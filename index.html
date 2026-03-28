@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🐾 动物城城市建设</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#20324a;
+  --muted:#7189a2;
+  --panel:#ffffffee;
+  --shadow:0 10px 30px rgba(30,68,108,.14);
+  --soft:0 4px 14px rgba(30,68,108,.10);
+  --line:#d8e8f5;
+  --blueSky1:#90d8ff;
+  --blueSky2:#dff5ff;
+  --mapBlue1:#72bdfb;
+  --mapBlue2:#5ba8ef;
+  --grass1:#9ee6a6;
+  --grass2:#65c66f;
+}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 16% 10%, rgba(255,255,255,.78) 0 7%, transparent 8%),
+    radial-gradient(circle at 76% 12%, rgba(255,255,255,.6) 0 6%, transparent 7%),
+    linear-gradient(180deg,var(--blueSky1) 0%,#b7ecff 24%,#d7f5ff 46%,var(--blueSky2) 100%);
+  font-size:13px;line-height:1.4;display:flex;flex-direction:column;
+}
+
+/* header */
+#hdr{
+  flex-shrink:0;height:70px;display:flex;align-items:center;gap:10px;padding:0 14px;
+  background:linear-gradient(180deg,#ffffffef,#f2f9ffeb);
+  border-bottom:1px solid #dce9f5;box-shadow:var(--soft);backdrop-filter:blur(8px);z-index:30;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{
+  width:40px;height:40px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#7ade94,#43b86e);color:#fff;font-size:22px;
+  box-shadow:0 8px 18px rgba(67,184,110,.32);
+}
+.sub{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+#hdr h1{font-size:17px;font-weight:900}
+.flex1{flex:1}
+.mode-tog{display:flex;background:#e8f4fd;border:1px solid #d7e8f5;border-radius:12px;padding:3px}
+.mode-btn{
+  border:none;background:none;border-radius:9px;padding:6px 10px;cursor:pointer;font-size:12px;
+  font-weight:900;color:var(--muted);transition:.2s
+}
+.mode-btn.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.sbox{
+  min-width:86px;padding:6px 10px;border-radius:14px;background:linear-gradient(180deg,#fff,#f6fbff);
+  border:1px solid #dce8f4;box-shadow:var(--soft);display:flex;flex-direction:column;align-items:center
+}
+.slbl{font-size:10px;font-weight:900;color:var(--muted)}
+.sval{font-size:17px;font-weight:900}
+.stars{position:relative;font-size:14px;line-height:1;display:inline-block}
+.stars-bg{color:#dbe7f0}
+.stars-fg{position:absolute;left:0;top:0;color:#f5b935;overflow:hidden;white-space:nowrap}
+.btn{
+  border:none;cursor:pointer;border-radius:12px;padding:8px 14px;font-size:12px;font-weight:900;
+  transition:.2s;display:inline-flex;align-items:center;gap:6px
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-p{background:linear-gradient(180deg,#4d95ff,#2f73dc);color:#fff;box-shadow:0 8px 20px rgba(47,115,220,.25)}
+.btn-p:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-g{background:linear-gradient(180deg,#fff,#f2f7fb);color:var(--ink);border:1px solid #dbe7f1}
+
+/* layout */
+#main{
+  flex:1;min-height:0;overflow:hidden;
+  display:grid;grid-template-columns:210px 320px minmax(0,1fr);gap:10px;padding:10px;
+}
+.panel{
+  background:var(--panel);border:1px solid #dce8f4;border-radius:22px;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;min-height:0;overflow:hidden;backdrop-filter:blur(8px);
+}
+.ph{
+  padding:10px 12px 8px;border-bottom:1px solid #e4eef6;background:linear-gradient(180deg,#ffffff,#f7fbff);
+}
+.pt{font-size:11px;font-weight:900;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.ps{font-size:11px;color:#89a2b8;margin-top:2px}
+.pb{padding:9px;overflow:auto;flex:1;min-height:0}
+
+/* left */
+#lcol{display:flex;flex-direction:column;gap:10px;min-height:0}
+#lcol .panel:first-child{flex:1}
+.opt-card{
+  position:relative;display:flex;gap:8px;align-items:center;margin-bottom:8px;padding:9px;
+  border-radius:15px;border:1px solid #dce9f5;cursor:grab;user-select:none;transition:.18s;
+  box-shadow:0 4px 10px rgba(32,50,74,.05);color:#20324a;
+}
+.opt-card:hover{transform:translateY(-2px);box-shadow:0 12px 22px rgba(32,50,74,.10)}
+.opt-card.off{opacity:.5;pointer-events:none}
+.opt-card.sel{
+  outline:3px solid rgba(79,70,229,.22);
+  box-shadow:0 0 0 3px rgba(79,70,229,.12),0 12px 22px rgba(32,50,74,.12);
+}
+.opt-sym{
+  width:38px;height:38px;border-radius:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:19px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.7)
+}
+.opt-name{font-size:12px;font-weight:900}
+.opt-rule{font-size:10px;color:#415a74;margin-top:2px}
+.opt-ribbon{
+  position:absolute;right:8px;top:-6px;background:rgba(255,255,255,.9);color:#48627c;
+  font-size:9px;font-weight:900;border-radius:999px;padding:3px 7px;box-shadow:0 6px 14px rgba(0,0,0,.08)
+}
+.stat-mini{
+  padding:12px;border-radius:20px;background:linear-gradient(180deg,#fff,#f5fbff);
+  border:1px solid #dbe8f4;box-shadow:var(--soft)
+}
+.stat-mini .sm-lbl{font-size:11px;font-weight:900;letter-spacing:.08em;color:var(--muted);margin-bottom:8px}
+.stat-mini dl{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;font-size:12px;color:var(--muted)}
+.stat-mini dd{text-align:right;font-weight:900;color:var(--ink)}
+
+/* center column fills full height with two doubled blocks */
+#mcol{
+  display:grid;
+  grid-template-rows:minmax(0,1fr) minmax(0,1fr);
+  gap:10px;
+  min-width:0;
+  min-height:0;
+}
+#theme-area,#queue-area{min-height:0}
+
+/* theme */
+#theme-inner{
+  height:100%;padding:10px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.15)),
+    linear-gradient(180deg,#7fd3ff 0%,#afeaff 36%,#bff0c9 36%,#8ed28d 100%);
+}
+#theme-inner::before,#theme-inner::after{
+  content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.42)
+}
+#theme-inner::before{width:140px;height:46px;left:20px;top:14px}
+#theme-inner::after{width:90px;height:28px;right:28px;top:22px}
+.theme-btns{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:8px;flex:1;position:relative;z-index:1
+}
+.theme-btn{
+  min-height:74px;border:none;cursor:pointer;border-radius:18px;padding:10px;color:#fff;font-weight:900;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  box-shadow:0 10px 20px rgba(0,0,0,.12);transition:.2s;font-size:12px;
+}
+.theme-btn:hover{transform:translateY(-2px) scale(1.02)}
+.tb-food{background:linear-gradient(180deg,#ff9758,#f45a5a)}
+.tb-residence{background:linear-gradient(180deg,#48c6ff,#2089df)}
+.tb-sports{background:linear-gradient(180deg,#67d97e,#35a84d)}
+.tb-feature{background:linear-gradient(180deg,#b084ff,#8158e8)}
+.tb-biology{background:linear-gradient(180deg,#ffb25f,#f08a1d)}
+.theme-disp{
+  flex:1;display:grid;grid-template-columns:minmax(0,1fr) 108px;gap:10px;position:relative;z-index:1;min-width:0;overflow:hidden
+}
+.theme-main{
+  min-width:0;overflow:hidden;border-radius:18px;padding:12px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 10px 20px rgba(0,0,0,.12)
+}
+.td-food .theme-main{background:linear-gradient(180deg,#ff9d66,#f16165)}
+.td-residence .theme-main{background:linear-gradient(180deg,#52caff,#278de5)}
+.td-sports .theme-main{background:linear-gradient(180deg,#6fdd84,#3dac51)}
+.td-feature .theme-main{background:linear-gradient(180deg,#b48dff,#8158e8)}
+.td-biology .theme-main{background:linear-gradient(180deg,#ffbe75,#f08c21)}
+.td-name{font-size:18px;font-weight:900;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.td-badge{
+  display:inline-flex;align-items:center;gap:6px;margin-top:4px;font-size:10px;font-weight:900;
+  padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.18);max-width:100%;
+}
+.td-desc{
+  margin-top:8px;background:rgba(255,255,255,.18);border-radius:12px;padding:8px;font-size:10px;line-height:1.5;
+  overflow-wrap:anywhere;word-break:break-word;
+}
+.td-change{
+  margin-top:8px;align-self:flex-start;border:none;cursor:pointer;padding:7px 11px;border-radius:10px;
+  background:#ffffff22;color:#fff;font-size:10px;font-weight:900
+}
+.theme-side{
+  width:108px;min-width:0;overflow:hidden;border-radius:18px;background:linear-gradient(180deg,#ffffffd8,#f1f9ffd8);
+  border:1px solid #dbe8f4;padding:8px;color:var(--ink)
+}
+.theme-side h3{font-size:10px;font-weight:900;margin-bottom:5px;line-height:1.2}
+.theme-tip{
+  font-size:9px;color:var(--muted);line-height:1.45;background:#f6fbff;border:1px dashed #d9e8f4;
+  border-radius:12px;padding:7px;overflow-wrap:anywhere;word-break:break-word;
+}
+
+/* queue bigger */
+#queue-area{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.q-hdr{
+  padding:10px 12px;border-bottom:1px solid #e4eef6;display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(180deg,#ffffff,#f7fbff)
+}
+.q-badge{
+  border-radius:999px;padding:4px 9px;background:linear-gradient(180deg,#4d95ff,#2f73dc);
+  color:#fff;font-size:10px;font-weight:900
+}
+.q-grid{
+  flex:1;overflow:auto;padding:10px;display:grid;grid-template-columns:1fr;gap:8px;align-content:start;
+  background:linear-gradient(180deg,#fafdff 0%,#f3fbff 42%,#eef8ff 100%)
+}
+.gc{
+  position:relative;border-radius:15px;padding:9px;background:linear-gradient(180deg,#fff,#f7fbff);
+  border:1px solid #dbe8f4;cursor:grab;user-select:none;transition:.18s;box-shadow:0 5px 14px rgba(32,50,74,.08)
+}
+.gc:hover{transform:translateY(-2px)}
+.gc.urg{border-color:#f0a5a2;background:linear-gradient(180deg,#fff,#fff1f1)}
+.gc.sel{
+  outline:3px solid rgba(79,70,229,.22);
+  box-shadow:0 0 0 3px rgba(79,70,229,.10),0 8px 18px rgba(32,50,74,.12);
+}
+.gc-row{display:flex;align-items:center;gap:7px}
+.gc-em{
+  width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;
+  background:linear-gradient(180deg,#fff,#ecf6ff);border:1px solid #dce9f5;flex-shrink:0
+}
+.gc-nm{font-size:12px;font-weight:900}
+.gc-gr{font-size:9px;color:var(--muted)}
+.gc-hint{
+  margin-top:6px;font-size:10px;color:#4d647d;line-height:1.4;background:#f7fbff;
+  border-radius:10px;padding:6px 7px;border:1px dashed #dce8f3
+}
+.gc-wait{margin-top:5px;font-size:9px;font-weight:900;color:#758ea4}
+.urg-ic{
+  position:absolute;right:-5px;top:-5px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:#ef6b67;color:#fff;font-size:10px;box-shadow:0 6px 14px rgba(239,83,80,.3)
+}
+.multi-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.mtag{
+  font-size:8px;font-weight:900;padding:2px 6px;border-radius:999px;background:#eef6ff;color:#4b78a5;border:1px solid #d6e7f6
+}
+
+/* map */
+#rcol{display:flex;flex-direction:column;min-height:0}
+#map-panel{flex:1;display:flex;flex-direction:column;min-height:0}
+.map-hdr{
+  padding:10px 12px 9px;border-bottom:1px solid #e4eef6;
+  display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,#fff,#f7fbff)
+}
+.map-ctrl{display:flex;align-items:center;gap:6px}
+.mct{font-size:11px;font-weight:900;color:var(--muted)}
+.mcb{
+  width:28px;height:28px;border:none;cursor:pointer;border-radius:10px;background:linear-gradient(180deg,#fff,#f1f8ff);
+  border:1px solid #dce8f5;font-size:16px;font-weight:900;color:var(--ink)
+}
+.mcb:disabled{opacity:.38;cursor:not-allowed}
+#map-wrap{
+  position:relative;flex:1;overflow:hidden;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,.18) 0 7%, transparent 8%),
+    radial-gradient(circle at 82% 10%, rgba(255,255,255,.16) 0 6%, transparent 7%),
+    linear-gradient(180deg,var(--mapBlue1) 0%,var(--mapBlue2) 100%);
+}
+#world-viewport{position:absolute;inset:0;overflow:hidden}
+#world-camera{position:absolute;left:0;top:0;transform-origin:0 0}
+#world-inner{position:relative;width:5200px;height:5200px}
+#grid-bg{
+  position:absolute;left:0;top:0;right:0;bottom:0;pointer-events:none;opacity:.95;
+}
+#grid-bg::before{
+  content:"";position:absolute;left:-2200px;top:-2200px;width:9600px;height:9600px;
+  transform:rotate(-45deg) skew(15deg,15deg);
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0) 0 24px, rgba(255,255,255,.72) 24px 27px, rgba(255,255,255,0) 27px 54px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0) 0 24px, rgba(255,255,255,.72) 24px 27px, rgba(255,255,255,0) 27px 54px);
+}
+
+#plot-layer{position:absolute;left:0;top:0}
+.plot{
+  position:absolute;width:264px;height:186px;transform-style:preserve-3d;
+}
+.plot .tile{
+  position:absolute;inset:0;
+  transform:rotate(-45deg) skew(15deg,15deg);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255,255,255,.25), transparent 26%),
+    linear-gradient(180deg,#b7efb1 0%,#7ad77d 52%,#62c367 100%);
+  box-shadow:
+    0 18px 0 #49a852,
+    0 30px 28px rgba(32,50,74,.20);
+  transition:.18s;border:3px solid rgba(255,255,255,.42);
+}
+.plot::after{
+  content:"";position:absolute;inset:18px 26px 22px 26px;pointer-events:none;z-index:1;
+  border-radius:22px;opacity:.28;
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.34) 0 6px, rgba(255,255,255,0) 6px 14px);
+  transform:rotate(-45deg) skew(15deg,15deg);
+}
+
+.plot.preset1 .tile{background:radial-gradient(circle at 35% 28%, rgba(255,255,255,.24), transparent 26%),linear-gradient(180deg,#ffcab7,#ff8c75 52%,#ef6d59 100%);box-shadow:0 18px 0 #cf5b4b,0 30px 28px rgba(32,50,74,.20)}
+.plot.preset2 .tile{background:radial-gradient(circle at 35% 28%, rgba(255,255,255,.24), transparent 26%),linear-gradient(180deg,#b8e9ff,#72c2ff 52%,#4b9de8 100%);box-shadow:0 18px 0 #2e7fce,0 30px 28px rgba(32,50,74,.20)}
+.plot.preset3 .tile{background:radial-gradient(circle at 35% 28%, rgba(255,255,255,.24), transparent 26%),linear-gradient(180deg,#c4f4bf,#82de88 52%,#57bf63 100%);box-shadow:0 18px 0 #2f9444,0 30px 28px rgba(32,50,74,.20)}
+.plot.preset4 .tile{background:radial-gradient(circle at 35% 28%, rgba(255,255,255,.24), transparent 26%),linear-gradient(180deg,#e3d0ff,#b38af8 52%,#8e63e0 100%);box-shadow:0 18px 0 #7354bd,0 30px 28px rgba(32,50,74,.20)}
+
+/* assigned colors */
+.plot.c-herbivore-hall .tile,.opt-card.c-herbivore-hall{background:linear-gradient(180deg,#cef4ae,#8be56e 60%,#67c854)}
+.plot.c-carnivore-hall .tile,.opt-card.c-carnivore-hall{background:linear-gradient(180deg,#ffc1b8,#ff8a7f 60%,#f36d62)}
+.plot.c-omnivore-hall .tile,.opt-card.c-omnivore-hall{background:linear-gradient(180deg,#ffe19f,#ffc45d 60%,#f0a93a)}
+.plot.c-fruit-bar .tile,.opt-card.c-fruit-bar{background:linear-gradient(180deg,#ffc3df,#ff8fc1 60%,#ef68a4)}
+.plot.c-insect-corner .tile,.opt-card.c-insect-corner{background:linear-gradient(180deg,#d9d1ff,#aa98ff 60%,#8470f1)}
+
+.plot.c-forest-home .tile,.opt-card.c-forest-home{background:linear-gradient(180deg,#baf0bf,#77d684 60%,#4fba67)}
+.plot.c-grassland-home .tile,.opt-card.c-grassland-home{background:linear-gradient(180deg,#e3f6a7,#c0e064 60%,#9ec84a)}
+.plot.c-water-home .tile,.opt-card.c-water-home{background:linear-gradient(180deg,#bfe9ff,#7ad0ff 60%,#53aef4)}
+.plot.c-farm-home .tile,.opt-card.c-farm-home{background:linear-gradient(180deg,#ffe1b9,#ffbf77 60%,#ed9f4c)}
+.plot.c-snow-home .tile,.opt-card.c-snow-home{background:linear-gradient(180deg,#f8fcff,#dcecff 60%,#bdd3ee)}
+
+.plot.c-flying-zone .tile,.opt-card.c-flying-zone{background:linear-gradient(180deg,#c7e4ff,#91c3ff 60%,#659eed)}
+.plot.c-swimming-zone .tile,.opt-card.c-swimming-zone{background:linear-gradient(180deg,#baf6ff,#79dfff 60%,#47bde8)}
+.plot.c-running-zone .tile,.opt-card.c-running-zone{background:linear-gradient(180deg,#ffd2a8,#ffab62 60%,#f18a38)}
+.plot.c-jumping-zone .tile,.opt-card.c-jumping-zone{background:linear-gradient(180deg,#ffc8f0,#f79bdd 60%,#e56ec3)}
+.plot.c-climbing-zone .tile,.opt-card.c-climbing-zone{background:linear-gradient(180deg,#bff0d1,#7ddba5 60%,#4fbe82)}
+
+.plot.c-feather-lab .tile,.opt-card.c-feather-lab{background:linear-gradient(180deg,#fff4b4,#f9d96b 60%,#eabb43)}
+.plot.c-scale-lab .tile,.opt-card.c-scale-lab{background:linear-gradient(180deg,#cce0ff,#8db6ff 60%,#5e90f0)}
+.plot.c-shell-lab .tile,.opt-card.c-shell-lab{background:linear-gradient(180deg,#e4d5c5,#c9ab8b 60%,#ac8865)}
+.plot.c-longnose-lab .tile,.opt-card.c-longnose-lab{background:linear-gradient(180deg,#ffdcb8,#ffb978 60%,#ef9650)}
+.plot.c-horn-lab .tile,.opt-card.c-horn-lab{background:linear-gradient(180deg,#e3d3ff,#b698ff 60%,#9476ef)}
+
+.plot.c-mammal-school .tile,.opt-card.c-mammal-school{background:linear-gradient(180deg,#f0ccb0,#d9a074 60%,#bb7d4f)}
+.plot.c-bird-school .tile,.opt-card.c-bird-school{background:linear-gradient(180deg,#cfe8ff,#9bcaff 60%,#6fa8ef)}
+.plot.c-fish-school .tile,.opt-card.c-fish-school{background:linear-gradient(180deg,#c4f2ff,#86dbff 60%,#51bfe9)}
+.plot.c-reptile-school .tile,.opt-card.c-reptile-school{background:linear-gradient(180deg,#d1f5ba,#98df6a 60%,#72bc45)}
+.plot.c-insect-school .tile,.opt-card.c-insect-school{background:linear-gradient(180deg,#fff0b1,#ffd666 60%,#efbc3a)}
+
+.plot.constructing .tile{
+  background:repeating-linear-gradient(135deg,#ffe08c 0 16px,#f7cb5d 16px 32px)!important;
+  box-shadow:0 18px 0 #bd8e27,0 30px 28px rgba(32,50,74,.20)!important
+}
+.plot.hover .tile{
+  outline:5px solid rgba(255,255,255,.55);
+  transform:rotate(-45deg) skew(15deg,15deg) translateY(-6px);
+}
+.plot.click-target .tile{
+  outline:5px solid rgba(79,70,229,.28);
+}
+.plot.wrong .tile{
+  background:linear-gradient(180deg,#ffb4ae,#ff7f76)!important;
+  box-shadow:0 18px 0 #d3574f,0 30px 28px rgba(32,50,74,.18)!important
+}
+
+/* plot info */
+.plot-top{
+  position:absolute;left:50%;top:8px;transform:translateX(-50%);display:flex;gap:6px;z-index:4;align-items:center
+}
+.plot-id,.plot-state{
+  padding:4px 9px;border-radius:999px;background:#ffffffea;border:1px solid #dce8f4;font-size:10px;font-weight:900;
+  box-shadow:0 4px 10px rgba(0,0,0,.06)
+}
+.plot-name{
+  position:absolute;left:50%;top:42px;transform:translateX(-50%);
+  width:148px;padding:5px 8px;border-radius:12px;background:rgba(255,255,255,.92);border:1px solid #dce8f4;
+  font-size:11px;font-weight:900;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:4
+}
+.plot-rule{
+  position:absolute;left:50%;top:69px;transform:translateX(-50%);
+  width:154px;padding:5px 8px;border-radius:12px;background:rgba(255,255,255,.84);border:1px dashed #dce8f4;
+  font-size:9px;line-height:1.3;color:#5a738b;text-align:center;z-index:4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.plot-served{
+  position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+  min-width:110px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.9);border:1px solid #dce8f4;
+  font-size:9px;font-weight:900;color:#617b95;text-align:center;z-index:4
+}
+.empty-tip{
+  position:absolute;left:50%;top:70px;transform:translateX(-50%);
+  width:118px;padding:8px 10px;border-radius:14px;background:#ffffffde;border:1px dashed #dce8f4;
+  text-align:center;font-size:11px;color:var(--muted);z-index:4
+}
+
+.bld{
+  position:absolute;left:50%;top:102px;transform:translateX(-50%);
+  width:122px;height:108px;z-index:3;pointer-events:none;
+}
+.bld-base{
+  position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(180deg,#f4d9a3,#d8af62);
+  transform:skewX(-28deg);border-radius:8px;box-shadow:0 10px 0 #a87d34;
+}
+.bld-front{
+  position:absolute;left:18px;right:18px;bottom:25px;height:40px;
+  border-radius:8px;background:linear-gradient(180deg,#fff8dc,#f2dfae);border:2px solid rgba(110,85,22,.08)
+}
+.bld-side{
+  position:absolute;right:8px;bottom:28px;width:24px;height:40px;background:linear-gradient(180deg,#e7c57d,#cb9c46);
+  transform:skewY(-38deg);border-radius:6px
+}
+.bld-roof{
+  position:absolute;left:16px;right:16px;bottom:60px;height:26px;transform:skewX(-28deg);
+  border-radius:10px;background:linear-gradient(180deg,#ff8f73,#dc5c4d);box-shadow:0 4px 0 #b8443a
+}
+.bld-icon{
+  position:absolute;left:50%;bottom:43px;transform:translateX(-50%);
+  width:40px;height:40px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:22px;box-shadow:0 6px 10px rgba(0,0,0,.12)
+}
+.bld.c-herbivore-hall .bld-roof,.bld.c-forest-home .bld-roof,.bld.c-running-zone .bld-roof,.bld.c-climbing-zone .bld-roof,.bld.c-reptile-school .bld-roof{background:linear-gradient(180deg,#83dd8a,#42ae58);box-shadow:0 4px 0 #2f8140}
+.bld.c-carnivore-hall .bld-roof,.bld.c-longnose-lab .bld-roof{background:linear-gradient(180deg,#ff9c69,#ea615b);box-shadow:0 4px 0 #bf4b41}
+.bld.c-omnivore-hall .bld-roof,.bld.c-farm-home .bld-roof,.bld.c-insect-school .bld-roof{background:linear-gradient(180deg,#ffd06d,#f0a11e);box-shadow:0 4px 0 #bf7812}
+.bld.c-water-home .bld-roof,.bld.c-swimming-zone .bld-roof,.bld.c-fish-school .bld-roof,.bld.c-bird-school .bld-roof,.bld.c-flying-zone .bld-roof{background:linear-gradient(180deg,#63cfff,#3093e5);box-shadow:0 4px 0 #286fbc}
+.bld.c-fruit-bar .bld-roof,.bld.c-jumping-zone .bld-roof{background:linear-gradient(180deg,#ff9bd2,#ea60a8);box-shadow:0 4px 0 #be4384}
+.bld.c-insect-corner .bld-roof,.bld.c-horn-lab .bld-roof,.bld.c-scale-lab .bld-roof,.bld.c-shell-lab .bld-roof{background:linear-gradient(180deg,#bd97ff,#8257e8);box-shadow:0 4px 0 #6540b8}
+.bld.c-feather-lab .bld-roof,.bld.c-snow-home .bld-roof{background:linear-gradient(180deg,#fff1a9,#f5c84e);box-shadow:0 4px 0 #d79d23}
+.bld.c-mammal-school .bld-roof{background:linear-gradient(180deg,#e9b88b,#cb7f48);box-shadow:0 4px 0 #a25e31}
+.bld-flag{
+  position:absolute;right:2px;bottom:80px;width:4px;height:28px;background:#7f8ea1;border-radius:2px
+}
+.bld-flag::after{
+  content:"";position:absolute;left:4px;top:2px;width:18px;height:10px;border-radius:0 6px 6px 0;background:#ffd76c
+}
+
+/* footer */
+#ftr{
+  flex-shrink:0;height:40px;padding:0 14px;display:flex;align-items:center;gap:8px;
+  background:linear-gradient(180deg,#ffffffee,#f5fbffea);
+  border-top:1px solid #dce8f5;font-size:12px;color:var(--muted)
+}
+#ftr .badge{
+  font-weight:900;color:#fff;background:linear-gradient(180deg,#49b675,#2f8f59);padding:4px 10px;border-radius:999px
+}
+
+/* overlay/result */
+.overlay{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(25,42,65,.38);backdrop-filter:blur(5px);z-index:200;padding:18px
+}
+.res-card{
+  width:100%;max-width:720px;background:linear-gradient(180deg,#fff,#f6fbff);
+  border:1px solid #dce8f4;border-radius:28px;padding:22px;box-shadow:0 26px 50px rgba(0,0,0,.18)
+}
+.res-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.res-title{font-size:24px;font-weight:900}
+.res-sub{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:4px}
+.res-rbox{
+  flex-shrink:0;border-radius:18px;padding:12px 18px;color:#fff;text-align:center;background:linear-gradient(180deg,#4d95ff,#2f73dc)
+}
+.res-rl{font-size:10px;opacity:.85;font-weight:900}
+.res-rv{font-size:30px;font-weight:900;line-height:1}
+.res-rc{font-size:10px;opacity:.78;margin-top:3px}
+.res-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.sc{
+  background:linear-gradient(180deg,#fff,#f6fbff);border:1px solid #dce8f4;border-radius:18px;padding:12px
+}
+.sc-l{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sc-v{font-size:24px;font-weight:900;margin:4px 0 2px}
+.sc-d{font-size:11px;color:var(--muted)}
+.rev-list{
+  max-height:120px;overflow:auto;background:#f7fbff;border:1px solid #dce8f4;border-radius:16px;padding:8px;
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px
+}
+.rchip{
+  display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:10px;background:#fff;border:1px solid #dce8f4;font-size:11px
+}
+.rstar{color:#f5b935}.rstar.low{color:#ef5350}
+.es{
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:var(--muted);font-size:12px;padding:18px;border-radius:18px;border:2px dashed #d8e6f2;background:rgba(255,255,255,.6)
+}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-thumb{background:#c9dceb;border-radius:999px}
+::-webkit-scrollbar-track{background:transparent}
+</style>
+</head>
+<body>
+
+<div id="hdr">
+  <div class="logo">
+    <div class="logo-mark">🐾</div>
+    <div>
+      <div class="sub">Animal City Builder</div>
+      <h1>动物城城市建设</h1>
+    </div>
+  </div>
+  <div class="flex1"></div>
+  <div class="mode-tog">
+    <button class="mode-btn on" id="btn-nov" onclick="setMode('novice')">新手模式</button>
+    <button class="mode-btn" id="btn-std" onclick="setMode('standard')">标准模式</button>
+  </div>
+  <div class="sbox">
+    <span class="slbl">⏱ 倒计时</span>
+    <span class="sval" id="timer">1:00</span>
+  </div>
+  <div class="sbox" style="min-width:126px">
+    <span class="slbl">⭐ 城市口碑</span>
+    <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
+      <div class="stars">
+        <span class="stars-bg">★★★★★</span>
+        <span class="stars-fg" id="stars-fg" style="width:0%">★★★★★</span>
+      </div>
+      <span class="sval" id="rating-val">—</span>
+    </div>
+    <span style="font-size:10px;color:#8aa1b7" id="rating-cnt">暂无评价</span>
+  </div>
+  <button class="btn btn-p" id="btn-start" onclick="beginGame()" disabled>⚔️ 开始营业</button>
+  <button class="btn btn-g" onclick="resetGame()">↺ 重新建设</button>
+</div>
+
+<div id="main">
+  <div id="lcol">
+    <div class="panel">
+      <div class="ph">
+        <div class="pt" id="lpt">分类建筑卡组</div>
+        <div class="ps" id="lps">可拖拽，也可先点卡片再点地块建造</div>
+      </div>
+      <div class="pb" id="opt-list">
+        <div class="es" style="height:100%">请先选择一个分类主题</div>
+      </div>
+    </div>
+    <div class="stat-mini">
+      <div class="sm-lbl">📊 本轮数据</div>
+      <dl>
+        <dt>主题</dt><dd id="st-theme">未选</dd>
+        <dt>地块</dt><dd id="st-fl">4块/建0</dd>
+        <dt>正确率</dt><dd id="st-acc">—</dd>
+        <dt>评价数</dt><dd id="st-revs">0</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div id="mcol">
+    <div class="panel" id="theme-area">
+      <div id="theme-inner"></div>
+    </div>
+    <div class="panel" id="queue-area">
+      <div class="q-hdr">
+        <div>
+          <div class="pt">访客营地</div>
+          <div class="ps">可拖拽，也可先点动物再点地图建筑</div>
+        </div>
+        <span class="q-badge" id="q-cnt">排队 0</span>
+      </div>
+      <div class="q-grid" id="q-grid">
+        <div class="es">营业开始后，小动物会从这里进入城市</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="rcol">
+    <div class="panel" id="map-panel">
+      <div class="map-hdr">
+        <div>
+          <div class="pt">分类基地地图</div>
+          <div class="ps" id="map-tip">地块不重叠 · 自动缩放显示全部地块</div>
+        </div>
+        <div class="map-ctrl">
+          <span class="mct" id="fl-cnt">共4块</span>
+          <button class="mcb" id="btn-rm" onclick="removeFloor()" disabled>−</button>
+          <button class="mcb" id="btn-add" onclick="addFloor()">+</button>
+        </div>
+      </div>
+      <div id="map-wrap">
+        <div id="world-viewport">
+          <div id="world-camera">
+            <div id="world-inner">
+              <div id="grid-bg"></div>
+              <div id="plot-layer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="ftr">
+  <span class="badge" id="ftr-badge">规划中</span>
+  <span id="ftr-msg">先选择分类主题，再建造分类建筑，最后让动物进入正确分类区域。</span>
+</div>
+
+<div class="overlay" id="overlay" style="display:none">
+  <div class="res-card" id="res-card"></div>
+</div>
+
+<script>
+const INIT_PLOTS = [
+  {id:'P1', gx:0, gy:0, preset:'preset1'},
+  {id:'P2', gx:2, gy:0, preset:'preset2'},
+  {id:'P3', gx:0, gy:2, preset:'preset3'},
+  {id:'P4', gx:2, gy:2, preset:'preset4'},
+];
+
+const TILE_W = 264;
+const TILE_H = 136;
+const WORLD_CX = 2600;
+const WORLD_CY = 2400;
+
+const THEMES = {
+  food:{id:'food',name:'美食广场',badge:'食性分类',emoji:'🍽️',desc:'按吃什么来分类，比如草食、肉食、杂食、吃果实、吃昆虫。',options:[
+    {id:'herbivore-hall',name:'草食餐厅',sym:'🌿',rule:'主要吃植物'},
+    {id:'carnivore-hall',name:'肉食餐厅',sym:'🥩',rule:'主要吃肉'},
+    {id:'omnivore-hall',name:'杂食餐厅',sym:'🍚',rule:'植物和动物都吃'},
+    {id:'fruit-bar',name:'果实小屋',sym:'🍎',rule:'喜欢果实和种子'},
+    {id:'insect-corner',name:'昆虫食堂',sym:'🐞',rule:'常吃昆虫'},
+  ]},
+  residence:{id:'residence',name:'生活家园',badge:'栖息地分类',emoji:'🏠',desc:'按生活环境分类，比如森林、草原、水边、农场、冰雪地区。',options:[
+    {id:'forest-home',name:'森林小屋',sym:'🌲',rule:'生活在森林'},
+    {id:'grassland-home',name:'草原社区',sym:'🌾',rule:'生活在草地平原'},
+    {id:'water-home',name:'水边公寓',sym:'🌊',rule:'生活在水边湿地'},
+    {id:'farm-home',name:'农场小院',sym:'🚜',rule:'常见于农场庭院'},
+    {id:'snow-home',name:'冰雪基地',sym:'❄️',rule:'适合寒冷冰雪环境'},
+  ]},
+  sports:{id:'sports',name:'运动中心',badge:'运动方式分类',emoji:'🏃',desc:'按怎样移动分类，比如飞、游、跑、跳、爬。',options:[
+    {id:'flying-zone',name:'飞行训练场',sym:'🕊️',rule:'主要靠飞行'},
+    {id:'swimming-zone',name:'游泳馆',sym:'🐟',rule:'主要靠游泳'},
+    {id:'running-zone',name:'奔跑赛道',sym:'🐾',rule:'主要靠奔跑'},
+    {id:'jumping-zone',name:'跳跃乐园',sym:'🦘',rule:'特别擅长跳跃'},
+    {id:'climbing-zone',name:'攀爬馆',sym:'🌿',rule:'擅长攀爬'},
+  ]},
+  feature:{id:'feature',name:'外形研究所',badge:'身体特征分类',emoji:'🔍',desc:'按身体特征分类，比如有羽毛、有鳞片、有壳、有长鼻子、有角。',options:[
+    {id:'feather-lab',name:'羽毛馆',sym:'🪶',rule:'身体上有羽毛'},
+    {id:'scale-lab',name:'鳞片馆',sym:'✨',rule:'身体有鳞片'},
+    {id:'shell-lab',name:'硬壳馆',sym:'🛡️',rule:'身体外面有壳'},
+    {id:'longnose-lab',name:'长鼻馆',sym:'👃',rule:'有长鼻子或长嘴'},
+    {id:'horn-lab',name:'角角馆',sym:'🫎',rule:'头上有角'},
+  ]},
+  biology:{id:'biology',name:'动物学院',badge:'生物类别分类',emoji:'📚',desc:'按大类来分，比如哺乳动物、鸟类、鱼类、爬行动物、昆虫。',options:[
+    {id:'mammal-school',name:'哺乳学院',sym:'🐻',rule:'属于哺乳动物'},
+    {id:'bird-school',name:'鸟类学院',sym:'🐦',rule:'属于鸟类'},
+    {id:'fish-school',name:'鱼类学院',sym:'🐠',rule:'属于鱼类'},
+    {id:'reptile-school',name:'爬行学院',sym:'🐍',rule:'属于爬行动物'},
+    {id:'insect-school',name:'昆虫学院',sym:'🐝',rule:'属于昆虫'},
+  ]}
+};
+
+const HINTS = {
+  food:{'herbivore-hall':n=>`${n}吃植物。`,'carnivore-hall':n=>`${n}吃肉。`,'omnivore-hall':n=>`${n}什么都吃。`,'fruit-bar':n=>`${n}爱吃果实。`,'insect-corner':n=>`${n}会吃虫子。`},
+  residence:{'forest-home':n=>`${n}住森林。`,'grassland-home':n=>`${n}住草地。`,'water-home':n=>`${n}离不开水边。`,'farm-home':n=>`${n}常见在农场。`,'snow-home':n=>`${n}适合冰雪地区。`},
+  sports:{'flying-zone':n=>`${n}会飞。`,'swimming-zone':n=>`${n}会游。`,'running-zone':n=>`${n}会跑。`,'jumping-zone':n=>`${n}会跳。`,'climbing-zone':n=>`${n}会爬。`},
+  feature:{'feather-lab':n=>`${n}有羽毛。`,'scale-lab':n=>`${n}有鳞片。`,'shell-lab':n=>`${n}有硬壳。`,'longnose-lab':n=>`${n}有长鼻子或长嘴。`,'horn-lab':n=>`${n}头上有角。`},
+  biology:{'mammal-school':n=>`${n}是哺乳动物。`,'bird-school':n=>`${n}是鸟类。`,'fish-school':n=>`${n}是鱼类。`,'reptile-school':n=>`${n}是爬行动物。`,'insect-school':n=>`${n}是昆虫。`}
+};
+
+const ANIMALS = [
+  {id:'rabbit',name:'兔子',emoji:'🐰',group:'哺乳动物',likes:['herbivore-hall','grassland-home','forest-home','running-zone','mammal-school']},
+  {id:'panda',name:'熊猫',emoji:'🐼',group:'哺乳动物',likes:['herbivore-hall','forest-home','climbing-zone','mammal-school']},
+  {id:'cat',name:'小猫',emoji:'🐱',group:'哺乳动物',likes:['carnivore-hall','farm-home','running-zone','climbing-zone','mammal-school']},
+  {id:'dog',name:'小狗',emoji:'🐶',group:'哺乳动物',likes:['omnivore-hall','farm-home','running-zone','mammal-school']},
+  {id:'cow',name:'奶牛',emoji:'🐮',group:'哺乳动物',likes:['herbivore-hall','farm-home','grassland-home','mammal-school']},
+  {id:'horse',name:'马',emoji:'🐴',group:'哺乳动物',likes:['herbivore-hall','grassland-home','running-zone','mammal-school']},
+  {id:'sheep',name:'绵羊',emoji:'🐑',group:'哺乳动物',likes:['herbivore-hall','farm-home','grassland-home','mammal-school']},
+  {id:'goat',name:'山羊',emoji:'🐐',group:'哺乳动物',likes:['herbivore-hall','farm-home','horn-lab','mammal-school']},
+  {id:'pig',name:'小猪',emoji:'🐷',group:'哺乳动物',likes:['omnivore-hall','farm-home','mammal-school']},
+  {id:'mouse',name:'老鼠',emoji:'🐭',group:'哺乳动物',likes:['fruit-bar','farm-home','running-zone','mammal-school']},
+  {id:'monkey',name:'猴子',emoji:'🐵',group:'哺乳动物',likes:['fruit-bar','forest-home','climbing-zone','mammal-school']},
+  {id:'elephant',name:'大象',emoji:'🐘',group:'哺乳动物',likes:['herbivore-hall','grassland-home','longnose-lab','mammal-school']},
+  {id:'lion',name:'狮子',emoji:'🦁',group:'哺乳动物',likes:['carnivore-hall','grassland-home','running-zone','mammal-school']},
+  {id:'tiger',name:'老虎',emoji:'🐯',group:'哺乳动物',likes:['carnivore-hall','forest-home','running-zone','mammal-school']},
+  {id:'deer',name:'小鹿',emoji:'🦌',group:'哺乳动物',likes:['herbivore-hall','forest-home','grassland-home','horn-lab','running-zone','mammal-school']},
+  {id:'zebra',name:'斑马',emoji:'🦓',group:'哺乳动物',likes:['herbivore-hall','grassland-home','running-zone','mammal-school']},
+  {id:'giraffe',name:'长颈鹿',emoji:'🦒',group:'哺乳动物',likes:['herbivore-hall','grassland-home','longnose-lab','mammal-school']},
+  {id:'kangaroo',name:'袋鼠',emoji:'🦘',group:'哺乳动物',likes:['herbivore-hall','grassland-home','jumping-zone','mammal-school']},
+  {id:'bear',name:'棕熊',emoji:'🐻',group:'哺乳动物',likes:['omnivore-hall','forest-home','mammal-school']},
+  {id:'bat',name:'蝙蝠',emoji:'🦇',group:'哺乳动物',likes:['fruit-bar','flying-zone','mammal-school']},
+  {id:'fox',name:'狐狸',emoji:'🦊',group:'哺乳动物',likes:['omnivore-hall','forest-home','running-zone','mammal-school']},
+  {id:'chicken',name:'小鸡',emoji:'🐔',group:'鸟类',likes:['omnivore-hall','farm-home','feather-lab','bird-school']},
+  {id:'duck',name:'鸭子',emoji:'🦆',group:'鸟类',likes:['omnivore-hall','water-home','farm-home','feather-lab','bird-school','swimming-zone']},
+  {id:'goose',name:'鹅',emoji:'🪿',group:'鸟类',likes:['herbivore-hall','water-home','farm-home','feather-lab','bird-school']},
+  {id:'sparrow',name:'麻雀',emoji:'🐦',group:'鸟类',likes:['fruit-bar','farm-home','flying-zone','feather-lab','bird-school']},
+  {id:'parrot',name:'鹦鹉',emoji:'🦜',group:'鸟类',likes:['fruit-bar','forest-home','flying-zone','feather-lab','bird-school']},
+  {id:'owl',name:'猫头鹰',emoji:'🦉',group:'鸟类',likes:['carnivore-hall','forest-home','flying-zone','feather-lab','bird-school']},
+  {id:'penguin',name:'企鹅',emoji:'🐧',group:'鸟类',likes:['carnivore-hall','snow-home','swimming-zone','feather-lab','bird-school']},
+  {id:'eagle',name:'老鹰',emoji:'🦅',group:'鸟类',likes:['carnivore-hall','forest-home','flying-zone','feather-lab','bird-school']},
+  {id:'peacock',name:'孔雀',emoji:'🦚',group:'鸟类',likes:['fruit-bar','forest-home','feather-lab','bird-school']},
+  {id:'goldfish',name:'金鱼',emoji:'🐟',group:'鱼类',likes:['omnivore-hall','water-home','swimming-zone','fish-school']},
+  {id:'shark',name:'鲨鱼',emoji:'🦈',group:'鱼类',likes:['carnivore-hall','water-home','swimming-zone','fish-school']},
+  {id:'dolphin',name:'海豚',emoji:'🐬',group:'哺乳动物',likes:['carnivore-hall','water-home','swimming-zone','mammal-school']},
+  {id:'whale',name:'鲸鱼',emoji:'🐋',group:'哺乳动物',likes:['carnivore-hall','water-home','swimming-zone','mammal-school']},
+  {id:'frog',name:'青蛙',emoji:'🐸',group:'两栖动物',likes:['insect-corner','water-home','jumping-zone']},
+  {id:'turtle',name:'乌龟',emoji:'🐢',group:'爬行动物',likes:['herbivore-hall','water-home','shell-lab','reptile-school']},
+  {id:'snake',name:'小蛇',emoji:'🐍',group:'爬行动物',likes:['carnivore-hall','forest-home','scale-lab','reptile-school']},
+  {id:'crocodile',name:'鳄鱼',emoji:'🐊',group:'爬行动物',likes:['carnivore-hall','water-home','scale-lab','reptile-school']},
+  {id:'lizard',name:'蜥蜴',emoji:'🦎',group:'爬行动物',likes:['insect-corner','forest-home','scale-lab','reptile-school','climbing-zone']},
+  {id:'bee',name:'蜜蜂',emoji:'🐝',group:'昆虫',likes:['fruit-bar','insect-school','flying-zone']},
+  {id:'butterfly',name:'蝴蝶',emoji:'🦋',group:'昆虫',likes:['fruit-bar','flying-zone','insect-school']},
+  {id:'ladybug',name:'瓢虫',emoji:'🐞',group:'昆虫',likes:['insect-school','flying-zone']},
+  {id:'ant',name:'蚂蚁',emoji:'🐜',group:'昆虫',likes:['insect-school']},
+  {id:'snail',name:'蜗牛',emoji:'🐌',group:'软体动物',likes:['forest-home','shell-lab']},
+  {id:'crab',name:'螃蟹',emoji:'🦀',group:'甲壳动物',likes:['water-home','shell-lab']},
+  {id:'octopus',name:'章鱼',emoji:'🐙',group:'软体动物',likes:['carnivore-hall','water-home','swimming-zone']},
+];
+
+let S = {};
+let T = {cd:null,wt:null,sp:null};
+
+/* click fallback */
+let clickBuildOptionId = null;
+let clickGuestId = null;
+
+function makeState(){
+  const floors=INIT_PLOTS.map(p=>p.id);
+  const coords={}, assignments={}, served={}, presets={};
+  INIT_PLOTS.forEach(p=>{
+    coords[p.id]={gx:p.gx,gy:p.gy};
+    assignments[p.id]=null;
+    served[p.id]=[];
+    presets[p.id]=p.preset;
+  });
+  return {
+    phase:'planning',
+    themeId:null,
+    floors,coords,assignments,served,presets,
+    queue:[],timeLeft:60,ratings:[],reviews:[],complaints:0,
+    mode:'novice',totalSpawned:0,placementAttempts:0,correctPlacements:0,gid:0,nextPlotIndex:5
+  };
+}
+S=makeState();
+
+const fmt=s=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+const avgR=()=>S.ratings.length?S.ratings.reduce((a,b)=>a+b,0)/S.ratings.length:null;
+const starW=v=>v===null?'0%':`${Math.max(0,Math.min(100,(v/5)*100))}%`;
+const stars=n=>'★'.repeat(n)+'☆'.repeat(5-n);
+const setMsg=t=>document.getElementById('ftr-msg').textContent=t;
+function clearT(){Object.values(T).forEach(t=>t&&clearInterval(t));T={cd:null,wt:null,sp:null};}
+function clearClickSelections(){ clickBuildOptionId=null; clickGuestId=null; }
+
+function optionMap(){
+  const map={};
+  Object.values(THEMES).forEach(t=>t.options.forEach(o=>map[o.id]={themeId:t.id,label:o.name,sym:o.sym,rule:o.rule}));
+  return map;
+}
+const OPTMAP=optionMap();
+const optionColorClass=id=>`c-${id}`;
+function animalTags(animal,max=2){
+  return animal.likes.slice(0,max).map(id=>{
+    const o=OPTMAP[id]; return o?`${o.sym} ${o.label}`:id;
+  });
+}
+function pickAnimal(optId){
+  const m=ANIMALS.filter(a=>a.likes.includes(optId));
+  return (m.length?m:ANIMALS)[Math.floor(Math.random()*(m.length||ANIMALS.length))];
+}
+function guestR(wait){if(wait<=5)return 5;if(wait<=10)return 4;if(wait<=16)return 3;return 2;}
+
+function isoPos(gx,gy){
+  return {
+    left: WORLD_CX + (gx-gy)*(TILE_W/2),
+    top: WORLD_CY + (gx+gy)*(TILE_H/2)
+  };
+}
+
+function getPlotBounds(){
+  let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  S.floors.forEach(id=>{
+    const c=S.coords[id], p=isoPos(c.gx,c.gy);
+    minX=Math.min(minX,p.left-30);
+    minY=Math.min(minY,p.top+5);
+    maxX=Math.max(maxX,p.left+270);
+    maxY=Math.max(maxY,p.top+210);
+  });
+  if(!S.floors.length) return {minX:2300,minY:2200,maxX:2900,maxY:2800};
+  return {minX,minY,maxX,maxY};
+}
+
+function fitWorldToViewport(){
+  const viewport=document.getElementById('world-viewport');
+  const camera=document.getElementById('world-camera');
+  if(!viewport||!camera)return;
+  const vw=viewport.clientWidth, vh=viewport.clientHeight, b=getPlotBounds();
+  const pad=55;
+  const bw=(b.maxX-b.minX)+pad*2;
+  const bh=(b.maxY-b.minY)+pad*2;
+  const scale=Math.min(vw/bw, vh/bh, 1.95);
+  const tx=(vw-bw*scale)/2 + pad*scale - b.minX*scale;
+  const ty=(vh-bh*scale)/2 + pad*scale - b.minY*scale;
+  camera.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;
+}
+
+function renderAll(){
+  renderHdr(); renderLeft(); renderTheme(); renderQueue(); renderPlots(); renderFtr();
+  requestAnimationFrame(fitWorldToViewport);
+}
+
+function renderHdr(){
+  document.getElementById('timer').textContent=fmt(S.timeLeft);
+  const av=avgR();
+  document.getElementById('rating-val').textContent=av===null?'—':av.toFixed(1);
+  document.getElementById('stars-fg').style.width=starW(av);
+  document.getElementById('rating-cnt').textContent=S.ratings.length?`${S.ratings.length} 条评价`:'暂无评价';
+  const built=S.floors.filter(f=>S.assignments[f]?.built);
+  document.getElementById('btn-start').disabled=!built.length||S.phase==='running';
+  document.getElementById('btn-nov').className='mode-btn'+(S.mode==='novice'?' on':'');
+  document.getElementById('btn-std').className='mode-btn'+(S.mode==='standard'?' on':'');
+}
+
+function renderLeft(){
+  const theme=S.themeId?THEMES[S.themeId]:null;
+  document.getElementById('lpt').textContent=theme?`${theme.badge} · 分类建筑卡组`:'分类建筑卡组';
+  document.getElementById('lps').textContent=theme?`${theme.name}：拖拽或点击建造`:'选择主题后显示可建造建筑';
+  const ol=document.getElementById('opt-list');
+
+  if(!theme){
+    ol.innerHTML='<div class="es" style="height:100%">请先在中部选择一个分类主题</div>';
+  }else{
+    const off=S.phase!=='planning';
+    ol.innerHTML=theme.options.map(o=>`
+      <div class="opt-card ${optionColorClass(o.id)}${off?' off':''}${clickBuildOptionId===o.id?' sel':''}"
+           draggable="${!off}"
+           ondragstart="optDS(event,'${o.id}')"
+           onclick="selectBuildOption('${o.id}')">
+        <div class="opt-ribbon">${theme.badge}</div>
+        <div class="opt-sym">${o.sym}</div>
+        <div>
+          <div class="opt-name">${o.name}</div>
+          <div class="opt-rule">${o.rule}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('st-theme').textContent=theme?theme.name:'未选';
+  const blt=S.floors.filter(f=>S.assignments[f]?.built).length;
+  document.getElementById('st-fl').textContent=`${S.floors.length}块/建${blt}`;
+  document.getElementById('st-acc').textContent=S.placementAttempts?`${((S.correctPlacements/S.placementAttempts)*100).toFixed(0)}%`:'—';
+  document.getElementById('st-revs').textContent=S.ratings.length;
+}
+
+function renderTheme(){
+  const el=document.getElementById('theme-inner');
+  const theme=S.themeId?THEMES[S.themeId]:null;
+
+  if(!theme){
+    el.innerHTML=`
+      <div style="font-size:11px;font-weight:900;color:#fff;position:relative;z-index:1;text-shadow:0 2px 6px rgba(0,0,0,.15)">
+        选择一套分类体系，建设你的动物城市：
+      </div>
+      <div class="theme-btns">
+        ${Object.values(THEMES).map(t=>`
+          <button class="theme-btn tb-${t.id}" onclick="selectTheme('${t.id}')">
+            <span style="font-size:22px">${t.emoji}</span>
+            <span>${t.name}</span>
+            <span style="font-size:10px;opacity:.9">${t.badge}</span>
+          </button>
+        `).join('')}
+      </div>
+    `;
+    return;
+  }
+
+  el.innerHTML=`
+    <div class="theme-disp td-${theme.id}">
+      <div class="theme-main">
+        <div>
+          <div style="font-size:9px;font-weight:900;letter-spacing:.12em;opacity:.86;text-transform:uppercase">当前分类体系</div>
+          <div class="td-name">${theme.emoji} ${theme.name}</div>
+          <div class="td-badge">同一种动物可以被多种方式分类</div>
+        </div>
+        <div class="td-desc">
+          ${theme.desc}<br><br>
+          本轮使用 <b>${theme.badge}</b> 接待动物顾客，重点理解：<b>同一种动物可以从多个角度来分类。</b>
+        </div>
+        ${S.phase==='planning'?`<button class="td-change" onclick="selectTheme(null)">更换主题</button>`:''}
+      </div>
+      <div class="theme-side">
+        <h3>🧭 提示</h3>
+        <div class="theme-tip">比如鸭子既是鸟类，也会游泳，还生活在水边。</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderQueue(){
+  const grid=document.getElementById('q-grid');
+  document.getElementById('q-cnt').textContent=`排队 ${S.queue.length}`;
+  if(!S.queue.length){
+    const t=S.phase==='running'?'暂无排队，下一波访客正在赶来':'营业开始后，小动物会从这里进入城市';
+    grid.innerHTML=`<div class="es">${t}</div>`;
+    return;
+  }
+  grid.innerHTML=S.queue.map(g=>{
+    const hint=S.mode==='novice'?`去：${g.targetLabel}`:g.stdHint;
+    const tags=S.mode==='novice'?(g.multiTags||[]).slice(0,2):(g.multiTags||[]).slice(0,1);
+    return `
+      <div class="gc${g.urgent?' urg':''}${clickGuestId===g.instanceId?' sel':''}"
+           draggable="true"
+           ondragstart="guestDS(event,'${g.instanceId}')"
+           onclick="selectGuest('${g.instanceId}')">
+        ${g.urgent?'<div class="urg-ic">!</div>':''}
+        <div class="gc-row">
+          <div class="gc-em">${g.emoji}</div>
+          <div><div class="gc-nm">${g.name}</div><div class="gc-gr">${g.group}</div></div>
+        </div>
+        <div class="gc-hint">${hint}</div>
+        ${tags.length?`<div class="multi-tags">${tags.map(t=>`<span class="mtag">${t}</span>`).join('')}</div>`:''}
+        <div class="gc-wait">等待 ${g.wait}s</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderPlots(){
+  document.getElementById('fl-cnt').textContent=`共${S.floors.length}块`;
+  document.getElementById('btn-rm').disabled=S.phase!=='planning'||S.floors.length<=INIT_PLOTS.length;
+  document.getElementById('btn-add').disabled=S.phase!=='planning';
+
+  const layer=document.getElementById('plot-layer');
+  const plots=[...S.floors].sort((a,b)=>{
+    const ca=S.coords[a], cb=S.coords[b];
+    return (ca.gx+ca.gy)-(cb.gx+cb.gy) || ca.gx-cb.gx;
+  });
+
+  layer.innerHTML=plots.map(fid=>{
+    const c=S.coords[fid], p=isoPos(c.gx,c.gy), a=S.assignments[fid], srv=S.served[fid]||[];
+    let cls='plot';
+    cls += ` ${S.presets[fid] || ''}`;
+    if(a?.optionId) cls += ` ${optionColorClass(a.optionId)}`;
+    if(clickBuildOptionId || clickGuestId) cls += ' click-target';
+    if(a?.built) cls+=' building';
+    else if(a && !a.built) cls+=' constructing';
+    else if(a) cls+=' assigned';
+
+    const stateText=a?.built?'已建成':a?'建设中':'待建设';
+    const servedText=srv.length?`已接待 ${srv.length} 位`:'暂无接待';
+    const roofCls=a?.optionId ? optionColorClass(a.optionId) : '';
+
+    return `
+      <div class="${cls}" id="plot-${fid}" style="left:${p.left}px;top:${p.top}px"
+        ondragover="event.preventDefault()"
+        ondrop="dropPlot(event,'${fid}')"
+        ondragenter="this.classList.add('hover')"
+        ondragleave="this.classList.remove('hover')"
+        onclick="plotClick('${fid}')">
+
+        <div class="tile"></div>
+
+        <div class="plot-top">
+          <span class="plot-id">${fid}</span>
+          <span class="plot-state">${stateText}</span>
+        </div>
+
+        ${a?`
+          <div class="plot-name">${a.sym} ${a.label}</div>
+          <div class="plot-rule">${a.rule}</div>
+          <div class="bld ${roofCls}">
+            <div class="bld-base"></div>
+            <div class="bld-front"></div>
+            <div class="bld-side"></div>
+            <div class="bld-roof"></div>
+            <div class="bld-icon">${a.sym}</div>
+            <div class="bld-flag"></div>
+          </div>
+          <div class="plot-served">${servedText}</div>
+        `:`
+          <div class="empty-tip">拖入或点选后建造</div>
+        `}
+      </div>
+    `;
+  }).join('');
+}
+
+function renderFtr(){
+  document.getElementById('ftr-badge').textContent={planning:'规划中',running:'营业中',ended:'已结束'}[S.phase];
+}
+
+function setMode(m){ S.mode=m; renderHdr(); renderQueue(); }
+
+function selectTheme(tid){
+  clearT();
+  clearClickSelections();
+  S.themeId=tid;
+  for(const f of S.floors){S.assignments[f]=null;S.served[f]=[];}
+  S.queue=[];S.phase='planning';S.ratings=[];S.reviews=[];S.complaints=0;
+  S.placementAttempts=0;S.correctPlacements=0;S.timeLeft=60;S.totalSpawned=0;S.gid=0;
+  setMsg(tid?`已选择 ${THEMES[tid].name}。可拖拽，也可点击卡片再点击地块。`:'请选择一个分类主题。');
+  renderAll();
+}
+
+/* click fallback */
+function selectBuildOption(optId){
+  if(S.phase!=='planning') return;
+  clickBuildOptionId = (clickBuildOptionId===optId?null:optId);
+  clickGuestId = null;
+  setMsg(clickBuildOptionId ? '已选中建筑卡，请点击地图地块进行建造。' : '已取消建筑卡选择。');
+  renderLeft(); renderQueue(); renderPlots();
+}
+function selectGuest(gid){
+  if(S.phase!=='running') return;
+  clickGuestId = (clickGuestId===gid?null:gid);
+  clickBuildOptionId = null;
+  setMsg(clickGuestId ? '已选中动物，请点击地图中的目标建筑。' : '已取消动物选择。');
+  renderLeft(); renderQueue(); renderPlots();
+}
+function plotClick(fid){
+  if(clickBuildOptionId && S.phase==='planning'){
+    assignPlot(fid, clickBuildOptionId);
+    clickBuildOptionId = null;
+    renderLeft(); renderPlots();
+    return;
+  }
+  if(clickGuestId && S.phase==='running'){
+    serveGuest(clickGuestId, fid);
+    clickGuestId = null;
+    renderQueue(); renderPlots();
+  }
+}
+
+function findNextPlotCoord(){
+  const used=new Set(S.floors.map(id=>`${S.coords[id].gx},${S.coords[id].gy}`));
+  const step=2;
+  const dirs=[[step,0],[0,step],[-step,0],[0,-step],[step,step],[-step,-step],[step,-step],[-step,step]];
+  for(let radius=1; radius<20; radius++){
+    for(const id of S.floors){
+      const base=S.coords[id];
+      for(const d of dirs){
+        const gx=base.gx+d[0]*radius;
+        const gy=base.gy+d[1]*radius;
+        if(!used.has(`${gx},${gy}`)) return {gx,gy};
+      }
+    }
+  }
+  return {gx:S.floors.length*step,gy:0};
+}
+function nextPlotId(){ return `P${S.nextPlotIndex++}`; }
+
+function addFloor(){
+  if(S.phase!=='planning'){setMsg('营业中不能新增地块。');return;}
+  const id=nextPlotId();
+  const c=findNextPlotCoord();
+  S.floors.push(id); S.coords[id]=c; S.assignments[id]=null; S.served[id]=[]; S.presets[id]='';
+  setMsg(`已新增地图地块 ${id}。`);
+  renderAll();
+}
+function removeFloor(){
+  if(S.phase!=='planning'){setMsg('营业中不能移除地块。');return;}
+  if(S.floors.length<=INIT_PLOTS.length){setMsg('当前已是默认地块，不能再减。');return;}
+  const rm=[...S.floors].reverse().find(f=>!INIT_PLOTS.some(p=>p.id===f));
+  if(!rm){setMsg('没有可移除的地块。');return;}
+  S.floors=S.floors.filter(f=>f!==rm);
+  delete S.coords[rm]; delete S.assignments[rm]; delete S.served[rm]; delete S.presets[rm];
+  setMsg(`已移除地块 ${rm}。`);
+  renderAll();
+}
+
+function assignPlot(fid,optId){
+  const opt=THEMES[S.themeId].options.find(o=>o.id===optId);
+  if(!opt)return;
+  S.assignments[fid]={fid,optionId:opt.id,label:opt.name,sym:opt.sym,rule:opt.rule,built:false};
+  setMsg(`${fid} 已设为 ${opt.name}，建筑施工中…`);
+  renderPlots(); renderHdr(); renderLeft(); requestAnimationFrame(fitWorldToViewport);
+  setTimeout(()=>{
+    if(S.assignments[fid]){
+      S.assignments[fid]={...S.assignments[fid],built:true};
+      setMsg(`${fid} 的 ${opt.name} 建设完成！`);
+      renderPlots(); renderHdr(); renderLeft(); requestAnimationFrame(fitWorldToViewport);
+    }
+  },900+Math.random()*500);
+}
+
+function spawnGuest(){
+  const avail=S.floors.filter(f=>S.assignments[f]?.built);
+  if(!avail.length)return;
+  const fid=avail[Math.floor(Math.random()*avail.length)];
+  const fi=S.assignments[fid];
+  const ani=pickAnimal(fi.optionId);
+  const hf=HINTS[S.themeId]?.[fi.optionId];
+  S.queue.push({
+    instanceId:`g${S.gid++}`,
+    name:ani.name, emoji:ani.emoji, group:ani.group,
+    targetFloorId:fid, targetOptionId:fi.optionId, targetLabel:fi.label,
+    hintText:`去：${fi.label}`, stdHint:hf?hf(ani.name):`${ani.name}有自己的分类线索。`,
+    multiTags:animalTags(ani,2), wait:0, urgent:false,
+  });
+  S.totalSpawned++; renderQueue();
+}
+function spawnWave(){
+  const avail=S.floors.filter(f=>S.assignments[f]?.built);
+  if(!avail.length)return;
+  const n=Math.random()<0.15?2:1;
+  for(let i=0;i<n;i++)setTimeout(()=>spawnGuest(),i*650);
+}
+
+function beginGame(){
+  const built=S.floors.filter(f=>S.assignments[f]?.built);
+  if(!built.length)return;
+  clearT();
+  clearClickSelections();
+  S.phase='running'; S.queue=[]; for(const f of S.floors)S.served[f]=[];
+  S.timeLeft=60;S.ratings=[];S.reviews=[];S.complaints=0;S.placementAttempts=0;S.correctPlacements=0;S.totalSpawned=0;S.gid=0;
+  setMsg('营业开始！可拖拽，也可先点动物再点目标建筑。');
+  renderAll(); spawnWave();
+
+  T.cd=setInterval(()=>{
+    S.timeLeft--; document.getElementById('timer').textContent=fmt(S.timeLeft);
+    if(S.timeLeft<=0){ clearT(); S.phase='ended'; setMsg('营业时间结束！'); renderAll(); showResult(); }
+  },1000);
+
+  T.wt=setInterval(()=>{
+    let anyOut=false;
+    S.queue=S.queue.filter(g=>{
+      g.wait++;
+      if(g.wait>=24){S.complaints++;S.ratings.push(1);S.reviews.push({emoji:g.emoji,name:g.name,stars:1,label:'超时离开'});anyOut=true;return false;}
+      g.urgent=g.wait>=14; return true;
+    });
+    if(anyOut)setMsg('有动物等待过久离开了，留下了差评！');
+    renderQueue();renderHdr();renderLeft();
+  },1000);
+
+  T.sp=setInterval(()=>{ if(S.phase==='running') spawnWave(); },6200);
+}
+
+function serveGuest(gid,fid){
+  if(S.phase!=='running')return;
+  const idx=S.queue.findIndex(g=>g.instanceId===gid);
+  if(idx===-1)return;
+  const g=S.queue[idx];
+  S.placementAttempts++;
+  const el=document.getElementById(`plot-${fid}`);
+  if(el)el.classList.remove('hover');
+
+  if(g.targetFloorId!==fid){
+    S.complaints++; S.ratings.push(1); S.reviews.push({emoji:g.emoji,name:g.name,stars:1,label:`应去${g.targetLabel}`});
+    setMsg(`${g.name} 分错了！当前主题下它应去「${g.targetLabel}」`);
+    if(el){el.classList.add('wrong');setTimeout(()=>el&&el.classList.remove('wrong'),700);}
+    S.queue.splice(idx,1); renderQueue(); renderHdr(); renderLeft(); return;
+  }
+
+  S.correctPlacements++;
+  const r=guestR(g.wait);
+  S.ratings.push(r); S.reviews.push({emoji:g.emoji,name:g.name,stars:r,label:g.targetLabel}); S.served[fid].push(g);
+  S.queue.splice(idx,1);
+  setMsg(`${g.name} 进入 ${g.targetLabel}，好评 ${stars(r)}（等待${g.wait}s）`);
+  renderQueue(); renderPlots(); renderHdr(); renderLeft(); requestAnimationFrame(fitWorldToViewport);
+}
+
+function optDS(e,optId){ e.dataTransfer.setData('j',JSON.stringify({kind:'opt',optId})); e.dataTransfer.effectAllowed='move'; }
+function guestDS(e,gid){ e.dataTransfer.setData('j',JSON.stringify({kind:'guest',gid})); e.dataTransfer.effectAllowed='move'; }
+function dropPlot(e,fid){
+  e.preventDefault();
+  const el=document.getElementById(`plot-${fid}`);
+  if(el)el.classList.remove('hover');
+  const p=JSON.parse(e.dataTransfer.getData('j')||'{}');
+  if(p.kind==='opt'){
+    if(!S.themeId){setMsg('请先选择分类主题。');return;}
+    if(S.phase!=='planning'){setMsg('营业中不能修改地块。');return;}
+    assignPlot(fid,p.optId);
+  }else if(p.kind==='guest'){
+    serveGuest(p.gid,fid);
+  }
+}
+
+function renderFtr(){
+  document.getElementById('ftr-badge').textContent={planning:'规划中',running:'营业中',ended:'已结束'}[S.phase];
+}
+
+function showResult(){
+  const av=avgR();
+  const totalSrv=Object.values(S.served).reduce((s,l)=>s+l.length,0);
+  const acc=S.placementAttempts?`${((S.correctPlacements/S.placementAttempts)*100).toFixed(0)}%`:'—';
+  const good=S.ratings.filter(r=>r>=4).length;
+  const revHtml=S.reviews.slice().reverse().slice(0,24).map(r=>`
+    <div class="rchip">
+      <span>${r.emoji}</span>
+      <span class="rstar${r.stars<=2?' low':''}">${stars(r.stars)}</span>
+      <span style="color:var(--muted);font-size:10px">${r.name}</span>
+    </div>`).join('');
+  document.getElementById('res-card').innerHTML=`
+    <div class="res-hdr">
+      <div><div class="res-sub">城市结算</div><div class="res-title">本轮建设挑战完成！🎉</div></div>
+      <div class="res-rbox">
+        <div class="res-rl">最终口碑</div><div class="res-rv">${av!==null?av.toFixed(1):'—'}</div><div class="res-rc">${S.ratings.length} 条顾客评价均值</div>
+      </div>
+    </div>
+    <div class="res-stats">
+      <div class="sc"><div class="sc-l">正确率</div><div class="sc-v">${acc}</div><div class="sc-d">正确${S.correctPlacements}/尝试${S.placementAttempts}</div></div>
+      <div class="sc"><div class="sc-l">总接待</div><div class="sc-v">${totalSrv}</div><div class="sc-d">到店${S.totalSpawned}位，成功${totalSrv}位</div></div>
+      <div class="sc"><div class="sc-l">好评(4⭐+)</div><div class="sc-v">${good}</div><div class="sc-d">占总评${S.ratings.length?((good/S.ratings.length)*100).toFixed(0)+'%':'—'}</div></div>
+      <div class="sc"><div class="sc-l">差评/投诉</div><div class="sc-v">${S.complaints}</div><div class="sc-d">分错类或等待超时产生</div></div>
+    </div>
+    <div style="margin-bottom:12px;font-size:12px;color:var(--muted);line-height:1.7;background:#f7fbff;border:1px dashed #dce8f4;border-radius:16px;padding:12px">
+      <b>学习总结：</b> 你本轮使用的是 <b>${S.themeId?THEMES[S.themeId].badge:'当前主题'}</b>，动物同时拥有多个分类标签，也就是说：<b>同一种动物可以被不同标准反复分类</b>。
+    </div>
+    ${S.reviews.length?`<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:900;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.07em">顾客评价记录</div><div class="rev-list">${revHtml}</div></div>`:''}
+    <div style="display:flex;justify-content:flex-end;gap:8px">
+      <button class="btn btn-g" onclick="closeRes()">关闭</button>
+      <button class="btn btn-p" onclick="resetGame()">↺ 再玩一轮</button>
+    </div>
+  `;
+  document.getElementById('overlay').style.display='flex';
+}
+function closeRes(){document.getElementById('overlay').style.display='none';}
+function resetGame(){
+  closeRes(); clearT(); clearClickSelections();
+  const mode=S.mode; S=makeState(); S.mode=mode;
+  setMsg('先选择分类主题，再建造分类建筑，最后让动物进入正确分类区域。'); renderAll();
+}
+window.addEventListener('resize', ()=>requestAnimationFrame(fitWorldToViewport));
+renderAll();
+</script>
+</body>
+</html>
