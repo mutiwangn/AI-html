@@ -8,6 +8,12 @@ on:
     paths:
       - 'ci/muti-ssd2677-v1.2.0/**'
       - '.github/workflows/muti-ssd2677-v1.2.0.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'ci/muti-ssd2677-v1.2.0/**'
+      - '.github/workflows/muti-ssd2677-v1.2.0.yml'
 
 permissions:
   contents: write
@@ -82,6 +88,7 @@ jobs:
           retention-days: 14
 
       - name: Publish verified outputs to branch
+        if: github.event_name != 'pull_request'
         shell: bash
         run: |
           set -euo pipefail
