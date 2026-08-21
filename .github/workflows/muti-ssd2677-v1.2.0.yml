@@ -42,6 +42,7 @@ jobs:
           echo 'ba99bcdc325f54d4bbe2e745ce208f255cee66e5961620c12cfeb281d52b8329  project_v120.tar.gz' | sha256sum --check --strict
           mkdir -p work
           tar -xzf project_v120.tar.gz -C work
+          cp -a overrides/. work/Muti-SSD2677-LocalWeb-C3-v1.2.0/
 
       - name: Set up Python
         uses: actions/setup-python@v5
