@@ -1,0 +1,175 @@
+name: Build Muti SSD2677 v1.3.0 final
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - build/muti-ssd2677-v1.3.0-final-ci
+    paths:
+      - 'ci/muti-ssd2677-v1.3.0/**'
+      - 'ci/muti-ssd2677-v1.3.0-final/**'
+      - '.github/workflows/muti-ssd2677-v1.3.0-final.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'ci/muti-ssd2677-v1.3.0/**'
+      - 'ci/muti-ssd2677-v1.3.0-final/**'
+      - '.github/workflows/muti-ssd2677-v1.3.0-final.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: build/muti-ssd2677-v1.3.0-final-ci
+
+      - name: Reconstruct verified v1.2.3 source
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='ci/muti-ssd2677-v1.2.0'
+          OUT='ci/muti-ssd2677-v1.3.0-final/work'
+          rm -rf "$OUT"
+          mkdir -p "$OUT"
+          cat "$BASE/source.part00" "$BASE/source.part01" "$BASE/source.part02" \
+              "$BASE/source.fix03a" "$BASE/source.fix03b" \
+              "$BASE/source.fix04a" "$BASE/source.fix04b" \
+              "$BASE/source.fix05a" "$BASE/source.fix05b" > /tmp/project_v120.b64
+          base64 --decode /tmp/project_v120.b64 > /tmp/project_v120.tar.gz
+          echo 'ba99bcdc325f54d4bbe2e745ce208f255cee66e5961620c12cfeb281d52b8329  /tmp/project_v120.tar.gz' | sha256sum --check --strict
+          tar -xzf /tmp/project_v120.tar.gz -C "$OUT"
+          cp -a "$BASE/overrides/." "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0/"
+
+          python ci/muti-ssd2677-v1.2.1/apply_v121.py "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0"
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1"
+          python ci/muti-ssd2677-v1.2.2/apply_v122.py "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1"
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2"
+
+          base64 --decode ci/muti-ssd2677-v1.2.3/v123.patch.gz.b64 > /tmp/v123.patch.gz
+          echo '7731a9d0f243d1c90f9276ea3f811faf4748d06fc0378be0c02327bf7713ef2e  /tmp/v123.patch.gz' | sha256sum --check --strict
+          gzip --decompress --stdout /tmp/v123.patch.gz > /tmp/v123.patch
+          echo 'c91caf9ecbeb875b15c68541d4b265bbcaf187c612a3a2bb52a92d45bfecc226  /tmp/v123.patch' | sha256sum --check --strict
+          cd "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2"
+          patch --batch --forward -p1 < /tmp/v123.patch || true
+          for critical in include/app_config.h src/main.cpp web/index.html tools/make_release.py tools/validate_project.py; do
+            if [ -f "${critical}.rej" ]; then
+              cat "${critical}.rej" >&2
+              exit 1
+            fi
+          done
+          find . -name '*.rej' -delete
+          find . -name '*.orig' -delete
+          cd -
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
+
+      - name: Apply v1.3.0 multi-device patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          PARTS='ci/muti-ssd2677-v1.3.0'
+          OUT='ci/muti-ssd2677-v1.3.0-final/work'
+          cat "$PARTS/v130.patch.gz.b64.part00" \
+              "$PARTS/v130.patch.gz.b64.part01" \
+              "$PARTS/v130.patch.gz.b64.part02" \
+              "$PARTS/v130.patch.gz.b64.part03" \
+              "$PARTS/v130.patch.gz.b64.part04" > /tmp/v130.patch.gz.b64
+          echo 'b7c71ab1f537b253f5c1b1b51c8e8c6a06e441849589aefc17b255d002bd753c  /tmp/v130.patch.gz.b64' | sha256sum --check --strict
+          base64 --decode /tmp/v130.patch.gz.b64 > /tmp/v130.patch.gz
+          echo '015af46d32f9f752f5327326284f30eab14398f87bb9a15a592c45e3a3e7a49a  /tmp/v130.patch.gz' | sha256sum --check --strict
+          gzip --decompress --stdout /tmp/v130.patch.gz > /tmp/v130.patch
+          echo '9739840950eaa34e2af311bf7de134b9045417fac49a7f5b419877daeffd5f24  /tmp/v130.patch' | sha256sum --check --strict
+
+          cd "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
+          patch --batch --forward -p1 < /tmp/v130.patch
+          test -z "$(find . -name '*.rej' -o -name '*.orig' -print -quit)"
+          cd -
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.3.0"
+          rm -rf "$OUT/Muti-SSD2677-LocalWeb-C3-v1.3.0/.pio"
+          rm -f "$OUT/Muti-SSD2677-LocalWeb-C3-v1.3.0/firmware/"*
+          rm -f "$OUT/Muti-SSD2677-LocalWeb-C3-v1.3.0/MANIFEST_SHA256.txt"
+          python "$OUT/Muti-SSD2677-LocalWeb-C3-v1.3.0/tools/embed_web.py"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: python -m pip install --disable-pip-version-check 'platformio==6.1.18'
+
+      - name: Validate project
+        working-directory: ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0
+        run: python tools/validate_project.py
+
+      - name: Compile USB-CDC build
+        working-directory: ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0
+        run: python -m platformio run -e c3_promini_usb
+
+      - name: Compile UART build
+        working-directory: ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0
+        run: python -m platformio run -e c3_promini_uart
+
+      - name: Produce flash images
+        working-directory: ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0
+        run: python tools/make_release.py --env c3_promini_usb
+
+      - name: Generate manifest and package
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT='ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0'
+          rm -rf "$ROOT/.pio"
+          rm -f "$ROOT/MANIFEST_SHA256.txt"
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root = Path('ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0')
+          rows=[]
+          for path in sorted(root.rglob('*')):
+              if path.is_file() and '.pio' not in path.parts and path.name != 'MANIFEST_SHA256.txt':
+                  rows.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.relative_to(root).as_posix()}")
+          (root/'MANIFEST_SHA256.txt').write_text('\n'.join(rows)+'\n', encoding='utf-8')
+          print('manifest entries:', len(rows))
+          PY
+          cd 'ci/muti-ssd2677-v1.3.0-final/work'
+          zip -qr Muti-SSD2677-LocalWeb-C3-v1.3.0.zip Muti-SSD2677-LocalWeb-C3-v1.3.0
+          sha256sum Muti-SSD2677-LocalWeb-C3-v1.3.0.zip > Muti-SSD2677-LocalWeb-C3-v1.3.0.zip.sha256
+          unzip -t Muti-SSD2677-LocalWeb-C3-v1.3.0.zip
+
+      - name: Upload complete program package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Muti-SSD2677-LocalWeb-C3-v1.3.0
+          path: |
+            ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0.zip
+            ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0.zip.sha256
+            ci/muti-ssd2677-v1.3.0-final/work/Muti-SSD2677-LocalWeb-C3-v1.3.0/firmware/*
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Publish verified outputs to branch
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT='ci/muti-ssd2677-v1.3.0-final/output'
+          WORK='ci/muti-ssd2677-v1.3.0-final/work'
+          rm -rf "$OUT"
+          mkdir -p "$OUT/firmware"
+          cp "$WORK/Muti-SSD2677-LocalWeb-C3-v1.3.0.zip" "$OUT/"
+          cp "$WORK/Muti-SSD2677-LocalWeb-C3-v1.3.0.zip.sha256" "$OUT/"
+          cp "$WORK/Muti-SSD2677-LocalWeb-C3-v1.3.0/firmware/"* "$OUT/firmware/"
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > "$OUT/CI_BUILD_UTC.txt"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$OUT"
+          git commit -m 'ci: publish verified SSD2677 v1.3.0 build' || exit 0
+          git push origin HEAD:build/muti-ssd2677-v1.3.0-final-ci
