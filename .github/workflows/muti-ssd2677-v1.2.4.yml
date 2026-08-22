@@ -69,9 +69,9 @@ jobs:
           mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
 
           base64 --decode ci/muti-ssd2677-v1.2.4/v124.patch.gz.b64 > /tmp/v124.patch.gz
-          echo '224ea4ddfccaef6544e1b63a4945b0e986098f67f58cc2b38c2ecd008121c1d6  /tmp/v124.patch.gz' | sha256sum --check --strict
+          echo 'ad9ac257038c3daceeb5338062745bf2d55870fef605fa46c52771e26586598c  /tmp/v124.patch.gz' | sha256sum --check --strict
           gzip --decompress --stdout /tmp/v124.patch.gz > /tmp/v124.patch
-          echo 'c9f679722c609548a36c02227bc4fa7a90df064b748e2e1b8ce3132d53dcc341  /tmp/v124.patch' | sha256sum --check --strict
+          echo '8f45b43e7875b3093fa0a93711d4bcbd3f310ca7424dae7c7ef194a159ada607  /tmp/v124.patch' | sha256sum --check --strict
           cd "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
           patch --batch --forward -p1 < /tmp/v124.patch
           cd -
