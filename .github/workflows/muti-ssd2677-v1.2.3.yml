@@ -53,7 +53,41 @@ jobs:
           gzip --decompress --stdout /tmp/v123.patch.gz > /tmp/v123.patch
           echo 'c91caf9ecbeb875b15c68541d4b265bbcaf187c612a3a2bb52a92d45bfecc226  /tmp/v123.patch' | sha256sum --check --strict
           cd "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2"
-          patch --batch --forward -p1 < /tmp/v123.patch
+          patch --batch --forward -p1 < /tmp/v123.patch || true
+
+          # The source reconstruction has older documentation snapshots and no
+          # generated JS syntax-check file.  Those non-runtime hunks may reject;
+          # runtime and build-critical files must apply without rejects.
+          for critical in include/app_config.h src/main.cpp web/index.html tools/make_release.py tools/validate_project.py; do
+            if [ -f "${critical}.rej" ]; then
+              echo "critical patch reject: ${critical}.rej" >&2
+              cat "${critical}.rej" >&2
+              exit 1
+            fi
+          done
+          find . -name '*.rej' -delete
+
+          python - <<'PY'
+          from pathlib import Path
+          root = Path('.')
+          docs = list(root.glob('README_*.md')) + list(root.glob('START_HERE_*.md'))
+          docs += [root/'docs/BUILD_STATUS.md', root/'docs/TEST_PLAN.md']
+          for p in docs:
+              if p.is_file():
+                  p.write_text(p.read_text(encoding='utf-8').replace('v1.2.2', 'v1.2.3'), encoding='utf-8')
+          changelog = root/'CHANGELOG.md'
+          if changelog.is_file():
+              text = changelog.read_text(encoding='utf-8')
+              if '## 1.2.3' not in text:
+                  entry = ('## 1.2.3 — 2026-08-22\n\n'
+                           '- 局域网 mDNS 固定为 `http://muti.local/`。\n'
+                           '- 强化 AP-only 启动：固定 `192.168.4.1`、关闭省电并最多重试三次。\n'
+                           '- 新增网页端“开启配置热点”和“连接已保存局域网”切换。\n'
+                           '- STA 成功后关闭热点是预期行为；STA 失败仍自动回退配置热点。\n'
+                           '- 显示驱动、TB LUT、GPIO、2bpp 帧格式与刷新保护不变。\n\n')
+                  text = text.replace('# CHANGELOG\n\n', '# CHANGELOG\n\n' + entry, 1)
+                  changelog.write_text(text, encoding='utf-8')
+          PY
           cd -
           mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
           rm -rf "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3/.pio"
