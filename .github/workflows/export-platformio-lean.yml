@@ -1,0 +1,125 @@
+name: Export lean PlatformIO toolchain
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/export-platformio-lean.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: build/muti-ssd2677-v1.2.4-ci
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: python -m pip install --disable-pip-version-check 'platformio==6.1.18'
+
+      - name: Reconstruct and build known-good ESP32-C3 project
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='ci/muti-ssd2677-v1.2.0'
+          OUT='/tmp/muti-v123'
+          mkdir -p "$OUT"
+          cat "$BASE/source.part00" "$BASE/source.part01" "$BASE/source.part02" \
+              "$BASE/source.fix03a" "$BASE/source.fix03b" \
+              "$BASE/source.fix04a" "$BASE/source.fix04b" \
+              "$BASE/source.fix05a" "$BASE/source.fix05b" > /tmp/project_v120.b64
+          base64 --decode /tmp/project_v120.b64 > /tmp/project_v120.tar.gz
+          tar -xzf /tmp/project_v120.tar.gz -C "$OUT"
+          cp -a "$BASE/overrides/." "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0/"
+          python ci/muti-ssd2677-v1.2.1/apply_v121.py "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0"
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1"
+          python ci/muti-ssd2677-v1.2.2/apply_v122.py "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1"
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2"
+          base64 --decode ci/muti-ssd2677-v1.2.3/v123.patch.gz.b64 > /tmp/v123.patch.gz
+          gzip --decompress --stdout /tmp/v123.patch.gz > /tmp/v123.patch
+          cd "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2"
+          patch --batch --forward -p1 < /tmp/v123.patch || true
+          for critical in include/app_config.h src/main.cpp web/index.html tools/make_release.py tools/validate_project.py; do
+            test ! -f "${critical}.rej" || { cat "${critical}.rej"; exit 1; }
+          done
+          cd -
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
+          python "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3/tools/embed_web.py"
+          cd "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
+          python -m platformio run -e c3_promini_usb
+          python -m platformio run -e c3_promini_uart
+
+      - name: Create lean offline archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$HOME/.platformio"
+          mkdir -p export/core export/framework export/toolchain export/wheelhouse
+          python -m pip download --disable-pip-version-check --dest export/wheelhouse 'platformio==6.1.18'
+
+          tar -C "$ROOT" -I 'zstd -19 -T0' -cf export/core/platformio-core.tar.zst \
+            platforms/espressif32 \
+            packages/tool-esptoolpy \
+            packages/tool-scons \
+            packages/tool-openocd-esp32
+
+          tar -C "$ROOT" -I 'zstd -19 -T0' -cf export/framework/framework-arduinoespressif32.tar.zst \
+            packages/framework-arduinoespressif32
+
+          tar -C "$ROOT" -I 'zstd -19 -T0' -cf export/toolchain/toolchain-riscv32-esp.tar.zst \
+            packages/toolchain-riscv32-esp
+
+          cat > export/core/README.txt <<'EOF'
+          Linux x86_64 offline PlatformIO bundle.
+          Install PlatformIO 6.1.18 from the wheelhouse artifact, then extract all three tar.zst archives into ~/.platformio.
+          Includes Espressif32 6.9.0, Arduino-ESP32 2.0.17, ESP32-C3 RISC-V toolchain, esptool, SCons and OpenOCD.
+          EOF
+
+          sha256sum export/core/* export/framework/* export/toolchain/* export/wheelhouse/* > export/SHA256SUMS.txt
+          du -h export/core/* export/framework/* export/toolchain/*
+
+      - name: Upload core
+        uses: actions/upload-artifact@v4
+        with:
+          name: pio-esp32c3-core
+          path: export/core/*
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload framework
+        uses: actions/upload-artifact@v4
+        with:
+          name: pio-esp32c3-framework
+          path: export/framework/*
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload toolchain
+        uses: actions/upload-artifact@v4
+        with:
+          name: pio-esp32c3-toolchain
+          path: export/toolchain/*
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload wheelhouse
+        uses: actions/upload-artifact@v4
+        with:
+          name: pio-python-wheelhouse
+          path: |
+            export/wheelhouse/*
+            export/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 7
