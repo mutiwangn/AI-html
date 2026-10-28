@@ -17,6 +17,8 @@
 @media(max-width:350px){.header h1{font-size:16px}.header .icon-button{width:37px}.time{font-size:9px}.player{gap:3px}.step-button{width:27px;min-width:27px}.empty h2{font-size:19px}}
 @media(orientation:landscape) and (max-height:600px){.app{min-height:300px;display:grid;grid-template-columns:minmax(0,1fr) 210px;grid-template-rows:52px minmax(0,1fr) 72px;grid-template-areas:'header header' 'workspace controls' 'workspace tabs';gap:0 18px;padding-bottom:10px}.header{grid-area:header;height:52px;min-height:0}.workspace{grid-area:workspace}.mode-actions{grid-area:controls;height:auto;min-height:0}.tabs{grid-area:tabs;height:72px;min-height:0;margin:0;padding:8px 0}.capture-actions{gap:4px}.record-button{width:66px;height:66px}.action-tile{min-width:50px}.track-actions{grid-template-columns:1fr 1fr;gap:10px}.track-actions #undoBtn{grid-column:1/3;justify-self:center;width:52px;min-height:42px}.stage{min-height:100px}.overlay-actions .button{font-size:15px;padding:12px}.tab{font-size:13px}.tab .icon{width:24px;height:24px}.toast{bottom:24px}.sheet{margin:auto;max-width:560px;border-radius:20px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.button.primary:not(:disabled):hover{background:#0c655e;border-color:#0c655e;color:#fff}.player .step-button{width:44px;min-width:44px}.player .play{width:44px;min-width:44px}.timeline{height:44px}.header .icon-button{min-width:44px}
+@media(max-width:600px){.sheet{max-width:100%}}
 </style>
 </head>
 <body data-mode="capture">
@@ -733,7 +735,7 @@
     if (S.recording || S.busy || S.loading || S.cameraPending) return;
     closeSettings();
     if (S.stream && !force) {
-      stopStream(); setView('original'); status('相机已关闭。'); sync(); return;
+      stopStream(); setView('original'); showTip(''); status('相机已关闭。'); sync(); return;
     }
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       status('此环境不提供网页相机。请用 Safari / Chrome / Edge 直接打开 HTTPS 链接，或先拍摄再导入。', 'error'); return;
@@ -747,8 +749,9 @@
       });
       live.srcObject = S.stream; await live.play();
       S.live = true; setView('original'); setTab('capture');
+      showTip('再点一下开始录制');
       status('相机已开启。固定机位后点击“开始”；结束后自动进入重播。');
-    } catch (error) { stopStream(); setView('original'); status(cameraError(error), 'error'); }
+    } catch (error) { stopStream(); setView('original'); showTip(''); status(cameraError(error), 'error'); }
     finally { S.cameraPending = false; sync(); }
   }
   function pickMime() {
@@ -789,7 +792,7 @@
         $('recordTime').textContent = fmt(elapsed, 0);
         if (elapsed >= 60 && recorder.state === 'recording') recorder.stop();
       }, 200);
-      status('正在录制，最长 60 秒。结束后请先下载原视频。'); sync();
+      showTip(''); status('正在录制，最长 60 秒。结束后请先下载原视频。'); sync();
     } catch (error) {
       S.recording = false; S.recorder = null; clearInterval(S.recordTimer);
       status('无法开始录像：' + error.message + '。可以先拍摄后导入。', 'error'); sync();
@@ -1110,7 +1113,7 @@
     const file = event.target.files && event.target.files[0]; if (file) loadVideo(file, file.name); event.target.value = '';
   }));
   $('playBtn').addEventListener('click', () => togglePlay());
-  $('restartBtn').addEventListener('click', () => togglePlay(true));
+  $('restartBtn').addEventListener('click', () => { closeSettings(); togglePlay(true); });
   $('prevBtn').addEventListener('click', () => seek(video.currentTime - Number($('frameStep').value)));
   $('nextBtn').addEventListener('click', () => seek(video.currentTime + Number($('frameStep').value)));
   $('timeline').addEventListener('input', () => seek(Number($('timeline').value)));
@@ -1129,8 +1132,8 @@
   $('generateOverlayBtn').addEventListener('click', makeOverlay);
   $('autoTrackBtn').addEventListener('click', autoTrack);
   $('cancelBtn').addEventListener('click', () => { cancelJob(); status('正在取消…'); });
-  $('originalViewBtn').addEventListener('click', () => setView('original'));
-  $('overlayViewBtn').addEventListener('click', () => { setMarking(false); setView('overlay'); });
+  $('originalViewBtn').addEventListener('click', () => { closeSettings(); setView('original'); });
+  $('overlayViewBtn').addEventListener('click', () => { closeSettings(); setMarking(false); setView('overlay'); });
   annotation.addEventListener('pointerdown', addPoint);
   $('addTrackBtn').addEventListener('click', () => {
     if (S.tracks.length >= 2) return; snapshot(); S.tracks.push(newTrack('B', '#f08a22'));
