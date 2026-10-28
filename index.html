@@ -3,71 +3,344 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#164d47">
-<meta name="description" content="小学科学互动课件总览，包含原有课程及镇海区其他学校徐敏、许易、林雅、凌瀚四位教师作品，按年级、单元和课次进入。">
+<meta name="theme-color" content="#143c32">
+<meta name="description" content="小学科学互动课件资源库：选择教科版科学教材封面，按具体册次与课次进入互动课堂。">
 <title>小学科学互动课件 · AI-html</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f5f7f5;color:#173831;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65}main{max-width:1080px;margin:0 auto;padding:64px 28px 40px}.eyebrow{color:#53746b;font-size:14px;font-weight:700;letter-spacing:2px}h1{font-size:clamp(30px,4vw,46px);line-height:1.3;margin:12px 0 16px}header p{color:#567068;font-size:18px;margin:0 0 36px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.card{background:white;border:1px solid #dbe6de;border-radius:22px;padding:28px;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 8px 24px #183b3008}.course{font-size:15px;font-weight:700;letter-spacing:1px;color:#587b52;background:#edf5e8;border-radius:8px;padding:5px 10px}.resp .course{color:#126f79;background:#e7f5f6}.lever .course{color:#926518;background:#fff3dd}.lever .button{background:#9a6b27}h2{font-size:clamp(25px,3vw,32px);line-height:1.4;margin:20px 0 12px}.card p{margin:0 0 24px;color:#567068;min-height:60px;font-size:17px}.status{font-size:14px;color:#507162;margin:auto 0 14px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;min-width:160px;padding:12px 20px;border-radius:12px;background:#1d6254;color:white;text-decoration:none;font-size:18px;font-weight:700;touch-action:manipulation}.resp .button{background:#126e78}.button:hover{filter:brightness(1.08)}a:focus-visible{outline:3px solid #d4a947;outline-offset:5px}.help{margin-top:28px;padding:20px 24px;border:1px solid #dbe6de;border-radius:14px;background:#eef3ef;font-size:15px;color:#526b61}.help p{margin:5px 0}footer{margin-top:32px;color:#6c7f76;font-size:14px}@media(max-width:680px){main{padding:32px 18px}.grid{grid-template-columns:1fr;gap:18px}.card{padding:24px}header p{margin-bottom:24px}.card p{min-height:0}.button{width:100%}.help{padding:16px}}
-
-/* 其他学校教师作品及署名 */
-.group-heading{margin:42px 0 20px}
-.group-heading h2{font-size:clamp(24px,3vw,31px);margin:0 0 5px;line-height:1.4}
-.group-heading p{font-size:16px;color:#567068;margin:0}
-.external .course{color:#285c81;background:#eaf2fb}
-.external .teacher{font-size:16px;font-weight:750;color:#315c78;margin:-5px 0 12px}
-.external .button{background:#285f83}
+:root{--ink:#143c32;--muted:#657a72;--surface:#fff;--line:#dbe7e1;--accent:#1f604e;--bg:#f8faf8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.55}
+button,a{font:inherit}
+a{color:inherit}
+.site-header{border-bottom:1px solid #e7efea;background:#fff}
+.site-header-inner{max-width:1160px;margin:0 auto;padding:22px 28px}
+.site-header .brand{font-size:13px;color:#587b6d;font-weight:700;letter-spacing:1.3px;margin:0 0 7px}
+.site-header h1{font-size:clamp(28px,3.3vw,39px);letter-spacing:-.02em;line-height:1.3;margin:0;font-weight:800}
+main{max-width:1160px;margin:0 auto;padding:30px 28px 62px;min-height:calc(100vh - 160px)}
+.intro{margin:5px 0 27px;color:var(--muted);font-size:17px}
+.book-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.book-card{min-width:0;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;background:#fff;border:1px solid #e0e9e3;border-radius:14px;text-decoration:none;box-shadow:0 5px 20px rgba(15,55,41,.035);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+.book-card:hover{transform:translateY(-3px);border-color:#b4cfc0;box-shadow:0 12px 28px rgba(15,55,41,.09)}
+.cover-stage{display:flex;align-items:center;justify-content:center;height:265px;padding:17px 12px 12px;background:#f5f8f6}
+.cover-stage img{display:block;max-height:100%;max-width:100%;height:auto;width:auto;object-fit:contain;border-radius:2px;box-shadow:0 5px 16px rgba(10,35,30,.20)}
+.book-info{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 18px 16px;min-height:82px}
+.book-info-text{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.book-info strong{font-size:18px;font-weight:800;line-height:1.35}
+.book-info small{color:#74867e;font-size:13px}
+.chevron{color:#427360;flex-shrink:0;transition:transform .18s}
+.book-card:hover .chevron{transform:translateX(3px)}
+.book-detail[hidden],.library-view[hidden]{display:none!important}
+.back-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 14px;border:1px solid #a6c6b7;border-radius:9px;color:#215847;text-decoration:none;font-size:16px;font-weight:700;background:#fff;margin-bottom:26px}
+.back-link:hover{background:#eff7f1}
+.detail-layout{display:grid;grid-template-columns:minmax(225px,300px) minmax(0,1fr);gap:34px;align-items:start}
+.detail-cover{padding:0 2px}
+.detail-cover img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 12px 25px rgba(11,48,39,.16)}
+.detail-content h2{font-size:clamp(30px,3.4vw,44px);letter-spacing:-.025em;line-height:1.22;margin:0 0 6px}
+.detail-count{font-size:17px;color:#6d8178;margin:0 0 26px}
+.lesson-list{display:flex;flex-direction:column;gap:12px}
+.lesson-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;column-gap:16px;border:1px solid #d1e2da;border-radius:11px;background:#fff;padding:18px 19px}
+.lesson-index{display:grid;place-items:center;background:#e8f3ed;width:42px;height:42px;border-radius:50%;font-size:20px;font-weight:800;color:#174b3a}
+.lesson-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.lesson-code{font-size:17px;font-weight:800;color:#245c4a}
+.lesson-head h3{font-size:21px;line-height:1.35;margin:0;font-weight:800}
+.origin{display:inline-block;font-size:13px;font-weight:650;color:#517264;margin-top:4px}
+.lesson-content p{font-size:14px;line-height:1.6;color:#687b73;margin:6px 0 0}
+.lesson-open{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;white-space:nowrap;padding:9px 13px;border:1px solid #8fb4a2;border-radius:8px;color:#1b5846;text-decoration:none;font-size:15px;font-weight:750;background:#fff}
+.lesson-open:hover{background:#eaf6ee}
+.empty-state{padding:54px 26px;border:1px dashed #c5d9ce;border-radius:12px;text-align:center;background:#fff}
+.empty-state h3{font-size:21px;margin:0 0 10px}
+.empty-state p{font-size:16px;color:#70837a;margin:0}
+.site-footer{border-top:1px solid #e7efea;background:#fff;color:#72847b;font-size:13px}
+.site-footer-inner{max-width:1160px;margin:auto;padding:20px 28px}
+a:focus-visible{outline:3px solid #f0ae4f;outline-offset:4px}
+@media(max-width:1000px){.book-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:850px){.book-grid{gap:14px}.cover-stage{height:245px}.detail-layout{grid-template-columns:220px minmax(0,1fr);gap:22px}.lesson-row{grid-template-columns:36px minmax(0,1fr);padding:14px}.lesson-index{width:36px;height:36px;font-size:18px}.lesson-open{grid-column:2;justify-self:start;margin-top:12px}}
+@media(max-width:640px){.site-header-inner{padding:21px 17px}main{padding:22px 16px 50px}.intro{font-size:15px;margin-bottom:20px}.book-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cover-stage{height:220px;padding:12px 9px}.book-info{padding:12px 10px;min-height:77px}.book-info strong{font-size:16px}.book-info small{font-size:12px}.chevron{width:17px;height:17px}.detail-layout{grid-template-columns:1fr;gap:20px}.detail-cover{max-width:190px;margin:0 auto}.detail-content h2{font-size:30px}.detail-count{margin-bottom:18px}.lesson-row{grid-template-columns:36px minmax(0,1fr);column-gap:11px}.lesson-head h3{font-size:19px}.lesson-code{font-size:15px}.lesson-open{font-size:14px}.site-footer-inner{padding:18px 16px}}
+@media(max-width:370px){.cover-stage{height:188px}.book-info strong{font-size:15px}.book-info small{font-size:11px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.book-card,.chevron{transition:none}}
 </style>
 </head>
 <body>
+<header class="site-header"><div class="site-header-inner"><div class="brand">AI-HTML · 课堂互动资源</div><h1>小学科学互动课件</h1></div></header>
 <main>
-<header><div class="eyebrow">AI-HTML · 课堂互动资源</div><h1>小学科学互动课件</h1><p>按年级、册次与课次进入，每一课独立保存。</p></header>
-<section class="grid" aria-label="课程列表">
-<article class="card"><div class="course">三年级上册 · 3.2</div><h2>各种各样的运动</h2><p>相机录像与重播、等间隔运动叠影、红点追踪与路径方向。比较同一物体不同位置的运动。</p><div class="status">已发布 · 视频本机处理 · 支持手动校正</div><a class="button" href="./三上3.2各种各样的运动/" aria-label="进入三上3.2各种各样的运动互动课件">进入课件 →</a></article>
-<article class="card"><div class="course">三年级下册 · 2.1</div><h2>不同种类的动物</h2><p>动物城城市建设。原有互动课件已完整归入本课程项目。</p><div class="status">原课件完整保留</div><a class="button" href="./三下2.1不同种类的动物/" aria-label="进入三下2.1不同种类的动物互动课件">进入课件 →</a></article>
-<article class="card resp"><div class="course">四年级上册 · 2.2</div><h2>认识呼吸器官</h2><p>透视人体呼吸，操作材料模型。支持动态轮廓对照、同步局部放大与触控观察。</p><div class="status" id="breathing-status">已发布 · 希沃 / iPad 触控版</div><a class="button" id="breathing-link" href="./四上2.2认识呼吸器官/" aria-label="进入四上2.2认识呼吸器官互动课件">进入课件 →</a></article>
-<article class="card lever"><div class="course">五年级上册 · 2.2</div><h2>独轮车省力的秘密</h2><p>3D 独轮车拆解、直尺杠杆模拟实验、生活工具标注与手臂透视观察。</p><div class="status">已发布 · 单文件离线可用</div><a class="button" href="./五上2.2独轮车省力的秘密/" aria-label="进入五上2.2独轮车省力的秘密互动课件">进入课件 →</a></article>
+<section class="library-view" id="library-view" aria-label="教材封面目录">
+ <p class="intro">选择教材封面，查看对应课时的互动课件。</p>
+ <div class="book-grid" id="books">
+<a class="book-card" href="#book-1-up" aria-label="查看一年级上册，暂未收录互动课">
+ <span class="cover-stage"><img src="./covers/一上.jpg" alt="一年级上册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>一年级上册</strong><small>暂无互动课件</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-1-down" aria-label="查看一年级下册，暂未收录互动课">
+ <span class="cover-stage"><img src="./covers/一下.jpg" alt="一年级下册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>一年级下册</strong><small>暂无互动课件</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-2-up" aria-label="查看二年级上册，暂未收录互动课">
+ <span class="cover-stage"><img src="./covers/二上.jpg" alt="二年级上册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>二年级上册</strong><small>暂无互动课件</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-2-down" aria-label="查看二年级下册，暂未收录互动课">
+ <span class="cover-stage"><img src="./covers/二下.jpg" alt="二年级下册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>二年级下册</strong><small>暂无互动课件</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-3-up" aria-label="查看三年级上册，已收录5节互动课">
+ <span class="cover-stage"><img src="./covers/三上.jpg" alt="三年级上册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>三年级上册</strong><small>已收录 5 节互动课</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-3-down" aria-label="查看三年级下册，已收录1节互动课">
+ <span class="cover-stage"><img src="./covers/三下.jpg" alt="三年级下册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>三年级下册</strong><small>已收录 1 节互动课</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-4-up" aria-label="查看四年级上册，已收录1节互动课">
+ <span class="cover-stage"><img src="./covers/四上.jpg" alt="四年级上册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>四年级上册</strong><small>已收录 1 节互动课</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-4-down" aria-label="查看四年级下册，暂未收录互动课">
+ <span class="cover-stage"><img src="./covers/四下.jpg" alt="四年级下册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>四年级下册</strong><small>暂无互动课件</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-5-up" aria-label="查看五年级上册，已收录1节互动课">
+ <span class="cover-stage"><img src="./covers/五上.jpg" alt="五年级上册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>五年级上册</strong><small>已收录 1 节互动课</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-5-down" aria-label="查看五年级下册，暂未收录互动课">
+ <span class="cover-stage"><img src="./covers/五下.jpg" alt="五年级下册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>五年级下册</strong><small>暂无互动课件</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-6-up" aria-label="查看六年级上册，暂未收录互动课">
+ <span class="cover-stage"><img src="./covers/六上.jpg" alt="六年级上册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>六年级上册</strong><small>暂无互动课件</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+<a class="book-card" href="#book-6-down" aria-label="查看六年级下册，暂未收录互动课">
+ <span class="cover-stage"><img src="./covers/六下.jpg" alt="六年级下册《科学》教材封面" width="520" height="735" loading="lazy" decoding="async"></span>
+ <span class="book-info"><span class="book-info-text"><strong>六年级下册</strong><small>暂无互动课件</small></span><svg class="chevron" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+ </a>
+ </div>
 </section>
-<section class="guest-section" aria-labelledby="guest-title">
-  <div class="group-heading">
-    <div><h2 id="guest-title">镇海区其他学校教师作品</h2><p>新增四份互动课件，按教材课次归档，并保留每位教师的姓名。</p></div>
+<div class="detail-view" id="detail-view" hidden>
+<section class="book-detail" id="book-1-up" data-detail="1-up" aria-labelledby="detail-title-1-up" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/一上.jpg" alt="一年级上册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-1-up">一年级上册</h2>
+      <p class="detail-count">当前暂无互动课件</p>
+      <div class="empty-state"><h3>这册教材暂未收录互动课件</h3><p>后续新增的作品将按单元和课次整理在这里。</p></div>
+    </div>
   </div>
-  <div class="grid" aria-label="其他学校教师互动课件">
-<article class="card external">
-  <div class="course">三年级上册 · 1.8</div>
-  <h2>天气的影响</h2>
-  <div class="teacher">教师【徐敏】</div>
+</section>
+<section class="book-detail" id="book-1-down" data-detail="1-down" aria-labelledby="detail-title-1-down" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/一下.jpg" alt="一年级下册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-1-down">一年级下册</h2>
+      <p class="detail-count">当前暂无互动课件</p>
+      <div class="empty-state"><h3>这册教材暂未收录互动课件</h3><p>后续新增的作品将按单元和课次整理在这里。</p></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-2-up" data-detail="2-up" aria-labelledby="detail-title-2-up" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/二上.jpg" alt="二年级上册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-2-up">二年级上册</h2>
+      <p class="detail-count">当前暂无互动课件</p>
+      <div class="empty-state"><h3>这册教材暂未收录互动课件</h3><p>后续新增的作品将按单元和课次整理在这里。</p></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-2-down" data-detail="2-down" aria-labelledby="detail-title-2-down" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/二下.jpg" alt="二年级下册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-2-down">二年级下册</h2>
+      <p class="detail-count">当前暂无互动课件</p>
+      <div class="empty-state"><h3>这册教材暂未收录互动课件</h3><p>后续新增的作品将按单元和课次整理在这里。</p></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-3-up" data-detail="3-up" aria-labelledby="detail-title-3-up" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/三上.jpg" alt="三年级上册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-3-up">三年级上册</h2>
+      <p class="detail-count">已收录 5 节互动课</p>
+      <div class="lesson-list"><article class="lesson-row">
+ <span class="lesson-index" aria-hidden="true">1</span>
+ <div class="lesson-content">
+  <div class="lesson-head"><span class="lesson-code">1.8</span><h3>天气的影响</h3></div>
+  <div class="origin">【镇海区实验小学徐敏原创】</div>
   <p>比较不同天气对职业、生活和动植物的影响，通过猜想、揭晓与冷热观察形成发现。</p>
-  <div class="status">镇海区其他学校教师作品 · 姓名已标注</div>
-  <a class="button" href="./三上1.8天气的影响【徐敏】/" aria-label="进入三年级上册 · 1.8《天气的影响》教师【徐敏】互动课件">进入课件 →</a>
-</article>
-<article class="card external">
-  <div class="course">三年级上册 · 2.1</div>
-  <h2>水到哪里去了</h2>
-  <div class="teacher">教师【许易】</div>
+ </div>
+ <a class="lesson-open" href="./三上1.8天气的影响【徐敏】/" aria-label="进入三上1.8《天气的影响》互动课件">进入课件 <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ </article>
+<article class="lesson-row">
+ <span class="lesson-index" aria-hidden="true">2</span>
+ <div class="lesson-content">
+  <div class="lesson-head"><span class="lesson-code">2.1</span><h3>水到哪里去了</h3></div>
+  <div class="origin">【镇海区实验小学许易原创】</div>
   <p>从生活情境寻找蒸发现象，完成实验预测、模拟观察与记录。</p>
-  <div class="status">镇海区其他学校教师作品 · 姓名已标注</div>
-  <a class="button" href="./三上2.1水到哪里去了【许易】/" aria-label="进入三年级上册 · 2.1《水到哪里去了》教师【许易】互动课件">进入课件 →</a>
-</article>
-<article class="card external">
-  <div class="course">三年级上册 · 2.3</div>
-  <h2>水沸腾了</h2>
-  <div class="teacher">教师【林雅】</div>
+ </div>
+ <a class="lesson-open" href="./三上2.1水到哪里去了【许易】/" aria-label="进入三上2.1《水到哪里去了》互动课件">进入课件 <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ </article>
+<article class="lesson-row">
+ <span class="lesson-index" aria-hidden="true">3</span>
+ <div class="lesson-content">
+  <div class="lesson-head"><span class="lesson-code">2.3</span><h3>水沸腾了</h3></div>
+  <div class="origin">【镇海区实验小学林雅原创】</div>
   <p>选择器材、模拟加热与观察沸腾现象，读取温度变化并绘制曲线。</p>
-  <div class="status">镇海区其他学校教师作品 · 姓名已标注</div>
-  <a class="button" href="./三上2.3水沸腾了【林雅】/" aria-label="进入三年级上册 · 2.3《水沸腾了》教师【林雅】互动课件">进入课件 →</a>
-</article>
-<article class="card external">
-  <div class="course">三年级上册 · 2.7</div>
-  <h2>加快溶解</h2>
-  <div class="teacher">教师【凌瀚】</div>
+ </div>
+ <a class="lesson-open" href="./三上2.3水沸腾了【林雅】/" aria-label="进入三上2.3《水沸腾了》互动课件">进入课件 <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ </article>
+<article class="lesson-row">
+ <span class="lesson-index" aria-hidden="true">4</span>
+ <div class="lesson-content">
+  <div class="lesson-head"><span class="lesson-code">2.7</span><h3>加快溶解</h3></div>
+  <div class="origin">【镇海区实验小学凌瀚原创】</div>
   <p>控制搅拌、水温与颗粒大小，进行公平的对比实验，记录食盐溶解快慢。</p>
-  <div class="status">镇海区其他学校教师作品 · 姓名已标注</div>
-  <a class="button" href="./三上2.7加快溶解【凌瀚】/" aria-label="进入三年级上册 · 2.7《加快溶解》教师【凌瀚】互动课件">进入课件 →</a>
-</article>
+ </div>
+ <a class="lesson-open" href="./三上2.7加快溶解【凌瀚】/" aria-label="进入三上2.7《加快溶解》互动课件">进入课件 <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ </article>
+<article class="lesson-row">
+ <span class="lesson-index" aria-hidden="true">5</span>
+ <div class="lesson-content">
+  <div class="lesson-head"><span class="lesson-code">3.2</span><h3>各种各样的运动</h3></div>
+  
+  <p>相机录像、运动叠影与红点追踪，观察和比较物体不同位置的运动轨迹。</p>
+ </div>
+ <a class="lesson-open" href="./三上3.2各种各样的运动/" aria-label="进入三上3.2《各种各样的运动》互动课件">进入课件 <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ </article></div>
+    </div>
   </div>
 </section>
-<aside class="help"><p><strong>课堂使用提示</strong></p><p>建议使用 Chrome、Edge 或 iPad Safari。呼吸课件内置三维模型，首次打开请等待资源加载完成。</p><p>希沃一体机可横屏、全屏演示；iPad 可横竖屏切换，进入课件后使用触控操作。</p></aside>
-<footer>各课的模型来源、许可与教学示意说明保留在对应项目中。</footer>
+<section class="book-detail" id="book-3-down" data-detail="3-down" aria-labelledby="detail-title-3-down" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/三下.jpg" alt="三年级下册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-3-down">三年级下册</h2>
+      <p class="detail-count">已收录 1 节互动课</p>
+      <div class="lesson-list"><article class="lesson-row">
+ <span class="lesson-index" aria-hidden="true">1</span>
+ <div class="lesson-content">
+  <div class="lesson-head"><span class="lesson-code">2.1</span><h3>不同种类的动物</h3></div>
+  
+  <p>通过互动动物城建设，认识和比较不同种类动物的特点。</p>
+ </div>
+ <a class="lesson-open" href="./三下2.1不同种类的动物/" aria-label="进入三下2.1《不同种类的动物》互动课件">进入课件 <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ </article></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-4-up" data-detail="4-up" aria-labelledby="detail-title-4-up" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/四上.jpg" alt="四年级上册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-4-up">四年级上册</h2>
+      <p class="detail-count">已收录 1 节互动课</p>
+      <div class="lesson-list"><article class="lesson-row">
+ <span class="lesson-index" aria-hidden="true">1</span>
+ <div class="lesson-content">
+  <div class="lesson-head"><span class="lesson-code">2.2</span><h3>认识呼吸器官</h3></div>
+  
+  <p>透视人体呼吸，操作材料模型，观察呼吸器官的动态变化。</p>
+ </div>
+ <a class="lesson-open" href="./四上2.2认识呼吸器官/" aria-label="进入四上2.2《认识呼吸器官》互动课件">进入课件 <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ </article></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-4-down" data-detail="4-down" aria-labelledby="detail-title-4-down" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/四下.jpg" alt="四年级下册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-4-down">四年级下册</h2>
+      <p class="detail-count">当前暂无互动课件</p>
+      <div class="empty-state"><h3>这册教材暂未收录互动课件</h3><p>后续新增的作品将按单元和课次整理在这里。</p></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-5-up" data-detail="5-up" aria-labelledby="detail-title-5-up" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/五上.jpg" alt="五年级上册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-5-up">五年级上册</h2>
+      <p class="detail-count">已收录 1 节互动课</p>
+      <div class="lesson-list"><article class="lesson-row">
+ <span class="lesson-index" aria-hidden="true">1</span>
+ <div class="lesson-content">
+  <div class="lesson-head"><span class="lesson-code">2.2</span><h3>独轮车省力的秘密</h3></div>
+  
+  <p>3D 独轮车拆解、杠杆模拟实验与生活工具观察。</p>
+ </div>
+ <a class="lesson-open" href="./五上2.2独轮车省力的秘密/" aria-label="进入五上2.2《独轮车省力的秘密》互动课件">进入课件 <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+ </article></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-5-down" data-detail="5-down" aria-labelledby="detail-title-5-down" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/五下.jpg" alt="五年级下册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-5-down">五年级下册</h2>
+      <p class="detail-count">当前暂无互动课件</p>
+      <div class="empty-state"><h3>这册教材暂未收录互动课件</h3><p>后续新增的作品将按单元和课次整理在这里。</p></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-6-up" data-detail="6-up" aria-labelledby="detail-title-6-up" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/六上.jpg" alt="六年级上册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-6-up">六年级上册</h2>
+      <p class="detail-count">当前暂无互动课件</p>
+      <div class="empty-state"><h3>这册教材暂未收录互动课件</h3><p>后续新增的作品将按单元和课次整理在这里。</p></div>
+    </div>
+  </div>
+</section>
+<section class="book-detail" id="book-6-down" data-detail="6-down" aria-labelledby="detail-title-6-down" hidden>
+  <a class="back-link" href="#books"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>返回教材目录</a>
+  <div class="detail-layout">
+    <div class="detail-cover"><img src="./covers/六下.jpg" alt="六年级下册《科学》教材封面" width="520" height="735" decoding="async"></div>
+    <div class="detail-content">
+      <h2 id="detail-title-6-down">六年级下册</h2>
+      <p class="detail-count">当前暂无互动课件</p>
+      <div class="empty-state"><h3>这册教材暂未收录互动课件</h3><p>后续新增的作品将按单元和课次整理在这里。</p></div>
+    </div>
+  </div>
+</section>
+</div>
+<noscript><p>请启用 JavaScript，以便通过教材封面查看对应课时。</p></noscript>
 </main>
+<footer class="site-footer"><div class="site-footer-inner">小学科学互动课件 · 按教材册次与课时整理 · 教师原创署名保留在对应作品中</div></footer>
+<script>
+(function(){
+  var library=document.getElementById('library-view');
+  var detail=document.getElementById('detail-view');
+  var pages=Array.from(document.querySelectorAll('.book-detail'));
+  function render(){
+    var m=/^#book-([a-z0-9-]+)$/.exec(location.hash);
+    var id=m&&m[1];
+    var selected=pages.find(function(p){return p.dataset.detail===id;});
+    library.hidden=!!selected;
+    detail.hidden=!selected;
+    pages.forEach(function(p){p.hidden=p!==selected;});
+    if(selected){document.title=selected.querySelector('h2').textContent+' · 小学科学互动课件';}
+    else{document.title='小学科学互动课件 · AI-html';}
+    window.scrollTo({top:0,behavior:'auto'});
+  }
+  window.addEventListener('hashchange',render);
+  render();
+})();
+</script>
 </body>
 </html>
