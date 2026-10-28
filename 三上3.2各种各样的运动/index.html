@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#ffffff">
 <meta name="description" content="三年级《各种各样的运动》：拍摄、等间隔叠影、红点轨迹。手机简洁版，视频仅在本机处理。">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; connect-src 'none'; font-src 'self' data:; object-src 'none'; base-uri 'self'">
-<title>各种各样的运动 · 运动观察 v3</title>
+<title>各种各样的运动 · 红点优先 v3.1</title>
 <style>
 :root{color-scheme:light;--bg:#f6f9fc;--paper:#fff;--ink:#1b2934;--muted:#71818d;--line:#e5ebef;--accent:#0f766e;--soft:#edf7f5;--red:#ed454a;--stage:#1b2730;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.5;background:var(--bg);color:var(--ink)}
 *{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation;-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.32}a{color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #76c1b8;outline-offset:3px}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.icon{width:25px;height:25px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.app{width:min(100%,1080px);height:100vh;height:100dvh;min-height:460px;margin:0 auto;padding:0 18px;padding-top:env(safe-area-inset-top);background:var(--paper);display:flex;flex-direction:column;overflow:hidden}.header{height:70px;min-height:70px;display:flex;align-items:center;gap:6px}.header h1{font-size:21px;font-weight:700;text-align:center;flex:1;line-height:1.3;margin:0;white-space:nowrap}.header-tools{display:flex;gap:2px}.icon-button{width:46px;height:46px;border:0;background:transparent;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:12px;padding:0;flex:0 0 auto}.icon-button:not(:disabled):hover{background:var(--soft)}.workspace{min-height:0;flex:1;display:flex;flex-direction:column;gap:0}.stage{position:relative;min-height:130px;flex:1;width:100%;overflow:hidden;isolation:isolate;border-radius:14px;background:var(--stage);line-height:0}.stage video,.stage>.composite{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.stage video{background:var(--stage)}#annotationCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;touch-action:pan-y}#annotationCanvas.marking{cursor:crosshair;pointer-events:auto;touch-action:none}.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fff;z-index:5;line-height:1.3;pointer-events:none}.empty .icon{width:76px;height:76px;stroke-width:1.55}.empty h2{font-size:23px;font-weight:600;margin:0}.stage-label{position:absolute;top:14px;left:14px;z-index:6;line-height:1.2}.recording-clock{display:flex;align-items:center;gap:8px;color:#fff;background:#cc353d;border-radius:8px;padding:9px 12px;font-size:14px;font-variant-numeric:tabular-nums}.rec-led{width:7px;height:7px;border-radius:50%;background:#fff}.watermark{position:absolute;right:12px;bottom:10px;font-size:11px;line-height:1;color:#ffffff60;z-index:3;pointer-events:none}
@@ -19,6 +19,7 @@
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 .button.primary:not(:disabled):hover{background:#0c655e;border-color:#0c655e;color:#fff}.player .step-button{width:44px;min-width:44px}.player .play{width:44px;min-width:44px}.timeline{height:44px}.header .icon-button{min-width:44px}
 @media(max-width:600px){.sheet{max-width:100%}}
+#modeLabel{display:inline-block;padding:6px 9px;border-radius:8px;background:#10202eab;color:white;font-size:12px;line-height:1.3}
 .capture-panel{display:flex;flex-direction:column;gap:9px}.capture-modes{display:flex;justify-content:center;gap:3px}.capture-modes button{min-width:72px;min-height:44px;padding:7px 12px;border:0;border-radius:24px;background:transparent;color:var(--muted);font-size:15px}.capture-modes button.active{background:var(--soft);color:var(--accent);font-weight:700}.capture-actions{width:100%}body[data-mode="capture"] .mode-actions{height:150px;min-height:150px}.overlay-actions{gap:10px}.overlay-actions #selectSubjectBtn{width:108px;flex:0 0 auto;padding:12px 10px;font-size:16px}.overlay-actions #generateOverlayBtn{width:auto;flex:1}.overlay-actions .icon{width:23px}.overlay-actions #selectSubjectBtn.is-active{background:var(--soft);border-color:var(--accent);color:var(--accent)}#annotationCanvas.selecting{cursor:crosshair;pointer-events:auto;touch-action:none}
 @media(max-width:600px){.capture-panel{gap:5px}body[data-mode="capture"] .mode-actions{height:142px;min-height:142px}.capture-modes button{min-width:72px;font-size:14px}.overlay-actions #selectSubjectBtn{width:96px;font-size:15px}.overlay-actions #generateOverlayBtn{font-size:16px;padding:12px 13px}.overlay-actions{gap:9px}}
 @media(orientation:landscape) and (max-height:600px){body[data-mode="capture"] .mode-actions{height:auto;min-height:0}.capture-modes button{min-width:0;flex:1;padding:6px;font-size:13px}.overlay-actions{flex-direction:column}.overlay-actions #selectSubjectBtn,.overlay-actions #generateOverlayBtn{width:100%;flex:none}}
@@ -53,11 +54,11 @@
  <div id="secureWarning" class="error-banner" hidden>相机需要 HTTPS。请使用在线链接，或导入已拍摄的视频。</div>
  <details class="setting-section"><summary>拍摄与保存</summary><div class="setting-content"><div class="row"><button id="openCameraBtn" class="button small">打开相机</button><button id="systemCameraBtn" class="button small">系统相机</button></div><button id="saveVideoBtn" class="button small wide" disabled><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>保存视频</button><button id="saveSourceBtn" class="button small wide" style="margin-top:8px" disabled hidden>保存拍摄原片</button><div id="sourceInfo" class="source-info">尚未载入视频</div><p id="captureInfo" class="small-note">普通拍摄 · 不录声音</p><button id="convertVideoBtn" class="button small wide" disabled hidden>转换当前视频</button><p class="small-note">慢动作：2 倍时长；延时：8 倍速，录完在本机生成。处理中请保持页面前台。网页尽量申请 60 帧，实际以设备为准；不等同系统相机的 120/240 帧模式。普通最多 60 秒，慢动作 20 秒，延时 120 秒。</p></div></details>
  <details class="setting-section"><summary>播放</summary><div class="setting-content"><div class="field-row"><div class="field"><label for="speed">播放速度</label><select id="speed" class="select" disabled><option value=".25">0.25 倍</option><option value=".5">0.5 倍</option><option value="1" selected>正常</option><option value="1.5">1.5 倍</option><option value="2">2 倍</option></select></div><div class="field"><label for="frameStep">前后步长</label><select id="frameStep" class="select"><option value=".0333333333">1/30 秒</option><option value=".0166666667">1/60 秒</option><option value=".1" selected>0.1 秒</option><option value=".2">0.2 秒</option></select></div></div><button id="restartBtn" class="button small wide" disabled>从头重播</button></div></details>
- <details class="setting-section"><summary>叠影</summary><div class="setting-content"><div class="density" id="densityChoices" role="group" aria-label="叠影数量"><button data-density="6" aria-pressed="false">少</button><button data-density="12" aria-pressed="true" class="active">中</button><button data-density="20" aria-pressed="false">多</button></div><div class="field-row"><div class="field"><label for="rangeStart">开始 / 秒</label><input id="rangeStart" class="number" type="number" min="0" step=".05" value="0"></div><div class="field"><label for="rangeEnd">结束 / 秒</label><input id="rangeEnd" class="number" type="number" min="0" step=".05" value="5"></div></div><div class="field-row"><div class="field"><label for="sampleInterval">间隔 / 秒</label><input id="sampleInterval" class="number" type="number" min=".05" max="3600" step=".05" value=".2"></div><div class="field"><label for="overlayMode">叠影方式</label><select id="overlayMode" class="select"><option value="foreground">突出物体</option><option value="full">整帧叠加</option></select></div></div><div class="field"><div class="range-head"><label for="opacity">物体浓淡</label><output id="opacityValue">95%</output></div><input id="opacity" type="range" min=".15" max="1" step=".05" value=".95"></div><div class="field"><div class="range-head"><label for="threshold">去背景程度</label><output id="thresholdValue">24</output></div><input id="threshold" type="range" min="8" max="100" step="1" value="24"></div><label class="check"><input id="stabilizeVideo" type="checkbox" checked>对齐固定背景（防抖）</label><button id="clearSubjectBtn" class="button small wide" disabled>清除主体框</button><label class="check"><input id="sampleLabels" type="checkbox">显示取样时间</label><p id="sampleCount" class="small-note">最多 60 帧。</p><div class="row"><button id="originalViewBtn" class="button small view-tab active" aria-pressed="true">看视频</button><button id="overlayViewBtn" class="button small view-tab" disabled aria-pressed="false">看叠影</button></div></div></details>
- <details class="setting-section"><summary>轨迹</summary><div class="setting-content"><div class="row"><label class="sr-only" for="trackSelect">观察点</label><select id="trackSelect" class="select"><option value="A">A · 红色</option></select><button id="addTrackBtn" class="button small" disabled>添加 B 点</button></div><div class="field-row"><div class="field"><label for="trackMode">追踪特征</label><select id="trackMode" class="select"><option value="auto">自动选择</option><option value="color">彩色贴点</option><option value="template">纹理特征</option></select></div><div class="field"><label for="trackStep">分析步长</label><select id="trackStep" class="select"><option value=".0333333333" selected>约 30 帧 / 秒</option><option value=".05">约 20 帧 / 秒</option><option value=".1">约 10 帧 / 秒</option><option value=".2">约 5 帧 / 秒</option></select></div></div><label class="check"><input id="smoothPath" type="checkbox" checked>平滑路径</label><label class="check"><input id="showArrows" type="checkbox" checked>方向箭头</label><label class="check"><input id="fullPath" type="checkbox" checked>完整路径</label><label class="check"><input id="showPaths" type="checkbox" checked>显示红点与路径</label><label class="check"><input id="pointTimes" type="checkbox">显示标点时间</label><div id="trackCount" class="track-count"></div><div class="row"><button id="clearTrackBtn" class="button small" disabled>清空当前点</button><button id="exportDataBtn" class="button small" disabled>导出数据</button></div><p class="small-note">实心点是手动标记，空心点是自动追踪。连线是拟合，不是新证据。</p></div></details>
- <button id="helpBtn" class="button small wide" style="margin-top:18px">使用帮助</button><div id="status" class="status" aria-live="off">准备好后拍摄或导入视频。</div><p class="discreet">本机处理 · 关闭前请保存 · mutiw · v3</p>
+ <details class="setting-section"><summary>叠影</summary><div class="setting-content"><div class="density" id="densityChoices" role="group" aria-label="叠影数量"><button data-density="6" aria-pressed="false">少</button><button data-density="12" aria-pressed="true" class="active">中</button><button data-density="20" aria-pressed="false">多</button></div><div class="field-row"><div class="field"><label for="rangeStart">开始 / 秒</label><input id="rangeStart" class="number" type="number" min="0" step=".05" value="0"></div><div class="field"><label for="rangeEnd">结束 / 秒</label><input id="rangeEnd" class="number" type="number" min="0" step=".05" value="5"></div></div><div class="field-row"><div class="field"><label for="sampleInterval">间隔 / 秒</label><input id="sampleInterval" class="number" type="number" min=".05" max="3600" step=".05" value=".2"></div><div class="field"><label for="overlayMode">叠影方式</label><select id="overlayMode" class="select"><option value="auto" selected>自动（红点优先）</option><option value="red">红色标记</option><option value="foreground">完整运动物体</option><option value="full">整帧叠加</option></select></div></div><div class="field"><div class="range-head"><label for="opacity">物体浓淡</label><output id="opacityValue">95%</output></div><input id="opacity" type="range" min=".15" max="1" step=".05" value=".95"></div><div class="field"><div class="range-head"><label for="threshold">去背景程度</label><output id="thresholdValue">24</output></div><input id="threshold" type="range" min="8" max="100" step="1" value="24"></div><label class="check"><input id="stabilizeVideo" type="checkbox" checked>对齐固定背景（防抖）</label><button id="clearSubjectBtn" class="button small wide" disabled>清除主体框</button><label class="check"><input id="sampleLabels" type="checkbox">显示取样时间</label><p id="sampleCount" class="small-note">最多 60 帧。</p><div class="row"><button id="originalViewBtn" class="button small view-tab active" aria-pressed="true">看视频</button><button id="overlayViewBtn" class="button small view-tab" disabled aria-pressed="false">看叠影</button></div></div></details>
+ <details class="setting-section"><summary>轨迹</summary><div class="setting-content"><div class="row"><label class="sr-only" for="trackSelect">观察点</label><select id="trackSelect" class="select"><option value="A">A · 红色</option></select><button id="addTrackBtn" class="button small" disabled>添加 B 点</button></div><div class="field-row"><div class="field"><label for="trackMode">追踪特征</label><select id="trackMode" class="select"><option value="auto">红点优先</option><option value="red">只追红点</option><option value="color">彩色贴点</option><option value="template">纹理特征</option></select></div><div class="field"><label for="trackStep">分析步长</label><select id="trackStep" class="select"><option value=".0333333333" selected>约 30 帧 / 秒</option><option value=".05">约 20 帧 / 秒</option><option value=".1">约 10 帧 / 秒</option><option value=".2">约 5 帧 / 秒</option></select></div></div><label class="check"><input id="smoothPath" type="checkbox" checked>平滑路径</label><label class="check"><input id="showArrows" type="checkbox" checked>方向箭头</label><label class="check"><input id="fullPath" type="checkbox" checked>完整路径</label><label class="check"><input id="showPaths" type="checkbox" checked>显示红点与路径</label><label class="check"><input id="pointTimes" type="checkbox">显示标点时间</label><div id="trackCount" class="track-count"></div><div class="row"><button id="clearTrackBtn" class="button small" disabled>清空当前点</button><button id="exportDataBtn" class="button small" disabled>导出数据</button></div><p class="small-note">实心点是手动选定，空心点是自动检测或追踪。红点模式观察贴纸中心；连线不是新的证据。</p></div></details>
+ <button id="helpBtn" class="button small wide" style="margin-top:18px">使用帮助</button><div id="status" class="status" aria-live="off">准备好后拍摄或导入视频。</div><p class="discreet">本机处理 · 关闭前请保存 · mutiw · v3.1</p>
 </div></dialog>
-<dialog id="helpDialog" class="sheet" aria-labelledby="helpTitle"><header class="sheet-head"><h2 id="helpTitle">使用帮助</h2><button id="closeHelpBtn" class="icon-button" aria-label="关闭帮助"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></header><div class="help-copy"><h3>拍摄</h3><p>先选普通、慢动作或延时，再点圆形按钮打开相机、开始录制。慢动作生成 2 倍时长的视频；延时录完后生成约 8 倍速的视频。处理中保持页面前台；变速成片与拍摄原片都能保存。高帧率取决于设备，放慢不会凭空增加细节。</p><h3>叠影</h3><p>点“生成叠影”，先对齐固定背景，再把运动主体按时间先后堆叠。复杂场景可点“选主体”，拖出一个框圈住物体。尽量固定手机，背景要有纹理；大幅晃动、强透视变化、透明物体和手部连接仍可能出错。无法确认的取样会跳过，未保留的时刻不会补造。</p><h3>轨迹</h3><p>点“标点”，再点物体上清楚的色块或边角，随后点“追踪”。程序核对颜色、纹理和前后帧，尽量保持最初点击的位置；遮挡或相似目标造成歧义时停止，在断点处补点再追踪。设置中可添加 B 点。轨迹在原视频坐标中，不代表已去除相机运动的物理位移。</p><h3>保存</h3><p>右上角下载图标保存当前画面；视频和观测数据在设置里保存。取样间隔与轨迹时间按当前成片计，慢动作或延时的成片时间不同于真实拍摄时间。本页变速时，设置与导出数据会给出对应原拍摄时间。刷新或关闭后，未保存内容会丢失。</p><p>视频只在本机处理。自动追踪用颜色和纹理，遮挡或运动过快时可能失效；请用原视频核对。网页路径是观察辅助，不是精密测量。相机打不开时请用 Safari、Chrome、Edge 直接打开在线链接。</p></div></dialog>
+<dialog id="helpDialog" class="sheet" aria-labelledby="helpTitle"><header class="sheet-head"><h2 id="helpTitle">使用帮助</h2><button id="closeHelpBtn" class="icon-button" aria-label="关闭帮助"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></header><div class="help-copy"><h3>拍摄</h3><p>先选普通、慢动作或延时，再点圆形按钮打开相机、开始录制。慢动作生成 2 倍时长的视频；延时录完后生成约 8 倍速的视频。处理中保持页面前台；变速成片与拍摄原片都能保存。高帧率取决于设备，放慢不会凭空增加细节。</p><h3>叠影</h3><p>点“生成叠影”会优先查找红色标记，把真实红点按时间堆叠到一张原图。红点模式不依赖桌面纹理，也不消除相机移动，所以请固定手机。多个红点时先圈住目标；想看整个物体，在设置中选“完整运动物体”，使用背景对齐后再叠影。尽量固定手机，背景要有纹理；大幅晃动、强透视变化、透明物体和手部连接仍可能出错。无法确认的取样会跳过，未保留的时刻不会补造。</p><h3>轨迹</h3><p>有红色标记时可直接点“找红点”，自动识别贴纸中心并追踪。多个红点时点“标点”指定一个；点击贴纸附近会吸附到红色中心。没有红点可手动标记其他清楚位置。快速旋转会扩大寻找范围，但只保留实际检测到的位置；红点消失或多个候选无法区分时停止，不补画假圆。设置中可添加 B 点。轨迹在原视频坐标中，不代表已去除相机运动的物理位移。</p><h3>保存</h3><p>右上角下载图标保存当前画面；视频和观测数据在设置里保存。取样间隔与轨迹时间按当前成片计，慢动作或延时的成片时间不同于真实拍摄时间。本页变速时，设置与导出数据会给出对应原拍摄时间。刷新或关闭后，未保存内容会丢失。</p><p>视频只在本机处理。自动追踪用颜色和纹理，遮挡或运动过快时可能失效；请用原视频核对。网页路径是观察辅助，不是精密测量。相机打不开时请用 Safari、Chrome、Edge 直接打开在线链接。</p></div></dialog>
 <input id="fileInput" type="file" accept="video/*" hidden><input id="captureInput" type="file" accept="video/*" capture="environment" hidden><video id="analysisVideo" class="analysis-video" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
 <script>
 /* MotionCore: local, dependency-free image analysis. Coordinates are normalized.
@@ -1310,6 +1311,474 @@
 
 </script>
 <script>
+/* MotionRedMarker: local red-sticker detection, independent of background texture.
+ * Frames must contain ORIGINAL pixels, never the app's rendered red overlays.
+ * ROI is {x,y,w,h} in pixels and only selects the initial marker. Seeds and
+ * returned x/y are normalized by (width-1)/(height-1). This mode deliberately
+ * measures the red support's weighted CENTER, including at initialization.
+ * It does not preserve an arbitrary material point or infer missing circles.
+ */
+(function (root, factory) {
+  'use strict';
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.MotionRedMarker = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const finite = Number.isFinite;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const hypot = Math.hypot;
+  const pi = Math.PI;
+  function checkedFrame(f) {
+    if (!f || !Number.isInteger(f.width) || !Number.isInteger(f.height) || f.width < 2 || f.height < 2 || !f.data || f.data.length < f.width * f.height * 4) throw new TypeError('A valid original RGBA frame is required.');
+    return f;
+  }
+  function checkedROI(roi, w, h) {
+    if (!roi) return null;
+    if (![roi.x, roi.y, roi.w, roi.h].every(finite) || roi.w <= 0 || roi.h <= 0) throw new RangeError('ROI must use pixel coordinates {x,y,w,h}.');
+    const x = clamp(roi.x, 0, w), y = clamp(roi.y, 0, h), right = clamp(roi.x + roi.w, 0, w), bottom = clamp(roi.y + roi.h, 0, h);
+    if (right <= x || bottom <= y) throw new RangeError('ROI is outside the frame.');
+    return { x, y, w: right - x, h: bottom - y };
+  }
+  function hueDistance(a, b) { const d = Math.abs(a - b) % 360; return Math.min(d, 360 - d); }
+  function wrap(a) { let v = a % (2 * pi); if (v > pi) v -= 2 * pi; if (v < -pi) v += 2 * pi; return v; }
+  function similarityRatio(a, b, sensitivity = 1) { return Math.exp(-Math.abs(Math.log(Math.max(1e-6, a) / Math.max(1e-6, b))) * sensitivity); }
+  function median(a) { const b = a.slice().sort((x, y) => x - y); return b.length & 1 ? b[b.length >> 1] : (b[b.length / 2 - 1] + b[b.length / 2]) / 2; }
+
+  function scan(frame) {
+    const f = checkedFrame(frame), w = f.width, h = f.height, n = w * h, d = f.data;
+    const red = new Uint8Array(n), hue = new Float32Array(n), saturation = new Float32Array(n), labels = new Int32Array(n);
+    for (let p = 0, q = 0; p < n; p++, q += 4) {
+      const r = d[q], g = d[q + 1], b = d[q + 2], other = Math.max(g, b), low = Math.min(g, b), delta = r - low;
+      if (r < 30 || r <= other || delta <= 0 || d[q + 3] === 0) continue;
+      const sat = delta / r, contrast = (r - other) / r;
+      // With R the maximum, signed HSV hue lies in [-60,60]. Keeping both
+      // signs is exactly the red wrap across 0/360, not just an RGB shortcut.
+      const signedHue = 60 * (g - b) / delta, hd = Math.abs(signedHue);
+      if (hd > 30 || sat < 0.25 || contrast < 0.16 || r - other < 10) continue;
+      const strength = Math.pow(Math.max(0, 1 - hd / 43), 0.75) * Math.sqrt(contrast) * Math.pow(sat, 0.25);
+      if (strength < 0.15) continue;
+      red[p] = Math.round(clamp(strength, 0, 1) * 255); hue[p] = signedHue; saturation[p] = sat; labels[p] = -1;
+    }
+    const queue = new Int32Array(n), components = [];
+    const minArea = Math.max(6, Math.round(n * 0.000015)), maxArea = Math.max(80, Math.round(n * 0.015));
+    let id = 0;
+    for (let p = 0; p < n; p++) {
+      if (labels[p] !== -1) continue;
+      const componentId = ++id;
+      let head = 0, tail = 1, mass = 0, sx = 0, sy = 0, sxx = 0, syy = 0, sxy = 0;
+      let redSum = 0, hueSum = 0, satSum = 0, contrastSum = 0, valueSum = 0, minX = w, maxX = -1, minY = h, maxY = -1;
+      queue[0] = p; labels[p] = componentId;
+      while (head < tail) {
+        const v = queue[head++], x = v % w, y = (v / w) | 0, r = red[v] / 255, weight = Math.pow(r, 1.5);
+        mass += weight; sx += weight * x; sy += weight * y; sxx += weight * x * x; syy += weight * y * y; sxy += weight * x * y;
+        redSum += r; hueSum += weight * hue[v]; satSum += weight * saturation[v]; valueSum += weight * d[v * 4];
+        contrastSum += weight * (d[v * 4] - Math.max(d[v * 4 + 1], d[v * 4 + 2])) / Math.max(1, d[v * 4]);
+        minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y);
+        // Eight-connectivity keeps rotated, small elliptical marks connected.
+        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+          if ((!dx && !dy) || x + dx < 0 || x + dx >= w || y + dy < 0 || y + dy >= h) continue;
+          const a = (y + dy) * w + x + dx;
+          if (labels[a] === -1) { labels[a] = componentId; queue[tail++] = a; }
+        }
+      }
+      if (tail < minArea || tail > maxArea || mass < 1.25) continue;
+      const x = sx / mass, y = sy / mass, xx = Math.max(0, sxx / mass - x * x), yy = Math.max(0, syy / mass - y * y), xy = sxy / mass - x * y;
+      const trace = xx + yy, disc = Math.sqrt((xx - yy) ** 2 + 4 * xy * xy);
+      const major = Math.sqrt(Math.max(0.01, (trace + disc) / 2)), minor = Math.sqrt(Math.max(0.01, (trace - disc) / 2)), aspect = major / minor;
+      const bounds = { x: minX, y: minY, w: maxX - minX + 1, h: maxY - minY + 1 }, fill = tail / (bounds.w * bounds.h);
+      const redness = redSum / tail, meanSat = satSum / mass;
+      if (minor < 0.52 || aspect > 9 || fill < 0.17 || redness < 0.18 || meanSat < 0.30) continue;
+      // A small red sticker blurred over a blue leaf shifts toward magenta.
+      // Score its remaining HSV/contrast evidence continuously; a hard count of
+      // "strong red" pixels would punish the same blur twice and flicker on H264.
+      const meanSignedHue = hueSum / mass;
+      const colorQuality = 0.45 * meanSat + 0.30 * contrastSum / mass + 0.25 * Math.exp(-0.5 * (meanSignedHue / 32) ** 2);
+      const sizeQuality = Math.min(1, Math.sqrt(tail / 22));
+      const shapeQuality = clamp(1 - Math.max(0, aspect - 5.5) * 0.08, 0.45, 1);
+      const confidence = clamp(0.73 * colorQuality + 0.15 * sizeQuality + 0.12 * shapeQuality, 0, 1);
+      const meanHue = (hueSum / mass + 360) % 360;
+      if (confidence < 0.47) continue;
+      components.push({ id: componentId, x, y, area: tail, mass, redness, saturation: meanSat, value: valueSum / mass, hue: meanHue,
+        major, minor, aspect, angle: 0.5 * Math.atan2(2 * xy, xx - yy), bounds, fill, confidence, pixels: queue.slice(0, tail),
+        border: minX === 0 || minY === 0 || maxX === w - 1 || maxY === h - 1 });
+    }
+    components.sort((a, b) => b.confidence - a.confidence || b.mass - a.mass);
+    return { width: w, height: h, red, labels, components };
+  }
+  function summary(c, w, h) {
+    return { id: c.id, center: { x: c.x, y: c.y }, point: { x: c.x / (w - 1), y: c.y / (h - 1) }, bounds: { ...c.bounds },
+      area: c.area, effectiveArea: c.mass, confidence: c.confidence, redness: c.redness, hue: c.hue, saturation: c.saturation,
+      value: c.value, major: c.major, minor: c.minor, aspect: c.aspect, angle: c.angle };
+  }
+  function maskFor(scanResult, c) {
+    const mask = new Uint8ClampedArray(scanResult.width * scanResult.height);
+    for (const p of c.pixels) mask[p] = Math.round(Math.min(1, scanResult.red[p] / (255 * 0.66)) * 255);
+    return mask;
+  }
+  function inside(c, roi) { return !roi || c.x >= roi.x && c.y >= roi.y && c.x <= roi.x + roi.w && c.y <= roi.y + roi.h; }
+  function seedPixel(seed, w, h) {
+    if (!seed) return null;
+    if (![seed.x, seed.y].every(finite) || seed.x < 0 || seed.x > 1 || seed.y < 0 || seed.y > 1) throw new RangeError('Seed must use normalized coordinates {x,y}.');
+    return { x: seed.x * (w - 1), y: seed.y * (h - 1) };
+  }
+  function seedDistance(c, p, w) {
+    let nearest = Infinity;
+    // Distances are to observed red pixels, not only an enclosing rectangle.
+    for (const q of c.pixels) nearest = Math.min(nearest, hypot(q % w - p.x, ((q / w) | 0) - p.y));
+    return nearest;
+  }
+  function select(scanResult, options) {
+    const { width: w, height: h } = scanResult, roi = checkedROI(options.roi, w, h), seed = seedPixel(options.seed, w, h);
+    const eligible = scanResult.components.filter(c => inside(c, roi));
+    if (!eligible.length) return { ok: false, ambiguous: false, reason: roi ? '框内没有清晰的小红色标记，请调整框或光线。' : '未找到清晰的小红色标记，请靠近或减慢运动。' };
+    if (seed) {
+      const ranked = eligible.map(c => ({ c, distance: seedDistance(c, seed, w) })).filter(v => v.distance <= 3.5).sort((a, b) => a.distance - b.distance);
+      if (!ranked.length) return { ok: false, ambiguous: false, reason: '点击位置不在红色标记上，请点红贴纸或先框选它。' };
+      if (ranked[1] && ranked[1].distance - ranked[0].distance < 1.2) return { ok: false, ambiguous: true, reason: '点击处邻近多个红色区域，请缩小框后重选。' };
+      return { ok: true, ambiguous: false, chosen: ranked[0].c, reason: '' };
+    }
+    const best = eligible[0];
+    if (best.confidence < 0.53) return { ok: false, ambiguous: false, reason: '红色区域太弱或太小，暂不能可靠自动选择。' };
+    // Two comparably credible red marks are not resolved by simply taking the
+    // largest blob. A weak, tiny reflection may be ignored; a genuine rival may not.
+    const rivals = eligible.slice(1).filter(c => c.confidence >= Math.max(0.52, best.confidence - 0.18)
+      && c.mass >= best.mass * 0.13);
+    if (rivals.length) return { ok: false, ambiguous: true, reason: '画面里有多个相当的红点，请框选或点选要观察的一个。' };
+    return { ok: true, ambiguous: false, chosen: best, reason: '' };
+  }
+  function detect(frame, options = {}) {
+    const s = scan(frame), selection = select(s, options);
+    const result = { ok: selection.ok, ambiguous: selection.ambiguous, point: null, center: null, candidate: null,
+      candidates: s.components.slice(0, 64).map(c => summary(c, s.width, s.height)), reason: selection.reason };
+    if (selection.ok) {
+      result.candidate = summary(selection.chosen, s.width, s.height); result.point = result.candidate.point; result.center = result.candidate.center;
+      if (options.includeMask) result.mask = maskFor(s, selection.chosen);
+    }
+    return result;
+  }
+  function appearance(c, prior, initial) {
+    const hueScore = Math.exp(-hueDistance(c.hue, initial.hue) / 14);
+    const redScore = Math.exp(-Math.abs(c.redness - initial.redness) * 1.2 - Math.abs(c.saturation - initial.saturation) * 0.65);
+    const areaScore = 0.65 * similarityRatio(c.area, prior.area, 0.8) + 0.35 * similarityRatio(c.area, initial.area, 0.6);
+    const minorScore = 0.7 * similarityRatio(c.minor, prior.minor, 0.7) + 0.3 * similarityRatio(c.minor, initial.minor, 0.5);
+    // Covariance eigenvalues, unlike axis-aligned bounds, survive ellipse rotation.
+    const shapeScore = similarityRatio(c.aspect, initial.aspect, 0.35);
+    return 0.15 * hueScore + 0.17 * redScore + 0.29 * areaScore + 0.16 * minorScore + 0.09 * shapeScore + 0.14 * c.confidence;
+  }
+  function motion(c, history, dt, diagonal, markerSize) {
+    const last = history[history.length - 1], dx = c.x - last.x, dy = c.y - last.y, distance = hypot(dx, dy);
+    if (history.length < 2) return { affinity: Math.exp(-distance / Math.max(markerSize * 5, diagonal * 0.35)), established: false, stationary: false };
+    const a = history[history.length - 2], previousDT = Math.max(1e-4, last.t - a.t), px = (last.x - a.x) * dt / previousDT, py = (last.y - a.y) * dt / previousDT;
+    const previousDistance = hypot(px, py);
+    if (previousDistance < Math.max(2.5, markerSize * 0.12)) return { affinity: Math.exp(-distance / Math.max(5, markerSize * 0.6)), established: true, stationary: true };
+    const speedSimilarity = similarityRatio(Math.max(0.5, distance), previousDistance, 0.9);
+    const turn = wrap(Math.atan2(dy, dx) - Math.atan2(py, px));
+    let turnSimilarity = Math.exp(-Math.abs(turn) / 2.1), established = false;
+    if (history.length >= 3) {
+      const b = history[history.length - 3], oldAngle = Math.atan2(a.y - b.y, a.x - b.x), previousAngle = Math.atan2(last.y - a.y, last.x - a.x);
+      const oldTurn = wrap(previousAngle - oldAngle);
+      turnSimilarity = Math.exp(-Math.abs(wrap(turn - oldTurn)) / 0.85); established = true;
+    }
+    return { affinity: 0.48 * speedSimilarity + 0.52 * turnSimilarity, established, stationary: false };
+  }
+  function createTracker(initialFrame, xNorm, yNorm, options = {}) {
+    const first = checkedFrame(initialFrame), w = first.width, h = first.height, diagonal = hypot(w, h);
+    const requestedSeed = { x: xNorm, y: yNorm }; seedPixel(requestedSeed, w, h);
+    let previousScan = scan(first), selection = select(previousScan, { roi: options.roi, seed: requestedSeed });
+    let lost = !selection.ok, reason = selection.reason, t = finite(options.t) ? options.t : 0;
+    let previous = selection.chosen || null, initial = previous, confidence = previous ? previous.confidence : 0;
+    let x = previous ? previous.x : xNorm * (w - 1), y = previous ? previous.y : yNorm * (h - 1), latestMask = null;
+    let history = [{ x, y, t }], ambiguous = selection.ambiguous;
+    if (options.includeMask && previous) latestMask = maskFor(previousScan, previous);
+    const valid = !lost;
+    function state() {
+      const r = { x: x / (w - 1), y: y / (h - 1), t, confidence: lost ? 0 : clamp(confidence, 0, 1), lost, ambiguous, reason,
+        mode: 'red-marker', center: { x, y }, bounds: previous ? { ...previous.bounds } : null,
+        scale: previous ? Math.sqrt(previous.area / initial.area) : 1, angle: previous ? previous.angle - initial.angle : 0, centering: 'marker-center' };
+      if (options.includeMask && latestMask && !lost) r.mask = latestMask;
+      return r;
+    }
+    function fail(message, nextT, isAmbiguous = false) { lost = true; reason = message; confidence = 0; ambiguous = isAmbiguous; if (finite(nextT)) t = nextT; return state(); }
+    function step(frame, nextT) {
+      const f = checkedFrame(frame);
+      if (lost) return state();
+      if (f.width !== w || f.height !== h) return fail('视频尺寸改变，请重新选择红点。', nextT);
+      const nt = finite(nextT) ? nextT : t + 1 / 30, dt = nt - t;
+      if (dt <= 0 || dt > 1) return fail('相邻分析时间不合适，请缩短间隔后重新选择红点。', nt);
+      const current = scan(f), candidates = [], markerSize = Math.max(4, 2 * initial.major);
+      let mergeOrForeign = false;
+      for (const c of current.components) {
+        const areaRatio = c.area / previous.area, totalRatio = c.area / initial.area;
+        if (areaRatio < 0.28 || areaRatio > 3.1 || totalRatio < 0.22 || totalRatio > 4.5 || hueDistance(c.hue, initial.hue) > 22
+            || c.minor / initial.minor < 0.35 || c.minor / initial.minor > 3.0 || c.border && !previous.border) continue;
+        const app = appearance(c, previous, initial);
+        if (app < 0.65 || hypot(c.x - x, c.y - y) > diagonal * 0.85) continue;
+        // A previously separate red mark cannot replace a vanished target. This
+        // also rejects two supports that now merge; it is not a prediction.
+        const foreign = previousScan.components.some(o => o.id !== previous.id && o.area >= Math.max(8, previous.area * 0.12)
+          && o.minor >= 0.65 && (o.x < previous.bounds.x - 2 || o.x > previous.bounds.x + previous.bounds.w + 2 || o.y < previous.bounds.y - 2 || o.y > previous.bounds.y + previous.bounds.h + 2)
+          && (current.labels[clamp(Math.round(o.y), 0, h - 1) * w + clamp(Math.round(o.x), 0, w - 1)] === c.id
+            || hypot(c.x - o.x, c.y - o.y) < Math.max(4, o.minor * 1.3) && similarityRatio(c.area, o.area) > 0.65)
+          && hypot(c.x - x, c.y - y) > Math.max(5, previous.minor * 2));
+        if (foreign) { mergeOrForeign = true; continue; }
+        const geometry = motion(c, history, dt, diagonal, markerSize);
+        candidates.push({ c, appearance: app, geometry, score: 0.84 * app + 0.16 * geometry.affinity });
+      }
+      candidates.sort((a, b) => b.score - a.score);
+      if (!candidates.length) return fail(mergeOrForeign ? '红点与其他红色区域身份不清，请重新点选。' : '红色标记消失、被遮挡或变得太模糊，已停止追踪。', nt, mergeOrForeign);
+      let best = candidates[0];
+      if (candidates.length > 1) {
+        const second = candidates[1], appearanceGap = best.appearance - second.appearance;
+        const decisiveAppearance = appearanceGap >= 0.14 && best.appearance >= 0.83;
+        const decisiveMotion = best.geometry.established && best.geometry.affinity >= 0.82 && second.geometry.affinity <= 0.35
+          && best.score - second.score >= 0.12 && best.appearance >= second.appearance - 0.03;
+        if (!decisiveAppearance && !decisiveMotion) return fail('多个红点的颜色和运动都相近，已停止，请手动确认。', nt, true);
+      }
+      // Unique, well-matching image evidence can move a long way around a circle.
+      // Geometry ranks competing observations; it never creates coordinates.
+      if (best.appearance < 0.70 || best.c.confidence < 0.48) return fail('红点外观变化过大，无法可靠确认同一个标记。', nt);
+      previous = best.c; previousScan = current; x = previous.x; y = previous.y; t = nt;
+      confidence = clamp(0.82 * best.appearance + 0.18 * previous.confidence, 0, 1); ambiguous = false;
+      history.push({ x, y, t }); if (history.length > 5) history.shift();
+      if (options.includeMask) latestMask = maskFor(current, previous);
+      return state();
+    }
+    return { valid, mode: 'red-marker', reason, step, getState: state, centering: 'marker-center' };
+  }
+  return Object.freeze({ detect, createTracker, version: '1.0.0' });
+});
+
+</script>
+<script>
+/* MotionMarkerOverlay: actual red-marker exposures on one original video frame.
+ * It does NOT align the camera, reconstruct the background, or cut out a whole
+ * object. Matching intermediates never become output exposure timestamps. */
+(function (root) {
+  'use strict';
+  const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+  const yieldFrame = () => new Promise(resolve => setTimeout(resolve, 0));
+  const CAMERA_WARNING = '红点位置使用原视频坐标，未做背景防抖；移动手机也会改变位置，请固定手机观察。';
+  function fail(code, message, stats) {
+    const error = new Error(message); error.name = 'MotionMarkerOverlayError'; error.code = code;
+    if (stats) error.stats = stats;
+    return error;
+  }
+  function checkAbort(signal) {
+    if (signal && signal.aborted) { const error = new Error('已取消红点叠影'); error.name = 'AbortError'; throw error; }
+  }
+  function moduleFor(options) {
+    if (options.dependencies && options.dependencies.redMarker) return options.dependencies.redMarker;
+    if (root.MotionRedMarker) return root.MotionRedMarker;
+    if (typeof require === 'function') {
+      try { return require('./motion-red-marker.js'); } catch (error) { if (error.code !== 'MODULE_NOT_FOUND') throw error; }
+    }
+    return null;
+  }
+  function checkFrame(frame, size) {
+    if (!frame || frame.width !== size.w || frame.height !== size.h || !frame.data || frame.data.length !== size.w * size.h * 4) {
+      throw fail('INVALID_FRAME', '视频画面尺寸不一致，请重新导入。');
+    }
+    return frame;
+  }
+  function ownFrame(frame) { return { width: frame.width, height: frame.height, data: new Uint8ClampedArray(frame.data) }; }
+  function checkedRect(rect, size) {
+    if (!rect || ![rect.x, rect.y, rect.w, rect.h].every(Number.isFinite) || rect.w <= 0 || rect.h <= 0) {
+      throw fail('INVALID_SUBJECT', '请重新圈选红色标记。');
+    }
+    const x = Math.max(0, rect.x), y = Math.max(0, rect.y);
+    const right = Math.min(size.w, rect.x + rect.w), bottom = Math.min(size.h, rect.y + rect.h);
+    if (right - x < 2 || bottom - y < 2) throw fail('INVALID_SUBJECT', '红点选框太小或不在画面内。');
+    return { x, y, w: right - x, h: bottom - y };
+  }
+  function validate(options) {
+    const { times, size } = options;
+    if (!size || !Number.isInteger(size.w) || !Number.isInteger(size.h) || size.w < 8 || size.h < 8 || size.w * size.h > 1920 * 1080) {
+      throw fail('INVALID_SIZE', '分析画面尺寸不正确，建议长边不超过 640 像素。');
+    }
+    if (!Array.isArray(times) || times.length < 2 || times.length > 60 || times.some(t => !Number.isFinite(t) || t < 0)) {
+      throw fail('INVALID_TIMES', '请选择 2–60 个等间隔时刻。');
+    }
+    const interval = times[1] - times[0], tolerance = Math.max(1e-7, Math.abs(interval) * 1e-5);
+    if (interval <= 0 || times.some((t, i) => i && Math.abs(t - times[i - 1] - interval) > tolerance)) {
+      throw fail('UNEQUAL_INTERVALS', '红点叠影必须使用相等的时间间隔。');
+    }
+    if (typeof options.getFrame !== 'function') throw fail('MISSING_READER', '无法读取视频画面。');
+    if (options.subject) {
+      checkedRect(options.subject.rect, size);
+      if (!Number.isFinite(options.subject.time) || options.subject.time < 0) throw fail('INVALID_SUBJECT_TIME', '请重新圈选红色标记。');
+    }
+    if (options.opacity !== undefined && (!Number.isFinite(Number(options.opacity)) || Number(options.opacity) <= 0 || Number(options.opacity) > 1)) {
+      throw fail('INVALID_OPACITY', '红点浓淡应大于 0 且不超过 1。');
+    }
+    return interval;
+  }
+  function skip(stats, record, reason, failedTime) {
+    if (record.skipped) return;
+    record.skipped = true;
+    stats.skipped.push({ index: record.index, time: record.time, stage: 'red-marker', reason, failedTime });
+  }
+  // Preserve the actual colors and soft red-mask boundary. The crop's unused
+  // pixels are transparent; no background rectangle or invented circle is used.
+  function stamp(frame, measurement, time, index, stats) {
+    const mask = measurement && measurement.mask, w = frame.width, h = frame.height;
+    if (!mask || mask.length !== w * h) throw fail('INVALID_MARKER_MASK', '红点轮廓数据不完整，已停止生成。', stats);
+    let left = w, top = h, right = -1, bottom = -1, pixels = 0, mass = 0, sx = 0, sy = 0;
+    for (let p = 0; p < mask.length; p++) {
+      const alpha = Number(mask[p]) * frame.data[p * 4 + 3] / 255;
+      if (!Number.isFinite(alpha) || alpha < 0 || alpha > 255) throw fail('INVALID_MARKER_MASK', '红点轮廓数据不正确。', stats);
+      if (alpha <= 0) continue;
+      const x = p % w, y = Math.floor(p / w);
+      left = Math.min(left, x); right = Math.max(right, x); top = Math.min(top, y); bottom = Math.max(bottom, y);
+      pixels++; mass += alpha; sx += x * alpha; sy += y * alpha;
+    }
+    if (pixels < 2 || mass < 255) return null;
+    const width = right - left + 1, height = bottom - top + 1, byteLength = width * height * 4;
+    if (stats.retainedStampBytes + byteLength > 64 * 1024 * 1024) throw fail('MEMORY_BUDGET_EXCEEDED', '红点画面过大，请减少取样或降低分析尺寸。', stats);
+    const data = new Uint8ClampedArray(byteLength);
+    for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+      const p = y * w + x, q = p * 4, target = ((y - top) * width + x - left) * 4;
+      if (!mask[p] || !frame.data[q + 3]) continue;
+      data[target] = frame.data[q]; data[target + 1] = frame.data[q + 1]; data[target + 2] = frame.data[q + 2];
+      data[target + 3] = mask[p] * frame.data[q + 3] / 255;
+    }
+    const center = measurement.center;
+    const centroid = center && Number.isFinite(center.x + center.y) ? { x: center.x, y: center.y } : { x: sx / mass, y: sy / mass };
+    stats.retainedStampBytes += byteLength;
+    return { data, x: left, y: top, width, height, observation: { index, time, centroid,
+      bounds: { x: left, y: top, w: width, h: height }, count: pixels,
+      confidence: Number.isFinite(measurement.confidence) ? measurement.confidence : null,
+      source: 'red-marker', actualPixels: true } };
+  }
+  function composite(output, width, saved, opacity) {
+    for (let y = 0; y < saved.height; y++) for (let x = 0; x < saved.width; x++) {
+      const q = (y * saved.width + x) * 4, alpha = saved.data[q + 3] / 255 * opacity;
+      if (!alpha) continue;
+      const destination = ((saved.y + y) * width + saved.x + x) * 4;
+      const prior = output[destination + 3] / 255, final = alpha + prior * (1 - alpha);
+      for (let c = 0; c < 3; c++) output[destination + c] = (saved.data[q + c] * alpha + output[destination + c] * prior * (1 - alpha)) / final;
+      output[destination + 3] = final * 255;
+    }
+  }
+  function normalizedPoint(detection, size) {
+    const point = detection.point || detection.candidate && detection.candidate.point;
+    if (point && Number.isFinite(point.x + point.y) && point.x >= 0 && point.x <= 1 && point.y >= 0 && point.y <= 1) return point;
+    const center = detection.center || detection.candidate && detection.candidate.center;
+    if (center && Number.isFinite(center.x + center.y)) return { x: center.x / (size.w - 1), y: center.y / (size.h - 1) };
+    throw fail('INVALID_MARKER_POINT', '无法确定红色标记的位置。');
+  }
+  async function generate(options) {
+    options = options || {};
+    const interval = validate(options), { size, getFrame, signal, subject } = options, times = options.times.slice();
+    const RedMarker = moduleFor(options);
+    if (!RedMarker || typeof RedMarker.detect !== 'function' || typeof RedMarker.createTracker !== 'function') {
+      throw fail('MISSING_RED_MARKER', '红点识别模块尚未加载，请刷新页面。');
+    }
+    const stats = { requestedFrames: times.length, interval, alignedFrames: 0, stabilizationEnabled: false,
+      coordinateSpace: 'video', markerOnly: true, subjectSelected: !!subject, trackedFrames: 0, compositedFrames: 0,
+      auxiliaryFrames: 0, retainedStampBytes: 0, foregroundPixels: 0, skipped: [],
+      warnings: ['camera-motion-uncompensated', 'marker-only'], backgroundEstimated: false,
+      semanticSegmentation: false, referenceContainsMarker: false };
+    const progress = (value, message) => { checkAbort(signal); if (typeof options.onProgress === 'function') options.onProgress(clamp(value, 0, 1), message); };
+    const records = times.map((time, index) => ({ time, index, stamp: null }));
+    const referenceTime = times[0], seedTime = subject ? subject.time : referenceTime;
+    let reference = null, seedFrame = null;
+    try {
+      progress(0, '读取参考原图');
+      reference = ownFrame(checkFrame(await getFrame(referenceTime), size)); checkAbort(signal);
+      seedFrame = Math.abs(seedTime - referenceTime) < 1e-7 ? reference : ownFrame(checkFrame(await getFrame(seedTime), size)); checkAbort(signal);
+      const roi = subject ? checkedRect(subject.rect, size) : undefined;
+      const detection = RedMarker.detect(seedFrame, { roi, includeMask: true });
+      if (detection && detection.ambiguous) throw fail('AMBIGUOUS_RED_MARKERS', '画面中有多个可能的红点，请圈选要观察的那一个。', stats);
+      if (!detection || !detection.ok) throw fail('NO_RED_MARKER', detection && detection.reason || '未找到清楚的红色标记，请圈选红点或靠近拍摄。', stats);
+      const referenceDetection = seedFrame === reference ? detection : RedMarker.detect(reference, { includeMask: false });
+      stats.referenceContainsMarker = !!(referenceDetection && (referenceDetection.ok || referenceDetection.candidates && referenceDetection.candidates.length));
+      const point = normalizedPoint(detection, size);
+      stats.seedTime = seedTime; stats.referenceTime = referenceTime;
+      stats.seed = { x: point.x * (size.w - 1), y: point.y * (size.h - 1) };
+      let completed = 0;
+      for (const record of records) if (Math.abs(record.time - seedTime) < 1e-7) {
+        record.stamp = stamp(seedFrame, { ...detection, confidence: detection.candidate && detection.candidate.confidence }, record.time, record.index, stats);
+        if (record.stamp) stats.trackedFrames++;
+        else skip(stats, record, '参考时刻的红点轮廓太小，未加入叠影。', seedTime);
+        completed++;
+      }
+      progress(.06, '识别红色标记'); await yieldFrame();
+      const branches = [records.filter(record => record.time > seedTime + 1e-7), records.filter(record => record.time < seedTime - 1e-7).reverse()];
+      for (const branch of branches) {
+        if (!branch.length) continue;
+        const tracker = RedMarker.createTracker(seedFrame, point.x, point.y, { t: 0, roi, includeMask: true });
+        if (!tracker || tracker.valid === false || typeof tracker.step !== 'function') throw fail('MARKER_NOT_TRACKABLE', tracker && tracker.reason || '无法初始化这个红点，请重新圈选。', stats);
+        let previousTime = seedTime, stopped = false, lossReason = '', failedTime = null;
+        for (const record of branch) {
+          checkAbort(signal);
+          if (stopped) skip(stats, record, lossReason, failedTime);
+          else {
+            const steps = Math.max(1, Math.ceil(Math.abs(record.time - previousTime) * 20));
+            let measurement = null, frame = null;
+            for (let j = 1; j <= steps; j++) {
+              checkAbort(signal);
+              const sampleTime = previousTime + (record.time - previousTime) * j / steps;
+              if (j < steps && stats.auxiliaryFrames >= 1200) throw fail('TRACKING_BUDGET_EXCEEDED', '片段过长，请截取较短的红点运动片段。', stats);
+              frame = Math.abs(sampleTime - referenceTime) < 1e-7 ? reference : checkFrame(await getFrame(sampleTime), size);
+              checkAbort(signal); if (j < steps) stats.auxiliaryFrames++;
+              measurement = tracker.step(frame, Math.abs(sampleTime - seedTime));
+              if (!measurement || measurement.lost || measurement.ambiguous) {
+                stopped = true; failedTime = sampleTime;
+                lossReason = measurement && measurement.reason || '红点不可见或身份不清，已停止这一方向的跟随。'; break;
+              }
+              progress(.06 + .8 * (completed + j / steps) / records.length, '跟随真实红点');
+              await yieldFrame();
+            }
+            previousTime = record.time;
+            if (stopped) skip(stats, record, lossReason, failedTime);
+            else {
+              record.stamp = stamp(frame, measurement, record.time, record.index, stats);
+              if (record.stamp) stats.trackedFrames++;
+              else { stopped = true; failedTime = record.time; lossReason = '红点轮廓太小或不可见，已停止这一方向的跟随。'; skip(stats, record, lossReason, failedTime); }
+            }
+            frame = null;
+          }
+          completed++; progress(.06 + .8 * completed / records.length, '跟随真实红点'); await yieldFrame();
+        }
+      }
+      if (stats.trackedFrames < 2) throw fail('NOT_ENOUGH_RED_MARKERS', '没有足够清楚的红点画面，请缩短片段或重新圈选。', stats);
+      const output = new Uint8ClampedArray(reference.data), observations = [], opacity = options.opacity === undefined ? 1 : Number(options.opacity);
+      for (const record of records) {
+        checkAbort(signal);
+        if (record.stamp) {
+          composite(output, size.w, record.stamp, opacity);
+          observations.push(record.stamp.observation); stats.foregroundPixels += record.stamp.observation.count;
+          stats.compositedFrames++; record.stamp = null;
+        }
+        progress(.86 + .13 * (record.index + 1) / records.length, '叠放红点原始像素'); await yieldFrame();
+      }
+      stats.skipped.sort((a, b) => a.index - b.index);
+      stats.referenceAccepted = observations.some(observation => Math.abs(observation.time - referenceTime) < 1e-7);
+      stats.retainedFraction = observations.length / records.length;
+      if (stats.skipped.length) stats.warnings.push('missing-samples');
+      if (!stats.referenceAccepted) stats.warnings.push('reference-not-accepted');
+      const messages = [];
+      if (stats.skipped.length) messages.push(`已跳过 ${stats.skipped.length} 个时刻，保留的红点并非完整连续等间隔序列。`);
+      if (!stats.referenceAccepted) messages.push('底图保留原片首帧；该帧未确认为目标红点的有效取样。');
+      messages.push(CAMERA_WARNING);
+      progress(1, '红点叠影完成');
+      return { image: { width: size.w, height: size.h, data: output }, times,
+        acceptedTimes: observations.map(observation => observation.time), observations,
+        referenceTime, seedTime, stats, reliable: stats.skipped.length === 0,
+        reliabilityScope: 'marker-correspondence', reason: messages.join(''),
+        coordinateSpace: 'video', markerOnly: true, referenceContainsMarker: stats.referenceContainsMarker };
+    } finally {
+      records.forEach(record => { record.stamp = null; }); reference = null; seedFrame = null;
+    }
+  }
+  const api = { generate };
+  root.MotionMarkerOverlay = api;
+  if (typeof module === 'object' && module.exports) module.exports = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+</script>
+<script>
 /* MotionOverlay v3. Equal-time subject exposures on one registered background.
  * Pure RGBA processing: no camera, DOM, network, canvas, or semantic model.
  * All public coordinates are pixels; only the tracker adapter uses [0, 1]. */
@@ -2204,6 +2673,7 @@
   const $ = id => document.getElementById(id);
   const Core = window.MotionCore;
   const Tracker = window.MotionTrackerV3, Overlay = window.MotionOverlay, Media = window.MotionMedia;
+  const Red = window.MotionRedMarker, MarkerOverlay = window.MotionMarkerOverlay;
   const video = $('video'), live = $('liveVideo'), analysis = $('analysisVideo');
   const annotation = $('annotationCanvas'), stage = $('stage');
   const ctx = annotation.getContext('2d');
@@ -2216,10 +2686,12 @@
     undo: [], recordStarted: 0, recordTimer: null, displayTime: 0, loop: 0,
     density: 12, toastTimer: null, captureMode: 'normal', recordingMode: 'normal', actualFps: null,
     sourceBlob: null, sourceName: '', timeScale: 1, conversion: '',
-    selectingSubject: false, subject: null, subjectDraft: null, overlayStats: null
+    selectingSubject: false, subject: null, subjectDraft: null, overlayStats: null, overlayMarkerOnly: false
   };
   function newTrack(id, color) { return { id, color, points: [], seedTime: null }; }
   function currentTrack() { return S.tracks.find(t => t.id === S.selected); }
+  function isAnchor(point) { return point.source === 'manual' || point.source === 'detected'; }
+  function preferRed() { return ['auto', 'red'].includes($('trackMode').value); }
   function fmt(t, decimals = 2) {
     if (!Number.isFinite(t) || t < 0) t = 0;
     const m = Math.floor(t / 60);
@@ -2304,7 +2776,8 @@
     $('overlayViewBtn').classList.toggle('active', name === 'overlay');
     $('originalViewBtn').setAttribute('aria-pressed', String(name === 'original'));
     $('overlayViewBtn').setAttribute('aria-pressed', String(name === 'overlay'));
-    $('modeLabel').textContent = S.live ? '相机预览' : name === 'overlay' ? '等间隔叠影 · ' + S.overlayTimes.length + ' 帧' : '原视频';
+    $('modeLabel').textContent = S.overlayMarkerOnly ? '红点位置 · 原画面坐标' : '物体叠影';
+    $('modeLabel').hidden = !(name === 'overlay' && S.overlayMarkerOnly);
     draw();
   }
   function showTip(text) {
@@ -2338,13 +2811,15 @@
       const selected = button.dataset.captureMode === S.captureMode;
       button.classList.toggle('active', selected); button.setAttribute('aria-pressed', String(selected)); button.disabled = blocked;
     });
-    $('selectSubjectBtn').textContent = S.selectingSubject ? '取消' : S.subject ? '重选主体' : '选主体';
+    $('selectSubjectBtn').textContent = S.selectingSubject ? '取消' : S.subject ? '重选目标' : '选目标';
     $('selectSubjectBtn').classList.toggle('is-active', S.selectingSubject || !!S.subject);
     $('selectSubjectBtn').setAttribute('aria-pressed', String(S.selectingSubject));
     $('overlayViewBtn').disabled = !S.overlay || blocked || S.live;
     $('originalViewBtn').disabled = blocked || S.live;
     $('addTrackBtn').disabled = !usable || S.tracks.length >= 2;
-    $('autoTrackBtn').disabled = !usable || !currentTrack().points.some(p => p.source === 'manual');
+    const hasAnchor = currentTrack().points.some(isAnchor);
+    $('autoTrackBtn').disabled = !usable || (!hasAnchor && !preferRed());
+    $('autoTrackBtn').textContent = !hasAnchor && preferRed() ? '找红点' : '追踪';
     $('undoBtn').disabled = !usable || !S.undo.length;
     $('clearTrackBtn').disabled = !usable || !currentTrack().points.length;
     $('exportDataBtn').disabled = !usable || !S.tracks.some(t => t.points.some(p => !p.lost));
@@ -2372,7 +2847,7 @@
     document.body.classList.toggle('busy', !!S.busy);
     const track = currentTrack();
     $('trackCount').textContent = track.id + '：' + track.points.filter(p => p.source === 'manual').length +
-      ' 个手动点 · ' + track.points.filter(p => p.source === 'tracked').length + ' 个自动点';
+      ' 个手动点 · ' + track.points.filter(p => p.source === 'tracked' || p.source === 'detected').length + ' 个自动点';
     updateSampling();
     updateTime();
   }
@@ -2554,7 +3029,7 @@
     cancelJob(); setMarking(false); setSubjectSelection(false); video.pause(); stopStream();
     const generation = ++S.generation;
     S.loading = true; S.loaded = false; S.busy = null; S.overlay = null; S.overlayTimes = [];
-    S.subject = null; S.subjectDraft = null; S.overlayStats = null;
+    S.subject = null; S.subjectDraft = null; S.overlayStats = null; S.overlayMarkerOnly = false;
     S.sourceBlob = null; S.sourceName = ''; S.timeScale = 1; S.conversion = ''; $('speed').value = '1';
     S.duration = 0; setTab('capture');
     $('sourceInfo').textContent = '正在载入新视频…';
@@ -2661,7 +3136,7 @@
     const hint = durationHint || S.duration * S.timeScale;
     const previous = { blob: S.blob, name: S.name, duration: S.duration, sourceBlob: S.sourceBlob, sourceName: S.sourceName,
       timeScale: S.timeScale, conversion: S.conversion, tracks: S.tracks, selected: S.selected, undo: S.undo,
-      subject: S.subject, overlay: S.overlay, overlayTimes: S.overlayTimes, overlayStats: S.overlayStats, tab: S.tab, view: S.view };
+      subject: S.subject, overlay: S.overlay, overlayTimes: S.overlayTimes, overlayStats: S.overlayStats, overlayMarkerOnly: S.overlayMarkerOnly, tab: S.tab, view: S.view };
     const job = beginJob('生成' + label + '…');
     let result;
     try {
@@ -2692,7 +3167,7 @@
       if (S.loaded && S.blob === previous.blob) {
         Object.assign(S, { sourceBlob: previous.sourceBlob, sourceName: previous.sourceName, timeScale: previous.timeScale,
           conversion: previous.conversion, tracks: previous.tracks, selected: previous.selected, undo: previous.undo,
-          subject: previous.subject, overlay: previous.overlay, overlayTimes: previous.overlayTimes, overlayStats: previous.overlayStats });
+          subject: previous.subject, overlay: previous.overlay, overlayTimes: previous.overlayTimes, overlayStats: previous.overlayStats, overlayMarkerOnly: previous.overlayMarkerOnly });
         rebuildTracks(); setTab(previous.tab); setView(previous.view);
         if (previous.overlay) {
           const display = $('overlayCanvas'); display.width = previous.overlay.width; display.height = previous.overlay.height;
@@ -2796,7 +3271,7 @@
   function updateSampling() {
     $('opacityValue').textContent = Math.round(Number($('opacity').value) * 100) + '%';
     $('thresholdValue').textContent = $('threshold').value;
-    const full = $('overlayMode').value === 'full';
+    const full = ['full', 'red'].includes($('overlayMode').value);
     $('threshold').disabled = full || !!S.busy || S.loading || S.recording || S.live;
     $('opacity').disabled = full || !!S.busy || S.loading || S.recording || S.live;
     if (!S.loaded) { $('sampleCount').textContent = '先录制或导入视频。每次最多 60 帧。'; return; }
@@ -2832,9 +3307,9 @@
     annotation.classList.toggle('selecting', S.selectingSubject);
     if (S.selectingSubject) {
       setMarking(false); setView('original'); video.pause();
-      showTip('拖出一个框，圈住物体');
+      showTip('拖框圈住红点或物体');
     } else if (!S.marking) showTip('');
-    $('selectSubjectBtn').textContent = S.selectingSubject ? '取消' : S.subject ? '重选主体' : '选主体';
+    $('selectSubjectBtn').textContent = S.selectingSubject ? '取消' : S.subject ? '重选目标' : '选目标';
     $('selectSubjectBtn').classList.toggle('is-active', S.selectingSubject || !!S.subject);
     $('selectSubjectBtn').setAttribute('aria-pressed', String(S.selectingSubject));
     draw();
@@ -2865,12 +3340,12 @@
     moveSubject(event);
     const rect = S.subjectDraft.rect;
     if (annotation.hasPointerCapture && annotation.hasPointerCapture(event.pointerId)) annotation.releasePointerCapture(event.pointerId);
-    if (rect.w < .035 || rect.h < .035) { S.subjectDraft = null; showTip('拖出一个框，圈住整个物体'); draw(); return; }
+    if (rect.w < .025 || rect.h < .025) { S.subjectDraft = null; showTip('拖出一个框，圈住红点或物体'); draw(); return; }
     S.subject = { rect, time: video.currentTime || 0 };
     S.overlay = null; S.overlayTimes = []; S.overlayStats = null;
     setSubjectSelection(false); sync(); draw();
-    showToast('已选主体，点“生成叠影”');
-    status('已圈选主体。以这一帧为参考，前后跟随主体；无法确认的取样会跳过，不更换目标。');
+    showToast('已选目标，点“生成叠影”');
+    status('已圈选目标。自动模式优先寻找框内的红色标记；无法确认的取样会跳过，不更换目标。');
   }
   const frameCanvas = document.createElement('canvas');
   const frameCtx = frameCanvas.getContext('2d', { willReadFrequently: true });
@@ -2924,7 +3399,8 @@
       status(error.code === 'TOO_MANY_FRAMES' ? '取样超过 60 帧，请增大取样间隔或缩短时间范围。不会自动改变你的间隔。' : error.message, 'error'); return;
     }
     if (times.length < 2) { status('至少需要两次取样，请缩短间隔或扩大时间范围。', 'warning'); return; }
-    const mode = $('overlayMode').value, opacity = Number($('opacity').value), threshold = Number($('threshold').value);
+    let mode = $('overlayMode').value;
+    const opacity = Number($('opacity').value), threshold = Number($('threshold').value);
     const labels = $('sampleLabels').checked;
     const job = beginJob('准备叠影…'), signal = job.controller.signal;
     const size = analysisSize(640);
@@ -2935,7 +3411,13 @@
         x: S.subject.rect.x * size.w, y: S.subject.rect.y * size.h,
         w: S.subject.rect.w * size.w, h: S.subject.rect.h * size.h
       } } : undefined;
-      const result = await Overlay.generate({
+      if (mode === 'auto') {
+        const candidateFrame = await frameAt(subject ? subject.time : times[0], size, signal);
+        const candidate = Red.detect(candidateFrame, { roi: subject && subject.rect });
+        if (candidate.ambiguous) throw new Error('发现多个红色标记，请先圈住要观察的红点；想观察整个物体，可在设置选“完整运动物体”。');
+        mode = candidate.ok ? 'red' : 'foreground';
+      }
+      const result = await (mode === 'red' ? MarkerOverlay : Overlay).generate({
         times, size, signal, mode, opacity, threshold, subject,
         stabilize: $('stabilizeVideo').checked,
         getFrame: t => frameAt(t, size, signal),
@@ -2953,16 +3435,17 @@
       });
       check(signal);
       if (job.generation !== S.generation) throw aborted();
-      S.overlay = out; S.overlayTimes = result.acceptedTimes; S.overlayStats = result.stats;
+      S.overlay = out; S.overlayTimes = result.acceptedTimes; S.overlayStats = result.stats; S.overlayMarkerOnly = !!result.markerOnly;
       const display = $('overlayCanvas'); display.width = size.w; display.height = size.h;
       display.getContext('2d').drawImage(out, 0, 0);
       setView('overlay');
       const skipped = times.length - result.acceptedTimes.length;
       let text = '已生成 ' + result.acceptedTimes.length + ' 帧叠影，按 ' + range.interval.toFixed(2) + ' 秒等间隔取样。';
-      text += mode === 'full' ? ($('stabilizeVideo').checked ? '使用背景对齐后的整帧平均。' : '使用整帧平均，未启用防抖。') : '背景只保留一份，运动主体按先后顺序堆叠。';
+      text += mode === 'red' ? '本次为红点叠影，只叠加实际红色标记，不是整只物体。未做背景防抖，请固定手机。' : mode === 'full' ? ($('stabilizeVideo').checked ? '使用背景对齐后的整帧平均。' : '使用整帧平均，未启用防抖。') : '背景只保留一份，运动主体按先后顺序堆叠。';
       if (skipped) text += '跳过 ' + skipped + ' 个不可靠取样，保留的画面间隔可能是设定间隔的倍数。';
       if (!result.reliable && result.reason) text += result.reason;
       status(text, skipped || !result.reliable ? 'warning' : '');
+      if (mode === 'red' && !skipped) showToast('红点叠影已生成 · 请保持机位固定');
     } catch (error) {
       status(error.name === 'AbortError' ? '已取消叠影分析，保留上一次结果。' : '叠影生成失败：' + error.message, error.name === 'AbortError' ? '' : 'error');
     } finally { endJob(job); }
@@ -2989,32 +3472,61 @@
     }
     event.preventDefault(); video.pause(); snapshot();
     const track = currentTrack(), t = video.currentTime;
+    let point = { x: (x - rect.x) / rect.w, y: (y - rect.y) / rect.h }, red = false;
+    const clicked = { ...point };
+    if (preferRed() && Red) {
+      try {
+        const size = analysisSize(640);
+        frameCanvas.width = size.w; frameCanvas.height = size.h;
+        frameCtx.drawImage(video, 0, 0, size.w, size.h);
+        const found = Red.detect(frameCtx.getImageData(0, 0, size.w, size.h), { seed: point });
+        if (found.ok && Math.hypot((found.point.x - point.x) * size.w, (found.point.y - point.y) * size.h) <= 25) {
+          point = found.point; red = true;
+        }
+      } catch (_) { /* An unavailable color read never prevents manual evidence. */ }
+    }
     // A correction removes only automatic results after this time; later manual evidence is preserved.
     track.points = track.points.filter(p => (p.source === 'manual' || p.t < t - .008) && !(p.source === 'manual' && Math.abs(p.t - t) < .008));
     const previous = track.points.filter(p => p.t < t).sort((a, b) => a.t - b.t).pop();
     const segment = previous ? (previous.segment || 0) + (previous.lost ? 1 : 0) : 0;
-    track.points.push({ t, x: (x - rect.x) / rect.w, y: (y - rect.y) / rect.h, confidence: 1, source: 'manual', segment });
+    track.points.push({ t, x: point.x, y: point.y, confidence: 1, source: 'manual', segment, red, clicked });
     track.points.sort((a, b) => a.t - b.t); track.seedTime = t;
     status('已在 ' + t.toFixed(2) + ' 秒标记 ' + track.id + '。可以向后播放继续补点，或从此处自动追踪。');
-    showTip('移动时间轴，继续标点');
+    showTip(red ? '已选红点中心，点“追踪”' : '移动时间轴，继续标点');
     sync(); draw();
   }
   async function autoTrack() {
     if (!S.loaded || S.busy || S.live) return;
     const track = currentTrack();
-    const manuals = track.points.filter(p => p.source === 'manual');
-    const seed = manuals.find(p => p.t === track.seedTime) || manuals[manuals.length - 1];
-    if (!seed) { status('请先在视频中点击一个观察点。', 'warning'); return; }
+    const anchors = track.points.filter(isAnchor), manuals = track.points.filter(p => p.source === 'manual');
+    let seed = anchors.find(p => p.t === track.seedTime) || anchors[anchors.length - 1];
+    const existingSeed = seed;
+    if (!seed && !preferRed()) { status('请先在视频中点击一个观察点。', 'warning'); return; }
     const interval = Number($('trackStep').value), size = analysisSize(640);
-    const nextManual = manuals.filter(p => p.t > seed.t + .01).sort((a, b) => a.t - b.t)[0];
-    const end = Math.min(S.duration - .003, seed.t + 30, nextManual ? nextManual.t - .003 : Infinity);
-    if (end - seed.t < interval) { status('该标记后没有足够的分析时间，请向前移动并重新标记。', 'warning'); return; }
-    const times = Core.samplingTimes(seed.t, end, interval, 1000);
-    const mode = $('trackMode').value, job = beginJob('追踪 0%'), signal = job.controller.signal;
-    const pending = []; let lost = null, tracker = null;
+    const mode = $('trackMode').value, job = beginJob(seed ? '追踪 0%' : '寻找红色标记'), signal = job.controller.signal;
+    const pending = []; let lost = null, tracker = null, usedRed = false, askForPoint = false;
     try {
-      const initial = await frameAt(seed.t, size, signal);
-      tracker = Tracker.createTracker(initial, seed.x, seed.y, { mode, t: seed.t });
+      const start = seed ? seed.t : S.subject ? S.subject.time : video.currentTime >= S.duration - interval ? 0 : video.currentTime;
+      const initial = await frameAt(start, size, signal);
+      if (preferRed()) {
+        const roi = !seed && S.subject ? { x: S.subject.rect.x * size.w, y: S.subject.rect.y * size.h, w: S.subject.rect.w * size.w, h: S.subject.rect.h * size.h } : undefined;
+        const found = Red.detect(initial, { roi, seed: seed ? { x: seed.x, y: seed.y } : undefined });
+        const near = found.ok && (!seed || Math.hypot((found.point.x - seed.x) * size.w, (found.point.y - seed.y) * size.h) <= 25);
+        if (near) {
+          usedRed = true;
+          seed = { ...(seed || {}), t: start, x: found.point.x, y: found.point.y, source: seed ? seed.source : 'detected',
+            confidence: seed ? seed.confidence : found.candidate?.confidence, segment: seed ? seed.segment || 0 : 0, red: true };
+        } else if (!seed || mode === 'red' || seed.red) {
+          askForPoint = true;
+          throw new Error(found.ambiguous ? '发现多个红点，请点“标点”指定一个红色标记。' : '这一帧没有找到清楚的红点，请移动到红点清楚的一帧，再点选它。');
+        }
+      }
+      if (!seed) throw new Error('请先选定一个观察位置。');
+      const nextManual = manuals.filter(p => p.t > seed.t + .01).sort((a, b) => a.t - b.t)[0];
+      const end = Math.min(S.duration - .003, seed.t + 30, nextManual ? nextManual.t - .003 : Infinity);
+      if (end - seed.t < interval) throw new Error('该位置后没有足够的分析时间，请向前移动时间轴后再试。');
+      const times = Core.samplingTimes(seed.t, end, interval, 1000);
+      tracker = (usedRed ? Red : Tracker).createTracker(initial, seed.x, seed.y, { mode: usedRed ? 'red' : mode, t: seed.t });
       if (!tracker.valid) throw new Error(tracker.reason || '该位置的颜色或纹理不够清晰。请标记醒目的小色点、边角，或改用手动补点。');
       for (let i = 1; i < times.length; i++) {
         const frame = await frameAt(times[i], size, signal);
@@ -3023,22 +3535,23 @@
           lost = { t: times[i], lost: true, source: 'lost', segment: seed.segment || 0, reason: p.reason };
           break;
         }
-        pending.push({ t: times[i], x: p.x, y: p.y, confidence: p.confidence, source: 'tracked', segment: seed.segment || 0 });
+        pending.push({ t: times[i], x: p.x, y: p.y, confidence: p.confidence, source: 'tracked', segment: seed.segment || 0, red: usedRed });
         jobProgress(job, i / (times.length - 1), '追踪 ' + Math.round(i / (times.length - 1) * 100) + '%');
         if (i % 3 === 0) await tick();
       }
       check(signal);
       if (job.generation !== S.generation) throw aborted();
       snapshot();
-      track.points = track.points.filter(p => p.source === 'manual' || p.t < seed.t - .008);
+      track.points = track.points.filter(p => p !== existingSeed && (p.source === 'manual' || p.t < seed.t - .008));
+      track.points.push(seed); track.seedTime = seed.t;
       track.points.push(...pending); if (lost) track.points.push(lost);
       track.points.sort((a, b) => a.t - b.t);
       $('showPaths').checked = true; setView('original');
       if (lost) status('已保留 ' + pending.length + ' 个可靠跟踪点；在 ' + lost.t.toFixed(2) + ' 秒附近无法可靠追踪。' + (lost.reason || '') + '。请在该处补点后重试；未编造丢失部分的路径。', 'warning');
-      else status('已完成 ' + track.id + ' 的本地多特征追踪，共 ' + pending.length + ' 个自动点。保留最初点击的位置，请重播核对；偏移处暂停并手动补点。');
+      else status('已完成 ' + track.id + ' 的本地' + (usedRed ? '红色标记中心' : '多特征') + '追踪，共 ' + pending.length + ' 个自动点。' + (usedRed ? '每个点均来自实际红色像素；快转可能漏圈，箭头仅表示取样顺序。' : '保留最初点击的位置，请重播核对；偏移处暂停并手动补点。'));
     } catch (error) {
       status(error.name === 'AbortError' ? '已取消追踪，原有标记保持不变。' : error.message, error.name === 'AbortError' ? '' : 'error');
-    } finally { endJob(job); }
+    } finally { endJob(job); if (askForPoint && S.loaded) setMarking(true); }
   }
   function download(blob, name) {
     const url = URL.createObjectURL(blob), link = document.createElement('a');
@@ -3055,7 +3568,7 @@
     if (S.view !== 'overlay' && S.tab === 'track') drawTrajectory(target, { x: 0, y: 0, w: size.w, h: size.h }, video.currentTime, $('fullPath').checked);
     target.fillStyle = '#f4f7fa'; target.fillRect(0, size.h, size.w, 30); target.fillStyle = '#344b5a'; target.font = '12px sans-serif';
     const missingSamples = S.overlayStats && S.overlayStats.skipped && S.overlayStats.skipped.length;
-    const label = '各种各样的运动 · ' + (S.view === 'overlay' ? '叠影 ' + S.overlayTimes.length + ' 帧' + (missingSamples ? '（有跳帧）' : '（等间隔取样）') : 't = ' + video.currentTime.toFixed(2) + 's') + ' · mutiw';
+    const label = '各种各样的运动 · ' + (S.view === 'overlay' ? (S.overlayMarkerOnly ? '红点叠影 ' : '叠影 ') + S.overlayTimes.length + ' 帧' + (missingSamples ? '（有跳帧）' : '（等间隔取样）') : 't = ' + video.currentTime.toFixed(2) + 's') + ' · mutiw';
     target.fillText(label, 10, size.h + 20);
     out.toBlob(blob => {
       if (blob) { download(blob, '运动观察_' + (S.view === 'overlay' ? '叠影' : '轨迹') + '_' + Date.now() + '.png'); status('画面已生成并请求下载。手机上请在下载列表或分享菜单中保存。'); }
@@ -3128,6 +3641,7 @@
     status('已新增观察点 B。点击第二个需要比较的位置，例如车轮轮缘。'); sync();
   });
   $('trackSelect').addEventListener('change', () => { S.selected = $('trackSelect').value; sync(); draw(); });
+  $('trackMode').addEventListener('change', sync);
   $('undoBtn').addEventListener('click', () => {
     const state = S.undo.pop(); if (!state) return; S.tracks = state.tracks; S.selected = state.selected;
     rebuildTracks(); sync(); draw(); status('已撤销最近一次标记或追踪操作。');
