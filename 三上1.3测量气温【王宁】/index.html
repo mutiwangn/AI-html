@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#087e8b">
+<meta name="description" content="小学科学三年级上册天气单元：认识气温计。离线可用的气温计模型、温度读写、调节液柱和平视练习。">
+<title>测量气温 · 认识气温计 · 【镇海区鲲池小学王宁原创】</title>
+<style>
+:root{--ink:#183744;--muted:#627784;--teal:#087e8b;--teal-dark:#066773;--teal-pale:#e5f4f4;--blue:#287cd4;--blue-pale:#edf5fe;--coral:#eb514f;--amber:#e5a02a;--paper:#fff;--bg:#f1f6f9;--line:#dce7ec;--shadow:0 8px 28px #173b5210;--radius:22px;--font:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:var(--font);color:var(--ink);background:var(--bg)}body{font-size:17px;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}button,input,select{outline-offset:4px}button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #368ed7}button{border:0;color:inherit;background:none}button:disabled{opacity:.5;cursor:not-allowed}button:hover:not(:disabled){filter:brightness(.97)}button:active:not(:disabled){transform:translateY(1px)}button svg{width:22px;height:22px;flex-shrink:0;vertical-align:middle}svg text{font-family:var(--font)}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.app{height:100dvh;min-height:580px;display:flex;flex-direction:column}.header,.navigation,.footer{flex-shrink:0}.header{height:88px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;gap:24px;background:white;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:15px;min-width:0}.brand-mark{display:grid;place-items:center;background:var(--teal);width:48px;height:54px;border-radius:15px;color:white;flex-shrink:0}.brand-mark svg{width:26px;height:35px}.brand h1{font-size:28px;font-weight:750;letter-spacing:1px;margin:0}.brand p{font-size:13px;color:var(--muted);letter-spacing:1px;margin:4px 0 0}.head-actions{display:flex;gap:10px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:12px;background:white;min-height:44px;padding:10px 16px;font-size:15px;font-weight:600;line-height:1.2}.btn.primary{background:var(--teal);color:white;border-color:var(--teal)}.btn.secondary{background:var(--teal-pale);color:var(--teal-dark);border-color:transparent}.btn.subtle{color:var(--muted);background:transparent}.btn.large{width:100%;min-height:52px;font-size:18px}.btn.coral{background:var(--coral);border-color:var(--coral);color:#fff}
+.navigation{height:68px;display:flex;align-items:end;padding:0 30px;gap:12px;background:#fff;border-bottom:1px solid var(--line)}.tab{position:relative;display:flex;align-items:center;justify-content:center;gap:9px;min-height:58px;padding:13px 24px 18px;color:var(--muted);font-size:18px;white-space:nowrap;border-radius:10px 10px 0 0}.tab svg{width:22px;height:22px}.tab[aria-selected="true"]{color:var(--teal);font-weight:700;background:linear-gradient(0deg,#ecf7f7,transparent)}.tab[aria-selected="true"]:after{content:"";position:absolute;bottom:-1px;left:18px;right:18px;height:4px;border-radius:4px;background:var(--teal)}.nav-note{margin:auto 0 auto auto;color:var(--muted);font-size:13px;white-space:nowrap;display:flex;align-items:center;gap:6px}.status-dot{height:7px;width:7px;background:#54a587;border-radius:50%}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) clamp(355px,29vw,460px);gap:22px;padding:22px 28px 14px;flex:1;min-height:0;height:calc(100dvh - 192px)}.stage{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.stage-tools{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 22px 13px;flex-shrink:0}.stage-title{font-size:16px;font-weight:700;display:flex;gap:9px;align-items:center}.stage-title:before{content:"";width:5px;height:19px;border-radius:3px;background:var(--coral)}.scale-switch{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)}.segmented{display:flex;padding:3px;border-radius:10px;background:#edf2f5;gap:3px}.segmented button{min-height:36px;padding:6px 12px;border-radius:8px;font-size:14px;font-weight:650;color:var(--muted)}.segmented button[aria-pressed="true"]{background:white;box-shadow:0 1px 4px #14344917;color:var(--teal)}.scene{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 52% 52%,#f9fbfc,white 72%)}.scene svg.main-svg{display:block;width:100%;height:100%;overflow:visible;user-select:none;-webkit-user-select:none;touch-action:none}.scene svg .tap-zone{cursor:ns-resize;touch-action:none}.scene svg .part-label{cursor:pointer}.scene svg .part-label:focus,.scene svg [role="slider"]:focus{outline:none}.scene svg .part-label:focus-visible rect,#dragHandle:focus-visible>rect{stroke:#087e8b;stroke-width:2.5}#eyeHandle:focus-visible>circle:first-of-type{stroke:#087e8b;stroke-width:2.5}.scene svg .part-label:hover rect{stroke-width:2.5}.scene svg .hint-text{fill:var(--muted);font-size:17px}.scene svg .micro-text{fill:var(--muted);font-size:14px}.scene svg .number{font-family:Arial,var(--font);font-variant-numeric:tabular-nums}.stage-bottom{flex-shrink:0;border-top:1px solid #edf1f3;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px}.stage-caption{color:var(--muted);font-size:13px;line-height:1.6}.stage-caption strong{font-size:14px;color:var(--ink);font-weight:600}.nudge{display:flex;gap:7px}.nudge .btn{min-width:68px;padding:10px 12px;font-size:15px}.stage-flags{position:absolute;left:20px;bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.toggle-button{border-radius:9px;padding:9px 12px;min-height:40px;border:1px solid var(--line);background:#ffffffef;color:var(--muted);font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}.toggle-button[aria-pressed="true"]{background:var(--teal-pale);border-color:#c2e3e3;color:var(--teal-dark)}.toggle-button svg{width:17px;height:17px}
+.side{display:flex;flex-direction:column;gap:14px;min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cbdae1 transparent;padding:1px 2px 5px}.side-panel{padding:24px;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.side-panel h2{margin:0;font-size:24px;line-height:1.45;font-weight:750}.lead{margin:7px 0 18px;color:var(--muted);font-size:15px;line-height:1.65}.panel-top{display:flex;align-items:center;justify-content:space-between;gap:6px}.quiet-btn{color:var(--teal);min-height:40px;display:flex;align-items:center;gap:5px;padding:6px 3px;font-size:13px;white-space:nowrap}.quiet-btn svg{width:17px;height:17px}.readout-area{margin:17px 0 15px;padding:16px 10px 18px;text-align:center;border-radius:17px;background:var(--teal-pale);position:relative}.temperature{font-family:Arial,var(--font);font-size:76px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-3px;color:var(--teal-dark)}.temperature .unit{font-size:30px;font-weight:500;letter-spacing:0;margin-left:5px}.pronunciation{font-size:20px;line-height:1.6;margin-top:11px}.pronunciation small{font-size:13px;color:var(--muted);margin-right:9px}.concealed{font-size:39px;letter-spacing:7px;padding:10px 0;color:var(--teal)}.conceal-note{font-size:14px;color:var(--muted);margin-top:10px}.explain{font-size:15px;line-height:1.9;margin:0}.explain b{color:var(--teal)}.small-label{font-size:13px;color:var(--muted);display:block;margin-bottom:10px}.preset-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 12px}.preset-row .btn{font-family:Arial,var(--font);font-size:18px;min-height:46px}.preset-row .btn:nth-child(1){background:#fff4e4;border-color:#f3ddba;color:#95630e}.preset-row .btn:nth-child(2){background:var(--teal-pale);border-color:#c9e5e5;color:var(--teal-dark)}.preset-row .btn:nth-child(3){background:var(--blue-pale);border-color:#cfdef4;color:#225e9c}.rule-panel{padding:16px 22px;box-shadow:none;background:#eaf2fa;border-color:#d5e3f0}.rule-panel h3{margin:0 0 8px;font-size:16px;color:#2c6093}.rule-panel p{margin:0;font-size:14px;line-height:1.8;color:#4c6a87}.part-info{background:#fff8e9;border-color:#f0deb9}.part-info h3{color:#926716}.part-info p{color:#7b6741}.rule-tags{display:flex;gap:12px;margin-top:7px;font-size:13px;color:#426687}.rule-tags span{display:flex;gap:5px;align-items:center}.rule-tags i{height:6px;width:6px;display:block;background:currentColor;border-radius:50%}
+.practice-panel{flex:1;display:flex;flex-direction:column;padding:20px 22px;min-height:min-content}.task-line{display:flex;align-items:center;justify-content:space-between;gap:8px}.task-line h2{font-size:23px}.question-num{font-family:Arial,var(--font);font-size:14px;color:var(--muted);white-space:nowrap}.filter-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:9px 0 12px;font-size:13px;color:var(--muted)}.filter-row select{min-height:39px;padding:6px 30px 6px 10px;border:1px solid var(--line);color:var(--ink);background:white;border-radius:9px;max-width:170px;font-size:14px}.answer-wrap{position:relative;display:flex;align-items:center;background:#f3f7f9;border:2px solid #d7e5ec;border-radius:14px;padding:5px 20px;min-height:72px;margin-bottom:10px}.answer-wrap:focus-within{border-color:var(--teal)}.answer-wrap input{width:100%;border:0;outline:none!important;background:transparent;color:var(--ink);font:600 44px Arial,var(--font);letter-spacing:2px;min-width:0;height:52px;padding:0}.answer-wrap input::placeholder{color:#a1b3bd;font-size:27px;letter-spacing:1px}.answer-wrap .answer-unit{font-size:27px}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px}.keypad button{height:45px;border:1px solid var(--line);border-radius:11px;background:#fff;box-shadow:0 2px 0 #e8eef2;font:600 23px Arial,var(--font)}.keypad button.special{background:#eef5f8;font-size:22px;color:#456574}.check-row{display:flex;gap:8px}.check-row .primary{flex:1}.hint-btn{min-width:83px;padding:8px 10px;color:var(--teal)}.feedback{border-radius:12px;min-height:70px;padding:10px 14px;margin-top:12px;font-size:14px;line-height:1.7;color:var(--muted);background:#f3f7f9;border:1px solid transparent}.feedback strong{font-size:16px;display:block;margin-bottom:3px;color:var(--ink)}.feedback.good{background:#e7f5ee;border-color:#bddfcd;color:#386b54}.feedback.good strong{color:#257549}.feedback.try{background:#fff6e8;border-color:#f0dfbf;color:#826137}.feedback.try strong{color:#926315}.feedback.info{background:var(--blue-pale);border-color:#cfe0f3;color:#426687}.practice-foot{margin-top:auto;padding-top:9px}.next-row{display:flex;gap:8px;align-items:center;justify-content:space-between}.next-row .btn{min-width:115px}.reveal-btn{font-size:13px;min-height:40px;padding:7px 0;color:var(--muted);text-decoration:underline;text-underline-offset:4px}.progress-line{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:var(--muted);margin-top:6px;padding-top:0;border-top:0;line-height:1.5}.progress-line b{font-family:Arial,var(--font);font-size:13px;color:var(--teal);padding:0 2px}.target-block{text-align:center;background:#fff2ed;border:1px solid #f6d9cb;border-radius:17px;padding:26px 12px;margin:6px 0 18px}.target-block .small-label{color:#926451}.target-reading{font-size:28px;line-height:1.7;font-weight:750;color:#b14735}.target-number{font-family:Arial,var(--font);font-size:44px;font-weight:600;color:#b14735;margin-top:4px}.task-hint{padding:2px 1px;font-size:15px;line-height:1.9;color:var(--muted);margin:0 0 18px}.task-hint b{color:var(--ink)}.set-action{display:flex;gap:9px;margin-bottom:1px}.set-action .btn{flex:1}.eye-status{margin:7px 0 15px;background:var(--blue-pale);border:1px solid #d3e3f5;border-radius:17px;padding:18px;text-align:center}.eye-status p{font-size:13px;color:var(--muted);margin:0 0 10px}.eye-status strong{font-size:28px;display:block;color:#296ca5}.eye-status span{display:block;font-size:14px;color:#547795;margin-top:10px;line-height:1.7}.eye-status.level{background:#e7f5ee;border-color:#bde0cd}.eye-status.level strong{color:#25754a}.eye-nudge{display:flex;gap:9px;margin-bottom:17px}.eye-nudge .btn{flex:1;padding:11px 7px}.eye-formula{font-size:15px;line-height:1.9;margin:0 0 17px;color:var(--muted)}.eye-formula b{color:var(--ink)}.eye-panel .feedback{min-height:84px}.footer{min-height:36px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:4px 30px 10px;color:#7b8d98;font-size:12px}.footer span:first-child{max-width:75%}.toast{position:fixed;bottom:38px;left:50%;transform:translateX(-50%);padding:13px 22px;background:#173947f2;color:white;box-shadow:0 8px 35px #132e4730;border-radius:12px;font-size:14px;z-index:30;max-width:90%;line-height:1.6}
+.modal-backdrop{position:fixed;inset:0;z-index:40;background:#13384b77;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:25px}.modal{width:min(740px,100%);max-height:90dvh;overflow:auto;background:white;border:1px solid #dbe8ed;border-radius:24px;padding:27px 30px;box-shadow:0 30px 100px #122e4340}.modal-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:19px}.modal h2{margin:0;font-size:24px}.modal h3{font-size:17px;margin:23px 0 8px;color:var(--teal)}.modal p{font-size:15px;line-height:1.9;color:#566e7b;margin:8px 0}.modal .notice{background:#fff7e9;border:1px solid #f1dfb9;border-radius:12px;padding:13px 17px;color:#81623c}.close-modal{min-width:44px;min-height:44px;border-radius:12px;background:#f1f5f8;display:grid;place-items:center}.help-row{display:grid;grid-template-columns:106px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid #edf1f4;font-size:14px;line-height:1.8}.help-row b{color:var(--ink)}.help-row span{color:#59727f}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 0;border-bottom:1px solid #edf1f4;font-size:15px}.setting-row p{margin:0;font-size:12px;color:var(--muted)}.setting-row input[type=checkbox]{width:22px;height:22px;accent-color:var(--teal)}.help-end{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:21px}.source-note{font-size:12px!important;color:#81929b!important;line-height:1.7!important}.readonly-hit{cursor:default!important}.pulse-zero{animation:zeroPulse 1s ease-in-out 2}@keyframes zeroPulse{0%,100%{opacity:.4}50%{opacity:1}}
+@media(min-width:1700px){.header{height:100px}.navigation{height:76px}.workspace{height:calc(100dvh - 214px);padding:26px 38px 14px;gap:28px}.header,.navigation{padding-left:40px;padding-right:40px}.stage-tools{padding:22px 27px 14px}.side-panel{padding:28px}.side-panel h2{font-size:27px}.lead,.explain,.task-hint{font-size:17px}.readout-area{padding:25px 10px}.temperature{font-size:90px}.keypad button{height:58px;font-size:27px}.answer-wrap{min-height:94px}.feedback{font-size:16px;min-height:98px}.practice-panel .btn.large{min-height:58px}.side{gap:18px}.stage-bottom{padding:14px 26px;min-height:77px}.stage-caption{font-size:15px}.stage-caption strong{font-size:16px}.toggle-button{font-size:15px;padding:10px 13px}.stage-title{font-size:18px}.scale-switch{font-size:15px}.segmented button{font-size:16px;min-height:40px}.rule-panel p{font-size:16px}.rule-panel h3{font-size:18px}.practice-panel .task-line h2{font-size:26px}.target-block{padding:35px 15px}.target-reading{font-size:32px}.target-number{font-size:56px}}
+@media(max-height:810px) and (min-width:901px){.header{height:73px}.brand h1{font-size:25px}.brand-mark{height:45px;width:43px}.navigation{height:58px}.tab{min-height:52px;font-size:16px;padding:12px 21px 16px}.workspace{height:calc(100dvh - 163px);padding:15px 22px 10px;gap:17px}.stage-tools{padding:11px 16px 7px}.stage-bottom{min-height:59px;padding:8px 15px}.stage-flags{left:14px;bottom:9px}.side-panel{padding:19px 20px}.side-panel h2{font-size:22px}.lead{font-size:14px;margin:5px 0 13px}.readout-area{padding:14px 9px;margin:14px 0}.temperature{font-size:67px}.pronunciation{font-size:18px;margin-top:7px}.preset-row{margin:8px 0}.rule-panel{padding:15px 19px}.rule-panel p{font-size:13px}.side{gap:10px}.practice-panel{padding:15px 18px}.filter-row{margin:6px 0 9px}.answer-wrap{min-height:64px;margin-bottom:10px;padding:4px 16px}.answer-wrap input{font-size:38px;height:48px}.keypad{gap:6px;margin-bottom:11px}.keypad button{height:44px;font-size:22px}.btn.large{min-height:46px;font-size:17px}.feedback{margin-top:11px;padding:10px 12px;min-height:62px;font-size:13px;line-height:1.6}.feedback strong{font-size:15px}.practice-foot{padding-top:6px}.progress-line{margin-top:4px;padding-top:0;font-size:11px}.target-block{padding:22px 10px;margin:2px 0 15px}.target-reading{font-size:25px}.target-number{font-size:38px}.task-hint{font-size:14px;margin-bottom:15px}.footer{min-height:32px;padding:3px 24px 8px}.eye-status{padding:17px;margin:3px 0 15px}.eye-formula{font-size:14px;margin-bottom:15px}}
+@media(max-width:1150px) and (min-width:901px){.workspace{grid-template-columns:minmax(0,1fr) 335px;padding-left:17px;padding-right:17px;gap:15px}.header,.navigation{padding-left:20px;padding-right:20px}.navigation{gap:1px}.tab{padding-left:18px;padding-right:18px}.nav-note{display:none}.stage-title{font-size:14px}.scale-switch>span{display:none}.stage-tools{gap:7px}.stage-bottom{padding:8px 12px}.stage-caption{font-size:12px}.stage-caption strong{font-size:12px}.nudge .btn{min-width:53px;padding:10px 8px}.side-panel{padding:18px}.toggle-button{padding:8px;font-size:12px}.stage-flags{left:10px;bottom:9px}.footer{font-size:11px}.keypad button{height:43px}}
+@media(max-width:900px){.app{height:auto;min-height:100dvh}.header{height:77px;padding:0 18px;gap:10px}.brand{gap:10px}.brand h1{font-size:23px}.brand p{font-size:11px;letter-spacing:0}.brand-mark{width:40px;height:45px;border-radius:12px}.head-actions{gap:7px}.head-actions .btn{min-width:42px;padding:9px}.head-actions .btn span{display:none}.navigation{padding:0 12px;gap:0;height:61px;justify-content:space-around}.tab{flex:1;font-size:15px;min-height:55px;padding:11px 9px 16px;gap:6px}.tab svg{width:19px;height:19px}.nav-note{display:none}.workspace{height:auto;display:flex;flex-direction:column;padding:15px;gap:15px;flex:1}.stage{height:650px;flex-shrink:0}.stage-tools{padding:13px 16px 8px}.stage-title{font-size:15px}.scale-switch{font-size:12px}.side{display:block;overflow:visible;padding:0;min-height:auto}.side-panel{padding:22px}.free-panel{display:grid;grid-template-columns:1fr 1fr;gap:0 25px}.free-panel .panel-top,.free-panel .lead{grid-column:1/-1}.free-panel .readout-area{grid-column:1;grid-row:3/6;margin:0}.free-panel .explain{grid-column:2;grid-row:3}.free-panel .presets-container{grid-column:2;grid-row:4;margin-top:15px}.free-panel>.btn{grid-column:2;grid-row:5}.rule-panel{margin-top:13px}.practice-panel{max-width:600px;margin:auto}.practice-panel .keypad button{height:53px}.footer{padding:2px 18px 13px;line-height:1.7;min-height:45px}.footer span:first-child{max-width:100%}.footer span:last-child{display:none}.stage-bottom{min-height:66px}.stage-flags{bottom:8px}.modal{padding:22px}.modal-backdrop{padding:15px}}
+@media(max-width:520px){.brand h1{font-size:21px}.brand-mark{width:35px;height:41px}.brand-mark svg{width:22px;height:29px}.brand p{font-size:10px}.header{padding:0 13px}.head-actions .btn{min-width:39px;padding:8px}.tab{font-size:13px;padding-left:4px;padding-right:4px;gap:4px}.tab svg{width:17px;height:17px}.navigation{padding:0 7px}.workspace{padding:11px;gap:12px}.stage{height:555px;border-radius:18px}.stage-tools{padding:11px 12px 6px;gap:5px}.stage-title{font-size:13px;gap:6px}.scale-switch>span{display:none}.segmented button{font-size:12px;padding:6px 9px;min-height:34px}.stage-bottom{padding:9px 11px;gap:7px}.stage-caption{font-size:11px}.stage-caption strong{font-size:12px}.nudge{gap:5px}.nudge .btn{font-size:13px;padding:9px;min-width:49px}.stage-flags{left:10px;gap:5px;bottom:10px}.toggle-button{padding:7px 9px;font-size:12px;min-height:37px}.free-panel{display:block;padding:20px}.free-panel .readout-area{margin:15px 0}.free-panel .presets-container{margin-top:19px}.side-panel h2{font-size:23px}.rule-panel{padding:16px 19px}.temperature{font-size:72px}.practice-panel{padding:20px}.modal h2{font-size:21px}.help-row{grid-template-columns:85px 1fr;gap:10px;font-size:13px}.modal p{font-size:14px}.help-end{flex-direction:column;align-items:stretch}.footer{font-size:11px}.small-label{font-size:12px}}
+
+@media(max-height:810px) and (min-width:901px){
+ .practice-panel{padding:13px 18px}.practice-panel .filter-row{margin:3px 0 7px}
+ .answer-wrap{min-height:60px;padding-top:4px;padding-bottom:4px}.answer-wrap input{height:44px}
+ .practice-panel .feedback{padding:8px 11px}.practice-foot{padding-top:4px}.progress-line{margin-top:2px}
+ .free-panel .readout-area{padding:10px 8px;margin:10px 0}.free-panel .temperature{font-size:62px}
+ .free-panel .lead{margin-bottom:9px}.free-panel .small-label{margin-bottom:7px}.free-panel .preset-row{margin-top:6px}
+ #ruleTags{display:none!important}.rule-panel{padding:13px 18px}
+ .eye-panel .lead{margin-bottom:8px}.eye-status{padding:12px;margin-bottom:10px}.eye-status span{margin-top:7px}
+ .eye-nudge{margin-bottom:10px}.eye-formula{margin-bottom:10px}.eye-panel .feedback{min-height:70px}
+}
+@media(min-height:811px) and (max-height:960px) and (min-width:901px){.rule-panel{padding-bottom:13px}}
+
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.author-credit{display:block;margin-top:2px;font-size:11px;font-weight:700;line-height:1.25;letter-spacing:0;color:var(--teal,var(--blue,#176d75))}@media(max-width:520px){.author-credit{font-size:10px}}
+</style>
+</head>
+<body>
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-thermo" viewBox="0 0 24 32"><path d="M9 19.3V6a4 4 0 0 1 8 0v13.3a7 7 0 1 1-8 0Z" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M13 10v13" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="13" cy="25" r="2.7" fill="currentColor"/><path d="M4 7h2M4 12h2M4 17h2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M5 3v18M12 3v18M19 3v18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><rect x="2" y="6" width="6" height="5" rx="2" fill="currentColor"/><rect x="9" y="14" width="6" height="5" rx="2" fill="currentColor"/><rect x="16" y="5" width="6" height="5" rx="2" fill="currentColor"/></symbol>
+<symbol id="i-read" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h3m3 1 1.5 1.5 3-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+<symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 3 21 21M10.4 5.2c.5-.1 1.1-.2 1.6-.2 6.5 0 10 7 10 7a19 19 0 0 1-3 3.8M6.2 6.2A18.1 18.1 0 0 0 2 12s3.5 7 10 7c1.8 0 3.3-.5 4.7-1.2M10 10a3 3 0 0 0 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-move" viewBox="0 0 24 24"><path d="M12 3v18m-4-4 4 4 4-4M8 7l4-4 4 4M4 11v2m16-2v2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9.2 9.2a2.8 2.8 0 0 1 5.6.3c0 1.7-2.8 2-2.8 3.8M12 17v.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 9A8 8 0 1 0 20 16M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 14 6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="m6 10 6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M9 5h12v14H9L2 12 9 5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m12 9 6 6m0-6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+</defs></svg>
+<div class="app" id="app">
+<header class="header">
+ <div class="brand"><div class="brand-mark" aria-hidden="true"><svg><use href="#i-thermo"/></svg></div><div><h1>认识气温计</h1><p>三年级上册 · 天气单元 · 互动练习</p><span class="author-credit">【镇海区鲲池小学王宁原创】</span></div></div>
+ <div class="head-actions"><button class="btn subtle" id="helpButton" aria-label="打开使用说明与教师设置"><svg><use href="#i-help"/></svg><span>使用说明</span></button><button class="btn primary" id="fullscreenButton" aria-label="进入全屏"><svg><use href="#i-full"/></svg><span id="fullscreenText">全屏展示</span></button></div>
+</header>
+<nav class="navigation" role="tablist" aria-label="练习方式">
+ <button class="tab" role="tab" id="tab-free" aria-selected="true" aria-controls="workspace" data-mode="free"><svg><use href="#i-sliders"/></svg>自由观察</button>
+ <button class="tab" role="tab" id="tab-read" aria-selected="false" aria-controls="workspace" data-mode="read" tabindex="-1"><svg><use href="#i-read"/></svg>我来读数</button>
+ <button class="tab" role="tab" id="tab-set" aria-selected="false" aria-controls="workspace" data-mode="set" tabindex="-1"><svg><use href="#i-move"/></svg>你说我调</button>
+ <button class="tab" role="tab" id="tab-eye" aria-selected="false" aria-controls="workspace" data-mode="eye" tabindex="-1"><svg><use href="#i-eye"/></svg>练习平视</button>
+ <div class="nav-note"><i class="status-dot"></i>离线可用 · 触摸操作</div>
+</nav>
+<main class="workspace" id="workspace" role="tabpanel" aria-labelledby="tab-free">
+ <section class="stage" aria-label="可交互的气温计模型">
+  <div class="stage-tools"><div class="stage-title" id="stageTitle">气温计模型</div><div class="scale-switch"><span>一小格</span><div class="segmented" role="group" aria-label="选择最小刻度"><button id="step1" aria-pressed="true" data-step="1" aria-label="一小格1摄氏度">1 ℃</button><button id="step2" aria-pressed="false" data-step="2" aria-label="一小格2摄氏度">2 ℃</button></div></div></div>
+  <div class="scene" id="scene">
+   <svg class="main-svg" id="mainSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 660" aria-labelledby="svgTitle svgDesc">
+    <title id="svgTitle">气温计读数模型</title><desc id="svgDesc">量程为零下三十摄氏度至五十摄氏度，红色液柱顶端对应温度。左侧有同步刻度放大图。</desc>
+    <defs>
+     <linearGradient id="bodyGrad" x1="0" x2="1"><stop stop-color="#e4ebf0"/><stop offset=".05" stop-color="#fff"/><stop offset=".88" stop-color="#fcfdfe"/><stop offset="1" stop-color="#dce5eb"/></linearGradient>
+     <linearGradient id="glassGrad" x1="0" x2="1"><stop stop-color="#b0c9d8" stop-opacity=".55"/><stop offset=".3" stop-color="#f7fcff"/><stop offset=".62" stop-color="#fff"/><stop offset="1" stop-color="#a4becd" stop-opacity=".7"/></linearGradient>
+     <linearGradient id="redGrad" x1="0" x2="1"><stop stop-color="#c32e37"/><stop offset=".42" stop-color="#f56964"/><stop offset="1" stop-color="#dd343d"/></linearGradient>
+     <radialGradient id="bulbGrad" cx=".35" cy=".28"><stop stop-color="#ff9281"/><stop offset=".5" stop-color="#f05151"/><stop offset="1" stop-color="#c6313b"/></radialGradient>
+     <filter id="bodyShadow" x="-30%" y="-10%" width="170%" height="125%"><feDropShadow dx="4" dy="7" stdDeviation="8" flood-color="#204e67" flood-opacity=".14"/></filter>
+     <marker id="arrowTeal" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="m0 0 6 3-6 3Z" fill="#087e8b"/></marker>
+     <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="m0 0 6 3-6 3Z" fill="#287cd4"/></marker>
+     <clipPath id="lensClip"><rect x="17" y="34" width="181" height="204" rx="5"/></clipPath>
+    </defs>
+    <!-- The instrument is drawn to a single linear scale. The liquid stays red below 0. -->
+    <g id="instrument">
+     <rect x="306" y="10" width="172" height="631" rx="27" fill="url(#bodyGrad)" stroke="#c6d5df" stroke-width="1.5" filter="url(#bodyShadow)"/>
+     <rect x="313" y="16" width="157" height="617" rx="22" fill="none" stroke="#fff" stroke-width="2"/>
+     <circle cx="391" cy="30" r="5.2" fill="#e1eaf0" stroke="#bacdda" stroke-width="1.2"/>
+     <text x="397" y="68" text-anchor="middle" font-family="Arial,sans-serif" font-size="27" fill="#476877">℃</text>
+     <g id="zeroBand"><rect x="320" y="368" width="126" height="14" rx="4" fill="#def1ee"/></g>
+     <rect id="sourceWindow" x="325" y="204" width="121" height="57" rx="4" fill="#dcedfc" fill-opacity=".45" stroke="#6da6d8" stroke-width="1.2" stroke-dasharray="4 4"/>
+     <g id="ticks"></g>
+     <rect x="407" y="80" width="22" height="520" rx="10" fill="url(#glassGrad)" stroke="#9bb7c7" stroke-width="1.1"/>
+     <circle cx="418" cy="603" r="25" fill="url(#glassGrad)" stroke="#9bb7c7" stroke-width="1.1"/>
+     <rect id="liquid" x="413" y="243.9" width="10" height="360.1" fill="url(#redGrad)"/>
+     <ellipse id="liquidTop" cx="418" cy="243.9" rx="5" ry="1.2" fill="#b52634"/>
+     <circle cx="418" cy="603" r="18.5" fill="url(#bulbGrad)"/>
+     <path d="M412 86v494" stroke="#fff" stroke-width="1.4" opacity=".8" stroke-linecap="round"/>
+     <path d="M404 595a15 15 0 0 1 7-6" stroke="#fff" stroke-width="2.1" opacity=".65" fill="none" stroke-linecap="round"/>
+     <text x="365" y="601" text-anchor="middle" font-size="11" fill="#8a9da7">气温计</text>
+    </g>
+    <g id="lensConnector" pointer-events="none"><path id="connectorPath" d="" fill="none" stroke="#90b8dc" stroke-width="1.2" stroke-dasharray="5 5" opacity=".75"/></g>
+    <g id="lensContainer" transform="translate(31 124)">
+     <rect width="215" height="284" rx="20" fill="#fff" stroke="#c5dcec" stroke-width="1.5"/>
+     <rect width="215" height="42" rx="20" fill="#edf5fc"/><rect y="22" width="215" height="20" fill="#edf5fc"/>
+     <circle cx="24" cy="21" r="6" fill="none" stroke="#4f86ba" stroke-width="1.7"/><path d="m28 25 5 5" stroke="#4f86ba" stroke-width="1.7" stroke-linecap="round"/>
+     <text x="45" y="27" font-size="17" font-weight="650" fill="#3c729f">刻度放大</text>
+     <g id="lensScale" clip-path="url(#lensClip)"></g>
+     <text x="107" y="264" text-anchor="middle" font-size="15" fill="#54738c" id="lensFoot">一小格 = 1 ℃</text>
+     <rect id="lensHit" x="21" y="46" width="172" height="191" fill="transparent" class="tap-zone" tabindex="-1"/>
+    </g>
+    <g id="lensNotes" pointer-events="none"><text x="32" y="449" font-size="19" font-weight="650" fill="#466c8b" id="lensCount">10 ℃ 分成 10 小格</text><text x="32" y="479" font-size="16" fill="#718695" id="lensNote">对准液柱顶端，数清小格。</text></g>
+    <g id="zeroGuide" pointer-events="none"><path id="zeroGuidePath" d="M443 375h56" stroke="#087e8b" stroke-width="1.6" stroke-dasharray="5 5"/><circle cx="443" cy="375" r="3" fill="#087e8b"/><text id="zeroGuideLabel" x="511" y="381" font-size="17" font-weight="650" fill="#087e8b">0 刻度</text></g>
+    <g id="readingGuide" pointer-events="none"><path id="topLine" d="" stroke="#ed6a65" stroke-width="1.6" stroke-dasharray="5 4"/></g>
+    <g id="countGuide" hidden pointer-events="none"><path id="countPath" d="" fill="none" stroke="#287cd4" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrowBlue)"/><text id="countLabel" x="637" y="330" fill="#287cd4" font-size="18" text-anchor="middle"></text></g>
+    <rect id="thermoHit" class="tap-zone" x="314" y="74" width="272" height="492" fill="transparent"/>
+    <g id="dragHandle" class="tap-zone" tabindex="0" role="slider" aria-orientation="vertical" aria-label="调节模型液柱高度" aria-valuemin="-30" aria-valuemax="50" aria-valuenow="23" transform="translate(487 221.9)">
+     <path d="M0 22h-55" stroke="#eb6662" stroke-width="1.4" stroke-dasharray="4 4" pointer-events="none"/>
+     <rect width="88" height="44" rx="13" fill="#fef0eb" stroke="#eeaaa0" stroke-width="1.2"/>
+     <path d="m14 17 4-4 4 4m-8 10 4 4 4-4M18 14v17" fill="none" stroke="#d45246" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+     <text x="32" y="28" font-size="16" font-weight="650" fill="#bc4f40">拖动</text>
+    </g>
+    <g id="partLabels" hidden>
+     <g class="part-label" role="button" tabindex="0" data-part="unit" aria-label="认识单位符号"><path d="M242 65h123" stroke="#5b9acd" stroke-width="1.4"/><circle cx="365" cy="65" r="3" fill="#5b9acd"/><rect x="41" y="42" width="201" height="53" rx="12" fill="#edf5fe" stroke="#bfd7ee"/><text x="60" y="75" fill="#326d9f" font-size="21" font-weight="600">单位符号 ℃</text></g>
+     <g class="part-label" role="button" tabindex="0" data-part="scale" aria-label="认识刻度"><path d="M242 227h78l46 35" stroke="#ccaa59" stroke-width="1.4" fill="none"/><circle cx="366" cy="262" r="3" fill="#ccaa59"/><rect x="41" y="203" width="201" height="53" rx="12" fill="#fff7e7" stroke="#edddb9"/><text x="60" y="237" fill="#957023" font-size="21" font-weight="600">刻度</text></g>
+     <g class="part-label" role="button" tabindex="0" data-part="liquid" aria-label="认识液柱"><path id="liquidPartPath" d="M242 398H285L413 470" fill="none" stroke="#df8b83" stroke-width="1.4"/><rect x="41" y="374" width="201" height="53" rx="12" fill="#fff1eb" stroke="#f3cbc2"/><text x="60" y="408" fill="#b45e52" font-size="21" font-weight="600">液柱</text></g>
+     <g class="part-label" role="button" tabindex="0" data-part="bulb" aria-label="认识玻璃泡"><path d="M242 566h61l95 31" fill="none" stroke="#66a8a1" stroke-width="1.4"/><circle cx="398" cy="597" r="3" fill="#66a8a1"/><rect x="41" y="542" width="201" height="53" rx="12" fill="#eaf5f0" stroke="#c2ded7"/><text x="60" y="576" fill="#438276" font-size="21" font-weight="600">玻璃泡（液泡）</text></g>
+    </g>
+    <g id="eyeScene" hidden>
+     <path d="M636 65v505" fill="none" stroke="#d0e0ec" stroke-width="2" stroke-dasharray="4 7"/>
+     <path d="m629 74 7-9 7 9m-14 486 7 9 7-9" fill="none" stroke="#93b4cc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+     <path id="levelReference" d="" stroke="#93b9bd" stroke-width="1.2" stroke-dasharray="5 7"/>
+     <path id="sightLine" d="" fill="none" stroke="#d8a048" stroke-width="2.7" stroke-dasharray="8 5"/>
+     <circle id="eyeTipDot" cx="418" cy="243.9" r="4" fill="#ec625b"/>
+     <g id="eyeHandle" role="slider" tabindex="0" aria-orientation="vertical" aria-label="上下拖动眼睛，练习平视读数" aria-valuemin="0" aria-valuemax="500" class="tap-zone" transform="translate(636 140)">
+      <rect x="-60" y="-49" width="120" height="111" rx="23" fill="transparent"/>
+      <circle r="43" fill="#f0f6fc" stroke="#bcd4e7" stroke-width="1.5"/>
+      <path d="M-31 0Q0-35 31 0Q0 35-31 0Z" fill="white" stroke="#305c7c" stroke-width="2.2"/>
+      <circle r="12" fill="#4d90b6"/><circle r="6" fill="#244b63"/><circle cx="-3" cy="-4" r="2.7" fill="white"/>
+      <rect x="-45" y="43" width="90" height="28" rx="8" fill="#edf5fb"/><text x="0" y="62" text-anchor="middle" font-size="14" fill="#3c729f">拖动眼睛</text>
+     </g>
+    </g>
+   </svg>
+   <div class="stage-flags"><button id="zeroToggle" class="toggle-button" aria-pressed="true">找 0 刻度</button><button id="partsToggle" class="toggle-button" aria-pressed="false"><svg><use href="#i-thermo"/></svg>认识结构</button><button id="localToggle" class="toggle-button" aria-pressed="false" hidden>只看局部</button></div>
+  </div>
+  <div class="stage-bottom"><div class="stage-caption"><strong id="stageInstruction">上下拖动右侧拖柄，调节模型液柱。</strong><br><span id="stageRange">这支模型的量程：−30 ～ 50 ℃</span></div><div class="nudge" id="nudgeGroup"><button class="btn" id="minusButton" aria-label="降低一小格">− 1格</button><button class="btn" id="plusButton" aria-label="升高一小格">+ 1格</button></div></div>
+ </section>
+ <aside class="side" id="side" aria-label="操作与练习区">
+  <section class="side-panel free-panel" id="freePanel">
+   <div class="panel-top"><h2>让温度看得见</h2><button class="quiet-btn" id="hideReading" aria-pressed="false"><svg><use href="#i-eyeoff"/></svg><span>隐藏读数</span></button></div>
+   <p class="lead">拉一拉液柱，再读出它表示的温度。</p>
+   <div class="readout-area" id="readoutArea"><div id="visibleReadout"><div class="temperature"><span id="freeNumber">23</span><span class="unit">℃</span></div><div class="pronunciation"><small>读作</small><span id="freeWords">二十三摄氏度</span></div></div><div id="hiddenReadout" hidden><div class="concealed">？ ℃</div><div class="conceal-note">先读给同伴听，再揭晓。</div></div></div>
+   <p class="explain" id="freeExplanation">液柱顶端在 <b>0 刻度上方</b>。<br>从 20 ℃ 向上数 3 小格。</p>
+   <div class="presets-container"><span class="small-label">试试教材中的三个温度</span><div class="preset-row"><button class="btn" data-preset="38">38 ℃</button><button class="btn" data-preset="0">0 ℃</button><button class="btn" data-preset="-4">−4 ℃</button></div></div>
+   <button class="btn large secondary" id="freeRandom"><svg><use href="#i-refresh"/></svg>换个温度</button>
+  </section>
+  <section class="side-panel rule-panel" id="freeRule"><h3 id="partTitle">读数有个好办法</h3><p id="partDescription">先看一小格表示几摄氏度，再找到 0 刻度，最后对准液柱顶端读数。</p><div class="rule-tags" id="ruleTags"><span><i></i>0 上向上读</span><span><i></i>0 下加“零下”</span></div></section>
+  <section class="side-panel practice-panel" id="readPanel" hidden>
+   <div class="task-line"><h2>我读到的温度是…</h2><span class="question-num" id="readQuestion">第 1 题</span></div>
+   <div class="filter-row"><label for="readFilter">练习范围</label><select id="readFilter"><option value="mixed">综合练习</option><option value="positive">零上温度</option><option value="negative">零下温度</option><option value="near">0 ℃ 附近</option></select></div>
+   <div class="answer-wrap"><input type="text" id="answerInput" inputmode="none" autocomplete="off" spellcheck="false" readonly maxlength="3" placeholder="输入温度" aria-label="输入气温计读数，支持数字键、负号和回车"><span class="answer-unit">℃</span></div>
+   <div class="keypad" id="keypad" role="group" aria-label="读数输入键盘"><button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button><button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button><button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button><button class="special" data-key="sign" aria-label="添加或去掉负号">±</button><button data-key="0">0</button><button class="special" data-key="back" aria-label="删除最后一位"><svg><use href="#i-back"/></svg></button></div>
+   <div class="check-row"><button class="btn primary large" id="checkRead">检查读数</button><button class="btn hint-btn" id="hintRead">给点提示</button></div>
+   <div class="feedback" id="readFeedback" role="status" aria-live="polite"><strong>先看刻度，再读数。</strong>温度在 0 以下时，别忘了负号“−”。</div>
+   <div class="practice-foot"><div class="next-row"><button class="reveal-btn" id="revealRead">看读数方法</button><button class="btn secondary" id="nextRead">下一题<svg><use href="#i-arrow"/></svg></button></div><div class="progress-line"><span>本轮完成 <b id="readCompleted">0</b> 题</span><span>独立一次正确 <b id="readFirst">0</b> 题</span></div></div>
+  </section>
+  <section class="side-panel practice-panel" id="setPanel" hidden>
+   <div class="task-line"><h2>把液柱调到这里</h2><span class="question-num" id="setQuestion">第 1 题</span></div>
+   <div class="filter-row"><label for="setFilter">练习范围</label><select id="setFilter"><option value="mixed">综合练习</option><option value="positive">零上温度</option><option value="negative">零下温度</option><option value="near">0 ℃ 附近</option></select></div>
+   <div class="target-block"><span class="small-label">目标温度</span><div class="target-reading" id="targetWords">零下四摄氏度</div><div class="target-number" id="targetNumber">−4 ℃</div></div>
+   <p class="task-hint">先找到 <b>0 刻度</b>，再判断向上还是向下。<br>拖动液柱，也可以用 <b>＋／− 1格</b> 微调。</p>
+   <div class="set-action"><button class="btn primary large" id="checkSet">我调好了</button><button class="btn hint-btn" id="hintSet">给点提示</button></div>
+   <div class="feedback" id="setFeedback" role="status" aria-live="polite"><strong>按目标调节，不直接显示读数。</strong>用左侧的刻度放大图，帮助自己数清小格。</div>
+   <div class="practice-foot"><div class="next-row"><button class="reveal-btn" id="revealSet">看调节示范</button><button class="btn secondary" id="nextSet">下一题<svg><use href="#i-arrow"/></svg></button></div><div class="progress-line"><span>本轮完成 <b id="setCompleted">0</b> 题</span><span>独立一次正确 <b id="setFirst">0</b> 题</span></div></div>
+  </section>
+  <section class="side-panel practice-panel eye-panel" id="eyePanel" hidden>
+   <div class="task-line"><h2>把眼睛放在哪里？</h2><span class="question-num" id="eyeQuestion">第 1 题</span></div>
+   <p class="lead">上下拖动眼睛，找到正确的读数姿势。</p>
+   <div class="eye-status" id="eyeStatus"><p>现在的观察姿势</p><strong id="eyePosture">俯视</strong><span id="eyeDirection">眼睛比液柱顶端高，再向下移一移。</span></div>
+   <div class="eye-nudge"><button class="btn" id="eyeUp"><svg><use href="#i-up"/></svg>眼睛上移</button><button class="btn" id="eyeDown"><svg><use href="#i-down"/></svg>眼睛下移</button></div>
+   <p class="eye-formula">正确读数时，<b>视线与液柱顶端保持齐平</b>。<br>动的是眼睛，液柱的高度不变。</p>
+   <button class="btn primary large" id="checkEye">我放好了</button>
+   <div class="feedback" id="eyeFeedback" role="status" aria-live="polite"><strong>让连接眼睛和液柱顶端的线变平。</strong>这幅图用来练习视线位置，不模拟具体的读数误差。</div>
+   <div class="practice-foot"><div class="next-row"><button class="reveal-btn" id="revealEye">看平视示范</button><button class="btn secondary" id="nextEye">换个温度<svg><use href="#i-arrow"/></svg></button></div><div class="progress-line"><span>本轮完成 <b id="eyeCompleted">0</b> 题</span><span>独立一次正确 <b id="eyeFirst">0</b> 题</span></div></div>
+  </section>
+ </aside>
+</main>
+<footer class="footer"><span>这是读数练习模型，不会测量真实气温。实际测量时，不要用手触碰玻璃泡。</span><span>可触摸拖动 · 支持鼠标与键盘</span></footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="modal-backdrop" id="helpModal" hidden>
+ <section class="modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1">
+  <div class="modal-top"><h2 id="helpTitle">使用说明与教师设置</h2><button class="close-modal" id="closeHelp" aria-label="关闭说明"><svg><use href="#i-close"/></svg></button></div>
+  <div class="help-row"><b>自由观察</b><span>拖动右侧拖柄、点击刻度或用微调按钮改变液柱。打开“认识结构”后，可点选四个部件查看说明。隐藏读数后，可与同伴玩“我拉你读”。</span></div>
+  <div class="help-row"><b>我来读数</b><span>用屏幕数字键输入；± 添加或去掉负号。也支持实体键盘的数字、负号、退格和回车。“只看局部”用于练习没有完整刻度图时的读数。</span></div>
+  <div class="help-row"><b>你说我调</b><span>根据指定温度调节液柱；提交前不显示当前温度。拖动放大图可以更精细地调节。提交后有反馈，下一题才切换题目。</span></div>
+  <div class="help-row"><b>练习平视</b><span>拖动眼睛或使用上下移动按钮。让视线与液柱顶端齐平，再提交。图示只表示观察位置，不给出俯视、仰视的具体误差值。</span></div>
+  <h3>教师设置</h3>
+  <label class="setting-row"><span>调节练习只显示中文读法<p>隐藏目标温度的数字写法，让学生把读法转成液柱高度。</p></span><input id="wordsOnly" type="checkbox"></label>
+  <label class="setting-row"><span>显示液柱顶端辅助线<p>不改变真实刻度，只帮助学生找准液柱顶端。</p></span><input id="guideSetting" type="checkbox" checked></label>
+  <h3>回到真实的气温计</h3>
+  <p class="notice">量程和一小格表示的温度，要看实际使用的气温计。实际测量气温时，应放在阴凉通风处，不碰玻璃泡，等液柱稳定后平视读数。网页的拖柄只属于练习模型，不是真实温度计的部件。</p>
+  <p>本模型量程固定为 −30～50 ℃，每小格可选 1 ℃ 或 2 ℃。切换为 2 ℃ 时，练习温度会落在对应刻度上，不要求学生估读。红色表示有颜色的测温液；零下温度时，液柱仍是红色。</p>
+  <p>“独立一次正确”只统计未查看提示或示范、第一次提交就正确的题目。刷新页面即开始新一轮；不联网、不收集学生信息。</p>
+  <p class="source-note">内容依据：用户提供的《【教学用书】三上》，天气单元第 2 课《认识气温计》（教师用书第 45～51 页）；实际使用提醒参照第 3 课。网页聚焦模型操作、读写和平视练习，不替代实物测量。</p>
+  <div class="help-end"><button class="btn subtle" id="resetSession">重置本轮练习记录</button><button class="btn primary" id="startAgain">返回练习</button></div>
+ </section>
+</div>
+<noscript><p style="padding:20px;background:#fff0d7">请使用启用 JavaScript 的浏览器打开此 HTML 文件，才能拖动气温计并完成练习。</p></noscript>
+<script>
+'use strict';
+(() => {
+  // All assets and logic are embedded. There are no requests, dependencies or sensors.
+  const $ = id => document.getElementById(id);
+  const NS = 'http://www.w3.org/2000/svg';
+  const MIN = -30, MAX = 50, SCALE_TOP = 90, PX_PER_DEGREE = 5.7;
+  const yFor = t => SCALE_TOP + (MAX - t) * PX_PER_DEGREE;
+  const tFor = y => MAX - (y - SCALE_TOP) / PX_PER_DEGREE;
+  const clamp = (v,lo,hi) => Math.min(hi,Math.max(lo,v));
+  const fmt = n => n < 0 ? '−' + Math.abs(n) : String(n);
+  const cnDigits = ['零','一','二','三','四','五','六','七','八','九'];
+  function chinese(n){
+    n=Math.abs(Math.round(n));
+    if(n<10)return cnDigits[n];
+    return (n>=20?cnDigits[Math.floor(n/10)]:'')+'十'+(n%10?cnDigits[n%10]:'');
+  }
+  const spoken = n => (n<0?'零下':'')+chinese(n)+'摄氏度';
+  const stats = {read:{completed:0,first:0},set:{completed:0,first:0},eye:{completed:0,first:0}};
+  const state = {
+    mode:'free',temp:23,freeTemp:23,step:1,hiddenReading:false,showParts:false,
+    showZero:true,guide:true,wordsOnly:false,localOnly:false,answer:'',
+    filter:{read:'mixed',set:'mixed'},questions:{read:0,set:0,eye:0},
+    q:null,target:-4,eyeY:140,part:null,showCount:false,countValue:0,
+    lensLow:20,lensHigh:30,lensFrozen:null,drag:null,hasGenerated:{read:false,set:false,eye:false}
+  };
+  const byMode = {free:'自由观察',read:'我来读数',set:'你说我调',eye:'练习平视'};
+  const partText = {
+    unit:['单位符号：℃','“℃”是摄氏度的符号。读温度时说“摄氏度”，书写记录时写上“℃”。'],
+    scale:['刻度：先看一小格','相邻两个整十数之间相差 10 ℃。这支模型现在分成 '+(10/state.step)+' 小格，一小格表示 '+state.step+' ℃。'],
+    liquid:['液柱：看准顶端','玻璃管里的红色液柱可以表示不同的温度。读数时，对准液柱顶端所对应的刻度，不是看液柱底部。'],
+    bulb:['玻璃泡（液泡）','玻璃泡内装有测温液体。实际测量时，不要用手碰玻璃泡，以免影响测量结果。']
+  };
+  function setVisible(el,visible){
+    if(typeof el==='string')el=$(el);
+    // SVG does not consistently implement the HTML hidden attribute across engines.
+    el.hidden=!visible;
+    el.style.display=visible?'':'none';
+    if(visible)el.removeAttribute('hidden');else el.setAttribute('hidden','');
+  }
+  function svgEl(tag,attrs,text){const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs||{}))el.setAttribute(k,String(v));if(text!==undefined)el.textContent=text;return el;}
+  function snap(t){const v=clamp(Math.round(t/state.step)*state.step,MIN,MAX);return Object.is(v,-0)?0:v;}
+  function isInteractive(){return state.mode==='free'||(state.mode==='set'&&state.q&&!state.q.done);}
+  function buildTicks(){
+    const frag=document.createDocumentFragment();
+    for(let t=MIN;t<=MAX;t+=state.step){
+      const major=t%10===0,half=state.step===1&&t%5===0, y=yFor(t);
+      frag.append(svgEl('line',{x1:major?362:half?373:384,x2:401,y1:y,y2:y,stroke:t===0&&state.showZero?'#087e8b':'#3b596b','stroke-width':major?2:1.2}));
+      if(major)frag.append(svgEl('text',{x:348,y:y+6.5,'text-anchor':'end',fill:t===0&&state.showZero?'#087e8b':'#294757','font-size':24,'font-weight':t===0?700:500,class:'number'},fmt(t)));
+    }
+    $('ticks').replaceChildren(frag);
+  }
+  function explanation(t){
+    if(t===0)return '液柱顶端正好在 <b>0 刻度</b>。<br>读作零摄氏度，写作 0 ℃。';
+    const base=Math.trunc(t/10)*10, n=Math.round(Math.abs(t-base)/state.step);
+    const intro='液柱顶端在 <b>0 刻度'+(t>0?'上方':'下方')+'</b>。';
+    const tail=n?'从 '+fmt(base)+' ℃ 向'+(t>0?'上':'下')+'数 '+n+' 小格。':'顶端正好对着 '+fmt(t)+' ℃ 的刻度。';
+    return intro+'<br>'+tail;
+  }
+  function method(t){
+    if(t===0)return '液柱顶端正好与 0 刻度齐平，读作“零摄氏度”，写作 0 ℃。';
+    const base=Math.trunc(t/10)*10,n=Math.round(Math.abs(t-base)/state.step);
+    return '顶端在 0 刻度'+(t>0?'上':'下')+'方，'+(n?'从 '+fmt(base)+' ℃ 向'+(t>0?'上':'下')+'数 '+n+' 格，每格 '+state.step+' ℃。':'正好对着 '+fmt(t)+' ℃ 的刻度。')+'读作“'+spoken(t)+'”，写作 '+fmt(t)+' ℃。';
+  }
+  function updateLens(){
+    let low;
+    if(state.lensFrozen!==null)low=state.lensFrozen;
+    else low=clamp(Math.floor(state.temp/10)*10,MIN,MAX-10);
+    const high=low+10;state.lensLow=low;state.lensHigh=high;
+    const LY=t=>53+(high-t)*17.6;
+    const frag=document.createDocumentFragment();
+    frag.append(svgEl('rect',{x:130,y:45,width:18,height:192,rx:7,fill:'url(#glassGrad)',stroke:'#adcadc','stroke-width':1}));
+    const liquidY=clamp(LY(state.temp),45,237);
+    frag.append(svgEl('rect',{x:135,y:liquidY,width:8,height:237-liquidY,fill:'url(#redGrad)'}));
+    if(LY(state.temp)>=45&&LY(state.temp)<=237)frag.append(svgEl('line',{x1:131,x2:160,y1:LY(state.temp),y2:LY(state.temp),stroke:'#e85a55','stroke-width':1.5,'stroke-dasharray':'3 3'}));
+    for(let t=low;t<=high;t+=state.step){const major=t%10===0,y=LY(t);
+      frag.append(svgEl('line',{x1:major?83:97,x2:124,y1:y,y2:y,stroke:t===0&&state.showZero?'#087e8b':'#375a72','stroke-width':major?2:1.4}));
+      if(major)frag.append(svgEl('text',{x:72,y:y+8,'text-anchor':'end','font-size':25,class:'number',fill:t===0&&state.showZero?'#087e8b':'#2b5067','font-weight':600},fmt(t)));
+    }
+    $('lensScale').replaceChildren(frag);
+    $('lensFoot').textContent='一小格 = '+state.step+' ℃';
+    $('lensCount').textContent='10 ℃ 分成 '+10/state.step+' 小格';
+    $('lensNote').textContent=state.mode==='eye'?'眼睛移动时，液柱不变。':'对准液柱顶端，数清小格。';
+    const sy=yFor(high),ey=yFor(low);
+    $('sourceWindow').setAttribute('y',sy);$('sourceWindow').setAttribute('height',ey-sy);
+    $('connectorPath').setAttribute('d','M246 177 L325 '+sy+' M246 353 L325 '+ey);
+    const lensOnly=state.mode==='read'&&state.localOnly;
+    $('lensContainer').setAttribute('transform',lensOnly?'translate(230 83) scale(1.65)':'translate(31 124)');
+    $('lensNotes').setAttribute('transform',lensOnly?'translate(130 169)':'');
+    if(lensOnly){$('lensNote').textContent=(low>0||high<0)?'0 不在图中，观察数字和位置。':'用相邻数字判断每格的温度。';}
+  }
+  function updateReadout(){
+    $('freeNumber').textContent=fmt(state.temp);$('freeWords').textContent=spoken(state.temp);
+    $('freeExplanation').innerHTML=state.hiddenReading?'读数已遮住。<br>先看一小格，再判断零上或零下。':explanation(state.temp);
+    setVisible('visibleReadout',!state.hiddenReading);setVisible('hiddenReadout',state.hiddenReading);
+    $('hideReading').setAttribute('aria-pressed',String(state.hiddenReading));
+    $('hideReading').querySelector('span').textContent=state.hiddenReading?'显示读数':'隐藏读数';
+    $('hideReading').querySelector('use').setAttribute('href',state.hiddenReading?'#i-eye':'#i-eyeoff');
+  }
+  function updateParts(){
+    const part=state.part;
+    if(state.showParts&&part){
+      partText.scale[1]='相邻两个整十数之间相差 10 ℃。这支模型现在分成 '+10/state.step+' 小格，一小格表示 '+state.step+' ℃。';
+      $('partTitle').textContent=partText[part][0];$('partDescription').textContent=partText[part][1];$('freeRule').classList.add('part-info');setVisible('ruleTags',false);
+    }else if(state.showParts){
+      $('partTitle').textContent='点一点，认识四个部件';$('partDescription').textContent='点击图中的“单位符号”“刻度”“液柱”或“玻璃泡”，查看它们的作用。';$('freeRule').classList.add('part-info');setVisible('ruleTags',false);
+    }else{
+      $('partTitle').textContent='读数有个好办法';$('partDescription').textContent='先看一小格表示几摄氏度，再找到 0 刻度，最后对准液柱顶端读数。';$('freeRule').classList.remove('part-info');setVisible('ruleTags',true);
+    }
+  }
+  function posture(){const dy=state.eyeY-yFor(state.temp);return Math.abs(dy)<=5?'level':dy<0?'above':'below';}
+  function updateEye(){
+    const ty=yFor(state.temp),p=posture(),level=p==='level';
+    $('eyeHandle').setAttribute('transform','translate(636 '+state.eyeY+')');
+    $('eyeHandle').setAttribute('aria-valuenow',String(Math.round(570-state.eyeY)));
+    $('eyeHandle').setAttribute('aria-valuetext',level?'眼睛与液柱顶端齐平':p==='above'?'眼睛在液柱顶端上方，正在俯视':'眼睛在液柱顶端下方，正在仰视');
+    $('sightLine').setAttribute('d','M418 '+ty+' L605 '+state.eyeY);
+    $('sightLine').setAttribute('stroke',level?'#25845b':'#d79a38');
+    $('levelReference').setAttribute('d','M429 '+ty+'H668');
+    $('eyeTipDot').setAttribute('cy',ty);
+    $('eyeStatus').classList.toggle('level',level);
+    $('eyePosture').textContent=level?'平视':p==='above'?'俯视':'仰视';
+    $('eyeDirection').textContent=level?'视线和液柱顶端在同一高度。':p==='above'?'眼睛比液柱顶端高，再向下移一移。':'眼睛比液柱顶端低，再向上移一移。';
+  }
+  function updateCount(){
+    const t=state.countValue,zy=yFor(0),ty=yFor(t);
+    $('countPath').setAttribute('d','M615 '+zy+'V'+ty);
+    $('countLabel').setAttribute('y',String((zy+ty)/2+4));
+    $('countLabel').setAttribute('x','670');
+    $('countLabel').textContent=t===0?'0 刻度':t<0?'向下数':'向上数';
+    setVisible('countGuide',state.showCount&&state.mode!=='eye'&&!(state.mode==='read'&&state.localOnly));
+  }
+  function draw(){
+    const ty=yFor(state.temp),interactive=isInteractive(),parts=state.mode==='free'&&state.showParts,eye=state.mode==='eye',local=state.mode==='read'&&state.localOnly;
+    $('mainSvg').style.touchAction=interactive||eye?'none':'pan-y';
+    $('liquid').setAttribute('y',ty);$('liquid').setAttribute('height',604-ty);$('liquidTop').setAttribute('cy',ty);
+    $('dragHandle').setAttribute('transform','translate(487 '+(ty-22)+')');
+    $('dragHandle').setAttribute('aria-valuenow',String(state.temp));
+    $('dragHandle').setAttribute('aria-valuetext',state.mode==='free'&&!state.hiddenReading?spoken(state.temp):'读数已隐藏，请观察刻度');
+    $('topLine').setAttribute('d','M424 '+ty+'H'+(eye?477:483));
+    $('liquidPartPath').setAttribute('d','M242 398H285L413 '+Math.max(ty+20,470));
+    setVisible('instrument',!local);setVisible('zeroGuide',state.showZero&&!local&&(!parts||eye));setVisible('zeroBand',state.showZero);
+    // Keep the 0-label and the drag handle from overlapping near 0 °C.
+    const nearZero=Math.abs(ty-yFor(0))<40&&interactive; $('zeroGuidePath').setAttribute('d','M443 375H'+(nearZero?599:499)); $('zeroGuideLabel').setAttribute('x',nearZero?'611':'511');
+    setVisible('lensContainer',!parts);setVisible('lensNotes',!parts);setVisible('sourceWindow',!parts&&!local);setVisible('lensConnector',!parts&&!local);
+    setVisible('partLabels',parts);setVisible('dragHandle',interactive);setVisible('thermoHit',interactive);
+    setVisible('readingGuide',state.guide&&!local);setVisible('eyeScene',eye);
+    $('lensHit').classList.toggle('readonly-hit',!interactive);
+    setVisible('partsToggle',state.mode==='free');setVisible('localToggle',state.mode==='read');
+    setVisible('nudgeGroup',state.mode==='free'||state.mode==='set');
+    $('minusButton').disabled=!interactive||state.temp<=MIN;$('plusButton').disabled=!interactive||state.temp>=MAX;
+    $('eyeUp').disabled=!!(state.q&&eye&&state.q.done);$('eyeDown').disabled=!!(state.q&&eye&&state.q.done);
+    $('zeroToggle').setAttribute('aria-pressed',String(state.showZero));$('partsToggle').setAttribute('aria-pressed',String(state.showParts));$('localToggle').setAttribute('aria-pressed',String(state.localOnly));
+    $('zeroToggle').disabled=local;
+    $('svgDesc').textContent=state.mode==='free'&&!state.hiddenReading?'量程零下三十至五十摄氏度，每小格'+state.step+'摄氏度。当前'+spoken(state.temp)+'。':'量程零下三十至五十摄氏度，每小格'+state.step+'摄氏度。请根据红色液柱顶端所对应的刻度完成练习。';
+    updateLens();updateReadout();updateParts();updateEye();updateCount();
+  }
+  function setTemp(t){state.temp=snap(t);if(state.mode==='free')state.freeTemp=state.temp;draw();}
+  function feedback(mode,type,title,detail){const el=$(mode+'Feedback');el.className='feedback '+type;el.replaceChildren();const strong=document.createElement('strong');strong.textContent=title;el.append(strong,document.createTextNode(detail));}
+  let toastTimer;
+  function toast(text){clearTimeout(toastTimer);$('toast').textContent=text;setVisible('toast',true);toastTimer=setTimeout(()=>setVisible('toast',false),3200);}
+  function candidateTemps(filter){
+    const result=[];
+    for(let t=MIN;t<=MAX;t+=state.step){if(filter==='positive'&&t<=0)continue;if(filter==='negative'&&t>=0)continue;if(filter==='near'&&Math.abs(t)>10)continue;result.push(t);}
+    return result;
+  }
+  function randomTemp(filter='mixed',avoid=null){
+    let pool=candidateTemps(filter);
+    // In mixed practice, give below-zero temperatures and 0 a fair share.
+    if(filter==='mixed'){
+      const r=Math.random();
+      if(r<.12&&avoid!==0)return 0;
+      const chosen=pool.filter(t=>r<.55?t<0:t>0);if(chosen.length)pool=chosen;
+    }
+    const alternatives=pool.filter(x=>x!==avoid);if(alternatives.length)pool=alternatives;
+    return pool[Math.floor(Math.random()*pool.length)];
+  }
+  function updateStats(mode){$(mode+'Completed').textContent=stats[mode].completed;$(mode+'First').textContent=stats[mode].first;}
+  function complete(mode,independent){
+    if(!state.q||state.q.done)return;
+    state.q.done=true;stats[mode].completed++;
+    if(independent&&state.q.attempts===1&&!state.q.assisted)stats[mode].first++;
+    updateStats(mode);
+    if(mode==='read'){$('checkRead').disabled=true;document.querySelectorAll('#keypad button').forEach(b=>b.disabled=true);}
+    if(mode==='set')$('checkSet').disabled=true;
+    if(mode==='eye')$('checkEye').disabled=true;
+    $(mode==='read'?'hintRead':mode==='set'?'hintSet':'revealEye').disabled=true;
+    draw();
+  }
+  function clearAnswer(){state.answer='';$('answerInput').value='';}
+  function newQuestion(mode){
+    state.drag=null;state.lensFrozen=null;state.showCount=false;
+    const prev=mode==='set'?state.target:state.temp;
+    const first=!state.hasGenerated[mode];state.hasGenerated[mode]=true;
+    state.questions[mode]++;state.q={attempts:0,assisted:false,done:false};
+    $(mode+'Question').textContent='第 '+state.questions[mode]+' 题';
+    if(mode==='read'){
+      state.temp=first&&state.filter.read==='mixed'?38:randomTemp(state.filter.read,prev);clearAnswer();
+      $('checkRead').disabled=false;$('hintRead').disabled=false;
+      document.querySelectorAll('#keypad button').forEach(b=>b.disabled=false);
+      feedback('read','','先看刻度，再读数。','温度在 0 以下时，别忘了负号“−”。');
+    }else if(mode==='set'){
+      state.target=first&&state.filter.set==='mixed'?-4:randomTemp(state.filter.set,prev);
+      let start=state.target<=0?20:0;
+      if(Math.abs(start-state.target)<state.step*3)start=state.target<20?30:-10;
+      state.temp=snap(start);
+      $('targetWords').textContent=spoken(state.target);$('targetNumber').textContent=fmt(state.target)+' ℃';setVisible('targetNumber',!state.wordsOnly);
+      $('checkSet').disabled=false;$('hintSet').disabled=false;
+      feedback('set','','按目标调节，不直接显示读数。','用左侧的刻度放大图，帮助自己数清小格。');
+    }else if(mode==='eye'){
+      let t=randomTemp('mixed',prev);t=clamp(t,-20,40);state.temp=snap(t);
+      const y=yFor(state.temp),offset=y<170?115:y>450?-115:Math.random()<.5?110:-110;
+      state.eyeY=clamp(y+offset,68,565);
+      $('checkEye').disabled=false;$('revealEye').disabled=false;
+      feedback('eye','','让连接眼睛和液柱顶端的线变平。','这幅图用来练习视线位置，不模拟具体的读数误差。');
+    }
+    draw();
+  }
+  function switchMode(mode){
+    if(!byMode[mode])return;
+    if(state.mode==='free')state.freeTemp=state.temp;
+    state.mode=mode;state.drag=null;state.lensFrozen=null;state.showCount=false;
+    document.querySelectorAll('.tab').forEach(btn=>{const active=btn.dataset.mode===mode;btn.setAttribute('aria-selected',String(active));btn.tabIndex=active?0:-1;});
+    $('workspace').setAttribute('aria-labelledby','tab-'+mode);
+    ['free','read','set','eye'].forEach(m=>setVisible(m+'Panel',m===mode));setVisible('freeRule',mode==='free');
+    $('stageTitle').textContent=mode==='eye'?'读数时，眼睛与顶端齐平':mode==='read'?'看清刻度，自己读一读':'气温计模型';
+    const instructions={free:'上下拖动右侧拖柄，调节模型液柱。',read:'观察液柱顶端，在右侧输入读数。',set:'按目标温度拖动液柱，再检查。',eye:'上下拖动眼睛，液柱的位置不变。'};
+    $('stageInstruction').textContent=instructions[mode];
+    if(mode==='free'){state.temp=snap(state.freeTemp);state.q=null;draw();}
+    else newQuestion(mode);
+    $('side').scrollTop=0;
+  }
+  function enterKey(key){
+    if(state.mode!=='read'||!state.q||state.q.done)return;
+    if(key==='back'){state.answer=state.answer.slice(0,-1);}
+    else if(key==='clear'){state.answer='';}
+    else if(key==='sign'){state.answer=state.answer.startsWith('-')?state.answer.slice(1):'-'+state.answer;}
+    else if(/^\d$/.test(key)){
+      const negative=state.answer.startsWith('-'),digits=state.answer.replace('-','');
+      if(digits.length>=2)return;
+      state.answer=(negative?'-':'')+(digits==='0'?key:digits+key);
+    }
+    $('answerInput').value=state.answer.replace('-','−');
+  }
+  function checkRead(){
+    if(!state.q||state.q.done)return;
+    if(!/^-?\d{1,2}$/.test(state.answer)){feedback('read','try','先输入一个温度。','点击数字键输入；零下温度可用 ± 添加负号。');return;}
+    const answer=Number(state.answer);state.q.attempts++;
+    if(answer===state.temp){
+      state.answer=String(state.temp);$('answerInput').value=fmt(state.temp);
+      feedback('read','good','读对了！'+fmt(state.temp)+' ℃',method(state.temp));complete('read',true);
+    }else{
+      let detail;
+      if(state.temp<0&&answer===Math.abs(state.temp))detail='大小读对了，但顶端在 0 刻度下方。想想书写时还要加什么符号。';
+      else if(state.temp>0&&answer===-state.temp)detail='顶端在 0 刻度上方，是零上温度，不需要负号。';
+      else if(state.step===2&&answer===state.temp/2)detail='请再看一小格：这里每格表示 2 ℃，不是 1 ℃。';
+      else if(state.temp===0)detail='再找一找 0 刻度，观察它与液柱顶端的位置关系。';
+      else detail='先确认零上或零下，再看每一小格表示 '+state.step+' ℃。看放大图，重新数一数。';
+      feedback('read','try','再观察一次。',detail);
+    }
+  }
+  function checkSet(){
+    if(!state.q||state.q.done)return;state.q.attempts++;
+    if(state.temp===state.target){feedback('set','good','调对了！'+fmt(state.target)+' ℃',method(state.target));complete('set',true);}
+    else{
+      let detail;
+      if(state.temp===-state.target&&state.target!==0)detail='数值大小接近目标，但零上、零下的位置相反。先找到 0 刻度再试。';
+      else detail='当前液柱顶端'+(state.temp>state.target?'偏高，需要向下移':'偏低，需要向上移')+'。每小格是 '+state.step+' ℃，再对照目标数一数。';
+      feedback('set','try','还可以再调一调。',detail);
+    }
+  }
+  function checkEye(){
+    if(!state.q||state.q.done)return;state.q.attempts++;
+    if(posture()==='level'){
+      state.eyeY=yFor(state.temp);feedback('eye','good','这就是平视！','眼睛与液柱顶端在同一高度，视线保持水平。真实测量时，还要等液柱稳定后再读数。');complete('eye',true);
+    }else feedback('eye','try','现在还不是平视。',posture()==='above'?'眼睛的位置偏高，是俯视。向下移动，让视线变平。':'眼睛的位置偏低，是仰视。向上移动，让视线变平。');
+    updateEye();
+  }
+  function hint(mode){
+    if(!state.q||state.q.done)return;state.q.assisted=true;
+    const t=mode==='read'?state.temp:state.target;
+    state.showCount=true;state.countValue=t;
+    // In reading practice, showing a direction must not mark the hidden answer.
+    if(mode==='read')state.countValue=t===0?0:t<0?-10:10;
+    if(t===0)feedback(mode,'info','先找到 0 刻度。','零摄氏度就在 0 刻度上，不在正温度一侧，也不在负温度一侧。');
+    else feedback(mode,'info',t<0?'这是零下温度。':'这是零上温度。','从 0 刻度往'+(t<0?'下':'上')+'观察，注意一小格表示 '+state.step+' ℃。'+(t<0?'书写零下温度时，要加上负号“−”。':''));
+    state.showZero=true;buildTicks();draw();
+  }
+  function reveal(mode){
+    if(!state.q)return;
+    if(state.q.done){if(mode==='read')feedback('read','info','再看一遍读数方法。',method(state.temp));else if(mode==='set')feedback('set','info','再看一遍调节方法。',method(state.target));else feedback('eye','info','平视读数。','视线要与液柱顶端在同一高度。');return;}
+    state.q.assisted=true;
+    if(mode==='read'){
+      state.answer=String(state.temp);$('answerInput').value=fmt(state.temp);
+      feedback('read','info','一起读：'+fmt(state.temp)+' ℃',method(state.temp));
+    }else if(mode==='set'){
+      state.temp=state.target;state.showCount=true;state.countValue=state.target;
+      feedback('set','info','示范：'+fmt(state.target)+' ℃',method(state.target));
+    }else{
+      state.eyeY=yFor(state.temp);feedback('eye','info','示范：视线与液柱顶端齐平。','观察水平的连线，再换个温度，自己试一次。');
+    }
+    complete(mode,false);draw();
+  }
+  function setStep(step){
+    if(step!==1&&step!==2)return;if(state.step===step)return;
+    state.step=step;state.lensFrozen=null;state.showCount=false;state.temp=snap(state.temp);state.freeTemp=snap(state.freeTemp);
+    document.querySelectorAll('[data-step]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.step)===step)));
+    buildTicks();
+    if(state.mode!=='free')newQuestion(state.mode);else draw();
+    toast('现在一小格表示 '+step+' ℃。'+(state.mode==='free'?'':'已更换练习题。'));
+  }
+  // Convert pointer position through the actual SVG matrix; works at any screen size.
+  function svgPoint(event,element){const p=$('mainSvg').createSVGPoint();p.x=event.clientX;p.y=event.clientY;const matrix=element.getScreenCTM();return matrix?p.matrixTransform(matrix.inverse()):{x:0,y:0};}
+  function startDrag(event,kind){
+    if(kind==='eye'){if(state.mode!=='eye'||!state.q||state.q.done)return;}
+    else if(!isInteractive())return;
+    if(event.pointerType==='mouse'&&event.button!==0)return;
+    event.preventDefault();
+    const el=event.currentTarget;
+    try{el.setPointerCapture(event.pointerId);}catch(_){/* Document fallback below still handles the drag. */}
+    state.drag={kind,id:event.pointerId,el,offset:0};
+    if(kind==='eye')state.drag.offset=svgPoint(event,$('mainSvg')).y-state.eyeY;
+    if(kind==='handle')state.drag.offset=svgPoint(event,$('mainSvg')).y-yFor(state.temp);
+    if(kind==='lens')state.lensFrozen=state.lensLow;
+    moveDrag(event);
+  }
+  function moveDrag(event){
+    const d=state.drag;if(!d||event.pointerId!==d.id)return;
+    event.preventDefault();
+    if(d.kind==='eye'){
+      const pt=svgPoint(event,$('mainSvg'));state.eyeY=clamp(pt.y-d.offset,68,565);updateEye();
+    }else if(d.kind==='lens'){
+      const pt=svgPoint(event,$('lensContainer'));
+      const t=state.lensFrozen+10-(pt.y-53)/17.6;setTemp(clamp(t,state.lensFrozen,state.lensFrozen+10));
+    }else{
+      const pt=svgPoint(event,$('mainSvg'));setTemp(tFor(pt.y-d.offset));
+    }
+  }
+  function endDrag(event){
+    const d=state.drag;if(!d||event.pointerId!==d.id)return;
+    if(d.kind==='eye'&&Math.abs(state.eyeY-yFor(state.temp))<=7){state.eyeY=yFor(state.temp);updateEye();}
+    try{if(d.el.hasPointerCapture(event.pointerId))d.el.releasePointerCapture(event.pointerId);}catch(_){}
+    state.drag=null;state.lensFrozen=null;draw();
+  }
+  $('thermoHit').addEventListener('pointerdown',e=>startDrag(e,'thermo'));
+  $('dragHandle').addEventListener('pointerdown',e=>startDrag(e,'handle'));
+  $('lensHit').addEventListener('pointerdown',e=>startDrag(e,'lens'));
+  $('eyeHandle').addEventListener('pointerdown',e=>startDrag(e,'eye'));
+  document.addEventListener('pointermove',moveDrag,{passive:false});document.addEventListener('pointerup',endDrag);document.addEventListener('pointercancel',endDrag);
+  $('dragHandle').addEventListener('keydown',e=>{
+    if(!isInteractive())return;
+    const k=e.key;if(!['ArrowUp','ArrowDown','Home','End','PageUp','PageDown'].includes(k))return;e.preventDefault();
+    const t=k==='Home'?MIN:k==='End'?MAX:state.temp+(k==='ArrowUp'?state.step:k==='ArrowDown'?-state.step:k==='PageUp'?10:-10);setTemp(t);
+  });
+  function moveEye(dy){if(state.mode!=='eye'||!state.q||state.q.done)return;let next=clamp(state.eyeY+dy,68,565);const ty=yFor(state.temp);if((state.eyeY-ty)*(next-ty)<0||Math.abs(next-ty)<5)next=ty;state.eyeY=next;updateEye();}
+  $('eyeHandle').addEventListener('keydown',e=>{if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();moveEye(e.key==='ArrowUp'?-7:7);}});
+  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{if(state.mode!==b.dataset.mode)switchMode(b.dataset.mode);}));
+  document.querySelectorAll('.tab').forEach((b,index)=>b.addEventListener('keydown',e=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const tabs=[...document.querySelectorAll('.tab')];
+    const i=e.key==='Home'?0:e.key==='End'?3:(index+(e.key==='ArrowRight'?1:-1)+4)%4;tabs[i].focus();switchMode(tabs[i].dataset.mode);
+  }));
+  document.querySelectorAll('[data-step]').forEach(b=>b.addEventListener('click',()=>setStep(Number(b.dataset.step))));
+  document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>setTemp(Number(b.dataset.preset))));
+  document.querySelectorAll('[data-part]').forEach(b=>{
+    const activate=()=>{state.part=b.dataset.part;updateParts();};b.addEventListener('click',activate);b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
+  });
+  $('freeRandom').addEventListener('click',()=>setTemp(randomTemp('mixed',state.temp)));
+  $('hideReading').addEventListener('click',()=>{state.hiddenReading=!state.hiddenReading;draw();});
+  $('partsToggle').addEventListener('click',()=>{state.showParts=!state.showParts;state.part=null;draw();});
+  $('zeroToggle').addEventListener('click',()=>{state.showZero=!state.showZero;buildTicks();draw();if(state.showZero){$('zeroBand').classList.remove('pulse-zero');void $('zeroBand').getBoundingClientRect();$('zeroBand').classList.add('pulse-zero');}});
+  $('localToggle').addEventListener('click',()=>{state.localOnly=!state.localOnly;draw();});
+  $('minusButton').addEventListener('click',()=>{if(isInteractive())setTemp(state.temp-state.step);});$('plusButton').addEventListener('click',()=>{if(isInteractive())setTemp(state.temp+state.step);});
+  $('keypad').addEventListener('click',e=>{const b=e.target.closest('[data-key]');if(b)enterKey(b.dataset.key);});
+  $('readFilter').addEventListener('change',e=>{state.filter.read=e.target.value;newQuestion('read');});$('setFilter').addEventListener('change',e=>{state.filter.set=e.target.value;newQuestion('set');});
+  $('checkRead').addEventListener('click',checkRead);$('checkSet').addEventListener('click',checkSet);$('checkEye').addEventListener('click',checkEye);
+  $('hintRead').addEventListener('click',()=>hint('read'));$('hintSet').addEventListener('click',()=>hint('set'));
+  ['read','set','eye'].forEach(m=>{$('reveal'+m[0].toUpperCase()+m.slice(1)).addEventListener('click',()=>reveal(m));$('next'+m[0].toUpperCase()+m.slice(1)).addEventListener('click',()=>newQuestion(m));});
+  $('eyeUp').addEventListener('click',()=>moveEye(-8));$('eyeDown').addEventListener('click',()=>moveEye(8));
+  document.addEventListener('keydown',e=>{
+    if(!$('helpModal').hidden)return;
+    if(state.mode!=='read'||e.altKey||e.ctrlKey||e.metaKey)return;
+    const el=document.activeElement;if(el&&el.tagName==='SELECT')return;
+    if(/^\d$/.test(e.key)){e.preventDefault();$('answerInput').focus({preventScroll:true});enterKey(e.key);}
+    else if(e.key==='-'||e.key==='−'){e.preventDefault();$('answerInput').focus({preventScroll:true});enterKey('sign');}
+    else if(e.key==='Backspace'){e.preventDefault();enterKey('back');}
+    else if(e.key==='Delete'){e.preventDefault();enterKey('clear');}
+    else if(e.key==='Enter'&&(!el||!['BUTTON','SELECT'].includes(el.tagName))){e.preventDefault();checkRead();}
+  });
+  let focusBeforeModal=null,resetArmed=false;
+  function openHelp(){focusBeforeModal=document.activeElement;setVisible('helpModal',true);$('app').setAttribute('inert','');$('closeHelp').focus();}
+  function closeHelp(){setVisible('helpModal',false);$('app').removeAttribute('inert');resetArmed=false;$('resetSession').textContent='重置本轮练习记录';if(focusBeforeModal)focusBeforeModal.focus();}
+  $('helpButton').addEventListener('click',openHelp);$('closeHelp').addEventListener('click',closeHelp);$('startAgain').addEventListener('click',closeHelp);
+  $('helpModal').addEventListener('click',e=>{if(e.target===$('helpModal'))closeHelp();});
+  $('helpModal').addEventListener('keydown',e=>{
+    if(e.key==='Escape'){e.preventDefault();closeHelp();return;}
+    if(e.key==='Tab'){const items=[...$('helpModal').querySelectorAll('button,input,[tabindex="0"]')].filter(x=>!x.disabled);const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+  });
+  $('wordsOnly').addEventListener('change',e=>{state.wordsOnly=e.target.checked;setVisible('targetNumber',!state.wordsOnly);});
+  $('guideSetting').addEventListener('change',e=>{state.guide=e.target.checked;draw();});
+  $('resetSession').addEventListener('click',()=>{
+    if(!resetArmed){resetArmed=true;$('resetSession').textContent='再点一次，确认清空记录';return;}
+    for(const m of ['read','set','eye']){stats[m]={completed:0,first:0};state.questions[m]=0;state.hasGenerated[m]=false;updateStats(m);}
+    if(state.mode!=='free')newQuestion(state.mode);closeHelp();toast('本轮记录已清空，重新开始练习。');
+  });
+  $('fullscreenButton').addEventListener('click',async()=>{
+    try{
+      if(document.fullscreenElement){await document.exitFullscreen();}
+      else if(document.documentElement.requestFullscreen){await document.documentElement.requestFullscreen();}
+      else if(document.documentElement.webkitRequestFullscreen){document.documentElement.webkitRequestFullscreen();}
+      else toast('此浏览器不支持网页全屏。可用浏览器的全屏功能打开。');
+    }catch(_){toast('未能进入全屏，可使用浏览器的全屏功能。');}
+  });
+  document.addEventListener('fullscreenchange',()=>{$('fullscreenText').textContent=document.fullscreenElement?'退出全屏':'全屏展示';$('fullscreenButton').setAttribute('aria-label',document.fullscreenElement?'退出全屏':'进入全屏');});
+  buildTicks();draw();
+})();
+</script>
+</body>
+</html>

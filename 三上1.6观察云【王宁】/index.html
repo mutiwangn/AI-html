@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>观察云 · 三年级科学互动课堂 · 【镇海区鲲池小学王宁原创】</title>
+<style>
+:root{--ink:#183247;--muted:#607585;--blue:#2568b7;--blue-dark:#165499;--pale:#edf5ff;--line:#dce5ed;--green:#18745b;--gold:#d99a22;--cloudy:#3c7dbd;--overcast:#63758b;--red:#be514b;--page:#f3f6f9;--r:17px;--shadow:0 4px 18px #263c5710}
+*{box-sizing:border-box}html,body{margin:0;padding:0;width:100%;height:100%;font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;color:var(--ink);background:var(--page)}body{overflow:hidden}button,input,select{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}button:disabled{cursor:default;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible,canvas:focus-visible{outline:3px solid #e4ab39;outline-offset:3px}button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:11px;padding:10px 15px;font-size:17px;line-height:1.25;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap;font-weight:600;transition:background .15s,box-shadow .15s,transform .15s}button:hover:not(:disabled){background:#eef5fc;border-color:#b3cce5}button:active:not(:disabled){transform:translateY(1px)}button.primary{background:var(--blue);border-color:var(--blue);color:white}button.primary:hover:not(:disabled){background:var(--blue-dark)}button.soft{background:var(--pale);color:var(--blue);border-color:#cfdfef}button.small{font-size:14px;padding:8px 11px;border-radius:9px}.icon{width:21px;height:21px;display:inline-block;flex-shrink:0}.icon svg{width:100%;height:100%;display:block}button.icononly{padding:10px}.hidden,[hidden]{display:none!important}.muted{color:var(--muted)}
+.app{height:100dvh;display:grid;grid-template-rows:78px minmax(0,1fr) 28px;max-width:2240px;margin:auto;padding:0 25px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:46px;height:46px;color:var(--blue);background:#e8f2fe;border-radius:14px;display:grid;place-items:center}.brand-mark .icon{width:32px;height:32px}h1{font-size:27px;margin:0;letter-spacing:2px;line-height:1.2}.subhead{font-size:12px;color:var(--muted);margin:5px 0 0;letter-spacing:1px}.tabs{display:flex;align-items:center;gap:7px;background:#e7edf3;padding:5px;border-radius:13px}.tabs button{border-color:transparent;background:transparent;color:var(--muted);padding:10px 21px;font-size:17px}.tabs button.active{color:var(--blue);background:white;box-shadow:0 2px 5px #1832470b}.header-actions{display:flex;gap:8px;align-items:center}.count{font:700 12px system-ui;min-width:20px;height:20px;border-radius:50%;background:#e7f1fb;display:grid;place-items:center;color:var(--blue)}main{min-height:0;padding:17px 0 0}.workspace{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 325px;gap:19px}.left{min-width:0;min-height:0;display:flex;flex-direction:column;gap:10px}.canvas-wrap{position:relative;min-height:160px;flex:1;border-radius:var(--r);overflow:hidden;background:#469bdb;box-shadow:var(--shadow);border:1px solid #c4d9e8}.sky{display:block;width:100%;height:100%;touch-action:none;cursor:grab;outline-offset:-6px!important}.sky:active{cursor:grabbing}.canvas-top{position:absolute;left:15px;right:15px;top:13px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;pointer-events:none}.sky-caption{padding:8px 12px;border-radius:10px;background:#ffffffed;font-size:14px;line-height:1.4;color:#28475c;box-shadow:0 2px 10px #1938570a;max-width:72%}.sky-caption strong{font-weight:700}.canvas-tools{display:flex;gap:7px;pointer-events:auto}.canvas-tools button{font-size:13px;padding:8px 10px;background:#fffffff0;border-color:#ffffff70}.canvas-tools .icon{width:16px;height:16px}.scene-label{position:absolute;bottom:12px;left:15px;font-size:12px;font-weight:500;letter-spacing:.3px;pointer-events:none;padding:5px 9px;color:#294e6b;background:#ffffffdc;border-radius:7px}.scene-count{position:absolute;bottom:12px;right:15px;font-size:12px;color:#355575;background:#ffffffda;border-radius:7px;padding:5px 9px;pointer-events:none}.drag-banner{position:absolute;top:64px;left:15px;right:15px;color:#244a70;background:#fff2bded;padding:8px 12px;border-radius:9px;font-size:13px;text-align:center;pointer-events:none}.loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#f4f9fed9;z-index:8;font-size:18px;gap:12px;opacity:0;pointer-events:none;transition:opacity .15s}.loading.show{opacity:1}.spinner{width:22px;height:22px;border:3px solid #c4d9ec;border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.tools{display:flex;align-items:center;gap:8px;flex-shrink:0}.tools button{min-height:43px}.tools .primary{padding-left:22px;padding-right:22px}.tools .toggle[aria-pressed=true]{background:var(--pale);color:var(--blue);border-color:#8db6de}.tool-hint{font-size:12px;color:var(--muted);margin-left:auto;text-align:right;line-height:1.6}.meter{background:white;border:1px solid var(--line);border-radius:var(--r);padding:13px 18px 15px;flex-shrink:0;box-shadow:var(--shadow)}.meter-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:7px}.meter-title{font-size:16px;letter-spacing:.3px}.meter-title strong{font-size:22px;margin-left:9px;color:var(--blue)}.meter-desc{font-size:13px;color:var(--muted)}.scale-wrap{position:relative;padding-top:25px;padding-bottom:20px}.scale-track{position:relative;height:27px;background:#65a8dd;border-radius:5px;overflow:visible;box-shadow:inset 0 0 0 1px #23628e25}.scale-fill{height:100%;width:50%;background:linear-gradient(180deg,#fff 0%,#edf1f4 50%,#cdd7de 100%);border-radius:5px 0 0 5px;border-right:2px solid white;transition:width .3s}.scale-mark{position:absolute;top:-25px;bottom:-8px;width:0;border-left:2px solid #516b85;z-index:2}.scale-mark.faint{border-left:1px solid #527c9c88;top:0}.scale-mark strong{position:absolute;top:-2px;left:0;transform:translateX(-50%);font-size:19px;line-height:23px;background:white;padding:0 8px;color:var(--blue);white-space:nowrap}.scale-mark em{position:absolute;bottom:-14px;left:0;transform:translateX(-50%);font-size:11px;font-style:normal;color:var(--muted);white-space:nowrap}.scale-mark.q25{border-color:var(--gold)}.scale-mark.q25 strong{color:#a16a0b}.scale-mark.q75 strong{color:#466785}.edge-label{position:absolute;bottom:-20px;font-size:11px;color:var(--muted)}.edge-label.end{right:0}.rules{display:grid;grid-template-columns:1fr 2fr 1fr;gap:7px;margin-top:7px}.rule{border-radius:9px;padding:8px 9px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;background:#f6f8fa;border:1px solid #edf1f4;white-space:nowrap;color:#536a7a}.rule strong{font-size:18px}.rule.sunny.active{background:#fff5d7;border-color:#e6c667;color:#8d6216}.rule.cloudy.active{background:#e9f4ff;border-color:#a9c9eb;color:#28649c}.rule.overcast.active{background:#e8edf3;border-color:#aebfce;color:#4b6076}
+.panel{min-height:0;background:white;border:1px solid var(--line);border-radius:var(--r);padding:19px;display:flex;flex-direction:column;box-shadow:var(--shadow);overflow:auto;scrollbar-width:thin}.panel h2{font-size:18px;margin:0 0 12px;line-height:1.2}.type-options{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.type-option{padding:0;overflow:hidden;border-radius:11px;display:flex;flex-direction:column;gap:0;font-size:16px;border:2px solid transparent;background:#f0f5f9}.type-option canvas{width:100%;height:55px;object-fit:cover;display:block}.type-option span{padding:6px 4px}.type-option.active{border-color:var(--blue);color:var(--blue);background:#eaf3fe}.type-explain{font-size:13px;color:var(--muted);margin:10px 0 0;line-height:1.6;min-height:21px}.separator{border-top:1px solid var(--line);margin:17px 0}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.section-title h2{margin:0}.pct-value{font-size:28px;font-weight:750;line-height:1;color:var(--blue);font-variant-numeric:tabular-nums}.pct-value small{font-size:16px}input[type=range]{width:100%;appearance:none;-webkit-appearance:none;height:7px;background:linear-gradient(to right,#8ebce4,#a6c5dd);border-radius:20px;margin:13px 0 9px;cursor:pointer;touch-action:pan-y}input[type=range]::-webkit-slider-thumb{appearance:none;width:25px;height:25px;border-radius:50%;background:var(--blue);border:4px solid white;box-shadow:0 0 0 1px #9cbadd}input[type=range]::-moz-range-thumb{width:20px;height:20px;border:3px solid white;background:var(--blue);border-radius:50%;box-shadow:0 0 0 1px #9cbadd}.range-labels{display:flex;justify-content:space-between;color:var(--muted);font:12px system-ui;margin-bottom:12px}.presets{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.presets button{font-size:15px;padding:8px 3px;border-radius:8px}.presets button.active{background:var(--pale);color:var(--blue);border-color:#9fbfe0}.fine{display:flex;gap:8px;margin-top:9px}.fine button{flex:1;font-size:13px;padding:7px}.random{width:100%;margin-top:11px;font-size:16px}.result{margin-top:16px;border-radius:13px;padding:15px 15px 13px;background:#ecf5ff;border:1px solid #d3e5f6;position:relative}.result.sunny{background:#fff6df;border-color:#f2dfab}.result.overcast{background:#edf1f5;border-color:#d9e1e8}.result-label{font-size:12px;letter-spacing:.5px;color:var(--muted)}.result-main{display:flex;align-items:center;gap:10px;margin-top:4px}.result-main .weather-icon{width:64px;height:52px;flex-shrink:0}.result-main strong{font-size:34px;line-height:1.25;letter-spacing:4px}.result-reason{font-size:14px;line-height:1.7;margin:6px 0 0;color:#466278}.result small{font-size:11px;color:var(--muted);display:block;margin-top:7px;line-height:1.5}.panel-bottom{margin-top:auto;padding-top:16px}.save-btn{width:100%;min-height:45px}.save-sub{font-size:11px;color:var(--muted);text-align:center;margin-top:7px}.quiz-question{font-size:22px;font-weight:700;line-height:1.5;margin:4px 0 4px}.quiz-desc{font-size:14px;color:var(--muted);line-height:1.6;margin:4px 0 16px}.answers{display:flex;flex-direction:column;gap:9px}.answer{justify-content:flex-start;font-size:23px;padding:11px 18px;border-width:2px}.answer svg{width:45px;height:34px;margin-right:9px}.answer.correct{background:#e7f6ee;border-color:#51a987;color:#18745b}.answer.wrong{background:#fff0ee;border-color:#d9877d;color:#af4842}.answer-mark{font-size:27px;margin-left:auto}.quiz-feedback{padding:14px 13px;border-radius:11px;margin-top:14px;background:#f3f6fa;color:#5d7386;min-height:72px;font-size:14px;line-height:1.5}.quiz-feedback.good{background:#e5f5ed;color:var(--green)}.quiz-feedback.bad{background:#fff0ed;color:#ac5144}.quiz-feedback strong{font-size:23px;display:block;margin-bottom:4px}.quiz-extra{display:flex;gap:8px;margin-top:12px}.quiz-extra button{flex:1;font-size:14px}.quiz-card{margin-top:auto}.success-burst{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .2s;z-index:6}.success-burst.show{opacity:1}.success-burst .medal{background:#fffffff5;border:3px solid #67b391;color:var(--green);box-shadow:0 15px 60px #07372520;border-radius:25px;padding:24px 43px;text-align:center;font-weight:750;font-size:30px}.medal .check{font-size:70px;display:block;line-height:1.1}
+footer{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#718291;line-height:1.3;gap:10px}.footer-link{border:0;padding:0;background:none;font-size:10px;font-weight:400;color:#718291}.gallery{height:100%;display:flex;flex-direction:column;gap:16px}.gallery-heading{display:flex;align-items:end;justify-content:space-between;padding:3px 2px}.gallery-heading h2{font-size:23px;margin:0}.gallery-heading p{font-size:14px;color:var(--muted);margin:0}.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px;min-height:0;flex:1}.cloud-card{border:1px solid var(--line);border-radius:var(--r);background:white;overflow:hidden;display:flex;flex-direction:column;min-height:0;box-shadow:var(--shadow)}.cloud-card canvas{width:100%;height:48%;min-height:135px;display:block;background:#4a9bd8}.cloud-card-text{padding:24px;flex:1;display:flex;flex-direction:column;min-height:0}.cloud-card h3{font-size:30px;letter-spacing:4px;margin:0 0 8px}.cloud-card .analogy{font-size:20px;color:var(--blue);font-weight:600;margin-bottom:13px}.cloud-card p{font-size:16px;line-height:1.9;color:var(--muted);margin:0}.cloud-card button{margin-top:auto;width:100%;padding:12px}.gallery-note{background:#eaf2fa;color:#315e84;border:1px solid #d3e1f0;border-radius:12px;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:17px}.gallery-note small{font-size:12px;color:var(--muted)}
+.dialog-backdrop{position:fixed;inset:0;z-index:20;background:#17344c66;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:25px}.dialog{background:white;border-radius:21px;box-shadow:0 25px 100px #102f4e38;width:min(920px,100%);max-height:90dvh;display:flex;flex-direction:column;overflow:hidden}.dialog-head{padding:20px 25px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);gap:15px}.dialog h2{margin:0;font-size:23px}.dialog-body{padding:24px;overflow:auto}.dialog-foot{border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:16px 24px;gap:10px}.dialog-foot .actions{display:flex;gap:8px}.dialog-note{font-size:12px;color:var(--muted);line-height:1.5}.record-empty{text-align:center;padding:40px 0;color:var(--muted)}.record-table{width:100%;border-collapse:collapse;font-size:15px}.record-table th{text-align:left;font-size:12px;font-weight:600;white-space:nowrap;padding:11px 9px;background:#eff5fa;color:#55718a}.record-table td{padding:13px 9px;border-bottom:1px solid var(--line);vertical-align:middle}.record-table .thumb{width:140px;aspect-ratio:1.75;object-fit:cover;display:block;border-radius:7px}.record-table .record-main{font-size:22px;font-weight:700;display:block}.record-table small{color:var(--muted);font-size:11px;line-height:1.6}.record-table .del{padding:5px 7px;color:#907979;border:0;background:#fbf5f4}.record-table .del .icon{width:15px;height:15px}.record-note{font-size:12px;line-height:1.7;color:var(--muted);background:#f4f7fa;border-radius:10px;padding:11px 14px;margin:15px 0 0}.explain-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.explain-block{padding:17px;border-radius:12px;background:#f3f7fb}.explain-block h3{margin:0 0 9px;font-size:17px}.explain-block p{font-size:14px;line-height:1.85;margin:0;color:#4b647a}.bound-settings{display:flex;gap:15px;margin-top:12px;flex-wrap:wrap}.bound-settings label{font-size:14px}.bound-settings select{border:1px solid var(--line);border-radius:7px;padding:5px;color:var(--ink);background:white;font-size:14px}.source-text{font-size:12px;line-height:1.8;color:var(--muted);margin-top:15px}.source-text a{color:var(--blue);text-decoration:none}.toast{position:fixed;bottom:45px;left:50%;transform:translateX(-50%) translateY(10px);background:#183c55f2;color:white;border-radius:12px;padding:12px 23px;font-size:15px;z-index:50;opacity:0;pointer-events:none;transition:all .2s;max-width:90vw;text-align:center;line-height:1.5}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.print-area{display:none}
+@media(min-width:1700px) and (min-height:900px){.app{padding:0 35px;grid-template-rows:94px minmax(0,1fr) 34px}.workspace{grid-template-columns:minmax(0,1fr) 380px;gap:24px}.panel{padding:25px}.panel h2{font-size:22px}.type-option canvas{height:74px}.type-option{font-size:20px}.type-explain{font-size:16px}.separator{margin:24px 0}.result{padding:22px;margin-top:24px}.result-main strong{font-size:44px}.result-reason{font-size:17px}.tools button{font-size:20px;padding:13px 20px}.meter{padding:17px 23px 20px}.meter-title{font-size:20px}.meter-title strong{font-size:28px}.rule{font-size:17px;padding:11px}.rule strong{font-size:24px}.sky-caption{font-size:17px}.gallery-heading h2{font-size:30px}.cloud-card-text{padding:30px}.cloud-card h3{font-size:42px}.cloud-card p{font-size:22px}.cloud-card .analogy{font-size:27px}.gallery-note{font-size:23px}}
+@media(max-height:780px) and (min-width:951px){.app{grid-template-rows:68px minmax(0,1fr) 25px;padding:0 19px}main{padding-top:13px}.workspace{gap:14px;grid-template-columns:minmax(0,1fr) 300px}.panel{padding:15px}.panel h2{font-size:16px;margin-bottom:9px}.type-option canvas{height:44px}.type-option span{padding:4px}.separator{margin:13px 0}.type-explain{font-size:12px;margin-top:7px}.section-title{margin-bottom:7px}.pct-value{font-size:26px}.range-labels{margin-bottom:8px}.presets button{padding:7px 2px}.fine{margin-top:7px}.fine button{padding:6px}.random{margin-top:9px;padding:9px}.result{margin-top:12px;padding:12px}.result-main strong{font-size:30px}.result-main .weather-icon{height:44px;width:57px}.result-reason{margin-top:3px;font-size:13px}.result small{margin-top:4px}.panel-bottom{padding-top:12px}.save-btn{min-height:41px}.save-sub{margin-top:5px}.meter{padding:10px 14px 12px}.meter-top{margin-bottom:4px}.scale-wrap{padding-top:23px;padding-bottom:17px}.scale-track{height:24px}.rule{font-size:12px;padding:7px 5px}.rule strong{font-size:16px}.rule .icon{width:17px;height:17px}.tools button{font-size:16px;padding:9px 13px;min-height:39px}.tool-hint{font-size:11px}.left{gap:9px}.quiz-question{font-size:21px}.quiz-desc{margin-bottom:12px}.answer{padding:8px 15px;font-size:22px}.quiz-feedback{padding:10px 12px;min-height:62px;margin-top:11px}.quiz-feedback strong{font-size:22px}.cloud-card-text{padding:20px}.cloud-card p{font-size:15px}.cloud-card .analogy{font-size:18px}.cloud-card h3{font-size:27px}.gallery-note{padding:12px 17px;font-size:16px}}
+@media(max-height:690px) and (min-width:951px){.app{grid-template-rows:60px minmax(0,1fr) 23px}.brand-mark{width:39px;height:39px}h1{font-size:23px}.subhead{font-size:10px}.tabs button{padding:8px 15px;font-size:15px}.header-actions button{font-size:14px}.workspace{grid-template-columns:minmax(0,1fr) 285px}.panel{padding:13px}.type-option canvas{height:32px}.type-option{font-size:14px}.type-explain{display:none}.separator{margin:10px 0}.result{margin-top:10px;padding:10px}.result-main .weather-icon{width:49px;height:35px}.result-main strong{font-size:26px}.result small{display:none}.result-reason{font-size:12px}.save-sub{display:none}.panel-bottom{padding-top:10px}.meter{padding:8px 12px 9px}.meter-title{font-size:14px}.meter-title strong{font-size:20px}.meter-desc{font-size:11px}.rules{gap:5px}.rule{font-size:11px}.rule strong{font-size:15px}.tool-hint{display:none}.tools button{font-size:14px;min-height:35px}.canvas-tools button{font-size:11px;padding:7px}.sky-caption{font-size:12px}.cloud-card p{font-size:14px}.cloud-card-text{padding:15px}.gallery-note small{display:none}}
+@media(max-width:1100px) and (min-width:951px){.header-actions .label{display:none}.app{padding:0 15px}.tabs button{padding-left:13px;padding-right:13px}.tool-hint{display:none}.rules{grid-template-columns:1fr 1.8fr 1fr}.rule{font-size:11px}.rule .icon{display:none}.meter-desc{font-size:11px}}
+@media(max-width:950px){body{overflow:auto}.app{height:auto;min-height:100dvh;display:flex;flex-direction:column;padding:0 13px}header{min-height:72px;gap:10px;flex-wrap:wrap;padding:12px 0}.brand{gap:8px}.brand-mark{width:38px;height:38px}.brand-mark .icon{width:28px;height:28px}h1{font-size:23px}.subhead{font-size:10px}.tabs{order:3;width:100%;justify-content:center}.tabs button{flex:1;font-size:15px;padding:9px 12px}.header-actions{margin-left:auto;gap:6px}.header-actions button{padding:8px 9px;font-size:13px}.header-actions .label{display:none}main{padding-top:13px}.workspace{display:flex;flex-direction:column;gap:13px;height:auto}.canvas-wrap{height:54vw;min-height:215px;max-height:490px;flex:none}.left{gap:10px}.panel{overflow:visible;padding:17px}.tools{flex-wrap:wrap}.tools button{font-size:14px;padding:9px 11px}.tool-hint{display:none}.meter{padding:12px}.meter-title{font-size:14px}.meter-title strong{font-size:20px}.meter-desc{font-size:11px}.rule{font-size:11px;padding:8px 4px;gap:4px}.rule strong{font-size:16px}.rule .icon{display:none}.canvas-top{left:9px;right:9px;top:9px}.sky-caption{font-size:11px;padding:6px 8px;max-width:75%}.canvas-tools button{font-size:11px;padding:6px 8px}.canvas-tools .icon{width:14px;height:14px}.scene-label,.scene-count{font-size:9px;bottom:8px}.scene-label{left:9px}.scene-count{right:9px}.type-option canvas{height:80px}.type-option{font-size:18px}footer{font-size:9px;min-height:35px;flex-wrap:wrap;margin-top:8px;padding:4px 0}.footer-link{font-size:9px}.gallery{height:auto}.gallery-heading{display:block}.gallery-heading p{margin-top:8px}.gallery-grid{display:flex;flex-direction:column;gap:14px}.cloud-card canvas{height:220px;min-height:0}.cloud-card-text{padding:18px}.cloud-card button{margin-top:18px}.gallery-note{display:block;font-size:16px;line-height:1.7}.gallery-note small{display:block}.dialog-backdrop{padding:12px}.dialog-head{padding:15px}.dialog h2{font-size:20px}.dialog-body{padding:13px}.dialog-foot{padding:12px;flex-wrap:wrap}.dialog-foot .actions{flex-wrap:wrap}.dialog-foot button{font-size:13px}.explain-grid{grid-template-columns:1fr}.record-table .thumb{width:85px}.record-table{font-size:12px}.record-table td,.record-table th{padding:9px 5px}.record-table .record-main{font-size:17px}.record-table small{font-size:10px}}
+@media(max-width:950px) and (orientation:landscape){header{flex-wrap:nowrap;min-height:61px;padding:8px 0}.tabs{order:initial;width:auto}.tabs button{font-size:13px;padding:8px 10px}.brand-mark{display:none}h1{font-size:21px}.subhead{display:none}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:12px}.canvas-wrap{height:330px}.panel{padding:13px;overflow:visible}.type-option canvas{height:42px}.type-option{font-size:14px}.rule{font-size:10px}.rule strong{font-size:13px}.rules{grid-template-columns:1fr 1.8fr 1fr}.tools button{font-size:12px;padding:8px}.tools .primary{padding:8px 11px}.meter-desc{display:none}.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr)}.cloud-card canvas{height:150px}.cloud-card-text{padding:15px}.cloud-card h3{font-size:24px}.cloud-card .analogy{font-size:16px}.cloud-card p{font-size:13px}.cloud-card button{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+@media(max-height:740px) and (min-width:951px){
+ .panel .fine{display:inline-flex;width:52%;vertical-align:middle;margin-top:9px;gap:5px}
+ .panel .fine button{font-size:12px;padding:7px 3px;min-height:32px}
+ .panel .random{display:inline-flex;vertical-align:middle;width:42%;margin:9px 0 0 3%;padding:7px 3px;min-height:32px;font-size:12px;gap:4px}
+ .panel .random .icon{width:15px;height:15px}
+ .panel .separator{margin:10px 0}
+}
+@media(max-height:650px) and (min-width:951px){
+ .panel .range-labels{display:none}
+ .panel .type-option canvas{height:24px}
+ .panel .result{padding:9px}
+ .panel .result-main strong{font-size:24px}
+ .panel .result-main .weather-icon{height:31px}
+ .panel .result-label{font-size:11px}
+ .panel .panel-bottom{padding-top:8px}
+ .panel .save-btn{min-height:34px;font-size:14px;padding:8px}
+}
+
+@media print{body{overflow:visible;background:white}.app,.dialog-backdrop,.toast{display:none!important}.print-area{display:block;color:#152e40;padding:10mm;font-family:"Microsoft YaHei",sans-serif}.print-area h1{font-size:24px;margin-bottom:5mm}.print-area p{font-size:12px;line-height:1.7}.print-area table{width:100%;border-collapse:collapse;font-size:14px}.print-area td,.print-area th{border:1px solid #b6c6d2;padding:9px;text-align:left}.print-area img{width:155px;height:auto}.print-area tr{break-inside:avoid}.print-area small{font-size:10px}.print-area strong{font-size:18px}}
+.author-credit{display:block;margin-top:2px;font-size:11px;font-weight:700;line-height:1.25;letter-spacing:0;color:var(--teal,var(--blue,#176d75))}@media(max-width:520px){.author-credit{font-size:10px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brand"><div class="brand-mark"><span class="icon" data-icon="cloudSun"></span></div><div><h1>观察云</h1><p class="subhead">三年级上册 · 天气单元</p><span class="author-credit">【镇海区鲲池小学王宁原创】</span></div></div>
+ <nav class="tabs" aria-label="学习模式"><button data-mode="explore" class="active" aria-pressed="true">自由观察</button><button data-mode="quiz" aria-pressed="false">判断练习</button><button data-mode="gallery" aria-pressed="false">认识云形</button></nav>
+ <div class="header-actions"><button id="recordsBtn" title="查看观察记录"><span class="icon" data-icon="book"></span><span class="label">观察记录</span><span class="count" id="recordCount">0</span></button><button class="icononly" id="soundBtn" title="开启答题音效" aria-label="开启答题音效" aria-pressed="false"><span class="icon" data-icon="volumeOff"></span></button><button class="icononly" id="fullBtn" title="全屏显示" aria-label="全屏显示"><span class="icon" data-icon="expand"></span></button></div>
+</header>
+<main>
+ <section class="workspace" id="workspace" aria-label="云量观察实验">
+  <div class="left">
+   <div class="canvas-wrap" id="canvasWrap">
+    <canvas class="sky" id="sky" width="1440" height="800" tabindex="0" aria-label="模拟天空。按住云朵可以拖动；点击等面积归拢，把全部云量铺到左侧。"></canvas>
+    <div class="canvas-top"><div class="sky-caption" id="skyCaption"><strong>看整片天空</strong>，云遮住了多少？</div><div class="canvas-tools"><button id="sunBtn" title="切换到移动太阳；云量不会因此改变" aria-pressed="false"><span class="icon" data-icon="sun"></span><span>移动太阳</span></button></div></div>
+    <div class="drag-banner hidden" id="dragBanner">云量按移动前的天空计算；重叠堆放不能用来比较面积。</div>
+    <div class="scene-label" id="sceneLabel">模拟天空 · 可拖动云朵</div><div class="scene-count" id="sceneCount">整幅画面代表整片天空</div>
+    <div class="loading" id="loading"><span class="spinner"></span>正在生成天空</div>
+    <div class="success-burst" id="successBurst" aria-hidden="true"><div class="medal"><span class="check">✓</span>判断正确</div></div>
+   </div>
+   <div class="tools">
+    <button class="primary" id="gatherBtn"><span class="icon" data-icon="gather"></span><span id="gatherText">归拢到左侧</span></button>
+    <button id="scatterBtn"><span class="icon" data-icon="undo"></span>恢复天空</button>
+    <button class="toggle" id="gridBtn" aria-pressed="false"><span class="icon" data-icon="grid"></span>四等份</button>
+    <span class="tool-hint">云形可以变，原来遮住的面积不变。</span>
+   </div>
+   <div class="meter">
+    <div class="meter-top"><div class="meter-title"><span id="meterTitle">云占天空</span><strong id="meterReadout">1/2</strong></div><span class="meter-desc" id="meterDesc">看面积，不数云朵</span></div>
+    <div class="scale-wrap"><div class="scale-track"><div class="scale-fill" id="scaleFill"></div><span class="edge-label">没有云</span><span class="edge-label end">全被云遮住</span><div class="scale-mark q25" style="left:25%"><strong>1/4</strong><em>四分之一</em></div><div class="scale-mark faint" style="left:50%"></div><div class="scale-mark q75" style="left:75%"><strong>3/4</strong><em>四分之三</em></div></div></div>
+    <div class="rules" id="rules"><div class="rule sunny" data-weather="sunny"><strong>晴</strong><span id="ruleSunny">不超过 1/4</span></div><div class="rule cloudy" data-weather="cloudy"><strong>多云</strong><span id="ruleCloudy">超过 1/4，不超过 3/4</span></div><div class="rule overcast" data-weather="overcast"><strong>阴</strong><span id="ruleOvercast">超过 3/4</span></div></div>
+   </div>
+  </div>
+  <aside class="panel" aria-label="调整天空与记录">
+   <div id="exploreControls">
+    <h2>选择云的形态</h2>
+    <div class="type-options" role="group" aria-label="云的形态"><button class="type-option active" data-type="cumulus" aria-pressed="true"><canvas id="thumb-cumulus" width="216" height="130" aria-hidden="true"></canvas><span>积云</span></button><button class="type-option" data-type="stratus" aria-pressed="false"><canvas id="thumb-stratus" width="216" height="130" aria-hidden="true"></canvas><span>层云</span></button><button class="type-option" data-type="cirrus" aria-pressed="false"><canvas id="thumb-cirrus" width="216" height="130" aria-hidden="true"></canvas><span>卷云</span></button></div>
+    <p class="type-explain" id="typeExplain">一团团，顶部鼓起，底部较平。</p>
+    <div class="separator"></div>
+    <div class="section-title"><h2>调整云量</h2><div class="pct-value"><span id="pctValue">50</span><small>%</small></div></div>
+    <label class="sr-only" for="amountRange">云覆盖整片天空的百分比</label><input type="range" id="amountRange" min="0" max="100" step="1" value="50" aria-valuetext="50%，二分之一天空">
+    <div class="range-labels"><span>0</span><span>1/4</span><span>1/2</span><span>3/4</span><span>全部</span></div>
+    <div class="presets" role="group" aria-label="典型云量"><button data-amount="0">无云</button><button data-amount="25">1/4</button><button data-amount="50" class="active">1/2</button><button data-amount="75">3/4</button><button data-amount="100">满天</button></div>
+    <div class="fine"><button id="minusBtn">减少 1%</button><button id="plusBtn">增加 1%</button></div>
+    <button class="random soft" id="randomBtn"><span class="icon" data-icon="shuffle"></span>换一片天空</button>
+   </div>
+   <div id="quizControls" class="hidden">
+    <h2>先观察，再判断</h2><p class="quiz-question">这片天空应该记录为？</p><p class="quiz-desc">可以拖动云朵，或归拢后与<br>1/4、3/4 两条界线比较。</p>
+    <div class="answers"><button class="answer" data-answer="sunny"><span class="answer-icon"></span>晴<span class="answer-mark"></span></button><button class="answer" data-answer="cloudy"><span class="answer-icon"></span>多云<span class="answer-mark"></span></button><button class="answer" data-answer="overcast"><span class="answer-icon"></span>阴<span class="answer-mark"></span></button></div>
+    <div class="quiz-feedback" id="quizFeedback" aria-live="polite">先看整片天空，不只看太阳有没有露出来。</div>
+    <div class="quiz-extra"><button id="revealBtn">显示答案</button><button class="primary" id="nextBtn">下一片天空<span class="icon" data-icon="next"></span></button></div>
+   </div>
+   <div class="result cloudy" id="resultCard"><div class="result-label" id="resultLabel">这次模拟观察</div><div class="result-main"><span class="weather-icon" id="weatherIcon"></span><strong id="weatherName">多云</strong></div><p class="result-reason" id="resultReason">超过 1/4，且不超过 3/4。</p><small id="boundaryNote">刚好 1/4 记为晴；刚好 3/4 记为多云。</small></div>
+   <div class="panel-bottom"><button class="save-btn primary" id="saveBtn"><span class="icon" data-icon="plusBook"></span>记入观察记录</button><div class="save-sub">保留原天空简图，方便对照作业本</div></div>
+  </aside>
+ </section>
+ <section class="gallery hidden" id="gallery" aria-label="三种云的形态">
+  <div class="gallery-heading"><h2>把云的样子，看清楚</h2><p>三种典型形态示意 · 真实天空还有其他云的类型</p></div>
+  <div class="gallery-grid">
+   <article class="cloud-card"><canvas id="gallery-cumulus" width="800" height="570" aria-label="一团团、上部鼓起的积云形态示意"></canvas><div class="cloud-card-text"><h3>积云</h3><div class="analogy">像一团团棉花</div><p>顶部鼓起，轮廓较清楚。<br>底部比较平，有时偏灰。</p><button class="soft" data-use="cumulus">用这种云观察云量<span class="icon" data-icon="next"></span></button></div></article>
+   <article class="cloud-card"><canvas id="gallery-stratus" width="800" height="570" aria-label="灰白色成层延展的层云形态示意"></canvas><div class="cloud-card-text"><h3>层云</h3><div class="analogy">像铺开的大毯子</div><p>向四周成层延展。<br>底面比较均匀，常呈灰色。</p><button class="soft" data-use="stratus">用这种云观察云量<span class="icon" data-icon="next"></span></button></div></article>
+   <article class="cloud-card"><canvas id="gallery-cirrus" width="800" height="570" aria-label="白色丝缕和羽毛状的卷云形态示意"></canvas><div class="cloud-card-text"><h3>卷云</h3><div class="analogy">像羽毛和丝线</div><p>细细的、丝缕状。<br>通常是白色的，看起来很轻薄。</p><button class="soft" data-use="cirrus">用这种云观察云量<span class="icon" data-icon="next"></span></button></div></article>
+  </div>
+  <div class="gallery-note"><span><strong>云形看样子，云量看面积。</strong> 看见太阳，也不一定是晴天。</span><small>本页为形态与面积模型，不模拟真实云的生成过程。</small></div>
+ </section>
+</main>
+<footer><span>整幅天空作为一个整体估测 · 户外观察不要直视太阳</span><span>离线课堂模型 <button class="footer-link" id="helpBtn">｜ 使用说明与教师设置</button></span></footer>
+</div>
+<div class="dialog-backdrop hidden" id="recordsModal" role="dialog" aria-modal="true" aria-labelledby="recordsTitle"><div class="dialog"><div class="dialog-head"><h2 id="recordsTitle">我的观察记录</h2><button class="icononly" data-close="recordsModal" aria-label="关闭观察记录"><span class="icon" data-icon="close"></span></button></div><div class="dialog-body"><div id="recordsContent"></div><p class="record-note">这里记录的是本网页的模拟天空，不是当天真实天气。云量按移动前的整片天空计算，拖动重叠不改变这份记录。</p></div><div class="dialog-foot"><span class="dialog-note" id="storageNote">记录保存在当前浏览器。<br>可导出图片，或打印后对照填写。</span><div class="actions"><button id="exportPngBtn"><span class="icon" data-icon="download"></span>导出最新记录图</button><button id="exportCsvBtn">导出表格</button><button class="primary" id="printBtn"><span class="icon" data-icon="print"></span>打印记录</button></div></div></div></div>
+<div class="dialog-backdrop hidden" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle"><div class="dialog"><div class="dialog-head"><h2 id="helpTitle">使用说明与教师设置</h2><button class="icononly" data-close="helpModal" aria-label="关闭说明"><span class="icon" data-icon="close"></span></button></div><div class="dialog-body"><div class="explain-grid"><section class="explain-block"><h3>拖动、归拢、比较</h3><p>手指或鼠标按住云朵可自由移动。想把所有云移到一侧，点击“归拢到左侧”，云会规整到左侧。蓝色矩形始终代表整片天空。归拢是面积模型，不是真实云会变成方块。</p></section><section class="explain-block"><h3>云量不是云朵的数量</h3><p>程序按原天空中被云遮盖的区域计算比例，而不是按云朵数、云的颜色或太阳是否露出来判断。自由拖动可能产生重叠，所以读数始终明确表示“原天空云量”；等面积归拢后再与界线比较。</p></section><section class="explain-block"><h3>四分之一与四分之三</h3><p>把整片天空平均分为四份。一份是 1/4（25%），三份是 3/4（75%）。本页默认不超过 1/4 为晴；超过 1/4 且不超过 3/4 为多云；超过 3/4 为阴。这是本课采用的简化约定，不替代专业气象业务分类。</p><div class="bound-settings"><label>刚好 1/4：<select id="bound25"><option value="sunny">晴（默认）</option><option value="cloudy">多云</option></select></label><label>刚好 3/4：<select id="bound75"><option value="cloudy">多云（默认）</option><option value="overcast">阴</option></select></label></div></section><section class="explain-block"><h3>课堂练习与作业记录</h3><p>“判断练习”会隐藏数值，答题后显示依据；“认识云形”可对比三种形态。把模拟观察记入记录后，可导出图片、表格或打印。实际户外观察仍要观察天空各个方向，并按真实结果另行填写。不要直视太阳。</p></section></div><p class="source-text">形态依据：世界气象组织《国际云图》中的 <a href="https://cloudatlas.wmo.int/en/clouds-genera-cumulus.html" target="_blank" rel="noopener noreferrer">积云</a>、<a href="https://cloudatlas.wmo.int/en/clouds-genera-stratus.html" target="_blank" rel="noopener noreferrer">层云</a>、<a href="https://cloudatlas.wmo.int/en/clouds-genera-cirrus.html" target="_blank" rel="noopener noreferrer">卷云</a>定义。云量参照“遮盖天空的面积比例”概念；屏幕将天空展开为等面积矩形作教学近似。所有云图都是本页程序生成的形态示意，不是真实摄影或实时气象观测。高云量下的相连云块只用于云量比较，不应据此单独判断真实云属。</p><p class="source-text">使用建议：电脑或教室一体机用浏览器直接打开本 HTML；触屏支持单指拖动。键盘：G 归拢、R 恢复、Q 四等份、N 换一片天空；选中云后方向键移动。无网络、无账号也可使用；外部资料链接仅供教师联网查阅。</p></div><div class="dialog-foot"><span class="dialog-note">临界值设置即时生效；以实际使用的教材、作业本表述为准。</span><button class="primary" data-close="helpModal">回到天空</button></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="print-area" id="printArea"></div>
+<script>
+'use strict';
+(()=>{
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const paths={
+ cloudSun:'<path d="M6 12a4 4 0 1 1 6-5"/><path d="M5 3v1m-4 4h1m.5-4.5 1 1M9 1v1"/><path d="M7.5 19h11a3.5 3.5 0 0 0 .2-7 5.5 5.5 0 0 0-10.3-1.8A4.5 4.5 0 0 0 7.5 19Z"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 1v2m0 18v2M1 12h2m18 0h2M4.2 4.2l1.4 1.4m12.8 12.8 1.4 1.4M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>',
+ book:'<path d="M12 5c-3-2-7-2-10-1v16c3-1 7-1 10 1 3-2 7-2 10-1V4c-3-1-7-1-10 1Zm0 0v16"/>',
+ plusBook:'<path d="M12 6c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1v-9M12 6v15M18 2v6m-3-3h6"/>',
+ expand:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/>',
+ volumeOff:'<path d="M11 5 6 9H2v6h4l5 4V5Zm5 4 6 6m0-6-6 6"/>',
+ volume:'<path d="M11 5 6 9H2v6h4l5 4V5Zm5 3a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/>',
+ gather:'<path d="M3 3v18m6-14-5 5 5 5m-4-5h11m-1-7h6m-6 14h6m-2-7h2"/>',
+ undo:'<path d="m3 3 0 7 7 0M3.5 10A9 9 0 1 1 5 19"/>',
+ grid:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7.5 4v16M12 4v16M16.5 4v16"/>',
+ shuffle:'<path d="M3 6h3c4 0 6 12 10 12h5m-4-4 4 4-4 4M3 18h3c2 0 3-3 4-5m3-5c1-2 2-2 3-2h5m-4-4 4 4-4 4"/>',
+ next:'<path d="M4 12h15m-6-6 6 6-6 6"/>',
+ close:'<path d="m5 5 14 14M19 5 5 19"/>',
+ download:'<path d="M12 3v12m-5-5 5 5 5-5M3 16v5h18v-5"/>',
+ print:'<path d="M6 8V3h12v5M6 17H3V8h18v9h-3M6 14h12v7H6Z"/><path d="M17 11h1"/>',
+ trash:'<path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/>'
+};
+function icon(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(paths[name]||paths.cloudSun)+'</svg>'}
+$$('[data-icon]').forEach(e=>e.innerHTML=icon(e.dataset.icon));
+function weatherSVG(w){let sun='<circle cx="32" cy="25" r="13" fill="#f4bd44"/><g stroke="#edb640" stroke-width="3" stroke-linecap="round"><path d="M32 5V1M32 49v-5M8 25h4M52 25h5M15 8l3 4M47 8l-3 4M16 42l3-3M46 41l-3-3"/></g>';let cloud='<path d="M18 49h39c15 0 16-22 2-24-3-19-29-20-35-4-19-4-25 26-6 28Z" fill="'+(w==='overcast'?'#98aabe':'#f3f7fb')+'" stroke="'+(w==='overcast'?'#748ba2':'#93b6d5')+'" stroke-width="2"/>';return '<svg viewBox="0 0 80 60" width="100%" height="100%" aria-hidden="true">'+(w==='sunny'?'<g transform="translate(8 5)">'+sun+'</g>':w==='cloudy'?sun+'<g transform="translate(8 9) scale(.87)">'+cloud+'</g>':cloud)+'</svg>'}
+$$('[data-answer]').forEach(b=>b.querySelector('.answer-icon').innerHTML=weatherSVG(b.dataset.answer));
+const W=720,H=400,N=W*H;
+const typeNames={cumulus:'积云',stratus:'层云',cirrus:'卷云'};
+const typeNotes={cumulus:'一团团，顶部鼓起，底部较平。',stratus:'像铺开的毯子，成层向四周延展。',cirrus:'细细的丝缕，像羽毛一样轻薄。'};
+const weatherNames={sunny:'晴',cloudy:'多云',overcast:'阴'};
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const state={mode:'explore',type:'cumulus',amount:50,seed:739182,grid:false,arrangement:'natural',sound:false,sunTool:false,sunX:.64,sunY:.30,clouds:[],field:null,original:null,packed:null,animation:0,drag:null,moved:false,revealed:false,answered:false,selected:null,records:[],bound25:'sunny',bound75:'cloudy',savedKey:null,generation:0};
+const canvas=$('#sky'),ctx=canvas.getContext('2d',{alpha:false});let currentRAF=0,toastTimer=0,resizeTimer=0,generateTimer=0,audioCtx=null,busy=false,modalFocus=null,storageOK=true;
+const sceneCanvas=document.createElement('canvas');sceneCanvas.width=W;sceneCanvas.height=H;
+try{const saved=JSON.parse(localStorage.getItem('cloud-observer-v1')||'{}');if(Array.isArray(saved.records)) state.records=saved.records.filter(r=>r&&typeof r.img==='string'&&r.img.startsWith('data:image/')&&Number.isFinite(r.amount)&&r.amount>=0&&r.amount<=100&&typeNames[r.type]&&weatherNames[r.weather]).slice(-40);if(['sunny','cloudy'].includes(saved.bound25))state.bound25=saved.bound25;if(['cloudy','overcast'].includes(saved.bound75))state.bound75=saved.bound75}catch(e){storageOK=false}
+function persist(){try{localStorage.setItem('cloud-observer-v1',JSON.stringify({records:state.records,bound25:state.bound25,bound75:state.bound75}));storageOK=true}catch(e){storageOK=false;$('#storageNote').textContent='当前浏览器不能保存记录，请及时导出。'}}
+function rng(seed){let a=seed|0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}function lerp(a,b,t){return a+(b-a)*t}function smooth(a,b,x){x=clamp((x-a)/(b-a),0,1);return x*x*(3-2*x)}
+function makeNoise(seed){const r=rng(seed),size=256,arr=new Float32Array(size*size);for(let i=0;i<arr.length;i++)arr[i]=r();return (x,y)=>{let ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy;fx=fx*fx*(3-2*fx);fy=fy*fy*(3-2*fy);ix&=255;iy&=255;let i00=iy*size+ix,i10=iy*size+((ix+1)&255),i01=((iy+1)&255)*size+ix,i11=((iy+1)&255)*size+((ix+1)&255);return lerp(lerp(arr[i00],arr[i10],fx),lerp(arr[i01],arr[i11],fx),fy)}}
+// Each true footprint pixel is one equal-area sample. The mask is selected by rank,
+// so 25% and 75% are exactly 72,000 and 216,000 of the 288,000 sky samples.
+function createField(type,seed,w=W,h=H){
+ const noise=makeNoise(seed),r=rng(seed+19),scores=new Float32Array(w*h),owners=new Uint8Array(w*h),texture=new Float32Array(w*h),lights=new Float32Array(w*h);
+ const blobs=[];const cols=3,rows=3;
+ const layout=[[.12,.21],[.49,.18],[.85,.20],[.06,.55],[.37,.58],[.73,.54],[.22,.88],[.61,.87],[.96,.88]];
+ for(let j=0;j<9;j++){
+  const cx=(layout[j][0]+(r()-.5)*.10)*W,cy=(layout[j][1]+(r()-.5)*.13)*H;
+  const rx=49+r()*48,ry=28+r()*29,base=cy+ry*.50,bias=(r()-.5)*.35;
+  const puffs=[];
+  // Unequal cauliflower lobes rise from a broad, nearly level cloud base.
+  for(let k=0;k<7;k++){
+   const off=(k/6-.5)*rx*1.5, rr=ry*(.56+r()*.52);
+   const peak=(1-Math.abs(k/3-1))*(.45+r()*.30)*ry;
+   puffs.push({x:cx+off,y:base-rr*.62-peak,rx:rr*(.84+r()*.30),ry:rr});
+  }
+  blobs.push({cx,cy,rx,ry,base,puffs,bias});
+ }
+ const plumes=[];
+ for(let j=0;j<7;j++){plumes.push({cx:(.05+r()*.95)*W,cy:(.05+r()*.95)*H,len:125+r()*120,wide:21+r()*29,slope:-.15-r()*.22,bend:(r()-.5)*36,phase:r()*6.28});}
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+  const i=y*w+x,X=x*W/w,Y=y*H/h;
+  const n1=noise(X*.016,Y*.02),n2=noise(X*.043+17,Y*.054+31),n3=noise(X*.11+91,Y*.13+52),n4=noise(X*.26+14,Y*.28+44);
+  const tex=n1*.38+n2*.31+n3*.21+n4*.10;texture[i]=tex;
+  let best=-1e8,owner=0,light=0;
+  if(type==='cumulus'){
+   const warpX=(noise(X*.027+40,Y*.030+19)-.5)*11;
+   const warpY=(noise(X*.025+61,Y*.026+77)-.5)*8;
+   for(let b=0;b<blobs.length;b++){
+    const v=blobs[b];let val=-1e8,puffLight=.8,sumLight=0,sumWeight=0;
+    for(const p of v.puffs){
+     const dx=(X+warpX-p.x)/p.rx,dy=(Y+warpY-p.y)/p.ry,rr=Math.sqrt(dx*dx+dy*dy),d=1-rr;
+     const nz=Math.sqrt(Math.max(0,1-dx*dx-dy*dy));const weight=Math.exp(d*5);sumWeight+=weight;sumLight+=weight*clamp(.62-.20*dx-.35*dy+.29*nz,0,1);if(d>val)val=d;
+    }
+    puffLight=sumWeight>1e-15?sumLight/sumWeight:.6;
+    const body=1-Math.sqrt((X-v.cx)*(X-v.cx)/(v.rx*v.rx)+(Y-v.base+v.ry*.16)*(Y-v.base+v.ry*.16)/(v.ry*v.ry*.18));
+    const bodyMix=smooth(-.12,.24,body-val);puffLight=lerp(puffLight,.56+(noise(X*.02,Y*.03)-.5)*.2,bodyMix);val=Math.max(val,body);
+    const bottom=(v.base-Y)/v.ry+.18;
+    puffLight=lerp(puffLight,.45+.15*tex,smooth(-.12,.35,val-bottom));val=Math.min(bottom,val);
+    val+=v.bias;
+    if(val>best){best=val;owner=b;light=puffLight;}
+   }
+   scores[i]=best+(n1-.5)*.19+(n2-.5)*.18+(n3-.5)*.065+(n4-.5)*.018;
+  }else if(type==='stratus'){
+   const large=noise(X*.0033+12,Y*.007+4),sheet=noise(X*.008+12,Y*.018+7);
+   scores[i]=large*.75+sheet*.20+n2*.038+n3*.012;
+   owner=clamp(Math.floor(Y/H*3),0,2)*3+clamp(Math.floor(X/W*3),0,2);light=.4+(1-Y/H)*.2;
+  }else{
+   for(let b=0;b<plumes.length;b++){
+    const p=plumes[b],u=(X-p.cx)/p.len;
+    const center=p.cy+p.slope*(X-p.cx)+p.bend*u*u;
+    const width=p.wide*(.8+.22*Math.sin(u*2+p.phase));
+    const v=(Y-center)/width;
+    // Fine curved filaments, not flat blobs: adjacent strands follow a shared flow.
+    const bend=noise(X*.007+8,Y*.007+80);
+    const filament=Math.sin((v+u*.15+bend*.12)*42+p.phase);
+    const envelope=1-u*u-v*v;
+    const value=envelope + filament*(.20+.10*noise(X*.03+66,v*.7+22)) + (noise(X*.025+7,(Y-center)*.20+9)-.5)*.22;
+    if(value>best){best=value;owner=b;light=.98;}
+   }
+   scores[i]=best+(n3-.5)*.035;
+  }
+  owners[i]=owner;lights[i]=light;
+ }
+ const sorted=Array.from(scores,(v,i)=>i).sort((a,b)=>scores[b]-scores[a]);
+ return {scores,owners,texture,lights,sorted,w,h,type,seed};
+}
+function rasterField(field,percent,makeSprites=true){
+ const {w,h,scores,owners,texture,lights,sorted,type}=field,total=w*h,count=Math.round(total*percent/100),mask=new Uint8Array(total),image=new ImageData(w,h);
+ const cut=count>0?scores[sorted[count-1]]:1e8;
+ for(let k=0;k<count;k++)mask[sorted[k]]=1;
+ const info=Array.from({length:9},(_,id)=>({id,x0:w,y0:h,x1:0,y1:0,area:0}));
+ for(let i=0;i<total;i++)if(mask[i]){
+  let x=i%w,y=(i/w)|0,tex=texture[i],deep=scores[i]-cut,light=lights[i],v,alpha=255;
+  if(type==='cumulus'){
+   const deepShade=smooth(0,.42,deep),detail=(tex-.5)*32;
+   v=clamp(203+light*53+detail-deepShade*(1-light)*7,188,255);
+   alpha=Math.round(lerp(105,255,smooth(0,.09,deep)));
+   image.data[i*4]=v;image.data[i*4+1]=Math.min(255,v+3);image.data[i*4+2]=Math.min(255,v+7);
+  }else if(type==='stratus'){
+   v=clamp(197+tex*45+(1-y/h)*5,186,235);alpha=Math.round(lerp(217,255,smooth(0,.025,deep)));
+   image.data[i*4]=v;image.data[i*4+1]=v+3;image.data[i*4+2]=v+8;
+  }else{
+   v=clamp(247+tex*9,247,255);alpha=Math.round(lerp(58,222,smooth(0,.58,deep)));
+   image.data[i*4]=v;image.data[i*4+1]=v;image.data[i*4+2]=Math.min(255,v+2);
+  }
+  image.data[i*4+3]=alpha;
+  const b=info[owners[i]];b.area++;if(x<b.x0)b.x0=x;if(x>b.x1)b.x1=x;if(y<b.y0)b.y0=y;if(y>b.y1)b.y1=y;
+ }
+ const out=document.createElement('canvas');out.width=w;out.height=h;out.getContext('2d').putImageData(image,0,0);
+ const sprites=[];
+ if(makeSprites)for(const b of info)if(b.area){
+  const bw=b.x1-b.x0+1,bh=b.y1-b.y0+1,c=document.createElement('canvas');c.width=bw;c.height=bh;const d=new ImageData(bw,bh),pixelMask=new Uint8Array(bw*bh);
+  for(let y=b.y0;y<=b.y1;y++)for(let x=b.x0;x<=b.x1;x++){const k=y*w+x;if(mask[k]&&owners[k]===b.id){const j=(y-b.y0)*bw+(x-b.x0);pixelMask[j]=1;d.data.set(image.data.subarray(k*4,k*4+4),j*4)}}
+  c.getContext('2d').putImageData(d,0,0);sprites.push({id:b.id,canvas:c,mask:pixelMask,x:b.x0,y:b.y0,ox:b.x0,oy:b.y0,w:bw,h:bh,area:b.area,scale:1});
+ }
+ return {canvas:out,sprites,mask,count,image};
+}
+function makePacked(field,amount){const p=document.createElement('canvas');p.width=W;p.height=H;const g=p.getContext('2d'),im=g.createImageData(W,H),cut=W*amount/100;
+ for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(x*H+y<Math.round(W*H*amount/100)){let i=y*W+x;const tx=field.texture[i],v=state.type==='stratus'?195+tx*44:222+tx*28+Math.sin(y*.02)*4;im.data[i*4]=v;im.data[i*4+1]=Math.min(255,v+3);im.data[i*4+2]=Math.min(255,v+7);im.data[i*4+3]=255;}
+ g.putImageData(im,0,0);return p;}
+function drawBackground(g,w,h,opts={}){
+ const sx=(opts.sunX??state.sunX)*w,sy=(opts.sunY??state.sunY)*h;
+ const gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,'#247cc0');gr.addColorStop(.45,'#4da0db');gr.addColorStop(1,'#9ed3ed');g.fillStyle=gr;g.fillRect(0,0,w,h);
+ const haze=g.createRadialGradient(w*.48,h*1.2,0,w*.48,h*1.2,w*.95);haze.addColorStop(0,'#eff9fe23');haze.addColorStop(1,'#d0edff00');g.fillStyle=haze;g.fillRect(0,0,w,h);
+ if(opts.noSun)return;
+ const rad=Math.min(w,h)*.038;
+ const halo=g.createRadialGradient(sx,sy,rad*.4,sx,sy,rad*5.6);halo.addColorStop(0,'#fffbeaef');halo.addColorStop(.16,'#fff8d3bb');halo.addColorStop(.45,'#fff7d742');halo.addColorStop(1,'#fffbea00');g.fillStyle=halo;g.fillRect(sx-rad*5.6,sy-rad*5.6,rad*11.2,rad*11.2);
+ const disk=g.createRadialGradient(sx,sy,0,sx,sy,rad*1.25);disk.addColorStop(0,'#fffef4');disk.addColorStop(.6,'#fffdf0');disk.addColorStop(.86,'#fff7cf');disk.addColorStop(1,'#fff7cf00');g.fillStyle=disk;g.beginPath();g.arc(sx,sy,rad*1.25,0,Math.PI*2);g.fill();
+}
+function roundedRect(g,x,y,w,h,r){r=Math.min(r,w/2,h/2);g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
+function drawGrid(g,w,h){
+ g.save();g.lineWidth=Math.max(1.5,w/650);g.setLineDash([7,6]);
+ [1,2,3].forEach(n=>{let x=w*n/4;g.strokeStyle=n===2?'#ffffffb5':n===1?'#ffc95b':'#eaf5ff';g.beginPath();g.moveTo(x,0);g.lineTo(x,h);g.stroke();});g.setLineDash([]);
+ [1,3].forEach(n=>{let x=w*n/4,label=n===1?'1/4':'3/4',fw=Math.max(21,Math.min(30,w*.035)),rw=fw*2.35;g.font='700 '+fw+'px "Microsoft YaHei",sans-serif';let yy=Math.min(h*.79,h-51);g.fillStyle='#ffffffed';roundedRect(g,x-rw/2,yy,rw,fw+14,8);g.fill();g.fillStyle=n===1?'#9b6a18':'#3f6383';g.textAlign='center';g.textBaseline='middle';g.fillText(label,x,yy+(fw+14)/2)});
+ g.restore();
+}
+function drawTo(g,w,h,opts={}){
+ drawBackground(g,w,h,opts);g.save();g.scale(w/W,h/H);
+ const p=opts.original?0:state.animation;
+ if(opts.original){if(state.original)g.drawImage(state.original,0,0)}
+ else if(p<=0){for(const s of state.clouds){g.drawImage(s.canvas,s.x,s.y)}}
+ else if(p>=1){if(state.packed)g.drawImage(state.packed,0,0)}
+ else{
+  // The animation is explicitly a regrouping model. Endpoints share one exact
+  // projected area. Never recalculate cloud amount from overlapping animation frames.
+  const ease=p*p*(3-2*p);
+  for(const s of state.clouds){const sx=lerp(s.x,s.x*.20,ease),sy=lerp(s.y,s.y,ease);g.globalAlpha=1-ease;g.drawImage(s.canvas,sx,sy)}
+  g.globalAlpha=ease;if(state.packed)g.drawImage(state.packed,0,0);g.globalAlpha=1;
+ }
+ g.restore();if(!opts.original&&state.grid)drawGrid(g,w,h);
+ if(!opts.original&&state.sunTool&&state.arrangement==='natural'){
+  g.save();g.strokeStyle='#ffed99';g.lineWidth=2;g.setLineDash([5,4]);g.beginPath();g.arc(state.sunX*w,state.sunY*h,Math.min(w,h)*.071,0,Math.PI*2);g.stroke();g.restore();
+ }
+ if(!opts.original&&state.selected!==null&&!state.drag&&state.arrangement==='natural'){
+  const s=state.clouds.find(s=>s.id===state.selected);if(s){g.save();g.strokeStyle='#ffffffa0';g.lineWidth=1.3;g.setLineDash([4,5]);g.strokeRect(s.x/W*w,s.y/H*h,s.w/W*w,s.h/H*h);g.restore()}
+ }
+}
+function render(){currentRAF=0;if(state.mode==='gallery')return;drawTo(ctx,canvas.width,canvas.height)}
+function requestRender(){if(!currentRAF)currentRAF=requestAnimationFrame(render)}
+function resize(){const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);if(rect.width<1||rect.height<1)return;canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);requestRender()}
+function weatherOf(p=state.amount){if(p<25||(p===25&&state.bound25==='sunny'))return'sunny';if(p>75||(p===75&&state.bound75==='overcast'))return'overcast';return'cloudy'}
+function fraction(p=state.amount){if(p===0)return'0';if(p===100)return'全部';if(p===25)return'1/4';if(p===50)return'1/2';if(p===75)return'3/4';if(p===10)return'1/10';if(p===20)return'1/5';if(p===40)return'2/5';if(p===60)return'3/5';if(p===80)return'4/5';if(p===90)return'9/10';return p+'%'}
+function reason(p=state.amount){const w=weatherOf(p);if(p===0)return'没有云遮盖天空，记录为晴。';if(p===100)return'整个天空都被云遮住，超过 3/4。';if(p===25)return'刚好占 1/4（25%），记录为'+weatherNames[w]+'。';if(p===75)return'刚好占 3/4（75%），记录为'+weatherNames[w]+'。';if(w==='sunny')return'少于 1/4 片天空。';if(w==='overcast')return'超过 3/4 片天空。';return'超过 1/4，且少于 3/4。'}
+function answerVisible(){return state.mode!=='quiz'||state.revealed}
+function updateRules(){
+ $('#ruleSunny').textContent=state.bound25==='sunny'?'不超过 1/4':'少于 1/4';
+ $('#ruleCloudy').textContent=(state.bound25==='sunny'?'超过':'不少于')+' 1/4，'+(state.bound75==='cloudy'?'不超过':'少于')+' 3/4';
+ $('#ruleOvercast').textContent=state.bound75==='cloudy'?'超过 3/4':'不少于 3/4';
+ $('#boundaryNote').textContent='刚好 1/4 记为'+weatherNames[state.bound25]+'；刚好 3/4 记为'+weatherNames[state.bound75]+'。';
+ $('#bound25').value=state.bound25;$('#bound75').value=state.bound75;
+}
+function updateUI(){
+ const visible=answerVisible(),w=weatherOf();
+ $$('.tabs button').forEach(b=>{const a=b.dataset.mode===state.mode;b.classList.toggle('active',a);b.setAttribute('aria-pressed',a)});
+ $('#workspace').classList.toggle('hidden',state.mode==='gallery');$('#gallery').classList.toggle('hidden',state.mode!=='gallery');
+ $('#exploreControls').classList.toggle('hidden',state.mode!=='explore');$('#quizControls').classList.toggle('hidden',state.mode!=='quiz');
+ $$('.type-option').forEach(b=>{const a=b.dataset.type===state.type;b.classList.toggle('active',a);b.setAttribute('aria-pressed',a)});
+ $('#typeExplain').textContent=typeNotes[state.type];$('#pctValue').textContent=state.amount;$('#amountRange').value=state.amount;$('#amountRange').setAttribute('aria-valuetext',state.amount+'%，'+fraction()+'片天空');
+ $$('.presets button').forEach(b=>b.classList.toggle('active',+b.dataset.amount===state.amount));
+ $('#minusBtn').disabled=state.amount===0;$('#plusBtn').disabled=state.amount===100;
+ $('#meterTitle').textContent=state.moved||state.animation>0?'原天空云量':'云占天空';$('#meterReadout').textContent=visible?fraction():'？';$('#meterDesc').textContent=visible?(state.amount===25?'四份中的一份 · 25%':state.amount===75?'四份中的三份 · 75%':state.amount===50?'四份中的两份 · 50%':'看面积，不数云朵'):'先估一估，再作判断';
+ $('#scaleFill').style.width=visible?state.amount+'%':'0%';$('#scaleFill').style.opacity=visible?'1':'0';
+ $$('.rule').forEach(el=>el.classList.toggle('active',visible&&el.dataset.weather===w));
+ $('#resultCard').className='result '+w;$('#resultCard').classList.toggle('hidden',!visible||state.mode==='quiz');
+ $('#weatherIcon').innerHTML=weatherSVG(w);$('#weatherName').textContent=weatherNames[w];$('#resultReason').textContent=reason();$('#resultLabel').textContent=state.mode==='quiz'?'核对这次判断':'这次模拟观察';
+ $('#saveBtn').disabled=!visible||busy;$('#gatherBtn').disabled=state.amount===0||busy||state.arrangement==='animating';$('#scatterBtn').disabled=busy;
+ $('#gridBtn').setAttribute('aria-pressed',state.grid);$('#sunBtn').setAttribute('aria-pressed',state.sunTool);$('#sunBtn').style.background=state.sunTool?'#fff0b9':'#fffffff0';$('#sunBtn').disabled=state.animation>0;
+ $('#gatherText').textContent=state.arrangement==='gathered'?'已归拢到左侧':'归拢到左侧';
+ $('#gatherBtn').classList.toggle('soft',state.arrangement==='gathered');
+ $('#skyCaption').innerHTML=state.arrangement==='gathered'?'<strong>全部归拢到左侧</strong> · 与 1/4、3/4 比一比':state.arrangement==='animating'?'<strong>正在归拢</strong> · 面积不增不减':state.sunTool?'<strong>拖动太阳</strong> · 云量会改变吗？':'<strong>看整片天空</strong>，云遮住了多少？';
+ $('#dragBanner').classList.toggle('hidden',!state.moved||state.animation>0);$('#sceneLabel').textContent=state.animation>0?'等面积示意 · 云形规整，原面积不变':state.moved?'移动估测 · 读数按原天空计算':'模拟天空 · 可拖动云朵';
+ $('#sceneCount').textContent=state.arrangement==='gathered'?'灰白区域＝原来云遮住的面积':'整幅画面代表整片天空';
+ $('#recordCount').textContent=state.records.length;
+ updateRules();
+}
+function rebuild(){
+ const raster=rasterField(state.field,state.amount);state.original=raster.canvas;state.clouds=raster.sprites;state.mask=raster.mask;state.coveredPixels=raster.count;state.packed=makePacked(state.field,state.amount);state.arrangement='natural';state.animation=0;state.moved=false;state.drag=null;state.selected=null;state.savedKey=null;state.sunTool=false;state.generation++;
+ busy=false;$('#loading').classList.remove('show');updateUI();requestRender();
+}
+function generate(newField=true){
+ if(state.arrangement==='animating')state.generation++;
+ clearTimeout(generateTimer);busy=true;$('#loading').classList.add('show');updateUI();
+ generateTimer=setTimeout(()=>{try{if(newField||!state.field||state.field.type!==state.type||state.field.seed!==state.seed)state.field=createField(state.type,state.seed);rebuild()}catch(e){busy=false;$('#loading').classList.remove('show');toast('生成天空时出现问题，请重新打开本文件。');console.error(e)}},25);
+}
+function setAmount(p){if(state.mode!=='explore')return;state.amount=clamp(Math.round(p),0,100);generate(false)}
+function restore(){state.generation++;state.clouds.forEach(s=>{s.x=s.ox;s.y=s.oy});state.arrangement='natural';state.animation=0;state.moved=false;state.selected=null;state.drag=null;updateUI();requestRender()}
+function gather(){if(busy||state.amount===0)return;if(state.arrangement==='gathered'){toast('已按原面积铺到左侧；点击“恢复天空”可重新观察。');return}if(state.arrangement==='animating')return;
+ state.sunTool=false;state.grid=true;state.arrangement='animating';state.selected=null;const generation=++state.generation,start=performance.now(),dur=reduceMotion?1:1050;updateUI();
+ function step(now){if(generation!==state.generation)return;state.animation=clamp((now-start)/dur,0,1);requestRender();if(state.animation<1)requestAnimationFrame(step);else{state.arrangement='gathered';updateUI();requestRender()}}
+ requestAnimationFrame(step);
+}
+function resetQuiz(){state.revealed=false;state.answered=false;$('#quizFeedback').className='quiz-feedback';$('#quizFeedback').textContent='先看整片天空，不只看太阳有没有露出来。';$$('.answer').forEach(b=>{b.classList.remove('correct','wrong');b.querySelector('.answer-mark').textContent='';b.disabled=false});$('#revealBtn').disabled=false;$('#successBurst').classList.remove('show')}
+function randomScene(quiz=state.mode==='quiz'){
+ const random=rng((Date.now()^state.seed)>>>0);state.seed=(random()*1e9)|0;const types=['cumulus','stratus','cirrus'];state.type=types[Math.floor(random()*3)];
+ // Include explicit boundary tasks, but avoid only-near-boundary samples.
+ const presets=[0,10,18,24,25,26,38,50,62,74,75,76,86,93,100];let next=presets[Math.floor(random()*presets.length)];if(next===state.amount)next=presets[(presets.indexOf(next)+3)%presets.length];state.amount=next;state.sunX=.65+random()*.23;state.sunY=.22+random()*.3;resetQuiz();generate(true);
+}
+let galleryReady=false;
+function fillGallery(){if(galleryReady)return;galleryReady=true;
+ const types=['cumulus','stratus','cirrus'];types.forEach((type,i)=>setTimeout(()=>{
+  const f=createField(type,27319+i*1583,480,300),p=type==='stratus'?97:type==='cirrus'?27:35,r=rasterField(f,p,false);
+  for(const id of ['#thumb-'+type,'#gallery-'+type]){const c=$(id),g=c.getContext('2d');drawBackground(g,c.width,c.height,{sunX:.83,sunY:.2,noSun:type==='stratus'});g.drawImage(r.canvas,0,0,c.width,c.height)}
+ },i*35+20));
+}
+function switchMode(mode){if(state.mode===mode)return;state.mode=mode;if(mode==='quiz'){state.grid=false;resetQuiz();randomScene(true)}else{updateUI();if(mode==='gallery')fillGallery();else{resize();requestRender()}}}
+function answer(choice){if(busy||state.answered)return;const correct=choice===weatherOf();$$('.answer').forEach(b=>{b.classList.remove('wrong');b.querySelector('.answer-mark').textContent=''});const b=$('[data-answer="'+choice+'"]');
+ if(correct){state.answered=true;state.revealed=true;b.classList.add('correct');b.querySelector('.answer-mark').textContent='✓';$('#quizFeedback').className='quiz-feedback good';$('#quizFeedback').innerHTML='<strong>✓ 判断正确</strong>'+reason();$$('.answer').forEach(el=>el.disabled=true);$('#revealBtn').disabled=true;$('#successBurst').classList.add('show');setTimeout(()=>$('#successBurst').classList.remove('show'),1400);sound('good')}
+ else{b.classList.add('wrong');b.querySelector('.answer-mark').textContent='×';$('#quizFeedback').className='quiz-feedback bad';$('#quizFeedback').innerHTML='<strong>再看一看</strong>把云归拢到左侧，和两条界线比较。';sound('bad')}
+ updateUI();
+}
+function reveal(){if(busy)return;state.revealed=true;state.answered=true;const w=weatherOf();$$('.answer').forEach(b=>{b.classList.remove('wrong');b.disabled=true;if(b.dataset.answer===w){b.classList.add('correct');b.querySelector('.answer-mark').textContent='✓'}});$('#quizFeedback').className='quiz-feedback good';$('#quizFeedback').innerHTML='<strong>记录为'+weatherNames[w]+'</strong>'+reason();$('#revealBtn').disabled=true;updateUI()}
+function sound(type){if(!state.sound)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();audioCtx.resume();const notes=type==='good'?[523.25,659.25,783.99]:[330,247];notes.forEach((f,i)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=audioCtx.currentTime+i*.12;o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.11,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+.28)})}catch(e){state.sound=false;$('#soundBtn').innerHTML='<span class="icon">'+icon('volumeOff')+'</span>';toast('此浏览器暂不支持音效，其他功能不受影响。')}}
+function xy(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H}}
+function pick(x,y){for(let i=state.clouds.length-1;i>=0;i--){const s=state.clouds[i],lx=Math.floor(x-s.x),ly=Math.floor(y-s.y);if(lx>=0&&lx<s.w&&ly>=0&&ly<s.h&&s.mask[ly*s.w+lx])return s}return null}
+canvas.addEventListener('pointerdown',e=>{
+ if(busy||state.arrangement!=='natural')return;e.preventDefault();canvas.focus({preventScroll:true});const p=xy(e);
+ if(state.sunTool){state.drag={kind:'sun',id:e.pointerId};state.sunX=clamp(p.x/W,.025,.975);state.sunY=clamp(p.y/H,.04,.94);canvas.setPointerCapture(e.pointerId);requestRender();return}
+ const s=pick(p.x,p.y);if(!s)return;state.selected=s.id;state.drag={kind:'cloud',s,id:e.pointerId,dx:p.x-s.x,dy:p.y-s.y,startX:p.x,startY:p.y};state.clouds=state.clouds.filter(c=>c!==s).concat(s);canvas.setPointerCapture(e.pointerId);requestRender();
+});
+canvas.addEventListener('pointermove',e=>{
+ const p=xy(e);if(!state.drag){canvas.style.cursor=state.sunTool?'crosshair':state.arrangement==='natural'&&pick(p.x,p.y)?'grab':'default';return}if(state.drag.id!==e.pointerId)return;e.preventDefault();
+ if(state.drag.kind==='sun'){state.sunX=clamp(p.x/W,.025,.975);state.sunY=clamp(p.y/H,.04,.94);state.savedKey=null;requestRender();return}
+ const d=state.drag,s=d.s;s.x=clamp(p.x-d.dx,0,W-s.w);s.y=clamp(p.y-d.dy,0,H-s.h);
+ if(Math.abs(s.x-s.ox)>1||Math.abs(s.y-s.oy)>1){state.moved=true;updateUI()}requestRender();
+});
+function finishDrag(e){if(!state.drag||state.drag.id!==e.pointerId)return;state.drag=null;try{canvas.releasePointerCapture(e.pointerId)}catch(_){}requestRender()}
+canvas.addEventListener('pointerup',finishDrag);canvas.addEventListener('pointercancel',finishDrag);
+canvas.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)||state.arrangement!=='natural')return;e.preventDefault();const s=state.clouds.find(c=>c.id===state.selected)||state.clouds[0];if(!s)return;state.selected=s.id;const step=e.shiftKey?15:5;s.x=clamp(s.x+(e.key==='ArrowRight'?step:e.key==='ArrowLeft'?-step:0),0,W-s.w);s.y=clamp(s.y+(e.key==='ArrowDown'?step:e.key==='ArrowUp'?-step:0),0,H-s.h);state.moved=true;updateUI();requestRender()});
+function toast(text){clearTimeout(toastTimer);$('#toast').textContent=text;$('#toast').classList.add('show');toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2800)}
+function originalDataURL(width=500,height=280){const c=document.createElement('canvas');c.width=width;c.height=height;drawTo(c.getContext('2d'),width,height,{original:true});return c.toDataURL('image/jpeg',.82)}
+function saveRecord(){if(busy||!answerVisible())return;const key=[state.seed,state.type,state.amount,state.bound25,state.bound75,state.sunX.toFixed(3),state.sunY.toFixed(3)].join(':');if(state.savedKey===key){toast('这片天空已记录；可换一片天空继续观察。');return}
+ const record={id:Date.now()+Math.floor(Math.random()*1000),time:new Date().toLocaleString('zh-CN',{hour12:false}),type:state.type,amount:state.amount,fraction:fraction(),weather:weatherOf(),reason:reason(),img:originalDataURL(),bound25:state.bound25,bound75:state.bound75,model:'课堂模拟天空（移动前）'};
+ state.records.push(record);if(state.records.length>40){state.records.shift();toast('已保存；仅保留最近 40 条，请及时导出。')}else toast('已记录：'+(record.amount===0?'无云':typeNames[record.type])+' · '+record.fraction+' · '+weatherNames[record.weather]);state.savedKey=key;persist();updateUI();sound('good');
+}
+function escapeHTML(text){return String(text).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]))}
+function miniFractionSvg(p){const x=p/100*100;return '<svg width="100" height="28" viewBox="0 0 100 28" aria-label="'+p+'%"><rect x="0" y="0" width="100" height="28" rx="3" fill="#b5d8f0"/><rect x="0" y="0" width="'+x+'" height="28" fill="#899fb2"/><path d="M25 0v28M50 0v28M75 0v28" stroke="#fff" stroke-width="1.5"/></svg>'}
+function recordRows(forPrint=false){return state.records.map((r,i)=>'<tr><td>'+String(i+1).padStart(2,'0')+'<br><small>模拟观察</small></td><td><img class="thumb" src="'+r.img+'" alt="第'+(i+1)+'次原天空简图"></td><td>'+(r.amount===0?'无云':typeNames[r.type])+'</td><td><span class="record-main">'+escapeHTML(r.fraction)+'</span><small>'+r.amount+'%</small>'+(forPrint?'':'<br>'+miniFractionSvg(r.amount))+'</td><td><span class="record-main">'+weatherNames[r.weather]+'</span><small>'+escapeHTML(r.reason)+'</small></td>'+(!forPrint?'<td><button class="del" data-delete="'+r.id+'" aria-label="删除第'+(i+1)+'条记录"><span class="icon">'+icon('trash')+'</span></button></td>':'')+'</tr>').join('')}
+function updateRecords(){const empty=!state.records.length;$('#recordsContent').innerHTML=empty?'<div class="record-empty">还没有观察记录。<br><br>回到天空，点击“记入观察记录”。</div>':'<table class="record-table"><thead><tr><th>次序</th><th>原天空简图</th><th>云形</th><th>云量</th><th>天气</th><th></th></tr></thead><tbody>'+recordRows()+'</tbody></table>';
+ ['#exportPngBtn','#exportCsvBtn','#printBtn'].forEach(s=>$(s).disabled=empty);if(!storageOK)$('#storageNote').textContent='当前浏览器不能保存记录，请及时导出。';
+}
+function openModal(id){modalFocus=document.activeElement;if(id==='recordsModal')updateRecords();$('#'+id).classList.remove('hidden');$('#'+id+' button').focus()}
+function closeModal(id){$('#'+id).classList.add('hidden');if(modalFocus)modalFocus.focus({preventScroll:true})}
+function download(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),20000)}
+function exportCSV(){if(!state.records.length)return;const heads=['观察次数','记录时间','记录性质','云的类型','云量比例','云量百分比','天气','判断依据','1/4临界归属','3/4临界归属'];const rows=state.records.map((r,i)=>[i+1,r.time,r.model,r.amount===0?'无云':typeNames[r.type],r.fraction,r.amount+'%',weatherNames[r.weather],r.reason,weatherNames[r.bound25],weatherNames[r.bound75]]);const csv='\ufeff'+[heads,...rows].map(row=>row.map(s=>'"'+String(s).replace(/"/g,'""')+'"').join(',')).join('\r\n');download(new Blob([csv],{type:'text/csv;charset=utf-8'}),'观察云_模拟观察记录.csv')}
+async function exportPNG(){if(!state.records.length)return;const r=state.records.at(-1),c=document.createElement('canvas');c.width=1500;c.height=1060;const g=c.getContext('2d');g.fillStyle='#f3f7fb';g.fillRect(0,0,c.width,c.height);g.fillStyle='#17374f';g.font='700 56px "Microsoft YaHei",sans-serif';g.fillText('观察云 · 我的观察记录',70,99);g.fillStyle='#657a8c';g.font='25px "Microsoft YaHei",sans-serif';g.fillText('第 '+state.records.length+' 次模拟观察  |  '+r.time,73,149);
+ const img=new Image();img.onload=()=>{
+  g.save();roundedRect(g,70,192,1360,470,20);g.clip();g.drawImage(img,70,192,1360,470);g.restore();
+  const cols=[70,525,980],labels=['云的类型','云占天空','记录天气'],vals=[r.amount===0?'无云':typeNames[r.type],r.fraction+(r.amount!==100?'（'+r.amount+'%）':''),weatherNames[r.weather]];
+  for(let i=0;i<3;i++){g.fillStyle='white';roundedRect(g,cols[i],698,425,158,16);g.fill();g.fillStyle='#667f92';g.font='25px "Microsoft YaHei",sans-serif';g.fillText(labels[i],cols[i]+26,738);g.fillStyle='#1f5f98';g.font='700 43px "Microsoft YaHei",sans-serif';g.fillText(vals[i],cols[i]+26,805)}
+  g.fillStyle='#254860';g.font='30px "Microsoft YaHei",sans-serif';g.fillText('判断依据：'+r.reason,74,914);g.fillStyle='#6c7c8b';g.font='22px "Microsoft YaHei",sans-serif';g.fillText('1/4＝25%，3/4＝75%。云量按移动前的原天空计算。',74,969);g.fillText('本图为课堂模拟记录，不代表当天真实天气。',74,1007);c.toBlob(blob=>{if(blob)download(blob,'观察云_第'+state.records.length+'次模拟观察.png');else toast('导出失败，请使用打印记录。')},'image/png');};img.onerror=()=>toast('记录图加载失败，请导出表格。');img.src=r.img;
+}
+function printRecords(){if(!state.records.length)return;$('#printArea').innerHTML='<h1>观察云 · 模拟观察记录</h1><p>班级：________________　姓名：________________　日期：________________<br>把整片天空平均分为四份；一份是 1/4，三份是 3/4。以下为课堂模拟记录，不是当天真实天气。</p><table><thead><tr><th>次数</th><th>原天空简图</th><th>云形</th><th>云量</th><th>天气与依据</th></tr></thead><tbody>'+recordRows(true)+'</tbody></table><p>云量以移动前的天空为准；自由拖动的重叠部分不用于重新判断。临界值按每次记录时的设置。</p>';setTimeout(()=>window.print(),80)}
+$$('[data-mode]').forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.mode)));
+$$('[data-type]').forEach(b=>b.addEventListener('click',()=>{if(state.type!==b.dataset.type){state.type=b.dataset.type;generate(true)}}));
+$$('[data-use]').forEach(b=>b.addEventListener('click',()=>{state.type=b.dataset.use;state.amount=state.type==='stratus'?88:state.type==='cirrus'?25:35;state.mode='explore';generate(true);updateUI();resize()}));
+$$('[data-amount]').forEach(b=>b.addEventListener('click',()=>setAmount(+b.dataset.amount)));
+$('#amountRange').addEventListener('input',e=>setAmount(+e.target.value));$('#minusBtn').addEventListener('click',()=>setAmount(state.amount-1));$('#plusBtn').addEventListener('click',()=>setAmount(state.amount+1));$('#randomBtn').addEventListener('click',()=>randomScene());$('#nextBtn').addEventListener('click',()=>randomScene(true));
+$('#gatherBtn').addEventListener('click',gather);$('#scatterBtn').addEventListener('click',restore);$('#gridBtn').addEventListener('click',()=>{state.grid=!state.grid;updateUI();requestRender()});
+$('#sunBtn').addEventListener('click',()=>{state.sunTool=!state.sunTool;state.selected=null;updateUI();requestRender();if(state.sunTool)toast('在天空中按住并拖动，改变太阳的位置。')});
+$$('[data-answer]').forEach(b=>b.addEventListener('click',()=>answer(b.dataset.answer)));$('#revealBtn').addEventListener('click',reveal);$('#saveBtn').addEventListener('click',saveRecord);
+$('#recordsBtn').addEventListener('click',()=>openModal('recordsModal'));$('#helpBtn').addEventListener('click',()=>openModal('helpModal'));
+$$('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.dataset.close)));
+$$('.dialog-backdrop').forEach(e=>e.addEventListener('pointerdown',ev=>{if(ev.target===e)closeModal(e.id)}));
+$('#recordsContent').addEventListener('click',e=>{const b=e.target.closest('[data-delete]');if(!b)return;state.records=state.records.filter(r=>r.id!==+b.dataset.delete);state.savedKey=null;persist();updateRecords();updateUI();toast('已删除这条模拟记录。')});
+$('#exportCsvBtn').addEventListener('click',exportCSV);$('#exportPngBtn').addEventListener('click',exportPNG);$('#printBtn').addEventListener('click',printRecords);
+$('#bound25').addEventListener('change',e=>{state.bound25=e.target.value;state.savedKey=null;if(state.mode==='quiz')resetQuiz();persist();updateUI()});$('#bound75').addEventListener('change',e=>{state.bound75=e.target.value;state.savedKey=null;if(state.mode==='quiz')resetQuiz();persist();updateUI()});
+$('#soundBtn').addEventListener('click',()=>{state.sound=!state.sound;$('#soundBtn').innerHTML='<span class="icon">'+icon(state.sound?'volume':'volumeOff')+'</span>';$('#soundBtn').setAttribute('aria-pressed',state.sound);$('#soundBtn').setAttribute('aria-label',state.sound?'关闭答题音效':'开启答题音效');$('#soundBtn').title=state.sound?'关闭答题音效':'开启答题音效';if(state.sound)sound('good')});
+$('#fullBtn').addEventListener('click',async()=>{try{if(document.fullscreenElement){await document.exitFullscreen()}else if(document.documentElement.requestFullscreen){await document.documentElement.requestFullscreen()}else if(document.documentElement.webkitRequestFullscreen){document.documentElement.webkitRequestFullscreen()}else toast('此浏览器不支持网页全屏，请横屏查看。')}catch(e){toast('浏览器未允许全屏，请使用浏览器的全屏菜单。')}});
+window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(resize,80)});document.addEventListener('fullscreenchange',()=>setTimeout(resize,80));
+if('ResizeObserver'in window)new ResizeObserver(()=>resize()).observe($('#canvasWrap'));
+document.addEventListener('keydown',e=>{
+ const modal=$('.dialog-backdrop:not(.hidden)');if(modal){if(e.key==='Escape'){closeModal(modal.id);e.preventDefault()}if(e.key==='Tab'){const focusables=Array.from(modal.querySelectorAll('button:not(:disabled),select,a[href],input')),first=focusables[0],last=focusables.at(-1);if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault()}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault()}}return}
+ if(/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;
+ const k=e.key.toLowerCase();if(k==='g')gather();if(k==='r')restore();if(k==='q'){$('#gridBtn').click()}if(k==='n'&&state.mode!=='gallery')randomScene();
+});
+// A read-only inspection hook supports offline classroom debugging and QA.
+Object.defineProperty(window,'cloudObserver',{value:{getSnapshot:()=>({type:state.type,amount:state.amount,weather:weatherOf(),coveredPixels:state.coveredPixels,totalPixels:N,cloudCount:state.clouds.length,arrangement:state.arrangement,mode:state.mode,revealed:state.revealed,moved:state.moved,records:state.records.length,grid:state.grid,busy,sunX:state.sunX,sunY:state.sunY}),getCloudPositions:()=>state.clouds.map(s=>({id:s.id,x:s.x,y:s.y,w:s.w,h:s.h,ox:s.ox,oy:s.oy,area:s.area})),getMaskCount:()=>state.mask?state.mask.reduce((a,b)=>a+b,0):0,getCloudPickPoints:()=>state.clouds.map(s=>{let idx=s.mask.findIndex((v,i)=>v&&i%s.w>s.w*.35&&i%s.w<s.w*.65&&Math.floor(i/s.w)>s.h*.35&&Math.floor(i/s.w)<s.h*.65);if(idx<0)idx=s.mask.findIndex(v=>v);return {id:s.id,x:s.x+idx%s.w,y:s.y+Math.floor(idx/s.w)}})}});
+updateUI();resize();generate(true);setTimeout(fillGallery,450);
+})();
+</script>
+</body>
+</html>
