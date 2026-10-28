@@ -1208,10 +1208,20 @@
         nextSeg = segmentColor(nextFrame, seed);
         const predicted = flow ? flow.apply(prevComp.x, prevComp.y) : { x: prevComp.x + predictedDX, y: prevComp.y + predictedDY };
         const candidates = [];
+        let mergeDetected = false;
         for (const c of nextSeg.components) {
           const areaRatio = c.area / prevComp.area, totalRatio = c.area / origComp.area;
           const displacement = hypot(c.x - prevComp.x, c.y - prevComp.y);
           if (areaRatio < 0.56 || areaRatio > 1.8 || totalRatio < 0.28 || totalRatio > 3.4 || displacement > radius || c.border && !prevComp.border) continue;
+          // A two-to-one color association is not a larger version of our target.
+          // If a previous, separate same-color object is now inside this support,
+          // stop before its pixels can pull the target centroid or update a template.
+          const merged = prevSeg.components.some(other => other.id !== prevComp.id
+            && other.area >= Math.max(12, prevComp.area * 0.10) && other.width >= 3 && other.height >= 3
+            && (other.x < prevComp.minX - 2 || other.x > prevComp.maxX + 2 || other.y < prevComp.minY - 2 || other.y > prevComp.maxY + 2)
+            && other.x >= c.minX - 1 && other.x <= c.maxX + 1 && other.y >= c.minY - 1 && other.y <= c.maxY + 1
+            && member(nextSeg, c.id, other.x, other.y));
+          if (merged) { mergeDetected = true; continue; }
           if (flow && hypot(c.x - predicted.x, c.y - predicted.y) > Math.max(4.5, Math.sqrt(c.area) * 0.24)) continue;
           const newScale = Math.sqrt(totalRatio), stepScale = newScale / scale;
           let measuredAngle = angle;
@@ -1226,7 +1236,15 @@
           for (const a of angles) {
             const start = colorScore(original, nextFrame, c, nextSeg, newScale, a);
             const last = colorScore(recent, nextFrame, c, nextSeg, newScale / recentScale, a - recentAngle);
-            if (start.support < 0.63 || last.support < 0.68 || original.textured && start.corr < 0.28 || recent.textured && last.corr < 0.45) continue;
+            if (start.support < 0.76 || last.support < 0.68 || original.textured && start.corr < 0.28 || recent.textured && last.corr < 0.45) continue;
+            // A shrinking identity silhouette and weak original texture cannot
+            // jointly validate each other, even if a recent template looks good.
+            if (original.textured && start.support < 0.80 && start.corr < 0.82) continue;
+            // At lower frame rates, contact with a same-color object can skip
+            // the separate-component stage. Abrupt color-area growth together
+            // with a weakened original silhouette needs measured scale support.
+            if (areaRatio > 1.20 && start.support < 0.80
+                && (!flow || Math.abs(flow.scale * flow.scale - areaRatio) > 0.10)) continue;
             const appearance = 0.56 * start.score + 0.44 * last.score;
             const movementPenalty = Math.min(0.13, hypot(c.x - predicted.x, c.y - predicted.y) / radius * 0.13);
             const areaPenalty = Math.min(0.08, Math.abs(Math.log(stepScale)) * 0.16);
@@ -1238,7 +1256,7 @@
         }
         candidates.sort((a, b) => b.score - a.score);
         const best = candidates[0];
-        if (!best || best.score < 0.69) return fail('目标颜色或外观不再吻合，可能被遮挡；请在此处手动补点。', nextT);
+        if (!best || best.score < 0.69) return fail(mergeDetected ? '目标与同色物体接触，身份不清；请在此处手动确认。' : '目标颜色或外观不再吻合，可能被遮挡；请在此处手动补点。', nextT);
         if (candidates[1] && best.score - candidates[1].score < 0.075 && candidates[1].appearance > 0.70) return fail('附近存在难以区分的同色物体，请手动确认目标。', nextT);
         nextComp = best.comp; nextScale = best.scale; nextAngle = best.angle; quality = best.score;
         // A fresh, backward appearance comparison must return to the prior identity.
@@ -1260,7 +1278,7 @@
           if (hypot(nx - fp.x, ny - fp.y) > Math.max(4, Math.sqrt(nextComp.area) * 0.22)) return fail('颜色位置与局部纹理运动不一致，请手动确认。', nextT);
         }
         if (!member(nextSeg, nextComp.id, nx, ny) && !member(nextSeg, nextComp.id, nx - 1, ny) && !member(nextSeg, nextComp.id, nx + 1, ny) && !member(nextSeg, nextComp.id, nx, ny - 1) && !member(nextSeg, nextComp.id, nx, ny + 1)) return fail('原来标记的位置已离开可见色块，请重新确认。', nextT);
-        if (quality > 0.82 && steps % 3 === 2) { recent = backwards; recentScale = nextScale; recentAngle = nextAngle; }
+        if (quality > 0.82 && steps % 3 === 2 && (!original.textured || backwards.textured)) { recent = backwards; recentScale = nextScale; recentAngle = nextAngle; }
       } else {
         const predicted = flow ? flow.apply(x, y) : { x: x + predictedDX, y: y + predictedDY };
         const best = templateSearch(nextFrame, recent, predicted.x, predicted.y, flow ? Math.min(radius, 7) : radius, scale / recentScale, angle - recentAngle);
@@ -1567,7 +1585,7 @@
       progress(.55, '分离运动主体'); await pause();
       if (options.subject && mode === 'foreground') await followSubject(options, records, anchor, background, foreground, tracker, vision, stats, progress);
       const output = new Uint8ClampedArray(background.data);
-      const opacity = clamp(options.opacity === undefined ? .95 : Number(options.opacity), .2, 1);
+      const opacity = clamp(options.opacity === undefined ? .95 : Number(options.opacity), .15, 1);
       if (!Number.isFinite(opacity)) throw failure('INVALID_OPACITY', '叠影清晰度不正确。');
       let previous = null, foregroundPixels = 0;
       const observations = [];
@@ -1677,10 +1695,126 @@
     };
   }
 
+  // Count real encoded video samples, not drawImage/requestFrame calls. These
+  // parsers intentionally cover the MP4/WebM containers produced by Recorder;
+  // unsupported or malformed structures return null instead of inventing fps.
+  async function inspectVideo(blob) {
+    if (!blob || typeof blob.arrayBuffer !== 'function') return null;
+    // Classroom clips are short. Do not duplicate an arbitrarily large upload
+    // into a second contiguous allocation on a memory-constrained phone.
+    if (blob.size > 128 * 1024 * 1024) return null;
+    const bytes = new Uint8Array(await blob.arrayBuffer());
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    const ascii = (p, n) => String.fromCharCode(...bytes.subarray(p, p + n));
+    const u32 = p => p >= 0 && p + 4 <= bytes.length ? view.getUint32(p) : null;
+    function boxes(start, end) {
+      const result = [];
+      for (let p = start; p + 8 <= end;) {
+        let length = u32(p), header = 8;
+        if (length === 1) {
+          if (p + 16 > end) return null;
+          length = u32(p + 8) * 4294967296 + u32(p + 12); header = 16;
+        } else if (length === 0) length = end - p;
+        if (!Number.isSafeInteger(length) || length < header || p + length > end) return null;
+        result.push({ type: ascii(p + 4, 4), start: p + header, end: p + length }); p += length;
+      }
+      return result;
+    }
+    if (bytes.length >= 8 && ['ftyp', 'moov', 'moof', 'free'].includes(ascii(4, 4))) {
+      const top = boxes(0, bytes.length);
+      if (!top) return null;
+      const child = (box, type) => (boxes(box.start, box.end) || []).find(b => b.type === type);
+      const videoTracks = new Set(); let frames = 0;
+      for (const moov of top.filter(box => box.type === 'moov')) {
+        for (const trak of (boxes(moov.start, moov.end) || []).filter(box => box.type === 'trak')) {
+          const mdia = child(trak, 'mdia'), tkhd = child(trak, 'tkhd');
+          const hdlr = mdia && child(mdia, 'hdlr');
+          if (!hdlr || hdlr.start + 12 > hdlr.end || ascii(hdlr.start + 8, 4) !== 'vide' || !tkhd) continue;
+          if (videoTracks.size) continue; // The default video track, not all alternative views.
+          const idOffset = tkhd.start + (bytes[tkhd.start] === 1 ? 20 : 12);
+          if (idOffset + 4 > tkhd.end) return null;
+          videoTracks.add(u32(idOffset));
+          const minf = child(mdia, 'minf'), stbl = minf && child(minf, 'stbl');
+          const samples = stbl && (child(stbl, 'stsz') || child(stbl, 'stz2'));
+          if (samples) {
+            if (samples.start + 12 > samples.end) return null;
+            frames += u32(samples.start + 8);
+          }
+        }
+      }
+      if (!videoTracks.size) return null;
+      for (const moof of top.filter(box => box.type === 'moof')) {
+        for (const traf of (boxes(moof.start, moof.end) || []).filter(box => box.type === 'traf')) {
+          const tfhd = child(traf, 'tfhd');
+          if (!tfhd || tfhd.start + 8 > tfhd.end || !videoTracks.has(u32(tfhd.start + 4))) continue;
+          for (const run of (boxes(traf.start, traf.end) || []).filter(box => box.type === 'trun')) {
+            if (run.start + 8 > run.end) return null;
+            frames += u32(run.start + 4);
+          }
+        }
+      }
+      return frames > 0 ? { container: 'mp4', frameCount: frames } : null;
+    }
+    if (bytes.length < 4 || u32(0) !== 0x1a45dfa3) return null;
+    const trackTypes = new Map(), counts = new Map();
+    const levelOne = new Set([0x1f43b675, 0x1654ae6b, 0x1549a966, 0x1c53bb6b, 0x114d9b74, 0x1941a469, 0x1043a770, 0x1254c367]);
+    function vint(p, keepMarker) {
+      if (p >= bytes.length || bytes[p] === 0) return null;
+      let length = 1, marker = 128;
+      while (!(bytes[p] & marker) && length <= 8) { marker >>= 1; length++; }
+      if (length > (keepMarker ? 4 : 8) || p + length > bytes.length) return null;
+      let value = keepMarker ? bytes[p] : bytes[p] & (marker - 1);
+      let unknown = !keepMarker && value === marker - 1;
+      for (let i = 1; i < length; i++) { value = value * 256 + bytes[p + i]; unknown = unknown && bytes[p + i] === 255; }
+      if (!unknown && !Number.isSafeInteger(value)) return null;
+      return { length, value, unknown };
+    }
+    function unsigned(start, end) {
+      if (end - start > 6) return null;
+      let value = 0; for (let p = start; p < end; p++) value = value * 256 + bytes[p]; return value;
+    }
+    function walk(start, end, scope, track, depth) {
+      if (depth > 10) return null;
+      let p = start;
+      while (p < end) {
+        const id = vint(p, true); if (!id) return null;
+        if (scope === 'unknown-cluster' && levelOne.has(id.value)) return p;
+        const size = vint(p + id.length, false); if (!size) return null;
+        const payload = p + id.length + size.length;
+        const next = size.unknown ? end : payload + size.value;
+        if (next > end || next < payload) return null;
+        if (id.value === 0x18538067 || id.value === 0x1654ae6b || id.value === 0x1f43b675 || id.value === 0xa0) {
+          const result = walk(payload, next, id.value === 0x1f43b675 && size.unknown ? 'unknown-cluster' : '', track, depth + 1);
+          if (result === null) return null;
+          p = size.unknown ? result : next; continue;
+        }
+        if (id.value === 0xae) {
+          const entry = {}; if (walk(payload, next, '', entry, depth + 1) === null) return null;
+          if (entry.number !== undefined) trackTypes.set(entry.number, entry.type);
+        } else if (track && id.value === 0xd7) track.number = unsigned(payload, next);
+        else if (track && id.value === 0x83) track.type = unsigned(payload, next);
+        else if (id.value === 0xa3 || id.value === 0xa1) {
+          const number = vint(payload, false); if (!number) return null;
+          const flagsAt = payload + number.length + 2;
+          if (flagsAt >= next) return null;
+          const laced = (bytes[flagsAt] & 6) !== 0;
+          if (laced && flagsAt + 1 >= next) return null;
+          counts.set(number.value, (counts.get(number.value) || 0) + (laced ? bytes[flagsAt + 1] + 1 : 1));
+        } else if (size.unknown) return null;
+        p = next;
+      }
+      return p;
+    }
+    if (walk(0, bytes.length, '', null, 0) === null) return null;
+    let frames = 0; for (const [number, type] of trackTypes) if (type === 1) { frames = counts.get(number) || 0; break; }
+    return frames > 0 ? { container: 'webm', frameCount: frames } : null;
+  }
+
   /**
    * @param {Blob} blob
    * @param {{rate:0.5|8,signal?:AbortSignal,onProgress?:(p:number)=>void,
-   *   maxDimension?:number,fps?:number,mimeType?:string,sourceDurationHint?:number}} options
+   *   maxDimension?:number,fps?:number,mimeType?:string,sourceDurationHint?:number,
+   *   previewHost?:HTMLElement}} options
    * @returns {Promise<{blob:Blob,duration:number,sourceDuration:number,rate:number,
    *   requestedRate:number,mimeType:string,durationEstimated:boolean}>}
    * `rate` is sourceDuration / returned duration. Tiny encoder tail padding can
@@ -1688,7 +1822,7 @@
    * duration, durationEstimated is true and duration = sourceDuration / rate.
    */
   async function retimeVideo(blob, options = {}) {
-    const { rate: requestedRate, signal, onProgress, mimeType, sourceDurationHint } = options;
+    const { rate: requestedRate, signal, onProgress, mimeType, sourceDurationHint, previewHost } = options;
     const maxDimension = options.maxDimension === undefined ? 1280 : Number(options.maxDimension);
     const fps = options.fps === undefined ? 30 : Number(options.fps);
     if (![0.5, 8].includes(requestedRate)) throw new RangeError('变速比例只支持 0.5（慢动作）或 8（延时）。');
@@ -1702,9 +1836,11 @@
     }
     if (isHidden(document)) throw error('BACKGROUND', '请保持这个页面在前台，再生成变速视频。');
 
-    let video, canvas, stream, recorder, probe;
+    let video, canvas, stream, recorder, probe, sourceInfo;
     let videoFrameId = null, animationId = null;
+    let paintTimer = null;
     let frameLoopStopped = false, sourceDuration = 0, recordingElapsed = 0;
+    let presentedFrames = 0, decodedFrames = 0, lastPresentedTime = -1;
     const urls = new Set(), timers = new Set(), intervals = new Set(), removers = [];
     const later = (fn, delay) => {
       const id = root.setTimeout(() => { timers.delete(id); fn(); }, delay);
@@ -1722,15 +1858,29 @@
         try { onProgress(Math.max(0, Math.min(1, p))); } catch (_) {}
       }
     };
-    function attachVideo() {
+    function previewStyle(thumbnail) {
+      if (previewHost && typeof previewHost.appendChild === 'function') {
+        return thumbnail
+          ? 'position:absolute;right:10px;bottom:10px;width:96px;height:auto;max-height:80px;object-fit:contain;opacity:1;z-index:3;pointer-events:none;border:1px solid rgba(255,255,255,.6);border-radius:6px;'
+          : 'position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:1;z-index:2;pointer-events:none;';
+      }
+      return 'position:fixed;right:12px;bottom:' + (thumbnail ? '12px;width:96px' : '92px;width:192px') + ';height:auto;max-height:140px;object-fit:contain;opacity:1;z-index:2147483000;pointer-events:none;border-radius:6px;';
+    }
+    function mountPreview(element, thumbnail) {
+      element.style.cssText = previewStyle(thumbnail);
+      element.setAttribute('data-motion-media-preview', thumbnail ? 'encoded' : 'source');
+      const host = previewHost && typeof previewHost.appendChild === 'function' ? previewHost : document.body;
+      if (host) host.appendChild(element);
+    }
+    function attachVideo(thumbnail = false) {
       const element = document.createElement('video');
       element.muted = true; element.defaultMuted = true; element.playsInline = true;
       element.preload = 'auto'; element.controls = false;
       element.setAttribute('playsinline', ''); element.setAttribute('webkit-playsinline', '');
       element.setAttribute('aria-hidden', 'true'); element.tabIndex = -1;
-      // Do not use display:none: some WebKit versions throttle decoding there.
-      element.style.cssText = 'position:fixed;left:-4px;top:0;width:2px;height:2px;opacity:0;pointer-events:none;';
-      if (document.body) document.body.appendChild(element);
+      // Keep source media in the actual visible viewport. Opacity 0 / tiny
+      // offscreen video can be throttled to 1 Hz even in a foreground tab.
+      mountPreview(element, thumbnail);
       return element;
     }
     function waitFor(target, names, predicate, timeout, code, message, action) {
@@ -1780,6 +1930,7 @@
         try { video.cancelVideoFrameCallback(videoFrameId); } catch (_) {}
       }
       if (animationId !== null && root.cancelAnimationFrame) root.cancelAnimationFrame(animationId);
+      if (paintTimer !== null) { root.clearInterval(paintTimer); intervals.delete(paintTimer); paintTimer = null; }
       videoFrameId = animationId = null;
     }
     function releaseVideo(element) {
@@ -1810,6 +1961,8 @@
       if (!positive(sourceDuration) || sourceDuration > 1800) {
         throw error('DURATION_INVALID', '请选择 30 分钟以内的视频；课堂使用建议录制 3—10 秒。');
       }
+      try { sourceInfo = await inspectVideo(blob); } catch (_) { sourceInfo = null; }
+      checkAbort(signal);
       await seek(0);
       try { video.playbackRate = requestedRate; video.defaultPlaybackRate = requestedRate; }
       catch (e) { throw error('RATE_UNSUPPORTED', '此浏览器不支持所选变速比例，尚未生成变速视频。', e); }
@@ -1817,6 +1970,7 @@
         throw error('RATE_UNSUPPORTED', '浏览器没有接受所选变速比例，尚未生成变速视频。');
       }
       canvas = document.createElement('canvas');
+      mountPreview(canvas, true);
       const scale = Math.min(1, maxDimension / Math.max(video.videoWidth, video.videoHeight));
       canvas.width = Math.max(2, Math.floor(video.videoWidth * scale / 2) * 2);
       canvas.height = Math.max(2, Math.floor(video.videoHeight * scale / 2) * 2);
@@ -1848,13 +2002,27 @@
         let settled = false, stopping = false, recordStarted = false;
         let lastMediaTime = 0, lastAdvanceAt = clock(), lastPaintAt = 0, drawnFrames = 0;
         let recordingStartAt = clock();
+        let lastPaintSlot = -1, firstPresentedCounter = null, previousPresentedTime = -1;
+        const qualityFrames = () => {
+          try {
+            const quality = video.getVideoPlaybackQuality && video.getVideoPlaybackQuality();
+            if (quality && Number.isFinite(quality.totalVideoFrames)) return Math.max(0, quality.totalVideoFrames - (quality.droppedVideoFrames || 0));
+            if (Number.isFinite(video.webkitDecodedFrameCount)) return Math.max(0, video.webkitDecodedFrameCount - (video.webkitDroppedFrameCount || 0));
+          } catch (_) {}
+          return null;
+        };
+        const initialQualityFrames = qualityFrames();
         const rejectOnce = e => { if (!settled) { settled = true; stopFrames(); reject(e); } };
-        const draw = () => {
+        const draw = (force = false) => {
           if (settled || frameLoopStopped) return;
+          const slot = Math.floor((clock() - recordingStartAt + 1) * fps / 1000);
+          // rAF and the independent timer share a clock grid; neither can
+          // double-count a capture slot or accumulate floating-point drift.
+          if (!force && slot <= lastPaintSlot) return;
           try {
             if (video.readyState >= 2) {
               context.drawImage(video, 0, 0, canvas.width, canvas.height);
-              lastPaintAt = clock(); drawnFrames++;
+              lastPaintAt = clock(); lastPaintSlot = slot; drawnFrames++;
               // Optional hint. captureStream(fps) remains the required mechanism.
               if (typeof videoTracks[0].requestFrame === 'function') {
                 try { videoTracks[0].requestFrame(); } catch (_) {}
@@ -1865,14 +2033,24 @@
         };
         const scheduleVideoFrame = () => {
           if (frameLoopStopped || settled || typeof video.requestVideoFrameCallback !== 'function') return;
-          videoFrameId = video.requestVideoFrameCallback(() => { videoFrameId = null; draw(); scheduleVideoFrame(); });
+          videoFrameId = video.requestVideoFrameCallback((now, metadata) => {
+            videoFrameId = null;
+            if (metadata && Number.isFinite(metadata.mediaTime) && metadata.mediaTime > previousPresentedTime + 0.00001) {
+              presentedFrames++; previousPresentedTime = metadata.mediaTime; lastPresentedTime = metadata.mediaTime;
+            }
+            if (metadata && Number.isFinite(metadata.presentedFrames)) {
+              if (firstPresentedCounter === null) firstPresentedCounter = metadata.presentedFrames;
+              presentedFrames = Math.max(presentedFrames, metadata.presentedFrames - firstPresentedCounter + 1);
+            }
+            scheduleVideoFrame();
+          });
         };
         const scheduleAnimation = () => {
           if (frameLoopStopped || settled || !root.requestAnimationFrame) return;
           animationId = root.requestAnimationFrame(() => {
             animationId = null;
-            // rAF is the fallback if offstage WebKit video callbacks are sparse.
-            if (!video.requestVideoFrameCallback || clock() - lastPaintAt >= 1000 / fps * 1.5) draw();
+            // Primary capture pump, independent of source rVFC frequency.
+            draw();
             scheduleAnimation();
           });
         };
@@ -1881,7 +2059,9 @@
           stopping = true;
           const finalTime = video.currentTime;
           if (positive(finalTime) && finalTime < 1801) sourceDuration = finalTime;
-          draw(); stopFrames(); report(1);
+          const finalQualityFrames = qualityFrames();
+          if (initialQualityFrames !== null && finalQualityFrames !== null) decodedFrames = Math.max(0, finalQualityFrames - initialQualityFrames);
+          draw(true); stopFrames(); report(1);
           // Keep the final decoded picture long enough for one canvas capture
           // tick, including videos shorter than a normal timeslice.
           later(() => {
@@ -1900,7 +2080,7 @@
             } catch (e) { rejectOnce(e.code ? e : error('ENCODER_STOP_FAILED', '无法完成视频编码，原视频仍然保留。', e)); }
           }, Math.ceil(1000 / fps) + 8);
         };
-        listen(recorder, 'start', () => { recordStarted = true; recordingStartAt = clock(); draw(); });
+        listen(recorder, 'start', () => { recordStarted = true; recordingStartAt = clock(); lastPaintSlot = -1; draw(true); });
         listen(recorder, 'dataavailable', event => {
           if (event.data && event.data.size > 0) { chunks.push(event.data); encodedType = event.data.type || encodedType; }
         });
@@ -1927,6 +2107,8 @@
           draw();
           if (settled) return;
           scheduleVideoFrame(); scheduleAnimation();
+          paintTimer = root.setInterval(() => draw(), Math.max(8, Math.floor(1000 / fps / 2)));
+          intervals.add(paintTimer);
           const playing = video.play();
           if (playing && playing.catch) playing.catch(e => rejectOnce(error('PLAY_REJECTED', '浏览器阻止了视频播放，尚未生成变速视频；请点击按钮重试并保持页面前台。', e)));
           later(() => {
@@ -1961,7 +2143,7 @@
         throw error('OUTPUT_TIMING_INVALID', '实际处理速度与所选速度不符，未采用此变速结果；请保持页面前台并尝试较短视频。');
       }
       let duration = expectedDuration, durationEstimated = true;
-      probe = attachVideo();
+      probe = attachVideo(true);
       const outputURL = root.URL.createObjectURL(output); urls.add(outputURL);
       // Non-empty codec headers are not proof of a playable movie. Require at
       // least one decoded output frame before the Infinity-duration fallback.
@@ -1975,9 +2157,30 @@
       if (!durationEstimated && Math.abs(duration - expectedDuration) > Math.max(0.4, expectedDuration * 0.35)) {
         throw error('OUTPUT_TIMING_INVALID', '输出时长与所选速度不符，未采用此变速结果；原视频仍然保留。');
       }
+      let outputInfo;
+      try { outputInfo = await inspectVideo(output); }
+      catch (e) { throw error('OUTPUT_FRAME_CHECK_FAILED', '无法核对成片帧数，未采用此结果；原视频仍然保留。', e); }
+      checkAbort(signal);
+      if (!outputInfo) throw error('OUTPUT_FRAME_CHECK_FAILED', '无法核对成片的实际视频帧数，未采用此结果；原视频仍然保留。');
+      const sourceFps = sourceInfo ? sourceInfo.frameCount / sourceDuration : fps;
+      const targetUniqueFps = Math.min(fps, sourceFps * requestedRate);
+      // Slow motion holds existing source frames; it does not invent in-between
+      // images. Compare against that legitimate unique-frame rate, not always30.
+      const minimumFrames = Math.max(1, Math.floor(expectedDuration * targetUniqueFps * 0.55));
+      const effectiveFps = outputInfo.frameCount / duration;
+      if (outputInfo.frameCount < minimumFrames) {
+        throw error('OUTPUT_LOW_FPS', '成片帧率过低，可能被浏览器节流；未采用此结果，请保持页面可见并重试。');
+      }
+      const minimumObserved = Math.max(2, Math.floor(minimumFrames * 0.7));
+      const enoughDecoded = decodedFrames >= minimumObserved;
+      const enoughPresented = presentedFrames >= minimumObserved && lastPresentedTime >= sourceDuration * 0.65;
+      if (expectedDuration >= 0.5 && !enoughDecoded && !enoughPresented) {
+        throw error('SOURCE_FRAME_STALLED', '源视频画面没有持续更新，未采用可能冻结的成片；请保持处理预览可见后重试。');
+      }
       checkAbort(signal); report(1);
       return { blob: output, duration, sourceDuration, rate: sourceDuration / duration,
-        requestedRate, mimeType: output.type, durationEstimated };
+        requestedRate, mimeType: output.type, durationEstimated, frameCount: outputInfo.frameCount,
+        effectiveFps, decodedFrames, presentedFrames };
     } finally {
       stopFrames();
       removers.splice(0).forEach(remove => { try { remove(); } catch (_) {} });
@@ -1987,11 +2190,11 @@
       if (stream) stream.getTracks().forEach(track => { try { track.stop(); } catch (_) {} });
       releaseVideo(video); releaseVideo(probe);
       urls.forEach(url => { try { root.URL.revokeObjectURL(url); } catch (_) {} }); urls.clear();
-      if (canvas) { canvas.width = 0; canvas.height = 0; }
+      if (canvas) { canvas.width = 0; canvas.height = 0; if (canvas.remove) canvas.remove(); }
       video = canvas = stream = recorder = probe = null;
     }
   }
-  return { retimeVideo, pickMime, recordingConstraints };
+  return { retimeVideo, pickMime, recordingConstraints, inspectVideo };
 });
 
 </script>
@@ -2461,7 +2664,7 @@
     try {
       showTip('处理中请保持页面前台');
       result = await Media.retimeVideo(source, {
-        rate: requestedRate, signal: job.controller.signal, sourceDurationHint: hint, maxDimension: 1280, fps: 30,
+        rate: requestedRate, signal: job.controller.signal, sourceDurationHint: hint, maxDimension: 1280, fps: 30, previewHost: stage,
         onProgress: fraction => jobProgress(job, fraction, '生成' + label + ' ' + Math.round(fraction * 100) + '%')
       });
       check(job.controller.signal);
@@ -2848,7 +3051,8 @@
     target.drawImage(S.view === 'overlay' && S.overlay ? S.overlay : video, 0, 0, size.w, size.h);
     if (S.view !== 'overlay' && S.tab === 'track') drawTrajectory(target, { x: 0, y: 0, w: size.w, h: size.h }, video.currentTime, $('fullPath').checked);
     target.fillStyle = '#f4f7fa'; target.fillRect(0, size.h, size.w, 30); target.fillStyle = '#344b5a'; target.font = '12px sans-serif';
-    const label = '各种各样的运动 · ' + (S.view === 'overlay' ? '等间隔叠影 ' + S.overlayTimes.length + ' 帧' : 't = ' + video.currentTime.toFixed(2) + 's') + ' · mutiw';
+    const missingSamples = S.overlayStats && S.overlayStats.skipped && S.overlayStats.skipped.length;
+    const label = '各种各样的运动 · ' + (S.view === 'overlay' ? '叠影 ' + S.overlayTimes.length + ' 帧' + (missingSamples ? '（有跳帧）' : '（等间隔取样）') : 't = ' + video.currentTime.toFixed(2) + 's') + ' · mutiw';
     target.fillText(label, 10, size.h + 20);
     out.toBlob(blob => {
       if (blob) { download(blob, '运动观察_' + (S.view === 'overlay' ? '叠影' : '轨迹') + '_' + Date.now() + '.png'); status('画面已生成并请求下载。手机上请在下载列表或分享菜单中保存。'); }
