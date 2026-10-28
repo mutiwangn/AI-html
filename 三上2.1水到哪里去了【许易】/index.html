@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>水的蒸发实验室 · 《水到哪里去了》AI互动实验（教科版三年级上册 第二单元第1课） · 【许易】</title>
+<style>
+:root{
+  --ink:#16374f; --ink2:#4d7692; --ink3:#86a7be;
+  --line:#d5ebf8; --line2:#bfe0f2; --card:#ffffff;
+  --blue:#2f9ee0; --blue-d:#1673b0; --blue-l:#e9f6ff;
+  --ice:#5ec8f0; --warm:#ff8f3c; --hot:#e8453f;
+  --ok:#2fb37a; --gold:#f2a63b;
+  --shadow:0 14px 40px rgba(47,158,224,.14);
+  --shadow2:0 4px 16px rgba(31,59,82,.09);
+  --shadow3:0 26px 64px rgba(47,158,224,.20);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  font-size:17px;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 720px at 3% -10%, #dff4ff 0%, transparent 62%),
+    radial-gradient(1100px 660px at 102% -6%, #fff3df 0%, transparent 60%),
+    radial-gradient(1000px 640px at 50% 112%, #e8fbf2 0%, transparent 62%),
+    #f7fbff;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.app{max-width:1680px;margin:0 auto;padding:30px 34px 110px}
+
+/* ---------- header ---------- */
+header.hd{display:flex;align-items:center;gap:22px;padding:6px 6px 24px}
+.mascot{width:106px;height:106px;flex:none;filter:drop-shadow(0 12px 20px rgba(58,168,221,.3));animation:bob 3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-7px) rotate(2deg)}}
+.h-title h1{font-size:40px;margin:0;letter-spacing:.8px;line-height:1.16}
+.h-title h1 em{font-style:normal;background:linear-gradient(120deg,#2f9ee0 8%,#ff9a4d 92%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.h-title p{margin:10px 0 0;font-size:16.5px;color:var(--ink2)}
+.h-tip{
+  margin-left:auto;max-width:640px;position:relative;background:linear-gradient(180deg,#fff,#f5fbff);
+  border:2px solid var(--line);border-radius:24px;padding:18px 24px;
+  font-size:16.5px;line-height:1.75;color:var(--ink2);box-shadow:var(--shadow2)
+}
+.h-tip:before{content:"";position:absolute;left:-11px;top:30px;width:18px;height:18px;background:#fff;border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(45deg)}
+.h-tip b{color:var(--blue-d)}
+
+/* ---------- hero question ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(120deg,#e4f5ff 0%,#f5fbff 46%,#fff2e0 100%);
+  border:2.5px solid #cbe6f7;border-radius:32px;padding:28px 36px;margin-bottom:24px;box-shadow:var(--shadow)
+}
+.hero:after{content:"";position:absolute;right:-60px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,#ffe6c2 0%,rgba(255,230,194,0) 70%)}
+.hero .k{display:inline-block;background:linear-gradient(180deg,#3fb0ee,#1f86c8);color:#fff;font-size:14.5px;font-weight:800;border-radius:999px;padding:6px 18px;letter-spacing:1.5px;margin-bottom:14px;box-shadow:0 6px 16px rgba(31,134,200,.28)}
+.hero .q{position:relative;font-size:34px;font-weight:900;letter-spacing:.6px;line-height:1.4}
+.hero .q em{font-style:normal;color:#d97518}
+.hero .s{position:relative;font-size:17px;color:var(--ink2);margin-top:12px;line-height:1.8}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 24px}
+.tab{
+  border:2px solid var(--line);background:#fff;color:var(--ink2);
+  padding:15px 30px;border-radius:999px;font-size:18px;cursor:pointer;
+  font-weight:800;transition:.2s;box-shadow:var(--shadow2);font-family:inherit
+}
+.tab:hover{border-color:var(--line2);transform:translateY(-2px);box-shadow:0 10px 24px rgba(47,158,224,.16)}
+.tab.on{background:linear-gradient(180deg,#45b4ef,#177ec0);color:#fff;border-color:#177ec0;box-shadow:0 12px 28px rgba(23,126,192,.34);transform:translateY(-2px)}
+.tab .num{display:inline-block;width:26px;height:26px;line-height:26px;border-radius:50%;background:rgba(0,0,0,.07);font-size:14px;margin-right:8px;text-align:center}
+.tab.on .num{background:rgba(255,255,255,.32)}
+
+/* ---------- layout ---------- */
+.panel{display:none}
+.panel.on{display:block;animation:fade .32s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.grid2{display:grid;grid-template-columns:440px 1fr;gap:24px;align-items:start}
+@media (max-width:1180px){.grid2{grid-template-columns:1fr}}
+.card{background:var(--card);border:2px solid var(--line);border-radius:28px;box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden;transition:box-shadow .25s}
+.card:hover{box-shadow:var(--shadow3)}
+.card-h{padding:20px 26px;border-bottom:2px dashed var(--line);display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(180deg,#fbfdff,#fff)}
+.card-h h2{margin:0;font-size:21px}
+.card-h .sub{font-size:15px;color:var(--ink3);margin-left:auto}
+.card-b{padding:22px 26px}
+
+/* ---------- controls ---------- */
+.ctrl{border:2px solid var(--line);border-radius:20px;padding:16px 18px;margin-bottom:14px;background:linear-gradient(180deg,#fbfdff,#f6fbff)}
+.ctrl .lab{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.ctrl .lab i{width:9px;height:9px;border-radius:50%;background:var(--blue);display:inline-block}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{
+  flex:1;min-width:76px;border:2px solid var(--line);background:#fff;color:var(--ink2);
+  padding:12px 6px;border-radius:14px;cursor:pointer;font-size:15.5px;font-weight:800;transition:.16s;font-family:inherit
+}
+.seg button:hover{border-color:var(--line2);transform:translateY(-1px)}
+.seg button.on{background:linear-gradient(180deg,#45b4ef,#2196dc);color:#fff;border-color:#2196dc;box-shadow:0 6px 16px rgba(47,158,224,.3)}
+.seg button.on.w{background:linear-gradient(180deg,#ffa259,#f07818);border-color:#f07818}
+.seg button.on.h{background:linear-gradient(180deg,#f2635c,#d8342e);border-color:#d8342e}
+
+/* switch */
+.sw{display:flex;align-items:center;gap:12px;font-size:16px;font-weight:700;color:var(--ink2);cursor:pointer;user-select:none}
+.sw input{display:none}
+.sw .track{width:54px;height:30px;border-radius:999px;background:#dbe9f2;position:relative;transition:.2s;flex:none}
+.sw .track:after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.22);transition:.2s}
+.sw input:checked + .track{background:linear-gradient(180deg,#41b2ef,#1f92d8)}
+.sw input:checked + .track:after{left:27px}
+
+/* range */
+input[type=range]{-webkit-appearance:none;appearance:none;height:10px;border-radius:999px;background:linear-gradient(90deg,#c7e8fb,#8ed0f0);outline:none;width:100%;margin:8px 0 2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#ffffff,#3aa8dd);border:3px solid #fff;box-shadow:0 4px 12px rgba(58,168,221,.5);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#3aa8dd;border:3px solid #fff;box-shadow:0 4px 12px rgba(58,168,221,.5);cursor:pointer}
+
+/* buttons */
+.act{display:flex;gap:12px;flex-wrap:wrap;align-items:center;padding:18px 26px;border-top:2px dashed var(--line);background:#fcfdff}
+.btn{border:none;border-radius:16px;padding:15px 30px;font-size:17.5px;font-weight:800;cursor:pointer;transition:.16s;font-family:inherit}
+.btn.primary{background:linear-gradient(180deg,#45b4ef,#1f92d8);color:#fff;box-shadow:0 10px 24px rgba(33,150,220,.34)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(33,150,220,.42)}
+.btn.ghost{background:#fff;border:2px solid var(--line);color:var(--ink2)}
+.btn.ghost:hover{border-color:var(--line2);transform:translateY(-1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+.btn.sm{padding:10px 18px;font-size:15px;border-radius:14px}
+
+/* ---------- stage ---------- */
+.stage-wrap{position:relative;border-radius:26px;overflow:hidden;border:2px solid var(--line);background:#f4fbff;box-shadow:inset 0 0 0 1px #fff}
+svg.stg{display:block;width:100%;height:auto}
+.hud{
+  position:absolute;right:16px;top:16px;background:rgba(255,255,255,.96);
+  border:2px solid var(--line);border-radius:20px;padding:14px 20px;box-shadow:var(--shadow2);text-align:right;min-width:200px
+}
+.hud .t{font-size:34px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.hud .t small{font-size:16px;font-weight:700;color:var(--ink3);margin-left:3px}
+.hud .s{font-size:15px;font-weight:800;color:var(--blue-d);margin-top:4px}
+.envtag{
+  position:absolute;left:16px;top:16px;background:rgba(255,255,255,.96);border:2px solid var(--line);
+  border-radius:999px;padding:9px 20px;font-size:15.5px;font-weight:800;color:var(--blue-d);box-shadow:var(--shadow2)
+}
+
+/* ---------- situation cards ---------- */
+.sit{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:860px){.sit{grid-template-columns:1fr}}
+.sitcard{
+  border:2px solid var(--line);background:linear-gradient(180deg,#fff,#f9fdff);border-radius:24px;padding:22px 18px;cursor:pointer;
+  text-align:center;transition:.24s;font-family:inherit;box-shadow:var(--shadow2);color:var(--ink)
+}
+.sitcard:hover{transform:translateY(-5px);border-color:var(--line2);box-shadow:0 18px 40px rgba(47,158,224,.2)}
+.sitcard svg{width:100%;max-width:230px;height:auto}
+.sitcard .nm{font-size:18px;font-weight:900;margin-top:12px}
+.sitcard .ds{font-size:14.5px;color:var(--ink3);margin-top:6px;line-height:1.6}
+.sitcard .st{display:inline-block;margin-top:12px;font-size:14px;font-weight:800;color:var(--blue-d);background:var(--blue-l);border-radius:999px;padding:6px 16px}
+.sitcard.done .drop{opacity:0;transform:translateY(-16px) scale(.5)}
+.sitcard .drop{transition:.7s cubic-bezier(.3,1.2,.5,1)}
+.sitcard.done .st{background:#e9f8f0;color:#1f9c6b}
+.sitcard.done .st:after{content:" ✓ 水不见了"}
+
+/* ---------- misc ---------- */
+.note{background:linear-gradient(180deg,#f4fbff,#eef8ff);border:1.5px dashed #bde2f6;border-radius:18px;padding:15px 19px;font-size:15.5px;color:var(--ink2);line-height:1.8}
+.note b{color:var(--blue-d)}
+.qbox{background:linear-gradient(180deg,#fffdf4,#fff6e2);border:2px solid #ffe0a8;border-radius:24px;padding:20px 24px;margin-top:22px;box-shadow:var(--shadow2)}
+.qbox .qq{font-size:19px;font-weight:900}
+.qbox .qs{font-size:15.5px;color:var(--ink2);margin-top:7px}
+.votes{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.votes button{border:2px solid var(--line);background:#fff;border-radius:14px;padding:12px 20px;font-weight:800;cursor:pointer;font-size:15.5px;color:var(--ink2);font-family:inherit;transition:.16s}
+.votes button:hover{border-color:#ffd79b;transform:translateY(-1px)}
+.votes button.on{background:linear-gradient(180deg,#ffa259,#f07818);color:#fff;border-color:#f07818;box-shadow:0 6px 16px rgba(240,120,24,.3)}
+#voteBox{margin-top:14px;font-size:15.5px;color:var(--ink2)}
+#voteBox .chip{display:inline-block;background:#fff;border:2px solid #ffd79b;color:#96560b;border-radius:999px;padding:6px 16px;font-weight:700;margin:4px 8px 0 0}
+.ai-say{display:flex;gap:16px;align-items:flex-start;background:linear-gradient(180deg,#eef8ff,#e7f4ff);border:2px solid #cfe8f6;border-radius:22px;padding:18px 22px;margin-top:22px;font-size:16.5px;color:var(--ink2);line-height:1.8;box-shadow:var(--shadow2)}
+.ai-say .av{width:48px;height:48px;flex:none}
+
+/* ---------- table ---------- */
+.tbl{width:100%;border-collapse:collapse;font-size:16px;margin-top:14px}
+.tbl th,.tbl td{border:1.5px solid var(--line);padding:13px 16px;text-align:center}
+.tbl th{background:linear-gradient(180deg,#f2f9ff,#e9f5fd);color:var(--blue-d);font-weight:800}
+.tbl td.l{text-align:left}
+.lk{color:var(--ok);font-weight:800}
+.lk.bad{color:var(--hot)}
+
+/* ---------- race ---------- */
+.race{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:920px){.race{grid-template-columns:1fr}}
+.rcup{border:2px solid var(--line);border-radius:24px;padding:20px;background:linear-gradient(180deg,#fbfdff,#f5fbff);transition:.22s}
+.rcup .nm{font-size:17px;font-weight:900;display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.rcup .nm i{width:26px;height:26px;border-radius:50%;background:linear-gradient(180deg,#45b4ef,#1f86c8);color:#fff;font-size:14px;display:inline-flex;align-items:center;justify-content:center;font-style:normal}
+.rcup svg{width:100%;height:auto}
+.rbar{height:14px;border-radius:9px;background:#e6f2f9;overflow:hidden;margin-top:12px}
+.rbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#8fd6f5,#2f9ee0);border-radius:9px;transition:width .12s linear}
+.rbar i.done{background:linear-gradient(90deg,#8ee0b6,#2fb37a)}
+.rmeta{font-size:14px;color:var(--ink3);margin-top:9px;display:flex;justify-content:space-between}
+.rcup.done{border-color:#a9e6c8;background:linear-gradient(180deg,#f6fdf9,#eefaf4);box-shadow:0 14px 34px rgba(47,179,122,.18)}
+.rank{font-size:14.5px;font-weight:900;color:var(--warm);margin-top:9px}
+
+footer{text-align:center;color:var(--ink3);font-size:14.5px;margin-top:36px;line-height:2}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="hd">
+    <svg class="mascot" viewBox="0 0 100 100">
+      <path d="M50 12 C50 12 18 50 18 66 a32 32 0 0 0 64 0 C82 50 50 12 50 12 Z" fill="#7ed0f2" stroke="#3aa8dd" stroke-width="3"/>
+      <ellipse cx="39" cy="62" rx="7" ry="9" fill="#fff" opacity=".85"/>
+      <circle cx="40" cy="55" r="4.4" fill="#1f3b52"/>
+      <circle cx="60" cy="55" r="4.4" fill="#1f3b52"/>
+      <circle cx="41.6" cy="53.4" r="1.5" fill="#fff"/>
+      <circle cx="61.6" cy="53.4" r="1.5" fill="#fff"/>
+      <path d="M43 68 q7 7 14 0" stroke="#1f3b52" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="h-title">
+      <h1>水的蒸发实验室 <em>· AI 互动</em></h1>
+      <p>教科版（2024）三年级上册 第二单元第 1 课《水到哪里去了》｜当小侦探，找回失踪的水 · 教师【许易】</p>
+    </div>
+    <div class="h-tip">我是 <b>AI 助学伙伴·水滴博士</b>。<br>这里每个实验你都能<b>自己动手点一点</b>，看看水到底跑到哪里去了。</div>
+  </header>
+
+  <div class="hero">
+    <span class="k">单元大问题</span>
+    <div class="q">看得见的水，为什么会<em>慢慢不见了</em>？它到底到哪里去了？</div>
+    <div class="s">今天，我们像科学家一样：先<strong>猜想</strong> → 再<strong>观察</strong> → 做<strong>实验验证</strong> → 最后<strong>说清道理</strong>。</div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-tab="1"><span class="num">1</span>情境台 · 水不见了</button>
+    <button class="tab" data-tab="2"><span class="num">2</span>探究一 · 水迹去哪了</button>
+    <button class="tab" data-tab="3"><span class="num">3</span>探究二 · 罩杯实验（难点）</button>
+    <button class="tab" data-tab="5"><span class="num">4</span>应用 · 晒衣服比赛</button>
+  </nav>
+
+  <!-- ================= P1 情境台 ================= -->
+  <section class="panel on" id="p1">
+    <div class="card">
+      <div class="card-h"><h2>🎬 情境台 · 水，不见了</h2><span class="sub">点一点下面三张卡片，看看会发生什么</span></div>
+      <div class="card-b">
+        <div class="sit" id="sitBox">
+          <button class="sitcard" data-i="0">
+            <svg viewBox="0 0 170 120">
+              <rect x="0" y="0" width="170" height="120" rx="14" fill="#f4fbff"/>
+              <circle cx="140" cy="30" r="16" fill="#ffd76b" opacity=".9"/>
+              <path d="M20 100 q30 -40 60 -30 q30 10 60 -20" stroke="#8ecf9b" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <circle class="drop" cx="58" cy="66" r="12" fill="#7ed0f2" stroke="#3aa8dd" stroke-width="2.5"/>
+              <circle class="drop" cx="96" cy="58" r="8" fill="#7ed0f2" stroke="#3aa8dd" stroke-width="2.5"/>
+              <circle class="drop" cx="40" cy="80" r="7" fill="#7ed0f2" stroke="#3aa8dd" stroke-width="2.5"/>
+            </svg>
+            <div class="nm">清晨 · 草叶上的露珠</div>
+            <div class="ds">太阳出来了，露珠一颗一颗不见了</div>
+            <span class="st">水到哪里去了？</span>
+          </button>
+          <button class="sitcard" data-i="1">
+            <svg viewBox="0 0 170 120">
+              <rect x="0" y="0" width="170" height="120" rx="14" fill="#f4fbff"/>
+              <rect x="16" y="20" width="138" height="78" rx="8" fill="#2f5d43" stroke="#7a5a3a" stroke-width="5"/>
+              <rect class="drop" x="30" y="34" width="110" height="50" rx="6" fill="#bfe9fb" opacity=".92"/>
+              <text x="85" y="66" font-size="15" fill="#3aa8dd" text-anchor="middle" font-weight="700">水 渍</text>
+            </svg>
+            <div class="nm">课间 · 湿布擦黑板</div>
+            <div class="ds">黑板上留下一大片水渍，慢慢变干</div>
+            <span class="st">水到哪里去了？</span>
+          </button>
+          <button class="sitcard" data-i="2">
+            <svg viewBox="0 0 170 120">
+              <rect x="0" y="0" width="170" height="120" rx="14" fill="#f4fbff"/>
+              <line x1="20" y1="26" x2="150" y2="26" stroke="#b9ddef" stroke-width="4"/>
+              <line x1="34" y1="26" x2="34" y2="72" stroke="#b9ddef" stroke-width="3"/>
+              <line x1="136" y1="26" x2="136" y2="72" stroke="#b9ddef" stroke-width="3"/>
+              <path class="drop" d="M56 30 h58 l-12 46 q-2 8 -10 8 h-14 q-8 0 -10 -8 Z" fill="#9fdcf5" stroke="#3aa8dd" stroke-width="3"/>
+              <path d="M124 70 q10 12 2 22" stroke="#3aa8dd" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"/>
+            </svg>
+            <div class="nm">傍晚 · 晾晒湿衣服</div>
+            <div class="ds">湿漉漉的衣服，晾一会儿就变干了</div>
+            <span class="st">水到哪里去了？</span>
+          </button>
+        </div>
+
+        <div class="qbox">
+          <div class="qq">🔎 侦探任务：这些看得见的水，最后都不见了。它们到哪里去了？</div>
+          <div class="qs">先别急着回答，把你心里最大胆的猜想投进"AI 猜想箱"吧！</div>
+          <div class="votes" id="voteBoxBtns">
+            <button data-v="渗进树叶、布料、黑板里去了">渗进物体里去了</button>
+            <button data-v="顺着流到地上漏掉了">流到地上漏掉了</button>
+            <button data-v="被空气带走，变成看不见的气体飞走了">变成看不见的气体飞走了</button>
+            <button data-v="我也不知道">我也不知道</button>
+          </div>
+          <div id="voteBox"></div>
+        </div>
+
+        <div class="ai-say">
+          <svg class="av" viewBox="0 0 100 100"><path d="M50 12 C50 12 18 50 18 66 a32 32 0 0 0 64 0 C82 50 50 12 50 12 Z" fill="#7ed0f2" stroke="#3aa8dd" stroke-width="4"/><circle cx="40" cy="58" r="4.5" fill="#1f3b52"/><circle cx="60" cy="58" r="4.5" fill="#1f3b52"/><path d="M43 70 q7 6 14 0" stroke="#1f3b52" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+          <div><b>水滴博士：</b>猜得好！科学家的第一步就是"大胆猜想"。不过，光猜可不算数——我们得用<b>眼睛观察</b>、用<b>实验验证</b>，才能找到真正的答案。走，去探究一看看水迹是怎么变化的！</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= P2 水迹去哪了 ================= -->
+  <section class="panel" id="p2">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <div class="card-h"><h2>🎛 实验控制台</h2></div>
+          <div class="card-b" style="padding:20px 24px">
+            <div class="ctrl">
+              <div class="lab"><i></i>实验材料</div>
+              <div class="seg" data-k="surf">
+                <button data-v="glass" class="on">玻璃片</button>
+                <button data-v="leaf">植物叶片</button>
+              </div>
+            </div>
+            <div class="ctrl">
+              <div class="lab"><i></i>放置环境</div>
+              <div class="seg" data-k="env">
+                <button data-v="room" class="on">常温放着</button>
+                <button data-v="heat" class="w">用灯加热</button>
+                <button data-v="wind" class="h">用扇子吹</button>
+              </div>
+            </div>
+            <div class="ctrl">
+              <div class="lab"><i></i>时间进度</div>
+              <input id="t2" type="range" min="0" max="10" step="0.1" value="0" style="width:100%">
+              <div style="font-size:15px;color:var(--ink3);display:flex;justify-content:space-between;margin-top:8px"><span>0 分钟</span><span>10 分钟</span></div>
+            </div>
+            <label class="sw"><input type="checkbox" id="mag2"><span class="track"></span>AI 水蒸气放大镜（看见看不见的气体）</label>
+          </div>
+          <div class="act">
+            <button class="btn primary" id="play2">▶ 开始观察</button>
+            <button class="btn ghost sm" id="reset2">↺ 重置</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h2>📝 观察记录单</h2></div>
+          <div class="card-b" style="padding:20px 24px">
+            <div id="rec2" style="font-size:16px;line-height:1.95;color:var(--ink2)"></div>
+            <div class="note" style="margin-top:10px" id="concl2">水迹从大变小、最后完全看不见——水并没有消失，而是变成了<b>看不见的水蒸气</b>，跑到空气里去了。这种现象叫 <b>蒸发</b>。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h2>🔬 水的踪迹观察台</h2><span class="sub" id="surfName2">玻璃片</span></div>
+        <div class="card-b">
+          <div class="stage-wrap">
+            <div class="envtag" id="envTag2">常温 · 静静放着</div>
+            <div class="hud"><div class="t" id="t2num">0.0<small>分钟</small></div><div class="s" id="t2state">刚刚涂上水</div></div>
+            <svg class="stg" viewBox="0 0 620 400" id="svg2">
+              <defs>
+                <linearGradient id="glassSlide" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e8f4fb"/>
+                </linearGradient>
+                <linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#a9e2a0"/><stop offset="1" stop-color="#69bd77"/>
+                </linearGradient>
+              </defs>
+              <rect x="0" y="0" width="620" height="400" fill="#f4fbff"/>
+              <rect x="0" y="330" width="620" height="70" fill="#eaf4fb"/>
+              <line x1="0" y1="330" x2="620" y2="330" stroke="#d3e8f5" stroke-width="2"/>
+
+              <g id="slideG">
+                <rect x="90" y="150" width="440" height="180" rx="18" fill="url(#glassSlide)" stroke="#b9ddef" stroke-width="3"/>
+                <rect x="104" y="164" width="412" height="20" rx="10" fill="#fff" opacity=".75"/>
+              </g>
+              <g id="leafG2" style="display:none">
+                <path d="M110 300 q90 -180 200 -180 q110 0 200 180 q-100 40 -200 40 q-100 0 -200 -40 Z" fill="url(#leafG)" stroke="#4fa663" stroke-width="3"/>
+                <path d="M118 296 q102 -150 194 -150 q92 0 186 148" stroke="#4fa663" stroke-width="2.5" fill="none" opacity=".55"/>
+              </g>
+
+              <g id="markG">
+                <ellipse id="mMain" cx="310" cy="240" rx="105" ry="34" fill="#bfe9fb" opacity=".92"/>
+                <circle id="mD1" cx="420" cy="258" r="10" fill="#bfe9fb" opacity=".9"/>
+                <circle id="mD2" cx="200" cy="256" r="8" fill="#bfe9fb" opacity=".9"/>
+                <circle id="mD3" cx="352" cy="218" r="7" fill="#bfe9fb" opacity=".85"/>
+              </g>
+
+              <g id="vapor2" style="display:none"></g>
+
+              <text x="310" y="378" font-size="15" fill="#8ea9bd" text-anchor="middle" id="label2">玻璃片上的水迹（俯视观察）</text>
+            </svg>
+          </div>
+          <div class="note" style="margin-top:12px">💡 <b>观察提示：</b>注意看水迹有没有流走？有没有被材料吸进去？还是<b>原地变小、最后消失</b>？打开"AI 水蒸气放大镜"，还能看见水偷偷变成气体飘走呢。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= P3 罩杯实验 ================= -->
+  <section class="panel" id="p3">
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <div class="card-h"><h2>🧪 实验步骤</h2></div>
+          <div class="card-b" style="padding:20px 24px">
+            <div class="step" id="steps3">
+              <div class="note" style="margin-bottom:8px"><b>①</b> 在小杯里倒入少量温水</div>
+              <div class="note" style="margin-bottom:8px"><b>②</b> 用<b>完全干燥</b>的大杯子，从上面完整罩住小杯</div>
+              <div class="note"><b>③</b> 静静等一会儿，盯住大杯子的<b>内壁</b></div>
+            </div>
+            <label class="sw" style="margin-top:12px"><input type="checkbox" id="mag3"><span class="track"></span>AI 水蒸气放大镜</label>
+            <div class="note" style="margin-top:10px" id="magTip3">放大镜关着时，水蒸气是<b>看不见</b>的——这正是最难懂的地方。</div>
+          </div>
+          <div class="act">
+            <button class="btn primary" id="play3">▶ 开始实验</button>
+            <button class="btn ghost sm" id="reset3">↺ 重置</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-h"><h2>🤔 研讨</h2></div>
+          <div class="card-b" style="padding:20px 24px">
+            <div style="font-size:16px;line-height:1.85;color:var(--ink2)">
+              <b>问题1：</b>实验前大杯子是完全干燥的，里面一滴水都没有。内壁的小水珠是从哪里来的？<br>
+              <b>问题2：</b>如果没有罩杯子，蒸发后的水会跑到哪里去？
+            </div>
+            <div class="note" style="margin-top:10px;display:none" id="ans3">
+              <b>原来如此：</b>温水蒸发变成<b>看不见的水蒸气</b>，被杯子困在里面；水蒸气碰到<b>冷</b>的杯壁，又变回<b>看得见的小水珠</b>。<br>
+              水蒸气：无色、无味、透明，<b>看不见</b> ｜ 白雾、水珠：<b>看得见</b>的液态小水滴。
+            </div>
+            <button class="btn ghost sm" id="reveal3" style="margin-top:10px">揭晓答案</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h2>🥛 罩杯实验观察台</h2><span class="sub">温水 + 干燥大杯</span></div>
+        <div class="card-b">
+          <div class="stage-wrap">
+            <div class="envtag" id="envTag3">准备就绪</div>
+            <div class="hud"><div class="t" id="t3num">0<small>秒</small></div><div class="s" id="t3state">等待开始</div><div style="font-size:14.5px;color:var(--ink3);margin-top:6px">小杯水量 <b id="w3">100%</b> ｜ 内壁水珠 <b id="d3">0</b> 颗</div></div>
+            <svg class="stg" viewBox="0 0 620 400" id="svg3">
+              <defs>
+                <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9adcf7"/><stop offset="1" stop-color="#3aa8dd"/></linearGradient>
+                <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.95)"/><stop offset="1" stop-color="rgba(214,238,250,.5)"/></linearGradient>
+              </defs>
+              <rect x="0" y="0" width="620" height="400" fill="#f4fbff"/>
+              <rect x="0" y="340" width="620" height="60" fill="#eaf4fb"/>
+              <line x1="0" y1="340" x2="620" y2="340" stroke="#d3e8f5" stroke-width="2"/>
+
+              <!-- 大杯（倒扣） -->
+              <g id="bigCup3">
+                <path d="M150 340 L150 84 Q150 70 164 70 L456 70 Q470 70 470 84 L470 340" fill="url(#cg)" stroke="#a9d3e8" stroke-width="4"/>
+                <path d="M162 96 L162 330" stroke="#d6eef9" stroke-width="3" opacity=".8"/>
+                <path d="M458 96 L458 330" stroke="#d6eef9" stroke-width="3" opacity=".8"/>
+              </g>
+              <!-- 内壁水珠层 -->
+              <g id="dropG3"></g>
+              <!-- 水蒸气层 -->
+              <g id="vaporG3"></g>
+              <!-- 小杯 + 温水 -->
+              <g id="smallCup3">
+                <rect x="272" y="252" width="76" height="88" rx="8" fill="#eef8ff" stroke="#a9d3e8" stroke-width="3.5"/>
+                <rect id="w3rect" x="277" y="266" width="66" height="69" rx="5" fill="url(#wg)"/>
+              </g>
+              <text x="310" y="378" font-size="15" fill="#8ea9bd" text-anchor="middle">干燥大杯罩住温水小杯（剖面观察）</text>
+            </svg>
+          </div>
+          <div class="note" style="margin-top:12px">🎯 <b>本课最难的一步：</b>水蒸气明明在那里，却<b>看不见</b>。我们用"沾到冷杯壁变成小水珠"这个办法，把它<b>抓出来</b>！</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= P5 晒衣服比赛 ================= -->
+  <section class="panel" id="p5">
+    <div class="card">
+      <div class="card-h"><h2>👕 应用挑战 · 晒衣服比赛</h2><span class="sub">三件同样的湿衣服，你想怎么晒？</span></div>
+      <div class="card-b">
+        <div class="race" id="race5"></div>
+      </div>
+      <div class="act">
+        <button class="btn primary" id="go5">▶ 开始比赛</button>
+        <button class="btn ghost sm" id="reset5">↺ 重置</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h2>🏆 比赛结果与生活建议</h2></div>
+      <div class="card-b"><div class="note" id="concl5">调好三件衣服的晾晒方式，点"开始比赛"，看看哪件先干，并说说为什么。</div></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h2>🎁 分层作业</h2></div>
+      <div class="card-b" style="font-size:16px;line-height:1.95;color:var(--ink2)">
+        <b>基础作业：</b>在家用两个一样的杯盖，一个滴几滴水放在窗台，一个放在阴凉处，观察记录哪一滴先干，并说说原因。<br>
+        <b>探究作业：</b>把同样多的一大摊水和一小堆水分别滴在桌上，比一比谁先干，拍下照片或画出记录，明天带来说给同学听。<br>
+        <b>拓展作业（选做）：</b>观察妈妈烧开水，找一找：锅里冒出的"白雾"离锅口近还是远？它是水蒸气吗？把你的发现记下来。
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    水的蒸发实验室 · 《水到哪里去了》AI 互动实验 ｜ 供公开课课堂演示与学生分组操作使用<br>
+    建议：全程"先猜想 — 再动手 — 后说理"，让每个孩子都亲手点一次。
+  </footer>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s){ return document.querySelector(s); };
+  var $$ = function(s, root){ return Array.prototype.slice.call((root || document).querySelectorAll(s)); };
+  var clamp = function(v,a,b){ return Math.max(a, Math.min(b, v)); };
+
+  /* ================= tabs ================= */
+  var curTab = '1';
+  $$('.tab').forEach(function(b){
+    b.addEventListener('click', function(){
+      $$('.tab').forEach(function(x){ x.classList.toggle('on', x === b); });
+      $$('.panel').forEach(function(p){ p.classList.toggle('on', p.id === 'p' + b.dataset.tab); });
+      curTab = b.dataset.tab;
+      if (curTab === '5') renderRace('5');
+    });
+  });
+
+  /* ================= P1 ================= */
+  $$('#sitBox .sitcard').forEach(function(c){
+    c.addEventListener('click', function(){ c.classList.add('done'); });
+  });
+  $$('#voteBoxBtns button').forEach(function(b){
+    b.addEventListener('click', function(){
+      $$('#voteBoxBtns button').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      var box = $('#voteBox');
+      var chips = box.querySelectorAll('.chip');
+      var dup = false;
+      for (var i=0;i<chips.length;i++){ if (chips[i].textContent === b.dataset.v) dup = true; }
+      if (dup) return;
+      var s = document.createElement('span');
+      s.className = 'chip'; s.textContent = b.dataset.v;
+      box.appendChild(s);
+      if (!box.querySelector('.aihint')){
+        var p = document.createElement('div');
+        p.className = 'aihint';
+        p.style.cssText = 'margin-top:12px;font-size:15px;color:#1b7fbd;font-weight:700';
+        p.textContent = '✓ 已存入 AI 猜想箱 —— 答案对不对不重要，敢猜才重要！';
+        box.appendChild(p);
+      }
+    });
+  });
+
+  /* ================= P2 ================= */
+  var P2 = { t: 0, env: 'room', surf: 'glass', playing: false, mag: false };
+  var RATE2 = { room: 0.34, heat: 0.95, wind: 0.72 };
+  var ENVNAME2 = { room: '常温 · 静静放着', heat: '加热 · 用灯照着', wind: '有风 · 用扇子吹' };
+  var vaporDots2 = [];
+  (function buildVapor2(){
+    var g = $('#vapor2');
+    for (var i=0;i<26;i++){
+      var c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('r', (2.5 + Math.random()*3).toFixed(1));
+      c.setAttribute('fill', '#7ec9ee');
+      c.setAttribute('opacity', '0.5');
+      g.appendChild(c);
+      vaporDots2.push({ el: c, x: 150 + Math.random()*320, y: 130 + Math.random()*180, ph: Math.random()*6.28 });
+    }
+  })();
+
+  function frac2(){
+    return Math.exp(-RATE2[P2.env] * P2.t);
+  }
+  function render2(){
+    P2.t = clamp(P2.t, 0, 10);
+    var f = frac2();
+    var s = Math.pow(f, 0.55);
+    $('#markG').setAttribute('transform','translate(310,240) scale(' + s.toFixed(3) + ') translate(-310,-240)');
+    $('#markG').setAttribute('opacity', (0.25 + 0.75*f).toFixed(2));
+
+    $('#t2').value = P2.t;
+    $('#t2num').innerHTML = P2.t.toFixed(1) + '<small>分钟</small>';
+    $('#envTag2').textContent = ENVNAME2[P2.env];
+    $('#surfName2').textContent = (P2.surf === 'glass') ? '玻璃片' : '植物叶片';
+    $('#slideG').style.display = (P2.surf === 'glass') ? '' : 'none';
+    $('#leafG2').style.display = (P2.surf === 'leaf') ? '' : 'none';
+    $('#label2').textContent = (P2.surf === 'glass' ? '玻璃片' : '植物叶片') + '上的水迹（俯视观察）';
+
+    var st = '水迹没变';
+    if (f < 0.02) st = '水迹完全不见了！';
+    else if (f < 0.35) st = '水迹只剩一点点';
+    else if (f < 0.75) st = '水迹慢慢变小';
+    else if (P2.t > 0.15) st = '水迹开始缩小';
+    $('#t2state').textContent = st;
+
+    var pct = Math.round(f*100);
+    var stage = pct >= 90 ? 1 : (pct >= 20 ? 2 : 3);
+    var html = '';
+    var rows = [
+      ['阶段一 · 刚涂上水', '一大片水迹，圆圆亮亮的'],
+      ['阶段二 · 中途观察', '水迹边缘向内缩小'],
+      ['阶段三 · 最后', '水迹完全看不见了']
+    ];
+    for (var i=0;i<3;i++){
+      var active = (stage === i+1);
+      html += '<div style="padding:10px 14px;border-radius:14px;' + (active ? 'background:#eaf7ff;font-weight:800;color:#1b7fbd' : 'color:#8ea9bd') + '">' + (active ? '▶ ' : '· ') + rows[i][0] + '：' + rows[i][1] + '</div>';
+    }
+    html += '<div style="margin-top:12px;font-size:15px;color:#5b7891">当前水迹还剩 <b style="color:#1b7fbd">' + pct + '%</b>　｜　蒸发速度：<b style="color:#d97518">' + (P2.env==='room'?'一般':(P2.env==='heat'?'很快':'较快')) + '</b></div>';
+    $('#rec2').innerHTML = html;
+
+    $('#vapor2').style.display = P2.mag ? '' : 'none';
+    var vop = (0.18 + 0.62 * (1 - f)).toFixed(2);
+    vaporDots2.forEach(function(d){
+      d.el.setAttribute('opacity', P2.mag ? vop : '0');
+    });
+  }
+  $$('.seg[data-k]').forEach(function(seg){
+    seg.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if(!b) return;
+      $$('button', seg).forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      if (seg.dataset.k === 'surf') P2.surf = b.dataset.v;
+      else if (seg.dataset.k === 'env') P2.env = b.dataset.v;
+      render2();
+    });
+  });
+  $('#t2').addEventListener('input', function(){ P2.t = parseFloat(this.value); P2.playing = false; $('#play2').textContent = '▶ 开始观察'; render2(); });
+  $('#mag2').addEventListener('change', function(){ P2.mag = this.checked; render2(); });
+  $('#play2').addEventListener('click', function(){
+    P2.playing = !P2.playing;
+    if (P2.playing && P2.t >= 10) P2.t = 0;
+    $('#play2').textContent = P2.playing ? '❚❚ 暂停' : '▶ 继续观察';
+  });
+  $('#reset2').addEventListener('click', function(){ P2.t = 0; P2.playing = false; $('#play2').textContent = '▶ 开始观察'; render2(); });
+  render2();
+
+  /* ================= P3 ================= */
+  var P3 = { running: false, t: 0, mag: false, dropN: 0, water: 1, parts: [], cooldown: 0 };
+  var DROP_POS = [];
+  (function buildDropPos(){
+    var i;
+    for (i=0;i<14;i++) DROP_POS.push([166, 120 + i*15]);   // 左内壁
+    for (i=0;i<14;i++) DROP_POS.push([454, 120 + i*15]);   // 右内壁
+    for (i=0;i<10;i++) DROP_POS.push([186 + i*28, 86]);    // 顶部内壁
+  })();
+
+  function spawnPart(){
+    var el = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    el.setAttribute('fill', '#8ed3f2');
+    el.setAttribute('stroke', '#63bde8');
+    el.setAttribute('stroke-width', '1');
+    el.setAttribute('r', (3 + Math.random()*2.4).toFixed(1));
+    $('#vaporG3').appendChild(el);
+    P3.parts.push({
+      el: el,
+      x: 280 + Math.random()*60,
+      y: 264,
+      vy: 0.55 + Math.random()*0.6,
+      vx: (Math.random()-0.5)*0.5,
+      ph: Math.random()*6.28
+    });
+  }
+  function addDrop(){
+    if (P3.dropN >= DROP_POS.length) return;
+    var p = DROP_POS[P3.dropN];
+    var c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx', p[0]); c.setAttribute('cy', p[1]);
+    c.setAttribute('r', (2.6 + Math.random()*2).toFixed(1));
+    c.setAttribute('fill', '#7fcdf0');
+    c.setAttribute('stroke', '#4aa8d6');
+    c.setAttribute('stroke-width', '1');
+    c.setAttribute('opacity','0.95');
+    $('#dropG3').appendChild(c);
+    P3.dropN++;
+  }
+  function render3(showAll){
+    $('#vaporG3').style.display = P3.mag ? '' : 'none';
+    $('#t3num').innerHTML = Math.round(P3.t) + '<small>秒</small>';
+    $('#w3').textContent = Math.round(P3.water*100) + '%';
+    $('#d3').textContent = P3.dropN;
+    $('#w3rect').setAttribute('y', (266 + (1-P3.water)*69).toFixed(1));
+    $('#w3rect').setAttribute('height', Math.max(0, P3.water*69).toFixed(1));
+    if (P3.dropN === 0) $('#t3state').textContent = P3.running ? '水蒸气正在上升…' : ($('#t3state').textContent);
+    else if (P3.dropN < 12) $('#t3state').textContent = '内壁出现了小水珠！';
+    else $('#t3state').textContent = '内壁布满小水珠了！';
+    $('#envTag3').textContent = P3.running ? '温水中 · 罩住观察' : (P3.dropN>0 ? '已观察到现象' : '准备就绪');
+    if (showAll) { $('#ans3').style.display = 'block'; }
+  }
+  $('#play3').addEventListener('click', function(){
+    if (!P3.running && P3.dropN === 0 && P3.t === 0){
+      P3.running = true; this.textContent = '❚❚ 暂停';
+    } else {
+      P3.running = !P3.running;
+      this.textContent = P3.running ? '❚❚ 暂停' : '▶ 继续实验';
+    }
+  });
+  $('#reset3').addEventListener('click', function(){
+    P3.running=false; P3.t=0; P3.dropN=0; P3.water=1; P3.parts=[];
+    P3.cooldown=0;
+    $('#vaporG3').innerHTML=''; $('#dropG3').innerHTML='';
+    $('#play3').textContent = '▶ 开始实验';
+    $('#t3state').textContent = '等待开始';
+    $('#ans3').style.display = 'none';
+    render3();
+  });
+  $('#mag3').addEventListener('change', function(){
+    P3.mag = this.checked;
+    $('#magTip3').innerHTML = P3.mag
+      ? '放大镜打开了：这些上升的小蓝点，就是<b>平时看不见的水蒸气</b>。'
+      : '放大镜关着时，水蒸气是<b>看不见</b>的——这正是最难懂的地方。';
+    render3();
+  });
+  $('#reveal3').addEventListener('click', function(){
+    $('#ans3').style.display = ($('#ans3').style.display === 'block') ? 'none' : 'block';
+  });
+  render3();
+
+  /* ================= 通用：赛跑 ================= */
+  var VAL4 = {
+    t: { '冷藏':0.62, '常温':1.0, '加热':2.6 },
+    w: { '无风':1.0, '微风':1.7, '大风':2.6 },
+    a: { '杯口（小）':1.0, '盘子（大）':1.9, '摊开（很大）':2.6 }
+  };
+  var OPT4 = { t:['冷藏','常温','加热'], w:['无风','微风','大风'], a:['杯口（小）','盘子（大）','摊开（很大）'] };
+  var RACE4 = [
+    { id:'A', t:'冷藏', w:'无风', a:'杯口（小）' },
+    { id:'B', t:'常温', w:'无风', a:'杯口（小）' },
+    { id:'C', t:'加热', w:'大风', a:'摊开（很大）' }
+  ];
+  var VAL5 = {
+    sun: { '太阳下':1.9, '阴凉处':1.0 },
+    wind: { '通风处':2.2, '不通风':1.0 },
+    spread: { '摊开挂':1.8, '团起来':1.0 }
+  };
+  var OPT5 = { sun:['太阳下','阴凉处'], wind:['通风处','不通风'], spread:['摊开挂','团起来'] };
+  var RACE5 = [
+    { id:'A', sun:'太阳下', wind:'通风处', spread:'摊开挂' },
+    { id:'B', sun:'太阳下', wind:'不通风', spread:'团起来' },
+    { id:'C', sun:'阴凉处', wind:'不通风', spread:'团起来' }
+  ];
+  var S4 = { f:[1,1,1], done:[false,false,false], order:[], running:false };
+  var S5 = { f:[1,1,1], done:[false,false,false], order:[], running:false };
+
+  function kOf(which, r){
+    if (which === '4'){
+      var p = VAL4.t[r.t] * VAL4.w[r.w] * VAL4.a[r.a];
+      return 0.05 * Math.pow(p, 0.6);
+    }
+    var q = VAL5.sun[r.sun] * VAL5.wind[r.wind] * VAL5.spread[r.spread];
+    return 0.045 * Math.pow(q, 0.6);
+  }
+
+  function updateRace(which){
+    var cfg = (which === '4') ? RACE4 : RACE5;
+    var st = (which === '4') ? S4 : S5;
+    for (var i = 0; i < 3; i++){
+      var f = st.f[i];
+      var bar = $('#bar' + which + '-' + i);
+      if (bar){ bar.style.width = Math.round(f * 100) + '%'; bar.classList.toggle('done', st.done[i]); }
+      var mt = $('#mt' + which + '-' + i);
+      if (mt) mt.textContent = '剩余水分 ' + Math.round(f * 100) + '%';
+      var ms = $('#ms' + which + '-' + i);
+      if (ms) ms.textContent = st.done[i] ? '已干' : '晾晒中';
+      var rk = $('#rk' + which + '-' + i);
+      var rank = st.order.indexOf(i);
+      if (rk) rk.textContent = rank >= 0 ? ('🏅 第 ' + (rank + 1) + ' 名变干') : '';
+      var cup = $('#cup' + which + '-' + i);
+      if (cup) cup.classList.toggle('done', st.done[i]);
+      if (which === '4'){
+        var w = $('#wv4-' + i);
+        if (w){ var h = 90 * f; w.setAttribute('y', (109 - h).toFixed(1)); w.setAttribute('height', Math.max(0, h).toFixed(1)); }
+      } else {
+        var w5 = $('#wv5-' + i);
+        if (w5){ w5.setAttribute('height', Math.max(2, f * 60 + 12).toFixed(1)); w5.setAttribute('opacity', (0.25 + 0.75 * f).toFixed(2)); }
+      }
+    }
+  }
+
+  function renderRace(which){
+    var box = $('#race' + which);
+    var cfg = (which === '4') ? RACE4 : RACE5;
+    var opts = (which === '4') ? OPT4 : OPT5;
+    var st = (which === '4') ? S4 : S5;
+    var keys = (which === '4') ? ['t', 'w', 'a'] : ['sun', 'wind', 'spread'];
+    var html = '';
+    cfg.forEach(function(r, i){
+      html += '<div class="rcup" id="cup' + which + '-' + i + '">';
+      html += '<div class="nm"><i>' + r.id + '</i>' + (which === '4' ? ('第 ' + (i + 1) + ' 杯水') : ('第 ' + (i + 1) + ' 件衣服')) + '</div>';
+      html += '<svg viewBox="0 0 120 130">';
+      if (which === '4'){
+        html += '<rect x="28" y="16" width="64" height="98" rx="8" fill="#eef8ff" stroke="#a9d3e8" stroke-width="3"/>';
+        html += '<rect id="wv4-' + i + '" x="33" y="109" width="54" height="0" rx="5" fill="#6ec6ec"/>';
+      } else {
+        html += '<line x1="30" y1="14" x2="90" y2="14" stroke="#b9ddef" stroke-width="4"/>';
+        html += '<line x1="30" y1="14" x2="30" y2="36" stroke="#b9ddef" stroke-width="2"/>';
+        html += '<line x1="90" y1="14" x2="90" y2="36" stroke="#b9ddef" stroke-width="2"/>';
+        html += '<rect id="wv5-' + i + '" x="30" y="36" width="60" height="72" rx="8" fill="#bfe9fb" stroke="#6ec6ec" stroke-width="2.5"/>';
+      }
+      html += '</svg>';
+      html += '<div class="rbar"><i id="bar' + which + '-' + i + '" style="width:100%"></i></div>';
+      html += '<div class="rmeta"><span id="mt' + which + '-' + i + '">剩余水分 100%</span><span id="ms' + which + '-' + i + '">晾晒中</span></div>';
+      html += '<div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">';
+      keys.forEach(function(key){
+        html += '<div class="seg" data-cup="' + i + '" data-key="' + key + '" style="gap:4px">';
+        opts[key].forEach(function(lab){
+          var on = (String(lab) === String(r[key])) ? ' on' : '';
+          html += '<button data-v="' + lab + '" class="' + on + '" style="font-size:13.5px;padding:9px 4px;min-width:0">' + lab + '</button>';
+        });
+        html += '</div>';
+      });
+      html += '</div>';
+      html += '<div class="rank" id="rk' + which + '-' + i + '"></div>';
+      html += '</div>';
+    });
+    box.innerHTML = html;
+    $$('#race' + which + ' .seg').forEach(function(seg){
+      seg.addEventListener('click', function(e){
+        var b = e.target.closest('button'); if (!b) return;
+        if (st.running) return;
+        var i = parseInt(seg.dataset.cup, 10);
+        cfg[i][seg.dataset.key] = b.dataset.v;
+        renderRace(which);
+      });
+    });
+    updateRace(which);
+  }
+
+  function resetRace(which){
+    var st = (which === '4') ? S4 : S5;
+    st.f = [1, 1, 1]; st.done = [false, false, false]; st.order = []; st.running = false;
+    var btn = $('#go' + which);
+    if (btn) btn.textContent = (which === '4') ? '▶ 同时开始' : '▶ 开始比赛';
+    if (which === '4'){
+      $('#concl4').innerHTML = '先给三杯水设置好条件，点"同时开始"，看看<b>哪一杯先干</b>，再想一想：是什么让它蒸发得更快？';
+      $('#tbl4').style.display = 'none';
+    } else {
+      $('#concl5').innerHTML = '调好三件衣服的晾晒方式，点"开始比赛"，看看哪件先干，并说说为什么。';
+    }
+    renderRace(which);
+  }
+  $('#go5').addEventListener('click', function(){ S5.running = true; this.textContent = '❚❚ 比赛中…'; });
+  $('#reset5').addEventListener('click', function(){ resetRace('5'); });
+
+  function tickRace(which){
+    var st = (which === '4') ? S4 : S5;
+    var cfg = (which === '4') ? RACE4 : RACE5;
+    if (!st.running) return;
+    for (var i = 0; i < 3; i++){
+      if (st.done[i]) continue;
+      st.f[i] -= kOf(which, cfg[i]) * dt;
+      if (st.f[i] <= 0){ st.f[i] = 0; st.done[i] = true; st.order.push(i); }
+    }
+    updateRace(which);
+    if (st.done[0] && st.done[1] && st.done[2]){
+      st.running = false;
+      var btn = $('#go' + which); if (btn) btn.textContent = '✔ 比赛结束';
+      if (which === '4'){
+        $('#concl4').innerHTML = '🏆 第 <b>' + (st.order[0] + 1) + '</b> 杯水最先干了！<br>结论：水蒸发的快慢和三个条件有关——<b>温度越高</b>、<b>风越大</b>、<b>水的表面积越大</b>，蒸发得越快。';
+        $('#tbl4').innerHTML = '<table class="tbl"><tr><th>改变的条件</th><th>怎么变</th><th>蒸发快慢</th></tr>' +
+          '<tr><td>温度</td><td>冷藏 → 常温 → 加热</td><td class="lk">越来越快</td></tr>' +
+          '<tr><td>风</td><td>无风 → 微风 → 大风</td><td class="lk">越来越快</td></tr>' +
+          '<tr><td>表面积</td><td>杯口 → 盘子 → 摊开</td><td class="lk">越来越快</td></tr>' +
+          '<tr><td>温度</td><td>常温 → 冷藏</td><td class="lk bad">变慢</td></tr></table>';
+        $('#tbl4').style.display = '';
+      } else {
+        $('#concl5').innerHTML = '🏆 <b>第 ' + (st.order[0] + 1) + ' 件衣服</b>最先干了！<br>想让它干得更快，就选：<b>晒在太阳下、放在通风处、把衣服摊开挂</b>。反过来，阴凉、不通风、团起来，就干得慢。';
+      }
+    }
+  }
+  renderRace('5');
+
+  /* ================= 主循环 ================= */
+  var last = 0, dt = 0;
+  function loop(ts){
+    if (!last) last = ts;
+    dt = Math.min(0.05, (ts - last) / 1000);
+    last = ts;
+
+    /* P2 自动播放 */
+    if (curTab === '2' && P2.playing){
+      P2.t += dt * 1.1;
+      if (P2.t >= 10){ P2.t = 10; P2.playing = false; $('#play2').textContent = '▶ 重新观察'; }
+      render2();
+    }
+
+    /* P3 罩杯实验 */
+    if (curTab === '3' && P3.running){
+      P3.t += dt * (P3.mag ? 1.0 : 1.6);
+      P3.water = Math.max(0.2, 1 - P3.t * 0.014);
+      P3.cooldown -= dt;
+      if (P3.cooldown <= 0 && P3.t > 0.6){
+        spawnPart();
+        P3.cooldown = 0.10;
+      }
+      for (var i=P3.parts.length-1; i>=0; i--){
+        var p = P3.parts[i];
+        p.ph += dt * 5;
+        p.y -= p.vy * dt * 62;
+        p.x += Math.sin(p.ph) * 0.5 + p.vx * dt * 26;
+        p.x = clamp(p.x, 168, 452);
+        if (!P3.mag){ p.el.setAttribute('opacity', '0'); }
+        else { p.el.setAttribute('opacity', '0.62'); }
+        p.el.setAttribute('cx', p.x.toFixed(1));
+        p.el.setAttribute('cy', p.y.toFixed(1));
+        if (p.y < 100 || p.x <= 170 || p.x >= 450){
+          if (Math.random() < 0.45) addDrop();
+          p.el.remove();
+          P3.parts.splice(i,1);
+        }
+      }
+      if (P3.t > 2.2 && P3.dropN === 0) addDrop();
+      render3();
+    }
+
+    /* 赛跑 */
+    if (curTab === '5') tickRace('5');
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+})();
+</script>
+</body>
+</html>

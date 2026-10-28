@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>天气的影响 · 三年级科学互动课堂 · 【徐敏】</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f8fd; --card:#ffffff; --ink:#1b2a41; --ink2:#5d6e88; --ink3:#8898ae;
+  --line:#e3ebf6; --blue:#2b8cf0; --blue-soft:#e9f2ff; --blue-deep:#1560b8;
+  --orange:#ff8a3d; --orange-soft:#fff3e8;
+  --green:#1fae68; --green-soft:#e9f9f0;
+  --red:#e8543f; --red-soft:#ffeeeb;
+  --purple:#7c5cf0; --purple-soft:#f1edff;
+  --yellow-soft:#fff8e1; --yellow-line:#f0d27a;
+  --r:18px; --sh:0 8px 26px rgba(28,70,130,.08);
+}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,-apple-system,sans-serif;
+  background:radial-gradient(1100px 520px at 8% -8%,#dcecff 0%,#f1f7fe 45%,#f7f9fc 100%);
+  background-attachment:fixed;
+  color:var(--ink); line-height:1.75; padding-bottom:70px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+/* ---------- header ---------- */
+header{padding:34px 0 10px;text-align:center}
+.kicker{display:inline-block;font-size:13px;letter-spacing:.14em;color:var(--blue-deep);
+  background:#fff;border:1px solid var(--line);border-radius:99px;padding:4px 16px;box-shadow:var(--sh)}
+h1{font-size:38px;letter-spacing:.04em;margin:14px 0 6px;font-weight:800}
+h1 .hl{background:linear-gradient(180deg,transparent 62%,#bfe0ff 62%);padding:0 4px}
+.sub{color:var(--ink2);font-size:15px}
+/* ---------- tabs ---------- */
+nav{position:sticky;top:0;z-index:50;padding:14px 0 12px;margin-top:18px;
+  background:linear-gradient(180deg,rgba(247,250,253,.96) 60%,rgba(247,250,253,.75));backdrop-filter:blur(10px)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tab{border:1px solid var(--line);background:#fff;color:var(--ink2);font-size:15px;font-weight:600;
+  padding:9px 18px;border-radius:99px;cursor:pointer;transition:.18s;font-family:inherit;box-shadow:0 2px 8px rgba(28,70,130,.05)}
+.tab:hover{border-color:#bcd9f8;color:var(--blue-deep);transform:translateY(-1px)}
+.tab.on{background:linear-gradient(135deg,#2b8cf0,#4fb0ff);color:#fff;border-color:transparent;box-shadow:0 6px 18px rgba(43,140,240,.32)}
+.tab .n{opacity:.6;font-size:12px;margin-right:5px}
+/* ---------- section ---------- */
+section{display:none;animation:fade .3s ease}
+section.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:26px 26px 28px;margin-bottom:20px;border:1px solid rgba(227,235,246,.9)}
+h2{font-size:24px;font-weight:800;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+h2 .dot{width:9px;height:26px;border-radius:6px;background:linear-gradient(180deg,#5cb3ff,#2b8cf0)}
+.lead{color:var(--ink2);font-size:15px;margin-top:8px}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 6px}
+.step{font-size:13px;color:var(--blue-deep);background:var(--blue-soft);border:1px dashed #b9daff;
+  border-radius:10px;padding:5px 12px}
+.step b{font-weight:800}
+.hintbar{margin-top:14px;font-size:14.5px;color:#8a6300;background:var(--yellow-soft);border:1px solid var(--yellow-line);
+  border-radius:12px;padding:10px 16px}
+.hintbar b{color:#c1721a}
+/* ---------- wea cards (m1) ---------- */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:20px}
+.wcard{border:1px solid var(--line);border-radius:16px;background:#fff;padding:16px;cursor:pointer;
+  transition:.2s;position:relative;overflow:hidden}
+.wcard:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(28,70,130,.11);border-color:#bcd9f8}
+.wcard .ic{font-size:34px;line-height:1}
+.wcard .nm{font-weight:800;font-size:17px;margin-top:6px}
+.wcard .ds{font-size:13.5px;color:var(--ink2);margin-top:4px}
+.wcard .peek{font-size:12.5px;color:var(--blue);margin-top:10px;font-weight:700}
+.wbody{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;display:none}
+.wbody.open{display:block;animation:fade .25s}
+.qa{font-size:14px;color:var(--ink2);background:#f7faff;border-left:3px solid #9ccdff;border-radius:0 10px 10px 0;padding:8px 12px}
+.lin{display:flex;gap:8px;font-size:14px;margin-top:8px;align-items:flex-start}
+.lin .tag{flex:0 0 auto;font-size:12.5px;border-radius:7px;padding:1px 9px;font-weight:700;margin-top:3px}
+.tag.g{background:var(--green-soft);color:#137a48}
+.tag.r{background:var(--red-soft);color:#b8381f}
+.tag.b{background:var(--blue-soft);color:var(--blue-deep)}
+/* ---------- buttons ---------- */
+.btn{border:none;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;border-radius:11px;
+  padding:9px 18px;transition:.16s;display:inline-flex;align-items:center;gap:7px}
+.btn:active{transform:scale(.97)}
+.btn.pri{background:linear-gradient(135deg,#ffb066,#ff8a3d);color:#fff;box-shadow:0 5px 14px rgba(255,138,61,.3)}
+.btn.pri:hover{filter:brightness(1.05)}
+.btn.ghost{background:#fff;border:1.5px solid #cfe3fa;color:var(--blue-deep)}
+.btn.ghost:hover{background:var(--blue-soft)}
+.btn.go{background:linear-gradient(135deg,#37c07e,#1fae68);color:#fff;box-shadow:0 5px 14px rgba(31,174,104,.3)}
+.btn[disabled]{opacity:.45;cursor:default;filter:grayscale(.4)}
+/* ---------- m2 ---------- */
+.picker{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0 4px}
+.pill{border:1.5px solid var(--line);background:#fff;border-radius:13px;padding:9px 15px;cursor:pointer;
+  font-family:inherit;font-size:15px;font-weight:700;color:var(--ink2);transition:.18s;display:flex;align-items:center;gap:7px}
+.pill:hover{border-color:#bcd9f8;transform:translateY(-2px)}
+.pill.on{background:linear-gradient(135deg,#2b8cf0,#57b2ff);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(43,140,240,.3)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(146px,1fr));gap:11px;margin-top:16px}
+.rcard{border:1.5px solid var(--line);border-radius:14px;background:#fff;padding:13px 10px;text-align:center;cursor:pointer;transition:.18s;font-family:inherit}
+.rcard:hover{transform:translateY(-3px);border-color:#bcd9f8;box-shadow:0 10px 22px rgba(28,70,130,.1)}
+.rcard.on{border-color:var(--blue);background:linear-gradient(180deg,#f2f8ff,#fff);box-shadow:0 8px 20px rgba(43,140,240,.16)}
+.rcard .ic{font-size:29px}
+.rcard .nm{font-weight:800;font-size:14.5px;margin-top:3px}
+.rcard .st{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.panel{margin-top:20px;border:1.5px solid #d8e8fb;border-radius:16px;background:linear-gradient(180deg,#f8fcff,#fff);padding:22px}
+.phead{font-size:14px;font-weight:800;color:var(--blue-deep);letter-spacing:.03em}
+.pq{font-size:23px;font-weight:800;line-height:1.55;margin:10px 0 4px}
+.pneed{font-size:14.5px;color:var(--ink2)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.box{border-radius:13px;padding:14px 17px;margin-top:14px;font-size:16px;animation:fade .28s}
+.box.h{background:var(--yellow-soft);border:1.5px dashed var(--yellow-line);color:#7a5a00}
+.box.a{background:var(--green-soft);border:1.5px solid #a9e5c6;color:#0f5c37;font-size:16.5px;line-height:1.85}
+.box.a .sm{display:block;font-size:14px;color:#3c7d5c;margin-top:6px}
+.box.q2{background:var(--purple-soft);border:1.5px solid #d3c6ff;color:#4b2fb0;font-size:15px}
+.box .t{font-weight:800;margin-right:6px}
+.hidden{display:none}
+/* ---------- m3 ---------- */
+.ngrid{display:grid;gap:14px;margin-top:18px}
+.nrow{border:1px solid var(--line);border-radius:15px;padding:16px 18px;background:#fff}
+.nrow .hd{font-weight:800;font-size:16px;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.nli{display:flex;gap:9px;font-size:15px;padding:6px 0;color:#33455e;align-items:flex-start}
+.nli .b{flex:0 0 auto;width:20px;height:20px;border-radius:50%;font-size:12px;display:flex;align-items:center;justify-content:center;
+  background:var(--blue-soft);color:var(--blue-deep);font-weight:800;margin-top:5px}
+.nli.an .b{background:var(--orange-soft);color:#c05a12}
+.nli.pl .b{background:var(--green-soft);color:#137a48}
+/* ---------- m4 ---------- */
+.scale{margin-top:26px}
+.slider{width:100%;-webkit-appearance:none;appearance:none;height:16px;border-radius:99px;outline:none;
+  background:linear-gradient(90deg,#2f6ee0 0%,#57a8f0 22%,#5fd39a 42%,#ffc247 62%,#ff7a4d 82%,#d62f2f 100%);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.14)}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;
+  border:4px solid #2b8cf0;cursor:pointer;box-shadow:0 3px 12px rgba(20,50,100,.3);transition:.15s}
+.slider::-webkit-slider-thumb:hover{transform:scale(1.12)}
+.slider::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid #2b8cf0;cursor:pointer}
+.marks{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}
+.mk{text-align:center;cursor:pointer;padding:8px 4px;border-radius:12px;transition:.16s;border:1.5px solid transparent}
+.mk:hover{background:#f5faff}
+.mk.on{background:#fff;border-color:var(--line);box-shadow:var(--sh)}
+.mk .e{font-size:24px}
+.mk .t1{font-weight:800;font-size:14px;margin-top:2px}
+.mk .t2{font-size:12px;color:var(--ink3)}
+.tpanel{margin-top:22px;border-radius:16px;overflow:hidden;border:1.5px solid var(--line)}
+.tpan-h{padding:16px 20px;background:linear-gradient(135deg,#eef6ff,#f9fcff);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tpan-h .big{font-size:26px;font-weight:800;letter-spacing:.02em}
+.badge{font-size:12.5px;font-weight:800;border-radius:99px;padding:3px 12px;background:var(--red-soft);color:#c02c14;border:1px solid #ffc3b6}
+.badge.ok{background:var(--green-soft);color:#137a48;border-color:#a9e5c6}
+.tpan-b{padding:6px 20px 20px;background:#fff}
+.tgrp{padding:14px 0 4px;border-top:1px dashed var(--line)}
+.tgrp:first-child{border-top:none}
+.tgrp .gh{font-weight:800;font-size:15.5px;margin-bottom:6px;display:flex;align-items:center;gap:7px}
+.tgrp .gi{font-size:19px}
+.tgrp ul{margin:0;padding-left:0;list-style:none}
+.tgrp li{font-size:15px;color:#33455e;padding:5px 0 5px 20px;position:relative}
+.tgrp li::before{content:"";position:absolute;left:4px;top:15px;width:6px;height:6px;border-radius:50%;background:#b9d6f7}
+.severe-note{margin-top:16px;background:var(--red-soft);border:1.5px solid #ffc3b6;border-radius:13px;padding:13px 17px;
+  font-size:15px;color:#8f2a17}
+/* ---------- m5 ---------- */
+.cgrid{display:grid;gap:13px;margin-top:20px}
+.ccard{border:1.5px solid var(--line);border-radius:15px;padding:17px 20px;background:#fff;transition:.2s}
+.ccard.open{border-color:#a9e5c6;background:linear-gradient(180deg,#f6fdf9,#fff)}
+.ccard .ch{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
+.ccard .cn{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-size:14px;
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.ccard.open .cn{background:var(--green)}
+.ccard .cb{display:none;margin-top:10px;font-size:15.5px;color:#25503a;line-height:1.9}
+.ccard.open .cb{display:block;animation:fade .28s}
+.ccard .btn{margin-top:10px}
+.final{margin-top:22px;text-align:center;padding:24px;border-radius:16px;
+  background:linear-gradient(135deg,#eaf4ff,#f4fbff);border:1.5px dashed #b9daff}
+.final .fq{font-size:22px;font-weight:800;color:var(--blue-deep)}
+.final .fa{font-size:15px;color:var(--ink2);margin-top:10px}
+.foot{text-align:center;color:var(--ink3);font-size:13px;margin-top:26px}
+@media (max-width:640px){
+  h1{font-size:27px} h2{font-size:20px} .pq{font-size:19px}
+  .rgrid{grid-template-columns:repeat(auto-fill,minmax(108px,1fr))}
+  .wgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .marks{grid-template-columns:repeat(5,1fr)} .mk .t2{display:none}
+  .card{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="kicker">三年级上册科学 · 天气单元</span>
+    <h1>天 气 的 <span class="hl">影 响</span></h1>
+    <p class="sub">先猜一猜，再揭晓 —— 看看同一种天气，究竟让谁开心、让谁发愁 · 教师【徐敏】</p>
+  </header>
+
+  <nav>
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-s="s1"><span class="n">01</span>天气家族</button>
+      <button class="tab" data-s="s2"><span class="n">02</span>不同的人，不同的感受</button>
+      <button class="tab" data-s="s3"><span class="n">03</span>动植物怎么说</button>
+      <button class="tab" data-s="s4"><span class="n">04</span>冷热放大镜</button>
+      <button class="tab" data-s="s5"><span class="n">05</span>我们的发现</button>
+    </div>
+  </nav>
+
+  <!-- ================= 模块一 ================= -->
+  <section id="s1" class="on">
+    <div class="card">
+      <h2><span class="dot"></span>天气家族大集合</h2>
+      <p class="lead">先认识一下我们身边的天气朋友。点开每一张卡片，看看它的样子——但答案先别看，先让同学们猜一猜。</p>
+      <div class="steps">
+        <span class="step"><b>步骤①</b> 认一认：这是哪种天气？</span>
+        <span class="step"><b>步骤②</b> 猜一猜：这样的天气里，谁最开心？谁最发愁？</span>
+        <span class="step"><b>步骤③</b> 揭晓对照：和我们想的哪里不一样？</span>
+      </div>
+      <div class="hintbar">💡 <b>提示用法：</b>先请 2—3 位同学说出自己的猜测并做动作表演，全班同学说不出来时，再点下方的「揭晓参考」。</div>
+      <div class="wgrid" id="wgrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= 模块二 ================= -->
+  <section id="s2">
+    <div class="card">
+      <h2><span class="dot"></span>不同的职业，不同的感受</h2>
+      <p class="lead">同样是这个天气，为什么有人笑、有人愁？先选一种天气，再选一个角色，让学生先猜、先演，最后才揭晓。</p>
+      <div class="steps">
+        <span class="step"><b>步骤①</b> 选天气 + 选角色</span>
+        <span class="step"><b>步骤②</b> 学生先猜、先表演</span>
+        <span class="step"><b>步骤③</b> 说不出 → 点「给点提示」</span>
+        <span class="step"><b>步骤④</b> 再点「揭晓参考说法」对照</span>
+      </div>
+      <div class="picker" id="wpicker"></div>
+      <div class="rgrid" id="rgrid"></div>
+      <div class="panel" id="panel2">
+        <div class="phead">👆 请先在上面选择一种天气和一个角色</div>
+        <div class="pq" style="color:#9fb0c6">这里会出现「猜一猜」的问题</div>
+        <p class="pneed">同一件事，不同的人感觉会不一样哦。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 模块三 ================= -->
+  <section id="s3">
+    <div class="card">
+      <h2><span class="dot"></span>动物和植物怎么说？</h2>
+      <p class="lead">天气不只影响人，还影响着身边的动物和植物。选一种天气，看看它们悄悄做出的反应。</p>
+      <div class="steps">
+        <span class="step"><b>步骤①</b> 先问：这种天气里，动植物会有什么变化？</span>
+        <span class="step"><b>步骤②</b> 点开卡片逐条对照</span>
+        <span class="step"><b>步骤③</b> 想一想：它们的反应和我们一样吗？</span>
+      </div>
+      <div class="picker" id="npicker"></div>
+      <div class="panel" id="panel3" style="margin-top:18px"></div>
+    </div>
+  </section>
+
+  <!-- ================= 模块四 ================= -->
+  <section id="s4">
+    <div class="card">
+      <h2><span class="dot"></span>冷热放大镜</h2>
+      <p class="lead">同样都是"冷"，冷一点和冷到极点，一样吗？拖动下面的滑杆，从最冷一直拉到最热，看看影响是怎样一步步变大的。</p>
+      <div class="steps">
+        <span class="step"><b>步骤①</b> 先停在"舒适"，问：这天出门要穿什么？</span>
+        <span class="step"><b>步骤②</b> 慢慢往两端拖动，每动一格就让同学猜一次</span>
+        <span class="step"><b>步骤③</b> 拖到最两端时追问：这还只是"有点冷/热"吗？</span>
+      </div>
+      <div class="scale">
+        <input type="range" min="0" max="4" step="1" value="2" class="slider" id="tempRange">
+        <div class="marks" id="tmarks"></div>
+      </div>
+      <div class="tpanel">
+        <div class="tpan-h" id="tpanH"></div>
+        <div class="tpan-b" id="tpanB"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 模块五 ================= -->
+  <section id="s5">
+    <div class="card">
+      <h2><span class="dot"></span>我们的发现</h2>
+      <p class="lead">前面猜了这么多，现在请大家用自己的话，把发现说出来。说完一条，再点开卡片对照。</p>
+      <div class="steps">
+        <span class="step"><b>步骤①</b> 小组讨论：你发现了什么规律？</span>
+        <span class="step"><b>步骤②</b> 派代表发言，其他人补充</span>
+        <span class="step"><b>步骤③</b> 逐条揭晓，看看和我们的发现一样吗</span>
+      </div>
+      <div class="cgrid" id="cgrid"></div>
+      <div class="final">
+        <div class="fq">最后一个问题：你能说出"最好的天气"吗？</div>
+        <div class="fa">这个问题没有标准答案。晒谷子的农民说是晴天，卖雨伞的老板说是雨天；蚯蚓盼下雨，蝴蝶盼晴天。<br>
+        天气本身没有好坏，重要的是——<b>看天做事，提前打算。</b></div>
+      </div>
+      <p class="foot">天气的影响 · 三年级科学互动课堂 · 先猜后揭晓</p>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ================================================================
+   数据区
+   ================================================================ */
+
+/* ---- 模块一：天气家族 ---- */
+const WEATHER_LIST = [
+  {ic:'☀️', nm:'晴天', ds:'阳光充足，天上云很少，地面被晒得暖烘烘的。',
+   q:'这样的天气里，谁最开心？谁最发愁？',
+   like:'晒被子的奶奶、卖冰棍的老板、能去公园玩的小朋友。',
+   hate:'干旱时等雨下田的农民、怕晒黑晒伤的户外工人。'},
+  {ic:'⛅', nm:'多云', ds:'云比较多，太阳时隐时现，一会儿亮一会儿暗。',
+   q:'这样的天气，对谁是刚刚好？',
+   like:'要上体育课的同学、出门散步的人、怕被晒的人。',
+   hate:'要晒粮食和衣服的人（晒不干）、想拍蓝天白云以外题材的摄影师。'},
+  {ic:'☁️', nm:'阴天', ds:'天空被云层盖住，光线暗暗的，常常快要下雨了。',
+   q:'阴天来了，猜猜大家的心情。',
+   like:'不用被太阳晒的户外工人、担心土地干旱的种菜人。',
+   hate:'要晾衣服的妈妈、要拍出好照片的摄影师、想去操场玩的同学。'},
+  {ic:'🌧️', nm:'下雨', ds:'小水滴从云里落下来，地面湿漉漉的，空气变得清新。',
+   q:'下雨了，谁笑得最开心？谁最头疼？',
+   like:'旱了很久的庄稼、卖雨伞的老板、可以踩水坑的小朋友。',
+   hate:'要在外面奔波的外卖小哥、正在开运动会的学校、晾衣服的人。'},
+  {ic:'⛈️', nm:'雷雨', ds:'又打雷又闪电，雨下得又急又大，还常常伴着大风。',
+   q:'雷雨来的时候，谁会先躲起来？',
+   like:'被闷热憋了很久的人——雷雨过后会凉快一大截。',
+   hate:'还在户外活动的人、要抢修线路的电工、怕打雷的小狗。'},
+  {ic:'🌨️', nm:'下雪', ds:'气温很低，小雪花飘下来，把地面盖成白茫茫的一片。',
+   q:'下雪天，谁的心里最矛盾？',
+   like:'想堆雪人打雪仗的小朋友、摄影爱好者、被雪盖住的麦苗。',
+   hate:'骑车上班的人、要连夜清理道路的环卫工人、没有暖棚的养殖户。'},
+  {ic:'🌫️', nm:'大雾', ds:'空气中的小水珠让远处变得模糊，几十米外就看不清楚了。',
+   q:'大雾天，谁会特别小心？',
+   like:'想拍朦胧仙境照片的摄影师、需要湿润空气的植物。',
+   hate:'开车的司机、机场的飞行员、骑车上学的同学。'},
+  {ic:'🌬️', nm:'大风', ds:'风很大，能吹动树枝、掀起衣角、扬起地上的尘土。',
+   q:'风这么大，风除了捣乱，还能帮忙吗？',
+   like:'放风筝的小朋友、风力发电机、靠风传播种子的蒲公英。',
+   hate:'撑着伞走路的人、容易被吹倒的高个子庄稼、没有加固的大棚。'},
+  {ic:'🧊', nm:'冰雹', ds:'一颗颗小冰球从天上砸下来，来得突然，砸得很重。',
+   q:'冰雹来了，为什么大家都紧张？',
+   like:'几乎没有——它是典型的灾害性天气。',
+   hate:'地里的庄稼和果子会被砸坏，汽车、屋顶也会被砸出坑。'},
+  {ic:'🌀', nm:'台风', ds:'狂风加上暴雨，是严重的灾害性天气，常常要停课停工。',
+   q:'台风要来，人们会做哪些准备？',
+   like:'几乎没有——不过台风有时能给闷热干旱的地方带来降温解渴的雨。',
+   hate:'海边的渔民和船只、果农的果树、没有加固的广告牌和树木。'}
+];
+
+/* ---- 模块二：天气 × 职业 ---- */
+const WEATHERS = [
+  {id:'sunny', nm:'晴天', ic:'☀️', trait:'太阳很大，光线强，地面晒得发烫，空气也有些干燥。'},
+  {id:'rain',  nm:'下雨天', ic:'🌧️', trait:'地面湿滑，视线变差，人和东西都容易被淋湿，气温也会下降。'},
+  {id:'snow',  nm:'下雪天', ic:'🌨️', trait:'到处白茫茫，路面又滑又冷，积雪会压住东西，气温很低。'},
+  {id:'hot',   nm:'酷热天', ic:'🥵', trait:'气温很高，太阳毒辣，人一动就出汗，地面烫脚。'},
+  {id:'cold',  nm:'严寒天', ic:'🥶', trait:'气温很低，风一吹更冷，手和脸冻得发疼，水会结冰。'},
+  {id:'fog',   nm:'大雾天', ic:'🌫️', trait:'能见度很低，几十米外就看不清楚，空气潮湿，出行变慢。'}
+];
+
+const ROLES = [
+  {id:'farmer',   nm:'农民伯伯', ic:'👨‍🌾', hint:'他的工作全在露天的田里，庄稼长得好不好，就是他一年的收成。'},
+  {id:'courier',  nm:'外卖小哥', ic:'🛵', hint:'他整天在路上跑，还要按时把饭菜送到，最怕迟到、怕东西被淋湿。'},
+  {id:'student',  nm:'小学生',   ic:'🎒', hint:'他要上学、要上课、还要在操场运动和放学回家。'},
+  {id:'police',   nm:'交警叔叔', ic:'🚦', hint:'他站在马路中间指挥交通，一天都在户外，一刻也不能离开岗位。'},
+  {id:'photo',    nm:'摄影师',   ic:'📷', hint:'他带着相机出门拍照片，画面好不好看、光线够不够，直接决定作品。'},
+  {id:'cleaner',  nm:'环卫工人', ic:'🧹', hint:'他要在马路上长时间扫地，最怕活儿突然变多变难。'},
+  {id:'icecream', nm:'卖冰棍的老板', ic:'🍦', hint:'他的生意，和温度的高低直接挂钩。'},
+  {id:'umbrella', nm:'卖雨伞的老板', ic:'☂️', hint:'他的生意，和天会不会下雨直接挂钩。'}
+];
+
+/* 每种天气下 8 个角色的感受：t=说法，s=情绪标签 */
+const FEEL = {
+sunny:{
+ farmer:{s:'又高兴又担心',c:'mix',t:'太阳足，庄稼长得快，收了粮食晒上两个好太阳就干透了，最省事。可太阳太毒，地里的苗也会被晒蔫，得挑水去浇。'},
+ courier:{s:'晒得难受，但送得快',c:'mix',t:'太阳直晒，骑一会儿车就满头大汗，胳膊晒得发红发疼。不过路面不滑、视线好，送得比雨天快，心里还算踏实。'},
+ student:{s:'很开心',c:'pos',t:'可以上体育课，去操场跑跳，放学还能去公园玩。就是中午太阳太厉害，晒得睁不开眼，要戴帽子、多喝水。'},
+ police:{s:'又晒又累',c:'neg',t:'站在马路中间一点遮挡也没有，汗顺着脸往下淌，制服湿了又干。还要一直闻汽车尾气，特别辛苦。'},
+ photo:{s:'太棒了',c:'pos',t:'光线好、天空蓝，拍出来的照片又透亮又干净，是出好照片的好日子。'},
+ cleaner:{s:'热得够呛',c:'neg',t:'太阳底下扫街，衣服湿了又干、干了又湿，得不停地喝水，还得小心中暑。'},
+ icecream:{s:'乐开了花',c:'pos',t:'天一热，冰棍和冷饮卖得特别快，冰柜一会儿就空一半，是赚钱的好日子。'},
+ umbrella:{s:'有点发愁',c:'neg',t:'大晴天谁会买雨伞呀，摊位前冷冷清清，一天也卖不出几把。'}
+},
+rain:{
+ farmer:{s:'笑得合不拢嘴',c:'mix',t:'庄稼正缺水，一场雨等于免费浇水，苗子蹭蹭往上长。可要是连着下暴雨，田里积水、庄稼倒伏，那就成灾了。'},
+ courier:{s:'最头疼',c:'neg',t:'风里雨里都得跑，雨衣挡不住，裤脚鞋子全湿透。路面打滑不敢骑快，可订单超时又要被投诉。'},
+ student:{s:'又爱又恨',c:'mix',t:'可以穿雨衣雨鞋踩水坑，特别好玩。可运动会取消了，体育课改成在教室里上，有点扫兴。'},
+ police:{s:'更辛苦，也更忙',c:'neg',t:'雨天路滑、视线差，最容易出交通事故。他得淋着雨指挥，还得一遍遍提醒大家慢一点、再慢一点。'},
+ photo:{s:'拍不成好照片',c:'neg',t:'天色灰蒙蒙的，光线平，相机还怕淋湿。只能拍拍屋檐上的雨滴和水洼里的倒影。'},
+ cleaner:{s:'活儿一下子变多了',c:'neg',t:'雨水把落叶和垃圾冲得到处都是，下水口容易堵住，他得冒雨去掏，衣服一直是湿的。'},
+ icecream:{s:'愁眉苦脸',c:'neg',t:'下雨没人出门，冰棍卖不动，还得担心放在外面的一批会化掉。'},
+ umbrella:{s:'生意红火',c:'pos',t:'雨伞、雨衣、雨鞋一下子就好卖了，有多少卖多少，忙得脚不沾地。'}
+},
+snow:{
+ farmer:{s:'心里高兴',c:'mix',t:'雪像给麦苗盖了一床棉被，既保暖又能冻死地里的害虫，来年收成有指望。但要防大雪把大棚压塌。'},
+ courier:{s:'又冷又危险',c:'neg',t:'路面结冰打滑，电动车不敢骑快，摔一跤人和饭菜都要遭殃，只能推着走。'},
+ student:{s:'太开心了',c:'pos',t:'可以堆雪人、打雪仗，学校还可能停课放假。就是路滑容易摔，手冻得连字都写不好。'},
+ police:{s:'最紧张的时候',c:'neg',t:'雪天路滑、事故多，他要站在风雪里疏导交通，还要帮着推陷进雪里打滑的汽车。'},
+ photo:{s:'拍大片的好机会',c:'pos',t:'雪景干净又漂亮，随手一拍都好看。就是相机电池怕冷，很快就没电了。'},
+ cleaner:{s:'半夜就要出动',c:'neg',t:'要赶在天亮前把雪扫干净、撒上融雪盐，不然大家上班上学容易摔跤。'},
+ icecream:{s:'卖不动',c:'neg',t:'天这么冷，谁还想吃冰棍啊，摆在外面一天也卖不掉几根。'},
+ umbrella:{s:'不好卖',c:'neg',t:'下雪不是下雨，大家要买的是手套、帽子和棉鞋，不是雨伞。'}
+},
+hot:{
+ farmer:{s:'辛苦又着急',c:'neg',t:'要给庄稼早晚浇水，自己在地里干活还容易中暑。水稻开花时碰上高温，谷粒会变空，收成要减。'},
+ courier:{s:'最难熬',c:'neg',t:'烈日下骑车像在蒸桑拿，一瓶水一会儿就喝完，还得防着中暑晕倒。'},
+ student:{s:'放假开心，天热难受',c:'mix',t:'放暑假最开心了，可太热也真难受：操场上跑一圈就满头大汗，教室里风扇转个不停。'},
+ police:{s:'汗流浃背',c:'neg',t:'柏油马路晒得发烫，站在上面像踩着热锅，制服湿了又干，还要保持站姿指挥。'},
+ photo:{s:'不太想出门',c:'mix',t:'光线太硬，人也晒得睁不开眼，白天不好拍。不过傍晚的晚霞，那真是特别美。'},
+ cleaner:{s:'只能早晚干活',c:'neg',t:'中午太阳太毒，只能早早出来、晚点收工，最怕的就是中暑。'},
+ icecream:{s:'一年中最赚钱的时候',c:'pos',t:'冰棍、冰水供不应求，忙得连擦汗的工夫都没有，冰柜恨不得再大两倍。'},
+ umbrella:{s:'换个招牌照样有生意',c:'mix',t:'雨伞不好卖了，但遮阳伞、防晒帽正是抢手货——聪明的老板会跟着天气换着卖。'}
+},
+cold:{
+ farmer:{s:'忙着给作物防冻',c:'mix',t:'要给大棚盖草帘、给果树包稻草。冬小麦不怕冷还行，可冻雨一来，柑橘和青菜就遭殃了。'},
+ courier:{s:'冻得手脚发木',c:'neg',t:'戴着手套不好按手机，饭菜送到手时容易变凉。好在天冷路上人少，跑起来还算顺畅。'},
+ student:{s:'不想起床，但教室里很舒服',c:'mix',t:'早上穿得像个小棉球才敢出门。到了教室有暖气，反而挺舒服，还能在窗玻璃上看到漂亮的冰花。'},
+ police:{s:'在寒风里硬扛',c:'neg',t:'一站就是几个小时，脸冻得通红，还要一直提醒骑车的人小心路面结冰。'},
+ photo:{s:'能拍出好题材',c:'mix',t:'冰挂、晨霜、呼出的白气，都是好画面。可手一拿出来就冻僵，相机电池也掉得飞快。'},
+ cleaner:{s:'最怕下冻雨',c:'neg',t:'路面一结冰就得赶紧撒盐、铲冰，手套冻得硬邦邦，扫一会儿就得搓搓手取取暖。'},
+ icecream:{s:'生意最冷清',c:'neg',t:'这么冷的天，冰棍摆一天也卖不出去几根，只能干着急。'},
+ umbrella:{s:'要换着东西卖',c:'mix',t:'雨伞卖不动，可手套、围巾、暖宝宝特别好卖，聪明的老板早就换货了。'}
+},
+fog:{
+ farmer:{s:'影响不算大',c:'mix',t:'雾气能给苗子添点湿润，但光照太少，大棚里的菜长得慢。通风不好时，果子还容易发霉。'},
+ courier:{s:'最怕看不清路',c:'neg',t:'能见度只有几十米，骑车只能慢慢挪，订单一个接一个超时，急得直跺脚。'},
+ student:{s:'像走在仙境里',c:'mix',t:'上学路上要拉着大人的手慢慢走，体育课也取消了。雾看着像仙境，其实空气不太干净，要戴口罩。'},
+ police:{s:'进入一级戒备',c:'neg',t:'要在雾里指挥交通，提醒司机开雾灯、慢行，高速公路还可能临时封闭，一刻不敢放松。'},
+ photo:{s:'能拍出朦胧的美',c:'pos',t:'雾里的一切都像水墨画，是摄影的好题材。不过光线太暗，一张照片要等很久很久。'},
+ cleaner:{s:'照常干活，但更小心',c:'mix',t:'扫地倒不受影响，可雾天司机看不清人，他得穿好反光衣，格外注意安全。'},
+ icecream:{s:'和平时差不多',c:'normal',t:'不冷不热的，生意跟平常一样，不算好也不算差。'},
+ umbrella:{s:'生意一般',c:'normal',t:'雾不是雨，撑伞的人不多，偶尔有人买把伞挡挡湿气。'}
+}
+};
+
+/* 每种天气的追问（不针对具体角色） */
+const ASK_AFTER = {
+  sunny:'追问：同是一个大晴天，还有谁的感受和农民伯伯完全相反？为什么？',
+  rain: '追问：同样是下雨，谁开心得不得了，谁却愁得不行？他们的区别在哪里？',
+  snow: '追问：雪一样的雪，为什么小朋友盼着下，环卫工人却发愁？',
+  hot:  '追问：同样是大热天，"舒服"和"难受"的分界线在哪里？',
+  cold: '追问：天冷对谁只是"有点麻烦"，对谁却是"大难关"？',
+  fog:  '追问：大雾天里，为什么有人觉得像仙境，有人却紧张得不敢开快车？'
+};
+
+/* ---- 模块三：动植物 ---- */
+const NATURE = {
+sunny:{
+  animal:['小狗趴在树荫下，伸出长长的舌头呼呼喘气——它在用舌头散热。','蜜蜂、蝴蝶在花丛里忙个不停，晴天正是采蜜、传粉的好时候。','蜻蜓在池塘边低飞晒太阳，翅膀晒暖了才飞得动。'],
+  plant:['向日葵的花盘跟着太阳慢慢转动，一直追着光。','叶片上的气孔张开，水分被蒸腾出去；太热了叶子就会打蔫。','刚收的稻谷摊在场院里，晒上几个大太阳就干透了，能存一整年。'],
+  q:'大太阳底下，小狗为什么要把舌头伸得长长的？'
+},
+rain:{
+  animal:['蚯蚓从土里钻出来——雨水把土壤里的空气挤走了，它只好到地面上呼吸。','青蛙高兴地呱呱叫，池塘灌满了水，正是产卵繁殖的好时候。','小鸟躲在窝里不出来，羽毛被淋湿就飞不动了。'],
+  plant:['旱了好几天的庄稼咕咚咕咚喝饱了水，叶子又重新立了起来。','连下几天大雨，根泡在水里会烂，高个子庄稼还容易被吹倒。','荷叶上的水珠滚来滚去，一点也沾不到叶面上。'],
+  q:'下雨前，蚯蚓为什么会从土里爬出来？'
+},
+snow:{
+  animal:['野兔换上厚厚的毛、麻雀蓬起绒羽，就像穿上了羽绒服。','青蛙和蛇早就钻进泥里冬眠了，一觉睡到春天。','雪地里找不到吃的，小鸟会飞到人家的窗台边讨食物。'],
+  plant:['落叶树把叶子全掉光，光秃秃地过冬，省下养分。','厚厚的雪盖在麦苗上，像盖了一床棉被，又保温又冻死害虫。','雪太厚会压断树枝；冻雨一挂，柑橘和青菜容易被冻伤。'],
+  q:'大雪盖在麦苗上，麦苗是被压坏了，还是被保护了？'
+},
+hot:{
+  animal:['狗拼命吐舌头，水牛干脆泡在水塘里不出来。','知了在树上一个劲儿地叫，天越热叫得越响。','太热时蜜蜂也少出门，蜂箱口的工蜂会扇翅膀给蜂巢降温。'],
+  plant:['叶子卷起来、耷拉下去，是为了少蒸发一点水分。','水稻开花时遇上高温，谷粒容易变空，收成就减少了。','要赶在清早和傍晚浇水，中午浇水反而会烫伤根。'],
+  q:'天气太热的时候，植物的叶子为什么会卷起来？'
+},
+cold:{
+  animal:['牛羊长出一身厚毛，冷了大家挤在一起互相取暖。','鱼儿沉到水底，因为水底比水面暖和一些。','大雁、燕子早就飞到南方过冬了，这叫候鸟迁徙。'],
+  plant:['树上的叶子落光，树干进入休眠，就好像睡着了。','常绿树的叶子变得又厚又硬，表面像涂了一层蜡，特别抗冻。','人们给菜地盖上地膜和稻草，给果树包上草绳，帮它们平安过冬。'],
+  q:'冬天到了，大雁为什么要往南飞？'
+},
+fog:{
+  animal:['雾天里鸟儿看不清方向，大多待在窝里不乱飞。','蜜蜂靠太阳认路，雾天找不到花在哪里，干脆不出巢。','清晨的露水挂在蜘蛛网上，一串一串像小珍珠。'],
+  plant:['雾里的水汽贴在叶子上凝成露水，帮植物补充一点水分。','光照太少，大棚里的菜长得慢，颜色也偏淡。','雾气重、通风差的时候，果实容易发霉烂掉。'],
+  q:'大雾天，蜜蜂为什么不出门采蜜？'
+}
+};
+
+/* ---- 模块四：温度阶梯 ---- */
+const TEMPS = [
+ {c:'-20℃ 以下', nm:'极寒 · 寒潮入侵', ic:'🥶', severe:true,
+  people:['在户外待一会儿，露出的皮肤就冻得发疼，很容易冻伤。','水管会冻裂，路面结冰，骑车走路都容易摔跤。','学校可能停课，户外工作要缩短时间、穿上最厚的衣服。'],
+  animal:['小鸟和野兔要躲进洞穴避风，野鸭缩成一团一动不动。','池塘结了厚冰，鱼儿沉在水底，游得极慢。','牛羊必须进暖棚，不然耳朵和蹄子会被冻伤。'],
+  plant:['柑橘、青菜冻得发黑发软，热带花木可能整棵冻死。','麦苗靠着厚厚的积雪当棉被，才勉强保住命。','大棚要加盖草帘、生炉子保温，果树要包上草绳。'],
+  ask:'寒潮来的时候，为什么大棚上要盖一层厚厚的草帘？'},
+ {c:'0℃ 左右', nm:'冷 · 冬天', ic:'❄️', severe:false,
+  people:['要穿羽绒服，戴手套围巾，手和耳朵还是冻得发疼。','呼出的气变成一团白雾，窗户上会结出漂亮的冰花。','洗好的衣服晾在外面，冻得硬邦邦的像木板。'],
+  animal:['猫狗换上厚毛，喜欢缩成一团或趴在暖和的地方。','鱼儿游到水底相对暖和的地方，不太爱动。','候鸟早已飞到南方，麻雀、喜鹊留下来过冬。'],
+  plant:['落叶树叶子掉光，进入休眠，几乎停止生长。','冬小麦比较耐寒，但也要防冻害。','菜地盖上地膜和稻草，果树刷上白灰防冻防虫。'],
+  ask:'天冷了，为什么路边的树干要刷上白灰、包上草绳？'},
+ {c:'20℃ 左右', nm:'舒适 · 春天和秋天', ic:'🌤️', severe:false,
+  people:['穿一件薄外套就很舒服，是郊游和开运动会的好天气。','户外工作的人也轻松，不冷不出汗，干活效率最高。','晚上盖一床薄被子刚刚好，睡得最香。'],
+  animal:['动物最活跃，蜜蜂采蜜、鸟儿鸣唱、蝴蝶飞舞。','不用躲热也不用避寒，正是繁殖和长身体的好时候。','家里的宠物也爱趴在阳台上晒太阳。'],
+  plant:['植物长得最快，播种、发芽、开花都在这时候。','一场春雨过后，小草和树叶蹭蹭地往上长。','是一年中种菜、种花最好的季节。'],
+  ask:'为什么农民最喜欢在春天播种？'},
+ {c:'33℃ 左右', nm:'热 · 夏天', ic:'🌞', severe:false,
+  people:['一动就出汗，要不停地喝水补充水分。','中午太阳最毒，大家更愿意待在阴凉处或空调房里。','户外工作的人容易中暑，要避开正午、多休息。'],
+  animal:['狗吐着舌头散热，水牛泡在水塘里不肯出来。','知了叫个不停，蜜蜂改成早上和傍晚才出来采蜜。','鸟儿中午躲进树荫里，几乎不怎么飞。'],
+  plant:['叶子蒸腾掉很多水分，中午会打蔫，到了晚上又挺起来。','要早晚浇水，不然叶子就会干枯发黄。','水稻、玉米正需要高温，这时候长得飞快。'],
+  ask:'为什么夏天要在清早或傍晚给花浇水，而不是中午？'},
+ {c:'40℃ 以上', nm:'极热 · 高温热浪', ic:'🔥', severe:true,
+  people:['极易中暑，头晕恶心，严重的会得热射病，有生命危险。','工地要调整作业时间，中午禁止户外施工。','要开空调、多喝淡盐水，老人和小孩尤其要小心。'],
+  animal:['池塘水温太高、氧气变少，鱼会浮到水面大口喘气。','蜜蜂不再出巢，鸡鸭张开翅膀散热，吃食也明显变少。','野外的鸟兽必须找到水源，才熬得过这样的高温。'],
+  plant:['叶片卷曲干枯，花粉失去活性，水稻玉米授粉不良、谷粒变空。','土壤干裂，需要抽水灌溉，菜地要拉上遮阳网。','森林火险等级极高，一个火星就可能引起大火。'],
+  ask:'连续高温干旱的时候，为什么森林里要严禁烟火？'}
+];
+
+/* ---- 模块五：结论 ---- */
+const CONCL = [
+ {h:'同一种天气，不同的人感受不一样', b:'因为大家要做的事不一样。下雨对等雨的庄稼是天大的好事，对赶时间的外卖小哥却是麻烦；小雪对堆雪人的小朋友是礼物，对要清路的环卫工人是加班。<b>天气一样，需要不一样，感受就不一样。</b>'},
+ {h:'同一种天气，对不同动物的影响也不同', b:'蚯蚓盼着下雨，因为雨水会把它闷在土里；可小鸟却怕下雨，羽毛湿了就飞不起来。蝴蝶喜欢晴天，蜜蜂大雾天干脆不出巢。<b>同一场雨，有的动物在欢呼，有的动物在躲避。</b>'},
+ {h:'天气"程度"变了，影响也跟着变', b:'从"有点冷"到"很冷"再到"极寒寒潮"，从"有点热"到"很热"再到"高温热浪"——影响不是一下子出现的，而是一步一步变大的。到了极端，它就变成了<b>灾害性天气</b>。'},
+ {h:'天气本身没有好坏', b:'说一种天气"好"还是"坏"，其实要看<b>是谁、正在做什么事</b>。对晒谷子的人是晴天好，对要送外卖的人是阴天好；蚯蚓喜欢雨，蝴蝶喜欢晴。<b>天气没有好坏，只有合适不合适。</b>'},
+ {h:'但极端的灾害性天气要特别当心', b:'台风、暴雨、寒潮、高温热浪、冰雹……这些天气会带来真正的危险。所以我们要学会<b>看天气预报、提前做准备</b>：该收棚的收棚，该停课的停课，该躲进屋里就躲进屋里。'}
+];
+
+/* ================================================================
+   渲染
+   ================================================================ */
+const $ = s => document.querySelector(s);
+
+/* --- 顶部标签切换 --- */
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick = ()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('section').forEach(x=>x.classList.remove('on'));
+    t.classList.add('on');
+    $('#'+t.dataset.s).classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+});
+
+/* --- 模块一 --- */
+(function(){
+  const box = $('#wgrid');
+  box.innerHTML = WEATHER_LIST.map((w,i)=>`
+    <div class="wcard" data-i="${i}">
+      <div class="ic">${w.ic}</div>
+      <div class="nm">${w.nm}</div>
+      <div class="ds">${w.ds}</div>
+      <div class="peek">🔍 点开猜一猜 ▸</div>
+      <div class="wbody">
+        <div class="qa">🤔 猜一猜：${w.q}</div>
+        <div class="lin"><span class="tag g">开心</span><span>${w.like}</span></div>
+        <div class="lin"><span class="tag r">发愁</span><span>${w.hate}</span></div>
+      </div>
+    </div>`).join('');
+  box.addEventListener('click',e=>{
+    const c = e.target.closest('.wcard'); if(!c) return;
+    const b = c.querySelector('.wbody');
+    const wasOpen = b.classList.contains('open');
+    document.querySelectorAll('.wcard').forEach(x=>{
+      x.classList.remove('open');
+      x.querySelector('.peek').textContent = '🔍 点开猜一猜 ▸';
+    });
+    if(!wasOpen){ b.classList.add('open'); c.querySelector('.peek').textContent = '▲ 收起'; }
+  });
+})();
+
+/* --- 模块二 --- */
+let curW = 'rain', curR = null;
+function renderPickers(){
+  $('#wpicker').innerHTML = WEATHERS.map(w=>
+    `<button class="pill ${w.id===curW?'on':''}" data-w="${w.id}"><span>${w.ic}</span>${w.nm}</button>`).join('');
+  $('#rgrid').innerHTML = ROLES.map(r=>
+    `<button class="rcard ${r.id===curR?'on':''}" data-r="${r.id}">
+       <div class="ic">${r.ic}</div><div class="nm">${r.nm}</div>
+     </button>`).join('');
+}
+function renderPanel(){
+  const p = $('#panel2');
+  if(!curR){
+    const w = WEATHERS.find(x=>x.id===curW);
+    p.innerHTML = `<div class="phead">已选择天气：${w.ic} ${w.nm}</div>
+      <div class="pq" style="color:#9fb0c6">👆 再点一位角色，猜猜他在这种天气里会有什么感受</div>
+      <p class="pneed">先让学生说，再让学生演，最后才揭晓。</p>`;
+    return;
+  }
+  const w = WEATHERS.find(x=>x.id===curW);
+  const r = ROLES.find(x=>x.id===curR);
+  const f = FEEL[curW][curR];
+  p.innerHTML = `
+    <div class="phead">${w.ic} ${w.nm} &nbsp;·&nbsp; ${r.ic} ${r.nm}</div>
+    <div class="pq">猜一猜：${w.nm}里，${r.nm}会有什么感受？</div>
+    <p class="pneed">请同学先说出自己的想法，还可以加上动作表演。说不出来，再往下点。</p>
+    <div class="acts">
+      <button class="btn pri" id="btnH">💡 给点提示</button>
+      <button class="btn go" id="btnA">✅ 揭晓参考说法</button>
+      <button class="btn ghost" id="btnRand">🎲 随机换个角色</button>
+    </div>
+    <div class="box h hidden" id="hintBox">
+      <div><span class="t">提示一（他的工作）：</span>${r.hint}</div>
+      <div style="margin-top:6px"><span class="t">提示二（这种天气）：</span>${w.trait}</div>
+      <div style="margin-top:6px"><span class="t">再想一想：</span>这种天气，会给他添麻烦，还是帮他省力气？</div>
+    </div>
+    <div class="box a hidden" id="ansBox">
+      <span class="t">参考说法：</span>${f.t}
+      <span class="sm">情绪关键词：${f.s}</span>
+    </div>
+    <div class="box q2 hidden" id="askBox">💬 ${ASK_AFTER[curW]}</div>`;
+  $('#btnH').onclick = ()=>{ $('#hintBox').classList.remove('hidden'); $('#btnH').disabled = true; };
+  $('#btnA').onclick = ()=>{ $('#hintBox').classList.remove('hidden'); $('#ansBox').classList.remove('hidden');
+                             $('#askBox').classList.remove('hidden'); $('#btnA').disabled = true; $('#btnH').disabled = true; };
+  $('#btnRand').onclick = ()=>{
+    let n; do { n = ROLES[Math.floor(Math.random()*ROLES.length)].id; } while(n===curR && ROLES.length>1);
+    curR = n; renderPickers(); renderPanel();
+  };
+}
+$('#wpicker').addEventListener('click',e=>{
+  const b = e.target.closest('.pill'); if(!b) return;
+  curW = b.dataset.w; curR = null; renderPickers(); renderPanel();
+});
+$('#rgrid').addEventListener('click',e=>{
+  const b = e.target.closest('.rcard'); if(!b) return;
+  curR = b.dataset.r; renderPickers(); renderPanel();
+  $('#panel2').scrollIntoView({behavior:'smooth',block:'center'});
+});
+renderPickers(); renderPanel();
+
+/* --- 模块三 --- */
+let curN = 'rain';
+function renderNature(){
+  $('#npicker').innerHTML = WEATHERS.map(w=>
+    `<button class="pill ${w.id===curN?'on':''}" data-w="${w.id}"><span>${w.ic}</span>${w.nm}</button>`).join('');
+  const d = NATURE[curN];
+  const w = WEATHERS.find(x=>x.id===curN);
+  $('#panel3').innerHTML = `
+    <div class="phead">${w.ic} ${w.nm} 里的动物和植物</div>
+    <div class="pq" style="font-size:20px">猜一猜：${d.q}</div>
+    <p class="pneed">让同学先猜，再点开下面的卡片对照。</p>
+    <div class="ngrid">
+      <div class="nrow">
+        <div class="hd">🐾 动物们的反应</div>
+        ${d.animal.map((x,i)=>`<div class="nli an"><span class="b">${i+1}</span><span>${x}</span></div>`).join('')}
+      </div>
+      <div class="nrow">
+        <div class="hd">🌿 植物们的反应</div>
+        ${d.plant.map((x,i)=>`<div class="nli pl"><span class="b">${i+1}</span><span>${x}</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="box q2" style="margin-top:16px">💬 追问：这种天气里，动物的反应和人的反应，有没有相似的地方？</div>`;
+}
+$('#npicker').addEventListener('click',e=>{
+  const b = e.target.closest('.pill'); if(!b) return;
+  curN = b.dataset.w; renderNature();
+});
+renderNature();
+
+/* --- 模块四 --- */
+function renderTemp(){
+  const i = +$('#tempRange').value;
+  const t = TEMPS[i];
+  $('#tmarks').innerHTML = TEMPS.map((x,k)=>
+    `<div class="mk ${k===i?'on':''}" data-k="${k}">
+       <div class="e">${x.ic}</div><div class="t1">${x.c}</div><div class="t2">${x.nm.split(' · ')[1]||x.nm}</div>
+     </div>`).join('');
+  $('#tpanH').innerHTML = `
+    <span class="e" style="font-size:30px">${t.ic}</span>
+    <span class="big">${t.c}</span>
+    <span style="font-size:16px;color:#5d6e88">${t.nm}</span>
+    <span class="badge ${t.severe?'':'ok'}">${t.severe?'⚠️ 恶劣天气 · 需要防范':'日常天气'}</span>`;
+  $('#tpanB').innerHTML = `
+    <div class="tgrp">
+      <div class="gh"><span class="gi">🧑</span>对人的影响</div>
+      <ul>${t.people.map(x=>`<li>${x}</li>`).join('')}</ul>
+    </div>
+    <div class="tgrp">
+      <div class="gh"><span class="gi">🐾</span>对动物的影响</div>
+      <ul>${t.animal.map(x=>`<li>${x}</li>`).join('')}</ul>
+    </div>
+    <div class="tgrp">
+      <div class="gh"><span class="gi">🌿</span>对植物的影响</div>
+      <ul>${t.plant.map(x=>`<li>${x}</li>`).join('')}</ul>
+    </div>
+    <div class="box q2" style="margin-top:14px">💬 猜一猜：${t.ask}</div>
+    ${t.severe?`<div class="severe-note">⚠️ <b>注意：</b>这已经不是普通的"有点冷/有点热"了。当天气走到极端，它就会变成<b>灾害性天气</b>，可能造成真正的伤害。遇到这种情况，要听天气预报的提醒，提前做好防范。</div>`:''}`;
+}
+$('#tempRange').addEventListener('input',renderTemp);
+$('#tmarks').addEventListener('click',e=>{
+  const m = e.target.closest('.mk'); if(!m) return;
+  $('#tempRange').value = m.dataset.k; renderTemp();
+});
+renderTemp();
+
+/* --- 模块五 --- */
+(function(){
+  $('#cgrid').innerHTML = CONCL.map((c,i)=>`
+    <div class="ccard" data-i="${i}">
+      <div class="ch"><span class="cn">${i+1}</span>${c.h}</div>
+      <button class="btn ghost">👀 揭晓我们的发现</button>
+      <div class="cb">${c.b}</div>
+    </div>`).join('');
+  $('#cgrid').addEventListener('click',e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    const c = b.closest('.ccard');
+    c.classList.add('open'); b.style.display='none';
+  });
+})();
+</script>
+</body>
+</html>

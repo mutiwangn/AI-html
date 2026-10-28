@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>水沸腾了 · 互动实验教学（教科版 三年级上册） · 【林雅】</title>
+<style>
+  :root{
+    --primary:#2b7de9;
+    --primary-dark:#1f63c4;
+    --accent:#ff8c42;
+    --bg:#eef4fb;
+    --card:#ffffff;
+    --ink:#2c3e50;
+    --muted:#7b8a9a;
+    --line:#e2e9f1;
+    --ok:#27ae60;
+    --warn:#e67e22;
+    --shadow:0 6px 20px rgba(43,125,233,.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+  header.topbar{
+    background:linear-gradient(120deg,var(--primary),#56a7ff);
+    color:#fff;
+    padding:14px 22px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 3px 14px rgba(43,125,233,.28);
+  }
+  header.topbar h1{font-size:22px;margin:0;letter-spacing:1px;}
+  header.topbar .sub{font-size:13px;opacity:.92;margin-top:3px;}
+  header.topbar .reset{
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.55);
+    color:#fff;
+    border-radius:20px;
+    padding:8px 16px;
+    font-size:14px;
+    cursor:pointer;
+    transition:.2s;
+  }
+  header.topbar .reset:hover{background:rgba(255,255,255,.32);}
+
+  .wrap{
+    display:flex;
+    gap:16px;
+    padding:16px;
+    align-items:stretch;
+    height:calc(100vh - 74px);
+  }
+  /* 主舞台 */
+  .stage-box{
+    flex:1 1 auto;
+    background:var(--card);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    min-width:0;
+  }
+  .stage-head{
+    padding:12px 18px;
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .stage-head .t{font-size:17px;font-weight:700;}
+  .stage-head .t small{font-weight:400;color:var(--muted);font-size:13px;margin-left:8px;}
+  .stage-svg-wrap{flex:1;position:relative;background:linear-gradient(180deg,#f7fbff 0%,#eaf3ff 60%,#dfeaff 100%);}
+  #stageSvg{width:100%;height:100%;display:block;}
+  .status-bar{
+    padding:10px 18px;background:#f4f8ff;border-top:1px solid var(--line);
+    font-size:14px;color:var(--primary-dark);min-height:42px;display:flex;align-items:center;
+  }
+  .status-bar .dot{width:9px;height:9px;border-radius:50%;background:var(--ok);margin-right:9px;flex:none;animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+  /* 右侧面板 */
+  .panel{
+    flex:0 0 380px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    overflow-y:auto;
+    padding-right:2px;
+  }
+  .panel::-webkit-scrollbar{width:8px;}
+  .panel::-webkit-scrollbar-thumb{background:#cdd9e8;border-radius:8px;}
+
+  .card{
+    background:var(--card);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:14px 16px 16px;
+  }
+  .card h2{
+    font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:8px;
+    padding-bottom:10px;border-bottom:2px dashed var(--line);
+  }
+  .card h2 .num{
+    width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;
+    font-size:14px;display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .card h2 .num.orange{background:var(--accent);}
+  .card h2 .num.green{background:var(--ok);}
+
+  .btn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .eq-btn{
+    border:2px solid var(--line);
+    background:#f7faff;
+    border-radius:12px;
+    padding:11px 8px;
+    font-size:14px;
+    cursor:pointer;
+    color:var(--ink);
+    transition:.18s;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    position:relative;
+  }
+  .eq-btn .ic{font-size:22px;line-height:1;}
+  .eq-btn:hover{border-color:var(--primary);transform:translateY(-2px);}
+  .eq-btn.done{
+    border-color:var(--ok);background:#eafaf0;color:var(--ok);
+  }
+  .eq-btn.done::after{
+    content:"✓";position:absolute;top:6px;right:9px;font-size:13px;font-weight:700;color:var(--ok);
+  }
+
+  .step-btn{
+    width:100%;
+    border:none;
+    border-radius:12px;
+    padding:13px 14px;
+    font-size:15px;
+    cursor:pointer;
+    color:#fff;
+    margin-bottom:10px;
+    text-align:left;
+    display:flex;align-items:center;gap:10px;
+    box-shadow:0 3px 10px rgba(43,125,233,.22);
+    transition:.18s;
+    background:linear-gradient(120deg,var(--primary),#56a7ff);
+  }
+  .step-btn:nth-child(2){background:linear-gradient(120deg,#27ae60,#52c98a);}
+  .step-btn:nth-child(3){background:linear-gradient(120deg,#e67e22,#ffa552);}
+  .step-btn:nth-child(4){background:linear-gradient(120deg,#8e44ad,#b06fd1);}
+  .step-btn:hover{transform:translateY(-2px);filter:brightness(1.05);}
+  .step-btn:disabled{opacity:.45;cursor:not-allowed;transform:none;filter:none;}
+  .step-btn .snum{
+    width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.28);
+    display:flex;align-items:center;justify-content:center;font-size:14px;flex:none;font-weight:700;
+  }
+  .step-btn.done{outline:3px solid rgba(39,174,96,.35);}
+
+  .hint{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.6;}
+
+  /* 现象区 */
+  .pheno-tabs{display:flex;gap:8px;margin-bottom:10px;}
+  .pheno-tabs button{
+    flex:1;border:2px solid var(--line);background:#f7faff;border-radius:10px;
+    padding:8px;font-size:13px;cursor:pointer;color:var(--muted);transition:.18s;
+  }
+  .pheno-tabs button.active{border-color:var(--accent);background:#fff4ea;color:var(--warn);font-weight:700;}
+  .mini-stage{background:#eef6ff;border-radius:12px;padding:6px;}
+  .mini-stage svg{width:100%;height:200px;display:block;}
+  .pheno-desc{font-size:13px;color:var(--ink);line-height:1.7;margin-top:8px;background:#f7faff;border-radius:10px;padding:10px 12px;}
+  .pheno-desc b{color:var(--primary-dark);}
+  .curve-wrap{margin-top:6px;background:#f7faff;border-radius:12px;padding:10px;}
+  .curve-wrap svg{width:100%;height:200px;display:block;}
+  .curve-legend{display:flex;gap:14px;font-size:12px;color:var(--muted);margin-top:6px;justify-content:center;}
+  .curve-legend span{display:flex;align-items:center;gap:5px;}
+  .curve-legend i{width:14px;height:4px;border-radius:3px;display:inline-block;}
+
+  /* 器材淡入 */
+  .equip{opacity:0;transition:opacity .55s ease;}
+  .equip.shown{opacity:1;}
+
+  /* 注意事项弹窗 */
+  .modal-mask{
+    position:fixed;inset:0;background:rgba(20,40,70,.45);display:none;
+    align-items:center;justify-content:center;z-index:50;backdrop-filter:blur(2px);
+  }
+  .modal-mask.show{display:flex;}
+  .modal{
+    background:#fff;border-radius:18px;width:min(460px,92vw);padding:22px 24px 20px;
+    box-shadow:0 18px 50px rgba(0,0,0,.25);animation:pop .25s ease;
+  }
+  @keyframes pop{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .modal h3{margin:0 0 4px;font-size:19px;color:var(--warn);display:flex;align-items:center;gap:8px;}
+  .modal .lead{font-size:13px;color:var(--muted);margin-bottom:14px;}
+  .modal ol{margin:0;padding-left:0;list-style:none;counter-reset:c;}
+  .modal ol li{
+    counter-increment:c;position:relative;padding:10px 12px 10px 40px;margin-bottom:9px;
+    background:#fff6ec;border-radius:10px;font-size:14px;line-height:1.55;color:var(--ink);
+  }
+  .modal ol li::before{
+    content:counter(c);position:absolute;left:10px;top:9px;width:22px;height:22px;border-radius:50%;
+    background:var(--warn);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:700;
+  }
+  .modal .close{
+    margin-top:8px;width:100%;border:none;background:var(--warn);color:#fff;border-radius:12px;
+    padding:12px;font-size:15px;cursor:pointer;transition:.18s;
+  }
+  .modal .close:hover{filter:brightness(1.06);}
+
+  .float-tip{
+    position:absolute;background:rgba(44,62,80,.92);color:#fff;font-size:12px;
+    padding:4px 9px;border-radius:8px;pointer-events:none;opacity:0;transition:.2s;white-space:nowrap;z-index:5;
+  }
+
+  /* 火焰放大镜 */
+  .flame-zoom{
+    position:absolute;left:58%;top:52%;transform:translate(-50%,-50%);
+    width:272px;display:none;z-index:9;pointer-events:none;
+  }
+  .flame-zoom.show{display:block;animation:pop .2s ease;}
+  .flame-zoom svg{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 24px rgba(0,0,0,.22));}
+
+  /* 图片放大弹窗 */
+  .zoom-mask{
+    position:fixed;inset:0;background:rgba(20,40,70,.55);display:none;
+    align-items:center;justify-content:center;z-index:60;backdrop-filter:blur(2px);
+  }
+  .zoom-mask.show{display:flex;}
+  .zoom-box{
+    background:#fff;border-radius:18px;padding:18px;width:min(640px,94vw);
+    box-shadow:0 20px 60px rgba(0,0,0,.3);animation:pop .25s ease;position:relative;
+  }
+  .zoom-box h3{margin:0 0 10px;font-size:17px;color:var(--primary-dark);text-align:center;}
+  .zoom-box .zb-content{background:#eef6ff;border-radius:12px;padding:8px;}
+  .zoom-box .zb-content svg{width:100%;height:auto;display:block;max-height:62vh;}
+  .zoom-box .close{margin-top:12px;width:100%;border:none;background:var(--primary);color:#fff;
+    border-radius:12px;padding:11px;font-size:15px;cursor:pointer;transition:.18s;}
+  .zoom-box .close:hover{filter:brightness(1.06);}
+  .mini-stage, .curve-wrap{cursor:zoom-in;}
+
+  /* 主舞台覆盖层：暂停按钮 / 问答 / 沸腾标签 */
+  .stage-overlay{position:absolute;inset:0;pointer-events:none;z-index:6;}
+  .stage-overlay > *{pointer-events:auto;}
+
+  .pause-btn{
+    position:absolute;top:12px;right:12px;
+    border:none;border-radius:22px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;
+    background:rgba(43,125,233,.92);color:#fff;box-shadow:0 4px 14px rgba(43,125,233,.4);transition:.18s;
+  }
+  .pause-btn:hover{filter:brightness(1.07);}
+  .pause-btn.paused{background:rgba(39,174,96,.95);box-shadow:0 4px 14px rgba(39,174,96,.4);}
+
+  .boil-label{
+    position:absolute;left:66%;top:6%;transform:translateX(-50%);
+    font-size:30px;font-weight:800;color:#e74c3c;letter-spacing:2px;
+    text-shadow:0 2px 6px rgba(255,255,255,.95),0 0 2px #fff;animation:boilpop .4s ease;white-space:nowrap;
+  }
+  @keyframes boilpop{from{transform:translateX(-50%) scale(.5);opacity:0;}to{transform:translateX(-50%) scale(1);opacity:1;}}
+
+  .q-box{
+    position:absolute;width:206px;
+    background:#fff;border:2px solid var(--line);border-radius:12px;
+    padding:8px 11px;box-shadow:0 6px 18px rgba(0,0,0,.12);
+  }
+  .q-box .q{font-size:14px;font-weight:700;color:var(--primary-dark);cursor:pointer;display:flex;align-items:center;gap:6px;}
+  .q-box .q:hover{color:var(--primary);}
+  .q-box .a{font-size:13px;color:var(--ink);line-height:1.6;margin-top:7px;border-top:1px dashed var(--line);padding-top:7px;}
+  .q-box .a b{color:var(--warn);}
+  #steamQ{left:32%;top:15%;}
+  #thermoQ{left:70%;top:47%;}
+
+  @media(max-width:980px){
+    .wrap{flex-direction:column;height:auto;}
+    .panel{flex:none;width:100%;}
+    .stage-box{height:60vh;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <h1>💧 水沸腾了</h1>
+    <div class="sub">教科版 · 小学科学 · 三年级上册 · 互动实验教学 · 教师【林雅】</div>
+  </div>
+  <button class="reset" id="resetBtn">↺ 重置实验</button>
+</header>
+
+<div class="wrap">
+  <!-- 主舞台 -->
+  <div class="stage-box">
+    <div class="stage-head">
+      <div class="t">主舞台 <small>实验装置与主要现象展示区</small></div>
+      <div id="phaseTag" style="font-size:13px;color:var(--muted);">当前阶段：准备中</div>
+    </div>
+    <div class="stage-svg-wrap" id="stageWrap">
+      <svg id="stageSvg" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <clipPath id="beakerClip">
+            <path d="M506,232 L620,232 L617,357 L509,357 Z"/>
+          </clipPath>
+          <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#7ec8ff"/>
+            <stop offset="1" stop-color="#3ea0ec"/>
+          </linearGradient>
+          <radialGradient id="flameGrad" cx="0.5" cy="0.7" r="0.6">
+            <stop offset="0" stop-color="#fff3b0"/>
+            <stop offset="0.5" stop-color="#ffb347"/>
+            <stop offset="1" stop-color="#ff6a00"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 实验台面 -->
+        <rect x="0" y="500" width="800" height="60" fill="#eef3f8"/>
+        <rect x="0" y="500" width="800" height="4" fill="#cfdae6"/>
+
+        <!-- 铁架台（规范造型：黑色重底座 + 银色立柱 + 蓝旋钮铁夹 + 横杆，仅用于悬挂水温计） -->
+        <g id="eq-stand" class="equip">
+          <!-- 底座 -->
+          <rect x="150" y="480" width="284" height="20" rx="2" fill="#22262b"/>
+          <rect x="150" y="480" width="284" height="5" rx="2" fill="#3b424a"/>
+          <!-- 立柱 -->
+          <rect x="290" y="118" width="10" height="364" rx="3" fill="#b9c1c9"/>
+          <rect x="290" y="118" width="3.5" height="364" rx="2" fill="#e2e8ee"/>
+          <!-- 横杆 -->
+          <rect x="300" y="150" width="340" height="8" rx="4" fill="#b9c1c9"/>
+          <rect x="300" y="150" width="340" height="3" rx="2" fill="#e2e8ee"/>
+          <!-- 铁夹（黑色夹体 + 两侧蓝色旋钮） -->
+          <rect x="281" y="140" width="30" height="28" rx="8" fill="#2b3038"/>
+          <circle cx="276" cy="154" r="9" fill="#29a3e3"/>
+          <circle cx="276" cy="154" r="4" fill="#1a7fbd"/>
+          <circle cx="317" cy="154" r="9" fill="#29a3e3"/>
+          <circle cx="317" cy="154" r="4" fill="#1a7fbd"/>
+          <text x="250" y="472" font-size="12" fill="#5a6470" text-anchor="middle">铁架台</text>
+        </g>
+
+        <!-- 三脚架（黑色，托石棉网与烧杯，酒精灯置于其下方） -->
+        <g id="eq-tripod" class="equip">
+          <!-- 后腿 -->
+          <path d="M563,381 C563,420 563,450 563,486" fill="none" stroke="#2b3038" stroke-width="6" stroke-linecap="round"/>
+          <!-- 前左腿 / 前右腿 -->
+          <path d="M489,378 C476,420 468,450 459,500" fill="none" stroke="#22262b" stroke-width="7" stroke-linecap="round"/>
+          <path d="M637,378 C650,420 658,450 667,500" fill="none" stroke="#22262b" stroke-width="7" stroke-linecap="round"/>
+          <!-- 顶圈（承托石棉网） -->
+          <ellipse cx="563" cy="372" rx="74" ry="13" fill="none" stroke="#22262b" stroke-width="7"/>
+          <text x="452" y="452" font-size="12" fill="#5a6470" text-anchor="end">三脚架</text>
+        </g>
+
+        <!-- 酒精灯（玻璃灯身 + 金属灯颈 + 灯芯 + 灯帽，位于三脚架下方） -->
+        <g id="eq-lamp" class="equip">
+          <!-- 玻璃灯身（圆润梨形，内含酒精） -->
+          <path d="M531,500 C521,500 519,478 524,460 C529,444 542,432 555,428 L571,428 C584,432 597,444 602,460 C607,478 605,500 595,500 Z" fill="rgba(214,228,238,.72)" stroke="#8fa6b8" stroke-width="2"/>
+          <!-- 灯内酒精液面 -->
+          <path d="M526,478 C527,468 533,461 540,458 L586,458 C593,461 599,468 600,478 C597,490 529,490 526,478 Z" fill="rgba(150,200,235,.5)"/>
+          <!-- 金属灯颈 -->
+          <rect x="551" y="415" width="24" height="16" rx="3" fill="#c9d0d6" stroke="#9aa3ad" stroke-width="1.5"/>
+          <rect x="551" y="415" width="24" height="5" rx="2" fill="#e3e9ee"/>
+          <!-- 灯芯 -->
+          <rect x="559" y="406" width="8" height="12" rx="2" fill="#c8b48a"/>
+          <!-- 灯帽（点燃时取下，放在一旁） -->
+          <rect x="612" y="478" width="16" height="22" rx="3" fill="#a9743a" stroke="#8a5e2c" stroke-width="1.5"/>
+          <ellipse cx="620" cy="478" rx="8" ry="3" fill="#8a5e2c"/>
+          <text x="664" y="470" font-size="12" fill="#5a6470" text-anchor="start">酒精灯</text>
+          <!-- 火焰（默认隐藏，点燃后显示，位于灯芯与石棉网之间） -->
+          <g id="flameGroup" style="opacity:0;transition:opacity .4s;">
+            <path id="flameOuter" d="M563,418 C544,392 550,362 563,348 C576,362 582,392 563,418 Z" fill="url(#flameGrad)"/>
+            <path id="flameInner" d="M563,413 C552,392 556,372 563,362 C570,372 574,392 563,413 Z" fill="#ffd86b"/>
+            <path d="M563,408 C557,394 560,378 563,370 C566,378 569,394 563,408 Z" fill="#cfe8ff"/>
+          </g>
+        </g>
+
+        <!-- 石棉网（白色网盘，置于三脚架顶圈上） -->
+        <g id="eq-gauze" class="equip">
+          <ellipse cx="563" cy="363" rx="66" ry="15" fill="#f5f3ec" stroke="#262b30" stroke-width="4"/>
+          <ellipse cx="563" cy="363" rx="54" ry="10" fill="none" stroke="#cfc9b6" stroke-width="1"/>
+          <g stroke="#c9c3ae" stroke-width="0.9" opacity=".9">
+            <line x1="527" y1="358" x2="599" y2="358"/>
+            <line x1="516" y1="363" x2="610" y2="363"/>
+            <line x1="527" y1="368" x2="599" y2="368"/>
+          </g>
+          <text x="492" y="352" font-size="12" fill="#5a6470" text-anchor="end">石棉网</text>
+        </g>
+
+        <!-- 烧杯（玻璃烧杯 + 刻度） -->
+        <g id="eq-beaker" class="equip">
+          <path d="M486,228 L640,228 L622,359 L504,359 Z" fill="rgba(150,205,255,.16)" stroke="#7fb3d5" stroke-width="2.5"/>
+          <path d="M480,228 L646,228" stroke="#7fb3d5" stroke-width="4" stroke-linecap="round"/>
+          <path d="M640,228 q10,1 8,12" fill="none" stroke="#7fb3d5" stroke-width="2.5" stroke-linecap="round"/>
+          <g stroke="#7cc0ef" stroke-width="1.3" opacity=".9">
+            <line x1="600" y1="268" x2="632" y2="268"/>
+            <line x1="600" y1="295" x2="629" y2="295"/>
+            <line x1="600" y1="322" x2="625" y2="322"/>
+            <line x1="600" y1="349" x2="621" y2="349"/>
+          </g>
+          <g font-size="9" fill="#5aa6e0" opacity=".9" text-anchor="end">
+            <text x="596" y="271">200</text>
+            <text x="596" y="298">150</text>
+            <text x="596" y="325">100</text>
+            <text x="596" y="352">50</text>
+          </g>
+          <text x="652" y="290" font-size="12" fill="#5a6470" text-anchor="start">烧杯</text>
+        </g>
+
+        <!-- 水（默认隐藏，加水后升起；水量适量减少） -->
+        <g id="eq-water" class="equip">
+          <g clip-path="url(#beakerClip)">
+            <rect id="waterRect" x="506" y="274" width="114" height="83" fill="url(#waterGrad)" opacity=".85"
+                  style="transform:scaleY(0);transform-origin:bottom;transform-box:fill-box;transition:transform 1.2s ease;"/>
+          </g>
+        </g>
+
+        <!-- 水温计（悬挂于横杆，玻璃泡浸没水中、不碰底不碰壁） -->
+        <g id="eq-thermo" class="equip">
+          <line x1="563" y1="158" x2="563" y2="172" stroke="#9aa3ad" stroke-width="2"/>
+          <rect x="559" y="170" width="8" height="152" rx="4" fill="#f7f7f7" stroke="#9aa3ad" stroke-width="1.5"/>
+          <g stroke="#c2cad2" stroke-width="0.9">
+            <line x1="559" y1="196" x2="567" y2="196"/>
+            <line x1="559" y1="222" x2="567" y2="222"/>
+            <line x1="559" y1="248" x2="567" y2="248"/>
+            <line x1="559" y1="274" x2="567" y2="274"/>
+            <line x1="559" y1="300" x2="567" y2="300"/>
+          </g>
+          <circle cx="563" cy="326" r="8" fill="#e74c3c" stroke="#c0392b" stroke-width="1.5"/>
+          <rect id="mercury" x="561" y="178" width="4" height="140" rx="2" fill="#e74c3c"
+                style="transform:scaleY(0);transform-origin:bottom;transform-box:fill-box;transition:transform 1s ease;"/>
+          <text x="580" y="182" font-size="12" fill="#c0392b" font-weight="700" id="tempReadout">25°C</text>
+          <text x="646" y="178" font-size="12" fill="#5a6470" text-anchor="start">水温计</text>
+        </g>
+
+        <!-- 火柴（点火时显示） -->
+        <g id="matchGroup" style="opacity:0;transition:opacity .3s;">
+          <line id="matchStick" x1="680" y1="404" x2="646" y2="410" stroke="#b5793a" stroke-width="3"/>
+          <circle id="matchHead" cx="644" cy="411" r="5" fill="#e74c3c"/>
+        </g>
+
+        <!-- 气泡层 -->
+        <g id="bubbleLayer"></g>
+        <!-- 白气（蒸汽）层：加热时由水面升起、逐渐增加 -->
+        <g id="steamLayer"></g>
+        <!-- 火焰单击热区（点燃后启用，单击展示/再次单击隐藏火焰结构） -->
+        <rect id="flameHotspot" x="538" y="376" width="50" height="48" fill="transparent" style="pointer-events:none;cursor:zoom-in;"/>
+      </svg>
+      <div class="float-tip" id="floatTip"></div>
+      <!-- 火焰放大镜：单击火焰展示，再次单击隐藏 -->
+      <div class="flame-zoom" id="flameZoom">
+        <svg viewBox="0 0 320 300" preserveAspectRatio="xMidYMid meet">
+          <!-- 手柄 -->
+          <line x1="186" y1="206" x2="252" y2="272" stroke="#8a939e" stroke-width="16" stroke-linecap="round"/>
+          <line x1="186" y1="206" x2="252" y2="272" stroke="#b9c1c9" stroke-width="7" stroke-linecap="round"/>
+          <!-- 镜框 -->
+          <circle cx="120" cy="140" r="96" fill="#eaf6ff" stroke="#9aa3ad" stroke-width="11"/>
+          <circle cx="120" cy="140" r="96" fill="none" stroke="#cdd9e8" stroke-width="3"/>
+          <!-- 高光 -->
+          <path d="M72,92 A90,90 0 0,1 150,52" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity=".85"/>
+          <!-- 镜内放大的火焰（三层） -->
+          <clipPath id="lensClip"><circle cx="120" cy="140" r="90"/></clipPath>
+          <g clip-path="url(#lensClip)">
+            <path d="M120,226 C70,186 82,110 120,54 C158,110 170,186 120,226 Z" fill="#ff8c42" opacity=".5"/>
+            <path d="M120,220 C88,188 98,128 120,90 C142,128 152,188 120,220 Z" fill="#ffd24d"/>
+            <path d="M120,212 C100,188 106,150 120,120 C134,150 140,188 120,212 Z" fill="#bfe6ff"/>
+            <ellipse cx="120" cy="176" rx="9" ry="20" fill="#7fb8e6"/>
+            <rect x="114" y="216" width="12" height="16" rx="2" fill="#8a5e2c"/>
+          </g>
+          <!-- 标注引线 -->
+          <g stroke="#5a6470" stroke-width="1.4" fill="none">
+            <path d="M226,94 L170,108"/>
+            <path d="M226,140 L152,140"/>
+            <path d="M226,186 L134,176"/>
+          </g>
+          <!-- 标注文字（火焰各部分名称） -->
+          <g font-size="15" font-weight="700">
+            <text x="230" y="90" fill="#e67e22">外焰</text>
+            <text x="230" y="108" font-size="11" fill="#7b8a9a">最外层 · 温度最高</text>
+            <text x="230" y="138" fill="#d4a017">内焰</text>
+            <text x="230" y="156" font-size="11" fill="#7b8a9a">中间层</text>
+            <text x="230" y="184" fill="#2b7de9">焰心</text>
+            <text x="230" y="202" font-size="11" fill="#7b8a9a">最内层 · 温度最低</text>
+          </g>
+          <text x="160" y="294" font-size="11" fill="#7b8a9a" text-anchor="middle">再次单击火焰可收起放大镜</text>
+        </svg>
+      </div>
+
+      <!-- 主舞台覆盖层：暂停按钮 / 白气问答 / 温度计问答 / 沸腾标签 -->
+      <div class="stage-overlay">
+        <button class="pause-btn" id="pauseBtn" style="display:none;">⏸ 暂停加热</button>
+        <div class="boil-label" id="boilLabel" style="display:none;">沸腾了！</div>
+        <div class="q-box" id="steamQ" style="display:none;">
+          <div class="q" id="steamQT">❓ 白气是什么？</div>
+          <div class="a" id="steamA" style="display:none;">白气是<b>水蒸气</b>遇冷<b>液化</b>形成的小水滴。</div>
+        </div>
+        <div class="q-box" id="thermoQ" style="display:none;">
+          <div class="q" id="thermoQT">❓ 沸腾后温度会变化吗？</div>
+          <div class="a" id="thermoA" style="display:none;">不会。如果继续加热，水会保持在沸腾时的温度（100°C）<b>不变</b>。</div>
+        </div>
+      </div>
+    </div>
+    <div class="status-bar"><span class="dot"></span><span id="statusText">欢迎！请先点击右侧「器材选择」把实验器材一件件放到舞台上。</span></div>
+  </div>
+
+  <!-- 右侧面板 -->
+  <div class="panel">
+    <!-- ① 器材选择 -->
+    <div class="card">
+      <h2><span class="num">①</span> 器材选择</h2>
+      <div class="btn-grid" id="equipBtns">
+        <button class="eq-btn" data-eq="stand"><span class="ic">🗜️</span>铁架台</button>
+        <button class="eq-btn" data-eq="tripod"><span class="ic">🪝</span>三脚架</button>
+        <button class="eq-btn" data-eq="gauze"><span class="ic">🔲</span>石棉网</button>
+        <button class="eq-btn" data-eq="beaker"><span class="ic">🥤</span>烧杯</button>
+        <button class="eq-btn" data-eq="lamp"><span class="ic">🪔</span>酒精灯</button>
+        <button class="eq-btn" data-eq="water"><span class="ic">💧</span>水</button>
+        <button class="eq-btn" data-eq="thermo"><span class="ic">🌡️</span>水温计</button>
+      </div>
+      <div class="hint">点击器材按钮，它会一件件出现在主舞台。也可以直接点「实验步骤」的「组装」一次性放好全部器材。</div>
+    </div>
+
+    <!-- ② 实验步骤 -->
+    <div class="card">
+      <h2><span class="num orange">②</span> 实验步骤</h2>
+      <button class="step-btn" data-step="assemble"><span class="snum">一</span>组装实验装置</button>
+      <button class="step-btn" data-step="water"><span class="snum">二</span>向烧杯中加入水</button>
+      <button class="step-btn" data-step="light"><span class="snum">三</span>点燃酒精灯（用火柴）</button>
+      <button class="step-btn" data-step="observe"><span class="snum">四</span>观察水的沸腾</button>
+      <div class="hint">提示：第三步「点燃酒精灯」会先弹出酒精灯的使用注意事项，请仔细阅读后再点燃。</div>
+    </div>
+
+    <!-- ③ 实验现象 -->
+    <div class="card">
+      <h2><span class="num green">③</span> 实验现象</h2>
+      <div class="pheno-tabs">
+        <button id="tabBefore" class="active">沸腾前 · 气泡</button>
+        <button id="tabAfter">沸腾后 · 气泡</button>
+      </div>
+      <div class="mini-stage">
+        <svg id="miniSvg" viewBox="0 0 240 200" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <clipPath id="miniClip"><path d="M70,42 L170,42 L162,150 L78,150 Z"/></clipPath>
+          </defs>
+          <!-- 桌面 -->
+          <rect x="18" y="150" width="204" height="22" fill="#eef3f8"/>
+          <rect x="18" y="150" width="204" height="3" fill="#cfdae6"/>
+          <!-- 烧杯 -->
+          <path d="M70,42 L170,42 L162,150 L78,150 Z" fill="rgba(150,205,255,.14)" stroke="#7fb3d5" stroke-width="2.5"/>
+          <path d="M64,42 L176,42" stroke="#7fb3d5" stroke-width="4" stroke-linecap="round"/>
+          <path d="M170,42 q9,1 7,11" fill="none" stroke="#7fb3d5" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- 刻度 -->
+          <g stroke="#7cc0ef" stroke-width="1.3" opacity=".9">
+            <line x1="98" y1="70" x2="128" y2="70"/>
+            <line x1="96" y1="95" x2="126" y2="95"/>
+            <line x1="94" y1="120" x2="124" y2="120"/>
+          </g>
+          <!-- 水 + 气泡（均裁剪在烧杯内，避免错位溢出） -->
+          <g clip-path="url(#miniClip)">
+            <rect id="miniWater" x="66" y="78" width="108" height="72" fill="url(#waterGrad)" opacity=".8"/>
+            <g id="miniBubbles"></g>
+          </g>
+        </svg>
+      </div>
+      <div class="pheno-desc" id="phenoBubbleDesc">
+        <b>沸腾前：</b>杯底和杯壁出现<b>少量</b>小气泡。这些气泡<b>下大上小</b>，在上升过程中体积<b>慢慢变小</b>，还没到水面就消失了。
+      </div>
+
+      <div style="margin-top:12px;font-size:13px;font-weight:700;color:var(--primary-dark);">🌡️ 温度变化曲线</div>
+      <div class="curve-wrap">
+        <svg id="curveSvg" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">
+          <!-- 坐标轴 -->
+          <line x1="40" y1="10" x2="40" y2="170" stroke="#9aa3ad" stroke-width="2"/>
+          <line x1="40" y1="170" x2="305" y2="170" stroke="#9aa3ad" stroke-width="2"/>
+          <!-- Y 刻度 -->
+          <g font-size="10" fill="#7b8a9a" text-anchor="end">
+            <text x="36" y="174">0</text>
+            <text x="36" y="138">25</text>
+            <text x="36" y="102">50</text>
+            <text x="36" y="66">75</text>
+            <text x="36" y="30">100</text>
+          </g>
+          <g stroke="#e2e9f1" stroke-width="1">
+            <line x1="40" y1="138" x2="305" y2="138"/>
+            <line x1="40" y1="102" x2="305" y2="102"/>
+            <line x1="40" y1="66" x2="305" y2="66"/>
+            <line x1="40" y1="30" x2="305" y2="30"/>
+          </g>
+          <!-- 100°C 参考线 -->
+          <line x1="40" y1="30" x2="305" y2="30" stroke="#ff8c42" stroke-width="1.5" stroke-dasharray="5 4" opacity=".7"/>
+          <text x="250" y="26" font-size="10" fill="#ff8c42">100°C 沸点</text>
+          <!-- X 刻度（分钟） -->
+          <g font-size="10" fill="#7b8a9a" text-anchor="middle">
+            <text x="40" y="186">0</text><text x="72" y="186">1</text><text x="104" y="186">2</text>
+            <text x="136" y="186">3</text><text x="168" y="186">4</text><text x="200" y="186">5</text>
+            <text x="232" y="186">6</text><text x="264" y="186">7</text><text x="296" y="186">8</text>
+          </g>
+          <text x="172" y="198" font-size="11" fill="#7b8a9a" text-anchor="middle">时间（分钟）</text>
+          <!-- 温度曲线（动画绘制：升温段蓝色，沸腾后变红） -->
+          <path id="tempPathBlue" d=""
+                fill="none" stroke="#2b7de9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="tempPathRed" d=""
+                fill="none" stroke="#e74c3c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle id="tempDot" cx="40" cy="170" r="5" fill="#e74c3c" stroke="#fff" stroke-width="2" style="opacity:0;"/>
+          <text id="curveTemp" x="60" y="22" font-size="12" fill="#e74c3c" font-weight="700" style="opacity:0;">25°C</text>
+        </svg>
+        <div class="curve-legend">
+          <span><i style="background:#2b7de9;"></i>升温阶段</span>
+          <span><i style="background:#e74c3c;"></i>沸腾后（保持不变）</span>
+          <span><i style="background:#ff8c42;"></i>100°C 沸点线</span>
+        </div>
+      </div>
+      <div class="pheno-desc">
+        <b>温度变化：</b>水从常温被加热，温度<b>逐渐上升</b>；到达 <b>100°C</b> 后继续加热，温度<b>保持不变</b>（每隔 1 分钟记录一次）。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 注意事项弹窗 -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal">
+    <h3>🪔 酒精灯使用注意事项</h3>
+    <div class="lead">点燃酒精灯前，请先记住这 5 条安全规则：</div>
+    <ol>
+      <li>用<b>火柴</b>点燃酒精灯。</li>
+      <li>加热过程中不要触碰容器；加热结束时也不要马上触碰器材，以免<b>烫伤</b>。</li>
+      <li>不能用燃烧的酒精灯去点燃另一盏酒精灯，这个操作叫<b>“对火”</b>，很危险。</li>
+      <li>熄灭酒精灯时应用<b>灯帽盖灭</b>，不可用嘴吹灭。</li>
+      <li>加热时要用酒精灯的<b>外焰</b>（温度最高）。</li>
+    </ol>
+    <button class="close" id="modalClose">我知道了，开始点燃 🔥</button>
+  </div>
+</div>
+
+<!-- 图片放大弹窗 -->
+<div class="zoom-mask" id="zoomMask">
+  <div class="zoom-box">
+    <h3 id="zoomTitle">放大查看</h3>
+    <div class="zb-content" id="zoomContent"></div>
+    <button class="close" id="zoomClose">关闭 ✕</button>
+  </div>
+</div>
+
+<script>
+/* ============ 状态 ============ */
+const state = {
+  added:{stand:false,tripod:false,gauze:false,beaker:false,lamp:false,water:false,thermo:false},
+  waterFilled:false,
+  lampLit:false,
+  observing:false,
+  phase:'准备中'
+};
+
+/* ============ 加热时间轴（约 20 秒到达沸点） ============ */
+const HEAT = {
+  active:false, paused:false, reachedBoiling:false, finished:false,
+  elapsed:0, last:0, boilSec:20, holdSec:6, steamQShown:false
+};
+
+/* ============ 通用 ============ */
+const $ = (id)=>document.getElementById(id);
+function setStatus(t){ $('statusText').textContent = t; }
+function setPhase(t){ state.phase=t; $('phaseTag').textContent='当前阶段：'+t; }
+
+/* ============ 器材添加 ============ */
+const eqName = {stand:'铁架台',tripod:'三脚架',gauze:'石棉网',beaker:'烧杯',lamp:'酒精灯',water:'水',thermo:'水温计'};
+document.querySelectorAll('.eq-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const k = btn.dataset.eq;
+    if(state.added[k]) return;
+    state.added[k]=true;
+    $('eq-'+k).classList.add('shown');
+    btn.classList.add('done');
+    setStatus('已把「'+eqName[k]+'」放到主舞台。');
+    if(Object.values(state.added).every(v=>v)) setPhase('器材已齐备');
+  });
+});
+
+function ensureAllEquip(){
+  Object.keys(state.added).forEach(k=>{
+    if(!state.added[k]){
+      state.added[k]=true;
+      $('eq-'+k).classList.add('shown');
+      const b=document.querySelector('.eq-btn[data-eq="'+k+'"]');
+      if(b) b.classList.add('done');
+    }
+  });
+}
+
+/* ============ 实验步骤 ============ */
+const stepBtns = document.querySelectorAll('.step-btn');
+function markStep(s){ const b=document.querySelector('.step-btn[data-step="'+s+'"]'); if(b) b.classList.add('done'); }
+
+// 一、组装
+document.querySelector('.step-btn[data-step="assemble"]').addEventListener('click',()=>{
+  ensureAllEquip();
+  setPhase('装置组装完成');
+  setStatus('✅ 实验装置组装完成：三脚架上放石棉网与烧杯，酒精灯置于三脚架下方准备加热；铁架台横杆悬挂水温计，玻璃泡浸没在水中。');
+  markStep('assemble');
+});
+
+// 二、加水
+document.querySelector('.step-btn[data-step="water"]').addEventListener('click',()=>{
+  if(!state.added.beaker){ setStatus('请先放好烧杯（可点「组装」一键放好）。'); return; }
+  $('eq-water').classList.add('shown');
+  // 触发水位升起
+  requestAnimationFrame(()=>{ $('waterRect').style.transform='scaleY(1)'; });
+  state.waterFilled=true;
+  setPhase('已加水');
+  setStatus('💧 已向烧杯中加入适量清水，水面没过水温计玻璃泡。');
+  markStep('water');
+});
+
+// 三、点燃酒精灯（含注意事项）
+document.querySelector('.step-btn[data-step="light"]').addEventListener('click',()=>{
+  if(!state.added.lamp){ setStatus('请先放好酒精灯（可点「组装」）。'); return; }
+  showModal(); // 显示酒精灯使用注意事项
+});
+
+// 四、观察
+document.querySelector('.step-btn[data-step="observe"]').addEventListener('click',()=>{
+  if(!state.waterFilled){ setStatus('请先「加水」再观察哦。'); return; }
+  if(!state.lampLit){ setStatus('请先「点燃酒精灯」再观察哦。'); return; }
+  startObserve();
+});
+
+/* ============ 注意事项弹窗 ============ */
+function showModal(){ $('modalMask').classList.add('show'); }
+$('modalClose').addEventListener('click',()=>{
+  $('modalMask').classList.remove('show');
+  lightLamp();
+});
+
+// 点击器材「酒精灯」按钮也弹出注意事项（贴合“点击酒精灯出现注意事项”）
+document.querySelector('.eq-btn[data-eq="lamp"]').addEventListener('click',()=>{
+  // 在已添加后再次点击，提示注意事项
+  if(state.added.lamp && !state.lampLit){ showModal(); }
+});
+
+/* ============ 点燃酒精灯动画 ============ */
+function lightLamp(){
+  if(state.lampLit) return;
+  state.lampLit=true;
+  markStep('light');
+  setPhase('加热中');
+  // 火柴动画
+  const m=$('matchGroup');
+  m.style.opacity='1';
+  const stick=$('matchStick'), head=$('matchHead');
+  let t=0;
+  const anim=setInterval(()=>{
+    t+=0.08;
+    const k=Math.min(t,1);
+    const hx=644-84*k;               // 644 → 560，靠近灯芯
+    head.setAttribute('cx', hx); head.setAttribute('cy', 411+k*2);
+    stick.setAttribute('x1', hx+38); stick.setAttribute('x2', hx);
+    if(t>=1){
+      clearInterval(anim);
+      // 火焰出现
+      $('flameGroup').style.opacity='1';
+      $('flameHotspot').style.pointerEvents='all';
+      startFlameFlicker();
+      // 火柴淡出
+      setTimeout(()=>{ m.style.opacity='0'; }, 350);
+      setStatus('🔥 用火柴点燃酒精灯，使用外焰加热。注意观察水温计和杯中的变化！');
+    }
+  },30);
+}
+
+let flameTimer=null;
+function startFlameFlicker(){
+  if(flameTimer) return;
+  let f=0;
+  flameTimer=setInterval(()=>{
+    f+=0.4;
+    const s=1+Math.sin(f)*0.06;
+    $('flameOuter').setAttribute('transform','translate(563,418) scale('+s+','+(1+(Math.cos(f)*0.05))+') translate(-563,-418)');
+  },80);
+}
+
+/* ============ 观察：气泡 + 温度 ============ */
+function startObserve(){
+  if(state.observing) return;
+  state.observing=true;
+  markStep('observe');
+  setPhase('观察沸腾');
+  setStatus('👀 开始加热观察：水温逐渐升高，水面冒出白气；达到 100°C 后剧烈沸腾、温度保持不变。点右上角可暂停/继续。');
+  startHeating();
+}
+
+/* ============ 气泡模拟（主舞台 + 迷你图） ============ */
+class BubbleField{
+  constructor(svgLayer, opt){
+    this.layer=svgLayer;
+    this.xMin=opt.xMin; this.xMax=opt.xMax;
+    this.bottomY=opt.bottomY; this.surfaceY=opt.surfaceY;
+    this.bubbles=[];
+    this.mode='preboil';
+    this.running=false;
+    this.spawnAcc=0;
+    this.last=0;
+    this.NS='http://www.w3.org/2000/svg';
+  }
+  setMode(m){ this.mode=m; }
+  start(){
+    if(this.running) return;
+    this.running=true; this.last=performance.now();
+    requestAnimationFrame((t)=>this.loop(t));
+  }
+  stop(){
+    this.running=false;
+    this.bubbles.forEach(b=>b.el.remove());
+    this.bubbles=[];
+  }
+  spawn(){
+    const c=document.createElementNS(this.NS,'circle');
+    const x=this.xMin+Math.random()*(this.xMax-this.xMin);
+    let r, vy, grow;
+    if(this.mode==='preboil'){
+      r=6+Math.random()*3;            // 下大
+      vy=0.25+Math.random()*0.2;
+      grow=-0.018;                    // 上升变小
+    }else{
+      r=2+Math.random()*2;            // 小
+      vy=0.7+Math.random()*0.6;
+      grow=0.06;                      // 上升变大
+    }
+    c.setAttribute('cx',x);
+    c.setAttribute('cy',this.bottomY);
+    c.setAttribute('r',r);
+    c.setAttribute('fill','rgba(255,255,255,.75)');
+    c.setAttribute('stroke','rgba(120,190,255,.7)');
+    c.setAttribute('stroke-width','1');
+    this.layer.appendChild(c);
+    this.bubbles.push({el:c,x,y:this.bottomY,r,vy,grow,mode:this.mode});
+  }
+  loop(t){
+    if(!this.running) return;
+    if(HEAT.paused){ this.last=t; requestAnimationFrame((tt)=>this.loop(tt)); return; }
+    const dt=Math.min((t-this.last)/16.7,3); this.last=t;
+    // 生成速率
+    const rate = this.mode==='preboil'? 0.06 : 0.5;
+    this.spawnAcc+=rate*dt;
+    while(this.spawnAcc>=1){ this.spawn(); this.spawnAcc-=1; }
+    for(let i=this.bubbles.length-1;i>=0;i--){
+      const b=this.bubbles[i];
+      b.y-=b.vy*dt;
+      b.r+=b.grow*dt;
+      if(b.r<0.5) b.r=0.5;
+      b.el.setAttribute('cy',b.y);
+      b.el.setAttribute('r',b.r);
+      if(b.y<=this.surfaceY){ b.el.remove(); this.bubbles.splice(i,1); }
+    }
+    requestAnimationFrame((tt)=>this.loop(tt));
+  }
+}
+
+const mainBubbles=new BubbleField($('bubbleLayer'),{xMin:512,xMax:608,bottomY:354,surfaceY:274});
+const miniBubbles=new BubbleField($('miniBubbles'),{xMin:84,xMax:156,bottomY:146,surfaceY:78});
+
+/* ============ 迷你图 气泡切换 ============ */
+let miniMode='preboil';
+function applyMiniMode(m){
+  miniMode=m;
+  miniBubbles.setMode(m);
+  miniBubbles.stop(); miniBubbles.start();
+  if(m==='preboil'){
+    $('tabBefore').classList.add('active'); $('tabAfter').classList.remove('active');
+    $('phenoBubbleDesc').innerHTML='<b>沸腾前：</b>杯底和杯壁出现<b>少量</b>小气泡。这些气泡<b>下大上小</b>，在上升过程中体积<b>慢慢变小</b>，还没到水面就消失了。';
+  }else{
+    $('tabAfter').classList.add('active'); $('tabBefore').classList.remove('active');
+    $('phenoBubbleDesc').innerHTML='<b>沸腾后：</b>杯中产生的气泡<b>大量</b>增多，气泡在上升过程中体积<b>慢慢变大</b>，到达水面后破裂，整杯水剧烈翻滚。';
+  }
+}
+$('tabBefore').addEventListener('click',()=>{ applyMiniMode('preboil'); demonstrateMain('preboil'); });
+$('tabAfter').addEventListener('click',()=>{ applyMiniMode('boil'); demonstrateMain('boil'); });
+// 迷你图默认运行（沸腾前，不在主舞台演示）
+applyMiniMode('preboil');
+
+/* ============ 主舞台现象演示（点击右侧图标触发） ============ */
+function ensureDemoSetup(){
+  // 确保烧杯与水已就位，便于在主舞台演示气泡
+  if(!state.added.beaker){
+    state.added.beaker=true; $('eq-beaker').classList.add('shown');
+    const b=document.querySelector('.eq-btn[data-eq="beaker"]'); if(b) b.classList.add('done');
+  }
+  if(!state.waterFilled){
+    state.added.water=true; $('eq-water').classList.add('shown');
+    requestAnimationFrame(()=>{ $('waterRect').style.transform='scaleY(1)'; });
+    state.waterFilled=true;
+    const b=document.querySelector('.eq-btn[data-eq="water"]'); if(b) b.classList.add('done');
+  }
+}
+function demonstrateMain(m){
+  if(HEAT.active) return;   // 加热演示进行中，主舞台气泡由加热时间轴控制
+  ensureDemoSetup();
+  mainBubbles.setMode(m);
+  mainBubbles.start();
+  setPhase('现象演示');
+  if(m==='preboil') setStatus('主舞台演示「沸腾前」：少量气泡，下大上小，上升过程中慢慢变小。');
+  else setStatus('主舞台演示「沸腾后」：大量气泡，上升过程中慢慢变大，到达水面后破裂。');
+}
+
+/* ============ 图片放大弹窗 ============ */
+let zoomField=null;
+function openBubbleZoom(m){
+  const clone=$('miniSvg').cloneNode(true);
+  clone.removeAttribute('id');
+  const layer=clone.querySelector('#miniBubbles'); if(layer) layer.innerHTML='';
+  const zb=$('zoomContent'); zb.innerHTML=''; zb.appendChild(clone);
+  $('zoomTitle').textContent=(m==='preboil'?'沸腾前':'沸腾后')+' · 气泡变化（放大）';
+  $('zoomMask').classList.add('show');
+  if(zoomField) zoomField.stop();
+  zoomField=new BubbleField(layer,{xMin:84,xMax:156,bottomY:146,surfaceY:78});
+  zoomField.setMode(m); zoomField.start();
+}
+function openCurveZoom(){
+  const clone=$('curveSvg').cloneNode(true);
+  clone.removeAttribute('id');
+  const pb=clone.querySelector('#tempPathBlue'); pb.setAttribute('d',buildBluePath());
+  pb.style.transition='none'; pb.style.strokeDasharray='none'; pb.style.strokeDashoffset='0';
+  const pr=clone.querySelector('#tempPathRed'); pr.setAttribute('d',buildRedPath());
+  pr.style.transition='none'; pr.style.strokeDasharray='none'; pr.style.strokeDashoffset='0';
+  const [lx,ly]=tempToXY(8,100);
+  const dot=clone.querySelector('#tempDot'); dot.setAttribute('cx',lx); dot.setAttribute('cy',ly); dot.style.opacity='1';
+  const ct=clone.querySelector('#curveTemp'); ct.textContent='100°C'; ct.setAttribute('x',Math.min(lx+8,260)); ct.setAttribute('y',Math.max(ly-8,16)); ct.style.opacity='1';
+  const zb=$('zoomContent'); zb.innerHTML=''; zb.appendChild(clone);
+  $('zoomTitle').textContent='温度变化曲线（放大）';
+  $('zoomMask').classList.add('show');
+}
+function closeZoom(){
+  $('zoomMask').classList.remove('show');
+  if(zoomField){ zoomField.stop(); zoomField=null; }
+}
+$('zoomClose').addEventListener('click',closeZoom);
+$('zoomMask').addEventListener('click',(e)=>{ if(e.target===$('zoomMask')) closeZoom(); });
+$('miniSvg').addEventListener('click',()=>openBubbleZoom(miniMode));
+$('curveSvg').addEventListener('click',openCurveZoom);
+
+/* ============ 火焰结构：单击展示 / 再次单击消失 ============ */
+const flameHotspot=$('flameHotspot');
+flameHotspot.addEventListener('click',()=>{
+  if(state.lampLit) $('flameZoom').classList.toggle('show');
+});
+
+/* ============ 温度曲线 + 加热时间轴（约 20 秒到沸点） ============ */
+const tempData=[25,40,55,68,80,90,97,100,100]; // 0~8 分钟（第 7 分钟达沸点，之后保持不变）
+const X0=40, X1=296, Y0=170, Ytop=30, Tmax=100;
+function tempToXY(min,temp){
+  const x=X0+(X1-X0)*(min/8);
+  const y=Y0-(Y0-Ytop)*(temp/Tmax);
+  return [x,y];
+}
+function buildBluePath(){
+  let d='';
+  for(let i=0;i<=7;i++){ const [x,y]=tempToXY(i,tempData[i]); d+=(i===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1)+' '; }
+  return d.trim();
+}
+function buildRedPath(){
+  let d='';
+  [7,8].forEach((i,k)=>{ const [x,y]=tempToXY(i,tempData[i]); d+=(k===0?'M':'L')+x.toFixed(1)+','+y.toFixed(1)+' '; });
+  return d.trim();
+}
+let blueLen=0, redLen=0;
+
+/* 按分钟位置插值温度 */
+function interpTemp(m){
+  const i=Math.floor(m);
+  if(i>=tempData.length-1) return tempData[tempData.length-1];
+  return tempData[i]+(tempData[i+1]-tempData[i])*(m-i);
+}
+function heatTemp(e){
+  if(e<=HEAT.boilSec) return interpTemp((e/HEAT.boilSec)*7); // 升温：分钟 0→7
+  return 100;                                                  // 沸腾后不变
+}
+
+/* ============ 白气（蒸汽）粒子 ============ */
+const NS='http://www.w3.org/2000/svg';
+let steamParticles=[], steamSpawnAcc=0;
+function clearSteam(){
+  const layer=$('steamLayer'); if(layer) layer.innerHTML='';
+  steamParticles=[]; steamSpawnAcc=0;
+}
+function spawnSteam(){
+  const layer=$('steamLayer'); if(!layer) return;
+  const x=518+Math.random()*92;   // 烧杯上方水面范围内
+  const y=270;                    // 紧贴水面（表面 y≈274）
+  const el=document.createElementNS(NS,'ellipse');
+  el.setAttribute('cx',x); el.setAttribute('cy',y);
+  el.setAttribute('rx',5); el.setAttribute('ry',7);
+  el.setAttribute('fill','#ffffff');
+  layer.appendChild(el);
+  steamParticles.push({el,x,y,age:0,vy:16+Math.random()*16,sw:Math.random()*6.28});
+}
+function updateSteam(dt, tempFrac){
+  const layer=$('steamLayer'); if(!layer) return;
+  const maxS=Math.floor(4+tempFrac*24);
+  const rate=0.4+tempFrac*7;     // 越热生成越快
+  steamSpawnAcc+=rate*dt;
+  while(steamSpawnAcc>=1 && steamParticles.length<maxS){ spawnSteam(); steamSpawnAcc-=1; }
+  for(let i=steamParticles.length-1;i>=0;i--){
+    const s=steamParticles[i];
+    s.age+=dt;
+    if(s.age>2.8){ s.el.remove(); steamParticles.splice(i,1); continue; }
+    s.y-=s.vy*dt;
+    s.x+=Math.sin(s.age*2+s.sw)*6*dt;
+    const appear=Math.min(s.age/0.5,1);
+    const vanish=Math.min(Math.max((2.8-s.age)/1.0,0),1);
+    const op=appear*vanish*0.62;
+    const rx=5+s.age*6, ry=7+s.age*8;
+    s.el.setAttribute('cx',s.x.toFixed(1)); s.el.setAttribute('cy',s.y.toFixed(1));
+    s.el.setAttribute('rx',rx.toFixed(1)); s.el.setAttribute('ry',ry.toFixed(1));
+    s.el.setAttribute('opacity',op.toFixed(2));
+  }
+}
+
+/* ============ 加热时间轴主循环 ============ */
+function heatLoop(ts){
+  if(!HEAT.active) return;
+  if(!HEAT.last) HEAT.last=ts;
+  let dt=(ts-HEAT.last)/1000; HEAT.last=ts;
+  if(HEAT.paused){ requestAnimationFrame(heatLoop); return; }
+  if(dt>0.1) dt=0.1;             // 防止切后台后跳变
+  HEAT.elapsed+=dt;
+  const e=HEAT.elapsed;
+  const temp=heatTemp(e);
+  const frac=Math.min(temp/Tmax,1);
+
+  // 主舞台水温计：水银柱 + 实时读数
+  $('mercury').style.transform='scaleY('+frac.toFixed(3)+')';
+  $('tempReadout').textContent=Math.round(temp)+'°C';
+
+  // 右侧曲线：红点 + 实时温度，蓝色升温段 / 红色沸腾段 渐进绘制
+  const blue=$('tempPathBlue'), red=$('tempPathRed');
+  let m;
+  if(e<=HEAT.boilSec){
+    m=(e/HEAT.boilSec)*7;
+    blue.style.strokeDashoffset=(blueLen*(1-m/7)).toFixed(1);
+  }else{
+    m=7+Math.min((e-HEAT.boilSec)/HEAT.holdSec,1);
+    blue.style.strokeDashoffset='0';
+    red.style.strokeDashoffset=(redLen*(1-Math.min((e-HEAT.boilSec)/HEAT.holdSec,1))).toFixed(1);
+  }
+  const [dx,dy]=tempToXY(m,temp);
+  const dot=$('tempDot'), ctemp=$('curveTemp');
+  dot.setAttribute('cx',dx.toFixed(1)); dot.setAttribute('cy',dy.toFixed(1));
+  ctemp.setAttribute('x',Math.min(dx+8,260).toFixed(1)); ctemp.setAttribute('y',Math.max(dy-8,16).toFixed(1));
+  ctemp.textContent=Math.round(temp)+'°C';
+
+  // 到达沸点：气泡转沸腾、显示“沸腾了”与温度计问答
+  if(!HEAT.reachedBoiling && e>=HEAT.boilSec){
+    HEAT.reachedBoiling=true;
+    mainBubbles.setMode('boil');
+    onBoilingReached();
+  }
+  // 白气问答：加热一会儿后出现
+  if(!HEAT.steamQShown && e>=3){ HEAT.steamQShown=true; $('steamQ').style.display='block'; }
+
+  // 白气动态更新
+  updateSteam(dt, frac);
+
+  // 结束
+  if(HEAT.elapsed>=HEAT.boilSec+HEAT.holdSec){
+    HEAT.active=false; HEAT.finished=true;
+    $('pauseBtn').style.display='none';
+    setStatus('✅ 实验完成：水沸腾时温度保持在 100°C 不变。可点「重置实验」重新演示。');
+    return;
+  }
+  requestAnimationFrame(heatLoop);
+}
+
+function onBoilingReached(){
+  $('boilLabel').style.display='block';
+  $('thermoQ').style.display='block';
+  setStatus('🎉 水沸腾了！水温达到 100°C 后保持不变——继续加热，吸收的热量用来让水变成水蒸气。');
+}
+
+/* 启动加热（观察步骤调用） */
+function startHeating(){
+  if(HEAT.active) return;
+  HEAT.active=true; HEAT.paused=false; HEAT.reachedBoiling=false; HEAT.finished=false;
+  HEAT.elapsed=0; HEAT.last=0; HEAT.steamQShown=false;
+  const blue=$('tempPathBlue'), red=$('tempPathRed');
+  blue.setAttribute('d',buildBluePath()); red.setAttribute('d',buildRedPath());
+  blueLen=blue.getTotalLength(); redLen=red.getTotalLength();
+  blue.style.transition='none'; red.style.transition='none';
+  blue.style.strokeDasharray=blueLen; blue.style.strokeDashoffset=blueLen;
+  red.style.strokeDasharray=redLen; red.style.strokeDashoffset=redLen;
+  $('tempDot').style.opacity='1'; $('curveTemp').style.opacity='1';
+  clearSteam();
+  mainBubbles.setMode('preboil'); mainBubbles.start();
+  $('boilLabel').style.display='none';
+  $('steamQ').style.display='none'; $('steamA').style.display='none';
+  $('thermoQ').style.display='none'; $('thermoA').style.display='none';
+  $('pauseBtn').style.display='block'; setPauseLabel();
+  HEAT.last=performance.now();
+  requestAnimationFrame(heatLoop);
+}
+
+/* 暂停 / 继续 加热 */
+function setPauseLabel(){
+  const b=$('pauseBtn');
+  if(HEAT.paused){ b.textContent='▶ 继续加热'; b.classList.add('paused'); }
+  else { b.textContent='⏸ 暂停加热'; b.classList.remove('paused'); }
+}
+$('pauseBtn').addEventListener('click',()=>{
+  if(!HEAT.active) return;
+  HEAT.paused=!HEAT.paused;
+  setPauseLabel();
+});
+/* 白气 / 温度计 问答：单击出题、再次单击隐藏答案 */
+$('steamQT').addEventListener('click',()=>{
+  const a=$('steamA'); a.style.display=(a.style.display==='block')?'none':'block';
+});
+$('thermoQT').addEventListener('click',()=>{
+  const a=$('thermoA'); a.style.display=(a.style.display==='block')?'none':'block';
+});
+
+/* ============ 重置 ============ */
+$('resetBtn').addEventListener('click',()=>{
+  Object.keys(state.added).forEach(k=>{ state.added[k]=false; $('eq-'+k).classList.remove('shown'); });
+  document.querySelectorAll('.eq-btn').forEach(b=>b.classList.remove('done'));
+  document.querySelectorAll('.step-btn').forEach(b=>b.classList.remove('done'));
+  state.waterFilled=false; state.lampLit=false; state.observing=false;
+  if(flameTimer){clearInterval(flameTimer);flameTimer=null;}
+  HEAT.active=false; HEAT.paused=false; HEAT.reachedBoiling=false; HEAT.finished=false; HEAT.elapsed=0;
+  $('flameGroup').style.opacity='0';
+  $('waterRect').style.transform='scaleY(0)';
+  $('mercury').style.transform='scaleY(0)';
+  $('tempReadout').textContent='25°C';
+  $('matchGroup').style.opacity='0';
+  mainBubbles.stop();
+  const blue=$('tempPathBlue'), red=$('tempPathRed');
+  blue.setAttribute('d',''); red.setAttribute('d',''); blue.style.transition='none'; red.style.transition='none';
+  $('tempDot').style.opacity='0'; $('curveTemp').style.opacity='0';
+  clearSteam();
+  $('boilLabel').style.display='none';
+  $('steamQ').style.display='none'; $('steamA').style.display='none';
+  $('thermoQ').style.display='none'; $('thermoA').style.display='none';
+  $('pauseBtn').style.display='none'; $('pauseBtn').classList.remove('paused');
+  $('flameHotspot').style.pointerEvents='none';
+  $('flameZoom').classList.remove('show');
+  closeZoom();
+  setPhase('准备中');
+  setStatus('已重置。请重新点击器材或步骤开始实验。');
+});
+</script>
+</body>
+</html>

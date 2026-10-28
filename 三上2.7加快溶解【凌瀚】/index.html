@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>加快溶解 · 食盐溶解实验室 · 【凌瀚】</title>
+<style>
+:root{
+  --ink:#22394f; --ink2:#5f7b93; --ink3:#8ba3b8;
+  --line:#dfeef6; --card:#ffffff;
+  --blue:#2f9ee0; --blue-d:#1b7fbd;
+  --a:#ff8f3c; --b:#16b8a0;
+  --ok:#2fb37a; --warn:#f5a623;
+  --shadow:0 6px 22px rgba(47,158,224,.12);
+  --shadow2:0 2px 10px rgba(34,57,79,.07);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 500px at 8% -5%, #dff3ff 0%, transparent 60%),
+    radial-gradient(800px 460px at 100% 0%, #fff0dc 0%, transparent 58%),
+    #f6fbff;
+  min-height:100vh;
+}
+.app{max-width:1240px;margin:0 auto;padding:18px 18px 60px}
+
+/* ---------- header ---------- */
+header{display:flex;align-items:center;gap:14px;padding:6px 4px 14px}
+.mascot{width:76px;height:76px;flex:none;position:relative;animation:bob 3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
+.h-title h1{font-size:27px;margin:0;letter-spacing:1px}
+.h-title h1 em{font-style:normal;color:var(--blue)}
+.h-title p{margin:4px 0 0;font-size:13.5px;color:var(--ink2)}
+.h-tip{
+  margin-left:auto;max-width:430px;position:relative;
+  background:#fff;border:2px solid var(--line);border-radius:16px;
+  padding:10px 14px;font-size:13.5px;line-height:1.55;color:var(--ink2);
+  box-shadow:var(--shadow2);
+}
+.h-tip:before{content:"";position:absolute;left:-9px;top:22px;width:14px;height:14px;background:#fff;border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(45deg)}
+.h-tip b{color:var(--blue)}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 14px}
+.tab{
+  border:2px solid var(--line);background:#fff;color:var(--ink2);
+  padding:9px 16px;border-radius:999px;font-size:14.5px;cursor:pointer;
+  font-weight:600;transition:.18s;box-shadow:var(--shadow2)
+}
+.tab:hover{border-color:#bfe0f2;transform:translateY(-1px)}
+.tab.on{background:linear-gradient(180deg,#3fb0ee,#2196dc);color:#fff;border-color:#2196dc;box-shadow:0 6px 16px rgba(33,150,220,.32)}
+.tab .num{display:inline-block;width:19px;height:19px;line-height:19px;border-radius:50%;background:rgba(0,0,0,.07);font-size:11.5px;margin-right:5px;text-align:center}
+.tab.on .num{background:rgba(255,255,255,.28)}
+
+/* ---------- layout ---------- */
+.lab{display:grid;grid-template-columns:340px 1fr;gap:16px;align-items:start}
+@media (max-width:980px){.lab{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
+.card-h{padding:13px 16px;border-bottom:2px dashed var(--line);display:flex;align-items:center;gap:8px}
+.card-h h2{margin:0;font-size:16.5px}
+.card-h .sub{font-size:12.5px;color:var(--ink3);margin-left:auto}
+.card-b{padding:14px 16px}
+
+/* ---------- controls ---------- */
+.ctrl-row{border:1.5px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:10px;background:#fbfdff}
+.ctrl-row.studied{border-color:#ffd9b8;background:#fffaf3}
+.ctrl-row.locked{opacity:.96}
+.rhead{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.rname{font-size:14.5px;font-weight:700}
+.tag{font-size:11.5px;padding:2px 8px;border-radius:999px;font-weight:700}
+.tag.change{background:#ffe6cf;color:#d97518}
+.tag.same{background:#e6f4ec;color:#22916a}
+.lockic{margin-left:auto;font-size:15px;opacity:.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt-col{border:1.5px dashed #e6eef4;border-radius:11px;padding:8px}
+.opt-col.a{border-color:#ffd6b3;background:#fff8f1}
+.opt-col.b{border-color:#bdeadf;background:#f2fbf9}
+.col-title{font-size:12px;font-weight:800;color:var(--ink2);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.dot.a{background:var(--a)} .dot.b{background:var(--b)}
+.one{padding-top:2px}
+
+.seg{display:flex;gap:6px}
+.seg button{
+  flex:1;border:1.5px solid var(--line);background:#fff;color:var(--ink2);
+  padding:8px 4px;border-radius:10px;cursor:pointer;font-size:13.5px;font-weight:700;transition:.15s
+}
+.seg button:hover{border-color:#bfe0f2}
+.seg button.on{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 4px 10px rgba(47,158,224,.3)}
+.seg.bigr button{padding:11px 4px;font-size:14.5px}
+.seg .sub{display:block;font-size:11px;font-weight:500;opacity:.75;margin-top:2px}
+
+.slider-wrap{display:flex;align-items:center;gap:8px}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;flex:1;height:8px;border-radius:8px;outline:none;
+  background:linear-gradient(90deg,#5cb8ea,#7fd0c6,#ffd166,#ff9160);
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;
+  border:3px solid var(--blue);cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.18)
+}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--blue);cursor:pointer}
+.sval{font-size:13px;font-weight:800;min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+.sval span{font-size:11px;color:var(--ink3);font-weight:600}
+
+.fixed-note{background:#f2f9ff;border:1.5px dashed #cfe8f6;border-radius:12px;padding:9px 11px;font-size:12.5px;color:var(--ink2);line-height:1.6}
+.fixed-note b{color:var(--blue-d)}
+
+/* ---------- action bar ---------- */
+.act{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:12px 16px;border-top:2px dashed var(--line)}
+.btn{
+  border:none;border-radius:12px;padding:11px 18px;font-size:15px;font-weight:800;cursor:pointer;
+  transition:.15s;font-family:inherit
+}
+.btn.primary{background:linear-gradient(180deg,#41b2ef,#1f92d8);color:#fff;box-shadow:0 6px 16px rgba(33,150,220,.35)}
+.btn.primary:hover{transform:translateY(-1px)}
+.btn.ghost{background:#fff;border:2px solid var(--line);color:var(--ink2)}
+.btn.ghost:hover{border-color:#bfe0f2}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important}
+.spd{display:flex;gap:4px;margin-left:auto;align-items:center;font-size:12.5px;color:var(--ink3)}
+.spd button{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:5px 9px;font-size:12.5px;cursor:pointer;color:var(--ink2);font-weight:700}
+.spd button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ---------- stage ---------- */
+.stage{padding:16px}
+.predict{
+  background:linear-gradient(180deg,#fffdf4,#fff7e6);border:2px solid #ffe0a8;border-radius:16px;
+  padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap
+}
+.predict .q{font-size:14.5px;font-weight:800}
+.predict .pk{display:flex;gap:8px}
+.predict .pk button{border:2px solid var(--line);background:#fff;border-radius:10px;padding:7px 15px;font-weight:800;cursor:pointer;font-size:14px;color:var(--ink2)}
+.predict .pk button.on{background:var(--warn);color:#fff;border-color:var(--warn)}
+.predict .ps{font-size:13px;color:var(--ink2)}
+.predict .ps b{color:var(--warn)}
+
+.beakers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:640px){.beakers{grid-template-columns:1fr}}
+.bk{position:relative;border:2px solid var(--line);border-radius:18px;padding:12px;background:#fdfeff;overflow:hidden}
+.bk.a{border-color:#ffdcc0;background:linear-gradient(180deg,#fffaf3,#ffffff)}
+.bk.b{border-color:#c2ecdf;background:linear-gradient(180deg,#f4fcfa,#ffffff)}
+.bk-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.bk-name{font-size:15px;font-weight:900;padding:3px 12px;border-radius:999px;color:#fff}
+.bk.a .bk-name{background:var(--a)} .bk.b .bk-name{background:var(--b)}
+.tbadge{margin-left:auto;font-size:12.5px;font-weight:800;padding:3px 10px;border-radius:999px;color:#fff;font-variant-numeric:tabular-nums}
+.bk svg{display:block;width:100%;height:auto}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 8px}
+.chip{font-size:12px;font-weight:700;background:#eef6fb;color:#4b7091;border-radius:8px;padding:3px 9px}
+.clock{font-size:24px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.bk.a .clock{color:#d97518} .bk.b .clock{color:#0f9c86}
+.clock small{font-size:13px;font-weight:700;color:var(--ink3);margin-left:3px}
+.pbar{height:11px;border-radius:8px;background:#eaf3f8;overflow:hidden;margin-top:7px}
+.pbar i{display:block;height:100%;width:0;border-radius:8px;transition:width .1s linear}
+.bk.a .pbar i{background:linear-gradient(90deg,#ffb469,#ff8f3c)}
+.bk.b .pbar i{background:linear-gradient(90deg,#5fdcc4,#16b8a0)}
+.done{margin-top:8px;font-size:13px;font-weight:800;color:var(--ok);min-height:20px}
+.done .rk{display:inline-block;background:var(--ok);color:#fff;border-radius:6px;padding:1px 7px;margin-right:5px;font-size:12px}
+
+.cf{position:absolute;top:-14px;width:8px;height:9px;border-radius:2px;animation:cfall 1.9s ease-in forwards;pointer-events:none;z-index:5}
+@keyframes cfall{to{transform:translate(var(--x),250px) rotate(760deg);opacity:0}}
+
+/* result banner */
+.result{
+  margin-top:14px;border-radius:16px;padding:13px 15px;font-size:14.5px;line-height:1.7;
+  background:linear-gradient(180deg,#eefaf3,#e6f7ee);border:2px solid #b9e8cf;color:#1d7a52;display:none
+}
+.result.show{display:block;animation:pop .35s ease}
+@keyframes pop{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
+.result b{color:#0f6b45}
+.result .big{font-size:17px;font-weight:900}
+
+/* ---------- findings ---------- */
+.records{width:100%;border-collapse:collapse;font-size:13px}
+.records th{background:#f2f9ff;color:#4b7091;font-size:12.5px;padding:8px 9px;text-align:left;white-space:nowrap}
+.records td{padding:8px 9px;border-top:1px solid var(--line);color:var(--ink2)}
+.records tr td:first-child{color:var(--ink3)}
+.records .winA{color:#d97518;font-weight:800} .records .winB{color:#0f9c86;font-weight:800}
+.empty{font-size:13px;color:var(--ink3);padding:10px 2px}
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+@media (max-width:820px){.findings{grid-template-columns:1fr}}
+.fbox{border:2px solid var(--line);border-radius:14px;padding:11px 13px;background:#fbfdff;position:relative}
+.fbox.got{border-color:#b9e8cf;background:#f4fdf8}
+.fbox .ft{font-size:13.5px;font-weight:800;display:flex;align-items:center;gap:6px}
+.fbox .fv{font-size:12.8px;color:var(--ink2);margin-top:5px;line-height:1.6}
+.fbox .fv b{color:var(--ok)}
+.fbox .lock{color:var(--ink3);font-size:12.5px;margin-top:5px}
+.stamp{position:absolute;right:8px;top:8px;font-size:11px;background:var(--ok);color:#fff;border-radius:6px;padding:2px 7px;font-weight:800}
+
+.badge{
+  margin-top:12px;display:none;align-items:center;gap:12px;
+  background:linear-gradient(180deg,#fff6e2,#ffeccb);border:2px solid #ffd79b;border-radius:16px;padding:12px 15px
+}
+.badge.show{display:flex;animation:pop .4s ease}
+.badge .medal{font-size:34px}
+.badge div{font-size:14px;line-height:1.6;color:#96560b}
+.badge b{font-size:16px;color:#c1740f}
+
+/* ---------- tips ---------- */
+.tips{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+@media (max-width:820px){.tips{grid-template-columns:1fr}}
+.tip{border:2px solid var(--line);border-radius:16px;padding:12px 14px;background:#fff;box-shadow:var(--shadow2)}
+.tip h3{margin:0 0 6px;font-size:14.5px;display:flex;align-items:center;gap:7px}
+.tip p{margin:0;font-size:13px;line-height:1.75;color:var(--ink2)}
+.tip.warn{border-color:#ffe0a8;background:#fffcf5}
+.tip.warn h3{color:#c1740f}
+.foot{text-align:center;font-size:12px;color:var(--ink3);margin-top:22px;line-height:1.7}
+
+/* svg anim */
+.steam path{animation:steam 2.6s ease-out infinite;transform-origin:bottom center}
+g[id^="stm"]>g:nth-child(2) .steam path{animation-delay:.9s}
+g[id^="stm"]>g:nth-child(3) .steam path{animation-delay:1.8s}
+@keyframes steam{0%{transform:translateY(8px) scale(.65);opacity:0}25%{opacity:.8}100%{transform:translateY(-40px) scale(1.25);opacity:0}}
+.cold{animation:shimmer 3s ease-in-out infinite}
+@keyframes shimmer{0%,100%{opacity:.75}50%{opacity:1}}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <svg class="mascot" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="dropg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#9fe3ff"/><stop offset="1" stop-color="#35a9e8"/>
+        </linearGradient>
+      </defs>
+      <path d="M50 10 C50 10 20 46 20 64 a30 30 0 0 0 60 0 C80 46 50 10 50 10 Z" fill="url(#dropg)" stroke="#2196dc" stroke-width="3"/>
+      <path d="M34 58 q6 -8 14 -8" stroke="#fff" stroke-width="5" fill="none" opacity=".65" stroke-linecap="round"/>
+      <circle cx="40" cy="64" r="4.6" fill="#16455f"/><circle cx="60" cy="64" r="4.6" fill="#16455f"/>
+      <circle cx="41.6" cy="62.4" r="1.5" fill="#fff"/><circle cx="61.6" cy="62.4" r="1.5" fill="#fff"/>
+      <path d="M43 74 q7 6 14 0" stroke="#16455f" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <circle cx="31" cy="71" r="4" fill="#ff9db1" opacity=".55"/><circle cx="69" cy="71" r="4" fill="#ff9db1" opacity=".55"/>
+    </svg>
+    <div class="h-title">
+      <h1>加快<em>溶解</em>实验室</h1>
+      <p>浙教版小学科学三年级 · 100 毫升水 + 2 克食盐 · 用对比实验找答案 · 教师【凌瀚】</p>
+    </div>
+    <div class="h-tip" id="mascotTip">
+      嗨！我是水滴<b>滴滴</b>。想让食盐快点溶解，可以想办法改变<b>水温</b>、<b>颗粒大小</b>和<b>是否搅拌</b>。记住哦：每次只能改变<b>一个</b>条件，才比得公平！
+    </div>
+  </header>
+
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-tab="stir"><span class="num">1</span>探索：搅拌</button>
+    <button class="tab" data-tab="temp"><span class="num">2</span>探索：水温</button>
+    <button class="tab" data-tab="size"><span class="num">3</span>拓展：颗粒大小</button>
+    <button class="tab" data-tab="free">🔓 自由探究</button>
+  </nav>
+
+  <div class="lab">
+    <!-- 左：控制 -->
+    <div class="card">
+      <div class="card-h"><h2>🧪 实验条件</h2><span class="sub" id="modeSub">对比实验</span></div>
+      <div class="card-b" id="ctrlBox"></div>
+      <div class="card-b" style="padding-top:0">
+        <div class="fixed-note">
+          <b>两个杯子都相同：</b>250 毫升烧杯 · 100 毫升水 · 2 克食盐 · 同时开始计时。
+          只有你选的那个条件不一样 —— 这就是<b>控制变量</b>。
+        </div>
+      </div>
+      <div class="act">
+        <button class="btn primary" id="btnRun">▶ 开始实验</button>
+        <button class="btn ghost" id="btnReset">↺ 重置</button>
+        <div class="spd">
+          <span>播放</span>
+          <button data-spd="1" class="on">1×</button>
+          <button data-spd="2">2×</button>
+          <button data-spd="4">4×</button>
+          <button data-spd="8">8×</button>
+          <button data-spd="16">16×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：舞台 -->
+    <div class="card">
+      <div class="card-h"><h2>🔬 观察台</h2><span class="sub" id="clockAll">00.0 秒</span></div>
+      <div class="stage">
+        <div class="predict" id="predict">
+          <span class="q">🎯 先猜一猜：哪一杯的食盐会<b>先完全溶解</b>？</span>
+          <span class="pk">
+            <button data-pk="A">甲杯更快</button>
+            <button data-pk="B">乙杯更快</button>
+          </span>
+          <span class="ps" id="predictState">（还没预测）</span>
+        </div>
+
+        <div class="beakers">
+          <div class="bk a" id="bkA">
+            <div class="bk-head">
+              <span class="bk-name">甲杯</span>
+              <span class="tbadge" id="tbA">30℃</span>
+            </div>
+            <div id="svgA"></div>
+            <div class="chips" id="chipsA"></div>
+            <div class="clock" id="ckA">0.0<small>秒</small></div>
+            <div class="pbar"><i id="pbA"></i></div>
+            <div class="done" id="dnA"></div>
+          </div>
+          <div class="bk b" id="bkB">
+            <div class="bk-head">
+              <span class="bk-name">乙杯</span>
+              <span class="tbadge" id="tbB">30℃</span>
+            </div>
+            <div id="svgB"></div>
+            <div class="chips" id="chipsB"></div>
+            <div class="clock" id="ckB">0.0<small>秒</small></div>
+            <div class="pbar"><i id="pbB"></i></div>
+            <div class="done" id="dnB"></div>
+          </div>
+        </div>
+
+        <div class="result" id="result"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 记录与发现 -->
+  <div class="card" style="margin-top:16px">
+    <div class="card-h"><h2>📒 我的实验记录</h2><span class="sub">先预测 → 再实验 → 找规律</span></div>
+    <div class="card-b">
+      <div id="recWrap"><div class="empty">还没有实验记录。选好条件，点「开始实验」试试吧！</div></div>
+      <div class="findings" id="findings"></div>
+      <div class="badge" id="badge">
+        <span class="medal">🏅</span>
+        <div><b>小小科学家徽章 · 达成！</b><br>你用「控制变量」的方法，把三个影响因素都研究清楚啦！</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 原理 -->
+  <div class="tips">
+    <div class="tip">
+      <h3>🥄 为什么搅拌会更快？</h3>
+      <p>食盐周围的那一小口水，很快就变得很咸、很"挤"了，后面的盐就难挤进去。搅拌让水流动起来，把咸水带走、换上淡水，盐就能一直快速地溶进去。</p>
+    </div>
+    <div class="tip">
+      <h3>🌡️ 为什么热水会更快？</h3>
+      <p>水温越高，水分子跑得越快、力气越大，把食盐晶体表面的"盐粒"拉进水里的速度就越快。所以同样一杯盐，在热水里溶解得更快。</p>
+    </div>
+    <div class="tip">
+      <h3>🧂 为什么细盐会更快？</h3>
+      <p>同样是 2 克食盐，磨得越细，颗粒越小，和水<b>接触的表面积</b>就越大。能同时"开工"的地方多了，溶解自然就快了。（食盐的晶体是小小的<b>立方体</b>哦）</p>
+    </div>
+    <div class="tip warn">
+      <h3>⚠️ 两个容易搞错的地方</h3>
+      <p>① 食盐完全溶解后的盐水是<b>无色透明</b>的，并不是蓝色的；杯子里那些淡淡的"水流"是浓盐水让光线偏折产生的纹路。<br>② 实验中"同样多的水、同样多的食盐、同时开始"，不是为了省事，而是为了<b>公平比较</b>。</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    溶解模型参考：Noyes–Whitney 溶解速率方程（速率 ∝ 接触面积 × 浓度差）与 Stokes–Einstein 扩散关系（速率 ∝ 温度 / 水的黏度）。<br>
+    时间为科学推算的模拟值，用于帮助建立"快慢"的定量感受。
+  </div>
+</div>
+
+<script>
+/* ============ 科学模型 ============ */
+// 水的动力黏度 (mPa·s)
+const VISC=[[0,1.792],[10,1.307],[20,1.002],[25,0.890],[30,0.797],[40,0.653],[50,0.547],[60,0.466],[70,0.404],[80,0.355],[90,0.315],[100,0.282]];
+function visc(T){
+  if(T<=0)return 1.792; if(T>=100)return .282;
+  for(let i=0;i<VISC.length-1;i++){
+    const [t0,v0]=VISC[i],[t1,v1]=VISC[i+1];
+    if(T>=t0&&T<=t1) return v0+(v1-v0)*(T-t0)/(t1-t0);
+  }
+  return .797;
+}
+// 温度因子：D ∝ T/η（Stokes–Einstein），以 30℃ 为基准
+function tempFactor(T){
+  const e=visc(T), e30=visc(30);
+  return ((T+273.15)/303.15)*(e30/e);
+}
+const SIZE_F={fine:1.0, coarse:0.28};   // 细盐(≈0.3mm) / 粗盐(≈1.1mm)，同质量下接触面积 ∝ 1/d
+const STIR_F={stir:5.0, still:1.0};     // 玻璃棒搅拌显著增厚"扩散层变薄"效应
+const BASE_T=60;                        // 基准：细盐 / 30℃ / 不搅拌 → 60 秒
+function dissolveTime(c){
+  return BASE_T/(tempFactor(c.temp)*SIZE_F[c.size]*STIR_F[c.stir?'stir':'still']);
+}
+// 剩余质量分数：dR/dt = -k·R^(2/3) → R=(1-x)^3；x=t/T
+function progressAt(t,T){ const x=Math.max(0,Math.min(1,t/T)); return 1-Math.pow(1-x,3); }
+
+/* ============ 状态 ============ */
+const PRESETS={
+  stir:{shared:{temp:30,size:'fine'},vals:{A:true,B:false}},
+  temp:{shared:{size:'fine',stir:false},vals:{A:70,B:10}},
+  size:{shared:{temp:30,stir:false},vals:{A:'fine',B:'coarse'}},
+  free:{full:{A:{temp:30,size:'fine',stir:true},B:{temp:30,size:'coarse',stir:false}}}
+};
+const state={
+  factor:'stir',
+  shared:{temp:30,size:'fine',stir:false},
+  vals:{A:true,B:false},
+  full:{A:{temp:30,size:'fine',stir:true},B:{temp:30,size:'coarse',stir:false}},
+  running:false, t:0, speed:1, userSpeed:false,
+  finA:null, finB:null, predict:null, records:[], findings:{}
+};
+const TABS_HINT={
+  stir:'探索1：两杯水一样多、盐一样多、温度一样，只有<b>一杯搅拌、一杯不搅拌</b>。',
+  temp:'探索2：这次只改变<b>水温</b>，两杯都不搅拌、都用细盐。',
+  size:'拓展：把食盐<b>研磨得更细</b>，接触水的面积变大，会溶解得更快吗？',
+  free:'自由探究：三个条件都能改，但记得<b>一次只改一个</b>，才比得公平。'
+};
+
+function condOf(side){
+  if(state.factor==='free') return {...state.full[side]};
+  const c={...state.shared}; c[state.factor]=state.vals[side]; return c;
+}
+function getVal(key,side){
+  if(state.factor==='free') return state.full[side][key];
+  if(state.factor===key) return state.vals[side];
+  return state.shared[key];
+}
+function setVal(key,side,v){
+  if(state.factor==='free') state.full[side][key]=v;
+  else if(state.factor===key) state.vals[side]=v;
+  else state.shared[key]=v;
+}
+const SIZE_TEXT={fine:'细盐',coarse:'粗盐'};
+const SIZE_SUB={fine:'已研磨·颗粒小',coarse:'未研磨·颗粒大'};
+function condText(c){ return `${c.temp}℃ · ${SIZE_TEXT[c.size]} · ${c.stir?'搅拌':'不搅拌'}`; }
+function fmt(s){
+  if(s<60) return s.toFixed(1);
+  const m=Math.floor(s/60); return `${m}分${String(Math.floor(s%60)).padStart(2,'0')}秒`;
+}
+function tempColor(T){
+  const p=Math.max(0,Math.min(1,(T-10)/60));
+  const c0=[74,168,232], c1=[240,102,63];
+  return `rgb(${Math.round(c0[0]+(c1[0]-c0[0])*p)},${Math.round(c0[1]+(c1[1]-c0[1])*p)},${Math.round(c0[2]+(c1[2]-c0[2])*p)})`;
+}
+
+/* ============ 控件渲染 ============ */
+const ctrlBox=document.getElementById('ctrlBox');
+function ctrlHTML(key,side){
+  const v=getVal(key,side);
+  if(key==='temp'){
+    return `<div class="slider-wrap">
+      <input type="range" min="10" max="70" step="1" value="${v}" data-k="temp" data-s="${side}">
+      <span class="sval" id="sv_${key}_${side}">${v}<span>℃</span></span></div>`;
+  }
+  if(key==='size'){
+    return `<div class="seg bigr">
+      <button data-k="size" data-s="${side}" data-v="coarse" class="${v==='coarse'?'on':''}">粗盐<span class="sub">颗粒大</span></button>
+      <button data-k="size" data-s="${side}" data-v="fine" class="${v==='fine'?'on':''}">细盐<span class="sub">颗粒小</span></button>
+    </div>`;
+  }
+  return `<div class="seg bigr">
+    <button data-k="stir" data-s="${side}" data-v="stir" class="${v?'on':''}">搅拌<span class="sub">用玻璃棒</span></button>
+    <button data-k="stir" data-s="${side}" data-v="still" class="${!v?'on':''}">不搅拌<span class="sub">静置</span></button>
+  </div>`;
+}
+const ROWS=[{k:'temp',icon:'🌡️',name:'水温'},{k:'size',icon:'🧂',name:'颗粒大小'},{k:'stir',icon:'🥄',name:'是否搅拌'}];
+function renderControls(){
+  const f=state.factor;
+  let html='';
+  for(const r of ROWS){
+    const studied=(f===r.k);
+    if(studied){
+      html+=`<div class="ctrl-row studied">
+        <div class="rhead"><span class="tag change">只改变它</span><span class="rname">${r.icon} ${r.name}</span><span class="lockic">⚖️</span></div>
+        <div class="two">
+          <div class="opt-col a"><div class="col-title"><i class="dot a"></i>甲杯</div>${ctrlHTML(r.k,'A')}</div>
+          <div class="opt-col b"><div class="col-title"><i class="dot b"></i>乙杯</div>${ctrlHTML(r.k,'B')}</div>
+        </div></div>`;
+    }else{
+      html+=`<div class="ctrl-row locked">
+        <div class="rhead"><span class="tag same">保持相同</span><span class="rname">${r.icon} ${r.name}</span><span class="lockic">🔒</span></div>
+        <div class="one">${ctrlHTML(r.k,'S')}</div></div>`;
+    }
+  }
+  if(f==='free'){
+    html=ROWS.map(r=>`<div class="ctrl-row">
+      <div class="rhead"><span class="rname">${r.icon} ${r.name}</span><span class="lockic">🎛️</span></div>
+      <div class="two">
+        <div class="opt-col a"><div class="col-title"><i class="dot a"></i>甲杯</div>${ctrlHTML(r.k,'A')}</div>
+        <div class="opt-col b"><div class="col-title"><i class="dot b"></i>乙杯</div>${ctrlHTML(r.k,'B')}</div>
+      </div></div>`).join('');
+  }
+  ctrlBox.innerHTML=html;
+}
+ctrlBox.addEventListener('input',e=>{
+  const t=e.target; if(t.type!=='range')return;
+  if(state.running)return;
+  setVal(t.dataset.k,t.dataset.s,Number(t.value));
+  const lab=document.getElementById('sv_'+t.dataset.k+'_'+t.dataset.s);
+  if(lab) lab.innerHTML=t.value+'<span>℃</span>';
+  refreshSetup();
+});
+ctrlBox.addEventListener('click',e=>{
+  const b=e.target.closest('button[data-k]'); if(!b)return;
+  if(state.running)return;
+  const k=b.dataset.k, s=b.dataset.s, v=b.dataset.v;
+  setVal(k,s, k==='stir' ? (v==='stir') : v);
+  renderControls(); refreshSetup();
+});
+document.getElementById('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('.tab'); if(!b)return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  state.factor=b.dataset.tab;
+  const p=PRESETS[state.factor];
+  if(p.shared){ state.shared={...p.shared}; state.vals={...p.vals}; }
+  document.getElementById('modeSub').textContent =
+    state.factor==='free' ? '自由探究' : '对比实验·控制变量';
+  say(TABS_HINT[state.factor]);
+  renderControls(); resetRun();
+});
+
+/* ============ 烧杯绘制 ============ */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+const GEO={ix1:31,ix2:189,iy1:62,iy2:265,ox1:26,ox2:194,oy1:58,oy2:272,surf:184};
+function beakerSVG(side,c){
+  const fine=(c.size==='fine');
+  const n=fine?110:30;
+  const rnd=mulberry32(side==='A'?20240917:777001);
+  const grains=[];
+  let parts='';
+  for(let i=0;i<n;i++){
+    const k=rnd();
+    const x=74+rnd()*104;
+    const h=14*Math.max(0,1-Math.pow((x-126)/54,2));
+    const y=264-rnd()*h;
+    const s=fine?(2.2+rnd()*1.3):(5.4+rnd()*2.4);
+    const rot=rnd()*90;
+    grains.push({k,x,y,s,rot});
+    parts+=`<rect class="cry" x="${(-s/2).toFixed(2)}" y="${(-s/2).toFixed(2)}" width="${s.toFixed(2)}" height="${s.toFixed(2)}" rx="${(s*0.16).toFixed(2)}" fill="#ffffff" stroke="#bcd3e0" stroke-width=".55"/>`;
+  }
+  window.__grains__=window.__grains__||{}; window.__grains__[side]=grains;
+  const marks=[50,100,150,200].map(v=>{
+    const y=GEO.iy2-(v/250)*(GEO.iy2-GEO.iy1);
+    return `<line x1="166" y1="${y.toFixed(1)}" x2="184" y2="${y.toFixed(1)}" stroke="#9fbccd" stroke-width="1.6"/>
+            <text x="162" y="${(y+3).toFixed(1)}" font-size="8.5" fill="#9fbccd" text-anchor="end">${v}</text>`;
+  }).join('');
+  let tmarks='';
+  for(let v=0;v<=100;v+=20){
+    const y=200-v*1.3;
+    tmarks+=`<line x1="66" y1="${y}" x2="72" y2="${y}" stroke="#93a9b8" stroke-width="1"/>
+             <text x="74.5" y="${y+3}" font-size="7" fill="#93a9b8">${v}</text>`;
+  }
+  return `<svg viewBox="0 0 220 320">
+  <defs>
+    <clipPath id="in${side}"><path d="M31,62 L31,255 Q31,265 41,265 L179,265 Q189,265 189,255 L189,62 Z"/></clipPath>
+    <linearGradient id="wg${side}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c6e9f8" stop-opacity=".5"/><stop offset="1" stop-color="#8bcfef" stop-opacity=".72"/>
+    </linearGradient>
+    <linearGradient id="bg${side}" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="bl${side}" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+
+  <ellipse cx="110" cy="277" rx="94" ry="9" fill="#22394f" opacity=".08"/>
+  <rect x="0" y="272" width="220" height="48" fill="#ece2cd"/>
+  <rect x="0" y="272" width="220" height="5" fill="#dbc9a6"/>
+
+  <g id="stm${side}" opacity="0">
+    <g transform="translate(92,52)"><g class="steam"><path d="M0,0 c-7,-9 7,-15 0,-24 c-7,-9 6,-15 1,-23" fill="none" stroke="#c3dbe7" stroke-width="4.5" stroke-linecap="round"/></g></g>
+    <g transform="translate(112,48)"><g class="steam"><path d="M0,0 c-7,-9 7,-15 0,-24 c-7,-9 6,-15 1,-23" fill="none" stroke="#c3dbe7" stroke-width="4.5" stroke-linecap="round"/></g></g>
+    <g transform="translate(132,52)"><g class="steam"><path d="M0,0 c-7,-9 7,-15 0,-24 c-7,-9 6,-15 1,-23" fill="none" stroke="#c3dbe7" stroke-width="4.5" stroke-linecap="round"/></g></g>
+  </g>
+
+  <path d="M26,58 L26,258 Q26,272 40,272 L180,272 Q194,272 194,258 L194,58 Z" fill="#ffffff" opacity=".6"/>
+
+  <g clip-path="url(#in${side})">
+    <path id="wat${side}" d="M31,184 C70,184 150,184 189,184 L189,255 Q189,265 179,265 L41,265 Q31,265 31,255 Z" fill="url(#wg${side})"/>
+    <rect id="brn${side}" x="20" y="176" width="190" height="92" fill="url(#bg${side})" opacity="0"/>
+    <g id="blb${side}" filter="url(#bl${side})">
+      <ellipse cx="90" cy="250" rx="16" ry="10" fill="#ffffff" opacity="0"/>
+      <ellipse cx="126" cy="248" rx="18" ry="11" fill="#ffffff" opacity="0"/>
+      <ellipse cx="158" cy="252" rx="14" ry="9" fill="#ffffff" opacity="0"/>
+      <ellipse cx="108" cy="244" rx="13" ry="8" fill="#ffffff" opacity="0"/>
+    </g>
+    <g id="pl${side}">${parts}</g>
+  </g>
+
+  <g id="thm${side}">
+    <rect x="54" y="50" width="11" height="158" rx="5.5" fill="#ffffff" stroke="#b6cbd8" stroke-width="1.6"/>
+    <rect x="57.6" y="52" width="3.8" height="150" rx="1.9" fill="#ffeef0"/>
+    <rect id="thc${side}" x="57.6" y="150" width="3.8" height="58" rx="1.9" fill="#e8453f"/>
+    <circle cx="59.5" cy="210" r="9" fill="#e8453f" stroke="#c9342f" stroke-width="1.2"/>
+    ${tmarks}
+  </g>
+
+  <g id="rod${side}" opacity="0">
+    <line id="rl1${side}" x1="110" y1="8" x2="110" y2="205" stroke="#a9c3d1" stroke-width="8" stroke-linecap="round"/>
+    <line id="rl2${side}" x1="110" y1="8" x2="110" y2="205" stroke="#eaf4f9" stroke-width="3.6" stroke-linecap="round"/>
+    <path id="sw${side}" d="" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity=".8"/>
+  </g>
+
+  <g id="cld${side}" opacity="0"><g class="cold">
+    <ellipse cx="30" cy="140" rx="3.2" ry="4.4" fill="#bfe0f2"/><ellipse cx="33" cy="176" rx="2.6" ry="3.6" fill="#bfe0f2"/>
+    <ellipse cx="29" cy="212" rx="3" ry="4" fill="#bfe0f2"/><ellipse cx="190" cy="152" rx="3" ry="4.2" fill="#bfe0f2"/>
+    <ellipse cx="187" cy="196" rx="2.6" ry="3.6" fill="#bfe0f2"/><ellipse cx="191" cy="232" rx="3.2" ry="4.2" fill="#bfe0f2"/>
+  </g></g>
+
+  <path d="M26,58 L26,258 Q26,272 40,272 L180,272 Q194,272 194,258 L194,58" fill="none" stroke="#a3bfd0" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M26,58 q-11,2 -10,10 q1,6 10,8" fill="#ffffff" stroke="#a3bfd0" stroke-width="3" stroke-linejoin="round"/>
+  <line x1="21" y1="58" x2="199" y2="58" stroke="#a3bfd0" stroke-width="5" stroke-linecap="round"/>
+  ${marks}
+  <text x="196" y="76" font-size="8.5" fill="#9fbccd" text-anchor="end">mL</text>
+  <line x1="36" y1="72" x2="36" y2="246" stroke="#ffffff" stroke-width="6" opacity=".55" stroke-linecap="round"/>
+</svg>`;
+}
+
+const BK={};
+for(const side of ['A','B']){
+  BK[side]={host:document.getElementById('svg'+side),cond:null,T:60,el:{},cry:[],blobs:[]};
+}
+function buildBeaker(side){
+  const bk=BK[side];
+  const c=condOf(side);
+  bk.cond=c; bk.T=dissolveTime(c);
+  bk.host.innerHTML=beakerSVG(side,c);
+  const g=id=>bk.host.querySelector('#'+id);
+  bk.el={
+    water:g('wat'+side), brine:g('brn'+side), blobs:g('blb'+side), steam:g('stm'+side),
+    cold:g('cld'+side), rod:g('rod'+side), r1:g('rl1'+side), r2:g('rl2'+side), sw:g('sw'+side),
+    thc:g('thc'+side)
+  };
+  bk.cry=[...bk.host.querySelectorAll('.cry')];
+  bk.grains=window.__grains__[side];
+  bk.blobs=[...bk.el.blobs.querySelectorAll('ellipse')];
+  bk.phase=[0.13,0.42,0.68,0.91];
+  // 静态部分
+  const yTop=200-c.temp*1.3;
+  bk.el.thc.setAttribute('y',yTop.toFixed(1));
+  bk.el.thc.setAttribute('height',(212-yTop).toFixed(1));
+  bk.el.steam.setAttribute('opacity', c.temp>=45 ? Math.min(1,(c.temp-42)/28).toFixed(2) : 0);
+  bk.el.cold.setAttribute('opacity', c.temp<=22 ? Math.min(1,(23-c.temp)/13).toFixed(2) : 0);
+  bk.el.rod.setAttribute('opacity', c.stir?1:0);
+  document.getElementById('tb'+side).textContent=c.temp+'℃';
+  document.getElementById('tb'+side).style.background=tempColor(c.temp);
+  document.getElementById('chips'+side).innerHTML=
+    `<span class="chip">💧 100 毫升水</span><span class="chip">🧂 2 克${SIZE_TEXT[c.size]}</span>
+     <span class="chip">🌡️ ${c.temp}℃</span><span class="chip">🥄 ${c.stir?'搅拌':'不搅拌'}</span>`;
+}
+function resetRun(){
+  state.running=false; state.t=0; state.finA=null; state.finB=null;
+  document.getElementById('btnRun').textContent='▶ 开始实验';
+  document.getElementById('result').classList.remove('show');
+  for(const s of ['A','B']){
+    buildBeaker(s);
+    document.getElementById('ck'+s).innerHTML='0.0<small>秒</small>';
+    document.getElementById('pb'+s).style.width='0%';
+    document.getElementById('dn'+s).innerHTML='';
+    document.getElementById('bk'+s).style.boxShadow='';
+  }
+  document.getElementById('clockAll').textContent='00.0 秒';
+  render(0);
+}
+function refreshSetup(){
+  for(const s of ['A','B']){
+    const c=condOf(s);
+    const tb=document.getElementById('tb'+s);
+    tb.textContent=c.temp+'℃'; tb.style.background=tempColor(c.temp);
+    document.getElementById('chips'+s).innerHTML=
+      `<span class="chip">💧 100 毫升水</span><span class="chip">🧂 2 克${SIZE_TEXT[c.size]}</span>
+       <span class="chip">🌡️ ${c.temp}℃</span><span class="chip">🥄 ${c.stir?'搅拌':'不搅拌'}</span>`;
+  }
+  if(!state.running && state.t===0){
+    for(const s of ['A','B']) if(condOf(s).size!==BK[s].cond.size) buildBeaker(s);
+  }
+  if(!state.running){
+    for(const s of ['A','B']){
+      const c=condOf(s);
+      const yTop=200-c.temp*1.3;
+      const g=BK[s].el.thc; if(g){g.setAttribute('y',yTop.toFixed(1));g.setAttribute('height',(212-yTop).toFixed(1));}
+      const st=BK[s].el.steam; if(st) st.setAttribute('opacity', c.temp>=45?Math.min(1,(c.temp-42)/28).toFixed(2):0);
+      const cd=BK[s].el.cold; if(cd) cd.setAttribute('opacity', c.temp<=22?Math.min(1,(23-c.temp)/13).toFixed(2):0);
+      const rd=BK[s].el.rod; if(rd) rd.setAttribute('opacity', c.stir?1:0);
+    }
+  }
+}
+
+/* ============ 逐帧渲染 ============ */
+function render(t){
+  for(const side of ['A','B']){
+    const bk=BK[side], c=bk.cond, T=bk.T;
+    const x=Math.max(0,Math.min(1,t/T));
+    const p=progressAt(t,T);
+    const finished=t>=T;
+
+    // 水面（搅拌时中心下凹 —— 漩涡）
+    const dip=c.stir?9:0;
+    bk.el.water.setAttribute('d',
+      `M31,${GEO.surf} C70,${GEO.surf+dip} 150,${GEO.surf+dip} 189,${GEO.surf} L189,255 Q189,265 179,265 L41,265 Q31,265 31,255 Z`);
+
+    // 盐粒：数量随溶解减少，同时每一颗都在变小（立方体食盐晶体）
+    for(let i=0;i<bk.cry.length;i++){
+      const g=bk.grains[i];
+      const life=Math.max(0,Math.min(1,(g.k-x)/0.10));
+      if(life<=0){ bk.cry[i].setAttribute('opacity',0); continue; }
+      const sc=0.3+0.7*life;
+      bk.cry[i].setAttribute('transform',
+        `translate(${g.x.toFixed(1)},${g.y.toFixed(1)}) rotate(${g.rot.toFixed(0)}) scale(${sc.toFixed(3)})`);
+      bk.cry[i].setAttribute('opacity',Math.min(1,life*3).toFixed(2));
+    }
+
+    // 浓盐水（下沉的"水流"纹）—— 强度 ∝ 剩余量^(2/3)
+    const conc=Math.pow(1-x,2)*(c.stir?0.55:1);
+    bk.el.brine.setAttribute('opacity',(conc*0.5).toFixed(3));
+    for(let i=0;i<bk.blobs.length;i++){
+      const rise=((t*0.22+bk.phase[i])%1);
+      const cy=258-rise*(c.stir?86:70);
+      const rx=(12+rise*16)*(c.stir?1.3:1);
+      bk.blobs[i].setAttribute('cy',cy.toFixed(1));
+      bk.blobs[i].setAttribute('rx',rx.toFixed(1));
+      bk.blobs[i].setAttribute('ry',(rx*0.6).toFixed(1));
+      bk.blobs[i].setAttribute('opacity',(conc*0.62*(1-rise)*0.9).toFixed(3));
+    }
+
+    // 搅拌棒：绕杯心画圈
+    if(c.stir){
+      const th=t*3.1;
+      const tx=110+32*Math.cos(th), ty=205+15*Math.sin(th);
+      const px=110+11*Math.cos(th), py=8+4*Math.sin(th);
+      bk.el.r1.setAttribute('x1',px.toFixed(1));bk.el.r1.setAttribute('y1',py.toFixed(1));
+      bk.el.r1.setAttribute('x2',tx.toFixed(1));bk.el.r1.setAttribute('y2',ty.toFixed(1));
+      bk.el.r2.setAttribute('x1',px.toFixed(1));bk.el.r2.setAttribute('y1',py.toFixed(1));
+      bk.el.r2.setAttribute('x2',tx.toFixed(1));bk.el.r2.setAttribute('y2',ty.toFixed(1));
+      bk.el.sw.setAttribute('d',`M${(tx-16).toFixed(1)},${(ty+6).toFixed(1)} q16,10 32,0`);
+      bk.el.sw.setAttribute('opacity',(0.35+0.3*Math.sin(th)).toFixed(2));
+    }
+
+    // 面板
+    const shown=finished?T:t;
+    document.getElementById('ck'+side).innerHTML=fmt(shown)+(shown<60?'<small>秒</small>':'');
+    document.getElementById('pb'+side).style.width=(p*100).toFixed(1)+'%';
+  }
+  document.getElementById('clockAll').textContent=fmt(t)+(t<60?' 秒':'');
+}
+
+/* ============ 运行控制 ============ */
+let last=0, raf=null;
+function loop(now){
+  if(!state.running){raf=null;return;}
+  if(!last)last=now;
+  const dt=Math.min(0.25,(now-last)/1000)*state.speed;
+  last=now; state.t+=dt;
+  const TA=BK.A.T, TB=BK.B.T;
+  if(state.finA===null && state.t>=TA){state.finA=TA; onFinish('A');}
+  if(state.finB===null && state.t>=TB){state.finB=TB; onFinish('B');}
+  render(Math.min(state.t,Math.max(TA,TB)));
+  if(state.finA!==null && state.finB!==null){state.running=false;document.getElementById('btnRun').textContent='↺ 再做一次';finalResult();return;}
+  raf=requestAnimationFrame(loop);
+}
+function start(){
+  const ca=condOf('A'), cb=condOf('B');
+  if(ca.temp===cb.temp && ca.size===cb.size && ca.stir===cb.stir){
+    say('两杯条件<b>完全一样</b>，就比不出谁快啦！请让<b>一个条件</b>不一样再试～');
+    return;
+  }
+  if(state.finA!==null||state.finB!==null) resetRun();
+  buildBeaker('A'); buildBeaker('B');
+  const mx=Math.max(BK.A.T,BK.B.T);
+  if(!state.userSpeed){
+    const auto = mx>240?16 : mx>120?8 : mx>60?4 : mx>30?2 : 1;
+    setSpeed(auto);
+  }
+  state.running=true; last=0;
+  document.getElementById('btnRun').textContent='⏸ 暂停';
+  say('计时开始！睁大眼睛看杯底，食盐颗粒会一点点变小、变少……');
+  raf=requestAnimationFrame(loop);
+}
+function pause(){
+  state.running=false;
+  document.getElementById('btnRun').textContent='▶ 继续';
+  if(raf){cancelAnimationFrame(raf);raf=null;}
+}
+function setSpeed(s,byUser){
+  if(byUser) state.userSpeed=true;
+  state.speed=s;
+  document.querySelectorAll('.spd button').forEach(b=>b.classList.toggle('on',Number(b.dataset.spd)===s));
+}
+document.getElementById('btnRun').addEventListener('click',()=>{
+  if(state.running){pause();return;}
+  if(state.t>0 && state.finA===null){ start2(); return; }
+  if(state.finA!==null||state.finB!==null){ resetRun(); start(); return; }
+  start();
+});
+function start2(){ state.running=true; last=0; document.getElementById('btnRun').textContent='⏸ 暂停'; raf=requestAnimationFrame(loop); }
+document.getElementById('btnReset').addEventListener('click',resetRun);
+document.querySelectorAll('.spd button').forEach(b=>b.addEventListener('click',()=>setSpeed(Number(b.dataset.spd),true)));
+
+function confetti(el){
+  const cols=['#ff8f3c','#16b8a0','#2f9ee0','#f5c542','#ff6b8b','#7ed957'];
+  for(let i=0;i<30;i++){
+    const c=document.createElement('i'); c.className='cf';
+    c.style.left=(6+Math.random()*88)+'%';
+    c.style.background=cols[i%cols.length];
+    c.style.setProperty('--x',(Math.random()*140-70)+'px');
+    c.style.animationDelay=(Math.random()*0.45)+'s';
+    el.appendChild(c); setTimeout(()=>c.remove(),2400);
+  }
+}
+function onFinish(side){
+  const el=document.getElementById('bk'+side);
+  document.getElementById('dn'+side).innerHTML='✅ 食盐完全溶解啦';
+  el.style.boxShadow='0 0 0 4px rgba(47,179,122,.35)';
+  confetti(el);
+}
+function finalResult(){
+  const TA=BK.A.T, TB=BK.B.T;
+  const winner = TA<TB?'A':'B';
+  const fast=Math.min(TA,TB), slow=Math.max(TA,TB);
+  const ratio=(slow/fast);
+  const ca=BK.A.cond, cb=BK.B.cond;
+  let diff='';
+  if(ca.stir!==cb.stir) diff=`<b>${ca.stir?'甲杯搅拌':'乙杯搅拌'}</b>，而另一杯<b>不搅拌</b>`;
+  else if(ca.temp!==cb.temp) diff=`甲杯水温 <b>${ca.temp}℃</b>，乙杯水温 <b>${cb.temp}℃</b>`;
+  else diff=`甲杯用<b>${SIZE_TEXT[ca.size]}</b>，乙杯用<b>${SIZE_TEXT[cb.size]}</b>`;
+
+  const rank={};
+  if(TA<TB){rank.A='第1名';rank.B='第2名';}else{rank.A='第2名';rank.B='第1名';}
+  document.getElementById('dnA').innerHTML=`<span class="rk">${rank.A}</span>✅ 完全溶解`;
+  document.getElementById('dnB').innerHTML=`<span class="rk">${rank.B}</span>✅ 完全溶解`;
+
+  let guess='';
+  if(state.predict){
+    guess = state.predict===winner
+      ? '🎉 <b>你猜对啦！</b>预测和实验结果一致，这就是科学家的感觉～'
+      : '🤔 <b>和你的预测不一样！</b>没关系，实验数据才是证据 —— 再换一个条件试试。';
+  }else{
+    guess='💡 下次先点上面的「猜一猜」，先预测再实验，会更像真正的科学家哦！';
+  }
+  const fasterName = winner==='A'?'甲杯':'乙杯';
+  const R=document.getElementById('result');
+  R.innerHTML=`<div class="big">结论：${fasterName}溶解得更快！</div>
+    两个杯子的水量、盐量都一样，只有一处不同 —— ${diff}。<br>
+    快的用了 <b>${fmt(fast)}${fast<60?' 秒':''}</b>，慢的用了 <b>${fmt(slow)}${slow<60?' 秒':''}</b>，
+    差不多快了 <b>${ratio.toFixed(1)} 倍</b>。<br>${guess}`;
+  R.classList.add('show');
+
+  say(`结果出来啦：其他条件都相同，<b>${diff.replace(/<\/?b>/g,'')}</b>时，溶解更快的是<b>${fasterName}</b>。`);
+
+  // 记录
+  const rec={n:state.records.length+1, ca:{...ca}, cb:{...cb}, TA, TB, winner, factor:state.factor, predict:state.predict};
+  state.records.push(rec);
+  if(state.factor!=='free'){
+    if(ca.stir!==cb.stir){
+      const fastIsStir = (TA<TB?ca.stir:cb.stir);
+      state.findings.stir={txt:`${fastIsStir?'搅拌':'不搅拌'} 更快`,ratio};
+    }else if(ca.temp!==cb.temp){
+      const ft=TA<TB?ca.temp:cb.temp, st=TA<TB?cb.temp:ca.temp;
+      state.findings.temp={txt:`${ft}℃ 比 ${st}℃ 更快`,ratio};
+    }else if(ca.size!==cb.size){
+      const fs=TA<TB?ca.size:cb.size, ss=TA<TB?cb.size:ca.size;
+      state.findings.size={txt:`${SIZE_TEXT[fs]} 比 ${SIZE_TEXT[ss]} 更快`,ratio};
+    }
+  }
+  renderRecords();
+  state.predict=null;
+  document.querySelectorAll('.predict .pk button').forEach(b=>b.classList.remove('on'));
+  document.getElementById('predictState').innerHTML='（还没预测）';
+}
+
+/* ============ 预测 ============ */
+document.getElementById('predict').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-pk]'); if(!b)return;
+  if(state.running)return;
+  document.querySelectorAll('.predict .pk button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); state.predict=b.dataset.pk;
+  document.getElementById('predictState').innerHTML=`已预测：<b>${b.dataset.pk==='A'?'甲杯':'乙杯'}更快</b>`;
+  say('好！把预测记下来，再开始实验，看看数据和你想的是不是一样。');
+});
+
+/* ============ 记录 / 发现 ============ */
+function renderRecords(){
+  const w=document.getElementById('recWrap');
+  if(state.records.length===0){ w.innerHTML='<div class="empty">还没有实验记录。选好条件，点「开始实验」试试吧！</div>'; }
+  else{
+    let h=`<table class="records"><thead><tr>
+      <th>#</th><th>甲杯条件</th><th>乙杯条件</th><th>甲杯用时</th><th>乙杯用时</th><th>更快</th><th>我的预测</th>
+    </tr></thead><tbody>`;
+    for(const r of state.records.slice().reverse()){
+      const wA=r.winner==='A';
+      const pk=r.predict? (r.predict===r.winner?'✅ 猜对':(r.predict==='A'?'❌ 甲杯':'❌ 乙杯')):'—';
+      h+=`<tr><td>${r.n}</td>
+        <td>${condText(r.ca)}</td><td>${condText(r.cb)}</td>
+        <td class="${wA?'winA':''}">${fmt(r.TA)}${r.TA<60?' 秒':''}</td>
+        <td class="${!wA?'winB':''}">${fmt(r.TB)}${r.TB<60?' 秒':''}</td>
+        <td>${wA?'甲杯':'乙杯'}（快 ${(Math.max(r.TA,r.TB)/Math.min(r.TA,r.TB)).toFixed(1)} 倍）</td>
+        <td>${pk}</td></tr>`;
+    }
+    w.innerHTML=h+'</tbody></table>';
+  }
+  const F=state.findings;
+  const boxes=[
+    {k:'stir',ic:'🥄',t:'搅拌的影响',got:F.stir},
+    {k:'temp',ic:'🌡️',t:'水温的影响',got:F.temp},
+    {k:'size',ic:'🧂',t:'颗粒大小的影响',got:F.size}
+  ];
+  document.getElementById('findings').innerHTML=boxes.map(b=>
+    `<div class="fbox ${b.got?'got':''}">
+      ${b.got?'<span class="stamp">已发现</span>':''}
+      <div class="ft">${b.ic} ${b.t}</div>
+      ${b.got?`<div class="fv">在其他条件相同时，<b>${b.got.txt}</b>，快了约 <b>${b.got.ratio.toFixed(1)} 倍</b>。</div>`
+             :`<div class="lock">🔒 还没研究。选上方的探索，做一次对比实验吧。</div>`}
+    </div>`).join('');
+  document.getElementById('badge').classList.toggle('show', !!(F.stir&&F.temp&&F.size));
+}
+
+/* ============ 提示语 ============ */
+let tipTimer=null;
+function say(html){
+  const el=document.getElementById('mascotTip');
+  el.innerHTML=html;
+  el.style.transition='none'; el.style.transform='scale(1.03)';
+  clearTimeout(tipTimer);
+  tipTimer=setTimeout(()=>{el.style.transform='scale(1)';},160);
+}
+
+/* ============ 初始化 ============ */
+renderControls();
+resetRun();
+renderRecords();
+</script>
+</body>
+</html>
