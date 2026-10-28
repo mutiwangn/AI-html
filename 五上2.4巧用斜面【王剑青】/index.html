@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="w8LYYDoyt9A5wzvJ4ZDuuZ">
+<head data-page-node-id="nHC57aEjD38LdrRnGtgD5T">
+<meta charset="utf-8" data-page-node-id="Dz5DqzfQ3GZq2ElF1BoyeB">
+<meta name="viewport" content="width=device-width, initial-scale=1" data-page-node-id="OIiXD0rzMPFCId9GiKS0FF">
+<title>五上2.4 巧用斜面 · 斜面组合探究 · 【镇海区九龙湖中心学校 王剑青】</title>
+<style>
+  :root{
+    --ink:#3a372f; --sub:#837c6d;
+    --wood1:#e5a75f; --wood2:#c6854b; --wood-edge:#a5693c;
+    --block1:#d8a468; --block2:#b8844a;
+    --teal:#3a9e8a; --blue:#5b8fc9; --orange:#e8983f; --red:#d96a5f;
+    --panel:#ffffff; --bg:#f4f2ec;
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{
+    font-family:"Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;
+    background:var(--bg); color:var(--ink);
+    display:flex; flex-direction:column; height:100vh; overflow:hidden;
+  }
+  header{
+    position:relative; flex:0 0 auto; display:flex; align-items:center; gap:10px; padding:8px 14px; flex-wrap:wrap;
+    background:linear-gradient(90deg,#6a9fc7,#5fae9a); color:#fff;
+  }
+  #schoolBadge{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    display:flex; align-items:center; gap:6px; white-space:nowrap;
+    font-size:15.5px; font-weight:bold; letter-spacing:3px; color:#fff;
+    background:rgba(255,255,255,.18); border:1.5px solid rgba(255,255,255,.55);
+    padding:5px 18px; border-radius:20px;
+    text-shadow:0 1px 3px rgba(0,0,0,.25); pointer-events:none;
+  }
+  #schoolBadge .sch-ico{font-size:16px; letter-spacing:0;}
+  header h1{font-size:19px; letter-spacing:1px; white-space:nowrap;}
+  header h1 small{font-size:12px; opacity:.9; font-weight:normal; margin-left:8px;}
+  .hspace{flex:1;}
+  .hbtn{
+    border:none; cursor:pointer; background:rgba(255,255,255,.2); color:#fff;
+    font-size:13px; font-weight:bold; padding:7px 13px; border-radius:18px; white-space:nowrap;
+  }
+  .hbtn:hover{background:rgba(255,255,255,.34);}
+  #hintbar{
+    flex:0 0 auto; text-align:center; font-size:13.5px; padding:5px 12px;
+    background:#fdf7e7; color:#8a6d1f; border-bottom:1px solid #eee0b7;
+  }
+  main{flex:1 1 auto; display:flex; gap:10px; padding:8px 10px; min-height:0;}
+  /* ---------- 素材区 ---------- */
+  #tray{
+    flex:0 0 158px; background:var(--panel); border-radius:12px; padding:10px 9px;
+    display:flex; flex-direction:column; gap:7px; overflow-y:auto;
+    box-shadow:0 2px 8px rgba(0,0,0,.07);
+  }
+  #tray h3{font-size:13.5px; color:var(--sub); text-align:center; margin-bottom:1px;}
+  .mat{
+    position:relative; border:2px dashed #ddd3bd; border-radius:11px; background:#fbf8f1;
+    padding:7px 5px 5px; text-align:center; cursor:grab; user-select:none; touch-action:none; transition:.15s;
+  }
+  .mat:hover{border-color:var(--teal); background:#f1f8f4;}
+  .mat.empty{opacity:.35; cursor:not-allowed; filter:grayscale(.7);}
+  .mat .cnt{
+    position:absolute; top:4px; right:5px; background:var(--orange); color:#fff;
+    font-size:11px; font-weight:bold; border-radius:9px; padding:0 6px;
+  }
+  .mat .demo{height:30px; display:flex; align-items:center; justify-content:center;}
+  .mat .nm{font-size:12.5px; font-weight:bold; margin-top:2px; line-height:1.35;}
+  .mini-plank{height:11px; border-radius:5px; background:linear-gradient(180deg,var(--wood1),var(--wood2)); border:1px solid var(--wood-edge);}
+  .mini-block{width:30px; height:22px; border-radius:4px; background:linear-gradient(180deg,var(--block1),var(--block2)); border:1px solid #96602c;}
+  .mini-block.wide{width:30px; border-style:dashed; border-width:2px; box-shadow:0 6px 0 -2px rgba(150,96,44,.32);}
+  #tray .tip{font-size:11px; color:var(--sub); line-height:1.6; background:#f3efe4; border-radius:8px; padding:6px 7px; margin-top:auto;}
+  /* ---------- 舞台 ---------- */
+  #stageCol{flex:1 1 auto; display:flex; flex-direction:column; gap:6px; min-width:0;}
+  #exampleBar{display:flex; gap:6px; align-items:center; flex-wrap:wrap;}
+  #exampleBar .lab{font-size:12.5px; color:var(--sub); font-weight:bold;}
+  .chip{
+    border:1.5px solid #cfdcd2; background:#fff; color:#3f6b5c; cursor:pointer;
+    font-size:12.5px; font-weight:bold; padding:4px 11px; border-radius:14px; transition:.15s;
+  }
+  .chip:hover{background:#eaf5ef; border-color:var(--teal);}
+  #stageWrap{flex:1 1 auto; position:relative; display:flex; align-items:center; justify-content:center; min-height:0; margin:auto 0;}
+  #stage{
+    width:1000px; height:540px; position:relative; flex:0 0 auto; touch-action:none;
+    background:linear-gradient(180deg,#e3eff7 0%,#eef7f3 78%,#eef7f3 92.6%,transparent 92.6%);
+    border-radius:12px; overflow:hidden; transform-origin:0 50%;
+    box-shadow:0 2px 10px rgba(0,0,0,.09);
+  }
+  #viewTag{
+    position:absolute; top:8px; left:10px; z-index:8; font-size:11.5px; color:#5c7d6f;
+    background:rgba(255,255,255,.85); border:1px solid #cfdcd2; border-radius:10px; padding:2px 9px;
+  }
+  #groundBand{
+    position:absolute; left:0; right:0; top:500px; height:40px;
+    background:linear-gradient(180deg,#a5cf87,#8abb69); border-top:3px solid #79a855;
+  }
+  #plat{
+    position:absolute; left:770px; top:350px; width:150px; height:150px;
+    background:repeating-linear-gradient(180deg,#cfc8ba 0 24px,#c1b9a9 24px 28px);
+    border:3px solid #a89f8d; border-radius:5px 5px 0 0;
+  }
+  #plat .tag{
+    position:absolute; top:-27px; left:50%; transform:translateX(-50%);
+    background:var(--red); color:#fff; font-size:12.5px; font-weight:bold;
+    padding:3px 11px; border-radius:12px; white-space:nowrap;
+  }
+  #plat .flag{position:absolute; top:-56px; right:14px; font-size:26px;}
+  #fx{position:absolute; inset:0; pointer-events:none; z-index:6;}
+  .plank{
+    position:absolute; height:12px; border-radius:6px; cursor:grab; touch-action:none;
+    background:
+      repeating-linear-gradient(90deg, rgba(133,86,38,.13) 0 2px, transparent 2px 30px),
+      repeating-linear-gradient(0deg, rgba(255,246,230,.16) 0 2px, transparent 2px 6px),
+      linear-gradient(180deg,var(--wood1) 0%,var(--wood2) 78%,var(--wood-edge) 100%);
+    border:1px solid var(--wood-edge); box-shadow:0 2px 4px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.35); z-index:4;
+  }
+  .plank .plabel{
+    position:absolute; left:50%; top:-18px; transform:translateX(-50%);
+    font-size:10.5px; color:#7c6a45; background:rgba(255,252,243,.95); padding:0 6px;
+    border-radius:8px; white-space:nowrap; pointer-events:none;
+  }
+  .blk{position:absolute; border-radius:4px; cursor:grab; touch-action:none;
+    background:
+      repeating-linear-gradient(90deg, rgba(120,74,32,.14) 0 2px, transparent 2px 20px),
+      linear-gradient(180deg,var(--block1),var(--block2));
+    border:2px solid #96602c; z-index:3;
+    box-shadow:0 2px 4px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.3);}
+  .blk.wide{border-style:dashed; box-shadow:0 2px 4px rgba(0,0,0,.14), inset 0 0 0 3px rgba(150,96,44,.22);}
+  .dragging{cursor:grabbing !important; opacity:.92; z-index:20 !important;}
+  .sbadge{
+    position:absolute; left:50%; transform:translateX(-50%); white-space:nowrap;
+    font-size:10.5px; font-weight:bold; color:#7c6a45; background:rgba(255,252,243,.95);
+    padding:0 6px; border-radius:8px; pointer-events:none;
+  }
+  /* ---------- 俯视图模式 ---------- */
+  #stage.topmode .plank, #stage.topmode .blk, #stage.topmode .sbadge,
+  #stage.topmode #layerBlocks, #stage.topmode #layerPlanks,
+  #stage.topmode #dims, #stage.topmode #grid,
+  #stage.topmode #plat, #stage.topmode #groundBand,
+  #stage.topmode #anchorDots{display:none !important;}
+  /* ---------- 数据面板 ---------- */
+  #panel{flex:0 0 292px; display:flex; flex-direction:column; gap:8px; overflow-y:auto; min-height:0;}
+  .card{background:var(--panel); border-radius:12px; padding:10px 12px; box-shadow:0 2px 8px rgba(0,0,0,.07);}
+  .card h3{font-size:13.5px; color:var(--sub); margin-bottom:7px;}
+  .mrow{display:flex; justify-content:space-between; align-items:baseline; padding:4px 0; border-bottom:1px dashed #eee7d6; font-size:13px;}
+  .mrow:last-child{border-bottom:none;}
+  .mrow .k{color:var(--sub);}
+  .mrow .v{font-weight:800; font-size:15px; color:#3f6b5c;}
+  .mrow .v.big{font-size:17px;}
+  #stars{color:var(--orange); letter-spacing:1px;}
+  #routeStat{font-size:12.5px; color:var(--sub); background:#f6f3ea; border-radius:8px; padding:6px 8px; margin-top:6px; line-height:1.5;}
+  #refRow{display:none; font-size:12px; color:#7c5a2c; background:#fdf3e0; border-radius:8px; padding:6px 8px; margin-top:6px; line-height:1.55;}
+  #noteCard p{font-size:12.5px; color:#6b6152; line-height:1.7;}
+  #noteCard b{color:#3f6b5c;}
+  /* ---------- toast ---------- */
+  #toast{
+    position:fixed; top:56px; left:50%; transform:translateX(-50%) translateY(-12px);
+    background:rgba(48,46,40,.9); color:#fff; font-size:13.5px; font-weight:bold;
+    padding:8px 17px; border-radius:20px; opacity:0; pointer-events:none; transition:.25s; z-index:99;
+    max-width:80vw; text-align:center;
+  }
+  #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  /* ---------- 3D 视图（可拖动小窗，搭建时实时更新） ---------- */
+  #view3d{
+    position:fixed; right:16px; bottom:52px; width:520px; height:400px;
+    background:linear-gradient(180deg,#dcebf3,#eef4ee);
+    display:none; z-index:50; border-radius:13px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.26); border:2px solid #fff;
+  }
+  #view3d.full{ left:0 !important; top:0 !important; right:0 !important; bottom:0 !important;
+    width:auto !important; height:auto !important; border-radius:0; border:none; }
+  #view3d .bar{
+    position:absolute; top:0; left:0; right:0; height:38px; display:flex; align-items:center; gap:7px;
+    padding:0 10px; z-index:2; cursor:move; touch-action:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.82));
+    border-bottom:1px solid #dbe6df;
+  }
+  #view3d.full .bar{cursor:default;}
+  #view3d .bar h2{font-size:13.5px; color:#3f6b5c; white-space:nowrap;}
+  #view3d .bar .sp{flex:1;}
+  #view3d .vbtn{
+    border:1.5px solid #b9cec2; background:#fff; color:#3f6b5c; cursor:pointer;
+    font-size:12px; font-weight:bold; padding:4px 10px; border-radius:14px; white-space:nowrap;
+  }
+  #view3d .vbtn.on{background:var(--teal); color:#fff; border-color:var(--teal);}
+  #c3d{position:absolute; inset:0; width:100%; height:100%; cursor:grab; touch-action:none;}
+  #c3d.grabbing{cursor:grabbing;}
+  #view3d .foot{
+    position:absolute; bottom:4px; left:0; right:0; text-align:center;
+    font-size:11px; color:#7d938a; pointer-events:none;
+  }
+  @media (max-width:1080px){
+    main{flex-wrap:wrap; overflow-y:auto;}
+    #panel{flex:1 1 100%; flex-direction:row; flex-wrap:wrap;}
+    #panel .card{flex:1 1 230px;}
+  }
+
+  #authorCredit{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;min-height:29px;padding:5px 12px;background:#e8f5ef;border-bottom:1px solid #cfe5dd;color:#1b6756;font-size:12px;line-height:1.3;font-weight:700;letter-spacing:.02em}
+  #authorCredit .lesson-reference{color:#547d72;font-weight:600}
+  @media(max-width:600px){#authorCredit{font-size:11px;gap:5px 11px;padding:5px 7px}}
+</style>
+</head>
+<body data-page-node-id="EC6KajfgfvaLskouvNyfaR">
+<header data-page-node-id="0Hl6i2qtFBUV2L6HEUdsBW">
+  <h1 data-page-node-id="IBaCdhCHEUtT5qRNEDrkmk">🛠️ 巧用斜面 · 斜面组合探究 <small data-page-node-id="50UN5N1gZ1hLytfo2ITCMY">小学科学五年级 · 交互仿真</small></h1>
+  <div id="schoolBadge"><span class="sch-ico">🏫</span>镇海区九龙湖中心学校</div>
+  <div class="hspace" data-page-node-id="nogZ7upumDmE3evc71Kuk4"></div>
+  <button class="hbtn" id="resetBtn" data-page-node-id="QenpMlqKFLKPw18o2yW2ro">↺ 一键重置</button>
+  <button class="hbtn" id="saveBtn" data-page-node-id="aQCjQAO2GtsMH0ytAzYHst">💾 保存方案</button>
+  <button class="hbtn" id="loadBtn" data-page-node-id="q58RRUkYJkUhQnHt3ydEI2">📂 读取方案</button>
+  <button class="hbtn" id="viewBtn">🗺 俯视图</button>
+  <button class="hbtn" id="open3dBtn" data-page-node-id="xZp8SCVkdyzP8fwyAwYabT">🧊 3D 小窗</button>
+</header>
+<div id="authorCredit" role="note"><span class="lesson-reference">五年级上册 · 2.4《巧用斜面》</span><strong>【镇海区九龙湖中心学校 王剑青】</strong></div>
+<div id="hintbar" data-page-node-id="3zOwOAFnxIpW0BXMPmksH6">任务：用<b data-page-node-id="68vcMP05SsncvIDNTTFB5C">木板</b>和<b data-page-node-id="pp7TYvvUbuKXE74Yf9k3W0">长方体木块</b>搭出你的斜面方案——直斜面、L 型、回字形（转转楼梯式折返）都可以。对比<b data-page-node-id="tRvLHzmBBEURoLz2fWsguH">坡度（省力程度）</b>与<b data-page-node-id="QOqdxFQheaPXXTOoHFiclv">占地面积</b>，找到又省力又省地的好设计！搭好后点「🗺 俯视图」看折返布局，「🧊 3D 小窗」看立体结构。</div>
+
+<main data-page-node-id="qgdVZl1HXxurytpgUEeojD">
+  <aside id="tray" data-page-node-id="ZvsReyErw6l4i130vjcMXH">
+    <h3 data-page-node-id="27mW44kMceKf5LCteEj5BF">🧰 素材区</h3>
+    <div class="mat" data-type="short" data-page-node-id="6hBg0GFGLMcHzq0g2PZZBg"><span class="cnt" data-page-node-id="uhkPwJQ63sYVlDgku7fSu7"></span>
+      <div class="demo" data-page-node-id="2dAtbHIxiDrBXrf7DHQmzH"><div class="mini-plank" style="width:55px" data-page-node-id="5dIvjALSUginAiCzikp6Wy"></div></div><div class="nm" data-page-node-id="FojODtEx20NG2PlMHc1lWe">短木板 1.6m</div></div>
+    <div class="mat" data-type="mid" data-page-node-id="hgfFngEMQBO6DQUZC4jKBa"><span class="cnt" data-page-node-id="YhHKwtbVgJqeKJLRrDTcZ0"></span>
+      <div class="demo" data-page-node-id="VN74USgOp2h2KWODhxYk9j"><div class="mini-plank" style="width:66px" data-page-node-id="UGcqVGLJfKAXYtcwG53bQk"></div></div><div class="nm" data-page-node-id="LcenZy1KOzPruURTytcAwT">中木板 1.9m</div></div>
+    <div class="mat" data-type="long" data-page-node-id="MwA28Ssqee5IU6GQdfp75a"><span class="cnt" data-page-node-id="EPGtngTpapMTkJinuxaBP1"></span>
+      <div class="demo" data-page-node-id="rZKtc5kIGNmMwNGlekwk0O"><div class="mini-plank" style="width:92px" data-page-node-id="Xj2tMR25EiCsWbCpFqctRC"></div></div><div class="nm" data-page-node-id="jfJkCEbOcL8CoZq9B7nDZ6">长木板 2.6m</div></div>
+    <div class="mat" data-type="block" data-page-node-id="8tCX0jDQmj9vnhncdOnfVM"><span class="cnt" data-page-node-id="MkpWALLn3LeZFvySU4qqNz"></span>
+      <div class="demo" data-page-node-id="XcmYGboWLgwXIeL8CgivIY"><div class="mini-block" data-page-node-id="b2KD44ZuQ8hq2LBtBJmjds"></div></div><div class="nm" data-page-node-id="8UEWKWnNwXWpappZAsGBkB">长方体木块<br data-page-node-id="LU9Po1LFgcFsl4YuzKtPAY"><span style="font-size:10.5px;color:var(--sub)" data-page-node-id="ZimGy3yWWVR5LvvWTDpOdi">可叠成桥墩（≤3块）</span></div></div>
+    <div class="mat" data-type="wide"><span class="cnt"></span>
+      <div class="demo"><div class="mini-block wide"></div></div><div class="nm">宽木块（2 倍深）<br><span style="font-size:10.5px;color:var(--sub)">宽 0.64m × 深 1.6m，一块＝转角平台</span></div></div>
+    <div class="tip" data-page-node-id="pRVMRRyQVzjvFIRY5RDmIL">🖐 拖到右边摆放；<br data-page-node-id="Dl2wv7twFLXrScnM1yiWE2">拖回素材区或<b data-page-node-id="zcilXriBXHZVxoSIvc7rEb">双击</b>可删除；<br data-page-node-id="6PTHuy96uUiRzGpFrSoF4e">木板靠近支点会<b data-page-node-id="Gqm5AAe9slSbQ9EkWpAD9E">自动旋转吸附</b>；<br data-page-node-id="fZOxa9yaVsfwNlJuAjDSon">搭好后试试点「🗺 俯视图」「🧊 3D 小窗」——3D 小窗里也能直接搭建：点住木块/木板拖动，转弯处把木块<b>并排</b>摆放，就是楼梯转角平台；<br>也可以直接用一块<b>宽木块</b>（深 1.6 m）搭出转角平台。</div>
+  </aside>
+
+  <div id="stageCol" data-page-node-id="zonp87p41jGxbnrqb9Y1nl">
+    <div id="exampleBar" data-page-node-id="hWTyc6JMVyMqiC6Y99lcau">
+      <span class="lab" data-page-node-id="Fmcg8ZL2slqMYN6lWmiguh">示例方案：</span>
+      <button class="chip" data-ex="p1" data-page-node-id="8mC6ix8x6aVX51zWD9jref">① 陡直坡</button>
+      <button class="chip" data-ex="p2" data-page-node-id="TJZA8THHSSwukg1FRO4xFA">② 缓直坡</button>
+      <button class="chip" data-ex="p3" data-page-node-id="n85SNiXlGY3jF2wMDeX78s">③ L 型两级</button>
+      <button class="chip" data-ex="p4" data-page-node-id="puVcmtneY384Rdo4ntXzQ2">④ 回字形三级（转转楼梯式）</button>
+      <button class="chip" data-ex="clear" style="color:#a05b52" data-page-node-id="sBUA1GfEFltuuuWoIXzEZ6">清空搭建</button>
+    </div>
+    <div id="stageWrap" data-page-node-id="v2l6eIlYiasiSmPKuIEuMC">
+      <div id="stage" data-page-node-id="RFZJ2ImzeHl5lhFxKK6n1K">
+        <span id="viewTag" data-page-node-id="MNmiWmO6ZTeI9vfj5pi16O">侧视截面图（正视图）</span>
+        <div id="groundBand" data-page-node-id="2jB7cK7If11n2eCk8qAABM"></div>
+        <div id="plat" data-page-node-id="99dhDj8T8fdweVPq7g98GP"><span class="tag" data-page-node-id="sSuskfa2KbWjJYrYhD4pD1">高台 1.5m</span><span class="flag" data-page-node-id="awIhbDPXfAbkT3pQaDuGEY">🚩</span></div>
+        <svg id="fx" viewBox="0 0 1000 540" data-page-node-id="nrj93bGPhgREgv7eZ8JPH5">
+          <g id="grid"></g>
+          <g id="anchorDots" style="display:none" data-page-node-id="E0QkQhbcCdUn4njkI5AsNc"></g>
+          <g id="dims" data-page-node-id="g6sCD0C4QW4Qt43a0GSyAR"></g>
+          <g id="topG" style="display:none"></g>
+        </svg>
+        <div id="layerBlocks" data-page-node-id="4gZJstRmfe49U5E76YvHbG"></div>
+        <div id="layerPlanks" data-page-node-id="4en3DWlDGiBJDg9ANIOTjv"></div>
+      </div>
+    </div>
+  </div>
+
+  <aside id="panel" data-page-node-id="qHeTkfGOHWbEWwAhTmXdyj">
+    <div class="card" data-page-node-id="eAOyqIDmIAmVI2BBLVtThs">
+      <h3 data-page-node-id="5mCb98SnRXAAoyp6oIAp3T">📐 模型自动测量</h3>
+      <div class="mrow" data-page-node-id="UuWS1OKjir1KWffmobLAfu"><span class="k" data-page-node-id="LFFTYv8vZVuBGkdp4KFfB7">斜面总长度</span><span class="v big" id="mLen" data-page-node-id="RsKGnOmPllD9iAZ0BDDBF8">--</span></div>
+      <div class="mrow" data-page-node-id="Pdtd4tbic8h2IgCLFDqY32"><span class="k" data-page-node-id="acLpMhYq450O3RSnNmVNNq">垂直高度</span><span class="v big" data-page-node-id="oO14P75WsfpWrF94JbhKFF">1.5 m</span></div>
+      <div class="mrow" data-page-node-id="xO7uDahwm7Nmcwl7rZBUdP"><span class="k" data-page-node-id="zmkukIZtISs9t6JLtdydLz">占地宽度</span><span class="v big" id="mFoot" data-page-node-id="04xwBos6ftPTFE2md0WFG5">--</span></div>
+      <div class="mrow" data-page-node-id="1i3NtEdPbcw56PStnpAYvG"><span class="k" data-page-node-id="rYV6EI96wZdcBAbx6k7b8V">占地面积</span><span class="v big" id="mArea" data-page-node-id="LyiXSyVMjCd3pgUUV4h3PD">--</span></div>
+      <div class="mrow" data-page-node-id="gSyp4dnBHyugXeIZxaYgMv"><span class="k" data-page-node-id="8fu9mhlblroYbIth3FrnoI">最陡坡度</span><span class="v" id="mSlope" data-page-node-id="U7x2HLXwBG9GVoLuLjiBt9">--</span></div>
+      <div class="mrow" data-page-node-id="SmMBCKqoG1uSnDnCGnTh8N"><span class="k" data-page-node-id="6WkOUZkCfBJlViPQ2wrMUA">省力程度</span><span class="v" id="stars" data-page-node-id="6KBrGpFRJbUyskdpicDsQz">--</span></div>
+      <div id="refRow" data-page-node-id="8OBWfzxlHl6ZQPzgR2WAZn"></div>
+      <div id="routeStat" data-page-node-id="TtTXILVJHqtr8ZzeXSyxCB">把木板一段一段连到高台顶部（可用木块做桥墩），就能自动测量啦。</div>
+    </div>
+    <div class="card" id="noteCard" data-page-node-id="JLjqdsUYrzwLp1aZd48Rh9">
+      <h3 data-page-node-id="8IE04Mz5eXU02eGkgqYmVu">💡 探究提示</h3>
+      <p data-page-node-id="wpktSWXePBLvBmr5YPkKCr"><b data-page-node-id="604ak43bdwZZ56NiyOtQSs">斜面越长（坡度越缓）越省力</b>，但直坡要缓就得修得很长，<b data-page-node-id="EZ51hYSnZLtSAoAxH6brPi">占地更大</b>。<br data-page-node-id="LBqPwySUbRJtYVEUkvdDls">
+      像盘山公路一样把斜面<b data-page-node-id="zKgyMZOhDEuyBWsSr8y4cv">"折弯"</b>——搭成 L 型、回字形，能在小场地上获得缓坡，代价是<b data-page-node-id="46RvyKCY6cBTj3ZqHCKrVE">木板总长度更长、路程更远</b>。试试找到两者的平衡！<br data-page-node-id="3xT2Qa9vZw8lMcN7rPd1Hs">
+      折返的诀窍是<b>换方向</b>：像<b>转转楼梯</b>那样上—折—再上，用木块当转弯处的桥墩。高处的转角要像<b>楼梯休息台</b>：把长方体<b>并排两块</b>（前后各一列），或者直接用一块<b>宽木块</b>（2 倍宽）——都能做出比木板更宽的<b>转角平台</b>，两段斜面才衔接得稳！<b>只转弯（L 型）不省地，折返（回字形）才省地</b>——搭出来比一比就知道了！</p>
+    </div>
+  </aside>
+</main>
+<div id="toast" data-page-node-id="rgMZYaXmN8Fk5tuJ6Vx0cU"></div>
+
+<!-- 3D 视图 -->
+<div id="view3d" data-page-node-id="lgwT2ZXy1Uq0gx2F6Jgkr5">
+  <canvas id="c3d" data-page-node-id="0JOsIG4D7XOP4noVIGUmFS"></canvas>
+  <div class="bar" data-page-node-id="WqenGh6zNdzgI9GIClHEHp">
+    <h2 data-page-node-id="ZaUr9DlylA9ilGKERrpZun">🧊 3D 观察窗</h2><span class="sp" data-page-node-id="Drk94LxkYlnrEkXvYKsFhC"></span>
+    <button class="vbtn on" id="vBtn3d" data-page-node-id="0FtJiyThLQWXmGvmFgCqBc">立体</button>
+    <button class="vbtn" id="vBtnTop" data-page-node-id="CugfsnCJzns6k3MJ27TF8t">俯视</button>
+    <button class="vbtn" id="vBtnFull">⛶ 放大</button>
+    <button class="vbtn" id="vBtnClose" data-page-node-id="y1SZ6d5EVTsciATfBDMQNf">✕</button>
+  </div>
+  <div class="foot" data-page-node-id="b9GRqSTl4Cf8MbVaHglVtN">空白处拖动＝旋转 · 滚轮＝缩放 · 点住木块/木板＝直接搭建 · 转弯处木块可并排（楼梯转角平台）</div>
+</div>
+
+<script>
+"use strict";
+/* ================= 常量（100px = 1m） ================= */
+const SW=1000, SH=540, GY=500;
+const PLAT={x:770, y:350, w:150, h:150};          // 高台＝1.5m×1.5m×1.5m 正方体
+const A={x:PLAT.x, y:PLAT.y};
+const PLEN={short:160, mid:190, long:260};
+const PNAME={short:"短木板", mid:"中木板", long:"长木板"};
+const BKW=64, BKH=50, BMAX=3;
+const DEPTH=0.8;                                  // 木板厚度方向宽 0.8m（3D 用）
+/* 长方体木块规格：w=侧视宽度(px)  h=高(px)  d=板宽方向深度(m)
+   宽木块＝深度 2 倍（宽 0.64m × 深 1.6m × 高 0.5m），一块顶两块并排，当楼梯转角平台 */
+const BTYPE={
+  block:{w:BKW,   h:BKH, d:DEPTH,   name:"长方体木块"},
+  wide :{w:BKW,   h:BKH, d:DEPTH*2, name:"宽木块"},
+};
+const bspec=st=>BTYPE[(st&&st.bt)||"block"];
+const matName=t=>BTYPE[t]?BTYPE[t].name:(PNAME[t]||"材料");
+const MAXN={short:4, mid:3, long:3, block:6, wide:3};
+
+const $=s=>document.querySelector(s);
+const stage=$("#stage"), layers={block:$("#layerBlocks"), plank:$("#layerPlanks")};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+let uid=0; const nid=p=>p+(++uid);
+
+const S={
+  inv:{short:4, mid:3, long:3, block:6, wide:3},
+  planks:[], stacks:[],
+  scale:1, chain:null, chainBounds:null, busy:false,
+};
+
+/* ================= 通用 UI ================= */
+let toastTimer=null;
+function toast(msg){ const t=$("#toast"); t.innerHTML=msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove("show"),2400); }
+
+function renderInv(){
+  document.querySelectorAll(".mat").forEach(m=>{
+    const n=S.inv[m.dataset.type];
+    m.querySelector(".cnt").textContent=n;
+    m.classList.toggle("empty", n<=0);
+  });
+}
+function inTray(px,py){ const r=$("#tray").getBoundingClientRect(); return px<r.right && py<r.bottom; }
+
+/* ================= 拖拽引擎 ================= */
+let drag=null;
+function stagePoint(e){
+  const r=stage.getBoundingClientRect();
+  return {x:(e.clientX-r.left)/S.scale, y:(e.clientY-r.top)/S.scale, px:e.clientX, py:e.clientY};
+}
+function grab(e, el, onMove, onUp){
+  e.preventDefault();
+  try{ el.setPointerCapture && el.setPointerCapture(e.pointerId); }catch(_){ }
+  drag={el, onMove, onUp};
+}
+window.addEventListener("pointermove", e=>{ if(drag) drag.onMove(e); });
+window.addEventListener("pointerup", e=>{ if(drag){ const d=drag; drag=null; d.onUp(e); } });
+
+document.querySelectorAll(".mat").forEach(m=>{
+  m.addEventListener("pointerdown", e=>{
+    if(S.busy) return;
+    const t=m.dataset.type;
+    if(S.inv[t]<=0){ toast(matName(t)+"用完啦，拖回素材区可以收回"); return; }
+    if(BTYPE[t]) spawnBlock(e, t); else spawnPlank(t, e);
+  });
+});
+
+/* ---------- 木板 ---------- */
+function spawnPlank(type, e){
+  S.inv[type]--; renderInv();
+  const el=document.createElement("div");
+  el.className="plank"; el.style.width=PLEN[type]+"px";
+  el.innerHTML='<span class="plabel">'+PNAME[type]+'</span>';
+  layers.plank.appendChild(el);
+  const rec={id:nid("p"), type, len:PLEN[type], el, placed:false, p1:null, p2:null, over:0};
+  S.planks.push(rec); el._rec=rec;
+  const sp=stagePoint(e);
+  el.style.left=(sp.x-PLEN[type]/2)+"px"; el.style.top=(sp.y-6)+"px";
+  el.classList.add("dragging");
+  showAnchors();
+  grab(e, el,
+    ev=>{ if(over3d(ev)){ el.style.display="none"; drag3dNew={kind:"plank", type, gx:undefined};
+             const g=ground3dAt(ev); if(g) drag3dNew.gx=g[0]; return; }
+      drag3dNew=null; el.style.display="";
+      const p=stagePoint(ev);
+      el.style.left=(p.x-PLEN[type]/2)+"px"; el.style.top=(p.y-6)+"px"; el.style.transform="none"; },
+    ev=>{ hideAnchors(); el.classList.remove("dragging"); drag3dNew=null;
+      if(over3d(ev)){
+        const g=ground3dAt(ev);
+        el.style.display="";
+        if(g && trySnapPlank(rec, clamp(g[0]*100,30,SW-30), GY)) return;
+        removePlank(rec); toast("这里搭不稳，"+PNAME[type]+"已收回"); return;
+      }
+      el.style.display="";
+      const p=stagePoint(ev);
+      if(inTray(p.px,p.py)){ removePlank(rec); toast(PNAME[type]+"已收回"); return; }
+      if(!trySnapPlank(rec, p.x, p.y)){ removePlank(rec); toast("这里搭不稳，"+PNAME[type]+"已收回"); }
+    });
+  el.addEventListener("dblclick", ()=>{ if(!S.busy){ removePlank(rec); toast(PNAME[type]+"已删除"); } });
+}
+function removePlank(rec){
+  rec.el.remove(); S.planks=S.planks.filter(p=>p!==rec);
+  S.inv[rec.type]++; renderInv(); updateMetrics();
+}
+function syncPlankEl(p){
+  const ang=Math.atan2(p.p2.y-p.p1.y, p.p2.x-p.p1.x)*180/Math.PI;
+  p.el.style.transformOrigin="0 50%";
+  p.el.style.transform="rotate("+ang+"deg)";
+  p.el.style.left=p.p1.x+"px"; p.el.style.top=(p.p1.y-6)+"px";
+  const deg=Math.round(Math.atan2(p.p1.y-p.p2.y, Math.abs(p.p2.x-p.p1.x))*180/Math.PI);
+  p.el.querySelector(".plabel").textContent=(p.flat?PNAME[p.type]:PNAME[p.type]+" · "+deg+"°");
+}
+function anchors(){
+  const list=[{x:A.x, y:A.y, kind:"plat"}];
+  S.stacks.forEach(st=>{ const ty=GY-st.n*st.h;
+    list.push({x:st.x-st.w/2, y:ty, kind:"blk", st});
+    list.push({x:st.x+st.w/2, y:ty, kind:"blk", st});
+  });
+  return list;
+}
+function trySnapPlank(rec, cx, cy){
+  const L=rec.len, cands=[];
+  if(cy>GY-48 && cy<GY+24){ cands.push({flat:true, score:Math.abs(cy-(GY-7))}); }
+  const anc=anchors();
+  for(const U of anc){
+    const h=GY-U.y;
+    if(h>16 && L>=h-2){
+      const run=Math.sqrt(L*L-h*h);
+      for(const dir of [-1,1]){
+        const gx=U.x+dir*run;
+        if(gx<28 || gx>736) continue;
+        if(U.kind==="plat" && dir===1) continue;
+        const mid={x:(gx+U.x)/2, y:(GY+U.y)/2};
+        cands.push({p1:{x:gx,y:GY}, p2:{x:U.x,y:U.y}, score:dist(mid,{x:cx,y:cy})});
+      }
+    }
+    for(const V of anc){
+      if(V===U || V.y<=U.y+10) continue;
+      const d=dist(U,V);
+      if(d>22 && d<=L+8){
+        const mid={x:(U.x+V.x)/2, y:(U.y+V.y)/2};
+        cands.push({p1:{x:V.x,y:V.y}, p2:{x:U.x,y:U.y}, over:Math.max(0,L-d), score:dist(mid,{x:cx,y:cy})+12});
+      }
+    }
+  }
+  cands.sort((a,b)=>a.score-b.score);
+  const best=cands[0];
+  if(!best || best.score>150) return false;
+  if(best.flat){
+    rec.flat=true; rec.over=0;
+    rec.p1={x:clamp(cx-L/2,15,SW-15-L/2), y:GY-7};
+    rec.p2={x:rec.p1.x+L, y:GY-7};
+    rec.el.style.transform="none";
+    rec.el.style.left=rec.p1.x+"px"; rec.el.style.top=(GY-7-6)+"px";
+    rec.el.querySelector(".plabel").textContent=PNAME[rec.type];
+  }else{
+    rec.flat=false; rec.p1=best.p1; rec.p2=best.p2; rec.over=best.over||0;
+    const ang=Math.atan2(rec.p2.y-rec.p1.y, rec.p2.x-rec.p1.x)*180/Math.PI;
+    rec.el.style.transformOrigin="0 50%";
+    rec.el.style.transform="rotate("+ang+"deg)";
+    rec.el.style.left=rec.p1.x+"px"; rec.el.style.top=(rec.p1.y-6)+"px";
+    const deg=Math.round(Math.atan2(rec.p1.y-rec.p2.y, Math.abs(rec.p2.x-rec.p1.x))*180/Math.PI);
+    rec.el.querySelector(".plabel").textContent=PNAME[rec.type]+" · "+deg+"°";
+  }
+  rec.placed=true; updateMetrics(); return true;
+}
+function showAnchors(){
+  const g=$("#anchorDots"); g.innerHTML="";
+  anchors().forEach(a=>{ const c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx",a.x); c.setAttribute("cy",a.y); c.setAttribute("r",5.5);
+    c.setAttribute("fill","#3a9e8a"); c.setAttribute("opacity",".55"); g.appendChild(c); });
+  const gc=document.createElementNS("http://www.w3.org/2000/svg","rect");
+  gc.setAttribute("x",0); gc.setAttribute("y",GY-3); gc.setAttribute("width",736); gc.setAttribute("height",3);
+  gc.setAttribute("fill","#3a9e8a"); gc.setAttribute("opacity",".3"); g.appendChild(gc);
+  g.style.display="";
+}
+function hideAnchors(){ $("#anchorDots").style.display="none"; }
+
+/* ---------- 木块 ---------- */
+function spawnBlock(e, bt){
+  bt=bt||"block"; const sp=BTYPE[bt];
+  S.inv[bt]--; renderInv();
+  const el=document.createElement("div"); el.className="blk"+(bt==="wide"?" wide":"");
+  el.style.width=sp.w+"px"; el.style.height=sp.h+"px";
+  layers.block.appendChild(el);
+  const rec={id:nid("b"), el, placed:false, stack:null, bt};
+  el._rec=rec;
+  const sp0=stagePoint(e);
+  el.style.left=(sp0.x-sp.w/2)+"px"; el.style.top=(sp0.y-sp.h/2)+"px";
+  el.classList.add("dragging");
+  el.addEventListener("dblclick", ()=>{ if(!S.busy){ removeBlock(rec); toast(sp.name+"已删除"); } });
+  grab(e, el,
+    ev=>{ if(over3d(ev)){ el.style.display="none"; drag3dNew={kind:"block", rec, bt, gx:undefined, gz:0};
+             const g=ground3dAt(ev); if(g){ drag3dNew.gx=g[0]; drag3dNew.gz=(bt==="wide"?0:g[2]); } return; }
+      drag3dNew=null; el.style.display="";
+      const p=stagePoint(ev); el.style.left=(p.x-sp.w/2)+"px"; el.style.top=(p.y-sp.h/2)+"px"; },
+    ev=>{ el.classList.remove("dragging"); drag3dNew=null;
+      if(over3d(ev)){
+        const g=ground3dAt(ev);
+        if(g){ dropBlock3d(rec, g[0], g[2]); return; }
+      }
+      el.style.display="";
+      const p=stagePoint(ev);
+      if(inTray(p.px,p.py)){ removeBlock(rec); toast(sp.name+"已收回"); return; }
+      if(!trySnapBlock(rec, p.x, p.y)){ removeBlock(rec); toast(sp.name+"已收回"); }
+    });
+}
+function removeBlock(rec){
+  const key=(rec&&rec.bt)||"block";
+  if(rec.stack){ const st=rec.stack;
+    st.n--; st.holder.querySelectorAll(".blk").forEach(b=>{ if(b._rec===rec || b===rec.el) b.remove(); });
+    if(st.n<=0){ st.holder.remove(); S.stacks=S.stacks.filter(s=>s!==st); }
+  } else if(rec.el) rec.el.remove();
+  S.inv[key]=(S.inv[key]||0)+1; renderInv(); updateMetrics();
+}
+function trySnapBlock(rec, cx, cy){
+  const bt=rec.bt||"block", sp=BTYPE[bt];
+  if(cy<GY-BMAX*sp.h-36 || cx>PLAT.x-8-sp.w/2) return false;
+  let st=S.stacks.find(s=>(s.bt||"block")===bt && Math.abs(s.x-cx)<s.w*0.87 && s.n<BMAX);
+  if(!st){
+    const nx=clamp(cx, 26+sp.w/2, PLAT.x-8-sp.w/2);
+    if(S.stacks.some(s=>(s.bt||"block")!==bt && Math.abs(s.x-nx)<(s.w+sp.w)/2-6)){
+      toast("这里已经有木块了，往旁边挪一点再放"); return false;
+    }
+    st=newStack(nx,0,bt);
+  }
+  attachBlockToStack(rec, st); return true;
+}
+function newStack(x,z,bt){
+  bt=bt||"block"; const sp=BTYPE[bt];
+  const st={id:nid("s"), x, n:0, z:z||0, bt, w:sp.w, h:sp.h, d:sp.d};
+  st.holder=document.createElement("div");
+  st.holder.style.position="absolute";
+  layers.block.appendChild(st.holder);
+  S.stacks.push(st);
+  return st;
+}
+function attachBlockToStack(rec, st){
+  rec.stack=st; rec.placed=true;
+  rec.el.remove(); rec.el.style.display="";
+  st.holder.appendChild(rec.el);
+  st.n++; renderStack(st); refreshPiers(); updateMetrics();
+}
+function renderStack(st){
+  st.holder.style.left=(st.x-st.w/2)+"px";
+  const blks=[...st.holder.querySelectorAll(".blk")];
+  for(let i=0;i<st.n && i<blks.length;i++){
+    const b=blks[i];
+    b.style.left="0px"; b.style.top=(GY-(i+1)*st.h)+"px"; b.style.position="absolute";
+    b.style.width=st.w+"px"; b.style.height=st.h+"px";
+  }
+  let bd=st.holder.querySelector(".sbadge");
+  if(!bd){ bd=document.createElement("span"); bd.className="sbadge"; st.holder.appendChild(bd); }
+  const cnt=S.stacks.filter(s=>(s.bt||"block")===(st.bt||"block") && Math.abs(s.x-st.x)<20).length;
+  bd.textContent=(st.bt==="wide"?"宽木块 · ":"")+st.n+" 层"+(cnt>1?" × 并排"+cnt:"");
+  bd.style.top=(GY-st.n*st.h-20)+"px";
+}
+/* 同一位置（x 相近）的桥墩徽标会互相影响（并排数量），统一刷新 */
+function refreshPiers(){ S.stacks.forEach(s=>{ if(s.holder && s.holder.isConnected) renderStack(s); }); }
+/* 3D：木块沿板宽方向并排（楼梯转角平台）；宽木块本身已占满 1.6m 深度，不做错位 */
+const snapZ=v=>clamp(Math.round(v/0.4)*0.4,-0.4,0.4);      // 普通木块只允许 -0.4 / 0 / 0.4 三档
+function dropBlock3d(rec,gx,gz){
+  const bt=rec.bt||"block", sp=BTYPE[bt], z=(bt==="wide")?0:snapZ(gz);
+  const x=clamp(gx*100, 26+sp.w/2, PLAT.x-8-sp.w/2);
+  const st=S.stacks.find(s=>(s.bt||"block")===bt && Math.abs(s.x-x)<s.w*0.87 && Math.abs((s.z||0)-z)<0.2 && s.n<BMAX)
+        || newStack(x,z,bt);
+  attachBlockToStack(rec,st);
+}
+function mergePiers(st){
+  const other=S.stacks.find(s=>s!==st && (s.bt||"block")===(st.bt||"block")
+    && Math.abs(s.x-st.x)<st.w*0.87 && Math.abs((s.z||0)-(st.z||0))<0.2 && s.n+st.n<=BMAX);
+  if(!other) return false;
+  [...st.holder.querySelectorAll(".blk")].forEach(el=>{
+    const r=el._rec; if(r){ r.stack=other; other.holder.appendChild(el); }
+  });
+  other.n+=st.n; st.holder.remove(); S.stacks=S.stacks.filter(s=>s!==st);
+  renderStack(other); refreshPiers(); return true;
+}
+function stackTopAt(pt){
+  return S.stacks.find(st=>Math.abs(pt.x-st.x)<=st.w/2+2 && Math.abs((GY-st.n*st.h)-pt.y)<3);
+}
+
+/* ================= 路径分析（可跨桥墩顶面，支持往转折返） ================= */
+function segSin(rec){
+  const rise=rec.p1.y-rec.p2.y, d=Math.hypot(rec.p2.x-rec.p1.x, rec.p2.y-rec.p1.y);
+  return d>1 ? rise/d : 0;
+}
+function allRoutes(){
+  const res=[];
+  const starts=S.planks.filter(r=>r.placed && !r.flat && Math.abs(r.p1.y-GY)<2);
+  function dfs(route, cur, used){
+    if(Math.abs(cur.x-A.x)<3 && Math.abs(cur.y-A.y)<3){ res.push(route.slice()); return; }
+    for(const r of S.planks){
+      if(!r.placed||r.flat||used.has(r.id)) continue;
+      if(dist(r.p1,cur)<3){
+        used.add(r.id); route.push({kind:"plank",rec:r});
+        dfs(route, r.p2, used);
+        route.pop(); used.delete(r.id);
+      }
+    }
+    const st=stackTopAt(cur);
+    if(st){
+      const other={x:st.x+(cur.x<st.x?st.w/2:-st.w/2), y:GY-st.n*st.h};
+      for(const r of S.planks){
+        if(!r.placed||r.flat||used.has(r.id)) continue;
+        if(dist(r.p1,other)<3){
+          used.add(r.id);
+          route.push({kind:"walk",p1:cur,p2:other},{kind:"plank",rec:r});
+          dfs(route, r.p2, used);
+          route.pop(); route.pop(); used.delete(r.id);
+        }
+      }
+    }
+  }
+  starts.forEach(st0=>dfs([{kind:"plank",rec:st0}], st0.p2, new Set([st0.id])));
+  return res;
+}
+function routeLen(r){ return r.filter(i=>i.kind==="plank").reduce((a,i)=>a+i.rec.len,0)/100; }
+function routeSteep(r){ return Math.max(...r.filter(i=>i.kind==="plank").map(i=>segSin(i.rec))); }
+function bestRoute(){
+  const rs=allRoutes();
+  if(!rs.length) return null;
+  rs.sort((a,b)=> routeSteep(a)-routeSteep(b) || routeLen(b)-routeLen(a));
+  return rs[0];
+}
+
+/* ================= 自动测量 ================= */
+function starOf(sin){
+  if(sin>=0.65) return ["★","费力"];
+  if(sin>=0.45) return ["★★","一般"];
+  if(sin>=0.30) return ["★★★","较省力"];
+  return ["★★★★","很省力"];
+}
+function updateMetrics(){
+  const route=bestRoute();
+  S.chain=route;
+  /* 楼梯式错开：多段斜面沿深度方向前后交错（±0.4m），像楼梯的上下两层；
+     未接入路径的木板回到中位（z=0） */
+  const rsegs=route?route.filter(i=>i.kind==="plank"):[];
+  S.planks.forEach(p=>{ p.z=0; });
+  if(rsegs.length>1) rsegs.forEach((it,i)=>{ it.rec.z=(i%2===0?-0.4:0.4); });
+  const dims=$("#dims"); dims.innerHTML="";
+  if(!route){
+    ["mLen","mFoot","mArea","mSlope"].forEach(id=>$("#"+id).textContent="--");
+    $("#stars").textContent="--";
+    $("#refRow").style.display="none";
+    $("#routeStat").textContent = S.planks.some(p=>p.placed)
+      ? "木板还没连接到高台顶部：让每块木板首尾相接（可借木块桥墩转折），最后搭上高台顶角。"
+      : "把木板一段一段连到高台顶部（可用木块做桥墩），就能自动测量啦。";
+    if(viewMode==="top") renderTop();
+    return;
+  }
+  const planks=route.filter(i=>i.kind==="plank").map(i=>i.rec);
+  const pts=[];
+  route.forEach(i=>{ if(i.kind==="plank"){ pts.push(i.rec.p1, i.rec.p2); } else { pts.push(i.p1,i.p2); } });
+  // 桥墩底面也占用地面积
+  S.stacks.forEach(st=>{ pts.push({x:st.x-st.w/2,y:0},{x:st.x+st.w/2,y:0}); });
+  const xs=pts.map(p=>p.x);
+  let minX=Math.min(...xs), maxX=Math.max(...xs);
+  const extM=(maxX-minX)/100, areaM=extM*DEPTH;
+  const lenM=routeLen(route), steep=routeSteep(route);
+  const deg=Math.round(Math.asin(Math.min(1,steep))*180/Math.PI);
+  const [st,lab]=starOf(steep);
+  $("#mLen").textContent=lenM.toFixed(1)+" m";
+  $("#mFoot").textContent=extM.toFixed(2)+" m";
+  $("#mArea").textContent=areaM.toFixed(2)+" ㎡";
+  $("#mSlope").textContent="≈"+deg+"°";
+  $("#stars").innerHTML=st+" <span style='font-size:12px;color:var(--sub)'>"+lab+"</span>";
+  // 参照：同坡度直坡
+  const tan=steep/Math.sqrt(Math.max(1e-6,1-steep*steep));
+  const refExt=1.5/tan, refArea=refExt*DEPTH;
+  const save=Math.round((refArea-areaM)/refArea*100);
+  $("#refRow").style.display="block";
+  $("#refRow").innerHTML = save>0
+    ? "📏 参照：搭同样缓的<b>直坡</b>需占地约 <b>"+refArea.toFixed(1)+" ㎡</b>，你的折返方案<b>节省了约 "+save+"%</b>！"
+    : "📏 参照：同样坡度的直坡约需占地 "+refArea.toFixed(1)+" ㎡——你的方案占地更大，因为只「转弯」还没「折返」。试试让木板<b>换个方向折回来</b>（像转转楼梯那样）。";
+  $("#routeStat").textContent="✅ 已连通高台！方案由 "+planks.length+" 段斜面组成。";
+  // 2D 标注：占地宽
+  function line(x1,y1,x2,y2,color,dash){
+    const l=document.createElementNS("http://www.w3.org/2000/svg","line");
+    l.setAttribute("x1",x1); l.setAttribute("y1",y1); l.setAttribute("x2",x2); l.setAttribute("y2",y2);
+    l.setAttribute("stroke",color); l.setAttribute("stroke-width","2");
+    if(dash) l.setAttribute("stroke-dasharray","6 5");
+    dims.appendChild(l);
+  }
+  function label(x,y,txt,color){
+    const t=document.createElementNS("http://www.w3.org/2000/svg","text");
+    t.setAttribute("x",x); t.setAttribute("y",y); t.setAttribute("text-anchor","middle");
+    t.setAttribute("font-size","12.5"); t.setAttribute("font-weight","bold"); t.setAttribute("fill",color);
+    t.textContent=txt; dims.appendChild(t);
+  }
+  const y0=GY+14;
+  line(minX,y0,maxX,y0,"#d96a5f",true);
+  line(minX,y0-5,minX,y0+5,"#d96a5f"); line(maxX,y0-5,maxX,y0+5,"#d96a5f");
+  label((minX+maxX)/2, y0+15, "占地宽 "+extM.toFixed(2)+" m", "#c0554b");
+  line(752,350,752,GY,"#5b8fc9",true);
+  label(738, 428, "高 1.5 m", "#4a7bab");
+  if(viewMode==="top") renderTop();
+}
+
+/* ================= 示例方案 ================= */
+function clearAll(){
+  S.planks.forEach(r=>{ S.inv[r.type]++; r.el.remove(); }); S.planks=[];
+  S.stacks.forEach(st=>{ const k=st.bt||"block"; S.inv[k]=(S.inv[k]||0)+st.n; st.holder.remove(); }); S.stacks=[];
+  layers.block.innerHTML=""; layers.plank.innerHTML="";
+  renderInv();
+}
+function addPlankP(type,p1,p2){
+  S.inv[type]--;
+  const el=document.createElement("div");
+  el.className="plank"; el.style.width=PLEN[type]+"px";
+  el.innerHTML='<span class="plabel"></span>';
+  layers.plank.appendChild(el);
+  const rec={id:nid("p"), type, len:PLEN[type], el, placed:true, p1, p2, over:Math.max(0,PLEN[type]-dist(p1,p2))};
+  el._rec=rec;
+  const ang=Math.atan2(p2.y-p1.y, p2.x-p1.x)*180/Math.PI;
+  el.style.transformOrigin="0 50%"; el.style.transform="rotate("+ang+"deg)";
+  el.style.left=p1.x+"px"; el.style.top=(p1.y-6)+"px";
+  const deg=Math.round(Math.atan2(p1.y-p2.y, Math.abs(p2.x-p1.x))*180/Math.PI);
+  el.querySelector(".plabel").textContent=PNAME[type]+" · "+deg+"°";
+  el.addEventListener("dblclick", ()=>{ if(!S.busy){ removePlank(rec); } });
+  S.planks.push(rec);
+}
+function addTowerP(x,n,z,bt){
+  bt=bt||"block"; const sp=BTYPE[bt];
+  S.inv[bt]-=n;
+  const st={id:nid("s"), x, n, z:z||0, bt, w:sp.w, h:sp.h, d:sp.d};
+  st.holder=document.createElement("div");
+  st.holder.style.position="absolute";
+  layers.block.appendChild(st.holder);
+  for(let i=0;i<n;i++){
+    const b=document.createElement("div"); b.className="blk"+(bt==="wide"?" wide":"");
+    b.style.width=sp.w+"px"; b.style.height=sp.h+"px";
+    st.holder.appendChild(b);
+    b.addEventListener("dblclick", ()=>{ if(!S.busy){ removeBlock({...b._rec, stack:st, el:b, placed:true, bt}); } });
+    b._rec={stack:st, el:b, placed:true, bt};
+  }
+  renderStack(st); S.stacks.push(st); refreshPiers();
+}
+const EX={
+  p1(){ addPlankP("mid", {x:653.1,y:GY}, {x:A.x,y:A.y}); },                       // 陡直坡 52°
+  p2(){ addPlankP("long",{x:557.7,y:GY}, {x:A.x,y:A.y}); },                       // 缓直坡 35°
+  p3(){ addTowerP(576.4,1,-0.4); addTowerP(576.4,1,0.4);                          // L 型两级 32°（转角平台并排两列）
+        addPlankP("short",{x:392.4,y:GY},{x:544.4,y:450});
+        addPlankP("mid",  {x:608.4,y:450},{x:A.x,y:A.y}); },
+  p4(){ addTowerP(730.2,1,-0.4); addTowerP(730.2,1,0.4);                          // 回字形三级 18°（每个转角都是并排平台）
+        addTowerP(482.9,2,-0.4); addTowerP(482.9,2,0.4);    // 第二层转角：两列并排（前后各 2 层）＝楼梯式转角平台，衔接木板②与③
+        addPlankP("short",{x:546.2,y:GY},{x:698.2,y:450});
+        addPlankP("mid",  {x:698.2,y:450},{x:514.9,y:400});
+        addPlankP("long", {x:514.9,y:400},{x:A.x,y:A.y}); },
+};
+document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click", ()=>{
+  if(S.busy) return;
+  const k=c.dataset.ex;
+  clearAll();
+  if(EX[k]){ EX[k](); toast("已载入示例："+c.textContent.replace(/^[①②③④]\s*/,"")); }
+  updateMetrics();
+}));
+
+/* ================= 重置 / 保存 / 读取 ================= */
+$("#resetBtn").addEventListener("click", ()=>{ clearAll(); updateMetrics(); toast("已一键重置"); });
+$("#saveBtn").addEventListener("click", ()=>{
+  const data={
+    planks:S.planks.filter(p=>p.placed&&!p.flat).map(p=>({t:p.type,p1:p.p1,p2:p.p2})),
+    stacks:S.stacks.map(s=>({x:s.x,n:s.n,z:s.z||0,bt:s.bt||"block"})),
+  };
+  try{ localStorage.setItem("xianmian_plan_v1", JSON.stringify(data));
+    toast("💾 方案已保存（"+data.planks.length+" 段斜面、"+data.stacks.length+" 个桥墩）");
+  }catch(e){ toast("保存失败："+e.message); }
+});
+$("#loadBtn").addEventListener("click", ()=>{
+  let data=null;
+  try{ data=JSON.parse(localStorage.getItem("xianmian_plan_v1")||"null"); }catch(e){}
+  if(!data || !data.planks.length){ toast("还没有保存过的方案哦"); return; }
+  clearAll();
+  data.stacks.forEach(s=>addTowerP(s.x,s.n,s.z||0,s.bt||"block"));
+  data.planks.forEach(p=>addPlankP(p.t,p.p1,p.p2));
+  renderInv(); updateMetrics();
+  toast("📂 已读取保存的方案");
+});
+
+/* ================= 3D 观察窗（可拖动小窗，搭建时同步刷新） ================= */
+const view3d=$("#view3d"), c3d=$("#c3d"), ctx=c3d.getContext("2d");
+const cam={yaw:0.5, pitch:0.42, R:7.5, F:640};
+let raf3d=null, lastMode="3d", VW=520, VH=400;
+
+function placePanel(){
+  if(view3d.classList.contains("full")) return;
+  if(view3d.dataset.moved==="1") return;
+  const r=stage.getBoundingClientRect();
+  const w=view3d.offsetWidth||520, h=view3d.offsetHeight||400;
+  let L=r.left+r.width-w-14, T=r.top+r.height-h-12;
+  L=clamp(L, 168, Math.max(168, innerWidth-w-14));
+  T=clamp(T, 92, Math.max(92, innerHeight-h-44));
+  view3d.style.left=L+"px"; view3d.style.top=T+"px";
+  view3d.style.right="auto"; view3d.style.bottom="auto";
+}
+function open3d(){
+  view3d.style.display="block"; lastMode="3d"; setCamPreset("3d");
+  placePanel(); sizeCanvas(); startLoop();
+}
+function close3d(){ view3d.style.display="none"; if(raf3d) cancelAnimationFrame(raf3d); raf3d=null; }
+$("#open3dBtn").addEventListener("click", open3d);
+$("#vBtnClose").addEventListener("click", close3d);
+$("#vBtn3d").addEventListener("click", ()=>setCamPreset("3d"));
+$("#vBtnTop").addEventListener("click", ()=>setCamPreset("top"));
+$("#vBtnFull").addEventListener("click", ()=>{
+  view3d.classList.toggle("full");
+  const full=view3d.classList.contains("full");
+  $("#vBtnFull").textContent = full ? "⤡ 缩小" : "⛶ 放大";
+  if(!full){ view3d.style.left=""; view3d.style.top=""; view3d.style.right=""; view3d.style.bottom=""; view3d.dataset.moved=""; }
+  setTimeout(()=>{ placePanel(); sizeCanvas(); }, 40);
+});
+/* 拖动标题栏移动小窗 */
+let pdrag=null;
+view3d.querySelector(".bar").addEventListener("pointerdown", e=>{
+  if(e.target.closest("button") || view3d.classList.contains("full")) return;
+  const r=view3d.getBoundingClientRect();
+  view3d.style.left=r.left+"px"; view3d.style.top=r.top+"px";
+  view3d.style.right="auto"; view3d.style.bottom="auto";
+  pdrag={x:e.clientX, y:e.clientY, l:r.left, t:r.top};
+  view3d.dataset.moved="1";
+  try{ view3d.querySelector(".bar").setPointerCapture(e.pointerId); }catch(_){}
+  e.preventDefault();
+});
+window.addEventListener("pointermove", e=>{
+  if(!pdrag) return;
+  view3d.style.left=(pdrag.l+e.clientX-pdrag.x)+"px";
+  view3d.style.top=(pdrag.t+e.clientY-pdrag.y)+"px";
+});
+window.addEventListener("pointerup", ()=>{ pdrag=null; });
+function setCamPreset(m){
+  lastMode=m;
+  $("#vBtn3d").classList.toggle("on", m==="3d");
+  $("#vBtnTop").classList.toggle("on", m==="top");
+  if(m==="top"){ cam.yaw=0.0001; cam.pitch=1.545; cam.R=8.5; }
+  else{ cam.yaw=0.5; cam.pitch=0.42; cam.R=7.5; }
+}
+function sizeCanvas(){
+  VW=c3d.clientWidth||520; VH=c3d.clientHeight||400;
+  const dpr=window.devicePixelRatio||1;
+  c3d.width=Math.round(VW*dpr); c3d.height=Math.round(VH*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener("resize", ()=>{ if(view3d.style.display==="block") sizeCanvas(); });
+
+/* 3D 搭建交互：空白处拖动=旋转视角；点住木块/木板=直接搭建 */
+let rot=null, mode3d=null, drag3dNew=null, HIT=[], camTarget=[5,0.75,0];
+function over3d(e){
+  if(view3d.style.display!=="block") return false;
+  const r=view3d.getBoundingClientRect();
+  return e.clientX>=r.left && e.clientX<=r.right && e.clientY>=r.top && e.clientY<=r.bottom;
+}
+function c3dPt(e){ const r=c3d.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
+function ground3dAt(e){ const [px,py]=c3dPt(e); return groundPoint3d(px,py); }
+function rotPtInv(p){
+  const cp=Math.cos(cam.pitch), sp=Math.sin(cam.pitch);
+  const y=p[1]*cp-p[2]*sp, z=p[1]*sp+p[2]*cp;
+  const cy=Math.cos(cam.yaw), sy=Math.sin(cam.yaw);
+  return [p[0]*cy-z*sy, y, p[0]*sy+z*cy];
+}
+/* 求指针射线与世界平面 comp=want 的交点（米） */
+function rayHit3d(px,py,comp,want){
+  const ax=px-VW/2, ay=VH/2+16-py;
+  const u=rotPtInv([ax,ay,cam.F]), w=rotPtInv([0,0,cam.R]);
+  const den=want-camTarget[comp]+w[comp];
+  if(Math.abs(u[comp])<1e-9) return null;
+  const s=u[comp]/den;
+  if(!(s>0.05)) return null;
+  return [camTarget[0]+u[0]/s-w[0], camTarget[1]+u[1]/s-w[1], camTarget[2]+u[2]/s-w[2]];
+}
+function groundPoint3d(px,py){ return rayHit3d(px,py,1,0); }
+function planePoint3d(px,py){ return rayHit3d(px,py,2,0); }
+function pip(px,py,pts){
+  let inside=false;
+  for(let i=0,j=pts.length-1;i<pts.length;j=i++){
+    const xi=pts[i].x, yi=pts[i].y, xj=pts[j].x, yj=pts[j].y;
+    if(((yi>py)!==(yj>py)) && (px < (xj-xi)*(py-yi)/(yj-yi)+xi)) inside=!inside;
+  }
+  return inside;
+}
+function pick3d(e){
+  const [px,py]=c3dPt(e);
+  for(const f of HIT){ if(pip(px,py,f.pj)) return f.owner; }
+  return null;
+}
+c3d.addEventListener("pointerdown", e=>{
+  const hit=pick3d(e);
+  if(hit){
+    e.preventDefault();
+    try{ c3d.setPointerCapture(e.pointerId); }catch(_){}
+    c3d.style.cursor="move";
+    if(hit.kind==="pier"){ mode3d={kind:"pier", st:hit.st}; }
+    else{
+      const p=hit.p;
+      mode3d={kind:"plank", p, p1:{...p.p1}, p2:{...p.p2}, cx:(p.p1.x+p.p2.x)/2, cy:(p.p1.y+p.p2.y)/2};
+      p.el.classList.add("dragging");
+    }
+    return;
+  }
+  c3d.classList.add("grabbing");
+  c3d.style.cursor="grabbing";
+  try{ c3d.setPointerCapture(e.pointerId); }catch(_){}
+  rot={x:e.clientX, y:e.clientY};
+});
+c3d.addEventListener("pointermove", e=>{
+  if(mode3d){
+    e.preventDefault();
+    const [px,py]=c3dPt(e);
+    if(mode3d.kind==="pier"){
+      const g=groundPoint3d(px,py);
+      if(g){
+        const sp=BTYPE[mode3d.st.bt||"block"];
+        mode3d.st.x=clamp(g[0]*100, 26+sp.w/2, PLAT.x-8-sp.w/2);
+        mode3d.st.z=(mode3d.st.bt==="wide")?0:snapZ(g[2]);
+        refreshPiers();
+      }
+    }else{
+      const q=planePoint3d(px,py);
+      if(q){
+        const p=mode3d.p, cx=q[0]*100, cy=clamp(GY-q[1]*100,20,GY);
+        const dx=cx-mode3d.cx, dy=cy-mode3d.cy;
+        p.p1={x:mode3d.p1.x+dx, y:mode3d.p1.y+dy};
+        p.p2={x:mode3d.p2.x+dx, y:mode3d.p2.y+dy};
+        syncPlankEl(p); mode3d.cx=cx; mode3d.cy=cy;
+      }
+    }
+    return;
+  }
+  if(!rot){
+    c3d.style.cursor = pick3d(e) ? "move" : "grab";
+    return;
+  }
+  cam.yaw+=(e.clientX-rot.x)*0.008;
+  cam.pitch=clamp(cam.pitch+(e.clientY-rot.y)*0.006, 0.06, 1.56);
+  rot={x:e.clientX, y:e.clientY};
+});
+function end3d(){
+  if(mode3d){
+    const m=mode3d; mode3d=null; c3d.style.cursor="grab";
+    if(m.kind==="pier"){
+      if(!mergePiers(m.st)) refreshPiers(m.st.x);
+      if(Math.abs(m.st.z||0)>0.2) toast("木块并排放置——楼梯转角平台搭好了");
+    }else{
+      const p=m.p; p.el.classList.remove("dragging");
+      const cx=(p.p1.x+p.p2.x)/2, cy=(p.p1.y+p.p2.y)/2;
+      const keep1={...m.p1}, keep2={...m.p2};
+      if(!trySnapPlank(p,cx,cy)){
+        p.p1=keep1; p.p2=keep2; syncPlankEl(p);
+        toast("这里放不稳，木板回到原位");
+      }
+    }
+    updateMetrics();
+    return;
+  }
+  if(rot){ rot=null; c3d.classList.remove("grabbing"); c3d.style.cursor="grab"; }
+}
+c3d.addEventListener("pointerup", end3d);
+c3d.addEventListener("pointercancel", end3d);
+c3d.addEventListener("wheel", e=>{ e.preventDefault(); cam.R=clamp(cam.R+e.deltaY*0.004, 3.5, 16); },{passive:false});
+
+/* 盒体集合 */
+function halfBoxes(){
+  // 返回 {c:[x,y,z], U:[..], V:[..], W:[..], color, owner}（U/V/W 为半尺寸方向向量）
+  const boxes=[];
+  boxes.push({c:[5,-0.15,0], U:[6,0,0], V:[0,0.15,0], W:[0,0,2.6], color:"#a3cd85"});           // 地面
+  boxes.push({c:[(PLAT.x+PLAT.w/2)/100, PLAT.h/2/100*1, 0], U:[PLAT.w/200,0,0], V:[0,PLAT.h/200,0], W:[0,0,PLAT.h/200], color:"#c9c2b2"}); // 高台（1.5m 正方体）
+  S.stacks.forEach(st=>{ for(let i=0;i<st.n;i++)
+    boxes.push({kind:"pier", st, c:[st.x/100,(i+0.5)*st.h/100,(st.z||0)], U:[st.w/200,0,0], V:[0,st.h/200,0], W:[0,0,st.d/2], color:"#cf9a5c"});
+  });
+  S.planks.forEach(p=>{
+    if(!p.placed||p.flat) return;
+    const mx=(p.p1.x+p.p2.x)/200, my=(GY-(p.p1.y+p.p2.y)/2)/100;
+    const dx=(p.p2.x-p.p1.x)/100, dy=(GY-p.p2.y-(GY-p.p1.y))/100;
+    const d=Math.hypot(dx,dy)||1, ux=dx/d, uy=dy/d, hl=p.len/200;
+    boxes.push({kind:"plank", p, c:[mx,my,p.z||0], U:[ux*hl,uy*hl,0], V:[-uy*0.06,ux*0.06,0], W:[0,0,DEPTH/2], color:"#dc9a55"});
+  });
+  // 素材拖入 3D 时的预览幽灵
+  if(drag3dNew && drag3dNew.gx!==undefined){
+    const gx=drag3dNew.gx, gz=(drag3dNew.bt==="wide")?0:(drag3dNew.gz||0);
+    if(drag3dNew.kind==="plank")
+      boxes.push({c:[gx,0.05,0], U:[PLEN[drag3dNew.type]/200,0,0], V:[0,0.06,0], W:[0,0,DEPTH/2], color:"#f2dda9"});
+    else{
+      const gp=BTYPE[drag3dNew.bt||"block"];
+      boxes.push({c:[gx,gp.h/200,gz], U:[gp.w/200,0,0], V:[0,gp.h/200,0], W:[0,0,gp.d/2], color:"#e8b878"});
+    }
+  }
+  return boxes;
+}
+function facesOf(b){
+  const C=[];
+  for(let i=0;i<2;i++)for(let j=0;j<2;j++)for(let k=0;k<2;k++)
+    C[i*4+j*2+k]=[ b.c[0]+(i?b.U[0]:-b.U[0])+(j?b.V[0]:-b.V[0])+(k?b.W[0]:-b.W[0]),
+                   b.c[1]+(i?b.U[1]:-b.U[1])+(j?b.V[1]:-b.V[1])+(k?b.W[1]:-b.W[1]),
+                   b.c[2]+(i?b.U[2]:-b.U[2])+(j?b.V[2]:-b.V[2])+(k?b.W[2]:-b.W[2])];
+  const idx=(i,j,k)=>C[i*4+j*2+k];
+  const quads=[
+    [[0,0,0],[1,0,0],[1,1,0],[0,1,0]], // V-
+    [[0,1,1],[1,1,1],[1,0,1],[0,0,1]], // V+
+    [[0,1,0],[1,1,0],[1,1,1],[0,1,1]], // U+
+    [[1,0,0],[0,0,0],[0,0,1],[1,0,1]], // U-
+    [[0,0,1],[0,1,1],[0,1,0],[0,0,0]], // W-
+    [[1,0,0],[1,1,0],[1,1,1],[1,0,1]], // W+
+  ];
+  return quads.map(q=>{
+    const pts=q.map(s=>idx(s[0],s[1],s[2]));
+    const e1=[pts[1][0]-pts[0][0], pts[1][1]-pts[0][1], pts[1][2]-pts[0][2]];
+    const e2=[pts[3][0]-pts[0][0], pts[3][1]-pts[0][1], pts[3][2]-pts[0][2]];
+    let n=[e1[1]*e2[2]-e1[2]*e2[1], e1[2]*e2[0]-e1[0]*e2[2], e1[0]*e2[1]-e1[1]*e2[0]];
+    const fc=[(pts[0][0]+pts[2][0])/2,(pts[0][1]+pts[2][1])/2,(pts[0][2]+pts[2][2])/2];
+    const out=[fc[0]-b.c[0], fc[1]-b.c[1], fc[2]-b.c[2]];
+    if(n[0]*out[0]+n[1]*out[1]+n[2]*out[2]<0){ n=[-n[0],-n[1],-n[2]]; }
+    return {pts, n, owner: b.kind ? {kind:b.kind, st:b.st, p:b.p} : undefined};
+  });
+}
+const LIGHT=(()=>{ const l=[-0.35,0.85,0.4], m=Math.hypot(...l); return l.map(v=>v/m); })();
+function rotPt(p){
+  const cy=Math.cos(cam.yaw), sy=Math.sin(cam.yaw);
+  let x=p[0]*cy+p[2]*sy, z=-p[0]*sy+p[2]*cy, y=p[1];
+  const cp=Math.cos(cam.pitch), sp=Math.sin(cam.pitch);
+  const y2=y*cp+z*sp, z2=-y*sp+z*cp;
+  return [x,y2,z2];
+}
+function project(p, target){
+  const v=[p[0]-target[0], p[1]-target[1], p[2]-target[2]];
+  const r=rotPt(v);
+  const depth=r[2]+cam.R;
+  if(depth<0.15) return null;
+  const s=cam.F/depth;
+  return {x:VW/2+r[0]*s, y:VH/2+16-r[1]*s, depth};
+}
+function structBounds(){
+  const pts=[];
+  S.planks.forEach(p=>{ if(p.placed&&!p.flat) pts.push(p.p1.x,p.p2.x); });
+  S.stacks.forEach(st=>pts.push(st.x-st.w/2, st.x+st.w/2));
+  if(!pts.length) return null;
+  return {min:Math.min(...pts)/100, max:Math.max(...pts)/100};
+}
+function render3d(){
+  ctx.clearRect(0,0,VW,VH);
+  // 取景：结构 + 高台一起入镜，焦距随窗口尺寸自适应
+  const b=structBounds();
+  const sceneMin=b?Math.min(b.min,7.7):-0.5, sceneMax=b?Math.max(b.max,9.2):10.0;
+  const target=[(sceneMin+sceneMax)/2, 0.75, 0];
+  camTarget=target;
+  const extent=sceneMax-sceneMin;
+  cam.F=clamp(Math.min(VW*0.7*cam.R/extent, 0.35*VH*cam.R), 300, 2600);
+  // 收集面
+  const faces=[];
+  halfBoxes().forEach(bx=>facesOf(bx).forEach(f=>{
+    const nC=rotPt(f.n);
+    if(nC[2]>=-0.02) return;                       // 背面剔除
+    faces.push({f, nC, nWorld:f.n});
+  }));
+  faces.forEach(o=>{
+    o.pj=o.f.pts.map(p=>project(p,target));
+    if(o.pj.some(q=>!q)) o.pj=null;
+  });
+  const vis=faces.filter(o=>o.pj);
+  vis.sort((a,b2)=>{
+    const da=a.pj.reduce((s,q)=>s+q.depth,0)/4, db=b2.pj.reduce((s,q)=>s+q.depth,0)/4;
+    return db-da;
+  });
+  vis.forEach(o=>{
+    const sh=0.6+0.4*Math.max(0, o.nWorld[0]*LIGHT[0]+o.nWorld[1]*LIGHT[1]+o.nWorld[2]*LIGHT[2]);
+    ctx.beginPath();
+    ctx.moveTo(o.pj[0].x,o.pj[0].y);
+    for(let i=1;i<4;i++) ctx.lineTo(o.pj[i].x,o.pj[i].y);
+    ctx.closePath();
+    ctx.fillStyle=shadeHex(o.f.pts.color||"#dc9a55",sh);
+    ctx.fill();
+    ctx.strokeStyle="rgba(70,50,30,.18)"; ctx.lineWidth=0.6; ctx.stroke();
+  });
+  // 记录可见面（供 3D 搭建拾取，最后画的在最上面）
+  HIT=vis.filter(o=>o.f.owner).map(o=>({pj:o.pj, owner:o.f.owner})).reverse();
+  // 占地轮廓（红色虚线）
+  if(b){
+    ctx.save(); ctx.setLineDash([7,5]); ctx.strokeStyle="#d96a5f"; ctx.lineWidth=2;
+    const fp=[[b.min,0.004,-DEPTH/2],[b.max,0.004,-DEPTH/2],[b.max,0.004,DEPTH/2],[b.min,0.004,DEPTH/2]];
+    const pj=fp.map(p=>project(p,target));
+    if(!pj.some(q=>!q)){
+      ctx.beginPath(); ctx.moveTo(pj[0].x,pj[0].y);
+      for(let i=1;i<4;i++) ctx.lineTo(pj[i].x,pj[i].y);
+      ctx.closePath(); ctx.stroke();
+      ctx.fillStyle="rgba(217,106,95,.07)"; ctx.fill();
+    }
+    ctx.restore();
+    if(lastMode==="top"){
+      ctx.font="bold 13px sans-serif"; ctx.fillStyle="#c0554b"; ctx.textAlign="center";
+      ctx.fillText("占地宽 "+((b.max-b.min)).toFixed(2)+" m × 深 "+DEPTH.toFixed(1)+" m", VW/2, VH-22);
+    }
+  }
+}
+function shadeHex(hex,k){
+  const n=parseInt(hex.slice(1),16);
+  const r=Math.min(255,Math.round(((n>>16)&255)*k)), g=Math.min(255,Math.round(((n>>8)&255)*k)), b2=Math.min(255,Math.round((n&255)*k));
+  return "rgb("+r+","+g+","+b2+")";
+}
+function startLoop(){
+  (function loop(){ if(view3d.style.display==="none") return; render3d(); raf3d=requestAnimationFrame(loop); })();
+}
+
+/* ================= 侧视图高度刻度（0.5 m 一级，便于读出折返台阶） ================= */
+function drawGrid(){
+  const g=$("#grid"); if(!g) return; g.innerHTML="";
+  const x0=92, x1=752;
+  for(let i=1;i<=3;i++){
+    const y=GY-i*50;
+    g.appendChild(svgEl("line",{x1:x0,y1:y,x2:x1,y2:y,stroke:"#b9d0c4","stroke-width":1,"stroke-dasharray":"4 7"}));
+    const t=svgEl("text",{x:x0-7,y:y+4,"text-anchor":"end","font-size":11.5,"font-weight":"bold",fill:"#8aa294"});
+    t.textContent=(i*0.5).toFixed(1)+" m"; g.appendChild(t);
+  }
+  const t0=svgEl("text",{x:x0-7,y:GY+4,"text-anchor":"end","font-size":11.5,"font-weight":"bold",fill:"#8aa294"});
+  t0.textContent="0 m"; g.appendChild(t0);
+}
+
+/* ================= 2D 俯视图切换 ================= */
+const NS="http://www.w3.org/2000/svg";
+let viewMode="side";
+function svgEl(tag,attrs){
+  const el=document.createElementNS(NS,tag);
+  for(const k in attrs) el.setAttribute(k,attrs[k]);
+  return el;
+}
+function setView(m){
+  viewMode=m;
+  stage.classList.toggle("topmode", m==="top");
+  $("#topG").style.display = m==="top" ? "" : "none";
+  $("#viewBtn").textContent = m==="top" ? "↔ 侧视图" : "🗺 俯视图";
+  $("#viewTag").textContent = m==="top" ? "2D 俯视图（占地平面）" : "侧视截面图（正视图）";
+  if(m==="top") renderTop();
+}
+$("#viewBtn").addEventListener("click", ()=> setView(viewMode==="side"?"top":"side"));
+
+function steepColor(sin){
+  if(sin>=0.65) return "#e08573";
+  if(sin>=0.45) return "#e8b26a";
+  if(sin>=0.30) return "#aecf8e";
+  return "#7cc47f";
+}
+function renderTop(){
+  const g=$("#topG"); if(!g) return;
+  g.innerHTML="";
+  const HZ=DEPTH*100/2;                               // 真实占地带（0.8 m 深）的半高
+  const CN=["①","②","③","④","⑤","⑥"];
+  const baseBottom=480, baseTop=baseBottom-HZ*2;       // 第 1 层 = 真实占地带
+  const segs = S.chain ? S.chain.filter(i=>i.kind==="plank").map(i=>i.rec) : [];
+  const n=segs.length;
+  // 楼梯式展开：每段各占一层，沿板宽方向逐层错开（越靠上＝越高的层）
+  const step = n>1 ? Math.min(HZ*2, (baseTop-186)/(n-1)) : HZ*2;
+  const laneTopY = i => baseTop - i*step;
+  const laneMidY = i => laneTopY(i) + step/2;
+  const stackTop = laneTopY(Math.max(n-1,0));
+
+  function rect(x,y,w,h,fill,stroke,dash,rx){
+    g.appendChild(svgEl("rect",{x,y,width:w,height:h,fill:fill||"none",stroke:stroke||"none",
+      "stroke-width":1.6, rx:rx||0, ...(dash?{"stroke-dasharray":"7 5"}:{})}));
+  }
+  function txt(x,y,s,fill,size,anchor){
+    const t=svgEl("text",{x,y,"text-anchor":anchor||"middle","font-size":size||12.5,
+      "font-weight":"bold",fill:fill||"#4a5b52"});
+    t.textContent=s; g.appendChild(t);
+  }
+  function dashLine(x1,y1,x2,y2,color){
+    g.appendChild(svgEl("line",{x1,y1,x2,y2,stroke:color,"stroke-width":2,"stroke-dasharray":"6 5"}));
+  }
+  // 水平方向箭头：表示重物在这一层的前进方向
+  function arrowH(xa,xb,y,color){
+    const d=xb>=xa?1:-1, s=6.5;
+    g.appendChild(svgEl("line",{x1:xa,y1:y,x2:xb,y2:y,stroke:color,"stroke-width":2.4,"stroke-linecap":"round"}));
+    g.appendChild(svgEl("polyline",{points:[(xb-d*s)+","+(y-s*0.62)+" "+xb+","+y+" "+(xb-d*s)+","+(y+s*0.62)],
+      fill:"none",stroke:color,"stroke-width":2.4,"stroke-linecap":"round","stroke-linejoin":"round"}));
+  }
+
+  /* ---- 左侧板宽刻度：只有第 1 层是真实的占地深度 ---- */
+  rect(24, baseTop, 8, HZ*2, "#e7efe6", "#a8bfb2");
+  txt(38, baseTop+HZ-4, "深 0.8 m", "#6b8577", 11.5, "start");
+  txt(38, baseTop+HZ+12, "（板宽）", "#9aa79f", 10.5, "start");
+
+  /* ---- 高台：从地面一直画到最高层，像楼梯一直通到高台 ---- */
+  rect(PLAT.x, stackTop, PLAT.w, baseBottom-stackTop, "#d6cfbf", "#a89f8d", false, 4);
+  txt(PLAT.x+PLAT.w/2, stackTop+22, "高台 1.5 m 正方体", "#7c7461", 12);
+  txt(PLAT.x+PLAT.w/2, stackTop+38, "深 1.5 m · 比木板宽", "#9c9382", 10.5);
+
+  /* ---- 木块桥墩（落在地面上；并排两列 / 宽木块 ＝ 比木板更宽的楼梯转角平台） ---- */
+  const bandMid=baseTop+HZ;
+  const seenX=new Set();
+  S.stacks.forEach(st=>{
+    const key=Math.round(st.x);
+    if(seenX.has(key)) return; seenX.add(key);
+    const grp=S.stacks.filter(s=>Math.abs(s.x-st.x)<20);
+    const nMax=Math.max(...grp.map(s=>s.n));
+    const zLo=Math.min(...grp.map(s=>(s.z||0)-(s.d||DEPTH)/2));
+    const zHi=Math.max(...grp.map(s=>(s.z||0)+(s.d||DEPTH)/2));
+    const yTop=bandMid-zHi*100, h=(zHi-zLo)*100;
+    const platform=(zHi-zLo)>DEPTH+0.01;
+    if(platform){
+      // 转角平台：深度超过一块木块（0.8 m），向木板两侧伸出，像楼梯休息台
+      rect(st.x-st.w/2, yTop, st.w, h, "#eec894", "#96602c", false, 3);
+      rect(st.x-st.w/2, baseTop, st.w, HZ*2, "none", "#96602c", true, 2);
+      txt(st.x, yTop+14, (st.bt==="wide"?"宽木块平台":"转角平台"), "#5f3d17", 10.5);
+      txt(st.x, yTop+28, nMax+" 层"+(grp.length>1?" × 并排 "+grp.length:"")+(st.bt==="wide"?" · 深 1.6 m":""), "#8a5a24", 10);
+    }else{
+      rect(st.x-st.w/2, baseTop, st.w, HZ*2, "#cf9a5c", "#96602c", false, 3);
+      txt(st.x, baseTop+HZ+4, nMax+" 层", "#5f3d17", 11);
+    }
+  });
+
+  /* ---- 木板：每段各占一层（楼梯式），不再叠在同一个面上 ---- */
+  const order=new Map();
+  segs.forEach((r,i)=>order.set(r.id,i+1));
+  S.planks.forEach(p=>{
+    if(!p.placed) return;
+    const x1=Math.min(p.p1.x,p.p2.x), x2=Math.max(p.p1.x,p.p2.x);
+    const idx=order.get(p.id);
+    const sin=p.flat?0:segSin(p);
+    if(idx){
+      const y=laneTopY(idx-1)+4, h=step-8, cy=y+h/2;
+      rect(x1, y, x2-x1, h, p.flat?"#e3d3ae":steepColor(sin), "#7d6236", false, 3);
+      if(!p.flat){
+        const deg=Math.round(Math.asin(Math.min(1,sin))*180/Math.PI);
+        const lo=(GY-Math.max(p.p1.y,p.p2.y))/100, hi=(GY-Math.min(p.p1.y,p.p2.y))/100;
+        txt((x1+x2)/2, cy+(h>58?-2:4), CN[idx-1]+"  "+deg+"°", "#4a3a1c", 13);
+        if(h>58) txt((x1+x2)/2, cy+16, "高 "+lo.toFixed(1)+" → "+hi.toFixed(1)+" m", "#6b5b3a", 10.5);
+      }
+    }else{
+      rect(x1, baseTop+4, x2-x1, HZ*2-8, "#e6dcc4", "#a99a7a", false, 3);
+      txt((x1+x2)/2, baseTop+HZ+4, "未接入路径", "#a08b64", 10.5);
+    }
+  });
+
+  /* ---- 行进方向箭头：→ ← → 交替前进，这就是折返 ---- */
+  segs.forEach((r,i)=>{
+    const L=Math.min(r.p1.x,r.p2.x), R=Math.max(r.p1.x,r.p2.x);
+    if(R-L>60){
+      const y=laneTopY(i)+step-12;
+      if(r.p2.x>r.p1.x) arrowH(L+16, R-14, y, "#2f8d7b");
+      else arrowH(R-16, L+14, y, "#2f8d7b");
+    }
+  });
+
+  /* ---- 折返连接（转弯处）：上下两层之间连起来 ---- */
+  for(let i=0;i<n-1;i++){
+    const a=segs[i], b=segs[i+1];
+    const yA=laneMidY(i), yB=laneMidY(i+1), ym=(yA+yB)/2;
+    g.appendChild(svgEl("polyline",{points:[a.p2.x,yA,a.p2.x,ym,b.p1.x,ym,b.p1.x,yB].join(" "),
+      fill:"none", stroke:"#3a9e8a", "stroke-width":2.4, "stroke-dasharray":"6 4", "stroke-linecap":"round"}));
+    rect(a.p2.x+12, ym-12, 34, 17, "rgba(255,255,255,.92)", "#bfe0d8", false, 8);
+    txt(a.p2.x+29, ym+1, "折返", "#2f8d7b", 11);
+  }
+
+  /* ---- 实际占地轮廓（只算学生搭建的结构，与右侧测量一致） ---- */
+  const b=structBounds();
+  if(b){
+    const x0=b.min*100, w=(b.max-b.min)*100;
+    rect(x0, baseTop, w, HZ*2, "none", "#d96a5f", true, 5);
+    dashLine(x0, baseBottom+16, x0+w, baseBottom+16, "#d96a5f");
+    g.appendChild(svgEl("line",{x1:x0,y1:baseBottom+11,x2:x0,y2:baseBottom+21,stroke:"#d96a5f","stroke-width":2}));
+    g.appendChild(svgEl("line",{x1:x0+w,y1:baseBottom+11,x2:x0+w,y2:baseBottom+21,stroke:"#d96a5f","stroke-width":2}));
+    txt(x0+w/2, baseBottom+40, "占地宽 "+(w/100).toFixed(2)+" m × 深 0.8 m = "+(w/100*DEPTH).toFixed(2)+" ㎡（楼梯式前后错开，转角平台略伸出）", "#c0554b", 12.5);
+  }else{
+    txt(SW/2, baseBottom+34, "把木板连到高台后，这里会显示占地轮廓", "#9aa79f", 12.5);
+  }
+
+  /* ---- 折返色块图例（每段一行） ---- */
+  const lh=46+segs.length*19;
+  g.appendChild(svgEl("rect",{x:56,y:58,width:364,height:lh,fill:"rgba(255,255,255,.94)",
+    stroke:"#cfdcd2","stroke-width":1.4,rx:9}));
+  txt(72, 80, "折返俯视图解（共 "+segs.length+" 段 · 楼梯式展开）", "#3f6b5c", 13.5, "start");
+  segs.forEach((r,i)=>{
+    const lo=(GY-Math.max(r.p1.y,r.p2.y))/100, hi=(GY-Math.min(r.p1.y,r.p2.y))/100;
+    const deg=Math.round(Math.asin(Math.min(1,segSin(r)))*180/Math.PI);
+    const cy=80+19*(i+1)+4;
+    g.appendChild(svgEl("rect",{x:72,y:cy-9,width:11,height:11,rx:2.5,fill:steepColor(segSin(r)),
+      stroke:"#7d6236","stroke-width":1}));
+    txt(90, cy, CN[i]+" 高 "+lo.toFixed(1)+" → "+hi.toFixed(1)+" m · "+deg+"° · 长 "+(r.len/100).toFixed(1)+" m",
+      i%2 ? "#7c5a2c" : "#3f6b5c", 11.5, "start");
+  });
+  txt(72, 58+lh+18, "每段各占一层画出（楼梯式展开）；3D 视图中上下两段沿深度方向前后错开——像真实楼梯一样，转角由并排桥墩平台衔接。",
+    "#9aa79f", 11, "start");
+}
+
+/* ================= 舞台自适应 ================= */
+function fitStage(){
+  const wrap=$("#stageWrap");
+  const aw=wrap.clientWidth-6, ah=wrap.clientHeight-6;
+  S.scale=Math.min(1.05, aw/SW, ah/SH);
+  stage.style.transform="scale("+S.scale+")";
+}
+window.addEventListener("resize", fitStage);
+
+/* ================= 启动 ================= */
+renderInv();
+drawGrid();
+fitStage();
+updateMetrics();
+</script>
+</body>
+</html>
