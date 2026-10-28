@@ -1,0 +1,1181 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="三年级《各种各样的运动》：拍摄、等间隔叠影、红点轨迹。手机简洁版，视频仅在本机处理。">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; connect-src 'none'; font-src 'self' data:; object-src 'none'; base-uri 'self'">
+<title>各种各样的运动 · 手机简洁版</title>
+<style>
+:root{color-scheme:light;--bg:#f6f9fc;--paper:#fff;--ink:#1b2934;--muted:#71818d;--line:#e5ebef;--accent:#0f766e;--soft:#edf7f5;--red:#ed454a;--stage:#1b2730;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.5;background:var(--bg);color:var(--ink)}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation;-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.32}a{color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #76c1b8;outline-offset:3px}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.icon{width:25px;height:25px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.app{width:min(100%,1080px);height:100vh;height:100dvh;min-height:460px;margin:0 auto;padding:0 18px;padding-top:env(safe-area-inset-top);background:var(--paper);display:flex;flex-direction:column;overflow:hidden}.header{height:70px;min-height:70px;display:flex;align-items:center;gap:6px}.header h1{font-size:21px;font-weight:700;text-align:center;flex:1;line-height:1.3;margin:0;white-space:nowrap}.header-tools{display:flex;gap:2px}.icon-button{width:46px;height:46px;border:0;background:transparent;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:12px;padding:0;flex:0 0 auto}.icon-button:not(:disabled):hover{background:var(--soft)}.workspace{min-height:0;flex:1;display:flex;flex-direction:column;gap:0}.stage{position:relative;min-height:130px;flex:1;width:100%;overflow:hidden;isolation:isolate;border-radius:14px;background:var(--stage);line-height:0}.stage video,.stage>.composite{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.stage video{background:var(--stage)}#annotationCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;touch-action:pan-y}#annotationCanvas.marking{cursor:crosshair;pointer-events:auto;touch-action:none}.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fff;z-index:5;line-height:1.3;pointer-events:none}.empty .icon{width:76px;height:76px;stroke-width:1.55}.empty h2{font-size:23px;font-weight:600;margin:0}.stage-label{position:absolute;top:14px;left:14px;z-index:6;line-height:1.2}.recording-clock{display:flex;align-items:center;gap:8px;color:#fff;background:#cc353d;border-radius:8px;padding:9px 12px;font-size:14px;font-variant-numeric:tabular-nums}.rec-led{width:7px;height:7px;border-radius:50%;background:#fff}.watermark{position:absolute;right:12px;bottom:10px;font-size:11px;line-height:1;color:#ffffff60;z-index:3;pointer-events:none}
+.player{height:56px;min-height:56px;display:flex;align-items:center;gap:9px;padding:4px 0}.play{color:var(--accent)}.play .icon{width:29px;height:29px}.timeline{min-width:28px;flex:1;height:28px;margin:0;accent-color:var(--accent);cursor:pointer}.time{font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}.time strong{font-weight:500}.step-button{width:35px;height:44px;min-width:35px}.step-button .icon{width:20px;height:20px}body:not([data-mode="track"]) .step-button{display:none}.stage-tip{min-height:24px;margin:0 0 2px;text-align:center;font-size:14px;line-height:1.5;color:var(--ink);padding:0 4px;flex:0 0 auto}.mode-actions{height:116px;min-height:116px;display:flex;align-items:center;justify-content:center}.action-panel{width:100%;max-width:440px}.capture-actions{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;justify-items:center;gap:18px}.action-tile{border:0;background:transparent;min-width:64px;min-height:66px;padding:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;border-radius:12px;color:var(--ink);font-size:14px}.action-tile .icon{width:30px;height:30px}.action-tile:hover{background:var(--soft)}#importBtn{grid-column:1}#recordBtn{grid-column:2}#switchCameraBtn{grid-column:3}.record-button{width:80px;height:80px;border:0;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%;padding:0}.record-button .icon{width:48px;height:48px;stroke:0}.record-button.danger{background:var(--red)}.record-button:active{transform:scale(.97)}.button{min-height:52px;padding:12px 20px;display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1.5px solid #d8e1e7;border-radius:16px;background:#fff;color:var(--ink);font-size:17px;font-weight:600;line-height:1.3;text-decoration:none}.button:not(:disabled):hover{background:var(--soft)}.button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.button.is-active{color:var(--accent);border-color:var(--accent);background:var(--soft)}.button.small{min-height:44px;padding:9px 12px;font-size:14px;border-width:1px;border-radius:11px}.button.wide{width:100%}.track-actions{display:grid;grid-template-columns:1fr 1fr 58px;gap:12px;align-items:center}.mark-dot{width:12px;height:12px;border-radius:50%;background:var(--red);flex:0 0 auto}.undo-button{padding:0}.overlay-actions{display:flex;justify-content:center}.overlay-actions .button{width:min(100%,300px)}
+.tabs{height:82px;min-height:82px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);padding:8px 0 calc(8px + env(safe-area-inset-bottom));margin:0 -18px}.tab{border:0;background:transparent;color:var(--ink);display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;font-size:15px;font-weight:500;min-width:0;padding:0 4px}.tab .icon{width:29px;height:29px;stroke-width:1.8}.tab.active{color:var(--accent);font-weight:700}.tab.active .icon{stroke-width:2.4}.tab:disabled{opacity:.27}.busy-layer{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;background:#14242b55;line-height:1.5}.busy-card{width:min(86%,260px);padding:20px;border-radius:16px;background:#ffffffed;color:var(--ink)}.progress-line{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}#cancelBtn{border:0;background:transparent;color:var(--muted);padding:5px;font-size:14px}#progress{width:100%;height:6px;accent-color:var(--accent);margin-top:14px}.toast{position:fixed;left:50%;bottom:calc(205px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:min(92vw,520px);z-index:30;display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:14px;background:#20323af0;color:#fff;box-shadow:0 5px 24px #10203020;font-size:14px;line-height:1.6}.toast .icon-button{width:30px;height:30px;color:#fff}.toast .icon{width:18px;height:18px}.analysis-video{position:fixed;left:-9999px;top:0;width:160px;height:90px;pointer-events:none;opacity:.01}
+.sheet{width:min(100% - 28px,560px);max-height:85vh;max-height:85dvh;margin:auto;border:0;border-radius:20px;padding:0;background:#fff;color:var(--ink);box-shadow:0 18px 90px #132c3f30;overflow:auto;overscroll-behavior:contain}.sheet::backdrop{background:#14242f66}.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}.sheet h2{font-size:20px;line-height:1.3;margin:0}.sheet-body{padding:6px 22px 24px}.setting-section{border-bottom:1px solid var(--line);margin:0;padding:0}.setting-section>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:18px 0;min-height:58px;cursor:pointer;font-size:16px;font-weight:600}.setting-section>summary::-webkit-details-marker{display:none}.setting-section>summary::after{content:'+';font-size:23px;color:var(--muted);font-weight:400}.setting-section[open]>summary::after{content:'−'}.setting-content{padding:0 0 20px}.field{display:grid;gap:6px;margin:0 0 15px;font-size:14px}.field label,.range-head{color:#435763;font-size:13px}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.number,.select{width:100%;min-height:44px;padding:9px 10px;border:1px solid #d8e1e7;border-radius:10px;color:var(--ink);background:#fff;font-size:15px}.field input[type=range]{width:100%;accent-color:var(--accent);margin:4px 0;height:26px}.range-head{display:flex;justify-content:space-between;gap:10px}.check{display:flex;align-items:center;gap:10px;font-size:14px;margin:13px 0}.check input{width:19px;height:19px;accent-color:var(--accent);margin:0}.row{display:flex;gap:9px;margin:8px 0;align-items:center}.row>*{flex:1;min-width:0}.small-note{font-size:12px;color:var(--muted);line-height:1.7;margin:10px 0}.source-info{font-size:12px;color:var(--muted);word-break:break-word;line-height:1.7;margin:12px 0}.source-info strong{display:block;font-weight:500;color:var(--ink)}.density{display:flex;border:1px solid #dce5e9;border-radius:11px;padding:4px;gap:4px;margin-bottom:18px}.density button{flex:1;min-height:38px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:14px}.density button.active{background:var(--soft);color:var(--accent);font-weight:600}.status{font-size:12px;line-height:1.7;color:var(--muted);margin-top:16px;word-break:break-word}.status.error{color:#b23b3b}.error-banner{color:#a44b25;font-size:13px;line-height:1.6;padding:12px 0}.view-tab.active{color:var(--accent);background:var(--soft);border-color:var(--accent)}.help-copy h3{font-size:16px;margin:18px 0 5px}.help-copy p{font-size:14px;line-height:1.8;color:#536773;margin:0 0 12px}.help-copy{padding:5px 22px 24px}.discreet{margin:16px 0 0;color:var(--muted);font-size:11px;text-align:center}.track-count{font-size:12px;color:var(--muted);margin:12px 0}body.busy #annotationCanvas{pointer-events:none}
+@media(max-width:600px){:root{background:#fff}.app{padding-right:12px;padding-left:12px}.header{height:58px;min-height:58px;gap:0}.header h1{font-size:18px}.header .icon-button{width:42px;height:46px}.header .icon{width:23px;height:23px}.header-tools{gap:0}.stage{border-radius:12px}.empty .icon{width:68px;height:68px}.empty h2{font-size:21px}.empty{gap:18px}.mode-actions{height:112px;min-height:112px}.record-button{width:78px;height:78px}.action-panel{max-width:350px}.tabs{margin:0 -12px;height:calc(76px + env(safe-area-inset-bottom));min-height:calc(76px + env(safe-area-inset-bottom));padding-top:7px;padding-bottom:calc(7px + env(safe-area-inset-bottom))}.tab{font-size:14px;gap:3px}.tab .icon{width:27px;height:27px}.player{gap:5px;height:51px;min-height:51px}.play{width:38px;height:44px}.time{font-size:10px}.step-button{width:30px;min-width:30px}.step-button .icon{width:18px;height:18px}.track-actions{gap:9px;grid-template-columns:1fr 1fr 52px}.track-actions .button{font-size:16px;padding:12px 10px;min-height:52px;border-radius:15px}.stage-tip{font-size:13px;line-height:1.45;min-height:20px}.sheet{width:100%;max-height:86dvh;margin:auto 0 0;border-radius:22px 22px 0 0;padding-bottom:env(safe-area-inset-bottom)}.sheet-head{padding:13px 18px}.sheet-body{padding:3px 20px 24px}.toast{bottom:calc(194px + env(safe-area-inset-bottom));font-size:13px}.watermark{font-size:10px}}
+@media(max-width:350px){.header h1{font-size:16px}.header .icon-button{width:37px}.time{font-size:9px}.player{gap:3px}.step-button{width:27px;min-width:27px}.empty h2{font-size:19px}}
+@media(orientation:landscape) and (max-height:600px){.app{min-height:300px;display:grid;grid-template-columns:minmax(0,1fr) 210px;grid-template-rows:52px minmax(0,1fr) 72px;grid-template-areas:'header header' 'workspace controls' 'workspace tabs';gap:0 18px;padding-bottom:10px}.header{grid-area:header;height:52px;min-height:0}.workspace{grid-area:workspace}.mode-actions{grid-area:controls;height:auto;min-height:0}.tabs{grid-area:tabs;height:72px;min-height:0;margin:0;padding:8px 0}.capture-actions{gap:4px}.record-button{width:66px;height:66px}.action-tile{min-width:50px}.track-actions{grid-template-columns:1fr 1fr;gap:10px}.track-actions #undoBtn{grid-column:1/3;justify-self:center;width:52px;min-height:42px}.stage{min-height:100px}.overlay-actions .button{font-size:15px;padding:12px}.tab{font-size:13px}.tab .icon{width:24px;height:24px}.toast{bottom:24px}.sheet{margin:auto;max-width:560px;border-radius:20px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body data-mode="capture">
+<svg width="0" height="0" class="sr-only" aria-hidden="true"><defs>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7h3l2-3h6l2 3h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m7 4 14 8-14 8Z" fill="currentColor" stroke="none"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 4v16M16 4v16" stroke-width="4"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="m12 4-8 8 8 8M4 12h16"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M3 6h5m4 0h9M3 12h11m4 0h3M3 18h3m4 0h11"/><circle cx="10" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></symbol>
+<symbol id="i-restart" viewBox="0 0 24 24"><path d="M20 8a8 8 0 1 1-7-4M13 1v6h6"/></symbol><symbol id="i-prev" viewBox="0 0 24 24"><path d="M5 5v14m13-13-9 6 9 6Z" fill="currentColor"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M19 5v14M6 6l9 6-9 6Z" fill="currentColor"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V4h6l2 3h10v13H3Z"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8Zm-10 9 10 5 10-5M2 16l10 5 10-5"/></symbol><symbol id="i-path" viewBox="0 0 24 24"><path d="m5 18 5-7 4 3 5-9"/><circle cx="4" cy="19" r="2.5" fill="currentColor"/><circle cx="10" cy="10" r="2.5" fill="currentColor"/><circle cx="15" cy="15" r="2.5" fill="currentColor"/><circle cx="20" cy="4" r="2.5" fill="currentColor"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1.5"/><path d="m21 16-6-6-12 11"/></symbol><symbol id="i-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.4" fill="currentColor" stroke="none"/></symbol><symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol><symbol id="i-switch" viewBox="0 0 24 24"><path d="M4 7h3l2-3h6l2 3h3v14H4Z"/><path d="M8 12a5 5 0 0 1 8-1m0-3v4h-4m4 5a5 5 0 0 1-8 0m0 3v-4h4"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="m8 3-5 5 5 5M3 8h12a6 6 0 0 1 0 12H9"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+</defs></svg>
+<main class="app">
+ <header class="header"><a class="icon-button" href="../" aria-label="返回课程"><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg></a><h1>各种各样的运动</h1><div class="header-tools"><button id="saveImageBtn" class="icon-button" disabled hidden aria-label="保存当前画面" title="保存画面"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></button><button id="settingsBtn" class="icon-button" aria-label="打开设置" title="设置"><svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg></button></div></header>
+ <section class="workspace" aria-label="运动画面">
+  <div class="stage" id="stage"><video id="liveVideo" muted playsinline autoplay hidden></video><video id="video" muted playsinline preload="auto" hidden></video><canvas id="overlayCanvas" class="composite" hidden></canvas><canvas id="annotationCanvas" tabindex="0" aria-label="标点区域"></canvas><div id="emptyState" class="empty"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><h2>拍一段运动</h2></div><div id="stageLabel" class="stage-label" hidden><span id="modeLabel" hidden></span><span id="recordClock" class="recording-clock" hidden><span class="rec-led"></span><span id="recordTime">00:00</span></span></div><span class="watermark">mutiw</span><div id="busyBox" class="busy-layer" hidden><div class="busy-card"><div class="progress-line"><span id="progressText">处理中</span><button id="cancelBtn">取消</button></div><progress id="progress" max="1" value="0"></progress></div></div></div>
+  <div class="player" id="playerBar" hidden><button id="playBtn" class="icon-button play" disabled aria-label="播放视频"><svg class="icon" aria-hidden="true"><use id="playIcon" href="#i-play"/></svg></button><button id="prevBtn" class="icon-button step-button" disabled aria-label="后退一步"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button><input id="timeline" class="timeline" type="range" min="0" max="1" step="0.001" value="0" disabled aria-label="视频时间轴"><button id="nextBtn" class="icon-button step-button" disabled aria-label="前进一步"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button><span class="time"><strong id="currentTime">00:00</strong> / <span id="durationTime">00:00</span></span></div>
+  <div id="stageTip" class="stage-tip" hidden></div>
+ </section>
+ <div class="mode-actions">
+  <section id="panelCapture" class="action-panel capture-actions" role="tabpanel" aria-labelledby="tabCapture"><button id="importBtn" class="action-tile"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg><span>导入</span></button><button id="recordBtn" class="record-button" aria-labelledby="recordText"><svg class="icon" aria-hidden="true"><use id="recordIcon" href="#i-record"/></svg><span id="recordText" class="sr-only">拍摄</span></button><button id="switchCameraBtn" class="action-tile" hidden disabled aria-label="切换镜头"><svg class="icon" aria-hidden="true"><use href="#i-switch"/></svg></button></section>
+  <section id="panelOverlay" class="action-panel overlay-actions" role="tabpanel" aria-labelledby="tabOverlay" hidden><button id="generateOverlayBtn" class="button primary" disabled><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>生成叠影</button></section>
+  <section id="panelTrack" class="action-panel track-actions" role="tabpanel" aria-labelledby="tabTrack" hidden><button id="markBtn" class="button" disabled><span class="mark-dot"></span><span id="markText">标点</span></button><button id="autoTrackBtn" class="button primary" disabled>追踪</button><button id="undoBtn" class="button undo-button" disabled aria-label="撤销"><svg class="icon" aria-hidden="true"><use href="#i-undo"/></svg></button></section>
+ </div>
+ <nav class="tabs" role="tablist" aria-label="选择操作"><button id="tabCapture" class="tab active" role="tab" data-tab="capture" aria-selected="true" aria-controls="panelCapture"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><span>拍摄</span></button><button id="tabOverlay" class="tab" role="tab" data-tab="overlay" aria-selected="false" aria-controls="panelOverlay" disabled><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg><span>叠影</span></button><button id="tabTrack" class="tab" role="tab" data-tab="track" aria-selected="false" aria-controls="panelTrack" disabled><svg class="icon" aria-hidden="true"><use href="#i-path"/></svg><span>轨迹</span></button></nav>
+</main>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden><span id="toastMessage"></span><button id="closeToastBtn" class="icon-button" aria-label="关闭提示"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+<dialog id="settingsDialog" class="sheet" aria-labelledby="settingsTitle"><header class="sheet-head"><h2 id="settingsTitle">设置</h2><button id="closeSettingsBtn" class="icon-button" aria-label="关闭设置"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></header><div class="sheet-body">
+ <div id="secureWarning" class="error-banner" hidden>相机需要 HTTPS。请使用在线链接，或导入已拍摄的视频。</div>
+ <details class="setting-section"><summary>拍摄与保存</summary><div class="setting-content"><div class="row"><button id="openCameraBtn" class="button small">打开相机</button><button id="systemCameraBtn" class="button small">系统相机</button></div><button id="saveVideoBtn" class="button small wide" disabled><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>保存原视频</button><div id="sourceInfo" class="source-info">尚未载入视频</div><p class="small-note">固定机位，建议拍摄 3—10 秒。最长 60 秒，不录声音。</p></div></details>
+ <details class="setting-section"><summary>播放</summary><div class="setting-content"><div class="field-row"><div class="field"><label for="speed">播放速度</label><select id="speed" class="select" disabled><option value=".25">0.25 倍</option><option value=".5">0.5 倍</option><option value="1" selected>正常</option><option value="1.5">1.5 倍</option><option value="2">2 倍</option></select></div><div class="field"><label for="frameStep">前后步长</label><select id="frameStep" class="select"><option value=".0333333333">1/30 秒</option><option value=".0166666667">1/60 秒</option><option value=".1" selected>0.1 秒</option><option value=".2">0.2 秒</option></select></div></div><button id="restartBtn" class="button small wide" disabled>从头重播</button></div></details>
+ <details class="setting-section"><summary>叠影</summary><div class="setting-content"><div class="density" id="densityChoices" role="group" aria-label="叠影数量"><button data-density="6" aria-pressed="false">少</button><button data-density="12" aria-pressed="true" class="active">中</button><button data-density="20" aria-pressed="false">多</button></div><div class="field-row"><div class="field"><label for="rangeStart">开始 / 秒</label><input id="rangeStart" class="number" type="number" min="0" step=".05" value="0"></div><div class="field"><label for="rangeEnd">结束 / 秒</label><input id="rangeEnd" class="number" type="number" min="0" step=".05" value="5"></div></div><div class="field-row"><div class="field"><label for="sampleInterval">间隔 / 秒</label><input id="sampleInterval" class="number" type="number" min=".05" max="3600" step=".05" value=".2"></div><div class="field"><label for="overlayMode">叠影方式</label><select id="overlayMode" class="select"><option value="foreground">突出物体</option><option value="full">整帧叠加</option></select></div></div><div class="field"><div class="range-head"><label for="opacity">物体浓淡</label><output id="opacityValue">75%</output></div><input id="opacity" type="range" min=".15" max="1" step=".05" value=".75"></div><div class="field"><div class="range-head"><label for="threshold">去背景程度</label><output id="thresholdValue">32</output></div><input id="threshold" type="range" min="8" max="100" step="1" value="32"></div><label class="check"><input id="sampleLabels" type="checkbox">显示取样时间</label><p id="sampleCount" class="small-note">最多 60 帧。</p><div class="row"><button id="originalViewBtn" class="button small view-tab active" aria-pressed="true">看视频</button><button id="overlayViewBtn" class="button small view-tab" disabled aria-pressed="false">看叠影</button></div></div></details>
+ <details class="setting-section"><summary>轨迹</summary><div class="setting-content"><div class="row"><label class="sr-only" for="trackSelect">观察点</label><select id="trackSelect" class="select"><option value="A">A · 红色</option></select><button id="addTrackBtn" class="button small" disabled>添加 B 点</button></div><div class="field-row"><div class="field"><label for="trackMode">追踪特征</label><select id="trackMode" class="select"><option value="auto">自动选择</option><option value="color">彩色贴点</option><option value="template">纹理特征</option></select></div><div class="field"><label for="trackStep">分析步长</label><select id="trackStep" class="select"><option value=".0333333333">约 30 帧 / 秒</option><option value=".05">约 20 帧 / 秒</option><option value=".1" selected>约 10 帧 / 秒</option><option value=".2">约 5 帧 / 秒</option></select></div></div><label class="check"><input id="smoothPath" type="checkbox" checked>平滑路径</label><label class="check"><input id="showArrows" type="checkbox" checked>方向箭头</label><label class="check"><input id="fullPath" type="checkbox" checked>完整路径</label><label class="check"><input id="showPaths" type="checkbox" checked>显示红点与路径</label><label class="check"><input id="pointTimes" type="checkbox">显示标点时间</label><div id="trackCount" class="track-count"></div><div class="row"><button id="clearTrackBtn" class="button small" disabled>清空当前点</button><button id="exportDataBtn" class="button small" disabled>导出数据</button></div><p class="small-note">实心点是手动标记，空心点是自动追踪。连线是拟合，不是新证据。</p></div></details>
+ <button id="helpBtn" class="button small wide" style="margin-top:18px">使用帮助</button><div id="status" class="status" aria-live="off">准备好后拍摄或导入视频。</div><p class="discreet">本机处理 · 关闭前请保存 · mutiw · v2</p>
+</div></dialog>
+<dialog id="helpDialog" class="sheet" aria-labelledby="helpTitle"><header class="sheet-head"><h2 id="helpTitle">使用帮助</h2><button id="closeHelpBtn" class="icon-button" aria-label="关闭帮助"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></header><div class="help-copy"><h3>拍摄</h3><p>先点圆形按钮打开相机，再点一次开始。结束后可播放；也能导入系统相机拍好的视频。</p><h3>叠影</h3><p>点“生成叠影”，就能看到等时间间隔留下的位置。默认分析整段视频；间隔和范围可在设置中调整。必须固定相机，手与阴影也可能留下痕迹。</p><h3>轨迹</h3><p>点“标点”，再点物体上的一个位置。拖动时间轴后继续标记，或点“追踪”自动寻找。始终观察同一位置；偏移处暂停补点。设置中可添加 B 点作比较。</p><h3>保存</h3><p>右上角下载图标保存当前画面；原视频和观测数据在设置里保存。刷新或关闭页面后，未保存的内容会丢失。</p><p>视频只在本机处理。自动追踪用颜色和纹理，遮挡或运动过快时可能失效；请用原视频核对。网页路径是观察辅助，不是精密测量。相机打不开时请用 Safari、Chrome、Edge 直接打开在线链接。</p></div></dialog>
+<input id="fileInput" type="file" accept="video/*" hidden><input id="captureInput" type="file" accept="video/*" capture="environment" hidden><video id="analysisVideo" class="analysis-video" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
+<script>
+/* MotionCore: local, dependency-free image analysis. Coordinates are normalized.
+ * No network, DOM, generated evidence, or silent extrapolation. */
+(function (root) {
+  'use strict';
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const finite = Number.isFinite;
+  function checkedFrame(frame) {
+    if (!frame || !Number.isInteger(frame.width) || !Number.isInteger(frame.height) ||
+        frame.width < 1 || frame.height < 1 || !frame.data ||
+        frame.data.length < frame.width * frame.height * 4) {
+      throw new TypeError('A valid RGBA frame with integer width and height is required.');
+    }
+    return frame;
+  }
+  function samplingTimes(start, end, interval, maxFrames = 80) {
+    if (![start, end, interval, maxFrames].every(finite) || start < 0 || end < start ||
+        interval <= 0 || maxFrames < 1) throw new RangeError('Invalid sampling range or interval.');
+    const n = Math.floor((end - start) / interval + 1e-9) + 1;
+    if (n > Math.floor(maxFrames)) {
+      const error = new RangeError(`Requested ${n} frames; limit is ${Math.floor(maxFrames)}. Increase the interval or shorten the range.`);
+      error.code = 'TOO_MANY_FRAMES'; error.requestedFrames = n;
+      throw error;
+    }
+    return Array.from({ length: n }, (_, i) => Math.min(end, start + i * interval));
+  }
+  function median(values, length = values.length) {
+    // Insertion sort is faster than per-pixel allocations for <= 9 background samples.
+    for (let i = 1; i < length; i++) {
+      const v = values[i]; let j = i - 1;
+      while (j >= 0 && values[j] > v) { values[j + 1] = values[j]; j--; }
+      values[j + 1] = v;
+    }
+    const m = Math.floor(length / 2);
+    return length % 2 ? values[m] : (values[m - 1] + values[m]) / 2;
+  }
+  function estimateBackground(frames) {
+    if (!Array.isArray(frames) || !frames.length || frames.length > 9) {
+      throw new RangeError('Use between 1 and 9 frames for the median background.');
+    }
+    const first = checkedFrame(frames[0]);
+    frames.forEach(f => {
+      checkedFrame(f);
+      if (f.width !== first.width || f.height !== first.height) throw new RangeError('Frame dimensions must match.');
+    });
+    const out = new Uint8ClampedArray(first.width * first.height * 4);
+    const values = new Uint8Array(frames.length);
+    for (let i = 0; i < out.length; i += 4) {
+      for (let c = 0; c < 3; c++) {
+        for (let j = 0; j < frames.length; j++) values[j] = frames[j].data[i + c];
+        out[i + c] = median(values);
+      }
+      out[i + 3] = 255;
+    }
+    return out;
+  }
+  function foregroundMask(frame, background, threshold = 26) {
+    checkedFrame(frame);
+    const bg = background && background.data ? background.data : background;
+    const { width: w, height: h, data } = frame, n = w * h;
+    if (!bg || bg.length < n * 4) throw new RangeError('Background dimensions must match the frame.');
+    if (!finite(threshold) || threshold < 1 || threshold > 255) throw new RangeError('Threshold must be between 1 and 255.');
+    // Compensate modest, global exposure changes using robust sparse medians.
+    const sampleStep = Math.max(1, Math.floor(n / 225));
+    const drift = [[], [], []];
+    for (let p = 0; p < n; p += sampleStep) {
+      const q = p * 4;
+      for (let c = 0; c < 3; c++) drift[c].push(data[q + c] - bg[q + c]);
+    }
+    const bias = drift.map(v => clamp(median(v), -40, 40));
+    const raw = new Uint8Array(n), strength = new Float32Array(n);
+    for (let p = 0, q = 0; p < n; p++, q += 4) {
+      const d = (Math.abs(data[q] - bg[q] - bias[0]) +
+        Math.abs(data[q + 1] - bg[q + 1] - bias[1]) +
+        Math.abs(data[q + 2] - bg[q + 2] - bias[2])) / 3;
+      strength[p] = d;
+      raw[p] = d >= threshold ? 1 : 0;
+    }
+    const out = new Uint8ClampedArray(n);
+    let weightedX = 0, weightedY = 0, weight = 0, count = 0;
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const p = y * w + x;
+      let neighbors = 0, available = 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+        const xx = x + dx, yy = y + dy;
+        if (xx >= 0 && xx < w && yy >= 0 && yy < h) { neighbors += raw[yy * w + xx]; available++; }
+      }
+      // A small majority filter removes isolated sensor noise and fills tiny gaps.
+      if (neighbors >= Math.max(3, Math.ceil(available * 0.44))) {
+        const a = raw[p] ? clamp((strength[p] / threshold - 0.6) * 255, 0, 255) : 150;
+        out[p] = a; weight += a; weightedX += x * a; weightedY += y * a; count++;
+      }
+    }
+    out.centroid = weight ? { x: weightedX / weight / w, y: weightedY / weight / h } : null;
+    out.count = count;
+    out.foregroundRatio = count / n;
+    out.exposureCorrection = bias;
+    return out;
+  }
+  function rgbAt(frame, x, y) {
+    const i = (clamp(Math.round(y), 0, frame.height - 1) * frame.width + clamp(Math.round(x), 0, frame.width - 1)) * 4;
+    return [frame.data[i], frame.data[i + 1], frame.data[i + 2]];
+  }
+  function seedColor(frame, x, y) {
+    const rgb = [0, 0, 0];
+    for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+      const p = rgbAt(frame, x + dx, y + dy);
+      for (let c = 0; c < 3; c++) rgb[c] += p[c] / 9;
+    }
+    const hi = Math.max(...rgb), lo = Math.min(...rgb), sum = rgb.reduce((a, b) => a + b, 0);
+    return { rgb, chroma: rgb.map(v => v / Math.max(1, sum)), saturation: hi ? (hi - lo) / hi : 0, value: hi };
+  }
+  function colorCandidates(frame, seed, cx, cy, radius) {
+    const w = frame.width, h = frame.height;
+    const left = Math.max(0, Math.floor(cx - radius)), top = Math.max(0, Math.floor(cy - radius));
+    const right = Math.min(w - 1, Math.ceil(cx + radius)), bottom = Math.min(h - 1, Math.ceil(cy + radius));
+    const rw = right - left + 1, rh = bottom - top + 1;
+    if (rw <= 0 || rh <= 0) return [];
+    const mask = new Uint8Array(rw * rh), errors = new Float32Array(mask.length);
+    for (let yy = 0; yy < rh; yy++) for (let xx = 0; xx < rw; xx++) {
+      const q = ((yy + top) * w + xx + left) * 4;
+      const r = frame.data[q], g = frame.data[q + 1], b = frame.data[q + 2];
+      const hi = Math.max(r, g, b), lo = Math.min(r, g, b), sum = Math.max(1, r + g + b);
+      const sat = hi ? (hi - lo) / hi : 0;
+      const error = (r / sum - seed.chroma[0]) ** 2 + (g / sum - seed.chroma[1]) ** 2 + (b / sum - seed.chroma[2]) ** 2;
+      const p = yy * rw + xx;
+      errors[p] = error;
+      if (sat >= Math.max(0.25, seed.saturation * 0.5) && hi >= 30 &&
+          Math.abs(hi - seed.value) < 160 && error < 0.027) mask[p] = 1;
+    }
+    const queue = new Int32Array(mask.length), candidates = [];
+    for (let p = 0; p < mask.length; p++) {
+      if (mask[p] !== 1) continue;
+      let head = 0, tail = 1, sx = 0, sy = 0, error = 0, boundary = false;
+      queue[0] = p; mask[p] = 2;
+      while (head < tail) {
+        const v = queue[head++], x = v % rw, y = Math.floor(v / rw);
+        sx += x + left; sy += y + top; error += errors[v];
+        if ((x === 0 && left > 0) || (x === rw - 1 && right < w - 1) ||
+            (y === 0 && top > 0) || (y === rh - 1 && bottom < h - 1)) boundary = true;
+        const adjacent = [x > 0 ? v - 1 : -1, x + 1 < rw ? v + 1 : -1, y > 0 ? v - rw : -1, y + 1 < rh ? v + rw : -1];
+        for (const a of adjacent) if (a >= 0 && mask[a] === 1) { mask[a] = 2; queue[tail++] = a; }
+      }
+      if (tail >= 3) candidates.push({ x: sx / tail, y: sy / tail, area: tail, error: error / tail, boundary });
+    }
+    return candidates;
+  }
+  function makeTemplate(frame, x, y, size) {
+    const r = Math.floor(size / 2), offsets = [], values = [];
+    let sum = 0;
+    for (let dy = -r; dy <= r; dy += 2) for (let dx = -r; dx <= r; dx += 2) {
+      const xx = Math.round(x) + dx, yy = Math.round(y) + dy;
+      if (xx < 0 || xx >= frame.width || yy < 0 || yy >= frame.height) continue;
+      const q = (yy * frame.width + xx) * 4;
+      const v = 0.299 * frame.data[q] + 0.587 * frame.data[q + 1] + 0.114 * frame.data[q + 2];
+      offsets.push([dx, dy]); values.push(v); sum += v;
+    }
+    const mean = sum / Math.max(1, values.length), centered = values.map(v => v - mean);
+    const energy = centered.reduce((s, v) => s + v * v, 0);
+    return { offsets, centered, energy, variance: energy / Math.max(1, values.length), radius: r,
+      left: Math.min(...offsets.map(p => p[0])), right: Math.max(...offsets.map(p => p[0])),
+      top: Math.min(...offsets.map(p => p[1])), bottom: Math.max(...offsets.map(p => p[1])) };
+  }
+  function templateScore(frame, template, x, y) {
+    if (x + template.left < 0 || x + template.right >= frame.width ||
+        y + template.top < 0 || y + template.bottom >= frame.height) return -1;
+    let sum = 0, squares = 0, dot = 0;
+    for (let k = 0; k < template.offsets.length; k++) {
+      const xx = x + template.offsets[k][0], yy = y + template.offsets[k][1];
+      const v = frame.gray[yy * frame.width + xx];
+      sum += v; squares += v * v; dot += v * template.centered[k];
+    }
+    const energy = squares - sum * sum / template.offsets.length;
+    return energy > 1 && template.energy > 1 ? clamp(dot / Math.sqrt(energy * template.energy), -1, 1) : -1;
+  }
+  function createTracker(initialFrame, xNorm, yNorm, options = {}) {
+    const frame = checkedFrame(initialFrame), w = frame.width, h = frame.height;
+    if (![xNorm, yNorm].every(finite) || xNorm < 0 || xNorm > 1 || yNorm < 0 || yNorm > 1) throw new RangeError('Seed coordinates must be normalized to 0..1.');
+    const radius = clamp(Math.round(options.searchRadius || 28), 6, 128);
+    const patchSize = clamp(Math.round(options.patchSize || 21) | 1, 9, 41);
+    const requestedMode = options.mode || 'auto';
+    if (!['auto', 'color', 'template'].includes(requestedMode)) throw new RangeError('Unknown tracking mode.');
+    let x = xNorm * (w - 1), y = yNorm * (h - 1), vx = 0, vy = 0;
+    let lastT = finite(options.t) ? options.t : null, lost = false, reason = '', lastConfidence = 1;
+    const seed = seedColor(frame, x, y), template = makeTemplate(frame, x, y, patchSize);
+    let mode = requestedMode === 'template' ? 'template' : seed.saturation >= 0.35 && seed.value >= 45 ? 'color' : 'template';
+    if (requestedMode === 'color') mode = 'color';
+    let expectedArea = 0;
+    if (mode === 'color') {
+      const initial = colorCandidates(frame, seed, x, y, radius).sort((a, b) => Math.hypot(a.x - x, a.y - y) - Math.hypot(b.x - x, b.y - y))[0];
+      if (initial && !initial.boundary && Math.hypot(initial.x - x, initial.y - y) < patchSize) expectedArea = initial.area;
+      else if (requestedMode === 'auto') mode = 'template';
+      else { lost = true; reason = 'Choose a small, distinct colored marker.'; }
+    }
+    if (mode === 'template' && (template.variance < 9 || template.offsets.length < 16)) {
+      lost = true; reason = 'The selected patch has too little texture. Choose a contrasting edge or colored marker.';
+    }
+    function result(confidence = 0) {
+      return { x: x / Math.max(1, w - 1), y: y / Math.max(1, h - 1), t: lastT,
+        confidence: clamp(confidence, 0, 1), lost, reason, mode };
+    }
+    function fail(message, t) {
+      lost = true; reason = message;
+      if (finite(t)) lastT = t;
+      return result(0);
+    }
+    function step(nextFrame, t) {
+      checkedFrame(nextFrame);
+      if (lost) return result(0);
+      if (nextFrame.width !== w || nextFrame.height !== h) return fail('Video dimensions changed; mark the point again.', t);
+      if (finite(t) && lastT !== null && t <= lastT) return fail('Tracking timestamps must increase.', t);
+      const dt = finite(t) && lastT !== null ? t - lastT : 1 / 20;
+      const predX = clamp(x + clamp(vx * dt, -radius * 0.7, radius * 0.7), 0, w - 1);
+      const predY = clamp(y + clamp(vy * dt, -radius * 0.7, radius * 0.7), 0, h - 1);
+      let nx, ny, confidence;
+      if (mode === 'color') {
+        const candidates = colorCandidates(nextFrame, seed, predX, predY, radius)
+          .filter(c => !c.boundary && c.area / expectedArea >= 0.3 && c.area / expectedArea <= 3 && Math.hypot(c.x - predX, c.y - predY) <= radius)
+          .map(c => ({ ...c, score: 0.48 * (1 - c.error / 0.027) +
+            0.30 * (1 - Math.hypot(c.x - predX, c.y - predY) / radius) +
+            0.22 * Math.exp(-Math.abs(Math.log(c.area / expectedArea))) }))
+          .sort((a, b) => b.score - a.score);
+        if (!candidates.length || candidates[0].score < 0.58) return fail('Colored marker lost or occluded. Add a manual point.', t);
+        if (candidates.length > 1 && candidates[0].score - candidates[1].score < 0.08) return fail('Two similar markers are ambiguous. Add a manual point.', t);
+        const best = candidates[0]; nx = best.x; ny = best.y; confidence = best.score;
+      } else {
+        const gray = new Float32Array(w * h);
+        for (let k = 0, q = 0; k < gray.length; k++, q += 4) gray[k] =
+          0.299 * nextFrame.data[q] + 0.587 * nextFrame.data[q + 1] + 0.114 * nextFrame.data[q + 2];
+        const searchFrame = { width: w, height: h, gray };
+        const scores = [], cx = Math.round(predX), cy = Math.round(predY);
+        let best = { score: -1, x: cx, y: cy };
+        // Exhaustive local integer search avoids aliasing high-frequency patterns
+        // that can make a coarse grid miss the correct feature completely.
+        for (let yy = cy - radius; yy <= cy + radius; yy++) for (let xx = cx - radius; xx <= cx + radius; xx++) {
+          const score = templateScore(searchFrame, template, xx, yy), p = { x: xx, y: yy, score };
+          scores.push(p); if (score > best.score) best = p;
+        }
+        let second = -1;
+        for (const p of scores) if (Math.hypot(p.x - best.x, p.y - best.y) > template.radius && p.score > second) second = p.score;
+        if (best.score < 0.72) return fail('The visual feature no longer matches. Add a manual point.', t);
+        if (second > 0.65 && best.score - second < 0.05) return fail('Repeated features are ambiguous. Add a manual point.', t);
+        nx = best.x; ny = best.y; confidence = best.score;
+      }
+      vx = 0.55 * vx + 0.45 * (nx - x) / Math.max(0.001, dt);
+      vy = 0.55 * vy + 0.45 * (ny - y) / Math.max(0.001, dt);
+      x = nx; y = ny; lastConfidence = confidence;
+      lastT = finite(t) ? t : (lastT === null ? 0 : lastT) + dt;
+      return result(confidence);
+    }
+    return { step, getState: () => result(lost ? 0 : lastConfidence), mode, valid: !lost, reason };
+  }
+  function splitSegments(points, maxGap = Infinity) {
+    if (!Array.isArray(points)) throw new TypeError('Trajectory points must be an array.');
+    const sorted = points.slice().filter(p => p && finite(p.t)).sort((a, b) => a.t - b.t);
+    const segments = []; let segment = [];
+    const finish = () => { if (segment.length) segments.push(segment); segment = []; };
+    for (const p of sorted) {
+      if (p.lost || p.valid === false || !finite(p.x) || !finite(p.y)) { finish(); continue; }
+      const last = segment[segment.length - 1];
+      if (last && (p.t - last.t > maxGap || (p.segment !== undefined && last.segment !== undefined && p.segment !== last.segment))) finish();
+      if (segment.length && p.t === segment[segment.length - 1].t) {
+        const old = segment[segment.length - 1];
+        if (p.source === 'manual' || old.source !== 'manual') segment[segment.length - 1] = p;
+      } else segment.push(p);
+    }
+    finish(); return segments;
+  }
+  function smoothSample(points, subdivisions = 8) {
+    // Shape-preserving parametric cubic Hermite interpolation in time.
+    // No y=f(x) assumption, no overshoot beyond each measured coordinate interval.
+    const segments = splitSegments(points), out = [];
+    subdivisions = clamp(Math.floor(subdivisions) || 1, 1, 40);
+    for (let s = 0; s < segments.length; s++) {
+      const p = segments[s], n = p.length;
+      if (!n) continue;
+      if (n === 1) { out.push({ ...p[0], segment: s, interpolated: false }); continue; }
+      const h = p.slice(1).map((v, i) => v.t - p[i].t);
+      function tangents(key) {
+        const d = h.map((v, i) => (p[i + 1][key] - p[i][key]) / v), m = new Array(n);
+        m[0] = d[0]; m[n - 1] = d[n - 2];
+        for (let i = 1; i < n - 1; i++) {
+          if (d[i - 1] * d[i] <= 0) m[i] = 0;
+          else { const a = 2 * h[i] + h[i - 1], b = h[i] + 2 * h[i - 1]; m[i] = (a + b) / (a / d[i - 1] + b / d[i]); }
+        }
+        return m;
+      }
+      const mx = tangents('x'), my = tangents('y');
+      for (let i = 0; i < n - 1; i++) for (let j = 0; j < subdivisions; j++) {
+        const u = j / subdivisions, u2 = u * u, u3 = u2 * u;
+        const a = 2 * u3 - 3 * u2 + 1, b = u3 - 2 * u2 + u, c = -2 * u3 + 3 * u2, d = u3 - u2;
+        const interpolate = (key, m) => clamp(a * p[i][key] + b * h[i] * m[i] + c * p[i + 1][key] + d * h[i] * m[i + 1], Math.min(p[i][key], p[i + 1][key]), Math.max(p[i][key], p[i + 1][key]));
+        out.push({ ...(j === 0 ? p[i] : {}), t: p[i].t + u * h[i], x: interpolate('x', mx), y: interpolate('y', my), segment: s, interpolated: j !== 0 });
+      }
+      out.push({ ...p[n - 1], segment: s, interpolated: false });
+    }
+    return out;
+  }
+  const api = Object.freeze({ samplingTimes, estimateBackground, foregroundMask, createTracker, splitSegments, smoothSample });
+  root.MotionCore = api;
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this);
+
+</script>
+<script>
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const Core = window.MotionCore;
+  const video = $('video'), live = $('liveVideo'), analysis = $('analysisVideo');
+  const annotation = $('annotationCanvas'), stage = $('stage');
+  const ctx = annotation.getContext('2d');
+  const MAX_OVERLAY = 60;
+  const S = {
+    stream: null, recorder: null, recording: false, live: false, cameraPending: false,
+    loading: false, loaded: false, blob: null, url: null, name: '', duration: 0,
+    generation: 0, busy: null, view: 'original', tab: 'capture', marking: false, facing: 'environment',
+    overlay: null, overlayTimes: [], tracks: [newTrack('A', '#ed454a')], selected: 'A',
+    undo: [], recordStarted: 0, recordTimer: null, displayTime: 0, loop: 0,
+    density: 12, toastTimer: null
+  };
+  function newTrack(id, color) { return { id, color, points: [], seedTime: null }; }
+  function currentTrack() { return S.tracks.find(t => t.id === S.selected); }
+  function fmt(t, decimals = 2) {
+    if (!Number.isFinite(t) || t < 0) t = 0;
+    const m = Math.floor(t / 60);
+    const seconds = (t - m * 60).toFixed(decimals).padStart(decimals ? 3 + decimals : 2, '0');
+    return String(m).padStart(2, '0') + ':' + seconds;
+  }
+  const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
+  const tick = () => new Promise(r => setTimeout(r, 0));
+  const aborted = () => new DOMException('分析已取消', 'AbortError');
+  function check(signal) { if (signal && signal.aborted) throw aborted(); }
+  function hideToast() {
+    clearTimeout(S.toastTimer); S.toastTimer = null;
+    $('toast').hidden = true;
+  }
+  function showToast(message, kind = '') {
+    clearTimeout(S.toastTimer);
+    $('toastMessage').textContent = message;
+    $('toast').classList.remove('error', 'warning', 'success');
+    $('toast').classList.add(kind || 'success');
+    $('toast').hidden = false;
+    S.toastTimer = setTimeout(hideToast, kind === 'error' ? 8000 : kind === 'warning' ? 5500 : 3200);
+  }
+  function conciseStatus(message, kind) {
+    if (/已保留.*可靠跟踪点/.test(message)) return '追踪中断，请在断点处补点';
+    if (kind === 'error' || kind === 'warning') {
+      if (/相机权限未开启/.test(message)) return '请允许相机权限，或导入视频';
+      if (/未找到摄像头/.test(message)) return '未找到相机，请导入视频';
+      if (/此环境不提供网页相机/.test(message)) return '请用系统浏览器打开，或导入视频';
+      if (/取样超过|超过 60 帧/.test(message)) return '取样太多，请在设置里增大间隔';
+      if (/背景发生变化/.test(message)) return '叠影已生成，请检查机位与背景';
+      if (/多数取样未检测/.test(message)) return '叠影已生成，可在设置里降低阈值';
+      if (/定位视频画面/.test(message)) return '等画面稳定后再标点';
+      if (/不要点击黑边/.test(message)) return '请点在视频画面内';
+      const first = message.split(/[。；]/)[0];
+      return first.length > 38 ? first.slice(0, 35) + '…（详见设置）' : first;
+    }
+    if (/^视频已就绪/.test(message)) return '视频已就绪';
+    const overlay = message.match(/^已生成 (\d+) 帧叠影/);
+    if (overlay) return '叠影已生成 · ' + overlay[1] + ' 帧';
+    const tracked = message.match(/^已完成 ([A-Z]) 的本地/);
+    if (tracked) return '轨迹 ' + tracked[1] + ' 已生成';
+    if (/^画面已生成/.test(message)) return '画面已生成，请查看下载列表';
+    if (/^已取消/.test(message)) return '分析已取消';
+    if (/^已撤销/.test(message)) return '已撤销';
+    if (/^已清空/.test(message)) return '已清空';
+    return '';
+  }
+  function status(message, kind = '') {
+    $('status').textContent = message;
+    $('status').className = 'status' + (kind ? ' ' + kind : '');
+    const concise = conciseStatus(message, kind);
+    if (concise) showToast(concise, kind);
+  }
+  function closeSettings() {
+    if ($('settingsDialog').open) $('settingsDialog').close();
+  }
+  function setTab(name) {
+    const names = { capture: 'Capture', overlay: 'Overlay', track: 'Track' };
+    if (!names[name] || S.busy && name !== S.tab) return;
+    if (name !== 'capture' && (!S.loaded || S.live || S.loading || S.recording || S.cameraPending)) return;
+    if (name !== 'track' && S.marking) setMarking(false);
+    S.tab = name;
+    document.body.dataset.mode = name;
+    Object.entries(names).forEach(([key, suffix]) => {
+      $('tab' + suffix).classList.toggle('active', key === name);
+      $('tab' + suffix).setAttribute('aria-selected', String(key === name));
+      $('panel' + suffix).hidden = key !== name;
+    });
+    setView(name === 'overlay' && S.overlay ? 'overlay' : 'original');
+  }
+  function setView(name) {
+    if (name === 'overlay' && !S.overlay) return;
+    S.view = name;
+    if (name === 'overlay') video.pause();
+    $('overlayCanvas').hidden = name !== 'overlay' || !S.overlay;
+    video.hidden = !S.loaded || S.live || name === 'overlay';
+    live.hidden = !S.live;
+    $('originalViewBtn').classList.toggle('active', name === 'original');
+    $('overlayViewBtn').classList.toggle('active', name === 'overlay');
+    $('originalViewBtn').setAttribute('aria-pressed', String(name === 'original'));
+    $('overlayViewBtn').setAttribute('aria-pressed', String(name === 'overlay'));
+    $('modeLabel').textContent = S.live ? '相机预览' : name === 'overlay' ? '等间隔叠影 · ' + S.overlayTimes.length + ' 帧' : '原视频';
+    draw();
+  }
+  function showTip(text) {
+    $('stageTip').textContent = text || '';
+    $('stageTip').hidden = !text;
+  }
+  function setMarking(on) {
+    S.marking = !!on && S.loaded && !S.busy && !S.live;
+    annotation.classList.toggle('marking', S.marking);
+    $('markBtn').classList.toggle('is-active', S.marking);
+    $('markText').textContent = S.marking ? '完成' : '标点';
+    if (S.marking) {
+      setView('original'); video.pause();
+      showTip('点一下要观察的位置');
+    } else showTip('');
+  }
+  function sync() {
+    const blocked = !!S.busy || S.loading || S.recording || S.cameraPending;
+    const usable = S.loaded && !blocked && !S.live;
+    ['playBtn', 'restartBtn', 'prevBtn', 'nextBtn', 'timeline', 'speed',
+      'saveImageBtn', 'generateOverlayBtn',
+      'markBtn', 'saveVideoBtn'].forEach(id => $(id).disabled = !usable);
+    $('overlayViewBtn').disabled = !S.overlay || blocked || S.live;
+    $('originalViewBtn').disabled = blocked || S.live;
+    $('addTrackBtn').disabled = !usable || S.tracks.length >= 2;
+    $('autoTrackBtn').disabled = !usable || !currentTrack().points.some(p => p.source === 'manual');
+    $('undoBtn').disabled = !usable || !S.undo.length;
+    $('clearTrackBtn').disabled = !usable || !currentTrack().points.length;
+    $('exportDataBtn').disabled = !usable || !S.tracks.some(t => t.points.some(p => !p.lost));
+    ['importBtn', 'systemCameraBtn'].forEach(id => $(id).disabled = blocked);
+    $('openCameraBtn').disabled = blocked;
+    $('recordBtn').disabled = !!S.busy || S.loading || S.cameraPending;
+    $('switchCameraBtn').disabled = !S.stream || blocked;
+    $('switchCameraBtn').hidden = !S.live;
+    $('saveImageBtn').hidden = !S.loaded;
+    $('playerBar').hidden = !S.loaded || S.live;
+    $('tabCapture').disabled = blocked;
+    $('tabOverlay').disabled = !usable;
+    $('tabTrack').disabled = !usable;
+    $('openCameraBtn').textContent = S.stream ? '关闭相机' : '打开相机';
+    $('recordText').textContent = S.recording ? '停止' : S.stream ? '开始' : '拍摄';
+    $('recordIcon').setAttribute('href', S.recording ? '#i-stop' : '#i-record');
+    $('recordBtn').classList.toggle('danger', S.recording);
+    $('recordClock').hidden = !S.recording;
+    ['rangeStart', 'rangeEnd', 'sampleInterval', 'overlayMode', 'sampleLabels',
+      'trackSelect', 'trackMode', 'trackStep'].forEach(id => $(id).disabled = blocked || S.live);
+    $('densityChoices').querySelectorAll('[data-density]').forEach(button => { button.disabled = !usable; });
+    $('emptyState').hidden = S.loaded || S.live || S.loading;
+    $('stageLabel').hidden = !S.loaded && !S.live;
+    $('busyBox').hidden = !S.busy;
+    document.body.classList.toggle('busy', !!S.busy);
+    const track = currentTrack();
+    $('trackCount').textContent = track.id + '：' + track.points.filter(p => p.source === 'manual').length +
+      ' 个手动点 · ' + track.points.filter(p => p.source === 'tracked').length + ' 个自动点';
+    updateSampling();
+    updateTime();
+  }
+  function updateTime() {
+    const time = S.loaded ? video.currentTime || 0 : 0;
+    const shortTime = t => { const n = Math.max(0, Math.floor(t || 0)); return Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0'); };
+    $('currentTime').textContent = shortTime(time);
+    $('durationTime').textContent = shortTime(S.duration);
+    $('timeline').max = String(S.duration || 1);
+    $('timeline').value = String(clamp(time, 0, S.duration || 1));
+    const playing = !video.paused && !video.ended;
+    $('playIcon').setAttribute('href', playing ? '#i-pause' : '#i-play');
+    $('playBtn').setAttribute('aria-label', playing ? '暂停视频' : '播放视频');
+  }
+  function frameRect(w, h) {
+    const vw = video.videoWidth || 16, vh = video.videoHeight || 9;
+    const scale = Math.min(w / vw, h / vh);
+    const rw = vw * scale, rh = vh * scale;
+    return { x: (w - rw) / 2, y: (h - rh) / 2, w: rw, h: rh };
+  }
+  function resize() {
+    const r = stage.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    annotation.width = Math.max(1, Math.round(r.width * dpr));
+    annotation.height = Math.max(1, Math.round(r.height * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+  function trajectorySegments(track, until) {
+    const out = [];
+    Core.splitSegments(track.points).forEach(segment => {
+      let a = segment;
+      if (Number.isFinite(until)) {
+        a = segment.filter(p => p.t <= until + .001);
+        const next = segment.find(p => p.t > until + .001);
+        const last = a[a.length - 1];
+        if (last && next && until > last.t) {
+          const f = (until - last.t) / (next.t - last.t);
+          a = a.concat([{ t: until, x: last.x + (next.x - last.x) * f,
+            y: last.y + (next.y - last.y) * f, source: 'interpolated', segment: last.segment }]);
+        }
+      }
+      if (a.length) out.push(a);
+    });
+    return out;
+  }
+  function drawTrajectory(target, rect, time, full) {
+    if (!$('showPaths').checked) return;
+    const map = p => ({ x: rect.x + p.x * rect.w, y: rect.y + p.y * rect.h });
+    const useSmooth = $('smoothPath').checked;
+    target.save();
+    target.beginPath(); target.rect(rect.x, rect.y, rect.w, rect.h); target.clip();
+    S.tracks.forEach(track => {
+      const segments = trajectorySegments(track, full ? Infinity : time);
+      segments.forEach(points => {
+        const fitted = useSmooth && points.length > 2 ? Core.smoothSample(points, 5) : points;
+        const manualOnly = !points.some(p => p.source === 'tracked');
+        if (fitted.length > 1) {
+          target.strokeStyle = track.color; target.lineWidth = 2.5;
+          target.setLineDash(manualOnly ? [7, 5] : []);
+          target.lineCap = 'round'; target.lineJoin = 'round'; target.beginPath();
+          fitted.forEach((p, i) => { const q = map(p); if (!i) target.moveTo(q.x, q.y); else target.lineTo(q.x, q.y); });
+          target.stroke(); target.setLineDash([]);
+          if ($('showArrows').checked) {
+            let distance = 0;
+            for (let i = 1; i < fitted.length; i++) {
+              const a = map(fitted[i - 1]), b = map(fitted[i]);
+              const len = Math.hypot(b.x - a.x, b.y - a.y);
+              distance += len;
+              if ((distance > 68 || i === fitted.length - 1 && distance > 23) && len > .15) {
+                const angle = Math.atan2(b.y - a.y, b.x - a.x);
+                target.save(); target.translate(b.x, b.y); target.rotate(angle);
+                target.fillStyle = track.color; target.beginPath(); target.moveTo(1, 0);
+                target.lineTo(-9, -4.6); target.lineTo(-7, 0); target.lineTo(-9, 4.6); target.closePath(); target.fill();
+                target.restore(); distance = 0;
+              }
+            }
+          }
+        }
+        points.forEach((p, i) => {
+          if (p.source === 'interpolated') return;
+          if (p.source === 'tracked' && points.length > 100 && i % 3) return;
+          const q = map(p), manual = p.source === 'manual';
+          target.beginPath(); target.arc(q.x, q.y, manual ? 4.8 : 2.1, 0, Math.PI * 2);
+          target.fillStyle = manual ? track.color : '#ffffffd9';
+          target.fill(); target.lineWidth = manual ? 1.5 : 1.4;
+          target.strokeStyle = manual ? '#fff' : track.color; target.stroke();
+          if (manual && $('pointTimes').checked) {
+            target.font = 'bold 12px sans-serif'; target.lineWidth = 3; target.strokeStyle = '#172b3ad0';
+            const label = track.id + ' · ' + p.t.toFixed(2) + 's';
+            target.strokeText(label, q.x + 9, q.y - 9); target.fillStyle = '#fff'; target.fillText(label, q.x + 9, q.y - 9);
+          }
+        });
+      });
+      // The moving marker is shown only between supported observations in one valid segment.
+      Core.splitSegments(track.points).forEach(points => {
+        if (!points.length || time < points[0].t - .025 || time > points[points.length - 1].t + .025) return;
+        let a = points[0], b = a;
+        for (let i = 1; i < points.length; i++) { b = points[i]; if (b.t >= time) break; a = b; }
+        const f = b.t > a.t ? clamp((time - a.t) / (b.t - a.t), 0, 1) : 0;
+        const q = map({ x: a.x + (b.x - a.x) * f, y: a.y + (b.y - a.y) * f });
+        target.beginPath(); target.arc(q.x, q.y, 7, 0, Math.PI * 2);
+        target.fillStyle = track.color; target.fill(); target.strokeStyle = '#fff'; target.lineWidth = 2.2; target.stroke();
+      });
+    });
+    target.restore();
+  }
+  function draw() {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    ctx.clearRect(0, 0, w, h);
+    if (!S.loaded || S.live) return;
+    drawTrajectory(ctx, frameRect(w, h), video.currentTime || 0, S.view === 'overlay' || $('fullPath').checked);
+  }
+  function animate() {
+    const loop = ++S.loop;
+    function next(now, metadata) {
+      if (loop !== S.loop) return;
+      S.displayTime = metadata && Number.isFinite(metadata.mediaTime) ? metadata.mediaTime : video.currentTime;
+      updateTime(); draw();
+      if (!video.paused && !video.ended) {
+        if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(next);
+        else requestAnimationFrame(next);
+      }
+    }
+    if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(next);
+    else requestAnimationFrame(next);
+  }
+  function waitForMedia(el, event, timeout = 14000) {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => done(new Error('视频载入超时，请尝试较短的 MP4 / WebM 视频。')), timeout);
+      const good = () => done();
+      const bad = () => done(new Error('浏览器无法解码这个视频，请尝试 MP4（H.264）或 WebM 格式。'));
+      function done(error) {
+        clearTimeout(timer); el.removeEventListener(event, good); el.removeEventListener('error', bad);
+        if (error) reject(error); else resolve();
+      }
+      el.addEventListener(event, good, { once: true }); el.addEventListener('error', bad, { once: true });
+    });
+  }
+  async function mediaDuration(el, fallback) {
+    if (Number.isFinite(el.duration) && el.duration > 0) return el.duration;
+    if (Number.isFinite(fallback) && fallback > 0) return fallback;
+    // Some MediaRecorder WebM files omit duration. Seeking to the end lets the decoder discover it.
+    return await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => finish(), 6500);
+      function changed() { if (Number.isFinite(el.duration) && el.duration > 0) finish(); }
+      function finish() {
+        clearTimeout(timer); el.removeEventListener('durationchange', changed); el.removeEventListener('seeked', changed);
+        const duration = el.duration;
+        try { el.currentTime = 0; } catch (_) {}
+        if (Number.isFinite(duration) && duration > 0) resolve(duration);
+        else reject(new Error('无法读取视频时长。请用系统相机保存为 MP4 后再导入。'));
+      }
+      el.addEventListener('durationchange', changed); el.addEventListener('seeked', changed);
+      try { el.currentTime = 1e10; } catch (_) { finish(); }
+    });
+  }
+  function stopStream() {
+    if (S.stream) S.stream.getTracks().forEach(t => t.stop());
+    S.stream = null; live.srcObject = null; S.live = false; live.hidden = true;
+  }
+  function cancelJob() { if (S.busy) S.busy.controller.abort(); }
+  async function loadVideo(blob, filename, fallbackDuration = null) {
+    if (!blob || !blob.size) { status('没有收到有效视频，请重新拍摄或导入。', 'error'); return; }
+    if (blob.size > 500 * 1024 * 1024) { status('视频超过 500 MB，请先剪短再导入。', 'error'); return; }
+    closeSettings(); hideToast();
+    cancelJob(); setMarking(false); video.pause(); stopStream();
+    const generation = ++S.generation;
+    S.loading = true; S.loaded = false; S.busy = null; S.overlay = null; S.overlayTimes = [];
+    S.duration = 0; setTab('capture');
+    $('sourceInfo').textContent = '正在载入新视频…';
+    S.tracks = [newTrack('A', '#ed454a')]; S.selected = 'A'; S.undo = [];
+    $('trackSelect').innerHTML = '<option value="A">观察点 A · 红色</option>';
+    const oldURL = S.url;
+    S.url = URL.createObjectURL(blob); S.blob = blob; S.name = filename || '运动录像';
+    video.removeAttribute('src'); analysis.removeAttribute('src'); video.load(); analysis.load();
+    if (oldURL) URL.revokeObjectURL(oldURL);
+    status('正在载入视频…'); showTip('正在读取视频…'); sync();
+    try {
+      const ready = waitForMedia(video, 'loadeddata');
+      video.src = S.url; video.load();
+      await ready;
+      if (generation !== S.generation) return;
+      S.duration = await mediaDuration(video, fallbackDuration);
+      if (generation !== S.generation) return;
+      if (!video.videoWidth || !video.videoHeight) throw new Error('视频没有可读取的画面。');
+      const analysisReady = waitForMedia(analysis, 'loadeddata');
+      analysis.src = S.url; analysis.load(); await analysisReady;
+      if (generation !== S.generation) return;
+      S.loaded = true; video.currentTime = 0; video.playbackRate = Number($('speed').value);
+      $('rangeStart').value = '0'; $('rangeEnd').value = String(S.duration);
+      $('rangeStart').max = String(S.duration); $('rangeEnd').max = String(S.duration);
+      applyDensity(12);
+      const strong = document.createElement('strong'); strong.textContent = S.name;
+      $('sourceInfo').replaceChildren(strong, document.createTextNode(video.videoWidth + ' × ' + video.videoHeight + ' · ' + fmt(S.duration) + ' · ' + (blob.size / 1024 / 1024).toFixed(1) + ' MB'));
+      setTab('capture'); showTip('');
+      status('视频已就绪。可重播、生成叠影，或在轨迹面板标记观察点。');
+    } catch (error) {
+      if (generation === S.generation) {
+        S.loaded = false; status(error.message || '视频载入失败。', 'error');
+        video.removeAttribute('src'); analysis.removeAttribute('src'); video.load(); analysis.load();
+        if (S.url) URL.revokeObjectURL(S.url);
+        S.url = null; S.blob = null; S.duration = 0; showTip('');
+        $('sourceInfo').textContent = '尚未载入有效视频'; setView('original');
+      }
+    } finally {
+      if (generation === S.generation) { S.loading = false; sync(); resize(); }
+    }
+  }
+  function cameraError(error) {
+    if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') return '相机权限未开启。请在浏览器网站设置中允许相机；也可以使用“导入视频”。';
+    if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') return '未找到摄像头。请连接摄像头，或导入已有视频。';
+    if (error.name === 'NotReadableError' || error.name === 'TrackStartError') return '摄像头可能正被其他应用占用。关闭占用相机的应用后再试。';
+    if (error.name === 'OverconstrainedError') return '当前摄像头不支持此配置，请切换镜头或导入视频。';
+    return '相机暂时无法开启：' + (error.message || error.name || '未知错误') + '。可先用系统相机拍摄后导入。';
+  }
+  async function openCamera(force = false) {
+    if (S.recording || S.busy || S.loading || S.cameraPending) return;
+    closeSettings();
+    if (S.stream && !force) {
+      stopStream(); setView('original'); status('相机已关闭。'); sync(); return;
+    }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      status('此环境不提供网页相机。请用 Safari / Chrome / Edge 直接打开 HTTPS 链接，或先拍摄再导入。', 'error'); return;
+    }
+    video.pause(); setMarking(false); stopStream(); S.cameraPending = true; sync();
+    status('正在请求相机权限…');
+    try {
+      S.stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { ideal: S.facing }, width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30, max: 30 } },
+        audio: false
+      });
+      live.srcObject = S.stream; await live.play();
+      S.live = true; setView('original'); setTab('capture');
+      status('相机已开启。固定机位后点击“开始”；结束后自动进入重播。');
+    } catch (error) { stopStream(); setView('original'); status(cameraError(error), 'error'); }
+    finally { S.cameraPending = false; sync(); }
+  }
+  function pickMime() {
+    const types = ['video/mp4;codecs=avc1.42E01E', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'];
+    return types.find(t => window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(t)) || '';
+  }
+  function startOrStopRecording() {
+    if (S.recording) { if (S.recorder && S.recorder.state !== 'inactive') S.recorder.stop(); return; }
+    if (S.busy || S.loading || S.cameraPending) return;
+    closeSettings();
+    if (!S.stream) { openCamera(); return; }
+    if (!window.MediaRecorder) { status('此浏览器不支持网页录像，请用“使用系统相机 / 选择视频”。', 'error'); return; }
+    const chunks = []; let failed = false, mime = pickMime();
+    try {
+      try { S.recorder = new MediaRecorder(S.stream, mime ? { mimeType: mime, videoBitsPerSecond: 5000000 } : {}); }
+      catch (_) { S.recorder = new MediaRecorder(S.stream); }
+      const recorder = S.recorder;
+      recorder.ondataavailable = event => { if (event.data && event.data.size) chunks.push(event.data); };
+      recorder.onerror = () => {
+        failed = true; status('录像失败，请改用系统相机拍摄并导入。', 'error');
+        if (recorder.state !== 'inactive') recorder.stop();
+      };
+      recorder.onstop = async () => {
+        const elapsed = (performance.now() - S.recordStarted) / 1000;
+        clearInterval(S.recordTimer); S.recordTimer = null; S.recording = false; S.recorder = null;
+        stopStream(); setView('original'); sync();
+        if (failed || !chunks.length) { status('未获得有效录像，请重新录制。', 'error'); return; }
+        const type = recorder.mimeType || (chunks[0] && chunks[0].type) || 'video/webm';
+        const blob = new Blob(chunks, { type }); chunks.length = 0;
+        const extension = type.includes('mp4') ? '.mp4' : '.webm';
+        await loadVideo(blob, '运动录像_' + new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19) + extension, elapsed);
+      };
+      recorder.start(1000);
+      S.recording = true; S.recordStarted = performance.now();
+      $('recordTime').textContent = '00:00';
+      S.recordTimer = setInterval(() => {
+        const elapsed = (performance.now() - S.recordStarted) / 1000;
+        $('recordTime').textContent = fmt(elapsed, 0);
+        if (elapsed >= 60 && recorder.state === 'recording') recorder.stop();
+      }, 200);
+      status('正在录制，最长 60 秒。结束后请先下载原视频。'); sync();
+    } catch (error) {
+      S.recording = false; S.recorder = null; clearInterval(S.recordTimer);
+      status('无法开始录像：' + error.message + '。可以先拍摄后导入。', 'error'); sync();
+    }
+  }
+  async function togglePlay(restart = false) {
+    if (!S.loaded || S.busy || S.live) return;
+    setView('original');
+    if (restart) video.currentTime = 0;
+    if (video.paused || restart) {
+      if (video.ended || video.currentTime >= S.duration - .01) video.currentTime = 0;
+      try { await video.play(); } catch (_) { status('播放未启动，请再次点播放按钮，或使用系统浏览器打开。', 'warning'); }
+    } else video.pause();
+    updateTime();
+  }
+  function seek(t) {
+    if (!S.loaded || S.busy || S.live) return;
+    video.pause(); setView('original');
+    video.currentTime = clamp(t, 0, Math.max(0, S.duration - .001));
+    updateTime(); draw();
+  }
+  function bounds() {
+    const start = Number($('rangeStart').value), end = Number($('rangeEnd').value), interval = Number($('sampleInterval').value);
+    if (![start, end, interval].every(Number.isFinite) || start < 0 || end <= start || end > S.duration + .02 || interval < .05) {
+      throw new Error('请设置有效范围：开始时间小于结束时间，结束时间不超过视频时长，间隔至少 0.05 秒。');
+    }
+    return { start, end: Math.min(end, S.duration), interval };
+  }
+  function updateDensitySelection() {
+    $('densityChoices').querySelectorAll('[data-density]').forEach(button => {
+      const active = Number(button.dataset.density) === S.density;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+  }
+  function applyDensity(count) {
+    if (![6, 12, 20].includes(count)) return;
+    S.density = count;
+    if (S.loaded) {
+      const start = Number($('rangeStart').value), end = Number($('rangeEnd').value);
+      // The default range is the complete video. Explicit density changes only
+      // replace the interval; a teacher's manually chosen range stays intact.
+      const span = Number.isFinite(start) && Number.isFinite(end) && end > start ? end - start : S.duration;
+      const interval = Math.max(.05, Math.ceil((span / (count - 1)) / .05) * .05);
+      $('sampleInterval').value = interval.toFixed(2);
+    }
+    updateDensitySelection(); updateSampling();
+  }
+  function updateSampling() {
+    $('opacityValue').textContent = Math.round(Number($('opacity').value) * 100) + '%';
+    $('thresholdValue').textContent = $('threshold').value;
+    const full = $('overlayMode').value === 'full';
+    $('threshold').disabled = full || !!S.busy || S.loading || S.recording || S.live;
+    $('opacity').disabled = full || !!S.busy || S.loading || S.recording || S.live;
+    if (!S.loaded) { $('sampleCount').textContent = '先录制或导入视频。每次最多 60 帧。'; return; }
+    try {
+      const { start, end, interval } = bounds();
+      const times = Core.samplingTimes(start, end, interval, MAX_OVERLAY);
+      $('sampleCount').textContent = '将取 ' + times.length + ' 帧，间隔 ' + interval.toFixed(2) + ' 秒；最后取样 ' + times[times.length - 1].toFixed(2) + ' 秒。';
+    } catch (error) {
+      $('sampleCount').textContent = error.code === 'TOO_MANY_FRAMES' ?
+        '需要 ' + error.requestedFrames + ' 帧，超过 60 帧上限。请增大间隔或缩短范围。' : error.message;
+    }
+  }
+  function beginJob(label) {
+    if (S.busy) throw new Error('已有分析正在进行。');
+    const job = { controller: new AbortController(), generation: S.generation, label };
+    S.busy = job; video.pause(); setMarking(false); hideToast();
+    $('progress').value = 0; $('progressText').textContent = label; sync();
+    return job;
+  }
+  function jobProgress(job, fraction, message) {
+    check(job.controller.signal);
+    if (job.generation !== S.generation) throw aborted();
+    $('progress').value = clamp(fraction, 0, 1); $('progressText').textContent = message;
+  }
+  function endJob(job) { if (S.busy === job) { S.busy = null; sync(); draw(); } }
+  function analysisSize(limit = 640) {
+    const ratio = Math.min(1, limit / video.videoWidth, limit / video.videoHeight);
+    return { w: Math.max(2, Math.round(video.videoWidth * ratio)), h: Math.max(2, Math.round(video.videoHeight * ratio)) };
+  }
+  const frameCanvas = document.createElement('canvas');
+  const frameCtx = frameCanvas.getContext('2d', { willReadFrequently: true });
+  async function frameAt(time, size, signal) {
+    check(signal);
+    const target = clamp(time, 0, Math.max(0, S.duration - .003));
+    if (frameCanvas.width !== size.w || frameCanvas.height !== size.h) {
+      frameCanvas.width = size.w; frameCanvas.height = size.h;
+    }
+    let actualTime = target;
+    if (analysis.seeking || Math.abs(analysis.currentTime - target) > .0005 || analysis.readyState < 2) {
+      await new Promise((resolve, reject) => {
+        let done = false, frameReady = false, seekReady = false, callback = null, grace = null;
+        const timeout = setTimeout(() => finish(new Error('视频逐帧读取超时，请缩短视频或转换为 MP4 后重试。')), 10000);
+        const onAbort = () => finish(aborted());
+        const onError = () => finish(new Error('视频解码失败。'));
+        function finish(error) {
+          if (done) return; done = true; clearTimeout(timeout); clearTimeout(grace);
+          analysis.removeEventListener('seeked', onSeek); analysis.removeEventListener('error', onError);
+          signal.removeEventListener('abort', onAbort);
+          if (callback !== null && analysis.cancelVideoFrameCallback) analysis.cancelVideoFrameCallback(callback);
+          if (error) reject(error); else resolve();
+        }
+        function onSeek() {
+          seekReady = true;
+          if (frameReady || !analysis.requestVideoFrameCallback) finish();
+          else grace = setTimeout(() => finish(), 120);
+        }
+        analysis.addEventListener('seeked', onSeek, { once: true });
+        analysis.addEventListener('error', onError, { once: true });
+        signal.addEventListener('abort', onAbort, { once: true });
+        if (analysis.requestVideoFrameCallback) callback = analysis.requestVideoFrameCallback((now, metadata) => {
+          actualTime = metadata.mediaTime; frameReady = true; if (seekReady) finish();
+        });
+        try { analysis.currentTime = target; } catch (error) { finish(error); }
+      });
+    }
+    check(signal);
+    if (analysis.readyState < 2) throw new Error('当前视频帧尚未就绪。');
+    frameCtx.drawImage(analysis, 0, 0, size.w, size.h);
+    const frame = frameCtx.getImageData(0, 0, size.w, size.h);
+    frame.actualTime = actualTime; return frame;
+  }
+  async function makeOverlay() {
+    if (!S.loaded || S.busy || S.live) return;
+    let times, range;
+    try { range = bounds(); times = Core.samplingTimes(range.start, range.end, range.interval, MAX_OVERLAY); }
+    catch (error) {
+      status(error.code === 'TOO_MANY_FRAMES' ? '取样超过 60 帧，请增大取样间隔或缩短时间范围。不会自动改变你的间隔。' : error.message, 'error'); return;
+    }
+    if (times.length < 2) { status('至少需要两次取样，请缩短间隔或扩大时间范围。', 'warning'); return; }
+    const mode = $('overlayMode').value, opacity = Number($('opacity').value), threshold = Number($('threshold').value);
+    const labels = $('sampleLabels').checked;
+    const job = beginJob('准备叠影…'), signal = job.controller.signal;
+    const size = analysisSize(800);
+    const out = document.createElement('canvas'); out.width = size.w; out.height = size.h;
+    const target = out.getContext('2d');
+    const layer = document.createElement('canvas'); layer.width = size.w; layer.height = size.h;
+    const layerCtx = layer.getContext('2d');
+    let badFrames = 0, blankFrames = 0;
+    try {
+      let background = null;
+      if (mode === 'foreground') {
+        const count = Math.min(9, times.length);
+        const samples = [];
+        for (let i = 0; i < count; i++) {
+          const t = times[Math.round(i * (times.length - 1) / Math.max(1, count - 1))];
+          samples.push(await frameAt(t, size, signal));
+          jobProgress(job, .23 * (i + 1) / count, '准备叠影 ' + (i + 1) + '/' + count);
+        }
+        background = Core.estimateBackground(samples);
+        target.putImageData(new ImageData(background, size.w, size.h), 0, 0);
+        samples.length = 0;
+      }
+      const timeLabels = [];
+      for (let i = 0; i < times.length; i++) {
+        const frame = await frameAt(times[i], size, signal);
+        if (mode === 'foreground') {
+          const mask = Core.foregroundMask(frame, background, threshold);
+          if (mask.foregroundRatio > .4) badFrames++;
+          if (mask.count < 8) blankFrames++;
+          for (let p = 0; p < mask.length; p++) frame.data[p * 4 + 3] = mask[p];
+          layerCtx.putImageData(frame, 0, 0);
+          target.globalAlpha = opacity * (.52 + .48 * i / Math.max(1, times.length - 1));
+          target.drawImage(layer, 0, 0); target.globalAlpha = 1;
+          if (labels && mask.centroid) timeLabels.push({ x: mask.centroid.x * size.w, y: mask.centroid.y * size.h, t: times[i] });
+        } else {
+          layerCtx.putImageData(frame, 0, 0);
+          target.globalAlpha = 1 / (i + 1); target.drawImage(layer, 0, 0); target.globalAlpha = 1;
+        }
+        jobProgress(job, .23 + .77 * (i + 1) / times.length, '生成叠影 ' + (i + 1) + '/' + times.length);
+        await tick();
+      }
+      timeLabels.forEach(p => {
+        target.font = '600 11px sans-serif'; const text = p.t.toFixed(2) + 's';
+        const width = target.measureText(text).width;
+        const x = clamp(p.x - width / 2, 3, size.w - width - 7), y = clamp(p.y + 24, 17, size.h - 4);
+        target.fillStyle = '#10202edb'; target.fillRect(x - 3, y - 13, width + 6, 17);
+        target.fillStyle = '#fff'; target.fillText(text, x, y);
+      });
+      check(signal);
+      if (job.generation !== S.generation) throw aborted();
+      S.overlay = out; S.overlayTimes = times;
+      const display = $('overlayCanvas'); display.width = size.w; display.height = size.h;
+      display.getContext('2d').drawImage(out, 0, 0);
+      setView('overlay');
+      let text = '已生成 ' + times.length + ' 帧叠影，严格间隔 ' + range.interval.toFixed(2) + ' 秒。';
+      if (mode === 'full') text += '整帧模式为等权平均；运动较小的物体可能较淡。';
+      else text += '较早的物体较浅，较晚的物体较深。';
+      if (badFrames > times.length / 4) text += '较多背景发生变化，请检查机位或提高阈值。';
+      if (blankFrames > times.length / 2) text += '多数取样未检测到明显移动，可降低阈值或改用整帧模式。';
+      status(text, badFrames > times.length / 4 || blankFrames > times.length / 2 ? 'warning' : '');
+    } catch (error) {
+      status(error.name === 'AbortError' ? '已取消叠影分析，保留上一次结果。' : '叠影生成失败：' + error.message, error.name === 'AbortError' ? '' : 'error');
+    } finally { endJob(job); }
+  }
+  function snapshot() {
+    S.undo.push({ tracks: JSON.parse(JSON.stringify(S.tracks)), selected: S.selected });
+    if (S.undo.length > 20) S.undo.shift();
+  }
+  function rebuildTracks() {
+    const select = $('trackSelect'); select.replaceChildren();
+    S.tracks.forEach(t => {
+      const option = document.createElement('option'); option.value = t.id;
+      option.textContent = '观察点 ' + t.id + (t.id === 'A' ? ' · 红色' : ' · 橙色'); select.append(option);
+    });
+    select.value = S.selected;
+  }
+  function addPoint(event) {
+    if (!S.marking || S.busy || !S.loaded || S.live) return;
+    if (video.seeking) { status('正在定位视频画面，请等画面稳定后再标点。', 'warning'); return; }
+    const box = annotation.getBoundingClientRect(), rect = frameRect(box.width, box.height);
+    const x = event.clientX - box.left, y = event.clientY - box.top;
+    if (x < rect.x || y < rect.y || x > rect.x + rect.w || y > rect.y + rect.h) {
+      status('请点击视频画面内的物体，不要点击黑边。', 'warning'); return;
+    }
+    event.preventDefault(); video.pause(); snapshot();
+    const track = currentTrack(), t = video.currentTime;
+    // A correction removes only automatic results after this time; later manual evidence is preserved.
+    track.points = track.points.filter(p => (p.source === 'manual' || p.t < t - .008) && !(p.source === 'manual' && Math.abs(p.t - t) < .008));
+    const previous = track.points.filter(p => p.t < t).sort((a, b) => a.t - b.t).pop();
+    const segment = previous ? (previous.segment || 0) + (previous.lost ? 1 : 0) : 0;
+    track.points.push({ t, x: (x - rect.x) / rect.w, y: (y - rect.y) / rect.h, confidence: 1, source: 'manual', segment });
+    track.points.sort((a, b) => a.t - b.t); track.seedTime = t;
+    status('已在 ' + t.toFixed(2) + ' 秒标记 ' + track.id + '。可以向后播放继续补点，或从此处自动追踪。');
+    showTip('移动时间轴，继续标点');
+    sync(); draw();
+  }
+  async function autoTrack() {
+    if (!S.loaded || S.busy || S.live) return;
+    const track = currentTrack();
+    const manuals = track.points.filter(p => p.source === 'manual');
+    const seed = manuals.find(p => p.t === track.seedTime) || manuals[manuals.length - 1];
+    if (!seed) { status('请先在视频中点击一个观察点。', 'warning'); return; }
+    const interval = Number($('trackStep').value), size = analysisSize(640);
+    const nextManual = manuals.filter(p => p.t > seed.t + .01).sort((a, b) => a.t - b.t)[0];
+    const end = Math.min(S.duration - .003, seed.t + 30, nextManual ? nextManual.t - .003 : Infinity);
+    if (end - seed.t < interval) { status('该标记后没有足够的分析时间，请向前移动并重新标记。', 'warning'); return; }
+    const times = Core.samplingTimes(seed.t, end, interval, 1000);
+    const mode = $('trackMode').value, job = beginJob('追踪 0%'), signal = job.controller.signal;
+    const pending = []; let lost = null, tracker = null;
+    try {
+      const initial = await frameAt(seed.t, size, signal);
+      tracker = Core.createTracker(initial, seed.x, seed.y, { mode, searchRadius: 38, patchSize: 21, t: seed.t });
+      if (!tracker.valid) throw new Error('该位置的颜色或纹理不够清晰。请标记醒目的小色点、边角，或改用手动补点。');
+      for (let i = 1; i < times.length; i++) {
+        const frame = await frameAt(times[i], size, signal);
+        const p = tracker.step(frame, times[i]);
+        if (p.lost) {
+          lost = { t: times[i], lost: true, source: 'lost', segment: seed.segment || 0, reason: p.reason };
+          break;
+        }
+        pending.push({ t: times[i], x: p.x, y: p.y, confidence: p.confidence, source: 'tracked', segment: seed.segment || 0 });
+        jobProgress(job, i / (times.length - 1), '追踪 ' + Math.round(i / (times.length - 1) * 100) + '%');
+        if (i % 3 === 0) await tick();
+      }
+      check(signal);
+      if (job.generation !== S.generation) throw aborted();
+      snapshot();
+      track.points = track.points.filter(p => p.source === 'manual' || p.t < seed.t - .008);
+      track.points.push(...pending); if (lost) track.points.push(lost);
+      track.points.sort((a, b) => a.t - b.t);
+      $('showPaths').checked = true; setView('original');
+      if (lost) status('已保留 ' + pending.length + ' 个可靠跟踪点；在 ' + lost.t.toFixed(2) + ' 秒附近无法可靠追踪。请播放核对，在该处手动补点后重试；未对丢失部分编造路径。', 'warning');
+      else status('已完成 ' + track.id + ' 的本地' + (tracker.mode === 'color' ? '颜色' : '纹理') + '追踪，共 ' + pending.length + ' 个自动点。请重播核对；偏移处暂停并手动补点。');
+    } catch (error) {
+      status(error.name === 'AbortError' ? '已取消追踪，原有标记保持不变。' : error.message, error.name === 'AbortError' ? '' : 'error');
+    } finally { endJob(job); }
+  }
+  function download(blob, name) {
+    const url = URL.createObjectURL(blob), link = document.createElement('a');
+    link.href = url; link.download = name; link.rel = 'noopener'; document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  }
+  async function saveImage() {
+    if (!S.loaded || S.live || S.busy) return;
+    const size = analysisSize(1600), out = document.createElement('canvas');
+    out.width = size.w; out.height = size.h + 30;
+    const target = out.getContext('2d');
+    target.fillStyle = '#1b2730'; target.fillRect(0, 0, out.width, out.height);
+    target.drawImage(S.view === 'overlay' && S.overlay ? S.overlay : video, 0, 0, size.w, size.h);
+    drawTrajectory(target, { x: 0, y: 0, w: size.w, h: size.h }, video.currentTime, S.view === 'overlay' || $('fullPath').checked);
+    target.fillStyle = '#f4f7fa'; target.fillRect(0, size.h, size.w, 30); target.fillStyle = '#344b5a'; target.font = '12px sans-serif';
+    const label = '各种各样的运动 · ' + (S.view === 'overlay' ? '等间隔叠影 ' + S.overlayTimes.length + ' 帧' : 't = ' + video.currentTime.toFixed(2) + 's') + ' · mutiw';
+    target.fillText(label, 10, size.h + 20);
+    out.toBlob(blob => {
+      if (blob) { download(blob, '运动观察_' + (S.view === 'overlay' ? '叠影' : '轨迹') + '_' + Date.now() + '.png'); status('画面已生成并请求下载。手机上请在下载列表或分享菜单中保存。'); }
+      else status('画面导出失败，请重试。', 'error');
+    }, 'image/png');
+  }
+  function exportData() {
+    const rows = [['观察点', '时间_秒', 'x_比例', 'y_比例', '来源', '置信度', '分段']];
+    S.tracks.forEach(track => track.points.forEach(p => rows.push([track.id, p.t.toFixed(5),
+      Number.isFinite(p.x) ? p.x.toFixed(6) : '', Number.isFinite(p.y) ? p.y.toFixed(6) : '',
+      p.source, Number.isFinite(p.confidence) ? p.confidence.toFixed(4) : '', p.segment || 0])));
+    download(new Blob(['\ufeff' + rows.map(r => r.join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), '运动观察点_' + Date.now() + '.csv');
+  }
+  document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => setTab(button.dataset.tab)));
+  $('settingsBtn').addEventListener('click', () => {
+    if (!$('settingsDialog').open) $('settingsDialog').showModal();
+  });
+  $('closeSettingsBtn').addEventListener('click', closeSettings);
+  $('settingsDialog').addEventListener('click', event => {
+    if (event.target !== $('settingsDialog')) return;
+    const r = $('settingsDialog').getBoundingClientRect();
+    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) closeSettings();
+  });
+  $('closeToastBtn').addEventListener('click', hideToast);
+  $('helpBtn').addEventListener('click', () => { closeSettings(); $('helpDialog').showModal(); });
+  $('closeHelpBtn').addEventListener('click', () => $('helpDialog').close());
+  $('helpDialog').addEventListener('click', event => { if (event.target === $('helpDialog')) { const r = $('helpDialog').getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) $('helpDialog').close(); } });
+  $('openCameraBtn').addEventListener('click', () => openCamera());
+  $('switchCameraBtn').addEventListener('click', () => { S.facing = S.facing === 'environment' ? 'user' : 'environment'; openCamera(true); });
+  $('recordBtn').addEventListener('click', startOrStopRecording);
+  $('importBtn').addEventListener('click', () => { closeSettings(); $('fileInput').click(); });
+  $('systemCameraBtn').addEventListener('click', () => { closeSettings(); $('captureInput').click(); });
+  ['fileInput', 'captureInput'].forEach(id => $(id).addEventListener('change', event => {
+    const file = event.target.files && event.target.files[0]; if (file) loadVideo(file, file.name); event.target.value = '';
+  }));
+  $('playBtn').addEventListener('click', () => togglePlay());
+  $('restartBtn').addEventListener('click', () => togglePlay(true));
+  $('prevBtn').addEventListener('click', () => seek(video.currentTime - Number($('frameStep').value)));
+  $('nextBtn').addEventListener('click', () => seek(video.currentTime + Number($('frameStep').value)));
+  $('timeline').addEventListener('input', () => seek(Number($('timeline').value)));
+  $('speed').addEventListener('change', () => { video.playbackRate = Number($('speed').value); });
+  ['rangeStart', 'rangeEnd', 'sampleInterval'].forEach(id => $(id).addEventListener('input', () => {
+    // An explicit teacher edit is never overwritten by a later sync or tab switch.
+    S.density = null; updateDensitySelection(); updateSampling();
+  }));
+  ['opacity', 'threshold', 'overlayMode'].forEach(id => $(id).addEventListener('input', updateSampling));
+  $('densityChoices').addEventListener('click', event => {
+    const button = event.target.closest('[data-density]');
+    if (!button || button.disabled || !S.loaded || S.busy || S.loading || S.live) return;
+    applyDensity(Number(button.dataset.density));
+  });
+  $('markBtn').addEventListener('click', () => setMarking(!S.marking));
+  $('generateOverlayBtn').addEventListener('click', makeOverlay);
+  $('autoTrackBtn').addEventListener('click', autoTrack);
+  $('cancelBtn').addEventListener('click', () => { cancelJob(); status('正在取消…'); });
+  $('originalViewBtn').addEventListener('click', () => setView('original'));
+  $('overlayViewBtn').addEventListener('click', () => { setMarking(false); setView('overlay'); });
+  annotation.addEventListener('pointerdown', addPoint);
+  $('addTrackBtn').addEventListener('click', () => {
+    if (S.tracks.length >= 2) return; snapshot(); S.tracks.push(newTrack('B', '#f08a22'));
+    S.selected = 'B'; rebuildTracks(); closeSettings(); setTab('track'); setMarking(true);
+    status('已新增观察点 B。点击第二个需要比较的位置，例如车轮轮缘。'); sync();
+  });
+  $('trackSelect').addEventListener('change', () => { S.selected = $('trackSelect').value; sync(); draw(); });
+  $('undoBtn').addEventListener('click', () => {
+    const state = S.undo.pop(); if (!state) return; S.tracks = state.tracks; S.selected = state.selected;
+    rebuildTracks(); sync(); draw(); status('已撤销最近一次标记或追踪操作。');
+  });
+  $('clearTrackBtn').addEventListener('click', () => {
+    if (!confirm('清空观察点 ' + S.selected + ' 的全部标记和自动轨迹？可用“撤销”恢复。')) return;
+    snapshot(); currentTrack().points = []; currentTrack().seedTime = null; sync(); draw(); status('已清空当前观察点，可重新标记。');
+  });
+  ['smoothPath', 'showArrows', 'fullPath', 'showPaths', 'pointTimes'].forEach(id => $(id).addEventListener('change', draw));
+  $('saveImageBtn').addEventListener('click', saveImage);
+  $('saveVideoBtn').addEventListener('click', () => {
+    if (S.blob) download(S.blob, S.name || '运动录像' + (S.blob.type.includes('mp4') ? '.mp4' : '.webm'));
+  });
+  $('exportDataBtn').addEventListener('click', exportData);
+  video.addEventListener('play', animate);
+  ['timeupdate', 'seeked', 'pause', 'ended'].forEach(name => video.addEventListener(name, () => { updateTime(); draw(); }));
+  video.addEventListener('loadedmetadata', resize);
+  window.addEventListener('resize', resize);
+  if (window.ResizeObserver) new ResizeObserver(resize).observe(stage);
+  document.addEventListener('keydown', event => {
+    if ($('settingsDialog').open || $('helpDialog').open || /INPUT|SELECT|TEXTAREA|BUTTON/.test(event.target.tagName) || !S.loaded || S.busy) return;
+    if (event.code === 'Space') { event.preventDefault(); togglePlay(); }
+    if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
+      event.preventDefault(); seek(video.currentTime + (event.code === 'ArrowRight' ? 1 : -1) * Number($('frameStep').value));
+    }
+  });
+  window.addEventListener('beforeunload', event => {
+    if (S.recording || S.busy) { event.preventDefault(); event.returnValue = ''; }
+  });
+  window.addEventListener('pagehide', () => {
+    cancelJob(); clearInterval(S.recordTimer); hideToast();
+    if (S.recorder && S.recorder.state === 'recording') S.recorder.stop();
+    stopStream();
+  });
+  $('secureWarning').hidden = window.isSecureContext && !!navigator.mediaDevices;
+  setTab('capture'); updateDensitySelection(); sync(); resize();
+})();
+
+</script>
+</body>
+</html>

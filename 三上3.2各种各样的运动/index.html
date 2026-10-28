@@ -3,138 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0f766e">
-<meta name="description" content="三年级《各种各样的运动》：相机录像、视频重播、等时间间隔运动叠影、红点自动追踪与手动拟合。视频仅在本机处理。">
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="三年级《各种各样的运动》：拍摄、等间隔叠影、红点轨迹。手机简洁版，视频仅在本机处理。">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob: data:; connect-src 'none'; font-src 'self' data:; object-src 'none'; base-uri 'self'">
-<title>各种各样的运动 · 运动轨迹观察器 | mutiw</title>
+<title>各种各样的运动 · 手机简洁版</title>
 <style>
-:root{color-scheme:light;--bg:#f5f8fb;--panel:#fff;--ink:#172b3a;--muted:#657789;--line:#dce6ee;--accent:#0f766e;--accent-soft:#e9f6f3;--red:#e5484d;--stage:#1b2730;--radius:12px}
-*{box-sizing:border-box}html{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.55}body{margin:0}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation}button,a{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.44}a{color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,canvas:focus-visible{outline:3px solid #65bdb3;outline-offset:3px}[hidden]{display:none!important}.icon{width:22px;height:22px;display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}.icon.small{width:18px;height:18px}.icon.large{width:76px;height:76px;stroke-width:1.35}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.app{max-width:1680px;margin:auto;padding:26px 28px 20px}.header{display:flex;align-items:center;gap:18px;margin-bottom:28px;min-height:44px}.brand{display:flex;align-items:center;gap:14px;min-width:0}.brand>.icon{width:35px;height:35px}.header h1{font-size:28px;letter-spacing:-.5px;margin:0;font-weight:750;line-height:1.25;white-space:nowrap}.subtitle{font-size:17px;color:var(--muted);border-left:1px solid #cbd6df;padding-left:20px;margin-left:4px;white-space:nowrap}.header-links{margin-left:auto;display:flex;align-items:center;gap:24px;white-space:nowrap}.text-button{background:none;border:0;padding:9px 2px;color:var(--ink);text-decoration:none;font-size:15px}.text-button:hover{color:var(--accent)}.workbench{display:grid;grid-template-columns:minmax(0,1fr) 324px;gap:24px;align-items:stretch}.workspace{min-width:0}.stage{position:relative;width:100%;aspect-ratio:16/9;background:var(--stage);border-radius:var(--radius);overflow:hidden;isolation:isolate;line-height:0}.stage video,.stage>.composite{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.stage video{background:var(--stage)}#annotationCanvas{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;z-index:4;pointer-events:none}#annotationCanvas.marking{cursor:crosshair;pointer-events:auto;touch-action:none}.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f7fafc;padding:24px;text-align:center;line-height:1.5;z-index:5}.empty>.icon{color:#d9e3e9;margin-bottom:24px}.empty h2{font-size:clamp(20px,2.1vw,30px);margin:0 0 10px;font-weight:700}.empty p{color:#c2ced6;font-size:17px;margin:0 0 24px}.empty-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);min-height:44px;padding:10px 16px;font-size:15px;line-height:1.3;font-weight:600;text-decoration:none;transition:background .15s,border-color .15s}.button:not(:disabled):hover{background:#f0f6f8;border-color:#b5c9d5}.button.primary{background:var(--accent);border-color:var(--accent);color:#fff}.button.primary:not(:disabled):hover{background:#0b625c}.button.danger{background:var(--red);border-color:var(--red);color:#fff}.button.ghost-light{color:#f7fbfe;background:transparent;border-color:#c5d3dd}.button.ghost-light:hover{background:#ffffff14}.button.small{min-height:36px;padding:7px 11px;font-size:13px}.button.wide{width:100%}.button.is-active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}.stage-label{position:absolute;left:14px;top:14px;z-index:6;line-height:1.4;display:flex;gap:8px;align-items:center}.pill{display:inline-flex;align-items:center;gap:7px;border-radius:6px;background:#101b27cc;color:#fff;font-size:12px;padding:5px 9px;font-variant-numeric:tabular-nums}.pill.recording{background:#c82e35}.rec-led{width:8px;height:8px;border-radius:50%;background:white}.stage-tip{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:7;max-width:calc(100% - 30px);padding:9px 14px;background:#10202ee8;border:1px solid #ffffff3a;border-radius:9px;color:#fff;font-size:14px;line-height:1.45;text-align:center;pointer-events:none}.stage-watermark{position:absolute;right:12px;bottom:9px;color:#ffffff65;font-size:12px;line-height:1.2;letter-spacing:.5px;z-index:3;pointer-events:none}
-.player{border:1px solid var(--line);border-top:0;border-radius:0 0 var(--radius) var(--radius);background:var(--panel);padding:16px;display:flex;align-items:center;gap:11px}.round{width:44px;height:44px;min-width:44px;padding:0;border-radius:50%}.round.primary{width:48px;height:48px;min-width:48px}.step{width:38px;height:40px;min-width:38px;padding:0}.timeline{min-width:40px;width:100%;accent-color:var(--accent);margin:0;height:24px;cursor:pointer}.time{font-size:13px;white-space:nowrap;color:#607184;font-variant-numeric:tabular-nums}.time strong{color:#354b60;font-weight:600}.speed{width:77px;padding:8px 10px;min-height:40px;border:1px solid var(--line);background:white;border-radius:9px;color:var(--ink);font-size:14px}.toolbar{margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}.toolbar .button{min-height:46px}.mark-dot{width:13px;height:13px;background:var(--red);border-radius:50%;display:inline-block;box-shadow:0 0 0 3px #e5484d12}.under-stage{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font-size:12px;margin-top:12px;min-height:24px;flex-wrap:wrap}.view-tabs{display:flex;gap:5px}.view-tab{border:0;background:transparent;color:var(--muted);font-size:12px;padding:5px 9px;border-radius:6px}.view-tab.active{color:var(--accent);background:#e6f1ef;font-weight:700}
-.inspector{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);min-width:0;display:flex;flex-direction:column;overflow:hidden}.tabs{display:grid;grid-template-columns:repeat(3,1fr);padding:0 5px;border-bottom:1px solid var(--line)}.tab{padding:17px 4px 14px;border:0;border-bottom:3px solid transparent;background:none;font-size:17px;font-weight:650;color:var(--muted)}.tab.active{border-color:var(--accent);color:var(--accent)}.panel{padding:24px 22px}.panel h2{font-size:23px;line-height:1.35;margin:0 0 9px;font-weight:730}.lead{font-size:14px;color:var(--muted);margin:0 0 22px}.stack{display:grid;gap:12px}.divider{border:0;border-top:1px solid var(--line);margin:24px 0}.note{font-size:13px;color:var(--muted);line-height:1.75;margin:12px 0 0}.note strong{color:var(--ink);font-weight:600}.source-info{font-size:13px;color:var(--muted);margin-top:20px;word-break:break-word}.source-info strong{color:var(--ink);display:block;font-size:14px;font-weight:600}.secondary-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:grid;gap:7px;margin-bottom:16px;font-size:13px}.field>label,.field-label{font-size:13px;color:#41566a;font-weight:600}.number,.select{width:100%;background:#fff;color:var(--ink);border:1px solid #d5e0e8;border-radius:8px;padding:8px 10px;min-height:39px;font-size:14px}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:11px}.field input[type=range]{width:100%;accent-color:var(--accent);margin:4px 0}.range-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.range-value{font-variant-numeric:tabular-nums;color:var(--accent);font-weight:650}.small-note{font-size:12px;color:var(--muted);line-height:1.65;margin:6px 0 12px}.check{display:flex;align-items:flex-start;gap:8px;font-size:13px;margin:12px 0;cursor:pointer}.check input{accent-color:var(--accent);width:16px;height:16px;margin:2px 0 0;flex:0 0 auto}.track-row{display:flex;align-items:center;gap:8px;margin:18px 0 14px}.track-select{flex:1;min-width:0}.track-count{font-size:12px;color:var(--muted);margin:10px 0 0}.status{padding:12px 14px;border-radius:9px;background:#edf7f4;border:1px solid #d5e9e3;color:#255c4e;font-size:13px;line-height:1.65;word-break:break-word;margin-top:16px}.status.error{background:#fff0ed;border-color:#f0d1ca;color:#943d30}.status.warning{background:#fff9eb;border-color:#eddfbb;color:#755720}.progress-box{padding:0 22px 18px;margin-top:auto}.progress-box progress{width:100%;height:7px;accent-color:var(--accent)}.progress-line{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:8px;font-size:12px;color:var(--muted)}.progress-line button{padding:4px 7px;border:1px solid var(--line);border-radius:5px;background:white;color:var(--ink);font-size:12px}.app-footer{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:26px;padding-top:18px;border-top:1px solid #e0e8ef;color:var(--muted);font-size:12px}.analysis-video{position:fixed;left:-9999px;top:0;width:160px;height:90px;pointer-events:none;opacity:.01}.modal{max-width:620px;width:calc(100% - 32px);border:1px solid var(--line);border-radius:16px;padding:28px;color:var(--ink);box-shadow:0 20px 80px #10202e30}.modal::backdrop{background:#0e1a2770}.modal h2{margin:0 0 16px;font-size:24px}.modal h3{font-size:16px;margin:20px 0 6px}.modal p,.modal li{font-size:14px;color:#4f6577;line-height:1.8}.modal ul{padding-left:22px}.modal .close{float:right;margin-left:12px}.kbd{font-family:inherit;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:12px}details{margin-top:14px}summary{font-size:13px;color:var(--muted);cursor:pointer}details[open] summary{margin-bottom:12px}.error-banner{padding:12px 16px;background:#fff3e4;color:#7a561c;border:1px solid #f1d9ad;border-radius:10px;font-size:13px;margin-bottom:16px}body.busy #annotationCanvas{pointer-events:none}.frame-info{color:#7b8b99;font-size:11px}
-@media(min-width:1600px){.workbench{grid-template-columns:minmax(0,1fr) 360px}.panel{padding:26px}.header h1{font-size:30px}.app{padding-top:30px}}@media(max-width:1180px){.app{padding:20px}.workbench{gap:18px;grid-template-columns:minmax(0,1fr) 298px}.subtitle{font-size:14px;padding-left:14px}.header h1{font-size:24px}.header-links{gap:14px}.player{gap:8px;padding:12px}.time{font-size:11px}.step{width:33px;min-width:33px}.round{width:39px;height:39px;min-width:39px}.round.primary{width:43px;height:43px;min-width:43px}.panel{padding:20px}.toolbar{gap:8px}.toolbar .button{font-size:13px;padding:10px 7px}.empty p{font-size:14px}.empty>.icon{width:60px;height:60px;margin-bottom:18px}}
-@media(max-width:900px){.header{flex-wrap:wrap;gap:12px;margin-bottom:18px}.subtitle{border:0;padding:0;margin-left:49px;order:3;width:100%;margin-top:-10px}.header-links{margin-left:auto}.workbench{grid-template-columns:1fr}.inspector{min-height:0}.panel{padding:22px}.record-panel .stack{grid-template-columns:1fr 1fr}.record-panel .divider{margin:18px 0}.record-panel .source-info{margin-top:12px}.progress-box{padding-bottom:18px}.empty h2{font-size:clamp(19px,3.4vw,30px)}.under-stage{margin-bottom:0}.app-footer{margin-top:20px}.timeline{flex:1}.player{padding:13px;gap:12px}.time{font-size:12px}.panel .field-row{gap:16px}}
-@media(max-width:560px){.app{padding:16px 12px 20px}.header{gap:8px}.brand{gap:9px}.brand>.icon{width:29px;height:29px}.header h1{font-size:22px}.subtitle{font-size:12px;margin-left:38px;margin-top:0}.header-links{gap:10px}.text-button{font-size:12px}.empty{padding:14px}.empty>.icon{width:42px;height:42px;margin:0 0 10px}.empty h2{font-size:18px;margin-bottom:5px}.empty p{font-size:12px;margin-bottom:14px}.empty .button{min-height:37px;padding:8px 12px;font-size:12px}.empty .icon.small{width:16px;height:16px}.empty-actions{gap:8px}.player{display:grid;grid-template-columns:40px 34px 30px 30px 1fr 70px;gap:8px;padding:12px}.round,.round.primary{width:38px;height:38px;min-width:38px}.step{height:35px;width:30px;min-width:30px}.player .time{grid-row:2;grid-column:1/4}.player .timeline{grid-row:2;grid-column:4/7}.speed{grid-column:6;width:70px;font-size:12px;min-height:36px;padding:7px}.toolbar{gap:6px;margin-top:10px}.toolbar .button{font-size:12px;gap:6px;min-height:42px}.toolbar .icon{width:17px;height:17px}.toolbar .mark-dot{width:10px;height:10px}.under-stage{font-size:11px;gap:6px}.frame-info{width:100%}.stage-tip{font-size:12px;padding:7px 10px;bottom:9px}.app-footer{font-size:11px;gap:6px}.panel h2{font-size:21px}.stage-watermark{font-size:10px}.pill{font-size:10px;padding:4px 6px}.stage-label{left:8px;top:8px}.modal{padding:20px}}
+:root{color-scheme:light;--bg:#f6f9fc;--paper:#fff;--ink:#1b2934;--muted:#71818d;--line:#e5ebef;--accent:#0f766e;--soft:#edf7f5;--red:#ed454a;--stage:#1b2730;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.5;background:var(--bg);color:var(--ink)}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,a,input,select{touch-action:manipulation;-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.32}a{color:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #76c1b8;outline-offset:3px}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.icon{width:25px;height:25px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}.app{width:min(100%,1080px);height:100vh;height:100dvh;min-height:460px;margin:0 auto;padding:0 18px;padding-top:env(safe-area-inset-top);background:var(--paper);display:flex;flex-direction:column;overflow:hidden}.header{height:70px;min-height:70px;display:flex;align-items:center;gap:6px}.header h1{font-size:21px;font-weight:700;text-align:center;flex:1;line-height:1.3;margin:0;white-space:nowrap}.header-tools{display:flex;gap:2px}.icon-button{width:46px;height:46px;border:0;background:transparent;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:12px;padding:0;flex:0 0 auto}.icon-button:not(:disabled):hover{background:var(--soft)}.workspace{min-height:0;flex:1;display:flex;flex-direction:column;gap:0}.stage{position:relative;min-height:130px;flex:1;width:100%;overflow:hidden;isolation:isolate;border-radius:14px;background:var(--stage);line-height:0}.stage video,.stage>.composite{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.stage video{background:var(--stage)}#annotationCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none;touch-action:pan-y}#annotationCanvas.marking{cursor:crosshair;pointer-events:auto;touch-action:none}.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fff;z-index:5;line-height:1.3;pointer-events:none}.empty .icon{width:76px;height:76px;stroke-width:1.55}.empty h2{font-size:23px;font-weight:600;margin:0}.stage-label{position:absolute;top:14px;left:14px;z-index:6;line-height:1.2}.recording-clock{display:flex;align-items:center;gap:8px;color:#fff;background:#cc353d;border-radius:8px;padding:9px 12px;font-size:14px;font-variant-numeric:tabular-nums}.rec-led{width:7px;height:7px;border-radius:50%;background:#fff}.watermark{position:absolute;right:12px;bottom:10px;font-size:11px;line-height:1;color:#ffffff60;z-index:3;pointer-events:none}
+.player{height:56px;min-height:56px;display:flex;align-items:center;gap:9px;padding:4px 0}.play{color:var(--accent)}.play .icon{width:29px;height:29px}.timeline{min-width:28px;flex:1;height:28px;margin:0;accent-color:var(--accent);cursor:pointer}.time{font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}.time strong{font-weight:500}.step-button{width:35px;height:44px;min-width:35px}.step-button .icon{width:20px;height:20px}body:not([data-mode="track"]) .step-button{display:none}.stage-tip{min-height:24px;margin:0 0 2px;text-align:center;font-size:14px;line-height:1.5;color:var(--ink);padding:0 4px;flex:0 0 auto}.mode-actions{height:116px;min-height:116px;display:flex;align-items:center;justify-content:center}.action-panel{width:100%;max-width:440px}.capture-actions{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;justify-items:center;gap:18px}.action-tile{border:0;background:transparent;min-width:64px;min-height:66px;padding:8px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;border-radius:12px;color:var(--ink);font-size:14px}.action-tile .icon{width:30px;height:30px}.action-tile:hover{background:var(--soft)}#importBtn{grid-column:1}#recordBtn{grid-column:2}#switchCameraBtn{grid-column:3}.record-button{width:80px;height:80px;border:0;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;border-radius:50%;padding:0}.record-button .icon{width:48px;height:48px;stroke:0}.record-button.danger{background:var(--red)}.record-button:active{transform:scale(.97)}.button{min-height:52px;padding:12px 20px;display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1.5px solid #d8e1e7;border-radius:16px;background:#fff;color:var(--ink);font-size:17px;font-weight:600;line-height:1.3;text-decoration:none}.button:not(:disabled):hover{background:var(--soft)}.button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.button.is-active{color:var(--accent);border-color:var(--accent);background:var(--soft)}.button.small{min-height:44px;padding:9px 12px;font-size:14px;border-width:1px;border-radius:11px}.button.wide{width:100%}.track-actions{display:grid;grid-template-columns:1fr 1fr 58px;gap:12px;align-items:center}.mark-dot{width:12px;height:12px;border-radius:50%;background:var(--red);flex:0 0 auto}.undo-button{padding:0}.overlay-actions{display:flex;justify-content:center}.overlay-actions .button{width:min(100%,300px)}
+.tabs{height:82px;min-height:82px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);padding:8px 0 calc(8px + env(safe-area-inset-bottom));margin:0 -18px}.tab{border:0;background:transparent;color:var(--ink);display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;font-size:15px;font-weight:500;min-width:0;padding:0 4px}.tab .icon{width:29px;height:29px;stroke-width:1.8}.tab.active{color:var(--accent);font-weight:700}.tab.active .icon{stroke-width:2.4}.tab:disabled{opacity:.27}.busy-layer{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;background:#14242b55;line-height:1.5}.busy-card{width:min(86%,260px);padding:20px;border-radius:16px;background:#ffffffed;color:var(--ink)}.progress-line{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px}#cancelBtn{border:0;background:transparent;color:var(--muted);padding:5px;font-size:14px}#progress{width:100%;height:6px;accent-color:var(--accent);margin-top:14px}.toast{position:fixed;left:50%;bottom:calc(205px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:min(92vw,520px);z-index:30;display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:14px;background:#20323af0;color:#fff;box-shadow:0 5px 24px #10203020;font-size:14px;line-height:1.6}.toast .icon-button{width:30px;height:30px;color:#fff}.toast .icon{width:18px;height:18px}.analysis-video{position:fixed;left:-9999px;top:0;width:160px;height:90px;pointer-events:none;opacity:.01}
+.sheet{width:min(100% - 28px,560px);max-height:85vh;max-height:85dvh;margin:auto;border:0;border-radius:20px;padding:0;background:#fff;color:var(--ink);box-shadow:0 18px 90px #132c3f30;overflow:auto;overscroll-behavior:contain}.sheet::backdrop{background:#14242f66}.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:2}.sheet h2{font-size:20px;line-height:1.3;margin:0}.sheet-body{padding:6px 22px 24px}.setting-section{border-bottom:1px solid var(--line);margin:0;padding:0}.setting-section>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:18px 0;min-height:58px;cursor:pointer;font-size:16px;font-weight:600}.setting-section>summary::-webkit-details-marker{display:none}.setting-section>summary::after{content:'+';font-size:23px;color:var(--muted);font-weight:400}.setting-section[open]>summary::after{content:'−'}.setting-content{padding:0 0 20px}.field{display:grid;gap:6px;margin:0 0 15px;font-size:14px}.field label,.range-head{color:#435763;font-size:13px}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.number,.select{width:100%;min-height:44px;padding:9px 10px;border:1px solid #d8e1e7;border-radius:10px;color:var(--ink);background:#fff;font-size:15px}.field input[type=range]{width:100%;accent-color:var(--accent);margin:4px 0;height:26px}.range-head{display:flex;justify-content:space-between;gap:10px}.check{display:flex;align-items:center;gap:10px;font-size:14px;margin:13px 0}.check input{width:19px;height:19px;accent-color:var(--accent);margin:0}.row{display:flex;gap:9px;margin:8px 0;align-items:center}.row>*{flex:1;min-width:0}.small-note{font-size:12px;color:var(--muted);line-height:1.7;margin:10px 0}.source-info{font-size:12px;color:var(--muted);word-break:break-word;line-height:1.7;margin:12px 0}.source-info strong{display:block;font-weight:500;color:var(--ink)}.density{display:flex;border:1px solid #dce5e9;border-radius:11px;padding:4px;gap:4px;margin-bottom:18px}.density button{flex:1;min-height:38px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:14px}.density button.active{background:var(--soft);color:var(--accent);font-weight:600}.status{font-size:12px;line-height:1.7;color:var(--muted);margin-top:16px;word-break:break-word}.status.error{color:#b23b3b}.error-banner{color:#a44b25;font-size:13px;line-height:1.6;padding:12px 0}.view-tab.active{color:var(--accent);background:var(--soft);border-color:var(--accent)}.help-copy h3{font-size:16px;margin:18px 0 5px}.help-copy p{font-size:14px;line-height:1.8;color:#536773;margin:0 0 12px}.help-copy{padding:5px 22px 24px}.discreet{margin:16px 0 0;color:var(--muted);font-size:11px;text-align:center}.track-count{font-size:12px;color:var(--muted);margin:12px 0}body.busy #annotationCanvas{pointer-events:none}
+@media(max-width:600px){:root{background:#fff}.app{padding-right:12px;padding-left:12px}.header{height:58px;min-height:58px;gap:0}.header h1{font-size:18px}.header .icon-button{width:42px;height:46px}.header .icon{width:23px;height:23px}.header-tools{gap:0}.stage{border-radius:12px}.empty .icon{width:68px;height:68px}.empty h2{font-size:21px}.empty{gap:18px}.mode-actions{height:112px;min-height:112px}.record-button{width:78px;height:78px}.action-panel{max-width:350px}.tabs{margin:0 -12px;height:calc(76px + env(safe-area-inset-bottom));min-height:calc(76px + env(safe-area-inset-bottom));padding-top:7px;padding-bottom:calc(7px + env(safe-area-inset-bottom))}.tab{font-size:14px;gap:3px}.tab .icon{width:27px;height:27px}.player{gap:5px;height:51px;min-height:51px}.play{width:38px;height:44px}.time{font-size:10px}.step-button{width:30px;min-width:30px}.step-button .icon{width:18px;height:18px}.track-actions{gap:9px;grid-template-columns:1fr 1fr 52px}.track-actions .button{font-size:16px;padding:12px 10px;min-height:52px;border-radius:15px}.stage-tip{font-size:13px;line-height:1.45;min-height:20px}.sheet{width:100%;max-height:86dvh;margin:auto 0 0;border-radius:22px 22px 0 0;padding-bottom:env(safe-area-inset-bottom)}.sheet-head{padding:13px 18px}.sheet-body{padding:3px 20px 24px}.toast{bottom:calc(194px + env(safe-area-inset-bottom));font-size:13px}.watermark{font-size:10px}}
+@media(max-width:350px){.header h1{font-size:16px}.header .icon-button{width:37px}.time{font-size:9px}.player{gap:3px}.step-button{width:27px;min-width:27px}.empty h2{font-size:19px}}
+@media(orientation:landscape) and (max-height:600px){.app{min-height:300px;display:grid;grid-template-columns:minmax(0,1fr) 210px;grid-template-rows:52px minmax(0,1fr) 72px;grid-template-areas:'header header' 'workspace controls' 'workspace tabs';gap:0 18px;padding-bottom:10px}.header{grid-area:header;height:52px;min-height:0}.workspace{grid-area:workspace}.mode-actions{grid-area:controls;height:auto;min-height:0}.tabs{grid-area:tabs;height:72px;min-height:0;margin:0;padding:8px 0}.capture-actions{gap:4px}.record-button{width:66px;height:66px}.action-tile{min-width:50px}.track-actions{grid-template-columns:1fr 1fr;gap:10px}.track-actions #undoBtn{grid-column:1/3;justify-self:center;width:52px;min-height:42px}.stage{min-height:100px}.overlay-actions .button{font-size:15px;padding:12px}.tab{font-size:13px}.tab .icon{width:24px;height:24px}.toast{bottom:24px}.sheet{margin:auto;max-width:560px;border-radius:20px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-@media print{.header-links,.inspector,.player,.toolbar,.under-stage,.app-footer{display:none}.workbench{display:block}.app{padding:0}.stage{break-inside:avoid}}
 </style>
 </head>
-<body>
+<body data-mode="capture">
 <svg width="0" height="0" class="sr-only" aria-hidden="true"><defs>
-<symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" transform="translate(0 -2)"/><circle cx="12" cy="12" r="4"/></symbol>
-<symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z" fill="currentColor" stroke-width="1.4"/></symbol>
-<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"/></symbol>
-<symbol id="i-restart" viewBox="0 0 24 24"><path d="M20 7a9 9 0 1 1-7-4M13 1v5h5"/></symbol>
-<symbol id="i-prev" viewBox="0 0 24 24"><path d="M5 5v14m13-13-9 6 9 6Z" fill="currentColor"/></symbol>
-<symbol id="i-next" viewBox="0 0 24 24"><path d="M19 5v14M6 6l9 6-9 6Z" fill="currentColor"/></symbol>
-<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V4h6l2 3h10v13H3Z"/><path d="M3 10h18"/></symbol>
-<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8Zm-10 9 10 5 10-5M2 16l10 5 10-5"/></symbol>
-<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1.5"/><path d="m21 16-6-6-12 11"/></symbol>
-<symbol id="i-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5" fill="currentColor" stroke="none"/></symbol>
-<symbol id="i-stop" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2" fill="currentColor" stroke="none"/></symbol>
-<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
-<symbol id="i-undo" viewBox="0 0 24 24"><path d="m9 4-6 6 6 6M3 10h10a7 7 0 0 1 7 7v3"/></symbol>
-<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></symbol>
-<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7h3l2-3h6l2 3h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m7 4 14 8-14 8Z" fill="currentColor" stroke="none"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 4v16M16 4v16" stroke-width="4"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="m12 4-8 8 8 8M4 12h16"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M3 6h5m4 0h9M3 12h11m4 0h3M3 18h3m4 0h11"/><circle cx="10" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></symbol>
+<symbol id="i-restart" viewBox="0 0 24 24"><path d="M20 8a8 8 0 1 1-7-4M13 1v6h6"/></symbol><symbol id="i-prev" viewBox="0 0 24 24"><path d="M5 5v14m13-13-9 6 9 6Z" fill="currentColor"/></symbol><symbol id="i-next" viewBox="0 0 24 24"><path d="M19 5v14M6 6l9 6-9 6Z" fill="currentColor"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V4h6l2 3h10v13H3Z"/></symbol><symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8Zm-10 9 10 5 10-5M2 16l10 5 10-5"/></symbol><symbol id="i-path" viewBox="0 0 24 24"><path d="m5 18 5-7 4 3 5-9"/><circle cx="4" cy="19" r="2.5" fill="currentColor"/><circle cx="10" cy="10" r="2.5" fill="currentColor"/><circle cx="15" cy="15" r="2.5" fill="currentColor"/><circle cx="20" cy="4" r="2.5" fill="currentColor"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1.5"/><path d="m21 16-6-6-12 11"/></symbol><symbol id="i-record" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.4" fill="currentColor" stroke="none"/></symbol><symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol><symbol id="i-switch" viewBox="0 0 24 24"><path d="M4 7h3l2-3h6l2 3h3v14H4Z"/><path d="M8 12a5 5 0 0 1 8-1m0-3v4h-4m4 5a5 5 0 0 1-8 0m0 3v-4h4"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="m8 3-5 5 5 5M3 8h12a6 6 0 0 1 0 12H9"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
 </defs></svg>
 <main class="app">
-<header class="header">
- <div class="brand"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><h1>运动轨迹观察器</h1></div>
- <span class="subtitle">三年级 · 各种各样的运动</span>
- <nav class="header-links" aria-label="帮助与课程"><button id="helpBtn" class="text-button">使用说明</button><a class="text-button" href="../">返回课程</a></nav>
-</header>
-<div id="secureWarning" class="error-banner" hidden>相机需要 HTTPS 或 localhost。请通过 GitHub Pages 链接打开；也可以直接导入已拍摄的视频。</div>
-<section class="workbench" aria-label="运动观察实验台">
- <div class="workspace">
-  <div class="stage" id="stage">
-   <video id="liveVideo" muted playsinline autoplay hidden></video>
-   <video id="video" muted playsinline preload="auto" hidden></video>
-   <canvas id="overlayCanvas" class="composite" hidden></canvas>
-   <canvas id="annotationCanvas" tabindex="0" aria-label="视频观察点标记区域，开启标点后点击物体上的同一位置"></canvas>
-   <div id="emptyState" class="empty">
-    <svg class="icon large" aria-hidden="true"><use href="#i-camera"/></svg>
-    <h2>让运动留下看得见的轨迹</h2><p>打开相机，或导入一段运动视频</p>
-    <div class="empty-actions"><button id="openCameraMain" class="button primary"><svg class="icon small" aria-hidden="true"><use href="#i-camera"/></svg>打开相机</button><button id="importMain" class="button ghost-light"><svg class="icon small" aria-hidden="true"><use href="#i-folder"/></svg>导入视频</button></div>
-   </div>
-   <div id="stageLabel" class="stage-label" hidden><span id="modeLabel" class="pill">原视频</span><span id="recordClock" class="pill recording" hidden><span class="rec-led"></span><span id="recordTime">00:00</span></span></div>
-   <div id="stageTip" class="stage-tip" hidden></div>
-   <span class="stage-watermark">mutiw</span>
-  </div>
-  <div class="player" aria-label="视频播放控制">
-   <button id="playBtn" class="button round primary" disabled aria-label="播放视频" title="播放 / 暂停（空格）"><svg class="icon" aria-hidden="true"><use id="playIcon" href="#i-play"/></svg></button>
-   <button id="restartBtn" class="button round" disabled aria-label="从头重播" title="从头重播"><svg class="icon" aria-hidden="true"><use href="#i-restart"/></svg></button>
-   <button id="prevBtn" class="button step" disabled aria-label="后退一个采样步长" title="后退一个采样步长（左方向键）"><svg class="icon small" aria-hidden="true"><use href="#i-prev"/></svg></button>
-   <button id="nextBtn" class="button step" disabled aria-label="前进一个采样步长" title="前进一个采样步长（右方向键）"><svg class="icon small" aria-hidden="true"><use href="#i-next"/></svg></button>
-   <input id="timeline" class="timeline" type="range" min="0" max="1" step="0.001" value="0" disabled aria-label="视频时间轴">
-   <span class="time"><strong id="currentTime">00:00.00</strong> / <span id="durationTime">00:00.00</span></span>
-   <select id="speed" class="speed" disabled aria-label="播放速度"><option value=".25">0.25×</option><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option><option value="2">2×</option></select>
-  </div>
-  <div class="toolbar"><button id="overlayShortcut" class="button" disabled><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>运动叠影</button><button id="markShortcut" class="button" disabled><span class="mark-dot"></span>标记红点</button><button id="saveImageBtn" class="button" disabled><svg class="icon" aria-hidden="true"><use href="#i-image"/></svg>保存画面</button></div>
-  <div class="under-stage">
-   <div class="view-tabs" aria-label="画面显示方式"><button id="originalViewBtn" class="view-tab active" aria-pressed="true">原视频 / 轨迹</button><button id="overlayViewBtn" class="view-tab" disabled aria-pressed="false">叠影结果</button></div>
-   <span id="frameInfo" class="frame-info">逐步查看：默认 0.033 秒，可在轨迹面板调整</span>
-  </div>
+ <header class="header"><a class="icon-button" href="../" aria-label="返回课程"><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg></a><h1>各种各样的运动</h1><div class="header-tools"><button id="saveImageBtn" class="icon-button" disabled hidden aria-label="保存当前画面" title="保存画面"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg></button><button id="settingsBtn" class="icon-button" aria-label="打开设置" title="设置"><svg class="icon" aria-hidden="true"><use href="#i-settings"/></svg></button></div></header>
+ <section class="workspace" aria-label="运动画面">
+  <div class="stage" id="stage"><video id="liveVideo" muted playsinline autoplay hidden></video><video id="video" muted playsinline preload="auto" hidden></video><canvas id="overlayCanvas" class="composite" hidden></canvas><canvas id="annotationCanvas" tabindex="0" aria-label="标点区域"></canvas><div id="emptyState" class="empty"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><h2>拍一段运动</h2></div><div id="stageLabel" class="stage-label" hidden><span id="modeLabel" hidden></span><span id="recordClock" class="recording-clock" hidden><span class="rec-led"></span><span id="recordTime">00:00</span></span></div><span class="watermark">mutiw</span><div id="busyBox" class="busy-layer" hidden><div class="busy-card"><div class="progress-line"><span id="progressText">处理中</span><button id="cancelBtn">取消</button></div><progress id="progress" max="1" value="0"></progress></div></div></div>
+  <div class="player" id="playerBar" hidden><button id="playBtn" class="icon-button play" disabled aria-label="播放视频"><svg class="icon" aria-hidden="true"><use id="playIcon" href="#i-play"/></svg></button><button id="prevBtn" class="icon-button step-button" disabled aria-label="后退一步"><svg class="icon" aria-hidden="true"><use href="#i-prev"/></svg></button><input id="timeline" class="timeline" type="range" min="0" max="1" step="0.001" value="0" disabled aria-label="视频时间轴"><button id="nextBtn" class="icon-button step-button" disabled aria-label="前进一步"><svg class="icon" aria-hidden="true"><use href="#i-next"/></svg></button><span class="time"><strong id="currentTime">00:00</strong> / <span id="durationTime">00:00</span></span></div>
+  <div id="stageTip" class="stage-tip" hidden></div>
+ </section>
+ <div class="mode-actions">
+  <section id="panelCapture" class="action-panel capture-actions" role="tabpanel" aria-labelledby="tabCapture"><button id="importBtn" class="action-tile"><svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg><span>导入</span></button><button id="recordBtn" class="record-button" aria-labelledby="recordText"><svg class="icon" aria-hidden="true"><use id="recordIcon" href="#i-record"/></svg><span id="recordText" class="sr-only">拍摄</span></button><button id="switchCameraBtn" class="action-tile" hidden disabled aria-label="切换镜头"><svg class="icon" aria-hidden="true"><use href="#i-switch"/></svg></button></section>
+  <section id="panelOverlay" class="action-panel overlay-actions" role="tabpanel" aria-labelledby="tabOverlay" hidden><button id="generateOverlayBtn" class="button primary" disabled><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>生成叠影</button></section>
+  <section id="panelTrack" class="action-panel track-actions" role="tabpanel" aria-labelledby="tabTrack" hidden><button id="markBtn" class="button" disabled><span class="mark-dot"></span><span id="markText">标点</span></button><button id="autoTrackBtn" class="button primary" disabled>追踪</button><button id="undoBtn" class="button undo-button" disabled aria-label="撤销"><svg class="icon" aria-hidden="true"><use href="#i-undo"/></svg></button></section>
  </div>
- <aside class="inspector" aria-label="分析设置">
-  <div class="tabs" role="tablist" aria-label="工作步骤"><button id="tabCapture" role="tab" aria-selected="true" aria-controls="panelCapture" class="tab active" data-tab="capture">录制</button><button id="tabOverlay" role="tab" aria-selected="false" aria-controls="panelOverlay" class="tab" data-tab="overlay">叠影</button><button id="tabTrack" role="tab" aria-selected="false" aria-controls="panelTrack" class="tab" data-tab="track">轨迹</button></div>
-  <section id="panelCapture" role="tabpanel" aria-labelledby="tabCapture" class="panel record-panel">
-   <h2>录制视频</h2><p class="lead">固定机位，让运动看得更清楚</p>
-   <div class="stack">
-    <button id="recordBtn" class="button primary wide" disabled><svg class="icon" aria-hidden="true"><use id="recordIcon" href="#i-record"/></svg><span id="recordText">开始录制</span></button>
-    <button id="switchCameraBtn" class="button wide" disabled><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg>切换镜头</button>
-   </div>
-   <hr class="divider">
-   <div class="secondary-actions"><button id="openCameraBtn" class="button small">打开相机</button><button id="importBtn" class="button small">导入视频</button></div>
-   <p class="note">建议固定机位，录制 <strong>3—10 秒</strong>。背景尽量简洁，物体慢一些移动。最长录制 60 秒，不录声音。</p>
-   <div id="sourceInfo" class="source-info">尚未载入视频</div>
-   <button id="saveVideoBtn" class="button small wide" style="margin-top:16px" disabled><svg class="icon small" aria-hidden="true"><use href="#i-download"/></svg>下载原视频</button>
-   <details><summary>相机打不开？</summary><p class="small-note">允许浏览器使用相机，并用 Safari / Chrome / Edge 直接打开 HTTPS 网页。也可用系统相机先拍摄，再导入。</p><button id="systemCameraBtn" class="button small wide">使用系统相机 / 选择视频</button></details>
-  </section>
-  <section id="panelOverlay" role="tabpanel" aria-labelledby="tabOverlay" class="panel" hidden>
-   <h2>等间隔运动叠影</h2><p class="lead">把不同时刻的物体留在同一画面</p>
-   <div class="field-row"><div class="field"><label for="rangeStart">开始时间 / 秒</label><input id="rangeStart" class="number" type="number" min="0" step=".05" value="0"></div><div class="field"><label for="rangeEnd">结束时间 / 秒</label><input id="rangeEnd" class="number" type="number" min="0" step=".05" value="5"></div></div>
-   <div class="field-row"><div class="field"><label for="sampleInterval">取样间隔 / 秒</label><input id="sampleInterval" class="number" type="number" min=".05" max="10" step=".05" value=".2"></div><div class="field"><label for="overlayMode">叠影方式</label><select id="overlayMode" class="select"><option value="foreground">突出运动物体</option><option value="full">整帧透明叠加</option></select></div></div>
-   <div class="field"><div class="range-head"><label for="opacity">物体不透明度</label><output id="opacityValue" class="range-value">75%</output></div><input id="opacity" type="range" min=".15" max="1" step=".05" value=".75"></div>
-   <div class="field"><div class="range-head"><label for="threshold">去除背景阈值</label><output id="thresholdValue" class="range-value">32</output></div><input id="threshold" type="range" min="8" max="100" step="1" value="32"></div>
-   <label class="check"><input id="sampleLabels" type="checkbox">显示各次取样时间</label>
-   <p id="sampleCount" class="small-note">先录制或导入视频。每次最多 60 帧。</p>
-   <button id="generateOverlayBtn" class="button primary wide" disabled><svg class="icon small" aria-hidden="true"><use href="#i-layers"/></svg>生成叠影</button>
-   <p class="note">相机必须保持不动。阴影、手部或背景变化也可能留下叠影；可调高阈值后重新生成。采样不足一整段间隔的尾帧不会追加。</p>
-  </section>
-  <section id="panelTrack" role="tabpanel" aria-labelledby="tabTrack" class="panel" hidden>
-   <h2>红点与运动路径</h2><p class="lead">点击同一位置，观察它怎样运动</p>
-   <div class="track-row"><label class="sr-only" for="trackSelect">当前观察点</label><select id="trackSelect" class="select track-select"><option value="A">观察点 A · 红色</option></select><button id="addTrackBtn" class="button small" disabled title="添加第二个观察点">＋ B</button></div>
-   <button id="markBtn" class="button wide" disabled><svg class="icon small" aria-hidden="true"><use href="#i-target"/></svg><span id="markText">手动标点 / 补点</span></button>
-   <p id="markHelp" class="small-note">先暂停或慢放，再点击物体上的同一位置；每个点都保留时间。可拖动进度条继续补点。</p>
-   <div class="field-row"><div class="field"><label for="trackMode">追踪特征</label><select id="trackMode" class="select"><option value="auto">自动选择</option><option value="color">彩色贴点</option><option value="template">纹理特征</option></select></div><div class="field"><label for="trackStep">分析步长 / 秒</label><select id="trackStep" class="select"><option value=".0333333333">0.033（约30帧/秒）</option><option value=".05">0.05（约20帧/秒）</option><option value=".1" selected>0.10（约10帧/秒）</option><option value=".2">0.20（约5帧/秒）</option></select></div></div>
-   <button id="autoTrackBtn" class="button primary wide" disabled>从当前标记自动追踪</button>
-   <p class="small-note">从所选标记向后追踪，最长 30 秒。贴一个醒目的彩色圆点，效果通常更好。</p>
-   <div class="secondary-actions"><button id="undoBtn" class="button small" disabled><svg class="icon small" aria-hidden="true"><use href="#i-undo"/></svg>撤销</button><button id="clearTrackBtn" class="button small" disabled>清空当前点</button></div>
-   <label class="check"><input id="smoothPath" type="checkbox" checked>平滑拟合路径（保留原始观测点）</label>
-   <label class="check"><input id="showArrows" type="checkbox" checked>显示时间前进方向箭头</label>
-   <label class="check"><input id="fullPath" type="checkbox" checked>显示完整路径</label>
-   <label class="check"><input id="showPaths" type="checkbox" checked>显示红点与路径</label>
-   <div id="trackCount" class="track-count">A：0 个手动点 · 0 个自动点</div>
-   <p class="note">实心点是人工标记，空心点是自动跟踪。虚线是手动点之间的估计；自动跟踪不确定时会停止。<strong>拟合线是模型，不是新证据。</strong></p>
-   <details><summary>逐步查看与数据</summary><div class="field"><label for="frameStep">前进 / 后退步长</label><select id="frameStep" class="select"><option value=".0333333333">1/30 秒</option><option value=".0166666667">1/60 秒</option><option value=".1">0.1 秒</option><option value=".2">0.2 秒</option></select></div><button id="exportDataBtn" class="button small wide" disabled>导出观测数据 CSV</button><p class="small-note">这是按时间步进，实际显示受视频帧率和浏览器解码精度影响。坐标为相对画面的比例。</p></details>
-  </section>
-  <div class="progress-box"><div id="busyBox" hidden><div class="progress-line"><span id="progressText">正在分析…</span><button id="cancelBtn">取消分析</button></div><progress id="progress" max="1" value="0"></progress></div><div id="status" class="status" role="status" aria-live="polite">准备好后打开相机，或导入一段视频。</div></div>
- </aside>
-</section>
-<footer class="app-footer"><span>先预测 · 再观察 · 用证据修正</span><span>所有视频仅在本机处理 · 关闭页面前请保存 · mutiw · v1.0</span></footer>
+ <nav class="tabs" role="tablist" aria-label="选择操作"><button id="tabCapture" class="tab active" role="tab" data-tab="capture" aria-selected="true" aria-controls="panelCapture"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><span>拍摄</span></button><button id="tabOverlay" class="tab" role="tab" data-tab="overlay" aria-selected="false" aria-controls="panelOverlay" disabled><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg><span>叠影</span></button><button id="tabTrack" class="tab" role="tab" data-tab="track" aria-selected="false" aria-controls="panelTrack" disabled><svg class="icon" aria-hidden="true"><use href="#i-path"/></svg><span>轨迹</span></button></nav>
 </main>
-<input id="fileInput" type="file" accept="video/*" hidden><input id="captureInput" type="file" accept="video/*" capture="environment" hidden>
-<video id="analysisVideo" class="analysis-video" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
-<dialog id="helpDialog" class="modal"><button id="closeHelpBtn" class="button small close" aria-label="关闭说明"><svg class="icon small" aria-hidden="true"><use href="#i-close"/></svg></button><h2>让学生自己发现运动路线</h2>
-<h3>1 · 拍一段真实运动</h3><p>固定手机或平板，背景保持不动。让小车、小球或陀螺慢一些运动，建议拍摄 3—10 秒。网页只录画面，不录声音；也支持导入已有视频。</p>
-<h3>2 · 看等时间间隔的运动叠影</h3><p>在“叠影”中设置时间范围和间隔，点击“生成叠影”。默认用背景差分突出移动部分；相机抖动、光照变化和阴影都会影响结果。它不是语义识别或自动抠出指定物体。</p>
-<h3>3 · 给同一个位置标红点</h3><p>进入“轨迹”，开启“手动标点 / 补点”，点击视频中的观察位置。点击会暂停播放；拖动时间轴或逐步前进，再点击同一位置。两个以上点可形成估计路径，虚线提醒这不是每一帧的真实测量。</p>
-<p>也可以在标记之后选择“从当前标记自动追踪”。本地算法跟踪颜色或纹理，不是云端大模型；遮挡、运动过快、外形旋转或背景相似时可能停止或偏移。请和真实视频核对，错误处暂停补点，再重新追踪。</p>
-<h3>4 · 比较车身和车轮</h3><p>用 A 点标车身，用 B 点标车轮轮缘。始终固定机位，相对于地面比较。观察点不同，运动路线可能不同；一个点不能代表物体所有部分的运动。</p>
-<h3>保存与快捷键</h3><p>“保存画面”导出当前视频与轨迹，或已生成的叠影 PNG；“下载原视频”保留原录像；观测数据可另存 CSV。<span class="kbd">空格</span> 播放 / 暂停，<span class="kbd">←</span> <span class="kbd">→</span> 按设定步长查看。</p>
-<p>推荐在 HTTPS 网页上用最新版 Safari、Chrome 或 Edge。手机应用内置浏览器可能禁止相机，遇到问题请用系统浏览器直接打开。刷新或关闭页面后，未保存的视频与标记不会保留。</p>
-</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden><span id="toastMessage"></span><button id="closeToastBtn" class="icon-button" aria-label="关闭提示"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+<dialog id="settingsDialog" class="sheet" aria-labelledby="settingsTitle"><header class="sheet-head"><h2 id="settingsTitle">设置</h2><button id="closeSettingsBtn" class="icon-button" aria-label="关闭设置"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></header><div class="sheet-body">
+ <div id="secureWarning" class="error-banner" hidden>相机需要 HTTPS。请使用在线链接，或导入已拍摄的视频。</div>
+ <details class="setting-section"><summary>拍摄与保存</summary><div class="setting-content"><div class="row"><button id="openCameraBtn" class="button small">打开相机</button><button id="systemCameraBtn" class="button small">系统相机</button></div><button id="saveVideoBtn" class="button small wide" disabled><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>保存原视频</button><div id="sourceInfo" class="source-info">尚未载入视频</div><p class="small-note">固定机位，建议拍摄 3—10 秒。最长 60 秒，不录声音。</p></div></details>
+ <details class="setting-section"><summary>播放</summary><div class="setting-content"><div class="field-row"><div class="field"><label for="speed">播放速度</label><select id="speed" class="select" disabled><option value=".25">0.25 倍</option><option value=".5">0.5 倍</option><option value="1" selected>正常</option><option value="1.5">1.5 倍</option><option value="2">2 倍</option></select></div><div class="field"><label for="frameStep">前后步长</label><select id="frameStep" class="select"><option value=".0333333333">1/30 秒</option><option value=".0166666667">1/60 秒</option><option value=".1" selected>0.1 秒</option><option value=".2">0.2 秒</option></select></div></div><button id="restartBtn" class="button small wide" disabled>从头重播</button></div></details>
+ <details class="setting-section"><summary>叠影</summary><div class="setting-content"><div class="density" id="densityChoices" role="group" aria-label="叠影数量"><button data-density="6" aria-pressed="false">少</button><button data-density="12" aria-pressed="true" class="active">中</button><button data-density="20" aria-pressed="false">多</button></div><div class="field-row"><div class="field"><label for="rangeStart">开始 / 秒</label><input id="rangeStart" class="number" type="number" min="0" step=".05" value="0"></div><div class="field"><label for="rangeEnd">结束 / 秒</label><input id="rangeEnd" class="number" type="number" min="0" step=".05" value="5"></div></div><div class="field-row"><div class="field"><label for="sampleInterval">间隔 / 秒</label><input id="sampleInterval" class="number" type="number" min=".05" max="3600" step=".05" value=".2"></div><div class="field"><label for="overlayMode">叠影方式</label><select id="overlayMode" class="select"><option value="foreground">突出物体</option><option value="full">整帧叠加</option></select></div></div><div class="field"><div class="range-head"><label for="opacity">物体浓淡</label><output id="opacityValue">75%</output></div><input id="opacity" type="range" min=".15" max="1" step=".05" value=".75"></div><div class="field"><div class="range-head"><label for="threshold">去背景程度</label><output id="thresholdValue">32</output></div><input id="threshold" type="range" min="8" max="100" step="1" value="32"></div><label class="check"><input id="sampleLabels" type="checkbox">显示取样时间</label><p id="sampleCount" class="small-note">最多 60 帧。</p><div class="row"><button id="originalViewBtn" class="button small view-tab active" aria-pressed="true">看视频</button><button id="overlayViewBtn" class="button small view-tab" disabled aria-pressed="false">看叠影</button></div></div></details>
+ <details class="setting-section"><summary>轨迹</summary><div class="setting-content"><div class="row"><label class="sr-only" for="trackSelect">观察点</label><select id="trackSelect" class="select"><option value="A">A · 红色</option></select><button id="addTrackBtn" class="button small" disabled>添加 B 点</button></div><div class="field-row"><div class="field"><label for="trackMode">追踪特征</label><select id="trackMode" class="select"><option value="auto">自动选择</option><option value="color">彩色贴点</option><option value="template">纹理特征</option></select></div><div class="field"><label for="trackStep">分析步长</label><select id="trackStep" class="select"><option value=".0333333333">约 30 帧 / 秒</option><option value=".05">约 20 帧 / 秒</option><option value=".1" selected>约 10 帧 / 秒</option><option value=".2">约 5 帧 / 秒</option></select></div></div><label class="check"><input id="smoothPath" type="checkbox" checked>平滑路径</label><label class="check"><input id="showArrows" type="checkbox" checked>方向箭头</label><label class="check"><input id="fullPath" type="checkbox" checked>完整路径</label><label class="check"><input id="showPaths" type="checkbox" checked>显示红点与路径</label><label class="check"><input id="pointTimes" type="checkbox">显示标点时间</label><div id="trackCount" class="track-count"></div><div class="row"><button id="clearTrackBtn" class="button small" disabled>清空当前点</button><button id="exportDataBtn" class="button small" disabled>导出数据</button></div><p class="small-note">实心点是手动标记，空心点是自动追踪。连线是拟合，不是新证据。</p></div></details>
+ <button id="helpBtn" class="button small wide" style="margin-top:18px">使用帮助</button><div id="status" class="status" aria-live="off">准备好后拍摄或导入视频。</div><p class="discreet">本机处理 · 关闭前请保存 · mutiw · v2</p>
+</div></dialog>
+<dialog id="helpDialog" class="sheet" aria-labelledby="helpTitle"><header class="sheet-head"><h2 id="helpTitle">使用帮助</h2><button id="closeHelpBtn" class="icon-button" aria-label="关闭帮助"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button></header><div class="help-copy"><h3>拍摄</h3><p>先点圆形按钮打开相机，再点一次开始。结束后可播放；也能导入系统相机拍好的视频。</p><h3>叠影</h3><p>点“生成叠影”，就能看到等时间间隔留下的位置。默认分析整段视频；间隔和范围可在设置中调整。必须固定相机，手与阴影也可能留下痕迹。</p><h3>轨迹</h3><p>点“标点”，再点物体上的一个位置。拖动时间轴后继续标记，或点“追踪”自动寻找。始终观察同一位置；偏移处暂停补点。设置中可添加 B 点作比较。</p><h3>保存</h3><p>右上角下载图标保存当前画面；原视频和观测数据在设置里保存。刷新或关闭页面后，未保存的内容会丢失。</p><p>视频只在本机处理。自动追踪用颜色和纹理，遮挡或运动过快时可能失效；请用原视频核对。网页路径是观察辅助，不是精密测量。相机打不开时请用 Safari、Chrome、Edge 直接打开在线链接。</p></div></dialog>
+<input id="fileInput" type="file" accept="video/*" hidden><input id="captureInput" type="file" accept="video/*" capture="environment" hidden><video id="analysisVideo" class="analysis-video" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video>
 <script>
 /* MotionCore: local, dependency-free image analysis. Coordinates are normalized.
  * No network, DOM, generated evidence, or silent extrapolation. */
@@ -451,9 +370,10 @@
   const S = {
     stream: null, recorder: null, recording: false, live: false, cameraPending: false,
     loading: false, loaded: false, blob: null, url: null, name: '', duration: 0,
-    generation: 0, busy: null, view: 'original', marking: false, facing: 'environment',
+    generation: 0, busy: null, view: 'original', tab: 'capture', marking: false, facing: 'environment',
     overlay: null, overlayTimes: [], tracks: [newTrack('A', '#ed454a')], selected: 'A',
-    undo: [], recordStarted: 0, recordTimer: null, displayTime: 0, loop: 0
+    undo: [], recordStarted: 0, recordTimer: null, displayTime: 0, loop: 0,
+    density: 12, toastTimer: null
   };
   function newTrack(id, color) { return { id, color, points: [], seedTime: null }; }
   function currentTrack() { return S.tracks.find(t => t.id === S.selected); }
@@ -467,17 +387,65 @@
   const tick = () => new Promise(r => setTimeout(r, 0));
   const aborted = () => new DOMException('分析已取消', 'AbortError');
   function check(signal) { if (signal && signal.aborted) throw aborted(); }
+  function hideToast() {
+    clearTimeout(S.toastTimer); S.toastTimer = null;
+    $('toast').hidden = true;
+  }
+  function showToast(message, kind = '') {
+    clearTimeout(S.toastTimer);
+    $('toastMessage').textContent = message;
+    $('toast').classList.remove('error', 'warning', 'success');
+    $('toast').classList.add(kind || 'success');
+    $('toast').hidden = false;
+    S.toastTimer = setTimeout(hideToast, kind === 'error' ? 8000 : kind === 'warning' ? 5500 : 3200);
+  }
+  function conciseStatus(message, kind) {
+    if (/已保留.*可靠跟踪点/.test(message)) return '追踪中断，请在断点处补点';
+    if (kind === 'error' || kind === 'warning') {
+      if (/相机权限未开启/.test(message)) return '请允许相机权限，或导入视频';
+      if (/未找到摄像头/.test(message)) return '未找到相机，请导入视频';
+      if (/此环境不提供网页相机/.test(message)) return '请用系统浏览器打开，或导入视频';
+      if (/取样超过|超过 60 帧/.test(message)) return '取样太多，请在设置里增大间隔';
+      if (/背景发生变化/.test(message)) return '叠影已生成，请检查机位与背景';
+      if (/多数取样未检测/.test(message)) return '叠影已生成，可在设置里降低阈值';
+      if (/定位视频画面/.test(message)) return '等画面稳定后再标点';
+      if (/不要点击黑边/.test(message)) return '请点在视频画面内';
+      const first = message.split(/[。；]/)[0];
+      return first.length > 38 ? first.slice(0, 35) + '…（详见设置）' : first;
+    }
+    if (/^视频已就绪/.test(message)) return '视频已就绪';
+    const overlay = message.match(/^已生成 (\d+) 帧叠影/);
+    if (overlay) return '叠影已生成 · ' + overlay[1] + ' 帧';
+    const tracked = message.match(/^已完成 ([A-Z]) 的本地/);
+    if (tracked) return '轨迹 ' + tracked[1] + ' 已生成';
+    if (/^画面已生成/.test(message)) return '画面已生成，请查看下载列表';
+    if (/^已取消/.test(message)) return '分析已取消';
+    if (/^已撤销/.test(message)) return '已撤销';
+    if (/^已清空/.test(message)) return '已清空';
+    return '';
+  }
   function status(message, kind = '') {
     $('status').textContent = message;
     $('status').className = 'status' + (kind ? ' ' + kind : '');
+    const concise = conciseStatus(message, kind);
+    if (concise) showToast(concise, kind);
+  }
+  function closeSettings() {
+    if ($('settingsDialog').open) $('settingsDialog').close();
   }
   function setTab(name) {
     const names = { capture: 'Capture', overlay: 'Overlay', track: 'Track' };
+    if (!names[name] || S.busy && name !== S.tab) return;
+    if (name !== 'capture' && (!S.loaded || S.live || S.loading || S.recording || S.cameraPending)) return;
+    if (name !== 'track' && S.marking) setMarking(false);
+    S.tab = name;
+    document.body.dataset.mode = name;
     Object.entries(names).forEach(([key, suffix]) => {
       $('tab' + suffix).classList.toggle('active', key === name);
       $('tab' + suffix).setAttribute('aria-selected', String(key === name));
       $('panel' + suffix).hidden = key !== name;
     });
+    setView(name === 'overlay' && S.overlay ? 'overlay' : 'original');
   }
   function setView(name) {
     if (name === 'overlay' && !S.overlay) return;
@@ -501,18 +469,17 @@
     S.marking = !!on && S.loaded && !S.busy && !S.live;
     annotation.classList.toggle('marking', S.marking);
     $('markBtn').classList.toggle('is-active', S.marking);
-    $('markShortcut').classList.toggle('is-active', S.marking);
-    $('markText').textContent = S.marking ? '正在标点 · 点击结束' : '手动标点 / 补点';
+    $('markText').textContent = S.marking ? '完成' : '标点';
     if (S.marking) {
       setView('original'); video.pause();
-      showTip('点击物体上的观察位置；拖动时间轴后，可继续补点');
+      showTip('点一下要观察的位置');
     } else showTip('');
   }
   function sync() {
     const blocked = !!S.busy || S.loading || S.recording || S.cameraPending;
     const usable = S.loaded && !blocked && !S.live;
     ['playBtn', 'restartBtn', 'prevBtn', 'nextBtn', 'timeline', 'speed',
-      'overlayShortcut', 'markShortcut', 'saveImageBtn', 'generateOverlayBtn',
+      'saveImageBtn', 'generateOverlayBtn',
       'markBtn', 'saveVideoBtn'].forEach(id => $(id).disabled = !usable);
     $('overlayViewBtn').disabled = !S.overlay || blocked || S.live;
     $('originalViewBtn').disabled = blocked || S.live;
@@ -521,17 +488,24 @@
     $('undoBtn').disabled = !usable || !S.undo.length;
     $('clearTrackBtn').disabled = !usable || !currentTrack().points.length;
     $('exportDataBtn').disabled = !usable || !S.tracks.some(t => t.points.some(p => !p.lost));
-    ['importBtn', 'importMain', 'systemCameraBtn'].forEach(id => $(id).disabled = blocked);
-    ['openCameraBtn', 'openCameraMain'].forEach(id => $(id).disabled = blocked);
-    $('recordBtn').disabled = !S.stream || !!S.busy || S.loading || S.cameraPending;
+    ['importBtn', 'systemCameraBtn'].forEach(id => $(id).disabled = blocked);
+    $('openCameraBtn').disabled = blocked;
+    $('recordBtn').disabled = !!S.busy || S.loading || S.cameraPending;
     $('switchCameraBtn').disabled = !S.stream || blocked;
+    $('switchCameraBtn').hidden = !S.live;
+    $('saveImageBtn').hidden = !S.loaded;
+    $('playerBar').hidden = !S.loaded || S.live;
+    $('tabCapture').disabled = blocked;
+    $('tabOverlay').disabled = !usable;
+    $('tabTrack').disabled = !usable;
     $('openCameraBtn').textContent = S.stream ? '关闭相机' : '打开相机';
-    $('recordText').textContent = S.recording ? '停止录制' : '开始录制';
+    $('recordText').textContent = S.recording ? '停止' : S.stream ? '开始' : '拍摄';
     $('recordIcon').setAttribute('href', S.recording ? '#i-stop' : '#i-record');
     $('recordBtn').classList.toggle('danger', S.recording);
     $('recordClock').hidden = !S.recording;
     ['rangeStart', 'rangeEnd', 'sampleInterval', 'overlayMode', 'sampleLabels',
       'trackSelect', 'trackMode', 'trackStep'].forEach(id => $(id).disabled = blocked || S.live);
+    $('densityChoices').querySelectorAll('[data-density]').forEach(button => { button.disabled = !usable; });
     $('emptyState').hidden = S.loaded || S.live || S.loading;
     $('stageLabel').hidden = !S.loaded && !S.live;
     $('busyBox').hidden = !S.busy;
@@ -544,8 +518,9 @@
   }
   function updateTime() {
     const time = S.loaded ? video.currentTime || 0 : 0;
-    $('currentTime').textContent = fmt(time);
-    $('durationTime').textContent = fmt(S.duration);
+    const shortTime = t => { const n = Math.max(0, Math.floor(t || 0)); return Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0'); };
+    $('currentTime').textContent = shortTime(time);
+    $('durationTime').textContent = shortTime(S.duration);
     $('timeline').max = String(S.duration || 1);
     $('timeline').value = String(clamp(time, 0, S.duration || 1));
     const playing = !video.paused && !video.ended;
@@ -625,7 +600,7 @@
           target.fillStyle = manual ? track.color : '#ffffffd9';
           target.fill(); target.lineWidth = manual ? 1.5 : 1.4;
           target.strokeStyle = manual ? '#fff' : track.color; target.stroke();
-          if (manual) {
+          if (manual && $('pointTimes').checked) {
             target.font = 'bold 12px sans-serif'; target.lineWidth = 3; target.strokeStyle = '#172b3ad0';
             const label = track.id + ' · ' + p.t.toFixed(2) + 's';
             target.strokeText(label, q.x + 9, q.y - 9); target.fillStyle = '#fff'; target.fillText(label, q.x + 9, q.y - 9);
@@ -703,10 +678,11 @@
   async function loadVideo(blob, filename, fallbackDuration = null) {
     if (!blob || !blob.size) { status('没有收到有效视频，请重新拍摄或导入。', 'error'); return; }
     if (blob.size > 500 * 1024 * 1024) { status('视频超过 500 MB，请先剪短再导入。', 'error'); return; }
+    closeSettings(); hideToast();
     cancelJob(); setMarking(false); video.pause(); stopStream();
     const generation = ++S.generation;
     S.loading = true; S.loaded = false; S.busy = null; S.overlay = null; S.overlayTimes = [];
-    S.duration = 0; setView('original');
+    S.duration = 0; setTab('capture');
     $('sourceInfo').textContent = '正在载入新视频…';
     S.tracks = [newTrack('A', '#ed454a')]; S.selected = 'A'; S.undo = [];
     $('trackSelect').innerHTML = '<option value="A">观察点 A · 红色</option>';
@@ -727,11 +703,12 @@
       analysis.src = S.url; analysis.load(); await analysisReady;
       if (generation !== S.generation) return;
       S.loaded = true; video.currentTime = 0; video.playbackRate = Number($('speed').value);
-      $('rangeStart').value = '0'; $('rangeEnd').value = Math.min(S.duration, 8).toFixed(2);
+      $('rangeStart').value = '0'; $('rangeEnd').value = String(S.duration);
       $('rangeStart').max = String(S.duration); $('rangeEnd').max = String(S.duration);
+      applyDensity(12);
       const strong = document.createElement('strong'); strong.textContent = S.name;
       $('sourceInfo').replaceChildren(strong, document.createTextNode(video.videoWidth + ' × ' + video.videoHeight + ' · ' + fmt(S.duration) + ' · ' + (blob.size / 1024 / 1024).toFixed(1) + ' MB'));
-      setView('original'); showTip('');
+      setTab('capture'); showTip('');
       status('视频已就绪。可重播、生成叠影，或在轨迹面板标记观察点。');
     } catch (error) {
       if (generation === S.generation) {
@@ -754,6 +731,7 @@
   }
   async function openCamera(force = false) {
     if (S.recording || S.busy || S.loading || S.cameraPending) return;
+    closeSettings();
     if (S.stream && !force) {
       stopStream(); setView('original'); status('相机已关闭。'); sync(); return;
     }
@@ -769,7 +747,7 @@
       });
       live.srcObject = S.stream; await live.play();
       S.live = true; setView('original'); setTab('capture');
-      status('相机已开启。固定机位后点击“开始录制”；结束后自动进入重播。');
+      status('相机已开启。固定机位后点击“开始”；结束后自动进入重播。');
     } catch (error) { stopStream(); setView('original'); status(cameraError(error), 'error'); }
     finally { S.cameraPending = false; sync(); }
   }
@@ -779,7 +757,9 @@
   }
   function startOrStopRecording() {
     if (S.recording) { if (S.recorder && S.recorder.state !== 'inactive') S.recorder.stop(); return; }
-    if (!S.stream) return;
+    if (S.busy || S.loading || S.cameraPending) return;
+    closeSettings();
+    if (!S.stream) { openCamera(); return; }
     if (!window.MediaRecorder) { status('此浏览器不支持网页录像，请用“使用系统相机 / 选择视频”。', 'error'); return; }
     const chunks = []; let failed = false, mime = pickMime();
     try {
@@ -838,6 +818,26 @@
     }
     return { start, end: Math.min(end, S.duration), interval };
   }
+  function updateDensitySelection() {
+    $('densityChoices').querySelectorAll('[data-density]').forEach(button => {
+      const active = Number(button.dataset.density) === S.density;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+  }
+  function applyDensity(count) {
+    if (![6, 12, 20].includes(count)) return;
+    S.density = count;
+    if (S.loaded) {
+      const start = Number($('rangeStart').value), end = Number($('rangeEnd').value);
+      // The default range is the complete video. Explicit density changes only
+      // replace the interval; a teacher's manually chosen range stays intact.
+      const span = Number.isFinite(start) && Number.isFinite(end) && end > start ? end - start : S.duration;
+      const interval = Math.max(.05, Math.ceil((span / (count - 1)) / .05) * .05);
+      $('sampleInterval').value = interval.toFixed(2);
+    }
+    updateDensitySelection(); updateSampling();
+  }
   function updateSampling() {
     $('opacityValue').textContent = Math.round(Number($('opacity').value) * 100) + '%';
     $('thresholdValue').textContent = $('threshold').value;
@@ -857,7 +857,7 @@
   function beginJob(label) {
     if (S.busy) throw new Error('已有分析正在进行。');
     const job = { controller: new AbortController(), generation: S.generation, label };
-    S.busy = job; video.pause(); setMarking(false);
+    S.busy = job; video.pause(); setMarking(false); hideToast();
     $('progress').value = 0; $('progressText').textContent = label; sync();
     return job;
   }
@@ -923,7 +923,7 @@
     if (times.length < 2) { status('至少需要两次取样，请缩短间隔或扩大时间范围。', 'warning'); return; }
     const mode = $('overlayMode').value, opacity = Number($('opacity').value), threshold = Number($('threshold').value);
     const labels = $('sampleLabels').checked;
-    const job = beginJob('准备生成叠影…'), signal = job.controller.signal;
+    const job = beginJob('准备叠影…'), signal = job.controller.signal;
     const size = analysisSize(800);
     const out = document.createElement('canvas'); out.width = size.w; out.height = size.h;
     const target = out.getContext('2d');
@@ -938,7 +938,7 @@
         for (let i = 0; i < count; i++) {
           const t = times[Math.round(i * (times.length - 1) / Math.max(1, count - 1))];
           samples.push(await frameAt(t, size, signal));
-          jobProgress(job, .23 * (i + 1) / count, '估计固定背景 ' + (i + 1) + '/' + count);
+          jobProgress(job, .23 * (i + 1) / count, '准备叠影 ' + (i + 1) + '/' + count);
         }
         background = Core.estimateBackground(samples);
         target.putImageData(new ImageData(background, size.w, size.h), 0, 0);
@@ -960,7 +960,7 @@
           layerCtx.putImageData(frame, 0, 0);
           target.globalAlpha = 1 / (i + 1); target.drawImage(layer, 0, 0); target.globalAlpha = 1;
         }
-        jobProgress(job, .23 + .77 * (i + 1) / times.length, '叠加等间隔画面 ' + (i + 1) + '/' + times.length);
+        jobProgress(job, .23 + .77 * (i + 1) / times.length, '生成叠影 ' + (i + 1) + '/' + times.length);
         await tick();
       }
       timeLabels.forEach(p => {
@@ -1015,6 +1015,7 @@
     track.points.push({ t, x: (x - rect.x) / rect.w, y: (y - rect.y) / rect.h, confidence: 1, source: 'manual', segment });
     track.points.sort((a, b) => a.t - b.t); track.seedTime = t;
     status('已在 ' + t.toFixed(2) + ' 秒标记 ' + track.id + '。可以向后播放继续补点，或从此处自动追踪。');
+    showTip('移动时间轴，继续标点');
     sync(); draw();
   }
   async function autoTrack() {
@@ -1028,7 +1029,7 @@
     const end = Math.min(S.duration - .003, seed.t + 30, nextManual ? nextManual.t - .003 : Infinity);
     if (end - seed.t < interval) { status('该标记后没有足够的分析时间，请向前移动并重新标记。', 'warning'); return; }
     const times = Core.samplingTimes(seed.t, end, interval, 1000);
-    const mode = $('trackMode').value, job = beginJob('准备本地追踪…'), signal = job.controller.signal;
+    const mode = $('trackMode').value, job = beginJob('追踪 0%'), signal = job.controller.signal;
     const pending = []; let lost = null, tracker = null;
     try {
       const initial = await frameAt(seed.t, size, signal);
@@ -1042,7 +1043,7 @@
           break;
         }
         pending.push({ t: times[i], x: p.x, y: p.y, confidence: p.confidence, source: 'tracked', segment: seed.segment || 0 });
-        jobProgress(job, i / (times.length - 1), '追踪 ' + track.id + ' · ' + times[i].toFixed(2) + 's · ' + Math.round(p.confidence * 100) + '%');
+        jobProgress(job, i / (times.length - 1), '追踪 ' + Math.round(i / (times.length - 1) * 100) + '%');
         if (i % 3 === 0) await tick();
       }
       check(signal);
@@ -1087,15 +1088,24 @@
     download(new Blob(['\ufeff' + rows.map(r => r.join(',')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), '运动观察点_' + Date.now() + '.csv');
   }
   document.querySelectorAll('[data-tab]').forEach(button => button.addEventListener('click', () => setTab(button.dataset.tab)));
-  $('helpBtn').addEventListener('click', () => $('helpDialog').showModal());
+  $('settingsBtn').addEventListener('click', () => {
+    if (!$('settingsDialog').open) $('settingsDialog').showModal();
+  });
+  $('closeSettingsBtn').addEventListener('click', closeSettings);
+  $('settingsDialog').addEventListener('click', event => {
+    if (event.target !== $('settingsDialog')) return;
+    const r = $('settingsDialog').getBoundingClientRect();
+    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) closeSettings();
+  });
+  $('closeToastBtn').addEventListener('click', hideToast);
+  $('helpBtn').addEventListener('click', () => { closeSettings(); $('helpDialog').showModal(); });
   $('closeHelpBtn').addEventListener('click', () => $('helpDialog').close());
   $('helpDialog').addEventListener('click', event => { if (event.target === $('helpDialog')) { const r = $('helpDialog').getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) $('helpDialog').close(); } });
-  $('openCameraMain').addEventListener('click', () => openCamera());
   $('openCameraBtn').addEventListener('click', () => openCamera());
   $('switchCameraBtn').addEventListener('click', () => { S.facing = S.facing === 'environment' ? 'user' : 'environment'; openCamera(true); });
   $('recordBtn').addEventListener('click', startOrStopRecording);
-  ['importMain', 'importBtn'].forEach(id => $(id).addEventListener('click', () => $('fileInput').click()));
-  $('systemCameraBtn').addEventListener('click', () => $('captureInput').click());
+  $('importBtn').addEventListener('click', () => { closeSettings(); $('fileInput').click(); });
+  $('systemCameraBtn').addEventListener('click', () => { closeSettings(); $('captureInput').click(); });
   ['fileInput', 'captureInput'].forEach(id => $(id).addEventListener('change', event => {
     const file = event.target.files && event.target.files[0]; if (file) loadVideo(file, file.name); event.target.value = '';
   }));
@@ -1105,10 +1115,16 @@
   $('nextBtn').addEventListener('click', () => seek(video.currentTime + Number($('frameStep').value)));
   $('timeline').addEventListener('input', () => seek(Number($('timeline').value)));
   $('speed').addEventListener('change', () => { video.playbackRate = Number($('speed').value); });
-  $('frameStep').addEventListener('change', () => { $('frameInfo').textContent = '逐步查看：' + Number($('frameStep').value).toFixed(3) + ' 秒 / 步，实际画面受源视频帧率影响'; });
-  ['rangeStart', 'rangeEnd', 'sampleInterval', 'opacity', 'threshold', 'overlayMode'].forEach(id => $(id).addEventListener('input', updateSampling));
-  $('overlayShortcut').addEventListener('click', () => { setTab('overlay'); setMarking(false); });
-  $('markShortcut').addEventListener('click', () => { setTab('track'); setMarking(!S.marking); });
+  ['rangeStart', 'rangeEnd', 'sampleInterval'].forEach(id => $(id).addEventListener('input', () => {
+    // An explicit teacher edit is never overwritten by a later sync or tab switch.
+    S.density = null; updateDensitySelection(); updateSampling();
+  }));
+  ['opacity', 'threshold', 'overlayMode'].forEach(id => $(id).addEventListener('input', updateSampling));
+  $('densityChoices').addEventListener('click', event => {
+    const button = event.target.closest('[data-density]');
+    if (!button || button.disabled || !S.loaded || S.busy || S.loading || S.live) return;
+    applyDensity(Number(button.dataset.density));
+  });
   $('markBtn').addEventListener('click', () => setMarking(!S.marking));
   $('generateOverlayBtn').addEventListener('click', makeOverlay);
   $('autoTrackBtn').addEventListener('click', autoTrack);
@@ -1118,7 +1134,8 @@
   annotation.addEventListener('pointerdown', addPoint);
   $('addTrackBtn').addEventListener('click', () => {
     if (S.tracks.length >= 2) return; snapshot(); S.tracks.push(newTrack('B', '#f08a22'));
-    S.selected = 'B'; rebuildTracks(); setMarking(true); status('已新增观察点 B。点击第二个需要比较的位置，例如车轮轮缘。'); sync();
+    S.selected = 'B'; rebuildTracks(); closeSettings(); setTab('track'); setMarking(true);
+    status('已新增观察点 B。点击第二个需要比较的位置，例如车轮轮缘。'); sync();
   });
   $('trackSelect').addEventListener('change', () => { S.selected = $('trackSelect').value; sync(); draw(); });
   $('undoBtn').addEventListener('click', () => {
@@ -1129,7 +1146,7 @@
     if (!confirm('清空观察点 ' + S.selected + ' 的全部标记和自动轨迹？可用“撤销”恢复。')) return;
     snapshot(); currentTrack().points = []; currentTrack().seedTime = null; sync(); draw(); status('已清空当前观察点，可重新标记。');
   });
-  ['smoothPath', 'showArrows', 'fullPath', 'showPaths'].forEach(id => $(id).addEventListener('change', draw));
+  ['smoothPath', 'showArrows', 'fullPath', 'showPaths', 'pointTimes'].forEach(id => $(id).addEventListener('change', draw));
   $('saveImageBtn').addEventListener('click', saveImage);
   $('saveVideoBtn').addEventListener('click', () => {
     if (S.blob) download(S.blob, S.name || '运动录像' + (S.blob.type.includes('mp4') ? '.mp4' : '.webm'));
@@ -1141,7 +1158,7 @@
   window.addEventListener('resize', resize);
   if (window.ResizeObserver) new ResizeObserver(resize).observe(stage);
   document.addEventListener('keydown', event => {
-    if ($('helpDialog').open || /INPUT|SELECT|TEXTAREA|BUTTON/.test(event.target.tagName) || !S.loaded || S.busy) return;
+    if ($('settingsDialog').open || $('helpDialog').open || /INPUT|SELECT|TEXTAREA|BUTTON/.test(event.target.tagName) || !S.loaded || S.busy) return;
     if (event.code === 'Space') { event.preventDefault(); togglePlay(); }
     if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
       event.preventDefault(); seek(video.currentTime + (event.code === 'ArrowRight' ? 1 : -1) * Number($('frameStep').value));
@@ -1151,12 +1168,12 @@
     if (S.recording || S.busy) { event.preventDefault(); event.returnValue = ''; }
   });
   window.addEventListener('pagehide', () => {
-    cancelJob(); clearInterval(S.recordTimer);
+    cancelJob(); clearInterval(S.recordTimer); hideToast();
     if (S.recorder && S.recorder.state === 'recording') S.recorder.stop();
     stopStream();
   });
   $('secureWarning').hidden = window.isSecureContext && !!navigator.mediaDevices;
-  sync(); resize();
+  setTab('capture'); updateDensitySelection(); sync(); resize();
 })();
 
 </script>
