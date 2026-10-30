@@ -1,4 +1,4 @@
-/* 船的最大装载量 · deterministic Canvas 2D scientific scenes · v1.0
+/* 船的最大装载量 · deterministic Canvas 2D scientific scenes · v2.0
  * Instrument geometry is drawn from lengths, not raster pixels.
  * No external dependencies or WebGL. Assets are optional same-origin images.
  */
@@ -67,8 +67,12 @@
   };
   FloatRenderer.prototype.getGeometry = function () {
     if (!this.geometry) return null;
-    return { floatTopY: this.geometry.floatTopY, pxPerCm: this.geometry.pxPerCm, waterY: this.geometry.waterY, centerX: this.geometry.centerX,
-      markRect: Object.assign({}, this.geometry.markRect), markerY: this.geometry.markerY, totalLengthCm: 24 };
+    var result = {};
+    Object.keys(this.geometry).forEach(function (key) {
+      var value = this.geometry[key];
+      result[key] = value && typeof value === 'object' ? Object.assign({}, value) : value;
+    }, this);
+    return result;
   };
   FloatRenderer.prototype.destroy = function () {
     this.destroyed = true; if (this.observer) this.observer.disconnect();
@@ -134,7 +138,7 @@
   };
   FloatRenderer.prototype.straw = function (x, top, scale, options) {
     var c = this.ctx; options = options || {};
-    var sw = clamp(scale * .82, 8, 23), stemH = scale * 22, ballastH = scale * 2, ballastW = sw * 2.6;
+    var sw = clamp(scale * .95, 12, 23), stemH = scale * 22, ballastH = scale * 2, ballastW = sw * 2.6;
     c.save(); if (options.faint) c.globalAlpha = .20;
     var shade = c.createLinearGradient(x - sw / 2, 0, x + sw / 2, 0);
     shade.addColorStop(0, '#b8c9d3'); shade.addColorStop(.24, '#f4f8fa'); shade.addColorStop(.49, '#fff'); shade.addColorStop(.8, '#e6eef2'); shade.addColorStop(1, '#adbfca');
@@ -142,11 +146,7 @@
     line(c, x - sw / 2 + 1, top + 3, x - sw / 2 + 1, top + stemH, 'rgba(255,255,255,.9)', 1);
     ellipse(c, x, top + 1, sw / 2, Math.max(2, sw * .12)); c.fillStyle = '#e4edf2'; c.fill();
     ellipse(c, x, top + 1, sw * .30, Math.max(1, sw * .075)); c.fillStyle = '#aebec7'; c.fill();
-    for (var k = 1; k < 22; k++) {
-      var ty = top + k * scale, major = k % 5 === 0;
-      line(c, x - sw * .33, ty, x + sw * (major ? .32 : .06), ty, 'rgba(29,53,73,.75)', major ? 1.5 : 1);
-      if (major && options.numbers) label(c, String(k), x + sw * .9 + 7, ty, clamp(scale * .72, 11, 14), '#6b8293', 'left', 500);
-    }
+    // The straw is deliberately ungraduated; students use an independent ruler.
     // Clay ballast is two centimetres high; its bottom is the float's 24 cm endpoint.
     var by = top + stemH, br = ballastW * .28;
     var clay = c.createLinearGradient(x - ballastW / 2, by, x + ballastW / 2, by + ballastH);
@@ -161,62 +161,110 @@
     line(c, x - ballastW * .3, by + ballastH * .25, x - ballastW * .24, by + ballastH * .67, 'rgba(158,222,218,.25)', Math.max(1, br * .3));
     c.restore(); return { width: sw, bottom: top + scale * 24 };
   };
-  FloatRenderer.prototype.drawMeasure = function (m) {
-    var c = this.ctx, w = this.width, h = this.height;
-    this.labBackground();
-    var exposure = clamp(n(m.floatExposure, 10), 0, 24);
-    var marginTop = Math.min(80, h * .13), marginBottom = Math.min(94, h * .16);
-    var above = Math.max(14, exposure + 1), below = Math.max(16, 24 - exposure + 3.5);
-    var scale = Math.max(2, (h - marginTop - marginBottom - 18) / (above + below));
-    var waterY = marginTop + above * scale, top = waterY - exposure * scale;
-    var center = w * (w > 480 ? .43 : .44), glassWidth = Math.min(w * .43, scale * 22);
-    var glassTop = Math.max(marginTop + 2, Math.min(top + scale * 3, waterY - scale * 3.5));
-    var glassBottom = waterY + below * scale;
-    this.beakerBack(center, glassTop, glassWidth, glassBottom, waterY, false);
-    this.straw(center, top, scale, { numbers: true });
-    this.beakerFront(center, glassTop, glassWidth, glassBottom, waterY);
-    var chosen = m.markerExposure == null ? null : clamp(n(m.markerExposure, exposure), 0, 24);
-    var markY = top + (chosen == null ? exposure : chosen) * scale;
-    var markerColor = COLORS[m.liquid] || COLORS.teal;
-    // Wide hit target is supplied through getGeometry; visible handle remains precise.
-    line(c, center - scale * .8, markY, center + Math.max(30, scale * 2.2), markY, markerColor, 3.5, chosen == null ? [5, 4] : null);
-    c.save(); c.fillStyle = '#fff'; c.strokeStyle = markerColor; c.lineWidth = 3;
-    ellipse(c, center + Math.max(30, scale * 2.2), markY, 9, 9); c.fill(); c.stroke(); c.restore();
-    var magR = clamp(Math.min(w * .145, h * .17), 43, 106), magX = w - magR - Math.max(18, w * .04), magY = marginTop + magR + 4;
-    if (w >= 450 && h >= 340) this.magnifier({ x: magX, y: magY, r: magR, sourceX: center, sourceY: waterY, scale: scale,
-      floatTopY: top, markerY: markY, color: markerColor, hasMarker: chosen != null });
-    this.geometry = { floatTopY: top, pxPerCm: scale, waterY: waterY, centerX: center, markerY: markY,
-      markRect: { x: center - 38, y: top - 12, width: 96, height: 24 * scale + 24 } };
-  };
-  FloatRenderer.prototype.magnifier = function (g) {
-    var c = this.ctx, z = 3.1;
-    c.save();
-    line(c, g.sourceX + 10, g.sourceY, g.x - g.r * .64, g.y + g.r * .7, 'rgba(24,120,135,.55)', 1.5);
-    c.shadowColor = 'rgba(37,71,91,.12)'; c.shadowBlur = 12; c.shadowOffsetY = 5;
-    ellipse(c, g.x, g.y, g.r, g.r); c.fillStyle = '#f6fbfd'; c.fill(); c.shadowBlur = 0; c.shadowOffsetY = 0;
-    c.save(); ellipse(c, g.x, g.y, g.r - 2, g.r - 2); c.clip();
-    var water = c.createLinearGradient(0, g.y, 0, g.y + g.r); water.addColorStop(0, '#d2eef5'); water.addColorStop(1, '#8bcbdc');
-    c.fillStyle = water; c.fillRect(g.x - g.r, g.y, g.r * 2, g.r);
-    var sw = clamp(g.scale * .82, 8, 23) * z;
-    var shade = c.createLinearGradient(g.x - sw / 2, 0, g.x + sw / 2, 0); shade.addColorStop(0, '#b7cbd4'); shade.addColorStop(.35, '#fff'); shade.addColorStop(.7, '#f8fbfd'); shade.addColorStop(1, '#bdcfd8');
-    c.fillStyle = shade; c.fillRect(g.x - sw / 2, g.y - g.r, sw, g.r * 2);
-    for (var k = 0; k <= 22; k++) {
-      var py = g.y + (g.floatTopY + k * g.scale - g.sourceY) * z;
-      if (py > g.y - g.r && py < g.y + g.r) line(c, g.x - sw * .33, py, g.x + sw * (k % 5 ? .08 : .33), py, '#344e63', k % 5 ? 1.8 : 2.7);
+  function ease(v) { v = clamp(v, 0, 1); return v * v * (3 - 2 * v); }
+  FloatRenderer.prototype.drawRuler = function (x, zeroY, scale, options) {
+    var c = this.ctx; options = options || {};
+    var width = options.width || clamp(scale * 4.1, 47, 66), length = 24;
+    var left = x - width / 2, top = zeroY - length * scale - 28;
+    c.save(); c.globalAlpha = n(options.alpha, 1);
+    c.shadowColor = 'rgba(41,79,96,.13)'; c.shadowBlur = 8; c.shadowOffsetX = 3; c.shadowOffsetY = 3;
+    var fill = c.createLinearGradient(left, 0, left + width, 0);
+    fill.addColorStop(0, 'rgba(246,225,153,.92)'); fill.addColorStop(.52, 'rgba(255,245,198,.96)'); fill.addColorStop(1, 'rgba(228,202,118,.88)');
+    rr(c, left, top, width, length * scale + 40, 8); c.fillStyle = fill; c.fill(); c.shadowBlur = 0; c.shadowOffsetX = 0; c.shadowOffsetY = 0;
+    c.strokeStyle = 'rgba(139,115,49,.45)'; c.lineWidth = 1.2; c.stroke();
+    // Zero at the bottom. Numbers increase upwards to measure exposed height.
+    for (var k = 0; k <= length * 10; k++) {
+      var y = zeroY - k * scale / 10, major = k % 10 === 0, half = k % 5 === 0;
+      if (!major && !half && scale < 12 && !options.fine) continue;
+      line(c, left + 2, y, left + (major ? width * .37 : half ? width * .26 : width * .15), y, '#6e633d', major ? 1.5 : .8);
+      if (major && (k % 20 === 0 || scale >= 18)) label(c, String(k / 10), left + width * .63, y, (scale < 8 ? 9 : clamp(scale * .96, 12, 18)), '#5e552f', 'center', k === 0 ? 700 : 500);
     }
-    line(c, g.x - g.r, g.y, g.x + g.r, g.y, 'rgba(32,146,174,.65)', 2.5);
-    line(c, g.x - g.r, g.y + 3, g.x + g.r, g.y + 3, 'rgba(255,255,255,.85)', 2);
-    var my = g.y + (g.markerY - g.sourceY) * z;
-    line(c, g.x - sw * .75, my, g.x + sw * .75, my, g.color, 5, g.hasMarker ? null : [7, 6]);
-    c.restore(); ellipse(c, g.x, g.y, g.r); c.strokeStyle = '#1a7e8b'; c.lineWidth = 2.7; c.stroke();
-    ellipse(c, g.x, g.y, g.r - 4); c.strokeStyle = 'rgba(255,255,255,.8)'; c.lineWidth = 2; c.stroke();
+    line(c, left, zeroY, left + width, zeroY, '#d18b14', 2.5);
+    label(c, 'cm', x, top + 11, 12, '#8c7940', 'center', 500);
     c.restore();
+    return { x: left - 7, y: top - 4, width: width + 14, height: length * scale + 48 };
+  };
+  FloatRenderer.prototype.drawMeasure = function (m) {
+    var c = this.ctx, w = this.width, h = this.height; this.labBackground();
+    var exposure = clamp(n(m.floatExposure, 10), 0, 24);
+    // Fixed geometry across liquids: both the complete 24 cm ruler and a freely
+    // floating 24 cm instrument fit, including the full accepted measurement range.
+    var marginTop = Math.min(78, h * .15), marginBottom = Math.min(64, h * .14);
+    var above = 26, below = 26;
+    var scale = Math.max(1.8, (h - marginTop - marginBottom) / (above + below));
+    var waterY = marginTop + above * scale, floatTop = waterY - exposure * scale;
+    var center = w * .41, glassWidth = Math.min(w * .44, scale * 22.5);
+    var glassTop = marginTop + 4 * scale, glassBottom = waterY + below * scale;
+    var p = clamp(n(m.transition, 1), 0, 1), changing = p < .999 && m.fromLiquid && m.fromLiquid !== m.liquid;
+    if (changing && p < .55) floatTop = waterY - clamp(n(m.fromFloatExposure, exposure), 0, 24) * scale;
+    var cupProgress = changing ? ease((p - .20) / .52) : 1;
+    var lift = 0;
+    if (changing) lift = (floatTop + 24 * scale - glassTop + 24) * (p < .27 ? ease(p / .27) : p > .72 ? 1 - ease((p - .72) / .28) : 1);
+    function cup(renderer, x, id) {
+      renderer.beakerBack(x, glassTop, glassWidth, glassBottom, waterY, false);
+      renderer.beakerFront(x, glassTop, glassWidth, glassBottom, waterY);
+      var tagW = Math.min(120, glassWidth * .62), tagH = clamp(scale * 2.5, 27, 38);
+      c.save(); c.fillStyle = 'rgba(255,255,255,.90)'; rr(c, x - tagW / 2, glassBottom - tagH - 12, tagW, tagH, 8); c.fill();
+      label(c, NAMES[id] || '', x, glassBottom - tagH / 2 - 12, clamp(scale * 1.35, 15, 22), COLORS[id] || COLORS.teal, 'center', 700); c.restore();
+    }
+    if (changing) {
+      cup(this, center - cupProgress * w * 1.02, m.fromLiquid);
+      cup(this, center + (1 - cupProgress) * w * 1.02, m.liquid);
+    } else this.beakerBack(center, glassTop, glassWidth, glassBottom, waterY, false);
+    this.straw(center, floatTop - lift, scale, {});
+    if (!changing) {
+      this.beakerFront(center, glassTop, glassWidth, glassBottom, waterY);
+      var tagW = Math.min(120, glassWidth * .62), tagH = clamp(scale * 2.5, 27, 38);
+      c.fillStyle = 'rgba(255,255,255,.90)'; rr(c, center - tagW / 2, glassBottom - tagH - 12, tagW, tagH, 8); c.fill();
+      label(c, NAMES[m.liquid] || '', center, glassBottom - tagH / 2 - 12, clamp(scale * 1.35, 15, 22), COLORS[m.liquid] || COLORS.teal, 'center', 700);
+    }
+    if (changing && lift > 1) {
+      // The same instrument is lifted clear before its container is replaced.
+      line(c, center - 7, floatTop - lift - 10, center - 7, floatTop - lift + 8, '#597f91', 3);
+      line(c, center + 7, floatTop - lift - 10, center + 7, floatTop - lift + 8, '#597f91', 3);
+    }
+    var ruler = m.ruler || {}, hasX = Number.isFinite(ruler.offsetXcm), hasY = Number.isFinite(ruler.zeroOffsetCm);
+    var rulerX = hasX ? clamp(center + ruler.offsetXcm * scale, .06 * w, .94 * w) : clamp(n(ruler.x, .61), .06, .94) * w;
+    if (ruler.nearFloat) { var nearLimit = Math.max(94, scale * 6) - 4; rulerX = clamp(rulerX, center - nearLimit, center + nearLimit); }
+    var rulerZeroY = hasY ? clamp(waterY + ruler.zeroOffsetCm * scale, .04 * h, .96 * h) : clamp(n(ruler.y, (waterY + 3 * scale) / h), .04, .96) * h;
+    var rulerWidth = clamp(scale * 4.1, 47, 66);
+    var rulerRect = this.drawRuler(rulerX, rulerZeroY, scale, { width: rulerWidth, alpha: changing ? .25 : 1 });
+    var near = Math.abs(rulerX - center) < Math.max(94, scale * 6), aligned = !changing && near && Math.abs(rulerZeroY - waterY) <= Math.max(3, scale * .18);
+    if (!changing) {
+      line(c, center - 18, waterY, rulerX + rulerWidth * .5, waterY, 'rgba(31,155,176,.38)', 1.3, [5, 5]);
+      line(c, rulerX - rulerWidth * .5 - 14, rulerZeroY, rulerX - rulerWidth * .5, rulerZeroY, '#ca8a18', 2.5);
+      var chosen = m.markerExposure == null ? null : clamp(n(m.markerExposure, exposure), 0, 24);
+      if (chosen != null) line(c, center - 10, waterY - chosen * scale, center + 16, waterY - chosen * scale, COLORS[m.liquid] || COLORS.teal, 3);
+      var magR = clamp(Math.min(w * .135, h * .165), 42, 102), magX = w - magR - Math.max(16, w * .035), magY = marginTop + magR + 3;
+      if (w >= 320 && h >= 300) this.measureMagnifier({ x: magX, y: magY, r: magR, centerX: center, floatTopY: floatTop, rulerX: rulerX, rulerZeroY: rulerZeroY, rulerWidth: rulerWidth, waterY: waterY, scale: scale, near: near });
+    }
+    this.geometry = { floatTopY: floatTop, pxPerCm: scale, waterY: waterY, centerX: center,
+      totalLengthCm: 24, rulerRect: rulerRect, rulerX: rulerX, rulerZeroY: rulerZeroY,
+      rulerReadingCm: (rulerZeroY - floatTop) / scale, rulerAligned: aligned, transitioning: changing,
+      markerY: waterY - n(m.markerExposure, exposure) * scale,
+      markRect: { x: center - 35, y: floatTop - 10, width: 70, height: exposure * scale + 20 } };
+  };
+  FloatRenderer.prototype.measureMagnifier = function (g) {
+    var c = this.ctx, z = 2.0;
+    var sourceX = g.near ? (g.r < 75 ? g.rulerX - g.rulerWidth * .05 : (g.centerX + g.rulerX + g.rulerWidth * .45) / 2) : g.centerX;
+    c.save();
+    line(c, g.centerX + 7, g.floatTopY, g.x - g.r * .6, g.y + g.r * .66, 'rgba(31,122,139,.45)', 1.3);
+    c.shadowColor = 'rgba(37,71,91,.12)'; c.shadowBlur = 12; c.shadowOffsetY = 5;
+    ellipse(c, g.x, g.y, g.r); c.fillStyle = '#f7fcff'; c.fill(); c.shadowBlur = 0; c.shadowOffsetY = 0;
+    c.save(); ellipse(c, g.x, g.y, g.r - 2); c.clip();
+    c.translate(g.x, g.y); c.scale(z, z); c.translate(-sourceX, -g.floatTopY);
+    this.straw(g.centerX, g.floatTopY, g.scale, {});
+    if (g.near) this.drawRuler(g.rulerX, g.rulerZeroY, g.scale, { width: g.rulerWidth, fine: true });
+    line(c, g.centerX - 10, g.floatTopY, g.rulerX + g.rulerWidth / 2, g.floatTopY, 'rgba(0,132,147,.7)', 1.1, [4, 3]);
+    c.restore();
+    ellipse(c, g.x, g.y, g.r); c.strokeStyle = '#197e8b'; c.lineWidth = 2.5; c.stroke();
+    ellipse(c, g.x, g.y, g.r - 4); c.strokeStyle = 'rgba(255,255,255,.85)'; c.lineWidth = 1.5; c.stroke(); c.restore();
   };
   FloatRenderer.prototype.drawCompare = function (m) {
     var c = this.ctx, w = this.width, h = this.height; this.labBackground();
     var readings = m.readings || {}, values = IDS.map(function (id) { var v = readings[id]; return typeof v === 'number' && isFinite(v) ? clamp(v, 0, 24) : null; });
     var valid = values.filter(function (v) { return v != null; });
-    var topMargin = Math.min(94, h * .17), bottomMargin = Math.min(106, h * .2);
+    var topMargin = Math.min(150, Math.max(115, h * .20)), bottomMargin = Math.min(78, h * .18);
     var above = Math.max(14, valid.length ? Math.max.apply(null, valid) + 1 : 14);
     var below = Math.max(16, valid.length ? 24 - Math.min.apply(null, valid) + 3 : 16);
     var scale = Math.max(2, (h - topMargin - bottomMargin) / (m.align === 'float' ? 28 : above + below));
@@ -243,6 +291,9 @@
         line(c, bx, floatTop, bx, waterY, COLORS[id], 1.8);
         line(c, bx - 5, floatTop, bx + 5, floatTop, COLORS[id], 1.8);
         line(c, bx - 5, waterY, bx + 5, waterY, COLORS[id], 1.8);
+        label(c, '0', bx + 9, waterY, clamp(colW * .065, 13, 17), COLORS[id], 'left', 500);
+        // Endpoint markers connect the numerical annotation to the exposed span.
+        ellipse(c, bx, floatTop, 3.3); c.fillStyle = COLORS[id]; c.fill();
       } else {
         this.straw(x, floatTop, scale, { faint: true });
         c.save(); c.strokeStyle = '#bfced8'; c.lineWidth = 1.5; c.setLineDash([5, 5]);
@@ -250,58 +301,159 @@
         label(c, '？', x, topMargin + scale * 13, clamp(colW * .12, 28, 44), '#9aafbc', 'center', 400);
       }
       ys.push(waterY);
-      var labelY = h - bottomMargin + Math.min(37, bottomMargin * .4);
-      label(c, NAMES[id], x, labelY, clamp(colW * .095, 19, 27), COLORS.ink, 'center', 650);
-      label(c, value == null ? '未记录' : value.toFixed(1) + ' cm', x, labelY + 34, clamp(colW * .075, 17, 24), value == null ? '#9babb7' : COLORS[id], 'center', 650);
+      var labelY = h - Math.max(27, bottomMargin * .40);
+      label(c, NAMES[id], x, labelY, clamp(colW * .105, 18, 29), COLORS.ink, 'center', 700);
+      var annotationY = topMargin - 32, annotationW = Math.min(150, colW * .78), annotationH = clamp(h * .075, 34, 44);
+      c.save(); c.fillStyle = '#ffffffeb'; c.strokeStyle = value == null ? '#d7e2e9' : COLORS[id]; c.lineWidth = 1.4;
+      rr(c, x - annotationW / 2, annotationY - annotationH / 2, annotationW, annotationH, 12); c.fill(); c.stroke(); c.restore();
+      label(c, value == null ? '未记录' : value.toFixed(1) + ' cm', x, annotationY, clamp(colW * .11, 19, 30), value == null ? '#9babb7' : COLORS[id], 'center', 700);
+      if (value != null) line(c, x, annotationY + annotationH / 2 + 3, x, floatTop - 6, 'rgba(77,125,145,.25)', 1.1, [3, 4]);
     }
     if (m.align === 'float' && valid.length) {
       line(c, colW * .18, fixedTop, w - colW * .18, fixedTop, 'rgba(107,131,148,.28)', 1.2, [6, 6]);
     }
   };
-  FloatRenderer.prototype.drawShip = function (m) {
-    var c = this.ctx, w = this.width, h = this.height, im = this.images.shipSrc, background = this.images.harborSrc;
-    if (!this.coverImage(background, 0, 0, w, h)) {
-      var sky = c.createLinearGradient(0, 0, 0, h); sky.addColorStop(0, '#d7edf7'); sky.addColorStop(.5, '#edf7fa'); sky.addColorStop(.501, '#a7dae4'); sky.addColorStop(1, '#d7f1f3');
-      c.fillStyle = sky; c.fillRect(0, 0, w, h);
+  var REGIONS = {
+    yangtze: { sky: '#d7eef7', horizon: '#b8dce6', water: '#639ca8', deep: '#a3d5d4', land: '#8ba9ac' },
+    ocean: { sky: '#c6e5fa', horizon: '#d6eff9', water: '#2e8eb5', deep: '#70bed3', land: '#95bfcd' },
+    yellow: { sky: '#e9e6d3', horizon: '#e3d8b9', water: '#ad9569', deep: '#cfbb89', land: '#b1a17d' }
+  };
+  FloatRenderer.prototype.drawEnvironment = function (region, time, pan) {
+    var c = this.ctx, w = this.width, h = this.height, colors = REGIONS[region] || REGIONS.yangtze;
+    if (region === 'yangtze' && this.images.harborSrc && this.images.harborSrc.width) {
+      c.save(); c.translate(n(pan, 0), 0); this.coverImage(this.images.harborSrc, -w * .08, 0, w * 1.16, h); c.restore();
+      c.fillStyle = 'rgba(171,213,211,.13)'; c.fillRect(0, h * .43, w, h * .57);
+      return;
     }
-    var waterY = h * .62;
+    var sky = c.createLinearGradient(0, 0, 0, h * .48); sky.addColorStop(0, colors.sky); sky.addColorStop(1, colors.horizon);
+    c.fillStyle = sky; c.fillRect(0, 0, w, h);
+    var horizon = h * .44, source = this.images.harborSrc;
+    // Reuse the existing sky and surface texture; crop away the harbor for the open sea.
+    if (source && source.width) {
+      var srcH = source.height * .25, srcW = Math.min(source.width, srcH * w / horizon);
+      c.drawImage(source, (source.width - srcW) / 2, 0, srcW, srcH, 0, 0, w, horizon);
+      if (region === 'yellow') { c.fillStyle = 'rgba(226,213,177,.27)'; c.fillRect(0, 0, w, horizon); }
+    } else {
+      c.save(); c.globalAlpha = .24; c.fillStyle = '#fff';
+      for (var i = 0; i < 5; i++) {
+        var x = ((i * .22 + .06) * w + n(pan, 0) * .2) % (w * 1.15), y = h * (.14 + (i % 3) * .055);
+        ellipse(c, x, y, w * .07, h * .020); c.fill(); ellipse(c, x + w * .027, y + 2, w * .042, h * .027); c.fill();
+      } c.restore();
+    }
+    if (region === 'yellow') {
+      c.save(); c.fillStyle = colors.land; c.globalAlpha = .43; c.beginPath(); c.moveTo(0, horizon);
+      for (var j = 0; j <= 16; j++) { var px = w * j / 16, py = horizon - h * (.025 + .085 * Math.pow(Math.sin(j * 1.73 + .8), 2)); c.lineTo(px + n(pan, 0) * .10, py); }
+      c.lineTo(w, horizon + 5); c.closePath(); c.fill(); c.restore();
+      c.fillStyle = '#c5b995'; c.fillRect(0, horizon - 3, w, 7);
+    } else {
+      line(c, 0, horizon, w, horizon, 'rgba(110,161,190,.42)', 1.2);
+    }
+    var sea = c.createLinearGradient(0, horizon, 0, h); sea.addColorStop(0, colors.water); sea.addColorStop(1, colors.deep);
+    c.fillStyle = sea; c.fillRect(0, horizon, w, h - horizon);
+    if (source && source.width) {
+      c.save(); c.globalAlpha = region === 'yellow' ? .40 : .58; c.globalCompositeOperation = 'luminosity';
+      c.drawImage(source, 0, source.height * .51, source.width, source.height * .49, 0, horizon, w, h - horizon); c.restore();
+    }
+    for (var k = 0; k < 17; k++) {
+      var yy = horizon + (h - horizon) * Math.pow((k + 1) / 18, 1.55);
+      c.save(); c.strokeStyle = k % 3 ? 'rgba(255,255,255,.16)' : 'rgba(32,92,114,.10)'; c.lineWidth = Math.min(2.3, .5 + k * .12); c.beginPath();
+      for (var x2 = 0; x2 <= w + 15; x2 += 15) { var y2 = yy + Math.sin(x2 / (23 + k * 6) + n(time, 0) * .5 + k) * (1 + k * .16); if (!x2) c.moveTo(x2, y2); else c.lineTo(x2, y2); }
+      c.stroke(); c.restore();
+    }
+  };
+  FloatRenderer.prototype.waveOffset = function (wave, xNorm) {
+    if (!wave) return 0;
+    if (root.VoyageLogic && root.VoyageLogic.waveSample) return root.VoyageLogic.waveSample(wave, xNorm);
+    var a = n(wave.amplitudeCm, n(wave.amplitudeM, 0)), phase = n(wave.phase, 0), cycles = n(wave.cyclesPerShip, 1.35);
+    return a * (.82 * Math.sin(phase + Math.PI * 2 * cycles * xNorm) + .18 * Math.sin(2 * phase + Math.PI * 4 * cycles * xNorm + .4));
+  };
+  FloatRenderer.prototype.drawShip = function (m) {
+    var c = this.ctx, w = this.width, h = this.height, im = this.images.shipSrc, b = m.boat || {};
+    var region = REGIONS[m.region] ? m.region : 'yangtze', time = n(m.time, 0), p = clamp(n(m.transition, 1), 0, 1);
+    var sailing = m.page === 'observe' && p < .999 && m.fromRegion && m.fromRegion !== region;
+    var pan = sailing ? -w * .07 * p : 0;
+    if (sailing) { this.drawEnvironment(m.fromRegion, time, pan); c.save(); c.globalAlpha = ease(p); this.drawEnvironment(region, time, w * .07 * (1 - p)); c.restore(); }
+    else this.drawEnvironment(region, time, 0);
+    var waterY = h * .61;
     if (!im || !im.width) { label(c, '正在准备场景', w * .5, h * .45, 22, '#577a91', 'center', 500); return; }
     var asset = this.options.shipAnchors || { keel: .895, deck: .625, hullDepth: .27, cargoLeft: .265, cargoRight: .80 };
-    var imageW = w * .91, imageH = imageW * im.height / im.width;
-    if (imageH > h * .62) { imageH = h * .62; imageW = imageH * im.width / im.height; }
-    var depthPx = imageH * asset.hullDepth, scale = depthPx / 4.4, draft = clamp(n(m.draft, 2.3), .3, 5.2);
-    var keelY = waterY + draft * scale, imageX = (w - imageW) / 2, imageY = keelY - imageH * asset.keel;
-    var cargo = clamp(Math.round(n(m.cargoUnits, 30)), 0, 72);
-    var deckY = imageY + imageH * asset.deck, cargoLeft = imageX + imageW * asset.cargoLeft;
-    var cargoSpan = imageW * (asset.cargoRight - asset.cargoLeft), cols = 12, cw = cargoSpan / cols, ch = cw * .51;
-    var cargoColors = ['#547f90', '#438c94', '#c59748', '#657f9d', '#5c999f', '#b77e49'];
-    c.save(); c.beginPath(); c.rect(0, waterY, w, h - waterY); c.clip();
-    c.globalAlpha = .12; c.translate(0, waterY * 1.7 + 3); c.scale(1, -.7);
-    c.drawImage(im, imageX, imageY, imageW, imageH); c.restore();
+    var imageW = w * .90, imageH = imageW * im.height / im.width;
+    if (imageH > h * .60) { imageH = h * .60; imageW = imageH * im.width / im.height; }
+    var hullDepth = n(b.hullDepthCm, n(b.hullDepthM, 4.4)), safeDraft = n(b.safeDraftCm, n(b.safeDraftM, 3.2));
+    var scale = imageH * asset.hullDepth / hullDepth, draft = Math.max(0, n(m.draft, n(b.draftCm, n(b.draftM, 2.6))));
+    var wave = m.wave || {}, heave = n(wave.heaveCm, n(wave.heaveM, 0)), pitch = n(wave.pitchRad, 0);
+    var sink = clamp(n(m.sinkProgress, n(b.sinkProgress, 0)), 0, 1), cargo = clamp(Math.round(n(b.cargoUnits, n(m.cargoUnits, 36))), 0, 80);
+    var centerX = w * .5 + (sailing ? Math.sin(p * Math.PI) * w * .025 : 0);
+    var keelY = waterY + draft * scale - heave * scale + sink * imageH * 1.30;
+    var imageX = centerX - imageW / 2, imageY = keelY - imageH * asset.keel;
+    var rotation = -pitch - sink * .14;
+    var status = b.status || m.status || 'safe', over = status === 'overloaded' || status === 'swamped' || status === 'flooding' || status === 'sinking' || status === 'sunk';
+    var safeColor = over ? COLORS.red : COLORS.amber;
+    var deckY = keelY - hullDepth * scale, safeY = keelY - safeDraft * scale;
+    // Boat and its safety reference move as one body. The wave remains in world coordinates.
+    c.save(); c.translate(centerX, keelY); c.rotate(rotation); c.translate(-centerX, -keelY);
+    c.globalAlpha = 1 - Math.max(0, sink - .65) / .35;
     c.drawImage(im, imageX, imageY, imageW, imageH);
-    var centerOrder = [5, 6, 4, 7, 3, 8, 2, 9, 1, 10, 0, 11];
-    for (var k = 0; k < cargo; k++) {
-      var row = Math.floor(k / cols), col = centerOrder[k % cols], x = cargoLeft + col * cw, y = deckY - (row + 1) * ch;
-      this.container(x, y, cw - 1.4, ch - 1.4, cargoColors[(col + row * 3) % cargoColors.length]);
+    var cargoDeckY = imageY + imageH * asset.deck, cargoLeft = imageX + imageW * asset.cargoLeft;
+    var cargoSpan = imageW * (asset.cargoRight - asset.cargoLeft), cols = 12, cw = cargoSpan / cols, ch = cw * .51;
+    var cargoColors = ['#547f90', '#438c94', '#c59748', '#657f9d', '#5c999f', '#b77e49'], centerOrder = [5, 6, 4, 7, 3, 8, 2, 9, 1, 10, 0, 11];
+    for (var k = 0; k < cargo; k++) { var row = Math.floor(k / cols), col = centerOrder[k % cols]; this.container(cargoLeft + col * cw, cargoDeckY - (row + 1) * ch, cw - 1.4, ch - 1.4, cargoColors[(col + row * 3) % cargoColors.length]); }
+    if (m.page === 'load' || m.showSafety) {
+      var sx = imageX + imageW * .57, ex = imageX + imageW * .90;
+      line(c, sx, safeY, ex, safeY, safeColor, 3, [9, 5]);
+      c.fillStyle = '#ffffffed'; rr(c, ex - 80, safeY - 34, 88, 27, 7); c.fill();
+      label(c, '安全线', ex - 36, safeY - 20, 17, safeColor, 'center', 700);
+      // Rail height and the safety line are distinct even in calm inland water.
+      line(c, imageX + imageW * .64, deckY, imageX + imageW * .90, deckY, 'rgba(246,249,253,.62)', 1.2);
     }
-    // A fixed world water surface covers the submerged hull while the ship moves.
-    var sea = c.createLinearGradient(0, waterY, 0, h);
-    sea.addColorStop(0, 'rgba(90,182,198,.23)'); sea.addColorStop(.35, 'rgba(111,201,214,.35)'); sea.addColorStop(1, 'rgba(201,236,239,.7)');
-    c.fillStyle = sea; c.fillRect(0, waterY, w, h - waterY);
-    line(c, 0, waterY, w, waterY, 'rgba(230,254,255,.82)', 2);
-    for (var j = 0; j < 10; j++) {
-      var waveY = waterY + 10 + j * (h - waterY) / 13;
-      c.save(); c.globalAlpha = .16 - j * .009; c.strokeStyle = '#fff'; c.lineWidth = 1.5; c.beginPath();
-      for (var px = 0; px <= w; px += 10) { var py = waveY + Math.sin(px / (30 + j * 4) + j * 1.8) * (1.2 + j * .1); if (!px) c.moveTo(px, py); else c.lineTo(px, py); } c.stroke(); c.restore();
+    c.restore();
+    var self = this, colors = REGIONS[region];
+    function surfaceAt(x) { return waterY - self.waveOffset(wave, (x - centerX) / imageW) * scale; }
+    // A continuous crest/trough surface masks the submerged hull and animates with
+    // exactly the same phase and spatial formula as the flooding model.
+    c.save(); c.beginPath(); c.moveTo(0, surfaceAt(0));
+    for (var x = 8; x <= w + 8; x += 8) c.lineTo(x, surfaceAt(x));
+    c.lineTo(w, h); c.lineTo(0, h); c.closePath();
+    var sea = c.createLinearGradient(0, waterY - n(wave.amplitudeCm, 0) * scale, 0, h);
+    sea.addColorStop(0, region === 'yellow' ? 'rgba(173,149,105,.64)' : region === 'ocean' ? 'rgba(49,139,174,.48)' : 'rgba(95,166,178,.39)');
+    sea.addColorStop(1, region === 'yellow' ? 'rgba(207,187,137,.96)' : region === 'ocean' ? 'rgba(112,190,211,.95)' : 'rgba(180,222,224,.90)');
+    c.fillStyle = sea; c.fill(); c.restore();
+    c.save(); c.beginPath();
+    for (var xx = 0; xx <= w + 8; xx += 8) { var yy = surfaceAt(xx); if (!xx) c.moveTo(xx, yy); else c.lineTo(xx, yy); }
+    c.strokeStyle = region === 'yellow' ? 'rgba(255,244,207,.85)' : 'rgba(235,255,255,.9)'; c.lineWidth = region === 'ocean' ? 2.8 : 1.6; c.stroke(); c.restore();
+    for (var j = 0; j < 7; j++) {
+      c.save(); c.globalAlpha = .18 - j * .014; c.strokeStyle = '#fff'; c.lineWidth = 1.5; c.beginPath();
+      for (var px = 0; px <= w + 10; px += 10) { var py = waterY + 16 + j * (h - waterY) / 9 - this.waveOffset(wave, (px - centerX) / imageW + j * .21) * scale * .60 + Math.sin(px / 55 - time * 1.2 + j) * 1.5; if (!px) c.moveTo(px, py); else c.lineTo(px, py); }
+      c.stroke(); c.restore();
     }
-    if (m.showSafety || m.page === 'load') {
-      var safeY = keelY - 3.2 * scale, color = m.status === 'overloaded' || m.status === 'swamped' ? COLORS.red : COLORS.amber;
-      var sx = imageX + imageW * .64, ex = imageX + imageW * .91;
-      line(c, sx, safeY, ex, safeY, color, 3.5, [9, 5]);
-      c.save(); c.fillStyle = 'rgba(255,255,255,.92)'; rr(c, ex - 64, safeY - 36, 78, 29, 8); c.fill(); c.restore();
-      label(c, '安全线', ex - 25, safeY - 21, 17, color, 'center', 700);
+    if (sailing || (m.page === 'observe' && n(m.speed, 0) > 0)) {
+      c.save(); c.globalAlpha = .42 * (1 - sink);
+      for (var wk = 0; wk < 4; wk++) line(c, imageX - 18 - wk * 12, waterY + 5 + wk * 5, imageX + imageW * .12, waterY + 3 + wk * 5, '#fff', 1.3);
+      c.restore();
     }
-    if (m.zoom) this.shipMagnifier({ x: w * .81, y: h * .23, r: Math.min(w * .13, h * .15), sourceX: imageX + imageW * .80, sourceY: waterY, keelY: keelY, scale: scale, showSafety: !!m.showSafety || m.page === 'load', status: m.status });
+    var breachAt = m.breachAt || b.breachAt || (b.breach ? 'bow' : null);
+    if (breachAt && sink < .8) {
+      var sign = breachAt === 'stern' ? -1 : 1, breachX = centerX + sign * imageW * .43;
+      var rimY = deckY - sign * Math.sin(pitch) * imageW * .43;
+      c.save(); c.strokeStyle = 'rgba(219,249,255,.9)'; c.lineWidth = 3; c.lineCap = 'round';
+      for (var q = 0; q < 6; q++) { var t = (time * 1.2 + q / 6) % 1; c.beginPath(); c.moveTo(breachX + sign * 12, surfaceAt(breachX)); c.quadraticCurveTo(breachX - sign * 9, rimY - 11, breachX - sign * (18 + t * 40), rimY + t * 21); c.stroke(); }
+      c.restore();
+    }
+    if (sink > .3 && sink < 1) {
+      c.save(); c.strokeStyle = 'rgba(235,255,255,.75)'; c.lineWidth = 1.7;
+      for (var q2 = 0; q2 < 10; q2++) { var bt = (time * .45 + q2 * .13) % 1, bx = centerX + Math.sin(q2 * 2.4) * imageW * .27, by = waterY + 40 - bt * 95; ellipse(c, bx, by, 2 + (1 - bt) * 3.5); c.stroke(); } c.restore();
+    }
+    if (m.page === 'load' && sink < .35) {
+      var gx = imageX + imageW * .965, physicalKeel = waterY + draft * scale;
+      line(c, gx, waterY, gx, physicalKeel, '#153f58', 1.8);
+      line(c, gx - 5, waterY, gx + 5, waterY, '#153f58', 1.8); line(c, gx - 5, physicalKeel, gx + 5, physicalKeel, '#153f58', 1.8);
+      var textY = Math.min(h - 46, physicalKeel + 24);
+      c.fillStyle = '#ffffffdf'; rr(c, gx - 126, textY - 20, 140, 38, 11); c.fill();
+      label(c, draft.toFixed(2) + ' m', gx - 56, textY - 1, 23, '#17475f', 'center', 700);
+    }
+    var lensR = Math.min(w * .12, h * .13), lensTop = m.page === 'observe' ? 112 : 72;
+    if (m.zoom && sink < .30) this.shipMagnifier({ x: w * .81, y: Math.max(h * .23, lensTop + lensR), r: lensR, sourceX: centerX + imageW * .35, sourceY: waterY, keelY: keelY, scale: scale, hullDepth: hullDepth, safeDraft: safeDraft, waveOffset: this.waveOffset(wave, .35), showSafety: m.page === 'load' || !!m.showSafety, status: status });
+    this.geometry = { waterY: waterY, centerX: centerX, shipWidth: imageW, pxPerCm: scale, keelY: keelY, safeY: safeY, deckY: deckY, draftCm: draft };
   };
   FloatRenderer.prototype.container = function (x, y, w, h, color) {
     var c = this.ctx, t = Math.min(3, w * .12);
@@ -317,18 +469,20 @@
     ellipse(c, g.x, g.y, r, r); c.fillStyle = '#eaf7fb'; c.fill(); c.save(); c.clip();
     // The lens stays on the world waterline; every hull feature moves with the keel.
     var scale = g.scale * z, keelY = g.y + (g.keelY - g.sourceY) * z;
-    var hullTopY = keelY - 4.4 * scale, sy = keelY - 3.2 * scale;
+    var hullDepth = n(g.hullDepth, 4.4), safeDraft = n(g.safeDraft, 3.2);
+    var hullTopY = keelY - hullDepth * scale, sy = keelY - safeDraft * scale;
     var hull = c.createLinearGradient(0, hullTopY, 0, keelY); hull.addColorStop(0, '#123951'); hull.addColorStop(.6, '#264d5e'); hull.addColorStop(.61, '#91504a'); hull.addColorStop(1, '#6b4041');
-    c.fillStyle = hull; c.fillRect(g.x - r, hullTopY, 2 * r, 4.4 * scale);
+    c.fillStyle = hull; c.fillRect(g.x - r, hullTopY, 2 * r, hullDepth * scale);
     // Quarter-centimetre marks share the main scene's physical scale and keel origin.
     for (var i = 0; i <= 17; i++) {
       var ty = keelY - i * .25 * scale;
       if (ty < g.y - r || ty > g.y + r) continue;
       line(c, g.x + 10, ty, g.x + (i % 4 === 0 ? 34 : i % 2 === 0 ? 27 : 21), ty, 'rgba(250,253,255,.92)', 2.4);
     }
-    c.fillStyle = 'rgba(141,214,223,.55)'; c.fillRect(g.x - r, g.y, 2 * r, r);
-    line(c, g.x - r, g.y, g.x + r, g.y, '#ecffff', 3);
-    if (g.showSafety) line(c, g.x - r, sy, g.x + r, sy, g.status === 'overloaded' || g.status === 'swamped' ? COLORS.red : COLORS.amber, 3.8, [11, 6]);
+    var lensWaterY = g.y - n(g.waveOffset, 0) * scale;
+    c.fillStyle = 'rgba(141,214,223,.55)'; c.fillRect(g.x - r, lensWaterY, 2 * r, g.y + r - lensWaterY);
+    line(c, g.x - r, lensWaterY, g.x + r, lensWaterY, '#ecffff', 3);
+    if (g.showSafety) line(c, g.x - r, sy, g.x + r, sy, g.status !== 'safe' ? COLORS.red : COLORS.amber, 3.8, [11, 6]);
     c.restore(); ellipse(c, g.x, g.y, r, r); c.strokeStyle = '#197e90'; c.lineWidth = 2.5; c.stroke(); c.restore();
   };
   root.FloatRenderer = FloatRenderer;

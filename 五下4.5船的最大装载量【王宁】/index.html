@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#edf8fb">
-  <meta name="description" content="五下第四单元第五课：同船换水、简易浮标实测记录、证据比较与安全装载。四人小组平板互动实验。">
+  <meta name="description" content="五下第四单元第五课：同船换水、简易浮标实测记录、证据比较与安全装载。航行预测、直尺测量与风浪安全装载。">
   <title>船的最大装载量 · 五下4.5 · 【镇海区鲲池小学 王宁】</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.0">
 </head>
 <body>
 <svg class="icon-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
@@ -27,7 +27,7 @@
 <symbol id="i-close" viewBox="0 0 32 32"><path d="M7 7l18 18M7 25L25 7"/></symbol>
 <symbol id="i-download" viewBox="0 0 32 32"><path d="M16 3v18M8 14l8 8 8-8M5 23v6h22v-6"/></symbol>
 </defs></svg>
-<div class="app" id="app">
+<div class="app" id="app" data-page="observe">
   <header class="topbar">
     <a class="brand" href="../#book-5-down" aria-label="返回五年级下册课程目录"><svg class="icon brand-icon"><use href="#i-ship"/></svg><h1>船的最大装载量</h1></a>
     <div class="top-actions">
@@ -37,76 +37,73 @@
       <button class="icon-button" id="fullscreenButton" aria-label="全屏"><svg class="icon"><use href="#i-full"/></svg></button>
     </div>
   </header>
-  <main class="workspace" id="workspace">
+  <nav class="task-nav" aria-label="学习任务">
+    <button data-page="observe" class="active" aria-current="page"><svg class="icon"><use href="#i-eye"/></svg>观察</button>
+    <button data-page="measure"><svg class="icon"><use href="#i-ruler"/></svg>测量</button>
+    <button data-page="compare"><svg class="icon"><use href="#i-compare"/></svg>比较</button>
+    <button data-page="load"><svg class="icon"><use href="#i-cargo"/></svg>装载</button>
+  </nav>
+  <main class="workspace">
     <section class="stage" aria-labelledby="question">
-      <canvas id="scene" role="img" aria-label="轮船在不同液体中的漂浮模型"></canvas>
-      <h2 id="question">换一种水，会怎样？</h2>
+      <canvas id="scene" role="img" tabindex="0" aria-label="长江、海洋与黄河中的轮船"></canvas>
+      <h2 id="question">驶入海洋，船会怎样？</h2>
+      <div class="journey" id="journey" aria-label="航行路线"><span data-stop="0" class="current">长江</span><b>→</b><span data-stop="1">海洋</span><b>→</b><span data-stop="2">黄河</span></div>
+      <div id="voyageResult" class="voyage-result" hidden></div>
       <button class="zoom-button" id="zoomButton" aria-label="放大吃水位置">看吃水</button>
-      <span class="source-note" id="sourceNote">课堂模型</span>
-      <div class="prediction-bar" id="predictionBar" aria-label="换水后的预测">
-        <button data-prediction="up" aria-pressed="false"><svg class="icon"><use href="#i-up"/></svg><span>上浮</span></button>
-        <button data-prediction="same" aria-pressed="false"><svg class="icon"><use href="#i-same"/></svg><span>不变</span></button>
-        <button data-prediction="down" aria-pressed="false"><svg class="icon"><use href="#i-down"/></svg><span>下沉</span></button>
+      <div class="prediction-bar" id="predictionBar" aria-label="驶入下一水域后的预测">
+        <button data-prediction="up" aria-pressed="false"><svg class="icon"><use href="#i-up"/></svg>上浮</button>
+        <button data-prediction="same" aria-pressed="false"><svg class="icon"><use href="#i-same"/></svg>不变</button>
+        <button data-prediction="down" aria-pressed="false"><svg class="icon"><use href="#i-down"/></svg>下沉</button>
       </div>
-      <div class="stage-hint" id="stageHint" hidden>拖动标线，或输入实测高度</div>
-      <div class="align-controls" id="alignControls" hidden>
-        <button data-align="water" class="selected" aria-pressed="true">对齐水面</button>
-        <button data-align="float" aria-pressed="false">对齐浮标</button>
-      </div>
-      <div class="load-status" id="loadStatus" hidden><span class="status-dot"></span><span id="loadStatusText">安全线以内</span></div>
+      <div class="ruler-tools" id="rulerTools" hidden><button id="resetRuler" class="tool-button"><svg class="icon"><use href="#i-ruler"/></svg>移动直尺</button><span id="alignmentState">0刻度对准液面</span></div>
+      <div class="stage-measures" id="stageMeasures" hidden><span>吃水 <b id="draftValue">2.600</b> m</span><span>干舷 <b id="freeboardValue">1.800</b> m</span></div>
+      <div class="load-status" id="loadStatus" hidden><span class="status-dot"></span><span id="loadStatusText">安全线以内</span><button id="resetShip" hidden>船只复位</button></div>
+      <span class="source-note" id="sourceNote">水域数据为教学样本</span>
     </section>
-    <aside class="control-rail" aria-label="实验操作">
-      <div class="liquid-picker" id="liquidPicker" aria-label="选择液体">
-        <button data-liquid="fresh" aria-pressed="true" class="liquid selected"><svg class="icon drop"><use href="#i-drop"/></svg><span>清水</span><span class="checkmark" aria-hidden="true">✓</span></button>
-        <button data-liquid="mild" aria-pressed="false" class="liquid"><svg class="icon drop"><use href="#i-drop"/></svg><span>淡盐水</span><span class="checkmark" aria-hidden="true">✓</span></button>
-        <button data-liquid="brine" aria-pressed="false" class="liquid"><svg class="icon drop"><use href="#i-drop"/></svg><span>浓盐水</span><span class="checkmark" aria-hidden="true">✓</span></button>
-      </div>
-      <div id="observeControls" class="page-controls">
-        <p class="small-context" id="observeContext">同一艘船 · 货物不变</p>
-        <button class="primary" id="observeButton">换水观察</button>
-      </div>
-      <div id="measureControls" class="page-controls" hidden>
-        <div class="measure-label"><label for="heightInput">露出高度</label><select id="recordMode" aria-label="记录来源"><option value="measured">实测</option><option value="simulation">模型</option></select></div>
-        <div class="number-input"><input id="heightInput" type="number" min="0" max="24" step="0.1" placeholder="—.—" inputmode="decimal" aria-label="露出高度，厘米"><span>cm</span></div>
-        <div class="adjust-row"><button id="heightMinus" class="round-button" aria-label="高度减少0.1厘米"><svg class="icon"><use href="#i-minus"/></svg></button><button id="heightPlus" class="round-button" aria-label="高度增加0.1厘米"><svg class="icon"><use href="#i-plus"/></svg></button></div>
-        <button class="primary" id="saveReading">记下来</button>
-        <button class="quiet" id="uncertainReading">暂时看不清</button>
-      </div>
-      <div id="compareControls" class="page-controls" hidden>
-        <div class="compare-source" id="compareSource">本组实测</div>
-        <div class="evidence-picker" id="evidencePicker" aria-label="选择支持观点的记录"></div>
-        <label class="reason-label" for="explanation">我们发现</label>
-        <textarea id="explanation" rows="3" maxlength="800" placeholder="用一条记录说明…"></textarea>
-        <button class="primary" id="saveExplanation">保存观点</button>
-        <button class="quiet" id="backMeasure">再测一次</button>
-      </div>
-      <div id="loadControls" class="page-controls" hidden>
-        <div class="cargo-display"><strong id="cargoCount">36</strong><span>箱</span></div>
-        <div class="adjust-row"><button id="cargoMinus" class="round-button" aria-label="减少货物，长按连续减少"><svg class="icon"><use href="#i-minus"/></svg></button><button id="cargoPlus" class="round-button" aria-label="增加货物，长按连续增加"><svg class="icon"><use href="#i-plus"/></svg></button></div>
-        <input id="cargoRange" type="range" min="0" max="72" value="36" step="1" aria-label="货物箱数">
-        <button class="primary" id="saveLoad">记下装载量</button>
-      </div>
+    <aside class="control-rail" aria-label="数据与操作">
+      <section id="observeControls" class="page-controls observe-controls">
+        <div class="sample-title">同样 <strong>1000 mL</strong></div>
+        <div id="sampleCards" class="sample-cards">
+          <div class="sample-card current" data-sample="yangtze"><span class="sample-number">1</span><div><h3>长江</h3><small>含沙较少</small></div><strong>1000<small> g</small></strong></div>
+          <div class="sample-card next" data-sample="ocean"><span class="sample-number">2</span><div><h3>海洋</h3><small>含有盐分</small></div><strong>1025<small> g</small></strong></div>
+          <div class="sample-card" data-sample="yellow"><span class="sample-number">3</span><div><h3>浑浊黄河</h3><small>本次含沙较多</small></div><strong>1050<small> g</small></strong></div>
+        </div>
+        <div class="journey-cargo"><svg class="icon"><use href="#i-cargo"/></svg><div><strong>3600 <small>t</small></strong><span>货物保持不变</span></div></div>
+        <button id="sailButton" class="primary">驶入海洋 →</button>
+      </section>
+      <section id="measureControls" class="page-controls measure-controls" hidden>
+        <div class="section-heading"><span>本组测量</span><select id="recordMode" aria-label="记录来源"><option value="simulation">模拟测量</option><option value="measured">实物记录</option></select></div>
+        <div class="liquid-picker" aria-label="选择液体">
+          <button data-liquid="fresh" aria-pressed="true" class="selected">清水</button><button data-liquid="mild" aria-pressed="false">淡盐水</button><button data-liquid="brine" aria-pressed="false">浓盐水</button>
+        </div>
+        <div class="reading-table" id="readingTable" aria-label="本组露出高度记录"></div>
+        <div class="readout-block"><label for="heightInput">露出高度</label><div class="number-input"><input id="heightInput" type="text" inputmode="none" readonly placeholder="—.—" aria-label="露出高度，厘米，点击打开数字键盘"><span>cm</span><button id="keyboardButton" aria-label="打开数字键盘"><svg class="icon" viewBox="0 0 32 32"><rect x="2" y="6" width="28" height="20" rx="3"/><path d="M7 12h1m5 0h1m5 0h1m5 0h1M7 17h1m5 0h1m5 0h1m5 0h1M9 22h14"/></svg></button></div></div>
+        <div class="keypad" id="keypad" hidden aria-label="数字键盘"><button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button><button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button><button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button><button data-key=".">.</button><button data-key="0">0</button><button data-key="backspace" aria-label="退格">⌫</button><button data-key="clear" class="keypad-small">清空</button><button data-key="done" class="keypad-done">收起键盘</button></div>
+        <button id="saveReading" class="primary">记下来</button><button id="uncertainReading" class="quiet">暂时看不清</button>
+      </section>
+      <section id="compareControls" class="page-controls compare-controls" hidden>
+        <div class="section-heading"><span>数据标注</span><select id="compareMode" aria-label="比较数据来源"><option value="simulation">模拟测量</option><option value="measured">实物记录</option></select></div>
+        <div class="compare-records" id="compareRecords"></div>
+        <div class="align-controls" aria-label="选择对齐方式"><button data-align="water" class="selected" aria-pressed="true">水面对齐</button><button data-align="float" aria-pressed="false">浮标对齐</button></div>
+        <div class="comparison-result" id="comparisonResult"></div>
+        <button id="saveComparison" class="primary">保存证据图</button><button id="backMeasure" class="quiet">再测一次</button>
+      </section>
+      <section id="loadControls" class="page-controls load-controls" hidden>
+        <div class="region-picker" aria-label="选择航行水域"><button data-region="yangtze" class="selected" aria-pressed="true">长江</button><button data-region="ocean" aria-pressed="false">海洋</button><button data-region="yellow" aria-pressed="false">黄河</button></div>
+        <div class="hold-controls" aria-label="保持不变的条件"><button data-hold="cargo" class="selected" aria-pressed="true">同装载</button><button data-hold="draft" aria-pressed="false">同吃水</button></div>
+        <div class="load-adjust"><button id="loadMinus" class="round-button" aria-label="减少，长按连续减少"><svg class="icon"><use href="#i-minus"/></svg></button><div><span id="adjustLabel">货物</span><strong id="adjustValue">3600</strong><small id="adjustUnit">t</small></div><button id="loadPlus" class="round-button" aria-label="增加，长按连续增加"><svg class="icon"><use href="#i-plus"/></svg></button></div>
+        <input id="loadRange" type="range" min="0" max="80" step="1" value="36" aria-label="调整装载量或吃水">
+        <label class="wave-control"><span id="waveLabel">平静内河</span><span class="switch"><input id="calmToggle" type="checkbox" aria-label="统一为平静水面"><span class="switch-track"></span></span><small>统一平静</small></label>
+        <div class="load-table" id="loadTable" aria-label="三个水域的同条件数据对比"></div>
+        <button id="saveLoad" class="primary">记下这一组</button>
+      </section>
     </aside>
   </main>
-  <div class="record-strip" id="recordStrip" hidden aria-label="本组记录"></div>
-  <nav class="bottom-nav" aria-label="学习任务">
-    <button data-page="observe" class="active" aria-current="page"><svg class="icon"><use href="#i-eye"/></svg><span>观察</span></button>
-    <button data-page="measure"><svg class="icon"><use href="#i-ruler"/></svg><span>测量</span></button>
-    <button data-page="compare"><svg class="icon"><use href="#i-compare"/></svg><span>比较</span></button>
-    <button data-page="load"><svg class="icon"><use href="#i-cargo"/></svg><span>装载</span></button>
-  </nav>
-  <footer class="credit">镇海区鲲池小学 王宁 · <b>mutiw</b><span>v1.0</span></footer>
+  <footer class="credit">镇海区鲲池小学 王宁 · <b>mutiw</b><span>v2.0</span></footer>
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-<div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden>
-  <div class="modal-panel help-panel"><button class="icon-button close-modal" aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button><h2 id="helpTitle">一起做实验</h2><div id="helpContent"></div><p class="model-note">轮船与“模型”浮标采用课堂参数。实测记录由小组填写，模型结果不会自动填入实测。</p><a href="README.md" target="_blank" rel="noopener" class="text-link">教师说明</a></div>
-</div>
-<div class="modal" id="notesModal" role="dialog" aria-modal="true" aria-labelledby="notesTitle" hidden>
- <div class="modal-panel notes-panel"><button class="icon-button close-modal" aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button><h2 id="notesTitle">小组记录</h2><div id="notesContent"></div><div class="download-actions"><button class="primary" id="exportImage"><svg class="icon"><use href="#i-download"/></svg>保存证据卡</button><button class="secondary" id="exportJson">导出记录</button><button class="secondary" id="importJson">导入记录</button></div><input id="importFile" type="file" accept=".json,application/json" hidden></div>
-</div>
+<div class="modal" id="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden><div class="modal-panel help-panel"><button class="icon-button close-modal" aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button><h2 id="helpTitle">一起做实验</h2><div id="helpContent"></div><p class="model-note">水域质量、波浪和安全线为教学参数。黄河含沙量会变化；沉没演示假设船口未封闭，时间经过缩放。</p><a href="README.md" target="_blank" rel="noopener" class="text-link">教师说明</a></div></div>
+<div class="modal" id="notesModal" role="dialog" aria-modal="true" aria-labelledby="notesTitle" hidden><div class="modal-panel notes-panel"><button class="icon-button close-modal" aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button><h2 id="notesTitle">小组记录</h2><div id="notesContent"></div><div class="download-actions"><button class="primary" id="exportImage">保存证据卡</button><button class="secondary" id="exportJson">导出记录</button><button class="secondary" id="importJson">导入记录</button></div><input id="importFile" type="file" accept=".json,application/json" hidden></div></div>
 <noscript><div class="fatal">请在支持 JavaScript 的浏览器中打开本课。</div></noscript>
-<script src="logic.js"></script>
-<script src="renderer.js"></script>
-<script src="app.js"></script>
-</body>
-</html>
+<script src="logic.js?v=1.0"></script><script src="voyage.js?v=2.0"></script><script src="workbook.js?v=2.0"></script><script src="renderer.js?v=2.0"></script><script src="app.js?v=2.0"></script>
+</body></html>
