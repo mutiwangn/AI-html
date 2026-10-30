@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7faf7"><meta name="description" content="一年级科学《我们的身体》：观察方法、外形比较、身体内部。离线平面交互版。">
+<title>我们的身体</title>
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<div id="app">
+<header class="top"><div class="brand"><svg viewBox="0 0 32 42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="16" cy="6" r="4"/><path d="M16 12v13m-2-12L6 22m12-9 8 9M16 25l-7 13m7-13 7 13"/></svg><span>我们的身体</span></div><nav class="tabs" role="tablist" aria-label="页面"><button role="tab" aria-selected="true" data-page="0">观察方法</button><button role="tab" aria-selected="false" data-page="1">外形比较</button><button role="tab" aria-selected="false" data-page="2">身体内部</button></nav><div class="utilities"><button class="icon-button" id="soundToggle" aria-label="静音" title="声音开关"></button><button class="icon-button" id="fullscreen" aria-label="全屏" title="全屏"></button></div></header>
+<section class="page active" id="page0" aria-label="观察方法"><div class="rail" id="methods"></div><div class="subject"><div class="figurebox" id="observeBody"></div><div class="controlrow"><button class="pill" id="turnBody">转身</button></div></div><div class="detail" id="observeDetail"></div></section>
+<section class="page compare" id="page1" aria-label="外形比较"><div class="compare-human"><svg id="compareHuman" viewBox="0 0 420 640" aria-label="人体与半身遮挡板"></svg><div class="controlrow"><button class="pill" id="coverToggle">遮一半</button><button class="pill" id="compareReset" aria-label="重置外形比较">重置</button></div></div><div class="parts" id="partButtons"></div><div class="animalpanel"><div class="animalart" id="animalArt"></div><div class="animalchoices" id="animalChoices"></div><div class="animal-note" id="animalNote"></div></div></section>
+<section class="page" id="page2" aria-label="身体内部"><div class="rail" id="layers"></div><div class="subject"><div class="figurebox" id="insideBody"></div><div class="controlrow"><span aria-label="外形" title="外形" id="skinIcon"></span><input id="opacity" class="range" type="range" min="0" max="100" value="75" aria-label="透视程度"><span aria-label="内部" title="内部" id="boneIcon"></span></div></div><div class="detail" id="insideDetail"></div></section>
+<footer class="foot"><button id="about" aria-label="查看示意范围与素材说明">人体示意 · 平面版 v2.0</button><span class="watermark">mutiw</span></footer>
+</div><div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-label="说明"></div><div class="toast hidden" id="toast" role="status"></div>
+<script src="media.js"></script>
+<script src="illustrations.js"></script>
+<script src="app.js"></script>
+</body></html>
