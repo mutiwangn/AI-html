@@ -60,7 +60,7 @@ function tick(now){
     if(!draftMotion){state.flood=V.stepFlood(state.flood,state.region,cargoUnits(),dt,options());state.visualDraft=state.flood.boat.draftCm;}
     else state.flood.wave=V.wave(state.region,state.flood.elapsedSec,options());
     if(now-lastUI>90){updateLoadStatus();lastUI=now;}
-    if(state.flood.status!==lastFloodStatus){if(state.flood.floodMassG>0)buildLoadTable();if(state.flood.status==='flooding')toast('浪越过船舷，船内开始进水');if(state.flood.status==='sinking')toast('进水增重，船继续下沉');lastFloodStatus=state.flood.status;}
+    if(state.flood.status!==lastFloodStatus){if(state.flood.floodMassG>0)buildLoadTable();lastFloodStatus=state.flood.status;}
   }
   redraw(now);
   if(travel||swap||draftMotion||state.page==='load')frameId=requestAnimationFrame(tick);
@@ -158,7 +158,7 @@ function syncLoad(){
 function buildLoadTable(){var rows=state.hold==='cargo'?V.compareAtLoad(state.cargo,options()):V.compareAtDraft(state.targetDraft,options());var host=$('loadTable');host.replaceChildren();var table=document.createElement('table');if(state.flood.floodMassG>0){var caption=document.createElement('caption');caption.textContent='进水前的同条件对比';table.appendChild(caption);}var tr=document.createElement('tr');['水域','载货 / t','吃水 / m'].forEach(function(s){var th=document.createElement('th');th.textContent=s;tr.appendChild(th);});var head=document.createElement('thead');head.appendChild(tr);table.appendChild(head);var body=document.createElement('tbody');rows.forEach(function(b){var row=document.createElement('tr');if(b.region===state.region)row.className='current';[V.getRegion(b.region).name,fmt(b.cargoMassT,0),fmt(b.draftM,3)].forEach(function(value,i){var td=document.createElement('td');td.textContent=value;if(i>0)td.className=(state.hold==='cargo'?i===2:i===1)?'changing':'fixed';row.appendChild(td);});body.appendChild(row);});table.appendChild(body);host.appendChild(table);}
 function updateLoadStatus(){
   var b=wetBoat(),wet=state.flood.floodMassG>0||state.flood.sinkProgress>0;
-  $('draftValue').textContent=fmt(b.draftM,3);$('freeboardValue').textContent=fmt(b.freeboardM,3);
+  $('draftValue').textContent=b.sinkProgress>0?'—':fmt(b.draftM,3);$('freeboardValue').textContent=b.sinkProgress>0?'—':fmt(b.freeboardM,3);
   $('loadStatus').className='load-status '+b.status;
   $('loadStatusText').textContent=b.isSunk?'船已沉没':b.sinkProgress>0?'进水增重 · 正在下沉':wet?'浪越船舷 · 船内进水':b.safe?'安全线以内':'超过安全线';
   $('resetShip').hidden=!wet&&!b.swamped;
