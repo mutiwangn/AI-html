@@ -61,7 +61,8 @@
     if (this.destroyed) return;
     this.model = model || {}; this.resize(); this.geometry = null;
     var c = this.ctx; c.clearRect(0, 0, this.width, this.height);
-    if (this.model.page === 'measure') this.drawMeasure(this.model);
+    if (this.model.page === 'bridge') this.drawBridge(this.model);
+    else if (this.model.page === 'measure') this.drawMeasure(this.model);
     else if (this.model.page === 'compare') this.drawCompare(this.model);
     else this.drawShip(this.model);
   };
@@ -454,6 +455,137 @@
     var lensR = Math.min(w * .12, h * .13), lensTop = m.page === 'observe' ? 112 : 72;
     if (m.zoom && sink < .30) this.shipMagnifier({ x: w * .81, y: Math.max(h * .23, lensTop + lensR), r: lensR, sourceX: centerX + imageW * .35, sourceY: waterY, keelY: keelY, scale: scale, hullDepth: hullDepth, safeDraft: safeDraft, waveOffset: this.waveOffset(wave, .35), showSafety: m.page === 'load' || !!m.showSafety, status: status });
     this.geometry = { waterY: waterY, centerX: centerX, shipWidth: imageW, pxPerCm: scale, keelY: keelY, safeY: safeY, deckY: deckY, draftCm: draft };
+  };
+  /* A shape-simplification bridge, not a physical ship-compression experiment.
+   * Z references are fixed in screen coordinates throughout this diagram.
+   * Y is first represented as a side projection, then X narrows to a column.
+   */
+  FloatRenderer.prototype.drawBridge = function (m) {
+    var c = this.ctx, w = this.width, h = this.height, p = clamp(n(m.progress, 0), 0, 1);
+    var im = this.images.shipSrc, region = REGIONS[m.region] ? m.region : 'yangtze';
+    var topSafe = Math.min(130, h * .26), bottomSafe = Math.min(120, h * .24), availableH = Math.max(70, h - topSafe - bottomSafe);
+    var aspect = 1910 / 653, maxShipW = w * .80, maxHeight = Math.min(availableH * .82, maxShipW / aspect);
+    var measureScale = Math.max(1.8, (h - Math.min(78, h * .15) - Math.min(64, h * .14)) / 52);
+    var defaultHeight = Math.min(maxHeight, 24 * measureScale);
+    var targetHeight = n(m.targetFloatHeight, defaultHeight);
+    if (targetHeight < 55 || targetHeight > maxHeight + 1) targetHeight = defaultHeight;
+    var objectH = Math.max(36, targetHeight), initialW = objectH * aspect;
+    var targetTop = n(m.targetFloatTopY, Math.min(78, h * .15) + 16 * measureScale);
+    if (targetTop < topSafe || targetTop + objectH > h - bottomSafe - 10) targetTop = topSafe + Math.max(0, (availableH - objectH) * .45);
+    var zTop = targetTop, zBottom = zTop + objectH;
+    var targetCenter = n(m.targetCenterX, w * (w > h ? .36 : .41));
+    if (targetCenter < 68 || targetCenter > w - 68) targetCenter = w * .45;
+    var fullDepth = Math.min(46, w * .045), startCenter = clamp(targetCenter * 1.22, initialW / 2 + 30, w - initialW / 2 - fullDepth - 18);
+    var yFlatten = ease((p - .18) / .25), xNarrow = ease((p - .50) / .32), columnMix = ease((p - .78) / .16);
+    var photoMix = im && im.width ? 1 - ease((p - .19) / .23) : 0;
+    var labMix = ease((p - .12) / .48), cupMix = ease((p - .87) / .13);
+    var centerX = startCenter + (targetCenter - startCenter) * ease((p - .50) / .42);
+    var stemWidth = clamp(objectH / 24 * .95, 12, 23), finalWidth = stemWidth * 1.45;
+    var currentW = initialW + (finalWidth - initialW) * xNarrow, xScale = currentW / initialW;
+    var depthX = fullDepth * (1 - yFlatten), depthY = -depthX * .34;
+    var regionDraft = 2.6;
+    if (root.VoyageLogic) { try { regionDraft = root.VoyageLogic.state(region, n(m.cargoUnits, 36), { conditions: 'calm' }).draftCm; } catch (ignore) {} }
+    var shipWaterY = zBottom - objectH * .328 * regionDraft / 4.4;
+    var targetWaterY = n(m.targetWaterY, zTop + objectH * 10 / 24);
+    if (targetWaterY < zTop + objectH * .08 || targetWaterY > zBottom - objectH * .08) targetWaterY = zTop + objectH * 10 / 24;
+    var rulerX = Math.max(18, Math.min(startCenter - initialW / 2 - 22, targetCenter - 78, w * .075));
+    var guideRight = Math.max(startCenter + initialW / 2 + depthX + 14, targetCenter + objectH * .46);
+    guideRight = Math.min(w - 14, guideRight);
+    this.drawEnvironment(region, m.reducedMotion ? 0 : n(m.time, 0), 0);
+    c.save(); c.globalAlpha = labMix; this.labBackground(); c.restore();
+    // The horizontal reference pair is never translated, stretched, or tilted.
+    line(c, rulerX + 5, zTop, guideRight, zTop, 'rgba(45,126,151,.37)', 1.4, [7, 6]);
+    line(c, rulerX + 5, zBottom, guideRight, zBottom, 'rgba(45,126,151,.37)', 1.4, [7, 6]);
+    function path(points, dx, dy) {
+      c.beginPath(); points.forEach(function (pt, i) { var x = centerX + pt[0] * initialW * xScale + (dx || 0), y = zTop + pt[1] * objectH + (dy || 0); if (!i) c.moveTo(x, y); else c.lineTo(x, y); }); c.closePath();
+    }
+    var hull = [[-.49,.70],[-.475,.89],[-.44,.985],[-.40,1],[.40,1],[.465,.85],[.50,.665],[.40,.69],[.31,.72],[-.19,.72],[-.22,.69]];
+    var house = [[-.405,.69],[-.405,.38],[-.36,.34],[-.23,.365],[-.21,.42],[-.21,.69]];
+    // Rear hull and connecting edges give a visible Y dimension without changing
+    // the front mast/keel Z bounds. Their depth disappears before X narrows.
+    if (depthX > .2) {
+      c.save(); c.globalAlpha = (1 - columnMix) * .78;
+      path(hull, depthX, depthY); c.fillStyle = '#6aa4b0'; c.fill(); c.strokeStyle = '#4b899a'; c.lineWidth = 1.5; c.stroke();
+      path(house, depthX * .65, depthY * .65); c.fillStyle = '#c5e0e6'; c.fill(); c.stroke();
+      for (var di = 0; di < hull.length; di += 2) {
+        var pt = hull[di]; line(c, centerX + pt[0] * initialW, zTop + pt[1] * objectH, centerX + pt[0] * initialW + depthX, zTop + pt[1] * objectH + depthY, '#76a9b5', 1.2);
+      } c.restore();
+    }
+    c.save(); c.globalAlpha = (1 - columnMix) * (1 - photoMix * .55);
+    path(hull); c.fillStyle = '#d9edf1'; c.fill(); c.strokeStyle = '#20647d'; c.lineWidth = 2.1; c.stroke();
+    path(house); c.fillStyle = '#f4fbfe'; c.fill(); c.strokeStyle = '#397b91'; c.lineWidth = 1.7; c.stroke();
+    var mastX = centerX - .33 * currentW, houseTop = zTop + .36 * objectH;
+    line(c, mastX, zTop, mastX, houseTop, '#2a7188', 2);
+    line(c, mastX - .027 * currentW, zTop + .12 * objectH, mastX + .035 * currentW, zTop + .12 * objectH, '#2a7188', 1.5);
+    line(c, mastX - .02 * currentW, zTop + .23 * objectH, mastX + .025 * currentW, zTop + .23 * objectH, '#2a7188', 1.5);
+    var bowMastX = centerX + .425 * currentW;
+    line(c, bowMastX, zTop + .34 * objectH, bowMastX, zTop + .70 * objectH, '#397b91', 1.6);
+    line(c, bowMastX - .014 * currentW, zTop + .40 * objectH, bowMastX + .015 * currentW, zTop + .40 * objectH, '#397b91', 1.2);
+    if (currentW > 120) {
+      for (var wy = 0; wy < 3; wy++) for (var wx = 0; wx < 4; wx++) {
+        var winX = centerX + (-.385 + wx * .036) * currentW, winY = zTop + (.41 + wy * .075) * objectH;
+        c.fillStyle = '#6fa4b5'; c.fillRect(winX, winY, currentW * .016, objectH * .025);
+      }
+    }
+    c.restore();
+    if (photoMix > .001 && im && im.width) {
+      c.save(); c.globalAlpha = photoMix; c.drawImage(im, 19, 67, 1910, 653, centerX - initialW / 2, zTop, initialW, objectH); c.restore();
+    }
+    // Cargo follows the same X compression while its vertical sizes stay fixed.
+    var cargo = clamp(Math.round(n(m.cargoUnits, 36)), 0, 80), cols = 12, cargoSpan = initialW * .544, cw = cargoSpan / cols, ch = cw * .51;
+    var cargoLeft = centerX - initialW * .240, deckY = zTop + objectH * .672;
+    var order = [5, 6, 4, 7, 3, 8, 2, 9, 1, 10, 0, 11], hues = ['#547f90','#438c94','#c59748','#657f9d','#5c999f','#b77e49'];
+    c.save(); c.globalAlpha = 1 - columnMix; c.translate(centerX, 0); c.scale(xScale, 1); c.translate(-centerX, 0);
+    for (var ci = 0; ci < cargo; ci++) {
+      var row = Math.floor(ci / cols), col = order[ci % cols], cx = cargoLeft + col * cw, cy = deckY - (row + 1) * ch;
+      if (photoMix > .08) this.container(cx, cy, cw - 1.3, ch - 1.3, hues[(col + row * 3) % hues.length]);
+      else { c.fillStyle = '#dceef2'; c.strokeStyle = '#4e8ba0'; c.lineWidth = 1.15; c.fillRect(cx, cy, cw - 1, ch - 1); c.strokeRect(cx, cy, cw - 1, ch - 1); }
+    } c.restore();
+    // The initial water context fades as the scene becomes an abstract projection.
+    if (labMix < .999) {
+      c.save(); c.globalAlpha = (1 - labMix) * .43; c.fillStyle = region === 'yellow' ? '#c1a36a' : '#82c7d2'; c.fillRect(0, shipWaterY, w, h - shipWaterY); c.restore();
+      line(c, 0, shipWaterY, w, shipWaterY, 'rgba(232,253,255,' + ((1 - labMix) * .72).toFixed(3) + ')', 1.7);
+    }
+    var cupWidth = Math.min(objectH * .96, w * .36), cupTop = Math.max(topSafe, zTop - objectH * .12), cupBottom = Math.min(h - bottomSafe + 2, zBottom + objectH * .18);
+    if (cupMix > .001) { c.save(); c.globalAlpha = cupMix; this.beakerBack(targetCenter, cupTop, cupWidth, cupBottom, targetWaterY, true); c.restore(); }
+    if (columnMix > .001) {
+      c.save(); c.globalAlpha = columnMix; this.straw(centerX, zTop, objectH / 24, {}); c.restore();
+    }
+    if (cupMix > .001) { c.save(); c.globalAlpha = cupMix; this.beakerFront(targetCenter, cupTop, cupWidth, cupBottom, targetWaterY); c.restore(); }
+    function arrow(x1, y1, x2, y2, color, doubleHead, alpha) {
+      c.save(); c.globalAlpha = alpha == null ? 1 : alpha; line(c, x1, y1, x2, y2, color, 1.7);
+      var angle = Math.atan2(y2-y1,x2-x1), head = 6;
+      function tip(x,y,a) { c.beginPath(); c.moveTo(x,y); c.lineTo(x-head*Math.cos(a-.48),y-head*Math.sin(a-.48)); c.lineTo(x-head*Math.cos(a+.48),y-head*Math.sin(a+.48)); c.closePath(); c.fillStyle=color; c.fill(); }
+      tip(x2,y2,angle);if(doubleHead)tip(x1,y1,angle+Math.PI);c.restore();
+    }
+    // Z remains a full, fixed-height reference through every key frame.
+    arrow(rulerX,zBottom,rulerX,zTop,'#257a91',true,1);
+    label(c,'Z',rulerX,zTop-15,clamp(w*.024,16,23),'#176b82','center',700);
+    var verticalText='竖直高度', charSize=clamp(w*.018,12,17), textTop=zTop+objectH/2-charSize*1.7;
+    for (var zi=0;zi<verticalText.length;zi++) label(c,verticalText[zi],rulerX-12,textTop+zi*charSize*1.2,charSize,'#386e82','center',500);
+    var axisY = Math.min(h-bottomSafe+43,zBottom+42), halfAxis=Math.max(15,currentW*.49);
+    arrow(centerX-halfAxis,axisY,centerX+halfAxis,axisY,'#56839a',true,.90);
+    label(c,'X',centerX,axisY+18,clamp(w*.024,16,22),'#477c94','center',700);
+    var shownDepth = Math.max(depthX, columnMix * 12), axisOriginX = Math.min(w-35,centerX+halfAxis);
+    var yAlpha = .22 + .78 * Math.max(1-yFlatten,columnMix*.65);
+    if (shownDepth > 1) arrow(axisOriginX,axisY,Math.min(w-12,axisOriginX+shownDepth),axisY-Math.max(9,shownDepth*.48),'#8a7b50',true,yAlpha);
+    label(c,'Y',Math.min(w-13,axisOriginX+Math.max(14,shownDepth*.52)),axisY-Math.max(19,shownDepth*.5)-7,clamp(w*.022,15,21),'#9c8c62','center',600);
+    if (p < .78) {
+      var badge = p < .25 ? '3D' : '2D', badgeY = Math.max(topSafe-8,zTop-35);
+      c.save(); c.fillStyle='#ffffffdf'; rr(c,centerX-28,badgeY-17,56,34,11); c.fill(); c.restore();
+      label(c,badge,centerX,badgeY,21,'#346e86','center',700);
+    }
+    // Brackets communicate inward X motion without adding instruction paragraphs.
+    if (p > .52 && p < .83 && currentW < initialW*.86) {
+      var midY=zTop+objectH*.53, offset=Math.min(56,initialW*.08), gap=currentW/2+18;
+      arrow(centerX-gap-offset,midY,centerX-gap,midY,'#6eaaa9',false,.75);
+      arrow(centerX+gap+offset,midY,centerX+gap,midY,'#6eaaa9',false,.75);
+    }
+    this.geometry = { bridgeProgress:p, bridgeStage:p<.25?'3d':p<.50?'side':p<.80?'narrow':'column',
+      referenceTopY:zTop,referenceBottomY:zBottom,referenceHeight:objectH,
+      bridgeWidth:currentW,bridgeDepth:depthX,centerX:centerX,floatTopY:zTop,
+      targetCenterX:targetCenter,targetWaterY:targetWaterY,cylinderAlpha:columnMix,
+      referenceRect:{x:rulerX,y:zTop,width:guideRight-rulerX,height:objectH} };
   };
   FloatRenderer.prototype.container = function (x, y, w, h, color) {
     var c = this.ctx, t = Math.min(3, w * .12);

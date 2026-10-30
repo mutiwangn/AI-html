@@ -7,7 +7,7 @@ var ids=['fresh','mild','brine'],names={fresh:'清水',mild:'淡盐水',brine:'�
 var words={up:'上浮',same:'不变',down:'下沉'};
 var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var state=Object.assign({page:'observe',ruler:null,zoom:false,prediction:null,flood:V.createFlood(),visualDraft:2.6,keypad:false},W.create(1,'simulation'));
-var storageOK=true,restoreNotice='',toastTimer=0,frameId=0,lastFrame=0,lastUI=0,travel=null,swap=null,draftMotion=null,drag=null,lastFocus=null,lastFloodStatus='dry';
+var storageOK=true,restoreNotice='',toastTimer=0,frameId=0,lastFrame=0,lastUI=0,travel=null,swap=null,draftMotion=null,bridge=null,drag=null,lastFocus=null,lastFloodStatus='dry';
 try{
   var saved=localStorage.getItem(STORE),legacy=localStorage.getItem(OLD_STORE);
   if(saved)Object.assign(state,W.import(saved));
@@ -30,6 +30,7 @@ function exposure(id){if(state.mode==='simulation')return L.floatState(id,curren
 function geometry(){return renderer.getGeometry();}
 function redraw(now){
   now=typeof now==='number'?now:performance.now();
+  if(bridge){renderer.render({page:'bridge',progress:bridge.progress,time:now/1000,region:V.ROUTE[state.routeIndex],cargoUnits:36,reducedMotion:reduced,targetCenterX:bridge.targetCenterX,targetFloatTopY:bridge.targetFloatTopY,targetFloatHeight:bridge.targetFloatHeight,targetWaterY:bridge.targetWaterY});syncBridge();return;}
   var id=V.ROUTE[state.routeIndex],boat,wave,fromRegion=id,p=1,fromLiquid=state.liquid;
   if(state.page==='observe'){
     if(travel){id=travel.to;fromRegion=travel.from;p=travel.progress;}
@@ -53,6 +54,7 @@ function tick(now){
   frameId=0;if(document.hidden||modalOpen())return;
   if(lastFrame&&now-lastFrame<32){frameId=requestAnimationFrame(tick);return;}
   var dt=lastFrame?Math.min(.08,(now-lastFrame)/1000):1/30;lastFrame=now;
+  if(bridge&&!bridge.paused){bridge.progress=Math.min(1,(now-bridge.started)/bridge.duration);if(bridge.progress>=1){finishBridge();return;}}
   if(travel){travel.progress=Math.min(1,(now-travel.started)/travel.duration);var e=travel.progress*travel.progress*(3-2*travel.progress);state.visualDraft=travel.fromDraft+(travel.toDraft-travel.fromDraft)*e;if(travel.progress>=1)completeTravel();}
   if(swap){swap.progress=Math.min(1,(now-swap.started)/swap.duration);if(swap.progress>=1){swap=null;setMeasureBusy(false);}}
   if(draftMotion){var q=Math.min(1,(now-draftMotion.started)/draftMotion.duration);state.visualDraft=draftMotion.from+(draftMotion.to-draftMotion.from)*(1-Math.pow(1-q,3));if(q>=1)draftMotion=null;}
@@ -63,13 +65,14 @@ function tick(now){
     if(state.flood.status!==lastFloodStatus){if(state.flood.floodMassG>0)buildLoadTable();lastFloodStatus=state.flood.status;}
   }
   redraw(now);
-  if(travel||swap||draftMotion||state.page==='load')frameId=requestAnimationFrame(tick);
+  if((bridge&&!bridge.paused)||travel||swap||draftMotion||state.page==='load')frameId=requestAnimationFrame(tick);
 }
 function animateDraft(){var b=wetBoat();draftMotion={from:state.visualDraft,to:b.draftCm,started:performance.now(),duration:reduced?80:600};ensureFrames();}
 function pressed(selector,attribute,value){document.querySelectorAll(selector).forEach(function(el){var on=el.dataset[attribute]===value;el.classList.toggle('selected',on);el.setAttribute('aria-pressed',String(on));});}
 function setPage(page,changeHash){
   if(['observe','measure','compare','load'].indexOf(page)<0)page='observe';
-  stopFrames();travel=null;swap=null;draftMotion=null;drag=null;state.page=page;state.zoom=false;state.keypad=false;
+  stopFrames();bridge=null;travel=null;swap=null;draftMotion=null;drag=null;state.page=page;state.zoom=false;state.keypad=false;
+  $('bridgeControls').hidden=true;$('bridgeCaption').hidden=true;
   $('app').dataset.page=page;$('app').classList.remove('keypad-open');$('keypad').hidden=true;
   ['observe','measure','compare','load'].forEach(function(p){$(p+'Controls').hidden=p!==page;});
   document.querySelectorAll('.task-nav [data-page]').forEach(function(el){var active=el.dataset.page===page;el.classList.toggle('active',active);if(active)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});
@@ -86,7 +89,29 @@ function setPage(page,changeHash){
   if(changeHash!==false){try{history.replaceState(null,'','#'+page);}catch(e){}}
   persist();requestAnimationFrame(redraw);
 }
-document.querySelectorAll('.task-nav [data-page]').forEach(function(el){el.addEventListener('click',function(){setPage(el.dataset.page);});});
+document.querySelectorAll('.task-nav [data-page]').forEach(function(el){el.addEventListener('click',function(){if(bridge&&el.dataset.page==='measure')finishBridge();else if(el.dataset.page==='measure'&&state.page==='observe'&&!reduced)startBridge(false);else setPage(el.dataset.page);});});
+function syncBridge(){
+  if(!bridge)return;var p=bridge.progress,caption=p<.25?'立体轮船':p<.50?'压缩 y · 侧面轮廓':p<.80?'压缩 x · 聚焦高度':'柱状浮标 · 测量高度';
+  if($('bridgeCaption').textContent!==caption)$('bridgeCaption').textContent=caption;
+  $('bridgePause').textContent=reduced?'下一步':bridge.paused?'继续':'暂停';
+  $('bridgePause').setAttribute('aria-label',reduced?'显示下一关键画面':bridge.paused?'继续模型变换':'暂停模型变换');
+  $('bridgePause').setAttribute('aria-pressed',String(bridge.paused));
+  var percent=Math.round(bridge.progress*100);if(Number($('bridgeProgress').value)!==percent)$('bridgeProgress').value=percent;
+}
+function startBridge(explicit){
+  var draft=state.page==='measure'?$('heightInput').value:null;
+  setPage('measure');redraw();var target=geometry();bridge={progress:reduced ? .08 : 0,started:performance.now(),duration:6400,paused:reduced,step:0,draft:draft,targetCenterX:target&&target.centerX,targetFloatTopY:target&&target.floatTopY,targetFloatHeight:target&&target.totalLengthCm*target.pxPerCm,targetWaterY:target&&target.waterY};
+  $('app').dataset.page='bridge';$('rulerTools').hidden=true;$('bridgeControls').hidden=false;$('bridgeCaption').hidden=false;
+  $('question').textContent='从轮船到浮标';$('sourceNote').textContent='方法示意 · 保留 z 方向，聚焦竖直高度';
+  $('scene').setAttribute('aria-label','模型变换：立体轮船先压缩纵深y，成为侧面轮廓；再压缩横向x，保留竖直z方向，成为柱状浮标。');
+  syncBridge();redraw();if(!bridge.paused)ensureFrames();
+}
+function finishBridge(){if(!bridge)return;var draft=bridge.draft;bridge=null;setPage('measure',false);if(draft!==null)$('heightInput').value=draft;}
+$('bridgeReplay').addEventListener('click',function(){startBridge(true);});
+$('bridgeSkip').addEventListener('click',finishBridge);
+$('bridgeProgress').addEventListener('input',function(){if(!bridge)return;stopFrames();bridge.paused=true;bridge.progress=Math.max(0,Math.min(1,Number(this.value)/100));bridge.step=[.08,.43,.72,1].filter(function(p){return p<=bridge.progress;}).length-1;bridge.started=performance.now()-bridge.progress*bridge.duration;redraw();});
+$('bridgeRestart').addEventListener('click',function(){if(!bridge)return;bridge.progress=reduced ? .08 : 0;bridge.started=performance.now();bridge.step=0;syncBridge();redraw();if(!bridge.paused)ensureFrames();});
+$('bridgePause').addEventListener('click',function(){if(!bridge)return;if(reduced){var frames=[.08,.43,.72,1];bridge.step++;if(bridge.step>=frames.length){finishBridge();return;}bridge.progress=frames[bridge.step];redraw();return;}bridge.paused=!bridge.paused;if(bridge.paused)stopFrames();else{bridge.started=performance.now()-bridge.progress*bridge.duration;ensureFrames();}syncBridge();});
 function syncVoyage(){
   var done=state.routeIndex>=2,next=V.ROUTE[Math.min(2,state.routeIndex+1)];
   $('question').textContent=done?'走过三个水域，发现了什么？':'驶入'+V.getRegion(next).name+'，船会怎样？';
@@ -95,7 +120,7 @@ function syncVoyage(){
   document.querySelectorAll('[data-prediction]').forEach(function(b){b.disabled=!!travel;});pressed('[data-prediction]','prediction',state.prediction);
   document.querySelectorAll('[data-stop]').forEach(function(el){var i=Number(el.dataset.stop);el.classList.toggle('current',i===state.routeIndex);el.classList.toggle('passed',i<state.routeIndex);});
   document.querySelectorAll('[data-sample]').forEach(function(el){var i=V.ROUTE.indexOf(el.dataset.sample);el.classList.toggle('current',i===state.routeIndex);el.classList.toggle('next',!done&&i===state.routeIndex+1);});
-  var q=state.voyageHistory[state.voyageHistory.length-1];$('voyageResult').hidden=!q||state.page!=='observe';
+  var q=state.routeIndex>0?state.voyageHistory[state.voyageHistory.length-1]:null;$('voyageResult').hidden=!q||state.page!=='observe';
   if(q){var a=V.state(q.from,36).draftM,b=V.state(q.to,36).draftM;var delta=Math.abs(a-b)*100;$('voyageResult').textContent=V.getRegion(q.to).name+'：'+words[q.result]+(q.result==='same'?'':' '+fmt(delta,1)+' cm')+' · 吃水 '+fmt(a,3)+' → '+fmt(b,3)+' m';}
 }
 document.querySelectorAll('[data-prediction]').forEach(function(el){el.addEventListener('click',function(){if(travel)return;state.prediction=el.dataset.prediction;pressed('[data-prediction]','prediction',state.prediction);});});
@@ -116,7 +141,7 @@ document.querySelectorAll('[data-liquid]').forEach(function(el){el.addEventListe
 function setMeasureBusy(busy){document.querySelectorAll('[data-liquid]').forEach(function(el){el.disabled=busy;});$('saveReading').disabled=busy;$('uncertainReading').disabled=busy;$('heightInput').disabled=busy;$('keyboardButton').disabled=busy;$('resetRuler').disabled=busy;}
 function setMode(mode){if(mode!=='measured'&&mode!=='simulation')return;state.mode=mode;state.ruler=null;closeKeyboard();if(state.page==='measure')fillMeasurement();if(state.page==='compare')syncCompare();$('sourceNote').textContent=state.mode==='simulation'?'模拟测量 · 手动读数':'本组实物记录 · 图示';persist();redraw();}
 $('recordMode').addEventListener('change',function(){if(swap){this.value=state.mode;return;}setMode(this.value);});$('compareMode').addEventListener('change',function(){setMode(this.value);});
-function openKeyboard(){if(swap)return;state.keypad=true;$('keypad').hidden=false;$('app').classList.add('keypad-open');$('keyboardButton').setAttribute('aria-label','收起数字键盘');requestAnimationFrame(redraw);}
+function openKeyboard(){if(swap||bridge)return;state.keypad=true;$('keypad').hidden=false;$('app').classList.add('keypad-open');$('keyboardButton').setAttribute('aria-label','收起数字键盘');requestAnimationFrame(redraw);}
 function closeKeyboard(){state.keypad=false;$('keypad').hidden=true;$('app').classList.remove('keypad-open');$('keyboardButton').setAttribute('aria-label','打开数字键盘');requestAnimationFrame(redraw);}
 $('heightInput').addEventListener('click',openKeyboard);$('keyboardButton').addEventListener('click',function(){if(state.keypad)closeKeyboard();else openKeyboard();});
 function inputKey(key){var input=$('heightInput'),str=input.value;if(key==='done'){closeKeyboard();return;}if(key==='clear'){input.value='';return;}if(key==='backspace'){input.value=str.slice(0,-1);return;}if(key==='.'){if(str.indexOf('.')>=0)return;input.value=(str||'0')+'.';return;}if(!/^\d$/.test(key))return;if(str==='0')str='';var next=str+key;if(/^\d{1,2}(\.\d?)?$/.test(next))input.value=next;}
@@ -125,7 +150,7 @@ $('heightInput').addEventListener('keydown',function(e){if(/^[0-9.]$/.test(e.key
 function updateRulerStatus(){var g=geometry(),el=$('alignmentState');if(!g)return;el.textContent=g.rulerAligned?'✓ 0线已对准液面':'0刻度对准液面';el.classList.toggle('aligned',!!g.rulerAligned);}
 $('resetRuler').textContent='直尺归位';$('resetRuler').addEventListener('click',function(){state.ruler=null;redraw();});
 $('scene').addEventListener('pointerdown',function(e){
-  if(state.page!=='measure'||swap)return;var g=geometry(),rect=this.getBoundingClientRect();if(!g||!g.rulerRect)return;var x=e.clientX-rect.left,y=e.clientY-rect.top,r=g.rulerRect;
+  if(state.page!=='measure'||swap||bridge)return;var g=geometry(),rect=this.getBoundingClientRect();if(!g||!g.rulerRect)return;var x=e.clientX-rect.left,y=e.clientY-rect.top,r=g.rulerRect;
   if(x<r.x-14||x>r.x+r.width+14||y<r.y-12||y>r.y+r.height+12)return;
   drag={startX:x,startY:y,x:g.rulerX,y:g.rulerZeroY,width:rect.width,height:rect.height,rect:rect};try{this.setPointerCapture(e.pointerId);}catch(err){}e.preventDefault();
 });
@@ -133,9 +158,9 @@ function placeRuler(x,y,rect,g){x=Math.max(rect.width*.06,Math.min(rect.width*.9
 $('scene').addEventListener('pointermove',function(e){if(!drag)return;var x=e.clientX-drag.rect.left,y=e.clientY-drag.rect.top;placeRuler(drag.x+x-drag.startX,drag.y+y-drag.startY,drag.rect,geometry());redraw();e.preventDefault();});
 function endRulerDrag(){if(!drag)return;drag=null;var g=geometry(),rect=$('scene').getBoundingClientRect();if(g&&Math.abs(g.rulerX-g.centerX)<Math.max(94,g.pxPerCm*6)&&Math.abs(g.rulerZeroY-g.waterY)<Math.max(4,g.pxPerCm*.3)){placeRuler(g.rulerX,g.waterY,rect,g);}redraw();}
 $('scene').addEventListener('pointerup',endRulerDrag);$('scene').addEventListener('pointercancel',endRulerDrag);
-$('scene').addEventListener('keydown',function(e){if(state.page!=='measure'||swap)return;var moves={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]},move=moves[e.key];if(!move)return;e.preventDefault();var g=geometry(),r=this.getBoundingClientRect(),step=e.shiftKey?1:5;placeRuler(g.rulerX+move[0]*step,g.rulerZeroY+move[1]*step,r,g);redraw();});
+$('scene').addEventListener('keydown',function(e){if(state.page!=='measure'||swap||bridge)return;var moves={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]},move=moves[e.key];if(!move)return;e.preventDefault();var g=geometry(),r=this.getBoundingClientRect(),step=e.shiftKey?1:5;placeRuler(g.rulerX+move[0]*step,g.rulerZeroY+move[1]*step,r,g);redraw();});
 function saveReading(uncertain){
-  if(swap)return;var str=$('heightInput').value,n=str===''?null:Number(str);
+  if(swap||bridge)return;var str=$('heightInput').value,n=str===''?null:Number(str);
   if(!uncertain&&(n===null||!Number.isFinite(n)||n<0||n>24)){toast('请输入 0—24 cm 的读数');openKeyboard();return;}
   if(!uncertain&&state.mode==='simulation'){var g=geometry();if(!g||!g.rulerAligned){toast('先把直尺0刻度对准液面');closeKeyboard();return;}}
   try{var old=current().readings[state.liquid].map(function(r){return r.id;});state.sessions[state.mode]=L.addReading(current(),state.liquid,uncertain?null:n,{source:state.mode==='simulation'?'simulation':'measured',uncertain:uncertain});current().evidenceIds=current().evidenceIds.filter(function(id){return old.indexOf(id)<0;});persist();closeKeyboard();readingRows('readingTable',true);redraw();toast(uncertain?'已记为待复测':names[state.liquid]+' '+fmt(n)+' cm · 已记录');}catch(e){toast(e.message);}
@@ -178,10 +203,10 @@ $('saveLoad').addEventListener('click',function(){var b=wetBoat();if(!b.safe||st
 $('groupNumber').value=state.group;$('groupNumber').addEventListener('change',function(){state.group=Math.max(1,Math.min(99,parseInt(this.value,10)||1));this.value=state.group;['simulation','measured'].forEach(function(mode){state.sessions[mode].group='第'+state.group+'组';});persist();});
 $('fullscreenButton').addEventListener('click',function(){if(document.fullscreenElement){if(document.exitFullscreen)document.exitFullscreen();return;}var el=document.documentElement,enter=el.requestFullscreen||el.webkitRequestFullscreen;if(enter){var promise=enter.call(el);if(promise&&promise.catch)promise.catch(function(){toast('可使用浏览器全屏功能');});}else toast('将平板横放可获得更大的实验画面');});
 function showModal(id){stopFrames();lastFocus=document.activeElement;$(id).hidden=false;$(id).querySelector('.close-modal').focus();}
-function closeModal(el){el.hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();if(travel)travel.started=performance.now()-travel.progress*travel.duration;if(swap)swap.started=performance.now()-swap.progress*swap.duration;if(state.page==='load'||travel||swap||draftMotion)ensureFrames();}
+function closeModal(el){el.hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();if(travel)travel.started=performance.now()-travel.progress*travel.duration;if(swap)swap.started=performance.now()-swap.progress*swap.duration;if(bridge)bridge.started=performance.now()-bridge.progress*bridge.duration;if(state.page==='load'||travel||swap||draftMotion||(bridge&&!bridge.paused))ensureFrames();}
 document.querySelectorAll('.modal').forEach(function(modal){modal.querySelector('.close-modal').addEventListener('click',function(){closeModal(modal);});modal.addEventListener('click',function(e){if(e.target===modal)closeModal(modal);});modal.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal(modal);e.preventDefault();}if(e.key==='Tab'){var f=Array.from(modal.querySelectorAll('button:not([disabled]),a[href],input:not([hidden]),select')).filter(function(el){return el.offsetParent!==null;});if(e.shiftKey&&document.activeElement===f[0]){f[f.length-1].focus();e.preventDefault();}else if(!e.shiftKey&&document.activeElement===f[f.length-1]){f[0].focus();e.preventDefault();}}});});
 var helps={observe:['同一艘船带着3600吨货物，从长江驶入海洋，再驶入本次浑浊黄河水样。','右侧三个水样体积都为1000毫升，先比较质量，再预测船会怎样。','吃水变化只有几厘米，可看局部放大与航行后的数值。'],measure:['吸管没有刻度。拖动直尺靠近吸管，把0刻度对准液面，读吸管顶端对应的刻度。','点击读数框，用数字键盘输入，再记下来；网页不会替你填正确读数。','换液体时仍用同一支浮标。做实物实验可切到“实物记录”，不清楚时保留待复测。'],compare:['水面对齐：比较露出的高度。浮标对齐：比较标记在吸管上的位置。','舞台标注来自本组记录，差值也按记录计算；数据不一致时回去复测。','不同组自制浮标可能不同，交流变化关系，不把绝对高度直接平均。'],load:['“同装载”保持货物质量，换水域看吃水；“同吃水”保持平均吃水，换水域看货物质量。','“统一平静”关闭波浪，并让三个水域采用相同安全吃水，单独比较液体的影响。','有浪海面要留出更多干舷，所以安全线较低；平静内河安全线可以更高，但仍低于船舷。','超过安全线不等于立即沉没。波浪越过开放船口会进水、增重；浮力储备不足后才逐渐沉没。','教学模型：船深4.4米，空船1600吨；货箱外观仅示意，装载质量以数值为准。']};
-$('helpButton').addEventListener('click',function(){var host=$('helpContent');host.replaceChildren();helps[state.page].forEach(function(s){var p=document.createElement('p');p.textContent=s;host.appendChild(p);});showModal('helpModal');});
+$('helpButton').addEventListener('click',function(){var host=$('helpContent');host.replaceChildren();(bridge?['收拢 x、y 方向的外观，保留 z 方向的高度，研究竖直方向的浮沉。','这是研究方法和工具的简化，不是真实轮船被压缩；圆柱形浮标仍是三维物体。']:helps[state.page]).forEach(function(s){var p=document.createElement('p');p.textContent=s;host.appendChild(p);});showModal('helpModal');});
 function appendHeading(host,title,text){var h=document.createElement('h3');h.textContent=title;var p=document.createElement('p');p.textContent=text;host.append(h,p);}
 function fillNotes(){var host=$('notesContent');host.replaceChildren();$('notesTitle').textContent='第'+state.group+'组 · '+sourceName();var table=document.createElement('table'),head=document.createElement('tr');['液体','露出高度','次数'].forEach(function(s){var th=document.createElement('th');th.textContent=s;head.appendChild(th);});table.appendChild(head);ids.forEach(function(id){var row=document.createElement('tr');[names[id],recordText(latest(id)),current().readings[id].length].forEach(function(s){var td=document.createElement('td');td.textContent=s;row.appendChild(td);});table.appendChild(row);});host.appendChild(table);
   var c=comparison();appendHeading(host,'图上比较',c.ready?c.detail+' '+c.label+'；'+c.highest:c.label);
@@ -196,7 +221,7 @@ $('exportJson').addEventListener('click',function(){try{download(new Blob([W.exp
 $('importJson').addEventListener('click',function(){$('importFile').click();});
 $('importFile').addEventListener('change',function(){var file=this.files&&this.files[0];this.value='';if(!file)return;if(file.size>524288){toast('记录文件过大');return;}var reader=new FileReader();reader.onload=function(){try{var restored=W.import(reader.result);Object.assign(state,restored);state.flood=V.createFlood();state.ruler=null;state.prediction=null;$('groupNumber').value=state.group;setPage(state.page);fillNotes();persist();toast('记录已恢复');}catch(e){toast('导入失败：'+e.message);}};reader.onerror=function(){toast('无法读取文件');};reader.readAsText(file);});
 function evidenceImage(){
-  var c=document.createElement('canvas');c.width=1400;c.height=1120;var g=c.getContext('2d');g.fillStyle='#f1f9fc';g.fillRect(0,0,c.width,c.height);g.fillStyle='#12314c';g.font='700 48px sans-serif';g.fillText('船的最大装载量',65,85);g.font='26px sans-serif';g.fillStyle='#537889';g.fillText('五下4.5 · 第'+state.group+'组 · '+sourceName()+' · v2.0',65,132);
+  var c=document.createElement('canvas');c.width=1400;c.height=1120;var g=c.getContext('2d');g.fillStyle='#f1f9fc';g.fillRect(0,0,c.width,c.height);g.fillStyle='#12314c';g.font='700 48px sans-serif';g.fillText('船的最大装载量',65,85);g.font='26px sans-serif';g.fillStyle='#537889';g.fillText('五下4.5 · 第'+state.group+'组 · '+sourceName()+' · v2.1',65,132);
   var vs=values(),cols=[270,700,1130],baseline=720,top=230,scale=17;g.strokeStyle='#bed7df';g.setLineDash([8,7]);g.beginPath();g.moveTo(80,baseline);g.lineTo(1320,baseline);g.stroke();g.setLineDash([]);
   ids.forEach(function(id,i){var x=cols[i],v=vs[id];g.fillStyle='#214b62';g.font='700 32px sans-serif';g.textAlign='center';g.fillText(names[id],x,205);if(v!==null){var h=v*scale;g.fillStyle=['#70b7c9','#7f9ecb','#9d91ba'][i];g.fillRect(x-60,baseline-h,120,h);g.fillStyle='#f6fcff';g.fillRect(x-4,baseline-h-15,8,h+55);g.fillStyle='#037f8c';g.font='700 38px sans-serif';g.fillText(fmt(v)+' cm',x,baseline-h-35);if(i>0&&vs.fresh!==null){g.fillStyle='#597c8d';g.font='24px sans-serif';var d=v-vs.fresh;g.fillText('比清水 '+(d>=0?'+':'')+fmt(d)+' cm',x,baseline+62);}}else{g.fillStyle='#98acb6';g.font='31px sans-serif';g.fillText('未记录',x,450);}});
   g.textAlign='left';var summary=comparison();g.fillStyle='#164960';g.font='700 30px sans-serif';g.fillText(summary.ready?summary.detail+' '+summary.label+' · '+summary.highest:summary.label,65,855);g.fillStyle='#678796';g.font='24px sans-serif';g.fillText('同一支浮标 · 露出高度由本组手动记录',65,916);g.fillText(new Date().toLocaleString('zh-CN',{timeZone:'Asia/Shanghai',hour12:false}),65,1000);g.fillText('镇海区鲲池小学 王宁 · mutiw',65,1060);c.toBlob(function(blob){if(blob){download(blob,'船的最大装载量_第'+state.group+'组_证据卡_v2.png');toast('证据卡已保存');}else toast('暂时无法生成图片，请导出记录');},'image/png');
@@ -204,6 +229,6 @@ function evidenceImage(){
 $('exportImage').addEventListener('click',evidenceImage);$('saveComparison').addEventListener('click',evidenceImage);
 window.addEventListener('hashchange',function(){var page=location.hash.slice(1);if(['observe','measure','compare','load'].indexOf(page)>=0&&page!==state.page)setPage(page,false);});
 window.addEventListener('resize',function(){requestAnimationFrame(redraw);});
-document.addEventListener('visibilitychange',function(){if(document.hidden){stopFrames();persist();}else{if(travel)travel.started=performance.now()-travel.progress*travel.duration;if(swap)swap.started=performance.now()-swap.progress*swap.duration;if(state.page==='load'||travel||swap||draftMotion)ensureFrames();else redraw();}});
+document.addEventListener('visibilitychange',function(){if(document.hidden){stopFrames();persist();}else{if(travel)travel.started=performance.now()-travel.progress*travel.duration;if(swap)swap.started=performance.now()-swap.progress*swap.duration;if(bridge)bridge.started=performance.now()-bridge.progress*bridge.duration;if(state.page==='load'||travel||swap||draftMotion||(bridge&&!bridge.paused))ensureFrames();else redraw();}});
 setPage(location.hash.slice(1)||'observe',false);if(restoreNotice)setTimeout(function(){toast(restoreNotice);},600);
 })();
