@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Muti 10.2 四色</title>
+<style>
+:root{--bg:#f2f1ed;--panel:#fff;--ink:#181816;--muted:#66645f;--line:#d8d5cc;--accent:#a62d29;--yellow:#d6a62a;--ok:#276642;--warn:#8a5b00;--danger:#a52a2a;--shadow:0 10px 30px rgba(28,26,22,.08)}
+*{box-sizing:border-box}html{background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif}body{margin:0;min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1180px;margin:auto;padding:18px}.topbar{position:sticky;top:0;z-index:9;background:rgba(242,241,237,.94);backdrop-filter:blur(12px);padding:10px 0 14px}.brandrow{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:800;font-size:21px;letter-spacing:-.02em}.subline{color:var(--muted);font-size:13px;margin-top:4px}.statuspill{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 12px;font-size:13px;white-space:nowrap}.dot{width:9px;height:9px;border-radius:50%;background:#999}.dot.ok{background:var(--ok)}.dot.warn{background:var(--yellow)}.dot.bad{background:var(--danger)}.tabs{display:flex;gap:8px;margin-top:16px}.tab{border:1px solid var(--line);background:transparent;border-radius:10px;padding:9px 18px;color:var(--muted)}.tab.active{background:var(--ink);border-color:var(--ink);color:#fff}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr);gap:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.card h2{font-size:17px;margin:0 0 14px}.card h3{font-size:14px;margin:18px 0 10px}.canvaswrap{width:100%;aspect-ratio:3/2;background:#d8d5cc;border:1px solid #bbb8b0;border-radius:10px;overflow:hidden;display:grid;place-items:center}.canvaswrap canvas{width:100%;height:100%;object-fit:contain;image-rendering:auto}.controls{display:grid;gap:13px}.field{display:grid;gap:6px}.field label{font-size:13px;color:var(--muted)}.field input,.field select{width:100%;border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 11px;color:var(--ink)}.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden}.seg button{border:0;border-right:1px solid var(--line);background:#fff;padding:9px}.seg button:last-child{border-right:0}.seg button.active{background:#e8e6df;font-weight:700}.btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;color:var(--ink)}.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700}.btn.accent{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}.btn.danger{color:var(--danger);border-color:#d9aaaa}.btn:disabled{opacity:.45;cursor:not-allowed}.btnrow{display:flex;gap:9px;flex-wrap:wrap}.drop{border:1.5px dashed #aaa79f;border-radius:12px;padding:18px;text-align:center;background:#faf9f6}.drop.drag{border-color:var(--accent);background:#fff4f2}.drop input{display:none}.hint{font-size:12px;color:var(--muted);line-height:1.55}.progress{height:8px;border-radius:99px;background:#e7e4dc;overflow:hidden}.progress>span{display:block;height:100%;width:0;background:var(--ink);transition:width .2s}.message{padding:11px 12px;border-radius:10px;background:#f1f0eb;font-size:13px;line-height:1.55;min-height:43px}.message.error{background:#fff0ef;color:#8d1f1f}.message.ok{background:#edf7f0;color:#1f5c38}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{background:#f6f5f1;border-radius:10px;padding:11px}.stat b{display:block;font-size:16px}.stat span{display:block;font-size:11px;color:var(--muted);margin-top:4px}.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.swatch{height:42px;border:1px solid #999;border-radius:8px;display:flex;align-items:end;padding:5px;font-size:10px;font-weight:700}.calendarform{display:grid;grid-template-columns:1fr 1fr;gap:12px}.calendarform .wide{grid-column:1/-1}.devicegrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.kv{display:grid;grid-template-columns:130px 1fr;gap:8px 14px;font-size:13px}.kv dt{color:var(--muted)}.kv dd{margin:0;word-break:break-all}.networklist{display:grid;gap:7px;max-height:250px;overflow:auto}.network{display:flex;align-items:center;justify-content:space-between;text-align:left;width:100%;border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px}.network small{color:var(--muted)}details{border-top:1px solid var(--line);margin-top:16px;padding-top:13px}summary{cursor:pointer;font-weight:700}.warning{border-left:4px solid var(--yellow);background:#fff8df;padding:11px 13px;font-size:12px;line-height:1.55;border-radius:6px}.footer{font-size:11px;color:var(--muted);text-align:center;padding:22px 0}.busyoverlay{display:none;position:fixed;inset:0;background:rgba(20,19,17,.62);z-index:50;place-items:center;padding:20px}.busyoverlay.show{display:grid}.busybox{background:#fff;border-radius:14px;padding:24px;max-width:420px;width:100%;text-align:center}.spinner{width:34px;height:34px;border:3px solid #ddd;border-top-color:#222;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:820px){.shell{padding:12px}.grid,.devicegrid{grid-template-columns:1fr}.topbar{position:static}.brandrow{align-items:flex-start}.statuspill{white-space:normal}.calendarform{grid-template-columns:1fr}.calendarform .wide{grid-column:auto}.tabs{display:grid;grid-template-columns:repeat(3,1fr)}.tab{padding:9px}.kv{grid-template-columns:105px 1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div class="brandrow">
+    <div><div class="brand" id="deviceTitle">Muti 10.2 四色</div><div class="subline" id="networkLine">正在读取设备状态…</div></div>
+    <div class="statuspill"><span class="dot" id="statusDot"></span><span id="statusText">连接中</span></div>
+  </div>
+  <nav class="tabs"><button class="tab active" data-page="image">传图</button><button class="tab" data-page="calendar">月历</button><button class="tab" data-page="device">设备</button></nav>
+</header>
+
+<main>
+<section class="page active" id="page-image">
+  <div class="grid">
+    <div class="card">
+      <h2>精确四色预览 · 960 × 640</h2>
+      <div class="canvaswrap"><canvas id="previewCanvas" width="960" height="640"></canvas></div>
+      <div class="palette" style="margin-top:12px">
+        <div class="swatch" style="background:#181816;color:#fff">黑 0</div><div class="swatch" style="background:#f9f7ee">白 1</div><div class="swatch" style="background:#e0a923">黄 2</div><div class="swatch" style="background:#b52b26;color:#fff">红 3</div>
+      </div>
+    </div>
+    <aside class="card controls">
+      <h2>本地图片处理</h2>
+      <label class="drop" id="dropZone"><input id="imageFile" type="file" accept="image/png,image/jpeg,image/webp"><b>选择 JPG / PNG / WebP</b><div class="hint" style="margin-top:6px">原图只在当前浏览器处理，不上传到互联网</div></label>
+      <div class="field"><label>显示方式</label><div class="seg" id="fitSeg"><button data-value="contain" class="active">完整显示</button><button data-value="cover">铺满裁切</button></div></div>
+      <div class="field"><label>旋转</label><div class="seg" id="rotateSeg"><button data-value="0" class="active">0°</button><button data-value="90">90°</button><button data-value="180">180°</button><button data-value="270">270°</button></div></div>
+      <button class="btn primary" id="processBtn" disabled>生成四色预览</button>
+      <button class="btn accent" id="uploadBtn" disabled>上传并刷新屏幕</button>
+      <div class="progress"><span id="imageProgress"></span></div>
+      <div class="message" id="imageMessage">请选择图片。算法固定为设备感知四色调色板 + RGB 加权距离 + 蛇形 Floyd–Steinberg。</div>
+      <div class="stats"><div class="stat"><b id="frameBytes">—</b><span>帧字节</span></div><div class="stat"><b id="frameCrc">—</b><span>CRC32</span></div></div>
+      <div class="hint">普通模式不提供阈值、Gamma、灰阶中点或算法下拉框。白底保护只针对接近纯白的中性像素。</div>
+    </aside>
+  </div>
+</section>
+
+<section class="page" id="page-calendar">
+  <div class="grid">
+    <div class="card">
+      <h2>本地月历预览</h2>
+      <div class="canvaswrap"><canvas id="calendarCanvas" width="960" height="640"></canvas></div>
+    </div>
+    <aside class="card controls">
+      <h2>月历设置</h2>
+      <div class="calendarform">
+        <div class="field"><label>年份</label><input id="calYear" type="number" min="2000" max="2099"></div>
+        <div class="field"><label>月份</label><select id="calMonth"></select></div>
+        <div class="field wide"><label>标题</label><input id="calTitle" maxlength="24" value="月度日历"></div>
+        <div class="field"><label>每周起始</label><select id="calWeekStart"><option value="1">星期一</option><option value="0">星期日</option></select></div>
+        <div class="field"><label>相邻月份日期</label><select id="calAdjacent"><option value="1">显示</option><option value="0">隐藏</option></select></div>
+      </div>
+      <button class="btn primary" id="calendarPreviewBtn">生成月历预览</button>
+      <button class="btn accent" id="calendarUploadBtn" disabled>上传并刷新屏幕</button>
+      <div class="progress"><span id="calendarProgress"></span></div>
+      <div class="message" id="calendarMessage">月历完全由当前浏览器生成，不访问日历服务器。</div>
+      <div class="stats"><div class="stat"><b id="calendarBytes">—</b><span>帧字节</span></div><div class="stat"><b id="calendarCrc">—</b><span>CRC32</span></div></div>
+    </aside>
+  </div>
+</section>
+
+<section class="page" id="page-device">
+  <div class="devicegrid">
+    <div class="card">
+      <h2>设备状态</h2>
+      <dl class="kv" id="deviceKv"><dt>状态</dt><dd>读取中…</dd></dl>
+      <div class="btnrow" style="margin-top:14px"><button class="btn" id="refreshStatusBtn">刷新状态</button><a class="btn" href="/frame.bin" download="frame.bin" style="text-decoration:none">下载 frame.bin</a></div>
+    </div>
+    <div class="card">
+      <h2>加入局域网</h2>
+      <div class="warning">设备成功连接局域网后会关闭配置热点，这是正常行为。只有未保存 Wi‑Fi、STA 连接失败或手动点击“开启配置热点”时，Muti-10.2 才会出现。</div>
+      <div class="btnrow" style="margin-top:12px"><button class="btn" id="scanWifiBtn">扫描 Wi‑Fi</button><button class="btn" id="switchStaBtn">连接已保存局域网</button><button class="btn" id="switchApBtn">开启配置热点</button><button class="btn danger" id="forgetWifiBtn">忘记局域网</button></div>
+      <div class="networklist" id="networkList" style="margin-top:10px"></div>
+      <div class="field" style="margin-top:12px"><label>SSID</label><input id="wifiSsid" maxlength="32" autocomplete="off"></div>
+      <div class="field" style="margin-top:10px"><label>密码（开放网络留空）</label><input id="wifiPassword" type="password" maxlength="64" autocomplete="new-password"></div>
+      <button class="btn primary" id="saveWifiBtn" style="margin-top:12px">保存并连接</button>
+      <div class="message" id="wifiMessage" style="margin-top:10px">首次隔离测试建议使用独立 2.4 GHz WPA2/AES 热点。</div>
+    </div>
+    <div class="card">
+      <h2>设备名称</h2>
+      <div class="field"><label>页面显示名称</label><input id="deviceNameInput" maxlength="48"></div>
+      <div class="field" style="margin-top:10px"><label>配置热点名称</label><input id="apNameInput" maxlength="31"></div>
+      <button class="btn" id="saveDeviceBtn" style="margin-top:12px">保存设置</button>
+      <div class="hint" style="margin-top:10px">局域网固定地址：<strong>http://muti.local/</strong>。如果系统不解析 .local，请使用页面显示的局域网 IP。</div>
+    </div>
+    <div class="card">
+      <h2>屏幕诊断</h2>
+      <div class="warning">所有按钮都会排队执行一次全局刷新。两次全刷之间固定冷却 180 秒。BUSY 超时后不自动重试。</div>
+      <div class="btnrow" style="margin-top:12px">
+        <button class="btn diag" data-action="raw">原始码 0/1/2/3</button>
+        <button class="btn diag" data-action="palette">四色块</button>
+        <button class="btn diag" data-action="gray">16级模拟灰阶</button>
+        <button class="btn diag" data-action="white">全白</button>
+        <button class="btn diag" data-action="refresh">重新显示当前帧</button>
+      </div>
+      <details><summary>底层固定参数</summary><div class="hint" style="margin-top:10px">GPIO：SCK 4、MOSI 6、CS 7、DC 1、RST 2、BUSY 10。PSR 9F A9；VCOM 9C；VBD 37；TB hybrid 外置 LUT；RESE 3 Ω。内部 OTP 不使用。</div></details>
+      <button class="btn danger" id="rebootBtn" style="margin-top:14px">重启设备</button>
+    </div>
+  </div>
+</section>
+</main>
+<div class="footer">Muti-SSD2677-LocalWeb-C3 v1.2.3 · 本地网页 · muti.local · 稳定恢复热点</div>
+</div>
+<div class="busyoverlay" id="busyOverlay"><div class="busybox"><div class="spinner"></div><b id="busyTitle">处理中</b><div class="hint" id="busyText" style="margin-top:8px">请勿关闭页面</div></div></div>
+<script>
+'use strict';
+const W=960,H=640,FRAME_BYTES=153600;
+const PALETTE=[
+ {code:0,name:'黑',rgb:[24,24,22]},
+ {code:1,name:'白',rgb:[249,247,238]},
+ {code:2,name:'黄',rgb:[224,169,35]},
+ {code:3,name:'红',rgb:[181,43,38]}
+];
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const previewCanvas=$('#previewCanvas'), previewCtx=previewCanvas.getContext('2d',{willReadFrequently:true});
+const workCanvas=document.createElement('canvas');workCanvas.width=W;workCanvas.height=H;
+const workCtx=workCanvas.getContext('2d',{willReadFrequently:true});
+const calCanvas=$('#calendarCanvas'),calCtx=calCanvas.getContext('2d',{willReadFrequently:true});
+let sourceImage=null, fitMode='contain',rotation=0,imageFrame=null,calendarFrame=null,lastStatus=null,statusTimer=null;
+
+function setMessage(id,text,type=''){const el=$(id);el.textContent=text;el.className='message'+(type?' '+type:'')}
+function progress(id,value){$(id).style.width=Math.max(0,Math.min(100,value))+'%'}
+function setBusy(show,title='处理中',text='请勿关闭页面'){const o=$('#busyOverlay');o.classList.toggle('show',show);$('#busyTitle').textContent=title;$('#busyText').textContent=text}
+function formatMs(ms){if(!ms)return '0 秒';if(ms<1000)return ms+' ms';return (ms/1000).toFixed(ms<10000?1:0)+' 秒'}
+function formatBytes(n){if(!Number.isFinite(n))return '—';if(n<1024)return n+' B';return (n/1024).toFixed(1)+' KiB'}
+function hex32(n){return (n>>>0).toString(16).toUpperCase().padStart(8,'0')}
+function clamp(v){return v<0?0:v>255?255:v}
+
+const crcTable=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0}return t})();
+function crc32(bytes){let c=0xFFFFFFFF;for(let i=0;i<bytes.length;i++)c=crcTable[(c^bytes[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+
+function selectSegment(container,value){container.querySelectorAll('button').forEach(b=>b.classList.toggle('active',String(b.dataset.value)===String(value)))}
+$('#fitSeg').addEventListener('click',e=>{if(e.target.dataset.value){fitMode=e.target.dataset.value;selectSegment($('#fitSeg'),fitMode)}});
+$('#rotateSeg').addEventListener('click',e=>{if(e.target.dataset.value){rotation=Number(e.target.dataset.value);selectSegment($('#rotateSeg'),rotation)}});
+$$('.tab').forEach(b=>b.addEventListener('click',()=>{$$('.tab').forEach(x=>x.classList.toggle('active',x===b));$$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+b.dataset.page))}));
+
+function placeholder(ctx,title,subtitle){ctx.fillStyle='#f9f7ee';ctx.fillRect(0,0,W,H);ctx.strokeStyle='#181816';ctx.lineWidth=4;ctx.strokeRect(24,24,W-48,H-48);ctx.fillStyle='#181816';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='700 54px system-ui,sans-serif';ctx.fillText(title,W/2,H/2-30);ctx.font='28px system-ui,sans-serif';ctx.fillStyle='#66645f';ctx.fillText(subtitle,W/2,H/2+40)}
+placeholder(previewCtx,'Muti 10.2 四色','选择图片后在浏览器本地处理');
+placeholder(calCtx,'本地月历','设置年月后生成');
+
+async function loadImageFile(file){
+ if(!file)return;
+ if(!/^image\/(png|jpeg|webp)$/.test(file.type)){setMessage('#imageMessage','仅支持 JPG、PNG、WebP。','error');return}
+ setBusy(true,'读取图片','原图不会离开当前浏览器');
+ try{
+  if('createImageBitmap'in window)sourceImage=await createImageBitmap(file,{imageOrientation:'from-image'});
+  else sourceImage=await new Promise((resolve,reject)=>{const img=new Image();const u=URL.createObjectURL(file);img.onload=()=>{URL.revokeObjectURL(u);resolve(img)};img.onerror=reject;img.src=u});
+  $('#processBtn').disabled=false;$('#uploadBtn').disabled=true;imageFrame=null;
+  setMessage('#imageMessage',`已读取 ${sourceImage.width} × ${sourceImage.height}，点击“生成四色预览”。`,'ok');
+ }catch(err){setMessage('#imageMessage','图片读取失败：'+err.message,'error')}
+ finally{setBusy(false)}
+}
+$('#imageFile').addEventListener('change',e=>loadImageFile(e.target.files[0]));
+const drop=$('#dropZone');
+['dragenter','dragover'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('drag')}));
+['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('drag')}));
+drop.addEventListener('drop',e=>loadImageFile(e.dataTransfer.files[0]));
+
+function drawSourceToWork(image){
+ workCtx.save();workCtx.setTransform(1,0,0,1,0,0);workCtx.fillStyle='#fff';workCtx.fillRect(0,0,W,H);
+ const sw=image.width,sh=image.height,rad=rotation*Math.PI/180,rotated=rotation%180!==0;
+ const rw=rotated?sh:sw,rh=rotated?sw:sh;
+ const scale=fitMode==='cover'?Math.max(W/rw,H/rh):Math.min(W/rw,H/rh);
+ workCtx.translate(W/2,H/2);workCtx.rotate(rad);workCtx.scale(scale,scale);workCtx.imageSmoothingEnabled=true;workCtx.imageSmoothingQuality='high';workCtx.drawImage(image,-sw/2,-sh/2);workCtx.restore();
+ return workCtx.getImageData(0,0,W,H);
+}
+
+function nearestPalette(r,g,b){
+ let best=0,bestD=Infinity;
+ for(let i=0;i<PALETTE.length;i++){const p=PALETTE[i].rgb,dr=r-p[0],dg=g-p[1],db=b-p[2],d=.30*dr*dr+.56*dg*dg+.14*db*db;if(d<bestD){bestD=d;best=i}}
+ return best;
+}
+
+async function quantizeFloyd(imageData,targetCtx,progressId){
+ const src=imageData.data,codes=new Uint8Array(W*H),out=new ImageData(W,H),dst=out.data;
+ let curr=new Float32Array((W+2)*3),next=new Float32Array((W+2)*3);
+ const contrast=1.05;
+ for(let y=0;y<H;y++){
+  next.fill(0);const dir=(y&1)?-1:1;let x=dir===1?0:W-1;
+  for(let step=0;step<W;step++,x+=dir){
+   const s=(y*W+x)*4,e=(x+1)*3;
+   let r=clamp((src[s]-128)*contrast+128+curr[e]);
+   let g=clamp((src[s+1]-128)*contrast+128+curr[e+1]);
+   let b=clamp((src[s+2]-128)*contrast+128+curr[e+2]);
+   const luma=.2126*r+.7152*g+.0722*b,chroma=Math.max(r,g,b)-Math.min(r,g,b);
+   const whiteProtect=luma>=247&&chroma<=10;
+   const pi=whiteProtect?1:nearestPalette(r,g,b),p=PALETTE[pi].rgb,gain=whiteProtect?.2:1;
+   codes[y*W+x]=PALETTE[pi].code;dst[s]=p[0];dst[s+1]=p[1];dst[s+2]=p[2];dst[s+3]=255;
+   const er=(r-p[0])*gain,eg=(g-p[1])*gain,eb=(b-p[2])*gain;
+   const add=(arr,idx,w)=>{arr[idx]+=er*w;arr[idx+1]+=eg*w;arr[idx+2]+=eb*w};
+   if(dir===1){add(curr,e+3,7/16);add(next,e-3,3/16);add(next,e,5/16);add(next,e+3,1/16)}
+   else{add(curr,e-3,7/16);add(next,e+3,3/16);add(next,e,5/16);add(next,e-3,1/16)}
+  }
+  [curr,next]=[next,curr];
+  if((y&31)===31){progress(progressId,10+75*(y+1)/H);await new Promise(r=>setTimeout(r,0))}
+ }
+ targetCtx.putImageData(out,0,0);
+ const packed=new Uint8Array(FRAME_BYTES);for(let p=0;p<codes.length;p++)packed[p>>2]|=codes[p]<<(6-((p&3)*2));
+ progress(progressId,95);const crc=crc32(packed);progress(progressId,100);return{bytes:packed,crc};
+}
+
+async function processImage(){
+ if(!sourceImage)return;$('#processBtn').disabled=true;$('#uploadBtn').disabled=true;progress('#imageProgress',3);setBusy(true,'四色量化中','固定调色板 + 蛇形 Floyd–Steinberg');
+ try{const source=drawSourceToWork(sourceImage);imageFrame=await quantizeFloyd(source,previewCtx,'#imageProgress');$('#frameBytes').textContent=formatBytes(imageFrame.bytes.length);$('#frameCrc').textContent=hex32(imageFrame.crc);$('#uploadBtn').disabled=false;setMessage('#imageMessage','预览完成。所见颜色就是将要打包的四种逻辑颜色。','ok')}
+ catch(err){setMessage('#imageMessage','处理失败：'+err.message,'error');progress('#imageProgress',0)}
+ finally{$('#processBtn').disabled=false;setBusy(false)}
+}
+$('#processBtn').addEventListener('click',processImage);
+
+async function fetchJson(url,options={}){
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),options.timeout||25000);try{const r=await fetch(url,{...options,signal:controller.signal,cache:'no-store'});const text=await r.text();let data;try{data=JSON.parse(text)}catch{throw new Error('设备返回非JSON：'+text.slice(0,120))}if(!r.ok||data.ok===false)throw new Error(data.error||('HTTP '+r.status));return data}finally{clearTimeout(timer)}
+}
+async function uploadFrame(frame,messageId,progressId){
+ if(!frame)return;if(lastStatus?.display?.fault)throw new Error('设备处于故障锁定状态，需物理断电30秒');
+ progress(progressId,2);setBusy(true,'上传 153600 字节','上传完成后设备会按冷却策略刷新');
+ try{const form=new FormData();form.append('frame',new Blob([frame.bytes],{type:'application/octet-stream'}),'frame.bin');progress(progressId,12);const data=await fetchJson('/api/upload',{method:'POST',body:form,headers:{'X-Frame-CRC32':hex32(frame.crc)},timeout:60000});progress(progressId,100);let text=data.sameFrame?'设备确认画面相同，已跳过刷新。':'帧已保存并进入刷新队列。';if(data.cooldownRemainingMs)text+=` 剩余冷却 ${formatMs(data.cooldownRemainingMs)}。`;setMessage(messageId,text,'ok');await pollStatus()}
+ catch(err){setMessage(messageId,'上传失败：'+err.message,'error');progress(progressId,0);throw err}
+ finally{setBusy(false)}
+}
+$('#uploadBtn').addEventListener('click',()=>uploadFrame(imageFrame,'#imageMessage','#imageProgress'));
+
+function initCalendarControls(){const now=new Date();$('#calYear').value=now.getFullYear();for(let m=1;m<=12;m++){const o=document.createElement('option');o.value=m;o.textContent=m+' 月';if(m===now.getMonth()+1)o.selected=true;$('#calMonth').append(o)}}
+function daysInMonth(y,m){return new Date(y,m,0).getDate()}
+function drawCalendarSource(){
+ const year=Number($('#calYear').value),month=Number($('#calMonth').value),weekStart=Number($('#calWeekStart').value),showAdjacent=$('#calAdjacent').value==='1',title=$('#calTitle').value.trim()||'月度日历';
+ calCtx.setTransform(1,0,0,1,0,0);calCtx.fillStyle='#f9f7ee';calCtx.fillRect(0,0,W,H);calCtx.strokeStyle='#181816';calCtx.lineWidth=3;calCtx.strokeRect(18,18,W-36,H-36);
+ calCtx.textAlign='left';calCtx.textBaseline='alphabetic';calCtx.fillStyle='#181816';calCtx.font='700 30px system-ui,sans-serif';calCtx.fillText(title,48,62);calCtx.textAlign='right';calCtx.fillStyle='#b52b26';calCtx.font='800 48px system-ui,sans-serif';calCtx.fillText(`${year} / ${String(month).padStart(2,'0')}`,W-48,66);
+ const names=weekStart===1?['一','二','三','四','五','六','日']:['日','一','二','三','四','五','六'];const gx=42,gy=100,gw=W-84,gh=H-132,cw=gw/7,ch=gh/7;
+ calCtx.font='700 22px system-ui,sans-serif';calCtx.textAlign='center';calCtx.textBaseline='middle';for(let c=0;c<7;c++){calCtx.fillStyle=(weekStart===1?c>=5:(c===0||c===6))?'#b52b26':'#181816';calCtx.fillText('周'+names[c],gx+cw*(c+.5),gy+ch*.5)}
+ calCtx.strokeStyle='#77736b';calCtx.lineWidth=1;for(let r=1;r<=7;r++){calCtx.beginPath();calCtx.moveTo(gx,gy+r*ch);calCtx.lineTo(gx+gw,gy+r*ch);calCtx.stroke()}for(let c=0;c<=7;c++){calCtx.beginPath();calCtx.moveTo(gx+c*cw,gy+ch);calCtx.lineTo(gx+c*cw,gy+gh);calCtx.stroke()}
+ const firstDay=new Date(year,month-1,1).getDay(),offset=(firstDay-weekStart+7)%7,dim=daysInMonth(year,month),prevDim=daysInMonth(year,month-1);const today=new Date();
+ calCtx.font='700 29px system-ui,sans-serif';for(let cell=0;cell<42;cell++){let day=cell-offset+1,cm=month,cy=year,muted=false;if(day<1){day=prevDim+day;cm=month-1;muted=true;if(cm===0){cm=12;cy--}}else if(day>dim){day-=dim;cm=month+1;muted=true;if(cm===13){cm=1;cy++}}if(muted&&!showAdjacent)continue;const row=Math.floor(cell/7)+1,col=cell%7,cx=gx+cw*(col+.5),cyy=gy+ch*(row+.5);const isToday=cy===today.getFullYear()&&cm===today.getMonth()+1&&day===today.getDate();if(isToday){calCtx.fillStyle='#e0a923';calCtx.beginPath();calCtx.arc(cx,cyy,25,0,Math.PI*2);calCtx.fill()}calCtx.fillStyle=muted?'#aaa69c':((weekStart===1?col>=5:(col===0||col===6))?'#b52b26':'#181816');calCtx.fillText(String(day),cx,cyy)}
+ return calCtx.getImageData(0,0,W,H);
+}
+async function processCalendar(){progress('#calendarProgress',3);$('#calendarUploadBtn').disabled=true;setBusy(true,'生成月历','排版与四色量化均在浏览器内完成');try{const source=drawCalendarSource();calendarFrame=await quantizeFloyd(source,calCtx,'#calendarProgress');$('#calendarBytes').textContent=formatBytes(calendarFrame.bytes.length);$('#calendarCrc').textContent=hex32(calendarFrame.crc);$('#calendarUploadBtn').disabled=false;setMessage('#calendarMessage','月历帧生成完成。','ok')}catch(err){setMessage('#calendarMessage','生成失败：'+err.message,'error')}finally{setBusy(false)}}
+$('#calendarPreviewBtn').addEventListener('click',processCalendar);$('#calendarUploadBtn').addEventListener('click',()=>uploadFrame(calendarFrame,'#calendarMessage','#calendarProgress'));
+
+function renderStatus(s){lastStatus=s;$('#deviceTitle').textContent=s.device.name;const n=s.network,local=n.hostname?`${n.hostname}.local`:'';$('#networkLine').textContent=`${n.mode==='ap'?'配置热点':n.mode==='sta'?'局域网':'网络连接中'} · ${n.ip}${local?' · '+local:''}`;const dot=$('#statusDot'),txt=$('#statusText');dot.className='dot';if(s.display.fault){dot.classList.add('bad');txt.textContent='屏幕故障锁定'}else if(s.display.state==='refreshing'){dot.classList.add('warn');txt.textContent='屏幕刷新中'}else if(s.display.pending){dot.classList.add('warn');txt.textContent=s.display.cooldownRemainingMs?`冷却 ${Math.ceil(s.display.cooldownRemainingMs/1000)}s`:'等待刷新'}else{dot.classList.add('ok');txt.textContent='设备空闲'}
+ $('#deviceNameInput').value=s.device.name;$('#apNameInput').value=n.mode==='ap'?n.ssid:($('#apNameInput').value||'Muti-10.2');
+ const apState=n.mode==='ap'?(n.apReady?'持续开放':'启动失败'):'已关闭（局域网模式）';
+ const rows=[['固件',`${s.firmware.name} v${s.firmware.version}`],['网络模式',n.mode],['当前SSID',n.ssid||'—'],['已保存局域网',n.savedSsid||'—'],['IP',n.ip],['mDNS',`${n.hostname}.local`],['配置热点',apState],['热点客户端',String(n.apClients||0)],['信号',n.mode==='sta'?n.rssi+' dBm':'—'],['显示状态',s.display.state],['提示',s.display.message],['BUSY 引脚',String(s.display.busyPin)],['冷却剩余',formatMs(s.display.cooldownRemainingMs)],['最后刷新',formatMs(s.display.lastRefreshMs)],['frame.bin',s.frame.exists?`${formatBytes(s.frame.bytes)} / ${s.frame.storedCrc32}`:'不存在'],['已显示 CRC',s.frame.displayedCrc32],['LittleFS',s.storage.mounted?`已挂载 (${s.storage.partitionLabel||'未知标签'}) · ${formatBytes(s.storage.usedBytes)} / ${formatBytes(s.storage.totalBytes)}${s.storage.formattedOnBoot?' · 本次启动已格式化':''}`:`未挂载 · ${s.storage.error||'未知错误'}`]];
+ $('#deviceKv').innerHTML=rows.map(([a,b])=>`<dt>${escapeHtml(a)}</dt><dd>${escapeHtml(String(b))}</dd>`).join('');
+ const fsOk=!!s.storage?.mounted;$$('.diag').forEach(b=>b.disabled=!fsOk||s.display.state==='refreshing'||s.display.fault);$('#uploadBtn').disabled=!imageFrame||!fsOk||s.display.state==='refreshing'||s.display.fault;$('#calendarUploadBtn').disabled=!calendarFrame||!fsOk||s.display.state==='refreshing'||s.display.fault;$('#switchStaBtn').disabled=!n.savedSsid||n.mode==='sta'||n.mode==='sta_connecting';$('#switchApBtn').disabled=n.mode==='ap';
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function pollStatus(){try{const s=await fetchJson('/api/status',{timeout:6000});renderStatus(s)}catch(err){$('#statusDot').className='dot bad';$('#statusText').textContent='设备连接失败';$('#networkLine').textContent=err.message}}
+$('#refreshStatusBtn').addEventListener('click',pollStatus);
+
+async function scanWifi(){const btn=$('#scanWifiBtn');btn.disabled=true;setMessage('#wifiMessage','正在扫描…');try{await fetchJson('/api/wifi/scan?start=1',{timeout:8000});for(let i=0;i<16;i++){await new Promise(r=>setTimeout(r,700));const d=await fetchJson('/api/wifi/scan',{timeout:5000});if(!d.scanning){renderNetworks(d.networks);setMessage('#wifiMessage',`找到 ${d.networks.length} 个网络。`,'ok');return}}throw new Error('扫描超时')}catch(err){setMessage('#wifiMessage','扫描失败：'+err.message,'error')}finally{btn.disabled=false}}
+function renderNetworks(list){$('#networkList').innerHTML='';list.sort((a,b)=>b.rssi-a.rssi).forEach(n=>{const b=document.createElement('button');b.className='network';b.innerHTML=`<span>${escapeHtml(n.ssid||'(隐藏网络)')}</span><small>${n.rssi} dBm · CH${n.channel}${n.secure?' · 加密':' · 开放'}</small>`;b.addEventListener('click',()=>{$('#wifiSsid').value=n.ssid;$('#wifiPassword').focus()});$('#networkList').append(b)})}
+$('#scanWifiBtn').addEventListener('click',scanWifi);
+$('#saveWifiBtn').addEventListener('click',async()=>{const ssid=$('#wifiSsid').value.trim(),password=$('#wifiPassword').value;if(!ssid){setMessage('#wifiMessage','请输入SSID。','error');return}if(!confirm(`保存 ${ssid} 并切换到局域网？\n如果连接失败，20秒后会恢复 Muti-10.2 热点。`))return;try{const body=new URLSearchParams({ssid,password});const d=await fetchJson('/api/wifi/save',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body,timeout:8000});setMessage('#wifiMessage',d.message,'ok')}catch(err){setMessage('#wifiMessage','保存失败：'+err.message,'error')}});
+$('#forgetWifiBtn').addEventListener('click',async()=>{if(!confirm('忘记已保存的局域网并保持配置热点？'))return;try{const d=await fetchJson('/api/wifi/forget',{method:'POST',timeout:8000});setMessage('#wifiMessage',d.message,'ok')}catch(err){setMessage('#wifiMessage',err.message,'error')}});
+$('#switchStaBtn').addEventListener('click',async()=>{if(!confirm('关闭配置热点并连接已保存的局域网？'))return;try{const d=await fetchJson('/api/network/sta',{method:'POST',timeout:8000});setMessage('#wifiMessage',d.message,'ok')}catch(err){setMessage('#wifiMessage','切换失败：'+err.message,'error')}});
+$('#switchApBtn').addEventListener('click',async()=>{if(!confirm('关闭当前局域网连接并开启 Muti-10.2 配置热点？'))return;try{const d=await fetchJson('/api/network/ap',{method:'POST',timeout:8000});setMessage('#wifiMessage',d.message,'ok')}catch(err){setMessage('#wifiMessage','切换失败：'+err.message,'error')}});
+$('#saveDeviceBtn').addEventListener('click',async()=>{const deviceName=$('#deviceNameInput').value.trim(),apName=$('#apNameInput').value.trim();if(!deviceName||!apName)return alert('名称不能为空');if(!confirm('保存设备名称和热点名称？'))return;try{const body=new URLSearchParams({deviceName,apName});await fetchJson('/api/device/save',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body,timeout:8000})}catch(err){alert(err.message)}});
+
+async function action(name){if(!confirm('确认执行一次全局刷新？\n两次全刷之间会自动冷却180秒。'))return;setBusy(true,'发送屏幕任务','任务保存后可关闭当前页面');try{const body=new URLSearchParams({action:name});const d=await fetchJson('/api/action',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body,timeout:30000});await pollStatus();alert(d.queued===false?'测试图与已显示画面相同，未重复刷新。':'任务已进入队列。')}catch(err){alert('操作失败：'+err.message)}finally{setBusy(false)}}
+$$('.diag').forEach(b=>b.addEventListener('click',()=>action(b.dataset.action)));$('#rebootBtn').addEventListener('click',()=>{if(confirm('立即重启设备？'))fetchJson('/api/action',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({action:'reboot'}),timeout:5000}).catch(()=>{})});
+
+initCalendarControls();drawCalendarSource();pollStatus();statusTimer=setInterval(pollStatus,2000);
+</script>
+</body>
+</html>
