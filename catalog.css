@@ -6,9 +6,14 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,Bl
 button,a{font:inherit}
 a{color:inherit}
 .site-header{border-bottom:1px solid #e7efea;background:#fff}
-.site-header-inner{max-width:1160px;margin:0 auto;padding:22px 28px}
+.site-header-inner{max-width:1160px;margin:0 auto;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.site-heading{min-width:0}
 .site-header .brand{font-size:13px;color:#587b6d;font-weight:700;letter-spacing:1.3px;margin:0 0 7px}
 .site-header h1{font-size:clamp(28px,3.3vw,39px);letter-spacing:-.02em;line-height:1.3;margin:0;font-weight:800}
+.compat-entry{display:inline-flex;align-items:center;gap:12px;flex:none;padding:12px 17px;min-height:60px;text-decoration:none;color:#fff;background:#23654f;border-radius:13px;box-shadow:0 6px 18px rgba(22,89,62,.16);font-size:16px;font-weight:800;line-height:1.25;transition:background .15s,transform .15s}
+.compat-entry:hover{background:#174e3c;transform:translateY(-2px)}
+.compat-entry svg{flex:none}
+.compat-entry small{display:block;color:#d5ede1;margin-top:4px;font-size:12px;font-weight:500}
 main{max-width:1160px;margin:0 auto;padding:30px 28px 62px;min-height:calc(100vh - 160px)}
 .intro{margin:5px 0 27px;color:var(--muted);font-size:17px}
 .book-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
@@ -29,13 +34,24 @@ main{max-width:1160px;margin:0 auto;padding:30px 28px 62px;min-height:calc(100vh
 .detail-cover{padding:0 2px}
 .detail-cover img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:0 12px 25px rgba(11,48,39,.16)}
 .detail-content h2{font-size:clamp(30px,3.4vw,44px);letter-spacing:-.025em;line-height:1.22;margin:0 0 6px}
-.detail-count{font-size:17px;color:#6d8178;margin:0 0 26px}
+.detail-count{font-size:17px;color:#6d8178;margin:0 0 9px}
+.tier-guide{font-size:12px;line-height:1.6;color:#658174;margin:0 0 24px}
+.tier-guide a{color:#235e4a;text-decoration:underline;text-underline-offset:3px;font-weight:700}
 .lesson-list{display:flex;flex-direction:column;gap:12px}
 .lesson-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;column-gap:16px;border:1px solid #d1e2da;border-radius:11px;background:#fff;padding:18px 19px}
 .lesson-index{display:grid;place-items:center;background:#e8f3ed;width:42px;height:42px;border-radius:50%;font-size:20px;font-weight:800;color:#174b3a}
 .lesson-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .lesson-code{font-size:17px;font-weight:800;color:#245c4a}
 .lesson-head h3{font-size:21px;line-height:1.35;margin:0;font-weight:800}
+.lesson-grade{display:inline-block;align-self:center;padding:4px 8px;border-radius:7px;line-height:1.25;font-size:12px;font-weight:800;white-space:nowrap;border:1px solid transparent}
+.grade-t1{background:#e9f3ee;color:#22563f;border-color:#d1e5da}
+.grade-t2{background:#e8f1ff;color:#255b9c;border-color:#d6e5fd}
+.grade-t3{background:#fff1d8;color:#8b5a18;border-color:#f8dfb0}
+.grade-t4{background:#f4e9fd;color:#7647a1;border-color:#e9d6fa}
+.lesson-feature{font-size:12px;font-weight:650;color:#9b6023;background:#fff6e9;border-radius:5px;padding:3px 7px;white-space:nowrap}
+.lesson-match{font-size:12px;font-weight:700;white-space:nowrap}
+.lesson-match.is-ok{color:#257448}
+.lesson-match.is-limited{color:#ae5c32}
 .origin{display:inline-block;font-size:13px;font-weight:650;color:#517264;margin-top:4px}
 .lesson-content p{font-size:14px;line-height:1.6;color:#687b73;margin:6px 0 0}
 .lesson-open{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;white-space:nowrap;padding:9px 13px;border:1px solid #8fb4a2;border-radius:8px;color:#1b5846;text-decoration:none;font-size:15px;font-weight:750;background:#fff}
@@ -48,6 +64,7 @@ main{max-width:1160px;margin:0 auto;padding:30px 28px 62px;min-height:calc(100vh
 a:focus-visible{outline:3px solid #f0ae4f;outline-offset:4px}
 @media(max-width:1000px){.book-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:850px){.book-grid{gap:14px}.cover-stage{height:245px}.detail-layout{grid-template-columns:220px minmax(0,1fr);gap:22px}.lesson-row{grid-template-columns:36px minmax(0,1fr);padding:14px}.lesson-index{width:36px;height:36px;font-size:18px}.lesson-open{grid-column:2;justify-self:start;margin-top:12px}}
-@media(max-width:640px){.site-header-inner{padding:21px 17px}main{padding:22px 16px 50px}.intro{font-size:15px;margin-bottom:20px}.book-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cover-stage{height:220px;padding:12px 9px}.book-info{padding:12px 10px;min-height:77px}.book-info strong{font-size:16px}.book-info small{font-size:12px}.chevron{width:17px;height:17px}.detail-layout{grid-template-columns:1fr;gap:20px}.detail-cover{max-width:190px;margin:0 auto}.detail-content h2{font-size:30px}.detail-count{margin-bottom:18px}.lesson-row{grid-template-columns:36px minmax(0,1fr);column-gap:11px}.lesson-head h3{font-size:19px}.lesson-code{font-size:15px}.lesson-open{font-size:14px}.site-footer-inner{padding:18px 16px}}
+@media(max-width:640px){.site-header-inner{padding:21px 17px;align-items:flex-start;gap:12px}.site-header h1{font-size:24px}.compat-entry{min-height:52px;padding:10px 12px;font-size:12px;gap:6px}.compat-entry svg{width:20px;height:20px}.compat-entry small{font-size:10px}.site-header .brand{font-size:11px}main{padding:22px 16px 50px}.intro{font-size:15px;margin-bottom:20px}.book-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.cover-stage{height:220px;padding:12px 9px}.book-info{padding:12px 10px;min-height:77px}.book-info strong{font-size:16px}.book-info small{font-size:12px}.chevron{width:17px;height:17px}.detail-layout{grid-template-columns:1fr;gap:20px}.detail-cover{max-width:190px;margin:0 auto}.detail-content h2{font-size:30px}.detail-count{margin-bottom:6px}.lesson-row{grid-template-columns:36px minmax(0,1fr);column-gap:11px}.lesson-head h3{font-size:19px}.lesson-code{font-size:15px}.lesson-open{font-size:14px}.site-footer-inner{padding:18px 16px}}
+@media(max-width:360px){.site-header-inner{flex-wrap:wrap}.compat-entry{width:100%;justify-content:center}.compat-entry span{display:flex;align-items:center;gap:9px}.compat-entry small{margin-top:0}}
 @media(max-width:370px){.cover-stage{height:188px}.book-info strong{font-size:15px}.book-info small{font-size:11px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.book-card,.chevron{transition:none}}
