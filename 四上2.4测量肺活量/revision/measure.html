@@ -1,0 +1,49 @@
+<section id="page-measure" class="page measure-page" aria-label="学会测量肺活量">
+ <div class="measure-stage">
+  <div class="measure-visual">
+   <svg id="bag-svg" viewBox="0 0 960 620" role="img" aria-label="短吸管插入测量袋；一次呼气后袋体松软；密封后向内卷袋至饱满读数">
+    <defs>
+     <linearGradient id="bag-plastic" x1="0" x2="1"><stop stop-color="#b8d8dd" stop-opacity=".50"/><stop offset=".15" stop-color="#f3fcfc" stop-opacity=".70"/><stop offset=".47" stop-color="#fff" stop-opacity=".82"/><stop offset=".8" stop-color="#d8edef" stop-opacity=".55"/><stop offset="1" stop-color="#8fbcc4" stop-opacity=".66"/></linearGradient>
+     <linearGradient id="bag-air" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#e9f7f7" stop-opacity=".15"/><stop offset=".4" stop-color="#c6e7e8" stop-opacity=".38"/><stop offset="1" stop-color="#97cdd1" stop-opacity=".60"/></linearGradient>
+     <linearGradient id="bag-roll-fill"><stop stop-color="#90b3bc"/><stop offset=".25" stop-color="#e6f3f4"/><stop offset=".5" stop-color="#fff"/><stop offset=".72" stop-color="#dcebed"/><stop offset="1" stop-color="#9ebdc5"/></linearGradient>
+     <linearGradient id="straw-fill" x1="0" x2="1"><stop stop-color="#ba3b3f"/><stop offset=".4" stop-color="#f37c72"/><stop offset="1" stop-color="#d44f4c"/></linearGradient>
+     <radialGradient id="bag-shadow"><stop stop-color="#b3c8cd" stop-opacity=".35"/><stop offset="1" stop-color="#b3c8cd" stop-opacity="0"/></radialGradient>
+     <clipPath id="bag-clip"><path id="bag-clip-shape" d="M370 115H610V550H370Z"/></clipPath>
+     <marker id="bag-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="m1 1 6 3-6 3" fill="none" stroke="#008d98" stroke-width="1.7"/></marker>
+    </defs>
+    <ellipse cx="490" cy="577" rx="170" ry="25" fill="url(#bag-shadow)"/>
+    <g id="bag-original-outline" opacity="0"><path d="M370 115H610V550H370Z" fill="none" stroke="#bed0d5" stroke-width="2" stroke-dasharray="7 7"/><text x="652" y="155" fill="#8ba1a8" font-size="23">展开时</text></g>
+    <g id="bag-straw"><rect x="477" y="42" width="13" height="137" rx="5" fill="url(#straw-fill)"/><ellipse cx="483.5" cy="42" rx="6.5" ry="3" fill="#a73b3e"/><path id="bag-flow" d="M483.5 58V162" stroke="#fff6df" stroke-width="4" stroke-linecap="round" stroke-dasharray="5 14" fill="none" opacity="0"/></g>
+    <g id="bag-straw-label"><path d="M341 72h105" stroke="#8da9b2" stroke-width="2"/><text x="326" y="81" text-anchor="end" fill="#536e7a" font-size="26">短吸管</text></g>
+    <path id="bag-body" d="M370 115Q490 121 610 115L608 550Q490 564 372 550Z" fill="url(#bag-plastic)" stroke="#9bbcc4" stroke-width="2.5"/>
+    <g clip-path="url(#bag-clip)">
+     <path id="bag-air-shape" fill="url(#bag-air)" stroke="none"/>
+     <g id="bag-wrinkles" fill="none" stroke="#a5c3ca" stroke-width="2" opacity=".60"><path d="M378 128 413 198 385 263 417 329 388 399 417 466 382 543M602 127 568 195 600 257 570 324 601 394 567 467 600 543M417 128 432 223 419 302 435 396 418 539M566 132 552 223 565 300 550 398 565 540"/><path d="m380 148 211 38M380 267l220 40M380 394l220 33M381 510l217 20" opacity=".42"/></g>
+     <path id="bag-shine" d="M391 132Q379 319 393 535" stroke="#fff" stroke-opacity=".82" stroke-width="11" fill="none" stroke-linecap="round"/>
+     <g id="bag-scale"></g>
+    </g>
+    <path id="bag-seam" d="M374 550Q490 559 606 550" fill="none" stroke="#92b3bd" stroke-width="5"/>
+    <g id="bag-mouth"><path d="M370 115Q490 123 610 115" stroke="#8aaeb8" stroke-width="4" fill="none"/><path d="M372 109Q490 117 608 109" stroke="#c3d9de" stroke-width="2" fill="none"/></g>
+    <g id="bag-roll" opacity="0" transform="translate(0 115)">
+     <path id="bag-seal" d="M368 0H612" stroke="#e8a14d" stroke-width="9" stroke-linecap="round"/>
+     <g id="bag-rolled-cylinder"><rect x="367" y="-13" width="246" height="27" rx="13.5" fill="url(#bag-roll-fill)" stroke="#91b1bb" stroke-width="2"/><ellipse cx="612" cy=".5" rx="12" ry="13.5" fill="#d5e7eb" stroke="#91b1bb" stroke-width="2"/><path d="M608-6c10-8 13 11 4 12-7 2-8-8-3-9 4-1 5 4 2 5" fill="none" stroke="#86a7b1" stroke-width="1.8"/><path d="M379-6H594M379 7H594" stroke="#fff" opacity=".65" stroke-width="2"/></g>
+     <g id="bag-handles" role="slider" tabindex="0" aria-label="密封后向内卷袋，直到饱满" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="touch-action:none;cursor:grab">
+      <rect x="341" y="-33" width="298" height="66" rx="22" fill="transparent"/>
+      <g id="bag-roll-grip"><rect x="408" y="-19" width="160" height="38" rx="19" fill="#fff7e8" stroke="#dfad66" stroke-width="2"/><path d="M432-8V8m-7-7 7 7 7-7" fill="none" stroke="#a16e31" stroke-width="2.6" stroke-linecap="round"/><text x="496" y="8" text-anchor="middle" fill="#95662c" font-size="21" font-weight="700">向内卷</text></g>
+     </g>
+    </g>
+    <g id="bag-read-pointer" opacity="0"><path id="bag-read-tick" d="M454 330H480" stroke="#2d7f8c" stroke-width="2.5"/><path id="bag-read-line" d="M638 330h63" stroke="#df9643" stroke-width="3"/><path id="bag-read-triangle" d="m637 330 12-7v14Z" fill="#df9643"/><text id="bag-read-text" x="717" y="338" fill="#a76c29" font-size="27" font-weight="650">这里读数</text></g>
+    <g id="bag-breath-cue" opacity="0"><circle cx="187" cy="225" r="68" fill="#edf7f6"/><path d="M155 215Q187 173 218 215M156 239Q186 280 218 239" fill="none" stroke="#61aeb4" stroke-width="4" stroke-linecap="round"/><path d="m208 204 12 13-16 1M165 251l-12-13 17-1" fill="none" stroke="#61aeb4" stroke-width="4" stroke-linecap="round"/><text id="bag-breath-text" x="187" y="329" text-anchor="middle" fill="#3f717a" font-size="29" font-weight="650">尽力吸气</text></g>
+    <g id="bag-state-tag" transform="translate(697 230)"><rect width="172" height="61" rx="18" fill="#eef6f6"/><text id="bag-state-text" x="86" y="40" text-anchor="middle" fill="#52808a" font-size="27" font-weight="650">先压平</text></g>
+    <text id="bag-stage-note" x="490" y="610" text-anchor="middle" fill="#81959d" font-size="18">器材操作示意 · 刻度以实物为准</text>
+   </svg>
+   <button id="measure-reset" class="icon-button stage-reset" aria-label="重置测量演示"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 0 5M4 4v6h6"/></svg></button>
+  </div>
+  <div id="measure-steps" class="step-track" aria-label="测量步骤"><button data-step="0" class="current"><i></i><span>展袋插管</span></button><button data-step="1"><i></i><span>深吸气</span></button><button data-step="2"><i></i><span>一次呼气</span></button><button data-step="3"><i></i><span>密封卷袋</span></button><button data-step="4"><i></i><span>读数</span></button></div>
+ </div>
+ <aside class="measure-control">
+  <div class="measure-copy"><p class="eyebrow" id="measure-counter">01 / 05</p><h2 id="measure-title">展开袋子，插入吸管</h2><p id="measure-instruction">先把袋内原有的空气排出去，再从袋口插入短吸管。</p></div>
+  <div id="measure-reading" class="measure-reading" hidden><button id="measure-answer" aria-label="填写测量袋读数"><strong>？</strong><small>mL</small></button><p id="measure-feedback" aria-live="polite">读鼓起部分的最大刻度。</p><button id="measure-zoom" class="text-button">放大刻度</button></div>
+  <div class="measure-actions"><button id="measure-action" class="primary">深吸一口气</button><button id="measure-question" class="secondary">想一想</button><p class="measure-small">每人一根吸管 · 同伴帮忙捏紧袋口</p></div>
+ </aside>
+</section>

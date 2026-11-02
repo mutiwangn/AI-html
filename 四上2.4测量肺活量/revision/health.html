@@ -1,0 +1,28 @@
+<section id="page-health" class="page health-page" aria-label="肺活量与健康" hidden>
+  <div class="health-model-column">
+    <div class="health-model-toolbar">
+      <div><strong id="health-phase">安静呼吸</strong><span id="health-motion-caption">观察肺和膈肌的变化</span></div>
+      <div class="health-view-tools"><button id="health-ribs" type="button" class="health-view-button" aria-pressed="true">胸廓</button><button id="health-reset" type="button" class="icon-button" aria-label="复位人体观察角度"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 0 5M4 4v6h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+    </div>
+    <div id="health-viewport" class="health-viewport">
+      <canvas id="health-canvas" tabindex="0" aria-label="真实Z-Anatomy人体呼吸系统模型，可用手指拖动或方向键旋转"></canvas>
+      <div id="health-fallback" class="health-fallback" hidden><img id="health-frame-low" alt="从真实Z-Anatomy解剖网格投影得到的人体呼吸系统"><img id="health-frame-high" alt="" aria-hidden="true"></div>
+      <div id="health-loading" class="health-loading"><strong>正在展开人体模型</strong><span>模型已内置，无需联网</span></div>
+      <p id="health-render-note" class="health-render-note" hidden>二维真实网格投影 · 当前设备不支持三维旋转</p>
+      <span id="health-drag-hint" class="health-drag-hint">拖动旋转，看看肺在身体里的位置</span>
+      <div id="health-residual" class="health-residual" hidden><span></span><strong>尽力呼气后<br>肺内仍有气体</strong></div>
+    </div>
+    <div class="health-volume-comparison" aria-label="日常一口气与最大可呼出气量的定性比较">
+      <div class="health-volume-row"><span>日常一口气</span><div class="health-volume-track"><i id="health-tidal-fill" class="health-tidal-fill"></i></div></div>
+      <div class="health-volume-row"><span>最大可呼出量</span><div class="health-volume-track"><i id="health-vital-fill" class="health-vital-fill"></i><b id="health-exhaled-fill" class="health-exhaled-fill"></b></div></div>
+      <div class="health-volume-foot"><span id="health-volume-note">平常每一口的进出量，只占最大可呼出量的一部分。</span><button id="health-source" type="button" class="health-source-button">模型来源</button></div>
+    </div>
+  </div>
+  <aside class="health-control">
+    <div class="health-context"><h2>呼吸随活动变化</h2><div class="health-scenarios" role="group" aria-label="选择身体活动情境"><button id="health-calm" type="button" class="active" aria-pressed="true">安静时</button><button id="health-active" type="button" aria-pressed="false">运动后</button></div><p id="health-context-note">安静时，呼吸较平缓。</p></div>
+    <div class="health-capacity-control"><label for="health-capacity">比较最大可呼出气量</label><input id="health-capacity" type="range" min="0" max="100" step="1" value="60" aria-label="同一体型的最大可呼出气量定性比较，较少到较多"><div class="health-range-labels"><span>较少</span><span>较多</span></div><p>同一体型示意，不代表健康等级。</p></div>
+    <div class="health-actions"><button id="health-play" type="button" class="primary">播放呼吸</button><button id="health-vital" type="button" class="secondary" aria-pressed="false">看一次最大呼出</button></div>
+    <div class="health-key-message"><p>肺活量帮助我们了解呼吸功能。</p><p>活动表现还与心脏、训练和运动强度有关。</p><button id="health-about" type="button" aria-label="了解怎样看待肺活量数值">?</button></div>
+  </aside>
+  <div id="health-details" class="health-details" hidden><div class="health-details-shade" id="health-details-shade"></div><section role="dialog" aria-modal="true" aria-labelledby="health-details-title" class="health-details-panel"><div class="health-details-head"><h2 id="health-details-title"></h2><button id="health-details-close" type="button" class="icon-button" aria-label="关闭说明">×</button></div><div id="health-details-body" class="health-details-body"></div></section></div>
+</section>
