@@ -55,39 +55,59 @@
     el('close-detail').hidden=state.detail===null;
     el('hotspot-hint').hidden=state.detail!==null;
     Array.prototype.forEach.call(root.querySelectorAll('[data-ins-hotspot]'),function(n){n.classList.toggle('ins-hot-active',n.getAttribute('data-ins-hotspot')===state.device+'-'+state.detail);});
+    Array.prototype.forEach.call(root.querySelectorAll('[data-ins-focus]'),function(n){n.classList.toggle('ins-part-active',n.getAttribute('data-ins-focus')===state.device+'-'+state.detail);});
   }
   function paintWater(ml,moving){
     var level=levelFor(ml),basin=432-ml/100;
     set(el('bottle-water'),{y:level,height:447-level});set(el('bottle-surface'),{d:'M330 '+level+'H580'});
     set(el('basin-water'),{y:basin,height:537-basin});set(el('basin-surface'),{d:'M205 '+basin+'H795'});
-    el('air-dots').setAttribute('opacity',ml>700?'.7':'0');
+    el('bottle-meniscus').setAttribute('cy',level);
+    el('air-dots').setAttribute('opacity',ml>250?'.55':'0');
+    Array.prototype.forEach.call(el('air-dots').querySelectorAll('circle'),function(dot,i){dot.setAttribute('cy',45+(level-45)*[.32,.61,.43][i]);});
+    var ripple=moving?Math.sin(Date.now()/170)*1.5:0;
+    set(el('basin-ripple'),{d:'M630 '+(basin+ripple)+'q30-7 60 0m-82 6q52-10 104 0',opacity:ml>0?'.7':'0'});
+    el('water-bubbles').setAttribute('opacity',moving&&level<73?'.85':'0');
+    Array.prototype.forEach.call(el('water-bubbles').querySelectorAll('circle'),function(dot,i){dot.setAttribute('cy',level+(75-level)*(.25+((Date.now()/900+i*.4)%1)*.6));});
+    el('water-direction').setAttribute('opacity',moving?'.9':'0');
     set(el('inlet-flow'),{opacity:moving?'1':'0','stroke-dashoffset':-(Date.now()%1400)/12});
     set(el('outlet-flow'),{opacity:moving?'1':'0','stroke-dashoffset':-(Date.now()%1100)/10});
     set(el('water-read-line'),{d:'M330 '+level+'H674',opacity:ml>0?'.8':'0'});
-    el('water-result').setAttribute('opacity',ml>0?'1':'0');
+    el('water-result').setAttribute('opacity','1');
     el('water-result-value').textContent=Math.round(ml);
   }
   function paintBag(ml,phase){
-    var maxSpan=655,roll=phase<=.67?0:Math.min(1,(phase-.67)/.33),end=830,start=175+(1-state.target/4500)*maxSpan*roll,len=end-start;
-    var half=ml>0?Math.min(80,80*Math.sqrt(ml/4500*maxSpan/Math.max(30,len))):8,cy=300;
-    set(el('bag-shape'),{d:'M'+(start-25)+' '+(cy-half*.18)+' Q'+(start-6)+' '+(cy-half)+' '+(start+18)+' '+(cy-half)+' H815 Q830 '+(cy-half)+' 830 300 Q830 '+(cy+half)+' 815 '+(cy+half)+' H'+(start+18)+' Q'+(start-6)+' '+(cy+half)+' '+(start-25)+' '+(cy+half*.18)+'Z'});
-    set(el('bag-shine'),{d:'M'+(start+20)+' '+(cy-half*.6)+'Q'+((start+end)/2)+' '+(cy-half*.84)+' 810 '+(cy-half*.62)});
-    set(el('bag-seam'),{d:'M830 '+(cy-half*.85)+'V'+(cy+half*.85)});
+    var maxSpan=655,bagCapacity=5000,roll=phase<=.67?0:Math.min(1,(phase-.67)/.33),end=830,start=175+(1-state.target/bagCapacity)*maxSpan*roll,len=end-start;
+    var half=ml>0?Math.min(80,80*Math.sqrt(ml/bagCapacity*maxSpan/Math.max(30,len))):8,cy=300;
+    function profile(h){return 'M'+(start-25)+' '+(cy-h*.18)+' Q'+(start-6)+' '+(cy-h)+' '+(start+18)+' '+(cy-h)+' H815 Q830 '+(cy-h)+' 830 300 Q830 '+(cy+h)+' 815 '+(cy+h)+' H'+(start+18)+' Q'+(start-6)+' '+(cy+h)+' '+(start-25)+' '+(cy+h*.18)+'Z';}
+    var envelope=profile(80);
+    set(el('bag-envelope'),{d:envelope});set(el('bag-body-highlight'),{d:envelope});set(el('bag-clip-shape'),{d:envelope});
+    set(el('bag-shape'),{d:profile(half),opacity:ml>0?'.95':'0'});
+    set(el('bag-shine'),{d:'M'+(start+20)+' 247Q'+((start+end)/2)+' 229 810 250'});
+    set(el('bag-seam'),{d:'M830 232V368'});
+    el('bag-wrinkles').setAttribute('opacity',.52*(1-roll));
+    el('bag-ghost').setAttribute('opacity',roll>0?'.7':'0');
+    el('bag-mouth').setAttribute('opacity',phase<.6?'1':'0');
     var s='';
-    for(var n=0;n<=4500;n+=250){var x=end-n/4500*maxSpan;if(x<start-1)continue;var major=n%500===0;s+='<line x1="'+x+'" y1="'+(cy-(major?17:10))+'" x2="'+x+'" y2="'+(cy+2)+'" stroke="#178694" stroke-width="2"/>';if(major)s+='<text x="'+x+'" y="'+(cy+30)+'" text-anchor="middle" font-size="20">'+n+'</text>';}
+    for(var n=0;n<=bagCapacity;n+=250){var x=end-n/bagCapacity*maxSpan;if(x<start-1)continue;var major=n%500===0,edge=phase>=1&&n===state.target;s+='<line x1="'+x+'" y1="'+(cy-(major?17:10))+'" x2="'+x+'" y2="'+(cy+2)+'" stroke="#178694" stroke-width="2"/>';if(major)s+='<text x="'+(edge?x+18:x)+'" y="'+(edge?cy-35:cy+30)+'" text-anchor="'+(edge?'start':'middle')+'" font-size="20">'+n+'</text>';}
     el('bag-scale').innerHTML=s;
-    set(el('bag-tube'),{opacity:phase<.6?'1':'0',transform:'translate('+(-Math.max(0,(phase-.55)/.05)*12)+',0)'});
+    var pulled=Math.max(0,Math.min(1,(phase-.55)/.12)),tubeTransform='translate('+(-10*pulled)+','+(-80*pulled)+')';
+    set(el('bag-guide-tube'),{d:'M94 185L'+(118-10*pulled)+' '+(292-80*pulled)});set(el('bag-guide-body'),{d:'M712 178L'+Math.max(682,start+12)+' 225'});set(el('bag-guide-roll'),{d:'M236 425L'+(start+6)+' 379'});
+    set(el('bag-tube'),{transform:tubeTransform});set(el('bag-tube-highlight'),{transform:tubeTransform});
     set(el('bag-flow'),{opacity:state.running&&phase<.55?'1':'0','stroke-dashoffset':-(Date.now()%900)/10});
     el('bag-roll').setAttribute('opacity',phase>=.6?'1':'0');
-    set(el('bag-rolled-flat'),{width:Math.max(30,start-145)});set(el('bag-roller'),{transform:'translate('+(start-175)+',0)'});
-    set(el('bag-read-line'),{d:'M'+start+' 193V414',opacity:phase>=1?'1':'0'});
-    el('bag-step').textContent=phase===0?'先排空袋内空气':phase<.55?'一次尽力呼出':phase<.67?'拔出吸管，马上捏口密封':phase<1?'向充气方向卷袋，气体要留住':'卷到饱满，读取对应刻度';
+    set(el('bag-roller'),{transform:'translate('+(start-175)+',0)'});
+    set(el('bag-roll-highlight'),{transform:'translate('+(start-175)+',0)'});
+    el('bag-read-mark').setAttribute('opacity',phase>=1?'1':'0');
+    set(el('bag-read-line'),{d:'M'+start+' 204V409'});set(el('bag-read-tick'),{d:'M'+start+' '+(cy-17)+'V'+(cy+2)});set(el('bag-read-arrow'),{d:'M'+start+' 408l-7 11h14Z'});
+    el('bag-step').textContent=phase===0?'先排空袋内空气':phase<.55?'一次尽力呼出':phase<.67?'袋体还松软 · 拔管并密封':phase<1?'向内卷袋，直到饱满':'卷到饱满，读取对应刻度';
     el('bag-result').textContent=phase>=1?state.target+' mL':'— mL';
   }
   function paintElectronic(ml,moving){
     el('electronic-value').textContent=ml>0?Math.round(ml):'—';
     set(el('electronic-flow'),{opacity:moving?'1':'0','stroke-dashoffset':-(Date.now()%1000)/9});
     set(el('electronic-progress'),{d:'M375 395H'+(375+290*Math.min(1,ml/state.target))});
+    el('electronic-sensor-pulse').setAttribute('opacity',moving?String(.35+.25*(1+Math.sin(Date.now()/180))):'.18');
+    set(el('electronic-signal-flow'),{opacity:moving?'.9':'0','stroke-dashoffset':-(Date.now()%1000)/18});
   }
   function paint(ml,phase,moving){state.value=ml;state.phase=phase;if(state.device==='water')paintWater(ml,moving);else if(state.device==='bag')paintBag(ml,phase);else paintElectronic(ml,moving);}
   function pause(){
@@ -105,7 +125,7 @@
   }
   function selectDevice(device){
     if(!configs[device])return;pause();state.device=device;state.detail=null;
-    ['water','bag','electronic'].forEach(function(name){el(name+'-svg').hidden=name!==device;var b=el('choose-'+name);b.classList.toggle('ins-selected',name===device);b.setAttribute('aria-pressed',String(name===device));});
+    ['water','bag','electronic'].forEach(function(name){var visible=name===device,scene=el(name+'-svg');if(visible)scene.removeAttribute('hidden');else scene.setAttribute('hidden','');scene.setAttribute('aria-hidden',visible?'false':'true');var b=el('choose-'+name);b.classList.toggle('ins-selected',visible);b.setAttribute('aria-pressed',String(visible));});
     describe();reset();
   }
   function finish(){

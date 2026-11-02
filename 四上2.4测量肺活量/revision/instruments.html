@@ -10,84 +10,9 @@
   <div class="ins-main">
     <div class="ins-stage">
       <div class="ins-scene">
-        <svg id="ins-water-svg" class="ins-svg" viewBox="0 0 900 560" role="group" aria-label="倒置塑料瓶排水式肺活量仪，长管向上送入气体，短管向下排水">
-          <defs>
-            <linearGradient id="ins-water-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9adbe9"/><stop offset="1" stop-color="#c9edf3"/></linearGradient>
-            <linearGradient id="ins-air-fill" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fff8e7"/><stop offset="1" stop-color="#ffe9bb"/></linearGradient>
-            <clipPath id="ins-bottle-clip"><path d="M342 45H568Q580 45 580 57V345L495 405V445H415V405L330 345V57Q330 45 342 45Z"/></clipPath>
-            <clipPath id="ins-basin-clip"><path d="M205 365H795V525Q795 537 783 537H217Q205 537 205 525Z"/></clipPath>
-            <marker id="ins-flow-arrow" markerWidth="8" markerHeight="8" refX="6.5" refY="4" orient="auto"><path d="M1 1 6.5 4 1 7" fill="none" stroke="#007f82" stroke-width="1.8"/></marker>
-          </defs>
-          <ellipse cx="492" cy="544" rx="310" ry="10" fill="#e5edef"/>
-          <path d="M205 365V525Q205 537 217 537H783Q795 537 795 525V365" fill="#fff" stroke="#adc6cd" stroke-width="4"/>
-          <g clip-path="url(#ins-basin-clip)"><rect id="ins-basin-water" x="205" y="432" width="590" height="105" fill="#caeaf1"/><path id="ins-basin-surface" d="M205 432H795" fill="none" stroke="#7cc6d7" stroke-width="3"/></g>
-          <path d="M342 45H568Q580 45 580 57V345L495 405V445H415V405L330 345V57Q330 45 342 45Z" fill="#fff"/>
-          <g clip-path="url(#ins-bottle-clip)">
-            <rect x="328" y="43" width="254" height="404" fill="url(#ins-air-fill)"/>
-            <rect id="ins-bottle-water" x="328" y="45" width="254" height="402" fill="url(#ins-water-fill)"/>
-            <path id="ins-bottle-surface" d="M330 45H580" fill="none" stroke="#2690a9" stroke-width="3"/>
-            <path d="M350 65V332" stroke="#fff" stroke-width="9" opacity=".5" stroke-linecap="round"/>
-            <g id="ins-air-dots" fill="#d6a052" opacity="0"><circle cx="375" cy="76" r="4"/><circle cx="505" cy="95" r="4"/><circle cx="547" cy="72" r="4"/></g>
-          </g>
-          <path d="M342 45H568Q580 45 580 57V345L495 405V445H415V405L330 345V57Q330 45 342 45Z" fill="none" stroke="#6d96a4" stroke-width="3.5" stroke-linejoin="round"/>
-          <path d="M345 36H565" stroke="#b3c8cf" stroke-width="5" stroke-linecap="round"/>
-          <rect x="408" y="441" width="94" height="21" rx="5" fill="#e2ebed" stroke="#6d96a4" stroke-width="2.5"/>
-          <g id="ins-water-scale" class="ins-scale"></g>
-          <path d="M110 225H150Q175 225 175 250V480Q175 500 200 500H415Q440 500 440 475V75" fill="none" stroke="#d3eded" stroke-width="16" stroke-linecap="round"/>
-          <path d="M110 225H150Q175 225 175 250V480Q175 500 200 500H415Q440 500 440 475V75" fill="none" stroke="#07888a" stroke-width="8" stroke-linecap="round"/>
-          <path id="ins-inlet-flow" d="M110 225H150Q175 225 175 250V480Q175 500 200 500H415Q440 500 440 475V75" fill="none" stroke="#fff4d9" stroke-width="3.5" stroke-dasharray="8 17" opacity="0"/>
-          <path d="M475 425V490Q475 507 492 507H660" fill="none" stroke="#e7f6fa" stroke-width="16" stroke-linecap="round"/>
-          <path d="M475 425V490Q475 507 492 507H660" fill="none" stroke="#2988ad" stroke-width="8" stroke-linecap="round"/>
-          <path id="ins-outlet-flow" d="M475 425V490Q475 507 492 507H660" fill="none" stroke="#fff" stroke-width="3.5" stroke-dasharray="7 13" opacity="0"/>
-          <rect x="89" y="214" width="39" height="22" rx="8" fill="#eff7f7" stroke="#07888a" stroke-width="3"/>
-          <path d="M64 225H84" fill="none" stroke="#007f82" stroke-width="3" marker-end="url(#ins-flow-arrow)"/>
-          <text x="106" y="190" text-anchor="middle" class="ins-svg-label">气体进入</text>
-          <text x="714" y="514" text-anchor="middle" class="ins-svg-label ins-blue-text">水排出</text>
-          <path id="ins-water-read-line" d="M330 45H674" stroke="#d6953c" stroke-width="2.5" stroke-dasharray="6 5" opacity="0"/>
-          <g id="ins-water-result" opacity="0"><text x="738" y="198" text-anchor="middle" class="ins-svg-small">收集的气体</text><text id="ins-water-result-value" x="738" y="243" text-anchor="middle" class="ins-svg-reading">0</text><text x="738" y="274" text-anchor="middle" class="ins-svg-unit">mL</text></g>
-          <g data-ins-hotspot="water-0" id="ins-water-hot-0" class="ins-hotspot" role="button" tabindex="0" aria-label="查看进气长管"><circle cx="221" cy="239" r="38" class="ins-hit"/><circle cx="221" cy="239" r="22"/><text x="221" y="247">1</text></g>
-          <g data-ins-hotspot="water-1" id="ins-water-hot-1" class="ins-hotspot" role="button" tabindex="0" aria-label="查看瓶身与刻度"><circle cx="738" cy="71" r="38" class="ins-hit"/><circle cx="738" cy="71" r="22"/><text x="738" y="79">2</text></g>
-          <g data-ins-hotspot="water-2" id="ins-water-hot-2" class="ins-hotspot" role="button" tabindex="0" aria-label="查看排水短管与密封"><circle cx="738" cy="424" r="38" class="ins-hit"/><circle cx="738" cy="424" r="22"/><text x="738" y="432">3</text></g>
-        </svg>
-        <svg id="ins-bag-svg" class="ins-svg" viewBox="0 0 900 560" role="group" aria-label="袋式肺活量仪：短直吸管、透明刻度袋和封口卷袋" hidden>
-          <defs><linearGradient id="ins-bag-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b8dfe3" stop-opacity=".6"/><stop offset=".35" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#91cdd2" stop-opacity=".52"/></linearGradient><linearGradient id="ins-roll-fill"><stop stop-color="#a9c9ce"/><stop offset=".4" stop-color="#f5fafa"/><stop offset="1" stop-color="#8eb5be"/></linearGradient></defs>
-          <ellipse cx="483" cy="410" rx="335" ry="13" fill="#e4edef"/>
-          <g id="ins-bag-tube"><path d="M65 300H172" stroke="#9fbfc7" stroke-width="17" stroke-linecap="round"/><path d="M65 300H172" stroke="#f4fafa" stroke-width="10" stroke-linecap="round"/><path id="ins-bag-flow" d="M65 300H172" stroke="#0c9196" stroke-width="4" stroke-dasharray="5 15" opacity="0"/></g>
-          <path id="ins-bag-shape" d="M145 292Q160 286 180 286H815Q830 290 830 300Q830 310 815 314H180Q160 314 145 308Z" fill="url(#ins-bag-fill)" stroke="#91b5bf" stroke-width="2.5"/>
-          <path id="ins-bag-shine" d="M190 292H810" stroke="#fff" stroke-width="6" opacity=".88" fill="none"/>
-          <path id="ins-bag-seam" d="M830 288V312" stroke="#7ca6b2" stroke-width="5"/>
-          <g id="ins-bag-scale" class="ins-scale"></g>
-          <g id="ins-bag-roll" opacity="0"><rect id="ins-bag-rolled-flat" x="145" y="292" width="30" height="16" rx="5" fill="#edf5f6" stroke="#b6ced4" stroke-width="1.5"/><g id="ins-bag-roller"><rect x="163" y="221" width="25" height="158" rx="12" fill="url(#ins-roll-fill)" stroke="#8eafb8" stroke-width="2"/><ellipse cx="175.5" cy="221" rx="12.5" ry="7" fill="#dae9ec" stroke="#8eafb8" stroke-width="2"/><rect x="158" y="289" width="35" height="20" rx="3" fill="#eea451" stroke="#c68639" stroke-width="1.7"/></g></g>
-          <path id="ins-bag-read-line" d="M502.5 190V415" fill="none" stroke="#d6953c" stroke-width="3" stroke-dasharray="6 5" opacity="0"/>
-          <text id="ins-bag-step" x="475" y="138" text-anchor="middle" class="ins-svg-prompt">先排空袋内空气</text>
-          <text id="ins-bag-result" x="475" y="472" text-anchor="middle" class="ins-svg-reading">— mL</text>
-          <g data-ins-hotspot="bag-0" id="ins-bag-hot-0" class="ins-hotspot" role="button" tabindex="0" aria-label="查看短直吸管"><circle cx="93" cy="226" r="38" class="ins-hit"/><circle cx="93" cy="226" r="22"/><text x="93" y="234">1</text></g>
-          <g data-ins-hotspot="bag-1" id="ins-bag-hot-1" class="ins-hotspot" role="button" tabindex="0" aria-label="查看刻度测量袋"><circle cx="735" cy="184" r="38" class="ins-hit"/><circle cx="735" cy="184" r="22"/><text x="735" y="192">2</text></g>
-          <g data-ins-hotspot="bag-2" id="ins-bag-hot-2" class="ins-hotspot" role="button" tabindex="0" aria-label="查看封口与卷袋"><circle cx="260" cy="428" r="38" class="ins-hit"/><circle cx="260" cy="428" r="22"/><text x="260" y="436">3</text></g>
-        </svg>
-        <svg id="ins-electronic-svg" class="ins-svg" viewBox="0 0 900 560" role="group" aria-label="流量式电子肺活量计的概念示意" hidden>
-          <defs><linearGradient id="ins-meter-fill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#e5eff1"/></linearGradient></defs>
-          <ellipse cx="500" cy="470" rx="263" ry="17" fill="#e3ecee"/>
-          <path d="M345 238Q345 215 368 215H690Q723 215 732 247L770 423Q776 453 742 453H315Q286 453 294 426Z" fill="url(#ins-meter-fill)" stroke="#9ab7c0" stroke-width="3"/>
-          <path d="M132 174H271V222H132Q111 222 111 198Q111 174 132 174Z" fill="#f2f7f8" stroke="#a2c1c8" stroke-width="3"/>
-          <ellipse cx="126" cy="198" rx="15" ry="24" fill="#d9eaee" stroke="#a2c1c8" stroke-width="3"/>
-          <rect x="264" y="161" width="277" height="74" rx="23" fill="#f6fafb" stroke="#6e9eaa" stroke-width="3"/>
-          <path d="M288 184H518V212H288Z" fill="#e2f2f3"/>
-          <path d="M541 180H603Q621 180 621 198Q621 216 603 216H541" fill="#e5eff1" stroke="#a2bdc5" stroke-width="3"/>
-          <path id="ins-electronic-flow" d="M142 198H658" stroke="#03858a" stroke-width="4.5" stroke-dasharray="7 17" opacity="0"/>
-          <path d="M645 198H688m-10-9 10 9-10 9" fill="none" stroke="#54a1ab" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M402 235V263" stroke="#82a5af" stroke-width="8"/>
-          <rect x="353" y="275" width="335" height="137" rx="15" fill="#e3f2ee" stroke="#b0cbc9" stroke-width="2"/>
-          <text x="520" y="306" text-anchor="middle" class="ins-svg-small">本次呼气体积</text>
-          <text id="ins-electronic-value" x="507" y="376" text-anchor="middle" class="ins-electronic-reading">—</text><text x="642" y="376" class="ins-svg-unit">mL</text>
-          <path d="M375 395H665" stroke="#a7c5c0" stroke-width="2"/>
-          <path id="ins-electronic-progress" d="M375 395H375" stroke="#00888b" stroke-width="5" stroke-linecap="round"/>
-          <text x="425" y="103" text-anchor="middle" class="ins-svg-prompt">气流经过，体积逐步累计</text>
-          <text x="425" y="512" text-anchor="middle" class="ins-svg-small">流量式原理示意 · 具体构造因仪器而异</text>
-          <g data-ins-hotspot="electronic-0" id="ins-electronic-hot-0" class="ins-hotspot" role="button" tabindex="0" aria-label="查看独立吹嘴"><circle cx="169" cy="129" r="38" class="ins-hit"/><circle cx="169" cy="129" r="22"/><text x="169" y="137">1</text></g>
-          <g data-ins-hotspot="electronic-1" id="ins-electronic-hot-1" class="ins-hotspot" role="button" tabindex="0" aria-label="查看流量感应部件"><circle cx="438" cy="162" r="38" class="ins-hit"/><circle cx="438" cy="162" r="22"/><text x="438" y="170">2</text></g>
-          <g data-ins-hotspot="electronic-2" id="ins-electronic-hot-2" class="ins-hotspot" role="button" tabindex="0" aria-label="查看显示与累计"><circle cx="733" cy="325" r="38" class="ins-hit"/><circle cx="733" cy="325" r="22"/><text x="733" y="333">3</text></g>
-        </svg>
+        <!--__WATER_SCENE__-->
+        <!--__BAG_SCENE__-->
+        <!--__ELECTRONIC_SCENE__-->
         <button id="ins-reset" type="button" class="icon-button ins-reset" aria-label="重置当前仪器" title="重置"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 0 5M4 4v6h6"/></svg></button>
       </div>
       <p id="ins-conclusion" class="ins-conclusion" aria-live="polite">收集气体占据的空间，可以用排出的水来表示。</p>
