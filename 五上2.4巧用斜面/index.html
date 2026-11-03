@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="五年级上册2.4巧用斜面：手推车装车开放游戏与生活中的斜面。离线单文件课堂互动。"><title>巧用斜面 · 装车挑战</title>
+<style>
+:root{--bg:#101c2b;--panel:#1b2d42;--ink:#f0f6fa;--sub:#b3c6d3;--line:#3b5168;--gold:#ffd071;--aqua:#7ae1dc;--danger:#ff967f;--success:#8ce8be;--radius:12px;color-scheme:dark}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;color:var(--ink)}button,input,select{font:inherit}button,select{color:inherit}button{cursor:pointer;touch-action:manipulation;user-select:none;min-height:44px;border-radius:9px;padding:10px 17px;border:1px solid var(--line);background:#233a50;font-size:clamp(16px,1.2vw,22px);font-weight:700;transition:background .15s,border-color .15s}button:hover{background:#304c64}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}button:disabled{opacity:.36;cursor:default}button.active{background:#24545e;border-color:var(--aqua);color:#b6fff4}button.primary{background:var(--gold);color:#192534;border-color:var(--gold)}button.primary:hover{background:#ffdc94}button.secondary{background:transparent}.hidden{display:none!important}.head{height:78px;padding:0 26px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:12px}.brand{font-size:clamp(23px,2vw,36px);margin:0;white-space:nowrap;font-weight:850;letter-spacing:1px}.brand span{font-size:.46em;font-weight:500;color:var(--sub);letter-spacing:0;margin-left:10px}.nav{display:flex;gap:8px}.utilities{display:flex;gap:7px}.utilities button{padding:9px 12px;font-size:16px}main{height:calc(100% - 78px);padding:16px}.page{height:100%;min-height:0;display:none;grid-template-columns:minmax(0,1fr) clamp(290px,26vw,410px);gap:16px}.page.current{display:grid}.stage{min-width:0;min-height:0;position:relative;border-radius:var(--radius);overflow:hidden;background:#16334a;border:1px solid #334e65}.stage canvas{display:block;width:100%;height:100%;touch-action:none}.stageTop{position:absolute;left:24px;right:24px;top:22px;display:flex;justify-content:space-between;align-items:start;pointer-events:none}.goal{font-size:clamp(20px,1.9vw,31px);font-weight:800;line-height:1.4}.goal small{display:block;color:var(--sub);font-weight:500;font-size:.6em;margin-top:5px}.delivered{font-size:clamp(22px,2.8vw,44px);color:var(--gold);font-weight:850}.delivered small{font-size:.43em;color:var(--sub);display:block;text-align:right}.stageFooter{position:absolute;bottom:20px;left:22px;right:22px;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}.message{font-size:clamp(17px,1.5vw,25px);font-weight:700;background:#112636e8;border:1px solid #425c70;border-radius:10px;padding:12px 18px;max-width:85%}.measure{font-size:17px;color:#c4d8e5;white-space:nowrap}.panel{background:var(--panel);border:1px solid #344b62;border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:17px;min-height:0;overflow:auto}.panel h2{font-size:clamp(23px,2vw,32px);margin:0}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.label{font-size:clamp(17px,1.3vw,23px);color:var(--sub)}.number{font-weight:800;font-size:clamp(23px,2.4vw,36px)}.number small{font-size:.5em;font-weight:500;color:var(--sub);margin-left:4px}.stepper{display:flex;align-items:center;gap:15px;justify-content:space-between}.stepper button{width:49px;padding:5px;font-size:27px}.route{display:flex;gap:8px}.route button{flex:1;padding:10px 7px}.block{display:flex;flex-direction:column;gap:9px}.divider{border-top:1px solid var(--line);padding-top:16px}.range{width:100%;margin:0;accent-color:var(--gold);height:30px;cursor:ew-resize}.mini{font-size:clamp(13px,1vw,17px);color:var(--sub);line-height:1.5}.gauge{height:13px;border-radius:20px;background:#334d62;position:relative;margin:4px 0 0}.gaugeFill{height:100%;background:var(--aqua);border-radius:20px;max-width:100%;transition:width .15s,background .15s}.limitMark{position:absolute;top:-4px;bottom:-4px;width:3px;background:#fff;left:66.66%}.forceNum{font-size:clamp(28px,3vw,46px);font-weight:850;color:var(--aqua);line-height:1.05}.forceNum.bad{color:var(--danger)}.push{min-height:66px;font-size:clamp(22px,2vw,32px);touch-action:none}.push:active{transform:translateY(1px)}.actionRow{display:flex;gap:8px}.actionRow button{flex:1;padding:10px 6px}.bottom{margin-top:auto}.taskSelect{width:100%;border:1px solid var(--line);background:#1a2d42;border-radius:9px;padding:10px;font-size:16px}.detail{border:0;padding:0;background:none;color:var(--sub);font-size:14px;min-height:30px;text-align:left}.modalShade{position:fixed;inset:0;background:#06111bba;display:none;align-items:center;justify-content:center;padding:25px;z-index:30;backdrop-filter:blur(5px)}.modalShade.open{display:flex}.dialog{background:#1b2e43;border:1px solid #658096;border-radius:18px;padding:28px;width:min(900px,98vw);max-height:92vh;overflow:auto;box-shadow:0 30px 100px #0008}.dialog h2{font-size:28px;margin:0 0 17px}.dialog p{font-size:19px;line-height:1.7;color:#d1e0e8}.dialog header{display:flex;justify-content:space-between;align-items:start;gap:20px}.dialog header button{min-width:44px;padding:7px}.records{width:100%;border-collapse:collapse;text-align:center;font-size:18px}.records th,.records td{border-bottom:1px solid #476075;padding:13px 8px}.records th{color:var(--sub);font-weight:500}.stars{font-size:46px;color:var(--gold);letter-spacing:7px}.starGoals{display:grid;gap:13px;font-size:21px}.matched{color:var(--aqua)}.comparison{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:18px 0}.comparison>div{background:#12273a;border-radius:9px;padding:17px}.comparison strong{font-size:33px;display:block;color:var(--gold);margin-top:8px}.comparison p{font-size:16px;margin:5px 0}.toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%);background:#f4dca4;color:#182b3d;max-width:90vw;border-radius:9px;padding:12px 22px;font-weight:700;z-index:99;font-size:20px;display:none}.il-controls{min-height:0}.page.lifePage{grid-template-columns:minmax(0,1fr) clamp(295px,29vw,440px)}#lifeControls{overflow:auto}body:fullscreen{background:var(--bg)}@media(min-width:1700px){.panel{padding:20px;gap:10px}.head{height:90px}main{height:calc(100% - 90px);padding:22px}.push{min-height:80px}.mini{font-size:18px}}
+@media(max-height:1050px) and (min-width:761px){.head{height:65px}main{height:calc(100% - 65px);padding:10px}.page{gap:10px}.panel{padding:14px;gap:10px}.panel h2{font-size:23px}.divider{padding-top:10px}.push{min-height:50px}.block{gap:5px}.forceNum{font-size:32px}.stageTop{top:15px}.stageFooter{bottom:12px}.taskSelect{padding:7px}.number{font-size:25px}}
+@media(max-width:950px){.brand span{display:none}.head{padding:0 12px}.utilities #fullBtn{display:none}.page,.page.lifePage{grid-template-columns:minmax(0,1fr) 275px}.panel{padding:14px;gap:12px}.measure{display:none}.stageTop{left:16px;right:16px}.goal{font-size:22px}.stageFooter{left:12px;right:12px}.message{max-width:100%}.nav button{padding:9px 12px}}
+@media(max-width:600px){.head{height:59px;padding:0 9px;gap:6px}.brand{font-size:21px}.nav{gap:4px}.nav button{padding:8px;font-size:15px;min-height:39px}.utilities #aboutBtn{display:none}.utilities button{padding:8px;font-size:14px;min-height:39px}main{height:calc(100% - 59px);padding:7px}.page,.page.lifePage{grid-template-columns:1fr;grid-template-rows:minmax(240px,1fr) auto;gap:7px}.panel{display:grid;grid-template-columns:1fr 1fr;padding:12px;gap:10px 14px;overflow:visible}.panel h2,.desktopOnly,.taskWrap,.measure,.panel .detail{display:none}.panel .divider{border:0;padding:0}.panel .block{gap:3px}.panel .label{font-size:14px}.panel .mini{font-size:11px}.panel .number{font-size:24px}.panel .forceNum{font-size:28px}.panel button{min-height:38px;font-size:15px;padding:6px}.panel .stepper button{width:38px;font-size:22px}.panel .stepper{gap:8px}.panel .route{gap:6px}.panel .push{min-height:53px;font-size:22px}.panel .actionBlock{display:flex;flex-direction:column;gap:5px}.panel .bottom{margin:0;grid-column:1/-1;display:flex;gap:8px;align-items:center}.panel .bottom>button{flex:1}.panel .actionRow{display:flex}.stageTop{top:12px;left:12px;right:12px}.goal{font-size:19px}.goal small{font-size:12px}.delivered{font-size:27px}.stageFooter{bottom:9px}.message{font-size:13px;padding:7px 10px}.gauge{height:8px}.range{height:23px}.dialog{padding:17px}.dialog h2{font-size:23px}.records{font-size:13px}.records th,.records td{padding:10px 4px}#lifeControls{display:block;max-height:42vh;overflow:auto}.page.lifePage{grid-template-rows:minmax(240px,1fr) auto}.comparison{gap:8px}.comparison>div{padding:10px}.comparison strong{font-size:23px}}
+@media(max-height:500px) and (min-width:601px){.head{height:48px}.brand{font-size:22px}.nav button,.utilities button{font-size:13px;min-height:34px;padding:5px 8px}main{height:calc(100% - 48px);padding:6px}.page,.page.lifePage{grid-template-columns:minmax(0,1fr) 245px;gap:6px}.panel{padding:9px;gap:6px}.panel h2,.desktopOnly,.taskWrap,.panel .detail{display:none}.label{font-size:14px}.number{font-size:21px}.mini{font-size:11px}.forceNum{font-size:25px}.panel button{min-height:33px;padding:4px;font-size:14px}.panel .push{min-height:42px;font-size:20px}.divider{padding-top:5px}.range{height:21px}.stageTop{top:10px}.goal{font-size:18px}.delivered{font-size:25px}.message{font-size:13px;padding:6px}.panel .actionRow{gap:5px}.stepper button{width:40px}.gauge{height:8px}.stageFooter{bottom:8px}}
+@media(max-height:820px) and (min-width:601px){.panel{gap:8px;padding:12px}.panel #panelTitle,.panel .desktopOnly,.panel #modelBtn{display:none}.panel .stepper button{height:38px;min-height:38px}.panel .route button{min-height:39px;padding:8px 7px}.panel .mini{font-size:12px}.panel .range{height:24px}.panel .divider{padding-top:8px}.panel #restart{min-height:36px;padding:6px}.panel .taskSelect{padding:7px}.panel .taskWrap>label{display:none}}
+@media(max-width:600px){.panel .bottom{flex-direction:row}.panel .bottom #restart{width:100%}}
+@media(max-height:500px) and (min-width:601px){.page,.page.lifePage{grid-template-columns:minmax(0,1fr) 315px}.panel{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;padding:10px;overflow:visible}.panel .block{gap:4px}.panel .divider{border:0;padding:0}.panel .label{font-size:13px}.panel .mini{font-size:10px}.panel .stepper button{width:35px;min-height:34px;height:34px}.panel .route button{font-size:12px;padding:4px;min-height:34px}.panel .number{font-size:23px}.panel .forceNum{font-size:25px}.panel .range{height:22px}.panel .actionBlock{display:flex;flex-direction:column;gap:4px}.panel .push{min-height:46px;font-size:18px}.panel .actionRow button{font-size:12px;min-height:33px;padding:3px}.panel .bottom{grid-column:1/-1;margin:0;display:flex;flex-direction:row}.panel .bottom #restart{width:100%;min-height:30px}.panel #modelBtn{display:none}#lifeControls{display:block;overflow:auto}}
+</style></head><body>
+<header class="head"><h1 class="brand">巧用斜面<span>五上 2.4</span></h1><nav class="nav" aria-label="学习场景"><button id="gameTab" class="active" aria-selected="true">装车挑战</button><button id="lifeTab" aria-selected="false">生活中的斜面</button></nav><div class="utilities"><button id="fullBtn" aria-label="切换全屏">全屏</button><button id="aboutBtn">说明</button></div></header>
+<main>
+<section id="gamePage" class="page current"><div class="stage"><canvas id="gameCanvas" aria-label="手推车装货游戏，可拖动黄色坡脚改变坡道，点击货堆装货，点击手推车减少货物。所有操作也有按钮。"></canvas><div class="stageTop"><div class="goal">把货物送上货车<small id="subGoal">24 箱货物，方法由你决定</small></div><div class="delivered"><span id="delivered">0</span><span style="font-size:.5em;color:#b3c6d3"> / 24</span><small>已装上货车</small></div></div><div class="stageFooter"><div id="message" class="message" role="status">点击货堆装货 · 拖动黄色坡脚搭坡</div><div id="distance" class="measure">已走 0.0 米</div></div></div>
+<aside class="panel"><h2 id="panelTitle">你的装车方案</h2><div class="block"><div class="row"><span class="label">本次装货</span><span class="mini">每箱 5 kg</span></div><div class="stepper"><button id="less" aria-label="减少一箱">−</button><div class="number"><span id="loadCount">4</span><small>箱</small></div><button id="more" aria-label="增加一箱">＋</button></div></div>
+<div class="block divider"><div class="route"><button id="straight" class="active">直坡</button><button id="folded">折返坡</button></div><div class="row"><label class="label" for="run">前后占地</label><strong id="runOut">2.4 m</strong></div><input id="run" class="range" type="range" min="1.4" max="6.4" value="2.4" step="0.1"><div class="row mini"><span id="routeInfo">坡长 2.68 m</span><span id="angle">坡角 27°</span></div><div id="widthInfo" class="mini">侧向占地约 1 m</div></div>
+<div class="block divider"><div class="row"><span id="forceLabel" class="label">最大所需推力</span><span class="mini" id="capacityOut">能力 160 N</span></div><div class="row"><div id="force" class="forceNum">141<small style="font-size:.44em"> N</small></div><span id="effort" class="mini">能推上去</span></div><div class="gauge"><div id="forceBar" class="gaugeFill"></div><i class="limitMark" title="用力能力上限"></i></div></div>
+<div class="block actionBlock"><button id="action" class="primary push">按住推上去</button><div class="actionRow"><button id="back" class="secondary" disabled>按住后退</button><button id="compare" class="secondary">比较记录 <span id="recordCount">0</span></button></div><div class="mini desktopOnly">松手自动刹车 · 空格键也能推车</div></div>
+<div class="bottom block"><div class="taskWrap"><label class="mini" for="task">换一种挑战</label><select id="task" class="taskSelect"><option value="open">自由装车 · 用力 160 N</option><option value="weak">小力气搬运 · 用力 110 N</option><option value="tight">狭窄场地 · 前后最多 2.2 m</option></select></div><button id="restart" class="secondary">重新装车</button><button id="modelBtn" class="detail">模拟数据与安全说明</button></div></aside></section>
+<section id="lifePage" class="page lifePage"><div class="stage"><canvas id="lifeCanvas" aria-label="生活中的变形斜面互动"></canvas></div><aside id="lifeControls" class="panel"></aside></section>
+</main>
+<div id="modal" class="modalShade" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><header><h2 id="modalTitle"></h2><button id="closeModal" aria-label="关闭">✕</button></header><div id="modalBody"></div></div></div><div class="toast" id="toast" role="status"></div>
+<script>
+(function(){'use strict';
+var $=function(s){return document.querySelector(s)}, $$=function(s){return Array.from(document.querySelectorAll(s))};
+var CFG={total:24,crateKg:5,cartKg:10,g:9.8,height:1.2,rolling:.035,maxLoad:8};
+var tasks={open:{cap:160,maxRun:6.4,sub:'24 箱货物，方法由你决定'},weak:{cap:110,maxRun:6.4,sub:'力气变小了，怎样完成同样的任务？'},tight:{cap:160,maxRun:2.2,sub:'前后只有 2.2 米，侧向空间仍可使用'}};
+var state={page:'game',task:'open',run:2.4,route:'straight',load:4,stock:20,delivered:0,pos:0,returning:false,hold:0,travel:0,trips:0,records:[],lastRecord:'',t:0,completed:false,compared:false};
+var canvas=$('#gameCanvas'),ctx=canvas.getContext('2d'),view={w:1200,h:700,s:100,ox:0,oy:0};var last=0,dirty=true,lifeMounted=false,toastTimer,focusBefore;
+function clamp(v,a,b){return Math.max(a,Math.min(b,v))}function round(v,n){var k=Math.pow(10,n||0);return Math.round(v*k)/k}function fmt(v){return v.toFixed(1)}
+function routeNodes(){var x=7.9-state.run,h=CFG.height;if(state.route==='straight')return [{x:x,z:0,y:0},{x:7.9,z:0,y:h}];return [{x:x,z:-2.3,y:0},{x:7.9,z:-2.3,y:h/3},{x:7.9,z:-1.15,y:h/3},{x:x,z:-1.15,y:2*h/3},{x:x,z:0,y:2*h/3},{x:7.9,z:0,y:h}]}
+function routeData(){var n=routeNodes(),parts=[],total=0;for(var i=1;i<n.length;i++){var a=n[i-1],b=n[i],dx=b.x-a.x,dz=b.z-a.z,dy=b.y-a.y,len=Math.hypot(dx,dz,dy);parts.push({a:a,b:b,len:len,start:total,theta:Math.atan2(dy,Math.hypot(dx,dz))});total+=len}return{nodes:n,parts:parts,length:total}}
+function mass(){return CFG.cartKg+state.load*CFG.crateKg}function maxForce(){var h=CFG.height/(state.route==='folded'?3:1),theta=Math.atan2(h,state.run);return mass()*CFG.g*(Math.sin(theta)+CFG.rolling*Math.cos(theta))}function brakeForce(){var h=CFG.height/(state.route==='folded'?3:1),theta=Math.atan2(h,state.run);return Math.max(0,mass()*CFG.g*(Math.sin(theta)-CFG.rolling*Math.cos(theta)))}
+function pointAt(pos){var data=routeData(),d=clamp(pos,0,data.length),seg=data.parts[data.parts.length-1];for(var i=0;i<data.parts.length;i++)if(d<=data.parts[i].start+data.parts[i].len+.0001){seg=data.parts[i];break}var u=clamp((d-seg.start)/seg.len,0,1);return{x:seg.a.x+(seg.b.x-seg.a.x)*u,y:seg.a.y+(seg.b.y-seg.a.y)*u,z:seg.a.z+(seg.b.z-seg.a.z)*u,seg:seg}}
+function atBase(){return state.pos<.0001&&!state.returning}function atTop(){return state.pos>=routeData().length-.0001}function conserved(){return state.load+state.stock+state.delivered===CFG.total}
+function project(x,y,z){return{x:view.ox+(x+z*.54)*view.s,y:view.oy-(y+z*.24)*view.s}}
+function resize(){var r=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);view.w=r.width;view.h=r.height;ctx.setTransform(dpr,0,0,dpr,0,0);view.s=Math.min(r.width/13.8,r.height/5.9);view.ox=(r.width-13.8*view.s)/2+1.6*view.s;view.oy=r.height*.70;dirty=true;draw();if(lifeMounted&&window.InclineLife)window.InclineLife.resize()}
+function poly(points,fill,stroke,width){ctx.beginPath();points.forEach(function(p,i){if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)});ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width||1;ctx.stroke()}}
+function line(a,b,color,w,dash){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=color;ctx.lineWidth=w||2;ctx.setLineDash(dash||[]);ctx.lineCap='round';ctx.stroke();ctx.setLineDash([])}
+function rr(x,y,w,h,r,fill,stroke,strokeWidth){r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();ctx.fillStyle=fill;ctx.fill();if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=strokeWidth||1.5;ctx.stroke()}}
+function text(t,x,y,size,color,align){ctx.font='700 '+size+'px "Microsoft YaHei",system-ui,sans-serif';ctx.textAlign=align||'center';ctx.textBaseline='middle';ctx.fillStyle=color||'#e9f5fb';ctx.fillText(t,x,y)}
+function box(x,y,z,w,h,d,c){var a=project(x,y,z),b=project(x+w,y,z),cc=project(x+w,y+h,z),dd=project(x,y+h,z),e=project(x,y+h,z+d),f=project(x+w,y+h,z+d),g=project(x+w,y,z+d);poly([a,b,cc,dd],c[0],c[3]||null);poly([dd,cc,f,e],c[1]);poly([b,g,f,cc],c[2]);}
+function crate(x,y,z,size){box(x,y,z,size,size*.8,size*.62,['#c59350','#e6b978','#a96f38','#efc88c']);var a=project(x+size*.42,y,z),b=project(x+size*.42,y+size*.8,z);line(a,b,'#f4d59c',Math.max(2,view.s*.05));var c=project(x+size*.22,y+size*.48,z);text('↑',c.x,c.y,view.s*.16,'#72502e')}
+function wheel(x,y,r){ctx.fillStyle='#101d2a';ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#7b94a5';ctx.lineWidth=Math.max(3,r*.22);ctx.stroke();ctx.fillStyle='#d6e1e6';ctx.beginPath();ctx.arc(x,y,r*.3,0,Math.PI*2);ctx.fill();for(var i=0;i<4;i++){var a=state.travel*3+i*Math.PI/2;line({x:x+Math.cos(a)*r*.37,y:y+Math.sin(a)*r*.37},{x:x+Math.cos(a)*r*.7,y:y+Math.sin(a)*r*.7},'#435d70',2)}}
+function drawTruck(){var s=view.s;box(7.9,.99,-.2,3.25,.21,1.25,['#607c8d','#a1bcc8','#385468']);var wa=project(8.7,.34,-.2),wb=project(10.55,.34,-.2);wheel(wa.x,wa.y,.34*s);wheel(wb.x,wb.y,.34*s);box(10.2,1.2,-.2,1.05,1.3,1.25,['#6692ae','#85abc3','#47718c']);var ca=project(10.42,2.27,-.21);rr(ca.x,ca.y,.56*s,.44*s,.05*s,'#1e455b');var cab=project(11.25,1.65,-.21);rr(cab.x-.12*s,cab.y,.14*s,.16*s,.02*s,'#ffe5a4');var b=project(8,1.2,1.05),c=project(8,2.05,1.05);line(b,c,'#aec9d5',.06*s);var dd=project(10.16,1.2,1.05),ee=project(10.16,2.05,1.05);line(dd,ee,'#aec9d5',.06*s);line(c,ee,'#7995a7',.05*s);for(var k=0;k<state.delivered;k++){var col=k%5,row=Math.floor(k/5)%3,dep=Math.floor(k/15);crate(8.03+col*.4,1.2+row*.34,.05+dep*.5,.37)}var a=project(9,2.8,.3);text('货车',a.x,a.y,Math.max(19,s*.25),'#d5e6ec')}
+function drawRamp(){var nodes=routeNodes(),s=view.s;nodes.forEach(function(p){if(p.y>.05){var a=project(p.x,p.y,p.z),b=project(p.x,0,p.z);line(a,b,'#4f6c7b',s*.065)}});for(var i=1;i<nodes.length;i++){var a=nodes[i-1],b=nodes[i];var dx=b.x-a.x,dz=b.z-a.z,L=Math.hypot(dx,dz),nx=-dz/L*.32,nz=dx/L*.32;var p1=project(a.x+nx,a.y,a.z+nz),p2=project(b.x+nx,b.y,b.z+nz),p3=project(b.x-nx,b.y,b.z-nz),p4=project(a.x-nx,a.y,a.z-nz);poly([p1,p2,p3,p4],'#dbb47c','#a37b49',2);line(p4,p3,'#886442',Math.max(5,s*.09));line(p1,p2,'#f2d8a9',Math.max(2,s*.035));var count=Math.ceil(L*2);for(var j=1;j<count;j++){var t=j/count;line(project(a.x+dx*t+nx,a.y+(b.y-a.y)*t,a.z+dz*t+nz),project(a.x+dx*t-nx,a.y+(b.y-a.y)*t,a.z+dz*t-nz),'#b28b5b',1)}if(i<nodes.length-1){var p=nodes[i];box(p.x-.38,p.y-.08,p.z-.38,.76,.08,.76,['#9e7c53','#e6c795','#866644'])}}var foot=project(nodes[0].x,0,nodes[0].z);ctx.beginPath();ctx.arc(foot.x,foot.y,Math.max(13,s*.16),0,Math.PI*2);ctx.fillStyle=atBase()?'#ffcf70':'#697d87';ctx.fill();ctx.strokeStyle='#fff0bf';ctx.lineWidth=3;ctx.stroke();text('↔',foot.x,foot.y,Math.max(17,s*.23),'#534328');if(atBase()){text('拖动坡脚',foot.x,foot.y+s*.5,Math.max(13,s*.19),'#ffda8e')}var top=project(7.9,1.2,0),bottom=project(7.9,0,0);line({x:top.x+s*.13,y:top.y},{x:bottom.x+s*.13,y:bottom.y},'#b6cfdb',1.5,[5,5]);text('1.2 m',bottom.x+s*.46,(bottom.y+top.y)/2,Math.max(12,s*.18),'#bad2de')}
+function drawCart(){var p=pointAt(state.pos),next=p.seg.b,prev=p.seg.a,s=view.s,a=project(p.x,p.y,p.z),d1=project(prev.x,prev.y,prev.z),d2=project(next.x,next.y,next.z);var reverse=d2.x<d1.x,angle=Math.atan2(d2.y-d1.y,d2.x-d1.x);if(reverse)angle+=Math.PI;ctx.save();ctx.translate(a.x,a.y);ctx.rotate(angle);var sc=s*.88;ctx.scale(sc,sc);var dir=reverse?-1:1;ctx.scale(dir,1);ctx.fillStyle='#101a2490';ctx.beginPath();ctx.ellipse(0,.04,.64,.1,0,0,Math.PI*2);ctx.fill();line({x:-.56,y:-.27},{x:.56,y:-.27},'#93c9c9',.08);line({x:-.48,y:-.27},{x:-.79,y:-.95},'#93c9c9',.07);line({x:-.79,y:-.95},{x:-1.03,y:-.95},'#e1f2ec',.08);rr(-.57,-.45,1.12,.15,.025,'#77c8c6');var rows=Math.ceil(state.load/3);for(var k=0;k<state.load;k++){var col=k%3,row=Math.floor(k/3),cx=-.51+col*.35,cy=-.77-row*.33;rr(cx,cy,.33,.31,.015,'#efb665','#f6d7a4',.018);ctx.fillStyle='#f9ddac';ctx.fillRect(cx+.14,cy,.055,.31)}ctx.fillStyle='#122431';[-.4,.4].forEach(function(x){ctx.beginPath();ctx.arc(x,-.06,.16,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#d4e8e6';ctx.lineWidth=.045;ctx.stroke()});var walk=state.hold?Math.sin(state.t*8)*.16:0;var lean=state.hold&&!state.returning?.12:0;line({x:-1.5,y:-.5},{x:-1.58+walk,y:.05},'#244151',.14);line({x:-1.5,y:-.5},{x:-1.38-walk,y:.05},'#244151',.14);line({x:-1.55,y:-1.1},{x:-1.5,y:-.5},'#eea457',.31);line({x:-1.55+lean,y:-1.03},{x:-1.09,y:-.92},'#efc5a1',.1);ctx.beginPath();ctx.arc(-1.58+lean,-1.39,.19,0,Math.PI*2);ctx.fillStyle='#f1c5a0';ctx.fill();ctx.fillStyle='#ffcd71';ctx.beginPath();ctx.arc(-1.59+lean,-1.48,.22,Math.PI,0);ctx.fill();line({x:-1.87+lean,y:-1.48},{x:-1.29+lean,y:-1.48},'#ffdb8c',.07);ctx.restore()}
+function drawStock(){var s=view.s,count=state.stock;for(var k=0;k<count;k++){var col=k%4,row=Math.floor(k/4)%3,dep=Math.floor(k/12);crate(.35+col*.46,row*.37,-1.2+dep*.65,.42)}var p=project(1,1.65,-.9);text('待运 '+state.stock+' 箱',p.x,p.y,Math.max(17,s*.23),'#f5ddb8');if(atBase()&&state.stock>0){var hit=project(1.15,0,-.7);text('点这里装货',hit.x,hit.y+s*.49,Math.max(13,s*.18),'#c7dce6')}}
+function draw(){if(!ctx||state.page!=='game')return;var w=view.w,h=view.h,s=view.s;ctx.clearRect(0,0,w,h);var bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,'#15344b');bg.addColorStop(1,'#254757');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);var gy=view.oy+s*.07;ctx.fillStyle='#294753';ctx.fillRect(0,gy,w,h-gy);for(var i=-3;i<16;i++)line(project(i,0,-4.2),project(i,0,3.5),'#42616b55',1);for(var z=-4;z<=4;z++)line(project(-3,0,z),project(13,0,z),'#42616b55',1);ctx.fillStyle='#45677722';ctx.fillRect(w*.06,h*.23,w*.29,h*.3);for(i=0;i<5;i++)ctx.fillRect(w*(.065+i*.055),h*.23,w*.02,h*.3);var guideA=project(7.9-state.run,0,.7),guideB=project(7.9,0,.7);line(guideA,guideB,'#7f9eac',1.5,[6,5]);text('前后 '+fmt(state.run)+' m',(guideA.x+guideB.x)/2,guideA.y+s*.3,Math.max(13,s*.18),'#b1cbd7');drawStock();drawRamp();drawTruck();drawCart();if(state.completed){ctx.fillStyle='#102b41aa';ctx.fillRect(0,0,w,h);text('全部装车完成',w*.5,h*.45,Math.max(26,w*.05),'#ffdf92');text('你的方案完成了 '+state.trips+' 趟运输',w*.5,h*.54,Math.max(18,w*.023),'#d6e8ef')}dirty=false}
+function message(s){$('#message').textContent=s}function toast(s){$('#toast').textContent=s;$('#toast').style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('#toast').style.display='none'},2600)}
+function sync(){var descending=state.returning||state.hold<0;var data=routeData(),f=descending?brakeForce():maxForce(),cap=tasks[state.task].cap,base=atBase(),top=atTop();$('#loadCount').textContent=state.load;$('#delivered').textContent=state.delivered;$('#more').disabled=!base||state.stock<=0||state.load>=CFG.maxLoad||state.completed;$('#less').disabled=!base||state.load<=0||state.completed;$('#run').disabled=!base||state.completed;$('#run').value=state.run;$('#run').max=tasks[state.task].maxRun;$('#runOut').textContent=fmt(state.run)+' m';$('#straight').disabled=!base||state.completed;$('#folded').disabled=!base||state.completed;$('#straight').classList.toggle('active',state.route==='straight');$('#folded').classList.toggle('active',state.route==='folded');$('#routeInfo').textContent='全程 '+data.length.toFixed(2)+' m';$('#angle').textContent='坡角 '+round(Math.atan2(CFG.height/(state.route==='folded'?3:1),state.run)*180/Math.PI)+'°';$('#widthInfo').textContent=state.route==='folded'?'侧向占地约 3.3 m · 含转弯平台':'侧向占地约 1 m';$('#forceLabel').textContent=descending?'下坡最大制动力':'最大所需推力';$('#force').innerHTML=f.toFixed(1)+'<small style="font-size:.44em"> N</small>';$('#force').classList.toggle('bad',!descending&&f>cap);$('#forceBar').style.width=clamp(f/(cap*1.5)*100,0,100)+'%';$('#forceBar').style.background=f>cap&&!descending?'var(--danger)':'var(--aqua)';$('#capacityOut').textContent='能力 '+cap+' N';$('#effort').textContent=descending?'握住制动':f>cap?'需要调整方案':f>cap*.85?'接近能力上限':'可以推上去';$('#action').textContent=state.completed?'查看挑战评价':top&&!state.returning?'把货物卸上车':state.returning?'按住返回取货':state.load===0?'先装几箱货物':'按住推上去';$('#action').disabled=!state.completed&&state.load===0&&!state.returning;$('#back').disabled=base||state.returning||top||state.completed;$('#distance').textContent='已走 '+fmt(state.travel)+' 米';$('#recordCount').textContent=state.records.length;$('#subGoal').textContent=tasks[state.task].sub;dirty=true;draw()}
+function addLoad(n){if(!atBase()||state.completed)return;if(n>0&&state.stock>0&&state.load<CFG.maxLoad){state.load++;state.stock--}if(n<0&&state.load>0){state.load--;state.stock++}state.lastRecord='';message('货物已调整：'+state.load+' 箱 · 再试试你的坡道');sync()}
+function configure(run,route){if(!atBase()||state.completed)return;if(run!==null)state.run=round(clamp(run,1.4,tasks[state.task].maxRun),1);if(route)state.route=route;state.pos=0;state.lastRecord='';message(state.route==='folded'?'三段坡道加平台：坡更缓，也更占侧向空间':'拖动坡脚，或调整每次装货量');sync()}
+function record(){if(state.load===0||state.returning)return;var key=[state.load,state.route,state.run,state.task].join('|');if(state.lastRecord===key)return;state.lastRecord=key;var r={n:state.records.length+1,load:state.load,run:state.run,route:state.route,force:maxForce(),length:routeData().length,cap:tasks[state.task].cap,angle:Math.atan2(CFG.height/(state.route==='folded'?3:1),state.run)*180/Math.PI,result:maxForce()<=tasks[state.task].cap?'可推动':'推不动'};state.records.push(r);if(state.records.length>30)state.records.shift();}
+function startMove(dir){if(state.page!=='game'||$('#modal').classList.contains('open'))return;if(state.completed){showCompletion();return}if(dir===-1){if(atBase()||atTop()||state.returning)return;state.hold=-1;message('握住制动，载货缓慢退回');sync();return}if(atTop()&&!state.returning){unload();return}if(atBase()&&state.load===0){toast('先点击货堆，装上几箱货物');return}if(!state.returning){record();if(maxForce()>tasks[state.task].cap){state.hold=0;message('推不动！可以把坡放缓、改用折返，或少装几箱');sync();return}}state.hold=1;message(state.returning?'握住制动，空车缓慢返回':'沿斜面向上推 · 松手自动刹车');sync()}
+function stopMove(){if(state.hold){state.hold=0;if(!state.completed&&!atTop()&&!atBase())message('自动刹车已停稳 · 可以继续或退回');sync()}}
+function unload(){if(!atTop()||state.returning||state.load===0)return;state.delivered+=state.load;state.load=0;state.trips++;state.hold=0;state.returning=true;message('本车卸货完成！按住返回，再选择下一次装多少');if(state.delivered===CFG.total){state.completed=true;state.returning=false;message('全部货物已装车 · 查看你的探究评价');showCompletion()}sync()}
+function tick(t){var dt=Math.min(.2,(t-last)/1000||0);last=t;if(state.page==='game'&&state.hold&&!state.completed&&!$('#modal').classList.contains('open')){state.t+=dt;var data=routeData(),reverse=state.returning||state.hold<0,ratio=maxForce()/tasks[state.task].cap,speed=reverse?.88:1.0*(1-.45*clamp(ratio,0,1)),old=state.pos;state.pos=clamp(state.pos+(reverse?-1:1)*dt*speed,0,data.length);state.travel+=Math.abs(state.pos-old);if(state.pos>=data.length&&!reverse){state.hold=0;message('到达车厢！点击黄色按钮卸货')}if(state.pos<=0&&reverse){state.pos=0;state.returning=false;state.hold=0;state.lastRecord='';message('回到装货区：可重新搭坡、增减货物')}sync()}if(dirty)draw();requestAnimationFrame(tick)}
+function getEvidence(){var same=false,improved=false;state.records.forEach(function(a,i){state.records.slice(i+1).forEach(function(b){if(a.load===b.load&&Math.abs(a.angle-b.angle)>.5){same=true;if(b.force<a.force-1&&b.result==='可推动')improved=true}})});return{finished:state.delivered===CFG.total,compare:same&&state.compared,improved:improved}}
+function openModal(title,body){stopMove();focusBefore=document.activeElement;$('#modalTitle').textContent=title;$('#modalBody').innerHTML=body;$('#modal').classList.add('open');$('#closeModal').focus()}
+function closeModal(){$('#modal').classList.remove('open');if(focusBefore&&focusBefore.focus)focusBefore.focus()}
+function showRecords(){state.compared=true;var rows=state.records.slice(-10).map(function(r){return '<tr><td>'+r.load+' 箱</td><td>'+(r.route==='folded'?'折返':'直坡')+' '+Math.round(r.angle)+'°</td><td>'+r.length.toFixed(2)+' m</td><td>'+r.force.toFixed(1)+' N</td><td style="color:'+(r.result==='可推动'?'#87e6b9':'#ff967f')+'">'+r.result+'</td></tr>'}).join('');var e=getEvidence(),W=mass()*CFG.g,F=maxForce();openModal('同样的货物，怎样更省力？','<p style="margin-top:0">下面是实际尝试过的方案。<strong>比较相同箱数</strong>的两行，再找证据。</p><div class="comparison"><div>直接竖直提起<strong>'+W.toFixed(1)+' N</strong><p>包含手推车与当前 '+state.load+' 箱货物</p></div><div>当前坡道最大推力<strong>'+F.toFixed(1)+' N</strong><p>同样货物 · 同样提升 1.2 m</p></div></div><table class="records"><thead><tr><th>装货</th><th>坡道</th><th>路线</th><th>推力</th><th>尝试</th></tr></thead><tbody>'+rows+'</tbody></table>'+(rows?'':'<p>还没有记录。装货后按住推车，记录会自动留下。</p>')+'<p class="matched">'+(e.compare?'已经有同载重、不同坡度的比较证据。':'试着保持箱数不变，换个坡度再试一次。')+'</p><p class="mini">省力不等于少走路，也不等于少做功。这里是慢速运动的简化模型，不是实物测量。</p>')}
+function showCompletion(){var e=getEvidence(),stars=+e.finished + +e.compare + +e.improved;openModal('装车挑战 · 我的发现','<div class="stars">'+'★'.repeat(stars)+'☆'.repeat(3-stars)+'</div><div class="starGoals"><div>'+(e.finished?'✓':'○')+' 完成运输：24 箱全部装上车</div><div>'+(e.compare?'✓':'○')+' 对比证据：同载重，尝试不同坡度并查看记录</div><div>'+(e.improved?'✓':'○')+' 改进方案：同载重，后来用了更小的推力</div></div><p>运输 '+state.trips+' 趟，累计行程 '+fmt(state.travel)+' 米。<br>哪种方案省力？哪种方案少走路？它们一定相同吗？</p><button id="endRecords" class="primary">看看运输记录</button>');$('#endRecords').onclick=showRecords}
+function showAbout(){openModal('课堂用法与模拟边界','<p>任务：用手推车把 24 箱货物运上货车。点击货堆装货，点击手推车减少一箱；黄色坡脚可以拖动。也可用右侧按钮操作。</p><p>先试运，再保持载重不变改变坡度，通过记录比较。折返坡由三段斜面与两处水平转弯平台组成，会同时增加路线长度与侧向占地。</p><p><strong>物理模型：</strong>货车高度 1.2 m，空车 10 kg，每箱 5 kg。沿斜面慢速匀速上推：F = mg(sinθ + 0.035cosθ)。0.035 为教学用等效滚动阻力系数；用力能力为游戏设定。转弯平台仅计平路滚动阻力，显示的数值为整条路线的最大所需力。下坡需制动，不是继续用同样大小的力向上推。</p><p>为便于课堂控制，游戏松手自动刹车；现实物体不会因此自动停止。坡道宽度、护栏、承载和转弯空间仅作示意，不能用作真实运输或无障碍设施的施工依据。螺纹拓展比较的是螺距与转数，不把螺钉转矩当成手推车推力。</p><p class="mini">教材依据：五年级上册第二单元第4课《巧用斜面》，46—49页及教师教学用书。作品版本 v1.0 · 二维离线版。画面模块与物理计算分离，可后续替换为精细模型。</p>')}
+function reset(task){state.task=task||state.task;state.run=Math.min(2.4,tasks[state.task].maxRun);state.route='straight';state.load=4;state.stock=20;state.delivered=0;state.pos=0;state.returning=false;state.hold=0;state.travel=0;state.trips=0;state.records=[];state.lastRecord='';state.completed=false;state.compared=false;$('#task').value=state.task;message('点击货堆装货 · 拖动黄色坡脚搭坡');closeModal();sync()}
+function confirmReset(task){openModal('开始新的装车任务？','<p>这会清空本轮运输进度与比较记录。</p><div class="actionRow"><button id="cancelReset">继续当前任务</button><button id="okReset" class="primary">开始新任务</button></div>');$('#cancelReset').onclick=function(){$('#task').value=state.task;closeModal()};$('#okReset').onclick=function(){reset(task)}}
+function switchPage(page){stopMove();state.page=page;$('#gamePage').classList.toggle('current',page==='game');$('#lifePage').classList.toggle('current',page==='life');$('#gameTab').classList.toggle('active',page==='game');$('#lifeTab').classList.toggle('active',page==='life');$('#gameTab').setAttribute('aria-selected',page==='game');$('#lifeTab').setAttribute('aria-selected',page==='life');if(page==='life'&&window.InclineLife){if(!lifeMounted){window.InclineLife.mount($('#lifeCanvas'),$('#lifeControls'));lifeMounted=true}else if(window.InclineLife.resume)window.InclineLife.resume()}else if(lifeMounted&&window.InclineLife)window.InclineLife.stop();resize()}
+$('#more').onclick=function(){addLoad(1)};$('#less').onclick=function(){addLoad(-1)};$('#run').oninput=function(){configure(+this.value,null)};$('#straight').onclick=function(){configure(null,'straight')};$('#folded').onclick=function(){configure(null,'folded')};$('#compare').onclick=showRecords;$('#modelBtn').onclick=showAbout;$('#aboutBtn').onclick=showAbout;$('#restart').onclick=function(){confirmReset(state.task)};$('#task').onchange=function(){var t=this.value;this.value=state.task;confirmReset(t)};$('#gameTab').onclick=function(){switchPage('game')};$('#lifeTab').onclick=function(){switchPage('life')};$('#closeModal').onclick=closeModal;$('#modal').onclick=function(e){if(e.target===this)closeModal()};
+function bindHold(el,dir){if(window.PointerEvent){el.addEventListener('pointerdown',function(e){if(e.button!==undefined&&e.button!==0)return;e.preventDefault();try{el.setPointerCapture(e.pointerId)}catch(ignore){}startMove(dir)});['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){el.addEventListener(ev,stopMove)})}else{el.addEventListener('mousedown',function(e){e.preventDefault();startMove(dir)});el.addEventListener('touchstart',function(e){e.preventDefault();startMove(dir)},{passive:false});['mouseup','mouseleave','touchend','touchcancel'].forEach(function(ev){el.addEventListener(ev,stopMove)})}el.addEventListener('keydown',function(e){if((e.key===' '||e.key==='Enter')&&!e.repeat){e.preventDefault();startMove(dir)}});el.addEventListener('keyup',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();stopMove()}});el.addEventListener('blur',stopMove)}bindHold($('#action'),1);bindHold($('#back'),-1);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModal();stopMove()}if(e.key==='Tab'&&$('#modal').classList.contains('open')){var items=$('#modal').querySelectorAll('button,[tabindex="0"]'),first=items[0],end=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();end.focus()}else if(!e.shiftKey&&document.activeElement===end){e.preventDefault();first.focus()}}if((e.code==='Space'||e.key===' ')&&!e.repeat&&state.page==='game'&&!['INPUT','SELECT','BUTTON'].includes(document.activeElement.tagName)){e.preventDefault();startMove(1)}});document.addEventListener('keyup',function(e){if(e.code==='Space'||e.key===' ')stopMove()});window.addEventListener('blur',stopMove);document.addEventListener('visibilitychange',function(){if(document.hidden)stopMove()});
+var drag=false;function pointer(e){var r=canvas.getBoundingClientRect(),a=e.touches&&e.touches[0]||e;return{x:a.clientX-r.left,y:a.clientY-r.top}}
+function down(e){if(!atBase()||state.completed)return;var p=pointer(e),n=routeNodes()[0],f=project(n.x,0,n.z),pile=project(1.05,.5,-.6),cart=project(n.x,n.y,n.z);if(Math.hypot(p.x-f.x,p.y-f.y)<Math.max(27,view.s*.3)){drag=true;if(e.pointerId!==undefined)try{canvas.setPointerCapture(e.pointerId)}catch(ignore){}e.preventDefault()}else if(Math.abs(p.x-pile.x)<view.s*1.2&&Math.abs(p.y-pile.y)<view.s*1.1){addLoad(1)}else if(Math.abs(p.x-cart.x)<view.s*.8&&p.y<cart.y&&p.y>cart.y-view.s*1.6){addLoad(-1)}}
+function move(e){if(!drag)return;e.preventDefault();var p=pointer(e),z=routeNodes()[0].z,x=(p.x-view.ox)/view.s-z*.54;configure(7.9-x,null)}function up(){drag=false}if(window.PointerEvent){canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up)}else{canvas.addEventListener('mousedown',down);window.addEventListener('mousemove',move);window.addEventListener('mouseup',up);canvas.addEventListener('touchstart',down,{passive:false});canvas.addEventListener('touchmove',move,{passive:false});canvas.addEventListener('touchend',up)}
+$('#fullBtn').onclick=function(){var d=document;if(d.fullscreenElement){d.exitFullscreen().catch(function(){})}else if(d.documentElement.requestFullscreen){d.documentElement.requestFullscreen().catch(function(){toast('浏览器不允许全屏，可尝试 F11')})}else{toast('请使用浏览器全屏或横屏显示')}};
+window.addEventListener('resize',resize);document.addEventListener('fullscreenchange',resize);if(window.ResizeObserver)new ResizeObserver(resize).observe(canvas.parentNode);
+// Stable replacement and test interfaces. No network, telemetry, remote fonts, or third-party scripts.
+window.InclineApp={getState:function(){return JSON.parse(JSON.stringify(state))},getPhysics:function(){return{force:maxForce(),brake:brakeForce(),mass:mass(),route:routeData(),conserved:conserved()}},renderers:{drawCart:drawCart,drawTruck:drawTruck,drawRamp:drawRamp},model:{config:CFG,routeNodes:routeNodes,routeData:routeData,maxForce:maxForce},resize:resize};
+resize();sync();requestAnimationFrame(tick);
+})();
+</script>
+<script>
+/* Offline extension for 五上 2.4 巧用斜面. No external assets.
+   Public API: InclineLife.mount(canvas, controlsHost), resize(), stop(),
+   resume(), destroy(), getState(), setScene(name). Canvas should fill its parent.
+   Projection is illustrative; displayed lengths/slopes use the 3D route coordinates.
+   No road-building regulation or screw torque prediction is implied. */
+(function () {
+  'use strict';
+  var api = {}, canvas, ctx, host, observer, raf = 0, last = 0, visible = false;
+  var state = { scene: 'bridge', value: 16, progress: 0, running: false, unfolded: false };
+  var route = null, controls = {}, dpr = 1, scale = 1, offsetX = 0, offsetY = 0;
+  var W = 1000, H = 650;
+  var C = { ink: '#f1f8ff', quiet: '#a6c0cf', aqua: '#7ce1d3', gold: '#ffd377', road: '#35576a', line: '#568093', navy: '#102638', wood: '#b88552' };
+  var scenes = {
+    bridge: { name: '大桥引桥', icon: '🌉', label: '引桥水平长度', min: 6, max: 30, step: 1, value: 16, unit: ' 米', hint: '桥面高度不变，试着拉长引桥', trade: '引桥越长，占地越多；相同高度下坡度更缓。' },
+    ramp: { name: '无障碍坡道', icon: '♿', label: '折返坡道段数', min: 2, max: 6, step: 1, value: 3, unit: ' 段', hint: '利用折返，把较长的坡道安排在场地里', trade: '转弯处是水平平台；增加坡道段数，也需要更多空间。' },
+    screw: { name: '螺钉螺纹', icon: '🔩', label: '相邻螺纹间距', min: 2, max: 10, step: 1, value: 6, unit: ' 毫米', hint: '把一圈螺纹展开，寻找藏起来的斜面', trade: '相同螺钉直径，螺距越小，一圈前进越少；实际旋入力还受材料与摩擦影响。' },
+    mountain: { name: '盘山公路', icon: '⛰', label: '盘旋圈数', min: 1, max: 4, step: 1, value: 2, unit: ' 圈', hint: '同一座山，试着设计不同的上山路线', trade: '绕行让路线变长、坡度变缓；不是把山的高度变低。' }
+  };
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function point(x, y, z) { return { x: x, y: y, z: z }; }
+  function distance(a, b) { return Math.sqrt(Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2) + Math.pow(b.z - a.z, 2)); }
+  function prepare(points) {
+    var cumul = [0], total = 0, maxSlope = 0, horizontal = 0;
+    for (var i = 1; i < points.length; i++) {
+      var a = points[i - 1], b = points[i], h = Math.hypot(b.x - a.x, b.y - a.y), dz = b.z - a.z;
+      total += distance(a, b); horizontal += h; cumul.push(total);
+      if (h > 0.00001) maxSlope = Math.max(maxSlope, Math.atan2(Math.abs(dz), h) * 180 / Math.PI);
+    }
+    return { points: points, cumul: cumul, total: total, horizontal: horizontal, maxSlope: maxSlope };
+  }
+  function makeRoute() {
+    var p = [], v = state.value, i, n;
+    if (state.scene === 'bridge') {
+      p = [point(0, 0, 0), point(v, 0, 4), point(v + 4, 0, 4)];
+    } else if (state.scene === 'ramp') {
+      p.push(point(0, 0, 0));
+      for (i = 0; i < v; i++) {
+        p.push(point(i % 2 === 0 ? 4.5 : 0, i * 0.9, (i + 1) * 1.2 / v));
+        if (i < v - 1) p.push(point(i % 2 === 0 ? 4.5 : 0, (i + 1) * 0.9, (i + 1) * 1.2 / v));
+      }
+    } else if (state.scene === 'mountain') {
+      n = v * 220;
+      for (i = 0; i <= n; i++) {
+        var t = i / n, angle = t * Math.PI * 2 * v + Math.PI / 2, radius = 51 - 39 * t;
+        p.push(point(Math.cos(angle) * radius, Math.sin(angle) * radius, 50 * t));
+      }
+    }
+    route = p.length ? prepare(p) : null;
+  }
+  function sample(progress) {
+    var d = clamp(progress, 0, 1) * route.total, a = 0;
+    while (a < route.cumul.length - 2 && route.cumul[a + 1] < d) a++;
+    var t = (d - route.cumul[a]) / Math.max(0.00001, route.cumul[a + 1] - route.cumul[a]);
+    var p = route.points[a], q = route.points[a + 1];
+    return { p: point(p.x + (q.x - p.x) * t, p.y + (q.y - p.y) * t, p.z + (q.z - p.z) * t), a: p, b: q };
+  }
+  function project(p) {
+    if (state.scene === 'bridge') return { x: 824 - state.value * 24 + p.x * 24, y: 506 - p.z * 24 };
+    if (state.scene === 'ramp') return { x: 170 + (p.x * 0.83 + p.y * 0.55) * 91, y: 545 - (p.y * 0.5 + p.z) * 91 };
+    return { x: 485 + p.x * 6, y: 515 + p.y * 1.75 - p.z * 6.05 };
+  }
+  function rounded(x, y, w, h, r, fill, stroke) {
+    r = Math.min(r, w / 2, h / 2); ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+    if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 2; ctx.stroke(); }
+  }
+  function text(t, x, y, size, color, align) {
+    ctx.font = '700 ' + size + 'px system-ui, "Microsoft YaHei", sans-serif'; ctx.fillStyle = color || C.ink; ctx.textAlign = align || 'left'; ctx.textBaseline = 'middle'; ctx.fillText(t, x, y);
+  }
+  function line(a, b, color, width, dash) {
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap = 'round'; ctx.setLineDash(dash || []); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function circle(x, y, r, color, stroke, width) { ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); if (color) { ctx.fillStyle = color; ctx.fill(); } if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = width || 3; ctx.stroke(); } }
+  function polygon(points, fill, stroke, width) { ctx.beginPath(); points.forEach(function (p, i) { if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); }); ctx.closePath(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = width || 2; ctx.stroke(); } }
+  function ellipse(x, y, rx, ry, fill, stroke) { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 2; ctx.stroke(); } }
+  function badge(t, x, y, width) { rounded(x, y, width, 44, 12, '#17394ad9', '#35596b'); text(t, x + width / 2, y + 23, 21, C.ink, 'center'); }
+  function flag(p, label) { line(p, { x: p.x, y: p.y - 62 }, C.ink, 4); polygon([{ x: p.x, y: p.y - 62 }, { x: p.x + 32, y: p.y - 51 }, { x: p.x, y: p.y - 38 }], C.aqua); if (label) text(label, p.x + 42, p.y - 48, 21); }
+  function drawCar(pos, angle, wheelchair) {
+    ctx.save(); ctx.translate(pos.x, pos.y); ctx.rotate(angle);
+    if (wheelchair) {
+      circle(-10, -12, 23, '#173246', '#d6eaf5', 5); line({ x: -10, y: -12 }, { x: 8, y: -43 }, C.aqua, 8); line({ x: 7, y: -40 }, { x: 25, y: -19 }, C.aqua, 8); line({ x: 25, y: -19 }, { x: 35, y: -19 }, '#e3f5fc', 6); circle(31, 3, 8, '#193044', '#cbe3ec', 3);
+      circle(6, -76, 12, '#efc49a'); line({ x: 3, y: -61 }, { x: 4, y: -38 }, C.gold, 14); line({ x: 6, y: -42 }, { x: 21, y: -37 }, '#efc49a', 7); line({ x: 21, y: -37 }, { x: 27, y: -20 }, '#efc49a', 7);
+    } else {
+      rounded(-41, -43, 79, 32, 8, C.gold); rounded(-25, -62, 49, 29, 8, '#eab75c'); rounded(-20, -57, 38, 18, 4, '#7bafc3'); circle(-24, -7, 12, '#132737', '#c1d7e0', 4); circle(25, -7, 12, '#132737', '#c1d7e0', 4); rounded(34, -36, 8, 8, 2, '#fff2bb');
+    }
+    ctx.restore();
+  }
+  function routeStroke(color, width, start, end, dash) {
+    ctx.beginPath(); var points = route.points, first = start || 0, lastIndex = end === undefined ? points.length - 1 : end;
+    for (var i = first; i <= lastIndex; i++) { var p = project(points[i]); if (i === first) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); }
+    ctx.lineWidth = width; ctx.strokeStyle = color; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.setLineDash(dash || []); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function movingRoadUser(wheelchair) {
+    var s = sample(state.progress), pos = project(s.p), a = project(s.a), b = project(s.b);
+    var angle = Math.atan2(b.y - a.y, b.x - a.x);
+    if (angle > Math.PI / 2 || angle < -Math.PI / 2) {
+      ctx.save(); ctx.translate(pos.x, pos.y); ctx.scale(-1, 1); drawCar({ x: 0, y: 0 }, Math.atan2(b.y - a.y, a.x - b.x), wheelchair); ctx.restore();
+    } else drawCar(pos, angle, wheelchair);
+  }
+  function bridge() {
+    var base = project(point(0, 0, 0)), top = project(point(state.value, 0, 4));
+    rounded(0, 530, 1000, 120, 0, '#1e414d'); rounded(840, 530, 160, 120, 0, '#1c6076');
+    for (var y = 553; y < 640; y += 24) line({ x: 850, y: y }, { x: 995, y: y }, '#3b8a99', 3);
+    polygon([base, top, { x: top.x, y: 530 }, { x: base.x, y: 530 }], '#375963');
+    [850, 949].forEach(function (x) { rounded(x, top.y + 8, 23, 148, 3, '#758f9a'); });
+    routeStroke('#233f50', 30); routeStroke('#9bb5bc', 19); routeStroke('#f4dda4', 3, 0, undefined, [15, 16]);
+    line({ x: 907, y: top.y - 90 }, { x: 907, y: top.y }, '#8bb0bb', 9); line({ x: 980, y: top.y - 90 }, { x: 980, y: top.y }, '#8bb0bb', 9);
+    line({ x: 907, y: top.y - 90 }, { x: 830, y: top.y - 14 }, '#658b9b', 3); line({ x: 907, y: top.y - 90 }, { x: 945, y: top.y - 14 }, '#658b9b', 3);
+    line({ x: top.x - 23, y: top.y + 22 }, { x: top.x - 23, y: 506 }, '#7b9eaf', 2, [5, 6]); text('4 米', top.x - 44, 462, 23, C.aqua, 'right');
+    badge('同一桥面高度', 70, 154, 218); text('引桥', (base.x + top.x) / 2, (base.y + top.y) / 2 + 53, 27, '#c6dbe3', 'center');
+    flag(project(route.points[route.points.length - 1])); movingRoadUser(false);
+  }
+  function ramp() {
+    var g = [point(-0.5, -0.6, 0), point(5.4, -0.6, 0), point(5.4, 5.5, 0), point(-0.5, 5.5, 0)].map(project);
+    polygon(g, '#243e4a', '#395768');
+    route.points.forEach(function (p) { if (p.z > 0) line(project(p), project(point(p.x, p.y, 0)), '#466472', 7); });
+    var end = route.points[route.points.length - 1], e = project(end);
+    var wall = [point(end.x - 0.3, end.y + 0.25, 0), point(end.x + 1.6, end.y + 0.25, 0), point(end.x + 1.6, end.y + 0.25, 2.9), point(end.x - 0.3, end.y + 0.25, 2.9)].map(project);
+    polygon(wall, '#506c78'); rounded(e.x + 32, e.y - 116, 64, 115, 3, '#254b5e', '#a5c3cd'); text('入口', e.x + 62, e.y - 141, 24);
+    routeStroke('#152d3d', 51); routeStroke('#7ba9a8', 36); routeStroke('#e1d7a4', 3, 0, undefined, [14, 14]);
+    // All turns are genuine horizontal landings, not disconnected diagonal pieces.
+    for (var i = 0; i < route.points.length - 1; i++) {
+      var a = route.points[i], b = route.points[i + 1], pa = project(a), pb = project(b);
+      var dx = pb.x - pa.x, dy = pb.y - pa.y, n = Math.hypot(dx, dy), nx = -dy / n * 22, ny = dx / n * 22;
+      var start = { x: pa.x + nx, y: pa.y + ny - 34 }, finish = { x: pb.x + nx, y: pb.y + ny - 34 };
+      line(start, finish, '#d6ebed', 4); line({ x: pa.x + nx, y: pa.y + ny }, start, '#9bbfc7', 3); line({ x: pb.x + nx, y: pb.y + ny }, finish, '#9bbfc7', 3);
+    }
+    badge('平台始终高 1.2 米', 65, 145, 245); movingRoadUser(true);
+    text('折返处有水平平台', 500, 593, 24, C.quiet, 'center');
+  }
+  function mountain() {
+    ellipse(485, 525, 324, 90, '#263f47');
+    polygon([{ x: 178, y: 515 }, { x: 412, y: 212 }, { x: 558, y: 212 }, { x: 791, y: 515 }], '#3a5b56');
+    polygon([{ x: 485, y: 212 }, { x: 558, y: 212 }, { x: 791, y: 515 }, { x: 485, y: 574 }], '#294c4d');
+    ellipse(485, 212, 73, 21, '#718c77');
+    // Continuous far-side road is dotted so the route around the mountain stays legible.
+    for (var i = 1; i < route.points.length; i++) {
+      var a = route.points[i - 1], b = route.points[i];
+      if ((a.y + b.y) / 2 < 0 && i % 4 < 2) line(project(a), project(b), '#658f8f', 5);
+    }
+    for (var j = 1; j < route.points.length; j++) {
+      var p = route.points[j - 1], q = route.points[j];
+      if ((p.y + q.y) / 2 >= 0) { line(project(p), project(q), '#183441', 21); line(project(p), project(q), '#ccb78c', 12); }
+    }
+    badge('同一座 50 米高的山', 65, 145, 263);
+    var s = sample(state.progress); ctx.save(); if (s.p.y < 0) ctx.globalAlpha = 0.55; movingRoadUser(false); ctx.restore();
+    flag(project(route.points[route.points.length - 1]), '山顶');
+    text('虚线是山体后方的路线', 500, 618, 23, C.quiet, 'center');
+  }
+  function screw() {
+    var pitch = state.value, depth = state.progress * 20, turns = depth / pitch, angle = turns * Math.PI * 2;
+    var cx = state.unfolded ? 735 : 510, shaftTop = 192 + depth * 7, shaftBottom = shaftTop + 280, radius = 45;
+    var grad = ctx.createLinearGradient(cx - radius, 0, cx + radius, 0); grad.addColorStop(0, '#647f90'); grad.addColorStop(0.4, '#e6f3f7'); grad.addColorStop(0.7, '#a7bdc8'); grad.addColorStop(1, '#5a7789');
+    rounded(cx - radius, shaftTop, radius * 2, shaftBottom - shaftTop, 3, grad);
+    ellipse(cx, shaftTop, radius, 12, '#cadae2');
+    polygon([{ x: cx - radius, y: shaftBottom }, { x: cx + radius, y: shaftBottom }, { x: cx, y: shaftBottom + 36 }], '#91a9b6');
+    var totalTurns = 40 / pitch, steps = Math.ceil(totalTurns * 120), highlighted = Math.floor(totalTurns / 2);
+    for (var i = 1; i <= steps; i++) {
+      var f0 = (i - 1) / steps * totalTurns, f1 = i / steps * totalTurns, a0 = f0 * Math.PI * 2 + angle, a1 = f1 * Math.PI * 2 + angle;
+      if (Math.sin((a0 + a1) / 2) >= 0) {
+        var p = { x: cx + Math.cos(a0) * radius, y: shaftTop + f0 * pitch * 7 + Math.sin(a0) * 10 };
+        var q = { x: cx + Math.cos(a1) * radius, y: shaftTop + f1 * pitch * 7 + Math.sin(a1) * 10 };
+        line(p, q, Math.floor(f1) === highlighted ? C.gold : '#526f84', Math.floor(f1) === highlighted ? 8 : 6);
+      }
+    }
+    rounded(cx - 67, shaftTop - 23, 134, 26, 6, '#bdd0d9', '#607c8e'); ellipse(cx, shaftTop - 23, 67, 17, '#d1e3eb', '#7795a8');
+    line({ x: cx - Math.cos(angle) * 39, y: shaftTop - 23 - Math.sin(angle) * 10 }, { x: cx + Math.cos(angle) * 39, y: shaftTop - 23 + Math.sin(angle) * 10 }, '#41617b', 6);
+    // The board is drawn after the screw so the inserted part is actually hidden.
+    polygon([{ x: 80, y: 508 }, { x: 880, y: 508 }, { x: 939, y: 548 }, { x: 139, y: 548 }], '#d7b17b');
+    rounded(139, 548, 800, 77, 0, '#a97d4d'); polygon([{ x: 80, y: 508 }, { x: 139, y: 548 }, { x: 139, y: 625 }, { x: 80, y: 585 }], '#89623f');
+    for (var yy = 562; yy < 620; yy += 18) line({ x: 155, y: yy }, { x: 921, y: yy }, '#90693e', 2);
+    if (state.unfolded) {
+      var bx = 75, by = 409, bw = 350, bh = pitch / (Math.PI * 18) * bw, turnFraction = turns % 1;
+      rounded(45, 172, 430, 309, 16, '#173342', '#345968');
+      text('一圈螺纹展开', 260, 214, 28, C.ink, 'center');
+      polygon([{ x: bx, y: by }, { x: bx + bw, y: by }, { x: bx + bw, y: by - bh }], '#a17f47', C.gold, 3);
+      line({ x: bx, y: by }, { x: bx + bw, y: by - bh }, C.gold, 6);
+      circle(bx + turnFraction * bw, by - turnFraction * bh, 10, C.aqua, '#e4fff6', 3);
+      line({ x: bx + bw + 18, y: by }, { x: bx + bw + 18, y: by - bh }, C.aqua, 3);
+      text(pitch + ' mm', bx + bw - 7, by - bh - 29, 22, C.aqua, 'right');
+      text('一圈的水平距离 = 圆周长', 260, 446, 22, C.quiet, 'center');
+    } else {
+      badge('同一直径 · 同一旋入深度', 65, 144, 316);
+      text('点击「展开螺纹」', 690, 347, 27, C.aqua, 'center');
+    }
+    var arrowX = cx + 107, arrowY = shaftTop + 35;
+    line({ x: arrowX, y: arrowY }, { x: arrowX, y: arrowY + 54 }, C.aqua, 5);
+    polygon([{ x: arrowX - 10, y: arrowY + 44 }, { x: arrowX + 10, y: arrowY + 44 }, { x: arrowX, y: arrowY + 61 }], C.aqua);
+    text(depth.toFixed(1) + ' / 20 mm', cx, 651 - 39, 23, '#f2dfc5', 'center');
+  }
+  function draw() {
+    if (!ctx || !visible) return;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+    var cw = canvas.width / dpr, ch = canvas.height / dpr;
+    var bg = ctx.createLinearGradient(0, 0, cw, ch); bg.addColorStop(0, '#173849'); bg.addColorStop(1, '#0c2131'); ctx.fillStyle = bg; ctx.fillRect(0, 0, cw, ch);
+    ctx.translate(offsetX, offsetY); ctx.scale(scale, scale);
+    text(scenes[state.scene].name, 52, 58, 37); text(scenes[state.scene].hint, 54, 104, 24, C.quiet);
+    if (state.scene === 'bridge') bridge(); else if (state.scene === 'ramp') ramp(); else if (state.scene === 'mountain') mountain(); else screw();
+  }
+  function updateControls() {
+    if (!controls.range) return;
+    var meta = scenes[state.scene];
+    controls.buttons.forEach(function (b) { var active = b.dataset.scene === state.scene; b.classList.toggle('il-active', active); b.setAttribute('aria-pressed', String(active)); });
+    controls.label.textContent = meta.label; controls.range.min = meta.min; controls.range.max = meta.max; controls.range.step = meta.step; controls.range.value = state.value;
+    controls.range.setAttribute('aria-label', meta.label); controls.value.textContent = state.value + meta.unit;
+    controls.unfold.hidden = state.scene !== 'screw'; controls.unfold.textContent = state.unfolded ? '收起展开图' : '展开螺纹'; controls.unfold.setAttribute('aria-pressed', String(state.unfolded));
+    controls.play.textContent = state.running ? '暂停演示' : state.progress >= 1 ? '再走一次' : state.progress > 0 ? '继续演示' : state.scene === 'screw' ? '旋入木板' : '走一走';
+    if (state.scene === 'screw') {
+      controls.metric1.textContent = state.value + ' mm'; controls.metric1Label.textContent = '旋转一圈前进';
+      controls.metric2.textContent = (20 / state.value).toFixed(1) + ' 圈'; controls.metric2Label.textContent = '旋入 20 mm 需要';
+    } else {
+      controls.metric1.textContent = route.maxSlope.toFixed(1) + '°'; controls.metric1Label.textContent = state.scene === 'mountain' ? '最陡处的坡度' : '斜面的坡度';
+      var length = state.scene === 'bridge' ? Math.hypot(state.value, 4) : route.total;
+      controls.metric2.textContent = length.toFixed(1) + ' m'; controls.metric2Label.textContent = state.scene === 'bridge' ? '上坡的路程' : '全程路程';
+    }
+    controls.trade.textContent = meta.trade;
+    controls.note.textContent = state.scene === 'screw' ? '结构模型；不模拟切削与锁紧摩擦。' : '工程示意；不作为真实坡道施工依据。';
+  }
+  function tick(t) {
+    raf = 0; if (!visible || !state.running) return;
+    var dt = Math.min(0.05, Math.max(0, (t - last) / 1000)); last = t;
+    if (state.scene === 'screw') state.progress = Math.min(1, state.progress + dt * 0.65 * state.value / 20);
+    else state.progress = Math.min(1, state.progress + dt * (state.scene === 'mountain' ? 44 : state.scene === 'bridge' ? 3.5 : 2.5) / route.total);
+    if (state.progress >= 1) { state.running = false; updateControls(); }
+    draw(); if (state.running) raf = requestAnimationFrame(tick);
+  }
+  function startLoop() { if (!raf && visible && state.running) { last = performance.now(); raf = requestAnimationFrame(tick); } }
+  function resize() {
+    if (!canvas) return;
+    var r = canvas.getBoundingClientRect(), cw = Math.max(1, r.width), ch = Math.max(1, r.height);
+    dpr = Math.min(window.devicePixelRatio || 1, 2); canvas.width = Math.round(cw * dpr); canvas.height = Math.round(ch * dpr);
+    scale = Math.min(cw / W, ch / H); offsetX = (cw - W * scale) / 2; offsetY = (ch - H * scale) / 2; draw();
+  }
+  function setScene(name) {
+    if (!scenes[name]) return;
+    state.scene = name; state.value = scenes[name].value; state.progress = 0; state.running = false; state.unfolded = false;
+    if (raf) cancelAnimationFrame(raf); raf = 0; makeRoute(); updateControls(); draw();
+  }
+  function mount(targetCanvas, controlsHost) {
+    api.destroy(); canvas = targetCanvas; host = controlsHost; if (!canvas || !host) throw new Error('InclineLife.mount requires canvas and controlsHost.');
+    ctx = canvas.getContext('2d'); if (!ctx) throw new Error('Canvas 2D is unavailable.');
+    state = { scene: 'bridge', value: 16, progress: 0, running: false, unfolded: false }; visible = true;
+    host.innerHTML = '';
+    var style = el('style');
+    style.textContent = '.il-root{display:flex;flex-direction:column;gap:14px;color:#edf7ff;font-family:system-ui,"Microsoft YaHei",sans-serif}.il-scenes{display:grid;grid-template-columns:1fr 1fr;gap:9px}.il-root button{font:700 18px system-ui,"Microsoft YaHei",sans-serif;border:1px solid #486b80;border-radius:11px;background:#234356;color:#edf7ff;padding:12px 9px;cursor:pointer;min-height:49px;touch-action:manipulation}.il-root button.il-active{background:#155961;border-color:#7ce1d3;color:#cffff0}.il-rangebox{background:#1c3748;border:1px solid #3e6175;border-radius:12px;padding:15px}.il-label{font-size:18px;color:#c1d6e2}.il-value{font-size:29px;font-weight:800;color:#ffd377;margin:6px 0}.il-range{width:100%;height:39px;accent-color:#ffd377;cursor:ew-resize}.il-metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px}.il-metric{background:#213e4f;padding:13px 10px;border-radius:10px}.il-metric b{display:block;font-size:clamp(22px,2.5vw,32px);color:#7ce1d3;white-space:nowrap}.il-metric span{display:block;font-size:15px;color:#b2cbd9;margin-top:6px}.il-root .il-play{background:#ffd377;border-color:#ffd377;color:#152d3e;font-size:22px}.il-trade{font-size:18px;line-height:1.6;color:#d0e1eb;margin:0}.il-note{font-size:13px;line-height:1.5;color:#91afc0;margin-top:auto}.il-root button[hidden]{display:none!important}@media(max-width:900px){.il-root{gap:9px}.il-root button{font-size:14px;min-height:40px;padding:8px 5px}.il-rangebox{padding:10px}.il-value{font-size:23px}.il-label{font-size:15px}.il-metric{padding:9px 6px}.il-metric b{font-size:22px}.il-metric span{font-size:12px}.il-trade{font-size:15px}.il-note{font-size:11px}.il-root .il-play{font-size:18px}}'; host.appendChild(style);
+    var root = el('div', 'il-root'); host.appendChild(root); var nav = el('div', 'il-scenes'); root.appendChild(nav); controls = { buttons: [] };
+    ['bridge', 'ramp', 'screw', 'mountain'].forEach(function (name) { var b = el('button', '', scenes[name].icon + ' ' + scenes[name].name); b.type = 'button'; b.dataset.scene = name; b.onclick = function () { setScene(name); }; nav.appendChild(b); controls.buttons.push(b); });
+    var rangebox = el('div', 'il-rangebox'); root.appendChild(rangebox); controls.label = el('div', 'il-label'); controls.value = el('div', 'il-value'); controls.range = el('input', 'il-range'); controls.range.type = 'range'; rangebox.appendChild(controls.label); rangebox.appendChild(controls.value); rangebox.appendChild(controls.range);
+    controls.range.oninput = function () { state.value = Number(this.value); state.progress = 0; state.running = false; if (raf) cancelAnimationFrame(raf); raf = 0; makeRoute(); updateControls(); draw(); };
+    var metrics = el('div', 'il-metrics'); root.appendChild(metrics);
+    for (var i = 1; i <= 2; i++) { var box = el('div', 'il-metric'); controls['metric' + i] = el('b'); controls['metric' + i + 'Label'] = el('span'); box.appendChild(controls['metric' + i]); box.appendChild(controls['metric' + i + 'Label']); metrics.appendChild(box); }
+    controls.unfold = el('button'); controls.unfold.type = 'button'; controls.unfold.onclick = function () { state.unfolded = !state.unfolded; updateControls(); draw(); }; root.appendChild(controls.unfold);
+    controls.play = el('button', 'il-play'); controls.play.type = 'button'; controls.play.onclick = function () { if (state.progress >= 1) state.progress = 0; state.running = !state.running; updateControls(); if (state.running) startLoop(); else { if (raf) cancelAnimationFrame(raf); raf = 0; draw(); } }; root.appendChild(controls.play);
+    controls.trade = el('p', 'il-trade'); root.appendChild(controls.trade); controls.note = el('div', 'il-note'); root.appendChild(controls.note);
+    canvas.setAttribute('aria-label', '生活中的斜面：可调整路线并播放演示'); canvas.setAttribute('role', 'img');
+    makeRoute(); updateControls(); window.addEventListener('resize', resize); if (window.ResizeObserver) { observer = new ResizeObserver(resize); observer.observe(canvas); } resize(); return api;
+  }
+  api.mount = mount; api.resize = resize; api.setScene = setScene;
+  api.stop = function () { visible = false; state.running = false; if (raf) cancelAnimationFrame(raf); raf = 0; updateControls(); };
+  api.resume = function () { visible = true; resize(); };
+  api.destroy = function () { if (raf) cancelAnimationFrame(raf); raf = 0; if (observer) observer.disconnect(); observer = null; window.removeEventListener('resize', resize); if (host) host.innerHTML = ''; canvas = null; ctx = null; host = null; visible = false; controls = {}; };
+  api.getState = function () { return { scene: state.scene, value: state.value, progress: state.progress, running: state.running, unfolded: state.unfolded, routeLength: route ? route.total : null, maxSlope: route ? route.maxSlope : null }; };
+  window.InclineLife = api;
+})();
+
+</script>
+
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T2 · 二维绘图" title="本课最低技术需求：T2 · 二维绘图" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T2 · 二维绘图</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body></html>
+
