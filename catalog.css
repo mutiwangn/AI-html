@@ -41,7 +41,7 @@ svg { display: block; flex-shrink: 0; }
 /* 固定保留三组入口，不让标题占用教材的主要展示空间。 */
 .site-header { position: sticky; top: 0; z-index: 50; flex: none; background: rgba(10,26,42,.97); border-bottom: 1px solid var(--line); }
 .site-header-inner { max-width: 1920px; min-height: 100px; margin: auto; padding: 15px 32px; display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: 24px; }
-.site-header h1 { position: relative; margin: 0; font-family: "AIHTML Display", "Microsoft YaHei", "PingFang SC", sans-serif; font-size: clamp(23px,2.15vw,36px); font-weight: 400; font-style: normal; font-synthesis: none; letter-spacing: .015em; line-height: 1.25; white-space: nowrap; }
+.site-header h1 { position: relative; margin: 0; font-family: "AIHTML Display", "Microsoft YaHei", "PingFang SC", sans-serif; font-size: clamp(26px,2.6vw,42px); font-weight: 400; font-style: normal; font-synthesis: none; letter-spacing: .015em; line-height: 1.25; white-space: nowrap; }
 .site-title > span { display: inline-block; }
 .title-divider { color: var(--accent); }
 .site-title::after { content: ""; display: block; width: 52px; height: 3px; margin-top: 10px; background: var(--accent); clip-path: polygon(0 0,100% 0,94% 100%,0 100%); }
@@ -202,6 +202,10 @@ body[data-view="focus"] .site-footer { position: fixed; left: 0; right: 0; botto
 }
 @media (min-width: 1100px) and (max-width: 1239px) {
   .book-unit-link { font-size: 17px; }
+}
+/* 窄桌面给长单元名的换行多留一行余量。 */
+@media (min-width: 1100px) and (max-width: 1250px) and (max-height: 760px) {
+  .book-cover-link { max-height: calc(100vh - 430px); }
 }
 @media (max-width: 1099px) {
   .site-header-inner { padding: 12px 22px; gap: 12px 18px; grid-template-columns: minmax(0,1fr) auto; }
