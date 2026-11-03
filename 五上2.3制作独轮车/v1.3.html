@@ -410,7 +410,7 @@
       needForce: f.force, needUp: f.forceUp, needPush: f.forcePush,
       remaining: CONFIG.totalBricks - s.delivered, stars: s.stars,
       fallen: s.fallen, maxCargo: stats.capacity + CONFIG.maxOverload,
-      overloaded: s.cargo > stats.capacity, gameMinutes: s.elapsed / 60 + (s.rests - (s.resting ? 1 : 0)) * CONFIG.restGameMinutes + (s.resting ? (CONFIG.restSeconds - s.restLeft) / CONFIG.restSeconds * CONFIG.restGameMinutes : 0),
+      overloaded: s.cargo > stats.capacity, gameMinutes: (s.elapsed - (s.rests - (s.resting ? 1 : 0)) * CONFIG.restSeconds - (s.resting ? (CONFIG.restSeconds - s.restLeft) : 0)) / 60 + (s.rests - (s.resting ? 1 : 0)) * CONFIG.restGameMinutes + (s.resting ? (CONFIG.restSeconds - s.restLeft) / CONFIG.restSeconds * CONFIG.restGameMinutes : 0),
       normalForce: f.normalForce, loadArm: f.loadArm, effortArm: f.effortArm
     };
   };
