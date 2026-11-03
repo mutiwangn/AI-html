@@ -141,7 +141,7 @@
           '</article>';
       }
 
-      function unitHTML(book, unit, initialUnit, initialLesson) {
+      function unitHTML(book, unit, initialUnit) {
         var unitOpen = unit.number === initialUnit;
         var unitId = 'directory-' + book.id + '-unit-' + unit.number;
         return '<details class="unit-node" data-unit="' + unit.number + '"' + (unitOpen ? ' open' : '') + '>' +
@@ -151,10 +151,9 @@
           '<div class="unit-lessons" id="' + unitId + '">' +
             unit.lessons.map(function (lesson) {
               var resources = resourcesFor(book, lesson.code);
-              var lessonOpen = unitOpen && lesson.code === initialLesson;
               var lessonId = 'resources-' + book.id + '-' + lesson.code.replace('.', '-');
-              return '<details class="lesson-node' + (resources.length ? ' has-resources' : '') + '" data-lesson="' + escapeHTML(lesson.code) + '"' + (lessonOpen ? ' open' : '') + '>' +
-                '<summary class="lesson-summary" aria-expanded="' + lessonOpen + '" aria-controls="' + lessonId + '">' +
+              return '<details class="lesson-node' + (resources.length ? ' has-resources' : '') + '" data-lesson="' + escapeHTML(lesson.code) + '">' +
+                '<summary class="lesson-summary" aria-expanded="false" aria-controls="' + lessonId + '">' +
                   '<span class="lesson-code">' + escapeHTML(lesson.code) + '</span><h4>' + escapeHTML(lesson.title) + '</h4>' +
                   (resources.length ? '<span class="resource-count" aria-label="' + resources.length + '份交互课件">' + resources.length + ' 份</span>' : '') + chevron +
                 '</summary>' +
@@ -167,7 +166,14 @@
 
       function changeDisclosure(node, open) {
         if (open) node.setAttribute('open', '');
-        else node.removeAttribute('open');
+        else {
+          node.removeAttribute('open');
+          /* 收起上一级时清除子级选择，下次展开仍从课时列表开始。 */
+          each(node.querySelectorAll('details[open]'), function (child) {
+            child.removeAttribute('open');
+            child.querySelector('summary').setAttribute('aria-expanded', 'false');
+          });
+        }
         node.querySelector('summary').setAttribute('aria-expanded', String(open));
       }
 
@@ -177,7 +183,10 @@
           function synchronize() {
             var isOpen = node.hasAttribute('open');
             summary.setAttribute('aria-expanded', String(isOpen));
-            if (!isOpen) return;
+            if (!isOpen) {
+              changeDisclosure(node, false);
+              return;
+            }
             /* 每一层只聚焦一个展开项；同一课的多个作品始终同时保留。 */
             each(node.parentNode.children, function (sibling) {
               if (sibling !== node && sibling.tagName === 'DETAILS') changeDisclosure(sibling, false);
@@ -203,29 +212,15 @@
       }
 
       function renderFocus(book, requestedUnit) {
-        var initialUnit = book.units.length ? book.units[0].number : null;
-        var initialLesson = null;
+        /* 只有显式点击单元入口才展开单元，绝不替使用者选择课时。 */
+        var initialUnit = null;
         var totalLessons = 0;
         var selectedUnit = null;
         each(book.units, function (unit) {
           totalLessons += unit.lessons.length;
           if (Number(requestedUnit) === unit.number) selectedUnit = unit;
         });
-        if (!selectedUnit && book.lessons.length) {
-          each(book.units, function (unit) {
-            if (selectedUnit) return;
-            each(unit.lessons, function (lesson) {
-              if (!selectedUnit && resourcesFor(book, lesson.code).length) selectedUnit = unit;
-            });
-          });
-        }
-        if (!selectedUnit) selectedUnit = book.units[0];
-        if (selectedUnit) {
-          initialUnit = selectedUnit.number;
-          each(selectedUnit.lessons, function (lesson) {
-            if (!initialLesson && resourcesFor(book, lesson.code).length) initialLesson = lesson.code;
-          });
-        }
+        if (selectedUnit) initialUnit = selectedUnit.number;
         directoryTitle.textContent = book.title;
         document.getElementById('directory-meta').textContent = book.units.length + ' 个单元 · ' + totalLessons + ' 个课时 · ' + book.lessons.length + ' 份课件';
         document.getElementById('focused-book').innerHTML =
@@ -233,7 +228,7 @@
           '<div class="focused-book-label"><h3>' + escapeHTML(book.title.replace(/[上下]册$/, '')) + '</h3><p>' + (semester === 'up' ? '秋季学期 · 上册' : '春季学期 · 下册') + '</p></div>';
         closeLink.setAttribute('href', '#books-' + semester);
         directory.innerHTML = book.units.map(function (unit) {
-          return unitHTML(book, unit, initialUnit, initialLesson);
+          return unitHTML(book, unit, initialUnit);
         }).join('');
         bindDisclosures();
         directory.scrollTop = 0;
@@ -284,7 +279,7 @@
           currentUnit = requestedUnit;
           focusWithoutScroll(directoryTitle);
           setBackgroundInactive(true);
-          status.textContent = book.title + '，已展开单元、课时与交互课件目录。';
+          status.textContent = book.title + '，已打开教材目录。选择单元查看课时，选择课时查看交互课件。';
           document.title = book.title + ' · 教科版-小学科学-交互课件';
         } else {
           setBackgroundInactive(false);
@@ -336,7 +331,12 @@
       window.addEventListener('resize', measureChrome);
       window.addEventListener('pageshow', measureChrome);
       render();
+      /* 标题字体完成加载后重新测量，避免窄屏换行改变顶栏高度。 */
+      if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+        document.fonts.ready.then(measureChrome);
+      }
     }
   };
 })(window, document);
+
 
