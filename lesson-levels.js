@@ -24,6 +24,7 @@
     '四上2.4测量肺活量': { level: 2, note: 'Canvas 与数据记录', highLoad: true },
     '四上2.5口腔里的消化': { level: 2, note: 'Canvas 与较大素材', highLoad: true },
     '四上2.6胃和小肠里的消化': { level: 1, note: 'SVG 与触控' },
+    '四上2.8呵护我们的器官': { level: 1, note: 'SVG 鼻腔模型、课堂调查与生活实践' },
     '五上2.2独轮车省力的秘密': { level: 2, note: 'Canvas 模拟三维视效' },
     '五上2.4巧用斜面【王剑青】': { level: 2, note: 'Canvas 互动' },
     '五下4.5船的最大装载量【王宁】': { level: 2, note: 'Canvas 与实验记录' }
