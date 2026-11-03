@@ -338,3 +338,147 @@ body[data-view="focus"] .site-footer { position: fixed; left: 0; right: 0; botto
 }
 
 
+
+
+/* Science illustration backdrop · glass UI refresh (2026-11-03)
+ * The decorative artwork stays separate from book covers and lesson assets.
+ * Fixed pseudo-element avoids iPad Safari's inconsistent background-attachment: fixed.
+ */
+:root {
+  --line: rgba(137,211,255,.30);
+  --surface: rgba(8,28,53,.38);
+  --glass-edge: rgba(150,222,255,.39);
+  --glass-pane: rgba(6,24,47,.46);
+}
+html { background: #04152d; }
+body { position: relative; isolation: isolate; background: transparent; }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #04152d;
+  background-image:
+    linear-gradient(180deg, rgba(1,11,31,.10), rgba(1,11,31,.07) 60%, rgba(1,11,31,.21)),
+    url("./assets/aihtml-home-science.jpg");
+  background-position: center, center;
+  background-size: 100% 100%, cover;
+  background-repeat: no-repeat;
+}
+
+/* Keep illustration visible behind the header, semester choices and footer. */
+.site-header,
+body[data-view="focus"] .site-header {
+  background: rgba(5,22,46,.54);
+  border-bottom-color: var(--glass-edge);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+.site-footer,
+body[data-view="focus"] .site-footer {
+  background: rgba(5,22,46,.44);
+  border-top-color: rgba(150,222,255,.25);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.semester-button,
+.season-autumn,
+.season-spring,
+body[data-view="focus"] .season-autumn:not([aria-pressed="true"]),
+body[data-view="focus"] .season-spring:not([aria-pressed="true"]) {
+  background: rgba(8,34,62,.38);
+  border-color: rgba(148,217,255,.42);
+  border-radius: 5px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.season-autumn[aria-pressed="true"],
+.season-spring[aria-pressed="true"] {
+  background: rgba(18,73,112,.54);
+  border-color: #9addff;
+  box-shadow: inset 0 0 0 1px rgba(172,230,255,.15), 0 5px 20px rgba(0,9,27,.22);
+}
+.compat-entry,
+body[data-view="focus"] .compat-entry {
+  background: rgba(8,34,62,.36);
+  border-color: rgba(148,217,255,.48);
+  border-radius: 5px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.compat-entry:hover,
+body[data-view="focus"] .compat-entry:hover,
+.book-unit-link:hover { background: rgba(38,103,149,.40); }
+
+/* Focus mode: lighter veil, with the science backdrop still recognizable. */
+.focus-backdrop {
+  background: rgba(0,8,23,.35);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.directory-panel {
+  background: var(--glass-pane);
+  border-color: rgba(146,215,255,.48);
+  border-radius: 6px;
+  box-shadow: 0 18px 48px rgba(0,7,24,.28);
+  -webkit-backdrop-filter: blur(18px) saturate(1.06);
+  backdrop-filter: blur(18px) saturate(1.06);
+}
+.directory-heading { background: rgba(8,33,62,.16); }
+.close-focus {
+  background: rgba(22,68,104,.30);
+  border-color: rgba(148,217,255,.40);
+  border-radius: 4px;
+}
+.close-focus:hover { background: rgba(38,103,149,.38); }
+
+/* Nested windows and controls use squared, lightweight surfaces. */
+.unit-node { background: rgba(16,53,83,.21); }
+.unit-node:first-child { border-radius: 4px 4px 0 0; }
+.unit-node:last-child { border-radius: 0 0 4px 4px; }
+.unit-summary { border-radius: 3px; }
+.unit-node[open] > .unit-summary { background: rgba(66,168,225,.17); }
+.lesson-summary { border-radius: 3px; }
+.resource-card {
+  background: rgba(25,66,101,.23);
+  border-color: rgba(150,222,255,.30);
+  border-radius: 4px;
+}
+.resource-count,
+.lesson-grade,
+.lesson-feature,
+.lesson-match { border-radius: 3px; }
+.lesson-open {
+  background: rgba(20,95,140,.65);
+  border-radius: 4px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.lesson-open:hover { background: rgba(35,120,169,.81); }
+.empty-lesson { border-radius: 4px; }
+.book-cover-link { border-radius: 3px; }
+.book-heading,
+.book-unit-link,
+.focused-book h3 { text-shadow: 0 2px 8px rgba(0,6,22,.72); }
+
+/* Portrait screens have room for the plant at the foot and the globe above. */
+@media (max-width: 699px) and (orientation: portrait) {
+  body::before {
+    background-image:
+      linear-gradient(180deg, rgba(1,11,31,.32), rgba(1,11,31,.16), rgba(1,11,31,.31)),
+      url("./assets/aihtml-home-science.jpg"),
+      url("./assets/aihtml-home-science.jpg");
+    background-size: 100% 100%, auto 62%, auto 62%;
+    background-position: center, right top, left bottom;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Solid-enough fallbacks for older Seewo browsers without glass blur support. */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .site-header, body[data-view="focus"] .site-header { background: rgba(5,22,46,.74); }
+  .site-footer, body[data-view="focus"] .site-footer { background: rgba(5,22,46,.68); }
+  .directory-panel { background: rgba(6,24,47,.78); }
+  .semester-button, .compat-entry { background: rgba(8,34,62,.70); }
+}
