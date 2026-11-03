@@ -48,6 +48,9 @@
       var directory = document.getElementById('directory-scroll');
       var directoryTitle = document.getElementById('directory-title');
       var closeLink = document.getElementById('close-focus');
+      var previousButton = document.getElementById('focus-prev');
+      var nextButton = document.getElementById('focus-next');
+      var touchOrigin = null;
       var status = document.getElementById('catalog-status');
       var semesterButtons = document.querySelectorAll('.semester-button');
       var semesterKey = 'aihtml-catalog-semester-v1';
@@ -238,6 +241,35 @@
         }
       }
 
+      /* 左右换书仅改变年级，学期保持不变，目录恢复为未展开状态。 */
+      function changeFocusedBook(step) {
+        if (!activeBook || (step !== -1 && step !== 1)) return;
+        var grade = parseInt(activeBook.id, 10);
+        var target = bookById[(grade + step) + '-' + semester];
+        if (target) window.location.hash = '#book-' + target.id;
+      }
+
+      function updateBookNavigation(book) {
+        var grade = parseInt(book.id, 10);
+        var before = bookById[(grade - 1) + '-' + semester];
+        var after = bookById[(grade + 1) + '-' + semester];
+        previousButton.disabled = !before;
+        nextButton.disabled = !after;
+        previousButton.setAttribute('aria-label', before ? '上一册：' + before.title : '已到一年级');
+        nextButton.setAttribute('aria-label', after ? '下一册：' + after.title : '已到六年级');
+        previousButton.title = before ? before.title : '已到第一册';
+        nextButton.title = after ? after.title : '已到最后一册';
+      }
+
+      function animateBookChange(fromBook, toBook) {
+        var direction = parseInt(toBook.id, 10) > parseInt(fromBook.id, 10) ? 'next' : 'prev';
+        focusLayout.className = focusLayout.className.replace(' is-switching', '');
+        focusLayout.setAttribute('data-slide', direction);
+        /* 同方向连续切换时，强制从第一帧重新播放。 */
+        focusLayout.offsetWidth;
+        focusLayout.className += ' is-switching';
+      }
+
       function measureChrome() {
         var root = document.documentElement;
         root.style.setProperty('--header-size', document.querySelector('.site-header').offsetHeight + 'px');
@@ -275,11 +307,17 @@
           if (!previousBook || previousBook.id !== book.id || currentUnit !== requestedUnit) {
             renderFocus(book, requestedUnit);
           }
+          updateBookNavigation(book);
+          if (previousBook && previousBook.id !== book.id) animateBookChange(previousBook, book);
+          else if (!previousBook) {
+            focusLayout.className = focusLayout.className.replace(' is-switching', '');
+            focusLayout.removeAttribute('data-slide');
+          }
           activeBook = book;
           currentUnit = requestedUnit;
           focusWithoutScroll(directoryTitle);
           setBackgroundInactive(true);
-          status.textContent = book.title + '，已打开教材目录。选择单元查看课时，选择课时查看交互课件。';
+          status.textContent = book.title + '，已打开教材目录。可使用左右切换按钮或左右滑动查看其他年级。';
           document.title = book.title + ' · 教科版-小学科学-交互课件';
         } else {
           setBackgroundInactive(false);
@@ -321,6 +359,33 @@
       focusView.addEventListener('click', function (event) {
         if (findAttribute(event.target, 'data-close-focus') || event.target === focusView || event.target === focusLayout) returnToShelf();
       });
+      previousButton.addEventListener('click', function () { changeFocusedBook(-1); });
+      nextButton.addEventListener('click', function () { changeFocusedBook(1); });
+
+      /* 手指横向划动：距离阈值 + 方向判定，避免目录纵向滚动误触。 */
+      focusView.addEventListener('touchstart', function (event) {
+        if (!activeBook || !event.touches || event.touches.length !== 1 ||
+            findAttribute(event.target, 'data-swipe-block')) {
+          touchOrigin = null;
+          return;
+        }
+        touchOrigin = {
+          x: event.touches[0].clientX,
+          y: event.touches[0].clientY,
+          at: Date.now()
+        };
+      }, false);
+      focusView.addEventListener('touchend', function (event) {
+        if (!touchOrigin || !activeBook || !event.changedTouches || !event.changedTouches.length) return;
+        var start = touchOrigin;
+        touchOrigin = null;
+        var dx = event.changedTouches[0].clientX - start.x;
+        var dy = event.changedTouches[0].clientY - start.y;
+        if (Math.abs(dx) >= 76 && Math.abs(dx) > Math.abs(dy) * 1.5 && Date.now() - start.at < 1200) {
+          changeFocusedBook(dx < 0 ? 1 : -1);
+        }
+      }, false);
+      focusView.addEventListener('touchcancel', function () { touchOrigin = null; }, false);
       document.addEventListener('keydown', function (event) {
         if (activeBook && !event.defaultPrevented && (event.key === 'Escape' || event.keyCode === 27)) {
           event.preventDefault();
