@@ -375,7 +375,7 @@
           if (this._dropRemaining <= 0) {
             var n = Math.min(s.cargo, excess >= 4 ? 2 : 1);
             for (var k = 0; k < n; k++) {
-              s.dropped.push({x:s.x, z:(k%2 ? -.85 : .85), id:s.dropEvent * 3 + k});
+              s.dropped.push({x:s.x, z:(k%2 ? -.85 : .85), born:s.elapsed, id:s.dropEvent * 3 + k});
             }
             s.cargo -= n; s.fallen += n; s.dropEvent++;
             s.pushing = false; s.moving = false;
@@ -1006,8 +1006,8 @@ P._environment=function(s){
  this._rod([28.3,8.5,6.9],[28.3,4.2,6.9],.018,'#394e5f',null,5);
  // Ground litter and reclaimed bricks stay at their actual drop coordinates.
  for(i=0;i<(s.dropped||[]).length;i++){
-   var b=s.dropped[i];
-   this._box(b.x,.13,b.z,.31,.23,.18,'#c46c4d',null,'#8e4a36');
+   var b=s.dropped[i],fall=Math.min(1,Math.max(0,((s.elapsed||0)-(b.born||0))/.68));
+   this._box(b.x+.20*fall,.14+Math.pow(1-fall,2)*.82,b.z*fall,.31,.23,.18,'#c46c4d',null,'#8e4a36');
  }
  this.labels.push({p:[-2.1-(s.x||0),1.0,3.1],text:'砖场',color:'#284d61',size:19});
  this.labels.push({p:[22.5-(s.x||0),1.2,3.2],text:'工地',color:'#284d61',size:19});
@@ -1354,7 +1354,7 @@ function finish(){
 }
 $('redesignBtn').onclick=returnToDesign;$('retryBtn').onclick=()=>{closeDialog('resultDialog');game=new WheelbarrowGame(design);recorded=false;renderer.setDesign(design);renderer.resetCamera();updateHud();$('batchSlider').value=WheelbarrowGame.getDesignStats(design).capacity;renderer.setViewMode('follow');$('cameraModeLabel').textContent='第一视角';toast('新一轮 200 块砖挑战');};
 function frame(now){requestAnimationFrame(frame);if(!lastFrame)lastFrame=now;let dt=Math.max(0,(now-lastFrame)/1000);lastFrame=now;if(document.hidden)return;if(toastTime>0){toastTime-=dt;if(toastTime<=0)$('toast').classList.remove('show');}if(page!=='game'||!game||!renderer)return;if(!dialogOpen){if(assembling){assemblyTime+=dt;let a=Math.min(1,assemblyTime/6.4);$('assemblyProgress').style.width=(a*100)+'%';setText('assemblyLabel',a<.25?'车身定位':a<.45?'安装车架':a<.60?'固定车斗':a<.76?'穿入轮轴，拧紧螺母':a<.95?'焊接固定连接':'组装完成，进入工地');if(a>=1){assembling=false;$('assemblyLayer').hidden=true;toast('装第一块砖，挑战就开始！');beep(720,.12);if(!rulesSeen){rulesSeen=true;$('rulesStart').textContent='开始搬运';openDialog('rulesDialog');}}}else{let oldRest=game.state.resting,oldDrop=game.state.dropEvent;game.step(dt);if(!oldRest&&game.state.resting){stopHold();beep(230,.14);toast('休息 10 分钟 · 现实等待 5 秒');}if(game.state.dropEvent>oldDrop){stopHold();beep(160,.24);toast('⚠ 超载滑落 '+game.state.fallen+' 块砖！停下捡回');}unloadAnim=Math.max(0,unloadAnim-dt*2.5);if(game.state.finished&&!recorded)finish();}}
- const s=game.state,m=game.getMetrics();renderer.render({mode:assembling?'assembly':'game',assembly:Math.min(1,assemblyTime/6.4),x:s.x,direction:s.direction,cargo:s.cargo,source:s.source,delivered:s.delivered,dropped:s.dropped,fallen:s.fallen,moving:s.moving,resting:s.resting,restLeft:s.restLeft,lifting:s.moving,forceUp:m.forceUp,forcePush:m.forcePush,showForces,unload:unloadAnim,wheelAngle:s.wheelAngle,celebration:s.finished},now/1000);updateHud();
+ const s=game.state,m=game.getMetrics();renderer.render({mode:assembling?'assembly':'game',assembly:Math.min(1,assemblyTime/6.4),x:s.x,direction:s.direction,cargo:s.cargo,source:s.source,delivered:s.delivered,dropped:s.dropped,fallen:s.fallen,elapsed:s.elapsed,moving:s.moving,resting:s.resting,restLeft:s.restLeft,lifting:s.moving,forceUp:m.forceUp,forcePush:m.forcePush,showForces,unload:unloadAnim,wheelAngle:s.wheelAngle,celebration:s.finished},now/1000);updateHud();
 }
 renderShelf();drawDesign();requestAnimationFrame(frame);
 })();
