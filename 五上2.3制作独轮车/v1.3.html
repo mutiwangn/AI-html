@@ -185,7 +185,7 @@
   WheelbarrowGame.prototype.reset = function (design) {
     this.design = normalizeDesign(design || this.design);
     this._forceIntegral = 0;
-    this._rng = 20261104;
+    this._rng = ((Math.random() * 4294967296) >>> 0) || 20261104;
     this._dropRemaining = -Math.log(Math.max(1e-6, this._random()));
     this.state = {
       status: 'ready', x: 0, direction: 1,
@@ -889,7 +889,7 @@ P.setViewMode=function(mode){
 P._setupVR=function(s){
  var heading=s.direction===-1?-1:1,yaw=this.yaw,pitch=this.pitch,eye,target,forward;
  if(this.viewMode==='first'){
-   eye=[s.x-heading*1.53,1.64,.08];
+   eye=[s.x-heading*1.88,1.68,.08];
    forward=unit([heading*Math.cos(yaw),-.18+(pitch-.54)*-.85,Math.sin(yaw)]);
    target=[eye[0]+forward[0]*7,eye[1]+forward[1]*7,eye[2]+forward[2]*7];
  } else {
@@ -911,7 +911,7 @@ P._vrDepth=function(p){
 P.project=function(p){
  if(!this.vrCamera)return oldProject.call(this,p);
  var v=vector(this._vrPoint(p),this.vrCamera.eye),cam=this.vrCamera;
- var dep=dot(v,cam.forward),z=Math.max(.095,dep),f=this.height*1.06;
+ var dep=dot(v,cam.forward),z=Math.max(.095,dep),f=this.height*(this.viewMode==='first'?.92:1.06);
  return {x:this.width*.5+f*dot(v,cam.right)/z,
          y:this.height*.58-f*dot(v,cam.up)/z, depth:-dep};
 };
@@ -1009,8 +1009,8 @@ P._environment=function(s){
    var b=s.dropped[i];
    this._box(b.x,.13,b.z,.31,.23,.18,'#c46c4d',null,'#8e4a36');
  }
- this.labels.push({p:[-2.1,1.0,3.1],text:'砖场',color:'#284d61',size:19});
- this.labels.push({p:[22.5,1.2,3.2],text:'工地',color:'#284d61',size:19});
+ this.labels.push({p:[-2.1-(s.x||0),1.0,3.1],text:'砖场',color:'#284d61',size:19});
+ this.labels.push({p:[22.5-(s.x||0),1.2,3.2],text:'工地',color:'#284d61',size:19});
  var source=this.project([-2.1,.55,3.1]);
  var dest=this.project([22.5,.55,3.2]);
  this.hitRegions.source={x:source.x,y:source.y,r:65};
@@ -1299,7 +1299,7 @@ function updateHud(){
  setText('timerValue',timeText(s.elapsed));
  let thresholds=WheelbarrowGame.config.starThresholds;
  setText('starHint',s.elapsed<=thresholds[0]?'★★★ ≤ '+timeText(thresholds[0]):s.elapsed<=thresholds[1]?'★★☆ ≤ '+timeText(thresholds[1]):'★☆☆ 完成得星');
- setText('energyValue',Math.ceil(st));
+ setText('energyValue',Math.round(st));
  $('energyFill').style.width=st+'%';
  $('energyFill').classList.toggle('low',st<25);
  $('energyTrack').setAttribute('aria-valuenow',Math.round(st));
