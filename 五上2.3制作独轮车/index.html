@@ -21,28 +21,6 @@
 @media(max-width:1100px){.design-tools .blueprint-tag{display:none}}
 @media(max-width:800px) and (orientation:portrait){.draw-top{padding-right:0;gap:9px}.draw-top h2{font-size:18px}.draw-top p{max-width:220px}.design-tools{gap:0}.lever-btn{font-size:12px;padding:7px 9px;min-height:38px;gap:4px}.lever-btn svg{width:17px;height:17px}}
 @media(max-height:520px) and (orientation:landscape){.lever-btn{font-size:12px;min-height:31px;padding:5px 9px}}
-
-/* v1.3 focus: terrain occupies the screen; bulk-load slider appears only at source. */
-.game-stage{background:linear-gradient(#bad9ef 0%,#dfeaed 64%,#b7c7be 100%)}
-.game-canvas{image-rendering:auto}
-.batch-widget{position:absolute;z-index:4;left:24px;bottom:70px;display:flex;flex-direction:column;gap:7px;min-width:196px;max-width:228px;padding:12px 14px;background:rgba(255,255,255,.94);border:1px solid #d2e0e8;border-radius:10px;box-shadow:0 8px 22px #14364c24;color:#173248}
-.batch-widget label{font-size:16px;font-weight:800;white-space:nowrap}
-.batch-widget label b{font-size:25px;color:var(--blue);font-variant-numeric:tabular-nums}
-.batch-widget input{width:100%;accent-color:var(--blue);cursor:pointer;height:20px;touch-action:pan-x}
-.overload-note{font-size:12px;color:#667f90;font-weight:700}
-.overload-note.danger{color:#ba3b23}
-#capacityValue.danger{color:#c2442c;font-weight:800}
-.stage-heading h2{color:#fff;text-shadow:0 2px 7px #163044aa;font-weight:900}
-.stage-heading p{color:#f3fbff;text-shadow:0 2px 5px #173248cc;font-weight:700}
-.stage-tools{z-index:4}
-.stage-tools button{background:#fffffff0;backdrop-filter:blur(5px)}
-.route{background:#ffffffb8;max-width:570px;left:50%;right:auto;transform:translateX(-50%);padding:9px 12px 16px;border-radius:10px;bottom:12px}
-.route-distance{top:18px}
-#cameraBtn{min-width:100px}
-@media(max-width:1000px){.batch-widget{left:12px;bottom:62px;min-width:152px;padding:9px 10px}.batch-widget label{font-size:13px}.batch-widget label b{font-size:20px}.route{max-width:47%;left:auto;right:10px;transform:none}}
-@media(max-width:800px) and (orientation:portrait){.batch-widget{bottom:52px;width:150px;min-width:0;gap:4px;padding:7px 9px}.batch-widget label{font-size:12px}.batch-widget label b{font-size:19px}.overload-note{font-size:10px}.route{max-width:51%;bottom:10px;padding:7px 7px 14px}.route-end{font-size:10px}.stage-heading{max-width:48%}.stage-heading h2{font-size:16px}.stage-heading p{font-size:10px}.stage-tools{right:7px;top:7px}#cameraBtn{min-width:50px}.controls{height:144px}}
-@media(max-height:520px) and (orientation:landscape){.batch-widget{left:8px;bottom:38px;min-width:150px;padding:6px 8px;gap:1px}.batch-widget label{font-size:12px}.batch-widget label b{font-size:17px}.route{bottom:6px;padding:4px 8px 12px}.stage-heading p{display:none}}
-
 </style>
 </head>
 <body>
@@ -55,20 +33,20 @@
  </header>
  <section class="page design-page" id="designPage" aria-label="二维设计工坊">
   <aside class="shelf"><h2><span data-icon="parts"></span>材料架</h2><div id="partGroups" style="display:contents"></div><div class="shelf-note"><div class="color-set" id="colors" aria-label="车斗颜色"></div><button class="reset-link" id="resetDesign">重置</button></div></aside>
-  <main class="drawing" id="drawing"><div class="draw-top"><div><h2>拼出你的独轮车</h2><p>选择部件 · 拖动车轮和车斗调整位置</p></div><div class="design-tools"><button class="soft-btn lever-btn" id="leverBtn" aria-pressed="false"><span data-icon="force"></span><span id="leverBtnLabel">显示三点</span></button><div class="blueprint-tag"><span data-icon="plan"></span>二维结构图</div></div></div><div class="design-stage"><svg id="designSvg" class="design-svg" viewBox="0 0 850 520" role="group" aria-label="独轮车二维设计，蓝色控制点可以左右拖动"></svg></div><div class="design-bottom"><div class="design-summary"><div class="summary-cell"><small>空车质量</small><strong id="designMass">10.4</strong><em>kg</em></div><div class="summary-cell"><small>额定装砖</small><strong id="designCapacity">8</strong><em>块</em></div><div class="summary-cell"><small>车把长度</small><strong id="designLength">1.95</strong><em>m</em></div></div><button class="primary build-btn" id="buildBtn"><span data-icon="weld"></span>组装出发<span data-icon="arrow"></span></button></div></main>
+  <main class="drawing" id="drawing"><div class="draw-top"><div><h2>拼出你的独轮车</h2><p>选择部件 · 拖动车轮和车斗调整位置</p></div><div class="design-tools"><button class="soft-btn lever-btn" id="leverBtn" aria-pressed="false"><span data-icon="force"></span><span id="leverBtnLabel">显示三点</span></button><div class="blueprint-tag"><span data-icon="plan"></span>二维结构图</div></div></div><div class="design-stage"><svg id="designSvg" class="design-svg" viewBox="0 0 850 520" role="group" aria-label="独轮车二维设计，蓝色控制点可以左右拖动"></svg></div><div class="design-bottom"><div class="design-summary"><div class="summary-cell"><small>空车质量</small><strong id="designMass">10.4</strong><em>kg</em></div><div class="summary-cell"><small>最多装砖</small><strong id="designCapacity">8</strong><em>块</em></div><div class="summary-cell"><small>车把长度</small><strong id="designLength">1.95</strong><em>m</em></div></div><button class="primary build-btn" id="buildBtn"><span data-icon="weld"></span>组装出发<span data-icon="arrow"></span></button></div></main>
  </section>
  <section class="page game-page" id="gamePage" hidden aria-label="立体工地搬运挑战">
-  <div class="hud"><div class="metric"><label>已送达</label><strong><span id="deliveredValue">0</span><small>/ 200 块</small></strong><span class="submetric" id="missionSub">把全部砖块送到施工区</span></div><div class="metric"><label>车上砖块</label><strong><span id="cargoValue">0</span><small>块</small></strong><span class="submetric" id="capacityValue">容量 8 块</span></div><div class="metric"><label>货物质量</label><strong><span id="massValue">0</span><small>kg</small></strong><span class="submetric" id="weightValue">重力 0 N</span></div><div class="metric force" id="forceMetric"><label>双手用力</label><strong><span id="forceValue">0</span><small>N</small></strong><span class="submetric" id="forceSub">起车预计 0 N</span></div><div class="metric"><label>工地用时</label><strong id="timerValue">0.0 分钟</strong><span class="submetric" id="starHint">★★★ ≤ 180 分钟</span></div></div>
-  <div class="game-stage" id="gameStage"><canvas class="game-canvas" id="gameCanvas" aria-label="可拖动观察的三维工地，支持跟随和第一视角"></canvas><div class="stage-heading"><h2 id="stageTitle">装砖，出发！</h2><p id="stageHint">选择装载数量，一次装车</p></div><div class="stage-tools"><button class="soft-btn" id="forcesBtn" aria-pressed="false"><span data-icon="force"></span>看受力</button><button class="soft-btn" id="cameraBtn" title="切换第一视角或跟随视角" aria-label="切换第一视角或跟随视角"><span data-icon="orbit"></span><span id="cameraModeLabel">第一视角</span></button></div><div class="batch-widget" id="batchWidget"><label for="batchSlider">计划装载 <b id="batchValue">8</b> 块</label><input id="batchSlider" type="range" min="1" max="14" value="8" aria-label="本趟装载砖块数"><span class="overload-note" id="overloadNote">额定 8 块</span></div><div class="route"><div class="route-end"><span data-icon="bricks"></span>砖场</div><div class="route-track"><div class="route-fill" id="routeFill"></div><div class="route-cart" id="routeCart"><span data-icon="cart"></span></div><span class="route-distance">20 m</span></div><div class="route-end"><span data-icon="flag"></span>工地</div></div><div class="assembly-layer" id="assemblyLayer" hidden><div class="assembly-label" id="assemblyLabel">部件定位</div><div class="assembly-progress"><i id="assemblyProgress"></i></div></div><div class="rest-layer" id="restLayer" hidden><div class="rest-card"><span data-icon="water"></span><div><strong>休息 10 分钟</strong><small>工地时间加速 · 体力恢复中</small></div><span class="rest-time" id="restTime">10.0 分钟</span></div></div><div class="float-toast" id="toast" role="status" aria-live="polite"></div></div>
-  <div class="controls"><div class="energy"><div class="energy-head"><span><span data-icon="bolt"></span>体力</span><b id="energyValue">100</b></div><div class="energy-track" role="progressbar" aria-label="体力" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" id="energyTrack"><div class="energy-fill" id="energyFill"></div></div><div class="energy-caption">用力越大，体力下降越快</div></div><div class="action-buttons"><div class="load-group"><button class="remove-btn" id="removeBtn" title="清空车斗" aria-label="清空车斗">−</button><button class="load-btn" id="loadBtn"><span data-icon="bricks"></span><span id="loadLabel">装砖</span></button></div><button class="primary push-btn" id="pushBtn"><span data-icon="cart"></span><span><span id="pushLabel">按住推车</span><small>松手即停 · 空格也可以</small></span></button><button class="drink-btn" id="drinkBtn"><span data-icon="water"></span><span>休息 10 分钟</span></button></div><div class="task-status"><b id="stationValue">砖场待命</b><span id="stockValue">砖场剩余 200 块</span></div></div>
+  <div class="hud"><div class="metric"><label>已送达</label><strong><span id="deliveredValue">0</span><small>/ 24 块</small></strong><span class="submetric" id="missionSub">把砖送到右侧工地</span></div><div class="metric"><label>车上砖块</label><strong><span id="cargoValue">0</span><small>块</small></strong><span class="submetric" id="capacityValue">容量 8 块</span></div><div class="metric"><label>货物质量</label><strong><span id="massValue">0</span><small>kg</small></strong><span class="submetric" id="weightValue">重力 0 N</span></div><div class="metric force" id="forceMetric"><label>双手用力</label><strong><span id="forceValue">0</span><small>N</small></strong><span class="submetric" id="forceSub">起车预计 0 N</span></div><div class="metric"><label>任务计时</label><strong id="timerValue">00:00</strong><span class="submetric" id="starHint">★★★ ≤ 55 秒</span></div></div>
+  <div class="game-stage" id="gameStage"><canvas class="game-canvas" id="gameCanvas" aria-label="可拖动旋转视角的立体独轮车和工地"></canvas><div class="stage-heading"><h2 id="stageTitle">装砖，出发！</h2><p id="stageHint">点砖堆装车，也可以长按装砖</p></div><div class="stage-tools"><button class="soft-btn" id="forcesBtn" aria-pressed="false"><span data-icon="force"></span>看受力</button><button class="soft-btn" id="cameraBtn" title="恢复视角" aria-label="恢复视角"><span data-icon="orbit"></span><span>视角</span></button></div><div class="route"><div class="route-end"><span data-icon="bricks"></span>砖场</div><div class="route-track"><div class="route-fill" id="routeFill"></div><div class="route-cart" id="routeCart"><span data-icon="cart"></span></div><span class="route-distance">20 m</span></div><div class="route-end"><span data-icon="flag"></span>工地</div></div><div class="assembly-layer" id="assemblyLayer" hidden><div class="assembly-label" id="assemblyLabel">部件定位</div><div class="assembly-progress"><i id="assemblyProgress"></i></div></div><div class="rest-layer" id="restLayer" hidden><div class="rest-card"><span data-icon="water"></span><div><strong>喝水休息</strong><small>休息时间也计入成绩</small></div><span class="rest-time" id="restTime">5</span></div></div><div class="float-toast" id="toast" role="status" aria-live="polite"></div></div>
+  <div class="controls"><div class="energy"><div class="energy-head"><span><span data-icon="bolt"></span>体力</span><b id="energyValue">100</b></div><div class="energy-track" role="progressbar" aria-label="体力" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" id="energyTrack"><div class="energy-fill" id="energyFill"></div></div><div class="energy-caption">用力越大，体力下降越快</div></div><div class="action-buttons"><div class="load-group"><button class="remove-btn" id="removeBtn" title="放回一块砖" aria-label="放回一块砖">−</button><button class="load-btn" id="loadBtn"><span data-icon="bricks"></span><span id="loadLabel">装砖</span></button></div><button class="primary push-btn" id="pushBtn"><span data-icon="cart"></span><span><span id="pushLabel">按住推车</span><small>松手即停 · 空格也可以</small></span></button><button class="drink-btn" id="drinkBtn"><span data-icon="water"></span><span>休息 5 秒</span></button></div><div class="task-status"><b id="stationValue">砖场待命</b><span id="stockValue">砖场剩余 24 块</span></div></div>
  </section>
 </div>
-<div class="dialog-backdrop" id="rulesDialog" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="rulesTitle"><button class="icon-btn close-dialog" id="closeRules" aria-label="关闭规则" data-icon="close"></button><h2 id="rulesTitle">工地搬运挑战</h2><p>把 <b>200 块砖</b>送到 20 m 外的工地。每块 <b>2 kg</b>。一次选择装载数量，超载后可能掉砖，掉落的砖必须捡回。</p><div class="rules-flow"><div class="rule-item"><span data-icon="bricks"></span>滑动选数量<br>一次装车</div><div class="rule-item"><span data-icon="cart"></span>跟随／第一视角<br>按住推车前进</div><div class="rule-item"><span data-icon="water"></span>体力到 0<br>休息 10 分钟</div></div><table class="stars-table" aria-label="星级标准"><tbody><tr><td>★★★</td><td>180 分钟以内 · 不超载</td></tr><tr><td>★★☆</td><td>260 分钟以内</td></tr><tr><td>★☆☆</td><td>完成全部搬运</td></tr></tbody></table><p>计时统一为工地模拟分钟：装砖、卸砖、走路、捡砖都计入时间。喝水休息计入工地 10 分钟，用加速动画完成。允许超载，但可能掉砖；出现超载运送，最多获得两颗星。</p><div class="science-note"><b>科学模型</b> · 双手用力包含向上托举与向前推动。停车后由支脚承重，用力归零。受力采用平路、匀速近似，g = 10 N/kg；部件质量、容量、滚阻和体力为游戏设定。<br><b>设计与测试</b> · 拖动车轮和车斗、调整车把与容量，再用相同任务比较。三星仅表示本游戏搬运效率，真实作品还要测试牢固与稳定。</div><div class="dialog-actions"><button class="primary" id="rulesStart">知道了，开始设计</button></div></section></div>
-<div class="dialog-backdrop" id="resultDialog" hidden><section class="dialog result-dialog" role="dialog" aria-modal="true" aria-labelledby="resultTitle"><div class="result-kicker">200 / 200 块 · 全部送达</div><h2 id="resultTitle">搬运任务完成！</h2><div class="result-stars" id="resultStars" aria-label="星级"></div><div class="result-time"><span id="resultTime">0.0</span><small> 分钟</small></div><div class="result-stats"><div><b id="resultTrips">0</b><span>搬运趟数</span></div><div><b id="resultForce">0 N</b><span>推行时平均用力</span></div><div><b id="resultRests">0</b><span>喝水休息次数</span></div></div><div class="comparison" id="comparison"></div><p class="result-question">改一改结构，能更省力、更快完成吗？</p><div class="dialog-actions"><button class="secondary" id="retryBtn"><span data-icon="replay"></span>原车再挑战</button><button class="primary" id="redesignBtn"><span data-icon="plan"></span>改装再挑战</button></div></section></div>
+<div class="dialog-backdrop" id="rulesDialog" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="rulesTitle"><button class="icon-btn close-dialog" id="closeRules" aria-label="关闭规则" data-icon="close"></button><h2 id="rulesTitle">工地搬运挑战</h2><p>把 <b>24 块砖</b>全部送到 20 m 外的工地。每块砖 <b>2 kg</b>，从装入第一块砖开始计时。</p><div class="rules-flow"><div class="rule-item"><span data-icon="bricks"></span>长按装砖<br>装多少自己定</div><div class="rule-item"><span data-icon="cart"></span>按住推车<br>送到终点再卸砖</div><div class="rule-item"><span data-icon="water"></span>体力到 0<br>自动喝水休息 5 秒</div></div><table class="stars-table" aria-label="星级标准"><tbody><tr><td>★★★</td><td>55 秒以内</td></tr><tr><td>★★☆</td><td>85 秒以内</td></tr><tr><td>★☆☆</td><td>完成全部搬运</td></tr></tbody></table><p>装卸、往返和休息都计时。中途查看规则或切到后台时，整局同步暂停。</p><div class="science-note"><b>科学模型</b> · 双手用力包含向上托举与向前推动。停车后由支脚承重，用力归零。受力采用平路、匀速近似，g = 10 N/kg；部件质量、容量、滚阻和体力为游戏设定。<br><b>设计与测试</b> · 拖动车轮和车斗、调整车把与容量，再用相同任务比较。三星仅表示本游戏搬运效率，真实作品还要测试牢固与稳定。</div><div class="dialog-actions"><button class="primary" id="rulesStart">知道了，开始设计</button></div></section></div>
+<div class="dialog-backdrop" id="resultDialog" hidden><section class="dialog result-dialog" role="dialog" aria-modal="true" aria-labelledby="resultTitle"><div class="result-kicker">24 / 24 块 · 全部送达</div><h2 id="resultTitle">搬运任务完成！</h2><div class="result-stars" id="resultStars" aria-label="星级"></div><div class="result-time"><span id="resultTime">0.0</span><small> 秒</small></div><div class="result-stats"><div><b id="resultTrips">0</b><span>搬运趟数</span></div><div><b id="resultForce">0 N</b><span>推行时平均用力</span></div><div><b id="resultRests">0</b><span>喝水休息次数</span></div></div><div class="comparison" id="comparison"></div><p class="result-question">改一改结构，能更省力、更快完成吗？</p><div class="dialog-actions"><button class="secondary" id="retryBtn"><span data-icon="replay"></span>原车再挑战</button><button class="primary" id="redesignBtn"><span data-icon="plan"></span>改装再挑战</button></div></section></div>
 <div class="dialog-backdrop" id="changeDialog" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="changeTitle" style="max-width:460px"><h2 id="changeTitle">返回设计台？</h2><p>这一轮搬运将结束。改装后会重新开始计时，已完成的历史成绩会保留。</p><div class="dialog-actions"><button class="secondary" id="cancelChange">继续搬运</button><button class="primary" id="confirmChange">返回改装</button></div></section></div>
 <script>
 /*
- * 制作独轮车 · 工地搬运挑战 v1.4
+ * 制作独轮车 · 工地搬运挑战 v1.2
  * 教学依据：五上教材第二单元第3课，印刷页42–45；教学用书“材料超市”、测试评价和改进。
  * 本文件完整离线可运行，无CDN、账号、接口与外部资源。
  * 车体、游戏逻辑、渲染器分层；可替换 window.WHEELBARROW_MODEL_FACTORY 生成的模型。
@@ -77,7 +55,7 @@
 </script>
 <script>
 /*
- * Wheelbarrow classroom game — independent classroom simulation.
+ * Wheelbarrow classroom game — independent, deterministic simulation.
  * No DOM, rendering, networking, or external dependencies.
  * Units: metres, seconds, kilograms, newtons. g = 10 N/kg is a classroom
  * approximation. Forward force models steady rolling on a level road;
@@ -88,18 +66,15 @@
   'use strict';
 
   var CONFIG = Object.freeze({
-    totalBricks: 200,
+    totalBricks: 24,
     brickMass: 2,
     routeLength: 20,
     speed: 2,
     gravity: 10,
     restSeconds: 5,
-    restGameMinutes: 10, loadCost: 1.35, pickupCost: 2.1, maxOverload: 6,
-    loadMinutesPerBrick: .07, unloadMinutesPerBrick: .06, removeMinutesPerBrick: .06,
-    pickupMinutesPerBrick: .12, loadedWalkSpeed: 1.0, emptyWalkSpeed: 1.35,
     bodyCenter: 0.88,
-    scoringVersion: 'v1.4',
-    starThresholds: Object.freeze([180, 260]),
+    scoringVersion: 'v1.1',
+    starThresholds: Object.freeze([55, 85]),
     defaultDesign: Object.freeze({
       body: 'standard', frame: 'light', tray: 'medium', wheel: 'large',
       axle: 0.34, cargoX: 0.94, color: '#ef8259'
@@ -155,7 +130,7 @@
   }
   function evaluateForce(design, cargo) {
     var d = normalizeDesign(design), stats = getDesignStats(d);
-    var count = clamp(Math.floor(validNumber(cargo, 0)), 0, stats.capacity + CONFIG.maxOverload);
+    var count = clamp(Math.floor(validNumber(cargo, 0)), 0, stats.capacity);
     var goodsMass = count * CONFIG.brickMass;
     var totalMass = stats.mass + goodsMass;
     var effortArm = stats.handleX - d.axle;
@@ -174,17 +149,10 @@
       loadArm: loadArm, effortArm: effortArm
     };
   }
-  function worksiteMinutes(s) {
-    var partialRest = s.resting ? CONFIG.restSeconds - s.restLeft : 0;
-    var finishedRests = s.rests - (s.resting ? 1 : 0);
-    var nonRestSeconds = Math.max(0, s.elapsed - finishedRests * CONFIG.restSeconds - partialRest);
-    return nonRestSeconds / 60 + s.taskMinutes + s.travelExtraMinutes +
-      finishedRests * CONFIG.restGameMinutes + partialRest / CONFIG.restSeconds * CONFIG.restGameMinutes;
-  }
-  function rateTime(minutes) {
+  function rateTime(elapsed) {
     var thresholds = CONFIG.starThresholds;
     for (var i = 0; i < thresholds.length; i++) {
-      if (minutes <= thresholds[i] + EPS) return 3 - i;
+      if (elapsed <= thresholds[i] + EPS) return 3 - i;
     }
     return 1;
   }
@@ -194,13 +162,10 @@
   WheelbarrowGame.prototype.reset = function (design) {
     this.design = normalizeDesign(design || this.design);
     this._forceIntegral = 0;
-    this._rng = ((Math.random() * 4294967296) >>> 0) || 20261104;
-    this._dropRemaining = -Math.log(Math.max(1e-6, this._random()));
     this.state = {
       status: 'ready', x: 0, direction: 1,
       cargo: 0, source: CONFIG.totalBricks, delivered: 0,
-      fallen: 0, dropped: [], dropEvent: 0, recovered: 0,
-      stamina: 100, elapsed: 0, taskMinutes: 0, travelExtraMinutes: 0, overloadTrips: 0, started: false,
+      stamina: 100, elapsed: 0, started: false,
       pushing: false, moving: false, resting: false,
       restLeft: 0, rests: 0, trips: 0, finished: false,
       wheelAngle: 0, meanForce: 0, peakForce: 0,
@@ -226,71 +191,37 @@
       s.x === CONFIG.routeLength && s.status === 'destination';
   };
 
-  WheelbarrowGame.prototype._random = function () {
-    this._rng = (Math.imul(this._rng, 1664525) + 1013904223) >>> 0;
-    return (this._rng + .5) / 4294967296;
-  };
-  WheelbarrowGame.prototype.addBatch = function (requested) {
+  WheelbarrowGame.prototype.addBrick = function () {
     var s = this.state;
-    if (!this._atSource() || s.source <= 0) return 0;
-    var limit = getDesignStats(this.design).capacity + CONFIG.maxOverload;
-    var want = clamp(Math.floor(validNumber(requested, 0)), 0, limit - s.cargo);
-    var count = Math.min(want, s.source, Math.floor((s.stamina + EPS) / CONFIG.loadCost));
-    if (count <= 0) { if (s.stamina < CONFIG.loadCost) this.drink(); return 0; }
-    s.cargo += count; s.source -= count;
-    s.taskMinutes += count * CONFIG.loadMinutesPerBrick;
-    s.stamina = Math.max(0, s.stamina - count * CONFIG.loadCost);
-    s.started = true; s.status = 'source';
-    if (s.stamina <= EPS) this.drink();
-    return count;
-  };
-  WheelbarrowGame.prototype.addBrick = function () { return this.addBatch(1) > 0; };
-  WheelbarrowGame.prototype.removeBatch = function (requested) {
-    var s = this.state;
-    if (!this._atSource() || s.cargo <= 0) return 0;
-    var n = Math.min(s.cargo, Math.max(1, Math.floor(validNumber(requested, s.cargo))));
-    s.cargo -= n; s.source += n;
-    s.taskMinutes += n * CONFIG.removeMinutesPerBrick;
-    return n;
+    if (!this._atSource() || s.source <= 0 || s.cargo >= getDesignStats(this.design).capacity) return false;
+    s.source--;
+    s.cargo++;
+    s.started = true;
+    s.status = 'source';
+    return true;
   };
 
   WheelbarrowGame.prototype.removeBrick = function () {
     var s = this.state;
-    return this.removeBatch(1) > 0;
+    if (!this._atSource() || s.cargo <= 0) return false;
+    s.cargo--;
+    s.source++;
+    return true;
   };
 
-  WheelbarrowGame.prototype.unloadAll = function () {
+  WheelbarrowGame.prototype.unloadBrick = function () {
     var s = this.state;
-    if (!this._atDestination() || s.cargo <= 0) return 0;
-    var n = s.cargo;
-    s.cargo = 0; s.delivered += n;
-    s.taskMinutes += n * CONFIG.unloadMinutesPerBrick;
-    if (s.delivered === CONFIG.totalBricks && s.source === 0 && s.fallen === 0) {
-      s.finished = true; s.status = 'finished';
-      s.pushing = false; s.moving = false;
-      s.stars = Math.min(rateTime(worksiteMinutes(s)), s.overloadTrips > 0 ? 2 : 3);
+    if (!this._atDestination() || s.cargo <= 0) return false;
+    s.cargo--;
+    s.delivered++;
+    if (s.delivered === CONFIG.totalBricks) {
+      s.finished = true;
+      s.status = 'finished';
+      s.pushing = false;
+      s.moving = false;
+      s.stars = rateTime(s.elapsed);
     }
-    return n;
-  };
-  WheelbarrowGame.prototype.unloadBrick = function () { return this.unloadAll() > 0; };
-  WheelbarrowGame.prototype.pickupDropped = function () {
-    var s = this.state;
-    if (s.moving || s.resting || s.finished || !s.dropped.length) return 0;
-    var can = Math.floor((s.stamina + EPS) / CONFIG.pickupCost);
-    if (!can) { this.drink(); return 0; }
-    var picked = 0;
-    for (var i = s.dropped.length - 1; i >= 0 && picked < can; i--) {
-      if (Math.abs(s.dropped[i].x - s.x) <= 2.0) {
-        s.dropped.splice(i, 1); picked++;
-      }
-    }
-    if (picked) {
-      s.fallen -= picked; s.cargo += picked; s.recovered += picked;
-      s.taskMinutes += picked * CONFIG.pickupMinutesPerBrick;
-      s.stamina = Math.max(0, s.stamina - picked * CONFIG.pickupCost);
-      if (s.stamina <= EPS) this.drink();
-    }
-    return picked;
+    return true;
   };
 
   WheelbarrowGame.prototype.setPushing = function (pushing) {
@@ -300,13 +231,12 @@
       s.moving = false;
       return true;
     }
-    if (!s.started || s.resting || s.finished || s.fallen > 0) return false;
+    if (!s.started || s.resting || s.finished) return false;
     if (s.status === 'source') {
       if (s.cargo <= 0) return false;
       s.status = 'outbound';
       s.direction = 1;
       s.trips++;
-      if (s.cargo > getDesignStats(this.design).capacity) s.overloadTrips++;
     } else if (s.status === 'destination') {
       if (s.cargo > 0) return false;
       s.status = 'returning';
@@ -378,27 +308,11 @@
         s.x = clamp(s.x + s.direction * CONFIG.speed * slice, 0, CONFIG.routeLength);
         s.stamina = Math.max(0, s.stamina - drain * slice);
         s.wheelAngle += s.direction * CONFIG.speed * slice / getDesignStats(this.design).radius;
-        var walkSpeed = s.cargo > 0 ? CONFIG.loadedWalkSpeed : CONFIG.emptyWalkSpeed;
-        s.travelExtraMinutes += Math.max(0, CONFIG.speed / walkSpeed - 1) * slice / 60;
         s.effortSeconds += slice;
         this._forceIntegral += f.force * slice;
         s.meanForce = this._forceIntegral / s.effortSeconds;
         s.peakForce = Math.max(s.peakForce, f.force);
         remaining -= slice;
-        var excess = s.cargo - getDesignStats(this.design).capacity;
-        if (s.direction === 1 && excess > 0) {
-          var risk = 0.025 + 0.18 * Math.pow(excess / getDesignStats(this.design).capacity, 1.2);
-          this._dropRemaining -= risk * slice;
-          if (this._dropRemaining <= 0) {
-            var n = Math.min(s.cargo, excess >= 4 ? 2 : 1);
-            for (var k = 0; k < n; k++) {
-              s.dropped.push({x:s.x, z:(k%2 ? -.85 : .85), born:s.elapsed, id:s.dropEvent * 3 + k});
-            }
-            s.cargo -= n; s.fallen += n; s.dropEvent++;
-            s.pushing = false; s.moving = false;
-            this._dropRemaining = -Math.log(Math.max(1e-6, this._random()));
-          }
-        }
       }
       if (untilArrival <= slice + EPS) {
         s.x = target;
@@ -426,9 +340,6 @@
       force: active ? f.force : 0,
       needForce: f.force, needUp: f.forceUp, needPush: f.forcePush,
       remaining: CONFIG.totalBricks - s.delivered, stars: s.stars,
-      fallen: s.fallen, maxCargo: stats.capacity + CONFIG.maxOverload,
-      overloaded: s.cargo > stats.capacity, overloadTrips: s.overloadTrips,
-      gameMinutes: worksiteMinutes(s),
       normalForce: f.normalForce, loadArm: f.loadArm, effortArm: f.effortArm
     };
   };
@@ -879,7 +790,7 @@
       var foot=personTr([geom.L-.1,.3,.55]),dir=s.direction===-1?-1:1;
       this._arrow(foot,[foot[0]+dir*clamp((s.forcePush||0)/70,.4,1.15),foot[1],foot[2]],'#357fbd','前推 '+Math.round(s.forcePush||0)+' N');
     }
-    if(s.resting&&head){var hp=this.project(head);this._text(hp.x,hp.y-8,'喝水休息 '+(s.restMinutesLeft||0).toFixed(1)+'分钟','#357f9e',clamp(this.scale*.22,16,22),true);}
+    if(s.resting&&head){var hp=this.project(head);this._text(hp.x,hp.y-8,'喝水休息 '+Math.ceil(Math.max(0,s.restLeft||0))+'秒','#357f9e',clamp(this.scale*.22,16,22),true);}
     if(s.celebration){
       for(var conf=0;conf<38;conf++){var px=((conf*71.7+time*(conf%3-1)*17)%w+w)%w,py=((conf*39+time*57)%h+h)%h;c.save();c.translate(px,py);c.rotate(time+conf);c.fillStyle=['#ef985e','#5c9dc7','#e1be60','#f7f9f3'][conf%4];c.fillRect(-3,-6,6,12);c.restore();}
     }
@@ -887,169 +798,6 @@
   global.WheelbarrowRenderer=WheelbarrowRenderer;
 })(typeof window!=='undefined'?window:globalThis);
 
-</script>
-<script>
-/* v1.3 immersive coordinate-space construction site. Offline procedural mesh geometry. */
-(function(){
-'use strict';
-var P=WheelbarrowRenderer.prototype;
-var oldProject=P.project, oldFace=P._face, oldRender=P.render;
-var oldShadow=P._shadow, oldPerson=P._person, oldPile=P._brickPile;
-var vector=function(a,b){return [a[0]-b[0],a[1]-b[1],a[2]-b[2]];};
-var dot=function(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2];};
-var cross=function(a,b){return [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];};
-var unit=function(a){var d=Math.hypot(a[0],a[1],a[2])||1;return [a[0]/d,a[1]/d,a[2]/d];};
-P.viewMode='follow';
-P.setViewMode=function(mode){
- this.viewMode=mode==='first'?'first':'follow';
- this.setCamera(this.viewMode==='first'?0:-.42,this.viewMode==='first'?.54:.60);
-};
-P._setupVR=function(s){
- var heading=s.direction===-1?-1:1,yaw=this.yaw,pitch=this.pitch,eye,target,forward;
- if(this.viewMode==='first'){
-   eye=[s.x-heading*1.88,1.68,.08];
-   forward=unit([heading*Math.cos(yaw),-.18+(pitch-.54)*-.85,Math.sin(yaw)]);
-   target=[eye[0]+forward[0]*7,eye[1]+forward[1]*7,eye[2]+forward[2]*7];
- } else {
-   var orbit=4.5*Math.cos((pitch-.15)*.45);
-   target=[s.x+heading*.82,.78,0];
-   eye=[target[0]-heading*orbit*Math.cos(yaw),2.24+2*Math.sin(pitch*.7),orbit*Math.sin(yaw)];
-   forward=unit(vector(target,eye));
- }
- var right=unit(cross(forward,[0,1,0]));
- var up=unit(cross(right,forward));
- this.vrCamera={eye:eye,right:right,up:up,forward:forward};
-};
-P._vrPoint=function(p){
- return this._vrCart?[p[0]+(this._vrState.x||0),p[1],p[2]]:p;
-};
-P._vrDepth=function(p){
- return dot(vector(this._vrPoint(p),this.vrCamera.eye),this.vrCamera.forward);
-};
-P.project=function(p){
- if(!this.vrCamera)return oldProject.call(this,p);
- var v=vector(this._vrPoint(p),this.vrCamera.eye),cam=this.vrCamera;
- var dep=dot(v,cam.forward),z=Math.max(.095,dep),f=this.height*(this.viewMode==='first'?.92:1.06);
- return {x:this.width*.5+f*dot(v,cam.right)/z,
-         y:this.height*.58-f*dot(v,cam.up)/z, depth:-dep};
-};
-P._face=function(points,color,edge,unlit){
- if(!this.vrCamera)return oldFace.call(this,points,color,edge,unlit);
- if(points.length<3)return;
- var out=[],prev=points[points.length-1],dprev=this._vrDepth(prev),near=.12;
- for(var i=0;i<points.length;i++){
-   var cur=points[i],dcur=this._vrDepth(cur),pin=dprev>=near,cin=dcur>=near;
-   if(pin!==cin){
-     var t=(near-dprev)/(dcur-dprev),crossing=[
-       prev[0]+(cur[0]-prev[0])*t,
-       prev[1]+(cur[1]-prev[1])*t,
-       prev[2]+(cur[2]-prev[2])*t];
-     out.push(crossing);
-   }
-   if(cin)out.push(cur);
-   prev=cur;dprev=dcur;
- }
- if(out.length>=3)oldFace.call(this,out,color,edge,unlit);
-};
-P._shadow=function(x,z,rx,rz,alpha){
- if(!this.vrCamera)return oldShadow.call(this,x,z,rx,rz,alpha);
- // The 3D ground is rendered first; keep ground anchors stable in both camera modes.
-};
-P._person=function(d,s,time,tr,railY,handleY){
- if(this.vrCamera&&this.viewMode==='first')return null;
- return oldPerson.call(this,d,s,time,tr,railY,handleY);
-};
-P._brickPile=function(x,z,count,delivered){
- if(!this.vrCamera)return oldPile.call(this,x,z,count,delivered);
- this._box(x,.09,z,1.9,.18,1.42,'#9ca7a7');
- for(var rail=-1;rail<=1;rail+=2)this._box(x,.16,z+rail*.61,1.96,.10,.10,'#9c764f');
- var amount=Math.min(65,Math.ceil(Math.max(0,count)/3));
- for(var i=0;i<amount;i++){
-   var col=i%5,row=Math.floor(i/5)%3,layer=Math.floor(i/15);
-   this._box(x+(col-2)*.34,.27+layer*.155,z+(row-1)*.39,
-      .32,.145,.32,delivered?'#c98e72':(i%4===0?'#d58a67':'#b86f52'),null,'#9f5a46');
- }
-};
-P._environment=function(s){
- this._vrState=s;this._vrCart=false;this._setupVR(s);
- var i,x,z;
- // Fixed world positions. Player and cart move relative to these objects.
- this._face([[-16,-.045,-9],[38,-.045,-9],[38,-.045,9],[-16,-.045,9]],'#cbd5c7',null,true);
- this._face([[-14,-.03,-2.05],[35,-.03,-2.05],[35,-.03,2.05],[-14,-.03,2.05]],'#7e919f',null,true);
- this._face([[-14,-.025,-1.91],[35,-.025,-1.91],[35,-.025,1.91],[-14,-.025,1.91]],'#c8d2d7',null,true);
- for(i=-7;i<=18;i++){
-   x=i*2.0;
-   this._face([[x,.002,-.055],[x+.72,.002,-.055],[x+.72,.002,.055],[x,.002,.055]],'#fbfaf1',null,true);
- }
- for(var side=-1;side<=1;side+=2){
-   z=side*2.12;
-   this._box(10,.05,z,50,.09,.15,'#e3ae50');
-   for(i=-8;i<=23;i++){
-     x=i*1.5;
-     this._rod([x,.01,side*5.15],[x,1.65,side*5.15],.038,'#789aa8',null,6);
-     if(i<23){
-       this._rod([x,1.5,side*5.15],[x+1.5,1.5,side*5.15],.030,'#7a9ca7',null,5);
-       this._rod([x,.76,side*5.15],[x+1.5,.76,side*5.15],.022,'#a9bac0',null,5);
-     }
-   }
- }
- // A stocked pallet at x=-2.5; a destination and active building x=22.5.
- this._brickPile(-2.1,3.1,s.source||0,false);
- this._box(-4.9,.8,3.75,2.1,1.6,2.2,'#e4c091');
- this._box(-4.9,1.69,3.75,2.27,.11,2.35,'#6a8396');
- this._box(-3.4,.98,4.98,.06,1.9,.06,'#587789');
- this._box(-3.4,1.83,4.98,2.0,.09,.10,'#587789');
- this._cone(-1.5,1.78);this._cone(.4,1.78);
- this._box(22.5,.08,3.2,3.4,.16,3.1,'#b3c2c3');
- this._brickPile(22.5,3.2,s.delivered||0,true);
- this._cone(21.2,1.8);this._cone(24.5,1.8);
- // Structural steel, scaffold, cement pillars and a small tower crane.
- for(i=0;i<5;i++){
-   x=17+i*1.8;
-   for(var sg=-1;sg<=1;sg+=2){
-     z=sg*5.95;
-     this._rod([x,0,z],[x,4.2,z],.080,'#c0a15e',null,8);
-   }
-   this._rod([x,2.1,-5.95],[x,2.1,5.95],.04,'#cba45a',null,6);
-   this._rod([x,4.1,-5.95],[x,4.1,5.95],.04,'#d4b05f',null,6);
- }
- this._box(21.2,3.1,-7.4,8.3,6.2,1.6,'#9caab0');
- this._box(21.2,6.28,-7.4,8.6,.17,1.8,'#647f94');
- for(i=17;i<26;i+=2){
-   this._box(i,3.0,-6.53,.66,.88,.04,'#7a9dae');
-   this._box(i,4.5,-6.53,.66,.88,.04,'#7a9dae');
- }
- this._rod([26,0,6.9],[26,9.0,6.9],.14,'#ddac52',null,8);
- this._rod([22,8.5,6.9],[30,8.5,6.9],.075,'#ddac52',null,8);
- this._rod([28.3,8.5,6.9],[28.3,4.2,6.9],.018,'#394e5f',null,5);
- // Ground litter and reclaimed bricks stay at their actual drop coordinates.
- for(i=0;i<(s.dropped||[]).length;i++){
-   var b=s.dropped[i],fall=Math.min(1,Math.max(0,((s.elapsed||0)-(b.born||0))/.68));
-   this._box(b.x+.20*fall,.14+Math.pow(1-fall,2)*.82,b.z*fall,.31,.23,.18,'#c46c4d',null,'#8e4a36');
- }
- this.labels.push({p:[-2.1-(s.x||0),1.0,3.1],text:'砖场',color:'#284d61',size:19});
- this.labels.push({p:[22.5-(s.x||0),1.2,3.2],text:'工地',color:'#284d61',size:19});
- var source=this.project([-2.1,.55,3.1]);
- var dest=this.project([22.5,.55,3.2]);
- this.hitRegions.source={x:source.x,y:source.y,r:65};
- this.hitRegions.destination={x:dest.x,y:dest.y,r:65};
- if(s.dropped&&s.dropped.length){
-   var brick=this.project([s.dropped[0].x,.23,s.dropped[0].z]);
-   this.hitRegions.fallen={x:brick.x,y:brick.y,r:90};
- }
- this._vrCart=true;
-};
-P.render=function(state,time){
- if(!state||state.mode==='assembly'){
-   this.vrCamera=null;this._vrCart=false;
-   return oldRender.call(this,state,time);
- }
- this._vrState=state;
- var result=oldRender.call(this,state,time);
- this._vrCart=false;
- return result;
-};
-})();
 </script>
 <script>
 (function(){
@@ -1195,23 +943,7 @@ function beep(freq,dur=.07,type='sine',volume=.025){if(!sound)return;try{if(!aud
 $('soundBtn').onclick=()=>{sound=!sound;$('soundBtn').innerHTML=icon(sound?'sound':'soundoff');$('soundBtn').ariaPressed=String(sound);$('soundBtn').setAttribute('aria-label',sound?'关闭声音':'开启声音');beep(660,.09);};
 $('fullBtn').onclick=()=>{let doc=document.documentElement;try{if(document.fullscreenElement){document.exitFullscreen();}else if(doc.requestFullscreen){doc.requestFullscreen().catch(()=>toast('浏览器菜单中也可以开启全屏'));}else if(doc.webkitRequestFullscreen){doc.webkitRequestFullscreen();}else{toast('可使用浏览器的全屏显示');}}catch(e){toast('可使用浏览器的全屏显示');}};
 function switchPage(p){page=p;$('designPage').hidden=p!=='design';$('gamePage').hidden=p!=='game';$('designTab').classList.toggle('active',p==='design');$('gameTab').classList.toggle('active',p==='game');$('designTab').setAttribute('aria-current',p==='design'?'step':'false');$('gameTab').setAttribute('aria-current',p==='game'?'step':'false');}
-function startAssembly(){
- if(assembling||dialogOpen)return;
- stopHold();
- game=new WheelbarrowGame(design);
- recorded=false;
- switchPage('game');
- if(!renderer)renderer=new WheelbarrowRenderer($('gameCanvas'));
- renderer.setDesign(design);renderer.setViewMode('follow');
- $('cameraModeLabel').textContent='第一视角';
- let capacity=WheelbarrowGame.getDesignStats(design).capacity;
- $('batchSlider').max=capacity+WheelbarrowGame.config.maxOverload;
- $('batchSlider').value=capacity;
- assembling=true;assemblyTime=0;$('assemblyLayer').hidden=false;
- $('stageTitle').textContent='二维设计 → 三维建造';
- $('stageHint').textContent='车架焊接 · 车轮穿轴 · 进入虚拟工地';
- updateHud();
-}
+function startAssembly(){if(assembling||dialogOpen)return;stopHold();game=new WheelbarrowGame(design);recorded=false;switchPage('game');if(!renderer)renderer=new WheelbarrowRenderer($('gameCanvas'));renderer.setDesign(design);renderer.resetCamera();assembling=true;assemblyTime=0;$('assemblyLayer').hidden=false;$('stageTitle').textContent='二维设计 → 立体作品';$('stageHint').textContent='金属部件焊接，车轮穿轴安装';updateHud();}
 $('buildBtn').onclick=startAssembly;$('gameTab').onclick=()=>{if(page==='design')startAssembly();};
 function askRedesign(){if(page==='design')return;if(game&&game.state.started&&!game.state.finished){openDialog('changeDialog');}else returnToDesign();}
 function returnToDesign(){stopHold();closeDialog('changeDialog');closeDialog('resultDialog');assembling=false;game=null;switchPage('design');drawDesign();}
@@ -1224,155 +956,29 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('rulesDialog'
 document.addEventListener('keyup',e=>{if(e.code===pushKey){e.preventDefault();pushKey=null;stopPush();}});
 function ready(){return page==='game'&&game&&!assembling&&!dialogOpen&&!game.state.finished&&!game.state.resting;}
 function toast(text){$('toast').textContent=text;$('toast').classList.add('show');toastTime=2.2;}
-function loadAction(){
- if(!ready())return;
- const s=game.state;
- if(s.fallen>0){
-   let n=game.pickupDropped();
-   if(n>0){toast('捡回 '+n+' 块砖 · 继续推车');beep(620,.09);}
-   else if(!s.resting)toast('先停在掉砖位置，或喝水恢复体力');
- }else if(s.x<=.01){
-   let target=Number($('batchSlider').value);
-   let n=game.addBatch(Math.max(0,target-s.cargo));
-   if(n>0){
-     beep(380,.07);
-     if(s.cargo>game.getMetrics().capacity)toast('⚠ 已超载！砖块可能从车斗滑落');
-     else toast('装入 '+n+' 块砖 · 消耗 '+(n*WheelbarrowGame.config.loadCost).toFixed(1)+' 点体力');
-   }else if(s.source<=0)toast('砖场已空，送完剩余砖块');
-   else if(!s.resting)toast('调整计划数量或休息后再装');
- }else if(s.x>=WheelbarrowGame.config.routeLength-.01){
-   let n=game.unloadAll();
-   if(n>0){beep(540,.09);unloadAnim=1;toast('整车卸下 '+n+' 块砖');}
- }else toast('前往工地，到终点卸砖');
- updateHud();
-}
-function removeAction(){
- if(!ready())return;
- let n=game.removeBatch(game.state.cargo);
- if(n>0){beep(260,.04);toast('已放回 '+n+' 块砖');}
- updateHud();
-}
-function pushStart(){
- if(!ready())return;
- if(loadHold){clearInterval(loadHold);loadHold=null;}
- if(removeHold){clearInterval(removeHold);removeHold=null;}
- const s=game.state;
- if(s.fallen>0){toast('有 '+s.fallen+' 块砖掉落，请先捡回');return;}
- if(s.x<=.01&&s.cargo===0){toast('先选数量再装砖');return;}
- if(s.x>=WheelbarrowGame.config.routeLength-.01&&s.cargo>0){toast('先把整车砖卸到工地');return;}
- game.setPushing(true);
- $('pushBtn').classList.toggle('held',game.state.pushing);
- if(game.state.pushing)beep(180,.04);
-}
+function loadAction(){if(!ready())return;const s=game.state;if(s.x<=.01){let before=s.cargo;game.addBrick();if(s.cargo>before)beep(390+s.cargo*25,.035);else if(s.source<=0)toast('砖场已空，把车上的砖送到工地');else toast('装满了，可以出发！');}else if(s.x>=19.99){let before=s.cargo;game.unloadBrick();if(s.cargo<before){beep(520,.04);unloadAnim=1;}else toast('已经卸空，按住推车返回砖场');}else toast('到达工地后再卸砖');updateHud();}
+function removeAction(){if(!ready())return;let before=game.state.cargo;game.removeBrick();if(game.state.cargo<before)beep(260,.04);updateHud();}
+function pushStart(){if(!ready())return;if(loadHold){clearInterval(loadHold);loadHold=null;}if(removeHold){clearInterval(removeHold);removeHold=null;}const s=game.state;if(s.x<=.01&&s.cargo===0){toast('先装几块砖，再推车');return;}if(s.x>=19.99&&s.cargo>0){toast('先把砖卸到工地');return;}game.setPushing(true);$('pushBtn').classList.toggle('held',game.state.pushing);beep(180,.04);}
 function stopPush(){if(game)game.setPushing(false);$('pushBtn').classList.remove('held');}
 function stopHold(){pushKey=null;if(loadHold){clearInterval(loadHold);loadHold=null;}if(removeHold){clearInterval(removeHold);removeHold=null;}stopPush();}
 function bindHold(el,fn,kind,interval){el.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;e.preventDefault();if(el.disabled)return;stopHold();try{el.setPointerCapture(e.pointerId);}catch(err){}fn();if(kind==='load')loadHold=setInterval(()=>{if(ready())fn();else stopHold();},interval);if(kind==='remove')removeHold=setInterval(()=>{if(ready())fn();else stopHold();},interval);});el.addEventListener('pointerleave',()=>{stopHold();});el.addEventListener('lostpointercapture',()=>stopHold());el.addEventListener('click',e=>{if(e.detail===0&&kind!=='push')fn();});}
 bindHold($('loadBtn'),loadAction,'load',260);bindHold($('removeBtn'),removeAction,'remove',260);bindHold($('pushBtn'),pushStart,'push',0);
-$('batchSlider').addEventListener('input',()=>{updateHud();if(game&&Number($('batchSlider').value)>game.getMetrics().capacity){toast('⚠ 超载可能掉砖');}});
-document.addEventListener('keydown',e=>{
- if(page!=='game'||!ready()||e.repeat||e.target.closest('button,input,select,textarea'))return;
- if(e.code==='KeyW'||e.code==='ArrowUp'){e.preventDefault();pushKey=e.code;pushStart();}
-});
 $('drinkBtn').onclick=()=>{if(ready()){stopHold();game.drink();updateHud();}};
-$('forcesBtn').onclick=()=>{showForces=!showForces;$('forcesBtn').classList.toggle('on',showForces);$('forcesBtn').setAttribute('aria-pressed',String(showForces));};$('cameraBtn').onclick=()=>{
- if(!renderer)return;
- let mode=renderer.viewMode==='first'?'follow':'first';
- renderer.setViewMode(mode);
- $('cameraModeLabel').textContent=mode==='first'?'跟随视角':'第一视角';
- toast(mode==='first'?'第一视角：看着车把前进':'跟随视角：观察人和车');
-};
+$('forcesBtn').onclick=()=>{showForces=!showForces;$('forcesBtn').classList.toggle('on',showForces);$('forcesBtn').setAttribute('aria-pressed',String(showForces));};$('cameraBtn').onclick=()=>{if(renderer)renderer.resetCamera();};
 $('gameCanvas').addEventListener('pointerdown',e=>{if(!renderer||assembling||dialogOpen)return;e.preventDefault();let v=renderer.getView();stageDrag={id:e.pointerId,x:e.clientX,y:e.clientY,yaw:v.yaw,pitch:v.pitch,moved:false};try{$('gameCanvas').setPointerCapture(e.pointerId);}catch(err){};});
-function stageTap(e){
- if(!ready())return;
- let r=$('gameCanvas').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
- let regions=renderer.hitRegions||{},inside=k=>regions[k]&&Math.hypot(x-regions[k].x,y-regions[k].y)<=regions[k].r;
- if(game.state.fallen>0){if(inside('fallen')||Math.abs(game.state.x-game.state.dropped[0].x)<2)loadAction();return;}
- if(game.state.x<.01&&inside('source'))loadAction();
- else if(game.state.x>WheelbarrowGame.config.routeLength-.01&&inside('cart'))loadAction();
-}
+function stageTap(e){if(!ready())return;let r=$('gameCanvas').getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,regions=renderer.hitRegions||{},inside=k=>regions[k]&&Math.hypot(x-regions[k].x,y-regions[k].y)<=regions[k].r;if(game.state.x<.01&&inside('source'))loadAction();else if(game.state.x>19.99&&(inside('cart')||inside('destination')))loadAction();else if(inside('cart')&&game.state.x<.01)loadAction();}
 window.addEventListener('blur',stopHold);document.addEventListener('visibilitychange',()=>{stopHold();lastFrame=performance.now();});
-function minuteValue(m){return Math.max(0,Number(m)||0).toFixed(1);}
+function timeText(s){let t=Math.floor(s);return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');}
 function setText(id,value){let el=$(id),s=String(value);if(el.textContent!==s)el.textContent=s;}
-function updateHud(){
- if(!game)return;
- const s=game.state,m=game.getMetrics(),st=s.stamina;
- const atSource=s.x<=.01,atDest=s.x>=WheelbarrowGame.config.routeLength-.01;
- const blocked=assembling||s.resting||s.finished;
- const qty=Math.min(m.maxCargo,Math.max(1,Number($('batchSlider').value)||m.capacity));
- $('batchWidget').hidden=!atSource||assembling||s.finished;
- $('batchSlider').max=m.maxCargo;
- if(qty!==Number($('batchSlider').value))$('batchSlider').value=qty;
- setText('batchValue',qty);
- setText('overloadNote',qty>m.capacity?'⚠ 超载 '+(qty-m.capacity)+' 块，路上可能滑落':'额定 '+m.capacity+' 块');
- $('overloadNote').classList.toggle('danger',qty>m.capacity);
- setText('deliveredValue',s.delivered);
- setText('cargoValue',s.cargo);
- setText('capacityValue',s.cargo>m.capacity?'⚠ 已超载 '+(s.cargo-m.capacity)+' 块':'额定 '+m.capacity+' 块');
- $('capacityValue').classList.toggle('danger',s.cargo>m.capacity);
- setText('massValue',m.goodsMass);
- setText('weightValue','重力 '+m.goodsWeight+' N');
- setText('forceValue',Math.round(m.force));
- setText('forceSub',s.moving?'↑ 托举 '+Math.round(m.forceUp)+' N　→ 前推 '+Math.round(m.forcePush)+' N':'起车预计 '+Math.round(m.needForce)+' N');
- $('forceMetric').classList.toggle('working',s.moving);
- setText('timerValue',minuteValue(m.gameMinutes)+' 分钟');
- let thresholds=WheelbarrowGame.config.starThresholds;
- setText('starHint',s.overloadTrips>0?'⚠ 曾超载 · 最高二星':m.gameMinutes<=thresholds[0]?'★★★ ≤ '+thresholds[0]+' 分钟':m.gameMinutes<=thresholds[1]?'★★☆ ≤ '+thresholds[1]+' 分钟':'★☆☆ 完成得星');
- setText('energyValue',Math.round(st));
- $('energyFill').style.width=st+'%';
- $('energyFill').classList.toggle('low',st<25);
- $('energyTrack').setAttribute('aria-valuenow',Math.round(st));
- $('routeFill').style.width=(s.x/WheelbarrowGame.config.routeLength*100)+'%';
- $('routeCart').style.left=(s.x/WheelbarrowGame.config.routeLength*100)+'%';
- $('routeCart').style.transform='translateX(-50%)'+(s.direction===-1?' scaleX(-1)':'');
- setText('stockValue',s.fallen>0?'掉落 '+s.fallen+' 块 · 请捡回':'砖场剩余 '+s.source+' 块');
- setText('missionSub',s.delivered===WheelbarrowGame.config.totalBricks?'全部搬运完成':'还需送达 '+m.remaining+' 块');
- $('loadBtn').disabled=blocked||!(
-   (s.fallen>0&&!s.moving)||
-   (atSource&&s.source>0&&s.cargo<qty)||
-   (atDest&&s.cargo>0)
- );
- $('removeBtn').hidden=!atSource||s.cargo===0;
- $('removeBtn').disabled=blocked||!atSource||s.cargo===0;
- setText('loadLabel',s.fallen>0?'捡起 '+s.fallen+' 块':atDest?'整车卸砖':atSource?(s.cargo>=qty?'已装到 '+s.cargo+' 块':'一次装 '+(qty-s.cargo)+' 块'):'运输中');
- $('pushBtn').disabled=blocked||s.fallen>0||(atSource&&s.cargo===0)||(atDest&&s.cargo>0);
- setText('pushLabel',(!atSource&&s.direction===-1)||atDest&&s.cargo===0?'按住返回':'按住推车');
- $('drinkBtn').disabled=blocked||st>=99.9;
- $('pushBtn').classList.toggle('held',s.pushing&&s.moving);
- $('restLayer').hidden=!s.resting;
- setText('restTime',minuteValue(s.restLeft/WheelbarrowGame.config.restSeconds*WheelbarrowGame.config.restGameMinutes)+' 分钟');
- if(!assembling){
-   let title,hint,station;
-   if(s.finished){title='200 块全部送达！';hint='改装后，再次挑战自己的记录';station='任务完成';}
-   else if(s.resting){title='喝水休息 10 分钟';hint='模拟工地时间 · 恢复体力中';station='工地休息';}
-   else if(s.fallen>0){title='⚠ 砖块滑落！';hint='停下捡回 '+s.fallen+' 块 · 再继续运送';station='路面捡砖';}
-   else if(atSource){title=s.cargo===0?'选择数量，一次装车':s.cargo>m.capacity?'⚠ 超载出发有风险':'准备出发！';hint=s.cargo===0?'装载也消耗体力':s.cargo>m.capacity?'超出额定容量，行驶时可能滑落':'按住推车 · 用力与体力实时变化';station='砖场装车';}
-   else if(atDest){title=s.cargo>0?'到达工地，整车卸砖':'空车返回砖场';hint=s.cargo>0?'点击整车卸砖':'按住推车返回';station='工地卸货';}
-   else{title=s.direction===1?'向工地前进':'返回砖场';hint=s.moving?'拖动画面转动视角':'按住推车或按 W 键前进';station=s.direction===1?'沿路运送':'空车返回';}
-   setText('stageTitle',title);setText('stageHint',hint);setText('stationValue',station);
- }
+function updateHud(){if(!game)return;const s=game.state,m=game.getMetrics(),st=s.stamina,atSource=s.x<=.01,atDest=s.x>=19.99,blocked=assembling||s.resting||s.finished;setText('deliveredValue',s.delivered);setText('cargoValue',s.cargo);setText('capacityValue','容量 '+m.capacity+' 块');setText('massValue',m.goodsMass);setText('weightValue','重力 '+m.goodsWeight+' N');setText('forceValue',Math.round(m.force));setText('forceSub',s.moving?'↑ 托举 '+Math.round(m.forceUp)+' N　→ 前推 '+Math.round(m.forcePush)+' N':'起车预计 '+Math.round(m.needForce)+' N');$('forceMetric').classList.toggle('working',s.moving);setText('timerValue',timeText(s.elapsed));setText('energyValue',Math.ceil(st));$('energyFill').style.width=st+'%';$('energyFill').classList.toggle('low',st<25);$('energyTrack').setAttribute('aria-valuenow',Math.round(st));$('routeFill').style.width=(s.x*5)+'%';$('routeCart').style.left=(s.x*5)+'%';$('routeCart').style.transform='translateX(-50%)'+(s.direction===-1?' scaleX(-1)':'');setText('stockValue','砖场剩余 '+s.source+' 块');setText('missionSub',s.delivered===24?'全部搬运完成':'共 24 块 · 每块 2 kg');
+ $('loadBtn').disabled=blocked||!(atSource||atDest)||(atSource&&(s.source<=0||s.cargo>=m.capacity))||(atDest&&s.cargo===0);$('removeBtn').hidden=!atSource;$('removeBtn').disabled=blocked||s.cargo===0||!atSource;setText('loadLabel',atDest?'卸砖':atSource?(s.cargo>=m.capacity?'已装满':'装砖'):'运输中');$('pushBtn').disabled=blocked||(atSource&&s.cargo===0)||(atDest&&s.cargo>0);setText('pushLabel',(!atSource&&s.direction===-1)||atDest&&s.cargo===0?'按住返回':'按住推车');$('drinkBtn').disabled=blocked||st>=99.9;$('pushBtn').classList.toggle('held',s.pushing&&s.moving);$('restLayer').hidden=!s.resting;setText('restTime',Math.max(1,Math.ceil(s.restLeft))+'s');
+ if(!assembling){let title,hint,station;if(s.finished){title='全部送达！';hint='试试改装后再次挑战';station='任务完成';}else if(s.resting){title='休息一下，再出发';hint='车已停稳，砖块还在车上';station='喝水休息';}else if(atSource){title=s.cargo===0?'装砖，出发！':'这次装几块？';hint=s.cargo>=m.capacity?'车斗已满，按住推车出发':'长按装砖 · 按住推车';station='砖场装车';}else if(atDest){title=s.cargo>0?'送到了，卸砖！':'空车返回，再来一趟';hint=s.cargo>0?'长按卸砖，放到工地':'按住返回，回砖场继续装车';station='工地卸货';}else{title=s.direction===1?'向工地前进':'空车返回砖场';hint=s.moving?'留意双手用力和体力变化':'按住推车继续 · 拖动画面可转动视角';station=s.direction===1?'运送砖块':'空车返回';}setText('stageTitle',title);setText('stageHint',hint);setText('stationValue',station);}
+ let t=s.elapsed,thresholds=WheelbarrowGame.config.starThresholds,h=t<=thresholds[0]?'★★★ ≤ '+thresholds[0]+' 秒':t<=thresholds[1]?'★★☆ ≤ '+thresholds[1]+' 秒':'★☆☆ 完成即得';setText('starHint',h);
 }
-function finish(){
- if(recorded||!game)return;
- recorded=true;stopHold();
- const s=game.state,prev=history.length?history[history.length-1]:null;
- const entry={time:game.getMetrics().gameMinutes,force:s.meanForce,rests:s.rests,trips:s.trips,stars:s.stars,overloadTrips:s.overloadTrips,rules:WheelbarrowGame.config.scoringVersion,design:{...design}};
- history.push(entry);history=history.slice(-5);persist();
- $('resultStars').innerHTML=[0,1,2].map(i=>icon('star').replace('<svg ','<svg class="'+(i<s.stars?'earned':'')+'" style="animation-delay:'+i*.12+'s" ')).join('');
- $('resultStars').setAttribute('aria-label',s.stars+'星认证');
- setText('resultTime',minuteValue(entry.time));
- setText('resultTrips',s.trips);
- setText('resultForce',Math.round(s.meanForce)+' N');
- setText('resultRests',s.rests);
- setText('resultTitle',['','完成搬运','高效搬运员','三星搬运达人'][s.stars]+'！');
- if(prev){
-   let delta=entry.time-prev.time,df=s.meanForce-prev.force;
-   $('comparison').innerHTML='与上次相比：用时 <strong>'+(delta<0?'减少 ':'增加 ')+minuteValue(Math.abs(delta))+' 分钟</strong>，平均用力 <strong>'+(df<0?'减少 ':'增加 ')+Math.round(Math.abs(df))+' N</strong>。<br>上次：'+minuteValue(prev.time)+' 分钟 / '+Math.round(prev.force)+' N / 休息 '+prev.rests+' 次';
- }else $('comparison').textContent='本次结果已记录。改装后，用相同的 200 块砖和 20 m 路线再比较。';
- beep(660,.15);setTimeout(()=>beep(880,.2),170);openDialog('resultDialog');
-}
-$('redesignBtn').onclick=returnToDesign;$('retryBtn').onclick=()=>{closeDialog('resultDialog');game=new WheelbarrowGame(design);recorded=false;renderer.setDesign(design);renderer.resetCamera();updateHud();$('batchSlider').value=WheelbarrowGame.getDesignStats(design).capacity;renderer.setViewMode('follow');$('cameraModeLabel').textContent='第一视角';toast('新一轮 200 块砖挑战');};
-function frame(now){requestAnimationFrame(frame);if(!lastFrame)lastFrame=now;let dt=Math.max(0,(now-lastFrame)/1000);lastFrame=now;if(document.hidden)return;if(toastTime>0){toastTime-=dt;if(toastTime<=0)$('toast').classList.remove('show');}if(page!=='game'||!game||!renderer)return;if(!dialogOpen){if(assembling){assemblyTime+=dt;let a=Math.min(1,assemblyTime/6.4);$('assemblyProgress').style.width=(a*100)+'%';setText('assemblyLabel',a<.25?'车身定位':a<.45?'安装车架':a<.60?'固定车斗':a<.76?'穿入轮轴，拧紧螺母':a<.95?'焊接固定连接':'组装完成，进入工地');if(a>=1){assembling=false;$('assemblyLayer').hidden=true;toast('装第一块砖，挑战就开始！');beep(720,.12);if(!rulesSeen){rulesSeen=true;$('rulesStart').textContent='开始搬运';openDialog('rulesDialog');}}}else{let oldRest=game.state.resting,oldDrop=game.state.dropEvent;game.step(dt);if(!oldRest&&game.state.resting){stopHold();beep(230,.14);toast('工地休息 10 分钟 · 时间加速中');}if(game.state.dropEvent>oldDrop){stopHold();beep(160,.24);toast('⚠ 超载滑落 '+game.state.fallen+' 块砖！停下捡回');}unloadAnim=Math.max(0,unloadAnim-dt*2.5);if(game.state.finished&&!recorded)finish();}}
- const s=game.state,m=game.getMetrics();renderer.render({mode:assembling?'assembly':'game',assembly:Math.min(1,assemblyTime/6.4),x:s.x,direction:s.direction,cargo:s.cargo,source:s.source,delivered:s.delivered,dropped:s.dropped,fallen:s.fallen,elapsed:s.elapsed,moving:s.moving,resting:s.resting,restLeft:s.restLeft,restMinutesLeft:s.restLeft/WheelbarrowGame.config.restSeconds*WheelbarrowGame.config.restGameMinutes,lifting:s.moving,forceUp:m.forceUp,forcePush:m.forcePush,showForces,unload:unloadAnim,wheelAngle:s.wheelAngle,celebration:s.finished},now/1000);updateHud();
+function finish(){if(recorded||!game)return;recorded=true;stopHold();const s=game.state,prev=history.length?history[history.length-1]:null,entry={time:s.elapsed,force:s.meanForce,rests:s.rests,trips:s.trips,stars:s.stars,rules:WheelbarrowGame.config.scoringVersion,design:{...design}};history.push(entry);history=history.slice(-5);persist();$('resultStars').innerHTML=[0,1,2].map(i=>icon('star').replace('<svg ','<svg class="'+(i<s.stars?'earned':'')+'" style="animation-delay:'+i*.12+'s" ')).join('');$('resultStars').setAttribute('aria-label',s.stars+'星认证');setText('resultTime',s.elapsed.toFixed(1));setText('resultTrips',s.trips);setText('resultForce',Math.round(s.meanForce)+' N');setText('resultRests',s.rests);setText('resultTitle',['','完成搬运','高效搬运员','三星搬运达人'][s.stars]+'！');if(prev){let delta=s.elapsed-prev.time,df=s.meanForce-prev.force;$('comparison').innerHTML='与上次相比：用时 <strong>'+(delta<0?'减少 ':'增加 ')+Math.abs(delta).toFixed(1)+' 秒</strong>，平均用力 <strong>'+(df<0?'减少 ':'增加 ')+Math.round(Math.abs(df))+' N</strong>。<br>上次：'+prev.time.toFixed(1)+' 秒 / '+Math.round(prev.force)+' N / 休息 '+prev.rests+' 次';}else{$('comparison').textContent='本次结果已记录。改装后，用相同的 24 块砖和 20 m 路线再比一次。';}beep(660,.15);setTimeout(()=>beep(880,.2),170);openDialog('resultDialog');}
+$('redesignBtn').onclick=returnToDesign;$('retryBtn').onclick=()=>{closeDialog('resultDialog');game=new WheelbarrowGame(design);recorded=false;renderer.setDesign(design);renderer.resetCamera();updateHud();toast('新一轮挑战，从装第一块砖开始计时');};
+function frame(now){requestAnimationFrame(frame);if(!lastFrame)lastFrame=now;let dt=Math.max(0,(now-lastFrame)/1000);lastFrame=now;if(document.hidden)return;if(toastTime>0){toastTime-=dt;if(toastTime<=0)$('toast').classList.remove('show');}if(page!=='game'||!game||!renderer)return;if(!dialogOpen){if(assembling){assemblyTime+=dt;let a=Math.min(1,assemblyTime/6.4);$('assemblyProgress').style.width=(a*100)+'%';setText('assemblyLabel',a<.25?'车身定位':a<.45?'安装车架':a<.60?'固定车斗':a<.76?'穿入轮轴，拧紧螺母':a<.95?'焊接固定连接':'组装完成，进入工地');if(a>=1){assembling=false;$('assemblyLayer').hidden=true;toast('装第一块砖，挑战就开始！');beep(720,.12);if(!rulesSeen){rulesSeen=true;$('rulesStart').textContent='开始搬运';openDialog('rulesDialog');}}}else{let oldRest=game.state.resting;game.step(dt);if(!oldRest&&game.state.resting){stopHold();beep(230,.14);}unloadAnim=Math.max(0,unloadAnim-dt*2.5);if(game.state.finished&&!recorded)finish();}}
+ const s=game.state,m=game.getMetrics();renderer.render({mode:assembling?'assembly':'game',assembly:Math.min(1,assemblyTime/6.4),x:s.x,direction:s.direction,cargo:s.cargo,source:s.source,delivered:s.delivered,moving:s.moving,resting:s.resting,restLeft:s.restLeft,lifting:s.moving,forceUp:m.forceUp,forcePush:m.forcePush,showForces,unload:unloadAnim,wheelAngle:s.wheelAngle,celebration:s.finished},now/1000);updateHud();
 }
 renderShelf();drawDesign();requestAnimationFrame(frame);
 })();
