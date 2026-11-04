@@ -934,7 +934,7 @@ var geometries=new Set(),materials=new Set(),groups={};
 function geo(g){geometries.add(g);return g;}
 function mat(color,metal,rough,extra){var m=new T.MeshStandardMaterial(Object.assign({color:color,metalness:metal||0,roughness:rough===undefined?.7:rough},extra||{}));materials.add(m);return m;}
 var M={rail:mat('#627b84',.62,.43),frame:mat('#344b53',.62,.48),steel:mat('#bdc8ca',.78,.32),dark:mat('#28373a',.68,.48),nut:mat('#a9a395',.72,.38),rubber:mat('#282b2c',0,.94),tread:mat('#343638',0,.95),grip:mat('#273132',0,.91),paint:mat(d.color||'#ef8259',.32,.51,{side:T.DoubleSide}),inside:mat(new T.Color(d.color||'#ef8259').lerp(new T.Color('#a9a79b'),.18),.38,.66,{side:T.DoubleSide}),scratch:mat('#b7aaa0',.65,.64),brick:mat('#ffffff',0,.96)};
-var unitBox=geo(new T.BoxGeometry(1,1,1)),unitRod=geo(new T.CylinderGeometry(1,1,1,LOW?8:12,1)),unitBall=geo(new T.SphereGeometry(1,12,8)),Y=new T.Vector3(0,1,0),Z=new T.Vector3(0,0,1),aVec=new T.Vector3(),bVec=new T.Vector3();
+var unitBox=geo(new T.BoxGeometry(1,1,1)),unitRod=geo(new T.CylinderGeometry(1,1,1,LOW?8:12,LOW?4:1)),unitBall=geo(new T.SphereGeometry(1,12,8)),Y=new T.Vector3(0,1,0),Z=new T.Vector3(0,0,1),aVec=new T.Vector3(),bVec=new T.Vector3();
 function mesh(parent,g,m){var o=new T.Mesh(g,m);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o;}
 function box(parent,x,y,z,w,h,dep,m){var o=mesh(parent,unitBox,m);o.position.set(x,y,z);o.scale.set(w,h,dep);return o;}
 function ball(parent,p,radius,m){var o=mesh(parent,unitBall,m);o.position.fromArray(p);o.scale.setScalar(radius);return o;}
