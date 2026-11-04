@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#081624">
+  <meta name="description" content="教科版三年级上册3.3直线运动和曲线运动：生活观察、轨道击球和桌沿小球探究。离线可用。">
+  <title>三上3.3 直线运动和曲线运动｜互动科学课堂</title>
+  <style>
+    :root{--bg:#081624;--panel:#102538;--line:#28485c;--ink:#eef9ff;--muted:#a6becd;--cyan:#4be4ef;--orange:#ffc269;--red:#ff7f87;--good:#75efb2}
+    *{box-sizing:border-box}
+    html,body{margin:0;width:100%;height:100%;overflow:hidden}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:var(--bg);-webkit-tap-highlight-color:transparent}
+    button,input{font:inherit}
+    button{cursor:pointer;touch-action:manipulation}
+    button:focus-visible,input:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+    [hidden]{display:none!important}
+    .app{display:flex;flex-direction:column;gap:11px;height:100vh;height:100dvh;padding:12px max(13px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(13px,env(safe-area-inset-left));max-width:2400px;margin:auto}
+    .top{min-height:57px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:0 8px}
+    .lesson{display:flex;align-items:center;gap:13px;min-width:0}
+    .lesson-mark{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:12px;color:#072332;background:linear-gradient(135deg,#68f0ec,#6caafb);font-weight:950;font-size:18px;box-shadow:0 4px 20px #4be4ef24}
+    .lesson h1{font-size:clamp(20px,2.08vw,32px);font-weight:850;letter-spacing:.035em;line-height:1.2;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .lesson small{display:block;color:var(--muted);font-size:clamp(11px,1.03vw,15px);letter-spacing:.1em;margin-top:3px}
+    .simple-button{border:1px solid #35536b;background:#132a40;color:var(--ink);border-radius:11px;min-height:42px;padding:0 15px;font-size:clamp(15px,1.3vw,20px);font-weight:700}
+    .simple-button:active{transform:scale(.98)}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-height:58px}
+    .step{position:relative;display:flex;align-items:center;justify-content:center;gap:13px;min-width:0;border:1px solid #29465c;border-radius:13px;color:#b3cad8;background:#102538;font-size:clamp(16px,1.52vw,24px);font-weight:800;letter-spacing:.04em;transition:background .18s,border-color .18s}
+    .step .num{width:28px;height:28px;flex:none;display:grid;place-items:center;border-radius:9px;background:#1a3a50;color:#a9cad8;font-size:16px}
+    .step.active{color:#f6feff;border-color:#4be4ef;background:linear-gradient(105deg,#1b5365,#173c50)}
+    .step.active .num{background:var(--cyan);color:#072531}
+    .stage{position:relative;isolation:isolate;flex:1;min-height:180px;overflow:hidden;border:1px solid #335265;border-radius:17px;background:radial-gradient(ellipse at 50% 12%,#1c4159,#0c2032 70%);box-shadow:inset 0 1px #bffaff19,0 14px 34px #0003}
+    #stage-canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;display:block}
+    .stage-head{position:absolute;z-index:1;top:clamp(13px,2vw,29px);left:clamp(15px,2.4vw,36px);pointer-events:none;text-shadow:0 2px 8px #001b2a}
+    .stage-head .eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:clamp(12px,1.03vw,17px);color:#9ad7e6;font-weight:800;letter-spacing:.12em}
+    .stage-head h2{margin:6px 0 0;font-size:clamp(22px,2.3vw,38px);font-weight:900;letter-spacing:.03em}
+    .stage-hint{position:absolute;z-index:1;right:clamp(12px,2vw,25px);top:clamp(13px,2vw,28px);padding:10px 15px;border:1px solid #6b9eb555;background:#0b2335cb;color:#e4f6ff;border-radius:12px;font-weight:750;font-size:clamp(13px,1.1vw,18px);pointer-events:none;max-width:38%;text-align:right}
+    .footer{display:flex;align-items:center;gap:12px;min-height:76px;padding:0 7px;overflow:auto hidden;scrollbar-width:none}
+    .footer::-webkit-scrollbar{display:none}
+    .controls{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-width:max-content}
+    .control{min-height:52px;padding:10px 20px;border:1px solid #36546b;border-radius:12px;background:#142e44;color:#e8f6ff;font-size:clamp(16px,1.32vw,21px);font-weight:800;white-space:nowrap;box-shadow:inset 0 1px #ffffff0b}
+    .control.selected{color:#06222d;background:var(--cyan);border-color:#6df2f2}
+    .control.primary{background:linear-gradient(125deg,#4ce7e8,#79c4ff);color:#082839;border-color:transparent;font-weight:900}
+    .control.warn{border-color:#ffbf6b88;color:#ffe2b2}
+    .control:active{transform:scale(.975)}
+    .control:disabled{opacity:.45;cursor:not-allowed}
+    .control-divider{width:1px;height:37px;background:#416073;margin:0 6px;flex:none}
+    .footer-note{color:#aac9d7;font-size:clamp(14px,1.05vw,18px);white-space:nowrap;font-weight:700;margin-left:auto}
+    .speed{display:flex;align-items:center;gap:10px;min-width:244px;color:#d2e9f4;font-weight:850;font-size:17px;white-space:nowrap}
+    .speed input{appearance:none;-webkit-appearance:none;width:130px;height:9px;border-radius:99px;background:linear-gradient(90deg,#438cba,#56f0e6);outline:none}
+    .speed input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid #3facc6;box-shadow:0 2px 9px #0005}
+    .speed input::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:#fff;border:4px solid #3facc6}
+    .rotate-hint{display:none}
+    @media(max-width:900px){.app{gap:7px;padding-top:7px}.top{min-height:45px}.lesson-mark{width:35px;height:35px;font-size:15px}.lesson small{display:none}.steps{min-height:49px;gap:6px}.step{gap:5px}.step .num{width:23px;height:23px;font-size:12px}.footer{min-height:62px;padding:0;justify-content:flex-start}.controls{justify-content:flex-start}.control{min-height:45px;padding:8px 13px}.footer-note{display:none}}
+    @media(max-width:620px){.lesson h1{font-size:17px}.step{font-size:13px;letter-spacing:0}.step .num{display:none}.simple-button{min-height:35px;padding:0 8px;font-size:12px}.stage-head h2{font-size:19px}.stage-hint{font-size:11px;max-width:45%;padding:6px 8px}.control{font-size:14px}.rotate-hint{display:block;position:absolute;z-index:2;bottom:10px;left:50%;transform:translateX(-50%);padding:6px 10px;background:#071e2dd8;color:#a5dce9;font-size:12px;border-radius:7px;white-space:nowrap;pointer-events:none}}
+    @media(orientation:landscape){.rotate-hint{display:none}}
+    @media(max-height:610px){.app{gap:5px;padding-top:5px;padding-bottom:5px}.top{min-height:40px}.lesson small{display:none}.steps{min-height:42px}.footer{min-height:50px}.control{min-height:40px;padding:6px 14px}.stage-head h2{margin-top:2px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="lesson"><div class="lesson-mark">3.3</div><div><h1>直线运动和曲线运动</h1><small>三年级上册 · 第三单元 物体的运动</small></div></div>
+    <button id="fullscreen" class="simple-button" type="button" aria-label="切换全屏">⛶ 全屏</button>
+  </header>
+  <nav class="steps" aria-label="课堂探索步骤">
+    <button class="step active" data-page="0" aria-current="step" type="button"><span class="num">1</span>生活中的路线</button>
+    <button class="step" data-page="1" type="button"><span class="num">2</span>击球挑战</button>
+    <button class="step" data-page="2" type="button"><span class="num">3</span>小球冲出桌面</button>
+  </nav>
+  <main class="stage" id="stage">
+    <canvas id="stage-canvas" aria-label="可触控的科学运动模拟实验画面"></canvas>
+    <div class="stage-head"><span class="eyebrow" id="stage-eyebrow">观察 · 比较</span><h2 id="stage-title">哪些运动路线不一样？</h2></div>
+    <div class="stage-hint" id="stage-hint">点击运动的物体，观察路线</div>
+    <div class="rotate-hint">横屏可获得更大的实验画面</div>
+  </main>
+  <footer class="footer" aria-label="实验操作区">
+    <div class="controls" id="controls-observe">
+      <button class="control selected" type="button" data-scene="road">🚙 公路</button>
+      <button class="control" type="button" data-scene="lift">🛗 生活</button>
+      <button class="control" type="button" data-scene="park">🎢 乐园</button>
+      <span class="control-divider"></span>
+      <button class="control" id="routes" type="button" aria-pressed="false">◎ 显示路线</button>
+      <button class="control" id="pause" type="button" aria-pressed="false">Ⅱ 暂停</button>
+    </div>
+    <div class="controls" id="controls-shoot" hidden>
+      <button class="control selected" type="button" data-track="free">◌ 自由击球</button>
+      <button class="control" type="button" data-track="straight">━ 直线轨道</button>
+      <button class="control" type="button" data-track="curve">〰 曲线轨道</button>
+      <span class="control-divider"></span>
+      <button class="control" id="shot-reset" type="button">↻ 再来一次</button>
+      <span class="footer-note">从蓝球向前拖动，松手发射</span>
+    </div>
+    <div class="controls" id="controls-fall" hidden>
+      <button class="control selected" id="guess" type="button" aria-pressed="true">✎ 画猜想</button>
+      <button class="control" id="guess-clear" type="button">⌫ 擦除</button>
+      <label class="speed" for="push-speed">🐢 <input id="push-speed" type="range" min="210" max="420" step="10" value="300" aria-label="调整小球推出速度"> 🐇</label>
+      <button class="control primary" id="fall-launch" type="button">▶ 推出小球</button>
+      <button class="control" id="slow" type="button" aria-pressed="false">◴ 慢镜头</button>
+      <button class="control" id="fall-restart" type="button">↻ 重试</button>
+      <button class="control warn" id="explain" type="button" hidden>查看路线</button>
+    </div>
+  </footer>
+</div>
+<script>
+(function(){
+  'use strict';
+  // 实验几何及绘图均为本地二维 Canvas；模型资源可由这里的绘制函数替换。
+  var W=1200,H=620,canvas=document.getElementById('stage-canvas'),ctx=canvas.getContext('2d');
+  var stage=document.getElementById('stage'),scale=1,offX=0,offY=0,dpr=1,cssW=0,cssH=0;
+  var page=0,scene='road',showRoutes=false,paused=false,selected=-1,clock=0,last=0;
+  var C={cyan:'#4be4ef',orange:'#ffc269',red:'#ff7f87',good:'#78efb2',white:'#f3fcff',muted:'#b6d0df'};
+  var shot={mode:'free',blue:{x:215,y:440},red:{x:1000,y:350},drag:false,dragAt:null,trace:[],records:{},running:false,result:'',elapsed:0,progress:0,vx:0,vy:0,redShift:0};
+  var fall={speed:300,slow:false,guessing:true,predictions:[],stroke:null,phase:'ready',t:0,x:170,y:311,trace:[],reveal:false};
+  var TRACK_START={x:215,y:440},TRACK_END={x:954,y:350},BALL_R=22,RED_R=28;
+  var EDGE_X=645,TABLE_Y=338,FLOOR_Y=550,FALL_G=630,FALL_START_X=170;
+  var trackSamples={},sceneObjects=[];
+
+  function el(id){return document.getElementById(id)}
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+  function lerp(a,b,t){return a+(b-a)*t}
+  function mix(a,b,t){return {x:lerp(a.x,b.x,t),y:lerp(a.y,b.y,t)}}
+  function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+  function pt(x,y){return {x:x,y:y}}
+  function cubic(a,b,c,d,t){var u=1-t;return pt(u*u*u*a.x+3*u*u*t*b.x+3*u*t*t*c.x+t*t*t*d.x,u*u*u*a.y+3*u*u*t*b.y+3*u*t*t*c.y+t*t*t*d.y)}
+  function frac(n){return n-Math.floor(n)}
+  function wave(t){return .5-.5*Math.cos(t*Math.PI*2)}
+  function rounded(x,y,w,h,r){r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath()}
+  function fillRound(x,y,w,h,r,color){ctx.fillStyle=color;rounded(x,y,w,h,r);ctx.fill()}
+  function strokeRound(x,y,w,h,r,color,width){ctx.strokeStyle=color;ctx.lineWidth=width||2;rounded(x,y,w,h,r);ctx.stroke()}
+  function text(s,x,y,size,color,align,weight){ctx.save();ctx.fillStyle=color||C.white;ctx.textAlign=align||'left';ctx.textBaseline='middle';ctx.font=(weight||'800')+' '+size+'px -apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif';ctx.fillText(s,x,y);ctx.restore()}
+  function dot(x,y,r,color){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.fill()}
+  function line(a,b,color,width,dash){ctx.save();ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=color;ctx.lineWidth=width||3;ctx.lineCap='round';if(dash)ctx.setLineDash(dash);ctx.stroke();ctx.restore()}
+  function path(fn,n,color,width,dash){ctx.save();ctx.beginPath();for(var i=0;i<=n;i++){var p=fn(i/n);if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}ctx.strokeStyle=color;ctx.lineWidth=width||4;ctx.lineJoin='round';ctx.lineCap='round';if(dash)ctx.setLineDash(dash);ctx.stroke();ctx.restore()}
+  function arrow(x,y,angle,color,size){size=size||15;ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.beginPath();ctx.moveTo(size,0);ctx.lineTo(-size*.65,-size*.68);ctx.lineTo(-size*.38,0);ctx.lineTo(-size*.65,size*.68);ctx.closePath();ctx.fillStyle=color;ctx.fill();ctx.restore()}
+  function halo(x,y,r,color){var g=ctx.createRadialGradient(x,y,r*.1,x,y,r*2.2);g.addColorStop(0,color);g.addColorStop(1,'#ffffff00');ctx.fillStyle=g;dot(x,y,r*2.2,g)}
+  function ball(x,y,r,color,shine){ctx.save();ctx.shadowColor=color;ctx.shadowBlur=17;var g=ctx.createRadialGradient(x-r*.33,y-r*.4,r*.08,x,y,r*1.25);g.addColorStop(0,shine||'#f4ffff');g.addColorStop(.25,color);g.addColorStop(1,'#0a2638');dot(x,y,r,g);ctx.shadowBlur=0;ctx.strokeStyle='#ffffff77';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.stroke();dot(x-r*.3,y-r*.3,r*.18,'#ffffff88');ctx.restore()}
+  function tracePoints(list,color,width){if(list.length<2)return;ctx.save();ctx.strokeStyle=color;ctx.lineWidth=width||6;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();for(var i=0;i<list.length;i++){var p=list[i];if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}ctx.stroke();ctx.restore()}
+  function lightPanel(x,y,w,h){fillRound(x,y,w,h,17,'#0a2031dd');strokeRound(x,y,w,h,17,'#75a7bb55',1.5)}
+  function resize(){var r=canvas.getBoundingClientRect();cssW=Math.max(1,r.width);cssH=Math.max(1,r.height);dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.round(cssW*dpr);canvas.height=Math.round(cssH*dpr);scale=Math.min(cssW/W,cssH/H);offX=(cssW-W*scale)/2;offY=(cssH-H*scale)/2}
+  function world(clientX,clientY){var r=canvas.getBoundingClientRect();return pt((clientX-r.left-offX)/scale,(clientY-r.top-offY)/scale)}
+  function prep(){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,cssW,cssH);var g=ctx.createLinearGradient(0,0,0,cssH);g.addColorStop(0,'#15374c');g.addColorStop(1,'#0a2031');ctx.fillStyle=g;ctx.fillRect(0,0,cssW,cssH);ctx.translate(offX,offY);ctx.scale(scale,scale);ctx.save();ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip()}
+  function drawFloor(){ctx.save();ctx.strokeStyle='#86bdcb16';ctx.lineWidth=1;for(var x=0;x<W;x+=50)line(pt(x,0),pt(x,H),'#8fb7ce10',1);for(var y=0;y<H;y+=50)line(pt(0,y),pt(W,y),'#8fb7ce10',1);ctx.restore()}
+
+  function scenePath(s,i,t){
+    if(s==='road')return i===0?pt(140+925*t,245):cubic(pt(130,480),pt(420,565),pt(685,310),pt(1070,465),t);
+    if(s==='lift'){
+      if(i===0)return pt(265,466-300*wave(t));
+      if(i===1)return pt(535+400*t,475-268*t);
+      return pt(1060,208+277*t);
+    }
+    if(i===0){if(t<.5)return cubic(pt(115,465),pt(295,455),pt(320,160),pt(610,360),t*2);return cubic(pt(610,360),pt(805,550),pt(885,150),pt(1080,440),(t-.5)*2)}
+    return cubic(pt(130,218),pt(440,110),pt(670,360),pt(1080,170),t);
+  }
+  function sceneLabel(s,i){return s==='road'?['A','B'][i]:s==='lift'?['电梯','扶梯','苹果'][i]:['过山车','飞鸟'][i]}
+  function sceneCount(){return scene==='road'?2:scene==='lift'?3:2}
+  function currentPoint(i){var rate=scene==='lift'&&i===2?.11:scene==='lift'&&i===0?.085:.047;var t=frac(clock*rate+i*.3);return scenePath(scene,i,t)}
+  function currentAngle(i){var rate=scene==='lift'&&i===2?.11:scene==='lift'&&i===0?.085:.047;var t=frac(clock*rate+i*.3),a=scenePath(scene,i,Math.max(0,t-.002)),b=scenePath(scene,i,Math.min(1,t+.002));return Math.atan2(b.y-a.y,b.x-a.x)}
+  function drawCar(x,y,a,color){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.shadowColor='#0009';ctx.shadowBlur=12;fillRound(-41,-23,82,46,14,color);ctx.shadowBlur=0;fillRound(-13,-18,34,36,7,'#163e56');fillRound(-31,-26,17,6,3,'#062c42');fillRound(19,-26,17,6,3,'#062c42');fillRound(-31,20,17,6,3,'#062c42');fillRound(19,20,17,6,3,'#062c42');dot(34,-13,4,'#fff5bc');dot(34,13,4,'#fff5bc');ctx.restore()}
+  function drawPerson(x,y,a,color){ctx.save();ctx.translate(x,y);ctx.rotate(a);dot(0,-23,12,'#ffd3ab');fillRound(-12,-9,24,35,8,color);line(pt(-3,23),pt(-11,40),'#e5f6fa',5);line(pt(5,23),pt(14,40),'#e5f6fa',5);ctx.restore()}
+  function drawBird(x,y,a){ctx.save();ctx.translate(x,y);ctx.rotate(a);ctx.strokeStyle='#ffc269';ctx.lineWidth=10;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-43,4);ctx.quadraticCurveTo(-15,-32,1,-6);ctx.quadraticCurveTo(20,-32,47,-4);ctx.stroke();ctx.strokeStyle='#ffedc8';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-25,-4);ctx.lineTo(0,4);ctx.lineTo(27,-7);ctx.stroke();ctx.restore()}
+  function drawTree(x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);line(pt(0,9),pt(0,55),'#8f7d65',8);dot(0,0,35,'#2f806d');dot(-18,-13,25,'#3a9b78');dot(21,-10,26,'#398c76');ctx.restore()}
+  function drawRoad(){
+    fillRound(30,152,1140,418,32,'#1f4e55');
+    for(var i=0;i<7;i++){var xx=105+i*159;drawTree(xx,145,.45);if(i%2===0)drawTree(xx+55,570,.35)}
+    path(function(t){return scenePath('road',0,t)},80,'#8ba8af',96);
+    path(function(t){return scenePath('road',0,t)},80,'#253849',86);
+    path(function(t){return scenePath('road',0,t)},80,'#ffffff40',2,[21,25]);
+    path(function(t){return scenePath('road',1,t)},120,'#8ba8af',94);
+    path(function(t){return scenePath('road',1,t)},120,'#293849',83);
+    path(function(t){return scenePath('road',1,t)},120,'#ffffff40',2,[19,25]);
+    text('A 路',143,177,21,'#bfe9e5');text('B 路',143,554,21,'#bfe9e5');
+  }
+  function drawLift(){
+    fillRound(95,128,370,445,21,'#1d4051');
+    fillRound(170,147,190,398,8,'#071b2a');
+    for(var i=0;i<6;i++)line(pt(180,180+i*61),pt(350,180+i*61),'#57839a36',2);
+    line(pt(203,145),pt(203,545),'#77adbd88',5);line(pt(327,145),pt(327,545),'#77adbd88',5);
+    line(pt(480,485),pt(945,177),'#8298a7',59);line(pt(480,485),pt(945,177),'#243b50',48);
+    for(var s=0;s<17;s++){var t=s/17,a=scenePath('lift',1,t);line(pt(a.x-13,a.y+9),pt(a.x+13,a.y+9),'#a7b6be88',3)}
+    line(pt(480,488),pt(940,180),'#e1b47b',6);line(pt(480,425),pt(940,117),'#e1b47b',6);
+    drawTree(1060,180,.95);fillRound(992,508,142,38,10,'#395b68');text('落下的苹果',1062,574,19,'#e4eff2','center');
+  }
+  function drawPark(){
+    ctx.save();ctx.fillStyle='#1a4550';ctx.beginPath();ctx.moveTo(0,500);ctx.quadraticCurveTo(175,342,355,488);ctx.quadraticCurveTo(540,330,770,465);ctx.quadraticCurveTo(930,326,1200,470);ctx.lineTo(1200,620);ctx.lineTo(0,620);ctx.fill();ctx.restore();
+    for(var x=150;x<1110;x+=115){var p=scenePath('park',0,(x-115)/965);line(pt(p.x,Math.min(p.y+5,530)),pt(p.x,554),'#7c97a3',8)}
+    path(function(t){return scenePath('park',0,t)},180,'#445c69',26);
+    path(function(t){return scenePath('park',0,t)},180,'#e6a55c',10);
+    path(function(t){return scenePath('park',0,t)},180,'#ffe0a0',3,[12,10]);
+    for(var i=0;i<8;i++)drawTree(80+i*146,571,.4);
+    text('观察：小车沿轨道上下转弯',215,545,23,'#edf9ff');
+  }
+  function drawRoute(i){var col=i===0?C.cyan:i===1?C.orange:C.red;path(function(t){return scenePath(scene,i,t)},140,col,8);for(var j=1;j<=3;j++){var t=j/4,p=scenePath(scene,i,t),b=scenePath(scene,i,t+.006);arrow(p.x,p.y,Math.atan2(b.y-p.y,b.x-p.x),col,11)}}
+  function drawSceneOne(){drawFloor();if(scene==='road')drawRoad();if(scene==='lift')drawLift();if(scene==='park')drawPark();sceneObjects=[];
+    var n=sceneCount();for(var i=0;i<n;i++){if(showRoutes||selected===i)drawRoute(i)}
+    for(var j=0;j<n;j++){
+      var p=currentPoint(j),angle=currentAngle(j),color=j===0?C.cyan:j===1?C.orange:C.red;
+      if(scene==='road')drawCar(p.x,p.y,angle,color);
+      else if(scene==='lift'){
+        if(j===0){ctx.save();ctx.translate(p.x,p.y);fillRound(-48,-38,96,80,9,'#63aabc');fillRound(-32,-29,64,53,5,'#1d5264');strokeRound(-48,-38,96,80,9,'#b2e7f5',3);ctx.restore()}
+        if(j===1)drawPerson(p.x,p.y-29,0,C.orange);
+        if(j===2){ball(p.x,p.y,18,'#fa6568','#ffde89');line(pt(p.x+7,p.y-20),pt(p.x+12,p.y-26),'#58885b',3)}
+      }else{if(j===0){drawCar(p.x,p.y-15,angle,C.cyan)}else{drawBird(p.x,p.y,angle)}}
+      if(selected===j){ctx.save();ctx.strokeStyle=color;ctx.lineWidth=3;ctx.setLineDash([9,8]);ctx.beginPath();ctx.arc(p.x,p.y,61,0,Math.PI*2);ctx.stroke();ctx.restore()}
+      sceneObjects.push({x:p.x,y:p.y,i:j});
+    }
+    if(scene==='road'){
+      lightPanel(890,110,239,76);dot(920,138,9,C.cyan);text('A 号汽车',944,139,21);dot(920,172,9,C.orange);text('B 号汽车',944,174,21);
+    }else if(scene==='lift'){
+      lightPanel(808,100,336,75);text('观察运动方向',832,132,22);text('斜着走也是直线吗？',832,158,17,C.muted);
+    }else{lightPanel(850,105,292,70);text('哪条路线弯了？',879,142,24)}
+  }
+
+  function makeTrackSamples(mode){var a=[];var fn;if(mode==='straight')fn=function(t){return mix(TRACK_START,TRACK_END,t)};
+    else fn=function(t){return t<.49?cubic(pt(215,440),pt(370,440),pt(447,202),pt(650,237),t/.49):cubic(pt(650,237),pt(775,255),pt(805,345),pt(954,350),(t-.49)/.51)};
+    var length=0;for(var i=0;i<=280;i++){var p=fn(i/280);if(i)length+=dist(p,a[i-1]);a.push({x:p.x,y:p.y,s:length})}return {list:a,length:length,fn:fn}
+  }
+  trackSamples.straight=makeTrackSamples('straight');trackSamples.curve=makeTrackSamples('curve');
+  function pointOnTrack(mode,d){var a=trackSamples[mode].list;d=clamp(d,0,trackSamples[mode].length);var lo=0,hi=a.length-1;while(lo<hi){var mid=(lo+hi)>>1;if(a[mid].s<d)lo=mid+1;else hi=mid}if(lo===0)return pt(a[0].x,a[0].y);var p=a[lo-1],q=a[lo],t=(d-p.s)/Math.max(.001,q.s-p.s);return mix(p,q,t)}
+  function shotReset(){shot.blue=pt(TRACK_START.x,TRACK_START.y);shot.red=pt(1000,350);shot.trace=[];shot.drag=false;shot.dragAt=null;shot.running=false;shot.result='';shot.elapsed=0;shot.progress=0;shot.vx=0;shot.vy=0;shot.redShift=0}
+  function setTrack(mode){shot.mode=mode;shotReset();document.querySelectorAll('[data-track]').forEach(function(b){b.classList.toggle('selected',b.dataset.track===mode)})}
+  function finishShot(hit){shot.running=false;shot.result=hit?'hit':'miss';if(hit){shot.redShift=0;shot.records[shot.mode]=shot.trace.slice()}else{shot.records[shot.mode]=shot.trace.slice()}}
+  function updateShot(dt){if(!shot.running)return;shot.elapsed+=dt;
+    if(shot.mode!=='free'){
+      shot.progress+=dt*shot.speed;var p=pointOnTrack(shot.mode,shot.progress);shot.blue=p;if(!shot.trace.length||dist(p,shot.trace[shot.trace.length-1])>4)shot.trace.push(pt(p.x,p.y));
+      if(shot.progress>=trackSamples[shot.mode].length-4){finishShot(true)}
+    }else{
+      var steps=Math.max(1,Math.ceil(dt*shot.speed/11));for(var i=0;i<steps&&shot.running;i++){
+        shot.blue.x+=shot.vx*dt/steps;shot.blue.y+=shot.vy*dt/steps;
+        if(!shot.trace.length||dist(shot.blue,shot.trace[shot.trace.length-1])>4)shot.trace.push(pt(shot.blue.x,shot.blue.y));
+        if(dist(shot.blue,shot.red)<=BALL_R+RED_R){finishShot(true)}
+        else if(shot.blue.x>W+35||shot.blue.x< -35||shot.blue.y>H+35||shot.blue.y< -35){finishShot(false)}
+      }
+    }
+    if(shot.elapsed>5&&shot.running)finishShot(false);
+  }
+  function launchShot(end){var dx=end.x-TRACK_START.x,dy=end.y-TRACK_START.y,m=Math.hypot(dx,dy);shot.drag=false;shot.dragAt=null;if(m<30)return;shot.speed=clamp(330+m*1.4,350,900);shot.vx=dx/m*shot.speed;shot.vy=dy/m*shot.speed;shot.running=true;shot.result='';shot.trace=[pt(shot.blue.x,shot.blue.y)];shot.elapsed=0;shot.progress=0}
+  function drawTrack(mode){var data=trackSamples[mode];path(data.fn,170,'#8499a8',87);path(data.fn,170,'#253e50',76);path(data.fn,170,'#476878',2,[13,15]);ctx.save();ctx.strokeStyle='#ffffff55';ctx.lineWidth=3;for(var i=1;i<=14;i++){var p=pointOnTrack(mode,data.length*i/15),b=pointOnTrack(mode,data.length*i/15+3),a=Math.atan2(b.y-p.y,b.x-p.x);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(a);ctx.beginPath();ctx.moveTo(0,-30);ctx.lineTo(0,30);ctx.stroke();ctx.restore()}ctx.restore()}
+  function drawRecordBox(){var entries=[['free','自由',C.cyan],['straight','直轨',C.good],['curve','弯轨',C.orange]],has=false;for(var e=0;e<entries.length;e++)if(shot.records[entries[e][0]])has=true;if(!has)return;
+    lightPanel(702,503,453,102);text('运动路线记录',722,526,17,C.muted);
+    for(var i=0;i<entries.length;i++){var k=entries[i][0],x=719+i*143;fillRound(x,542,133,53,9,'#1b3949');text(entries[i][1],x+9,556,15,entries[i][2]);var tr=shot.records[k];if(!tr){line(pt(x+16,575),pt(x+117,575),'#486170',2,[4,6]);continue}
+      var x0=tr[0].x,x1=tr[tr.length-1].x,yMin=9999,yMax=-9999;for(var j=0;j<tr.length;j++){yMin=Math.min(yMin,tr[j].y);yMax=Math.max(yMax,tr[j].y)}var w=Math.max(1,x1-x0),h=Math.max(70,yMax-yMin);ctx.save();ctx.beginPath();rounded(x+5,563,122,27,4);ctx.clip();ctx.beginPath();for(var j=0;j<tr.length;j++){var xx=x+15+(tr[j].x-x0)/w*103,yy=576+(tr[j].y-(yMin+yMax)/2)/h*23;if(!j)ctx.moveTo(xx,yy);else ctx.lineTo(xx,yy)}ctx.strokeStyle=entries[i][2];ctx.lineWidth=3;ctx.stroke();ctx.restore();
+    }
+  }
+  function drawShot(){drawFloor();fillRound(32,196,1136,300,25,'#345e6a');fillRound(47,210,1106,273,17,'#1a6470');strokeRound(47,210,1106,273,17,'#66a5a6',6);
+    for(var x=60;x<1130;x+=83){dot(x,215,2,'#a2fff82b');dot(x,479,2,'#a2fff82b')}
+    if(shot.mode!=='free')drawTrack(shot.mode);
+    line(pt(84,493),pt(1119,493),'#0c344366',5);
+    if(shot.trace.length>1)tracePoints(shot.trace,shot.mode==='curve'?C.orange:C.cyan,7);
+    var rx=shot.red.x+shot.redShift;ball(rx,shot.red.y,RED_R,'#f16476','#ffe2de');ball(shot.blue.x,shot.blue.y,BALL_R,'#39bdf0','#e7ffff');
+    if(shot.mode==='free'&&!shot.running&&!shot.result){
+      line(pt(TRACK_START.x+40,TRACK_START.y),pt(TRACK_START.x+117,TRACK_START.y),'#ffffff40',3,[7,9]);arrow(TRACK_START.x+120,TRACK_START.y,0,'#ffffff88',13);
+      dot(shot.blue.x,shot.blue.y,45,'#7befff17');
+    }
+    if(shot.drag&&shot.dragAt){var dx=shot.dragAt.x-TRACK_START.x,dy=shot.dragAt.y-TRACK_START.y,m=Math.hypot(dx,dy);if(m>4){var xx=TRACK_START.x+dx/m*Math.min(m,330),yy=TRACK_START.y+dy/m*Math.min(m,330);line(TRACK_START,pt(xx,yy),'#ffffffbb',5,[14,10]);arrow(xx,yy,Math.atan2(dy,dx),C.white,21)}}
+    if(shot.result){var success=shot.result==='hit';lightPanel(451,114,308,75);text(success?'✓ 击中了！':'↻ 再试试看',605,151,35,success?C.good:C.orange,'center');if(success){ball(1045,350,9,'#ffab9d');shot.redShift=Math.min(56,shot.redShift+.7)}}
+    else if(!shot.running){text('●',183,385,27,C.cyan);text('蓝球',230,383,22,C.white);text('目标',1000,290,23,C.white,'center');}
+    drawRecordBox();
+  }
+
+  function fallReset(keepGuess){fall.phase='ready';fall.t=0;fall.x=FALL_START_X;fall.y=TABLE_Y-BALL_R;fall.trace=[];fall.reveal=false;fall.stroke=null;if(!keepGuess)fall.predictions=[];el('explain').hidden=true;el('fall-launch').disabled=false;el('fall-launch').textContent='▶ 推出小球'}
+  function launchFall(){fallReset(true);fall.phase='running';fall.trace=[pt(fall.x,fall.y)];fall.guessing=false;el('guess').classList.remove('selected');el('guess').setAttribute('aria-pressed','false');el('fall-launch').disabled=true}
+  function updateFall(dt){if(fall.phase!=='running')return;fall.t+=dt*(fall.slow?.27:1);var edgeT=(EDGE_X-FALL_START_X)/fall.speed;
+    if(fall.t<edgeT){fall.x=FALL_START_X+fall.speed*fall.t;fall.y=TABLE_Y-BALL_R}
+    else{var u=fall.t-edgeT;fall.x=EDGE_X+fall.speed*u;fall.y=TABLE_Y-BALL_R+FALL_G*u*u/2}
+    if(fall.y+BALL_R>=FLOOR_Y){fall.y=FLOOR_Y-BALL_R;fall.phase='finished';el('fall-launch').disabled=false;el('fall-launch').textContent='▶ 再推一次';el('explain').hidden=false}
+    if(!fall.trace.length||dist(fall.trace[fall.trace.length-1],fall)>3)fall.trace.push(pt(fall.x,fall.y));
+  }
+  function drawTable(){
+    fillRound(0,FLOOR_Y,1200,72,0,'#163d49');line(pt(0,FLOOR_Y),pt(W,FLOOR_Y),'#638b8a',5);
+    ctx.save();var g=ctx.createLinearGradient(0,TABLE_Y,0,FLOOR_Y);g.addColorStop(0,'#365a69');g.addColorStop(1,'#233b45');ctx.fillStyle=g;ctx.fillRect(135,TABLE_Y+18,60,FLOOR_Y-TABLE_Y-18);ctx.fillRect(550,TABLE_Y+18,56,FLOOR_Y-TABLE_Y-18);ctx.restore();
+    fillRound(65,TABLE_Y-2,EDGE_X-65,29,5,'#d7a77e');fillRound(65,TABLE_Y-8,EDGE_X-65,14,5,'#edcb9a');line(pt(EDGE_X,TABLE_Y-8),pt(EDGE_X,TABLE_Y+22),'#ffe2b6',5);
+    fillRound(123,TABLE_Y+88,460,98,18,'#0f2b3c55');
+    text('桌面',385,TABLE_Y+54,26,'#d3e8ed','center');text('地面',1100,FLOOR_Y+32,24,'#a4c4d0','center');
+  }
+  function drawFall(){drawFloor();drawTable();
+    for(var i=0;i<fall.predictions.length;i++){var s=fall.predictions[i];if(s.length>1)tracePoints(s,'#d6a6ffc7',5)}
+    if(fall.stroke&&fall.stroke.length>1)tracePoints(fall.stroke,'#d6a6ff',6);
+    if(fall.trace.length>1){var tabletop=[],air=[];for(var j=0;j<fall.trace.length;j++){var p=fall.trace[j];if(p.x<=EDGE_X+1)tabletop.push(p);else air.push(p)}if(tabletop.length)tracePoints(tabletop,C.cyan,7);if(air.length)tracePoints([tabletop[tabletop.length-1]||pt(EDGE_X,TABLE_Y-BALL_R)].concat(air),C.orange,8)}
+    ball(fall.x,fall.y,BALL_R,'#4ecbff','#e7ffff');
+    if(fall.phase==='ready'){ctx.save();ctx.strokeStyle='#b5dbeb88';ctx.lineWidth=3;ctx.setLineDash([9,11]);ctx.beginPath();ctx.arc(fall.x,fall.y,40,0,Math.PI*2);ctx.stroke();ctx.restore();text('起点',165,266,22,'#e1f6ff','center')}
+    if(fall.guessing&&fall.phase==='ready'){lightPanel(739,179,335,91);text('① 先画猜想',771,210,28,'#d6a6ff');text('手指 / 鼠标在画面中画线',771,246,19,C.muted)}
+    if(fall.phase==='running'){
+      fillRound(837,111,251,56,13,'#102c41cb');text(fall.slow?'0.27 倍慢镜头':'观察小球的运动路线',963,140,23,'#edfbff','center');
+    }
+    if(fall.phase==='finished'){
+      lightPanel(824,116,325,78);text('② 比较猜想与实验',850,150,25,C.white);text('紫色＝猜想 · 亮色＝实验',851,176,16,C.muted);
+      if(fall.reveal){lightPanel(305,235,204,56);text('直线运动',407,263,27,C.cyan,'center');lightPanel(771,438,209,59);text('曲线运动',876,467,27,C.orange,'center')}
+    }
+  }
+
+  function setPage(p){page=p;document.querySelectorAll('.step').forEach(function(b){var active=Number(b.dataset.page)===page;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});el('controls-observe').hidden=page!==0;el('controls-shoot').hidden=page!==1;el('controls-fall').hidden=page!==2;var eyebrow=['观察 · 比较','探索 · 验证','预测 · 实验'][page],title=['哪些运动路线不一样？','怎样让蓝球击中红球？','小球离开桌面后怎样运动？'][page],hint=['点击运动物体，观察路线','从蓝球向前拖动，松手发射','先画猜想，再做实验'][page];el('stage-eyebrow').textContent=eyebrow;el('stage-title').textContent=title;el('stage-hint').textContent=hint; if(page===1)shotReset();if(page===2)fallReset(true)}
+  function selectScene(s){scene=s;selected=-1;showRoutes=false;clock=0;document.querySelectorAll('[data-scene]').forEach(function(b){b.classList.toggle('selected',b.dataset.scene===s)});el('routes').textContent='◎ 显示路线';el('routes').classList.remove('selected');el('routes').setAttribute('aria-pressed','false');el('stage-hint').textContent=s==='road'?'点击汽车，观察它走过的路':s==='lift'?'竖直、倾斜，也可能是直线':'点一点小车或飞鸟'}
+
+  var pointerId=null,dragMode='';
+  function down(p,id){if(pointerId!==null)return;pointerId=id;if(page===0){var closest=-1,best=85;for(var i=0;i<sceneObjects.length;i++){var d=dist(p,sceneObjects[i]);if(d<best){best=d;closest=sceneObjects[i].i}}selected=selected===closest?-1:closest}
+    else if(page===1){if(shot.running)return;if(shot.result)shotReset();if(dist(p,shot.blue)<=78){shot.drag=true;shot.dragAt=p;dragMode='shot'}}
+    else if(page===2&&fall.guessing&&fall.phase!=='running'){fall.stroke=[p];dragMode='draw'}
+  }
+  function move(p){if(dragMode==='shot'&&shot.drag)shot.dragAt=p;else if(dragMode==='draw'&&fall.stroke){var lastp=fall.stroke[fall.stroke.length-1];if(dist(lastp,p)>3)fall.stroke.push(p)}}
+  function up(p){if(dragMode==='shot'&&shot.drag)launchShot(p);else if(dragMode==='draw'&&fall.stroke){if(fall.stroke.length>1)fall.predictions.push(fall.stroke);if(fall.predictions.length>5)fall.predictions.shift();fall.stroke=null}pointerId=null;dragMode=''}
+  if(window.PointerEvent){canvas.addEventListener('pointerdown',function(e){var p=world(e.clientX,e.clientY);down(p,e.pointerId);try{canvas.setPointerCapture(e.pointerId)}catch(_){}});canvas.addEventListener('pointermove',function(e){if(pointerId===e.pointerId)move(world(e.clientX,e.clientY))});canvas.addEventListener('pointerup',function(e){if(pointerId===e.pointerId)up(world(e.clientX,e.clientY))});canvas.addEventListener('pointercancel',function(){pointerId=null;dragMode='';shot.drag=false;fall.stroke=null})}
+  else{canvas.addEventListener('mousedown',function(e){down(world(e.clientX,e.clientY),'mouse')});window.addEventListener('mousemove',function(e){if(pointerId==='mouse')move(world(e.clientX,e.clientY))});window.addEventListener('mouseup',function(e){if(pointerId==='mouse')up(world(e.clientX,e.clientY))});canvas.addEventListener('touchstart',function(e){e.preventDefault();var t=e.changedTouches[0];down(world(t.clientX,t.clientY),t.identifier)},{passive:false});canvas.addEventListener('touchmove',function(e){e.preventDefault();var t=e.changedTouches[0];if(t.identifier===pointerId)move(world(t.clientX,t.clientY))},{passive:false});canvas.addEventListener('touchend',function(e){e.preventDefault();var t=e.changedTouches[0];if(t.identifier===pointerId)up(world(t.clientX,t.clientY))},{passive:false})}
+  document.querySelectorAll('.step').forEach(function(b){b.addEventListener('click',function(){setPage(Number(b.dataset.page))})});
+  document.querySelectorAll('[data-scene]').forEach(function(b){b.addEventListener('click',function(){selectScene(b.dataset.scene)})});
+  document.querySelectorAll('[data-track]').forEach(function(b){b.addEventListener('click',function(){setTrack(b.dataset.track)})});
+  el('routes').addEventListener('click',function(){showRoutes=!showRoutes;selected=-1;this.textContent=showRoutes?'◎ 隐藏路线':'◎ 显示路线';this.classList.toggle('selected',showRoutes);this.setAttribute('aria-pressed',String(showRoutes))});
+  el('pause').addEventListener('click',function(){paused=!paused;this.textContent=paused?'▶ 继续':'Ⅱ 暂停';this.classList.toggle('selected',paused);this.setAttribute('aria-pressed',String(paused))});
+  el('shot-reset').addEventListener('click',shotReset);
+  el('guess').addEventListener('click',function(){fall.guessing=!fall.guessing;this.classList.toggle('selected',fall.guessing);this.setAttribute('aria-pressed',String(fall.guessing))});
+  el('guess-clear').addEventListener('click',function(){fall.predictions=[];fall.stroke=null});
+  el('push-speed').addEventListener('input',function(){fall.speed=Number(this.value)});
+  el('fall-launch').addEventListener('click',launchFall);
+  el('slow').addEventListener('click',function(){fall.slow=!fall.slow;this.classList.toggle('selected',fall.slow);this.setAttribute('aria-pressed',String(fall.slow));this.textContent=fall.slow?'◴ 慢镜头 开':'◴ 慢镜头'});
+  el('fall-restart').addEventListener('click',function(){fallReset(true)});
+  el('explain').addEventListener('click',function(){fall.reveal=!fall.reveal;this.textContent=fall.reveal?'隐藏答案':'查看路线'});
+  el('fullscreen').addEventListener('click',function(){var doc=document,root=doc.documentElement;if(doc.fullscreenElement||doc.webkitFullscreenElement){var exit=doc.exitFullscreen||doc.webkitExitFullscreen;if(exit)exit.call(doc)}else{var enter=root.requestFullscreen||root.webkitRequestFullscreen;if(enter)enter.call(root)}});
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'&&page<2&&!e.target.matches('input'))setPage(page+1);if(e.key==='ArrowLeft'&&page>0&&!e.target.matches('input'))setPage(page-1);if(e.key==='Escape'&&page===1&&shot.drag)shotReset()});
+  window.addEventListener('resize',resize);if(window.ResizeObserver)new ResizeObserver(resize).observe(stage);
+  function tick(now){var dt=last?clamp((now-last)/1000,0,.045):0;last=now;if(page===0){if(!paused)clock+=dt}else if(page===1)updateShot(dt);else updateFall(dt);prep();if(page===0)drawSceneOne();if(page===1)drawShot();if(page===2)drawFall();ctx.restore();window.requestAnimationFrame(tick)}
+  resize();setPage(0);window.requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

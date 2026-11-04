@@ -19,6 +19,7 @@
     '三上2.7加快溶解【凌瀚】': { level: 1, note: '基础交互' },
     '三上2.8用水分离': { level: 1, note: 'SVG 互动' },
     '三上3.2各种各样的运动': { level: 2, note: '相机、视频处理', camera: true, highLoad: true },
+    '三上3.3直线运动和曲线运动': { level: 2, note: 'Canvas 轨迹、击球与桌沿运动模拟' },
     '三下2.1不同种类的动物': { level: 1, note: '基础交互' },
     '四上2.2认识呼吸器官': { level: 4, note: '大型人体三维模型', highLoad: true },
     '四上2.4测量肺活量': { level: 2, note: 'Canvas 与数据记录', highLoad: true },
