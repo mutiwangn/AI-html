@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3f6fb">
+<meta name="description" content="教科版三年级上册第三单元第8课：观察过山车运动，用相同路程或相同时间公平比较，改进轨道并观察木块移动。单体离线互动课堂。">
+<title>测试“过山车” · 互动实验室</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:#f3f6fb;color:#19314f;font:19px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;-webkit-tap-highlight-color:transparent}button,input,select{font:inherit}button{border:0;background:none;color:inherit;cursor:pointer;touch-action:manipulation}button:disabled{opacity:.4;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #ec9c28;outline-offset:4px}button svg{height:22px;width:22px;vertical-align:middle;pointer-events:none}.hidden,[hidden]{display:none!important}.app{height:100vh;height:100dvh;display:flex;flex-direction:column;padding:0 26px 16px;max-width:2200px;margin:auto}.header{height:88px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-shrink:0}.brand{display:flex;align-items:center;gap:12px}.brand svg{width:40px;height:40px;flex-shrink:0}h1{font-size:clamp(20px,2vw,30px);margin:0;white-space:nowrap;letter-spacing:.02em}.nav{display:flex;gap:6px}.nav button{min-height:48px;display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:9px;color:#637893;font-weight:700;white-space:nowrap}.nav b{width:25px;height:25px;border-radius:50%;border:1.5px solid #bbcbe0;font-size:15px;display:grid;place-items:center}.nav button.active{background:#e4edfd;color:#235ed2}.nav button.active b{background:#286ce6;border-color:#286ce6;color:#fff}.head-tools{display:flex;gap:7px}.icon-btn{width:44px;height:44px;border:1px solid #d7e2ef;border-radius:8px;background:#fff;display:grid;place-items:center}.icon-btn:hover{background:#e6effe}.page{display:flex;gap:20px;flex:1;min-height:0}.main-zone{display:flex;flex-direction:column;flex:1;min-width:0;min-height:0;gap:12px}.scene,.test-card{background:#fff;border:1px solid #dbe5f1;border-radius:12px;overflow:hidden;position:relative;min-height:0}.scene{flex:1;display:flex;flex-direction:column}.scene-top{position:absolute;left:22px;top:18px;right:18px;display:flex;justify-content:space-between;align-items:center;gap:10px;z-index:2;pointer-events:none}.scene-top>span{color:#637c98;font-size:18px}.sim-badge{font-size:15px;background:#edf3fc;border-radius:5px;color:#617a98;padding:6px 10px;white-space:nowrap}.stage{display:block;width:100%;height:100%;min-height:0;flex:1;touch-action:none;user-select:none;-webkit-user-select:none}.stage text{font-family:inherit;pointer-events:none;user-select:none}.stage [data-ball],.stage [data-node]{cursor:grab}.stage [data-ball]:active,.stage [data-node]:active{cursor:grabbing}.scene-status{position:absolute;bottom:17px;left:50%;transform:translateX(-50%);background:#eaf2ff;color:#255cc4;border-radius:8px;font-size:21px;font-weight:650;padding:9px 18px;max-width:calc(100% - 28px);white-space:nowrap;text-align:center;pointer-events:none}.scene-status.warn{background:#fff0db;color:#995c19}.toolbar{display:flex;align-items:center;gap:10px;min-height:58px;flex-shrink:0}.primary{background:#286ce6;color:#fff;border-radius:9px;min-height:54px;padding:10px 24px;font-weight:700;display:flex;justify-content:center;align-items:center;gap:9px;white-space:nowrap}.primary:hover{background:#205bc8}.secondary{background:#fff;border:1px solid #cedbed;border-radius:9px;min-height:48px;padding:9px 16px;display:flex;align-items:center;justify-content:center;gap:7px}.secondary.active{background:#fff4db;border-color:#e9bd61;color:#936113}.toolbar .secondary{height:54px}.toolbar-note{margin-left:auto;font-size:17px;color:#6d819b;text-align:right}.aside{width:238px;flex-shrink:0;display:flex;flex-direction:column;gap:20px;padding:12px 0;min-height:0}.aside h2{font-size:25px;line-height:1.4;margin:0 0 8px;letter-spacing:.01em}.aside p{margin:0;color:#6d8198;font-size:18px;line-height:1.65}.select-wrap{position:relative}.select-wrap select{appearance:none;-webkit-appearance:none;width:100%;min-height:50px;padding:10px 34px 10px 15px;border:1px solid #ccd9eb;background:#fff;border-radius:8px;font-weight:650;color:#234265}.select-wrap:after{content:'⌄';position:absolute;right:15px;top:10px;pointer-events:none;color:#6c85a3}.button-row{display:flex;gap:8px}.button-row>button{flex:1;padding:9px 8px;font-size:17px}.readout{border-top:1px solid #d8e3f0;padding-top:18px;display:flex;flex-direction:column;gap:15px}.clue{font-size:24px;font-weight:700;line-height:1.6;min-height:76px}.minor{font-size:16px;color:#72849b}.metric-label{font-size:18px;color:#667e9c}.metric{font-size:54px;font-weight:750;line-height:1.18;letter-spacing:-1.5px;font-variant-numeric:tabular-nums;white-space:nowrap}.metric small{font-size:21px;font-weight:550;letter-spacing:0;margin-left:5px}.metric.muted{color:#8093ac}.metric-note{font-size:17px;margin-top:7px;color:#70839b}.scrub{margin-top:auto}.slider-label{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-bottom:9px;font-size:18px}.slider-label strong{font-variant-numeric:tabular-nums}.range{width:100%;height:44px;margin:0;accent-color:#286ce6;cursor:pointer;touch-action:pan-y}.range::-webkit-slider-runnable-track{height:8px;border-radius:5px;background:#d6e2f2}.range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:28px;height:28px;border-radius:50%;background:#286ce6;border:4px solid #fff;box-shadow:0 1px 5px #1f426444;margin-top:-10px}.range{-webkit-appearance:none;appearance:none;background:transparent}.range::-moz-range-track{height:8px;border-radius:5px;background:#d6e2f2}.range::-moz-range-thumb{width:22px;height:22px;border:4px solid #fff;border-radius:50%;background:#286ce6;box-shadow:0 1px 5px #1f426444}.twin{display:flex;gap:14px;flex:1;min-height:0}.test-card{display:flex;flex:1;flex-direction:column;min-width:0}.card-heading{height:66px;display:flex;align-items:center;justify-content:space-between;padding:16px 20px 0;flex-shrink:0;gap:6px}.card-heading h2{font-size:23px;margin:0;display:flex;align-items:center;gap:9px;white-space:nowrap}.track-dot{width:10px;height:10px;border-radius:50%;background:#347bea}.track-dot.teal{background:#199c8d}.card-state{font-size:16px;color:#6c829c;white-space:nowrap}.card-state.done{color:#23816c}.card-state.warn{color:#ae681b}.card-result{padding:6px 22px 20px;flex-shrink:0}.card-result .metric{font-size:57px;line-height:1.15}.card-result .metric-label{font-size:17px;margin-bottom:4px}.method-switch{display:flex;gap:7px;padding:4px;background:#e3ebf7;border-radius:10px}.method-switch button{flex:1;border-radius:7px;padding:10px 4px;font-size:18px;font-weight:650;min-height:47px;color:#607693}.method-switch button.active{background:#fff;color:#225fc9;box-shadow:0 1px 4px #26447012}.condition{border-top:1px solid #d6e1ef;padding-top:20px}.condition .metric{font-size:45px;margin:5px 0 8px}.common-note{border-top:1px solid #d6e1ef;padding-top:16px;margin-top:auto;color:#6d829b;font-size:17px;line-height:1.7}.question{font-size:22px;font-weight:650;line-height:1.65}.node-name{font-size:21px;font-weight:700;margin-bottom:6px}.height-value{font-size:48px;font-weight:750;letter-spacing:-1px;line-height:1.2;font-variant-numeric:tabular-nums}.height-value small{font-size:20px;font-weight:550;margin-left:4px;letter-spacing:0}.stepper{display:flex;align-items:center;gap:12px;margin-bottom:6px}.stepper button{width:43px;height:43px;border:1px solid #c8d7eb;border-radius:8px;background:#fff;font-size:26px;flex-shrink:0}.stepper .height-value{flex:1;text-align:center}.reset-design{align-self:flex-start;color:#5f7897;border-bottom:1px solid #b7c8df;padding:3px 0;min-height:35px;font-size:17px}.edit-hint{font-size:16px;color:#627b97}.dialog-backdrop{position:fixed;inset:0;background:#10243d66;z-index:20;display:flex;align-items:center;justify-content:center;padding:22px;backdrop-filter:blur(4px)}.dialog{background:#fff;border:1px solid #d3e0f0;border-radius:15px;padding:26px 30px;width:min(650px,100%);max-height:calc(100dvh - 44px);overflow:auto;box-shadow:0 20px 80px #112b5033}.dialog-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px}.dialog h2{font-size:26px;margin:0}.dialog h3{font-size:20px;margin:20px 0 8px}.dialog p{margin:8px 0;color:#607691;font-size:17px;line-height:1.75}.dialog .close{width:40px;height:40px;border-radius:7px;font-size:29px;color:#71859e}.dialog .close:hover{background:#eef3fa}.rating-row{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid #e1e8f2;padding:16px 0}.rating-row>span{font-size:20px;font-weight:600}.stars{display:flex;gap:3px;flex-shrink:0}.stars button{font-size:32px;width:41px;height:46px;color:#cdd9e8;line-height:1}.stars button.active{color:#e3a22f}.rating-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}.rating-footer strong{font-size:25px;color:#a87320}.small-link{font-size:16px;color:#6380a3;padding:10px 3px}.help-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#183752;color:#fff;border-radius:9px;padding:13px 22px;max-width:90%;z-index:40;font-size:18px;text-align:center;box-shadow:0 4px 20px #16304a24}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.noselect{user-select:none}
+@media(min-width:1700px){.aside{width:280px;padding-top:20px;gap:26px}.aside h2{font-size:29px}.metric{font-size:66px}.card-result .metric{font-size:68px}.card-heading{height:78px}.card-heading h2{font-size:27px}.toolbar{min-height:68px}.primary{min-height:60px;font-size:22px}.app{padding:0 34px 20px}.header{height:98px}}
+@media(max-width:1150px){.app{padding:0 18px 12px}.header{gap:10px;height:80px}.nav button{padding:8px 10px;font-size:17px;gap:6px}.brand{gap:8px}.brand svg{width:33px}.aside{width:210px;gap:16px}.page{gap:16px}.aside h2{font-size:23px}.toolbar-note{font-size:15px}.card-heading{padding:12px 15px 0;height:58px}.card-heading h2{font-size:21px}.card-state{font-size:14px}.card-result{padding:4px 16px 16px}.card-result .metric{font-size:49px}.metric{font-size:47px}.primary{padding:10px 19px}.twin{gap:10px}.head-tools{gap:5px}.icon-btn{width:40px;height:40px}}
+@media(max-width:950px){.header{height:112px;flex-wrap:wrap;justify-content:flex-start;align-content:center;row-gap:6px}.brand{flex:1}.head-tools{margin-left:auto}.nav{order:3;width:100%;justify-content:center}.nav button{flex:1;justify-content:center;min-height:40px;padding:5px 8px}.nav b{width:23px;height:23px}.aside{width:195px;padding:5px 0;gap:13px}.aside p{font-size:16px}.button-row{flex-direction:column;gap:7px}.button-row button{min-height:43px}.aside h2{font-size:21px}.metric{font-size:43px}.clue{font-size:22px;min-height:58px}.card-state{max-width:90px;overflow:hidden;text-overflow:ellipsis}.toolbar-note{max-width:210px}.scene-top>span{font-size:16px}.card-heading h2{font-size:19px}.card-heading{padding:11px 12px 0;height:48px}.card-result{padding:4px 12px 15px}.card-result .metric{font-size:43px}.card-result .metric small{font-size:18px}.card-result .metric-label{font-size:15px}.method-switch button{font-size:16px}.height-value{font-size:41px}.stepper{gap:6px}.stepper button{width:34px;height:39px}.common-note{font-size:15px}.condition{padding-top:13px}.condition .metric{font-size:38px}.question{font-size:19px}}
+@media(max-width:640px) and (orientation:portrait){body{font-size:17px}.app{padding:0 10px 9px}.header{height:105px;row-gap:4px}.brand svg{width:29px;height:29px}h1{font-size:22px}.icon-btn{width:35px;height:35px}.icon-btn svg{width:20px;height:20px}.nav{gap:3px}.nav button{font-size:15px;padding:6px 4px;gap:5px;min-height:38px}.nav b{width:21px;height:21px;font-size:13px}.page{flex-direction:column;gap:10px}.main-zone{gap:7px;min-height:0}.scene-top{top:13px;left:13px;right:12px}.scene-top>span{font-size:14px}.sim-badge{font-size:12px;padding:4px 7px}.scene-status{font-size:16px;padding:7px 13px;bottom:12px}.toolbar{min-height:46px;gap:7px}.primary{min-height:46px;font-size:16px;padding:9px 14px}.toolbar .secondary{height:46px;min-height:46px;padding:9px 11px;font-size:15px}.toolbar-note{font-size:12px;max-width:134px;line-height:1.5}.aside{width:100%;flex-shrink:0;padding:0;display:grid;gap:10px;align-items:center}.aside h2,.aside p.intro,.common-note{display:none}.obs-aside{grid-template-columns:1fr 1fr}.select-wrap select{min-height:44px;padding:8px 27px 8px 12px;font-size:16px}.select-wrap:after{top:7px}.button-row{flex-direction:row;gap:6px}.button-row button{font-size:14px;padding:6px;min-height:44px}.readout{grid-column:1/-1;border-top:0;padding-top:0;display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:8px;min-height:49px}.clue{font-size:18px;min-height:0;line-height:1.45}.minor{font-size:12px}.metric-label{font-size:14px}.metric{font-size:29px}.metric small{font-size:15px;margin-left:3px}.metric-note{font-size:12px;margin-top:0}.obs-distance{display:flex;align-items:center;gap:8px}.obs-distance .metric-note{max-width:65px}.scrub{display:none}.twin{gap:8px}.card-heading{height:45px;padding:10px 11px 0;align-items:flex-start}.card-heading h2{font-size:17px;gap:6px}.track-dot{width:8px;height:8px}.card-state{font-size:11px;margin-top:3px;max-width:58px}.card-result{padding:2px 12px 12px}.card-result .metric{font-size:36px}.card-result .metric small{font-size:15px}.card-result .metric-label{font-size:12px}.compare-aside{grid-template-columns:1fr 1.25fr;gap:8px 14px}.method-switch{padding:3px;gap:3px}.method-switch button{min-height:42px;font-size:16px;padding:8px 3px}.condition{border:0;padding:0;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0 4px}.condition>.metric-label{font-size:12px;grid-column:1}.condition .metric{font-size:25px;margin:0;grid-column:1}.condition .metric small{font-size:14px}.condition input{grid-column:2;grid-row:1/3;min-width:50px}.compare-aside .question{grid-column:1/-1;text-align:center;font-size:16px;line-height:1.4;min-height:23px}.improve-aside{grid-template-columns:1.1fr 1fr;gap:4px 16px}.improve-aside>div:first-child{display:none}.height-control{display:grid;grid-template-columns:1fr;gap:0}.node-name{font-size:14px;margin:0}.stepper{margin:1px 0 0;gap:5px}.height-value{font-size:30px}.height-value small{font-size:15px}.stepper button{width:32px;height:33px;font-size:22px}.improve-aside .range{height:37px}.edit-extras{display:flex;flex-direction:column;gap:4px}.edit-hint{font-size:12px}.reset-design{font-size:14px;min-height:32px}.dialog{padding:20px}.dialog-backdrop{padding:13px}.dialog h2{font-size:23px}.dialog p{font-size:15px}.rating-row>span{font-size:16px}.stars button{width:32px;font-size:27px;height:42px}.rating-row{gap:4px;padding:13px 0}.rating-footer strong{font-size:22px}.toast{font-size:15px;bottom:22px}}
+@media(max-height:620px) and (orientation:landscape){body{font-size:16px}.app{padding:0 12px 7px}.header{height:57px;flex-wrap:nowrap;align-content:normal}.brand{flex:0 1 auto;gap:6px}.brand svg{width:27px;height:27px}h1{font-size:19px}.nav{order:0;width:auto;flex:1;justify-content:center}.nav button{flex:0 1 auto;font-size:15px;padding:6px 9px;min-height:36px;gap:5px}.nav b{width:21px;height:21px;font-size:12px}.head-tools{gap:4px}.icon-btn{width:33px;height:33px}.icon-btn svg{height:19px;width:19px}.page{gap:12px}.aside{width:185px;gap:10px;padding:0}.aside h2{font-size:19px;margin-bottom:5px}.aside p{font-size:14px}.select-wrap select{min-height:39px;padding:7px 28px 7px 12px;font-size:16px}.select-wrap:after{top:5px}.button-row{flex-direction:row;gap:5px}.button-row button{font-size:14px;min-height:38px;padding:6px}.readout{padding-top:9px;gap:7px}.clue{font-size:19px;min-height:40px}.metric{font-size:35px}.metric small{font-size:17px}.metric-label{font-size:14px}.metric-note{font-size:13px;margin-top:2px}.minor{font-size:12px}.scrub{display:none}.main-zone{gap:7px}.toolbar{min-height:42px;gap:7px}.primary{min-height:42px;padding:8px 15px;font-size:16px}.toolbar .secondary{height:42px;min-height:42px;font-size:14px;padding:8px 11px}.toolbar-note{font-size:12px;max-width:195px}.scene-top{top:10px;left:14px}.scene-top>span{font-size:14px}.sim-badge{font-size:11px;padding:4px 6px}.scene-status{font-size:16px;padding:7px 13px;bottom:10px}.card-heading{height:39px;padding:9px 12px 0}.card-heading h2{font-size:17px}.card-state{font-size:12px}.card-result{padding:2px 12px 10px;display:flex;align-items:center;justify-content:space-between;gap:7px}.card-result .metric{font-size:34px}.card-result .metric small{font-size:15px}.card-result .metric-label{font-size:13px;margin:0}.method-switch button{min-height:37px;padding:7px 4px;font-size:15px}.condition{padding-top:9px}.condition .metric{font-size:29px;margin:2px 0}.condition .range{height:30px}.common-note{font-size:12px;padding-top:8px;line-height:1.55}.question{font-size:16px;line-height:1.5}.node-name{font-size:16px;margin-bottom:3px}.height-value{font-size:32px}.height-value small{font-size:15px}.stepper button{height:34px;width:31px;font-size:22px}.height-control .range{height:30px}.edit-hint{font-size:12px}.reset-design{font-size:14px;min-height:29px}.dialog{padding:18px 24px}.dialog h2{font-size:23px}.dialog p{font-size:15px}.rating-row{padding:9px 0}.rating-row>span{font-size:17px}.stars button{height:36px;font-size:28px}.dialog-head{margin-bottom:5px}}
+.card-result .metric.is-text{font-size:28px;letter-spacing:0;line-height:1.9}
+@media(max-width:640px) and (orientation:portrait){.obs-aside>div:nth-child(2),.compare-aside>div:first-child,.desktop-break{display:none}.card-state.warn{max-width:none;position:absolute;top:43px;left:12px;right:12px;text-align:center;font-size:13px;white-space:normal;line-height:1.3}.card-result .metric.is-text{font-size:23px}}
+@media(max-width:640px) and (orientation:portrait){.twin{flex-direction:column}.card-heading{height:35px;padding-top:8px;align-items:center}.card-heading h2{font-size:17px}.card-state{font-size:12px;max-width:110px}.card-result{display:flex;align-items:baseline;justify-content:space-between;padding:0 13px 8px;gap:8px}.card-result .metric{font-size:32px}.card-result .metric-label{font-size:13px;margin:0}.card-state.warn{position:static;font-size:12px;max-width:130px;text-align:right}.card-result .metric.is-text{font-size:22px;line-height:1.5}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="header">
+    <div class="brand"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M4 29C11 29 11 12 19 12S25 32 34 27L40 20" fill="none" stroke="#286ce6" stroke-width="4" stroke-linecap="round"/><path d="M10 36V24M20 36V17M30 36V28" stroke="#aec6e8" stroke-width="3" stroke-linecap="round"/><circle cx="18" cy="7" r="4.5" fill="#efa949"/></svg><h1>测试“过山车”</h1></div>
+    <nav class="nav" aria-label="探究任务"><button class="active" data-page="observe" aria-current="page"><b>1</b>观察运动</button><button data-page="compare"><b>2</b>公平比较</button><button data-page="improve"><b>3</b>改进验证</button></nav>
+    <div class="head-tools"><button class="icon-btn" id="rating-open" title="作品评价" aria-label="作品评价"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"/></svg></button><button class="icon-btn" id="help-open" title="教师说明" aria-label="教师说明"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 8.5a2.6 2.6 0 0 1 5 1c0 2-2.5 2-2.5 4"/><circle cx="12" cy="17" r=".8" fill="currentColor"/></svg></button><button class="icon-btn" id="fullscreen" title="全屏" aria-label="全屏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg></button></div>
+  </header>
+  <section class="page" id="page-observe" aria-label="观察运动">
+    <div class="main-zone">
+      <div class="scene"><div class="scene-top"><span id="obs-hint">拖动小球，或从起点放球</span><b class="sim-badge">模拟 · 慢放</b></div><svg class="stage" id="obs-stage" role="group" aria-label="可拖动小球的过山车轨道"></svg><div id="obs-status" class="scene-status hidden"></div></div>
+      <div class="toolbar"><button class="primary" id="obs-play">从起点放球</button><button class="secondary" id="obs-reset" aria-label="小球回到起点">回到起点</button><span class="toolbar-note">轻轻放手，不推小球</span></div>
+    </div>
+    <aside class="aside obs-aside">
+      <div class="select-wrap"><select id="obs-source" aria-label="选择观察的轨道"><option value="A">轨道 A</option><option value="B">轨道 B</option></select></div>
+      <div><h2>小球在哪里？</h2><p class="intro">以起点为参照，<br>说说你看到的运动。</p></div>
+      <div class="button-row"><button class="secondary" id="clue-toggle" aria-pressed="false">位置线索</button><button class="secondary" id="measure-toggle" aria-pressed="false">沿轨测量</button></div>
+      <div class="readout"><div id="position-readout"><div class="minor" id="position-caption">先观察，再说一说</div><div class="clue" id="position-clue">小球怎样运动？</div></div><div class="obs-distance hidden" id="distance-readout"><div><div class="metric-label">沿轨道已走</div><div class="metric"><span id="obs-distance">0</span><small>厘米</small></div></div><div class="metric-note" id="obs-length">全长 — 厘米</div></div></div>
+      <div class="scrub"><label class="slider-label" for="obs-scrub">观察位置<span class="minor">沿轨移动</span></label><input class="range" id="obs-scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="沿轨道移动小球"></div>
+    </aside>
+  </section>
+  <section class="page hidden" id="page-compare" aria-label="公平比较">
+    <div class="main-zone"><div class="twin">
+      <article class="test-card"><div class="card-heading"><h2><i class="track-dot"></i>轨道 A</h2><span class="card-state" id="cmp-state-A">准备放球</span></div><svg class="stage" id="cmp-stage-A" role="img" aria-label="公平比较轨道A"></svg><div class="card-result"><div class="metric-label cmp-label">模拟用时</div><div class="metric"><span id="cmp-value-A">—</span><small class="cmp-unit">秒</small></div></div></article>
+      <article class="test-card"><div class="card-heading"><h2><i class="track-dot teal"></i>轨道 B</h2><span class="card-state" id="cmp-state-B">准备放球</span></div><svg class="stage" id="cmp-stage-B" role="img" aria-label="公平比较轨道B"></svg><div class="card-result"><div class="metric-label cmp-label">模拟用时</div><div class="metric"><span id="cmp-value-B">—</span><small class="cmp-unit">秒</small></div></div></article>
+    </div><div class="toolbar"><button class="primary" id="cmp-play">一起放球</button><button class="secondary" id="cmp-reset">重新准备</button><span class="toolbar-note">模拟计时 · 慢放观察</span></div></div>
+    <aside class="aside compare-aside"><div><h2>怎样公平比较？</h2><p class="intro">只比较相同的条件。</p></div><div class="method-switch" aria-label="比较方法"><button class="active" id="mode-distance" aria-pressed="true">同路程</button><button id="mode-time" aria-pressed="false">同时间</button></div><div class="condition"><label class="metric-label" id="target-label" for="cmp-target">都沿轨道走到</label><div class="metric"><span id="target-value">2.0</span><small id="target-unit">米</small></div><input class="range" id="cmp-target" type="range" min="0.5" max="2.9" step="0.1" value="2" aria-label="共同路程，米"></div><div class="question" id="cmp-question">哪条轨道用时更短？</div><div class="common-note">同一种小球<br>同时从静止释放</div></aside>
+  </section>
+  <section class="page hidden" id="page-improve" aria-label="改进验证">
+    <div class="main-zone"><div class="twin">
+      <article class="test-card"><div class="card-heading"><h2><i class="track-dot"></i>原方案 A</h2><span class="card-state" id="imp-state-A">准备放球</span></div><svg class="stage" id="imp-stage-A" role="img" aria-label="原方案轨道和木块"></svg><div class="card-result"><div class="metric-label">木块移动</div><div class="metric"><span id="imp-value-A">—</span><small>厘米</small></div></div></article>
+      <article class="test-card"><div class="card-heading"><h2><i class="track-dot teal"></i>改进方案</h2><span class="card-state" id="imp-state-B">拖动支点</span></div><svg class="stage" id="imp-stage-B" role="group" aria-label="可上下拖动支点的改进轨道"></svg><div class="card-result"><div class="metric-label">木块移动</div><div class="metric"><span id="imp-value-B">—</span><small>厘米</small></div></div></article>
+    </div><div class="toolbar"><button class="primary" id="imp-play">对照试跑</button><button class="secondary" id="imp-reset">重新准备</button><span class="toolbar-note">模拟 · 小球能把木块推多远？</span></div></div>
+    <aside class="aside improve-aside"><div><h2>改一处，再试试</h2><p class="intro">上下拖动支点，<br>观察证据怎样变化。</p></div><div class="height-control"><div class="node-name" id="node-name">起点高度</div><div class="stepper"><button id="height-minus" aria-label="支点降低1厘米">−</button><div class="height-value"><span id="height-value">42</span><small>厘米</small></div><button id="height-plus" aria-label="支点升高1厘米">+</button></div><input class="range" id="height-slider" type="range" min="4" max="72" step="1" value="42" aria-label="选中支点高度，厘米"></div><div class="edit-extras"><span class="edit-hint">点选支点，调整高度</span><br class="desktop-break"><button class="reset-design" id="restore-design">恢复原方案</button></div><div class="common-note">同一种小球、木块和桌面<br>末端保持水平</div></aside>
+  </section>
+</div>
+<div class="dialog-backdrop hidden" id="rating-dialog"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="rating-title"><div class="dialog-head"><h2 id="rating-title">我们的作品评价</h2><button class="close" data-close="rating-dialog" aria-label="关闭作品评价">×</button></div><p>结合实际搭建和试跑，给每项评一评。</p><div id="rating-rows"></div><div class="rating-footer"><strong id="rating-total">0 / 12 星</strong><button class="small-link" id="rating-clear">清空评价</button></div></section></div>
+<div class="dialog-backdrop hidden" id="help-dialog"><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="help-title"><div class="dialog-head"><h2 id="help-title">教师说明</h2><button class="close" data-close="help-dialog" aria-label="关闭教师说明">×</button></div><p>教科版三年级上册 · 第三单元第 8 课</p><h3>先提问，再打开线索</h3><p>观察页可以直接拖动小球。位置以起点为参照，从当前画面描述左、右、上、下；距离用沿轨道的长度表示。</p><h3>公平地比较</h3><p>轨道 A、B 长度不同。选择相同路程比用时，或相同时间比路程。计时读数是模型中的时间，动画以 0.4 倍速度慢放。</p><h3>让证据支持改进</h3><p>改进页使用固定原方案 A。调整前四个支点，最后两点保持水平。相同小球从静止释放，撞击相同木块；木块移动由碰撞前瞬时速度计算。</p><p>这是简化的滚动与碰撞模型。木块停止后画面定格，球此时不一定自然停稳。表面、球和木块参数固定；不模拟材料形变、侧向飞出和随机误差。小球爬不上坡时停在最高可达处，便于讨论，未继续模拟倒滚；失去支撑时在判定点定格并标记位置。模拟读数不能代替课堂实测。</p><div class="help-actions"><button class="secondary" id="import-lesson7">载入上节轨道</button><button class="secondary" data-close="help-dialog">回到实验</button></div><p class="minor">同一浏览器、同一网站内保存的第 7 课作品，可载入观察页。其余两页保留标准对照方案。</p></section></div>
+<div id="toast" class="toast hidden" role="status"></div><div id="status-live" class="sr-only" aria-live="polite"></div>
+<script>
+/* CoasterPhysics — dependency-free, ES5-compatible rolling-ball model.
+ * Points and lengths: metres. Time: seconds. y is vertical, positive upwards.
+ * The supplied polyline is the nominal path of the ball centre.
+ * Assumptions: a solid sphere rolls without slipping in an upright open trough;
+ * the side walls constrain lateral motion. Only loss of upward support is tested.
+ * Rolling resistance is mu * m * g * cos(slope), with constant mu = 0.012.
+ * This is a teaching model, not a prediction of a particular classroom material.
+ */
+(function (root, factory) {
+  'use strict';
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.CoasterPhysics = api;
+}(typeof window !== 'undefined' ? window : (typeof global !== 'undefined' ? global : this), function () {
+  'use strict';
+
+  var EPS = 1e-10;
+  var G = 9.81;
+  var ROTATION_FACTOR = 5 / 7;
+  var DEFAULT_MU = 0.012;
+  var DEFAULT_SUPPORT_WINDOW = 0.035;
+
+  function finite(n) { return typeof n === 'number' && isFinite(n); }
+  function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+  function length3(x, y, z) { return Math.sqrt(x * x + y * y + z * z); }
+  function copyPoint(p) { return { x: p.x, y: p.y, z: p.z }; }
+  function mixPoint(a, b, u) {
+    return { x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u, z: a.z + (b.z - a.z) * u };
+  }
+  function unit(x, y, z) {
+    var len = length3(x, y, z);
+    return len > EPS ? { x: x / len, y: y / len, z: z / len } : { x: 0, y: 0, z: 0 };
+  }
+
+  function segmentAt(track, s) {
+    var low = 0;
+    var high = track.points.length - 1;
+    var mid;
+    if (s <= 0) return 0;
+    if (s >= track.length) return Math.max(0, high - 1);
+    while (high - low > 1) {
+      mid = (low + high) >> 1;
+      if (track.distances[mid] <= s) low = mid;
+      else high = mid;
+    }
+    return low;
+  }
+
+  function pointAt(track, s) {
+    var i;
+    var ds;
+    if (!track || !track.points || !track.points.length) return { x: 0, y: 0, z: 0 };
+    if (track.points.length === 1 || s <= 0) return copyPoint(track.points[0]);
+    if (s >= track.length) return copyPoint(track.points[track.points.length - 1]);
+    i = segmentAt(track, s);
+    ds = track.distances[i + 1] - track.distances[i];
+    return mixPoint(track.points[i], track.points[i + 1], ds > EPS ? (s - track.distances[i]) / ds : 0);
+  }
+
+  /* A physical-length window avoids curvature spikes caused by unequal sample
+   * spacing. It approximates the rail over 7 cm by default, not per-pixel turns.
+   * Geometry is still expected to be smooth at joints; real sharp crests can
+   * legitimately cause loss of support.
+   */
+  function geometryAt(track, s) {
+    var w = track.options.supportWindow;
+    var left = Math.max(0, s - w);
+    var right = Math.min(track.length, s + w);
+    var p = pointAt(track, s);
+    var a = pointAt(track, left);
+    var b = pointAt(track, right);
+    var i = segmentAt(track, s);
+    var base = track.segments[i] || { tangent: { x: 1, y: 0, z: 0 } };
+    var u;
+    var v;
+    var tangent;
+    var curvature;
+    var windowLength;
+    var parallel;
+    if (s - left < 1e-6 || right - s < 1e-6) {
+      return { tangent: base.tangent, curvature: { x: 0, y: 0, z: 0 } };
+    }
+    u = unit(p.x - a.x, p.y - a.y, p.z - a.z);
+    v = unit(b.x - p.x, b.y - p.y, b.z - p.z);
+    tangent = unit(u.x + v.x, u.y + v.y, u.z + v.z);
+    if (length3(tangent.x, tangent.y, tangent.z) < EPS) tangent = base.tangent;
+    windowLength = (right - left) / 2;
+    curvature = { x: (v.x - u.x) / windowLength, y: (v.y - u.y) / windowLength, z: (v.z - u.z) / windowLength };
+    parallel = curvature.x * tangent.x + curvature.y * tangent.y + curvature.z * tangent.z;
+    curvature.x -= parallel * tangent.x;
+    curvature.y -= parallel * tangent.y;
+    curvature.z -= parallel * tangent.z;
+    return { tangent: tangent, curvature: curvature };
+  }
+
+  /* N/m along the upward-facing track normal. A negative value would require
+   * an open trough to pull the ball downward, so contact is lost.
+   * For a horizontal crest this becomes g - v^2 / R.
+   */
+  function supportAt(track, s, speed) {
+    var geometry = geometryAt(track, s);
+    var ty = clamp(geometry.tangent.y, -1, 1);
+    var normalVertical = Math.sqrt(Math.max(0, 1 - ty * ty));
+    var value;
+    if (normalVertical < 1e-5) value = 0;
+    else value = (track.options.gravity * (1 - ty * ty) + speed * speed * geometry.curvature.y) / normalVertical;
+    return { value: value, tangent: geometry.tangent, curvature: geometry.curvature };
+  }
+
+  function prepare(points, options) {
+    var o = options || {};
+    var clean = [];
+    var distances = [0];
+    var horizontalDistances = [0];
+    var segments = [];
+    var total = 0;
+    var horizontal = 0;
+    var invalid = '';
+    var i;
+    var p;
+    var a;
+    var dx;
+    var dy;
+    var dz;
+    var ds;
+    var dh;
+    var opts = {
+      gravity: finite(o.gravity) && o.gravity > 0 ? o.gravity : G,
+      rollingResistance: finite(o.rollingResistance) && o.rollingResistance >= 0 ? o.rollingResistance : DEFAULT_MU,
+      supportWindow: finite(o.supportWindow) && o.supportWindow > 0 ? o.supportWindow : DEFAULT_SUPPORT_WINDOW,
+      derail: o.derail !== false
+    };
+    if (!points || typeof points.length !== 'number') points = [];
+    for (i = 0; i < points.length; i += 1) {
+      p = points[i];
+      if (!p || !finite(p.x) || !finite(p.y) || !finite(p.z)) { invalid = 'non-finite-point'; break; }
+      if (!clean.length) { clean.push(copyPoint(p)); continue; }
+      a = clean[clean.length - 1];
+      dx = p.x - a.x;
+      dy = p.y - a.y;
+      dz = p.z - a.z;
+      ds = length3(dx, dy, dz);
+      if (ds < EPS) continue;
+      dh = Math.sqrt(dx * dx + dz * dz);
+      total += ds;
+      horizontal += dh;
+      clean.push(copyPoint(p));
+      distances.push(total);
+      horizontalDistances.push(horizontal);
+      segments.push({
+        length: ds,
+        tangent: { x: dx / ds, y: dy / ds, z: dz / ds },
+        horizontalRatio: dh / ds,
+        acceleration: ROTATION_FACTOR * opts.gravity * (-dy / ds - opts.rollingResistance * dh / ds)
+      });
+    }
+    if (!invalid && clean.length < 2) invalid = 'too-short';
+    return {
+      points: clean,
+      distances: distances,
+      horizontalDistances: horizontalDistances,
+      segments: segments,
+      length: total,
+      totalLength: total,
+      horizontalLength: horizontal,
+      options: opts,
+      valid: !invalid,
+      invalidReason: invalid
+    };
+  }
+
+  function updateOutput(run) {
+    var info;
+    run.point = pointAt(run.track, run.s);
+    run.progress = run.track.length > EPS ? clamp(run.s / run.track.length, 0, 1) : 0;
+    info = supportAt(run.track, run.s, run.v);
+    run.support = info.value;
+    run.velocity = { x: info.tangent.x * run.v, y: info.tangent.y * run.v, z: info.tangent.z * run.v };
+    return run;
+  }
+
+  function finish(run, state, reason, message) {
+    run.state = state;
+    run.reason = reason;
+    run.message = message;
+    updateOutput(run);
+    if (state === 'derailed') {
+      run.departure = { point: copyPoint(run.point), velocity: copyPoint(run.velocity), time: run.time, s: run.s };
+    }
+    return run;
+  }
+
+  function createRun(track) {
+    var run = {
+      track: track,
+      s: 0,
+      v: 0,
+      time: 0,
+      state: 'running',
+      reason: '',
+      message: '',
+      progress: 0,
+      point: pointAt(track, 0),
+      velocity: { x: 0, y: 0, z: 0 },
+      support: 0,
+      departure: null,
+      segment: 0
+    };
+    if (!track || !track.valid) {
+      run.state = 'stalled';
+      run.reason = 'invalid-track';
+      run.message = '先连接好轨道。';
+      return run;
+    }
+    updateOutput(run);
+    return run;
+  }
+
+  function contactLost(run, s, speed) {
+    var info;
+    if (!run.track.options.derail || speed <= 1e-8) return false;
+    /* The first and last 1 mm have no meaningful two-sided curvature. */
+    if (s < 0.001 || run.track.length - s < 0.001) return false;
+    info = supportAt(run.track, s, speed);
+    return info.value < -1e-7;
+  }
+
+  function step(run, dt) {
+    var track;
+    var remaining;
+    var i;
+    var seg;
+    var ds;
+    var a;
+    var v0;
+    var radicand;
+    var endSpeed;
+    var eventTime;
+    var stop;
+    var slice;
+    var advance;
+    var targetS;
+    var targetV;
+    var middleS;
+    var middleV;
+    var lo;
+    var hi;
+    var mid;
+    var q;
+    var oldS;
+    var oldV;
+    var count = 0;
+    var iterationBudget;
+    if (!run || run.state !== 'running' || !finite(dt) || dt <= 0) return run;
+    track = run.track;
+    remaining = dt;
+    iterationBudget = Math.ceil(dt * 120) + track.segments.length * 3 + 30;
+    while (remaining > EPS && run.state === 'running') {
+      count += 1;
+      /* Bound pathological input without changing normal elapsed time. */
+      if (count > iterationBudget) return finish(run, 'stalled', 'invalid-track', '检查轨道的连接。');
+      if (run.s >= track.length - 1e-9) {
+        run.s = track.length;
+        return finish(run, 'finished', 'finished', '小球到达终点！');
+      }
+      i = segmentAt(track, run.s + 1e-11);
+      seg = track.segments[i];
+      run.segment = i;
+      ds = track.distances[i + 1] - run.s;
+      if (ds <= EPS) { run.s = track.distances[i + 1]; continue; }
+      a = seg.acceleration;
+      v0 = Math.max(0, run.v);
+      if (v0 < 1e-9 && a <= EPS) {
+        run.v = 0;
+        if (run.s < 1e-6) {
+          if (seg.tangent.y > 1e-6) return finish(run, 'stalled', 'uphill-start', '起点朝上，小球不会自己出发。');
+          return finish(run, 'stalled', 'flat-start', '起点太平，试着调整支架。');
+        }
+        return finish(run, 'stalled', 'insufficient-energy', '小球停住了，调整支架再试。');
+      }
+      if (contactLost(run, run.s, v0)) return finish(run, 'derailed', 'lost-contact', '小球离开轨道了，试着把坡接得更平顺。');
+      radicand = v0 * v0 + 2 * a * ds;
+      stop = a < 0 && radicand < -1e-11;
+      if (stop) {
+        eventTime = v0 / -a;
+        endSpeed = 0;
+      } else {
+        endSpeed = Math.sqrt(Math.max(0, radicand));
+        eventTime = v0 + endSpeed > EPS ? 2 * ds / (v0 + endSpeed) : 0;
+      }
+      if (eventTime < EPS) {
+        run.v = 0;
+        return finish(run, 'stalled', 'insufficient-energy', '小球停住了，调整支架再试。');
+      }
+      /* Dense rail sampling normally makes these slices much shorter than
+       * 1/120 s. This time cap also detects crests with coarse input. */
+      slice = Math.min(remaining, eventTime, 1 / 120);
+      advance = Math.max(0, v0 * slice + 0.5 * a * slice * slice);
+      targetS = Math.min(track.distances[i + 1], run.s + advance);
+      targetV = Math.max(0, v0 + a * slice);
+      middleS = run.s + v0 * slice * 0.5 + 0.5 * a * slice * slice * 0.25;
+      middleV = Math.max(0, v0 + a * slice * 0.5);
+      if (contactLost(run, middleS, middleV) || contactLost(run, targetS, targetV)) {
+        oldS = run.s;
+        oldV = run.v;
+        lo = 0;
+        hi = slice;
+        if (contactLost(run, middleS, middleV)) hi = slice * 0.5;
+        for (q = 0; q < 16; q += 1) {
+          mid = (lo + hi) * 0.5;
+          if (contactLost(run, oldS + oldV * mid + 0.5 * a * mid * mid, Math.max(0, oldV + a * mid))) hi = mid;
+          else lo = mid;
+        }
+        run.s = oldS + oldV * hi + 0.5 * a * hi * hi;
+        run.v = Math.max(0, oldV + a * hi);
+        run.time += hi;
+        return finish(run, 'derailed', 'lost-contact', '小球离开轨道了，试着把坡接得更平顺。');
+      }
+      run.s = targetS;
+      run.v = targetV;
+      run.time += slice;
+      remaining -= slice;
+      if (slice >= eventTime - EPS) {
+        if (stop) {
+          run.v = 0;
+          return finish(run, 'stalled', seg.tangent.y > 0 ? 'insufficient-energy' : 'rolling-resistance', '小球停住了，调整支架再试。');
+        }
+        run.s = track.distances[i + 1];
+        run.v = endSpeed;
+      }
+    }
+    if (run.s >= track.length - 1e-9) {
+      run.s = track.length;
+      return finish(run, 'finished', 'finished', '小球到达终点！');
+    }
+    return updateOutput(run);
+  }
+
+  function flightAt(run, secondsAfterDeparture) {
+    var d = run && run.departure;
+    var t = Math.max(0, secondsAfterDeparture || 0);
+    if (!d) return run ? copyPoint(run.point) : { x: 0, y: 0, z: 0 };
+    return {
+      x: d.point.x + d.velocity.x * t,
+      y: d.point.y + d.velocity.y * t - 0.5 * run.track.options.gravity * t * t,
+      z: d.point.z + d.velocity.z * t
+    };
+  }
+
+  return {
+    version: '1.0.0',
+    prepare: prepare,
+    createRun: createRun,
+    step: step,
+    pointAt: pointAt,
+    geometryAt: geometryAt,
+    supportAt: supportAt,
+    flightAt: flightAt,
+    defaults: { gravity: G, rollingResistance: DEFAULT_MU, supportWindow: DEFAULT_SUPPORT_WINDOW, rotationFactor: ROTATION_FACTOR }
+  };
+}));
+
+</script>
+<script>
+/* TestCoasterModel — lesson 3.8. Distances in metres; physical time in seconds.
+ * Reuses the lesson 3.7 rail geometry and rolling-sphere engine.
+ * This module is independent of DOM, rendering, storage and wall-clock playback.
+ */
+(function(root,factory){
+  var physics=root&&root.CoasterPhysics;
+  if(!physics&&typeof module==='object'&&module.exports)physics=require('../work/coaster-physics.js');
+  var api=factory(physics);
+  if(typeof module==='object'&&module.exports)module.exports=api;
+  if(root)root.TestCoasterModel=api;
+}(typeof window!=='undefined'?window:typeof global!=='undefined'?global:this,function(CoasterPhysics){
+  'use strict';
+  if(!CoasterPhysics)throw new Error('CoasterPhysics must load before TestCoasterModel.');
+  var W=2.4,D=1.6,STEP=1/240,MAX_TIME=120,EPS=1e-9;
+  var IMPACT={ballMass:.03,blockMass:.08,restitution:.5,friction:.18,gravity:9.81};
+  var PRESETS={
+    A:{version:1,nodes:[{x:.18,z:.32,h:.42},{x:.85,z:.32,h:.32},{x:1.25,z:.65,h:.20},{x:1.25,z:1.20,h:.08},{x:.59,z:1.20,h:.04},{x:.15,z:1.20,h:.04}],kinds:['straight','curve','straight','curve','straight']},
+    B:{version:1,nodes:[{x:.18,z:.22,h:.64},{x:1.20,z:.22,h:.44},{x:1.85,z:.75,h:.24},{x:1.15,z:1.25,h:.10},{x:.65,z:1.25,h:.04},{x:.15,z:1.25,h:.04}],kinds:['straight','curve','curve','straight','straight']}
+  };
+  function copy(v){return JSON.parse(JSON.stringify(v));}
+  function finite(v){return typeof v==='number'&&isFinite(v);}
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function len(a,b){var x=b.x-a.x,z=b.z-a.z;return Math.sqrt(x*x+z*z);}
+  function unit(x,z){var l=Math.sqrt(x*x+z*z)||1;return{x:x/l,z:z/l};}
+  function hermite(y0,y1,m0,m1,t,L){var t2=t*t,t3=t2*t;return(2*t3-3*t2+1)*y0+(t3-2*t2+t)*L*m0+(-2*t3+3*t2)*y1+(t3-t2)*L*m1;}
+  function presets(){return copy(PRESETS);}
+  function designProblem(d){
+    if(!d||d.version!==1||!Array.isArray(d.nodes)||!Array.isArray(d.kinds))return '轨道方案格式不正确。';
+    if(d.nodes.length<2||d.nodes.length>10||d.kinds.length!==d.nodes.length-1)return '需要 2—10 个支点，并连接相邻轨道。';
+    var i,p;
+    for(i=0;i<d.nodes.length;i++){
+      p=d.nodes[i];
+      if(!p||!finite(p.x)||!finite(p.z)||!finite(p.h))return '支点坐标应是有效数字。';
+      if(p.x<.08||p.x>W-.08||p.z<.08||p.z>D-.08||p.h<.04||p.h>.72)return '支点应在实验台内，高度为 4—72 厘米。';
+      if(i&&len(d.nodes[i-1],p)<.10)return '相邻支点需要相距至少 10 厘米。';
+    }
+    for(i=0;i<d.kinds.length;i++)if(d.kinds[i]!=='straight'&&d.kinds[i]!=='curve')return '轨道类型应为直轨或弯轨。';
+    return '';
+  }
+  function validateDesign(d){return !designProblem(d);}
+  function buildGeometry(d){
+    var problem=designProblem(d);
+    if(problem)throw new Error(problem);
+    var n=d.nodes, kinds=d.kinds, raw=[], segments=[], nodeIndices=[0], nodeS=[0], total=0, i,j;
+    for(i=0;i<kinds.length;i++){
+      var a=n[i],b=n[i+1],v=unit(b.x-a.x,b.z-a.z),L=len(a,b),vs=v,ve=v,prev,next;
+      if(i>0){prev=unit(a.x-n[i-1].x,a.z-n[i-1].z);vs=kinds[i-1]==='straight'?prev:unit(prev.x+v.x,prev.z+v.z);}
+      if(i+2<n.length){next=unit(n[i+2].x-b.x,n[i+2].z-b.z);ve=kinds[i+1]==='straight'?next:unit(next.x+v.x,next.z+v.z);}
+      var handle=Math.min(L*.36,.40),c1={x:clamp(a.x+vs.x*handle,.04,W-.04),z:clamp(a.z+vs.z*handle,.04,D-.04)},c2={x:clamp(b.x-ve.x*handle,.04,W-.04),z:clamp(b.z-ve.z*handle,.04,D-.04)};
+      var spread=Math.abs((c1.x-a.x)*v.z-(c1.z-a.z)*v.x)+Math.abs((c2.x-a.x)*v.z-(c2.z-a.z)*v.x);
+      var bulge=kinds[i]==='curve'&&spread<.025?Math.min(.13,L*.23):0;
+      if(bulge){var midx=(a.x+b.x)/2-v.z*bulge,midz=(a.z+b.z)/2+v.x*bulge;if(midx<.08||midx>W-.08||midz<.08||midz>D-.08)bulge=-bulge;}
+      var steps=kinds[i]==='curve'?60:Math.max(24,Math.ceil(L/.012)),local=[];
+      for(j=0;j<=steps;j++){
+        var t=j/steps,u=1-t,x,z;
+        if(kinds[i]==='straight'){x=a.x+(b.x-a.x)*t;z=a.z+(b.z-a.z)*t;}
+        else{x=u*u*u*a.x+3*u*u*t*c1.x+3*u*t*t*c2.x+t*t*t*b.x;z=u*u*u*a.z+3*u*u*t*c1.z+3*u*t*t*c2.z+t*t*t*b.z;var w=16*t*t*u*u*bulge;x-=v.z*w;z+=v.x*w;}
+        local.push({x:x,z:z,y:0,planS:0});
+      }
+      var localLength=0;
+      for(j=1;j<local.length;j++){localLength+=len(local[j-1],local[j]);local[j].planS=localLength;}
+      var startIndex=raw.length?raw.length-1:0;
+      for(j=0;j<local.length;j++){
+        local[j].y=a.h+(b.h-a.h)*(local[j].planS/localLength);
+        local[j].planS+=total;
+        if(i===0||j>0)raw.push(local[j]);
+      }
+      total+=localLength;
+      segments.push({kind:kinds[i],start:startIndex,end:raw.length-1,planLength:localLength});
+      nodeIndices.push(raw.length-1);nodeS.push(total);
+    }
+    // Smooth the height close to a support, while retaining its exact height and the
+    // straight central portions. Both sides share a monotone tangent at the join.
+    for(i=1;i<n.length-1;i++){
+      var leftL=nodeS[i]-nodeS[i-1],rightL=nodeS[i+1]-nodeS[i];
+      var sl=(n[i].h-n[i-1].h)/leftL,sr=(n[i+1].h-n[i].h)/rightL;
+      var sm=sl*sr>0?2*sl*sr/(sl+sr):0;
+      var radius=Math.min(.18,leftL*.36,rightL*.36),s0=nodeS[i];
+      for(j=nodeIndices[i-1];j<=nodeIndices[i+1];j++){
+        var ss=raw[j].planS;
+        if(ss>=s0-radius&&ss<=s0)raw[j].y=hermite(n[i].h-sl*radius,n[i].h,sl,sm,(ss-(s0-radius))/radius,radius);
+        else if(ss>s0&&ss<=s0+radius)raw[j].y=hermite(n[i].h,n[i].h+sr*radius,sm,sr,(ss-s0)/radius,radius);
+      }
+    }
+    var points=[],flat=[];
+    for(i=0;i<raw.length;i++){points.push({x:raw[i].x,y:raw[i].y,z:raw[i].z});flat.push({x:raw[i].x,y:0,z:raw[i].z});}
+    var track=CoasterPhysics.prepare(points),planTrack=CoasterPhysics.prepare(flat,{derail:false});
+    var actualS=[0];
+    for(i=1;i<points.length;i++){var dx=points[i].x-points[i-1].x,dy=points[i].y-points[i-1].y,dz=points[i].z-points[i-1].z;actualS.push(actualS[i-1]+Math.sqrt(dx*dx+dy*dy+dz*dz));}
+    var issues=[],crossings=[];
+    for(i=1;i<n.length-1;i++){
+      var k=nodeIndices[i],before=points[Math.max(0,k-2)],here=points[k],after=points[Math.min(points.length-1,k+2)];
+      var vi=unit(here.x-before.x,here.z-before.z),vo=unit(after.x-here.x,after.z-here.z);
+      if(vi.x*vo.x+vi.z*vo.z<Math.cos(.31))issues.push({kind:'joint',node:i,s:actualS[k],point:here,message:'这里的接口有折角'});
+    }
+    function intersect(a,b,c,d){var rx=b.x-a.x,rz=b.z-a.z,sx=d.x-c.x,sz=d.z-c.z,den=rx*sz-rz*sx;if(Math.abs(den)<1e-9)return null;var cx=c.x-a.x,cz=c.z-a.z,t=(cx*sz-cz*sx)/den,u=(cx*rz-cz*rx)/den;if(t<0||t>1||u<0||u>1)return null;return{t:t,u:u,x:a.x+t*rx,z:a.z+t*rz};}
+    for(i=0;i<points.length-1;i++){
+      for(j=i+8;j<points.length-1;j++){
+        if(actualS[j]-actualS[i]<.22)continue;
+        var cross=intersect(points[i],points[i+1],points[j],points[j+1]);if(!cross)continue;
+        var y1=points[i].y+(points[i+1].y-points[i].y)*cross.t,y2=points[j].y+(points[j+1].y-points[j].y)*cross.u;
+        cross.y=Math.max(y1,y2);cross.lowY=Math.min(y1,y2);cross.s1=actualS[i]+(actualS[i+1]-actualS[i])*cross.t;cross.s2=actualS[j]+(actualS[j+1]-actualS[j])*cross.u;
+        var duplicate=false;for(var q=0;q<crossings.length;q++)if(Math.abs(cross.s1-crossings[q].s1)<.06&&Math.abs(cross.s2-crossings[q].s2)<.06){duplicate=true;break;}if(duplicate)continue;
+        cross.upper=y1>=y2?cross.s1:cross.s2;cross.lower=y1<y2?cross.s1:cross.s2;cross.gap=Math.abs(y1-y2);crossings.push(cross);
+        if(cross.gap<.065)issues.push({kind:'crossing',s:Math.min(cross.s1,cross.s2),point:{x:cross.x,z:cross.z,y:y1},message:'两段轨道碰在一起'});
+      }
+    }
+    issues.sort(function(a,b){return a.s-b.s;});
+    return{points:points,flat:flat,raw:raw,segments:segments,nodeIndices:nodeIndices,nodeS:nodeS,actualS:actualS,planLength:total,length:actualS[actualS.length-1],track:track,planTrack:planTrack,issues:issues,crossings:crossings};
+  }
+
+  function shallowRun(run){var o={},k;for(k in run)if(Object.prototype.hasOwnProperty.call(run,k))o[k]=run[k];return o;}
+  function makeFrame(run){return{t:run.time,s:run.s,v:run.v};}
+  function simulate(design){
+    var problem=designProblem(design),model,run,frames,old,gate,lo,hi,mid,candidate,i;
+    if(problem)return{design:null,model:null,frames:[{t:0,s:0,v:0}],duration:0,state:'invalid',reason:'invalid-design',message:problem,finalS:0,finalV:0,departure:null,issue:null};
+    model=buildGeometry(design);
+    run=CoasterPhysics.createRun(model.track);
+    frames=[makeFrame(run)];
+    gate=model.issues.length?model.issues[0]:null;
+    while(run.state==='running'&&run.time<MAX_TIME){
+      old=shallowRun(run);
+      CoasterPhysics.step(run,Math.min(STEP,MAX_TIME-run.time));
+      if(gate&&old.s<=gate.s+EPS&&run.s>=gate.s-EPS){
+        // Locate the physical event inside this time step. Truncation is at the
+        // exact rail arc length, so no frame travels through a broken joint.
+        lo=0;hi=Math.max(0,run.time-old.time);
+        for(i=0;i<36;i++){
+          mid=(lo+hi)/2;
+          candidate=shallowRun(old);
+          CoasterPhysics.step(candidate,mid);
+          if(candidate.s>=gate.s)hi=mid;else lo=mid;
+        }
+        run=shallowRun(old);
+        CoasterPhysics.step(run,hi);
+        run.time=old.time+hi;
+        run.s=gate.s;
+        run.v=0;
+        run.point=CoasterPhysics.pointAt(model.track,run.s);
+        run.velocity={x:0,y:0,z:0};
+        run.progress=run.s/model.length;
+        run.state='stalled';
+        run.reason=gate.kind==='joint'?'rough-joint':'track-crossing';
+        run.message=gate.message;
+        run.departure=null;
+      }
+      if(run.time>frames[frames.length-1].t+1e-12)frames.push(makeFrame(run));
+      else{frames[frames.length-1]=makeFrame(run);if(run.state==='running'){run.state='stalled';run.reason='invalid-track';run.message='检查轨道的连接。';}}
+    }
+    if(run.state==='running'){run.state='stalled';run.reason='time-limit';run.message='小球移动过慢，请调整起点或轨道。';}
+    return{design:copy(design),model:model,frames:frames,duration:run.time,state:run.state,reason:run.reason,message:run.message,finalS:run.s,finalV:run.v,departure:run.departure,issue:gate&&(run.reason==='rough-joint'||run.reason==='track-crossing')?gate:null};
+  }
+  function sample(sim,time){
+    var t=finite(time)?Math.max(0,time):0,frames=sim&&sim.frames,lo=0,hi,mid,a,b,u,s,v,done;
+    if(!sim||!sim.model||!frames||!frames.length)return{t:0,s:0,v:0,point:{x:0,y:0,z:0},progress:0,state:'invalid',reason:'invalid-design',done:true};
+    t=Math.min(t,sim.duration);hi=frames.length-1;
+    while(lo<hi){mid=Math.floor((lo+hi)/2);if(frames[mid].t<t)lo=mid+1;else hi=mid;}
+    b=frames[lo];a=frames[Math.max(0,lo-1)];
+    u=b.t>a.t?clamp((t-a.t)/(b.t-a.t),0,1):1;
+    s=a.s+(b.s-a.s)*u;v=a.v+(b.v-a.v)*u;
+    done=t>=sim.duration-EPS;
+    return{t:t,s:s,v:v,point:CoasterPhysics.pointAt(sim.model.track,s),progress:sim.model.length?s/sim.model.length:0,state:done?sim.state:'running',reason:done?sim.reason:'',done:done};
+  }
+  function atDistance(sim,distance){
+    var s=finite(distance)?Math.max(0,distance):NaN,frames=sim&&sim.frames,lo=0,hi,mid,a,b,u;
+    if(!finite(s)||!sim||!sim.model||!frames||!frames.length||s>sim.finalS+EPS)return{reached:false,t:null,s:s,v:null,point:null,reason:sim?sim.reason:'invalid-design'};
+    s=Math.min(s,sim.finalS);hi=frames.length-1;
+    while(lo<hi){mid=Math.floor((lo+hi)/2);if(frames[mid].s<s)lo=mid+1;else hi=mid;}
+    b=frames[lo];a=frames[Math.max(0,lo-1)];
+    u=b.s>a.s?clamp((s-a.s)/(b.s-a.s),0,1):1;
+    return{reached:true,t:a.t+(b.t-a.t)*u,s:s,v:a.v+(b.v-a.v)*u,point:CoasterPhysics.pointAt(sim.model.track,s),reason:''};
+  }
+  function impact(sim,options){
+    var p=copy(IMPACT),key,v=0,speed=0,displacement=0,duration=0,ballAfterSpeed=0,ballDeceleration,reached=!!(sim&&sim.state==='finished'),tangent,flat=false;
+    if(options)for(key in p)if(Object.prototype.hasOwnProperty.call(p,key)&&finite(options[key]))p[key]=options[key];
+    if(p.ballMass<=0||p.blockMass<=0||p.friction<=0||p.gravity<=0||p.restitution<0||p.restitution>1)throw new Error('木块实验参数超出有效范围。');
+    ballDeceleration=CoasterPhysics.defaults.rotationFactor*CoasterPhysics.defaults.rollingResistance*p.gravity;
+    if(reached){
+      v=sim.finalV;
+      speed=(1+p.restitution)*p.ballMass/(p.ballMass+p.blockMass)*v;
+      displacement=speed*speed/(2*p.friction*p.gravity);
+      duration=speed/(p.friction*p.gravity);
+      ballAfterSpeed=(p.ballMass-p.restitution*p.blockMass)/(p.ballMass+p.blockMass)*v;
+      tangent=CoasterPhysics.geometryAt(sim.model.track,sim.model.length).tangent;
+      flat=Math.abs(tangent.y)<.015;
+    }
+    // The impact table is horizontal. For imported slopes, the lesson UI must
+    // explicitly disclose the ideal, speed-preserving horizontal transition.
+    // A 1D instantaneous collision is followed by kinetic-friction-only sliding.
+    return{reached:reached,vEnd:v,blockSpeed:speed,displacement:displacement,slideDuration:duration,parameters:p,horizontalExit:flat,usesHorizontalTransition:reached&&!flat,reason:reached?'':sim?sim.reason:'invalid-design',ballTranslationalEnergy:.5*p.ballMass*v*v,ballRollingEnergy:.7*p.ballMass*v*v,blockKineticEnergy:.5*p.blockMass*speed*speed,ballAfterSpeed:ballAfterSpeed,ballRollingDeceleration:ballDeceleration,ballRecoilDistance:ballAfterSpeed<0?ballAfterSpeed*ballAfterSpeed/(2*ballDeceleration):0,ballRecoilDuration:ballAfterSpeed<0?-ballAfterSpeed/ballDeceleration:0};
+  }
+  function blockAt(result,time){
+    var t=finite(time)?Math.max(0,time):0,used=result&&result.reached?Math.min(t,result.slideDuration):0,a=result&&result.parameters?result.parameters.friction*result.parameters.gravity:0,v0=result&&result.blockSpeed||0;
+    return{t:used,s:Math.max(0,v0*used-.5*a*used*used),v:Math.max(0,v0-a*used),done:!result||!result.reached||t>=result.slideDuration};
+  }
+  function ballAfterImpact(result,time){
+    // The signed axis points out of the rail: a negative s/v is a rebound.
+    // This classroom model idealizes the brief slip immediately after impact
+    // as an immediate return to rolling; the return rail must be horizontal.
+    var t=finite(time)?Math.max(0,time):0,v0=result&&result.reached&&finite(result.ballAfterSpeed)?result.ballAfterSpeed:0,a=result&&finite(result.ballRollingDeceleration)?result.ballRollingDeceleration:0,direction=v0<0?-1:1,duration=a>0?Math.abs(v0)/a:0,used=Math.min(t,duration),distance=Math.max(0,Math.abs(v0)*used-.5*a*used*used),speed=Math.max(0,Math.abs(v0)-a*used);
+    return{t:used,s:distance?direction*distance:0,v:speed?direction*speed:0,distance:distance,done:!result||!result.reached||t>=duration};
+  }
+  return{version:'1.0.1',presets:presets,validateDesign:validateDesign,designProblem:designProblem,buildGeometry:buildGeometry,simulate:simulate,sample:sample,atDistance:atDistance,impact:impact,blockAt:blockAt,ballAfterImpact:ballAfterImpact,defaults:{timeStep:STEP,maxTime:MAX_TIME,impact:copy(IMPACT)},bounds:{width:W,depth:D,minHeight:.04,maxHeight:.72}};
+}));
+
+</script>
+<script>
+(function(){
+  'use strict';
+  var M=window.TestCoasterModel,P=window.CoasterPhysics,PRESETS=M.presets(),SIMS={A:M.simulate(PRESETS.A),B:M.simulate(PRESETS.B)};
+  var $=function(id){return document.getElementById(id);},page='observe',views={},drag=null,last=0,resizeTimer=0,toastTimer=0,focusBeforeDialog=null;
+  var obs={source:'A',s:0,t:0,running:false,phase:'idle',clue:false,measure:false};
+  var cmp={method:'distance',distance:2,time:1.5,t:0,running:false,phase:'idle'};
+  var imp={design:copy(PRESETS.A),sim:null,node:0,t:0,running:false,phase:'idle'};
+  imp.sim=M.simulate(imp.design);
+  var ratings=[0,0,0,0],ratingNames=['轨道总长不少于 2 米','有直线轨道和曲线轨道','小球滚完全程、不脱轨','小组合作完成'];
+  try{var saved=JSON.parse(localStorage.getItem('aihtml.coaster.testing.ratings.v1')||'null');if(Array.isArray(saved)&&saved.length===4&&saved.every(function(n){return typeof n==='number'&&n>=0&&n<=3&&n%1===0;}))ratings=saved;}catch(ignore){}
+  function copy(v){return JSON.parse(JSON.stringify(v));}
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function round(v,n){var q=Math.pow(10,n||0);return Math.round(v*q)/q;}
+  function f(v){return round(v,2);}
+  function pointText(p){return f(p.x)+','+f(p.y);}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function announce(s){$('status-live').textContent=s;}
+  function toast(s){$('toast').textContent=s;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').classList.add('hidden');},3000);announce(s);}
+  function list(selector,fn){Array.prototype.forEach.call(document.querySelectorAll(selector),fn);}
+  function observationSim(){return SIMS[obs.source]||SIMS.A;}
+  function path(points,project){var out='';for(var i=0;i<points.length;i++){var p=project(points[i]);out+=(i?'L':'M')+f(p.x)+' '+f(p.y);}return out;}
+  function trackSlice(sim,s){var pts=[],model=sim.model;for(var i=0;i<model.points.length;i++){if(model.actualS[i]>=s)break;pts.push(model.points[i]);}pts.push(P.pointAt(model.track,s));return pts;}
+  function failure(sim){var reasons={'flat-start':'起点太平，未能出发','uphill-start':'起点朝上，未能出发','insufficient-energy':'未越过高坡','lost-contact':'失去支撑，已定格','rough-joint':'接口有折角','track-crossing':'轨道相互碰撞','time-limit':'小球移动过慢'};return reasons[sim.reason]||sim.message||'未完成试跑';}
+  function projection(portrait){return portrait?function(p){return{x:p.x*190+p.z*60,y:p.x*75+p.z*160-(p.y||0)*310};}:function(p){return{x:p.x*235+p.z*120,y:-p.x*38+p.z*125-(p.y||0)*295};};}
+  function groundLimits(sims,block){var xmax=1.1,zmax=1;for(var a=0;a<sims.length;a++)for(var i=0;i<sims[a].design.nodes.length;i++){xmax=Math.max(xmax,sims[a].design.nodes[i].x+.18);zmax=Math.max(zmax,sims[a].design.nodes[i].z+.21);}return{x0:block?-.55:0,x1:xmax,z0:0,z1:zmax};}
+  function makeView(id,sim,color,group,kind){
+    var svg=$(id),rect=svg.getBoundingClientRect(),project=projection(rect.width/Math.max(1,rect.height)<1.10),block=kind==='block'||kind==='edit',lim=groundLimits(group,block);
+    var corners=[{x:lim.x0,z:lim.z0},{x:lim.x1,z:lim.z0},{x:lim.x1,z:lim.z1},{x:lim.x0,z:lim.z1}],points=corners.slice();
+    group.forEach(function(s){points=points.concat(s.model.points);if(block)s.design.nodes.slice(0,-2).forEach(function(n){points.push({x:n.x,z:n.z,y:.72});points.push({x:n.x,z:n.z,y:.04});});});
+    var b={minX:Infinity,maxX:-Infinity,minY:Infinity,maxY:-Infinity};points.forEach(function(v){var p=project(v);b.minX=Math.min(b.minX,p.x);b.maxX=Math.max(b.maxX,p.x);b.minY=Math.min(b.minY,p.y);b.maxY=Math.max(b.maxY,p.y);});
+    var padX=46,padTop=80,padBottom=block?65:45;
+    svg.setAttribute('viewBox',[f(b.minX-padX),f(b.minY-padTop),f(b.maxX-b.minX+padX*2),f(b.maxY-b.minY+padTop+padBottom)].join(' '));
+    var view={svg:svg,id:id,sim:sim,color:color,project:project,kind:kind,limits:lim,corners:corners};views[id]=view;drawStatic(view);return view;
+  }
+  var Artwork={
+    support:function(n,project){var a=project({x:n.x,z:n.z,y:n.h}),b=project({x:n.x,z:n.z,y:0});return'<ellipse cx="'+f(b.x)+'" cy="'+f(b.y)+'" rx="15" ry="5" fill="#d5e1ef"/><path d="M'+f(b.x-5)+' '+f(b.y)+'V'+f(a.y)+'h10V'+f(b.y)+'Z" fill="#c2d4ec" stroke="#93b3d9" stroke-width="1.4"/><path d="M'+f(b.x-11)+' '+f(b.y)+'L'+f(a.x)+' '+f(a.y+12)+'L'+f(b.x+11)+' '+f(b.y)+'" fill="none" stroke="#adbfda" stroke-width="1.4"/>';},
+    ball:function(p,id,s,draggable){return'<g transform="translate('+f(p.x)+' '+f(p.y-18)+')"'+(draggable?' data-ball="true"':'')+'><circle cy="13" r="16" fill="#995c2415"/><circle r="17" fill="url(#'+id+'-ball)" stroke="#bd792b" stroke-width="1.7"/><path d="M-5-15C10-6-10 6 5 15" fill="none" stroke="#fff0b9" stroke-width="4" transform="rotate('+f(s*1200)+')"/><circle cx="-6" cy="-7" r="4" fill="#fff9d4" opacity=".85"/>'+(draggable?'<circle r="36" fill="transparent"/>':'')+'</g>';},
+    block:function(end,d,project){
+      var x=end.x-d-.10,z=end.z,h=end.y+.025,w=.16,depth=.14,height=.14;
+      var p=[{x:x+w/2,z:z-depth/2,y:h},{x:x-w/2,z:z-depth/2,y:h},{x:x-w/2,z:z+depth/2,y:h},{x:x+w/2,z:z+depth/2,y:h}];
+      var top=p.map(function(q){return project({x:q.x,z:q.z,y:q.y+height});}),bottom=p.map(project);
+      function poly(arr,fill){return'<polygon points="'+arr.map(pointText).join(' ')+'" fill="'+fill+'" stroke="#b57f43" stroke-width="1.5" stroke-linejoin="round"/>';}
+      return poly([bottom[1],bottom[2],top[2],top[1]],'#c99556')+poly([bottom[2],bottom[3],top[3],top[2]],'#dfb47d')+poly(top,'#f0d3a9');
+    }
+  };
+  // Independent vector artwork can be replaced without changing the model or lesson logic.
+  window.TestCoasterArtwork=Artwork;
+  function drawStatic(v){
+    var p=v.project,m=v.sim.model,id=v.id,out='<defs><radialGradient id="'+id+'-ball" cx="32%" cy="25%" r="75%"><stop stop-color="#ffe99d"/><stop offset=".58" stop-color="#f3bb52"/><stop offset="1" stop-color="#de8d2e"/></radialGradient></defs>';
+    var corners=v.corners.map(p),low=corners.map(function(q){return{x:q.x,y:q.y+10};});
+    out+='<path d="M'+pointText(corners[0])+'L'+pointText(corners[3])+'L'+pointText(corners[2])+'L'+pointText(low[2])+'L'+pointText(low[3])+'L'+pointText(low[0])+'Z" fill="#dae6f5"/>';
+    out+='<polygon points="'+corners.map(pointText).join(' ')+'" fill="#f4f8fd" stroke="#d0deef" stroke-width="1.5"/>';
+    for(var x=Math.ceil(v.limits.x0*5)/5;x<v.limits.x1-.01;x+=.2)out+='<path d="'+path([{x:x,z:v.limits.z0},{x:x,z:v.limits.z1}],p)+'" stroke="#dfe8f4" stroke-width="1" fill="none"/>';
+    for(var z=.2;z<v.limits.z1;z+=.2)out+='<path d="'+path([{x:v.limits.x0,z:z},{x:v.limits.x1,z:z}],p)+'" stroke="#dfe8f4" stroke-width="1" fill="none"/>';
+    out+='<path d="'+path(m.flat,p)+'" fill="none" stroke="#839dbc" opacity=".12" stroke-width="21" stroke-linecap="round" stroke-linejoin="round"/>';
+    var order=v.sim.design.nodes.slice().sort(function(a,b){return p({x:a.x,z:a.z}).y-p({x:b.x,z:b.z}).y;});
+    for(var i=0;i<order.length;i++)out+=Artwork.support(order[i],p);
+    var rail=path(m.points,p);
+    out+='<path d="'+rail+'" fill="none" stroke="#255a9b" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/><path d="'+rail+'" fill="none" stroke="'+v.color+'" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="'+rail+'" fill="none" stroke="#d9efff" stroke-width="3" opacity=".85" stroke-linecap="round" stroke-linejoin="round"/>';
+    var start=p(m.points[0]),end=p(m.points[m.points.length-1]);
+    out+='<circle cx="'+f(start.x)+'" cy="'+f(start.y)+'" r="8" fill="#fff" stroke="'+v.color+'" stroke-width="3"/>';
+    if(v.kind!=='edit')out+='<text x="'+f(start.x-10)+'" y="'+f(start.y-48)+'" font-size="25" font-weight="650" text-anchor="middle" fill="#526e90">起点</text>';
+    if(v.kind==='observe')out+='<text x="'+f(end.x)+'" y="'+f(end.y+43)+'" font-size="24" text-anchor="middle" fill="#6a82a1">终点</text>';
+    if(v.kind==='block'||v.kind==='edit')out+=receiver(v);
+    out+='<g id="'+id+'-measure"></g><g id="'+id+'-flag"></g><g id="'+id+'-moving-block"></g><g id="'+id+'-ball-group"></g><g id="'+id+'-handles"></g>';
+    v.svg.innerHTML=out;
+    if(v.kind==='edit')drawHandles(v);
+    if(v.kind==='block'||v.kind==='edit')$(id+'-moving-block').innerHTML=Artwork.block(m.points[m.points.length-1],0,p);
+  }
+  function receiver(v){
+    var end=v.sim.model.points[v.sim.model.points.length-1],p=v.project,out='',a={x:end.x+.06,z:end.z+.20,y:end.y+.025},b={x:end.x-.66,z:end.z+.20,y:end.y+.025};
+    out+='<path d="'+path([{x:end.x+.04,z:end.z,y:end.y},{x:end.x-.66,z:end.z,y:end.y}],p)+'" stroke="#d0dce9" stroke-width="27" stroke-linecap="round"/>';
+    out+='<path d="'+path([a,b],p)+'" stroke="#90a5bf" stroke-width="1.6"/>';
+    for(var i=0;i<=6;i++){var q=p({x:end.x-.02-i*.1,z:a.z,y:a.y});out+='<path d="M'+f(q.x)+' '+f(q.y)+'v'+(i%2?7:11)+'" stroke="#90a5bf" stroke-width="1.5"/>';if(i%2===0)out+='<text x="'+f(q.x)+'" y="'+f(q.y+31)+'" fill="#748ca8" text-anchor="middle" font-size="18">'+i*10+'</text>';}
+    out+='<path d="'+path([{x:end.x-.02,z:end.z+.07,y:a.y},{x:end.x-.02,z:a.z,y:a.y}],p)+'" stroke="#9aabc1" stroke-width="1.6" stroke-dasharray="4 4"/>';var u=p(b);out+='<text x="'+f(u.x-22)+'" y="'+f(u.y+31)+'" fill="#748ca8" text-anchor="end" font-size="17">厘米</text>';return out;
+  }
+  function blockGuide(v,d){var e=v.sim.model.points[v.sim.model.points.length-1],x=e.x-.02,p=v.project,y=e.y+.025;return '<path d="'+path([{x:x,z:e.z+.20,y:y},{x:x-d,z:e.z+.20,y:y}],p)+'" stroke="'+v.color+'" stroke-width="3" fill="none"/><path d="'+path([{x:x-d,z:e.z+.07,y:y},{x:x-d,z:e.z+.20,y:y}],p)+'" stroke="'+v.color+'" stroke-width="2" stroke-dasharray="4 4" fill="none"/>'; }
+  function failureMarker(v,show){var g=$(v.id+'-flag');if(!show){g.innerHTML='';return;}var q=v.project(P.pointAt(v.sim.model.track,v.sim.finalS));g.innerHTML='<circle cx="'+f(q.x)+'" cy="'+f(q.y)+'" r="29" fill="none" stroke="#d98a32" stroke-width="3" stroke-dasharray="5 5"/>'; }
+  function drawHandles(v){
+    var out='';v.sim.design.nodes.slice(0,-2).forEach(function(n,i){var q=v.project({x:n.x,z:n.z,y:n.h}),selected=imp.node===i;out+='<g data-node="'+i+'" role="button" tabindex="0" aria-label="'+(i===0?'起点':'支点 '+i)+'，高度 '+Math.round(n.h*100)+' 厘米"><circle cx="'+f(q.x)+'" cy="'+f(q.y)+'" r="29" fill="transparent"/><circle cx="'+f(q.x)+'" cy="'+f(q.y)+'" r="18" fill="'+(selected?'#1c8f84':'#fff')+'" stroke="'+(selected?'#fff':'#219c90')+'" stroke-width="3"/><text x="'+f(q.x)+'" y="'+f(q.y+7)+'" font-size="20" font-weight="750" text-anchor="middle" fill="'+(selected?'#fff':'#168678')+'">'+(i===0?'起':i)+'</text>'+(selected?'<path d="M'+f(q.x-7)+' '+f(q.y-32)+'l7-7 7 7M'+f(q.x-7)+' '+f(q.y+32)+'l7 7 7-7" fill="none" stroke="#1b9587" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>':'')+'</g>';});$(v.id+'-handles').innerHTML=out;
+  }
+  function drawBall(v,s,draggable){var q=P.pointAt(v.sim.model.track,clamp(s,0,v.sim.model.length));$(v.id+'-ball-group').innerHTML=Artwork.ball(v.project(q),v.id,s,draggable);}
+  function drawMeasurement(){
+    var v=views['obs-stage'];if(!v)return;var g=$('obs-stage-measure');g.innerHTML='';if(!obs.measure)return;
+    var model=v.sim.model,out='<path d="'+path(model.points,v.project)+'" fill="none" stroke="#efbe5f" stroke-width="4" stroke-dasharray="3 10" stroke-linecap="round"/>';
+    out+='<path d="'+path(trackSlice(v.sim,obs.s),v.project)+'" fill="none" stroke="#ffc854" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>';
+    for(var s=.5;s<model.length-.05;s+=.5){var q=v.project(P.pointAt(model.track,s));out+='<circle cx="'+f(q.x)+'" cy="'+f(q.y)+'" r="5" fill="#fff7d6" stroke="#c79532" stroke-width="2"/>';}
+    g.innerHTML=out;
+  }
+  function direction(){
+    if(obs.s<.025)return'就在起点';var v=views['obs-stage'],a=v.project(v.sim.model.points[0]),b=v.project(P.pointAt(v.sim.model.track,obs.s)),dx=b.x-a.x,dy=b.y-a.y;
+    var horizontal=Math.abs(dx)>13?(dx>0?'右':'左'):'',vertical=Math.abs(dy)>13?(dy>0?'下':'上'):'';
+    if(!horizontal&&!vertical)return'靠近起点';return'起点的'+horizontal+vertical+'方';
+  }
+  function updateObserve(){
+    var sim=observationSim(),v=views['obs-stage'];if(v){drawBall(v,obs.s,true);failureMarker(v,obs.phase==='done'&&sim.state!=='finished');}
+    $('obs-scrub').value=String(Math.round(obs.s/sim.model.length*1000));$('obs-distance').textContent=String(Math.round(obs.s*100));$('obs-length').textContent='全长 '+Math.round(sim.model.length*100)+' 厘米';
+    $('position-caption').textContent=obs.clue?'从当前画面看':'先观察，再说一说';$('position-clue').textContent=obs.clue?direction():'小球怎样运动？';
+    $('distance-readout').classList.toggle('hidden',!obs.measure);
+    $('obs-play').textContent=obs.running?'暂停观察':obs.phase==='paused'?'继续观察':'从起点放球';
+    var status=$('obs-status'),msg='';if(obs.phase==='done')msg=sim.state==='finished'?'到达终点':failure(sim);else if(obs.phase==='paused')msg='已暂停';
+    status.textContent=msg;status.className='scene-status'+(msg?'':' hidden')+(obs.phase==='done'&&sim.state!=='finished'?' warn':'');
+    if(obs.measure)drawMeasurement();
+  }
+  function resetObserve(){obs.t=0;obs.s=0;obs.running=false;obs.phase='idle';updateObserve();}
+  function playObserve(){if(obs.running){obs.running=false;obs.phase='paused';}else{if(obs.phase!=='paused'){obs.t=0;obs.s=0;}obs.running=true;obs.phase='running';last=0;}updateObserve();}
+  function placeObserve(s){obs.running=false;obs.phase='placed';obs.s=clamp(s,0,observationSim().model.length);obs.t=0;updateObserve();}
+  function compareTarget(){return cmp.method==='distance'?cmp.distance:cmp.time;}
+  function compareEndpoint(sim){if(cmp.method==='distance'){var e=M.atDistance(sim,cmp.distance);return{t:e.reached?e.t:sim.duration,reached:e.reached};}return{t:Math.min(cmp.time,sim.duration),reached:sim.duration>=cmp.time-1e-8};}
+  function drawFlag(v){
+    var g=$(v.id+'-flag');if(cmp.method!=='distance'){g.innerHTML='';return;}var q=v.project(P.pointAt(v.sim.model.track,cmp.distance));
+    g.innerHTML='<path d="M'+f(q.x)+' '+f(q.y+5)+'V'+f(q.y-52)+'" stroke="#c99429" stroke-width="3"/><path d="M'+f(q.x)+' '+f(q.y-52)+'h64v32h-64Z" fill="#f8cc6d" stroke="#d7a841" stroke-width="1"/><text x="'+f(q.x+32)+'" y="'+f(q.y-30)+'" text-anchor="middle" font-size="19" font-weight="700" fill="#785319">'+cmp.distance.toFixed(1)+' m</text>';
+  }
+  function updateCompare(){
+    ['A','B'].forEach(function(key){
+      var sim=SIMS[key],end=compareEndpoint(sim),used=Math.min(cmp.t,end.t),frame=M.sample(sim,used),done=cmp.phase!=='idle'&&cmp.t>=end.t-1e-7,v=views['cmp-stage-'+key];
+      if(done&&end.reached&&cmp.method==='distance')frame.s=cmp.distance;
+      if(v)drawBall(v,frame.s,false);
+      var val='—',label='准备放球',cls='';if(cmp.phase!=='idle'){
+        if(!end.reached&&done){val='未到达';label='未达条件';cls='warn';}
+        else{val=cmp.method==='distance'?used.toFixed(2):Math.round(frame.s*100).toString();label=done?(cmp.method==='distance'?'已到标线':'同时定格'):cmp.running?'正在观察':'已暂停';cls=done?'done':'';}
+      }
+      $('cmp-value-'+key).textContent=val;$('cmp-value-'+key).parentNode.classList.toggle('is-text',val==='未到达');$('cmp-value-'+key).nextElementSibling.classList.toggle('hidden',val==='未到达');$('cmp-state-'+key).textContent=label;$('cmp-state-'+key).className='card-state '+cls;
+    });
+    $('cmp-play').textContent=cmp.running?'暂停观察':cmp.phase==='paused'?'继续观察':cmp.phase==='done'?'再比一次':'一起放球';
+    $('cmp-question').textContent=cmp.method==='distance'?'哪条轨道用时更短？':'哪条轨道走得更远？';
+  }
+  function compareControls(){
+    var distance=cmp.method==='distance';$('mode-distance').classList.toggle('active',distance);$('mode-time').classList.toggle('active',!distance);$('mode-distance').setAttribute('aria-pressed',String(distance));$('mode-time').setAttribute('aria-pressed',String(!distance));
+    $('target-label').textContent=distance?'都沿轨道走到':'都观察同样久';$('target-unit').textContent=distance?'米':'秒';$('target-value').textContent=compareTarget().toFixed(1);
+    $('cmp-target').max=distance?String(Math.floor(Math.min(SIMS.A.model.length,SIMS.B.model.length)*10)/10):String(Math.floor(Math.min(SIMS.A.duration,SIMS.B.duration)*10)/10);$('cmp-target').value=String(compareTarget());$('cmp-target').setAttribute('aria-label',distance?'共同路程，米':'共同时间，秒');
+    list('.cmp-label',function(el){el.textContent=distance?'模拟用时':'沿轨道走过';});list('.cmp-unit',function(el){el.textContent=distance?'秒':'厘米';});
+    ['A','B'].forEach(function(key){if(views['cmp-stage-'+key])drawFlag(views['cmp-stage-'+key]);});
+  }
+  function resetCompare(){cmp.t=0;cmp.phase='idle';cmp.running=false;updateCompare();}
+  function playCompare(){if(cmp.running){cmp.running=false;cmp.phase='paused';}else{if(cmp.phase!=='paused')cmp.t=0;cmp.running=true;cmp.phase='running';last=0;}updateCompare();}
+  function impactState(sim,t){
+    var hit=M.impact(sim),frame=M.sample(sim,t),after=Math.max(0,t-sim.duration),wood=M.blockAt(hit,after),ball=hit.reached&&after>0&&M.ballAfterImpact?M.ballAfterImpact(hit,Math.min(after,hit.slideDuration)):null;
+    return{hit:hit,frame:frame,wood:wood,ballS:ball?Math.max(0,sim.model.length+ball.s):frame.s,hitYet:hit.reached&&t>=sim.duration,end:sim.duration+(hit.reached?hit.slideDuration:0)};
+  }
+  function updateImprove(){
+    var allDone=true;['A','B'].forEach(function(key){
+      var sim=key==='A'?SIMS.A:imp.sim,r=impactState(sim,imp.t),v=views['imp-stage-'+key],finished=imp.phase!=='idle'&&imp.t>=r.end-1e-7;
+      if(!finished)allDone=false;if(v){drawBall(v,r.ballS,false);$(v.id+'-moving-block').innerHTML=blockGuide(v,r.wood.s)+Artwork.block(sim.model.points[sim.model.points.length-1],r.wood.s,v.project);failureMarker(v,imp.phase!=='idle'&&!r.hit.reached&&imp.t>=sim.duration-1e-7);}
+      var val='—',label=key==='B'?'拖动支点':'准备放球',cls='';if(imp.phase!=='idle'){
+        if(!r.hit.reached&&imp.t>=sim.duration-1e-7){val='未撞到';label=failure(sim);cls='warn';}
+        else if(r.hitYet){val=(r.wood.s*100).toFixed(1);label=finished?'木块停下':imp.running?'木块滑动':'已暂停';cls=finished?'done':'';}
+        else label=imp.running?'正在试跑':'已暂停';
+      }
+      $('imp-value-'+key).textContent=val;$('imp-value-'+key).parentNode.classList.toggle('is-text',val==='未撞到');$('imp-value-'+key).nextElementSibling.classList.toggle('hidden',val==='未撞到');$('imp-state-'+key).textContent=label;$('imp-state-'+key).title=label;$('imp-state-'+key).className='card-state '+cls;
+    });
+    $('imp-play').textContent=imp.running?'暂停观察':imp.phase==='paused'?'继续观察':imp.phase==='done'?'再试一次':'对照试跑';
+    return allDone;
+  }
+  function heightControl(){var value=Math.round(imp.design.nodes[imp.node].h*100);$('node-name').textContent=(imp.node===0?'起点':'支点 '+imp.node)+'高度';$('height-value').textContent=String(value);$('height-slider').value=String(value);$('height-minus').disabled=value<=4;$('height-plus').disabled=value>=72;}
+  function resetImprove(){imp.t=0;imp.running=false;imp.phase='idle';updateImprove();}
+  function setHeight(cm){cm=clamp(Math.round(cm),4,72);if(Math.round(imp.design.nodes[imp.node].h*100)===cm)return;imp.design.nodes[imp.node].h=cm/100;imp.sim=M.simulate(imp.design);imp.t=0;imp.running=false;imp.phase='idle';heightControl();renderImprove();}
+  function playImprove(){if(imp.running){imp.running=false;imp.phase='paused';}else{if(imp.phase!=='paused')imp.t=0;imp.running=true;imp.phase='running';last=0;}updateImprove();}
+  function renderObserve(){var sim=observationSim();makeView('obs-stage',sim,obs.source==='B'?'#27aa9b':'#4a8ded',[sim],'observe');drawMeasurement();updateObserve();}
+  function renderCompare(){['A','B'].forEach(function(key){makeView('cmp-stage-'+key,SIMS[key],key==='A'?'#4a8ded':'#27aa9b',[SIMS.A,SIMS.B],'compare');});compareControls();updateCompare();}
+  function renderImprove(){['A','B'].forEach(function(key){makeView('imp-stage-'+key,key==='A'?SIMS.A:imp.sim,key==='A'?'#4a8ded':'#27aa9b',[SIMS.A,imp.sim],key==='A'?'block':'edit');});heightControl();updateImprove();}
+  function renderActive(){if(page==='observe')renderObserve();else if(page==='compare')renderCompare();else renderImprove();}
+  function pauseAll(){[obs,cmp,imp].forEach(function(s){if(s.running){s.running=false;s.phase='paused';}});}
+  function changePage(next){pauseAll();page=next;drag=null;['observe','compare','improve'].forEach(function(p){$('page-'+p).classList.toggle('hidden',p!==next);});list('[data-page]',function(b){b.classList.toggle('active',b.getAttribute('data-page')===next);if(b.getAttribute('data-page')===next)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});renderActive();announce(next==='observe'?'观察运动':next==='compare'?'公平比较':'改进验证');}
+  function svgPoint(svg,clientX,clientY){var p=svg.createSVGPoint();p.x=clientX;p.y=clientY;var ctm=svg.getScreenCTM();return ctm?p.matrixTransform(ctm.inverse()):null;}
+  function closestData(el,name){while(el&&el!==document){if(el.getAttribute&&el.hasAttribute(name))return el;el=el.parentNode;}return null;}
+  function moveDrag(clientX,clientY){
+    if(!drag)return;var v=views[drag.id],p=svgPoint(v.svg,clientX,clientY);if(!p)return;
+    if(drag.type==='ball'){
+      var model=v.sim.model,best=Infinity,at=0;for(var i=0;i<model.points.length;i++){var q=v.project(model.points[i]),dx=q.x-p.x,dy=q.y-18-p.y,d=dx*dx+dy*dy;if(d<best){best=d;at=model.actualS[i];}}placeObserve(at);
+    }else{
+      var n=imp.design.nodes[imp.node],base=v.project({x:n.x,z:n.z,y:0}),ratio=v.project({x:0,z:0,y:1}).y;
+      setHeight((base.y-p.y)/(-ratio)*100);
+    }
+  }
+  function startDrag(ev,id,clientX,clientY){
+    var node=closestData(ev.target,'data-node'),ball=closestData(ev.target,'data-ball');if(id==='obs-stage'&&ball){obs.running=false;obs.phase='placed';drag={type:'ball',id:id};updateObserve();}
+    else if(id==='imp-stage-B'&&node){imp.node=Number(node.getAttribute('data-node'));imp.running=false;if(imp.phase==='running')imp.phase='paused';drag={type:'node',id:id};heightControl();drawHandles(views[id]);updateImprove();}
+    else return false;
+    if(ev.cancelable)ev.preventDefault();return true;
+  }
+  function bindDrag(id){var el=$(id);
+    if(window.PointerEvent){
+      el.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button!==0)return;if(startDrag(e,id,e.clientX,e.clientY)){try{el.setPointerCapture(e.pointerId);}catch(ignore){}}});
+      el.addEventListener('pointermove',function(e){if(drag&&drag.id===id){if(e.cancelable)e.preventDefault();moveDrag(e.clientX,e.clientY);}});
+      el.addEventListener('pointerup',function(e){if(drag&&drag.id===id){drag=null;try{el.releasePointerCapture(e.pointerId);}catch(ignore){}}});
+      el.addEventListener('pointercancel',function(){drag=null;});
+    }else{
+      el.addEventListener('mousedown',function(e){if(e.button===0)startDrag(e,id,e.clientX,e.clientY);});
+      el.addEventListener('touchstart',function(e){if(e.touches.length===1)startDrag(e,id,e.touches[0].clientX,e.touches[0].clientY);},{passive:false});
+      el.addEventListener('touchmove',function(e){if(drag&&e.touches.length===1){e.preventDefault();moveDrag(e.touches[0].clientX,e.touches[0].clientY);}},{passive:false});
+      el.addEventListener('touchend',function(){drag=null;});el.addEventListener('touchcancel',function(){drag=null;});
+    }
+    if(id==='imp-stage-B')el.addEventListener('keydown',function(e){var n=closestData(e.target,'data-node');if(!n)return;var index=Number(n.getAttribute('data-node'));if(e.key==='Enter'||e.key===' '){e.preventDefault();imp.node=index;heightControl();drawHandles(views[id]);$('height-slider').focus();}else if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();imp.node=index;setHeight(imp.design.nodes[index].h*100+(e.key==='ArrowUp'?1:-1));$('height-slider').focus();}});
+  }
+  if(!window.PointerEvent){document.addEventListener('mousemove',function(e){if(drag)moveDrag(e.clientX,e.clientY);});document.addEventListener('mouseup',function(){drag=null;});}
+  function drawRatings(){
+    var out='';ratingNames.forEach(function(name,i){out+='<div class="rating-row"><span>'+esc(name)+'</span><div class="stars" role="group" aria-label="'+esc(name)+'">';for(var j=1;j<=3;j++)out+='<button data-rating="'+i+'" data-stars="'+j+'" class="'+(j<=ratings[i]?'active':'')+'" aria-label="'+esc(name)+'，'+j+' 星" aria-pressed="'+(ratings[i]===j)+'">★</button>';out+='</div></div>';});$('rating-rows').innerHTML=out;$('rating-total').textContent=ratings.reduce(function(a,b){return a+b;},0)+' / 12 星';
+  }
+  function storeRatings(){try{localStorage.setItem('aihtml.coaster.testing.ratings.v1',JSON.stringify(ratings));}catch(ignore){}}
+  function openDialog(id){pauseAll();renderActive();focusBeforeDialog=document.activeElement;$(id).classList.remove('hidden');$(id).querySelector('.close').focus();}
+  function closeDialog(id){$(id).classList.add('hidden');if(focusBeforeDialog&&focusBeforeDialog.focus)focusBeforeDialog.focus();}
+  list('[data-page]',function(b){b.addEventListener('click',function(){changePage(b.getAttribute('data-page'));});});
+  $('obs-play').addEventListener('click',playObserve);$('obs-reset').addEventListener('click',resetObserve);
+  $('obs-source').addEventListener('change',function(){obs.source=this.value;obs.s=0;obs.t=0;obs.phase='idle';obs.running=false;renderObserve();});
+  $('obs-scrub').addEventListener('input',function(){placeObserve(Number(this.value)/1000*observationSim().model.length);});
+  $('clue-toggle').addEventListener('click',function(){obs.clue=!obs.clue;this.classList.toggle('active',obs.clue);this.setAttribute('aria-pressed',String(obs.clue));updateObserve();});
+  $('measure-toggle').addEventListener('click',function(){obs.measure=!obs.measure;this.classList.toggle('active',obs.measure);this.setAttribute('aria-pressed',String(obs.measure));drawMeasurement();updateObserve();});
+  $('cmp-play').addEventListener('click',playCompare);$('cmp-reset').addEventListener('click',resetCompare);
+  ['distance','time'].forEach(function(mode){$('mode-'+mode).addEventListener('click',function(){cmp.method=mode;resetCompare();compareControls();});});
+  $('cmp-target').addEventListener('input',function(){cmp[cmp.method]=Number(this.value);resetCompare();compareControls();});
+  $('imp-play').addEventListener('click',playImprove);$('imp-reset').addEventListener('click',resetImprove);
+  $('height-slider').addEventListener('input',function(){setHeight(Number(this.value));});
+  $('height-minus').addEventListener('click',function(){setHeight(imp.design.nodes[imp.node].h*100-1);});$('height-plus').addEventListener('click',function(){setHeight(imp.design.nodes[imp.node].h*100+1);});
+  $('restore-design').addEventListener('click',function(){imp.design=copy(PRESETS.A);imp.sim=M.simulate(imp.design);imp.t=0;imp.phase='idle';imp.running=false;imp.node=0;renderImprove();});
+  $('rating-open').addEventListener('click',function(){drawRatings();openDialog('rating-dialog');});$('help-open').addEventListener('click',function(){openDialog('help-dialog');});
+  list('[data-close]',function(b){b.addEventListener('click',function(){closeDialog(b.getAttribute('data-close'));});});
+  list('.dialog-backdrop',function(d){d.addEventListener('click',function(e){if(e.target===d)closeDialog(d.id);});});
+  $('rating-rows').addEventListener('click',function(e){var b=closestData(e.target,'data-rating');if(!b)return;var row=Number(b.getAttribute('data-rating')),n=Number(b.getAttribute('data-stars'));ratings[row]=ratings[row]===n?0:n;storeRatings();drawRatings();var replacement=$('rating-rows').querySelector('[data-rating="'+row+'"][data-stars="'+n+'"]');if(replacement)replacement.focus();});
+  $('rating-clear').addEventListener('click',function(){ratings=[0,0,0,0];storeRatings();drawRatings();});
+  document.addEventListener('keydown',function(e){var open=document.querySelector('.dialog-backdrop:not(.hidden)');if(!open)return;if(e.key==='Escape'){closeDialog(open.id);e.preventDefault();}else if(e.key==='Tab'){var focusable=open.querySelectorAll('button:not(:disabled),input,select,[tabindex="0"]'),first=focusable[0],lastItem=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();lastItem.focus();}else if(!e.shiftKey&&document.activeElement===lastItem){e.preventDefault();first.focus();}}});
+  $('import-lesson7').addEventListener('click',function(){
+    var d=null;try{d=JSON.parse(localStorage.getItem('aihtml.coaster.design.v1')||'null');}catch(ignore){}
+    if(!M.validateDesign(d)){toast('还没有找到上节保存的轨道，请在同一浏览器和网站完成第 7 课。');return;}
+    SIMS.imported=M.simulate(d);if(!$('obs-source').querySelector('[value="imported"]')){var option=document.createElement('option');option.value='imported';option.textContent='上节作品';$('obs-source').appendChild(option);}obs.source='imported';obs.s=0;obs.t=0;obs.running=false;obs.phase='idle';$('obs-source').value='imported';closeDialog('help-dialog');changePage('observe');toast('已载入上节作品，可以观察与测量。');
+  });
+  $('fullscreen').addEventListener('click',function(){
+    var d=document,root=d.documentElement,active=d.fullscreenElement||d.webkitFullscreenElement,method=active?(d.exitFullscreen||d.webkitExitFullscreen):(root.requestFullscreen||root.webkitRequestFullscreen);
+    if(!method){toast('可使用浏览器全屏，或将设备横向摆放。');return;}try{var result=method.call(active?d:root);if(result&&result.catch)result.catch(function(){toast('请使用浏览器菜单中的全屏功能。');});}catch(e){toast('请使用浏览器菜单中的全屏功能。');}
+  });
+  document.addEventListener('visibilitychange',function(){if(document.hidden){pauseAll();renderActive();last=0;}});
+  window.addEventListener('resize',function(){clearTimeout(resizeTimer);resizeTimer=setTimeout(renderActive,100);});
+  bindDrag('obs-stage');bindDrag('imp-stage-B');drawRatings();renderActive();
+  function tick(now){
+    var dt=last?Math.max(0,(now-last)/1000)*.4:0;last=now;
+    if(page==='observe'&&obs.running){var sim=observationSim();obs.t=Math.min(obs.t+dt,sim.duration);var frame=M.sample(sim,obs.t);obs.s=frame.s;if(frame.done){obs.running=false;obs.phase='done';announce(sim.state==='finished'?'小球到达终点':failure(sim));}updateObserve();}
+    else if(page==='compare'&&cmp.running){var max=Math.max(compareEndpoint(SIMS.A).t,compareEndpoint(SIMS.B).t);cmp.t=Math.min(cmp.t+dt,max);if(cmp.t>=max-1e-8){cmp.running=false;cmp.phase='done';announce('比较结束，请根据相同条件下的读数判断。');}updateCompare();}
+    else if(page==='improve'&&imp.running){var endA=impactState(SIMS.A,0).end,endB=impactState(imp.sim,0).end,maxEnd=Math.max(endA,endB);imp.t=Math.min(imp.t+dt,maxEnd);if(imp.t>=maxEnd-1e-8){imp.running=false;imp.phase='done';announce('试跑结束，请比较木块移动的距离。');}updateImprove();}
+    window.requestAnimationFrame(tick);
+  }
+  window.requestAnimationFrame(tick);
+}());
+
+</script>
+</body>
+</html>
