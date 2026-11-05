@@ -361,9 +361,9 @@ body::before {
   background-color: #04152d;
   background-image:
     linear-gradient(180deg, rgba(1,11,31,.10), rgba(1,11,31,.07) 60%, rgba(1,11,31,.21)),
-    url("./assets/aihtml-home-pixel-steam.jpg");
+    url("./assets/aihtml-home-pixel-steam-recomposed-landscape.jpg");
   background-position: center, center;
-  background-size: 100% 100%, cover;
+  background-size: 100% 100%, 100% 100%;
   background-repeat: no-repeat;
 }
 
@@ -463,15 +463,14 @@ body[data-view="focus"] .compat-entry:hover,
 .book-unit-link,
 .focused-book h3 { text-shadow: 0 2px 8px rgba(0,6,22,.72); }
 
-/* Portrait screens emphasize the wind turbine and rover above, gears and pulley below. */
+/* Purpose-built portrait composition: keep science exhibits outside the content area. */
 @media (max-width: 699px) and (orientation: portrait) {
   body::before {
     background-image:
-      linear-gradient(180deg, rgba(1,11,31,.32), rgba(1,11,31,.16), rgba(1,11,31,.31)),
-      url("./assets/aihtml-home-pixel-steam.jpg"),
-      url("./assets/aihtml-home-pixel-steam.jpg");
-    background-size: 100% 100%, auto 62%, auto 62%;
-    background-position: center, right top, left bottom;
+      linear-gradient(180deg, rgba(1,11,31,.26), rgba(1,11,31,.12) 55%, rgba(1,11,31,.25)),
+      url("./assets/aihtml-home-pixel-steam-recomposed-portrait.jpg");
+    background-size: 100% 100%, 100% 100%;
+    background-position: center, center;
     background-repeat: no-repeat;
   }
 }
