@@ -550,3 +550,174 @@ body[data-view="focus"] .compat-entry:hover,
 @media (prefers-reduced-motion: reduce) {
   .focus-layout.is-switching { animation: none; }
 }
+
+
+/* Responsive reading layout: large classroom screens, tablets, and narrow phones.
+ * Mobile grade cards retain the two-column textbook overview with much less
+ * vertical space and a quiet frosted backdrop for legible unit names.
+ */
+.site-footer-inner { justify-content: center; }
+.site-footer p { text-align: center; }
+
+@media (min-width: 1100px) {
+  .book-grid { gap: clamp(14px, 1.3vw, 26px); }
+  .book-entry {
+    padding: 0 5px 7px;
+    border-radius: 5px;
+    background: linear-gradient(180deg, transparent 0%, transparent 47%, rgba(3,18,42,.12) 62%, rgba(3,18,42,.34) 100%);
+  }
+  .book-units {
+    background: rgba(4,22,48,.18);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+  .book-unit-link { padding-left: 5px; padding-right: 4px; }
+}
+
+@media (min-width: 700px) and (max-width: 1099px) {
+  main { padding: 20px; }
+  .book-grid { gap: 18px; align-items: stretch; }
+  .book-entry {
+    padding: 12px 12px 9px;
+    border: 1px solid rgba(146,217,255,.22);
+    border-radius: 5px;
+    background: linear-gradient(160deg, rgba(8,33,62,.23), rgba(5,24,51,.52));
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+  .book-cover-link { height: clamp(170px, 27vw, 250px); }
+  .book-heading { padding-top: 9px; padding-bottom: 8px; }
+  .book-unit-link { min-height: 42px; font-size: 18px; }
+}
+@media (min-width: 700px) and (max-width: 799px) and (orientation: portrait) {
+  .book-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .book-cover-link { height: 235px; }
+}
+@media (min-width: 700px) and (max-width: 1099px) and (orientation: landscape) and (max-height: 600px) {
+  .book-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .book-cover-link { height: clamp(125px, 18vw, 170px); }
+  .book-heading h2 { font-size: 23px; }
+  .book-unit-link { min-height: 36px; font-size: 16px; }
+}
+
+@media (max-width: 699px) {
+  /* The shelf can use the full scroll viewport; focus mode pins the header. */
+  .site-header { position: relative; }
+  body[data-view="focus"] .site-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  .site-header-inner {
+    padding: 9px 12px;
+    gap: 8px 10px;
+  }
+  .site-header h1 {
+    font-size: clamp(17px, 4.65vw, 20px);
+    line-height: 1.22;
+  }
+  .site-title::after { width: 35px; margin-top: 5px; }
+  .compat-entry { min-height: 42px; padding: 7px 9px; gap: 6px; font-size: 13px; border-radius: 4px; }
+  .compat-entry svg { width: 20px; height: 20px; }
+  .semester-switch { gap: 8px; }
+  .semester-button {
+    min-height: 46px;
+    padding: 8px 8px;
+    font-size: clamp(17px, 4.6vw, 20px);
+    gap: 6px;
+    border-width: 1.5px;
+    border-radius: 4px;
+  }
+  .season-icon { width: 22px; height: 22px; }
+  .season-label small { margin-left: 6px; font-size: 11px; }
+
+  main { padding: 16px 12px 22px; }
+  .library-view { justify-content: flex-start; }
+  .book-grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 12px;
+    align-items: stretch;
+  }
+  .book-entry {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 11px 9px 9px;
+    border: 1px solid rgba(147,218,255,.29);
+    border-radius: 5px;
+    background: rgba(6,26,53,.51);
+    box-shadow: inset 0 1px 0 rgba(183,232,255,.10), 0 7px 22px rgba(0,5,22,.16);
+    -webkit-backdrop-filter: blur(9px);
+    backdrop-filter: blur(9px);
+  }
+  .book-cover-link {
+    flex: none;
+    height: clamp(154px, 38vw, 216px);
+    min-height: 0;
+    max-height: none;
+    align-items: center;
+    padding: 0 3px;
+  }
+  .book-cover-link img { max-height: 100%; }
+  .book-heading {
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2px 5px;
+    padding: 9px 1px 7px;
+  }
+  .book-heading h2 { font-size: clamp(20px, 5vw, 26px); }
+  .book-heading h2 a { min-height: 30px; padding: 1px 0; }
+  .book-resource-count { font-size: 10px; }
+  .book-units { margin-top: auto; }
+  .book-unit-link {
+    gap: 5px;
+    min-height: 40px;
+    padding: 6px 2px;
+    font-size: clamp(15px, 3.8vw, 18px);
+    line-height: 1.3;
+  }
+  .book-unit-number { font-size: 10px; }
+  .book-unit-link .chevron { flex: none; width: 12px; height: 12px; }
+  .site-footer-inner { padding: 10px 12px; justify-content: center; }
+  .site-footer p { width: auto; }
+
+  .focus-view { padding: calc(var(--header-size) + 8px) 8px calc(var(--footer-size) + 8px); }
+  .focus-layout { grid-template-rows: 78px minmax(0,1fr); gap: 8px; }
+  .focused-book { padding: 0 39px; gap: 12px; }
+  .focused-cover { width: 52px; height: 75px; }
+  .focused-cover img { max-height: 75px; }
+  .focused-book h3 { font-size: 22px; }
+  .focused-book p { font-size: 13px; }
+  .focus-nav { top: calc(var(--header-size) + 48px); width: 36px; height: 64px; }
+  .directory-panel { border-radius: 5px; }
+  .directory-heading { padding: 11px 12px; }
+  .directory-heading h2 { font-size: clamp(21px, 5.4vw, 25px); }
+  .directory-scroll { padding: 7px 7px 14px; }
+}
+@media (max-width: 430px) {
+  .book-cover-link { height: clamp(120px, 36vw, 154px); }
+  .book-entry { padding: 10px 8px 8px; }
+  .book-heading h2 { font-size: 21px; }
+  .book-unit-link { font-size: 15px; }
+}
+@media (max-width: 360px) {
+  main { padding-left: 8px; padding-right: 8px; }
+  .site-header-inner { padding-left: 10px; padding-right: 10px; }
+  .season-label small { font-size: 10px; margin-left: 4px; }
+  .book-grid { gap: 8px; }
+  .book-entry { padding: 8px 6px; }
+  .book-cover-link { height: 118px; }
+  .book-heading h2 { font-size: 19px; }
+  .book-unit-link { font-size: 14px; }
+  .focus-layout { grid-template-rows: 70px minmax(0,1fr); }
+  .focus-nav { top: calc(var(--header-size) + 43px); }
+  .focused-cover { height: 67px; }
+  .focused-cover img { max-height: 67px; }
+}
+/* On older browsers, retain contrast without relying on glass blurs. */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  @media (max-width: 1099px) {
+    .book-entry { background: rgba(6,26,53,.82); }
+  }
+}
