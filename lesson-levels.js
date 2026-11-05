@@ -22,6 +22,7 @@
     '三上3.3直线运动和曲线运动': { level: 2, note: 'Canvas 轨迹、击球与桌沿运动模拟' },
     '三上3.4相同距离比快慢': { level: 1, note: 'SVG赛道、手动秒表与实验记录' },
     '三上3.5相同时间比快慢': { level: 1, note: 'SVG、触控、共同计时与测距' },
+    '三上3.6运动和能量': { level: 1, note: 'SVG、触控、斜面碰撞与测距' },
     '三下2.1不同种类的动物': { level: 1, note: '基础交互' },
     '四上2.2认识呼吸器官': { level: 4, note: '大型人体三维模型', highLoad: true },
     '四上2.4测量肺活量': { level: 2, note: 'Canvas 与数据记录', highLoad: true },
