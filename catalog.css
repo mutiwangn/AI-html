@@ -340,7 +340,7 @@ body[data-view="focus"] .site-footer { position: fixed; left: 0; right: 0; botto
 
 
 
-/* Science illustration backdrop · glass UI refresh (2026-11-03)
+/* Pixel-art STEAM engineering backdrop · glass UI refresh (2026-11-05)
  * The decorative artwork stays separate from book covers and lesson assets.
  * Fixed pseudo-element avoids iPad Safari's inconsistent background-attachment: fixed.
  */
@@ -361,7 +361,7 @@ body::before {
   background-color: #04152d;
   background-image:
     linear-gradient(180deg, rgba(1,11,31,.10), rgba(1,11,31,.07) 60%, rgba(1,11,31,.21)),
-    url("./assets/aihtml-home-science.jpg");
+    url("./assets/aihtml-home-pixel-steam.jpg");
   background-position: center, center;
   background-size: 100% 100%, cover;
   background-repeat: no-repeat;
@@ -463,13 +463,13 @@ body[data-view="focus"] .compat-entry:hover,
 .book-unit-link,
 .focused-book h3 { text-shadow: 0 2px 8px rgba(0,6,22,.72); }
 
-/* Portrait screens have room for the plant at the foot and the globe above. */
+/* Portrait screens emphasize the wind turbine and rover above, gears and pulley below. */
 @media (max-width: 699px) and (orientation: portrait) {
   body::before {
     background-image:
       linear-gradient(180deg, rgba(1,11,31,.32), rgba(1,11,31,.16), rgba(1,11,31,.31)),
-      url("./assets/aihtml-home-science.jpg"),
-      url("./assets/aihtml-home-science.jpg");
+      url("./assets/aihtml-home-pixel-steam.jpg"),
+      url("./assets/aihtml-home-pixel-steam.jpg");
     background-size: 100% 100%, auto 62%, auto 62%;
     background-position: center, right top, left bottom;
     background-repeat: no-repeat;
