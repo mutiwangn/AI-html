@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f3ed">
+<meta name="description" content="乐器的声音变化：操作吉他琴弦和排箫空气柱，让声音、有效振动部分、慢放与同刻度对照联动。单体离线互动课堂。">
+<meta name="aihtml-level" content="1">
+<title>乐器的声音变化 · 互动实验室</title>
+<style>
+:root{--paper:#f4f3ed;--ink:#24364b;--muted:#657488;--blue:#176ac6;--blue-soft:#e9f2fd;--line:#dbe1e5;--orange:#bd7135;--orange-soft:#fff2e5;--white:#fffefa;--radius:16px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%}body{background:var(--paper);color:var(--ink);font:18px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{cursor:pointer;color:inherit;border:0;background:none;touch-action:manipulation}button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #287ee2;outline-offset:4px}button:disabled{cursor:default;opacity:.4}button,.pill{user-select:none;-webkit-user-select:none}button svg{width:22px;height:22px;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}.app{height:100vh;height:100dvh;min-height:620px;display:flex;flex-direction:column;max-width:2000px;margin:auto;padding:0 24px}.header{display:flex;align-items:center;gap:24px;flex:0 0 88px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;white-space:nowrap}.brandmark{width:42px;height:42px;border-radius:12px;background:var(--blue);display:flex;align-items:center;justify-content:center}.brandmark svg{width:30px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round}.brand h1{font-size:26px;line-height:1.2;margin:0;font-weight:750;letter-spacing:.01em}.brand p{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:5px 0 0}.nav{display:flex;gap:6px;background:#e8e9e6;padding:5px;border-radius:12px;margin:auto}.nav button{min-height:46px;padding:0 20px;font-weight:650;font-size:18px;border-radius:8px;white-space:nowrap}.nav button[aria-selected=true]{background:var(--white);box-shadow:0 2px 5px #33465a0a;color:var(--blue)}.nav .num{font-size:13px;opacity:.65;margin-right:8px}.header-tools{display:flex;align-items:center;gap:6px}.tool{display:flex;align-items:center;justify-content:center;gap:7px;min-width:44px;min-height:44px;padding:6px 9px;font-size:15px;border-radius:9px}.tool:hover{background:#e6e9ea}.tool.is-muted{color:#a05b39}.workshop{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:22px;padding:20px 0 10px}.arena{min-height:0;display:flex;flex-direction:column;background:var(--white);border:1px solid #e0e3e2;border-radius:var(--radius);overflow:hidden;box-shadow:0 6px 26px #25374b04}.arena-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 22px 5px}.arena-top h2{font-size:22px;line-height:1.3;margin:0;letter-spacing:.02em}.arena-top p{font-size:14px;margin:5px 0 0;color:var(--muted)}.view-tools{display:flex;gap:5px;flex-shrink:0}.pill{border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:40px;font-size:14px;font-weight:600;white-space:nowrap}.pill[aria-pressed=true]{color:var(--blue);background:var(--blue-soft);border-color:#bed4ed}.scene{flex:1;min-height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.scene>svg{display:block;width:100%;height:100%;max-height:620px;touch-action:none}.svg-hint{font:18px "PingFang SC","Microsoft YaHei",sans-serif;fill:#68798b}.svg-label{font:20px "PingFang SC","Microsoft YaHei",sans-serif;fill:#30445b}.svg-small{font:16px "PingFang SC","Microsoft YaHei",sans-serif;fill:#64788e}.svg-measure{font:700 22px "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;fill:#176ac6}.svg-touch{cursor:pointer;touch-action:none}.drag-point{cursor:ew-resize}.air-drag{cursor:ns-resize}.scene-caption{display:flex;justify-content:space-between;gap:14px;padding:0 22px 10px;color:var(--muted);font-size:13px;flex-wrap:wrap}.scene-caption strong{font-weight:600;color:#537396}.evidence{border-top:1px solid var(--line);background:#f8fafb;padding:10px 20px 6px;flex:0 0 166px}.evidence-head{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px}.evidence-head strong{font-weight:650;color:#3b526c}.evidence-head span{color:var(--muted);font-size:12px}.evidence svg{display:block;width:100%;height:112px;overflow:visible}.controls{display:flex;flex-direction:column;min-height:0;gap:13px}.control-heading{display:flex;justify-content:space-between;align-items:baseline;padding:1px 0 0}.control-heading span{font-size:13px;letter-spacing:.08em;color:var(--muted)}.control-heading strong{font-size:18px}.control-set{display:flex;flex-direction:column;gap:13px}.control-row{border-bottom:1px solid #dce1e4;padding-bottom:10px}.control-row label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:17px;font-weight:650;margin-bottom:3px}.control-row output{font-size:20px;color:var(--blue);font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}.control-row output small{font-size:13px;font-weight:500;margin-left:4px}.range-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:-2px}.range-ends span{display:block}input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;display:block;margin:0;background:transparent;cursor:pointer;touch-action:pan-x}input[type=range]::-webkit-slider-runnable-track{height:5px;background:#d3dce4;border-radius:3px}input[type=range]::-moz-range-track{height:5px;background:#d3dce4;border-radius:3px}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:25px;height:25px;background:var(--blue);border:4px solid var(--white);border-radius:50%;margin-top:-10px;box-shadow:0 0 0 1px #2879ce55}input[type=range]::-moz-range-thumb{width:18px;height:18px;background:var(--blue);border:4px solid var(--white);border-radius:50%;box-shadow:0 0 0 1px #2879ce55}.play-button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;width:100%;background:var(--blue);color:white;border-radius:11px;font-size:20px;font-weight:650;box-shadow:0 4px 10px #176ac612}.play-button:hover{background:#125ead}.play-button svg{width:25px;height:25px}.compare-box{margin-top:auto;padding-top:2px}.save-button{border:1px dashed #9baabb;background:#ffffff66;border-radius:10px;min-height:47px;width:100%;font-size:16px;font-weight:600}.save-button:hover{background:#fff}.comparison{border:1px solid #dbcab9;background:#fffaf4;border-radius:12px;padding:11px 12px}.comparison-header{display:flex;justify-content:space-between;gap:6px;align-items:center;font-size:14px;color:#8d623d}.comparison-header button{font-size:12px;padding:7px 6px;min-height:34px}.compare-values{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:3px 0}.compare-values span{font-size:12px;color:var(--muted)}.compare-values strong{font-size:24px;line-height:1.3;font-weight:700;font-variant-numeric:tabular-nums}.ref-color{color:var(--orange)}.now-color{color:var(--blue)}.diff{font-size:13px;min-height:34px;margin:7px 0 9px;color:#66768a;line-height:1.4}.compare-actions{display:flex;gap:7px}.compare-actions button{border:1px solid #d2dbe3;border-radius:7px;min-height:43px;padding:6px 8px;flex:1;font-size:14px;background:#fff}.compare-actions .compare-play{background:#233b57;border-color:#233b57;color:#fff;flex:1.2}.secondary-save{width:100%;font-size:13px;min-height:34px;margin-top:4px;color:#6e7d8f}.pipe-tip{font-size:16px;line-height:1.75;color:#66788c;margin:3px 0 0;padding:5px 0 15px}.pipe-tip strong{color:#354e67;font-weight:600}.pipe-tip .mini-bar{height:4px;width:38px;background:#9ec4e9;margin:0 0 10px;border-radius:2px}.footer{flex:0 0 32px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:#7a8795}.footer button{font-size:12px;min-height:32px;padding:3px 8px;color:#5c7088;text-decoration:underline;text-decoration-color:#acbac7;text-underline-offset:3px}.footer .stamp{letter-spacing:.14em;opacity:.55}.toast{position:fixed;left:50%;bottom:48px;transform:translateX(-50%);max-width:calc(100% - 30px);padding:11px 20px;border-radius:10px;color:#fff;background:#233b57;box-shadow:0 6px 24px #162d3e2b;z-index:25;font-size:15px;pointer-events:none}.modal-backdrop{position:fixed;inset:0;z-index:40;background:#1d304a80;display:flex;align-items:center;justify-content:center;padding:24px}.modal{max-width:670px;width:100%;max-height:90vh;overflow:auto;background:var(--white);border-radius:18px;padding:25px 30px;box-shadow:0 20px 80px #0d23364d}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.modal h2{font-size:24px;margin:0}.modal h3{font-size:18px;margin:21px 0 7px}.modal p{font-size:16px;line-height:1.8;margin:8px 0;color:#586c80}.modal a{color:var(--blue)}.modal a.play-button{color:#fff}.modal-close{min-width:44px;min-height:44px;font-size:28px}.mono{font-variant-numeric:tabular-nums}.play-badge{fill:#176ac6}.flash .play-badge{fill:#e19b38}.touch-quiet{outline:none}.sound-note{font-size:12px;color:#6b7d90;margin:4px 0 0;text-align:center}.print-note{display:none}
+@media(min-width:1600px){.app{padding:0 36px}.header{flex-basis:100px}.brand h1{font-size:30px}.workshop{grid-template-columns:minmax(0,1fr) 360px;gap:30px;padding-top:26px}.controls{gap:19px}.control-set{gap:18px}.control-row label{font-size:20px}.control-row output{font-size:23px}.control-row{padding-bottom:16px}.evidence{flex-basis:185px}.evidence svg{height:128px}.arena-top h2{font-size:26px}.arena-top p{font-size:16px}.nav button{font-size:20px}.scene-caption{font-size:15px}.comparison{padding:15px}.diff{font-size:15px}.compare-actions button{font-size:16px}.footer{font-size:14px}}
+@media(max-height:860px) and (min-width:851px){.app{min-height:590px}.header{flex-basis:72px}.workshop{padding-top:12px;gap:16px;grid-template-columns:minmax(0,1fr) 286px}.controls{gap:8px}.control-set{gap:7px}.control-row{padding-bottom:5px}.range-ends{display:none}.control-row label{font-size:16px}.control-row output{font-size:18px}.control-row input{height:26px}.play-button{min-height:44px;font-size:18px}.arena-top{padding:13px 18px 0}.arena-top h2{font-size:20px}.evidence{flex-basis:143px;padding-top:7px}.evidence svg{height:94px}.scene-caption{padding-bottom:5px;font-size:12px}.comparison{padding:8px 10px}.diff{min-height:26px;margin:4px 0 6px}.compare-values strong{font-size:22px}.comparison-header button{min-height:28px}.compare-actions button{min-height:38px}.secondary-save{min-height:28px}.pipe-tip{font-size:14px}.footer{flex-basis:26px}.footer button{min-height:26px}}
+@media(max-width:1150px){.app{padding:0 16px}.header{gap:12px}.brand h1{font-size:23px}.brandmark{width:36px;height:36px}.brand p{font-size:11px}.nav button{padding:0 13px;font-size:16px}.nav .num{display:none}.header-tools{gap:0}.tool{padding:6px}.tool .tool-label{display:none}.workshop{gap:14px;grid-template-columns:minmax(0,1fr) 270px}.arena-top{padding-left:17px;padding-right:17px}.arena-top h2{font-size:20px}.arena-top p{font-size:13px}.view-tools{gap:4px}.pill{padding:7px 9px;font-size:12px}.evidence{padding-left:14px;padding-right:14px}.control-row label{font-size:16px}.scene-caption{padding-left:16px;padding-right:16px}}
+@media(max-width:850px){html,body{height:auto;min-height:100%}.app{height:auto;min-height:100vh;padding:0 14px}.header{flex-wrap:wrap;flex-basis:auto;min-height:120px;padding:14px 0 10px;gap:11px}.brand{flex:1}.brand h1{font-size:24px}.brand p{font-size:10px}.header-tools{order:1}.nav{order:2;width:100%;margin:0;gap:5px}.nav button{flex:1;min-height:44px;font-size:17px}.nav .num{display:inline}.workshop{display:flex;flex-direction:column;padding-top:14px;gap:16px}.arena{height:580px;flex:none}.arena-top h2{font-size:21px}.scene{min-height:260px}.evidence{flex-basis:145px}.evidence svg{height:98px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}.control-heading{grid-column:1/-1}.control-set{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}.control-row label{font-size:18px}.control-row output{font-size:20px}.play-area{grid-column:1;align-self:start}.compare-box{grid-column:2;grid-row:2 / span 2;margin:0}.pipe-tip{display:none}.footer{min-height:45px;flex-wrap:wrap}.scene-caption{font-size:12px}.comparison{padding:10px}.control-heading{display:none}}
+@media(max-width:520px){.app{padding:0 10px}.header{padding-top:12px;gap:10px}.brand{gap:8px}.brand h1{font-size:21px}.brandmark{width:32px;height:32px;border-radius:9px}.brandmark svg{width:24px}.brand p{font-size:9px}.tool{min-width:36px;min-height:40px;padding:4px}.tool svg{width:20px}.nav button{font-size:16px;min-height:42px}.arena{height:430px;border-radius:12px}.arena-top{padding:12px 13px 0;align-items:flex-start;gap:6px}.arena-top h2{font-size:18px}.arena-top p{font-size:11px;max-width:210px;margin-top:3px}.view-tools{flex-direction:column;gap:3px}.pill{min-height:32px;padding:5px 7px;font-size:11px}.scene{min-height:178px}.scene-caption{font-size:10px;padding:0 12px 6px;gap:6px}.evidence{padding:9px 10px 4px;flex-basis:119px}.evidence-head{font-size:12px;gap:5px}.evidence-head span{font-size:10px}.evidence svg{height:83px}.controls{gap:12px 14px}.control-set{gap:10px 14px}.control-row label{font-size:14px}.control-row output{font-size:17px}.control-row output small{font-size:11px}.range-ends{font-size:11px}.control-row{padding-bottom:8px}.play-area{grid-column:1/-1}.play-button{min-height:48px;font-size:18px}.sound-note{font-size:11px}.compare-box{grid-column:1/-1;grid-row:auto}.comparison{padding:12px 14px}.diff{min-height:18px}.compare-actions button{font-size:15px}.footer{font-size:10px;gap:4px}.footer button{font-size:11px}.footer .stamp{display:none}.modal{padding:18px 20px}.modal h2{font-size:21px}.modal p{font-size:14px}.modal-backdrop{padding:12px}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="header">
+    <div class="brand"><span class="brandmark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 16v1M10 8v16M16 4v24M22 10v12M28 15v2"/></svg></span><div><h1>乐器的声音变化</h1><p>声音实验室 · 四上 3.4</p></div></div>
+    <nav class="nav" role="tablist" aria-label="选择乐器"><button id="tab-guitar" role="tab" aria-selected="true" aria-controls="workshop" data-page="guitar"><span class="num">01</span>吉他的弦</button><button id="tab-pipe" role="tab" aria-selected="false" aria-controls="workshop" data-page="pipe"><span class="num">02</span>排箫的管</button></nav>
+    <div class="header-tools"><button class="tool" id="soundToggle" aria-label="关闭声音" aria-pressed="true" title="声音开关"><svg id="soundIcon" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM17 8q5 4 0 8M19 4q9 8 0 16"/></svg><span class="tool-label">声音</span></button><button class="tool" id="reset" aria-label="复位当前乐器" title="复位当前乐器"><svg viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg><span class="tool-label">复位</span></button><button class="tool" id="fullscreen" aria-label="全屏显示" title="全屏"><svg viewBox="0 0 24 24"><path d="M9 4H4v5M15 4h5v5M4 15v5h5M20 15v5h-5"/></svg></button></div>
+  </header>
+  <main class="workshop" id="workshop" role="tabpanel" aria-labelledby="tab-guitar">
+    <section class="arena" aria-label="乐器观察区">
+      <div class="arena-top"><div><h2 id="sceneTitle">拨动一根弦，听见什么？</h2><p id="sceneHint">点选琴弦 · 拖动按压点 · 拨弦试听</p></div><div class="view-tools"><button class="pill" id="modelToggle" aria-pressed="true">慢放透视：开</button><button class="pill" id="pause" aria-pressed="false">暂停慢放</button></div></div>
+      <div class="scene" id="scene">
+        <svg id="guitarSvg" viewBox="0 0 1000 430" role="group" aria-label="可操作的六弦吉他，拖动按压点改变有效振动长度，拖动琴弦后松开可拨弦">
+          <defs>
+            <linearGradient id="bodyWood" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#f4d6a1"/><stop offset=".45" stop-color="#dca66b"/><stop offset="1" stop-color="#c38248"/></linearGradient>
+            <linearGradient id="neckWood" x2="0" y2="1"><stop stop-color="#75513c"/><stop offset=".45" stop-color="#4e372c"/><stop offset="1" stop-color="#63432e"/></linearGradient>
+            <linearGradient id="headWood" x2="1" y2="1"><stop stop-color="#c88e57"/><stop offset="1" stop-color="#966035"/></linearGradient>
+            <radialGradient id="soundHole"><stop stop-color="#342a24"/><stop offset="1" stop-color="#4b3325"/></radialGradient>
+            <filter id="softShadow" x="-20%" y="-20%" width="150%" height="160%"><feDropShadow dx="0" dy="9" stdDeviation="9" flood-color="#6f4b26" flood-opacity=".13"/></filter>
+            <marker id="blueArrow" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 1L7 4L0 7" fill="none" stroke="#176ac6" stroke-width="1.4"/></marker>
+          </defs>
+          <ellipse cx="671" cy="370" rx="283" ry="22" fill="#d8c4a0" opacity=".14"/>
+          <g filter="url(#softShadow)"><path d="M644 92C687 65 706 104 746 84C827 41 967 90 967 221C971 352 826 403 747 363C706 342 683 379 638 351C589 321 574 274 615 234C640 207 591 186 602 139C607 116 622 102 644 92Z" fill="url(#bodyWood)" stroke="#9d6637" stroke-width="5"/><path d="M648 100C690 76 711 113 750 94C825 53 955 98 956 221C960 345 829 390 752 354C707 332 688 365 645 343C603 318 588 277 625 238C654 205 603 182 612 142C618 121 629 109 648 100Z" fill="none" stroke="#f9e5c0" stroke-width="3"/>
+          <path d="M658 117C737 137 811 109 894 131M648 133C740 154 834 126 910 150M647 324C747 293 833 335 910 300M659 341C749 319 816 353 884 324" stroke="#c9975e" stroke-width="1.2" opacity=".35" fill="none"/>
+          <circle cx="745" cy="235" r="62" fill="none" stroke="#a67849" stroke-width="8"/><circle cx="745" cy="235" r="55" fill="url(#soundHole)" stroke="#f4d7a8" stroke-width="4"/><circle cx="745" cy="235" r="67" fill="none" stroke="#765236" stroke-width="1.4"/>
+          <path d="M797 290Q786 318 830 329L863 269Q828 280 797 290" fill="#6a3e2b" opacity=".76"/>
+          <rect x="142" y="161" width="496" height="143" rx="4" fill="url(#neckWood)" stroke="#37291f" stroke-width="3"/>
+          <path d="M42 145Q83 128 139 159L146 304Q96 329 44 308L24 285V165Z" fill="url(#headWood)" stroke="#95633a" stroke-width="3"/>
+          <g fill="#c6d0d6" stroke="#83909b" stroke-width="2"><rect x="46" y="129" width="23" height="22" rx="6"/><rect x="82" y="135" width="23" height="20" rx="6"/><rect x="116" y="145" width="22" height="20" rx="6"/><rect x="46" y="304" width="23" height="22" rx="6"/><rect x="82" y="302" width="23" height="20" rx="6"/><rect x="116" y="295" width="22" height="20" rx="6"/></g>
+          <rect x="137" y="159" width="9" height="147" rx="2" fill="#f5ebd8"/><rect x="850" y="164" width="31" height="147" rx="8" fill="#684531"/><rect x="854" y="180" width="6" height="113" rx="2" fill="#f1dfb7"/>
+          </g>
+          <g id="frets"></g><g id="guitarStrings"></g>
+          <g id="tuner" class="svg-touch" data-drag="tension" role="slider" tabindex="0" aria-label="琴弦松紧旋钮，上下拖动或用方向键调节" aria-valuemin="50" aria-valuemax="150" aria-valuenow="100"><circle cx="75" cy="67" r="27" fill="#f1f4f6" stroke="#bdcbd5" stroke-width="2"/><circle cx="75" cy="67" r="19" fill="#e0e7ec" stroke="#9bafbf"/><path id="tunerTick" d="M75 67L75 48" stroke="#176ac6" stroke-width="4" stroke-linecap="round"/><path d="M43 66A32 32 0 0 1 98 45" fill="none" stroke="#9bb5cc" stroke-width="2" stroke-dasharray="3 5"/><text x="118" y="66" class="svg-hint">转动旋钮</text><text id="tuneTag" x="118" y="91" class="svg-small">松紧 1.00×</text></g>
+          <g id="guitarModel">
+            <path id="vibrationBounds" d="" fill="#2c7ec8" fill-opacity=".07" stroke="#77a9d8" stroke-width="1.3" stroke-dasharray="5 5"/>
+            <path id="deadString" fill="none" stroke="#afbac4" stroke-width="3" stroke-dasharray="5 5"/>
+            <path id="liveString" fill="none" stroke="#176ac6" stroke-width="4" stroke-linecap="round"/>
+            <circle id="stringTracer" r="6" fill="#fff" stroke="#176ac6" stroke-width="3"/>
+            <path id="lengthMeasure" stroke="#176ac6" stroke-width="2" marker-start="url(#blueArrow)" marker-end="url(#blueArrow)" fill="none"/>
+            <text id="lengthLabel" text-anchor="middle" class="svg-measure" y="365"></text>
+            <path id="refLengthMeasure" stroke="#bd7135" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+            <text id="refLengthLabel" y="411" text-anchor="middle" class="svg-small" style="fill:#ad713f"></text>
+          </g>
+          <g id="pressHandle" data-drag="length" class="svg-touch drag-point" role="slider" tabindex="0" aria-label="琴弦按压点，左右拖动改变有效振动长度" aria-valuemin="32.5" aria-valuemax="65" aria-valuenow="65"><path id="pressStem" stroke="#176ac6" stroke-width="2" stroke-dasharray="4 4"/><rect id="pressBox" x="112" y="110" width="64" height="36" rx="10" fill="#e8f2fd" stroke="#b7d3ee"/><text id="pressText" x="144" y="135" text-anchor="middle" class="svg-small" style="fill:#176ac6;font-weight:700">按压点</text><circle id="pressCircle" cx="144" cy="227" r="15" fill="#176ac6" stroke="#fff" stroke-width="4"/><path id="pressArrows" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <g id="pluckHint"><path d="M699 124q-10 13 0 25m0-25l-7 3m7-3l3 7" stroke="#5d87ae" stroke-width="2" fill="none"/><text x="715" y="141" class="svg-hint">拖弦 → 松手</text></g>
+          <g id="guitarHits"></g>
+        </svg>
+        <svg id="pipeSvg" viewBox="0 0 1000 430" hidden role="group" aria-label="八根排箫管，点选管口可吹奏，右侧显示空气柱纵向往复的透视模型，管底可拖动">
+          <defs><linearGradient id="bamboo" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#b88045"/><stop offset=".25" stop-color="#e7bf79"/><stop offset=".48" stop-color="#f0d399"/><stop offset=".8" stop-color="#d6a967"/><stop offset="1" stop-color="#b77b3e"/></linearGradient><linearGradient id="selectedBamboo" x2="1" y2="0"><stop stop-color="#ca9151"/><stop offset=".35" stop-color="#f5d697"/><stop offset="1" stop-color="#cf944c"/></linearGradient><marker id="airArrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L7 4L1 7" fill="none" stroke="#659dcc" stroke-width="1.5"/></marker><clipPath id="columnClip"><rect id="columnClipRect" x="774" y="91" width="92" height="250"/></clipPath></defs>
+          <ellipse cx="350" cy="392" rx="280" ry="16" fill="#cbb79c" opacity=".12"/>
+          <g id="pipes"></g>
+          <path d="M104 148Q336 166 604 148L604 166Q336 186 104 166Z" fill="#9c6441" opacity=".85" pointer-events="none"/><path d="M105 154Q339 172 604 154" fill="none" stroke="#e3bf87" stroke-width="3" pointer-events="none"/>
+          
+          <g id="pipeInspector">
+            <text x="818" y="32" text-anchor="middle" class="svg-label" font-weight="700">空气柱透视</text>
+            <path d="M709 67Q772 58 860 66" fill="none" stroke="#82afd4" stroke-width="3" marker-end="url(#airArrow)"/><text x="695" y="48" class="svg-small">从管口上方吹过</text>
+            <rect id="columnBack" x="772" y="90" width="96" height="250" fill="#eff7fe"/>
+            <g id="airParticles" clip-path="url(#columnClip)"></g>
+            <g id="airReference" opacity=".35" stroke="#9cbbd8" stroke-width="1.1" stroke-dasharray="4 4"></g>
+            <path id="columnWalls" d="" fill="none" stroke="#8ba8bf" stroke-width="5"/>
+            <path id="airGauge" d="" fill="none" stroke="#176ac6" stroke-width="2"/>
+            <text id="airGaugeLabel" x="729" y="225" text-anchor="end" class="svg-measure"></text>
+            <text id="airTopLabel" x="884" y="102" class="svg-small">开口</text>
+            <text id="airBottomLabel" x="884" y="337" class="svg-small">封闭</text>
+            <path id="pipeRefOutline" d="" fill="none" stroke="#bd7135" stroke-width="2" stroke-dasharray="6 5"/>
+            <g id="pipeLengthHandle" data-drag="pipe-length" class="svg-touch air-drag" role="slider" tabindex="0" aria-label="管底，向上或向下拖动改变空气柱长度" aria-valuemin="12" aria-valuemax="40" aria-valuenow="32.8"><rect id="pipeHandleRect" x="792" y="330" width="56" height="35" rx="10" fill="#176ac6" stroke="#fff" stroke-width="3"/><path id="pipeHandleArrow" d="" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+            <text x="818" y="411" text-anchor="middle" class="svg-small">拖动管底 · 改变长度</text>
+          </g>
+          <g id="pipeOpaque" hidden><rect x="713" y="96" width="214" height="264" rx="18" fill="#f8f5ec" stroke="#e7dac8"/><text x="820" y="200" text-anchor="middle" class="svg-label">空气藏在管里</text><text x="820" y="233" text-anchor="middle" class="svg-hint">打开「慢放透视」</text><text x="820" y="260" text-anchor="middle" class="svg-hint">看看它怎样振动</text></g>
+        </svg>
+      </div>
+      <div class="scene-caption"><strong id="motionLabel">周期慢放 1/120 · 位移已放大</strong><span id="modelShort">同材质琴弦模型 · 非真实吉他定弦</span></div>
+      <div class="evidence" id="evidence"><div class="evidence-head"><strong>振动留下的轨迹 <span>（模型）</span></strong><span>同样的时间、同样的振幅刻度</span></div><svg id="traceSvg" viewBox="0 0 900 126" role="img" aria-label="当前与保留条件的模型振动轨迹，横轴时间为0至10毫秒，纵轴为相对位移，同刻度比较"><g id="traceGrid" stroke="#dae3eb" stroke-width="1"><path d="M139 7V107M279 7V107M419 7V107M559 7V107M699 7V107M839 7V107" stroke-dasharray="3 5"/><path d="M139 33H839M139 82H839"/></g><text x="4" y="26" font-size="17" fill="#176ac6" font-weight="700" id="nowTraceTitle">当前</text><text x="4" y="47" font-size="14" fill="#687e95" id="nowTraceHz">— Hz</text><text x="4" y="77" font-size="17" fill="#bd7135" font-weight="700" id="refTraceTitle">对照 A</text><text x="4" y="98" font-size="14" fill="#917c68" id="refTraceHz">尚未保留</text><path id="nowTrace" d="" fill="none" stroke="#176ac6" stroke-width="2.5"/><path id="refTrace" d="" fill="none" stroke="#bd7135" stroke-width="2.5"/><text id="tracePlaceholder" x="489" y="87" text-anchor="middle" font-size="14" fill="#9aa9b8">保留当前条件，再改变一个量</text><g font-size="12" fill="#7a8c9f"><text x="139" y="123" text-anchor="middle">0</text><text x="279" y="123" text-anchor="middle">2</text><text x="419" y="123" text-anchor="middle">4</text><text x="559" y="123" text-anchor="middle">6</text><text x="699" y="123" text-anchor="middle">8</text><text x="839" y="123" text-anchor="middle">10 毫秒</text></g></svg></div>
+    </section>
+    <aside class="controls" aria-label="变量控制和比较">
+      <div class="control-heading"><span id="controlKicker">GUITAR / 弦</span><strong id="controlTitle">一次只改变一个量</strong></div>
+      <div class="control-set" id="guitarControls">
+        <div class="control-row"><label for="stringSelect">琴弦粗细 <output id="stringValue">3号弦</output></label><input id="stringSelect" type="range" min="0" max="5" step="1" value="2" aria-label="选择琴弦粗细"><div class="range-ends"><span>1号 · 细</span><span>6号 · 粗</span></div></div>
+        <div class="control-row"><label for="stringLength">有效振动长度 <output id="lengthValue">65<small>cm</small></output></label><input id="stringLength" type="range" min="32.5" max="65" step="0.5" value="65" aria-label="琴弦有效振动长度，厘米"><div class="range-ends"><span>短</span><span>长</span></div></div>
+        <div class="control-row"><label for="stringTension">琴弦松紧 <output id="tensionValue">1.00<small>×</small></output></label><input id="stringTension" type="range" min="50" max="150" step="1" value="100" aria-label="琴弦相对张力，百分比"><div class="range-ends"><span>较松</span><span>较紧</span></div></div>
+        <div class="control-row"><label for="stringPower">拨动幅度 <output id="powerValue">55<small>%</small></output></label><input id="stringPower" type="range" min="20" max="100" step="1" value="55" aria-label="琴弦拨动幅度"><div class="range-ends"><span>小</span><span>大</span></div></div>
+      </div>
+      <div class="control-set" id="pipeControls" hidden>
+        <div class="control-row"><label for="pipeLength">空气柱长度 <output id="pipeLengthValue">32.8<small>cm</small></output></label><input id="pipeLength" type="range" min="12" max="40" step="0.1" value="32.8" aria-label="空气柱长度，厘米"><div class="range-ends"><span>短</span><span>长</span></div></div>
+        <div class="control-row"><label for="pipePower">吹奏气息 <output id="pipePowerValue">55<small>%</small></output></label><input id="pipePower" type="range" min="20" max="100" step="1" value="55" aria-label="吹奏气息强弱"><div class="range-ends"><span>较弱</span><span>较强</span></div></div>
+      </div>
+      <div class="pipe-tip" id="pipeTip" hidden><div class="mini-bar"></div><strong>管里的什么在振动？</strong><br>跟着透视图里的亮点观察。<br>再保留一根管，换一根听听。</div>
+      <div class="play-area"><button class="play-button" id="play"><svg viewBox="0 0 24 24"><path d="M8 5l12 7-12 7z"/></svg><span id="playText">拨弦试听</span></button><p class="sound-note" id="soundNote" role="status">合成示意音色 · 请使用适中音量</p></div>
+      <div class="compare-box"><button class="save-button" id="saveReference">＋ 保留当前，做一次对照</button><div class="comparison" id="comparison" hidden><div class="comparison-header"><span>已保留条件 A</span><button id="clearReference">清除</button></div><p id="referenceMeta" style="font-size:12px;line-height:1.4;color:#947759;margin:2px 0 5px"></p><div class="compare-values"><div><span>A</span> <strong class="ref-color" id="referenceFrequency">—</strong> <span>Hz</span></div><span>→</span><div><span>B</span> <strong class="now-color" id="currentFrequency">—</strong> <span>Hz</span></div></div><p class="diff" id="differenceText">改变一个量，比较声音与轨迹。</p><div class="compare-actions"><button class="compare-play" id="compareSounds">A → B 试听</button><button id="exportComparison">保存对照图</button></div><button class="secondary-save" id="replaceReference">用当前条件更新 A</button></div></div>
+    </aside>
+  </main>
+  <footer class="footer"><span>模型帮助解释，真实乐器用来探究。</span><span><button id="modelInfo">模型说明与来源</button><span>T1 · 离线可用</span></span><span class="stamp" aria-hidden="true">mutiw</span></footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div class="modal-backdrop" id="infoModal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="modal-head"><h2 id="infoTitle">这是怎样的模型？</h2><button class="modal-close" id="closeInfo" aria-label="关闭说明">×</button></div><p>本页辅助观察真实实验中难以看清的振动；轨迹、频率和长度都是<strong>模型计算</strong>，不是麦克风测量，也不能用来独立验证模型预设的规律。</p><h3>吉他：控制变量的六弦模型</h3><p>六根弦采用相同材质，基准张力相同；仅改变粗细时，长度、张力和拨动幅度保持不变。它不复制真实吉他的材料组合与标准定弦。按压点到琴桥是本模型的有效振动段。</p><p>弦基频 f = (1/2L)√(T/μ)。模型密度为1150 kg/m³，基准张力为45 N，直径依次为0.50、0.60、0.72、0.86、1.03、1.24 mm。拨动幅度不改变基频，是小振幅条件下的简化。</p><h3>排箫：一端开口、一端封闭</h3><p>声音来自空气柱的振动。空气质点在原位置附近沿管轴往复，管口的位移较大、封闭管底的位移为零；吹气喷流仅在管口附近示意，不贯穿封底的管子。</p><p>基频 f = 343/(4L)，L以米计；忽略端部修正，不作为制作乐器的精确下料尺寸。同一基音状态下，气息只改变振幅；真实吹奏过强可能改变音高或激发更高的共振。</p><h3>声音、慢放与对照</h3><p>声音为合成示意音色，保持模型音高；画面统一按1/120速度循环慢放，并放大位移，不演示振幅衰减。轨迹只画基频分量，横轴均为10毫秒，纵向刻度一致。不同乐器的示意振幅不能直接当作同样的响度。</p><p>暂停只暂停慢放并停止声音；复位恢复当前乐器参数并清除本页对照。页面不请求麦克风、不上传数据。声音需浏览器支持Web Audio，首次点击后启用；静音状态仍可观察模型。</p><h3>依据</h3><p>本项目所附教科版四上教材第67—69页、《教师用书》本课，以及 <a href="https://www.phys.unsw.edu.au/jw/strings.html" target="_blank" rel="noopener">UNSW弦振动资料</a>、<a href="https://www.phys.unsw.edu.au/jw/flutes.v.clarinets.html" target="_blank" rel="noopener">UNSW开闭管资料</a>、<a href="https://www.phys.unsw.edu.au/music/people/publications/Fletcher2005.pdf" target="_blank" rel="noopener">Fletcher（2005）排箫声学研究</a>。来源链接需要联网，课件本身可离线运行。</p></section></div>
+<div class="modal-backdrop" id="exportModal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="exportTitle" style="max-width:1000px"><div class="modal-head"><h2 id="exportTitle">本次模型对照</h2><button class="modal-close" id="closeExport" aria-label="关闭对照图">×</button></div><img id="exportPreview" alt="当前两组条件与同刻度振动轨迹的模型对照图" style="width:100%;display:block;border:1px solid #dbe1e5;margin:15px 0;border-radius:8px"><a id="exportDownload" class="play-button" style="text-decoration:none;max-width:290px;margin:12px auto" href="#" download>下载 SVG 对照图</a><p style="text-align:center">对照图可在浏览器中打开、缩放或打印。</p></section></div>
+<script>
+/*
+ * LessonAudio — self-contained, illustrative instrument synthesis (not recordings).
+ * ES5 syntax; no network, microphone or sample assets.
+ * play() returns true when accepted, not a guarantee that the device is audible.
+ * getStatus() returns {code, message, supported, muted, contextState, activeVoices}.
+ * Call play() from a click/touch/key action. Unmuting never starts sound by itself.
+ */
+(function (window, document) {
+  'use strict';
+
+  var AudioConstructor = window.AudioContext || window.webkitAudioContext;
+  var supported = !!AudioConstructor;
+  var context = null;
+  var master = null;
+  var waves = {};
+  var voices = [];
+  var muted = false;
+  var gestureSeen = false;
+  var wasRunning = false;
+  var MAX_VOICES = 12;
+  var MASTER_GAIN = 0.30;
+  var status = {
+    code: supported ? 'idle' : 'unsupported',
+    message: supported ? '点击乐器或播放按钮听声音' : '此浏览器不支持合成声音，仍可观察模型'
+  };
+
+  function setStatus(code, message) {
+    status.code = code;
+    status.message = message;
+  }
+
+  function finiteNumber(value, fallback) {
+    value = Number(value);
+    return isFinite(value) ? value : fallback;
+  }
+
+  function clamp(value, minimum, maximum) {
+    return Math.max(minimum, Math.min(maximum, value));
+  }
+
+  function hidden() {
+    return document.hidden === true || document.visibilityState === 'hidden';
+  }
+
+  function rememberGesture(event) {
+    if (!event || event.isTrusted !== false) gestureSeen = true;
+  }
+
+  if (document.addEventListener) {
+    ['pointerdown', 'touchstart', 'mousedown', 'keydown', 'click'].forEach(function (type) {
+      document.addEventListener(type, rememberGesture, true);
+    });
+  }
+
+  function hasGesture() {
+    return gestureSeen || !!(window.navigator && window.navigator.userActivation && window.navigator.userActivation.isActive);
+  }
+
+  function disconnect(node) {
+    try { if (node) node.disconnect(); } catch (ignore) {}
+  }
+
+  function cleanup(voice) {
+    var index;
+    if (!voice || voice.cleaned) return;
+    voice.cleaned = true;
+    if (voice.timer) window.clearTimeout(voice.timer);
+    disconnect(voice.source);
+    disconnect(voice.filter);
+    disconnect(voice.gain);
+    index = voices.indexOf(voice);
+    if (index !== -1) voices.splice(index, 1);
+    if (!voices.length && (status.code === 'playing' || status.code === 'starting')) {
+      setStatus('ready', '声音已结束，可再次播放');
+    }
+  }
+
+  function envelopeValue(voice, time) {
+    var points = voice.points;
+    var previous = points[0];
+    var next;
+    var ratio;
+    var i;
+    if (time < previous.time) return 0;
+    for (i = 1; i < points.length; i += 1) {
+      next = points[i];
+      if (time < next.time) {
+        ratio = (time - previous.time) / Math.max(0.000001, next.time - previous.time);
+        if (next.type === 'exponential' && previous.value > 0 && next.value > 0) {
+          return previous.value * Math.pow(next.value / previous.value, ratio);
+        }
+        return previous.value + (next.value - previous.value) * ratio;
+      }
+      previous = next;
+    }
+    return previous.value;
+  }
+
+  function stopVoice(voice, time) {
+    var value;
+    var fade;
+    if (!voice || voice.cleaned || voice.stopping) return;
+    voice.stopping = true;
+    try {
+      value = envelopeValue(voice, time);
+      fade = time < voice.start || time >= voice.end ? 0 : 0.025;
+      voice.gain.gain.cancelScheduledValues(time);
+      voice.gain.gain.setValueAtTime(value, time);
+      voice.gain.gain.linearRampToValueAtTime(0, time + fade);
+      voice.source.stop(time + fade + 0.001);
+    } catch (ignore) {}
+    /* Also releases nodes if a browser does not fire onended while suspended. */
+    if (voice.timer) window.clearTimeout(voice.timer);
+    voice.timer = window.setTimeout(function () { cleanup(voice); }, 70);
+  }
+
+  function stopAll(code, message) {
+    var time = context ? context.currentTime : 0;
+    voices.slice().forEach(function (voice) { stopVoice(voice, time); });
+    setStatus(code || (muted ? 'muted' : 'ready'), message || (muted ? '声音已关闭' : '声音已停止'));
+  }
+
+  function requestResume() {
+    var result;
+    if (!context || !context.resume || context.state === 'running') return true;
+    try {
+      result = context.resume();
+      if (result && typeof result.then === 'function') {
+        result.then(function () {
+          if (!context || hidden()) return;
+          if (context.state === 'running') {
+            wasRunning = true;
+            if (!muted && voices.length) setStatus('playing', '正在播放合成声音');
+          } else {
+            stopAll('suspended', '浏览器暂停了声音，请再次点击播放');
+          }
+        }, function () {
+          stopAll('suspended', '声音未能启动，请再次点击播放');
+        });
+      }
+    } catch (ignore) {
+      stopAll('suspended', '声音未能启动，请再次点击播放');
+      return false;
+    }
+    return true;
+  }
+
+  function ensureContext() {
+    if (!supported) {
+      setStatus('unsupported', '此浏览器不支持合成声音，仍可观察模型');
+      return false;
+    }
+    if (!context) {
+      if (!hasGesture()) {
+        setStatus('gesture', '请先点击乐器或播放按钮开启声音');
+        return false;
+      }
+      try {
+        context = new AudioConstructor();
+        master = context.createGain();
+        master.gain.value = muted ? 0 : MASTER_GAIN;
+        master.connect(context.destination);
+        wasRunning = context.state === 'running';
+        context.onstatechange = function () {
+          if (!context) return;
+          if (context.state === 'running') {
+            wasRunning = true;
+          } else if (wasRunning && (context.state === 'suspended' || context.state === 'interrupted')) {
+            wasRunning = false;
+            if (voices.length) stopAll(hidden() ? 'hidden' : 'suspended', hidden() ? '页面在后台，声音已停止' : '浏览器暂停了声音，请再次点击播放');
+          }
+        };
+      } catch (ignore) {
+        try { if (context && context.close) context.close(); } catch (ignoredClose) {}
+        context = null;
+        master = null;
+        setStatus('error', '声音暂时不可用，仍可观察模型；可再次点击重试');
+        return false;
+      }
+    }
+    if (context.state === 'closed') {
+      context = null;
+      master = null;
+      waves = {};
+      return ensureContext();
+    }
+    return requestResume();
+  }
+
+  function getWave(kind) {
+    var harmonics;
+    var real;
+    var imaginary;
+    if (waves[kind]) return waves[kind];
+    if (!context.createPeriodicWave) return null;
+    /* These are deliberately simple timbres, not claims about a real spectrum. */
+    harmonics = kind === 'pipe' ? [0, 1, 0.025, 0.12, 0.01, 0.035, 0, 0.01] : [0, 1, 0.28, 0.13, 0.065, 0.035, 0.018];
+    real = new Float32Array(harmonics.length);
+    imaginary = new Float32Array(harmonics);
+    waves[kind] = context.createPeriodicWave(real, imaginary);
+    return waves[kind];
+  }
+
+  function play(options) {
+    var frequency;
+    var amplitude;
+    var duration;
+    var delay;
+    var kind;
+    var time;
+    var start;
+    var end;
+    var peak;
+    var attack;
+    var release;
+    var source;
+    var gain;
+    var filter;
+    var wave;
+    var voice;
+    var points;
+    options = options || {};
+    if (muted) {
+      setStatus('muted', '声音已关闭');
+      return false;
+    }
+    if (hidden()) {
+      setStatus('hidden', '页面在后台，声音已停止');
+      return false;
+    }
+    frequency = finiteNumber(options.frequency, 220);
+    /* Reject impossible inputs instead of silently changing a model's frequency. */
+    if (frequency < 40 || frequency > 4000) {
+      setStatus('range', '此音高超出合成演示范围');
+      return false;
+    }
+    amplitude = clamp(finiteNumber(options.amplitude, 0.65), 0, 1);
+    kind = options.kind === 'pipe' ? 'pipe' : 'string';
+    duration = clamp(finiteNumber(options.duration, kind === 'pipe' ? 1.1 : 1.6), 0.12, 6);
+    delay = clamp(finiteNumber(options.delay, 0), 0, 10);
+    if (!ensureContext()) return false;
+    if (!amplitude) {
+      setStatus('silent', '振幅为零，不发声');
+      return true;
+    }
+    time = context.currentTime;
+    voices.slice().forEach(function (item) { if (time >= item.end + 0.1) cleanup(item); });
+    if (voices.length >= MAX_VOICES) {
+      setStatus('busy', '同时播放的声音较多，请稍等再试');
+      return false;
+    }
+    try {
+      start = time + delay + 0.02;
+      end = start + duration;
+      peak = 0.25 * amplitude;
+      attack = Math.min(kind === 'pipe' ? 0.045 : 0.009, duration * 0.15);
+      release = Math.min(kind === 'pipe' ? 0.09 : 0.04, duration * 0.2);
+      source = context.createOscillator();
+      gain = context.createGain();
+      filter = context.createBiquadFilter();
+      wave = getWave(kind);
+      if (wave && source.setPeriodicWave) source.setPeriodicWave(wave);
+      else source.type = kind === 'pipe' ? 'sine' : 'triangle';
+      source.frequency.setValueAtTime(frequency, start);
+      filter.type = 'lowpass';
+      filter.Q.setValueAtTime(0.5, start);
+      filter.frequency.setValueAtTime(Math.min(context.sampleRate * 0.42, frequency * (kind === 'pipe' ? 6 : 8)), start);
+      if (kind === 'string') {
+        filter.frequency.exponentialRampToValueAtTime(Math.min(context.sampleRate * 0.42, frequency * 2.4), end);
+      }
+      source.connect(filter);
+      filter.connect(gain);
+      gain.connect(master);
+      gain.gain.setValueAtTime(0, time);
+      points = [{time: start, value: 0, type: 'set'}, {time: start + attack, value: peak, type: 'linear'}];
+      if (kind === 'string') {
+        points.push({time: start + duration * 0.38, value: peak * 0.24, type: 'exponential'});
+        points.push({time: end - release, value: peak * 0.009, type: 'exponential'});
+      } else {
+        points.push({time: end - release, value: peak * 0.93, type: 'linear'});
+      }
+      points.push({time: end, value: 0, type: 'linear'});
+      points.forEach(function (point) {
+        if (point.type === 'exponential') gain.gain.exponentialRampToValueAtTime(point.value, point.time);
+        else if (point.type === 'linear') gain.gain.linearRampToValueAtTime(point.value, point.time);
+        else gain.gain.setValueAtTime(point.value, point.time);
+      });
+      voice = {source: source, gain: gain, filter: filter, points: points, start: start, end: end, cleaned: false, stopping: false, timer: null};
+      voices.push(voice);
+      source.onended = function () { cleanup(voice); };
+      source.start(start);
+      source.stop(end + 0.012);
+      setStatus(context.state && context.state !== 'running' ? 'starting' : 'playing', context.state && context.state !== 'running' ? '正在开启声音' : '正在播放合成声音');
+      /* Wall-clock watchdog prevents a suspended browser from keeping stale notes. */
+      voice.timer = window.setTimeout(function () {
+        if (!voice.cleaned) {
+          try { voice.source.stop(); } catch (ignoreStop) {}
+          cleanup(voice);
+        }
+      }, (delay + duration + 1) * 1000);
+      return true;
+    } catch (ignore) {
+      if (voice) cleanup(voice);
+      disconnect(source);
+      disconnect(filter);
+      disconnect(gain);
+      setStatus('error', '声音暂时不可用，仍可观察模型；可再次点击重试');
+      return false;
+    }
+  }
+
+  function setMuted(value) {
+    muted = !!value;
+    if (muted) stopAll('muted', '声音已关闭');
+    else setStatus('ready', '声音已开启，点击乐器或播放按钮试听');
+    if (master && context) {
+      try {
+        master.gain.cancelScheduledValues(context.currentTime);
+        master.gain.setValueAtTime(master.gain.value, context.currentTime);
+        master.gain.linearRampToValueAtTime(muted ? 0 : MASTER_GAIN, context.currentTime + 0.03);
+      } catch (ignore) { master.gain.value = muted ? 0 : MASTER_GAIN; }
+    }
+    return muted;
+  }
+
+  function backgroundStop() {
+    var result;
+    stopAll('hidden', '页面在后台，声音已停止');
+    if (context && context.suspend && context.state === 'running') {
+      try {
+        result = context.suspend();
+        if (result && result.then) result.then(function () {}, function () {});
+      } catch (ignore) {}
+    }
+  }
+
+  if (document.addEventListener) {
+    document.addEventListener('visibilitychange', function () { if (hidden()) backgroundStop(); }, false);
+  }
+  if (window.addEventListener) window.addEventListener('pagehide', backgroundStop, false);
+
+  window.LessonAudio = {
+    play: play,
+    stop: function () { stopAll(); },
+    setMuted: setMuted,
+    isMuted: function () { return muted; },
+    isSupported: function () { return supported; },
+    getStatus: function () {
+      return {
+        code: status.code,
+        message: status.message,
+        supported: supported,
+        muted: muted,
+        contextState: context ? (context.state || 'running') : 'not-created',
+        activeVoices: voices.length
+      };
+    }
+  };
+}(window, document));
+
+</script>
+<script>
+(function(){
+  'use strict';
+  /* Asset replacement entry: instrument SVGs above. Scientific parameters and
+     model functions below are independent of drawing and audio synthesis. */
+  var MODEL={density:1150,tension:45,diameters:[0.50,0.60,0.72,0.86,1.03,1.24],stringFull:65,nutX:144,bridgeX:858,slowFactor:120,soundSpeed:343,pipeScale:7.2,pipeTop:91,pipeLengths:[32.8,29.2,26.0,24.6,21.9,19.5,17.4,16.4]};
+  var SVG_NS='http://www.w3.org/2000/svg';
+  function $(id){return document.getElementById(id);}
+  function attr(el,name,val){el.setAttribute(name,String(val));}
+  function text(id,value){$(id).textContent=value;}
+  function setHidden(id,value){if(value){$(id).setAttribute('hidden','');}else{$(id).removeAttribute('hidden');}}
+  function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
+  function round(x,step){return Math.round(x/step)*step;}
+  function number(x){return Math.abs(x-Math.round(x))<.01?String(Math.round(x)):x.toFixed(1);}
+  function createSVG(tag,attrs,parent){var e=document.createElementNS(SVG_NS,tag),k;for(k in attrs){if(attrs.hasOwnProperty(k)){attr(e,k,attrs[k]);}}if(parent){parent.appendChild(e);}return e;}
+  function initialGuitar(){return {string:2,length:65,tension:100,power:55};}
+  function initialPipe(){return {selected:0,lengths:MODEL.pipeLengths.slice(),power:55};}
+  var state={page:'guitar',guitar:initialGuitar(),pipe:initialPipe(),reference:{guitar:null,pipe:null},model:true,paused:false,motion:false,phase:0,previousTime:0,drag:null,compareTimers:[],toastTimer:null,flashTimer:null,comparing:false};
+  function snapshot(){if(state.page==='guitar'){return {type:'guitar',string:state.guitar.string,length:state.guitar.length,tension:state.guitar.tension,power:state.guitar.power};}return {type:'pipe',selected:state.pipe.selected,length:state.pipe.lengths[state.pipe.selected],power:state.pipe.power};}
+  function frequency(s){if(s.type==='pipe'){return MODEL.soundSpeed/(4*s.length/100);}var d=MODEL.diameters[s.string]/1000;var mu=MODEL.density*Math.PI*d*d/4;return 1/(2*s.length/100)*Math.sqrt(MODEL.tension*s.tension/100/mu);}
+  function getReference(){return state.reference[state.page];}
+  function labelValue(id,value,unit){$(id).textContent=number(value);if(unit){var sm=document.createElement('small');sm.textContent=unit;$(id).appendChild(sm);}}
+  function toast(message){text('toast',message);$('toast').hidden=false;clearTimeout(state.toastTimer);state.toastTimer=setTimeout(function(){$('toast').hidden=true;},2900);}
+  function cancelComparison(){if(state.comparing){state.paused=!!state.compareRestorePaused;updatePause();}attr($('nowTrace'),'opacity',1);attr($('refTrace'),'opacity',1);var i;for(i=0;i<state.compareTimers.length;i++){clearTimeout(state.compareTimers[i]);}state.compareTimers=[];state.comparing=false;text('compareSounds','A → B 试听');if(window.LessonAudio){window.LessonAudio.stop();}}
+  function soundStatus(){var a=window.LessonAudio;if(!a||!a.isSupported()){text('soundNote','此浏览器不支持音频；模型仍可操作');return;}if(a.isMuted()){text('soundNote','当前静音 · 仍可观察模型变化');return;}var status=a.getStatus();if(status&&(status.code==='error'||status.code==='suspended'||status.code==='gesture')){text('soundNote','声音未能启用，请再点击试听');}else{text('soundNote','合成示意音色 · 请使用适中音量');}}
+  function playSnapshot(s,delay,duration){if(!window.LessonAudio){soundStatus();return false;}var ok=window.LessonAudio.play({frequency:frequency(s),amplitude:s.power/100,kind:s.type==='guitar'?'string':'pipe',duration:duration||1.3,delay:delay||0});soundStatus();return ok;}
+  function flashInstrument(){clearTimeout(state.flashTimer);var el=$(state.page==='guitar'?'guitarSvg':'pipeSvg');el.classList.add('flash');state.flashTimer=setTimeout(function(){el.classList.remove('flash');},220);}
+  function startMotion(){state.motion=true;state.paused=false;updatePause();}
+  function playCurrent(){cancelComparison();startMotion();state.phase=0;playSnapshot(snapshot(),0,state.page==='guitar'?1.8:1.15);flashInstrument();}
+  function updatePause(){attr($('pause'),'aria-pressed',state.paused?'true':'false');text('pause',state.paused?'继续慢放':'暂停慢放');text('motionLabel',!state.model?'已隐藏振动透视':state.paused?'慢放已暂停 · 可改变条件':'周期慢放 1/120 · 位移已放大');}
+  function effectiveX(s){return MODEL.bridgeX-(MODEL.bridgeX-MODEL.nutX)*s.length/MODEL.stringFull;}
+  function stringY(i){return 186+i*19;}
+  var stringPaths=[],stringHits=[],airNodes=[],pipeParts=[];
+  function buildGuitar(){var i,x,fret,dot;for(i=1;i<=12;i++){x=MODEL.nutX+(MODEL.bridgeX-MODEL.nutX)*(1-Math.pow(2,-i/12));createSVG('path',{d:'M'+x+' 163V302',stroke:'#a4a29a','stroke-width':2},$('frets'));if(i===3||i===5||i===7||i===9){createSVG('circle',{cx:x-12,cy:233,r:4,fill:'#c2b2a1'},$('frets'));}if(i===12){createSVG('circle',{cx:x-12,cy:211,r:4,fill:'#c2b2a1'},$('frets'));createSVG('circle',{cx:x-12,cy:254,r:4,fill:'#c2b2a1'},$('frets'));}}
+    for(i=0;i<6;i++){var y=stringY(i);createSVG('path',{d:'M77 '+(170+i*24)+'L144 '+y,stroke:'#d4d1c4','stroke-width':1.4},$('guitarStrings'));createSVG('circle',{cx:77,cy:170+i*24,r:4.5,fill:'#a9b8c2',stroke:'#6f8290','stroke-width':1},$('guitarStrings'));stringPaths.push(createSVG('path',{d:'M144 '+y+'H858',stroke:'#e2ded1','stroke-width':1.4+MODEL.diameters[i]*1.8,fill:'none'},$('guitarStrings')));var hit=createSVG('path',{d:'M169 '+y+'H842',stroke:'transparent','stroke-width':18,fill:'none','data-string':i,tabindex:0,role:'button','aria-label':(i+1)+'号琴弦，点击选择并拨弦',class:'svg-touch'},$('guitarHits'));stringHits.push(hit);var tx=createSVG('text',{x:902,y:y+6,'font-size':15,fill:'#997649','data-string':i,class:'svg-touch'},$('guitarHits'));tx.textContent=String(i+1);}
+    /* Keep the press handle above plucking hit targets. */
+    $('guitarSvg').appendChild($('pressHandle'));
+  }
+  function curvePath(x1,x2,y,amplitude,phase,sign){var d='',i,x,t,dy;for(i=0;i<=80;i++){t=i/80;x=x1+(x2-x1)*t;dy=amplitude*Math.sin(Math.PI*t)*(sign===undefined?Math.sin(phase):sign);d+=(i?'L':'M')+x.toFixed(2)+' '+(y+dy).toFixed(2);}return d;}
+  function updateGuitar(){var s=state.guitar,ss=snapshot(),x=effectiveX(ss),y=stringY(s.string),i,amp=20*s.power/100;for(i=0;i<6;i++){attr(stringPaths[i],'opacity',i===s.string&&state.model ? 0.1 : 1);attr(stringPaths[i],'stroke',i===s.string&&!state.model?'#176ac6':'#e2ded1');attr(stringPaths[i],'stroke-width',i===s.string&&!state.model?4:1.4+MODEL.diameters[i]*1.8);attr(stringHits[i],'aria-pressed',i===s.string?'true':'false');attr(stringHits[i],'d','M'+Math.max(169,x+15)+' '+stringY(i)+'H842');}
+    $('stringSelect').value=s.string;$('stringLength').value=s.length;$('stringTension').value=s.tension;$('stringPower').value=s.power;
+    text('stringValue',(s.string+1)+'号 · '+MODEL.diameters[s.string].toFixed(2)+' mm');labelValue('lengthValue',s.length,'cm');$('tensionValue').innerHTML=(s.tension/100).toFixed(2)+'<small>×</small>';labelValue('powerValue',s.power,'%');
+    attr($('deadString'),'d','M144 '+y+'H'+x);attr($('liveString'),'stroke-width',2.3+MODEL.diameters[s.string]*1.8);attr($('vibrationBounds'),'d',curvePath(x,MODEL.bridgeX,y,amp,0,1)+curvePath(MODEL.bridgeX,x,y,amp,0,-1).replace('M','L')+'Z');
+    attr($('lengthMeasure'),'d','M'+x+' 334V342M'+x+' 339H858M858 334V342');text('lengthLabel','有效振动段 '+number(s.length)+' cm');attr($('lengthLabel'),'x',(x+858)/2);
+    attr($('pressStem'),'d','M'+x+' 145V'+(y-14));attr($('pressBox'),'x',x-32);attr($('pressText'),'x',x);attr($('pressCircle'),'cx',x);attr($('pressCircle'),'cy',y);attr($('pressArrows'),'d','M'+(x-3)+' '+(y-4)+'l-4 4 4 4M'+(x+3)+' '+(y-4)+'l4 4-4 4');attr($('pressHandle'),'aria-valuenow',s.length);attr($('pressHandle'),'aria-valuetext',number(s.length)+'厘米');
+    var rot=(s.tension-100)*1.8;attr($('tunerTick'),'transform','rotate('+rot+' 75 67)');text('tuneTag','松紧 '+(s.tension/100).toFixed(2)+'×');attr($('tuner'),'aria-valuenow',s.tension);
+    var ref=getReference();$('refLengthMeasure').style.display=ref?'':'none';$('refLengthLabel').style.display=ref?'':'none';if(ref){var rx=effectiveX(ref);attr($('refLengthMeasure'),'d','M'+rx+' 375V386H858V375');attr($('refLengthLabel'),'x',(rx+858)/2);text('refLengthLabel','A：'+number(ref.length)+' cm');}
+    $('guitarModel').style.display=state.model?'':'none';$('pluckHint').style.display=s.length<52?'none':'';drawGuitarMotion();
+  }
+  function drawGuitarMotion(){if(state.page!=='guitar'||!state.model){return;}var s=snapshot(),x=effectiveX(s),y=stringY(s.string),amp=state.motion?20*s.power/100:0,phase=state.phase;if(state.drag&&state.drag.kind==='pluck'){var pull=state.drag.pull||0,point=state.drag.x;attr($('liveString'),'d','M'+x+' '+y+'L'+point+' '+(y+pull)+'L858 '+y);attr($('stringTracer'),'cx',point);attr($('stringTracer'),'cy',y+pull);return;}attr($('liveString'),'d',curvePath(x,858,y,amp,phase));attr($('stringTracer'),'cx',(x+858)/2);attr($('stringTracer'),'cy',y+amp*Math.sin(phase));}
+  function buildPipes(){var i,x,g,r,bottom,top,tag,no,hit;for(i=0;i<8;i++){x=116+i*62;g=createSVG('g',{'data-pipe':i,class:'svg-touch',tabindex:0,role:'button','aria-label':(i+1)+'号排箫管，点击吹奏'},$('pipes'));r=createSVG('rect',{x:x,y:98,width:43,height:240,rx:11,fill:'url(#bamboo)',stroke:'#ad7a43','stroke-width':1.7},g);createSVG('path',{d:'M'+(x+11)+' 112V300',stroke:'#fff4cd','stroke-width':1.5,opacity:.3,'pointer-events':'none'},g);bottom=createSVG('path',{d:'',fill:'none',stroke:'#ac713b','stroke-width':4},g);top=createSVG('ellipse',{cx:x+21.5,cy:100,rx:21.5,ry:9,fill:'#9c693b',stroke:'#d5ad6e','stroke-width':3},g);createSVG('ellipse',{cx:x+21.5,cy:100,rx:14.5,ry:5.4,fill:'#574232'},g);tag=createSVG('rect',{x:x+4,y:49,width:35,height:31,rx:8,fill:'#f0e7d6'},g);no=createSVG('text',{x:x+21.5,y:71,'text-anchor':'middle','font-size':18,'font-weight':700,fill:'#8b6a45'},g);no.textContent=i+1;var label=createSVG('text',{x:x+21.5,y:360,'text-anchor':'middle','font-size':14,fill:'#8e7357'},g);hit=createSVG('rect',{x:x-5,y:38,width:53,height:350,fill:'transparent'},g);pipeParts.push({group:g,rect:r,bottom:bottom,top:top,tag:tag,no:no,label:label,hit:hit,shine:g.childNodes[1]});}}
+  function rebuildAir(){var height=state.pipe.lengths[state.pipe.selected]*MODEL.pipeScale,row,col,node;while($('airParticles').firstChild){$('airParticles').removeChild($('airParticles').firstChild);}while($('airReference').firstChild){$('airReference').removeChild($('airReference').firstChild);}airNodes=[];for(row=12;row<height-8;row+=14){for(col=0;col<5;col++){var anchorY=MODEL.pipeTop+row;node=createSVG('circle',{cx:783+col*18,cy:anchorY,r:2.5,fill:'#5b98cf',opacity:col===2 ? 0.9 : 0.65},$('airParticles'));airNodes.push({node:node,distance:row,baseY:anchorY,bright:false});}}var distance=height*.27;var tracer=createSVG('circle',{cx:819,cy:MODEL.pipeTop+distance,r:5.5,fill:'#e4a246',stroke:'#fff','stroke-width':2.3},$('airParticles'));airNodes.push({node:tracer,distance:distance,baseY:MODEL.pipeTop+distance,bright:true});createSVG('path',{d:'M777 '+(MODEL.pipeTop+distance)+'H862'},$('airReference'));}
+  function updatePipes(rebuild){var s=state.pipe,i,len,height,y,pp;for(i=0;i<8;i++){pp=pipeParts[i];len=s.lengths[i];height=len*MODEL.pipeScale;y=98+height;attr(pp.rect,'height',height);attr(pp.rect,'fill',i===s.selected?'url(#selectedBamboo)':'url(#bamboo)');attr(pp.rect,'stroke',i===s.selected?'#176ac6':'#ad7a43');attr(pp.rect,'stroke-width',i===s.selected?3.5:1.7);attr(pp.bottom,'d','M'+(119+i*62)+' '+(y-9)+'Q'+(137.5+i*62)+' '+(y+2)+' '+(156+i*62)+' '+(y-9));attr(pp.shine,'d','M'+(127+i*62)+' 115V'+(y-15));attr(pp.tag,'fill',i===s.selected?'#176ac6':'#f0e7d6');attr(pp.no,'fill',i===s.selected?'#fff':'#8b6a45');attr(pp.label,'y',y+24);pp.label.textContent=number(len);attr(pp.hit,'height',height+95);attr(pp.group,'aria-pressed',i===s.selected?'true':'false');attr(pp.group,'aria-label',(i+1)+'号排箫管，空气柱长'+number(len)+'厘米，点击吹奏');}
+    len=s.lengths[s.selected];height=len*MODEL.pipeScale;y=MODEL.pipeTop+height;$('pipeLength').value=len;$('pipePower').value=s.power;labelValue('pipeLengthValue',len,'cm');labelValue('pipePowerValue',s.power,'%');text('controlKicker','排箫 / '+(s.selected+1)+'号管');text('sceneHint','点选管口试听 · 拖动右侧管底改变长度');
+    attr($('columnBack'),'height',height);attr($('columnClipRect'),'height',height);attr($('columnWalls'),'d','M772 '+MODEL.pipeTop+'V'+y+'H868V'+MODEL.pipeTop);attr($('airGauge'),'d','M750 '+MODEL.pipeTop+'H739V'+y+'H750');attr($('airGaugeLabel'),'y',MODEL.pipeTop+height/2+7);text('airGaugeLabel',number(len)+' cm');attr($('airBottomLabel'),'y',y+7);attr($('pipeHandleRect'),'y',y-15);attr($('pipeHandleArrow'),'d','M815 '+(y-5)+'l5-5 5 5M815 '+(y+5)+'l5 5 5-5');attr($('pipeLengthHandle'),'aria-valuenow',len);attr($('pipeLengthHandle'),'aria-valuetext',number(len)+'厘米');
+    var ref=getReference();$('pipeRefOutline').style.display=ref?'':'none';if(ref){var refY=MODEL.pipeTop+ref.length*MODEL.pipeScale;attr($('pipeRefOutline'),'d','M914 '+MODEL.pipeTop+'V'+refY+'H931');}
+    $('pipeInspector').style.display=state.model?'':'none';setHidden('pipeOpaque',state.model);if(rebuild){rebuildAir();}drawAirMotion();
+  }
+  function drawAirMotion(){if(state.page!=='pipe'||!state.model){return;}var s=state.pipe,height=s.lengths[s.selected]*MODEL.pipeScale,amp=state.motion?10*s.power/100:0,i,n;for(i=0;i<airNodes.length;i++){n=airNodes[i];/* closed bottom: displacement tends to zero; no net axial flow */attr(n.node,'cy',n.baseY+amp*Math.cos(Math.PI*n.distance/(2*height))*Math.sin(state.phase));}}
+  function tracePath(s,center){var i,x,y,d='',f=frequency(s),a=s.power/100*20;for(i=0;i<=420;i++){x=139+700*i/420;y=center-a*Math.sin(2*Math.PI*f*.010*i/420);d+=(i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2);}return d;}
+  function updateTrace(){var s=snapshot(),ref=getReference();attr($('nowTrace'),'d',tracePath(s,33));text('nowTraceTitle',ref?'当前 B':'当前');text('nowTraceHz',Math.round(frequency(s))+' Hz');text('currentFrequency',Math.round(frequency(s)));text('referenceFrequency',ref?Math.round(frequency(ref)):'—');$('tracePlaceholder').style.display=ref?'none':'';text('refTraceHz',ref?Math.round(frequency(ref))+' Hz':'尚未保留');attr($('refTrace'),'d',ref?tracePath(ref,82):'');$('saveReference').hidden=!!ref;$('comparison').hidden=!ref;if(ref){text('differenceText',difference(s,ref));text('referenceMeta',ref.type==='guitar'?(ref.string+1)+'号弦 · '+number(ref.length)+' cm · '+(ref.tension/100).toFixed(2)+'× · 幅度'+ref.power+'%':(ref.selected+1)+'号管 · '+number(ref.length)+' cm · 气息'+ref.power+'%');}}
+  function difference(a,b){var changes=[];if(a.type==='guitar'){if(a.string!==b.string){changes.push('琴弦粗细');}if(Math.abs(a.length-b.length)>.04){changes.push('有效长度');}if(a.tension!==b.tension){changes.push('松紧');}}else{if(Math.abs(a.length-b.length)>.04){changes.push('空气柱长度');}}if(a.power!==b.power){changes.push(a.type==='guitar'?'拨动幅度':'气息');}if(!changes.length){return 'A、B条件相同。改变一个量，再比较。';}if(changes.length===1){return '只改变了'+changes[0]+'。声音和轨迹有何变化？';}return '同时改变了'+changes.length+'项：'+changes.join('、')+'。';}
+  function updateAll(rebuild){if(state.page==='guitar'){updateGuitar();}else{updatePipes(rebuild!==false);}updateTrace();updatePause();}
+  function setPage(page){if(state.page===page){return;}cancelComparison();state.drag=null;state.page=page;state.motion=false;state.phase=0;state.paused=false;var g=page==='guitar';setHidden('guitarSvg',!g);setHidden('pipeSvg',g);$('guitarControls').hidden=!g;$('pipeControls').hidden=g;$('pipeTip').hidden=g;attr($('tab-guitar'),'aria-selected',g?'true':'false');attr($('tab-pipe'),'aria-selected',g?'false':'true');attr($('workshop'),'aria-labelledby',g?'tab-guitar':'tab-pipe');text('sceneTitle',g?'拨动一根弦，听见什么？':'看不见的空气，怎样发声？');text('sceneHint',g?'点选琴弦 · 拖动按压点 · 拨弦试听':'点选管口试听 · 拖动右侧管底改变长度');text('controlKicker',g?'GUITAR / 弦':'PANPIPES / 管');text('controlTitle','一次只改变一个量');text('playText',g?'拨弦试听':'吹奏试听');text('modelShort',g?'同材质琴弦模型 · 非真实吉他定弦':'封底管模型 · 数字为近似空气柱长（cm）');updateAll(true);}
+  function changed(rebuild){cancelComparison();updateAll(rebuild);}
+  function bindRange(id,callback,rebuild){$(id).addEventListener('input',function(){callback(Number(this.value));changed(rebuild);});$(id).addEventListener('change',playCurrent);}
+  function keepReference(){cancelComparison();state.reference[state.page]=snapshot();updateAll(false);toast('已保留 A。现在改变一个量，再比较。');}
+  function compare(){var ref=getReference();if(!ref){return;}cancelComparison();state.compareRestorePaused=state.paused;state.paused=true;state.comparing=true;updatePause();text('motionLabel','舞台保留当前 B（冻结）· 正在试听 A');attr($('nowTrace'),'opacity',.25);attr($('refTrace'),'opacity',1);playSnapshot(ref,0,1.05);playSnapshot(snapshot(),1.45,1.05);text('compareSounds','正在听 A…');state.compareTimers.push(setTimeout(function(){text('compareSounds','正在听 B…');text('motionLabel','舞台保留当前 B（冻结）· 正在试听 B');attr($('nowTrace'),'opacity',1);attr($('refTrace'),'opacity',.25);},1450));state.compareTimers.push(setTimeout(function(){state.comparing=false;state.paused=state.compareRestorePaused;text('compareSounds','A → B 试听');attr($('nowTrace'),'opacity',1);attr($('refTrace'),'opacity',1);updatePause();},2700));}
+  function findData(target,name,root){while(target&&target!==root){if(target.getAttribute&&target.hasAttribute(name)){return target.getAttribute(name);}target=target.parentNode;}return null;}
+  function svgPoint(svg,event){var contact=event.touches&&event.touches.length?event.touches[0]:event.changedTouches&&event.changedTouches.length?event.changedTouches[0]:event;var point=svg.createSVGPoint();point.x=contact.clientX;point.y=contact.clientY;var matrix=svg.getScreenCTM();if(!matrix){return {x:0,y:0};}return point.matrixTransform(matrix.inverse());}
+  function pointerStart(event){if(event.button!==undefined&&event.button!==0){return;}var svg=state.page==='guitar'?$('guitarSvg'):$('pipeSvg'),p=svgPoint(svg,event),kind=findData(event.target,'data-drag',svg),stringIndex=findData(event.target,'data-string',svg),pipeIndex=findData(event.target,'data-pipe',svg);if(kind){event.preventDefault();cancelComparison();state.drag={kind:kind,startX:p.x,startY:p.y,startTension:state.guitar.tension,startLength:state.page==='guitar'?state.guitar.length:state.pipe.lengths[state.pipe.selected],pointerId:event.pointerId};}else if(state.page==='guitar'&&stringIndex!==null){event.preventDefault();cancelComparison();state.guitar.string=Number(stringIndex);updateAll(false);var x=clamp(p.x,effectiveX(snapshot())+15,MODEL.bridgeX-15);state.drag={kind:'pluck',startY:p.y,pull:0,x:x,moved:false,pointerId:event.pointerId};}else if(state.page==='pipe'&&pipeIndex!==null){event.preventDefault();state.pipe.selected=Number(pipeIndex);updateAll(true);playCurrent();}if(state.drag&&event.pointerId!==undefined&&svg.setPointerCapture){try{svg.setPointerCapture(event.pointerId);}catch(ignore){}}}
+  function pointerMove(event){if(!state.drag){return;}if(state.drag.pointerId!==undefined&&event.pointerId!==undefined&&event.pointerId!==state.drag.pointerId){return;}event.preventDefault();var svg=state.page==='guitar'?$('guitarSvg'):$('pipeSvg'),p=svgPoint(svg,event),d=state.drag;if(d.kind==='length'){state.guitar.length=clamp(round(d.startLength-(p.x-d.startX)/(MODEL.bridgeX-MODEL.nutX)*65,.5),32.5,65);updateAll(false);}else if(d.kind==='tension'){state.guitar.tension=clamp(Math.round(d.startTension+(d.startY-p.y)*.7),50,150);updateAll(false);}else if(d.kind==='pluck'){d.pull=clamp(p.y-d.startY,-28,28);if(Math.abs(d.pull)>3){d.moved=true;state.guitar.power=clamp(Math.round(Math.abs(d.pull)/28*100),20,100);updateAll(false);}drawGuitarMotion();}else if(d.kind==='pipe-length'){state.pipe.lengths[state.pipe.selected]=clamp(round(d.startLength+(p.y-d.startY)/MODEL.pipeScale,.1),12,40);updateAll(true);}}
+  function pointerEnd(event){if(!state.drag){return;}if(state.drag.pointerId!==undefined&&event.pointerId!==undefined&&event.pointerId!==state.drag.pointerId){return;}var cancel=event.type==='pointercancel'||event.type==='touchcancel';state.drag=null;if(!cancel){playCurrent();}else{updateAll(false);}}
+  function bindPointer(svg){if(window.PointerEvent){svg.addEventListener('pointerdown',pointerStart);svg.addEventListener('pointermove',pointerMove);svg.addEventListener('pointerup',pointerEnd);svg.addEventListener('pointercancel',pointerEnd);}else{svg.addEventListener('mousedown',pointerStart);svg.addEventListener('touchstart',pointerStart,{passive:false});svg.addEventListener('touchmove',pointerMove,{passive:false});svg.addEventListener('touchend',pointerEnd);svg.addEventListener('touchcancel',pointerEnd);}}
+  function instrumentKeys(event){var target=event.target,page=state.page;var kind=target.getAttribute('data-drag'),idx=target.getAttribute(page==='guitar'?'data-string':'data-pipe');if(idx!==null&&(event.key==='Enter'||event.key===' ')){event.preventDefault();if(page==='guitar'){state.guitar.string=Number(idx);}else{state.pipe.selected=Number(idx);}updateAll(true);playCurrent();return;}if(!kind){return;}var dir=event.key==='ArrowRight'||event.key==='ArrowUp'?1:event.key==='ArrowLeft'||event.key==='ArrowDown'?-1:0;if(!dir){return;}event.preventDefault();if(kind==='length'){state.guitar.length=clamp(state.guitar.length+dir*.5,32.5,65);}else if(kind==='tension'){state.guitar.tension=clamp(state.guitar.tension+dir*5,50,150);}else if(kind==='pipe-length'){state.pipe.lengths[state.pipe.selected]=clamp(round(state.pipe.lengths[state.pipe.selected]+dir*.5,.1),12,40);}changed(true);playCurrent();}
+  function reset(){cancelComparison();state.drag=null;if(state.page==='guitar'){state.guitar=initialGuitar();}else{state.pipe=initialPipe();}state.reference[state.page]=null;state.motion=false;state.phase=0;state.paused=false;updateAll(true);toast('已恢复当前乐器的初始状态');}
+  function escapeXML(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c];});}
+  function describe(s){if(s.type==='guitar'){return (s.string+1)+'号弦（'+MODEL.diameters[s.string].toFixed(2)+' mm） · 有效长度 '+number(s.length)+' cm · 张力 '+(s.tension/100).toFixed(2)+'× · 拨动幅度 '+s.power+'%';}return '第'+(s.selected+1)+'根管 · 空气柱长 '+number(s.length)+' cm · 气息 '+s.power+'%';}
+  var exportURL=null;
+  function exportComparison(){cancelComparison();var ref=getReference();if(!ref){return;}var s=snapshot(),clone=$('traceSvg').cloneNode(true);clone.removeAttribute('id');clone.setAttribute('x','50');clone.setAttribute('y','190');clone.setAttribute('width','900');clone.setAttribute('height','160');var xml=new XMLSerializer().serializeToString(clone);var title='乐器的声音变化 · '+(s.type==='guitar'?'吉他':'排箫')+'对照';var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="460" viewBox="0 0 1000 460"><rect width="1000" height="460" fill="#fffefa"/><g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif"><text x="50" y="51" font-size="28" font-weight="700" fill="#24364b">'+title+'</text><text x="50" y="88" font-size="17" fill="#6c7a8a">模型计算与合成声音的对照 · 非真实测量记录</text><text x="50" y="131" font-size="19" fill="#ad713f">A：'+escapeXML(describe(ref))+'</text><text x="50" y="166" font-size="19" fill="#176ac6">B：'+escapeXML(describe(s))+'</text>'+xml+'<text x="50" y="390" font-size="18" fill="#41546a">'+escapeXML(difference(s,ref))+'</text><text x="50" y="426" font-size="16" fill="#7a8795">相同的10毫秒时间窗，振幅采用相同刻度；Hz表示每秒振动次数。请结合真实乐器检验解释。</text></g></svg>';var blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'});if(exportURL){URL.revokeObjectURL(exportURL);}exportURL=URL.createObjectURL(blob);$('exportPreview').src=exportURL;$('exportDownload').href=exportURL;$('exportDownload').download='四上3.4乐器的声音变化_'+(s.type==='guitar'?'吉他':'排箫')+'_模型对照.svg';$('exportModal').hidden=false;$('closeExport').focus();}
+  function toggleSound(){if(!window.LessonAudio){return;}cancelComparison();var muted=!window.LessonAudio.isMuted();window.LessonAudio.setMuted(muted);attr($('soundToggle'),'aria-pressed',muted?'false':'true');attr($('soundToggle'),'aria-label',muted?'开启声音':'关闭声音');$('soundToggle').classList.toggle('is-muted',muted);$('soundIcon').innerHTML=muted?'<path d="M4 9h4l5-4v14l-5-4H4zM17 9l5 6M22 9l-5 6"/>':'<path d="M4 9h4l5-4v14l-5-4H4zM17 8q5 4 0 8M19 4q9 8 0 16"/>';soundStatus();}
+  function openInfo(){cancelComparison();$('infoModal').hidden=false;$('closeInfo').focus();}
+  function closeInfo(){$('infoModal').hidden=true;$('modelInfo').focus();}
+  function fullscreen(){var doc=document.documentElement,active=document.fullscreenElement||document.webkitFullscreenElement,fn=active?(document.exitFullscreen||document.webkitExitFullscreen):(doc.requestFullscreen||doc.webkitRequestFullscreen);if(!fn){toast('此浏览器不支持网页全屏，可横屏或添加到主屏幕');return;}try{var promise=fn.call(active?document:doc);if(promise&&promise.catch){promise.catch(function(){toast('全屏未开启，请使用浏览器的全屏功能');});}}catch(ignore){toast('全屏未开启，请使用浏览器的全屏功能');}}
+  function tick(time){if(!state.previousTime){state.previousTime=time;}var dt=Math.min(.05,(time-state.previousTime)/1000);state.previousTime=time;if(state.motion&&!state.paused&&state.model&&!document.hidden){state.phase=(state.phase+2*Math.PI*frequency(snapshot())*dt/MODEL.slowFactor)%(Math.PI*2);if(state.page==='guitar'){drawGuitarMotion();}else{drawAirMotion();}}window.requestAnimationFrame(tick);}
+  buildGuitar();buildPipes();
+  $('tab-guitar').addEventListener('click',function(){setPage('guitar');});$('tab-pipe').addEventListener('click',function(){setPage('pipe');});
+  bindRange('stringSelect',function(v){state.guitar.string=v;},false);bindRange('stringLength',function(v){state.guitar.length=v;},false);bindRange('stringTension',function(v){state.guitar.tension=v;},false);bindRange('stringPower',function(v){state.guitar.power=v;},false);bindRange('pipeLength',function(v){state.pipe.lengths[state.pipe.selected]=v;},true);bindRange('pipePower',function(v){state.pipe.power=v;},false);
+  $('play').addEventListener('click',playCurrent);$('reset').addEventListener('click',reset);$('soundToggle').addEventListener('click',toggleSound);$('fullscreen').addEventListener('click',fullscreen);$('saveReference').addEventListener('click',keepReference);$('replaceReference').addEventListener('click',keepReference);$('clearReference').addEventListener('click',function(){cancelComparison();state.reference[state.page]=null;updateAll(false);});$('compareSounds').addEventListener('click',compare);$('exportComparison').addEventListener('click',exportComparison);
+  $('modelToggle').addEventListener('click',function(){state.model=!state.model;attr(this,'aria-pressed',state.model?'true':'false');this.textContent=state.model?'慢放透视：开':'慢放透视：关';updateAll(false);});$('pause').addEventListener('click',function(){cancelComparison();state.paused=!state.paused;if(!state.paused){state.motion=true;}updatePause();});
+  $('closeExport').addEventListener('click',function(){$('exportModal').hidden=true;$('exportComparison').focus();});$('exportModal').addEventListener('click',function(e){if(e.target===this){$('closeExport').click();}});document.addEventListener('keydown',function(e){if(!$('exportModal').hidden){if(e.key==='Escape'){$('closeExport').click();}else if(e.key==='Tab'){var first=$('closeExport'),last=$('exportDownload');if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}}});
+  $('modelInfo').addEventListener('click',openInfo);$('closeInfo').addEventListener('click',closeInfo);$('infoModal').addEventListener('click',function(e){if(e.target===this){closeInfo();}});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('infoModal').hidden){closeInfo();}if(!$('infoModal').hidden&&e.key==='Tab'){var focusable=$('infoModal').querySelectorAll('button,a[href]'),first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+  bindPointer($('guitarSvg'));bindPointer($('pipeSvg'));if(!window.PointerEvent){document.addEventListener('mousemove',pointerMove);document.addEventListener('mouseup',pointerEnd);}$('guitarSvg').addEventListener('keydown',instrumentKeys);$('pipeSvg').addEventListener('keydown',instrumentKeys);document.addEventListener('visibilitychange',function(){if(document.hidden){cancelComparison();state.drag=null;}});window.addEventListener('blur',function(){cancelComparison();state.drag=null;});
+  updateAll(true);soundStatus();window.requestAnimationFrame(tick);
+  /* Read-only diagnostics: values are model calculations, not measured data. */
+  window.InstrumentLab={getState:function(){return {page:state.page,current:snapshot(),reference:getReference()?JSON.parse(JSON.stringify(getReference())):null,frequency:frequency(snapshot()),paused:state.paused,modelVisible:state.model};},frequency:frequency};
+}());
+</script>
+</body>
+</html>
