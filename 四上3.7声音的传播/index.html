@@ -1,0 +1,1517 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#edf3f8">
+<meta name="description" content="四上3.7声音的传播：追踪微粒振动、观察传声路径、比较抽气钟罩与土电话。单文件离线互动。">
+<title>声音的传播 · 振动传递实验室</title>
+<style>
+:root{--ink:#17334e;--muted:#57718a;--blue:#176be8;--blue-light:#e8f1ff;--orange:#ee9137;--line:#d9e4ee;--paper:#fff;--bg:#edf3f8;--radius:12px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,"Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:var(--bg)}body{display:flex;flex-direction:column;overflow:hidden}button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:disabled{cursor:default;opacity:.46}button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #f3a34c;outline-offset:3px}button{color:var(--ink)}[hidden]{display:none!important}.app-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 24px 12px;flex:none;border-bottom:1px solid var(--line);background:rgba(255,255,255,.82)}.brand{display:flex;align-items:center;gap:12px;min-width:200px}.brand-icon{width:40px;height:40px;color:var(--blue)}h1{margin:0;font-size:27px;letter-spacing:1px;font-weight:800}.chapter{display:block;margin-top:3px;font-size:12px;letter-spacing:1px;color:var(--muted)}.nav{display:flex;gap:5px;padding:4px;background:#e9eff6;border-radius:10px}.nav button{background:transparent;border:0;border-radius:7px;min-height:46px;padding:0 18px;font-size:18px;font-weight:700;white-space:nowrap}.nav button[aria-selected=true]{background:var(--ink);color:white;box-shadow:0 2px 4px #17334e1c}.nav .num{font-size:13px;opacity:.65;margin-right:7px}.tools{display:flex;gap:7px}.tool{height:44px;min-width:44px;padding:0 11px;border:1px solid var(--line);border-radius:8px;background:white;font-size:15px}.tool svg{width:21px;height:21px;vertical-align:middle}.tool[aria-pressed=true]{background:var(--blue-light);color:var(--blue);border-color:#8ab9fb}.app-main{flex:1;min-height:0;padding:15px 22px 8px}.lesson-panel{height:100%;min-height:0}.heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 12px;min-height:32px}.heading h2{font-size:23px;line-height:1.4;margin:0;font-weight:800}.heading p{font-size:16px;line-height:1.5;margin:0;color:var(--muted)}.panel-layout{height:calc(100% - 46px);min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:16px}.canvas-column{min-width:0;min-height:0;display:flex;flex-direction:column;gap:12px}.scene-card{position:relative;min-height:0;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius)}.scene-head{position:absolute;top:15px;left:18px;z-index:2;display:flex;gap:8px;align-items:center;pointer-events:none}.scene-head span{background:#edf4fc;border:1px solid #d7e7f7;padding:4px 10px;border-radius:5px;font-size:15px;font-weight:700;color:#4a6786}.scene-head small{font-size:14px;color:var(--muted)}.macro-card{flex:1.15}.micro-card{flex:1}.viz{width:100%;height:100%;display:block}.viz text{font-family:Arial,"Microsoft YaHei","PingFang SC",sans-serif}.svg-action{cursor:pointer;touch-action:none}.svg-action:hover .hover-stroke{stroke:#75aaf3}.svg-label{fill:var(--ink);font-size:21px;font-weight:700}.svg-caption{fill:var(--muted);font-size:17px}.sidebar{display:flex;flex-direction:column;gap:14px;min-height:0}.control-card{background:white;border:1px solid var(--line);border-radius:var(--radius);padding:20px}.control-card h3{font-size:17px;color:var(--muted);margin:0 0 10px;font-weight:600}.readout{font-size:27px;line-height:1.35;font-weight:800;letter-spacing:.2px;margin:0 0 5px;min-height:36px}.readout.blue{color:var(--blue)}.control-note{font-size:16px;color:var(--muted);line-height:1.65;margin:5px 0 0}.control-label{display:flex;align-items:center;justify-content:space-between;font-size:18px;margin:13px 0 10px;gap:10px}.control-label output{color:var(--blue);font-weight:700;font-size:16px}.slider{width:100%;height:34px;margin:0;accent-color:var(--blue);cursor:pointer;touch-action:pan-y}.range-ends{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-top:1px}.button{min-height:48px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:18px;font-weight:700;line-height:1.3}.button:hover{border-color:#7eaeea;background:#f5f9ff}.button.primary{background:var(--blue);border-color:var(--blue);color:#fff}.button.primary:hover{background:#0b5dce}.button.subtle{background:#f3f6fa}.button.wide{width:100%}.button-row{display:flex;gap:8px}.button-row>*{flex:1;min-width:0}.control-actions{display:flex;flex-direction:column;gap:10px}.tiny-note{font-size:14px;color:var(--muted);line-height:1.65}.side-bottom{margin-top:auto}.time-card{padding-top:15px;padding-bottom:15px}.status-line{display:flex;align-items:center;gap:7px;font-size:16px;color:var(--muted);margin:8px 0 0}.status-dot{width:9px;height:9px;border-radius:50%;background:#b7c6d8;flex:none}.status-dot.on{background:#176be8;box-shadow:0 0 0 4px #176be815}.speed{display:flex;gap:6px;margin-top:12px}.speed button{flex:1;border:1px solid var(--line);background:#f5f8fc;min-height:40px;font-size:16px;border-radius:6px}.speed button[aria-pressed=true]{background:#e8f1ff;color:var(--blue);border-color:#87b5f5}.app-footer{padding:7px 23px 10px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:#5d748b;flex:none}.app-footer .level{font-weight:700;border:1px solid #cedce8;border-radius:4px;padding:3px 7px}.footer-link{padding:4px 8px;border:0;background:transparent;color:#466581;font-size:13px;text-decoration:underline;text-underline-offset:3px}.toast{position:fixed;left:50%;bottom:45px;transform:translateX(-50%);z-index:50;padding:12px 19px;background:#17334ef5;color:#fff;border-radius:8px;font-size:17px;max-width:85vw;text-align:center;pointer-events:none}.modal-backdrop{position:fixed;inset:0;background:#102c45a1;z-index:100;display:flex;align-items:center;justify-content:center;padding:22px}.modal{background:white;max-width:760px;max-height:90vh;overflow:auto;border-radius:14px;padding:27px 30px;box-shadow:0 24px 100px #081b3a55}.modal h2{margin:0 0 18px;font-size:25px}.modal h3{margin:22px 0 7px;font-size:18px}.modal p,.modal li{font-size:17px;line-height:1.75}.modal ul{padding-left:23px}.modal a{color:var(--blue)}.modal .close-row{display:flex;justify-content:flex-end;margin-top:22px}.nojs{padding:20px;background:#fff2d8;color:#68420a}.arrive-dot{transition:fill .1s}.scene-options{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;flex:none}.scene-option{display:flex;align-items:center;justify-content:center;gap:10px;min-height:58px;padding:8px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:19px;font-weight:700}.scene-option svg{width:30px;height:30px}.scene-option[aria-pressed=true]{border:2px solid var(--blue);background:var(--blue-light);color:var(--blue)}.path-card{flex:1}.path-strip{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;min-height:65px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;flex:none}.path-chip{padding:8px 12px;border-radius:6px;background:#f0f4f8;border:1px solid #e3eaf1;color:#61758b;font-size:19px;font-weight:700}.path-chip.reached{background:#e4efff;border-color:#a5c7f7;color:#155db5}.path-arrow{font-size:18px;color:#91a4b9}.path-strip.hidden-path .path-chip{color:transparent;min-width:55px;background:#f1f5f9;border-style:dashed}.path-strip.hidden-path .path-chip:after{content:'?';color:#647b92;display:block;text-align:center;margin-top:-24px}.model-comparison{border-top:1px solid var(--line);padding-top:12px;margin-top:10px;font-size:15px;line-height:1.6}.model-comparison strong{display:block;color:var(--blue);font-size:16px}.model-comparison .compare-current{margin-top:7px;color:var(--ink)}.effect-bars{display:flex;align-items:flex-end;gap:5px;height:32px;margin-top:8px}.effect-bars i{display:block;width:29px;background:#e5edf5;border-radius:3px 3px 0 0}.effect-bars i.lit{background:#5492e9}.path-actions{padding:16px}.path-feedback{padding:16px}.path-feedback .readout{font-size:24px}.contact-button{width:100%;min-height:46px;background:#f5f8fc;border:1px solid var(--line);border-radius:7px;font-size:17px;font-weight:700}.jar-controls .control-label{font-size:18px}.jar-caveat{font-size:14px;line-height:1.55;color:#7c592f;background:#fff7e9;border-radius:6px;padding:8px 10px;margin-top:10px}.notebook-hint{font-size:15px;line-height:1.6;color:var(--muted);margin:0}.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1600px){.app-header{padding:19px 32px}.app-main{padding:22px 30px 10px}.heading{margin-bottom:16px}.heading h2{font-size:28px}.heading p{font-size:19px}.panel-layout{height:calc(100% - 55px);grid-template-columns:minmax(0,1fr) 340px;gap:20px}.sidebar{gap:18px}.control-card{padding:24px}.control-card h3{font-size:20px}.readout{font-size:32px}.button{min-height:56px;font-size:21px}.control-note{font-size:18px}.scene-option{min-height:68px;font-size:22px}.path-chip{font-size:22px}.path-feedback .readout{font-size:29px}.tiny-note{font-size:16px}}
+@media(max-width:1150px){.app-header{padding:12px 16px;gap:10px}.brand{min-width:160px;gap:8px}h1{font-size:23px}.brand-icon{width:32px;height:32px}.nav button{padding:0 11px;font-size:17px}.nav .num{display:none}.tool{padding:0 8px}.tool .tool-word{display:none}.panel-layout{grid-template-columns:minmax(0,1fr) 250px;gap:12px}.app-main{padding:12px 14px 7px}.control-card{padding:16px}.sidebar{gap:11px}.heading h2{font-size:21px}.heading p{font-size:14px}.readout{font-size:24px}.control-note{font-size:15px}.button{padding:9px 11px;font-size:17px}.path-chip{font-size:17px;padding:7px 9px}.scene-option{font-size:18px;min-height:52px;gap:5px}.scene-option svg{width:24px}.path-actions{padding:13px}}
+@media(max-height:720px) and (min-width:761px){.app-header{padding-top:8px;padding-bottom:8px}.nav button{min-height:42px}.app-main{padding-top:9px}.heading{margin-bottom:8px;min-height:28px}.heading h2{font-size:20px}.panel-layout{height:calc(100% - 36px)}.sidebar{gap:9px}.control-card{padding:12px 15px}.control-note{font-size:14px;line-height:1.5}.control-label{margin:8px 0 4px}.button{min-height:43px;padding:8px 10px}.speed{margin-top:7px}.speed button{min-height:34px}.readout{font-size:22px;min-height:28px}.scene-head{top:9px;left:13px}.scene-head span{font-size:13px}.scene-head small{font-size:12px}.scene-options{gap:7px}.scene-option{min-height:47px}.path-strip{min-height:51px;padding:6px}.model-comparison{font-size:14px;margin-top:6px;padding-top:7px}.jar-caveat{font-size:12px}.app-footer{padding-top:3px;padding-bottom:6px}.notebook-hint{font-size:14px}}
+@media(max-width:760px), (max-width:1000px) and (orientation:portrait){body{height:auto;min-height:100%;overflow:auto}.app-header{flex-wrap:wrap;gap:10px;padding:11px 12px}.brand{flex:1}.tools{gap:5px}.chapter{font-size:10px}h1{font-size:22px}.nav{order:3;width:100%}.nav button{flex:1;padding:0 4px;min-height:44px;font-size:16px}.app-main{padding:12px 11px;flex:none}.lesson-panel{height:auto}.heading{display:block;margin-bottom:12px}.heading h2{font-size:21px}.heading p{margin-top:5px;font-size:14px}.panel-layout{height:auto;display:flex;flex-direction:column;gap:12px}.canvas-column{gap:10px}.macro-card{height:250px;flex:none}.micro-card{height:200px;flex:none}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sidebar>.control-actions,.sidebar>.side-bottom{grid-column:1 / -1}.control-card{padding:14px}.wave-side .time-card{grid-column:1 / -1}.wave-side .control-actions{flex-direction:row;flex-wrap:wrap}.wave-side .control-actions>.button{flex:1}.wave-side .control-actions>.button-row{flex:1.2}.readout{font-size:23px}.button{font-size:17px;min-height:46px}.control-note{font-size:15px}.app-footer{font-size:11px;padding:6px 12px 15px;align-items:flex-start;flex-wrap:wrap}.app-footer .model-note{max-width:70%;line-height:1.5}.scene-option{font-size:16px;min-height:55px;gap:4px;flex-direction:column}.scene-option svg{width:24px;height:22px}.path-card{height:330px;flex:none}.path-strip{gap:5px;min-height:56px}.path-chip{font-size:15px;padding:6px 8px}.path-arrow{font-size:15px}.path-sidebar .path-actions,.path-sidebar .path-feedback{grid-column:1/-1}.path-sidebar .path-actions .control-actions{display:grid;grid-template-columns:1fr 1fr}.path-sidebar .path-actions .control-actions>.button-row{display:contents}.path-sidebar .path-actions .notebook-hint{grid-column:1/-1}.modal{padding:23px 19px}.modal p,.modal li{font-size:16px}.scene-head span{font-size:13px}.scene-head small{font-size:12px}.model-comparison{font-size:15px}.jar-controls{grid-column:1 / -1}.path-feedback{grid-column:1/-1}}
+
+.path-actions .control-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.path-actions .button-row{display:contents}.path-actions .button{font-size:17px;padding:10px 6px}.path-actions .notebook-hint{grid-column:1/-1}.path-comparison{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;margin:0;padding:10px 16px;background:white;border:1px solid var(--line);border-radius:9px;font-size:16px}.path-comparison>strong{grid-column:1/-1}.path-comparison .compare-current{margin-top:0}.path-sidebar .control-note{font-size:15px;line-height:1.5}.path-sidebar .path-feedback h3{margin-bottom:5px}.path-sidebar .path-feedback .readout{font-size:23px}.path-sidebar .jar-controls{padding:15px}.path-sidebar .jar-controls .button{font-size:17px;min-height:43px}.path-sidebar .jar-controls .control-label{margin-top:0}.path-sidebar .jar-caveat{font-size:13px}.path-sidebar .notebook-hint{font-size:14px;line-height:1.55}
+@media(max-height:740px) and (min-width:761px){.path-sidebar{gap:8px}.path-sidebar .path-feedback,.path-sidebar .path-actions{padding:11px 13px}.path-sidebar .control-note{font-size:14px}.path-sidebar .jar-controls{padding:11px 13px}.path-sidebar .jar-caveat{font-size:12px;margin-top:7px;padding:6px 8px}.path-sidebar .button{min-height:41px;padding-top:8px;padding-bottom:8px}.path-sidebar .path-feedback .readout{font-size:21px}.path-sidebar .effect-bars{height:26px;margin-top:5px}}
+@media(max-width:760px), (max-width:1000px) and (orientation:portrait){.path-comparison{grid-template-columns:1fr;font-size:16px}.path-sidebar .control-note,.path-sidebar .notebook-hint{font-size:15px}.path-sidebar .jar-caveat{font-size:14px}.path-sidebar .button{min-height:48px}.path-sidebar .path-feedback .readout{font-size:24px}}
+
+.phone-panel { height:100%; min-height:0; color:#17334e; }
+.phone-panel[hidden], .phone-panel [hidden] { display:none !important; }
+.phone-grid { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:16px; height:100%; min-height:0; }
+.phone-stage { display:flex; flex-direction:column; min-width:0; min-height:0; overflow:hidden; background:#fff; border:1px solid #dae5ef; border-radius:12px; }
+.phone-stage-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:20px 24px 0; }
+.phone-stage-heading h2 { font-size:26px; line-height:1.25; margin:0; font-weight:750; letter-spacing:.01em; }
+.phone-stage-heading p { margin:8px 0 0; font-size:19px; line-height:1.45; color:#60758a; }
+.phone-model-tag { flex:none; padding:6px 10px; background:#f0f5fa; color:#60758a; border-radius:7px; font-size:18px; line-height:1.3; }
+.phone-scene { display:block; width:100%; height:auto; flex:1 1 auto; min-height:0; overflow:visible; user-select:none; -webkit-user-select:none; }
+.phone-source { cursor:pointer; outline:none; }
+.phone-receiver { cursor:grab; touch-action:none; outline:none; }
+.phone-receiver.phone-dragging { cursor:grabbing; }
+.phone-source:focus > rect, .phone-receiver:focus > rect { fill:#176be80a; stroke:#176be8; stroke-width:3px; stroke-dasharray:8 6; }
+.phone-stage-bottom { padding:0 22px 16px; flex:none; }
+.phone-route { display:flex; align-items:center; justify-content:center; gap:15px; font-size:20px; font-weight:700; line-height:1.5; }
+.phone-route span { padding:4px 12px; border-radius:6px; color:#71869a; background:#f2f6fa; transition:background .15s, color .15s; }
+.phone-route span.phone-active { background:#dcecff; color:#176be8; }
+.phone-route span.phone-arrived { background:#fff0de; color:#a15813; }
+.phone-route b { font-weight:400; color:#91a4b6; }
+.phone-scope { margin:10px 0 0; text-align:center; font-size:18px; line-height:1.45; color:#61768a; }
+.phone-controls { display:flex; flex-direction:column; gap:16px; overflow:auto; min-height:0; background:#f8fbfe; border:1px solid #dae5ef; border-radius:12px; padding:20px; }
+.phone-button { appearance:none; -webkit-appearance:none; display:inline-flex; justify-content:center; align-items:center; min-height:49px; width:100%; padding:10px 14px; border:1px solid #c6d7e7; border-radius:9px; background:#fff; font:inherit; font-size:20px; line-height:1.25; font-weight:650; color:#17334e; cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+.phone-button:hover { border-color:#90b8df; background:#f0f6fd; }
+.phone-button:focus-visible, .phone-range:focus-visible { outline:3px solid #ee9137; outline-offset:3px; }
+.phone-button:disabled { color:#8a9bab; border-color:#dae3ed; background:#f2f5f8; cursor:default; }
+.phone-primary { flex:none; background:#176be8; border-color:#176be8; color:#fff; min-height:58px; font-size:23px; box-shadow:0 4px 12px #176be81a; }
+.phone-primary:hover { background:#105dcf; border-color:#105dcf; }
+.phone-primary span { font-size:26px; margin-right:7px; }
+.phone-range-group { padding:3px 0 0; }
+.phone-range-group label { display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:20px; line-height:1.4; }
+.phone-range-group strong { font-size:18px; color:#506e88; font-weight:600; }
+.phone-range { appearance:none; -webkit-appearance:none; width:100%; height:42px; margin:5px 0 0; padding:0; background:transparent; cursor:pointer; touch-action:pan-y; }
+.phone-range::-webkit-slider-runnable-track { height:9px; border-radius:5px; background:#dce8f4; }
+.phone-range::-moz-range-track { height:9px; border-radius:5px; background:#dce8f4; }
+.phone-range::-webkit-slider-thumb { appearance:none; -webkit-appearance:none; width:28px; height:28px; margin-top:-10px; border-radius:50%; background:#176be8; border:4px solid #fff; box-shadow:0 0 0 2px #176be8; }
+.phone-range::-moz-range-thumb { width:22px; height:22px; border-radius:50%; background:#176be8; border:4px solid #fff; box-shadow:0 0 0 2px #176be8; }
+.phone-range-ends { display:flex; justify-content:space-between; font-size:18px; color:#6b8194; line-height:1.3; }
+.phone-pinch[aria-pressed="true"] { background:#fff0dc; color:#8c4e12; border-color:#ee9137; }
+.phone-observation { display:flex; flex-direction:column; gap:5px; padding:14px 16px; border-left:4px solid #ee9137; background:#fff; border-radius:0 7px 7px 0; }
+.phone-observation-label { font-size:18px; color:#647c91; }
+.phone-observation strong { font-size:28px; line-height:1.25; color:#17334e; font-weight:750; }
+.phone-observation > span:last-child { font-size:18px; line-height:1.35; color:#6c8195; }
+.phone-has-compare .phone-observation { display:none; }
+.phone-keep { font-size:19px; }
+.phone-reset { margin-top:auto; background:transparent; border-color:transparent; min-height:48px; font-size:19px; color:#526e86; }
+.phone-compare { background:#fff; border:1px solid #dce7f0; border-radius:9px; padding:12px 14px; }
+.phone-compare p { display:grid; grid-template-columns:auto 1fr; gap:4px 10px; margin:0; padding:0; font-size:18px; line-height:1.3; }
+.phone-compare p + p { border-top:1px solid #e3ebf3; padding-top:10px; margin-top:10px; }
+.phone-compare strong { justify-self:end; font-size:19px; }
+.phone-compare p > span:last-child { grid-column:1/-1; color:#637d92; font-size:18px; }
+.phone-compare-label { color:#176be8; font-weight:700; }
+@media (max-height:780px) and (min-width:900px) {
+  .phone-controls { gap:8px; padding:14px; }
+  .phone-primary { min-height:54px; }
+  .phone-range { height:36px; }
+  .phone-stage-heading { padding-top:16px; }
+  .phone-stage-heading p { margin-top:5px; }
+  .phone-stage-bottom { padding-bottom:12px; }
+  .phone-observation { padding:10px 13px; }
+  .phone-compare { padding:8px 12px; }
+  .phone-compare p + p { padding-top:7px; margin-top:7px; }
+}
+@media (min-width:761px) and (max-width:1100px) {
+  .phone-grid { grid-template-columns:minmax(0,1fr) 265px; gap:12px; }
+  .phone-controls { padding:15px; gap:12px; }
+  .phone-stage-heading { display:block; padding:17px 18px 0; }
+  .phone-stage-heading h2 { font-size:25px; }
+  .phone-model-tag { display:none; }
+  .phone-stage-bottom { padding:0 14px 14px; }
+  .phone-route { gap:7px; font-size:19px; }
+  .phone-route span { padding:4px 8px; }
+  .phone-scope { text-align:left; }
+}
+@media (max-width:760px), (max-width:1000px) and (orientation:portrait) {
+  .phone-panel { height:auto; }
+  .phone-grid { grid-template-columns:1fr; height:auto; gap:12px; }
+  .phone-stage { min-height:390px; }
+  .phone-stage-heading { padding:17px 17px 0; }
+  .phone-stage-heading h2 { font-size:23px; }
+  .phone-stage-heading p { font-size:18px; }
+  .phone-model-tag { display:none; }
+  .phone-scene { min-height:190px; }
+  .phone-stage-bottom { padding:5px 15px 14px; }
+  .phone-route { gap:5px; font-size:18px; }
+  .phone-route span { padding:4px 8px; }
+  .phone-scope { font-size:18px; text-align:left; }
+  .phone-controls { display:grid; grid-template-columns:1fr 1fr; align-items:start; overflow:visible; gap:14px; padding:16px; }
+  .phone-primary { min-height:57px; }
+  .phone-range-group { grid-column:1/-1; grid-row:2; }
+  .phone-pinch { min-height:57px; }
+  .phone-observation { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; align-items:center; }
+  .phone-observation > span:last-child { grid-column:1/-1; }
+  .phone-observation strong { justify-self:end; font-size:25px; }
+  .phone-compare { grid-column:1/-1; grid-row:auto; }
+  .phone-reset { margin-top:0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .phone-route span { transition:none; }
+}
+
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="brand"><svg class="brand-icon" viewBox="0 0 42 42" aria-hidden="true"><path d="M5 16v10M13 9v24M21 3v36M29 9v24M37 16v10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg><div><h1>声音的传播</h1><span class="chapter">四上 · 第三单元 · 第7课</span></div></div>
+  <nav class="nav" role="tablist" aria-label="探究页面"><button role="tab" id="tab-wave" aria-controls="wavePanel" aria-selected="true" data-panel="wave"><span class="num">01</span>振动怎样传递</button><button role="tab" id="tab-path" aria-controls="pathPanel" aria-selected="false" data-panel="path"><span class="num">02</span>声音经过哪里</button><button role="tab" id="tab-phone" aria-controls="phonePanel" aria-selected="false" data-panel="phone"><span class="num">03</span>修好土电话</button></nav>
+  <div class="tools"><button class="tool" id="audioToggle" aria-pressed="false" title="启用合成提示音"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4zM17 8q5 4 0 8"/></svg> <span class="tool-word" id="audioLabel">声音关</span></button><button class="tool" id="fullscreen" aria-label="全屏显示" title="全屏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"/></svg></button></div>
+</header>
+<noscript><p class="nojs">请使用支持 JavaScript 的浏览器打开本文件，才能进行互动探究。</p></noscript>
+<main class="app-main">
+<section class="lesson-panel" id="wavePanel" role="tabpanel" aria-labelledby="tab-wave">
+ <div class="heading"><h2>声音出发后，什么在移动？</h2><p>点声源 · 拖动听音点 · 追踪一颗橙色微粒</p></div>
+ <div class="panel-layout">
+  <div class="canvas-column">
+   <div class="scene-card macro-card"><div class="scene-head"><span>空气中的声场</span><small>三维扩散的一个切面</small></div>
+    <svg id="waveSvg" class="viz" viewBox="0 0 900 370" role="img" aria-label="向四周扩散的声波，可拖动听音点"><defs><pattern id="dotgrid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#dae5ef"/></pattern><radialGradient id="fieldGradient"><stop stop-color="#e9f3ff"/><stop offset="1" stop-color="#fff"/></radialGradient><filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#17334e" flood-opacity=".1"/></filter><marker id="blueArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#6b9cdc"/></marker></defs>
+     <rect width="900" height="370" fill="url(#fieldGradient)"/><rect x="25" y="55" width="850" height="285" fill="url(#dotgrid)" opacity=".48"/>
+     <circle cx="420" cy="195" r="126" fill="none" stroke="#d9e7f5" stroke-dasharray="4 8"/>
+     <g id="waveRings"></g><line id="listenRay" x1="420" y1="195" x2="674" y2="174" stroke="#ee9137" stroke-width="2" stroke-dasharray="6 7" opacity=".6"/>
+     <g id="observers"></g>
+     <g id="sourceButton" class="svg-action" role="button" tabindex="0" aria-label="启动画面中的声源" transform="translate(420 195)"><circle class="hover-stroke" r="45" fill="#fff" stroke="#d5e5f6" stroke-width="2" filter="url(#softShadow)"/><g id="sourceCone"><rect x="-24" y="-15" width="17" height="30" rx="4" fill="#174d88"/><path d="M-8-16L19-31V31L-8 16Z" fill="#2678dc"/><ellipse cx="19" cy="0" rx="7" ry="31" fill="#74b2fc"/><ellipse cx="19" cy="0" rx="3" ry="22" fill="#d2e7ff"/></g><rect x="-41" y="54" width="82" height="34" rx="7" fill="#176be8"/><text x="0" y="77" text-anchor="middle" fill="white" font-size="19" font-weight="700">发声</text></g>
+     <g id="receiver" class="svg-action" role="slider" tabindex="0" aria-label="听音点位置，方向键移动" aria-valuemin="0" aria-valuemax="360" aria-valuenow="0" transform="translate(674 174)"><circle id="receiverHalo" r="37" fill="#fff4e6" stroke="#ee9137" stroke-width="2"/><path d="M-9 7C-25-13-10-29 7-22C25-15 18 3 7 10C1 14 5 24-5 24C-12 24-16 18-14 14M-10-7C-5-19 12-14 9-4C7 3-3-2-3 7" fill="none" stroke="#b86921" stroke-width="4" stroke-linecap="round"/><rect x="-60" y="46" width="120" height="30" rx="5" fill="#fff7eb"/><text x="0" y="67" text-anchor="middle" fill="#a76624" font-size="18">拖动听音点</text></g>
+     <text x="30" y="351" class="svg-caption" font-size="16">圆环表示声波到达的位置</text>
+    </svg>
+   </div>
+   <div class="scene-card micro-card"><div class="scene-head"><span>沿虚线放大</span><small>点击微粒，换一颗追踪</small></div>
+    <svg id="microSvg" class="viz" viewBox="0 0 900 255" role="img" aria-label="空气微粒在原位置附近往复，密疏变化向前传播"><defs><marker id="smallArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="#4b84c6"/></marker></defs><rect x="37" y="70" width="826" height="132" rx="9" fill="#f0f6fd"/><line x1="47" y1="221" x2="853" y2="221" stroke="#9eb9d9" stroke-width="1.5" marker-end="url(#smallArrow)"/><text x="45" y="246" class="svg-caption">声源这一侧</text><text x="853" y="246" text-anchor="end" class="svg-caption">听音点这一侧</text><g id="microParticles"></g><rect id="particleHome" x="430" y="119" width="29" height="30" rx="15" fill="none" stroke="#ee9137" stroke-width="1.6" stroke-dasharray="3 3"/><circle id="trackedParticle" cx="445" cy="134" r="6.7" fill="#ee9137" stroke="white" stroke-width="2"/><text x="860" y="45" text-anchor="end" fill="#a36321" font-size="17">橙色虚框：它原来的位置</text></svg>
+   </div>
+  </div>
+  <aside class="sidebar wave-side">
+   <div class="control-card"><h3>听音点</h3><p class="readout blue" id="waveStatus" role="status">等待声源振动</p><p class="control-note" id="waveQuestion">换一个方向，还能接收到吗？</p><div class="status-line"><span class="status-dot" id="arrivalDot"></span><span id="arrivalText">拖动耳朵改变位置</span></div></div>
+   <div class="control-actions"><button class="button primary wide" id="waveStart">让声源振动</button><div class="button-row"><button class="button" id="wavePause" disabled>暂停</button><button class="button subtle" id="waveReset">复位</button></div></div>
+   <div class="control-card time-card"><label class="control-label" for="waveTime">回看过程 <output id="waveProgress">0%</output></label><input class="slider" id="waveTime" type="range" min="0" max="1000" step="1" value="0" aria-label="传播过程回放进度"><div class="range-ends"><span>开始</span><span>结束</span></div><div class="speed"><button id="speed1" aria-pressed="true">慢放</button><button id="speedHalf" aria-pressed="false">更慢 ×½</button></div></div>
+   <div class="side-bottom"><p class="tiny-note">虚线只是选定的观察方向。声波也会向其他方向传播。</p></div>
+  </aside>
+ </div>
+</section>
+<section class="lesson-panel" id="pathPanel" role="tabpanel" aria-labelledby="tab-path" hidden>
+ <div class="heading"><h2>从声源到耳朵，中间经过了什么？</h2><p>选装置 · 改条件 · 留下模型对照</p></div>
+ <div class="panel-layout">
+  <div class="canvas-column">
+   <div class="scene-options" role="group" aria-label="选择传声装置">
+    <button class="scene-option" data-scene="air" aria-pressed="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 11h14q8 0 5-6M4 17h23M4 23h13q8 0 6 5"/></svg>空气</button>
+    <button class="scene-option" data-scene="wood" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 10h26v7H3zM7 17v12M25 17v12M7 14h18"/></svg>木桌</button>
+    <button class="scene-option" data-scene="water" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6v23h26V6M4 14q4-5 8 0t8 0t8 0M13 3v7q3 5 6 0V3"/></svg>水槽</button>
+    <button class="scene-option" data-scene="jar" aria-pressed="false"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 27V13a11 11 0 0 1 22 0v14M2 29h28M16 3V0"/><circle cx="16" cy="18" r="6"/><path d="M16 14v5l3 1"/></svg>抽气罩</button>
+   </div>
+   <div class="scene-card path-card"><div class="scene-head"><span id="pathSceneLabel">观察空气路径</span><small id="pathSceneHint">点击声源开始</small></div><svg id="pathSvg" class="viz" viewBox="0 0 900 480" role="img" aria-label="选定装置中的振动传递示意"><defs><linearGradient id="waterFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d9efff"/><stop offset="1" stop-color="#93c7f1"/></linearGradient><linearGradient id="woodFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#eabf85"/><stop offset="1" stop-color="#c89458"/></linearGradient><linearGradient id="glassFill"><stop stop-color="#e7f3fb" stop-opacity=".7"/><stop offset=".5" stop-color="#fff" stop-opacity=".15"/><stop offset="1" stop-color="#cce2f4" stop-opacity=".7"/></linearGradient></defs><g id="pathArtwork"></g><g id="pathMotion"></g></svg></div>
+   <div class="path-strip hidden-path" id="pathStrip" aria-label="传播路径"></div>
+   <div class="model-comparison path-comparison" id="pathComparison" hidden><strong>模型对照</strong><div id="savedPathText"></div><div class="compare-current" id="currentPathText"></div></div>
+  </div>
+  <aside class="sidebar path-sidebar">
+   <div class="control-card" id="contactControl" hidden><h3>改变接收方式</h3><button class="contact-button" id="contactToggle">耳朵贴紧桌面</button><p class="control-note" id="contactNote">点这里，切换贴紧与离开。</p></div>
+   <div class="control-card jar-controls" id="jarControl" hidden><label class="control-label" for="airAmount">罩内空气 <output id="airAmountLabel">较多</output></label><input class="slider" id="airAmount" type="range" min="0" max="100" step="1" value="100" aria-label="罩内空气量，示意调节"><div class="range-ends"><span>理想真空</span><span>空气较多</span></div><div class="button-row" style="margin-top:12px"><button class="button" id="pumpButton">抽气</button><button class="button subtle" id="refillButton">放气</button></div><div class="jar-caveat" id="jarCaveat">真实抽气后仍可能有空气残留；底座也可能传振。</div></div>
+   <div class="control-card path-feedback"><h3 id="receiveTitle">接收端的振动</h3><p class="readout blue" id="pathStatus" role="status">还没有发声</p><div class="effect-bars" id="effectBars" aria-label="接收振动强弱，定性示意"><i style="height:10px"></i><i style="height:15px"></i><i style="height:21px"></i><i style="height:26px"></i><i style="height:32px"></i></div><p class="control-note" id="pathPrompt">先想一想：振动能经过空气传到耳边吗？</p></div>
+   <div class="control-card path-actions"><div class="control-actions"><button class="button primary wide" id="pathStart">开始发声</button><div class="button-row"><button class="button" id="pathPause" disabled>暂停</button><button class="button subtle" id="pathReset">复位</button></div><button class="button wide" id="keepPath" disabled>保留这次对照</button><p class="notebook-hint">用模型解释真实实验；声音更清楚，不能据此判断声速。</p></div></div>
+  </aside>
+ </div>
+</section>
+<section id="phonePanel" class="lesson-panel phone-panel" hidden role="tabpanel" aria-labelledby="tab-phone">
+  <div class="phone-grid">
+    <div class="phone-stage">
+      <div class="phone-stage-heading">
+        <div>
+          <h2>让另一只杯子也振动</h2>
+          <p id="phonePrompt">拖动右杯，再试着说一句。</p>
+        </div>
+        <span class="phone-model-tag">棉线长度固定</span>
+      </div>
+      <svg id="phoneScene" class="phone-scene" viewBox="0 0 1120 535" role="group" aria-label="两只纸杯与一根棉线组成的土电话">
+        <defs>
+          <linearGradient id="phoneCupBlue" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" />
+            <stop offset="0.46" stop-color="#eaf4ff" />
+            <stop offset="1" stop-color="#b5d5f2" />
+          </linearGradient>
+          <linearGradient id="phoneCupOrange" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff" />
+            <stop offset="0.46" stop-color="#fff5e8" />
+            <stop offset="1" stop-color="#edcba0" />
+          </linearGradient>
+          <radialGradient id="phoneZoomShade">
+            <stop offset="0" stop-color="#ffffff" />
+            <stop offset="1" stop-color="#eff5fc" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="225" cy="327" rx="96" ry="11" fill="#dbe7f2" opacity=".6" />
+        <ellipse id="phoneReceiverShadow" cx="820" cy="327" rx="96" ry="11" fill="#e7e0d6" opacity=".6" />
+        <path id="phoneStringShadow" d="M285 260 Q510 500 735 260" fill="none" stroke="#cfdeea" stroke-width="12" stroke-linecap="round" />
+        <g id="phoneStringSegments" aria-hidden="true"></g>
+        <g id="phoneSource" class="phone-source" tabindex="0" role="button" aria-label="对左侧纸杯说一句">
+          <rect x="82" y="168" width="232" height="171" rx="28" fill="transparent" />
+          <path d="M153 205 L285 222 L285 298 L153 315 Z" fill="url(#phoneCupBlue)" stroke="#719cbf" stroke-width="3" />
+          <path d="M199 211 L223 214 L223 306 L199 309 Z" fill="#6eb0ec" opacity=".42" />
+          <ellipse cx="153" cy="260" rx="18" ry="55" fill="#d8e9f6" stroke="#719cbf" stroke-width="3" />
+          <ellipse cx="153" cy="260" rx="11" ry="44" fill="#6c8eaa" />
+          <path id="phoneSourceBase" d="M285 222 Q285 260 285 298" fill="none" stroke="#176be8" stroke-width="6" />
+          <path id="phoneSourceAir" d="M182 235 Q199 260 182 285 M205 239 Q219 260 205 281 M230 243 Q239 260 230 277" fill="none" stroke="#176be8" stroke-width="4" stroke-linecap="round" opacity="0" />
+          <text x="216" y="154" text-anchor="middle" fill="#17334e" font-size="29" font-weight="700">对着杯口说话</text>
+          <g fill="none" stroke="#176be8" stroke-width="5" stroke-linecap="round">
+            <path d="M77 247 L87 247 L100 235 L100 282 L87 271 L77 271 Z" fill="#d6eaff" />
+            <path d="M111 248 Q122 260 111 272" />
+          </g>
+        </g>
+        <g id="phoneReceiver" class="phone-receiver" tabindex="0" role="slider" aria-label="拖动右杯调节两杯距离" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" aria-valuetext="线松弛" transform="translate(763 0)">
+          <rect x="-28" y="168" width="228" height="177" rx="26" fill="transparent" />
+          <path d="M0 222 L132 205 L132 315 L0 298 Z" fill="url(#phoneCupOrange)" stroke="#bd976d" stroke-width="3" />
+          <path d="M65 214 L89 211 L89 309 L65 306 Z" fill="#ee9137" opacity=".36" />
+          <ellipse cx="132" cy="260" rx="18" ry="55" fill="#f2dec2" stroke="#bd976d" stroke-width="3" />
+          <ellipse cx="132" cy="260" rx="11" ry="44" fill="#997b5a" />
+          <path id="phoneReceiverBase" d="M0 222 Q0 260 0 298" fill="none" stroke="#ee9137" stroke-width="6" />
+          <path id="phoneReceiverAir" d="M34 243 Q43 260 34 277 M59 239 Q73 260 59 281 M84 235 Q101 260 84 285" fill="none" stroke="#ee9137" stroke-width="4" stroke-linecap="round" opacity="0" />
+          <text x="68" y="154" text-anchor="middle" fill="#17334e" font-size="29" font-weight="700">拖动这只杯子</text>
+          <g transform="translate(176 241)" fill="none" stroke="#7d624a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M0 22 C-10 7 -2 -8 10 -6 C28 -4 28 13 16 23 C10 28 16 36 7 39 C0 41 -4 36 -4 31" />
+            <path d="M4 16 C-1 6 6 1 12 4 C22 8 12 15 9 19" />
+          </g>
+          <path d="M35 347 L20 357 L35 367 M20 357 H112 M97 347 L112 357 L97 367" fill="none" stroke="#ee9137" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+        </g>
+        <g id="phonePinchHand" aria-hidden="true" visibility="hidden">
+          <circle cx="0" cy="0" r="31" fill="#fff1df" stroke="#ee9137" stroke-width="3" />
+          <path d="M-8 17 L-14 -5 C-16 -13 -8 -16 -4 -10 L1 3 L4 -13 C6 -21 15 -18 13 -10 L10 11 C9 22 -3 27 -8 17 Z" fill="#e9b38b" stroke="#b97f59" stroke-width="2.5" stroke-linejoin="round" />
+        </g>
+        <g id="phoneLeftZoom" aria-hidden="true">
+          <path d="M285 302 L253 383" stroke="#aac4dc" stroke-width="2" stroke-dasharray="6 7" />
+          <circle cx="220" cy="435" r="58" fill="url(#phoneZoomShade)" stroke="#b7cee4" stroke-width="2" />
+          <path d="M195 394 L239 394 M195 476 L239 476" fill="none" stroke="#a8c7df" stroke-width="6" stroke-linecap="round" />
+          <path d="M219 394 V476" fill="none" stroke="#b9ccdd" stroke-width="2" stroke-dasharray="5 5" />
+          <path id="phoneLeftMembrane" d="M219 394 Q219 435 219 476" fill="none" stroke="#176be8" stroke-width="6" />
+          <text x="220" y="519" text-anchor="middle" fill="#3c5b73" font-size="26">左杯底放大</text>
+        </g>
+        <g id="phoneRightZoom" aria-hidden="true" transform="translate(763 0)">
+          <path d="M0 302 L37 383" stroke="#d9c3a9" stroke-width="2" stroke-dasharray="6 7" />
+          <circle cx="68" cy="435" r="58" fill="url(#phoneZoomShade)" stroke="#d6c6b1" stroke-width="2" />
+          <path d="M44 394 L88 394 M44 476 L88 476" fill="none" stroke="#d5c0a6" stroke-width="6" stroke-linecap="round" />
+          <path d="M68 394 V476" fill="none" stroke="#d3c6b6" stroke-width="2" stroke-dasharray="5 5" />
+          <path id="phoneRightMembrane" d="M68 394 Q68 435 68 476" fill="none" stroke="#ee9137" stroke-width="6" />
+          <text x="68" y="519" text-anchor="middle" fill="#3c5b73" font-size="26">右杯底放大</text>
+        </g>
+      </svg>
+      <div class="phone-stage-bottom">
+        <div class="phone-route" aria-label="棉线传声路径">
+          <span id="phoneStepSource">左杯底</span><b aria-hidden="true">→</b>
+          <span id="phoneStepString">棉线</span><b aria-hidden="true">→</b>
+          <span id="phoneStepReceiver">右杯底</span>
+        </div>
+        <p class="phone-scope">只追踪棉线路径；现实中也可能直接从空气听见。</p>
+      </div>
+    </div>
+    <aside id="phoneControls" class="phone-controls" aria-label="土电话探究操作">
+      <button id="phoneSpeak" type="button" class="phone-button phone-primary"><span aria-hidden="true">◖</span> 说一句</button>
+      <div class="phone-range-group">
+        <label for="phoneDistance">两杯距离 <strong id="phoneTension">线松弛</strong></label>
+        <input id="phoneDistance" class="phone-range" type="range" min="0" max="100" step="1" value="60" aria-valuetext="线松弛" />
+        <div class="phone-range-ends"><span>近 · 松</span><span>远 · 紧</span></div>
+      </div>
+      <button id="phonePinch" type="button" class="phone-button phone-pinch" aria-pressed="false">捏住棉线</button>
+      <div class="phone-observation" aria-live="polite">
+        <span class="phone-observation-label">右杯底振动</span>
+        <strong id="phoneResult">等你试一试</strong>
+        <span id="phoneResultHint">观察放大的杯底</span>
+      </div>
+      <button id="phoneKeep" type="button" class="phone-button phone-keep" disabled>保留这次作对照</button>
+      <div id="phoneCompare" class="phone-compare" hidden aria-label="前后对照">
+        <p><span class="phone-compare-label">对照 A</span><strong id="phoneSavedResult"></strong><span id="phoneSavedSetting"></span></p>
+        <p><span class="phone-compare-label">现在</span><strong id="phoneCurrentResult">尚未观察</strong><span id="phoneCurrentSetting"></span></p>
+      </div>
+      <button id="phoneReset" type="button" class="phone-button phone-reset">恢复初始</button>
+    </aside>
+  </div>
+</section>
+
+</main>
+<footer class="app-footer"><span class="level">T1 基础交互 · 离线可用</span><span class="model-note">模型放大慢放 · 合成提示音 · 非真实测量</span><button class="footer-link" id="modelInfo">模型说明</button></footer>
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="modal-backdrop" id="infoDialog" role="dialog" aria-modal="true" aria-labelledby="infoTitle" hidden><div class="modal"><h2 id="infoTitle">这个模型怎样帮助观察？</h2><p>先用实物实验获得证据，再用网页追踪看不见的振动传递。网页里的结果由模型规则计算，不能当成新的实测证据。</p><h3>三个观察重点</h3><ul><li>空气中的微粒在原位置附近往复；向远处传播的是振动。为便于追踪，微粒作规则排列，未画出空气微粒原本的随机运动。蓝色圆环表示波传播的阶段，画面是三维扩散的一个切面。</li><li>传声路径页突出所选的一条路径。水槽实验里，音叉不碰槽壁；水面波纹与水中的声波并不是同一种波。</li><li>土电话只追踪杯底和棉线路径。实际实验中，还可能直接从空气听到声音，应轻声说话。</li></ul><h3>放大与简化</h3><p>距离、振幅、微粒数量与时间均为绘图参数，不对应实际尺寸、分贝或声速。不同装置采用便于观察的播放速度，不用来比较传播快慢。强弱示意用于同一装置改变条件前后的观察，不作跨材料的定量比较。路径上的虚圈标示固定观察位置，蓝点表示该处的局部振动。音效是低音量的合成提示音，与真实器材的音色不同。</p><p>抽气罩的滑块表示空气多少，接收强弱是定性示意，不是气压与响度的定量公式。滑到“理想真空”时，仅研究罩内气体路径并忽略支架等其他路径；真实抽气装置通常会残留空气，也可能经支架传振。</p><h3>依据与使用</h3><p>依据所提供的四上教材第76—78页及教师用书本课。机制核对：<a href="https://www.acs.psu.edu/drussell/demos/waves/wavemotion.html" target="_blank" rel="noopener">宾州州立大学：纵波与微粒运动</a>；<a href="https://lecdem.physics.umd.edu/h/h1/853-h1-01.html" target="_blank" rel="noopener">马里兰大学：抽气钟罩</a>；<a href="https://wonders.physics.wisc.edu/build-a-string-telephone/" target="_blank" rel="noopener">威斯康星大学：土电话</a>。本页图形与动画为独立编写，不包含外站图片或代码。</p><p>页面无需联网、摄像头或麦克风。声音需要浏览器支持 Web Audio，并由一次点击启用；不能启用声音时仍可操作全部模型。全屏支持由浏览器决定。</p><div class="close-row"><button class="button primary" id="closeInfo">继续探究</button></div></div></div>
+<script>
+(function () {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+  function byId(id) { return document.getElementById(id); }
+  function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+  function svg(name, attrs, parent) {
+    var el = document.createElementNS(NS, name), k;
+    for (k in attrs) { if (Object.prototype.hasOwnProperty.call(attrs, k)) el.setAttribute(k, attrs[k]); }
+    if (parent) parent.appendChild(el);
+    return el;
+  }
+  var toastTimer;
+  window.LessonToast = function (message) {
+    var box = byId('toast'); box.textContent = message; box.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { box.hidden = true; }, 3500);
+  };
+
+  // Optional synthesized listening cue. There are no microphone or network requests.
+  var audio = { enabled: false, context: null, gain: null, oscillator: null, last: 0 };
+  function silence() { audio.last = 0; if (audio.gain && audio.context) audio.gain.gain.setTargetAtTime(0, audio.context.currentTime, 0.025); }
+  window.LessonAudio = {
+    setLevel: function (value) {
+      audio.last = clamp(Number(value) || 0, 0, 1);
+      if (audio.gain && audio.context) audio.gain.gain.setTargetAtTime(audio.enabled ? audio.last * 0.035 : 0, audio.context.currentTime, 0.035);
+    },
+    stop: silence,
+    isEnabled: function () { return audio.enabled; }
+  };
+  function updateAudioLabel() {
+    byId('audioToggle').setAttribute('aria-pressed', audio.enabled ? 'true' : 'false');
+    byId('audioToggle').setAttribute('title', audio.enabled ? '关闭合成提示音' : '启用低音量合成提示音');
+    byId('audioLabel').textContent = audio.enabled ? '声音开' : '声音关';
+  }
+  function audioError() {
+    audio.enabled = false; updateAudioLabel(); silence();
+    window.LessonToast('暂时无法启用声音；所有视觉探究仍可使用。');
+  }
+  function toggleAudio() {
+    if (audio.enabled) { audio.enabled = false; silence(); updateAudioLabel(); return; }
+    var AudioCtor = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtor) { audioError(); return; }
+    try {
+      if (!audio.context) {
+        audio.context = new AudioCtor();
+        audio.gain = audio.context.createGain(); audio.gain.gain.value = 0;
+        audio.oscillator = audio.context.createOscillator(); audio.oscillator.type = 'sine';
+        audio.oscillator.frequency.value = 440; audio.oscillator.connect(audio.gain);
+        audio.gain.connect(audio.context.destination); audio.oscillator.start();
+      }
+      audio.enabled = true; updateAudioLabel();
+      if (audio.context.state === 'suspended' && audio.context.resume) {
+        var resumed = audio.context.resume(); if (resumed && resumed.catch) resumed.catch(audioError);
+      }
+      window.LessonToast('已启用低音量合成提示音，画面仍按慢放播放。');
+    } catch (e) { audioError(); }
+  }
+
+  // Model: a finite longitudinal wave packet. Units below are display pixels/time only.
+  var DURATION = 2.2, FREQUENCY = 1.35, SPEED = 84, END_TIME = 7.8, AMPLITUDE = 8;
+  function envelope(u) { if (u <= 0 || u >= DURATION) return 0; var s = Math.sin(Math.PI * u / DURATION); return s * s; }
+  function displacement(u) { return AMPLITUDE * Math.sin(2 * Math.PI * FREQUENCY * u) * envelope(u); }
+  var wave = { active: true, running: false, time: 0, rate: 1, rx: 674, ry: 174, col: 16, row: 2, frame: 0, lastStamp: 0, started: false, positionChanged: false };
+  var particles = [], rings = [], observers = [], cols = 33, rows = 5;
+  function distance() { var x = wave.rx - 420, y = wave.ry - 195; return Math.sqrt(x * x + y * y); }
+  function stopWave() {
+    wave.running = false; wave.lastStamp = 0;
+    if (wave.frame) cancelAnimationFrame(wave.frame); wave.frame = 0;
+    byId('wavePause').textContent = wave.time >= END_TIME ? '已结束' : '继续';
+    window.LessonAudio.setLevel(0);
+  }
+  function updateWave() {
+    var t = wave.time, r, i, p, u, shift, d = distance(), delay = d / SPEED, seen = t >= delay, listening = envelope(t - delay), homeX = 55 + wave.col * 24.5, homeY = 90 + wave.row * 23;
+    byId('listenRay').setAttribute('x2', wave.rx); byId('listenRay').setAttribute('y2', wave.ry);
+    byId('receiver').setAttribute('transform', 'translate(' + wave.rx.toFixed(1) + ' ' + wave.ry.toFixed(1) + ')');
+    var degrees = Math.round(((Math.atan2(wave.ry - 195, wave.rx - 420) * 180 / Math.PI) + 360) % 360);
+    byId('receiver').setAttribute('aria-valuenow', degrees);
+    byId('receiver').setAttribute('aria-valuetext', '相对声源方向' + degrees + '度；方向键移动');
+    byId('sourceCone').setAttribute('transform', 'translate(' + (displacement(t) * 0.32).toFixed(2) + ' 0)');
+    for (i = 0; i < rings.length; i++) {
+      r = SPEED * (t - i / FREQUENCY);
+      rings[i].setAttribute('r', Math.max(0, r));
+      rings[i].setAttribute('opacity', r > 20 && r < 520 && t > 0 ? Math.max(0, 0.65 * (1 - r / 590)) : 0);
+    }
+    for (i = 0; i < observers.length; i++) {
+      u = t - 126 / SPEED;
+      observers[i].setAttribute('fill', u >= 0 ? '#3e85df' : '#cbd8e8');
+      observers[i].setAttribute('r', 5.5 + 4 * envelope(u));
+    }
+    for (i = 0; i < particles.length; i++) {
+      p = particles[i]; u = t - (p.col / (cols - 1)) * delay; shift = displacement(u);
+      p.el.setAttribute('cx', (p.x + shift).toFixed(2));
+      p.el.setAttribute('opacity', p.col === wave.col && p.row === wave.row ? 0 : 0.42 + 0.45 * envelope(u));
+    }
+    shift = displacement(t - (wave.col / (cols - 1)) * delay);
+    byId('trackedParticle').setAttribute('cx', (homeX + shift).toFixed(2)); byId('trackedParticle').setAttribute('cy', homeY);
+    byId('particleHome').setAttribute('x', homeX - 15); byId('particleHome').setAttribute('y', homeY - 15);
+    byId('receiverHalo').setAttribute('fill', listening > 0.06 ? '#ffdfb4' : '#fff4e6');
+    byId('receiverHalo').setAttribute('stroke-width', listening > 0.06 ? 3 : 2);
+    var status = !wave.started ? '等待声源振动' : !seen ? '正在向外传播' : t < delay + DURATION ? '接收到振动' : '这次振动已通过';
+    byId('waveStatus').textContent = status;
+    byId('waveQuestion').textContent = !wave.started ? (wave.positionChanged ? '观察路径改变了，重新发声再追踪。' : '换一个方向，还能接收到吗？') : t < delay + DURATION ? '一边看听音点，一边盯住橙色微粒。' : '橙色微粒跟着声波离开原位了吗？';
+    byId('arrivalDot').className = 'status-dot' + (listening > 0.02 ? ' on' : '');
+    byId('arrivalText').textContent = wave.started ? (seen ? '这个方向也接收到了振动' : '振动还没有到达这里') : '拖动耳朵改变位置';
+    byId('waveTime').value = Math.round(t / END_TIME * 1000);
+    byId('waveProgress').textContent = Math.round(t / END_TIME * 100) + '%';
+    byId('wavePause').disabled = !wave.started || t >= END_TIME;
+    byId('wavePause').textContent = !wave.started ? '暂停' : wave.running ? '暂停' : t >= END_TIME ? '已结束' : '继续';
+    if (wave.active) window.LessonAudio.setLevel(wave.running ? listening : 0);
+  }
+  function animateWave(stamp) {
+    if (!wave.running || !wave.active) return;
+    if (!wave.lastStamp) wave.lastStamp = stamp;
+    var dt = Math.min(0.25, (stamp - wave.lastStamp) / 1000); wave.lastStamp = stamp;
+    wave.time = Math.min(END_TIME, wave.time + dt * wave.rate);
+    if (wave.time >= END_TIME) stopWave();
+    updateWave(); if (wave.running) wave.frame = requestAnimationFrame(animateWave);
+  }
+  function startWave() {
+    stopWave(); wave.time = 0; wave.started = true; wave.positionChanged = false; wave.running = true; wave.lastStamp = 0; updateWave();
+    wave.frame = requestAnimationFrame(animateWave);
+  }
+  function toggleWave() {
+    if (wave.running) { stopWave(); updateWave(); }
+    else if (wave.started && wave.time < END_TIME) { wave.running = true; wave.lastStamp = 0; updateWave(); wave.frame = requestAnimationFrame(animateWave); }
+  }
+  function resetWave() {
+    stopWave(); wave.time = 0; wave.started = false; wave.positionChanged = false; wave.rx = 674; wave.ry = 174; wave.col = 16; wave.row = 2; wave.rate = 1;
+    byId('speed1').setAttribute('aria-pressed', 'true'); byId('speedHalf').setAttribute('aria-pressed', 'false'); updateWave();
+  }
+  function svgPoint(svgEl, event) {
+    var touch = event.touches && event.touches[0] ? event.touches[0] : event.changedTouches && event.changedTouches[0] ? event.changedTouches[0] : event;
+    var m = svgEl.getScreenCTM(); if (!m) return null;
+    var pt = svgEl.createSVGPoint(); pt.x = touch.clientX; pt.y = touch.clientY; return pt.matrixTransform(m.inverse());
+  }
+  function setReceiver(x, y) {
+    x = clamp(x, 115, 790); y = clamp(y, 90, 282);
+    var dx = x - 420, dy = y - 195, d = Math.sqrt(dx * dx + dy * dy);
+    if (d < 92) { if (d < 1) { dx = 92; dy = 0; d = 92; } x = 420 + dx * 92 / d; y = 195 + dy * 92 / d; }
+    // Changing the observed ray samples a different region; restart the observation
+    // instead of changing the phase of an allegedly unchanged tracked particle.
+    if (Math.abs(wave.rx - x) + Math.abs(wave.ry - y) > 0.1) {
+      stopWave(); wave.time = 0; wave.started = false; wave.positionChanged = true;
+    }
+    wave.rx = x; wave.ry = y; updateWave();
+  }
+  function initWave() {
+    var i, j, g = byId('microParticles');
+    for (i = 0; i < 3; i++) rings.push(svg('circle', { cx: 420, cy: 195, r: 0, fill: 'none', stroke: '#4c93ec', 'stroke-width': 2.3, opacity: 0 }, byId('waveRings')));
+    var locations = [[420,69],[546,195],[420,321],[294,195]];
+    for (i = 0; i < locations.length; i++) observers.push(svg('circle', { cx: locations[i][0], cy: locations[i][1], r: 5.5, fill: '#cbd8e8', stroke: '#fff', 'stroke-width': 2 }, byId('observers')));
+    for (j = 0; j < rows; j++) for (i = 0; i < cols; i++) {
+      var x = 55 + i * 24.5, y = 90 + j * 23;
+      particles.push({ x: x, y: y, col: i, row: j, el: svg('circle', { cx: x, cy: y, r: 4.3, fill: '#4a8bd9', opacity: 0.5 }, g) });
+    }
+    byId('waveStart').addEventListener('click', startWave);
+    byId('sourceButton').addEventListener('click', startWave);
+    byId('sourceButton').addEventListener('keydown', function(e) { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startWave(); } });
+    byId('wavePause').addEventListener('click', toggleWave); byId('waveReset').addEventListener('click', resetWave);
+    byId('waveTime').addEventListener('input', function () { stopWave(); wave.time = END_TIME * Number(this.value) / 1000; wave.started = wave.time > 0; updateWave(); });
+    function setRate(value) { wave.rate = value; byId('speed1').setAttribute('aria-pressed', value === 1 ? 'true' : 'false'); byId('speedHalf').setAttribute('aria-pressed', value === 0.5 ? 'true' : 'false'); }
+    byId('speed1').addEventListener('click', function () { setRate(1); }); byId('speedHalf').addEventListener('click', function () { setRate(0.5); });
+    var ear = byId('receiver'), dragging = false;
+    function drag(e) { if (!dragging) return; if(e.cancelable) e.preventDefault(); var pt = svgPoint(byId('waveSvg'), e); if (pt) setReceiver(pt.x, pt.y); }
+    function down(e) { dragging = true; if (ear.setPointerCapture && e.pointerId !== undefined) ear.setPointerCapture(e.pointerId); drag(e); }
+    function up() { dragging = false; }
+    if (window.PointerEvent) { ear.addEventListener('pointerdown', down); ear.addEventListener('pointermove', drag); ear.addEventListener('pointerup', up); ear.addEventListener('pointercancel', up); }
+    else { ear.addEventListener('mousedown', down); document.addEventListener('mousemove', drag); document.addEventListener('mouseup', up); ear.addEventListener('touchstart', down, {passive:false}); document.addEventListener('touchmove', drag, {passive:false}); document.addEventListener('touchend', up); }
+    ear.addEventListener('keydown', function (e) { var dx = 0, dy = 0; if (e.key === 'ArrowLeft') dx = -18; if (e.key === 'ArrowRight') dx = 18; if (e.key === 'ArrowUp') dy = -18; if (e.key === 'ArrowDown') dy = 18; if (dx || dy) { e.preventDefault(); setReceiver(wave.rx + dx, wave.ry + dy); } });
+    byId('microSvg').addEventListener('click', function (e) { var p = svgPoint(this, e); if (p && p.y >= 64 && p.y <= 204) { wave.col = clamp(Math.round((p.x - 55) / 24.5), 0, cols - 1); wave.row = clamp(Math.round((p.y - 90) / 23), 0, rows - 1); updateWave(); } });
+    updateWave();
+  }
+  window.WaveLab = {
+    init: initWave,
+    activate: function () { wave.active = true; updateWave(); },
+    pause: function () { stopWave(); wave.active = false; updateWave(); },
+    reset: resetWave,
+    getState: function () { return { time: wave.time, running: wave.running, rate: wave.rate, receiver: { x: wave.rx, y: wave.ry }, tracked: { col: wave.col, row: wave.row }, particleDisplacement: displacement(wave.time - wave.col / (cols - 1) * distance() / SPEED), receiverEnvelope: envelope(wave.time - distance() / SPEED) }; }
+  };
+
+  var current = 'wave', initialized = false, focusBeforeDialog = null;
+  function switchPanel(key) {
+    if (key === current) return;
+    window.WaveLab.pause(); if (window.PathLab) window.PathLab.pause(); if (window.PhoneLab) window.PhoneLab.pause(); silence();
+    current = key;
+    var names = ['wave','path','phone'], i;
+    for (i = 0; i < names.length; i++) {
+      byId(names[i] + 'Panel').hidden = names[i] !== key;
+      byId('tab-' + names[i]).setAttribute('aria-selected', names[i] === key ? 'true' : 'false');
+    }
+    if (key === 'wave') window.WaveLab.activate();
+    if (key === 'path' && window.PathLab) window.PathLab.activate();
+    if (key === 'phone' && window.PhoneLab) window.PhoneLab.activate();
+  }
+  function openInfo() {
+    focusBeforeDialog = document.activeElement;
+    window.WaveLab.pause(); if (window.PathLab) window.PathLab.pause(); if (window.PhoneLab) window.PhoneLab.pause(); silence();
+    byId('infoDialog').hidden = false; byId('closeInfo').focus();
+  }
+  function closeInfo() {
+    byId('infoDialog').hidden = true;
+    if (current === 'wave') window.WaveLab.activate(); if (current === 'path' && window.PathLab) window.PathLab.activate(); if (current === 'phone' && window.PhoneLab) window.PhoneLab.activate();
+    if (focusBeforeDialog && focusBeforeDialog.focus) focusBeforeDialog.focus();
+  }
+  function toggleFullscreen() {
+    var el = document.documentElement, promise;
+    try {
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) promise = document.exitFullscreen(); else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      } else if (el.requestFullscreen) promise = el.requestFullscreen(); else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else window.LessonToast('此浏览器不支持网页全屏，可用横屏或浏览器全屏显示。');
+      if (promise && promise.catch) promise.catch(function () { window.LessonToast('浏览器暂未允许全屏，请尝试横屏显示。'); });
+    } catch (e) { window.LessonToast('当前浏览器未能进入全屏，页面仍可正常操作。'); }
+  }
+  window.LessonApp = {
+    init: function () {
+      if (initialized) return; initialized = true;
+      initWave(); if (window.PathLab) window.PathLab.init(); if (window.PhoneLab) { window.PhoneLab.init(); window.PhoneLab.pause(); }
+      var tabs = document.querySelectorAll('[data-panel]'), i;
+      for (i = 0; i < tabs.length; i++) tabs[i].addEventListener('click', function () { switchPanel(this.getAttribute('data-panel')); });
+      byId('audioToggle').addEventListener('click', toggleAudio); byId('fullscreen').addEventListener('click', toggleFullscreen);
+      byId('modelInfo').addEventListener('click', openInfo); byId('closeInfo').addEventListener('click', closeInfo);
+      byId('infoDialog').addEventListener('click', function (e) { if(e.target === this) closeInfo(); });
+      document.addEventListener('keydown', function (e) {
+        if (byId('infoDialog').hidden) return;
+        if (e.key === 'Escape') { e.preventDefault(); closeInfo(); return; }
+        if (e.key === 'Tab') { var items = byId('infoDialog').querySelectorAll('a,button'), first = items[0], last = items[items.length - 1]; if(e.shiftKey && document.activeElement === first){e.preventDefault();last.focus();}else if(!e.shiftKey && document.activeElement === last){e.preventDefault();first.focus();} }
+      });
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) { window.WaveLab.pause(); if (window.PathLab) window.PathLab.pause(); if (window.PhoneLab) window.PhoneLab.pause(); silence(); }
+        else if (byId('infoDialog').hidden) { if(current === 'wave') window.WaveLab.activate(); if(current === 'path' && window.PathLab) window.PathLab.activate(); if(current === 'phone' && window.PhoneLab) window.PhoneLab.activate(); }
+      });
+    },
+    getState: function () { return { panel: current, soundEnabled: audio.enabled, wave: window.WaveLab.getState(), path: window.PathLab && window.PathLab.getState ? window.PathLab.getState() : null }; }
+  };
+}());
+
+</script>
+<script>
+/* PathLab: selected sound paths. All times, distances and amplitudes are
+ * drawing parameters; these scenes do not measure or compare sound speeds.
+ * Asset replacement entry points: drawAir / drawWood / drawWater / drawJar.
+ */
+(function (root) {
+  'use strict';
+
+  var DURATION = 6.5;
+  var TRANSIT = 2.35;
+  var PULSE = 3.4;
+  var NODE_COUNT = 24;
+  var BLUE = '#2879d8';
+  var INK = '#17334e';
+  var MUTED = '#657d94';
+  var ORANGE = '#e7973f';
+  var state = {
+    scene: 'air', contact: true, airAmount: 100,
+    elapsed: 0, started: false, running: false, completed: false,
+    active: false, pumping: false, saved: null
+  };
+  var initialized = false;
+  var el = {};
+  var sceneButtons = [];
+  var barElements = [];
+  var chipElements = [];
+  var anchors = [];
+  var nodeElements = [];
+  var fields = [];
+  var sceneData = null;
+  var moving = {};
+  var frameId = 0;
+  var lastStamp = null;
+  var lastParticleCount = -1;
+  var lastAudio = -1;
+  var raf = root.requestAnimationFrame || function (callback) {
+    return root.setTimeout(function () { callback(Date.now()); }, 16);
+  };
+  var caf = root.cancelAnimationFrame || root.clearTimeout;
+
+  function clamp(value, low, high) { return Math.max(low, Math.min(high, value)); }
+  function byId(id) { return document.getElementById(id); }
+  function setText(element, text) {
+    if (element && element.textContent !== text) element.textContent = text;
+  }
+  function attr(element, name, value) {
+    if (element) element.setAttribute(name, String(value));
+  }
+  function num(value) { return (Math.round(value * 100) / 100).toString(); }
+  function notify(message) {
+    if (typeof root.LessonToast === 'function') root.LessonToast(message);
+  }
+  function audio(level) {
+    level = state.active && state.running ? clamp(level, 0, 1) : 0;
+    if (Math.abs(level - lastAudio) < 0.002) return;
+    lastAudio = level;
+    if (root.LessonAudio && typeof root.LessonAudio.setLevel === 'function') {
+      root.LessonAudio.setLevel(level);
+    }
+  }
+  function text(x, y, content, size, color, anchor, weight) {
+    return '<text x="' + x + '" y="' + y + '" font-size="' + (size || 24) +
+      '" fill="' + (color || INK) + '" text-anchor="' + (anchor || 'middle') +
+      '" font-weight="' + (weight || 600) + '">' + content + '</text>';
+  }
+  function caption(content) {
+    return text(450, 450, content, 22, MUTED, 'middle', 400);
+  }
+  function svgLine(points) {
+    var output = [];
+    var i;
+    for (i = 0; i < points.length; i++) output.push(points[i][0] + ',' + points[i][1]);
+    return output.join(' ');
+  }
+  function sourceAction(content, hitbox, label) {
+    return '<g class="svg-action" role="button" tabindex="0" data-path-action="source" aria-label="' +
+      label + '"><title>' + label + '</title><rect x="' + hitbox[0] + '" y="' + hitbox[1] +
+      '" width="' + hitbox[2] + '" height="' + hitbox[3] + '" rx="18" fill="transparent"/>' +
+      content + '</g>';
+  }
+  function ear(x, y, rotation, scale) {
+    return '<g id="pathReceiverVibrator"><g transform="translate(' + x + ' ' + y + ') rotate(' +
+      (rotation || 0) + ') scale(' + (scale || 1) + ')">' +
+      '<path d="M11-52C-25-67-51-38-42-9C-38 13-22 25-17 45C-12 64 16 66 28 49C39 34 29 24 42 3C61-29 44-54 11-52Z" fill="#fbe3cc" stroke="#b57d52" stroke-width="3.2"/>' +
+      '<path d="M-24-19C-23-43 12-45 25-28C36-14 27 0 15 9C3 19 13 31 4 39C-3 45-11 36-13 28M-17-10C-8-25 14-23 16-9C18 4 2 4-4 11M-13 12C-2 6 6 16 1 24" fill="none" stroke="#bb835b" stroke-width="3.1" stroke-linecap="round"/>' +
+      '<circle cx="-9" cy="14" r="6" fill="#a36540"/>' +
+      '</g></g>';
+  }
+  function fork(upright) {
+    if (upright) {
+      return '<rect x="169" y="238" width="17" height="95" rx="6" fill="#7590a8" stroke="#496580" stroke-width="2"/>' +
+        '<path d="M151 211Q151 243 178 243Q205 243 205 211" fill="none" stroke="#91a8b9" stroke-width="16"/>' +
+        '<g id="pathProngLeft"><path d="M151 124V217" stroke="#62809a" stroke-width="17" stroke-linecap="round"/><path d="M148 124V215" stroke="#d8e6ed" stroke-width="5" stroke-linecap="round"/></g>' +
+        '<g id="pathProngRight"><path d="M205 124V217" stroke="#62809a" stroke-width="17" stroke-linecap="round"/><path d="M202 124V215" stroke="#d8e6ed" stroke-width="5" stroke-linecap="round"/></g>' +
+        '<rect x="166" y="287" width="23" height="56" rx="6" fill="#cc9b60" stroke="#997449" stroke-width="2"/>';
+    }
+    return '<rect x="230" y="95" width="16" height="61" rx="6" fill="#7991a5" stroke="#4f6d85" stroke-width="2"/>' +
+      '<path d="M207 184Q207 151 237 151Q267 151 267 184" fill="none" stroke="#8ba3b8" stroke-width="16"/>' +
+      '<g id="pathProngLeft"><path d="M207 176V286" stroke="#597c99" stroke-width="17" stroke-linecap="round"/><path d="M204 180V284" stroke="#d8e6ed" stroke-width="5" stroke-linecap="round"/></g>' +
+      '<g id="pathProngRight"><path d="M267 176V286" stroke="#597c99" stroke-width="17" stroke-linecap="round"/><path d="M264 180V284" stroke="#d8e6ed" stroke-width="5" stroke-linecap="round"/></g>' +
+      '<rect x="225" y="82" width="25" height="44" rx="6" fill="#cc9b60" stroke="#997449" stroke-width="2"/>';
+  }
+  function fieldMarkup(kind) {
+    var output = '<g id="pathParticleField" aria-hidden="true">';
+    var row, col, x, y, index;
+    fields = [];
+    for (row = 0; row < 5; row++) {
+      for (col = 0; col < (kind === 'air' ? 12 : 9); col++) {
+        if (kind === 'air') {
+          x = 290 + col * 34 + ((row % 2) ? 10 : 0);
+          y = 145 + row * 39 + ((col % 3) - 1) * 4;
+        } else if (kind === 'water') {
+          x = 299 + col * 34;
+          y = 246 + row * 22;
+        } else {
+          x = 214 + col * 33 + ((row % 2) ? 8 : 0);
+          y = 150 + row * 42;
+          if (Math.pow((x - 350) / 94, 2) + Math.pow((y - 280) / 100, 2) < 1) continue;
+          if (y < 190 && (x < 235 || x > 475)) continue;
+        }
+        index = fields.length;
+        fields.push({ x: x, y: y, index: index, element: null, visible: true });
+        output += '<circle id="pathField' + index + '" cx="' + x + '" cy="' + y +
+          '" r="3.4" fill="' + (kind === 'water' ? '#70acd8' : '#97b5d4') + '" opacity=".65"/>';
+      }
+    }
+    return output + '</g>';
+  }
+
+  function drawAir() {
+    var art = '<ellipse cx="178" cy="363" rx="75" ry="11" fill="#e9eff5"/>' +
+      '<rect x="255" y="116" width="447" height="231" rx="24" fill="#f3f8ff"/>' +
+      fieldMarkup('air') + text(478, 101, '空气', 28, '#6288ae') +
+      sourceAction(fork(true), [106, 102, 142, 263], '点击音叉，开始发声') +
+      ear(784, 236, 0, 1.08) + text(178, 390, '音叉', 26) +
+      text(784, 337, '耳朵', 26) + caption('蓝点在原处附近往复 · 振动向远处传递');
+    return {
+      art: art, points: [[216, 235], [748, 235]],
+      labels: ['音叉', '空气', '耳朵'], chipFractions: [0, 0.18, 1],
+      source: [178, 225], receiver: [775, 246]
+    };
+  }
+
+  function drawWood() {
+    fields = [];
+    var tabletop = '<ellipse cx="466" cy="419" rx="305" ry="19" fill="#e7edf2"/>' +
+      '<path d="M226 322L259 324L250 415L228 415Z" fill="#ac7641" stroke="#8f653e" stroke-width="2"/>' +
+      '<path d="M725 300L754 297L764 406L742 410Z" fill="#ac7641" stroke="#8f653e" stroke-width="2"/>' +
+      '<path d="M163 296L188 298L174 389L154 388Z" fill="#bf8c56"/>' +
+      '<path d="M132 273L677 247L799 275L245 312Z" fill="url(#woodFill)" stroke="#b3804b" stroke-width="2.5"/>' +
+      '<path d="M132 273L245 312L799 275V309L245 346L132 307Z" fill="#c49157" stroke="#a47444" stroke-width="2.5"/>' +
+      '<path d="M245 314V345M143 287L245 326L790 291" fill="none" stroke="#a57445" stroke-width="2"/>' +
+      '<path d="M307 277Q393 265 468 271T643 263M285 292Q391 279 529 283T735 275M171 272Q227 281 274 281M357 299L645 281" fill="none" stroke="#bc874a" stroke-width="2" opacity=".55"/>';
+    var hand = '<g id="pathSourceVibrator">' +
+      '<path d="M82 151L153 187Q169 195 176 212L190 232L211 254Q219 261 212 269Q206 276 196 266L178 252L190 273Q195 282 187 286Q179 289 173 279L155 257L163 278Q165 287 156 288Q148 288 144 278L131 252Q117 247 108 232L89 212L61 196Z" fill="#f5d6ba" stroke="#b8845e" stroke-width="2.8" stroke-linejoin="round"/>' +
+      '<path d="M87 181L137 208M138 226L159 242M155 214L175 237" fill="none" stroke="#d4a584" stroke-width="2.5" stroke-linecap="round"/>' +
+      '<path d="M57 144L88 156L72 203L44 191Z" fill="#8bb6e4" stroke="#668cba" stroke-width="2"/>' +
+      '<path d="M207 271l16-2m-11 7 17-1" fill="none" stroke="#a3632d" stroke-width="2.5"/>' +
+      '</g>';
+    var earX = state.contact ? 748 : 766;
+    var earY = state.contact ? 211 : 148;
+    var art = tabletop +
+      sourceAction(hand, [45, 135, 196, 169], '点击手指，轻轻抓挠木桌') +
+      ear(earX, earY, state.contact ? -18 : 0, 1) +
+      text(139, 111, '轻轻抓挠', 26) +
+      text(713, state.contact ? 112 : 77, state.contact ? '耳贴桌面' : '耳离桌面', 25) +
+      text(481, 378, '木桌', 26, '#986432') +
+      (state.contact ? '' : '<path d="M230 290L727 278" stroke="#98a8b5" stroke-width="2" stroke-dasharray="6 8" fill="none"/>') +
+      caption(state.contact ? '当前追踪桌内路径 · 手指轻抓，不用重敲' : '当前追踪空气路径 · 木桌中的振动仍存在');
+    return {
+      art: art,
+      points: state.contact ? [[214, 282], [477, 287], [736, 271]] : [[215, 270], [330, 176], [538, 142], [731, 148]],
+      labels: state.contact ? ['抓挠处', '木桌', '耳朵'] : ['抓挠处', '空气', '耳朵'],
+      chipFractions: [0, 0.18, 1], source: [209, 271], receiver: [earX - 9, earY + 14]
+    };
+  }
+
+  function drawWater() {
+    var tank = '<ellipse cx="398" cy="390" rx="286" ry="13" fill="#e7edf2"/>' +
+      '<path d="M141 177L620 177L646 192V367L166 367L141 351Z" fill="url(#glassFill)" stroke="#86a7c2" stroke-width="3"/>' +
+      '<path d="M151 231H620L635 241V356H164L151 345Z" fill="url(#waterFill)" opacity=".8"/>' +
+      '<path d="M151 231H620L635 241" fill="none" stroke="#81b9e1" stroke-width="2.5"/>' +
+      fieldMarkup('water') +
+      '<path d="M141 177L166 192H646M166 192V367M620 177V351L646 367M141 177V351L620 351" fill="none" stroke="#89a9c1" stroke-width="3.5"/>' +
+      '<path d="M180 206V345M604 202V341" stroke="#fff" stroke-width="4" opacity=".8"/>' +
+      '<rect x="627" y="194" width="12" height="164" rx="3" fill="#bcd8e9" fill-opacity=".8"/>';
+    var earX = state.contact ? 685 : 770;
+    var earY = state.contact ? 277 : 157;
+    var art = tank + sourceAction(fork(false), [174, 76, 128, 243], '点击音叉，观察浸水音叉传声') +
+      ear(earX, earY, 0, 1) +
+      text(339, 111, '音叉不碰槽壁', 24, MUTED, 'start', 500) +
+      text(447, 331, '水', 28, '#3177a4') +
+      text(420, 404, '玻璃槽壁', 24, '#6286a3') +
+      text(state.contact ? 755 : 757, state.contact ? 197 : 83, state.contact ? '耳贴槽壁' : '耳离槽壁', 25) +
+      (state.contact ? '' : '<path d="M278 286H626" stroke="#80aac6" stroke-width="2" stroke-dasharray="6 8" fill="none"/>') +
+      caption(state.contact ? '选定水与槽壁路径 · 耳朵还可能收到空气传来的声音' : '音叉露出部分也经空气传声 · 水中的路径仍存在');
+    return {
+      art: art,
+      points: state.contact ? [[274, 277], [435, 277], [630, 277], [655, 287]] : [[276, 185], [410, 148], [584, 139], [731, 157]],
+      labels: state.contact ? ['音叉', '水', '玻璃', '耳朵'] : ['音叉露出部分', '空气', '耳朵'],
+      chipFractions: state.contact ? [0, 0.15, 0.86, 1] : [0, 0.2, 1],
+      source: state.contact ? [267, 270] : [267, 184], receiver: [earX - 9, earY + 14]
+    };
+  }
+
+  function drawJar() {
+    var shell = '<ellipse cx="364" cy="391" rx="231" ry="14" fill="#e5edf4"/>' +
+      '<path d="M178 365V238C178 140 239 82 357 82C474 82 545 142 545 238V365Z" fill="url(#glassFill)" stroke="#92b0c8" stroke-width="4"/>' +
+      '<ellipse cx="357" cy="78" rx="19" ry="10" fill="#dcebf4" stroke="#93b0c7" stroke-width="3"/>' +
+      '<path d="M198 323V234C198 158 241 111 288 105" fill="none" stroke="#fff" stroke-width="7" opacity=".9"/>' +
+      fieldMarkup('jar') +
+      '<path d="M150 367H574V385H150Z" fill="#8d9dab" stroke="#667a8e" stroke-width="2"/>' +
+      '<rect x="165" y="360" width="393" height="9" rx="4" fill="#4c6477"/>' +
+      '<path d="M563 379H590V409H659V369" fill="none" stroke="#6c7f91" stroke-width="12" stroke-linejoin="round"/>' +
+      '<path d="M563 376H590V405H659V369" fill="none" stroke="#a9b9c9" stroke-width="4" stroke-linejoin="round"/>' +
+      '<rect x="631" y="301" width="57" height="80" rx="9" fill="#efbd79" stroke="#b58244" stroke-width="2.5"/>' +
+      '<ellipse cx="659" cy="303" rx="28" ry="9" fill="#f9dba6" stroke="#b58244" stroke-width="2"/>' +
+      '<g id="pathPumpHandle"><path d="M659 299V269" stroke="#71849a" stroke-width="10"/><rect x="624" y="258" width="70" height="13" rx="6" fill="#526d88"/></g>' +
+      '<path d="M633 382H686" stroke="#8c6540" stroke-width="8" stroke-linecap="round"/>';
+    var clock = '<path d="M311 335L299 355M387 335L399 355" stroke="#9c6f38" stroke-width="10" stroke-linecap="round"/>' +
+      '<circle cx="350" cy="277" r="72" fill="#e5b871" stroke="#a47a40" stroke-width="4"/>' +
+      '<circle cx="350" cy="277" r="58" fill="#fffdf6" stroke="#b78a4e" stroke-width="3"/>' +
+      '<path d="M350 226v8m0 86v8M299 277h8m86 0h8M314 241l6 6m60 60 6 6m0-72-6 6m-60 60-6 6" stroke="#a29c8d" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M350 277L350 244M350 277L376 289" stroke="#53687b" stroke-width="5" stroke-linecap="round"/>' +
+      '<circle cx="350" cy="277" r="6" fill="#53687b"/>' +
+      '<g id="pathBellLeft"><path d="M280 224L316 202L310 188Q282 186 270 213Z" fill="#e3ad58" stroke="#aa7635" stroke-width="3"/><path d="M279 225L316 203" stroke="#8c652f" stroke-width="5" stroke-linecap="round"/></g>' +
+      '<g id="pathBellRight"><path d="M383 203L420 225L430 214Q419 187 391 188Z" fill="#e3ad58" stroke="#aa7635" stroke-width="3"/><path d="M383 203L420 225" stroke="#8c652f" stroke-width="5" stroke-linecap="round"/></g>' +
+      '<g id="pathSourceVibrator"><path d="M350 208V186" stroke="#7d776c" stroke-width="4"/><ellipse cx="350" cy="183" rx="9" ry="4" fill="#7d776c"/></g>';
+    var art = shell + sourceAction(clock, [258, 172, 183, 186], '点击闹钟，开始持续发声') +
+      ear(784, 192, 0, 1.05) +
+      '<g id="pathJarVacuum" display="none">' +
+      '<rect x="237" y="113" width="239" height="39" rx="9" fill="#fff7e9"/>' +
+      text(357, 140, '理想真空', 24, '#a36d2c') + '</g>' +
+      '<g id="pathJarAirLabel">' + text(357, 133, '罩内空气', 24, '#6187a9') + '</g>' +
+      text(785, 294, '罩外耳朵', 24) + text(659, 442, '抽气泵', 22, MUTED) +
+      text(350, 428, '同时观察闹钟与罩外接收端', 23, '#9b6b2d');
+    return {
+      art: art, points: [[408, 199], [482, 190], [535, 193], [621, 192], [745, 192]],
+      labels: ['闹钟', '罩内气体', '玻璃罩', '罩外空气', '耳朵'],
+      chipFractions: [0, 0.13, 0.38, 0.66, 1], source: [350, 190], receiver: [775, 206]
+    };
+  }
+
+  function sampleRoute(points, fraction) {
+    var i, dx, dy, total = 0, cumulative = 0, segment = [];
+    for (i = 1; i < points.length; i++) {
+      dx = points[i][0] - points[i - 1][0];
+      dy = points[i][1] - points[i - 1][1];
+      segment.push(Math.sqrt(dx * dx + dy * dy));
+      total += segment[segment.length - 1];
+    }
+    var distance = fraction * total;
+    for (i = 0; i < segment.length; i++) {
+      if (distance <= cumulative + segment[i] || i === segment.length - 1) {
+        var ratio = clamp((distance - cumulative) / segment[i], 0, 1);
+        dx = points[i + 1][0] - points[i][0];
+        dy = points[i + 1][1] - points[i][1];
+        return {
+          x: points[i][0] + ratio * dx, y: points[i][1] + ratio * dy,
+          tx: dx / segment[i], ty: dy / segment[i], fraction: fraction
+        };
+      }
+      cumulative += segment[i];
+    }
+    return { x: points[0][0], y: points[0][1], tx: 1, ty: 0, fraction: 0 };
+  }
+  function renderScene() {
+    var makers = { air: drawAir, wood: drawWood, water: drawWater, jar: drawJar };
+    var i, point;
+    sceneData = makers[state.scene]();
+    el.pathArtwork.innerHTML = sceneData.art;
+    var route = svgLine(sceneData.points);
+    var motion = '<polyline points="' + route + '" fill="none" stroke="#6ba2db" stroke-opacity=".12" stroke-width="18" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<polyline points="' + route + '" fill="none" stroke="#86a5c4" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="4 9" stroke-linejoin="round"/>';
+    anchors = [];
+    nodeElements = [];
+    for (i = 0; i < NODE_COUNT; i++) {
+      point = sampleRoute(sceneData.points, (i + 0.5) / NODE_COUNT);
+      anchors.push(point);
+      motion += '<circle cx="' + num(point.x) + '" cy="' + num(point.y) + '" r="5" fill="none" stroke="#abc0d5" stroke-width="1" opacity=".65"/>' +
+        '<circle id="pathNode' + i + '" cx="' + num(point.x) + '" cy="' + num(point.y) + '" r="3.7" fill="#b4c7d9"/>';
+    }
+    motion += '<circle id="pathSourceGlow" cx="' + sceneData.source[0] + '" cy="' + sceneData.source[1] + '" r="30" fill="none" stroke="' + ORANGE + '" stroke-width="3" opacity="0"/>' +
+      '<circle id="pathReceiverGlow" cx="' + sceneData.receiver[0] + '" cy="' + sceneData.receiver[1] + '" r="40" fill="none" stroke="' + BLUE + '" stroke-width="3" opacity="0"/>';
+    if (state.scene === 'jar') {
+      motion += '<g id="pathGasBreak" opacity="0"><circle cx="490" cy="191" r="16" fill="#fff7ef" stroke="#ce8b4c" stroke-width="2"/>' +
+        '<path d="M483 184L497 198M497 184L483 198" stroke="#b97c43" stroke-width="3" stroke-linecap="round"/></g>';
+    }
+    el.pathMotion.innerHTML = motion;
+    for (i = 0; i < NODE_COUNT; i++) nodeElements.push(byId('pathNode' + i));
+    for (i = 0; i < fields.length; i++) fields[i].element = byId('pathField' + i);
+    moving = {
+      source: byId('pathSourceVibrator'), left: byId('pathProngLeft'), right: byId('pathProngRight'),
+      bellLeft: byId('pathBellLeft'), bellRight: byId('pathBellRight'),
+      ear: byId('pathReceiverVibrator'), sourceGlow: byId('pathSourceGlow'), receiverGlow: byId('pathReceiverGlow'),
+      pump: byId('pathPumpHandle'), vacuum: byId('pathJarVacuum'), airLabel: byId('pathJarAirLabel'), gasBreak: byId('pathGasBreak')
+    };
+    var chips = '';
+    for (i = 0; i < sceneData.labels.length; i++) {
+      if (i) chips += '<span class="path-arrow" aria-hidden="true">→</span>';
+      chips += '<span class="path-chip">' + sceneData.labels[i] + '</span>';
+    }
+    el.pathStrip.innerHTML = chips;
+    chipElements = el.pathStrip.querySelectorAll('.path-chip');
+    lastParticleCount = -1;
+    updateControls();
+    renderFrame();
+  }
+
+  function sourceEnvelope(time) {
+    if (!state.started || time < 0) return 0;
+    if (state.scene === 'jar') return 1;
+    if (time > PULSE) return 0;
+    return Math.sin(Math.PI * time / PULSE);
+  }
+  function transferLevel() {
+    if (state.scene === 'jar') {
+      // Deliberately qualitative: this coefficient is not a pressure/loudness law.
+      if (state.airAmount === 0) return 0;
+      return 0.08 + 0.72 * Math.pow(state.airAmount / 100, 0.7);
+    }
+    if (state.scene === 'wood') return state.contact ? 0.85 : 0.32;
+    if (state.scene === 'water') return state.contact ? 0.76 : 0.36;
+    return 0.68;
+  }
+  function gasBlocked() { return state.scene === 'jar' && state.airAmount === 0; }
+  function levelDescription(value) {
+    if (value <= 0) return '气体路径不传声';
+    if (value < 0.24) return '接收振动很弱';
+    if (value < 0.5) return '接收振动较弱';
+    return '接收振动较明显';
+  }
+  function airDescription() {
+    if (state.airAmount === 0) return '理想真空';
+    if (state.airAmount <= 15) return '很少，仍有残留';
+    if (state.airAmount <= 40) return '较少';
+    if (state.airAmount <= 75) return '逐渐减少';
+    return '较多';
+  }
+  function conditionLabel(snapshot) {
+    var s = snapshot || state;
+    if (s.scene === 'air') return '空气路径';
+    if (s.scene === 'wood') return '木桌 · ' + (s.contact ? '耳贴桌面' : '耳离桌面');
+    if (s.scene === 'water') return '水槽 · ' + (s.contact ? '耳贴槽壁' : '耳离槽壁');
+    if (s.airAmount === 0) return '钟罩 · 理想真空';
+    if (s.airAmount <= 15) return '钟罩 · 少量残余空气';
+    if (s.airAmount <= 40) return '钟罩 · 空气较少';
+    if (s.airAmount <= 75) return '钟罩 · 空气减少';
+    return '钟罩 · 空气较多';
+  }
+  function canKeep() {
+    return state.started && (state.elapsed >= TRANSIT + 0.05 || (gasBlocked() && state.elapsed > 0.25));
+  }
+  function updateComparison() {
+    el.pathComparison.hidden = !state.saved;
+    if (!state.saved) return;
+    setText(el.savedPathText, conditionLabel(state.saved) + '：' + state.saved.result);
+    var label = canKeep() ? levelDescription(transferLevel()) : '待发声比较';
+    setText(el.currentPathText, '当前：' + conditionLabel() + '，' + label);
+  }
+  function updateControls() {
+    var names = { air: '空气', wood: '木桌', water: '水槽', jar: '抽气罩' };
+    var hints = { air: '点击音叉开始', wood: '轻抓桌面，不用重敲', water: '音叉浸水，不碰槽壁', jar: '拖动滑块，同时看声源与耳朵' };
+    var i;
+    setText(el.pathSceneLabel, names[state.scene] + ' · 选定路径');
+    setText(el.pathSceneHint, hints[state.scene]);
+    for (i = 0; i < sceneButtons.length; i++) {
+      attr(sceneButtons[i], 'aria-pressed', sceneButtons[i].getAttribute('data-scene') === state.scene ? 'true' : 'false');
+    }
+    el.contactControl.hidden = state.scene !== 'wood' && state.scene !== 'water';
+    el.jarControl.hidden = state.scene !== 'jar';
+    attr(el.contactToggle, 'aria-pressed', state.contact ? 'true' : 'false');
+    setText(el.contactToggle, state.contact ? '当前贴紧 · 改为离开' : '当前离开 · 改为贴紧');
+    setText(el.contactNote, state.scene === 'wood' ? '比较耳朵贴桌与离桌时的路径。' : '贴壁与离壁，各突出一条路径。');
+    el.airAmount.value = String(Math.round(state.airAmount));
+    setText(el.airAmountLabel, airDescription());
+    attr(el.airAmount, 'aria-valuetext', airDescription() + '，示意量，不是气压百分比');
+    setText(el.jarCaveat, state.airAmount === 0 ? '理想真空：只比较气体路径，忽略支架等传振。' : '空气量是示意；真实装置可能残留空气，底座也可能传振。');
+    setText(el.receiveTitle, state.scene === 'jar' ? '接收端 · 气体路径' : '接收端 · 定性模型');
+    setText(el.pumpButton, state.pumping ? '停止抽气' : '抽气');
+    el.pumpButton.disabled = !state.pumping && state.airAmount <= 5;
+    setText(el.refillButton, '放入空气');
+    setText(el.pathStart, !state.started ? '开始发声' : state.scene === 'jar' ? '重新开始' : '再发声一次');
+    el.pathPause.disabled = !state.started || state.completed;
+    setText(el.pathPause, !state.started ? '暂停' : state.completed ? '已结束' : state.running ? '暂停' : '继续');
+    el.keepPath.disabled = !canKeep();
+    setText(el.keepPath, state.saved ? '更新对照' : '保留对照');
+    el.pathStrip.className = 'path-strip' + (state.started ? '' : ' hidden-path');
+    updateComparison();
+  }
+
+  function renderFrame() {
+    if (!sceneData) return;
+    var time = state.elapsed;
+    var source = sourceEnvelope(time);
+    var receiver = sourceEnvelope(time - TRANSIT) * transferLevel();
+    var phase = Math.sin(time * Math.PI * 6);
+    var sourceShift = source * phase * 3.2;
+    var i, anchor, env, displacement, nodeGain, shiftX, shiftY;
+    attr(moving.source, 'transform', 'translate(' + num(sourceShift) + ' 0)');
+    attr(moving.left, 'transform', 'translate(' + num(-sourceShift) + ' 0)');
+    attr(moving.right, 'transform', 'translate(' + num(sourceShift) + ' 0)');
+    attr(moving.bellLeft, 'transform', 'rotate(' + num(sourceShift * 1.3) + ' 293 208)');
+    attr(moving.bellRight, 'transform', 'rotate(' + num(-sourceShift * 1.3) + ' 408 208)');
+    // The halo indicates reception; the whole external ear does not shake.
+    attr(moving.ear, 'transform', 'translate(0 0)');
+    attr(moving.sourceGlow, 'opacity', num(source * 0.58));
+    attr(moving.sourceGlow, 'r', num(28 + source * 6));
+    attr(moving.receiverGlow, 'opacity', num(receiver * 0.9));
+    attr(moving.receiverGlow, 'r', num(36 + receiver * 6));
+    attr(moving.pump, 'transform', 'translate(0 ' + (state.pumping ? num(9 + 9 * Math.sin(time * 5.5)) : '0') + ')');
+    for (i = 0; i < anchors.length; i++) {
+      anchor = anchors[i];
+      env = sourceEnvelope(time - TRANSIT * anchor.fraction);
+      nodeGain = state.scene === 'jar' ? transferLevel() : 0.95 - anchor.fraction * 0.25;
+      displacement = 4.5 * env * nodeGain * Math.sin((time - TRANSIT * anchor.fraction) * Math.PI * 6);
+      shiftX = anchor.tx * displacement;
+      shiftY = anchor.ty * displacement;
+      attr(nodeElements[i], 'cx', num(anchor.x + shiftX));
+      attr(nodeElements[i], 'cy', num(anchor.y + shiftY));
+      attr(nodeElements[i], 'fill', env * nodeGain > 0.03 ? BLUE : '#b4c7d9');
+      attr(nodeElements[i], 'opacity', gasBlocked() ? 0.24 : 1);
+    }
+    var count = fields.length;
+    if (state.scene === 'jar') count = state.airAmount === 0 ? 0 : Math.max(2, Math.round(fields.length * state.airAmount / 100));
+    for (i = 0; i < fields.length; i++) {
+      var field = fields[i];
+      // Reproducible interleaving removes particles across the whole jar.
+      var rank = (i * 13) % fields.length;
+      var visible = state.scene !== 'jar' || rank < count;
+      if (count !== lastParticleCount) {
+        attr(field.element, 'display', visible ? 'inline' : 'none');
+        field.visible = visible;
+      }
+      if (!visible) continue;
+      var delay = clamp((field.x - (state.scene === 'jar' ? 350 : 240)) / 470, 0, 1) * TRANSIT;
+      var localEnv = sourceEnvelope(time - delay);
+      attr(field.element, 'cx', num(field.x + 2.6 * localEnv * Math.sin((time - delay) * Math.PI * 6)));
+    }
+    lastParticleCount = count;
+    if (state.scene === 'jar') {
+      attr(moving.vacuum, 'display', gasBlocked() ? 'inline' : 'none');
+      attr(moving.airLabel, 'display', gasBlocked() ? 'none' : 'inline');
+      attr(moving.gasBreak, 'opacity', gasBlocked() && state.started ? 1 : 0);
+    }
+    for (i = 0; i < chipElements.length; i++) {
+      var reached = state.started && time >= sceneData.chipFractions[i] * TRANSIT;
+      if (gasBlocked() && i > 0) reached = false;
+      chipElements[i].className = 'path-chip' + (reached ? ' reached' : '');
+    }
+    var lit = receiver > 0.01 ? Math.max(1, Math.round(receiver * 5)) : 0;
+    for (i = 0; i < barElements.length; i++) barElements[i].className = i < lit ? 'lit' : '';
+    var status, prompt;
+    if (!state.started) {
+      status = '还没有发声';
+      if (state.scene === 'air') prompt = '振动会经过什么，才到达耳边？';
+      else if (state.scene === 'wood') prompt = '先轻抓桌面，再比较两种接收方式。';
+      else if (state.scene === 'water') prompt = '音叉不碰槽壁，振动怎样传到耳边？';
+      else prompt = '启动闹钟，边抽气边观察。';
+    } else if (gasBlocked()) {
+      status = '气体路径不传声';
+      prompt = '声源仍振动；这里只比较气体路径。';
+    } else if (!state.running && !state.completed) {
+      status = '暂停观察';
+      prompt = '蓝点仍在原处附近；点“继续”接着看。';
+    } else if (time < TRANSIT) {
+      status = '还未传到耳边';
+      prompt = '看路径依次点亮，接收端稍后响应。';
+    } else if (state.scene !== 'jar' && time > PULSE + TRANSIT) {
+      status = '这轮传播已结束';
+      prompt = '可以重复发声，或保留当前模型对照。';
+    } else {
+      status = levelDescription(transferLevel());
+      if (state.scene === 'jar') prompt = '空气减少时，声源的振动没有减弱。';
+      else if (state.scene === 'wood') prompt = state.contact ? '当前突出木桌路径；空气路径也存在。' : '离开桌面后，仍可能从空气听到。';
+      else if (state.scene === 'water') prompt = state.contact ? '当前突出水与槽壁路径；还有空气路径。' : '当前突出露出水面的音叉经空气传声。';
+      else prompt = '各处微粒往复，传播的是振动。';
+    }
+    setText(el.pathStatus, status);
+    setText(el.pathPrompt, prompt);
+    attr(el.effectBars, 'aria-label', '接收端振动强弱为定性示意，' + status);
+    el.keepPath.disabled = !canKeep();
+    updateComparison();
+    audio(receiver * 0.62);
+  }
+
+  function cancelFrame() {
+    if (frameId) caf.call(root, frameId);
+    frameId = 0;
+    lastStamp = null;
+  }
+  function schedule() {
+    if (!frameId && state.active && (state.running || state.pumping)) frameId = raf.call(root, tick);
+  }
+  function tick(stamp) {
+    frameId = 0;
+    if (!state.active || (!state.running && !state.pumping)) { lastStamp = null; audio(0); return; }
+    var delta = lastStamp === null ? 0 : clamp((stamp - lastStamp) / 1000, 0, 0.25);
+    lastStamp = stamp;
+    if (state.running) state.elapsed += delta;
+    if (state.pumping) {
+      state.airAmount = Math.max(5, state.airAmount - delta * 13);
+      if (state.airAmount <= 5) {
+        state.pumping = false;
+        notify('抽气示意保留少量空气；理想真空可用滑块选择。');
+      }
+      updateControls();
+    }
+    if (state.scene !== 'jar' && state.elapsed >= DURATION) {
+      state.elapsed = DURATION;
+      state.running = false;
+      state.completed = true;
+      updateControls();
+    }
+    renderFrame();
+    schedule();
+  }
+  function start() {
+    if (!initialized) init();
+    cancelFrame();
+    state.active = true;
+    state.elapsed = 0;
+    state.started = true;
+    state.running = true;
+    state.completed = false;
+    updateControls();
+    renderFrame();
+    schedule();
+  }
+  function pausePlayback(leave) {
+    state.running = false;
+    state.pumping = false;
+    if (leave) state.active = false;
+    cancelFrame();
+    audio(0);
+    if (initialized) { updateControls(); renderFrame(); }
+  }
+  function togglePlayback() {
+    if (state.running || state.pumping) {
+      pausePlayback(false);
+    } else if (state.started && !state.completed) {
+      state.active = true;
+      state.running = true;
+      updateControls();
+      schedule();
+    }
+  }
+  function resetCurrent(restoreControls, clearSaved) {
+    cancelFrame();
+    state.elapsed = 0;
+    state.started = false;
+    state.running = false;
+    state.completed = false;
+    state.pumping = false;
+    if (restoreControls) { state.contact = true; state.airAmount = 100; }
+    if (clearSaved) state.saved = null;
+    audio(0);
+    if (initialized) renderScene();
+  }
+  function chooseScene(name) {
+    if (!/^(air|wood|water|jar)$/.test(name)) return;
+    state.scene = name;
+    resetCurrent(true, false);
+  }
+  function keep() {
+    if (!canKeep()) { notify('等这次传播到达接收端，再保留对照。'); return; }
+    state.saved = {
+      scene: state.scene, contact: state.contact,
+      airAmount: state.airAmount, result: levelDescription(transferLevel())
+    };
+    updateControls();
+    notify('已保留模型条件；改变条件，再比较。');
+  }
+  function setAir(value, stopPump) {
+    state.airAmount = clamp(Number(value) || 0, 0, 100);
+    if (stopPump) state.pumping = false;
+    updateControls();
+    renderFrame();
+    if (!state.running && !state.pumping) cancelFrame();
+  }
+  function togglePump() {
+    if (state.pumping) {
+      state.pumping = false;
+      updateControls();
+      return;
+    }
+    if (state.airAmount <= 5) return;
+    state.pumping = true;
+    if (!state.running) start();
+    else { updateControls(); schedule(); }
+  }
+  function sourceTarget(target) {
+    while (target && target !== el.pathSvg) {
+      if (target.getAttribute && target.getAttribute('data-path-action') === 'source') return true;
+      target = target.parentNode;
+    }
+    return false;
+  }
+
+  function init() {
+    if (initialized) return;
+    var ids = ['pathPanel', 'pathSvg', 'pathArtwork', 'pathMotion', 'pathStrip', 'pathSceneLabel', 'pathSceneHint',
+      'contactControl', 'contactToggle', 'contactNote', 'jarControl', 'airAmount', 'airAmountLabel',
+      'pumpButton', 'refillButton', 'jarCaveat', 'receiveTitle', 'pathStatus', 'effectBars', 'pathPrompt',
+      'pathStart', 'pathPause', 'pathReset', 'keepPath', 'pathComparison', 'savedPathText', 'currentPathText'];
+    var i;
+    for (i = 0; i < ids.length; i++) {
+      el[ids[i]] = byId(ids[i]);
+      if (!el[ids[i]]) throw new Error('PathLab missing element: ' + ids[i]);
+    }
+    initialized = true;
+    attr(el.pathSvg, 'role', 'group');
+    el.pathMotion.style.pointerEvents = 'none';
+    sceneButtons = el.pathPanel.querySelectorAll('[data-scene]');
+    barElements = el.effectBars.querySelectorAll('i');
+    for (i = 0; i < sceneButtons.length; i++) {
+      sceneButtons[i].addEventListener('click', function () { chooseScene(this.getAttribute('data-scene')); });
+    }
+    el.pathStart.addEventListener('click', start);
+    el.pathPause.addEventListener('click', togglePlayback);
+    el.pathReset.addEventListener('click', function () { resetCurrent(true, true); });
+    el.keepPath.addEventListener('click', keep);
+    el.contactToggle.addEventListener('click', function () {
+      state.contact = !state.contact;
+      resetCurrent(false, false);
+    });
+    el.airAmount.addEventListener('input', function () { setAir(this.value, true); });
+    el.airAmount.addEventListener('change', function () { setAir(this.value, true); });
+    el.pumpButton.addEventListener('click', togglePump);
+    el.refillButton.addEventListener('click', function () { setAir(100, true); });
+    el.pathSvg.addEventListener('click', function (event) {
+      if (sourceTarget(event.target)) start();
+    });
+    el.pathSvg.addEventListener('keydown', function (event) {
+      if (sourceTarget(event.target) && (event.key === 'Enter' || event.key === ' ' || event.keyCode === 13 || event.keyCode === 32)) {
+        event.preventDefault();
+        start();
+      }
+    });
+    renderScene();
+  }
+  function activate() {
+    if (!initialized) init();
+    state.active = true;
+    // Returning to this page does not resume a paused experiment.
+    updateControls();
+    renderFrame();
+  }
+  function pause() { pausePlayback(true); }
+  function reset() {
+    if (!initialized) init();
+    resetCurrent(true, true);
+  }
+  function getState() {
+    var snapshot = {
+      scene: state.scene, contact: state.contact, airAmount: state.airAmount,
+      elapsed: state.elapsed, started: state.started, running: state.running,
+      completed: state.completed, active: state.active, pumping: state.pumping,
+      gasPathEnabled: !gasBlocked(), sourceEnvelope: sourceEnvelope(state.elapsed),
+      receiverEnvelope: sourceEnvelope(state.elapsed - TRANSIT) * transferLevel(),
+      transferLevel: transferLevel(), canKeep: canKeep(),
+      saved: state.saved ? {
+        scene: state.saved.scene, contact: state.saved.contact,
+        airAmount: state.saved.airAmount, result: state.saved.result
+      } : null,
+      displayDuration: DURATION, displayTransit: TRANSIT,
+      fixedNodeAnchors: []
+    };
+    for (var i = 0; i < anchors.length; i++) {
+      snapshot.fixedNodeAnchors.push({ x: anchors[i].x, y: anchors[i].y });
+    }
+    return snapshot;
+  }
+
+  root.PathLab = { init: init, activate: activate, pause: pause, reset: reset, getState: getState };
+}(window));
+
+/* Replaceable asset/model module: paper-cup telephone. No network dependency. */
+(function (window, document) {
+  'use strict';
+  var NS = 'http://www.w3.org/2000/svg';
+  var LEFT = 285, Y = 260, LINE_LENGTH = 570, MIN_DISTANCE = 340;
+  var SIGNAL_START = 0.1, TRANSIT_DELAY = 1.9, PACKET_LENGTH = 1.25;
+  var DURATION = SIGNAL_START + TRANSIT_DELAY + PACKET_LENGTH + 0.2, PIECES = 24;
+  var state = { distance:60, pinched:false, active:false, playing:false, time:0, tested:false, saved:null, dragging:false };
+  var dom = {}, segments = [], frameId = 0, lastTime = 0, initialized = false, lastPhase = '', dragOffset = 0;
+  var requestFrame = window.requestAnimationFrame || function (fn) { return window.setTimeout(function () { fn(Date.now()); }, 16); };
+  var cancelFrame = window.cancelAnimationFrame || window.clearTimeout;
+
+  function byId(id) { return document.getElementById(id); }
+  function clamp(v, low, high) { return Math.max(low, Math.min(high, v)); }
+  function setAudio(level) {
+    if (window.LessonAudio && typeof window.LessonAudio.setLevel === 'function') {
+      window.LessonAudio.setLevel(level);
+    }
+  }
+  function gap() { return MIN_DISTANCE + (LINE_LENGTH - MIN_DISTANCE) * state.distance / 100; }
+  function tensionLabel(amount) { return amount >= 98 ? '线已拉紧' : (amount >= 78 ? '线较紧' : '线松弛'); }
+  function gain(amount, pinched) {
+    /* Qualitative visual interpolation only, not a measured attenuation law or quantitative distance rule. */
+    return (0.18 + 0.82 * Math.pow(amount / 100, 3.2)) * (pinched ? 0.22 : 1);
+  }
+  function effect(amount, pinched) {
+    var level = gain(amount, pinched);
+    return level > 0.7 ? '明显' : (level > 0.32 ? '较弱' : '很弱');
+  }
+  function settings(amount, pinched) { return tensionLabel(amount) + ' · ' + (pinched ? '捏住棉线' : '未捏棉线'); }
+  function envelope(localTime) {
+    if (localTime <= 0 || localTime >= PACKET_LENGTH) { return 0; }
+    return Math.pow(Math.sin(Math.PI * localTime / PACKET_LENGTH), 2);
+  }
+  function localStrength(u) {
+    var strength = 1 - (1 - gain(state.distance, false)) * u;
+    if (state.pinched) {
+      /* A short damped contact region; smoothly connect both sides of the pinched point. */
+      var contact = clamp((u - 0.44) / 0.06, 0, 1);
+      contact = contact * contact * (3 - 2 * contact);
+      strength *= 1 - 0.78 * contact;
+    }
+    return strength;
+  }
+  function localSignal(u, time) {
+    var age = time - SIGNAL_START - TRANSIT_DELAY * u;
+    return envelope(age) * Math.sin(age * 29) * localStrength(u);
+  }
+  function sagForDistance(distance) {
+    /* A parabolic hanging string. Solve its sampled arc length, keeping total length fixed. */
+    if (distance >= LINE_LENGTH - 0.01) { return 0; }
+    var low = 0, high = LINE_LENGTH / 2, h, length, px, py, x, y, i, n;
+    for (n = 0; n < 19; n += 1) {
+      h = (low + high) / 2; length = 0; px = 0; py = 0;
+      for (i = 1; i <= 48; i += 1) {
+        x = distance * i / 48;
+        y = 4 * h * (i / 48) * (1 - i / 48);
+        length += Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
+        px = x; py = y;
+      }
+      if (length > LINE_LENGTH) { high = h; } else { low = h; }
+    }
+    return (low + high) / 2;
+  }
+  var geometryCache = { distance:-1, gap:0, sag:0 };
+  function geometry() {
+    if (geometryCache.distance !== state.distance) {
+      geometryCache.distance = state.distance;
+      geometryCache.gap = gap();
+      geometryCache.sag = sagForDistance(geometryCache.gap);
+    }
+    return geometryCache;
+  }
+  function wirePoint(u, time, geom, quiet) {
+    var x = LEFT + geom.gap * u;
+    var y = Y + 4 * geom.sag * u * (1 - u);
+    if (!quiet) {
+      var move = localSignal(u, time) * 4.5;
+      var tangentY = 4 * geom.sag * (1 - 2 * u);
+      var tangentLength = Math.sqrt(geom.gap * geom.gap + tangentY * tangentY);
+      /* Each section oscillates locally. At the attached ends, motion follows the cup bottom normal. */
+      var blend = Math.sin(Math.PI * u);
+      var directionX = 1 - blend + blend * geom.gap / tangentLength;
+      var directionY = blend * tangentY / tangentLength;
+      var directionLength = Math.sqrt(directionX * directionX + directionY * directionY);
+      x += move * directionX / directionLength;
+      y += move * directionY / directionLength;
+    }
+    return { x:x, y:y };
+  }
+  function curveSegment(from, to, time, geom, quiet, count) {
+    var value = '', i, p, samples = count || 4;
+    for (i = 0; i <= samples; i += 1) {
+      p = wirePoint(from + (to - from) * i / samples, time, geom, quiet);
+      value += (i ? ' L' : 'M') + p.x.toFixed(2) + ' ' + p.y.toFixed(2);
+    }
+    return value;
+  }
+  function membranePath(x, top, bottom, displacement) {
+    /* The explicit middle vertex is also the string attachment; both use the same displacement. */
+    var middle = (top + bottom) / 2, centerX = (x + displacement).toFixed(2);
+    return 'M' + x + ' ' + top + ' Q' + centerX + ' ' + ((top + middle) / 2) + ' ' + centerX + ' ' + middle +
+      ' Q' + centerX + ' ' + ((middle + bottom) / 2) + ' ' + x + ' ' + bottom;
+  }
+  function phaseText(phase) {
+    if (phase === 'source') { return '先看：左杯底怎样振动？'; }
+    if (phase === 'string') { return '接着看：棉线各处的振动。'; }
+    if (phase === 'receiver') { return '再看：另一只杯底振动了吗？'; }
+    if (phase === 'done') { return '改变一个条件，再作一次对照。'; }
+    return '拖动右杯，再试着说一句。';
+  }
+  function draw() {
+    if (!initialized) { return; }
+    var geom = geometry(), right = LEFT + geom.gap, t = state.time;
+    var sourceEnv = envelope(t - SIGNAL_START), receiverEnv = envelope(t - SIGNAL_START - TRANSIT_DELAY);
+    var receivingGain = gain(state.distance, state.pinched);
+    var sourcePoint = wirePoint(0, t, geom, false), receiverPoint = wirePoint(1, t, geom, false);
+    var sourceMove = sourcePoint.x - LEFT, receiverMove = receiverPoint.x - right;
+    var mid = wirePoint(0.5, t, geom, false), i, env, strength;
+    dom.receiver.setAttribute('transform', 'translate(' + right.toFixed(1) + ' 0)');
+    dom.rightZoom.setAttribute('transform', 'translate(' + right.toFixed(1) + ' 0)');
+    dom.receiverShadow.setAttribute('cx', (right + 65).toFixed(1));
+    dom.stringShadow.setAttribute('d', curveSegment(0, 1, t, geom, false, PIECES * 4));
+    for (i = 0; i < PIECES; i += 1) {
+      env = envelope(t - SIGNAL_START - TRANSIT_DELAY * (i + 0.5) / PIECES);
+      strength = localStrength((i + 0.5) / PIECES);
+      segments[i].setAttribute('d', curveSegment(i / PIECES, (i + 1) / PIECES, t, geom, false));
+      segments[i].setAttribute('stroke', env * strength > 0.08 ? '#ee9137' : '#67849c');
+      segments[i].setAttribute('stroke-width', (5 + 3.5 * env * strength).toFixed(1));
+    }
+    dom.pinchHand.setAttribute('visibility', state.pinched ? 'visible' : 'hidden');
+    dom.pinchHand.setAttribute('transform', 'translate(' + mid.x.toFixed(1) + ' ' + mid.y.toFixed(1) + ')');
+    dom.sourceBase.setAttribute('d', membranePath(LEFT, 222, 298, sourceMove));
+    dom.receiverBase.setAttribute('d', membranePath(0, 222, 298, receiverMove));
+    dom.leftMembrane.setAttribute('d', membranePath(219, 394, 476, sourceMove * 6.4));
+    dom.rightMembrane.setAttribute('d', membranePath(68, 394, 476, receiverMove * 6.4));
+    dom.sourceAir.setAttribute('opacity', (sourceEnv * 0.8).toFixed(2));
+    dom.receiverAir.setAttribute('opacity', (receiverEnv * receivingGain * 0.9).toFixed(2));
+    dom.stepSource.setAttribute('class', sourceEnv > 0.01 ? 'phone-active' : '');
+    dom.stepString.setAttribute('class', t > SIGNAL_START && t < SIGNAL_START + TRANSIT_DELAY + PACKET_LENGTH ? 'phone-active' : '');
+    dom.stepReceiver.setAttribute('class', receiverEnv > 0.01 ? 'phone-arrived' : '');
+    var phase = !t ? '' : (t < 0.65 ? 'source' : (t < SIGNAL_START + TRANSIT_DELAY ? 'string' : (t < SIGNAL_START + TRANSIT_DELAY + PACKET_LENGTH ? 'receiver' : 'done')));
+    if (phase !== lastPhase) { dom.prompt.textContent = phaseText(phase); lastPhase = phase; }
+    if (state.playing) { setAudio(receiverEnv * receivingGain); }
+  }
+  function updateUI() {
+    var label = tensionLabel(state.distance);
+    dom.distance.value = state.distance;
+    dom.distance.setAttribute('aria-valuetext', label);
+    dom.tension.textContent = label;
+    dom.receiver.setAttribute('aria-valuenow', state.distance);
+    dom.receiver.setAttribute('aria-valuetext', label);
+    dom.pinch.setAttribute('aria-pressed', state.pinched ? 'true' : 'false');
+    dom.pinch.textContent = state.pinched ? '松开棉线' : '捏住棉线';
+    dom.speak.textContent = state.playing ? 'Ⅱ 暂停观察' : (state.time > 0 && !state.tested ? '▷ 继续观察' : (state.tested ? '◖ 再说一句' : '◖ 说一句'));
+    dom.keep.disabled = !state.tested;
+    dom.keep.textContent = state.saved ? '替换对照 A' : '保留这次作对照';
+    dom.result.textContent = state.tested ? effect(state.distance, state.pinched) : (state.playing ? '正在观察…' : (state.time ? '已暂停' : '等你试一试'));
+    dom.resultHint.textContent = state.tested ? '仅作定性比较' : '观察放大的杯底';
+    dom.compare.hidden = !state.saved;
+    dom.controls.setAttribute('class', state.saved ? 'phone-controls phone-has-compare' : 'phone-controls');
+    if (state.saved) {
+      dom.savedResult.textContent = state.saved.effect;
+      dom.savedSetting.textContent = settings(state.saved.distance, state.saved.pinched);
+      dom.currentResult.textContent = state.tested ? effect(state.distance, state.pinched) : '尚未观察';
+      dom.currentSetting.textContent = settings(state.distance, state.pinched);
+    }
+  }
+  function stopFrame() {
+    if (frameId) { cancelFrame.call(window, frameId); frameId = 0; }
+    lastTime = 0;
+    setAudio(0);
+  }
+  function tick(now) {
+    frameId = 0;
+    if (!state.playing || !state.active) { stopFrame(); return; }
+    if (lastTime) { state.time += Math.min((now - lastTime) / 1000, 0.25); }
+    lastTime = now;
+    if (state.time >= DURATION) {
+      state.time = DURATION; state.playing = false; state.tested = true;
+      stopFrame(); draw(); updateUI(); return;
+    }
+    draw();
+    frameId = requestFrame.call(window, tick);
+  }
+  function speak() {
+    if (!state.active) { return; }
+    if (state.playing) { pause(false); return; }
+    if (state.tested || state.time >= DURATION) { state.time = 0; }
+    state.tested = false; state.playing = true; lastTime = 0;
+    updateUI(); draw();
+    frameId = requestFrame.call(window, tick);
+  }
+  function changed() {
+    state.playing = false; state.time = 0; state.tested = false; lastPhase = '';
+    stopFrame(); updateUI(); draw();
+    dom.prompt.textContent = '条件变了，再说一句作比较。';
+  }
+  function changeDistance(value) {
+    var next = clamp(Math.round(Number(value)), 0, 100);
+    if (!isFinite(next)) { return; }
+    if (next !== state.distance) { state.distance = next; changed(); }
+  }
+  function pointerX(event) {
+    var touch = event.touches && event.touches.length ? event.touches[0] : event;
+    var point = dom.scene.createSVGPoint();
+    point.x = touch.clientX; point.y = touch.clientY;
+    var matrix = dom.scene.getScreenCTM();
+    if (!matrix) { return LEFT + gap(); }
+    return point.matrixTransform(matrix.inverse()).x;
+  }
+  function down(event) {
+    if (!state.active || (typeof event.button === 'number' && event.button !== 0)) { return; }
+    event.preventDefault(); state.dragging = true;
+    dragOffset = pointerX(event) - (LEFT + gap());
+    dom.receiver.setAttribute('class', 'phone-receiver phone-dragging');
+    if (dom.receiver.setPointerCapture && event.pointerId !== undefined) {
+      try { dom.receiver.setPointerCapture(event.pointerId); } catch (ignore) {}
+    }
+  }
+  function move(event) {
+    if (!state.dragging) { return; }
+    if (event.cancelable) { event.preventDefault(); }
+    changeDistance((pointerX(event) - dragOffset - LEFT - MIN_DISTANCE) / (LINE_LENGTH - MIN_DISTANCE) * 100);
+  }
+  function up() {
+    if (!state.dragging) { return; }
+    state.dragging = false; dom.receiver.setAttribute('class', 'phone-receiver');
+  }
+  function pause(leave) {
+    if (!initialized) { return; }
+    if (leave !== false) { state.active = false; }
+    state.playing = false; up(); stopFrame(); updateUI();
+  }
+  function reset() {
+    if (!initialized) { init(); }
+    stopFrame();
+    state.distance = 60; state.pinched = false; state.playing = false; state.time = 0; state.tested = false; state.saved = null; lastPhase = ''; up();
+    updateUI(); draw(); dom.prompt.textContent = phaseText('');
+  }
+  function activate() {
+    if (!initialized) { init(); }
+    state.active = true; updateUI(); draw();
+  }
+  function init() {
+    if (initialized) { return; }
+    var names = {
+      scene:'phoneScene', source:'phoneSource', receiver:'phoneReceiver', rightZoom:'phoneRightZoom',
+      receiverShadow:'phoneReceiverShadow', stringShadow:'phoneStringShadow', pinchHand:'phonePinchHand',
+      sourceBase:'phoneSourceBase', receiverBase:'phoneReceiverBase', sourceAir:'phoneSourceAir', receiverAir:'phoneReceiverAir',
+      leftMembrane:'phoneLeftMembrane', rightMembrane:'phoneRightMembrane', stepSource:'phoneStepSource',
+      stepString:'phoneStepString', stepReceiver:'phoneStepReceiver', prompt:'phonePrompt', speak:'phoneSpeak',
+      distance:'phoneDistance', tension:'phoneTension', pinch:'phonePinch', result:'phoneResult', resultHint:'phoneResultHint',
+      keep:'phoneKeep', compare:'phoneCompare', savedResult:'phoneSavedResult', savedSetting:'phoneSavedSetting',
+      currentResult:'phoneCurrentResult', currentSetting:'phoneCurrentSetting', reset:'phoneReset', controls:'phoneControls'
+    }, key, i, segment;
+    for (key in names) { if (Object.prototype.hasOwnProperty.call(names, key)) { dom[key] = byId(names[key]); } }
+    if (!dom.scene) { return; }
+    for (i = 0; i < PIECES; i += 1) {
+      segment = document.createElementNS(NS, 'path');
+      segment.setAttribute('fill', 'none'); segment.setAttribute('stroke-linecap', 'round');
+      byId('phoneStringSegments').appendChild(segment); segments.push(segment);
+    }
+    initialized = true;
+    dom.speak.addEventListener('click', speak);
+    dom.source.addEventListener('click', speak);
+    dom.source.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); speak(); }
+    });
+    dom.distance.addEventListener('input', function () { changeDistance(dom.distance.value); });
+    dom.distance.addEventListener('change', function () { changeDistance(dom.distance.value); });
+    dom.receiver.addEventListener('keydown', function (event) {
+      var value = state.distance;
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') { value -= 5; }
+      else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') { value += 5; }
+      else if (event.key === 'Home') { value = 0; }
+      else if (event.key === 'End') { value = 100; }
+      else { return; }
+      event.preventDefault(); changeDistance(value);
+    });
+    dom.pinch.addEventListener('click', function () { state.pinched = !state.pinched; changed(); });
+    dom.keep.addEventListener('click', function () {
+      if (!state.tested) { return; }
+      state.saved = { distance:state.distance, pinched:state.pinched, effect:effect(state.distance, state.pinched) };
+      updateUI();
+    });
+    dom.reset.addEventListener('click', reset);
+    if (window.PointerEvent) {
+      dom.receiver.addEventListener('pointerdown', down);
+      window.addEventListener('pointermove', move, { passive:false });
+      window.addEventListener('pointerup', up); window.addEventListener('pointercancel', up);
+    } else {
+      dom.receiver.addEventListener('mousedown', down); window.addEventListener('mousemove', move); window.addEventListener('mouseup', up);
+      dom.receiver.addEventListener('touchstart', down, { passive:false });
+      window.addEventListener('touchmove', move, { passive:false }); window.addEventListener('touchend', up); window.addEventListener('touchcancel', up);
+    }
+    document.addEventListener('visibilitychange', function () { if (document.hidden && state.active) { pause(false); } });
+    updateUI(); draw();
+  }
+  window.PhoneLab = { init:init, activate:activate, pause:pause, reset:reset };
+}(window, document));
+
+</script>
+<script>window.LessonApp.init();</script>
+</body>
+</html>
