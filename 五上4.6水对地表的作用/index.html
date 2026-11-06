@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f1f5ed">
+<meta name="description" content="五上4.6水对地表的作用：透视坡面，追踪土粒，回看侵蚀与沉积；沿河俯视与剖面联动，保留同进度对照。单文件离线互动。">
+<title>水对地表的作用 · 五上4.6</title>
+<style>
+:root{--ink:#183b3b;--muted:#5e7370;--teal:#087e82;--teal-dark:#06575d;--teal-soft:#d9efec;--paper:#f7f8f2;--line:#d6e0d7;--sand:#d6ac70;--orange:#d26f42;--blue:#3e8caa;--violet:#7964a5;--white:#fffefa;--shadow:0 14px 38px #284a3b0a}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Microsoft YaHei","PingFang SC",sans-serif}body{overflow:hidden}button,input,a{-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{color:inherit;cursor:pointer;touch-action:manipulation}button{border:1px solid transparent;background:none}button:disabled{opacity:.42;cursor:default}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #c8782f;outline-offset:4px}button svg{vertical-align:middle;flex-shrink:0}svg{display:block}button svg{display:inline-block}button[hidden],[hidden]{display:none!important}button:active:not(:disabled){transform:translateY(1px)}.app{height:100%;height:100dvh;display:flex;flex-direction:column;padding:0 28px 23px;max-width:2100px;margin:auto}.topbar{display:flex;align-items:center;gap:24px;min-height:91px;flex-shrink:0}.identity{display:flex;align-items:center;gap:13px;min-width:280px}.brand-icon{width:49px;height:49px;background:var(--teal);border-radius:15px;color:#fff;display:grid;place-items:center}.chapter{font-size:12px;font-weight:750;letter-spacing:1.5px;color:var(--muted);margin-bottom:3px}.identity h1{font-size:25px;line-height:1.2;letter-spacing:.5px;margin:0;font-weight:780}.tabs{margin-left:auto;display:flex;padding:5px;gap:3px;border:1px solid var(--line);border-radius:14px;background:#e8eee5}.tab{min-height:45px;padding:10px 22px;font-size:17px;font-weight:700;border-radius:10px;color:#607370;white-space:nowrap}.tab[aria-selected=true]{background:#fffefa;box-shadow:0 2px 8px #1c443117;color:var(--teal-dark)}.tab .num{font-size:12px;margin-right:7px;opacity:.65}.tools{display:flex;gap:7px}.iconbtn{width:43px;height:43px;border:1px solid var(--line);border-radius:12px;display:grid;place-items:center;background:#fffefa;color:var(--muted)}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:20px}.stage-card{min-height:0;min-width:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:#fffefa;box-shadow:var(--shadow)}.stage-head{padding:19px 24px 12px;display:flex;align-items:flex-start;gap:12px;justify-content:space-between;flex-shrink:0}.stage-head h2{margin:0 0 7px;font-size:24px;font-weight:760;letter-spacing:.4px}.subtitle{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.view-tools{display:flex;gap:6px;align-items:center;white-space:nowrap;padding-top:2px}.chip{font-size:13px;font-weight:650;border:1px solid var(--line);padding:7px 10px;border-radius:8px;min-height:35px;background:#fffefa}.chip[aria-pressed=true]{color:var(--teal-dark);background:#e3f0e9;border-color:#9ac0b4}.chip .tiny-dot{display:inline-block;height:7px;width:7px;border-radius:50%;background:currentColor;margin-right:5px;vertical-align:1px}.stage-body{position:relative;flex:1;min-height:0;isolation:isolate;background:linear-gradient(180deg,#f4f8f0,#eef4e9 70%,#f7f2e9)}canvas{width:100%;height:100%;display:block;touch-action:none}.stage-topline{position:absolute;top:10px;left:24px;right:22px;display:flex;justify-content:space-between;gap:10px;align-items:center;pointer-events:none}.view-tag{font-size:12px;font-weight:700;color:#476660;border:1px solid #c6d7c8;border-radius:6px;padding:5px 9px;background:#fffff5d9;backdrop-filter:blur(4px)}.compare-tag{font-size:12px;color:#577269;background:#fffef4e6;border-radius:6px;padding:5px 9px}.river-stations{position:absolute;left:8%;right:14%;top:38px;display:flex;justify-content:space-between;pointer-events:none}.station{pointer-events:auto;background:#fffdf3e8;border:1px solid #aec8bc;box-shadow:0 3px 12px #2342360c;min-width:103px;padding:6px 12px;border-radius:9px;font-size:14px;font-weight:750}.station[aria-pressed=true]{background:var(--teal-dark);border-color:var(--teal-dark);color:#fff}.station small{display:block;font-size:11px;letter-spacing:1px;margin-top:2px;font-weight:500;opacity:.72}.tracker{position:absolute;bottom:13px;left:23px;right:23px;display:flex;align-items:center;gap:12px;pointer-events:none}.trackbtn{pointer-events:auto;min-height:40px;border-radius:9px;border:1px solid #bfd3c9;background:#fffefaeb;box-shadow:0 3px 10px #193e3210;font-weight:650;font-size:14px;padding:8px 12px;display:flex;align-items:center;gap:6px}.tracktext{font-size:13px;line-height:1.35;color:#526d63;max-width:65%;background:#fffff1d6;border-radius:7px;padding:6px 9px}.playbar{display:flex;align-items:center;gap:15px;padding:15px 22px 14px;border-top:1px solid var(--line);background:#fffefa;flex-shrink:0}.primary{background:var(--teal-dark);color:#fff;min-height:48px;border-radius:11px;display:flex;align-items:center;justify-content:center;gap:9px;padding:10px 20px;font-weight:750;font-size:17px;border:1px solid var(--teal-dark);white-space:nowrap}.primary:hover{background:#066f73}.reset{height:42px;width:42px;border:1px solid #dce4db;border-radius:10px;display:grid;place-items:center;color:#587267;flex-shrink:0}.timeline{flex:1;min-width:80px}.timeline-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:1px}.timeline-labels strong{font-weight:700;color:var(--teal-dark)}input[type=range]{appearance:none;-webkit-appearance:none;background:transparent;width:100%;height:24px;cursor:pointer;touch-action:pan-y;margin:3px 0}input[type=range]::-webkit-slider-runnable-track{height:5px;background:#cbded2;border-radius:8px}input[type=range]::-moz-range-track{height:5px;background:#cbded2;border-radius:8px}input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;height:22px;width:22px;background:var(--teal);border:3px solid #fffef8;border-radius:50%;box-shadow:0 1px 5px #2c5e4850;margin-top:-8px}input[type=range]::-moz-range-thumb{height:17px;width:17px;background:var(--teal);border:3px solid #fffef8;border-radius:50%;box-shadow:0 1px 5px #2c5e4850}.slow{min-height:39px;padding:6px 11px;border-radius:8px;border:1px solid var(--line);font-size:13px;color:var(--muted);white-space:nowrap}.slow[aria-pressed=true]{background:#e3f0e9;border-color:#9ac0b4;color:var(--teal-dark)}.sidebar{min-height:0;display:flex;flex-direction:column;gap:14px}.control-card,.evidence-card{border:1px solid var(--line);border-radius:17px;background:#fffefa;box-shadow:var(--shadow);padding:19px 20px}.eyebrow{font-size:12px;font-weight:760;letter-spacing:1.1px;color:var(--muted);margin:0 0 17px;display:flex;justify-content:space-between;align-items:center}.eyebrow span{font-weight:500;font-size:11px;letter-spacing:0}.control{margin-top:14px}.control:first-of-type{margin-top:0}.control-label{display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:680;line-height:1.3;margin-bottom:6px}.control-label output{font-size:13px;color:var(--teal);font-weight:750;background:#edf4e9;padding:3px 7px;border-radius:5px}.range-ends{display:flex;justify-content:space-between;color:#7a8a7e;font-size:11px;margin-top:1px}.sepline{height:1px;background:var(--line);margin:16px 0}.compare-button{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#eff4ea;min-height:43px;border-radius:9px;border:1px solid #b7cbb9;font-size:14px;font-weight:650;color:#34584c}.compare-button.saved{background:#dceee5;color:#166d5b}.compare-note{font-size:11px;color:var(--muted);line-height:1.5;margin:8px 0 0}.compare-note.warn{color:#a55f32}.evidence-card{padding-top:16px;flex:1;min-height:0;overflow:auto}.evidence-card .eyebrow{margin-bottom:12px}.balance-total{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:15px;font-weight:650}.balance-total strong{font-size:35px;line-height:1.2;color:#b8603b;font-variant-numeric:tabular-nums}.balance-line{height:5px;display:flex;border-radius:6px;background:#e9e9de;overflow:hidden;margin:10px 0 13px}.balance-line i{display:block;height:100%;transition:width .1s}.balance-parts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.part strong{font-size:25px;line-height:1.1;display:block;font-variant-numeric:tabular-nums}.part span{font-size:12px;color:#688076;display:block;margin-top:5px}.part:first-child strong{color:#1986a0}.part:last-child strong{color:#a57433}.export-count{font-size:12px;color:#627b71;border-top:1px dashed #d5ddd0;margin-top:12px;padding-top:10px}.mini-comparison{font-size:12px;color:#4f7164;border-top:1px solid var(--line);padding-top:11px;margin-top:12px;line-height:1.5}.mini-comparison table{width:100%;border-collapse:collapse}.mini-comparison th{text-align:right;font-weight:500;font-size:11px}.mini-comparison th:first-child{text-align:left}.mini-comparison td{text-align:right;font-weight:700;font-size:14px;padding:3px 0}.mini-comparison td:first-child{text-align:left;font-size:11px;font-weight:650}.compare-mode .prompt-card{display:none}.source-key{display:flex;gap:12px;flex-wrap:wrap;margin-top:17px;font-size:11px;color:#64756d}.source-key span{display:flex;align-items:center;gap:5px}.source-key i{width:8px;height:8px;display:inline-block;border-radius:50%}.prompt-card{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}.prompt-card strong{font-size:13px;font-weight:700}.prompt-card p{font-size:13px;margin:5px 0 0;line-height:1.65;color:#557367}.export-button{min-height:45px;width:100%;border:1px solid #b9cbbb;border-radius:11px;display:flex;justify-content:center;align-items:center;gap:8px;background:#fffefa;font-size:14px;font-weight:650;flex-shrink:0}.bottomline{height:18px;position:fixed;bottom:3px;left:24px;right:24px;display:flex;justify-content:center;align-items:center;gap:12px;font-size:10px;color:#819083;pointer-events:none}.watermark{position:absolute;right:4px;color:#849788;letter-spacing:3px;font-size:11px}.toast{position:fixed;left:50%;bottom:75px;transform:translate(-50%,10px);background:#173f35ee;color:#fff;padding:12px 20px;border-radius:12px;box-shadow:0 6px 20px #0b302828;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50;max-width:85vw}.toast.on{opacity:1;transform:translate(-50%,0)}.modal{position:fixed;inset:0;background:#16372e73;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(5px)}.modal-panel{width:min(760px,95vw);max-height:88vh;overflow:auto;border-radius:20px;border:1px solid #dae3d5;background:#fffef7;box-shadow:0 25px 80px #102c3150;padding:25px 28px}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:19px}.modal-head h2{font-size:23px;margin:0}.modal-close{width:40px;height:40px;background:#eef2e7;border:1px solid #d4dfcf;border-radius:10px;font-size:22px}.modal-panel h3{font-size:16px;margin:18px 0 8px}.modal-panel p,.modal-panel li{font-size:14px;line-height:1.8;color:#466359}.modal-panel a{color:#087e82}.modal-panel ul{padding-left:23px}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.info-box{background:#eff4e9;border-radius:10px;padding:2px 15px 12px}.info-box h3{margin-top:13px}#evidenceImage{width:100%;height:auto;border:1px solid #d5dece;border-radius:10px}#downloadImage{color:#fff;display:inline-flex;text-decoration:none;font-size:14px;margin-top:12px}.download-hint{font-size:12px!important}.compat{position:fixed;left:8px;bottom:5px;z-index:8;pointer-events:none;padding:2px 7px;border:1px solid #b7d6bf;border-radius:5px;background:#e7efe0;color:#4d6d59;font:700 10px/1.4 Arial,'Microsoft YaHei',sans-serif}
+@media(min-width:1650px){.app{padding:0 40px 28px}.topbar{min-height:110px}.identity h1{font-size:31px}.identity{min-width:360px}.chapter{font-size:14px}.tab{font-size:20px;min-height:51px}.workspace{grid-template-columns:minmax(0,1fr) 330px;gap:25px}.stage-head h2{font-size:30px}.stage-head{padding:24px 30px 18px}.subtitle{font-size:17px}.chip{font-size:15px}.eyebrow{font-size:14px}.control-label{font-size:19px}.control-label output{font-size:15px}.control-card,.evidence-card{padding:24px}.range-ends,.compare-note,.source-key{font-size:13px}.compare-button,.export-button{font-size:17px;min-height:49px}.prompt-card p{font-size:16px}.prompt-card strong{font-size:16px}.balance-total{font-size:18px}.balance-total strong{font-size:40px}.part strong{font-size:31px}.part span{font-size:15px}.export-count{font-size:14px}.trackbtn{font-size:17px;min-height:45px}.tracktext{font-size:15px}.station{font-size:17px;min-width:130px}.station small{font-size:13px}.playbar{padding:18px 27px}.primary{font-size:20px;min-height:54px}.slow{font-size:16px}.timeline-labels{font-size:13px}.view-tag,.compare-tag{font-size:14px}}
+@media(max-width:1150px){.app{padding:0 16px 23px}.topbar{gap:13px;min-height:80px}.identity{min-width:242px;gap:10px}.identity h1{font-size:22px}.brand-icon{width:42px;height:42px;border-radius:12px}.chapter{font-size:10px}.tab{padding:8px 14px;font-size:15px;min-height:42px}.tools{gap:4px}.iconbtn{width:38px;height:38px}.workspace{gap:12px;grid-template-columns:minmax(0,1fr) 250px}.stage-head{padding:16px 18px 10px}.stage-head h2{font-size:21px}.subtitle{font-size:12px}.view-tools{gap:4px}.chip{padding:5px 7px;font-size:11px}.control-card,.evidence-card{padding:15px 16px}.eyebrow{margin-bottom:12px;font-size:11px}.control-label{font-size:15px}.control{margin-top:11px}.compare-note{font-size:10px}.playbar{padding:12px 16px;gap:10px}.primary{font-size:15px;padding:10px 15px;min-height:45px}.reset{width:38px;height:38px}.source-key{gap:8px;margin-top:13px}.prompt-card p{font-size:12px}.stage-topline{left:18px;right:18px}.tracker{left:17px;right:17px;gap:8px}.tracktext{font-size:11px}.trackbtn{font-size:12px;min-height:37px}.station{min-width:87px;font-size:12px;padding:5px 8px}.station small{font-size:10px}.stage-card{border-radius:16px}.sidebar{gap:11px}.evidence-card .eyebrow{margin-bottom:9px}.sepline{margin:12px 0}.balance-total strong{font-size:30px}.part strong{font-size:23px}.prompt-card{margin-top:10px;padding-top:9px}}
+@media(max-height:850px) and (min-width:951px){.topbar{min-height:73px}.stage-head{padding-top:12px;padding-bottom:8px}.stage-head h2{font-size:20px;margin-bottom:4px}.subtitle{font-size:12px}.control-card,.evidence-card{padding:13px 16px}.eyebrow{margin-bottom:10px}.control{margin-top:8px}.sepline{margin:9px 0}.compare-note{margin-top:5px}.sidebar{gap:9px}.balance-line{margin:6px 0 9px}.balance-total strong{font-size:28px}.part strong{font-size:22px}.source-key{margin-top:10px}.prompt-card{margin-top:9px;padding-top:8px}.prompt-card p{font-size:11px}.playbar{padding-top:10px;padding-bottom:10px}.export-button{min-height:40px}.view-tag,.compare-tag{font-size:10px}.trackbtn{font-size:12px;min-height:34px}.tracktext{font-size:11px}}
+@media(max-width:950px){body{overflow:auto}.app{height:auto;min-height:100vh;padding:0 14px 25px}.topbar{flex-wrap:wrap;gap:10px;padding:15px 0 12px}.identity{min-width:0;flex:1}.tabs{order:3;width:100%;margin:0;justify-content:center}.tab{flex:1;min-height:43px}.workspace{display:flex;flex-direction:column;gap:13px}.stage-card{min-height:540px;height:66vh;max-height:760px;flex-shrink:0}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:0}.control-card,.evidence-card{min-height:0}.export-button{grid-column:1/-1}.evidence-card{overflow:visible}.bottomline{position:relative;left:auto;right:auto;bottom:auto;margin-top:12px}.compat{position:static;align-self:flex-start;margin:6px 0 0 14px;display:inline-block}.stage-head h2{font-size:22px}.subtitle{font-size:13px}.stage-topline{top:9px}.source-key{margin-top:13px}.prompt-card p{font-size:13px}}
+@media(max-width:580px){.identity h1{font-size:20px}.brand-icon{height:39px;width:39px}.stage-head{display:block;padding:14px 15px 9px}.stage-head h2{font-size:20px}.subtitle{font-size:12px;line-height:1.55}.view-tools{margin-top:8px;justify-content:flex-end}.chip{font-size:11px;min-height:29px;padding:4px 8px}.stage-card{height:590px;min-height:590px}.stage-head{min-height:106px}.playbar{padding:10px;gap:7px;flex-wrap:wrap}.primary{font-size:14px;min-height:42px;padding:8px 14px}.reset{width:36px;height:36px}.slow{font-size:12px;padding:5px 8px}.timeline{order:5;flex-basis:100%;padding:0 4px}.timeline-labels{font-size:11px}.sidebar{grid-template-columns:1fr}.control-card{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}.control-card .eyebrow{grid-column:1/-1;margin-bottom:10px}.control{margin-top:0}.sepline{grid-column:1/-1;margin:11px 0}.compare-button,.compare-note{grid-column:1/-1}.compare-note{font-size:11px}.evidence-card{padding:16px 20px}.balance-parts{grid-template-columns:1fr 1fr}.balance-total strong{font-size:33px}.part strong{font-size:27px}.part span{font-size:13px}.source-key{font-size:12px}.tracker{left:10px;right:10px;bottom:9px;gap:5px}.trackbtn{font-size:11px;padding:6px 8px;min-height:33px}.tracktext{font-size:10px;padding:5px 6px;max-width:65%}.stage-topline{left:12px;right:12px}.view-tag,.compare-tag{font-size:10px;padding:4px 6px}.river-stations{left:6%;right:7%;top:40px}.station{min-width:78px;font-size:12px;padding:5px 7px}.station small{font-size:9px}.info-grid{grid-template-columns:1fr}.modal{padding:12px}.modal-panel{padding:19px;max-height:92vh}.modal-head h2{font-size:21px}.modal-panel p,.modal-panel li{font-size:13px}.bottomline{font-size:9px;justify-content:flex-start}.watermark{font-size:10px}.toast{font-size:12px;bottom:25px;line-height:1.5}}
+@media(max-height:850px) and (min-width:951px){.control-card{padding:11px 16px}.control-card .eyebrow{margin-bottom:7px}.control-card .sepline{margin:7px 0}.evidence-card .source-key{margin-top:7px}.export-count{margin-top:8px;padding-top:7px}.mini-comparison{margin-top:8px;padding-top:8px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="app">
+ <header class="topbar">
+  <div class="identity"><div class="brand-icon" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 40 40"><path d="M4 22 13 10l9 13 7-8 8 9" fill="none" stroke="#c9edc5" stroke-width="2.3" stroke-linejoin="round"/><path d="M4 29c7-9 13 6 20-1s9-5 13-4M4 35c7-9 13 6 20-1s9-5 13-4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></div><div><div class="chapter">五上 · 第四单元 · 第6课</div><h1>水对地表的作用</h1></div></div>
+  <nav class="tabs" role="tablist" aria-label="观察任务"><button class="tab" id="tab-rain" role="tab" aria-selected="true" aria-controls="workspace" data-mode="rain"><span class="num">01</span>透视一场雨</button><button class="tab" id="tab-river" role="tab" aria-selected="false" aria-controls="workspace" data-mode="river"><span class="num">02</span>沿河看变化</button></nav>
+  <div class="tools"><button class="iconbtn" id="infoBtn" aria-label="模型说明与教材依据" title="模型说明"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></svg></button><button class="iconbtn" id="fullBtn" aria-label="进入全屏" title="全屏"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></svg></button></div>
+ </header>
+ <section class="workspace" id="workspace" role="tabpanel" aria-labelledby="tab-rain">
+  <section class="stage-card" aria-label="地表观察区">
+   <div class="stage-head"><div><h2 id="question">坡上少掉的土，到哪里去了？</h2><p class="subtitle" id="subtitle">剖开坡面，让每一份土的去向都看得见。</p></div><div class="view-tools"><button class="chip" id="outlineBtn" aria-pressed="true"><span class="tiny-dot"></span>原地表</button><button class="chip" id="colorBtn" aria-pressed="true"><span class="tiny-dot"></span>来源颜色</button></div></div>
+   <div class="stage-body" id="stageBody"><canvas id="scene" aria-label="可点选土粒追踪的地表剖面示意" role="img">浏览器需要支持Canvas二维绘图。请使用支持Canvas的浏览器打开。</canvas>
+    <div class="stage-topline"><span class="view-tag" id="viewTag">沿径流纵剖 · 变化放大</span><span class="compare-tag" id="compareTag">过程示意</span></div>
+    <div class="river-stations" id="riverStations" role="group" aria-label="选择观察河段" hidden><button class="station" data-region="0" aria-pressed="true">上游<small>山地河谷</small></button><button class="station" data-region="1" aria-pressed="false">中游<small>平原河弯</small></button><button class="station" data-region="2" aria-pressed="false">下游<small>宽阔河道</small></button></div>
+    <div class="tracker"><button id="trackBtn" class="trackbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M10 7v6m-3-3h6"/></svg>追踪一份土</button><span id="trackText" class="tracktext">也可直接点选坡面上的土粒</span></div>
+   </div>
+   <div class="playbar"><button class="primary" id="playBtn"><svg id="playIcon" width="16" height="17" viewBox="0 0 20 20" fill="currentColor"><path d="m5 2 12 8-12 8Z"/></svg><span id="playLabel">开始降雨</span></button><button class="reset" id="resetBtn" aria-label="回到起点，保留条件和对照" title="回到起点"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg></button><div class="timeline"><input type="range" id="timeRange" min="0" max="120" value="0" step="1" aria-label="过程回放进度"><div class="timeline-labels"><span>起点</span><strong id="timeLabel">尚未降雨 · 0%</strong><span>同一过程</span></div></div><button class="slow" id="slowBtn" aria-pressed="false">慢放</button></div>
+  </section>
+  <aside class="sidebar" aria-label="条件与观察记录">
+   <section class="control-card"><h3 class="eyebrow">改变条件 <span>改变后回到相同起点</span></h3>
+    <div class="control"><label class="control-label" for="param1"><span id="param1Name">降雨强弱</span><output id="param1Value" for="param1">适中</output></label><input type="range" id="param1" min="1" max="3" step="1" value="2"><div class="range-ends"><span id="param1Min">弱</span><span id="param1Max">强</span></div></div>
+    <div class="control"><label class="control-label" for="param2"><span id="param2Name">坡面倾斜</span><output id="param2Value" for="param2">中坡</output></label><input type="range" id="param2" min="1" max="3" step="1" value="2"><div class="range-ends"><span id="param2Min">缓</span><span id="param2Max">陡</span></div></div>
+    <div class="sepline"></div><button class="compare-button" id="compareBtn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="7" height="16" rx="1"/><rect x="14" y="4" width="7" height="16" rx="1"/></svg><span id="compareLabel">保留这组作对照</span></button><p class="compare-note" id="compareNote">保留后改变一个条件，两组同进度回放。</p>
+   </section>
+   <section class="evidence-card"><h3 class="eyebrow">土粒去了哪里 <span>等量份数 · 模型计数</span></h3><div class="balance-total"><span>离开原位</span><strong id="erodedCount">0</strong></div><div class="balance-line" aria-hidden="true"><i id="movingBar" style="background:#328faa;width:0"></i><i id="settledBar" style="background:#be9552;width:0"></i><i id="exportedBar" style="background:#7991a1;width:0"></i></div><div class="balance-parts"><div class="part"><strong id="movingCount">0</strong><span>正在搬运</span></div><div class="part"><strong id="settledCount">0</strong><span>已在新位置沉积</span></div></div><div class="export-count" id="exportCount" hidden>进入画面外海域 <strong id="exportedCount">0</strong> 份</div><div id="miniComparison" class="mini-comparison" hidden></div><div class="source-key" id="sourceKey"><span><i style="background:var(--orange)"></i>坡上来源</span><span><i style="background:var(--violet)"></i>坡中来源</span><span><i style="background:var(--blue)"></i>坡下来源</span></div><div class="prompt-card"><strong id="promptTitle">先找变化，再说理由</strong><p id="prompt">水流经过后，哪里降低了？哪里又增高了？</p></div></section>
+   <button class="export-button" id="exportBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m4 18 5-5 4 3 4-6 4 5"/></svg>保存观察图</button>
+  </aside>
+ </section>
+ <footer class="bottomline"><span>教学模型 · 时间与地形变化为示意，需与真实实验和资料对照</span><span class="watermark">mutiw</span></footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoTitle" hidden><section class="modal-panel"><div class="modal-head"><h2 id="infoTitle">看得见的去向，看不见的时间</h2><button class="modal-close" data-close="infoModal" aria-label="关闭模型说明">×</button></div><p>先做真实土坡实验，再用这里的透视、追踪和回放帮助解释。网页中的数值是<strong>模型计数</strong>，不能填成真实实验测量值。</p><div class="info-grid"><div class="info-box"><h3>透视一场雨</h3><p>144份等量土粒，颜色只表示最初来自坡上、坡中或坡下。先降雨，再退水；雨停后已有的径流仍会逐渐流走。改变雨强或坡度会重新计算同一初始土层。</p></div><div class="info-box"><h3>沿河看变化</h3><p>96份等量砂粒，俯视与纵剖面显示同一批物质。来水大小与河口扩展影响搬运；流出右边界的泥沙单独计数。三段地形是示意，并非长江实测地图。</p></div></div><h3>如何公平比较</h3><p>点击“保留这组作对照”，再改变一个条件。A、B使用相同初始颗粒和同一进度；颜色、剖面和计数来自同一份状态。若同时改变两项，就不能把差异只归因于其中一项。改变坡度时，初始坡形不同，土粒份数不变。</p><h3>模型的边界</h3><ul><li>每个圆点是一份示踪物质，大小经过放大，不是一粒真实沙的尺寸。地形变化也被放大，纵横比例不相同。坡面剖面沿一条径流路径，不表示整个坡面均匀降低。</li><li>水流强弱、土粒起动与停留使用定性规则，时间轴表示过程进度，不对应真实分钟或地质年数；不预测真实侵蚀量或洪水。地表形变不反算水动力，蓝色水层只示意所在位置，不计算真实水深或蓄水量。</li><li>同一河段可以同时发生侵蚀、搬运和沉积；沉积物也可能被再次带走。不能把三个过程固定分配给上、中、下游。</li><li>流量不等于流速。真实流速还受坡度、河道宽深等影响，不能推断所有河流都越往下游越慢。</li><li>河口仅模拟扩展与减速，不模拟海浪、潮汐、黏土黏聚与植被；并非所有河口都会形成同样的三角洲。</li></ul><h3>教材与资料依据</h3><p>教科版五年级上册第四单元第6课《水对地表的作用》，教材第118–121页；配套教师用书“第6课”；实验说明书第29页。三处观察线索对应教材中的金沙江、荆江与南京段。</p><p><a href="https://www.usgs.gov/water-science-school/science/sediment-and-suspended-sediment?qt-science_center_objects=0" target="_blank" rel="noopener noreferrer">USGS：泥沙的搬运、沉降与再次搬运</a><br><a href="https://www.nps.gov/articles/meandering-stream.htm" target="_blank" rel="noopener noreferrer">NPS：河弯中的侵蚀与沉积</a> · <a href="https://www.nps.gov/articles/delta-landforms.htm" target="_blank" rel="noopener noreferrer">NPS：河口堆积的条件</a></p><p style="font-size:12px;color:#7d8d7e">v1.0 · 单文件 · 无外部脚本、字体、图片依赖 · 说明中的资料链接需联网</p></section></div>
+<div class="modal" id="exportModal" role="dialog" aria-modal="true" aria-labelledby="exportTitle" hidden><section class="modal-panel"><div class="modal-head"><h2 id="exportTitle">保留这一刻的观察</h2><button class="modal-close" data-close="exportModal" aria-label="关闭观察图">×</button></div><img id="evidenceImage" alt="带有条件、进度和模型计数的观察图"><a id="downloadImage" class="primary" download="水对地表的作用_模型观察图.png">下载观察图</a><p class="download-hint">平板如未开始下载，可长按图片保存。图中记录的是模型结果；真实实验记录请根据实际观察填写。</p></section></div>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div class="compat" aria-label="本课技术需求：T2 · 二维绘图" title="本课最低技术需求：T2 · 二维绘图">T2 · 二维绘图</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+<script>
+/*
+ * RainModel: deterministic, qualitative hillslope erosion and deposition.
+ * 144 equal-mass tracer packets; not individual grains or grain-size classes.
+ * x = 0..1 is a model coordinate; t = 0..120 is model progress, not real time.
+ * Rain falls through step 80. Residual runoff drains smoothly through step 120.
+ * The slope ends at x=.65; the flatter receiving area ends in a closed basin
+ * at x=.95. This model has no sediment outlet, dissolution or mass creation.
+ *
+ * Rules: runoff accumulates downslope; rainfall impact and runoff stress
+ * gradually detach packets with fixed, heterogeneous attachment strengths.
+ * Lower transport capacity on the flatter area, or during falling runoff,
+ * allows deposition. Rising capacity can entrain deposited material again.
+ * Attachment and transport thresholds are illustrative, not calibrated data.
+ * No stochastic state is shared between runs, so comparisons are repeatable.
+ */
+var RainModel = (function () {
+  'use strict';
+
+  var COUNT = 144;
+  var BINS = 48;
+  var LAST = 120;
+  var RAIN_END = 80;
+  var FOOT = 0.65;
+  var BASIN_END = 0.95;
+  var RAIN_FACTORS = [0, 0.65, 1.00, 1.45];
+  var SLOPE_FACTORS = [0, 0.60, 1.00, 1.45];
+
+  function zeros(n) {
+    var a = [], i;
+    for (i = 0; i < n; i++) a.push(0);
+    return a;
+  }
+
+  function option(value) {
+    var n = Number(value);
+    if (!isFinite(n)) n = 2;
+    return Math.max(1, Math.min(3, Math.round(n)));
+  }
+
+  function seedGenerator(seed) {
+    return function () {
+      seed = (1664525 * seed + 1013904223) >>> 0;
+      return seed / 4294967296;
+    };
+  }
+
+  /* Reproducible, small local flow fluctuations; independent of grain size. */
+  function noise(id, t, salt) {
+    var n = ((id + 1) * 374761393 + (t + 1) * 668265263 + salt) >>> 0;
+    n = (n ^ (n >>> 13)) >>> 0;
+    n = (1664525 * n + 1013904223) >>> 0;
+    return n / 4294967296;
+  }
+
+  function bin(x) {
+    return Math.max(0, Math.min(BINS - 1, Math.floor(x * BINS)));
+  }
+
+  function accumulation(x) {
+    var u = Math.max(0, Math.min(1, (x - 0.09) / (FOOT - 0.09)));
+    return 0.35 + 0.65 * u;
+  }
+
+  function runoff(t, rainFactor) {
+    var buildUp = Math.min(1, t / 22);
+    var drainage = t <= RAIN_END ? 1 : Math.pow(Math.max(0, (LAST - t) / (LAST - RAIN_END)), 1.6);
+    return rainFactor * buildUp * drainage;
+  }
+
+  function capacity(x, water, slopeFactor) {
+    if (x >= BASIN_END) return 0;
+    var grade = 1;
+    if (x > FOOT) {
+      var remaining = Math.max(0, (BASIN_END - x) / (BASIN_END - FOOT));
+      grade = 0.035 + 0.965 * Math.pow(remaining, 2.1);
+    }
+    return water * accumulation(x) * slopeFactor * grade;
+  }
+
+  function run(input) {
+    input = input || {};
+    var params = { rain: option(input.rain), slope: option(input.slope) };
+    var rainFactor = RAIN_FACTORS[params.rain];
+    var slopeFactor = SLOPE_FACTORS[params.slope];
+    var random = seedGenerator(46062026);
+    var particles = [];
+    var live = [];
+    var loss = zeros(BINS);
+    var frames = [];
+    var i, t;
+
+    for (i = 0; i < COUNT; i++) {
+      var x0 = 0.09 + (i + 0.5 + (random() - 0.5) * 0.64) / COUNT * (FOOT - 0.09);
+      var origin = Math.floor(i / (COUNT / 3));
+      particles.push({ id: i, x0: x0, origin: origin });
+      live.push({
+        id: i, x: x0, x0: x0, origin: origin, state: 0,
+        dose: 0, attachment: 9 + 82 * Math.pow(random(), 0.83)
+      });
+    }
+
+    function capture(step) {
+      var dots = [], deposit = zeros(BINS);
+      var eroded = 0, moving = 0, settled = 0;
+      for (var j = 0; j < live.length; j++) {
+        var p = live[j];
+        dots.push({ id: p.id, x: p.x, x0: p.x0, origin: p.origin, state: p.state });
+        if (p.state !== 0) eroded++;
+        if (p.state === 1) moving++;
+        if (p.state === 2) {
+          settled++;
+          deposit[bin(p.x)]++;
+        }
+      }
+      frames.push({
+        t: step, particles: dots, loss: loss.slice(), deposit: deposit,
+        eroded: eroded, moving: moving, settled: settled
+      });
+    }
+
+    capture(0);
+    for (t = 1; t <= LAST; t++) {
+      var water = runoff(t, rainFactor);
+      var impact = t <= RAIN_END ? rainFactor * Math.min(1, t / 8) * 0.16 : 0;
+
+      for (i = 0; i < live.length; i++) {
+        var p = live[i];
+        var justDetached = false;
+
+        if (p.state === 0) {
+          /* Attachment depends on the starting surface, never on later x. */
+          var stress = water * accumulation(p.x0) * slopeFactor * 0.84;
+          p.dose += impact + stress;
+          if (p.dose < p.attachment || water < 0.035) continue;
+          p.state = 1;
+          justDetached = true;
+          loss[bin(p.x0)]++;
+        }
+
+        var ability = capacity(p.x, water, slopeFactor);
+        if (p.state === 2) {
+          /* Hysteresis avoids flickering at a single transport threshold. */
+          if (p.x >= BASIN_END || ability <= 0.145) continue;
+          p.state = 1;
+        }
+
+        if (p.state === 1) {
+          if (water <= 0 || p.x >= BASIN_END) {
+            p.state = 2;
+            continue;
+          }
+
+          var stopThreshold = 0.095 + 0.025 * noise(p.id, t, 8147);
+          if (!justDetached && ability < stopThreshold) {
+            p.state = 2;
+            continue;
+          }
+
+          var fluctuation = 0.82 + 0.36 * noise(p.id, t, 1931);
+          var dx = 0.014 * Math.sqrt(Math.max(0, ability)) * fluctuation;
+          /* A newly detached packet must actually move before deposition. */
+          if (justDetached) dx = Math.max(0.0015, dx);
+          p.x = Math.min(BASIN_END, p.x + dx);
+
+          if (p.x >= BASIN_END || capacity(p.x, water, slopeFactor) < stopThreshold) p.state = 2;
+        }
+      }
+      capture(t);
+    }
+
+    return { params: params, frames: frames, particles: particles };
+  }
+
+  function check(result) {
+    var errors = [];
+    var checkedFrames = 0, reentrainments = 0;
+    var firstDeparture = null, lastDeparture = null, peakMoving = 0;
+    var tolerance = 1e-10;
+
+    function fail(message) {
+      if (errors.length < 30) errors.push(message);
+    }
+
+    if (!result || !result.frames || !result.particles) {
+      return { ok: false, errors: ['Missing run result, frames or particles.'] };
+    }
+    if (result.frames.length !== LAST + 1) fail('Expected 121 frames.');
+    if (result.particles.length !== COUNT) fail('Expected 144 initial packets.');
+
+    var previous = null;
+    var expectedLoss = zeros(BINS);
+    for (var f = 0; f < result.frames.length; f++) {
+      var frame = result.frames[f];
+      if (!frame || !frame.particles || !frame.loss || !frame.deposit) {
+        fail('Incomplete frame at index ' + f);
+        continue;
+      }
+      checkedFrames++;
+      if (frame.t !== f) fail('Incorrect progress at frame ' + f);
+      if (frame.particles.length !== COUNT) fail('Packet count changed at frame ' + f);
+      if (frame.loss.length !== BINS || frame.deposit.length !== BINS) fail('Expected 48 spatial bins at frame ' + f);
+      var eroded = 0, moving = 0, settled = 0;
+      var expectedDeposit = zeros(BINS);
+      var origins = [0, 0, 0];
+      for (var i = 0; i < frame.particles.length; i++) {
+        var p = frame.particles[i];
+        var initial = result.particles[i];
+        var before = previous && previous.particles[i];
+        if (!p || !initial) { fail('Missing packet at frame ' + f + ', index ' + i); continue; }
+        if (p.id !== i || p.origin !== initial.origin || Math.abs(p.x0 - initial.x0) > tolerance) fail('Identity/source changed at frame ' + f + ', packet ' + i);
+        if (!isFinite(p.x) || p.x < p.x0 - tolerance || p.x > BASIN_END + tolerance) fail('Position outside bounds at frame ' + f + ', packet ' + i);
+        if (p.origin !== 0 && p.origin !== 1 && p.origin !== 2) fail('Invalid origin at frame ' + f + ', packet ' + i);
+        else origins[p.origin]++;
+        if (p.state !== 0 && p.state !== 1 && p.state !== 2) fail('Invalid state at frame ' + f + ', packet ' + i);
+        if (p.state === 0 && Math.abs(p.x - p.x0) > tolerance) fail('Unmoved packet changed position at frame ' + f + ', packet ' + i);
+        if (p.state !== 0 && p.x <= p.x0) fail('Eroded packet never moved at frame ' + f + ', packet ' + i);
+        if (f === 0 && p.state !== 0) fail('Initial frame contains eroded material.');
+        if (before) {
+          if (p.x < before.x - tolerance) fail('Upstream jump at frame ' + f + ', packet ' + i);
+          if (before.state !== 0 && p.state === 0) fail('Detached packet returned to original state at frame ' + f + ', packet ' + i);
+          if (before.state === 0 && p.state !== 0) {
+            expectedLoss[bin(p.x0)]++;
+            if (firstDeparture === null) firstDeparture = f;
+            lastDeparture = f;
+          }
+          if (before.state === 2 && p.state === 1) reentrainments++;
+        }
+        if (p.state !== 0) eroded++;
+        if (p.state === 1) moving++;
+        if (p.state === 2) { settled++; expectedDeposit[bin(p.x)]++; }
+      }
+      if (origins[0] !== 48 || origins[1] !== 48 || origins[2] !== 48) fail('Source packet counts changed at frame ' + f);
+      if (frame.eroded !== eroded || frame.moving !== moving || frame.settled !== settled || eroded !== moving + settled) fail('State mass balance failed at frame ' + f);
+      var sumLoss = 0, sumDeposit = 0;
+      for (var b = 0; b < BINS; b++) {
+        var loss = frame.loss[b], deposit = frame.deposit[b];
+        if (loss !== expectedLoss[b] || deposit !== expectedDeposit[b]) fail('Spatial mass balance failed at frame ' + f + ', bin ' + b);
+        if (loss < 0 || deposit < 0 || loss % 1 !== 0 || deposit % 1 !== 0) fail('Noninteger/negative mass at frame ' + f + ', bin ' + b);
+        sumLoss += loss;
+        sumDeposit += deposit;
+      }
+      if (sumLoss !== eroded || sumDeposit !== settled) fail('Aggregate mass balance failed at frame ' + f);
+      peakMoving = Math.max(peakMoving, moving);
+      previous = frame;
+    }
+
+    var last = result.frames[result.frames.length - 1];
+    if (last && last.moving !== 0) fail('Moving packets remain after runoff ends.');
+    return {
+      ok: errors.length === 0,
+      errors: errors,
+      stats: {
+        frames: checkedFrames,
+        packets: COUNT,
+        finalEroded: last ? last.eroded : null,
+        finalMoving: last ? last.moving : null,
+        finalSettled: last ? last.settled : null,
+        neverMoved: last ? COUNT - last.eroded : null,
+        peakMoving: peakMoving,
+        firstDeparture: firstDeparture,
+        lastDeparture: lastDeparture,
+        reentrainments: reentrainments
+      }
+    };
+  }
+
+  return { run: run, check: check };
+}());
+
+if (typeof module !== 'undefined' && module.exports) module.exports = RainModel;
+
+/*
+ * RiverModel — 五上4.6《水对地表的作用》教学模型，v1.0
+ *
+ * 96 个同尺寸、等体积、松散且不黏结的示意砂砾包；颜色只表示来源。
+ * 这不是长江实测数据、真实年代表或经过校准的水沙数值预报。
+ * 水流强弱、起动阻力与携沙容量均为无量纲的教学简化值。
+ * 时间 t 是模拟步（0–120），纵横比例、颗粒图形均不按实物比例。
+ *
+ * 机制：局部流动超过起动阻力后搬运；局部流动不足或携沙容量已满时
+ * 沉积；容量重新空出且流动足够时，已沉积物质可以再次搬运。
+ * 初始床面阻力的差异表示相同颗粒的暴露/遮蔽条件，不表示粒径差异。
+ * 河床变化由物质包的实际移出/沉积计算，不另播放预设地形动画。
+ * 床面反馈、黏性细泥、波浪、潮汐、支流和新增来沙未纳入本模型。
+ * 来水持续，帧120不要求所有砂砾停止；越过右边界仍记账为海域输出。
+ *
+ * 科学参考（只支持定性机制，不提供本文件的任意教学参数）：
+ * https://www.usgs.gov/water-science-school/science/sediment-and-suspended-sediment?qt-science_center_objects=0
+ * https://www.usgs.gov/centers/southwest-biological-science-center/science/river-sediment-dynamics
+ * https://www.nps.gov/articles/delta-landforms.htm
+ */
+(function (root, factory) {
+  'use strict';
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.RiverModel = api;
+})(typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : this, function () {
+  'use strict';
+
+  var COUNT = 96;
+  var BINS = 48;
+  var STEPS = 120;
+  var STATES = { ORIGINAL: 0, MOVING: 1, SETTLED: 2, EXPORTED: 3 };
+  var TWO_PI = Math.PI * 2;
+
+  function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+  function finite(n, fallback) { return typeof n === 'number' && isFinite(n) ? n : fallback; }
+  function normalize(params) {
+    params = params || {};
+    return { flow: clamp(finite(params.flow, 2), 1, 3), spread: clamp(finite(params.spread, 2), 1, 3) };
+  }
+  function smooth(n) { n = clamp(n, 0, 1); return n * n * (3 - 2 * n); }
+  function hash(i) {
+    // 固定整数散列；同条件每次完全一致，不使用 Math.random。
+    var n = (Math.imul(i + 1, 1597334677) ^ 0x7f4a7c15) >>> 0;
+    n = Math.imul(n ^ (n >>> 16), 2246822507) >>> 0;
+    n = Math.imul(n ^ (n >>> 13), 3266489909) >>> 0;
+    return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
+  }
+  function binAt(x) { return clamp(Math.floor(x * BINS), 0, BINS - 1); }
+  function regionAt(x) { return clamp(Math.floor(x * 3), 0, 2); }
+  function zeroBins() { return Array(BINS).fill(0); }
+  function smoothBins(values) {
+    // 仅供画连续剖面：每个格子的份数向邻近格分配，边界重新归一化。
+    // 既避免显示成直立尖柱，也保留总面积；原始 loss/deposit 从不改写。
+    var result = zeroBins();
+    for (var i = 0; i < BINS; i++) {
+      if (!values[i]) continue;
+      var totalWeight = 0;
+      for (var offset = -4; offset <= 4; offset++) {
+        if (i + offset >= 0 && i + offset < BINS) totalWeight += 5 - Math.abs(offset);
+      }
+      for (var j = -4; j <= 4; j++) {
+        if (i + j >= 0 && i + j < BINS) result[i + j] += values[i] * (5 - Math.abs(j)) / totalWeight;
+      }
+    }
+    return result;
+  }
+
+  function speedAt(x, p) {
+    x = clamp(finite(x, 0), 0, 1);
+    // 总体由较陡河段转向较缓河段；小起伏表现局部缓急，不把三区写死。
+    var gradient = 0.28 + 1.03 * Math.pow(1 - x, 1.1);
+    var pockets = 0.92 + 0.12 * Math.sin(TWO_PI * 6.3 * x) + 0.04 * Math.sin(TWO_PI * 11.2 * x + 0.8);
+    var flowFactor = 0.82 + 0.36 * (p.flow - 1);
+    // 入海扩散只作用于 x > 0.8，绝不反向改变其上游流场。
+    var expansion = x > 0.8 ? 1 + 1.8 * (p.spread - 1) * smooth((x - 0.8) / 0.2) : 1;
+    return Math.max(0.025, gradient * pockets * flowFactor / expansion);
+  }
+  function velocity(x, params) { return speedAt(x, normalize(params)); }
+  function capacity(x, p) {
+    // 每格同时搬运的等体积物质包上限；不是实际河流输沙公式。
+    return Math.max(1, Math.floor(0.6 + 4.6 * Math.pow(speedAt(x, p), 1.45)));
+  }
+
+  function definitions() {
+    var result = [];
+    for (var i = 0; i < COUNT; i++) {
+      var x = (i + 0.5) / COUNT;
+      result.push({ id: i, x0: x, origin: regionAt(x), amount: 1 });
+    }
+    return result;
+  }
+  function emptyRegion(index) {
+    return { index: index, original: 0, moving: 0, settled: 0, loss: 0, deposit: 0, bedDelta: 0 };
+  }
+
+  function snapshot(t, particles, remobilized) {
+    var loss = zeroBins();
+    var deposit = zeroBins();
+    var regions = [emptyRegion(0), emptyRegion(1), emptyRegion(2)];
+    var byOrigin = [0, 1, 2].map(function (index) {
+      return { origin: index, original: 0, moving: 0, settled: 0, exported: 0, eroded: 0 };
+    });
+    var eroded = 0;
+    var moving = 0;
+    var settled = 0;
+    var exported = 0;
+    var copies = particles.map(function (packet) {
+      if (packet.state !== STATES.ORIGINAL) {
+        loss[binAt(packet.x0)]++;
+        regions[packet.origin].loss++;
+        byOrigin[packet.origin].eroded++;
+        eroded++;
+      }
+      if (packet.state === STATES.ORIGINAL) {
+        regions[regionAt(packet.x)].original++;
+        byOrigin[packet.origin].original++;
+      } else if (packet.state === STATES.MOVING) {
+        regions[regionAt(packet.x)].moving++;
+        byOrigin[packet.origin].moving++;
+        moving++;
+      } else if (packet.state === STATES.SETTLED) {
+        deposit[binAt(packet.x)]++;
+        regions[regionAt(packet.x)].settled++;
+        regions[regionAt(packet.x)].deposit++;
+        byOrigin[packet.origin].settled++;
+        settled++;
+      } else {
+        byOrigin[packet.origin].exported++;
+        exported++;
+      }
+      return { id: packet.id, x: packet.x, x0: packet.x0, origin: packet.origin, state: packet.state };
+    });
+    regions.forEach(function (region) { region.bedDelta = region.deposit - region.loss; });
+    var bedDelta = loss.map(function (value, i) { return deposit[i] - value; });
+    var profileLoss = smoothBins(loss);
+    var profileDeposit = smoothBins(deposit);
+    return {
+      t: t,
+      particles: copies,
+      loss: loss,
+      deposit: deposit,
+      bedDelta: bedDelta,
+      bedProfile: {
+        loss: profileLoss,
+        deposit: profileDeposit,
+        delta: profileLoss.map(function (value, i) { return profileDeposit[i] - value; })
+      },
+      eroded: eroded,
+      moving: moving,
+      settled: settled,
+      exported: exported,
+      remobilized: remobilized,
+      regions: regions,
+      byOrigin: byOrigin
+    };
+  }
+
+  function run(params) {
+    var p = normalize(params);
+    var initial = definitions();
+    var packets = initial.map(function (item) {
+      return {
+        id: item.id, x: item.x0, x0: item.x0, origin: item.origin, state: STATES.ORIGINAL,
+        work: 0, settling: 0, travelSinceRelease: 0,
+        initialThreshold: 0.32 + 0.64 * hash(item.id + 37),
+        initialWork: 0.55 + 0.3 * hash(item.id + 71),
+        resumeThreshold: 0.39 + 0.04 * hash(item.id + 113),
+        resumeWork: 0.18 + 0.1 * hash(item.id + 197),
+        settleThreshold: 0.32 + 0.04 * hash(item.id + 251)
+      };
+    });
+    var frames = [snapshot(0, packets, 0)];
+    var remobilized = 0;
+
+    for (var t = 1; t <= STEPS; t++) {
+      var occupancy = zeroBins();
+      packets.forEach(function (packet) {
+        if (packet.state === STATES.MOVING) occupancy[binAt(packet.x)]++;
+      });
+
+      // 在原位可被搬动和已经沉积的物质，都需要足够的局部水流和剩余容量。
+      packets.forEach(function (packet) {
+        if (packet.state !== STATES.ORIGINAL && packet.state !== STATES.SETTLED) return;
+        var isOriginal = packet.state === STATES.ORIGINAL;
+        var u = speedAt(packet.x, p);
+        var threshold = isOriginal ? packet.initialThreshold : packet.resumeThreshold;
+        var targetWork = isOriginal ? packet.initialWork : packet.resumeWork;
+        packet.work += Math.max(0, u - threshold) * (isOriginal ? 0.28 : 0.55);
+        if (u <= threshold) packet.work = Math.max(0, packet.work - 0.015);
+        var bin = binAt(packet.x);
+        if (u > threshold && packet.work >= targetWork && occupancy[bin] < capacity(packet.x, p)) {
+          if (!isOriginal) remobilized++;
+          packet.state = STATES.MOVING;
+          packet.work = 0;
+          packet.settling = 0;
+          packet.travelSinceRelease = 0;
+          occupancy[bin]++;
+        }
+      });
+
+      packets.forEach(function (packet) {
+        if (packet.state !== STATES.MOVING) return;
+        var u = speedAt(packet.x, p);
+        var dx = 0.0165 * u;
+        packet.x += dx;
+        packet.travelSinceRelease += dx;
+        if (packet.x >= 1) {
+          packet.x = 1.02;
+          packet.state = STATES.EXPORTED;
+          return;
+        }
+        // 减速后需要一段沉降过程；新放出的物质不会在原位置瞬间变成沉积。
+        var downstreamSpeed = speedAt(packet.x, p);
+        packet.settling += Math.max(0, packet.settleThreshold - downstreamSpeed) * 2.6;
+        if (downstreamSpeed >= packet.settleThreshold) packet.settling = Math.max(0, packet.settling - 0.18);
+        if (packet.settling >= 1 && packet.travelSinceRelease >= 0.008) {
+          packet.state = STATES.SETTLED;
+          packet.work = 0;
+          packet.settling = 0;
+        }
+      });
+
+      // 进入局部较慢水流时，来沙可暂时超过容量；多出的物质停留在新位置。
+      // 稍后该格容量空出时，这些物质可以再次被搬走，故不是一次性固定动画。
+      var groups = Array.from({ length: BINS }, function () { return []; });
+      packets.forEach(function (packet) {
+        if (packet.state === STATES.MOVING) groups[binAt(packet.x)].push(packet);
+      });
+      groups.forEach(function (group, bin) {
+        var available = capacity((bin + 0.5) / BINS, p);
+        if (group.length <= available) return;
+        // 优先保留已走到格子下游一侧的物质，避免固定按来源色或ID优待。
+        group.sort(function (a, b) { return b.x - a.x || a.id - b.id; });
+        for (var j = available; j < group.length; j++) {
+          var packet = group[j];
+          packet.state = STATES.SETTLED;
+          packet.work = 0;
+          packet.settling = 0;
+        }
+      });
+      frames.push(snapshot(t, packets, remobilized));
+    }
+    return { params: p, frames: frames, particles: initial };
+  }
+
+  return {
+    run: run,
+    velocity: velocity,
+    capacity: function (x, params) { return capacity(x, normalize(params)); },
+    constants: { particleCount: COUNT, bins: BINS, steps: STEPS, states: STATES },
+    modelNote: '同尺寸等量砂砾包；颜色表示来源。相对流动与加速过程示意，不是长江实测；未计入波浪、潮汐、黏性及河床对水流的反馈。'
+  };
+});
+
+(function () {
+'use strict';
+const $ = id => document.getElementById(id);
+const canvas = $('scene');
+const ctx = canvas.getContext('2d');
+if (!ctx) { $('question').textContent = '当前浏览器不支持二维绘图'; $('subtitle').textContent = '请换用支持 Canvas 的浏览器打开此文件。'; return; }
+const C = { ink:'#254c43', muted:'#6f8275', water:'#369cab', waterLight:'#a9d8d5', orange:'#d57745', violet:'#8265a8', blue:'#448fab', earth:'#c99f68', earthDark:'#927851', original:'#6c7759' };
+const sources = [C.orange,C.violet,C.blue];
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+const labels = {rain:['弱','适中','强'],slope:['缓坡','中坡','陡坡'],flow:['较小','适中','较大'],spread:['较窄','适中','较宽']};
+const states = {
+ rain:{params:{rain:2,slope:2},run:null,baseline:null,t:0,selected:-1,region:0},
+ river:{params:{flow:2,spread:2},run:null,baseline:null,t:0,selected:-1,region:0}
+};
+states.rain.run=RainModel.run(states.rain.params); states.river.run=RiverModel.run(states.river.params);
+let mode='rain',playing=false,slow=false,outline=true,sourceColors=true,cw=0,ch=0,dpr=1,hits=[],lastTime=0,raf=0,toastTimer=0,trackCycle=0,lastFocus=null;
+function cur(){return states[mode];}
+function currentFrame(s){return s.run.frames[Math.round(clamp(s.t,0,120))];}
+function paramsText(p,m){return m==='rain' ? '雨强'+labels.rain[p.rain-1]+' · '+labels.slope[p.slope-1] : '来水'+labels.flow[p.flow-1]+' · 河口'+labels.spread[p.spread-1];}
+function toast(message){$('toast').textContent=message;$('toast').classList.add('on');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('on'),2600);}
+function stop(){playing=false;cancelAnimationFrame(raf);lastTime=0;syncPlay();}
+function syncPlay(){const s=cur();$('playLabel').textContent=playing?'暂停观察':s.t>=120?'重新播放':s.t>0?'继续回放':mode==='rain'?'开始降雨':'让河水流动';$('playIcon').innerHTML=playing?'<path d="M4 3h4v14H4zm8 0h4v14h-4Z"/>':'<path d="m5 2 12 8-12 8Z"/>';$('playBtn').setAttribute('aria-label',playing?'暂停过程，观察当前状态':$('playLabel').textContent);}
+function play(){if(playing){stop();return;}const s=cur();if(s.t>=120)s.t=0;playing=true;syncPlay();lastTime=0;raf=requestAnimationFrame(tick);}
+function tick(now){if(!playing)return;if(!lastTime)lastTime=now;const dt=Math.min(.08,(now-lastTime)/1000);lastTime=now;cur().t=Math.min(120,cur().t+dt*(slow?1.5:6));render();updateNumbers();if(cur().t>=120){stop();return;}raf=requestAnimationFrame(tick);}
+function switchMode(next){if(next===mode)return;stop();mode=next;trackCycle=0;document.querySelectorAll('.tab').forEach(el=>el.setAttribute('aria-selected',String(el.dataset.mode===mode)));$('workspace').setAttribute('aria-labelledby','tab-'+mode);syncUI();resize();}
+function syncUI(){const s=cur(),rain=mode==='rain';$('workspace').classList.toggle('compare-mode',!!s.baseline);$('question').textContent=rain?'坡上少掉的土，到哪里去了？':'河流带走的泥沙，后来在哪里？';$('subtitle').textContent=rain?'剖开坡面，让每一份土的去向都看得见。':'俯视与剖面联动，追踪同一批泥沙的旅程。';$('viewTag').textContent=rain?'沿径流纵剖 · 变化放大':s.baseline?'沿河纵剖 · 同进度比较':'俯视＋沿河纵剖 · 非实测地图';$('param1Name').textContent=rain?'降雨强弱':'来水大小';$('param2Name').textContent=rain?'坡面倾斜':'河口扩展';$('param1Min').textContent=rain?'弱':'小';$('param1Max').textContent=rain?'强':'大';$('param2Min').textContent=rain?'缓':'窄';$('param2Max').textContent=rain?'陡':'宽';$('param1').value=rain?s.params.rain:s.params.flow;$('param2').value=rain?s.params.slope:s.params.spread;$('param1Value').textContent=rain?labels.rain[s.params.rain-1]:labels.flow[s.params.flow-1];$('param2Value').textContent=rain?labels.slope[s.params.slope-1]:labels.spread[s.params.spread-1];$('trackBtn').lastChild.textContent=rain?'追踪一份土':'追踪一份沙';$('riverStations').hidden=rain||!!s.baseline;$('exportCount').hidden=rain;$('sourceKey').innerHTML=(rain?['坡上来源','坡中来源','坡下来源']:['上游来源','中游来源','下游来源']).map((v,i)=>'<span><i style="background:'+sources[i]+'"></i>'+v+'</span>').join('');$('compareLabel').textContent=s.baseline?'移除对照 A':'保留这组作对照';$('compareBtn').classList.toggle('saved',!!s.baseline);$('compareTag').textContent=s.baseline?'A / B · 同一进度':'过程示意';document.querySelectorAll('.station').forEach(el=>el.setAttribute('aria-pressed',String(+el.dataset.region===s.region)));syncCompareNote();syncPrompt();syncPlay();updateNumbers();}
+function syncPrompt(){const s=cur();if(mode==='rain'){$('promptTitle').textContent='先找变化，再说理由';$('prompt').textContent='水流经过后，哪里降低了？哪里又增高了？';return;}const titles=['资料线索 · 金沙江','资料线索 · 荆江','资料线索 · 南京段'];const tips=['高山与峡谷中，河道坡度较大。我们的土坡更像这一段吗？用现象说明。','进入平原后，河道曲折。真实河弯的侵蚀和沉积可在不同位置同时发生。','江面变宽，江中可见沙洲。这里沉下的沙，最初可能来自哪里？'];$('promptTitle').textContent=titles[s.region];$('prompt').textContent=tips[s.region];}
+function syncCompareNote(){const s=cur(),el=$('compareNote');el.classList.remove('warn');if(!s.baseline){el.textContent='保留后改变一个条件，两组同进度回放。';return;}const keys=Object.keys(s.params),changed=keys.filter(k=>s.params[k]!==s.baseline.params[k]);if(changed.length===0)el.textContent='A 已保留。调节一个条件，让 B 与它比较。';else if(changed.length===1){const names={rain:'雨强',slope:'坡度',flow:'来水大小',spread:'河口扩展'};el.textContent='只改变'+names[changed[0]]+' · 相同份数、同一进度。';}else{el.textContent='同时改变了两项，不能把差异只归因于一项。';el.classList.add('warn');}}
+function updateNumbers(){const s=cur(),f=currentFrame(s),t=Math.round(s.t);$('timeRange').value=t;$('timeLabel').textContent=(mode==='rain'?(t===0?'尚未降雨':t<=80?'降雨中':t<120?'雨停后，径流减弱':'退水结束'):(t===0?'初始河床':t<120?'过程加速示意':'本次回放结束'))+' · '+Math.round(t/1.2)+'%';$('erodedCount').textContent=f.eroded;$('movingCount').textContent=f.moving;$('settledCount').textContent=f.settled;$('exportedCount').textContent=f.exported||0;const sum=f.eroded||1;$('movingBar').style.width=100*f.moving/sum+'%';$('settledBar').style.width=100*f.settled/sum+'%';$('exportedBar').style.width=100*(f.exported||0)/sum+'%';$('miniComparison').hidden=!s.baseline;if(s.baseline){const a=s.baseline.run.frames[t];$('miniComparison').innerHTML='<table aria-label="同一进度的两组模型计数"><thead><tr><th>模型份数</th><th>离开原位</th><th>已沉积</th></tr></thead><tbody><tr><td>A 对照</td><td>'+a.eroded+'</td><td>'+a.settled+'</td></tr><tr><td>B 当前</td><td>'+f.eroded+'</td><td>'+f.settled+'</td></tr></tbody></table>';}
+ if(s.selected>=0){const p=f.particles.find(p=>p.id===s.selected);if(p){const origins=mode==='rain'?['坡上','坡中','坡下']:['上游','中游','下游'];let status=['尚在原位','正在搬运','在新位置停留','已随水进入画面外海域'][p.state];$('trackText').textContent=origins[p.origin]+'来源 · 第'+(p.id+1)+'份 · '+status;$('trackText').style.borderLeft='3px solid '+sources[p.origin];}}else{$('trackText').textContent=mode==='rain'?'也可直接点选坡面上的土粒':s.baseline?'点选 B 中的泥沙，追踪同一来源':'点选泥沙，同步追踪俯视图与剖面';$('trackText').style.borderLeft='none';}}
+function setParam(which,value){const s=cur(),keys=mode==='rain'?['rain','slope']:['flow','spread'],key=keys[which];if(s.params[key]===+value)return;stop();s.params[key]=+value;s.run=(mode==='rain'?RainModel:RiverModel).run(s.params);s.t=0;syncUI();render();}
+function resize(){const rect=$('stageBody').getBoundingClientRect();cw=Math.max(250,Math.round(rect.width));ch=Math.max(180,Math.round(rect.height));dpr=Math.min(2,window.devicePixelRatio||1);canvas.width=Math.round(cw*dpr);canvas.height=Math.round(ch*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);render();}
+function text(txt,x,y,size=14,color=C.ink,weight=500,align='left'){ctx.font=weight+' '+size+'px "Microsoft YaHei","PingFang SC",system-ui,sans-serif';ctx.fillStyle=color;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(txt,x,y);}
+function path(points,close=false){ctx.beginPath();points.forEach((p,i)=>{i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);});if(close)ctx.closePath();}
+function roundRect(x,y,w,h,r){r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function arrow(x,y,length,angle,color=C.water,width=2.5){ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-length/2,0);ctx.lineTo(length/2,0);ctx.moveTo(length/2-6,-4);ctx.lineTo(length/2,0);ctx.lineTo(length/2-6,4);ctx.stroke();ctx.restore();}
+function smoothMass(a){let r=a.slice();for(let k=0;k<4;k++){const n=r.map(()=>0);for(let i=0;i<r.length;i++){n[i]+=.5*r[i];n[Math.max(0,i-1)]+=.25*r[i];n[Math.min(r.length-1,i+1)]+=.25*r[i];}r=n;}return r;}
+function interpolate(a,x){const z=clamp(x*48-.5,0,47),i=Math.floor(z),f=z-i;return a[i]*(1-f)+a[Math.min(47,i+1)]*f;}
+function terrainBase(x,p,m){if(m==='rain'){const top=[0,.37,.25,.13][p.slope],foot=.67;return x<.08?top+.015: x<.65?top+(.69-top)*(x-.08)/.57: foot+.02+.065*(x-.65)/.35;}return x<.34?.10+.47*Math.pow(x/.34,.8):x<.68?.57+.115*(x-.34)/.34:.685+.06*(x-.68)/.32;}
+function cloud(x,y,s,alpha){ctx.save();ctx.globalAlpha=alpha;ctx.fillStyle='#fbfdf7';ctx.shadowColor='#789ca71a';ctx.shadowBlur=12;ctx.beginPath();ctx.ellipse(x,y,44*s,16*s,0,0,Math.PI*2);ctx.ellipse(x-19*s,y-7*s,20*s,17*s,0,0,Math.PI*2);ctx.ellipse(x+10*s,y-17*s,25*s,24*s,0,0,Math.PI*2);ctx.fill();ctx.restore();}
+function drawCross(rect,run,t,m,opts){const f=run.frames[Math.round(t)],p=run.params;const x=rect.x,y=rect.y,w=rect.w,h=rect.h,compact=!!opts.compact;
+ ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+ const margin=Math.max(19,w*.034),left=x+margin,iw=w-2*margin,top=y+h*.13,bottom=y+h*.91,ih=h*.82;const X=z=>left+z*iw;const base=z=>top+terrainBase(z,p,m)*ih;const loss=smoothMass(f.loss),dep=smoothMass(f.deposit);const scale=ih*(m==='rain'?.008:.009);const ground=z=>base(z)+(interpolate(loss,z)-interpolate(dep,z))*scale;const points=[];for(let i=0;i<=144;i++){const z=i/144;points.push([X(z),ground(z)]);}
+ // Layered material is drawn from the same loss/deposit fields as the counts.
+ const g=ctx.createLinearGradient(0,top,0,bottom);g.addColorStop(0,'#d8b782');g.addColorStop(.55,'#c5a470');g.addColorStop(1,'#b7976a');path([...points,[X(1),bottom],[X(0),bottom]],true);ctx.fillStyle=g;ctx.fill();
+ ctx.save();path([...points,[X(1),bottom],[X(0),bottom]],true);ctx.clip();ctx.strokeStyle='#8d7b5140';ctx.lineWidth=1;for(let layer=0;layer<4;layer++){ctx.beginPath();for(let j=0;j<=70;j++){const z=j/70,py=base(z)+18+h*.09*layer+Math.sin(z*13+layer)*h*.012;j?ctx.lineTo(X(z),py):ctx.moveTo(X(z),py);}ctx.stroke();}
+ for(let i=0;i<110;i++){const zx=((i*71)%997)/997,zy=((i*197+83)%997)/997,py=base(zx)+zy*(bottom-base(zx));ctx.fillStyle=i%3?'#866c4333':'#f6e0ad66';ctx.beginPath();ctx.ellipse(X(zx),py,1.2+(i%4)*.6,.8+(i%3)*.4,.2,0,Math.PI*2);ctx.fill();}ctx.restore();
+ // Warm and gold wedges reveal the lowered and raised parts of the ground.
+ for(let i=0;i<96;i++){const a=i/96,b=(i+1)/96,ca=ground(a),cb=ground(b),ba=base(a),bb=base(b);path([[X(a),ba],[X(b),bb],[X(b),cb],[X(a),ca]],true);ctx.fillStyle=(ca+cb>ba+bb)?'#db845a9e':'#e8c66bb8';ctx.fill();}
+ path(points);ctx.strokeStyle='#7e8052';ctx.lineWidth=2.2;ctx.lineJoin='round';ctx.stroke();
+ if(outline){const orig=[];for(let i=0;i<=96;i++)orig.push([X(i/96),base(i/96)]);path(orig);ctx.strokeStyle=C.original;ctx.lineWidth=1.6;ctx.setLineDash([7,5]);ctx.stroke();ctx.setLineDash([]);}
+ const runoff=m==='rain'?(t===0?0:Math.min(1,t/22)*(t<=80?1:Math.pow((120-t)/40,1.6))):t===0?.3:1;
+ const depth=m==='rain'?runoff*(3+p.rain*1.7):6+p.flow*3;
+ const surface=[];for(let i=0;i<=144;i++)surface.push(ground(i/144)-depth);
+ // Water-layer positioning only, not a backwater or water-volume calculation.
+ // Screen y increases downwards; this envelope never rises downstream.
+ for(let i=143;i>=0;i--)surface[i]=Math.min(surface[i],surface[i+1]);
+ const waterAt=z=>{const a=clamp(z*144,0,144),i=Math.floor(a),b=a-i;return surface[i]*(1-b)+surface[Math.min(144,i+1)]*b;};
+ if(runoff>0){const wet=ctx.createLinearGradient(0,top,0,bottom);wet.addColorStop(0,'#48a6b4aa');wet.addColorStop(1,'#86c9c8b5');const waterPoints=[];for(let i=0;i<=144;i++)waterPoints.push([X(i/144),surface[i]]);path([...waterPoints,...points.slice().reverse()],true);ctx.fillStyle=wet;ctx.fill();
+  if(m==='rain'&&t<=80&&t>0){ctx.strokeStyle='#589abf70';ctx.lineWidth=1.25;const n=20+p.rain*10;for(let i=0;i<n;i++){const zx=.08+(((i*61+13)%997)/997)*.56;const roof=y+h*.11;const by=ground(zx)-8;let py=roof+(((i*23+t*9)%101)/101)*Math.max(1,by-roof);ctx.beginPath();ctx.moveTo(X(zx)+4,py-9);ctx.lineTo(X(zx),py);ctx.stroke();}}
+  const arrowXs=m==='rain'?[.2,.42,.61,.81]:[.15,.43,.71,.89];arrowXs.forEach((z,i)=>{const v=m==='rain'?(p.rain*.5+.7)*runoff:RiverModel.velocity(z,p);const slope=(waterAt(Math.min(1,z+.01))-waterAt(Math.max(0,z-.01)))/(.02*iw);if(!compact||i%2===0)arrow(X(z),waterAt(z)-7,Math.max(12,Math.min(37,12+v*15)),Math.atan(slope),m==='rain'?'#238da5b0':'#167f95c0',compact?1.7:2.2);});}
+ if(m==='rain'&&!compact){cloud(X(.22),y+h*.10,Math.min(1.2,w/650),.96);cloud(X(.47),y+h*.17,Math.min(.9,w/740),.8);}
+ if(m==='river'&&!compact){const s=cur(),bounds=[[0,.34],[.34,.68],[.68,.96]][s.region];ctx.fillStyle='#fff5ba13';ctx.fillRect(X(bounds[0]),top-10,(bounds[1]-bounds[0])*iw,bottom-top+10);ctx.strokeStyle='#557c663e';ctx.setLineDash([3,5]);[bounds[0],bounds[1]].forEach(z=>{ctx.beginPath();ctx.moveTo(X(z),top-10);ctx.lineTo(X(z),bottom);ctx.stroke();});ctx.setLineDash([]);}
+ const id=cur().selected;const selected=f.particles.find(a=>a.id===id);if(selected){ctx.save();ctx.lineWidth=2;ctx.strokeStyle=sources[selected.origin]+'a6';ctx.setLineDash([4,4]);ctx.beginPath();let started=false;for(let j=0;j<=Math.round(t);j+=2){const fr=run.frames[j],q=fr.particles.find(a=>a.id===id);if(!q||q.state===3)continue;const z=q.x;const yy=q.state===1?waterAt(z)+(ground(z)-waterAt(z))*.4:ground(z)-2;started?ctx.lineTo(X(z),yy):ctx.moveTo(X(z),yy);started=true;}ctx.stroke();ctx.setLineDash([]);ctx.restore();}
+ const isCurrent=opts.interactive!==false;f.particles.forEach(q=>{if(q.state===3)return;const z=q.x,fill=sourceColors?sources[q.origin]:'#98714b';let yy=ground(z);if(q.state===0)yy+=5+(q.id%4)*2.8;else if(q.state===1)yy=waterAt(z)+(ground(z)-waterAt(z))*(.35+.15*Math.sin(q.id*1.7+t*.48));else yy-=2+(q.id%3)*1.8;const rr=compact?2.8:Math.max(3.2,Math.min(4.3,w/210));ctx.globalAlpha=q.state===0?.57:1;ctx.fillStyle=fill;ctx.beginPath();ctx.arc(X(z),yy,rr,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;if(q.id===id){ctx.beginPath();ctx.arc(X(z),yy,rr+4,0,Math.PI*2);ctx.strokeStyle='#fffdf2';ctx.lineWidth=3;ctx.stroke();ctx.beginPath();ctx.arc(X(z),yy,rr+5.5,0,Math.PI*2);ctx.strokeStyle=sources[q.origin];ctx.lineWidth=1.8;ctx.stroke();}if(isCurrent)hits.push({x:X(z),y:yy,id:q.id});});
+ if(m==='rain'){text('坡面',X(.20),bottom+2,compact?10:13,'#7e7459',650);text('坡脚与汇集区',X(.79),bottom+2,compact?10:13,'#7e7459',650,'center');}else{text('上游',X(.17),bottom+2,compact?10:12,'#7e7459',650,'center');text('中游',X(.51),bottom+2,compact?10:12,'#7e7459',650,'center');text('下游',X(.79),bottom+2,compact?10:12,'#7e7459',650,'center');text('海域 →',X(.985),bottom+2,compact?9:11,'#4c8e98',600,'right');}
+ if(!compact&&outline){ctx.strokeStyle=C.original;ctx.lineWidth=1.5;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(x+w-151,y+h*.27);ctx.lineTo(x+w-124,y+h*.27);ctx.stroke();ctx.setLineDash([]);text('开始前的地表',x+w-116,y+h*.27,Math.min(12,w/57),'#74805f',500);}
+ if(opts.label){text(opts.label,x+18,y+14,Math.max(11,Math.min(15,w/60)),opts.label[0]==='A'?'#6d7754':C.ink,700);text(paramsText(p,m),x+w-18,y+14,Math.max(10,Math.min(12,w/68)),C.muted,500,'right');}
+ ctx.restore();
+}
+function riverY(z,top,h){return top+h*(.42+.25*z+.12*Math.sin(z*15.8)*Math.sin(z*Math.PI));}
+function drawOverview(rect,run,t){const f=run.frames[Math.round(t)],p=run.params,{x,y,w,h}=rect;ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();const X=z=>x+z*w;const Y=z=>riverY(z,y,h);
+ const land=ctx.createLinearGradient(x,y,x+w,y+h);land.addColorStop(0,'#dbe5c8');land.addColorStop(.4,'#e6edcf');land.addColorStop(1,'#eff0d7');ctx.fillStyle=land;ctx.fillRect(x,y,w,h);
+ // A compact landform panorama, separate from the mass-conserving section.
+ for(let k=0;k<8;k++){const px=x+(k%4)*w*.085,py=y+h*(.13+Math.floor(k/4)*.22),mw=w*(.07+(k%3)*.017),mh=h*(.23+(k%4)*.06);path([[px-mw,py+mh],[px,py],[px+mw,py+mh]],true);ctx.fillStyle=k%2?'#b9c8a6':'#c6d0b4';ctx.fill();path([[px,py],[px+mw*.23,py+mh*.34],[px+mw*.04,py+mh*.27],[px-mw*.16,py+mh*.42]],true);ctx.fillStyle='#eef1da';ctx.fill();}
+ // Fields only locate the plain; they do not enter the transport calculation.
+ ctx.strokeStyle='#b8c5a65c';ctx.lineWidth=1;for(let i=0;i<7;i++){let zx=.39+i*.069;ctx.beginPath();ctx.moveTo(X(zx),y+h*.15);ctx.lineTo(X(zx+.02),y+h*.4);ctx.stroke();}
+ const sea=ctx.createLinearGradient(x+w*.87,0,x+w,0);sea.addColorStop(0,'#aad4d0');sea.addColorStop(1,'#8dc4ca');path([[X(.91),y],[x+w,y],[x+w,y+h],[X(.86),y+h],[X(.93),y+h*.65],[X(.90),y+h*.33]],true);ctx.fillStyle=sea;ctx.fill();
+ const shape=[];for(let i=0;i<=120;i++){const z=i/120,wide=(3+18*z+Math.max(0,z-.8)*p.spread*52)*(h/180);shape.push([X(z),Y(z)-wide]);}for(let i=120;i>=0;i--){const z=i/120,wide=(3+18*z+Math.max(0,z-.8)*p.spread*52)*(h/180);shape.push([X(z),Y(z)+wide]);}path(shape,true);ctx.fillStyle='#5aa8ad';ctx.fill();
+ ctx.beginPath();for(let i=0;i<=90;i++){const z=i/90;i?ctx.lineTo(X(z),Y(z)):ctx.moveTo(X(z),Y(z));}ctx.strokeStyle='#d4efdf9c';ctx.lineWidth=1.8;ctx.setLineDash([10,13]);ctx.lineDashOffset=-t*2;ctx.stroke();ctx.setLineDash([]);
+ const selected=cur().region;const b=[[.02,.33],[.34,.67],[.68,.89]][selected];ctx.strokeStyle='#4272636b';ctx.lineWidth=1.2;ctx.setLineDash([4,4]);roundRect(X(b[0]),y+5,(b[1]-b[0])*w,h-10,10);ctx.stroke();ctx.setLineDash([]);
+ f.particles.forEach(q=>{if(q.state===0||q.state===3)return;const yy=Y(q.x)+Math.sin(q.id*2.4)*(q.state===1?5:11);ctx.fillStyle=sourceColors?sources[q.origin]:'#bd965e';ctx.beginPath();ctx.arc(X(q.x),yy,q.id===cur().selected?5:2.8,0,Math.PI*2);ctx.fill();if(q.id===cur().selected){ctx.strokeStyle='#fffdf2';ctx.lineWidth=2.2;ctx.stroke();}hits.push({x:X(q.x),y:yy,id:q.id});});
+ [.19,.49,.76].forEach(z=>{let angle=Math.atan2(Y(z+.01)-Y(z-.01),w*.02);arrow(X(z),Y(z),18,angle,'#e3f6e8',2);});text('海',x+w*.968,y+h*.25,14,'#538d9c',650,'center');ctx.restore();
+}
+function render(){if(!cw||!ch)return;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,cw,ch);hits=[];const s=cur();if(s.baseline){const top=37,bottom=49,half=(ch-top-bottom-13)/2;drawCross({x:4,y:top,w:cw-8,h:half},s.baseline.run,s.t,mode,{compact:true,interactive:false,label:'A · 保留的条件'});ctx.strokeStyle='#c8d6c6';ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(20,top+half+6);ctx.lineTo(cw-20,top+half+6);ctx.stroke();ctx.setLineDash([]);drawCross({x:4,y:top+half+13,w:cw-8,h:half},s.run,s.t,mode,{compact:true,label:'B · 当前条件'});}else if(mode==='rain'){drawCross({x:0,y:37,w:cw,h:ch-87},s.run,s.t,mode,{});}else{const top=89,overviewH=Math.max(90,(ch-155)*.35);drawOverview({x:21,y:top,w:cw-42,h:overviewH},s.run,s.t);const secY=top+overviewH+9;text('沿河纵剖面',25,secY+9,11,C.muted,650);drawCross({x:0,y:secY+15,w:cw,h:Math.max(110,ch-secY-66)},s.run,s.t,mode,{});} }
+function nearestParticle(px,py){let near=null,d=Infinity;for(const hit of hits){const nd=Math.hypot(hit.x-px,hit.y-py);if(nd<d){d=nd;near=hit;}}return near&&d<55?near:null;}
+function pickAt(clientX,clientY){const r=canvas.getBoundingClientRect(),near=nearestParticle(clientX-r.left,clientY-r.top);if(near){cur().selected=near.id;updateNumbers();render();}}
+function trackNext(){const s=cur(),last=s.run.frames[120];const origin=trackCycle++%3;const options=s.run.particles.filter(p=>p.origin===origin);let choices=options.filter(p=>last.particles.find(q=>q.id===p.id).state!==0);if(!choices.length)choices=options;const chosen=choices[Math.floor(choices.length/2)];s.selected=chosen.id;updateNumbers();render();}
+function compare(){const s=cur();if(s.baseline){s.baseline=null;}else{s.baseline={params:Object.assign({},s.params),run:s.run};toast('A 已保留。改变一个条件，两组会按相同进度回放。');}syncUI();render();}
+function openModal(id){stop();lastFocus=document.activeElement;$(id).hidden=false;const first=$(id).querySelector('button,a');if(first)first.focus();}
+function closeModal(id){$(id).hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+function saveEvidence(){stop();render();const s=cur(),f=currentFrame(s),out=document.createElement('canvas');out.width=1600;const ratio=canvas.height/canvas.width;const imageH=Math.min(940,1460*ratio),imageW=imageH/ratio;out.height=Math.round(imageH+395);const g=out.getContext('2d');g.fillStyle='#f9faf2';g.fillRect(0,0,out.width,out.height);g.fillStyle=C.ink;g.font='700 38px "Microsoft YaHei",sans-serif';g.fillText('水对地表的作用 · '+(mode==='rain'?'透视一场雨':'沿河看变化'),70,70);g.font='24px "Microsoft YaHei",sans-serif';g.fillStyle='#577264';g.fillText('模型观察图  |  过程进度 '+Math.round(s.t/1.2)+'%  |  '+paramsText(s.params,mode),70,115);if(s.baseline){g.font='21px "Microsoft YaHei",sans-serif';g.fillText('A：'+paramsText(s.baseline.params,mode)+'    B：'+paramsText(s.params,mode),70,151);}g.drawImage(canvas,(1600-imageW)/2,170,imageW,imageH);let yy=190+imageH;g.fillStyle=C.ink;g.font='25px "Microsoft YaHei",sans-serif';g.fillText((s.baseline?'B 当前：':'')+'离开原位 '+f.eroded+'  =  搬运中 '+f.moving+' + 新位置沉积 '+f.settled+(mode==='river'?' + 流出画面 '+f.exported:''),70,yy);if(s.baseline){const a=s.baseline.run.frames[Math.round(s.t)];g.font='21px "Microsoft YaHei",sans-serif';g.fillText('A 对照：离开原位 '+a.eroded+'  =  搬运中 '+a.moving+' + 新位置沉积 '+a.settled+(mode==='river'?' + 流出画面 '+a.exported:''),70,yy+35);}g.font='23px "Microsoft YaHei",sans-serif';g.fillStyle='#75846c';g.fillText('我的解释：_________________________________________________________________',70,yy+100);g.font='21px \"Microsoft YaHei\",sans-serif';const originLabels=sourceColors?(mode==='rain'?['坡上来源','坡中来源','坡下来源']:['上游来源','中游来源','下游来源']):['来源颜色已关闭'];originLabels.forEach((label,i)=>{g.fillStyle=sourceColors?sources[i]:'#98714b';g.beginPath();g.arc(80+i*230,yy+65,7,0,Math.PI*2);g.fill();g.fillStyle='#577264';g.fillText(label,100+i*230,yy+72);});g.font='18px "Microsoft YaHei",sans-serif';g.fillText('示踪物质与地形变化经过放大；时间为过程示意。以上是模型份数，不是真实实验测量值。',70,out.height-24);const data=out.toDataURL('image/png');$('evidenceImage').src=data;$('downloadImage').href=data;$('downloadImage').download='五上4.6水对地表的作用_'+(mode==='rain'?'坡面':'河流')+'模型观察图.png';openModal('exportModal');}
+document.querySelectorAll('.tab').forEach(el=>el.addEventListener('click',()=>switchMode(el.dataset.mode)));
+document.querySelectorAll('.tab').forEach(el=>el.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();switchMode(mode==='rain'?'river':'rain');$('tab-'+mode).focus();}}));
+$('playBtn').addEventListener('click',play);$('resetBtn').addEventListener('click',()=>{stop();cur().t=0;syncUI();render();});$('timeRange').addEventListener('input',e=>{stop();cur().t=+e.target.value;syncPlay();updateNumbers();render();});$('slowBtn').addEventListener('click',()=>{slow=!slow;$('slowBtn').setAttribute('aria-pressed',String(slow));});$('param1').addEventListener('input',e=>setParam(0,e.target.value));$('param2').addEventListener('input',e=>setParam(1,e.target.value));$('compareBtn').addEventListener('click',compare);$('outlineBtn').addEventListener('click',()=>{outline=!outline;$('outlineBtn').setAttribute('aria-pressed',String(outline));render();});$('colorBtn').addEventListener('click',()=>{sourceColors=!sourceColors;$('colorBtn').setAttribute('aria-pressed',String(sourceColors));render();});$('trackBtn').addEventListener('click',trackNext);
+document.querySelectorAll('.station').forEach(el=>el.addEventListener('click',()=>{cur().region=+el.dataset.region;syncUI();render();}));
+if(window.PointerEvent){let drag=false;canvas.addEventListener('pointerdown',e=>{drag=true;canvas.setPointerCapture(e.pointerId);pickAt(e.clientX,e.clientY);});canvas.addEventListener('pointermove',e=>{if(drag)pickAt(e.clientX,e.clientY);});canvas.addEventListener('pointerup',()=>{drag=false;});canvas.addEventListener('pointercancel',()=>{drag=false;});}else{canvas.addEventListener('click',e=>pickAt(e.clientX,e.clientY));canvas.addEventListener('touchstart',e=>{if(e.touches[0]){pickAt(e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();}},{passive:false});}
+$('infoBtn').addEventListener('click',()=>openModal('infoModal'));$('exportBtn').addEventListener('click',saveEvidence);document.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',()=>closeModal(el.dataset.close)));document.querySelectorAll('.modal').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)closeModal(el.id);}));document.addEventListener('keydown',e=>{const modal=Array.from(document.querySelectorAll('.modal')).find(el=>!el.hidden);if(modal){if(e.key==='Escape')closeModal(modal.id);if(e.key==='Tab'){const focusables=Array.from(modal.querySelectorAll('button,a[href]'));const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}return;}if(e.code==='Space'&&!['INPUT','BUTTON','A'].includes(document.activeElement.tagName)){e.preventDefault();play();}});
+$('fullBtn').addEventListener('click',async()=>{try{if(document.fullscreenElement||document.webkitFullscreenElement){const fn=document.exitFullscreen||document.webkitExitFullscreen;if(fn)await fn.call(document);}else{const el=document.documentElement,fn=el.requestFullscreen||el.webkitRequestFullscreen;if(fn)await fn.call(el);else toast('此设备请使用浏览器的全屏或添加到主屏幕功能。');}}catch(e){toast('当前环境未允许全屏，可使用浏览器全屏。');}});document.addEventListener('fullscreenchange',()=>{$('fullBtn').setAttribute('aria-label',document.fullscreenElement?'退出全屏':'进入全屏');resize();});document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});window.addEventListener('resize',resize);if(window.ResizeObserver)new ResizeObserver(resize).observe($('stageBody'));
+// A read-only diagnostic snapshot, for local verification and future maintenance.
+window.WaterLesson={version:'1.0',getState:()=>({mode,t:Math.round(cur().t),playing,slow,params:Object.assign({},cur().params),selected:cur().selected,comparison:!!cur().baseline,counts:{eroded:currentFrame(cur()).eroded,moving:currentFrame(cur()).moving,settled:currentFrame(cur()).settled,exported:currentFrame(cur()).exported||0}})};
+syncUI();resize();
+}());
+
+</script>
+</body>
+</html>
