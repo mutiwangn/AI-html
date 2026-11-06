@@ -33,6 +33,7 @@
     '四上2.6胃和小肠里的消化': { level: 1, note: 'SVG 与触控' },
     '四上2.7食物在身体里的旅行': { level: 2, note: 'SVG 透视、触控绘图与 Canvas 记录导出' },
     '四上2.8呵护我们的器官': { level: 1, note: 'SVG 鼻腔模型、课堂调查与生活实践' },
+    '四上3.1声音是怎样产生的': { level: 1, note: 'SVG 与 Web Audio，无 3D' },
     '五上2.2独轮车省力的秘密': { level: 2, note: 'Canvas 模拟三维视效' },
     '五上2.3制作独轮车': { level: 2, note: 'SVG 设计与 Canvas 立体投影' },
     '五上2.4巧用斜面': { level: 2, note: 'Canvas 运输游戏与变形斜面' },
@@ -46,5 +47,6 @@
     4: '进阶三维'
   };
 }(window));
+
 
 
