@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#edf3f8">
+<meta name="description" content="五上3.5摩擦力的比较：水平拉动与匀速读数、控制变量、三次实验记录及生活中的摩擦。可离线使用的课堂互动网页。">
+<meta name="aihtml-level" content="1">
+<title>摩擦力的比较 · 五上3.5</title>
+<style>
+:root{--ink:#183247;--blue:#2866e8;--muted:#637485;--line:#dce4ec;--paper:#fff;--orange:#df7937;--soft:#edf3fa;--shadow:0 9px 30px rgba(36,63,89,.06)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:#edf3f8}button,input,select{font:inherit}button{cursor:pointer;color:inherit;touch-action:manipulation}button:disabled{cursor:default;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #f0a13a;outline-offset:3px}button,select{min-height:44px}button{border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px 16px;font-weight:650}button:hover:not(:disabled){border-color:#9ab4d8}button[aria-pressed=true]{background:#e7efff;border-color:#91b0f1;color:#1c54c0}[hidden]{display:none!important}svg{display:block;max-width:100%;font-family:inherit}h1,h2,h3,p{margin:0}.app{height:100vh;height:100dvh;min-height:620px;display:flex;flex-direction:column;overflow:hidden}.app-header{flex:none;height:94px;display:flex;align-items:center;gap:28px;padding:16px 28px;background:rgba(255,255,255,.78);border-bottom:1px solid #dae4ef}.brand{min-width:275px}.eyebrow{font-size:13px;letter-spacing:1.3px;color:#6c8197;margin-bottom:5px}h1{font-size:27px;font-weight:800;letter-spacing:1px}.main-nav{display:flex;gap:6px;padding:5px;background:#e7edf4;border-radius:12px;margin:auto}.main-nav button{border:0;background:transparent;white-space:nowrap;font-size:18px;padding:12px 21px;color:#607286;min-height:48px}.main-nav button[aria-selected=true]{background:#fff;color:var(--blue);box-shadow:0 2px 8px #1b477414}.nav-number{font-size:12px;opacity:.55;margin-right:8px}.header-tools{display:flex;align-items:center;gap:8px}.header-tools button{font-size:15px;padding:9px 11px;background:transparent}.level-pill{font-size:12px;color:#657b90;border:1px solid #cdd9e5;border-radius:5px;padding:4px 6px;white-space:nowrap}.pages{flex:1;min-height:0;padding:20px 28px 24px}.page{height:100%;min-height:0}.page-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.page-head h2{font-size:24px;font-weight:750;letter-spacing:.2px}.page-head p{font-size:16px;color:var(--muted);margin-top:6px}.page-head .tiny-label{font-size:13px;white-space:nowrap;background:#e4ebf5;padding:7px 10px;border-radius:5px;color:#667c93}.primary{background:var(--blue);color:#fff;border-color:var(--blue)}.primary:hover:not(:disabled){background:#215cd2;border-color:#215cd2}.secondary{background:#f0f5fb}.text-btn{background:transparent;border-color:transparent;color:var(--muted)}
+#page-measure{display:flex;flex-direction:column}.lab-layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px;flex:1;min-height:0}.bench-card{position:relative;background:#fff;border:1px solid #dbe4ed;border-radius:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:0;overflow:hidden}.bench-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 20px;border-bottom:1px solid #edf1f5;flex:none}.bench-label{display:flex;align-items:center;gap:9px;font-size:16px}.status-dot{width:9px;height:9px;background:#a2afbc;border-radius:50%}.status-dot.steady{background:#2866e8;box-shadow:0 0 0 4px #e3ecff}.bench-top .quiet-btn{font-size:14px;min-height:36px;padding:6px 10px;background:#f7f9fc}.scene-wrap{position:relative;flex:1;min-height:200px;background:linear-gradient(180deg,#fbfcfe 0%,#f5f8fc 77%,#e8eef6 77%)}#labScene{width:100%;height:100%;min-height:0;touch-action:none;user-select:none}.force-readout{position:absolute;top:20px;left:25px;pointer-events:none}.force-readout .read-label{font-size:14px;color:#718196;margin-bottom:4px}.read-value{font-size:50px;font-weight:750;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-1px}.read-value span{font-size:23px;letter-spacing:0;font-weight:600;margin-left:4px}.read-value.steady{color:var(--blue)}.read-value.warn{color:#b6502c}.read-hint{font-size:14px;color:#718196;margin-top:7px;max-width:310px}.scene-tools{position:absolute;right:18px;top:18px;display:flex;gap:6px}.scene-tools button{font-size:14px;background:#fff9;min-height:38px;padding:7px 10px}.scene-note{position:absolute;bottom:14px;left:22px;font-size:14px;color:#6a7e93}.bench-chart{height:115px;flex:none;border-top:1px solid #dbe4ed;background:#fff;padding:6px 16px 1px}.chart-caption{display:flex;justify-content:space-between;font-size:13px;color:#718398;margin:0 4px}.chart-caption span:last-child{color:#3b6ec5}.bench-chart svg{height:84px;width:100%}.lab-actions{flex:none;display:flex;gap:10px;align-items:center;padding:12px 18px;border-top:1px solid #edf1f5;background:#fff}.lab-actions button{font-size:17px;min-height:48px;white-space:nowrap}.lab-actions .capture{margin-left:auto}.trial-count{font-size:14px;color:#728398;white-space:nowrap}.setting-panel{display:flex;flex-direction:column;min-height:0;gap:13px}.condition-card{background:#fff;border:1px solid #dbe4ed;border-radius:13px;padding:17px;box-shadow:var(--shadow)}.condition-card h3{font-size:17px;margin-bottom:12px;display:flex;justify-content:space-between}.condition-card h3 span{font-weight:400;font-size:13px;color:#78899c}.segmented{display:flex;gap:5px}.segmented button{flex:1;font-size:16px;padding:9px 5px;min-height:45px}.material-note{font-size:12px;color:#7b899a;margin-top:8px;line-height:1.5}.weight-controls{display:flex;justify-content:space-between;align-items:center;gap:8px}.weight-controls button{font-size:27px;line-height:1;width:48px;padding:4px}.weight-read{font-size:24px;font-weight:700;white-space:nowrap}.weight-read small{font-size:14px;font-weight:500;margin-left:3px}.block-tray{display:flex;gap:7px;justify-content:center;height:39px;margin-top:9px}.tray-block{padding:0;min-height:30px;white-space:nowrap;height:30px;width:62px;background:#e8edf7;border:1px solid #c9d5e6;box-shadow:0 4px 0 #bccce2;border-radius:5px;font-size:12px;color:#60768f;display:grid;place-items:center;cursor:pointer}.tray-block.active{background:#7f99bd;color:#fff;border-color:#718cab;box-shadow:0 4px 0 #526c8e}.compare-link{margin-top:auto;border:1px solid #c3d5f4;border-radius:12px;background:#e8f0ff;padding:14px;font-size:16px;text-align:left;color:#295bb5}.compare-link span{display:block;color:#6283b6;font-size:13px;margin-top:5px}.magnifier{position:absolute;left:23px;right:23px;bottom:42px;padding:13px 16px;border:1px solid #bdcee3;border-radius:12px;background:#fffffff5;box-shadow:0 8px 28px #24446916;pointer-events:none}.magnifier .lens-title{font-size:14px;color:#5b718a;display:flex;justify-content:space-between;margin-bottom:5px}.magnifier svg{width:100%;height:93px}.contact-lens{left:auto;width:330px;bottom:43px;right:23px;pointer-events:auto}.contact-lens svg{height:128px}.contact-lens .lens-foot{font-size:13px;line-height:1.6;color:#6d7f92}.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#183247;color:#fff;padding:13px 22px;max-width:90vw;border-radius:10px;box-shadow:0 7px 30px #18324730;z-index:100;font-size:16px;pointer-events:none}.modal-backdrop{position:fixed;inset:0;background:#1c304963;display:flex;align-items:center;justify-content:center;padding:20px;z-index:90}.info-dialog{background:#fff;border-radius:16px;width:660px;max-width:100%;max-height:85vh;overflow:auto;padding:26px}.info-dialog h2{font-size:24px;margin-bottom:15px}.info-dialog h3{font-size:18px;margin:20px 0 8px}.info-dialog p,.info-dialog li{font-size:16px;line-height:1.8;color:#536b82}.info-dialog ul{padding-left:23px;margin:6px 0}.info-dialog .dialog-head{display:flex;align-items:start;justify-content:space-between}.info-dialog .dialog-head button{padding:6px 12px}.info-dialog footer{font-size:13px;color:#7c8ea1;border-top:1px solid #e3eaf1;padding-top:15px;margin-top:18px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1600px){.app-header{height:105px;padding-inline:40px}.pages{padding:24px 40px 30px}.lab-layout{grid-template-columns:minmax(0,1fr) 310px;gap:22px}.condition-card{padding:21px}.condition-card h3{font-size:20px}.segmented button{font-size:18px;min-height:51px}.page-head h2{font-size:28px}.page-head p{font-size:18px}.bench-chart{height:135px}.bench-chart svg{height:103px}.lab-actions{padding:15px 20px}.lab-actions button{font-size:19px;min-height:54px}.read-value{font-size:62px}.scene-note{font-size:16px}}
+@media(max-height:730px) and (min-width:950px){.app-header{height:78px}.pages{padding-top:13px;padding-bottom:13px}.page-head{margin-bottom:10px}.page-head h2{font-size:21px}.page-head p{font-size:14px;margin-top:4px}.condition-card{padding:11px 13px}.condition-card h3{margin-bottom:8px}.setting-panel{gap:9px}.bench-chart{height:99px}.bench-chart svg{height:72px}.lab-actions{padding:8px 12px}.read-value{font-size:42px}.read-hint{font-size:12px}.force-readout{top:12px;left:20px}}
+@media(max-width:1100px){.app-header{gap:15px;padding:12px 20px}.brand{min-width:230px}h1{font-size:24px}.eyebrow{font-size:11px}.main-nav button{font-size:16px;padding:10px 12px}.nav-number{display:none}.header-tools{gap:5px}.header-tools button{font-size:13px;padding:8px}.pages{padding:16px 18px 18px}.lab-layout{grid-template-columns:minmax(0,1fr) 225px;gap:12px}.condition-card{padding:13px}.condition-card h3{font-size:16px}.segmented button{font-size:14px}.lab-actions{gap:6px;padding:9px}.lab-actions button{font-size:15px;padding:9px 10px}.trial-count{font-size:12px}.read-value{font-size:42px}.read-hint{font-size:12px}.compare-link{font-size:15px}}
+@media(max-width:860px){.app{height:auto;min-height:100vh;overflow:visible}.app-header{height:auto;flex-wrap:wrap;gap:12px;padding:14px 18px}.brand{flex:1;min-width:0}.header-tools{order:1}.main-nav{order:2;width:100%;margin:0;justify-content:space-around}.main-nav button{flex:1;font-size:16px}.pages{padding:16px}.page{height:auto;min-height:calc(100vh - 175px)}.lab-layout{display:flex;flex-direction:column}.bench-card{flex:none;min-height:470px}.scene-wrap{height:300px;flex:none}.setting-panel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.condition-card{padding:13px 10px}.condition-card h3{font-size:15px}.condition-card h3 span{display:none}.weight-read{font-size:22px}.weight-controls button{width:39px;min-height:40px;font-size:23px}.compare-link{grid-column:1/-1;margin-top:0;padding:12px}.compare-link span{display:inline;margin-left:8px}.material-note{font-size:11px}.block-tray{height:25px;margin-top:10px}.tray-block{height:22px;width:43px;font-size:10px}.read-value{font-size:43px}.page-head .tiny-label{display:none}}
+@media(max-width:540px){.app-header{padding:12px;gap:10px}.eyebrow{font-size:10px;letter-spacing:.5px}h1{font-size:23px}.header-tools .level-pill{display:none}.header-tools button{min-height:40px}.main-nav button{font-size:15px;padding:9px 7px;min-height:44px}.pages{padding:13px 10px}.page-head h2{font-size:22px}.page-head p{font-size:13px;line-height:1.6}.bench-card{min-height:425px;border-radius:12px}.bench-top{padding:9px 12px}.bench-label{font-size:14px}.scene-wrap{height:260px}.force-readout{left:14px;top:14px}.read-value{font-size:34px}.read-value span{font-size:18px}.read-label{font-size:12px!important}.read-hint{max-width:210px;font-size:11px}.scene-tools{top:12px;right:10px;flex-direction:column}.scene-tools button{font-size:11px;padding:5px 7px;min-height:32px}.scene-note{left:12px;bottom:9px;font-size:11px}.bench-chart{height:95px;padding:6px 8px 0}.bench-chart svg{height:69px}.chart-caption{font-size:11px}.lab-actions{flex-wrap:wrap;gap:6px;padding:9px}.lab-actions button{font-size:13px;padding:9px;min-height:44px}.trial-count{display:none}.lab-actions .capture{margin-left:auto}.setting-panel{gap:6px}.condition-card{padding:10px 7px;border-radius:10px}.condition-card h3{font-size:13px;margin-bottom:10px}.segmented{flex-direction:column;gap:4px}.segmented button{font-size:13px;min-height:38px;padding:6px 3px}.weight-controls{gap:2px;flex-wrap:wrap;justify-content:center}.weight-read{width:100%;text-align:center;font-size:21px;order:-1;margin-bottom:8px}.weight-controls button{width:38px;min-height:38px}.block-tray{display:none}.material-note{font-size:10px;line-height:1.4}.magnifier{left:10px;right:10px;bottom:31px;padding:10px}.magnifier svg{height:75px}.magnifier .lens-title{font-size:12px}.contact-lens{width:auto}.contact-lens svg{height:97px}.contact-lens .lens-foot{font-size:11px}.info-dialog{padding:20px}.info-dialog p,.info-dialog li{font-size:14px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+<style>
+
+#page-evidence{box-sizing:border-box;display:flex;flex-direction:column;gap:14px;min-width:0;min-height:0;width:100%;height:100%;overflow:hidden;color:var(--ink,#183247);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif}
+#page-evidence[hidden],#page-evidence [hidden]{display:none!important}
+#page-evidence *{box-sizing:border-box}
+#page-evidence button,#page-evidence select,#page-evidence input{font:inherit}
+#page-evidence button{min-height:44px;min-width:44px;border:1px solid var(--line,#dce4ec);border-radius:10px;background:#fff;color:var(--ink,#183247);font-weight:650;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#page-evidence button:focus-visible,#page-evidence select:focus-visible,#page-evidence input:focus-visible{outline:3px solid #f5b63b;outline-offset:3px}
+#page-evidence button:disabled{cursor:default;opacity:.45}
+#page-evidence .ev-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex:none}
+#page-evidence .ev-heading{min-width:0}
+#page-evidence h2{margin:0 0 4px;font-size:clamp(25px,2.2vw,34px);line-height:1.25;letter-spacing:.02em}
+#page-evidence .ev-lead{margin:0;color:var(--muted,#637485);font-size:clamp(16px,1.35vw,19px);line-height:1.5}
+#page-evidence .ev-actions{display:flex;gap:8px;flex:none;flex-wrap:wrap;justify-content:flex-end}
+#page-evidence .ev-actions button{padding:0 13px;font-size:17px}
+#page-evidence .ev-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none}
+#page-evidence .ev-source-switch{display:flex;gap:4px;padding:4px;border:1px solid var(--line,#dce4ec);background:#edf2f8;border-radius:12px;flex:none}
+#page-evidence .ev-source-switch button{border-color:transparent;background:transparent;padding:0 20px;font-size:19px;border-radius:8px;min-height:44px}
+#page-evidence .ev-source-switch button[aria-pressed="true"]{color:#fff;background:var(--blue,#2866e8);box-shadow:0 2px 5px #2866e829}
+#page-evidence .ev-source-note{margin:0;color:var(--muted,#637485);font-size:17px;line-height:1.45;text-align:right}
+#page-evidence .ev-grid{display:grid;grid-template-columns:minmax(0,1.17fr) minmax(0,1fr);gap:16px;flex:1;min-height:0;min-width:0}
+#page-evidence .ev-data-card,#page-evidence .ev-chart-card{display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0;border:1px solid var(--line,#dce4ec);border-radius:16px;background:#fff;padding:16px;overflow:hidden}
+#page-evidence .ev-data-title{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none}
+#page-evidence h3{margin:0;font-size:21px;line-height:1.4}
+#page-evidence .ev-counter{font-size:16px;color:var(--muted,#637485);white-space:nowrap}
+#page-evidence .ev-real-builder{flex:none;padding:10px 12px;background:#f4f7fc;border:1px solid var(--line,#dce4ec);border-radius:12px}
+#page-evidence .ev-builder-fields{display:grid;grid-template-columns:1fr 1.15fr 1.25fr auto;gap:8px;align-items:end}
+#page-evidence .ev-field{display:flex;flex-direction:column;gap:5px;min-width:0;font-size:16px;color:var(--muted,#637485)}
+#page-evidence select{height:44px;width:100%;min-width:0;border:1px solid #bfcddb;border-radius:8px;background:#fff;color:var(--ink,#183247);padding:0 5px;font-size:17px}
+#page-evidence .ev-add{padding:0 12px;background:var(--blue,#2866e8);color:#fff;border-color:var(--blue,#2866e8);font-size:17px;white-space:nowrap}
+#page-evidence .ev-real-note{margin:9px 0 0;color:var(--muted,#637485);font-size:15px;line-height:1.5}
+#page-evidence .ev-table-wrap{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;border:1px solid var(--line,#dce4ec);border-radius:10px;-webkit-overflow-scrolling:touch}
+#page-evidence .ev-table{width:100%;min-width:535px;border-collapse:separate;border-spacing:0;table-layout:fixed;font-size:18px}
+#page-evidence .ev-table col.ev-col-pick{width:54px}
+#page-evidence .ev-table col.ev-col-condition{width:auto}
+#page-evidence .ev-table col.ev-col-trial{width:58px}
+#page-evidence .ev-table col.ev-col-mean{width:72px}
+#page-evidence .ev-table thead th{position:sticky;top:0;z-index:2;padding:9px 4px;background:#eff4fa;color:var(--muted,#637485);border-bottom:1px solid var(--line,#dce4ec);font-size:16px;font-weight:650;text-align:center;line-height:1.3}
+#page-evidence .ev-table th.ev-condition-head{text-align:left;padding-left:6px}
+#page-evidence .ev-table tbody td{padding:9px 4px;border-bottom:1px solid #e7edf4;vertical-align:middle;text-align:center}
+#page-evidence .ev-table tbody tr:last-child td{border-bottom:0}
+#page-evidence .ev-table tbody tr.ev-row-a{background:#eff5ff}
+#page-evidence .ev-table tbody tr.ev-row-b{background:#fff8ea}
+#page-evidence .ev-pick{width:44px;padding:0;border-radius:50%;font-size:24px;background:#fff;font-weight:750}
+#page-evidence .ev-row-a .ev-pick{background:var(--blue,#2866e8);border-color:var(--blue,#2866e8);color:#fff}
+#page-evidence .ev-row-b .ev-pick{background:#c66b12;border-color:#c66b12;color:#fff}
+#page-evidence .ev-condition{text-align:left!important;overflow-wrap:anywhere}
+#page-evidence .ev-condition-name{display:block;font-size:17px;font-weight:700;line-height:1.5}
+#page-evidence .ev-condition-meta{display:flex;align-items:center;justify-content:space-between;gap:3px;font-size:15px;color:var(--muted,#637485);line-height:1.35}
+#page-evidence .ev-delete{font-size:14px;min-width:44px;padding:0 5px;background:transparent;border-color:transparent;color:#9b3a30;flex:none}
+#page-evidence .ev-delete.ev-armed{background:#fff0ed;border-color:#d9806f;color:#9b3023}
+#page-evidence .ev-value{width:48px;padding:0;font-size:21px;font-variant-numeric:tabular-nums;border-color:#bdcce0;background:#fff}
+#page-evidence .ev-value.ev-blank{color:#74859a;background:#f9fbff;border-style:dashed}
+#page-evidence .ev-sim-value{display:inline-flex;min-height:44px;align-items:center;justify-content:center;font-size:21px;font-weight:650;font-variant-numeric:tabular-nums}
+#page-evidence .ev-no-value{color:#8593a3}
+#page-evidence .ev-average{display:block;font-size:22px;font-weight:750;font-variant-numeric:tabular-nums}
+#page-evidence .ev-count{display:block;font-size:14px;color:var(--muted,#637485);line-height:1.5}
+#page-evidence .ev-empty td{height:170px;padding:24px 12px!important;line-height:1.7;color:var(--muted,#637485);font-size:18px}
+#page-evidence .ev-empty strong{display:block;margin-bottom:3px;color:var(--ink,#183247);font-size:21px}
+#page-evidence .ev-table-hint{margin:0;color:var(--muted,#637485);font-size:15px;line-height:1.5;flex:none}
+#page-evidence .ev-chart-card{gap:8px}
+#page-evidence .ev-chart-title{display:flex;justify-content:space-between;gap:8px;align-items:center;flex:none}
+#page-evidence .ev-scale-note{font-size:16px;color:var(--muted,#637485);white-space:nowrap}
+#page-evidence .ev-chart-svg{width:100%;height:100%;min-height:185px;max-height:370px;flex:1;display:block}
+#page-evidence .ev-insight{flex:none;padding:11px 13px;background:#f1f6fc;border:1px solid #d9e6f5;border-radius:10px;min-height:77px}
+#page-evidence .ev-insight[data-kind="warning"]{background:#fff8e9;border-color:#ecd5a0}
+#page-evidence .ev-status-title{margin:0 0 4px;font-size:19px;font-weight:750;line-height:1.35}
+#page-evidence .ev-status-body{margin:0;color:var(--muted,#637485);font-size:16px;line-height:1.55}
+#page-evidence .ev-question{margin:7px 0 0;color:var(--blue,#2866e8);font-size:18px;font-weight:700;line-height:1.5}
+#page-evidence .ev-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:calc(100vw - 32px);z-index:10020;border-radius:10px;background:#183247;color:#fff;padding:12px 20px;box-shadow:0 4px 20px #10263a30;font-size:18px;line-height:1.5;text-align:center;pointer-events:none}
+#page-evidence .ev-modal{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px;background:#0b213974;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#page-evidence .ev-keypad{width:min(100%,420px);max-height:calc(100vh - 24px);overflow:auto;padding:22px;border-radius:20px;background:#fff;box-shadow:0 18px 60px #0b21394d;color:var(--ink,#183247)}
+#page-evidence .ev-keypad h3{font-size:24px;margin:0 0 7px}
+#page-evidence .ev-keypad-context{margin:0 0 12px;color:var(--muted,#637485);font-size:16px;line-height:1.55}
+#page-evidence .ev-keypad-display{display:flex;align-items:center;gap:10px;border:2px solid var(--blue,#2866e8);border-radius:12px;padding:7px 14px;background:#f5f9ff}
+#page-evidence .ev-keypad-display input{width:100%;min-width:0;height:58px;padding:0;border:0;outline:0;background:transparent;font-size:40px;line-height:1;font-weight:750;letter-spacing:.04em;color:var(--ink,#183247);font-variant-numeric:tabular-nums;text-align:right;caret-color:transparent}
+#page-evidence .ev-keypad-display input::placeholder{font-size:23px;letter-spacing:0;color:#8493a6;font-weight:500}
+#page-evidence .ev-keypad-unit{font-size:26px;font-weight:650}
+#page-evidence .ev-keypad-feedback{min-height:26px;margin:8px 0;color:var(--muted,#637485);font-size:16px;line-height:1.5}
+#page-evidence .ev-keypad-feedback.ev-error{color:#ad3729}
+#page-evidence .ev-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+#page-evidence .ev-keys button{min-height:56px;border-radius:10px;font-size:26px;background:#f2f5fa;border-color:#dde5f0}
+#page-evidence .ev-keypad-actions{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:9px;margin-top:12px}
+#page-evidence .ev-keypad-actions button{font-size:19px;min-height:48px}
+#page-evidence .ev-keypad-actions .ev-confirm{background:var(--blue,#2866e8);border-color:var(--blue,#2866e8);color:#fff}
+@media(max-width:1100px){
+  #page-evidence{display:block;overflow-y:auto;overflow-x:hidden;height:100%;padding-bottom:10px}
+  #page-evidence .ev-top{margin-bottom:13px}
+  #page-evidence .ev-toolbar{margin-bottom:13px}
+  #page-evidence .ev-grid{grid-template-columns:1fr;display:grid}
+  #page-evidence .ev-data-card{min-height:290px}
+  #page-evidence .ev-table-wrap{max-height:340px;min-height:175px}
+  #page-evidence .ev-chart-svg{height:auto;min-height:0;max-height:370px;flex:none}
+  #page-evidence .ev-chart-card{min-height:0}
+}
+@media(max-width:620px){
+  #page-evidence{padding-bottom:12px}
+  #page-evidence .ev-top{display:block}
+  #page-evidence .ev-actions{justify-content:flex-start;margin-top:10px}
+  #page-evidence .ev-actions button{font-size:16px}
+  #page-evidence .ev-toolbar{display:block}
+  #page-evidence .ev-source-switch{width:max-content;max-width:100%}
+  #page-evidence .ev-source-switch button{padding:0 18px;font-size:18px;min-height:44px}
+  #page-evidence .ev-source-note{text-align:left;font-size:16px;margin-top:8px}
+  #page-evidence .ev-grid{gap:12px}
+  #page-evidence .ev-data-card,#page-evidence .ev-chart-card{padding:12px;border-radius:12px}
+  #page-evidence .ev-builder-fields{grid-template-columns:1fr 1fr}
+  #page-evidence .ev-real-builder{padding:10px}
+  #page-evidence .ev-add{width:100%}
+  #page-evidence .ev-table-wrap{max-height:350px}
+  #page-evidence .ev-chart-title{display:block}
+  #page-evidence .ev-chart-svg{min-width:0}
+  #page-evidence .ev-status-title{font-size:18px}
+  #page-evidence .ev-status-body{font-size:16px}
+  #page-evidence .ev-keypad{padding:17px}
+  #page-evidence .ev-keypad-display input{height:48px;font-size:34px}
+  #page-evidence .ev-keys button{min-height:51px}
+  #page-evidence .ev-toast{bottom:14px;width:max-content;font-size:16px}
+}
+@media(max-height:700px) and (min-width:1101px){
+  #page-evidence{gap:9px}
+  #page-evidence .ev-data-card,#page-evidence .ev-chart-card{padding:12px;gap:7px}
+  #page-evidence .ev-insight{padding:8px 11px;min-height:65px}
+  #page-evidence .ev-real-builder{padding:8px}
+  #page-evidence .ev-real-note{margin-top:5px;font-size:14px}
+  #page-evidence .ev-chart-svg{min-height:160px}
+}
+@media(prefers-reduced-motion:reduce){#page-evidence *{scroll-behavior:auto!important}}
+
+
+#page-life{height:100%;min-height:0;display:flex;flex-direction:column;gap:14px;color:var(--ink,#183247)}
+#page-life[hidden]{display:none!important}
+#page-life .life-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-shrink:0}
+#page-life .life-heading h2{font-size:clamp(23px,2.1vw,31px);letter-spacing:.03em;margin:0 0 4px;font-weight:800}
+#page-life .life-heading p{margin:0;color:var(--muted,#637485);font-size:17px;line-height:1.5}
+#page-life .life-weather{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:15px;color:#337696;padding:9px 12px;border:1px solid #c9e4ef;background:#edf8fc;border-radius:9px}
+#page-life .life-layout{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(246px,292px);gap:16px}
+#page-life .life-scene{min-height:0;display:flex;flex-direction:column;border:1px solid var(--line,#dce4ec);border-radius:15px;background:#fff;overflow:hidden}
+#page-life .life-stage{position:relative;flex:1;min-height:210px;background:linear-gradient(180deg,#f5fbff 0%,#fff 73%)}
+#page-life .life-stage svg{width:100%;height:100%;display:block;min-height:0}
+#page-life .life-stage-top{position:absolute;z-index:1;left:17px;top:14px;right:17px;display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none}
+#page-life .life-phase{font-size:17px;font-weight:750;color:#29455c;border:1px solid #dde9f1;background:rgba(255,255,255,.94);border-radius:8px;padding:7px 10px;box-shadow:0 2px 6px #18324705}
+#page-life .life-follow{font-size:13px;color:#718293}
+#page-life .life-hotspot{cursor:pointer;outline:none}
+#page-life .life-hotspot .life-hot-ring{transition:stroke .16s,fill .16s;stroke:#6489ad;fill:#ffffffbd;stroke-width:2.5}
+#page-life .life-hotspot:hover .life-hot-ring,#page-life .life-hotspot:focus .life-hot-ring,#page-life .life-hotspot[aria-pressed="true"] .life-hot-ring{stroke:#2866e8;fill:#eaf2ff}
+#page-life .life-hotspot:focus-visible .life-hot-ring{stroke-width:4}
+#page-life .life-hotspot text{font-family:inherit;fill:#24455e;font-weight:750;user-select:none}
+#page-life .life-detail{display:flex;gap:12px;align-items:center;min-height:108px;padding:11px 18px;border-top:1px solid #e0e9f0;background:#f7faff;flex-shrink:0}
+#page-life .life-detail-graphic{width:170px;height:88px;flex-shrink:0}
+#page-life .life-detail-copy{min-width:0}
+#page-life .life-detail-copy h3{font-size:19px;line-height:1.3;margin:0 0 5px}
+#page-life .life-detail-copy p{font-size:16px;line-height:1.5;color:#5e7283;margin:0;max-width:560px}
+#page-life .life-side{min-height:0;display:flex;flex-direction:column;gap:12px}
+#page-life .life-config{border:1px solid var(--line,#dce4ec);border-radius:12px;background:#fff;padding:14px;display:flex;flex-direction:column;gap:15px}
+#page-life .life-label{display:block;font-size:18px;font-weight:750;margin:0 0 8px}
+#page-life .life-options{display:flex;gap:6px;padding:4px;background:#edf2f7;border-radius:9px}
+#page-life .life-choice{appearance:none;border:1px solid transparent;border-radius:7px;background:transparent;color:#536779;font-family:inherit;font-size:17px;font-weight:700;line-height:1.25;min-height:42px;padding:7px 9px;flex:1;cursor:pointer;transition:background .16s,color .16s,box-shadow .16s}
+#page-life .life-choice[aria-pressed="true"]{background:#fff;border-color:#ceddf4;color:#1e5ace;box-shadow:0 2px 6px #1639520a}
+#page-life .life-choice:disabled{opacity:.68;cursor:default}
+#page-life .life-choice:focus-visible,#page-life .life-primary:focus-visible,#page-life .life-save:focus-visible{outline:3px solid #79a9ff;outline-offset:3px}
+#page-life .life-primary{appearance:none;border:0;border-radius:10px;background:#2866e8;color:#fff;min-height:50px;width:100%;font-family:inherit;font-size:19px;line-height:1.2;font-weight:750;padding:12px 14px;cursor:pointer;box-shadow:0 4px 12px #2866e829}
+#page-life .life-primary:hover{background:#1e59d2}
+#page-life .life-primary[data-paused="true"]{background:#496a9b}
+#page-life .life-feedback{border:1px solid var(--line,#dce4ec);border-radius:12px;background:#fff;padding:13px 14px}
+#page-life .life-result-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#page-life .life-result-item+ .life-result-item{border-left:1px solid #e5ecf2;padding-left:12px}
+#page-life .life-result-item span{font-size:15px;color:#637485;display:block;margin-bottom:6px}
+#page-life .life-result-item strong{display:block;font-size:23px;line-height:1.25;letter-spacing:.03em;min-height:29px;color:#183247}
+#page-life .life-bars{height:7px;display:flex;gap:3px;margin-top:9px}
+#page-life .life-bars i{display:block;flex:1;border-radius:2px;background:#e8edf3;transition:background .2s}
+#page-life .life-bars[data-kind="drag"] i[data-on="true"]{background:#ee9c4a}
+#page-life .life-bars[data-kind="grip"] i[data-on="true"]{background:#4c89de}
+#page-life .life-result-note{font-size:14px;line-height:1.5;color:#647587;min-height:21px;margin:11px 0 0}
+#page-life .life-save{appearance:none;border:1px solid #cdddf0;border-radius:9px;background:#f6f9fe;color:#285eaa;min-height:43px;padding:9px 12px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;width:100%;margin-top:12px}
+#page-life .life-save:disabled{background:#f4f6f8;border-color:#e3e8ef;color:#98a6b3;cursor:default}
+#page-life .life-baseline{background:#edf4ff;border:1px solid #d1dff5;border-radius:11px;padding:11px 13px;min-height:0}
+#page-life .life-baseline[hidden]{display:none}
+#page-life .life-baseline-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px;font-size:15px;font-weight:750;color:#345b91}
+#page-life .life-baseline-config{font-size:15px;color:#5c7090;margin:0 0 8px;line-height:1.4}
+#page-life .life-baseline-values{display:flex;gap:13px;flex-wrap:wrap;font-size:14px;line-height:1.5;color:#596f88}
+#page-life .life-baseline-values b{font-size:17px;color:#24476c;padding-left:4px}
+#page-life .life-comparison{margin:9px 0 0;padding-top:8px;border-top:1px solid #d2dff2;color:#285da1;font-size:15px;line-height:1.5}
+#page-life .life-note{flex-shrink:0;font-size:12px;line-height:1.5;color:#7a8b99;margin:0}
+@media(min-width:1100px) and (max-height:790px){
+ #page-life{gap:10px}
+ #page-life .life-heading h2{font-size:25px}
+ #page-life .life-heading p{font-size:16px}
+ #page-life .life-side{gap:9px}
+ #page-life .life-config{padding:11px 12px;gap:11px}
+ #page-life .life-feedback{padding:11px 12px}
+ #page-life .life-detail{min-height:92px;padding:8px 14px}
+ #page-life .life-detail-graphic{height:78px;width:145px}
+ #page-life .life-baseline{padding:9px 12px}
+ #page-life .life-baseline-config{margin-bottom:4px}
+ #page-life .life-save{margin-top:9px}
+}
+@media(min-width:861px) and (max-height:820px){
+ #page-life .life-config{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:12px}
+ #page-life .life-label{font-size:16px}
+ #page-life .life-choice{font-size:14px;padding:7px 3px}
+ #page-life .life-options{padding:3px;gap:4px;align-items:stretch}
+ #page-life .life-side{overflow-y:auto;overscroll-behavior:contain}
+}
+@media(max-width:1040px){
+ #page-life .life-layout{grid-template-columns:minmax(0,1fr) 242px;gap:12px}
+ #page-life .life-heading p{font-size:16px}
+ #page-life .life-weather{font-size:13px;padding:8px}
+ #page-life .life-detail{padding:10px 12px;gap:9px}
+ #page-life .life-detail-graphic{width:130px;height:82px}
+ #page-life .life-detail-copy h3{font-size:18px}
+ #page-life .life-detail-copy p{font-size:15px}
+ #page-life .life-config{padding:11px;gap:12px}
+ #page-life .life-choice{font-size:16px;padding:7px 5px}
+ #page-life .life-feedback{padding:11px}
+ #page-life .life-result-item strong{font-size:21px}
+}
+@media(max-width:820px) and (orientation:portrait){
+ #page-life{height:auto;min-height:100%;gap:12px}
+ #page-life .life-layout{display:flex;flex-direction:column;gap:12px;flex:none}
+ #page-life .life-stage{height:330px;flex:none}
+ #page-life .life-detail{min-height:92px}
+ #page-life .life-side{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ #page-life .life-config{grid-column:1;grid-row:1/3;justify-content:center}
+ #page-life .life-primary{grid-column:2;grid-row:1;min-height:48px}
+ #page-life .life-feedback{grid-column:2;grid-row:2}
+ #page-life .life-baseline{grid-column:1/-1}
+ #page-life .life-baseline-title{margin-bottom:4px}
+ #page-life .life-baseline-config,#page-life .life-baseline-values{display:inline-flex;margin-right:16px}
+ #page-life .life-comparison{margin-top:6px;padding-top:6px}
+}
+@media(max-width:540px){
+ #page-life .life-heading{align-items:flex-start;gap:8px}
+ #page-life .life-heading h2{font-size:22px;letter-spacing:0}
+ #page-life .life-heading p{font-size:14px}
+ #page-life .life-weather{font-size:12px;padding:6px 7px}
+ #page-life .life-stage{height:245px;min-height:245px}
+ #page-life .life-stage-top{left:10px;right:10px;top:10px}
+ #page-life .life-phase{font-size:13px;padding:5px 7px}
+ #page-life .life-follow{font-size:11px}
+ #page-life .life-detail{min-height:91px;padding:9px 10px;gap:10px}
+ #page-life .life-detail-graphic{width:112px;height:73px}
+ #page-life .life-detail-copy h3{font-size:17px}
+ #page-life .life-detail-copy p{font-size:13px;line-height:1.45}
+ #page-life .life-side{display:flex;gap:10px}
+ #page-life .life-config{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+ #page-life .life-label{font-size:16px;margin-bottom:7px}
+ #page-life .life-choice{font-size:14px;min-height:42px;padding:7px 4px}
+ #page-life .life-options{gap:2px;padding:3px}
+ #page-life .life-primary{font-size:18px;min-height:48px}
+ #page-life .life-feedback{padding:11px}
+ #page-life .life-result-item strong{font-size:22px}
+ #page-life .life-result-note{font-size:13px;margin-top:9px;min-height:0}
+ #page-life .life-save{min-height:42px;margin-top:9px;font-size:15px}
+ #page-life .life-baseline-config,#page-life .life-baseline-values{display:flex;margin-right:0}
+ #page-life .life-note{font-size:11px}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header class="app-header">
+ <div class="brand"><div class="eyebrow">五年级上册 / 第三单元 · 第5课</div><h1>摩擦力的比较</h1></div>
+ <nav class="main-nav" aria-label="课堂任务"><button type="button" data-page="measure" aria-selected="true"><span class="nav-number">01</span>测一测</button><button type="button" data-page="evidence" aria-selected="false"><span class="nav-number">02</span>比一比</button><button type="button" data-page="life" aria-selected="false"><span class="nav-number">03</span>用一用</button></nav>
+ <div class="header-tools"><span class="level-pill" title="T1 基础级，HTML/CSS/JS/SVG，无外部依赖">T1 基础</span><button type="button" id="showInfo" aria-label="课堂说明">说明</button><button type="button" id="fullscreenBtn" aria-label="全屏展示">全屏</button></div>
+</header>
+<main class="pages">
+<section class="page" id="page-measure" aria-label="测一测">
+ <div class="page-head"><div><h2>什么时候可以读数？</h2><p>拖动测力计拉环，试着让小车平稳前进。</p></div><div class="tiny-label">先感受，再测量</div></div>
+ <div class="lab-layout">
+  <div class="bench-card">
+   <div class="bench-top"><div class="bench-label"><i class="status-dot" id="statusDot"></i><span id="motionStatus" aria-live="polite">准备拉动</span></div><button class="quiet-btn" id="showForces" aria-pressed="false">显示受力</button></div>
+   <div class="scene-wrap">
+    <div class="force-readout"><div class="read-label" id="readoutLabel">测力计示数</div><div class="read-value" id="forceValue">0.0<span>N</span></div><div class="read-hint" id="readingHint">保持水平，先看小车是否平稳。</div></div>
+    <div class="scene-tools"><button id="gaugeZoomBtn" aria-pressed="false">放大刻度</button><button id="contactZoomBtn" aria-pressed="false">看轮地接触</button></div>
+    <svg id="labScene" viewBox="0 120 1000 350" role="img" aria-label="水平桌面上的实验小车和弹簧测力计，拖动右侧蓝色拉环">
+     <defs>
+      <linearGradient id="cartPaint" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#73b5df"/><stop offset="1" stop-color="#397eb2"/></linearGradient>
+      <linearGradient id="metalPaint" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f1f5fa"/><stop offset=".4" stop-color="#c7d4e3"/><stop offset="1" stop-color="#8fa5bc"/></linearGradient>
+      <linearGradient id="gaugePaint" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#faffff"/><stop offset="1" stop-color="#dce6f0"/></linearGradient>
+      <pattern id="tablePattern" width="80" height="30" patternUnits="userSpaceOnUse"><path d="M0 14H80M14 28H49" stroke="#d6e1ed" stroke-width="1"/></pattern>
+      <marker id="orangeArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#df7937"/></marker>
+      <marker id="blueArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#2866e8"/></marker>
+     </defs>
+     <path d="M0 349H1000V470H0Z" fill="#e8eff7"/><path d="M0 353H1000V470H0Z" fill="url(#tablePattern)"/><path d="M0 348H1000" stroke="#9fb4cb" stroke-width="4"/>
+     <g stroke="#bbcadd" stroke-width="1"><path d="M90 391H930"/><path d="M110 386V398M220 386V398M330 386V398M440 386V398M550 386V398M660 386V398M770 386V398M880 386V398"/></g>
+     <text x="112" y="420" font-size="16" fill="#8799ad">同一水平桌面</text>
+     <ellipse id="cartShadow" cx="200" cy="350" rx="120" ry="10" fill="#5e7998" opacity=".14"/>
+     <g id="cartGroup"></g>
+     <g id="forceArrows" visibility="hidden"><line id="pullArrow" x1="320" y1="230" x2="390" y2="230" stroke="#df7937" stroke-width="5" marker-end="url(#orangeArrow)"/><text id="pullLabel" x="340" y="215" font-size="19" fill="#b9652d">拉力</text><line id="resistArrow" x1="200" y1="371" x2="140" y2="371" stroke="#2866e8" stroke-width="5" marker-end="url(#blueArrow)"/><text id="resistLabel" x="130" y="403" font-size="18" fill="#3669bd">阻力</text></g>
+     <g id="gaugeGroup" transform="translate(360 0)">
+      <rect x="0" y="252" width="220" height="72" rx="13" fill="url(#gaugePaint)" stroke="#93a9bf" stroke-width="2"/>
+      <rect x="12" y="262" width="192" height="49" rx="5" fill="#fff" stroke="#c6d2e0"/>
+      <g id="smallScale"></g><path id="springPath" d="" fill="none" stroke="#56728e" stroke-width="3"/>
+      <line id="meterRod" x1="-70" y1="289" x2="175" y2="289" stroke="#849cb4" stroke-width="4"/>
+      <path id="meterNeedle" d="M175 268V287" stroke="#df7937" stroke-width="3"/>
+      <path d="M220 288H238" stroke="#7892ad" stroke-width="7"/>
+      <g id="pullHandle" role="button" tabindex="0" aria-label="测力计拉环，向右拖动；键盘按右方向键拉动，回车匀速演示" style="cursor:ew-resize">
+       <circle cx="255" cy="288" r="32" fill="#2866e8" opacity=".09"/>
+       <rect x="232" y="257" width="57" height="61" rx="16" fill="transparent"/>
+       <ellipse cx="255" cy="288" rx="19" ry="22" fill="#eff5ff" stroke="#2866e8" stroke-width="7"/>
+       <path d="M247 288H263M259 283L264 288L259 293" fill="none" stroke="#2866e8" stroke-width="2"/>
+      </g>
+      <text x="247" y="350" id="handleHint" text-anchor="middle" font-size="19" fill="#3b6fc2">向右拉 →</text>
+     </g>
+    </svg>
+    <div class="magnifier" id="gaugeLens" hidden><div class="lens-title"><span>测力计刻度 · 0～5 N</span><span>每小格 0.1 N</span></div><svg viewBox="0 0 800 100" aria-label="测力计放大刻度"><rect x="10" y="2" width="780" height="94" rx="8" fill="#f7faff"/><g id="largeScale"></g><path id="largeNeedle" d="M45 6V45" stroke="#df7937" stroke-width="4"/></svg></div>
+    <div class="magnifier contact-lens" id="contactLens" hidden><div class="lens-title"><span id="contactTitle">车轮接触放大</span><span>红点追踪轮面</span></div><svg viewBox="0 0 360 160" aria-label="轮胎与地面接触放大示意"><path d="M0 132H360V160H0Z" fill="#dbe6f2"/><path d="M0 132H360" stroke="#859db8" stroke-width="3"/><g id="zoomWheel" transform="translate(172 77)"><circle r="55" fill="#3d5065"/><circle r="40" fill="#dbe6f1"/><circle r="12" fill="#8498b0"/><g id="zoomSpokes"><path d="M-35 0H35M0-35V35M-25-25L25 25M25-25L-25 25" stroke="#9baec3" stroke-width="5"/><circle cx="0" cy="50" r="6" fill="#ef8052"/></g></g><g id="zoomContactMarks" stroke="#6e8aad" stroke-width="2"></g></svg><div class="lens-foot" id="contactFoot">先拉动，再观察红点怎样经过接触处。</div></div>
+    <div class="scene-note">教学模拟 · 实物数值以实际测量为准</div>
+   </div>
+   <div class="bench-chart"><div class="chart-caption"><span>拉力变化 / N</span><span>蓝色：正在平稳移动</span></div><svg id="forceChart" viewBox="0 0 800 90" preserveAspectRatio="none" aria-label="拉力随时间变化的曲线"><g stroke="#e2e9f1" stroke-width="1"><path d="M37 12H780M37 70H780"/></g><g fill="#8090a2" font-size="12"><text x="6" y="17">5.0</text><text x="17" y="73">0</text><text x="40" y="87">0 s</text><text x="750" y="87" id="chartEnd">10 s</text></g><path id="tracePath" fill="none" stroke="#df7937" stroke-width="2.5"/><path id="steadyPath" fill="none" stroke="#2866e8" stroke-width="3"/></svg></div>
+   <div class="lab-actions"><button class="primary" id="autoPull">匀速拉动</button><button id="resetTrial" class="secondary">回到起点</button><span class="trial-count" id="trialCount">本组 0 / 3 次</span><button class="capture" id="captureReading" disabled>记下读数</button></div>
+  </div>
+  <aside class="setting-panel" aria-label="实验条件">
+   <div class="condition-card"><h3>车轮怎样运动 <span>运动方式</span></h3><div class="segmented" id="modeControl"><button data-mode="roll" aria-pressed="true">自由滚动</button><button data-mode="slide" aria-pressed="false">锁轮滑动</button></div></div>
+   <div class="condition-card"><h3>更换轮面 <span>粗糙程度</span></h3><div class="segmented" id="textureControl"><button data-texture="smooth" aria-pressed="true">较光滑</button><button data-texture="rough" aria-pressed="false">较粗糙</button></div><p class="material-note">同材质、同尺寸，只改变轮面纹理。</p></div>
+   <div class="condition-card"><h3>给小车加载 <span>每块 200 g</span></h3><div class="weight-controls"><button id="removeWeight" aria-label="减少一块载重">−</button><div class="weight-read"><span id="massValue">300</span><small>g</small></div><button id="addWeight" aria-label="增加一块载重">＋</button></div><div class="block-tray"><button class="tray-block" data-load="1" aria-label="放上一块200克载重">200 g</button><button class="tray-block" data-load="2" aria-label="放上两块共400克载重">200 g</button></div><p class="material-note">显示的是小车与载重的总质量。</p></div>
+   <button class="compare-link" id="goEvidence">带着证据去比较 →<span id="recordSummary">还没有记录</span></button>
+  </aside>
+ </div>
+</section>
+
+
+<section class="page" id="page-evidence" hidden aria-labelledby="ev-heading">
+  <div class="ev-top">
+    <div class="ev-heading">
+      <h2 id="ev-heading">用数据公平比较</h2>
+      <p class="ev-lead">每次只改变一个条件，重复测量后再比较。</p>
+    </div>
+    <div class="ev-actions">
+      <button type="button" id="ev-export-csv">导出 CSV</button>
+      <button type="button" id="ev-export-png">保存比较图</button>
+    </div>
+  </div>
+  <div class="ev-toolbar">
+    <div class="ev-source-switch" role="group" aria-label="记录来源">
+      <button type="button" data-ev-source="sim" aria-pressed="true">模拟记录</button>
+      <button type="button" data-ev-source="real" aria-pressed="false">实物记录</button>
+    </div>
+    <p class="ev-source-note" id="ev-source-note">模拟记录来自测量页，不与实物数据混算。</p>
+  </div>
+  <div class="ev-grid">
+    <div class="ev-data-card">
+      <div class="ev-data-title">
+        <h3>测量记录 <span style="font-size:.8em;font-weight:500">/ N</span></h3>
+        <span class="ev-counter" id="ev-group-count">0 / 12 组</span>
+      </div>
+      <div class="ev-real-builder" id="ev-real-builder" hidden>
+        <div class="ev-builder-fields">
+          <label class="ev-field">运动方式
+            <select id="ev-mode" aria-label="实测组运动方式">
+              <option value="roll">滚动</option>
+              <option value="slide">锁轮滑动</option>
+            </select>
+          </label>
+          <label class="ev-field">车轮表面
+            <select id="ev-texture" aria-label="实测组车轮表面">
+              <option value="smooth">较光滑轮</option>
+              <option value="rough">较粗糙轮</option>
+            </select>
+          </label>
+          <label class="ev-field">配重数量
+            <select id="ev-loads" aria-label="实测组配重数量，每份质量相同">
+              <option value="0">未加配重</option>
+              <option value="1">加 1 份配重</option>
+              <option value="2">加 2 份配重</option>
+            </select>
+          </label>
+          <button type="button" class="ev-add" id="ev-add-real">加入实测组</button>
+        </div>
+        <p class="ev-real-note">使用同一辆小车，每份配重质量相同。粗糙程度比较应保持轮胎材质和尺寸相同。</p>
+      </div>
+      <div class="ev-table-wrap" id="ev-table-wrap" tabindex="0" aria-label="测量记录表，可滚动查看">
+        <table class="ev-table">
+          <colgroup><col class="ev-col-pick"><col class="ev-col-condition"><col class="ev-col-trial"><col class="ev-col-trial"><col class="ev-col-trial"><col class="ev-col-mean"></colgroup>
+          <thead><tr><th scope="col">选择</th><th scope="col" class="ev-condition-head">实验条件</th><th scope="col">第1次</th><th scope="col">第2次</th><th scope="col">第3次</th><th scope="col">平均值</th></tr></thead>
+          <tbody id="ev-table-body"></tbody>
+        </table>
+      </div>
+      <p class="ev-table-hint" id="ev-table-hint">点选两组标为 A、B；空白不计入平均值。</p>
+    </div>
+    <div class="ev-chart-card">
+      <div class="ev-chart-title"><h3>两组放在一起看</h3><span class="ev-scale-note">统一刻度 0–5 N</span></div>
+      <svg class="ev-chart-svg" id="ev-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 365" role="img" aria-label="等待测量记录" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="ev-insight" id="ev-insight" data-kind="neutral" aria-live="polite">
+        <p class="ev-status-title" id="ev-status-title">先选择两组记录</p>
+        <p class="ev-status-body" id="ev-status-body">检查两组的条件，再比较测量结果。</p>
+        <p class="ev-question" id="ev-question" hidden></p>
+      </div>
+    </div>
+  </div>
+  <div class="ev-toast" id="ev-toast" role="status" aria-live="polite" hidden></div>
+  <div class="ev-modal" id="ev-keypad-layer" hidden>
+    <div class="ev-keypad" id="ev-keypad" role="dialog" aria-modal="true" aria-labelledby="ev-keypad-title" aria-describedby="ev-keypad-context" tabindex="-1">
+      <h3 id="ev-keypad-title">输入实测读数</h3>
+      <p class="ev-keypad-context" id="ev-keypad-context"></p>
+      <div class="ev-keypad-display"><input id="ev-keypad-input" type="text" readonly inputmode="none" autocomplete="off" aria-label="待保存的实测读数" placeholder="未测"><span class="ev-keypad-unit">N</span></div>
+      <p class="ev-keypad-feedback" id="ev-keypad-feedback" aria-live="polite">范围 0–5.0 N，记录到 0.1 N。</p>
+      <div class="ev-keys" id="ev-keys">
+        <button type="button" data-ev-key="1">1</button><button type="button" data-ev-key="2">2</button><button type="button" data-ev-key="3">3</button>
+        <button type="button" data-ev-key="4">4</button><button type="button" data-ev-key="5">5</button><button type="button" data-ev-key="6">6</button>
+        <button type="button" data-ev-key="7">7</button><button type="button" data-ev-key="8">8</button><button type="button" data-ev-key="9">9</button>
+        <button type="button" data-ev-key=".">.</button><button type="button" data-ev-key="0">0</button><button type="button" data-ev-key="back" aria-label="退格">⌫</button>
+      </div>
+      <div class="ev-keypad-actions">
+        <button type="button" id="ev-keypad-clear">清空</button>
+        <button type="button" id="ev-keypad-cancel">取消</button>
+        <button type="button" class="ev-confirm" id="ev-keypad-confirm">确认</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="page" id="page-life" hidden aria-labelledby="life-title">
+ <div class="life-heading">
+  <div><h2 id="life-title">好骑，也要停得住</h2><p>同一辆车，两处接触。点一处放大看。</p></div>
+  <div class="life-weather"><svg width="19" height="21" viewBox="0 0 19 21" aria-hidden="true"><path d="M9.5 1C7.5 5 3 8.5 3 13a6.5 6.5 0 0 0 13 0c0-4.5-4.5-8-6.5-12Z" fill="#5dadd6"/><path d="M6 12c0 3 1.3 4 3 4" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>有水膜的路面</div>
+ </div>
+ <div class="life-layout">
+  <div class="life-scene">
+   <div class="life-stage">
+    <div class="life-stage-top"><span class="life-phase" id="life-phase" aria-live="polite">先选方案，再试骑</span><span class="life-follow">跟随视角</span></div>
+    <svg id="life-bike-svg" viewBox="0 0 900 465" role="group" aria-label="湿路上的自行车，点轮轴或轮胎接地处查看局部">
+     <defs>
+      <linearGradient id="life-road-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d5eaf3"/><stop offset="1" stop-color="#eef6fa"/></linearGradient>
+      <linearGradient id="life-frame-fill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4794ee"/><stop offset=".55" stop-color="#2866e8"/><stop offset="1" stop-color="#1b4fbe"/></linearGradient>
+      <linearGradient id="life-rim-fill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e5edf2"/><stop offset=".5" stop-color="#98acbb"/><stop offset="1" stop-color="#e3ebef"/></linearGradient>
+      <clipPath id="life-road-clip"><path d="M0 355H900V465H0Z"/></clipPath>
+      <marker id="life-force-head" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 12 6 0 12 3 6Z" fill="#df7940"/></marker>
+      <marker id="life-resist-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0 0 10 5 0 10 2 5Z" fill="#df8b42"/></marker>
+      <marker id="life-water-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#65b6dc"/></marker>
+     </defs>
+     <path d="M32 113H107M54 100h26M739 113h81M781 102h25" stroke="#d4e6ee" stroke-width="5" stroke-linecap="round"/>
+     <path d="m120 142-6 13m641-22-6 13m66 54-6 13" stroke="#a4cfdf" stroke-width="4" stroke-linecap="round" opacity=".6"/>
+     <path d="M0 355H900V465H0Z" fill="url(#life-road-fill)"/>
+     <path d="M0 355H900" stroke="#92b3c5" stroke-width="3"/>
+     <g clip-path="url(#life-road-clip)"><g id="life-road-marks" stroke-linecap="round" opacity=".82">
+      <path d="M-100 386h110M80 438h85M230 377h90M380 433h120M580 382h62M730 439h106M925 382h103M1090 435h85" stroke="#a6d3e5" stroke-width="5"/>
+      <path d="M-20 412h58M150 397h43M320 452h45M505 409h68M670 421h37M830 395h60M1000 417h58" stroke="#fff" stroke-width="4"/>
+     </g></g>
+     <ellipse cx="436" cy="360" rx="265" ry="11" fill="#193b5a" opacity=".055"/>
+     <g id="life-rear-wheel">
+      <circle cx="248" cy="276" r="72" fill="#f8fcff" stroke="#23394a" stroke-width="14"/>
+      <circle cx="248" cy="276" r="65" fill="none" stroke="url(#life-rim-fill)" stroke-width="5"/>
+      <g id="life-rear-spin" stroke="#b7c9d6" stroke-width="2.3">
+       <path d="M248 211v130M183 276h130M202 230l92 92M202 322l92-92M223 216l50 120M188 251l120 50M188 301l120-50M223 336l50-120"/>
+       <circle cx="248" cy="201" r="5" fill="#f4ab53" stroke="#fff" stroke-width="2"/>
+       <g class="life-tread" data-cx="248" data-cy="276" stroke="#7b94a6" stroke-width="2.8"></g>
+      </g>
+      <circle cx="248" cy="276" r="18" fill="#aec3d1" stroke="#6e889d" stroke-width="3"/>
+     </g>
+     <g id="life-front-wheel">
+      <circle cx="620" cy="276" r="72" fill="#f8fcff" stroke="#23394a" stroke-width="14"/>
+      <circle cx="620" cy="276" r="65" fill="none" stroke="url(#life-rim-fill)" stroke-width="5"/>
+      <g id="life-front-spin" stroke="#b7c9d6" stroke-width="2.3">
+       <path d="M620 211v130M555 276h130M574 230l92 92M574 322l92-92M595 216l50 120M560 251l120 50M560 301l120-50M595 336l50-120"/>
+       <circle cx="620" cy="201" r="5" fill="#f4ab53" stroke="#fff" stroke-width="2"/>
+       <g class="life-tread" data-cx="620" data-cy="276" stroke="#7b94a6" stroke-width="2.8"></g>
+      </g>
+      <circle cx="620" cy="276" r="12" fill="#b5c9d6" stroke="#718b9f" stroke-width="3"/>
+     </g>
+     <path d="M248 276 347 160 373 276 248 276M347 160 532 155 373 276M532 155 620 276" fill="none" stroke="#184a83" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+     <path d="M248 276 347 160 373 276 248 276M347 160 532 155 373 276M532 155 620 276" fill="none" stroke="url(#life-frame-fill)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+     <path d="M353 176 364 224M379 160 470 157M538 173 555 199" fill="none" stroke="#9bc8ff" stroke-width="2.5" stroke-linecap="round"/>
+     <path d="m347 160-5-23m190 18-11-30" fill="none" stroke="#7b8f9e" stroke-width="7" stroke-linecap="round"/>
+     <path d="M315 133q0-7 8-6l48 5q9 1 5 8h-48q-11 0-13-7Z" fill="#20374a"/>
+     <path d="M521 126h40q13 0 13 12" fill="none" stroke="#a8bac7" stroke-width="7" stroke-linecap="round"/>
+     <path d="M557 126h17q10 0 10 11" fill="none" stroke="#23394a" stroke-width="8" stroke-linecap="round"/>
+     <path d="M572 137Q545 173 505 172L353 178Q323 178 300 215" fill="none" stroke="#6d8698" stroke-width="2"/><path d="m297 207 10 8-8 13" fill="none" stroke="#7890a4" stroke-width="4" stroke-linecap="round"/><path d="m293 222 5 5" stroke="#23394a" stroke-width="6" stroke-linecap="round"/>
+     <path d="M246 263 373 247a29 29 0 0 1 0 58l-127-16a13 13 0 0 1 0-26Z" fill="#f4f7fb" fill-opacity=".9" stroke="#6c879b" stroke-width="5"/>
+     <path id="life-chain" d="M246 263 373 247a29 29 0 0 1 0 58l-127-16a13 13 0 0 1 0-26Z" fill="none" stroke="#c7d6df" stroke-width="2" stroke-dasharray="4 5"/>
+     <circle cx="373" cy="276" r="26" fill="#a7bdce" stroke="#7893a8" stroke-width="2"/>
+     <circle cx="373" cy="276" r="17" fill="#dbe5ed" stroke="#91a7b8" stroke-width="2"/>
+     <g id="life-pedal" transform="rotate(18 373 276)"><path d="m373 276 29 18m-29-18-29-18" stroke="#6a8498" stroke-width="6" stroke-linecap="round"/><path d="M393 294h18M335 258h18" stroke="#20374a" stroke-width="6" stroke-linecap="round"/></g>
+     <circle cx="373" cy="276" r="6" fill="#55758d"/>
+     <path d="M225 172q-34 27-43 61M653 204q26 19 38 52" fill="none" stroke="#c9d9e3" stroke-width="6" stroke-linecap="round"/>
+     <g class="life-hotspot" data-life-focus="axle" role="button" tabindex="0" aria-label="放大轮轴与轴承" aria-pressed="true">
+      <circle cx="248" cy="276" r="56" fill="transparent" stroke="none"/><circle class="life-hot-ring" cx="248" cy="276" r="25"/>
+      <circle cx="248" cy="276" r="12" fill="#dce8f2" stroke="#6c8da7" stroke-width="2"/>
+      <circle cx="248" cy="276" r="5" fill="#557a98"/>
+      <path d="M145 235h53l31 26" fill="none" stroke="#7396b3" stroke-width="2"/>
+      <rect x="65" y="215" width="90" height="39" rx="9" fill="#fff" stroke="#c9dbe9" stroke-width="2"/>
+      <text x="110" y="241" text-anchor="middle" font-size="21">轮轴 ＋</text>
+     </g>
+     <g class="life-hotspot" data-life-focus="ground" role="button" tabindex="0" aria-label="放大轮胎与湿路接触" aria-pressed="false">
+      <circle cx="248" cy="355" r="56" fill="transparent" stroke="none"/><circle class="life-hot-ring" cx="248" cy="355" r="21"/>
+      <path d="M239 355h18M248 346v18" stroke="#4e7ea6" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M148 404h43l39-34" fill="none" stroke="#7396b3" stroke-width="2"/>
+      <rect x="30" y="387" width="134" height="39" rx="9" fill="#fff" stroke="#c9dbe9" stroke-width="2"/>
+      <text x="97" y="413" text-anchor="middle" font-size="21">轮胎接地 ＋</text>
+     </g>
+     <g id="life-force" visibility="hidden">
+      <path id="life-force-line" d="M263 345H363" stroke="#df7940" stroke-width="6" stroke-linecap="round" marker-end="url(#life-force-head)"/>
+      <rect x="330" y="392" width="380" height="39" rx="8" fill="#fff9f2" stroke="#efd9c2"/>
+      <text id="life-force-label" x="520" y="418" text-anchor="middle" fill="#a8582e" font-size="21" font-weight="700">地面对驱动后轮的摩擦力 →</text>
+     </g>
+     <text x="213" y="177" fill="#8193a2" font-size="16">后轮驱动</text>
+    </svg>
+   </div>
+   <div class="life-detail">
+    <svg class="life-detail-graphic" viewBox="0 0 180 94" role="img" aria-label="接触位置的放大示意">
+     <g id="life-bearing-detail">
+      <circle cx="56" cy="47" r="38" fill="#e3ebf3" stroke="#718ca4" stroke-width="4"/>
+      <circle cx="56" cy="47" r="25" fill="#fff" stroke="#c4d4e3" stroke-width="15"/>
+      <circle id="life-grease-ring" cx="56" cy="47" r="25" fill="none" stroke="#efbb4c" stroke-width="12" opacity="0"/>
+      <g id="life-bearing-balls" fill="#f3f7fb" stroke="#7e9ab1" stroke-width="2"></g>
+      <circle cx="56" cy="47" r="14" fill="#94aabe" stroke="#637f98" stroke-width="3"/>
+      <g id="life-bearing-resistance" visibility="hidden"><path id="life-resistance-arc" d="M56 5A42 42 0 0 0 20 68.6" fill="none" stroke="#df8b42" stroke-width="5" stroke-linecap="round" marker-end="url(#life-resist-head)"/><text x="108" y="89" fill="#ac6a35" font-size="13" font-family="inherit">阻碍转动</text></g>
+      <path d="M91 28h32l11-11M70 48h53l11 13" fill="none" stroke="#7e9ab1" stroke-width="1.5"/>
+      <text x="136" y="21" fill="#59748b" font-size="15" font-family="inherit">滚珠</text>
+      <text x="136" y="67" fill="#59748b" font-size="15" font-family="inherit">轴</text>
+     </g>
+     <g id="life-ground-detail" style="display:none">
+      <path d="M10 77H171V91H10Z" fill="#bbccd7"/>
+      <path d="M10 77H171" stroke="#7392a7" stroke-width="2"/>
+      <path id="life-water-film" d="M10 69H171V76H10Z" fill="#76c1e7" opacity=".7"/>
+      <path d="M39 12h104v43q0 17-22 17H61q-22 0-22-17Z" fill="#2c4559"/>
+      <path id="life-grooves" d="M63 42v30h13V42m29 0v30h13V42" fill="#e9f5fc" style="display:none"/>
+      <path id="life-draining" d="M70 68V47M111 68V47M33 70H12M148 70h22" fill="none" stroke="#65b6dc" stroke-width="3" marker-end="url(#life-water-head)" style="display:none"/>
+      <path d="M149 22h22M149 67h22" fill="none" stroke="#9aaec0" stroke-width="1.5"/>
+     </g>
+    </svg>
+    <div class="life-detail-copy"><h3 id="life-detail-title">轮轴里的接触</h3><p id="life-detail-text">滚珠夹在内外圈之间。它们转动时，也有阻力吗？</p></div>
+   </div>
+  </div>
+  <aside class="life-side" aria-label="自行车改进方案">
+   <div class="life-config">
+    <div><span class="life-label" id="life-axle-label">轮轴</span><div class="life-options" role="group" aria-labelledby="life-axle-label"><button class="life-choice" type="button" data-life-key="axle" data-life-value="dry" aria-pressed="true">干涩</button><button class="life-choice" type="button" data-life-key="axle" data-life-value="oiled" aria-pressed="false">润滑</button></div></div>
+    <div><span class="life-label" id="life-tyre-label">湿路轮胎</span><div class="life-options" role="group" aria-labelledby="life-tyre-label"><button class="life-choice" type="button" data-life-key="tyre" data-life-value="worn" aria-pressed="true">磨平</button><button class="life-choice" type="button" data-life-key="tyre" data-life-value="drain" aria-pressed="false">排水胎纹</button></div></div>
+   </div>
+   <button class="life-primary" id="life-run" type="button">试骑与刹车</button>
+   <div class="life-feedback">
+    <div class="life-result-pair">
+     <div class="life-result-item"><span>轮轴阻力</span><strong id="life-drag-result">—</strong><div class="life-bars" id="life-drag-bars" data-kind="drag" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+     <div class="life-result-item"><span>湿路抓地</span><strong id="life-grip-result">—</strong><div class="life-bars" id="life-grip-bars" data-kind="grip" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+    </div>
+    <p class="life-result-note" id="life-result-note" aria-live="polite">摩擦力是不是越小越好？</p>
+    <button class="life-save" id="life-save" type="button" disabled>保留方案，继续改进</button>
+   </div>
+   <div class="life-baseline" id="life-baseline" hidden>
+    <div class="life-baseline-title"><span>保留的方案</span><span aria-hidden="true">①</span></div>
+    <p class="life-baseline-config" id="life-baseline-config"></p>
+    <div class="life-baseline-values"><span>阻力<b id="life-baseline-drag"></b></span><span>抓地<b id="life-baseline-grip"></b></span></div>
+    <p class="life-comparison" id="life-comparison">改变一个部位，再试骑。</p>
+   </div>
+  </aside>
+ </div>
+ <p class="life-note">定性模型：各方案用相同运动过程观察受力方向，不比较真实刹车距离；固定车辆、载重和胎压。</p>
+</section>
+
+
+</main>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="modal-backdrop" id="infoModal" hidden><section class="info-dialog" role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="dialog-head"><h2 id="infoTitle">课堂使用说明</h2><button id="closeInfo" aria-label="关闭说明">关闭</button></div><p>建议先做教材中的身体体验与真实实验，再用网页放大测量过程、整理证据、讨论生活中的不同需求。</p><h3>三个任务</h3><ul><li>测一测：水平拖拉测力计，比较启动、变速与匀速的读数；也可用“匀速拉动”辅助观察。</li><li>比一比：每组最多记录三次；真实实验用触控键盘录入，选择两组比较条件与平均值。</li><li>用一用：对照轮轴与轮胎两处接触，改进湿路自行车方案。</li></ul><h3>模型边界</h3><p>模拟参数用于同条件的定性比较，不能当作真实器材测量结果。匀速阶段的拉力可近似反映水平方向的总阻力。滚动状态包含轮轴、接触形变等阻力，不能把它等同于轮胎打滑时的滑动摩擦。较粗糙与较光滑的差别仅表示本模型的条件，不是对所有材料的通用定律。</p><p>测力计量程 5 N，最小分度 0.1 N；启动、变速或超量程时不作为有效读数。各组比较应保持测力计、桌面、轮胎材料和尺寸等条件一致。</p><h3>保存与操作</h3><p>记录自动保存在当前浏览器，可从“比一比”导出。不同设备的记录不会自动同步。鼠标、触控均可操作；键盘聚焦拉环后可按右方向键拉动，回车启动演示。单体文件无外部依赖，可断网打开。</p><footer>依据所提供教材第82—85页、教师用书本课教学建议。v1.0 · T1 基础级（HTML/CSS/JS/SVG）。本页数值与动画均为教学模型。</footer></section></div>
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var config={mode:'roll',texture:'smooth',loads:0};
+var STORE='aihtml-friction-compare-v1';
+var records=[];var seq=0;var customCartRenderer=null;
+function validConfig(c){return c&&(c.mode==='roll'||c.mode==='slide')&&(c.texture==='smooth'||c.texture==='rough')&&[0,1,2].indexOf(Number(c.loads))>=0;}
+try{var loaded=JSON.parse(localStorage.getItem(STORE)||'[]');if(Array.isArray(loaded))records=loaded.filter(function(r){return validConfig(r)&&(r.source==='sim'||r.source==='real')&&Array.isArray(r.values);}).map(function(r){return {id:String(r.id),mode:r.mode,texture:r.texture,loads:Number(r.loads),source:r.source,values:[0,1,2].map(function(i){var v=r.values[i];return typeof v==='number'&&isFinite(v)&&v>=0&&v<=5?Math.round(v*10)/10:null;})};}).slice(0,24);}catch(e){}
+function key(c,source){return [source,c.mode,c.texture,c.loads].join('-');}
+function findRecord(c,source){return records.find(function(r){return key(r,r.source)===key(c,source);});}
+function newRecord(c,source){var r={id:key(c,source)+'-'+Date.now()+'-'+(++seq),mode:c.mode,texture:c.texture,loads:Number(c.loads),source:source,values:[null,null,null]};records.push(r);return r;}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(records));}catch(e){toast('当前浏览器未能保存，请及时导出记录。');}updateCounts();document.dispatchEvent(new CustomEvent('friction-records-change'));}
+window.FrictionLab={
+ getRecords:function(){return JSON.parse(JSON.stringify(records));},
+ getConfig:function(){return Object.assign({},config);},
+ ensureReal:function(c){if(!validConfig(c))return null;var r=findRecord(c,'real')||newRecord(c,'real');persist();return r.id;},
+ setRealValue:function(id,index,value){var r=records.find(function(x){return x.id===id&&x.source==='real';});if(!r||[0,1,2].indexOf(index)<0||!(value===null||(typeof value==='number'&&isFinite(value)&&value>=0&&value<=5&&Math.abs(value*10-Math.round(value*10))<1e-7)))return false;r.values[index]=value;persist();return true;},
+ deleteRecord:function(id){records=records.filter(function(r){return r.id!==id;});persist();},
+ registerCartRenderer:function(fn){customCartRenderer=typeof fn==='function'?fn:null;buildCart();render();},
+ model:function(c){return forces(c);},
+ getState:function(){return {config:Object.assign({},config),trial:Object.assign({},trial),records:JSON.parse(JSON.stringify(records))};}
+};
+// MODEL REPLACEMENT INTERFACE: these are representative classroom parameters,
+// not measured coefficients for a named commercial tyre. Rolling includes axle
+// and deformation resistance; it is distinct from tyre-road traction.
+function forces(c){var mass=.3+.2*c.loads;var n=mass*9.8;var rough=c.texture==='rough';return {mass:mass,normal:n,kinetic:n*(c.mode==='roll'?(rough?.10:.07):(rough?.45:.30)),start:n*(c.mode==='roll'?(rough?.13:.095):(rough?.54:.37))};}
+var K=12,DAMP=1.8,SCALE=220,MAX_H=1.48;
+var trial;var lastStamp=0,traceClock=0;var drag=null;var toastTimer;
+function freshTrial(){return {x:0,v:0,h:0,targetH:0,hv:0,force:0,acc:0,t:0,running:false,auto:false,autoT:0,completed:false,saved:false,stable:false,stableFor:0,pending:null,trace:[],over:false,moved:false};}
+trial=freshTrial();
+function toast(msg){$('toast').textContent=msg;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3200);}
+function choosePage(name){['measure','evidence','life'].forEach(function(n){$('page-'+n).hidden=n!==name;});document.querySelectorAll('[data-page]').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.page===name));});if(name!=='measure'&&trial.t>0){finishTrial();}document.dispatchEvent(new CustomEvent('friction-page-change',{detail:{page:name}}));}
+document.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){choosePage(b.dataset.page);});});$('goEvidence').onclick=function(){choosePage('evidence');};
+function updateCounts(){var r=findRecord(config,'sim');var n=r?r.values.filter(function(v){return v!==null;}).length:0;$('trialCount').textContent='本组 '+n+' / 3 次';$('recordSummary').textContent=records.length?records.length+' 组记录 · 点此查看':'还没有记录';if(n>=3)$('captureReading').disabled=true;}
+function resetTrial(){trial=freshTrial();drag=null;traceClock=0;$('autoPull').textContent='匀速拉动';$('captureReading').textContent='记下读数';buildCart();render();updateCounts();}
+function setConfig(field,value){if(field==='loads')value=Math.max(0,Math.min(2,Number(value)));config[field]=value;resetTrial();document.querySelectorAll('[data-mode]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.mode===config.mode));});document.querySelectorAll('[data-texture]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.texture===config.texture));});document.querySelectorAll('[data-load]').forEach(function(b){b.classList.toggle('active',Number(b.dataset.load)<=config.loads);});$('massValue').textContent=300+200*config.loads;$('removeWeight').disabled=config.loads===0;$('addWeight').disabled=config.loads===2;}
+document.querySelectorAll('[data-mode]').forEach(function(b){b.onclick=function(){setConfig('mode',b.dataset.mode);};});document.querySelectorAll('[data-texture]').forEach(function(b){b.onclick=function(){setConfig('texture',b.dataset.texture);};});document.querySelectorAll('[data-load]').forEach(function(b){b.onclick=function(){var n=Number(b.dataset.load);setConfig('loads',n===config.loads?n-1:n);};});$('removeWeight').onclick=function(){setConfig('loads',config.loads-1);};$('addWeight').onclick=function(){setConfig('loads',config.loads+1);};$('resetTrial').onclick=resetTrial;
+function finishTrial(){trial.running=false;trial.auto=false;trial.completed=true;trial.stable=false;drag=null;if(trial.lastStable){['x','v','h','hv','force','acc'].forEach(function(k){trial[k]=trial.lastStable[k];});trial.over=false;}$('autoPull').textContent='重新拉动';}
+function autoRun(){if(trial.auto&&trial.running){finishTrial();render();return;}resetTrial();trial.auto=true;trial.running=true;$('autoPull').textContent='暂停';}
+$('autoPull').onclick=autoRun;
+$('captureReading').onclick=function(){if(trial.pending===null||trial.saved)return;var r=findRecord(config,'sim')||newRecord(config,'sim');var i=r.values.indexOf(null);if(i<0){toast('这组已经有三次记录。可到“比一比”查看。');return;}r.values[i]=Math.round(trial.pending*10)/10;trial.saved=true;persist();$('captureReading').textContent='已记录 '+r.values[i].toFixed(1)+' N';$('captureReading').disabled=true;toast('第 '+(i+1)+' 次读数已记录。');};
+function bindToggle(button,panel){$(button).onclick=function(){var show=$(panel).hidden;$(panel).hidden=!show;$(button).setAttribute('aria-pressed',String(show));if(show){var other=panel==='gaugeLens'?'contactLens':'gaugeLens';var otherBtn=panel==='gaugeLens'?'contactZoomBtn':'gaugeZoomBtn';$(other).hidden=true;$(otherBtn).setAttribute('aria-pressed','false');}render();};}
+bindToggle('gaugeZoomBtn','gaugeLens');bindToggle('contactZoomBtn','contactLens');$('showForces').onclick=function(){var show=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',String(show));$('forceArrows').setAttribute('visibility',show?'visible':'hidden');render();};
+function svgPoint(event){var p=$('labScene').createSVGPoint();p.x=event.clientX;p.y=event.clientY;var m=$('labScene').getScreenCTM();return m?p.matrixTransform(m.inverse()):{x:615};}
+function startDrag(e){if(e.button!==undefined&&e.button!==0)return;if(e.preventDefault)e.preventDefault();if(trial.completed||trial.saved)resetTrial();trial.auto=false;trial.running=true;var p=svgPoint(e);trial.targetH=trial.h;drag={id:e.pointerId,startX:p.x,startH:trial.h};if(e.pointerId!==undefined&&$('labScene').setPointerCapture){try{$('labScene').setPointerCapture(e.pointerId);}catch(err){}}$('autoPull').textContent='匀速拉动';}
+function moveDrag(e){if(!drag)return;if(e.preventDefault)e.preventDefault();var p=svgPoint(e);trial.targetH=Math.max(0,Math.min(MAX_H,drag.startH+(p.x-drag.startX)/SCALE));}
+function endDrag(e){if(!drag)return;drag=null;trial.hv=0;}
+if(window.PointerEvent){$('pullHandle').addEventListener('pointerdown',startDrag);$('labScene').addEventListener('pointermove',moveDrag);$('labScene').addEventListener('pointerup',endDrag);$('labScene').addEventListener('pointercancel',endDrag);}else{$('pullHandle').addEventListener('mousedown',startDrag);document.addEventListener('mousemove',moveDrag);document.addEventListener('mouseup',endDrag);$('pullHandle').addEventListener('touchstart',function(e){startDrag(e.changedTouches[0]);e.preventDefault();},{passive:false});$('labScene').addEventListener('touchmove',function(e){if(drag){moveDrag(e.changedTouches[0]);e.preventDefault();}},{passive:false});document.addEventListener('touchend',endDrag);}
+$('pullHandle').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();autoRun();}else if(e.key==='ArrowRight'||e.key==='ArrowLeft'){if(e.preventDefault)e.preventDefault();if(trial.completed||trial.saved)resetTrial();trial.auto=false;trial.running=true;trial.targetH=Math.max(0,Math.min(MAX_H,trial.targetH+(e.key==='ArrowRight'?.022:-.022)));}});
+function spring(x0,x1,y){var s='M'+x0+' '+y;var count=10;for(var i=1;i<=count;i++){var x=x0+(x1-x0)*i/(count+1);s+='L'+x+' '+(y+(i%2?6:-6));}return s+'L'+x1+' '+y;}
+function wheelMarkup(cx){var marks='';if(config.texture==='rough'){for(var i=0;i<16;i++){var a=i*Math.PI/8;marks+='<line x1="'+(Math.cos(a)*24)+'" y1="'+(Math.sin(a)*24)+'" x2="'+(Math.cos(a)*29)+'" y2="'+(Math.sin(a)*29)+'" stroke="#8191a5" stroke-width="3"/>';}}return '<g transform="translate('+cx+' 317)"><circle r="31" fill="#263c53"/><circle r="22" fill="#dce5ef"/><g class="wheel-rotate">'+marks+'<path d="M-18 0H18M0-18V18M-13-13L13 13M13-13L-13 13" stroke="#8ba1ba" stroke-width="4"/><circle cx="0" cy="26" r="4.5" fill="#ef8052"/></g><circle r="8" fill="#69849f"/>'+(config.mode==='slide'?'<rect x="-12" y="-33" width="24" height="10" rx="3" fill="#df7937"/><path d="M0-28V-13" stroke="#df7937" stroke-width="6"/>':'')+'</g>';}
+// RENDERER REPLACEMENT INTERFACE: registerCartRenderer(targetGroup, viewState)
+// can replace the complete 2-D cart later without changing records or physics.
+function buildCart(){if(customCartRenderer)return;var blocks='';for(var i=0;i<config.loads;i++){blocks+='<g transform="translate('+(43+i*62)+' 246)"><rect y="-29" width="54" height="32" rx="4" fill="#839bb9" stroke="#617d9e"/><rect x="17" y="-35" width="21" height="8" rx="3" fill="#b1c1d5"/><text x="27" y="-9" font-size="12" fill="#fff" text-anchor="middle">200 g</text></g>';}$('cartGroup').innerHTML='<path d="M4 276H204V300H4Z" fill="url(#metalPaint)" stroke="#8aa2bb" stroke-width="2"/><path d="M15 249H183L194 278H6Z" fill="url(#cartPaint)" stroke="#3774a0" stroke-width="2"/><path d="M18 253H176" stroke="#b5dbef" stroke-width="3"/><path d="M204 287h12a7 7 0 0 1 0 14h-10" fill="none" stroke="#859eb7" stroke-width="4"/>'+blocks+wheelMarkup(44)+wheelMarkup(162);}
+function buildScales(){var s='',l='';for(var i=0;i<=50;i++){var val=i/10;var x=175-val*SCALE/K;var len=i%10===0?14:(i%5===0?10:5);s+='<line x1="'+x+'" y1="264" x2="'+x+'" y2="'+(264+len)+'" stroke="#668099" stroke-width="1"/>';if(i%10===0)s+='<text x="'+x+'" y="307" font-size="11" fill="#6f8297" text-anchor="middle">'+val+'</text>';var xl=45+i*14.2;l+='<line x1="'+xl+'" y1="44" x2="'+xl+'" y2="'+(i%10===0?76:(i%5===0?68:59))+'" stroke="#526d89" stroke-width="'+(i%10===0?2:1)+'"/>';if(i%10===0)l+='<text x="'+xl+'" y="94" font-size="18" fill="#526d89" text-anchor="middle">'+val+'</text>';}$('smallScale').innerHTML=s;$('largeScale').innerHTML=l;}
+function step(dt,manualH,manualV){if(!trial.running||dt<=0)return;var f=forces(config);var oldH=trial.h;if(trial.auto){trial.autoT+=dt;var v=.19*Math.min(1,trial.autoT/.65);trial.h=Math.min(MAX_H,trial.h+v*dt);trial.hv=(trial.h-oldH)/dt;}else{if(manualH!==undefined)trial.h=manualH;var speed=manualV===undefined?0:Math.max(-2,Math.min(2,manualV));var blend=1-Math.exp(-dt/.055);trial.hv+=(speed-trial.hv)*blend;}
+ var tension=Math.max(0,Math.min(7.5,K*(trial.h-trial.x)+DAMP*(trial.hv-trial.v)));var oldV=trial.v;
+ if(Math.abs(trial.v)<.003&&tension<=f.start){trial.v=0;}else{var acceleration=(tension-f.kinetic)/f.mass;trial.v=Math.max(0,trial.v+acceleration*dt);}
+ trial.x+=trial.v*dt;trial.acc=(trial.v-oldV)/dt;trial.force=tension;trial.over=tension>5;trial.t+=dt;trial.moved=trial.moved||trial.v>.02;
+ var rawSteady=trial.v>.035&&Math.abs(trial.acc)<.075&&!trial.over&&trial.hv>0;
+ trial.stableFor=rawSteady?trial.stableFor+dt:0;trial.stable=trial.stableFor>.45;
+ if(trial.stable){trial.pending=trial.force;trial.lastStable={x:trial.x,v:trial.v,h:trial.h,hv:trial.hv,force:trial.force,acc:trial.acc};}
+ traceClock+=dt;if(traceClock>=.05){traceClock=0;trial.trace.push({t:trial.t,f:tension,steady:trial.stable});if(trial.trace.length>600)trial.trace.shift();}
+ if(trial.h>=MAX_H||trial.t>18){finishTrial();}
+}
+function render(){var c=110+trial.x*SCALE;var gx=360+trial.h*SCALE;var visualF=Math.max(0,Math.min(5,trial.force));var pointer=175-visualF*SCALE/K;var angle=config.mode==='roll'?trial.x*SCALE/31*180/Math.PI:0;
+ if(customCartRenderer){customCartRenderer($('cartGroup'),{x:c,angle:angle,config:Object.assign({},config),trial:Object.assign({},trial)});}else{$('cartGroup').setAttribute('transform','translate('+c+' 0)');$('cartGroup').querySelectorAll('.wheel-rotate').forEach(function(w){w.setAttribute('transform','rotate('+angle+')');});}
+ $('cartShadow').setAttribute('cx',c+105);$('gaugeGroup').setAttribute('transform','translate('+gx+' 0)');$('springPath').setAttribute('d',spring(pointer,196,289));$('meterRod').setAttribute('x1',c+215-gx);$('meterRod').setAttribute('x2',pointer);$('meterNeedle').setAttribute('d','M'+pointer+' 265V286');$('largeNeedle').setAttribute('d','M'+(45+visualF*142)+' 6V44');$('handleHint').setAttribute('opacity',trial.t>.5?'0':'1');
+ var n=trial.force;$('readoutLabel').textContent=trial.completed&&trial.pending!==null?'保留的匀速读数':'测力计示数';$('forceValue').innerHTML=(trial.over?'>5.0':n.toFixed(1))+'<span>N</span>';$('forceValue').classList.toggle('steady',trial.stable||trial.completed&&trial.pending!==null);$('forceValue').classList.toggle('warn',trial.over);
+ var status='准备拉动',hint='保持水平，先看小车是否平稳。';if(trial.over){status='超出量程';hint='不能记录：拉力超过 5 N。请回到起点。';}else if(trial.completed){status=trial.pending!==null?'本次拉动结束':'本次没有稳定读数';hint=trial.pending!==null?'保留本次匀速读数，可点击“记下读数”。':'回到起点，试着更平稳地拉动。';}else if(trial.stable){status='匀速移动 · 可以读数';hint='速度与示数稳定，现在可近似比较阻力。';}else if(trial.t>.05&&trial.v<.01){status=trial.moved?'小车已停下':'小车尚未移动';hint='此时的示数不作为匀速读数。';}else if(trial.v>=.01){status='速度在变化';hint='先观察曲线，等待平稳移动。';}
+ if($('motionStatus').textContent!==status)$('motionStatus').textContent=status;$('readingHint').textContent=hint;$('statusDot').classList.toggle('steady',trial.stable);var r=findRecord(config,'sim');var full=r&&r.values.every(function(v){return v!==null;});$('captureReading').disabled=trial.pending===null||trial.saved||full||trial.over||(!trial.stable&&!trial.completed); if(!trial.saved)$('captureReading').textContent=full?'本组已测 3 次':'记下读数';
+ var fl=Math.min(115,trial.force*29);var rl=Math.min(115,(trial.v>.003?forces(config).kinetic:Math.min(trial.force,forces(config).start))*29);$('pullArrow').setAttribute('x1',c+180);$('pullArrow').setAttribute('x2',c+180+Math.max(0.1,fl));$('pullArrow').setAttribute('opacity',trial.force>.02?'1':'0');$('pullLabel').setAttribute('x',c+185);$('pullLabel').setAttribute('opacity',trial.force>.02?'1':'0');$('resistArrow').setAttribute('x1',c+100);$('resistArrow').setAttribute('x2',c+100-Math.max(.1,rl));$('resistArrow').setAttribute('opacity',rl>1?'1':'0');$('resistLabel').setAttribute('x',c+16);$('resistLabel').setAttribute('opacity',rl>1?'1':'0');$('resistLabel').textContent=config.mode==='roll'?'总阻力':trial.v>.003?'滑动摩擦力':'阻力';
+ if(!$('contactLens').hidden){$('zoomSpokes').setAttribute('transform','rotate('+angle+')');$('contactTitle').textContent=config.mode==='roll'?'车轮自由滚动':'车轮已锁住';$('contactFoot').textContent=config.mode==='roll'?'轮面上的不同位置轮流接触桌面。滚动仍有阻力。':'同一段轮面沿桌面滑动。红点不再绕轴旋转。';var marks='';var offset=(trial.x*SCALE*2)%35;for(var i=-1;i<12;i++){var x=i*35-offset;marks+='<path d="M'+x+' 139h13"/>';}$('zoomContactMarks').innerHTML=marks;}
+ var maxT=Math.max(10,Math.ceil(trial.t/5)*5),path='',sp='',prev=false;trial.trace.forEach(function(s,i){var x=37+743*s.t/maxT,y=70-58*Math.min(5,s.f)/5;path+=(i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2);if(s.steady){sp+=(prev?'L':'M')+x.toFixed(2)+' '+y.toFixed(2);prev=true;}else prev=false;});$('tracePath').setAttribute('d',path);$('steadyPath').setAttribute('d',sp);$('chartEnd').textContent=maxT+' s';
+}
+var lastRender=0;function animate(stamp){var dt=lastStamp?Math.min(.05,(stamp-lastStamp)/1000):0;lastStamp=stamp;if(!$('page-measure').hidden&&trial.running){var n=Math.max(1,Math.ceil(dt/(1/120)));var startH=trial.h,targetH=trial.targetH;var handSpeed=dt>0?(targetH-startH)/dt:0;for(var i=0;i<n;i++)step(dt/n,startH+(targetH-startH)*(i+1)/n,handSpeed);}if(stamp-lastRender>32&&!$('page-measure').hidden){render();lastRender=stamp;}requestAnimationFrame(animate);}
+var lastFocus;function closeInfo(){$('infoModal').hidden=true;if(lastFocus)lastFocus.focus();}$('showInfo').onclick=function(){lastFocus=document.activeElement;$('infoModal').hidden=false;$('closeInfo').focus();};$('closeInfo').onclick=closeInfo;$('infoModal').onclick=function(e){if(e.target===$('infoModal'))closeInfo();};document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('infoModal').hidden)closeInfo();if(e.key==='Tab'&&!$('infoModal').hidden){e.preventDefault();$('closeInfo').focus();}});
+$('fullscreenBtn').onclick=function(){var d=document;var active=d.fullscreenElement||d.webkitFullscreenElement;try{var promise;if(active){promise=d.exitFullscreen?d.exitFullscreen():d.webkitExitFullscreen&&d.webkitExitFullscreen();}else{promise=d.documentElement.requestFullscreen?d.documentElement.requestFullscreen():d.documentElement.webkitRequestFullscreen&&d.documentElement.webkitRequestFullscreen();if(!d.documentElement.requestFullscreen&&!d.documentElement.webkitRequestFullscreen)toast('当前浏览器不支持网页全屏，可使用浏览器全屏功能。');}if(promise&&promise.catch)promise.catch(function(){toast('可使用浏览器菜单或 F11 进入全屏。');});}catch(e){toast('可使用浏览器菜单或 F11 进入全屏。');}};
+document.addEventListener('fullscreenchange',function(){$('fullscreenBtn').textContent=document.fullscreenElement?'退出全屏':'全屏';});
+buildScales();buildCart();setConfig('loads',0);updateCounts();requestAnimationFrame(animate);
+})();
+</script>
+<script>
+
+(function () {
+  'use strict';
+  var page = document.getElementById('page-evidence');
+  if (!page) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var source = 'sim';
+  var selected = { sim: [], real: [] };
+  var realConfigInitialized = false;
+  var pendingDelete = null;
+  var deleteTimer = null;
+  var toastTimer = null;
+  var modal = null;
+  var returnFocus = null;
+  var currentRows = [];
+  var NS = 'http://www.w3.org/2000/svg';
+  var colors = ['#2866e8', '#c66b12'];
+  var sourceName = function () { return source === 'sim' ? '模拟记录' : '实物记录'; };
+  var modeName = function (mode) { return mode === 'slide' ? '锁轮滑动' : '滚动'; };
+  var textureName = function (texture) { return texture === 'rough' ? '较粗糙轮' : '较光滑轮'; };
+  var mass = function (row) { return 300 + 200 * Number(row.loads || 0); };
+  var loadText = function (row) {
+    if (row.source === 'real') return ['未加配重', '加1份配重', '加2份配重'][Number(row.loads) || 0];
+    return '总质量 ' + mass(row) + ' g';
+  };
+  var escapeText = function (value) {
+    return String(value).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
+  };
+  function api() { return window.FrictionLab || null; }
+  function rowsAll() {
+    var lab = api();
+    if (!lab || typeof lab.getRecords !== 'function') return [];
+    try {
+      var rows = lab.getRecords();
+      return Array.isArray(rows) ? rows : [];
+    } catch (err) { return []; }
+  }
+  function valuesOf(row) {
+    var values = Array.isArray(row.values) ? row.values : [];
+    return [0, 1, 2].map(function (i) {
+      var n = values[i];
+      return typeof n === 'number' && isFinite(n) && n >= 0 && n <= 5 ? n : null;
+    });
+  }
+  function stats(row) {
+    var measured = valuesOf(row).filter(function (n) { return n !== null; });
+    return { count: measured.length, mean: measured.length ? measured.reduce(function (sum, n) { return sum + n; }, 0) / measured.length : null };
+  }
+  function numberText(n) { return n === null ? '—' : n.toFixed(1); }
+  function conditionText(row) { return modeName(row.mode) + ' · ' + textureName(row.texture) + ' · ' + loadText(row); }
+  function rowById(id) { return currentRows.filter(function (row) { return String(row.id) === String(id); })[0] || null; }
+  function announce(message) {
+    var el = $('ev-toast');
+    el.textContent = message;
+    el.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.hidden = true; }, 3600);
+  }
+  function setSource(next) {
+    if (next !== 'sim' && next !== 'real') return;
+    source = next;
+    pendingDelete = null;
+    clearTimeout(deleteTimer);
+    if (source === 'real' && !realConfigInitialized) {
+      var lab = api();
+      var c = lab && typeof lab.getConfig === 'function' ? lab.getConfig() : null;
+      if (c) {
+        $('ev-mode').value = c.mode === 'slide' ? 'slide' : 'roll';
+        $('ev-texture').value = c.texture === 'rough' ? 'rough' : 'smooth';
+        $('ev-loads').value = String([0, 1, 2].indexOf(Number(c.loads)) >= 0 ? Number(c.loads) : 0);
+      }
+      realConfigInitialized = true;
+    }
+    render();
+  }
+  function render() {
+    var all = rowsAll();
+    currentRows = all.filter(function (row) { return row && row.source === source; }).slice(0, 12);
+    selected[source] = selected[source].filter(function (id) { return !!rowById(id); }).slice(0, 2);
+    Array.prototype.forEach.call(page.querySelectorAll('[data-ev-source]'), function (button) {
+      button.setAttribute('aria-pressed', button.getAttribute('data-ev-source') === source ? 'true' : 'false');
+    });
+    $('ev-real-builder').hidden = source !== 'real';
+    $('ev-source-note').textContent = source === 'sim' ? '模拟记录来自测量页，不与实物数据混算。' : '点空白格填写读数，与模拟记录分开保存。';
+    $('ev-group-count').textContent = currentRows.length + ' / 12 组';
+    $('ev-table-hint').textContent = source === 'sim' ? '点选两组标为 A、B；空白不计入平均值。' : '点数值可更正；清空代表未测，0.0 是有效读数。';
+    $('ev-export-csv').disabled = currentRows.length === 0;
+    $('ev-export-png').disabled = selected[source].length === 0;
+    $('ev-add-real').disabled = !api();
+    renderTable();
+    renderChart();
+    renderInsight();
+  }
+  function renderTable() {
+    var wrap = $('ev-table-wrap');
+    var top = wrap.scrollTop;
+    var left = wrap.scrollLeft;
+    var body = $('ev-table-body');
+    if (!currentRows.length) {
+      body.innerHTML = '<tr class="ev-empty"><td colspan="6"><strong>' + (source === 'sim' ? '等待测量记录' : '还没有实物记录') + '</strong>' + (source === 'sim' ? '在测量页取得稳定读数后，点击记录。' : '选好条件，加入一组；三个读数都由你填写。') + '</td></tr>';
+      return;
+    }
+    body.innerHTML = currentRows.map(function (row) {
+      var id = String(row.id);
+      var safeId = escapeText(id);
+      var pickIndex = selected[source].indexOf(id);
+      var label = pickIndex >= 0 ? (pickIndex === 0 ? 'A' : 'B') : '○';
+      var rowClass = pickIndex < 0 ? '' : (pickIndex === 0 ? 'ev-row-a' : 'ev-row-b');
+      var s = stats(row);
+      var remove = pickIndex < 0 ? '' : '<button type="button" class="ev-delete' + (pendingDelete === id ? ' ev-armed' : '') + '" data-ev-delete="' + safeId + '" aria-label="' + (pendingDelete === id ? '再次点击删除这一组' : '删除这一组，需再点一次确认') + '">' + (pendingDelete === id ? '再点删除' : '删组') + '</button>';
+      var cells = valuesOf(row).map(function (n, index) {
+        if (source === 'real') {
+          return '<td><button type="button" class="ev-value' + (n === null ? ' ev-blank' : '') + '" data-ev-edit="' + safeId + '" data-ev-index="' + index + '" aria-label="' + escapeText(conditionText(row)) + '，第' + (index + 1) + '次，' + (n === null ? '尚未测量' : numberText(n) + '牛，可修改') + '">' + numberText(n) + '</button></td>';
+        }
+        return '<td><span class="ev-sim-value' + (n === null ? ' ev-no-value' : '') + '">' + numberText(n) + '</span></td>';
+      }).join('');
+      return '<tr class="' + rowClass + '" data-ev-row="' + safeId + '"><td><button type="button" class="ev-pick" data-ev-pick="' + safeId + '" aria-pressed="' + (pickIndex >= 0 ? 'true' : 'false') + '" aria-label="' + (pickIndex >= 0 ? '取消' + label + '组' : '选择这一组进行比较') + '">' + label + '</button></td><td class="ev-condition"><span class="ev-condition-name">' + modeName(row.mode) + ' · ' + textureName(row.texture) + '</span><span class="ev-condition-meta"><span>' + loadText(row) + '</span>' + remove + '</span></td>' + cells + '<td><span class="ev-average">' + numberText(s.mean) + '</span><span class="ev-count">已测 ' + s.count + '/3</span></td></tr>';
+    }).join('');
+    wrap.scrollTop = top;
+    wrap.scrollLeft = left;
+  }
+  function svgElement(tag, attrs, textValue) {
+    var el = document.createElementNS(NS, tag);
+    Object.keys(attrs || {}).forEach(function (key) { el.setAttribute(key, attrs[key]); });
+    if (textValue !== undefined) el.textContent = textValue;
+    return el;
+  }
+  function addSvg(svg, tag, attrs, textValue) {
+    var el = svgElement(tag, attrs, textValue);
+    svg.appendChild(el);
+    return el;
+  }
+  function renderChart() {
+    var svg = $('ev-chart');
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    svg.setAttribute('font-family', 'Arial, Microsoft YaHei, PingFang SC, sans-serif');
+    addSvg(svg, 'rect', { x: 0, y: 0, width: 560, height: 365, fill: '#ffffff' });
+    addSvg(svg, 'text', { x: 20, y: 29, fill: '#183247', 'font-size': 22, 'font-weight': 700 }, '摩擦力比较');
+    addSvg(svg, 'text', { x: 540, y: 28, fill: '#637485', 'font-size': 18, 'text-anchor': 'end' }, sourceName());
+    var choices = selected[source].map(rowById).filter(Boolean);
+    if (!choices.length) {
+      svg.setAttribute('aria-label', currentRows.length ? '请选择两组记录进行比较' : '等待测量记录，尚无数据');
+      addSvg(svg, 'rect', { x: 44, y: 76, width: 472, height: 218, rx: 14, fill: '#f6f9fd', stroke: '#dce4ec', 'stroke-dasharray': '7 5' });
+      addSvg(svg, 'text', { x: 280, y: 167, 'text-anchor': 'middle', fill: '#183247', 'font-size': 28, 'font-weight': 700 }, currentRows.length ? '点选两组记录' : '等待记录');
+      addSvg(svg, 'text', { x: 280, y: 211, 'text-anchor': 'middle', fill: '#637485', 'font-size': 21 }, currentRows.length ? 'A、B 放在同一刻度上比较' : (source === 'sim' ? '获得读数后，再来比较' : '加入实测组，填写你的读数'));
+      return;
+    }
+    var x0 = 100, plotWidth = 420;
+    var xOf = function (n) { return x0 + n / 5 * plotWidth; };
+    for (var tick = 0; tick <= 5; tick++) {
+      var x = xOf(tick);
+      addSvg(svg, 'line', { x1: x, x2: x, y1: 61, y2: 291, stroke: tick === 0 ? '#9aafc4' : '#e1e8f0', 'stroke-width': tick === 0 ? 2 : 1 });
+      addSvg(svg, 'text', { x: x, y: 318, 'text-anchor': 'middle', fill: '#637485', 'font-size': 21 }, String(tick));
+    }
+    addSvg(svg, 'line', { x1: 100, y1: 291, x2: 520, y2: 291, stroke: '#9aafc4', 'stroke-width': 2 });
+    var accessible = [];
+    [0, 1].forEach(function (index) {
+      var row = choices[index];
+      var center = index === 0 ? 138 : 249;
+      var color = colors[index];
+      var letter = index === 0 ? 'A' : 'B';
+      addSvg(svg, 'rect', { x: 20, y: center - 19, width: 40, height: 40, rx: 8, fill: row ? color : '#e9eef4' });
+      addSvg(svg, 'text', { x: 40, y: center + 9, 'text-anchor': 'middle', fill: row ? '#fff' : '#7c8b9d', 'font-size': 27, 'font-weight': 700 }, letter);
+      if (!row) {
+        addSvg(svg, 'text', { x: 120, y: center + 7, fill: '#7c8b9d', 'font-size': 23 }, '再选一组');
+        return;
+      }
+      var s = stats(row);
+      addSvg(svg, 'text', { x: 100, y: center - 61, fill: '#183247', 'font-size': 20, 'font-weight': 650 }, conditionText(row));
+      addSvg(svg, 'text', { x: 40, y: center + 44, 'text-anchor': 'middle', fill: '#637485', 'font-size': 17 }, s.count + '/3 次');
+      if (s.mean === null) {
+        addSvg(svg, 'text', { x: 120, y: center + 8, fill: '#7c8b9d', 'font-size': 24 }, '待测');
+        accessible.push(letter + '组尚未测量');
+        return;
+      }
+      addSvg(svg, 'rect', { x: x0, y: center - 17, width: Math.max(0, xOf(s.mean) - x0), height: 34, rx: 5, fill: color, 'fill-opacity': 0.16 });
+      addSvg(svg, 'line', { x1: xOf(s.mean), x2: xOf(s.mean), y1: center - 27, y2: center + 27, stroke: color, 'stroke-width': 4 });
+      valuesOf(row).forEach(function (n, valueIndex) {
+        if (n === null) return;
+        var circle = addSvg(svg, 'circle', { cx: xOf(n), cy: center + (valueIndex - 1) * 11, r: 6.5, fill: color, stroke: '#ffffff', 'stroke-width': 2 });
+        circle.appendChild(svgElement('title', {}, '第' + (valueIndex + 1) + '次：' + numberText(n) + ' N'));
+      });
+      var meanX = xOf(s.mean);
+      var alignEnd = s.mean >= 3.6;
+      addSvg(svg, 'text', { x: alignEnd ? Math.min(520, meanX + 8) : Math.max(100, meanX - 8), y: center - 32, 'text-anchor': alignEnd ? 'end' : 'start', fill: color, 'font-size': 22, 'font-weight': 700 }, (s.count < 3 ? '当前均值 ' : '均值 ') + numberText(s.mean) + ' N');
+      accessible.push(letter + '组' + conditionText(row) + '，已测' + s.count + '次，平均值' + numberText(s.mean) + '牛');
+    });
+    addSvg(svg, 'circle', { cx: 105, cy: 347, r: 6, fill: '#536c86' });
+    addSvg(svg, 'text', { x: 120, y: 353, fill: '#637485', 'font-size': 19 }, '每次测量');
+    addSvg(svg, 'line', { x1: 283, x2: 283, y1: 337, y2: 357, stroke: '#536c86', 'stroke-width': 4 });
+    addSvg(svg, 'text', { x: 297, y: 353, fill: '#637485', 'font-size': 19 }, '均值');
+    addSvg(svg, 'text', { x: 520, y: 353, fill: '#637485', 'font-size': 20, 'text-anchor': 'end' }, '力 / N');
+    svg.setAttribute('aria-label', sourceName() + '；统一范围0到5牛。' + accessible.join('；'));
+  }
+  function renderInsight() {
+    var choices = selected[source].map(rowById).filter(Boolean);
+    var title = '先选择两组记录';
+    var body = '点表格左侧圆圈，为两组标上 A、B。';
+    var question = '';
+    var kind = 'neutral';
+    if (choices.length === 1) {
+      title = '再选一组作比较';
+      body = '观察两组哪些条件相同，哪个条件不同。';
+    } else if (choices.length === 2) {
+      var a = choices[0], b = choices[1];
+      var fields = ['mode', 'texture', 'loads'];
+      var names = { mode: '运动方式', texture: '车轮表面', loads: source === 'real' ? '配重数量' : '总质量' };
+      var changed = fields.filter(function (key) { return String(a[key]) !== String(b[key]); });
+      var sa = stats(a), sb = stats(b);
+      if (!changed.length) {
+        title = '两组条件相同';
+        body = '可以检查重复测量是否接近，不能研究条件变化的影响。';
+      } else if (changed.length > 1) {
+        title = '同时改变了 ' + changed.length + ' 个条件';
+        body = changed.map(function (key) { return names[key]; }).join('、') + '都不同，还不能把差异归因于其中一个条件。';
+        kind = 'warning';
+      } else {
+        title = '只改变了：' + names[changed[0]];
+        kind = 'fair';
+        var held = fields.filter(function (key) { return key !== changed[0]; }).map(function (key) {
+          return key === 'mode' ? modeName(a.mode) : (key === 'texture' ? textureName(a.texture) : loadText(a));
+        });
+        body = '保持相同：' + held.join('、') + '。';
+        if (sa.count === 3 && sb.count === 3) {
+          var prompts = {
+            mode: source === 'real' ? '同样的小车、轮胎和配重，哪种运动方式所需的拉力更小？' : '同样的轮胎和总质量，哪种运动方式所需的拉力更小？',
+            texture: '其他条件相同，轮面变化时平均拉力怎样变？',
+            loads: source === 'real' ? '同样的小车、轮胎和运动方式，增加配重后平均拉力怎样变？' : '轮胎和运动方式相同，增加配重后平均拉力怎样变？'
+          };
+          question = prompts[changed[0]];
+        } else {
+          body += ' A 已测 ' + sa.count + '/3，B 已测 ' + sb.count + '/3；测满后再归纳。';
+        }
+      }
+    }
+    $('ev-status-title').textContent = title;
+    $('ev-status-body').textContent = body;
+    $('ev-insight').setAttribute('data-kind', kind);
+    $('ev-question').textContent = question;
+    $('ev-question').hidden = !question;
+  }
+  function togglePick(id) {
+    if (!rowById(id)) return;
+    var list = selected[source];
+    var index = list.indexOf(String(id));
+    if (index >= 0) list.splice(index, 1);
+    else if (list.length < 2) list.push(String(id));
+    else { announce('已选 A、B 两组，请先取消其中一组。'); return; }
+    pendingDelete = null;
+    clearTimeout(deleteTimer);
+    render();
+  }
+  function deleteRow(id) {
+    var row = rowById(id);
+    if (!row || selected[source].indexOf(String(id)) < 0) return;
+    if (pendingDelete !== String(id)) {
+      pendingDelete = String(id);
+      clearTimeout(deleteTimer);
+      deleteTimer = setTimeout(function () { pendingDelete = null; renderTable(); }, 3500);
+      renderTable();
+      return;
+    }
+    var lab = api();
+    if (!lab || typeof lab.deleteRecord !== 'function') return;
+    pendingDelete = null;
+    clearTimeout(deleteTimer);
+    lab.deleteRecord(row.id);
+    render();
+    announce('已删除这一组记录。');
+  }
+  function addReal() {
+    var lab = api();
+    if (!lab || typeof lab.ensureReal !== 'function') { announce('记录功能尚未就绪。'); return; }
+    var config = { mode: $('ev-mode').value, texture: $('ev-texture').value, loads: Number($('ev-loads').value) };
+    var existing = rowsAll().filter(function (row) {
+      return row.source === 'real' && row.mode === config.mode && row.texture === config.texture && Number(row.loads) === config.loads;
+    })[0];
+    if (!existing && currentRows.length >= 12) { announce('最多保留 12 组，先删除不需要的组。'); return; }
+    var id = lab.ensureReal(config);
+    if (id === undefined || id === null || id === false) { announce('未能加入记录，请稍后再试。'); return; }
+    if (selected.real.indexOf(String(id)) < 0 && selected.real.length < 2) selected.real.push(String(id));
+    render();
+    var rowNodes = page.querySelectorAll('[data-ev-row]');
+    Array.prototype.forEach.call(rowNodes, function (node) {
+      if (node.getAttribute('data-ev-row') === String(id)) {
+        var wrap = $('ev-table-wrap');
+        var rect = node.getBoundingClientRect();
+        var wrapRect = wrap.getBoundingClientRect();
+        if (rect.bottom > wrapRect.bottom) wrap.scrollTop += rect.bottom - wrapRect.bottom + 8;
+        if (rect.top < wrapRect.top + 42) wrap.scrollTop -= wrapRect.top + 42 - rect.top;
+        var cell = node.querySelector('[data-ev-edit]');
+        if (cell) cell.focus({ preventScroll: true });
+      }
+    });
+    announce(existing ? '已有这组条件，可继续填写或更正。' : '已加入空白实测组，点读数格填写。');
+  }
+  function keypadFeedback(message, isError) {
+    $('ev-keypad-feedback').textContent = message;
+    $('ev-keypad-feedback').classList.toggle('ev-error', !!isError);
+  }
+  function openKeypad(id, index, trigger) {
+    var row = rowById(id);
+    if (!row || row.source !== 'real' || index < 0 || index > 2) return;
+    var n = valuesOf(row)[index];
+    modal = { id: row.id, index: index, draft: n === null ? '' : n.toFixed(1), replaceNext: n !== null };
+    returnFocus = trigger || document.activeElement;
+    $('ev-keypad-title').textContent = '第 ' + (index + 1) + ' 次实测';
+    $('ev-keypad-context').textContent = conditionText(row);
+    $('ev-keypad-input').value = modal.draft;
+    keypadFeedback('范围 0–5.0 N，记录到 0.1 N。', false);
+    $('ev-keypad-layer').hidden = false;
+    $('ev-keypad').focus();
+  }
+  function closeKeypad() {
+    $('ev-keypad-layer').hidden = true;
+    modal = null;
+    if (returnFocus && document.documentElement.contains(returnFocus)) returnFocus.focus();
+    returnFocus = null;
+  }
+  function typeKey(key) {
+    if (!modal) return;
+    var draft = modal.draft;
+    if (modal.replaceNext && /^[0-9.]$/.test(key)) draft = '';
+    modal.replaceNext = false;
+    if (key === 'back') draft = draft.slice(0, -1);
+    else if (key === '.') {
+      if (draft.indexOf('.') >= 0) return;
+      draft = (draft || '0') + '.';
+    } else if (/^[0-9]$/.test(key)) {
+      if (draft.indexOf('.') >= 0 && draft.split('.')[1].length >= 1) {
+        keypadFeedback('只记录一位小数，可先退格修改。', true);
+        return;
+      }
+      if (draft.indexOf('.') < 0 && draft.length >= 2) return;
+      draft = draft === '0' ? key : draft + key;
+    } else return;
+    modal.draft = draft;
+    $('ev-keypad-input').value = draft;
+    if (draft && Number(draft) > 5) keypadFeedback('本表量程是 0–5.0 N，请修改读数。', true);
+    else keypadFeedback(draft === '' ? '留空表示未测；确认后保存为空白。' : '范围 0–5.0 N，记录到 0.1 N。', false);
+  }
+  function saveKeypad() {
+    if (!modal) return;
+    var draft = modal.draft;
+    var value = draft === '' ? null : Number(draft);
+    if (draft !== '' && (!/^\d+(?:\.\d?)?$/.test(draft) || !isFinite(value) || value < 0 || value > 5)) {
+      keypadFeedback('请输入 0–5.0 N，最多一位小数。', true);
+      return;
+    }
+    if (value !== null) value = Math.round(value * 10) / 10;
+    var lab = api();
+    if (!lab || typeof lab.setRealValue !== 'function') { keypadFeedback('记录功能尚未就绪，请稍后再试。', true); return; }
+    var saved = lab.setRealValue(modal.id, modal.index, value);
+    if (saved === false) { keypadFeedback('这组记录已变化，请取消后重新选择。', true); return; }
+    var focusId = String(modal.id);
+    var focusIndex = modal.index;
+    closeKeypad();
+    render();
+    var matches = page.querySelectorAll('[data-ev-edit]');
+    Array.prototype.forEach.call(matches, function (button) {
+      if (button.getAttribute('data-ev-edit') === focusId && Number(button.getAttribute('data-ev-index')) === focusIndex) button.focus({ preventScroll: true });
+    });
+  }
+  function fileDate() {
+    var d = new Date();
+    return String(d.getFullYear()) + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0');
+  }
+  function saveBlob(blob, filename) {
+    if (!window.URL || !window.URL.createObjectURL) { announce('当前浏览器暂不支持文件导出。'); return; }
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
+  }
+  function csvField(value) { return '"' + String(value).replace(/"/g, '""') + '"'; }
+  function exportCSV() {
+    if (!currentRows.length) { announce('当前来源还没有可导出的记录。'); return; }
+    var data = [['数据来源', '运动方式', '车轮表面', source === 'real' ? '配重份数' : '配重块数', source === 'real' ? '配重说明' : '总质量（g）', '第1次（N）', '第2次（N）', '第3次（N）', '已测次数', '平均值（N）']];
+    currentRows.forEach(function (row) {
+      var v = valuesOf(row), s = stats(row);
+      data.push([sourceName(), modeName(row.mode), textureName(row.texture), row.loads, source === 'real' ? '同一辆小车，每份配重质量相同' : mass(row), v[0] === null ? '' : numberText(v[0]), v[1] === null ? '' : numberText(v[1]), v[2] === null ? '' : numberText(v[2]), s.count, s.mean === null ? '' : numberText(s.mean)]);
+    });
+    var csv = '\ufeff' + data.map(function (line) { return line.map(csvField).join(','); }).join('\r\n');
+    saveBlob(new Blob([csv], { type: 'text/csv;charset=utf-8' }), '摩擦力比较_' + sourceName() + '_' + fileDate() + '.csv');
+    announce('已导出当前来源的记录，空白保持为空白。');
+  }
+  function exportPNG() {
+    if (!selected[source].length) { announce('先选择要保存的 A、B 组。'); return; }
+    if (!window.URL || !window.URL.createObjectURL) { announce('当前浏览器暂不支持图片导出。'); return; }
+    var chart = $('ev-chart').cloneNode(true);
+    chart.setAttribute('xmlns', NS);
+    chart.setAttribute('width', '560');
+    chart.setAttribute('height', '365');
+    chart.removeAttribute('class');
+    var outer = svgElement('svg', { xmlns: NS, width: 1120, height: 910, viewBox: '0 0 560 455', 'font-family': 'Arial, Microsoft YaHei, PingFang SC, sans-serif' });
+    addSvg(outer, 'rect', { x: 0, y: 0, width: 560, height: 455, fill: '#ffffff' });
+    outer.appendChild(chart);
+    addSvg(outer, 'line', { x1: 20, x2: 540, y1: 379, y2: 379, stroke: '#dce4ec' });
+    addSvg(outer, 'text', { x: 24, y: 410, fill: '#183247', 'font-size': 20, 'font-weight': 700 }, $('ev-status-title').textContent);
+    addSvg(outer, 'text', { x: 24, y: 440, fill: '#637485', 'font-size': 17 }, '未测值不计入均值；不同来源的数据分开比较。');
+    var text = new XMLSerializer().serializeToString(outer);
+    var url = URL.createObjectURL(new Blob([text], { type: 'image/svg+xml;charset=utf-8' }));
+    var picture = new Image();
+    var filename = '摩擦力比较_' + sourceName() + '_' + fileDate() + '.png';
+    var button = $('ev-export-png');
+    button.disabled = true;
+    picture.onload = function () {
+      var canvas = document.createElement('canvas');
+      canvas.width = 1120;
+      canvas.height = 910;
+      var context = canvas.getContext('2d');
+      if (!context) { URL.revokeObjectURL(url); button.disabled = false; announce('当前浏览器暂不支持图片导出。'); return; }
+      context.fillStyle = '#ffffff';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(picture, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      if (canvas.toBlob) {
+        canvas.toBlob(function (blob) {
+          button.disabled = false;
+          if (blob) { saveBlob(blob, filename); announce('已保存当前比较图。'); }
+          else announce('图片导出未完成，可先导出 CSV。');
+        }, 'image/png');
+      } else {
+        button.disabled = false;
+        var link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = filename;
+        link.click();
+      }
+    };
+    picture.onerror = function () { URL.revokeObjectURL(url); button.disabled = false; announce('图片导出未完成，可先导出 CSV。'); };
+    picture.src = url;
+  }
+  page.addEventListener('click', function (event) {
+    var target = event.target;
+    var button = target.closest ? target.closest('button') : null;
+    if (!button || !page.contains(button)) return;
+    if (button.hasAttribute('data-ev-source')) setSource(button.getAttribute('data-ev-source'));
+    else if (button.hasAttribute('data-ev-pick')) togglePick(button.getAttribute('data-ev-pick'));
+    else if (button.hasAttribute('data-ev-delete')) deleteRow(button.getAttribute('data-ev-delete'));
+    else if (button.hasAttribute('data-ev-edit')) openKeypad(button.getAttribute('data-ev-edit'), Number(button.getAttribute('data-ev-index')), button);
+    else if (button.hasAttribute('data-ev-key')) typeKey(button.getAttribute('data-ev-key'));
+  });
+  $('ev-add-real').addEventListener('click', addReal);
+  $('ev-export-csv').addEventListener('click', exportCSV);
+  $('ev-export-png').addEventListener('click', exportPNG);
+  $('ev-keypad-clear').addEventListener('click', function () {
+    if (!modal) return;
+    modal.draft = '';
+    modal.replaceNext = false;
+    $('ev-keypad-input').value = '';
+    keypadFeedback('留空表示未测；确认后保存为空白。', false);
+  });
+  $('ev-keypad-cancel').addEventListener('click', closeKeypad);
+  $('ev-keypad-confirm').addEventListener('click', saveKeypad);
+  $('ev-keypad-layer').addEventListener('click', function (event) {
+    if (event.target === $('ev-keypad-layer')) closeKeypad();
+  });
+  document.addEventListener('keydown', function (event) {
+    if (!modal) return;
+    if (event.key === 'Escape') { event.preventDefault(); closeKeypad(); return; }
+    if (event.key === 'Tab') {
+      var nodes = $('ev-keypad').querySelectorAll('button:not([disabled]), input');
+      var first = nodes[0], last = nodes[nodes.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === $('ev-keypad'))) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      return;
+    }
+    if (/^[0-9.]$/.test(event.key)) { event.preventDefault(); typeKey(event.key); }
+    else if (event.key === 'Backspace') { event.preventDefault(); typeKey('back'); }
+    else if (event.key === 'Delete') { event.preventDefault(); $('ev-keypad-clear').click(); }
+    else if (event.key === 'Enter') { event.preventDefault(); saveKeypad(); }
+  });
+  document.addEventListener('friction-records-change', render);
+  document.addEventListener('DOMContentLoaded', render);
+  window.FrictionEvidence = { refresh: render };
+  render();
+})();
+
+</script>
+<script>
+
+(function(){
+ 'use strict';
+ var root=document.getElementById('page-life');
+ if(!root)return;
+ var $=function(id){return document.getElementById(id);};
+ var ns='http://www.w3.org/2000/svg';
+ var state={axle:'dry',tyre:'worn',focus:'axle',running:false,paused:false,time:0,phase:'ready',result:null,baseline:null,angle:0,driveAngle:0,road:0};
+ var lastTime=null,frameId=0,total=8.4;
+ var settings=Array.prototype.slice.call(root.querySelectorAll('[data-life-key]'));
+ var focusTargets=Array.prototype.slice.call(root.querySelectorAll('[data-life-focus]'));
+ function svgEl(name,attrs){var e=document.createElementNS(ns,name);Object.keys(attrs).forEach(function(k){e.setAttribute(k,attrs[k]);});return e;}
+ Array.prototype.forEach.call(root.querySelectorAll('.life-tread'),function(g){
+  var cx=+g.getAttribute('data-cx'),cy=+g.getAttribute('data-cy');
+  for(var n=0;n<28;n++){
+   var a=n*Math.PI/14,x=cx+76*Math.cos(a),y=cy+76*Math.sin(a);
+   g.appendChild(svgEl('path',{d:'M'+(x-4*Math.cos(a)+2*Math.sin(a)).toFixed(2)+' '+(y-4*Math.sin(a)-2*Math.cos(a)).toFixed(2)+'l'+(8*Math.cos(a)-4*Math.sin(a)).toFixed(2)+' '+(8*Math.sin(a)+4*Math.cos(a)).toFixed(2)}));
+  }
+ });
+ for(var n=0;n<8;n++){
+  var a=n*Math.PI/4;
+  $('life-bearing-balls').appendChild(svgEl('circle',{cx:(56+25*Math.cos(a)).toFixed(2),cy:(47+25*Math.sin(a)).toFixed(2),r:6.1}));
+ }
+ function axleName(v){return v==='oiled'?'润滑轮轴':'干涩轮轴';}
+ function tyreName(v){return v==='drain'?'排水胎纹':'磨平轮胎';}
+ function resultFor(config){
+  return {axle:config.axle,tyre:config.tyre,drag:config.axle==='oiled'?'较小':'偏大',grip:config.tyre==='drain'?'较好':'较弱',dragLevel:config.axle==='oiled'?1:4,gripLevel:config.tyre==='drain'?4:1};
+ }
+ function setBars(id,num){Array.prototype.forEach.call($(id).children,function(e,i){e.setAttribute('data-on',i<num?'true':'false');});}
+ function drawDetail(){
+  var axle=state.focus==='axle',tested=!!state.result;
+  $('life-bearing-detail').style.display=axle?'':'none';
+  $('life-ground-detail').style.display=axle?'none':'';
+  $('life-grease-ring').setAttribute('opacity',state.axle==='oiled'?'.72':'0');
+  $('life-bearing-resistance').setAttribute('visibility',(state.running||tested)?'visible':'hidden');
+  $('life-resistance-arc').setAttribute('d',state.axle==='oiled'?'M56 5A42 42 0 0 0 26.3 17.3':'M56 5A42 42 0 0 0 20 68.6');
+  $('life-resistance-arc').setAttribute('stroke-width',state.axle==='oiled'?'3':'5');
+  $('life-grooves').style.display=state.tyre==='drain'?'':'none';
+  $('life-draining').style.display=state.tyre==='drain'?'':'none';
+  $('life-water-film').setAttribute('opacity',state.tyre==='drain'?'.3':'.75');
+  $('life-detail-title').textContent=axle?'轮轴里的接触':'轮胎与湿路的接触';
+  if(axle){
+   $('life-detail-text').textContent=tested&&state.axle==='oiled'?'润滑减少轮轴接触处的阻力。润滑剂留在轮轴，不涂到轮胎接地面。':state.axle==='oiled'?'黄色表示润滑剂。轮轴处理了，轮胎与地面的接触会一起改变吗？':'滚珠夹在内外圈之间。它们转动时，也有阻力吗？';
+  }else{
+   $('life-detail-text').textContent=tested&&state.tyre==='drain'?'本模型中，沟槽帮助排水，改善湿路接触。胎纹并非越深越好。':state.tyre==='drain'?'蓝色表示水。沟槽为水留下通道，试骑后再比较湿路抓地。':'薄水膜会改变接触条件。换成排水胎纹，轮轴会一起改变吗？';
+  }
+  focusTargets.forEach(function(e){e.setAttribute('aria-pressed',e.getAttribute('data-life-focus')===state.focus?'true':'false');});
+ }
+ function drawSettings(){
+  settings.forEach(function(b){var k=b.getAttribute('data-life-key');b.setAttribute('aria-pressed',state[k]===b.getAttribute('data-life-value')?'true':'false');b.disabled=state.running;});
+  Array.prototype.forEach.call(root.querySelectorAll('.life-tread'),function(g){g.setAttribute('opacity',state.tyre==='drain'?'.95':'.1');});
+  drawDetail();
+ }
+ function resultSentence(r){
+  if(r.axle==='oiled'&&r.tyre==='drain')return '轮轴更易转，湿路抓地也改善了。';
+  if(r.axle==='oiled')return '轮轴更易转，湿路抓地仍待改进。';
+  if(r.tyre==='drain')return '湿路抓地改善了，轮轴阻力仍偏大。';
+  return '先改变一个部位，再看看哪项反馈变了。';
+ }
+ function comparison(){
+  if(!state.baseline)return;
+  var b=state.baseline,r=state.result;
+  $('life-baseline').hidden=false;
+  $('life-baseline-config').textContent=axleName(b.axle)+' · '+tyreName(b.tyre);
+  $('life-baseline-drag').textContent=b.drag;
+  $('life-baseline-grip').textContent=b.grip;
+  if(!r){$('life-comparison').textContent='改变一个部位，再试骑。';return;}
+  var a=r.axle!==b.axle,t=r.tyre!==b.tyre;
+  if(!a&&!t)$('life-comparison').textContent='相同方案。还可以试着改变一个部位。';
+  else if(a&&!t)$('life-comparison').textContent='只改轮轴：阻力'+(r.dragLevel<b.dragLevel?'减小':'增大')+'，湿路抓地未变。';
+  else if(!a&&t)$('life-comparison').textContent='只改胎面：湿路抓地'+(r.gripLevel>b.gripLevel?'改善':'减弱')+'，轮轴阻力未变。';
+  else $('life-comparison').textContent='两处都改变了。再分别试一次，辨别各自的作用。';
+ }
+ function drawResult(){
+  var r=state.result;
+  $('life-drag-result').textContent=r?r.drag:'—';
+  $('life-grip-result').textContent=r?r.grip:'—';
+  setBars('life-drag-bars',r?r.dragLevel:0);setBars('life-grip-bars',r?r.gripLevel:0);
+  $('life-result-note').textContent=r?resultSentence(r):state.running?'观察后轮接地处：力的方向变了吗？':'摩擦力是不是越小越好？';
+  $('life-save').disabled=!r||state.running;
+  comparison();drawDetail();
+ }
+ function setPhase(phase){
+  if(state.phase===phase)return;
+  state.phase=phase;
+  var label={ready:'先选方案，再试骑',start:'起步 · 脚蹬驱动',cruise:'骑行 · 持续驱动',brake:'刹车 · 后轮制动',done:'已停稳 · 比较两处接触'};
+  $('life-phase').textContent=label[phase]||'';
+  var active=phase==='start'||phase==='cruise'||phase==='brake';
+  $('life-force').setAttribute('visibility',active?'visible':'hidden');
+  if(active){
+   var length=100;
+   $('life-force-line').setAttribute('d',phase==='brake'?'M232 345H'+(232-length):'M264 345H'+(264+length));
+   $('life-force-label').textContent=phase==='brake'?'← 地面对后轮的摩擦力':'地面对驱动后轮的摩擦力 →';
+  }
+ }
+ function drawMovement(){
+  $('life-rear-spin').setAttribute('transform','rotate('+state.angle.toFixed(2)+' 248 276)');
+  $('life-front-spin').setAttribute('transform','rotate('+state.angle.toFixed(2)+' 620 276)');
+  $('life-pedal').setAttribute('transform','rotate('+(state.driveAngle+18).toFixed(2)+' 373 276)');
+  $('life-chain').setAttribute('stroke-dashoffset',(-state.driveAngle*.238).toFixed(2));
+  $('life-road-marks').setAttribute('transform','translate('+(-state.road%300).toFixed(2)+' 0)');
+  $('life-bearing-balls').setAttribute('transform','rotate('+(state.angle*.62).toFixed(2)+' 56 47)');
+ }
+ function finish(){
+  state.running=false;state.paused=false;state.result=resultFor(state);setPhase('done');
+  $('life-run').textContent='再试骑一次';$('life-run').setAttribute('data-paused','false');
+  drawSettings();drawResult();drawMovement();lastTime=null;frameId=0;
+ }
+ function tick(ts){
+  if(!state.running){frameId=0;return;}
+  if(root.hidden||document.hidden||state.paused){lastTime=null;frameId=requestAnimationFrame(tick);return;}
+  var dt=lastTime===null?0:Math.min(.045,(ts-lastTime)/1000);lastTime=ts;
+  state.time+=dt;
+  var speed=0;
+  if(state.time<2.4){setPhase('start');speed=Math.min(1,state.time/2.4);}
+  else if(state.time<4.8){setPhase('cruise');speed=1;}
+  else{setPhase('brake');speed=Math.max(0,1-(state.time-4.8)/3.6);speed*=speed;}
+  state.angle+=speed*105*dt;if(state.phase!=='brake')state.driveAngle+=speed*105*.42*dt;state.road+=speed*144.775*dt;
+  drawMovement();
+  if(state.time>=total){finish();return;}
+  frameId=requestAnimationFrame(tick);
+ }
+ function startOrPause(){
+  if(state.running){
+   state.paused=!state.paused;lastTime=null;
+   $('life-run').textContent=state.paused?'继续试骑':'暂停观察';
+   $('life-run').setAttribute('data-paused',state.paused?'true':'false');return;
+  }
+  state.running=true;state.paused=false;state.time=0;state.result=null;state.angle=0;state.driveAngle=0;state.road=0;lastTime=null;
+  $('life-run').textContent='暂停观察';$('life-run').setAttribute('data-paused','false');
+  setPhase('start');drawSettings();drawResult();drawMovement();
+  frameId=requestAnimationFrame(tick);
+ }
+ settings.forEach(function(b){b.addEventListener('click',function(){
+  if(state.running)return;
+  var k=b.getAttribute('data-life-key'),v=b.getAttribute('data-life-value');
+  if(state[k]===v)return;
+  state[k]=v;state.result=null;state.focus=k==='axle'?'axle':'ground';
+  setPhase('ready');$('life-phase').textContent='方案已改变 · 再试骑';
+  $('life-run').textContent='试骑与刹车';drawSettings();drawResult();
+ });});
+ focusTargets.forEach(function(e){
+  function choose(){state.focus=e.getAttribute('data-life-focus');drawDetail();}
+  e.addEventListener('click',choose);e.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();choose();}});
+ });
+ $('life-run').addEventListener('click',startOrPause);
+ $('life-save').addEventListener('click',function(){
+  if(!state.result||state.running)return;
+  state.baseline=Object.assign({},state.result);comparison();
+  $('life-result-note').textContent='已保留。改变一个部位，再试骑。';
+ });
+ function reset(){
+  if(frameId)cancelAnimationFrame(frameId);frameId=0;lastTime=null;
+  state={axle:'dry',tyre:'worn',focus:'axle',running:false,paused:false,time:0,phase:'',result:null,baseline:null,angle:0,driveAngle:0,road:0};
+  setPhase('ready');$('life-run').textContent='试骑与刹车';$('life-run').setAttribute('data-paused','false');$('life-baseline').hidden=true;
+  drawSettings();drawResult();drawMovement();
+ }
+ window.LifeLab={getState:function(){return JSON.parse(JSON.stringify(state));},reset:reset};
+ drawSettings();drawResult();drawMovement();
+})();
+
+</script>
+</body>
+</html>
