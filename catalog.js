@@ -135,12 +135,13 @@
       }
 
       function resourceHTML(book, resource) {
-        var author = resource[2].replace(/^【|】$/g, '');
+        var author = (resource[2] || '').replace(/^【|】$/g, '').trim();
         return '<article class="resource-card">' +
-          '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5><span class="resource-author">' + escapeHTML(author) + '</span></div>' +
+          '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5>' +
+            (author ? '<span class="resource-author">' + escapeHTML(author) + '</span>' : '') + '</div>' +
           '<p class="resource-description">' + escapeHTML(resource[3]) + '</p>' +
           '<div class="resource-bottom"><div class="resource-tech">' + resourceGrade(resource) + '</div>' +
-            '<a class="lesson-open" href="' + escapeHTML(resource[4]) + '" aria-label="进入' + escapeHTML(book.title) + resource[0] + '《' + escapeHTML(resource[1]) + '》，' + escapeHTML(author) + '的交互课件">进入课件' + arrow + '</a></div>' +
+            '<a class="lesson-open" href="' + escapeHTML(resource[4]) + '" aria-label="进入' + escapeHTML(book.title) + resource[0] + '《' + escapeHTML(resource[1]) + '》' + (author ? '，' + escapeHTML(author) : '') + '的交互课件">进入课件' + arrow + '</a></div>' +
           '</article>';
       }
 
