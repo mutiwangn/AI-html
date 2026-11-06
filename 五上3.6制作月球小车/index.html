@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f3ed">
+<meta name="aihtml-level" content="1">
+<meta name="description" content="五上3.6 制作月球小车：三视设计、材料取舍与传动透视。单体离线互动工坊。">
+<title>制作“月球小车” · 设计工坊</title>
+<style>
+:root{--paper:#f4f3ed;--ink:#18334b;--muted:#5f7384;--blue:#246bce;--soft:#eaf2fd;--orange:#df842d;--line:#dce3e7;--white:#fff;--good:#277359;--bad:#b2493b}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--paper)}body{display:flex;flex-direction:column;overflow:hidden}button,input,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink);min-height:44px;padding:8px 14px;font-weight:600}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e99b40;outline-offset:3px}button:hover{border-color:var(--blue)}button.active,button[aria-pressed=true]{background:var(--soft);border-color:var(--blue);color:var(--blue)}button.primary{background:var(--blue);color:white;border-color:var(--blue)}button:disabled{opacity:.45;cursor:default}input[type=range]{width:100%;height:36px;accent-color:var(--blue)}input[type=number],input[type=text],select,textarea{border:1px solid #bccbd5;border-radius:7px;min-height:40px;padding:7px;background:white;color:var(--ink)}[hidden]{display:none!important}.app-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;gap:20px;min-height:83px;border-bottom:1px solid #d4dde2;background:#fafaf7}.brand{display:flex;align-items:center;gap:12px;white-space:nowrap}.brand-icon{width:43px;height:43px;color:var(--blue);background:#e4eefb;border-radius:11px;padding:5px}.eyebrow{font-size:12px;letter-spacing:1.6px;color:var(--muted);margin-bottom:4px}.brand h1{font-size:24px;line-height:1.15;margin:0;font-weight:750}.tabs{display:flex;gap:7px;background:#e8edf0;padding:4px;border-radius:11px}.tabs button{background:transparent;border:0;font-size:18px;padding:10px 20px;white-space:nowrap}.tabs button[aria-selected=true]{background:white;box-shadow:0 2px 7px #20395012;color:var(--blue)}.tab-number{margin-right:8px;opacity:.6;font-size:14px}.header-actions{display:flex;gap:8px}.icon-btn{width:44px;padding:8px;font-size:22px}.task-strip{display:flex;align-items:center;gap:16px;padding:9px 24px;font-size:15px;min-height:46px}.task-strip strong{font-size:16px}.task-strip .line{height:18px;width:1px;background:#cbd6df}.task-tag{background:#ece4d5;color:#785c32;padding:4px 8px;border-radius:4px;font-size:13px}.task-strip .settings-link{margin-left:auto;padding:3px 11px;min-height:32px;font-size:13px;background:transparent}.page{flex:1;min-height:0;margin:0 20px 12px}.design-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px;height:100%}.drawing-board{min-height:0;background:white;border:1px solid var(--line);border-radius:13px;display:flex;flex-direction:column;overflow:hidden}.board-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid #e9edef}.board-head h2{font-size:18px;margin:0}.board-head .helper{font-size:14px;color:var(--muted);margin-top:4px}.board-tools{display:flex;gap:5px}.board-tools button{font-size:13px;min-height:36px;padding:6px 9px;white-space:nowrap}.draw-wrap{min-height:0;flex:1;position:relative;background:radial-gradient(ellipse at 40% 40%,#ffffff 30%,#f4f8fb 100%)}#design-svg{display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none}#design-svg text{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif}#design-svg .part{cursor:pointer}#design-svg .drag{cursor:grab}#design-svg .drag:active{cursor:grabbing}#design-svg .outline{stroke:#246bce;stroke-width:3;stroke-dasharray:8 5;fill:none;pointer-events:none}.diagram-note{position:absolute;right:18px;bottom:10px;max-width:218px;font-size:12px;color:var(--muted);line-height:1.6}.board-bottom{padding:10px 16px;border-top:1px solid var(--line);display:flex;align-items:center;gap:8px;min-height:62px}.board-bottom .hint{flex:1;min-width:80px;color:var(--muted);font-size:14px;line-height:1.5}.board-bottom button{font-size:14px;padding:8px 12px}.control-panel{background:#fff;border:1px solid var(--line);border-radius:13px;display:flex;flex-direction:column;min-height:0;overflow:auto}.summary{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:#f8fbfe;border-radius:13px 13px 0 0}.summary-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:14px}.data-origin{font-size:11px;color:var(--muted);border:1px solid #ccd8e2;padding:3px 5px;border-radius:4px}.totals{display:flex;gap:14px}.total{flex:1;min-width:0}.total strong{font-size:29px;font-variant-numeric:tabular-nums}.total span.unit{font-size:14px;margin-left:4px}.limit{font-size:12px;color:var(--muted);margin:3px 0}.meter{height:5px;background:#dfe8ed;overflow:hidden;border-radius:4px}.meter i{display:block;height:100%;background:var(--blue);width:50%;transition:width .2s}.total.over strong,.total.over .limit{color:var(--bad)}.total.over .meter i{background:var(--bad)}.mass-note{font-size:11px;color:var(--muted);margin-top:8px}.choices{padding:12px 16px}.option-row{margin-bottom:12px;padding:4px;border-radius:9px;border:2px solid transparent}.option-row.focused{border-color:#b4cff3;background:#f5f9ff}.option-label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:14px;font-weight:600}.option-label small{font-size:11px;color:var(--muted);font-weight:400}.choice-pair{display:flex;gap:6px}.choice-pair button{flex:1;min-height:43px;padding:5px 7px;font-size:14px}.choice-pair button small{display:block;font-weight:400;font-size:11px;margin-top:3px;color:var(--muted)}.compact-row{display:flex;align-items:center;gap:10px;margin-top:6px;font-size:14px}.compact-row .choice-pair{flex:1}.compact-row .choice-pair button{min-height:34px}.sliders{padding:0 20px 8px}.slider-label{display:flex;justify-content:space-between;font-size:14px;align-items:center}.slider-label output{font-weight:700;color:var(--blue);font-size:16px;font-variant-numeric:tabular-nums}.status-note{margin:auto 16px 12px;padding:10px 12px;font-size:12px;background:#f5f3ed;border-radius:7px;line-height:1.65}.status-note b{font-weight:600}.app-footer{display:flex;align-items:center;justify-content:space-between;padding:0 24px 10px;font-size:11px;color:#6b7f8f;gap:12px;min-height:24px}.app-footer button{border:0;background:transparent;min-height:20px;padding:0;font-size:11px;color:#6b7f8f;font-weight:400}.toast{position:fixed;bottom:45px;left:50%;transform:translateX(-50%);z-index:100;background:var(--ink);color:white;padding:11px 20px;border-radius:8px;font-size:15px;max-width:90%;box-shadow:0 5px 25px #14283a24}.modal-backdrop{position:fixed;inset:0;background:#132c4577;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}.modal{width:min(920px,100%);max-height:92vh;background:#fafbf9;border:1px solid white;border-radius:15px;display:flex;flex-direction:column;box-shadow:0 20px 90px #142a4b55}.modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--line)}.modal-header h2{font-size:22px;margin:0}.modal-content{padding:20px 24px;overflow:auto}.modal-footer{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line)}.modal p{font-size:15px;line-height:1.8;margin-top:0}.modal h3{font-size:17px;margin-top:20px}.modal table{width:100%;border-collapse:collapse;font-size:14px}.modal th,.modal td{padding:9px;border-bottom:1px solid #dce4e9;text-align:left}.modal th{background:#edf3f7}.modal input[type=number]{width:90px}.settings-grid{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:18px}.settings-grid label{font-size:14px;display:flex;gap:7px;align-items:center}.table-wrap{overflow-x:auto}.fine-print{font-size:12px!important;color:var(--muted)}.settings-grid small{color:var(--muted)}.modal a{color:var(--blue)}.compare-table td:not(:first-child),.compare-table th:not(:first-child){width:32%}.compare-table .changed{background:#fff1dd}.compare-preview{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px}.preview-cell{border:1px solid var(--line);border-radius:10px;background:white;overflow:hidden}.preview-cell h3{margin:0;padding:9px 12px;background:#edf4fb}.preview-cell svg{width:100%;height:auto;display:block}.note-input{display:block;width:100%;min-height:65px;resize:vertical;font-size:15px}.compare-tools{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.compare-tools button{font-size:13px}.summary-badge{padding:4px 8px;border-radius:4px;background:#ecf3f7;font-size:12px}.checklist{padding-left:22px;line-height:1.9;font-size:15px}.save-status{font-size:11px}.help-columns{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+@media(min-width:1600px){.app-header{padding:18px 32px;min-height:94px}.brand h1{font-size:29px}.tabs button{font-size:21px}.page{margin:0 28px 16px}.design-layout{grid-template-columns:minmax(0,1fr) 350px;gap:20px}.task-strip{font-size:18px;padding:12px 32px}.task-strip strong{font-size:18px}.task-strip .settings-link{font-size:15px}.board-head{padding:16px 22px}.board-head h2{font-size:22px}.board-head .helper{font-size:16px}.board-tools button{font-size:15px}.summary{padding:20px}.option-label{font-size:17px}.choice-pair button{font-size:17px;min-height:52px}.choice-pair button small{font-size:13px}.option-row{margin-bottom:16px}.total strong{font-size:36px}.slider-label{font-size:18px}.slider-label output{font-size:20px}.status-note{font-size:14px}.board-bottom .hint,.board-bottom button{font-size:17px}.diagram-note{font-size:14px}.mass-note,.limit{font-size:13px}.data-origin{font-size:12px}}
+@media(max-height:780px) and (min-width:901px){.app-header{min-height:72px;padding-top:10px;padding-bottom:10px}.task-strip{min-height:40px;padding-top:7px;padding-bottom:7px}.option-row{margin-bottom:6px}.choices{padding-top:8px;padding-bottom:6px}.choice-pair button{min-height:38px}.summary{padding-top:10px;padding-bottom:9px}.board-head{padding-top:9px;padding-bottom:9px}.status-note{padding:7px 10px;margin-bottom:8px}.sliders{padding-bottom:4px}.board-bottom{min-height:54px;padding-top:7px;padding-bottom:7px}.compact-row .choice-pair button{min-height:32px}.brand h1{font-size:22px}}
+@media(max-height:800px) and (min-width:901px){.summary{padding:9px 12px}.summary-top{margin-bottom:5px}.total strong{font-size:26px}.mass-note{margin-top:5px;font-size:10px}.choices{padding:5px 12px}.option-row{padding:2px;margin-bottom:4px}.option-label{font-size:13px;margin-bottom:4px}.choice-pair button{min-height:36px;padding:3px 5px;font-size:13px}.choice-pair button small{font-size:10px;margin-top:1px}.compact-row{margin-top:3px}.compact-row .choice-pair button{min-height:30px}.sliders{padding:0 16px 3px}.sliders input[type=range]{height:28px;margin:0 0 3px}.slider-label{font-size:13px}.status-note{font-size:11px;padding:6px 8px;line-height:1.45;margin:5px 12px 9px}}
+@media(max-width:1100px) and (min-width:901px){.app-header{padding-left:17px;padding-right:17px;gap:12px}.tabs button{padding:10px 12px;font-size:16px}.brand-icon{display:none}.design-layout{grid-template-columns:minmax(0,1fr) 280px;gap:12px}.page{margin-left:14px;margin-right:14px}.board-head .helper{font-size:12px}.board-head{padding-left:12px;padding-right:12px}.board-head h2{font-size:16px}.board-tools button{font-size:12px;padding:5px}.board-bottom .hint{font-size:12px}.board-bottom button{font-size:12px;padding:7px}.diagram-note{font-size:11px;right:10px;max-width:140px}.task-strip{gap:10px;padding-left:16px;padding-right:16px;font-size:13px}.task-strip strong{font-size:14px}}
+@media(max-width:900px){body{overflow:auto;min-height:100%;height:auto}.app-header{position:sticky;top:0;z-index:20;flex-wrap:wrap;padding:10px 14px;gap:10px}.brand h1{font-size:21px}.brand-icon{width:36px;height:36px}.eyebrow{font-size:10px}.tabs{order:3;width:100%;justify-content:center}.tabs button{flex:1;font-size:17px}.header-actions{margin-left:auto}.task-strip{padding:10px 14px;font-size:13px;gap:8px;flex-wrap:wrap}.task-strip strong{font-size:14px}.task-strip .line{display:none}.task-strip .settings-link{margin-left:auto}.task-tag{font-size:11px}.page{margin:0 12px 12px;flex:auto}.design-layout{grid-template-columns:1fr;gap:12px}.drawing-board{height:560px}.control-panel{display:grid;grid-template-columns:240px 1fr;grid-template-rows:auto auto;overflow:visible}.summary{grid-column:1;grid-row:1;border-bottom:0;border-right:1px solid var(--line);border-radius:12px 0 0 0}.choices{grid-column:2;grid-row:1/3;display:grid;grid-template-columns:1fr 1fr;gap:5px 12px}.choices .option-row{margin:0}.sliders{grid-column:1;grid-row:2;padding:8px 16px}.status-note{grid-column:1/3;margin:4px 15px 12px;font-size:13px}.app-footer{padding:2px 15px 15px}.diagram-note{font-size:12px;max-width:190px}.help-columns{grid-template-columns:1fr}}
+@media(max-width:560px){.brand-icon{display:none}.brand h1{font-size:19px}.header-actions .icon-btn{width:38px;min-height:38px;font-size:19px}.drawing-board{height:465px}.board-head{padding:10px;align-items:flex-start}.board-head .helper{font-size:11px}.board-head h2{font-size:16px}.board-tools{flex-direction:column}.board-tools button{min-height:29px;font-size:11px}.board-bottom{flex-wrap:wrap;padding:9px}.board-bottom .hint{width:100%;flex-basis:100%;font-size:12px}.board-bottom button{flex:1;font-size:12px;padding:7px}.control-panel{grid-template-columns:1fr}.summary{grid-column:1;grid-row:1;border-right:0;border-bottom:1px solid var(--line)}.choices{grid-column:1;grid-row:2}.sliders{grid-column:1;grid-row:3;display:grid;grid-template-columns:1fr 1fr;gap:14px}.status-note{grid-column:1;grid-row:4}.diagram-note{display:none}.modal-backdrop{padding:8px}.modal-content{padding:15px}.modal-header,.modal-footer{padding:13px 15px}.modal-header h2{font-size:19px}.modal th,.modal td{padding:7px;font-size:12px}.modal input[type=number]{width:75px}.compare-preview{gap:7px}.compare-table td{font-size:11px}.settings-grid{gap:9px}.app-footer{font-size:10px}.task-strip .task-tag{display:none}}
+</style>
+</head>
+<body>
+<header class="app-header">
+ <div class="brand"><svg class="brand-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 24h28M12 24l3-9h12l3 9M17 13l-2-5h13l-2 5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="12" cy="29" r="5" fill="none" stroke="currentColor" stroke-width="2.4"/><circle cx="29" cy="29" r="5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16 8v5m5-5v5m5-5v5" stroke="currentColor" stroke-width="1"/></svg><div><div class="eyebrow">五上 · 3.6　工程设计</div><h1>制作“月球小车”</h1></div></div>
+ <nav class="tabs" aria-label="工作区"><button id="tab-design" aria-selected="true" aria-controls="design-page"><span class="tab-number">01</span>方案工坊</button><button id="tab-mechanism" aria-selected="false" aria-controls="mechanism-page"><span class="tab-number">02</span>传动透视</button></nav>
+ <div class="header-actions"><button id="help-btn" class="icon-btn" title="模型说明" aria-label="模型说明">?</button><button id="fullscreen-btn" class="icon-btn" title="全屏" aria-label="全屏">⛶</button></div>
+</header>
+<div class="task-strip"><span class="task-tag">制作任务</span><strong>载一块橡皮，穿过凹凸沙地</strong><span class="line"></span><span id="task-limits">≤100元 · 小车≤100克</span><span class="line"></span><span id="task-time">10秒内通过 · 待实物测试</span><button class="settings-link" id="settings-btn">材料与任务 ⚙</button></div>
+<main id="design-page" class="page">
+ <div class="design-layout">
+  <section class="drawing-board" aria-label="小车三视设计图">
+   <div class="board-head"><div><h2>一个设计，三个视角</h2><div class="helper">点零件换材料 · 拖橡皮和蓝色轮轴</div></div><div class="board-tools"><button id="dimensions-btn" aria-pressed="true">尺寸线</button><button id="xray-btn" aria-pressed="false">看被挡住的结构</button></div></div>
+   <div class="draw-wrap"><svg id="design-svg" viewBox="0 0 960 600" role="img" aria-label="侧视、俯视、前视同步的小车设计图"></svg><div class="diagram-note">尺寸为本网页设计设定。<br>制作时需与实际器材核对。</div></div>
+   <div class="board-bottom"><span class="hint" id="design-hint">先留住一个方案，再改变一处比较。</span><button id="save-baseline">保留为方案 A</button><button id="compare-btn">对照 / 导出</button><button id="reset-btn" title="重置当前设计，保留方案A和材料设置">复位</button></div>
+  </section>
+  <aside class="control-panel" aria-label="材料和结构调整">
+   <div class="summary"><div class="summary-top"><strong>材料合计</strong><span class="data-origin" id="data-origin">教材示例</span></div><div class="totals"><div class="total" id="cost-total"><strong id="cost-value">74</strong><span class="unit">元</span><div class="limit" id="cost-limit">上限 100 元</div><div class="meter"><i id="cost-meter"></i></div></div><div class="total" id="mass-total"><strong id="mass-value">65</strong><span class="unit">克</span><div class="limit" id="mass-limit">上限 100 克</div><div class="meter"><i id="mass-meter"></i></div></div></div><div class="mass-note">小车已列材料，不含橡皮；小配件可补入。</div></div>
+   <div class="choices">
+    <div class="option-row" id="choice-solar"><div class="option-label"><span>太阳能板</span><small>一对</small></div><div class="choice-pair"><button data-field="solar" data-value="B">B · 正方形<small id="label-solarB">30元 / 20克</small></button><button data-field="solar" data-value="A">A · 长方形<small id="label-solarA">40元 / 25克</small></button></div></div>
+    <div class="option-row" id="choice-wheel"><div class="option-label"><span>车轮与车轴</span><small>价格按一对</small></div><div class="choice-pair"><button data-field="wheel" data-value="B">B · 中轮<small id="label-wheelB">10元 / 8克</small></button><button data-field="wheel" data-value="A">A · 大轮<small id="label-wheelA">15元 / 10克</small></button></div><div class="compact-row"><span>数量</span><div class="choice-pair"><button data-field="wheels" data-value="4">四轮</button><button data-field="wheels" data-value="6">六轮</button></div></div></div>
+    <div class="option-row" id="choice-motor"><div class="option-label"><span>电动机</span><small>一个</small></div><div class="choice-pair"><button data-field="motor" data-value="B">B · 较慢<small id="label-motorB">10元 / 15克</small></button><button data-field="motor" data-value="A">A · 较快<small id="label-motorA">15元 / 20克</small></button></div></div>
+   </div>
+   <div class="sliders"><div><label class="slider-label" for="wheelbase-input"><span>前后轴距</span><output id="wheelbase-out">10 cm</output></label><input type="range" id="wheelbase-input" min="6" max="14" step="0.5" value="10"></div><div><label class="slider-label" for="tilt-input"><span>太阳能板倾角</span><output id="tilt-out">20°</output></label><input type="range" id="tilt-input" min="0" max="60" step="5" value="20"></div></div>
+   <div class="status-note" id="design-status">车轮、支架、载物位置要一起考虑。<br>沙地表现留给实物检验。</div>
+  </aside>
+ </div>
+</main>
+<section id="mechanism-page" class="page" hidden>
+  <style>
+    #mechanism-page{display:grid;grid-template-columns:minmax(0,1fr) 272px;gap:16px;min-height:0;height:100%;color:#18334b}
+    #mechanism-page[hidden]{display:none!important}
+    #mechanism-page *{box-sizing:border-box}
+    #mechanism-page .mech-stage{min-width:0;min-height:0;display:flex;flex-direction:column;background:#fff;border:1px solid #dce3e8;border-radius:12px;overflow:hidden}
+    #mechanism-page .mech-stage-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px 9px}
+    #mechanism-page .mech-stage-head strong{font-size:21px}
+    #mechanism-page .mech-stage-head span{font-size:15px;color:#5a6e7d}
+    #mechanism-page .mech-figure{flex:1;min-height:0;position:relative;background:linear-gradient(180deg,#fff 0%,#f7f9fb 100%)}
+    #mechanism-page .mech-figure svg{display:block;width:100%;height:100%;min-height:260px;font-family:inherit}
+    #mechanism-page .mech-bottom{padding:10px 16px;display:flex;gap:10px;border-top:1px solid #e5e9ed;background:#fff}
+    #mechanism-page button{font:inherit;cursor:pointer;min-height:44px;border-radius:9px;border:1px solid #ced8e2;background:#fff;color:#18334b;padding:9px 12px;line-height:1.25;touch-action:manipulation}
+    #mechanism-page button:hover{border-color:#246bce;background:#f0f5ff}
+    #mechanism-page button:focus-visible,#mechanism-page [role=button]:focus-visible,#mechanism-page input:focus-visible{outline:3px solid #ed9540;outline-offset:3px}
+    #mechanism-page button:disabled{opacity:.45;cursor:default}
+    #mechanism-page .mech-bottom button{flex:1;font-size:17px;font-weight:650}
+    #mechanism-page .mech-bottom button[aria-pressed=true]{background:#edf5ff;border-color:#b9d1f1;color:#1553a1}
+    #mechanism-page .mech-sidebar{min-height:0;display:flex;flex-direction:column;gap:13px;padding:16px;background:#fff;border:1px solid #dce3e8;border-radius:12px;overflow:auto}
+    #mechanism-page .mech-play-row{display:flex;gap:8px}
+    #mechanism-page .mech-play-row button{flex:1;font-size:18px;font-weight:700;padding:11px 5px}
+    #mechanism-page #mech-play{color:#fff;background:#246bce;border-color:#246bce}
+    #mechanism-page #mech-play:hover{background:#1759b3}
+    #mechanism-page .mech-control{border-top:1px solid #e6ebef;padding-top:12px}
+    #mechanism-page .mech-label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:18px;font-weight:650;margin-bottom:10px}
+    #mechanism-page .mech-label output{font-weight:700;color:#246bce}
+    #mechanism-page input[type=range]{width:100%;margin:0;min-height:36px;accent-color:#246bce;cursor:pointer;touch-action:pan-y}
+    #mechanism-page .mech-range-ends{display:flex;justify-content:space-between;font-size:14px;color:#607080;margin-top:1px}
+    #mechanism-page .mech-ratios{display:flex;gap:6px}
+    #mechanism-page .mech-ratios button{flex:1;padding:10px 3px;font-size:17px;font-weight:650;white-space:nowrap}
+    #mechanism-page .mech-ratios button[aria-pressed=true]{color:#fff;background:#246bce;border-color:#246bce}
+    #mechanism-page .mech-counts{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:#f4f7fa;border-radius:10px;padding:13px 9px}
+    #mechanism-page .mech-counts span{display:block;font-size:16px;color:#4b6379;text-align:center}
+    #mechanism-page .mech-counts output{display:block;margin-top:6px;font-size:28px;font-weight:750;font-variant-numeric:tabular-nums;text-align:center;color:#246bce;line-height:1.1}
+    #mechanism-page .mech-counts .mech-driven output{color:#bd6a14}
+    #mechanism-page .mech-counts small{font-size:14px;font-weight:500}
+    #mechanism-page #mech-status{margin:0;padding:11px 12px;min-height:66px;font-size:17px;line-height:1.5;border-left:4px solid #91afcb;background:#f5f8fb;border-radius:3px 8px 8px 3px}
+    #mechanism-page #mech-status[data-warning=true]{border-color:#e2a34d;background:#fff6e8}
+    #mechanism-page .mech-tools{display:flex;gap:8px;margin-top:auto}
+    #mechanism-page .mech-tools button{flex:1;font-size:16px}
+    #mechanism-page .mech-scope{font-size:13px;line-height:1.45;color:#617282;margin:0}
+    #mechanism-page .mech-svg-button{cursor:pointer;outline:none}
+    #mechanism-page .mech-svg-button:hover .mech-hit{fill:#e3efff;fill-opacity:.6}
+    #mechanism-page .mech-svg-button:focus .mech-hit{stroke:#ed9540;stroke-width:3}
+    #mechanism-page .mech-note-backdrop{position:absolute;inset:0;z-index:10;background:rgba(18,40,58,.32);display:flex;align-items:center;justify-content:center;padding:20px}
+    #mechanism-page .mech-note-backdrop[hidden]{display:none!important}
+    #mechanism-page .mech-note{max-width:640px;width:100%;max-height:100%;overflow:auto;background:#fff;border-radius:12px;padding:22px;box-shadow:0 15px 40px rgba(20,40,60,.18)}
+    #mechanism-page .mech-note-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    #mechanism-page .mech-note h3{font-size:24px;margin:0}
+    #mechanism-page .mech-note p{font-size:18px;line-height:1.7;margin:14px 0 0}
+    #mechanism-page .mech-note .mech-note-small{font-size:15px;color:#617282}
+    @media(max-width:1150px){#mechanism-page{grid-template-columns:minmax(0,1fr) 238px;gap:12px}#mechanism-page .mech-sidebar{padding:12px;gap:10px}#mechanism-page .mech-stage-head{padding:12px}#mechanism-page .mech-stage-head span{display:none}#mechanism-page .mech-control{padding-top:10px}#mechanism-page .mech-bottom{padding:9px;gap:8px}#mechanism-page .mech-bottom button{font-size:16px}#mechanism-page .mech-label{font-size:17px}}
+    @media(max-width:760px){#mechanism-page{height:auto;grid-template-columns:1fr;gap:12px}#mechanism-page .mech-stage{min-height:380px}#mechanism-page .mech-figure{min-height:300px}#mechanism-page .mech-sidebar{display:grid;grid-template-columns:1fr 1fr;overflow:visible;gap:12px}#mechanism-page .mech-control{padding-top:8px}#mechanism-page .mech-play-row{align-items:center}#mechanism-page .mech-play-row button{min-height:52px}#mechanism-page .mech-counts{align-content:center}#mechanism-page #mech-status{min-height:0}#mechanism-page .mech-tools{align-items:center;margin:0}#mechanism-page .mech-scope{grid-column:1/-1}#mechanism-page .mech-stage-head strong{font-size:19px}}
+    @media(max-width:430px){#mechanism-page .mech-sidebar{padding:10px;gap:10px}#mechanism-page .mech-ratios button{font-size:15px}#mechanism-page .mech-bottom button{font-size:15px}#mechanism-page .mech-stage{min-height:340px}#mechanism-page .mech-figure{min-height:270px}#mechanism-page .mech-counts output{font-size:24px}}
+    @media(max-height:880px) and (min-width:761px){#mechanism-page .mech-sidebar{gap:7px;padding:12px}#mechanism-page .mech-control{padding-top:5px}#mechanism-page .mech-label{margin-bottom:3px}#mechanism-page input[type=range]{min-height:26px}#mechanism-page .mech-counts{padding:9px}#mechanism-page .mech-counts output{font-size:26px;margin-top:3px}#mechanism-page #mech-status{min-height:57px;padding:8px 10px;font-size:16px}#mechanism-page .mech-scope{font-size:12px}#mechanism-page .mech-stage-head{padding-top:10px;padding-bottom:7px}}
+  </style>
+  <div class="mech-stage">
+    <div class="mech-stage-head"><strong>放大一组驱动</strong><span>点连接处，观察哪里停止</span></div>
+    <div class="mech-figure">
+      <svg id="mech-scene" viewBox="0 0 900 540" role="img" aria-label="太阳能电池、电动机、齿轮、车轴和透视车轮的联动示意">
+        <defs>
+          <linearGradient id="mech-panel-fill" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b5fa3"/><stop offset="1" stop-color="#12385f"/></linearGradient>
+          <linearGradient id="mech-motor-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0e9f1"/><stop offset=".5" stop-color="#f5f8fa"/><stop offset="1" stop-color="#a3b6c6"/></linearGradient>
+          <marker id="mech-leader-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L9 5L0 9" fill="none" stroke="#8094a6" stroke-width="1.5"/></marker>
+        </defs>
+        <rect x="20" y="20" width="860" height="225" rx="16" fill="#f2f6fb"/>
+        <g id="mech-solar-system">
+          <g id="mech-rays" stroke="#e5b44a" stroke-width="5" stroke-linecap="round">
+            <path d="M60 55L75 72M95 35L100 57M135 34L130 56"/><circle cx="62" cy="30" r="13" fill="#f7d66f" stroke="none"/>
+          </g>
+          <g id="mech-solar-panels">
+            <rect x="92" y="67" width="124" height="99" rx="5" fill="url(#mech-panel-fill)" stroke="#83a0bf" stroke-width="5"/>
+            <rect x="245" y="67" width="124" height="99" rx="5" fill="url(#mech-panel-fill)" stroke="#83a0bf" stroke-width="5"/>
+            <path d="M113 69V164M134 69V164M155 69V164M176 69V164M197 69V164M94 91H214M94 116H214M94 141H214M266 69V164M287 69V164M308 69V164M329 69V164M350 69V164M247 91H367M247 116H367M247 141H367" fill="none" stroke="#8cc2ef" stroke-width="1.5" opacity=".7"/>
+          </g>
+          <text id="mech-solar-label" x="228" y="207" text-anchor="middle" font-size="25" fill="#18334b" font-weight="650">太阳能电池 B（一对）</text>
+          <path d="M135 167V177H286V167" fill="none" stroke="#dc7c3f" stroke-width="3"/>
+          <path d="M172 167V188H326V183Q337 177 326 171V167" fill="none" stroke="#f2f6fb" stroke-width="7"/>
+          <path d="M172 167V188H326V183Q337 177 326 171V167" fill="none" stroke="#355477" stroke-width="3"/>
+          <circle cx="286" cy="177" r="5" fill="#dc7c3f"/><circle cx="326" cy="188" r="5" fill="#355477"/>
+        </g>
+        <path id="mech-wire-positive" d="M286 177H416V100H695" fill="none" stroke="#dc7c3f" stroke-width="5" stroke-linejoin="round"/>
+        <path id="mech-wire-negative" d="M326 188H642V165H695" fill="none" stroke="#355477" stroke-width="5" stroke-linejoin="round"/>
+        <path d="M326 183Q337 177 326 171" fill="none" stroke="#f2f6fb" stroke-width="8"/>
+        <path d="M326 183Q337 177 326 171" fill="none" stroke="#355477" stroke-width="3"/>
+        <g id="mech-wire-hit" class="mech-svg-button" role="button" tabindex="0" aria-label="断开导线" aria-pressed="true">
+          <rect class="mech-hit" x="470" y="72" width="120" height="62" rx="10" fill="#f2f6fb" fill-opacity="1" stroke="#a7c3e9" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="490" cy="100" r="6" fill="#dc7c3f"/><circle cx="570" cy="100" r="6" fill="#dc7c3f"/>
+          <path id="mech-switch" d="M490 100L570 100" fill="none" stroke="#dc7c3f" stroke-width="6" stroke-linecap="round"/>
+          <text x="530" y="61" font-size="23" text-anchor="middle" fill="#355477">连接处</text>
+        </g>
+        <g id="mech-motor">
+          <rect x="695" y="86" width="119" height="96" rx="17" fill="url(#mech-motor-fill)" stroke="#7a93a8" stroke-width="3"/>
+          <rect x="810" y="112" width="16" height="44" rx="4" fill="#8399ac"/>
+          <rect x="825" y="128" width="35" height="13" rx="3" fill="#526e87"/>
+          <rect x="688" y="96" width="12" height="10" rx="2" fill="#dc7c3f"/><rect x="688" y="160" width="12" height="10" rx="2" fill="#355477"/>
+          <circle cx="751" cy="134" r="30" fill="#e9f0f6" stroke="#8ca7c1" stroke-width="2"/>
+          <g id="mech-motor-rotor" transform="translate(751 134)"><path d="M0-24V24M-21-12L21 12M-21 12L21-12" stroke="#3777b9" stroke-width="6" stroke-linecap="round"/><circle r="7" fill="#18334b"/></g>
+          <text id="mech-motor-label" x="752" y="215" text-anchor="middle" font-size="25" fill="#18334b" font-weight="650">电动机 B</text>
+        </g>
+        <path id="mech-magnify-leader" d="M844 146V260H300V338" fill="none" stroke="#91a8bc" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#mech-leader-arrow)"/>
+        <text x="90" y="283" font-size="23" fill="#61778b">沿车轴方向看</text>
+        <g id="mech-wheel-position" transform="translate(420 405)">
+          <g id="mech-wheel-rotation">
+            <circle id="mech-wheel-outer" r="113" fill="#e7edf1" fill-opacity=".36" stroke="#5f7890" stroke-opacity=".37" stroke-width="18"/>
+            <g id="mech-wheel-spokes" stroke="#66859e" stroke-opacity=".32" stroke-width="7"><path d="M0-109V109M-109 0H109M-77-77L77 77M-77 77L77-77"/></g>
+            <circle id="mech-wheel-dot" cx="0" cy="-113" r="8" fill="#c77a21"/>
+          </g>
+        </g>
+        <g id="mech-driven-position" transform="translate(420 405)">
+          <g id="mech-driven-rotation"><path id="mech-driven-shape" fill="#f6be6d" stroke="#a8661b" stroke-width="2.3"/><circle id="mech-driven-ring" r="45" fill="none" stroke="#d49137" stroke-width="2"/><path id="mech-driven-mark" d="M0 0V-47" stroke="#975719" stroke-width="5" stroke-linecap="round"/><circle r="10" fill="#fff1d6" stroke="#8f6231" stroke-width="2"/></g>
+        </g>
+        <g id="mech-driver-position" transform="translate(300 405)">
+          <g id="mech-driver-rotation"><path id="mech-driver-shape" fill="#78ace0" stroke="#235487" stroke-width="2.3"/><circle r="17" fill="#d9eafb" stroke="#326a9f" stroke-width="2"/><path d="M0 0V-24" stroke="#1a4e7e" stroke-width="5" stroke-linecap="round"/><circle r="5" fill="#18334b"/></g>
+        </g>
+        <g id="mech-mesh-hit" class="mech-svg-button" role="button" tabindex="0" aria-label="分离齿轮" aria-pressed="true">
+          <rect class="mech-hit" id="mech-mesh-hit-rect" x="320" y="365" width="65" height="80" rx="10" fill="#fff" fill-opacity="0" stroke="#246bce" stroke-width="2" stroke-dasharray="5 5"/>
+        </g>
+        <path id="mech-driver-label-leader" d="M190 384H257" fill="none" stroke="#8094a6" stroke-width="2" marker-end="url(#mech-leader-arrow)"/>
+        <text x="42" y="377" font-size="25" fill="#246bce" font-weight="650">电机齿轮</text><text x="42" y="408" font-size="23" fill="#426c93">12 齿</text>
+        <path id="mech-wheel-label-leader" d="M710 333H554" fill="none" stroke="#8094a6" stroke-width="2" marker-end="url(#mech-leader-arrow)"/>
+        <text x="719" y="341" font-size="25" fill="#18334b" font-weight="650">车轮透视</text>
+        <path id="mech-axle-label-leader" d="M710 407H460" fill="none" stroke="#8094a6" stroke-width="2" marker-end="url(#mech-leader-arrow)"/>
+        <text x="719" y="414" font-size="25" fill="#18334b" font-weight="650">同一车轴</text>
+        <path id="mech-driven-label-leader" d="M710 477H510L466 451" fill="none" stroke="#8094a6" stroke-width="2" marker-end="url(#mech-leader-arrow)"/>
+        <text id="mech-driven-label" x="719" y="484" font-size="25" fill="#b06d1f" font-weight="650">车轴齿轮 24齿</text>
+      </svg>
+      <div id="mech-note-backdrop" class="mech-note-backdrop" hidden>
+        <div class="mech-note" role="dialog" aria-modal="true" aria-labelledby="mech-note-title">
+          <div class="mech-note-head"><h3 id="mech-note-title">把连接看清楚</h3><button id="mech-note-close" type="button" aria-label="关闭传动说明">关闭</button></div>
+          <p>太阳能电池把光能转化为电能。两根导线形成完整回路后，电动机才能带动电机齿轮转动；遮光或断开回路时，这个演示中的电机停止。</p>
+          <p>相邻的两个外啮合齿轮转向相反。车轴齿轮、车轴和固定在轴上的车轮一起转动。改变齿数，再用“转一圈”观察两边的圈数。</p>
+          <p class="mech-note-small">这是沿车轴看的放大结构示意，半透明车轮位于齿轮后方，只显示一组驱动。齿数由网页设定；动图已慢放，光照与转动仅作定性对应，不显示真实电机转速。简化模型不含起动阈值、负载、打滑和惯性，不能用于推算沙地通过时间；实物仍需测试。重新啮合或更换齿数时，演示圈数归零。</p>
+        </div>
+      </div>
+    </div>
+    <div class="mech-bottom"><button id="mech-wire-toggle" type="button" aria-pressed="true">导线已接通 · 点此断开</button><button id="mech-mesh-toggle" type="button" aria-pressed="true">齿轮已啮合 · 点此分离</button></div>
+  </div>
+  <aside class="mech-sidebar" aria-label="传动观察控制">
+    <div class="mech-play-row"><button id="mech-play" type="button">▶ 播放</button><button id="mech-step" type="button">转一圈</button></div>
+    <div class="mech-control"><label class="mech-label" for="mech-light">光照条件 <output id="mech-light-label">强</output></label><input id="mech-light" type="range" min="0" max="100" step="1" value="100" aria-label="示意光照条件"><div class="mech-range-ends"><span>完全遮光</span><span>光照充足</span></div></div>
+    <div class="mech-control"><div class="mech-label">齿数：电机 ∶ 车轴</div><div class="mech-ratios" role="group" aria-label="选择齿数"><button type="button" data-mech-ratio="1" aria-pressed="false">12∶12</button><button type="button" data-mech-ratio="2" aria-pressed="true">12∶24</button><button type="button" data-mech-ratio="3" aria-pressed="false">12∶36</button></div></div>
+    <div class="mech-counts" aria-label="本次演示累计转动圈数"><div><span>电机齿轮</span><output id="mech-motor-count">0.00 <small>圈</small></output></div><div class="mech-driven"><span>车轮</span><output id="mech-wheel-count">0.00 <small>圈</small></output></div></div>
+    <p id="mech-status" aria-live="polite" data-warning="false">按“转一圈”，看看两边各转了多少。</p>
+    <div class="mech-tools"><button id="mech-reset" type="button">重新观察</button><button id="mech-note-open" type="button">模型说明</button></div>
+    <p class="mech-scope">空载机制示意 · 已慢放<br>齿数为网页设定，不代替实物测试。</p>
+  </aside>
+</section>
+
+<footer class="app-footer"><span>T1 基础交互 · v1.0 · 离线可用</span><span class="save-status" id="save-status">设计自动保存在此浏览器</span><button id="source-btn">数据与模型说明</button><span>mutiw</span></footer>
+<div class="modal-backdrop" id="modal-backdrop" hidden><section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header class="modal-header"><h2 id="modal-title"></h2><button id="modal-close" aria-label="关闭">关闭 ×</button></header><div class="modal-content" id="modal-content"></div><footer class="modal-footer" id="modal-footer"></footer></section></div>
+<div class="toast" id="toast" role="status" hidden></div><input id="import-file" type="file" accept="application/json,.json" hidden>
+<script>
+(function () {
+ 'use strict';
+ var $=function(id){return document.getElementById(id);};
+ var DEFAULT_DESIGN={solar:'B',wheel:'B',motor:'B',wheels:4,wheelbase:10,tilt:20,cargoX:12,cargoY:0,ratio:3,note:''};
+ var DEFAULT_SETTINGS={costLimit:100,massLimit:100,timeLimit:10,extraMass:0,extraCost:0,material:{solarA:{cost:40,mass:25},solarB:{cost:30,mass:20},wheelA:{cost:15,mass:10},wheelB:{cost:10,mass:8},frame:{cost:10,mass:10},motorA:{cost:15,mass:20},motorB:{cost:10,mass:15},gear:{cost:2,mass:2}}};
+ var MATERIAL_NAMES={solarA:'太阳能板 A（一对）',solarB:'太阳能板 B（一对）',wheelA:'车轮 A＋轴（一对）',wheelB:'车轮 B＋轴（一对）',frame:'车身支架',motorA:'电动机 A',motorB:'电动机 B',gear:'齿轮（一个）'};
+ var design=copy(DEFAULT_DESIGN),settings=copy(DEFAULT_SETTINGS),baseline=null,selected='',dimensions=true,xray=false,currentPage='design',toastTimer=0,persistTimer=0,drag=null,modalLastFocus=null;
+ var STORAGE_KEY='aihtml-g5u3l6-v1',P=28,X0=100,AXLE_Y=190,TOP_Y=420,FRONT_X=788;
+ function copy(v){return JSON.parse(JSON.stringify(v));}
+ function clamp(n,a,b){return Math.max(a,Math.min(b,n));}
+ function num(n){return Math.round(n*100)/100;}
+ function round(n){return Math.round(n*10)/10;}
+ function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+ function format(n){return String(num(n));}
+ function validNumber(v,a,b,fallback){return typeof v==='number'&&isFinite(v)&&v>=a&&v<=b?v:fallback;}
+ function normalizeDesign(d){d=d||{};return {solar:d.solar==='A'?'A':'B',wheel:d.wheel==='A'?'A':'B',motor:d.motor==='A'?'A':'B',wheels:d.wheels===6?6:4,wheelbase:validNumber(d.wheelbase,6,14,10),tilt:validNumber(d.tilt,0,60,20),cargoX:validNumber(d.cargoX,1.5,14.5,12),cargoY:validNumber(d.cargoY,-2,2,0),ratio:[1,2,3].indexOf(d.ratio)>=0?d.ratio:3,note:typeof d.note==='string'?d.note.slice(0,300):''};}
+ function normalizeSettings(s){s=s||{};var o=copy(DEFAULT_SETTINGS),k;for(k in o){if(k==='material')continue;o[k]=validNumber(s[k],k.indexOf('Limit')>=0?1:0,100000,o[k]);}for(k in o.material){var m=s.material&&s.material[k];if(m){o.material[k].cost=validNumber(m.cost,0,100000,o.material[k].cost);o.material[k].mass=validNumber(m.mass,0,100000,o.material[k].mass);}}return o;}
+ function bill(d,s){var rows=[['solar'+d.solar,1],['wheel'+d.wheel,d.wheels/2],['frame',1],['motor'+d.motor,1],['gear',2]],cost=s.extraCost,mass=s.extraMass;rows.forEach(function(r){cost+=s.material[r[0]].cost*r[1];mass+=s.material[r[0]].mass*r[1];});return {cost:num(cost),mass:num(mass),rows:rows};}
+ function designIssues(d,s){var b=bill(d,s),issues=[],diam=d.wheel==='A'?5:3;if(b.cost>s.costLimit)issues.push('预算超出 '+format(b.cost-s.costLimit)+' 元');if(b.mass>s.massLimit)issues.push('已列材料质量超出 '+format(b.mass-s.massLimit)+' 克');if(d.wheels===6&&d.wheelbase/2<diam+.2)issues.push('同侧车轮过近：轴距至少需 '+format((diam+.2)*2)+' cm');var halfPanel=(d.solar==='A'?3:2)*Math.cos(d.tilt*Math.PI/180);if(d.cargoX-1.5<5.5+halfPanel&&d.cargoX+1.5>5.5-halfPanel)issues.push('橡皮在太阳能板下方，请用透视检查装载空间');return issues;}
+ function toast(t){clearTimeout(toastTimer);$('toast').textContent=t;$('toast').hidden=false;toastTimer=setTimeout(function(){$('toast').hidden=true;},3200);}
+ function save(){clearTimeout(persistTimer);persistTimer=setTimeout(function(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:1,design:design,settings:settings,baseline:baseline}));$('save-status').textContent='设计已保存在此浏览器';}catch(e){$('save-status').textContent='浏览器无法保存；请导出方案备份';}},150);}
+ function load(){try{var data=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');if(data&&data.version===1){design=normalizeDesign(data.design);settings=normalizeSettings(data.settings);if(data.baseline&&data.baseline.design&&data.baseline.settings)baseline={design:normalizeDesign(data.baseline.design),settings:normalizeSettings(data.baseline.settings)};}}catch(e){$('save-status').textContent='未读取到保存的设计，可继续使用';}}
+ function svgText(x,y,t,size,color,anchor){return '<text x="'+num(x)+'" y="'+num(y)+'" font-size="'+(size||22)+'" fill="'+(color||'#18334b')+'"'+(anchor?' text-anchor="'+anchor+'"':'')+'>'+esc(t)+'</text>';}
+ function line(x1,y1,x2,y2,color,width,dash){return '<line x1="'+num(x1)+'" y1="'+num(y1)+'" x2="'+num(x2)+'" y2="'+num(y2)+'" stroke="'+(color||'#b2c1ce')+'" stroke-width="'+(width||1.5)+'"'+(dash?' stroke-dasharray="'+dash+'"':'')+'/>';}
+ function rect(x,y,w,h,fill,stroke,r){return '<rect x="'+num(x)+'" y="'+num(y)+'" width="'+num(w)+'" height="'+num(h)+'" rx="'+(r||0)+'" fill="'+fill+'"'+(stroke?' stroke="'+stroke+'" stroke-width="2"':'')+'/>';}
+ function dim(x1,y1,x2,y2,label,below){var horizontal=Math.abs(y1-y2)<1,parts=line(x1,y1,x2,y2,'#7893aa',1.5);if(horizontal){parts+=line(x1,y1-6,x1,y1+6,'#7893aa')+line(x2,y1-6,x2,y1+6,'#7893aa');parts+=svgText((x1+x2)/2,y1+(below?22:-9),label,19,'#486c8b','middle');}else{parts+=line(x1-6,y1,x1+6,y1,'#7893aa')+line(x1-6,y2,x1+6,y2,'#7893aa');parts+=svgText(x1+10,(y1+y2)/2+6,label,18,'#486c8b');}return parts;}
+ function wheel(cx,cy,r,mark){var s='<circle cx="'+num(cx)+'" cy="'+num(cy)+'" r="'+num(r)+'" fill="#2a4050" stroke="#142f42" stroke-width="3"/>';s+='<circle cx="'+num(cx)+'" cy="'+num(cy)+'" r="'+num(r*.65)+'" fill="#d4dfe6" stroke="#9dafbb" stroke-width="2"/>';for(var i=0;i<6;i++){var a=i*Math.PI/3;s+=line(cx+Math.cos(a)*r*.17,cy+Math.sin(a)*r*.17,cx+Math.cos(a)*r*.55,cy+Math.sin(a)*r*.55,'#7d94a5',4);}s+='<circle cx="'+num(cx)+'" cy="'+num(cy)+'" r="7" fill="#f3a340"/>';if(mark)s+='<circle cx="'+num(cx)+'" cy="'+num(cy)+'" r="'+num(r+6)+'" fill="none" stroke="#246bce" stroke-width="2" stroke-dasharray="7 5"/>';return s;}
+ function panelGrid(x,y,w,h,prefix){var s=rect(x,y,w,h,'url(#'+prefix+'solar)','#325d8a',3);for(var i=1;i<4;i++)s+=line(x+w*i/4,y+2,x+w*i/4,y+h-2,'#91b1d4',1);for(var j=1;j<3;j++)s+=line(x+2,y+h*j/3,x+w-2,y+h*j/3,'#91b1d4',1);return s;}
+ function partOpen(part,label,interactive,cls){return '<g'+(interactive?' data-part="'+part+'" class="part '+(cls||'')+'" tabindex="0" role="button" aria-label="'+label+'"':'')+'>';}
+ function renderSvg(d,opt){opt=opt||{};var prefix=opt.prefix||'main-',inter=!!opt.interactive,showDim=opt.dimensions!==false,see=!!opt.xray,sel=opt.selected||'',r=(d.wheel==='A'?2.5:1.5)*P,rear=X0+(8-d.wheelbase/2)*P,front=X0+(8+d.wheelbase/2)*P,axles=d.wheels===6?[rear,(rear+front)/2,front]:[rear,front],angle=d.tilt*Math.PI/180,panelL=(d.solar==='A'?6:4)*P,panelW=8*P,panelX=X0+5.5*P,proj=panelL*Math.cos(angle)+16*Math.sin(angle),cargoX=X0+d.cargoX*P,cargoY=TOP_Y+d.cargoY*P,panelY=Math.min(110,160-panelL/2*Math.sin(angle)-8*Math.cos(angle)),gearIn=9.8,gearOut=9.8*d.ratio,motorX=rear+gearIn+gearOut,motorR=d.motor==='A'?22:18;
+ var s='<defs><pattern id="'+prefix+'grid" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#d9e4ed"/></pattern><linearGradient id="'+prefix+'solar" x2="0" y2="1"><stop stop-color="#436eaa"/><stop offset="1" stop-color="#244d83"/></linearGradient><linearGradient id="'+prefix+'frame" x2="0" y2="1"><stop stop-color="#b4c7d4"/><stop offset="1" stop-color="#7592a7"/></linearGradient></defs>';
+ s+=rect(0,0,960,600,'url(#'+prefix+'grid)');
+ s+=svgText(35,37,'侧视',24)+svgText(675,37,'前视',24)+svgText(35,322,'俯视',24);
+ s+=svgText(555,37,'车头 →',17,'#788d9d','end');
+ s+=line(640,18,640,575,'#e0e8ed',1);
+ // Side elevation. All horizontal locations share the plan coordinate system.
+ s+=line(60,AXLE_Y+r+2,600,AXLE_Y+r+2,'#aebfca',2);
+ s+=partOpen('frame','车身支架',inter)+rect(X0,169,16*P,17,'url(#'+prefix+'frame)','#7894a8',4)+axles.map(function(cx){return line(cx,186,cx,AXLE_Y,'#6b879a',6);}).join('')+'</g>';
+ s+=partOpen('motor','选择电动机',inter)+'<circle cx="'+num(motorX)+'" cy="'+AXLE_Y+'" r="'+motorR+'" fill="#b2c5cd" stroke="#6a8b9d" stroke-width="2"/>'+svgText(motorX,AXLE_Y+6,'M',19,'#365669','middle')+'</g>';
+ axles.forEach(function(cx,i){s+=partOpen('wheel','选择车轮，拖动蓝色轮轴可调整轴距',inter,'drag')+'<g'+(inter&&i!==1||inter&&axles.length===2?' data-drag="axle" data-axle="'+(i===0?'rear':'front')+'"':'')+'>'+'<g opacity="'+(see?.3:1)+'">'+wheel(cx,AXLE_Y,r,sel==='wheel')+'</g>'+'</g></g>';});
+ s+=partOpen('cargo','拖动橡皮调整载物位置',inter,'drag')+'<g'+(inter?' data-drag="cargo" data-view="side"':'')+'>'+rect(cargoX-1.5*P,133,3*P,34,'#f6b7a3','#dc8e73',6)+rect(cargoX-1.5*P,133,1.1*P,34,'#fff3df',null,5)+svgText(cargoX+8,156,'橡皮',16,'#87523e','middle')+'</g></g>';
+ [-1,1].forEach(function(q){var u=q*panelL*.28;s+=line(panelX+q*40,169,panelX+u*Math.cos(angle)+8*Math.sin(angle),panelY-u*Math.sin(angle)+8*Math.cos(angle),'#7c94a4',5);});
+ s+=partOpen('solar','选择太阳能板',inter)+'<g transform="rotate('+(-d.tilt)+' '+num(panelX)+' '+num(panelY)+')" opacity="'+(see?.36:1)+'">'+rect(panelX-panelL/2,panelY-8,panelL,16,'#315c91','#244b76',3);for(var p=1;p<5;p++)s+=line(panelX-panelL/2+panelL*p/5,panelY-6,panelX-panelL/2+panelL*p/5,panelY+6,'#a4c4e3',1);s+='</g></g>';
+ 
+ if(showDim){s+=dim(rear,280,front,280,'轴距 '+format(d.wheelbase)+' cm',true);s+=svgText(555,75,'轮径 '+(d.wheel==='A'?5:3)+' cm',18,'#486c8b','end');}
+ // Front view preserves the same wheel diameter and lateral positions as the plan.
+ s+=line(658,AXLE_Y+r+2,928,AXLE_Y+r+2,'#aebfca',2);
+ s+=rect(FRONT_X-3*P,169,6*P,17,'url(#'+prefix+'frame)','#7894a8',4)+line(FRONT_X-3.65*P,AXLE_Y,FRONT_X+3.65*P,AXLE_Y,'#8ba0b0',7);
+ [-1,1].forEach(function(q){s+=rect(FRONT_X+q*3.65*P-14,AXLE_Y-r,28,2*r,'#293f50','#182f40',7);for(var j=0;j<6;j++)s+=line(FRONT_X+q*3.65*P-12,AXLE_Y-r+(j+.5)*2*r/6,FRONT_X+q*3.65*P+12,AXLE_Y-r+(j+.5)*2*r/6,'#4b6070',2);});
+ var frontCargoX=FRONT_X+d.cargoY*P;s+=rect(frontCargoX-P,133,2*P,34,'#f6b7a3','#dc8e73',5);s+=line(FRONT_X-40,169,FRONT_X-40,panelY+(panelL*Math.sin(angle)+16*Math.cos(angle))/2,'#7c94a4',5)+line(FRONT_X+40,169,FRONT_X+40,panelY+(panelL*Math.sin(angle)+16*Math.cos(angle))/2,'#7c94a4',5);
+ var frontPanelH=(panelL*Math.sin(angle)+16*Math.cos(angle));s+='<g opacity="'+(see?.36:1)+'">'+panelGrid(FRONT_X-panelW/2,panelY-frontPanelH/2,panelW/2-3,frontPanelH,prefix)+panelGrid(FRONT_X+3,panelY-frontPanelH/2,panelW/2-3,frontPanelH,prefix)+'</g>';
+ if(showDim)s+=dim(FRONT_X-3.65*P-14,280,FRONT_X+3.65*P+14,280,'总宽 8.3 cm',true);
+ // Plan view, including concealed drivetrain and two solar boards.
+ s+=partOpen('frame','车身支架',inter)+rect(X0,TOP_Y-3*P,16*P,6*P,'#edf3f6','#c0cdd6',5);
+ s+=rect(X0,TOP_Y-3*P,16*P,14,'url(#'+prefix+'frame)',null,3)+rect(X0,TOP_Y+3*P-14,16*P,14,'url(#'+prefix+'frame)',null,3);[X0+20,X0+220,X0+420].forEach(function(cx){s+=rect(cx,TOP_Y-3*P,12,6*P,'#a4bac9',null,2);});s+='</g>';
+ axles.forEach(function(cx,i){s+=line(cx,TOP_Y-3.65*P,cx,TOP_Y+3.65*P,'#8aa0b3',6);[-1,1].forEach(function(q){s+=partOpen('wheel','拖动轮轴，调整前后轴距',inter,'drag')+'<g'+(inter&&(i===0||i===axles.length-1)?' data-drag="axle" data-axle="'+(i===0?'rear':'front')+'"':'')+'>'+rect(cx-r,TOP_Y+q*3.65*P-14,2*r,28,'#2a4050','#173044',6);for(var k=0;k<6;k++)s+=line(cx-r+(k+.5)*r/3,TOP_Y+q*3.65*P-11,cx-r+(k+.5)*r/3,TOP_Y+q*3.65*P+11,'#506776',2);s+='</g></g>';});if(inter&&(i===0||i===axles.length-1))s+='<g data-drag="axle" data-axle="'+(i===0?'rear':'front')+'" class="drag" role="slider" tabindex="0" aria-label="'+(i===0?'后轮轴':'前轮轴')+'，左右方向键调整轴距" aria-valuemin="6" aria-valuemax="14" aria-valuenow="'+d.wheelbase+'"><circle cx="'+num(cx)+'" cy="'+TOP_Y+'" r="22" fill="#e4effc" stroke="#246bce" stroke-width="2"/>'+svgText(cx,TOP_Y+6,'↔',25,'#246bce','middle')+'</g>';});
+ s+=partOpen('motor','选择电动机',inter)+rect(motorX-motorR,TOP_Y-38,motorR*2,d.motor==='A'?62:48,'#aec3cf','#628296',7)+svgText(motorX,TOP_Y-9,'M',19,'#284b64','middle')+'</g>';
+ s+=line(motorX,TOP_Y+(d.motor==='A'?24:10),motorX,TOP_Y+34,'#59788f',7)+rect(motorX-gearIn,TOP_Y+28,gearIn*2,12,'#e6a64a','#bf8535',2)+rect(rear-gearOut,TOP_Y+28,gearOut*2,12,'#5487c3','#376597',2);
+ s+=partOpen('cargo','拖动橡皮，调整前后和左右位置',inter,'drag')+'<g'+(inter?' data-drag="cargo" data-view="top"':'')+'>'+rect(cargoX-1.5*P,cargoY-P,3*P,2*P,'#f6b7a3','#dc8e73',7)+rect(cargoX-1.5*P,cargoY-P,1.1*P,2*P,'#fff3df',null,6)+svgText(cargoX+10,cargoY+6,'橡皮',19,'#8a5944','middle')+'</g></g>';
+ s+=partOpen('solar','选择太阳能板',inter)+'<g opacity="'+(see?.3:1)+'">'+panelGrid(panelX-proj/2,TOP_Y-panelW/2,proj,panelW/2-4,prefix)+panelGrid(panelX-proj/2,TOP_Y+4,proj,panelW/2-4,prefix)+'</g></g>';
+ if(inter)s+='<g data-drag="cargo" data-view="top" class="drag" role="slider" tabindex="0" aria-label="橡皮位置，方向键移动" aria-valuemin="1.5" aria-valuemax="14.5" aria-valuenow="'+d.cargoX+'"><rect x="'+num(cargoX-1.5*P-4)+'" y="'+num(cargoY-P-4)+'" width="'+(3*P+8)+'" height="'+(2*P+8)+'" fill="transparent" stroke="'+(sel==='cargo'?'#df842d':'transparent')+'" stroke-width="3" rx="8"/></g>';
+ if(showDim){s+=dim(X0,565,X0+16*P,565,'车架长 16 cm');s+=dim(588,TOP_Y-3*P,588,TOP_Y+3*P,'6 cm');}
+ s+=svgText(676,339,'设计中的对应关系',20,'#5f7384');
+ s+='<circle cx="690" cy="383" r="7" fill="#35659c"/>'+svgText(709,390,'太阳能板 '+d.solar+' · 一对',20);
+ s+='<circle cx="690" cy="422" r="7" fill="#8aa7b8"/>'+svgText(709,429,'电动机 '+d.motor+' · 一个',20);
+ s+='<circle cx="690" cy="461" r="7" fill="#293f50"/>'+svgText(709,468,d.wheels+' 个轮 · '+d.wheels/2+' 根轴',20);
+ s+='<circle cx="690" cy="500" r="7" fill="#efa385"/>'+svgText(709,507,'齿轮 12 : '+(12*d.ratio)+' · 板角 '+d.tilt+'°',17,'#8d624a');
+ return s;
+ }
+ function update(drawOnly){$('design-svg').innerHTML=renderSvg(design,{interactive:true,dimensions:dimensions,xray:xray,selected:selected});if(drawOnly)return;var b=bill(design,settings);$('cost-value').textContent=format(b.cost);$('mass-value').textContent=format(b.mass);$('cost-limit').textContent=(b.cost>settings.costLimit?'超出 '+format(b.cost-settings.costLimit):'上限 '+format(settings.costLimit))+' 元';$('mass-limit').textContent=(b.mass>settings.massLimit?'超出 '+format(b.mass-settings.massLimit):'上限 '+format(settings.massLimit))+' 克';$('cost-total').className='total'+(b.cost>settings.costLimit?' over':'');$('mass-total').className='total'+(b.mass>settings.massLimit?' over':'');$('cost-meter').style.width=clamp(b.cost/settings.costLimit*100,0,100)+'%';$('mass-meter').style.width=clamp(b.mass/settings.massLimit*100,0,100)+'%';$('task-limits').textContent='≤'+format(settings.costLimit)+'元 · 小车≤'+format(settings.massLimit)+'克';$('task-time').textContent=format(settings.timeLimit)+'秒内通过 · 待实物测试';$('data-origin').textContent=JSON.stringify(settings.material)===JSON.stringify(DEFAULT_SETTINGS.material)&&settings.extraMass===0&&settings.extraCost===0?'教材示例':'自设材料数据';
+ ['solarA','solarB','wheelA','wheelB','motorA','motorB'].forEach(function(k){$('label-'+k).textContent=format(settings.material[k].cost)+'元 / '+format(settings.material[k].mass)+'克';});
+ var btns=document.querySelectorAll('[data-field]');Array.prototype.forEach.call(btns,function(btn){btn.setAttribute('aria-pressed',String(design[btn.getAttribute('data-field')])===btn.getAttribute('data-value')?'true':'false');});['solar','wheel','motor'].forEach(function(k){$('choice-'+k).className='option-row'+(selected===k?' focused':'');});
+ $('wheelbase-input').value=design.wheelbase;$('wheelbase-out').textContent=format(design.wheelbase)+' cm';$('tilt-input').value=design.tilt;$('tilt-out').textContent=format(design.tilt)+'°';var issues=designIssues(design,settings);$('design-status').innerHTML=issues.length?issues.map(esc).join('<br>'):'已列材料在预算和质量范围内。<br>装配、牢固程度与沙地表现需实物检验。';$('design-status').style.color=issues.some(function(t){return t.indexOf('超出')>=0||t.indexOf('过近')>=0;})?'#a34b3c':'#5e6d75';$('save-baseline').textContent=baseline?'更新方案 A':'保留为方案 A';$('design-hint').textContent=baseline?'方案 A 已保留；当前改动作为方案 B 对照。':'先留住一个方案，再改变一处比较。';
+ if(window.MoonMechanism)window.MoonMechanism.refresh();save();
+ }
+ function change(field,value){design[field]=value;update();}
+ function switchPage(p){currentPage=p;$('design-page').hidden=p!=='design';$('mechanism-page').hidden=p!=='mechanism';$('tab-design').setAttribute('aria-selected',p==='design'?'true':'false');$('tab-mechanism').setAttribute('aria-selected',p==='mechanism'?'true':'false');if(window.MoonMechanism){window.MoonMechanism.refresh();window.MoonMechanism.setVisible(p==='mechanism');}}
+ function openModal(title,html,buttons){modalLastFocus=document.activeElement;$('modal-title').textContent=title;$('modal-content').innerHTML=html;$('modal-footer').innerHTML='';(buttons||[]).forEach(function(b){var el=document.createElement('button');el.textContent=b.text;if(b.primary)el.className='primary';el.onclick=b.action;$('modal-footer').appendChild(el);});$('modal-backdrop').hidden=false;$('modal-close').focus();if(window.MoonMechanism)window.MoonMechanism.setVisible(false);}
+ function closeModal(){$('modal-backdrop').hidden=true;if(window.MoonMechanism)window.MoonMechanism.setVisible(currentPage==='mechanism');if(modalLastFocus&&document.contains(modalLastFocus))modalLastFocus.focus();}
+ function showHelp(){openModal('这张网页怎样帮助制作？','<div class="help-columns"><div><h3>先把设计表达清楚</h3><p>侧视、前视和俯视共用同一组结构数据。改车轮、轴距、板角与载物位置，三个视角一起改变；尺寸线显示的是网页模型的设计尺寸。</p><p>保留方案 A 后再修改，用对照表找出改了什么、为什么改。可导出带材料清单的 SVG 设计单，交给小组进行实物制作。</p><h3>再看隐藏的连接</h3><p>“传动透视”放大一组驱动：比较断路、遮光和齿轮脱开的不同结果。慢放与转一圈用于看方向和转数，不是实物转速测量。</p></div><div><h3>数据分别来自哪里？</h3><p>任务与材料示例来自教科版五上教材第86—89页；A/B材料质量和价格按第88页。100元是教材示例，不是报价。表内两只齿轮各按2克、2元累计。</p><p>轮径 A=5 cm、B=3 cm，车架16×6 cm、齿数与几何布置是本网页设定。请在制作前核对器材；三视图不是加工图。</p><p>质量合计不含橡皮。导线、扎带等未列小配件可在“材料与任务”补入。六轮方案仅增加一根被动轴，不等于真实月球车的悬架。</p></div></div><h3>哪些问题要留给实物？</h3><p>电机真实输出、光照下能否启动、轮地摩擦、陷沙、结构强度与通过用时都需要实测。本页不会自动判定沙坑任务成功。齿轮慢放遵循齿数比，相邻外齿轮反向；简化机构省略惯性和负载。</p><p class="fine-print">传动依据：<a href="https://education.lego.com/en-us/lessons/spm/gear/" target="_blank" rel="noopener noreferrer">LEGO Education · Gear</a>。本页不需要联网、摄像头或麦克风；导出文件可能需要浏览器允许下载。实体太阳能板和电机按配套低压器材说明连接，导线接头应绝缘。</p>',[{text:'开始设计',primary:true,action:closeModal}]);}
+ function showSettings(){var h='<p>把课堂材料的实际数据填在这里。默认价格与质量为教材示例，任务指标可调整。</p><div class="settings-grid"><label>预算上限 <input type="number" id="set-costLimit" min="1" max="100000" step="1" value="'+settings.costLimit+'"> 元</label><label>质量上限 <input type="number" id="set-massLimit" min="1" max="100000" step="1" value="'+settings.massLimit+'"> 克</label><label>通过限时 <input type="number" id="set-timeLimit" min="1" max="100000" step="1" value="'+settings.timeLimit+'"> 秒</label></div><div class="table-wrap"><table><thead><tr><th>材料（按这一单位）</th><th>价格 / 元</th><th>质量 / 克</th></tr></thead><tbody>';Object.keys(MATERIAL_NAMES).forEach(function(k){h+='<tr><td>'+MATERIAL_NAMES[k]+'</td><td><input aria-label="'+MATERIAL_NAMES[k]+'价格" type="number" min="0" max="100000" step="0.1" id="set-'+k+'-cost" value="'+settings.material[k].cost+'"></td><td><input aria-label="'+MATERIAL_NAMES[k]+'质量" type="number" min="0" max="100000" step="0.1" id="set-'+k+'-mass" value="'+settings.material[k].mass+'"></td></tr>';});h+='</tbody></table></div><div class="settings-grid" style="margin-top:16px"><label>其他小配件合计 <input type="number" min="0" max="100000" step="0.1" id="set-extraCost" value="'+settings.extraCost+'"> 元</label><label><input aria-label="其他小配件质量" type="number" min="0" max="100000" step="0.1" id="set-extraMass" value="'+settings.extraMass+'"> 克</label></div><p class="fine-print">橡皮属于载荷，不计入小车材料质量。轮轴按对计价：四轮=两对，六轮=三对。方案 A 保留保存时的材料数据，用于识别数据口径变化。</p>';
+ openModal('材料与任务',h,[{text:'恢复教材示例',action:function(){settings=copy(DEFAULT_SETTINGS);update();showSettings();toast('已恢复教材示例数据');}},{text:'保存设置',primary:true,action:function(){var next=copy(settings),invalid=null;Object.keys(next).forEach(function(k){if(k==='material')return;var v=Number($('set-'+k).value),min=k.indexOf('Limit')>=0?1:0;if($('set-'+k).value===''||!isFinite(v)||v<min||v>100000)invalid=$('set-'+k);else next[k]=num(v);});Object.keys(MATERIAL_NAMES).forEach(function(k){['cost','mass'].forEach(function(f){var el=$('set-'+k+'-'+f),v=Number(el.value);if(el.value===''||!isFinite(v)||v<0||v>100000)invalid=el;else next.material[k][f]=num(v);});});if(invalid){invalid.focus();toast('请填写范围内的非负数，上限不能为零');return;}settings=next;closeModal();update();toast('材料数据与任务已更新');}}]);}
+ function diffRow(name,a,b){return '<tr><td>'+name+'</td><td>'+esc(a)+'</td><td'+(a!==b?' class="changed"':'')+'>'+esc(b)+'</td></tr>';}
+ function showCompare(){var a=baseline?baseline.design:null,s=baseline?baseline.settings:null,b=bill(design,settings),h='';if(a){var ab=bill(a,s);h='<div class="compare-preview"><div class="preview-cell"><h3>方案 A · 已保留</h3><svg viewBox="0 0 960 600">'+renderSvg(a,{prefix:'a-',dimensions:false})+'</svg></div><div class="preview-cell"><h3>方案 B · 当前</h3><svg viewBox="0 0 960 600">'+renderSvg(design,{prefix:'b-',dimensions:false})+'</svg></div></div><table class="compare-table"><thead><tr><th>对照项目</th><th>方案 A</th><th>方案 B</th></tr></thead><tbody>'+diffRow('太阳能板 / 电机',a.solar+' / '+a.motor,design.solar+' / '+design.motor)+diffRow('车轮 / 数量',a.wheel+' / '+a.wheels+'轮',design.wheel+' / '+design.wheels+'轮')+diffRow('轴距 / 板角',format(a.wheelbase)+' cm / '+a.tilt+'°',format(design.wheelbase)+' cm / '+design.tilt+'°')+diffRow('橡皮位置（从车尾）',format(a.cargoX)+' cm，横向 '+format(a.cargoY)+' cm',format(design.cargoX)+' cm，横向 '+format(design.cargoY)+' cm')+diffRow('齿轮（主动 : 从动）','12 : '+12*a.ratio,'12 : '+12*design.ratio)+diffRow('材料合计',format(ab.cost)+'元 / '+format(ab.mass)+'克',format(b.cost)+'元 / '+format(b.mass)+'克')+diffRow('预算 / 质量上限',s.costLimit+'元 / '+s.massLimit+'克',settings.costLimit+'元 / '+settings.massLimit+'克')+diffRow('真实沙地测试','待实物测试','待实物测试')+'</tbody></table>';if(JSON.stringify(s.material)!==JSON.stringify(settings.material)||s.extraMass!==settings.extraMass||s.extraCost!==settings.extraCost)h+='<p class="fine-print">A、B使用了不同的材料数据；金额与质量差异不能只归因于结构。</p>';h+='<div class="compare-tools"><button id="restore-a">把 A 恢复为当前方案</button></div>';}else{h='<p>还没有保留方案 A。可先导出当前设计，也可以回到工坊保留一个方案后再修改。</p><div class="preview-cell"><svg viewBox="0 0 960 600">'+renderSvg(design,{prefix:'single-',dimensions:true})+'</svg></div>';}
+ h+='<h3>我的改动依据</h3><textarea id="design-note" class="note-input" maxlength="300" placeholder="例如：我改变了什么？想解决哪个问题？还要怎样用实物验证？">'+esc(design.note)+'</textarea><div class="compare-tools"><button id="export-json">导出方案备份</button><button id="import-json">导入方案备份</button></div><p class="fine-print">SVG设计单包含三视图、材料清单、当前限制与这段说明。JSON备份包含当前方案、方案A和材料设置。</p>';
+ openModal('保留证据，说明你的取舍',h,[{text:'返回设计',action:closeModal},{text:'导出当前设计单',primary:true,action:exportSvg}]);if($('restore-a'))$('restore-a').onclick=function(){design=copy(baseline.design);settings=copy(baseline.settings);closeModal();update();toast('方案 A 已恢复为当前方案');};$('design-note').oninput=function(){design.note=this.value;save();};$('export-json').onclick=exportJSON;$('import-json').onclick=function(){$('import-file').click();};}
+ function download(text,type,name){try{var blob=new Blob([text],{type:type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},60000);toast('已生成 '+name+'，请查看浏览器下载');}catch(e){toast('当前浏览器不能下载，请使用现代浏览器或截图保存');}}
+ function exportJSON(){download(JSON.stringify({kind:'moon-rover-design',version:1,design:design,settings:settings,baseline:baseline},null,2),'application/json;charset=utf-8','月球小车_方案备份.json');}
+ function wrapText(text,n){var arr=[],lines=String(text).split('\n');lines.forEach(function(l){if(!l)arr.push('');while(l.length){arr.push(l.slice(0,n));l=l.slice(n);}});return arr;}
+ function exportSvg(){var b=bill(design,settings),lines=wrapText(design.note||'（请小组补充设计理由与实物验证计划）',52),height=1140+(settings.extraMass||settings.extraCost?29:0)+Math.max(0,lines.length-2)*27;var s='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="'+height+'" viewBox="0 0 1200 '+height+'"><style>text{font-family:"Microsoft YaHei","PingFang SC",sans-serif}</style>'+rect(0,0,1200,height,'#fff')+svgText(55,57,'制作“月球小车” · 设计单',31)+svgText(55,91,'五上 3.6　｜　设计尺寸为模型设定，请核对实际器材',17,'#637e91')+'<g transform="translate(55 103) scale(1.1)">'+renderSvg(design,{prefix:'export-',dimensions:true,xray:false})+'</g>';
+ s+=svgText(55,795,'材料清单',23);s+=svgText(450,795,'数量',19)+svgText(610,795,'质量 / 克',19)+svgText(810,795,'价格 / 元',19);var y=830;b.rows.forEach(function(r){s+=svgText(55,y,MATERIAL_NAMES[r[0]],18)+svgText(460,y,r[1],18)+svgText(640,y,format(settings.material[r[0]].mass*r[1]),18)+svgText(840,y,format(settings.material[r[0]].cost*r[1]),18);y+=29;});if(settings.extraMass||settings.extraCost){s+=svgText(55,y,'其他小配件',18)+svgText(460,y,'1份',18)+svgText(640,y,format(settings.extraMass),18)+svgText(840,y,format(settings.extraCost),18);y+=29;}s+=line(55,y-12,1115,y-12,'#ccd9e3',1);s+=svgText(55,y+14,'合计 '+b.cost+'元 / '+b.mass+'克　　限制 '+settings.costLimit+'元 / '+settings.massLimit+'克',20);s+=svgText(55,y+43,'载1块橡皮，'+settings.timeLimit+'秒内通过沙地：待实物测试。质量合计不含橡皮。',17,'#637e91');y+=82;lines.forEach(function(l){s+=svgText(55,y,l,18);y+=27;});s+=svgText(55,height-28,'数据：教材第88页示例或教师修改值；小车结构与传动为简化模型。 v1.0',14,'#6b8294')+'</svg>';download(s,'image/svg+xml;charset=utf-8','五上3.6_月球小车设计单.svg');}
+ function findAttr(target,attr){while(target&&target!==$('design-svg')){if(target.getAttribute&&target.hasAttribute(attr))return target;target=target.parentNode;}return null;}
+ function svgPoint(e){var svg=$('design-svg'),pt=svg.createSVGPoint(),ev=e.touches?e.touches[0]:e;pt.x=ev.clientX;pt.y=ev.clientY;var m=svg.getScreenCTM();return m?pt.matrixTransform(m.inverse()):{x:0,y:0};}
+ function pointerDown(e){if(e.button!==undefined&&e.button!==0)return;var dr=findAttr(e.target,'data-drag'),part=findAttr(e.target,'data-part');if(part)selected=part.getAttribute('data-part');if(dr){drag={type:dr.getAttribute('data-drag'),axle:dr.getAttribute('data-axle'),view:dr.getAttribute('data-view')};if(drag.type==='cargo')selected='cargo';if(drag.type==='axle')selected='wheel';e.preventDefault();}update();}
+ function pointerMove(e){if(!drag)return;e.preventDefault();var p=svgPoint(e);if(drag.type==='cargo'){design.cargoX=round(clamp((p.x-X0)/P,1.5,14.5));if(drag.view==='top')design.cargoY=round(clamp((p.y-TOP_Y)/P,-2,2));}else{var b=drag.axle==='rear'?2*(8-(p.x-X0)/P):2*((p.x-X0)/P-8);design.wheelbase=Math.round(clamp(b,6,14)*2)/2;}update();}
+ function pointerUp(){if(drag){drag=null;save();}}
+ function bindDrag(){var svg=$('design-svg');if(window.PointerEvent){svg.addEventListener('pointerdown',pointerDown);document.addEventListener('pointermove',pointerMove);document.addEventListener('pointerup',pointerUp);document.addEventListener('pointercancel',pointerUp);}else{svg.addEventListener('mousedown',pointerDown);document.addEventListener('mousemove',pointerMove);document.addEventListener('mouseup',pointerUp);svg.addEventListener('touchstart',pointerDown,{passive:false});document.addEventListener('touchmove',pointerMove,{passive:false});document.addEventListener('touchend',pointerUp);}svg.addEventListener('keydown',function(e){var dr=findAttr(e.target,'data-drag'),part=findAttr(e.target,'data-part');if(dr&&/^Arrow/.test(e.key)){var isRight=e.key==='ArrowRight',isLeft=e.key==='ArrowLeft';if(dr.getAttribute('data-drag')==='cargo'){if(isLeft||isRight)design.cargoX=round(clamp(design.cargoX+(isRight?.5:-.5),1.5,14.5));else design.cargoY=round(clamp(design.cargoY+(e.key==='ArrowDown'?.5:-.5),-2,2));}else if(isLeft||isRight){var sign=dr.getAttribute('data-axle')==='rear'?-1:1;design.wheelbase=clamp(design.wheelbase+(isRight?1:-1)*.5*sign,6,14);}e.preventDefault();var focusSelector='[data-drag="'+dr.getAttribute('data-drag')+'"]'+(dr.getAttribute('data-axle')?'[data-axle="'+dr.getAttribute('data-axle')+'"]':'[data-view="'+dr.getAttribute('data-view')+'"]')+'[tabindex]';update();var focusTarget=svg.querySelector(focusSelector);if(focusTarget)focusTarget.focus();}else if(part&&(e.key==='Enter'||e.key===' ')){selected=part.getAttribute('data-part');update();var choice=$('choice-'+selected);if(choice)choice.querySelector('button').focus();e.preventDefault();}});}
+ function boot(){load();$('tab-design').onclick=function(){switchPage('design');};$('tab-mechanism').onclick=function(){switchPage('mechanism');};$('help-btn').onclick=showHelp;$('source-btn').onclick=showHelp;$('settings-btn').onclick=showSettings;$('modal-close').onclick=closeModal;$('modal-backdrop').onclick=function(e){if(e.target===this)closeModal();};document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('modal-backdrop').hidden)closeModal();if(e.key==='Tab'&&!$('modal-backdrop').hidden){var nodes=$('modal').querySelectorAll('button,input,select,textarea,a[href]');if(!nodes.length)return;var first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+ $('fullscreen-btn').onclick=function(){var doc=document.documentElement,req=doc.requestFullscreen||doc.webkitRequestFullscreen,exit=document.exitFullscreen||document.webkitExitFullscreen;try{if(document.fullscreenElement||document.webkitFullscreenElement){if(exit)exit.call(document);}else if(req){var promise=req.call(doc);if(promise&&promise.catch)promise.catch(function(){toast('当前浏览器未允许全屏，可使用系统全屏功能');});}else toast('当前设备使用浏览器全屏或横屏查看');}catch(e){toast('此浏览器不支持网页全屏');}};
+ Array.prototype.forEach.call(document.querySelectorAll('[data-field]'),function(btn){btn.onclick=function(){var f=this.getAttribute('data-field'),v=this.getAttribute('data-value');selected=f==='wheels'?'wheel':f;change(f,f==='wheels'?Number(v):v);};});$('wheelbase-input').oninput=function(){selected='wheel';change('wheelbase',Number(this.value));};$('tilt-input').oninput=function(){selected='solar';change('tilt',Number(this.value));};$('dimensions-btn').onclick=function(){dimensions=!dimensions;this.setAttribute('aria-pressed',dimensions?'true':'false');update(true);};$('xray-btn').onclick=function(){xray=!xray;this.setAttribute('aria-pressed',xray?'true':'false');update(true);};$('save-baseline').onclick=function(){baseline={design:copy(design),settings:copy(settings)};update();toast('方案 A 已保留；可以继续改变当前设计');};$('compare-btn').onclick=showCompare;$('reset-btn').onclick=function(){design=copy(DEFAULT_DESIGN);selected='';xray=false;dimensions=true;$('dimensions-btn').setAttribute('aria-pressed','true');$('xray-btn').setAttribute('aria-pressed','false');if(window.MoonMechanism)window.MoonMechanism.reset();update();toast('当前设计已复位；方案A和材料设置保留');};
+ $('import-file').onchange=function(){var input=this,file=input.files&&input.files[0];if(!file)return;if(file.size>200000){toast('文件过大，请选择本网页导出的JSON方案');input.value='';return;}var reader=new FileReader();reader.onload=function(){try{var d=JSON.parse(reader.result);if(d.kind!=='moon-rover-design'||d.version!==1||!d.design||!d.settings)throw new Error('format');design=normalizeDesign(d.design);settings=normalizeSettings(d.settings);baseline=d.baseline&&d.baseline.design&&d.baseline.settings?{design:normalizeDesign(d.baseline.design),settings:normalizeSettings(d.baseline.settings)}:null;closeModal();update();toast('方案已导入');}catch(e){toast('不是有效的月球小车方案文件');}input.value='';};reader.onerror=function(){toast('文件读取失败，请重选');input.value='';};reader.readAsText(file);};
+ document.addEventListener('moon-mechanism-ratio',function(e){var r=e.detail&&Number(e.detail.ratio);if([1,2,3].indexOf(r)>=0){design.ratio=r;save();}});
+ bindDrag();if(window.MoonMechanism){window.MoonMechanism.init($('mechanism-page'),function(){return copy(design);});window.MoonMechanism.setVisible(false);}update();
+ }
+ window.MoonApp={boot:boot,getDesign:function(){return copy(design);},getSettings:function(){return copy(settings);},bill:bill,renderSvg:renderSvg,issues:designIssues};
+}());
+
+</script>
+<script>
+(function (window, document) {
+  'use strict';
+  var root = null, getDesign = null, nodes = {}, started = false, frame = null, lastTime = 0, lastDesign = '';
+  var state = { visible: false, playing: false, wire: true, mesh: true, light: 100, ratio: 2, motor: 'B', solar: 'B', wheel: 'B', motorTurns: 0, wheelTurns: 0, target: null, message: '' };
+  var smallRadius = 30, smallX = 300, centerY = 405, gearModule = 5;
+  var raf = window.requestAnimationFrame || function (fn) { return window.setTimeout(function () { fn(Date.now()); }, 16); };
+  var caf = window.cancelAnimationFrame || window.clearTimeout;
+  function id(name) { return document.getElementById('mech-' + name); }
+  function setText(el, text) { if (el) { el.textContent = text; } }
+  function attr(el, key, value) { if (el) { el.setAttribute(key, String(value)); } }
+  function activePower() { return state.wire && state.light > 0; }
+  function designValue(value, fallback) { return value === 'A' || value === 'B' ? value : fallback; }
+  function validRatio(value) { value = Number(value); return value === 1 || value === 2 || value === 3 ? value : 2; }
+  function stop() { state.playing = false; state.target = null; lastTime = 0; if (frame !== null) { caf.call(window, frame); frame = null; } }
+  function clearTurns() { stop(); state.motorTurns = 0; state.wheelTurns = 0; }
+  function gearPath(teeth, pitchRadius) {
+    var p = [], a, r, x, y, t, j, step = Math.PI * 2 / teeth;
+    var angles = [-0.5, -0.30, -0.23, -0.16, 0.16, 0.23, 0.30, 0.5];
+    var radii = [pitchRadius - 1.25 * gearModule, pitchRadius - 1.25 * gearModule, pitchRadius, pitchRadius + gearModule, pitchRadius + gearModule, pitchRadius, pitchRadius - 1.25 * gearModule, pitchRadius - 1.25 * gearModule];
+    for (t = 0; t < teeth; t += 1) {
+      for (j = 0; j < angles.length; j += 1) {
+        a = (t + angles[j]) * step; r = radii[j]; x = Math.cos(a) * r; y = Math.sin(a) * r;
+        p.push((t === 0 && j === 0 ? 'M' : 'L') + x.toFixed(3) + ' ' + y.toFixed(3));
+      }
+    }
+    return p.join(' ') + ' Z';
+  }
+  function geometry() {
+    var r = smallRadius * state.ratio, dx = smallX + smallRadius + r, sx = smallX - (state.mesh ? 0 : 50), wr = state.wheel === 'A' ? 125 : 113;
+    attr(nodes['driver-shape'], 'd', gearPath(12, smallRadius));
+    attr(nodes['driven-shape'], 'd', gearPath(12 * state.ratio, r));
+    attr(nodes['driver-position'], 'transform', 'translate(' + sx + ' ' + centerY + ')');
+    attr(nodes['driven-position'], 'transform', 'translate(' + dx + ' ' + centerY + ')');
+    attr(nodes['wheel-position'], 'transform', 'translate(' + dx + ' ' + centerY + ')');
+    attr(nodes['driven-ring'], 'r', Math.max(13, r - 16));
+    attr(nodes['driven-mark'], 'd', 'M0 0V' + (-(r - 9)));
+    attr(nodes['wheel-outer'], 'r', wr);
+    attr(nodes['wheel-dot'], 'cy', -wr);
+    attr(nodes['wheel-spokes'], 'transform', 'scale(' + wr / 113 + ')');
+    attr(nodes['magnify-leader'], 'd', 'M844 146V260H' + sx + 'V355');
+    attr(nodes['driver-label-leader'], 'd', 'M190 384H' + (sx - 42));
+    attr(nodes['wheel-label-leader'], 'd', 'M710 333H' + (dx + Math.sqrt(wr * wr - 72 * 72) + 9));
+    attr(nodes['axle-label-leader'], 'd', 'M710 407H' + (dx + 15));
+    attr(nodes['driven-label-leader'], 'd', 'M710 477H' + (dx + r + 29) + 'L' + (dx + r * 0.69) + ' ' + (centerY + r * 0.69));
+    attr(nodes['mesh-hit-rect'], 'x', smallX + smallRadius - 22);
+    attr(nodes['mesh-hit-rect'], 'width', 44 + (state.mesh ? 0 : 0));
+    setText(nodes['driven-label'], '车轴齿轮 ' + (12 * state.ratio) + '齿');
+    setText(nodes['solar-label'], '太阳能电池 ' + state.solar + '（一对）');
+    setText(nodes['motor-label'], '电动机 ' + state.motor);
+  }
+  function paintMotion() {
+    var motorAngle = (state.motorTurns % 1) * 360;
+    var wheelAngle = -(state.wheelTurns % 1) * 360;
+    var meshPhase = 180 - 180 / (12 * state.ratio);
+    attr(nodes['driver-rotation'], 'transform', 'rotate(' + motorAngle + ')');
+    attr(nodes['driven-rotation'], 'transform', 'rotate(' + (meshPhase + wheelAngle) + ')');
+    attr(nodes['wheel-rotation'], 'transform', 'rotate(' + wheelAngle + ')');
+    attr(nodes['motor-rotor'], 'transform', 'translate(751 134) rotate(' + motorAngle + ')');
+    nodes['motor-count'].innerHTML = state.motorTurns.toFixed(2) + ' <small>圈</small>';
+    nodes['wheel-count'].innerHTML = state.wheelTurns.toFixed(2) + ' <small>圈</small>';
+  }
+  function status() {
+    var text, warning = false;
+    if (!state.wire) { text = '回路断开。接回导线，再观察电机。'; warning = true; }
+    else if (state.light === 0) { text = '完全遮光。电机和车轮都停止。'; warning = true; }
+    else if (!state.mesh) { text = state.playing ? '电机在转，车轴齿轮没有被带动。' : '齿轮已分离。播放后观察两边。'; warning = true; }
+    else if (state.message) { text = state.message; }
+    else if (state.playing) { text = state.target !== null ? '正在让电机齿轮转一圈……' : '看转向，再比较两边的圈数。'; }
+    else if (state.motorTurns > 0) { text = '已暂停。可继续观察，或改动连接。'; }
+    else { text = '按“转一圈”，看看两边各转了多少。'; }
+    setText(nodes.status, text); attr(nodes.status, 'data-warning', warning);
+  }
+  function paint() {
+    if (!root) { return; }
+    var powered = activePower(), i, buttons = root.querySelectorAll('[data-mech-ratio]');
+    attr(nodes['wire-positive'], 'opacity', powered ? 1 : 0.42);
+    attr(nodes['wire-negative'], 'opacity', powered ? 1 : 0.42);
+    attr(nodes['switch'], 'd', state.wire ? 'M490 100L570 100' : 'M490 100L557 75');
+    attr(nodes['rays'], 'opacity', 0.1 + 0.9 * state.light / 100);
+    attr(nodes['solar-panels'], 'opacity', state.light === 0 ? 0.45 : 0.65 + 0.35 * state.light / 100);
+    setText(nodes['light-label'], state.light === 0 ? '遮光' : state.light < 35 ? '弱' : state.light < 70 ? '适中' : '强');
+    nodes.light.value = state.light;
+    attr(nodes.light, 'aria-valuetext', state.light === 0 ? '完全遮光' : state.light < 35 ? '弱光' : state.light < 70 ? '适中光照' : '光照充足');
+    setText(nodes.play, state.playing ? 'Ⅱ 暂停' : '▶ 播放');
+    attr(nodes['wire-toggle'], 'aria-pressed', state.wire);
+    attr(nodes['mesh-toggle'], 'aria-pressed', state.mesh);
+    attr(nodes['wire-hit'], 'aria-pressed', state.wire);
+    attr(nodes['mesh-hit'], 'aria-pressed', state.mesh);
+    attr(nodes['wire-hit'], 'aria-label', state.wire ? '断开导线' : '接通导线');
+    attr(nodes['mesh-hit'], 'aria-label', state.mesh ? '分离齿轮' : '重新啮合齿轮并清零圈数');
+    setText(nodes['wire-toggle'], state.wire ? '导线已接通 · 点此断开' : '导线已断开 · 点此接通');
+    setText(nodes['mesh-toggle'], state.mesh ? '齿轮已啮合 · 点此分离' : '齿轮已分离 · 点此啮合');
+    for (i = 0; i < buttons.length; i += 1) { attr(buttons[i], 'aria-pressed', Number(buttons[i].getAttribute('data-mech-ratio')) === state.ratio); }
+    geometry(); paintMotion(); status();
+  }
+  function schedule() { if (frame === null && state.visible && state.playing && activePower()) { frame = raf.call(window, tick); } }
+  function tick(time) {
+    frame = null;
+    if (!state.visible || !state.playing || !activePower()) { lastTime = 0; return; }
+    var dt = lastTime ? Math.min(Math.max((time - lastTime) / 1000, 0), 0.08) : 0;
+    var demoRps = (state.motor === 'A' ? 24 : 16) / 60;
+    var addition = dt * demoRps * (0.25 + 0.75 * state.light / 100);
+    lastTime = time;
+    if (state.target !== null) { addition = Math.max(0, Math.min(addition, state.target - state.motorTurns)); }
+    state.motorTurns += addition;
+    if (state.mesh) { state.wheelTurns += addition / state.ratio; }
+    if (state.target !== null && state.motorTurns >= state.target - 0.000000001) {
+      state.motorTurns = state.target;
+      if (state.mesh) { state.wheelTurns = state.motorTurns / state.ratio; }
+      stop(); state.message = state.mesh ? '这一次，电机齿轮转了 1 圈。比较车轮增加了多少。' : '';
+      paint();
+    } else { paintMotion(); }
+    schedule();
+  }
+  function toggleWire() { state.wire = !state.wire; state.message = ''; lastTime = 0; paint(); schedule(); }
+  function toggleMesh() {
+    state.mesh = !state.mesh; state.message = '';
+    if (state.mesh) { clearTurns(); state.message = '重新啮合，圈数归零。可以再次观察。'; }
+    paint(); schedule();
+  }
+  function emitRatio() {
+    var event;
+    try { event = new window.CustomEvent('moon-mechanism-ratio', { detail: { ratio: state.ratio }, bubbles: true }); }
+    catch (ignore) { event = document.createEvent('CustomEvent'); event.initCustomEvent('moon-mechanism-ratio', true, false, { ratio: state.ratio }); }
+    root.dispatchEvent(event);
+  }
+  function setRatio(ratio) {
+    ratio = validRatio(ratio);
+    if (ratio === state.ratio) { return; }
+    state.ratio = ratio; clearTurns(); state.message = '齿数已改变，圈数归零。再转一圈比较。';
+    paint(); emitRatio();
+  }
+  function bindButton(node, fn) {
+    node.addEventListener('click', fn);
+    if (node.getAttribute('role') === 'button') {
+      node.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ' || event.keyCode === 13 || event.keyCode === 32) { event.preventDefault(); fn(); } });
+    }
+  }
+  function openNote() { stop(); paint(); nodes['note-backdrop'].hidden = false; nodes['note-close'].focus(); }
+  function closeNote() { nodes['note-backdrop'].hidden = true; nodes['note-open'].focus(); }
+  function init(element, getter) {
+    if (started) { return; }
+    root = element; getDesign = getter; started = true;
+    var names = ['driver-shape','driven-shape','driver-position','driven-position','wheel-position','driven-ring','driven-mark','wheel-outer','wheel-dot','wheel-spokes','magnify-leader','driver-label-leader','wheel-label-leader','axle-label-leader','driven-label-leader','mesh-hit-rect','solar-label','motor-label','driven-label','driver-rotation','driven-rotation','wheel-rotation','motor-rotor','motor-count','wheel-count','status','wire-positive','wire-negative','switch','rays','solar-panels','light-label','light','play','step','wire-toggle','mesh-toggle','wire-hit','mesh-hit','reset','note-open','note-close','note-backdrop'];
+    var i, buttons;
+    for (i = 0; i < names.length; i += 1) { nodes[names[i]] = id(names[i]); }
+    bindButton(nodes['wire-toggle'], toggleWire); bindButton(nodes['wire-hit'], toggleWire);
+    bindButton(nodes['mesh-toggle'], toggleMesh); bindButton(nodes['mesh-hit'], toggleMesh);
+    bindButton(nodes.play, function () {
+      state.message = '';
+      if (state.playing) { stop(); }
+      else { state.playing = true; state.target = null; lastTime = 0; }
+      paint(); schedule();
+    });
+    bindButton(nodes.step, function () {
+      if (!activePower()) { state.message = ''; paint(); return; }
+      state.target = state.motorTurns + 1; state.playing = true; state.message = ''; lastTime = 0; paint(); schedule();
+    });
+    nodes.light.addEventListener('input', function () { state.light = Math.max(0, Math.min(100, Number(nodes.light.value) || 0)); state.message = ''; lastTime = 0; paint(); schedule(); });
+    nodes.light.addEventListener('change', function () { state.light = Math.max(0, Math.min(100, Number(nodes.light.value) || 0)); state.message = ''; lastTime = 0; paint(); schedule(); });
+    buttons = root.querySelectorAll('[data-mech-ratio]');
+    for (i = 0; i < buttons.length; i += 1) { (function (button) { bindButton(button, function () { setRatio(button.getAttribute('data-mech-ratio')); }); }(buttons[i])); }
+    bindButton(nodes.reset, reset); bindButton(nodes['note-open'], openNote); bindButton(nodes['note-close'], closeNote);
+    nodes['note-backdrop'].addEventListener('click', function (event) { if (event.target === nodes['note-backdrop']) { closeNote(); } });
+    root.addEventListener('keydown', function (event) {
+      if (!nodes['note-backdrop'].hidden && (event.key === 'Tab' || event.keyCode === 9)) { event.preventDefault(); nodes['note-close'].focus(); }
+      if ((event.key === 'Escape' || event.keyCode === 27) && !nodes['note-backdrop'].hidden) { closeNote(); }
+    });
+    refresh();
+  }
+  function refresh() {
+    if (!root) { return; }
+    var design = typeof getDesign === 'function' ? getDesign() || {} : {};
+    var next = { solar: designValue(design.solar, 'B'), motor: designValue(design.motor, 'B'), wheel: designValue(design.wheel, 'B'), ratio: validRatio(design.ratio) };
+    var fingerprint = next.solar + next.motor + next.wheel + next.ratio;
+    if (fingerprint !== lastDesign) {
+      state.solar = next.solar; state.motor = next.motor; state.wheel = next.wheel; state.ratio = next.ratio;
+      lastDesign = fingerprint; clearTurns(); state.message = '';
+    }
+    paint();
+  }
+  function setVisible(visible) { state.visible = !!visible; if (!state.visible) { stop(); if (root) { nodes['note-backdrop'].hidden = true; paint(); } } else { refresh(); } }
+  function reset() { clearTurns(); state.wire = true; state.mesh = true; state.light = 100; state.message = ''; if (root) { nodes['note-backdrop'].hidden = true; } paint(); }
+  window.MoonMechanism = { init: init, refresh: refresh, setVisible: setVisible, reset: reset };
+}(window, document));
+
+</script>
+<script>window.MoonApp.boot();</script>
+</body></html>

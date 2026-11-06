@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   root.AIHTML_LEVELS = {
+    '五上3.6制作月球小车': { level: 1, note: 'SVG 三视图与触控设计、预算质量对照、齿轮传动透视；单文件离线' },
     "五上3.5摩擦力的比较": { level: 1, note: "SVG 测力计与触控拖拽、控制变量、实测数据图；PNG 导出使用可选 Canvas" },
     '五上3.3用弹力驱动小车': { level: 1, note: 'SVG 透视与触控、圈数对比、实测圆点记录' },
     '五上3.4测量力的大小': { level: 3, note: 'WebGL1 轻量三维结构与 SVG 二维后备，切换量程、调零及触控读数' },
@@ -60,6 +61,7 @@
     4: '进阶三维'
   };
 }(window));
+
 
 
 
