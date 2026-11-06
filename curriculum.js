@@ -843,7 +843,7 @@ window.AIHTML_CURRICULUM = {
             },
             {
               "code": "3.2",
-              "title": "用重物驱动小车"
+              "title": "用重力驱动小车"
             },
             {
               "code": "3.3",
@@ -1331,4 +1331,5 @@ window.AIHTML_CURRICULUM = {
     }
   ]
 };
+
 

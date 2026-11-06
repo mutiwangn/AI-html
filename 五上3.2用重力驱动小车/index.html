@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f3ed">
+<meta name="description" content="五年级上册3.2用重力驱动小车：改变垫圈、慢放观察、三次测量与1米3秒挑战。单体HTML离线课堂。">
+<title>用重力驱动小车 · 互动实验室</title>
+<style>
+:root{--ink:#162d46;--muted:#607487;--blue:#2368e8;--orange:#ef943c;--paper:#f5f3ed;--line:#dbe3e9;--card:#fff;--soft:#edf3fe;--green:#218675}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;color:var(--ink);background:var(--paper)}body{overflow:hidden}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation;min-height:46px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fff;padding:9px 15px;font-weight:700;font-size:18px}button:hover{border-color:#9cb8df;background:#f3f7ff}button:active{transform:translateY(1px)}button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #f6a442;outline-offset:3px}button:disabled{opacity:.4;cursor:default}button[aria-pressed="true"]{background:var(--soft);border-color:var(--blue);color:var(--blue)}button.primary{background:var(--blue);color:white;border-color:var(--blue)}button.primary:hover{background:#1558ce}button.quiet{background:transparent;border-color:transparent}.small{font-size:15px;color:var(--muted)}[hidden]{display:none!important}
+.app{height:100vh;height:100dvh;display:flex;flex-direction:column;max-width:1920px;margin:auto;padding:0 24px;gap:0}.topbar{height:78px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:15px}.brand{display:flex;gap:13px;align-items:center}.brand-mark{width:44px;height:44px;flex:none;background:#e3ecff;border-radius:12px;display:grid;place-items:center}.brand h1{font-size:27px;line-height:1.2;margin:0;letter-spacing:1px}.brand small{display:block;color:var(--muted);font-size:14px;letter-spacing:1.2px;margin-bottom:5px}.top-actions{display:flex;gap:6px}.top-actions button{padding:8px 12px;font-size:16px}.tabs{display:flex;gap:10px;border-bottom:1px solid #d8dfdf;padding:0 0 10px;flex-shrink:0}.tab{background:transparent;border:0;padding:10px 22px;font-size:19px;display:flex;gap:10px;align-items:center;border-radius:10px}.tab b{display:inline-grid;place-items:center;width:25px;height:25px;font-size:15px;border:1px solid currentColor;border-radius:50%}.tab.active{background:var(--ink);color:#fff}.page{flex:1;min-height:0;padding:16px 0 8px}.page-content{height:100%}.lab-layout{display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:16px;height:100%}.scene-card{display:flex;flex-direction:column;min-height:0;min-width:0;background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden}.scene-heading{display:flex;align-items:center;justify-content:space-between;padding:17px 22px 0;gap:8px}.scene-heading h2{margin:0;font-size:23px}.pill{font-size:14px;padding:5px 9px;background:#f1f4f7;border-radius:6px;color:#53697c;white-space:nowrap}.stage-wrap{flex:1;min-height:0;position:relative;background:radial-gradient(ellipse at 42% 40%,#fbfcfe 0,#fff 68%)}.stage{width:100%;height:100%;display:block;touch-action:none}.stage text{font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif}.stage .interactive{cursor:pointer}.scene-toolbar{display:flex;align-items:center;gap:8px;padding:8px 15px 13px;flex-wrap:wrap}.scene-toolbar button{font-size:16px;min-height:42px;padding:7px 12px}.timeline{display:flex;align-items:center;gap:10px;padding:0 18px 14px}.timeline input{min-width:0;flex:1;accent-color:var(--blue)}.timeline span{font-size:14px;color:var(--muted);min-width:58px}.side{display:flex;flex-direction:column;gap:12px;min-height:0}.control-card{padding:19px;background:#fff;border:1px solid var(--line);border-radius:13px}.control-card h3{font-size:17px;margin:0 0 12px;color:var(--muted);font-weight:500}.counter{display:flex;align-items:center;justify-content:space-between;gap:8px}.counter button{width:49px;height:49px;padding:0;font-size:29px;font-weight:400}.count-value{font-size:48px;font-weight:750;line-height:1.1;display:flex;align-items:baseline;gap:8px;font-variant-numeric:tabular-nums}.count-value span{font-size:19px;font-weight:500;color:var(--muted)}.washer-bin{margin-top:14px;padding:10px;background:#f4f6f8;border-radius:8px;display:flex;align-items:center;gap:9px;touch-action:none;cursor:grab;user-select:none}.washer-bin svg{width:43px;height:35px;flex:none}.washer-bin span{font-size:15px;color:var(--muted)}.start-row{display:flex;gap:8px;margin-top:14px}.start-row .primary{flex:1}.start-row .reset{width:48px;padding:8px}.clock-card{flex:1;min-height:150px;display:flex;flex-direction:column;justify-content:center;background:#f0f5fd;border-color:#d9e5f7}.clock-label{display:flex;align-items:center;justify-content:space-between;font-size:16px;color:var(--muted)}.clock{font-size:58px;font-weight:750;color:var(--blue);font-variant-numeric:tabular-nums;letter-spacing:-2px;margin:7px 0}.clock em{font-size:21px;letter-spacing:0;font-weight:500;font-style:normal;margin-left:6px;color:var(--muted)}.status{font-size:18px;line-height:1.5;min-height:54px;margin:0}.saved-line{font-size:14px;margin:9px 0 0;color:var(--green)}.next-link{border:0;background:transparent;padding:4px 0;color:var(--blue);text-align:left;min-height:35px;font-size:16px}.fixed-line{font-size:14px;color:var(--muted);text-align:center;line-height:1.6;margin:0}.app-footer{height:25px;display:flex;align-items:center;justify-content:space-between;flex:none;font-size:12px;color:#718293;padding:0 3px 4px}.compat{color:#57758e}.footer-title{display:none}.drag-ghost{position:fixed;z-index:25;pointer-events:none;width:44px;height:44px;border:11px solid #9dadc0;border-radius:50%;background:transparent;box-shadow:0 5px 12px #162d4630}.drop-ready{filter:drop-shadow(0 0 7px #ef943c)}
+.challenge-card{padding:17px 18px}.challenge-card h3{margin:0 0 10px}.mass-title{display:flex;justify-content:space-between;font-size:17px;margin:14px 0 6px}.mass-title strong{color:var(--blue)}input[type=range]{accent-color:var(--blue);width:100%;height:28px;cursor:pointer}.range-ends{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}.target-readout{display:flex;align-items:baseline;gap:6px;font-size:17px}.target-readout b{font-size:34px;color:var(--orange)}.challenge-status{min-height:64px;font-size:18px;line-height:1.5;margin:8px 0}.attempts{flex:1;min-height:95px;overflow:auto;padding:13px 17px}.attempts h3{font-size:16px;margin-bottom:8px}.attempt-line{display:flex;justify-content:space-between;gap:7px;font-size:15px;padding:8px 0;border-top:1px solid var(--line)}.attempt-line strong{font-variant-numeric:tabular-nums}.attempt-line.good strong{color:var(--green)}.attempt-empty{color:var(--muted);font-size:15px;line-height:1.6}.success{background:#eaf6ef;border-color:#a7d2bc}
+.dialog-cover{position:fixed;inset:0;z-index:40;background:rgba(15,32,53,.46);display:flex;align-items:center;justify-content:center;padding:20px}.dialog{max-width:700px;width:100%;max-height:90vh;overflow:auto;border-radius:16px;background:white;box-shadow:0 24px 80px #14283d40;padding:25px 28px}.dialog-head{display:flex;justify-content:space-between;align-items:center}.dialog h2{font-size:25px;margin:0}.dialog h3{font-size:18px;margin:21px 0 7px}.dialog p{font-size:16px;line-height:1.8;margin:7px 0;color:#4c6276}.dialog .close{width:45px;padding:0;font-size:25px}.dialog .model-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.dialog .model-grid p{padding:10px 13px;background:#f1f5f9;border-radius:8px}.toast{position:fixed;z-index:35;left:50%;bottom:40px;transform:translateX(-50%);background:#18334a;color:white;border-radius:10px;padding:12px 19px;font-size:17px;max-width:90vw;box-shadow:0 7px 30px #17334a30;text-align:center}
+/* Scoped records-page styles. No external font, image or drawing dependency. */
+#records-root{height:100%;min-height:0;}
+.gr-shell,.gr-shell *{box-sizing:border-box;}
+.gr-shell{height:100%;min-height:0;display:flex;flex-direction:column;gap:14px;color:#162d46;font-family:inherit;font-size:20px;line-height:1.4;}
+.gr-shell button,.gr-shell input,.gr-shell select{font:inherit;color:inherit;}
+.gr-shell button{min-height:46px;border:1px solid #d7e1eb;border-radius:10px;padding:9px 17px;background:#fff;cursor:pointer;font-weight:700;touch-action:manipulation;}
+.gr-shell button:hover{border-color:#8ba9c9;background:#f4f8fc;}
+.gr-shell button:active{transform:translateY(1px);}
+.gr-shell button:focus-visible,.gr-shell input:focus-visible,.gr-shell select:focus-visible,.gr-table-scroll:focus-visible{outline:3px solid #f49a42;outline-offset:3px;}
+.gr-toolbar{display:flex;align-items:center;gap:14px;flex:0 0 auto;min-height:54px;}
+.gr-source{display:flex;background:#eaf0f6;padding:4px;border-radius:12px;gap:4px;flex-shrink:0;}
+.gr-shell .gr-source-button{border-color:transparent;background:transparent;padding:8px 20px;white-space:nowrap;}
+.gr-shell .gr-source-button.gr-selected{background:#2368e8;color:white;box-shadow:0 3px 10px #2368e821;}
+.gr-condition{font-size:18px;color:#536d85;flex:1;}
+.gr-export{margin-left:auto;white-space:nowrap;}
+.gr-group-select{min-width:0;flex:1;}
+.gr-group-select select{max-width:100%;width:100%;min-height:46px;border:1px solid #d7e1eb;border-radius:10px;background:#fff;padding:8px 12px;font-size:18px;}
+.gr-real-tools{display:flex;gap:12px;align-items:center;flex:0 0 auto;flex-wrap:wrap;padding:8px 12px;background:#fff9f0;border:1px solid #efdcc0;border-radius:12px;}
+.gr-condition-input{display:flex;align-items:center;gap:7px;color:#53657a;font-size:18px;white-space:nowrap;}
+.gr-condition-input input{width:82px;min-height:44px;background:#fff;border:1px solid #d5dfeb;border-radius:8px;text-align:center;font-size:21px;}
+.gr-shell .gr-primary{background:#2368e8;border-color:#2368e8;color:#fff;}
+.gr-shell .gr-primary:hover{background:#1959cf;border-color:#1959cf;}
+.gr-add-row{margin-left:auto;}
+.gr-body{display:grid;grid-template-columns:minmax(310px,.92fr) minmax(520px,1.18fr);gap:16px;flex:1;min-height:0;}
+.gr-chart-card,.gr-table-card{background:rgba(255,255,255,.94);border:1px solid #dce4ec;border-radius:14px;display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;}
+.gr-card-heading{padding:17px 21px 12px;flex:0 0 auto;}
+.gr-card-heading h3{font-size:25px;line-height:1.35;margin:0;font-weight:800;}
+.gr-card-heading p{font-size:16px;color:#65798d;line-height:1.4;margin:5px 0 0;}
+.gr-table-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.gr-table-heading>span{font-size:17px;color:#65798d;white-space:nowrap;}
+.gr-chart{padding:0 12px 12px;overflow:auto;flex:1;min-height:0;overscroll-behavior:contain;}
+.gr-bars{display:block;width:100%;font-family:inherit;}
+.gr-empty{height:100%;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:10px 20px 24px;}
+.gr-empty svg{width:180px;max-height:100px;flex-shrink:0;}
+.gr-empty p{margin:0 0 7px;font-size:20px;line-height:1.7;max-width:330px;color:#637a90;}
+.gr-table-scroll{flex:1;overflow:auto;min-height:0;padding:0 14px;overscroll-behavior:contain;}
+.gr-table{width:100%;border-collapse:separate;border-spacing:0;text-align:center;table-layout:fixed;font-size:20px;}
+.gr-table thead th{font-size:19px;font-weight:600;color:#61768b;padding:9px 3px;border-bottom:1px solid #dce4ec;position:sticky;top:0;background:#fff;z-index:1;white-space:nowrap;}
+.gr-table thead th:first-child{width:92px;}
+.gr-table thead th:last-child{width:48px;}
+.gr-table thead th:nth-child(5){width:94px;}
+.gr-table tbody th,.gr-table tbody td{border-bottom:1px solid #e5ebf1;padding:14px 4px;height:85px;vertical-align:middle;}
+.gr-n-display{font-size:29px;font-weight:800;white-space:nowrap;}
+.gr-n-display small{font-size:17px;font-weight:500;}
+.gr-trial-value{font-size:24px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.gr-small{font-size:16px;}
+.gr-mean{font-size:28px;line-height:1.1;color:#2368e8;font-variant-numeric:tabular-nums;}
+.gr-count{display:block;font-size:14px;line-height:1.35;color:#708295;font-weight:400;margin-top:5px;white-space:nowrap;}
+.gr-pending{font-size:18px;color:#8091a3;white-space:nowrap;}
+.gr-number-label{display:flex;align-items:center;justify-content:center;gap:3px;font-size:16px;font-weight:400;}
+.gr-n-input{width:58px;border:1px solid #d3deea;background:#f9fbfd;min-height:44px;text-align:center;border-radius:8px;font-size:23px!important;font-weight:700;}
+.gr-time-input{width:100%;max-width:95px;min-width:0;min-height:46px;border:1px solid #ccdcec;background:#f8fbff;border-radius:8px;text-align:center;font-size:22px!important;font-weight:650;padding:5px 2px;font-variant-numeric:tabular-nums;}
+.gr-time-input::placeholder{color:#91a0b0;font-size:17px;font-weight:400;}
+.gr-time-input:disabled{background:#eef2f6;color:#99a6b1;}
+.gr-block-label{display:flex;align-items:center;justify-content:center;gap:4px;min-height:44px;margin-top:3px;font-weight:400;font-size:15px;white-space:nowrap;cursor:pointer;}
+.gr-block-label input{width:20px;height:20px;accent-color:#2368e8;margin:0;}
+.gr-shell .gr-delete{padding:0;min-width:44px;width:44px;height:44px;min-height:44px;border-color:transparent;background:transparent;font-size:29px;font-weight:400;color:#8c9cad;line-height:1;}
+.gr-shell .gr-delete:hover{color:#b34b3c;background:#fff4ee;border-color:#f4d2c7;}
+.gr-table-empty{min-height:210px;height:100%;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#71879b;}
+.gr-table-empty-mark{display:flex;align-items:center;justify-content:center;width:60px;height:60px;border:2px dashed #d0dce8;border-radius:12px;color:#b4c3d1;font-size:36px;}
+.gr-table-empty p{font-size:20px;line-height:1.6;margin:15px 0;max-width:340px;}
+.gr-table-note{flex:0 0 auto;padding:12px 18px;color:#6a7f93;font-size:16px;background:#f7f9fc;border-top:1px solid #e5ebf1;}
+.gr-footer{min-height:30px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex:0 0 auto;padding:0 3px;}
+.gr-footer>strong{font-size:20px;font-weight:650;}
+.gr-live{font-size:16px;color:#657a8f;text-align:right;}
+.gr-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+@media(max-width:1150px){
+  .gr-shell{gap:10px;}
+  .gr-body{grid-template-columns:minmax(280px,.8fr) minmax(475px,1.2fr);gap:12px;}
+  .gr-card-heading{padding:14px 16px 10px;}
+  .gr-card-heading h3{font-size:22px;}
+  .gr-condition{font-size:16px;}
+  .gr-source-button{font-size:19px!important;}
+  .gr-table-scroll{padding:0 8px;}
+  .gr-table thead th:first-child{width:86px;}
+  .gr-table thead th:nth-child(5){width:86px;}
+  .gr-trial-value{font-size:22px;}
+  .gr-mean{font-size:25px;}
+  .gr-condition-input{font-size:16px;}
+  .gr-real-tools{gap:8px;}
+}
+@media(max-width:900px){
+  /* Keep the evidence legible on tablets and phones. This page may scroll inside
+     its own allocated area; never compress a chart into a blank 40px viewport. */
+  .gr-shell{overflow-y:auto;overflow-x:hidden;padding-right:2px;padding-bottom:12px;overscroll-behavior:contain;}
+  .gr-toolbar{gap:8px;flex-wrap:wrap;}
+  .gr-body{display:flex;flex-direction:column;flex:0 0 auto;min-height:0;gap:12px;}
+  .gr-chart-card{flex:0 0 auto;min-height:240px;overflow:visible;}
+  .gr-table-card{flex:0 0 auto;min-height:260px;overflow:hidden;}
+  .gr-card-heading{padding:10px 15px 7px;}
+  .gr-card-heading h3{font-size:21px;}
+  .gr-card-heading p{font-size:15px;margin-top:3px;}
+  .gr-chart{padding:0 12px 12px;overflow:visible;flex:0 0 auto;min-height:160px;}
+  .gr-bars{width:100%;min-width:0;max-width:620px;height:auto;min-height:0!important;margin:0 auto;}
+  .gr-empty{min-height:160px;flex-direction:row;gap:15px;padding:10px;}
+  .gr-empty svg{width:80px;max-height:75px;}
+  .gr-empty p{font-size:18px;max-width:260px;text-align:left;}
+  .gr-empty button{font-size:18px;white-space:nowrap;}
+  .gr-table tbody th,.gr-table tbody td{height:70px;padding-top:8px;padding-bottom:8px;}
+  .gr-table-scroll{overflow:visible;flex:0 0 auto;}
+  .gr-table-note{padding:7px 14px;font-size:15px;}
+  .gr-table-empty{min-height:120px;flex-direction:row;gap:15px;}
+  .gr-table-empty p{font-size:18px;}
+  .gr-footer{min-height:28px;align-items:flex-start;}
+  .gr-footer>strong{font-size:18px;}
+  .gr-live{font-size:14px;}
+}
+@media(max-width:600px){
+  .gr-shell{gap:8px;font-size:18px;}
+  .gr-toolbar{gap:6px;}
+  .gr-source{gap:2px;padding:3px;}
+  .gr-source{order:1;}
+  .gr-shell .gr-source-button{font-size:17px!important;padding:7px 11px;}
+  .gr-shell .gr-export{order:2;font-size:16px;padding:8px 10px;margin-left:auto;}
+  .gr-condition,.gr-group-select{order:3;flex:0 0 100%;width:100%;font-size:15px;padding-left:3px;}
+  .gr-group-select select{font-size:16px;min-height:42px;}
+  .gr-real-tools{gap:6px;padding:6px;}
+  .gr-condition-input{font-size:14px;gap:4px;}
+  .gr-condition-input input{width:57px;font-size:18px;}
+  .gr-shell .gr-new-group,.gr-shell .gr-add-row{font-size:15px;padding:7px 10px;}
+  .gr-add-row{margin-left:auto;}
+  .gr-chart-card{min-height:240px;}
+  .gr-card-heading{padding:9px 12px 6px;}
+  .gr-card-heading h3{font-size:19px;}
+  .gr-card-heading p{font-size:13px;}
+  .gr-empty{flex-wrap:wrap;gap:8px;justify-content:center;padding:5px 10px;}
+  .gr-empty svg{display:none;}
+  .gr-empty p{font-size:16px;text-align:center;max-width:none;flex:1 1 100%;line-height:1.5;margin:0;}
+  .gr-empty button{font-size:16px;}
+  .gr-chart{padding:0 6px 10px;min-height:155px;}
+  .gr-bars{width:100%;min-width:0;height:auto;min-height:0!important;}
+  .gr-table{font-size:17px;}
+  .gr-table thead th{font-size:13px;white-space:normal;padding:8px 1px;}
+  .gr-table thead th:first-child{width:65px;}
+  .gr-table thead th:nth-child(5){width:65px;}
+  .gr-table thead th:last-child{width:44px;}
+  .gr-table tbody th,.gr-table tbody td{padding:8px 2px;}
+  .gr-n-display{font-size:25px;}
+  .gr-n-display small{font-size:13px;}
+  .gr-trial-value{font-size:18px;}
+  .gr-time-input{font-size:17px!important;}
+  .gr-n-input{width:44px;font-size:18px!important;}
+  .gr-number-label{font-size:13px;gap:1px;}
+  .gr-block-label{font-size:12px;gap:2px;}
+  .gr-block-label input{width:17px;height:17px;}
+  .gr-mean{font-size:21px;}
+  .gr-count{font-size:11px;white-space:normal;}
+  .gr-pending{font-size:14px;}
+  .gr-small{font-size:13px;}
+  .gr-shell .gr-delete{width:44px;min-width:44px;}
+  .gr-table-note{font-size:13px;padding:7px 10px;}
+  .gr-table-empty p{font-size:16px;}
+  .gr-table-empty-mark{width:44px;height:44px;flex-shrink:0;}
+  .gr-footer{flex-direction:column;gap:3px;}
+  .gr-footer>strong{font-size:16px;}
+  .gr-live{text-align:left;font-size:13px;}
+}
+@media(max-height:650px) and (min-width:901px){
+  .gr-shell{gap:8px;}
+  .gr-card-heading{padding-top:10px;padding-bottom:7px;}
+  .gr-card-heading h3{font-size:22px;}
+  .gr-real-tools{padding-top:5px;padding-bottom:5px;}
+  .gr-table tbody th,.gr-table tbody td{padding-top:7px;padding-bottom:7px;}
+  .gr-footer>strong{font-size:17px;}
+}
+
+@media(min-width:1500px){.app{padding:0 32px}.topbar{height:91px}.brand h1{font-size:32px}.tabs{padding-bottom:14px}.tab{font-size:22px}.lab-layout{grid-template-columns:minmax(0,1fr) 340px;gap:22px}.control-card{padding:24px}.count-value{font-size:58px}.clock{font-size:70px}.scene-heading h2{font-size:27px}.scene-toolbar button{font-size:18px}.status{font-size:21px}}
+@media(max-width:1000px) and (min-width:701px){.app{padding:0 15px}.lab-layout{grid-template-columns:minmax(0,1fr) 244px;gap:12px}.control-card{padding:15px}.brand h1{font-size:24px}.scene-heading{padding:15px 15px 0}.scene-heading h2{font-size:21px}.scene-toolbar{gap:5px;padding:8px 9px 12px}.scene-toolbar button{font-size:14px;padding:7px 9px}.clock{font-size:48px}}
+@media(max-width:700px){.app{padding:0 10px}.topbar{height:69px;gap:6px}.brand{gap:8px}.brand-mark{width:34px;height:38px;border-radius:9px}.brand h1{font-size:19px;letter-spacing:0}.brand small{font-size:11px;letter-spacing:.5px;margin-bottom:4px}.top-actions button{padding:6px;min-height:39px;font-size:13px}.top-actions #fullscreen{display:none}.tabs{gap:4px;padding-bottom:7px}.tab{font-size:14px;padding:9px 7px;justify-content:center;flex:1;gap:5px;border-radius:8px;min-height:44px}.tab b{width:20px;height:20px;font-size:12px}.page{padding:9px 0 5px}.lab-layout{display:flex;flex-direction:column;gap:9px}.scene-card{flex:1;min-height:260px;border-radius:11px}.scene-heading{padding:11px 12px 0}.scene-heading h2{font-size:17px}.pill{font-size:11px;padding:4px 6px}.scene-toolbar{padding:3px 8px 8px;gap:4px;flex-wrap:nowrap}.scene-toolbar button{font-size:12px;padding:7px 8px;min-height:35px;flex:1}.timeline{padding:0 10px 7px;gap:5px}.timeline span{font-size:11px;min-width:42px}.timeline input{height:18px}.side{display:grid;grid-template-columns:1fr 1fr;gap:9px;flex-shrink:0}.control-card{padding:11px;border-radius:10px}.control-card h3{font-size:13px;margin-bottom:8px}.counter button{width:44px;height:44px;min-height:44px;font-size:24px}.counter{gap:2px}.count-value{font-size:34px;gap:4px}.count-value span{font-size:14px}.washer-bin{display:none}.start-row{margin-top:10px;gap:4px}.start-row button{font-size:15px;padding:7px;min-height:44px}.start-row .reset{width:36px}.clock-card{min-height:0}.clock-label{font-size:12px}.clock{font-size:36px;margin:5px 0;letter-spacing:-1px}.clock em{font-size:15px}.status{font-size:13px;min-height:38px;line-height:1.45}.saved-line{font-size:11px;margin-top:5px}.next-link{font-size:12px;min-height:25px}.fixed-line{grid-column:1/-1;font-size:11px;margin-top:-3px}.app-footer{height:22px;font-size:10px}.challenge-card{grid-row:1}.mass-title{font-size:12px;margin-top:8px}.mass-title strong{font-size:13px}.range-ends{font-size:10px}.target-readout{font-size:12px}.target-readout b{font-size:25px}.challenge-status{font-size:13px;min-height:40px;margin:4px 0}.attempts{display:block;grid-column:1/-1;min-height:0;max-height:86px;padding:7px 11px}.attempts h3{font-size:12px;margin:0 0 3px}.attempts #attempt-list{display:flex;gap:13px;overflow-x:auto}.attempt-line{flex:none;gap:8px;font-size:12px;padding:5px 0}.attempt-empty{font-size:12px}.attempt-empty br{display:none}.dialog{padding:19px}.dialog h2{font-size:21px}.dialog p{font-size:14px}.dialog .model-grid{display:block}.toast{font-size:14px;bottom:28px}.stage-wrap{min-height:185px}.stage text[font-size="21"],.stage text[font-size="24"],.stage text[font-size="25"],.stage text[font-size="26"],.stage text[font-size="29"]{font-size:34px}.stage text[font-size="49"]{font-size:58px}}
+@media(max-height:650px) and (min-width:701px){.topbar{height:60px}.brand small{font-size:11px}.brand h1{font-size:22px}.tab{padding:7px 17px;font-size:16px;min-height:38px}.tabs{padding-bottom:7px}.page{padding-top:10px}.scene-heading{padding-top:10px}.scene-heading h2{font-size:19px}.control-card{padding:12px}.control-card h3{margin-bottom:6px;font-size:14px}.counter button{height:39px;min-height:39px;width:40px}.count-value{font-size:35px}.washer-bin{margin-top:7px;padding:4px 8px}.washer-bin span{font-size:12px}.washer-bin svg{height:26px}.clock{font-size:40px}.clock-card{min-height:100px}.status{font-size:14px;min-height:36px}.clock-label,.saved-line,.fixed-line{font-size:12px}.side{gap:8px}.start-row{margin-top:7px}.start-row button{min-height:39px;font-size:15px}.scene-toolbar{padding-bottom:8px}.scene-toolbar button{min-height:35px;font-size:14px}.challenge-status{font-size:14px;min-height:40px}.mass-title{font-size:14px;margin-top:9px}.attempts{min-height:55px}.target-readout b{font-size:27px}.attempt-line{font-size:12px;padding:5px 0}}
+@media(max-height:720px) and (max-width:700px){.topbar{height:58px}.tabs{padding-bottom:4px}.tab{min-height:38px;padding-top:6px;padding-bottom:6px}.page{overflow:auto}.scene-card{min-height:220px}.stage-wrap{min-height:145px}.control-card{padding:9px}.clock{font-size:30px}.counter button{min-height:32px;height:32px}.count-value{font-size:29px}.fixed-line{display:none}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <header class="topbar"><div class="brand"><div class="brand-mark" aria-hidden="true"><svg width="32" height="30" viewBox="0 0 40 36"><path d="M5 10h23v13H5z" fill="none" stroke="#2368e8" stroke-width="2.5"/><circle cx="11" cy="27" r="4" fill="#2368e8"/><circle cx="25" cy="27" r="4" fill="#2368e8"/><path d="M28 15h7V5m-4 4 4-4 4 4" fill="none" stroke="#ef943c" stroke-width="2.5"/></svg></div><div><small>五年级上册 · 运动和力 · 3.2</small><h1>用重力驱动小车</h1></div></div><div class="top-actions"><button class="quiet" id="teacher-notes">课堂提示</button><button class="quiet" id="fullscreen" aria-label="切换全屏">⛶ 全屏</button></div></header>
+ <nav class="tabs" aria-label="课堂活动"><button class="tab active" id="tab-lab" data-page="lab" aria-current="page"><b>1</b>重力实验室</button><button class="tab" id="tab-records" data-page="records"><b>2</b>比较与记录</button><button class="tab" id="tab-challenge" data-page="challenge"><b>3</b>3秒到站</button></nav>
+ <main id="page-lab" class="page"><div class="lab-layout">
+  <div class="scene-card"><div class="scene-heading"><h2>几个垫圈能让小车动起来？</h2><span class="pill">模拟实验</span></div><div class="stage-wrap"><svg id="lab-stage" class="stage" viewBox="0 0 1060 740" role="img" aria-label="小车经绳子和定滑轮连接悬挂的垫圈"></svg></div><div class="scene-toolbar"><button id="lab-slow" aria-pressed="false">慢放 ×¼</button><button id="lab-forces" aria-pressed="false">看力的方向</button><button id="lab-ghosts" aria-pressed="false">等时位置</button><button id="lab-cut" disabled>松开绳子</button></div><div class="timeline"><span id="lab-timeline-label">回看过程</span><input id="lab-timeline" type="range" min="0" max="1000" value="0" aria-label="拖动回看实验过程" disabled><span id="lab-progress">0.00 秒</span></div></div>
+  <aside class="side"><div class="control-card"><h3>悬挂垫圈</h3><div class="counter"><button id="lab-minus" aria-label="减少一个垫圈">−</button><div class="count-value"><b id="lab-n">1</b><span>个</span></div><button id="lab-plus" aria-label="增加一个垫圈">＋</button></div><div class="washer-bin" id="washer-bin" role="button" tabindex="0" aria-label="将垫圈拖到挂钩，或点击增加一个"><svg viewBox="0 0 60 42" aria-hidden="true"><ellipse cx="29" cy="27" rx="24" ry="12" fill="#778c9f"/><path d="M5 21v6c0 7 11 12 24 12s24-5 24-12v-6" fill="#91a2b2"/><ellipse cx="29" cy="21" rx="24" ry="12" fill="#ced7e2" stroke="#778c9f" stroke-width="2"/><ellipse cx="29" cy="21" rx="10" ry="5" fill="#fff" stroke="#778c9f" stroke-width="2"/></svg><span>拖到挂钩，或点一下</span></div><div class="start-row"><button id="lab-start" class="primary">释放小车</button><button id="lab-reset" class="reset" aria-label="小车回到起点">↺</button></div></div><div class="control-card clock-card"><div class="clock-label"><span>走完 60 厘米</span><span id="lab-run-label">计时器</span></div><div class="clock"><span id="lab-clock">0.00</span><em>秒</em></div><p id="lab-status" class="status" aria-live="polite">不推小车，松手试试看。</p><p id="lab-saved" class="saved-line">只改变悬挂垫圈的数量</p><button class="next-link" id="to-records">查看实验记录 →</button></div><p class="fixed-line">同一辆小车 · 同一条路 · 同一起终点</p></aside>
+ </div></main>
+ <section id="page-records" class="page" aria-label="比较与记录" hidden><div id="records-root" class="page-content"></div></section>
+ <section id="page-challenge" class="page" aria-label="3秒到站挑战" hidden><div class="lab-layout">
+  <div class="scene-card"><div class="scene-heading"><h2>1米，怎样更接近3秒？</h2><span class="pill">高架实验台</span></div><div class="stage-wrap"><svg id="challenge-stage" class="stage" viewBox="0 0 1060 740" role="img" aria-label="高架实验台上的一米重力小车挑战"></svg></div><div class="scene-toolbar"><button id="challenge-slow" aria-pressed="false">慢放 ×¼</button><button id="challenge-ghosts" aria-pressed="false">等时位置</button><button id="challenge-reset">回到起点</button></div><div class="timeline"><span>回看过程</span><input id="challenge-timeline" type="range" min="0" max="1000" value="0" aria-label="回看挑战过程" disabled><span id="challenge-progress">0.00 秒</span></div></div>
+  <aside class="side"><div class="control-card challenge-card"><h3>调整你的方案</h3><div class="counter"><button id="challenge-minus" aria-label="挑战减少一个垫圈">−</button><div class="count-value"><b id="challenge-n">2</b><span>个</span></div><button id="challenge-plus" aria-label="挑战增加一个垫圈">＋</button></div><label class="mass-title" for="challenge-mass">小车与载物总质量<strong><span id="challenge-mass-value">200</span>克</strong></label><input id="challenge-mass" type="range" min="200" max="800" step="10" value="200"><div class="range-ends"><span>空车 200克</span><span>800克</span></div><div class="start-row"><button id="challenge-start" class="primary">试一试</button></div></div><div id="challenge-result-card" class="control-card"><div class="target-readout">目标 <b>3.00</b> 秒内，尽量接近</div><div class="clock"><span id="challenge-clock">0.00</span><em>秒</em></div><p id="challenge-status" class="challenge-status" aria-live="polite">先选择方案，再测试。</p></div><div class="control-card attempts"><h3>我的尝试 <span id="attempt-count">0</span></h3><div id="attempt-list"><div class="attempt-empty">每次结果都会留下来。<br>比较后，再改一个条件。</div></div></div></aside>
+ </div></section>
+ <footer class="app-footer"><span class="compat">T1 · 基础交互</span><span>模型可离线运行<span class="footer-title"> · 用重力驱动小车</span></span></footer>
+</div>
+<div class="dialog-cover" id="notes-modal" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="notes-title"><div class="dialog-head"><h2 id="notes-title">课堂提示</h2><button class="close" id="notes-close" aria-label="关闭课堂提示">×</button></div><h3>先操作，再用数据解释</h3><p>实验室只改变悬挂垫圈数量：从1个开始尝试，每种数量重复3次。打开“等时位置”比较每隔0.2秒的位置；暂停后可拖动进度条回看。记录页可以填写真实实验结果，模拟数据和实测数据分别保存。</p><h3>把看不清的过程放大</h3><p>“看力的方向”突出垫圈受到的向下重力和绳子对小车的向前拉力。只画相关的部分力，并非完整受力图。加速时绳子拉力不等于悬挂物重力。松开绳子或垫圈落地后，小车会继续滑行并减速；受阻力减速，或被挡车器挡停。</p><div class="model-grid"><p><b>本实验模型</b><br>小车200克，每个垫圈10克；测距60厘米，下落空间65厘米。当前阻力设置下，1个垫圈不能起动。</p><p><b>器材会改变结果</b><br>启动所需数量由车、路面等决定。模型的启动数量和用时不能当作实物标准答案。同条件模拟重复得到相同结果。</p></div><h3>3秒到站</h3><p>目标是在3秒内走完1米，越接近3秒越好。可改变垫圈数量和车载质量；高架实验台留出115厘米下落空间。到达终点时计时结束，动画继续运行；用时不超过3秒且误差不超过0.15秒，显示“精准到站”。</p><h3>记录与设备</h3><p>记录仅保存在当前浏览器；CSV可导出。全屏不可用时仍可直接操作。课件使用内联SVG，无外部字体、图片或脚本。图形与物理模型分离，便于后续替换素材。</p><p class="small">依据：教科版五年级上册教材第70—73页；教师用书对应第213—223页。本页为教学模型，忽略滑轮转动惯量、细绳质量等因素。</p></div></div>
+<div id="toast" class="toast" role="status" hidden></div>
+<noscript><p>请启用JavaScript以运行互动实验。</p></noscript>
+<script>
+/*
+ * GravityPhysics — analytical teaching model for a gravity-driven cart.
+ * SI units: kg, m, s, N. x is rightward; weightY is downward from its release point.
+ * This is a reproducible model, not measured classroom data.
+ *
+ * Assumptions: level track, inextensible light string, ideal fixed pulley,
+ * identical washers, no air drag. startFriction is an empirical starting
+ * resistance (including axle stiction); rollingFriction is a constant moving
+ * resistance. These are apparatus parameters, not universal washer thresholds.
+ *
+ * While the weight falls on a taut string:
+ *   a = (m*g - rollingFriction) / (cartMass + m)
+ *   T = cartMass*a + rollingFriction = m*(g-a), so T is not simply m*g.
+ * After the weight lands or the string is cut, T=0 and the moving cart coasts
+ * with a=-rollingFriction/cartMass. A finite stopDistance represents a bumper.
+ * A cut weight continues in free fall until the floor; a bumper can hold an
+ * uncut hanging weight at rest. Every event time is solved analytically.
+ *
+ * Browser: window.GravityPhysics.create(options)
+ * Node:    require('./gravity-model.js').create(options)
+ */
+(function (root, factory) {
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.GravityPhysics = api;
+}(typeof window !== 'undefined' ? window : this, function () {
+  'use strict';
+
+  var EPS = 1e-10;
+  var DEFAULTS = {
+    n: 4,
+    cartMass: 0.2,
+    washerMass: 0.01,
+    g: 9.8,
+    startFriction: 0.14,
+    rollingFriction: 0.10,
+    distance: 0.6,
+    dropHeight: 0.8,
+    stopDistance: 0.9,
+    detachTime: null
+  };
+
+  function readNumber(options, key) {
+    var value = options[key] === undefined ? DEFAULTS[key] : options[key];
+    value = Number(value);
+    if (!isFinite(value)) throw new TypeError(key + ' must be finite');
+    return value;
+  }
+
+  function nullableTime(t) {
+    return isFinite(t) ? t : null;
+  }
+
+  function cleanZero(value) {
+    return Math.abs(value) < EPS ? 0 : value;
+  }
+
+  /* Time to travel dx from speed v with nonnegative deceleration d.
+     The rationalized expression avoids cancellation for very small dx. */
+  function coastTime(dx, v, d) {
+    if (dx <= EPS) return 0;
+    if (v <= 0) return Infinity;
+    if (d === 0) return dx / v;
+    var radicand = v * v - 2 * d * dx;
+    if (radicand < -EPS) return Infinity;
+    return 2 * dx / (v + Math.sqrt(Math.max(0, radicand)));
+  }
+
+  function create(options) {
+    options = options || {};
+    var p = {}, key;
+    for (key in DEFAULTS) {
+      if (Object.prototype.hasOwnProperty.call(DEFAULTS, key) && key !== 'detachTime') {
+        p[key] = readNumber(options, key);
+      }
+    }
+    if (p.n < 0 || Math.floor(p.n) !== p.n) throw new RangeError('n must be a nonnegative integer');
+    if (p.cartMass <= 0 || p.washerMass <= 0 || p.g <= 0) throw new RangeError('masses and g must be positive');
+    if (p.startFriction < 0 || p.rollingFriction < 0) throw new RangeError('resistances must be nonnegative');
+    if (p.startFriction < p.rollingFriction) throw new RangeError('startFriction must be at least rollingFriction');
+    if (p.distance <= 0 || p.dropHeight < 0 || p.stopDistance <= 0) throw new RangeError('distance and stopDistance must be positive; dropHeight may be zero');
+    p.detachTime = options.detachTime === undefined || options.detachTime === null ? null : Number(options.detachTime);
+    if (p.detachTime !== null && (!isFinite(p.detachTime) || p.detachTime < 0)) throw new RangeError('detachTime must be null or a nonnegative finite time');
+
+    var M = p.cartMass;
+    var m = p.n * p.washerMass;
+    var G = m * p.g;
+    var cutAt = p.detachTime === null ? Infinity : p.detachTime;
+    var enoughForce = m > 0 && G > p.startFriction + EPS;
+    var canStart = enoughForce && p.dropHeight > 0 && cutAt > 0;
+    var aPull = canStart ? (G - p.rollingFriction) / (M + m) : 0;
+    var TPull = canStart ? M * aPull + p.rollingFriction : 0;
+    var dCoast = p.rollingFriction / M;
+
+    var predictedGroundAt = canStart ? Math.sqrt(2 * p.dropHeight / aPull) : Infinity;
+    var predictedBumperAt = canStart ? Math.sqrt(2 * p.stopDistance / aPull) : Infinity;
+    var pullEndAt = canStart ? Math.min(predictedGroundAt, predictedBumperAt, cutAt) : 0;
+    var pullEndX = canStart ? Math.min(p.stopDistance, p.dropHeight, 0.5 * aPull * pullEndAt * pullEndAt) : 0;
+    var pullEndV = canStart ? aPull * pullEndAt : 0;
+    var pullEndCause = null;
+    var releaseAt = Infinity;
+    var releaseCause = null;
+    var bumperAt = Infinity;
+    var restAt = 0;
+    var finalX = 0;
+
+    if (canStart) {
+      /* A cut or a landing at the same instant as the bumper releases the
+         string; the cart still stops at the bumper at that instant. */
+      if (cutAt <= pullEndAt + EPS) {
+        pullEndCause = 'detach';
+        releaseAt = pullEndAt;
+        releaseCause = 'detach';
+      } else if (predictedGroundAt <= pullEndAt + EPS) {
+        pullEndCause = 'ground';
+        releaseAt = pullEndAt;
+        releaseCause = 'ground';
+      } else {
+        pullEndCause = 'bumper';
+      }
+
+      if (predictedBumperAt <= pullEndAt + EPS) {
+        bumperAt = pullEndAt;
+        restAt = pullEndAt;
+        finalX = p.stopDistance;
+      } else {
+        var coastRestDuration = dCoast > 0 ? pullEndV / dCoast : Infinity;
+        var coastRestX = dCoast > 0 ? pullEndX + pullEndV * pullEndV / (2 * dCoast) : Infinity;
+        var coastBumperDuration = coastTime(p.stopDistance - pullEndX, pullEndV, dCoast);
+        if (isFinite(coastBumperDuration) && coastBumperDuration <= coastRestDuration + EPS) {
+          bumperAt = pullEndAt + coastBumperDuration;
+          restAt = bumperAt;
+          finalX = p.stopDistance;
+        } else {
+          restAt = pullEndAt + coastRestDuration;
+          finalX = coastRestX;
+        }
+      }
+    } else if (cutAt === 0) {
+      releaseAt = 0;
+      releaseCause = 'detach';
+    } else if (p.dropHeight === 0 && m > 0) {
+      releaseAt = 0;
+      releaseCause = 'ground';
+    }
+
+    function cartAt(t) {
+      if (!canStart) return { x: 0, v: 0, a: 0 };
+      if (t < pullEndAt - EPS) return { x: 0.5 * aPull * t * t, v: aPull * t, a: aPull };
+      if (t >= restAt - EPS) return { x: finalX, v: 0, a: 0 };
+      var dt = Math.max(0, t - pullEndAt);
+      return {
+        x: Math.min(finalX, pullEndX + pullEndV * dt - 0.5 * dCoast * dt * dt),
+        v: Math.max(0, pullEndV - dCoast * dt),
+        a: -dCoast
+      };
+    }
+
+    /* The hanging object follows the cart while the string is intact. If the
+       cart meets the bumper first, both stop; cutting later releases only the
+       hanging object. Cutting an initially stationary system is also valid. */
+    var groundAt = Infinity;
+    var cutY = 0;
+    var cutV = 0;
+    if (m > 0 && p.dropHeight === 0) {
+      groundAt = 0;
+    } else if (canStart && predictedGroundAt <= predictedBumperAt + EPS && predictedGroundAt <= cutAt + EPS) {
+      groundAt = predictedGroundAt;
+    } else if (m > 0 && isFinite(cutAt)) {
+      var cutCart = cartAt(cutAt);
+      cutY = Math.min(p.dropHeight, cutCart.x);
+      /* If the cart was just arriving at a bumper, its instantaneous velocity
+         is reset there. For an earlier cut, use the taut-string pull velocity. */
+      cutV = canStart && cutAt <= predictedBumperAt + EPS ? aPull * Math.min(cutAt, pullEndAt) : 0;
+      var remainingDrop = Math.max(0, p.dropHeight - cutY);
+      var fallDuration = remainingDrop === 0 ? 0 : 2 * remainingDrop / (cutV + Math.sqrt(cutV * cutV + 2 * p.g * remainingDrop));
+      groundAt = cutAt + fallDuration;
+    }
+
+    /* A later cut of a bumper-held or initially stationary system is still a
+       release event even though the cart does not begin another motion. */
+    if (!isFinite(releaseAt) && isFinite(cutAt) && cutAt < groundAt + EPS) {
+      releaseAt = cutAt;
+      releaseCause = 'detach';
+    }
+
+    var measuredAt = Infinity;
+    if (canStart && p.distance <= pullEndX + EPS) {
+      measuredAt = Math.sqrt(2 * p.distance / aPull);
+    } else if (canStart && p.distance <= finalX + EPS && p.distance > pullEndX) {
+      var afterRelease = coastTime(p.distance - pullEndX, pullEndV, dCoast);
+      if (isFinite(afterRelease)) measuredAt = pullEndAt + afterRelease;
+    }
+
+    var duration = restAt;
+    if (isFinite(groundAt)) duration = Math.max(duration, groundAt);
+    var summary = {
+      canStart: canStart,
+      enoughForce: enoughForce,
+      reason: canStart ? 'moving' : (m === 0 ? 'noWeight' : (p.dropHeight === 0 ? 'weightOnFloor' : (cutAt === 0 ? 'detached' : 'belowStartingResistance'))),
+      hangingMass: m,
+      gravityForce: G,
+      pullAcceleration: aPull,
+      pullTension: TPull,
+      coastDeceleration: dCoast,
+      pullEndTime: canStart ? pullEndAt : null,
+      pullEndCause: pullEndCause,
+      pullEndX: pullEndX,
+      pullEndV: pullEndV,
+      releaseTime: nullableTime(releaseAt),
+      releaseCause: releaseCause,
+      groundTime: nullableTime(groundAt),
+      bumperTime: nullableTime(bumperAt),
+      stopTime: restAt,
+      finalX: finalX,
+      measurementTime: nullableTime(measuredAt),
+      measurementAfterRelease: isFinite(measuredAt) && measuredAt > releaseAt + EPS,
+      duration: duration
+    };
+
+    function stateAt(time) {
+      var t = Number(time);
+      if (!isFinite(t)) throw new TypeError('time must be finite');
+      t = Math.max(0, t);
+      var cart = cartAt(t);
+      var grounded = m > 0 && t >= groundAt - EPS;
+      var detached = t >= cutAt - EPS;
+      var atBumper = t >= bumperAt - EPS;
+      var ropeTaut = m > 0 && !grounded && !detached;
+      var weightY = 0, weightV = 0, weightA = 0;
+      var tension = 0, friction = 0, bumperForce = 0;
+
+      if (grounded) {
+        weightY = p.dropHeight;
+      } else if (detached && m > 0) {
+        var fallT = Math.max(0, t - cutAt);
+        weightY = Math.min(p.dropHeight, cutY + cutV * fallT + 0.5 * p.g * fallT * fallT);
+        weightV = cutV + p.g * fallT;
+        weightA = p.g;
+      } else if (ropeTaut) {
+        weightY = cart.x;
+        weightV = cart.v;
+        weightA = cart.a;
+      }
+
+      if (ropeTaut && canStart && t < pullEndAt - EPS) {
+        tension = TPull;
+        friction = p.rollingFriction;
+      } else if (ropeTaut) {
+        tension = G;
+        if (atBumper) bumperForce = G;
+        else friction = G;
+      } else if (cart.v > EPS) {
+        friction = p.rollingFriction;
+      }
+
+      var phase;
+      if (atBumper) phase = 'bumper';
+      else if (canStart && t < pullEndAt - EPS) phase = 'pull';
+      else if (cart.v > EPS) phase = 'coast';
+      else if (!canStart && ropeTaut) phase = 'stuck';
+      else phase = 'stopped';
+
+      return {
+        t: t,
+        x: cleanZero(cart.x),
+        v: cleanZero(cart.v),
+        a: cleanZero(cart.a),
+        phase: phase,
+        tension: cleanZero(tension),
+        gravity: G,
+        friction: cleanZero(friction),
+        bumperForce: bumperForce,
+        cartWeight: M * p.g,
+        cartSupport: M * p.g,
+        weightY: cleanZero(weightY),
+        weightV: cleanZero(weightV),
+        weightA: cleanZero(weightA),
+        weightSupport: grounded ? G : 0,
+        ropeTaut: ropeTaut,
+        detached: detached,
+        grounded: grounded,
+        atBumper: atBumper,
+        arrived: isFinite(measuredAt) && t >= measuredAt - EPS,
+        measurementTime: summary.measurementTime,
+        finished: t >= duration - EPS
+      };
+    }
+
+    return { config: p, summary: summary, stateAt: stateAt };
+  }
+
+  return { create: create, defaults: DEFAULTS, version: '1.0.0' };
+}));
+
+/* GravityRecords — offline, ES5, SVG evidence table for the gravity-cart lesson.
+ * Public API: mount(id, {onExplore}), configure(options), addTrial(trial), refresh(), getData().
+ * Times are seconds; distance and cartMass use SI units. Simulation and real observations
+ * are stored in separate groups. A failure to start is never averaged as zero seconds.
+ */
+(function (root) {
+  'use strict';
+  var document = root.document;
+  var STORAGE_KEY = 'gravity-cart-evidence-v1';
+  var MAX_ROWS = 8;
+  var element = null;
+  var options = {};
+  var storageOK = true;
+  var loaded = false;
+  var notice = '';
+  var state = {
+    version: 1,
+    nextId: 1,
+    source: 'simulation',
+    active: { simulation: null, real: null },
+    groups: [],
+    rows: [],
+    draft: { distance: 0.6, cartMass: 0.2 }
+  };
+
+  function esc(value) {
+    return String(value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function finite(value) { return typeof value === 'number' && isFinite(value); }
+  function round(value, digits) {
+    var p = Math.pow(10, digits || 0);
+    return Math.round(value * p) / p;
+  }
+  function numberLabel(value) { return String(round(value, 2)); }
+  function groupLabel(group) {
+    return numberLabel(group.distance * 100) + ' cm · ' + numberLabel(group.cartMass * 1000) + ' g小车' + (group.round > 1 ? ' · 第' + group.round + '轮' : '');
+  }
+  function findGroup(id) {
+    var i;
+    for (i = 0; i < state.groups.length; i++) if (state.groups[i].id === id) return state.groups[i];
+    return null;
+  }
+  function findRow(id) {
+    var i;
+    for (i = 0; i < state.rows.length; i++) if (state.rows[i].id === id) return state.rows[i];
+    return null;
+  }
+  function sourceGroups(source) {
+    return state.groups.filter(function (g) { return g.source === source; });
+  }
+  function groupRows(group) {
+    if (!group) return [];
+    return state.rows.filter(function (r) { return r.groupId === group.id; });
+  }
+  function validConditions(distance, mass) {
+    return finite(distance) && distance >= 0.05 && distance <= 10 && finite(mass) && mass >= 0.001 && mass <= 10;
+  }
+  function makeGroup(source, distance, mass) {
+    var roundNumber = 1;
+    state.groups.forEach(function (g) {
+      if (g.source === source && Math.abs(g.distance - distance) < 1e-8 && Math.abs(g.cartMass - mass) < 1e-8) roundNumber = Math.max(roundNumber, g.round + 1);
+    });
+    var g = { id: 'g' + state.nextId++, source: source, distance: distance, cartMass: mass, round: roundNumber };
+    state.groups.push(g);
+    state.active[source] = g.id;
+    return g;
+  }
+  function makeRow(group, n) {
+    var batch = 1;
+    groupRows(group).forEach(function (r) { if (r.n === n) batch = Math.max(batch, r.batch + 1); });
+    var r = { id: 'r' + state.nextId++, groupId: group.id, n: n, batch: batch, trials: [null, null, null], blocked: false };
+    state.rows.push(r);
+    return r;
+  }
+  function activeGroup() {
+    var g = findGroup(state.active[state.source]);
+    if (g && g.source === state.source) return g;
+    var groups = sourceGroups(state.source);
+    if (groups.length) {
+      state.active[state.source] = groups[groups.length - 1].id;
+      return groups[groups.length - 1];
+    }
+    return null;
+  }
+  function rowStats(row) {
+    var count = 0, sum = 0, stuck = 0;
+    if (row.blocked) return { status: 'stuck', count: 0, mean: null, stuck: 1 };
+    row.trials.forEach(function (v) {
+      if (v === 'stuck') stuck++;
+      else if (finite(v) && v > 0) { count++; sum += v; }
+    });
+    if (stuck) return { status: count ? 'mixed' : 'stuck', count: count, mean: null, stuck: stuck };
+    if (!count) return { status: 'empty', count: 0, mean: null, stuck: 0 };
+    return { status: count === 3 ? 'complete' : 'partial', count: count, mean: sum / count, stuck: 0 };
+  }
+  function load() {
+    if (loaded) return;
+    loaded = true;
+    try {
+      var raw = root.localStorage && root.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var s = JSON.parse(raw);
+      if (!s || s.version !== 1 || !Array.isArray(s.groups) || !Array.isArray(s.rows)) return;
+      var ids = {};
+      s.groups = s.groups.filter(function (g) {
+        var valid = g && typeof g.id === 'string' && (g.source === 'simulation' || g.source === 'real') && validConditions(g.distance, g.cartMass);
+        if (valid) { ids[g.id] = true; g.round = Math.max(1, Math.floor(Number(g.round) || 1)); }
+        return valid;
+      });
+      s.rows = s.rows.filter(function (r) {
+        return r && typeof r.id === 'string' && ids[r.groupId] && finite(r.n) && r.n >= 0 && r.n <= 99 && Math.floor(r.n) === r.n && Array.isArray(r.trials);
+      }).map(function (r) {
+        r.trials = [0, 1, 2].map(function (i) {
+          var v = r.trials[i];
+          return v === 'stuck' ? v : finite(v) && v > 0 && v <= 3600 ? v : null;
+        });
+        r.batch = Math.max(1, Math.floor(Number(r.batch) || 1));
+        r.blocked = !!r.blocked;
+        return r;
+      });
+      state.groups = s.groups;
+      state.rows = s.rows;
+      state.nextId = Math.max(1, Math.floor(Number(s.nextId) || 1), s.groups.length + s.rows.length + 1);
+      /* A changed distance/mass is a new group, never a reinterpretation of old data. */
+      if (s.draft && validConditions(s.draft.distance, s.draft.cartMass)) state.draft = s.draft;
+      if (s.active && typeof s.active === 'object') state.active = { simulation: s.active.simulation || null, real: s.active.real || null };
+      state.source = s.source === 'real' ? 'real' : 'simulation';
+    } catch (ignore) { storageOK = false; }
+  }
+  function save() {
+    try { if (root.localStorage) root.localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); else storageOK = false; }
+    catch (ignore) { storageOK = false; }
+  }
+  function say(message) {
+    notice = message || '';
+    if (element) {
+      var target = element.querySelector('.gr-live');
+      if (target) target.textContent = notice;
+    }
+  }
+  function niceMax(value) {
+    if (!(value > 0)) return 2;
+    var power = Math.pow(10, Math.floor(Math.log(value) / Math.LN10));
+    var unit = value / power;
+    return (unit <= 1 ? 1 : unit <= 2 ? 2 : unit <= 4 ? 4 : unit <= 5 ? 5 : 10) * power;
+  }
+  function chartHTML(rows, source) {
+    if (!rows.length) {
+      return '<div class="gr-empty"><svg viewBox="0 0 200 116" aria-hidden="true"><path d="M22 16v76h160" fill="none" stroke="#afbfce" stroke-width="3"/><rect x="45" y="53" width="24" height="39" rx="5" fill="#d9e7ff"/><rect x="91" y="33" width="24" height="59" rx="5" fill="#c2d8ff"/><rect x="137" y="15" width="24" height="77" rx="5" fill="#e6edf4"/><path d="M44 102h26m19 0h28m18 0h28" stroke="#afbfce" stroke-width="3" stroke-linecap="round"/></svg><p>' + (source === 'simulation' ? '完成一次试跑，记录就会出现在这里。' : '把实物实验的用时填进右侧表格。') + '</p>' + (source === 'simulation' ? '<button type="button" class="gr-primary" data-gr-action="explore">去实验室试一试</button>' : '<button type="button" class="gr-primary" data-gr-action="add-row">添加一组垫圈</button>') + '</div>';
+    }
+    var maximum = 0;
+    rows.forEach(function (row) { var stats = rowStats(row); if (stats.mean !== null) maximum = Math.max(maximum, stats.mean); });
+    var max = niceMax(maximum * 1.12);
+    var height = Math.max(270, rows.length * 68 + 112);
+    var plotX = 90, plotW = 315, firstY = 54, axisY = rows.length * 68 + 40;
+    var out = '<svg class="gr-bars" style="min-height:' + height + 'px" viewBox="0 0 560 ' + height + '" role="img" aria-label="相同距离、相同小车条件下，垫圈数量与平均用时的比较图">';
+    var i;
+    for (i = 0; i <= 4; i++) {
+      var x = plotX + plotW * i / 4;
+      out += '<line x1="' + x + '" y1="20" x2="' + x + '" y2="' + axisY + '" stroke="#dce4ec" stroke-dasharray="4 5"/><text x="' + x + '" y="' + (axisY + 24) + '" text-anchor="middle" fill="#5c7187" font-size="19">' + esc(numberLabel(max * i / 4)) + '</text>';
+    }
+    rows.forEach(function (row, index) {
+      var s = rowStats(row), y = firstY + index * 68;
+      out += '<text x="74" y="' + (y + 3) + '" text-anchor="end" fill="#162d46" font-size="24" font-weight="700">' + row.n + '个</text>';
+      if (row.batch > 1) out += '<text x="74" y="' + (y + 23) + '" text-anchor="end" fill="#657a8e" font-size="14">第' + row.batch + '组</text>';
+      if (s.mean !== null) {
+        var width = Math.max(2, plotW * s.mean / max);
+        out += '<rect x="' + plotX + '" y="' + (y - 18) + '" width="' + width + '" height="27" rx="6" fill="' + (source === 'real' ? '#e68e33' : '#2368e8') + '" opacity="' + (s.status === 'complete' ? 1 : 0.42) + '"/>';
+        out += '<text x="' + (plotX + width + 10) + '" y="' + (y + 3) + '" fill="#162d46" font-size="23" font-weight="700">' + s.mean.toFixed(2) + ' s</text>';
+        if (s.status === 'partial') out += '<text x="' + (plotX + 8) + '" y="' + (y + 29) + '" fill="#657a8e" font-size="16">已测' + s.count + '次的均值</text>';
+      } else {
+        out += '<text x="' + (plotX + 10) + '" y="' + (y + 3) + '" fill="#657a8e" font-size="22">' + (s.status === 'stuck' ? '未起动' : s.status === 'mixed' ? '有未起动，不求均值' : '等待测量') + '</text>';
+      }
+    });
+    out += '<text x="' + (plotX + plotW / 2) + '" y="' + (axisY + 57) + '" text-anchor="middle" fill="#5c7187" font-size="20">平均用时 / 秒</text></svg>';
+    return out;
+  }
+  function meanHTML(row) {
+    var s = rowStats(row);
+    if (s.status === 'empty') return '<span class="gr-pending">待测</span>';
+    if (s.status === 'stuck') return '<span class="gr-pending">未起动</span>';
+    if (s.status === 'mixed') return '<span class="gr-pending gr-small">有未起动</span>';
+    return '<strong class="gr-mean">' + s.mean.toFixed(2) + '</strong><span class="gr-count">' + (s.status === 'complete' ? '3次均值' : '已测' + s.count + '次') + '</span>';
+  }
+  function tableHTML(rows, source) {
+    if (!rows.length) return '<div class="gr-table-empty"><span class="gr-table-empty-mark">＋</span><p>' + (source === 'simulation' ? '先改变垫圈数量，再放开小车。' : '每种垫圈数量，重复测量3次。') + '</p></div>';
+    var out = '<table class="gr-table"><thead><tr><th scope="col">垫圈</th><th scope="col">第1次</th><th scope="col">第2次</th><th scope="col">第3次</th><th scope="col">平均 / 秒</th><th scope="col"><span class="gr-sr-only">删除</span></th></tr></thead><tbody>';
+    rows.forEach(function (row) {
+      out += '<tr data-gr-row="' + esc(row.id) + '"><th scope="row" class="gr-count-cell">';
+      if (source === 'real') {
+        out += '<label class="gr-number-label"><input class="gr-n-input" type="number" inputmode="numeric" min="0" max="99" step="1" value="' + row.n + '" data-gr-field="n" data-gr-id="' + esc(row.id) + '" aria-label="本组垫圈数量"><span>个</span></label>';
+        out += '<label class="gr-block-label"><input type="checkbox" data-gr-field="blocked" data-gr-id="' + esc(row.id) + '"' + (row.blocked ? ' checked' : '') + '><span>未起动</span></label>';
+      } else {
+        out += '<span class="gr-n-display">' + row.n + '<small> 个</small></span>' + (row.batch > 1 ? '<span class="gr-count">第' + row.batch + '组</span>' : '');
+      }
+      out += '</th>';
+      row.trials.forEach(function (v, index) {
+        out += '<td class="gr-trial-cell" data-label="第' + (index + 1) + '次">';
+        if (source === 'real') {
+          out += '<input class="gr-time-input" type="text" inputmode="decimal" autocomplete="off" maxlength="8" placeholder="秒" value="' + (row.blocked ? '—' : v === 'stuck' ? '未起动' : finite(v) ? esc(numberLabel(v)) : '') + '" data-gr-field="time" data-gr-id="' + esc(row.id) + '" data-gr-index="' + index + '" aria-label="' + row.n + '个垫圈，第' + (index + 1) + '次用时，单位秒"' + (row.blocked ? ' disabled' : '') + '>';
+        } else out += '<span class="gr-trial-value' + (v === 'stuck' ? ' gr-small' : '') + '">' + (v === 'stuck' ? '未起动' : finite(v) ? v.toFixed(2) : '—') + '</span>';
+        out += '</td>';
+      });
+      out += '<td class="gr-mean-cell" data-label="平均 / 秒">' + meanHTML(row) + '</td><td class="gr-delete-cell"><button type="button" class="gr-delete" data-gr-action="delete-row" data-gr-id="' + esc(row.id) + '" aria-label="删除' + row.n + '个垫圈的本组记录" title="删除本组">×</button></td></tr>';
+    });
+    return out + '</tbody></table>';
+  }
+  function renderEvidence() {
+    if (!element) return;
+    var g = activeGroup(), rows = groupRows(g);
+    var chart = element.querySelector('.gr-chart');
+    if (chart) chart.innerHTML = chartHTML(rows, state.source);
+    rows.forEach(function (r) {
+      var row = element.querySelector('[data-gr-row="' + r.id + '"]');
+      if (!row) return;
+      var mean = row.querySelector('.gr-mean-cell');
+      if (mean) mean.innerHTML = meanHTML(r);
+    });
+  }
+  function render() {
+    if (!element) return;
+    var group = activeGroup(), rows = groupRows(group), groups = sourceGroups(state.source);
+    var real = state.source === 'real';
+    var label = group ? groupLabel(group) : '同一辆车 · 相同距离';
+    var out = '<div class="gr-shell"><div class="gr-toolbar"><div class="gr-source" role="group" aria-label="记录来源"><button type="button" class="gr-source-button' + (!real ? ' gr-selected' : '') + '" aria-pressed="' + (!real) + '" data-gr-action="source" data-gr-source="simulation">模拟记录</button><button type="button" class="gr-source-button' + (real ? ' gr-selected' : '') + '" aria-pressed="' + real + '" data-gr-action="source" data-gr-source="real">实物记录</button></div>';
+    if (groups.length > 1) {
+      out += '<label class="gr-group-select"><span class="gr-sr-only">选择实验条件</span><select aria-label="选择实验条件" data-gr-field="group">';
+      groups.forEach(function (g) { out += '<option value="' + esc(g.id) + '"' + (group && group.id === g.id ? ' selected' : '') + '>' + esc(groupLabel(g)) + '</option>'; });
+      out += '</select></label>';
+    } else out += '<span class="gr-condition">' + esc(label) + '</span>';
+    out += '<button type="button" class="gr-export" data-gr-action="export">导出记录</button></div>';
+    if (real) {
+      out += '<div class="gr-real-tools"><label class="gr-condition-input">距离 <input type="number" inputmode="decimal" min="5" max="1000" step="1" value="' + numberLabel(state.draft.distance * 100) + '" data-gr-field="distance" aria-label="新实验组的测量距离，厘米"> cm</label><label class="gr-condition-input">车质量 <input type="number" inputmode="decimal" min="1" max="10000" step="1" value="' + numberLabel(state.draft.cartMass * 1000) + '" data-gr-field="mass" aria-label="新实验组的小车质量，克"> g</label><button type="button" class="gr-new-group" data-gr-action="new-group">新实验组</button><button type="button" class="gr-primary gr-add-row" data-gr-action="add-row">＋ 一组垫圈</button></div>';
+    }
+    out += '<div class="gr-body"><section class="gr-chart-card" aria-label="用时比较图"><div class="gr-card-heading"><h3>同样的距离，用时怎样变？</h3><p>' + (real ? '实物测量' : '教学模型') + ' · ' + esc(label) + '</p></div><div class="gr-chart">' + chartHTML(rows, state.source) + '</div></section><section class="gr-table-card" aria-label="三次测量记录"><div class="gr-card-heading gr-table-heading"><h3>每组试3次</h3><span>用时 / 秒</span></div><div class="gr-table-scroll" tabindex="0" aria-label="实验数据表，可滚动">' + tableHTML(rows, state.source) + '</div><div class="gr-table-note">' + (real ? '未起动请勾选；不把它记成0秒。' : '同条件的理想模型，重复用时相同。') + '</div></section></div><div class="gr-footer"><strong>哪些数据能支持你的发现？</strong><span class="gr-live" role="status" aria-live="polite">' + esc(notice || (storageOK ? '' : '此浏览器无法自动保存，请导出记录。')) + '</span></div></div>';
+    element.innerHTML = out;
+  }
+  function actionTarget(target) {
+    while (target && target !== element) {
+      if (target.getAttribute && target.getAttribute('data-gr-action')) return target;
+      target = target.parentNode;
+    }
+    return null;
+  }
+  function explore() {
+    if (typeof options.onExplore === 'function') { options.onExplore(); return; }
+    var event = document.createEvent('Event');
+    event.initEvent('gravity-explore', true, true);
+    element.dispatchEvent(event);
+  }
+  function addRealRow() {
+    var group = activeGroup();
+    if (!group || group.source !== 'real') group = makeGroup('real', state.draft.distance, state.draft.cartMass);
+    var rows = groupRows(group);
+    if (rows.length >= MAX_ROWS) { say('本实验组已有8组垫圈，请另开新实验组。'); return; }
+    var n = rows.length ? Math.min(99, rows[rows.length - 1].n + 2) : 2;
+    var row = makeRow(group, n);
+    save(); render(); say('填入3次实测用时。');
+    var field = element.querySelector('[data-gr-field="n"][data-gr-id="' + row.id + '"]');
+    if (field) { field.focus(); field.select(); }
+  }
+  function clickHandler(event) {
+    var target = actionTarget(event.target);
+    if (!target) return;
+    var action = target.getAttribute('data-gr-action');
+    if (action === 'source') {
+      state.source = target.getAttribute('data-gr-source') === 'real' ? 'real' : 'simulation';
+      notice = '';
+      save(); render();
+    } else if (action === 'explore') explore();
+    else if (action === 'add-row') addRealRow();
+    else if (action === 'new-group') {
+      if (!validConditions(state.draft.distance, state.draft.cartMass)) { say('请填写有效的距离与小车质量。'); return; }
+      makeGroup('real', state.draft.distance, state.draft.cartMass);
+      save(); render(); say('已开新实验组，原有数据保留。');
+    } else if (action === 'delete-row') {
+      var id = target.getAttribute('data-gr-id');
+      state.rows = state.rows.filter(function (r) { return r.id !== id; });
+      save(); render(); say('已删除这一组记录。');
+    } else if (action === 'export') exportCSV();
+  }
+  function fieldHandler(event) {
+    var target = event.target;
+    if (!target || !target.getAttribute) return;
+    var field = target.getAttribute('data-gr-field');
+    if (!field) return;
+    var row = findRow(target.getAttribute('data-gr-id'));
+    var value;
+    if (field === 'time' && row) {
+      var raw = String(target.value).replace(/^\s+|\s+$/g, '').replace(/，/g, '.').replace(/,/g, '.');
+      var index = Number(target.getAttribute('data-gr-index'));
+      if (raw === '') value = null;
+      else if (raw === '未起动' || raw === '不动') value = 'stuck';
+      else {
+        value = Number(raw);
+        if (!finite(value) || value <= 0 || value > 3600) {
+          if (event.type === 'change') { target.value = finite(row.trials[index]) ? numberLabel(row.trials[index]) : ''; say('用时应大于0；未起动请勾选“未起动”。'); }
+          return;
+        }
+      }
+      row.trials[index] = value;
+      save(); renderEvidence(); say('');
+    } else if (event.type === 'change' && field === 'n' && row) {
+      value = Number(target.value);
+      if (!finite(value) || value < 0 || value > 99 || Math.floor(value) !== value) { target.value = row.n; say('垫圈数量请填0到99之间的整数。'); return; }
+      row.n = value;
+      save(); render();
+    } else if (event.type === 'change' && field === 'blocked' && row) {
+      row.blocked = !!target.checked;
+      save(); render();
+    } else if (event.type === 'change' && field === 'group') {
+      var group = findGroup(target.value);
+      if (!group || group.source !== state.source) return;
+      state.active[state.source] = group.id;
+      if (state.source === 'real') state.draft = { distance: group.distance, cartMass: group.cartMass };
+      save(); render();
+    } else if ((field === 'distance' || field === 'mass') && event.type === 'change') {
+      value = Number(target.value);
+      var distance = field === 'distance' ? value / 100 : state.draft.distance;
+      var mass = field === 'mass' ? value / 1000 : state.draft.cartMass;
+      if (!validConditions(distance, mass)) { render(); say('距离为5–1000cm，小车质量为1–10000g。'); return; }
+      state.draft = { distance: distance, cartMass: mass };
+      save(); say('新条件准备好后，点“新实验组”。原有数据不变。');
+    }
+  }
+  function csvCell(value) { return '"' + String(value === null || typeof value === 'undefined' ? '' : value).replace(/"/g, '""') + '"'; }
+  function csvText() {
+    var lines = [['来源', '实验条件', '垫圈数量(个)', '小车质量(g)', '测量距离(cm)', '第1次(秒)', '第2次(秒)', '第3次(秒)', '平均用时(秒)', '已测有效次数', '状态'].map(csvCell).join(',')];
+    state.rows.forEach(function (r) {
+      var g = findGroup(r.groupId);
+      if (!g) return;
+      var s = rowStats(r), values = r.blocked ? ['', '', ''] : r.trials.map(function (v) { return v === 'stuck' ? '未起动' : v === null ? '' : numberLabel(v); });
+      var status = s.status === 'complete' ? '3次完成' : s.status === 'partial' ? '已测' + s.count + '次的均值' : s.status === 'stuck' ? '未起动' : s.status === 'mixed' ? '有未起动，不求均值' : '待测';
+      lines.push([g.source === 'real' ? '实物记录' : '模拟记录', groupLabel(g), r.n, round(g.cartMass * 1000, 3), round(g.distance * 100, 3), values[0], values[1], values[2], s.mean === null ? '' : s.mean.toFixed(2), s.count, status].map(csvCell).join(','));
+    });
+    return '\uFEFF' + lines.join('\r\n');
+  }
+  function exportCSV() {
+    if (!state.rows.length) { say('有一组记录后就可以导出。'); return; }
+    var content = csvText();
+    var link = document.createElement('a');
+    var api = root.URL || root.webkitURL;
+    var url = null;
+    try { if (api && api.createObjectURL && root.Blob) url = api.createObjectURL(new root.Blob([content], { type: 'text/csv;charset=utf-8;' })); } catch (ignore) {}
+    link.href = url || 'data:text/csv;charset=utf-8,' + encodeURIComponent(content);
+    link.download = '用重力驱动小车_实验记录.csv';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    root.setTimeout(function () { if (link.parentNode) link.parentNode.removeChild(link); if (url && api.revokeObjectURL) api.revokeObjectURL(url); }, 1500);
+    say('已导出模拟与实物记录，CSV中标明了来源。');
+  }
+  function addTrial(trial) {
+    load();
+    trial = trial || {};
+    var n = Number(trial.n), distance = Number(trial.distance), mass = Number(trial.cartMass);
+    var source = trial.source === 'real' ? 'real' : 'simulation';
+    var moved = trial.moved !== false;
+    var time = Number(trial.time);
+    if (!finite(n) || n < 0 || n > 99 || Math.floor(n) !== n || !validConditions(distance, mass) || (moved && (!finite(time) || time <= 0 || time > 3600))) {
+      return { ok: false, reason: 'invalid', message: '无效的实验参数；未写入记录。' };
+    }
+    var group = null;
+    state.groups.forEach(function (g) {
+      if (g.source === source && Math.abs(g.distance - distance) < 1e-8 && Math.abs(g.cartMass - mass) < 1e-8) group = g;
+    });
+    if (!group) group = makeGroup(source, distance, mass);
+    var rows = groupRows(group), row = null;
+    rows.forEach(function (r) { if (r.n === n && !r.blocked && r.trials.indexOf(null) !== -1) row = r; });
+    if (!row && rows.length >= MAX_ROWS) {
+      say('本实验组已满8行，未覆盖旧记录。请在记录页删去不需要的行。');
+      return { ok: false, reason: 'full', message: '记录已满，未覆盖旧记录。' };
+    }
+    if (!row) row = makeRow(group, n);
+    var index = row.trials.indexOf(null);
+    row.trials[index] = moved ? time : 'stuck';
+    state.active[source] = group.id;
+    save(); render();
+    return { ok: true, rowId: row.id, trialIndex: index, count: rowStats(row).count, batch: row.batch };
+  }
+  function mount(id, settings) {
+    load();
+    if (settings) options = settings;
+    var node = typeof id === 'string' ? document.getElementById(id) : id;
+    if (!node) throw new Error('GravityRecords mount target missing');
+    if (element) {
+      element.removeEventListener('click', clickHandler, false);
+      element.removeEventListener('input', fieldHandler, false);
+      element.removeEventListener('change', fieldHandler, false);
+    }
+    element = node;
+    element.addEventListener('click', clickHandler, false);
+    element.addEventListener('input', fieldHandler, false);
+    element.addEventListener('change', fieldHandler, false);
+    render();
+    return api;
+  }
+  var api = {
+    mount: mount,
+    configure: function (settings) { options = settings || {}; },
+    addTrial: addTrial,
+    refresh: function () { load(); render(); },
+    getData: function () { load(); return JSON.parse(JSON.stringify(state)); },
+    getCSV: function () { load(); return csvText(); }
+  };
+  root.GravityRecords = api;
+}(typeof window !== 'undefined' ? window : this));
+
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var NS='http://www.w3.org/2000/svg', page='lab', raf=0, lastFrame=0, toastTimer=0, attempts=[], focusBeforeModal=null;
+var requestFrame=window.requestAnimationFrame||function(fn){return setTimeout(function(){fn(Date.now());},16);};
+var cancelFrame=window.cancelAnimationFrame||clearTimeout;
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function fixed(n){return Number(n).toFixed(2);}
+function toast(t){$('toast').textContent=t;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3000);}
+function setPressed(id,on){$(id).setAttribute('aria-pressed',on?'true':'false');}
+function makeState(name){return {name:name,n:name==='lab'?1:2,mass:.2,t:0,maxT:0,model:null,running:false,started:false,recorded:false,slow:false,forces:false,ghosts:false,cut:null,stopAt:10};}
+var lab=makeState('lab'), challenge=makeState('challenge');
+function parameters(s){return {n:s.n,cartMass:s.mass,washerMass:.01,g:9.8,startFriction:.14*s.mass/.2,rollingFriction:.10*s.mass/.2,distance:s.name==='lab'?.6:1,dropHeight:s.name==='lab'?.65:1.15,stopDistance:s.name==='lab'?.78:1.22,detachTime:s.cut};}
+function remake(s){s.model=GravityPhysics.create(parameters(s));}
+function reset(s){s.running=false;s.t=0;s.maxT=0;s.started=false;s.recorded=false;s.cut=null;remake(s);$(s.name+'-timeline').disabled=true;$(s.name+'-timeline').value=0;$(s.name+'-clock').textContent='0.00';$(s.name+'-start').textContent=s.name==='lab'?'释放小车':'试一试';if(s.name==='lab'){$('lab-status').textContent='不推小车，松手试试看。';$('lab-saved').textContent='只改变悬挂垫圈的数量';$('lab-run-label').textContent='计时器';$('lab-cut').disabled=true;}else{$('challenge-status').textContent='先选择方案，再测试。';$('challenge-result-card').classList.remove('success');}controls(s);draw(s);}
+function controls(s){$(s.name+'-n').textContent=s.n;$(s.name+'-minus').disabled=s.n<=0||s.running;$(s.name+'-plus').disabled=s.n>=12||s.running;if(s.name==='challenge'){$('challenge-mass').disabled=s.running;$('challenge-mass-value').textContent=Math.round(s.mass*1000);}else{$('washer-bin').setAttribute('aria-disabled',s.running?'true':'false');}}
+function changeCount(s,d){if(s.running)return;var n=Math.max(0,Math.min(12,s.n+d));if(n===s.n)return;s.n=n;reset(s);}
+function recordLab(s,st){if(s.recorded||s.cut!==null)return;s.recorded=true;var time=st.measurementTime;var result=GravityRecords.addTrial({n:s.n,cartMass:s.mass,distance:.6,time:time,moved:time!==null&&isFinite(time),source:'simulation'});$('lab-saved').textContent=result&&result.ok?'已加入模拟记录 · 每种情况至少3次':'记录已满，请先到记录页整理';}
+function recordChallenge(s,st){if(s.recorded)return;s.recorded=true;var time=st.measurementTime,good=time!==null&&isFinite(time)&&time<=3&&time>=2.85;var item={n:s.n,mass:Math.round(s.mass*1000),time:time===null||!isFinite(time)?null:time,good:good};attempts.unshift(item);if(attempts.length>40)attempts.pop();try{localStorage.setItem('gravity-challenge-v1',JSON.stringify(attempts));}catch(e){}renderAttempts();$('challenge-result-card').classList.toggle('success',good);if(time===null||!isFinite(time))$('challenge-status').textContent='这次没有到达终点。试着调整方案。';else if(good)$('challenge-status').textContent='精准到站！距3秒只差 '+fixed(3-time)+' 秒。';else if(time>3)$('challenge-status').textContent='晚到 '+fixed(time-3)+' 秒。怎样稍快一点？';else $('challenge-status').textContent='提前 '+fixed(3-time)+' 秒。怎样更接近3秒？';}
+function start(s){if(s.running){s.running=false;$(s.name+'-start').textContent='继续';controls(s);return;}var st=s.model.stateAt(s.t);if(s.started&&(st.finished||!s.model.summary.canStart))reset(s);s.started=true;s.running=true;$(s.name+'-start').textContent='暂停';$(s.name+'-timeline').disabled=false;controls(s);var cur=s.model.stateAt(s.t);if(!s.model.summary.canStart){s.running=false;s.maxT=2;s.t=0;$(s.name+'-start').textContent='再试一次';if(s.name==='lab'){$('lab-status').textContent=s.n===0?'还没有挂上垫圈。':'小车没有起动。可以再加一个试试。';$('lab-run-label').textContent='未起动';recordLab(s,cur);}else recordChallenge(s,cur);controls(s);draw(s);return;}if(s.name==='lab'){$('lab-status').textContent='松手释放，正在观察。';$('lab-cut').disabled=false;}else $('challenge-status').textContent='正在测试你的方案…';kick();}
+function kick(){if(!raf){lastFrame=0;raf=requestFrame(tick);}}
+function tick(now){raf=0;var dt=lastFrame?Math.min((now-lastFrame)/1000,.07):0;lastFrame=now;var states=[lab,challenge],any=false;for(var i=0;i<states.length;i++){var s=states[i];if(!s.running)continue;s.t+=dt*(s.slow?.25:1);s.maxT=Math.max(s.maxT,s.t);var st=s.model.stateAt(s.t);if(st.arrived&&!s.recorded){if(s.name==='lab'){recordLab(s,st);$('lab-status').textContent=s.cut===null?'计时结束，小车继续运动。':'已松开绳子，本次用于观察。';$('lab-run-label').textContent='计时结束';}else recordChallenge(s,st);}if(st.finished||s.t>25){s.running=false;$(s.name+'-start').textContent='再试一次';if(s.name==='lab'){$('lab-cut').disabled=true;if(!s.recorded&&s.cut===null){recordLab(s,st);$('lab-status').textContent='小车停在终点前。';}else if(s.cut!==null)$('lab-status').textContent='绳子松开后，小车滑行并逐渐停下。';else $('lab-status').textContent=st.phase==='bumper'?'小车到达挡车器，实验结束。':'小车滑行后停下，实验结束。';}else if(!s.recorded)recordChallenge(s,st);controls(s);}draw(s);if(s.running)any=true;}if(any)raf=requestFrame(tick);else lastFrame=0;}
+function svgText(x,y,t,size,fill,anchor,extra){return '<text x="'+x+'" y="'+y+'" font-size="'+(size||26)+'" fill="'+(fill||'#162d46')+'" text-anchor="'+(anchor||'start')+'" '+(extra||'')+'>'+esc(t)+'</text>';}
+function cartArt(x,y,mass,opacity,angle,id){var load=Math.max(0,Math.round((mass-.2)*1000));var out='<g transform="translate('+x+' '+y+')" opacity="'+opacity+'">';out+='<ellipse cx="0" cy="12" rx="84" ry="9" fill="#18364b" opacity=".07"/>';out+='<rect x="-70" y="-54" width="140" height="35" rx="8" fill="url(#'+id+'-cart)" stroke="#1d59a8" stroke-width="2.5"/><path d="M-64 -54l12-18H53l13 18" fill="#79aafd" stroke="#1d59a8" stroke-width="2.5"/><path d="M-50 -69H43" stroke="#c6dcff" stroke-width="3"/><rect x="-41" y="-48" width="82" height="18" rx="4" fill="#e4efff"/>'+svgText(0,-34,'GRAVITY',11,'#205594','middle','font-weight="700" letter-spacing="2"');for(var w=0;w<2;w++){var wx=w?-46:46;out+='<g transform="translate('+wx+' -18) rotate('+angle+')"><circle r="18" fill="#243b50"/><circle r="11" fill="#c1cfdb"/><path d="M-8 0H8M0-8V8" stroke="#5c748d" stroke-width="2.5"/><circle r="4" fill="#536a80"/></g>';}out+='<circle cx="72" cy="-44" r="5" fill="#a3bbd4" stroke="#496884" stroke-width="2"/>';if(load>0){out+='<rect x="-38" y="-108" width="76" height="35" rx="4" fill="#f0bd70" stroke="#b67e3d" stroke-width="2"/><path d="M-3-107v34" stroke="#d99541" stroke-width="8"/>'+svgText(0,-84,load+'g',17,'#795020','middle','font-weight="700"');}return out+'</g>';}
+function arrow(x1,y1,x2,y2,color,label,tx,ty){return '<path d="M'+x1+' '+y1+'L'+x2+' '+y2+'" stroke="'+color+'" stroke-width="6" stroke-linecap="round"/><path d="M'+x2+' '+y2+'l'+(x1===x2?'-9 -15':'-15 -9')+'m'+(x1===x2?'9 15':'15 9')+'l'+(x1===x2?'9 -15':'-15 9')+'" fill="none" stroke="'+color+'" stroke-width="6" stroke-linecap="round"/>'+svgText(tx,ty,label,25,color,'middle','font-weight="700"');}
+function buildScene(s,st){var id=s.name,scale=id==='lab'?600:370,startX=160,trackY=210,cartX=startX+st.x*scale,lineX=startX+70,endX=startX+70+(id==='lab'?.6:1)*scale,stopX=startX+(id==='lab'?.78:1.22)*scale,wy=270+st.weightY*scale,drop=id==='lab'?.65:1.15,floor=280+drop*scale;var h='';h+='<defs><linearGradient id="'+id+'-cart" x2="0" y2="1"><stop stop-color="#4b8df5"/><stop offset="1" stop-color="#2368d9"/></linearGradient><linearGradient id="'+id+'-metal" x2="0" y2="1"><stop stop-color="#edf2f7"/><stop offset=".5" stop-color="#b7c4d3"/><stop offset="1" stop-color="#8295aa"/></linearGradient><pattern id="'+id+'-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ebf0f5" stroke-width="1"/></pattern></defs>';
+h+='<rect x="40" y="40" width="980" height="650" rx="20" fill="url(#'+id+'-grid)"/>';
+h+='<path d="M60 '+trackY+'H795v28H60Z" fill="#e0d5bd" stroke="#b3a58c" stroke-width="2"/><path d="M60 '+(trackY+9)+'H795" stroke="#f6efdf" stroke-width="5"/><rect x="85" y="238" width="22" height="'+(floor-238)+'" rx="3" fill="#d6dfe7"/><rect x="728" y="238" width="22" height="'+(floor-238)+'" rx="3" fill="#d6dfe7"/><path d="M65 '+floor+'H1010" stroke="#c2cbd5" stroke-width="3"/>';
+h+='<path d="M795 238v-33h14" stroke="#7e92a6" stroke-width="10" fill="none"/><circle cx="800" cy="186" r="22" fill="#d3e0eb" stroke="#758da3" stroke-width="3"/><circle cx="800" cy="186" r="15" fill="#f8fafc" stroke="#9cafbf" stroke-width="2"/><g transform="rotate('+st.x*scale*2.6+' 800 186)"><path d="M786 186h28m-14-14v28" stroke="#9cafbf" stroke-width="3"/></g><circle cx="800" cy="186" r="4" fill="#67839e"/>';
+if(st.ropeTaut){h+='<path d="M'+(cartX+72)+' 166H800A20 20 0 0 1 820 186V'+(wy-72)+'" fill="none" stroke="#c98739" stroke-width="4.5"/>';}else if(s.cut!==null){h+='<path d="M'+(cartX+72)+' 166q14 15 24 4" fill="none" stroke="#c98739" stroke-width="4"/><path d="M'+Math.max(cartX+125,770)+' 215Q780 190 800 166A20 20 0 0 1 820 186V'+(wy-72)+'" fill="none" stroke="#c98739" stroke-width="4"/>';}else{h+='<path d="M'+(cartX+72)+' 166Q'+((cartX+72+790)/2)+' 235 800 166A20 20 0 0 1 820 186Q850 '+(wy-105)+' 820 '+(wy-72)+'" fill="none" stroke="#c98739" stroke-width="4"/>';}
+h+='<path d="M'+lineX+' 120v116" stroke="#7ba6d7" stroke-width="2" stroke-dasharray="5 6"/><path d="M'+endX+' 108v128" stroke="#ea9c3e" stroke-width="3" stroke-dasharray="7 7"/>'+svgText(lineX,70,'起点',24,'#597895','middle')+svgText(endX,70,'计时线',24,'#b77425','middle');
+h+='<path d="M'+lineX+' 270H'+endX+'M'+lineX+' 261v18M'+endX+' 261v18" stroke="#657f98" stroke-width="2"/>'+svgText((lineX+endX)/2,307,id==='lab'?'相同距离 60厘米':'挑战距离 1米',25,'#506c87','middle');
+h+='<path d="M'+(stopX+86)+' 210v-45h13v45" fill="#71879b"/><rect x="'+(stopX+70)+'" y="174" width="16" height="22" rx="4" fill="#e7a75a"/>'+svgText(stopX+80,264,'挡车器',20,'#72879a','middle');
+if(s.ghosts&&s.started){var interval=.2,max=Math.min(s.t,st.measurementTime||s.t),points=[],j;for(j=0;j<=max+.00001;j+=interval){var old=s.model.stateAt(j);if(old.x>0||j===0)points.push({x:startX+old.x*scale,t:j});if(points.length>=24)break;}for(j=0;j<points.length;j++){h+='<circle cx="'+points[j].x+'" cy="339" r="5" fill="#3874d6" opacity=".75"/>';if(j>0)h+='<path d="M'+points[j-1].x+' 339H'+points[j].x+'" stroke="#8fb2e5" stroke-width="2"/>';}h+=svgText(150,382,'● 每隔0.2秒留下一个位置',24,'#4470a4');}
+h+=window.GravityArt.cart(cartX,trackY,s.mass,1,st.x*scale/18*180/Math.PI,id);
+h+='<g id="'+id+'-hanger" class="interactive" role="button" tabindex="0" aria-label="点击悬挂垫圈可取下一个"><rect x="772" y="'+(wy-90)+'" width="97" height="112" fill="transparent"/><path d="M820 '+(wy-72)+'v58q0 8 9 8" fill="none" stroke="#758a9d" stroke-width="4"/>';
+for(var k=0;k<s.n;k++){var yy=wy-k*5;h+='<path d="M793 '+yy+'v5a27 9 0 0 0 54 0v-5" fill="#8f9fb1" stroke="#6c8097" stroke-width="1"/><ellipse cx="820" cy="'+yy+'" rx="27" ry="9" fill="url(#'+id+'-metal)" stroke="#748a9f" stroke-width="1.5"/><ellipse cx="820" cy="'+yy+'" rx="9" ry="3" fill="#fff" stroke="#8a9dae"/>';}
+h+='</g>';
+h+=svgText(883,wy-10,s.n+'个',29,'#314d68','start','font-weight="700"');
+var traveled=Math.round(st.x*100),fallen=Math.round(st.weightY*100);h+='<g>'+svgText(150,453,'小车前进',24,'#6d8194')+svgText(150,500,traveled+'',49,'#2769cf','start','font-weight="700"')+svgText(260,497,'厘米',24,'#6d8194')+svgText(370,453,'垫圈下落',24,'#6d8194')+svgText(370,500,fallen+'',49,'#d48831','start','font-weight="700"')+svgText(480,497,'厘米',24,'#6d8194')+'</g>';
+if(s.forces){if(st.tension>.0001)h+=arrow(cartX+4,trackY-82,cartX+100,trackY-82,'#2469d6','绳子拉力',cartX+50,trackY-103);if(s.n>0)h+=arrow(930,wy-25,930,Math.min(wy+75,714),'#d5882a','重力',985,wy+30);h+=svgText(150,548,'只显示与驱动相关的部分力',21,'#8293a3');}
+if(s.started&&(st.grounded||s.cut!==null))h+=svgText(150,596,s.cut!==null?'绳子已松开，观察小车的变化':'垫圈已落地，绳子松弛',25,'#50718b');
+if(!s.started)h+=svgText(150,595,'准备好，就松手释放。',25,'#8092a3');
+if(id==='challenge')h+=svgText(908,80,'下落空间',21,'#8092a3','middle')+svgText(908,112,'115厘米',24,'#536f88','middle');
+return h;}
+window.GravityArt={cart:cartArt,scene:buildScene};
+function draw(s){if(!s.model)return;var st=s.model.stateAt(s.t);$(s.name+'-stage').innerHTML=window.GravityArt.scene(s,st);var tm=st.arrived&&st.measurementTime!==null?st.measurementTime:s.t;$(s.name+'-clock').textContent=fixed(tm);$(s.name+'-progress').textContent=fixed(s.t)+' 秒';$(s.name+'-timeline').value=s.maxT>0?Math.round(s.t/s.maxT*1000):0;if(s.name==='lab')$('lab-cut').disabled=!s.running||!st.ropeTaut||st.arrived||s.cut!==null;}
+function renderAttempts(){$('attempt-count').textContent=attempts.length;var h='';for(var i=0;i<Math.min(attempts.length,8);i++){var a=attempts[i];h+='<div class="attempt-line'+(a.good?' good':'')+'"><span>'+a.n+'个 · '+a.mass+'克</span><strong>'+(a.time===null?'未到达':fixed(a.time)+'秒')+'</strong></div>';}if(!h)h='<div class="attempt-empty">每次结果都会留下来。<br>比较后，再改一个条件。</div>';$('attempt-list').innerHTML=h;}
+function switchPage(target){lab.running=false;challenge.running=false;var list=['lab','records','challenge'];for(var i=0;i<list.length;i++){var n=list[i];$('page-'+n).hidden=n!==target;$('tab-'+n).classList.toggle('active',n===target);if(n===target)$('tab-'+n).setAttribute('aria-current','page');else $('tab-'+n).removeAttribute('aria-current');}page=target;[lab,challenge].forEach(function(s){$(s.name+'-start').textContent=s.started?'继续':s.name==='lab'?'释放小车':'试一试';controls(s);});if(target==='records')GravityRecords.refresh();else draw(target==='lab'?lab:challenge);}
+function bindState(s){var id=s.name;$(id+'-minus').onclick=function(){changeCount(s,-1);};$(id+'-plus').onclick=function(){changeCount(s,1);};$(id+'-start').onclick=function(){start(s);};$(id+'-reset').onclick=function(){reset(s);};$(id+'-slow').onclick=function(){s.slow=!s.slow;setPressed(id+'-slow',s.slow);};$(id+'-ghosts').onclick=function(){s.ghosts=!s.ghosts;setPressed(id+'-ghosts',s.ghosts);draw(s);};$(id+'-timeline').oninput=function(){if(!s.started)return;s.running=false;$(id+'-start').textContent='继续';s.t=s.maxT*this.value/1000;controls(s);draw(s);};$(id+'-stage').addEventListener('click',function(e){var t=e.target;while(t&&t!==this){if(t.id===id+'-hanger'){changeCount(s,-1);return;}t=t.parentNode;}});$(id+'-stage').addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.id===id+'-hanger'){e.preventDefault();changeCount(s,-1);}});}
+GravityRecords.mount('records-root',{onExplore:function(){switchPage('lab');}});
+bindState(lab);bindState(challenge);reset(lab);reset(challenge);
+$('lab-forces').onclick=function(){lab.forces=!lab.forces;setPressed('lab-forces',lab.forces);draw(lab);};
+$('lab-cut').onclick=function(){if(!lab.running)return;lab.cut=lab.t;lab.recorded=true;remake(lab);$('lab-status').textContent='绳子松开了，小车会怎样？';$('lab-saved').textContent='本次为松绳观察，不加入同条件比较';$('lab-cut').disabled=true;draw(lab);};
+$('challenge-mass').oninput=function(){challenge.mass=Number(this.value)/1000;reset(challenge);};
+Array.prototype.forEach.call(document.querySelectorAll('[data-page]'),function(b){b.onclick=function(){switchPage(b.getAttribute('data-page'));};});$('to-records').onclick=function(){switchPage('records');};
+var bin=$('washer-bin'),drag=null,suppressClick=false;
+function clientPoint(e){return e.touches&&e.touches.length?{x:e.touches[0].clientX,y:e.touches[0].clientY}:{x:e.clientX,y:e.clientY};}
+function dragStart(e){if(lab.running)return;var p=clientPoint(e);drag={x:p.x,y:p.y,moved:false,ghost:null};if(e.pointerId!==undefined&&bin.setPointerCapture){try{bin.setPointerCapture(e.pointerId);}catch(ignore){}}}
+function dragMove(e){if(!drag)return;var p=clientPoint(e);if(Math.abs(p.x-drag.x)+Math.abs(p.y-drag.y)>8)drag.moved=true;if(!drag.moved)return;e.preventDefault();if(!drag.ghost){drag.ghost=document.createElement('div');drag.ghost.className='drag-ghost';document.body.appendChild(drag.ghost);}drag.ghost.style.left=(p.x-22)+'px';drag.ghost.style.top=(p.y-22)+'px';drag.last=p;var h=$('lab-hanger');if(h)h.classList.add('drop-ready');}
+function dragEnd(e){if(!drag)return;var d=drag;drag=null;if(d.ghost&&d.ghost.parentNode)d.ghost.parentNode.removeChild(d.ghost);var h=$('lab-hanger');if(h)h.classList.remove('drop-ready');if(d.moved){suppressClick=true;setTimeout(function(){suppressClick=false;},400);var p=d.last,rect=h?h.getBoundingClientRect():null;if(p&&rect&&p.x>=rect.left-45&&p.x<=rect.right+45&&p.y>=rect.top-45&&p.y<=rect.bottom+45)changeCount(lab,1);else toast('把垫圈放到右侧挂钩上');}}
+if(window.PointerEvent){bin.addEventListener('pointerdown',dragStart);bin.addEventListener('pointermove',dragMove);bin.addEventListener('pointerup',dragEnd);bin.addEventListener('pointercancel',dragEnd);}else{bin.addEventListener('mousedown',dragStart);window.addEventListener('mousemove',dragMove);window.addEventListener('mouseup',dragEnd);bin.addEventListener('touchstart',dragStart,{passive:true});bin.addEventListener('touchmove',dragMove,{passive:false});bin.addEventListener('touchend',dragEnd);}
+bin.onclick=function(){if(!suppressClick)changeCount(lab,1);};bin.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();changeCount(lab,1);}};
+function closeNotes(){$('notes-modal').hidden=true;if(focusBeforeModal)focusBeforeModal.focus();}
+$('teacher-notes').onclick=function(){focusBeforeModal=document.activeElement;[lab,challenge].forEach(function(s){if(s.running){s.running=false;$(s.name+'-start').textContent='继续';controls(s);}});$('notes-modal').hidden=false;$('notes-close').focus();};$('notes-close').onclick=closeNotes;$('notes-modal').onclick=function(e){if(e.target===this)closeNotes();};document.addEventListener('keydown',function(e){if(!$('notes-modal').hidden){if(e.key==='Escape')closeNotes();if(e.key==='Tab'){e.preventDefault();$('notes-close').focus();}}});
+$('fullscreen').onclick=function(){var d=document,el=d.documentElement,fn;if(d.fullscreenElement||d.webkitFullscreenElement){fn=d.exitFullscreen||d.webkitExitFullscreen;if(fn)fn.call(d);}else{fn=el.requestFullscreen||el.webkitRequestFullscreen;if(fn){try{var promise=fn.call(el);if(promise&&promise.catch)promise.catch(function(){toast('可使用浏览器全屏或横屏观看');});}catch(e){toast('可使用浏览器全屏或横屏观看');}}else toast('可使用浏览器全屏或横屏观看');}};
+document.addEventListener('visibilitychange',function(){if(document.hidden){[lab,challenge].forEach(function(s){if(s.running){s.running=false;$(s.name+'-start').textContent='继续';controls(s);}});}});
+try{var loaded=JSON.parse(localStorage.getItem('gravity-challenge-v1')||'[]');if(Array.isArray(loaded))attempts=loaded.filter(function(a){return a&&typeof a.n==='number'&&a.n>=0&&a.n<=12&&typeof a.mass==='number'&&(a.time===null||typeof a.time==='number'&&isFinite(a.time));}).slice(0,40);}catch(e){}renderAttempts();
+window.GravityApp={version:'1.0.0',showPage:switchPage};
+}());
+</script>
+</body>
+</html>
