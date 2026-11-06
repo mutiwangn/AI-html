@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   root.AIHTML_LEVELS = {
+    '五上4.2火山喷发对地表的作用': { level: 1, note: 'SVG 地下透视、同坐标地形比较与触控测高；单文件离线，SVG 证据图' },
     '五上3.7评价月球小车': { level: 1, note: 'SVG 同步模型与触控，实测数据图；本地视频需浏览器支持，证据图导出使用可选 Canvas' },
     '五上3.6制作月球小车': { level: 1, note: 'SVG 三视图与触控设计、预算质量对照、齿轮传动透视；单文件离线' },
     "五上3.5摩擦力的比较": { level: 1, note: "SVG 测力计与触控拖拽、控制变量、实测数据图；PNG 导出使用可选 Canvas" },

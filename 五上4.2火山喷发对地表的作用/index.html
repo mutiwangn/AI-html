@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#142c39">
+<meta name="description" content="五上4.2火山喷发对地表的作用：地下剖面与岩浆追踪、等量熔岩流动比较、多次堆积地层和同位置测高。单体离线互动模型。">
+<meta name="aihtml-compatibility" content="T1">
+<title>火山喷发对地表的作用 · 透视与地形实验室</title>
+<style>
+:root{--paper:#f4f2eb;--ink:#18313b;--muted:#63747a;--line:#d9e0df;--accent:#bf4e25;--hot:#ffbb54;--teal:#167e88;--panel:#fff;--radius:12px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:var(--paper)}button,input,select{font:inherit}button{cursor:pointer;min-height:44px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--ink);padding:9px 15px;font-weight:650;transition:background .15s,transform .15s}button:hover{background:#f0f4f2}button:active{transform:translateY(1px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none}button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #1696a4;outline-offset:3px}button.primary{color:#fff;background:var(--accent);border-color:var(--accent)}button.primary:hover{background:#a74120}button.ghost{background:transparent}button[aria-pressed="true"]{color:#fff;background:var(--ink);border-color:var(--ink)}.hidden,[hidden]{display:none!important}
+.app{height:100%;height:100dvh;display:flex;flex-direction:column;max-width:2100px;margin:auto;padding:0 24px}header{height:82px;min-height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:43px;height:43px;flex-shrink:0}.brand small{font-size:12px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:4px}h1{font-size:clamp(18px,1.6vw,27px);margin:0;letter-spacing:.02em;font-weight:750}.topnav{display:flex;gap:6px;background:#e7e9e2;padding:5px;border-radius:10px;flex-shrink:0}.topnav button{border:0;background:transparent;padding:10px 18px;font-size:17px}.topnav button[aria-selected="true"]{background:#fff;box-shadow:0 2px 7px #243c3810}.topnav b{color:var(--accent);font-size:13px;margin-right:7px}.header-actions{display:flex;gap:6px}.iconbtn{width:44px;padding:8px;display:grid;place-items:center}.iconbtn svg{width:21px;height:21px}.view{flex:1;min-height:0;display:flex;flex-direction:column;padding:17px 0 14px}.question{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:48px;margin-bottom:12px}.question h2{font-size:clamp(21px,1.85vw,30px);margin:0;font-weight:730}.question p{font-size:15px;color:var(--muted);margin:5px 0 0}.model-label{font-size:13px;background:#e7ebe6;border:1px solid #d5dfd7;padding:7px 10px;border-radius:6px;white-space:nowrap}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:16px}.maincol{display:flex;flex-direction:column;min-height:0;min-width:0;gap:10px}.stage{position:relative;flex:1;min-height:220px;border-radius:var(--radius);overflow:hidden;background:#dcecee;border:1px solid #ccd9d9}.stage>svg{display:block;width:100%;height:100%;touch-action:none}.stage-tools{position:absolute;top:14px;left:14px;display:flex;gap:8px;z-index:2}.stage-tools button{min-height:40px;font-size:14px;padding:7px 12px;box-shadow:0 2px 10px #1c354017}.stage-chip{position:absolute;top:16px;right:18px;font-size:13px;color:#4a646d;background:#ffffffe0;padding:6px 10px;border-radius:5px;pointer-events:none}.legend{position:absolute;bottom:14px;left:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;font-size:13px;color:#e6e7e2}.legend span{display:flex;align-items:center;gap:6px}.swatch{width:13px;height:13px;border-radius:3px;display:inline-block}.tiny{font-size:12px;color:var(--muted)}.aside{display:flex;flex-direction:column;min-height:0;gap:12px}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:19px}.card h3{font-size:18px;margin:0 0 12px}.card p{font-size:16px;line-height:1.6;margin:8px 0 0}.eyebrow{font-size:12px;color:var(--muted);letter-spacing:.13em;margin-bottom:8px}.lens-card{flex:1;min-height:0;display:flex;flex-direction:column}.lens-card>svg{width:100%;max-height:220px;min-height:100px;flex:1;display:block}.lens-name{font-size:24px;font-weight:750;display:flex;align-items:center;gap:8px}.live-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#d76b35}.lens-caption{font-size:16px!important;line-height:1.65!important;min-height:70px}.note{border-left:3px solid #e1ba86;padding-left:12px;color:#566b72;font-size:14px;line-height:1.65}.utility-row{display:flex;gap:8px}.utility-row button{flex:1;font-size:14px;padding:8px}.timeline{background:white;border:1px solid var(--line);border-radius:10px;padding:12px 15px;display:grid;grid-template-columns:112px 1fr 74px;gap:14px;align-items:center}.timeline .primary{height:48px;font-size:18px;padding:8px}.rangebox{min-width:0}input[type=range]{width:100%;accent-color:var(--accent);height:28px;cursor:pointer;touch-action:pan-y;margin:0;vertical-align:middle}input[type=range]::-webkit-slider-thumb{width:24px;height:24px}input[type=range]::-moz-range-thumb{width:23px;height:23px}.phase-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;padding-top:2px}.speed-btn{padding:8px 6px;font-size:14px;min-height:44px}.footnote{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:12px;padding:0 2px;min-height:16px}.mutiw{letter-spacing:2px;opacity:.6}.segmented{display:flex;padding:4px;background:#eef1ec;border-radius:8px;gap:4px}.segmented button{flex:1;min-height:39px;padding:6px;font-size:15px;border:0;background:transparent}.segmented button[aria-pressed=true]{background:#203c48;color:white}.controls-card{padding:17px 18px}.control-head{display:flex;justify-content:space-between;align-items:center;font-size:17px;font-weight:700;margin:18px 0 7px}.control-head output{font-size:14px;color:var(--teal);background:#e9f2ef;padding:3px 7px;border-radius:4px}.range-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:0 0 13px}.fixed-amount{display:flex;align-items:center;gap:9px;border-top:1px solid #e6e9e4;padding-top:11px;font-size:14px}.fixed-amount svg{width:22px;height:22px;color:var(--accent)}.measure{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}.measure h3{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.measure h3 span{font-weight:500;font-size:12px;color:var(--muted)}.data-row{display:flex;align-items:baseline;justify-content:space-between;font-size:15px;min-height:35px}.data-row strong{font-size:25px;font-variant-numeric:tabular-nums;font-weight:720}.data-row small{font-size:13px;margin-left:5px}.change-row{color:var(--accent);border-top:1px solid var(--line);padding-top:9px;margin-top:5px}.compare-line{color:var(--teal)}.evidence-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.evidence-actions button{font-size:14px;padding:9px 6px}.aside-foot{font-size:12px;color:var(--muted);line-height:1.5}.probe-help{display:none;position:absolute;bottom:14px;right:17px;background:#ffffffe0;border:1px solid #dce3de;color:#52696f;font-size:13px;padding:6px 10px;border-radius:5px;pointer-events:none}.layer-legend{color:var(--ink);background:#ffffffd9;border:1px solid #dbe3dd;padding:7px 10px;border-radius:5px;gap:9px;bottom:14px}.layer-legend span{gap:4px;font-size:12px}.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#173440;color:white;border-radius:8px;padding:12px 22px;font-size:15px;z-index:20;box-shadow:0 6px 30px #0002;max-width:90%;text-align:center}.modal-shell{position:fixed;inset:0;background:#102d37a6;backdrop-filter:blur(7px);z-index:10;display:grid;place-items:center;padding:26px}.modal{background:#f8f8f3;max-width:880px;width:100%;max-height:90vh;overflow:auto;border-radius:15px;padding:28px;box-shadow:0 20px 60px #0003}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:22px}.modal-head h2{font-size:25px;margin:0}.modal h3{font-size:19px;margin:22px 0 8px}.modal p,.modal li{line-height:1.8;font-size:16px}.modal a{color:#126e79}.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}.modal table{width:100%;border-collapse:collapse;font-size:15px}.modal td,.modal th{text-align:left;padding:12px 9px;border-bottom:1px solid #dce3dc;line-height:1.6}.modal th{background:#ecf0e9}.earth-diagram{background:#e5edf0;border-radius:10px;display:flex;flex-direction:column;justify-content:center;padding:10px}.earth-diagram svg{width:100%;height:auto}.source-list{font-size:13px!important;color:var(--muted)}.state-readout{position:absolute;left:20px;top:70px;font-size:16px;color:#244c5a;pointer-events:none}.counter{font-size:15px;font-weight:650;color:#204654}.compare-summary{font-size:13px;padding:8px 10px;background:#e9f3f2;color:#176f79;border-radius:6px;line-height:1.55}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1600px){.app{padding:0 36px}.workspace{grid-template-columns:minmax(0,1fr) 330px}.card{padding:22px}.card p{font-size:18px}.question p{font-size:17px}.timeline{padding:14px 20px}.footnote,.aside-foot{font-size:13px}header{height:91px;min-height:91px}.view{padding-top:20px}}
+@media(max-height:760px) and (min-width:950px){header{height:68px;min-height:68px}.view{padding:11px 0 8px}.question{margin-bottom:8px;min-height:38px}.question h2{font-size:22px}.question p{font-size:13px;margin-top:3px}.workspace{gap:12px;grid-template-columns:minmax(0,1fr) 265px}.aside{gap:8px}.card{padding:13px 16px}.lens-card>svg{max-height:155px}.lens-caption{font-size:14px!important;min-height:55px}.lens-name{font-size:21px}.card h3{font-size:16px;margin-bottom:8px}.timeline{padding:7px 12px;gap:10px}.controls-card .control-head{margin-top:10px}.data-row{min-height:28px;font-size:14px}.data-row strong{font-size:22px}.range-ends{margin-bottom:9px}.fixed-amount{padding-top:7px}.aside-foot{font-size:11px}.stage{min-height:180px}.utility-row button{min-height:39px}.footnote{font-size:11px}.header-actions button{min-height:40px;width:40px}.topnav button{font-size:15px;padding:8px 12px}}
+@media(max-width:1100px){.app{padding:0 16px}header{gap:10px}.logo{width:35px;height:35px}.brand small{font-size:10px;letter-spacing:1px}.brand{gap:8px}h1{font-size:19px}.topnav button{padding:9px 10px;font-size:15px}.header-actions{gap:4px}.workspace{grid-template-columns:minmax(0,1fr) 246px;gap:12px}.card{padding:15px}.lens-caption{font-size:15px!important}.model-label{font-size:11px}.question h2{font-size:22px}.footnote{font-size:11px}.stage-tools{top:10px;left:10px}.stage-chip{top:12px;right:10px;font-size:11px}.layer-legend{left:12px;gap:6px}.probe-help{font-size:11px;right:12px}.stage-tools button{font-size:13px}.modal{padding:23px}}
+@media(max-width:800px) and (orientation:portrait){.app{height:auto;min-height:100dvh;padding:0 12px}header{height:auto;min-height:100px;padding:12px 0;display:grid;grid-template-columns:1fr auto;gap:10px}.topnav{grid-row:2;grid-column:1/-1;justify-content:center}.topnav button{flex:1}.brand h1{font-size:18px}.brand small{font-size:10px}.logo{width:33px}.view{min-height:0;padding-top:13px}.question{margin-bottom:10px}.question h2{font-size:20px}.question p{font-size:12px}.model-label{display:none}.workspace{display:flex;flex-direction:column;gap:12px}.maincol{min-height:0;gap:8px}.stage{flex:none;height:49vw;min-height:275px;max-height:470px}.stage>svg{width:100%;height:100%}.aside{display:grid;grid-template-columns:1fr 1fr;gap:10px}.lens-card{display:grid;grid-template-columns:140px 1fr;gap:6px 12px;grid-column:1/-1}.lens-card .eyebrow{grid-column:2;margin:0}.lens-card>svg{grid-row:1/5;grid-column:1;width:140px;height:160px}.lens-name{font-size:21px}.lens-caption{font-size:15px!important;min-height:0;margin-top:0!important}.note{grid-column:1/-1;font-size:12px}.utility-row{grid-column:1/-1}.footnote{grid-column:1/-1}.controls-card,.measure{padding:15px}.evidence-actions{grid-column:1/-1}.aside-foot,.compare-summary{grid-column:1/-1}.timeline{padding:8px 10px;grid-template-columns:92px 1fr 62px;gap:8px}.timeline .primary{font-size:15px;min-height:44px;height:44px}.phase-labels{font-size:10px}.speed-btn{font-size:12px}.modal-shell{padding:14px}.modal{padding:20px;max-height:92vh}.modal-grid{grid-template-columns:1fr}.modal-head h2{font-size:22px}.earth-diagram svg{max-height:270px}.stage-chip{font-size:10px;padding:5px 7px}.stage-tools button{font-size:12px;min-height:35px;padding:6px 9px}.legend{font-size:11px;bottom:10px;left:11px;gap:9px}.probe-help{display:none}.layer-legend{font-size:10px;bottom:8px}.layer-legend span{font-size:10px}.state-readout{left:12px;top:57px;font-size:13px}.question p{max-width:90%}.control-head{font-size:15px}.fixed-amount{font-size:12px}.data-row{font-size:13px}.data-row strong{font-size:21px}.measure h3{font-size:16px}.counter{font-size:12px}.lens-card h3{margin:0}}
+@media(max-width:600px) and (orientation:landscape){.app{padding:0 10px}header{min-height:55px;height:55px}.brand small{display:none}h1{font-size:15px}.logo{display:none}.topnav button{font-size:12px;padding:6px}.topnav b{display:none}.workspace{grid-template-columns:minmax(0,1fr) 195px}.question{min-height:30px;margin-bottom:6px}.question h2{font-size:17px}.question p{display:none}.model-label{display:none}.card{padding:9px}.lens-card>svg{max-height:95px}.lens-caption{font-size:12px!important;min-height:0}.note{display:none}.timeline{grid-template-columns:80px 1fr 55px;padding:4px 7px;gap:6px}.timeline .primary{font-size:13px}.footnote{display:none}}
+
+@media(max-height:850px) and (min-width:801px){#view2 .aside{gap:8px}#view2 .controls-card{flex:none;padding:12px 15px}#view2 .control-head{margin:10px 0 2px}#view2 .range-ends{margin:0 0 5px}#view2 .fixed-amount{padding-top:7px;font-size:13px}#view2 .measure{min-height:180px;justify-content:center;padding:10px 15px}#view2 .measure h3{font-size:16px;margin-bottom:6px}#view2 .data-row{min-height:29px;font-size:14px}#view2 .data-row strong{font-size:23px}#terrainObservation{display:none}#view2 .aside>.aside-foot{display:none}#view2 .compare-summary{font-size:12px;padding:7px 9px}#view2 .evidence-actions button{min-height:42px;padding:7px 6px}}
+.download-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 19px;background:#bf4e25;color:white!important;border-radius:7px;font-weight:650;text-decoration:none}.export-preview{background:#f4f2eb;border:1px solid #d9e0df;border-radius:8px;overflow:hidden;margin-top:18px}.export-preview>svg{width:100%;height:auto;display:block}
+.timeline .primary{white-space:nowrap;padding:8px 5px}.question>div{flex:1}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brand"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="11" fill="#1c3944"/><path d="m6 36 12-17 7 3 6-9 13 23Z" fill="#b8c9c5"/><path d="m17 19 5 4 4-1 5-9 4 11-5-2-6 7Z" fill="#faac59"/><path d="m7 36 37 0" stroke="#f2d6a6" stroke-width="2"/><path d="m27 8 2-4m6 5 3-2" stroke="#f2ab60" stroke-width="2" stroke-linecap="round"/></svg><div><small>五年级上册 / 4.2 · 地球表面的变化</small><h1>火山喷发对地表的作用</h1></div></div>
+ <nav class="topnav" role="tablist" aria-label="探究视角"><button id="tab1" role="tab" aria-selected="true" aria-controls="view1"><b>01</b>透视火山</button><button id="tab2" role="tab" aria-selected="false" aria-controls="view2" tabindex="-1"><b>02</b>留下的地形</button></nav>
+ <div class="header-actions"><button id="helpBtn" class="iconbtn ghost" title="模型与资料" aria-label="模型与资料"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v1"/></svg></button><button id="fullBtn" class="iconbtn ghost" title="全屏" aria-label="全屏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></svg></button></div>
+</header>
+<section class="view" id="view1" role="tabpanel" aria-labelledby="tab1">
+ <div class="question"><div><h2>一份岩浆，怎样到达地表？</h2><p>剖开山体，跟着光点观察；随时暂停、回看。</p></div><span class="model-label">机制示意 · 不按比例</span></div>
+ <div class="workspace">
+  <div class="maincol">
+   <div class="stage" id="processStage">
+    <div class="stage-tools"><button id="cutBtn" aria-pressed="true">剖开山体</button><button id="earthBtn">地球内部 ↗</button></div><span class="stage-chip">地壳局部剖面</span>
+    <svg id="processSvg" viewBox="0 0 1000 610" role="group" aria-label="火山局部剖面，拖动发光追踪点可回看岩浆上升、喷出与冷却过程">
+    <defs>
+     <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#c5e1e5"/><stop offset="1" stop-color="#edf1df"/></linearGradient>
+     <linearGradient id="rock" x2="0" y2="1"><stop stop-color="#687f7c"/><stop offset=".25" stop-color="#67726c"/><stop offset="1" stop-color="#263e45"/></linearGradient>
+     <linearGradient id="cutRock" x2="0" y2="1"><stop stop-color="#a5977e"/><stop offset=".45" stop-color="#736e60"/><stop offset="1" stop-color="#35454a"/></linearGradient>
+     <radialGradient id="magma"><stop stop-color="#ffd065"/><stop offset=".5" stop-color="#f58a3c"/><stop offset="1" stop-color="#bb492b"/></radialGradient>
+     <linearGradient id="hotline" x2="0" y2="1"><stop stop-color="#ffdd7c"/><stop offset="1" stop-color="#f98639"/></linearGradient>
+     <filter id="softGlow"><feGaussianBlur stdDeviation="6"/></filter>
+     <pattern id="grain" patternUnits="userSpaceOnUse" width="55" height="41"><path d="m8 15 6 3m23 14 8-2M45 9l3 2" stroke="#e6ddbd" stroke-width="1.2" opacity=".16"/></pattern>
+     <path id="landform" d="M0 310 95 311 164 298 218 285 285 257 349 223 413 190 465 147 487 145 499 154 513 145 533 149 582 190 641 235 706 270 792 298 861 308 1000 314V610H0Z"/>
+     <clipPath id="landClip"><use href="#landform"/></clipPath>
+    </defs>
+    <rect width="1000" height="610" fill="url(#sky)"/>
+    <path d="M0 250 105 204 160 218 223 183 319 229 383 214 470 260 593 219 685 232 754 201 834 240 930 210 1000 250V350H0Z" fill="#9fb9b6" opacity=".44"/>
+    <path d="M0 290 135 256 231 282 344 257 460 286 590 271 720 286 828 256 1000 279V340H0Z" fill="#a6bab0" opacity=".55"/>
+    <g fill="#f6f7e9" opacity=".55"><ellipse cx="174" cy="120" rx="72" ry="13"/><ellipse cx="215" cy="111" rx="44" ry="17"/><ellipse cx="788" cy="98" rx="94" ry="12"/></g>
+    <use href="#landform" fill="url(#rock)"/>
+    <g id="exterior"><path d="M487 145 413 190 349 223 285 257 218 285 164 298 95 311 422 325 453 268Z" fill="#95a392" opacity=".65"/><path d="m533 149 49 41 59 45 65 35 86 28-160-17-73-63Z" fill="#364e50" opacity=".65"/><path d="M465 147 487 145 499 154 513 145 533 149" fill="none" stroke="#2b4449" stroke-width="7" stroke-linecap="round"/></g>
+    <g id="interior" clip-path="url(#landClip)">
+      <use href="#landform" fill="url(#cutRock)"/><use href="#landform" fill="url(#grain)"/>
+      <path d="M-10 337Q160 365 304 335T550 335T1010 351M-10 399Q170 418 338 389T650 397T1010 409M-10 474Q120 457 270 469T560 481T1010 471M-10 544Q161 538 306 550T585 551T1010 544" fill="none" stroke="#c3b297" stroke-width="15" opacity=".3"/>
+      <path d="m104 352 15 37-9 29 22 39m647-123-27 50 11 34-12 52m-442-186 16 49-13 32m543 68 16 21-8 28" fill="none" stroke="#33494b" stroke-width="3" opacity=".35"/>
+      <path d="M347 505C329 475 349 454 391 450C420 441 443 450 475 445C521 431 559 449 579 478C594 504 562 530 517 528C470 540 441 525 410 534C375 542 357 525 347 505Z" fill="#b45232" opacity=".5" filter="url(#softGlow)"/>
+      <path d="M347 505C329 475 349 454 391 450C420 441 443 450 475 445C521 431 559 449 579 478C594 504 562 530 517 528C470 540 441 525 410 534C375 542 357 525 347 505Z" fill="url(#magma)" stroke="#a75a3d" stroke-width="4"/>
+      <path d="m380 482 9-7 8 15-11 3m124-24 11-3 7 13-9 7m-86 24 9-9 10 13-7 7m94-17 10-6 4 10-8 5" fill="#f9bd68" stroke="#df8d46" stroke-width="2"/>
+      <path id="conduit" d="M461 473C458 433 483 410 479 374S487 316 498 285S484 231 495 205S505 172 501 150" fill="none" stroke="#45483e" stroke-width="33" stroke-linecap="round"/>
+      <path id="risingMagma" d="M461 473C458 433 483 410 479 374S487 316 498 285S484 231 495 205S505 172 501 150" fill="none" stroke="url(#hotline)" stroke-width="21" stroke-linecap="round"/>
+      <g id="risingBubbles" fill="#ffe7a6" fill-opacity=".7" stroke="#ffcf73" stroke-width="1.4"></g>
+      <g fill="#e2dec9" font-size="22" font-weight="600"><text x="73" y="405">固态围岩</text><text x="680" y="488">局部岩浆储集区</text></g><path d="m661 481-82 12" stroke="#e6d3b2" stroke-width="1.5" fill="none"/>
+    </g>
+    <path id="oldSurface1" d="M0 310 95 311 164 298 218 285 285 257 349 223 413 190 465 147 487 145 499 154 513 145 533 149 582 190 641 235 706 270 792 298 861 308 1000 314" fill="none" stroke="#eee9d2" stroke-width="2" stroke-dasharray="8 7" opacity=".72"/>
+    <path id="lavaLeft" d="M499 149 481 144 465 151 433 178 413 190 380 207 349 225 316 244 285 258 247 277 218 286" fill="none" stroke="#f99a43" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="lavaRight" d="M501 149 516 145 533 152 552 169 582 191 612 216 641 236 676 256 706 272 749 286 792 300 833 305" fill="none" stroke="#f99a43" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <g id="gasPuffs" fill="none" stroke="#eef4e9" stroke-width="2.5" opacity="0"><path d="M496 129c-18-25 13-32 0-54M515 125c9-17-9-26 6-43M480 124c-8-11-7-22-1-30"/></g>
+    <g id="flowLabel" opacity="0"><path d="m737 225-31 39" stroke="#a8512e" stroke-width="1.5"/><rect x="715" y="184" width="177" height="42" rx="7" fill="#fffaf0" fill-opacity=".94"/><text id="flowLabelText" x="803" y="212" text-anchor="middle" fill="#9e4725" font-size="20" font-weight="650">流到地表的熔岩</text></g>
+    <g id="trackingPoint" tabindex="0" role="slider" aria-label="拖动追踪点回看过程" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="cursor:grab"><circle r="24" fill="#ffe09d" opacity=".15"/><circle r="14" fill="none" stroke="#fff5cc" stroke-width="2.5"/><circle r="6" fill="#fff8dc"/><circle r="30" fill="transparent"/></g>
+    <g id="pointHint"><path d="m420 486-29-19" stroke="#fff1ce" stroke-width="1.4"/><text x="272" y="459" fill="#fff1ce" font-size="18">拖动光点</text></g>
+    <text x="25" y="588" fill="#e0dfcf" opacity=".77" font-size="14">局部剖面，未延伸到地核；尺寸与时间均经简化。</text>
+    </svg>
+   </div>
+   <div class="timeline"><button id="play1" class="primary">开始观察</button><div class="rangebox"><label class="sr-only" for="time1">喷发过程进度</label><input id="time1" type="range" min="0" max="1000" value="0"><div class="phase-labels"><span>地下</span><span>上升</span><span>喷出</span><span>冷却后</span></div></div><button id="slow1" class="speed-btn" aria-pressed="false">慢放</button></div>
+   <div class="footnote"><span>过程进度，不代表真实时长 · 拖动光点或进度条回看</span><span class="mutiw">mutiw</span></div>
+  </div>
+  <aside class="aside">
+   <div class="card lens-card"><div class="eyebrow">跟随同一份物质</div><div class="lens-name"><i class="live-dot"></i><span id="lensTitle">地下的岩浆</span></div>
+    <svg id="lensSvg" viewBox="0 0 250 210" role="img" aria-label="岩浆局部放大，随上升观察气体变化"><defs><radialGradient id="lensMagma"><stop stop-color="#f4a249"/><stop offset="1" stop-color="#c55a32"/></radialGradient><clipPath id="lensClip"><circle cx="125" cy="108" r="82"/></clipPath></defs><circle cx="125" cy="108" r="90" fill="#f2e7d1"/><circle id="lensRock" cx="125" cy="108" r="82" fill="url(#lensMagma)"/><g clip-path="url(#lensClip)"><path d="M39 135q40-30 71 0t102-17M37 69q38 26 89-3t87 18" fill="none" stroke="#ffe6a3" stroke-width="8" opacity=".16"/><g id="lensBubbles"></g><g id="crystals" fill="#f9d092" opacity=".8"><path d="m67 78 9-7 10 14-12 6M133 138l15-7 9 14-14 6M163 76l8-7 10 11-8 7"/></g></g><circle cx="125" cy="108" r="82" fill="none" stroke="#a66e4c" stroke-width="1.5"/><path d="M47 20h25M47 20v25M203 20h-25M203 20v25M47 196h25M47 196v-25M203 196h-25M203 196v-25" fill="none" stroke="#b4bcb2" stroke-width="1.5"/><text x="125" y="207" text-anchor="middle" fill="#71827d" font-size="11">气泡与晶体均为放大示意</text></svg>
+    <p id="lensCaption" class="lens-caption">先看一看：这份物质在地表之下，周围是什么？</p>
+    <div class="note" id="processNote">岩浆储存区是局部现象，地幔并非整层液体。</div>
+   </div>
+   <div class="utility-row"><button id="analogyBtn">联系实物实验</button><button id="reset1">重新观察</button></div>
+  </aside>
+ </div>
+</section>
+<section class="view" id="view2" role="tabpanel" aria-labelledby="tab2" hidden>
+ <div class="question"><div><h2>喷出的物质，给地表留下了什么？</h2><p>每次喷出量相同。拖动测高线，比较原地表和新地形。</p></div><span class="model-label">熔岩堆积模型 · 刻度为模型格</span></div>
+ <div class="workspace">
+  <div class="maincol">
+   <div class="stage" id="terrainStage">
+    <div class="stage-tools"><button id="originalBtn" aria-pressed="true">原地表虚线</button><button id="layerBtn" aria-pressed="true">分层着色</button></div><span id="runCounter" class="stage-chip counter">尚未喷发</span>
+    <svg id="terrainSvg" viewBox="0 0 1000 610" role="group" aria-label="熔岩堆积剖面，拖动测高线比较同一位置的原地表和当前地表"></svg>
+    <div id="layerLegend" class="legend layer-legend"><span><i class="swatch" style="background:#89958b"></i>原地形</span></div><div class="probe-help">↔ 拖动测高线，比较同一位置</div>
+   </div>
+   <div class="timeline"><button id="play2" class="primary">喷发一次</button><div class="rangebox"><label class="sr-only" for="time2">地表变化回放</label><input id="time2" type="range" min="0" max="1000" value="0" disabled><div class="phase-labels"><span>原地表</span><span id="timeline2Status">可累积 6 次 · 拖动回看</span><span>冷却后</span></div></div><button id="slow2" class="speed-btn" aria-pressed="false">慢放</button></div>
+   <div class="footnote"><span>只模拟熔岩流动、冷却和覆盖；不含爆炸、塌陷及侵蚀。</span><span class="mutiw">mutiw</span></div>
+  </div>
+  <aside class="aside">
+   <div class="card controls-card"><div class="segmented" role="group" aria-label="地形情境"><button id="landBtn" aria-pressed="true">山坡</button><button id="seaBtn" aria-pressed="false">海底</button></div><div class="control-head"><label for="mobility">熔岩流动性</label><output id="mobilityValue" for="mobility">中等</output></div><input id="mobility" type="range" min="0" max="100" value="50"><div class="range-ends"><span>较黏稠</span><span>较易流动</span></div><div class="fixed-amount"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 11V7a4 4 0 018 0v4M6 11h12v10H6Z"/></svg><span>每次喷出量固定 · 最多 6 次</span></div></div>
+   <div class="card measure"><h3>同一位置测高<span>模型格</span></h3><div class="data-row"><span>原地表</span><strong id="baseHeight">—</strong></div><div class="data-row"><span>当前地表</span><strong id="currentHeight">—</strong></div><div class="data-row compare-line" id="savedHeightRow" hidden><span>对照 A</span><strong id="savedHeight">—</strong></div><div class="data-row change-row"><span>新增厚度</span><strong id="addedHeight">0.00</strong></div><p id="terrainObservation" class="aside-foot">拖动图中的测高线，选一个想观察的位置。</p></div>
+   <div id="compareSummary" class="compare-summary" hidden></div>
+   <div class="evidence-actions"><button id="saveCompare" disabled>留作对照 A</button><button id="startOver">从原地表重做</button><button id="exportBtn">导出证据图</button><button id="reset2">重置本页</button></div>
+   <div class="aside-foot">高度是模型计算结果。与实物实验和真实资料一起解释，不能用于预测真实火山。</div>
+  </aside>
+ </div>
+</section>
+</div>
+<div id="modalShell" class="modal-shell" hidden><section id="modalPanel" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1"><div class="modal-head"><h2 id="modalTitle"></h2><button id="closeModal" aria-label="关闭说明">关闭 ×</button></div><div id="modalContent"></div></section></div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script>
+/*
+ * 熔岩流与冷却堆积的二维剖面教学模型，v1.0。
+ * 横坐标、厚度和截面积均用“模型格”；迭代步不是现实时间。
+ * 在一维有限体积网格中，从喷口等量供料；热熔岩沿总表面下降方向
+ * 流向相邻网格，并逐步冷却为固态。每次只移动本次尚未冷却的物质。
+ * 守恒的是剖面中的面积（假设垂直于剖面的单位宽度），不是火山体积。
+ * mobility 仅为定性的可流动程度，不是实测黏度；不模拟爆炸、气体、
+ * 水下淬冷、枕状构造、侵蚀、塌陷、分支或三维流动，不能预测真火山。
+ */
+(function (root) {
+  'use strict';
+  var N = 141, WIDTH = 20, DX = WIDTH / (N - 1);
+  var STEPS = 800, INJECTION_STEPS = 140, SNAPSHOT_EVERY = 10;
+  var AMOUNT_AREA = 4, COOLING = 0.008, FOOTPRINT_THRESHOLD = 0.02;
+
+  function zeros(n) { var a = [], i; for (i = 0; i < n; i++) a.push(0); return a; }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function number(v, fallback) { return typeof v === 'number' && isFinite(v) ? v : fallback; }
+  // 网格两端各占半格，有限体积覆盖的横向范围恰好是0–20格。
+  function cellWidth(i) { return i === 0 || i === N - 1 ? DX / 2 : DX; }
+  function areaOf(a) { var s = 0, i; for (i = 0; i < a.length; i++) s += a[i] * cellWidth(i); return s; }
+
+  function create(terrain) {
+    terrain = terrain === 'sea' ? 'sea' : 'land';
+    var x = [], base = [], i, xx, hill, span;
+    for (i = 0; i < N; i++) {
+      xx = i * DX; x.push(xx);
+      if (terrain === 'sea') {
+        hill = 0.65 + 2.85 * Math.exp(-Math.pow((xx - 10) / 3.4, 2));
+      } else {
+        span = xx < 10 ? 7.2 : 4.8;
+        hill = 1 + 2.3 * Math.pow(Math.max(0, 1 - Math.abs(xx - 10) / span), 1.12)
+          + 0.15 * Math.sin(xx * 0.7) - 0.18 * Math.exp(-Math.pow((xx - 15.2) / 1.3, 2));
+      }
+      base.push(hill);
+    }
+    return {
+      terrain: terrain, base: base, surface: base.slice(), layers: [],
+      seaLevel: terrain === 'sea' ? 5 : null, ventIndex: 70, x: x,
+      N: N, dx: DX, width: WIDTH, maxHeight: 14
+    };
+  }
+
+  function surfaceOf(state) {
+    if (Array.isArray(state)) return state.slice();
+    if ((!state.layers || !state.layers.length) && state.surface) return state.surface.slice();
+    var a = state.base.slice(), layers = state.layers || [], i, j, layer;
+    for (j = 0; j < layers.length; j++) {
+      layer = layers[j].deposit || layers[j];
+      for (i = 0; i < a.length; i++) a[i] += layer[i];
+    }
+    return a;
+  }
+
+  function profileStats(base, deposit, options) {
+    options = options || {};
+    var sea = options.seaLevel, i, d, h, footprint = 0, first = -1, last = -1;
+    var maxThickness = 0, peakHeight = -Infinity, aboveSeaWidth = 0, area = 0, moment = 0;
+    for (i = 0; i < base.length; i++) {
+      d = Math.max(0, deposit[i]); h = base[i] + d;
+      area += d * cellWidth(i); moment += d * cellWidth(i) * i * DX;
+      maxThickness = Math.max(maxThickness, d); peakHeight = Math.max(peakHeight, h);
+      if (d >= FOOTPRINT_THRESHOLD) { footprint += cellWidth(i); if (first < 0) first = i; last = i; }
+      if (typeof sea === 'number' && h >= sea) aboveSeaWidth += cellWidth(i);
+    }
+    return {
+      depositedArea: area, coverageWidth: footprint, maxThickness: maxThickness,
+      peakHeight: peakHeight, centroid: area ? moment / area : null,
+      firstX: first < 0 ? null : first * DX, lastX: last < 0 ? null : last * DX,
+      aboveSeaWidth: aboveSeaWidth, emerged: aboveSeaWidth > 0,
+      footprintThreshold: FOOTPRINT_THRESHOLD
+    };
+  }
+
+  function simulate(baseSurface, options) {
+    options = options || {};
+    if (!Array.isArray(baseSurface) || baseSurface.length !== N) throw new Error('模型需要141个地形高度。');
+    var base = baseSurface.slice(), i, step, j;
+    for (i = 0; i < N; i++) if (typeof base[i] !== 'number' || !isFinite(base[i])) throw new Error('地形高度必须是有限数值。');
+    var mobility = clamp(number(options.mobility, 0.5), 0, 1);
+    var amount = clamp(number(options.amount, 1), 0.6, 1.4);
+    var vent = Math.round(clamp(number(options.ventIndex, 70), 2, N - 3));
+    var area = AMOUNT_AREA * amount, added = 0;
+    var flowFactor = 0.026 + 0.14 * Math.pow(mobility, 1.4);
+    var hot = zeros(N), solid = zeros(N), z = zeros(N), flux = zeros(N - 1), out = zeros(N);
+    var frames = [], weights = [0.1, 0.2, 0.4, 0.2, 0.1];
+    var diff, donor, q, limit, d, surface, deposit, cooling, fraction;
+
+    function snapshot(progress, phase) {
+      surface = []; deposit = [];
+      for (var k = 0; k < N; k++) { d = hot[k] + solid[k]; deposit.push(d); surface.push(base[k] + d); }
+      frames.push({
+        surface: surface, deposit: deposit, hot: hot.slice(), solid: solid.slice(),
+        progress: progress, phase: phase, injectedArea: added
+      });
+    }
+    snapshot(0, 'before');
+
+    for (step = 0; step < STEPS; step++) {
+      if (step < INJECTION_STEPS) {
+        // 供料宽度固定；相同 amount 的剖面总面积严格相等。
+        var packet = area / INJECTION_STEPS;
+        for (j = 0; j < weights.length; j++) hot[vent + j - 2] += packet * weights[j] / cellWidth(vent + j - 2);
+        added += packet;
+      }
+      for (i = 0; i < N; i++) { z[i] = base[i] + solid[i] + hot[i]; out[i] = 0; }
+
+      // 通量由表面高差及上游仍可流动的厚度决定；外边界封闭。
+      for (i = 0; i < N - 1; i++) {
+        diff = z[i] - z[i + 1]; donor = diff >= 0 ? i : i + 1;
+        q = flowFactor * hot[donor] * Math.min(12, Math.abs(diff) / DX) * cellWidth(donor);
+        flux[i] = diff >= 0 ? q : -q; out[donor] += q;
+      }
+      // 同一格可同时向两边出流，统一限流，避免负厚度或质量凭空增加。
+      for (i = 0; i < N - 1; i++) {
+        donor = flux[i] >= 0 ? i : i + 1;
+        limit = out[donor] > 0 ? Math.min(1, 0.46 * hot[donor] * cellWidth(donor) / out[donor]) : 1;
+        flux[i] *= limit;
+      }
+      for (i = 0; i < N - 1; i++) {
+        hot[i] -= flux[i] / cellWidth(i); hot[i + 1] += flux[i] / cellWidth(i + 1);
+      }
+      for (i = 0; i < N; i++) {
+        cooling = hot[i] * COOLING; hot[i] -= cooling; solid[i] += cooling;
+      }
+      if ((step + 1) % SNAPSHOT_EVERY === 0 && step + 1 < STEPS) {
+        fraction = (step + 1) / STEPS;
+        snapshot(fraction, step < INJECTION_STEPS ? 'erupting' : 'cooling');
+      }
+    }
+    // 省略最后极慢的冷却尾段；剩余热熔岩原位固结，物质不消失。
+    for (i = 0; i < N; i++) { solid[i] += hot[i]; hot[i] = 0; }
+    snapshot(1, 'cooled');
+    deposit = solid.slice(); surface = base.map(function (h, k) { return h + deposit[k]; });
+    return {
+      frames: frames, base: base, deposit: deposit, surface: surface,
+      added: area, injectedArea: area, escaped: 0, mobility: mobility, amount: amount,
+      ventIndex: vent, N: N, dx: DX, width: WIDTH,
+      conservationError: areaOf(deposit) - area,
+      stats: profileStats(base, deposit, {seaLevel: options.seaLevel})
+    };
+  }
+
+  var api = {
+    create: create, simulate: simulate, surfaceOf: surfaceOf, profileStats: profileStats,
+    N: N, dx: DX, width: WIDTH, amountArea: AMOUNT_AREA,
+    footprintThreshold: FOOTPRINT_THRESHOLD, version: '1.0'
+  };
+  root.VolcanoModel = api;
+  if (typeof module === 'object' && module.exports) module.exports = api;
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+<script>
+/* 状态、交互与SVG表现分离。科学参数在前一个script的VolcanoModel中。
+ * 资产替换入口：第一视角 processSvg 的地形/岩浆图组、地球结构弹窗；
+ * 第二视角只替换纹理与配色，不改计算得到的surface/deposit/hot数组。 */
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var clamp=function(v,a,b){return Math.max(a,Math.min(b,v));};
+var fmt=function(v){return Math.abs(v)<0.005?'0.00':v.toFixed(2);};
+var scene=1, lastTick=0, toastTimer=null, lastFocus=null;
+var P={progress:0,playing:false,slow:false,cut:true};
+var T={model:VolcanoModel.create('land'),runs:[],position:0,playing:false,slow:false,mobility:.5,probe:10,original:true,layers:true,compare:null};
+var COLORS=['#c27550','#cf9e6c','#778e8a','#a78674','#d6b172','#9e7770'];
+var path1=$('conduit'), pathL=$('lavaLeft'), pathR=$('lavaRight');
+var len1=path1.getTotalLength(),lenL=pathL.getTotalLength(),lenR=pathR.getTotalLength();
+var drag1=false,drag2=false;
+function toast(s){$('toast').textContent=s;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3600);}
+function press(id,v){$(id).setAttribute('aria-pressed',String(v));}
+function svgPoint(svg,e){var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse());}
+function showTab(n){scene=n;P.playing=false;T.playing=false;$('view1').hidden=n!==1;$('view2').hidden=n!==2;[1,2].forEach(function(i){$('tab'+i).setAttribute('aria-selected',String(n===i));$('tab'+i).tabIndex=n===i?0:-1;});render1();if(n===2)render2();}
+$('tab1').onclick=function(){showTab(1);};$('tab2').onclick=function(){showTab(2);};
+[1,2].forEach(function(n){$('tab'+n).onkeydown=function(e){if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();showTab(3-n);$('tab'+(3-n)).focus();}};});
+function magmaPoint(p){if(p<=.38)return path1.getPointAtLength(len1*clamp(p/.38,0,1));return pathR.getPointAtLength(lenR*clamp((p-.38)/.39,0,1));}
+function drawStroke(el,len,f){var a=clamp(f,0,1);el.style.strokeDasharray=(len*a).toFixed(2)+' '+(len+2).toFixed(2);el.style.opacity=a<=.002?'0':'1';}
+function render1(){
+ var p=P.progress, rise=clamp(p/.38,0,1),flow=clamp((p-.38)/.39,0,1),cool=clamp((p-.67)/.33,0,1),pt=magmaPoint(p);
+ $('time1').value=Math.round(p*1000);$('play1').textContent=P.playing?'暂停':p>=1?'再次回放':p>0?'继续观察':'开始观察';
+ $('interior').style.display=P.cut?'':'none';$('exterior').style.display=P.cut?'none':'';press('cutBtn',P.cut);press('slow1',P.slow);
+ drawStroke($('risingMagma'),len1,rise);drawStroke(pathL,lenL,flow*.87);drawStroke(pathR,lenR,flow);
+ var col='rgb('+Math.round(249-119*cool)+','+Math.round(154-49*cool)+','+Math.round(67+22*cool)+')';pathL.style.stroke=col;pathR.style.stroke=col;
+ $('gasPuffs').style.opacity=p>.28&&p<.7?Math.sin(clamp((p-.28)/.42,0,1)*Math.PI)*.9:0;
+ $('flowLabel').style.opacity=flow>.08?'1':'0';$('flowLabelText').textContent=cool>.75?'冷却后留下的岩石':'流到地表的熔岩';
+ $('trackingPoint').setAttribute('transform','translate('+pt.x.toFixed(2)+' '+pt.y.toFixed(2)+')');$('trackingPoint').setAttribute('aria-valuenow',Math.round(p*100));$('trackingPoint').style.visibility=!P.cut&&p<.38?'hidden':'visible';
+ $('pointHint').style.opacity=P.cut&&p<.035?1:0;
+ var bubbles='';for(var i=0;i<9;i++){var a=(i+.5)/10;if(a>rise||p>.78)continue;var q=path1.getPointAtLength(len1*a),r=1.2+3.9*a;bubbles+='<circle cx="'+q.x.toFixed(2)+'" cy="'+q.y.toFixed(2)+'" r="'+r.toFixed(1)+'"/>';}$('risingBubbles').innerHTML=bubbles;
+ var bulb='',coords=[[83,60],[139,60],[170,100],[72,124],[119,106],[156,146],[110,166],[182,128]];
+ var gas=clamp((p-.055)/.3,0,1);coords.forEach(function(a,i){var r=p<.07?1.5:2+gas*(4.8+(i%3)*2.2);var cy=a[1]-(p>.38?clamp((p-.38)/.24,0,1)*(40+i*9):0);var opacity=cool>.05?0:p>.58?1-clamp((p-.58)/.1,0,1):.8;if(p<.07)opacity=.9;bulb+='<circle cx="'+a[0]+'" cy="'+cy.toFixed(1)+'" r="'+r.toFixed(1)+'" fill="'+(p<.07?'#f9d7a0':'#fff1bc')+'" fill-opacity="'+(p<.07?.8:.35)+'" stroke="#fff1bb" stroke-opacity="'+opacity+'" opacity="'+opacity+'" stroke-width="1.6"/>';});
+ $('lensBubbles').innerHTML=bulb;$('lensRock').setAttribute('fill',cool>.02?col:'url(#lensMagma)');$('crystals').style.opacity=cool>.6?.5:.8;
+ var title,caption,note;
+ if(p<.09){title='地下的岩浆';caption='先看一看：这份物质在地表之下，周围是什么？';note='岩浆储存区是局部现象，地幔并非整层液体。';}
+ else if(p<.38){title='沿裂隙上升';caption='越靠近地表，周围压力越小；部分气体析出，气泡逐渐膨胀。';note='岩浆上升与浮力、气体作用等有关，不是把整座山“煮开”。';}
+ else if(p<.67){title='地表的熔岩';caption='同一份物质到了地表，称为熔岩。留意它沿着哪里流动。';note='这里演示熔岩溢流；真实喷发也可能产生火山灰和岩石碎屑。';}
+ else{title=p>.97?'留下新的岩石':'熔岩逐渐冷却';caption=p>.97?'颜色变暗，物质仍然留在地表。切换“留下的地形”，比较它增加在哪里。':'冷却使熔岩逐渐固结，颜色变暗。观察：它有没有消失？';note='冷却过程大幅压缩。实际地形还会受塌陷、流水和风等影响。';}
+ $('lensTitle').textContent=title;$('lensCaption').textContent=caption;$('processNote').textContent=note;
+}
+$('play1').onclick=function(){if(P.progress>=1)P.progress=0;P.playing=!P.playing;render1();};
+$('time1').oninput=function(){P.playing=false;P.progress=Number(this.value)/1000;render1();};
+$('slow1').onclick=function(){P.slow=!P.slow;render1();};$('cutBtn').onclick=function(){P.cut=!P.cut;render1();};
+$('reset1').onclick=function(){P.progress=0;P.playing=false;P.cut=true;P.slow=false;render1();};
+$('processSvg').addEventListener('pointerdown',function(e){if(!e.target.closest('#trackingPoint'))return;drag1=true;P.playing=false;this.setPointerCapture(e.pointerId);e.preventDefault();});
+$('processSvg').addEventListener('pointermove',function(e){if(!drag1)return;var loc=svgPoint(this,e),best=Infinity,bp=0;for(var j=0;j<=160;j++){var p=.77*j/160,q=magmaPoint(p),d=Math.pow(loc.x-q.x,2)+Math.pow(loc.y-q.y,2);if(d<best){best=d;bp=p;}}P.progress=bp;render1();});
+['pointerup','pointercancel','lostpointercapture'].forEach(function(type){$('processSvg').addEventListener(type,function(){drag1=false;});});
+$('trackingPoint').onkeydown=function(e){var delta=(e.key==='ArrowRight'||e.key==='ArrowUp')?.025:(e.key==='ArrowLeft'||e.key==='ArrowDown')?-.025:0;if(delta){e.preventDefault();P.playing=false;P.progress=clamp(P.progress+delta,0,1);render1();}if(e.key==='Home'||e.key==='End'){e.preventDefault();P.playing=false;P.progress=e.key==='Home'?0:1;render1();}};
+// 地形计算完成后才产生动画帧，播放与回溯不修改计算结果。
+var GX=58,GW=895,GY=530,GH=421,MAXY=12;
+function X(x){return GX+x/20*GW;}function Y(h){return GY-h/MAXY*GH;}
+function pathOf(a){var s='';for(var i=0;i<a.length;i++)s+=(i?'L':'M')+X(i*VolcanoModel.dx).toFixed(1)+' '+Y(a[i]).toFixed(1)+' ';return s;}
+function bandPath(low,high){var s=pathOf(high);for(var i=low.length-1;i>=0;i--)s+='L'+X(i*VolcanoModel.dx).toFixed(1)+' '+Y(low[i]).toFixed(1)+' ';return s+'Z';}
+function currentView(){
+ var completed=Math.min(T.runs.length,Math.floor(T.position+1e-8)),layers=[],surface=T.model.base.slice(),active=null,i;
+ for(i=0;i<completed;i++){layers.push({base:surface.slice(),deposit:T.runs[i].deposit,index:i});surface=T.runs[i].surface.slice();}
+ if(completed<T.runs.length){var run=T.runs[completed],part=clamp(T.position-completed,0,1),at=part*(run.frames.length-1),lo=Math.floor(at),hi=Math.min(run.frames.length-1,lo+1),f=at-lo,a=run.frames[lo],b=run.frames[hi],de=[],hot=[],solid=[];for(i=0;i<a.surface.length;i++){de[i]=a.deposit[i]+(b.deposit[i]-a.deposit[i])*f;hot[i]=a.hot[i]+(b.hot[i]-a.hot[i])*f;solid[i]=a.solid[i]+(b.solid[i]-a.solid[i])*f;}active={base:surface.slice(),deposit:de,hot:hot,solid:solid,index:completed,part:part};layers.push(active);surface=surface.map(function(v,k){return v+de[k];});}
+ return{surface:surface,layers:layers,active:active,completed:completed};
+}
+function mobilityName(v){return v<.28?'较黏稠':v>.72?'较易流动':'中等';}
+function cumulativeStats(view){return VolcanoModel.profileStats(T.model.base,view.surface.map(function(h,i){return h-T.model.base[i];}),{seaLevel:T.model.seaLevel});}
+function profileSVG(view,exporting){
+ var base=T.model.base,sea=T.model.seaLevel,parts=[];
+ parts.push('<defs><linearGradient id="terrainSky" x2="0" y2="1"><stop stop-color="#e2ece6"/><stop offset="1" stop-color="#f7f4e8"/></linearGradient><linearGradient id="terrainRock" x2="0" y2="1"><stop stop-color="#89988c"/><stop offset="1" stop-color="#4a6668"/></linearGradient><linearGradient id="seaWater" x2="0" y2="1"><stop stop-color="#79bdcc" stop-opacity=".35"/><stop offset="1" stop-color="#438c9c" stop-opacity=".56"/></linearGradient><pattern id="sediment" width="53" height="31" patternUnits="userSpaceOnUse"><path d="m7 14 11 2m19 11 7-3" stroke="#cfdbca" opacity=".2" stroke-width="1.2"/></pattern></defs><rect width="1000" height="610" fill="url(#terrainSky)"/>');
+ for(var h=0;h<=MAXY;h+=2){var yy=Y(h);parts.push('<path d="M'+GX+' '+yy+'H'+(GX+GW)+'" stroke="#c5d3cb" stroke-opacity=".65" stroke-dasharray="3 6"/><text x="44" y="'+(yy+5)+'" text-anchor="end" fill="#667f7c" font-size="15">'+h+'</text>');}
+ parts.push('<text x="19" y="91" fill="#55746f" font-size="14">高度 / 格</text>');
+ var under=pathOf(base)+'L'+(GX+GW)+' '+GY+'H'+GX+'Z';parts.push('<path d="'+under+'" fill="url(#terrainRock)"/><path d="'+under+'" fill="url(#sediment)"/>');
+ view.layers.forEach(function(l){var top=l.base.map(function(h,i){return h+l.deposit[i];}),color=T.layers?COLORS[l.index%COLORS.length]:'#bd8764';parts.push('<path d="'+bandPath(l.base,top)+'" fill="'+color+'" stroke="'+color+'" stroke-width=".35"/>');if(l.hot&&l.part<1){var cold=l.base.map(function(h,i){return h+l.solid[i];});parts.push('<path d="'+bandPath(cold,top)+'" fill="#ffad46" stroke="#ffbe5e" stroke-width=".3"/>');}});
+ if(sea!==null){var waterTop=base.map(function(){return sea;}),bottom=view.surface.map(function(h){return Math.min(h,sea);});parts.push('<path d="'+bandPath(bottom,waterTop)+'" fill="url(#seaWater)"/>');parts.push('<path d="M'+GX+' '+Y(sea)+'H'+(GX+GW)+'" stroke="#2d8199" stroke-width="2" stroke-dasharray="12 5"/><rect x="806" y="'+(Y(sea)-31)+'" width="140" height="27" rx="4" fill="#edf8f4"/><text x="876" y="'+(Y(sea)-12)+'" text-anchor="middle" fill="#286d80" font-size="16">海面 · 5 格</text>');}
+ parts.push('<path d="'+pathOf(view.surface)+'" fill="none" stroke="#78543d" stroke-width="2.2" stroke-linejoin="round"/>');
+ if(T.original)parts.push('<path d="'+pathOf(base)+'" fill="none" stroke="#f9efcf" stroke-width="5" stroke-dasharray="9 6"/><path d="'+pathOf(base)+'" fill="none" stroke="#3e5a5c" stroke-width="1.8" stroke-dasharray="9 6"/>');
+ if(T.compare)parts.push('<path d="'+pathOf(T.compare.surface)+'" fill="none" stroke="#146f82" stroke-width="3.2" stroke-dasharray="12 5"/>');
+ // 喷口位置贯穿所有实验保持不变；一条短引线指向当前表面。
+ var vi=T.model.ventIndex,vy=Y(view.surface[vi]),vx=X(10);parts.push('<path d="M'+vx+' '+(vy+4)+'v23" stroke="#7e5240" stroke-width="6"/><path d="M'+vx+' '+(vy+4)+'v23" stroke="#eab17b" stroke-width="2"/>');
+ var labelY=Math.max(109,vy-57);parts.push('<path d="M'+vx+' '+(labelY+24)+'V'+(vy-5)+'" stroke="#946e57" stroke-width="1.3"/><rect x="'+(vx-35)+'" y="'+labelY+'" width="70" height="28" rx="4" fill="#fff9e9"/><text x="'+vx+'" y="'+(labelY+20)+'" text-anchor="middle" fill="#825539" font-size="16">喷口</text>');
+ if(view.active&&view.active.part>.002&&view.active.part<.175){var fraction=view.active.part/.175;parts.push('<path d="M'+(vx-3)+' '+vy+'q-5 -18 4 -28" fill="none" stroke="#ffd781" stroke-width="4" opacity="'+Math.sin(fraction*Math.PI)+'"/>');}
+ parts.push('<path d="M'+GX+' '+GY+'H'+(GX+GW)+'" stroke="#78908b" stroke-width="1.4"/>');
+ for(var x=0;x<=20;x+=5){parts.push('<path d="M'+X(x)+' '+GY+'v6" stroke="#7b9089"/><text x="'+X(x)+'" y="'+(GY+25)+'" text-anchor="middle" fill="#617a73" font-size="15">'+x+'</text>');}
+ parts.push('<text x="947" y="'+(GY+48)+'" text-anchor="end" fill="#617a73" font-size="14">水平位置 / 格</text>');
+ var probe=Math.round(T.probe/VolcanoModel.dx),px=X(probe*VolcanoModel.dx),py=Y(view.surface[probe]),by=Y(base[probe]);
+ parts.push('<g id="probeHandle" role="slider" tabindex="0" aria-label="同位置测高线" aria-valuemin="0" aria-valuemax="20" aria-valuenow="'+(probe*VolcanoModel.dx).toFixed(2)+'" style="cursor:ew-resize"><path d="M'+px+' 94V'+(GY+4)+'" stroke="#c9502d" stroke-width="1.7" stroke-dasharray="5 5"/><path d="M'+(px-5)+' '+py+'V'+by+'" stroke="#c9502d" stroke-width="4"/><circle cx="'+px+'" cy="'+by+'" r="5.5" fill="#f7f6eb" stroke="#466569" stroke-width="2"/><circle cx="'+px+'" cy="'+py+'" r="6.5" fill="#bf4e25" stroke="#fff4d7" stroke-width="2"/><rect x="'+(px-22)+'" y="83" width="44" height="30" rx="7" fill="#bd4e28"/><path d="m'+(px-7)+' 93-5 5 5 5m14-10 5 5-5 5" fill="none" stroke="#fff9e6" stroke-width="1.8"/><rect x="'+(px-25)+'" y="76" width="50" height="'+(GY-58)+'" fill="transparent"/></g>');
+ if(exporting){var lx=62;parts.push('<g font-size="13" fill="#36595d"><path d="M62 591h24" stroke="#3e5a5c" stroke-width="2" stroke-dasharray="6 4"/><text x="91" y="596">原地表</text>');lx=169;view.layers.forEach(function(l){if(l.deposit.some(function(d){return d>.0001;})){parts.push('<rect x="'+lx+'" y="582" width="13" height="13" rx="2" fill="'+(T.layers?COLORS[l.index%COLORS.length]:'#bd8764')+'"/><text x="'+(lx+18)+'" y="594">第'+(l.index+1)+'次</text>');lx+=81;}});if(T.compare)parts.push('<path d="M'+lx+' 589h25" stroke="#146f82" stroke-width="3" stroke-dasharray="7 4"/><text x="'+(lx+31)+'" y="594">对照 A</text>');parts.push('</g>');}
+ var result=parts.join('');return exporting?result.replace('id="probeHandle" role="slider" tabindex="0"','id="exportProbe"'):result;
+}
+function render2(){
+ var view=currentView(),final=Math.abs(T.position-T.runs.length)<.00001,index=clamp(Math.round(T.probe/VolcanoModel.dx),0,VolcanoModel.N-1),stats=cumulativeStats(view);
+ $('terrainSvg').innerHTML=profileSVG(view,false);$('mobilityValue').textContent=mobilityName(T.mobility);$('mobility').value=Math.round(T.mobility*100);$('mobility').disabled=T.playing;press('landBtn',T.model.terrain==='land');press('seaBtn',T.model.terrain==='sea');press('originalBtn',T.original);press('layerBtn',T.layers);press('slow2',T.slow);
+ $('time2').disabled=T.runs.length===0;$('time2').max=Math.max(1000,T.runs.length*1000);$('time2').value=Math.round(T.position*1000);
+ $('play2').textContent=T.playing?'暂停':!final?'继续回放':T.runs.length>=6?'已完成 6 次':T.runs.length===0?'喷发一次':'再喷发一次';$('play2').disabled=final&&T.runs.length>=6;
+ $('runCounter').textContent=T.runs.length===0?'尚未喷发':final?'已冷却 · '+T.runs.length+' 次堆积':'第 '+Math.min(T.runs.length,Math.floor(T.position)+1)+' 次 · '+(view.active&&view.active.part<.175?'喷出':'流动 / 冷却');
+ $('timeline2Status').textContent=T.runs.length===0?'可累积 6 次 · 拖动回看':'已建立 '+T.runs.length+' 次过程 · 可回看';
+ $('baseHeight').textContent=fmt(T.model.base[index]);$('currentHeight').textContent=fmt(view.surface[index]);$('addedHeight').textContent=fmt(view.surface[index]-T.model.base[index]);
+ $('savedHeightRow').hidden=!T.compare;if(T.compare)$('savedHeight').textContent=fmt(T.compare.surface[index]);
+ $('saveCompare').disabled=!final||T.runs.length===0;$('saveCompare').textContent=T.compare?'更新对照 A':'留作对照 A';
+ $('landBtn').disabled=T.playing;$('seaBtn').disabled=T.playing;
+ var legend='<span><i class="swatch" style="background:#89958b"></i>原地形</span>';view.layers.forEach(function(l){if(l.deposit.some(function(d){return d>.0001;}))legend+='<span><i class="swatch" style="background:'+(T.layers?COLORS[l.index%COLORS.length]:'#bd8764')+'"></i>第'+(l.index+1)+'次</span>';});if(T.compare)legend+='<span style="color:#146f82">┄ 对照 A</span>';$('layerLegend').innerHTML=legend;
+ var obs='拖动图中的测高线，选一个想观察的位置。';if(T.position>.01){if(T.model.terrain==='sea'){obs=stats.emerged?'模型中已有部分堆积高于海面。新陆地在哪里？':'堆积仍在海面之下。继续累积，是否会露出水面？';}else{obs=final?'哪些位置变厚了？把本轮留作 A，重做一轮比较。':'橙色表示尚未冷却的熔岩；变暗后，物质仍留在地表。';}}
+ $('terrainObservation').textContent=obs;$('compareSummary').hidden=!T.compare;
+ if(T.compare){var counts=T.compare.count===T.runs.length&&final;var varies=T.compare.mobilities.some(function(m){return m!==T.compare.mobilities[0];})||T.runs.some(function(r){return r.mobility!==T.runs[0].mobility;});var txt='A：'+T.compare.count+' 次，'+(T.compare.mobilities.every(function(m){return m===T.compare.mobilities[0];})?mobilityName(T.compare.mobilities[0]):'混合流动性')+'。';txt+=counts?(varies?'同次数，但各次条件有变化。':'当前次数相同，可比较展布与厚度。'):' 当前 '+(final?T.runs.length:Math.floor(T.position))+' 次冷却；匹配次数后再比较流动性。';$('compareSummary').textContent=txt;}
+}
+function newRun(){var base=T.runs.length?T.runs[T.runs.length-1].surface:T.model.base;var result=VolcanoModel.simulate(base,{mobility:T.mobility,amount:1,ventIndex:T.model.ventIndex,seaLevel:T.model.seaLevel});T.position=T.runs.length;T.runs.push(result);T.playing=true;render2();}
+$('play2').onclick=function(){if(T.playing){T.playing=false;render2();return;}if(T.position<T.runs.length-.00001){T.playing=true;render2();return;}if(T.runs.length<6)newRun();};
+$('time2').oninput=function(){T.playing=false;T.position=Number(this.value)/1000;render2();};
+$('slow2').onclick=function(){T.slow=!T.slow;render2();};$('mobility').oninput=function(){T.mobility=Number(this.value)/100;$('mobilityValue').textContent=mobilityName(T.mobility);};
+$('mobility').onchange=function(){if(T.runs.length)toast('流动性将在下一次喷发中生效；已有地层保持不变。');};
+$('originalBtn').onclick=function(){T.original=!T.original;render2();};$('layerBtn').onclick=function(){T.layers=!T.layers;render2();};
+function clearTerrain(keepCompare){T.runs=[];T.position=0;T.playing=false;if(!keepCompare)T.compare=null;render2();}
+function setTerrain(name){if(T.model.terrain===name)return;T.model=VolcanoModel.create(name);clearTerrain(false);toast('已切换'+(name==='sea'?'海底':'山坡')+'情境，本轮与对照已重置。');}
+$('landBtn').onclick=function(){setTerrain('land');};$('seaBtn').onclick=function(){setTerrain('sea');};
+$('startOver').onclick=function(){clearTerrain(true);toast(T.compare?'已回到相同原地表，对照 A 保留。调整流动性后再喷发。':'已回到原地表，保留当前流动性。');};
+$('reset2').onclick=function(){T.mobility=.5;T.probe=10;T.slow=false;T.original=true;T.layers=true;clearTerrain(false);toast('本页已重置。');};
+$('saveCompare').onclick=function(){if(!T.runs.length||T.position<T.runs.length)return;T.compare={surface:T.runs[T.runs.length-1].surface.slice(),count:T.runs.length,mobilities:T.runs.map(function(r){return r.mobility;})};render2();toast('已保留对照 A。点击“从原地表重做”，改变流动性再比较。');};
+function moveProbe(e){var p=svgPoint($('terrainSvg'),e);T.probe=clamp((p.x-GX)/GW*20,0,20);render2();}
+$('terrainSvg').addEventListener('pointerdown',function(e){var p=svgPoint(this,e);if(p.x<GX-24||p.x>GX+GW+24||p.y<76||p.y>GY+30)return;drag2=true;this.setPointerCapture(e.pointerId);moveProbe(e);e.preventDefault();});
+$('terrainSvg').addEventListener('pointermove',function(e){if(drag2){moveProbe(e);e.preventDefault();}});
+['pointerup','pointercancel','lostpointercapture'].forEach(function(type){$('terrainSvg').addEventListener(type,function(){drag2=false;});});
+$('terrainSvg').addEventListener('keydown',function(e){if(e.target.id!=='probeHandle')return;var d=e.key==='ArrowRight'?VolcanoModel.dx:e.key==='ArrowLeft'?-VolcanoModel.dx:0;if(d||e.key==='Home'||e.key==='End'){e.preventDefault();T.probe=e.key==='Home'?0:e.key==='End'?20:clamp(T.probe+d,0,20);render2();$('probeHandle').focus();}});
+$('exportBtn').onclick=function(){
+ var view=currentView(),i=clamp(Math.round(T.probe/VolcanoModel.dx),0,VolcanoModel.N-1),sceneName=T.model.terrain==='sea'?'海底':'山坡';
+ var line='情境：'+sceneName+' · 当前进度：'+T.position.toFixed(2)+' 次 · 每次等量 · 观察位置：'+(i*VolcanoModel.dx).toFixed(2)+' 格';
+ var values='原地表 '+fmt(T.model.base[i])+' 格  /  当前 '+fmt(view.surface[i])+' 格  /  新增 '+fmt(view.surface[i]-T.model.base[i])+' 格'+(T.compare?'  /  对照 A '+fmt(T.compare.surface[i])+' 格':'');
+ var series=T.runs.map(function(r,n){return '第'+(n+1)+'次 '+Math.round(r.mobility*100)+'%';}).join('；');
+ var summary='流动性为模型调节值：'+(series||'尚未喷发');
+ var compare=T.compare?'对照 A：'+T.compare.count+' 次，流动性 '+T.compare.mobilities.map(function(m){return Math.round(m*100)+'%';}).join(' / '):'未保存对照 A';
+ var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="970" viewBox="0 0 1000 808"><rect width="1000" height="808" fill="#f4f2eb"/><g font-family="system-ui, Microsoft YaHei, sans-serif"><text x="28" y="40" font-size="26" font-weight="700" fill="#18313b">火山喷发对地表的作用 · 模型证据图</text><text x="28" y="70" font-size="16" fill="#526e72">'+line+'</text><g transform="translate(0 86)">'+profileSVG(view,true)+'</g><text x="28" y="715" font-size="17" fill="#18313b">'+values+'</text><text x="28" y="741" font-size="14" fill="#526e72">'+summary+'</text><text x="28" y="764" font-size="14" fill="#146f82">'+compare+'</text><text x="28" y="791" font-size="13" fill="#63747a">定性模型计算；不按真实比例和时间。仅观察熔岩堆积，不作火山预测。请结合实物实验与真实资料解释。</text></g></svg>';
+ var blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob);openModal('证据图已准备','<p><a class="download-link" id="downloadEvidence" href="'+url+'" download="火山地表变化_模型证据图.svg">下载 SVG 证据图</a></p><p class="source-list">可用浏览器打开、放大或打印。图中保留模型刻度、各次颜色图例和对照条件。</p><div class="export-preview">'+svg+'</div>');
+};
+var earthHTML='<div class="modal-grid"><div class="earth-diagram"><svg viewBox="0 0 360 340" role="img" aria-label="地壳、地幔、地核比例示意"><circle cx="154" cy="163" r="130" fill="#b78050" stroke="#497570" stroke-width="3"/><circle cx="154" cy="163" r="70.8" fill="#e6b85b"/><circle cx="154" cy="163" r="130" fill="none" stroke="#91b4a0" stroke-width="1"/><path d="M239 65h82M239 111h82M209 163h112" stroke="#527279" stroke-width="1.5"/><g fill="#284853" font-size="18" font-weight="650"><text x="280" y="58">地壳</text><text x="280" y="105">地幔</text><text x="280" y="158">地核</text></g><text x="154" y="321" text-anchor="middle" fill="#5b7474" font-size="13">按教材近似厚度比例；外缘描线加粗便于辨认</text></svg></div><div><h3>地壳很薄，局部图放大了它</h3><p>地球内部主要分为地壳、地幔和地核。火山页画的是<strong>地壳附近的一小块剖面</strong>，并未画到地核。</p><p>地幔总体以固态为主；局部岩石部分熔融可形成岩浆，岩浆可在地下储存并沿裂隙上升。</p><p>真实岩浆储存区也可能同时含有熔体、晶体和气体，不是地下空洞中的一池纯液体。</p></div></div><h3>联系教材的圈层模型</h3><table><thead><tr><th>教材用近似值</th><th>半径 10 厘米的比例模型</th></tr></thead><tbody><tr><td>地壳平均厚度约 17 千米</td><td>厚度约 0.27 毫米</td></tr><tr><td>地幔厚度约 2870 千米</td><td>厚度约 4.53 厘米</td></tr><tr><td>地核半径约 3450 千米</td><td>半径约 5.44 厘米</td></tr></tbody></table><p class="source-list">比例按所用教师教学用书近似值之和归一化，圈层半径数字不作为精密地球测量值。</p>';
+var analogyHTML='<p>保留课堂上的真实动手实验。把观察到的现象与剖面模型对应起来，再讨论哪里相似、哪里不同。</p><table><thead><tr><th>实物实验</th><th>帮助理解</th><th>类比的边界</th></tr></thead><tbody><tr><td>土豆泥山体</td><td>山体与地壳部分</td><td>不能代表岩石的所有性质</td></tr><tr><td>番茄酱</td><td>岩浆沿通道流出、覆盖表面</td><td>番茄酱受热沸腾不等于真实喷发机制</td></tr><tr><td>酒精灯加热</td><td>地下高温与内部能量</td><td>真实地球不是被灯加热，也非全部内部煮沸</td></tr></tbody></table><h3>可以带着证据讨论</h3><p>实物实验中，喷出物从哪里来？哪些地方被覆盖？这张剖面图补充了哪些看不见的信息？哪些信息还需要真实火山资料支持？</p><p class="note">实物加热由教师组织，按实验要求操作；避免烫伤并保持距离。</p>';
+var helpHTML='<h3>本页增加的观察条件</h3><p>把同一份物质从地下追踪到地表；将上升、气体变化与物质名称同步呈现。把多次喷发后的剖面放在同一坐标中，保留原地表，拖动测高线，并保存一轮作为对照。</p><h3>科学模型与真实证据</h3><p>“透视火山”是机制示意；“留下的地形”是简化模型计算，均不是实测资料，也不能作为独立验证预设规律的证据。地下称岩浆，到达地表称熔岩，冷却后留下岩石。地幔不是整层液体，岩浆不直接来自地核。</p><p>地形计算把剖面分成 141 个网格：在固定喷口等量供料，热熔岩随表面高差流向邻格，逐步冷却。已冷却地层保留。每次投入固定为 4 模型格²（单位宽度下的剖面面积），只调定性的流动程度。两端不流出，图中不把模型格换算成真实米或千米。</p><p>为了看清同量条件下的不同分布，模型固定供料和冷却规则；未表示真实熔岩复杂的温度、成分与地形关系。流动性改变只影响下一次喷发。比较时应使用相同原地形、相同次数。</p><p>海底情境只比较堆积高度与固定海面，不模拟水下淬冷、枕状熔岩和水汽爆炸。火山活动还可能发生碎屑堆积、崩塌和塌陷；并非每次喷发都会把山顶抬高。这个版本聚焦熔岩堆积。</p><h3>资料依据</h3><p>项目所附五年级上册教材第 102—105 页、教师教学用书本课内容。未使用或编制作业本题目。</p><ul class="source-list"><li><a href="https://www.usgs.gov/faqs/how-do-volcanoes-erupt" target="_blank" rel="noopener noreferrer">USGS：How Do Volcanoes Erupt?</a></li><li><a href="https://www.nps.gov/subjects/volcanoes/volcanic-eruptions.htm" target="_blank" rel="noopener noreferrer">NPS：Volcanic Eruptions</a></li><li><a href="https://www.usgs.gov/faqs/are-tectonic-plates-floating-magma" target="_blank" rel="noopener noreferrer">USGS：Are tectonic plates floating on magma?</a></li></ul><p class="source-list">v1.0 · 单体 HTML · SVG / JavaScript · 离线可运行。外部资料链接需联网；核心功能无需联网。证据图为 SVG。课件数据只保留在当前页面会话，刷新即重置。</p>';
+function openModal(title,html){lastFocus=document.activeElement;P.playing=false;T.playing=false;render1();if(scene===2)render2();$('modalTitle').textContent=title;$('modalContent').innerHTML=html;$('modalShell').hidden=false;$('closeModal').focus();}
+function closeModal(){$('modalShell').hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+$('earthBtn').onclick=function(){openModal('从整个地球，到火山的一角',earthHTML);};$('analogyBtn').onclick=function(){openModal('实物实验能解释到哪里？',analogyHTML);};$('helpBtn').onclick=function(){openModal('模型与资料',helpHTML);};$('closeModal').onclick=closeModal;
+$('modalShell').onclick=function(e){if(e.target===this)closeModal();};
+document.addEventListener('keydown',function(e){if($('modalShell').hidden)return;if(e.key==='Escape')closeModal();if(e.key==='Tab'){var fs=$('modalPanel').querySelectorAll('button,a,[tabindex="0"]'),first=fs[0],last=fs[fs.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+$('fullBtn').onclick=function(){var d=document.documentElement;if(document.fullscreenElement||document.webkitFullscreenElement){var x=document.exitFullscreen||document.webkitExitFullscreen;if(x)x.call(document);}else{var f=d.requestFullscreen||d.webkitRequestFullscreen;if(f){try{var result=f.call(d);if(result&&result.catch)result.catch(function(){toast('当前浏览器限制全屏，可使用设备或浏览器的全屏功能。');});}catch(e){toast('当前浏览器限制全屏，请使用浏览器的全屏功能。');}}else toast('当前浏览器不支持网页全屏，可横屏查看。');}};
+document.addEventListener('visibilitychange',function(){if(document.hidden){P.playing=false;T.playing=false;render1();if(scene===2)render2();}});
+function loop(t){var dt=Math.min(.05,lastTick?(t-lastTick)/1000:0);lastTick=t;if(P.playing&&scene===1){P.progress=clamp(P.progress+dt/(P.slow?42:18),0,1);if(P.progress>=1)P.playing=false;render1();}if(T.playing&&scene===2){T.position=clamp(T.position+dt/(T.slow?20:9),0,T.runs.length);if(T.position>=T.runs.length)T.playing=false;render2();}requestAnimationFrame(loop);}
+render1();render2();requestAnimationFrame(loop);
+// 只读审阅入口：便于验证模型/界面状态，不参与任何教学判断。
+window.VolcanoLab={version:'1.0',getState:function(){return{page:scene,process:{progress:P.progress,playing:P.playing,cut:P.cut},terrain:{name:T.model.terrain,count:T.runs.length,position:T.position,playing:T.playing,mobility:T.mobility,probe:T.probe,compareCount:T.compare?T.compare.count:0},stats:cumulativeStats(currentView())};}};
+}());
+
+</script>
+</body>
+</html>
