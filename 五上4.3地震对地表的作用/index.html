@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#152d43">
+<meta name="aihtml-compatibility" content="T1">
+<meta name="description" content="五上4.3地震对地表的作用：地下断层透视、能量释放与振动传播，河谷滑坡、堵河与蓄水的条件比较。可暂停回溯、保留对照、导出证据图的离线互动模型。">
+<title>地震对地表的作用 · 五上4.3</title>
+<style>
+:root{--ink:#1b3045;--muted:#647487;--blue:#2168ab;--blue-soft:#e6f0f9;--amber:#c4772b;--line:#dbe2e7;--paper:#f3f5f7;--radius:14px;--shadow:0 8px 28px #1c34450b;font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;background:var(--paper)}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation}button:disabled{cursor:default;opacity:.45}button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #d48834;outline-offset:3px}button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;min-height:44px;padding:9px 14px;font-weight:650;transition:background .15s,color .15s}button:hover:not(:disabled){background:#edf3f8}button[aria-pressed=true],.primary{background:var(--ink);color:white;border-color:var(--ink)}button[aria-pressed=true]:hover,.primary:hover:not(:disabled){background:#28465e}.plain{border-color:transparent;background:transparent}.small{min-height:40px;font-size:14px;padding:7px 10px}.app{max-width:1920px;height:100vh;height:100dvh;min-height:620px;margin:auto;display:flex;flex-direction:column;padding:0 22px 10px;gap:12px}.topbar{height:86px;flex:none;display:flex;align-items:center;gap:24px;border-bottom:1px solid var(--line)}.brand{min-width:280px}.eyebrow{font-size:12px;letter-spacing:.13em;font-weight:700;color:var(--muted);margin-bottom:4px}.brand h1{font-size:25px;letter-spacing:.02em;line-height:1.2;margin:0;font-weight:780}.nav{display:flex;gap:7px;margin:auto}.nav button{min-width:145px;border:0;background:transparent;font-size:17px;padding:12px 18px}.nav button[aria-pressed=true]{background:var(--ink);color:#fff}.nav .num{font:700 12px/1 ui-monospace,monospace;margin-right:9px;opacity:.6}.utilities{display:flex;gap:6px}.utilities button{font-size:14px}.screen{display:none;min-height:0;flex:1;grid-template-columns:minmax(0,1fr) 284px;gap:14px}.screen.active{display:grid}.workspace{display:flex;flex-direction:column;min-width:0;min-height:0;gap:10px}.scene{position:relative;flex:1;min-height:0;overflow:hidden;border-radius:var(--radius);background:#edf3f5;border:1px solid #d8e1e5;box-shadow:var(--shadow);display:flex;align-items:stretch}.scene svg{width:100%;height:100%;display:block;touch-action:none;user-select:none}.scene-head{position:absolute;z-index:1;top:18px;left:22px;right:20px;pointer-events:none;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.scene-head h2{font-size:23px;line-height:1.35;margin:0 0 5px;font-weight:760}.scene-head p{margin:0;color:var(--muted);font-size:15px}.badge{background:#ffffffde;border:1px solid #d6e2e8;border-radius:20px;padding:6px 12px;white-space:nowrap;font-size:13px;font-weight:650}.scene-foot{position:absolute;left:20px;right:20px;bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;color:#667789;pointer-events:none}.scene-foot strong{font-weight:500;background:#fff9;padding:4px 9px;border-radius:5px}.player{flex:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:grid;grid-template-columns:auto minmax(160px,1fr) auto;align-items:center;gap:12px;box-shadow:var(--shadow)}.playbutton{min-width:116px}.transport{display:flex;gap:6px}.timeline{min-width:0}.timeline-head{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);margin:0 3px 2px;gap:8px}.timeline input{width:100%;margin:0;display:block}.sidebar{display:flex;flex-direction:column;gap:12px;min-height:0}.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:17px;box-shadow:var(--shadow)}.panel-title{font-size:14px;font-weight:750;color:var(--muted);margin:0 0 12px;display:flex;justify-content:space-between;align-items:center}.choice{display:flex;gap:5px;background:#f1f4f6;border-radius:9px;padding:4px}.choice button{flex:1;min-width:0;border:0;background:transparent;padding:10px 7px;font-size:15px;min-height:43px}.choice button[aria-pressed=true]{background:#fff;color:var(--blue);box-shadow:0 2px 6px #243e5514}.control-label{font-size:14px;font-weight:650;display:flex;align-items:center;justify-content:space-between;gap:8px;margin:16px 0 6px}.control-label output{font-size:13px;color:var(--blue);font-weight:750}.range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:1px}input[type=range]{accent-color:var(--blue);height:30px;min-height:30px;cursor:pointer;touch-action:pan-y;width:100%;padding:0;margin:0}input[type=range]:disabled{opacity:.4}.energy-track{height:9px;border-radius:8px;background:#e9eef2;overflow:hidden;margin-top:7px}.energy-fill{width:0;height:100%;background:linear-gradient(90deg,#deb568,#c27830);border-radius:8px}.energy-row{display:flex;align-items:center;justify-content:space-between;margin-top:15px;font-size:13px;color:var(--muted)}.energy-row b{font-size:13px;color:var(--amber)}.subcontrol{border-top:1px solid #e9edf0;padding-top:13px;margin-top:15px}.subcontrol .panel-title{font-size:13px;margin-bottom:8px}.observe{flex:1;min-height:0;display:flex;flex-direction:column}.observe h3{font-size:17px;margin:0 0 5px}.live-line{font-size:15px;line-height:1.5;margin:0;min-height:46px}.trace{width:100%;height:88px;display:block;margin:8px 0 2px}.trace-label{font-size:11px;color:var(--muted);display:flex;justify-content:space-between}.inline-tools{display:flex;gap:7px;margin-top:14px}.inline-tools button{flex:1;min-height:41px;font-size:13px;padding:7px}.prompt{margin:12px 0 0;line-height:1.65;font-size:14px;color:#526678;border-left:3px solid #dcb77d;padding-left:11px}.bottom-action{display:flex;gap:7px;flex:none}.bottom-action button{flex:1;min-height:43px;font-size:14px}.hint{font-size:12px;color:var(--muted);line-height:1.55;margin:10px 0 0}.value-list{margin:10px 0 0}.value-row{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #edf0f2;padding:10px 0;font-size:14px}.value-row:last-child{border:0}.value-row span:first-child{color:var(--muted)}.value-row strong{font-size:15px}.compare-strip{font-size:12px;line-height:1.6;padding:8px 10px;border-radius:7px;background:#fff4df;color:#7a5627;margin-top:10px}.footer{height:16px;display:flex;justify-content:space-between;align-items:center;flex:none;font-size:11px;color:#7b8995}.watermark{letter-spacing:.15em;color:#8c9aa5}.modal[hidden],.toast[hidden]{display:none}.modal{position:fixed;inset:0;background:#101f32a6;z-index:10;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(5px)}.dialog{width:min(820px,100%);max-height:90vh;overflow:auto;border-radius:18px;background:#f8fafc;box-shadow:0 20px 90px #05131a66;padding:28px}.dialog-head{display:flex;justify-content:space-between;align-items:center;gap:20px;position:sticky;top:-28px;background:#f8fafc;z-index:2;padding:0 0 14px}.dialog h2{font-size:24px;margin:0}.dialog h3{font-size:17px;margin:24px 0 8px}.dialog p,.dialog li{font-size:15px;line-height:1.85}.dialog a{color:var(--blue);overflow-wrap:anywhere}.dialog ul{padding-left:22px}.dialog table{border-collapse:collapse;width:100%;font-size:14px}.dialog th,.dialog td{border:1px solid var(--line);padding:10px 12px;text-align:left;line-height:1.7}.dialog th{background:#eef2f5}.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.evidence-card{border:1px solid var(--line);background:#fff;border-radius:12px;overflow:hidden}.evidence-card svg{width:100%;height:auto;display:block}.evidence-caption{padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px}.dialog-actions{display:flex;gap:9px;margin-top:20px;flex-wrap:wrap}.empty{padding:48px 24px;color:var(--muted);text-align:center;line-height:1.8}.toast{position:fixed;bottom:34px;left:50%;transform:translateX(-50%);z-index:20;background:#172e43;color:#fff;padding:13px 22px;border-radius:10px;box-shadow:0 5px 30px #0003;font-size:15px;max-width:90vw;text-align:center}.tiny-dot{width:8px;height:8px;display:inline-block;background:#dc963c;border-radius:50%;margin-right:6px}.illustration{width:100%;height:auto;background:#edf3f6;border-radius:10px}.keyphrase{background:#e7f0f9;padding:1px 6px;border-radius:3px}.view-key{color:var(--blue);font-size:13px;font-weight:700}.insight{background:#edf3f8;border-radius:8px;padding:12px;margin-top:12px;font-size:14px;line-height:1.8}
+@media(min-width:1500px){.app{padding-left:32px;padding-right:32px}.screen{grid-template-columns:minmax(0,1fr) 330px}.brand h1{font-size:30px}.topbar{height:96px}.nav button{font-size:19px}.panel{padding:22px}.panel-title{font-size:16px}.choice button{font-size:17px}.scene-head h2{font-size:27px}.live-line,.prompt{font-size:17px}.trace{height:104px}.control-label,.value-row{font-size:16px}.hint{font-size:14px}}
+@media(max-height:820px) and (min-width:901px){.app{gap:9px;min-height:590px;padding-bottom:7px}.topbar{height:72px}.panel{padding:13px}.sidebar{gap:9px}.scene-head{top:13px;left:18px}.scene-head h2{font-size:20px}.scene-head p{font-size:13px}.control-label{margin-top:10px}.subcontrol{margin-top:10px;padding-top:10px}.energy-row{margin-top:10px}.panel-title{margin-bottom:8px}.trace{height:64px;margin-top:5px}.prompt{margin-top:8px;font-size:13px}.inline-tools{margin-top:8px}.live-line{font-size:14px;min-height:39px}.observe h3{font-size:16px}.value-row{padding:7px 0}.player{padding:8px 11px}.footer{height:13px}}
+@media(max-width:1120px) and (min-width:901px){.app{padding-left:12px;padding-right:12px}.topbar{gap:8px}.brand{min-width:240px}.brand h1{font-size:22px}.nav button{min-width:125px;padding:10px 12px;font-size:16px}.utilities button{padding:8px}.screen{grid-template-columns:minmax(0,1fr) 255px;gap:10px}.scene-head h2{font-size:19px}.scene-head p{font-size:13px}.badge{font-size:11px;padding:5px 8px}.player{gap:6px}.playbutton{min-width:96px;font-size:14px;padding:9px}.transport button{padding:7px 9px;font-size:12px}.timeline-head{font-size:10px}}
+@media(max-width:900px){.app{height:auto;min-height:100vh;min-height:100dvh;padding:0 14px 12px;gap:12px}.topbar{height:auto;min-height:110px;flex-wrap:wrap;gap:8px;padding:13px 0 10px}.brand{min-width:0;flex:1}.brand h1{font-size:23px}.eyebrow{font-size:10px}.utilities{margin-left:auto}.utilities button{font-size:12px;padding:7px 9px;min-height:39px}.nav{order:3;width:100%;margin:0}.nav button{flex:1;min-height:44px;padding:10px;font-size:16px}.screen.active{display:flex;flex-direction:column;gap:12px}.workspace{gap:9px}.scene{flex:none;height:clamp(360px,55vw,510px);min-height:0}.scene-head{top:13px;left:16px}.scene-head h2{font-size:21px}.scene-head p{font-size:13px}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:12px}.bottom-action{grid-column:1/-1}.panel{padding:16px}.observe{min-height:240px}.player{grid-template-columns:auto 1fr auto}.footer{height:20px}.prompt{font-size:14px}.scene-foot{font-size:10px}.badge{font-size:12px}.dialog{padding:20px}.dialog-head{top:-20px}}
+@media(max-width:560px){.app{padding:0 9px 10px}.topbar{gap:7px}.brand h1{font-size:20px}.utilities button{padding:6px 8px;font-size:11px;min-height:36px}.utilities #evidenceOpen{display:none}.scene{height:360px}.scene-head{top:11px;left:12px;right:12px}.scene-head h2{font-size:17px}.scene-head p{font-size:11px;max-width:230px;line-height:1.5}.badge{font-size:10px;padding:5px 8px}.scene-foot{left:12px;right:12px;bottom:8px;font-size:9px}.player{grid-template-columns:auto 1fr;padding:8px;gap:8px}.transport{grid-column:1/-1;justify-content:flex-end;margin-top:-1px}.transport button{min-height:34px}.playbutton{min-width:101px;font-size:14px}.timeline-head{font-size:10px}.sidebar{grid-template-columns:1fr}.panel{padding:15px}.observe{min-height:0}.trace{height:82px}.footer{font-size:9px}.evidence-grid{grid-template-columns:1fr}.modal{padding:12px}.dialog h2{font-size:20px}.dialog p,.dialog li{font-size:14px}.dialog table{font-size:12px}.dialog td,.dialog th{padding:7px}.scene svg text{paint-order:stroke;stroke-width:.15px}.screen{gap:9px}.bottom-action{position:sticky;bottom:8px;background:#f3f5f7ed;padding:6px;border-radius:10px;z-index:2}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.trace-inset{position:absolute;z-index:1;top:88px;right:28px;width:230px;pointer-events:none;background:#ffffffd4;border:1px solid #d8e2e8;border-radius:9px;padding:7px 10px}.trace-inset .trace{height:62px;min-height:62px;margin:0}.trace-inset .trace-label{font-size:10px;gap:4px}
+@media(max-height:820px) and (min-width:901px){.trace-inset{top:78px;width:220px}.trace-inset .trace{height:54px;min-height:54px}}
+@media(max-width:900px){.trace-inset{top:75px;right:20px;width:200px}.trace-inset .trace{height:52px;min-height:52px}}
+@media(max-width:560px){.trace-inset{top:60px;right:12px;width:143px;padding:5px 7px}.trace-inset .trace{height:38px;min-height:38px}.trace-inset .trace-label{font-size:8px}}
+@media(max-height:820px) and (min-width:901px){#screen2 .sidebar .hint{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="eyebrow">五上 4.3 · 地球表面的变化</div><h1>地震对地表的作用</h1></div>
+  <nav class="nav" aria-label="探究场景"><button id="nav1" aria-pressed="true"><span class="num">01</span>看进地底</button><button id="nav2" aria-pressed="false"><span class="num">02</span>追踪河谷</button></nav>
+  <div class="utilities"><button id="evidenceOpen" class="plain">证据夹 <span id="count">0</span></button><button id="help" class="plain">模型说明</button><button id="fullscreen" class="plain" aria-label="切换全屏">全屏</button></div>
+</header>
+<main class="screen active" id="screen1" aria-label="看进地底">
+  <div class="workspace">
+    <section class="scene">
+      <div class="scene-head"><div><h2 id="title1">地下怎样动，地面才会晃？</h2><p id="subtitle1">拖动两侧箭头施力，也可点击下方开始。</p></div><span class="badge" id="phase1">等待观察</span></div>
+      <div class="trace-inset"><svg id="traceSvg" class="trace" viewBox="0 0 260 84" role="img" aria-label="A点的局部往返振动示意记录"></svg><div class="trace-label"><span>局部振动示意 · 非实测</span><span>过程 →</span></div></div>
+      <svg id="faultSvg" viewBox="0 0 1000 580" role="group" aria-label="可操作的地下断层剖面；拖动边缘箭头加载，拖动A点观察局部振动"></svg>
+      <div class="scene-foot"><strong>地下剖面 · 形变与时间均为放大示意</strong><span>蓝点：岩石标记　橙圈：能量传播示意</span></div>
+    </section>
+    <div class="player">
+      <button id="play1" class="primary playbutton">开始加载</button>
+      <div class="timeline"><div class="timeline-head"><span>拖动回看已经发生的过程</span><span id="progress1">尚未加载</span></div><input id="time1" type="range" min="0" max="1" step="1" value="0" disabled aria-label="地下过程回放进度"></div>
+      <div class="transport"><button id="slow1" class="small" aria-pressed="false">慢放</button><button id="reset1" class="small">复位</button></div>
+    </div>
+  </div>
+  <aside class="sidebar">
+    <section class="panel">
+      <h3 class="panel-title">改变岩层受到的作用</h3>
+      <div class="choice" aria-label="受力方向"><button id="compress" aria-pressed="true">相向挤压</button><button id="extend" aria-pressed="false">相背拉伸</button></div>
+      <label class="control-label" for="load">远端加载 <output id="loadText">未加载</output></label><input id="load" type="range" min="0" max="125" value="0" aria-label="远端加载程度，模型量"><div class="range-labels"><span>轻</span><span>持续施力 →</span></div>
+      <div class="energy-row"><span>岩层储能 · 相对示意</span><b id="energyText">尚未积累</b></div><div class="energy-track"><div class="energy-fill" id="energy"></div></div>
+      <div class="subcontrol"><h4 class="panel-title">换一种破裂范围</h4><div class="choice" aria-label="破裂范围"><button id="surface" aria-pressed="true">到达地表</button><button id="buried" aria-pressed="false">停留地下</button></div></div>
+    </section>
+    <section class="panel observe">
+      <h3><span class="view-key">A</span> 追踪一个位置</h3><p class="live-line" id="probeText">拖动地面上的 A 点，选定观察位置。</p>
+      
+      <div class="inline-tools"><button id="ghost1" aria-pressed="false">震前轮廓</button><button id="analogy">对照实物</button></div>
+      <p class="prompt" id="question1">地面开始晃动之前，地下已经在发生什么？</p>
+    </section>
+    <div class="bottom-action"><button id="save1">保存这一刻</button><button class="open-evidence">查看证据</button></div>
+  </aside>
+</main>
+<main class="screen" id="screen2" aria-label="追踪河谷" hidden>
+  <div class="workspace">
+    <section class="scene">
+      <div class="scene-head"><div><h2 id="title2">震动停了，地表还会改变吗？</h2><p id="subtitle2">拖动蓝色河道，改变滑落物与河道的相对位置。</p></div><span class="badge" id="phase2">等待观察</span></div>
+      <svg id="valleySvg" viewBox="0 0 1000 580" role="group" aria-label="河谷俯视示意；可拖动河道位置，比较滑坡堵河和蓄水"></svg>
+      <div class="scene-foot"><strong>河谷俯视 · 震动与滑移慢放，蓄水时间压缩</strong><span>位置用模型格表示，无实际长度对应</span></div>
+    </section>
+    <div class="player">
+      <button id="play2" class="primary playbutton">开始观察</button>
+      <div class="timeline"><div class="timeline-head"><span>同一过程，可暂停与回溯</span><span id="progress2">震前</span></div><input id="time2" type="range" min="0" max="1" step="1" value="0" aria-label="河谷变化回放进度"></div>
+      <div class="transport"><button id="slow2" class="small" aria-pressed="false">慢放</button><button id="reset2" class="small">复位</button></div>
+    </div>
+  </div>
+  <aside class="sidebar">
+    <section class="panel">
+      <h3 class="panel-title">保持模型震动相同，改变条件</h3>
+      <div class="control-label" style="margin-top:0">坡体条件</div><div class="choice" aria-label="坡体稳定程度"><button id="stable" aria-pressed="false">较稳固</button><button id="loose" aria-pressed="true">易滑动</button></div>
+      <label class="control-label" for="river">河道位置 <output id="riverText">7.6 格</output></label><input id="river" type="range" min="650" max="920" step="5" value="760" aria-label="河道位置"><div class="range-labels"><span>靠近坡脚</span><span>远离坡脚</span></div>
+      <p class="hint">每次只改变一个条件，再观察。蓝色河道也可直接拖动。</p>
+    </section>
+    <section class="panel observe">
+      <h3>追踪变化留下的痕迹</h3>
+      <div class="value-list"><div class="value-row"><span>坡体</span><strong id="slopeStatus">等待观察</strong></div><div class="value-row"><span>河道</span><strong id="riverStatus">水流通过</strong></div><div class="value-row"><span>上游水位</span><strong id="waterStatus">原水位</strong></div></div>
+      <div id="compareStrip" class="compare-strip" hidden></div>
+      <div class="inline-tools"><button id="keepA">留作对照 A</button><button id="clearA" hidden>清除对照</button></div>
+      <p class="prompt" id="question2">滑坡一定会堵河吗？试着用位置关系作出解释。</p>
+    </section>
+    <div class="bottom-action"><button id="save2">保存这一刻</button><button class="open-evidence">查看证据</button></div>
+  </aside>
+</main>
+<footer class="footer"><span>T1 · 离线互动模型 v1.0　<span class="tiny-dot"></span>模拟结果需要结合实物实验和真实资料解释</span><span class="watermark">mutiw</span></footer>
+</div>
+<div class="modal" id="modal" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><div class="dialog-head"><h2 id="dialogTitle"></h2><button id="closeModal" aria-label="关闭对话框">关闭</button></div><div id="dialogBody"></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+/*
+ * EarthquakeModel — a one-event spring / friction-slider teaching model.
+ * All time, load, displacement and energy values use MODEL units, not SI.
+ *
+ * While the fault is locked: F = k (drive - slip). The far end approaches
+ * a user-selected load slowly. At static-friction failure that end is held
+ * fixed; the slider follows m x'' + c x' + k x = k drive - kineticFriction.
+ * An exact damped-oscillator solution is evaluated within short substeps.
+ * The first zero of velocity relocks the slider. This leaves permanent slip
+ * and a residual elastic force smaller than the static-friction threshold.
+ *
+ * The model illustrates an existing fault that is initially locked. It does
+ * not assert that visible folds precede every earthquake, predict real
+ * earthquakes, or reproduce the full crust, individual seismic-wave types,
+ * magnitude, surface damage, or observed earthquake timing.
+ *
+ * energyReleased = dissipated = initial event energy - current mechanical
+ * energy. This is cumulative irreversible conversion to frictional heat,
+ * radiated energy and other omitted processes, NOT seismic energy alone.
+ * waveAt is a delayed, attenuated VISUAL cue linked to that conversion;
+ * it is not a second energy reservoir or a calculated seismogram.
+ */
+(function (root) {
+  'use strict';
+
+  var constants = Object.freeze({
+    stiffness: 1,
+    mass: 1,
+    staticFriction: 1,
+    kineticFriction: 0.36,
+    damping: 0.28,
+    loadSpeed: 0.26,
+    maxLoad: 1.25,
+    maxStep: 1 / 240,
+    sampleRate: 30,
+    replayTail: 7,
+    waveSpeed: 1.6, // model distance / model time; UI uses 180 px / distance.
+    waveFrequency: 1.5, // cycles / model time, illustrative, NOT hertz.
+    waveDecay: 0.65,
+    waveAttenuationLength: 2,
+    waveVisualGain: 2.5
+  });
+
+  var K = constants.stiffness;
+  var M = constants.mass;
+  var STATIC = constants.staticFriction;
+  var KINETIC = constants.kineticFriction;
+  var ALPHA = constants.damping / (2 * M);
+  var OMEGA = Math.sqrt(K / M - ALPHA * ALPHA);
+  var CRITICAL_DRIVE = STATIC / K;
+  var STOP_TIME = Math.PI / OMEGA;
+  var EPS = 1e-12;
+
+  function finite(value, fallback) {
+    return typeof value === 'number' && isFinite(value) ? value : fallback;
+  }
+
+  function clamp(value, low, high) {
+    return Math.max(low, Math.min(high, value));
+  }
+
+  // The first slip always starts from rest at the same static threshold.
+  // Compression / extension is a rendering direction, not a change in this
+  // scalar energy law; a positive slip means motion along the chosen fault.
+  function motionAt(age, drive) {
+    var tau = clamp(age, 0, STOP_TIME);
+    var equilibriumSlip = drive - KINETIC / K;
+    var decay = Math.exp(-ALPHA * tau);
+    var sine = Math.sin(OMEGA * tau);
+    var cosine = Math.cos(OMEGA * tau);
+    var slip = equilibriumSlip *
+      (1 - decay * (cosine + ALPHA / OMEGA * sine));
+    var settled = age >= STOP_TIME;
+    var velocity = settled ? 0 :
+      equilibriumSlip * (K / M) / OMEGA * decay * sine;
+    var force = K * (drive - slip);
+    var elasticEnergy = 0.5 * K * Math.pow(drive - slip, 2);
+    var kineticEnergy = 0.5 * M * velocity * velocity;
+    var initialEnergy = 0.5 * K * drive * drive;
+    var dissipated = Math.max(0, initialEnergy - elasticEnergy - kineticEnergy);
+    return {
+      slip: Math.max(0, slip),
+      velocity: Math.max(0, velocity),
+      force: force,
+      elasticEnergy: elasticEnergy,
+      kineticEnergy: kineticEnergy,
+      dissipated: dissipated,
+      sliding: age < STOP_TIME,
+      settled: settled,
+      energyReleased: dissipated
+    };
+  }
+
+  function create() {
+    var state;
+
+    function snapshot() {
+      return {
+        t: state.t,
+        drive: state.drive,
+        slip: state.slip,
+        velocity: state.velocity,
+        force: state.force,
+        elasticEnergy: state.elasticEnergy,
+        kineticEnergy: state.kineticEnergy,
+        dissipated: state.dissipated,
+        sliding: state.sliding,
+        eventTime: state.eventTime,
+        settled: state.settled,
+        energyReleased: state.energyReleased
+      };
+    }
+
+    function reset() {
+      state = {
+        t: 0,
+        drive: 0,
+        slip: 0,
+        velocity: 0,
+        force: 0,
+        elasticEnergy: 0,
+        kineticEnergy: 0,
+        dissipated: 0,
+        sliding: false,
+        eventTime: null,
+        settled: false,
+        energyReleased: 0
+      };
+      return snapshot();
+    }
+
+    function updateLocked() {
+      state.force = K * state.drive;
+      state.elasticEnergy = 0.5 * K * state.drive * state.drive;
+    }
+
+    function updateSliding() {
+      var motion = motionAt(state.t - state.eventTime, state.drive);
+      Object.keys(motion).forEach(function (key) { state[key] = motion[key]; });
+    }
+
+    function step(dt, target) {
+      var remaining = Math.max(0, finite(dt, 0));
+      var requested = clamp(finite(target, state.drive), 0, constants.maxLoad);
+
+      while (remaining > EPS) {
+        // Once stopped, a long inactive browser frame needs no tiny stepping.
+        // Likewise a subcritical slider at its requested load stays at rest.
+        if (state.settled || (state.eventTime === null &&
+            Math.abs(state.drive - requested) <= EPS)) {
+          state.t += remaining;
+          remaining = 0;
+          break;
+        }
+
+        var h = Math.min(remaining, constants.maxStep);
+        if (state.eventTime === null) {
+          var delta = clamp(requested - state.drive,
+            -constants.loadSpeed * h, constants.loadSpeed * h);
+          var nextDrive = state.drive + delta;
+
+          if (delta > 0 && nextDrive >= CRITICAL_DRIVE - EPS) {
+            // Locate the crossing within the substep, so event time does not
+            // depend on the caller's frame rate and drive cannot overshoot.
+            var crossing = clamp((CRITICAL_DRIVE - state.drive) /
+              constants.loadSpeed, 0, h);
+            state.t += crossing;
+            state.drive = CRITICAL_DRIVE;
+            state.eventTime = state.t;
+            state.sliding = true;
+            state.t += h - crossing;
+            updateSliding();
+          } else {
+            state.drive = nextDrive;
+            state.t += h;
+            updateLocked();
+          }
+        } else {
+          // After first failure the drive is frozen, regardless of target.
+          state.t += h;
+          updateSliding();
+        }
+        remaining -= h;
+      }
+      return snapshot();
+    }
+
+    reset();
+    return { step: step, snapshot: snapshot, reset: reset };
+  }
+
+  function scenario(target) {
+    var requested = clamp(finite(target, constants.maxLoad), 0, constants.maxLoad);
+    var model = create();
+    var frames = [model.snapshot()];
+    var dt = 1 / constants.sampleRate;
+    // At least 0.75 model time remains after a subcritical load stabilizes.
+    var end = requested / constants.loadSpeed + 0.75;
+    while (frames[frames.length - 1].t < end - EPS) {
+      var frame = model.step(dt, requested);
+      frames.push(frame);
+      if (frame.eventTime !== null) end = frame.eventTime + constants.replayTail;
+    }
+    return frames;
+  }
+
+  function waveAt(state, distance) {
+    if (!state || state.eventTime === null ||
+        !isFinite(state.eventTime) || !isFinite(state.t)) return 0;
+    var radius = Math.max(0, finite(distance, 0));
+    var retardedTime = state.t - state.eventTime - radius / constants.waveSpeed;
+    if (retardedTime <= 0) return 0;
+
+    // The source release is evaluated at retarded time. Using the current
+    // release everywhere would make distant points react before arrival.
+    var drive = finite(state.drive, CRITICAL_DRIVE);
+    var initialEnergy = 0.5 * K * drive * drive;
+    if (initialEnergy <= EPS) return 0;
+    var release = motionAt(retardedTime, drive).energyReleased;
+    var releaseFraction = clamp(release / initialEnergy, 0, 1);
+    var attenuation = 1 / Math.sqrt(1 + radius / constants.waveAttenuationLength);
+    var envelope = constants.waveVisualGain * Math.sqrt(releaseFraction) *
+      Math.exp(-constants.waveDecay * retardedTime) * attenuation;
+    return envelope * Math.sin(2 * Math.PI * constants.waveFrequency * retardedTime);
+  }
+
+  root.EarthquakeModel = Object.freeze({
+    constants: constants,
+    create: create,
+    scenario: scenario,
+    waveAt: waveAt
+  });
+}(typeof globalThis !== 'undefined' ? globalThis : window));
+
+</script>
+<script>
+/*
+ * ValleyModel — a qualitative earthquake / landslide / river-blockage model.
+ * Coordinates and time are MODEL units. The drawing may use the same x values
+ * as its SVG coordinate system, but they are not surveyed metres or seconds.
+ *
+ * Both slopes are initially stable: tan(32 degrees) < either static friction
+ * coefficient. They receive the SAME prescribed horizontal shaking. One
+ * coefficient is low enough for the resulting tangential force to overcome
+ * static friction; the other is not. Once released, the simplified mass slides
+ * downhill, then slows on a horizontal reach. The horizontal velocity remains
+ * continuous at the foot; bouncing, fragmentation and the loss of vertical
+ * motion on impact are not resolved.
+ *
+ * A fixed footprint is used for the final deposit. Full blockage is assessed
+ * only after it stops. Partial coverage retains a flow path in this model.
+ * Fixed inflow fills a fixed-area reservoir above its initial flowing level;
+ * water above the model crest can overflow. There is no breach / dam failure.
+ * The rates returned for a recorded frame are averages over the preceding
+ * frame interval, so summing (inflow - outflow) * frameDt gives waterVolume.
+ * This is a schematic comparison, not a real landslide or flood prediction.
+ */
+(function (root) {
+  'use strict';
+
+  var constants = Object.freeze({
+    initialX: 350,
+    slopeEnd: 580,
+    slopeAngleDegrees: 32,
+    gravity: 80,
+    looseStaticFriction: 0.72,
+    firmStaticFriction: 1.1,
+    kineticFriction: 0.4,
+    flatFriction: 0.22,
+    depositHalfWidth: 70,
+    defaultRiverX: 760,
+    defaultRiverWidth: 76,
+    quakeStart: 1,
+    quakeDuration: 2.6,
+    quakePeakAcceleration: 18,
+    quakeFrequency: 1.8,
+    quakeDecayTime: 1.2,
+    maxStep: 1 / 240,
+    sampleRate: 30,
+    duration: 28,
+    inflow: 0.07,
+    storageVolume: 1,
+    crestLevel: 0.62,
+    weirCoefficient: 0.9
+  });
+
+  var ANGLE = constants.slopeAngleDegrees * Math.PI / 180;
+  var SIN = Math.sin(ANGLE);
+  var COS = Math.cos(ANGLE);
+  var EPS = 1e-10;
+
+  function clamp(value, low, high) {
+    return Math.max(low, Math.min(high, value));
+  }
+
+  function finite(value, fallback) {
+    return typeof value === 'number' && isFinite(value) ? value : fallback;
+  }
+
+  function shakingAcceleration(t) {
+    var age = t - constants.quakeStart;
+    if (age <= 0 || age >= constants.quakeDuration) return 0;
+    // Smoothly taper the final 0.2 model time to zero as the envelope ends.
+    var tail = clamp((constants.quakeDuration - age) / 0.2, 0, 1);
+    return constants.quakePeakAcceleration *
+      Math.sin(2 * Math.PI * constants.quakeFrequency * age) *
+      Math.exp(-age / constants.quakeDecayTime) * tail;
+  }
+
+  function scenario(options) {
+    var opts = options || {};
+    var loose = opts.loose !== false;
+    var riverX = finite(opts.riverX, constants.defaultRiverX);
+    var riverWidth = finite(opts.riverWidth, constants.defaultRiverWidth);
+    if (riverWidth <= 0) riverWidth = constants.defaultRiverWidth;
+    var bedLeft = riverX - riverWidth / 2;
+    var bedRight = riverX + riverWidth / 2;
+    var staticFriction = loose ? constants.looseStaticFriction :
+      constants.firmStaticFriction;
+
+    var t = 0;
+    var x = constants.initialX;
+    var velocity = 0;
+    var triggered = false;
+    var sliding = false;
+    var settled = false;
+    var waterVolume = 0;
+    var frameInflow = constants.inflow;
+    var frameOutflow = constants.inflow;
+
+    function geometry() {
+      var depositLeft = x - constants.depositHalfWidth;
+      var depositRight = x + constants.depositHalfWidth;
+      var coveredWidth = Math.max(0,
+        Math.min(depositRight, bedRight) - Math.max(depositLeft, bedLeft));
+      return {
+        depositLeft: depositLeft,
+        depositRight: depositRight,
+        bedLeft: bedLeft,
+        bedRight: bedRight,
+        overlap: clamp(coveredWidth / riverWidth, 0, 1),
+        blocked: triggered && settled && depositLeft <= bedLeft + EPS &&
+          depositRight >= bedRight - EPS
+      };
+    }
+
+    function snapshot() {
+      var shape = geometry();
+      return {
+        t: t,
+        x: x,
+        velocity: velocity,
+        sliding: sliding,
+        triggered: triggered,
+        settled: settled,
+        shaking: shakingAcceleration(t) / constants.quakePeakAcceleration,
+        overlap: shape.overlap,
+        blocked: shape.blocked,
+        waterLevel: clamp(waterVolume / constants.storageVolume, 0, 1),
+        inflow: frameInflow,
+        outflow: frameOutflow,
+        waterVolume: waterVolume,
+        depositLeft: shape.depositLeft,
+        depositRight: shape.depositRight,
+        bedLeft: shape.bedLeft,
+        bedRight: shape.bedRight
+      };
+    }
+
+    function moveFor(h, horizontalInertia) {
+      var remaining = h;
+      while (remaining > EPS && sliding) {
+        var onSlope = x < constants.slopeEnd - EPS;
+        var normal = Math.max(0, constants.gravity * COS - horizontalInertia * SIN);
+        var acceleration = onSlope ?
+          (constants.gravity * SIN + horizontalInertia * COS -
+            constants.kineticFriction * normal) * COS :
+          -constants.flatFriction * constants.gravity;
+        var duration = remaining;
+
+        // Resolve a stop inside the substep without reversing the mass.
+        if (acceleration < 0 && velocity + acceleration * duration <= 0) {
+          duration = velocity / -acceleration;
+        }
+
+        // Resolve the slope-to-flat transition at its actual crossing time.
+        // Re-evaluate acceleration on the flat for the rest of the substep.
+        var projectedX = x + velocity * duration +
+          0.5 * acceleration * duration * duration;
+        var crossesFoot = onSlope && projectedX >= constants.slopeEnd;
+        if (crossesFoot) {
+          var distance = constants.slopeEnd - x;
+          var crossingTime;
+          if (Math.abs(acceleration) < EPS) {
+            crossingTime = distance / velocity;
+          } else {
+            // Numerically stable positive root of v*t + 0.5*a*t^2 = distance.
+            crossingTime = 2 * distance /
+              (velocity + Math.sqrt(velocity * velocity + 2 * acceleration * distance));
+          }
+          duration = clamp(crossingTime, 0, duration);
+        }
+
+        x += velocity * duration + 0.5 * acceleration * duration * duration;
+        velocity = Math.max(0, velocity + acceleration * duration);
+        remaining -= duration;
+        if (crossesFoot) x = constants.slopeEnd;
+
+        if (velocity <= EPS && acceleration <= 0) {
+          velocity = 0;
+          sliding = false;
+          settled = true;
+        }
+        // At a slope crossing duration can be zero within roundoff; placing
+        // the mass exactly at slopeEnd makes the next iteration the flat.
+      }
+    }
+
+    function stepFrame(frameDt) {
+      var remaining = frameDt;
+      var inputVolume = 0;
+      var outputVolume = 0;
+      while (remaining > EPS) {
+        var h = Math.min(remaining, constants.maxStep);
+        var inertia = shakingAcceleration(t + h / 2);
+
+        if (!triggered) {
+          var normal = constants.gravity * COS - inertia * SIN;
+          var downslope = constants.gravity * SIN + inertia * COS;
+          if (downslope > staticFriction * normal) {
+            triggered = true;
+            sliding = true;
+          }
+        }
+        if (sliding) moveFor(h, inertia);
+
+        var shape = geometry();
+        var incoming = constants.inflow;
+        var outgoing;
+        if (!shape.blocked) {
+          // An open channel passes the inflow. The scenario never removes a
+          // stopped deposit, but the storage term also keeps this branch
+          // conservative if the model is later extended to a reopening.
+          outgoing = incoming + waterVolume / h;
+        } else {
+          var waterLevel = waterVolume / constants.storageVolume;
+          var overflowHead = Math.max(0, waterLevel - constants.crestLevel);
+          outgoing = constants.weirCoefficient * Math.pow(overflowHead, 1.5);
+          outgoing = Math.min(outgoing, incoming + waterVolume / h);
+        }
+        var nextVolume = waterVolume + (incoming - outgoing) * h;
+        // Any excess is routed to spill, never silently discarded by clamping.
+        if (nextVolume > constants.storageVolume) {
+          outgoing += (nextVolume - constants.storageVolume) / h;
+          nextVolume = constants.storageVolume;
+        }
+        waterVolume = Math.max(0, nextVolume);
+        inputVolume += incoming * h;
+        outputVolume += outgoing * h;
+        t += h;
+        remaining -= h;
+      }
+      frameInflow = inputVolume / frameDt;
+      frameOutflow = outputVolume / frameDt;
+    }
+
+    var frames = [snapshot()];
+    var count = Math.round(constants.duration * constants.sampleRate);
+    var frameDt = 1 / constants.sampleRate;
+    for (var i = 1; i <= count; i++) {
+      stepFrame(frameDt);
+      t = i / constants.sampleRate;
+      frames.push(snapshot());
+    }
+    return frames;
+  }
+
+  root.ValleyModel = Object.freeze({ constants: constants, scenario: scenario });
+}(typeof globalThis !== 'undefined' ? globalThis : window));
+
+</script>
+<script>
+/* Presentation / controls. The two pure science modules above are separate
+   replacement points; SVG assets below never decide scientific outcomes. */
+(function(){'use strict';
+var $=function(id){return document.getElementById(id)}, clamp=function(x,a,b){return Math.max(a,Math.min(b,x))}, fmt=function(x){return Number(x).toFixed(1)}, NS='http://www.w3.org/2000/svg';
+var E=window.EarthquakeModel,V=window.ValleyModel;
+var P={engine:E.create(),frames:[],cursor:0,playing:false,replay:false,target:0,speed:1,direction:1,surface:true,ghost:false,probe:730,done:false};P.frames=[P.engine.snapshot()];
+var Q={loose:true,riverX:760,frames:[],cursor:0,playing:false,speed:1,reference:null};
+var page=1,evidence=[],dirty=true,acc1=0,acc2=0,lastTime=0,modalReturn=null,toastTimer=null,drag=null;
+var COLORS=['#e2c291','#c69469','#b87550','#7f8a8b'];
+function esc(x){return String(x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function pressed(id,on){$(id).setAttribute('aria-pressed',on?'true':'false')}
+function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true},3000)}
+function currentP(){return P.frames[Math.round(P.cursor)]||P.frames[0]}
+function currentQ(){return Q.frames[Math.round(Q.cursor)]||Q.frames[0]}
+function resetP(){P.engine.reset();P.frames=[P.engine.snapshot()];P.cursor=0;P.target=0;P.playing=false;P.replay=false;P.done=false;acc1=0;$('load').value=0;dirty=true}
+function rebuildQ(){Q.frames=V.scenario({loose:Q.loose,riverX:Q.riverX,riverWidth:76});Q.cursor=0;Q.playing=false;acc2=0;dirty=true}
+function switchPage(n){P.playing=false;Q.playing=false;page=n;[1,2].forEach(function(i){$('screen'+i).classList.toggle('active',i===n);$('screen'+i).hidden=i!==n;pressed('nav'+i,i===n)});dirty=true}
+function setDirection(n){if(P.direction!==n){P.direction=n;resetP()}pressed('compress',n===1);pressed('extend',n===-1)}
+function setSurface(on){if(P.surface!==on){P.surface=on;resetP()}pressed('surface',on);pressed('buried',!on)}
+function setLoad(v){if(P.engine.snapshot().eventTime!==null){toast('这一轮已发生错动；复位后可重新施力。');return}P.target=clamp(v/100,0,1.25);$('load').value=Math.round(P.target*100);P.playing=true;P.replay=false;P.cursor=P.frames.length-1;dirty=true}
+function faultX(y){return 485+.6*(y-210)}
+function mapRock(x,y,side,s){var depth=P.surface?1:clamp((y-264)/122,0,1);var dist=x-faultX(y);var elastic=-P.direction*s.force*7*Math.tanh(dist/180);var dy=(-side)*P.direction*s.slip*43*depth+elastic;return [x+.6*dy,y+dy]}
+function pt(p){return p.map(function(x){return x.toFixed(2)}).join(',')}
+function layerPath(y1,y2,side,s){var p=[],f1=faultX(y1),f2=faultX(y2),xmin=side<0?65:f1,xmax=side<0?f1:935;for(var j=0;j<=24;j++){var x=xmin+(xmax-xmin)*j/24;p.push(mapRock(x,y1,side,s))}xmin=side<0?65:f2;xmax=side<0?f2:935;for(j=24;j>=0;j--){x=xmin+(xmax-xmin)*j/24;p.push(mapRock(x,y2,side,s))}return 'M'+p.map(pt).join('L')+'Z'}
+function surfaceLine(side,s){var out=[],min=side<0?65:485,max=side<0?485:935;for(var i=0;i<=35;i++)out.push(mapRock(min+(max-min)*i/35,210,side,s));return 'M'+out.map(pt).join('L')}
+function svgText(x,y,text,size,color,anchor,weight){return '<text x="'+x+'" y="'+y+'" fill="'+(color||'#244259')+'" font-size="'+(size||18)+'" font-weight="'+(weight||500)+'" text-anchor="'+(anchor||'start')+'">'+esc(text)+'</text>'}
+function tree(x,y,scale){return '<g transform="translate('+x+' '+y+') scale('+scale+')"><path d="M0 0V-36" stroke="#736758" stroke-width="5"/><path d="M-17-26Q-30-45-12-56Q0-77 15-53Q36-36 16-23Z" fill="#6b8c82"/><path d="M0-31V-54" stroke="#4d766e" stroke-width="2"/></g>'}
+function flag(x,y,label,color){return '<g><path d="M'+x+' '+y+'v-44" stroke="'+color+'" stroke-width="3"/><rect x="'+(x-18)+'" y="'+(y-62)+'" width="36" height="27" rx="6" fill="'+color+'"/>'+svgText(x,y-43,label,17,'#fff','middle',750)+'</g>'}
+function faultSVG(s,exporting){var a=[],initial={force:0,slip:0},source=[faultX(370),370],age=s.eventTime===null?-1:s.t-s.eventTime;
+ a.push('<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#eaf1f5"/><stop offset="1" stop-color="#faf8ed"/></linearGradient><linearGradient id="deep" x2="0" y2="1"><stop stop-color="#7c8b8f"/><stop offset="1" stop-color="#526975"/></linearGradient><pattern id="speck" width="37" height="31" patternUnits="userSpaceOnUse"><circle cx="8" cy="12" r="1.7" fill="#5f5145" opacity=".14"/><path d="M23 22l5-2" stroke="#fff" opacity=".24" stroke-width="2"/></pattern><clipPath id="earthClip"><rect x="65" y="105" width="870" height="415" rx="13"/></clipPath><filter id="soft"><feGaussianBlur stdDeviation="8"/></filter></defs>');
+ a.push('<rect width="1000" height="580" fill="url(#sky)"/><path d="M0 202Q135 175 275 198T540 184T800 194T1000 170V245H0Z" fill="#d7e3e5" opacity=".6"/><g clip-path="url(#earthClip)">');
+ var ys=[210,282,359,438,650];for(var i=0;i<4;i++)[-1,1].forEach(function(side){var path=layerPath(ys[i],ys[i+1],side,s);a.push('<path d="'+path+'" fill="'+COLORS[i]+'" stroke="#ffffff38" stroke-width="1.5"/><path d="'+path+'" fill="url(#speck)"/>')});
+ [-1,1].forEach(function(side){a.push('<path d="'+surfaceLine(side,s)+'" fill="none" stroke="#6f806b" stroke-width="15"/><path d="'+surfaceLine(side,s)+'" fill="none" stroke="#c1c7bd" stroke-width="7"/>')});
+ if(P.ghost){a.push('<path d="M65 210H935M65 282H935M65 359H935M65 438H935" fill="none" stroke="#fefcf3" stroke-width="2.5" stroke-dasharray="9 7" opacity=".9"/>')}
+ var startY=P.surface?210-s.slip*43:282,fp=[];for(i=0;i<=35;i++){var yy=startY+(650-startY)*i/35;fp.push([faultX(yy),yy])}a.push('<path d="M'+fp.map(pt).join('L')+'" fill="none" stroke="'+(age<0?'#66584f':'#c16636')+'" stroke-width="'+(age<0?3:5)+'" stroke-dasharray="'+(age<0?'7 5':'none')+'" opacity=".9"/>');
+ if(age>=0){for(i=0;i<4;i++){var r=(age-i*.24)*E.constants.waveSpeed*180;if(r>0&&r<1000){a.push('<circle cx="'+source[0]+'" cy="'+source[1]+'" r="'+r+'" fill="none" stroke="#eda644" stroke-width="'+(i===0?3:1.6)+'" opacity="'+Math.max(0,.58-r/1800)+'"/>')}}}
+ var dots=[[185,268],[310,322],[420,402],[690,270],[790,335],[845,447],[248,462],[715,476]];dots.forEach(function(d){var side=d[0]<faultX(d[1])?-1:1,b=mapRock(d[0],d[1],side,s),dist=Math.hypot(d[0]-source[0],d[1]-source[1]),v=E.waveAt(s,dist/180)*8;var ang=Math.atan2(d[1]-source[1],d[0]-source[0]);a.push('<circle cx="'+b[0]+'" cy="'+b[1]+'" r="7" fill="none" stroke="#fff7" stroke-width="1.5"/><circle cx="'+(b[0]+v*Math.cos(ang))+'" cy="'+(b[1]+v*Math.sin(ang))+'" r="5" fill="#235b86" stroke="#f4f8ff" stroke-width="2"/>')});
+ if(age>=0){a.push('<circle cx="'+source[0]+'" cy="'+source[1]+'" r="8" fill="#e6a14f" stroke="#fff4dd" stroke-width="3"/>');a.push(svgText(source[0]+20,source[1]+5,'开始错动的位置',17,'#fff9ef'))}else{a.push('<rect x="'+(source[0]-12)+'" y="'+(source[1]-10)+'" width="24" height="20" rx="5" fill="#e1a85e"/><path d="M'+(source[0]-6)+' '+(source[1]-10)+'v-5a6 6 0 0 1 12 0v5" fill="none" stroke="#fdf5df" stroke-width="3"/>');a.push(svgText(source[0]+22,source[1]+5,'暂时卡住',18,'#fff9ef'))}
+ a.push('</g>');
+ [170,314,806,893].forEach(function(x,i){var side=x<485?-1:1,p=mapRock(x,210,side,s),wave=E.waveAt(s,Math.hypot(x-source[0],210-source[1])/180)*8;a.push(tree(p[0]+wave*.5,p[1]-7,.7+(i%2)*.12))});
+ var probeSide=P.probe<485?-1:1,bp=mapRock(P.probe,210,probeSide,s),pv=E.waveAt(s,Math.hypot(P.probe-source[0],210-source[1])/180)*8;
+ a.push('<g data-drag="probe" tabindex="0" role="button" aria-label="左右拖动A观察点" style="cursor:ew-resize"><rect x="'+(bp[0]-30)+'" y="'+(bp[1]-77)+'" width="60" height="88" fill="transparent"/>'+flag(bp[0]+pv,bp[1]-2,'A','#2566a0')+'<circle cx="'+(bp[0]+pv)+'" cy="'+bp[1]+'" r="7" fill="#fff" stroke="#2566a0" stroke-width="3"/></g>');
+ a.push(svgText(90,501,'同色带表示同一岩层',15,'#f4f7f3'));if(!P.surface)a.push(svgText(690,295,'破裂没有延伸到地表',16,'#583f30'));
+ if(P.ghost)a.push(svgText(84,239,'虚线：震前位置',14,'#fff'));
+ var handleColor=s.eventTime===null?'#226eae':'#8296a4';[-1,1].forEach(function(side){var x=side<0?53:947,sign=-side*P.direction;var offset=clamp(s.drive,0,1)*10*sign;a.push('<g data-drag="load" data-side="'+side+'" tabindex="0" role="button" aria-label="'+(side<0?'左侧':'右侧')+'施力箭头，拖动或按方向键加载" style="cursor:ew-resize"><rect x="'+(x-28)+'" y="305" width="56" height="110" rx="22" fill="#ffffffd9" stroke="#c7d6df"/><path d="M'+(x+offset-16*sign)+' 360h'+(23*sign)+'m'+(-9*sign)+' -10l'+(10*sign)+' 10l'+(-10*sign)+' 10" fill="none" stroke="'+handleColor+'" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>')});
+ if(exporting)a.push(svgText(22,38,'看进地底 · '+(P.direction===1?'相向挤压':'相背拉伸')+' / '+(P.surface?'破裂到达地表':'破裂停留地下'),22,'#1b3045','start',750));
+ return a.join('');
+}
+function probePhase(s){if(s.eventTime===null)return s.drive>.03?'断层仍卡住，A 点还没有震动。':'拖动地面上的 A 点，选定观察位置。';var dist=Math.hypot(P.probe-faultX(370),160)/180,arr=s.eventTime+dist/E.constants.waveSpeed;if(s.t<arr)return '地下已开始错动，振动还没有传到 A 点。';if(s.t-arr<4.4)return '波经过 A 点，标记在原位附近往返振动。';return '振动逐渐减弱。再比较岩层是否回到原处。'}
+function phaseP(s){if(s.eventTime===null)return s.drive>.02?'缓慢积累':'等待观察';if(s.sliding)return '突然错动';return P.done&&P.cursor>=P.frames.length-1?'振动过后':'振动传播'}
+function renderTrace(s){var a=['<path d="M6 42H254" stroke="#c9d6df" stroke-width="1.4"/><path d="M6 8V76M254 8V76" stroke="#e4e9ef"/>'],dist=Math.hypot(P.probe-faultX(370),160)/180,total=Math.max(P.frames[P.frames.length-1].t,10.9),points=[];for(var i=0;i<=Math.round(P.cursor);i++){var f=P.frames[i],x=6+f.t/total*248,y=42-E.waveAt(f,dist)*27;points.push(x.toFixed(1)+','+y.toFixed(1))}if(points.length)a.push('<polyline points="'+points.join(' ')+'" fill="none" stroke="#2774ad" stroke-width="2.1"/>');var markerX=6+s.t/total*248;a.push('<path d="M'+markerX+' 8V76" stroke="#cf9343" stroke-dasharray="3 3"/>');$('traceSvg').innerHTML=a.join('')}
+function renderP(){var s=currentP(),event=s.eventTime!==null;$('faultSvg').innerHTML=faultSVG(s,false);$('probeText').textContent=probePhase(s);$('phase1').textContent=phaseP(s);$('load').disabled=P.engine.snapshot().eventTime!==null;$('loadText').textContent=event?'本轮加载已停止':s.drive>.02?'正在受力':'未加载';$('energy').style.width=clamp(s.elasticEnergy/.5*100,0,100)+'%';$('energyText').textContent=!event?(s.drive>.02?'正在积累':'尚未积累'):(s.sliding?'快速转换':'保留少量');$('subtitle1').textContent=event?'拖动时间轴，找出错动、传播与地面振动的先后。':'拖动两侧箭头施力，也可点击下方开始。';$('time1').max=Math.max(1,P.frames.length-1);$('time1').value=Math.round(P.cursor);$('time1').disabled=P.frames.length<2;$('progress1').textContent=P.replay?'回看中':phaseP(s);$('play1').textContent=P.playing?'暂停':P.done&&P.cursor>=P.frames.length-1?'重放过程':P.replay?'继续回放':s.eventTime===null&&s.drive>1e-7&&Math.abs(P.engine.snapshot().drive-P.target)<1e-7?'继续加力':s.drive>1e-7?'继续观察':'开始加载';$('question1').textContent=event?'震动停止以后，哪些变化还留在原地？':'地面开始晃动之前，地下已经在发生什么？';pressed('ghost1',P.ghost);renderTrace(s)}
+function riverCenter(y,x){return x+9*Math.sin((y-299)/90)}
+function riverShape(x,w,y0,y1){var p=[];for(var y=y0;y<=y1;y+=10)p.push([riverCenter(y,x)-w/2,y]);p.push([riverCenter(y1,x)-w/2,y1]);for(y=y1;y>=y0;y-=10)p.push([riverCenter(y,x)+w/2,y]);p.push([riverCenter(y0,x)+w/2,y0]);return 'M'+p.map(pt).join('L')+'Z'}
+function debrisPath(x){var w=V.constants.depositHalfWidth;return 'M'+(x-w)+',299 Q'+(x-w+12)+',255 '+(x-28)+',258 Q'+(x+13)+',239 '+(x+43)+',267 Q'+(x+w)+',268 '+(x+w)+',300 Q'+(x+w-4)+',333 '+(x+32)+',338 Q'+(x-19)+',354 '+(x-49)+',329 Q'+(x-w)+',323 '+(x-w)+',299Z'}
+function lakePath(x,level){var h=clamp(level,0,1),w=38+h*56,top=287-h*148;return 'M'+(x-w)+',287Q'+(x-w-16)+',230 '+(x-w*.55)+','+top+'Q'+x+','+(top-21)+' '+(x+w*.55)+','+top+'Q'+(x+w+16)+',230 '+(x+w)+',287Z'}
+function valleySVG(s,exporting){var a=[],shake=s.shaking*5;var riverX=Q.riverX,wet=s.waterLevel;
+ a.push('<defs><linearGradient id="valleyGround" x2="1" y2="1"><stop stop-color="#e7e8d7"/><stop offset="1" stop-color="#f4eedb"/></linearGradient><linearGradient id="hill" x2="1" y2=".4"><stop stop-color="#a1b7a4"/><stop offset="1" stop-color="#d6d9b6"/></linearGradient><linearGradient id="riverColor" x2="1" y2="0"><stop stop-color="#81becd"/><stop offset=".5" stop-color="#469cb5"/><stop offset="1" stop-color="#89c4ce"/></linearGradient><clipPath id="valleyClip"><rect x="35" y="108" width="930" height="408" rx="18"/></clipPath><pattern id="landgrain" width="43" height="37" patternUnits="userSpaceOnUse"><path d="M4 18l5-2M28 29l4 1" stroke="#9c9e7a" opacity=".2" stroke-width="2"/></pattern></defs>');
+ a.push('<rect width="1000" height="580" fill="#edf2ed"/><g clip-path="url(#valleyClip)"><rect x="35" y="108" width="930" height="408" fill="url(#valleyGround)"/><g transform="translate('+shake+' '+(shake*.25)+')"><path d="M35 108H370Q402 170 493 202Q575 268 594 312Q520 386 429 396Q369 458 340 516H35Z" fill="url(#hill)"/>');
+ [0,1,2,3,4].forEach(function(i){var x=90+i*76;a.push('<path d="M'+x+' 108Q'+(x-38)+' 173 '+(x+84)+' 214Q'+(x+170)+' 267 '+(x+172)+' 309Q'+(x+162)+' 363 '+(x+60)+' 401Q'+(x-26)+' 449 '+(x+5)+' 516" fill="none" stroke="#8fa68f" opacity="'+(.55-i*.065)+'" stroke-width="2.2"/>')});
+ a.push('<rect x="35" y="108" width="930" height="408" fill="url(#landgrain)"/>');
+ [[112,172],[166,455],[250,169],[425,181],[485,428],[591,463],[620,163],[906,449],[940,178]].forEach(function(p,i){a.push('<g opacity=".8">'+tree(p[0],p[1],.55+(i%3)*.06)+'</g>')});
+ if(s.triggered){a.push('<path d="'+debrisPath(350)+'" fill="#c5b79b" opacity=".8" stroke="#a2977e" stroke-dasharray="4 4"/>');a.push('<path d="M365 284Q'+(s.x-70)+' 260 '+s.x+' 289L'+s.x+' 319Q'+(s.x-70)+' 338 365 320Z" fill="#bfa98a" opacity="'+Math.min(.42,(s.x-350)/500)+'"/>')}
+ a.push('<path d="'+riverShape(riverX,98,80,540)+'" fill="#d1c79f"/><path d="'+riverShape(riverX,76,80,540)+'" fill="url(#riverColor)"/>');
+ if(wet>.001)a.push('<path d="'+lakePath(riverX,wet)+'" fill="#62adc3" stroke="#c1e1e6" stroke-width="2"/>');
+ var flowOffset=(s.t*34)%58;for(var i=0;i<8;i++){var y=121+i*54+flowOffset;if(y>510)continue;if(s.blocked&&y>326)continue;var x=riverCenter(y,riverX);if(s.blocked&&y>260)continue;a.push('<path d="M'+(x-6)+' '+y+'l6 7l6-7" stroke="#e5f6f5" stroke-width="2.7" fill="none" opacity=".85"/>')}
+ if(Q.reference){var ref=Q.reference;if(ref.state.triggered){a.push('<path d="'+debrisPath(ref.state.x)+'" fill="none" stroke="#be7732" stroke-width="3" stroke-dasharray="8 6"/>')}a.push('<path d="'+riverShape(ref.riverX,76,111,506)+'" fill="none" stroke="#be7732" stroke-width="2.2" stroke-dasharray="8 6" opacity=".8"/>');if(ref.state.waterLevel>.01)a.push('<path d="'+lakePath(ref.riverX,ref.state.waterLevel)+'" fill="none" stroke="#be7732" stroke-width="2.2" stroke-dasharray="8 6"/>')}
+ a.push('<path d="'+debrisPath(s.x)+'" fill="'+(s.triggered?'#ad8a61':'#b6a179')+'" stroke="#8c7355" stroke-width="2"/>');
+ for(i=0;i<20;i++){var ox=((i*43)%121)-60,oy=((i*31)%61)-30,rx=6+i%4,ry=4+i%3;var xx=s.x+ox,yy=299+oy;a.push('<path d="M'+(xx-rx)+' '+yy+'l'+(rx*.65)+' '+(-ry)+'l'+(rx*1.2)+' 1l'+(rx*.4)+' '+(ry)+'l'+(-rx*.8)+' '+(ry)+'l'+(-rx)+' -1Z" fill="'+(['#c6af8a','#968066','#bda78b','#d4bea0'][i%4])+'" stroke="#806f5a" stroke-width=".7"/>')}
+ if(s.blocked&&wet>V.constants.crestLevel){var spill=clamp(s.outflow/Math.max(s.inflow,.001),0,1);a.push('<path d="M'+riverX+' 281Q'+(riverX-9)+' 307 '+(riverX+3)+' 343" fill="none" stroke="#89d3de" stroke-width="'+(6+spill*15)+'" stroke-linecap="round"/><path d="M'+riverX+' 295v22m-5-5l5 5l5-5" fill="none" stroke="#e7fafb" stroke-width="2"/>');a.push(svgText(riverX+48,347,'越顶出流',14,'#246b83'))}a.push(svgText(115,265,'高地',22,'#557665','start',650),svgText(589,460,'坡脚 / 低地',18,'#7a8065'));a.push('<path d="M440 350h100m-10-7l10 7l-10 7" fill="none" stroke="#7d8b70" stroke-width="2"/>');
+ if(s.triggered)a.push(svgText(332,247,'滑出位置',16,'#7a654c','middle'));if(s.settled&&s.triggered)a.push(svgText(s.x,371,'留下的滑落物',17,'#715639','middle',650));
+ a.push('</g>');
+ a.push(svgText(riverX,141,'上游',16,'#2c6680','middle',700),svgText(riverX,487,'下游',16,'#2c6680','middle',700));
+ if(wet>.2)a.push(svgText(riverX,217,'逐渐蓄水',17,'#154f69','middle',700));
+ if(Q.reference)a.push(svgText(59,492,'橙色虚线：对照 A',14,'#966125'));
+ a.push('</g>');
+ a.push('<g data-drag="river" tabindex="0" role="button" aria-label="左右拖动河道" style="cursor:ew-resize"><rect x="'+(riverX-50)+'" y="80" width="100" height="35" rx="17" fill="#fff" stroke="#87bac8" stroke-width="1.5"/><path d="M'+(riverX-33)+' 98h13m-8-5l-5 5l5 5M'+(riverX+33)+' 98h-13m8-5l5 5l-5 5" fill="none" stroke="#3185a4" stroke-width="2.2"/>'+svgText(riverX,103,'拖河道',12,'#236582','middle',700)+'</g>');
+ a.push('<path d="M65 530H935" stroke="#aeb8ad" stroke-width="1.2"/>');for(i=1;i<=9;i++)a.push('<path d="M'+(i*100)+' 525v10" stroke="#99a79d"/>',svgText(i*100,552,String(i),12,'#728579','middle'));a.push(svgText(938,552,'格',12,'#728579'));
+ if(exporting)a.push(svgText(22,38,'追踪河谷 · '+(Q.loose?'易滑动坡体':'较稳固坡体')+' / 河道 '+fmt(Q.riverX/100)+' 格',22,'#1b3045','start',750));
+ return a.join('');
+}
+function valleyPhase(s){if(s.t<.1)return '等待观察';if(Math.abs(s.shaking)>.005||s.t<3.4)return '震动传来';if(s.sliding)return '坡体滑动';if(s.blocked&&s.waterLevel>.02)return '上游蓄水';return '震动过后'}
+function riverResult(s){if(!s.settled||!s.triggered)return '水流通过';if(s.blocked)return '滑落物堵住河道';if(s.overlap>0)return '部分变窄，仍可通过';return '滑落物未到达河道'}
+function renderQ(){var s=currentQ();if(Q.reference)Q.reference.state=Q.reference.frames[Math.min(Math.round(Q.cursor),Q.reference.frames.length-1)];$('valleySvg').innerHTML=valleySVG(s,false);$('phase2').textContent=valleyPhase(s);$('riverText').textContent=fmt(Q.riverX/100)+' 格';$('river').value=Q.riverX;$('time2').max=Q.frames.length-1;$('time2').value=Math.round(Q.cursor);$('progress2').textContent=s.t<.1?'震前':valleyPhase(s);$('play2').textContent=Q.playing?'暂停':Q.cursor>=Q.frames.length-1?'重新观察':Q.cursor>0?'继续观察':'开始观察';$('slopeStatus').textContent=s.triggered?(s.settled?'滑落物已停住':'正在滑动'):(s.t>3.5?'本次没有滑动':'等待观察');$('riverStatus').textContent=riverResult(s);$('waterStatus').textContent=s.blocked&&s.waterLevel>V.constants.crestLevel?'上升放缓，越顶出流':s.waterLevel>.015?'逐渐高于原水位':'原水位';$('keepA').disabled=Q.cursor<1;var strip=$('compareStrip');strip.hidden=!Q.reference;$('clearA').hidden=!Q.reference;if(Q.reference)strip.textContent='A（同步进度）：'+(Q.reference.loose?'易滑动':'较稳固')+' · 河道 '+fmt(Q.reference.riverX/100)+' 格 · '+riverResult(Q.reference.state);$('question2').textContent=s.blocked&&s.waterLevel>V.constants.crestLevel?'水在流入，也开始流出；水位怎样变化？':s.blocked?'震动已经停了。水从哪里来，为什么还在升高？':'滑坡一定会堵河吗？试着用位置关系作出解释。';pressed('stable',!Q.loose);pressed('loose',Q.loose)}
+function render(){if(page===1)renderP();else renderQ();dirty=false}
+function tick(time){var dt=Math.min(1,(time-lastTime)/1000||0);lastTime=time;
+ if(P.playing&&page===1){acc1+=dt*P.speed;while(acc1>=1/30){acc1-=1/30;if(P.replay){P.cursor=Math.min(P.cursor+1,P.frames.length-1);if(P.cursor>=P.frames.length-1){if(P.done){P.playing=false;break}else P.replay=false}}else{var f=P.engine.step(1/30,P.target);P.frames.push(f);P.cursor=P.frames.length-1;if(f.eventTime!==null&&f.t>=f.eventTime+7){P.done=true;P.playing=false;break}if(f.eventTime===null&&Math.abs(f.drive-P.target)<1e-7){P.playing=false;break}}}dirty=true}
+ if(Q.playing&&page===2){acc2+=dt*Q.speed*1.55;while(acc2>=1/30){acc2-=1/30;Q.cursor=Math.min(Q.cursor+1,Q.frames.length-1);if(Q.cursor>=Q.frames.length-1){Q.playing=false;break}}dirty=true}
+ if(dirty)render();requestAnimationFrame(tick)
+}
+function playP(){if(P.playing){P.playing=false}else if(P.done&&P.cursor>=P.frames.length-1){P.cursor=0;P.replay=true;P.playing=true}else if(P.replay){P.playing=true}else{var snap=P.engine.snapshot();if(snap.eventTime===null&&((snap.drive<1e-7&&P.target<1e-7)||(snap.drive>1e-7&&Math.abs(snap.drive-P.target)<1e-7))){P.target=1.25;$('load').value=125}P.playing=true}dirty=true}
+function playQ(){if(Q.playing)Q.playing=false;else{if(Q.cursor>=Q.frames.length-1)Q.cursor=0;Q.playing=true}dirty=true}
+function modal(title,html){P.playing=false;Q.playing=false;dirty=true;modalReturn=document.activeElement;$('dialogTitle').textContent=title;$('dialogBody').innerHTML=html;$('modal').hidden=false;$('closeModal').focus()}
+function closeModal(){$('modal').hidden=true;if(modalReturn&&modalReturn.focus)modalReturn.focus()}
+function showHelp(){modal('模型说明与资料依据','<p>本页对应教材第106—109页，聚焦<strong>构造地震</strong>。先用彩泥、毛巾和木筷获得实物体验，再借助剖面、暂停与条件比较解释看不见的过程。</p><h3>怎样操作</h3><ul><li>看进地底：拖动两侧箭头或加载条施力；拖动 A 点观察一个位置。暂停后可拖动时间轴，回到刚刚发生的变化。</li><li>追踪河谷：改变坡体条件或拖动河道，运行后留作对照 A。每次只改变一个条件；橙色虚线显示对照条件在同一进度下的轮廓。</li><li>保存这一刻：最多保留4张模型证据图，可预览并导出为单张 SVG 图。刷新页面会清空本次记录。</li></ul><h3>这两个模型怎样工作</h3><p>地下模型用弹簧储能、静摩擦锁定、动摩擦和阻尼描述一处已有断层。缓慢加载使弹性形变增加，超过模型条件后快速滑动并留下错位。压缩与拉伸改变运动方向；“停留地下”把近地表错位平滑减小到零，用于比较有没有明显地表错断。</p><p>河谷模型保持震动相同，比较两种坡体稳定条件。开始滑动后计算沿坡加速、到达坡脚后的减速和停止位置；滑落物横跨整个河道才在本模型中形成堵塞。堵住后由固定来水和出流差积累水量，并计算水位上升及堰顶溢流。</p><h3>读图时要注意</h3><ul><li>所有形变、距离、加载量和过程时间都是<strong>模型量或放大示意</strong>，不是实测数据，不能换算为真实震级、力度、时间或灾害概率。</li><li>环线表示能量传播；蓝点在原位附近振动。它们不是飞出去的岩石，也不是精确的 P 波、S 波或真实地震仪记录。</li><li>储能会转化为运动、摩擦热、波等；橙色环线不是全部释放能量的数值测量。这里不模拟真实地震预报。</li><li>并非每次地震都有地表裂缝。未显示明显地表错断也不代表真实地面绝不会发生整体变形。</li><li>彩泥能形成褶皱，但不能据此认为可见褶皱是每次地震的必经阶段或预兆。</li><li>滑坡、堵河、蓄湖都需要条件。河谷省略复杂侵蚀、渗漏、分流、三维堆积和溃坝；蓄水所需的真实时间通常远长于震动，图中被压缩呈现。</li></ul><h3>资料依据</h3><p>项目所附五上教材第106—109页、教师教学用书本课与课程标准5～6年级10.4。未使用或编制作业本题目。</p><ul><li><a href="https://www.usgs.gov/programs/earthquake-hazards/science-earthquakes" target="_blank" rel="noopener">USGS：地震成因、断层错动与振动传播</a></li><li><a href="https://www.usgs.gov/faqs/what-surface-faulting-or-surface-rupture-earthquake" target="_blank" rel="noopener">USGS：并非所有地震都发生地表破裂</a></li><li><a href="https://www.usgs.gov/publications/earthquake-induced-chains-geologic-hazards-patterns-mechanisms-and-impacts" target="_blank" rel="noopener">USGS：地震、滑坡与堵河的连锁变化</a></li></ul><p class="hint">核心功能无需联网；以上资料链接需要网络。全屏能力取决于浏览器。没有使用摄像头、麦克风或位置权限。</p>')}
+function showAnalogy(){modal('把实物证据与地下模型对上','<svg class="illustration" viewBox="0 0 720 180" role="img" aria-label="彩泥弯曲与木筷断裂的示意对照"><rect width="720" height="180" fill="#eef3f5"/><g transform="translate(44 30)"><path d="M0 95Q70 95 106 48T224 95" fill="none" stroke="#cb9c70" stroke-width="17"/><path d="M0 78Q70 78 106 31T224 78" fill="none" stroke="#e7c28f" stroke-width="17"/><path d="M0 61Q70 61 106 14T224 61" fill="none" stroke="#af805a" stroke-width="17"/>'+svgText(112,134,'受力，形状改变',18,'#345067','middle',650)+'</g><path d="M414 90L518 58M536 70L649 107" stroke="#b18959" stroke-width="12" stroke-linecap="round"/><path d="M516 30l8 16M548 39l-10 12M522 88l-3 17" stroke="#d29c43" stroke-width="3"/>'+svgText(534,164,'突然断裂，手感到震动',18,'#345067','middle',650)+'</svg><table><tr><th>真实活动</th><th>提供的证据</th><th>还不能直接看见</th></tr><tr><td>挤压彩泥 / 毛巾</td><td>受力会使叠层形状改变</td><td>真实地下岩层的受力、时间与能量状态</td></tr><tr><td>弯折木筷</td><td>持续用力后，断裂瞬间产生震动</td><td>断层错动和振动向远处传播的联系</td></tr></table><div class="insight">网页里的断层一开始就存在。<strong>岩层受力变形、发生褶皱、突然错动</strong>需要不同条件，不能把它们排成每次都必然发生的固定三步。模型帮助解释关系，真实实验和地震资料才提供外部证据。</div>')}
+function snapshotSvg(content){content=content.replace(/ (?:data-drag|data-side|tabindex)="[^"]*"/g,'').replace(/ role="button"/g,'').replace(/ style="cursor:[^"]*"/g,'');return '<svg xmlns="'+NS+'" viewBox="0 0 1000 580" width="1000" height="580" style="font-family:system-ui,Microsoft YaHei,sans-serif">'+content+'</svg>'}
+function saveEvidence(which){if(evidence.length>=4){toast('证据夹已满。打开证据夹可删除旧图。');return}var s=which===1?currentP():currentQ();var title=which===1?(P.direction===1?'挤压':'拉伸')+' · '+(P.surface?'到达地表':'停留地下')+' · '+phaseP(s):(Q.loose?'易滑动坡体':'较稳固坡体')+' · 河道'+fmt(Q.riverX/100)+'格 · '+valleyPhase(s);evidence.push({title:title,svg:snapshotSvg(which===1?faultSVG(s,true):valleySVG(s,true))});$('count').textContent=evidence.length;toast('已保存这一刻，可在证据夹中对照。')}
+function showEvidence(){var html=evidence.length?'<div class="evidence-grid">'+evidence.map(function(e,i){return '<div class="evidence-card">'+e.svg+'<div class="evidence-caption"><span>'+esc(e.title)+'</span><button class="small remove-evidence" data-index="'+i+'">删除</button></div></div>'}).join('')+'</div><div class="dialog-actions"><button id="exportEvidence" class="primary">导出证据图 SVG</button><button id="clearEvidence">清空证据夹</button></div><p class="hint">图中保留模型条件和观察时刻，不自动填写解释。可在浏览器中打开、放大或打印。最多4张，刷新页面后清空。</p>':'<div class="empty">还没有保存观察画面。<br>在任一场景暂停后，点击“保存这一刻”。</div>';modal('证据夹 · '+evidence.length+' / 4',html);document.querySelectorAll('.remove-evidence').forEach(function(b){b.onclick=function(){evidence.splice(Number(b.dataset.index),1);$('count').textContent=evidence.length;showEvidence()}});if($('exportEvidence'))$('exportEvidence').onclick=exportEvidence;if($('clearEvidence'))$('clearEvidence').onclick=function(){evidence=[];$('count').textContent=0;showEvidence()}}
+function exportEvidence(){if(!evidence.length)return;var cols=evidence.length===1?1:2,w=cols*620,h=106+Math.ceil(evidence.length/cols)*422+55;var items=evidence.map(function(e,i){var raw=e.svg.replace(/^<svg[^>]*>/,'').replace(/<\/svg>$/,'');raw=raw.replace(/\bid="([^"]+)"/g,function(_,id){return 'id="e'+i+'_'+id+'"'}).replace(/url\(#([^)]+)\)/g,function(_,id){return 'url(#e'+i+'_'+id+')'});return '<g transform="translate('+(20+i%cols*620)+' '+(90+Math.floor(i/cols)*422)+')"><rect width="580" height="400" rx="12" fill="#fff" stroke="#d7e1e8"/><svg x="0" y="0" width="580" height="337" viewBox="0 0 1000 580">'+raw+'</svg>'+svgText(16,369,(i+1)+'. '+e.title,15,'#244259')+'</g>'}).join('');var data='<svg xmlns="'+NS+'" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" style="font-family:system-ui,Microsoft YaHei,sans-serif"><rect width="100%" height="100%" fill="#f1f5f8"/>'+svgText(24,40,'地震对地表的作用 · 观察证据',27,'#1b3045','start',750)+svgText(24,68,'模型画面，非实测。请结合实物实验和真实资料说明你的解释。',15,'#617589')+items+svgText(24,h-20,'五上4.3 · 形变、时间与尺寸均为示意 · mutiw',13,'#7d8c98')+'</svg>';var blob=new Blob([data],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob);modal('证据图预览','<p>已将 '+evidence.length+' 张观察画面合成一张图。请点击下载；也可打开预览后保存或打印。</p><div class="dialog-actions"><a id="downloadEvidence" href="'+url+'" download="地震对地表的作用_观察证据.svg" style="background:#1b3045;color:white;padding:12px 18px;border-radius:9px;text-decoration:none;font-weight:700">下载 SVG 文件</a><a href="'+url+'" target="_blank" rel="noopener" style="padding:12px 18px">打开图像预览</a></div><div id="exportPreview" style="margin-top:18px">'+data.replace('width="'+w+'" height="'+h+'"','width="100%" height="auto"')+'</div>');setTimeout(function(){URL.revokeObjectURL(url)},600000)}
+function svgPoint(svg,event){var r=svg.getBoundingClientRect(),scale=Math.min(r.width/1000,r.height/580);return {x:(event.clientX-r.left-(r.width-1000*scale)/2)/scale,y:(event.clientY-r.top-(r.height-580*scale)/2)/scale}}
+function bindDrag(svg){svg.addEventListener('pointerdown',function(e){var target=e.target.closest('[data-drag]');if(!target)return;var p=svgPoint(svg,e);drag={kind:target.dataset.drag,side:Number(target.dataset.side),startX:p.x,startLoad:P.target*100,id:e.pointerId,svg:svg};if(drag.kind==='load'&&P.engine.snapshot().eventTime!==null){drag=null;return}if(drag.kind==='river')Q.playing=false;svg.setPointerCapture(e.pointerId);e.preventDefault()});svg.addEventListener('pointermove',function(e){if(!drag||drag.svg!==svg||drag.id!==e.pointerId)return;var p=svgPoint(svg,e);if(drag.kind==='probe'){P.probe=clamp(p.x,105,900);dirty=true}else if(drag.kind==='river'){Q.riverX=Math.round(clamp(p.x,650,920)/5)*5;rebuildQ()}else{var sign=-drag.side*P.direction;setLoad(clamp(drag.startLoad+(p.x-drag.startX)*sign*.9,0,125))}});function end(e){if(drag&&drag.id===e.pointerId){drag=null;try{svg.releasePointerCapture(e.pointerId)}catch(_){}}}svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);svg.addEventListener('keydown',function(e){var t=e.target.closest('[data-drag]');if(!t||!['ArrowLeft','ArrowRight','Enter',' '].includes(e.key))return;e.preventDefault();if(t.dataset.drag==='probe'){P.probe=clamp(P.probe+(e.key==='ArrowLeft'?-20:20),105,900);dirty=true}else if(t.dataset.drag==='river'){Q.riverX=clamp(Q.riverX+(e.key==='ArrowLeft'?-10:10),650,920);rebuildQ()}else setLoad(P.target*100+10)})}
+$('nav1').onclick=function(){switchPage(1)};$('nav2').onclick=function(){switchPage(2)};$('compress').onclick=function(){setDirection(1)};$('extend').onclick=function(){setDirection(-1)};$('surface').onclick=function(){setSurface(true)};$('buried').onclick=function(){setSurface(false)};$('load').oninput=function(){setLoad(Number(this.value))};$('play1').onclick=playP;$('reset1').onclick=function(){resetP();P.ghost=false};$('slow1').onclick=function(){P.speed=P.speed===1?.25:1;pressed('slow1',P.speed!==1);$('slow1').textContent=P.speed===1?'慢放':'慢放 ×¼';dirty=true};$('time1').oninput=function(){P.playing=false;P.replay=true;P.cursor=Number(this.value);dirty=true};$('ghost1').onclick=function(){P.ghost=!P.ghost;dirty=true};$('analogy').onclick=showAnalogy;
+$('stable').onclick=function(){if(Q.loose){Q.loose=false;rebuildQ()}};$('loose').onclick=function(){if(!Q.loose){Q.loose=true;rebuildQ()}};$('river').oninput=function(){Q.riverX=Number(this.value);rebuildQ()};$('play2').onclick=playQ;$('reset2').onclick=function(){Q.loose=true;Q.riverX=760;Q.reference=null;rebuildQ()};$('slow2').onclick=function(){Q.speed=Q.speed===1?.25:1;pressed('slow2',Q.speed!==1);$('slow2').textContent=Q.speed===1?'慢放':'慢放 ×¼';dirty=true};$('time2').oninput=function(){Q.playing=false;Q.cursor=Number(this.value);dirty=true};$('keepA').onclick=function(){Q.reference={loose:Q.loose,riverX:Q.riverX,state:Object.assign({},currentQ()),frames:Q.frames};dirty=true;toast('已保留对照 A 的条件；后续按相同进度同步比较。')};$('clearA').onclick=function(){Q.reference=null;dirty=true};
+$('save1').onclick=function(){saveEvidence(1)};$('save2').onclick=function(){saveEvidence(2)};$('evidenceOpen').onclick=showEvidence;document.querySelectorAll('.open-evidence').forEach(function(b){b.onclick=showEvidence});$('help').onclick=showHelp;$('closeModal').onclick=closeModal;$('modal').addEventListener('click',function(e){if(e.target===$('modal'))closeModal()});document.addEventListener('keydown',function(e){if(!$('modal').hidden){if(e.key==='Escape')closeModal();if(e.key==='Tab'){var focus=$('modal').querySelectorAll('button:not([disabled]),a[href],input'),first=focus[0],last=focus[focus.length-1];if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault()}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault()}}}});
+$('fullscreen').onclick=function(){var root=document.documentElement;try{var p;if(document.fullscreenElement){p=document.exitFullscreen()}else if(root.requestFullscreen){p=root.requestFullscreen()}else if(root.webkitRequestFullscreen){root.webkitRequestFullscreen()}else{toast('此浏览器不支持网页全屏，可使用浏览器全屏或横屏。');return}if(p&&p.catch)p.catch(function(){toast('未能进入全屏，可使用浏览器全屏或横屏。')})}catch(_){toast('未能进入全屏，可使用浏览器全屏或横屏。')}};
+['click','input','keydown','pointermove'].forEach(function(type){document.addEventListener(type,function(){if(dirty)render()})});
+document.addEventListener('visibilitychange',function(){if(document.hidden){P.playing=false;Q.playing=false;dirty=true}});window.addEventListener('blur',function(){drag=null});bindDrag($('faultSvg'));bindDrag($('valleySvg'));rebuildQ();render();requestAnimationFrame(tick);
+// Read-only validation entry; rendering and controls remain the actual user path.
+window.EarthquakeLab={getState:function(){return {page:page,fault:{state:Object.assign({},currentP()),direction:P.direction,surface:P.surface,playing:P.playing,target:P.target,frames:P.frames.length,cursor:P.cursor,ghost:P.ghost,probe:P.probe,done:P.done},valley:{state:Object.assign({},currentQ()),loose:Q.loose,riverX:Q.riverX,playing:Q.playing,cursor:Q.cursor,frames:Q.frames.length,reference:Q.reference?{loose:Q.reference.loose,riverX:Q.reference.riverX,state:Object.assign({},Q.reference.state)}:null},evidenceCount:evidence.length}},version:'1.0'};
+})();
+</script>
+</body>
+</html>
