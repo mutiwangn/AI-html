@@ -37,6 +37,7 @@
     '四上3.2声音的强弱': { level: 1, note: 'SVG、振动对照与Web Audio；录音另需麦克风授权' },
     '四上3.3声音的高低': { level: 1, note: 'SVG、钢尺慢放、振动对照与 Web Audio' },
     '四上3.4乐器的声音变化': { level: 1, note: 'SVG、琴弦与空气柱慢放、Web Audio、同刻度对照；无3D' },
+    '四上3.5设计我们的乐器': { level: 1, note: 'SVG、结构设计、连续调音、Web Audio、方案对照与制作单；无3D' },
     '五上2.2独轮车省力的秘密': { level: 2, note: 'Canvas 模拟三维视效' },
     '五上2.3制作独轮车': { level: 2, note: 'SVG 设计与 Canvas 立体投影' },
     '五上2.4巧用斜面': { level: 2, note: 'Canvas 运输游戏与变形斜面' },
