@@ -829,7 +829,7 @@ window.AIHTML_CURRICULUM = {
             },
             {
               "code": "2.7",
-              "title": "社会发展与工具和技术"
+              "title": "推动社会发展的工具和技术"
             }
           ]
         },
@@ -1331,5 +1331,6 @@ window.AIHTML_CURRICULUM = {
     }
   ]
 };
+
 
 

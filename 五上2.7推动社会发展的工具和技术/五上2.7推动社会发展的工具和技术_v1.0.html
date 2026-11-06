@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173b49">
+<meta name="description" content="教科版五年级上册2.7：双向追踪工具与技术，用印刷任务模型比较准备、复制和修订。单文件离线互动。">
+<meta name="aihtml-compatibility" content="T1">
+<title>推动社会发展的工具和技术 · 互动探索</title>
+<style>
+:root{--ink:#183448;--muted:#536a76;--teal:#147d76;--teal-light:#d9eee8;--paper:#f8faf7;--line:#d6e2df;--gold:#d9993e;--blue:#5980ae;--shadow:0 10px 32px #1834480a;--radius:18px;font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;color:var(--ink);background:#eaf0eb;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit;border:1px solid var(--line);background:#fff;min-height:44px;border-radius:10px;padding:8px 14px;transition:background .15s,border-color .15s,box-shadow .15s}button:hover{border-color:#8ab6ad;background:#f3faf6}button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #dc9b35;outline-offset:3px}button:disabled{cursor:default;opacity:.42}button[aria-pressed=true],.primary{color:white;background:var(--teal);border-color:var(--teal)}button[aria-pressed=true]:hover,.primary:hover{background:#096b67}button.small{font-size:15px;min-height:40px;padding:5px 10px}.quiet{background:transparent}.iconbutton{width:44px;padding:9px;display:inline-grid;place-items:center}.iconbutton svg{width:22px;height:22px}svg{display:block}input[type=range]{width:100%;height:34px;margin:0;accent-color:var(--teal);cursor:pointer;touch-action:pan-y}input[type=checkbox]{width:22px;height:22px;accent-color:var(--teal)}input[type=number]{max-width:100%;border:1px solid #b9ccc6;border-radius:8px;padding:8px;color:var(--ink);background:white}textarea{resize:vertical;border:1px solid #bdcec9;border-radius:10px;padding:9px 11px;width:100%;min-height:62px;background:#fff;font-size:16px;color:var(--ink)}[hidden]{display:none!important}.app{height:100vh;height:100dvh;max-width:1920px;margin:auto;display:flex;flex-direction:column;padding:0 22px}.topbar{min-height:92px;display:flex;align-items:center;gap:24px;border-bottom:1px solid #cbd9d0;flex-shrink:0}.brand{flex:1;min-width:260px}.eyebrow{font-size:13px;letter-spacing:2px;font-weight:700;color:#48776d;margin-bottom:6px}.brand h1{font-size:clamp(19px,1.75vw,29px);line-height:1.3;letter-spacing:.02em;margin:0;font-weight:780}.nav{display:flex;padding:5px;background:#dce7df;border-radius:13px;gap:4px}.nav button{font-size:17px;background:transparent;border-color:transparent;min-width:143px}.nav button[aria-selected=true]{background:#fff;box-shadow:0 3px 12px #193b4210;color:var(--teal);font-weight:750}.top-actions{display:flex;gap:7px}.body{flex:1;min-height:0;padding:16px 0 10px}.page{display:none;height:100%;min-height:0;gap:16px}.page.active{display:grid;grid-template-columns:minmax(0,1fr) 320px}.surface{background:var(--paper);border:1px solid #d8e2da;border-radius:var(--radius);box-shadow:var(--shadow);min-width:0;min-height:0}.graph-main{display:grid;grid-template-rows:55px minmax(180px,1fr) 180px;overflow:hidden}.tool-tabs{display:flex;gap:8px;padding:9px 16px;align-items:center;border-bottom:1px solid var(--line)}.tool-tabs button{min-height:36px;padding:6px 18px;font-size:16px;border-radius:8px}.tool-tabs .hint{margin-left:auto;font-size:14px;color:var(--muted)}.diagram{position:relative;background-image:radial-gradient(#c7d8cf 1px,transparent 1px);background-size:23px 23px;overflow:hidden;min-height:0}.diagram:before{content:"";position:absolute;width:380px;height:280px;left:calc(50% - 190px);top:calc(50% - 140px);background:#e5efe7;border-radius:50%;opacity:.64}.diagram svg{width:100%;height:100%;position:relative}.graph-node{cursor:pointer;outline:none}.graph-node rect{fill:#fff;stroke:#bdcec7;stroke-width:1.5}.graph-node text{fill:#254554;font-size:18px;font-weight:650}.graph-node:hover rect,.graph-node:focus rect{stroke:var(--gold);stroke-width:3}.graph-node.selected rect{fill:#147d76;stroke:#147d76}.graph-node.selected text{fill:white}.graph-node.selected .node-num{fill:#daf0e6}.tech-path{stroke:#c2d4cb;stroke-width:2;fill:none}.tech-path.active{stroke:#15847b;stroke-width:3}.hero-art .part{transition:opacity .18s;cursor:pointer;pointer-events:all}.hero-art.focused .part{opacity:.2}.hero-art.focused .focus-on{opacity:1;filter:drop-shadow(0 0 3px #30b9a64d)}.hero-art.focused .part-lever{opacity:1}.hero-caption{font-size:20px;font-weight:700;fill:var(--ink)}.hero-note{font-size:14px;fill:var(--muted)}.transfer{padding:10px 16px 12px;border-top:1px solid var(--line);background:#f0f5ed;display:flex;flex-direction:column;gap:6px}.transfer-heading{font-size:16px;font-weight:650;display:flex;align-items:center;justify-content:space-between;gap:10px}.transfer-heading span:last-child{font-size:13px;color:var(--muted);font-weight:400}.candidates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;flex:1;min-height:0}.candidate{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px 7px;overflow:hidden;background:#fff;border-radius:10px;font-size:16px;font-weight:600}.candidate svg{width:100%;height:78px;pointer-events:none}.candidate[aria-pressed=true]{background:#e1f1eb;color:var(--teal);border:2px solid var(--teal)}.candidate .candidate-mark{position:absolute;top:8px;right:8px;font-size:13px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#f0f4ef;color:var(--muted)}.candidate[aria-pressed=true] .candidate-mark{background:var(--teal);color:white}.graph-side{display:flex;flex-direction:column;padding:20px;gap:12px;overflow:auto}.section-kicker{font-size:13px;letter-spacing:1px;color:var(--teal);font-weight:750}.graph-side h2{font-size:24px;line-height:1.3;margin:0}.source-fact{font-size:17px;line-height:1.6;margin:0;min-height:76px}.source-fact strong{color:var(--teal)}.relation-path{background:#eaf1ec;border-left:3px solid var(--teal);padding:11px 12px;font-size:17px;line-height:1.7;border-radius:3px 9px 9px 3px}.relation-path .arrow{color:var(--teal);padding:0 3px}.evidence{font-size:16px;line-height:1.55;min-height:70px;margin:0}.evidence .status{display:inline-block;font-size:13px;font-weight:700;background:#e4efe7;color:#36684e;padding:2px 6px;border-radius:4px;margin-bottom:5px}.evidence .status.pending{background:#f5ead9;color:#8c6728}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.row button{font-size:16px;padding:8px 7px}.notebook{margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}.notebook-head{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:15px;font-weight:700;margin-bottom:6px}.note-list{max-height:110px;overflow:auto;display:grid;gap:5px}.note-row{font-size:13px;line-height:1.4;background:#edf2ec;padding:7px;border-radius:6px;display:flex;gap:5px;align-items:center}.note-row span{flex:1}.note-row button{min-height:30px;width:30px;padding:0;flex-shrink:0;border:none;background:transparent}.empty{color:var(--muted);font-size:14px;line-height:1.5;margin:5px 0}.foot{display:flex;justify-content:space-between;gap:15px;align-items:center;min-height:25px;flex-shrink:0;color:#5e756a;font-size:12px;padding-bottom:6px}.watermark{letter-spacing:2px;font-size:11px;opacity:.6}.print-main{display:flex;flex-direction:column;overflow:hidden}.print-heading{display:flex;gap:14px;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid var(--line)}.print-heading h2{font-size:21px;margin:0}.badge{display:inline-block;border-radius:6px;font-size:13px;padding:4px 8px;background:#faeedc;color:#8a652b;white-space:nowrap}.lanes{display:grid;grid-template-rows:repeat(3,minmax(0,1fr));min-height:0;flex:1}.print-lane{display:grid;grid-template-columns:190px minmax(0,1fr);padding:12px 20px;gap:14px;border-bottom:1px solid var(--line);min-height:0}.machine{position:relative;min-height:0;display:flex;flex-direction:column}.machine-name{display:flex;align-items:center;gap:10px}.machine-name h3{font-size:19px;margin:0}.machine-name .method-no{font-family:Georgia,serif;color:#86978c;font-size:25px}.machine svg{width:100%;flex:1;min-height:0;height:82px;max-height:112px}.machine .machine-help{font-size:12px;color:#536b68;text-align:center}.lane-data{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:8px}.lane-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.stage-name{font-size:17px;font-weight:650}.copy-count{font-size:14px;white-space:nowrap}.copy-count b{font-size:25px;font-variant-numeric:tabular-nums;color:var(--teal)}.timeline{position:relative;height:33px;border-radius:7px;background:#e9ede7;display:flex;overflow:visible;margin-top:2px;border:1px solid #d9e1d6}.segment{height:100%;position:relative;opacity:.3}.segment:first-child{border-radius:6px 0 0 6px}.segment:last-child{border-radius:0 6px 6px 0}.segment.prep{background:#d8a057}.segment.old{background:#8595a7}.segment.revise{background:#a77cac}.segment.print{background:#23998d}.timeline-played{position:absolute;left:0;top:0;height:100%;overflow:hidden;border-radius:6px;display:flex;pointer-events:none}.timeline-played .segment{opacity:1;flex-shrink:0}.time-hand{position:absolute;top:-5px;height:41px;width:2px;background:#183448;z-index:2;left:0}.time-hand:before{content:"";position:absolute;left:-3px;top:-1px;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid #183448}.lane-bottom{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:14px;line-height:1.4}.lane-bottom .old-note{color:#7a627f}.lane-total{font-variant-numeric:tabular-nums}.model-clock{padding:12px 20px 13px;display:grid;grid-template-columns:150px 1fr;gap:16px;align-items:center;background:#f2f5ef}.clock-label{font-size:14px;color:var(--muted)}.clock-label strong{font-size:26px;display:block;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.3}.clock-main .row{margin-bottom:5px}.clock-main .row button{flex:0 0 auto;min-height:39px;font-size:14px;padding:6px 12px}.clock-main .row span{margin-left:auto;flex:0 0 auto;font-size:12px;color:var(--muted)}.legend{display:flex;gap:16px;justify-content:center;font-size:12px;color:var(--muted);margin-top:1px}.legend span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;background:var(--color)}.print-side{padding:18px;display:flex;flex-direction:column;gap:13px;overflow:auto}.print-side h2{font-size:20px;margin:0}.control-label{font-size:17px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:650}.control-label output{font-size:26px;color:var(--teal);font-variant-numeric:tabular-nums}.range-ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:-5px}.stepper{display:flex;align-items:center;gap:6px}.stepper button{width:43px;padding:0;font-size:22px;min-height:40px}.stepper output{width:57px;text-align:center;font-size:22px}.job-note{padding:10px 12px;border-radius:8px;background:#edf2eb;font-size:14px;line-height:1.55;margin:0}.switchline{display:flex;align-items:center;gap:10px;font-size:16px;cursor:pointer}.rule{height:1px;background:var(--line);flex-shrink:0}.print-controls{display:flex;flex-direction:column;gap:12px}.print-note{color:var(--muted);font-size:13px;line-height:1.5;margin:0}.saved-prints{margin-top:auto}#printRecords{max-height:170px;overflow:auto}.snapshot{margin-top:7px;border:1px solid #d1dfd5;border-radius:8px;padding:8px;display:flex;align-items:center;gap:6px;font-size:13px}.snapshot>button:first-child{flex:1;text-align:left;border:0;background:none;padding:0;min-height:32px;font-size:13px}.snapshot>button:last-child{min-height:32px;width:28px;padding:0;border:0;background:none}.snapshot strong{color:var(--teal)}.modal-backdrop{position:fixed;inset:0;z-index:40;background:#17344875;display:grid;place-items:center;padding:25px;backdrop-filter:blur(5px)}.modal{background:#fafcf8;border:1px solid #fff;border-radius:20px;width:min(860px,100%);max-height:90vh;overflow:auto;padding:24px;box-shadow:0 20px 100px #05252545}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}.modal h2{font-size:23px;margin:0}.modal h3{font-size:18px;margin:20px 0 8px}.modal p,.modal li{font-size:16px;line-height:1.7}.modal a{color:var(--teal);text-underline-offset:3px}.modal .subtle{color:var(--muted);font-size:14px}.param-table{width:100%;border-collapse:collapse;font-size:16px}.param-table th,.param-table td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line)}.param-table input{width:110px;font-size:18px}.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.comparison-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.compare-card{padding:15px;background:#eef3ed;border-radius:12px}.compare-card h3{margin:0 0 8px}.compare-card p{font-size:14px;margin:6px 0}.compare-bar{height:15px;background:#23998d;border-radius:3px;margin:4px 0 12px}.toast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,15px);background:#173e45;color:#fff;padding:13px 22px;box-shadow:0 7px 30px #173e4530;border-radius:10px;font-size:16px;opacity:0;pointer-events:none;z-index:60;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.svg-open{text-align:center}.svg-open svg{width:100%;max-height:55vh;background:#fff}.blocked{color:#9e5e25}.part:focus{outline:none}.bad-input{border-color:#bd4b39!important}.no-js{padding:30px;font-size:20px}
+@media(min-width:1500px){.page.active{grid-template-columns:minmax(0,1fr) 365px}.graph-main{grid-template-rows:61px minmax(250px,1fr) 215px}.tool-tabs button{font-size:18px}.candidate svg{height:108px}.graph-side{padding:25px;gap:17px}.source-fact{font-size:19px}.graph-side h2{font-size:28px}.evidence{font-size:18px}.print-lane{grid-template-columns:240px 1fr;padding:17px 24px;gap:25px}.machine svg{max-height:135px}.stage-name{font-size:20px}.copy-count b{font-size:32px}.print-side{padding:25px;gap:21px}.timeline{height:40px}.time-hand{height:48px}.print-heading h2{font-size:24px}.lane-bottom{font-size:16px}.print-note,.job-note{font-size:15px}.foot{font-size:13px}}
+@media(max-height:820px) and (min-width:951px){.topbar{min-height:78px}.body{padding-top:11px}.graph-main{grid-template-rows:48px minmax(165px,1fr) 157px}.candidate svg{height:64px}.graph-side{padding:14px;gap:8px}.graph-side h2{font-size:21px}.source-fact{font-size:16px;min-height:56px}.evidence{font-size:14px;min-height:58px}.relation-path{font-size:15px;padding:7px 10px}.note-list{max-height:68px}.notebook{padding-top:8px}.print-side{padding:14px;gap:9px}.print-controls{gap:8px}.print-heading{padding:10px 18px}.print-lane{padding:9px 18px;grid-template-columns:155px 1fr}.machine-name h3{font-size:17px}.machine svg{height:65px}.machine .machine-help{font-size:11px}.lane-data{gap:5px}.stage-name{font-size:15px}.copy-count b{font-size:23px}.model-clock{padding:9px 18px}.print-note{font-size:12px}.control-label{font-size:15px}.control-label output{font-size:23px}.job-note{font-size:12px;padding:7px 9px}.print-side h2{font-size:18px}.print-side .small{min-height:35px;font-size:13px}.print-side .switchline{font-size:14px}.snapshot{font-size:12px;margin-top:4px;padding:5px}.nav button{min-width:130px;font-size:16px}.brand h1{font-size:22px}}
+@media(max-width:1150px) and (min-width:951px){.app{padding:0 14px}.page.active{grid-template-columns:minmax(0,1fr) 280px;gap:12px}.topbar{gap:14px}.brand h1{font-size:19px}.eyebrow{font-size:11px}.nav button{min-width:122px;font-size:15px}.tool-tabs .hint{display:none}.tool-tabs button{font-size:15px;padding:6px 12px}.graph-side{padding:14px}.source-fact{font-size:16px}.print-lane{grid-template-columns:135px 1fr;padding:10px 12px;gap:12px}.print-heading{padding:12px}.print-heading h2{font-size:18px}.machine-name h3{font-size:16px}.copy-count b{font-size:22px}.lane-bottom{font-size:12px}.model-clock{grid-template-columns:115px 1fr;padding:10px 12px;gap:8px}.legend{gap:10px}.candidate{font-size:14px}.graph-node text{font-size:20px}}
+@media(max-width:950px){.app{height:auto;min-height:100vh;padding:0 14px}.topbar{flex-wrap:wrap;min-height:118px;padding:12px 0;gap:10px}.brand{flex:1;min-width:220px}.brand h1{font-size:20px}.eyebrow{font-size:11px}.top-actions{margin-left:auto}.nav{order:3;width:100%;padding:3px}.nav button{flex:1;min-height:39px;font-size:16px}.body{padding-top:12px}.page.active{grid-template-columns:1fr;gap:12px}.graph-main{height:560px;grid-template-rows:52px minmax(250px,1fr) 173px}.graph-side{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;overflow:visible}.graph-side .fact-block{grid-row:1 / span 2}.graph-side .relation-path{grid-column:2}.graph-side .row{grid-column:2}.graph-side .evidence{grid-column:1;grid-row:3}.graph-side .notebook{grid-column:2;grid-row:3 / span 2;margin:0;padding:0;border:0}.graph-side .note-list{max-height:125px}.graph-side textarea{grid-column:1;grid-row:4}.source-fact{min-height:0}.print-main{height:625px}.print-side{display:grid;grid-template-columns:1fr 1fr;gap:16px}.print-side>h2{grid-column:1/-1}.print-controls{grid-row:2/span 3}.print-side>.rule{display:none}.print-side>.row{grid-column:2}.print-side>.print-note{grid-column:2}.saved-prints{grid-column:1/-1;margin:0}.foot{margin-top:4px;font-size:11px}.comparison-grid{grid-template-columns:1fr}.print-lane{grid-template-columns:170px 1fr}.machine svg{max-height:100px}.modal{padding:20px}.param-table{font-size:14px}.param-table input{width:90px}.tool-tabs .hint{font-size:12px}.print-side h2{font-size:21px}}
+@media(max-width:560px){.app{padding:0 9px}.brand h1{font-size:18px}.top-actions{gap:3px}.iconbutton{width:38px;min-height:38px}.graph-main{height:505px;grid-template-rows:47px minmax(240px,1fr) 147px}.tool-tabs{padding:7px 10px;gap:6px}.tool-tabs button{font-size:14px;min-height:32px;padding:5px 11px}.tool-tabs .hint{display:none}.graph-node text{font-size:22px}.hero-caption{font-size:24px}.hero-note{font-size:18px}.transfer{padding:8px}.transfer-heading{font-size:14px}.transfer-heading span:last-child{font-size:11px}.candidates{gap:6px}.candidate svg{height:65px}.candidate{font-size:12px}.candidate .candidate-mark{width:18px;height:18px;top:5px;right:5px;font-size:11px}.graph-side{display:flex;gap:12px;padding:17px}.graph-side .notebook{border-top:1px solid var(--line);padding-top:12px}.graph-side .note-list{max-height:150px}.print-main{height:650px}.print-heading h2{font-size:16px}.print-heading{padding:12px 10px;gap:8px}.badge{font-size:10px}.print-lane{grid-template-columns:100px minmax(0,1fr);padding:10px;gap:9px}.machine-name{gap:5px}.machine-name h3{font-size:14px}.machine-name .method-no{font-size:18px}.machine svg{height:70px}.machine .machine-help{font-size:10px}.lane-top{display:block}.stage-name{font-size:15px}.copy-count{font-size:12px}.copy-count b{font-size:23px}.lane-bottom{font-size:11px;display:block}.lane-total{display:block}.timeline{height:29px}.time-hand{height:37px}.model-clock{grid-template-columns:82px 1fr;padding:10px;gap:9px}.clock-label{font-size:10px}.clock-label strong{font-size:22px}.clock-main .row{gap:4px}.clock-main .row button{padding:5px 6px;font-size:12px;min-height:36px}.clock-main .row span{display:none}.legend{font-size:10px;gap:6px}.print-side{display:flex;padding:17px;gap:14px}.print-side>.rule{display:block}.modal-backdrop{padding:10px}.modal{padding:14px;border-radius:14px}.modal h2{font-size:19px}.param-table{font-size:12px}.param-table th,.param-table td{padding:9px 3px}.param-table input{width:67px;font-size:15px;padding:7px 3px}.foot span:first-child{max-width:85%}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+<div class="brand"><div class="eyebrow">五上 · 工具与技术 / 2.7</div><h1>推动社会发展的工具和技术</h1></div>
+<nav class="nav" aria-label="工作区"><button id="tabGraph" role="tab" aria-selected="true" aria-controls="pageGraph">① 追踪技术</button><button id="tabPrint" role="tab" aria-selected="false" aria-controls="pagePrint">② 印刷试验场</button></nav>
+<div class="top-actions"><button class="iconbutton" id="helpBtn" aria-label="使用与资料" title="使用与资料"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.7 8.5a2.4 2.4 0 0 1 4.6 1c0 1.7-2.3 1.9-2.3 3.9M12 17v.2"/></svg></button><button class="iconbutton" id="fullBtn" aria-label="全屏" title="全屏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg></button></div>
+</header>
+<main class="body">
+<section class="page active" id="pageGraph" role="tabpanel" aria-labelledby="tabGraph">
+<div class="surface graph-main">
+<div class="tool-tabs" aria-label="选择要观察的工具"><button data-source="wheelbarrow" aria-pressed="true">独轮车</button><button data-source="evan" aria-pressed="false">电动汽车</button><button data-source="station" aria-pressed="false">中国空间站</button><span class="hint">点部件，也能追踪技术</span></div>
+<div class="diagram"><svg id="techDiagram" viewBox="0 0 900 410" role="group" aria-label="工具与技术关系图"></svg></div>
+<div class="transfer"><div class="transfer-heading"><span id="transferTitle">这项技术，还能用在哪里？</span><span>点一个工具，建立联系</span></div><div class="candidates" id="candidates"></div></div>
+</div>
+<aside class="surface graph-side" aria-label="技术关联与观察记录">
+<div class="fact-block"><div class="section-kicker">从部件 · 到技术</div><h2 id="techTitle">轮与转动</h2><p class="source-fact" id="sourceFact"></p></div>
+<div class="relation-path" id="relationPath"></div>
+<div class="row"><button id="revealBtn">查阅资料</button><button id="saveLinkBtn" class="primary">保留关系</button></div>
+<p class="evidence" id="evidence" aria-live="polite"></p>
+<textarea id="reason" maxlength="100" placeholder="我的依据（也可以口头解释）" aria-label="我的依据，可选填"></textarea>
+<div class="notebook"><div class="notebook-head"><span id="linkCount">我的关系图 · 0 条</span><button id="exportGraphBtn" class="small quiet" disabled>导出图</button></div><div id="linkList" class="note-list"><p class="empty">选一个新工具，保留你的猜想或查证结果。</p></div></div>
+</aside>
+</section>
+<section class="page" id="pagePrint" role="tabpanel" aria-labelledby="tabPrint" hidden>
+<div class="surface print-main">
+<div class="print-heading"><h2>把一份科学活动通知，送到更多人手中</h2><span class="badge">可改参数的课堂模型</span></div>
+<div id="printLanes" class="lanes"></div>
+<div class="model-clock"><div class="clock-label">共同模型时钟<strong><span id="timeNow">0.0</span><small style="font-size:13px"> 分</small></strong></div><div class="clock-main"><div class="row"><button class="primary" id="playBtn">开始同步回放</button><button id="rewindBtn">回到起点</button><button id="endBtn">到结束</button><span>时间压缩 · 可拖动回看</span></div><input id="timeSlider" type="range" min="0" max="1000" step="1" value="0" aria-label="回看共同模型时间"><div class="legend"><span style="--color:#d8a057">准备</span><span style="--color:#8595a7">印旧版</span><span style="--color:#a77cac">修订</span><span style="--color:#23998d">印最新版</span></div></div></div>
+</div>
+<aside class="surface print-side" aria-label="印刷任务条件">
+<h2>改变任务，再作比较</h2>
+<div class="print-controls">
+<div><label for="copies" class="control-label">需要最新版 <output id="copiesOut">60 份</output></label><input id="copies" type="range" min="10" max="400" step="10" value="60"><div class="range-ends"><span>10 份</span><span>400 份</span></div></div>
+<div class="control-label"><span>中途改字</span><div class="stepper"><button id="lessChange" aria-label="少改一个字">−</button><output id="changeOut">0</output><button id="moreChange" aria-label="多改一个字">＋</button></div></div>
+<p class="job-note" id="jobNote">文字不变。三种方法都要完成 60 份相同通知。</p>
+<label class="switchline"><input id="reuse" type="checkbox">已有可用的印版 / 文件</label>
+<label class="switchline"><input id="power" type="checkbox" checked>现场有电（无备用电源）</label>
+<button id="paramsBtn" class="small quiet">查看 / 调整模型参数</button>
+</div>
+<div class="rule"></div>
+<div class="row"><button id="savePrintBtn" class="primary" disabled>保留本次</button><button id="compareBtn" disabled>对照记录</button></div>
+<p class="print-note">图中时间均为假设，不是历史实测。相同时间轴；准备和改字时不增加印数。</p>
+<div class="saved-prints"><div class="notebook-head"><span id="printRecordCount">条件记录 · 0 / 3</span><button id="exportPrintBtn" class="small quiet">导出图</button></div><div id="printRecords"><p class="empty">播放或拖动时间后，可保留条件与结果。</p></div></div>
+</aside>
+</section>
+</main>
+<footer class="foot"><span id="footerNote">结构图为示意；共用技术类别，不代表装置相同或发明先后。</span><span class="watermark">mutiw · v1.0</span></footer>
+</div>
+<div class="modal-backdrop" id="modalBackdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><header class="modal-head"><h2 id="modalTitle"></h2><button class="iconbutton" id="closeModal" aria-label="关闭">✕</button></header><div id="modalContent"></div></section></div>
+<div class="toast" id="toast" role="status"></div>
+<noscript><p class="no-js">请在支持 JavaScript 的浏览器中打开这个单体 HTML 文件。</p></noscript>
+<script>
+'use strict';
+/* ASSET_SLOT: original inline SVG artwork is inserted here. */
+/* Original, dependency-free SVG illustrations for 五上2.7.
+ * Insert toolArt(id, focus, uniquePrefix) inside an SVG with viewBox="0 0 520 280".
+ * Each clickable part has data-tech="KEY", class="part part-KEY".
+ * focus may be empty or frame / join / wheel / energy / control / signal.
+ * These are deliberately simplified structural diagrams, not dimensioned drawings.
+ */
+function toolArt(id, focus, prefix) {
+  focus = focus || '';
+  var p = String(prefix || ('art-' + id)).replace(/[^a-zA-Z0-9_-]/g, '-');
+  var ink = '#172c42', teal = '#26a69a', gold = '#edb76e', pale = '#dce8ee';
+  var supported = {
+    wheelbarrow: ['frame','join','wheel'],
+    evan: ['frame','join','wheel','energy','control','signal'],
+    station: ['frame','join','energy','control','signal'],
+    robot: ['frame','join','wheel','energy','control','signal'],
+    solarlamp: ['frame','join','energy','control','signal'],
+    train: ['frame','join','wheel','energy','control','signal']
+  };
+  var hasFocus = (supported[id] || []).indexOf(focus) >= 0;
+  function part(key, body) {
+    var selected = hasFocus && key === focus;
+    return '<g class="part part-' + key + (selected ? ' is-focus' : '') + '" data-tech="' + key + '" opacity="' + (hasFocus && !selected ? '0.40' : '1') + '"' + (selected ? ' filter="url(#' + p + '-glow)"' : '') + '>' + body + '</g>';
+  }
+  function bolt(x, y, r) {
+    r = r || 4;
+    return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#f8fbfc" stroke="'+ink+'" stroke-width="2"/><path d="M'+(x-r*.55)+' '+y+'h'+(r*1.1)+'" stroke="'+ink+'" stroke-width="1.5"/>';
+  }
+  function roadWheel(x,y,r) {
+    var spokes = '';
+    for (var a=0; a<8; a++) {
+      var angle = a * Math.PI / 4;
+      spokes += '<path d="M'+x+' '+y+'L'+(x+Math.cos(angle)*(r-9)).toFixed(2)+' '+(y+Math.sin(angle)*(r-9)).toFixed(2)+'" stroke="#8a9fac" stroke-width="2.5"/>';
+    }
+    return '<g><circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+ink+'"/><circle cx="'+x+'" cy="'+y+'" r="'+(r-8)+'" fill="#d7e2e7" stroke="#849ba9" stroke-width="2"/>'+spokes+'<circle cx="'+x+'" cy="'+y+'" r="6" fill="'+teal+'" stroke="'+ink+'" stroke-width="2"/><path d="M'+(x-r*.7)+' '+(y-r*.6)+'a'+(r*.92)+' '+(r*.92)+' 0 0 1 '+(r*.84)+' '+(-r*.3)+'" fill="none" stroke="#52697b" stroke-width="3"/></g>';
+  }
+  function solarGrid(x,y,w,h) {
+    var s = '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="2" fill="#244d78" stroke="'+gold+'" stroke-width="3"/>';
+    for(var i=1;i<5;i++) s+='<path d="M'+(x+w*i/5)+' '+y+'v'+h+'" stroke="#729db9" stroke-width="1"/>';
+    for(var j=1;j<4;j++) s+='<path d="M'+x+' '+(y+h*j/4)+'h'+w+'" stroke="#729db9" stroke-width="1"/>';
+    return s;
+  }
+  var defs = '<defs>'+
+    '<linearGradient id="'+p+'-steel" x1="0" y1="0" x2="0.9" y2="1"><stop stop-color="#f7fbfc"/><stop offset="0.55" stop-color="#dce8ee"/><stop offset="1" stop-color="#adc3cf"/></linearGradient>'+
+    '<linearGradient id="'+p+'-teal" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#63c8b9"/><stop offset="1" stop-color="#198c82"/></linearGradient>'+
+    '<linearGradient id="'+p+'-glass" x1="0" y1="0" x2="0.7" y2="1"><stop stop-color="#5a839c"/><stop offset="1" stop-color="#1d3b51"/></linearGradient>'+
+    '<filter id="'+p+'-glow" x="-25%" y="-30%" width="150%" height="160%"><feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/><feFlood flood-color="#efb86a" flood-opacity="0.85" result="glowColor"/><feComposite in="glowColor" in2="blur" operator="in" result="glow"/><feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'+
+    '</defs>';
+  var steel = 'url(#'+p+'-steel)', mint = 'url(#'+p+'-teal)', glass = 'url(#'+p+'-glass)';
+  var s = '';
+  if (id === 'wheelbarrow') {
+    s = '<ellipse cx="258" cy="252" rx="199" ry="10" fill="#172c42" opacity="0.07"/>';
+    s += part('frame',
+      '<path d="M147 201L181 164L350 147L446 111" fill="none" stroke="'+ink+'" stroke-width="13"/>'+
+      '<path d="M151 200L183 169L350 153L446 118" fill="none" stroke="#6d9ba6" stroke-width="5"/>'+
+      '<path d="M267 162L294 239H327L310 155" fill="none" stroke="'+ink+'" stroke-width="10"/>'+
+      '<path d="M291 236H328" fill="none" stroke="'+teal+'" stroke-width="7"/>'+
+      '<path d="M88 94L328 80L378 127L328 175L151 165Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="3"/>'+
+      '<path d="M105 101L323 89L358 125L322 149L159 144Z" fill="#a7c4cb" stroke="#789ca8" stroke-width="2"/>'+
+      '<path d="M105 101L159 144L151 165M159 144L322 149M322 149L328 175" fill="none" stroke="#8eafb9" stroke-width="2"/>'+
+      '<path d="M88 94L328 80L378 127" fill="none" stroke="#6d929d" stroke-width="7"/>'+
+      '<path d="M89 91L328 77L379 125" fill="none" stroke="#eaf4f4" stroke-width="3"/>'+
+      '<path d="M423 120L461 106" stroke="'+ink+'" stroke-width="18"/>'+
+      '<path d="M430 116L455 107" stroke="'+gold+'" stroke-width="11"/>'+
+      '<path d="M164 177L151 210" stroke="'+ink+'" stroke-width="11"/>');
+    s += part('wheel', roadWheel(149,213,38)+'<circle cx="149" cy="213" r="8" fill="'+gold+'" stroke="'+ink+'" stroke-width="2"/>');
+    s += part('join',bolt(172,168,5)+bolt(278,162,5)+bolt(318,157,5)+bolt(350,149,4)+'<path d="M269 174l10-5M309 166l9-7" stroke="'+gold+'" stroke-width="4"/>');
+  } else if (id === 'evan') {
+    s = '<ellipse cx="260" cy="253" rx="211" ry="10" fill="#172c42" opacity="0.07"/>';
+    s += part('frame',
+      '<path d="M65 207V97Q65 80 82 80H305Q322 80 322 96V173H338V109H382L433 160Q453 164 453 187V214H65Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="3"/>'+
+      '<path d="M76 91H308V174H76Z" fill="#eaf2f4"/>'+
+      '<path d="M80 174H325V207H80Z" fill="#bed6dc"/>'+
+      '<path d="M347 121H377L414 160H347Z" fill="'+glass+'" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<path d="M355 126H375L400 154H355Z" fill="#8ac5d7" opacity="0.35"/>'+
+      '<path d="M328 173H443V187H328Z" fill="'+mint+'"/>'+
+      '<path d="M334 174V211M433 176V207" stroke="#92aebc" stroke-width="2"/>'+
+      '<path d="M75 208H451" stroke="'+ink+'" stroke-width="8"/>'+
+      '<rect x="88" y="110" width="64" height="52" rx="3" fill="#e8c99f" stroke="#b9976d" stroke-width="2"/>'+
+      '<path d="M117 111v51M88 126h64" stroke="#b9976d" stroke-width="2"/>'+
+      '<rect x="161" y="124" width="51" height="38" rx="3" fill="#eddbbf" stroke="#b9976d" stroke-width="2"/>'+
+      '<path d="M183 124v38" stroke="#b9976d" stroke-width="2"/>'+
+      '<path d="M225 129h55M225 139h40" stroke="#b9cdd5" stroke-width="5"/>'+
+      '<path d="M340 191h14" stroke="'+ink+'" stroke-width="4"/>'+
+      '<rect x="437" y="187" width="15" height="9" rx="3" fill="'+gold+'"/>'+
+      '<rect x="64" y="187" width="7" height="13" rx="2" fill="#d37162"/>');
+    s += part('energy',
+      '<path d="M246 198H363L390 209" fill="none" stroke="'+gold+'" stroke-width="5"/>'+
+      '<rect x="198" y="183" width="98" height="24" rx="5" fill="'+teal+'" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<rect x="205" y="189" width="14" height="12" rx="2" fill="#d5f3dc"/><rect x="224" y="189" width="14" height="12" rx="2" fill="#d5f3dc"/><rect x="243" y="189" width="14" height="12" rx="2" fill="#d5f3dc"/><rect x="262" y="189" width="14" height="12" rx="2" fill="#d5f3dc"/>'+
+      '<path d="M287 188v7M283.5 191.5h7" stroke="#e9fff1" stroke-width="2"/>'+
+      '<rect x="373" y="195" width="29" height="20" rx="7" fill="'+gold+'" stroke="'+ink+'" stroke-width="2"/><path d="M380 200v10M386 200v10M392 200v10" stroke="#ab7c3b" stroke-width="2"/>');
+    s += part('wheel',roadWheel(137,219,33)+roadWheel(409,219,33));
+    s += part('control',
+      '<path d="M362 170v14h-35v10h-28" fill="none" stroke="'+teal+'" stroke-width="3" stroke-dasharray="5 4"/>'+
+      '<rect x="354" y="161" width="25" height="17" rx="3" fill="'+ink+'"/><rect x="359" y="165" width="15" height="8" rx="1" fill="#86d5be"/>');
+    s += part('signal',
+      '<path d="M361 108V88" fill="none" stroke="'+ink+'" stroke-width="3"/><circle cx="361" cy="86" r="4" fill="'+teal+'"/>'+
+      '<path d="M352 80Q361 73 370 80M346 74Q361 61 376 74" fill="none" stroke="'+teal+'" stroke-width="2.5"/>'+
+      '<circle cx="443" cy="176" r="4" fill="'+ink+'"/>');
+    s += part('join',bolt(78,96,3)+bolt(307,96,3)+bolt(78,165,3)+bolt(307,165,3)+bolt(323,204,3));
+  } else if (id === 'station') {
+    s = '<ellipse cx="262" cy="258" rx="110" ry="8" fill="#172c42" opacity="0.035"/>';
+    s += part('energy',
+      '<path d="M101 111H136M386 111H419" fill="none" stroke="'+gold+'" stroke-width="7"/>'+
+      solarGrid(19,55,87,47)+solarGrid(19,119,87,47)+solarGrid(414,55,87,47)+solarGrid(414,119,87,47)+
+      '<path d="M60 103v16M458 103v16" stroke="'+gold+'" stroke-width="4"/>'+
+      '<rect x="248" y="168" width="27" height="29" rx="3" fill="'+teal+'" stroke="'+ink+'" stroke-width="2"/>'+
+      '<path d="M253 173v18M260 173v18M267 173v18" stroke="#dbf3dd" stroke-width="3"/>');
+    s += part('frame',
+      '<path d="M133 88Q120 88 120 110Q120 132 133 132H242V88Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<path d="M281 88H389Q402 88 402 110Q402 132 389 132H281Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<path d="M240 95Q240 77 260 77Q282 77 282 95V213Q282 233 261 233Q240 233 240 213Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<path d="M137 96H224M297 96H382M247 207Q260 214 275 207" fill="none" stroke="#f9fcfd" stroke-width="4"/>'+
+      '<path d="M153 89v43M183 89v43M333 89v43M365 89v43" fill="none" stroke="#b4c9d3" stroke-width="2"/>'+
+      '<rect x="245" y="164" width="33" height="36" rx="5" fill="#b7d1d8" opacity="0.35" stroke="#70949f" stroke-width="1.5" stroke-dasharray="3 3"/>'+
+      '<path d="M248 221h25" stroke="#93abb7" stroke-width="2"/>'+
+      '<rect x="291" y="104" width="21" height="14" rx="1" fill="#d74c48"/><circle cx="296" cy="108" r="2" fill="#f8db86"/>'+
+      '<path d="M165 141H205V156H165Z" fill="#c6d9e2" stroke="#7b9aa9" stroke-width="2"/><path d="M172 143v11M180 143v11M188 143v11M196 143v11" stroke="#8ca7b5" stroke-width="1.5"/>'+
+      '<path d="M307 132L321 158L354 181L374 163" fill="none" stroke="'+ink+'" stroke-width="9"/>'+
+      '<path d="M307 132L321 158L354 181L374 163" fill="none" stroke="#b9cdd7" stroke-width="5"/>'+
+      '<circle cx="321" cy="158" r="6" fill="'+gold+'" stroke="'+ink+'" stroke-width="2"/><circle cx="354" cy="181" r="6" fill="'+gold+'" stroke="'+ink+'" stroke-width="2"/>');
+    s += part('join',
+      '<rect x="228" y="86" width="13" height="48" rx="4" fill="#a1bbc8" stroke="'+ink+'" stroke-width="2"/>'+
+      '<rect x="280" y="86" width="13" height="48" rx="4" fill="#a1bbc8" stroke="'+ink+'" stroke-width="2"/>'+
+      '<path d="M243 148H279M243 153H279" stroke="#758f9e" stroke-width="3"/>'+
+      bolt(234,96,3)+bolt(234,123,3)+bolt(286,96,3)+bolt(286,123,3));
+    s += part('control',
+      '<rect x="248" y="113" width="26" height="24" rx="4" fill="'+ink+'" stroke="#698b9b" stroke-width="2"/>'+
+      '<path d="M253 125l5-6 5 10 6-8" fill="none" stroke="#87d8bf" stroke-width="2"/>'+
+      '<path d="M250 140v8M257 140v8M264 140v8M271 140v8" stroke="'+gold+'" stroke-width="2"/>');
+    s += part('signal',
+      '<path d="M331 87V67L348 54" stroke="'+ink+'" stroke-width="4" fill="none"/>'+
+      '<path d="M326 47Q344 69 360 44L326 47Z" fill="'+pale+'" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<path d="M343 51L343 34" stroke="'+ink+'" stroke-width="2"/><circle cx="343" cy="32" r="3" fill="'+teal+'"/>'+
+      '<path d="M365 37Q374 45 371 56M372 28Q388 42 384 60" fill="none" stroke="'+teal+'" stroke-width="2.5"/>'+
+      '<circle cx="260" cy="86" r="9" fill="'+glass+'" stroke="'+ink+'" stroke-width="2"/><circle cx="258" cy="83" r="3" fill="#87c8d7"/>');
+    // The battery is drawn over the translucent hull window so its location is visible.
+    s += part('energy','<rect x="250" y="169" width="23" height="26" rx="3" fill="'+teal+'" stroke="'+ink+'" stroke-width="1.5"/><path d="M255 174v16M262 174v16M269 174v16" stroke="#dcf4df" stroke-width="2.5"/>');
+  } else if (id === 'robot') {
+    s = '<ellipse cx="262" cy="255" rx="196" ry="9" fill="#172c42" opacity="0.07"/>';
+    s += part('frame',
+      '<path d="M201 224H304L315 245H190Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="3"/>'+
+      '<rect x="223" y="193" width="59" height="34" rx="8" fill="'+mint+'" stroke="'+ink+'" stroke-width="3"/>'+
+      '<path d="M238 199L228 173L185 113L210 96L267 164L270 198Z" fill="'+gold+'" stroke="'+ink+'" stroke-width="3.5"/>'+
+      '<path d="M197 85L305 50L318 78L212 117Z" fill="'+mint+'" stroke="'+ink+'" stroke-width="3.5"/>'+
+      '<path d="M215 91L294 64" fill="none" stroke="#b6e5d7" stroke-width="5"/>'+
+      '<path d="M313 61L343 88L326 107L298 77Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="3"/>'+
+      '<path d="M332 97L348 112M345 109L364 112L368 129M341 115L345 133L360 142" fill="none" stroke="'+ink+'" stroke-width="7"/>'+
+      '<path d="M366 126l-4 5M357 140l6-3" fill="none" stroke="'+teal+'" stroke-width="5"/>');
+    s += part('wheel',
+      '<circle cx="250" cy="177" r="23" fill="'+ink+'"/><circle cx="250" cy="177" r="15" fill="#afc8d4"/><path d="M239 177h22M250 166v22" stroke="#658998" stroke-width="3"/><circle cx="250" cy="177" r="6" fill="'+gold+'"/>'+
+      '<circle cx="198" cy="100" r="22" fill="'+ink+'"/><circle cx="198" cy="100" r="14" fill="#afc8d4"/><path d="M188 100h20M198 90v20" stroke="#658998" stroke-width="3"/><circle cx="198" cy="100" r="5" fill="'+gold+'"/>'+
+      '<circle cx="309" cy="65" r="18" fill="'+ink+'"/><circle cx="309" cy="65" r="10" fill="#c6dbe2"/><circle cx="309" cy="65" r="4" fill="'+teal+'"/>');
+    s += part('energy',
+      '<path d="M128 222H164Q180 222 181 207L176 154Q171 132 183 119M209 87L291 61" fill="none" stroke="'+gold+'" stroke-width="6"/>'+
+      '<path d="M273 186H286V164H273" fill="'+gold+'" stroke="'+ink+'" stroke-width="2"/>'+
+      '<path d="M75 242v8h36" fill="none" stroke="'+ink+'" stroke-width="4"/><path d="M111 246h12v8h-12Z" fill="'+ink+'"/>');
+    s += part('control',
+      '<rect x="62" y="146" width="68" height="96" rx="7" fill="'+steel+'" stroke="'+ink+'" stroke-width="3"/>'+
+      '<rect x="74" y="159" width="44" height="32" rx="4" fill="'+ink+'"/><path d="M81 180l9-10 10 7 10-11" fill="none" stroke="#8bdec4" stroke-width="2.5"/>'+
+      '<circle cx="81" cy="207" r="5" fill="'+teal+'"/><circle cx="99" cy="207" r="5" fill="'+gold+'"/><path d="M76 224h38M76 230h38" stroke="#8ca8b5" stroke-width="2"/>'+
+      '<path d="M128 194H160L193 122" fill="none" stroke="'+teal+'" stroke-width="2.5" stroke-dasharray="5 4"/>');
+    s += part('signal',
+      '<path d="M338 93l14-3 6 10-14 5Z" fill="'+ink+'"/><circle cx="351" cy="98" r="4" fill="#71d9cc"/>'+
+      '<path d="M357 104L399 139M354 106L387 148" fill="none" stroke="'+teal+'" stroke-width="2" stroke-dasharray="4 5"/>'+
+      '<rect x="383" y="149" width="42" height="35" rx="3" fill="#ecd6b5" stroke="#b89a70" stroke-width="2"/><path d="M403 150v33" stroke="#b89a70" stroke-width="2"/>'+
+      '<path d="M374 187h63v7h-63Z" fill="'+pale+'" stroke="'+ink+'" stroke-width="2"/><path d="M385 194v45M426 194v45" stroke="'+ink+'" stroke-width="5"/>');
+    s += part('join',bolt(208,236,4)+bolt(295,236,4)+bolt(230,219,3)+bolt(275,219,3)+bolt(331,94,3));
+  } else if (id === 'solarlamp') {
+    s = '<ellipse cx="271" cy="255" rx="125" ry="9" fill="#172c42" opacity="0.07"/>';
+    s += part('frame',
+      '<path d="M256 244V78H268V244" fill="'+steel+'" stroke="'+ink+'" stroke-width="3"/>'+
+      '<path d="M268 111Q312 99 345 120" fill="none" stroke="'+ink+'" stroke-width="9"/>'+
+      '<path d="M269 109Q312 99 344 118" fill="none" stroke="#9db7c4" stroke-width="4"/>'+
+      '<path d="M249 239H275L284 251H240Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<path d="M227 86L252 91L284 65" fill="none" stroke="'+ink+'" stroke-width="5"/>');
+    s += part('energy',
+      '<path d="M329 143L299 228Q357 242 409 226L374 146Z" fill="'+gold+'" opacity="0.14"/>'+
+      '<g transform="matrix(1,-0.18,0.34,0.82,187,50)">'+solarGrid(0,0,132,58)+'</g>'+
+      '<path d="M244 92L242 200H249" fill="none" stroke="'+gold+'" stroke-width="3"/>'+
+      '<rect x="241" y="191" width="44" height="41" rx="5" fill="#b7d3d9" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<rect x="248" y="199" width="29" height="24" rx="3" fill="'+teal+'"/><path d="M254 203v16M262 203v16M270 203v16" stroke="#daf0d9" stroke-width="3"/>'+
+      '<path d="M325 124Q345 117 377 130L381 142L330 140Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="2.5"/>'+
+      '<path d="M333 139L376 141" stroke="'+gold+'" stroke-width="7"/>'+
+      '<path d="M330 152l-3 8M348 155v9M369 154l3 8" stroke="#d7a653" stroke-width="2.5"/>');
+    s += part('control',
+      '<rect x="246" y="126" width="35" height="32" rx="4" fill="'+ink+'"/><rect x="253" y="132" width="21" height="12" rx="2" fill="#83d2b9"/>'+
+      '<circle cx="256" cy="151" r="2" fill="'+gold+'"/><path d="M264 151h9" stroke="#a6bcca" stroke-width="2"/>'+
+      '<path d="M264 159v29M282 136h30l22-10" fill="none" stroke="'+teal+'" stroke-width="2.5" stroke-dasharray="5 4"/>');
+    s += part('signal',
+      '<path d="M348 120v-10" stroke="'+ink+'" stroke-width="3"/><circle cx="348" cy="107" r="6" fill="'+teal+'" stroke="'+ink+'" stroke-width="2"/>'+
+      '<path d="M348 91v-5M337 96l-4-4M359 96l4-4" fill="none" stroke="'+gold+'" stroke-width="2.5"/>');
+    s += part('join',bolt(249,245,3)+bolt(275,245,3)+bolt(261,117,3)+bolt(261,87,3)+bolt(247,196,2.5)+bolt(279,226,2.5));
+  } else if (id === 'train') {
+    s = '<ellipse cx="264" cy="253" rx="226" ry="8" fill="#172c42" opacity="0.07"/>';
+    s += part('wheel',
+      '<path d="M28 244H500" fill="none" stroke="#748d9c" stroke-width="5"/>'+
+      '<path d="M42 249h23M91 249h23M140 249h23M189 249h23M238 249h23M287 249h23M336 249h23M385 249h23M434 249h23M478 249h18" stroke="#b3c4cc" stroke-width="6"/>'+
+      '<path d="M95 222H174M339 222H418" fill="none" stroke="'+ink+'" stroke-width="17"/>'+
+      '<g fill="#415b70" stroke="'+ink+'" stroke-width="2.5"><circle cx="105" cy="228" r="15"/><circle cx="163" cy="228" r="15"/><circle cx="349" cy="228" r="15"/><circle cx="407" cy="228" r="15"/></g>'+
+      '<g fill="#c6dbe2"><circle cx="105" cy="228" r="6"/><circle cx="163" cy="228" r="6"/><circle cx="349" cy="228" r="6"/><circle cx="407" cy="228" r="6"/></g>');
+    s += part('frame',
+      '<path d="M35 103Q35 88 51 88H344Q380 88 404 112L480 182Q494 196 483 210H35Z" fill="'+steel+'" stroke="'+ink+'" stroke-width="3"/>'+
+      '<path d="M43 107H337Q363 107 379 121L421 159H43Z" fill="'+glass+'"/>'+
+      '<path d="M55 113h45v35H55ZM112 113h45v35h-45ZM169 113h45v35h-45ZM226 113h45v35h-45Z" fill="#6093ab"/>'+
+      '<path d="M301 110h30q18 0 29 9l37 31h-96Z" fill="#87b4c6" opacity="0.5"/>'+
+      '<path d="M43 174H423Q448 174 470 194H43Z" fill="'+mint+'"/>'+
+      '<path d="M43 190H464" stroke="#b6e5da" stroke-width="3"/>'+
+      '<path d="M43 207H483" stroke="'+ink+'" stroke-width="6"/>'+
+      '<path d="M285 102V199M294 102V199" stroke="#8ca8b6" stroke-width="2"/>'+
+      '<path d="M304 179h8" stroke="'+ink+'" stroke-width="3"/>'+
+      '<path d="M444 178l15 4" stroke="'+gold+'" stroke-width="6"/>');
+    s += part('energy',
+      '<path d="M45 39H477" fill="none" stroke="#8da8b7" stroke-width="2"/>'+
+      '<path d="M202 88L220 66L193 46H251L225 66L244 88" fill="none" stroke="'+ink+'" stroke-width="4"/>'+
+      '<path d="M188 40H257" stroke="'+gold+'" stroke-width="5"/>'+
+      '<rect x="204" y="211" width="83" height="18" rx="4" fill="'+gold+'" stroke="'+ink+'" stroke-width="2"/><path d="M214 215v10M224 215v10M234 215v10M244 215v10M254 215v10M264 215v10M274 215v10" stroke="#b28144" stroke-width="2"/>'+
+      '<path d="M288 220H325L340 228" fill="none" stroke="'+gold+'" stroke-width="4"/>');
+    s += part('control',
+      '<path d="M385 145L405 157H378L371 145Z" fill="'+ink+'"/><path d="M380 146l13 7h-11" fill="none" stroke="#8ad9be" stroke-width="2"/>'+
+      '<path d="M374 161V169H318" fill="none" stroke="'+teal+'" stroke-width="2.5" stroke-dasharray="5 4"/>');
+    s += part('signal',
+      '<path d="M345 88V71" stroke="'+ink+'" stroke-width="3"/><circle cx="345" cy="68" r="4" fill="'+teal+'"/>'+
+      '<path d="M335 61Q345 53 355 61M328 54Q345 41 362 54" fill="none" stroke="'+teal+'" stroke-width="2.5"/>');
+    s += part('join',bolt(51,99,3)+bolt(51,199,3)+bolt(334,99,3)+bolt(288,199,3)+bolt(434,199,3));
+  } else {
+    return '<g><rect x="125" y="65" width="270" height="150" rx="24" fill="'+pale+'" stroke="'+ink+'" stroke-width="3"/><path d="M180 140h160M260 95v90" stroke="'+teal+'" stroke-width="8"/></g>';
+  }
+  return '<g class="tool-art" data-art="'+id+'" data-focus="'+focus+'" stroke-linecap="round" stroke-linejoin="round">'+defs+s+'</g>';
+}
+
+
+/* MODEL_START: pure functions; all times are editable classroom assumptions, in minutes. */
+const DEFAULT_PARAMS = {
+ wood:{setup:40,perCopy:0.4,perChar:6},
+ type:{setup:12,perCopy:0.5,perChar:1},
+ laser:{setup:2,perCopy:0.08,perChar:0.2}
+};
+function makePlan(job,method){
+ const p=job.params[method], n=job.copies, changed=job.changes>0, oldTarget=changed?Math.floor(n/2):0;
+ const prepare=job.reuse?0:p.setup, revision=changed?p.perChar*job.changes:0;
+ const blocked=method==='laser'&&!job.power;
+ const stages=[{key:'prep',duration:prepare},{key:'old',duration:oldTarget*p.perCopy},{key:'revise',duration:revision},{key:'print',duration:n*p.perCopy}];
+ let end=0;stages.forEach(s=>{s.start=end;end+=s.duration;s.end=end;});
+ return {method,blocked,stages,total:blocked?null:end,nominalTotal:end,oldTarget,newTarget:n,perCopy:p.perCopy,changed};
+}
+function planAt(plan,time){
+ if(plan.blocked)return {stage:'blocked',old:0,fresh:0,done:false,version:0};
+ const t=Math.max(0,Math.min(time,plan.total));
+ let stage='done';
+ for(let i=0;i<plan.stages.length;i++){const s=plan.stages[i];if(s.duration>0&&t<s.end-1e-8){stage=s.key;break;}}
+ const oldStage=plan.stages[1], freshStage=plan.stages[3];
+ const old=Math.max(0,Math.min(plan.oldTarget,Math.floor((t-oldStage.start+1e-7)/plan.perCopy)));
+ const fresh=Math.max(0,Math.min(plan.newTarget,Math.floor((t-freshStage.start+1e-7)/plan.perCopy)));
+ return {stage,old,fresh,done:t>=plan.total-1e-8,version:plan.changed&&t>=plan.stages[2].end-1e-8?1:0};
+}
+/* MODEL_END */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const copy=o=>JSON.parse(JSON.stringify(o));
+const TOOL_NAMES={wheelbarrow:'独轮车',evan:'电动汽车',station:'中国空间站',robot:'工业机械臂',solarlamp:'太阳能路灯',train:'轮轨高速列车',scissors:'剪刀',opener:'开瓶器'};
+const TECH={
+ frame:{name:'材料与结构',prompt:'怎样承受载荷、保持形状？',targets:['train','robot','station']},
+ join:{name:'连接与组装',prompt:'零件怎样成为一个整体？',targets:['robot','evan','station']},
+ wheel:{name:'轮与转动',prompt:'怎样让部件转动、传递运动？',targets:['train','robot','solarlamp']},
+ lever:{name:'杠杆',prompt:'支点、用力位置和负载在哪里？',targets:['scissors','opener','solarlamp']},
+ energy:{name:'电源与储能',prompt:'电从哪里来，又怎样留到需要时？',targets:['solarlamp','evan','wheelbarrow']},
+ control:{name:'自动控制',prompt:'如何按要求调节动作？',targets:['robot','evan','wheelbarrow']},
+ signal:{name:'感知与探测',prompt:'怎样获得位置或环境的信息？',targets:['robot','evan','solarlamp']}
+};
+const SOURCE_TECH={wheelbarrow:['frame','join','wheel','lever'],evan:['frame','join','wheel','energy','control','signal'],station:['frame','join','energy','control','signal']};
+// Curated examples, not a universal classification or a score key. An absent item means “not covered here”.
+const FACTS={
+ wheelbarrow:{frame:'车斗和车架共同承载；材料、形状和结构都影响承载表现。',join:'车斗、车架和车轮需要装配；金属结构可使用螺栓或焊接等连接方式。',wheel:'车轮绕轴转动，把搬运中的许多滑动变为滚动。',lever:'图中独轮车以车轮接地点为支点，负载位于支点与双手用力位置之间。'},
+ evan:{frame:'车身和底架共同支撑与保护；材料需要配合合适的形状和结构。',join:'车身、底盘、电池和车轮需要可靠连接；不同部位可用不同连接工艺。',wheel:'电动机经过传动装置驱动车轮。车轮支承、转向和传动需要协同。',energy:'动力电池储存能量，经电路供给电动机；蓄电池并不是能量的最初来源。',control:'控制器根据指令调节电动机输出。自动控制不等于汽车一定能无人驾驶。',signal:'配有传感器的汽车可以测量车速、位置或周围障碍等信息。'},
+ station:{frame:'舱体、桁架和太阳翼需要结构设计，并适应太空中的工作条件。',join:'舱段通过对接机构连接，内部设备也需要装配；连接方式要适合各自任务。',energy:'太阳翼发电，蓄电池储能，供电网络分配电能；这些部分共同支持设备工作。',control:'对日定向装置调节太阳翼朝向，控制系统让各部分按任务要求工作。',signal:'传感器和探测设备取得姿态、环境等信息，为控制或科学研究提供依据。'},
+ train:{frame:'车体和转向架需要结构与材料设计，才能支承和保护车内人员与设备。',join:'车体、车轮组件及设备通过适当工艺组装成为列车。',wheel:'这里的列车采用车轮与钢轨接触的轮轨方式；它不是磁浮列车。',energy:'轮轨高速列车通常从接触网取电，不能把它当成主要由动力电池驱动的汽车。',control:'列车的牵引、制动和运行监测需要控制系统。'},
+ robot:{frame:'连杆与底座的结构需要适合机械臂的载荷和工作范围。',join:'关节、连杆、驱动装置和工具端需要可靠组装。',wheel:'关节中的齿轮等旋转部件可传递运动；它不一定在地面上用轮子行走。',control:'控制器按程序和反馈信息调节关节动作，完成重复或精细操作。',signal:'关节位置等传感信息帮助机械臂确定动作和位置。'},
+ solarlamp:{frame:'灯杆、灯架与底座需要承受自身重量及风等影响。',join:'灯杆、太阳能板、灯具和电池需要组装连接。',energy:'太阳能板发电，蓄电池存储能量，夜间为灯供电。与空间站相通的是技术类别。',control:'装有控制器的路灯可以按设定条件调节照明和充放电。',signal:'装有光敏传感器的路灯能感知环境明暗。并非所有路灯都采用同一方案。'},
+ scissors:{lever:'两片剪刀绕共同的轴转动，可以分析各自的支点、用力点和阻力点。省力与否还取决于具体结构。',join:'轴把两片剪刀连接起来，并允许它们相对转动。'},
+ opener:{lever:'图示撬盖式开瓶器以瓶盖接触处的一点为支点，利用杠杆撬起瓶盖。'}
+};
+const state={page:'graph',source:'wheelbarrow',tech:'wheel',target:'train',revealed:{},links:[],job:{copies:60,changes:0,reuse:false,power:true,params:copy(DEFAULT_PARAMS)},time:0,playing:false,printRecords:[]};
+let raf=0,lastFrame=0,toastTimer=0,returnFocus=null;
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2800);}
+function smallArt(id,prefix){
+ if(id==='scissors')return '<g stroke="#27485b" stroke-width="9" fill="none" stroke-linecap="round"><path d="M194 190L345 65M204 75L340 204" stroke="#9bb2bb" stroke-width="17"/><ellipse cx="177" cy="205" rx="47" ry="32" transform="rotate(-32 177 205)" stroke="#19968c"/><ellipse cx="179" cy="60" rx="43" ry="31" transform="rotate(29 179 60)" stroke="#19968c"/><circle cx="253" cy="137" r="12" fill="#e6b66e" stroke-width="4"/></g>';
+ if(id==='opener')return '<g stroke="#294a5d" stroke-width="5" stroke-linejoin="round"><path d="M160 245V164L181 142V104H224V142L244 164V245Z" fill="#b6d7cb"/><rect x="176" y="91" width="54" height="19" rx="4" fill="#eab76e"/><path d="M184 88L347 41L362 69L218 107L202 100Z" fill="#8ea7ae"/><path d="M260 62L347 38Q365 35 371 55Q375 74 359 80L274 102Z" fill="#168c80"/></g>';
+ return toolArt(id,'',prefix);
+}
+function currentKey(){return state.source+'|'+state.tech+'|'+state.target;}
+function candidates(){const base=TECH[state.tech].targets.filter(x=>x!==state.source);for(const id of ['station','evan','train','robot','solarlamp','wheelbarrow'])if(base.length<3&&id!==state.source&&!base.includes(id))base.push(id);return base.slice(0,3);}
+function chooseSource(id){state.source=id;if(!SOURCE_TECH[id].includes(state.tech))state.tech=SOURCE_TECH[id][0];chooseTech(state.tech);}
+function chooseTech(id){if(!SOURCE_TECH[state.source].includes(id))return;state.tech=id;const c=candidates();if(!c.includes(state.target))state.target=c[0];$('reason').value='';renderGraph();}
+function renderGraph(){
+ document.querySelectorAll('[data-source]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.source===state.source)));
+ const keys=SOURCE_TECH[state.source], left=keys.slice(0,Math.ceil(keys.length/2)),right=keys.slice(Math.ceil(keys.length/2));
+ const coords=[];left.forEach((k,i)=>coords.push({k,x:22,y:60+i*(keys.length>4?100:150),side:'left'}));right.forEach((k,i)=>coords.push({k,x:708,y:60+i*(keys.length>4?100:150),side:'right'}));
+ let s='<ellipse cx="450" cy="228" rx="245" ry="139" fill="#e4eee7" opacity=".75"/>';
+ const anchors={wheelbarrow:{frame:[252,123],join:[278,162],wheel:[149,213],lever:[306,156]},evan:{frame:[193,119],join:[307,96],wheel:[137,219],energy:[245,196],control:[366,169],signal:[361,86]},station:{frame:[260,203],join:[234,110],energy:[58,139],control:[260,125],signal:[337,64]}};
+ coords.forEach(c=>{const cy=c.y+27,ex=c.side==='left'?192:708,a=anchors[state.source][c.k],ax=177+a[0]*1.05,ay=54+a[1]*1.05;s+='<path class="tech-path '+(c.k===state.tech?'active':'')+'" d="M '+ex+' '+cy+' C '+(c.side==='left'?260:640)+' '+cy+' '+(c.side==='left'?ax-40:ax+40)+' '+ay+' '+ax+' '+ay+'"/>';});
+ s+='<g class="hero-art '+(state.tech==='lever'?'':'focused')+'" transform="translate(177 54) scale(1.05)">'+toolArt(state.source,state.tech,'hero')+'</g>';
+
+ coords.forEach((c,i)=>s+='<g class="graph-node '+(c.k===state.tech?'selected':'')+'" data-tech="'+c.k+'" role="button" tabindex="0" aria-label="查看'+TECH[c.k].name+'" aria-pressed="'+(c.k===state.tech)+'"><rect x="'+c.x+'" y="'+c.y+'" width="170" height="54" rx="12"/><text x="'+(c.x+85)+'" y="'+(c.y+33)+'" text-anchor="middle">'+TECH[c.k].name+'</text></g>');
+ s+='<text x="450" y="363" text-anchor="middle" class="hero-caption">'+TOOL_NAMES[state.source]+'</text><text x="450" y="389" text-anchor="middle" class="hero-note">'+(state.source==='station'?'基本构型示意 · 部分技术示例':'部件高亮 · 并非完整技术清单')+'</text>';
+ $('techDiagram').innerHTML=s;
+ $('techDiagram').querySelectorAll('.hero-art .part-'+state.tech).forEach(el=>{el.classList.add('focus-on');let p=el.parentElement;while(p&&!p.classList.contains('hero-art')){if(p.classList.contains('part'))p.classList.add('focus-on');p=p.parentElement;}});
+ $('techTitle').textContent=TECH[state.tech].name;$('sourceFact').textContent=FACTS[state.source][state.tech];
+ $('transferTitle').textContent='追踪「'+TECH[state.tech].name+'」的新用途';
+ $('candidates').innerHTML=candidates().map((id,i)=>'<button class="candidate" data-target="'+id+'" aria-pressed="'+(id===state.target)+'"><span class="candidate-mark">'+(id===state.target?'✓':'+')+'</span><svg viewBox="0 0 520 280" aria-hidden="true">'+smallArt(id,'candidate'+i)+'</svg><span>'+TOOL_NAMES[id]+'</span></button>').join('');
+ renderEvidence();renderLinks();
+}
+function renderEvidence(){
+ $('relationPath').innerHTML='<span>'+TOOL_NAMES[state.source]+'</span> <span class="arrow">→</span> <strong>'+TECH[state.tech].name+'</strong> <span class="arrow">→</span> <span>'+TOOL_NAMES[state.target]+'</span>';
+ const revealed=!!state.revealed[currentKey()],fact=(FACTS[state.target]||{})[state.tech];
+ $('revealBtn').textContent=revealed?'收起资料':'查阅资料';$('revealBtn').setAttribute('aria-pressed',String(revealed));
+ $('evidence').innerHTML=revealed?(fact?'<span class="status">资料中的应用例子</span><br>'+esc(fact):'<span class="status pending">本例还需要查证</span><br>这张示意图没有提供该技术的具体应用证据。你准备观察哪个部件，或查哪份资料？'):'<span class="status pending">先建立你的联系</span><br>'+TECH[state.tech].prompt+' 说说两个工具在哪一点相通，再查资料。';
+}
+function saveLink(){
+ const k=currentKey(),old=state.links.find(x=>x.key===k);if(!old&&state.links.length>=8){toast('已保留 8 条关系，请先删除不需要的一条。');return;}
+ const obj={key:k,source:state.source,tech:state.tech,target:state.target,reviewed:!!state.revealed[k],supported:!!(FACTS[state.target]||{})[state.tech],reason:$('reason').value.trim()};
+ if(old)Object.assign(old,obj);else state.links.push(obj);renderLinks();toast(old?'已更新这条关系与依据':'已保留，可继续追踪另一项技术');
+}
+function renderLinks(){
+ $('linkCount').textContent='我的关系图 · '+state.links.length+' 条';$('exportGraphBtn').disabled=state.links.length===0;
+ $('linkList').innerHTML=state.links.length?state.links.map((l,i)=>'<div class="note-row"><span>'+esc(TOOL_NAMES[l.source]+' → '+TECH[l.tech].name+' → '+TOOL_NAMES[l.target])+'<br><small>'+(!l.reviewed?'我的猜想':l.supported?'资料支持的例子':'待进一步查证')+'</small></span><button data-delete-link="'+i+'" aria-label="删除第'+(i+1)+'条关系">×</button></div>').join(''):'<p class="empty">选一个新工具，保留你的猜想或查证结果。</p>';
+}
+const METHOD_NAMES={wood:'雕版印刷',type:'活字印刷',laser:'激光打印'};
+const STAGE_NAMES={prep:'准备印版',old:'印制旧版',revise:'修改内容',print:'印制最新版',done:'本任务完成',blocked:'缺少供电 · 暂不可用'};
+function plans(job=state.job){return ['wood','type','laser'].map(m=>makePlan(job,m));}
+function maxTime(job=state.job){return Math.max(1,...plans(job).filter(p=>!p.blocked).map(p=>p.total));}
+function fmt(n){return n.toFixed(n<10?2:1).replace(/\.00$/,'').replace(/(\.\d)0$/,'$1');}
+function resetTime(){pause();state.time=0;renderPrint();}
+function jobChanged(){resetTime();}
+function renderPrint(){
+ const ps=plans(),max=maxTime();state.time=Math.min(state.time,max);
+ $('copies').value=state.job.copies;$('copiesOut').textContent=state.job.copies+' 份';$('changeOut').textContent=state.job.changes;$('lessChange').disabled=state.job.changes===0;$('moreChange').disabled=state.job.changes===3;
+ $('reuse').checked=state.job.reuse;$('power').checked=state.job.power;
+ const old=state.job.changes?Math.floor(state.job.copies/2):0;
+ $('jobNote').textContent=state.job.changes?'各自印出 '+old+' 份后修改 '+state.job.changes+' 个字，再印齐 '+state.job.copies+' 份最新版。旧版仍保留，不能自动变新。':'文字不变。三种方法都要完成 '+state.job.copies+' 份相同通知。';
+ $('printLanes').innerHTML=ps.map((p,i)=>'<section class="print-lane" data-method="'+p.method+'"><div class="machine"><div class="machine-name"><span class="method-no">0'+(i+1)+'</span><h3>'+METHOD_NAMES[p.method]+'</h3></div><svg id="art-'+p.method+'" viewBox="0 0 240 112" aria-label="'+METHOD_NAMES[p.method]+'结构示意"></svg><div class="machine-help">'+({wood:'整版刻制 · 可修版、补刻',type:'字库已备 · 排字、换字',laser:'数字文件 · 曝光、转印、定影'})[p.method]+'</div></div><div class="lane-data"><div class="lane-top"><span class="stage-name" id="stage-'+p.method+'"></span><span class="copy-count">最新版 <b id="count-'+p.method+'">0</b> / '+state.job.copies+' 份</span></div><div class="timeline" id="timeline-'+p.method+'" aria-label="'+METHOD_NAMES[p.method]+'的共同时间轴"></div><div class="lane-bottom"><span class="old-note" id="old-'+p.method+'"></span><span class="lane-total" id="total-'+p.method+'"></span></div></div></section>').join('');
+ ps.forEach(p=>{
+  const root=$('timeline-'+p.method);if(p.blocked){root.innerHTML='<span style="padding:6px 8px;font-size:12px;color:#865e31">此方法需要电能</span>';return;}
+  const segs=p.stages.map(s=>'<span class="segment '+s.key+'" style="width:'+(s.duration/max*100)+'%" title="'+STAGE_NAMES[s.key]+'：'+fmt(s.duration)+' 模型分钟"></span>').join('');
+  root.innerHTML=segs+'<div class="timeline-played" id="played-'+p.method+'">'+p.stages.map(s=>'<span class="segment '+s.key+'" style="width:'+(s.duration/max*100)+'%"></span>').join('')+'</div><span class="time-hand" id="hand-'+p.method+'"></span>';
+ });
+ updatePrintFrame();renderPrintRecords();
+}
+function printArt(method,obs,p){
+ const t=state.time,active=['old','print'].includes(obs.stage),phase=active?(t/p.perCopy)%1:0,changed=obs.version===1,revision=obs.stage==='revise';
+ const versions=['科学活动周三见','科学活动周五见','科学行动周五见','科技行动周五见'];
+ const words=(changed?versions[state.job.changes]:versions[0]).split(''),newWords=versions[state.job.changes].split(''),oldWords=versions[0].split('');
+ let svg='<ellipse cx="123" cy="104" rx="108" ry="6" fill="#dfe6de"/>';
+ if(method==='wood'||method==='type'){
+  svg+='<rect x="18" y="51" width="145" height="44" rx="4" fill="'+(method==='wood'?'#bd8b57':'#7f9a9b')+'" stroke="#5f6b60" stroke-width="2"/><g transform="translate(161 0) scale(-1 1)">';
+  words.forEach((w,i)=>{const x=7+i*19;if(method==='type')svg+='<rect x="'+x+'" y="56" width="18" height="32" rx="2" fill="'+(revision&&newWords[i]!==oldWords[i]?'#e5c28a':'#e6ce9f')+'" stroke="#977f59"/>';svg+='<text x="'+(x+9)+'" y="77" font-size="16" text-anchor="middle" fill="#4a4538">'+w+'</text>';});svg+='</g>';
+  if(active)svg+='<rect x="20" y="'+(15+Math.sin(phase*Math.PI)*32)+'" width="141" height="31" rx="2" fill="#fcfaf1" stroke="#b9bbaa"/>';
+  if(revision)svg+='<path d="M140 18L119 58" stroke="#405b64" stroke-width="7"/><path d="M114 62l12-3-7-7Z" fill="#e9b15c"/>';
+  svg+='<text x="181" y="25" font-size="10" fill="#506d68">纸上正字</text><rect x="176" y="35" width="53" height="59" rx="3" fill="#fff" stroke="#c8d3c5"/><text x="202" y="56" text-anchor="middle" font-size="11" fill="#324f53">'+words.slice(0,4).join('')+'</text><text x="202" y="73" text-anchor="middle" font-size="11" fill="'+(changed?'#147d76':'#324f53')+'">'+words.slice(4).join('')+'</text>';
+ }else{
+  svg+='<rect x="9" y="14" width="66" height="48" rx="5" fill="#e7efe9" stroke="#5f7b7b" stroke-width="2"/><text x="42" y="33" font-size="11" text-anchor="middle" fill="#385a60">数字文件</text><text x="42" y="49" font-size="11" text-anchor="middle" fill="#147d76">'+words.slice(4).join('')+'</text><path d="M75 41H91" stroke="#869f99" stroke-width="2" stroke-dasharray="3 3"/><path d="M93 31H215V96H88V46Z" fill="#cbdad7" stroke="#5e7776" stroke-width="2"/><rect x="105" y="18" width="86" height="25" rx="3" fill="#fcfcf2" stroke="#a8beb3"/><circle cx="137" cy="66" r="17" fill="#8ca9a5" stroke="#406c6c" stroke-width="2"/><circle cx="187" cy="77" r="7" fill="#c8995e"/><circle cx="187" cy="90" r="5" fill="#ad895b"/><path d="M111 84H228" stroke="#f8fcf6" stroke-width="5"/>';
+  if(active&&!p.blocked)svg+='<path d="M104 48L133 56" stroke="#df9b45" stroke-width="2"/><path d="M150 82H'+(196+phase*32)+'" stroke="#fff" stroke-width="5"/><circle cx="148" cy="75" r="2" fill="#254655"/>';
+  svg+='<text x="136" y="70" text-anchor="middle" font-size="9" fill="#173c48">鼓</text><text x="192" y="58" text-anchor="middle" font-size="9" fill="#536a70">定影</text>';
+  if(p.blocked)svg+='<path d="M87 16L219 100" stroke="#bd7b47" stroke-width="5"/>';
+ }
+ return svg;
+}
+function updatePrintFrame(){
+ const max=maxTime(),ps=plans();$('timeNow').textContent=state.time.toFixed(1);$('timeSlider').value=Math.round(state.time/max*1000);$('timeSlider').setAttribute('aria-valuetext',state.time.toFixed(1)+' 模型分钟');
+ $('playBtn').textContent=state.playing?'暂停回放':state.time>=max-1e-7?'重新回放':'开始同步回放';$('savePrintBtn').disabled=state.time<=0;
+ ps.forEach(p=>{
+  const obs=planAt(p,state.time);$('stage-'+p.method).textContent=obs.stage==='prep'?({wood:'刻制 / 准备整版',type:'检字、排版、校正',laser:'文件处理 / 准备'})[p.method]:obs.stage==='revise'?({wood:'修版 / 补刻',type:'检字、换字、校正',laser:'编辑文件 / 重新处理'})[p.method]:STAGE_NAMES[obs.stage];
+  $('stage-'+p.method).classList.toggle('blocked',p.blocked);$('count-'+p.method).textContent=obs.fresh;
+  $('old-'+p.method).textContent=state.job.changes?'旧版 '+obs.old+' 份 · 保留待处理':'同一版内容 · 不修改';
+  $('total-'+p.method).textContent=p.blocked?'暂不能完成':'总需 '+fmt(p.total)+' 模型分';
+  $('art-'+p.method).innerHTML=printArt(p.method,obs,p);
+  if(!p.blocked){const progress=Math.min(state.time,p.total)/max*100;$('played-'+p.method).style.width=progress+'%';const totalWidth=$('timeline-'+p.method).getBoundingClientRect().width;Array.from($('played-'+p.method).children).forEach((e,i)=>e.style.width=(p.stages[i].duration/max*totalWidth)+'px');$('hand-'+p.method).style.left=Math.min(state.time/max*100,100)+'%';}
+ });
+}
+function play(){if(state.playing){pause();updatePrintFrame();return;}if(state.time>=maxTime()-1e-7)state.time=0;state.playing=true;lastFrame=0;updatePrintFrame();raf=requestAnimationFrame(tick);}
+function tick(ts){if(!state.playing)return;if(!lastFrame)lastFrame=ts;const dt=Math.min((ts-lastFrame)/1000,.08);lastFrame=ts;state.time=Math.min(maxTime(),state.time+dt*maxTime()/18);updatePrintFrame();if(state.time>=maxTime()-1e-7){pause();updatePrintFrame();}else raf=requestAnimationFrame(tick);}
+function pause(){state.playing=false;cancelAnimationFrame(raf);raf=0;lastFrame=0;}
+function savePrint(){if(state.printRecords.length>=3){toast('最多对照 3 次，请先删除一条旧记录。');return;}state.printRecords.push({job:copy(state.job),time:state.time});renderPrintRecords();toast('已保留本次条件、参数与时刻');}
+function renderPrintRecords(){
+ $('printRecordCount').textContent='条件记录 · '+state.printRecords.length+' / 3';$('compareBtn').disabled=state.printRecords.length===0;
+ $('printRecords').innerHTML=state.printRecords.length?state.printRecords.map((r,i)=>'<div class="snapshot"><button data-load-record="'+i+'" aria-label="恢复记录'+String.fromCharCode(65+i)+'"><strong>'+String.fromCharCode(65+i)+'</strong>　'+r.job.copies+' 份 / 改 '+r.job.changes+' 字 / '+(r.job.power?'有电':'无电')+'<br><span>'+ (r.job.reuse?'复用已有版或文件':'从准备开始')+' · 回看 '+fmt(r.time)+' 分</span></button><button data-delete-record="'+i+'" aria-label="删除记录'+String.fromCharCode(65+i)+'">×</button></div>').join(''):'<p class="empty">播放或拖动时间后，可保留条件与结果。</p>';
+}
+function switchPage(page){pause();state.page=page;for(const p of ['graph','print']){const active=page===p;$('page'+(p==='graph'?'Graph':'Print')).hidden=!active;$('page'+(p==='graph'?'Graph':'Print')).classList.toggle('active',active);$('tab'+(p==='graph'?'Graph':'Print')).setAttribute('aria-selected',String(active));}$('footerNote').textContent=page==='graph'?'结构图为示意；共用技术类别，不代表装置相同或发明先后。':'课堂假设模型：未计算设备制造、购置、耗材、质量差异与环境影响。';if(page==='print')renderPrint();}
+function modal(title,html){pause();if(state.page==='print')updatePrintFrame();returnFocus=document.activeElement;$('modalTitle').textContent=title;$('modalContent').innerHTML=html;$('modalBackdrop').hidden=false;$('closeModal').focus();}
+function closeModal(){$('modalBackdrop').hidden=true;$('modalContent').innerHTML='';if(returnFocus&&returnFocus.isConnected)returnFocus.focus();}
+function openParams(){
+ modal('模型参数：改变假设，重新比较','<p class="subtle">所有数值都是课堂假设，单位为分钟（保留两位小数）。它们用于讨论“准备 + 重复复制 + 修订”，不代表任何朝代或设备的真实速度。</p><table class="param-table"><thead><tr><th>方法</th><th>准备 / 分</th><th>每份 / 分</th><th>每改一字 / 分</th></tr></thead><tbody>'+['wood','type','laser'].map(m=>'<tr><th>'+METHOD_NAMES[m]+'</th>'+['setup','perCopy','perChar'].map(k=>'<td><input type="number" data-param="'+m+':'+k+'" aria-label="'+METHOD_NAMES[m]+({setup:'准备分钟',perCopy:'每份分钟',perChar:'每改一字分钟'})[k]+'" min="'+(k==='perCopy'?'0.01':'0')+'" max="'+(k==='perCopy'?'10':'240')+'" step="0.01" value="'+state.job.params[m][k]+'"></td>').join('')+'</tr>').join('')+'</tbody></table><p class="subtle">活字假定字库已备；三种方法均不计设备的制造和采购。“复用”表示版或文件已准备妥当，不再计准备时间。雕版允许修版、补刻；并非每改一字都须整版重刻。</p><p class="subtle">中途修订：先印一半旧版，再修订并重新印齐全部最新版。旧版单独记录。总时长 = 准备 + 印旧版 + 修订 + 印最新版。</p><div class="modal-actions"><button id="defaultParams">恢复示例值</button><button class="primary" id="applyParams">应用并回到起点</button></div>');
+ $('defaultParams').onclick=()=>{document.querySelectorAll('[data-param]').forEach(el=>{const [m,k]=el.dataset.param.split(':');el.value=DEFAULT_PARAMS[m][k];el.classList.remove('bad-input');});};
+ $('applyParams').onclick=()=>{const next=copy(state.job.params);let valid=true;document.querySelectorAll('[data-param]').forEach(el=>{const [m,k]=el.dataset.param.split(':'),v=Number(el.value),ok=el.value!==''&&Number.isFinite(v)&&v>=Number(el.min)&&v<=Number(el.max);el.classList.toggle('bad-input',!ok);if(ok)next[m][k]=Math.round(v*100)/100;else valid=false;});if(!valid){toast('请填写范围内的数字；每份时间必须大于 0。');return;}state.job.params=next;closeModal();jobChanged();toast('已应用新假设；此前保留的记录仍使用原参数。');};
+}
+function openCompare(){
+ const mx=Math.max(1,...state.printRecords.flatMap(r=>plans(r.job).filter(p=>!p.blocked).map(p=>p.total)));
+ modal('保留条件，比较不同结果','<p class="subtle">下列总时长由每条记录自己的参数计算。若同时改变多个条件，就不能把差异归因于其中一个条件。</p><div class="comparison-grid">'+state.printRecords.map((r,i)=>'<section class="compare-card"><h3>记录 '+String.fromCharCode(65+i)+'</h3><p>'+r.job.copies+' 份最新版 · 改 '+r.job.changes+' 字</p><p>'+(r.job.reuse?'已有版 / 文件':'从准备开始')+' · '+(r.job.power?'现场有电':'现场无电')+'</p><p>保留时刻：'+fmt(r.time)+' 模型分</p>'+plans(r.job).map(p=>{const obs=planAt(p,r.time);return '<p><strong>'+METHOD_NAMES[p.method]+'</strong>　'+(p.blocked?'暂不可用':fmt(p.total)+' 分')+'<br>当时：新 '+obs.fresh+' / 旧 '+obs.old+' 份</p><div class="compare-bar" style="width:'+(p.blocked?0:p.total/mx*100)+'%"></div>';}).join('')+'<p class="subtle">准备 / 每份 / 改一字：<br>'+['wood','type','laser'].map(m=>METHOD_NAMES[m]+' '+[r.job.params[m].setup,r.job.params[m].perCopy,r.job.params[m].perChar].join(' / ')).join('<br>')+'</p></section>').join('')+'</div><p>这些条件下，哪部分最花时间？把结果用于生活选择时，还需要补充哪些信息？</p><div class="modal-actions"><button class="primary" id="exportCompareBtn">导出对照图</button></div>');
+ $('exportCompareBtn').onclick=()=>exportPrint(true);
+}
+function openHelp(){modal('使用、模型与资料','<h3>追踪技术</h3><p>选择工具，点技术标签或图中的部件。再选一个可能使用相同技术的工具，先说出依据，再查阅资料；把猜想或查证结果保留在关系图中。示例没有覆盖所有技术，未提供证据不表示绝对不可能。</p><h3>印刷试验场</h3><p>改变印数、改字数量、版或文件是否已备及供电条件。三条时间轴采用同一模型时钟，可以暂停、拖动回看，保留最多三次条件。修改期间不会出新纸；已印旧版不会自动改成新内容。</p><p>印面使用镜像字，纸上使用正字。示意通知按设置改变 1—3 个字符；修改的字符数与时间计算一致。这里用桌面激光打印机代表现代技术的一个例子，并非复原教材中的大型印刷设备。激光打印用光照感光鼓，经碳粉转印和热压定影成像，激光并不直接在纸上刻字。</p><h3>模型边界</h3><p>时间是可编辑的假设参数，不能作为独立证据验证现实效率。初稿只比较本任务时间及版本数量；设备购置、耗材、印刷质量、技能与环境影响需要另作调查。图中为结构或关系示意，不是工程图。</p><p>关系线表示技术类别与应用的联系，不代表该民用技术由空间站发明，也不代表两种装置可以直接互换。技术包含方法、程序和产品，不只指零件。</p><h3>依据与延伸阅读</h3><ul><li>用户提供的教科版《科学》五年级上册，第58—61页，及对应教师教学用书第7课。</li><li><a href="https://www.dpm.org.cn/lemmas/240351.html" target="_blank" rel="noopener">故宫博物院：木活字</a>——独立字块与排字。</li><li><a href="https://yzmuseum.com/index.php?a=show&amp;g=home&amp;id=260&amp;m=article" target="_blank" rel="noopener">扬州中国雕版印刷博物馆：雕版印刷研究</a>——版片修补的研究资料。</li><li><a href="https://global.canon/en/technology/canon-tech/tech/laser-printer/" target="_blank" rel="noopener">Canon：激光打印原理</a>——曝光、转印与定影。</li><li><a href="https://www.cmse.gov.cn/xwzx/202211/t20221107_51357.html" target="_blank" rel="noopener">中国载人航天：空间站电源与储能</a>——太阳翼、蓄电池和供电网络。</li></ul><p class="subtle">v1.0 · 单文件，无外部运行依赖；资料链接需要联网。记录暂存于当前打开的页面，关闭前请导出。全屏与下载方式取决于浏览器。</p>');}
+function textSvg(x,y,text,size=18,color='#234957',weight=400){return '<text x="'+x+'" y="'+y+'" font-size="'+size+'" fill="'+color+'" font-weight="'+weight+'">'+esc(text)+'</text>';}
+function wrapSvg(text,x,y,width=48,size=17,color='#536c70'){const a=Array.from(text),lines=[];for(let i=0;i<a.length;i+=width)lines.push(a.slice(i,i+width).join(''));return lines.map((line,i)=>textSvg(x,y+i*(size+8),line,size,color)).join('');}
+function svgDoc(width,height,content){return '<svg xmlns="http://www.w3.org/2000/svg" width="'+width+'" height="'+height+'" viewBox="0 0 '+width+' '+height+'"><rect width="100%" height="100%" fill="#f6f8f3"/><g font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,sans-serif">'+content+'</g></svg>';}
+function downloadSvg(filename,svg){
+ const blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);toast('已请求保存 SVG 图；若没有下载，请在浏览器中允许下载。');
+}
+function exportGraph(){
+ if(!state.links.length)return;let y=118,s=textSvg(40,50,'工具与技术 · 我的关系图',28,'#173e46',700)+textSvg(40,82,'五上2.7  ｜  猜想与资料状态分别保留；连接不是发明先后的时间线。',16);
+ state.links.forEach((l,i)=>{
+  const fact=l.reviewed&&l.supported?'资料：'+FACTS[l.target][l.tech]:'',reason=l.reason?'我的依据：'+l.reason:'';
+  const factLines=fact?Math.ceil(Array.from(fact).length/52):0,reasonLines=reason?Math.ceil(Array.from(reason).length/57):0;
+  const cardHeight=77+factLines*24+(reasonLines?10+reasonLines*23:0);
+  s+='<rect x="28" y="'+(y-22)+'" width="984" height="'+cardHeight+'" rx="12" fill="#e8f0e9"/>'+textSvg(46,y,String(i+1).padStart(2,'0')+'　'+TOOL_NAMES[l.source]+' → '+TECH[l.tech].name+' → '+TOOL_NAMES[l.target],23,'#176f68',700)+textSvg(46,y+30,!l.reviewed?'状态：我的猜想':l.supported?'状态：资料支持的应用例子':'状态：还需查证',16);
+  if(fact)s+=wrapSvg(fact,46,y+56,52,16);
+  if(reason)s+=wrapSvg(reason,46,y+56+factLines*24+(factLines?8:0),57,15);
+  y+=cardHeight+17;
+ });
+ s+=textSvg(40,y+12,'共用技术类别，具体装置和适用条件可以不同。资料见课件“使用与资料”。',16)+textSvg(40,y+40,'mutiw · v1.0',13,'#6b8178');downloadSvg('五上2.7_我的技术关系图.svg',svgDoc(1040,y+65,s));
+}
+function exportPrint(all=false){
+ const records=all&&state.printRecords.length?state.printRecords:[{job:copy(state.job),time:state.time}],mx=Math.max(1,...records.flatMap(r=>plans(r.job).filter(p=>!p.blocked).map(p=>p.total)));let y=116;
+ let s=textSvg(35,48,'印刷任务 · 条件与模型结果',28,'#173e46',700)+textSvg(35,79,'时间为课堂假设，非历史实测。比较时使用共同刻度。',17);
+ records.forEach((r,i)=>{s+=textSvg(35,y,'记录 '+String.fromCharCode(65+i)+'：'+r.job.copies+' 份最新版 / 改 '+r.job.changes+' 字 / '+(r.job.reuse?'版或文件已备':'从准备开始')+' / '+(r.job.power?'有电':'无电'),21,'#176f68',700);y+=31;s+=textSvg(35,y,'保留时刻 '+fmt(r.time)+' 模型分钟；未计算设备购置、耗材和质量。',15);y+=34;
+ plans(r.job).forEach(p=>{const o=planAt(p,r.time);s+=textSvg(35,y,METHOD_NAMES[p.method],19,'#173e46',600)+textSvg(190,y,p.blocked?'缺少供电，暂不能完成':'总需 '+fmt(p.total)+' 分；保留时刻新 '+o.fresh+' 份 / 旧 '+o.old+' 份',16);y+=14;if(!p.blocked){let x=190;p.stages.forEach(st=>{const w=st.duration/mx*620;s+='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="20" fill="'+({prep:'#d8a057',old:'#8595a7',revise:'#a77cac',print:'#23998d'})[st.key]+'"/>';x+=w;});}y+=42;});
+ const parameterLine='本次参数（准备 / 每份 / 改一字，分钟）：'+['wood','type','laser'].map(m=>METHOD_NAMES[m]+' '+[r.job.params[m].setup,r.job.params[m].perCopy,r.job.params[m].perChar].join('/')).join('；');s+=wrapSvg(parameterLine,35,y,62,14);y+=Math.ceil(Array.from(parameterLine).length/62)*22+25;});
+ s+=textSvg(35,y,'橙：准备　灰蓝：旧版　紫：修订　绿：最新版',16)+textSvg(35,y+30,'改字时旧版不会自动变新；各方法先印一半旧版，再修订并印齐全部最新版。',16)+textSvg(35,y+58,'工具制造与购置不计；活字字库已备。模型不能证明现实中哪一种技术永远更好。',15)+textSvg(35,y+86,'mutiw · v1.0',13,'#657c72');downloadSvg(all?'五上2.7_印刷条件对照.svg':'五上2.7_印刷观察图.svg',svgDoc(1040,y+110,s));
+}
+function bind(){
+ $('tabGraph').onclick=()=>switchPage('graph');$('tabPrint').onclick=()=>switchPage('print');document.querySelectorAll('[data-source]').forEach(b=>b.onclick=()=>chooseSource(b.dataset.source));
+ $('techDiagram').addEventListener('click',e=>{const target=e.target.closest('[data-tech]');if(target&&SOURCE_TECH[state.source].includes(target.dataset.tech))chooseTech(target.dataset.tech);});
+ $('techDiagram').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const target=e.target.closest('.graph-node');if(target){e.preventDefault();chooseTech(target.dataset.tech);}}});
+ $('candidates').onclick=e=>{const b=e.target.closest('[data-target]');if(!b)return;state.target=b.dataset.target;$('reason').value='';renderGraph();};
+ $('revealBtn').onclick=()=>{state.revealed[currentKey()]=!state.revealed[currentKey()];renderEvidence();};$('saveLinkBtn').onclick=saveLink;$('exportGraphBtn').onclick=exportGraph;
+ $('linkList').onclick=e=>{const b=e.target.closest('[data-delete-link]');if(b){state.links.splice(Number(b.dataset.deleteLink),1);renderLinks();}};
+ $('copies').oninput=e=>{state.job.copies=Number(e.target.value);jobChanged();};$('lessChange').onclick=()=>{state.job.changes=Math.max(0,state.job.changes-1);jobChanged();};$('moreChange').onclick=()=>{state.job.changes=Math.min(3,state.job.changes+1);jobChanged();};$('reuse').onchange=e=>{state.job.reuse=e.target.checked;jobChanged();};$('power').onchange=e=>{state.job.power=e.target.checked;jobChanged();};
+ $('playBtn').onclick=play;$('rewindBtn').onclick=resetTime;$('endBtn').onclick=()=>{pause();state.time=maxTime();updatePrintFrame();};$('timeSlider').oninput=e=>{pause();state.time=Number(e.target.value)/1000*maxTime();updatePrintFrame();};
+ $('paramsBtn').onclick=openParams;$('savePrintBtn').onclick=savePrint;$('compareBtn').onclick=openCompare;$('exportPrintBtn').onclick=()=>exportPrint(false);
+ $('printRecords').onclick=e=>{const del=e.target.closest('[data-delete-record]'),b=e.target.closest('[data-load-record]');if(del){state.printRecords.splice(Number(del.dataset.deleteRecord),1);renderPrintRecords();}else if(b){const r=state.printRecords[Number(b.dataset.loadRecord)];pause();state.job=copy(r.job);state.time=r.time;renderPrint();toast('已恢复记录中的条件、参数和时刻');}};
+ $('helpBtn').onclick=openHelp;$('closeModal').onclick=closeModal;$('modalBackdrop').onclick=e=>{if(e.target===$('modalBackdrop'))closeModal();};
+ $('fullBtn').onclick=()=>{if(document.fullscreenElement){if(document.exitFullscreen)document.exitFullscreen().catch(()=>toast('请使用浏览器退出全屏'));}else if(document.documentElement.requestFullscreen){document.documentElement.requestFullscreen().catch(()=>toast('此环境不允许全屏，可使用浏览器全屏按钮。'));}else toast('此浏览器不支持网页全屏，请使用浏览器或设备的全屏功能。');};
+ document.addEventListener('keydown',e=>{if(!$('modalBackdrop').hidden){if(e.key==='Escape'){e.preventDefault();closeModal();}if(e.key==='Tab'){const fs=Array.from($('modalBackdrop').querySelectorAll('button,a,input,textarea,[tabindex="0"]')).filter(el=>!el.disabled),first=fs[0],last=fs[fs.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden&&state.playing){pause();if(state.page==='print')updatePrintFrame();}});window.addEventListener('resize',()=>{if(state.page==='print')updatePrintFrame();});
+}
+bind();renderGraph();
+</script>
+</body>
+</html>
