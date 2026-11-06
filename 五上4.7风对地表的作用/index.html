@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173e3a">
+<meta name="description" content="五上4.7风对地表的作用：追踪同一批沙、回溯对照、放大风沙磨蚀与自主连接地表变化因素。单文件离线互动模型。">
+<title>风对地表的作用 · 地表观察站</title>
+<style>
+:root{--ink:#173e3a;--muted:#60716a;--paper:#f5f3ec;--card:#fffdf7;--line:#d9ded4;--gold:#b77935;--teal:#2a776c;--purple:#73599d;--font:system-ui,-apple-system,'Segoe UI','Microsoft YaHei','PingFang SC',sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:17px}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid #dc9b42;outline-offset:3px}button{min-height:44px;border:1px solid var(--line);border-radius:10px;color:var(--ink);background:#fffdf9;font-weight:650;padding:9px 14px}button:disabled{opacity:.45;cursor:default}button:hover{border-color:#87a195}.quiet{background:transparent}.primary{background:var(--ink);color:white;border-color:var(--ink);min-height:52px}.secondary{background:#e8eee4;border-color:#d4dfd1}.selected,.segmented button.selected{color:#fff;background:var(--ink);border-color:var(--ink)}[hidden]{display:none!important}.app{height:100vh;height:100dvh;min-height:580px;display:flex;flex-direction:column;padding:0 24px}.app-head{display:flex;align-items:center;gap:30px;min-height:96px;border-bottom:1px solid var(--line)}.brand h1{font-size:clamp(24px,2vw,32px);letter-spacing:.03em;line-height:1.2;margin:4px 0 0}.eyebrow,.tiny-label{font-size:13px;letter-spacing:.09em;color:#768176;font-weight:700}.main-nav{display:flex;background:#e9ece3;border-radius:12px;padding:4px;gap:4px;margin:auto}.main-nav button{border:0;background:none;min-height:49px;font-size:16px;color:#6f7b6e;white-space:nowrap}.main-nav button.selected{background:var(--ink);color:#fff;box-shadow:0 3px 6px #173e3a14}.main-nav button span{margin-left:10px;font-size:18px}.head-tools{display:flex;gap:8px;align-items:center}.head-tools button{font-size:14px}.workspace{flex:1;min-height:0;padding-top:18px}.wind-panel{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:20px}.scene-column{display:flex;flex-direction:column;min-height:0;min-width:0}.scene-header{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;padding:0 2px 12px}.scene-header h2{font-size:clamp(20px,1.6vw,27px);margin:4px 0 0;font-weight:700}.scene-header .tiny-label{color:var(--gold);font-size:12px}.scene-tools{display:flex;gap:6px}.scene-tools button{font-size:14px;padding:8px 10px}.scene-tools button.active{background:#e7eee5;border-color:#ccd9ca}.stage-wrap{position:relative;flex:1;min-height:190px;overflow:hidden;border:1px solid #d8ddd0;border-radius:15px;background:linear-gradient(#e6eee9,#f2efe3)}#sandSvg{width:100%;height:100%;display:block;cursor:crosshair;touch-action:none}.rock-entry{position:absolute;right:15px;top:14px;width:135px;min-height:100px;display:flex;flex-direction:column;align-items:center;background:#fffdf6e8;border-color:#d5d6c6;box-shadow:0 5px 14px #4250420a;font-size:14px;padding:8px 7px}.rock-entry svg{width:70px;height:50px}.rock-entry b{color:var(--gold);margin-left:5px}.track-hint{position:absolute;left:18px;bottom:14px;background:#fffdf3e5;border:1px solid #dddcc7;border-radius:8px;padding:6px 10px;font-size:14px;pointer-events:none}.compare-chip{position:absolute;left:18px;top:14px;border-radius:8px;background:#f4eef9e8;color:var(--purple);padding:4px 6px 4px 10px;font-size:14px;font-weight:700}.compare-chip button{min-height:32px;border:0;background:transparent;font-size:22px;padding:0 7px;color:var(--purple)}.mass-ledger{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;background:#fffdf8;border:1px solid var(--line);border-radius:12px;margin-top:10px;padding:9px 4px}.mass-item{text-align:center;border-right:1px solid #e3e5da;position:relative}.mass-item:last-child{border:0}.mass-item .mass-label{display:block;color:#67756b;font-size:14px}.mass-item .num{display:block;font-size:28px;font-weight:740;line-height:1.2;letter-spacing:-.03em}.mass-item .num small{font-size:17px;color:var(--purple);font-weight:650;margin-left:10px}.mass-item .mass-note{font-size:11px;color:#849083}.timeline{display:flex;align-items:center;gap:12px;margin-top:12px;min-height:44px}.timeline label{font-size:14px;white-space:nowrap}.timeline output{font-weight:700;color:var(--ink);display:block;font-size:15px}.timeline input{flex:1;min-width:40px}.timeline button{font-size:14px;min-height:42px}.timeline button.active{background:#e5ede3}.scene-foot{font-size:12px;color:#7d897d;margin:7px 0 1px;display:flex;justify-content:space-between;gap:10px;line-height:1.5}.control-panel{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px;display:flex;flex-direction:column;gap:12px;overflow:auto}.control-title{display:flex;align-items:center;justify-content:space-between;gap:8px}.control-title h2{font-size:20px;margin:0}.control-title span{font-size:12px;color:var(--muted)}.control-block{border-bottom:1px solid #e5e8dd;padding:0 0 14px}.range-label{display:flex;justify-content:space-between;align-items:center;margin:0 0 7px;font-size:17px}.range-label strong{font-size:28px;color:var(--gold)}input[type=range]{width:100%;height:30px;accent-color:var(--teal);cursor:pointer;touch-action:pan-y;margin:0}input[type=range]::-webkit-slider-thumb{min-width:20px;min-height:20px}input[type=range]::-moz-range-thumb{width:20px;height:20px}.range-labels{display:flex;justify-content:space-between;font-size:11px;color:#7b8679}.field-label{display:block;font-size:15px;color:#5b6f62;margin-bottom:9px}.segmented{display:flex;gap:5px}.segmented button{flex:1;padding:7px 8px;font-size:15px}.switch-label{display:flex;align-items:center;gap:8px;cursor:pointer;min-height:36px}.switch-label input{width:22px;height:22px;accent-color:var(--teal);margin:0 4px 0 0}.switch-label span{font-size:17px}.switch-visual{margin-left:auto;width:34px;height:25px;background:repeating-linear-gradient(74deg,transparent 0px,transparent 5px,#66916c 6px,#66916c 8px,transparent 9px);border-bottom:2px solid #c3ac7e}#grassControl{padding-top:8px}.mini-label{font-size:13px;color:var(--muted)}.condition-note{font-size:12px;color:#788474;line-height:1.65;margin:0}.button-pair{display:flex;gap:6px}.button-pair button{flex:1;font-size:13px;padding:8px 7px}.prompt-box{border-left:3px solid #caa263;padding:4px 0 3px 13px;margin-top:auto}.prompt-box p{font-size:15px;line-height:1.65;margin:5px 0}.prompt-box .tiny-label{font-size:11px;color:#967b50}.comparison-info{background:#f4f0f8;border:1px solid #e2d9eb;border-radius:8px;padding:8px 10px;font-size:12px;color:#6e5a82;line-height:1.65}.app-footer{min-height:30px;display:flex;align-items:center;justify-content:space-between;color:#8b9587;font-size:11px;gap:12px}.app-footer .watermark{letter-spacing:.12em}.modal{position:fixed;inset:0;z-index:50;background:#17342eca;display:flex;justify-content:center;align-items:center;padding:20px;backdrop-filter:blur(4px)}.modal-surface{background:var(--paper);border:1px solid #d4dacf;border-radius:18px;box-shadow:0 20px 80px #0c22184d;max-width:1200px;width:100%;max-height:96vh;max-height:96dvh;display:flex;flex-direction:column;padding:22px;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:16px}.modal-head h2{font-size:27px;margin:5px 0 0}.modal-head button{font-size:14px}.rock-surface{height:min(810px,96vh);height:min(810px,96dvh)}.rock-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;min-height:220px}.rock-card{display:flex;flex-direction:column;min-height:0;overflow:hidden;background:#eaf0e8;border:1px solid #d9dfd2;border-radius:12px}.rock-label{display:flex;align-items:center;justify-content:space-between;padding:13px 16px 4px;gap:8px}.rock-label b{font-size:19px}.rock-label span{font-size:13px;color:#71806b}.rock-card svg{width:100%;min-height:0;flex:1;display:block}.rock-caption{display:flex;justify-content:space-between;gap:10px;color:#77816f;font-size:12px;padding:10px 3px}.rock-controls{display:flex;align-items:center;gap:10px;padding-top:6px}.rock-controls button{white-space:nowrap;font-size:15px}.rock-wind-label{flex:1;max-width:240px;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.rock-wind-label input{width:100%;height:24px}.rock-wind-label output{color:var(--gold);font-weight:800}.rock-bottom{font-size:12px;color:#74816f;margin:8px 0 0;line-height:1.6}.rock-timeline{margin-top:10px}.about-surface{max-width:730px;padding:28px}.about-body{font-size:17px;line-height:1.8;overflow:auto}.about-body p{margin:0 0 15px}.about-body ul{padding-left:22px;margin:0 0 18px}.about-body li{margin-bottom:12px}.about-body .source-line{font-size:13px;color:#6e7c6d}.about-body a{color:var(--teal)}.toast{position:fixed;z-index:100;bottom:42px;left:50%;transform:translateX(-50%);padding:12px 20px;background:#173e3a;color:#fff;box-shadow:0 4px 20px #173e3a30;border-radius:10px;font-size:15px;max-width:90vw;text-align:center;pointer-events:none}
+@media(min-width:1600px){.app{padding:0 36px}.app-head{min-height:112px}.wind-panel{grid-template-columns:minmax(0,1fr) 330px;gap:24px}.control-panel{padding:22px;gap:18px}.control-panel button{font-size:17px}.range-labels,.condition-note{font-size:14px}.mass-item .num{font-size:34px}.mass-item .mass-label{font-size:17px}.scene-foot{font-size:14px}.scene-tools button{font-size:16px}.control-title h2{font-size:23px}.prompt-box p{font-size:18px}.scene-header{min-height:75px}}
+@media(max-height:850px) and (min-width:901px){.app-head{min-height:80px}.workspace{padding-top:12px}.control-panel{padding:13px;gap:8px}.control-block{padding-bottom:10px}.control-title h2{font-size:18px}.prompt-box p{font-size:14px}.prompt-box .tiny-label{display:none}.scene-header{min-height:52px;padding-bottom:8px}.scene-header .tiny-label{display:none}.mass-ledger{padding:6px 2px;margin-top:8px}.mass-item .num{font-size:25px}.scene-foot{font-size:11px}.timeline{margin-top:6px}.modal-surface{padding:16px}.modal-head{margin-bottom:8px}.rock-caption{padding:6px 2px}.rock-controls{gap:8px}.rock-controls .primary{min-height:45px}.rock-bottom{font-size:11px}.rock-label{padding-top:9px}}
+@media(max-width:1100px){.app{padding:0 16px}.app-head{gap:16px}.wind-panel{grid-template-columns:minmax(0,1fr) 245px;gap:12px}.brand h1{font-size:24px}.main-nav button{font-size:12px;padding:8px 10px}.main-nav button span{font-size:16px;margin-left:5px}.head-tools{gap:4px}.head-tools button{font-size:12px;padding:8px 10px}.scene-header h2{font-size:21px}.scene-tools button{font-size:12px;padding:6px 8px}.control-panel{padding:13px}.rock-entry{width:115px;right:12px;top:12px;min-height:90px;font-size:13px}.scene-foot span:last-child{display:none}.rock-caption{flex-wrap:wrap}.rock-controls{flex-wrap:wrap}.rock-controls .rock-wind-label{margin-right:auto;min-width:150px}.rock-surface{padding:15px}}
+@media(max-width:900px){.app{padding:0 14px;min-height:650px}.app-head{min-height:86px;gap:12px;flex-wrap:wrap;padding:10px 0}.brand{flex:1}.brand h1{font-size:23px}.eyebrow{font-size:11px}.main-nav{order:3;margin:0;flex:1;justify-content:center;padding:3px}.main-nav button{flex:1;min-height:40px}.head-tools{margin-left:auto}.wind-panel{grid-template-columns:minmax(0,1fr) 220px}.control-panel{gap:10px;padding:13px}.scene-header{min-height:64px;align-items:flex-start;flex-wrap:wrap;gap:5px;padding-bottom:8px}.scene-header .tiny-label{display:none}.scene-header h2{font-size:20px;margin:0}.scene-tools button{min-height:32px;padding:4px 8px}.scene-tools{gap:4px}.mass-item .mass-label{font-size:12px}.mass-item .num{font-size:24px}.mass-item .num small{font-size:14px;margin-left:5px}.track-hint{left:9px;bottom:9px;font-size:12px}.rock-entry{width:100px;min-height:80px;font-size:12px}.rock-entry svg{width:58px;height:40px}.control-title h2{font-size:18px}.prompt-box p{font-size:14px}.condition-note{font-size:11px}.segmented button{font-size:13px}.app-footer span:nth-child(2){font-size:10px}.modal{padding:10px}.modal-head h2{font-size:23px}.rock-label{padding:9px 10px 4px}.rock-label b{font-size:16px}.rock-label span{font-size:11px}.rock-pair{gap:10px}.rock-caption{font-size:11px}.rock-controls button{font-size:13px;min-height:43px;padding:8px 12px}.rock-wind-label{min-width:120px}.rock-bottom{font-size:11px}}
+@media(max-width:650px){.app{height:auto;min-height:100vh;min-height:100dvh;padding:0 10px}.workspace{padding-top:12px}.app-head{gap:9px}.brand h1{font-size:22px}.head-tools button{padding:7px;min-height:38px}.head-tools #fullBtn span{display:none}.wind-panel{display:flex;flex-direction:column;gap:10px;height:auto}.stage-wrap{height:300px;flex:none;min-height:0}.scene-header{min-height:58px}.scene-header h2{font-size:21px}.scene-tools button{font-size:13px}.control-panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;overflow:visible;padding:14px}.control-title{grid-column:1/-1}.control-block{padding-bottom:10px}.control-panel .grass-block{grid-column:1/-1}.control-panel .condition-note{grid-column:1/-1;font-size:12px}.control-panel .button-pair{grid-column:1/-1}.control-panel .prompt-box{grid-column:1/-1;margin-top:0}.control-panel .comparison-info{grid-column:1/-1}.prompt-box p{margin:4px 0}.prompt-box p br{display:none}.grass-block{display:flex;align-items:center;gap:20px}.grass-block .switch-label{flex:1}.grass-block #grassControl{flex:1;padding:0}.mass-item .num{font-size:26px}.mass-item .mass-label{font-size:12px}.mass-ledger{padding:8px 3px}.mass-item .num small{display:block;margin:0;font-size:13px}.timeline{gap:9px}.scene-foot{font-size:10px}.scene-header{flex-direction:column}.scene-tools{align-self:flex-end;margin-top:-3px}.app-footer{padding:9px 0;font-size:10px}.app-footer span:nth-child(2){display:none}.rock-entry{width:95px;top:10px;right:10px}.modal{padding:8px}.modal-surface{border-radius:12px;padding:12px}.modal-head{align-items:flex-start;gap:10px}.modal-head h2{font-size:21px}.modal-head button{font-size:12px;min-height:39px;padding:7px 9px}.rock-pair{grid-template-columns:1fr;flex:none;min-height:0;gap:10px}.rock-card{height:260px}.rock-card svg{min-height:0}.rock-label{padding:8px 12px 0}.rock-label b{font-size:16px}.rock-label span{font-size:12px}.rock-surface{height:auto;overflow-y:auto;max-height:96dvh}.rock-caption{font-size:11px;gap:5px}.rock-controls{display:grid;grid-template-columns:1fr 1fr}.rock-wind-label{grid-column:1/-1;max-width:none;width:100%;flex-wrap:nowrap}.rock-wind-label input{width:auto;flex:1}.rock-wind-label output{min-width:30px}.rock-controls button{font-size:14px}.rock-bottom{font-size:12px}.about-surface{padding:17px}.about-body{font-size:15px}.about-body .source-line{font-size:12px}.about-body ul{padding-left:19px}.rock-timeline label{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+.scene-column>.comparison-info{margin-top:8px;font-size:12px;line-height:1.5;padding:7px 12px}.control-panel.has-grass .prompt-box{display:none}
+@media(max-height:850px) and (min-width:901px){.control-panel .prompt-box{display:none}.control-panel{gap:10px;padding:16px}.control-panel .condition-note{font-size:12px}.scene-column>.comparison-info{margin-top:6px}}
+
+@media(min-width:651px) and (max-width:900px) and (orientation:portrait){
+ .wind-panel{display:flex;flex-direction:column;gap:10px}
+ .scene-column{flex:1;min-height:0}.scene-header{min-height:54px;flex-wrap:nowrap;align-items:center}.stage-wrap{min-height:240px}
+ .control-panel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px 12px;padding:12px 14px;flex:none;overflow:visible}
+ .control-panel .control-title{display:none}.control-panel .control-block{padding-bottom:8px;margin:0}.control-panel .condition-note{grid-column:1/-1;font-size:12px}
+ .control-panel .prompt-box{display:none}.control-panel>.primary,.control-panel>.secondary{min-height:45px;font-size:15px}
+ .control-panel .button-pair{align-self:stretch;gap:5px}.control-panel .button-pair button{padding:6px;font-size:12px}
+ .control-panel .range-label{margin:0;font-size:15px}.control-panel .range-label strong{font-size:24px}.control-panel .field-label{margin-bottom:7px}
+ .control-panel #grassControl{padding-top:0}.control-panel #grassControl input{height:24px}.control-panel .switch-label{min-height:31px}.control-panel .switch-label span{font-size:15px}
+ .scene-foot{margin-top:5px}.scene-column>.comparison-info{font-size:11px;line-height:1.35;padding:5px 10px}
+}
+
+.compare-chip{left:50%;transform:translateX(-50%);white-space:nowrap}
+
+#mapPanel{--cm-ink:#173e3a;--cm-muted:#60746c;--cm-gold:#c58a44;box-sizing:border-box;width:100%;height:100%;min-height:0;color:var(--cm-ink);font-family:inherit;display:flex;flex-direction:column;gap:12px;padding:0}
+#mapPanel[hidden]{display:none!important}
+#mapPanel *{box-sizing:border-box}
+#mapPanel button{font:inherit;font-size:17px;font-weight:650;min-height:44px;padding:8px 13px;border:1px solid #d6ded4;border-radius:10px;background:#fffdf8;color:var(--cm-ink);cursor:pointer;touch-action:manipulation;line-height:1.25;white-space:nowrap;box-shadow:none;transition:background .12s,border-color .12s}
+#mapPanel button:hover:not(:disabled){background:#eef3eb;border-color:#a7bcb0}
+#mapPanel button:focus-visible{outline:3px solid #c58a44;outline-offset:3px}
+#mapPanel button:disabled{opacity:.43;cursor:default}
+#mapPanel h2,#mapPanel h3,#mapPanel p{margin:0}
+#mapPanel .cm-topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex:none}
+#mapPanel .cm-heading{display:flex;align-items:center;gap:12px;min-width:0}
+#mapPanel h2{font-size:clamp(20px,1.8vw,27px);line-height:1.2;font-weight:750;white-space:nowrap}
+#mapPanel #cm-view-label{font-size:14px;color:var(--cm-muted);padding:5px 10px;background:#e8eee5;border-radius:20px;white-space:nowrap}
+#mapPanel .cm-tools{display:flex;align-items:center;gap:10px;flex:none}
+#mapPanel .cm-mode{display:flex;background:#e6ebe2;padding:4px;border-radius:12px;gap:3px}
+#mapPanel .cm-mode button{min-width:76px;min-height:39px;border:0;background:transparent;padding:7px 14px}
+#mapPanel .cm-mode button[aria-pressed=true]{background:#173e3a;color:white;box-shadow:0 2px 5px #173e3a19}
+#mapPanel .cm-quiet{background:transparent;border-color:transparent;color:#58726a}
+#mapPanel .cm-workspace{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px;min-height:0}
+#mapPanel .cm-board-wrap{position:relative;min-width:0;min-height:0;border:1px solid #d9dfd5;border-radius:14px;overflow:hidden;background:#faf9f4}
+#mapPanel #cm-board{display:block;width:100%;height:100%;touch-action:none;user-select:none;-webkit-user-select:none;outline:none}
+#mapPanel #cm-board:focus-visible{outline:3px solid #c58a44;outline-offset:-4px}
+#mapPanel #cm-board [data-cm-node]{cursor:grab;outline:none}
+#mapPanel #cm-board[data-mode=link] [data-cm-node]{cursor:pointer}
+#mapPanel #cm-board[data-dragging=true] [data-cm-node]{cursor:grabbing}
+#mapPanel #cm-board[data-readonly=true] [data-cm-node]{cursor:default}
+#mapPanel #cm-board [data-cm-node]:focus-visible rect{stroke:#c58a44;stroke-width:4}
+#mapPanel #cm-board [data-cm-edge]{cursor:pointer;outline:none}
+#mapPanel #cm-board [data-cm-edge]:focus-visible .cm-edge-line{stroke:#c58a44;stroke-width:5}
+#mapPanel .cm-board-hint{position:absolute;left:18px;bottom:12px;color:#6b7b70;font-size:15px;line-height:1.3;pointer-events:none;max-width:calc(100% - 36px);background:rgba(250,249,244,.92);padding:5px 8px;border-radius:6px}
+#mapPanel .cm-readonly{position:absolute;right:16px;top:14px;background:#f6e5c9;color:#865622;padding:7px 13px;border-radius:20px;font-weight:700;font-size:16px;pointer-events:none}
+#mapPanel .cm-aside{min-height:0;display:flex;flex-direction:column;gap:12px}
+#mapPanel .cm-context{padding:15px;background:#fffdf8;border:1px solid #dce2d7;border-radius:12px;flex:1;min-height:132px}
+#mapPanel .cm-context h3{font-size:18px;line-height:1.35;font-weight:750}
+#mapPanel .cm-context p{margin-top:7px;font-size:16px;line-height:1.55;color:var(--cm-muted);overflow-wrap:anywhere}
+#mapPanel .cm-relations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px}
+#mapPanel .cm-relations button{padding:7px 8px;min-height:42px;font-size:17px}
+#mapPanel .cm-relations button[aria-pressed=true]{background:#e5eee3;border-color:#52766a;box-shadow:inset 0 0 0 1px #52766a}
+#mapPanel .cm-context-actions{display:flex;gap:3px;margin-top:8px;flex-wrap:wrap}
+#mapPanel .cm-context-actions button{font-size:14px;padding:6px;min-height:35px}
+#mapPanel .cm-danger{color:#9c513c;border-color:transparent;background:transparent}
+#mapPanel .cm-additions{display:flex;flex-direction:column;gap:7px}
+#mapPanel .cm-additions>span{font-size:15px;color:var(--cm-muted)}
+#mapPanel .cm-additions>div{display:flex;gap:8px}
+#mapPanel .cm-additions button{flex:1;font-size:16px;padding:7px;min-height:41px}
+#mapPanel .cm-snapshots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#mapPanel .cm-snapshots button{font-size:16px;padding:9px 6px;min-height:44px}
+#mapPanel .cm-output{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#mapPanel .cm-output button{font-size:16px;min-height:44px;padding:9px 10px}
+#mapPanel .cm-output .cm-primary{flex:1;color:#fff;background:#173e3a;border-color:#173e3a}
+#mapPanel .cm-output .cm-primary:hover:not(:disabled){background:#285b52}
+#mapPanel .cm-evidence{font-size:13px;background:#eeeadd;border-left:3px solid #c58a44;padding:8px 10px;border-radius:0 7px 7px 0}
+#mapPanel .cm-evidence span{color:#7b623f;font-weight:700}
+#mapPanel .cm-evidence p{color:#59695e;line-height:1.4;margin-top:3px;overflow-wrap:anywhere}
+#mapPanel .cm-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;flex:none;line-height:1.35}
+#mapPanel .cm-footer p{font-size:15px;color:#566f64}
+#mapPanel #cm-status{font-size:13px;color:#7b826f;text-align:right;max-width:42%}
+#mapPanel [hidden]{display:none!important}
+@media(max-width:1100px){#mapPanel .cm-workspace{grid-template-columns:minmax(0,1fr) 214px;gap:10px}#mapPanel .cm-context{padding:12px}#mapPanel .cm-footer p{font-size:14px}#mapPanel .cm-tools{gap:5px}}
+@media(max-height:700px) and (min-width:851px){#mapPanel{gap:8px}#mapPanel .cm-aside{gap:7px}#mapPanel .cm-context{min-height:105px;padding:10px 12px}#mapPanel .cm-context p{font-size:15px;line-height:1.35}#mapPanel .cm-relations{margin-top:8px;gap:5px}#mapPanel .cm-relations button{min-height:36px;font-size:16px}#mapPanel .cm-context-actions{margin-top:3px}#mapPanel .cm-context-actions button{min-height:31px}#mapPanel .cm-evidence{padding:5px 8px;font-size:12px}#mapPanel .cm-additions{gap:4px}#mapPanel .cm-additions>span{font-size:14px}#mapPanel .cm-additions button{min-height:37px}#mapPanel .cm-snapshots button,#mapPanel .cm-output button{min-height:39px}#mapPanel .cm-footer p{font-size:13px}}
+@media(max-width:850px){#mapPanel .cm-topbar{gap:8px}#mapPanel h2{font-size:20px}#mapPanel #cm-view-label{display:none}#mapPanel .cm-workspace{display:flex;flex-direction:column;gap:9px}#mapPanel .cm-board-wrap{flex:1;min-height:260px}#mapPanel .cm-aside{flex:none;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:8px;align-items:start}#mapPanel .cm-context{grid-column:1;grid-row:1 / span 3;min-height:0;height:100%;padding:10px 12px}#mapPanel .cm-context h3{font-size:16px}#mapPanel .cm-context p{font-size:14px;line-height:1.35;margin-top:4px}#mapPanel .cm-relations{grid-template-columns:repeat(3,1fr);gap:5px;margin-top:8px}#mapPanel .cm-relations button{min-height:37px;font-size:15px;padding:6px 2px}#mapPanel .cm-additions{grid-column:2;flex-direction:row;align-items:center;gap:4px}#mapPanel .cm-additions>span{display:none}#mapPanel .cm-additions>div{width:100%;gap:6px}#mapPanel .cm-additions button{min-height:36px;font-size:14px}#mapPanel .cm-snapshots{grid-column:2;gap:6px}#mapPanel .cm-snapshots button{min-height:38px;font-size:14px}#mapPanel .cm-output{grid-column:2;gap:4px}#mapPanel .cm-output button{min-height:38px;font-size:14px;padding:7px}#mapPanel .cm-evidence{grid-column:1 / -1;grid-row:4;font-size:12px;padding:5px 8px}#mapPanel .cm-evidence span,#mapPanel .cm-evidence p{display:inline;margin-right:5px}#mapPanel .cm-footer{align-items:flex-start}#mapPanel .cm-footer p{font-size:12px}#mapPanel #cm-status{font-size:12px}#mapPanel .cm-board-hint{font-size:12px;left:10px;bottom:8px;max-width:calc(100% - 20px)}}
+@media(max-width:520px){#mapPanel .cm-topbar{flex-wrap:wrap}#mapPanel .cm-heading{width:100%}#mapPanel h2{font-size:21px}#mapPanel .cm-tools{width:100%;justify-content:space-between}#mapPanel .cm-mode{flex:1}#mapPanel .cm-mode button{flex:1}#mapPanel .cm-board-wrap{min-height:245px}#mapPanel .cm-aside{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}#mapPanel .cm-context{padding:9px}#mapPanel .cm-context h3{font-size:14px}#mapPanel .cm-context p{font-size:13px}#mapPanel .cm-relations{grid-template-columns:repeat(2,1fr)}#mapPanel .cm-relations button{min-height:34px}#mapPanel .cm-context-actions button{font-size:12px;min-height:30px;padding:4px}#mapPanel .cm-snapshots{grid-template-columns:1fr}#mapPanel .cm-output{flex-direction:column;align-items:stretch}#mapPanel .cm-footer{display:block}#mapPanel #cm-status{display:block;max-width:100%;text-align:left;margin-top:4px}#mapPanel .cm-readonly{font-size:13px;padding:5px 9px}}
+
+</style>
+</head>
+<body>
+<div class="app" id="app">
+ <header class="app-head">
+  <div class="brand"><span class="eyebrow">五上 4.7 · 地表观察站</span><h1>风对地表的作用</h1></div>
+  <nav class="main-nav" aria-label="工作区"><button id="windTab" class="selected" aria-pressed="true">01 <span>追踪风沙</span></button><button id="mapTab" aria-pressed="false">02 <span>连接地表</span></button></nav>
+  <div class="head-tools"><button id="aboutBtn" class="quiet">模型说明</button><button id="fullBtn" class="quiet" aria-label="全屏显示"><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" style="vertical-align:-3px"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> <span>全屏</span></button></div>
+ </header>
+ <main class="workspace">
+ <section id="windPanel" class="wind-panel" aria-label="风沙追踪模型">
+  <div class="scene-column">
+   <div class="scene-header"><div><span class="tiny-label">追踪同一批沙</span><h2>离开原处的沙，去了哪里？</h2></div><div class="scene-tools"><button id="outlineBtn" aria-pressed="true" class="quiet active">初始轮廓</button><button id="exportBtn" class="quiet">保存观察图</button></div></div>
+   <div class="stage-wrap" id="stageWrap">
+    <svg id="sandSvg" viewBox="0 0 1000 420" role="img" aria-label="可点选沙粒追踪的风沙剖面模型" tabindex="0"></svg>
+    <button id="openRock" class="rock-entry" aria-haspopup="dialog"><svg viewBox="0 0 80 60" aria-hidden="true"><path d="M28 8 58 6 64 17 57 30 52 46 57 53 20 53 29 45 25 32 19 21Z" fill="#c4a58c" stroke="#806c5c" stroke-width="2"/><path d="m26 22 33-3M29 35l24-4" stroke="#907763" fill="none"/><path d="M4 35h17m-6-5 6 5-6 5" stroke="#b87b36" stroke-width="2" fill="none"/><circle cx="64" cy="42" r="10" stroke="#173e3a" fill="#f5f3ec" stroke-width="2"/><path d="m71 49 6 6M64 37v10m-5-5h10" stroke="#173e3a" stroke-width="2"/></svg><span>放大岩面 <b>↗</b></span></button>
+    <div class="track-hint" id="trackHint">点一粒沙，追踪它的去向</div>
+    <div class="compare-chip" id="compareChip" hidden>A 虚线 · B 实线 <button id="removeA" aria-label="移除条件A对照">×</button></div>
+   </div>
+   <div class="mass-ledger" id="ledger" aria-label="沙的去向计数"></div>
+   <div id="comparisonInfo" class="comparison-info" hidden></div>
+   <div class="timeline"><button id="slowBtn" class="quiet" aria-pressed="false">慢放</button><label for="sandTime">模型进程 <output id="sandStep">0 / 240 步</output></label><input id="sandTime" type="range" min="0" max="240" value="0" step="1" aria-label="拖动回溯模型进程"></div>
+   <p class="scene-foot"><span id="massNote">等量沙单元计数 · 模型示意</span><span>拖动进程可回看；暂停会冻结全部运动。</span></p>
+  </div>
+  <aside class="control-panel" aria-label="改变模型条件">
+   <div class="control-title"><h2>改变条件</h2><span id="runBadge">准备观察</span></div>
+   <div class="control-block"><label class="range-label" for="windRange">风强度 <strong id="windValue">3.0</strong></label><input type="range" id="windRange" min="0" max="5" step="0.5" value="3"><div class="range-labels"><span>0 停风</span><span>相对强度，非风级</span><span>5</span></div></div>
+   <div class="control-block"><span class="field-label">来风方向</span><div class="segmented"><button id="dirLeft" aria-pressed="false">← 向左吹</button><button id="dirRight" class="selected" aria-pressed="true">向右吹 →</button></div></div>
+   <div class="control-block grass-block"><label class="switch-label"><input type="checkbox" id="grassToggle"><span>加入草带</span><span class="switch-visual" aria-hidden="true"></span></label><div id="grassControl" hidden><label for="grassRange" class="mini-label">草带位置</label><input id="grassRange" type="range" min="180" max="820" step="10" value="710" aria-label="草带横向位置"></div></div>
+   <p class="condition-note">调节条件会从同一沙堆重开。先保留 A，可在同一进程比较。</p>
+   <button id="sandPlay" class="primary">▶ 开始吹风</button>
+   <button id="stopWind" class="secondary">停风，看沙落下</button>
+   <div class="button-pair"><button id="sandReset" class="quiet">↶ 重新观察</button><button id="saveA" class="secondary">保留条件 A</button></div>
+   <div class="prompt-box"><span class="tiny-label">观察线索</span><p id="questionPrompt">原处减少了什么？<br>留在原处的又是什么？</p></div>
+  </aside>
+ </section>
+ <section id="mapPanel" class="cm-panel" hidden aria-labelledby="cm-title">
+  <div class="cm-topbar">
+    <div class="cm-heading"><h2 id="cm-title">地表变化关系图</h2><span id="cm-view-label">当前图</span></div>
+    <div class="cm-tools" role="group" aria-label="关系图操作">
+      <div class="cm-mode" role="group" aria-label="选择操作方式">
+        <button id="cm-move" type="button" aria-pressed="true">移动</button>
+        <button id="cm-link" type="button" aria-pressed="false">连线</button>
+      </div>
+      <button id="cm-undo" class="cm-quiet" type="button" disabled aria-label="撤销最近一步">↶ 撤销</button>
+    </div>
+  </div>
+  <div class="cm-workspace">
+    <div class="cm-board-wrap">
+      <svg id="cm-board" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="group" aria-label="地表变化关系图，可拖动节点，切换连线后选择两个节点" tabindex="0">
+        <defs>
+          <pattern id="cm-grid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#d9ded6"/></pattern>
+          <marker id="cm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1L9 5L1 9Z" fill="#51746d"/></marker>
+          <marker id="cm-arrow-active" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1L9 5L1 9Z" fill="#b47a31"/></marker>
+        </defs>
+        <rect x="0" y="0" width="1000" height="600" fill="#faf9f4"/>
+        <rect x="0" y="0" width="1000" height="600" fill="url(#cm-grid)"/>
+        <g id="cm-edges"></g><g id="cm-nodes"></g>
+      </svg>
+      <span id="cm-readonly" class="cm-readonly" hidden>初图 · 只读</span>
+      <p id="cm-board-hint" class="cm-board-hint">拖动节点整理位置，切到“连线”表达关系。</p>
+    </div>
+    <aside class="cm-aside" aria-label="关系图工具">
+      <div class="cm-context">
+        <h3 id="cm-context-title">从哪里连到哪里？</h3>
+        <p id="cm-context-text">切到“连线”，依次点两个节点。</p>
+        <div id="cm-relation-box" hidden>
+          <div id="cm-relations" class="cm-relations" role="group" aria-label="选择关系词">
+            <button type="button" data-cm-relation="改变">改变</button><button type="button" data-cm-relation="搬运">搬运</button>
+            <button type="button" data-cm-relation="磨蚀">磨蚀</button><button type="button" data-cm-relation="破碎">破碎</button>
+            <button type="button" data-cm-relation="形成">形成</button><button type="button" data-cm-relation="堆积">堆积</button>
+          </div>
+          <div class="cm-context-actions"><button id="cm-cancel-link" type="button" class="cm-quiet">取消选择</button><button id="cm-delete-edge" type="button" class="cm-danger" hidden>删除连线</button></div>
+        </div>
+      </div>
+      <div class="cm-additions"><span>还想到什么？</span><div><button id="cm-add-temperature" type="button">＋ 温度</button><button id="cm-add-plants" type="button">＋ 植物</button></div></div>
+      <div id="cm-evidence" class="cm-evidence" hidden><span>风沙模型记录（示意）</span><p id="cm-evidence-text"></p></div>
+      <div class="cm-snapshots"><button id="cm-save-initial" type="button">保留初图</button><button id="cm-show-initial" type="button" disabled>查看初图</button></div>
+      <div class="cm-output"><button id="cm-export" type="button" class="cm-primary">导出关系图</button><button id="cm-clear" type="button" class="cm-quiet">清空连线</button></div>
+    </aside>
+  </div>
+  <div class="cm-footer"><p>请用实物观察、教材资料或模型过程说明连接的依据。</p><span id="cm-status" role="status" aria-live="polite">连接由你来解释</span></div>
+</section>
+
+ </main>
+ <footer class="app-footer"><span aria-hidden="true"></span><span>干燥、松散沙粒与小石砾 · 教学模型</span><span class="watermark">mutiw</span></footer>
+</div>
+<div id="rockModal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="rockTitle">
+ <div class="modal-surface rock-surface">
+  <header class="modal-head"><div><span class="eyebrow">同风 · 同材料 · 同进程</span><h2 id="rockTitle">沙粒撞到了哪里？</h2></div><button id="closeRock" class="quiet">返回风沙场 ×</button></header>
+  <div class="rock-pair"><div class="rock-card"><div class="rock-label"><b>无沙气流</b><span id="rockEmptyCount">累计撞击 0</span></div><svg id="clearRockSvg" viewBox="0 0 520 400" role="img" aria-label="无沙气流下岩面保持不变"></svg></div><div class="rock-card"><div class="rock-label"><b>含沙气流</b><span id="rockHitCount">累计撞击 0</span></div><svg id="sandyRockSvg" viewBox="0 0 520 400" role="img" aria-label="含沙气流中的沙粒撞击与岩面磨蚀"></svg></div></div>
+  <div class="rock-caption"><span>虚线：初始岩面</span><span>右侧短条：各高度累计撞击（模型）</span><span>颗粒及形变均已放大、加速</span></div>
+  <div class="rock-controls"><button id="rockPlay" class="primary">▶ 开始观察</button><button id="rockReverse" class="secondary">换侧来风 ←</button><label class="rock-wind-label">风强度 <output id="rockWindValue">3.0</output><input id="rockWind" type="range" min="0" max="5" step="0.5" value="3" aria-label="岩面模型相对风强度"></label><button id="rockReset" class="quiet">↶ 复位</button><button id="rockExport" class="quiet">保存对照图</button></div>
+  <div class="timeline rock-timeline"><label for="rockTime">累计作用 <output id="rockStep">0 / 240 步</output></label><input type="range" id="rockTime" min="0" max="240" value="0" aria-label="回溯岩面磨蚀进程"></div>
+  <p class="rock-bottom">换侧来风会保留已有痕迹。低处沙粒分布较多；这不表示低处风速更大。模型不换算自然界的年数。</p>
+ </div>
+</div>
+<div id="aboutModal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="aboutTitle"><div class="modal-surface about-surface"><header class="modal-head"><h2 id="aboutTitle">这是一套怎样的模型？</h2><button id="closeAbout" class="quiet" aria-label="关闭模型说明">关闭 ×</button></header><div class="about-body"><p>依据本项目教材《科学》五年级上册第122—125页与对应教师用书，补充实物吹沙实验中的追踪、回溯和对照。</p><ul><li><b>沙粒去向：</b>同一批等量沙单元在表层起动、跃移和落下；计数守恒，离开画面会单列。本模型固定干燥、松散的沙，不包含粉尘黏结与潮湿结皮。</li><li><b>草带：</b>用局部减风示意对输沙的影响，未模拟根系、真实湍流或植被种类。</li><li><b>岩面：</b>同材料岩块的各高度因撞击而退缩，只演示含沙气流的磨蚀；不是所有风蚀岩都会形成相同形状。</li><li><b>数值：</b>风强度、作用步、沙单元和撞击数均为模型量，不是实测风速、沙粒数或地质年代。模拟不能作为独立实验证据验证其预设规律。</li><li><b>实物活动：</b>保留吹沙、观察与解释；操作时按教材要求佩戴护目镜。</li></ul><p class="source-line">科学参考：<a href="https://www.nps.gov/articles/aeolian.htm" target="_blank" rel="noopener">NPS · Aeolian Features and Processes</a>。关系图由学生自主建立，不自动给出标准答案。</p><p class="source-line">版本 v1.0 · 单文件，无外部运行依赖。关系图在浏览器允许时保存在本机；保存观察图导出 SVG。</p></div></div></div>
+<div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+<script>
+(function () {
+  'use strict';
+  // Independent learner-authored relation map. No connection is judged scientifically correct.
+  var KEY = 'aihtml-w5-4-7-concept-map-v1';
+  var WORDS = ['改变', '搬运', '磨蚀', '破碎', '形成', '堆积'];
+  var SPECS = {
+    land: {label:'地表形态', x:500, y:290, w:188, type:'land'},
+    volcano: {label:'火山喷发', x:180, y:115, w:172, type:'cause'},
+    quake: {label:'地震', x:155, y:305, w:136, type:'cause'},
+    water: {label:'水', x:255, y:485, w:128, type:'cause'},
+    wind: {label:'风', x:800, y:115, w:128, type:'cause'},
+    rock: {label:'岩石', x:835, y:305, w:136, type:'material'},
+    grains: {label:'沙和小石砾', x:720, y:485, w:195, type:'material'},
+    temperature: {label:'温度', x:480, y:90, w:136, type:'extra'},
+    plants: {label:'植物', x:495, y:490, w:136, type:'extra'}
+  };
+  var REQUIRED = ['land','volcano','quake','water','wind','rock','grains'];
+  var ui, state, history = [], initial = null, mode = 'move', source = null, pending = null;
+  var selectedEdge = null, preview = false, drag = null, initialized = false, lastId = 0;
+  var confirmAction = null, confirmTimer = null, saveWarning = false, evidenceNames = [];
+  function clone(value) { return JSON.parse(JSON.stringify(value)); }
+  function esc(value) { return String(value).replace(/[&<>"']/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c];}); }
+  function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+  function fresh() { return {nodes:REQUIRED.map(function(id){return {id:id,x:SPECS[id].x,y:SPECS[id].y};}),edges:[]}; }
+  function normalize(raw) {
+    if (!raw || !Array.isArray(raw.nodes) || !Array.isArray(raw.edges)) return null;
+    var nodes=[], seen={};
+    raw.nodes.forEach(function(n){
+      if(!n || !Object.prototype.hasOwnProperty.call(SPECS,n.id) || seen[n.id] || !Number.isFinite(n.x) || !Number.isFinite(n.y)) return;
+      seen[n.id]=true; var w=SPECS[n.id].w;
+      nodes.push({id:n.id,x:clamp(n.x,w/2+16,984-w/2),y:clamp(n.y,52,540)});
+    });
+    REQUIRED.forEach(function(id){if(!seen[id]){nodes.push({id:id,x:SPECS[id].x,y:SPECS[id].y});seen[id]=true;}});
+    var edges=[], pairs={};
+    raw.edges.slice(0,90).forEach(function(e){
+      if(!e || e.from===e.to || !seen[e.from] || !seen[e.to] || WORDS.indexOf(e.word)<0) return;
+      var pair=e.from+'>'+e.to; if(pairs[pair])return; pairs[pair]=true;
+      edges.push({id:'restored-'+(++lastId),from:e.from,to:e.to,word:e.word});
+    });
+    return {nodes:nodes,edges:edges};
+  }
+  function message(text) { ui.status.textContent=text; }
+  function save() {
+    try { localStorage.setItem(KEY,JSON.stringify({version:1,current:state,initial:initial})); message('已在本机保存'); }
+    catch(e) { if(!saveWarning){saveWarning=true;message('本机保存不可用，可导出关系图。');} }
+  }
+  function pushHistory(before) { history.push(clone(before||state)); if(history.length>30)history.shift(); }
+  function currentData() { return preview&&initial ? initial : state; }
+  function findNode(data,id) { return data.nodes.find(function(n){return n.id===id;}); }
+  function nodeLabel(id) { return SPECS[id] ? SPECS[id].label : ''; }
+  function boundary(n,t,pad) {
+    var dx=t.x-n.x,dy=t.y-n.y; if(Math.abs(dx)+Math.abs(dy)<.1){dx=1;dy=0;}
+    var k=Math.min((SPECS[n.id].w/2+pad)/(Math.abs(dx)||.0001),(32+pad)/(Math.abs(dy)||.0001));
+    return {x:n.x+dx*k,y:n.y+dy*k};
+  }
+  function edgeGeometry(data,e) {
+    var a=findNode(data,e.from),b=findNode(data,e.to); if(!a||!b)return null;
+    var s=boundary(a,b,5),t=boundary(b,a,9),dx=t.x-s.x,dy=t.y-s.y,len=Math.hypot(dx,dy)||1;
+    var reverse=data.edges.some(function(other){return other.from===e.to&&other.to===e.from;});
+    var bend=reverse?34:0,c={x:(s.x+t.x)/2-dy/len*bend,y:(s.y+t.y)/2+dx/len*bend};
+    return {d:'M'+s.x.toFixed(1)+' '+s.y.toFixed(1)+' Q'+c.x.toFixed(1)+' '+c.y.toFixed(1)+' '+t.x.toFixed(1)+' '+t.y.toFixed(1),x:(s.x+2*c.x+t.x)/4,y:(s.y+2*c.y+t.y)/4};
+  }
+  function edgesMarkup(data,interactive) {
+    return data.edges.map(function(e){
+      var g=edgeGeometry(data,e);if(!g)return '';
+      var active=interactive&&!preview&&e.id===selectedEdge,col=active?'#b47a31':'#51746d';
+      return '<g'+(interactive?' data-cm-edge="'+esc(e.id)+'" tabindex="0" role="button" aria-label="'+esc(nodeLabel(e.from)+'，'+e.word+'，'+nodeLabel(e.to)+'。点选可修改')+'"':'')+'>'+
+        '<path d="'+g.d+'" fill="none" stroke="transparent" stroke-width="24"/>'+
+        '<path class="cm-edge-line" d="'+g.d+'" fill="none" stroke="'+col+'" stroke-width="'+(active?4:3)+'" marker-end="url(#cm-arrow'+(active?'-active':'')+')"/>'+
+        '<rect x="'+(g.x-36).toFixed(1)+'" y="'+(g.y-19).toFixed(1)+'" width="72" height="38" rx="9" fill="'+(active?'#f7e9cf':'#faf9f4')+'" stroke="'+(active?'#d4b37c':'#e1e5d9')+'"/>'+
+        '<text x="'+g.x.toFixed(1)+'" y="'+g.y.toFixed(1)+'" text-anchor="middle" dominant-baseline="central" font-size="22" font-weight="650" fill="'+col+'">'+esc(e.word)+'</text></g>';
+    }).join('');
+  }
+  function nodesMarkup(data,interactive) {
+    return data.nodes.map(function(n){
+      var s=SPECS[n.id],active=interactive&&!preview&&(source===n.id || (pending&&(pending.from===n.id||pending.to===n.id)));
+      var fill=s.type==='land'?'#173e3a':s.type==='material'?'#f3e5cb':s.type==='extra'?'#e8efdf':'#fffdf7';
+      var stroke=active?'#bd833c':s.type==='land'?'#173e3a':s.type==='material'?'#d4bc92':'#b9cabb';
+      return '<g'+(interactive?' data-cm-node="'+n.id+'" role="button" tabindex="'+(preview?'-1':'0')+'" aria-label="'+esc(s.label+(mode==='link'?'，点选连线':'，可拖动或用方向键移动'))+'"':'')+' transform="translate('+n.x.toFixed(1)+' '+n.y.toFixed(1)+')">'+
+        (active?'<rect x="'+(-s.w/2-6)+'" y="-38" width="'+(s.w+12)+'" height="76" rx="19" fill="none" stroke="#d7b77d" stroke-width="2" stroke-dasharray="5 4"/>':'')+
+        '<rect x="'+(-s.w/2)+'" y="-32" width="'+s.w+'" height="64" rx="14" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+(active?3:2)+'"/>'+
+        '<text x="0" y="0" text-anchor="middle" dominant-baseline="central" font-size="26" font-weight="700" fill="'+(s.type==='land'?'#fffdf4':'#214a3e')+'">'+esc(s.label)+'</text></g>';
+    }).join('');
+  }
+  function renderDrawing(keepNodes) {
+    var data=currentData();ui.edges.innerHTML=edgesMarkup(data,true);
+    if(keepNodes){
+      // Keep the original touch target attached until its pointer and touch events finish.
+      data.nodes.forEach(function(n){var element=ui.nodes.querySelector('[data-cm-node="'+n.id+'"]');if(element)element.setAttribute('transform','translate('+n.x.toFixed(1)+' '+n.y.toFixed(1)+')');});
+    }else ui.nodes.innerHTML=nodesMarkup(data,true);
+    ui.board.setAttribute('data-mode',mode);ui.board.setAttribute('data-readonly',String(preview));ui.board.setAttribute('data-dragging',String(!!drag));
+  }
+  function updateTools() {
+    ui.move.setAttribute('aria-pressed',String(mode==='move'));ui.link.setAttribute('aria-pressed',String(mode==='link'));
+    ui.move.disabled=ui.link.disabled=preview;ui.undo.disabled=preview||!history.length;
+    ui.saveInitial.disabled=preview;ui.saveInitial.textContent=confirmAction==='initial'?'确认替换':initial?'替换初图':'保留初图';
+    ui.showInitial.disabled=!initial;ui.showInitial.textContent=preview?'返回当前':'查看初图';
+    ui.clear.disabled=preview||!state.edges.length;ui.clear.textContent=confirmAction==='clear'?'确认清空':'清空连线';
+    ui.addTemperature.disabled=preview||!!findNode(state,'temperature');ui.addPlants.disabled=preview||!!findNode(state,'plants');
+    ui.addTemperature.textContent=findNode(state,'temperature')?'温度 ✓':'＋ 温度';ui.addPlants.textContent=findNode(state,'plants')?'植物 ✓':'＋ 植物';
+    ui.readonly.hidden=!preview;ui.viewLabel.textContent=preview?'保留的初图':'当前图';
+    var edge=state.edges.find(function(e){return e.id===selectedEdge;});
+    ui.additions.hidden=!!(pending||edge);ui.evidence.hidden=!evidenceNames.length||!!(pending||edge);
+    ui.relationBox.hidden=preview||(!pending&&!edge);ui.deleteEdge.hidden=!edge;ui.cancelLink.textContent=edge?'取消选择':'取消连线';
+    ui.relations.querySelectorAll('[data-cm-relation]').forEach(function(b){b.setAttribute('aria-pressed',String(!!edge&&edge.word===b.getAttribute('data-cm-relation')));});
+    if(preview){ui.contextTitle.textContent='回看最初的想法';ui.contextText.textContent='比较连接的方向与关系词。点“返回当前”继续修改。';}
+    else if(pending){ui.contextTitle.textContent='选一个关系词';ui.contextText.textContent=nodeLabel(pending.from)+' → '+nodeLabel(pending.to);}
+    else if(edge){ui.contextTitle.textContent='修改这条连接';ui.contextText.textContent=nodeLabel(edge.from)+' → '+nodeLabel(edge.to);}
+    else if(source){ui.contextTitle.textContent='已选：'+nodeLabel(source);ui.contextText.textContent='再点终点；也可再点起点取消。';}
+    else if(mode==='link'){ui.contextTitle.textContent='从哪里连到哪里？';ui.contextText.textContent='先点起点，再点终点。箭头由起点指向终点。';}
+    else{ui.contextTitle.textContent='先整理，再解释';ui.contextText.textContent='拖动节点整理位置，切到“连线”表达关系。';}
+    ui.hint.textContent=preview?'保留的初图；当前图的修改仍然保留。':pending?'选择关系词，完成这条有方向的连接。':source?'再点一个节点作为终点。':mode==='link'?'点起点 → 点终点 → 选关系词。':'拖动节点整理位置；点连线可以修改关系词。';
+  }
+  function render() {renderDrawing();updateTools();}
+  function cancelConfirm() {confirmAction=null;if(confirmTimer)clearTimeout(confirmTimer);confirmTimer=null;}
+  function askConfirm(action,text) {confirmAction=action;message(text);updateTools();if(confirmTimer)clearTimeout(confirmTimer);confirmTimer=setTimeout(function(){confirmAction=null;confirmTimer=null;updateTools();},5000);}
+  function resetSelection() {source=null;pending=null;selectedEdge=null;}
+  function setMode(next) {if(preview)return;cancelConfirm();mode=next;resetSelection();render();message(next==='link'?'依次选择起点、终点，再选关系词。':'可拖动节点，也可点连线进行修改。');}
+  function chooseNode(id) {
+    if(preview||mode!=='link')return;cancelConfirm();selectedEdge=null;
+    if(pending){source=id;pending=null;}
+    else if(source===id){source=null;}
+    else if(!source){source=id;}
+    else{
+      var existing=state.edges.find(function(e){return e.from===source&&e.to===id;});
+      if(existing){selectedEdge=existing.id;source=null;pending=null;}
+      else{pending={from:source,to:id};source=null;}
+    }
+    render();
+  }
+  function chooseRelation(word) {
+    if(preview||WORDS.indexOf(word)<0)return;cancelConfirm();
+    var edge=state.edges.find(function(e){return e.id===selectedEdge;});
+    if(pending){pushHistory();state.edges.push({id:'edge-'+Date.now()+'-'+(++lastId),from:pending.from,to:pending.to,word:word});resetSelection();save();render();message('已连好。请说明这个关系的依据。');}
+    else if(edge&&edge.word!==word){pushHistory();edge.word=word;save();render();}
+  }
+  function removeEdge() {if(preview||!selectedEdge)return;pushHistory();state.edges=state.edges.filter(function(e){return e.id!==selectedEdge;});resetSelection();cancelConfirm();save();render();message('已删除连线，可撤销。');}
+  function point(ev) {var p=ui.board.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;var m=ui.board.getScreenCTM();return m?p.matrixTransform(m.inverse()):{x:0,y:0};}
+  function down(ev) {
+    if(preview||mode!=='move'||ev.button>0)return;var target=ev.target.closest('[data-cm-node]');if(!target)return;
+    var n=findNode(state,target.getAttribute('data-cm-node'));if(!n)return;var p=point(ev);
+    cancelConfirm();resetSelection();drag={id:n.id,pointer:ev.pointerId,start:p,x:n.x,y:n.y,before:clone(state),changed:false};
+    if(ui.board.setPointerCapture)try{ui.board.setPointerCapture(ev.pointerId);}catch(e){}
+    if(ev.pointerType!=='touch')ev.preventDefault();renderDrawing(true);updateTools();
+  }
+  function move(ev) {
+    if(!drag||ev.pointerId!==drag.pointer)return;var n=findNode(state,drag.id),p=point(ev),w=SPECS[n.id].w;
+    n.x=clamp(drag.x+p.x-drag.start.x,w/2+16,984-w/2);n.y=clamp(drag.y+p.y-drag.start.y,52,540);
+    if(Math.hypot(n.x-drag.x,n.y-drag.y)>2)drag.changed=true;
+    renderDrawing(true);if(ev.pointerType!=='touch')ev.preventDefault();
+  }
+  function up(ev) {
+    if(!drag||ev.pointerId!==drag.pointer)return;var saved=drag;drag=null;
+    if(ui.board.hasPointerCapture&&ui.board.hasPointerCapture(ev.pointerId))try{ui.board.releasePointerCapture(ev.pointerId);}catch(e){}
+    if(saved.changed){pushHistory(saved.before);save();}renderDrawing(true);updateTools();
+  }
+  function clickBoard(ev) {
+    if(preview)return;var n=ev.target.closest('[data-cm-node]');if(n){chooseNode(n.getAttribute('data-cm-node'));return;}
+    var e=ev.target.closest('[data-cm-edge]');if(e){cancelConfirm();source=null;pending=null;selectedEdge=e.getAttribute('data-cm-edge');render();return;}
+    resetSelection();render();
+  }
+  function keyBoard(ev) {
+    if(ev.key==='Escape'){resetSelection();cancelConfirm();render();return;}
+    if(preview)return;var n=ev.target.closest('[data-cm-node]'),e=ev.target.closest('[data-cm-edge]');
+    if((ev.key==='Delete'||ev.key==='Backspace')&&selectedEdge){ev.preventDefault();removeEdge();return;}
+    if((ev.key==='Enter'||ev.key===' ')&&(n||e)){
+      ev.preventDefault();var focusId=n&&n.getAttribute('data-cm-node');
+      if(n)chooseNode(focusId);else{selectedEdge=e.getAttribute('data-cm-edge');source=null;pending=null;render();}
+      if(pending||selectedEdge){var first=ui.relations.querySelector('[data-cm-relation]');if(first)first.focus();}
+      else if(focusId){var nextFocus=ui.nodes.querySelector('[data-cm-node="'+focusId+'"]');if(nextFocus)nextFocus.focus();}
+      return;
+    }
+    if(n&&mode==='move'&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].indexOf(ev.key)>=0){
+      ev.preventDefault();var id=n.getAttribute('data-cm-node'),node=findNode(state,id),step=ev.shiftKey?36:12,w=SPECS[id].w;pushHistory();
+      if(ev.key==='ArrowLeft')node.x-=step;if(ev.key==='ArrowRight')node.x+=step;if(ev.key==='ArrowUp')node.y-=step;if(ev.key==='ArrowDown')node.y+=step;
+      node.x=clamp(node.x,w/2+16,984-w/2);node.y=clamp(node.y,52,540);save();render();
+      var focus=ui.nodes.querySelector('[data-cm-node="'+id+'"]');if(focus)focus.focus();
+    }
+  }
+  function addNode(id) {if(preview||findNode(state,id))return;cancelConfirm();pushHistory();state.nodes.push({id:id,x:SPECS[id].x,y:SPECS[id].y});save();render();message('已添加“'+nodeLabel(id)+'”，请自己建立关系。');}
+  function exportSvg() {
+    var data=currentData(),label=preview?'保留的初图':'当前关系图';
+    var defs=ui.board.querySelector('defs').outerHTML;
+    var svg='<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="994" viewBox="0 0 1000 710">'+defs+
+      '<style>text{font-family:system-ui,-apple-system,"Microsoft YaHei","PingFang SC",sans-serif}</style><rect width="1000" height="710" fill="#f5f3ec"/>'+
+      '<text x="28" y="43" font-size="27" font-weight="750" fill="#173e3a">风对地表的作用 · 地表变化关系图</text><text x="970" y="42" text-anchor="end" font-size="17" fill="#60746c">'+label+'</text>'+
+      '<g transform="translate(0 70)"><rect width="1000" height="600" fill="#faf9f4"/><rect width="1000" height="600" fill="url(#cm-grid)"/>'+edgesMarkup(data,false)+nodesMarkup(data,false)+'</g>'+
+      '<text x="28" y="695" font-size="15" fill="#60746c">学生整理：请用实物观察、教材资料或模型过程说明连接的依据。</text></svg>';
+    var url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='风对地表的作用_'+(preview?'初图':'关系图')+'.svg';a.style.display='none';ui.root.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},30000);message('已导出当前显示的关系图 SVG。');
+    return svg;
+  }
+  function setEvidence(items) {
+    if(!initialized)init();if(!ui)return;
+    evidenceNames=(Array.isArray(items)?items:[]).slice(0,3).map(function(item){return typeof item==='string'?item:item&&(item.title||item.label||item.name)||'';}).filter(Boolean);
+    ui.evidenceText.textContent=evidenceNames.join(' · ');updateTools();
+  }
+  function init() {
+    if(initialized)return;var root=document.getElementById('mapPanel');if(!root)return;initialized=true;
+    function el(id){return root.querySelector('#cm-'+id);}
+    ui={root:root,board:el('board'),edges:el('edges'),nodes:el('nodes'),move:el('move'),link:el('link'),undo:el('undo'),contextTitle:el('context-title'),contextText:el('context-text'),relationBox:el('relation-box'),relations:el('relations'),cancelLink:el('cancel-link'),deleteEdge:el('delete-edge'),additions:root.querySelector('.cm-additions'),addTemperature:el('add-temperature'),addPlants:el('add-plants'),saveInitial:el('save-initial'),showInitial:el('show-initial'),clear:el('clear'),export:el('export'),readonly:el('readonly'),viewLabel:el('view-label'),hint:el('board-hint'),status:el('status'),evidence:el('evidence'),evidenceText:el('evidence-text')};
+    state=fresh();try{var stored=JSON.parse(localStorage.getItem(KEY)||'null');if(stored&&stored.version===1){state=normalize(stored.current)||state;initial=normalize(stored.initial);}}catch(e){}
+    ui.move.addEventListener('click',function(){setMode('move');});ui.link.addEventListener('click',function(){setMode('link');});
+    ui.undo.addEventListener('click',function(){if(preview||!history.length)return;cancelConfirm();state=history.pop();resetSelection();save();render();message('已撤销最近一步。');});
+    ui.board.addEventListener('pointerdown',down);ui.board.addEventListener('pointermove',move);ui.board.addEventListener('pointerup',up);ui.board.addEventListener('pointercancel',up);ui.board.addEventListener('click',clickBoard);ui.board.addEventListener('keydown',keyBoard);
+    ui.relations.addEventListener('click',function(ev){var b=ev.target.closest('[data-cm-relation]');if(b)chooseRelation(b.getAttribute('data-cm-relation'));});
+    ui.cancelLink.addEventListener('click',function(){resetSelection();render();});ui.deleteEdge.addEventListener('click',removeEdge);
+    ui.addTemperature.addEventListener('click',function(){addNode('temperature');});ui.addPlants.addEventListener('click',function(){addNode('plants');});
+    ui.saveInitial.addEventListener('click',function(){if(preview)return;if(initial&&confirmAction!=='initial'){askConfirm('initial','已有初图；再次点击将替换为当前图。');return;}cancelConfirm();initial=clone(state);save();render();message('初图已保留；继续修改后可回看比较。');});
+    ui.showInitial.addEventListener('click',function(){if(!initial)return;cancelConfirm();preview=!preview;resetSelection();render();message(preview?'正在查看初图；当前图的修改没有丢失。':'已返回当前图，可以继续修改。');});
+    ui.clear.addEventListener('click',function(){if(preview||!state.edges.length)return;if(confirmAction!=='clear'){askConfirm('clear','再次点击只清空当前连线；节点位置和初图保留。');return;}cancelConfirm();pushHistory();state.edges=[];resetSelection();save();render();message('已清空当前连线，可撤销。');});
+    ui.export.addEventListener('click',exportSvg);render();
+  }
+  window.ConceptMap={init:init,resize:function(){if(!initialized)init();if(ui)render();},setEvidence:setEvidence,getState:function(){return initialized?clone({current:state,initial:initial,preview:preview,mode:mode}):null;},exportSvg:exportSvg};
+}());
+
+(function(){
+'use strict';
+// Scientific parameters are deliberately dimensionless; never real wind speeds or years.
+var P={steps:240,grains:240,cells:84,left:60,right:940,ground:304,unit:3.5,gravity:.72};
+P.dx=(P.right-P.left)/P.cells;
+var $=function(id){return document.getElementById(id);};
+var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c];});};
+var clamp=function(v,a,b){return Math.max(a,Math.min(b,v));};
+var clone=function(v){return JSON.parse(JSON.stringify(v));};
+// Integer hash keeps every plan on exactly the same initial material and random schedule.
+function rand(a,b){var n=(Math.imul(a+19,374761393)^Math.imul(b+73,668265263))>>>0;n^=n>>>16;n=Math.imul(n,0x7feb352d);n^=n>>>15;n=Math.imul(n,0x846ca68b);n^=n>>>16;return (n>>>0)/4294967296;}
+function cx(c){return P.left+(c+.5)*P.dx;}
+function cell(x){return clamp(Math.floor((x-P.left)/P.dx),0,P.cells-1);}
+var initial=[],alloc=[];
+// A smooth initial pile, exactly 240 equal units; every condition reuses it.
+for(var ci=22;ci<=44;ci++)alloc.push({c:ci,w:12-Math.abs(ci-33),n:0,rem:0});
+var weightSum=alloc.reduce(function(sum,a){return sum+a.w;},0),used=0;
+alloc.forEach(function(a){var exact=a.w/weightSum*P.grains;a.n=Math.floor(exact);a.rem=exact-a.n;used+=a.n;});
+alloc.slice().sort(function(a,b){return b.rem-a.rem;}).slice(0,P.grains-used).forEach(function(a){a.n++;});
+alloc.forEach(function(a){for(var k=0;k<a.n;k++){var i=initial.length;initial.push({id:i,x:cx(a.c)+(rand(i,3)-.5)*7,y:0,c:a.c,vx:0,vy:0,m:0,wait:Math.floor(rand(i,4)*16),origin:a.c});}});
+var sourceMin=Math.min.apply(null,initial.map(function(p){return p.c;}));
+var sourceMax=Math.max.apply(null,initial.map(function(p){return p.c;}));
+function arrange(ps){var grid=Array(P.cells).fill(0);ps.forEach(function(p){if(p.m===0){grid[p.c]++;p.y=P.ground-grid[p.c]*P.unit+1.4;}});return grid;}
+var initialGrid=arrange(initial);
+function effectiveWind(x,c,t){var u=(c.cutoff!==null&&t>=c.cutoff)?0:c.wind;if(!c.grass)return u;var along=(x-c.grassX)*c.dir;var factor=1;if(Math.abs(x-c.grassX)<36)factor=.25;else if(along>=0&&along<190)factor=.25+.75*(along-36)/154;return u*clamp(factor,.25,1);}
+function totals(ps){var v=[0,0,0,0];ps.forEach(function(p){if(p.m===2)v[3]++;else if(p.m===1)v[1]++;else if(p.c>=sourceMin&&p.c<=sourceMax)v[0]++;else v[2]++;});return v;}
+function relaxSand(ps,grid){
+ // A simplified angle-of-repose rule. Sliding moves the same surface units.
+ for(var pass=0;pass<3;pass++){
+  var top=Array(P.cells).fill(-1);ps.forEach(function(p,j){if(p.m===0)top[p.c]=j;});
+  for(var k=1;k<P.cells-1;k++){
+   var to=grid[k-1]<grid[k+1]?k-1:k+1;
+   if(grid[k]-grid[to]>2&&top[k]>=0){var p=ps[top[k]];grid[k]--;grid[to]++;p.c=to;p.x=cx(to)+(rand(p.id,270)-.5)*7;p.wait=Math.max(p.wait,3);top[k]=-1;}
+  }
+  // The observation boundary is open: overflowing edge sand leaves the field.
+  [0,P.cells-1].forEach(function(edge){
+   for(var z=ps.length-1;z>=0&&grid[edge]>2;z--){var q=ps[z];if(q.m===0&&q.c===edge){q.m=2;q.x=edge===0?P.left-4:P.right+4;grid[edge]--;}}
+  });
+ }
+}
+function buildSand(c,limit){
+ var ps=clone(initial),history=[];
+ function snap(t){var grid=arrange(ps);history.push({t:t,p:clone(ps),grid:grid.slice(),totals:totals(ps)});return grid;}
+ var grid=snap(0);
+ for(var t=1;t<=Math.max(P.steps,limit||0,c.cutoff===null?0:c.cutoff+60);t++){
+  var tops=Array(P.cells).fill(-1);ps.forEach(function(p,j){if(p.m===0)tops[p.c]=j;});
+  ps.forEach(function(p,j){
+   if(p.m===2)return;
+   var u=effectiveWind(p.x,c,t-1);
+   if(p.m===0){
+    if(p.wait>0){p.wait--;return;}
+    var threshold=1.0+rand(j,7)*.48;
+    if(tops[p.c]===j&&u>threshold&&rand(j,t+700)<Math.min(.48,(u-threshold)*.105)){
+     p.m=1;p.vx=c.dir*(1.5+(u-threshold)*1.6)*( .82+rand(j,t+20)*.35);
+     p.vy=-(2.4+(u-threshold)*1.5)*(.65+rand(j,t+31)*.65);p.y-=2;grid[p.c]--;
+    }
+   }else{
+    var target=c.dir*u*2.0;
+    p.vx+=(target-p.vx)*.07;if(u===0)p.vx*=.90;
+    p.vy+=P.gravity;p.x+=p.vx;p.y+=p.vy;
+    if(p.x<P.left||p.x>P.right){p.m=2;p.x=clamp(p.x,P.left-4,P.right+4);return;}
+    var k=cell(p.x),surface=P.ground-grid[k]*P.unit;
+    if(p.vy>=0&&p.y>=surface-1.4){p.m=0;p.c=k;p.x=cx(k)+(rand(j,t+57)-.5)*7;p.y=surface-P.unit+1.4;p.vx=0;p.vy=0;p.wait=5+Math.floor(rand(j,t+83)*9);grid[k]++;}
+   }
+  });
+  relaxSand(ps,grid);grid=snap(t);
+ }
+ return history;
+}
+var sand={cfg:{wind:3,dir:1,grass:false,grassX:710,cutoff:null},history:null,t:0,playing:false,slow:false,selected:null,outline:true,a:null,end:P.steps};
+sand.history=buildSand(sand.cfg);
+var toastTimer;
+function toast(s){$('toast').textContent=s;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},2800);}
+function description(c){return '风 '+c.wind.toFixed(1)+' · '+(c.dir===1?'向右':'向左')+' · '+(c.grass?'草带 '+Math.round(c.grassX):'无草带')+(c.cutoff!==null?' · 第'+c.cutoff+'步停风':'');}
+function terrain(grid,close){var d='M '+P.left+' '+P.ground;grid.forEach(function(n,j){d+=' L '+cx(j).toFixed(1)+' '+(P.ground-n*P.unit).toFixed(1);});d+=' L '+P.right+' '+P.ground;return close?d+' Z':d;}
+function airPaths(c,t,w,h){var stopped=c.cutoff!==null&&t>=c.cutoff;var opacity=c.wind===0||stopped?.16:.56;var dirs=c.dir;var result='';for(var j=0;j<5;j++){var phase=(stopped?c.cutoff:t)*c.wind*2*c.dir;var x=((j*173+phase)%720+720)%720+60,y=100+j%3*39;var end=x+dirs*(28+c.wind*9);result+='<path d="M '+x.toFixed(1)+' '+y+' Q '+((x+end)/2).toFixed(1)+' '+(y-5)+' '+end.toFixed(1)+' '+y+' l '+(-dirs*7)+' -4 m '+(dirs*7)+' 4 l '+(-dirs*7)+' 4" fill="none" stroke="#769f92" stroke-width="2" opacity="'+opacity+'"/>';}
+ return result;
+}
+function grassArt(x,grid){var y=P.ground-initialGrid[cell(x)]*P.unit;var s='<g aria-label="草带，局部减风"><ellipse cx="'+x+'" cy="'+(y+1)+'" rx="50" ry="9" fill="#78955c" opacity=".2"/>';
+ for(var j=-4;j<=4;j++){var gx=x+j*9,gy=P.ground-initialGrid[cell(gx)]*P.unit;s+='<path d="M '+gx+' '+gy+' q -7 -48 -15 -76 M '+gx+' '+gy+' q -1 -85 3 -112 M '+gx+' '+gy+' q 8 -64 19 -88" fill="none" stroke="'+(j%2?'#688758':'#456c4b')+'" stroke-width="3" stroke-linecap="round"/>';}
+ return s+'<text x="'+x+'" y="'+(P.ground+47)+'" text-anchor="middle" fill="#59734d" font-size="17">草带 · 局部减风</text></g>';
+}
+function sandArt(state,c,opt){
+ opt=opt||{};var s='<defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#e2ece7"/><stop offset="1" stop-color="#f5f0df"/></linearGradient><linearGradient id="sandFill" x2="0" y2="1"><stop stop-color="#e1bd75"/><stop offset="1" stop-color="#cda05c"/></linearGradient></defs><rect width="1000" height="420" fill="url(#sky)"/>';
+ s+='<circle cx="150" cy="70" r="33" fill="#f4e6bb" opacity=".7"/><path d="M0 247 95 201 156 227 258 165 376 225 480 199 613 236 740 178 850 219 1000 161V320H0Z" fill="#dce1cd" opacity=".6"/><path d="M0 272Q230 245 400 267T1000 252V420H0Z" fill="#e0d3b5"/><path d="M0 322Q250 340 530 322T1000 332V420H0Z" fill="#d4c3a0" opacity=".55"/>';
+ s+=airPaths(c,state.t,1000,420);
+ var startX=P.left+sourceMin*P.dx,endX=P.left+(sourceMax+1)*P.dx;
+ s+='<path d="M '+startX+' 355v12H '+endX+'v-12" stroke="#a98b5a" stroke-width="1.5" fill="none"/><text x="'+((startX+endX)/2)+'" y="393" font-size="18" text-anchor="middle" fill="#816d4b">原沙堆区域</text>';
+ // Fixed gravel is partly hidden by the sand cover, then revealed as sand is removed.
+ for(var j=0;j<16;j++){var x=310+j*12.4,y=P.ground+1;var h=9+rand(j,90)*10;s+='<path d="M '+(x-8)+' '+y+' l -3 -'+(h*.5)+' 8 -'+(h*.5)+' 8 3 5 '+(h*.7)+'Z" fill="'+(j%2?'#8c9288':'#a1a294')+'" stroke="#7f8377" stroke-width="1"/>';}
+ if(c.grass)s+=grassArt(c.grassX,state.grid);
+ s+='<path d="'+terrain(state.grid,true)+'" fill="url(#sandFill)" stroke="#b78741" stroke-width="1.4"/>';
+ if(opt.outline)s+='<path d="'+terrain(initialGrid,false)+'" fill="none" stroke="#9d8f74" stroke-dasharray="6 6" stroke-width="2" opacity=".7"/>';
+ if(c.grass){var d=c.dir===1?'M '+c.grassX+' 245h190v65h-190Z':'M '+c.grassX+' 245h-190v65h190Z';s+='<path d="'+d+'" fill="#7f9e77" opacity=".08"/>';}
+ if(opt.a)s+='<path d="'+terrain(opt.a.grid,false)+'" fill="none" stroke="#7955a4" stroke-dasharray="10 5" stroke-width="3"/>';
+ state.p.forEach(function(p){if(p.m===2)return;var col=p.id===opt.selected?'#cf5540':(p.m===1?'#a26728':'#b78c43');var r=p.id===opt.selected?5.3:2.3;s+='<circle data-grain="'+p.id+'" cx="'+p.x.toFixed(2)+'" cy="'+p.y.toFixed(2)+'" r="'+r+'" fill="'+col+'"'+(p.id===opt.selected?' stroke="#fff6dd" stroke-width="2"':'')+'/>';});
+ if(opt.selected!==null&&opt.selected!==undefined){
+  var p=state.p[opt.selected],orig=initial[opt.selected],hist=opt.history||sand.history;
+  var route=[];for(var k=0;k<=state.t;k+=Math.max(1,Math.floor(state.t/90))){var q=hist[k].p[opt.selected];route.push(q.x.toFixed(1)+','+q.y.toFixed(1));}
+  route.push(p.x.toFixed(1)+','+p.y.toFixed(1));s+='<polyline points="'+route.join(' ')+'" fill="none" stroke="#c85740" stroke-width="2" stroke-dasharray="4 3" opacity=".8"/><circle cx="'+orig.x.toFixed(1)+'" cy="'+orig.y.toFixed(1)+'" r="6" fill="none" stroke="#c85740" stroke-width="2"/><circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="9" fill="none" stroke="#c85740" stroke-width="2"/>';
+  var lx=clamp(p.x,108,888),ly=clamp(p.y-22,30,330);s+='<rect x="'+(lx-43)+'" y="'+(ly-24)+'" width="86" height="28" rx="7" fill="#fff6e8"/><text x="'+lx+'" y="'+(ly-5)+'" text-anchor="middle" font-size="17" font-weight="700" fill="#a34b36">沙 #'+(p.id+1)+'</text>';
+ }
+ var dir=c.dir===1?'→':'←',stopped=c.cutoff!==null&&state.t>=c.cutoff;
+ s+='<text x="54" y="49" font-size="21" font-weight="700" fill="#466a5d">'+(c.wind===0||stopped?'停风 · 观察落下':dir+' 风强度 '+c.wind.toFixed(1))+'</text>';
+ s+='<path d="M 60 286v34 M 940 286v34" stroke="#a3a78f" stroke-dasharray="4 4"/><text x="'+(c.dir===1?923:77)+'" y="350" text-anchor="'+(c.dir===1?'end':'start')+'" font-size="14" fill="#7e826c">'+(c.dir===1?'移出观察区 →':'← 移出观察区')+'</text>';
+ return s;
+}
+function renderSand(){
+ var state=sand.history[sand.t],ast=sand.a?sand.a.history[sand.t]:null;
+ $('sandSvg').innerHTML=sandArt(state,sand.cfg,{outline:sand.outline,a:ast,selected:sand.selected});
+ var labels=['原区停留','搬运中','异地停留','移出观察区'];
+ $('ledger').innerHTML=labels.map(function(v,j){return '<div class="mass-item"><span class="mass-label">'+v+'</span><span class="num">'+(ast?'B ':'')+state.totals[j]+(ast?'<small>A '+ast.totals[j]+'</small>':'')+'</span></div>';}).join('');
+ $('massNote').textContent='总计 '+P.grains+' 份等量沙 · 模型计数';
+ $('sandStep').textContent=sand.t+' / '+sand.end+' 步';$('sandTime').max=sand.end;$('sandTime').value=sand.t;
+ $('sandPlay').textContent=sand.playing?'Ⅱ 暂停观察':(sand.t===sand.end?'↶ 从头播放':sand.t?'▶ 继续观察':'▶ 开始吹风');
+ $('runBadge').textContent=sand.playing?'正在观察':sand.t===sand.end?'本轮结束':sand.t?'已暂停':'准备观察';
+ $('stopWind').disabled=sand.cfg.wind===0||sand.cfg.cutoff!==null;
+ $('compareChip').hidden=!sand.a;$('comparisonInfo').hidden=!sand.a;
+ if(sand.a){$('comparisonInfo').innerHTML='<b>同一初始沙堆 · 同一步数</b><br>A：'+esc(description(sand.a.cfg))+'<br>B：'+esc(description(sand.cfg));}
+ if(sand.selected!==null){var p=state.p[sand.selected];$('trackHint').textContent='沙 #'+(p.id+1)+' · '+(p.m===2?'已移出观察区':p.m===1?'正在搬运':p.c>=sourceMin&&p.c<=sourceMax?'停在原区':'停在别处')+' · 红线为已有轨迹';}
+ else $('trackHint').textContent='点一粒沙，追踪它的去向';
+ $('questionPrompt').innerHTML=sand.cfg.cutoff!==null?'停风后，空中的沙怎样变化？':sand.a?'A 和 B 改变了什么？<br>哪一处的变化能支持你的解释？':sand.cfg.grass?'草带附近和远处的沙，<br>运动有什么不同？':'原处减少了什么？<br>留在原处的又是什么？';
+}
+function alignSandHistories(){sand.end=Math.max(P.steps,sand.cfg.cutoff===null?0:sand.cfg.cutoff+60,sand.a&&sand.a.cfg.cutoff!==null?sand.a.cfg.cutoff+60:0);sand.history=buildSand(sand.cfg,sand.end);if(sand.a)sand.a.history=buildSand(sand.a.cfg,sand.end);sand.t=Math.min(sand.t,sand.end);}
+function newSand(message){sand.playing=false;sand.t=0;sand.cfg.cutoff=null;alignSandHistories();renderSand();if(message)toast(message);}
+function cfgChange(){sand.cfg.wind=Number($('windRange').value);sand.cfg.grass=$('grassToggle').checked;sand.cfg.grassX=Number($('grassRange').value);$('windValue').textContent=sand.cfg.wind.toFixed(1);$('grassControl').hidden=!sand.cfg.grass;document.querySelector('.control-panel').classList.toggle('has-grass',sand.cfg.grass);newSand('已从同一沙堆重新开始');}
+$('windRange').addEventListener('input',cfgChange);$('grassToggle').addEventListener('change',cfgChange);$('grassRange').addEventListener('input',cfgChange);
+function setDir(d){sand.cfg.dir=d;$('dirLeft').classList.toggle('selected',d===-1);$('dirRight').classList.toggle('selected',d===1);$('dirLeft').setAttribute('aria-pressed',d===-1);$('dirRight').setAttribute('aria-pressed',d===1);newSand('已换向，从同一沙堆重新开始');}
+$('dirLeft').onclick=function(){setDir(-1);};$('dirRight').onclick=function(){setDir(1);};
+$('sandPlay').onclick=function(){if(sand.t>=sand.end)sand.t=0;sand.playing=!sand.playing;renderSand();};
+$('stopWind').onclick=function(){sand.cfg.cutoff=sand.t;alignSandHistories();sand.playing=true;renderSand();toast('已停风，继续观察空中沙粒落下');};
+$('sandReset').onclick=function(){newSand('当前条件已复位，保留的 A 不变');};
+$('sandTime').oninput=function(){sand.playing=false;sand.t=Number(this.value);renderSand();};
+$('slowBtn').onclick=function(){sand.slow=!sand.slow;this.classList.toggle('active',sand.slow);this.setAttribute('aria-pressed',sand.slow);this.textContent=sand.slow?'慢放中':'慢放';};
+$('outlineBtn').onclick=function(){sand.outline=!sand.outline;this.classList.toggle('active',sand.outline);this.setAttribute('aria-pressed',sand.outline);renderSand();};
+$('saveA').onclick=function(){sand.a={cfg:clone(sand.cfg),history:sand.history};renderSand();toast('已保留条件 A，改变条件后可同步比较');syncEvidence();};
+$('removeA').onclick=function(){sand.a=null;alignSandHistories();renderSand();syncEvidence();};
+$('sandSvg').addEventListener('pointerdown',function(e){
+ var svg=this,pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;var mat=svg.getScreenCTM();if(!mat)return;var xy=pt.matrixTransform(mat.inverse());
+ var state=sand.history[sand.t],nearest=null,dist=900;state.p.forEach(function(p){if(p.m===2)return;var ds=Math.pow(p.x-xy.x,2)+Math.pow(p.y-xy.y,2);if(ds<dist){dist=ds;nearest=p.id;}});
+ if(nearest!==null){sand.selected=nearest;renderSand();}else toast('请点沙堆或空中的沙粒');
+});
+$('sandSvg').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();var ps=sand.history[sand.t].p;var p=ps.find(function(v){return v.m===1;})||ps.find(function(v){return v.m===0;});if(p){sand.selected=p.id;renderSand();}}});
+// Abrasion window: only actual hits remove material from the struck side and height band.
+var R={bands:12,top:78,bottom:330,left:195,right:325,steps:240};R.bandH=(R.bottom-R.top)/R.bands;
+function rockOutline(st,original){var left=original?Array(R.bands).fill(0):st.l,right=original?Array(R.bands).fill(0):st.r;var d='M '+(R.left+left[0]).toFixed(1)+' '+R.top;for(var j=0;j<R.bands;j++){var y=R.top+(j+.5)*R.bandH;d+=' L '+(R.left+left[j]).toFixed(1)+' '+y.toFixed(1);}d+=' L '+(R.left+left[R.bands-1]).toFixed(1)+' '+R.bottom+' L '+(R.right-right[R.bands-1]).toFixed(1)+' '+R.bottom;for(var k=R.bands-1;k>=0;k--)d+=' L '+(R.right-right[k]).toFixed(1)+' '+(R.top+(k+.5)*R.bandH).toFixed(1);return d+' L '+(R.right-right[0]).toFixed(1)+' '+R.top+' Z';}
+function rockWall(st,y,dir){var a=dir>0?st.l:st.r,f=clamp((y-R.top)/R.bandH-.5,0,R.bands-1),lo=Math.floor(f),hi=Math.min(R.bands-1,lo+1),v=a[lo]+(a[hi]-a[lo])*(f-lo);return dir>0?R.left+v:R.right-v;}
+var rock={t:0,playing:false,events:[{t:0,wind:3,dir:1}],history:null};
+function paramsAt(t){var last=rock.events[0];rock.events.forEach(function(e){if(e.t<=t)last=e;});return last;}
+function buildRock(events){
+ var st={l:Array(R.bands).fill(0),r:Array(R.bands).fill(0),hits:Array(R.bands).fill(0),parts:[],flashes:[],total:0,t:0};var result=[clone(st)],seq=0;
+ for(var t=1;t<=R.steps;t++){
+  var e=events[0];events.forEach(function(v){if(v.t<t)e=v;});st.t=t;st.flashes=[];
+  if(e.wind>1){var amount=Math.floor((e.wind-1)*1.7);for(var n=0;n<amount;n++){
+   var h=4+Math.pow(rand(seq,11),2.6)*246;st.parts.push({x:e.dir===1?25:495,y:R.bottom-h,v:e.dir*(2.8+e.wind*1.7),power:.13+e.wind*.085,id:seq++});
+  }}
+  var keep=[];st.parts.forEach(function(p){var old=p.x;if(e.wind<=1){p.v*=.84;p.fall=(p.fall||0)+.55;p.y+=p.fall;}else{p.v+=(e.dir*(2.8+e.wind*1.7)-p.v)*.08;p.fall=0;}if(p.y>=R.bottom)return;p.x+=p.v;var b=clamp(Math.floor((p.y-R.top)/R.bandH),0,R.bands-1);var wall=rockWall(st,p.y,p.v);var hit=(p.v>0&&old<=wall&&p.x>=wall)||(p.v<0&&old>=wall&&p.x<=wall);
+   if(hit){st.hits[b]++;st.total++;var side=p.v>0?st.l:st.r;side[b]=Math.min(54,side[b]+p.power);st.flashes.push({x:wall,y:p.y});}
+   else if(p.x>=0&&p.x<=520)keep.push(p);
+  });st.parts=keep;result.push(clone(st));
+ }
+ return result;
+}
+rock.history=buildRock(rock.events);
+function rockArt(st,sandy,par){
+ var zero={l:Array(R.bands).fill(0),r:Array(R.bands).fill(0)},shape=sandy?st:zero;
+ var s='<defs><linearGradient id="rockFill'+(sandy?'S':'C')+'" x2="1" y2=".5"><stop stop-color="#b3a38f"/><stop offset=".5" stop-color="#cbbba3"/><stop offset="1" stop-color="#9d8c78"/></linearGradient><clipPath id="rockClip'+(sandy?'S':'C')+'"><path d="'+rockOutline(shape,false)+'"/></clipPath></defs><rect width="520" height="400" fill="#eaf0e8"/><path d="M0 332Q125 322 235 335T520 330V400H0Z" fill="#ddceb1"/><ellipse cx="262" cy="340" rx="104" ry="12" fill="#b4a388" opacity=".28"/>';
+ s+='<path d="'+rockOutline(shape,false)+'" fill="url(#rockFill'+(sandy?'S':'C')+')" stroke="#8e806c" stroke-width="2"/>';
+ s+='<g clip-path="url(#rockClip'+(sandy?'S':'C')+')" stroke="#9a8a72" opacity=".6" stroke-width="2">';for(var j=0;j<6;j++)s+='<path d="M160 '+(110+j*40)+'l200 -18"/>';s+='</g>';
+ s+='<path d="'+rockOutline(zero,true)+'" stroke="#7a8174" fill="none" stroke-dasharray="6 5" stroke-width="1.5"/>';
+ var d=par.dir;for(var k=0;k<3;k++){var y=120+k*83,x=d===1?40:475,x2=x+d*65;s+='<path d="M'+x+' '+y+'h'+(d*65)+'l'+(-d*9)+' -5m'+(d*9)+' 5l'+(-d*9)+' 5" stroke="#7fa194" fill="none" stroke-width="2" opacity="'+(par.wind===0?.15:.55)+'"/>';}
+ if(sandy){st.parts.forEach(function(p){s+='<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="2.8" fill="#b47a39"/>';});st.flashes.forEach(function(p){s+='<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="7" fill="none" stroke="#cf633e" stroke-width="2"/>';});}
+ s+='<text x="30" y="40" font-size="18" font-weight="650" fill="#506d5b">'+(par.wind===0?'停风':(d===1?'→':'←')+' 风强度 '+par.wind.toFixed(1))+'</text>';
+ s+='<text x="407" y="65" font-size="13" fill="#7c806e">撞击分布</text>';
+ var max=Math.max(1,Math.max.apply(null,st.hits));for(var b=0;b<R.bands;b++){var yy=R.top+b*R.bandH+4;var len=sandy?st.hits[b]/max*64:0;s+='<rect x="408" y="'+yy+'" width="64" height="10" rx="3" fill="#dbe1d2"/><rect x="408" y="'+yy+'" width="'+len.toFixed(1)+'" height="10" rx="3" fill="#b78a4b"/>';}
+ s+='<text x="260" y="382" text-anchor="middle" font-size="17" fill="#6f7563">'+(sandy?'累计 '+st.total+' 次模型撞击':'同一岩块 · 无沙粒撞击')+'</text>';
+ return s;
+}
+function renderRock(){var st=rock.history[rock.t],par=paramsAt(rock.t);$('clearRockSvg').innerHTML=rockArt(st,false,par);$('sandyRockSvg').innerHTML=rockArt(st,true,par);$('rockHitCount').textContent='累计撞击 '+st.total;$('rockStep').textContent=rock.t+' / 240 步';$('rockTime').value=rock.t;$('rockWind').value=par.wind;$('rockWindValue').textContent=par.wind.toFixed(1);$('rockReverse').textContent='换侧来风 '+(par.dir===1?'←':'→');$('rockPlay').textContent=rock.playing?'Ⅱ 暂停观察':rock.t===240?'↶ 从头播放':rock.t?'▶ 继续观察':'▶ 开始观察';}
+function changeRock(wind,dir){var p=paramsAt(rock.t);rock.events=rock.events.filter(function(e){return e.t<rock.t;});rock.events.push({t:rock.t,wind:wind===undefined?p.wind:wind,dir:dir===undefined?p.dir:dir});if(!rock.events.some(function(e){return e.t===0;}))rock.events.unshift({t:0,wind:3,dir:1});rock.history=buildRock(rock.events);renderRock();}
+$('rockPlay').onclick=function(){if(rock.t===240)rock.t=0;rock.playing=!rock.playing;renderRock();};
+$('rockReverse').onclick=function(){changeRock(undefined,-paramsAt(rock.t).dir);toast('已换侧来风，已有磨蚀保留');};
+$('rockWind').oninput=function(){changeRock(Number(this.value),undefined);};
+$('rockTime').oninput=function(){rock.playing=false;rock.t=Number(this.value);renderRock();};
+$('rockReset').onclick=function(){var p=paramsAt(rock.t);rock.playing=false;rock.t=0;rock.events=[{t:0,wind:p.wind,dir:p.dir}];rock.history=buildRock(rock.events);renderRock();};
+var savedEvidence=[];
+function syncEvidence(){if(window.ConceptMap&&window.ConceptMap.setEvidence){var ev=savedEvidence.slice();if(sand.a)ev.unshift('模型条件A：'+description(sand.a.cfg));window.ConceptMap.setEvidence(ev);}}
+function downloadSvg(text,name){try{var blob=new Blob([text],{type:'image/svg+xml;charset=utf-8'});var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},30000);toast('观察图已生成，请在下载中查看');}catch(e){toast('此浏览器无法下载，可使用系统截图保存');}}
+function outerSvg(content,w,h){return '<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'"><rect width="100%" height="100%" fill="#f5f3ec"/><g font-family="Microsoft YaHei,PingFang SC,Arial,sans-serif">'+content+'</g></svg>';}
+$('exportBtn').onclick=function(){sand.playing=false;renderSand();var st=sand.history[sand.t],ast=sand.a?sand.a.history[sand.t]:null;var content='<text x="40" y="48" font-size="27" fill="#173e3a" font-weight="700">风对地表的作用 · 观察图</text><text x="40" y="82" font-size="17" fill="#60716a">模型第 '+sand.t+' 步 · '+esc(description(sand.cfg))+'</text><svg x="20" y="100" width="1000" height="420" viewBox="0 0 1000 420">'+sandArt(st,sand.cfg,{outline:true,a:ast,selected:sand.selected})+'</svg>';var y=550;content+='<text x="40" y="'+y+'" font-size="19" fill="#173e3a">'+(ast?'B：':'')+'原区 '+st.totals[0]+' / 搬运中 '+st.totals[1]+' / 异地 '+st.totals[2]+' / 移出 '+st.totals[3]+' ；总计 '+P.grains+' 份等量沙</text>';if(ast){y+=31;content+='<text x="40" y="'+y+'" font-size="17" fill="#73599d">A：'+esc(description(sand.a.cfg))+'；原区 '+ast.totals[0]+' / 搬运中 '+ast.totals[1]+' / 异地 '+ast.totals[2]+' / 移出 '+ast.totals[3]+'</text>';}
+ content+='<text x="40" y="'+(y+43)+'" font-size="17" fill="#60716a">我的观察与解释：____________________________________________</text><text x="40" y="'+(y+78)+'" font-size="14" fill="#89907e">教学模型，非实测；初始轮廓为灰虚线，A为紫虚线。请结合实物与教材解释。</text>';downloadSvg(outerSvg(content,1040,y+110),'风对地表的作用_风沙观察_第'+sand.t+'步.svg');savedEvidence.push('风沙模型观察 · 第'+sand.t+'步 · '+description(sand.cfg));syncEvidence();};
+$('rockExport').onclick=function(){rock.playing=false;renderRock();var st=rock.history[rock.t],p=paramsAt(rock.t);var s='<text x="35" y="44" font-size="26" fill="#173e3a">风沙磨蚀对照 · 模型第 '+rock.t+' 步</text><text x="35" y="76" font-size="16" fill="#60716a">同风、同材料、同进程；改变方向保留已有磨蚀；形变加速、放大</text><text x="160" y="110" font-size="21" fill="#173e3a">无沙气流</text><text x="700" y="110" font-size="21" fill="#173e3a">含沙气流</text><svg x="10" y="120" width="520" height="400">'+rockArt(st,false,p)+'</svg><svg x="550" y="120" width="520" height="400">'+rockArt(st,true,p)+'</svg><text x="35" y="560" font-size="17" fill="#173e3a">条件记录：'+esc(rock.events.map(function(v){return v.t+'步起 '+(v.dir===1?'向右':'向左')+'风'+v.wind;}).join('；'))+'</text><text x="35" y="602" font-size="17" fill="#60716a">我的观察与解释：______________________________________________</text><text x="35" y="643" font-size="14" fill="#89907e">教学模型，非实测；近地面活动沙粒较多，不表示近地风速更大；不换算真实年代。</text>';downloadSvg(outerSvg(s,1080,670),'风对地表的作用_岩面磨蚀对照.svg');savedEvidence.push('岩面模型对照 · 第'+rock.t+'步 · 累计撞击'+st.total);syncEvidence();};
+function modalOpen(id,focusId){sand.playing=false;rock.playing=false;renderSand();$(id).hidden=false;if(focusId)$(focusId).focus();}
+function modalClose(id,returnId){$(id).hidden=true;rock.playing=false;if(returnId)$(returnId).focus();}
+$('openRock').onclick=function(){modalOpen('rockModal','closeRock');renderRock();};$('closeRock').onclick=function(){modalClose('rockModal','openRock');};$('aboutBtn').onclick=function(){modalOpen('aboutModal','closeAbout');};$('closeAbout').onclick=function(){modalClose('aboutModal','aboutBtn');};
+['rockModal','aboutModal'].forEach(function(id){$(id).addEventListener('click',function(e){if(e.target===$(id))modalClose(id,id==='rockModal'?'openRock':'aboutBtn');});});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!$('rockModal').hidden)modalClose('rockModal','openRock');if(!$('aboutModal').hidden)modalClose('aboutModal','aboutBtn');}if(e.key==='Tab'){var modal=!$('aboutModal').hidden?$('aboutModal'):!$('rockModal').hidden?$('rockModal'):null;if(modal){var a=Array.from(modal.querySelectorAll('button,input,a')).filter(function(n){return !n.disabled&&n.getClientRects().length;});if(!a.length)return;if(e.shiftKey&&document.activeElement===a[0]){e.preventDefault();a[a.length-1].focus();}else if(!e.shiftKey&&document.activeElement===a[a.length-1]){e.preventDefault();a[0].focus();}}}});
+function setPage(which){sand.playing=false;rock.playing=false;$('windPanel').hidden=which!=='wind';$('mapPanel').hidden=which!=='map';$('windTab').classList.toggle('selected',which==='wind');$('mapTab').classList.toggle('selected',which==='map');$('windTab').setAttribute('aria-pressed',which==='wind');$('mapTab').setAttribute('aria-pressed',which==='map');renderSand();if(which==='map'&&window.ConceptMap){window.ConceptMap.resize();syncEvidence();}}
+$('windTab').onclick=function(){setPage('wind');};$('mapTab').onclick=function(){setPage('map');};
+$('fullBtn').onclick=function(){try{var p;if(document.fullscreenElement){p=document.exitFullscreen();}else if(document.documentElement.requestFullscreen){p=document.documentElement.requestFullscreen();}else if(document.documentElement.webkitRequestFullscreen){document.documentElement.webkitRequestFullscreen();}else{toast('请使用浏览器全屏或横屏显示');return;}if(p&&p.catch)p.catch(function(){toast('请用浏览器菜单开启全屏');});}catch(e){toast('请用浏览器菜单开启全屏');}};
+document.addEventListener('visibilitychange',function(){if(document.hidden){sand.playing=false;rock.playing=false;renderSand();renderRock();}});
+if(window.ConceptMap)window.ConceptMap.init();
+var last=0,acc=0;function animate(now){var dt=Math.min(120,now-last);last=now;acc+=dt;var rate=sand.slow?170:65;if(acc>=rate){acc=0;if(sand.playing&&!$('windPanel').hidden&&$('rockModal').hidden){sand.t=Math.min(sand.end,sand.t+1);if(sand.t===sand.end)sand.playing=false;renderSand();}if(rock.playing&&!$('rockModal').hidden){rock.t=Math.min(R.steps,rock.t+1);if(rock.t===R.steps)rock.playing=false;renderRock();}}requestAnimationFrame(animate);}
+renderSand();renderRock();requestAnimationFrame(animate);
+// Read-only diagnostics for reproducible model review; no external requests or telemetry.
+window.WindLab={version:'1.0',parameters:P,buildSand:buildSand,buildRock:buildRock,getSand:function(){return sand;},getRock:function(){return rock;},render:renderSand};
+})();
+
+</script>
+
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
