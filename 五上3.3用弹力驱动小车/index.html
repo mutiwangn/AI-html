@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eef3f7">
+<meta name="description" content="五上3.3用弹力驱动小车：透视缠绕车轴、同条件圈数对比和真实实验圆点记录。单文件离线互动课堂。">
+<meta name="aihtml-compat-level" content="1">
+<title>用弹力驱动小车 · 五上3.3</title>
+<style>
+:root{--ink:#142d45;--muted:#607489;--blue:#176be8;--line:#dce6ee;--paper:#fff;--bg:#eef3f7;--orange:#ee8453;--teal:#13857a;--shadow:0 8px 28px rgba(23,51,78,.055)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;color:var(--ink);background:var(--bg)}body{display:flex;flex-direction:column;overflow:hidden}button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:disabled{cursor:default;opacity:.45}button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #1b75ec;outline-offset:4px}button,input{touch-action:manipulation}svg{display:block;width:100%;height:100%;overflow:visible}svg text{font-family:inherit}[hidden]{display:none!important}.app-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 26px 15px;flex:none;background:#fff;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px}.brand-icon{width:47px;height:47px;border-radius:12px;background:#e9f1ff;padding:6px}.eyebrow{font-size:12px;font-weight:650;letter-spacing:.12em;color:var(--muted);margin-bottom:3px}.brand h1{font-size:clamp(22px,2.2vw,32px);margin:0;letter-spacing:-.035em;white-space:nowrap}.main-nav{display:flex;gap:5px;background:#eef3f7;padding:5px;border-radius:12px}.nav-btn{border:0;background:transparent;min-height:47px;padding:8px 17px;border-radius:8px;color:#607489;font-size:17px;font-weight:700;white-space:nowrap}.nav-btn b{font-size:13px;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border:1px solid #becddb;border-radius:50%;margin-right:8px}.nav-btn[aria-selected=true]{background:#fff;color:var(--blue);box-shadow:0 2px 7px #253f5a12}.nav-btn[aria-selected=true] b{color:#fff;background:var(--blue);border-color:var(--blue)}.head-actions{display:flex;gap:8px}.icon-btn{width:43px;min-width:43px;height:43px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--muted);font-size:22px}.icon-btn svg{width:21px;height:21px;margin:auto}.workspace{flex:1;min-height:0;padding:18px 24px 6px;position:relative}.page{display:none;height:100%;min-height:0}.page.active{display:grid}.lab-layout{grid-template-columns:minmax(0,1fr) 282px;gap:16px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);min-width:0}.scene-panel{display:flex;flex-direction:column;overflow:hidden;min-height:0}.scene-head{padding:20px 24px 8px;display:flex;align-items:flex-start;justify-content:space-between;gap:15px;flex:none}.section-tag{color:var(--blue);font-weight:700;font-size:12px;letter-spacing:.12em;margin:0 0 5px}.scene-head h2{font-size:clamp(22px,2.1vw,30px);font-weight:750;margin:0 0 6px;line-height:1.25}.scene-head p{font-size:16px;line-height:1.5;margin:0;color:var(--muted)}.toggle{border:1px solid #cfdeec;border-radius:25px;background:#fff;color:var(--muted);padding:10px 15px;min-height:43px;white-space:nowrap;font-size:15px;font-weight:600}.toggle[aria-pressed=true]{background:#eaf2ff;color:#145cbf;border-color:#aacbff}.scene-wrap{flex:1;min-height:0;position:relative;padding:0 16px}.scene-wrap>svg{width:100%;height:100%}.surface{fill:#f4f7fa}.subtle{fill:#7a90a5}.svg-label{font-size:19px;font-weight:650}.svg-small{font-size:15px;fill:var(--muted)}.scene-foot{flex:none;border-top:1px solid #e7eef4;margin:0 22px;padding:12px 0 14px;min-height:78px}.status-line{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:17px;min-height:29px}.status-line strong{font-size:20px}.status-dot{width:9px;height:9px;border-radius:50%;background:#8ca4bc;display:inline-block;margin-right:9px}.status-dot.drive{background:var(--orange)}.status-dot.coast{background:var(--blue)}.status-dot.stop{background:var(--teal)}.scrub-row{display:flex;gap:12px;align-items:center;margin-top:7px}.scrub-row label{font-size:13px;color:var(--muted);white-space:nowrap}.scrub-row input{flex:1}.control-panel{padding:21px 20px 16px;display:flex;flex-direction:column;min-height:0;gap:12px}.control-kicker{font-size:14px;letter-spacing:.06em;color:var(--muted);margin:0}.wind-count{display:flex;align-items:baseline;justify-content:space-between;gap:8px}.wind-count strong{font-size:44px;letter-spacing:-.04em;font-weight:750;line-height:1.1}.wind-count strong span{font-size:18px;margin-left:6px;font-weight:600;color:var(--muted)}.direction{font-size:14px;font-weight:650;color:var(--blue)}.wheel-control{height:clamp(120px,22vh,210px);min-height:115px;max-height:210px;touch-action:none;cursor:grab;user-select:none;flex:1}.wheel-control:active{cursor:grabbing}.wind-help{text-align:center;font-size:14px;color:var(--muted);margin:0}.range-row{display:flex;gap:10px;align-items:center}.small-btn{border:1px solid var(--line);border-radius:9px;background:#f6f8fb;min-width:44px;height:44px;font-size:24px;color:var(--ink)}input[type=range]{accent-color:var(--blue);height:32px;min-width:0;width:100%;cursor:pointer}input[type=range]::-webkit-slider-thumb{min-width:20px;min-height:20px}.btn{min-height:47px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:10px 16px;font-size:16px;font-weight:650;background:#fff;color:var(--ink);text-decoration:none;line-height:1.35}.btn.primary{border-color:var(--blue);background:var(--blue);color:#fff;box-shadow:0 4px 10px #176be824}.btn.quiet{background:#f6f8fb}.btn.wide{width:100%;font-size:19px;min-height:52px}.action-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.control-bottom{margin-top:auto}.note{font-size:13px;line-height:1.55;color:var(--muted);margin:0}.warning{color:#b96a24;background:#fff5e6;border:1px solid #f6dfb9;padding:9px 11px;border-radius:8px;font-size:13px;line-height:1.5}.meter{background:#edf2f6;height:7px;border-radius:6px;overflow:hidden;margin-top:8px}.meter>span{display:block;height:100%;background:var(--orange);width:0;transition:width .06s linear}.metric{display:flex;align-items:center;justify-content:space-between;margin:1px 0;font-size:14px;color:var(--muted)}.metric strong{color:var(--ink);font-size:18px}.phase-strip{display:flex;gap:9px;margin-top:9px}.phase-chip{padding:5px 9px;border:1px solid transparent;color:#8395a6;font-size:13px;border-radius:6px}.phase-chip.on{background:#fff0e5;color:#9f591f;border-color:#f7d5bb}.phase-chip.coast.on{background:#eaf2ff;color:#176be8;border-color:#c7dcff}.phase-chip.stop.on{background:#e8f6f3;color:#13857a;border-color:#bfe2d9}.app-foot{display:flex;justify-content:space-between;padding:7px 27px 10px;font-size:11px;line-height:1.3;color:#778b9d;flex:none}.tiny-button{background:none;border:0;color:inherit;font-size:inherit;padding:0;min-height:18px;text-decoration:underline;text-underline-offset:3px}.compare-controls{gap:17px}.lane-control{border:1px solid var(--line);padding:14px 14px 8px;border-radius:11px;background:#fff}.lane-title{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:18px}.lane-title strong{font-size:28px}.lane-title strong small{font-size:15px;font-weight:600;color:var(--muted)}.lane-letter{display:inline-flex;width:31px;height:31px;border-radius:8px;background:var(--lane);color:#fff;align-items:center;justify-content:center;font-size:17px;font-weight:750}.lane-control input{accent-color:var(--lane)}.flag{cursor:ew-resize;touch-action:none}.prediction-tag{font-size:13px;fill:#7a90a5}.race-line{stroke:#ccd8e2;stroke-width:2}.result-text{font-size:23px;font-weight:750}.compare-panel .scene-foot{min-height:72px}.modal-shade{position:fixed;inset:0;background:rgba(12,31,49,.48);z-index:40;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)}.info-card{background:#fff;width:min(640px,100%);max-height:90vh;overflow:auto;border-radius:16px;padding:28px;box-shadow:0 20px 90px #142d453b}.info-card h2{font-size:25px;margin:0 0 12px}.info-card h3{font-size:17px;margin:20px 0 8px}.info-card p,.info-card li{font-size:16px;line-height:1.75}.info-card ul{padding-left:22px}.info-card footer{display:flex;justify-content:flex-end;margin-top:22px}.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#16334c;color:#fff;padding:12px 20px;border-radius:9px;z-index:60;font-size:15px;box-shadow:0 8px 30px #142d4526;max-width:90%;text-align:center}.badge-model{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;border:1px solid #d4e2f0;background:#f4f8fd;color:#64809d;border-radius:5px;padding:3px 7px;font-size:11px;letter-spacing:0}.xray-body{transition:opacity .25s}.zoom-guide{stroke:#b8c8d6;stroke-width:1.8;stroke-dasharray:5 5;fill:none}.instruction-scrim{fill:#fff}.drive-arrow{stroke:#ef8a37;stroke-width:5;fill:none;stroke-linecap:round}.no-select{-webkit-user-select:none;user-select:none}.hidden-initial{visibility:hidden}
+@media(min-width:1600px){.workspace{padding:24px 32px 8px}.lab-layout{grid-template-columns:minmax(0,1fr) 330px;gap:22px}.control-panel{padding:25px;gap:18px}.scene-head{padding:25px 30px 10px}.scene-head p{font-size:19px}.btn{font-size:19px;min-height:53px}.nav-btn{font-size:20px;padding:10px 22px}.wind-count strong{font-size:55px}.wheel-control{max-height:260px;height:26vh}.note{font-size:15px}.scene-foot{padding:17px 0}.status-line{font-size:21px}.status-line strong{font-size:24px}.lane-title{font-size:22px}.lane-title strong{font-size:35px}.lane-control{padding:20px 17px 10px}.lane-control input{height:40px}}
+@media(max-width:1100px){.app-head{padding:13px 18px;gap:10px}.brand-icon{display:none}.eyebrow{font-size:11px}.nav-btn{font-size:15px;padding:8px 12px}.nav-btn b{margin-right:5px}.head-actions{gap:5px}.workspace{padding:13px 16px 4px}.lab-layout{grid-template-columns:minmax(0,1fr) 248px;gap:12px}.control-panel{padding:17px 16px;gap:11px}.scene-head{padding:18px 18px 5px}.scene-head p{font-size:14px}.scene-foot{margin:0 17px}.status-line{font-size:15px}.status-line strong{font-size:18px}.toggle{padding:9px 11px;font-size:13px}.compare-controls{gap:12px}.lane-control{padding:11px 12px 4px}}
+@media(max-height:740px) and (min-width:901px){.app-head{padding-top:10px;padding-bottom:10px}.eyebrow{font-size:10px}.brand h1{font-size:24px}.workspace{padding-top:12px}.control-panel{padding:15px;gap:9px}.wheel-control{min-height:100px;max-height:145px}.wind-count strong{font-size:34px}.wind-help{font-size:12px}.control-kicker{font-size:12px}.btn.wide{min-height:46px;font-size:17px}.btn{min-height:42px;font-size:14px}.scene-head{padding-top:16px}.scene-head h2{font-size:24px}.phase-strip{margin-top:4px}.scene-foot{min-height:65px;padding:8px 0 10px}.scene-wrap{padding:0 12px}.compare-controls{gap:10px}.lane-control{padding:10px 12px 5px}.lane-title strong{font-size:25px}.lane-control input{height:24px}.note{font-size:12px}.app-foot{padding-bottom:7px}.warning{font-size:12px;padding:7px}}
+@media(max-width:900px){.app-head{flex-wrap:wrap;padding:12px 16px;gap:11px}.brand{flex:1}.brand h1{font-size:23px}.main-nav{order:3;width:100%;justify-content:space-between;padding:4px}.nav-btn{flex:1;min-height:42px}.head-actions{margin-left:auto}.workspace{padding:12px}.lab-layout{grid-template-columns:minmax(0,1fr) 230px;gap:10px}.scene-head{padding:16px 16px 5px;display:block}.scene-head .toggle{margin-top:8px;min-height:38px}.scene-head h2{font-size:23px}.scene-wrap{padding:0 6px}.status-line{gap:8px}.phase-chip{font-size:11px;padding:5px 6px}.control-panel{padding:14px}.app-foot{padding:6px 15px 9px}}
+@media(max-width:700px), (max-height:540px){html,body{height:auto;min-height:100%}body{overflow:auto}.workspace{flex:none}.page{height:auto}.page.active.lab-layout{display:flex;flex-direction:column}.app-head{position:relative}.scene-panel{min-height:410px}.scene-wrap{height:280px;flex:auto;min-height:230px}.scene-head{display:flex}.scene-head h2{font-size:22px}.scene-head p{font-size:13px}.control-panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}.control-kicker{grid-column:1/-1}.wind-count{grid-column:2;grid-row:2}.wheel-control{grid-column:1;grid-row:2/5;height:150px;min-height:130px;width:100%}.wind-help{grid-column:1;grid-row:5}.range-row{grid-column:2;grid-row:3}.control-panel>.btn.wide{grid-column:2;grid-row:4}.action-pair{grid-column:2;grid-row:5}.control-panel>.warning{grid-column:1/-1}.control-bottom{grid-column:1/-1}.scene-foot{margin:0 15px}.compare-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.compare-controls .control-kicker,.compare-controls .note,.compare-controls .control-bottom,.compare-controls .warning{grid-column:1/-1}.compare-controls .lane-control{padding:9px 8px 5px}.compare-controls .lane-title strong{font-size:23px}.compare-controls .btn.wide{grid-column:1/-1;grid-row:auto}.compare-controls .action-pair{grid-column:1/-1;grid-row:auto;grid-template-columns:1fr 1fr}.compare-controls .control-bottom{margin-top:3px}.app-foot{font-size:10px;gap:12px}.phase-chip{font-size:12px}.scene-panel.compare-panel{min-height:480px}.compare-panel .scene-wrap{height:330px}.brand h1{font-size:22px}.eyebrow{font-size:10px}.nav-btn{font-size:14px;padding:7px 5px}.nav-btn b{width:21px;height:21px;font-size:11px}.icon-btn{width:37px;min-width:37px;height:39px}.lane-letter{width:26px;height:26px;font-size:14px}.status-line{font-size:14px}.status-line strong{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<style>
+/* Classroom measurements: all data below are entered by the class, never simulated. */
+#page-records { min-height: 0; }
+#page-records [hidden] { display: none !important; }
+#page-records .records-shell { height: 100%; min-height: 0; display: flex; flex-direction: column; }
+#page-records .records-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+#page-records .records-heading h2 { font-size: 27px; line-height: 1.3; margin: 0; color: var(--ink, #142d45); font-weight: 750; }
+#page-records .records-count { color: var(--muted, #607489); font-size: 18px; white-space: nowrap; margin-left: 16px; }
+#page-records .records-workspace { flex: 1; display: flex; min-height: 0; }
+#page-records .records-panel { position: relative; min-width: 0; min-height: 0; padding: 20px; border: 1px solid var(--line, #dce6ee); border-radius: 16px; background: var(--paper, #fff); box-sizing: border-box; }
+#page-records .records-entry-panel { flex: 0 0 40%; display: flex; flex-direction: column; margin-right: 16px; overflow: auto; }
+#page-records .records-chart-panel { flex: 1; display: flex; flex-direction: column; }
+#page-records .records-panel-title { margin: 0 0 8px; color: var(--ink, #142d45); font-size: 21px; font-weight: 700; line-height: 1.4; }
+#page-records .records-conditions { color: var(--muted, #607489); font-size: 16px; line-height: 1.6; margin: 0 0 16px; }
+#page-records .records-table { width: 100%; border-collapse: separate; border-spacing: 6px 10px; table-layout: fixed; margin: 0 -3px 12px; }
+#page-records .records-table th { color: var(--muted, #607489); font-size: 17px; font-weight: 600; text-align: center; height: 28px; padding: 0; }
+#page-records .records-table td { padding: 0; }
+#page-records .records-table th:first-child { width: 23%; }
+#page-records .records-table button { border-radius: 10px; width: 100%; min-height: 58px; padding: 8px 2px; background: #f3f6fa; color: var(--ink, #142d45); border: 1px solid #dce5ef; font: inherit; font-size: 24px; font-weight: 650; line-height: 1.2; cursor: pointer; touch-action: manipulation; box-sizing: border-box; }
+#page-records .records-table button:hover { border-color: var(--blue, #176be8); background: #eaf2ff; }
+#page-records .records-table button.rec-turn { color: #155fc5; background: #eaf2ff; border-color: #cddff9; }
+#page-records .rec-turn span { font-size: 16px; font-weight: 500; padding-left: 3px; }
+#page-records .records-table button.rec-empty { color: #8a9bad; font-size: 25px; font-weight: 400; }
+#page-records .records-table .rec-trial-0 { border-bottom: 3px solid #176be8; }
+#page-records .records-table .rec-trial-1 { border-bottom: 3px solid #c15c23; }
+#page-records .records-table .rec-trial-2 { border-bottom: 3px solid #7b54d9; }
+#page-records .rec-key { display: inline-block; width: 21px; height: 21px; border-radius: 50%; color: #fff; text-align: center; font-size: 14px; line-height: 21px; margin-right: 3px; vertical-align: 1px; }
+#page-records .rec-key-0 { background: #176be8; }
+#page-records .rec-key-1 { background: #c15c23; }
+#page-records .rec-key-2 { background: #7b54d9; }
+#page-records .records-measure-note { margin: 0; padding: 11px 12px; font-size: 17px; line-height: 1.6; color: var(--ink, #142d45); background: #f4f7fb; border-radius: 10px; }
+#page-records .records-entry-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 14px; }
+#page-records .records-entry-actions button { min-height: 44px; font-size: 16px; }
+#page-records .records-entry-actions .rec-mean-button { display: flex; align-items: center; padding-left: 0; background: transparent; border-color: transparent; color: var(--ink, #142d45); }
+#page-records .rec-check { width: 20px; height: 20px; margin-right: 8px; border: 2px solid #a9b9ca; border-radius: 5px; display: inline-block; box-sizing: border-box; text-align: center; line-height: 16px; font-size: 16px; color: transparent; }
+#page-records .rec-mean-button[aria-pressed="true"] .rec-check { background: var(--blue, #176be8); border-color: var(--blue, #176be8); color: #fff; }
+#page-records .records-save-status { margin: 6px 0 0; font-size: 14px; line-height: 1.4; min-height: 20px; color: var(--muted, #607489); }
+#page-records .records-chart-heading { display: flex; align-items: center; justify-content: space-between; }
+#page-records .records-chart-heading span { font-size: 17px; color: var(--muted, #607489); }
+#page-records .records-plot { flex: 1; min-height: 0; width: 100%; display: block; }
+#page-records .records-chart-foot { margin-top: 8px; }
+#page-records .records-chart-caption { margin: 0 0 12px; color: var(--muted, #607489); font-size: 17px; line-height: 1.4; }
+#page-records .records-export-actions { display: flex; }
+#page-records .records-export-actions button { min-height: 46px; font-size: 17px; padding: 9px 15px; }
+#page-records .records-export-actions button + button { margin-left: 10px; }
+#page-records .records-clear-confirm { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 5; background: #fff; padding: 16px; border: 1px solid #b8c9dc; border-radius: 12px; box-shadow: 0 12px 35px rgba(20,45,69,.17); }
+#page-records .records-clear-confirm p { color: var(--ink, #142d45); font-size: 18px; line-height: 1.5; margin: 0 0 12px; }
+#page-records .records-clear-confirm button { min-height: 44px; font-size: 16px; }
+#page-records .records-clear-confirm button + button { margin-left: 8px; }
+#page-records .records-modal { position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 1000; background: rgba(14,34,54,.44); display: flex; align-items: center; justify-content: center; padding: 12px; box-sizing: border-box; }
+#page-records .records-modal-card { width: 380px; max-width: 100%; max-height: calc(100vh - 24px); overflow: auto; box-sizing: border-box; background: #fff; border-radius: 18px; padding: 20px; box-shadow: 0 18px 70px rgba(9,24,42,.25); color: var(--ink, #142d45); }
+#page-records .records-modal-card h3 { font-size: 23px; margin: 0 0 8px; line-height: 1.4; }
+#page-records .records-input-wrap { display: flex; align-items: center; border: 2px solid #b8d2f9; background: #f5f9ff; border-radius: 12px; padding: 8px 14px; }
+#page-records .records-input-wrap input { width: 100%; min-width: 0; font: inherit; font-size: 38px; font-weight: 700; line-height: 1.3; color: var(--ink, #142d45); border: 0; background: transparent; padding: 0; box-sizing: border-box; outline: none; }
+#page-records .records-input-wrap input::placeholder { color: #b5c2d0; font-size: 26px; font-weight: 400; }
+#page-records .records-input-wrap span { font-size: 21px; margin-left: 8px; }
+#page-records .records-input-error { min-height: 22px; font-size: 16px; line-height: 1.4; color: #ac4427; margin: 7px 0 5px; }
+#page-records .records-keypad { display: flex; flex-wrap: wrap; margin: -4px; }
+#page-records .records-keypad button { width: calc(33.333% - 8px); margin: 4px; min-height: 50px; border: 1px solid #dce5ef; border-radius: 9px; background: #f2f5f9; font: inherit; font-size: 24px; font-weight: 650; color: var(--ink, #142d45); cursor: pointer; touch-action: manipulation; }
+#page-records .records-keypad button:hover { background: #e4eefc; }
+#page-records .records-keypad button:disabled { visibility: hidden; }
+#page-records .records-modal-actions { display: flex; flex-wrap: wrap; margin-top: 12px; }
+#page-records .records-modal-actions button { min-height: 46px; padding: 9px 12px; font-size: 17px; }
+#page-records .records-modal-actions button + button { margin-left: 8px; }
+#page-records .records-modal-actions .rec-save { flex: 1; }
+#page-records .records-row-warning { color: #8c4e1c; font-size: 17px; line-height: 1.5; padding: 12px; background: #fff4e8; border-radius: 10px; margin: 10px 0 0; }
+#page-records .records-modal-card.rec-confirming .records-modal-actions { flex-wrap: wrap; }
+#page-records .records-modal-card.rec-confirming .rec-save { flex-basis: 100%; margin: 8px 0 0; }
+#page-records button:focus-visible { outline: 3px solid #eea94d; outline-offset: 3px; }
+@media (min-width: 701px) and (max-height: 760px) {
+  #page-records .records-heading { margin-bottom: 10px; }
+  #page-records .records-heading h2 { font-size: 23px; }
+  #page-records .records-panel { padding: 14px; }
+  #page-records .records-conditions { margin-bottom: 8px; font-size: 15px; }
+  #page-records .records-table { border-spacing: 5px 7px; margin-bottom: 8px; }
+  #page-records .records-table button { min-height: 50px; font-size: 22px; }
+  #page-records .records-measure-note { font-size: 16px; padding: 8px 10px; }
+  #page-records .records-entry-actions { padding-top: 8px; }
+  #page-records .records-chart-caption { font-size: 16px; margin-bottom: 8px; }
+}
+@media (max-width: 1050px) and (min-width: 701px) {
+  #page-records .records-panel { padding: 13px; }
+  #page-records .records-entry-panel { flex-basis: 42%; margin-right: 12px; }
+  #page-records .records-table th { font-size: 16px; }
+  #page-records .rec-key { width: 19px; height: 19px; line-height: 19px; margin-right: 2px; }
+  #page-records .records-conditions { font-size: 14px; }
+}
+@media (min-width: 701px) and (max-height: 680px) {
+  #page-records .records-heading { margin-bottom: 8px; }
+  #page-records .records-heading h2 { font-size: 21px; }
+  #page-records .records-count { font-size: 16px; }
+  #page-records .records-panel { padding: 12px; }
+  #page-records .records-panel-title { font-size: 19px; margin-bottom: 4px; }
+  #page-records .records-conditions { font-size: 14px; line-height: 1.4; margin-bottom: 4px; }
+  #page-records .records-table { border-spacing: 5px; margin-bottom: 6px; }
+  #page-records .records-table th { height: 22px; font-size: 15px; }
+  #page-records .records-table button { min-height: 44px; padding-top: 6px; padding-bottom: 6px; font-size: 21px; }
+  #page-records .records-measure-note { font-size: 14px; line-height: 1.4; padding: 7px 9px; }
+  #page-records .records-measure-note br { display: none; }
+  #page-records .records-entry-actions { padding-top: 6px; }
+  #page-records .records-entry-actions button { font-size: 15px; }
+  #page-records .records-save-status { font-size: 13px; min-height: 18px; margin-top: 4px; }
+}
+@media (min-width: 701px) and (max-height: 620px) {
+  #page-records .records-measure-note { display: none; }
+}
+@media (max-width: 700px) {
+  #page-records .records-shell { height: auto; }
+  #page-records .records-heading { align-items: flex-start; }
+  #page-records .records-heading h2 { font-size: 22px; }
+  #page-records .records-count { font-size: 16px; padding-top: 3px; }
+  #page-records .records-workspace { display: block; }
+  #page-records .records-entry-panel { margin: 0 0 14px; }
+  #page-records .records-chart-panel { min-height: 410px; }
+  #page-records .records-plot { height: 330px; flex: none; }
+  #page-records .records-panel { padding: 16px; }
+  #page-records .records-table button { min-height: 54px; }
+}
+@media (max-width: 420px) {
+  #page-records .records-heading { display: block; }
+  #page-records .records-count { display: block; margin: 5px 0 0; }
+  #page-records .records-conditions { font-size: 14px; }
+  #page-records .records-panel { padding: 12px; }
+  #page-records .records-table { border-spacing: 4px 8px; }
+  #page-records .records-table th { font-size: 14px; }
+  #page-records .records-table button { font-size: 21px; }
+  #page-records .rec-key { width: 18px; height: 18px; font-size: 12px; line-height: 18px; }
+  #page-records .records-plot { height: 280px; }
+  #page-records .records-chart-panel { min-height: 380px; }
+  #page-records .records-modal-card { padding: 16px; }
+}
+@media (max-height: 610px) {
+  #page-records .records-modal-card { padding: 12px; }
+  #page-records .records-modal-card h3 { font-size: 20px; margin-bottom: 5px; }
+  #page-records .records-keypad button { min-height: 44px; margin-top: 3px; margin-bottom: 3px; }
+  #page-records .records-input-wrap { padding-top: 4px; padding-bottom: 4px; }
+  #page-records .records-input-wrap input { font-size: 32px; }
+  #page-records .records-modal-actions { margin-top: 8px; }
+}
+</style>
+</head>
+<body>
+<header class="app-head">
+  <div class="brand"><div class="brand-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M7 24V14h25v10M5 23h30" fill="none" stroke="#176be8" stroke-width="3" stroke-linejoin="round"/><circle cx="11" cy="27" r="5" fill="#176be8"/><circle cx="29" cy="27" r="5" fill="#176be8"/><path d="M11 14 15 9 18 17 22 9 25 14" fill="none" stroke="#ee8453" stroke-width="2.5"/></svg></div><div><div class="eyebrow">五年级上册 · 3.3 · 运动和力</div><h1>用弹力驱动小车</h1></div></div>
+  <nav class="main-nav" aria-label="探究任务" role="tablist"><button class="nav-btn" data-page="mechanism" id="tab-mechanism" type="button" role="tab" aria-selected="true" aria-controls="page-mechanism"><b>1</b>透视小车</button><button class="nav-btn" data-page="compare" id="tab-compare" type="button" role="tab" aria-selected="false" aria-controls="page-compare"><b>2</b>圈数对比</button><button class="nav-btn" data-page="records" id="tab-records" type="button" role="tab" aria-selected="false" aria-controls="page-records"><b>3</b>实测记录</button></nav>
+  <div class="head-actions"><button id="info-open" class="icon-btn" aria-label="课堂使用与模型说明" title="课堂使用与模型说明">ⓘ</button><button id="full-screen" class="icon-btn" aria-label="全屏" title="全屏"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5M4 15v5h5m6 0h5v-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button></div>
+</header>
+<main class="workspace">
+<section class="page active lab-layout" id="page-mechanism" role="tabpanel" aria-labelledby="tab-mechanism">
+  <div class="panel scene-panel">
+    <div class="scene-head"><div><div class="section-tag">让动力看得见</div><h2>小车里面发生了什么？</h2><p>转动车轮缠绕皮筋，再慢放观察。</p></div><button class="toggle" id="xray-toggle" aria-pressed="true">透视车架</button></div>
+    <div class="scene-wrap">
+    <svg id="mechanism-scene" viewBox="0 0 900 480" role="img" aria-label="俯视小车，显示车架、车轴、橡皮筋和车轴侧面放大图">
+    <defs>
+      <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c4d2df"/><stop offset=".45" stop-color="#eff4f7"/><stop offset="1" stop-color="#9eafc0"/></linearGradient>
+      <linearGradient id="wheel-shade" x1="0" x2="1"><stop offset="0" stop-color="#3a4c5d"/><stop offset=".5" stop-color="#253645"/><stop offset="1" stop-color="#4b6072"/></linearGradient>
+      <pattern id="floor-grid" width="54" height="54" patternUnits="userSpaceOnUse"><path d="M54 0H0V54" fill="none" stroke="#e3ebf1" stroke-width="1"/></pattern>
+      <pattern id="tread" width="13" height="12" patternUnits="userSpaceOnUse"><path d="M1 1H12M1 7H12" stroke="#8da1b3" stroke-width="2"/></pattern>
+      <marker id="orange-tip" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#ee8453"/></marker>
+      <marker id="blue-tip" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#176be8"/></marker>
+      <clipPath id="floor-clip"><rect x="30" y="82" width="840" height="280" rx="24"/></clipPath>
+    </defs>
+    <rect x="30" y="82" width="840" height="280" rx="24" fill="#f2f6f9"/>
+    <g clip-path="url(#floor-clip)"><rect id="moving-floor" x="-60" y="82" width="1100" height="280" fill="url(#floor-grid)"/><path d="M30 111H870M30 334H870" stroke="#d8e5ef" stroke-width="2" stroke-dasharray="11 10"/></g>
+    <text x="47" y="57" class="svg-small">俯视 · 跟随观察</text>
+    <g id="large-car" transform="translate(10 0)">
+      <rect x="282" y="143" width="363" height="169" rx="30" fill="#223d5912"/>
+      <g fill="url(#wheel-shade)" stroke="#203449" stroke-width="2"><rect x="285" y="115" width="73" height="37" rx="11"/><rect x="285" y="296" width="73" height="37" rx="11"/><rect x="576" y="115" width="73" height="37" rx="11"/><rect x="576" y="296" width="73" height="37" rx="11"/></g>
+      <g fill="url(#tread)" opacity=".7"><rect x="290" y="118" width="63" height="31" rx="8"/><rect x="290" y="299" width="63" height="31" rx="8"/><rect x="581" y="118" width="63" height="31" rx="8"/><rect x="581" y="299" width="63" height="31" rx="8"/></g>
+      <g id="wheel-marks" stroke="#f9cf72" stroke-width="4"><path id="rear-mark1" d="M321 118V148"/><path id="rear-mark2" d="M321 300V330"/><path id="front-mark1" d="M612 118V148"/><path id="front-mark2" d="M612 300V330"/></g>
+      <rect x="310" y="148" width="17" height="151" rx="5" fill="url(#metal)" stroke="#8295a8"/><rect x="606" y="148" width="13" height="151" rx="4" fill="url(#metal)" stroke="#8295a8"/>
+      <path d="M326 164H611V283H326Z" fill="#e5eff74d" stroke="url(#metal)" stroke-width="17" stroke-linejoin="round"/>
+      <g fill="#94a8bc"><circle cx="337" cy="164" r="3"/><circle cx="365" cy="164" r="3"/><circle cx="393" cy="164" r="3"/><circle cx="421" cy="164" r="3"/><circle cx="449" cy="164" r="3"/><circle cx="477" cy="164" r="3"/><circle cx="505" cy="164" r="3"/><circle cx="533" cy="164" r="3"/><circle cx="561" cy="164" r="3"/><circle cx="589" cy="164" r="3"/><circle cx="337" cy="283" r="3"/><circle cx="365" cy="283" r="3"/><circle cx="393" cy="283" r="3"/><circle cx="421" cy="283" r="3"/><circle cx="449" cy="283" r="3"/><circle cx="477" cy="283" r="3"/><circle cx="505" cy="283" r="3"/><circle cx="533" cy="283" r="3"/><circle cx="561" cy="283" r="3"/><circle cx="589" cy="283" r="3"/></g>
+      <rect x="308" y="194" width="24" height="59" rx="4" fill="#537998" stroke="#365978" stroke-width="2"/>
+      <path id="rubber-upper" d="M329 205Q460 185 585 224" fill="none" stroke="#e69b36" stroke-width="7" stroke-linecap="round"/>
+      <path id="rubber-lower" d="M329 242Q465 266 585 224" fill="none" stroke="#f1b94d" stroke-width="7" stroke-linecap="round"/>
+      <g id="axle-wraps" fill="none" stroke="#f0b546" stroke-width="4"/>
+      <path d="M584 220h10v-11" stroke="#71869b" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="585" cy="224" r="5" fill="#efb348"/>
+      <g id="car-cover" class="xray-body" opacity=".09"><path d="M310 157Q305 147 327 147H589Q644 147 653 181V267Q638 299 589 299H327Q305 299 310 285Z" fill="#4389e1" stroke="#1b64b9" stroke-width="4"/><path d="M533 164H579Q618 165 630 185V259Q614 282 578 282H533Z" fill="#cbe4ff" stroke="#71a7e7" stroke-width="3"/><path d="M358 164H506V282H358Z" fill="#b5d4f7"/></g>
+      <g id="rubber-arrows" opacity="0"><path d="M417 201h44M417 248h44" class="drive-arrow" marker-end="url(#orange-tip)"/></g>
+      <path id="travel-arrow" d="M698 223h90" stroke="#176be8" stroke-width="5" fill="none" marker-end="url(#blue-tip)" opacity="0"/>
+    </g>
+    <g id="car-labels"><path d="M327 171V56H254" class="zoom-guide"/><text x="180" y="48" class="svg-label">驱动车轴</text><path d="M478 223V44" class="zoom-guide"/><text x="443" y="34" class="svg-label">橡皮筋</text><path d="M595 225 697 168H811" class="zoom-guide"/><text x="710" y="153" class="svg-label">固定点</text></g>
+    <path d="M328 249 216 365H176" class="zoom-guide"/>
+    <g transform="translate(105 396)"><circle r="61" fill="#fff" stroke="#d9e5ee" stroke-width="2"/><circle r="38" fill="#eaf0f6" stroke="#7393ae" stroke-width="3"/><g id="zoom-axle"><circle r="15" fill="#597f9e"/><path d="M-15 0H15M0-15V15" stroke="#eef4f8" stroke-width="3"/><circle cx="0" cy="-31" r="6" fill="#ee8453"/></g><path id="zoom-rubber" d="M0-18H155" stroke="#efb140" stroke-width="7" fill="none" stroke-linecap="round"/><path id="zoom-arc" d="M-41-13A43 43 0 1 1 20 39" fill="none" stroke="#ee8453" stroke-width="3" marker-end="url(#orange-tip)" opacity="0"/></g>
+    <text x="188" y="406" class="svg-label">车轴侧面放大</text><text id="zoom-caption" x="188" y="433" class="svg-small">标记回到原处，转过一圈</text>
+    <g transform="translate(597 393)"><rect width="245" height="61" rx="11" fill="#f5f8fb"/><text x="15" y="25" class="svg-small">车头移动</text><text id="mechanism-distance" x="230" y="41" text-anchor="end" style="font-size:32px;font-weight:750;fill:#176be8">0.00 m</text></g>
+    </svg>
+    </div>
+    <div class="scene-foot"><div class="status-line"><span><i class="status-dot" id="mechanism-dot"></i><strong id="mechanism-state">准备缠绕</strong></span><span id="mechanism-observe">车轮与车轴一起转</span></div><div class="phase-strip" id="phase-strip"><span class="phase-chip" data-phase="drive">皮筋驱动</span><span class="phase-chip coast" data-phase="coast">继续滑行</span><span class="phase-chip stop" data-phase="stopped">逐渐停止</span></div><div class="scrub-row" id="mechanism-scrub-row" hidden><label for="mechanism-scrub">回看过程</label><input id="mechanism-scrub" type="range" min="0" max="1000" value="0" aria-label="回看小车运动过程"></div></div>
+  </div>
+  <aside class="panel control-panel">
+    <p class="control-kicker">转一转 · 绕一绕</p>
+    <div class="wind-count"><strong id="wind-count">0<span>圈</span></strong><span class="direction" id="wind-direction">↺ 正向缠绕</span></div>
+    <div id="wheel-control" class="wheel-control no-select" role="slider" tabindex="0" aria-label="拖转车轮缠绕橡皮筋；左右方向键也可调整" aria-valuemin="-18" aria-valuemax="18" aria-valuenow="0">
+      <svg viewBox="0 0 230 230" aria-hidden="true"><circle cx="115" cy="115" r="100" fill="#f0f5fa"/><path d="M51 28A110 110 0 0 1 178 27" stroke="#abc2d7" stroke-width="2" fill="none"/><path d="m57 20-9 9 14-1" fill="none" stroke="#abc2d7" stroke-width="2"/><g id="control-wheel" transform="rotate(0 115 115)"><circle cx="115" cy="115" r="86" fill="#273e53"/><circle cx="115" cy="115" r="76" fill="none" stroke="#557087" stroke-width="6" stroke-dasharray="4 11"/><circle cx="115" cy="115" r="61" fill="#e6eef5" stroke="#98afc2" stroke-width="3"/><path d="M115 59V171M66 87l98 56M66 143l98-56" stroke="#94aec4" stroke-width="12" stroke-linecap="round"/><circle cx="115" cy="115" r="24" fill="#176be8" stroke="#c4d8ed" stroke-width="4"/><circle cx="115" cy="115" r="8" fill="#d7e9fb"/><circle cx="115" cy="38" r="8" fill="#ffbd5b"/></g><path d="M106 12 115 21 124 12" fill="none" stroke="#ee8453" stroke-width="3" stroke-linecap="round"/></svg>
+    </div>
+    <p class="wind-help">沿圆周拖动，反转可反向缠绕</p>
+    <div class="range-row"><button class="small-btn" id="wind-minus" aria-label="减少一圈">−</button><input id="wind-range" type="range" min="-18" max="18" step="1" value="0" aria-label="缠绕圈数，负数为反向"><button class="small-btn" id="wind-plus" aria-label="增加一圈">＋</button></div>
+    <button class="btn primary wide" id="mechanism-play">释放小车</button>
+    <div class="action-pair"><button class="btn quiet" id="mechanism-reset">复位</button><button class="btn" id="mechanism-slow" aria-pressed="false">慢放 ×¼</button></div>
+    <div class="warning" id="wind-warning" hidden>缠绕较多，留意车轮是否打滑。</div>
+    <div class="control-bottom"><div class="metric"><span>尚未释放的圈数</span><strong id="remaining-count">0 圈</strong></div><div class="meter"><span id="remaining-meter"></span></div><p class="note" style="margin-top:10px">先预测：皮筋不再驱动时，车会立刻停下吗？</p></div>
+  </aside>
+</section>
+<section class="page lab-layout" id="page-compare" role="tabpanel" aria-labelledby="tab-compare" aria-hidden="true">
+  <div class="panel scene-panel compare-panel"><div class="scene-head"><div><div class="section-tag">只改变一个条件</div><h2>多绕几圈，会怎样？</h2><p>拖动小旗预测终点，再让三辆相同的小车同时出发。</p></div><span class="badge-model">模型对比</span></div><div class="scene-wrap"><svg id="race-scene" viewBox="0 0 960 485" role="img" aria-label="三个同条件跑道，共用零点和距离刻度，可拖动预测小旗"><defs><pattern id="finish-hatch" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="#d8e5ee"/><rect x="5" y="5" width="5" height="5" fill="#d8e5ee"/></pattern></defs><g id="race-ruler"></g><g id="race-lanes"></g><g id="race-flags"></g></svg></div><div class="scene-foot"><div class="status-line"><span><i class="status-dot" id="race-dot"></i><strong id="race-status">先放预测旗</strong></span><span id="race-info">统一从车头量起</span></div><div class="scrub-row" id="race-scrub-row" hidden><label for="race-scrub">同步回看</label><input id="race-scrub" type="range" min="0" max="1000" value="0" aria-label="同步回看三个小车的运动"></div></div></div>
+  <aside class="panel control-panel compare-controls"><p class="control-kicker">同一规格 · 同一路面</p>
+    <div class="lane-control" style="--lane:#176be8"><label class="lane-title" for="turns-a"><span class="lane-letter">A</span><strong><output id="turns-a-out">3</output> <small>圈</small></strong></label><input id="turns-a" type="range" min="0" max="18" step="1" value="3" aria-label="A车缠绕圈数"></div>
+    <div class="lane-control" style="--lane:#e7813e"><label class="lane-title" for="turns-b"><span class="lane-letter">B</span><strong><output id="turns-b-out">6</output> <small>圈</small></strong></label><input id="turns-b" type="range" min="0" max="18" step="1" value="6" aria-label="B车缠绕圈数"></div>
+    <div class="lane-control" style="--lane:#13857a"><label class="lane-title" for="turns-c"><span class="lane-letter">C</span><strong><output id="turns-c-out">9</output> <small>圈</small></strong></label><input id="turns-c" type="range" min="0" max="18" step="1" value="9" aria-label="C车缠绕圈数"></div>
+    <button class="btn primary wide" id="race-play">同时释放</button><div class="action-pair"><button class="btn quiet" id="race-reset">复位</button><button class="btn" id="race-slow" aria-pressed="false">慢放 ×¼</button></div>
+    <div class="warning" id="race-warning" hidden>高圈数可能打滑。看车轮与车身是否同步。</div>
+    <div class="control-bottom"><p class="note" id="compare-note">皮筋、车轮、车重、路面保持相同。模型重复运行不会自行产生误差。</p></div>
+  </aside>
+</section>
+<section id="page-records" class="page" role="tabpanel" aria-labelledby="tab-records" aria-hidden="true">
+  <div class="records-shell">
+    <div class="records-heading">
+      <h2>把三次结果放在同一把尺上</h2>
+      <span class="records-count" id="recCount">已记录 0 / 9 次</span>
+    </div>
+    <div class="records-workspace">
+      <div class="records-panel records-entry-panel">
+        <h3 class="records-panel-title">填写实物实验数据</h3>
+        <p class="records-conditions">同一小车 · 同一皮筋 · 同一路面</p>
+        <table class="records-table" aria-label="三档缠绕圈数，每档测量三次行驶距离，单位厘米">
+          <thead><tr><th scope="col">圈数</th><th scope="col" aria-label="第1次"><span class="rec-key rec-key-0" aria-hidden="true">1</span>次</th><th scope="col" aria-label="第2次"><span class="rec-key rec-key-1" aria-hidden="true">2</span>次</th><th scope="col" aria-label="第3次"><span class="rec-key rec-key-2" aria-hidden="true">3</span>次</th></tr></thead>
+          <tbody id="recTableBody"></tbody>
+        </table>
+        <p class="records-measure-note">起点、终点都以<strong>车头</strong>为准。<br>点格子输入距离，单位 <strong>cm</strong>。</p>
+        <div class="records-entry-actions">
+          <button id="recMean" class="btn quiet rec-mean-button" type="button" aria-pressed="false"><span class="rec-check" aria-hidden="true">✓</span>显示平均值</button>
+          <button id="recClear" class="btn quiet" type="button">清空记录</button>
+        </div>
+        <p class="records-save-status" id="recSaveStatus" role="status" aria-live="polite">只记录课堂实测，不自动填入模拟结果。</p>
+        <div class="records-clear-confirm" id="recClearConfirm" hidden>
+          <p>清空这 9 格距离？<br>已选的缠绕圈数会保留。</p>
+          <button class="btn primary" id="recClearYes" type="button">确认清空</button><button class="btn quiet" id="recClearNo" type="button">取消</button>
+        </div>
+      </div>
+      <div class="records-panel records-chart-panel">
+        <div class="records-chart-heading"><h3 class="records-panel-title">圆点纸带</h3><span>距离 / cm</span></div>
+        <svg id="recChart" class="records-plot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 440" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="recChartTitle recChartDesc"></svg>
+        <div class="records-chart-foot">
+          <p class="records-chart-caption" id="recChartCaption">同一行的三个圆点，靠得近吗？</p>
+          <div class="records-export-actions"><button class="btn primary" type="button" id="recExportCSV">导出数据</button><button class="btn quiet" type="button" id="recExportSVG">保存纸带图</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="recModal" class="records-modal" hidden>
+    <div class="records-modal-card" id="recModalCard" role="dialog" aria-modal="true" aria-labelledby="recModalTitle" aria-describedby="recInputError">
+      <h3 id="recModalTitle">填写距离</h3>
+      <div class="records-input-wrap"><input id="recInput" type="text" readonly inputmode="none" placeholder="未测量" aria-label="输入数值"><span id="recInputUnit">cm</span></div>
+      <p id="recInputError" class="records-input-error" role="status" aria-live="polite"></p>
+      <div class="records-keypad" id="recKeypad" aria-label="数字键盘">
+        <button type="button" data-rec-key="7">7</button><button type="button" data-rec-key="8">8</button><button type="button" data-rec-key="9">9</button>
+        <button type="button" data-rec-key="4">4</button><button type="button" data-rec-key="5">5</button><button type="button" data-rec-key="6">6</button>
+        <button type="button" data-rec-key="1">1</button><button type="button" data-rec-key="2">2</button><button type="button" data-rec-key="3">3</button>
+        <button type="button" id="recDecimal" data-rec-key=".">.</button><button type="button" data-rec-key="0">0</button><button type="button" data-rec-key="back" aria-label="删除一位">⌫</button>
+      </div>
+      <p id="recRowWarning" class="records-row-warning" hidden>这一行已有测量记录。改圈数后，将清空这一行的三次距离。</p>
+      <div class="records-modal-actions"><button class="btn quiet" type="button" id="recSetEmpty">未测量</button><button class="btn quiet" type="button" id="recCancel">取消</button><button class="btn primary rec-save" type="button" id="recSave">确定</button></div>
+    </div>
+  </div>
+</section>
+
+
+</main>
+<footer class="app-foot"><span>离线可用 · T1 基础交互</span><span>模型帮助解释；真实距离以课堂测量为准</span><button class="tiny-button" id="source-open">教材与模型说明</button></footer>
+<div class="modal-shade" id="info-modal" hidden><section class="info-card" role="dialog" aria-modal="true" aria-labelledby="info-title" tabindex="-1"><h2 id="info-title">留住证据，看清过程</h2><p>依据五年级上册《运动和力》第3课设计。先用透视和慢放看清驱动过程，再做实物实验，把三次距离填入“实测记录”。</p><h3>课堂用法</h3><ul><li><b>透视小车：</b>拖转车轮缠绕；箭头键或滑条同样可调。释放后可暂停、慢放和拖动进度。</li><li><b>圈数对比：</b>拖动预测旗；只改变缠绕圈数，让三辆相同规格的小车在相同路面运动。</li><li><b>实测记录：</b>同一圈数测三次，统一以车头为起终点。点数字格用大键盘录入，保留每次圆点。</li></ul><h3>模型边界</h3><p>车的尺寸和放大图经过示意化处理。运动由简化的弹性驱动、牵引限制和滚动阻力共同计算，所用参数未对应某套器材。低圈数可能不足以启动，高圈数可能打滑；“圈数越多越远”需要相同条件和合适缠绕范围。皮筋停止驱动后，小车仍可继续滑行。</p><p>模型不向实测记录填入数值，也不添加随机“误差”。实测记录仅保存在当前浏览器，可导出 CSV 与圆点图。更换浏览器或清理数据后应从导出文件查阅。</p><h3>教材依据</h3><p>《科学》五年级上册，印刷第74—77页；配套教师教学用书，第224—235页。重点为弹力驱动、条件控制、重复测量及纸带圆点记录。</p><footer><button class="btn primary" id="info-close">开始探究</button></footer></section></div>
+<div id="toast" class="toast" role="status" hidden></div>
+<noscript><p>请在浏览器中启用 JavaScript 后使用互动功能。</p></noscript>
+<script>
+/*
+ * 橡皮筋小车：教学示意模型，不用于预测实物行驶距离。
+ * 同一小车、同一橡皮筋、同一路面。参数是假定的教学参数，并非实测值。
+ * 皮筋绕在车轴上，释放时产生转矩；未打滑时轮缘速度等于车速。
+ * 驱动轮超过地面牵引上限后空转，橡皮筋更快释放，并产生滑动损耗。
+ * 皮筋完全松弛后，车身及车轮的动能使其继续滑行，阻力使其停止。
+ * 无随机数；相同输入必须得到相同结果，不伪造重复实验的测量误差。
+ *
+ * 全部长度用米、时间用秒、转角用弧度。
+ * options.resistance / options.traction 是阻力/牵引上限的倍率，默认 1。
+ * sample 的 phase 为 drive / coast / stopped；slip 为布尔值。
+ */
+var ElasticModel = (function () {
+  'use strict';
+
+  var TAU = Math.PI * 2;
+  var CONFIG = {
+    mass: 0.22,
+    rotationalMass: 0.020,
+    wheelRadius: 0.023,
+    forcePerTurn: 0.018,
+    rollingResistance: 0.023,
+    startResistance: 0.0276,
+    viscousResistance: 0.012,
+    staticTraction: 0.235,
+    kineticTraction: 0.188,
+    dt: 0.002,
+    maxTime: 60
+  };
+
+  function finiteNumber(value, fallback) {
+    var number = Number(value);
+    return isFinite(number) ? number : fallback;
+  }
+
+  function clamp(value, low, high) {
+    return Math.max(low, Math.min(high, value));
+  }
+
+  function copy(value) {
+    return {
+      t: value.t, x: value.x, v: value.v, remaining: value.remaining,
+      phase: value.phase, slip: value.slip,
+      wheelAngle: value.wheelAngle, omega: value.omega
+    };
+  }
+
+  function simulate(turns, options) {
+    var n = clamp(finiteNumber(turns, 0), 0, 18);
+    var initialTurns = n;
+    var opts = options || {};
+    var resistance = clamp(finiteNumber(opts.resistance, 1), 0.25, 4);
+    var traction = clamp(finiteNumber(opts.traction, 1), 0.25, 4);
+    var radius = CONFIG.wheelRadius;
+    var circumference = TAU * radius;
+    var mass = CONFIG.mass;
+    var rotationalMass = CONFIG.rotationalMass;
+    var rolling = CONFIG.rollingResistance * resistance;
+    var startResistance = CONFIG.startResistance * resistance;
+    var viscous = CONFIG.viscousResistance * resistance;
+    var staticTraction = CONFIG.staticTraction * traction;
+    var kineticTraction = CONFIG.kineticTraction * traction;
+    var dt = CONFIG.dt;
+    var t = 0, x = 0, v = 0, wheelSurfaceSpeed = 0, wheelAngle = 0;
+    var slipping = false, slipped = false, driveEnd = null;
+    var samples = [];
+    var moving = n * CONFIG.forcePerTurn > startResistance;
+    var step = 0;
+
+    function frame(phase) {
+      return {
+        t: t, x: x, v: v, remaining: n, phase: phase,
+        slip: slipping, wheelAngle: wheelAngle,
+        omega: wheelSurfaceSpeed / radius
+      };
+    }
+
+    samples.push(frame(moving ? 'drive' : 'stopped'));
+    if (!moving) {
+      return {
+        samples: samples, distance: 0, duration: 0, driveEnd: 0,
+        slipped: false, turns: initialTurns, stalled: initialTurns > 0,
+        radius: radius
+      };
+    }
+
+    while (t < CONFIG.maxTime) {
+      var motorForce = CONFIG.forcePerTurn * n;
+      var drag = rolling + viscous * v;
+      var acceleration = (motorForce - drag) / (mass + rotationalMass);
+      var requiredContact = mass * acceleration + drag;
+      var nextV, nextWheelSpeed;
+
+      /* Static traction supports rolling until the necessary contact force is too large. */
+      if (!slipping && n > 0 && requiredContact > staticTraction) {
+        slipping = true;
+        slipped = true;
+      }
+
+      if (slipping) {
+        /* During forward wheelspin the ground acts forwards on the driven wheel. */
+        nextV = Math.max(0, v + (kineticTraction - drag) / mass * dt);
+        nextWheelSpeed = Math.max(0,
+          wheelSurfaceSpeed + (motorForce - kineticTraction) / rotationalMass * dt);
+        if (nextWheelSpeed <= nextV) {
+          /* Recover rolling. Combine translational and rotational momenta at contact. */
+          nextV = Math.max(0,
+            (mass * nextV + rotationalMass * nextWheelSpeed) / (mass + rotationalMass));
+          nextWheelSpeed = nextV;
+          slipping = false;
+        }
+      } else {
+        nextV = Math.max(0, v + acceleration * dt);
+        nextWheelSpeed = nextV;
+      }
+
+      var axleTravel = (wheelSurfaceSpeed + nextWheelSpeed) * 0.5 * dt;
+      x += (v + nextV) * 0.5 * dt;
+      wheelAngle += axleTravel / radius;
+      n = Math.max(0, n - axleTravel / circumference);
+      t += dt;
+      v = nextV;
+      wheelSurfaceSpeed = nextWheelSpeed;
+      step += 1;
+
+      if (n === 0 && driveEnd === null) driveEnd = t;
+      if (v <= 0.00001 && wheelSurfaceSpeed <= 0.00001 &&
+          CONFIG.forcePerTurn * n <= startResistance) {
+        v = 0;
+        wheelSurfaceSpeed = 0;
+        slipping = false;
+        break;
+      }
+
+      /* A frame every 16 ms; the solver itself uses a fixed 2 ms step. */
+      if (step % 8 === 0) samples.push(frame(n > 0 ? 'drive' : 'coast'));
+    }
+
+    samples.push(frame('stopped'));
+    return {
+      samples: samples, distance: x, duration: t,
+      driveEnd: driveEnd === null ? t : driveEnd,
+      slipped: slipped, turns: initialTurns, stalled: n > 0,
+      radius: radius
+    };
+  }
+
+  function sample(run, time) {
+    var frames = run.samples;
+    var timeValue = finiteNumber(time, 0);
+    if (timeValue <= 0 || frames.length === 1) return copy(frames[0]);
+    if (timeValue >= run.duration) return copy(frames[frames.length - 1]);
+    var low = 0, high = frames.length - 1;
+    while (high - low > 1) {
+      var middle = (low + high) >> 1;
+      if (frames[middle].t <= timeValue) low = middle;
+      else high = middle;
+    }
+    var a = frames[low], b = frames[high];
+    var fraction = (timeValue - a.t) / (b.t - a.t);
+    function interpolate(key) { return a[key] + (b[key] - a[key]) * fraction; }
+    return {
+      t: timeValue, x: interpolate('x'), v: interpolate('v'),
+      remaining: Math.max(0, interpolate('remaining')),
+      phase: timeValue >= run.driveEnd ? 'coast' : a.phase,
+      slip: a.slip, wheelAngle: interpolate('wheelAngle'),
+      omega: interpolate('omega')
+    };
+  }
+
+  return {
+    simulate: simulate, sample: sample,
+    limits: {
+      minTurns: 0, maxTurns: 18, recommendedTurns: [3, 6, 9],
+      slipNearTurns: 14, wheelRadius: CONFIG.wheelRadius,
+      resistanceRange: [0.25, 4], tractionRange: [0.25, 4],
+      note: '教学示意，不预测实物；同条件重复结果一致。'
+    }
+  };
+}());
+
+if (typeof module !== 'undefined' && module.exports) module.exports = ElasticModel;
+
+</script>
+<script>
+(function(){
+'use strict';
+function $(id){return document.getElementById(id);}function each(list,fn){Array.prototype.forEach.call(list,fn);}function clamp(v,a,b){return Math.max(a,Math.min(b,v));}function setText(id,s){$(id).textContent=s;}function attr(el,key,val){el.setAttribute(key,val);}function svgEl(name,attrs){var e=document.createElementNS('http://www.w3.org/2000/svg',name),k;for(k in attrs){if(attrs.hasOwnProperty(k)){attr(e,k,attrs[k]);}}return e;}
+var activePage='mechanism',mechanism={turns:0,run:null,time:0,playing:false,slow:false,direction:1},race={turns:[3,6,9],runs:[],time:0,playing:false,slow:false,duration:0,started:false,predictions:[2,4,6],scale:8},toastTimer,lastTime=0,dragWheel=null,dragFlag=null,lastFocus=null;
+var colors=['#176be8','#e7813e','#13857a'],letters=['A','B','C'];
+function toast(s){setText('toast',s);$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3200);}
+function showPage(name){if(activePage==='records'&&window.ElasticRecords&&window.ElasticRecords.onLeave){window.ElasticRecords.onLeave();}mechanism.playing=false;race.playing=false;activePage=name;each(document.querySelectorAll('.page'),function(p){var on=p.id==='page-'+name;p.classList.toggle('active',on);attr(p,'aria-hidden',on?'false':'true');});each(document.querySelectorAll('.nav-btn'),function(b){attr(b,'aria-selected',b.getAttribute('data-page')===name?'true':'false');});if(name==='records'&&window.ElasticRecords){window.ElasticRecords.refresh();}updateButtons();}
+each(document.querySelectorAll('.nav-btn'),function(b){b.addEventListener('click',function(){showPage(b.getAttribute('data-page'));});b.addEventListener('keydown',function(e){var names=['mechanism','compare','records'],i=names.indexOf(activePage);if(e.key==='ArrowRight'||e.key==='ArrowLeft'){i=(i+(e.key==='ArrowRight'?1:2))%3;showPage(names[i]);$('tab-'+names[i]).focus();e.preventDefault();}});});
+function windTo(n){mechanism.turns=clamp(Math.round(n),-18,18);mechanism.direction=mechanism.turns<0?-1:1;mechanism.run=null;mechanism.playing=false;mechanism.time=0;$('wind-range').value=mechanism.turns;attr($('wheel-control'),'aria-valuenow',mechanism.turns);attr($('wheel-control'),'aria-valuetext',Math.abs(mechanism.turns)+'圈，'+(mechanism.direction>0?'正向':'反向'));$('wind-count').innerHTML=Math.abs(mechanism.turns)+'<span>圈</span>';setText('wind-direction',mechanism.direction>0?'↺ 正向缠绕':'↻ 反向缠绕');$('wind-warning').hidden=Math.abs(mechanism.turns)<14;$('mechanism-scrub-row').hidden=true;renderMechanism(null);updateButtons();}
+function renderMechanism(sample){var turns=Math.abs(mechanism.turns),remaining=sample?sample.remaining:turns,phase=sample?sample.phase:'ready',distance=sample?sample.x:0,angle=sample?(sample.wheelAngle||0)*180/Math.PI:0,direction=mechanism.direction,tension=clamp(remaining/8,0,1),sag=(1-tension)*24,wraps=Math.min(18,Math.ceil(remaining)),i,path='';
+attr($('rubber-upper'),'d','M329 205Q460 '+(205-sag)+' 585 224');attr($('rubber-lower'),'d','M329 242Q465 '+(242+sag)+' 585 224');attr($('rubber-upper'),'stroke-width',7-2*tension);attr($('rubber-lower'),'stroke-width',7-2*tension);
+for(i=0;i<wraps;i++){var y=195+i*3.25;path+='<path d="M308 '+y+'Q320 '+(y-5)+' 332 '+y+'"/>';}$('axle-wraps').innerHTML=path;
+attr($('car-cover'),'opacity',$('xray-toggle').getAttribute('aria-pressed')==='true'?'.09':'1');var spin=(angle*direction)%360;attr($('control-wheel'),'transform','rotate('+(mechanism.run?(spin-turns*360*direction):-mechanism.turns*360)+' 115 115)');attr($('zoom-axle'),'transform','rotate('+spin+')');
+var markShift=Math.sin(spin*Math.PI/180)*27,frontShift=Math.sin(distance/.023*direction)*27;attr($('rear-mark1'),'d','M'+(321+markShift)+' 118V148');attr($('rear-mark2'),'d','M'+(321+markShift)+' 300V330');attr($('front-mark1'),'d','M'+(612+frontShift)+' 118V148');attr($('front-mark2'),'d','M'+(612+frontShift)+' 300V330');attr($('moving-floor'),'transform','translate('+(-distance*95*direction%54)+' 0)');
+var driving=phase==='drive'||phase==='slip';attr($('rubber-arrows'),'opacity',driving&&$('xray-toggle').getAttribute('aria-pressed')==='true'?1:0);attr($('zoom-arc'),'opacity',sample&&sample.v>0.001?1:0);attr($('zoom-arc'),'transform',direction>0?'scale(1 1)':'scale(-1 1)');var sy=-18*direction;attr($('zoom-rubber'),'d','M0 '+sy+'Q75 '+(sy+(1-tension)*21*direction)+' 155 '+sy);attr($('travel-arrow'),'d',direction>0?'M698 223h90':'M246 223h-90');attr($('travel-arrow'),'opacity',sample&&sample.v>0.001?.8:0);
+setText('mechanism-distance',distance.toFixed(2)+' m');setText('remaining-count',remaining.toFixed(sample?1:0)+' 圈');$('remaining-meter').style.width=(remaining/18*100)+'%';
+var status='准备缠绕',observe='车轮与车轴一起转';if(sample){if(sample.slip&&phase!=='stopped'){status='车轮打滑';observe='轮子转得快，车身未同步前进';}else if(driving){status='皮筋驱动';observe='皮筋恢复，带动车轴转动';}else if(phase==='coast'){status='继续滑行';observe='皮筋已不再驱动，车还在前进';}else if(phase==='stopped'){status=distance<.001?'小车没有启动':'小车停下了';observe=distance<.001?'试着增加一些圈数':'阻力使小车逐渐减速';}else{status='准备释放';}}else if(turns){status='已经缠绕 '+turns+' 圈';observe='释放之前，先说说你的预测';}
+setText('mechanism-state',status);setText('mechanism-observe',observe);$('mechanism-dot').className='status-dot '+(driving?'drive':phase==='coast'?'coast':phase==='stopped'?'stop':'');setText('zoom-caption',driving?'皮筋拉动车轴，车轴带动车轮':phase==='coast'?'皮筋松弛，轮子仍在转动':'标记回到原处，转过一圈');
+each(document.querySelectorAll('.phase-chip'),function(chip){var cp=chip.getAttribute('data-phase');chip.classList.toggle('on',cp===phase||(cp==='drive'&&driving));});if(mechanism.run){$('mechanism-scrub').value=Math.round(mechanism.time/mechanism.run.duration*1000)||0;}
+}
+function updateButtons(){setText('mechanism-play',mechanism.playing?'暂停观察':mechanism.run?(mechanism.time>=mechanism.run.duration?'再看一次':'继续播放'):'释放小车');setText('race-play',race.playing?'暂停观察':race.started?(race.time>=race.duration?'再次同时释放':'继续播放'):'同时释放');var locked=mechanism.playing;['wind-range','wind-minus','wind-plus'].forEach(function(id){$(id).disabled=locked;});attr($('wheel-control'),'aria-disabled',locked?'true':'false');['turns-a','turns-b','turns-c'].forEach(function(id){$(id).disabled=race.playing;});}
+function playMechanism(){if(mechanism.playing){mechanism.playing=false;updateButtons();return;}if(!mechanism.run||mechanism.time>=mechanism.run.duration){mechanism.run=window.ElasticModel.simulate(Math.abs(mechanism.turns));mechanism.time=0;}$('mechanism-scrub-row').hidden=false;mechanism.playing=true;lastTime=0;updateButtons();}
+$('mechanism-play').addEventListener('click',playMechanism);$('mechanism-reset').addEventListener('click',function(){windTo(0);});$('wind-range').addEventListener('input',function(){windTo(+this.value);});$('wind-minus').addEventListener('click',function(){windTo(mechanism.turns-1);});$('wind-plus').addEventListener('click',function(){windTo(mechanism.turns+1);});$('mechanism-slow').addEventListener('click',function(){mechanism.slow=!mechanism.slow;attr(this,'aria-pressed',mechanism.slow?'true':'false');this.classList.toggle('primary',mechanism.slow);});$('xray-toggle').addEventListener('click',function(){attr(this,'aria-pressed',this.getAttribute('aria-pressed')==='true'?'false':'true');$('car-labels').style.opacity=this.getAttribute('aria-pressed')==='true'?1:0;renderMechanism(mechanism.run?ElasticModel.sample(mechanism.run,mechanism.time):null);});$('mechanism-scrub').addEventListener('input',function(){if(!mechanism.run){return;}mechanism.playing=false;mechanism.time=(+this.value/1000)*mechanism.run.duration;renderMechanism(ElasticModel.sample(mechanism.run,mechanism.time));updateButtons();});
+function pos(e){var t=e.touches&&e.touches[0]?e.touches[0]:e;return{x:t.clientX,y:t.clientY};}function wheelAngle(e){var b=$('wheel-control').getBoundingClientRect(),p=pos(e);return Math.atan2(p.y-b.top-b.height/2,p.x-b.left-b.width/2);}
+function wheelDown(e){if(mechanism.playing){return;}var p=pos(e),b=$('wheel-control').getBoundingClientRect(),dx=p.x-b.left-b.width/2,dy=p.y-b.top-b.height/2;if(dx*dx+dy*dy<400){return;}dragWheel={angle:wheelAngle(e),accum:mechanism.turns*2*Math.PI};if(e.cancelable){e.preventDefault();}}
+function wheelMove(e){if(!dragWheel){return;}var a=wheelAngle(e),delta=a-dragWheel.angle;if(delta>Math.PI){delta-=2*Math.PI;}if(delta<-Math.PI){delta+=2*Math.PI;}dragWheel.accum=clamp(dragWheel.accum-delta,-18*2*Math.PI,18*2*Math.PI);dragWheel.angle=a;var n=dragWheel.accum>=0?Math.floor(dragWheel.accum/(2*Math.PI)+.0001):Math.ceil(dragWheel.accum/(2*Math.PI)-.0001);if(n!==mechanism.turns){windTo(n);}attr($('control-wheel'),'transform','rotate('+(-dragWheel.accum*180/Math.PI)+' 115 115)');if(e.cancelable){e.preventDefault();}}
+$('wheel-control').addEventListener('keydown',function(e){if(mechanism.playing){return;}if(e.key==='ArrowRight'||e.key==='ArrowUp'){windTo(mechanism.turns+1);e.preventDefault();}if(e.key==='ArrowLeft'||e.key==='ArrowDown'){windTo(mechanism.turns-1);e.preventDefault();}if(e.key==='Home'){windTo(0);e.preventDefault();}});
+function chooseScale(){var max=0;for(var i=0;i<3;i++){max=Math.max(max,ElasticModel.simulate(race.turns[i]).distance);}return Math.max(8,Math.ceil(max/2)*2);}
+function makeRace(){race.scale=chooseScale();var ruler=$('race-ruler'),lanes=$('race-lanes'),flags=$('race-flags');ruler.innerHTML='';lanes.innerHTML='';flags.innerHTML='';var i,j,start=150,end=910,len=end-start;
+ruler.appendChild(svgEl('path',{d:'M'+start+' 44V411',stroke:'#829cb3','stroke-width':2,'stroke-dasharray':'5 5'}));var title=svgEl('text',{x:start,y:27,'text-anchor':'middle',class:'svg-small'});title.textContent='车头起点';ruler.appendChild(title);
+for(j=0;j<=race.scale;j++){var x=start+j/race.scale*len;ruler.appendChild(svgEl('path',{d:'M'+x+' 58V401',stroke:j%2===0?'#e2eaf1':'#edf2f6','stroke-width':1}));ruler.appendChild(svgEl('path',{d:'M'+x+' 412v'+(j%2===0?13:7),stroke:'#9ab0c3','stroke-width':1.5}));if(race.scale<=10||j%2===0){var tx=svgEl('text',{x:x,y:449,'text-anchor':'middle',class:'svg-small'});tx.textContent=j;ruler.appendChild(tx);}}var unit=svgEl('text',{x:913,y:475,'text-anchor':'end',class:'svg-small'});unit.textContent='距离 / m';ruler.appendChild(unit);
+for(i=0;i<3;i++){var y=114+i*126,g=svgEl('g',{}),letter=svgEl('text',{x:29,y:y+6,'text-anchor':'middle','font-size':22,'font-weight':750,style:'fill:'+colors[i]});letter.textContent=letters[i];g.appendChild(svgEl('rect',{x:9,y:y-25,width:40,height:40,rx:10,fill:colors[i]+'13'}));g.appendChild(letter);g.appendChild(svgEl('path',{d:'M62 '+(y+26)+'H922',class:'race-line'}));g.appendChild(svgEl('path',{id:'race-trail-'+i,d:'M150 '+(y+26)+'H150',stroke:colors[i],'stroke-width':5,'stroke-linecap':'round',opacity:.4}));
+var car=svgEl('g',{id:'race-car-'+i,transform:'translate(150 '+y+')'});car.innerHTML='<path d="M-91-14V-35Q-90-42-80-42H-31L-8-24H0V-14Z" fill="'+colors[i]+'"/><path d="M-64-36H-33L-18-25H-64Z" fill="#ffffffa0"/><rect x="-94" y="-17" width="96" height="11" rx="5" fill="#233e57"/><g id="race-wheels-'+i+'"><g transform="translate(-73 6)"><circle r="19" fill="#2c4154"/><g id="race-rear-'+i+'"><circle r="12" fill="#e4edf5"/><path d="M-11 0H11M0-11V11" stroke="#7895ad" stroke-width="3"/><circle cy="-13" r="3" fill="#ffc671"/></g></g><g transform="translate(-21 6)"><circle r="19" fill="#2c4154"/><g id="race-front-'+i+'"><circle r="12" fill="#e4edf5"/><path d="M-11 0H11M0-11V11" stroke="#7895ad" stroke-width="3"/></g></g></g><path d="M0-48V28" stroke="'+colors[i]+'" stroke-width="1.5" stroke-dasharray="3 3"/>';
+g.appendChild(car);var result=svgEl('text',{id:'race-result-'+i,x:916,y:y-52,'text-anchor':'end',class:'result-text',style:'fill:'+colors[i]});result.textContent='';g.appendChild(result);var state=svgEl('text',{id:'race-phase-'+i,x:914,y:y+55,'text-anchor':'end',class:'svg-small'});g.appendChild(state);lanes.appendChild(g);
+var pred=clamp(race.predictions[i],0,race.scale);race.predictions[i]=pred;var flag=svgEl('g',{class:'flag',id:'race-flag-'+i,'data-lane':i,tabindex:0,role:'slider','aria-label':letters[i]+'车预测距离','aria-valuemin':0,'aria-valuemax':race.scale,'aria-valuenow':pred,transform:'translate('+(start+pred/race.scale*len)+' '+(y+26)+')'});flag.innerHTML='<rect x="-19" y="-76" width="69" height="88" fill="transparent"/><path d="M0 0V-69" stroke="'+colors[i]+'" stroke-width="2.5" stroke-dasharray="4 3"/><path d="M1-68H39L29-55 39-42H1Z" fill="'+colors[i]+'" opacity=".88"/><text x="18" y="-51" text-anchor="middle" style="fill:#fff;font-size:13px;font-weight:700">猜</text><text id="race-pred-'+i+'" y="25" text-anchor="middle" class="prediction-tag">'+pred.toFixed(1)+' m</text>';flags.appendChild(flag);flag.addEventListener('keydown',flagKey);}
+renderRace();}
+function flagKey(e){if(race.started){return;}var i=+this.getAttribute('data-lane');if(e.key==='ArrowLeft'||e.key==='ArrowRight'){race.predictions[i]=clamp(race.predictions[i]+(e.key==='ArrowRight'?.1:-.1),0,race.scale);moveFlag(i);e.preventDefault();}}
+function moveFlag(i){var d=race.predictions[i],y=114+i*126;attr($('race-flag-'+i),'transform','translate('+(150+d/race.scale*760)+' '+(y+26)+')');attr($('race-flag-'+i),'aria-valuenow',d.toFixed(1));setText('race-pred-'+i,d.toFixed(1)+' m');}
+function findFlag(el){while(el&&el!==$('race-scene')){if(el.getAttribute&&el.getAttribute('data-lane')!==null){return el;}el=el.parentNode;}return null;}
+function flagDown(e){if(race.started){return;}var f=findFlag(e.target);if(!f){return;}dragFlag=+f.getAttribute('data-lane');flagMove(e);if(e.cancelable){e.preventDefault();}}
+function flagMove(e){if(dragFlag===null){return;}var p=pos(e),point=$('race-scene').createSVGPoint();point.x=p.x;point.y=p.y;var matrix=$('race-scene').getScreenCTM();if(!matrix){return;}var s=point.matrixTransform(matrix.inverse());race.predictions[dragFlag]=Math.round(clamp((s.x-150)/760*race.scale,0,race.scale)*10)/10;moveFlag(dragFlag);if(e.cancelable){e.preventDefault();}}
+function pointerEnd(){if(dragWheel){dragWheel=null;renderMechanism(mechanism.run?ElasticModel.sample(mechanism.run,mechanism.time):null);}dragFlag=null;}
+if(window.PointerEvent){$('wheel-control').addEventListener('pointerdown',wheelDown);$('race-scene').addEventListener('pointerdown',flagDown);document.addEventListener('pointermove',function(e){wheelMove(e);flagMove(e);},{passive:false});document.addEventListener('pointerup',pointerEnd);document.addEventListener('pointercancel',pointerEnd);}else{$('wheel-control').addEventListener('mousedown',wheelDown);$('wheel-control').addEventListener('touchstart',wheelDown,{passive:false});$('race-scene').addEventListener('mousedown',flagDown);$('race-scene').addEventListener('touchstart',flagDown,{passive:false});document.addEventListener('mousemove',function(e){wheelMove(e);flagMove(e);});document.addEventListener('touchmove',function(e){wheelMove(e);flagMove(e);},{passive:false});document.addEventListener('mouseup',pointerEnd);document.addEventListener('touchend',pointerEnd);document.addEventListener('touchcancel',pointerEnd);}
+function resetRace(){race.playing=false;race.started=false;race.time=0;race.runs=[];$('race-scrub-row').hidden=true;makeRace();updateButtons();}
+['a','b','c'].forEach(function(letter,i){$('turns-'+letter).addEventListener('input',function(){race.turns[i]=+this.value;setText('turns-'+letter+'-out',this.value);resetRace();});});
+function renderRace(){var stopped=0,anySlip=false,i,s,phaseNames={drive:'皮筋驱动',slip:'车轮打滑',coast:'继续滑行',stopped:'停止'};for(i=0;i<3;i++){s=race.started?ElasticModel.sample(race.runs[i],race.time):{x:0,v:0,remaining:race.turns[i],phase:'ready',wheelAngle:0,slip:false};var x=150+s.x/race.scale*760,y=114+i*126;attr($('race-car-'+i),'transform','translate('+x+' '+y+')');attr($('race-trail-'+i),'d','M150 '+(y+26)+'H'+x);attr($('race-rear-'+i),'transform','rotate('+(s.wheelAngle||0)*180/Math.PI+')');attr($('race-front-'+i),'transform','rotate('+(s.x/.023*180/Math.PI)+')');var stop=s.phase==='stopped';if(stop){stopped++;}anySlip=anySlip||!!s.slip;setText('race-phase-'+i,s.slip&&!stop?'车轮打滑':(phaseNames[s.phase]||''));setText('race-result-'+i,stop?s.x.toFixed(2)+' m':'');$('race-flag-'+i).style.opacity=race.started?.48:1;attr($('race-flag-'+i),'aria-disabled',race.started?'true':'false');}
+$('race-warning').hidden=!race.turns.some(function(n){return n>=14;});if(!race.started){setText('race-status','先放预测旗');setText('race-info','统一从车头量起');$('race-dot').className='status-dot';}else if(stopped===3){setText('race-status','比较预测与结果');setText('race-info','下一步：用实物测量三次');$('race-dot').className='status-dot stop';}else{setText('race-status',anySlip?'注意：有车轮打滑':race.playing?'观察驱动与滑行':'暂停观察');setText('race-info','相同规格 · 相同路面');$('race-dot').className='status-dot drive';}if(race.started){$('race-scrub').value=Math.round(race.time/race.duration*1000)||0;}}
+$('race-play').addEventListener('click',function(){if(race.playing){race.playing=false;renderRace();updateButtons();return;}if(!race.started||race.time>=race.duration){race.runs=race.turns.map(function(n){return ElasticModel.simulate(n);});race.duration=Math.max(race.runs[0].duration,race.runs[1].duration,race.runs[2].duration);race.time=0;race.started=true;}$('race-scrub-row').hidden=false;race.playing=true;lastTime=0;updateButtons();});$('race-reset').addEventListener('click',resetRace);$('race-slow').addEventListener('click',function(){race.slow=!race.slow;attr(this,'aria-pressed',race.slow?'true':'false');this.classList.toggle('primary',race.slow);});$('race-scrub').addEventListener('input',function(){if(!race.started){return;}race.playing=false;race.time=(+this.value/1000)*race.duration;renderRace();updateButtons();});
+function frame(now){var dt=lastTime?Math.min(.05,(now-lastTime)/1000):0;lastTime=now;if(activePage==='mechanism'&&mechanism.playing&&mechanism.run){mechanism.time=Math.min(mechanism.run.duration,mechanism.time+dt*(mechanism.slow?.25:1));renderMechanism(ElasticModel.sample(mechanism.run,mechanism.time));if(mechanism.time>=mechanism.run.duration){mechanism.playing=false;updateButtons();}}if(activePage==='compare'&&race.playing){race.time=Math.min(race.duration,race.time+dt*(race.slow?.25:1));renderRace();if(race.time>=race.duration){race.playing=false;updateButtons();}}window.requestAnimationFrame(frame);}
+function openInfo(){lastFocus=document.activeElement;$('info-modal').hidden=false;mechanism.playing=false;race.playing=false;updateButtons();$('info-close').focus();}function closeInfo(){$('info-modal').hidden=true;if(lastFocus&&lastFocus.focus){lastFocus.focus();}}
+$('info-open').addEventListener('click',openInfo);$('source-open').addEventListener('click',openInfo);$('info-close').addEventListener('click',closeInfo);$('info-modal').addEventListener('click',function(e){if(e.target===this){closeInfo();}});document.addEventListener('keydown',function(e){if(!$('info-modal').hidden){if(e.key==='Escape'){closeInfo();}if(e.key==='Tab'){e.preventDefault();$('info-close').focus();}}});
+$('full-screen').addEventListener('click',function(){var d=document,el=d.documentElement,exit=d.exitFullscreen||d.webkitExitFullscreen,enter=el.requestFullscreen||el.webkitRequestFullscreen;try{if(d.fullscreenElement||d.webkitFullscreenElement){if(exit){exit.call(d);}}else if(enter){var result=enter.call(el);if(result&&result.catch){result.catch(function(){toast('请使用浏览器的全屏功能');});}}else{toast('可横屏使用，或从浏览器菜单进入全屏');}}catch(ignore){toast('可使用浏览器的全屏功能');}});
+document.addEventListener('visibilitychange',function(){if(document.hidden){mechanism.playing=false;race.playing=false;updateButtons();}});
+/* Replaceable seams: ElasticModel owns motion; renderMechanism and makeRace own SVG assets. */
+windTo(0);makeRace();window.requestAnimationFrame(frame);
+}());
+</script>
+<script>
+(function (window, document) {
+  'use strict';
+  var KEY = 'elastic-car-real-records-v1';
+  var colours = ['#176be8', '#c15c23', '#7b54d9'];
+  var state = defaults();
+  var activeEdit = null;
+  var inputText = '';
+  var replaceOnDigit = false;
+  var rowConfirmation = false;
+  var focusId = '';
+  var storageWorks = true;
+  var byId = function (id) { return document.getElementById(id); };
+  var modal = byId('recModal');
+  var input = byId('recInput');
+  var error = byId('recInputError');
+  var body = byId('recTableBody');
+  var chart = byId('recChart');
+
+  function defaults() {
+    return {version: 1, groups: [
+      {turns: 3, values: [null, null, null]},
+      {turns: 6, values: [null, null, null]},
+      {turns: 9, values: [null, null, null]}
+    ], showMean: false};
+  }
+  function finiteNumber(value) { return typeof value === 'number' && isFinite(value); }
+  function validData(data) {
+    var i, j, group;
+    if (!data || data.version !== 1 || Object.prototype.toString.call(data.groups) !== '[object Array]' || data.groups.length !== 3 || typeof data.showMean !== 'boolean') return false;
+    for (i = 0; i < 3; i++) {
+      group = data.groups[i];
+      if (!group || !finiteNumber(group.turns) || group.turns < 0 || group.turns > 99 || Math.floor(group.turns) !== group.turns || Object.prototype.toString.call(group.values) !== '[object Array]' || group.values.length !== 3) return false;
+      for (j = 0; j < 3; j++) {
+        if (group.values[j] !== null && (!finiteNumber(group.values[j]) || group.values[j] < 0 || group.values[j] > 2000)) return false;
+      }
+    }
+    return true;
+  }
+  function readStorage() {
+    var raw, candidate;
+    try {
+      raw = window.localStorage.getItem(KEY);
+    } catch (ignore) { storageWorks = false; return; }
+    if (!raw) return;
+    try { candidate = JSON.parse(raw); } catch (invalidJSON) { return; }
+    if (validData(candidate)) state = candidate;
+  }
+  function persist(message) {
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify(state));
+      storageWorks = true;
+    } catch (ignore) { storageWorks = false; }
+    byId('recSaveStatus').textContent = storageWorks ? (message || '已保存在本机。') : '本机保存不可用，请导出记录。';
+  }
+  function pretty(value) {
+    if (value === null) return '';
+    return String(Math.round(value * 10) / 10);
+  }
+  function mean(values) {
+    if (values[0] === null || values[1] === null || values[2] === null) return null;
+    return (values[0] + values[1] + values[2]) / 3;
+  }
+  function focusElement(id) {
+    var target = byId(id);
+    if (!target) return;
+    try { target.focus({preventScroll: true}); } catch (ignore) { target.focus(); }
+  }
+  function getButton(target, container) {
+    while (target && target !== container) {
+      if (target.tagName && target.tagName.toLowerCase() === 'button') return target;
+      target = target.parentNode;
+    }
+    return null;
+  }
+  function renderTable() {
+    var i, j, group, value, count = 0, html = '';
+    for (i = 0; i < 3; i++) {
+      group = state.groups[i];
+      html += '<tr><td><button type="button" id="rec-turn-' + i + '" class="rec-turn" data-rec-row="' + i + '" data-rec-col="turns" aria-label="修改第' + (i + 1) + '组缠绕圈数，当前' + group.turns + '圈">' + group.turns + '<span>圈</span></button></td>';
+      for (j = 0; j < 3; j++) {
+        value = group.values[j];
+        if (value !== null) count++;
+        html += '<td><button type="button" id="rec-value-' + i + '-' + j + '" class="rec-trial-' + j + (value === null ? ' rec-empty' : '') + '" data-rec-row="' + i + '" data-rec-col="' + j + '" aria-label="' + group.turns + '圈，第' + (j + 1) + '次距离，' + (value === null ? '未测量，点按输入厘米' : pretty(value) + '厘米，点按修改') + '">' + (value === null ? '+' : pretty(value)) + '</button></td>';
+      }
+      html += '</tr>';
+    }
+    body.innerHTML = html;
+    byId('recCount').textContent = '已记录 ' + count + ' / 9 次';
+    byId('recMean').setAttribute('aria-pressed', state.showMean ? 'true' : 'false');
+  }
+  function axisSettings() {
+    var i, j, max = 100, steps = [10, 20, 25, 50, 100, 200, 250, 500, 1000], step = 1000;
+    for (i = 0; i < 3; i++) for (j = 0; j < 3; j++) if (state.groups[i].values[j] !== null) max = Math.max(max, state.groups[i].values[j]);
+    for (i = 0; i < steps.length; i++) if (max / steps[i] <= 7) { step = steps[i]; break; }
+    return {step: step, max: Math.ceil(max / step) * step};
+  }
+  function makeChart() {
+    var axes = axisSettings(), left = 105, width = 635, i, j, tick, x, y, value, average, meanX, labelX;
+    var centres = [130, 250, 370], offsets = [-28, 0, 28], descriptions = [];
+    var parts = ['<title id="recChartTitle">橡皮筋小车实物实验：圆点纸带</title>'];
+    for (i = 0; i < 3; i++) {
+      descriptions.push(state.groups[i].turns + '圈：' + state.groups[i].values.map(function (v, k) { return '第' + (k + 1) + '次' + (v === null ? '未测量' : pretty(v) + '厘米'); }).join('，'));
+    }
+    parts.push('<desc id="recChartDesc">' + descriptions.join('；') + '。三次数据均保留，平均值仅在三次齐全且打开开关时显示。</desc>');
+    parts.push('<rect width="780" height="440" fill="#ffffff"/>');
+    parts.push('<g font-family="Microsoft YaHei, PingFang SC, sans-serif">');
+    for (i = 0; i < 3; i++) {
+      parts.push('<rect x="97" y="' + (centres[i] - 43) + '" width="651" height="86" rx="12" fill="#f4f7fb" stroke="#dce6ee"/>');
+    }
+    for (tick = 0; tick <= axes.max; tick += axes.step) {
+      x = left + width * tick / axes.max;
+      parts.push('<line x1="' + x + '" y1="53" x2="' + x + '" y2="415" stroke="' + (tick === 0 ? '#90a9c4' : '#dbe4ef') + '" stroke-width="' + (tick === 0 ? '2' : '1') + '" stroke-dasharray="' + (tick === 0 ? '0' : '4 6') + '"/>');
+      parts.push('<text x="' + x + '" y="36" text-anchor="middle" font-size="22" fill="#607489">' + tick + '</text>');
+    }
+    parts.push('<text x="105" y="437" text-anchor="middle" font-size="18" fill="#607489">共同起点</text>');
+    for (i = 0; i < 3; i++) {
+      y = centres[i];
+      parts.push('<text x="17" y="' + (y + 8) + '" font-size="25" font-weight="700" fill="#142d45">' + state.groups[i].turns + '圈</text>');
+      if (state.groups[i].values[0] === null && state.groups[i].values[1] === null && state.groups[i].values[2] === null) {
+        parts.push('<text x="423" y="' + (y + 8) + '" text-anchor="middle" font-size="22" fill="#8293a5">等待三次测量</text>');
+      }
+      average = mean(state.groups[i].values);
+      if (state.showMean && average !== null) {
+        meanX = left + width * average / axes.max;
+        labelX = Math.max(170, Math.min(665, meanX));
+        parts.push('<line x1="' + meanX + '" x2="' + meanX + '" y1="' + (y - 47) + '" y2="' + (y + 43) + '" stroke="#142d45" stroke-width="2" stroke-dasharray="4 4"/>');
+        parts.push('<path d="M ' + meanX + ' ' + (y - 50) + ' l 6 6 -6 6 -6 -6 Z" fill="#142d45"/>');
+        parts.push('<text x="' + labelX + '" y="' + (y - 56) + '" text-anchor="middle" font-size="20" fill="#142d45">均值 ' + pretty(average) + '</text>');
+      }
+      for (j = 0; j < 3; j++) {
+        value = state.groups[i].values[j];
+        if (value === null) continue;
+        x = left + width * value / axes.max;
+        parts.push('<g><title>' + state.groups[i].turns + '圈，第' + (j + 1) + '次：' + pretty(value) + ' cm</title>');
+        parts.push('<circle cx="' + x + '" cy="' + (y + offsets[j]) + '" r="14" fill="' + colours[j] + '" stroke="#fff" stroke-width="2"/>');
+        parts.push('<text x="' + x + '" y="' + (y + offsets[j] + 6) + '" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">' + (j + 1) + '</text>');
+        parts.push('<text x="' + (x + (x > 665 ? -24 : 24)) + '" y="' + (y + offsets[j] + 7) + '" text-anchor="' + (x > 665 ? 'end' : 'start') + '" font-size="21" font-weight="600" fill="#29445e">' + pretty(value) + '</text></g>');
+      }
+    }
+    parts.push('</g>');
+    return parts.join('');
+  }
+  function render() {
+    renderTable();
+    chart.innerHTML = makeChart();
+    byId('recChartCaption').textContent = state.showMean ? '测满三次才显示均值；三个原始圆点仍保留。' : '同一行的三个圆点，靠得近吗？';
+  }
+  function resetConfirmation() {
+    rowConfirmation = false;
+    byId('recRowWarning').hidden = true;
+    byId('recModalCard').className = 'records-modal-card';
+    byId('recSave').textContent = '确定';
+  }
+  function openEditor(row, col, buttonId) {
+    activeEdit = {row: row, col: col};
+    focusId = buttonId;
+    inputText = col === 'turns' ? String(state.groups[row].turns) : pretty(state.groups[row].values[col]);
+    replaceOnDigit = true;
+    resetConfirmation();
+    error.textContent = col === 'turns' ? '输入 0—99 的整数；0 圈可作对照。' : '输入 0—2000 cm，最多一位小数。';
+    byId('recModalTitle').textContent = col === 'turns' ? '第' + (row + 1) + '组缠绕圈数' : state.groups[row].turns + '圈 · 第' + (Number(col) + 1) + '次距离';
+    byId('recInputUnit').textContent = col === 'turns' ? '圈' : 'cm';
+    byId('recDecimal').disabled = col === 'turns';
+    byId('recSetEmpty').hidden = col === 'turns';
+    input.value = inputText;
+    modal.hidden = false;
+    byId('recClearConfirm').hidden = true;
+    focusElement('recInput');
+  }
+  function closeEditor() {
+    modal.hidden = true;
+    activeEdit = null;
+    resetConfirmation();
+    if (focusId) focusElement(focusId);
+  }
+  function enterKey(key) {
+    if (!activeEdit) return;
+    resetConfirmation();
+    error.textContent = '';
+    if (key === 'back') {
+      inputText = inputText.slice(0, -1);
+      replaceOnDigit = false;
+    } else {
+      if (replaceOnDigit) { inputText = ''; replaceOnDigit = false; }
+      if (key === '.') {
+        if (activeEdit.col === 'turns' || inputText.indexOf('.') !== -1) return;
+        inputText = inputText ? inputText + '.' : '0.';
+      } else if (/^[0-9]$/.test(key)) {
+        if (inputText.length >= 7) return;
+        if (inputText.indexOf('.') !== -1 && inputText.length - inputText.indexOf('.') > 1) return;
+        inputText = inputText === '0' ? key : inputText + key;
+      }
+    }
+    input.value = inputText;
+  }
+  function saveEditor() {
+    if (!activeEdit) return;
+    var row = activeEdit.row, col = activeEdit.col, value = inputText === '' ? null : Number(inputText), i, hasValues = false;
+    if (col === 'turns') {
+      if (value === null || !finiteNumber(value) || value < 0 || value > 99 || Math.floor(value) !== value) { error.textContent = '圈数需要是 0—99 的整数。'; return; }
+      for (i = 0; i < 3; i++) if (state.groups[row].values[i] !== null) hasValues = true;
+      if (value !== state.groups[row].turns && hasValues && !rowConfirmation) {
+        rowConfirmation = true;
+        byId('recRowWarning').hidden = false;
+        byId('recModalCard').className = 'records-modal-card rec-confirming';
+        byId('recSave').textContent = '改圈数并清空这一行';
+        error.textContent = '';
+        return;
+      }
+      if (value !== state.groups[row].turns) state.groups[row].values = [null, null, null];
+      state.groups[row].turns = value;
+    } else {
+      if (value !== null && (!finiteNumber(value) || value < 0 || value > 2000)) { error.textContent = '距离范围是 0—2000 cm。'; return; }
+      state.groups[row].values[col] = value;
+    }
+    render();
+    persist();
+    closeEditor();
+  }
+  function datedName(extension) {
+    var d = new Date(), month = String(d.getMonth() + 1), day = String(d.getDate());
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return '用弹力驱动小车_课堂实测_' + d.getFullYear() + month + day + '.' + extension;
+  }
+  function download(data, type, filename) {
+    var api = window.URL || window.webkitURL, blob, url, link;
+    if (!api || !api.createObjectURL || typeof window.Blob === 'undefined') { byId('recSaveStatus').textContent = '当前浏览器无法导出，请先截图保留记录。'; return; }
+    blob = new window.Blob([data], {type: type});
+    url = api.createObjectURL(blob);
+    link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.setTimeout(function () { api.revokeObjectURL(url); }, 30000);
+    byId('recSaveStatus').textContent = '已准备导出：' + filename;
+  }
+  body.addEventListener('click', function (event) {
+    var button = getButton(event.target, body), col;
+    if (!button) return;
+    col = button.getAttribute('data-rec-col');
+    openEditor(Number(button.getAttribute('data-rec-row')), col === 'turns' ? col : Number(col), button.id);
+  });
+  byId('recKeypad').addEventListener('click', function (event) {
+    var button = getButton(event.target, byId('recKeypad'));
+    if (button) enterKey(button.getAttribute('data-rec-key'));
+  });
+  byId('recCancel').addEventListener('click', closeEditor);
+  byId('recSave').addEventListener('click', saveEditor);
+  byId('recSetEmpty').addEventListener('click', function () {
+    inputText = '';
+    input.value = '';
+    replaceOnDigit = false;
+    resetConfirmation();
+    error.textContent = '确定后，这一格恢复为未测量。';
+  });
+  modal.addEventListener('click', function (event) { if (event.target === modal) closeEditor(); });
+  byId('recMean').addEventListener('click', function () { state.showMean = !state.showMean; render(); persist(); });
+  byId('recClear').addEventListener('click', function () { byId('recClearConfirm').hidden = false; focusElement('recClearNo'); });
+  byId('recClearNo').addEventListener('click', function () { byId('recClearConfirm').hidden = true; focusElement('recClear'); });
+  byId('recClearYes').addEventListener('click', function () {
+    var i;
+    for (i = 0; i < 3; i++) state.groups[i].values = [null, null, null];
+    byId('recClearConfirm').hidden = true;
+    render();
+    persist('已清空测量记录，圈数已保留。');
+    focusElement('recClear');
+  });
+  byId('recExportCSV').addEventListener('click', function () {
+    var rows = ['缠绕圈数（圈）,第1次距离（cm）,第2次距离（cm）,第3次距离（cm）,3次平均距离（cm）'], i, group;
+    for (i = 0; i < 3; i++) {
+      group = state.groups[i];
+      rows.push([group.turns, pretty(group.values[0]), pretty(group.values[1]), pretty(group.values[2]), pretty(mean(group.values))].join(','));
+    }
+    download('\uFEFF' + rows.join('\r\n') + '\r\n', 'text/csv;charset=utf-8', datedName('csv'));
+  });
+  byId('recExportSVG').addEventListener('click', function () {
+    var svg = '<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="1000" viewBox="0 0 780 500" role="img" aria-labelledby="recChartTitle recChartDesc">';
+    svg += '<rect width="780" height="500" fill="#fff"/><text x="24" y="32" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#142d45">用弹力驱动小车 · 课堂实测</text><text x="750" y="32" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" fill="#607489">距离 / cm</text>';
+    svg += '<g transform="translate(0,45)">' + makeChart() + '</g></svg>';
+    download(svg, 'image/svg+xml;charset=utf-8', datedName('svg'));
+  });
+  document.addEventListener('keydown', function (event) {
+    var key = event.key, code = event.keyCode, nodes, list = [], i, first, last;
+    if (modal.hidden || !activeEdit) return;
+    if (!key) {
+      if (code >= 48 && code <= 57) key = String(code - 48);
+      else if (code >= 96 && code <= 105) key = String(code - 96);
+      else key = {8: 'Backspace', 9: 'Tab', 13: 'Enter', 27: 'Escape', 46: 'Delete', 110: '.', 190: '.'}[code];
+    }
+    if (event.ctrlKey || event.metaKey || event.altKey) return;
+    if (/^[0-9]$/.test(key || '') || key === '.') { event.preventDefault(); event.stopPropagation(); enterKey(key); }
+    else if (key === 'Backspace') { event.preventDefault(); event.stopPropagation(); enterKey('back'); }
+    else if (key === 'Delete') { event.preventDefault(); event.stopPropagation(); inputText = ''; input.value = ''; replaceOnDigit = false; resetConfirmation(); }
+    else if (key === 'Escape') { event.preventDefault(); event.stopPropagation(); closeEditor(); }
+    else if (key === 'Enter') {
+      event.stopPropagation();
+      if (!document.activeElement || String(document.activeElement.tagName).toLowerCase() !== 'button') { event.preventDefault(); saveEditor(); }
+    }
+    else if (key === 'Tab') {
+      nodes = byId('recModalCard').querySelectorAll('button, input');
+      for (i = 0; i < nodes.length; i++) if (!nodes[i].disabled && !nodes[i].hidden && nodes[i].offsetParent !== null) list.push(nodes[i]);
+      first = list[0]; last = list[list.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); if (last) last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); if (first) first.focus(); }
+      event.stopPropagation();
+    }
+  }, true);
+  window.ElasticRecords = {
+    refresh: function () { render(); },
+    getData: function () { return JSON.parse(JSON.stringify(state)); },
+    onLeave: function () { if (!modal.hidden) closeEditor(); byId('recClearConfirm').hidden = true; }
+  };
+  readStorage();
+  render();
+  if (!storageWorks) byId('recSaveStatus').textContent = '本机保存不可用，请导出记录。';
+}(window, document));
+</script>
+</body>
+</html>

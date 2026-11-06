@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   root.AIHTML_LEVELS = {
+    '五上3.3用弹力驱动小车': { level: 1, note: 'SVG 透视与触控、圈数对比、实测圆点记录' },
     '一上2.6观察与比较': { level: 1, note: 'SVG 比较与图画记录；图片导出可选 Canvas' },
     '一上2.1我们的身体': { level: 1, note: 'SVG 与触控' },
     '一上2.2发现生长': { level: 2, note: 'Canvas 与音效' },
