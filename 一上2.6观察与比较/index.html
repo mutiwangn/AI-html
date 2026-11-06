@@ -21,6 +21,7 @@
 @media(max-height:750px) and (min-width:851px){.mix-cup>svg,.mix-cup.middle>svg{height:218px}}
 @media(max-width:850px){.mix-cup>svg,.mix-cup.middle>svg{height:245px}}
 @media(max-width:480px){.mix-cup>svg,.mix-cup.middle>svg{height:200px}.history-item>svg{height:165px}.history-refs{margin-top:10px}.history-refs svg{width:53px;height:75px}.history-refs>div{font-size:13px}}
+.pair-log{min-height:0;overflow-y:auto}.is-sorting #sort-question .subline,.is-sorting #compare-foot{display:none}.is-sorting .sort-actions{flex-direction:row;flex:none;margin-top:10px}.is-sorting .sort-actions button{flex:1;min-width:0;margin:0;padding:10px 8px;min-height:50px;font-size:17px}.is-sorting .sort-actions button+button{margin-left:8px}.is-sorting #sort-question h3{font-size:23px;margin-bottom:8px}.is-sorting .result-note{font-size:17px;line-height:1.55;flex:none}.is-sorting .proof{padding:7px 10px;min-height:44px}
 #page-record[hidden]{display:none!important}
 #page-record{color:var(--ink,#183248);width:100%;min-width:0}
 #page-record *{box-sizing:border-box}
@@ -85,7 +86,7 @@
      <div class="direction" id="sort-direction" hidden><span>浅</span><span class="direction-line"></span><span>深</span></div>
      <p class="condition">同样的杯子 · 同样多的清水 · 同一种酱油</p>
     </div>
-    <aside class="side-card">
+    <aside class="side-card" id="compare-aside">
      <div class="side-kicker"><span id="compare-kicker">用眼睛，找不同</span><span id="pair-count">0 / 2 组</span></div>
      <div id="compare-choices"><h3>哪一杯更深？</h3><div class="choice-row"><button id="choose-left" class="choice" type="button"></button><button id="choose-same" class="choice equal" type="button"><b>＝</b>一样深</button><button id="choose-right" class="choice" type="button"></button></div></div>
      <div id="sort-question" hidden><h3>从浅到深排一排</h3><p class="subline">点一杯，再点另一杯，<br>交换它们的位置。</p></div>
@@ -220,6 +221,7 @@
  }
  function renderCompare(){
   var isSort=c.mode==='sort',p=c.pair;
+  $('compare-aside').className='side-card'+(isSort?' is-sorting':'');
   visible('pair-station',!isSort);visible('sample-row',!isSort);visible('sort-station',isSort);visible('sort-direction',isSort);visible('compare-choices',!isSort);visible('sort-question',isSort);visible('start-sort',!isSort);visible('sort-actions',isSort);
   text('compare-title',isSort?(c.sorted?'给杯子贴上编号':'从浅到深排一排'):'谁的颜色更深？');
   text('compare-instruction',isSort?(c.sorted?'1号浅，3号深。指着杯子，说说你的依据。':'点一杯，再点另一杯，交换它们的位置。'):'点下面的杯子，选择要比较的两杯。');
