@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3f4ee">
+<meta name="description" content="拖动钢尺，听声音，慢放并保留两次振动范围；用同一比例比较真实录音。四上3.2声音的强弱，单体离线互动网页。">
+<title>声音的强弱 · 四上3.2</title>
+<style>
+:root{--ink:#153640;--muted:#62757b;--paper:#f3f4ee;--white:#fffefa;--line:#d8e1df;--teal:#087d84;--teal-light:#dff1ed;--amber:#d9782b;--amber-light:#fff0dc;--radius:15px;--shadow:0 12px 35px rgba(31,62,69,.06)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{cursor:pointer;color:inherit;border:1px solid var(--line);background:var(--white);border-radius:10px;min-height:46px;padding:9px 15px;font-weight:650;white-space:nowrap;touch-action:manipulation;transition:background .15s,box-shadow .15s}button:hover{background:#eef4f1}button:active{transform:translateY(1px)}button:disabled{opacity:.38;cursor:default;transform:none}button:focus-visible,a:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #d9782b;outline-offset:4px}button.primary{background:var(--teal);border-color:var(--teal);color:white}button.primary:hover{background:#066c72}button.small{min-height:38px;padding:7px 11px;font-size:14px}button.icon{padding:9px;min-width:46px;display:inline-flex;align-items:center;justify-content:center}button svg{width:21px;height:21px;vertical-align:middle;flex-shrink:0}button .ic{display:inline-flex;margin-right:6px;vertical-align:middle}svg text{font-family:inherit}h1,h2,p{margin:0}a{color:inherit}input[type=range]{width:100%;accent-color:var(--teal);height:34px;cursor:pointer;min-width:0;touch-action:pan-y}.hidden,[hidden]{display:none!important}
+.shell{height:100%;height:100dvh;max-width:1680px;margin:0 auto;padding:20px 28px 8px;display:grid;grid-template-rows:auto minmax(0,1fr) 28px;gap:18px}.header{display:flex;align-items:center;gap:28px;min-height:62px}.brand{display:flex;align-items:center;gap:13px}.brandmark{width:47px;height:47px;background:var(--ink);color:#e6ef9a;border-radius:12px;display:grid;place-items:center}.brandmark svg{width:30px;height:30px}.eyebrow{font-size:12px;letter-spacing:2px;color:var(--muted);font-weight:700;margin-bottom:3px}h1{font-size:29px;letter-spacing:1px;line-height:1.25}.nav{display:flex;gap:5px;background:#e5ebe7;border-radius:12px;padding:5px;margin:auto}.nav button{border:0;background:transparent;min-width:157px;min-height:44px;font-size:17px;padding:10px 18px}.nav button[aria-selected=true]{background:var(--white);box-shadow:0 2px 8px #193a3810;color:var(--teal)}.nav .step{font-size:12px;opacity:.65;margin-right:8px}.header-actions{display:flex;gap:8px}.header-actions button{background:transparent}.screen{min-height:0;height:100%}.model-layout{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px}.stage{min-height:0;display:flex;flex-direction:column;background:#e9efed;border:1px solid #d4e0dd;border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:var(--shadow)}.stage-top{display:flex;align-items:center;justify-content:space-between;padding:19px 22px 2px;gap:14px;z-index:1}.stage-top h2{font-size:21px}.tag{font-size:12px;font-weight:650;letter-spacing:.5px;border:1px solid #bdcfca;padding:4px 7px;border-radius:5px;color:#526f70;margin-left:8px;vertical-align:middle;white-space:nowrap}.stage-top button[aria-pressed=true]{background:var(--teal-light);border-color:#83bdb7;color:var(--teal)}.stage-subtitle{font-size:14px;color:var(--muted);padding:7px 22px 0}.scene-wrap{min-height:0;flex:1;position:relative;display:flex;align-items:center;justify-content:center}.scene{display:block;width:100%;height:100%;min-height:0;overflow:visible;touch-action:none;user-select:none;-webkit-user-select:none}.scene text{fill:var(--ink)}.scene .micro{font-size:16px;fill:#667f7e}.scene .label{font-size:22px;font-weight:600}.scene #tipHandle{cursor:ns-resize;touch-action:none}.mode-flag{position:absolute;top:9px;left:22px;display:flex;align-items:center;gap:7px;font-size:13px;color:#466b6b;background:#ffffffb3;border-radius:6px;padding:6px 10px;pointer-events:none}.mode-flag .dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}.drag-hint{position:absolute;bottom:6px;right:18px;color:#58706e;font-size:14px;pointer-events:none}.stage-bottom{padding:6px 22px 18px;background:linear-gradient(0deg,#e9efed 85%,#e9efed00)}.distance-row{display:flex;align-items:center;gap:15px;margin-bottom:10px}.distance-row label{font-size:15px;white-space:nowrap}.distance-row output{width:47px;text-align:right;font-size:18px;font-weight:750;font-variant-numeric:tabular-nums}.play-controls{display:flex;align-items:center;gap:8px}.play-controls button{font-size:16px;min-height:47px}.play-controls button.primary{flex:1.1}.play-controls button.slow{flex:1}.play-controls button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--teal)}.scrub-row{display:flex;align-items:center;gap:13px;margin-top:5px;height:32px}.scrub-row span{font-size:12px;color:var(--muted);white-space:nowrap}.scrub-row input{height:28px}.scrub-row output{font-size:13px;min-width:54px;text-align:right;font-variant-numeric:tabular-nums}
+.evidence{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:14px;min-height:0;box-shadow:var(--shadow)}.evidence-heading{display:flex;align-items:baseline;justify-content:space-between;gap:9px}.evidence h2{font-size:21px}.subtle{font-size:12px;color:var(--muted)}.sample{padding:13px;border:1px solid #c8ddda;border-radius:10px;background:#f0f7f4;flex:1;min-height:0;display:flex;flex-direction:column;transition:box-shadow .2s}.sample.b{background:#fff7ed;border-color:#eadbc8}.sample.playing{box-shadow:0 0 0 3px #6faea6}.sample.b.playing{box-shadow:0 0 0 3px #e9b57a}.sample-top{display:flex;justify-content:space-between;align-items:center;gap:10px}.sample-name{font-size:21px;font-weight:750;display:flex;align-items:center;gap:8px;color:var(--teal)}.sample.b .sample-name{color:var(--amber)}.sample-name small{font-size:13px;font-weight:500;color:var(--muted)}.sample-top button{min-height:34px;padding:5px 9px;font-size:13px}.mini-wave{width:100%;min-height:65px;flex:1;max-height:115px}.sample-meta{font-size:13px;line-height:1.5;color:#5a7473;display:flex;justify-content:space-between;gap:5px}.sample-meta button{background:transparent;border:0;min-height:28px;padding:2px 4px;font-size:12px}.evidence-actions{display:grid;grid-template-columns:1fr;gap:8px}.evidence-actions button{min-height:43px;font-size:15px}.evidence-actions button[aria-pressed=true]{background:var(--teal-light);border-color:#96c5c0}.think{font-size:15px;line-height:1.65;margin-top:auto;padding-top:3px;color:#496366}.think b{font-weight:650;color:var(--ink)}
+.record-layout{height:100%;display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}.record-head{display:flex;justify-content:space-between;gap:20px;padding:22px 26px 14px;align-items:flex-start}.record-head h2{font-size:23px}.record-head p{font-size:15px;color:var(--muted);margin-top:8px}.record-head .source-tag{background:#e9efed;font-size:12px;padding:6px 9px;border-radius:6px;white-space:nowrap}.record-cards{min-height:0;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:0 26px}.record-card{min-height:0;display:flex;flex-direction:column;background:#f0f7f4;border:1px solid #c8ddda;border-radius:12px;overflow:hidden}.record-card.b{background:#fff7ed;border-color:#eadbc8}.record-card-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 4px;gap:10px}.record-card h3{margin:0;font-size:24px;color:var(--teal)}.record-card.b h3{color:var(--amber)}.record-card h3 span{font-size:15px;font-weight:500;color:var(--ink);margin-left:8px}.record-state{font-size:13px;color:var(--muted)}.record-wave{min-height:0;flex:1;position:relative;padding:0 8px}.record-wave svg{width:100%;height:100%;display:block;min-height:135px}.empty-record{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;font-size:16px;color:#829b94;pointer-events:none}.empty-record svg{width:34px;height:34px;min-height:0;opacity:.55}.record-controls{display:flex;gap:10px;padding:0 19px 12px}.record-controls button{flex:1;font-size:16px}.record-metric{height:32px;font-size:12px;color:var(--muted);padding:0 20px}.record-bottom{padding:18px 26px;display:flex;align-items:center;gap:22px}.gain-control{display:flex;align-items:center;gap:12px;min-width:0}.gain-control label{font-size:14px;white-space:nowrap}.gain-control select{font:inherit;padding:9px 26px 9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--ink);min-height:42px}.record-bottom .record-note{font-size:13px;line-height:1.5;color:var(--muted);flex:1}.record-bottom button{margin-left:auto}.mic-status{min-height:42px;padding:10px 26px;background:#eef2ed;color:#4a6869;font-size:13px;line-height:1.65;border-top:1px solid var(--line)}.mic-status.error{color:#8f471f;background:#fff2df}.mic-status.live{color:#086d71;background:#e3f3ed}.record-card.recording{box-shadow:inset 0 0 0 2px var(--teal)}.record-card.b.recording{box-shadow:inset 0 0 0 2px var(--amber)}
+.footer{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;color:#71837d;padding:0 1px}.footer .compat{font-size:10px;letter-spacing:.6px}.footer button{border:0;background:none;min-height:26px;font-size:11px;padding:2px 0;color:var(--muted);font-weight:500}.toast{position:fixed;left:50%;bottom:38px;transform:translateX(-50%);max-width:90vw;background:#173c40;color:white;padding:12px 20px;border-radius:10px;font-size:15px;line-height:1.5;z-index:12;box-shadow:0 6px 30px #0002;text-align:center;pointer-events:none}.dialog-shade{position:fixed;inset:0;background:#14323560;z-index:20;display:grid;place-items:center;padding:20px}.dialog{background:var(--white);width:600px;max-width:100%;max-height:88vh;overflow:auto;border-radius:15px;box-shadow:0 20px 80px #001b2c30;padding:28px}.dialog-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}.dialog h2{font-size:23px}.dialog h3{font-size:17px;margin:20px 0 8px}.dialog p{font-size:15px;line-height:1.9;color:#4b6569}.dialog code{font-family:inherit}.dialog .pill{display:inline-block;background:var(--teal-light);padding:2px 6px;border-radius:4px;color:var(--teal)}
+@media(min-width:1500px){.shell{padding:24px 36px 10px;gap:22px}.model-layout{grid-template-columns:minmax(0,1fr) 340px}.evidence{padding:24px;gap:18px}h1{font-size:32px}.stage-top h2,.evidence h2{font-size:23px}.sample-top button{font-size:15px}.sample-meta,.stage-subtitle{font-size:15px}.think{font-size:17px}.play-controls button{font-size:18px}}
+@media(max-width:1100px){.shell{padding:14px 18px 6px;gap:12px}.header{gap:12px;min-height:57px}h1{font-size:25px}.nav button{min-width:132px;font-size:16px;padding:9px 12px}.model-layout{grid-template-columns:minmax(0,1fr) 255px;gap:12px}.evidence{padding:15px;gap:11px}.stage-top{padding:16px 17px 2px}.stage-top h2,.evidence h2{font-size:19px}.stage-top .tag{display:none}.stage-subtitle{padding-left:17px;font-size:13px}.stage-bottom{padding:6px 17px 13px}.sample{padding:10px}.think{font-size:14px}.play-controls button{font-size:14px;padding:8px 9px}.record-cards{padding:0 19px;gap:13px}.record-head,.record-bottom{padding:18px 19px}.record-bottom{gap:12px}.record-card-head{padding:15px 15px 4px}.record-controls{padding:0 15px 10px;gap:7px}.record-controls button{font-size:14px;padding:8px 10px}.mic-status{padding:9px 19px}}
+@media(max-width:760px){.shell{padding:10px 12px 5px;gap:10px;grid-template-rows:auto minmax(0,1fr) 24px}.header{flex-wrap:wrap;gap:9px}.brandmark{width:37px;height:37px;border-radius:9px}.brandmark svg{width:26px;height:26px}.brand{gap:9px}h1{font-size:23px}.eyebrow{font-size:10px;letter-spacing:1px;margin-bottom:2px}.nav{order:3;width:100%;padding:4px;gap:4px}.nav button{width:50%;min-height:38px;padding:7px 8px;font-size:15px}.header-actions{margin-left:auto;gap:5px}.header-actions button{min-height:37px;min-width:37px;padding:6px}.model-layout{display:flex;flex-direction:column;gap:9px}.stage{flex:1;min-height:0}.stage-top{padding:12px 14px 0}.stage-top h2{font-size:17px}.stage-top button{min-height:32px;font-size:12px;padding:5px 8px}.stage-subtitle{padding:4px 14px 0;font-size:11px}.scene-wrap{min-height:100px}.mode-flag{font-size:10px;top:4px;left:14px;padding:4px 6px}.drag-hint{font-size:10px;bottom:0;right:10px}.stage-bottom{padding:2px 13px 10px}.distance-row{margin-bottom:2px;gap:9px}.distance-row label{font-size:12px}.distance-row output{font-size:15px}.play-controls{gap:6px}.play-controls button{min-height:37px;font-size:13px;padding:6px 8px}.play-controls button svg{width:17px;height:17px}.play-controls .ic{margin-right:3px}.scrub-row{height:25px;gap:7px;margin-top:1px}.scrub-row span{font-size:10px}.scrub-row output{font-size:11px;min-width:46px}.evidence{flex:0 0 174px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto minmax(0,1fr);padding:10px;gap:7px 9px}.evidence-heading{grid-column:1 / 3}.evidence h2{font-size:15px}.evidence-heading .subtle{font-size:10px}.evidence-heading .desktop-label{display:none}.sample{grid-row:2;padding:7px;min-height:0}.sample-top{gap:3px}.sample-name{font-size:17px;gap:3px}.sample-name small{font-size:10px}.sample-top button{font-size:10px;min-height:27px;padding:3px 6px}.mini-wave{min-height:28px;max-height:50px}.sample-meta{font-size:10px;gap:2px;align-items:center}.sample-meta button{font-size:10px;min-height:23px;padding:0 2px}.evidence-actions{display:none}.think{display:none}.compact-compare{display:flex!important;gap:5px}.compact-compare button{min-height:26px;padding:3px 7px;font-size:10px}.compact-compare button[aria-pressed=true]{background:var(--teal-light);border-color:#96c5c0}.record-head{padding:14px 14px 10px;gap:8px}.record-head h2{font-size:18px}.record-head p{font-size:12px;line-height:1.5;margin-top:4px}.record-head .source-tag{font-size:10px;padding:4px 6px}.record-cards{grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:10px;padding:0 12px}.record-card-head{padding:9px 12px 0}.record-card h3{font-size:21px}.record-card h3 span{font-size:13px}.record-state{font-size:11px}.record-wave svg{min-height:58px}.empty-record{font-size:12px;gap:4px}.empty-record svg{display:none}.record-controls{padding:0 11px 7px;gap:7px}.record-controls button{min-height:34px;font-size:13px;padding:5px 9px}.record-metric{height:20px;font-size:10px;padding:0 12px}.record-bottom{padding:10px 12px;gap:8px;flex-wrap:wrap}.gain-control{gap:7px}.gain-control label{font-size:11px}.gain-control select{font-size:12px;min-height:33px;padding:6px 20px 6px 6px}.record-bottom .record-note{order:3;flex:0 0 100%;font-size:10px;line-height:1.3}.record-bottom button{min-height:33px;font-size:12px;padding:6px 8px}.mic-status{font-size:10px;line-height:1.4;padding:8px 12px;min-height:32px}.footer{font-size:9px;gap:4px}.footer button{font-size:10px}.footer .compat{font-size:8px}.toast{bottom:30px;font-size:13px;padding:10px 14px}.dialog{padding:20px}.dialog p{font-size:13px}.dialog h2{font-size:20px}}
+@media(max-height:600px) and (min-width:761px){.shell{padding:7px 13px 3px;gap:7px;grid-template-rows:45px minmax(0,1fr) 20px}.header{min-height:0}.brandmark{width:35px;height:35px}.brandmark svg{width:25px;height:25px}h1{font-size:23px}.eyebrow{font-size:10px}.nav{padding:3px}.nav button{min-height:34px;font-size:14px}.header-actions button{min-height:35px;min-width:35px;padding:6px}.stage-top{padding-top:10px}.stage-top h2,.evidence h2{font-size:17px}.stage-top button{min-height:30px;font-size:12px}.stage-subtitle{font-size:11px;padding-top:3px}.stage-bottom{padding:2px 14px 8px}.distance-row{margin-bottom:2px}.distance-row input{height:24px}.distance-row label{font-size:12px}.play-controls button{min-height:35px;font-size:12px;padding:6px}.scrub-row{height:22px;margin-top:1px}.evidence{padding:10px;gap:7px}.sample{padding:7px}.sample-name{font-size:17px}.sample-top button{min-height:27px;font-size:11px}.sample-name small,.sample-meta{font-size:10px}.mini-wave{min-height:25px;max-height:60px}.evidence-actions{grid-template-columns:1fr 1fr;gap:5px}.evidence-actions button{min-height:32px;font-size:11px;padding:4px 5px}.think{display:none}.record-head{padding:12px 16px 8px}.record-head h2{font-size:18px}.record-head p{font-size:12px;margin-top:3px}.record-card-head{padding:10px 13px 0}.record-card h3{font-size:20px}.record-wave svg{min-height:65px}.record-controls{padding-bottom:7px}.record-controls button{min-height:34px;font-size:12px}.record-metric{height:23px}.record-bottom{padding:8px 16px}.record-note{font-size:11px!important}.gain-control label{font-size:11px}.gain-control select{min-height:32px;font-size:12px;padding:6px 15px 6px 7px}.record-bottom button{min-height:33px;font-size:12px}.mic-status{padding:6px 16px;font-size:10px;min-height:30px}.footer{font-size:9px}.footer button{font-size:9px}}
+@media(max-height:680px) and (max-width:760px){.shell{gap:6px;padding-top:6px}.header{gap:5px}.brandmark{width:32px;height:32px}h1{font-size:20px}.eyebrow{display:none}.nav button{min-height:31px;font-size:13px;padding:5px}.evidence{flex-basis:135px}.stage-subtitle{display:none}.sample-name small{display:none}.mini-wave{max-height:30px}.distance-row{margin:0}.distance-row input{height:23px}.stage-top{padding-top:8px}.stage-bottom{padding-bottom:6px}.record-head p{font-size:10px}.record-head{padding:10px}.record-bottom .record-note{display:none}.record-metric{height:17px}.record-controls button{min-height:30px;font-size:12px}.mic-status{font-size:9px}}
+.record-wave>svg{min-height:0}.record-wave{overflow:hidden}
+@media(max-height:600px) and (min-width:761px){.empty-record svg{display:none}.empty-record{font-size:11px}.stage-subtitle{display:none}.mode-flag{font-size:10px;top:2px;padding:4px 6px}.drag-hint{display:none}.record-head{padding:9px 16px 6px}.record-head h2{font-size:16px}.record-head p{font-size:10px;margin-top:2px}.record-card-head{padding-top:7px}.record-card h3{font-size:18px}.record-metric{height:18px;font-size:10px}.record-bottom{padding:6px 16px}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z" fill="currentColor"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5v14M17 5v14" stroke="currentColor" stroke-width="4"/></symbol>
+<symbol id="i-speaker" viewBox="0 0 24 24"><path d="m12 4-6 5H3v6h3l6 5ZM16 8q5 4 0 8m3-11q8 7 0 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+<symbol id="i-slow" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v5l-3 2M9 2h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 0 6M4 3v6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 10v2a7 7 0 0 0 14 0v-2m-7 9v3m-4 0h8" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7" r="1.2" fill="currentColor"/></symbol>
+</defs></svg>
+<div class="shell">
+<header class="header">
+ <div class="brand"><div class="brandmark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M3 16h3m3-6v12m5-19v26m5-23v20m5-16v12m5-6h1" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></div><div><div class="eyebrow">四年级上册 · 3.2</div><h1>声音的强弱</h1></div></div>
+ <nav class="nav" role="tablist" aria-label="探究页面"><button id="tab-model" role="tab" aria-selected="true" aria-controls="page-model" type="button"><span class="step">01</span>看清振动</button><button id="tab-record" role="tab" aria-selected="false" aria-controls="page-record" type="button"><span class="step">02</span>录音比一比</button></nav>
+ <div class="header-actions"><button class="icon" id="resetBtn" aria-label="恢复当前页" title="恢复当前页"><svg><use href="#i-reset"/></svg></button><button class="icon" id="fullBtn" aria-label="全屏显示" title="全屏显示"><svg><use href="#i-full"/></svg></button><button class="icon" id="infoBtn" aria-label="使用与模型说明" title="使用与模型说明"><svg><use href="#i-info"/></svg></button></div>
+</header>
+<main class="screen">
+<section id="page-model" class="screen" role="tabpanel" aria-labelledby="tab-model">
+ <div class="model-layout">
+  <section class="stage" aria-label="钢尺振动模型">
+   <div class="stage-top"><h2>拨一拨这把钢尺 <span class="tag">模型示意</span></h2><button class="small" id="rangeBtn" aria-pressed="false">显出振动范围</button></div>
+   <p class="stage-subtitle">长度与压紧位置不变，只改变拨动距离。</p>
+   <div class="scene-wrap">
+    <div class="mode-flag"><span class="dot"></span><span id="modeText">侧面放大 · 拖动尺端后松手</span></div>
+    <svg id="scene" class="scene" viewBox="0 90 900 370" role="img" aria-label="一端压紧在桌边的钢尺，可上下拖动右端">
+     <defs>
+      <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7b386"/><stop offset=".5" stop-color="#c49c70"/><stop offset="1" stop-color="#aa8159"/></linearGradient>
+      <linearGradient id="metal" gradientUnits="userSpaceOnUse" x1="0" y1="243" x2="0" y2="258"><stop stop-color="#f7fbfc"/><stop offset=".38" stop-color="#c8d9dc"/><stop offset=".7" stop-color="#6e8d97"/><stop offset="1" stop-color="#e1e9e9"/></linearGradient>
+      <linearGradient id="clamp" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#48666a"/><stop offset="1" stop-color="#24474c"/></linearGradient>
+      <radialGradient id="halo"><stop stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#cbdad5" stroke-width=".7"/></pattern>
+      <marker id="arrowT" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M6 3 0 0v6Z" fill="#087d84"/></marker>
+      <marker id="arrowO" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M6 3 0 0v6Z" fill="#d9782b"/></marker>
+     </defs>
+     <rect x="320" y="45" width="505" height="380" rx="18" fill="url(#halo)"/>
+     <rect x="320" y="70" width="500" height="350" fill="url(#grid)" opacity=".45"/>
+     <ellipse cx="230" cy="444" rx="194" ry="16" fill="#8da59b" opacity=".18"/>
+     <path d="M60 256h248v178H60Z" fill="url(#wood)"/>
+     <path d="M60 256h248v22H60Z" fill="#e6c79c"/>
+     <path d="M74 307c41 8 137-12 217-2M74 333c55-10 150 10 217-2M74 395c54-9 137 13 217 0M82 418c81 4 138-2 192 0" fill="none" stroke="#865e3b" stroke-width="2" opacity=".13"/>
+     <path d="M302 258v175" fill="none" stroke="#9c744d" stroke-width="4"/>
+     <line x1="308" y1="250" x2="817" y2="250" stroke="#718e8a" stroke-width="1.5" stroke-dasharray="6 7" opacity=".5"/>
+     <text x="686" y="276" class="micro" text-anchor="end">静止位置</text>
+     <g id="ghostRanges" pointer-events="none"></g>
+     <g id="rangeOverlay" pointer-events="none"></g>
+     <g id="blurRuler" pointer-events="none" opacity=".2"></g>
+     <path id="rulerOutline" d="M100 250H743" fill="none" stroke="#546d76" stroke-width="12" stroke-linecap="round"/>
+     <path id="rulerBody" d="M100 248H743" fill="none" stroke="url(#metal)" stroke-width="9" stroke-linecap="round"/>
+     <g id="rulerTicks" opacity=".75"></g>
+     <g id="clampArt"><path d="M190 207h88l21 18v20H183v-26Z" fill="url(#clamp)"/><path d="M183 235h116v10H183Z" fill="#183b42"/><path d="M191 207h87l13 10H190Z" fill="#6c8a89"/><rect x="225" y="177" width="13" height="41" rx="3" fill="#9bb3b1"/><path d="M207 178h50" stroke="#476a6e" stroke-width="9" stroke-linecap="round"/><circle cx="202" cy="227" r="4" fill="#adbfba"/><circle cx="279" cy="227" r="4" fill="#adbfba"/></g>
+     <text x="209" y="327" text-anchor="middle" class="label" fill="#6c4d32">压紧</text>
+     <g id="tipHandle" tabindex="0" role="slider" aria-label="上下拖动钢尺端点；也可按上下方向键调节，回车发声" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45" transform="translate(743 250)">
+      <circle r="40" fill="transparent"/>
+      <circle r="19" fill="#fff9ef" stroke="#d9782b" stroke-width="3"/>
+      <circle r="6" fill="#d9782b"/>
+      <path d="m-5-30 5-6 5 6m-10 60 5 6 5-6" fill="none" stroke="#bc773f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+     </g>
+     <g id="dragLabel"><path d="M715 356q32 11 30-58" fill="none" stroke="#b58b63" stroke-width="1.5" stroke-dasharray="4 4"/><text x="706" y="365" text-anchor="end" class="label">上下拖动，再松手</text></g>
+    </svg>
+    <div class="drag-hint" id="sceneHint">同一物体 · 同一长度 · 同一比例</div>
+   </div>
+   <div class="stage-bottom">
+    <div class="distance-row"><label for="ampSlider">拨动距离<span class="subtle">（相对）</span></label><input id="ampSlider" type="range" min="0" max="100" step="1" value="45"><output id="ampValue" for="ampSlider">45%</output></div>
+    <div class="play-controls"><button id="hearBtn" class="primary"><span class="ic"><svg><use href="#i-speaker"/></svg></span>原速听声音</button><button id="slowBtn" class="slow"><span class="ic"><svg><use href="#i-slow"/></svg></span>慢放看振动</button><button id="pauseBtn" class="icon" disabled aria-label="暂停画面" title="暂停画面"><svg><use id="pauseIcon" href="#i-pause"/></svg></button></div>
+    <div class="scrub-row"><span id="timelineLabel">原速 · 2秒</span><input id="timeSlider" aria-label="逐帧观察振动" type="range" min="0" max="2000" step="1" value="0" disabled><output id="timeValue">0.00 s</output></div>
+   </div>
+  </section>
+  <aside class="evidence" aria-label="保留两次钢尺振动对照">
+   <div class="evidence-heading"><h2>留下两次证据</h2><span class="subtle desktop-label">同一比例</span><div class="compact-compare" style="display:none"><button id="overlayCompact" disabled aria-pressed="false">叠加</button><button id="compareCompact" disabled>依次听</button></div></div>
+   <article id="modelCardA" class="sample"><div class="sample-top"><div class="sample-name">A <small>尺端运动</small></div><button id="saveA" disabled>保留这次</button></div><svg id="modelWaveA" class="mini-wave" viewBox="0 0 250 100" aria-label="A的尺端位移随时间变化示意"></svg><div class="sample-meta"><span id="modelMetaA">拨动一次，再保留</span><button id="playA" disabled aria-label="回听模型A">回听</button></div></article>
+   <article id="modelCardB" class="sample b"><div class="sample-top"><div class="sample-name">B <small>尺端运动</small></div><button id="saveB" disabled>保留这次</button></div><svg id="modelWaveB" class="mini-wave" viewBox="0 0 250 100" aria-label="B的尺端位移随时间变化示意"></svg><div class="sample-meta"><span id="modelMetaB">换个距离，再保留</span><button id="playB" disabled aria-label="回听模型B">回听</button></div></article>
+   <div class="evidence-actions"><button id="overlayBtn" disabled aria-pressed="false">叠加两次振动范围</button><button id="compareBtn" disabled>依次听 A → B</button></div>
+   <p class="think">两次<span id="questionFocus">声音与振动范围</span>，<br><b>哪里变了，哪里没变？</b></p>
+  </aside>
+ </div>
+</section>
+<section id="page-record" class="screen" role="tabpanel" aria-labelledby="tab-record" hidden>
+ <div class="record-layout">
+  <div class="record-head"><div><h2>把真实声音留下来</h2><p>用同一个物体发声两次，保持麦克风距离与设备音量不变。</p></div><span class="source-tag">麦克风采集</span></div>
+  <div class="record-cards">
+   <article class="record-card" id="recordCardA"><div class="record-card-head"><h3>A <span>第一次声音</span></h3><span class="record-state" id="recordStateA">等待录音</span></div><div class="record-wave"><svg id="recordWaveA" viewBox="0 0 520 250" preserveAspectRatio="none" aria-label="录音A的接收信号波形"></svg><div class="empty-record" id="recordEmptyA"><svg><use href="#i-mic"/></svg><span>看到“正在录音”后发声</span></div></div><div class="record-controls"><button id="recordA" class="primary"><span class="ic"><svg><use href="#i-mic"/></svg></span>录 A · 2秒</button><button id="listenA" disabled>回听 A</button></div><div class="record-metric" id="recordMetricA">接收信号 · 不是声源的位移</div></article>
+   <article class="record-card b" id="recordCardB"><div class="record-card-head"><h3>B <span>第二次声音</span></h3><span class="record-state" id="recordStateB">等待录音</span></div><div class="record-wave"><svg id="recordWaveB" viewBox="0 0 520 250" preserveAspectRatio="none" aria-label="录音B的接收信号波形"></svg><div class="empty-record" id="recordEmptyB"><svg><use href="#i-mic"/></svg><span>换一种力度，再录一次</span></div></div><div class="record-controls"><button id="recordB" class="primary"><span class="ic"><svg><use href="#i-mic"/></svg></span>录 B · 2秒</button><button id="listenB" disabled>回听 B</button></div><div class="record-metric" id="recordMetricB">接收信号 · 不是声源的位移</div></article>
+  </div>
+  <div class="record-bottom"><div class="gain-control"><label for="displayGain">两图统一放大</label><select id="displayGain"><option value="1">1 ×</option><option value="4">4 ×</option><option value="16" selected>16 ×</option><option value="64">64 ×</option></select></div><p class="record-note">只放大画面，不改变录音音量。两图坐标一致；波形不是分贝值。</p><button id="listenBoth" disabled>依次听 A → B</button></div>
+  <div id="micStatus" class="mic-status" role="status">录音仅在本机临时保存，离开或刷新后清空。请用正常音量，不要对着麦克风大喊。</div>
+ </div>
+</section>
+</main>
+<footer class="footer"><span><!-- AIHTML-COMPAT-GRADE:START --><span class="compat" title="T1 基础交互；声音另需Web Audio，录音另需麦克风授权">T1 基础交互</span><!-- AIHTML-COMPAT-GRADE:END --> <span aria-hidden="true">·</span> SVG / AUDIO</span><span id="footerNote">模型解释关系，真实实验提供证据。</span><button id="infoLink">使用说明</button></footer>
+</div>
+<div id="toast" class="toast" role="status" hidden></div>
+<div id="infoDialog" class="dialog-shade" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><div class="dialog-top"><h2 id="dialogTitle">怎么用，怎么看</h2><button id="closeInfo" class="icon" aria-label="关闭说明">✕</button></div><h3>看清同一把钢尺</h3><p>上下拖动橙色尺端后松手，或调节下方滑块后点“原速听声音”。分别保留 A、B，再叠加范围、回听比较。<span class="pill">慢放看振动</span> 将刚开始的 60 毫秒放慢 80 倍，慢放时不发声；可暂停、拖动进度逐帧观察。</p><h3>模型的边界</h3><p>钢尺图形是侧面放大示意，拨动距离采用相对刻度，不是毫米。模型固定长度、振动频率与衰减规律，只有起始位移改变；声音由固定音调合成，不是钢尺实录。范围用上下包络表示，A、B 的尺端轨迹均展示起始的 30 毫秒，比例相同。原速振动很快，用虚影表示；暂停后可以看到某一时刻的位置。模型不能用来独立证明预设规律。</p><h3>把真实实验的声音留下来</h3><p>点击“录 A”或“录 B”，授权后看到“正在录音”再发声。每次采集 2 秒。保持物体、敲击位置、距离与设备设置相同；图形是麦克风收到的信号，不是物体位移，也不是校准的分贝。浏览器或设备可能保留自动增益，跨设备的数值不能直接比较。</p><h3>运行条件</h3><p>第一页面的图形和模型可离线使用，声音需要浏览器支持 Web Audio。录音需要麦克风权限及安全页面，建议从发布的 HTTPS 地址打开；本地文件、内置浏览器或设备策略可能限制录音。页面不上传录音，不接入外部服务。全屏按钮由浏览器支持情况决定。</p><h3>教学依据</h3><p>依据项目提供的教科版《科学》四年级上册第三单元第 2 课，教材第 61—63 页及配套教师教学用书。未使用配套作业本题目。v1.0</p></section></div>
+<script>
+/* Same source, same length: amplitude alone is adjustable. Units are relative. */
+(function(root){
+  'use strict';
+  var F=196, D=2;
+  function clamp(a){return Math.max(0,Math.min(1,Number(a)||0));}
+  function envelope(a,t){return clamp(a)*Math.exp(-D*Math.max(0,t));}
+  function displacement(a,t){return envelope(a,t)*Math.cos(2*Math.PI*F*Math.max(0,t));}
+  function shape(u){u=Math.max(0,Math.min(1,u));return u*u*(3-u)/2;}
+  function samples(a,duration,n){var out=[];for(var i=0;i<n;i++)out.push(displacement(a,duration*i/(n-1)));return out;}
+  root.SoundModel={frequency:F,decay:D,duration:2,slowDuration:.06,slowFactor:80,clamp:clamp,envelope:envelope,displacement:displacement,shape:shape,samples:samples};
+}(typeof window!=='undefined'?window:globalThis));
+
+</script>
+<script>
+/* Sound-strength lesson audio. Standalone, no dependencies or network requests.
+   Actual microphone PCM is kept in memory only. Display/replay must use a shared
+   scale; this module never normalizes a recording or converts it to sound dB. */
+(function (global) {
+  'use strict';
+
+  var AudioCtor = global.AudioContext || global.webkitAudioContext;
+  var context = null;
+  var active = null;
+  var unitModelBuffer = null;
+  var workletSetup = null;
+  var disposed = false;
+  var MODEL = Object.freeze({ frequency: 196, decay: 2, duration: 2, maxGain: 0.14 });
+  var WORKLET_NAME = 'sound-strength-pcm-v1';
+
+  function error(name, message) {
+    var e;
+    try { e = new DOMException(message, name); }
+    catch (_) { e = new Error(message); e.name = name; }
+    return e;
+  }
+
+  function supported() {
+    var media = global.navigator && global.navigator.mediaDevices;
+    return {
+      audio: !!AudioCtor,
+      microphone: !!(AudioCtor && media && media.getUserMedia),
+      secureContext: global.isSecureContext !== false,
+      worklet: !!(global.AudioWorkletNode && AudioCtor &&
+        AudioCtor.prototype && 'audioWorklet' in AudioCtor.prototype)
+    };
+  }
+
+  function alive(op) { return active === op && !op.done && !disposed; }
+  function invoke(fn, value) { if (typeof fn === 'function') { try { fn(value); } catch (_) {} } }
+  function stopTracks(stream) {
+    if (!stream) return;
+    stream.getTracks().forEach(function (track) { try { track.stop(); } catch (_) {} });
+  }
+
+  function cleanup(op) {
+    op.timers.forEach(function (timer) { global.clearTimeout(timer); global.clearInterval(timer); });
+    op.timers = [];
+    if (op.track && op.trackEnded) {
+      try { op.track.removeEventListener('ended', op.trackEnded); } catch (_) {}
+    }
+    if (op.captureNode) {
+      op.captureNode.onaudioprocess = null;
+      op.captureNode.onprocessorerror = null;
+      if (op.captureNode.port) {
+        op.captureNode.port.onmessage = null;
+        try { op.captureNode.port.postMessage({ type: 'stop' }); } catch (_) {}
+        try { op.captureNode.port.close(); } catch (_) {}
+      }
+    }
+    if (op.playSource) {
+      op.playSource.onended = null;
+      try { op.playSource.stop(); } catch (_) {}
+    }
+    op.nodes.forEach(function (node) { try { node.disconnect(); } catch (_) {} });
+    op.nodes = [];
+    stopTracks(op.stream);
+    op.stream = null;
+    op.samples = null;
+  }
+
+  function settle(op, failure, result) {
+    if (op.done) return;
+    op.done = true;
+    cleanup(op);
+    if (active === op) active = null;
+    if (failure) op.reject(failure);
+    else op.resolve(result);
+  }
+
+  function stop() {
+    var op = active;
+    if (!op) return;
+    if (op.kind === 'recording') {
+      settle(op, error('AbortError', '录音已取消。'));
+    } else {
+      var position = op.offset || 0;
+      if (op.context && op.startedAt != null) {
+        position = Math.min(op.totalDuration, position + Math.max(0, op.context.currentTime - op.startedAt));
+      }
+      settle(op, null, { stopped: true, position: position });
+    }
+  }
+
+  function begin(kind) {
+    stop();
+    var op = { kind: kind, done: false, nodes: [], timers: [] };
+    op.promise = new Promise(function (resolve, reject) { op.resolve = resolve; op.reject = reject; });
+    active = op;
+    return op;
+  }
+
+  /* Called synchronously by the public action, before its first Promise turn,
+     so AudioContext creation/resume remains inside the user's gesture. */
+  function runningContext() {
+    if (disposed) throw error('InvalidStateError', '音频模块已关闭。');
+    if (!AudioCtor) throw error('NotSupportedError', '此浏览器不支持网页声音。');
+    if (!context || context.state === 'closed') {
+      try { context = new AudioCtor({ latencyHint: 'interactive' }); }
+      catch (_) { context = new AudioCtor(); }
+      unitModelBuffer = null;
+      workletSetup = null;
+    }
+    var current = context;
+    var resume = current.state === 'running' ? Promise.resolve() : current.resume();
+    return Promise.resolve(resume).then(function () {
+      if (current.state !== 'running') throw error('NotAllowedError', '声音尚未启用，请再次点击播放。');
+      return current;
+    });
+  }
+
+  function buildUnitModel(ctx) {
+    if (unitModelBuffer) return unitModelBuffer;
+    var count = Math.round(ctx.sampleRate * MODEL.duration);
+    var buffer = ctx.createBuffer(1, count, ctx.sampleRate);
+    var data = buffer.getChannelData(0);
+    // Fixed harmonic weights and fixed gain: no per-event peak normalization.
+    var factor = MODEL.maxGain / 1.32;
+    for (var i = 0; i < count; i++) {
+      var t = i / ctx.sampleRate;
+      var phase = 2 * Math.PI * MODEL.frequency * t;
+      var attack = Math.min(1, t / 0.003);
+      var release = Math.min(1, (MODEL.duration - t) / 0.01);
+      data[i] = factor * Math.exp(-MODEL.decay * t) * attack * release *
+        (Math.sin(phase) + 0.24 * Math.sin(2 * phase) + 0.08 * Math.sin(3 * phase));
+    }
+    unitModelBuffer = buffer;
+    return buffer;
+  }
+
+  function playBuffer(kind, makeBuffer, amplitude, options) {
+    var op = begin(kind);
+    options = options || {};
+    try {
+      var ready = runningContext();
+      op.timers.push(global.setTimeout(function () {
+        if (alive(op)) settle(op, error('NotAllowedError', '声音未能开始播放，请再次点击。'));
+      }, 10000));
+      ready.then(function (ctx) {
+        if (!alive(op)) return;
+        op.timers.forEach(function (timer) { global.clearTimeout(timer); });
+        op.timers = [];
+        var buffer = makeBuffer(ctx);
+        var offset = Number(options.offset) || 0;
+        offset = Math.max(0, Math.min(buffer.duration, offset));
+        op.context = ctx;
+        op.offset = offset;
+        op.totalDuration = buffer.duration;
+        if (offset >= buffer.duration) {
+          settle(op, null, { stopped: false, position: buffer.duration });
+          return;
+        }
+        var source = ctx.createBufferSource();
+        var gain = ctx.createGain();
+        source.buffer = buffer;
+        source.playbackRate.value = 1;
+        var start = ctx.currentTime;
+        gain.gain.setValueAtTime(amplitude, start);
+        // Real recordings retain original PCM amplitude. A common edge fade
+        // prevents clicks on recording replay and when resuming a model event.
+        if (kind === 'record-playback' || offset > 0) {
+          var remaining = buffer.duration - offset;
+          var fadeIn = Math.min(0.004, remaining / 3);
+          var fadeOut = Math.min(0.01, remaining / 3);
+          gain.gain.setValueAtTime(0, start);
+          gain.gain.linearRampToValueAtTime(amplitude, start + fadeIn);
+          gain.gain.setValueAtTime(amplitude, start + remaining - fadeOut);
+          gain.gain.linearRampToValueAtTime(0, start + remaining);
+        }
+        source.connect(gain);
+        gain.connect(ctx.destination);
+        op.playSource = source;
+        op.nodes.push(source, gain);
+        op.startedAt = start;
+        source.onended = function () {
+          if (alive(op)) settle(op, null, { stopped: false, position: buffer.duration });
+        };
+        source.start(start, offset);
+        invoke(options.onStart, { contextTime: start, offset: offset, duration: buffer.duration - offset, totalDuration: buffer.duration });
+        if (alive(op) && typeof options.onProgress === 'function') {
+          op.timers.push(global.setInterval(function () {
+            if (alive(op)) invoke(options.onProgress, Math.min(1, (offset + ctx.currentTime - start) / buffer.duration));
+          }, 40));
+        }
+      }).catch(function (e) { if (alive(op)) settle(op, e); });
+    } catch (e) { settle(op, e); }
+    return op.promise;
+  }
+
+  function playModel(amplitude, options) {
+    amplitude = Number(amplitude);
+    if (!isFinite(amplitude)) return Promise.reject(error('TypeError', '声音幅值必须是数值。'));
+    amplitude = Math.max(0, Math.min(1, amplitude));
+    return playBuffer('model-playback', buildUnitModel, amplitude, options);
+  }
+
+  function playRecord(recording, options) {
+    if (!recording || !recording.samples || !recording.samples.length ||
+        !isFinite(recording.sampleRate) || recording.sampleRate < 8000 || recording.sampleRate > 384000) {
+      return Promise.reject(error('DataError', '没有可回听的录音。'));
+    }
+    return playBuffer('record-playback', function (ctx) {
+      var buffer = ctx.createBuffer(1, recording.samples.length, recording.sampleRate);
+      buffer.getChannelData(0).set(recording.samples);
+      return buffer;
+    }, 1, options);
+  }
+
+  /* The worklet outputs silence. Only PCM and exact captured-frame counts are
+     passed back; a muted sink additionally prevents microphone monitoring. */
+  var WORKLET_SOURCE =
+    "class SoundStrengthPCM extends AudioWorkletProcessor {\n" +
+    " constructor(options) { super(); this.limit=options.processorOptions.frames; this.data=new Float32Array(this.limit); this.count=0; this.sent=0; this.stopped=false; this.port.onmessage=(event)=>{if(event.data.type==='stop')this.stopped=true;}; }\n" +
+    " process(inputs,outputs) { for(const output of outputs)for(const channel of output)channel.fill(0); if(this.stopped)return false; const input=inputs[0]&&inputs[0][0]; if(!input||!input.length)return true; const n=Math.min(input.length,this.limit-this.count); this.data.set(input.subarray(0,n),this.count); this.count+=n; if(this.count>=this.limit){this.stopped=true;this.port.postMessage({type:'complete',buffer:this.data.buffer},[this.data.buffer]);this.data=null;return false;} if(this.count-this.sent>=2048){this.sent=this.count;this.port.postMessage({type:'progress',frames:this.count});} return true; }\n" +
+    "}\nregisterProcessor('" + WORKLET_NAME + "',SoundStrengthPCM);";
+
+  function loadWorklet(ctx) {
+    if (!ctx.audioWorklet || !global.AudioWorkletNode || !global.Blob || !global.URL || !global.URL.createObjectURL) {
+      return Promise.resolve(false);
+    }
+    if (workletSetup) return workletSetup;
+    var url;
+    try {
+      url = global.URL.createObjectURL(new Blob([WORKLET_SOURCE], { type: 'text/javascript' }));
+      workletSetup = ctx.audioWorklet.addModule(url).then(function () {
+        global.URL.revokeObjectURL(url);
+        return true;
+      }, function () {
+        global.URL.revokeObjectURL(url);
+        return false; // Restricted Blob worklets / older browser: PCM fallback.
+      });
+    } catch (_) {
+      if (url) global.URL.revokeObjectURL(url);
+      workletSetup = Promise.resolve(false);
+    }
+    return workletSetup;
+  }
+
+  function analyse(samples, sampleRate, settings, method) {
+    var peak = 0, squareSum = 0, peakIndex = 0;
+    for (var i = 0; i < samples.length; i++) {
+      var value = samples[i];
+      if (!isFinite(value)) throw error('DataError', '录音包含无效数据，请重新录制。');
+      var absolute = Math.abs(value);
+      if (absolute > peak) { peak = absolute; peakIndex = i; }
+      squareSum += value * value;
+    }
+    var bins = 256, envelope = [];
+    for (var b = 0; b < bins; b++) {
+      var beginIndex = Math.floor(b * samples.length / bins);
+      var endIndex = Math.max(beginIndex + 1, Math.floor((b + 1) * samples.length / bins));
+      var minimum = Infinity, maximum = -Infinity;
+      for (var s = beginIndex; s < endIndex && s < samples.length; s++) {
+        minimum = Math.min(minimum, samples[s]);
+        maximum = Math.max(maximum, samples[s]);
+      }
+      envelope.push({ min: isFinite(minimum) ? minimum : 0, max: isFinite(maximum) ? maximum : 0 });
+    }
+    var count = Math.min(samples.length, Math.round(sampleRate * 0.012));
+    var first = 0, threshold = Math.max(0.001, peak * 0.1);
+    while (first < samples.length && Math.abs(samples[first]) < threshold) first++;
+    if (first === samples.length) first = Math.max(0, peakIndex - Math.floor(count / 3));
+    first = Math.max(0, Math.min(first, samples.length - count));
+    var waveform = Array.prototype.slice.call(samples.subarray(first, first + count));
+    return {
+      samples: samples,
+      sampleRate: sampleRate,
+      duration: samples.length / sampleRate,
+      peak: peak,
+      rms: Math.sqrt(squareSum / samples.length),
+      constraints: settings,
+      envelope: envelope,
+      waveform: waveform,
+      waveformStart: first / sampleRate,
+      waveformDuration: count / sampleRate,
+      clipped: peak >= 0.995,
+      captureMethod: method
+    };
+  }
+
+  function connectCapture(op, ctx, useWorklet, frames, onProgress) {
+    if (!alive(op)) return;
+    var source = ctx.createMediaStreamSource(op.stream);
+    var sink = ctx.createGain();
+    sink.gain.value = 0;
+    op.nodes.push(source, sink);
+    var captured = 0;
+    function progress(frameCount) {
+      if (!alive(op)) return;
+      invoke(onProgress, Math.min(1, frameCount / frames));
+    }
+    function complete(samples) {
+      if (!alive(op)) return;
+      // Close the device before calculations and UI updates.
+      stopTracks(op.stream);
+      progress(frames);
+      try { settle(op, null, analyse(samples, ctx.sampleRate, op.settings, op.captureMethod)); }
+      catch (e) { settle(op, e); }
+    }
+    var node;
+    if (useWorklet) {
+      try {
+        node = new global.AudioWorkletNode(ctx, WORKLET_NAME, {
+          numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1],
+          channelCount: 1, channelCountMode: 'explicit', processorOptions: { frames: frames }
+        });
+        op.captureMethod = 'audio-worklet';
+        node.port.onmessage = function (event) {
+          if (!alive(op)) return;
+          if (event.data.type === 'progress') progress(event.data.frames);
+          if (event.data.type === 'complete') complete(new Float32Array(event.data.buffer));
+        };
+        node.onprocessorerror = function () {
+          if (alive(op)) settle(op, error('NotReadableError', '录音处理已中断，请重新录制。'));
+        };
+      } catch (_) { node = null; }
+    }
+    if (!node) {
+      if (!ctx.createScriptProcessor) throw error('NotSupportedError', '此浏览器无法采集音频波形。');
+      node = ctx.createScriptProcessor(2048, 1, 1);
+      op.captureMethod = 'script-processor';
+      op.samples = new Float32Array(frames);
+      node.onaudioprocess = function (event) {
+        for (var c = 0; c < event.outputBuffer.numberOfChannels; c++) event.outputBuffer.getChannelData(c).fill(0);
+        if (!alive(op)) return;
+        var input = event.inputBuffer.getChannelData(0);
+        var take = Math.min(input.length, frames - captured);
+        op.samples.set(input.subarray(0, take), captured);
+        captured += take;
+        if (captured >= frames) complete(op.samples);
+        else progress(captured);
+      };
+    }
+    op.captureNode = node;
+    op.nodes.push(node);
+    op.timers.forEach(function (timer) { global.clearTimeout(timer); });
+    op.timers = [];
+    op.timers.push(global.setTimeout(function () {
+      if (alive(op)) settle(op, error('NotReadableError', '没有收到完整录音，请保持页面在前台并检查麦克风。'));
+    }, frames / ctx.sampleRate * 1000 + 8000));
+    source.connect(node);
+    node.connect(sink);
+    sink.connect(ctx.destination);
+  }
+
+  function record(seconds, onProgress) {
+    seconds = seconds == null ? 2 : Number(seconds);
+    if (!isFinite(seconds) || seconds < 0.25 || seconds > 10) {
+      return Promise.reject(error('RangeError', '录音时长须在0.25至10秒之间。'));
+    }
+    var op = begin('recording');
+    try {
+      if (!supported().microphone) throw error('NotSupportedError', '此环境无法使用麦克风，请在支持录音的浏览器中打开HTTPS网页。');
+      var ready = runningContext();
+      // A synchronous getUserMedia failure must not leave resume() unobserved.
+      ready.catch(function () {});
+      op.timers.push(global.setTimeout(function () {
+        if (alive(op)) settle(op, error('TimeoutError', '等待麦克风超时，请允许权限后重新点击录音。'));
+      }, 30000));
+      // Plain false is a best-effort request. Actual settings are returned,
+      // including undefined/unreported values; hardware processing may remain.
+      var permission = global.navigator.mediaDevices.getUserMedia({
+        audio: { channelCount: 1, autoGainControl: false, noiseSuppression: false, echoCancellation: false },
+        video: false
+      }).then(function (stream) {
+        // getUserMedia is not abortable. Stop any stream granted after cancel,
+        // timeout, page hiding, or a newer recording action.
+        if (!alive(op)) { stopTracks(stream); return null; }
+        op.stream = stream;
+        op.track = stream.getAudioTracks()[0];
+        if (!op.track) throw error('NotFoundError', '没有找到可用的麦克风。');
+        op.settings = op.track.getSettings ? op.track.getSettings() : {};
+        op.trackEnded = function () {
+          if (alive(op)) settle(op, error('NotReadableError', '麦克风已断开，请重新录制。'));
+        };
+        op.track.addEventListener('ended', op.trackEnded);
+        return stream;
+      });
+      Promise.all([ready, permission]).then(function (results) {
+        if (!alive(op)) return;
+        var ctx = results[0];
+        return loadWorklet(ctx).then(function (workletAvailable) {
+          if (alive(op)) connectCapture(op, ctx, workletAvailable, Math.round(ctx.sampleRate * seconds), onProgress);
+        });
+      }).catch(function (e) { if (alive(op)) settle(op, e); });
+    } catch (e) { settle(op, e); }
+    return op.promise;
+  }
+
+  function dispose() {
+    stop();
+    disposed = true;
+    var old = context;
+    context = null;
+    unitModelBuffer = null;
+    workletSetup = null;
+    if (old && old.state !== 'closed') {
+      try { return Promise.resolve(old.close()).catch(function () {}); } catch (_) {}
+    }
+    return Promise.resolve();
+  }
+
+  global.addEventListener('pagehide', stop);
+  if (global.document) global.document.addEventListener('visibilitychange', function () {
+    if (global.document.hidden) stop();
+  });
+  global.SoundAudio = {
+    supported: supported, playModel: playModel, stop: stop, record: record,
+    playRecord: playRecord, dispose: dispose, MODEL: MODEL,
+    state: function () { return active ? active.kind : 'idle'; }
+  };
+})(window);
+
+</script>
+<script>
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id);};
+  var M=window.SoundModel, Audio=window.SoundAudio;
+  var C={a:'#087d84',b:'#d9782b',maxDeflection:136};
+  var S={page:'model',amp:.45,sign:1,last:null,slots:{A:null,B:null},showRange:false,overlay:false,mode:'idle',time:0,playing:false,frame:0,lastClock:0,token:0,drag:false,records:{A:null,B:null},busy:null,listening:null,sequence:null,gain:16};
+  var toastTimer=0,previousFocus=null;
+  function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3600);}
+  function fmt(n,p){return Number(n).toFixed(p===undefined?2:p);}
+  function svgPath(values,x,y,w,h){var out='';for(var i=0;i<values.length;i++)out+=(i?'L':'M')+fmt(x+w*i/(values.length-1),1)+' '+fmt(y-values[i]*h,1);return out;}
+  function rulerPath(deflection){var p='M100 250L308 250';for(var i=1;i<=32;i++){var u=i/32;p+='L'+fmt(308+435*u,1)+' '+fmt(250+deflection*M.shape(u),1);}return p;}
+  function cancelOperation(){S.token++;S.playing=false;S.lastClock=0;cancelAnimationFrame(S.frame);S.frame=0;Audio.stop();S.listening=null;S.sequence=null;if(S.busy){var cancelled=S.busy;S.busy=null;renderRecord(cancelled);micStatus('录音已取消。已有记录保留。');}renderRecordingControls();renderSaved();}
+  function setAmp(value){S.amp=M.clamp(value);$('ampSlider').value=Math.round(S.amp*100);$('ampValue').textContent=Math.round(S.amp*100)+'%';$('tipHandle').setAttribute('aria-valuenow',Math.round(S.amp*100));}
+  function sceneDisplacement(){if(S.drag||S.mode==='ready')return S.sign*S.amp*C.maxDeflection;if(S.mode==='idle')return 0;if(S.mode==='normal'&&S.playing)return 0;if(S.time>=M.duration)return 0;return S.sign*M.displacement(S.amp,S.time)*C.maxDeflection;}
+  function renderScene(){
+    var d=sceneDisplacement(),p=rulerPath(d),env=M.envelope(S.amp,S.time)*C.maxDeflection;
+    $('rulerOutline').setAttribute('d',p);$('rulerBody').setAttribute('d',p);$('tipHandle').setAttribute('transform','translate(743 '+fmt(250+d,1)+')');
+    var ticks='';for(var j=0;j<19;j++){var u=j/18,x=308+435*u,y=250+d*M.shape(u),len=j%3===0?10:6;ticks+='<path d="M'+fmt(x,1)+' '+fmt(y-2,1)+'v'+len+'" stroke="#516d77" stroke-width="1.2"/>';}
+    $('rulerTicks').innerHTML=ticks;
+    var blur='';if(S.mode==='normal'&&S.playing&&env>2){for(var b=-3;b<=3;b++){if(!b)continue;blur+='<path d="'+rulerPath(env*b/3)+'" fill="none" stroke="#70949a" stroke-width="6" opacity="'+(.6-Math.abs(b)*.11)+'"/>';}}
+    $('blurRuler').innerHTML=blur;
+    var range='';if(S.showRange&&S.amp>0){var amp=S.amp*C.maxDeflection;range='<path d="'+rulerPath(-amp)+'" fill="none" stroke="#087d84" stroke-width="2" stroke-dasharray="6 6" opacity=".65"/><path d="'+rulerPath(amp)+'" fill="none" stroke="#087d84" stroke-width="2" stroke-dasharray="6 6" opacity=".65"/><path d="M787 '+fmt(250-amp,1)+'V'+fmt(250+amp,1)+'" stroke="#087d84" stroke-width="2" marker-start="url(#arrowT)" marker-end="url(#arrowT)"/><text x="812" y="'+fmt(250-amp-18,1)+'" font-size="19" text-anchor="end" fill="#087d84">上下摆动的范围</text>';}
+    $('rangeOverlay').innerHTML=range;
+    var ghosts='';if(S.overlay){['A','B'].forEach(function(k,i){var r=S.slots[k];if(!r)return;var a=r.amp*C.maxDeflection,color=i?C.b:C.a,x=i?846:824;ghosts+='<path d="'+rulerPath(-a)+'" fill="none" stroke="'+color+'" stroke-width="2.6" stroke-dasharray="'+(i?'3 5':'10 5')+'"/><path d="'+rulerPath(a)+'" fill="none" stroke="'+color+'" stroke-width="2.6" stroke-dasharray="'+(i?'3 5':'10 5')+'"/><path d="M'+x+' '+fmt(250-a)+'V'+fmt(250+a)+'" stroke="'+color+'" stroke-width="2"/><path d="M'+(x-5)+' '+fmt(250-a)+'h10m-10 '+fmt(2*a)+'h10" stroke="'+color+'" stroke-width="2"/><text x="'+x+'" y="'+fmt(250-a-12)+'" fill="'+color+'" font-size="21" text-anchor="middle" font-weight="700">'+k+'</text>';});}
+    $('ghostRanges').innerHTML=ghosts;
+    $('dragLabel').style.display=(!S.last&&!S.drag&&S.mode==='idle')?'':'none';
+    var modeText='侧面放大 · 拖动尺端后松手';if(S.drag)modeText='松手发声 · 长度保持不变';else if(S.mode==='ready')modeText='距离已调整 · 点原速听或慢放看';else if(S.mode==='normal')modeText=S.playing?'原速发声 · 快速振动用虚影表示':(S.time>=2?'声音渐弱 · 可以重播或慢放':'已暂停 · 此刻位置');else if(S.mode==='slow')modeText=S.playing?'慢放 80 倍 · 画面不发声':'慢放 80 倍 · 拖动进度逐帧看';if(S.last&&S.amp===0&&S.mode!=='ready')modeText='没有拨动 · 钢尺保持静止';$('modeText').textContent=modeText;
+    $('sceneHint').textContent=S.overlay?'A、B 的起始范围 · 同一比例':(S.showRange?'起始振动范围示意 · 非实测尺寸':'同一物体 · 同一长度 · 同一比例');
+    $('rangeBtn').setAttribute('aria-pressed',String(S.showRange));$('rangeBtn').textContent=S.showRange?'隐藏振动范围':'显出振动范围';
+    var slow=S.mode==='slow',limit=slow?M.slowDuration:M.duration;
+    $('timeSlider').max=Math.round(limit*1000);$('timeSlider').step=slow?.05:1;$('timeSlider').value=Math.round(S.time*1000*20)/20;$('timeSlider').disabled=!S.last||S.mode==='ready'||S.drag;
+    $('timelineLabel').textContent=slow?'慢放 · 前60毫秒':'原速 · 2秒';$('timeValue').textContent=slow?fmt(S.time*1000,1)+' ms':fmt(S.time)+' s';
+    $('pauseBtn').disabled=!S.last||S.amp===0||S.mode==='idle'||S.mode==='ready'||S.time>=limit;$('pauseIcon').setAttribute('href',S.playing?'#i-pause':'#i-play');$('pauseBtn').setAttribute('aria-label',S.playing?'暂停画面与声音':'继续播放');
+    $('slowBtn').setAttribute('aria-pressed',String(slow));
+  }
+  function renderSaved(){
+    ['A','B'].forEach(function(k,i){var r=S.slots[k],color=i?C.b:C.a,svg=$('modelWave'+k),base='<path d="M10 50H240" stroke="#9cb2ab" stroke-width="1" stroke-dasharray="4 5"/>';if(r){var v=M.samples(r.amp,.03,300).map(function(n){return n*r.sign;});base+='<path d="'+svgPath(v,10,50,230,37)+'" fill="none" stroke="'+color+'" stroke-width="2.4" stroke-linejoin="round"/><text x="240" y="96" text-anchor="end" font-size="9" fill="#72857d">相同的 30 ms</text>';}else{base+='<text x="125" y="54" text-anchor="middle" font-size="12" fill="#94a59f">尚未保留</text>';}
+      svg.innerHTML=base;$('modelMeta'+k).textContent=r?'拨动距离 '+Math.round(r.amp*100)+'%':(i?'换个距离，再保留':'拨动一次，再保留');$('save'+k).textContent=S.mode==='ready'?'播放后再保留':(r?'替换这次':'保留这次');$('save'+k).disabled=!S.last||S.mode==='ready'||S.drag;$('play'+k).disabled=!r;$('modelCard'+k).classList.toggle('playing',S.listening==='model'+k);
+    });
+    var both=!!(S.slots.A&&S.slots.B);['overlayBtn','overlayCompact'].forEach(function(id){$(id).disabled=!both;$(id).setAttribute('aria-pressed',String(S.overlay));});['compareBtn','compareCompact'].forEach(function(id){$(id).disabled=!both;$(id).textContent=S.sequence==='model'?'停止回听':(id==='compareCompact'?'依次听':'依次听 A → B');});
+  }
+  function tick(clock){if(!S.playing)return;if(!S.lastClock)S.lastClock=clock;var dt=Math.max(0,(clock-S.lastClock)/1000);S.lastClock=clock;S.time+=dt/(S.mode==='slow'?M.slowFactor:1);var limit=S.mode==='slow'?M.slowDuration:M.duration;if(S.time>=limit){S.time=limit;S.playing=false;}renderScene();if(S.playing)S.frame=requestAnimationFrame(tick);}
+  function begin(mode,amp,sign,withoutCancel){
+    if(!withoutCancel)cancelOperation();setAmp(amp===undefined?S.amp:amp);S.sign=sign||S.sign||1;S.last={amp:S.amp,sign:S.sign};S.mode=mode;S.time=0;S.playing=S.amp>0;S.lastClock=0;renderSaved();renderScene();
+    if(S.playing){
+      if(mode==='normal'){
+        var token=S.token;
+        return Audio.playModel(S.amp,{onStart:function(){if(token!==S.token)return;S.lastClock=0;S.frame=requestAnimationFrame(tick);}}).then(function(result){if(token===S.token&&!result.stopped){S.time=M.duration;S.playing=false;cancelAnimationFrame(S.frame);renderScene();}return result;}).catch(function(e){if(token===S.token){audioError(e);S.lastClock=0;S.frame=requestAnimationFrame(tick);}return {unavailable:true};});
+      }
+      S.frame=requestAnimationFrame(tick);
+    }else toast('没有拨动，模型不会发声。');
+    return Promise.resolve({silent:!S.playing});
+  }
+  function audioError(e){if(e&&e.name==='AbortError')return;toast('声音未能播放；请检查浏览器声音权限与设备音量。');}
+  function save(k){if(!S.last||S.mode==='ready'||S.drag)return;S.slots[k]={amp:S.last.amp,sign:S.last.sign};renderSaved();renderScene();toast('已保留 '+k+'；可以改变距离，再保留另一次。');}
+  function toggleOverlay(){S.overlay=!S.overlay;if(S.overlay)S.showRange=false;renderSaved();renderScene();}
+  async function compareModel(single){
+    if(!single&&S.sequence==='model'){cancelOperation();renderScene();return;}
+    cancelOperation();var token=S.token;S.sequence=single?null:'model';var ks=single?[single]:['A','B'];
+    for(var i=0;i<ks.length;i++){if(token!==S.token)return;var k=ks[i],r=S.slots[k];if(!r)continue;S.listening='model'+k;var playing=begin('normal',r.amp,r.sign,true);renderSaved();
+      await playing;if(token!==S.token)return;S.listening=null;renderSaved();if(i<ks.length-1)await new Promise(function(resolve){setTimeout(resolve,350);});}
+    if(token===S.token){S.sequence=null;renderSaved();}
+  }
+  function pause(){if(!S.last)return;if(S.playing){S.playing=false;cancelAnimationFrame(S.frame);Audio.stop();S.token++;S.sequence=null;S.listening=null;renderSaved();}else{S.playing=true;S.lastClock=0;if(S.mode==='normal')Audio.playModel(S.amp,{offset:S.time}).catch(audioError);S.frame=requestAnimationFrame(tick);}renderScene();}
+  function point(ev){var p=$('scene').createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;var mat=$('scene').getScreenCTM();return mat?p.matrixTransform(mat.inverse()):{x:743,y:250};}
+  function dragUpdate(ev){var p=point(ev),v=Math.max(-1,Math.min(1,(p.y-250)/C.maxDeflection));S.sign=v<0?-1:1;setAmp(Math.abs(v));renderScene();}
+  var handle=$('tipHandle');
+  if(window.PointerEvent){handle.addEventListener('pointerdown',function(e){if(e.button!==undefined&&e.button!==0)return;cancelOperation();S.drag=true;S.mode='ready';S.time=0;renderSaved();handle.setPointerCapture(e.pointerId);dragUpdate(e);e.preventDefault();});handle.addEventListener('pointermove',function(e){if(S.drag){dragUpdate(e);e.preventDefault();}});handle.addEventListener('pointerup',function(e){if(!S.drag)return;dragUpdate(e);S.drag=false;try{handle.releasePointerCapture(e.pointerId);}catch(_){}begin('normal');});handle.addEventListener('pointercancel',function(){S.drag=false;S.mode='ready';renderScene();});}
+  else{handle.addEventListener('mousedown',function(e){cancelOperation();S.drag=true;S.mode='ready';renderSaved();dragUpdate(e);e.preventDefault();});window.addEventListener('mousemove',function(e){if(S.drag)dragUpdate(e);});window.addEventListener('mouseup',function(){if(S.drag){S.drag=false;begin('normal');}});handle.addEventListener('touchstart',function(e){cancelOperation();S.drag=true;S.mode='ready';renderSaved();dragUpdate(e.touches[0]);e.preventDefault();},{passive:false});handle.addEventListener('touchmove',function(e){if(S.drag)dragUpdate(e.touches[0]);e.preventDefault();},{passive:false});handle.addEventListener('touchend',function(e){if(S.drag){S.drag=false;begin('normal');}e.preventDefault();},{passive:false});handle.addEventListener('touchcancel',function(){S.drag=false;S.mode='ready';renderScene();});}
+  handle.addEventListener('keydown',function(e){if(e.key==='ArrowUp'||e.key==='ArrowDown'){cancelOperation();S.mode='ready';S.sign=1;renderSaved();setAmp(S.amp+(e.key==='ArrowDown'?.05:-.05));renderScene();e.preventDefault();}else if(e.key==='Enter'||e.key===' '){begin('normal');e.preventDefault();}});
+  $('ampSlider').addEventListener('input',function(){cancelOperation();S.mode='ready';S.time=0;S.sign=1;renderSaved();setAmp(Number(this.value)/100);renderScene();});
+  $('hearBtn').onclick=function(){begin('normal');};$('slowBtn').onclick=function(){begin('slow');};$('pauseBtn').onclick=pause;
+  $('rangeBtn').onclick=function(){S.showRange=!S.showRange;if(S.showRange)S.overlay=false;renderScene();renderSaved();};
+  $('timeSlider').addEventListener('input',function(){cancelOperation();if(S.mode!=='slow'&&S.mode!=='normal')S.mode='normal';S.amp=S.last.amp;S.sign=S.last.sign;setAmp(S.amp);S.time=Number(this.value)/1000;renderScene();});
+  ['A','B'].forEach(function(k){$('save'+k).onclick=function(){save(k);};$('play'+k).onclick=function(){compareModel(k);};});
+  $('overlayBtn').onclick=$('overlayCompact').onclick=toggleOverlay;$('compareBtn').onclick=$('compareCompact').onclick=function(){compareModel();};
+  function micStatus(message,cls){$('micStatus').textContent=message;$('micStatus').className='mic-status'+(cls?' '+cls:'');}
+  function renderRecordingControls(){['A','B'].forEach(function(k){var isBusy=S.busy===k,isListening=S.listening==='mic'+k;$('record'+k).disabled=!!S.busy&&!isBusy;$('record'+k).textContent=isBusy?'取消录音':(S.records[k]?'重录 '+k+' · 2秒':'录 '+k+' · 2秒');$('listen'+k).disabled=!S.records[k]||!!S.busy;$('listen'+k).textContent=isListening?'停止回听':'回听 '+k;$('recordCard'+k).classList.toggle('recording',isBusy);if(!isBusy)$('recordState'+k).textContent=isListening?'正在回听':(S.records[k]?'已录 '+fmt(S.records[k].duration)+'秒':'等待录音');});$('listenBoth').disabled=!(S.records.A&&S.records.B)||!!S.busy;$('listenBoth').textContent=S.sequence==='mic'?'停止回听':'依次听 A → B';}
+  function graphGeometry(k){var svg=$('recordWave'+k),w=svg.clientWidth||520,h=svg.clientHeight||250,compact=h<100,top=compact?15:24,bottom=compact?15:26;svg.setAttribute('viewBox','0 0 '+w+' '+h);return {x:42,w:Math.max(30,w-54),top:top,bottom:h-bottom,mid:(top+h-bottom)/2,half:Math.max(3,(h-bottom-top)/2),h:h,font:compact?9:11};}
+  function waveformGrid(k){var g=graphGeometry(k),top=1/S.gain,x=g.x,end=x+g.w,mid=x+g.w/2;return '<path d="M'+x+' '+g.top+'H'+end+'M'+x+' '+g.mid+'H'+end+'M'+x+' '+g.bottom+'H'+end+'M'+x+' '+g.top+'V'+g.bottom+'M'+mid+' '+g.top+'V'+g.bottom+'M'+end+' '+g.top+'V'+g.bottom+'" fill="none" stroke="#b8c9c3" stroke-width="1" stroke-dasharray="4 5"/><g fill="#70877f" font-size="'+g.font+'"><text x="36" y="'+(g.top+3)+'" text-anchor="end">'+fmt(top,top<.1?3:2)+'</text><text x="36" y="'+(g.mid+3)+'" text-anchor="end">0</text><text x="36" y="'+(g.bottom+3)+'" text-anchor="end">−'+fmt(top,top<.1?3:2)+'</text><text x="'+x+'" y="'+(g.h-3)+'">0</text><text x="'+mid+'" y="'+(g.h-3)+'" text-anchor="middle">1</text><text x="'+end+'" y="'+(g.h-3)+'" text-anchor="end">2 秒</text><text x="'+x+'" y="'+(g.font+1)+'">接收信号（相对）</text></g>';}
+  function renderRecord(k){var r=S.records[k],color=k==='A'?C.a:C.b,svg=$('recordWave'+k),base=waveformGrid(k),g=graphGeometry(k);$('recordEmpty'+k).hidden=!!r||S.busy===k;
+    if(r){var env=r.envelope,upper='',lower='',cut=false;for(var i=0;i<env.length;i++){var x=g.x+i/(env.length-1)*g.w,hi=env[i].max*S.gain,lo=env[i].min*S.gain;if(Math.abs(hi)>1||Math.abs(lo)>1)cut=true;upper+=(i?'L':'M')+fmt(x,1)+' '+fmt(g.mid-Math.max(-1,Math.min(1,hi))*g.half,1);var j=env.length-1-i,x2=g.x+j/(env.length-1)*g.w;lower+='L'+fmt(x2,1)+' '+fmt(g.mid-Math.max(-1,Math.min(1,env[j].min*S.gain))*g.half,1);}base+='<path d="'+upper+lower+'Z" fill="'+color+'" fill-opacity=".34" stroke="'+color+'" stroke-width="1.2"/>';$('recordMetric'+k).textContent=r.clipped?'录音有削波：请调整音量后重录两次':(cut?'画面超出刻度：请减小“两图统一放大”':'原始录音 · 两图使用相同刻度');}
+    else $('recordMetric'+k).textContent='接收信号 · 不是声源的位移';svg.innerHTML=base;
+  }
+  function micError(e){var name=e&&e.name;var msg=name==='NotAllowedError'?'未获得麦克风权限。请在浏览器地址栏允许麦克风，再重试。':name==='NotFoundError'?'没有找到麦克风。连接麦克风后再试，或继续使用看清振动页面。':name==='NotReadableError'?'麦克风可能被其他应用占用。关闭占用后重试。':name==='SecurityError'?'浏览器限制了录音。请从发布的 HTTPS 页面用系统浏览器打开。':name==='TimeoutError'?'录音没有开始。请检查麦克风权限与设备，再重试。':'录音未能完成。请检查麦克风，并尝试从 HTTPS 页面用系统浏览器打开。';micStatus(msg,'error');}
+  async function record(k){
+    if(S.busy===k){cancelOperation();renderRecord(k);return;}
+    var support=Audio.supported();if(!support.microphone){micStatus(support.secureContext?'此浏览器不支持麦克风采集。可换系统浏览器；看清振动页面仍可使用。':'录音需要安全页面，请打开发布的 HTTPS 地址；模型页面可以离线使用。','error');return;}
+    cancelOperation();var token=S.token;S.busy=k;renderRecordingControls();renderRecord(k);$('recordState'+k).textContent='等待授权…';micStatus('请允许麦克风。出现“正在录音”后再发声。','live');var started=false;
+    try{var r=await Audio.record(2,function(progress){if(token!==S.token)return;if(!started){started=true;micStatus('正在录音 '+k+' · 请现在发声，保持距离不变。','live');}var p=Math.max(0,Math.min(1,progress));$('recordState'+k).textContent='正在录音 '+fmt((1-p)*2,1)+'秒';var g=graphGeometry(k);$('recordWave'+k).innerHTML=waveformGrid(k)+'<rect x="'+g.x+'" y="'+g.top+'" width="'+fmt(g.w*p,1)+'" height="'+(g.bottom-g.top)+'" fill="'+(k==='A'?C.a:C.b)+'" fill-opacity=".06"/><line x1="'+fmt(g.x+g.w*p,1)+'" x2="'+fmt(g.x+g.w*p,1)+'" y1="'+g.top+'" y2="'+g.bottom+'" stroke="'+(k==='A'?C.a:C.b)+'" stroke-width="2"/>';});
+      if(token!==S.token)return;S.records[k]=r;S.busy=null;renderRecord(k);renderRecordingControls();var settings=r.constraints||{},processed=settings.autoGainControl===true||settings.noiseSuppression===true||settings.echoCancellation===true;var uncertain=settings.autoGainControl!==false;var message='已保留 '+k+'，可以回听或继续录另一次。';if(r.peak<.001)message+=' 接收信号很小，请检查是否发声或调高画面放大倍数。';if(processed||uncertain)message+=' 设备可能保留自动增益，波形只作课堂辅助比较。';else message+=' 浏览器已报告关闭自动增益；硬件处理仍可能影响比较。';micStatus(message,r.clipped?'error':'');
+    }catch(e){if(token!==S.token)return;S.busy=null;renderRecord(k);renderRecordingControls();if(e&&e.name==='AbortError')micStatus('录音已取消，已有记录保留。');else micError(e);}
+  }
+  async function listen(k){
+    if((k&&S.listening==='mic'+k)||(!k&&S.sequence==='mic')){cancelOperation();return;}
+    cancelOperation();var token=S.token,ks=k?[k]:['A','B'];S.sequence=k?null:'mic';
+    for(var i=0;i<ks.length;i++){if(token!==S.token)return;var key=ks[i],r=S.records[key];if(!r)continue;S.listening='mic'+key;renderRecordingControls();try{await Audio.playRecord(r);}catch(e){if(token===S.token)audioError(e);}if(token!==S.token)return;S.listening=null;renderRecordingControls();if(i<ks.length-1)await new Promise(function(resolve){setTimeout(resolve,350);});}
+    if(token===S.token){S.sequence=null;renderRecordingControls();}
+  }
+  ['A','B'].forEach(function(k){$('record'+k).onclick=function(){record(k);};$('listen'+k).onclick=function(){listen(k);};});$('listenBoth').onclick=function(){listen();};$('displayGain').onchange=function(){S.gain=Number(this.value);renderRecord('A');renderRecord('B');};
+  function changePage(page){if(page===S.page)return;cancelOperation();S.drag=false;S.page=page;['model','record'].forEach(function(p){$('page-'+p).hidden=p!==page;$('tab-'+p).setAttribute('aria-selected',String(p===page));});$('footerNote').textContent=page==='model'?'模型解释关系，真实实验提供证据。':'真实录音 · 同一设备 · 同一距离';renderScene();if(page==='record'){renderRecord('A');renderRecord('B');renderRecordingControls();}}
+  $('tab-model').onclick=function(){changePage('model');};$('tab-record').onclick=function(){changePage('record');};
+  $('resetBtn').onclick=function(){cancelOperation();if(S.page==='model'){S.amp=.45;S.sign=1;S.last=null;S.slots={A:null,B:null};S.showRange=false;S.overlay=false;S.mode='idle';S.time=0;S.drag=false;setAmp(.45);renderScene();renderSaved();toast('已恢复钢尺，清空模型 A、B。');}else{S.records={A:null,B:null};S.gain=16;$('displayGain').value='16';renderRecord('A');renderRecord('B');renderRecordingControls();micStatus('录音仅在本机临时保存，离开或刷新后清空。请用正常音量，不要对着麦克风大喊。');toast('已清空两次录音。');}};
+  $('fullBtn').onclick=function(){var doc=document,root=doc.documentElement,exit=doc.exitFullscreen||doc.webkitExitFullscreen,enter=root.requestFullscreen||root.webkitRequestFullscreen;try{var r;if(doc.fullscreenElement||doc.webkitFullscreenElement){if(exit)r=exit.call(doc);}else if(enter)r=enter.call(root);else{toast('当前浏览器不支持网页全屏，可使用浏览器全屏或横屏。');return;}if(r&&r.catch)r.catch(function(){toast('全屏未开启，可使用浏览器全屏或横屏。');});}catch(_){toast('当前浏览器限制了全屏。');}};
+  function openInfo(){previousFocus=document.activeElement;cancelOperation();renderScene();$('infoDialog').hidden=false;$('closeInfo').focus();}function closeInfo(){$('infoDialog').hidden=true;if(previousFocus)previousFocus.focus();}
+  $('infoBtn').onclick=$('infoLink').onclick=openInfo;$('closeInfo').onclick=closeInfo;$('infoDialog').onclick=function(e){if(e.target===this)closeInfo();};document.addEventListener('keydown',function(e){if($('infoDialog').hidden)return;if(e.key==='Escape'){closeInfo();e.preventDefault();}if(e.key==='Tab'){var focusables=$('infoDialog').querySelectorAll('button,[href],input,select,[tabindex="0"]'),first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault();}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault();}}});
+  document.addEventListener('visibilitychange',function(){if(document.hidden){cancelOperation();renderScene();}});window.addEventListener('pagehide',function(){cancelOperation();S.records={A:null,B:null};renderRecord('A');renderRecord('B');renderRecordingControls();});
+  function resizeScene(){$('scene').setAttribute('viewBox',window.innerWidth<=760?'180 90 690 370':'0 90 900 370');if(S.page==='record'&&!S.busy){renderRecord('A');renderRecord('B');}}window.addEventListener('resize',resizeScene);resizeScene();
+  setAmp(.45);renderScene();renderSaved();renderRecord('A');renderRecord('B');renderRecordingControls();
+}());
+
+</script>
+</body>
+</html>
