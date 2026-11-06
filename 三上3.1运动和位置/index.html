@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eef4f7">
+<meta name="description" content="三上3.1《运动和位置》：观察位置变化、用方向和距离说位置、蒙眼找朋友。离线可用的三页互动课堂。">
+<meta name="aihtml-level" content="T1">
+<title>运动和位置 · 互动课堂</title>
+<style>
+:root{--ink:#16324c;--muted:#60778a;--blue:#2868dc;--orange:#ee8653;--paper:#eef4f7;--line:#dce6ec;--green:#157f67;--red:#bd4054}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);-webkit-tap-highlight-color:transparent}
+button,input{font:inherit}button{color:inherit;cursor:pointer;-webkit-user-select:none;user-select:none}button:disabled{cursor:default}button:focus-visible,[tabindex]:focus-visible,input:focus-visible{outline:4px solid #f2b63e;outline-offset:4px}button svg{pointer-events:none}
+#app{height:100%;height:100dvh;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0)}
+.app-header{display:flex;align-items:center;justify-content:space-between;gap:22px;flex:0 0 96px;padding:12px 28px}
+.brand{display:flex;align-items:center;gap:13px;white-space:nowrap}.brand-icon{width:46px;height:46px;background:var(--ink);border-radius:14px;display:grid;place-items:center;color:white}.brand h1{font-size:28px;letter-spacing:1px;margin:0;font-weight:850}.brand small{display:block;font-size:12px;font-weight:650;color:var(--muted);letter-spacing:2px;margin-top:3px}
+.page-nav{display:flex;padding:5px;gap:5px;border-radius:14px;background:#e0e9ef}.nav-btn{border:0;background:transparent;padding:13px 24px;border-radius:10px;font-weight:750;font-size:20px;white-space:nowrap}.nav-btn span{margin-right:9px;font-size:14px;opacity:.65}.nav-btn.active{background:#fff;color:#205dcb;box-shadow:0 2px 8px #21426912}.header-actions{display:flex;gap:8px}
+.fullscreen{height:48px;width:48px;border:1px solid var(--line);background:white;border-radius:12px;display:grid;place-items:center}
+main{flex:1;min-height:0;padding:0 24px 26px}.lesson-page{display:none;height:100%;min-height:0}.lesson-page.active{display:block}.workspace{height:100%;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px}
+.scene-card,.side-card{background:#fff;border:1px solid var(--line);border-radius:20px;min-width:0;min-height:0;box-shadow:0 3px 0 #dce7ee66}.scene-card{overflow:hidden;position:relative;display:flex;flex-direction:column}.side-card{padding:24px;display:flex;flex-direction:column;gap:20px}
+.scene-inner{position:relative;flex:1;min-height:0;background:#f8fbf9}.scene-svg{width:100%;height:100%;display:block;touch-action:none;-webkit-user-select:none;user-select:none}.svg-label{font-family:inherit;fill:var(--ink);font-weight:750;pointer-events:none}
+.eyebrow{color:var(--muted);font-size:15px;line-height:1.5;font-weight:650;margin:0 0 4px}.side-title{font-size:29px;line-height:1.4;letter-spacing:.5px;margin:0;font-weight:850}.side-title .blue-text{color:var(--blue)}.side-title .orange-text{color:#c75c28}
+.scene-caption{position:absolute;left:18px;top:16px;z-index:2;padding:9px 14px;font-size:16px;font-weight:650;border-radius:10px;background:#fffefaed;color:#52705f;border:1px solid #dfebe0;pointer-events:none}.scene-caption b{color:var(--ink)}.canvas-footer{display:flex;align-items:center;justify-content:space-between;min-height:55px;padding:8px 20px;gap:12px;background:#fff;border-top:1px solid #e4ebe9;font-size:16px;color:var(--muted);font-weight:650}.scale-bar{display:flex;align-items:center;gap:10px;color:#39565e;font-size:15px;white-space:nowrap}.scale-bar i{display:block;width:48px;height:9px;border-left:2px solid;border-right:2px solid;border-bottom:2px solid}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:9px;min-height:52px;padding:12px 18px;border:1px solid var(--line);border-radius:12px;background:white;font-size:19px;font-weight:750;line-height:1.25;touch-action:manipulation}.btn.primary{background:var(--blue);color:white;border-color:var(--blue)}.btn.soft{background:#edf3fa;color:#245cb0;border-color:#dce7f5}.btn.icon{width:50px;padding:10px}.btn:active{transform:translateY(1px)}.btn:disabled{opacity:.48}.action-row{display:flex;align-items:center;gap:10px}.action-row>.btn{flex:1}
+.clue-tile{width:100%;text-align:left;border:2px solid #dfe8ef;background:#f6f9fc;border-radius:16px;min-height:114px;padding:16px 18px;position:relative;transition:background .15s,border-color .15s}.clue-tile small{display:block;font-size:15px;color:var(--muted);font-weight:650;margin-bottom:10px}.clue-value{display:block;font-size:33px;line-height:1.2;font-weight:850;letter-spacing:1px}.clue-tile .tile-action{position:absolute;right:15px;top:15px;color:#8a9cad;font-size:22px}.clue-tile.revealed{background:#edf4ff;border-color:#abc8f4}.clue-tile.distance.revealed{background:#fff3e9;border-color:#efc39f}.clue-tile.revealed .clue-value{color:#235bb4}.clue-tile.distance.revealed .clue-value{color:#a65021}.clue-tile:not(.revealed) .clue-value{font-size:23px;color:#6c8194}
+.position-side .side-actions{margin-top:auto;display:flex;gap:8px}.position-side .side-actions .btn{flex:1;white-space:nowrap}.position-side .side-actions .btn.icon{flex:0 0 50px}.position-note{margin:0;color:var(--muted);font-size:16px;line-height:1.6}
+.person{cursor:grab;touch-action:none}.person.dragging{cursor:grabbing}.person .selection-ring{fill:none;stroke:#2868dc;stroke-width:4;stroke-dasharray:7 6;opacity:.28}.person.is-reference .selection-ring{stroke-width:5;stroke-dasharray:none;opacity:.9}.person:focus .selection-ring{stroke:#e1a119;stroke-width:6;opacity:1}.person .hit-circle{fill:transparent}.game-node{cursor:pointer;outline:none}.game-node:focus .node-disc{stroke:#e2a52b;stroke-width:5}.node-disc{fill:#fff;stroke:#bfcfc8;stroke-width:2.2}.node-mark{fill:#a7bcb2}.game-node.possible .node-disc{fill:#eaf2ff;stroke:#729ee1}.game-node.possible .node-mark{fill:#517dbb}.game-node.ruled-out{opacity:.30}.game-node.selected .node-disc{fill:#fff2d7;stroke:#d4a14b;stroke-width:4}.game-node.solved .node-disc{fill:#ddf3e8;stroke:#23846c;stroke-width:4}
+.game-side{gap:15px}.game-side .clue-tile{min-height:105px}.clue-pair{display:flex;flex-direction:column;gap:13px}.feedback{min-height:94px;border-radius:14px;padding:14px 15px;background:#f4f7fa;font-size:18px;line-height:1.5;font-weight:650;color:#5a7182;display:flex;gap:10px;align-items:center}.feedback .feedback-symbol{flex:0 0 30px;font-size:30px;font-weight:900}.feedback.success{background:#e8f6ef;color:#136b55}.feedback.possible{background:#fff4dc;color:#88611f}.feedback.retry{background:#fff0ec;color:#a05237}.game-side .next-btn{margin-top:auto;width:100%}.possible-count{font-size:17px;fill:#597365;font-weight:650}.game-caption{position:absolute;left:18px;top:16px;background:#fffefaed;border:1px solid #dfebe0;border-radius:10px;padding:9px 14px;font-size:16px;font-weight:650;color:#52705f;z-index:2;pointer-events:none}
+.toast{position:fixed;left:50%;bottom:48px;transform:translateX(-50%);max-width:calc(100% - 28px);background:#16324cf5;color:#fff;padding:14px 20px;border-radius:13px;font-size:18px;z-index:99;box-shadow:0 8px 30px #19344a30;text-align:center}.toast[hidden]{display:none}.compat-grade{position:fixed;left:12px;bottom:5px;color:#6f8391;font-size:11px;font-weight:650;pointer-events:none}
+@media(min-width:1600px){.app-header{flex-basis:112px;padding-left:36px;padding-right:36px}.brand h1{font-size:34px}.brand small{font-size:14px}.nav-btn{font-size:23px;padding:16px 30px}main{padding:0 32px 30px}.workspace{grid-template-columns:minmax(0,1fr) 350px;gap:24px}.side-card{padding:30px;gap:28px}.side-title{font-size:35px}.eyebrow{font-size:18px}.clue-tile{min-height:136px;padding:20px}.clue-value{font-size:42px}.clue-tile small{font-size:18px}.clue-tile:not(.revealed) .clue-value{font-size:29px}.btn{font-size:23px;min-height:60px}.feedback{font-size:23px;min-height:114px}.canvas-footer{font-size:20px;min-height:64px}.scene-caption,.game-caption{font-size:20px}.game-side .clue-tile{min-height:125px}}
+@media(max-width:1100px){.app-header{gap:14px;padding:12px 20px;flex-basis:86px}.brand h1{font-size:25px}.brand-icon{width:40px;height:40px}.nav-btn{font-size:18px;padding:12px 17px}.workspace{grid-template-columns:minmax(0,1fr) 260px;gap:14px}main{padding:0 16px 24px}.side-card{padding:20px;gap:16px}.side-title{font-size:26px}.clue-tile{min-height:105px;padding:14px}.clue-value{font-size:29px}.clue-tile:not(.revealed) .clue-value{font-size:21px}.btn{font-size:17px;padding:11px 14px}.position-note{font-size:15px}.feedback{font-size:16px}.game-side{gap:13px}.scene-caption,.game-caption{font-size:14px;padding:8px 11px}}
+@media(max-height:620px) and (min-width:761px){.app-header{flex-basis:64px;padding:7px 18px}.brand h1{font-size:23px}.brand small{display:none}.brand-icon{width:37px;height:37px;border-radius:10px}.nav-btn{padding:9px 18px;font-size:17px}.fullscreen{width:40px;height:40px}main{padding:0 14px 20px}.workspace{gap:12px;grid-template-columns:minmax(0,1fr) 245px}.side-card{padding:13px;gap:9px;border-radius:15px}.side-title{font-size:21px}.eyebrow{font-size:12px;margin:0}.clue-tile{min-height:76px;padding:10px 13px}.clue-tile small{font-size:12px;margin-bottom:4px}.clue-value{font-size:25px}.clue-tile:not(.revealed) .clue-value{font-size:19px}.btn{font-size:16px;min-height:42px;padding:8px 10px}.clue-pair{gap:8px}.game-side .clue-tile{min-height:72px}.feedback{min-height:60px;font-size:14px;padding:8px 10px}.feedback .feedback-symbol{font-size:24px;flex-basis:25px}.position-note{display:none}.canvas-footer{min-height:40px;font-size:13px;padding:5px 12px}.scene-caption,.game-caption{font-size:12px;left:10px;top:9px;padding:6px 9px}.scale-bar{font-size:12px}}
+@media(max-width:760px),(max-width:1000px) and (orientation:portrait){
+ .app-header{flex:0 0 auto;min-height:106px;flex-wrap:wrap;padding:10px 14px;gap:8px}.brand{gap:8px}.brand-icon{width:33px;height:33px;border-radius:10px}.brand-icon svg{width:25px;height:25px}.brand h1{font-size:21px;letter-spacing:.5px}.brand small{display:none}.header-actions{margin-left:auto}.fullscreen{width:35px;height:35px;border-radius:9px}.page-nav{order:3;width:100%;padding:3px;gap:4px;border-radius:12px}.nav-btn{flex:1;padding:9px 4px;font-size:16px;min-height:37px}.nav-btn span{font-size:12px;margin-right:6px}
+ main{padding:0 10px 21px}.workspace{grid-template-columns:1fr;grid-template-rows:minmax(200px,1fr) auto;gap:10px}.scene-card,.side-card{border-radius:15px}.side-card{padding:13px;gap:10px}.position-side{display:grid;grid-template-columns:1fr 1fr;gap:9px}.position-side .side-heading{grid-column:1/-1;display:flex;align-items:baseline;gap:12px}.side-title{font-size:22px}.eyebrow{font-size:13px}.position-side .eyebrow{order:2;margin:0}.clue-tile{min-height:80px;padding:10px 13px;border-radius:12px}.clue-tile small{font-size:13px;margin-bottom:5px}.clue-value{font-size:28px}.clue-tile:not(.revealed) .clue-value{font-size:20px}.clue-tile .tile-action{top:10px;font-size:18px}.position-side .side-actions{grid-column:1/-1;margin:0}.position-note{display:none}.btn{min-height:44px;font-size:16px;padding:10px 12px}.canvas-footer{font-size:13px;padding:6px 12px;min-height:40px}.scale-bar{font-size:12px}.scale-bar i{width:30px}.scene-caption,.game-caption{font-size:12px;left:10px;top:8px;padding:6px 9px;border-radius:8px}
+ .game-side{display:grid;grid-template-columns:1fr auto;gap:9px}.game-side .side-heading{grid-column:1/-1;display:flex;align-items:baseline;gap:12px}.game-side .side-heading .eyebrow{order:2;margin:0}.clue-pair{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:9px}.game-side .clue-tile{min-height:80px}.feedback{min-height:55px;font-size:14px;padding:8px 10px;border-radius:11px}.feedback .feedback-symbol{font-size:24px;flex-basis:23px}.game-side .next-btn{margin:0;width:auto;max-width:114px}.compat-grade{font-size:10px;bottom:3px}
+}
+@media(max-width:380px){.app-header{padding:8px 10px}.brand h1{font-size:19px}.workspace{grid-template-rows:minmax(175px,1fr) auto}.side-card{padding:10px}.side-title{font-size:20px}.eyebrow{font-size:12px}.position-side .side-heading,.game-side .side-heading{gap:7px}.clue-value{font-size:25px}.clue-tile{min-height:74px}.game-side .clue-tile{min-height:72px}.clue-tile:not(.revealed) .clue-value{font-size:18px}.feedback{font-size:13px}.game-side .next-btn{font-size:14px;max-width:96px}}
+@media(max-height:500px) and (orientation:landscape){
+ .app-header{flex:0 0 56px;min-height:56px;flex-wrap:nowrap;padding:6px 12px;gap:10px}.brand h1{font-size:20px}.brand small{display:none}.brand-icon{display:none}.page-nav{order:0;width:auto;padding:3px}.nav-btn{padding:7px 12px;min-height:34px;font-size:15px}.header-actions{margin:0}.fullscreen{height:34px;width:34px}main{padding:0 10px 18px}.workspace{grid-template-columns:minmax(0,1fr) 240px;grid-template-rows:minmax(0,1fr);gap:10px}.side-card{padding:10px;gap:8px}.position-side{display:flex;flex-direction:column}.position-side .side-heading{display:block}.side-title{font-size:20px}.eyebrow{font-size:12px}.position-side .side-actions{margin-top:auto}.clue-tile{min-height:68px;padding:8px 12px;flex-shrink:0}.clue-tile small{font-size:12px;margin-bottom:3px}.clue-value{font-size:24px}.clue-tile:not(.revealed) .clue-value{font-size:18px}.btn{min-height:36px;padding:7px 9px;font-size:15px}.game-side{display:flex;flex-direction:column;gap:7px}.game-side .side-heading{display:block}.game-side .clue-pair{display:grid;grid-template-columns:1fr 1fr;gap:6px}.game-side .clue-tile{min-height:75px;padding:8px 10px}.game-side .clue-value{font-size:23px}.game-side .clue-tile:not(.revealed) .clue-value{font-size:17px}.game-side .next-btn{max-width:none;margin-top:auto;width:100%}.feedback{min-height:60px;font-size:14px;padding:8px 10px}.canvas-footer{font-size:12px;min-height:34px;padding:4px 10px}.scene-caption,.game-caption{font-size:11px;padding:5px 7px}.position-note{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+ <header class="app-header">
+  <div class="brand"><span class="brand-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 32 32"><path d="M5 25h23M7 23V8m0 0L3 12m4-4 4 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="m12 21 7-7 7 1" stroke="#70d9c7" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="26" cy="15" r="3.5" fill="#ffd777"/></svg></span><div><h1>运动和位置</h1><small>三上 3.1 · 互动课堂</small></div></div>
+  <nav class="page-nav" aria-label="课堂活动">
+   <button class="nav-btn active" data-page="motion" aria-pressed="true" aria-controls="page-motion"><span>01</span>看变化</button>
+   <button class="nav-btn" data-page="position" aria-pressed="false" aria-controls="page-position"><span>02</span>说位置</button>
+   <button class="nav-btn" data-page="game" aria-pressed="false" aria-controls="page-game"><span>03</span>找朋友</button>
+  </nav>
+  <div class="header-actions"><button class="fullscreen" id="fullscreen" aria-label="全屏显示" title="全屏显示"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+ </header>
+ <main>
+ <section id="page-motion" class="lesson-page active" aria-label="看变化">
+  <div class="workspace">
+    <div class="scene-card m-scene">
+      <div class="m-stage-top"><span>点选一个物体</span><span class="m-time"><b id="m-time">0.0</b> 秒</span></div>
+      <div class="m-svg-wrap">
+        <svg id="m-scene-svg" viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet" role="group" aria-label="操场：小车、小狗和长椅的位置变化" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <defs>
+            <pattern id="m-grass" width="46" height="46" patternUnits="userSpaceOnUse"><path d="m10 26 3-5 3 5M33 8l2-4 2 4" fill="none" stroke="#c4d7cb" stroke-width="2" stroke-linecap="round" opacity=".5"/></pattern>
+            <linearGradient id="m-car-paint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a99fb"/><stop offset="1" stop-color="#2868dc"/></linearGradient>
+            <g id="m-car-art">
+              <ellipse cx="0" cy="15" rx="64" ry="26" fill="#183b62" opacity=".14"/>
+              <rect x="-40" y="-35" width="22" height="12" rx="5" fill="#263e54"/><rect x="22" y="-35" width="22" height="12" rx="5" fill="#263e54"/>
+              <rect x="-40" y="23" width="22" height="12" rx="5" fill="#263e54"/><rect x="22" y="23" width="22" height="12" rx="5" fill="#263e54"/>
+              <path d="M-54-26h88q24 0 24 21V9q0 20-24 20h-88q-9 0-9-11V-15q0-11 9-11Z" fill="url(#m-car-paint)" stroke="#205ab7" stroke-width="3"/>
+              <path d="M-20-21h35l9 15V9l-9 15h-35l-10-15V-6Z" fill="#d2edff" stroke="#2868b8" stroke-width="3"/>
+              <path d="M-17-20h21v42h-21Z" fill="#e9f6ff" opacity=".85"/>
+              <path d="M23-5v14" stroke="#326494" stroke-width="3"/>
+              <rect x="48" y="-20" width="8" height="12" rx="3" fill="#fff2ad"/><rect x="48" y="11" width="8" height="12" rx="3" fill="#fff2ad"/>
+              <rect x="-62" y="-18" width="6" height="10" rx="2" fill="#f88878"/><rect x="-62" y="10" width="6" height="10" rx="2" fill="#f88878"/>
+              <path d="m-45-8 0 17" stroke="#8ab8ff" stroke-width="4" stroke-linecap="round"/>
+            </g>
+            <g id="m-dog-art">
+              <ellipse cx="-3" cy="12" rx="42" ry="24" fill="#734722" opacity=".15"/>
+              <path d="M-30 0q-24-8-20-24" fill="none" stroke="#ad6e3f" stroke-width="10" stroke-linecap="round"/>
+              <path d="m-19-10-7-15m16 36-9 15m24-30 11-15m-3 31 14 13" stroke="#c58b52" stroke-width="12" stroke-linecap="round"/>
+              <ellipse cx="-6" cy="0" rx="32" ry="22" fill="#dca56a" stroke="#b77a42" stroke-width="2"/>
+              <path d="M-15-17q-16 17 0 34" fill="none" stroke="#f3d5a4" stroke-width="15"/>
+              <path d="M17-20v39" stroke="#ed6e55" stroke-width="7"/>
+              <circle cx="28" cy="0" r="23" fill="#e4b680" stroke="#b77a42" stroke-width="2"/>
+              <ellipse cx="19" cy="-22" rx="10" ry="17" transform="rotate(-25 19 -22)" fill="#a36b41"/>
+              <ellipse cx="19" cy="22" rx="10" ry="17" transform="rotate(25 19 22)" fill="#a36b41"/>
+              <ellipse cx="46" cy="0" rx="13" ry="12" fill="#f6dbb4"/><circle cx="55" cy="0" r="6" fill="#3b3d43"/>
+              <circle cx="34" cy="-11" r="3" fill="#3b3d43"/><circle cx="34" cy="11" r="3" fill="#3b3d43"/>
+            </g>
+            <g id="m-bench-art">
+              <ellipse cx="0" cy="18" rx="66" ry="28" fill="#634d3d" opacity=".12"/>
+              <path d="M-43-27v61M43-27v61" stroke="#536777" stroke-width="10" stroke-linecap="round"/>
+              <rect x="-65" y="-27" width="130" height="16" rx="5" fill="#dca16b" stroke="#a77449" stroke-width="2"/>
+              <rect x="-65" y="-5" width="130" height="16" rx="5" fill="#e8b887" stroke="#a77449" stroke-width="2"/>
+              <rect x="-65" y="17" width="130" height="16" rx="5" fill="#dca16b" stroke="#a77449" stroke-width="2"/>
+              <path d="M-48-32v35M48-32v35" stroke="#536777" stroke-width="7" stroke-linecap="round"/>
+            </g>
+          </defs>
+          <rect width="1000" height="640" fill="#f5f8f8"/>
+          <rect x="25" y="24" width="950" height="402" rx="35" fill="#e1eee7" stroke="#ccdcd3" stroke-width="3"/>
+          <rect x="25" y="24" width="950" height="402" rx="35" fill="url(#m-grass)"/>
+          <path d="M315 300a185 185 0 0 1 370 0" fill="none" stroke="#f8f3e5" stroke-width="63" stroke-linecap="round"/>
+          <path d="M315 300a185 185 0 0 1 370 0" fill="none" stroke="#d8cfb9" stroke-width="2" stroke-dasharray="4 12"/>
+          <path d="M500 300v114" stroke="#f8f3e5" stroke-width="76"/>
+          <g fill="#abc7b6"><circle cx="91" cy="86" r="30"/><circle cx="123" cy="74" r="34"/><circle cx="905" cy="105" r="33"/><circle cx="871" cy="82" r="32"/></g>
+          <g fill="#d1e3d7"><circle cx="94" cy="77" r="20"/><circle cx="127" cy="62" r="21"/><circle cx="907" cy="94" r="22"/><circle cx="870" cy="71" r="19"/></g>
+          <g stroke="#a9bcb3" stroke-width="5"><path d="M815 335v47M858 335v47"/><path d="M804 344h65M804 359h65"/></g>
+          <rect x="25" y="449" width="950" height="126" rx="26" fill="#d7e1eb" stroke="#bfccd8" stroke-width="3"/>
+          <path d="M55 510h890" stroke="#f9fcff" stroke-width="4" stroke-dasharray="25 23"/>
+          <path d="M47 463h906M47 561h906" stroke="#f4f8fb" stroke-width="3"/>
+          <g id="m-evidence" visibility="hidden" pointer-events="none">
+            <line id="m-origin-line" x1="500" y1="300" x2="170" y2="510" stroke="#9aabb9" stroke-width="3" stroke-dasharray="6 8"/>
+            <line id="m-now-line" x1="500" y1="300" x2="170" y2="510" stroke="#2868dc" stroke-width="3" stroke-dasharray="6 8"/>
+            <path id="m-trail" d="M170 510" fill="none" stroke="#2868dc" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+            <g id="m-ghost" opacity=".3"><use id="m-ghost-use" href="#m-car-art" xlink:href="#m-car-art"/></g>
+            <circle id="m-start-dot" cx="170" cy="510" r="8" fill="#fff" stroke="#64798a" stroke-width="3"/>
+          </g>
+          <g transform="translate(500 300)" pointer-events="none">
+            <ellipse cx="0" cy="4" rx="43" ry="21" fill="#bdcdd5"/><ellipse cx="0" cy="0" rx="36" ry="16" fill="#f8fbfd" stroke="#a7b9c6" stroke-width="3"/>
+            <path d="M0 0v-119" stroke="#5f7d93" stroke-width="7" stroke-linecap="round"/>
+            <path d="M4-116q31-15 77 5l-5 42q-42-17-72-3Z" fill="#f16e62" stroke="#d45149" stroke-width="2"/>
+            <circle cx="0" cy="-123" r="7" fill="#eebf5d"/>
+            <circle cx="0" cy="0" r="6" fill="#2868dc"/>
+            <rect x="-41" y="27" width="82" height="36" rx="12" fill="#fff" stroke="#d0dce3" stroke-width="2"/>
+            <text x="0" y="52" text-anchor="middle" fill="#35546a" font-size="24" font-weight="700">旗杆</text>
+          </g>
+          <g id="m-target-bench" class="m-target" transform="translate(220 160)" data-m-target="bench" role="button" tabindex="0" aria-label="观察长椅" aria-pressed="false">
+            <circle r="88" fill="transparent"/><ellipse class="m-selection" cx="0" cy="2" rx="79" ry="51" fill="#e9e6ff" stroke="#8c77cf" stroke-width="4"/>
+            <use href="#m-bench-art" xlink:href="#m-bench-art"/>
+            <g class="m-target-label" transform="translate(0 65)"><rect x="-43" y="-22" width="86" height="38" rx="13" fill="#fff"/><text text-anchor="middle" y="5">长椅</text></g>
+          </g>
+          <g id="m-target-dog" class="m-target" transform="translate(315 300)" data-m-target="dog" role="button" tabindex="0" aria-label="观察小狗" aria-pressed="false">
+            <circle r="78" fill="transparent"/><ellipse class="m-selection" rx="70" ry="54" fill="#fff0da" stroke="#df9550" stroke-width="4"/>
+            <g id="m-dog-pose" transform="rotate(-90)"><use href="#m-dog-art" xlink:href="#m-dog-art"/></g>
+            <g class="m-target-label" transform="translate(0 -64)"><rect x="-43" y="-22" width="86" height="38" rx="13" fill="#fff"/><text text-anchor="middle" y="5">小狗</text></g>
+          </g>
+          <g id="m-target-car" class="m-target is-selected" transform="translate(170 510)" data-m-target="car" role="button" tabindex="0" aria-label="观察小车" aria-pressed="true">
+            <circle r="85" fill="transparent"/><ellipse class="m-selection" rx="79" ry="48" fill="#deebff" stroke="#2868dc" stroke-width="4"/>
+            <use href="#m-car-art" xlink:href="#m-car-art"/>
+            <g class="m-target-label" transform="translate(0 63)"><rect x="-43" y="-22" width="86" height="38" rx="13" fill="#fff"/><text text-anchor="middle" y="5">小车</text></g>
+          </g>
+          <g transform="translate(65 612)" fill="#536d80" font-size="21"><path d="M0-7v10m0-5h50m0-5v10" fill="none" stroke="#536d80" stroke-width="3"/><text x="67" y="6">1 米</text></g>
+        </svg>
+      </div>
+      <div class="m-controls">
+        <button class="btn primary" id="m-play" type="button" aria-label="开始观察">▶ 开始</button>
+        <input id="m-timeline" class="m-timeline" type="range" min="0" max="6" step="0.05" value="0" aria-label="观察时间" aria-valuetext="0秒"/>
+        <button class="btn icon" id="m-reset" type="button" title="回到起点" aria-label="回到起点">↺</button>
+      </div>
+    </div>
+    <aside class="side-card m-side" aria-label="位置比较">
+      <div><p class="eyebrow">与旗杆比位置</p><h2 class="side-title" id="m-selected-name">小车</h2></div>
+      <div class="m-position-pair">
+        <div class="m-position m-before"><span class="m-data-label">开始</span><strong id="m-before-direction">左下方</strong><span class="m-distance"><b id="m-before-distance">7.8</b> 米</span></div>
+        <div class="m-position m-now"><span class="m-data-label">现在</span><strong id="m-now-direction">左下方</strong><span class="m-distance"><b id="m-now-distance">7.8</b> 米</span></div>
+      </div>
+      <p class="m-direction-note">画面方向 · 与旗杆的直线距离</p>
+      <button class="btn soft" id="m-trace" type="button" aria-pressed="false">显示轨迹</button>
+      <div class="m-judgment">
+        <p class="m-question">观察这段时间，它在……</p>
+        <div class="m-answer-row"><button class="btn" id="m-answer-moving" type="button">运动</button><button class="btn" id="m-answer-still" type="button">静止</button></div>
+      </div>
+      <div id="m-feedback" class="m-feedback" role="status" aria-live="polite"><span class="m-feedback-icon">?</span><p>先观察，再判断</p></div>
+    </aside>
+  </div>
+</section>
+<style>
+#page-motion .m-scene{display:flex;flex-direction:column;min-width:0}
+#page-motion .m-stage-top{display:flex;align-items:center;justify-content:space-between;flex-shrink:0;padding:15px 22px 0;color:var(--muted,#64798a);font-size:18px;font-weight:700;gap:12px}
+#page-motion .m-time{color:var(--ink,#16324c);font-variant-numeric:tabular-nums;white-space:nowrap}#page-motion .m-time b{font-size:26px}
+#page-motion .m-svg-wrap{position:relative;flex:1;min-height:0;overflow:hidden}#page-motion #m-scene-svg{display:block;width:100%;height:100%;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+#page-motion .m-target{cursor:pointer;outline:none}#page-motion .m-target .m-selection{opacity:0;transition:opacity .18s}#page-motion .m-target.is-selected .m-selection,#page-motion .m-target:focus .m-selection{opacity:1}#page-motion .m-target:focus .m-selection{stroke-width:6}
+#page-motion .m-target-label text{font:700 24px Arial,'Microsoft YaHei',sans-serif;fill:#35546a;pointer-events:none}#page-motion .m-target-label rect{stroke:#d0dce3;stroke-width:2}
+#page-motion .m-controls{display:flex;align-items:center;gap:17px;padding:10px 20px 20px;flex-shrink:0}#page-motion #m-play{min-width:116px;white-space:nowrap}#page-motion .m-timeline{flex:1;width:100%;height:46px;min-width:50px;margin:0;accent-color:#2868dc;cursor:pointer;touch-action:pan-x}#page-motion .m-timeline::-webkit-slider-thumb{min-width:24px;min-height:24px}#page-motion .m-timeline::-moz-range-thumb{width:24px;height:24px;border:2px solid #fff;border-radius:50%;background:#2868dc}
+#page-motion .m-side{display:flex;flex-direction:column;gap:18px;min-width:0}#page-motion .m-side .eyebrow{margin:0 0 6px}#page-motion .m-side .side-title{margin:0;font-size:36px;line-height:1.2}
+#page-motion .m-position-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}#page-motion .m-position{display:flex;flex-direction:column;align-items:center;gap:7px;border-radius:14px;padding:14px 5px;border:1px solid #dce6ec;background:#f4f7fa}#page-motion .m-now{background:#edf4ff;border-color:#cedfff}#page-motion .m-position strong{font-size:27px;line-height:1.3;white-space:nowrap;color:#325677}#page-motion .m-now strong{color:#2868dc}#page-motion .m-data-label{font-size:17px;color:#64798a;font-weight:700}#page-motion .m-distance{font-size:17px;color:#536d80;white-space:nowrap}#page-motion .m-distance b{font-size:27px;font-variant-numeric:tabular-nums;color:#16324c}
+#page-motion .m-direction-note{margin:-8px 0 0;font-size:13px;line-height:1.4;color:#64798a;text-align:center}#page-motion #m-trace{width:100%}#page-motion #m-trace[aria-pressed="true"]{background:#e0ecff;color:#1e55bc;border-color:#9ebff5}
+#page-motion .m-judgment{margin-top:auto}#page-motion .m-question{font-size:18px;font-weight:700;line-height:1.5;margin:0 0 10px;color:#35546a}#page-motion .m-answer-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}#page-motion .m-answer-row .btn{padding-left:10px;padding-right:10px}#page-motion .m-answer-row .chosen{box-shadow:inset 0 0 0 2px #2868dc;background:#edf4ff;color:#2868dc}
+#page-motion .m-feedback{min-height:81px;display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:#f1f5f8;color:#64798a}#page-motion .m-feedback p{margin:0;font-size:18px;line-height:1.45;font-weight:700}#page-motion .m-feedback-icon{font-size:30px;font-weight:900;flex-shrink:0;line-height:1}#page-motion .m-feedback.correct{background:#e7f4ed;color:#287249}#page-motion .m-feedback.retry{background:#fff1df;color:#986019}#page-motion .m-feedback.wait{background:#edf4ff;color:#2868dc}
+@media(max-width:900px){#page-motion .m-side{gap:12px}#page-motion .m-stage-top{padding:12px 16px 0}#page-motion .m-controls{padding:8px 14px 14px;gap:10px}#page-motion .m-position strong,#page-motion .m-distance b{font-size:24px}#page-motion .m-side .side-title{font-size:30px}#page-motion .m-feedback{padding:10px;min-height:68px}#page-motion .m-question{font-size:17px}}
+@media(max-width:760px),(max-width:1000px) and (orientation:portrait){#page-motion .m-side{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px}#page-motion .m-side>div:first-child{align-self:center}#page-motion .m-position-pair{grid-column:2;grid-row:1 / span 2}#page-motion .m-direction-note{grid-column:2;margin:0;font-size:11px}#page-motion #m-trace{grid-column:1;grid-row:2;align-self:start}#page-motion .m-judgment{grid-column:1;margin:0}#page-motion .m-feedback{grid-column:2;align-self:stretch;min-height:0}#page-motion .m-side .side-title{font-size:27px}#page-motion .m-position{padding:9px 4px;gap:3px}#page-motion .m-position strong,#page-motion .m-distance b{font-size:22px}#page-motion .m-data-label,#page-motion .m-distance{font-size:14px}#page-motion .m-question{font-size:15px;margin-bottom:7px}#page-motion .m-feedback p{font-size:16px}#page-motion .m-feedback-icon{font-size:25px}#page-motion .m-stage-top{font-size:15px}#page-motion .m-controls{padding:4px 12px 12px}#page-motion #m-play{min-width:104px}#page-motion .m-direction-note{display:none}}
+@media(max-height:650px) and (orientation:landscape){#page-motion .m-side{gap:10px}#page-motion .m-position{padding:9px 4px;gap:3px}#page-motion .m-side .side-title{font-size:28px}#page-motion .m-position strong,#page-motion .m-distance b{font-size:24px}#page-motion .m-feedback{min-height:55px;padding:9px 12px}#page-motion .m-feedback p{font-size:16px}#page-motion .m-question{font-size:16px;margin-bottom:7px}#page-motion .m-stage-top{padding:8px 16px 0;font-size:15px}#page-motion .m-controls{padding:5px 14px 12px}#page-motion .m-direction-note{font-size:11px}}
+@media(max-height:500px) and (orientation:landscape){#page-motion .m-side{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px;align-content:start}#page-motion .m-side>div:first-child{grid-column:1;grid-row:1;align-self:center}#page-motion .m-side .eyebrow{font-size:12px;margin-bottom:2px}#page-motion .m-side .side-title{font-size:22px}#page-motion #m-trace{grid-column:2;grid-row:1;align-self:center}#page-motion .m-position-pair{grid-column:1 / span 2;grid-row:2}#page-motion .m-position{padding:4px;gap:0}#page-motion .m-position strong,#page-motion .m-distance b{font-size:21px}#page-motion .m-data-label,#page-motion .m-distance{font-size:12px}#page-motion .m-direction-note{display:none}#page-motion .m-judgment{grid-column:1 / span 2;grid-row:3;margin:0}#page-motion .m-question{font-size:12px;line-height:1.3;margin:0 0 4px}#page-motion .m-side .btn{font-size:15px;min-height:34px;height:34px;padding:5px 7px}#page-motion .m-feedback{grid-column:1 / span 2;grid-row:4;min-height:37px;padding:5px 9px}#page-motion .m-feedback p{font-size:13px;line-height:1.3}#page-motion .m-feedback-icon{font-size:22px}#page-motion .m-stage-top{padding:6px 12px 0;font-size:12px}#page-motion .m-time b{font-size:20px}#page-motion .m-controls{padding:3px 10px 8px;gap:9px}#page-motion .m-controls .btn{min-height:38px;height:38px;padding:5px 10px;font-size:15px}#page-motion #m-play{min-width:90px}#page-motion .m-timeline{height:36px}}
+</style>
+
+ <section id="page-position" class="lesson-page" aria-label="说位置" hidden>
+  <div class="workspace">
+   <div class="scene-card">
+    <div class="scene-inner">
+     <div class="scene-caption">大家都面向旗台 <b>↑</b></div>
+     <svg id="position-svg" class="scene-svg" viewBox="0 0 1000 640" aria-label="拖动小蓝和小橙，比较两人之间的方向和距离">
+      <defs><pattern id="p-grid" x="140" y="90" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#dbe7dc" stroke-width="1.4"/></pattern></defs>
+      <rect width="1000" height="640" fill="#f7f9f1"/>
+      <rect x="34" y="78" width="932" height="510" rx="90" fill="#e8eee1"/>
+      <rect x="62" y="99" width="876" height="466" rx="72" fill="#f7f8ec" stroke="#c9d8be" stroke-width="2"/>
+      <rect x="85" y="117" width="830" height="430" rx="58" fill="none" stroke="#dce4d3" stroke-width="2"/>
+      <rect x="140" y="90" width="720" height="480" fill="url(#p-grid)"/>
+      <rect x="422" y="24" width="156" height="43" rx="9" fill="#c7d8c6"/><rect x="431" y="17" width="138" height="39" rx="8" fill="#477a6b"/><text x="500" y="44" text-anchor="middle" font-size="21" fill="#fff" font-weight="750">旗 台</text>
+      <g aria-hidden="true" opacity=".8"><circle cx="55" cy="43" r="22" fill="#aec8a8"/><circle cx="70" cy="31" r="20" fill="#bbd2b4"/><circle cx="935" cy="50" r="26" fill="#b8cfaf"/><circle cx="953" cy="28" r="19" fill="#a7c6a1"/><rect x="30" y="258" width="13" height="115" rx="5" fill="#c3ac89"/><path d="M28 272h17m-17 27h17m-17 27h17m-17 27h17" stroke="#e0cdb1" stroke-width="4"/></g>
+      <g id="position-axes" opacity=".8" pointer-events="none">
+       <path d="M0-114V-70M0 80V91M-114 0H-70M70 0H114" stroke="#6e92c7" stroke-width="2.5" stroke-dasharray="5 5"/>
+       <path d="M0-123l-6 10h12ZM0 99l-6-10h12ZM-123 0l10-6v12ZM123 0l-10-6v12Z" fill="#6e92c7"/>
+       <g class="svg-label" font-size="25" text-anchor="middle" fill="#5379ac"><text y="-136">前</text><text y="120">后</text><text x="-144" y="9">左</text><text x="144" y="9">右</text></g>
+      </g>
+      <g id="position-measure" display="none" pointer-events="none"><line id="position-line" stroke="#c77a43" stroke-width="3" stroke-dasharray="8 6"/><circle id="position-dot-a" r="5" fill="#c77a43"/><circle id="position-dot-b" r="5" fill="#c77a43"/><g id="position-measure-label"><rect x="-67" y="-21" width="134" height="42" rx="12" fill="#fff8ef" stroke="#e8c2a2" stroke-width="2"/><text id="position-line-text" y="9" text-anchor="middle" font-size="25" fill="#975023" font-weight="800"></text></g></g>
+      <g id="position-blue" class="person is-reference" role="button" tabindex="0" aria-label="小蓝，可拖动；键盘方向键每次移动半米"><circle class="hit-circle" r="52"/><g class="avatar-art"></g></g>
+      <g id="position-orange" class="person" role="button" tabindex="0" aria-label="小橙，可拖动；键盘方向键每次移动半米"><circle class="hit-circle" r="52"/><g class="avatar-art"></g></g>
+      <g transform="translate(127 607)" pointer-events="none"><path d="M0-6V6M60-6V6M0 0h60" fill="none" stroke="#58745f" stroke-width="2.5"/><text x="76" y="7" fill="#58745f" font-size="20" font-weight="650">1米</text></g>
+      <text x="870" y="613" text-anchor="end" fill="#7d9381" font-size="18">模拟操场</text>
+     </svg>
+    </div>
+    <div class="canvas-footer"><span>↔ 拖动两位同学</span><span>先说一说，再量一量</span></div>
+   </div>
+   <aside class="side-card position-side">
+    <div class="side-heading"><p class="eyebrow" id="position-reference">和小蓝比一比</p><h2 class="side-title"><span id="position-target-name" class="orange-text">小橙</span>在哪里？</h2></div>
+    <button id="position-direction-btn" class="clue-tile" aria-pressed="false" aria-label="显示或隐藏方向"><small>方向</small><span class="tile-action" aria-hidden="true">＋</span><span class="clue-value" id="position-direction">点开看看</span></button>
+    <button id="position-distance-btn" class="clue-tile distance" aria-pressed="false" aria-label="测量或隐藏距离"><small>距离</small><span class="tile-action" aria-hidden="true">＋</span><span class="clue-value" id="position-distance">量一量</span></button>
+    <p class="position-note" id="position-sentence">先选一个人来比较。</p>
+    <div class="side-actions"><button id="position-swap" class="btn primary">⇄ 换个人说</button><button id="position-reset" class="btn icon" aria-label="重置两人位置" title="重新摆放">↺</button></div>
+   </aside>
+  </div>
+ </section>
+ <section id="page-game" class="lesson-page" aria-label="蒙眼找朋友" hidden>
+  <div class="workspace">
+   <div class="scene-card">
+    <div class="scene-inner">
+     <div class="game-caption" id="game-caption">朋友站在一个圆点上</div>
+     <svg id="game-svg" class="scene-svg" viewBox="0 0 1000 640" aria-label="蒙眼找朋友。打开方向和距离线索，点击圆点或拖动小蓝去找朋友">
+      <defs><pattern id="g-grid" x="500" y="330" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#dbe7dc" stroke-width="1.4"/></pattern></defs>
+      <rect width="1000" height="640" fill="#f7f9f1"/>
+      <rect x="38" y="76" width="924" height="514" rx="115" fill="#e8eee1"/><rect x="66" y="96" width="868" height="474" rx="95" fill="#f7f8ec" stroke="#c9d8be" stroke-width="2"/><rect x="92" y="117" width="816" height="430" rx="79" fill="none" stroke="#dce4d3" stroke-width="2"/>
+      <rect x="200" y="90" width="600" height="480" fill="url(#g-grid)"/>
+      <rect x="422" y="24" width="156" height="43" rx="9" fill="#c7d8c6"/><rect x="431" y="17" width="138" height="39" rx="8" fill="#477a6b"/><text x="500" y="44" text-anchor="middle" font-size="21" fill="#fff" font-weight="750">旗 台</text>
+      <g id="game-ray" display="none" pointer-events="none"><path id="game-ray-band" stroke="#b7d3f5" stroke-width="53" stroke-linecap="round" opacity=".55"/><path id="game-ray-line" stroke="#709ad4" stroke-width="2" stroke-dasharray="7 7"/></g>
+      <circle id="game-distance-ring" cx="500" cy="330" r="180" fill="none" stroke="#d9a473" stroke-width="3" stroke-dasharray="10 8" display="none" pointer-events="none"/>
+      <g pointer-events="none" opacity=".8"><path d="M549 279V251" stroke="#6c87a4" stroke-width="2"/><path d="m549 244-6 10h12Z" fill="#6c87a4"/><text x="549" y="237" text-anchor="middle" font-size="22" fill="#4d6d8c" font-weight="750">前</text></g>
+      <g id="game-nodes"></g>
+      <g id="game-origin" pointer-events="none"><circle cx="500" cy="330" r="26" fill="#e6edf5" stroke="#7b9dc7" stroke-width="2" stroke-dasharray="5 5"/><path d="M490 330h20m-10-10v20" stroke="#809fca" stroke-width="2"/><rect x="469" y="366" width="62" height="28" rx="9" fill="#e9eff7"/><text x="500" y="386" text-anchor="middle" font-size="18" fill="#5b7899" font-weight="700">起点</text></g>
+      <g id="game-friend" display="none" pointer-events="none"></g>
+      <g id="game-player" class="person" role="button" tabindex="0" aria-label="蒙眼的小蓝，可拖到圆点上找朋友；方向键移动，回车确认"><circle class="hit-circle" r="52"/><g class="avatar-art" transform="scale(.85)"></g></g>
+      <g id="game-scale" transform="translate(127 607)" pointer-events="none"><path d="M0-6V6M60-6V6M0 0h60" fill="none" stroke="#58745f" stroke-width="2.5"/><text x="76" y="7" fill="#58745f" font-size="20" font-weight="650">1米</text></g>
+      <text id="game-count" x="874" y="610" text-anchor="end" class="possible-count">图中16处可能</text>
+     </svg>
+    </div>
+    <div class="canvas-footer"><span>点圆点，或拖动小蓝</span><span>从起点看方向、量距离</span></div>
+   </div>
+   <aside class="side-card game-side">
+    <div class="side-heading"><p class="eyebrow">给小蓝一些线索</p><h2 class="side-title">朋友在哪里？</h2></div>
+    <div class="clue-pair">
+     <button id="game-direction-btn" class="clue-tile" aria-pressed="false"><small>方向</small><span class="tile-action" aria-hidden="true">＋</span><span class="clue-value" id="game-direction">打开线索</span></button>
+     <button id="game-distance-btn" class="clue-tile distance" aria-pressed="false"><small>距离</small><span class="tile-action" aria-hidden="true">＋</span><span class="clue-value" id="game-distance">打开线索</span></button>
+    </div>
+    <div id="game-feedback" class="feedback" role="status" aria-live="polite"><span class="feedback-symbol" aria-hidden="true">?</span><span id="game-feedback-text">先打开一条线索。</span></div>
+    <button id="game-next" class="btn soft next-btn">换一位朋友</button>
+   </aside>
+  </div>
+ </section>
+ </main>
+</div>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div class="compat-grade" aria-label="本课技术需求：T1 基础交互">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+<div id="toast" class="toast" role="status" hidden></div>
+<noscript>请启用浏览器的JavaScript后使用互动课堂。</noscript>
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var activePage='motion';
+var position={people:[{name:'小蓝',x:4,y:4,color:'#377ddb'},{name:'小橙',x:8,y:4,color:'#eb8c58'}],reference:0,direction:false,distance:false};
+var directions=[{name:'前方',x:0,y:-1},{name:'右边',x:1,y:0},{name:'后方',x:0,y:1},{name:'左边',x:-1,y:0}];
+var game={direction:0,distance:3,showDirection:false,showDistance:false,selected:-1,solved:false,px:500,py:330,deck:[],previous:-1};
+var nodes=[],toastTimer=null,dragActive=null;
+function setText(el,text){if(el.textContent!==text)el.textContent=text;}
+function attr(el,key,value){el.setAttribute(key,String(value));}
+function show(el,on){el.style.display=on?'inline':'none';}
+function distance(a,b){var dx=b.x-a.x,dy=b.y-a.y;return Math.sqrt(dx*dx+dy*dy);}
+function directionName(a,b){
+ var dx=b.x-a.x,dy=b.y-a.y,eps=.01;
+ if(Math.abs(dx)<eps&&Math.abs(dy)<eps)return '同一位置';
+ var horizontal=Math.abs(dx)<eps?'':dx>0?'右':'左';
+ var vertical=Math.abs(dy)<eps?'':dy<0?'前':'后';
+ return horizontal&&vertical?horizontal+vertical+'方':horizontal?horizontal+'边':vertical+'方';
+}
+function distanceLabel(value){var rounded=Math.round(value*10)/10;return (Math.abs(value-Math.round(value))<.001?'':'约')+((rounded%1)?rounded.toFixed(1):String(rounded))+'米';}
+function mapPoint(person){return {x:140+60*person.x,y:90+60*person.y};}
+// All people drawings are generated here. Replace only this function to change the SVG asset.
+function avatarSVG(color,name,blind){
+ return '<ellipse cy="35" rx="30" ry="11" fill="#244332" opacity=".13"/><circle class="selection-ring" r="43"/><path d="M-13 24v16M13 24v16" stroke="#344c65" stroke-width="12" stroke-linecap="round"/><path d="M-13 40h-9M13 40h9" stroke="#20364c" stroke-width="10" stroke-linecap="round"/><path d="M-23 4-31 22M23 4l8 18" stroke="#f1ba8b" stroke-width="11" stroke-linecap="round"/><rect x="-22" y="-3" width="44" height="35" rx="14" fill="'+color+'"/><rect x="-11" y="5" width="22" height="22" rx="7" fill="#fff" opacity=".23"/><circle cy="-18" r="22" fill="#efb78e"/><path d="M-21-18a21 21 0 0 0 42 0v7C17 8-17 8-21-11Z" fill="#293f51"/><path d="M-21-23c0-23 42-23 42 0v6h-42Z" fill="'+color+'"/><path d="M-14-37q14-10 28 0" fill="none" stroke="#fff" stroke-width="4" opacity=".65"/><path d="M-11-36q11-14 22 0" fill="'+color+'"/>'+ (blind?'<path d="M-20-20h40v10h-40Z" fill="#16324c"/><path d="m19-15 15 11-2-15" fill="#16324c"/>':'')+'<path d="m0-57-7 11h14Z" fill="'+color+'"/><rect x="-34" y="49" width="68" height="28" rx="10" fill="#fff" stroke="#dbe5ea"/><text class="svg-label" x="0" y="69" text-anchor="middle" font-size="19">'+name+'</text>';
+}
+function renderPosition(){
+ var reference=position.people[position.reference],target=position.people[1-position.reference];
+ var a=mapPoint(reference),b=mapPoint(target),ids=['position-blue','position-orange'];
+ for(var i=0;i<2;i++){
+  var point=mapPoint(position.people[i]),el=$(ids[i]);
+  attr(el,'transform','translate('+point.x+' '+point.y+')');
+  attr(el,'class','person'+(position.reference===i?' is-reference':'')+(dragActive&&dragActive.element===el?' dragging':''));
+ }
+ attr($('position-axes'),'transform','translate('+a.x+' '+a.y+')');
+ show($('position-axes'),position.direction);
+ setText($('position-reference'),'和'+reference.name+'比一比');
+ setText($('position-target-name'),target.name);
+ $('position-target-name').className=position.reference===0?'orange-text':'blue-text';
+ setText($('position-direction'),position.direction?directionName(reference,target):'点开看看');
+ setText($('position-distance'),position.distance?distanceLabel(distance(reference,target)):'量一量');
+ updateTile('position-direction-btn',position.direction);
+ updateTile('position-distance-btn',position.distance);
+ var sentence='两人都面向旗台。';
+ if(position.direction&&position.distance)sentence=target.name+'在'+reference.name+'的'+directionName(reference,target)+'，相距'+distanceLabel(distance(reference,target))+'。';
+ else if(position.direction)sentence='还有多远？可以量一量。';
+ else if(position.distance)sentence='在哪个方向？再说一说。';
+ setText($('position-sentence'),sentence);
+ show($('position-measure'),position.distance);
+ attr($('position-line'),'x1',a.x);attr($('position-line'),'y1',a.y);attr($('position-line'),'x2',b.x);attr($('position-line'),'y2',b.y);
+ attr($('position-dot-a'),'cx',a.x);attr($('position-dot-a'),'cy',a.y);attr($('position-dot-b'),'cx',b.x);attr($('position-dot-b'),'cy',b.y);
+ var lx=(a.x+b.x)/2,ly=(a.y+b.y)/2;
+ if(Math.abs(a.y-b.y)<50)ly-=34;else lx+=65;
+ lx=Math.max(100,Math.min(900,lx));ly=Math.max(85,Math.min(565,ly));
+ attr($('position-measure-label'),'transform','translate('+lx+' '+ly+')');
+ setText($('position-line-text'),distanceLabel(distance(reference,target)));
+}
+function updateTile(id,on){
+ var el=$(id);el.classList.toggle('revealed',on);attr(el,'aria-pressed',on?'true':'false');
+ var sign=el.querySelector('.tile-action');if(sign)setText(sign,on?'−':'＋');
+}
+function setPerson(index,x,y){
+ x=Math.max(1,Math.min(11,Math.round(x*2)/2));y=Math.max(1,Math.min(7,Math.round(y*2)/2));
+ var other=position.people[1-index];
+ if(distance({x:x,y:y},other)<.95)return;
+ position.people[index].x=x;position.people[index].y=y;renderPosition();
+}
+function svgPoint(svg,event){
+ var e=event.touches&&event.touches[0]?event.touches[0]:event.changedTouches&&event.changedTouches[0]?event.changedTouches[0]:event;
+ var matrix=svg.getScreenCTM();if(!matrix)return {x:0,y:0};
+ var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(matrix.inverse());
+}
+function bindDrag(element,svg,begin,move,end){
+ function start(e){
+  if(e.button!==undefined&&e.button!==0)return;
+  if(dragActive)return;
+  e.preventDefault();
+  var p=svgPoint(svg,e);dragActive={element:element,id:e.pointerId,offset:begin(p)};
+  element.classList.add('dragging');
+  if(element.setPointerCapture&&e.pointerId!==undefined){try{element.setPointerCapture(e.pointerId);}catch(ignore){}}
+ }
+ function moving(e){
+  if(!dragActive||dragActive.element!==element)return;
+  if(e.pointerId!==undefined&&dragActive.id!==e.pointerId)return;
+  if(e.cancelable)e.preventDefault();
+  move(svgPoint(svg,e),dragActive.offset);
+ }
+ function finish(e){
+  if(!dragActive||dragActive.element!==element)return;
+  if(e.pointerId!==undefined&&dragActive.id!==e.pointerId)return;
+  var was=dragActive;dragActive=null;element.classList.remove('dragging');
+  if(end)end(e.type.indexOf('cancel')<0,was);
+ }
+ if(window.PointerEvent){
+  element.addEventListener('pointerdown',start);window.addEventListener('pointermove',moving,{passive:false});window.addEventListener('pointerup',finish);window.addEventListener('pointercancel',finish);
+ }else{
+  element.addEventListener('mousedown',start);window.addEventListener('mousemove',moving);window.addEventListener('mouseup',finish);
+  element.addEventListener('touchstart',start,{passive:false});window.addEventListener('touchmove',moving,{passive:false});window.addEventListener('touchend',finish);window.addEventListener('touchcancel',finish);
+ }
+}
+function resetPosition(){position.people[0].x=4;position.people[0].y=4;position.people[1].x=8;position.people[1].y=4;position.reference=0;position.direction=false;position.distance=false;renderPosition();}
+function setFeedback(type,symbol,text){
+ $('game-feedback').className='feedback'+(type?' '+type:'');
+ setText($('game-feedback').querySelector('.feedback-symbol'),symbol);
+ setText($('game-feedback-text'),text);
+}
+function nodePossible(node){return (!game.showDirection||node.direction===game.direction)&&(!game.showDistance||node.distance===game.distance);}
+function makeDeck(){
+ var deck=[];for(var d=0;d<4;d++)for(var r=2;r<=4;r++)deck.push(d*10+r);
+ for(var i=deck.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),v=deck[i];deck[i]=deck[j];deck[j]=v;}
+ if(deck[deck.length-1]===game.previous){var swap=deck[0];deck[0]=deck[deck.length-1];deck[deck.length-1]=swap;}
+ return deck;
+}
+function nextGame(){
+ if(!game.deck.length)game.deck=makeDeck();
+ var key=game.deck.pop();game.previous=key;game.direction=Math.floor(key/10);game.distance=key%10;
+ game.showDirection=false;game.showDistance=false;game.selected=-1;game.solved=false;game.px=500;game.py=330;
+ setFeedback('','?','先打开一条线索。');renderGame();
+}
+function renderGame(){
+ var dir=directions[game.direction],count=0;
+ setText($('game-direction'),game.showDirection?dir.name:'打开线索');
+ setText($('game-distance'),game.showDistance?game.distance+'米':'打开线索');
+ updateTile('game-direction-btn',game.showDirection);updateTile('game-distance-btn',game.showDistance);
+ $('game-direction-btn').disabled=game.solved;$('game-distance-btn').disabled=game.solved;
+ show($('game-ray'),game.showDirection);
+ var ray='M500 330L'+(500+dir.x*255)+' '+(330+dir.y*255);
+ attr($('game-ray-band'),'d',ray);attr($('game-ray-line'),'d',ray);
+ show($('game-distance-ring'),game.showDistance);attr($('game-distance-ring'),'r',game.distance*60);
+ for(var i=0;i<nodes.length;i++){
+  var possible=nodePossible(nodes[i]);if(possible)count++;
+  var c='game-node'+(possible?' possible':' ruled-out')+(game.selected===i?' selected':'')+(game.solved&&game.selected===i?' solved':'');
+  attr(nodes[i].el,'class',c);attr(nodes[i].el,'aria-pressed',game.selected===i?'true':'false');
+ }
+ attr($('game-player'),'transform','translate('+(game.px+(game.solved?-18:0))+' '+game.py+')');
+ $('game-player').style.pointerEvents=game.solved?'none':'';
+ attr($('game-player'),'tabindex',game.solved?'-1':'0');
+ show($('game-friend'),game.solved);
+ if(game.solved)attr($('game-friend'),'transform','translate('+(500+dir.x*game.distance*60+23)+' '+(330+dir.y*game.distance*60)+')');
+ setText($('game-count'),game.solved?'方向＋距离 → 找到了':'图中'+count+'处符合线索');
+ setText($('game-caption'),game.solved?'两位朋友见面了':'朋友站在一个圆点上');
+ setText($('game-next'),game.solved?'再找一位':'换一位朋友');
+ $('game-next').className='btn '+(game.solved?'primary':'soft')+' next-btn';
+}
+function evaluateNode(index){
+ if(game.solved||index<0||index>=nodes.length)return;
+ game.selected=index;var node=nodes[index];game.px=node.x;game.py=node.y;
+ if(!nodePossible(node)){
+  if(game.showDirection&&node.direction!==game.direction)setFeedback('retry','↺','方向不合，再看看线索。');
+  else setFeedback('retry','↺','距离不合，再量一量。');
+ }else if(!game.showDirection||!game.showDistance){
+  var missing=!game.showDirection&&!game.showDistance?'还需要方向和距离。':!game.showDirection?'还缺方向线索。':'还缺距离线索。';
+  setFeedback('possible','?','这里也有可能，'+missing);
+ }else{
+  game.solved=true;setFeedback('success','✓','找到了！起点的'+directions[game.direction].name+game.distance+'米处。');
+ }
+ renderGame();
+}
+function toggleGameClue(kind){
+ if(game.solved)return;
+ if(kind==='direction')game.showDirection=!game.showDirection;else game.showDistance=!game.showDistance;
+ if(game.selected>=0)evaluateNode(game.selected);
+ else{
+  if(game.showDirection&&game.showDistance)setFeedback('','→','线索齐了，去找朋友吧。');
+  else if(game.showDirection)setFeedback('possible','?','这个方向，有几个可能的位置？');
+  else if(game.showDistance)setFeedback('possible','?','同样远，可以在哪些方向？');
+  else setFeedback('','?','先打开一条线索。');
+  renderGame();
+ }
+}
+function nearestNode(x,y){
+ var best=-1,bestDist=42;
+ for(var i=0;i<nodes.length;i++){var dx=x-nodes[i].x,dy=y-nodes[i].y,dd=Math.sqrt(dx*dx+dy*dy);if(dd<bestDist){best=i;bestDist=dd;}}
+ return best;
+}
+function buildNodes(){
+ var html='',index=0;
+ for(var d=0;d<4;d++)for(var r=1;r<=4;r++){
+  var p={direction:d,distance:r,x:500+directions[d].x*r*60,y:330+directions[d].y*r*60};
+  nodes.push(p);
+  html+='<g id="game-node-'+index+'" class="game-node" transform="translate('+p.x+' '+p.y+')" tabindex="0" role="button" aria-label="起点'+directions[d].name+r+'米的圆点" aria-pressed="false"><circle r="27" fill="transparent"/><circle class="node-disc" r="21"/><circle class="node-mark" r="5"/></g>';index++;
+ }
+ $('game-nodes').innerHTML=html;
+ nodes.forEach(function(node,i){
+  node.el=$('game-node-'+i);
+  node.el.addEventListener('click',function(){evaluateNode(i);});
+  node.el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();evaluateNode(i);}});
+ });
+}
+function toast(text){setText($('toast'),text);$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3300);}
+function fitScenes(){
+ var portrait=window.innerWidth<=1000&&window.innerHeight>window.innerWidth;
+ attr($('game-svg'),'viewBox',portrait?'200 -10 600 660':'0 0 1000 640');
+ attr($('game-scale'),'transform',portrait?'translate(245 615)':'translate(127 607)');
+ attr($('game-count'),'x',portrait?755:874);
+ attr($('game-count'),'y',portrait?620:610);
+}
+function changePage(name){
+ if(['motion','position','game'].indexOf(name)<0)return;
+ if(window.MotionPage&&name!=='motion')window.MotionPage.deactivate();
+ activePage=name;
+ var buttons=document.querySelectorAll('[data-page]');for(var i=0;i<buttons.length;i++){var on=buttons[i].getAttribute('data-page')===name;buttons[i].classList.toggle('active',on);attr(buttons[i],'aria-pressed',on?'true':'false');}
+ var pages=document.querySelectorAll('.lesson-page');for(var j=0;j<pages.length;j++){var isActive=pages[j].id==='page-'+name;pages[j].classList.toggle('active',isActive);pages[j].hidden=!isActive;}
+ if(name==='motion'&&window.MotionPage)window.MotionPage.activate();
+}
+function init(){
+ $('position-blue').querySelector('.avatar-art').innerHTML=avatarSVG('#377ddb','小蓝',false);
+ $('position-orange').querySelector('.avatar-art').innerHTML=avatarSVG('#eb8c58','小橙',false);
+ $('game-player').querySelector('.avatar-art').innerHTML=avatarSVG('#377ddb','小蓝',true);
+ $('game-friend').innerHTML='<g transform="scale(.85)">'+avatarSVG('#eb8c58','朋友',false)+'</g>';
+ ['position-blue','position-orange'].forEach(function(id,index){
+  var el=$(id);
+  bindDrag(el,$('position-svg'),function(p){var where=mapPoint(position.people[index]);return {x:p.x-where.x,y:p.y-where.y};},function(p,offset){setPerson(index,(p.x-offset.x-140)/60,(p.y-offset.y-90)/60);},function(){renderPosition();});
+  el.addEventListener('keydown',function(e){
+   var dx=e.key==='ArrowLeft'?-.5:e.key==='ArrowRight'?.5:0,dy=e.key==='ArrowUp'?-.5:e.key==='ArrowDown'?.5:0;
+   if(dx||dy){e.preventDefault();setPerson(index,position.people[index].x+dx,position.people[index].y+dy);}
+  });
+ });
+ $('position-direction-btn').addEventListener('click',function(){position.direction=!position.direction;renderPosition();});
+ $('position-distance-btn').addEventListener('click',function(){position.distance=!position.distance;renderPosition();});
+ $('position-swap').addEventListener('click',function(){position.reference=1-position.reference;renderPosition();});
+ $('position-reset').addEventListener('click',resetPosition);
+ $('game-direction-btn').addEventListener('click',function(){toggleGameClue('direction');});
+ $('game-distance-btn').addEventListener('click',function(){toggleGameClue('distance');});
+ $('game-next').addEventListener('click',nextGame);
+ buildNodes();
+ bindDrag($('game-player'),$('game-svg'),function(p){return {x:p.x-game.px,y:p.y-game.py};},function(p,offset){
+  if(game.solved)return;game.px=Math.max(200,Math.min(800,p.x-offset.x));game.py=Math.max(85,Math.min(575,p.y-offset.y));attr($('game-player'),'transform','translate('+game.px+' '+game.py+')');
+ },function(commit){
+  if(game.solved)return;
+  var i=nearestNode(game.px,game.py);
+  if(commit&&i>=0)evaluateNode(i);else{
+   game.px=game.selected>=0?nodes[game.selected].x:500;game.py=game.selected>=0?nodes[game.selected].y:330;
+   if(commit)setFeedback('','→','把小蓝放在一个圆点上。');renderGame();
+  }
+ });
+ $('game-player').addEventListener('keydown',function(e){
+  if(game.solved)return;
+  var dx=e.key==='ArrowLeft'?-60:e.key==='ArrowRight'?60:0,dy=e.key==='ArrowUp'?-60:e.key==='ArrowDown'?60:0;
+  if(dx||dy){e.preventDefault();game.px=Math.max(260,Math.min(740,game.px+dx));game.py=Math.max(90,Math.min(570,game.py+dy));attr($('game-player'),'transform','translate('+game.px+' '+game.py+')');}
+  if(e.key==='Enter'||e.key===' '){e.preventDefault();var index=nearestNode(game.px,game.py);if(index>=0)evaluateNode(index);else setFeedback('','→','先走到一个圆点上。');}
+ });
+ var nav=document.querySelectorAll('[data-page]');for(var i=0;i<nav.length;i++)nav[i].addEventListener('click',function(){changePage(this.getAttribute('data-page'));});
+ $('fullscreen').addEventListener('click',function(){
+  var doc=document,root=doc.documentElement,exit=doc.exitFullscreen||doc.webkitExitFullscreen,enter=root.requestFullscreen||root.webkitRequestFullscreen;
+  try{
+   var result;if(doc.fullscreenElement||doc.webkitFullscreenElement){if(exit)result=exit.call(doc);}else if(enter)result=enter.call(root);else{toast('此浏览器不支持网页全屏，可横屏放大使用。');return;}
+   if(result&&result.catch)result.catch(function(){toast('请使用浏览器的全屏功能。');});
+  }catch(error){toast('请使用浏览器的全屏功能。');}
+ });
+ document.addEventListener('visibilitychange',function(){if(document.hidden&&window.MotionPage)window.MotionPage.deactivate();});
+ window.addEventListener('blur',function(){if(window.MotionPage)window.MotionPage.deactivate();if(dragActive){dragActive.element.classList.remove('dragging');dragActive=null;}});
+ window.addEventListener('resize',fitScenes);
+ renderPosition();nextGame();fitScenes();changePage('motion');
+}
+window.LessonApp={init:init,changePage:changePage,getState:function(){return {page:activePage,position:JSON.parse(JSON.stringify(position)),game:JSON.parse(JSON.stringify(game))};},geometry:{distance:distance,directionName:directionName,distanceLabel:distanceLabel},assets:{avatarSVG:avatarSVG},setPerson:setPerson,resetPosition:resetPosition,evaluateNode:evaluateNode,nextGame:nextGame};
+}());
+(function () {
+  'use strict';
+  var root = document.getElementById('page-motion');
+  if (!root) return;
+  var names = { car: '小车', dog: '小狗', bench: '长椅' };
+  var colors = { car: '#2868dc', dog: '#d38436', bench: '#8c77cf' };
+  var state = { time: 0, running: false, active: true, selected: 'car', trace: false, answer: null };
+  var lastTime = 0, frame = 0;
+  var raf = window.requestAnimationFrame || function (fn) { return window.setTimeout(function () { fn(Date.now()); }, 16); };
+  var caf = window.cancelAnimationFrame || window.clearTimeout;
+  var el = {};
+  var ids = ['time', 'timeline', 'play', 'reset', 'trace', 'selected-name', 'before-direction', 'now-direction', 'before-distance', 'now-distance', 'evidence', 'origin-line', 'now-line', 'trail', 'ghost', 'ghost-use', 'start-dot', 'dog-pose', 'feedback', 'answer-moving', 'answer-still'];
+  for (var i = 0; i < ids.length; i++) el[ids[i]] = document.getElementById('m-' + ids[i]);
+  var targets = { car: document.getElementById('m-target-car'), dog: document.getElementById('m-target-dog'), bench: document.getElementById('m-target-bench') };
+
+  function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+  function positionAt(name, seconds) {
+    var t = clamp(Number(seconds) || 0, 0, 6) / 6;
+    if (name === 'car') return { x: 170 + 660 * t, y: 510 };
+    if (name === 'dog') return { x: 500 - 185 * Math.cos(Math.PI * t), y: 300 - 185 * Math.sin(Math.PI * t) };
+    return { x: 220, y: 160 };
+  }
+  function distanceFromPole(point) {
+    var dx = point.x - 500, dy = point.y - 300;
+    return Math.sqrt(dx * dx + dy * dy) / 50;
+  }
+  function directionFromPole(point) {
+    var dx = point.x - 500, dy = point.y - 300;
+    var horizontal = Math.abs(dx) < 1 ? '' : dx < 0 ? '左' : '右';
+    var vertical = Math.abs(dy) < 1 ? '' : dy < 0 ? '上' : '下';
+    return horizontal || vertical ? horizontal + vertical + '方' : '同一位置';
+  }
+  function setText(node, value) { if (node.textContent !== value) node.textContent = value; }
+  function clearAnswer() {
+    state.answer = null;
+    el['answer-moving'].className = 'btn';
+    el['answer-still'].className = 'btn';
+    feedback('', '?', '先观察，再判断');
+  }
+  function feedback(kind, icon, text) {
+    el.feedback.className = 'm-feedback' + (kind ? ' ' + kind : '');
+    setText(el.feedback.firstElementChild, icon);
+    setText(el.feedback.lastElementChild, text);
+  }
+  function syncPlay() {
+    setText(el.play, state.running ? 'Ⅱ 暂停' : state.time >= 6 ? '↻ 重播' : '▶ 开始');
+    el.play.setAttribute('aria-label', state.running ? '暂停观察' : state.time >= 6 ? '重新观察' : '开始观察');
+  }
+  function renderTrace() {
+    var start = positionAt(state.selected, 0), now = positionAt(state.selected, state.time);
+    el.evidence.setAttribute('visibility', state.trace ? 'visible' : 'hidden');
+    if (!state.trace) return;
+    el['origin-line'].setAttribute('x2', start.x);
+    el['origin-line'].setAttribute('y2', start.y);
+    el['now-line'].setAttribute('x2', now.x);
+    el['now-line'].setAttribute('y2', now.y);
+    el['now-line'].setAttribute('stroke', colors[state.selected]);
+    el.trail.setAttribute('stroke', colors[state.selected]);
+    var path = 'M' + start.x + ' ' + start.y;
+    if (state.selected === 'dog' && state.time > 0) {
+      path += 'A185 185 0 0 1 ' + now.x + ' ' + now.y;
+    } else if (state.selected === 'car') {
+      path += 'L' + now.x + ' ' + now.y;
+    }
+    el.trail.setAttribute('d', path);
+    el.ghost.setAttribute('transform', 'translate(' + start.x + ' ' + start.y + ')' + (state.selected === 'dog' ? ' rotate(-90)' : ''));
+    var art = '#m-' + state.selected + '-art';
+    el['ghost-use'].setAttribute('href', art);
+    el['ghost-use'].setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', art);
+    el['start-dot'].setAttribute('cx', start.x);
+    el['start-dot'].setAttribute('cy', start.y);
+  }
+  function render() {
+    var car = positionAt('car', state.time), dog = positionAt('dog', state.time);
+    targets.car.setAttribute('transform', 'translate(' + car.x + ' ' + car.y + ')');
+    targets.dog.setAttribute('transform', 'translate(' + dog.x + ' ' + dog.y + ')');
+    el['dog-pose'].setAttribute('transform', 'rotate(' + (-90 + 180 * state.time / 6) + ')');
+    var start = positionAt(state.selected, 0), now = positionAt(state.selected, state.time);
+    setText(el.time, state.time.toFixed(1));
+    el.timeline.value = state.time;
+    el.timeline.setAttribute('aria-valuetext', state.time.toFixed(1) + '秒');
+    setText(el['before-direction'], directionFromPole(start));
+    setText(el['now-direction'], directionFromPole(now));
+    setText(el['before-distance'], distanceFromPole(start).toFixed(1));
+    setText(el['now-distance'], distanceFromPole(now).toFixed(1));
+    renderTrace();
+  }
+  function select(name) {
+    state.selected = name;
+    for (var key in targets) {
+      if (Object.prototype.hasOwnProperty.call(targets, key)) {
+        targets[key].setAttribute('class', 'm-target' + (key === name ? ' is-selected' : ''));
+        targets[key].setAttribute('aria-pressed', key === name ? 'true' : 'false');
+      }
+    }
+    setText(el['selected-name'], names[name]);
+    clearAnswer();
+    render();
+  }
+  function pause() {
+    state.running = false;
+    if (frame) caf(frame);
+    frame = 0;
+    lastTime = 0;
+    syncPlay();
+  }
+  function tick(now) {
+    frame = 0;
+    if (!state.running || !state.active) return;
+    if (!lastTime) lastTime = now;
+    var dt = clamp((now - lastTime) / 1000, 0, 0.05);
+    lastTime = now;
+    state.time = Math.min(6, state.time + dt);
+    render();
+    if (state.time >= 6) {
+      pause();
+    } else {
+      frame = raf(tick);
+    }
+  }
+  function play() {
+    if (state.running) { pause(); return; }
+    if (state.time >= 6) {
+      state.time = 0;
+      clearAnswer();
+      render();
+    }
+    state.active = true;
+    state.running = true;
+    lastTime = 0;
+    syncPlay();
+    frame = raf(tick);
+  }
+  function reset() {
+    pause();
+    state.time = 0;
+    state.trace = false;
+    el.trace.setAttribute('aria-pressed', 'false');
+    setText(el.trace, '显示轨迹');
+    clearAnswer();
+    render();
+    syncPlay();
+  }
+  function answer(moving) {
+    pause();
+    if (state.time < 0.4) {
+      feedback('wait', '▶', '先播放，或拖动时间');
+      return;
+    }
+    var actual = state.selected !== 'bench';
+    state.answer = moving;
+    el['answer-moving'].className = 'btn' + (moving ? ' chosen' : '');
+    el['answer-still'].className = 'btn' + (!moving ? ' chosen' : '');
+    if (moving === actual) {
+      feedback('correct', '✓', state.selected === 'dog' ? '距离相同，方向变了' : actual ? '位置发生变化' : '位置没有变化');
+    } else {
+      feedback('retry', '↺', actual ? '再比一比开始和现在的位置' : '与旗杆的位置变了吗？');
+    }
+    state.trace = true;
+    el.trace.setAttribute('aria-pressed', 'true');
+    setText(el.trace, '隐藏轨迹');
+    renderTrace();
+  }
+  function listenTarget(name) {
+    var node = targets[name];
+    node.addEventListener('click', function () { select(name); });
+    node.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ' || event.keyCode === 13 || event.keyCode === 32) {
+        event.preventDefault();
+        select(name);
+      }
+    });
+  }
+  listenTarget('car'); listenTarget('dog'); listenTarget('bench');
+  el.play.addEventListener('click', play);
+  el.reset.addEventListener('click', reset);
+  el.timeline.addEventListener('input', function () {
+    pause();
+    state.time = clamp(Number(el.timeline.value), 0, 6);
+    clearAnswer();
+    render();
+    syncPlay();
+  });
+  el.trace.addEventListener('click', function () {
+    state.trace = !state.trace;
+    el.trace.setAttribute('aria-pressed', state.trace ? 'true' : 'false');
+    setText(el.trace, state.trace ? '隐藏轨迹' : '显示轨迹');
+    renderTrace();
+  });
+  el['answer-moving'].addEventListener('click', function () { answer(true); });
+  el['answer-still'].addEventListener('click', function () { answer(false); });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) pause(); });
+  window.MotionPage = {
+    activate: function () { state.active = true; render(); },
+    deactivate: function () { state.active = false; pause(); },
+    reset: reset,
+    positionAt: positionAt,
+    getState: function () { return { time: state.time, running: state.running, active: state.active, selected: state.selected, trace: state.trace, answer: state.answer }; }
+  };
+  render();
+  syncPlay();
+}());
+
+window.LessonApp.init();
+</script>
+</body>
+</html>
