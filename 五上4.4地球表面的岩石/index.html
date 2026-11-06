@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f3ec">
+<meta name="description" content="五上4.4地球表面的岩石：整块与颗粒同步放大，跨矿物刻画、擦拭并保留前后证据。单体离线互动网页。">
+<title>地球表面的岩石 · 岩石观察室</title>
+<style>
+:root{--ink:#243c39;--sub:#5d7069;--green:#246b5d;--deep:#194e43;--mint:#e7eee7;--paper:#f4f3ec;--white:#fffefa;--line:#d7ded4;--amber:#b97021;--amber-light:#fff0d4;--shadow:0 12px 36px #233b3610;--rad:20px;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);font-synthesis:none}
+*{box-sizing:border-box}html,body{margin:0;min-width:320px;height:100%;background:var(--paper)}body{overflow:hidden}button,input,textarea,select{font:inherit}button{cursor:pointer;touch-action:manipulation;min-height:44px;color:inherit;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:9px 15px;font-weight:600;transition:background .15s,border-color .15s,box-shadow .15s}button:hover{border-color:#739487;background:#edf2eb}button:active{transform:translateY(1px)}button:disabled{cursor:default;opacity:.4;transform:none}button:focus-visible,input:focus-visible,textarea:focus-visible,canvas:focus-visible{outline:3px solid var(--amber);outline-offset:3px}.primary{background:var(--green);border-color:var(--green);color:white}.primary:hover{background:var(--deep);color:#fff}.ghost{background:transparent}.small{font-size:14px;min-height:40px;padding:7px 12px}.iconbtn{width:44px;padding:8px;flex:none;display:grid;place-items:center}.icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.hidden,[hidden]{display:none!important}.muted{color:var(--sub)}
+#app{height:100%;height:100dvh;display:flex;flex-direction:column;padding:0 26px}.topbar{flex:none;min-height:100px;display:flex;align-items:center;gap:24px;border-bottom:1px solid var(--line)}.brand{flex:1;min-width:240px}.eyebrow{font-size:13px;letter-spacing:.12em;color:var(--sub);margin-bottom:6px}.brand h1{font-size:clamp(22px,2vw,30px);line-height:1.15;letter-spacing:.04em;margin:0;font-weight:750}.topnav{display:flex;border:1px solid #d2dbd1;background:#e9eee5;padding:5px;border-radius:14px;gap:3px;flex:none}.topnav button{background:transparent;border:0;min-height:44px;padding:9px 21px;font-size:17px;color:var(--sub)}.topnav button[aria-selected=true]{background:var(--white);color:var(--green);box-shadow:0 2px 8px #344b3810}.navnum{font-size:12px;opacity:.6;margin-right:7px}.headtools{display:flex;align-items:center;gap:8px;flex:none}#evidenceBtn{display:flex;align-items:center;gap:8px}.count{background:var(--mint);border-radius:7px;min-width:22px;font-size:12px;padding:2px 5px}.main{flex:1;min-height:0;display:flex;flex-direction:column}.page{flex:1;min-height:0;display:flex;flex-direction:column;padding-top:15px}.toolbar{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.samples{display:flex;gap:8px;align-items:center}.sample{display:flex;align-items:center;gap:9px;min-height:54px;padding:6px 15px 6px 8px;background:transparent;font-size:18px}.sample.active{border-color:var(--green);background:var(--white);box-shadow:0 3px 10px #314c3210}.sample canvas{width:45px;height:37px}.toolbar-actions{display:flex;gap:8px}.workbench{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr);gap:18px}.specimen-panel{min-height:0;display:flex;flex-direction:column;position:relative;border-radius:var(--rad);background:radial-gradient(ellipse at 40% 35%,#fffef9,#eeeede 92%);border:1px solid #e0e3d8;overflow:hidden}.panel-head{height:56px;flex:none;padding:15px 19px;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:1}.panel-name{font-size:17px;font-weight:650}.badge{display:inline-flex;align-items:center;font-size:12px;line-height:1.4;padding:5px 9px;border:1px solid #cdd9cd;border-radius:20px;letter-spacing:.03em;background:#f5f7f0;color:#5c7061;white-space:nowrap}.badge.photo{color:#81601a;background:#fff4d6;border-color:#e3ca83}.canvas-area{flex:1;min-height:0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.stage-canvas{display:block;width:100%;height:100%;touch-action:none;outline-offset:-4px!important;cursor:crosshair}.stage-tip{position:absolute;left:20px;bottom:18px;right:20px;pointer-events:none;display:flex;align-items:center;justify-content:center;gap:8px;color:#587163;font-size:15px}.panel-foot{flex:none;min-height:53px;padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #d9dfd480;background:#f8f9f177}.footertext{font-size:13px;color:var(--sub);line-height:1.45}.lens-panel{min-height:0;background:var(--white);border:1px solid var(--line);border-radius:var(--rad);box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}.lens-top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 18px 10px;flex:none}.lens-top h2{margin:0;font-size:19px;font-weight:650;display:flex;align-items:center;gap:8px}.orange-dot{width:9px;height:9px;border-radius:50%;background:var(--amber);display:inline-block}.zoom-display{font-size:13px;color:var(--sub)}.lens-canvas-wrap{flex:1;min-height:110px;margin:0 16px;position:relative;overflow:hidden;border:2px solid #c39653;border-radius:12px;background:#efefe5}.lens-canvas-wrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}.lens-center{position:absolute;left:50%;top:50%;width:12px;height:12px;border:1px solid #fff8;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}.zoom-row{padding:10px 18px;display:flex;align-items:center;gap:12px;font-size:14px;flex:none}.zoom-row input{flex:1;min-width:50px;accent-color:var(--green);height:30px}.mineral-context{padding:0 18px 10px;flex:none}.mineral-row{display:flex;gap:8px;align-items:center;justify-content:space-between;min-height:43px}.context-label{font-size:16px;font-weight:600}.mineral-note{font-size:12px;color:var(--sub);margin:6px 0 0;line-height:1.5;min-height:18px}.lens-actions{padding:13px 16px;border-top:1px solid #e3e7dd;display:flex;gap:8px;flex:none}.lens-actions button{flex:1;padding:10px 6px;font-size:16px}.stone-meta{font-size:15px;display:flex;gap:10px;align-items:center}.stone-meta strong{font-size:18px}.pagebottom{height:38px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:#697b6e}.pagebottom .watermark{letter-spacing:.15em;opacity:.65}.tinykey{color:var(--amber);font-weight:700}
+.scratch-title{display:flex;flex-direction:column;gap:4px}.scratch-title h2{font-size:21px;margin:0;font-weight:650}.scratch-title p{font-size:14px;margin:0;color:var(--sub)}.scratch-bench{grid-template-columns:minmax(0,1fr) 296px}.scratch-panel{background:radial-gradient(ellipse at 45% 40%,#fafaf2,#e9eddf)}.scratch-overlay{position:absolute;right:15px;top:12px;display:flex;gap:6px;align-items:center;pointer-events:none}.scratch-overlay .badge{background:#fcfff5e8}.scratch-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 18px;min-height:63px;background:#fffef88c;border-top:1px solid #d9dfd4;flex:none}.scratch-footer .status{font-size:16px;line-height:1.45}.scratch-footer button{flex:none}.toolbox{display:flex;flex-direction:column;gap:12px;min-height:0}.tool-card{background:var(--white);border:1px solid var(--line);border-radius:var(--rad);padding:18px}.tool-card h3{margin:0 0 12px;font-size:16px;font-weight:650}.tool-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.tool{padding:9px 4px;min-height:91px;display:flex;align-items:center;justify-content:center;gap:6px;flex-direction:column;font-size:14px;background:#f9faf4}.tool svg{height:32px;width:40px}.tool.active{border:2px solid var(--green);background:#eaf3e9;padding:8px 3px}.erasebtn{width:100%;display:flex;gap:10px;align-items:center;justify-content:center;margin-top:10px;padding:12px;font-size:17px}.erasebtn.active{border-color:var(--amber);background:var(--amber-light);color:#81500d}.toolhint{font-size:13px;color:var(--sub);line-height:1.5;margin:10px 0 0;min-height:39px}.mini-card{flex:1;min-height:0;display:flex;flex-direction:column}.mini-card h3{display:flex;align-items:center;justify-content:space-between;gap:6px}.mini-card h3 span{font-size:12px;font-weight:400;color:var(--sub)}.mini-frame{flex:1;min-height:74px;background:#f1f2e9;border:1px solid #e0e5d7;border-radius:10px;overflow:hidden;position:relative}.mini-frame canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}.mini-label{margin-top:7px;font-size:12px;line-height:1.5;color:var(--sub)}.toolbox>.primary{font-size:17px;min-height:49px}.toolbox>.control-row{display:flex;gap:7px}.control-row button{flex:1;min-width:0}.science-hint{padding:10px 14px;background:#e8eee2;border-radius:12px;font-size:13px;line-height:1.5;color:#556e5e}.stroke-count{font-variant-numeric:tabular-nums}
+.modal{position:fixed;inset:0;background:#152c2780;backdrop-filter:blur(5px);z-index:30;display:flex;align-items:center;justify-content:center;padding:24px}.dialog{background:var(--paper);border:1px solid #fff9;border-radius:22px;box-shadow:0 24px 80px #0b292943;width:min(1160px,100%);max-height:calc(100dvh - 48px);display:flex;flex-direction:column;overflow:hidden}.dialog-header{display:flex;align-items:center;justify-content:space-between;gap:15px;flex:none;padding:19px 24px;border-bottom:1px solid var(--line)}.dialog-header h2{margin:0;font-size:24px}.dialog-header p{font-size:13px;color:var(--sub);margin:5px 0 0}.dialog-header .actions{display:flex;gap:8px}.dialog-body{padding:20px 24px;overflow:auto;min-height:0}.dialog.small-dialog{max-width:670px}.dialog.small-dialog .dialog-body{font-size:16px;line-height:1.75}.dialog h3{font-size:18px}.dialog p{margin-top:6px}.dialog a{color:var(--green)}.model-table{border-collapse:collapse;width:100%;font-size:14px}.model-table th,.model-table td{padding:8px;border-bottom:1px solid var(--line);text-align:left}.callout{background:#e7eee2;border-left:3px solid var(--green);padding:12px 16px;border-radius:5px}.record-empty{min-height:300px;display:grid;place-items:center;text-align:center;color:var(--sub)}.record-empty .icon{width:56px;height:56px;stroke-width:1}.record-empty h3{font-size:23px;color:var(--ink);margin:18px 0 8px}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.compare-card{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--white);min-width:0}.compare-card header{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:10px 13px;font-size:15px}.compare-card header strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.compare-card img{width:100%;height:auto;aspect-ratio:1.55;display:block;object-fit:contain;background:#f0f2e8}.compare-card textarea{display:block;border:0;border-top:1px solid var(--line);resize:none;width:100%;height:62px;background:#fffcf2;padding:10px 13px;font-size:15px;line-height:1.5;color:var(--ink)}.compare-card .tags{display:flex;gap:5px;flex-wrap:wrap;padding:8px 10px}.tag{font-size:12px;padding:6px 8px;min-height:32px;border-radius:7px;font-weight:500}.tag.on{background:#e2ebdf;border-color:var(--green);color:var(--green)}.compare-placeholder{min-height:310px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1px dashed #b8c7b7;border-radius:15px;color:var(--sub);padding:25px;text-align:center}.evidence-strip{display:flex;gap:10px;overflow:auto;padding:14px 2px 4px;margin-top:5px}.thumb-card{width:143px;flex:none;position:relative}.thumb-button{width:100%;padding:5px;min-height:103px;border:2px solid transparent;background:var(--white)}.thumb-button.selected{border-color:var(--green);background:#edf4e8}.thumb-button img{display:block;width:100%;height:63px;object-fit:cover;border-radius:7px}.thumb-button span{display:block;font-size:12px;padding-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.remove-record{position:absolute;right:4px;top:4px;border:0;min-height:24px;height:24px;width:24px;padding:0;border-radius:50%;background:#fffef4e8;font-weight:400;color:#5c655f;font-size:18px}.evidence-note{font-size:12px;color:var(--sub);margin:6px 0 0;line-height:1.5}.export-preview{max-width:100%;max-height:55dvh;object-fit:contain;background:#fff}.export-links{display:flex;align-items:center;gap:12px;justify-content:center}.download-link{display:inline-block;background:var(--green);color:white!important;padding:9px 20px;text-decoration:none;border-radius:10px;font-weight:600}.legend-line{display:flex;align-items:center;gap:7px}.line-demo{width:28px;height:5px;background:#57534c;border-radius:3px}.line-demo.groove{background:#4b3430;border-bottom:2px solid #fff}.hidden-name{font-size:13px;color:var(--sub)}
+#toast{position:fixed;bottom:55px;left:50%;transform:translateX(-50%);z-index:80;max-width:calc(100% - 30px);padding:13px 22px;border-radius:12px;background:#213d35f0;color:white;font-size:15px;box-shadow:var(--shadow);pointer-events:none;text-align:center;line-height:1.5}.noscript{padding:30px;text-align:center;color:#7c2929}
+@media(min-width:1650px){#app{padding:0 42px}.topbar{min-height:116px}.page{padding-top:22px}.workbench{gap:24px}.lens-top{padding:22px 23px 14px}.lens-top h2{font-size:24px}.lens-canvas-wrap{margin:0 22px}.zoom-row{padding:15px 24px;font-size:17px}.mineral-context{padding:0 24px 16px}.context-label{font-size:20px}.mineral-note{font-size:15px}.lens-actions{padding:18px 22px}.lens-actions button{font-size:19px}.sample{min-height:64px;font-size:21px;padding-right:22px}.sample canvas{width:53px;height:44px}.panel-head{height:66px}.panel-name{font-size:20px}.scratch-bench{grid-template-columns:minmax(0,1fr) 350px}.tool{font-size:17px;min-height:106px}.tool-card{padding:22px}.tool-card h3{font-size:20px}.toolhint{font-size:16px}.scratch-title h2{font-size:25px}.scratch-title p{font-size:16px}.scratch-footer .status{font-size:19px}.pagebottom{font-size:14px;height:45px}.footertext{font-size:15px}.badge{font-size:14px}}
+@media(max-width:1150px){#app{padding:0 17px}.topbar{gap:12px;min-height:90px}.brand{min-width:204px}.brand h1{font-size:23px}.eyebrow{font-size:11px}.topnav button{font-size:15px;padding:9px 12px}.headtools{gap:5px}.headtools .iconbtn{width:39px;min-height:40px}.navnum{display:none}#evidenceBtn{padding:8px 11px;font-size:14px}.workbench{gap:13px;grid-template-columns:minmax(0,1.4fr) minmax(287px,1fr)}.sample{font-size:16px;padding-right:12px;min-height:50px}.sample canvas{width:34px;height:29px}.toolbar-actions button{font-size:13px;padding:8px 10px}.lens-top{padding:13px 14px 9px}.lens-top h2{font-size:17px}.lens-canvas-wrap{margin:0 12px}.lens-actions{padding:10px 12px}.lens-actions button{font-size:14px}.mineral-context{padding:0 13px 9px}.scratch-bench{grid-template-columns:minmax(0,1fr) 255px}.tool-card{padding:14px}.toolbox{gap:10px}.tool{font-size:13px;min-height:82px}.toolhint{font-size:12px}.scratch-footer .status{font-size:14px}.scratch-title h2{font-size:20px}.scratch-title p{font-size:13px}.small{font-size:12px}.science-hint{font-size:12px}.panel-head{padding:13px 14px}}
+@media(max-height:720px) and (min-width:800px){.topbar{min-height:76px}.page{padding-top:10px}.toolbar{margin-bottom:9px}.sample{min-height:47px}.panel-head{height:43px;padding-top:9px;padding-bottom:9px}.panel-foot{min-height:43px;padding:6px 14px}.lens-top{padding-top:10px;padding-bottom:6px}.zoom-row{padding:4px 15px}.mineral-context{padding-bottom:5px}.mineral-row{min-height:36px}.mineral-note{font-size:11px;margin-top:3px}.lens-actions{padding:8px 12px}.pagebottom{height:29px;font-size:11px}.tool-card{padding:11px}.tool-card h3{margin-bottom:8px}.tool{min-height:70px}.tool svg{height:26px}.toolhint{min-height:30px;margin-top:7px}.erasebtn{margin-top:7px;padding:7px}.scratch-footer{min-height:52px;padding:6px 14px}.toolbox{gap:8px}.science-hint{padding:8px 11px}.mini-label{font-size:11px}.toolbox>.primary{min-height:44px}.toolbox>.control-row button{min-height:36px}.mini-card h3 span{font-size:11px}.stage-tip{font-size:13px;bottom:10px}}
+@media(max-width:799px){body{overflow:auto}#app{height:auto;min-height:100dvh;padding:0 14px}.topbar{flex-wrap:wrap;padding:15px 0 12px;min-height:0;gap:12px}.brand{min-width:0;flex:1}.brand h1{font-size:24px}.eyebrow{font-size:11px}.headtools{order:2}.topnav{order:3;width:100%;justify-content:stretch}.topnav button{flex:1;padding:9px 12px;font-size:16px}.headtools #modelBtn{display:none}.headtools #fullscreenBtn{display:none}.headtools #evidenceBtn{padding:7px 10px;font-size:14px}.main{min-height:0}.page{padding-top:13px}.toolbar{flex-wrap:wrap;gap:8px}.samples{width:100%;gap:7px}.sample{flex:1;justify-content:center;min-width:0;padding:6px;font-size:16px}.sample canvas{width:32px;height:30px}.toolbar-actions{width:100%;justify-content:flex-end}.workbench{display:flex;flex-direction:column;gap:13px}.specimen-panel{height:350px;min-height:350px}.lens-panel{min-height:405px}.lens-canvas-wrap{min-height:210px;height:210px;flex:none}.panel-name{font-size:16px}.panel-head{height:47px}.panel-foot{min-height:46px}.lens-actions button{font-size:16px}.mineral-note{font-size:12px}.pagebottom{min-height:47px;height:auto;font-size:11px;padding:10px 0;line-height:1.5;align-items:flex-start}.pagebottom span:first-child{max-width:90%}.scratch-bench{display:flex;flex-direction:column}.scratch-panel{height:430px;min-height:430px}.scratch-title h2{font-size:20px}.scratch-title p{font-size:13px}.scratch-footer{padding:10px;min-height:64px}.scratch-footer .status{font-size:13px}.scratch-footer button{font-size:12px;padding:7px}.toolbox{display:grid;grid-template-columns:1.25fr 1fr;gap:10px;align-items:stretch}.toolbox .tool-card{padding:12px}.toolbox .mini-card{grid-column:2;grid-row:1}.toolbox .science-hint{grid-column:1/-1;grid-row:2}.toolbox>.primary{grid-column:1;grid-row:3}.toolbox>.control-row{grid-column:2;grid-row:3}.tool{min-height:82px;font-size:12px}.tool svg{width:30px}.tool-choices{gap:4px}.toolhint{font-size:11px}.erasebtn{font-size:14px;padding:8px}.mini-frame{min-height:100px}.mini-card h3{flex-wrap:wrap}.modal{padding:10px}.dialog{max-height:calc(100dvh - 20px);border-radius:16px}.dialog-header{padding:14px 15px;gap:8px}.dialog-header h2{font-size:21px}.dialog-header p{font-size:11px}.dialog-header .actions{gap:5px}.dialog-header .actions button{padding:7px 9px;font-size:12px;min-height:38px}.dialog-body{padding:13px}.compare-grid{gap:10px}.compare-card header{font-size:12px;padding:8px}.compare-card .badge{font-size:10px;padding:3px 5px}.compare-card .tags{gap:4px;padding:6px}.tag{font-size:11px;padding:4px 6px;min-height:29px}.compare-card textarea{font-size:13px;height:80px;padding:7px}.compare-placeholder{padding:15px;min-height:290px;font-size:14px}.thumb-card{width:118px}.evidence-strip{margin-top:0}.evidence-note{font-size:11px}.dialog.small-dialog .dialog-body{font-size:14px}.model-table{font-size:12px}#toast{bottom:25px;font-size:14px}}
+@media(max-width:390px){.brand h1{font-size:21px}.sample{font-size:14px}.sample canvas{width:27px}.headtools #evidenceBtn .icon{display:none}.toolbox{grid-template-columns:1fr}.toolbox .mini-card{grid-column:1;grid-row:2;height:180px}.toolbox .science-hint{grid-row:3}.toolbox>.primary{grid-row:4}.toolbox>.control-row{grid-column:1;grid-row:5}.compare-grid{grid-template-columns:1fr}.compare-placeholder{min-height:100px}.compare-card textarea{height:65px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<noscript><div class="noscript">请使用支持 JavaScript 的浏览器打开本互动网页。</div></noscript>
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6h6l2 2h10v12H3zM3 6V4h7l2 2h8v2"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.2"/></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 7h5l2-3h4l2 3h5v13H3z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24"><path d="M7 12V6c0-3 3-3 3 0v5-7c0-3 3-3 3 0v7-5c0-3 3-3 3 0v6-3c0-3 3-3 3 0v5c0 5-3 8-7 8-3 0-5-2-7-5l-2-3c-1-2 1-3 3-1l1 1z"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+</defs></svg>
+<div id="app">
+ <header class="topbar">
+  <div class="brand"><div class="eyebrow">五年级上册 · 4.4 · 岩石观察室</div><h1>地球表面的岩石</h1></div>
+  <nav class="topnav" role="tablist" aria-label="探究视角">
+   <button id="tab-observe" role="tab" aria-selected="true" aria-controls="page-observe"><span class="navnum">01</span>放大观察</button>
+   <button id="tab-scratch" role="tab" aria-selected="false" aria-controls="page-scratch"><span class="navnum">02</span>跨颗粒刻画</button>
+  </nav>
+  <div class="headtools"><button id="evidenceBtn"><svg class="icon"><use href="#i-folder"/></svg>证据夹<span id="evidenceCount" class="count">0</span></button><button id="modelBtn" class="iconbtn ghost" aria-label="模型与资料说明" title="模型与资料说明"><svg class="icon"><use href="#i-info"/></svg></button><button id="fullscreenBtn" class="iconbtn ghost" aria-label="全屏" title="全屏"><svg class="icon"><use href="#i-full"/></svg></button></div>
+ </header>
+ <main class="main">
+  <section id="page-observe" class="page" role="tabpanel" aria-labelledby="tab-observe">
+   <div class="toolbar"><div class="samples" aria-label="选择岩石"><button class="sample active" data-kind="granite" aria-pressed="true"><canvas data-mini="granite" aria-hidden="true"></canvas>花岗岩</button><button class="sample" data-kind="sandstone" aria-pressed="false"><canvas data-mini="sandstone" aria-hidden="true"></canvas>砂岩</button><button class="sample" data-kind="marble" aria-pressed="false"><canvas data-mini="marble" aria-hidden="true"></canvas>大理岩</button></div><div class="toolbar-actions"><button id="newSpecimen" class="ghost">换一块</button><button id="importPhoto">＋ 实物照片</button><input id="photoInput" type="file" accept="image/*" hidden></div></div>
+   <div class="workbench">
+    <div class="specimen-panel"><div class="panel-head"><span class="panel-name" id="specimenName">花岗岩 · 样本 1</span><span class="badge" id="sourceBadge">典型结构示意</span></div><div class="canvas-area"><canvas id="rockCanvas" class="stage-canvas" tabindex="0" role="img" aria-label="岩石全貌，拖动或用方向键移动取样框"></canvas><div class="stage-tip" id="observeTip"><svg class="icon"><use href="#i-hand"/></svg>拖动橙色取样框，看看里面有什么</div></div><div class="panel-foot"><span class="footertext" id="observeFooter">同一块岩石，同一个位置。</span><button id="boundariesBtn" class="small ghost" aria-pressed="false">描出颗粒边界</button></div></div>
+    <div class="lens-panel"><div class="lens-top"><h2><span class="orange-dot"></span>局部放大窗</h2><span id="zoomText" class="zoom-display">屏幕放大 4×</span></div><div class="lens-canvas-wrap"><canvas id="lensCanvas" tabindex="0" role="img" aria-label="同一区域的放大图，点按查看中心颗粒"></canvas><span class="lens-center"></span></div><label class="zoom-row" for="zoomRange"><span>2×</span><input id="zoomRange" type="range" min="2" max="8" value="4" step="1" aria-label="屏幕放大倍数"><span>8×</span></label><div class="mineral-context"><div class="mineral-row"><span class="context-label" id="mineralLabel">先看看颗粒的样子</span><button id="mineralBtn" class="small ghost" aria-pressed="false">矿物提示</button></div><p id="mineralNote" class="mineral-note">点按放大图中的颗粒，可以换一个观察位置。</p></div><div class="lens-actions"><button id="captureObserve" class="primary">保留这一处</button><button id="toScratch">在这里刻画 →</button></div></div>
+   </div>
+   <div class="pagebottom"><span>图中为典型结构示意；缩放不等于显微镜实测倍数。 <button id="mobileModelBtn" class="ghost" style="min-height:24px;padding:0 4px;border:0;font-size:inherit;text-decoration:underline">查看模型说明</button></span><span class="watermark">mutiw</span></div>
+  </section>
+  <section id="page-scratch" class="page" role="tabpanel" aria-labelledby="tab-scratch" hidden>
+   <div class="toolbar"><div class="scratch-title"><h2>同一条线，经过了哪些颗粒？</h2><p>选工具，跨过不同颜色的颗粒刻画，再擦一擦。</p></div><button id="scratchBoundaryBtn" class="ghost" aria-pressed="false">描出边界</button></div>
+   <div class="workbench scratch-bench">
+    <div class="specimen-panel scratch-panel"><div class="panel-head"><span class="panel-name">同一块花岗岩 · 局部</span><span class="badge">刻画模型</span></div><div class="canvas-area"><canvas id="scratchCanvas" class="stage-canvas" tabindex="0" role="img" aria-label="在花岗岩放大区域拖动刻画，选择橡皮擦后拖动擦拭"></canvas><div class="scratch-overlay"><span class="badge" id="activeToolBadge">当前：小刀</span><span class="badge stroke-count" id="strokeCount">0 次刻画</span></div></div><div class="scratch-footer"><span class="status" id="scratchStatus">在岩石上拖出一条线。</span><button id="wipeAll" class="small">擦一遍</button></div></div>
+    <aside class="toolbox" aria-label="刻画工具">
+     <div class="tool-card"><h3>① 选一种工具</h3><div class="tool-choices">
+      <button class="tool" data-tool="nail" aria-pressed="false"><svg viewBox="0 0 50 40" aria-hidden="true"><path d="M10 37V20c0-8 5-15 14-15s14 7 14 15v17" fill="#e9c7ae" stroke="#b2917b" stroke-width="1.5"/><path d="M17 17c0-6 2-9 7-9s8 3 8 9v7c-6 3-10 3-15 0Z" fill="#fbede0" stroke="#caa88c"/></svg>指甲</button>
+      <button class="tool" data-tool="copper" aria-pressed="false"><svg viewBox="0 0 50 40" aria-hidden="true"><path d="M22 15a10 10 0 1 0-5 10L39 36l4-6-5-3 2-4-7-4-2 4Z" fill="#c59b53" stroke="#8c6c34" stroke-width="1.5"/><circle cx="12" cy="15" r="4" fill="#fbf9ed"/></svg>铜钥匙</button>
+      <button class="tool active" data-tool="knife" aria-pressed="true"><svg viewBox="0 0 50 40" aria-hidden="true"><path d="m5 4 28 18-8 10C12 22 7 14 5 4" fill="#bcc8c9" stroke="#718482" stroke-width="1.5"/><path d="m30 21 15 11c4 3 0 8-4 5L25 30Z" fill="#947356" stroke="#5c4b39"/><circle cx="37" cy="30" r="1.4" fill="#e1c595"/></svg>小刀</button>
+     </div><button id="eraserBtn" class="erasebtn" aria-pressed="false"><svg width="31" height="23" viewBox="0 0 40 28" aria-hidden="true"><path d="m2 17 15-15h9l12 11-14 13H12Z" fill="#e7bb9f" stroke="#a7765e" stroke-width="1.5"/><path d="m17 2 11 12-15 12-11-9Z" fill="#f1d8bc" stroke="#a7765e" stroke-width="1.5"/></svg>② 橡皮擦</button><p class="toolhint" id="toolHint">按住拖动。工具经过每一颗粒时，模型分别计算是否刻入。</p></div>
+     <div class="tool-card mini-card"><h3>观察位置 <span>点小图换位置</span></h3><div class="mini-frame"><canvas id="miniCanvas" tabindex="0" role="img" aria-label="花岗岩全貌，点按或使用方向键更换刻画区域"></canvas></div><div class="mini-label" id="regionHint">橙框与左边放大图对应。换位置会清除当前刻画。</div></div>
+     <div class="science-hint">实物小刀操作由教师指导，刀口朝外、避开手指。</div>
+     <button id="captureScratch" class="primary">③ 保留擦拭前后</button><div class="control-row"><button id="undoStroke" class="small ghost">撤销一笔</button><button id="resetScratch" class="small ghost">重新刻画</button></div>
+    </aside>
+   </div>
+   <div class="pagebottom"><span>本模型展示一种可能出现的附着痕；依据预设硬度计算，不代替实物测量。<span id="nailCaution" hidden> 指甲与黑云母硬度相近，实物需换点复测。</span></span><span class="watermark">mutiw</span></div>
+  </section>
+ </main>
+</div>
+<div class="modal" id="evidenceModal" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="evidenceTitle"><header class="dialog-header"><div><h2 id="evidenceTitle">观察证据夹</h2><p>选两条并排看；写下你看见的，再形成解释。</p></div><div class="actions"><button id="exportPng">导出对照图</button><button id="exportJson" class="ghost">备份记录</button><button class="iconbtn" data-close="evidenceModal" aria-label="关闭证据夹"><svg class="icon"><use href="#i-close"/></svg></button></div></header><div class="dialog-body"><div id="evidenceEmpty" class="record-empty"><div><svg class="icon"><use href="#i-folder"/></svg><h3>把值得比较的画面留下来</h3><p>在观察页点“保留这一处”，<br>或在刻画页保留擦拭前后的变化。</p></div></div><div id="evidenceContent" hidden><div id="compareGrid" class="compare-grid"></div><div id="evidenceStrip" class="evidence-strip" aria-label="选择对照记录"></div><p class="evidence-note">最多保留8条。模型记录用于解释模型，实物照片用于记录真实外观；两者不会自动鉴定矿物。仅保存在当前浏览器。</p></div></div></section></div>
+<div class="modal" id="modelModal" hidden><section class="dialog small-dialog" role="dialog" aria-modal="true" aria-labelledby="modelTitle"><header class="dialog-header"><h2 id="modelTitle">模型与资料</h2><button class="iconbtn" data-close="modelModal" aria-label="关闭模型说明"><svg class="icon"><use href="#i-close"/></svg></button></header><div class="dialog-body"><div class="callout">本课保留实物观察与刻画。网页补充的是：同一区域同步放大、跨颗粒追踪，以及擦拭前后的可保存对照。</div><h3>这幅图代表什么？</h3><p>三类岩石均为人工绘制的典型结构示意，不是照片或显微影像。晶粒形状、颜色、比例可与实物不同；颜色不能单独用于鉴定矿物。“换一块”仅改变示例分布，不代表所有岩石的变化范围。</p><p>本示例花岗岩以石英、长石、黑云母表示；砂岩示意砂粒与胶结物；大理岩示意以方解石为主的相互嵌合晶粒。描边是观察辅助线，不是天然裂缝。</p><h3>刻画如何计算？</h3><p>刻画沿真实拖动路径逐段查询矿物；工具的示例硬度大于该矿物时，留下不可擦掉的沟痕。表面的附着痕只表示可能出现的一种情况。</p><table class="model-table"><thead><tr><th>本示例工具</th><th>相对硬度</th><th>本示例矿物</th><th>相对硬度</th></tr></thead><tbody><tr><td>指甲</td><td>2.5</td><td>黑云母</td><td>3</td></tr><tr><td>铜钥匙</td><td>3.5</td><td>长石</td><td>6</td></tr><tr><td>小刀</td><td>5.5</td><td>石英</td><td>7</td></tr></tbody></table><p>数值为莫氏相对等级，无单位，不是倍数。铜钥匙为教学模型选值，真实合金、刀具和矿物有差异；黑云母通常约2.5—3，与指甲接近，应换点复测。砂岩不设置整块统一硬度。</p><p>能擦掉的线可能是工具附着痕；本模型中擦后仍保留的沟痕表示刻入。图像不表示裂开、敲碎或真实损伤深度。不能用模型生成的结果独立证明模型预设规律。</p><h3>实物照片与记录</h3><p>照片在本机处理，不上传。放大仅放大原像素，不生成原图没有的细节；不自动识别岩石、矿物或推算硬度。留存图片与描述保存于当前浏览器；可导出对照图和JSON备份。</p><h3>教材与主源</h3><p>本项目提供的教材：五上第四单元第4课，110—113页；教师教学用书331—341页。观察记录参考教材112页，不是对未提供作业本的复刻。</p><ul><li><a href="https://www.bgs.ac.uk/discovering-geology/rocks-and-minerals/" target="_blank" rel="noopener">英国地质调查局：岩石、矿物与颗粒结构</a></li><li><a href="https://www.nps.gov/articles/mohs-hardness-scale.htm" target="_blank" rel="noopener">美国国家公园管理局：莫氏硬度与比较工具</a></li><li><a href="https://msaweb.org/msa/Collectors_Corner/id/mineral_id_keyi4.htm" target="_blank" rel="noopener">美国矿物学会：擦拭检验与相对硬度</a></li><li><a href="https://commonminerals.esci.umn.edu/minerals-f/biotite" target="_blank" rel="noopener">明尼苏达大学：黑云母</a></li></ul><p class="muted">v1.0 · Canvas 2D · 无外部运行依赖 · T2 二维绘图</p></div></section></div>
+<div class="modal" id="exportModal" hidden><section class="dialog small-dialog" role="dialog" aria-modal="true" aria-labelledby="exportTitle"><header class="dialog-header"><h2 id="exportTitle">对照图已生成</h2><button class="iconbtn" data-close="exportModal" aria-label="关闭导出预览"><svg class="icon"><use href="#i-close"/></svg></button></header><div class="dialog-body" style="text-align:center"><img id="exportImage" class="export-preview" alt="岩石观察证据对照图"><div class="export-links"><a id="downloadImage" class="download-link" download="岩石观察_证据对照.png">保存图片</a></div><p class="muted" style="font-size:13px">也可长按图片保存，或右键另存为。</p></div></section></div>
+<div id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+/*
+ * RockEngine — deterministic, offline, two-dimensional rock structure models.
+ * The drawings are representative teaching models, not specimen photographs or
+ * calibrated microscope images. Mineral colours vary in real specimens.
+ * Public API: create(kind, seed), draw(ctx, model, options), hit(model,x,y),
+ * contains(model,x,y). Coordinates are always 1000 × 720.
+ */
+(function (global) {
+  'use strict';
+
+  var W = 1000, H = 720;
+  var TAU = Math.PI * 2;
+  var HARDNESS = { quartz: 7, feldspar: 6, biotite: 3, calcite: 3, cement: null };
+  var NAMES = { quartz: '石英', feldspar: '长石', biotite: '黑云母', calcite: '方解石', cement: '胶结物' };
+  var ROCK_NAMES = { granite: '花岗岩', sandstone: '砂岩', marble: '大理岩' };
+
+  function seedNumber(value) {
+    if (typeof value === 'number' && isFinite(value)) return (value >>> 0) || 1;
+    var s = String(value == null ? 1 : value), h = 2166136261;
+    for (var i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619);
+    return (h >>> 0) || 1;
+  }
+
+  function rng(seed) {
+    var a = seed >>> 0;
+    return function () {
+      a += 0x6D2B79F5;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  function between(r, a, b) { return a + (b - a) * r(); }
+  function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+  function rgba(rgb, alpha) { return 'rgba(' + rgb.join(',') + ',' + alpha + ')'; }
+  function colour(rgb) { return 'rgb(' + rgb.map(function (v) { return Math.round(clamp(v, 0, 255)); }).join(',') + ')'; }
+  function shift(rgb, amount) { return rgb.map(function (v) { return clamp(v + amount, 0, 255); }); }
+
+  function polygonPath(ctx, p) {
+    if (!p.length) return;
+    ctx.beginPath(); ctx.moveTo(p[0].x, p[0].y);
+    for (var i = 1; i < p.length; i++) ctx.lineTo(p[i].x, p[i].y);
+    ctx.closePath();
+  }
+
+  function inside(poly, x, y) {
+    var result = false;
+    for (var i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+      var a = poly[i], b = poly[j];
+      if (((a.y > y) !== (b.y > y)) &&
+          x < (b.x - a.x) * (y - a.y) / (b.y - a.y) + a.x) result = !result;
+    }
+    return result;
+  }
+
+  function bounds(poly) {
+    var b = { x: Infinity, y: Infinity, right: -Infinity, bottom: -Infinity };
+    poly.forEach(function (p) {
+      b.x = Math.min(b.x, p.x); b.y = Math.min(b.y, p.y);
+      b.right = Math.max(b.right, p.x); b.bottom = Math.max(b.bottom, p.y);
+    });
+    b.width = b.right - b.x; b.height = b.bottom - b.y;
+    return b;
+  }
+
+  function centroid(poly) {
+    var area = 0, x = 0, y = 0;
+    for (var i = 0; i < poly.length; i++) {
+      var p = poly[i], q = poly[(i + 1) % poly.length];
+      var a = p.x * q.y - q.x * p.y;
+      area += a; x += (p.x + q.x) * a; y += (p.y + q.y) * a;
+    }
+    if (Math.abs(area) < 0.001) return poly[0];
+    return { x: x / (3 * area), y: y / (3 * area) };
+  }
+
+  function makeOutline(r) {
+    // Slightly faceted, asymmetrical hand-sized specimen. No fixed scale implied.
+    var p = [], count = 34;
+    for (var i = 0; i < count; i++) {
+      var a = TAU * i / count;
+      var irregular = 0.96 + 0.025 * Math.sin(3 * a + 0.7) + between(r, -0.025, 0.025);
+      var x = 500 + Math.cos(a) * 402 * irregular + Math.sin(a) * 15;
+      var y = 355 + Math.sin(a) * 274 * irregular + Math.cos(a * 2) * 10;
+      p.push({ x: clamp(x, 100, 900), y: clamp(y, 85, 635) });
+    }
+    return p;
+  }
+
+  function halfPlane(poly, nx, ny, c) {
+    if (!poly.length) return poly;
+    var out = [];
+    var prev = poly[poly.length - 1];
+    var dp = prev.x * nx + prev.y * ny - c;
+    for (var i = 0; i < poly.length; i++) {
+      var curr = poly[i], dc = curr.x * nx + curr.y * ny - c;
+      if ((dc <= 1e-7) !== (dp <= 1e-7)) {
+        var t = dp / (dp - dc);
+        out.push({ x: prev.x + (curr.x - prev.x) * t, y: prev.y + (curr.y - prev.y) * t });
+      }
+      if (dc <= 1e-7) out.push(curr);
+      prev = curr; dp = dc;
+    }
+    return out;
+  }
+
+  function cellAt(points, index) {
+    var a = points[index];
+    var poly = [{ x: 65, y: 45 }, { x: 935, y: 45 }, { x: 935, y: 675 }, { x: 65, y: 675 }];
+    // A distant point cannot cut a small local Voronoi cell, but clipping all
+    // points is inexpensive at this specimen size and avoids seams.
+    for (var j = 0; j < points.length && poly.length; j++) {
+      if (j === index) continue;
+      var b = points[j], nx = b.x - a.x, ny = b.y - a.y;
+      poly = halfPlane(poly, nx, ny, (b.x * b.x + b.y * b.y - a.x * a.x - a.y * a.y) / 2);
+    }
+    return poly;
+  }
+
+  function grainData(id, mineral, p, rgb, r) {
+    var center = centroid(p), b = bounds(p);
+    return {
+      id: id, mineral: mineral, name: NAMES[mineral],
+      cx: center.x, cy: center.y, polygon: p,
+      color: colour(rgb), rgb: rgb, hardness: HARDNESS[mineral],
+      bounds: b, angle: between(r, -Math.PI, Math.PI),
+      textureSeed: Math.floor(r() * 4294967295),
+      radius: Math.sqrt(Math.max(1, b.width * b.height)) / 2
+    };
+  }
+
+  function irregularEdges(poly) {
+    // Shared edges acquire the same small irregularities from either side.
+    // This preserves a continuous interlocking surface, including hit tests.
+    var out = [];
+    for (var i = 0; i < poly.length; i++) {
+      var p = poly[i], q = poly[(i + 1) % poly.length];
+      out.push(p);
+      var dx = q.x - p.x, dy = q.y - p.y, len = Math.sqrt(dx * dx + dy * dy);
+      if (len < 15) continue;
+      var forward = p.x < q.x || (p.x === q.x && p.y < q.y);
+      var a = forward ? p : q, b = forward ? q : p;
+      var hash = seedNumber([a.x.toFixed(3), a.y.toFixed(3), b.x.toFixed(3), b.y.toFixed(3)].join(','));
+      var random = rng(hash), nx = -(b.y - a.y) / len, ny = (b.x - a.x) / len;
+      var points = [];
+      for (var k = 0; k < 2; k++) {
+        var t = k === 0 ? 0.34 : 0.68;
+        var offset = (random() - 0.5) * Math.min(5.4, len * 0.15);
+        points.push({ x: a.x + (b.x - a.x) * t + nx * offset, y: a.y + (b.y - a.y) * t + ny * offset });
+      }
+      if (!forward) points.reverse();
+      out.push(points[0], points[1]);
+    }
+    return out;
+  }
+
+  function crystallineGrains(kind, r) {
+    var points = [], grains = [];
+    var spacingX = kind === 'granite' ? 58 : 67;
+    var spacingY = kind === 'granite' ? 53 : 59;
+    for (var row = 0, y = 58; y <= 686; row++, y += spacingY) {
+      for (var col = 0, x = 58; x <= 950; col++, x += spacingX) {
+        points.push({
+          x: x + (row % 2) * spacingX * 0.38 + between(r, -spacingX * 0.38, spacingX * 0.38),
+          y: y + between(r, -spacingY * 0.38, spacingY * 0.38),
+          mineralRand: r(), shade: r(), hue: r()
+        });
+      }
+    }
+    if (kind === 'granite') {
+      // Nearby light-mineral sites constrain mica to thinner plates. All
+      // resulting cells still meet edge-to-edge; there are no pasted-on flakes.
+      var originals = points.slice();
+      originals.forEach(function (point) {
+        if (point.mineralRand < 0.86) return;
+        var normal = point.hue * Math.PI, distance = between(r, 25, 32);
+        point.plateAngle = normal + Math.PI / 2;
+        [-1, 1].forEach(function (side) {
+          points.push({
+            x: point.x + Math.cos(normal) * distance * side,
+            y: point.y + Math.sin(normal) * distance * side,
+            mineralRand: between(r, 0.03, 0.83), shade: r(), hue: r()
+          });
+        });
+      });
+    }
+    points.forEach(function (point, i) {
+      var poly = cellAt(points, i);
+      if (poly.length < 3) return;
+      var mineral, rgb;
+      if (kind === 'granite') {
+        mineral = point.mineralRand < 0.34 ? 'quartz' : point.mineralRand < 0.86 ? 'feldspar' : 'biotite';
+        if (mineral === 'quartz') rgb = shift([171, 178, 174], (point.shade - 0.5) * 50);
+        else if (mineral === 'feldspar') {
+          rgb = point.hue > 0.36 ? [222, 191, 175] : [228, 221, 200];
+          rgb = shift(rgb, (point.shade - 0.5) * 32);
+        } else rgb = shift([46, 49, 44], (point.shade - 0.5) * 22);
+      } else {
+        mineral = 'calcite';
+        rgb = point.hue > 0.32 ? [232, 230, 216] : [209, 214, 206];
+        rgb = shift(rgb, (point.shade - 0.5) * 14);
+      }
+      var grain = grainData(kind + '-' + i, mineral, irregularEdges(poly), rgb, r);
+      if (mineral === 'biotite' && point.plateAngle != null) grain.angle = point.plateAngle;
+      grains.push(grain);
+    });
+    return grains;
+  }
+
+  function sedimentGrains(r, outline) {
+    var result = [], n = 0, packing = {}, packed = [];
+    var packingSize = 24;
+    // Randomly pack unequal grains, then fill the remaining spaces with finer
+    // grains. This avoids an artificial bead-grid and retains actual matrix gaps.
+    for (var attempt = 0; attempt < 28000; attempt++) {
+        var cx = between(r, 65, 935), cy = between(r, 55, 665);
+        var rx = attempt < 12000 ? between(r, 6.2, 11.3) : between(r, 3.6, 6.6);
+        var gx = Math.floor(cx / packingSize), gy = Math.floor(cy / packingSize), blocked = false;
+        for (var by = gy - 1; by <= gy + 1 && !blocked; by++) {
+          for (var bx = gx - 1; bx <= gx + 1 && !blocked; bx++) {
+            var neighbours = packing[bx + ':' + by] || [];
+            for (var ni = 0; ni < neighbours.length; ni++) {
+              var other = neighbours[ni], ex = cx - other.x, ey = cy - other.y;
+              var gap = rx + other.r + 0.45;
+              if (ex * ex + ey * ey < gap * gap) { blocked = true; break; }
+            }
+          }
+        }
+        if (blocked) continue;
+        var packKey = gx + ':' + gy;
+        if (!packing[packKey]) packing[packKey] = [];
+        packing[packKey].push({ x: cx, y: cy, r: rx });
+        packed.push({ x: cx, y: cy, radius: rx });
+    }
+    packed.forEach(function (packedGrain) {
+        var cx = packedGrain.x, cy = packedGrain.y, rx = packedGrain.radius;
+        var ry = rx * between(r, 0.77, 1.04);
+        var rot = between(r, -1.4, 1.4), p = [];
+        for (var k = 0; k < 11; k++) {
+          var a = TAU * k / 11, q = between(r, 0.85, 1.04);
+          var px = Math.cos(a) * rx * q, py = Math.sin(a) * ry * q;
+          p.push({ x: cx + px * Math.cos(rot) - py * Math.sin(rot), y: cy + px * Math.sin(rot) + py * Math.cos(rot) });
+        }
+        var mineral = r() < 0.93 ? 'quartz' : 'feldspar';
+        var band = Math.sin(cy / 31 + cx / 340) * 0.5 + Math.sin(cy / 64) * 0.4;
+        var tone = between(r, -30, 28) + band * 12;
+        var rgb = mineral === 'quartz' ? shift([205, 173, 121], tone) : shift([216, 191, 156], tone);
+        var g = grainData('sandstone-' + n++, mineral, p, rgb, r);
+        g.cx = cx; g.cy = cy; g.sand = true;
+        result.push(g);
+    });
+    // The matrix is a separate, unassigned material. Its mineralogy and hardness
+    // cannot be inferred just from a sandstone photograph.
+    var matrix = grainData('sandstone-cement', 'cement', outline, [147, 111, 66], r);
+    matrix.isMatrix = true; matrix.hardness = null;
+    result.unshift(matrix);
+    return result;
+  }
+
+  function spatialIndex(model) {
+    var size = 70, cells = {};
+    model.grains.forEach(function (g) {
+      if (g.isMatrix) { model.matrix = g; return; }
+      var b = g.bounds;
+      for (var y = Math.floor(b.y / size); y <= Math.floor(b.bottom / size); y++) {
+        for (var x = Math.floor(b.x / size); x <= Math.floor(b.right / size); x++) {
+          var key = x + ':' + y;
+          if (!cells[key]) cells[key] = [];
+          cells[key].push(g);
+        }
+      }
+    });
+    model._grid = cells; model._gridSize = size;
+  }
+
+  function create(kind, seed) {
+    if (!ROCK_NAMES[kind]) kind = 'granite';
+    var numericSeed = seedNumber(seed), random = rng(numericSeed);
+    var model = {
+      kind: kind, name: ROCK_NAMES[kind], seed: numericSeed,
+      width: W, height: H, outline: makeOutline(random),
+      grains: [], isSchematic: true,
+      note: '典型样本结构示意；颜色、颗粒形状和大小因实物而异，不能仅凭颜色鉴定矿物。'
+    };
+    model.grains = kind === 'sandstone' ? sedimentGrains(random, model.outline) : crystallineGrains(kind, random);
+    spatialIndex(model);
+    model.representativePoints = {};
+    model.grains.forEach(function (g) {
+      if (g.isMatrix || !inside(model.outline, g.cx, g.cy)) return;
+      // Prefer a representative point near the centre, away from the outline.
+      var old = model.representativePoints[g.mineral];
+      var distance = Math.pow(g.cx - 500, 2) + Math.pow(g.cy - 355, 2);
+      if (!old || distance < old.distance) {
+        model.representativePoints[g.mineral] = { x: g.cx, y: g.cy, id: g.id, distance: distance };
+      }
+    });
+    return model;
+  }
+
+  function contains(model, x, y) {
+    return !!model && isFinite(x) && isFinite(y) && inside(model.outline, x, y);
+  }
+
+  function hit(model, x, y) {
+    if (!contains(model, x, y)) return null;
+    var key = Math.floor(x / model._gridSize) + ':' + Math.floor(y / model._gridSize);
+    var candidates = model._grid[key] || [];
+    for (var i = candidates.length - 1; i >= 0; i--) {
+      if (inside(candidates[i].polygon, x, y)) return candidates[i];
+    }
+    return model.matrix || null;
+  }
+
+  function canvas() {
+    if (typeof document !== 'undefined' && document.createElement) {
+      var c = document.createElement('canvas'); c.width = W; c.height = H; return c;
+    }
+    if (typeof OffscreenCanvas !== 'undefined') return new OffscreenCanvas(W, H);
+    throw new Error('RockEngine.draw requires a Canvas-capable browser.');
+  }
+
+  function crystalTexture(ctx, grain, kind) {
+    var r = rng(grain.textureSeed), b = grain.bounds, rgb = grain.rgb;
+    ctx.save(); polygonPath(ctx, grain.polygon); ctx.clip();
+    var grad = ctx.createLinearGradient(b.x, b.y, b.right, b.bottom);
+    grad.addColorStop(0, colour(shift(rgb, grain.mineral === 'biotite' ? 18 : 14)));
+    grad.addColorStop(0.47, grain.color);
+    grad.addColorStop(1, colour(shift(rgb, grain.mineral === 'biotite' ? -13 : -15)));
+    ctx.fillStyle = grad; ctx.fillRect(b.x - 1, b.y - 1, b.width + 2, b.height + 2);
+
+    // Subtle facets and mineral-specific textures, fixed to the same geometry
+    // at every zoom. No independently redrawn “microscope view”.
+    var p = grain.polygon;
+    for (var k = 0; k < p.length; k++) {
+      var q = p[(k + 1) % p.length];
+      ctx.beginPath(); ctx.moveTo(grain.cx, grain.cy); ctx.lineTo(p[k].x, p[k].y); ctx.lineTo(q.x, q.y); ctx.closePath();
+      ctx.fillStyle = k % 2 ? 'rgba(255,255,245,0.027)' : 'rgba(47,53,50,0.018)'; ctx.fill();
+    }
+    if (grain.mineral === 'biotite') {
+      ctx.translate(grain.cx, grain.cy); ctx.rotate(grain.angle);
+      var extent = Math.max(b.width, b.height);
+      for (var line = -extent; line < extent; line += between(r, 3.2, 5.5)) {
+        ctx.beginPath(); ctx.moveTo(-extent, line); ctx.lineTo(extent, line - 2.5);
+        ctx.strokeStyle = line % 2 > 0 ? 'rgba(200,202,175,0.24)' : 'rgba(7,15,12,0.30)';
+        ctx.lineWidth = between(r, 0.5, 1.35); ctx.stroke();
+      }
+      ctx.restore(); ctx.save(); polygonPath(ctx, grain.polygon); ctx.clip();
+    } else if (grain.mineral === 'feldspar' && kind === 'granite') {
+      ctx.translate(grain.cx, grain.cy); ctx.rotate(grain.angle);
+      var span = Math.max(b.width, b.height);
+      for (var stria = -span; stria < span; stria += between(r, 4.2, 7.8)) {
+        ctx.beginPath(); ctx.moveTo(-span, stria); ctx.lineTo(span, stria + 1.2);
+        ctx.strokeStyle = 'rgba(255,249,231,0.18)'; ctx.lineWidth = 0.65; ctx.stroke();
+      }
+      ctx.restore(); ctx.save(); polygonPath(ctx, grain.polygon); ctx.clip();
+    } else {
+      var glaze = ctx.createRadialGradient(grain.cx - b.width * 0.15, grain.cy - b.height * 0.2, 0, grain.cx, grain.cy, Math.max(b.width, b.height) * 0.6);
+      glaze.addColorStop(0, 'rgba(255,255,255,0.18)');
+      glaze.addColorStop(0.55, 'rgba(244,250,246,0.025)');
+      glaze.addColorStop(1, 'rgba(90,103,94,0.09)');
+      ctx.fillStyle = glaze; ctx.fillRect(b.x, b.y, b.width, b.height);
+    }
+
+    // Fine, low-contrast inclusions: material texture, not simulated pore counts.
+    var count = Math.round(b.width * b.height / (kind === 'marble' ? 85 : 55));
+    for (var t = 0; t < count; t++) {
+      var px = between(r, b.x, b.right), py = between(r, b.y, b.bottom);
+      ctx.fillStyle = t % 3 ? 'rgba(34,42,38,0.09)' : 'rgba(255,255,247,0.26)';
+      ctx.fillRect(px, py, between(r, 0.5, 1.7), between(r, 0.4, 1.1));
+    }
+    ctx.restore();
+    polygonPath(ctx, grain.polygon);
+    ctx.strokeStyle = kind === 'marble' ? 'rgba(105,119,108,0.14)' : 'rgba(68,63,50,0.23)';
+    ctx.lineWidth = kind === 'marble' ? 0.7 : 0.8; ctx.stroke();
+    // One illuminated edge makes tightly adjacent grains legible without gaps.
+    ctx.beginPath(); ctx.moveTo(p[0].x, p[0].y);
+    for (var j = 1; j < Math.min(3, p.length); j++) ctx.lineTo(p[j].x, p[j].y);
+    ctx.strokeStyle = grain.mineral === 'biotite' ? 'rgba(225,224,193,0.24)' : 'rgba(255,255,248,0.31)';
+    ctx.lineWidth = 0.65; ctx.stroke();
+  }
+
+  function sandTexture(ctx, grain) {
+    var b = grain.bounds;
+    polygonPath(ctx, grain.polygon);
+    var grad = ctx.createRadialGradient(grain.cx - 2.5, grain.cy - 3, 0.5, grain.cx, grain.cy, grain.radius * 1.2);
+    grad.addColorStop(0, colour(shift(grain.rgb, 15)));
+    grad.addColorStop(0.6, grain.color);
+    grad.addColorStop(1, colour(shift(grain.rgb, -17)));
+    ctx.fillStyle = grad; ctx.fill();
+    ctx.strokeStyle = 'rgba(80,59,33,0.28)'; ctx.lineWidth = 0.7; ctx.stroke();
+    var r = rng(grain.textureSeed);
+    ctx.save(); polygonPath(ctx, grain.polygon); ctx.clip();
+    for (var n = 0; n < 5; n++) {
+      ctx.fillStyle = n % 2 ? 'rgba(255,248,216,0.35)' : 'rgba(69,54,35,0.16)';
+      ctx.fillRect(b.x + r() * b.width, b.y + r() * b.height, 0.6 + r() * 1.1, 0.8 + r());
+    }
+    ctx.restore();
+  }
+
+  function makeTexture(model) {
+    var c = canvas(), ctx = c.getContext('2d');
+    var outline = model.outline;
+
+    // Ground shadow and a narrow broken edge, never interpreted as a separate
+    // specimen face. Front-face hit testing uses the outline above.
+    ctx.save(); ctx.translate(1, 15); polygonPath(ctx, outline);
+    ctx.shadowColor = 'rgba(28,29,24,0.18)'; ctx.shadowBlur = 26; ctx.shadowOffsetY = 8;
+    ctx.fillStyle = model.kind === 'sandstone' ? '#755734' : model.kind === 'marble' ? '#8b9489' : '#706958'; ctx.fill(); ctx.restore();
+    ctx.save(); polygonPath(ctx, outline); ctx.clip();
+    ctx.fillStyle = model.kind === 'sandstone' ? '#9b784a' : model.kind === 'marble' ? '#dbded1' : '#a39986';
+    ctx.fillRect(0, 0, W, H);
+
+    if (model.kind === 'sandstone') {
+      // Fine bedding is an optional feature of this typical specimen; grains
+      // still remain visible and the bands do not substitute for them.
+      for (var y = 70; y < 670; y += 5) {
+        var shade = (Math.sin(y / 27) + Math.sin(y / 67)) * 0.05;
+        ctx.strokeStyle = shade > 0 ? 'rgba(237,205,148,' + shade + ')' : 'rgba(77,51,27,' + (-shade) + ')';
+        ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(70, y + 8); ctx.bezierCurveTo(260, y - 10, 620, y + 14, 930, y - 2); ctx.stroke();
+      }
+      model.grains.forEach(function (g) { if (!g.isMatrix) sandTexture(ctx, g); });
+    } else {
+      model.grains.forEach(function (g) { crystalTexture(ctx, g, model.kind); });
+      if (model.kind === 'marble') {
+        // Wisps show variation within a pale specimen, not a classification map.
+        var veinRng = rng(model.seed ^ 0x734b928);
+        for (var v = 0; v < 6; v++) {
+          var startX = between(veinRng, 110, 700), startY = between(veinRng, 150, 500);
+          ctx.beginPath(); ctx.moveTo(startX, startY);
+          for (var j = 0; j < 4; j++) {
+            ctx.bezierCurveTo(startX + j * 65 + 20, startY - 15 + j * 13, startX + j * 65 + 37, startY + 24 + j * 13, startX + j * 65 + 65, startY + j * 13 + 9);
+          }
+          ctx.strokeStyle = 'rgba(100,119,113,0.09)'; ctx.lineWidth = 4.5; ctx.stroke();
+          ctx.strokeStyle = 'rgba(112,127,119,0.15)'; ctx.lineWidth = 1.15; ctx.stroke();
+        }
+      }
+    }
+
+    // Shared broad lighting keeps it recognisably a rock, not loose tiles.
+    var light = ctx.createLinearGradient(240, 90, 710, 650);
+    light.addColorStop(0, 'rgba(255,249,221,0.13)');
+    light.addColorStop(0.47, 'rgba(255,255,255,0)');
+    light.addColorStop(1, 'rgba(26,35,29,0.22)');
+    ctx.fillStyle = light; ctx.fillRect(0, 0, W, H);
+    var rim = ctx.createRadialGradient(470, 330, 185, 490, 355, 445);
+    rim.addColorStop(0, 'rgba(0,0,0,0)'); rim.addColorStop(0.64, 'rgba(0,0,0,0)');
+    rim.addColorStop(1, 'rgba(28,29,22,0.22)'); ctx.fillStyle = rim; ctx.fillRect(0, 0, W, H);
+    ctx.restore();
+
+    polygonPath(ctx, outline); ctx.strokeStyle = 'rgba(42,47,38,0.44)'; ctx.lineWidth = 1.5; ctx.stroke();
+    // Subtle top-left edge lighting. The outline remains identical at all zooms.
+    ctx.save(); polygonPath(ctx, outline); ctx.clip();
+    ctx.translate(0.3, 1.2); polygonPath(ctx, outline);
+    ctx.strokeStyle = 'rgba(255,255,230,0.40)'; ctx.lineWidth = 2.6; ctx.stroke(); ctx.restore();
+    model._texture = c;
+    return c;
+  }
+
+  function draw(ctx, model, options) {
+    if (!ctx || !model) return;
+    options = options || {};
+    ctx.save();
+    ctx.drawImage(model._texture || makeTexture(model), 0, 0, W, H);
+    if (options.highlightMineral || options.showBoundaries) {
+      ctx.save(); polygonPath(ctx, model.outline); ctx.clip();
+      if (options.highlightMineral) {
+        var selected = model.grains.filter(function (g) { return !g.isMatrix && g.mineral === options.highlightMineral; });
+        if (options.highlightMineral === 'cement' && model.matrix) {
+          // Keep the intergranular matrix visible, dimming the sand grains.
+          ctx.beginPath();
+          model.grains.forEach(function (g) { if (!g.isMatrix) appendPolygon(ctx, g.polygon); });
+          ctx.fillStyle = 'rgba(15,31,29,0.46)'; ctx.fill();
+        } else {
+          ctx.fillStyle = 'rgba(15,31,29,0.34)'; ctx.fillRect(0, 0, W, H);
+          ctx.save(); ctx.beginPath();
+          selected.forEach(function (g) { appendPolygon(ctx, g.polygon); });
+          ctx.clip(); ctx.drawImage(model._texture, 0, 0, W, H); ctx.restore();
+          ctx.beginPath(); selected.forEach(function (g) { appendPolygon(ctx, g.polygon); });
+          ctx.strokeStyle = '#f6cf62'; ctx.lineWidth = model.kind === 'sandstone' ? 1.5 : 2.1; ctx.stroke();
+        }
+      }
+      if (options.showBoundaries) {
+        ctx.beginPath();
+        model.grains.forEach(function (g) { if (!g.isMatrix) appendPolygon(ctx, g.polygon); });
+        ctx.strokeStyle = 'rgba(27,106,101,0.72)';
+        ctx.lineWidth = model.kind === 'sandstone' ? 1 : 1.4; ctx.stroke();
+      }
+      ctx.restore();
+    }
+    ctx.restore();
+  }
+
+  function appendPolygon(ctx, p) {
+    if (!p.length) return;
+    ctx.moveTo(p[0].x, p[0].y);
+    for (var i = 1; i < p.length; i++) ctx.lineTo(p[i].x, p[i].y);
+    ctx.closePath();
+  }
+
+  global.RockEngine = {
+    create: create, draw: draw, hit: hit, contains: contains,
+    width: W, height: H, mineralNames: NAMES,
+    hardness: HARDNESS,
+    version: '1.0.0'
+  };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+/* App state, observation, scratch model, and local evidence are kept separate.
+ * Asset replacement entry: RockEngine.draw / create. No network requests.
+ */
+(function () {
+ 'use strict';
+ var $=function(id){return document.getElementById(id);};
+ var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
+ var clamp=function(v,a,b){return Math.max(a,Math.min(b,v));};
+ var names={granite:'花岗岩',sandstone:'砂岩',marble:'大理岩'};
+ var minerals={quartz:'石英',feldspar:'长石',biotite:'黑云母',calcite:'方解石',cement:'胶结物'};
+ // Representative relative Mohs values only. Copper-key alloy is not universal.
+ var TOOLS={nail:{name:'指甲',h:2.5,color:'#b79377'},copper:{name:'铜钥匙',h:3.5,color:'#8b673c'},knife:{name:'小刀',h:5.5,color:'#535a59'}};
+ var STORE='AIHTML_5_4_4_rocks_v1',MAX_RECORDS=8;
+ var modelCache={},surfaceCache={},raf=0,lastFocus=null,toastTimer=0;
+ var state={page:'observe',kind:'granite',serial:{granite:1,sandstone:1,marble:1},seed:44,focus:{x:500,y:340},zoom:4,boundaries:false,reveal:false,photo:null,records:[],selected:[]};
+ var scratch={model:null,center:{x:500,y:340},view:null,tool:'knife',mode:'scratch',boundaries:false,strokes:[],active:null,pointer:null,beforeState:null,hasWiped:false,history:[]};
+ var obsFit=null,obsView=null,miniFit=null;
+
+ function toast(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3600);}
+ function getModel(kind,serial){var seed=44+(serial-1)*137,key=kind+'-'+seed;if(!modelCache[key])modelCache[key]=RockEngine.create(kind,seed);return modelCache[key];}
+ function obsModel(){return getModel(state.kind,state.serial[state.kind]);}
+ function surface(model,boundaries,highlight){var key=model.kind+'-'+model.seed+'-'+boundaries+'-'+highlight;var c=surfaceCache[key];if(!c){c=document.createElement('canvas');c.width=1000;c.height=720;RockEngine.draw(c.getContext('2d'),model,{showBoundaries:!!boundaries,highlightMineral:highlight||null});surfaceCache[key]=c;}return c;}
+ function canvasSetup(el){var r=el.getBoundingClientRect();if(r.width<1||r.height<1)return null;var dpr=Math.min(window.devicePixelRatio||1,2),w=r.width,h=r.height;var pw=Math.round(w*dpr),ph=Math.round(h*dpr);if(el.width!==pw||el.height!==ph){el.width=pw;el.height=ph;}var ctx=el.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);return {ctx:ctx,w:w,h:h,dpr:dpr};}
+ function fitting(w,h){var s=Math.min(w/1000,h/720);return {s:s,x:(w-1000*s)/2,y:(h-720*s)/2};}
+ function pos(el,event){var r=el.getBoundingClientRect();return {x:event.clientX-r.left,y:event.clientY-r.top};}
+ function localToModel(p,fit){return {x:(p.x-fit.x)/fit.s,y:(p.y-fit.y)/fit.s};}
+ function makeView(center,width,height){width=Math.min(940,width);height=Math.min(690,height);return {x:clamp(center.x-width/2,0,1000-width),y:clamp(center.y-height/2,0,720-height),w:width,h:height};}
+ function frame(ctx,view,fit,color){ctx.save();ctx.strokeStyle=color||'#b87725';ctx.lineWidth=2.5;var x=fit.x+view.x*fit.s,y=fit.y+view.y*fit.s,w=view.w*fit.s,h=view.h*fit.s;ctx.fillStyle='#eab05712';ctx.fillRect(x,y,w,h);ctx.strokeRect(x,y,w,h);ctx.strokeStyle='#fff9';ctx.lineWidth=1;ctx.strokeRect(x+3,y+3,w-6,h-6);ctx.fillStyle='#bd7a25';[[-3,-3],[w-3,-3],[-3,h-3],[w-3,h-3]].forEach(function(q){ctx.fillRect(x+q[0],y+q[1],6,6);});ctx.restore();}
+ function drawSource(ctx,source,fit){ctx.drawImage(source,fit.x,fit.y,1000*fit.s,720*fit.s);}
+ function currentSource(){if(state.photo)return state.photo.canvas;var m=obsModel(),g=RockEngine.hit(m,state.focus.x,state.focus.y);return surface(m,state.boundaries,state.reveal&&g?g.mineral:null);}
+ function drawObserve(){if(state.page!=='observe')return;var a=canvasSetup($('rockCanvas')),b=canvasSetup($('lensCanvas'));if(!a||!b)return;obsFit=fitting(a.w,a.h);var src=currentSource();drawSource(a.ctx,src,obsFit);obsView=makeView(state.focus,b.w/(obsFit.s*state.zoom),b.h/(obsFit.s*state.zoom));b.ctx.fillStyle='#efefe4';b.ctx.fillRect(0,0,b.w,b.h);b.ctx.drawImage(src,obsView.x*src.width/1000,obsView.y*src.height/720,obsView.w*src.width/1000,obsView.h*src.height/720,0,0,b.w,b.h);var marker=document.querySelector('.lens-center');marker.style.left=((state.focus.x-obsView.x)/obsView.w*100)+'%';marker.style.top=((state.focus.y-obsView.y)/obsView.h*100)+'%';frame(a.ctx,obsView,obsFit);var x=obsFit.x+state.focus.x*obsFit.s,y=obsFit.y+state.focus.y*obsFit.s;a.ctx.fillStyle='#ba7d25';a.ctx.beginPath();a.ctx.arc(x,y,3,0,Math.PI*2);a.ctx.fill();updateMineral();}
+ function updateMineral(){if(state.photo){$('mineralLabel').textContent='实物照片 · 自主观察';$('mineralNote').textContent='只放大原有像素，不识别矿物，不推算硬度。';return;}var g=RockEngine.hit(obsModel(),state.focus.x,state.focus.y);if(state.reveal&&g){$('mineralLabel').textContent='此示例：'+(minerals[g.mineral]||g.name);$('mineralNote').textContent='高亮同类组成；颜色不能单独用于实物鉴定。';}else if(!g){$('mineralLabel').textContent='移到岩石上再看看';$('mineralNote').textContent='橙色框始终与放大窗对应。';}else{$('mineralLabel').textContent='先看看颗粒的样子';$('mineralNote').textContent='点按放大图中的颗粒，可以换一个观察位置。';}}
+ function updateObserveUI(){var photo=state.photo;$$('.sample').forEach(function(b){var active=!photo&&b.dataset.kind===state.kind;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});$('specimenName').textContent=photo?'实物照片 · '+photo.name:names[state.kind]+' · 样本 '+state.serial[state.kind];$('sourceBadge').textContent=photo?'实物照片':'典型结构示意';$('sourceBadge').classList.toggle('photo',!!photo);$('boundariesBtn').disabled=!!photo;$('boundariesBtn').setAttribute('aria-pressed',String(state.boundaries));$('boundariesBtn').textContent=state.boundaries?'隐藏辅助边界':'描出颗粒边界';$('mineralBtn').disabled=!!photo;$('mineralBtn').setAttribute('aria-pressed',String(state.reveal));$('mineralBtn').textContent=state.reveal?'收起提示':'矿物提示';$('toScratch').disabled=!!photo||state.kind!=='granite';$('toScratch').title=photo?'照片无法推算硬度':state.kind!=='granite'?'本页只在花岗岩模型中比较不同矿物':'把当前观察区域带到刻画页';$('newSpecimen').textContent=photo?'回到模型':'换一块';$('observeFooter').textContent=photo?'照片仅在本机处理，未上传。':'同一块岩石，同一个位置。';$('zoomText').textContent='屏幕放大 '+state.zoom+'×';$('zoomRange').value=state.zoom;}
+ function invalidate(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;if(state.page==='observe')drawObserve();else drawScratch();});}
+ function changeRock(kind){state.kind=kind;state.photo=null;state.focus={x:500,y:340};state.reveal=false;state.boundaries=false;updateObserveUI();invalidate();}
+ function setPage(page,fromFocus){state.page=page;['observe','scratch'].forEach(function(p){$('page-'+p).hidden=p!==page;$('tab-'+p).setAttribute('aria-selected',String(p===page));});if(page==='scratch'){var desired=getModel('granite',state.serial.granite);if(scratch.model!==desired){scratch.model=desired;scratch.center={x:500,y:340};clearScratch();}if(fromFocus){scratch.center={x:state.focus.x,y:state.focus.y};clearScratch();}updateScratchUI();}else updateObserveUI();invalidate();}
+
+ // ---------- A path is sampled in specimen coordinates, never screen pixels. ----------
+ function scratchView(w,h){var width=455,height=width*h/w;if(height>440){height=440;width=height*w/h;}return makeView(scratch.center,width,height);}
+ function segments(stroke,callback){for(var i=1;i<stroke.points.length;i++){var a=stroke.points[i-1],b=stroke.points[i];callback(a,b,i);}}
+ function drawMarks(ctx,view,w,h,strokes){var sx=w/view.w,sy=h/view.h;ctx.save();ctx.beginPath();ctx.rect(0,0,w,h);ctx.clip();ctx.translate(-view.x*sx,-view.y*sy);ctx.scale(sx,sy);ctx.lineCap='round';(strokes||scratch.strokes).forEach(function(st){segments(st,function(a,b){if(!b.mineral)return;if(b.cut){ctx.strokeStyle='#392f2e';ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(a.x,a.y+.55);ctx.lineTo(b.x,b.y+.55);ctx.stroke();ctx.strokeStyle='#fff6da';ctx.lineWidth=.65;ctx.beginPath();ctx.moveTo(a.x,a.y-.75);ctx.lineTo(b.x,b.y-.75);ctx.stroke();}if(!b.erased){ctx.strokeStyle=TOOLS[st.tool].color;ctx.globalAlpha=b.cut?.58:.83;ctx.lineWidth=3.2;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.globalAlpha=1;}});});ctx.restore();}
+ function renderScratchView(ctx,w,h,view,mode){ctx.fillStyle='#eceee3';ctx.fillRect(0,0,w,h);var src=surface(scratch.model,scratch.boundaries,null);ctx.drawImage(src,view.x,view.y,view.w,view.h,0,0,w,h);drawMarks(ctx,view,w,h,mode==='before'&&scratch.beforeState?scratch.beforeState:scratch.strokes);}
+ function drawScratch(){if(state.page!=='scratch'||!scratch.model)return;var c=canvasSetup($('scratchCanvas')),m=canvasSetup($('miniCanvas'));if(c){scratch.view=scratchView(c.w,c.h);renderScratchView(c.ctx,c.w,c.h,scratch.view,'now');if(scratch.pointer&&scratch.mode==='erase'){var p=scratch.pointer,s=c.w/scratch.view.w;c.ctx.save();c.ctx.fillStyle='#fff8';c.ctx.strokeStyle='#ac7c41';c.ctx.lineWidth=2;c.ctx.beginPath();c.ctx.arc((p.x-scratch.view.x)*s,(p.y-scratch.view.y)*s,20*s,0,Math.PI*2);c.ctx.fill();c.ctx.stroke();c.ctx.restore();}}if(m){miniFit=fitting(m.w,m.h);drawSource(m.ctx,surface(scratch.model,false,null),miniFit);if(scratch.view)frame(m.ctx,scratch.view,miniFit);}updateScratchUI();}
+ function updateScratchUI(){var erase=scratch.mode==='erase';$$('[data-tool]').forEach(function(b){var active=!erase&&b.dataset.tool===scratch.tool;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});$('eraserBtn').classList.toggle('active',erase);$('eraserBtn').setAttribute('aria-pressed',String(erase));$('activeToolBadge').textContent='当前：'+(erase?'橡皮擦':TOOLS[scratch.tool].name);$('strokeCount').textContent=scratch.strokes.length+' 次刻画';$('scratchBoundaryBtn').textContent=scratch.boundaries?'隐藏边界':'描出边界';$('scratchBoundaryBtn').setAttribute('aria-pressed',String(scratch.boundaries));$('captureScratch').disabled=!scratch.strokes.length;$('wipeAll').disabled=!scratch.strokes.length;$('undoStroke').disabled=!scratch.strokes.length;$('resetScratch').disabled=!scratch.strokes.length;$('nailCaution').hidden=scratch.tool!=='nail'||erase;if(erase){$('toolHint').textContent='按住拖动擦拭。也可点“擦一遍”，观察整条线的变化。';}else if(scratch.tool==='nail'){$('toolHint').textContent='指甲与黑云母硬度接近。本示例采用特定值，实物需换点复测。';}else{$('toolHint').textContent='按住拖动。工具经过每一颗粒时，模型分别计算是否刻入。';}if(!scratch.strokes.length)$('scratchStatus').textContent='在岩石上拖出一条线。';else if(scratch.hasWiped)$('scratchStatus').textContent='擦过之后：哪些位置仍有沟痕？';else $('scratchStatus').textContent='看到线还不能判断刻入。换橡皮擦再看。';}
+ function screenScratchPoint(event){var p=pos($('scratchCanvas'),event),r=$('scratchCanvas').getBoundingClientRect();return {x:scratch.view.x+p.x/r.width*scratch.view.w,y:scratch.view.y+p.y/r.height*scratch.view.h};}
+ function addScratchPoint(p){var st=scratch.active;if(!st)return;var prev=st.points[st.points.length-1];if(!prev){var g0=RockEngine.hit(scratch.model,p.x,p.y);st.points.push({x:p.x,y:p.y,mineral:g0?g0.mineral:null,cut:false,erased:false});return;}var d=Math.hypot(p.x-prev.x,p.y-prev.y);if(d<.8)return;var steps=Math.ceil(d/1.6);for(var i=1;i<=steps;i++){var q={x:prev.x+(p.x-prev.x)*i/steps,y:prev.y+(p.y-prev.y)*i/steps};var g=RockEngine.hit(scratch.model,q.x,q.y);q.mineral=g?g.mineral:null;q.grainId=g?g.id:null;q.cut=!!g&&g.hardness!=null&&TOOLS[st.tool].h>g.hardness;q.erased=false;st.points.push(q);}}
+ function takeScratchImage(mode){var c=document.createElement('canvas');var view=scratch.view||scratchView(720,480);c.width=720;c.height=Math.round(720*view.h/view.w);renderScratchView(c.getContext('2d'),c.width,c.height,view,mode||'now');return c.toDataURL('image/jpeg',.87);}
+ function beginWipe(){if(!scratch.strokes.length)return false;if(!scratch.beforeState)scratch.beforeState=JSON.parse(JSON.stringify(scratch.strokes));return true;}
+ function wipeAt(p){var hits=[];scratch.strokes.forEach(function(st){st.points.forEach(function(q){if(q.mineral&&Math.hypot(q.x-p.x,q.y-p.y)<23&&!q.erased)hits.push(q);});});if(hits.length){beginWipe();hits.forEach(function(q){q.erased=true;});scratch.hasWiped=true;}scratch.pointer=p;invalidate();}
+ function wipePath(a,b){var d=Math.hypot(a.x-b.x,a.y-b.y),n=Math.max(1,Math.ceil(d/9));for(var i=1;i<=n;i++)wipeAt({x:a.x+(b.x-a.x)*i/n,y:a.y+(b.y-a.y)*i/n});}
+ function finishStroke(event){if(scratch.active){var st=scratch.active;if(st.points.length<3||!st.points.some(function(p){return !!p.mineral;})){scratch.strokes.pop();toast('请在岩石上按住拖动一小段。');}else{scratch.beforeState=null;scratch.hasWiped=false;}scratch.active=null;}
+ scratch.pointer=null;invalidate();}
+ function clearScratch(){scratch.strokes=[];scratch.active=null;scratch.pointer=null;scratch.beforeState=null;scratch.hasWiped=false;updateScratchUI();invalidate();}
+ function hasUnsavedScratch(){return scratch.strokes.length>0;}
+ function moveScratchCenter(p){if(hasUnsavedScratch()&&!window.confirm('更换观察位置会清除当前刻画。继续吗？'))return;scratch.center={x:clamp(p.x,200,800),y:clamp(p.y,170,550)};clearScratch();}
+
+ // ---------- Evidence is source-labelled; descriptions are entered by pupils. ----------
+ function escapeHtml(text){return String(text).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
+ function restoreRecords(){try{var a=JSON.parse(localStorage.getItem(STORE)||'[]');if(!Array.isArray(a))return;state.records=a.filter(function(r){return r&&typeof r.id==='string'&&typeof r.image==='string'&&/^data:image\/(jpeg|png);base64,/.test(r.image)&&r.image.length<700000&&['model','photo'].indexOf(r.source)>=0;}).slice(-MAX_RECORDS).map(function(r){return {id:r.id,image:r.image,title:String(r.title||'观察记录').slice(0,60),source:r.source,type:r.type==='scratch'?'scratch':'observe',note:String(r.note||'').slice(0,300),tags:Array.isArray(r.tags)?r.tags.map(String).slice(0,6):[],detail:String(r.detail||'').slice(0,200)};});state.selected=state.records.slice(-2).map(function(r){return r.id;});}catch(e){state.records=[];}updateCount();}
+ function saveRecords(){try{localStorage.setItem(STORE,JSON.stringify(state.records));}catch(e){toast('浏览器未能保存记录，请及时导出图片或备份。');}updateCount();}
+ function updateCount(){$('evidenceCount').textContent=state.records.length;}
+ function addRecord(r){if(state.records.length>=MAX_RECORDS){toast('证据夹已满。请先导出，再删除不需要的记录。');return false;}r.id='r'+Date.now()+'-'+Math.random().toString(16).slice(2,7);r.note='';r.tags=[];state.records.push(r);state.selected=state.selected.slice(-1).concat(r.id);saveRecords();toast('已放入证据夹，可与另一条并排比较。');return true;}
+ function observationCapture(){if(!obsView)return;var c=document.createElement('canvas');c.width=720;c.height=480;var ctx=c.getContext('2d'),src=currentSource(),view=obsView;ctx.fillStyle='#edeedf';ctx.fillRect(0,0,720,480);var s=Math.min(720/view.w,480/view.h),w=view.w*s,h=view.h*s;ctx.drawImage(src,view.x*src.width/1000,view.y*src.height/720,view.w*src.width/1000,view.h*src.height/720,(720-w)/2,(480-h)/2,w,h);addRecord({type:'observe',source:state.photo?'photo':'model',title:state.photo?'实物照片：'+state.photo.name:names[state.kind]+' · 样本 '+state.serial[state.kind],detail:'屏幕放大 '+state.zoom+'×；中心 '+Math.round(state.focus.x)+','+Math.round(state.focus.y)+'（图像坐标）',image:c.toDataURL('image/jpeg',.87)});}
+ function imageLoad(url){return new Promise(function(resolve,reject){var im=new Image();im.onload=function(){resolve(im);};im.onerror=reject;im.src=url;});}
+ async function captureScratch(){if(!scratch.strokes.length)return;if(!scratch.hasWiped){toast('先用橡皮擦擦拭，或点“擦一遍”，再保留前后对照。');return;}var before=takeScratchImage('before'),after=takeScratchImage('now');var ims=await Promise.all([imageLoad(before),imageLoad(after)]),c=document.createElement('canvas');c.width=1080;c.height=480;var ctx=c.getContext('2d');ctx.fillStyle='#f4f3e9';ctx.fillRect(0,0,1080,480);ctx.fillStyle='#2b4c40';ctx.font='600 27px "Microsoft YaHei", sans-serif';ctx.fillText('擦拭前',26,48);ctx.fillText('擦拭后（当前状态）',560,48);ims.forEach(function(im,i){var scale=Math.min(516/im.width,344/im.height),iw=im.width*scale,ih=im.height*scale;ctx.drawImage(im,18+i*528+(516-iw)/2,74+(344-ih)/2,iw,ih);});ctx.strokeStyle='#d4dacb';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(540,65);ctx.lineTo(540,427);ctx.stroke();ctx.font='20px "Microsoft YaHei",sans-serif';ctx.fillStyle='#61725f';ctx.fillText('同一块花岗岩 · 同一区域 · 模型示意',26,463);var used=[];scratch.strokes.forEach(function(s){if(used.indexOf(TOOLS[s.tool].name)<0)used.push(TOOLS[s.tool].name);});if(addRecord({type:'scratch',source:'model',title:used.join(' / ')+' · 擦拭前后',detail:'工具：'+used.join('、')+'；'+scratch.strokes.length+'次刻画；部分擦拭也按当前状态记录。',image:c.toDataURL('image/jpeg',.87)})){} }
+ function selectedRecords(){return state.selected.map(function(id){return state.records.find(function(r){return r.id===id;});}).filter(Boolean).slice(0,2);}
+ function renderEvidence(){var any=state.records.length>0;$('evidenceEmpty').hidden=any;$('evidenceContent').hidden=!any;$('exportPng').disabled=!any;$('exportJson').disabled=!any;if(!any)return;state.selected=state.selected.filter(function(id){return state.records.some(function(r){return r.id===id;});});if(!state.selected.length)state.selected=[state.records[state.records.length-1].id];var compare=$('compareGrid');compare.innerHTML='';var records=selectedRecords();records.forEach(function(r){var card=document.createElement('article');card.className='compare-card';var srcLabel=r.source==='photo'?'实物照片':'模型示意';card.innerHTML='<header><strong>'+escapeHtml(r.title)+'</strong><span class="badge '+(r.source==='photo'?'photo':'')+'">'+srcLabel+'</span></header><img alt="'+escapeHtml(r.title)+'" src="'+r.image+'"><div class="tags"></div><textarea maxlength="300" aria-label="'+escapeHtml(r.title)+'的观察描述" placeholder="我看见……；我还想比较……"></textarea>';var options=r.type==='scratch'?['线有变化','仍有沟痕','有些消失','还需复测']:['多种颜色','颜色接近','颗粒明显','颗粒较细','有层次','还没看清'];var tags=card.querySelector('.tags');options.forEach(function(t){var b=document.createElement('button');b.className='tag'+(r.tags.indexOf(t)>=0?' on':'');b.textContent=t;b.setAttribute('aria-pressed',String(r.tags.indexOf(t)>=0));b.onclick=function(){var i=r.tags.indexOf(t);if(i>=0)r.tags.splice(i,1);else r.tags.push(t);saveRecords();renderEvidence();};tags.appendChild(b);});var ta=card.querySelector('textarea');ta.value=r.note;ta.addEventListener('input',function(){r.note=ta.value;saveRecords();});compare.appendChild(card);});if(records.length<2){var placeholder=document.createElement('div');placeholder.className='compare-placeholder';placeholder.innerHTML='<strong>再选一条，放在一起比较</strong><p>可比较不同岩石、同一块的不同位置，<br>或实物照片与结构模型。</p>';compare.appendChild(placeholder);}var strip=$('evidenceStrip');strip.innerHTML='';state.records.forEach(function(r,index){var item=document.createElement('div');item.className='thumb-card';var b=document.createElement('button');b.className='thumb-button'+(state.selected.indexOf(r.id)>=0?' selected':'');b.setAttribute('aria-pressed',String(state.selected.indexOf(r.id)>=0));b.setAttribute('aria-label','选择记录'+(index+1)+'：'+r.title);b.innerHTML='<img alt="" src="'+r.image+'"><span>'+(index+1)+'. '+escapeHtml(r.title)+'</span>';b.onclick=function(){var i=state.selected.indexOf(r.id);if(i>=0)state.selected.splice(i,1);else state.selected=state.selected.slice(-1).concat(r.id);renderEvidence();};var del=document.createElement('button');del.className='remove-record';del.textContent='×';del.setAttribute('aria-label','删除记录'+(index+1));del.onclick=function(){if(!window.confirm('删除这条记录？已导出的图片不受影响。'))return;state.records=state.records.filter(function(x){return x.id!==r.id;});state.selected=state.selected.filter(function(id){return id!==r.id;});saveRecords();renderEvidence();};item.appendChild(b);item.appendChild(del);strip.appendChild(item);});}
+ function showModal(id){lastFocus=document.activeElement;$(id).hidden=false;if(id==='evidenceModal')renderEvidence();var first=$(id).querySelector('button:not(:disabled),a[href],textarea');if(first)first.focus();}
+ function closeModal(id){$(id).hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+ function wrapText(ctx,text,x,y,maxWidth,lineHeight,maxLines){var lines=[''];Array.from(text).forEach(function(ch){if(ch==='\n'){lines.push('');return;}var i=lines.length-1;if(ctx.measureText(lines[i]+ch).width>maxWidth)lines.push(ch);else lines[i]+=ch;});lines.slice(0,maxLines||99).forEach(function(t,i){ctx.fillText(t,x,y+i*lineHeight);});return Math.min(lines.length,maxLines||99)*lineHeight;}
+ async function exportPng(){var records=selectedRecords();if(!records.length)return;var ims=await Promise.all(records.map(function(r){return imageLoad(r.image);}));var c=document.createElement('canvas');c.width=1600;c.height=1080;var ctx=c.getContext('2d');ctx.fillStyle='#f5f4ec';ctx.fillRect(0,0,1600,1080);ctx.fillStyle='#25483d';ctx.font='bold 44px "Microsoft YaHei",sans-serif';ctx.fillText('地球表面的岩石 · 观察证据',64,90);ctx.font='23px "Microsoft YaHei",sans-serif';ctx.fillStyle='#627568';ctx.fillText('五上 4.4  ｜  '+new Date().toLocaleString('zh-CN',{hour12:false}),66,133);records.forEach(function(r,i){var x=64+i*755,w=717;ctx.fillStyle='#fffef8';ctx.fillRect(x,172,w,784);ctx.strokeStyle='#d5ddcf';ctx.strokeRect(x,172,w,784);ctx.fillStyle='#2b473d';ctx.font='600 27px "Microsoft YaHei",sans-serif';wrapText(ctx,r.title,x+22,216,w-44,36,2);ctx.font='21px "Microsoft YaHei",sans-serif';ctx.fillStyle=r.source==='photo'?'#9a6b24':'#657960';ctx.fillText(r.source==='photo'?'来源：实物照片':'来源：典型结构 / 刻画模型',x+22,282);var im=ims[i],s=Math.min((w-32)/im.width,440/im.height),iw=im.width*s,ih=im.height*s;ctx.fillStyle='#edefe2';ctx.fillRect(x+16,305,w-32,440);ctx.drawImage(im,x+(w-iw)/2,305+(440-ih)/2,iw,ih);ctx.fillStyle='#2c493d';ctx.font='25px "Microsoft YaHei",sans-serif';wrapText(ctx,(r.tags.length?'观察：'+r.tags.join('、'):'观察：')+(r.note?'\n'+r.note:''),x+23,793,w-46,39,4);});if(records.length===1){ctx.fillStyle='#647866';ctx.font='26px "Microsoft YaHei",sans-serif';ctx.fillText('可在证据夹中选两条记录并排导出。',850,520);}ctx.font='22px "Microsoft YaHei",sans-serif';ctx.fillStyle='#657666';ctx.fillText('模型记录不能代替实物测量；照片放大不自动鉴定矿物。',64,1011);ctx.font='18px sans-serif';ctx.fillText('mutiw · v1.0',1380,1042);var url=c.toDataURL('image/png');$('exportImage').src=url;$('downloadImage').href=url;showModal('exportModal');}
+ function exportJson(){var payload={lesson:'五上4.4地球表面的岩石',version:'1.0',exportedAt:new Date().toISOString(),records:state.records};var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='岩石观察_记录备份.json';a.click();setTimeout(function(){URL.revokeObjectURL(url);},5000);toast('已生成记录备份；其中包含截图、来源与观察描述。');}
+
+ // ---------- Pointer, touch, keyboard and file interactions ----------
+ $$('[data-kind]').forEach(function(b){b.onclick=function(){changeRock(b.dataset.kind);};});
+ $('newSpecimen').onclick=function(){if(state.photo){changeRock(state.kind);return;}state.serial[state.kind]++;state.focus={x:500,y:340};state.reveal=false;surfaceCache={};updateObserveUI();invalidate();};
+ $('tab-observe').onclick=function(){setPage('observe');};$('tab-scratch').onclick=function(){setPage('scratch');};$('toScratch').onclick=function(){setPage('scratch',true);};
+ $('zoomRange').addEventListener('input',function(){state.zoom=Number(this.value);updateObserveUI();invalidate();});
+ $('boundariesBtn').onclick=function(){state.boundaries=!state.boundaries;updateObserveUI();invalidate();};$('mineralBtn').onclick=function(){state.reveal=!state.reveal;updateObserveUI();invalidate();};
+ var observeDrag=false;
+ function moveFocus(event){if(!obsFit)return;var p=localToModel(pos($('rockCanvas'),event),obsFit);state.focus={x:clamp(p.x,45,955),y:clamp(p.y,40,680)};invalidate();}
+ $('rockCanvas').addEventListener('pointerdown',function(e){observeDrag=true;try{this.setPointerCapture(e.pointerId);}catch(ignore){}moveFocus(e);$('observeTip').style.opacity='.45';});
+ $('rockCanvas').addEventListener('pointermove',function(e){if(observeDrag)moveFocus(e);});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(function(type){$('rockCanvas').addEventListener(type,function(){observeDrag=false;});});
+ $('rockCanvas').addEventListener('keydown',function(e){var keys={ArrowLeft:[-18,0],ArrowRight:[18,0],ArrowUp:[0,-18],ArrowDown:[0,18]};if(!keys[e.key])return;e.preventDefault();state.focus={x:clamp(state.focus.x+keys[e.key][0],45,955),y:clamp(state.focus.y+keys[e.key][1],40,680)};invalidate();});
+ $('lensCanvas').addEventListener('pointerdown',function(e){if(!obsView)return;var p=pos(this,e),r=this.getBoundingClientRect();state.focus={x:obsView.x+p.x/r.width*obsView.w,y:obsView.y+p.y/r.height*obsView.h};invalidate();});
+ $('lensCanvas').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();if(!state.photo){state.reveal=!state.reveal;updateObserveUI();invalidate();}}});
+ $('importPhoto').onclick=function(){$('photoInput').click();};
+ $('photoInput').addEventListener('change',function(){var file=this.files&&this.files[0];this.value='';if(!file)return;if(!/^image\//.test(file.type)&&!(/\.(png|jpg|jpeg|webp|gif|bmp)$/i.test(file.name))){toast('请选择浏览器能打开的照片文件。');return;}if(file.size>30*1024*1024){toast('照片较大，请先缩小至30MB以内。');return;}var url=URL.createObjectURL(file),im=new Image();im.onload=function(){var c=document.createElement('canvas');var resolution=Math.min(3,Math.max(1,Math.min(im.width/1000,im.height/720)));c.width=Math.round(1000*resolution);c.height=Math.round(720*resolution);var ctx=c.getContext('2d');ctx.fillStyle='#efefe5';ctx.fillRect(0,0,c.width,c.height);var s=Math.min(c.width/im.width,c.height/im.height),w=im.width*s,h=im.height*s;ctx.drawImage(im,(c.width-w)/2,(c.height-h)/2,w,h);state.photo={name:file.name.replace(/\.[^.]+$/,'').slice(0,28),canvas:c};state.focus={x:500,y:360};state.boundaries=false;state.reveal=false;URL.revokeObjectURL(url);updateObserveUI();invalidate();toast('已载入实物照片，仅在本机观察和留存。');};im.onerror=function(){URL.revokeObjectURL(url);toast('这张照片暂时无法解码，请改用 JPG、PNG 或 WebP。');};im.src=url;});
+ $$('[data-tool]').forEach(function(b){b.onclick=function(){scratch.tool=b.dataset.tool;scratch.mode='scratch';scratch.pointer=null;updateScratchUI();invalidate();};});
+ $('eraserBtn').onclick=function(){scratch.mode='erase';updateScratchUI();invalidate();};
+ $('scratchCanvas').addEventListener('pointerdown',function(e){if(!scratch.view)return;try{this.setPointerCapture(e.pointerId);}catch(ignore){}var p=screenScratchPoint(e);scratch.pointer=p;if(scratch.mode==='erase'){wipeAt(p);}else{if(scratch.strokes.length>=16){toast('本次最多16条刻画，请保留证据后重新刻画。');return;}var st={tool:scratch.tool,points:[]};scratch.strokes.push(st);scratch.active=st;addScratchPoint(p);}invalidate();});
+ $('scratchCanvas').addEventListener('pointermove',function(e){if(!this.hasPointerCapture(e.pointerId)||!scratch.view)return;var p=screenScratchPoint(e);if(scratch.mode==='erase'){var old=scratch.pointer||p;wipePath(old,p);}else if(scratch.active)addScratchPoint(p);scratch.pointer=p;invalidate();});
+ ['pointerup','pointercancel','lostpointercapture'].forEach(function(type){$('scratchCanvas').addEventListener(type,finishStroke);});
+ $('scratchCanvas').addEventListener('keydown',function(e){if(e.key==='Escape'){finishStroke();}else if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'){e.preventDefault();$('undoStroke').click();}});
+ $('wipeAll').onclick=function(){if(!beginWipe())return;scratch.strokes.forEach(function(st){st.points.forEach(function(p){p.erased=true;});});scratch.hasWiped=true;scratch.mode='erase';scratch.pointer=null;updateScratchUI();invalidate();};
+ $('undoStroke').onclick=function(){if(scratch.strokes.length){scratch.strokes.pop();scratch.beforeState=null;scratch.hasWiped=false;scratch.strokes.forEach(function(st){st.points.forEach(function(p){p.erased=false;});});invalidate();}};
+ $('resetScratch').onclick=clearScratch;
+ $('scratchBoundaryBtn').onclick=function(){scratch.boundaries=!scratch.boundaries;updateScratchUI();invalidate();};
+ $('miniCanvas').addEventListener('pointerdown',function(e){if(!miniFit)return;moveScratchCenter(localToModel(pos(this,e),miniFit));});
+ $('miniCanvas').addEventListener('keydown',function(e){var k={ArrowLeft:[-75,0],ArrowRight:[75,0],ArrowUp:[0,-65],ArrowDown:[0,65]};if(!k[e.key])return;e.preventDefault();moveScratchCenter({x:scratch.center.x+k[e.key][0],y:scratch.center.y+k[e.key][1]});});
+ $('captureObserve').onclick=observationCapture;$('captureScratch').onclick=function(){captureScratch().catch(function(){toast('暂时无法生成对照图，请重试。');});};
+ $('evidenceBtn').onclick=function(){showModal('evidenceModal');};$('modelBtn').onclick=function(){showModal('modelModal');};$('mobileModelBtn').onclick=function(){showModal('modelModal');};
+ $$('[data-close]').forEach(function(b){b.onclick=function(){closeModal(b.dataset.close);};});
+ $$('.modal').forEach(function(m){m.addEventListener('pointerdown',function(e){if(e.target===m)closeModal(m.id);});});
+ document.addEventListener('keydown',function(e){var open=$$('.modal').filter(function(m){return !m.hidden;});if(!open.length)return;var top=open[open.length-1];if(e.key==='Escape'){e.preventDefault();closeModal(top.id);}if(e.key==='Tab'){var nodes=Array.prototype.slice.call(top.querySelectorAll('button:not(:disabled),textarea,a[href],input:not(:disabled)')).filter(function(x){return x.offsetParent!==null;});if(!nodes.length)return;var first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+ $('exportPng').onclick=function(){exportPng().catch(function(){toast('对照图生成失败，请重试或备份记录。');});};$('exportJson').onclick=exportJson;
+ $('fullscreenBtn').onclick=function(){if(document.fullscreenElement){if(document.exitFullscreen)document.exitFullscreen();}else if(document.documentElement.requestFullscreen){var p=document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(function(){toast('浏览器未允许全屏，可使用浏览器全屏功能。');});}else toast('此浏览器没有网页全屏接口，可使用设备的全屏功能。');};
+ window.addEventListener('resize',invalidate);if(window.ResizeObserver){var ro=new ResizeObserver(invalidate);['rockCanvas','lensCanvas','scratchCanvas','miniCanvas'].forEach(function(id){ro.observe($(id));});}
+ function initThumbs(){$$('[data-mini]').forEach(function(c){c.width=120;c.height=90;var ctx=c.getContext('2d');ctx.scale(.14,.14);ctx.translate(-70,-40);RockEngine.draw(ctx,getModel(c.dataset.mini,1),{});});}
+ initThumbs();restoreRecords();scratch.model=getModel('granite',1);updateObserveUI();updateScratchUI();invalidate();
+ // Transparent debugging contract for automated checks, not a student-facing feature.
+ window.RockApp={state:state,scratch:scratch,tools:TOOLS,getModel:getModel,setPage:setPage,clearScratch:clearScratch,render:invalidate,modelHit:function(x,y){return RockEngine.hit(scratch.model,x,y);},version:'1.0'};
+})();
+
+</script>
+<!-- AIHTML-COMPAT-GRADE:START --><span style="position:fixed;left:7px;bottom:4px;font:10px system-ui,sans-serif;color:#6f7b6a;pointer-events:none;z-index:1" title="Canvas二维绘图，无WebGL">T2</span><!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
