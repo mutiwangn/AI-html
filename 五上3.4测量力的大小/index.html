@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, viewport-fit=cover"><meta name="color-scheme" content="light"><title>测量力的大小 · 双测力计互动实验室 v1.1</title>
+<style>:root{--ink:#142f35;--muted:#688087;--teal:#087f83;--teal-deep:#075f65;--teal-light:#e5f3ef;--line:#dce7e5;--paper:#fff;--bg:#f4f7f5;--orange:#d97831;--red:#c6453e;--green:#258464;--ui:clamp(16px,1.45vw,25px);--small:clamp(13px,1.12vw,19px);--gap:clamp(12px,1.6vw,25px);--radius:22px;--header:84px;--footer:27px;--app-h:100vh;--font:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif}
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-tap-highlight-color:transparent}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation}button:disabled{cursor:default;opacity:.43}button,input,select{outline-offset:4px}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #eaa549}button{border:0;background:none;color:inherit}button svg{width:21px;height:21px;flex-shrink:0}button:active:not(:disabled){transform:translateY(1px)}.app{height:var(--app-h);display:flex;flex-direction:column}.topbar{height:var(--header);flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 var(--gap);border-bottom:1px solid var(--line);background:white;gap:20px}.brand{display:flex;align-items:center;gap:13px;white-space:nowrap}.brand-mark{width:42px;height:48px;display:grid;place-items:center;color:var(--teal)}.brand-mark svg{width:32px;height:45px}.brand h1{font-size:clamp(21px,1.9vw,30px);letter-spacing:.025em;font-weight:750;margin:0}.brand small{display:block;font-size:12px;letter-spacing:.2em;color:var(--muted);margin-top:4px}.tabs{display:flex;gap:7px;align-items:center;background:#f1f5f3;padding:5px;border-radius:15px}.tab{height:48px;padding:0 23px;display:flex;gap:12px;align-items:center;border-radius:11px;font-size:var(--ui);font-weight:650;white-space:nowrap;color:#697f81}.tab .num{font-size:14px;font-variant-numeric:tabular-nums;opacity:.65}.tab.active{background:var(--teal-deep);color:#fff;box-shadow:0 3px 8px #123e3a14}.utilities{display:flex;gap:8px}.icon-btn{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#f4f7f5;border:1px solid #e6eeeb}.icon-btn:hover{background:#e5eee9}.main{min-height:0;flex:1;padding:var(--gap);padding-bottom:10px;display:flex}.page{width:100%;height:100%;min-height:0;display:none;gap:var(--gap)}.page.active{display:grid}.structure-page{grid-template-columns:minmax(0,1fr) clamp(300px,27vw,415px)}.practice-page{grid-template-columns:minmax(0,1fr) clamp(335px,31vw,450px)}.stage{min-width:0;min-height:0;position:relative;overflow:hidden;border-radius:var(--radius);background:#edf3ef;border:1px solid #dfe8e3}.structure-stage{background:radial-gradient(ellipse at 43% 44%,#fff 0%,#f1f6f2 49%,#e6eee7 100%)}.stage:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#799f8824 .8px,transparent .8px);background-size:24px 24px;opacity:.65}.canvas-wrap{position:absolute;inset:0;touch-action:none}.canvas-wrap canvas{width:100%;height:100%;display:block}.stage-top{position:absolute;z-index:6;top:18px;left:20px;right:20px;display:flex;align-items:center;justify-content:space-between;gap:10px;pointer-events:none}.stage-top>*{pointer-events:auto}.segmented{display:flex;gap:3px;background:#ffffffec;padding:5px;border:1px solid #d9e5dd;border-radius:12px}.segmented button{min-height:39px;padding:6px 18px;border-radius:8px;font-size:var(--small);font-weight:600;white-space:nowrap}.segmented button.active{background:var(--teal);color:white}.stage-tools{display:flex;gap:5px;background:#ffffffed;padding:4px;border:1px solid #dde7e0;border-radius:12px}.stage-tools button{width:38px;height:39px;border-radius:8px;font-size:var(--small);display:grid;place-items:center}.stage-tools button:hover{background:#ebf3ee}.stage-tools .wide-tool{width:auto;min-width:53px;padding:0 10px}.stage-bottom{position:absolute;bottom:16px;left:20px;right:20px;display:flex;align-items:center;justify-content:space-between;gap:10px;z-index:6;pointer-events:none}.stage-instruction{font-size:var(--small);color:#617970;display:flex;align-items:center;gap:8px;background:#ffffffa8;padding:8px 12px;border-radius:9px}.stage-instruction svg{width:18px;height:18px}.model-note{font-size:12px;color:#7e9188;background:#f8fbf8a6;padding:5px 8px;border-radius:8px}.annotations{position:absolute;inset:0;pointer-events:none;z-index:4}.annotations svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}.part-tag{position:absolute;padding:7px 13px;border:1px solid #d4e2d8;border-radius:10px;background:#ffffffee;box-shadow:0 4px 16px #123d2610;pointer-events:auto;font-size:clamp(18px,1.55vw,27px);font-weight:600;white-space:nowrap;transition:background .2s,color .2s}.part-tag.active{background:var(--teal-deep);border-color:var(--teal-deep);color:white}.part-tag:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#77a999;vertical-align:middle;margin-right:8px}.part-tag.active:before{background:#8ed3b2}.inspector{min-height:0;display:flex;flex-direction:column;background:#fff;border:1px solid #e2eae5;border-radius:var(--radius);padding:clamp(17px,1.8vw,27px);gap:clamp(12px,1.45vh,18px);overflow:hidden}.section-head h2{font-size:clamp(23px,2vw,32px);line-height:1.3;margin:0 0 6px;font-weight:720;letter-spacing:.025em}.section-head p{margin:0;color:var(--muted);font-size:var(--small);line-height:1.6}.parts-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}.part-choice{display:flex;align-items:center;gap:10px;min-height:clamp(43px,6.1vh,61px);padding:10px 12px;border:1px solid var(--line);border-radius:11px;font-size:var(--ui);text-align:left}.part-choice .part-number{font-size:13px;color:#8ba197;align-self:center}.part-choice.selected{color:var(--teal-deep);background:#e7f3ed;border-color:#94bdae}.part-choice.selected .part-number{color:#47927c}.detail{min-height:100px;flex:1;background:#f5f8f6;border-radius:13px;padding:15px 17px;border-left:3px solid #61a892;display:flex;flex-direction:column;justify-content:center}.detail h3{font-size:var(--ui);margin:0 0 8px;color:var(--teal-deep)}.detail p{margin:0;font-size:var(--small);line-height:1.85}.linkage{display:flex;align-items:center;justify-content:space-between;color:#47685f;gap:4px;font-size:clamp(12px,1.05vw,18px);white-space:nowrap;padding:0 2px}.linkage span{padding:5px 0}.linkage b{color:#8aaa9b;font-weight:400}.force-box{border-top:1px solid var(--line);padding-top:15px}.force-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:var(--ui);font-weight:600;margin-bottom:9px}.force-value{font-size:clamp(25px,2.6vw,39px);color:var(--teal-deep);font-weight:750;font-variant-numeric:tabular-nums}.force-value small{font-size:18px;margin-left:3px}input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;touch-action:none;cursor:pointer;margin:3px 0}input[type=range]::-webkit-slider-runnable-track{height:7px;border-radius:9px;background:#dbe8e0}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;margin-top:-8px;width:23px;height:23px;border:3px solid white;border-radius:50%;background:var(--teal);box-shadow:0 1px 5px #184c383b}input[type=range]::-moz-range-track{height:7px;border-radius:9px;background:#dbe8e0}input[type=range]::-moz-range-thumb{width:18px;height:18px;border:3px solid white;border-radius:50%;background:var(--teal)}.range-labels{display:flex;justify-content:space-between;color:#84978f;font-size:12px;margin:0 1px 12px}.force-actions{display:flex;gap:8px}.btn{min-height:45px;padding:9px 16px;border-radius:11px;font-size:var(--small);font-weight:650;display:inline-flex;justify-content:center;align-items:center;gap:8px;border:1px solid var(--line);background:white}.btn:hover{background:#f3f7f4}.btn.primary{background:var(--teal-deep);border-color:var(--teal-deep);color:white}.btn.primary:hover{background:#08777a}.btn.soft{background:#edf5ef;color:#315f4f;border-color:#dbe9df}.force-actions .btn{flex:1}.footer{height:var(--footer);flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 var(--gap) 4px;color:#81918a;font-size:11px;letter-spacing:.03em}.footer button{text-decoration:underline;text-underline-offset:3px;color:#71857a}.toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);z-index:40;padding:13px 23px;max-width:90%;background:#183d36;color:white;border-radius:12px;box-shadow:0 8px 30px #132f351f;font-size:var(--small);pointer-events:none;opacity:0;transition:opacity .2s}.toast.show{opacity:1}.fallback-banner{position:absolute;top:76px;left:20px;right:20px;font-size:13px;z-index:9;color:#775326;display:none;background:#fff6e8;border:1px solid #ecd9b6;border-radius:9px;padding:8px 11px}.fallback-svg{width:100%;height:100%;display:none}.fallback-svg>svg{display:block;width:100%;height:100%}.view-status{font-size:13px;color:#2f7060;background:#ffffffc9;padding:6px 10px;border-radius:8px;display:none}
+/* Reading workspace */
+.reading-stage{background:#eff4f0;display:flex;flex-direction:column}.reading-top{z-index:3;position:relative;display:flex;align-items:center;justify-content:space-between;padding:18px 23px 9px;gap:10px}.reading-top h2{font-size:var(--ui);margin:0;font-weight:650}.reading-top .question-no{font-size:var(--small);color:#617c6d}.reading-art{position:relative;display:grid;grid-template-columns:43% 57%;flex:1;min-height:0;padding:0 22px;z-index:2;gap:0}.instrument-col{position:relative;min-height:0;display:flex;align-items:center;justify-content:center}.instrument-col svg{width:100%;height:100%;overflow:visible}.instrument-col .under-label{position:absolute;top:13px;left:15px;color:#789181;font-size:12px}.magnifier{position:relative;min-height:0;margin:24px 0 22px 6px;background:#fff;border:1px solid #d6e2d8;border-radius:18px;box-shadow:0 14px 35px #426b4710;display:flex;flex-direction:column;overflow:hidden}.magnifier-heading{padding:17px 18px 11px;border-bottom:1px solid #eff2ed;display:flex;align-items:center;justify-content:space-between;font-size:var(--small);color:#486853;font-weight:650;gap:8px}.magnifier-heading svg{width:19px;height:19px}.magnifier-heading span{display:flex;align-items:center;gap:8px}.magnifier-heading .tiny{color:#8c9c91;font-size:12px;font-weight:400}.zoom-art{position:relative;min-height:0;flex:1}.zoom-art svg{height:100%;width:100%;display:block}.zoom-under{font-size:var(--small);line-height:1.6;min-height:48px;text-align:center;color:#7d8c82;padding:8px 12px;background:#fbfcfa}.reading-bottom{position:relative;z-index:6;padding:0 22px 18px;flex:none}.eye-controls{display:flex;align-items:center;justify-content:center;gap:10px}.eye-controls .segmented{padding:3px}.eye-controls .segmented button{min-height:36px;font-size:var(--small);padding:5px 18px}.eye-caption{font-size:var(--small);color:#6a8271;white-space:nowrap}.zero-toolbar{display:none;margin-bottom:12px;padding:10px 12px;align-items:center;gap:10px;justify-content:space-between;background:#fff;border:1px solid #d9e5da;border-radius:12px}.zero-toolbar.visible{display:flex}.zero-toolbar span{font-size:var(--small);font-weight:600;flex:1}.zero-controls{display:flex;gap:6px}.zero-controls .btn{min-height:40px;min-width:49px;padding:6px 12px;font-size:18px}.zero-toolbar .btn.primary{font-size:var(--small);padding:7px 14px}.quiz-panel{gap:clamp(9px,1.4vh,15px)}.quiz-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.quiz-head h2{margin:0;font-size:clamp(22px,1.9vw,30px)}.quiz-head .score{font-size:var(--small);color:#6e8378;white-space:nowrap}.quiz-head .score b{color:var(--teal-deep);font-size:1.25em}.quiz-mode{width:100%;background:#f1f5f1;border-color:#f1f5f1;padding:4px;flex:none}.quiz-mode button{flex:1;font-size:var(--small);padding:6px 8px;min-height:38px}.configuration{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:var(--small);color:#597566}.configuration select{padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font-size:var(--small);min-width:160px;max-width:75%;height:39px}.task-line{margin:2px 0;font-size:var(--ui);font-weight:600;line-height:1.45}.answer-wrap{border:2px solid #c4dad0;border-radius:13px;display:flex;align-items:center;padding:0 17px;background:#fbfdfb;min-height:clamp(63px,8vh,86px);gap:8px}.answer-wrap:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px #087f8310}.answer-wrap input{display:block;width:100%;min-width:0;background:transparent;border:0;outline:0!important;font-size:clamp(35px,3vw,48px);color:var(--ink);font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:.07em;padding:0}.answer-wrap input::placeholder{color:#b2c4b9;font-size:27px;font-weight:400;letter-spacing:0}.answer-wrap .unit{font-size:clamp(23px,2vw,32px);color:#486f5a;font-weight:650}.keypad{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,minmax(36px,1fr));gap:7px;min-height:150px;max-height:260px;flex:1}.key{background:#f3f6f3;border:1px solid #e4ece5;border-radius:10px;font-size:clamp(23px,2.2vw,33px);font-weight:500;display:grid;place-items:center;padding:1px 0}.key:hover{background:#e4f0e7}.key.muted{color:#6c8975;background:#edf2ed}.feedback{border-radius:12px;min-height:67px;display:flex;align-items:center;gap:12px;padding:10px 12px;font-size:var(--small);background:#f5f7f4;color:#6d8273;flex:none}.feedback .feedback-icon{font-size:30px;font-weight:800;display:none;flex:none;width:31px;text-align:center}.feedback .feedback-main{font-weight:650;color:#41634d;font-size:var(--small)}.feedback .feedback-sub{font-size:clamp(12px,1.02vw,17px);line-height:1.6;margin-top:3px}.feedback.success{background:#e3f5e9;color:#257344}.feedback.success .feedback-main{color:#146739;font-size:var(--ui)}.feedback.success .feedback-icon{display:block;color:#228448;font-size:38px}.feedback.error{background:#fcefeb;color:#a43d30}.feedback.error .feedback-main{color:#a3372b;font-size:var(--ui)}.feedback.error .feedback-icon{display:block;color:#c33e35}.feedback.warning{background:#fff4df;color:#8a6334}.feedback.warning .feedback-main{color:#8a6334}.quiz-actions{display:flex;gap:8px;min-height:48px;flex:none}.quiz-actions .hint{min-width:72px;font-size:var(--small);padding:9px 12px}.quiz-actions .submit{flex:1;font-size:var(--ui);min-height:49px}.quiz-actions .next{display:none;flex:1;font-size:var(--ui);min-height:49px;background:#156e4b;border-color:#156e4b}.quiz-actions.answered .submit{display:none}.quiz-actions.answered .next{display:flex}.after-links{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:#84978b}.after-links button{padding:0;color:#7b9483;min-height:19px}.after-links button:hover{color:var(--teal-deep)}.dialog-backdrop{position:fixed;inset:0;z-index:60;background:#16362f65;display:none;align-items:center;justify-content:center;padding:20px}.dialog-backdrop.open{display:flex}.dialog{max-width:670px;width:100%;max-height:calc(var(--app-h) - 48px);background:#fff;border-radius:21px;padding:30px;box-shadow:0 25px 80px #102b3033;overflow:auto}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}.dialog h2{margin:0;font-size:26px}.dialog h3{font-size:19px;margin:22px 0 8px}.dialog p{font-size:16px;line-height:1.85;color:#557367;margin:8px 0}.dialog .fineprint{font-size:13px;line-height:1.8;color:#83938b}.teacher-row{display:flex;gap:15px;align-items:center;margin-top:15px;font-size:18px}.teacher-row input{width:130px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;font-size:22px}.dialog .button-row{display:flex;gap:10px;margin-top:20px}.dialog .button-row .btn{flex:1;font-size:18px}.view-rotate-note{display:none}.hidden{display:none!important}
+@media(min-width:1700px){:root{--header:96px;--footer:31px}.tab{height:54px;padding:0 30px}.brand small{font-size:13px}.parts-list{gap:10px}.stage-top{top:23px;left:25px;right:25px}.segmented button{min-height:44px}.icon-btn{width:49px;height:49px}.keypad{max-height:330px}.detail{padding:22px}.feedback{min-height:90px}.btn{min-height:50px}.quiz-actions .submit,.quiz-actions .next{min-height:58px}.model-note,.footer{font-size:13px}}
+@media(max-height:780px){:root{--header:70px;--footer:23px;--gap:13px;--radius:17px}.topbar{padding:0 17px}.brand h1{font-size:23px}.brand small{display:none}.tab{height:43px;padding:0 18px;font-size:20px}.inspector{padding:17px;gap:10px}.section-head h2{font-size:25px}.part-choice{min-height:43px;padding:8px 10px}.detail{min-height:88px;padding:11px 13px}.detail p{font-size:16px;line-height:1.65}.detail h3{font-size:20px;margin-bottom:5px}.force-box{padding-top:11px}.range-labels{margin-bottom:8px}.btn{min-height:41px}.stage-top{top:14px;left:14px;right:14px}.stage-bottom{bottom:13px;left:14px;right:14px}.reading-top{padding:14px 18px 3px}.reading-art{padding:0 15px}.magnifier{margin:18px 0 15px 5px}.magnifier-heading{padding:12px 13px}.reading-bottom{padding:0 15px 13px}.quiz-panel{gap:8px}.quiz-head h2{font-size:24px}.quiz-mode button{min-height:34px}.configuration select{height:35px;padding:4px 7px}.answer-wrap{min-height:61px}.task-line{font-size:21px}.keypad{gap:5px;min-height:150px;max-height:212px}.key{font-size:26px}.feedback{min-height:62px;padding:8px 10px}.quiz-actions .submit,.quiz-actions .next{min-height:45px;font-size:21px}.after-links{font-size:11px}.zero-toolbar{padding:7px 9px;gap:7px}.zero-toolbar span{font-size:15px}.zero-controls .btn{padding:3px 8px;min-width:37px;min-height:36px}.zero-toolbar .btn.primary{min-height:36px;padding:5px 9px}}
+@media(max-width:1120px){.brand-mark{width:32px}.brand{gap:7px}.brand h1{font-size:21px}.brand small{display:none}.tab{font-size:18px;padding:0 13px;gap:8px}.utilities{gap:5px}.icon-btn{width:38px;height:39px}.structure-page{grid-template-columns:minmax(0,1fr) 288px}.practice-page{grid-template-columns:minmax(0,1fr) 316px}.inspector{padding:16px}.model-note{display:none}.stage-instruction{font-size:12px}.stage-tools .wide-tool{min-width:39px;padding:0 7px}.segmented button{padding:6px 12px}.part-tag{font-size:18px;padding:6px 10px}.reading-top{padding:14px 15px 4px}.reading-art{padding:0 12px;grid-template-columns:42% 58%}.magnifier{margin-top:18px}.magnifier-heading .tiny{display:none}.magnifier-heading{font-size:16px;padding:12px}.magnifier .zoom-under{font-size:14px}.eye-caption{font-size:14px}.eye-controls{gap:7px}.eye-controls .segmented button{padding:4px 12px;font-size:15px}.configuration{font-size:14px}.configuration select{min-width:149px;font-size:14px}.task-line{font-size:20px}.feedback .feedback-main{font-size:16px}.zero-toolbar{flex-wrap:wrap}.zero-toolbar span{flex-basis:100%;font-size:14px}.zero-toolbar .btn.primary{margin-left:auto}.after-links{font-size:11px}}
+@media(max-height:660px) and (min-width:800px){:root{--header:59px;--footer:18px;--gap:10px}.brand h1{font-size:20px}.brand-mark{height:34px}.brand-mark svg{height:33px}.tab{height:36px;font-size:18px}.icon-btn{height:34px;width:34px}.structure-page{grid-template-columns:minmax(0,1fr) 298px}.practice-page{grid-template-columns:minmax(0,1fr) 328px}.inspector{padding:12px;gap:7px}.section-head h2{font-size:22px}.section-head p{font-size:13px}.part-choice{min-height:36px;padding:5px 9px;font-size:17px}.parts-list{gap:5px}.detail{min-height:67px;padding:8px 11px}.detail p{font-size:14px;line-height:1.55}.detail h3{font-size:18px;margin-bottom:2px}.linkage{font-size:12px}.force-box{padding-top:7px}.force-head{font-size:18px;margin-bottom:0}.force-value{font-size:27px}.range-labels{margin-bottom:4px}.force-actions .btn{min-height:34px;padding:5px 9px}.stage-top{top:10px;left:10px;right:10px}.stage-tools button,.segmented button{min-height:31px;height:31px}.stage-bottom{bottom:10px;left:10px;right:10px}.stage-instruction{padding:6px 9px}.quiz-head h2{font-size:22px}.quiz-mode button{min-height:29px;height:30px}.configuration select{height:31px}.task-line{font-size:18px;margin:0}.answer-wrap{min-height:46px}.answer-wrap input{font-size:31px}.answer-wrap input::placeholder{font-size:23px}.answer-wrap .unit{font-size:23px}.keypad{min-height:119px;max-height:163px;grid-template-rows:repeat(4,minmax(27px,1fr))}.key{font-size:23px}.feedback{min-height:48px;padding:6px 9px}.feedback .feedback-sub{font-size:11px}.feedback .feedback-main{font-size:14px}.feedback.success .feedback-main,.feedback.error .feedback-main{font-size:17px}.quiz-actions{min-height:38px}.quiz-actions .submit,.quiz-actions .next,.quiz-actions .hint{min-height:38px;padding:5px 10px;font-size:18px}.after-links{display:none}.reading-top{padding-top:11px}.magnifier{margin-top:11px;margin-bottom:10px}.magnifier-heading{padding:9px 11px}.zoom-under{min-height:35px;padding:5px 9px;font-size:13px}.eye-controls .segmented button{min-height:29px;height:29px}.zero-toolbar{margin-bottom:6px;flex-wrap:nowrap}.zero-toolbar span{flex-basis:auto;font-size:12px}.zero-toolbar .btn.primary{font-size:12px}.zero-controls .btn{min-width:30px}.reading-bottom{padding-bottom:9px}.footer{font-size:10px}}
+@media(max-width:799px){:root{--header:106px;--footer:21px;--gap:10px;--ui:17px;--small:14px;--radius:15px}.topbar{height:var(--header);position:relative;align-items:flex-start;padding:10px 13px;gap:8px}.brand h1{font-size:21px}.brand-mark{height:34px}.brand-mark svg{height:32px}.utilities{margin-left:auto}.utilities .icon-btn{width:33px;height:33px}.tabs{position:absolute;bottom:8px;left:12px;right:12px;height:43px;justify-content:center;padding:4px}.tab{flex:1;justify-content:center;height:35px;font-size:17px;padding:0 12px}.tab .num{font-size:12px}.structure-page,.practice-page{grid-template-columns:1fr;grid-template-rows:minmax(250px,1fr) auto;gap:9px}.stage-top{top:10px;left:10px;right:10px}.segmented{padding:3px}.segmented button{min-height:31px;height:31px;padding:4px 12px;font-size:13px}.stage-tools{padding:3px;gap:1px}.stage-tools button{width:30px;height:31px;font-size:12px}.stage-tools .wide-tool{min-width:34px;padding:0 5px}.stage-tools button svg{width:17px}.stage-bottom{bottom:9px;left:10px;right:10px}.stage-instruction{padding:4px 8px;font-size:11px}.part-tag{font-size:15px;padding:4px 8px;border-radius:7px}.part-tag:before{width:4px;height:4px;margin-right:5px}.inspector{border-radius:15px;padding:12px;gap:7px}.structure-page .inspector{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;column-gap:12px}.structure-page .section-head{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center}.section-head h2{font-size:19px;margin:0}.section-head p{font-size:11px}.parts-list{gap:4px;grid-column:1;grid-row:2}.part-choice{min-height:33px;font-size:14px;padding:4px 7px;gap:7px}.part-choice .part-number{font-size:10px}.detail{grid-column:2;grid-row:2;min-height:100px;padding:9px 11px}.detail h3{font-size:16px}.detail p{font-size:12px;line-height:1.6}.linkage{display:none}.force-box{grid-column:1/-1;grid-row:3;display:grid;grid-template-columns:1fr 1fr;gap:0 12px;padding-top:7px}.force-head{font-size:14px;margin:0;grid-column:1}.force-value{font-size:24px}.force-value small{font-size:13px}.force-box input{grid-column:1;height:22px}.range-labels{display:none}.force-actions{grid-column:2;grid-row:1/3;align-items:center;gap:5px}.force-actions .btn{min-height:35px;font-size:12px;padding:4px 7px}.footer{font-size:9px}.practice-page{grid-template-rows:minmax(240px,1fr) auto}.reading-top{padding:10px 12px 0}.reading-top h2{font-size:16px}.reading-top .question-no{font-size:12px}.reading-art{padding:0 12px;grid-template-columns:44% 56%}.magnifier{margin:7px 0 7px 0;border-radius:12px}.magnifier-heading{font-size:12px;padding:7px 10px}.magnifier-heading svg{width:15px;height:15px}.zoom-under{font-size:11px!important;min-height:28px;padding:4px}.reading-bottom{padding:0 12px 8px}.eye-controls .segmented button{min-height:25px;height:25px;font-size:12px;padding:3px 12px}.eye-caption{font-size:12px}.quiz-panel{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto auto auto;column-gap:10px;gap:7px;padding:10px 12px}.quiz-head{grid-column:1;grid-row:1}.quiz-head h2{font-size:17px}.quiz-head .score{font-size:11px}.quiz-mode{grid-column:2;grid-row:1}.quiz-mode button{font-size:11px;min-height:29px;height:29px;padding:4px}.configuration{grid-column:1/-1;grid-row:2;font-size:12px}.configuration select{min-width:130px;font-size:12px;height:28px;padding:3px 8px;max-width:60%}.task-line{grid-column:1;grid-row:3;font-size:14px;align-self:start}.answer-wrap{grid-column:1;grid-row:3;align-self:end;margin-top:28px;min-height:48px;padding:0 10px}.answer-wrap input{font-size:29px}.answer-wrap input::placeholder{font-size:19px}.answer-wrap .unit{font-size:20px}.keypad{grid-column:2;grid-row:3/5;min-height:131px;max-height:none;gap:4px;grid-template-rows:repeat(4,minmax(28px,1fr))}.key{font-size:21px;border-radius:7px}.feedback{grid-column:1;grid-row:4;min-height:47px;padding:5px 7px;gap:5px}.feedback .feedback-main{font-size:11px}.feedback .feedback-sub{font-size:10px;line-height:1.45;margin-top:2px}.feedback.success .feedback-main,.feedback.error .feedback-main{font-size:13px}.feedback .feedback-icon{font-size:22px!important;width:21px}.quiz-actions{grid-column:1/-1;grid-row:5;min-height:37px}.quiz-actions .submit,.quiz-actions .next,.quiz-actions .hint{min-height:37px;padding:5px 9px;font-size:15px}.after-links{display:none}.zero-toolbar{padding:5px 7px;margin-bottom:6px;gap:5px;flex-wrap:nowrap}.zero-toolbar span{font-size:11px;flex-basis:auto}.zero-controls .btn{min-width:29px;min-height:29px;font-size:13px;padding:4px}.zero-toolbar .btn.primary{min-height:29px;font-size:11px;padding:4px 6px}.dialog{padding:20px}.dialog h2{font-size:22px}.dialog p{font-size:14px}.model-note{display:none}.fallback-banner{font-size:10px;top:55px;padding:5px 8px;left:10px;right:10px}.toast{font-size:14px;bottom:28px;padding:11px 17px}.view-rotate-note{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media(max-height:510px) and (min-width:800px){:root{--header:53px;--footer:17px;--gap:8px}.quiz-panel .keypad{display:none}.quiz-panel{gap:5px;padding:9px 12px}.quiz-head h2{font-size:19px}.quiz-mode button{height:25px;min-height:25px}.configuration select{height:27px}.task-line{font-size:16px}.answer-wrap{min-height:44px}.feedback{flex:1;min-height:39px}.quiz-actions,.quiz-actions .submit,.quiz-actions .next,.quiz-actions .hint{min-height:34px;font-size:16px}.structure-page .inspector{padding:9px 12px;gap:5px}.structure-page .section-head p,.structure-page .linkage{display:none}.section-head h2{font-size:18px}.parts-list{gap:4px}.part-choice{min-height:27px;font-size:14px;padding:3px 8px}.detail{min-height:57px;padding:6px 9px}.detail h3{font-size:15px}.detail p{font-size:12px;line-height:1.45}.force-box{padding-top:5px}.force-head{font-size:14px}.force-value{font-size:22px}.force-box input[type=range]{height:22px;margin:0}.range-labels{display:none}.force-actions .btn{min-height:28px;font-size:12px}.stage-bottom{bottom:7px}.stage-instruction{font-size:10px}.reading-top h2{font-size:16px}.magnifier-heading{font-size:13px;padding:6px 10px}.zoom-under{font-size:11px;min-height:25px}.reading-bottom{padding-bottom:6px}.zero-toolbar{padding:4px 6px}.zero-toolbar span{font-size:10px}.zero-controls .btn,.zero-toolbar .btn.primary{min-height:26px;padding:3px 6px}.model-note{display:none}}
+
+.focus-part{margin-top:13px;align-self:flex-start;border:1px solid #c4dacf;color:#35755e;border-radius:8px;padding:6px 12px;font-size:var(--small);background:#ffffffbf;min-height:33px}.focus-part:hover{background:#e4f1e7}.fallback-banner{top:auto!important;bottom:17px;left:auto!important;right:15px;max-width:45%;width:auto;font-size:12px;padding:6px 10px}.structure-page .stage-bottom{z-index:6}
+@media(max-width:799px){.focus-part{display:none}.fallback-banner{bottom:9px;right:10px;max-width:45%;font-size:9px;padding:3px 6px}}
+@media(max-height:660px) and (min-width:800px){.focus-part{display:none}}
+@media(max-height:510px) and (min-width:800px){.part-choice{min-height:24px;padding:2px 8px}.structure-page .inspector{gap:4px;padding:8px 11px}.force-actions .btn{min-height:26px}.fallback-banner{bottom:8px;font-size:10px;padding:4px 7px}}
+
+@media(max-width:799px){.stage-tools{gap:1px}.stage-tools button{width:27px}.stage-tools .wide-tool{min-width:32px;padding:0 4px}.stage-top{gap:6px}.stage-top .segmented button{padding-left:10px;padding-right:10px}}
+
+/* v1.1: preserve the v1 workspace; improve classroom legibility and add a small
+   independent inspection window. Its scale is independent of the 3D camera. */
+.structure-page{grid-template-columns:minmax(0,1fr) clamp(320px,29vw,460px)}
+.structure-page .inspector{gap:12px;padding:clamp(16px,1.6vw,28px)}
+.structure-page .section-head h2{font-size:clamp(25px,2.05vw,34px)}
+.structure-page .section-head p{font-size:clamp(15px,1.22vw,20px)}
+.structure-page .part-choice{font-size:clamp(21px,1.78vw,30px);min-height:clamp(42px,5.8vh,62px);padding:8px 10px}
+.structure-page .detail{min-height:155px;padding:15px 18px;justify-content:center}
+.structure-page .detail h3{font-size:clamp(25px,2.05vw,34px);line-height:1.35;margin-bottom:10px}
+.structure-page .detail p{font-size:clamp(23px,1.84vw,31px);line-height:1.6;font-weight:500;letter-spacing:.015em}
+.structure-page .linkage{font-size:clamp(13px,1.1vw,18px)}
+.structure-page .force-head{font-size:clamp(19px,1.55vw,27px);margin-bottom:3px}
+.structure-page .force-box{padding-top:12px}
+.structure-page .force-value{font-size:clamp(29px,2.65vw,44px)}
+.structure-page .range-labels{margin-bottom:6px;font-size:clamp(12px,1vw,17px)}
+.load-status{margin:5px 0 11px;color:#657d6d;font-size:clamp(14px,1.16vw,19px);line-height:1.5}
+.structure-page .canvas-wrap{top:115px;bottom:46px;left:0;right:0}
+.instrument-picker{position:absolute;z-index:7;left:20px;top:78px;display:flex;align-items:center;gap:8px;font-size:var(--small);background:#f6faf6d6;border-radius:9px;padding:3px 6px;color:#42675e}
+.instrument-picker label{font-size:clamp(13px,1.13vw,19px)}
+.instrument-picker select{height:34px;padding:3px 8px;border:1px solid #d6e3d9;border-radius:7px;background:white;color:#204d43;font-size:clamp(14px,1.1vw,19px)}
+.structure-closeup{position:absolute;z-index:8;right:18px;top:135px;width:clamp(183px,17vw,296px);background:#fff;border:1px solid #cadcd0;border-radius:16px;box-shadow:0 12px 34px #193c2519;overflow:hidden}
+.closeup-head{padding:9px 12px 9px 15px;display:flex;align-items:center;justify-content:space-between;gap:7px;border-bottom:1px solid #e5ede6;background:#f9fcf9;font-size:clamp(16px,1.4vw,23px);font-weight:650;color:#255d50;cursor:move;touch-action:none;user-select:none}
+.closeup-head button{border:1px solid #dce8df;border-radius:7px;font-size:23px;line-height:1;width:30px;height:30px;background:white;flex:none;padding:0}
+.closeup-read{display:flex;align-items:center;justify-content:space-between;gap:4px;padding:9px 14px 2px;font-size:clamp(11px,1.05vw,17px);color:#6e8176}
+.closeup-read strong{font-family:Arial,sans-serif;font-size:clamp(25px,2.2vw,36px);color:#075f65;white-space:nowrap}
+.closeup-read strong small{font-size:.55em}
+#structureZoom{height:clamp(213px,30vh,326px);width:100%;padding:0 5px}
+#structureZoom svg{display:block;width:100%;height:100%}
+.closeup-foot{border-top:1px solid #edf2ed;padding:8px;text-align:center;font-size:clamp(14px,1.18vw,21px);color:#376d58}
+.structure-closeup.collapsed .closeup-body{display:none}.structure-closeup.collapsed .closeup-head{border-bottom:0}
+.weight-label{position:absolute;z-index:5;pointer-events:none;padding:4px 9px;font-size:clamp(13px,1.08vw,18px);white-space:nowrap;background:#fffaf0df;color:#936823;border-radius:7px;border:1px solid #e5d6b7}
+.weight-label[hidden]{display:none}
+.configuration{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:stretch}
+.select-field{min-width:0;display:flex;flex-direction:column;gap:4px}
+.select-field label{font-size:clamp(13px,1vw,17px);color:#6f857b}
+.configuration .select-field select{width:100%;max-width:100%;min-width:0;font-size:clamp(14px,1.15vw,19px);padding:5px 9px;height:37px}
+@media(min-width:800px) and (max-height:820px){
+ .structure-page .inspector{gap:9px;padding:15px 18px}
+ .structure-page .section-head p{display:none}
+ .structure-page .part-choice{min-height:39px;padding:7px 9px;font-size:22px}
+ .structure-page .detail{min-height:149px;padding:12px 15px}
+ .structure-page .detail h3{font-size:26px;margin-bottom:7px}
+ .structure-page .detail p{font-size:24px;line-height:1.55}
+ .structure-page .linkage{font-size:13px}
+ .structure-page .force-head{font-size:20px}
+ .structure-page .force-box{padding-top:8px}
+ .structure-page .force-value{font-size:32px}
+ .load-status{font-size:14px;margin:4px 0 8px}
+ .structure-page .force-actions .btn{min-height:38px;font-size:16px;padding:7px 9px}
+ .structure-page .canvas-wrap{top:112px;bottom:40px}
+ .structure-closeup{top:126px;right:12px;width:clamp(175px,16vw,232px)}
+ #structureZoom{height:225px}
+ .closeup-head{font-size:18px;padding:7px 9px 7px 12px}
+ .closeup-read{padding:7px 10px 1px;font-size:13px}
+ .closeup-read strong{font-size:28px}
+ .closeup-foot{font-size:16px;padding:6px}
+ .configuration .select-field select{height:33px}
+}
+@media(min-width:800px) and (max-width:1150px){
+ .structure-page{grid-template-columns:minmax(0,1fr) 318px}
+ .structure-page .inspector{padding:14px;gap:9px}
+ .structure-page .detail p{font-size:23px}
+ .structure-page .detail h3{font-size:26px}
+ .instrument-picker{left:12px;top:69px;gap:5px;padding:2px}
+ .instrument-picker select{font-size:13px;height:31px;padding:3px 5px}
+ .instrument-picker label{font-size:12px}
+ .structure-page .canvas-wrap{top:104px;bottom:42px}
+ .structure-closeup{width:167px;top:114px;right:10px}
+ .closeup-head{font-size:15px;padding:7px 8px 7px 10px}
+ .closeup-head button{width:25px;height:25px;font-size:20px}
+ .closeup-read{font-size:11px;padding:7px 8px 0}.closeup-read strong{font-size:25px}
+ #structureZoom{height:203px;padding:0}
+ .closeup-foot{font-size:14px}
+ .part-tag{font-size:18px;padding:5px 8px}
+ .model-note{display:none}
+}
+@media(min-width:800px) and (max-height:660px){
+ .structure-page .section-head h2{font-size:22px}
+ .structure-page .inspector{padding:10px 13px;gap:6px}
+ .structure-page .part-choice{min-height:32px;font-size:18px;padding:4px 7px}
+ .structure-page .detail{min-height:115px;padding:10px 12px}.structure-page .detail h3{font-size:22px;margin-bottom:4px}.structure-page .detail p{font-size:21px;line-height:1.45}
+ .structure-page .linkage{display:none}.structure-page .force-head{font-size:18px}.structure-page .force-value{font-size:29px}.structure-page .force-box{padding-top:6px}
+ .load-status{font-size:12px;margin:3px 0 5px}
+ .structure-page .force-actions .btn{min-height:32px;font-size:14px;padding:4px 8px}
+ .instrument-picker{top:55px;left:12px}.instrument-picker select{height:29px}
+ .structure-page .canvas-wrap{top:91px;bottom:34px}.structure-closeup{top:102px;width:170px}
+ #structureZoom{height:169px}.closeup-head{font-size:15px;padding:6px 8px}.closeup-read strong{font-size:23px}.closeup-foot{font-size:13px;padding:5px}
+ .select-field label{display:none}.configuration .select-field select{height:28px;font-size:13px}
+}
+@media(max-width:799px){
+ .structure-page{grid-template-columns:1fr;grid-template-rows:minmax(250px,1fr) auto}
+ .structure-page .inspector{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;padding:10px 12px;gap:8px 10px}
+ .structure-page .section-head h2{font-size:20px}.structure-page .section-head p{display:none}
+ .structure-page .part-choice{font-size:16px;min-height:34px;padding:5px 7px}
+ .structure-page .detail{min-height:135px;padding:10px 11px}
+ .structure-page .detail h3{font-size:20px;margin-bottom:5px}
+ .structure-page .detail p{font-size:17px;line-height:1.55}
+ .structure-page .force-box{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;padding-top:6px}
+ .structure-page .force-head{font-size:14px;grid-column:1}.structure-page .force-value{font-size:25px}
+ .structure-page .force-actions{grid-column:2;grid-row:1/3}.structure-page .force-actions .btn{font-size:13px;min-height:35px}
+ .load-status{grid-column:1/-1;grid-row:3;font-size:12px;margin:2px 0 0}
+ .structure-page .canvas-wrap{top:90px;bottom:28px}
+ .instrument-picker{top:54px;left:10px;right:10px;gap:4px;padding:2px 3px;font-size:11px}
+ .instrument-picker label{font-size:10px}.instrument-picker select{font-size:12px;height:28px;flex:1;min-width:0;padding:3px 4px}
+ .structure-closeup{top:98px;right:8px;width:130px;border-radius:11px}
+ .closeup-head{font-size:13px;padding:5px 6px 5px 9px}
+ .closeup-head button{width:23px;height:23px;font-size:18px}
+ .closeup-read{font-size:9px;padding:5px 7px 0}.closeup-read strong{font-size:20px}
+ #structureZoom{height:141px;padding:0}
+ .closeup-foot{font-size:11px;padding:4px}
+ .structure-page .stage-instruction{font-size:10px;padding:3px 6px}.structure-page .stage-bottom{bottom:6px}
+ .structure-page .part-tag{font-size:15px;padding:4px 7px}
+ .weight-label{font-size:10px;padding:3px 5px}
+ .configuration{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+ .select-field label{display:none}.configuration .select-field select{height:28px;font-size:12px;padding:3px 7px}
+}
+@media(max-width:799px) and (max-height:740px){
+ .structure-page .detail p{font-size:15px}.structure-page .detail h3{font-size:18px}.structure-page .detail{min-height:110px;padding:8px}
+ .structure-page .part-choice{font-size:14px;min-height:29px;padding:3px 5px}
+ .structure-page .inspector{gap:6px;padding:8px 10px}.structure-page .section-head h2{font-size:18px}
+ .structure-closeup{top:97px;width:118px}.closeup-head{font-size:12px}.closeup-read span{display:none}.closeup-read{justify-content:center}
+ #structureZoom{height:106px}.closeup-foot{font-size:10px}.load-status{font-size:11px}
+}
+@media(min-width:800px){
+ .structure-page .section-head p,.structure-page .linkage{display:none}
+ .structure-page .part-choice{min-height:48px}
+ .structure-page .detail{min-height:220px;justify-content:flex-start;padding-top:18px}
+ .structure-page .detail p{flex-shrink:0}
+ .structure-page .detail h3{flex-shrink:0}
+}
+@media(min-width:800px) and (max-height:820px){
+ .structure-page .part-choice{min-height:39px}
+ .structure-page .detail{min-height:205px;padding:14px 15px;justify-content:center}
+}
+@media(min-width:800px) and (max-height:700px){
+ .structure-page .part-choice{min-height:34px;font-size:20px}
+ .structure-page .detail{min-height:172px;padding:10px 12px}
+ .structure-page .detail h3{font-size:23px;margin-bottom:6px}
+ .structure-page .detail p{font-size:21px;line-height:1.5}
+}
+@media(min-width:800px) and (max-height:590px){
+ .structure-page .detail{min-height:138px}
+ .structure-page .detail p{font-size:19px;line-height:1.45}
+ .structure-page .part-choice{min-height:29px;font-size:17px}
+ .load-status{font-size:11px;margin:2px 0 4px}
+ .structure-page .range-labels{display:none}
+ .structure-page .force-actions .btn{min-height:30px}
+}
+@media(min-width:800px) and (max-height:650px){
+ .structure-page .part-choice{min-height:29px;font-size:18px;padding:4px 7px}
+ .structure-page .detail{min-height:151px;padding:10px 12px}
+ .structure-page .detail h3{font-size:22px;margin-bottom:5px}
+ .structure-page .detail p{font-size:20px;line-height:1.5}
+ .structure-page .force-box input[type=range]{height:23px;margin:1px 0}
+ .structure-page .force-head{font-size:18px}
+ .structure-page .force-value{font-size:27px}
+ .structure-page .load-status{font-size:11px;margin:2px 0 5px}
+}
+@media(max-width:500px){
+ .structure-page .part-number{display:none}
+ .structure-page .part-choice{justify-content:center;white-space:nowrap;font-size:15px;padding:5px 3px}
+ .structure-page .force-head{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+<div class="brand"><div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 30 46" fill="none"><path d="M10 8V6a5 5 0 0 1 10 0v2" stroke="currentColor" stroke-width="2.4"/><rect x="6" y="8" width="18" height="30" rx="4" fill="currentColor"/><path d="M12 14h6m-6 5h4m-4 5h6m-6 5h4" stroke="#ddf4e9" stroke-width="1.5"/><path d="M15 38v3c0 5 6 4 6 0" stroke="currentColor" stroke-width="2.2"/><path d="M10 22h10" stroke="#e5b259" stroke-width="2.4" stroke-linecap="round"/></svg></div><div><h1>测量力的大小</h1><small>弹簧测力计互动实验室</small></div></div>
+<nav class="tabs" aria-label="页面切换"><button class="tab active" data-page="structure" aria-current="page"><span class="num">01</span>认识结构</button><button class="tab" data-page="practice"><span class="num">02</span>读数练习</button></nav>
+<div class="utilities"><button class="icon-btn" id="soundBtn" title="关闭音效" aria-label="关闭音效" data-icon="sound"></button><button class="icon-btn" id="helpBtn" title="使用说明" aria-label="使用说明" data-icon="help"></button><button class="icon-btn" id="fullscreenBtn" title="全屏显示" aria-label="全屏显示" data-icon="fullscreen"></button></div>
+</header>
+<main class="main">
+<section class="page structure-page active" id="structurePage" aria-label="认识弹簧测力计的结构">
+<div class="stage structure-stage" id="modelStage">
+<div class="canvas-wrap" id="canvasWrap"><canvas id="modelCanvas" aria-label="可以拖动旋转的弹簧测力计三维教学模型"></canvas><div class="fallback-svg" id="modelFallback"></div></div>
+<div class="fallback-banner" id="fallbackBanner">二维结构模式 · 读数练习可用</div>
+<div class="annotations" id="annotations"><svg id="leaderLines" aria-hidden="true"></svg></div>
+<div class="stage-top"><div class="segmented" id="modelModes" aria-label="结构展示方式"><button data-view="solid">外观</button><button class="active" data-view="xray">透视</button><button data-view="explode">拆解</button></div><div class="stage-tools"><button class="wide-tool" id="frontBtn" title="回到正面">正面</button><button class="wide-tool" id="focusPartBtn" title="聚焦当前选中的部件">聚焦</button><button id="zoomIn" title="放大" aria-label="放大模型" data-icon="plus"></button><button id="zoomOut" title="缩小" aria-label="缩小模型" data-icon="minus"></button><button id="resetModel" title="复位" aria-label="复位模型" data-icon="reset"></button></div></div>
+<div class="instrument-picker" aria-label="更换测力计"><label for="instrumentType">外形</label><select id="instrumentType"><option value="box">条形盒式</option><option value="tube">圆筒式</option></select><label for="structurePreset">量程</label><select id="structurePreset"><option value="5fine">5 N · 0.1 N/格</option><option value="5coarse">5 N · 0.2 N/格</option><option value="2.5">2.5 N · 0.05 N/格</option><option value="1">1 N · 0.02 N/格</option><option value="10">10 N · 0.2 N/格</option></select></div>
+<div class="structure-closeup" id="structureCloseup"><div class="closeup-head" id="closeupHandle"><span>指针与刻度</span><button id="closeupToggle" aria-expanded="true" aria-label="收起特写窗">−</button></div><div class="closeup-body"><div class="closeup-read"><span>当前示数</span><strong id="closeupValue">0.0 <small>N</small></strong></div><div id="structureZoom"></div><div class="closeup-foot" id="closeupDivision">每小格 0.1 N</div></div></div>
+<div class="weight-label" id="weightLabel" hidden>模拟重物</div>
+<div class="stage-bottom"><div class="stage-instruction"><span data-icon="drag"></span><span id="modelInstruction">拖动旋转 · 双指或滚轮缩放</span></div><div class="model-note">视野固定 · 内部为教学示意</div></div>
+</div>
+<aside class="inspector">
+<div class="section-head"><h2>认识每一个部件</h2><p>点选部件，观察它的作用。</p></div>
+<div class="parts-list" id="partsList"></div>
+<div class="detail" aria-live="polite"><h3 id="partTitle">弹簧</h3><p id="partDescription">在正常使用范围内，拉力越大，弹簧的伸长量越大。它是测力计的核心部件。</p></div>
+<div class="linkage"><span>挂钩受拉</span><b>→</b><span>弹簧伸长</span><b>→</b><span>指针移动</span></div>
+<div class="force-box"><div class="force-head"><span>试着拉一拉</span><span class="force-value"><span id="forceValue">0.0</span><small>N</small></span></div><input type="range" id="forceSlider" min="0" max="5" step="0.1" value="0" aria-label="调节模拟重物的重力，零到五牛"><div class="range-labels" id="forceRangeLabels"><span>0 N</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5 N</span></div><p class="load-status" id="loadStatus">空载 · 拖动滑杆挂上重物</p><div class="force-actions"><button class="btn soft" id="demoBtn"><span data-icon="play"></span><span>自动演示</span></button><button class="btn" id="unloadBtn">撤去拉力</button></div></div>
+</aside>
+</section>
+<section class="page practice-page" id="practicePage" aria-label="弹簧测力计读数练习" hidden>
+<div class="stage reading-stage">
+<div class="reading-top"><h2 id="readingStageTitle">指针指到了哪里？</h2><span class="question-no" id="questionNumber">第 01 题</span></div>
+<div class="reading-art"><div class="instrument-col"><div id="practiceInstrument" style="width:100%;height:100%"></div></div><div class="magnifier"><div class="magnifier-heading"><span><i data-icon="search"></i>刻度放大</span><span class="tiny">与左侧同步</span></div><div class="zoom-art" id="zoomArt"></div><div class="zoom-under" id="zoomUnder">先看相邻标数，再数小格。</div></div></div>
+<div class="reading-bottom"><div class="zero-toolbar" id="zeroToolbar"><span id="zeroStatus">空载时，先让指针对准 0。</span><div class="zero-controls"><button class="btn soft" id="zeroUp" title="向上调一小格">↑</button><button class="btn soft" id="zeroDown" title="向下调一小格">↓</button></div><button class="btn primary" id="loadWeight">挂上物体</button></div><div class="eye-controls"><span class="eye-caption">观察视线</span><div class="segmented" id="eyeModes" aria-label="观察视线"><button data-eye="-1">俯视</button><button class="active" data-eye="0">平视</button><button data-eye="1">仰视</button></div></div></div>
+</div>
+<aside class="inspector quiz-panel">
+<div class="quiz-head"><h2>读出力的大小</h2><span class="score">已读对 <b id="correctCount">0</b> 题</span></div>
+<div class="segmented quiz-mode" id="practiceModes"><button class="active" data-mode="read">直接读数</button><button data-mode="measure">调零与测量</button></div>
+<div class="configuration"><div class="select-field"><label for="practiceType">外形</label><select id="practiceType"><option value="box">条形盒式</option><option value="tube">圆筒式</option></select></div><div class="select-field"><label for="gaugePreset">量程</label><select id="gaugePreset"><option value="5fine">5 N · A 型</option><option value="5coarse">5 N · B 型</option><option value="2.5">2.5 N</option><option value="1">1 N</option><option value="10">10 N</option></select></div></div>
+<p class="task-line" id="taskLine">这次测得的力是多少牛？</p>
+<div class="answer-wrap"><input id="answer" type="text" inputmode="decimal" autocomplete="off" maxlength="6" aria-label="输入力的大小，单位牛顿" placeholder="输入读数"><span class="unit">N</span></div>
+<div class="keypad" id="keypad" aria-label="数字键盘"></div>
+<div class="feedback" id="feedback" aria-live="polite"><span class="feedback-icon" id="feedbackIcon"></span><div><div class="feedback-main" id="feedbackMain">看量程 · 认分度值 · 平视读数</div><div class="feedback-sub" id="feedbackSub">最小的一小格，代表多少牛？</div></div></div>
+<div class="quiz-actions" id="quizActions"><button class="btn hint" id="hintBtn">提示</button><button class="btn primary submit" id="checkBtn">检查读数 <span data-icon="arrow"></span></button><button class="btn primary next" id="nextBtn">下一题 <span data-icon="arrow"></span></button></div>
+<div class="after-links"><button id="teacherBtn">教师设题</button><button id="skipBtn">换一道题</button><span>Enter 检查 / 下一题</span></div>
+</aside>
+</section>
+</main>
+<footer class="footer"><span>教科版五年级上册 · 运动和力</span><span>课堂互动模型 · v1.1 <button id="aboutBtn">模型说明</button></span></footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<div class="dialog-backdrop" id="helpDialog" role="dialog" aria-modal="true" aria-labelledby="helpTitle"><div class="dialog"><div class="dialog-head"><h2 id="helpTitle">使用说明</h2><button class="icon-btn close-dialog" aria-label="关闭说明" data-icon="close"></button></div><h3>01　认识结构</h3><p>点选名称或部件，可查看作用。使用“聚焦”放大当前部件，“整体”返回全貌。拖动模型旋转，滚轮或双指缩放。“外观”看实物形态，“透视”看内部联动，“拆解”看装配关系。拖动拉力滑杆增减模拟重物，观察重物、挂钩、活动杆和弹簧同步运动。重物通过托架悬挂，教学模型忽略托架自重。顶部选择外形与量程，两个页面同步换用同一支测力计。</p><p>主舞台在空载到满量程之间保持同一缩放比例，不会跟着拉力自动缩放。需要放大时请用 + / −、滚轮或双指。浮动特写窗始终以平视方式显示同一指针和刻度，可以拖动标题栏挪动，也可以收起。</p><h3>02　读数练习</h3><p>“直接读数”随机呈现指针位置；“调零与测量”需要先在空载状态用 ↑ / ↓ 调整指针，再挂上物体。放大窗口同步显示刻度。数字键盘和电脑键盘都可输入，Enter 检查或进入下一题。</p><p>5 N · A 型每小格 0.1 N；B 型每小格 0.2 N。另有 1 N（0.02 N / 格）、2.5 N（0.05 N / 格）和 10 N（0.2 N / 格）练习。练习值均落在刻度线上，不要求估读。</p><h3>模型的边界</h3><p>条形盒式参考青绿色实拍，圆筒式参考黄色端盖、透明管的实拍。两种外形均采用固定刻度、活动指针与挂钩的结构。内部连接与调零装置采用符合受力关系的简化教学结构，不是厂家拆机复刻。教学刻度统一使用牛顿，不混入克数刻度。</p><p>不同量程代表更换不同规格的测力计，不是修改同一支仪器的刻度。切换量程会先卸载重物，再换用新的模拟仪器。正常使用范围内，模型以拉力与伸长量的线性关系演示。视差窗口有意放大了指针与刻度面的间距，方便观察；它不会改变实际受力大小。模型不能代替真实拉动测力计形成的力感。</p><p class="fineprint">内容参考：《2026秋教科版五年级科学上册教师用书》，第三单元第4课《测量力的大小》，印刷页236—245。此文件的图形、代码与音效均内嵌，可离线使用。不支持 WebGL 时自动使用二维结构示意。无账号、无网络请求，不采集学生数据。</p><button class="btn primary close-dialog" style="width:100%;margin-top:18px">开始使用</button></div></div>
+<div class="dialog-backdrop" id="teacherDialog" role="dialog" aria-modal="true" aria-labelledby="teacherTitle"><div class="dialog"><div class="dialog-head"><h2 id="teacherTitle">教师设题</h2><button class="icon-btn close-dialog" aria-label="关闭设题" data-icon="close"></button></div><p>设置一个落在刻度线上的力值，交给学生读数。切换为“调零与测量”后，仍使用这个待测力值。</p><div class="teacher-row"><label for="teacherForce">待测力</label><input id="teacherForce" type="number" min="0" max="5" step="0.1" value="2.4"><span>N</span></div><p id="teacherPresetInfo" class="fineprint">当前量程 5 N，每小格 0.1 N。</p><div class="button-row"><button class="btn soft" id="teacherCancel">取消</button><button class="btn primary" id="teacherApply">使用这道题</button></div></div></div>
+<script>/* Tiny offline WebGL 1 renderer, written for this teaching model.
+   Unit: millimetres. No CDN, model, shader or texture fetches. */
+(function(){'use strict';
+var V={add:function(a,b){return[a[0]+b[0],a[1]+b[1],a[2]+b[2]]},sub:function(a,b){return[a[0]-b[0],a[1]-b[1],a[2]-b[2]]},mul:function(a,s){return[a[0]*s,a[1]*s,a[2]*s]},dot:function(a,b){return a[0]*b[0]+a[1]*b[1]+a[2]*b[2]},cross:function(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]},norm:function(a){var l=Math.sqrt(a[0]*a[0]+a[1]*a[1]+a[2]*a[2])||1;return[a[0]/l,a[1]/l,a[2]/l]}};
+function mult(a,b){var o=new Float32Array(16);for(var c=0;c<4;c++)for(var r=0;r<4;r++){var s=0;for(var k=0;k<4;k++)s+=a[k*4+r]*b[c*4+k];o[c*4+r]=s}return o}
+function ortho(l,r,b,t,n,f){return new Float32Array([2/(r-l),0,0,0,0,2/(t-b),0,0,0,0,-2/(f-n),0,-(r+l)/(r-l),-(t+b)/(t-b),-(f+n)/(f-n),1])}
+function lookAt(e,c){var z=V.norm(V.sub(e,c)),x=V.norm(V.cross([0,1,0],z)),y=V.cross(z,x);return new Float32Array([x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-V.dot(x,e),-V.dot(y,e),-V.dot(z,e),1])}
+function G(){return{p:[],n:[],u:[],i:[]}}
+function vert(g,p,n,uv){g.p.push(p[0],p[1],p[2]);g.n.push(n[0],n[1],n[2]);g.u.push(uv?uv[0]:0,uv?uv[1]:0);return g.p.length/3-1}
+function quad(g,a,b,c,d,n,uv){var k=g.p.length/3;[a,b,c,d].forEach(function(p,j){vert(g,p,n,uv?uv[j]:null)});g.i.push(k,k+1,k+2,k,k+2,k+3)}
+function box(x,y,z,w,h,d){var g=G(),a=x-w/2,b=x+w/2,c=y-h/2,e=y+h/2,f=z-d/2,k=z+d/2;quad(g,[a,c,k],[b,c,k],[b,e,k],[a,e,k],[0,0,1]);quad(g,[b,c,f],[a,c,f],[a,e,f],[b,e,f],[0,0,-1]);quad(g,[a,c,f],[a,c,k],[a,e,k],[a,e,f],[-1,0,0]);quad(g,[b,c,k],[b,c,f],[b,e,f],[b,e,k],[1,0,0]);quad(g,[a,e,k],[b,e,k],[b,e,f],[a,e,f],[0,1,0]);quad(g,[a,c,f],[b,c,f],[b,c,k],[a,c,k],[0,-1,0]);return g}
+function outline(w,h,panel){var a=[],N=24,top=panel?62:h/2-2.5,bottom=panel?-68:-h/2+2.5;for(var k=0;k<N;k++){var t=k/N,x=-w/2+w*t;a.push([x,panel?62+5*Math.exp(-Math.pow(x/5,2)):top+2.5*(1-Math.pow(x/(w/2),2))])}for(k=0;k<N;k++)a.push([w/2,top+(bottom-top)*k/N]);for(k=0;k<N;k++){t=k/N;x=w/2-w*t;a.push([x,bottom-(panel?2:2.5)*(1-Math.pow(x/(w/2),2))])}for(k=0;k<N;k++)a.push([-w/2,bottom+(top-bottom)*k/N]);return a}
+function ringExtrude(outer,inner,z0,z1){var g=G();for(var k=0;k<outer.length;k++){var j=(k+1)%outer.length,a=outer[k],b=outer[j],c=inner[j],d=inner[k];quad(g,[a[0],a[1],z1],[b[0],b[1],z1],[c[0],c[1],z1],[d[0],d[1],z1],[0,0,1]);quad(g,[d[0],d[1],z0],[c[0],c[1],z0],[b[0],b[1],z0],[a[0],a[1],z0],[0,0,-1]);var n=V.norm([a[1]-b[1],b[0]-a[0],0]);quad(g,[a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1],n);n=V.norm([d[1]-c[1],c[0]-d[0],0]);quad(g,[d[0],d[1],z1],[c[0],c[1],z1],[c[0],c[1],z0],[d[0],d[1],z0],V.mul(n,-1))}return g}
+function facePolygon(points,z,tex){var g=G(),cx=0,cy=0;points.forEach(function(p){cx+=p[0];cy+=p[1]});cx/=points.length;cy/=points.length;for(var k=0;k<points.length;k++){var q=[ [cx,cy],points[k],points[(k+1)%points.length] ];q.forEach(function(p){var i=vert(g,[p[0],p[1],z],[0,0,1],tex?[(p[0]+16)/32,(p[1]+71)/140]:null);g.i.push(i)})}return g}
+function extrudeFill(out,z0,z1){var g=facePolygon(out,z1,false);var back=facePolygon(out,z0,false);back.n=back.n.map(function(v,i){return i%3===2?-1:v});merge(g,back);for(var k=0;k<out.length;k++){var a=out[k],b=out[(k+1)%out.length],n=V.norm([a[1]-b[1],b[0]-a[0],0]);quad(g,[a[0],a[1],z0],[b[0],b[1],z0],[b[0],b[1],z1],[a[0],a[1],z1],n)}return g}
+function merge(a,b){var n=a.p.length/3;a.p=a.p.concat(b.p);a.n=a.n.concat(b.n);a.u=a.u.concat(b.u);a.i=a.i.concat(b.i.map(function(v){return v+n}));return a}
+function rect(a,b,c,d,z){return facePolygon([[a,c],[b,c],[b,d],[a,d]],z,true)}
+function tube(points,r,sides){var g=G(),N=points.length,s=sides||10;for(var k=0;k<N;k++){var p=points[k],tan=V.norm(V.sub(points[Math.min(k+1,N-1)],points[Math.max(0,k-1)])),ref=Math.abs(tan[2])<.9?[0,0,1]:[1,0,0],u=V.norm(V.cross(tan,ref)),v=V.norm(V.cross(tan,u));for(var j=0;j<=s;j++){var th=2*Math.PI*j/s,n=V.add(V.mul(u,Math.cos(th)),V.mul(v,Math.sin(th)));vert(g,V.add(p,V.mul(n,r)),n)}if(k<N-1)for(j=0;j<s;j++){var a=k*(s+1)+j,b=a+s+1;g.i.push(a,b,a+1,a+1,b,b+1)}}return g}
+function circle(cx,cy,z,r,wire){var p=[];for(var k=0;k<=96;k++){var t=k/96*Math.PI*2;p.push([cx+r*Math.cos(t),cy+r*Math.sin(t),z])}return tube(p,wire,10)}
+function smoothPath(ctrl,per){var p=[],n=ctrl.length;for(var k=0;k<n-1;k++){var a=ctrl[Math.max(0,k-1)],b=ctrl[k],c=ctrl[k+1],d=ctrl[Math.min(n-1,k+2)];for(var j=0;j<per;j++){var t=j/per,v=[];for(var h=0;h<3;h++)v[h]=.5*((2*b[h])+(-a[h]+c[h])*t+(2*a[h]-5*b[h]+4*c[h]-d[h])*t*t+(-a[h]+3*b[h]-3*c[h]+d[h])*t*t*t);p.push(v)}}p.push(ctrl[n-1]);return p}
+function springGeometry(length){var g=G(),turns=30,N=360,s=8,R=2.75,r=.32;for(var k=0;k<=N;k++){var t=k/N,a=t*turns*Math.PI*2,sa=Math.sin(a),ca=Math.cos(a),cen=[R*sa,60-length*t,R*ca],nn=[sa,0,ca],tan=V.norm([R*turns*Math.PI*2*ca,-length,-R*turns*Math.PI*2*sa]),bb=V.norm(V.cross(tan,nn));for(var j=0;j<=s;j++){var b=j/s*Math.PI*2,n=V.add(V.mul(nn,Math.cos(b)),V.mul(bb,Math.sin(b)));vert(g,V.add(cen,V.mul(n,r)),n)}if(k<N)for(j=0;j<s;j++){var q=k*(s+1)+j,qq=q+s+1;g.i.push(q,qq,q+1,q+1,qq,qq+1)}}return g}
+function hex(h){return[(h>>16&255)/255,(h>>8&255)/255,(h&255)/255]}
+function ForceModel(canvas,onSelect){this.canvas=canvas;this.onSelect=onSelect;this.force=0;this.targetForce=0;this.mode='solid';this.explode=0;this.ghost=0;this.yaw=-.36;this.pitch=.07;this.targetYaw=this.yaw;this.targetPitch=this.pitch;this.zoom=1;this.targetZoom=1;this.selected='ring';this.meshes=[];this.dirty=true;this.width=1;this.height=1;this.lastTime=0;this.running=true;this.centerY=-64;this.focusPart=null;this.focusCenterY=-64;this.frameHeight=365;this.kind='box';this.range=5;this.division=.1;this.major=1;this.insetVisible=true;
+var gl=canvas.getContext('webgl',{alpha:true,antialias:true,premultipliedAlpha:false,powerPreference:'low-power'})||canvas.getContext('experimental-webgl',{alpha:true,antialias:true,premultipliedAlpha:false});if(!gl)throw new Error('WebGL unavailable');this.gl=gl;
+var vs='attribute vec3 aPos;attribute vec3 aNormal;attribute vec2 aUV;uniform mat4 uVP;uniform vec3 uOffset;uniform vec3 uScale;varying vec3 vPos;varying vec3 vNormal;varying vec2 vUV;void main(){vPos=aPos*uScale+uOffset;vNormal=aNormal;vUV=aUV;gl_Position=uVP*vec4(vPos,1.0);}';
+var fs='precision mediump float;varying vec3 vPos;varying vec3 vNormal;varying vec2 vUV;uniform vec3 uColor;uniform vec3 uCamera;uniform float uAlpha;uniform float uMetal;uniform float uGlow;uniform float uTex;uniform sampler2D uMap;void main(){vec3 n=normalize(vNormal);vec3 base=uColor;if(uTex>0.5)base*=texture2D(uMap,vUV).rgb;vec3 l=normalize(vec3(-0.4,0.8,1.0));vec3 l2=normalize(vec3(0.7,0.4,-0.6));vec3 eye=normalize(uCamera-vPos);float d=max(dot(n,l),0.0);float f=max(dot(n,l2),0.0);float hemi=0.48+0.1*n.y;vec3 color=base*(hemi+0.44*d+0.23*f);float shine=mix(48.0,95.0,uMetal);float sp=pow(max(dot(n,normalize(l+eye)),0.0),shine);float sp2=pow(max(dot(n,normalize(l2+eye)),0.0),shine*.5);float fres=pow(1.0-max(dot(n,eye),0.0),3.0);color+=vec3(1.0,.98,.94)*sp*mix(.28,.9,uMetal)+vec3(.83,.95,1.0)*sp2*.25; color+=uMetal*(.16*fres+.10*pow(abs(n.x*.6+n.z*.8),18.0));color=mix(color,vec3(.94,.62,.20),uGlow*.28);gl_FragColor=vec4(clamp(color,0.0,1.0),uAlpha);}';
+function shader(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s}var p=gl.createProgram();gl.attachShader(p,shader(gl.VERTEX_SHADER,vs));gl.attachShader(p,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw new Error('Shader link failed');this.program=p;gl.useProgram(p);this.a={p:gl.getAttribLocation(p,'aPos'),n:gl.getAttribLocation(p,'aNormal'),u:gl.getAttribLocation(p,'aUV')};this.u={};['VP','Offset','Scale','Color','Camera','Alpha','Metal','Glow','Tex','Map'].forEach(function(k){this.u[k]=gl.getUniformLocation(p,'u'+k)},this);gl.enable(gl.DEPTH_TEST);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);gl.clearColor(0,0,0,0);this.makeTexture();this.build();this.bindControls();this.resize();var self=this;this.resizeHandler=function(){self.resize()};window.addEventListener('resize',this.resizeHandler);canvas.addEventListener('webglcontextlost',function(e){e.preventDefault();self.running=false;if(self.onLost)self.onLost()});
+}
+ForceModel.prototype.add=function(name,geometry,color,opts){var gl=this.gl,o=opts||{},m={name:name,color:hex(color),metal:o.metal||0,texture:!!o.texture,group:o.group||'core',moving:!!o.moving,part:o.part||name,offset:[0,0,0],count:geometry.i.length};['p','n','u'].forEach(function(k){m[k]=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,m[k]);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(geometry[k]),o.dynamic?gl.DYNAMIC_DRAW:gl.STATIC_DRAW)});m.index=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,m.index);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(geometry.i),gl.STATIC_DRAW);this.meshes.push(m);return m};
+ForceModel.prototype.buildBox=function(){var teal=0x078b91,white=0xe8ede2,metal=0x96a7a8,out=outline(35,150,false),inner=outline(30,134,true);this.add('front',ringExtrude(out,inner,3,5),teal,{group:'front',part:'scale'});this.add('frontBevel',ringExtrude(out,outline(34.4,149.4,false),4.9,5.2),0x24999b,{group:'front',part:'scale'});this.add('side',ringExtrude(out,outline(32,146,false),-3.2,3),teal,{group:'side',part:'scale'});this.add('rear',extrudeFill(out,-5,-3.2),teal,{group:'rear',part:'scale'});this.add('rearInset',extrudeFill(outline(31,139,false),-5.3,-5),0x088489,{group:'rear',part:'scale'});
+var plate=G();merge(plate,rect(-15,-1.65,-66,62,5.13));merge(plate,rect(1.65,15,-66,62,5.13));merge(plate,rect(-1.65,1.65,42,62,5.13));var top=[[-15,62]],bottom=[[-15,-66],[15,-66]];for(var i=0;i<=40;i++){var xx=-15+30*i/40;top.push([xx,62+5*Math.exp(-Math.pow(xx/5,2))]);var bx=15-30*i/40;bottom.push([bx,-68-2*(1-Math.pow(bx/15,2))])}top.push([15,62]);merge(plate,facePolygon(top,5.13,true));merge(plate,facePolygon(bottom,5.13,true));this.add('scale',plate,0xffffff,{texture:true,group:'plate',part:'scale'});
+this.add('topRing',circle(0,89.5,0,12.3,.95),metal,{metal:1,part:'ring'});this.add('ringBase',box(0,76.5,0,8,10,3.5),white,{part:'zero'});this.add('anchor',box(0,66,0,7,4,4),white,{part:'zero'});this.add('anchorStem',box(0,70.5,0,3,7,2.5),white,{part:'zero'});this.add('anchorWire',tube(smoothPath([[0,66,0],[0,64,0],[0,62,1],[0,60,2.75]],9),.42),metal,{metal:1,part:'zero'});
+this.spring=this.add('spring',springGeometry(26),metal,{metal:1,dynamic:true,part:'spring'});this.add('lowerSpringLink',tube(smoothPath([[0,34,2.75],[0,32.8,2],[0,32,0],[0,30.5,0]],8),.42),metal,{metal:1,moving:true,part:'spring'});
+this.add('movingRod',box(0,-24,0,2.05,113,1.2),0x8d9d9e,{metal:1,moving:true,part:'hook'});this.add('pointerNeck',box(0,32,3,1.3,1.5,5.4),metal,{metal:1,moving:true,part:'pointer'});this.add('pointer',tube([[-4.8,32,6.3],[4.8,32,6.3]],.52,12),0xe54831,{moving:true,part:'pointer'});this.add('pointerEnd',circle(0,32,6.3,.75,.2),0xe54831,{moving:true,part:'pointer'});
+this.add('lowerGuideL',box(-2.7,-71,0,2.4,4,5),white,{part:'scale'});this.add('lowerGuideR',box(2.7,-71,0,2.4,4,5),white,{part:'scale'});this.add('hookEye',circle(0,-82,0,2.25,.55),metal,{metal:1,moving:true,part:'hook'});
+var hookPts=smoothPath([[.1,-80.8,0],[-1.2,-84.5,0],[1.8,-89,0],[5,-94.5,0],[4.8,-100,0],[1,-103.3,0],[-3.8,-102.3,0],[-6,-98.5,0],[-6.5,-96.5,0]],10);this.add('bottomHook',tube(hookPts,.8,12),metal,{metal:1,moving:true,part:'hook'});
+this.add('upperStandoffL',box(-12,60,0,2,4,6),white,{group:'rear',part:'scale'});this.add('upperStandoffR',box(12,60,0,2,4,6),white,{group:'rear',part:'scale'});this.add('lowerStandoffL',box(-12,-66,0,2,4,6),white,{group:'rear',part:'scale'});this.add('lowerStandoffR',box(12,-66,0,2,4,6),white,{group:'rear',part:'scale'});
+};
+ForceModel.prototype.resize=function(){var r=this.canvas.parentNode.getBoundingClientRect();if(r.width<1||r.height<1)return;this.width=r.width;this.height=r.height;var ratio=Math.min(window.devicePixelRatio||1,1.65);this.canvas.width=Math.round(r.width*ratio);this.canvas.height=Math.round(r.height*ratio);this.gl.viewport(0,0,this.canvas.width,this.canvas.height);this.dirty=true};
+ForceModel.prototype.setMode=function(m){this.mode=m;if(m==='explode'){this.focusPart=null;this.targetZoom=1;}this.dirty=true};ForceModel.prototype.select=function(p){this.selected=p;if(this.focusPart)this.setFocus(p);this.dirty=true};
+ForceModel.prototype.front=function(){this.focusPart=null;this.targetYaw=0;this.targetPitch=0;this.targetZoom=1;this.dirty=true};ForceModel.prototype.reset=function(){this.focusPart=null;this.targetYaw=-.36;this.targetPitch=.07;this.targetZoom=1;this.dirty=true};ForceModel.prototype.zoomBy=function(f){this.targetZoom=Math.max(.65,Math.min(6.5,this.targetZoom*f));this.dirty=true};
+ForceModel.prototype.project=function(point,group,moving){if(!this.vp)return[0,0];var off=this.getOffset({group:group||'core',moving:!!moving}),x=point[0]+off[0],y=point[1]+off[1],z=point[2]+off[2],m=this.vp;var qx=m[0]*x+m[4]*y+m[8]*z+m[12],qy=m[1]*x+m[5]*y+m[9]*z+m[13],qw=m[3]*x+m[7]*y+m[11]*z+m[15];return[(qx/qw*.5+.5)*this.width,(.5-qy/qw*.5)*this.height]};
+ForceModel.prototype.bindControls=function(){var self=this,el=this.canvas,points={},last=null,down=null,pinch=null;el.addEventListener('wheel',function(e){e.preventDefault();self.zoomBy(e.deltaY<0?1.08:1/1.08)},{passive:false});el.addEventListener('pointerdown',function(e){points[e.pointerId]=[e.clientX,e.clientY];try{el.setPointerCapture(e.pointerId)}catch(err){}var ids=Object.keys(points);if(ids.length===1){last=[e.clientX,e.clientY];down=last.slice()}else if(ids.length===2){pinch=Math.hypot(points[ids[0]][0]-points[ids[1]][0],points[ids[0]][1]-points[ids[1]][1]);down=null}});el.addEventListener('pointermove',function(e){if(!points[e.pointerId])return;points[e.pointerId]=[e.clientX,e.clientY];var ids=Object.keys(points);if(ids.length===2){var d=Math.hypot(points[ids[0]][0]-points[ids[1]][0],points[ids[0]][1]-points[ids[1]][1]);if(pinch)self.zoomBy(d/pinch);pinch=d}else if(last){self.targetYaw-=(e.clientX-last[0])*.009;self.targetPitch=Math.max(-1.1,Math.min(1.1,self.targetPitch-(e.clientY-last[1])*.006));last=[e.clientX,e.clientY];self.dirty=true}});function end(e){if(down&&Math.hypot(e.clientX-down[0],e.clientY-down[1])<6){var rect=el.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top,a=self.anchors(),best=null,min=40;Object.keys(a).forEach(function(k){var d=Math.hypot(a[k][0]-x,a[k][1]-y);if(d<min){min=d;best=k}});if(best&&self.onSelect)self.onSelect(best)}delete points[e.pointerId];last=null;down=null;pinch=null}el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);if(!window.PointerEvent){var tx=0,ty=0,td=0;el.addEventListener('touchstart',function(e){if(e.touches.length===1){tx=e.touches[0].clientX;ty=e.touches[0].clientY;}else if(e.touches.length===2)td=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);},{passive:true});el.addEventListener('touchmove',function(e){e.preventDefault();if(e.touches.length===1){var t=e.touches[0];self.targetYaw-=(t.clientX-tx)*.009;self.targetPitch=Math.max(-1.1,Math.min(1.1,self.targetPitch-(t.clientY-ty)*.006));tx=t.clientX;ty=t.clientY;self.dirty=true;}else if(e.touches.length===2){var d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);if(td)self.zoomBy(d/td);td=d;}},{passive:false});el.addEventListener('touchend',function(){td=0;},{passive:true});}};
+
+/* v1.1: both instruments share one physical displacement model.
+   Fixed scale and guides remain in the casing. Only spring lower end, pointer,
+   rod, hook and load move. frameHeight never depends on force or load. */
+function lathe(profile, sides, ribs) {
+  var g=G(),S=sides||64;
+  for(var i=0;i<profile.length;i++) {
+    var prev=profile[Math.max(0,i-1)], next=profile[Math.min(profile.length-1,i+1)],
+        dr=next[0]-prev[0],dy=next[1]-prev[1];
+    for(var j=0;j<=S;j++) {
+      var a=j/S*Math.PI*2,rr=profile[i][0]+(ribs?ribs*.5*(1+Math.cos(a*24)):0),
+          n=V.norm([dy*Math.cos(a),-dr,dy*Math.sin(a)]);
+      vert(g,[rr*Math.cos(a),profile[i][1],rr*Math.sin(a)],n);
+      if(i<profile.length-1&&j<S){var k=i*(S+1)+j;g.i.push(k,k+S+1,k+1,k+1,k+S+1,k+S+2)}
+    }
+  }
+  return g;
+}
+function cyl(radius,y,height){return lathe([[0,y-height/2],[radius*.94,y-height/2],[radius,y-height/2+.25],[radius,y+height/2-.25],[radius*.94,y+height/2],[0,y+height/2]],64);}
+function moved(g,dx,dy,dz){for(var i=0;i<g.p.length;i+=3){g.p[i]+=dx;g.p[i+1]+=dy;g.p[i+2]+=dz;}return g;}
+function tubePlate(){var g=G();quad(g,[-6.2,-70,4],[6.2,-70,4],[6.2,43,4],[-6.2,43,4],[0,0,1],[[.015625,1/140],[.984375,1/140],[.984375,114/140],[.015625,114/140]]);return g;}
+ForceModel.prototype.makeTexture=function(){
+  var c=document.createElement('canvas');c.width=1024;c.height=4096;
+  var ctx=c.getContext('2d'),W=c.width,H=c.height,isTube=this.kind==='tube',span=isTube?12.8:32,
+      range=this.range,step=this.division,majorVal=this.major;
+  function x(a){return(a+span/2)/span*W;}function y(a){return(69-a)/140*H;}
+  ctx.fillStyle=isTube?'#fff178':'#fffefa';ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#16342e';ctx.textAlign='center';ctx.textBaseline='middle';
+  if(!isTube){ctx.font='600 57px Arial,Microsoft YaHei,sans-serif';ctx.fillText(range+'N  弹簧测力计',W/2,y(54));}
+  ctx.font='500 86px Arial,sans-serif';
+  if(isTube){ctx.fillText('N',x(3.6),y(39));}else{ctx.fillText('N',x(-10.3),y(39.5));ctx.fillText('N',x(10.3),y(39.5));}
+  var total=Math.round(range/step);
+  for(var i=0;i<=total;i++){
+    var val=Math.round(i*step*10000)/10000,Y=y(32-96*val/range),isMajor=Math.abs(val/majorVal-Math.round(val/majorVal))<.0001,
+        half=i%5===0,end=isMajor?8.8:half?7:5.9;
+    ctx.lineWidth=isMajor?5:half?4:3;ctx.strokeStyle='#243c30';ctx.beginPath();
+    if(isTube){ctx.moveTo(x(-5.3),Y);ctx.lineTo(x(isMajor?.6:half?-.3:-1.2),Y);}
+    else{ctx.moveTo(x(-2.5),Y);ctx.lineTo(x(-end),Y);ctx.moveTo(x(2.5),Y);ctx.lineTo(x(end),Y);}
+    ctx.stroke();if(isMajor){ctx.font='500 86px Arial,sans-serif';if(isTube)ctx.fillText(String(val),x(3.65),Y);else{ctx.fillText(String(val),x(-12),Y);ctx.fillText(String(val),x(12),Y);}}
+  }
+  var gl=this.gl;if(!this.tex)this.tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,this.tex);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,c);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);gl.generateMipmap(gl.TEXTURE_2D);
+};
+ForceModel.prototype.clearMeshes=function(){var gl=this.gl;this.meshes.forEach(function(m){['p','n','u','index'].forEach(function(k){gl.deleteBuffer(m[k]);});});this.meshes=[];};
+ForceModel.prototype.buildTube=function(){
+  var yellow=0xf1d52c,light=0xffe950,metal=0x9aabad;
+  // Casing/scale are fixed. The moving pointer ring travels outside the scale insert.
+  var glass=lathe([[8.9,-72],[8.9,70]],96);this.add('clearTube',glass,0xcde8e3,{group:'glass',part:'scale'});
+  this.add('glassLowerRim',lathe([[8.25,-72],[8.9,-72],[8.9,-71.5]],96),0xcce7e4,{group:'glass',part:'scale'});
+  this.add('glassUpperRim',lathe([[8.25,70],[8.9,70],[8.9,69.5]],96),0xcce7e4,{group:'glass',part:'scale'});
+  this.add('topCap',lathe([[0,61],[6.1,61],[6.1,76],[10.3,76],[10.3,79],[6.8,79],[6.8,84],[0,84]],96),yellow,{group:'front',part:'zero'});
+  this.add('zeroKnob',lathe([[0,80],[5.7,80],[5.7,87],[5.2,87.6],[0,87.6]],96,.3),light,{group:'front',part:'zero'});
+  this.add('topAnchor',cyl(1.25,61,7.5),yellow,{part:'zero'});
+  var loop=smoothPath([[-8.5,74,0],[-10.4,75,0],[-10.4,99,0],[-7.7,106,0],[0,109.4,0],[7.7,106,0],[10.4,99,0],[10.4,75,0],[8.5,74,0]],10);
+  this.add('topRing',tube(loop,.73,12),metal,{metal:1,part:'ring'});
+  this.add('anchorWire',tube(smoothPath([[0,61.8,0],[0,61,1],[0,60,2.75]],10),.38),metal,{metal:1,part:'zero'});
+  this.spring=this.add('spring',springGeometry(26),metal,{metal:1,dynamic:true,part:'spring'});
+  this.add('lowerSpringLink',tube(smoothPath([[0,34,2.75],[0,32.8,2],[0,32,0],[0,30.5,0]],8),.42),metal,{metal:1,moving:true,part:'spring'});
+  this.add('movingRod',cyl(.9,-24,113),metal,{metal:1,moving:true,part:'hook'});
+  var pointer=[];for(var j=0;j<=100;j++){var a=j/100*Math.PI*2;pointer.push([7.05*Math.cos(a),32,7.05*Math.sin(a)]);}
+  this.add('pointerRing',tube(pointer,.44,10),0xe44729,{moving:true,part:'pointer'});
+  this.add('pointerSpoke',box(0,32,3.2,1.1,.9,6.4),yellow,{moving:true,part:'pointer'});
+  this.add('pointer',tube([[-5.6,32,7.2],[5.6,32,7.2]],.36,10),0xe44729,{moving:true,part:'pointer'});
+  this.add('scaleSupport',box(0,-13.5,3.55,12.4,113,.8),0xedce27,{group:'plate',part:'scale'});
+  this.add('scale',tubePlate(),0xffffff,{group:'plate',part:'scale',texture:true});
+  this.add('bottomCap',lathe([[1.55,-77],[10.3,-77],[10.3,-72],[8.7,-72],[8.7,-69],[1.55,-69]],96),yellow,{group:'front',part:'scale'});
+  this.add('lowerGuide',lathe([[1.3,-79],[3.1,-79],[3.1,-68],[1.3,-68]],64),light,{part:'scale'});
+  this.add('hookEye',circle(0,-82,0,2.25,.55),metal,{metal:1,moving:true,part:'hook'});
+  var hookPts=smoothPath([[.1,-80.8,0],[-1.2,-84.5,0],[1.8,-89,0],[5,-94.5,0],[4.8,-100,0],[1,-103.3,0],[-3.8,-102.3,0],[-6,-98.5,0],[-6.5,-96.5,0]],10);
+  this.add('bottomHook',tube(hookPts,.8,12),metal,{metal:1,moving:true,part:'hook'});
+};
+ForceModel.prototype.buildLoad=function(){
+  var metal=0x9eaeb0,brass=0xd2a04b,p=[];
+  // A perpendicular eye rests on the J-hook; a hanger carries slotted weights.
+  for(var k=0;k<=64;k++){var a=k/64*Math.PI*2;p.push([.5,-106.3+2.8*Math.cos(a),2.8*Math.sin(a)]);}
+  this.add('loadEye',tube(p,.46,10),metal,{metal:1,moving:true,group:'load',part:'load'});
+  this.add('loadStem',cyl(.6,-121,23.8),metal,{metal:1,moving:true,group:'load',part:'load'});
+  this.add('loadTray',cyl(11.9,-134.2,1.3),brass,{metal:.62,moving:true,group:'load',part:'load'});
+  for(k=0;k<5;k++){var m=this.add('loadDisc'+k,cyl(11.4,0,3.6),brass,{metal:.7,moving:true,group:'load',part:'load'});m.weightIndex=k;}
+};
+ForceModel.prototype.build=function(){if(this.kind==='tube')this.buildTube();else this.buildBox();this.buildLoad();};
+ForceModel.prototype.setInstrument=function(kind,config){
+  var changed=kind!==this.kind;this.kind=kind==='tube'?'tube':'box';this.range=config.range;this.division=config.step;this.major=config.major;
+  this.targetForce=Math.min(this.targetForce,this.range);this.force=Math.min(this.force,this.range);
+  this.makeTexture();if(changed){this.clearMeshes();this.build();}this.updateSpring();this.dirty=true;
+};
+ForceModel.prototype.updateSpring=function(){var g=springGeometry(26+this.force/this.range*96),gl=this.gl;gl.bindBuffer(gl.ARRAY_BUFFER,this.spring.p);gl.bufferSubData(gl.ARRAY_BUFFER,0,new Float32Array(g.p));gl.bindBuffer(gl.ARRAY_BUFFER,this.spring.n);gl.bufferSubData(gl.ARRAY_BUFFER,0,new Float32Array(g.n));};
+ForceModel.prototype.setForce=function(f){this.targetForce=Math.max(0,Math.min(this.range,Number(f)||0));this.dirty=true;};
+ForceModel.prototype.getOffset=function(m){
+  var e=this.explode,x=0,z=0,y=m.moving?-this.force/this.range*96:0;
+  if(m.group==='front'){x=-69*e;z=10*e;}else if(m.group==='plate'){x=-29*e;z=20*e;}else if(m.group==='rear'||m.group==='side'||m.group==='glass'){x=64*e;z=-21*e;}
+  if(typeof m.weightIndex==='number'){var fill=Math.max(0,Math.min(1,this.force/this.range*5-m.weightIndex));y+=-133.4+m.weightIndex*3.8+1.8*fill;}
+  return[x,y,z];
+};
+ForceModel.prototype.setFocus=function(part){
+  var stretch=this.force/this.range*96;this.focusPart=part;
+  var ys={ring:this.kind==='tube'?98:89.5,zero:70,spring:47-stretch/2,pointer:32-stretch,scale:-18,hook:-96-stretch};
+  this.focusCenterY=ys[part]||0;this.targetYaw=-.23;this.targetPitch=.03;
+  var zs={ring:5.4,zero:5.4,pointer:5.6,scale:2.2,hook:4.8,spring:Math.min(5.3,400/(26+stretch+44))};
+  this.targetZoom=zs[part]||2;this.dirty=true;
+};
+ForceModel.prototype.clearFocus=function(){this.focusPart=null;this.targetZoom=1;this.dirty=true;};
+ForceModel.prototype.anchors=function(){return{
+  ring:this.project([0,this.kind==='tube'?104:95,0]),zero:this.project([0,this.kind==='tube'?80:72,0],this.kind==='tube'?'front':'core'),
+  spring:this.project([0,47-this.force/this.range*48,0]),pointer:this.project([0,32,this.kind==='tube'?7.6:6.4],'core',true),
+  scale:this.project([this.kind==='tube'?4:10,-34,this.kind==='tube'?4:5.1],'plate'),
+  hook:this.project([0,-97,0],'core',true)
+};};
+ForceModel.prototype.tick=function(time){
+  if(!this.running)return;var dt=Math.min(.04,(time-(this.lastTime||time))/1000||.016);this.lastTime=time;
+  var speed=1-Math.exp(-dt*12),changed=false;
+  function ease(o,k,v){if(Math.abs(o[k]-v)>.0002){o[k]+=(v-o[k])*speed;changed=true;}else if(o[k]!==v){o[k]=v;changed=true;}}
+  var old=this.force;ease(this,'force',this.targetForce);
+  // Only explicit focus/front/reset/zoom controls change the camera framing.
+  ease(this,'centerY',this.focusPart?this.focusCenterY:-64);
+  ease(this,'explode',this.mode==='explode'?1:0);ease(this,'ghost',this.mode==='xray'?1:0);
+  ease(this,'yaw',this.targetYaw);ease(this,'pitch',this.targetPitch);ease(this,'zoom',this.targetZoom);
+  if(old!==this.force)this.updateSpring();if(changed||this.dirty){this.render();this.dirty=false;if(this.onRender)this.onRender(this.anchors());}
+};
+ForceModel.prototype.render=function(){
+  var gl=this.gl,centerY=this.centerY,height=this.frameHeight/this.zoom,aspect=this.width/this.height,
+      shift=this.insetVisible?height*aspect*.105:0;
+  if(this.width<430&&this.insetVisible)shift=height*aspect*.12;
+  var eye=[400*Math.sin(this.yaw)*Math.cos(this.pitch),centerY+400*Math.sin(this.pitch),400*Math.cos(this.yaw)*Math.cos(this.pitch)];
+  this.vp=mult(ortho(-height*aspect/2+shift,height*aspect/2+shift,-height/2,height/2,1,1000),lookAt(eye,[0,centerY,0]));
+  gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(this.program);gl.uniformMatrix4fv(this.u.VP,false,this.vp);gl.uniform3fv(this.u.Camera,new Float32Array(eye));
+  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,this.tex);gl.uniform1i(this.u.Map,0);
+  var opaque=[],transparent=[],self=this;
+  this.meshes.forEach(function(m){
+    m.alpha=1;m.scale=[1,1,1];var a=self.ghost;
+    if(m.group==='load'){
+      if(self.targetForce<=0||self.force<.001)return;
+      if(typeof m.weightIndex==='number'){var fill=Math.max(0,Math.min(1,self.force/self.range*5-m.weightIndex));if(fill<.001)return;m.scale[1]=fill;}
+    }
+    if(m.group==='front')m.alpha=1-a*.72;
+    if(m.group==='plate')m.alpha=1-a*.94;
+    if(m.group==='rear'||m.group==='side')m.alpha=1-a*.85;
+    if(m.group==='glass')m.alpha=.16-a*.08;
+    m.offset=self.getOffset(m);if(m.alpha<.995)transparent.push(m);else opaque.push(m);
+  });
+  transparent.sort(function(a,b){return V.dot(V.sub(b.offset,eye),V.sub(b.offset,eye))-V.dot(V.sub(a.offset,eye),V.sub(a.offset,eye));});
+  function draw(m){
+    ['p','n','u'].forEach(function(k){gl.bindBuffer(gl.ARRAY_BUFFER,m[k]);gl.enableVertexAttribArray(self.a[k]);gl.vertexAttribPointer(self.a[k],k==='u'?2:3,gl.FLOAT,false,0,0);});
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,m.index);gl.uniform3fv(self.u.Offset,new Float32Array(m.offset));gl.uniform3fv(self.u.Scale,new Float32Array(m.scale));gl.uniform3fv(self.u.Color,new Float32Array(m.color));
+    gl.uniform1f(self.u.Alpha,m.alpha);gl.uniform1f(self.u.Metal,m.metal);gl.uniform1f(self.u.Glow,m.part===self.selected?.9:0);gl.uniform1f(self.u.Tex,m.texture?1:0);gl.drawElements(gl.TRIANGLES,m.count,gl.UNSIGNED_SHORT,0);
+  }
+  gl.depthMask(true);opaque.forEach(draw);gl.depthMask(false);transparent.forEach(draw);gl.depthMask(true);
+};
+window.ForceModel=ForceModel;
+})();
+</script>
+<script>(function(){'use strict';
+if(window.NodeList&&!NodeList.prototype.forEach)NodeList.prototype.forEach=Array.prototype.forEach;
+if(!String.prototype.padStart)String.prototype.padStart=function(n,c){var s=String(this);c=c||' ';while(s.length<n)s=c+s;return s.slice(-Math.max(n,String(this).length));};
+var $=function(id){return document.getElementById(id)},clamp=function(v,a,b){return Math.max(a,Math.min(b,v))},round=function(v){return Math.round(v*10000)/10000};
+var icons={plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',reset:'<path d="M3 10a9 9 0 1 1 1.8 7M3 4v6h6"/>',arrow:'<path d="M5 12h14m-5-5 5 5-5 5"/>',play:'<path d="m9 5 10 7-10 7V5Z"/>',pause:'<path d="M9 5v14M15 5v14"/>',close:'<path d="m6 6 12 12M18 6 6 18"/>',fullscreen:'<path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/>',help:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.6-2.5 2-2.5 3.5M12 17v.1"/>',sound:'<path d="m11 5-5 4H3v6h3l5 4V5Zm4 4a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/>',mute:'<path d="m11 5-5 4H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/>',search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',drag:'<path d="M8 11V5a2 2 0 0 1 4 0v7-4a2 2 0 0 1 4 0v4-2a2 2 0 0 1 4 0v6c0 4-2 6-6 6h-2c-2 0-3.5-1.5-4.5-3L4 13c-1.3-2 1-3.8 2.5-2L8 13"/>',backspace:'<path d="m8 5-6 7 6 7h13V5H8Zm3 4 6 6m0-6-6 6"/>'};
+function icon(n){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(icons[n]||icons.help)+'</svg>'}
+function hydrateIcons(root){(root||document).querySelectorAll('[data-icon]').forEach(function(el){el.innerHTML=icon(el.getAttribute('data-icon'))})}hydrateIcons();
+function viewport(){document.documentElement.style.setProperty('--app-h',window.innerHeight+'px')}viewport();window.addEventListener('resize',viewport);
+var activePage='structure',soundOn=true,audio=null,toastTimer=null,model=null,isFallback=false,modelView='solid',selectedPart='ring',modelForce=0,focusKey=null,autoDemo=false,demoStart=0,instrumentKind='box',closeupLast='',fallbackFocus=null;
+var parts={ring:{name:'提环',number:'01',side:'left',desc:'握住提环，给测力计提供支撑。测量时，不能用手托住挂钩或重物。'},spring:{name:'弹簧',number:'02',side:'right',desc:'在正常使用范围内，拉力越大，弹簧伸长得越多。撤去拉力，弹簧恢复原状。'},pointer:{name:'指针',number:'03',side:'left',desc:'指针和活动杆一起移动。读数时，视线正对刻度板，读指针中心对应的刻度。'},scale:{name:'刻度板',number:'04',side:'right',desc:'刻度板固定不动，力的单位是牛顿（N）。测量前先看量程，再认清每小格。'},hook:{name:'挂钩',number:'05',side:'left',desc:'重物挂在挂钩上。挂钩连接活动杆，把重物的拉力传递给弹簧。'},zero:{name:'调零装置',number:'06',side:'right',desc:'先取下重物，再调到指针对准 0。不能挂着重物调零；实际调法以手中仪器为准。'}};
+var tagEls={};Object.keys(parts).forEach(function(k){var p=parts[k],b=document.createElement('button');b.className='part-choice'+(k===selectedPart?' selected':'');b.setAttribute('data-part',k);b.innerHTML='<span class="part-number">'+p.number+'</span><span>'+p.name+'</span>';b.addEventListener('click',function(){selectPart(k)});$('partsList').appendChild(b);var tag=document.createElement('button');tag.className='part-tag'+(k===selectedPart?' active':'');tag.innerText=p.name;tag.setAttribute('aria-label','观察'+p.name);tag.addEventListener('click',function(){selectPart(k)});$('annotations').appendChild(tag);tagEls[k]=tag});
+function selectPart(k){selectedPart=k;if(focusKey)focusKey=k;$('partTitle').innerText=parts[k].name;$('partDescription').innerText=parts[k].desc;document.querySelectorAll('.part-choice').forEach(function(b){b.classList.toggle('selected',b.getAttribute('data-part')===k)});Object.keys(tagEls).forEach(function(p){tagEls[p].classList.toggle('active',p===k)});if((k==='spring'||k==='zero')&&modelView==='solid')setView('xray');if(model)model.select(k);if(isFallback)renderFallback()}
+function toast(text){$('toast').innerText=text;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').classList.remove('show')},2700)}
+function playTone(success){if(!soundOn)return;try{var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!audio)audio=new AC();if(audio.state==='suspended')audio.resume();var now=audio.currentTime,notes=success?[523.25,659.25,783.99]:[246.94,196];notes.forEach(function(f,i){var o=audio.createOscillator(),g=audio.createGain(),t=now+i*.09;o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+.012);g.gain.exponentialRampToValueAtTime(.001,t+.22);o.connect(g);g.connect(audio.destination);o.start(t);o.stop(t+.25)})}catch(e){}}
+$('soundBtn').addEventListener('click',function(){soundOn=!soundOn;this.innerHTML=icon(soundOn?'sound':'mute');this.title=soundOn?'关闭音效':'开启音效';this.setAttribute('aria-label',this.title);if(soundOn)playTone(true);toast(soundOn?'音效已开启':'音效已关闭')});
+var lastFocus=null;function openDialog(id){lastFocus=document.activeElement;$(id).classList.add('open');var close=$(id).querySelector('.close-dialog');if(close)close.focus()}function closeDialogs(){document.querySelectorAll('.dialog-backdrop').forEach(function(d){d.classList.remove('open')});if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+$('helpBtn').addEventListener('click',function(){openDialog('helpDialog')});$('aboutBtn').addEventListener('click',function(){openDialog('helpDialog')});document.querySelectorAll('.close-dialog').forEach(function(b){b.addEventListener('click',closeDialogs)});document.querySelectorAll('.dialog-backdrop').forEach(function(d){d.addEventListener('click',function(e){if(e.target===d)closeDialogs()})});
+$('fullscreenBtn').addEventListener('click',function(){var el=document.documentElement;try{if(document.fullscreenElement||document.webkitFullscreenElement){var ex=document.exitFullscreen||document.webkitExitFullscreen;if(ex)ex.call(document)}else{var rq=el.requestFullscreen||el.webkitRequestFullscreen;if(rq){var promise=rq.call(el);if(promise&&promise.catch)promise.catch(function(){toast('浏览器未允许全屏，可使用系统全屏功能。')})}else toast('此浏览器未提供全屏按钮，可横屏使用。')}}catch(e){toast('请使用浏览器的全屏功能。')}});
+function setPage(name){activePage=name;document.querySelectorAll('.tab').forEach(function(b){var on=b.getAttribute('data-page')===name;b.classList.toggle('active',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});var s=name==='structure';$('structurePage').classList.toggle('active',s);$('practicePage').classList.toggle('active',!s);$('structurePage').hidden=!s;$('practicePage').hidden=s;if(s){if(model){model.resize();model.dirty=true}if(isFallback)renderFallback()}else{stopDemo();renderPractice()} }
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){setPage(this.getAttribute('data-page'))})});
+function setView(v){modelView=v;if(v==='explode'){focusKey=null;$('focusPartBtn').innerText='聚焦';}document.querySelectorAll('#modelModes button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-view')===v)});if(model)model.setMode(v);if(isFallback)renderFallback();$('modelInstruction').innerText=isFallback?(v==='explode'?'分开观察固定部件和活动部件':'点选名称 · 拖动滑杆观察联动'):(v==='explode'?'拖动旋转 · 观察各部件装配关系':'拖动旋转 · 双指或滚轮缩放')}
+document.querySelectorAll('#modelModes button').forEach(function(b){b.addEventListener('click',function(){setView(this.getAttribute('data-view'))})});
+function updateForce(f){var c=cfg();modelForce=round(clamp(Number(f)||0,0,c.range));$('forceValue').innerText=forceText(modelForce);$('forceSlider').value=modelForce;$('loadStatus').innerText=modelForce>0?'模拟重物 '+forceText(modelForce)+' N · 悬空静止后读数':'空载 · 拖动滑杆挂上重物';if(model)model.setForce(modelForce);if(isFallback){renderFallback();renderStructureCloseup(modelForce);}}
+$('forceSlider').addEventListener('input',function(){stopDemo();updateForce(this.value)});$('unloadBtn').addEventListener('click',function(){stopDemo();updateForce(0)});$('demoBtn').addEventListener('click',function(){if(autoDemo){stopDemo();return}autoDemo=true;demoStart=performance.now();this.innerHTML=icon('pause')+'<span>暂停演示</span>';if(modelView==='solid')setView('xray')});function stopDemo(){autoDemo=false;$('demoBtn').innerHTML=icon('play')+'<span>自动演示</span>'}
+$('frontBtn').addEventListener('click',function(){focusKey=null;$('focusPartBtn').innerText='聚焦';if(model)model.front();else renderFallback()});$('zoomIn').addEventListener('click',function(){if(model)model.zoomBy(1.18);else toast('二维模式：读数页提供同步刻度放大。')});$('zoomOut').addEventListener('click',function(){if(model)model.zoomBy(1/1.18)});$('resetModel').addEventListener('click',function(){focusKey=null;$('focusPartBtn').innerText='聚焦';stopDemo();updateForce(0);setView('xray');selectPart('spring');if(model)model.reset()});
+$('focusPartBtn').addEventListener('click',function(){if(focusKey){focusKey=null;this.innerText='聚焦';if(model)model.clearFocus();}else{focusKey=selectedPart;if(modelView==='explode')setView('xray');focusKey=selectedPart;if(model)model.setFocus(focusKey);this.innerText='整体';}if(isFallback)renderFallback();});
+function updateTags(anchors,alreadyStage){
+ if(activePage!=='structure')return;
+ var stage=$('modelStage').getBoundingClientRect(),canvas=$('canvasWrap').getBoundingClientRect(),w=stage.width,h=stage.height,narrow=w<480,
+ top=canvas.top-stage.top+8,bottom=canvas.bottom-stage.top-8,positions=[], inset=$('structureCloseup').getBoundingClientRect(),insetX=inset.left-stage.left;
+ Object.keys(parts).forEach(function(k){var el=tagEls[k],p=parts[k],source=anchors[k];if(!source)return;
+ var a=alreadyStage?source:[source[0]+canvas.left-stage.left,source[1]+canvas.top-stage.top];
+ if((focusKey&&focusKey!==k)||(narrow&&selectedPart!==k)){el.style.display='none';return;}el.style.display='';
+ var tw=el.offsetWidth||80,th=el.offsetHeight||34,side=p.side,spread=narrow?33:Math.min(86,w*.09),left=side==='left'?a[0]-spread-tw:a[0]+spread;
+ if(modelView==='explode'&&!focusKey){left=side==='left'?18:Math.max(w*.56,insetX-tw-14);}
+ left=clamp(left,8,w-tw-8);var yy=clamp(a[1]-th/2,top,bottom-th);
+ if(left+tw>insetX-8&&left<inset.right-stage.left+8&&yy+th>inset.top-stage.top-6&&yy<inset.bottom-stage.top+6){left=Math.max(8,insetX-tw-10);}
+ if(a[1]<canvas.top-stage.top-30||a[1]>canvas.bottom-stage.top+30){el.style.display='none';return;}
+ positions.push({k:k,a:a,x:left,y:yy,w:tw,h:th,side:side});
+ });
+ ['left','right'].forEach(function(side){var arr=positions.filter(function(p){return p.side===side;}).sort(function(a,b){return a.y-b.y;});for(var i=1;i<arr.length;i++){if(arr[i].y<arr[i-1].y+arr[i-1].h+8)arr[i].y=arr[i-1].y+arr[i-1].h+8;}if(arr.length&&arr[arr.length-1].y+arr[arr.length-1].h>bottom){var d=arr[arr.length-1].y+arr[arr.length-1].h-bottom;arr.forEach(function(p){p.y-=d;});}});
+ var lines='';positions.forEach(function(p){var el=tagEls[p.k];el.style.left=p.x+'px';el.style.top=p.y+'px';var x=p.side==='left'?p.x+p.w:p.x,y=p.y+p.h/2,col=p.k===selectedPart?'#548a74':'#8aab96';lines+='<path d="M'+x.toFixed(1)+','+y.toFixed(1)+' L'+(p.a[0]+(p.side==='left'?-10:10)).toFixed(1)+','+y.toFixed(1)+' L'+p.a[0].toFixed(1)+','+p.a[1].toFixed(1)+'" fill="none" stroke="'+col+'" stroke-width="1.2"/><circle cx="'+p.a[0].toFixed(1)+'" cy="'+p.a[1].toFixed(1)+'" r="3" fill="'+col+'" stroke="#fff" stroke-width="1.2"/>';});$('leaderLines').innerHTML=lines;
+ if(model){renderStructureCloseup(model.force);var point=model.project([0,-139,0],'core',true);updateWeightLabel([point[0]+canvas.left-stage.left,point[1]+canvas.top-stage.top],model.force);}
+}
+function enableFallback(){isFallback=true;if(model)model.running=false;model=null;$('modelCanvas').style.display='none';$('modelFallback').style.display='block';$('fallbackBanner').style.display='block';$('modelInstruction').innerText='点选名称 · 拖动滑杆观察联动';renderFallback()}
+/* SVG is intentionally used for accurate, infinitely sharp graduations and for
+   a non-WebGL fallback. It is not a screenshot standing in for controls. */
+function fmt(v){return String(round(v)).replace(/^-0$/,'0')}
+var presets={'5fine':{range:5,step:.1,major:1,name:'5 N · A 型'},'5coarse':{range:5,step:.2,major:1,name:'5 N · B 型'},'2.5':{range:2.5,step:.05,major:.5,name:'2.5 N'},'1':{range:1,step:.02,major:.1,name:'1 N'},'10':{range:10,step:.2,major:1,name:'10 N'}};
+function gaugeSVG(config,opts){if(instrumentKind==='tube')return tubeGaugeSVG(config,opts);var o=opts||{},F=o.force||0,error=o.error||0,stroke=96*F/config.range,zeroShift=96*error/config.range,dis=stroke+zeroShift,py=80+dis,isX=o.mode==='xray',isE=o.mode==='explode',prefix=o.prefix||'p',loaded=!!o.weight,viewHeight=o.frameHeight||355,viewWidth=isE?250:100,cx=isE?122:50;
+var defs='<defs><linearGradient id="'+prefix+'plastic" x1="0" x2="1"><stop stop-color="#096d76"/><stop offset=".12" stop-color="#0f989d"/><stop offset=".65" stop-color="#08888c"/><stop offset="1" stop-color="#087077"/></linearGradient><linearGradient id="'+prefix+'steel" gradientUnits="userSpaceOnUse" x1="-4" x2="4"><stop stop-color="#3b4f52"/><stop offset=".2" stop-color="#b9c5c5"/><stop offset=".43" stop-color="#f8faf7"/><stop offset=".63" stop-color="#67787a"/><stop offset=".82" stop-color="#dce5e1"/><stop offset="1" stop-color="#536769"/></linearGradient><linearGradient id="'+prefix+'paper" x1="0" x2="1"><stop stop-color="#eef1e9"/><stop offset=".5" stop-color="#fffef8"/><stop offset="1" stop-color="#eef1e9"/></linearGradient><linearGradient id="'+prefix+'brass"><stop stop-color="#a97832"/><stop offset=".4" stop-color="#e2b96b"/><stop offset="1" stop-color="#ac823e"/></linearGradient></defs>';
+var shape='M-17.5,40 Q0,34 17.5,40 L17.5,184 Q0,190 -17.5,184 Z',plateShape='M-15,50 L-5,48 Q0,43 5,48 L15,50 V180 Q0,184 -15,180 Z',frameOpacity=isX?.15:1,plateOpacity=isX?.11:1,backX=isE?75:1.7,frontX=isE?-78:0,plateX=isE?-38:0;
+var body='<g transform="translate('+cx+',0)">';body+='<g transform="translate('+backX+',1.2)" opacity="'+(isX?.14:1)+'"><path d="'+shape+'" fill="#086b73" stroke="#366f71" stroke-width=".3"/>';if(isE)body+='<rect x="-14" y="44" width="28" height="137" rx="2" fill="#16898c"/>';body+='</g>';
+/* The spring top shifts with the zero adjustment. The coil length depends only on applied force. */
+body+='<g fill="none" stroke="url(#'+prefix+'steel)"><circle cx="0" cy="22.5" r="12.3" stroke-width="1.9"/><path d="M0 37v'+(15+zeroShift).toFixed(3)+'" stroke-width="1"/></g><path d="M-4 42v-12h8v12" fill="#dce4dc" stroke="#8d9f94" stroke-width=".35"/>';
+body+='<g transform="translate(0,'+zeroShift.toFixed(3)+')"><rect x="-3.4" y="46" width="6.8" height="4" rx=".7" fill="#dee7dd" stroke="#a2b3a2" stroke-width=".3"/></g>';
+var coil='',len=26+stroke,sy=52+zeroShift;for(var i=0;i<=300;i++){var t=i/300,x=2.75*Math.sin(t*30*Math.PI*2),y=sy+len*t;coil+=(i?'L':'M')+x.toFixed(3)+','+y.toFixed(3)}
+body+='<path d="'+coil+'" fill="none" stroke="url(#'+prefix+'steel)" stroke-width=".65" stroke-linecap="round"/>';if(isX&&o.selected==='spring')body+='<rect x="-4.3" y="'+(sy-2)+'" width="8.6" height="'+(len+4)+'" rx="3" fill="#dda74e18" stroke="#b18447" stroke-width=".45"/>';
+body+='<g transform="translate(0,'+dis.toFixed(3)+')"><path d="M0 78v115" stroke="url(#'+prefix+'steel)" stroke-width="2.05"/><circle cx="0" cy="194" r="2.25" fill="none" stroke="url(#'+prefix+'steel)" stroke-width="1.1"/><path d="M0 192 C-2 196 2 201 4 204 C9 211 2 219-4 214 L-6.5 208.5" fill="none" stroke="url(#'+prefix+'steel)" stroke-width="1.6" stroke-linecap="round"/></g>';
+if(isX||isE)body+='<g fill="#dae5d7" stroke="#a3b8a4" stroke-width=".3"><rect x="-5" y="180" width="3.2" height="4" rx=".4"/><rect x="1.8" y="180" width="3.2" height="4" rx=".4"/></g>';
+body+='<g transform="translate('+frontX+',0)" opacity="'+frameOpacity+'"><path d="'+shape+'" fill="url(#'+prefix+'plastic)" stroke="#04777c" stroke-width=".35"/><path d="'+plateShape+'" fill="url(#'+prefix+'paper)"/></g>';
+var plateG='<g transform="translate('+plateX+',0)" opacity="'+plateOpacity+'"><path d="'+plateShape+'" fill="url(#'+prefix+'paper)" stroke="#cad8cb" stroke-width=".3"/><text x="0" y="59" font-size="2.8" text-anchor="middle" fill="#455b52" font-weight="600">'+fmt(config.range)+' N 弹簧测力计</text><rect x="-1.65" y="70" width="3.3" height="108" fill="#253e3d"/><rect x="-.65" y="'+Math.max(70,py).toFixed(3)+'" width="1.3" height="'+Math.max(0,178-Math.max(70,py)).toFixed(3)+'" fill="url(#'+prefix+'steel)"/>';
+plateG+='<g fill="#1a342e" font-family="Arial,sans-serif" font-size="3.7" text-anchor="middle"><text x="-10.2" y="74.5">N</text><text x="10.2" y="74.5">N</text>';
+var total=Math.round(config.range/config.step);for(i=0;i<=total;i++){var val=round(i*config.step),Y=80+96*val/config.range,major=Math.abs(val/config.major-Math.round(val/config.major))<.001,half=i%5===0,end=major?8.2:half?6.7:5.5;plateG+='<path d="M-2.45 '+Y.toFixed(3)+'H-'+end+' M2.45 '+Y.toFixed(3)+'H'+end+'" fill="none" stroke="#283b30" stroke-width="'+(major?.32:.2)+'"/>';if(major)plateG+='<text x="-11.6" y="'+(Y+1.3).toFixed(3)+'">'+fmt(val)+'</text><text x="11.6" y="'+(Y+1.3).toFixed(3)+'">'+fmt(val)+'</text>'}
+plateG+='</g></g>';body+=plateG;
+body+='<path d="M-4.8 '+py.toFixed(3)+'H4.8" fill="none" stroke="#d8432c" stroke-width="1.2" stroke-linecap="round"/><path d="M-4.3 '+(py-.25).toFixed(3)+'H4.3" fill="none" stroke="#f9956f" stroke-width=".25"/>';
+if(!isX&&!isE)body+='<rect x="-18" y="'+(py-3).toFixed(3)+'" width="36" height="6" rx="1.4" fill="none" stroke="#279a7e" stroke-width=".55" stroke-dasharray="1.3 1"/><path d="M18 '+py.toFixed(3)+'H'+(48)+'" stroke="#87b4a0" stroke-width=".4" stroke-dasharray="1.5 1.5"/>';
+if(loaded){body+=svgLoad(config,F,dis,prefix);}if(!loaded&&F>0){var ay=218+dis;body+='<path d="M0 '+ay+'v12m-2.5-3 2.5 3 2.5-3" fill="none" stroke="#bb7b39" stroke-width=".65"/><text x="5" y="'+(ay+8)+'" fill="#a6763e" font-size="3.3">拉力</text>'}body+='</g>';return '<svg viewBox="0 0 '+viewWidth+' '+viewHeight.toFixed(2)+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="弹簧测力计，指针位置和放大窗口同步">'+defs+body+'</svg>'}
+function renderFallback(){
+ if(!isFallback)return;var c=cfg(),opt={mode:modelView,force:modelForce,prefix:'fb',selected:selectedPart,weight:modelForce>.001,frameHeight:400},
+ stage=$('modelStage').getBoundingClientRect(),r=$('canvasWrap').getBoundingClientRect(),vh=400,vw=modelView==='explode'?290:200,cx=modelView==='explode'?122:50,
+ dis=96*modelForce/c.range,svg=gaugeSVG(c,opt);
+ $('modelFallback').innerHTML=svg;var el=$('modelFallback').querySelector('svg'),actualW=vh*r.width/r.height,x0=cx-actualW*.395,y0=-10;
+ if(focusKey){if(!fallbackFocus||fallbackFocus.key!==focusKey){var ys={ring:22,zero:42,spring:65+dis/2,pointer:80+dis,scale:131,hook:211+dis},hs={ring:70,zero:62,spring:130,pointer:65,scale:155,hook:80};fallbackFocus={key:focusKey,height:hs[focusKey],center:ys[focusKey]};}vh=fallbackFocus.height;actualW=vh*r.width/r.height;x0=cx-actualW*.395;y0=fallbackFocus.center-vh/2;}else{fallbackFocus=null;}
+ el.setAttribute('viewBox',[x0,y0,actualW,vh].join(' '));var scale=r.height/vh,dx=r.left-stage.left-x0*scale,dy=r.top-stage.top-y0*scale;
+ var a={ring:[cx,19],zero:[cx,42],spring:[cx,65+dis/2],pointer:[cx,80+dis],scale:[cx+(modelView==='explode'?-38:0)+12,148],hook:[cx,211+dis]};Object.keys(a).forEach(function(k){a[k]=[dx+a[k][0]*scale,dy+a[k][1]*scale];});updateTags(a,true);renderStructureCloseup(modelForce);updateWeightLabel([dx+cx*scale,dy+(253+dis)*scale],modelForce);
+}
+var q={preset:'5fine',mode:'read',force:2.4,zeroError:0,zeroAdjust:0,loaded:true,eye:0,answered:false,revealed:false,hint:false,tries:0,number:0,correct:0,lastIndex:-1,scored:false};
+function cfg(){return presets[q.preset]}function currentRead(){return round((q.loaded?q.force:0)+q.zeroError+q.zeroAdjust)}function zeroOK(){return Math.abs(q.zeroError+q.zeroAdjust)<.00001}
+function feedback(type,title,sub,symbol){$('feedback').className='feedback'+(type?' '+type:'');$('feedbackMain').innerText=title;$('feedbackSub').innerText=sub||'';$('feedbackIcon').innerText=symbol||''}
+function makeQuestion(forced){var c=cfg(),n=Math.round(c.range/c.step),idx;stopDemo();q.number++;if(typeof forced==='number'){q.force=round(clamp(forced,0,c.range))}else{var attempts=0;do{idx=1+Math.floor(Math.random()*(n-1));attempts++}while(idx===q.lastIndex&&attempts<8);q.lastIndex=idx;q.force=round(idx*c.step)}q.zeroError=q.mode==='measure'?(Math.random()<.5?-1:1)*c.step*(Math.random()<.5?1:2):0;q.zeroAdjust=0;q.loaded=q.mode==='read';q.eye=0;q.answered=false;q.revealed=false;q.hint=false;q.tries=0;q.scored=false;$('answer').value='';$('answer').readOnly=false;$('quizActions').classList.remove('answered');$('hintBtn').innerText='提示';feedback('',q.mode==='measure'?'测量前，先检查零点。':'看量程 · 认分度值 · 平视读数',q.mode==='measure'?'空载时指针没有对准0，怎么办？':'最小的一小格，代表多少牛？');renderPractice()}
+function renderPractice(){var c=cfg();$('practiceInstrument').innerHTML=gaugeSVG(c,{force:q.loaded?q.force:0,error:q.zeroError+q.zeroAdjust,prefix:'p',weight:q.mode==='measure'&&q.loaded});$('zoomArt').innerHTML=zoomSVG();$('questionNumber').innerText='第 '+String(q.number).padStart(2,'0')+' 题';$('correctCount').innerText=q.correct;document.querySelectorAll('#eyeModes button').forEach(function(b){b.classList.toggle('active',Number(b.getAttribute('data-eye'))===q.eye)});var measure=q.mode==='measure';$('zeroToolbar').classList.toggle('visible',measure);$('zeroUp').disabled=q.loaded;$('zeroDown').disabled=q.loaded;$('loadWeight').innerText=q.loaded?'取下物体':'挂上物体';$('readingStageTitle').innerText=measure?(q.loaded?'物体悬空静止后，读出力的大小。':'空载检查：指针是否对准 0？'):'指针指到了哪里？';$('zeroStatus').innerText=q.loaded?'物体已经悬空，请平视读数。':(zeroOK()?'零点已对齐，可以挂上物体。':'空载时，先让指针对准 0。');$('zeroStatus').style.color=zeroOK()?'#236d49':'';$('taskLine').innerText=measure&&!q.loaded?'先调零，再挂上待测物。':'这次测得的力是多少牛？';if(q.eye!==0){$('zoomUnder').innerText='视差示意已放大，力的大小没有改变。';$('zoomUnder').style.color='#a07138'}else if(q.hint&&(!measure||q.loaded)){$('zoomUnder').innerText='每小格 '+fmt(c.step)+' N；量程 '+fmt(c.range)+' N。';$('zoomUnder').style.color='#32714f'}else{$('zoomUnder').innerText=measure&&!q.loaded?'空载时，把指针对准 0 刻度线。':'先看相邻标数，再数小格。';$('zoomUnder').style.color=''} }
+for(var i=1;i<=9;i++){var b=document.createElement('button');b.className='key';b.innerText=i;b.setAttribute('aria-label','数字'+i);b.setAttribute('data-key',i);$('keypad').appendChild(b)}['.','0','back'].forEach(function(k){var b=document.createElement('button');b.className='key'+(k==='0'?'':' muted');b.setAttribute('data-key',k);b.setAttribute('aria-label',k==='back'?'退格':k==='.'?'小数点':'数字0');b.innerHTML=k==='back'?icon('backspace'):k;$('keypad').appendChild(b)});
+function key(k){if(q.answered)return;var el=$('answer'),s=el.value;if(k==='back'){el.value=s.slice(0,-1);return}if(k==='.'&&s.indexOf('.')!==-1)return;if(s.length>=6)return;if(k==='.'&&!s)s='0';if(s==='0'&&k!=='.')s='';el.value=s+k}
+$('keypad').addEventListener('click',function(e){var b=e.target.closest('[data-key]');if(b)key(b.getAttribute('data-key'))});$('answer').addEventListener('input',function(){var s=this.value.replace(/[^0-9.]/g,'');var p=s.indexOf('.');if(p!==-1)s=s.slice(0,p+1)+s.slice(p+1).replace(/\./g,'');this.value=s.slice(0,6)});
+function explanation(){var c=cfg(),major=c.major,base=round(Math.floor((q.force+1e-7)/major)*major);if(Math.abs(base-q.force)<.00001)return '指针与 '+fmt(q.force)+' N 的标数刻度线对齐。';var n=Math.round((q.force-base)/c.step);return fmt(base)+' N + '+n+' 格 × '+fmt(c.step)+' N = '+fmt(q.force)+' N。'}
+function checkAnswer(){if(q.answered)return;var s=$('answer').value.trim();if(q.mode==='measure'&&!q.loaded){feedback('warning','先完成调零与悬挂。','空载时调零，再挂上物体，静止后读数。');return}if(q.eye!==0){feedback('warning','先平视，再读数。','斜视会产生视差，但不会改变物体受到的力。');return}if(!s||!/^\d+(\.\d+)?$/.test(s)){feedback('warning','请输入一个读数。','使用数字键盘，单位 N 已经为你写好。');return}var n=Number(s);if(Math.abs(n-q.force)<.00001){q.answered=true;if(!q.scored){q.correct++;q.scored=true;}$('correctCount').innerText=q.correct;$('answer').readOnly=true;$('quizActions').classList.add('answered');feedback('success','读数正确：'+fmt(q.force)+' N',explanation(),'✓');playTone(true)}else{q.tries++;playTone(false);if(n>cfg().range){feedback('error','超过了这支测力计的量程。','最大标数是 '+fmt(cfg().range)+' N，请重新检查。','×')}else{feedback('error','再看一看指针的位置。',q.tries===1?'注意：要数格子的间隔，不是数刻度线条数。':'每小格 '+fmt(cfg().step)+' N，从前一个标数接着往下数。','×')}if(q.tries>=2){q.hint=true;renderPractice()}}}
+$('checkBtn').addEventListener('click',checkAnswer);$('nextBtn').addEventListener('click',function(){makeQuestion()});$('skipBtn').addEventListener('click',function(){makeQuestion()});$('hintBtn').addEventListener('click',function(){if(q.mode==='measure'&&!q.loaded){feedback('warning',zeroOK()?'零点已对齐，可以挂上物体。':'观察空载时的指针。',zeroOK()?'点击左侧“挂上物体”，再读取刻度。':'指针在0的下方就向上调；在上方就向下调。');return}q.hint=!q.hint;this.innerText=q.hint?'收起':'提示';if(q.hint&&!q.answered)feedback('', '每小格 '+fmt(cfg().step)+' N。','相邻标数相差 '+fmt(cfg().major)+' N，中间有 '+Math.round(cfg().major/cfg().step)+' 小格。');renderPractice()});
+$('gaugePreset').addEventListener('change',function(){changeInstrumentPreset(this.value);});document.querySelectorAll('#practiceModes button').forEach(function(b){b.addEventListener('click',function(){q.mode=this.getAttribute('data-mode');document.querySelectorAll('#practiceModes button').forEach(function(btn){btn.classList.toggle('active',btn===b)});makeQuestion()})});document.querySelectorAll('#eyeModes button').forEach(function(b){b.addEventListener('click',function(){q.eye=Number(this.getAttribute('data-eye'));renderPractice();if(q.eye===0&&$('feedback').classList.contains('warning'))feedback('',q.loaded?'视线已对齐，开始读数。':'视线已对齐，检查零点。',q.loaded?'读指针中心对应的刻度。':'空载状态下，指针应当指向0。')})});
+function adjustZero(dir){if(q.loaded){toast('请先取下物体，再调零。');return}if(q.eye!==0){feedback('warning','先平视零点。','把观察视线切换为“平视”，再进行调零。');return}var c=cfg();q.zeroAdjust=round(clamp(q.zeroAdjust+dir*c.step,-c.step*5,c.step*5));renderPractice();if(zeroOK())feedback('','零点已对齐。','点击“挂上物体”，观察静止后的指针。');else feedback('','继续微调零点。','此时还没有挂物体，指针应该指向0。')}
+$('zeroUp').addEventListener('click',function(){adjustZero(-1)});$('zeroDown').addEventListener('click',function(){adjustZero(1)});$('loadWeight').addEventListener('click',function(){if(q.loaded){q.loaded=false;q.answered=false;$('answer').value='';$('answer').readOnly=false;$('quizActions').classList.remove('answered');feedback('','物体已取下。','再次检查指针是否回到0。');renderPractice();return}if(q.eye!==0){feedback('warning','先平视检查零点。','视线与指针相平后，再判断是否调零。');return}if(!zeroOK()){feedback('warning','还没有对准0。','先空载调零，避免把初始偏差算进测量结果。');return}q.loaded=true;feedback('','物体已经悬空静止。','观察放大刻度，读出它受到的重力。');renderPractice()});
+$('teacherBtn').addEventListener('click',function(){var c=cfg();$('teacherForce').min=q.mode==='measure'?c.step:0;$('teacherForce').max=c.range;$('teacherForce').step=c.step;$('teacherForce').value=q.force;$('teacherPresetInfo').innerText='当前量程 '+fmt(c.range)+' N，每小格 '+fmt(c.step)+' N。请设置整小格数。';openDialog('teacherDialog')});$('teacherCancel').addEventListener('click',closeDialogs);$('teacherApply').addEventListener('click',function(){var c=cfg(),raw=$('teacherForce').value,f=Number(raw),min=q.mode==='measure'?c.step:0;if(raw===''||!Number.isFinite(f)||f<min||f>c.range){$('teacherPresetInfo').innerText='请输入 '+fmt(min)+'～'+fmt(c.range)+' N 范围内的力值。';return}if(Math.abs(f/c.step-Math.round(f/c.step))>.00001){$('teacherPresetInfo').innerText='这个位置不在刻度线上，请使用 '+fmt(c.step)+' N 的整数倍。';return}closeDialogs();makeQuestion(f);toast('教师设题已就绪。')});
+document.addEventListener('keydown',function(e){var dialog=document.querySelector('.dialog-backdrop.open');if(dialog){if(e.key==='Escape')closeDialogs();if(e.key==='Tab'){var items=Array.prototype.slice.call(dialog.querySelectorAll('button:not(:disabled),input,select,[tabindex="0"]')).filter(function(el){return el.offsetParent!==null});if(items.length){var first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}return}if(activePage!=='practice')return;if(e.key==='Enter'){e.preventDefault();if(q.answered)makeQuestion();else checkAnswer();return}var el=document.activeElement;if(el&&['INPUT','SELECT','TEXTAREA'].indexOf(el.tagName)!==-1)return;if(/^[0-9.]$/.test(e.key)){e.preventDefault();key(e.key)}else if(e.key==='Backspace'){e.preventDefault();key('back')}});
+/* Instrument selection, native-scale close-up, and cylindrical SVG fallback. */
+function forceText(v){var dp=cfg().step<.1?2:1;return (Math.round(v*Math.pow(10,dp))/Math.pow(10,dp)).toFixed(dp);}
+function syncInstrumentControls(){
+ var c=cfg();$('instrumentType').value=instrumentKind;$('practiceType').value=instrumentKind;$('structurePreset').value=q.preset;$('gaugePreset').value=q.preset;
+ $('forceSlider').max=c.range;$('forceSlider').step=c.step;$('forceSlider').setAttribute('aria-label','调节模拟重物的重力，0到'+c.range+'牛，每次'+c.step+'牛');
+ var labels='';for(var i=0;i<=5;i++)labels+='<span>'+fmt(c.range*i/5)+(i===0||i===5?' N':'')+'</span>';$('forceRangeLabels').innerHTML=labels;
+ $('closeupDivision').innerText='每小格 '+fmt(c.step)+' N';closeupLast='';
+}
+function changeInstrumentType(kind){
+ instrumentKind=kind==='tube'?'tube':'box';syncInstrumentControls();if(model)model.setInstrument(instrumentKind,cfg());
+ if(isFallback)renderFallback();renderPractice();renderStructureCloseup(model?model.force:modelForce);
+}
+function changeInstrumentPreset(preset){
+ if(!presets[preset])return;var hadWeight=modelForce>0;stopDemo();
+ // Unload before swapping range: never silently turn an overweight load into a smaller one.
+ modelForce=0;if(model){model.force=0;model.targetForce=0;}
+ q.preset=preset;if(model)model.setInstrument(instrumentKind,cfg());syncInstrumentControls();updateForce(0);makeQuestion();renderStructureCloseup(0);
+ toast((hadWeight?'已卸下重物，':'')+'换用 '+fmt(cfg().range)+' N 测力计，每小格 '+fmt(cfg().step)+' N。');
+}
+$('instrumentType').addEventListener('change',function(){changeInstrumentType(this.value);});
+$('practiceType').addEventListener('change',function(){changeInstrumentType(this.value);});
+$('structurePreset').addEventListener('change',function(){changeInstrumentPreset(this.value);});
+
+function scaleCloseup(c,read,kind,opt){
+ var o=opt||{},major=c.major,span=2*major,low=clamp(read-major,0,Math.max(0,c.range-span)),high=low+span;
+ if(o.zeroing){low=-major*.25;high=major*1.25;}
+ var W=300,H=360,top=55,bottom=304,pp=(bottom-top)/(high-low),fy=function(v){return top+(v-low)*pp;},
+ trueY=fy(read),shift=o.eye?-o.eye*c.step*pp*1.5:0,py=trueY+shift,isTube=kind==='tube',prefix=o.main?'sdetail':'pdetail',s='';
+ s='<svg viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="'+(isTube?'圆筒式':'条形盒式')+'测力计的同步刻度特写"><defs><linearGradient id="'+prefix+'steel" x1="0" x2="1"><stop stop-color="#536963"/><stop offset=".45" stop-color="#dce3dc"/><stop offset="1" stop-color="#7a9387"/></linearGradient><clipPath id="'+prefix+'clip"><rect x="20" y="30" width="270" height="302" rx="4"/></clipPath></defs><rect width="300" height="360" fill="white"/>';
+ if(isTube)s+='<rect x="63" y="6" width="178" height="332" rx="8" fill="#fff18a" stroke="#e4d46a"/>';
+ s+='<g font-family="Arial,sans-serif" font-size="20" fill="#6c8275" text-anchor="middle">'+(isTube?'<text x="216" y="26">N</text>':'<text x="49" y="26">N</text><text x="251" y="26">N</text>')+'</g><g clip-path="url(#'+prefix+'clip)">';
+ if(o.hint&&!o.zeroing){var base=clamp(Math.floor(read/major)*major,0,c.range-major);s+='<rect x="25" y="'+fy(base)+'" width="250" height="'+(major*pp)+'" rx="6" fill="#bfdedc" opacity=".23"/>';}
+ if(!isTube){s+='<rect x="144" y="31" width="13" height="301" rx="2" fill="#253d38"/><rect x="148" y="'+clamp(trueY,31,332)+'" width="5" height="'+Math.max(0,332-clamp(trueY,31,332))+'" fill="url(#'+prefix+'steel)"/>';}
+ var total=Math.round(c.range/c.step);
+ for(var i=0;i<=total;i++){
+  var v=round(i*c.step),y=fy(v);if(y<30||y>332)continue;
+  var big=Math.abs(v/major-Math.round(v/major))<.001,half=i%5===0,end=big?80:half?95:108;
+  if(isTube)s+='<path d="M85 '+y.toFixed(3)+'H'+(big?178:half?162:148)+'" stroke="#31473b" stroke-width="'+(big?2.5:1.6)+'"/>';
+  else s+='<path d="M135 '+y.toFixed(3)+'H'+end+' M166 '+y.toFixed(3)+'H'+(300-end)+'" stroke="#344e40" stroke-width="'+(big?2.5:1.7)+'"/>';
+  if(big){s+='<g fill="#183a2c" text-anchor="middle" font-family="Arial,sans-serif" font-size="31">';if(isTube)s+='<text x="214" y="'+(y+10)+'">'+fmt(v)+'</text>';else s+='<text x="48" y="'+(y+10)+'">'+fmt(v)+'</text><text x="252" y="'+(y+10)+'">'+fmt(v)+'</text>';s+='</g>';}
+ }
+ if(o.eye)s+='<path d="M92 '+trueY+'H'+(isTube?186:215)+'" stroke="#a6b6ab" stroke-width="4" stroke-dasharray="6 5"/>';
+ s+='<path d="M90 '+py.toFixed(3)+'H'+(isTube?186:219)+'" stroke="#c73f2b" stroke-width="6" stroke-linecap="round"/><path d="M94 '+(py-1.5).toFixed(3)+'H'+(isTube?183:216)+'" stroke="#f39873" stroke-width="1.4"/>';
+ s+='</g><text x="150" y="353" text-anchor="middle" font-size="13" font-family="Arial,Microsoft YaHei,sans-serif" fill="'+(o.eye?'#947040':'#819487')+'">'+(o.eye?'灰线是平视位置，红线是斜视位置':'读指针的中心线')+'</text></svg>';
+ return s;
+}
+function zoomSVG(){return scaleCloseup(cfg(),currentRead(),instrumentKind,{eye:q.eye,zeroing:q.mode==='measure'&&!q.loaded,hint:q.hint});}
+function renderStructureCloseup(value){
+ var k=[value.toFixed(4),q.preset,instrumentKind].join('|');if(k===closeupLast)return;closeupLast=k;
+ $('structureZoom').innerHTML=scaleCloseup(cfg(),value,instrumentKind,{main:true});
+ $('closeupValue').innerHTML=forceText(value)+' <small>N</small>';$('closeupDivision').innerText='每小格 '+fmt(cfg().step)+' N';
+}
+function updateWeightLabel(point,force){
+ var el=$('weightLabel'),rect=$('modelStage').getBoundingClientRect();el.hidden=modelForce<=0||force<.001||!!focusKey;
+ if(el.hidden)return;el.innerText='模拟重物 · '+forceText(force)+' N';
+ el.style.left=clamp(point[0]-el.offsetWidth/2,8,rect.width-el.offsetWidth-8)+'px';
+ el.style.top=clamp(point[1]+4,120,rect.height-el.offsetHeight-40)+'px';
+}
+$('closeupToggle').addEventListener('click',function(){var pane=$('structureCloseup'),collapsed=pane.classList.toggle('collapsed');this.innerText=collapsed?'+':'−';this.setAttribute('aria-expanded',String(!collapsed));this.setAttribute('aria-label',collapsed?'展开特写窗':'收起特写窗');if(model)model.dirty=true;if(isFallback)renderFallback();});
+(function(){
+ var pane=$('structureCloseup'),handle=$('closeupHandle'),drag=null;
+ function down(x,y){var pr=pane.getBoundingClientRect(),sr=$('modelStage').getBoundingClientRect();drag={x:x,y:y,left:pr.left-sr.left,top:pr.top-sr.top};}
+ function move(x,y){if(!drag)return;var sr=$('modelStage').getBoundingClientRect();pane.style.right='auto';pane.style.left=clamp(drag.left+x-drag.x,8,sr.width-pane.offsetWidth-8)+'px';pane.style.top=clamp(drag.top+y-drag.y,8,sr.height-pane.offsetHeight-8)+'px';pane.dataset.moved='1';if(model)model.dirty=true;if(isFallback)renderFallback();}
+ if(window.PointerEvent){handle.addEventListener('pointerdown',function(e){if(e.target.closest('button'))return;down(e.clientX,e.clientY);handle.setPointerCapture(e.pointerId);e.preventDefault();});handle.addEventListener('pointermove',function(e){move(e.clientX,e.clientY);});handle.addEventListener('pointerup',function(){drag=null;});handle.addEventListener('pointercancel',function(){drag=null;});}
+ else{handle.addEventListener('touchstart',function(e){if(e.target.closest('button'))return;down(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});handle.addEventListener('touchmove',function(e){if(drag){e.preventDefault();move(e.touches[0].clientX,e.touches[0].clientY);}},{passive:false});handle.addEventListener('touchend',function(){drag=null;});}
+ function fit(){if(!pane.dataset.moved)return;var sr=$('modelStage').getBoundingClientRect();if(sr.width<1)return;pane.style.left=clamp(parseFloat(pane.style.left)||8,8,sr.width-pane.offsetWidth-8)+'px';pane.style.top=clamp(parseFloat(pane.style.top)||8,8,sr.height-pane.offsetHeight-8)+'px';}
+ window.addEventListener('resize',fit);
+ $('resetModel').addEventListener('click',function(){pane.style.left='';pane.style.top='';pane.style.right='';delete pane.dataset.moved;pane.classList.remove('collapsed');$('closeupToggle').innerText='−';$('closeupToggle').setAttribute('aria-expanded','true');closeupLast='';renderStructureCloseup(0);});
+})();
+
+function svgLoad(c,F,dis,prefix){
+ var s='<g transform="translate(0,'+dis.toFixed(3)+')"><ellipse cx="0" cy="219" rx="1.8" ry="3.2" fill="none" stroke="url(#'+prefix+'steel)" stroke-width=".8"/><path d="M0 222v25" stroke="#83918a" stroke-width="1"/><ellipse cx="0" cy="247" rx="11.6" ry="2.2" fill="url(#'+prefix+'brass)" stroke="#9d782f" stroke-width=".3"/>';
+ for(var i=0;i<5;i++){var fill=clamp(F/c.range*5-i,0,1);if(fill<.0001)continue;var height=3.7*fill,Y=246-i*4-height;s+='<rect x="-11.2" y="'+Y+'" width="22.4" height="'+height+'" fill="url(#'+prefix+'brass)" stroke="#a7792f" stroke-width=".22"/><ellipse cx="0" cy="'+Y+'" rx="11.2" ry="1.8" fill="#e6c179" stroke="#ad8742" stroke-width=".25"/><ellipse cx="0" cy="'+Y+'" rx="1.2" ry=".5" fill="#82958d"/>';}
+ return s+'</g>';
+}
+function tubeGaugeSVG(c,opts){
+ var o=opts||{},F=o.force||0,error=o.error||0,stroke=96*F/c.range,zeroShift=96*error/c.range,dis=stroke+zeroShift,py=80+dis,
+ isX=o.mode==='xray',isE=o.mode==='explode',prefix=o.prefix||'tube',loaded=!!o.weight,H=o.frameHeight||355,W=isE?250:100,cx=isE?122:50;
+ var s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="圆筒弹簧测力计"><defs><linearGradient id="'+prefix+'yellow" x1="0" x2="1"><stop stop-color="#c4a820"/><stop offset=".25" stop-color="#fff461"/><stop offset=".7" stop-color="#e9cd2e"/><stop offset="1" stop-color="#c8ad22"/></linearGradient><linearGradient id="'+prefix+'steel" gradientUnits="userSpaceOnUse" x1="-5" x2="5"><stop stop-color="#5b6d69"/><stop offset=".27" stop-color="#dbe4df"/><stop offset=".5" stop-color="#fafefa"/><stop offset=".8" stop-color="#7b8e89"/><stop offset="1" stop-color="#485b54"/></linearGradient><linearGradient id="'+prefix+'glass" x1="0" x2="1"><stop stop-color="#8eb8bd" stop-opacity=".25"/><stop offset=".15" stop-color="#fff" stop-opacity=".3"/><stop offset=".35" stop-color="#d7eae0" stop-opacity=".02"/><stop offset=".88" stop-color="#bedad7" stop-opacity=".15"/><stop offset="1" stop-color="#76a1a6" stop-opacity=".3"/></linearGradient><linearGradient id="'+prefix+'brass" x1="0" x2="1"><stop stop-color="#a67832"/><stop offset=".45" stop-color="#e6bc6d"/><stop offset="1" stop-color="#b78736"/></linearGradient></defs><g transform="translate('+cx+',0)">';
+ // Fixed top support, moving spring lower end and rod.
+ s+='<path d="M-8 44Q-11 44-11 40V22C-11 7 11 7 11 22V40Q11 44 8 44" fill="none" stroke="url(#'+prefix+'steel)" stroke-width="1.6"/>';
+ var coil='',len=26+stroke,sy=52+zeroShift;for(var i=0;i<=300;i++){var t=i/300;coil+=(i?'L':'M')+(2.75*Math.sin(t*30*Math.PI*2)).toFixed(3)+','+(sy+len*t).toFixed(3);}
+ s+='<path d="M0 44V'+sy+'" stroke="#a0a89b" stroke-width=".8"/><path d="'+coil+'" fill="none" stroke="url(#'+prefix+'steel)" stroke-width=".68"/>';
+ s+='<g transform="translate(0,'+dis.toFixed(3)+')"><path d="M0 78v115" stroke="url(#'+prefix+'steel)" stroke-width="1.7"/><circle cx="0" cy="194" r="2.25" fill="none" stroke="url(#'+prefix+'steel)" stroke-width="1.1"/><path d="M0 192 C-2 196 2 201 4 204 C9 211 2 219-4 214 L-6.5 208.5" fill="none" stroke="url(#'+prefix+'steel)" stroke-width="1.6" stroke-linecap="round"/></g>';
+ s+='<g transform="translate('+(isE?-38:0)+',0)" opacity="'+(isX?.14:1)+'"><rect x="-6.2" y="69" width="12.4" height="111" rx=".7" fill="#fff177" stroke="#d1b83c" stroke-width=".2"/><text x="3.5" y="76" font-size="3.6" text-anchor="middle" font-family="Arial" fill="#17382d">N</text>';
+ var total=Math.round(c.range/c.step);for(i=0;i<=total;i++){var v=round(i*c.step),Y=80+96*v/c.range,big=Math.abs(v/c.major-Math.round(v/c.major))<.0001;s+='<path d="M-5.4 '+Y+'H'+(big?.3:i%5===0?-.4:-1.4)+'" stroke="#354736" stroke-width="'+(big?.3:.18)+'"/>';if(big)s+='<text x="3.7" y="'+(Y+1.25)+'" font-size="3.6" text-anchor="middle" font-family="Arial" fill="#17382d">'+fmt(v)+'</text>';}
+ s+='</g><ellipse cx="0" cy="'+py+'" rx="7.1" ry=".7" fill="none" stroke="#d9452b" stroke-width=".55"/><path d="M-6 '+py+'H6" stroke="#dc4428" stroke-width=".7"/>';
+ s+='<g transform="translate('+(isE?68:0)+',0)"><rect x="-9" y="43" width="18" height="142" rx="1.4" fill="url(#'+prefix+'glass)" stroke="#91b8b8" stroke-width=".4"/><path d="M-7.6 45v138M7.4 45v138" stroke="#fff" stroke-opacity=".78" stroke-width=".55"/></g>';
+ s+='<g transform="translate('+(isE?-75:0)+',0)" opacity="'+(isX?.35:1)+'"><rect x="-6.3" y="29" width="12.6" height="12" rx="2" fill="url(#'+prefix+'yellow)"/><rect x="-10.1" y="38" width="20.2" height="4.5" rx="1.3" fill="url(#'+prefix+'yellow)"/><rect x="-6.6" y="42" width="13.2" height="12" rx="1" fill="url(#'+prefix+'yellow)"/><rect x="-1.1" y="52" width="2.2" height="3.3" fill="#ebcb20"/>';
+ for(i=-4;i<=4;i++)s+='<path d="M'+i*1.1+' 31V37" stroke="#c5b22e" stroke-width=".3"/>';
+ s+='<rect x="-10.1" y="183" width="20.2" height="5" rx="1" fill="url(#'+prefix+'yellow)"/><rect x="-2.5" y="181" width="5" height="9" rx=".6" fill="url(#'+prefix+'yellow)"/></g>';
+ if(loaded)s+=svgLoad(c,F,dis,prefix);else if(F>0)s+='<path d="M0 '+(222+dis)+'v13m-3-3 3 3 3-3" fill="none" stroke="#bd8e48" stroke-width=".7"/>';
+ if(!isX&&!isE)s+='<path d="M10 '+py+'H42" stroke="#a6b9a9" stroke-dasharray="1.5 1.5" stroke-width=".4"/>';
+ return s+'</g></svg>';
+}
+
+/* Boot: independent reading engine continues even if 3D is unavailable. */
+try{model=new window.ForceModel($('modelCanvas'),selectPart);model.onRender=updateTags;model.onLost=enableFallback;model.render();updateTags(model.anchors())}catch(error){enableFallback()}
+window.addEventListener('resize',function(){if(isFallback)renderFallback();else if(model){model.resize();model.dirty=true}});
+var animationFrame=function(t){if(activePage==='structure'){if(autoDemo){var phase=(t-demoStart)/1000;var period=9;var u=(phase%period)/period,f=cfg().range*.4*(1-Math.cos(u*Math.PI*2));updateForce(f)}if(model)model.tick(t)}requestAnimationFrame(animationFrame)};requestAnimationFrame(animationFrame);makeQuestion(2.4);setPage('structure');selectPart('ring');setView('solid');syncInstrumentControls();renderStructureCloseup(0);
+window.ForceLab={getState:function(){return{page:activePage,force:modelForce,view:modelView,part:selectedPart,webgl:!!model,preset:q.preset,mode:q.mode,question:q.number,target:q.force,reading:currentRead(),zeroError:q.zeroError,zeroAdjust:q.zeroAdjust,loaded:q.loaded,eye:q.eye,answered:q.answered,correct:q.correct,division:cfg().step,range:cfg().range,instrument:instrumentKind,modelPreset:q.preset,camera:model?{zoom:model.zoom,targetZoom:model.targetZoom,yaw:model.yaw,targetYaw:model.targetYaw,pitch:model.pitch,targetPitch:model.targetPitch,centerY:model.centerY,frameHeight:model.frameHeight}:null,actualModelForce:model?model.force:modelForce,stretch:model?96*model.force/model.range:96*modelForce/cfg().range,meshNames:model?model.meshes.map(function(m){return m.name;}):[]}},setPage:setPage,setForce:updateForce,setView:setView};
+})();
+</script>
+</body></html>
