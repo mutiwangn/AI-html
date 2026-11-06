@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#edf3f7">
+<meta name="description" content="五上3.7评价月球小车：同步剖面诊断、实物视频慢镜取证与真实测试评价。单文件离线课堂工具。">
+<title>评价“月球小车” · 测试与改进</title>
+<style>:root{--ink:#172c44;--muted:#64788b;--line:#dce5ed;--blue:#147caa;--cyan:#167e88;--orange:#cd7338;--paper:#fff;--bg:#edf3f7;--shadow:0 8px 24px #18354c07;--font:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:var(--font);color:var(--ink);background:var(--bg);font-size:17px;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit}button{cursor:pointer;touch-action:manipulation;color:inherit}button:disabled{cursor:default;opacity:.45}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #168dba;outline-offset:3px}button{border:0}input[type=range]{width:100%;height:28px;accent-color:var(--blue);cursor:pointer;touch-action:none}input[type=range]::-webkit-slider-thumb{height:24px;width:24px}h1,h2,h3,p{margin:0}button,select,input{min-height:40px}svg{display:block}.app-header{height:84px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:18px;background:#fff;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}.brand>svg{width:51px;height:51px;padding:5px;border-radius:14px;background:var(--ink)}.brand h1{font-size:25px;font-weight:750;letter-spacing:.02em}.brand span{font-size:13px;letter-spacing:.08em;color:var(--muted);display:block;margin-top:3px}.brand b{font-weight:400;margin:0 7px}.tabs{display:flex;gap:7px;align-self:stretch;align-items:center}.tab{font-size:18px;min-height:48px;background:transparent;border-radius:10px;padding:9px 16px;font-weight:650;color:#5e7184;white-space:nowrap}.tab.active{background:#e7f2f7;color:#0f6c94}.tab-number{font-size:12px;vertical-align:2px;margin-right:7px;font-weight:500;opacity:.75}.icon-button{display:flex;align-items:center;justify-content:center;gap:7px;background:#f0f4f7;min-width:44px;min-height:44px;padding:10px 12px;border-radius:9px;font-size:15px;white-space:nowrap}.icon-button svg{width:21px;height:21px}main{height:calc(100% - 84px);padding:16px}.page{display:none;height:100%;min-height:0}.page.active{display:block}.sim-layout{display:grid;grid-template-columns:minmax(0,1fr) 302px;gap:15px;height:100%;min-height:0}.stage-card,.control-card,.video-card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.stage-card{display:flex;flex-direction:column;min-width:0;min-height:0}.stage-heading{padding:17px 22px 0;display:flex;align-items:center;justify-content:space-between;gap:15px}.eyebrow{font-size:13px;letter-spacing:.04em;color:var(--muted);margin-bottom:5px;display:block}.stage-heading h2{font-size:22px;line-height:1.3;font-weight:700}.pill{display:inline-flex;align-items:center;justify-content:center;font-size:13px;border-radius:100px;padding:6px 10px;white-space:nowrap;font-weight:600}.model-pill{background:#f3eadf;color:#90633c}.real-pill{background:#e5f4ef;color:#237458}.stage-wrap{min-height:0;flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:0 6px}.stage-wrap>svg{width:100%;height:100%;font-family:var(--font);user-select:none;-webkit-user-select:none;touch-action:none}.transport{display:flex;align-items:center;gap:10px;padding:9px 18px 8px;border-top:1px solid #e7edf2;flex-shrink:0}.primary{background:var(--blue);color:white;border-radius:9px;padding:12px 17px;min-height:46px;font-weight:650;white-space:nowrap;box-shadow:0 3px 6px #147caa13}.primary:active{transform:translateY(1px)}.play-symbol{display:inline-block;margin-right:8px;font-size:14px}.soft-button{display:inline-flex;justify-content:center;align-items:center;gap:7px;padding:10px 14px;min-height:44px;background:#f0f4f7;border:1px solid #dce6ed;border-radius:8px;white-space:nowrap;font-size:15px}.soft-button:hover{background:#e9f0f4}.text-button{padding:8px 6px;min-height:38px;background:transparent;color:#147caa;font-size:14px;font-weight:600}.timeline{flex:1;min-width:100px}.timeline label{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}.timeline output{color:var(--ink);font-variant-numeric:tabular-nums;font-size:16px;font-weight:600}.timeline input{height:24px;min-height:24px;display:block;margin:0}.speed-button{min-width:90px;font-size:14px}.stage-note{font-size:12px;color:#728496;text-align:center;padding:0 10px 7px;flex-shrink:0;line-height:1.5}.stage-note .text-button{font-size:12px;min-height:24px;padding:0 5px}.control-card{padding:17px 18px;display:flex;flex-direction:column;gap:0}.control-top .eyebrow{font-size:14px}.examples{display:flex;gap:6px;margin:7px 0 18px}.example{flex:1;background:#f1f5f8;border:1px solid transparent;border-radius:7px;min-height:41px;padding:6px 5px;font-size:15px}.example.selected{background:#edf5f8;border-color:#8eb6ca;color:#0d6b95;font-weight:650}.edit-heading{display:flex;align-items:center;gap:7px;padding-bottom:8px;border-bottom:1px solid #e6edf2}.edit-heading h2{font-size:20px}.edit-heading #change-count{margin-left:auto;font-size:12px;color:var(--muted)}.color-dot{display:inline-block;vertical-align:middle;width:10px;height:10px;border-radius:50%;flex-shrink:0}.before{background:var(--orange)}.after{background:var(--cyan)}.control-field{padding:14px 0 11px;border-bottom:1px solid #e6edf2}.control-field label{display:flex;align-items:center;justify-content:space-between;font-size:17px;font-weight:650}.control-field output{font-size:22px;color:var(--blue);font-variant-numeric:tabular-nums}.field-sub{font-size:12px;color:var(--muted);margin:3px 0 5px}.control-field input{margin:5px 0 0}.range-labels{display:flex;justify-content:space-between;color:#738596;font-size:12px}.segmented{display:flex;margin-top:10px;gap:6px}.segmented button{background:#f3f6f8;border:1px solid #dce5ec;border-radius:8px;flex:1;display:flex;justify-content:center;align-items:center;gap:5px;min-height:46px;font-size:14px;padding:5px 6px}.segmented button svg{width:22px;height:22px;flex-shrink:0}.segmented button.selected{background:#e7f3f3;border-color:#83babe;color:#176d75;font-weight:600}.control-actions{padding-top:12px;display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:2px}.control-actions .soft-button{width:100%;font-size:14px}.control-actions .text-button{min-height:30px;font-size:12px}.observe-prompt{display:flex;gap:9px;align-items:flex-start;padding:10px 11px;background:#f4f7f9;border-radius:9px;margin-top:auto;font-size:14px;line-height:1.5;color:#4c6376}.prompt-icon{background:#dbe9f0;color:#397a99;display:flex;width:20px;height:20px;align-items:center;justify-content:center;border-radius:50%;font-size:13px;font-weight:700;flex-shrink:0}.fixed-conditions{display:flex;flex-direction:column;margin-top:12px;padding-top:10px;border-top:1px solid #e5ebf1;gap:3px;text-align:center;font-size:12px;color:var(--muted)}.fixed-conditions strong{font-size:14px;font-weight:500;color:#566d7e}.fixed-conditions small{font-size:12px}.touch-target{cursor:pointer}.touch-target:focus{outline:none;filter:drop-shadow(0 0 3px #168dba)}.svg-number{font-variant-numeric:tabular-nums}.video-page{height:100%;display:flex;flex-direction:column;gap:14px;min-height:0}.page-heading{display:flex;justify-content:space-between;align-items:center;padding:1px 8px;gap:12px}.page-heading h2{font-size:24px;font-weight:700}.video-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;min-height:0;flex:1}.video-card{display:flex;flex-direction:column;min-height:0;padding:15px}.video-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.video-title h3{display:flex;gap:8px;align-items:center;font-size:20px}.file-label{position:relative;overflow:hidden;cursor:pointer}.file-label input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}.video-screen{position:relative;flex:1;min-height:130px;border-radius:10px;overflow:hidden;background:#152539}.video-screen video{width:100%;height:100%;position:absolute;inset:0;object-fit:contain}.video-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(ellipse at 50% 0%,#203b53,#142538);color:#97bbd0;pointer-events:none}.video-empty svg{width:100px;height:72px;opacity:.75}.video-empty strong{font-size:21px;color:#dcecf5;font-weight:500}.video-empty span{font-size:14px;color:#a3b8c7}.video-filename{font-size:12px;line-height:1.5;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:7px}.video-marks{display:grid;grid-template-columns:auto 1fr auto 1fr;align-items:center;gap:8px;margin-top:10px}.video-marks button{padding:8px 11px;font-size:14px;min-height:42px}.video-marks output{font-size:14px;font-variant-numeric:tabular-nums;color:#526a7b;text-align:center}.video-result{display:flex;align-items:center;justify-content:space-between;margin-top:6px;gap:6px;font-size:14px}.video-result strong{font-size:24px;color:var(--blue);margin-left:8px;font-variant-numeric:tabular-nums}.video-result .text-button{font-size:13px}.video-bottom{border-radius:13px;background:#fff;border:1px solid var(--line);overflow:hidden}.video-transport{border-top:0;padding-top:12px}.video-help{font-size:13px;color:var(--muted);padding:3px 18px 12px;line-height:1.5}.video-help.warning{color:#aa5d29}.modal-backdrop{position:fixed;inset:0;background:#18304566;backdrop-filter:blur(5px);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px}.modal-backdrop[hidden]{display:none}.modal{background:white;width:min(600px,100%);border-radius:18px;padding:25px;box-shadow:0 24px 70px #122c4c30;max-height:calc(100vh - 48px);overflow:auto}.modal-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.modal-title h2{font-size:25px}.modal-title .icon-button{font-size:27px}.modal>p{font-size:15px;color:var(--muted);line-height:1.6}.modal-field{display:block;font-size:18px;font-weight:600;margin-top:18px}.modal-field output{float:right;color:var(--blue)}.modal-field input{display:block;margin-top:8px}.model-explainer{background:#f4f7f9;border-radius:10px;padding:15px;margin-top:20px}.model-explainer h3{font-size:16px;margin-bottom:8px}.model-explainer p{font-size:13px;line-height:1.7;color:#5e7385;margin-bottom:9px}.model-explainer p:last-child{margin:0}.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);background:#172c44;color:white;padding:12px 20px;border-radius:11px;font-size:15px;box-shadow:0 6px 24px #142c4530;opacity:0;pointer-events:none;z-index:200;transition:opacity .15s,transform .15s;max-width:min(90vw,620px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:1600px){.app-header{height:92px;padding:0 32px}.brand h1{font-size:28px}.brand span{font-size:15px}.tab{font-size:21px;padding:12px 22px}main{height:calc(100% - 92px);padding:22px}.sim-layout{grid-template-columns:minmax(0,1fr) 340px;gap:20px}.control-card{padding:24px}.control-field{padding:20px 0 16px}.control-field label{font-size:20px}.examples{margin-bottom:25px}.control-field output{font-size:27px}.stage-heading{padding:22px 28px 0}.stage-heading h2{font-size:27px}.eyebrow{font-size:15px}.transport{padding:14px 22px 8px}.primary{font-size:20px;padding:14px 20px}.soft-button{font-size:17px}.stage-note{font-size:14px;padding-bottom:12px}.stage-note .text-button{font-size:14px}.observe-prompt{font-size:16px;padding:14px}.fixed-conditions strong{font-size:17px}.control-actions .soft-button{font-size:16px}.video-marks button{font-size:17px}.video-help{font-size:15px}}
+@media(max-width:1150px){.app-header{padding:0 16px;gap:10px;height:76px}.brand h1{font-size:22px}.brand>svg{width:44px;height:44px}.tab{font-size:16px;padding:10px 12px}.tab-number{display:none}.icon-button span{display:none}main{height:calc(100% - 76px);padding:12px}.sim-layout{grid-template-columns:minmax(0,1fr) 264px;gap:10px}.control-card{padding:14px}.stage-heading{padding:14px 16px 0}.stage-heading h2{font-size:19px}.stage-heading .eyebrow{font-size:12px}.model-pill{font-size:11px;padding:5px 8px}.transport{padding:8px 10px;gap:7px}.primary{font-size:15px;padding:11px 13px}.transport .soft-button{font-size:13px;padding:9px 10px}.speed-button{min-width:75px}.stage-note{font-size:11px;padding:0 8px 7px}.stage-note .text-button{font-size:11px}.control-field{padding:13px 0 10px}.control-field label{font-size:16px}.control-field output{font-size:21px}.examples{margin-bottom:14px}.observe-prompt{font-size:13px;padding:9px}.fixed-conditions{margin-top:9px;padding-top:8px}.video-card{padding:12px}.video-pair{gap:12px}.video-marks{grid-template-columns:1fr 1fr;gap:4px}.video-marks output{font-size:13px}.video-result{flex-wrap:wrap}.video-result strong{font-size:21px}.video-result .text-button{margin-left:auto;min-height:30px}.video-title{margin-bottom:8px}.video-help{font-size:12px}.page-heading h2{font-size:22px}}
+@media(max-width:850px){.app-header{height:112px;align-items:flex-start;position:relative;padding-top:12px}.brand h1{font-size:20px}.brand>svg{width:39px;height:39px;border-radius:11px}.brand span{font-size:11px}.tabs{position:absolute;bottom:0;left:12px;right:12px;justify-content:center;height:49px;gap:5px}.tab{flex:1;padding:9px 6px;min-height:42px;font-size:16px;border-radius:9px 9px 0 0}.icon-button{min-height:39px;min-width:39px;padding:8px}main{height:calc(100% - 112px);padding:8px}.sim-layout{display:flex;flex-direction:column;gap:8px}.stage-card{flex:1;min-height:260px}.stage-heading{padding:10px 12px 0;gap:6px}.stage-heading h2{font-size:17px}.stage-heading .eyebrow{display:none}.stage-wrap{padding:0}.stage-note{font-size:10px;padding-bottom:4px}.stage-note .text-button{font-size:10px}.transport{gap:5px;padding:6px 8px}.transport .primary{font-size:14px;padding:8px 10px;min-height:42px}.transport .soft-button{padding:7px 8px;min-height:40px;font-size:12px}.timeline label{font-size:11px}.timeline output{font-size:13px}.speed-button{min-width:70px}.control-card{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 12px;overflow:visible;flex-shrink:0;border-radius:11px}.control-top{grid-column:1;min-width:0}.control-top .eyebrow{font-size:11px}.examples{margin:2px 0 0;gap:3px}.example{font-size:11px;min-height:36px;padding:4px}.edit-heading{display:none}.control-field{padding:0;border:0}.control-field label{font-size:12px;min-height:28px}.control-field output{font-size:17px}.field-sub{font-size:9px;margin:0}.range-labels{font-size:10px}.control-field input{min-height:28px;height:28px;margin:0}.segmented{margin-top:4px;gap:3px}.segmented button{font-size:11px;min-height:37px;padding:3px;gap:1px}.segmented button svg{width:18px;height:18px}.control-actions{grid-column:1;padding:0;gap:0}.control-actions .soft-button{min-height:35px;font-size:10px;padding:5px}.control-actions .text-button{font-size:10px;min-height:25px;padding:2px}.observe-prompt{grid-column:2/4;grid-row:2;margin-top:0;font-size:12px;align-items:center;padding:6px}.fixed-conditions{display:none}.video-page{gap:8px;overflow:auto}.page-heading{padding:2px 5px;flex-wrap:wrap}.page-heading .eyebrow{font-size:11px}.page-heading h2{font-size:18px}.real-pill{font-size:11px}.video-pair{gap:8px;flex:1;min-height:350px}.video-card{padding:8px;border-radius:12px}.video-title h3{font-size:16px}.video-title .soft-button{font-size:12px;padding:6px;min-height:38px}.video-empty svg{width:65px}.video-empty strong{font-size:15px}.video-empty span{font-size:11px;padding:0 8px;text-align:center}.video-filename{font-size:10px}.video-marks button{font-size:11px;padding:6px}.video-marks output{font-size:11px}.video-result{font-size:11px}.video-result strong{font-size:18px;margin-left:4px}.video-result .text-button{font-size:11px}.video-transport{flex-wrap:wrap}.video-transport .timeline{min-width:140px}.video-transport #video-snapshot{margin-left:auto}.video-help{font-size:11px;padding:2px 10px 9px}}
+@media(max-width:500px){.stage-card{min-height:280px}.stage-heading h2{font-size:15px}.model-pill{font-size:10px;padding:4px 6px}.transport #replay{display:none}.timeline{min-width:60px}.control-card{gap:5px;padding:8px}.control-field label{font-size:11px}.control-field output{font-size:15px}.range-labels{font-size:9px}.segmented button svg{display:none}.examples button{font-size:10px}.control-top .eyebrow{font-size:10px}.video-pair{grid-template-columns:1fr;flex:none;min-height:0}.video-card{min-height:320px}.video-screen{min-height:190px}.video-marks{grid-template-columns:auto 1fr auto 1fr}.video-result{flex-wrap:nowrap}.video-empty svg{width:75px}.video-empty strong{font-size:18px}.video-empty span{font-size:12px}.video-transport{padding:10px}.video-transport .timeline{flex-basis:100%;order:5}.modal-backdrop{padding:12px}.modal{padding:18px;max-height:calc(100vh - 24px)}}
+@media(max-height:710px) and (min-width:851px){.app-header{height:66px}main{height:calc(100% - 66px);padding:10px}.stage-heading{padding-top:10px}.stage-heading .eyebrow{display:none}.stage-heading h2{font-size:20px}.control-card{padding:11px 14px}.examples{margin:4px 0 10px}.control-field{padding:8px 0}.control-field label{font-size:15px}.control-field output{font-size:19px}.control-actions{padding-top:8px}.control-actions .soft-button{min-height:38px}.observe-prompt{font-size:12px;padding:7px}.fixed-conditions{margin-top:7px;padding-top:6px}.fixed-conditions small{display:none}.transport{padding-top:5px;padding-bottom:5px}.stage-note{font-size:10px;padding-bottom:4px}.video-page{gap:8px}.page-heading .eyebrow{display:none}.video-card{padding:10px}.video-marks{margin-top:6px}.video-marks button{min-height:38px}.video-result .text-button{min-height:30px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.toast{transition:none}}
+@media(max-height:820px) and (min-width:851px){.control-card{padding:12px 14px}.control-top .eyebrow{font-size:12px}.examples{margin:4px 0 10px}.example{min-height:36px;font-size:14px}.edit-heading{padding-bottom:6px}.edit-heading h2{font-size:18px}.control-field{padding:9px 0}.control-field label{font-size:16px}.control-field output{font-size:20px}.field-sub{font-size:11px;margin:0 0 1px}.control-field input{min-height:24px;height:24px;margin:3px 0 0}.range-labels{font-size:11px}.segmented{margin-top:7px}.segmented button{min-height:40px;font-size:13px}.control-actions{padding-top:8px}.control-actions .soft-button{min-height:36px;font-size:13px}.control-actions .text-button{min-height:24px;font-size:11px;padding:3px}.observe-prompt{font-size:12px;padding:7px;margin-top:auto}.fixed-conditions{margin-top:6px;padding-top:6px;gap:2px}.fixed-conditions>span{display:none}.fixed-conditions strong{font-size:13px}.fixed-conditions small{font-size:11px}}
+
+#page-evidence { min-height: 0; }
+.ev-shell { color:#172c44; height:100%; min-height:0; display:grid; grid-template-rows:auto auto minmax(0,1fr) auto; gap:9px; font:inherit; }
+.ev-shell *, .ev-overlay * { box-sizing:border-box; }
+.ev-toolbar,.ev-toolbar-title,.ev-toolbar-actions,.ev-dialog-heading,.ev-dialog-actions { display:flex; align-items:center; gap:10px; }
+.ev-toolbar { justify-content:space-between; }
+.ev-toolbar-title { min-width:0; }
+.ev-group,.ev-btn,.ev-close,.ev-shell select,.ev-shell input,.ev-overlay input,.ev-keypad button { font-family:inherit; }
+.ev-group { min-height:44px; font-size:20px; font-weight:750; color:#172c44; padding:5px 30px 5px 13px; background:#fff; border:1px solid #c8d5de; border-radius:9px; }
+.ev-origin { display:flex; align-items:baseline; flex-wrap:wrap; gap:9px; }
+.ev-origin strong { font-size:20px; color:#166b79; }
+.ev-origin span { color:#647380; font-size:14px; }
+.ev-btn { background:#fff; border:1px solid #cbd8df; color:#172c44; border-radius:8px; min-height:44px; padding:8px 14px; font-size:16px; font-weight:650; cursor:pointer; touch-action:manipulation; }
+.ev-btn:hover { border-color:#147caa; background:#f0f8fa; }
+.ev-btn:focus-visible,.ev-shell button:focus-visible,.ev-shell input:focus-visible,.ev-shell select:focus-visible,.ev-overlay button:focus-visible,.ev-overlay input:focus-visible { outline:3px solid #43a9cc; outline-offset:2px; }
+.ev-quiet { background:transparent; border-color:transparent; color:#60717e; }
+.ev-standards-line { padding:1px 1px 2px; font-size:15px; line-height:1.4; color:#596b78; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ev-workspace { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:14px; min-height:0; }
+.ev-versions { display:grid; grid-template-columns:1fr 1fr; gap:10px; min-height:0; }
+.ev-version { min-width:0; min-height:0; padding:13px 12px; border:1px solid #d8e2e8; border-top:4px solid #df7b35; border-radius:12px; background:#fff; display:flex; flex-direction:column; gap:10px; overflow-y:auto; }
+.ev-version-after { border-top-color:#147caa; }
+.ev-version h3 { margin:0; font-size:20px; display:flex; align-items:center; justify-content:space-between; line-height:1.3; }
+.ev-version-code { color:#df7b35; font-size:15px; font-weight:700; background:#fff2e7; padding:3px 8px; border-radius:5px; }
+.ev-version-after .ev-version-code { background:#e8f5fa; color:#147caa; }
+.ev-meta-fields { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.ev-meta-label { font-size:15px; color:#4d626f; display:flex; justify-content:space-between; align-items:center; line-height:1.3; margin-bottom:4px; }
+.ev-metric-grade { color:#ad651e; font-size:14px; font-weight:700; }
+.ev-number { width:100%; min-height:44px; border:1px solid #cbd8df; border-radius:7px; background:#f9fbfc; color:#172c44; font-family:inherit; font-size:21px; font-weight:700; cursor:pointer; touch-action:manipulation; }
+.ev-number span { font-size:14px; font-weight:400; margin-left:4px; color:#607482; }
+.ev-consistency { display:flex; align-items:center; gap:6px; font-size:15px; white-space:nowrap; }
+.ev-consistency select { min-width:0; width:100%; min-height:38px; color:#243c4e; border:1px solid #d6e0e6; background:white; border-radius:6px; font-size:15px; padding:4px; }
+.ev-diff { width:100%; min-height:38px; border:1px solid #d6e0e6; border-radius:6px; padding:6px 8px; font-size:15px; color:#172c44; }
+.ev-section-caption { font-size:15px; line-height:1.25; color:#4d626f; margin:2px 0 0; display:flex; justify-content:space-between; }
+.ev-section-caption small { font-size:12px; }
+.ev-trials { display:flex; flex-direction:column; gap:7px; }
+.ev-trial { display:grid; grid-template-columns:23px minmax(60px,1fr) 61px 27px; align-items:center; gap:5px; }
+.ev-trial-number { display:inline-grid; place-items:center; height:23px; width:23px; border-radius:50%; background:#eaf0f4; color:#435d6e; font-size:14px; font-weight:700; }
+.ev-time { min-height:46px; padding:3px 3px; border:1px solid #cbd8df; border-radius:7px; color:#172c44; background:#f8fbfc; font-family:inherit; font-size:19px; line-height:1.15; font-weight:700; cursor:pointer; touch-action:manipulation; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.ev-time small { font-size:10px; color:#147caa; font-weight:500; line-height:1.1; }
+.ev-time[disabled] { color:#7f8c95; cursor:default; background:#f4f6f8; }
+.ev-fail { min-height:46px; padding:5px 2px; background:white; border:1px solid #d1dce3; border-radius:7px; color:#5b6f7c; font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; touch-action:manipulation; }
+.ev-fail[aria-pressed="true"] { color:#a44625; background:#fff0e9; border-color:#dc936f; }
+.ev-trial-grade { font-size:14px; font-weight:700; color:#aa641e; text-align:center; }
+.ev-ratings { margin-top:auto; display:grid; grid-template-columns:1fr 1fr; gap:8px; padding-top:4px; }
+.ev-ratings select { width:100%; min-height:42px; min-width:0; border:1px solid #d4dfe5; border-radius:6px; padding:4px; background:white; color:#314c5d; font-size:14px; }
+.ev-insight { min-width:0; min-height:0; border:1px solid #d8e2e8; border-radius:12px; background:#f8fbfc; padding:12px 14px; display:grid; grid-template-rows:auto minmax(135px,1fr) auto auto auto; gap:8px; overflow-y:auto; }
+.ev-chart-heading { display:flex; align-items:center; justify-content:space-between; gap:9px; }
+.ev-chart-heading h2 { margin:0; font-size:20px; }
+.ev-chart-key { white-space:nowrap; color:#536976; font-size:14px; display:flex; align-items:center; gap:5px; }
+.ev-dot { width:9px; height:9px; display:inline-block; border-radius:50%; }
+.ev-dot-before { background:#df7b35; }
+.ev-dot-after { background:#147caa; margin-left:5px; }
+.ev-chart { min-height:135px; position:relative; }
+.ev-chart svg { width:100%; height:100%; display:block; overflow:visible; }
+.ev-summary { display:flex; justify-content:space-between; align-items:center; gap:5px; font-size:17px; font-weight:700; }
+.ev-summary span:first-child { color:#b86728; }
+.ev-summary span:last-child { color:#147caa; }
+.ev-condition-box { padding:7px 0 0; border-top:1px solid #dbe5e9; }
+.ev-condition-controls { display:grid; grid-template-columns:1fr 1fr 1fr; gap:5px; }
+.ev-condition-controls select { min-height:38px; width:100%; min-width:0; border:1px solid #d0dde4; border-radius:6px; background:white; color:#486170; font-size:13px; padding:3px; }
+.ev-condition-note { font-size:13px; line-height:1.4; margin:5px 0 0; color:#7d622f; min-height:18px; }
+.ev-condition-note.ev-ready { color:#216e68; }
+.ev-reflections { display:flex; flex-direction:column; gap:6px; padding-top:2px; }
+.ev-reflections label { display:grid; grid-template-columns:70px 1fr; align-items:center; gap:6px; font-size:15px; color:#405b6b; }
+.ev-reflections input { min-width:0; width:100%; min-height:38px; border:1px solid #d5e0e6; background:#fff; border-radius:6px; padding:6px 8px; font-size:15px; color:#172c44; }
+.ev-reflections input::placeholder { color:#82919b; font-size:13px; }
+.ev-footer { display:flex; justify-content:space-between; gap:10px; color:#6b7f8d; font-size:12px; line-height:1.4; padding:0 2px; }
+.ev-overlay[hidden],.ev-shell [hidden] { display:none!important; }
+.ev-overlay { position:fixed; inset:0; z-index:500; padding:18px; background:rgba(19,37,52,.4); display:grid; place-items:center; color:#172c44; font-family:inherit; }
+.ev-dialog { width:min(100%,540px); max-height:calc(100vh - 36px); overflow-y:auto; border:1px solid #cfdae1; border-radius:16px; padding:23px; background:#fff; box-shadow:0 20px 70px rgba(12,31,44,.22); }
+.ev-dialog h2 { margin:0; font-size:24px; }
+.ev-dialog-heading { justify-content:space-between; }
+.ev-close { border:0; background:#edf3f6; color:#3e5b6c; border-radius:8px; height:40px; width:40px; font-size:28px; cursor:pointer; }
+.ev-dialog-note { font-size:15px; line-height:1.6; color:#617685; margin:13px 0; }
+.ev-dialog-actions { justify-content:flex-end; margin-top:17px; }
+.ev-primary { background:#147caa; border-color:#147caa; color:#fff; }
+.ev-primary:hover { background:#116b93; color:white; }
+.ev-danger { background:#ad4c2c; color:white; border-color:#ad4c2c; }
+.ev-number-dialog { max-width:370px; }
+.ev-number-readout { display:flex; align-items:center; gap:10px; margin:18px 0 14px; }
+.ev-number-readout input { width:100%; min-width:0; font-size:35px; text-align:right; border:1px solid #b8cdd9; border-radius:9px; height:60px; padding:8px 12px; color:#172c44; }
+.ev-number-readout span { font-size:22px; min-width:24px; }
+.ev-keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+.ev-keypad button { min-height:50px; border:1px solid #cedbe3; border-radius:9px; background:#f5f9fb; color:#172c44; font-size:24px; font-weight:600; cursor:pointer; touch-action:manipulation; }
+.ev-keypad button:active { background:#d7edf5; }
+.ev-standard-fields { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.ev-standard-fields label>span { display:block; font-size:15px; margin-bottom:6px; color:#4a6270; }
+.ev-standard-fields label>div { display:flex; gap:7px; align-items:center; }
+.ev-standard-fields input { width:100%; min-width:0; height:44px; border:1px solid #c8d8e1; border-radius:7px; padding:7px 9px; font-size:20px; color:#172c44; }
+.ev-standard-fields b { color:#657c8b; font-size:15px; font-weight:500; }
+.ev-standard-load input { font-size:16px; }
+.ev-rubric { margin-top:16px; border-radius:9px; background:#f1f7fa; padding:10px 13px; }
+.ev-rubric p { margin:5px 0; font-size:14px; line-height:1.55; }
+.ev-reset-dialog { max-width:420px; }
+@media (min-width:1600px) { .ev-workspace { gap:20px; } .ev-version { padding:17px; gap:15px; } .ev-version h3,.ev-chart-heading h2 { font-size:24px; } .ev-insight { padding:17px 20px; gap:11px; } .ev-number,.ev-time { min-height:51px; font-size:24px; } .ev-fail { min-height:51px; font-size:16px; } .ev-trial { grid-template-columns:27px minmax(70px,1fr) 75px 34px; } .ev-meta-label,.ev-consistency,.ev-reflections label,.ev-reflections input { font-size:18px; } .ev-reflections label { grid-template-columns:82px 1fr; } .ev-reflections input { min-height:44px; } .ev-condition-controls select { font-size:16px; min-height:42px; } .ev-condition-note,.ev-footer { font-size:14px; } }
+@media (max-width:1120px) { .ev-workspace { grid-template-columns:minmax(0,1.28fr) minmax(0,1fr); gap:10px; } .ev-versions { gap:7px; } .ev-version { padding:10px 8px; gap:9px; } .ev-insight { padding:10px; gap:7px; } .ev-trial { grid-template-columns:20px minmax(48px,1fr) 55px 23px; gap:3px; } .ev-trial-number { width:20px; height:20px; font-size:13px; } .ev-time { font-size:17px; } .ev-fail { font-size:13px; } .ev-trial-grade { font-size:12px; } .ev-chart-heading h2 { font-size:18px; } .ev-chart-key { font-size:12px; gap:3px; } .ev-reflections label { grid-template-columns:62px 1fr; font-size:14px; } .ev-reflections input { font-size:14px; } .ev-condition-controls select { font-size:12px; } .ev-origin span { font-size:12px; } .ev-footer { font-size:11px; } }
+@media (max-height:720px) and (min-width:900px) { .ev-shell { gap:6px; } .ev-version { gap:7px; padding:8px; } .ev-insight { gap:5px; padding:8px 10px; grid-template-rows:auto minmax(110px,1fr) auto auto auto; } .ev-chart { min-height:110px; } .ev-number { min-height:40px; } .ev-time,.ev-fail { min-height:40px; } .ev-trials { gap:5px; } .ev-ratings select { min-height:38px; } .ev-reflections input { min-height:34px; } .ev-reflections { gap:4px; } }
+@media (max-width:760px) { .ev-shell { height:100%; overflow-y:auto; grid-template-rows:auto auto auto auto; padding-bottom:10px; } .ev-toolbar { flex-wrap:wrap; gap:8px; } .ev-toolbar-actions { gap:5px; } .ev-btn { font-size:14px; padding:8px 10px; } .ev-workspace { grid-template-columns:1fr; } .ev-version { overflow:visible; padding:12px 9px; } .ev-insight { min-height:480px; overflow:visible; } .ev-chart { min-height:175px; } .ev-standards-line { white-space:normal; font-size:13px; } .ev-footer { flex-direction:column; gap:3px; } .ev-origin strong { font-size:18px; } .ev-version h3 { font-size:18px; } .ev-meta-label { font-size:13px; } .ev-consistency { font-size:13px; } .ev-consistency select { font-size:13px; } .ev-trial { grid-template-columns:18px minmax(40px,1fr) 51px 21px; gap:3px; } .ev-time { font-size:16px; } .ev-ratings { grid-template-columns:1fr; gap:5px; } .ev-ratings select { font-size:14px; } .ev-dialog { padding:18px; } }
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="brand"><svg viewBox="0 0 54 44" aria-hidden="true"><path d="M13 25h30l-4-12H21L13 25Z" fill="#fff" opacity=".94"/><path d="m20 13-2-7h21l2 7M22 6l2 7m7-7 2 7M16 25v8m23-8v8" fill="none" stroke="#93e4ed" stroke-width="2"/><circle cx="16" cy="34" r="6" fill="none" stroke="#fff" stroke-width="3"/><circle cx="39" cy="34" r="6" fill="none" stroke="#fff" stroke-width="3"/></svg><div><h1>评价“月球小车”</h1><span>五上 3.7 <b>·</b> 测试与改进</span></div></div>
+  <nav class="tabs" aria-label="课堂工具"><button class="tab active" data-page="sim" aria-current="page"><span class="tab-number">01</span>剖面诊断</button><button class="tab" data-page="video"><span class="tab-number">02</span>慢镜取证</button><button class="tab" data-page="evidence"><span class="tab-number">03</span>实测评价</button></nav>
+  <button class="icon-button" id="fullscreen" title="全屏展示" aria-label="全屏展示"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>全屏</span></button>
+</header>
+<main>
+<section id="page-sim" class="page active" aria-label="剖面诊断">
+ <div class="sim-layout">
+  <div class="stage-card">
+   <div class="stage-heading"><div><p class="eyebrow">让看不清的过程，成为能比较的证据</p><h2>同一片沙坑，改动后有什么不同？</h2></div><span class="pill model-pill">教学模型</span></div>
+   <div class="stage-wrap"><svg id="simulation" viewBox="0 0 1000 570" role="img" aria-label="改进前与改进后小车同步运动、车轮接地点放大和俯视轨迹"></svg></div>
+   <div class="transport">
+    <button class="primary" id="play"><span class="play-symbol">▶</span><span id="play-label">同步试跑</span></button>
+    <button class="soft-button" id="replay" aria-label="回到开始">重看</button>
+    <button class="soft-button speed-button" id="speed" aria-label="切换回放速度">正常速度</button>
+    <div class="timeline"><label for="scrub">共同时间 <output id="time-label">0.00 s</output></label><input type="range" id="scrub" min="0" max="20" step="0.02" value="0" aria-label="拖动时间同步回放两辆小车"></div>
+   </div>
+   <p class="stage-note">小车与沙坑均为地球课堂模型；数值用于解释趋势，不能预测实物成绩。<button class="text-button" id="model-open">条件与模型</button></p>
+  </div>
+  <aside class="control-card" aria-label="改进小车">
+   <div class="control-top"><span class="eyebrow">选一辆待改进的样车</span><div class="examples" role="group" aria-label="选择样车"><button data-case="power" class="example selected" aria-pressed="true">样车 1</button><button data-case="slip" class="example" aria-pressed="false">样车 2</button><button data-case="veer" class="example" aria-pressed="false">样车 3</button></div></div>
+   <div class="edit-heading"><span class="color-dot after"></span><h2>改进后</h2><span id="change-count">尚未改动</span></div>
+   <div class="control-field" id="panel-control"><label for="incidence">太阳能板 <output id="incidence-output">65°</output></label><div class="field-sub">对光偏角 · 0°为正对光线</div><input id="incidence" type="range" min="0" max="80" step="1" value="65"><div class="range-labels"><span>正对</span><span>偏斜</span></div></div>
+   <div class="control-field" id="grip-control"><label>驱动轮表面</label><div class="segmented" role="group" aria-label="驱动轮表面"><button data-grip="smooth" class="selected" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="3"/></svg>平滑轮</button><button data-grip="rubber" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="3 2"/></svg>套橡胶圈</button></div></div>
+   <div class="control-field" id="axle-control"><label for="axle">车轴偏角 <output id="axle-output">0°</output></label><input id="axle" type="range" min="-8" max="8" step="1" value="0"><div class="range-labels"><span>向左偏</span><span>对正</span><span>向右偏</span></div></div>
+   <div class="control-actions"><button class="soft-button" id="keep-baseline">保留这版为改进前</button><button class="text-button" id="reset-case">还原样车</button></div>
+   <div class="observe-prompt"><span class="prompt-icon">?</span><p id="observe-question">轮子转了多少？车身前进了多少？先试跑，再寻找线索。</p></div>
+   <div class="fixed-conditions"><span>共同条件</span><strong id="condition-summary">80 g 车身 + 20 g 载物</strong><small id="condition-detail">同一沙坑 · 同一光照</small></div>
+  </aside>
+ </div>
+</section>
+<section id="page-video" class="page" aria-label="实物视频慢镜取证">
+ <div class="video-page">
+  <div class="page-heading"><div><p class="eyebrow">把自己的测试，带回课堂细看</p><h2>同一段过程，并排慢放</h2></div><span class="pill real-pill">实物视频 · 仅在本机处理</span></div>
+  <div class="video-pair">
+   <article class="video-card" data-slot="before"><div class="video-title"><h3><span class="color-dot before"></span>改进前</h3><label class="soft-button file-label">导入视频<input type="file" id="video-before-file" accept="video/*"></label></div><div class="video-screen"><video id="video-before" playsinline preload="metadata" controls></video><div class="video-empty" id="empty-before"><svg viewBox="0 0 100 80" aria-hidden="true"><rect x="10" y="12" width="80" height="56" rx="9" fill="none" stroke="currentColor" stroke-width="3"/><path d="m43 28 20 13-20 13Z" fill="currentColor"/></svg><strong>放入第一次测试</strong><span>拍到小车、车轮和起终点</span></div></div><p class="video-filename" id="filename-before">可从手机或平板选择已拍摄的视频</p><div class="video-marks"><button class="soft-button" data-mark="start" data-slot="before">此刻为起点</button><output id="start-before">未标记</output><button class="soft-button" data-mark="end" data-slot="before">此刻为终点</button><output id="end-before">未标记</output></div><div class="video-result"><span>人工标点用时 <strong id="elapsed-before">—</strong></span><button class="text-button" data-send="before">加入实测记录 ↗</button></div></article>
+   <article class="video-card" data-slot="after"><div class="video-title"><h3><span class="color-dot after"></span>改进后</h3><label class="soft-button file-label">导入视频<input type="file" id="video-after-file" accept="video/*"></label></div><div class="video-screen"><video id="video-after" playsinline preload="metadata" controls></video><div class="video-empty" id="empty-after"><svg viewBox="0 0 100 80" aria-hidden="true"><rect x="10" y="12" width="80" height="56" rx="9" fill="none" stroke="currentColor" stroke-width="3"/><path d="m43 28 20 13-20 13Z" fill="currentColor"/></svg><strong>放入改进后的测试</strong><span>尽量保持载重、坑道和光照相同</span></div></div><p class="video-filename" id="filename-after">视频不会上传；重新打开网页需重新导入</p><div class="video-marks"><button class="soft-button" data-mark="start" data-slot="after">此刻为起点</button><output id="start-after">未标记</output><button class="soft-button" data-mark="end" data-slot="after">此刻为终点</button><output id="end-after">未标记</output></div><div class="video-result"><span>人工标点用时 <strong id="elapsed-after">—</strong></span><button class="text-button" data-send="after">加入实测记录 ↗</button></div></article>
+  </div>
+  <div class="video-bottom"><div class="transport video-transport"><button class="primary" id="video-play">▶ 同步回放</button><button class="soft-button" id="video-reset">回到起点</button><button class="soft-button" id="video-speed">0.5× 慢放</button><div class="timeline"><label for="video-scrub">距各自起点 <output id="video-time">0.00 s</output></label><input type="range" id="video-scrub" min="0" max="20" step="0.02" value="0" aria-label="同步定位两段视频"></div><button class="soft-button" id="video-snapshot">保存当前对照图</button></div><p class="video-help" id="video-message" role="status">先用各自的视频进度条找到同一判定位置，分别标记起点和终点，再同步回看。未通过的测试请在实测评价中记为“未通过”。</p></div>
+ </div>
+</section>
+<section id="page-evidence" class="page" aria-label="实测评价">
+  <div class="ev-shell">
+    <div class="ev-toolbar">
+      <div class="ev-toolbar-title">
+        <select id="ev-group" class="ev-group" aria-label="选择记录的小组"><option value="0">第1组</option><option value="1">第2组</option><option value="2">第3组</option><option value="3">第4组</option></select>
+        <div class="ev-origin"><strong>实物测得</strong><span>手动记录 · 视频标点</span></div>
+      </div>
+      <div class="ev-toolbar-actions"><button type="button" class="ev-btn" data-ev-action="standards">约定标准</button><button type="button" class="ev-btn" data-ev-action="export">导出记录</button><button type="button" class="ev-btn ev-quiet" data-ev-action="reset">重填本组</button></div>
+    </div>
+    <div id="ev-standards-line" class="ev-standards-line"></div>
+    <div class="ev-workspace">
+      <div id="ev-versions" class="ev-versions"></div>
+      <aside class="ev-insight" aria-label="改进前后证据比较">
+        <div class="ev-chart-heading"><h2>三次测试，一起看</h2><span class="ev-chart-key"><i class="ev-dot ev-dot-before"></i>改前 <i class="ev-dot ev-dot-after"></i>改后</span></div>
+        <div id="ev-chart" class="ev-chart" role="img" aria-label="尚未记录真实测试"></div>
+        <div id="ev-summary" class="ev-summary" aria-live="polite"></div>
+        <div class="ev-condition-box">
+          <div class="ev-condition-controls">
+            <select data-ev-condition="load" aria-label="前后载重是否相同"><option value="unknown">载重未核对</option><option value="same">载重相同</option><option value="different">载重不同</option></select>
+            <select data-ev-condition="track" aria-label="前后坑道是否相同"><option value="unknown">坑道未核对</option><option value="same">坑道相同</option><option value="different">坑道不同</option></select>
+            <select data-ev-condition="light" aria-label="前后光照是否相同"><option value="unknown">光照未核对</option><option value="same">光照相同</option><option value="different">光照不同</option></select>
+          </div>
+          <p id="ev-condition-note" class="ev-condition-note"></p>
+        </div>
+        <div class="ev-reflections" aria-label="问题、原因与改进记录">
+          <label><span>发现问题</span><input data-ev-note="problem" maxlength="120" placeholder="看到了什么？" autocomplete="off"></label>
+          <label><span>可能原因</span><input data-ev-note="cause" maxlength="120" placeholder="你的解释是……" autocomplete="off"></label>
+          <label><span>本次只改</span><input data-ev-note="change" maxlength="120" placeholder="改了哪一处？" autocomplete="off"></label>
+          <label><span>复测发现</span><input data-ev-note="finding" maxlength="120" placeholder="哪些记录支持你的判断？" autocomplete="off"></label>
+        </div>
+      </aside>
+    </div>
+    <div class="ev-footer"><span id="ev-save-state" aria-live="polite">记录保存在本机</span><span>圆点数字＝测试次序；每次独立评价，不取最快一次。</span></div>
+  </div>
+
+  <div id="ev-number-dialog" class="ev-overlay" role="dialog" aria-modal="true" aria-labelledby="ev-number-title" hidden>
+    <div class="ev-dialog ev-number-dialog">
+      <div class="ev-dialog-heading"><h2 id="ev-number-title">记录数值</h2><button class="ev-close" data-ev-action="close" type="button" aria-label="关闭数值输入">×</button></div>
+      <label class="ev-number-readout"><input id="ev-number-value" type="text" inputmode="decimal" autocomplete="off" aria-label="输入测得的数值"><span id="ev-number-unit"></span></label>
+      <div class="ev-keypad" aria-label="触控数字键盘"><button type="button" data-ev-key="7">7</button><button type="button" data-ev-key="8">8</button><button type="button" data-ev-key="9">9</button><button type="button" data-ev-key="4">4</button><button type="button" data-ev-key="5">5</button><button type="button" data-ev-key="6">6</button><button type="button" data-ev-key="1">1</button><button type="button" data-ev-key="2">2</button><button type="button" data-ev-key="3">3</button><button type="button" data-ev-key=".">.</button><button type="button" data-ev-key="0">0</button><button type="button" data-ev-key="back" aria-label="删除末位">⌫</button></div>
+      <p id="ev-number-error" class="ev-dialog-note" aria-live="polite">填入实测数值；空白表示待测。</p>
+      <div class="ev-dialog-actions"><button type="button" class="ev-btn" data-ev-action="number-clear">设为待测</button><button type="button" class="ev-btn ev-primary" data-ev-action="number-save">记下数值</button></div>
+    </div>
+  </div>
+
+  <div id="ev-standards-dialog" class="ev-overlay" role="dialog" aria-modal="true" aria-labelledby="ev-standards-title" hidden>
+    <div class="ev-dialog ev-standards-dialog">
+      <div class="ev-dialog-heading"><h2 id="ev-standards-title">全班共同约定</h2><button class="ev-close" data-ev-action="close" type="button" aria-label="关闭评价标准">×</button></div>
+      <p class="ev-dialog-note">初始值参考教材第86、91页示例。先讨论标准，再测试；修改后对各组、两版记录一起生效。</p>
+      <div class="ev-standard-fields">
+        <label><span>空车质量上限</span><div><input id="ev-standard-mass" type="number" min="1" max="10000" step="1" inputmode="decimal"><b>g</b></div></label>
+        <label><span>材料预算上限</span><div><input id="ev-standard-cost" type="number" min="0" max="10000" step="1" inputmode="decimal"><b>元</b></div></label>
+        <label><span>快速通过用时</span><div><input id="ev-standard-time" type="number" min="0.1" max="999" step="0.1" inputmode="decimal"><b>s</b></div></label>
+        <label class="ev-standard-load"><span>约定载重</span><input id="ev-standard-load" type="text" maxlength="50" placeholder="例如：同一块橡皮"></label>
+      </div>
+      <div class="ev-rubric"><p><b>质量、费用</b>　符合上限 3★ · 超过 1★</p><p><b>每次过坑</b>　规定用时内 5★ · 超时通过 4★ · 未通过 2★</p><p><b>合作 / 外观</b>　由小组评价；合作好 3★ / 一般 2★，外观好 2★ / 一般 1★。</p></div>
+      <p id="ev-standard-error" class="ev-dialog-note" aria-live="polite">100元是课堂材料预算示例，不是市场报价。质量g与重力N分开记录。</p>
+      <div class="ev-dialog-actions"><button type="button" class="ev-btn" data-ev-action="close">取消</button><button type="button" class="ev-btn ev-primary" data-ev-action="standards-save">采用这些标准</button></div>
+    </div>
+  </div>
+
+  <div id="ev-reset-dialog" class="ev-overlay" role="dialog" aria-modal="true" aria-labelledby="ev-reset-title" hidden>
+    <div class="ev-dialog ev-reset-dialog"><h2 id="ev-reset-title">重填这一组？</h2><p id="ev-reset-description" class="ev-dialog-note"></p><div class="ev-dialog-actions"><button class="ev-btn" data-ev-action="close" type="button">保留记录</button><button class="ev-btn ev-danger" data-ev-action="reset-confirm" type="button">清空本组记录</button></div></div>
+  </div>
+</section>
+
+</main>
+<div class="modal-backdrop" id="model-modal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="model-title"><div class="modal-title"><h2 id="model-title">共同测试条件</h2><button class="icon-button" id="model-close" aria-label="关闭">×</button></div><p>两辆车使用相同条件。改变条件后，两版都重新计算。</p><label class="modal-field" for="light">光照强度（相对值） <output id="light-output">100%</output><input id="light" type="range" min="40" max="100" step="5" value="100"></label><label class="modal-field" for="slope">最大坡角 <output id="slope-output">8°</output><input id="slope" type="range" min="4" max="14" step="1" value="8"></label><div class="model-explainer"><h3>这个模型解释什么？</h3><p>模拟地球课堂中的太阳能玩具车。光照和板角影响供能，轮面抓地限制推力，坡度和滚动阻力影响前进；车轴偏斜改变路线。</p><p>空车 80 g，载物 20 g，起终点相距 0.80 m。侧视坑深放大 1.5 倍，俯视横向位置经过压缩示意，测试道边界为左右各 12 cm。参数未经真实套件标定；面板通过理想铰接保持设定对光偏角。未模拟松沙下陷、部件磨损、真实电路和全部失效原因。</p><p>橡胶圈以抓地参数变化表示，不代表所有轮面在所有沙地都更好。请用实物复测检验改进。</p></div></section></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>/*
+ * RoverModel — classroom solar toy-rover trend model, v1.0.
+ * All distances are metres, time seconds, forces newtons, angles radians
+ * in frames (configuration incidence/axle/environment.slope are degrees).
+ *
+ * This is NOT measured data and NOT a lunar surface simulation.
+ * Effective sunlight q = light * cos(incidence), incidence measured from
+ * the panel NORMAL. Diffuse light, panel IV curves, shadows and heating
+ * are omitted; stall force = 0.36*q N and free rim speed = 0.24*sqrt(q)
+ * m/s are deliberately chosen educational parameters, not kit ratings.
+ * The approximate DC-motor torque-speed line is evaluated quasi-statically.
+ * Contact force is limited by mu*N on the driven axle (60% of total load).
+ * Above that limit, the wheel spins faster than the vehicle; no-slip wheel
+ * speed otherwise follows body speed. Motor/wheel rotational inertia,
+ * suspension, soil sinkage and load transfer are omitted. Rolling/bearing
+ * resistance and an equivalent speed loss represent a shallow classroom
+ * sand course. At rest the actual resisting reaction is solved separately
+ * from the resistance that would have to be overcome to move forward.
+ *
+ * Beam-incidence geometry: Sandia PVPMC / IEA PVPS SAND2017-2570-R,
+ * https://pvpmc.sandia.gov/app/uploads/sites/243/2022/10/Report-IEA-PVPS-T13-06-2017_PV_Performance_Modeling_Methods_and_Practices_SAND2017-2570-R.pdf
+ * DC motor trend: maxon, DC and EC motor key information,
+ * https://www.maxongroup.com/medias/sys_master/8815460712478.pdf
+ * These sources support the qualitative mechanism, NOT this model's
+ * numerical parameter choices or predictions for any student's vehicle.
+ */
+(function (root) {
+  'use strict';
+
+  var P = {
+    gravity: 9.8,
+    routeLength: 0.8,
+    pitStart: 0.18,
+    pitEnd: 0.66,
+    wheelRadius: 0.025,
+    wheelbase: 0.14,
+    drivenLoadFraction: 0.60,
+    smoothGrip: 0.18,
+    rubberGrip: 0.72,
+    rollingCoefficient: 0.06,
+    startingCoefficient: 0.075,
+    velocityResistance: 0.60,
+    referenceStallForce: 0.36,
+    referenceFreeSpeed: 0.24,
+    laneHalfWidth: 0.12,
+    maxTime: 20,
+    dt: 1 / 120
+  };
+  var RAD = Math.PI / 180;
+
+  function clamp(x, lo, hi) { return Math.max(lo, Math.min(hi, x)); }
+  function numeric(x, fallback) { return typeof x === 'number' && isFinite(x) ? x : fallback; }
+  function configOf(c) {
+    c = c || {};
+    return {
+      incidence: clamp(numeric(c.incidence, 0), 0, 80),
+      grip: c.grip === 'smooth' ? 'smooth' : 'rubber',
+      axle: clamp(numeric(c.axle, 0), -8, 8),
+      mass: clamp(numeric(c.mass, 80), 20, 200),
+      load: clamp(numeric(c.load, 20), 0, 100)
+    };
+  }
+  function environmentOf(e) {
+    e = e || {};
+    return {
+      light: clamp(numeric(e.light, 1), 0, 1),
+      slope: clamp(numeric(e.slope, 8), 0, 14)
+    };
+  }
+
+  // A smooth cosine pit: maximum slope equals environment.slope exactly.
+  // Its depth changes with the shared course setting, never with the car.
+  function terrain(x, environment) {
+    var e = environmentOf(environment);
+    var span = P.pitEnd - P.pitStart;
+    var q = (x - P.pitStart) / span;
+    var maxGradient = Math.tan(e.slope * RAD);
+    var depth = span * maxGradient / Math.PI;
+    if (q <= 0 || q >= 1) {
+      return { height: 0, z: 0, slope: 0, theta: 0, depth: depth, section: '平地' };
+    }
+    var z = -0.5 * depth * (1 - Math.cos(2 * Math.PI * q));
+    var dzdx = -maxGradient * Math.sin(2 * Math.PI * q);
+    return {
+      height: z, z: z, slope: dzdx, theta: Math.atan(dzdx), depth: depth,
+      section: q < 0.48 ? '下坡' : q > 0.52 ? '上坡' : '坑底'
+    };
+  }
+
+  // Quasi-static wheel torque balance, followed by body translation.
+  // Forward wheelspin: motor torque available at rolling speed exceeds
+  // traction. The limiting contact force sets wheel speed through the
+  // same motor characteristic, so animation and body dynamics agree.
+  function forces(state, c, e) {
+    var ground = terrain(state.x, e);
+    var pitch = Math.atan(ground.slope * Math.cos(state.heading));
+    var massKg = (c.mass + c.load) / 1000;
+    var weight = massKg * P.gravity;
+    var normal = weight * Math.cos(pitch);
+    var grade = weight * Math.sin(pitch);
+    var q = e.light * Math.cos(c.incidence * RAD);
+    var stall = P.referenceStallForce * q;
+    var free = P.referenceFreeSpeed * Math.sqrt(q);
+    var mu = c.grip === 'smooth' ? P.smoothGrip : P.rubberGrip;
+    var limit = mu * normal * P.drivenLoadFraction;
+    var motor = free > 0 ? stall * Math.max(0, 1 - state.v / free) : 0;
+    var driving = Math.min(motor, limit);
+    var wheelSpeed = state.v;
+    var spinning = motor > limit + 1e-9;
+    if (spinning && stall > 0) {
+      wheelSpeed = free * Math.max(0, 1 - limit / stall);
+    }
+    var rolling = P.rollingCoefficient * normal;
+    var staticLimit = P.startingCoefficient * normal;
+    var velocityLoss = P.velocityResistance * state.v;
+    var balance = driving - grade;
+    var appliedResistance;
+    var acceleration;
+    if (Math.abs(state.v) < 0.0002 && Math.abs(balance) <= staticLimit) {
+      // Bearing and sand resistance can balance the applied force at rest.
+      // A spinning driven wheel can still push against resistance from the
+      // rest of the car; wheelspin does not imply forward acceleration.
+      acceleration = 0;
+      appliedResistance = balance;
+    } else {
+      var direction = Math.abs(state.v) > 0.0002 ? (state.v > 0 ? 1 : -1) : (balance >= 0 ? 1 : -1);
+      appliedResistance = direction * rolling + velocityLoss;
+      acceleration = (balance - appliedResistance) / massKg;
+    }
+    var slip = wheelSpeed > 0.002 ? clamp((wheelSpeed - state.v) / wheelSpeed, 0, 1) : 0;
+    return {
+      theta: pitch,
+      groundTheta: ground.theta,
+      height: ground.height,
+      normalForce: normal,
+      drivenNormalForce: normal * P.drivenLoadFraction,
+      gravityForce: weight,
+      gradeForce: grade,
+      rollingForce: rolling,
+      staticResistanceLimit: staticLimit,
+      velocityLoss: velocityLoss,
+      // Positive requiredForce opposes forward motion. A negative value
+      // on the downhill means gravity would drive an unpowered car.
+      requiredForce: grade + rolling + P.velocityResistance * Math.max(0, state.v),
+      resistForce: grade + rolling + P.velocityResistance * Math.max(0, state.v),
+      actualResistance: grade + appliedResistance,
+      driveForce: driving,
+      tractionLimit: limit,
+      // motorDemand is the torque/radius that would occur at rolling
+      // speed. During wheelspin the actual motor force has fallen to the
+      // contact limit because the wheel is now rotating faster.
+      motorDemand: motor,
+      motorForce: free > 0 ? stall * Math.max(0, 1 - wheelSpeed / free) : 0,
+      stallForce: stall,
+      freeWheelSpeed: free,
+      wheelSpeed: wheelSpeed,
+      slip: slip,
+      spinning: spinning,
+      acceleration: acceleration,
+      netForce: driving - grade - appliedResistance,
+      lightFactor: q,
+      section: ground.section
+    };
+  }
+
+  function phaseFor(s, f, ended, passed, offCourse) {
+    if (ended && passed) return '到达终点';
+    if (ended && offCourse) return '偏离测试路线';
+    if (f.spinning && Math.abs(s.v) < 0.008) return '车轮空转';
+    if (f.slip > 0.20) return '车轮打滑';
+    if (s.t > 0.3 && Math.abs(s.v) < 0.003) return '车轮停转';
+    if (s.v < -0.003) return '向后滑退';
+    if (Math.abs(s.y) > 0.015) return '路线偏斜';
+    if (f.theta > 2 * RAD) return '上坡';
+    if (f.theta < -2 * RAD) return '下坡';
+    return s.t < 0.05 ? '准备出发' : '前进';
+  }
+
+  function makeFrame(s, c, e, ended, passed, offCourse) {
+    var f = forces(s, c, e);
+    var frame = {
+      t: s.t, x: s.x, y: s.y, z: f.height,
+      theta: f.theta, heading: s.heading,
+      wheelAngle: s.wheelAngle,
+      wheelTravel: s.wheelTravel,
+      bodyTravel: s.bodyTravel,
+      speed: s.v,
+      progress: clamp(s.x / P.routeLength, 0, 1),
+      phase: phaseFor(s, f, ended, passed, offCourse),
+      ended: !!ended,
+      passed: !!passed,
+      offCourse: !!offCourse
+    };
+    Object.keys(f).forEach(function (k) { frame[k] = f[k]; });
+    return frame;
+  }
+
+  function simulate(configuration, environment) {
+    var c = configOf(configuration);
+    var e = environmentOf(environment);
+    var state = { t: 0, x: 0, y: 0, v: 0, heading: 0, wheelAngle: 0, wheelTravel: 0, bodyTravel: 0 };
+    var frames = [makeFrame(state, c, e, false, false, false)];
+    var passed = false;
+    var offCourse = false;
+    var maxX = 0;
+    var stepCount = Math.round(P.maxTime / P.dt);
+    for (var i = 1; i <= stepCount; i += 1) {
+      var f = forces(state, c, e);
+      var oldV = state.v;
+      var v = oldV + f.acceleration * P.dt;
+      // If a step crosses rest, let the static model decide whether the
+      // next motion starts forward, backward, or remains held at rest.
+      if (oldV !== 0 && oldV * v < 0) v = 0;
+      if (Math.abs(v) < 0.0002 && f.acceleration === 0) v = 0;
+      var ds = (oldV + v) * 0.5 * P.dt;
+      var dheading = ds * Math.tan(c.axle * RAD) / P.wheelbase;
+      var middleHeading = state.heading + dheading * 0.5;
+      var ground = terrain(state.x, e);
+      var middlePitch = Math.atan(ground.slope * Math.cos(middleHeading));
+      var dx = ds * Math.cos(middlePitch) * Math.cos(middleHeading);
+      var dy = ds * Math.cos(middlePitch) * Math.sin(middleHeading);
+      var next = {
+        t: i * P.dt,
+        x: state.x + dx,
+        y: state.y + dy,
+        v: v,
+        heading: state.heading + dheading,
+        wheelAngle: state.wheelAngle,
+        wheelTravel: state.wheelTravel,
+        bodyTravel: state.bodyTravel + Math.abs(ds)
+      };
+      if (next.x < 0) { next.x = 0; next.v = Math.max(0, next.v); }
+      var nextF = forces(next, c, e);
+      var wheelDisplacement;
+      if (!f.spinning && !nextF.spinning) {
+        // Exact no-slip geometric correspondence, including backward roll.
+        wheelDisplacement = ds;
+      } else {
+        wheelDisplacement = (f.wheelSpeed + nextF.wheelSpeed) * 0.5 * P.dt;
+      }
+      next.wheelAngle += wheelDisplacement / P.wheelRadius;
+      next.wheelTravel += Math.abs(wheelDisplacement);
+      passed = next.x >= P.routeLength;
+      offCourse = Math.abs(next.y) >= P.laneHalfWidth;
+      // Finish at the shared physical boundary, not at a preset animation
+      // duration. Interpolate the crossing within the fixed integration step.
+      if (passed || offCourse) {
+        var fraction = 1;
+        if (passed && dx > 0) fraction = Math.min(fraction, (P.routeLength - state.x) / dx);
+        if (offCourse && dy !== 0) fraction = Math.min(fraction, (Math.sign(next.y) * P.laneHalfWidth - state.y) / dy);
+        fraction = clamp(fraction, 0, 1);
+        Object.keys(next).forEach(function (k) { next[k] = state[k] + (next[k] - state[k]) * fraction; });
+        passed = next.x >= P.routeLength - 1e-9;
+        offCourse = !passed && Math.abs(next.y) >= P.laneHalfWidth - 1e-9;
+      }
+      state = next;
+      maxX = Math.max(maxX, state.x);
+      var ended = passed || offCourse || i === stepCount;
+      frames.push(makeFrame(state, c, e, ended, passed, offCourse));
+      if (ended) break;
+    }
+    var last = frames[frames.length - 1];
+    var reasonCode;
+    var reason;
+    if (passed) { reasonCode = 'passed'; reason = '通过测试路线'; }
+    else if (offCourse) { reasonCode = 'alignment'; reason = '偏离测试路线'; }
+    else if (last.spinning && last.slip > 0.20) { reasonCode = 'slip'; reason = '驱动轮打滑，未通过'; }
+    else if (maxX < 0.03) { reasonCode = 'power'; reason = '供能不足，未能起步'; }
+    else if (Math.abs(last.speed) < 0.01) { reasonCode = 'power'; reason = '驱动力不足，停在坡上'; }
+    else { reasonCode = 'timeout'; reason = '20秒内未到终点'; }
+    return {
+      frames: frames,
+      duration: last.t,
+      passed: passed,
+      finishTime: passed ? last.t : null,
+      reason: reason,
+      reasonCode: reasonCode,
+      config: c,
+      environment: e,
+      maxDistance: maxX,
+      totalDistance: last.bodyTravel,
+      wheelDistance: last.wheelTravel,
+      routeLength: P.routeLength,
+      laneHalfWidth: P.laneHalfWidth,
+      dt: P.dt,
+      modelOnly: true
+    };
+  }
+
+  function sample(run, time) {
+    if (!run || !run.frames || !run.frames.length) return null;
+    var frames = run.frames;
+    var t = clamp(numeric(time, 0), 0, run.duration);
+    if (t <= 0) return Object.assign({}, frames[0]);
+    if (t >= run.duration) return Object.assign({}, frames[frames.length - 1]);
+    var left = 0;
+    var right = frames.length - 1;
+    while (right - left > 1) {
+      var mid = (left + right) >> 1;
+      if (frames[mid].t <= t) left = mid; else right = mid;
+    }
+    var a = frames[left];
+    var b = frames[right];
+    var q = (t - a.t) / (b.t - a.t);
+    var result = {};
+    Object.keys(a).forEach(function (key) {
+      result[key] = typeof a[key] === 'number' && typeof b[key] === 'number'
+        ? a[key] + (b[key] - a[key]) * q : a[key];
+    });
+    result.t = t;
+    return result;
+  }
+
+  var API = {
+    simulate: simulate,
+    sample: sample,
+    terrain: terrain,
+    normalizeConfig: configOf,
+    normalizeEnvironment: environmentOf,
+    parameters: P,
+    version: '1.0'
+  };
+  root.RoverModel = API;
+  if (typeof module !== 'undefined' && module.exports) module.exports = API;
+}(typeof window !== 'undefined' ? window : globalThis));
+</script>
+<script>/* Real evidence is entered by learners or timed from manually marked video endpoints.
+ * This module never imports simulation values or invents missing measurements.
+ * Public API: init(), onShow(), getData(), getEvaluation(), setGroup(n),
+ * addVideoTime('before'|'after', seconds) -> false when no empty slot remains.
+ */
+(function (global) {
+  'use strict';
+  var STORAGE_KEY = 'moon-cart-real-evidence-v1';
+  var root, ready = false, lastFocus = null, numericTarget = null, replaceNext = false;
+  var data = freshData();
+  var VERSION_NAMES = { before: '改进前', after: '改进后' };
+  var CONDITION_NAMES = { load: '载重', track: '坑道', light: '光照' };
+  function blankTrial() { return { status: 'empty', seconds: null, source: 'manual' }; }
+  function blankVersion() { return { mass: null, cost: null, consistency: 'unknown', difference: '', cooperation: 'unknown', looks: 'unknown', trials: [blankTrial(), blankTrial(), blankTrial()] }; }
+  function blankGroup() { return { before: blankVersion(), after: blankVersion(), conditions: { load: 'unknown', track: 'unknown', light: 'unknown' }, notes: { problem: '', cause: '', change: '', finding: '' } }; }
+  function freshData() { return { schema: 1, currentGroup: 0, standards: { mass: 100, cost: 100, time: 10, load: '同一块橡皮' }, groups: [blankGroup(), blankGroup(), blankGroup(), blankGroup()] }; }
+  function q(selector) { return root.querySelector(selector); }
+  function qa(selector) { return Array.prototype.slice.call(root.querySelectorAll(selector)); }
+  function currentGroup() { return data.groups[data.currentGroup]; }
+  function cleanText(value, length) { return typeof value === 'string' ? value.slice(0, length) : ''; }
+  function validNumber(value, min, max) { return typeof value === 'number' && isFinite(value) && value >= min && value <= max ? Math.round(value * 100) / 100 : null; }
+  function choice(value, choices, fallback) { return choices.indexOf(value) >= 0 ? value : fallback; }
+  function normalized(saved) {
+    var out = freshData();
+    if (!saved || saved.schema !== 1 || !Array.isArray(saved.groups)) return out;
+    out.currentGroup = typeof saved.currentGroup === 'number' && saved.currentGroup >= 0 && saved.currentGroup < 4 ? Math.floor(saved.currentGroup) : 0;
+    var s = saved.standards || {}, n;
+    n = validNumber(s.mass, 1, 10000); if (n !== null) out.standards.mass = n;
+    n = validNumber(s.cost, 0, 10000); if (n !== null) out.standards.cost = n;
+    n = validNumber(s.time, 0.1, 999); if (n !== null) out.standards.time = n;
+    if (cleanText(s.load, 50).trim()) out.standards.load = cleanText(s.load, 50).trim();
+    out.groups.forEach(function (g, gi) {
+      var source = saved.groups[gi] || {};
+      ['before', 'after'].forEach(function (vk) {
+        var src = source[vk] || {}, dst = g[vk];
+        dst.mass = validNumber(src.mass, 0.01, 100000);
+        dst.cost = validNumber(src.cost, 0, 100000);
+        dst.consistency = choice(src.consistency, ['same', 'different', 'unknown'], 'unknown');
+        dst.difference = cleanText(src.difference, 100);
+        dst.cooperation = choice(src.cooperation, ['good', 'fair', 'unknown'], 'unknown');
+        dst.looks = choice(src.looks, ['good', 'fair', 'unknown'], 'unknown');
+        dst.trials = [0, 1, 2].map(function (ti) {
+          var trial = src.trials && src.trials[ti] || {}, seconds = validNumber(trial.seconds, 0.01, 999);
+          if (trial.status === 'failed') return { status: 'failed', seconds: null, source: 'manual' };
+          if (trial.status === 'passed' && seconds !== null) return { status: 'passed', seconds: seconds, source: trial.source === 'video' ? 'video' : 'manual' };
+          return blankTrial();
+        });
+      });
+      Object.keys(g.conditions).forEach(function (key) { g.conditions[key] = choice(source.conditions && source.conditions[key], ['unknown', 'same', 'different'], 'unknown'); });
+      Object.keys(g.notes).forEach(function (key) { g.notes[key] = cleanText(source.notes && source.notes[key], 120); });
+    });
+    return out;
+  }
+  function format(value, decimals) { return value === null ? '—' : (decimals ? value.toFixed(2) : String(value)); }
+  function limitScore(value, limit) { return value === null ? null : (value <= limit ? 3 : 1); }
+  function trialScore(trial) { return trial.status === 'empty' ? null : trial.status === 'failed' ? 2 : trial.seconds <= data.standards.time ? 5 : 4; }
+  function displayGrade(value) { return value === null ? '—' : String(value) + '★'; }
+  function evaluateVersion(version) {
+    var attempts = version.trials.filter(function (t) { return t.status !== 'empty'; }).length;
+    var successes = version.trials.filter(function (t) { return t.status === 'passed'; }).length;
+    return { mass: limitScore(version.mass, data.standards.mass), cost: limitScore(version.cost, data.standards.cost), trials: version.trials.map(trialScore), cooperation: version.cooperation === 'unknown' ? null : version.cooperation === 'good' ? 3 : 2, looks: version.looks === 'unknown' ? null : version.looks === 'good' ? 2 : 1, attempts: attempts, successes: successes };
+  }
+  function save() {
+    try { global.localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); q('#ev-save-state').textContent = '已自动保存 · 仅在本机'; }
+    catch (error) { q('#ev-save-state').textContent = '本机未能保存；可继续记录，请导出留存'; }
+  }
+  function cardsHTML() {
+    return ['before', 'after'].map(function (vk) {
+      return '<article class="ev-version ev-version-' + vk + '" data-ev-version="' + vk + '">' +
+        '<h3>' + VERSION_NAMES[vk] + '<span class="ev-version-code">' + (vk === 'before' ? 'A' : 'B') + '</span></h3>' +
+        '<div class="ev-meta-fields">' + ['mass', 'cost'].map(function (key) {
+          var label = key === 'mass' ? '空车质量' : '材料费用';
+          return '<div><div class="ev-meta-label"><span>' + label + '</span><output class="ev-metric-grade" data-ev-grade="' + key + '"></output></div><button type="button" class="ev-number" data-ev-action="number" data-ev-version="' + vk + '" data-ev-field="' + key + '" aria-label="' + VERSION_NAMES[vk] + label + '"></button></div>';
+        }).join('') + '</div>' +
+        '<label class="ev-consistency">图与作品<select data-ev-version="' + vk + '" data-ev-field="consistency" aria-label="' + VERSION_NAMES[vk] + '作品与设计图是否一致"><option value="unknown">未检查</option><option value="same">一致</option><option value="different">有差异</option></select></label>' +
+        '<input class="ev-diff" data-ev-version="' + vk + '" data-ev-difference maxlength="100" placeholder="记下与设计图不同的地方" aria-label="' + VERSION_NAMES[vk] + '与设计图的差异" hidden>' +
+        '<p class="ev-section-caption"><span>载重过坑</span><small>点数值记录 · s</small></p>' +
+        '<div class="ev-trials">' + [0, 1, 2].map(function (ti) {
+          return '<div class="ev-trial"><span class="ev-trial-number">' + (ti + 1) + '</span><button type="button" class="ev-time" data-ev-action="number" data-ev-version="' + vk + '" data-ev-field="trial" data-ev-trial="' + ti + '" aria-label="' + VERSION_NAMES[vk] + '第' + (ti + 1) + '次实测用时"></button><button type="button" class="ev-fail" data-ev-action="fail" data-ev-version="' + vk + '" data-ev-trial="' + ti + '" aria-label="' + VERSION_NAMES[vk] + '第' + (ti + 1) + '次未通过" aria-pressed="false">未通过</button><output class="ev-trial-grade" data-ev-trial-grade="' + ti + '"></output></div>';
+        }).join('') + '</div>' +
+        '<div class="ev-ratings"><select data-ev-version="' + vk + '" data-ev-field="cooperation" aria-label="' + VERSION_NAMES[vk] + '团队合作评价"><option value="unknown">合作：待评</option><option value="good">合作：好 3★</option><option value="fair">合作：一般 2★</option></select><select data-ev-version="' + vk + '" data-ev-field="looks" aria-label="' + VERSION_NAMES[vk] + '外观评价"><option value="unknown">外观：待评</option><option value="good">外观：好 2★</option><option value="fair">外观：一般 1★</option></select></div></article>';
+    }).join('');
+  }
+  function renderCards() {
+    var group = currentGroup();
+    ['before', 'after'].forEach(function (vk) {
+      var version = group[vk], card = q('.ev-version[data-ev-version="' + vk + '"]');
+      ['mass', 'cost'].forEach(function (key) {
+        card.querySelector('.ev-number[data-ev-field="' + key + '"]').innerHTML = format(version[key], false) + '<span>' + (key === 'mass' ? 'g' : '元') + '</span>';
+        card.querySelector('[data-ev-grade="' + key + '"]').textContent = displayGrade(limitScore(version[key], data.standards[key]));
+      });
+      ['consistency', 'cooperation', 'looks'].forEach(function (key) { card.querySelector('select[data-ev-field="' + key + '"]').value = version[key]; });
+      var diff = card.querySelector('[data-ev-difference]'); diff.value = version.difference; diff.hidden = version.consistency !== 'different';
+      version.trials.forEach(function (trial, ti) {
+        var time = card.querySelector('.ev-time[data-ev-trial="' + ti + '"]'), fail = card.querySelector('.ev-fail[data-ev-trial="' + ti + '"]');
+        time.disabled = trial.status === 'failed';
+        time.innerHTML = trial.status === 'empty' ? '记时间' : trial.status === 'failed' ? '—' : format(trial.seconds, true) + (trial.source === 'video' ? '<small>视频标点</small>' : '');
+        time.title = trial.source === 'video' && trial.status === 'passed' ? '根据人工标定的视频起终点计算；请核对计时点' : '填入这一轮实物测试的用时（秒）';
+        fail.setAttribute('aria-pressed', trial.status === 'failed' ? 'true' : 'false');
+        fail.title = trial.status === 'failed' ? '再次点击，恢复为待测' : '记为未通过；不填虚构用时';
+        var grade = card.querySelector('[data-ev-trial-grade="' + ti + '"]'); grade.textContent = displayGrade(trialScore(trial));
+        grade.setAttribute('aria-label', trial.status === 'empty' ? '待测' : trialScore(trial) + '星');
+      });
+    });
+  }
+  function renderChart() {
+    var group = currentGroup(), left = 64, right = 460, max = 30;
+    var s = '<svg viewBox="0 0 660 232" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="544" y="22" width="103" height="160" rx="10" fill="#fff2ec"/><text x="596" y="212" text-anchor="middle" font-size="22" fill="#8a5b43">未通过</text><text x="501" y="212" text-anchor="middle" font-size="19" fill="#6c7d88">＞30s</text>';
+    var threshold = Math.min(max, data.standards.time), thresholdX = left + (right - left) * threshold / max;
+    s += '<rect x="' + left + '" y="23" width="' + Math.max(0, thresholdX - left) + '" height="160" fill="#e5f3f6" opacity=".65"/>';
+    [0, 10, 20, 30].forEach(function (tick) {
+      var x = left + (right - left) * tick / max;
+      s += '<line x1="' + x + '" y1="23" x2="' + x + '" y2="185" stroke="#cedde5" stroke-width="1.5"/><text x="' + x + '" y="213" text-anchor="middle" font-size="23" fill="#567080">' + tick + '</text>';
+    });
+    s += '<text x="' + right + '" y="232" text-anchor="middle" font-size="17" fill="#718594">秒</text>';
+    var descriptions = [], hasAny = false;
+    ['before', 'after'].forEach(function (vk, vi) {
+      var baseY = vi === 0 ? 64 : 145, color = vi === 0 ? '#df7b35' : '#147caa';
+      s += '<text x="15" y="' + (baseY + 8) + '" font-size="26" font-weight="700" fill="' + color + '">' + (vi === 0 ? '前' : '后') + '</text><line x1="' + left + '" y1="' + baseY + '" x2="' + right + '" y2="' + baseY + '" stroke="#d9e4ea" stroke-width="2"/>';
+      group[vk].trials.forEach(function (trial, ti) {
+        if (trial.status === 'empty') return;
+        hasAny = true;
+        var y = baseY + (ti - 1) * 24, x = trial.status === 'failed' ? 595 : trial.seconds > max ? 501 : left + (right - left) * trial.seconds / max;
+        var title = VERSION_NAMES[vk] + '第' + (ti + 1) + '次：' + (trial.status === 'failed' ? '未通过' : trial.seconds.toFixed(2) + '秒');
+        descriptions.push(title);
+        s += '<g><title>' + title + '</title><circle cx="' + x.toFixed(2) + '" cy="' + y + '" r="13" fill="' + color + '" stroke="white" stroke-width="2"/><text x="' + x.toFixed(2) + '" y="' + (y + 6) + '" text-anchor="middle" font-size="18" font-weight="700" fill="white">' + (ti + 1) + '</text></g>';
+      });
+    });
+    if (!hasAny) s += '<text x="290" y="111" text-anchor="middle" font-size="25" fill="#8296a3">记录后出现圆点</text>';
+    s += '</svg>';
+    q('#ev-chart').innerHTML = s;
+    q('#ev-chart').setAttribute('aria-label', '真实测试用时，主刻度0到30秒；超过30秒和未通过单列。' + (descriptions.length ? descriptions.join('；') : '尚未记录。'));
+    var before = evaluateVersion(group.before), after = evaluateVersion(group.after);
+    q('#ev-summary').innerHTML = '<span>改前 ' + (before.attempts ? before.successes + '/' + before.attempts + ' 次通过' : '待测') + '</span><span>改后 ' + (after.attempts ? after.successes + '/' + after.attempts + ' 次通过' : '待测') + '</span>';
+  }
+  function renderConditions() {
+    var conditions = currentGroup().conditions, keys = Object.keys(conditions), note = q('#ev-condition-note');
+    keys.forEach(function (key) { q('[data-ev-condition="' + key + '"]').value = conditions[key]; });
+    note.classList.remove('ev-ready');
+    if (keys.some(function (key) { return conditions[key] === 'different'; })) note.textContent = '条件发生变化：差别可能来自多种因素。';
+    else if (keys.every(function (key) { return conditions[key] === 'same'; })) { note.textContent = '已核对相同条件；结合三次记录说明改进效果。'; note.classList.add('ev-ready'); }
+    else note.textContent = '比较前，先核对载重、坑道与光照。';
+  }
+  function render() {
+    q('#ev-group').value = String(data.currentGroup);
+    var s = data.standards;
+    q('#ev-standards-line').textContent = '共同约定：空车≤' + s.mass + 'g · 材料≤' + s.cost + '元 · ' + s.time + 's内通过 · 载重：' + s.load;
+    renderCards(); renderChart(); renderConditions();
+    qa('[data-ev-note]').forEach(function (el) { el.value = currentGroup().notes[el.getAttribute('data-ev-note')]; });
+  }
+  function openDialog(id) {
+    lastFocus = document.activeElement;
+    qa('.ev-overlay').forEach(function (el) { el.hidden = el.id !== id; });
+    var modal = q('#' + id), first = modal.querySelector('input,button,select');
+    if (first) first.focus();
+  }
+  function closeDialog() {
+    qa('.ev-overlay').forEach(function (el) { el.hidden = true; });
+    numericTarget = null;
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+  }
+  function openNumber(button) {
+    var vk = button.getAttribute('data-ev-version'), field = button.getAttribute('data-ev-field'), ti = Number(button.getAttribute('data-ev-trial'));
+    numericTarget = { version: vk, field: field, trial: ti };
+    var value = field === 'trial' ? currentGroup()[vk].trials[ti].seconds : currentGroup()[vk][field];
+    q('#ev-number-title').textContent = VERSION_NAMES[vk] + (field === 'trial' ? ' · 第' + (ti + 1) + '次用时' : field === 'mass' ? ' · 空车质量' : ' · 材料费用');
+    q('#ev-number-unit').textContent = field === 'trial' ? 's' : field === 'mass' ? 'g' : '元';
+    q('#ev-number-value').value = value === null ? '' : String(value);
+    q('#ev-number-error').textContent = '填入实测数值；空白表示待测。';
+    openDialog('ev-number-dialog');
+    q('#ev-number-value').focus(); q('#ev-number-value').select(); replaceNext = true;
+  }
+  function applyNumber(clear) {
+    if (!numericTarget) return;
+    var target = numericTarget, raw = q('#ev-number-value').value.trim(), value = clear || raw === '' ? null : Number(raw);
+    var min = target.field === 'cost' ? 0 : 0.01, max = target.field === 'trial' ? 999 : 100000;
+    if (value !== null && (!/^\d*\.?\d{0,2}$/.test(raw) || !isFinite(value) || value < min || value > max)) { q('#ev-number-error').textContent = '请输入' + min + '到' + max + '之间的数值，最多两位小数。'; return; }
+    if (target.field === 'trial') currentGroup()[target.version].trials[target.trial] = value === null ? blankTrial() : { status: 'passed', seconds: Math.round(value * 100) / 100, source: 'manual' };
+    else currentGroup()[target.version][target.field] = value;
+    closeDialog(); render(); save();
+  }
+  function pressKey(key) {
+    var input = q('#ev-number-value'), value = replaceNext ? '' : input.value;
+    replaceNext = false;
+    if (key === 'back') value = value.slice(0, -1);
+    else if (key === '.') { if (value.indexOf('.') === -1) value += value ? '.' : '0.'; }
+    else if (value.length < 9) value += key;
+    input.value = value; input.focus();
+    if (input.setSelectionRange) input.setSelectionRange(value.length, value.length);
+  }
+  function openStandards() {
+    q('#ev-standard-mass').value = data.standards.mass;
+    q('#ev-standard-cost').value = data.standards.cost;
+    q('#ev-standard-time').value = data.standards.time;
+    q('#ev-standard-load').value = data.standards.load;
+    q('#ev-standard-error').textContent = '100元是课堂材料预算示例，不是市场报价。质量g与重力N分开记录。';
+    openDialog('ev-standards-dialog');
+  }
+  function saveStandards() {
+    var massText = q('#ev-standard-mass').value.trim(), costText = q('#ev-standard-cost').value.trim(), timeText = q('#ev-standard-time').value.trim();
+    var mass = validNumber(Number(massText), 1, 10000), cost = validNumber(Number(costText), 0, 10000), time = validNumber(Number(timeText), 0.1, 999), load = q('#ev-standard-load').value.trim();
+    if (!massText || !costText || !timeText || mass === null || cost === null || time === null || !load) { q('#ev-standard-error').textContent = '请填写有效的质量、预算、用时与载重约定。'; return; }
+    data.standards = { mass: mass, cost: cost, time: time, load: load.slice(0, 50) };
+    closeDialog(); render(); save();
+  }
+  function csvCell(value) {
+    if (value === null || value === undefined) value = '';
+    if (typeof value === 'string' && /^[=+\-@]/.test(value)) value = "'" + value;
+    return '"' + String(value).replace(/"/g, '""') + '"';
+  }
+  function downloadCSV() {
+    var rows = [['小组','版本','第几次','测试状态','实测用时(s)','数据来源','本次过坑星级','空车质量(g)','质量星级','材料费用(元)','费用星级','作品与设计图','差异说明','团队合作','合作星级','外观','外观星级','载重是否相同','坑道是否相同','光照是否相同','发现问题','可能原因','本次只改','复测发现','质量上限(g)','预算上限(元)','快通过阈值(s)','约定载重']];
+    var valueNames = { unknown:'未评价', same:'相同', different:'不同', good:'好', fair:'一般', empty:'待测', passed:'通过', failed:'未通过' };
+    data.groups.forEach(function (group, gi) {
+      ['before','after'].forEach(function (vk) {
+        var v = group[vk], scores = evaluateVersion(v);
+        v.trials.forEach(function (trial, ti) {
+          rows.push(['第'+(gi+1)+'组',VERSION_NAMES[vk],ti+1,valueNames[trial.status],trial.seconds,trial.status==='empty'?'':trial.source==='video'?'视频人工标定起终点':'实物手动记录',scores.trials[ti],v.mass,scores.mass,v.cost,scores.cost,v.consistency==='unknown'?'未检查':v.consistency==='same'?'一致':'有差异',v.difference,valueNames[v.cooperation],scores.cooperation,valueNames[v.looks],scores.looks,group.conditions.load==='unknown'?'未核对':valueNames[group.conditions.load],group.conditions.track==='unknown'?'未核对':valueNames[group.conditions.track],group.conditions.light==='unknown'?'未核对':valueNames[group.conditions.light],group.notes.problem,group.notes.cause,group.notes.change,group.notes.finding,data.standards.mass,data.standards.cost,data.standards.time,data.standards.load]);
+        });
+      });
+    });
+    var csv = '\uFEFF' + rows.map(function (row) { return row.map(csvCell).join(','); }).join('\r\n');
+    var blob = new Blob([csv], { type:'text/csv;charset=utf-8' }), url = URL.createObjectURL(blob), link = document.createElement('a');
+    var now = new Date(), dateLabel = now.getFullYear() + '-' + ('0' + (now.getMonth() + 1)).slice(-2) + '-' + ('0' + now.getDate()).slice(-2);
+    link.href = url; link.download = '月球小车_实测评价_' + dateLabel + '.csv';
+    document.body.appendChild(link); link.click(); link.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    q('#ev-save-state').textContent = '已生成全班4组的CSV记录；请在下载文件中确认。';
+  }
+  function clickHandler(event) {
+    var key = event.target.closest('[data-ev-key]'); if (key && root.contains(key)) { pressKey(key.getAttribute('data-ev-key')); return; }
+    var button = event.target.closest('[data-ev-action]'); if (!button || !root.contains(button)) return;
+    var action = button.getAttribute('data-ev-action');
+    if (action === 'close') closeDialog();
+    else if (action === 'number') openNumber(button);
+    else if (action === 'number-save') applyNumber(false);
+    else if (action === 'number-clear') applyNumber(true);
+    else if (action === 'standards') openStandards();
+    else if (action === 'standards-save') saveStandards();
+    else if (action === 'export') downloadCSV();
+    else if (action === 'reset') { q('#ev-reset-description').textContent = '将清空第' + (data.currentGroup + 1) + '组的两版测试和说明。共同标准、其他小组记录保留。'; openDialog('ev-reset-dialog'); }
+    else if (action === 'reset-confirm') { data.groups[data.currentGroup] = blankGroup(); closeDialog(); render(); save(); }
+    else if (action === 'fail') {
+      var version = button.getAttribute('data-ev-version'), ti = Number(button.getAttribute('data-ev-trial')), trial = currentGroup()[version].trials[ti];
+      currentGroup()[version].trials[ti] = trial.status === 'failed' ? blankTrial() : { status:'failed',seconds:null,source:'manual' };
+      renderCards(); renderChart(); save();
+    }
+  }
+  function changeHandler(event) {
+    var el = event.target;
+    if (el.id === 'ev-group') { data.currentGroup = Math.max(0, Math.min(3, Number(el.value))); render(); save(); return; }
+    var condition = el.getAttribute('data-ev-condition');
+    if (condition) { currentGroup().conditions[condition] = choice(el.value,['unknown','same','different'],'unknown'); renderConditions(); save(); return; }
+    var field = el.getAttribute('data-ev-field'), version = el.getAttribute('data-ev-version');
+    if (el.tagName === 'SELECT' && field && version) { currentGroup()[version][field] = el.value; renderCards(); save(); }
+  }
+  function inputHandler(event) {
+    var el = event.target, note = el.getAttribute('data-ev-note');
+    if (note) { currentGroup().notes[note] = el.value.slice(0,120); save(); }
+    else if (el.hasAttribute('data-ev-difference')) { currentGroup()[el.getAttribute('data-ev-version')].difference = el.value.slice(0,100); save(); }
+    else if (el.id === 'ev-number-value') replaceNext = false;
+  }
+  function keyboardHandler(event) {
+    var modal = q('.ev-overlay:not([hidden])'); if (!modal) return;
+    if (event.key === 'Escape') { event.preventDefault(); closeDialog(); return; }
+    if (event.key === 'Enter' && modal.id === 'ev-number-dialog' && event.target.tagName === 'INPUT') { event.preventDefault(); applyNumber(false); return; }
+    if (event.key !== 'Tab') return;
+    var focusable = Array.prototype.slice.call(modal.querySelectorAll('button,input,select,[tabindex="0"]')).filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length-1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
+  function init() {
+    if (ready) return true;
+    root = document.getElementById('page-evidence'); if (!root) return false;
+    var loadWarning = false;
+    try { var raw = global.localStorage.getItem(STORAGE_KEY); if (raw) data = normalized(JSON.parse(raw)); }
+    catch (error) { loadWarning = true; /* Private browsing or an unreadable old record must not block current input. */ }
+    q('#ev-versions').innerHTML = cardsHTML();
+    root.addEventListener('click', clickHandler);
+    root.addEventListener('change', changeHandler);
+    root.addEventListener('input', inputHandler);
+    root.addEventListener('keydown', keyboardHandler);
+    ready = true; render();
+    if (loadWarning) q('#ev-save-state').textContent = '旧记录未能读取；本次可继续记录并导出留存';
+    return true;
+  }
+  function addVideoTime(version, seconds) {
+    if (!ready && !init()) return false;
+    if (version !== 'before' && version !== 'after') return false;
+    seconds = validNumber(seconds,0.01,999); if (seconds === null) return false;
+    var trials = currentGroup()[version].trials, index = -1;
+    for (var i=0; i<trials.length; i++) if (trials[i].status === 'empty') { index=i; break; }
+    if (index === -1) return false;
+    trials[index] = { status:'passed', seconds:seconds, source:'video' };
+    render(); save(); return true;
+  }
+  global.EvidenceBoard = {
+    init: init,
+    onShow: function () { if (init()) render(); },
+    getData: function () { return JSON.parse(JSON.stringify(data)); },
+    getEvaluation: function () { return data.groups.map(function (g) { return { before:evaluateVersion(g.before), after:evaluateVersion(g.after), comparable:Object.keys(g.conditions).every(function (k) { return g.conditions[k] === 'same'; }) }; }); },
+    setGroup: function (index) { if (!init() || !Number.isInteger(index) || index < 0 || index > 3) return false; data.currentGroup=index; render(); save(); return true; },
+    addVideoTime: addVideoTime
+  };
+})(window);
+</script>
+<script>(function(){
+'use strict';
+var $=function(id){return document.getElementById(id)}, $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var NS='http://www.w3.org/2000/svg', activePage='sim', toastTimer;
+function toast(s){$('toast').textContent=s;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').classList.remove('show')},3400)}
+window.RoverToast=toast;
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function fmt(x,n){return Number.isFinite(x)?x.toFixed(n===undefined?1:n):'—'}
+function clone(o){return JSON.parse(JSON.stringify(o))}
+var cases={power:{incidence:72,grip:'rubber',axle:0,mass:80,load:20},slip:{incidence:0,grip:'smooth',axle:0,mass:80,load:20},veer:{incidence:0,grip:'rubber',axle:6,mass:80,load:20}};
+var state={key:'power',before:clone(cases.power),after:clone(cases.power),env:{light:1,slope:8},runs:null,t:0,duration:20,playing:false,speed:1,last:0};
+var colors={before:'#cd7338',after:'#167e88'}, labels={before:'改进前',after:'改进后'};
+function compute(reset){state.runs={before:RoverModel.simulate(state.before,state.env),after:RoverModel.simulate(state.after,state.env)};state.duration=Math.max(state.runs.before.duration,state.runs.after.duration);if(reset){state.t=0;pauseSim()}state.t=Math.min(state.t,state.duration);$('scrub').max=state.duration;updateFields();draw()}
+function pauseSim(){state.playing=false;$('play-label').textContent=state.t>=state.duration?'再试一次':'同步试跑';}
+function updateFields(){
+ $('incidence').value=state.after.incidence;$('incidence-output').textContent=state.after.incidence+'°';$('axle').value=state.after.axle;$('axle-output').textContent=(state.after.axle>0?'+':'')+state.after.axle+'°';
+ $$('[data-grip]').forEach(function(b){var on=b.dataset.grip===state.after.grip;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on))});
+ $$('[data-case]').forEach(function(b){var on=b.dataset.case===state.key;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on))});
+ var changes=['incidence','grip','axle'].filter(function(k){return state.before[k]!==state.after[k]});$('change-count').textContent=changes.length?'改了 '+changes.length+' 处':'尚未改动';
+ $('observe-question').textContent=changes.length>1?'同时改了多处。怎样知道是哪一处带来了变化？':changes.length===1?'两版只改了一处。试跑后，找出支持你判断的现象。':'先试跑，再改变一个部件。轮子、车身和路线有什么线索？';
+ $('light-output').textContent=Math.round(state.env.light*100)+'%';$('slope-output').textContent=state.env.slope+'°';$('condition-detail').textContent='光照 '+Math.round(state.env.light*100)+'% · 坡角 '+state.env.slope+'° · 0.80 m';
+}
+function getFrame(slot){return RoverModel.sample(state.runs[slot],state.t)}
+function wheel(cx,cy,r,angle,grip,color,drag){var spokes='';for(var i=0;i<6;i++){var a=angle+i*Math.PI/3;spokes+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+Math.cos(a)*(r-5))+'" y2="'+(cy+Math.sin(a)*(r-5))+'" stroke="#b6c8d5" stroke-width="2"/>'}var d=drag?' data-drag="grip" class="touch-target" tabindex="0" role="button" aria-label="选择改进后的轮面"':'';return '<g'+d+'><circle cx="'+cx+'" cy="'+cy+'" r="'+(r+7)+'" fill="transparent"/><circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="#243d50" stroke="'+(grip==='rubber'?'#182b3a':'#718897')+'" stroke-width="'+(grip==='rubber'?6:3)+'"'+(grip==='rubber'?' stroke-dasharray="5 3"':'')+'/>'+spokes+'<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="'+color+'"/><circle cx="'+(cx+Math.cos(angle)*(r-3))+'" cy="'+(cy+Math.sin(angle)*(r-3))+'" r="4" fill="#ffd27b"/></g>'}
+function terrainPath(base){var d='M50 '+base;for(var j=-6;j<=88;j++){var x=j/100;var h=RoverModel.terrain(x,state.env).height;d+=' L'+fmt(100+x*800,2)+' '+fmt(base-h*1200,2)}return d}
+function drawCar(slot,f,base){var c=state[slot],cx=100+Math.min(.83,Math.max(0,f.x))*800,ground=base-RoverModel.terrain(f.x,state.env).height*1200,rot=-Math.atan(1.5*Math.tan(f.theta))*180/Math.PI,col=colors[slot];var dir=slot==='after',angle=f.wheelAngle||0;
+ var body='<g transform="translate('+fmt(cx,2)+' '+fmt(ground-19,2)+') rotate('+fmt(rot,2)+')"><path d="M-49-13h98l-8 15h-82Z" fill="'+col+'" stroke="#fff" stroke-width="2"/><path d="M-32-15v-15h50v15" fill="#cad5df" stroke="#8196a6" stroke-width="1.5"/><rect x="-23" y="-29" width="36" height="12" rx="3" fill="#e6bd8e"/><path d="M-11-29v12M2-29v12" stroke="#bc9166" stroke-width="1.5"/>'+wheel(-36,4,17,angle,c.grip,col,dir)+wheel(36,4,17,f.bodyTravel/.025,'smooth',col,false)+'<path d="M0-14v-28" stroke="#7794a5" stroke-width="4"/></g>';
+ var px=cx,py=ground-56;var panelAngle=45-c.incidence;body+='<g transform="translate('+fmt(px,2)+' '+fmt(py,2)+') rotate('+panelAngle+')"'+(dir?' data-drag="panel" class="touch-target" tabindex="0" role="slider" aria-label="拖动太阳能板改变对光偏角" aria-valuemin="0" aria-valuemax="80" aria-valuenow="'+c.incidence+'"':'')+'><rect x="-41" y="-16" width="82" height="32" rx="9" fill="transparent"/><rect x="-31" y="-9" width="62" height="18" rx="3" fill="#1d527a" stroke="'+(dir?'#42a8c1':'#aac0ce')+'" stroke-width="2"/><path d="M-15-8V8M0-8V8M15-8V8M-29 0H29" stroke="#87bbd5" stroke-width="1"/><circle cy="0" r="3" fill="#b5d7e6"/></g>';
+ body+='<path d="M'+fmt(px+28,2)+' '+fmt(py-28,2)+'l-16 16" stroke="#e8b24b" stroke-width="2.5" marker-end="url(#light-arrow)" opacity=".8"/>';
+ return body;
+}
+function statusFor(run,f){if(state.t<.025)return '准备测试';if(run.passed && state.t>=run.finishTime)return '通过 · '+fmt(run.finishTime,2)+' s（定格）';if(run.reasonCode==='alignment' && state.t>=run.duration-.02)return '偏出测试道 · 未通过';if(state.t>=run.duration-.02&&!run.passed)return '本次未通过';if(f.speed<.004&&f.wheelSpeed>.025)return '轮在转，车身几乎停住';if(f.speed<.004&&state.t>.6)return '车轮与车身几乎停住';if(f.slip>.2)return '轮缘与车身进度不同';return f.theta>.03?'正在上坡':'正在行驶'}
+function zoom(slot,f,base){var c=state[slot],col=colors[slot],x=870,y=base-47,r=31;var s='<rect x="797" y="'+(base-112)+'" width="180" height="207" rx="13" fill="#f3f7fa" stroke="#e4ebf0"/><text x="887" y="'+(base-88)+'" text-anchor="middle" font-size="16" fill="#5d7587">驱动轮接地点 ×2</text>';
+ s+='<g>'+wheel(x,y,r,f.wheelAngle,c.grip,col,false)+'<path d="M815 '+(y+r+5)+'H958" stroke="#b8a083" stroke-width="4"/>';
+ var offset=((f.bodyTravel||f.x)*800)%20;for(var i=0;i<8;i++){var tx=816+i*20-offset;s+='<path d="M'+tx+' '+(y+r+8)+'l-6 8" stroke="#ccb89e" stroke-width="1.4"/>'}
+ if(f.driveForce>.015){var al=Math.min(60,Math.max(7,f.driveForce*160));s+='<path d="M'+(x-15)+' '+(y+r)+'h'+al+'" stroke="#218ab0" stroke-width="4" marker-end="url(#force-arrow)"/>'}
+ s+='</g><text x="887" y="'+(base+15)+'" text-anchor="middle" font-size="16" fill="#356d85">地面对轮的推力</text><text x="887" y="'+(base+42)+'" text-anchor="middle" font-size="25" font-weight="650" fill="#216a8c" class="svg-number">'+fmt(Math.max(0,f.driveForce),2)+' N</text><text x="887" y="'+(base+70)+'" text-anchor="middle" font-size="14" fill="#6b8091">蓝箭头表示向前</text>';
+ return s;
+}
+function progressBars(slot,f,base){var other=getFrame(slot==='before'?'after':'before'),col=colors[slot],body=Math.max(0,f.bodyTravel||f.x),rim=Math.max(0,f.wheelTravel),max=Math.max(.8,Math.ceil(Math.max(body,rim,other.bodyTravel,other.wheelTravel)*10)/10),x=205,w=455;
+ var s='<text x="68" y="'+(base+65)+'" font-size="17" fill="#4c687d">车身路程</text><rect x="'+x+'" y="'+(base+50)+'" width="'+w+'" height="13" rx="4" fill="#e4edf1"/><rect x="'+x+'" y="'+(base+50)+'" width="'+fmt(body/max*w,1)+'" height="13" rx="4" fill="'+col+'"/><text x="675" y="'+(base+63)+'" font-size="17" fill="'+col+'" class="svg-number">'+fmt(body*100,1)+' cm</text>';
+ s+='<text x="68" y="'+(base+90)+'" font-size="17" fill="#4c687d">轮缘路程</text><rect x="'+x+'" y="'+(base+75)+'" width="'+w+'" height="13" rx="4" fill="#e4edf1"/><rect x="'+x+'" y="'+(base+75)+'" width="'+fmt(rim/max*w,1)+'" height="13" rx="4" fill="#dfa759"/><text x="675" y="'+(base+88)+'" font-size="17" fill="#a8732e" class="svg-number">'+fmt(rim*100,1)+' cm</text>';
+ return s;
+}
+function draw(){
+ var defs='<defs><linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e6d1b4"/><stop offset="1" stop-color="#f1e5d4"/></linearGradient><marker id="force-arrow" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0L5 2.5 0 5Z" fill="#218ab0"/></marker><marker id="light-arrow" markerWidth="4" markerHeight="4" refX="4" refY="2" orient="auto"><path d="M0 0L4 2 0 4Z" fill="#e8b24b"/></marker></defs>';
+ var s=defs+'<rect x="18" y="9" width="964" height="551" rx="12" fill="#fff"/><text x="755" y="21" text-anchor="end" font-size="12" fill="#8193a1">侧视：坑深放大 1.5 倍 · 同一时刻</text>';
+ ['before','after'].forEach(function(slot,i){var base=125+i*210,f=getFrame(slot),run=state.runs[slot],col=colors[slot];var d=terrainPath(base);s+='<rect x="50" y="'+(base-115)+'" width="110" height="30" rx="6" fill="'+(slot==='before'?'#f9ede3':'#e8f4f2')+'"/><circle cx="66" cy="'+(base-100)+'" r="4" fill="'+col+'"/><text x="80" y="'+(base-93)+'" font-size="19" fill="'+col+'" font-weight="650">'+labels[slot]+'</text><text x="177" y="'+(base-93)+'" font-size="17" fill="#587184">'+statusFor(run,f)+'</text>';
+ s+='<path d="'+d+' L804 '+(base+50)+' H50Z" fill="url(#sand)"/><path d="'+d+'" fill="none" stroke="#bda380" stroke-width="3"/>';
+ s+='<path d="M100 '+(base-25)+'v52M740 '+(base-25)+'v52" stroke="#a7b5bf" stroke-width="1.5" stroke-dasharray="4 4"/><path d="M740 '+(base-25)+'h15l-5 8h-10Z" fill="'+col+'"/><text x="100" y="'+(base+25)+'" text-anchor="middle" font-size="13" fill="#8c7960">0</text><text x="740" y="'+(base+25)+'" text-anchor="middle" font-size="13" fill="#8c7960">0.80 m</text>';
+ s+=drawCar(slot,f,base)+zoom(slot,f,base)+progressBars(slot,f,base);
+ });
+ s+='<rect x="50" y="448" width="927" height="108" rx="12" fill="#f4f7f9" stroke="#e5ebef"/><text x="70" y="474" font-size="17" fill="#536d81">俯视轨迹</text><text x="194" y="474" font-size="13" fill="#8495a2">横向压缩示意 · 边界 ±12 cm</text><text x="957" y="474" text-anchor="end" font-size="13" fill="#758895">可拖动车轴，观察跑偏</text>';
+ var topX=310,topW=640,topY=517,ys=160; s+='<rect x="'+topX+'" y="'+(topY-.12*ys)+'" width="'+topW+'" height="'+(.24*ys)+'" fill="#e3ebef"/><path d="M'+topX+' '+topY+'H'+(topX+topW)+'" stroke="#becdd5" stroke-dasharray="7 5"/><path d="M'+topX+' '+(topY-.12*ys)+'H'+(topX+topW)+'M'+topX+' '+(topY+.12*ys)+'H'+(topX+topW)+'" stroke="#b9cbd3" stroke-dasharray="3 3"/>';
+ ['before','after'].forEach(function(slot){var r=state.runs[slot],f=getFrame(slot),points=r.frames.filter(function(p,j){return p.t<=state.t&&(j%6===0)}).map(function(p){return fmt(topX+p.x*800,2)+','+fmt(topY+p.y*ys,2)});points.push(fmt(topX+f.x*800,2)+','+fmt(topY+f.y*ys,2));s+='<polyline points="'+points.join(' ')+'" fill="none" stroke="'+colors[slot]+'" stroke-width="'+(slot==='before'?4:3)+'"'+(slot==='before'?' stroke-dasharray="7 5"':'')+'/>';s+='<g transform="translate('+fmt(topX+f.x*800,2)+' '+fmt(topY+f.y*ys,2)+') rotate('+fmt(Math.atan2(Math.sin(f.heading||0)*ys,Math.cos(f.heading||0)*800)*180/Math.PI,2)+')"><rect x="-12" y="-8" width="24" height="16" rx="3" fill="'+colors[slot]+'"/><path d="m6-3 4 3-4 3" fill="none" stroke="#fff" stroke-width="1.5"/></g>'});
+ var ax=state.after.axle;s+='<g transform="translate(115 518)" data-drag="axle" class="touch-target" tabindex="0" role="slider" aria-label="拖动俯视车轴改变偏斜" aria-valuemin="-8" aria-valuemax="8" aria-valuenow="'+ax+'"><rect x="-25" y="-29" width="84" height="58" rx="9" fill="transparent"/><rect x="-15" y="-18" width="52" height="36" rx="7" fill="#cbe0e2"/><path d="M-7-24v48" stroke="#527f88" stroke-width="4"/><g transform="translate(28 0) rotate('+(-ax*2)+')"><path d="M0-25v50" stroke="#167e88" stroke-width="4"/><rect x="-8" y="-27" width="16" height="10" rx="3" fill="#263e4d"/><rect x="-8" y="17" width="16" height="10" rx="3" fill="#263e4d"/></g></g><text x="180" y="523" font-size="20" fill="#167e88">'+(ax>0?'+':'')+ax+'°</text>';
+ $('simulation').innerHTML=s;$('scrub').value=state.t;$('time-label').textContent=fmt(state.t,2)+' s';$('play-label').textContent=state.playing?'暂停观察':state.t>=state.duration?'再试一次':'同步试跑';
+}
+function raf(ts){var dt=state.last?Math.min(.1,(ts-state.last)/1000):0;state.last=ts;if(state.playing&&activePage==='sim'){state.t=Math.min(state.duration,state.t+dt*state.speed);if(state.t>=state.duration)state.playing=false;draw()}if(videoState.playing&&activePage==='video')videoTick();requestAnimationFrame(raf)}
+function switchPage(name){pauseSim();pauseVideo();activePage=name;$$('.page').forEach(function(p){p.classList.toggle('active',p.id==='page-'+name)});$$('.tab').forEach(function(b){var on=b.dataset.page===name;b.classList.toggle('active',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});if(name==='evidence'&&window.EvidenceBoard)EvidenceBoard.onShow();if(name==='sim')draw()}
+$$('.tab').forEach(function(b){b.addEventListener('click',function(){switchPage(b.dataset.page)})});
+$('play').addEventListener('click',function(){if(state.playing)pauseSim();else{if(state.t>=state.duration)state.t=0;state.playing=true;state.last=performance.now()}draw()});$('replay').addEventListener('click',function(){state.t=0;pauseSim();draw()});$('speed').addEventListener('click',function(){state.speed=state.speed===1?.25:1;$('speed').textContent=state.speed===1?'正常速度':'¼ 倍慢放'});$('scrub').addEventListener('input',function(){pauseSim();state.t=Number(this.value);draw()});
+function change(k,v){state.after[k]=v;compute(true)}
+$('incidence').addEventListener('input',function(){change('incidence',Number(this.value))});$('axle').addEventListener('input',function(){change('axle',Number(this.value))});$$('[data-grip]').forEach(function(b){b.addEventListener('click',function(){change('grip',b.dataset.grip)})});
+$$('[data-case]').forEach(function(b){b.addEventListener('click',function(){state.key=b.dataset.case;state.before=clone(cases[state.key]);state.after=clone(cases[state.key]);compute(true)})});$('keep-baseline').addEventListener('click',function(){state.before=clone(state.after);compute(true);toast('已保留为改进前。现在可再改变一个部件。')});$('reset-case').addEventListener('click',function(){state.before=clone(cases[state.key]);state.after=clone(cases[state.key]);compute(true);toast('两辆车已还原到当前样车')});
+var drag=null;
+$('simulation').addEventListener('pointerdown',function(e){var g=e.target.closest('[data-drag]');if(!g)return;var type=g.dataset.drag;if(type==='grip'){change('grip',state.after.grip==='smooth'?'rubber':'smooth');toast('改进后：'+(state.after.grip==='rubber'?'驱动轮套上橡胶圈':'换回平滑轮'));return}pauseSim();drag={type:type,x:e.clientX,y:e.clientY,start:type==='panel'?state.after.incidence:state.after.axle};try{this.setPointerCapture(e.pointerId)}catch(ignore){}e.preventDefault()});
+$('simulation').addEventListener('pointermove',function(e){if(!drag)return;var scale=1000/this.getBoundingClientRect().width;var v=drag.start+(e.clientX-drag.x)*scale*(drag.type==='panel'?.3:.08);v=Math.round(Math.max(drag.type==='panel'?0:-8,Math.min(drag.type==='panel'?80:8,v)));if(state.after[drag.type==='panel'?'incidence':'axle']!==v)change(drag.type==='panel'?'incidence':'axle',v)});['pointerup','pointercancel','lostpointercapture'].forEach(function(n){$('simulation').addEventListener(n,function(){drag=null})});$('simulation').addEventListener('keydown',function(e){var g=e.target.closest('[data-drag]');if(!g)return;var t=g.dataset.drag;if(t==='grip'&&(e.key==='Enter'||e.key===' ')){change('grip',state.after.grip==='smooth'?'rubber':'smooth');e.preventDefault()}else if(e.key==='ArrowLeft'||e.key==='ArrowRight'){var k=t==='panel'?'incidence':'axle',v=state.after[k]+(e.key==='ArrowRight'?1:-1);change(k,Math.max(k==='incidence'?0:-8,Math.min(k==='incidence'?80:8,v)));e.preventDefault()}});
+$('light').addEventListener('input',function(){state.env.light=Number(this.value)/100;compute(true)});$('slope').addEventListener('input',function(){state.env.slope=Number(this.value);compute(true)});
+var lastFocus=null;function modelOpen(){pauseSim();lastFocus=document.activeElement;$('model-modal').hidden=false;$('model-close').focus()}function modelClose(){$('model-modal').hidden=true;if(lastFocus)lastFocus.focus()};$('model-open').addEventListener('click',modelOpen);$('model-close').addEventListener('click',modelClose);$('model-modal').addEventListener('click',function(e){if(e.target===this)modelClose()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('model-modal').hidden)modelClose();if(e.key==='Tab'&&!$('model-modal').hidden){var focusable=$('model-modal').querySelectorAll('button,input'),first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
+$('fullscreen').addEventListener('click',function(){var el=document.documentElement;if(document.fullscreenElement){document.exitFullscreen().catch(function(){toast('请使用浏览器退出全屏')})}else if(el.requestFullscreen){el.requestFullscreen().catch(function(){toast('当前浏览器未允许全屏，请使用浏览器的全屏功能')})}else if(el.webkitRequestFullscreen){el.webkitRequestFullscreen()}else toast('可使用浏览器的全屏或添加到主屏幕功能')});
+// Real videos stay in browser memory. No network request, camera or microphone access.
+var videoState={before:{ready:false,url:null,start:null,end:null},after:{ready:false,url:null,start:null,end:null},playing:false,rate:.5,t:0};
+function videoMessage(s,warn){$('video-message').textContent=s;$('video-message').classList.toggle('warning',!!warn)}
+function pauseVideo(){if(!videoState)return;videoState.playing=false;['before','after'].forEach(function(slot){var el=$('video-'+slot);if(el)el.pause()});if($('video-play'))$('video-play').textContent='▶ 同步回放'}
+function span(slot){var v=videoState[slot],el=$('video-'+slot);return v.ready?Math.max(0,(v.end===null?el.duration:v.end)-(v.start===null?0:v.start)):0}
+function videoLimit(){return Math.max(span('before'),span('after'),.01)}
+function updateVideoMarks(slot){var v=videoState[slot];$('start-'+slot).textContent=v.start===null?'未标记':fmt(v.start,2)+' s';$('end-'+slot).textContent=v.end===null?'未标记':fmt(v.end,2)+' s';var valid=v.start!==null&&v.end!==null&&v.end>v.start;$('elapsed-'+slot).textContent=valid?fmt(v.end-v.start,2)+' s':'—';$('video-scrub').max=videoLimit();var send=document.querySelector('[data-send="'+slot+'"]');send.disabled=!valid}
+['before','after'].forEach(function(slot){var el=$('video-'+slot);$('video-'+slot+'-file').addEventListener('change',function(){var f=this.files&&this.files[0];if(!f)return;pauseVideo();if(f.size>700*1024*1024){videoMessage('文件较大，可先剪出测试过程，减少平板内存占用。',true)}var v=videoState[slot];if(v.url)URL.revokeObjectURL(v.url);v.ready=false;v.start=null;v.end=null;v.url=URL.createObjectURL(f);el.src=v.url;el.load();$('filename-'+slot).textContent=f.name;updateVideoMarks(slot)});
+ el.addEventListener('loadedmetadata',function(){var v=videoState[slot];if(!Number.isFinite(el.duration)||el.duration<=0){videoMessage('这段视频暂时无法读取时长，请换一段可正常播放的视频。',true);return}v.ready=true;el.muted=true;el.playbackRate=videoState.rate;$('empty-'+slot).style.display='none';videoState.t=0;updateVideoMarks(slot);videoMessage('已载入真实测试视频。用视频自己的进度条定位，再标记起点和终点。')});el.addEventListener('error',function(){videoState[slot].ready=false;$('empty-'+slot).style.display='flex';videoMessage('当前浏览器无法播放这段视频。可换用常见的 MP4（H.264）视频。',true);updateVideoMarks(slot)});updateVideoMarks(slot)
+});
+$$('[data-mark]').forEach(function(b){b.addEventListener('click',function(){var slot=b.dataset.slot,v=videoState[slot],el=$('video-'+slot);if(!v.ready){toast('请先导入这版小车的测试视频');return}pauseVideo();var t=el.currentTime;if(b.dataset.mark==='start'){v.start=t;if(v.end!==null&&v.end<=t)v.end=null}else{if(v.start===null){toast('请先标记起点');return}if(t<=v.start+.01){toast('终点必须在起点之后');return}v.end=t}updateVideoMarks(slot);videoState.t=0;$('video-scrub').value=0;$('video-time').textContent='0.00 s';videoMessage('起终点由你手动判定；显示的小数位不等于实际测量精度。两次测试请使用相同判定规则。')})});
+function videoSeek(t){videoState.t=Math.max(0,Math.min(videoLimit(),t));['before','after'].forEach(function(slot){var v=videoState[slot];if(!v.ready)return;var el=$('video-'+slot),start=v.start===null?0:v.start;el.currentTime=Math.min(start+videoState.t,v.end===null?el.duration:v.end)});$('video-scrub').value=videoState.t;$('video-time').textContent=fmt(videoState.t,2)+' s'}
+$('video-scrub').addEventListener('input',function(){pauseVideo();videoSeek(Number(this.value))});$('video-reset').addEventListener('click',function(){pauseVideo();videoSeek(0)});$('video-speed').addEventListener('click',function(){videoState.rate=videoState.rate===.5?.25:videoState.rate===.25?1:.5;['before','after'].forEach(function(slot){$('video-'+slot).playbackRate=videoState.rate});this.textContent=videoState.rate+'× '+(videoState.rate===1?'原速':'慢放')});
+$('video-play').addEventListener('click',function(){if(videoState.playing){pauseVideo();return}var loaded=['before','after'].filter(function(slot){return videoState[slot].ready});if(!loaded.length){toast('先导入一段或两段实物测试视频');return}if(loaded.some(function(slot){return videoState[slot].start===null})){toast('请先为已导入的视频标记起点');return}if(videoState.t>=videoLimit()-.03)videoState.t=0;videoSeek(videoState.t);videoState.playing=true;this.textContent='Ⅱ 暂停观察';loaded.forEach(function(slot){var el=$('video-'+slot);if(videoState.t<span(slot)-.01){el.playbackRate=videoState.rate;var p=el.play();if(p&&p.catch)p.catch(function(){pauseVideo();videoMessage('浏览器暂停了视频，请点击视频原生播放按钮后再尝试同步。',true)})}})});
+function videoTick(){var times=[];['before','after'].forEach(function(slot){var v=videoState[slot],el=$('video-'+slot);if(!v.ready)return;var end=v.end===null?el.duration:v.end;if(el.currentTime>=end-.015){el.pause();if(el.currentTime>end+.03)el.currentTime=end}times.push(Math.min(span(slot),Math.max(0,el.currentTime-(v.start||0))))});if(times.length){videoState.t=Math.max.apply(Math,times);$('video-scrub').value=videoState.t;$('video-time').textContent=fmt(videoState.t,2)+' s'}if(videoState.t>=videoLimit()-.03)pauseVideo()}
+$$('[data-send]').forEach(function(b){b.addEventListener('click',function(){var slot=b.dataset.send,v=videoState[slot];if(v.start===null||v.end===null||v.end<=v.start){toast('先为这段视频标记起点和终点');return}if(window.EvidenceBoard&&typeof EvidenceBoard.addVideoTime==='function'){var ok=EvidenceBoard.addVideoTime(slot,Math.round((v.end-v.start)*100)/100);if(ok){switchPage('evidence');toast('已加入当前小组的第一条空测试记录，请确认载重和测试条件。')}else toast('当前小组这一版的3次记录已填满，请到实测评价选择其他小组或修改记录。')}else toast('请将 '+fmt(v.end-v.start,2)+' 秒填写到实测评价。')})});
+function downloadBlob(blob,name){var a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},2000)}
+$('video-snapshot').addEventListener('click',function(){var slots=['before','after'].filter(function(slot){return videoState[slot].ready});if(!slots.length){toast('请先导入测试视频');return}pauseVideo();var canvas=document.createElement('canvas');canvas.width=1600;canvas.height=680;var ctx=canvas.getContext('2d');if(!ctx){toast('当前浏览器不支持对照图导出');return}ctx.fillStyle='#edf3f7';ctx.fillRect(0,0,1600,680);ctx.font='bold 32px sans-serif';ctx.fillStyle='#172c44';ctx.fillText('评价“月球小车” · 实物视频证据',35,48);['before','after'].forEach(function(slot,i){var x=30+i*795,v=videoState[slot],el=$('video-'+slot);ctx.fillStyle='#fff';ctx.fillRect(x,75,775,535);ctx.font='bold 25px sans-serif';ctx.fillStyle=colors[slot];ctx.fillText(labels[slot],x+20,112);if(v.ready&&el.videoWidth){var scale=Math.min(735/el.videoWidth,400/el.videoHeight),w=el.videoWidth*scale,h=el.videoHeight*scale;ctx.drawImage(el,x+20+(735-w)/2,140+(400-h)/2,w,h);ctx.font='18px sans-serif';ctx.fillStyle='#546d7e';ctx.fillText('视频时刻 '+fmt(el.currentTime,2)+' s · 距标记起点 '+fmt(Math.max(0,el.currentTime-(v.start||0)),2)+' s',x+20,581)}else{ctx.font='22px sans-serif';ctx.fillStyle='#8192a0';ctx.fillText('未导入视频',x+280,335)}});ctx.font='18px sans-serif';ctx.fillStyle='#64788b';ctx.fillText('真实视频 · 人工标点。图像本身不自动证明原因；请结合条件和重复测试解释。',35,650);try{canvas.toBlob(function(blob){if(blob){downloadBlob(blob,'月球小车_实物视频对照.png');toast('已保存当前画面对照图')}else toast('导出失败，请重试')},'image/png')}catch(e){toast('浏览器未允许这段视频导出画面')}});
+document.addEventListener('visibilitychange',function(){if(document.hidden){pauseSim();pauseVideo()}});
+window.RoverLab={getState:function(){return clone({before:state.before,after:state.after,environment:state.env,t:state.t})},setTime:function(t){pauseSim();state.t=Math.max(0,Math.min(state.duration,t));draw()},setCase:function(key){if(cases[key]){state.key=key;state.before=clone(cases[key]);state.after=clone(cases[key]);compute(true)}},setParameter:change,switchPage:switchPage};
+if(window.EvidenceBoard)EvidenceBoard.init();compute(true);requestAnimationFrame(raf);
+})();
+</script>
+
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T1 · 基础交互" title="SVG 与本地记录；视频需浏览器支持；对照图导出使用可选 Canvas" style="position:fixed;left:8px;bottom:4px;z-index:8;pointer-events:none;padding:2px 6px;border-radius:5px;background:rgba(23,44,68,.78);color:#fff;font:600 10px/1.4 Arial,'Microsoft YaHei',sans-serif">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
