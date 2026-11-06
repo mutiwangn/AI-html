@@ -153,7 +153,7 @@
 #page-life .life-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-shrink:0}
 #page-life .life-heading h2{font-size:clamp(23px,2.1vw,31px);letter-spacing:.03em;margin:0 0 4px;font-weight:800}
 #page-life .life-heading p{margin:0;color:var(--muted,#637485);font-size:17px;line-height:1.5}
-#page-life .life-weather{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:15px;color:#337696;padding:9px 12px;border:1px solid #c9e4ef;background:#edf8fc;border-radius:9px}
+#page-life .life-weather{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:15px;color:#7b5d3c;padding:9px 12px;border:1px solid #e5d4bb;background:#fbf4e9;border-radius:9px}
 #page-life .life-layout{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(246px,292px);gap:16px}
 #page-life .life-scene{min-height:0;display:flex;flex-direction:column;border:1px solid var(--line,#dce4ec);border-radius:15px;background:#fff;overflow:hidden}
 #page-life .life-stage{position:relative;flex:1;min-height:210px;background:linear-gradient(180deg,#f5fbff 0%,#fff 73%)}
@@ -438,30 +438,25 @@
 <section class="page" id="page-life" hidden aria-labelledby="life-title">
  <div class="life-heading">
   <div><h2 id="life-title">好骑，也要停得住</h2><p>同一辆车，两处接触。点一处放大看。</p></div>
-  <div class="life-weather"><svg width="19" height="21" viewBox="0 0 19 21" aria-hidden="true"><path d="M9.5 1C7.5 5 3 8.5 3 13a6.5 6.5 0 0 0 13 0c0-4.5-4.5-8-6.5-12Z" fill="#5dadd6"/><path d="M6 12c0 3 1.3 4 3 4" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>有水膜的路面</div>
+  <div class="life-weather"><svg width="24" height="21" viewBox="0 0 24 21" aria-hidden="true"><path d="m1 13 5-5 5 3 4-6 8 8v7H1Z" fill="#d6b487"/><path d="M1 14h22" stroke="#a27a4d" stroke-width="1.5"/><circle cx="6" cy="17" r="1.3" fill="#a27a4d"/><circle cx="14" cy="15" r="1" fill="#a27a4d"/><circle cx="20" cy="18" r="1.2" fill="#a27a4d"/></svg>松软土路</div>
  </div>
  <div class="life-layout">
   <div class="life-scene">
    <div class="life-stage">
     <div class="life-stage-top"><span class="life-phase" id="life-phase" aria-live="polite">先选方案，再试骑</span><span class="life-follow">跟随视角</span></div>
-    <svg id="life-bike-svg" viewBox="0 0 900 465" role="group" aria-label="湿路上的自行车，点轮轴或轮胎接地处查看局部">
+    <svg id="life-bike-svg" viewBox="0 0 900 465" role="group" aria-label="松软土路上的自行车，点轮轴或轮胎接地处查看局部">
      <defs>
-      <linearGradient id="life-road-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d5eaf3"/><stop offset="1" stop-color="#eef6fa"/></linearGradient>
+      <linearGradient id="life-road-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#dec29a"/><stop offset="1" stop-color="#f2e4cd"/></linearGradient>
       <linearGradient id="life-frame-fill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4794ee"/><stop offset=".55" stop-color="#2866e8"/><stop offset="1" stop-color="#1b4fbe"/></linearGradient>
       <linearGradient id="life-rim-fill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e5edf2"/><stop offset=".5" stop-color="#98acbb"/><stop offset="1" stop-color="#e3ebef"/></linearGradient>
       <clipPath id="life-road-clip"><path d="M0 355H900V465H0Z"/></clipPath>
       <marker id="life-force-head" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 12 6 0 12 3 6Z" fill="#df7940"/></marker>
       <marker id="life-resist-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0 0 10 5 0 10 2 5Z" fill="#df8b42"/></marker>
-      <marker id="life-water-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10Z" fill="#65b6dc"/></marker>
      </defs>
      <path d="M32 113H107M54 100h26M739 113h81M781 102h25" stroke="#d4e6ee" stroke-width="5" stroke-linecap="round"/>
-     <path d="m120 142-6 13m641-22-6 13m66 54-6 13" stroke="#a4cfdf" stroke-width="4" stroke-linecap="round" opacity=".6"/>
      <path d="M0 355H900V465H0Z" fill="url(#life-road-fill)"/>
-     <path d="M0 355H900" stroke="#92b3c5" stroke-width="3"/>
-     <g clip-path="url(#life-road-clip)"><g id="life-road-marks" stroke-linecap="round" opacity=".82">
-      <path d="M-100 386h110M80 438h85M230 377h90M380 433h120M580 382h62M730 439h106M925 382h103M1090 435h85" stroke="#a6d3e5" stroke-width="5"/>
-      <path d="M-20 412h58M150 397h43M320 452h45M505 409h68M670 421h37M830 395h60M1000 417h58" stroke="#fff" stroke-width="4"/>
-     </g></g>
+     <path d="M0 355H900" stroke="#ad875b" stroke-width="3"/>
+     <g clip-path="url(#life-road-clip)"><g id="life-road-marks" fill="#ae8456" opacity=".72"></g></g>
      <ellipse cx="436" cy="360" rx="265" ry="11" fill="#193b5a" opacity=".055"/>
      <g id="life-rear-wheel">
       <circle cx="248" cy="276" r="72" fill="#f8fcff" stroke="#23394a" stroke-width="14"/>
@@ -506,7 +501,7 @@
       <rect x="65" y="215" width="90" height="39" rx="9" fill="#fff" stroke="#c9dbe9" stroke-width="2"/>
       <text x="110" y="241" text-anchor="middle" font-size="21">轮轴 ＋</text>
      </g>
-     <g class="life-hotspot" data-life-focus="ground" role="button" tabindex="0" aria-label="放大轮胎与湿路接触" aria-pressed="false">
+     <g class="life-hotspot" data-life-focus="ground" role="button" tabindex="0" aria-label="放大轮胎与松软土路接触" aria-pressed="false">
       <circle cx="248" cy="355" r="56" fill="transparent" stroke="none"/><circle class="life-hot-ring" cx="248" cy="355" r="21"/>
       <path d="M239 355h18M248 346v18" stroke="#4e7ea6" stroke-width="2.5" stroke-linecap="round"/>
       <path d="M148 404h43l39-34" fill="none" stroke="#7396b3" stroke-width="2"/>
@@ -535,13 +530,13 @@
       <text x="136" y="67" fill="#59748b" font-size="15" font-family="inherit">轴</text>
      </g>
      <g id="life-ground-detail" style="display:none">
-      <path d="M10 77H171V91H10Z" fill="#bbccd7"/>
-      <path d="M10 77H171" stroke="#7392a7" stroke-width="2"/>
-      <path id="life-water-film" d="M10 69H171V76H10Z" fill="#76c1e7" opacity=".7"/>
-      <path d="M39 12h104v43q0 17-22 17H61q-22 0-22-17Z" fill="#2c4559"/>
-      <path id="life-grooves" d="M63 42v30h13V42m29 0v30h13V42" fill="#e9f5fc" style="display:none"/>
-      <path id="life-draining" d="M70 68V47M111 68V47M33 70H12M148 70h22" fill="none" stroke="#65b6dc" stroke-width="3" marker-end="url(#life-water-head)" style="display:none"/>
-      <path d="M149 22h22M149 67h22" fill="none" stroke="#9aaec0" stroke-width="1.5"/>
+      <path d="M10 61H171V92H10Z" fill="#d8b887"/>
+      <path d="m10 61 11 1 10-2 11 2 10-1 12 1 12-2 11 2 11-1 11 1 10-2 11 2 10-1 11 1 9-1 11 1" fill="none" stroke="#b38c58" stroke-width="2"/>
+      <g fill="#ac8150"><circle cx="19" cy="69" r="2"/><circle cx="30" cy="81" r="2.3"/><circle cx="43" cy="73" r="1.7"/><circle cx="57" cy="86" r="2"/><circle cx="73" cy="79" r="2.2"/><circle cx="87" cy="86" r="1.8"/><circle cx="108" cy="82" r="2.4"/><circle cx="126" cy="87" r="1.6"/><circle cx="139" cy="75" r="2.1"/><circle cx="154" cy="84" r="2.3"/><circle cx="165" cy="69" r="1.8"/></g>
+      <path d="M39 10h104v34q0 12-22 12H61q-22 0-22-12Z" fill="#2c4559"/>
+      <path id="life-smooth-contact" d="M39 41v5q0 15 22 15h60q22 0 22-15v-5Z" fill="#2c4559"/>
+      <g id="life-tread-knobs" fill="#2c4559" style="display:none"><path d="M51 46h18v29H51ZM82 46h18v31H82ZM113 46h18v29h-18Z"/><path d="M51 57h18M82 57h18M113 57h18" stroke="#466277" stroke-width="1.5"/></g>
+      <g id="life-soil-interlock" fill="#b58a55" stroke="#98713e" stroke-width=".6" style="display:none"><path d="m46 65 4-3v11l-5-2Zm25-3 5 3-1 7-4 2Zm6 5 4-3v11l-5-2Zm25-3 6 2-1 7-5 3Zm6 0 4-3v12l-5-2Zm25-1 6 4-2 7-4-1Z"/></g>
      </g>
     </svg>
     <div class="life-detail-copy"><h3 id="life-detail-title">轮轴里的接触</h3><p id="life-detail-text">滚珠夹在内外圈之间。它们转动时，也有阻力吗？</p></div>
@@ -550,13 +545,13 @@
   <aside class="life-side" aria-label="自行车改进方案">
    <div class="life-config">
     <div><span class="life-label" id="life-axle-label">轮轴</span><div class="life-options" role="group" aria-labelledby="life-axle-label"><button class="life-choice" type="button" data-life-key="axle" data-life-value="dry" aria-pressed="true">干涩</button><button class="life-choice" type="button" data-life-key="axle" data-life-value="oiled" aria-pressed="false">润滑</button></div></div>
-    <div><span class="life-label" id="life-tyre-label">湿路轮胎</span><div class="life-options" role="group" aria-labelledby="life-tyre-label"><button class="life-choice" type="button" data-life-key="tyre" data-life-value="worn" aria-pressed="true">磨平</button><button class="life-choice" type="button" data-life-key="tyre" data-life-value="drain" aria-pressed="false">排水胎纹</button></div></div>
+    <div><span class="life-label" id="life-tyre-label">土路轮胎</span><div class="life-options" role="group" aria-labelledby="life-tyre-label"><button class="life-choice" type="button" data-life-key="tyre" data-life-value="smooth" aria-pressed="true">平滑胎面</button><button class="life-choice" type="button" data-life-key="tyre" data-life-value="knob" aria-pressed="false">凸起胎纹</button></div></div>
    </div>
    <button class="life-primary" id="life-run" type="button">试骑与刹车</button>
    <div class="life-feedback">
     <div class="life-result-pair">
      <div class="life-result-item"><span>轮轴阻力</span><strong id="life-drag-result">—</strong><div class="life-bars" id="life-drag-bars" data-kind="drag" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
-     <div class="life-result-item"><span>湿路抓地</span><strong id="life-grip-result">—</strong><div class="life-bars" id="life-grip-bars" data-kind="grip" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+     <div class="life-result-item"><span>土路抓地</span><strong id="life-grip-result">—</strong><div class="life-bars" id="life-grip-bars" data-kind="grip" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
     </div>
     <p class="life-result-note" id="life-result-note" aria-live="polite">摩擦力是不是越小越好？</p>
     <button class="life-save" id="life-save" type="button" disabled>保留方案，继续改进</button>
@@ -569,14 +564,14 @@
    </div>
   </aside>
  </div>
- <p class="life-note">定性模型：各方案用相同运动过程观察受力方向，不比较真实刹车距离；固定车辆、载重和胎压。</p>
+ <p class="life-note">定性模型：只示意松软土路上的接触作用；各方案用相同运动过程，不比较真实刹车距离。固定车辆、载重、胎压与胎面材料。</p>
 </section>
 
 
 </main>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
-<div class="modal-backdrop" id="infoModal" hidden><section class="info-dialog" role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="dialog-head"><h2 id="infoTitle">课堂使用说明</h2><button id="closeInfo" aria-label="关闭说明">关闭</button></div><p>建议先做教材中的身体体验与真实实验，再用网页放大测量过程、整理证据、讨论生活中的不同需求。</p><h3>三个任务</h3><ul><li>测一测：水平拖拉测力计，比较启动、变速与匀速的读数；也可用“匀速拉动”辅助观察。</li><li>比一比：每组最多记录三次；真实实验用触控键盘录入，选择两组比较条件与平均值。</li><li>用一用：对照轮轴与轮胎两处接触，改进湿路自行车方案。</li></ul><h3>模型边界</h3><p>模拟参数用于同条件的定性比较，不能当作真实器材测量结果。匀速阶段的拉力可近似反映水平方向的总阻力。滚动状态包含轮轴、接触形变等阻力，不能把它等同于轮胎打滑时的滑动摩擦。较粗糙与较光滑的差别仅表示本模型的条件，不是对所有材料的通用定律。</p><p>测力计量程 5 N，最小分度 0.1 N；启动、变速或超量程时不作为有效读数。各组比较应保持测力计、桌面、轮胎材料和尺寸等条件一致。</p><h3>保存与操作</h3><p>记录自动保存在当前浏览器，可从“比一比”导出。不同设备的记录不会自动同步。鼠标、触控均可操作；键盘聚焦拉环后可按右方向键拉动，回车启动演示。单体文件无外部依赖，可断网打开。</p><footer>依据所提供教材第82—85页、教师用书本课教学建议。v1.0 · T1 基础级（HTML/CSS/JS/SVG）。本页数值与动画均为教学模型。</footer></section></div>
+<div class="modal-backdrop" id="infoModal" hidden><section class="info-dialog" role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="dialog-head"><h2 id="infoTitle">课堂使用说明</h2><button id="closeInfo" aria-label="关闭说明">关闭</button></div><p>建议先做教材中的身体体验与真实实验，再用网页放大测量过程、整理证据、讨论生活中的不同需求。</p><h3>三个任务</h3><ul><li>测一测：水平拖拉测力计，比较启动、变速与匀速的读数；也可用“匀速拉动”辅助观察。</li><li>比一比：每组最多记录三次；真实实验用触控键盘录入，选择两组比较条件与平均值。</li><li>用一用：对照轮轴与轮胎两处接触，改进松软土路上的自行车方案。</li></ul><h3>模型边界</h3><p>模拟参数用于同条件的定性比较，不能当作真实器材测量结果。匀速阶段的拉力可近似反映水平方向的总阻力。滚动状态包含轮轴、接触形变等阻力，不能把它等同于轮胎打滑时的滑动摩擦。较粗糙与较光滑的差别仅表示本模型的条件，不是对所有材料的通用定律。</p><p>测力计量程 5 N，最小分度 0.1 N；启动、变速或超量程时不作为有效读数。各组比较应保持测力计、桌面、轮胎材料和尺寸等条件一致。</p><h3>保存与操作</h3><p>记录自动保存在当前浏览器，可从“比一比”导出。不同设备的记录不会自动同步。鼠标、触控均可操作；键盘聚焦拉环后可按右方向键拉动，回车启动演示。单体文件无外部依赖，可断网打开。</p><footer>依据所提供教材第82—85页、教师用书本课教学建议。v1.0 · T1 基础级（HTML/CSS/JS/SVG）。本页数值与动画均为教学模型。自行车胎纹的路面条件参考 <a href="https://www.schwalbe.com/en/technology-faq/profile/" target="_blank" rel="noopener noreferrer">Schwalbe 技术说明</a>。</footer></section></div>
 <script>
 (function(){
 'use strict';
@@ -1154,16 +1149,23 @@ buildScales();buildCart();setConfig('loads',0);updateCounts();requestAnimationFr
  if(!root)return;
  var $=function(id){return document.getElementById(id);};
  var ns='http://www.w3.org/2000/svg';
- var state={axle:'dry',tyre:'worn',focus:'axle',running:false,paused:false,time:0,phase:'ready',result:null,baseline:null,angle:0,driveAngle:0,road:0};
+ var state={axle:'dry',tyre:'smooth',focus:'axle',running:false,paused:false,time:0,phase:'ready',result:null,baseline:null,angle:0,driveAngle:0,road:0};
  var lastTime=null,frameId=0,total=8.4;
  var settings=Array.prototype.slice.call(root.querySelectorAll('[data-life-key]'));
  var focusTargets=Array.prototype.slice.call(root.querySelectorAll('[data-life-focus]'));
  function svgEl(name,attrs){var e=document.createElementNS(ns,name);Object.keys(attrs).forEach(function(k){e.setAttribute(k,attrs[k]);});return e;}
+ /* Soil-grip illustration: Schwalbe, https://www.schwalbe.com/en/technology-faq/profile/
+    Tread blocks interlock with soft ground; this is not a car-style wet-road drainage model. */
+ for(var strip=-1;strip<4;strip++){
+  [[18,376,3.1],[67,401,4],[115,367,2.6],[163,441,3.5],[211,390,3.2],[258,423,4.2],[289,452,2.8]].forEach(function(p){
+   $('life-road-marks').appendChild(svgEl('ellipse',{cx:strip*300+p[0],cy:p[1],rx:p[2]*1.35,ry:p[2]}));
+  });
+  $('life-road-marks').appendChild(svgEl('path',{d:'m'+(strip*300+42)+' 433 8-5 10 3-4 5Zm'+161+' -24 6-5 8 3-3 5Z',fill:'#c39c68'}));
+ }
  Array.prototype.forEach.call(root.querySelectorAll('.life-tread'),function(g){
   var cx=+g.getAttribute('data-cx'),cy=+g.getAttribute('data-cy');
   for(var n=0;n<28;n++){
-   var a=n*Math.PI/14,x=cx+76*Math.cos(a),y=cy+76*Math.sin(a);
-   g.appendChild(svgEl('path',{d:'M'+(x-4*Math.cos(a)+2*Math.sin(a)).toFixed(2)+' '+(y-4*Math.sin(a)-2*Math.cos(a)).toFixed(2)+'l'+(8*Math.cos(a)-4*Math.sin(a)).toFixed(2)+' '+(8*Math.sin(a)+4*Math.cos(a)).toFixed(2)}));
+   g.appendChild(svgEl('rect',{x:cx-4,y:cy-83,width:8,height:9,rx:1.2,fill:'#2c4559',stroke:'#23394a','stroke-width':1,transform:'rotate('+(n*360/28).toFixed(2)+' '+cx+' '+cy+')'}));
   }
  });
  for(var n=0;n<8;n++){
@@ -1171,9 +1173,9 @@ buildScales();buildCart();setConfig('loads',0);updateCounts();requestAnimationFr
   $('life-bearing-balls').appendChild(svgEl('circle',{cx:(56+25*Math.cos(a)).toFixed(2),cy:(47+25*Math.sin(a)).toFixed(2),r:6.1}));
  }
  function axleName(v){return v==='oiled'?'润滑轮轴':'干涩轮轴';}
- function tyreName(v){return v==='drain'?'排水胎纹':'磨平轮胎';}
+ function tyreName(v){return v==='knob'?'凸起胎纹':'平滑胎面';}
  function resultFor(config){
-  return {axle:config.axle,tyre:config.tyre,drag:config.axle==='oiled'?'较小':'偏大',grip:config.tyre==='drain'?'较好':'较弱',dragLevel:config.axle==='oiled'?1:4,gripLevel:config.tyre==='drain'?4:1};
+  return {axle:config.axle,tyre:config.tyre,drag:config.axle==='oiled'?'较小':'偏大',grip:config.tyre==='knob'?'较好':'较弱',dragLevel:config.axle==='oiled'?1:4,gripLevel:config.tyre==='knob'?4:1};
  }
  function setBars(id,num){Array.prototype.forEach.call($(id).children,function(e,i){e.setAttribute('data-on',i<num?'true':'false');});}
  function drawDetail(){
@@ -1184,26 +1186,26 @@ buildScales();buildCart();setConfig('loads',0);updateCounts();requestAnimationFr
   $('life-bearing-resistance').setAttribute('visibility',(state.running||tested)?'visible':'hidden');
   $('life-resistance-arc').setAttribute('d',state.axle==='oiled'?'M56 5A42 42 0 0 0 26.3 17.3':'M56 5A42 42 0 0 0 20 68.6');
   $('life-resistance-arc').setAttribute('stroke-width',state.axle==='oiled'?'3':'5');
-  $('life-grooves').style.display=state.tyre==='drain'?'':'none';
-  $('life-draining').style.display=state.tyre==='drain'?'':'none';
-  $('life-water-film').setAttribute('opacity',state.tyre==='drain'?'.3':'.75');
-  $('life-detail-title').textContent=axle?'轮轴里的接触':'轮胎与湿路的接触';
+  $('life-tread-knobs').style.display=state.tyre==='knob'?'':'none';
+  $('life-soil-interlock').style.display=state.tyre==='knob'?'':'none';
+  $('life-smooth-contact').style.display=state.tyre==='knob'?'none':'';
+  $('life-detail-title').textContent=axle?'轮轴里的接触':'轮胎与软土的接触';
   if(axle){
    $('life-detail-text').textContent=tested&&state.axle==='oiled'?'润滑减少轮轴接触处的阻力。润滑剂留在轮轴，不涂到轮胎接地面。':state.axle==='oiled'?'黄色表示润滑剂。轮轴处理了，轮胎与地面的接触会一起改变吗？':'滚珠夹在内外圈之间。它们转动时，也有阻力吗？';
   }else{
-   $('life-detail-text').textContent=tested&&state.tyre==='drain'?'本模型中，沟槽帮助排水，改善湿路接触。胎纹并非越深越好。':state.tyre==='drain'?'蓝色表示水。沟槽为水留下通道，试骑后再比较湿路抓地。':'薄水膜会改变接触条件。换成排水胎纹，轮轴会一起改变吗？';
+   $('life-detail-text').textContent=tested&&state.tyre==='knob'?'本模型中，凸纹嵌入软土，帮助传递驱动和制动力；这不表示胎纹越深越好。':state.tyre==='knob'?'看凸起的纹块怎样嵌入软土。试骑后再比较土路抓地。':'棕色颗粒表示软土。换成凸起胎纹，轮轴会一起改变吗？';
   }
   focusTargets.forEach(function(e){e.setAttribute('aria-pressed',e.getAttribute('data-life-focus')===state.focus?'true':'false');});
  }
  function drawSettings(){
   settings.forEach(function(b){var k=b.getAttribute('data-life-key');b.setAttribute('aria-pressed',state[k]===b.getAttribute('data-life-value')?'true':'false');b.disabled=state.running;});
-  Array.prototype.forEach.call(root.querySelectorAll('.life-tread'),function(g){g.setAttribute('opacity',state.tyre==='drain'?'.95':'.1');});
+  Array.prototype.forEach.call(root.querySelectorAll('.life-tread'),function(g){g.setAttribute('opacity',state.tyre==='knob'?'1':'0');});
   drawDetail();
  }
  function resultSentence(r){
-  if(r.axle==='oiled'&&r.tyre==='drain')return '轮轴更易转，湿路抓地也改善了。';
-  if(r.axle==='oiled')return '轮轴更易转，湿路抓地仍待改进。';
-  if(r.tyre==='drain')return '湿路抓地改善了，轮轴阻力仍偏大。';
+  if(r.axle==='oiled'&&r.tyre==='knob')return '轮轴更易转，土路抓地也改善了。';
+  if(r.axle==='oiled')return '轮轴更易转，土路抓地仍待改进。';
+  if(r.tyre==='knob')return '土路抓地改善了，轮轴阻力仍偏大。';
   return '先改变一个部位，再看看哪项反馈变了。';
  }
  function comparison(){
@@ -1216,8 +1218,8 @@ buildScales();buildCart();setConfig('loads',0);updateCounts();requestAnimationFr
   if(!r){$('life-comparison').textContent='改变一个部位，再试骑。';return;}
   var a=r.axle!==b.axle,t=r.tyre!==b.tyre;
   if(!a&&!t)$('life-comparison').textContent='相同方案。还可以试着改变一个部位。';
-  else if(a&&!t)$('life-comparison').textContent='只改轮轴：阻力'+(r.dragLevel<b.dragLevel?'减小':'增大')+'，湿路抓地未变。';
-  else if(!a&&t)$('life-comparison').textContent='只改胎面：湿路抓地'+(r.gripLevel>b.gripLevel?'改善':'减弱')+'，轮轴阻力未变。';
+  else if(a&&!t)$('life-comparison').textContent='只改轮轴：阻力'+(r.dragLevel<b.dragLevel?'减小':'增大')+'，土路抓地未变。';
+  else if(!a&&t)$('life-comparison').textContent='只改胎面：土路抓地'+(r.gripLevel>b.gripLevel?'改善':'减弱')+'，轮轴阻力未变。';
   else $('life-comparison').textContent='两处都改变了。再分别试一次，辨别各自的作用。';
  }
  function drawResult(){
@@ -1300,7 +1302,7 @@ buildScales();buildCart();setConfig('loads',0);updateCounts();requestAnimationFr
  });
  function reset(){
   if(frameId)cancelAnimationFrame(frameId);frameId=0;lastTime=null;
-  state={axle:'dry',tyre:'worn',focus:'axle',running:false,paused:false,time:0,phase:'',result:null,baseline:null,angle:0,driveAngle:0,road:0};
+  state={axle:'dry',tyre:'smooth',focus:'axle',running:false,paused:false,time:0,phase:'',result:null,baseline:null,angle:0,driveAngle:0,road:0};
   setPhase('ready');$('life-run').textContent='试骑与刹车';$('life-run').setAttribute('data-paused','false');$('life-baseline').hidden=true;
   drawSettings();drawResult();drawMovement();
  }
