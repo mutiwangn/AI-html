@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#edf2f5">
+<meta name="description" content="改变钢尺伸出长度，听音、慢放、保留两次同尺度对照；独立调节振动快慢与幅度，理解声音的高低。">
+<title>声音的高低 · 四上3.3</title>
+<style>
+:root{--ink:#18334e;--muted:#62788b;--paper:#edf2f5;--line:#d4dfe7;--blue:#236ebb;--blue-soft:#e9f2fc;--orange:#b96924;--orange-soft:#fff3e6;--white:#fff;--radius:14px}
+*{box-sizing:border-box}html,body{margin:0;height:100%;width:100%;overflow:hidden}body{background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent}h1,h2,h3,p{margin:0}button,input{font:inherit}button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;min-height:45px;padding:9px 14px;font-size:16px;font-weight:650;cursor:pointer;touch-action:manipulation;white-space:nowrap}button:hover{background:#f3f7fb}button:active{transform:translateY(1px)}button:disabled{opacity:.35;cursor:default;transform:none}button.primary{background:var(--blue);border-color:var(--blue);color:#fff}button.primary:hover{background:#1b5d9f}button.small{min-height:35px;padding:6px 10px;font-size:13px}button.icon{width:45px;padding:9px;display:inline-flex;align-items:center;justify-content:center}button svg{width:21px;height:21px;vertical-align:middle;flex:none}button .ic{display:inline-flex;vertical-align:middle;margin-right:7px}button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #ee9e3e;outline-offset:3px}input[type=range]{accent-color:var(--blue);height:34px;min-width:0;width:100%;cursor:pointer;touch-action:pan-y}svg text{font-family:inherit}[hidden],.hidden{display:none!important}.shell{max-width:1840px;margin:0 auto;height:100%;height:100dvh;padding:20px 26px 7px;display:grid;grid-template-rows:64px minmax(0,1fr) 23px;gap:15px}.header{display:flex;align-items:center;gap:24px;min-width:0}.brand{display:flex;align-items:center;gap:13px;flex-shrink:0}.brand-icon{width:47px;height:47px;border-radius:12px;background:var(--ink);color:#c9e7ff;display:grid;place-items:center}.brand-icon svg{width:32px;height:32px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--muted);font-weight:700;margin-bottom:4px}h1{font-size:29px;letter-spacing:1px;line-height:1.2}.nav{display:flex;margin:auto;gap:4px;padding:5px;background:#dfe7ee;border-radius:11px}.nav button{border:0;background:transparent;min-width:153px;font-size:17px;min-height:43px;padding:9px 16px}.nav button[aria-selected=true]{background:#fff;color:var(--blue);box-shadow:0 2px 5px #17365012}.nav .num{font-size:12px;opacity:.6;margin-right:8px}.header-tools{display:flex;gap:7px}.header-tools button{background:transparent}.screen,.main{min-height:0;height:100%}.ruler-layout{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 312px;gap:16px}.stage{border-radius:var(--radius);background:#172f49;min-height:0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 6px 24px #233c5012}.stage-head{color:#f7fbff;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:21px 23px 6px}.stage-head h2{font-size:22px;font-weight:650}.stage-head .badge{font-size:12px;color:#adc9df;border:1px solid #4a667d;padding:4px 8px;border-radius:5px;white-space:nowrap}.stage-instruction{font-size:14px;color:#a9c0d5;padding:0 23px;line-height:1.5}.scene-wrap{position:relative;flex:1;min-height:0;display:flex;align-items:center;background:radial-gradient(ellipse at 70% 46%,#264b68 0%,#172f4900 65%)}.scene{width:100%;height:100%;min-height:0;display:block;touch-action:none;user-select:none;-webkit-user-select:none}.scene .label{fill:#d1e1ec;font-size:19px;font-weight:600}.scene .quiet{fill:#92b1ca;font-size:16px}.scene .measure{fill:#f5bd72;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}.scene .handle{cursor:ew-resize}.scene .pluck{cursor:pointer}.scene-mode{position:absolute;top:12px;left:23px;background:#10283a99;border:1px solid #47637970;border-radius:6px;color:#c3d6e6;font-size:12px;padding:6px 10px;pointer-events:none}.scene-mode .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#69b5ef;margin-right:6px}.stage-controls{background:#fff;padding:16px 22px 11px;border-top:1px solid #cbd9e4}.length-row{display:flex;align-items:center;gap:15px;margin-bottom:7px}.length-row label{font-size:16px;font-weight:650;white-space:nowrap}.length-row output{font-weight:750;min-width:67px;font-size:21px;text-align:right;font-variant-numeric:tabular-nums}.length-range{position:relative;flex:1}.length-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:0 8px;margin-top:-3px}.play-row{display:flex;gap:8px;margin-top:12px}.play-row button{font-size:16px}.play-row .primary{flex:1.2}.play-row .slow{flex:1}.timeline{display:flex;align-items:center;gap:10px;margin-top:5px;height:31px;font-size:12px;color:var(--muted)}.timeline input{height:27px}.timeline span{white-space:nowrap}.timeline output{min-width:62px;text-align:right;font-variant-numeric:tabular-nums}.sound-note{font-size:11px;color:var(--muted);line-height:1.4;margin-top:2px}.evidence{min-height:0;border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:18px;display:flex;flex-direction:column;gap:13px}.evidence-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}.evidence h2{font-size:21px}.evidence-heading span{font-size:12px;color:var(--muted)}.sample{background:var(--blue-soft);border:1px solid #c4daf1;border-radius:10px;padding:12px;min-height:0;flex:1;display:flex;flex-direction:column}.sample.b{background:var(--orange-soft);border-color:#e7d0b7}.sample.playing{box-shadow:inset 0 0 0 2px var(--blue)}.sample.b.playing{box-shadow:inset 0 0 0 2px var(--orange)}.sample-top{display:flex;align-items:center;justify-content:space-between;gap:7px}.sample-title{display:flex;align-items:baseline;gap:9px;font-size:23px;font-weight:750;color:var(--blue)}.b .sample-title{color:var(--orange)}.sample-title span{font-size:15px;color:var(--ink);font-weight:650}.sample-wave{width:100%;flex:1;min-height:67px;max-height:128px;display:block}.sample-bottom{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12px;color:var(--muted)}.sample-bottom button{border:0;background:transparent;min-height:28px;padding:3px;font-size:12px}.sample-bottom .frequency{font-variant-numeric:tabular-nums}.compare-actions{display:grid;grid-template-columns:1fr;gap:8px}.compare-actions button{font-size:15px;min-height:42px}.compare-actions button[aria-pressed=true]{background:var(--blue-soft);border-color:#8bb6df}.think{font-size:15px;line-height:1.6;color:#526b81}.think b{color:var(--ink);font-weight:650}.evidence-note{font-size:11px;color:var(--muted);margin-top:-5px}
+.mixer-layout{height:100%;display:flex;flex-direction:column;gap:16px}.mixer-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:6px 2px 0}.mixer-heading h2{font-size:24px}.mixer-heading p{font-size:14px;color:var(--muted);margin-top:6px}.mixer-heading .equal-note{font-size:13px;color:var(--muted);border:1px solid #cbd9e4;padding:8px 11px;border-radius:7px;white-space:nowrap}.mixer-cards{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:18px}.voice{min-height:0;display:flex;flex-direction:column;background:#fff;border:1px solid #c9dceb;border-radius:var(--radius);overflow:hidden}.voice.b{border-color:#e3cfb8}.voice.active{box-shadow:0 0 0 2px #8bb6df}.voice.b.active{box-shadow:0 0 0 2px #dba46d}.voice-head{display:flex;align-items:center;justify-content:space-between;padding:18px 23px 0;gap:12px}.voice-title{display:flex;align-items:center;gap:12px}.voice-key{font-size:21px;color:#fff;background:var(--blue);border-radius:8px;width:41px;height:41px;display:grid;place-items:center;font-weight:700}.voice.b .voice-key{background:var(--orange)}.voice-title h3{font-size:18px;font-weight:650}.voice-title p{font-size:12px;color:var(--muted);margin-top:4px}.voice-head button{min-width:94px}.voice-plot{flex:1;min-height:0;display:flex;align-items:center;background:linear-gradient(180deg,#fff 0%,#f6fafe 100%)}.voice.b .voice-plot{background:linear-gradient(180deg,#fff 0%,#fffaf4 100%)}.voice-plot svg{width:100%;height:100%;display:block;min-height:130px}.voice-controls{padding:16px 24px 17px;display:flex;flex-direction:column;gap:15px;border-top:1px solid #e3ebf1}.control-line{display:grid;grid-template-columns:105px minmax(0,1fr) 85px;gap:15px;align-items:center}.control-line label{font-size:16px;font-weight:650}.control-line label small{display:block;font-size:11px;font-weight:400;color:var(--muted);margin-top:4px}.control-line output{text-align:right;font-size:21px;font-weight:750;white-space:nowrap;font-variant-numeric:tabular-nums}.control-line output small{font-size:12px;font-weight:500}.voice.b input{accent-color:var(--orange)}.control-endpoints{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:-3px;padding:0 5px}.mixer-bottom{display:flex;align-items:center;gap:12px;padding:13px 18px;border:1px solid var(--line);border-radius:11px;background:#fff}.mixer-bottom .primary{min-width:170px}.mixer-bottom button{font-size:15px}.mixer-bottom button[aria-pressed=true]{background:var(--blue-soft);border-color:#87b4df}.mixer-prompt{margin-left:auto;font-size:15px;line-height:1.6;text-align:right;color:#526b81}.mixer-prompt b{color:var(--ink)}.footer{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted);font-size:11px}.footer .level{font-size:10px;letter-spacing:.7px}.footer button{border:0;background:none;min-height:24px;font-size:11px;padding:2px 0;font-weight:500;color:var(--muted)}.toast{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);max-width:90vw;z-index:12;background:#17344d;color:#fff;border:1px solid #4d6c84;border-radius:10px;padding:12px 20px;box-shadow:0 7px 30px #001b3c22;font-size:15px;line-height:1.5;text-align:center;pointer-events:none}.dialog-shade{position:fixed;inset:0;z-index:20;background:#10253e70;display:grid;place-items:center;padding:20px}.dialog{background:#fff;border-radius:14px;padding:27px;width:650px;max-width:100%;max-height:88vh;overflow:auto;box-shadow:0 20px 80px #001b3c30}.dialog-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.dialog h2{font-size:23px}.dialog h3{font-size:17px;margin:20px 0 7px}.dialog p{font-size:15px;line-height:1.85;color:#4e677b}.dialog .highlight{color:var(--blue);font-weight:650}.dialog a{color:var(--blue)}
+@media(min-width:1600px){.shell{padding:25px 36px 8px;gap:20px;grid-template-rows:70px minmax(0,1fr) 25px}h1{font-size:33px}.ruler-layout{grid-template-columns:minmax(0,1fr) 360px;gap:20px}.evidence{padding:22px;gap:18px}.sample-title span{font-size:18px}.sample-bottom,.stage-instruction{font-size:15px}.sample-top button{font-size:15px}.think{font-size:18px}.stage-head h2,.evidence h2{font-size:24px}.stage-controls{padding:19px 28px 14px}.play-row button{font-size:18px;min-height:51px}.sound-note{font-size:13px}.control-line label{font-size:20px}.control-line{grid-template-columns:125px minmax(0,1fr) 108px}.control-line output{font-size:25px}.voice-controls{padding:20px 30px}.voice-title h3{font-size:22px}.mixer-prompt{font-size:18px}}
+@media(max-width:1100px){.shell{padding:13px 16px 6px;gap:11px;grid-template-rows:60px minmax(0,1fr) 23px}.header{gap:12px}h1{font-size:26px}.nav button{min-width:126px;font-size:16px;padding:9px 12px}.ruler-layout{grid-template-columns:minmax(0,1fr) 260px;gap:12px}.stage-head{padding:17px 18px 5px}.stage-head h2{font-size:20px}.stage-head .badge{font-size:11px}.stage-instruction{padding:0 18px;font-size:12px}.stage-controls{padding:13px 16px 9px}.length-row{gap:10px}.length-row label{font-size:14px}.play-row button{font-size:14px;padding:8px 9px}.evidence{padding:14px;gap:11px}.evidence h2{font-size:18px}.evidence-heading span{font-size:11px}.sample{padding:10px}.sample-title span{font-size:14px}.sample-bottom{font-size:11px}.think{font-size:14px}.sound-note{font-size:10px}.voice-head{padding:16px 18px 0}.voice-controls{padding:13px 18px;gap:13px}.control-line{grid-template-columns:93px minmax(0,1fr) 73px;gap:10px}.control-line label{font-size:15px}.control-line output{font-size:19px}.mixer-bottom{padding:11px 14px}.mixer-bottom button{font-size:14px}.mixer-prompt{font-size:13px}}
+@media(max-height:700px) and (min-width:761px){.shell{padding-top:9px;gap:8px;grid-template-rows:53px minmax(0,1fr) 21px}.brand-icon{width:42px;height:42px}.eyebrow{font-size:10px}h1{font-size:25px}.stage-head{padding-top:13px}.stage-instruction{font-size:12px}.stage-controls{padding-top:9px;padding-bottom:6px}.play-row{margin-top:7px}.play-row button{min-height:41px}.length-row{margin-bottom:3px}.evidence{gap:8px;padding:12px}.evidence h2{font-size:18px}.sample{padding:9px}.sample-wave{min-height:52px}.sample-top button{min-height:30px;font-size:12px}.sample-bottom{font-size:10px}.compare-actions{gap:5px}.compare-actions button{min-height:36px;font-size:13px}.think{font-size:13px}.evidence-note{font-size:10px}.mixer-layout{gap:10px}.mixer-heading h2{font-size:21px}.mixer-heading p{font-size:12px;margin-top:4px}.voice-head{padding-top:12px}.voice-head button{min-height:39px}.voice-controls{padding-top:10px;padding-bottom:10px;gap:9px}.mixer-bottom{padding:9px 14px}.mixer-bottom button{min-height:40px}}
+@media(max-width:760px){.shell{padding:10px 12px 5px;grid-template-rows:95px minmax(0,1fr) 22px;gap:9px}.header{display:grid;grid-template-columns:1fr auto;grid-template-rows:44px 43px;gap:8px}.brand{gap:9px}.brand-icon{width:37px;height:37px;border-radius:9px}.brand-icon svg{width:26px;height:26px}.eyebrow{font-size:9px;letter-spacing:1.5px;margin-bottom:3px}h1{font-size:23px}.header-tools{grid-row:1;grid-column:2}.header-tools button{min-height:36px;height:36px;font-size:13px;padding:6px 9px}.header-tools .icon{width:36px}.nav{grid-column:1/-1;grid-row:2;margin:0;padding:4px}.nav button{flex:1;min-height:34px;font-size:15px;min-width:0;padding:6px 11px}.ruler-layout{display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) 187px;gap:9px}.stage-head{padding:12px 14px 3px}.stage-head h2{font-size:18px}.stage-head .badge{font-size:10px}.stage-instruction{font-size:11px;padding:0 14px}.scene-mode{top:6px;left:14px;font-size:10px;padding:4px 7px}.stage-controls{padding:7px 12px 6px}.length-row{gap:9px;margin:0}.length-row label{font-size:13px}.length-row output{font-size:18px;min-width:60px}.length-labels{font-size:9px}.length-row input{height:27px}.play-row{margin-top:6px;gap:6px}.play-row button{min-height:38px;padding:7px 9px;font-size:13px}.play-row .icon{width:38px}.timeline{height:25px;margin-top:2px;font-size:10px}.timeline output{min-width:55px}.timeline input{height:24px}.sound-note{font-size:9px}.evidence{padding:9px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:20px minmax(0,1fr) 32px;gap:6px 8px}.evidence-heading{grid-column:1/-1}.evidence h2{font-size:14px}.evidence-heading span{font-size:10px}.sample{padding:6px 8px}.sample-title{font-size:17px;gap:6px}.sample-title span{font-size:12px}.sample-top button{font-size:10px;min-height:26px;padding:3px 6px}.sample-wave{min-height:30px}.sample-bottom{font-size:9px}.sample-bottom button{font-size:10px;min-height:20px;padding:0 2px}.compare-actions{grid-column:1/-1;display:flex;gap:8px}.compare-actions button{flex:1;min-height:31px;font-size:12px;padding:5px 8px}.think,.evidence-note{display:none}.footer{font-size:9px}.footer .level{font-size:9px}.footer button{font-size:10px}.footer .footer-message{display:none}.mixer-layout{gap:9px}.mixer-heading{padding:0 2px}.mixer-heading h2{font-size:18px}.mixer-heading p{font-size:11px;margin-top:4px}.mixer-heading .equal-note{display:none}.mixer-cards{grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:9px}.voice-head{padding:9px 12px 0}.voice-key{width:28px;height:28px;font-size:16px;border-radius:6px}.voice-title{gap:9px}.voice-title h3{font-size:14px}.voice-title p{font-size:9px;margin-top:3px}.voice-head button{min-height:31px;min-width:72px;font-size:12px;padding:5px 8px}.voice-plot svg{min-height:60px}.voice-controls{padding:7px 12px;gap:4px}.control-line{grid-template-columns:78px minmax(0,1fr) 69px;gap:7px}.control-line label{font-size:12px}.control-line label small{font-size:9px;margin-top:1px}.control-line output{font-size:16px}.control-line output small{font-size:10px}.control-line input{height:25px}.control-endpoints{display:none}.mixer-bottom{padding:8px 10px;gap:8px;flex-wrap:wrap}.mixer-bottom button{flex:1;min-height:35px;font-size:12px;padding:6px 9px}.mixer-bottom .primary{min-width:0}.mixer-prompt{display:none}.dialog{padding:20px}.dialog h2{font-size:21px}.dialog p{font-size:14px}}
+@media(max-height:560px) and (min-width:761px){.shell{padding:6px 10px 3px;gap:5px;grid-template-rows:43px minmax(0,1fr) 17px}.header{gap:10px}.brand-icon{width:34px;height:34px;border-radius:8px}.brand-icon svg{width:25px;height:25px}.eyebrow{font-size:8px;margin-bottom:2px}h1{font-size:21px}.nav{padding:3px}.nav button{min-height:32px;font-size:13px;min-width:115px;padding:5px 9px}.header-tools button{min-height:33px;font-size:12px;padding:6px 9px}.header-tools .icon{width:34px}.ruler-layout{grid-template-columns:minmax(0,1fr) 225px;gap:8px}.stage-head{padding:8px 12px 3px}.stage-head h2{font-size:17px}.stage-head .badge{display:none}.stage-instruction{padding:0 12px;font-size:10px}.scene-mode{left:12px;top:5px;font-size:9px;padding:3px 6px}.stage-controls{padding:5px 10px}.length-row label{font-size:12px}.length-row output{font-size:16px;min-width:55px}.length-row input{height:25px}.length-labels{display:none}.play-row{margin-top:4px;gap:5px}.play-row button{min-height:32px;font-size:12px;padding:5px 8px}.play-row .icon{width:34px}.play-row button svg{width:17px;height:17px}.timeline{height:22px;margin-top:1px;font-size:9px}.timeline input{height:20px}.sound-note{font-size:9px}.evidence{padding:9px;gap:5px}.evidence h2{font-size:15px}.evidence-heading span{font-size:9px}.sample{padding:6px 8px}.sample-title{font-size:18px}.sample-title span{font-size:12px}.sample-top button{min-height:25px;font-size:10px;padding:3px 6px}.sample-wave{min-height:25px}.sample-bottom{font-size:9px}.sample-bottom button{min-height:20px;font-size:10px;padding:0}.compare-actions{gap:4px}.compare-actions button{min-height:28px;font-size:11px;padding:4px 8px}.think,.evidence-note{display:none}.footer,.footer .level,.footer button{font-size:9px;min-height:17px}.mixer-layout{gap:7px}.mixer-heading h2{font-size:17px}.mixer-heading p{font-size:10px;margin-top:2px}.mixer-heading .equal-note{font-size:10px;padding:5px 8px}.mixer-cards{gap:10px}.voice-head{padding:8px 12px 0}.voice-title{gap:8px}.voice-key{width:27px;height:27px;font-size:16px}.voice-title h3{font-size:13px}.voice-title p{font-size:9px}.voice-head button{min-height:29px;font-size:11px;padding:5px 8px;min-width:70px}.voice-plot svg{min-height:60px}.voice-controls{padding:6px 12px;gap:4px}.control-line{grid-template-columns:75px minmax(0,1fr) 65px;gap:7px}.control-line label{font-size:12px}.control-line label small{font-size:9px;margin-top:1px}.control-line input{height:24px}.control-line output{font-size:16px}.control-line output small{font-size:10px}.control-endpoints{display:none}.mixer-bottom{padding:6px 10px;gap:8px}.mixer-bottom button{min-height:31px;font-size:11px;padding:5px 9px}.mixer-bottom .primary{min-width:140px}.mixer-prompt{font-size:11px}}
+@media(max-width:760px) and (max-height:720px){.shell{grid-template-rows:85px minmax(0,1fr) 19px;gap:6px;padding:7px 9px 3px}.header{grid-template-rows:38px 39px;gap:6px}.brand-icon{width:33px;height:33px}h1{font-size:21px}.nav button{min-height:31px}.ruler-layout{grid-template-rows:minmax(0,1fr) 160px;gap:6px}.stage-head{padding:8px 12px 2px}.stage-head h2{font-size:16px}.stage-instruction{font-size:10px}.sound-note{font-size:8px}.stage-controls{padding:5px 10px}.play-row button{min-height:33px;font-size:12px}.length-labels{display:none}.timeline{height:22px}.evidence{grid-template-rows:17px minmax(0,1fr) 28px;gap:4px 6px;padding:7px}.compare-actions button{min-height:28px}.mixer-heading p{font-size:10px}.voice-controls{padding:5px 10px}.voice-head{padding:6px 10px 0}.voice-title p{display:none}.voice-plot svg{min-height:45px}}
+</style>
+<style>
+@media(max-width:760px){.stage-head .badge{display:none}.scene .handle circle:first-child,.scene .pluck circle:first-child{r:56px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true"><defs>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 8c3 2 3 6 0 8m3-11c5 4 5 10 0 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5v14M17 5v14" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z" fill="currentColor"/></symbol>
+<symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-slow" viewBox="0 0 24 24"><path d="m4 6 8 6-8 6Zm9 0 8 6-8 6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<div class="shell">
+<header class="header">
+ <div class="brand"><div class="brand-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M4 13v6M10 8v16M16 3v26M22 10v12M28 14v4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div><div><p class="eyebrow">四上 / 第三单元 / 3.3</p><h1>声音的高低</h1></div></div>
+ <nav class="nav" role="tablist" aria-label="探究页面"><button id="tab-ruler" role="tab" aria-selected="true" aria-controls="page-ruler"><span class="num">01</span>钢尺探究</button><button id="tab-mixer" role="tab" aria-selected="false" aria-controls="page-mixer"><span class="num">02</span>高低与强弱</button></nav>
+ <div class="header-tools"><button id="resetBtn">复位</button><button id="fullscreenBtn" class="icon" aria-label="全屏显示" title="全屏"><svg><use href="#i-expand"/></svg></button></div>
+</header>
+<main class="main">
+<section id="page-ruler" class="screen" role="tabpanel" aria-labelledby="tab-ruler">
+ <div class="ruler-layout">
+ <section class="stage" aria-label="钢尺长度与振动模型">
+  <div class="stage-head"><h2>伸出的长度，改变了什么？</h2><span class="badge">同一把钢尺 · 相同拨动幅度</span></div>
+  <p class="stage-instruction">拖动金色圆点改变长度，点蓝色尺端拨动。</p>
+  <div class="scene-wrap">
+   <div class="scene-mode"><span class="dot"></span><span id="sceneMode">侧面放大 · 等待拨动</span></div>
+   <svg id="rulerScene" class="scene" viewBox="0 0 900 355" role="group" aria-label="钢尺一端压紧在桌边，伸出部分可以改变长度并拨动">
+    <defs>
+     <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d6aa79"/><stop offset="1" stop-color="#947052"/></linearGradient>
+     <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f6fbff"/><stop offset=".35" stop-color="#b4cbd9"/><stop offset=".6" stop-color="#68849d"/><stop offset="1" stop-color="#d9e7f0"/></linearGradient>
+     <linearGradient id="clamp" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6c8194"/><stop offset="1" stop-color="#30465e"/></linearGradient>
+     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#a1cae1" stroke-width=".6" opacity=".14"/></pattern>
+     <marker id="arrow" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M6 3 0 0v6Z" fill="#e8b77a"/></marker>
+    </defs>
+    <rect x="280" y="44" width="560" height="262" fill="url(#grid)"/>
+    <g id="singleScene">
+     <ellipse cx="170" cy="306" rx="135" ry="13" fill="#0b1c2e" opacity=".35"/>
+     <path d="M38 178H280V300H38Z" fill="url(#wood)"/><path d="M38 178H280v17H38Z" fill="#e6bc8e"/>
+     <path d="M58 225c72-9 135 9 201-2M58 258c47 6 125-13 201-2M65 282c70-7 130 8 194 0" fill="none" stroke="#6f4e37" opacity=".24" stroke-width="2"/>
+     <path d="M277 194v105" stroke="#795337" stroke-width="4" opacity=".45"/>
+     <line x1="280" x2="833" y1="170" y2="170" stroke="#8dacbf" opacity=".5" stroke-dasharray="6 7"/>
+     <text x="829" y="191" text-anchor="end" class="quiet">静止位置</text>
+     <g id="rulerGhosts" opacity=".21" pointer-events="none"></g>
+     <path id="rulerEdge" stroke="#6e8b9f" stroke-width="13" fill="none" stroke-linecap="round"/>
+     <path id="rulerBlade" stroke="url(#steel)" stroke-width="10" fill="none" stroke-linecap="round"/>
+     <g id="rulerTicks" opacity=".75" pointer-events="none"></g>
+     <path d="M194 127h63l18 17v20H184v-24Z" fill="url(#clamp)"/><path d="M184 156h91v11h-91Z" fill="#273d50"/>
+     <path d="M196 127h60l12 10h-72Z" fill="#98abb9"/><rect x="221" y="94" width="12" height="43" rx="2" fill="#a7bdcc"/><path d="M203 95h49" stroke="#8197aa" stroke-width="8" stroke-linecap="round"/>
+     <circle cx="202" cy="149" r="4" fill="#b3c6d3"/><circle cx="259" cy="149" r="4" fill="#b3c6d3"/>
+     <text x="194" y="238" class="label" fill="#513b2c">压紧</text>
+     <g id="pluckTip" class="pluck" role="button" tabindex="0" aria-label="拨动钢尺，听声音"><circle r="32" fill="transparent"/><circle r="18" fill="#286ea7" stroke="#a5d8ff" stroke-width="2.5"/><path d="M0-8V8m-6-6 6 6 6-6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+     <g id="lengthMeasure"><path id="dimensionLine" stroke="#e8b77a" stroke-width="1.6" marker-start="url(#arrow)" marker-end="url(#arrow)"/><path id="dimensionEnds" fill="none" stroke="#e8b77a" opacity=".5" stroke-width="1.2"/><text id="lengthText" class="measure" text-anchor="middle" y="267">12 cm</text><g id="lengthHandle" class="handle" role="slider" tabindex="0" aria-label="钢尺伸出长度，左右拖动或按方向键调整" aria-valuemin="8" aria-valuemax="20" aria-valuenow="12"><circle r="31" fill="transparent"/><circle r="17" fill="#e5a75c" stroke="#ffddac" stroke-width="2"/><path d="m-4-5-5 5 5 5m8-10 5 5-5 5" fill="none" stroke="#493e32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+    </g>
+    <g id="doubleScene" hidden></g>
+   </svg>
+  </div>
+  <div class="stage-controls">
+   <div class="length-row"><label for="lengthSlider">伸出桌面</label><div class="length-range"><input id="lengthSlider" type="range" min="8" max="20" step="0.5" value="12"><div class="length-labels"><span>8 cm</span><span>12 cm</span><span>16 cm</span><span>20 cm</span></div></div><output id="lengthValue" for="lengthSlider">12 cm</output></div>
+   <div class="play-row"><button id="pluckBtn" class="primary"><span class="ic"><svg><use href="#i-sound"/></svg></span>拨动听声音</button><button id="slowBtn" class="slow"><span class="ic"><svg><use href="#i-slow"/></svg></span>慢放看振动</button><button id="pauseBtn" class="icon" aria-label="暂停画面" title="暂停" disabled><svg><use id="pauseIcon" href="#i-pause"/></svg></button></div>
+   <div class="timeline"><span id="timeMode">原速观察</span><input id="timeSlider" type="range" min="0" max="1400" step="1" value="0" aria-label="拖动时间逐帧观察" disabled><output id="timeValue">0.00 s</output></div>
+   <p class="sound-note">合成音统一升高两个八度便于听辨；图示保留模型原频率。慢放时静音。</p>
+  </div>
+ </section>
+ <aside class="evidence" aria-label="保留模型对照">
+  <div class="evidence-heading"><h2>留住两次振动</h2><span>同一时间 · 同一比例</span></div>
+  <article id="sampleA" class="sample"><div class="sample-top"><h3 class="sample-title">A <span id="savedLengthA">待保留</span></h3><button id="saveA" class="small" disabled>保留这次</button></div><svg id="waveA" class="sample-wave" viewBox="0 0 300 110" aria-label="A尺端位移随时间变化，模型计算"></svg><div class="sample-bottom"><span id="savedMetaA" class="frequency">拨动后再保留</span><button id="hearA" disabled>回听 A</button></div></article>
+  <article id="sampleB" class="sample b"><div class="sample-top"><h3 class="sample-title">B <span id="savedLengthB">待保留</span></h3><button id="saveB" class="small" disabled>保留这次</button></div><svg id="waveB" class="sample-wave" viewBox="0 0 300 110" aria-label="B尺端位移随时间变化，模型计算"></svg><div class="sample-bottom"><span id="savedMetaB" class="frequency">换个长度，再保留</span><button id="hearB" disabled>回听 B</button></div></article>
+  <div class="compare-actions"><button id="syncBtn" disabled aria-pressed="false">两把尺 · 同步慢放</button><button id="hearBoth" disabled>依次听 A → B</button></div>
+  <p class="think">同样长的时间里，<br><b>哪一次来回更多？</b></p>
+  <p class="evidence-note">图示为尺端运动，不是声音在空气中传播。</p>
+ </aside>
+ </div>
+</section>
+<section id="page-mixer" class="screen" role="tabpanel" aria-labelledby="tab-mixer" hidden>
+ <div class="mixer-layout">
+ <div class="mixer-heading"><div><h2>变高，还是变响？</h2><p>一次只改变一个条件，听一听，再比较两张图。</p></div><span class="equal-note">两图均为 20 毫秒 · 相同比例</span></div>
+ <div class="mixer-cards">
+  <article id="voiceA" class="voice"><div class="voice-head"><div class="voice-title"><span class="voice-key">A</span><div><h3>第一种声音</h3><p>振动位移示意 · 合成纯音</p></div></div><button id="playVoiceA"><span class="ic"><svg><use href="#i-sound"/></svg></span>听 A</button></div><div class="voice-plot"><svg id="voiceWaveA" viewBox="0 0 580 245" aria-label="声音A的振动位移示意，时间范围20毫秒"></svg></div><div class="voice-controls"><div class="control-line"><label for="freqA">振动快慢<small>每秒振动次数</small></label><div><input id="freqA" type="range" min="100" max="600" step="10" value="200"><div class="control-endpoints"><span>慢</span><span>快</span></div></div><output id="freqValueA" for="freqA">200 <small>Hz</small></output></div><div class="control-line"><label for="ampA">振动幅度<small>相对值</small></label><div><input id="ampA" type="range" min="10" max="90" step="5" value="50"><div class="control-endpoints"><span>小</span><span>大</span></div></div><output id="ampValueA" for="ampA">50 <small>%</small></output></div></div></article>
+  <article id="voiceB" class="voice b"><div class="voice-head"><div class="voice-title"><span class="voice-key">B</span><div><h3>第二种声音</h3><p>振动位移示意 · 合成纯音</p></div></div><button id="playVoiceB"><span class="ic"><svg><use href="#i-sound"/></svg></span>听 B</button></div><div class="voice-plot"><svg id="voiceWaveB" viewBox="0 0 580 245" aria-label="声音B的振动位移示意，时间范围20毫秒"></svg></div><div class="voice-controls"><div class="control-line"><label for="freqB">振动快慢<small>每秒振动次数</small></label><div><input id="freqB" type="range" min="100" max="600" step="10" value="400"><div class="control-endpoints"><span>慢</span><span>快</span></div></div><output id="freqValueB" for="freqB">400 <small>Hz</small></output></div><div class="control-line"><label for="ampB">振动幅度<small>相对值</small></label><div><input id="ampB" type="range" min="10" max="90" step="5" value="50"><div class="control-endpoints"><span>小</span><span>大</span></div></div><output id="ampValueB" for="ampB">50 <small>%</small></output></div></div></article>
+ </div>
+ <div class="mixer-bottom"><button id="playVoices" class="primary">依次听 A → B</button><button id="periodBtn" aria-pressed="false">标出一次完整振动</button><p class="mixer-prompt">只改快慢，图形哪里变了？<br><b>只改幅度呢？</b></p></div>
+ </div>
+</section>
+</main>
+<footer class="footer"><span><!-- AIHTML-COMPAT-GRADE:START --><span class="level" title="T1基础交互；声音另需Web Audio">T1 基础交互</span><!-- AIHTML-COMPAT-GRADE:END --> · SVG / AUDIO</span><span class="footer-message">模型帮助解释；真实实验提供证据。</span><button id="infoBtn">使用说明</button></footer>
+</div>
+<div id="toast" class="toast" role="status" hidden></div>
+<div id="infoDialog" class="dialog-shade" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="infoTitle"><div class="dialog-top"><h2 id="infoTitle">怎么用，怎么看</h2><button id="closeInfo" class="icon" aria-label="关闭说明">✕</button></div>
+<h3>钢尺探究</h3><p>先在真实实验中压紧钢尺，改变伸出桌面的长度，并尽量保持拨动幅度相同。网页可拖动金色圆点或长度滑块改变伸出长度，点蓝色尺端拨动。保留 A、B 后，可依次回听，或用<span class="highlight">相同的慢放倍率</span>同步比较。同样长的时间里，一个完整来回算一次振动。</p>
+<h3>声音与慢放各表示什么</h3><p>图形按均匀悬臂钢尺的小振幅基频模型计算：钢材弹性模量 200 GPa、密度 7850 kg/m³、厚度 1 mm，保持材质、宽厚和固定方式不变，基频与伸出长度的平方成反比。尺寸、固定方式和真实材料都会影响实物声音，<span class="highlight">图中的频率是模型值，不是实测值</span>。钢尺曲线采用简化的弯曲形状，位移为放大示意。</p><p>为了便于设备呈现低音，钢尺页的合成音频率统一乘以 4（升高两个八度），仍保留两次声音频率的比例；不是钢尺录音，也不表示真实钢尺一定发出相同音高。原速画面用虚影表示快速振动，避免屏幕刷新造成假慢速。慢放展示起始 100 毫秒，放慢 80 倍并静音；两张记录图也展示同一个 100 毫秒。暂停后可拖动时间逐帧观察。振动呈衰减示意，画面观察时段结束不代表实物此刻停止振动。</p>
+<h3>高低与强弱</h3><p>第二页的快慢值直接用于合成声音，不移调。两张图均显示 20 毫秒内的振动位移示意，横纵比例相同；每秒的振动次数用 Hz 表示。改变“振动快慢”只改变频率，改变“振动幅度”只改变幅度。点击“标出一次完整振动”，观察从一个最高点到下一个最高点的间隔。图形不表示声音在空气中的传播形状。</p><p>播放时保持设备音量不变。幅度百分比是模型相对值，不是分贝；不同频率在扬声器上的输出和人耳感受也会不同，因此相同的幅度设置不保证听起来完全一样响。模型用于解释关系，不能替代真实实验的证据。</p>
+<h3>运行与操作</h3><p>本页无外部依赖，可离线运行，不使用麦克风。发声需要浏览器支持 Web Audio，并由点击触发；初次使用请将设备音量调低。左右方向键可调整金色长度控制点；蓝色尺端支持回车或空格。复位只清空当前页；切换页面保留探究记录并停止发声。全屏由浏览器能力决定。</p>
+<h3>教学依据</h3><p id="sourceNote">依据项目提供的教科版《科学》四年级上册第三单元第 3 课《声音的高低》，教材第 64—66 页及教师教学用书本课章节。8—20 cm 是本网页的连续探究范围，不是教材规定的实验长度。真实实验应反复观察，区分钢尺自身振动声与碰到桌面的杂声。未使用未提供的作业本题目。v1.0</p>
+</section></div>
+<script>
+/* PitchCore — scientific parameters and browser-local synthesized audio.
+ * Steel-ruler frequencies are a simplified uniform cantilever model, not measurements.
+ * The ruler's listening signal is uniformly transposed by AUDIO_TRANSPOSE for speakers.
+ * No network, microphone, storage, or external dependencies are used.
+ */
+(function (root) {
+  'use strict';
+
+  var PARAMETERS = {
+    youngModulusPa: 200000000000,
+    densityKgM3: 7850,
+    thicknessM: 0.001,
+    beta1: 1.875104,
+    minLengthCm: 8,
+    maxLengthCm: 20,
+    audioTranspose: 4,
+    rulerDecayPerSecond: 2,
+    maxAudioGain: 0.15
+  };
+  var TWO_PI = 2 * Math.PI;
+
+  function finiteNumber(value, fallback) {
+    var n = Number(value);
+    return isFinite(n) ? n : fallback;
+  }
+
+  function clamp(value, min, max, fallback) {
+    return Math.max(min, Math.min(max, finiteNumber(value, fallback)));
+  }
+
+  function rulerFrequency(lengthCm) {
+    var lengthM = clamp(lengthCm, PARAMETERS.minLengthCm,
+      PARAMETERS.maxLengthCm, 12) / 100;
+    // f1 = beta1^2/(2*pi*L^2) * sqrt(E*I/(rho*A)); I/A = h^2/12.
+    return PARAMETERS.beta1 * PARAMETERS.beta1 / (TWO_PI * lengthM * lengthM) *
+      Math.sqrt(PARAMETERS.youngModulusPa * PARAMETERS.thicknessM *
+        PARAMETERS.thicknessM / (12 * PARAMETERS.densityKgM3));
+  }
+
+  function rulerAudioFrequency(lengthCm) {
+    return rulerFrequency(lengthCm) * PARAMETERS.audioTranspose;
+  }
+
+  function displacement(frequency, amplitude, timeSeconds, decayPerSecond) {
+    var f = Math.max(0, finiteNumber(frequency, 0));
+    var a = finiteNumber(amplitude, 0);
+    var t = Math.max(0, finiteNumber(timeSeconds, 0));
+    var decay = Math.max(0, finiteNumber(decayPerSecond, 0));
+    return a * Math.exp(-decay * t) * Math.cos(TWO_PI * f * t);
+  }
+
+  function audioConstructor() {
+    return root.AudioContext || root.webkitAudioContext;
+  }
+
+  function Audio() {
+    this._context = null;
+    this._voice = null;
+    this._generation = 0;
+    this._pending = false;
+    this._status = 'idle';
+    this._lastRequest = null;
+    this._lastError = '';
+  }
+
+  Audio.prototype.supported = function () {
+    return typeof audioConstructor() === 'function';
+  };
+
+  function disconnect(node) {
+    if (!node) { return; }
+    try { node.disconnect(); } catch (ignore) { /* Already disconnected. */ }
+  }
+
+  function finishVoice(engine, voice) {
+    if (!voice || voice.cleaned) { return; }
+    voice.cleaned = true;
+    if (voice.cleanupTimer !== null) {
+      clearTimeout(voice.cleanupTimer);
+      voice.cleanupTimer = null;
+    }
+    for (var i = 0; i < voice.oscillators.length; i += 1) {
+      voice.oscillators[i].onended = null;
+      disconnect(voice.oscillators[i]);
+    }
+    for (var j = 0; j < voice.harmonicGains.length; j += 1) {
+      disconnect(voice.harmonicGains[j]);
+    }
+    disconnect(voice.envelope);
+    if (engine._voice === voice) {
+      engine._voice = null;
+      engine._status = 'idle';
+    }
+  }
+
+  function envelopeValue(voice, now) {
+    var t = now - voice.start;
+    if (t <= 0 || now >= voice.end) { return 0; }
+    if (t < voice.attack) { return voice.peak * t / voice.attack; }
+    var age = Math.min(now, voice.releaseStart) - voice.start - voice.attack;
+    var value = voice.peak * Math.exp(-voice.decay * Math.max(0, age));
+    if (now > voice.releaseStart) {
+      value *= Math.max(0, (voice.end - now) / (voice.end - voice.releaseStart));
+    }
+    return value;
+  }
+
+  Audio.prototype.stop = function () {
+    this._generation += 1;
+    this._pending = false;
+    this._status = 'idle';
+    var voice = this._voice;
+    this._voice = null;
+    if (!voice || voice.cleaned) { return; }
+    var self = this;
+    var now = finiteNumber(this._context && this._context.currentTime, 0);
+    // A short release avoids clicks. New voices begin after this release.
+    try {
+      var parameter = voice.envelope.gain;
+      parameter.cancelScheduledValues(now);
+      parameter.setValueAtTime(envelopeValue(voice, now), now);
+      parameter.linearRampToValueAtTime(0, now + 0.012);
+    } catch (ignoreGain) { /* Cleanup below still stops and disconnects. */ }
+    for (var i = 0; i < voice.oscillators.length; i += 1) {
+      try { voice.oscillators[i].stop(now + 0.016); } catch (ignoreStop) { /* Ended. */ }
+    }
+    if (voice.cleanupTimer !== null) { clearTimeout(voice.cleanupTimer); }
+    voice.cleanupTimer = setTimeout(function () { finishVoice(self, voice); }, 80);
+  };
+
+  Audio.prototype.play = function (frequency, amplitude, duration, timbre) {
+    var self = this;
+    this.stop();
+    var generation = this._generation;
+    var request = {
+      frequency: clamp(frequency, 20, 4000, 240),
+      amplitude: clamp(amplitude, 0, 1, 0.5),
+      duration: clamp(duration, 0.12, 8, 1.4),
+      timbre: timbre === 'ruler' ? 'ruler' : 'sine'
+    };
+    this._lastRequest = request;
+    this._lastError = '';
+
+    function cancelled() {
+      return { ok: false, cancelled: true, reason: '播放已取消。' };
+    }
+
+    function failed(reason) {
+      if (generation !== self._generation) { return cancelled(); }
+      self._pending = false;
+      self._status = 'error';
+      self._lastError = reason;
+      return { ok: false, reason: reason };
+    }
+
+    if (!this.supported()) {
+      return Promise.resolve(failed('此浏览器不支持声音播放，仍可观察图形。'));
+    }
+    if (request.amplitude === 0) {
+      return Promise.resolve({ ok: true, silent: true });
+    }
+
+    var context;
+    var resumeResult;
+    try {
+      if (!this._context || this._context.state === 'closed') {
+        var Constructor = audioConstructor();
+        this._context = new Constructor();
+      }
+      context = this._context;
+      this._pending = true;
+      this._status = 'starting';
+      // Creation and resume run synchronously inside the initiating user gesture.
+      resumeResult = context.state !== 'running' && typeof context.resume === 'function' ?
+        context.resume() : null;
+    } catch (creationError) {
+      return Promise.resolve(failed('无法开启声音，请再次点击播放或更换浏览器。'));
+    }
+
+    return Promise.resolve(resumeResult).then(function () {
+      if (generation !== self._generation) { return cancelled(); }
+      if (context.state && context.state !== 'running') {
+        return failed('声音尚未启用，请再次点击播放并检查浏览器设置。');
+      }
+      var voice = null;
+      try {
+        var sampleRate = finiteNumber(context.sampleRate, 44100);
+        request.frequency = Math.min(request.frequency, sampleRate * 0.44);
+        var start = context.currentTime + 0.02;
+        var end = start + request.duration;
+        var attack = 0.008;
+        var releaseStart = end - Math.min(0.06, request.duration * 0.18);
+        var peak = PARAMETERS.maxAudioGain * request.amplitude;
+        var decay = request.timbre === 'ruler' ? PARAMETERS.rulerDecayPerSecond : 0;
+        var envelope = context.createGain();
+        voice = {
+          start: start,
+          end: end,
+          attack: attack,
+          releaseStart: releaseStart,
+          peak: peak,
+          decay: decay,
+          envelope: envelope,
+          oscillators: [],
+          harmonicGains: [],
+          cleanupTimer: null,
+          cleaned: false
+        };
+        envelope.gain.setValueAtTime(0, start);
+        envelope.gain.linearRampToValueAtTime(peak, start + attack);
+        if (decay > 0) {
+          envelope.gain.exponentialRampToValueAtTime(
+            Math.max(Number.MIN_VALUE, peak * Math.exp(-decay * (releaseStart - start - attack))),
+            releaseStart
+          );
+        } else {
+          envelope.gain.setValueAtTime(peak, releaseStart);
+        }
+        envelope.gain.linearRampToValueAtTime(0, end);
+        envelope.connect(context.destination);
+
+        // These weak harmonics make a clearly labelled synthesized ruler timbre;
+        // they do not claim to reproduce a cantilever's true modal spectrum.
+        var weights = request.timbre === 'ruler' ? [1, 0.22, 0.08] : [1];
+        var weightSum = 0;
+        var k;
+        for (k = 0; k < weights.length; k += 1) {
+          if (request.frequency * (k + 1) < sampleRate * 0.45) {
+            weightSum += weights[k];
+          }
+        }
+        var ended = 0;
+        function onEnded() {
+          ended += 1;
+          if (ended >= voice.oscillators.length) { finishVoice(self, voice); }
+        }
+        for (k = 0; k < weights.length; k += 1) {
+          if (request.frequency * (k + 1) >= sampleRate * 0.45) { continue; }
+          var oscillator = context.createOscillator();
+          var harmonicGain = context.createGain();
+          voice.oscillators.push(oscillator);
+          voice.harmonicGains.push(harmonicGain);
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(request.frequency * (k + 1), start);
+          harmonicGain.gain.setValueAtTime(weights[k] / weightSum, start);
+          oscillator.connect(harmonicGain);
+          harmonicGain.connect(envelope);
+          oscillator.onended = onEnded;
+          oscillator.start(start);
+          oscillator.stop(end + 0.01);
+        }
+        voice.cleanupTimer = setTimeout(function () {
+          finishVoice(self, voice);
+        }, Math.ceil((request.duration + 0.2) * 1000));
+        self._voice = voice;
+        self._pending = false;
+        self._status = 'playing';
+        return {
+          ok: true,
+          frequency: request.frequency,
+          amplitude: request.amplitude,
+          duration: request.duration,
+          timbre: request.timbre
+        };
+      } catch (playError) {
+        if (voice) {
+          for (var n = 0; n < voice.oscillators.length; n += 1) {
+            try { voice.oscillators[n].stop(); } catch (ignore) { /* Not started. */ }
+          }
+          finishVoice(self, voice);
+        }
+        return failed('声音播放未能启动，请再次点击播放。');
+      }
+    }, function () {
+      return failed('浏览器未允许声音播放，请再次点击播放。');
+    });
+  };
+
+  Audio.prototype.getState = function () {
+    var last = this._lastRequest;
+    return {
+      supported: this.supported(),
+      status: this._status,
+      contextState: this._context ? (this._context.state || 'unknown') : 'not-created',
+      active: !!this._voice,
+      pending: this._pending,
+      generation: this._generation,
+      frequency: last ? last.frequency : null,
+      amplitude: last ? last.amplitude : null,
+      duration: last ? last.duration : null,
+      timbre: last ? last.timbre : null,
+      lastError: this._lastError
+    };
+  };
+
+  root.PitchCore = {
+    parameters: PARAMETERS,
+    clamp: clamp,
+    rulerFrequency: rulerFrequency,
+    rulerAudioFrequency: rulerAudioFrequency,
+    displacement: displacement,
+    Audio: Audio
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var NS = 'http://www.w3.org/2000/svg';
+  var C = window.PitchCore, audio = new C.Audio();
+  var LENGTH_PX = 26, FIXED_X = 280, BASE_Y = 170, AMP = 0.55, SLOW = 80, WINDOW = 0.1;
+  var state = {
+    page: 'ruler', length: 12, lastTrial: null, saved: { A: null, B: null },
+    motion: { kind: 'idle', time: 0, end: 1.4, running: false, startTime: 0, wall: 0 },
+    voices: { A: { freq: 200, amp: 50 }, B: { freq: 400, amp: 50 } }, period: false
+  };
+  var raf = 0, soundToken = 0, soundTimers = [], toastTimer = 0, dragId = null, lastFocus = null;
+
+  function fmt(n, digits) { return Number(n.toFixed(digits === undefined ? 1 : digits)).toString(); }
+  function toast(message) {
+    clearTimeout(toastTimer); $('toast').textContent = message; $('toast').hidden = false;
+    toastTimer = setTimeout(function () { $('toast').hidden = true; }, 3500);
+  }
+  function clearHighlights() {
+    ['A', 'B'].forEach(function (k) { $('sample' + k).classList.remove('playing'); $('voice' + k).classList.remove('active'); });
+  }
+  function stopAudio() {
+    soundToken++; soundTimers.forEach(clearTimeout); soundTimers = []; audio.stop(); clearHighlights();
+  }
+  function later(fn, ms) { var id = setTimeout(fn, ms); soundTimers.push(id); return id; }
+  function playSounds(sounds) {
+    stopAudio();
+    var token = soundToken;
+    function one(index) {
+      if (token !== soundToken || index >= sounds.length) return;
+      var s = sounds[index];
+      audio.play(s.freq, s.amp, 1.4, s.type || 'sine').then(function (result) {
+        if (token !== soundToken) return;
+        if (!result.ok) { if (!result.cancelled) toast(result.reason || '当前浏览器无法发声，图形探究仍可使用。'); return; }
+        clearHighlights();
+        if (s.key) $(s.scope === 'voice' ? 'voice' + s.key : 'sample' + s.key).classList.add(s.scope === 'voice' ? 'active' : 'playing');
+        later(function () { if (token === soundToken) clearHighlights(); }, 1400);
+        if (index + 1 < sounds.length) later(function () { one(index + 1); }, 1700);
+      });
+    }
+    one(0);
+  }
+  function rulerSound(length, key) { return { freq: C.rulerAudioFrequency(length), amp: AMP, type: 'ruler', key: key, scope: 'ruler' }; }
+  function stopMotion() {
+    if (raf) cancelAnimationFrame(raf); raf = 0; state.motion.running = false;
+    $('pauseIcon').setAttribute('href', '#i-play'); $('pauseBtn').setAttribute('aria-label', '继续画面');
+  }
+  function curve(length, displacement, baseY) {
+    var y0 = baseY === undefined ? BASE_Y : baseY;
+    var end = FIXED_X + length * LENGTH_PX;
+    return 'M80 ' + y0 + 'H' + FIXED_X + ' C' + (FIXED_X + (end - FIXED_X) / 3) + ' ' + y0 + ' ' + (FIXED_X + (end - FIXED_X) * 2 / 3) + ' ' + (y0 + displacement / 2) + ' ' + end + ' ' + (y0 + displacement);
+  }
+  function drawTicks(length, disp) {
+    var s = '', n = Math.floor(length);
+    for (var i = 0; i <= n; i++) {
+      var u = i / length, x = FIXED_X + i * LENGTH_PX, y = BASE_Y + disp * u * u * (3 - u) / 2;
+      s += '<path d="M' + x + ' ' + (y - 5) + 'v' + (i % 2 ? 5 : 8) + '" stroke="#355268" stroke-width="1.5"/>';
+    }
+    $('rulerTicks').innerHTML = s;
+  }
+  function updateLengthArt(disp) {
+    var length = state.length, end = FIXED_X + length * LENGTH_PX;
+    $('rulerEdge').setAttribute('d', curve(length, disp)); $('rulerBlade').setAttribute('d', curve(length, disp));
+    $('pluckTip').setAttribute('transform', 'translate(' + end + ' ' + (BASE_Y + disp) + ')');
+    $('lengthHandle').setAttribute('transform', 'translate(' + end + ' 288)');
+    $('lengthHandle').setAttribute('aria-valuenow', length); $('lengthHandle').setAttribute('aria-valuetext', fmt(length) + '厘米');
+    $('dimensionLine').setAttribute('d', 'M286 288H' + (end - 22));
+    $('dimensionEnds').setAttribute('d', 'M280 200V306M' + end + ' 213V260');
+    $('lengthText').setAttribute('x', (FIXED_X + end) / 2); $('lengthText').textContent = fmt(length) + ' cm';
+    drawTicks(length, disp);
+  }
+  function rowArt(key, baseY, time) {
+    var record = state.saved[key], color = key === 'A' ? '#83c7ff' : '#f2bd7d';
+    var disp = C.displacement(record.freq, AMP, time, C.parameters.rulerDecayPerSecond) * 75;
+    var end = FIXED_X + record.length * LENGTH_PX;
+    return '<text x="64" y="' + (baseY - 34) + '" font-size="24" font-weight="750" fill="' + color + '">' + key + ' <tspan font-size="20" font-weight="550">' + fmt(record.length) + ' cm</tspan></text>' +
+      '<path d="M55 ' + (baseY + 8) + 'H280v55H55Z" fill="url(#wood)"/>' +
+      '<path d="M55 ' + (baseY + 8) + 'H280v11H55Z" fill="#d7ae83"/>' +
+      '<path d="M280 ' + baseY + 'H834" stroke="#7899b3" stroke-dasharray="5 7" opacity=".5"/>' +
+      '<path d="' + curve(record.length, disp, baseY) + '" fill="none" stroke="#7798ae" stroke-width="12" stroke-linecap="round"/>' +
+      '<path d="' + curve(record.length, disp, baseY) + '" fill="none" stroke="url(#steel)" stroke-width="8" stroke-linecap="round"/>' +
+      '<path d="M195 ' + (baseY - 29) + 'h65l15 12v12h-90v-15Z" fill="url(#clamp)"/>' +
+      '<path d="M185 ' + (baseY - 5) + 'h90" stroke="#263e52" stroke-width="8"/>' +
+      '<circle cx="' + end + '" cy="' + (baseY + disp) + '" r="9" fill="' + color + '"/>' +
+      '<text x="805" y="' + (baseY - 34) + '" text-anchor="end" font-size="17" fill="' + color + '">' + fmt(record.freq) + ' 次/秒 · 模型</text>';
+  }
+  function miniWave(key, cursor) {
+    var record = state.saved[key], color = key === 'A' ? '#236ebb' : '#b96924';
+    var html = '<g fill="none" stroke="#a6bacb" opacity=".45"><path d="M10 50H290"/>';
+    for (var i = 0; i <= 4; i++) html += '<path d="M' + (10 + i * 70) + ' 14V84" stroke-dasharray="3 4"/>';
+    html += '</g>';
+    if (record) {
+      var d = '';
+      for (var p = 0; p <= 560; p++) {
+        var t = p / 560 * WINDOW, y = 50 + C.displacement(record.freq, record.amp, t, C.parameters.rulerDecayPerSecond) * 53;
+        d += (p ? 'L' : 'M') + (10 + p / 2).toFixed(2) + ' ' + y.toFixed(2);
+      }
+      html += '<path d="' + d + '" stroke="' + color + '" stroke-width="2.1" fill="none"/>';
+      if (cursor !== null && cursor !== undefined) {
+        var cx = 10 + Math.min(WINDOW, Math.max(0, cursor)) / WINDOW * 280;
+        html += '<path d="M' + cx + ' 11V85" stroke="' + color + '" stroke-width="1.4" opacity=".7"/>';
+      }
+    } else html += '<text x="150" y="53" text-anchor="middle" fill="#8a9eaf" font-size="14">尚未保留</text>';
+    html += '<g font-size="12" fill="#637c90"><text x="10" y="102">0</text><text x="150" y="102" text-anchor="middle">50</text><text x="290" y="102" text-anchor="end">100 毫秒</text></g>';
+    $('wave' + key).innerHTML = html;
+  }
+  function drawScene() {
+    var m = state.motion, sync = m.kind === 'sync';
+    $('singleScene').removeAttribute('hidden'); $('singleScene').style.display = sync ? 'none' : '';
+    $('doubleScene').removeAttribute('hidden'); $('doubleScene').style.display = sync ? '' : 'none';
+    $('syncBtn').setAttribute('aria-pressed', String(sync));
+    if (sync && state.saved.A && state.saved.B) {
+      $('doubleScene').innerHTML = rowArt('A', 108, m.time) + rowArt('B', 252, m.time);
+      miniWave('A', m.time); miniWave('B', m.time);
+    } else {
+      var raw = m.kind === 'raw' && m.running;
+      var disp = m.kind === 'idle' || raw ? 0 : C.displacement(C.rulerFrequency(state.length), AMP, m.time, C.parameters.rulerDecayPerSecond) * 75;
+      updateLengthArt(disp);
+      var ghosts = '';
+      if (raw) {
+        var envelope = AMP * Math.exp(-C.parameters.rulerDecayPerSecond * m.time) * 75;
+        [-1, -.7, -.35, .35, .7, 1].forEach(function (x) { ghosts += '<path d="' + curve(state.length, x * envelope) + '" stroke="#b7e1ff" stroke-width="8" fill="none" stroke-linecap="round"/>'; });
+      }
+      $('rulerGhosts').innerHTML = ghosts;
+    }
+    var isSlow = m.kind === 'slow' || sync;
+    $('timeValue').textContent = isSlow ? fmt(m.time * 1000, 1) + ' ms' : m.time.toFixed(2) + ' s';
+    $('timeSlider').value = (m.time * 1000).toFixed(isSlow ? 1 : 0);
+    $('pauseIcon').setAttribute('href', m.running ? '#i-pause' : '#i-play');
+    $('pauseBtn').setAttribute('aria-label', m.running ? '暂停画面' : '继续画面');
+    var label = '侧面放大 · 等待拨动';
+    if (m.kind === 'raw') label = m.running ? '原速 · 快速振动用虚影表示' : '原速画面已暂停 · 可拖动时间';
+    if (isSlow) label = (sync ? 'A / B 同步' : '慢放') + ' · 时间放慢 80 倍 · 静音';
+    $('sceneMode').textContent = label;
+  }
+  function tick(now) {
+    var m = state.motion;
+    if (!m.running || state.page !== 'ruler') { raf = 0; return; }
+    var speed = m.kind === 'raw' ? 1 : 1 / SLOW;
+    m.time = Math.min(m.end, m.startTime + (now - m.wall) / 1000 * speed);
+    if (m.time >= m.end) { m.running = false; raf = 0; }
+    drawScene();
+    if (m.running) raf = requestAnimationFrame(tick);
+  }
+  function runMotion(kind) {
+    stopMotion();
+    var m = state.motion;
+    m.kind = kind; m.time = 0; m.end = kind === 'raw' ? 1.4 : WINDOW;
+    m.running = true; m.startTime = 0; m.wall = performance.now();
+    $('pauseBtn').disabled = false; $('timeSlider').disabled = false;
+    $('timeSlider').max = String(m.end * 1000); $('timeSlider').step = kind === 'raw' ? '1' : '0.1';
+    $('timeMode').textContent = kind === 'raw' ? '原速 · 1.4秒' : '慢放 ×80';
+    if (kind !== 'sync') { miniWave('A'); miniWave('B'); }
+    updateCapture(); drawScene(); raf = requestAnimationFrame(tick);
+  }
+  function updateCapture() {
+    var ready = !!state.lastTrial && state.lastTrial.length === state.length && state.motion.kind !== 'sync';
+    $('saveA').disabled = !ready; $('saveB').disabled = !ready;
+    var paired = !!state.saved.A && !!state.saved.B;
+    $('syncBtn').disabled = !paired; $('hearBoth').disabled = !paired;
+  }
+  function makeTrial(kind) {
+    stopAudio();
+    state.lastTrial = { length: state.length, freq: C.rulerFrequency(state.length), amp: AMP };
+    updateCapture(); runMotion(kind);
+    if (kind === 'raw') playSounds([rulerSound(state.length)]);
+  }
+  function setLength(value) {
+    var length = Math.max(8, Math.min(20, Math.round(Number(value) * 2) / 2));
+    if (!isFinite(length)) return;
+    if (length !== state.length || state.motion.kind === 'sync') {
+      stopAudio(); stopMotion(); state.motion.kind = 'idle'; state.motion.time = 0;
+      state.length = length; state.lastTrial = null;
+      $('pauseBtn').disabled = true; $('timeSlider').disabled = true; $('timeMode').textContent = '原速观察';
+      miniWave('A'); miniWave('B');
+    }
+    $('lengthSlider').value = String(length); $('lengthValue').textContent = fmt(length) + ' cm';
+    updateCapture(); drawScene();
+  }
+  function saveTrial(key) {
+    if (!state.lastTrial || state.lastTrial.length !== state.length) return;
+    if (state.motion.kind === 'sync') { stopMotion(); state.motion.kind = 'idle'; state.motion.time = 0; drawScene(); }
+    state.saved[key] = { length: state.lastTrial.length, freq: state.lastTrial.freq, amp: state.lastTrial.amp };
+    $('savedLength' + key).textContent = fmt(state.saved[key].length) + ' cm';
+    $('savedMeta' + key).textContent = fmt(state.saved[key].freq) + ' 次/秒 · 模型';
+    $('hear' + key).disabled = false; miniWave(key); updateCapture();
+    toast('已保留 ' + key + '：伸出 ' + fmt(state.saved[key].length) + ' cm');
+  }
+  function pause() {
+    var m = state.motion;
+    if (m.kind === 'idle') return;
+    if (m.running) { stopMotion(); stopAudio(); drawScene(); return; }
+    stopAudio();
+    if (m.time >= m.end) m.time = 0;
+    m.startTime = m.time; m.wall = performance.now(); m.running = true;
+    if (m.kind === 'raw') {
+      var token = soundToken;
+      audio.play(C.rulerAudioFrequency(state.length), AMP * Math.exp(-C.parameters.rulerDecayPerSecond * m.time), Math.max(0.05, m.end - m.time), 'ruler').then(function (result) {
+        if (token === soundToken && !result.ok && !result.cancelled) toast(result.reason);
+      });
+    }
+    drawScene(); raf = requestAnimationFrame(tick);
+  }
+  function drawVoice(key) {
+    var v = state.voices[key], x0 = 52, width = 494, center = 120, scale = 83, color = key === 'A' ? '#236ebb' : '#b96924';
+    var h = '<g stroke="#bacbd9" opacity=".55" fill="none"><path d="M52 120H546"/>';
+    for (var i = 0; i <= 4; i++) h += '<path d="M' + (x0 + width * i / 4) + ' 35V204" stroke-dasharray="4 5"/>';
+    h += '<path d="M52 37H546M52 203H546" opacity=".3"/></g>';
+    if (state.period) {
+      var px = width / (v.freq * .02);
+      h += '<rect x="52" y="36" width="' + px + '" height="168" fill="' + color + '" opacity=".09"/>';
+      h += '<path d="M52 29v-8h' + px + 'v8" stroke="' + color + '" fill="none" stroke-width="1.8"/>';
+      h += '<text x="' + (52 + px / 2) + '" y="15" fill="' + color + '" font-size="13" text-anchor="middle">一次</text>';
+      h += '<path d="M' + (52 + px) + ' 36V204" stroke="' + color + '" stroke-dasharray="4 4" opacity=".55"/>';
+    }
+    var d = '';
+    for (var p = 0; p <= 988; p++) {
+      var t = p / 988 * .02, y = center - v.amp / 100 * scale * Math.cos(2 * Math.PI * v.freq * t);
+      d += (p ? 'L' : 'M') + (x0 + p / 2).toFixed(2) + ' ' + y.toFixed(2);
+    }
+    h += '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="3" stroke-linecap="round"/>';
+    if (state.period) {
+      var peakY = center - v.amp / 100 * scale;
+      h += '<circle cx="52" cy="' + peakY + '" r="4.5" fill="' + color + '"/><circle cx="' + (52 + width / (v.freq * .02)) + '" cy="' + peakY + '" r="4.5" fill="' + color + '"/>';
+    }
+    h += '<g fill="#6d8296" font-size="13"><text x="41" y="124" text-anchor="end">0</text><text x="12" y="48">位移</text>';
+    for (var j = 0; j <= 4; j++) h += '<text x="' + (x0 + width * j / 4) + '" y="226" text-anchor="' + (j === 0 ? 'start' : j === 4 ? 'end' : 'middle') + '">' + (j * 5) + (j === 4 ? ' 毫秒' : '') + '</text>';
+    h += '</g>';
+    $('voiceWave' + key).innerHTML = h;
+    $('freqValue' + key).innerHTML = v.freq + ' <small>Hz</small>';
+    $('ampValue' + key).innerHTML = v.amp + ' <small>%</small>';
+    $('freq' + key).value = String(v.freq); $('amp' + key).value = String(v.amp);
+  }
+  function voiceSound(key) {
+    return { freq: state.voices[key].freq, amp: state.voices[key].amp / 100, type: 'sine', key: key, scope: 'voice' };
+  }
+  function setPage(page) {
+    stopAudio(); stopMotion(); state.page = page;
+    ['ruler', 'mixer'].forEach(function (k) { $('page-' + k).hidden = page !== k; $('tab-' + k).setAttribute('aria-selected', String(page === k)); });
+    if (page === 'ruler') drawScene();
+  }
+  function reset() {
+    stopAudio(); stopMotion();
+    if (state.page === 'ruler') {
+      state.saved = { A: null, B: null }; state.lastTrial = null; state.motion.kind = 'idle'; state.motion.time = 0;
+      ['A', 'B'].forEach(function (k) {
+        $('savedLength' + k).textContent = '待保留'; $('savedMeta' + k).textContent = k === 'A' ? '拨动后再保留' : '换个长度，再保留';
+        $('hear' + k).disabled = true; miniWave(k);
+      });
+      $('pauseBtn').disabled = true; $('timeSlider').disabled = true; $('timeMode').textContent = '原速观察';
+      setLength(12);
+    } else {
+      state.voices = { A: { freq: 200, amp: 50 }, B: { freq: 400, amp: 50 } }; state.period = false;
+      $('periodBtn').setAttribute('aria-pressed', 'false'); drawVoice('A'); drawVoice('B');
+    }
+    toast('当前页已恢复初始状态');
+  }
+  function sceneX(event) {
+    var svg = $('rulerScene'), matrix = svg.getScreenCTM();
+    if (!matrix) return null;
+    var p = svg.createSVGPoint(); p.x = event.clientX; p.y = event.clientY;
+    return p.matrixTransform(matrix.inverse()).x;
+  }
+  $('lengthHandle').addEventListener('pointerdown', function (e) {
+    e.preventDefault(); dragId = e.pointerId;
+    if (this.setPointerCapture) this.setPointerCapture(e.pointerId);
+    var x = sceneX(e); if (x !== null) setLength((x - FIXED_X) / LENGTH_PX);
+  });
+  $('lengthHandle').addEventListener('pointermove', function (e) {
+    if (dragId !== e.pointerId) return; e.preventDefault();
+    var x = sceneX(e); if (x !== null) setLength((x - FIXED_X) / LENGTH_PX);
+  });
+  function endDrag(e) { if (dragId === e.pointerId) { dragId = null; if (e.currentTarget.hasPointerCapture && e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId); } }
+  $('lengthHandle').addEventListener('pointerup', endDrag); $('lengthHandle').addEventListener('pointercancel', endDrag);
+  $('lengthHandle').addEventListener('keydown', function (e) {
+    var delta = e.key === 'ArrowLeft' || e.key === 'ArrowDown' ? -.5 : e.key === 'ArrowRight' || e.key === 'ArrowUp' ? .5 : 0;
+    if (delta) { e.preventDefault(); setLength(state.length + delta); }
+    if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); setLength(e.key === 'Home' ? 8 : 20); }
+  });
+  $('pluckTip').addEventListener('click', function () { makeTrial('raw'); });
+  $('pluckTip').addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); makeTrial('raw'); } });
+  $('lengthSlider').addEventListener('input', function () { setLength(this.value); });
+  $('pluckBtn').addEventListener('click', function () { makeTrial('raw'); });
+  $('slowBtn').addEventListener('click', function () { makeTrial('slow'); });
+  $('pauseBtn').addEventListener('click', pause);
+  $('timeSlider').addEventListener('input', function () { stopAudio(); stopMotion(); state.motion.time = Math.min(state.motion.end, Math.max(0, Number(this.value) / 1000)); drawScene(); });
+  ['A', 'B'].forEach(function (key) {
+    $('save' + key).addEventListener('click', function () { saveTrial(key); });
+    $('hear' + key).addEventListener('click', function () { if (state.saved[key]) { stopMotion(); drawScene(); playSounds([rulerSound(state.saved[key].length, key)]); } });
+    $('playVoice' + key).addEventListener('click', function () { playSounds([voiceSound(key)]); });
+    ['freq', 'amp'].forEach(function (param) {
+      $(param + key).addEventListener('input', function () { stopAudio(); state.voices[key][param] = Number(this.value); drawVoice(key); });
+    });
+  });
+  $('syncBtn').addEventListener('click', function () { if (state.saved.A && state.saved.B) { stopAudio(); runMotion('sync'); } });
+  $('hearBoth').addEventListener('click', function () { if (state.saved.A && state.saved.B) { stopMotion(); drawScene(); playSounds([rulerSound(state.saved.A.length, 'A'), rulerSound(state.saved.B.length, 'B')]); } });
+  $('playVoices').addEventListener('click', function () { playSounds([voiceSound('A'), voiceSound('B')]); });
+  $('periodBtn').addEventListener('click', function () { state.period = !state.period; this.setAttribute('aria-pressed', String(state.period)); drawVoice('A'); drawVoice('B'); });
+  $('tab-ruler').addEventListener('click', function () { setPage('ruler'); });
+  $('tab-mixer').addEventListener('click', function () { setPage('mixer'); });
+  $('resetBtn').addEventListener('click', reset);
+  $('fullscreenBtn').addEventListener('click', function () {
+    var doc = document, root = doc.documentElement, active = doc.fullscreenElement || doc.webkitFullscreenElement;
+    var request = active ? (doc.exitFullscreen || doc.webkitExitFullscreen) : (root.requestFullscreen || root.webkitRequestFullscreen);
+    if (!request) { toast('此浏览器不支持网页全屏，可使用浏览器菜单或横屏打开。'); return; }
+    try { var promise = request.call(active ? doc : root); if (promise && promise.catch) promise.catch(function () { toast('全屏未开启，请使用浏览器的全屏功能。'); }); }
+    catch (e) { toast('当前环境无法进入全屏。'); }
+  });
+  function closeInfo() { $('infoDialog').hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  $('infoBtn').addEventListener('click', function () { stopAudio(); stopMotion(); drawScene(); lastFocus = document.activeElement; $('infoDialog').hidden = false; $('closeInfo').focus(); });
+  $('closeInfo').addEventListener('click', closeInfo);
+  $('infoDialog').addEventListener('click', function (e) { if (e.target === this) closeInfo(); });
+  document.addEventListener('keydown', function (e) {
+    if (!$('infoDialog').hidden) {
+      if (e.key === 'Escape') { e.preventDefault(); closeInfo(); }
+      if (e.key === 'Tab') { e.preventDefault(); $('closeInfo').focus(); }
+    }
+  });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) { stopAudio(); stopMotion(); drawScene(); } });
+  window.addEventListener('pagehide', function () { stopAudio(); stopMotion(); });
+  miniWave('A'); miniWave('B'); drawVoice('A'); drawVoice('B'); setLength(12); updateCapture();
+}());
+
+</script>
+</body>
+</html>
