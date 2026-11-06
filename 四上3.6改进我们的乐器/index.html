@@ -1,0 +1,1007 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="四年级科学：改进我们的乐器。连续调音、结构透视、前后同条件试听、实物录音与迭代记录。">
+<meta name="aihtml-level" content="1">
+<title>改进我们的乐器 · 对照实验台</title>
+<style>:root{--bg:#f5f6fa;--surface:#fff;--ink:#17354e;--muted:#586f82;--blue:#3163dc;--blue-light:#e8efff;--before:#b6772b;--before-bg:#fff6e9;--now:#18877b;--now-bg:#ecf8f4;--line:#d6dfeb;--radius:13px;--shadow:0 5px 20px #17354e08;font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;color:var(--ink);font-size:20px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);overscroll-behavior:none}button,input,select{font:inherit;color:inherit}button{border:1.5px solid var(--line);background:#fff;min-height:48px;padding:10px 18px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:650;touch-action:manipulation;line-height:1.2;transition:background .16s,border-color .16s,box-shadow .16s}button:hover{border-color:#8fa9d5;background:#f0f4fd}button:active{transform:translateY(1px)}button:disabled{opacity:.45;cursor:default}button:focus-visible,select:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #edaf4b;outline-offset:3px}button.primary{color:#fff;border-color:var(--blue);background:var(--blue);box-shadow:0 3px 10px #3163dc1a}button.primary:hover{background:#2452c2}.icon{width:25px;height:25px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.icon-only{padding:10px;width:48px;flex-shrink:0}.symbol-bank{position:absolute;width:0;height:0;overflow:hidden}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.text-button{padding:6px 9px;background:transparent;border-color:transparent;box-shadow:none;color:var(--blue);font-size:18px}.text-button:hover{background:var(--blue-light);border-color:transparent}
+#app{height:100vh;height:100dvh;max-width:2200px;margin:auto;display:flex;flex-direction:column;padding:0 22px;overflow:hidden}.topbar{height:83px;flex:0 0 83px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line)}h1{font-size:30px;line-height:1.15;letter-spacing:.02em;margin:0;white-space:nowrap;font-weight:800}.topbar nav{display:flex;gap:8px}.tab{min-height:54px;font-size:23px;padding:12px 26px;border-radius:10px;background:transparent;border-color:transparent}.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}.utilities{display:flex;gap:8px}.utilities button{font-size:18px;background:transparent}.utilities .icon-only{width:46px;min-height:46px}.view{flex:1;min-height:0;padding-top:15px}.lab-view{display:flex;flex-direction:column;gap:14px}.material-rail{height:70px;flex:0 0 70px;display:flex;align-items:stretch;gap:14px}.material{flex:1;max-width:430px;font-size:23px;justify-content:flex-start;padding:5px 24px;gap:18px;background:#fff9}.material svg{height:56px;width:88px;flex-shrink:0}.material.active{border:2px solid var(--blue);background:var(--blue-light);box-shadow:0 2px 9px #3163dc12}.add-part{margin-left:auto;flex-direction:column;gap:0;font-size:26px;padding:0 18px;background:transparent}.add-part span{font-size:16px}.lab-layout{min-height:0;flex:1;display:grid;grid-template-columns:minmax(0,1fr) 305px;gap:16px}.workbench{min-width:0;min-height:0;background:linear-gradient(180deg,#fff,#f7f9fc);border:1px solid var(--line);border-radius:var(--radius);display:flex;flex-direction:column;padding:12px;box-shadow:var(--shadow)}.tuner{height:102px;flex:0 0 102px;display:grid;grid-template-columns:172px minmax(150px,1fr) 130px;align-items:center;gap:22px;border-bottom:1px solid var(--line);padding:0 14px 9px}.reference{position:relative;height:78px;display:grid;grid-template-columns:1fr 28px;grid-template-rows:24px 1fr;padding:0 10px 0 0;border:0;border-right:1px solid var(--line);background:transparent;text-align:left;justify-items:start;border-radius:0}.target-label{font-size:18px;font-weight:500}.reference strong{font-size:44px;line-height:1;letter-spacing:0}.reference strong span{font-size:22px;margin-left:10px;font-weight:500}.reference .icon{grid-column:2;grid-row:1/3;align-self:center}.pitch-scale{min-width:0}.scale-labels{display:flex;justify-content:space-between;font-size:17px;color:var(--muted);padding-bottom:9px}.scale-track{height:10px;border-radius:6px;background:linear-gradient(90deg,#c8dcf5,#e9eddf 45%,#e9eddf 55%,#ead1a9);position:relative;box-shadow:inset 0 1px 3px #17354e0d}.center-tick{position:absolute;left:50%;top:-8px;width:4px;height:26px;background:var(--ink);border-radius:3px;transform:translateX(-50%)}.pitch-dot{position:absolute;left:25%;width:24px;height:24px;top:-7px;background:var(--now);border:4px solid #fff;border-radius:50%;box-shadow:0 2px 6px #17354e22;transform:translateX(-50%);transition:left .12s}.pitch-detail{text-align:center;font-size:16px;color:var(--muted);margin-top:11px;white-space:nowrap}.pitch-result{text-align:center}.pitch-result strong{display:block;font-size:32px;color:var(--now)}.pitch-result span{font-size:16px;color:var(--muted)}.scene-wrap{position:relative;flex:1;min-height:140px;display:flex;flex-direction:column;justify-content:center}#mainScene{display:block;width:100%;height:100%;min-height:0;touch-action:none;user-select:none}.scene-tools{position:absolute;z-index:2;top:7px;right:6px;display:flex;align-items:center;gap:7px}.scene-tools button{font-size:16px;min-height:38px;padding:6px 10px;background:#ffffffd9}.scene-tools button[aria-pressed=true]{color:var(--blue);border-color:var(--blue)}.scene-tools .icon{width:21px;height:21px}.scene-tools .icon-only{width:38px}.scene-tools span{font-size:16px;color:var(--muted);background:#ffffffce}.scene-hint{position:absolute;bottom:4px;left:10px;color:var(--muted);font-size:17px;pointer-events:none;background:#ffffffb3;border-radius:7px;padding:3px 8px}.lab-actions{display:grid;grid-template-columns:1fr 1fr 1.18fr;gap:12px;flex:0 0 58px;margin-top:5px}.lab-actions button{font-size:21px;min-width:0}.before-tone{color:var(--before);border-color:#d6ad75;background:var(--before-bg)}.now-tone{color:var(--now);border-color:#73b9ad;background:var(--now-bg)}.inspector{min-height:0;display:flex;flex-direction:column;gap:18px;padding:24px 22px 16px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow)}.inspector h2{font-size:26px;margin:0 0 3px;padding:0;font-weight:800}.editor{flex:1;min-height:0}.parameter-label{display:flex;justify-content:space-between;align-items:center;font-size:21px;font-weight:600;margin:6px 0 14px;gap:6px}.parameter-label strong{color:var(--blue);font-size:28px;white-space:nowrap}input[type=range]{width:100%;height:32px;padding:0;accent-color:var(--blue);margin:0;cursor:pointer;touch-action:pan-y}input[type=range]::-webkit-slider-thumb{width:28px;height:28px}.step-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px}.step-controls button{font-size:22px;padding:12px 4px;min-height:59px;user-select:none;touch-action:none}.control-hint{color:var(--muted);font-size:17px;line-height:1.55;margin:12px 0}.cut-tools{display:flex;gap:7px}.cut-tools button{font-size:18px;padding:8px 10px}.force-control{display:flex;align-items:center;gap:14px;justify-content:space-between;border-top:1px solid var(--line);padding-top:17px;font-size:20px;flex-shrink:0}.segmented{display:flex;gap:6px}.segmented button{min-width:49px;padding:9px;font-size:22px}.segmented .selected{background:var(--now);color:#fff;border-color:var(--now)}.try-button{font-size:26px;min-height:62px;flex-shrink:0}.try-button .icon{width:30px;height:30px}.part-summary{display:flex;flex-wrap:wrap;align-items:center;gap:5px;justify-content:space-between;color:var(--muted);font-size:16px}.part-summary .text-button{font-size:17px;min-height:36px}.state-control{display:block;width:100%;text-align:left;font-size:20px;padding:13px 11px;margin:5px 0 10px;line-height:1.45;min-height:55px}.state-control.is-good{background:var(--now-bg);border-color:#68af9f;color:#12665d}.structure-editor .control-hint{font-size:17px}.mobile-keys{display:none}.part-key,.instrument-part,[data-part],[data-structure],[data-drag]{cursor:pointer}[data-drag]{touch-action:none}[data-structure]:focus-visible,[data-part]:focus-visible{outline:0;filter:drop-shadow(0 0 6px #3163dc)}
+.compare-view{display:flex;flex-direction:column;gap:13px}.scorebar{position:relative;flex:0 0 105px;display:flex;align-items:center;gap:22px;min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:12px 19px}.song-control{flex:0 0 145px;border-right:1px solid var(--line);padding-right:16px;display:flex;flex-direction:column;gap:4px}.song-control select{width:100%;font-size:23px;font-weight:750;border:0;background:transparent;padding:6px 0}.song-control button{min-height:34px;font-size:17px;padding:0;justify-content:flex-start}.score{flex:1;display:flex;gap:5px;align-items:center;justify-content:space-around;min-width:0}.score .note{font-size:31px;font-weight:750;min-width:27px;text-align:center;border-radius:7px;padding:8px 4px}.score .bar{height:34px;width:1px;background:#9aafbf;margin:0 6px;flex-shrink:0}.score .note.current{background:var(--blue);color:white}.score .note.correct{background:var(--now-bg);color:var(--now)}.score .note.miss{background:#fff0de;color:#a65c10}.practice-feedback{position:absolute;right:12px;top:calc(100% - 6px);z-index:5;padding:10px 19px;color:#9b5610;background:#fff3df;border:1px solid #efc075;box-shadow:0 3px 12px #17354e12;border-radius:9px;font-size:22px;font-weight:700}.practice-feedback.correct{background:#e8f8ef;color:#0a6b53;border-color:#7fc8b4}.comparison-panels{display:grid;grid-template-columns:1fr 1fr;gap:18px;min-height:0;flex:1}.version-panel{min-width:0;min-height:0;overflow:hidden;border:1px solid #dec6a2;border-radius:var(--radius);background:#fff;display:flex;flex-direction:column;box-shadow:var(--shadow)}.version-panel header{display:flex;justify-content:space-between;align-items:center;padding:10px 19px;min-height:53px;background:#d09b50;color:#fff;flex-shrink:0}.version-panel header h2{font-size:27px;margin:0}.version-panel header button{border:0;background:#fff2;min-height:33px;padding:3px 11px;color:inherit;font-size:17px}.version-panel header span{font-size:17px}.now-panel{border-color:#9ccbc0}.now-panel header{background:var(--now)}.version-visual{min-height:0;flex:1;display:grid;grid-template-columns:1.15fr 1fr;align-items:center;padding:8px 10px;gap:8px}.version-visual>svg{width:100%;height:100%;min-height:0;overflow:visible}#beforeScene,#afterScene{touch-action:manipulation}.version-stats{display:flex;justify-content:space-between;gap:14px;background:#faf4eb;margin:0 15px 14px;padding:10px 15px;border-radius:8px;align-items:center;font-size:20px;min-height:55px}.version-stats strong{font-size:30px;margin-left:5px;color:var(--before);line-height:1}.now-panel .version-stats{background:var(--now-bg)}.now-panel .version-stats strong{color:var(--now)}.version-stats>span:last-child{font-size:19px}.compare-transport{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 18px;flex:0 0 93px}.compare-transport button{min-width:190px;font-size:23px;min-height:53px}.compare-transport p{width:100%;text-align:center;font-size:18px;color:var(--muted);margin:0;line-height:1.15}.compare-transport .stop-button{min-width:110px}.reflection-row{display:flex;align-items:center;gap:14px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 12px;flex:0 0 62px;min-height:62px}.change-summary{flex:1;min-width:0;border:0;background:transparent;justify-content:flex-start;text-align:left;font-size:18px;font-weight:500;padding:5px 3px;gap:4px}.change-summary span:first-child{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.edit-mark{color:var(--blue);margin-left:5px}.judgement{display:flex;gap:7px;align-items:center;flex-shrink:0}.judgement>span{font-size:18px;margin-right:3px}.judgement button{font-size:18px;min-height:42px;padding:7px 12px;font-weight:500}.judgement button.selected{background:var(--blue-light);color:var(--blue);border-color:var(--blue)}.compare-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:0 0 52px}.compare-bottom>span{font-size:17px;color:var(--muted)}.compare-bottom .primary{font-size:21px;min-width:185px}footer{display:flex;align-items:center;gap:18px;justify-content:space-between;height:35px;flex:0 0 35px;color:var(--muted);font-size:16px}.footer-info{border:0;background:transparent;font-size:16px;font-weight:450;padding:4px 0;min-height:30px;color:var(--muted)}.technical-level{font-size:14px;margin-left:auto;color:#7b8c9e}.watermark{font-size:16px;color:#8291a3;letter-spacing:.1em}.toast{position:fixed;z-index:50;left:50%;bottom:45px;transform:translate(-50%,20px);opacity:0;background:#18354f;color:white;box-shadow:0 6px 20px #17354e22;border-radius:12px;padding:15px 24px;font-size:21px;line-height:1.5;max-width:90vw;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+dialog{border:1px solid var(--line);border-radius:17px;background:#fff;color:var(--ink);box-shadow:0 18px 80px #17354e35;width:min(710px,94vw);max-height:92vh;padding:24px 28px;overflow:auto}dialog::backdrop{background:#152f4566;backdrop-filter:blur(3px)}.dialog-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.dialog-heading h2{font-size:27px;margin:0}.dialog-heading .icon-only{border-color:transparent}.dialog-note{font-size:17px;color:var(--muted);line-height:1.6;margin:16px 0 2px}.project-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}.project-actions button{min-height:60px;justify-content:flex-start;font-size:19px;padding:13px}.volume-control{display:flex;gap:20px;align-items:center;margin-top:25px;white-space:nowrap;font-size:18px}.note-question{display:flex;flex-direction:column;gap:8px;margin:18px 0;font-size:20px}.note-question label{font-weight:650}.note-question select,.note-question input{border:1px solid #bacbdd;border-radius:9px;font-size:20px;min-height:52px;padding:10px 13px;background:#f7f9fd;width:100%}.note-question input{font-size:18px}.automatic-change{margin:0;font-size:20px;line-height:1.6;background:var(--blue-light);padding:11px 14px;border-radius:9px}.dialog-foot{display:flex;justify-content:flex-end;margin-top:20px}.dialog-foot .primary{min-width:200px}.history-list{display:flex;flex-direction:column;gap:11px;margin-top:20px}.history-row{display:flex;align-items:center;justify-content:space-between;padding:13px;background:#f3f6fc;border-radius:10px;gap:15px}.history-row>div{display:flex;flex-direction:column;gap:7px;font-size:21px}.history-row small{font-size:17px;line-height:1.4;color:var(--muted)}.history-row button{font-size:18px;flex-shrink:0}.record-advice{font-size:21px;line-height:1.6}.real-recordings{display:grid;grid-template-columns:1fr 1fr;gap:18px}.real-recordings section{padding:16px;background:#f5f7fc;border:1px solid var(--line);border-radius:12px;text-align:center;min-width:0}.real-recordings h3{font-size:24px;margin:0 0 16px}.real-recordings audio{width:100%;margin-top:16px;height:43px}.record-btn{color:#a64c3e;width:100%;min-height:55px}.record-btn.is-recording{background:#af4a42;color:#fff;border-color:#af4a42}#recordingStatus{font-size:19px;line-height:1.6;min-height:30px}#infoDialog{width:min(820px,94vw)}.info-content{font-size:19px;line-height:1.85}.info-content h3{font-size:22px;margin:24px 0 5px}.info-content p{margin:10px 0}.info-content li{margin:9px 0}.info-content .sources{font-size:16px}.info-content a{color:var(--blue)}
+@media(min-width:1600px){:root{font-size:22px}.topbar{height:92px;flex-basis:92px}h1{font-size:36px}.tab{font-size:27px;padding:14px 34px}.material-rail{height:83px;flex-basis:83px}.material{font-size:26px;max-width:500px}.material svg{height:65px;width:100px}.lab-layout{grid-template-columns:minmax(0,1fr) 370px}.inspector{padding:30px;gap:25px}.inspector h2{font-size:31px}.parameter-label{font-size:25px}.parameter-label strong{font-size:35px}.step-controls button{font-size:27px;min-height:70px}.force-control{font-size:25px}.segmented button{font-size:26px;min-width:56px}.try-button{font-size:30px;min-height:75px}.lab-actions{flex-basis:66px}.lab-actions button{font-size:27px}.tuner{height:115px;flex-basis:115px;grid-template-columns:220px minmax(150px,1fr) 180px}.reference strong{font-size:50px}.target-label,.scale-labels{font-size:22px}.pitch-result strong{font-size:40px}.pitch-detail,.pitch-result span{font-size:19px}.scene-tools button{font-size:20px;min-height:44px}.scene-hint{font-size:21px}.control-hint{font-size:20px}.scorebar{flex-basis:125px}.score .note{font-size:42px}.song-control{flex-basis:180px}.song-control select{font-size:28px}.version-panel header h2{font-size:33px}.version-panel header{min-height:64px}.version-stats{font-size:25px;min-height:65px}.version-stats strong{font-size:38px}.version-stats>span:last-child{font-size:25px}.compare-transport{flex-basis:105px}.compare-transport button{font-size:28px;min-height:60px;min-width:225px}.compare-transport p{font-size:22px}.reflection-row{flex-basis:74px}.change-summary,.judgement button,.judgement>span{font-size:23px}.compare-bottom{flex-basis:62px}.compare-bottom .primary{font-size:26px}.compare-bottom>span{font-size:21px}footer{height:42px;flex-basis:42px}.footer-info{font-size:18px}}
+@media(max-height:760px) and (min-width:951px){#app{padding:0 16px}.topbar{height:68px;flex-basis:68px}h1{font-size:28px}.tab{font-size:21px;min-height:48px;padding:9px 21px}.view{padding-top:10px}.lab-view{gap:10px}.material-rail{height:59px;flex-basis:59px;gap:10px}.material{font-size:21px}.material svg{height:47px;width:74px}.lab-layout{gap:12px;grid-template-columns:minmax(0,1fr) 284px}.workbench{padding:10px}.tuner{height:85px;flex-basis:85px;gap:16px;grid-template-columns:160px minmax(130px,1fr) 110px}.reference{height:67px}.reference strong{font-size:37px}.pitch-result strong{font-size:29px}.inspector{gap:13px;padding:17px 18px 10px}.inspector h2{font-size:25px}.parameter-label{margin:6px 0 7px;font-size:20px}.parameter-label strong{font-size:26px}.step-controls{margin-top:8px}.step-controls button{min-height:51px;font-size:21px}.control-hint{margin:8px 0;font-size:16px}.force-control{padding-top:10px}.try-button{min-height:55px;font-size:24px}.lab-actions{flex-basis:52px;gap:9px}.lab-actions button{font-size:20px;padding:9px 5px}.state-control{font-size:18px;padding:9px;min-height:50px;margin-bottom:8px}.scorebar{flex-basis:90px;padding:8px 15px}.compare-view{gap:10px}.score .note{font-size:29px;padding:6px 3px}.score .bar{margin:0 4px}.version-panel header{min-height:48px;padding:7px 16px}.version-stats{margin:0 11px 10px;padding:8px 12px;min-height:47px;font-size:19px}.version-stats strong{font-size:27px}.version-stats>span:last-child{font-size:18px}.compare-transport{flex-basis:82px;gap:7px 14px}.compare-transport button{min-height:48px;font-size:22px}.reflection-row{flex-basis:57px;min-height:57px;padding:5px 9px;gap:8px}.judgement button{padding:7px 9px;font-size:17px}.judgement>span{font-size:17px}.compare-bottom{flex-basis:49px}.scene-hint{font-size:16px}footer{height:30px;flex-basis:30px}.technical-level{font-size:13px}}
+@media(max-width:1150px) and (min-width:951px){h1{font-size:26px}.topbar{gap:10px}.tab{font-size:20px;padding:10px 16px}.utilities{gap:5px}.utilities button{padding:9px}.utilities button span{display:none}.material{padding:4px 14px;gap:8px}.material svg{width:68px}.lab-layout{grid-template-columns:minmax(0,1fr) 270px}.inspector{padding:18px 16px;gap:12px}.tuner{grid-template-columns:140px minmax(110px,1fr) 95px;gap:12px;padding:0 6px 8px}.pitch-result strong{font-size:27px}.pitch-detail{font-size:15px}.pitch-result span{font-size:15px}.lab-actions button{font-size:18px}.lab-actions .icon{width:22px}.version-visual{grid-template-columns:1fr;grid-template-rows:1fr 100px;padding:3px 10px}.score .note{font-size:24px;min-width:20px;padding:5px 2px}.score{gap:1px}.scorebar{gap:12px}.song-control{flex-basis:130px}.reflection-row{flex-wrap:wrap;flex-basis:93px}.change-summary{width:100%;flex-basis:100%;min-height:30px}.judgement{justify-content:center;width:100%}.version-stats{font-size:18px}.version-stats>span:last-child{font-size:16px}.compare-bottom>span{display:none}}
+@media(max-width:950px){#app{padding:0 14px}.topbar{height:113px;flex-basis:113px;flex-wrap:wrap;gap:6px 12px;padding:9px 0}h1{font-size:27px}.topbar nav{order:3;width:100%;justify-content:center}.tab{min-height:44px;padding:8px 23px;font-size:21px;flex:1;max-width:340px}.utilities{margin-left:auto;gap:6px}.utilities button{min-height:42px;font-size:17px}.utilities .icon-only{min-height:42px;width:42px}.view{padding-top:10px}.material-rail{height:64px;flex-basis:64px;gap:9px}.material{font-size:20px;padding:5px 13px;gap:8px}.material svg{width:66px;height:47px}.add-part{padding:0 10px}.lab-view{gap:10px}.lab-layout{grid-template-columns:1fr;grid-template-rows:minmax(250px,1fr) 218px;gap:10px}.workbench{padding:9px}.tuner{height:83px;flex-basis:83px;grid-template-columns:154px minmax(130px,1fr) 106px;gap:18px;padding:0 7px 7px}.reference{height:65px}.reference strong{font-size:38px}.pitch-result strong{font-size:29px}.scene-tools button{font-size:16px;min-height:34px}.scene-tools .icon{width:18px}.scene-hint{font-size:16px}.lab-actions{flex-basis:47px;gap:9px;margin-top:1px}.lab-actions button{font-size:20px;min-height:47px;padding:8px}.inspector{padding:13px 17px;display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:34px 1fr 34px;gap:9px 25px}.inspector h2{grid-row:1;grid-column:1;font-size:23px;align-self:center}.inspector .editor{grid-column:1;grid-row:2/4}.parameter-label{margin:0;font-size:20px}.parameter-label strong{font-size:25px}input[type=range]{height:28px}.step-controls{margin-top:3px;gap:9px}.step-controls button{min-height:46px;font-size:21px;padding:7px}.control-hint{margin:5px 0;font-size:16px}.force-control{grid-column:2;grid-row:1/2;border:0;padding:0;font-size:18px;gap:9px}.segmented button{min-height:38px;min-width:42px;font-size:20px;padding:6px}.try-button{grid-column:2;grid-row:2;align-self:center;min-height:58px;font-size:25px}.part-summary{grid-column:2;grid-row:3;font-size:14px;gap:3px}.part-summary .text-button{min-height:28px}.cut-tools{margin-top:4px}.cut-tools button{min-height:37px;font-size:17px;padding:7px 10px}.structure-editor .state-control{font-size:17px;min-height:39px;padding:7px;margin:0 0 5px}.structure-editor .control-hint{font-size:15px;margin:2px 0}.structure-editor .text-button{min-height:27px;font-size:16px}.scorebar{padding:10px 13px;flex-basis:122px;gap:12px;align-items:center}.song-control{flex-basis:130px}.song-control select{font-size:21px}.score{flex-wrap:wrap;justify-content:flex-start;gap:2px}.score .note{font-size:27px;min-width:25px;padding:7px 3px}.score .bar{height:30px;margin:0 3px}.comparison-panels{gap:12px}.version-panel header{min-height:50px;padding:9px 14px}.version-panel header h2{font-size:26px}.version-visual{grid-template-columns:1fr;grid-template-rows:minmax(80px,1fr) minmax(80px,125px);padding:4px 10px;gap:1px}.version-stats{flex-wrap:wrap;justify-content:center;gap:5px;font-size:19px;margin:0 11px 10px;padding:8px}.version-stats strong{font-size:27px}.version-stats>span:last-child{font-size:17px}.compare-transport{flex-basis:88px;gap:9px}.compare-transport button{min-width:160px;font-size:22px;min-height:48px}.reflection-row{flex-basis:108px;flex-wrap:wrap;gap:4px;padding:6px 12px}.change-summary{width:100%;flex-basis:100%;min-height:36px;font-size:18px}.judgement{width:100%;justify-content:center}.judgement button{font-size:18px}.compare-bottom{flex-basis:49px}.compare-bottom>span{display:none}.compare-bottom .primary{font-size:20px;min-width:180px}footer{height:31px;flex-basis:31px}.footer-info{font-size:15px}.technical-level{font-size:13px}}
+@media(max-width:650px){#app{height:auto;min-height:100dvh;padding:0 9px;overflow:visible}.topbar{height:108px;flex-basis:108px}h1{font-size:23px}.utilities{gap:3px}.utilities button{font-size:15px;padding:7px;min-height:38px}.utilities button .icon{width:21px;height:21px}.utilities .icon-only{width:36px;min-height:38px}.utilities #projectBtn span{display:none}.tab{font-size:19px;padding:9px 16px;min-height:44px}.material-rail{height:57px;flex-basis:57px;gap:6px}.material{font-size:16px;padding:4px 5px;gap:2px;flex-direction:column}.material svg{width:48px;height:27px}.add-part{font-size:23px;padding:0 7px}.add-part span{font-size:13px}.lab-layout{grid-template-rows:345px auto}.workbench{padding:7px}.tuner{height:75px;flex-basis:75px;grid-template-columns:91px minmax(80px,1fr) 72px;gap:9px;padding:0 1px 6px}.reference{height:59px;grid-template-columns:1fr 17px;grid-template-rows:20px 1fr;padding:0 7px 0 0}.reference .icon{width:18px;height:18px}.target-label{font-size:15px}.reference strong{font-size:30px}.reference strong span{font-size:16px;margin-left:3px}.scale-labels{font-size:14px;padding-bottom:7px}.pitch-detail{font-size:12px;margin-top:11px;letter-spacing:-.3px}.pitch-result strong{font-size:23px}.pitch-result span{font-size:13px}.pitch-dot{width:19px;height:19px;top:-5px;border-width:3px}.scene-tools{top:4px;right:2px;gap:4px}.scene-tools button{font-size:13px;min-height:29px;padding:4px 7px}.scene-tools span{font-size:12px}.scene-tools .icon-only{width:29px}.scene-tools .icon{width:17px;height:17px}.scene-hint{font-size:13px;padding:1px 4px;bottom:0;left:3px}.mobile-keys{display:flex;gap:5px;margin:3px 0}.mobile-keys button{flex:1;min-width:0;min-height:38px;padding:4px;font-size:20px}.mobile-keys .selected{background:var(--blue-light);border-color:var(--blue);color:var(--blue)}.lab-actions{flex-basis:44px;gap:5px}.lab-actions button{font-size:16px;padding:5px 2px;min-height:42px;gap:2px}.lab-actions .icon{width:19px;height:19px}.inspector{padding:12px 13px;grid-template-columns:1.1fr 1fr;grid-template-rows:28px auto 29px;gap:8px 14px;min-height:210px}.inspector h2{font-size:19px}.parameter-label{font-size:17px}.parameter-label strong{font-size:21px}.step-controls button{font-size:18px;padding:6px 2px;min-height:43px}.control-hint{font-size:13px}.force-control{font-size:15px;gap:5px}.segmented{gap:4px}.segmented button{font-size:18px;min-width:31px;min-height:34px;padding:5px}.try-button{min-height:54px;font-size:22px}.try-button .icon{width:25px;height:25px}.part-summary{font-size:12px}.part-summary .text-button{font-size:15px}.cut-tools{flex-wrap:wrap;gap:4px}.cut-tools button{font-size:15px;padding:5px;min-height:35px}.structure-editor .state-control{font-size:16px;line-height:1.3}.structure-editor .control-hint{font-size:13px}.comparison-panels{min-height:460px;grid-template-columns:1fr}.version-panel{height:224px}.version-panel header{min-height:41px;padding:6px 12px}.version-panel header h2{font-size:23px}.version-panel header span{font-size:14px}.version-visual{grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:8px}.version-stats{min-height:40px;flex-wrap:nowrap;justify-content:space-between;margin:0 10px 8px;font-size:17px;padding:5px 10px}.version-stats strong{font-size:24px}.version-stats>span:last-child{font-size:16px}.scorebar{flex-basis:auto;min-height:142px;display:flex;flex-direction:column;gap:8px;padding:8px 10px}.song-control{flex:0 0 auto;width:100%;flex-direction:row;justify-content:space-between;border:0;padding:0}.song-control select{width:130px;font-size:20px}.song-control .text-button{font-size:16px}.score{gap:0;justify-content:center}.score .note{font-size:24px;min-width:24px;padding:5px 3px}.score .bar{margin:0 4px;height:26px}.compare-transport{padding-top:4px;flex-basis:89px}.compare-transport button{font-size:20px;min-width:145px}.compare-transport p{font-size:14px}.reflection-row{flex-basis:auto;min-height:130px;flex-direction:column;align-items:stretch;gap:6px;padding:9px}.change-summary{font-size:17px;min-height:42px;flex-basis:auto}.judgement{flex-wrap:wrap;gap:5px}.judgement>span{font-size:16px;width:100%;text-align:center}.judgement button{font-size:16px;min-height:39px;padding:6px 9px}.compare-bottom .primary{font-size:19px;min-width:140px;padding:9px 12px}.compare-bottom .text-button{font-size:16px}.technical-level{display:none}.footer-info{font-size:13px}.watermark{font-size:14px}dialog{padding:18px;width:95vw;max-height:93dvh}.dialog-heading h2{font-size:23px}.project-actions{grid-template-columns:1fr}.project-actions button{min-height:53px}.real-recordings{grid-template-columns:1fr}.record-advice{font-size:18px}.practice-feedback{font-size:18px;padding:8px 12px}.toast{font-size:18px;padding:12px 16px;width:90vw}.info-content{font-size:17px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.practice-row{display:flex;align-items:center;gap:16px;flex:0 0 54px;min-height:54px}.practice-keys{display:flex;flex:1;gap:7px;max-width:680px}.practice-keys button{flex:1;min-width:0;font-size:28px;min-height:48px;padding:5px 9px;border-color:#8faedf;background:var(--blue-light)}.practice-row .practice-feedback{position:static;flex:1;min-width:0;margin:0;padding:8px 14px;font-size:20px;box-shadow:none;line-height:1.3}.dialog-fallback[open]{position:fixed;z-index:45;top:4vh;left:50%;transform:translateX(-50%)}
+@media(min-height:761px) and (max-height:820px) and (min-width:951px){.topbar{height:68px;flex-basis:68px}.view{padding-top:10px}.material-rail{height:59px;flex-basis:59px}.material svg{height:47px;width:74px}.lab-view{gap:10px}.tuner{height:85px;flex-basis:85px}.reference{height:68px}.inspector{padding:17px 18px 12px;gap:10px}.inspector .editor{min-height:min-content}.inspector h2{font-size:24px}.parameter-label{font-size:20px;margin:4px 0 7px}.parameter-label strong{font-size:26px}.step-controls{margin-top:8px}.step-controls button{font-size:21px;min-height:51px}.control-hint{font-size:16px;margin:8px 0}.force-control{padding-top:10px}.try-button{min-height:55px;font-size:24px}.part-summary{font-size:15px}.lab-actions{flex-basis:52px}.lab-actions button{font-size:20px}.scene-hint{font-size:16px}}
+@media(max-height:820px) and (min-width:951px){.compare-view{gap:8px}.scorebar{flex-basis:80px;padding:8px 15px}.song-control select{font-size:22px}.score .note{font-size:27px;padding:5px 3px}.version-panel header{min-height:46px;padding:7px 14px}.version-panel header h2{font-size:27px}.version-visual{grid-template-columns:1.15fr 1fr;grid-template-rows:1fr;padding:4px 8px}.version-stats{margin:0 10px 10px;min-height:48px;padding:7px 10px;font-size:18px}.version-stats strong{font-size:27px}.version-stats>span:last-child{font-size:17px}.compare-transport{flex-basis:79px;gap:7px 12px}.compare-transport button{min-height:48px;font-size:22px}.compare-transport p{font-size:17px}.reflection-row{flex-wrap:nowrap;flex-basis:60px;min-height:60px;padding:5px 10px}.change-summary{width:auto;flex-basis:0;min-height:35px;font-size:17px}.judgement{width:auto;gap:6px}.judgement>span{font-size:17px}.judgement button{font-size:17px;padding:6px 8px;min-height:40px}.compare-bottom{flex-basis:48px}.compare-bottom .primary{min-height:46px}}
+@media(max-width:950px){.lab-layout{grid-template-rows:minmax(250px,1fr) 260px}.practice-row{gap:8px;flex-basis:58px}.practice-keys{gap:5px}.practice-keys button{font-size:23px;padding:5px;min-height:45px}.practice-row .practice-feedback{font-size:17px;padding:6px 9px}}
+@media(max-width:650px){.lab-layout{grid-template-rows:345px auto}.practice-row{flex-wrap:wrap;flex-basis:auto}.practice-keys{flex-basis:100%}.practice-row .practice-feedback{flex-basis:100%;font-size:17px;text-align:center}}
+</style>
+</head>
+<body>
+<svg class="symbol-bank" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M8 4 20 12 8 20Z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V5h7l3 3h8v12H3Z"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"/></symbol>
+<symbol id="i-save" viewBox="0 0 24 24"><path d="M4 3h13l3 3v15H4ZM8 3v6h8V3M8 21v-8h8v8"/></symbol>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-5v16l-5-5H4ZM17 8a7 7 0 0 1 0 8M20 5a11 11 0 0 1 0 14"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="m10 5-7 7 7 7M3 12h18"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="m14 5 7 7-7 7M3 12h18"/></symbol>
+</defs></svg>
+<div id="app">
+ <header class="topbar">
+  <h1>改进我们的乐器</h1>
+  <nav aria-label="活动页面"><button id="labTab" class="tab active" aria-current="page" data-view="lab">改进实验台</button><button id="compareTab" class="tab" data-view="compare">演奏与比较</button></nav>
+  <div class="utilities"><button id="projectBtn" aria-label="作品、记录与说明"><svg class="icon"><use href="#i-folder"/></svg><span>作品</span></button><button id="resetBtn" class="icon-only" aria-label="重新开始当前材料" title="重新开始当前材料"><svg class="icon"><use href="#i-reset"/></svg></button><button id="fullscreenBtn" class="icon-only" aria-label="全屏" title="全屏"><svg class="icon"><use href="#i-full"/></svg></button></div>
+ </header>
+
+ <main id="labView" class="view lab-view">
+  <div class="material-rail" aria-label="选择乐器">
+   <button class="material active" data-family="string"><svg viewBox="0 0 90 55" aria-hidden="true"><path d="M15 8h60l9 39H6Z" fill="#e8ca96" stroke="#b88a51" stroke-width="2"/><ellipse cx="45" cy="28" rx="13" ry="8" fill="#735e3f"/><path d="M20 10v33M33 10v33M46 10v33M59 10v33M72 10v33" stroke="#bd853d" stroke-width="2.5"/><path d="M13 14h65M9 39h72" stroke="#f5e1b7" stroke-width="4"/></svg><span>橡皮筋琴</span></button>
+   <button class="material" data-family="pipe"><svg viewBox="0 0 90 55" aria-hidden="true"><path d="M17 7v43M30 7v37M43 7v32M56 7v27M69 7v22" stroke="#dc9e42" stroke-width="10" stroke-linecap="round"/><path d="M16 8v41M29 8v35M42 8v30M55 8v24M68 8v20" stroke="#ffe0a1" stroke-width="3"/><path d="M10 16h65" stroke="#b96e45" stroke-width="6"/></svg><span>吸管排箫</span></button>
+   <button class="material" data-family="water"><svg viewBox="0 0 90 55" aria-hidden="true"><path d="M7 21h22l-2 29H9ZM35 13h23l-2 37H37ZM64 6h23l-2 44H66Z" fill="#edf8ff" stroke="#829fb4" stroke-width="2"/><path d="M9 36h18v12H10ZM37 28h19v20H38ZM66 23h19v25H67Z" fill="#7cc8ee" fill-opacity=".7"/><path d="M12 24v20M40 17v26M69 10v33" stroke="#fff" stroke-width="2"/></svg><span>水杯琴</span></button>
+   <button id="addPartBtn" class="add-part" aria-label="补充一个发声元件">＋<span>补音</span></button>
+  </div>
+  <div class="lab-layout">
+   <section class="workbench" aria-label="乐器实验台">
+    <div class="tuner">
+     <button id="referenceBtn" class="reference" aria-label="听目标音"><span class="target-label">目标音</span><strong id="targetNumber">3<span>mi</span></strong><svg class="icon"><use href="#i-sound"/></svg></button>
+     <div class="pitch-scale" aria-label="模拟音高与目标的差距"><div class="scale-labels"><span>低</span><span>目标</span><span>高</span></div><div class="scale-track"><i class="center-tick"></i><i class="pitch-dot" id="pitchDot"></i></div><div id="pitchDetail" class="pitch-detail">目标与当前音高</div></div>
+     <div class="pitch-result"><strong id="pitchStatus">偏低</strong><span id="pitchCents">模型音高</span></div>
+    </div>
+    <div class="scene-wrap">
+     <div class="scene-tools"><button id="insideBtn" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg>看结构</button><button id="pauseVisualBtn" class="icon-only" aria-label="暂停慢放" hidden><svg class="icon"><use href="#i-pause"/></svg></button><span id="slowLabel" hidden>振动慢放示意</span></div>
+     <svg id="mainScene" viewBox="0 0 1000 490" aria-label="点击元件试听，拖动高亮部位调整" xmlns="http://www.w3.org/2000/svg"></svg>
+     <div class="scene-hint" id="sceneHint">点弦试音，点琴箱看结构</div>
+    </div>
+    <div id="mobileKeys" class="mobile-keys" aria-label="演奏按键"></div>
+    <div class="lab-actions"><button id="beforeNoteBtn" class="before-tone"><svg class="icon"><use href="#i-play"/></svg>听改前</button><button id="nowNoteBtn" class="now-tone"><svg class="icon"><use href="#i-play"/></svg>听现在</button><button id="saveVersionBtn" class="primary"><svg class="icon"><use href="#i-save"/></svg>留存这一版</button></div>
+   </section>
+   <aside class="inspector" aria-label="调整选中的部件">
+    <h2 id="editorHeading">调整第 3 个音</h2>
+    <div id="pitchEditor" class="editor">
+     <label class="parameter-label" for="paramRange"><span id="paramLabel">绷紧程度</span><strong id="paramValue">47%</strong></label>
+     <input id="paramRange" type="range" min=".3" max="5" step=".025" value="1">
+     <div class="step-controls"><button id="lessBtn">− 拧松</button><button id="moreBtn">＋ 拧紧</button></div>
+     <p id="adjustHint" class="control-hint">长按可连续调整</p>
+     <div id="cutTools" class="cut-tools" hidden><button id="cutBtn" class="primary">剪短并封底</button><button id="replaceBtn">换新管</button></div>
+    </div>
+    <div id="structureEditor" class="editor structure-editor" hidden><button id="couplingBtn" class="state-control"></button><button id="dampingBtn" class="state-control"></button><button id="clearanceBtn" class="state-control"></button><p id="structureHint" class="control-hint"></p><button id="returnPitchBtn" class="text-button"><svg class="icon"><use href="#i-back"/></svg>返回调音</button></div>
+    <div class="force-control"><span>力度</span><div class="segmented" role="group" aria-label="演奏力度"><button data-force="0.32">轻</button><button data-force="0.64" class="selected">中</button><button data-force="0.94">重</button></div></div>
+    <button id="tryBtn" class="primary try-button"><svg class="icon"><use href="#i-play"/></svg><span>弹一下</span></button>
+    <div class="part-summary"><span id="materialSummary"></span><button id="toCompareBtn" class="text-button">去比较<svg class="icon"><use href="#i-next"/></svg></button></div>
+   </aside>
+  </div>
+ </main>
+
+ <main id="compareView" class="view compare-view" hidden>
+  <section class="scorebar" aria-label="演奏简谱"><div class="song-control"><label class="sr-only" for="songSelect">选择旋律</label><select id="songSelect"><option value="star">小星星</option><option value="joy">欢乐颂</option><option value="scale">六音测试</option></select><button id="practiceBtn" class="text-button">自己演奏</button></div><div id="score" class="score"></div></section>
+  <div id="practiceRow" class="practice-row" hidden><div id="practiceKeys" class="practice-keys" aria-label="用当前乐器演奏"></div><div id="practiceFeedback" class="practice-feedback" role="status" hidden></div></div>
+  <section class="comparison-panels" aria-label="同条件比较">
+   <article class="version-panel before-panel"><header><h2>改前</h2><button id="baselineBtn" title="选择已留存的对照版本"><span id="baselineName">初始版</span>⌄</button></header><div class="version-visual"><svg id="beforeScene" viewBox="0 0 1000 490" aria-label="改前乐器，可点按试听" xmlns="http://www.w3.org/2000/svg"></svg><svg id="beforeEnvelope" viewBox="0 0 480 175" aria-label="改前相对声幅包络，模型示意"></svg></div><div class="version-stats"><span>接近目标 <strong id="beforeCount">0/6</strong></span><span id="beforePitch">此音偏低</span></div></article>
+   <article class="version-panel now-panel"><header><h2>现在</h2><span id="currentVersionName">正在改进</span></header><div class="version-visual"><svg id="afterScene" viewBox="0 0 1000 490" aria-label="当前乐器，可点按演奏" xmlns="http://www.w3.org/2000/svg"></svg><svg id="afterEnvelope" viewBox="0 0 480 175" aria-label="当前相对声幅包络，模型示意"></svg></div><div class="version-stats"><span>接近目标 <strong id="afterCount">0/6</strong></span><span id="afterPitch">此音偏低</span></div></article>
+  </section>
+  <div class="compare-transport"><button id="alternateBtn" class="primary"><svg class="icon"><use href="#i-play"/></svg><span>轮流听</span></button><button id="stopBtn" class="stop-button" hidden><svg class="icon"><use href="#i-stop"/></svg>停止</button><button id="recordRealBtn"><svg class="icon"><use href="#i-mic"/></svg>实物录音</button><p id="fairLabel">同一首曲子 · 同样力度 · 同样速度</p></div>
+  <div class="reflection-row"><button id="noteBtn" class="change-summary" title="记录问题、原因和改法">改动：<span id="changeSummary">还没有改动</span><span class="edit-mark">✎</span></button><div class="judgement"><span>我的判断</span><button data-judgement="有改善">有改善</button><button data-judgement="还不确定">还不确定</button><button data-judgement="需要再改">需要再改</button></div></div>
+  <div class="compare-bottom"><button id="exportRecordBtn" class="text-button"><svg class="icon"><use href="#i-down"/></svg>导出记录</button><span id="iterationInfo">保留证据，再改一次</span><button id="backToLabBtn" class="primary">回去再改<svg class="icon"><use href="#i-next"/></svg></button></div>
+ </main>
+ <footer><button id="modelInfoBtn" class="footer-info">模拟结果 · 用实物再验证</button><span class="technical-level">T1 基础交互 · v1.0</span><span class="watermark">mutiw</span></footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<dialog id="projectDialog"><div class="dialog-heading"><h2>作品与记录</h2><button class="icon-only" data-close aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="project-actions"><button id="continuePreviousBtn"><svg class="icon"><use href="#i-back"/></svg>接着上一课的作品</button><button id="importBtn"><svg class="icon"><use href="#i-folder"/></svg>打开作品 JSON</button><button id="exportProjectBtn"><svg class="icon"><use href="#i-save"/></svg>保存本课作品</button><button id="historyBtn">查看留存版本</button><button id="recordNotesBtn">问题 · 原因 · 改法</button><button id="helpBtn">模型与使用说明</button></div><p class="dialog-note">自动保存在这台设备。接入上一课只读取副本，不改动原作品。</p><label class="volume-control">播放音量<input id="volumeRange" type="range" min="0" max="1" step=".05" value=".6"></label><input type="file" id="importFile" accept="application/json,.json" hidden></dialog>
+
+<dialog id="notesDialog"><div class="dialog-heading"><h2>这一次，为什么改？</h2><button class="icon-only" data-close aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="note-question"><label for="problemSelect">发现的问题</label><select id="problemSelect"><option value="">选择，也可以先留空</option>有的音偏高</option>有的音偏低</option>声音太小或太闷</option>管口被遮挡</option>不方便演奏</option>还不确定</option></select></div><div class="note-question"><label for="causeSelect">我推测的原因</label><select id="causeSelect"><option value="">还需要比较</option>绷紧程度不合适</option>空气柱长短不合适</option>杯中水量不合适</option>振动段被碰到</option>琴码与箱面接触不良</option>固定结构遮住管口</option>元件排列不方便</option></select></div><div class="note-question"><label>我实际改变了</label><p id="automaticChange" class="automatic-change">还没有改动</p></div><label class="note-question">补充想法（可不填）<input id="studentExplanation" maxlength="180" placeholder="例如：听起来更清楚了，但还要用实物再试"></label><div class="dialog-foot"><button id="saveNotesBtn" class="primary">保存我的说明</button></div></dialog>
+
+<dialog id="historyDialog"><div class="dialog-heading"><h2>留存的版本</h2><button class="icon-only" data-close aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button></div><p class="dialog-note">选一版作为“改前”试听，不会让剪短的管子长回来。</p><div id="historyList" class="history-list"></div></dialog>
+
+<dialog id="recordingDialog"><div class="dialog-heading"><h2>听听真实的乐器</h2><button class="icon-only" data-close aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button></div><p class="record-advice">同一段旋律、同样力度，设备位置保持不变。</p><div class="real-recordings"><section><h3>改前</h3><button class="record-btn" id="recordBeforeBtn">● 录改前</button><audio id="realBefore" controls preload="metadata"></audio><button id="downloadBeforeBtn" class="text-button" disabled>保存这段录音</button></section><section><h3>改后</h3><button class="record-btn" id="recordAfterBtn">● 录改后</button><audio id="realAfter" controls preload="metadata"></audio><button id="downloadAfterBtn" class="text-button" disabled>保存这段录音</button></section></div><p id="recordingStatus" role="status">每段最多 12 秒。先录“改前”，改好实物后再录“改后”。</p><div class="dialog-foot"><button id="realCompareBtn" class="primary" disabled>轮流听实物</button></div><p class="dialog-note">录音留在当前页面，不上传；关闭或刷新前请保存。浏览器可能自动处理音量，因此只作听感对照，不作分贝测量。</p></dialog>
+
+<dialog id="infoDialog"><div class="dialog-heading"><h2>模型与真实测试</h2><button class="icon-only" data-close aria-label="关闭"><svg class="icon"><use href="#i-close"/></svg></button></div><div class="info-content"><p>改变结构后，听同一段旋律再比较。可以一次改多处，但要判断某个条件的作用，最好让其他条件保持相同。</p><h3>页面呈现的是什么？</h3><p>音高、音分和曲线是模型计算；音色为合成近似。振动图是慢放示意。它们帮助形成解释，不能代替真实乐器测试，也不是独立证明模型规律的实验数据。</p><ul><li>橡皮筋：理想弦近似，长度与材料不变时，拧紧提高音调；真实橡皮筋拉伸还会改变其他条件。</li><li>排箫：上端开口、下端封闭。剪短使空气柱变短；已经剪下不能接长，只能换新。</li><li>水杯：敲击杯壁，不是吹杯口。示例使用不同尺寸杯子，水量用于微调；音高随加水下降的示意模型不适用于所有杯子。</li><li>琴码和箱面接触有助于传递振动，不是共鸣箱凭空增加能量；触碰振动段会使声音更快衰减。</li></ul><p>“接近目标”的 ±35 音分是本网页的提示范围，不是教材评分标准。基本六音统计 1—6，第 7 音及高音 1 为扩展；真实结构牢固、美观、演奏方便程度由师生观察评价。</p><h3>使用与安全</h3><p>点元件发声；拖动高亮部位或用右侧按钮调整，长按连续变化。键盘 1—8 演奏、左右箭头选元件，Esc 停止播放。导入支持已发布二维《设计我们的乐器》的 JSON（不是旧三维版）；会保持原模型和音高。</p><p>模拟和合成声音可离线使用。实物录音另需安全页面、麦克风与授权。小刀和剪刀由教师指导使用；玻璃杯轻敲，破损不用；吹奏管不要交叉使用。</p><p class="sources">教学依据：本项目教师用书第三单元第6课。声学参考：<a href="https://www.phys.unsw.edu.au/jw/strings.html" target="_blank" rel="noopener">UNSW 弦振动</a> · <a href="https://phys.unsw.edu.au/jw/flutes.v.clarinets.html" target="_blank" rel="noopener">开口与封闭管</a> · <a href="https://newt.phys.unsw.edu.au/music/guitar/guitarintro.html" target="_blank" rel="noopener">琴弦与琴箱</a></p></div></dialog>
+
+<script>/* Instrument improvement model + synthetic audio, v1.0.
+ * These are teaching models, NOT measured physical specimens or dB SPL.
+ * Pipe lengths include an approximate open-end correction in modern mode.
+ * Modern water cups are differently sized example cups; k=1.5 is illustrative.
+ * legacy-v1 keeps the previous lesson's pitch equations and C4 targets intact.
+ */
+(function (root) {
+  'use strict';
+  var FAMILIES = ['string', 'pipe', 'water'];
+  var STEPS = [0, 2, 4, 5, 7, 9, 11, 12];
+  var STRING_BASE = 130.8128;
+  var CLOSE_CENTS = 35;
+  function finite(n) { return typeof n === 'number' && isFinite(n); }
+  function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+  function clone(value) { return JSON.parse(JSON.stringify(value)); }
+  function validFamily(f) { return FAMILIES.indexOf(f) !== -1; }
+  function midiHz(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
+  function centsBetween(actual, target) {
+    return finite(actual) && finite(target) && actual > 0 && target > 0 ? 1200 * Math.log(actual / target) / Math.LN2 : NaN;
+  }
+  function getPart(work, index) { return work && Array.isArray(work.parts) ? work.parts[index == null ? 0 : index] : null; }
+  function noteHz(work, target) {
+    return work && finite(work.baseMidi) && Number.isInteger(target) && target >= 0 && target < STEPS.length ? midiHz(work.baseMidi + STEPS[target]) : NaN;
+  }
+  function targetHz(work, index) { var p = getPart(work, index); return p ? noteHz(work, p.target) : NaN; }
+  function frequency(work, index) {
+    var p = getPart(work, index);
+    if (!p || !validFamily(work.family)) return NaN;
+    if (work.model === 'legacy-v1') {
+      if (work.family === 'water') return finite(p.fill) ? 620 / Math.sqrt(1 + 8 * clamp(p.fill, 0, .85)) : NaN;
+      if (!finite(p.length) || p.length <= 0) return NaN;
+      var legacyL = clamp(p.length, 12, 40) / 100;
+      if (work.family === 'pipe') return 343 / (4 * legacyL);
+      return finite(p.tension) ? Math.sqrt(8 * clamp(p.tension, .5, 2) / .00032) / (2 * legacyL) : NaN;
+    }
+    if (work.family === 'water') return finite(p.emptyHz) && p.emptyHz > 0 && finite(p.fill) && p.fill >= 0 ? p.emptyHz / Math.sqrt(1 + 1.5 * p.fill) : NaN;
+    if (!finite(p.length) || p.length <= 0) return NaN;
+    if (work.family === 'pipe') return finite(p.diameter) && p.diameter > 0 ? 343 / (4 * (p.length / 100 + .6 * p.diameter / 200)) : NaN;
+    return finite(p.tension) && p.tension > 0 ? STRING_BASE * (30 / p.length) * Math.sqrt(p.tension) : NaN;
+  }
+  function cents(work, index) { return centsBetween(frequency(work, index), targetHz(work, index)); }
+  function makeWork(family) {
+    if (!validFamily(family)) throw Error('请选择橡皮筋琴、封底排箫或水杯琴。');
+    var work = { family: family, model: 'modern', baseMidi: family === 'string' ? 48 : 72, parts: [], body: { coupled: true, damped: false, clearance: 1 } };
+    var offsets = [-135, 95, -90, 65, 0, -110, 70];
+    var longer = [.10, .06, .12, .08, .05, .11, .07];
+    var fills = [.64, .18, .55, .27, .40, .68, .20];
+    for (var i = 0; i < 7; i++) {
+      var goal = noteHz(work, i);
+      var p = { id: family + '-' + (i + 1), target: i, length: 30, tension: 1, fill: .4, diameter: .6 };
+      if (family === 'string') p.tension = Math.pow(goal * Math.pow(2, offsets[i] / 1200) / STRING_BASE, 2);
+      if (family === 'pipe') p.length = (343 / (4 * goal) - .6 * p.diameter / 200) * 100 * (1 + longer[i]);
+      if (family === 'water') {
+        p.emptyHz = goal * Math.sqrt(1 + 1.5 * .4);
+        p.fill = fills[i];
+        p.length = 12 - i * .45;
+        p.diameter = 8.4 - i * .37;
+      }
+      work.parts.push(p);
+    }
+    return work;
+  }
+  function paramSpec(work) {
+    if (!work || !validFamily(work.family)) throw Error('乐器材料不正确。');
+    var old = work.model === 'legacy-v1';
+    if (work.family === 'string') return { key: 'tension', min: old ? .5 : .3, max: old ? 2 : 5, step: .01, unit: '倍', label: '绷紧程度', scale: 1 };
+    if (work.family === 'pipe') return { key: 'length', min: old ? 12 : 6, max: old ? 40 : 36, step: .01, unit: 'cm', label: '管长', scale: 1 };
+    return { key: 'fill', min: 0, max: .85, step: .005, unit: '%', label: '水位', scale: 100 };
+  }
+  function body(work) { return work && work.body ? work.body : {}; }
+  function level(work, force) {
+    force = finite(force) ? clamp(force, 0, 1) : .65;
+    var b = body(work), efficiency = work.family === 'string' ? (b.coupled === false ? .42 : .92) : (work.family === 'water' ? .85 : .82);
+    if (b.damped) efficiency *= .27;
+    if (work.family === 'pipe') {
+      var opening = finite(b.clearance) ? clamp(b.clearance, 0, 1) : 1;
+      efficiency *= opening < .25 ? opening * .48 : .12 + .88 * (opening - .25) / .75;
+    }
+    return clamp(force * efficiency, 0, 1);
+  }
+  // Model characteristic decay time (seconds), not an empirical reverberation time.
+  // A continuously blown pipe sustains during the note; decay describes its release.
+  function decay(work) {
+    var b = body(work), value = work.family === 'water' ? .42 : (work.family === 'pipe' ? .12 : (b.coupled === false ? .23 : .17));
+    return value * (b.damped ? .22 : 1);
+  }
+  function envelope(work, index, force, t, duration) {
+    if (!getPart(work, index) || !finite(t) || t < 0) return 0;
+    duration = finite(duration) ? clamp(duration, .08, 5) : .7;
+    if (t >= duration) return 0;
+    var peak = level(work, force), attack = work.family === 'pipe' ? .045 : .005;
+    if (t < attack) return peak * t / attack;
+    var release = Math.min(duration * .25, work.family === 'pipe' ? Math.max(.025, decay(work)) : .06);
+    var shape = work.family === 'pipe' ? 1 : Math.exp(-(t - attack) / decay(work));
+    if (t > duration - release) shape *= (duration - t) / release;
+    return Math.max(0, peak * shape);
+  }
+  function stats(work) {
+    var errors = [], close = 0, available = 0, sum = 0, maximum = 0, missing = [];
+    for (var n = 0; n < 6; n++) {
+      var best = null;
+      ((work && work.parts) || []).forEach(function (p, i) {
+        if (p.target !== n) return;
+        var hz = frequency(work, i), error = cents(work, i);
+        if (!finite(error)) return;
+        if (!best || Math.abs(error) < Math.abs(best.cents)) best = { target: n, index: i, hz: hz, targetHz: targetHz(work, i), cents: error, close: Math.abs(error) <= CLOSE_CENTS + 1e-8 };
+      });
+      if (best) { available++; sum += Math.abs(best.cents); maximum = Math.max(maximum, Math.abs(best.cents)); if (best.close) close++; errors.push(best); }
+      else { missing.push(n); errors.push({ target: n, index: -1, hz: null, targetHz: noteHz(work, n), cents: null, close: false }); }
+    }
+    return { close: close, total: 6, available: available, missing: missing, meanAbsCents: available ? sum / available : null, maxAbsCents: available ? maximum : null, errors: errors, threshold: CLOSE_CENTS };
+  }
+  function record(value) { return value && typeof value === 'object' && !Array.isArray(value); }
+  function validatePreviousDesign(d, family) {
+    if (!record(d) || d.family !== family) throw Error('作品中的材料类型不一致。');
+    if (!Array.isArray(d.parts) || d.parts.length < 5 || d.parts.length > 8) throw Error('上一课作品需要包含 5—8 个发声元件。');
+    return d.parts.map(function (p, i) {
+      if (!record(p)) throw Error('第 ' + (i + 1) + ' 个元件格式不正确。');
+      [['length', 12, 40], ['tension', .5, 2], ['fill', 0, .85]].forEach(function (spec) {
+        if (!finite(p[spec[0]]) || p[spec[0]] < spec[1] || p[spec[0]] > spec[2]) throw Error('第 ' + (i + 1) + ' 个元件的 ' + spec[0] + ' 参数超出上一课范围。');
+      });
+      if (!Number.isInteger(p.target) || p.target < 0 || p.target > 7) throw Error('第 ' + (i + 1) + ' 个元件的目标音必须为 0—7 的整数。');
+      if (p.diameter != null && (!finite(p.diameter) || p.diameter <= 0 || p.diameter > 20)) throw Error('元件直径参数不正确。');
+      return { id: 'legacy-' + family + '-' + (i + 1), target: p.target, length: p.length, tension: p.tension, fill: p.fill, diameter: p.diameter == null ? .65 : p.diameter };
+    });
+  }
+  function importPrevious(data, family) {
+    if (typeof data === 'string') { try { data = JSON.parse(data); } catch (e) { throw Error('作品文件不是有效的 JSON。'); } }
+    if (!record(data) || data.format !== 'mutiw-instrument-2d' || data.version !== 1) throw Error('请选择上一课《设计我们的乐器》导出的作品 JSON。');
+    if (!validFamily(data.family) || (family != null && !validFamily(family))) throw Error('作品材料不正确。');
+    if (!record(data.designs)) throw Error('作品中缺少乐器设计。');
+    // The actual previous exporter always saves all three families. Validate every
+    // design before importing any one; never clamp corrupt values or retune silently.
+    var safe = {};
+    FAMILIES.forEach(function (f) { safe[f] = validatePreviousDesign(data.designs[f], f); });
+    family = family || data.family;
+    return { family: family, model: 'legacy-v1', baseMidi: 60, parts: safe[family], body: { coupled: true, damped: false, clearance: 1 } };
+  }
+
+  function InstrumentAudio() {
+    this.context = null;
+    this.master = null;
+    this.compressor = null;
+    this.sources = [];
+    this.voices = [];
+    this.volume = .72;
+    this.lastError = '';
+    this.supported = !!(root.AudioContext || root.webkitAudioContext);
+    this._epoch = 0;
+    this._noise = null;
+  }
+  InstrumentAudio.prototype.init = function () {
+    var self = this, Context = root.AudioContext || root.webkitAudioContext;
+    if (!Context) { this.lastError = '当前浏览器不支持声音播放，可继续观察和比较图形。'; return Promise.reject(Error(this.lastError)); }
+    try {
+      if (!this.context || this.context.state === 'closed') {
+        this.context = new Context();
+        this.master = this.context.createGain();
+        this.master.gain.value = this.volume;
+        this.compressor = this.context.createDynamicsCompressor();
+        this.compressor.threshold.value = -8;
+        this.compressor.knee.value = 6;
+        this.compressor.ratio.value = 12;
+        this.compressor.attack.value = .003;
+        this.compressor.release.value = .12;
+        this.master.connect(this.compressor);
+        this.compressor.connect(this.context.destination);
+        this._noise = null;
+      }
+      var resume = this.context.state === 'running' ? Promise.resolve() : this.context.resume();
+      return Promise.resolve(resume).then(function () {
+        if (self.context.state !== 'running') throw Error('请再次点按乐器开启声音，并检查设备音量。');
+        self.lastError = '';
+        return self.context;
+      }).catch(function (err) { self.lastError = err.message || '声音未能开启，请再次点按乐器。'; throw Error(self.lastError); });
+    } catch (err) { this.lastError = '声音未能开启，请检查浏览器和设备音量。'; return Promise.reject(Error(this.lastError)); }
+  };
+  InstrumentAudio.prototype.setVolume = function (value) {
+    value = Number(value);
+    if (!finite(value)) return this.volume;
+    this.volume = clamp(value, 0, 1);
+    if (this.master && this.context && this.context.state !== 'closed') this.master.gain.setTargetAtTime(this.volume, this.context.currentTime, .015);
+    return this.volume;
+  };
+  InstrumentAudio.prototype._dispose = function (voice, stop) {
+    if (!voice || voice.disposed) return;
+    voice.disposed = true;
+    var self = this, now = this.context ? this.context.currentTime : 0;
+    if (stop) {
+      try { voice.bus.gain.cancelScheduledValues(now); voice.bus.gain.setTargetAtTime(.00001, now, .004); } catch (ignore) {}
+      voice.sources.forEach(function (src) { try { src.stop(now + .018); } catch (ignore) {} });
+    }
+    this.sources = this.sources.filter(function (src) { return voice.sources.indexOf(src) < 0; });
+    this.voices = this.voices.filter(function (v) { return v !== voice; });
+    function disconnect() { voice.nodes.forEach(function (node) { try { node.disconnect(); } catch (ignore) {} }); }
+    if (stop && typeof root.setTimeout === 'function') root.setTimeout(disconnect, 45); else disconnect();
+  };
+  InstrumentAudio.prototype.stop = function () {
+    this._epoch++;
+    var self = this;
+    this.voices.slice().forEach(function (v) { self._dispose(v, true); });
+    this.sources = [];
+  };
+  InstrumentAudio.prototype._breathBuffer = function () {
+    if (this._noise) return this._noise;
+    var ctx = this.context, b = ctx.createBuffer(1, Math.floor(ctx.sampleRate), ctx.sampleRate), samples = b.getChannelData(0);
+    // Deterministic seed: same airy texture on both sides of a controlled A/B.
+    var seed = 12491;
+    for (var i = 0; i < samples.length; i++) { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; samples[i] = seed / 2147483648 - 1; }
+    this._noise = b;
+    return b;
+  };
+  InstrumentAudio.prototype.note = function (work, index, options) {
+    options = options || {};
+    var self = this, snapshot;
+    try { snapshot = clone(work); } catch (err) { return Promise.reject(Error('乐器数据不能播放。')); }
+    var reference = !!options.reference, hz = reference ? targetHz(snapshot, index) : frequency(snapshot, index);
+    if (!finite(hz) || hz < 20 || hz > 8000) return Promise.reject(Error('这个元件的音高参数无效。'));
+    var force = finite(options.force) ? clamp(options.force, 0, 1) : .65;
+    var duration = finite(options.duration) ? clamp(options.duration, .08, 5) : .7;
+    var requestedWhen = finite(options.when) ? options.when : null;
+    var epoch = this._epoch;
+    return this.init().then(function (ctx) {
+      var when = Math.max(ctx.currentTime + .008, requestedWhen == null ? ctx.currentTime + .008 : requestedWhen);
+      var result = { frequency: hz, targetHz: targetHz(snapshot, index), when: when, duration: duration, force: force, snapshot: clone(snapshot), reference: reference, cancelled: false };
+      if (epoch !== self._epoch) { result.cancelled = true; return result; }
+      if (force === 0 || (!reference && level(snapshot, force) === 0)) { result.silent = true; return result; }
+      if (self.voices.length >= 12) self._dispose(self.voices[0], true);
+      var family = snapshot.family;
+      var partials = reference ? [[1, 1]] : family === 'water' ? [[1, 1], [2.71, .20], [5.26, .07], [8.82, .025]] : family === 'pipe' ? [[1, 1], [2, .025], [3, .12], [5, .035]] : [[1, 1], [2, .28], [3, .12], [4, .055], [5, .025]];
+      var total = partials.reduce(function (sum, item) { return sum + item[1]; }, 0);
+      var voice = { sources: [], nodes: [], bus: ctx.createGain(), disposed: false, ended: 0 };
+      voice.bus.gain.value = 1;
+      voice.bus.connect(self.master);
+      voice.nodes.push(voice.bus);
+      self.voices.push(voice);
+      function register(src, nodes) {
+        voice.sources.push(src); self.sources.push(src);
+        nodes.forEach(function (node) { voice.nodes.push(node); });
+        src.onended = function () { voice.ended++; if (voice.ended >= voice.sources.length) self._dispose(voice, false); };
+        src.start(when); src.stop(when + duration + .01);
+      }
+      function curve(weight, harmonicIndex, noise) {
+        var samples = new Float32Array(160);
+        for (var i = 0; i < samples.length; i++) {
+          var t = duration * i / (samples.length - 1), value;
+          if (reference) {
+            value = force * Math.min(1, t / .018) * Math.min(1, (duration - t) / .055);
+          } else {
+            value = envelope(snapshot, index, force, t, duration);
+            if (family !== 'pipe' && harmonicIndex) value *= Math.exp(-t * harmonicIndex / (family === 'water' ? .22 : .11));
+            if (noise) value *= .3 + .7 * Math.exp(-t / .12);
+          }
+          samples[i] = Math.max(0, value * .22 * weight);
+        }
+        return samples;
+      }
+      try {
+        partials.forEach(function (partial, partialIndex) {
+          if (hz * partial[0] >= ctx.sampleRate * .45) return;
+          var oscillator = ctx.createOscillator(), gain = ctx.createGain();
+          oscillator.type = 'sine';
+          oscillator.frequency.setValueAtTime(hz * partial[0], when);
+          gain.gain.setValueCurveAtTime(curve(partial[1] / total, partialIndex, false), when, duration);
+          oscillator.connect(gain); gain.connect(voice.bus);
+          register(oscillator, [oscillator, gain]);
+        });
+        if (!reference && family === 'pipe') {
+          var breath = ctx.createBufferSource(), filter = ctx.createBiquadFilter(), breathGain = ctx.createGain();
+          breath.buffer = self._breathBuffer(); breath.loop = true;
+          filter.type = 'bandpass'; filter.frequency.setValueAtTime(Math.min(4000, hz * 2.2), when); filter.Q.value = .7;
+          breathGain.gain.setValueCurveAtTime(curve(.085, 0, true), when, duration);
+          breath.connect(filter); filter.connect(breathGain); breathGain.connect(voice.bus);
+          register(breath, [breath, filter, breathGain]);
+        }
+        self.lastError = '';
+        return result;
+      } catch (err) { self._dispose(voice, true); self.lastError = '播放没有完成，请再次点按乐器。'; throw Error(self.lastError); }
+    });
+  };
+  Object.defineProperty(InstrumentAudio.prototype, 'currentTime', { get: function () { return this.context ? this.context.currentTime : 0; } });
+  var model = {
+    makeWork: makeWork, clone: clone, targetHz: targetHz, frequency: frequency, cents: cents, stats: stats,
+    paramSpec: paramSpec, level: level, decay: decay, envelope: envelope, importPrevious: importPrevious,
+    families: FAMILIES.slice(), semitones: STEPS.slice(), midiHz: midiHz, centsBetween: centsBetween,
+    constants: { stringBaseHz: STRING_BASE, soundSpeed: 343, waterCoupling: 1.5, closeCents: CLOSE_CENTS }
+  };
+  root.InstrumentModel = model;
+  root.InstrumentAudio = InstrumentAudio;
+  if (typeof module !== 'undefined' && module.exports) module.exports = { InstrumentModel: model, InstrumentAudio: InstrumentAudio };
+}(typeof window !== 'undefined' ? window : typeof globalThis !== 'undefined' ? globalThis : this));
+</script>
+<script>/* InstrumentScene 1.0 — parameter-driven, code-native SVG for 改进我们的乐器.
+ * No remote assets or DOM access at load time. Artwork is not a cutting template.
+ * draw(): SVG children for viewBox 0 0 1000 490. phase in animate() is radians at
+ * a deliberately slow reference rate; real model frequencies set relative speed.
+ */
+(function (root) {
+  'use strict';
+  var serial = 0;
+  var C = { ink:'#17354e', blue:'#3163dc', teal:'#18877b', amber:'#d59744', muted:'#62768a', line:'#c5cfdb' };
+  function clamp(n,a,b) { n=Number(n); return Math.max(a,Math.min(b,isFinite(n)?n:a)); }
+  function num(n) { return Math.round(Number(n)*100)/100; }
+  function esc(s) { return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function fam(w) { return w && /^(pipe|water)$/.test(w.family)?w.family:'string'; }
+  function body(w) { return w.body || {coupled:true,damped:false,clearance:1}; }
+  function part(w,i) { return w.parts && w.parts[i] || {target:i,length:30,tension:1,fill:.4,emptyHz:700}; }
+  function xAt(w,i) { var n=(w.parts||[]).length; return n<2?500:126+i*748/(n-1); }
+  function targetLabel(p) { var t=Math.round(clamp(p.target,0,7)); return t===7?'1':String(t+1); }
+  function text(x,y,s,opt) {
+    opt=opt||{};
+    return '<text x="'+num(x)+'" y="'+num(y)+'" text-anchor="'+(opt.anchor||'middle')+'" fill="'+(opt.fill||C.ink)+'" font-size="'+(opt.size||24)+'" font-weight="'+(opt.bold?750:500)+'"'+(opt.cls?' class="'+esc(opt.cls)+'"':'')+'>'+esc(s)+'</text>';
+  }
+  function getPipeScale(w,o) {
+    var vals=(w.parts||[]).map(function(p){return clamp(p.length,6,40);});
+    if(o&&o.baseline&&o.baseline.family==='pipe') vals=vals.concat(o.baseline.parts.map(function(p){return clamp(p.length,6,40);}));
+    return 275/Math.max.apply(null,[18].concat(vals));
+  }
+  function geometry(w,i,o) {
+    var p=part(w,i), family=fam(w), x=xAt(w,i), n=(w.parts||[]).length, top,bottom,h,width;
+    if(family==='string') {
+      top=111; bottom=w.model==='legacy-v1'?111+clamp(p.length,12,40)*5.7:330;
+      return {x:num(x),yTop:top,yBottom:num(bottom),paramMinY:350,paramMaxY:402,dragDirection:'horizontal',dragX:num(x),dragY:376,width:Math.min(74,748/Math.max(1,n-1)-22)};
+    }
+    if(family==='pipe') {
+      top=79; h=clamp(p.length,6,40)*getPipeScale(w,o); bottom=top+h;
+      return {x:num(x),yTop:top,yBottom:num(bottom),paramMinY:top+6*getPipeScale(w,o),paramMaxY:top+Math.max(clamp(p.length,6,40),18)*getPipeScale(w,o),dragDirection:'vertical',dragX:num(x),dragY:num(bottom+7),width:Math.min(76,748/Math.max(1,n-1)-30),scale:getPipeScale(w,o)};
+    }
+    var ref=700;
+    if(w.model!=='legacy-v1') ref=Math.min.apply(null,(w.parts||[]).map(function(q){return clamp(q.emptyHz||700,100,4000);}));
+    var size=w.model==='legacy-v1'?1:Math.pow(ref/clamp(p.emptyHz||ref,100,4000),.48);
+    h=clamp(254*size,156,254); bottom=362; top=bottom-h;
+    width=Math.min(108,748/Math.max(1,n-1)-25)*(.88+.12*size);
+    return {x:num(x),yTop:num(top),yBottom:bottom,paramMinY:num(bottom-h*.85),paramMaxY:bottom,dragDirection:'vertical',dragX:num(x),dragY:num(bottom-h*clamp(p.fill,0,.85)),width:num(width),height:num(h)};
+  }
+  function partAttrs(w,i,o,label) {
+    return ' data-part="'+i+'" role="button" tabindex="0" aria-label="'+esc(label||'第'+(i+1)+'个元件，试听音'+targetLabel(part(w,i)))+'"';
+  }
+  function structureAttrs(o,label) {
+    return o.mini?'':' data-structure="true" role="button" tabindex="0" aria-label="'+esc(label)+'"';
+  }
+  function dragAttrs(w,i,o,label) {
+    if(o.mini) return '';
+    return ' data-drag="param" data-index="'+i+'" role="slider" tabindex="0" aria-label="'+esc(label)+'"';
+  }
+  function notePad(w,i,o) {
+    var p=part(w,i),x=xAt(w,i),sel=o.selected===i,active=o.active===i;
+    return '<g class="scene-note"'+partAttrs(w,i,o)+'><circle cx="'+num(x)+'" cy="432" r="'+(sel?28:25)+'" fill="'+(active?C.blue:sel?C.teal:'#fff')+'" stroke="'+(sel?C.teal:C.line)+'" stroke-width="'+(sel?3:2)+'"/>'+text(x,444,targetLabel(p),{size:34,bold:true,fill:sel||active?'#fff':C.ink})+(p.target===7?'<circle cx="'+num(x)+'" cy="410" r="3.5" fill="'+(sel||active?'#fff':C.ink)+'"/>':'')+'</g>';
+  }
+  function defs(uid,w,o) {
+    var s='<defs>'+ 
+      '<linearGradient id="'+uid+'-board" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#f8e5bb"/><stop offset=".58" stop-color="#efd1a1"/><stop offset="1" stop-color="#d9af78"/></linearGradient>'+
+      '<linearGradient id="'+uid+'-front" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ce9d64"/><stop offset="1" stop-color="#b5834f"/></linearGradient>'+
+      '<linearGradient id="'+uid+'-bridge" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#ffe9bc"/><stop offset=".48" stop-color="#dab37b"/><stop offset="1" stop-color="#ad7b44"/></linearGradient>'+
+      '<radialGradient id="'+uid+'-hole"><stop stop-color="#59472f"/><stop offset=".7" stop-color="#51402b"/><stop offset="1" stop-color="#936b3e"/></radialGradient>'+
+      '<linearGradient id="'+uid+'-metal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#8799ab"/><stop offset=".33" stop-color="#f7fcff"/><stop offset=".5" stop-color="#c3d0db"/><stop offset="1" stop-color="#718297"/></linearGradient>'+
+      '<linearGradient id="'+uid+'-glass" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#d3e9ef" stop-opacity=".68"/><stop offset=".18" stop-color="#fff" stop-opacity=".9"/><stop offset=".38" stop-color="#effcff" stop-opacity=".14"/><stop offset=".76" stop-color="#cce6ed" stop-opacity=".24"/><stop offset="1" stop-color="#92baca" stop-opacity=".65"/></linearGradient>'+
+      '<linearGradient id="'+uid+'-water" x1="0" y1="0" x2=".15" y2="1"><stop stop-color="#8ad9ee" stop-opacity=".64"/><stop offset="1" stop-color="#3da9ce" stop-opacity=".8"/></linearGradient>'+
+      '<linearGradient id="'+uid+'-tube" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#c98b2c"/><stop offset=".2" stop-color="#edba58"/><stop offset=".43" stop-color="#ffe6a2"/><stop offset=".66" stop-color="#f2c86c"/><stop offset="1" stop-color="#b97829"/></linearGradient>'+
+      '<linearGradient id="'+uid+'-inside" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#48bfb5" stop-opacity=".26"/><stop offset=".5" stop-color="#e0fcfa" stop-opacity=".85"/><stop offset="1" stop-color="#18877b" stop-opacity=".3"/></linearGradient>'+
+      '<pattern id="'+uid+'-cloth" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#cbd9e9"/><path d="M0 3H12M0 9H12M3 0V12M9 0V12" stroke="#e9f1fa" stroke-width="1.5"/></pattern>';
+    if(fam(w)==='water') w.parts.forEach(function(p,i){
+      var g=geometry(w,i,o),l=g.x-g.width/2,r=g.x+g.width/2;
+      s+='<clipPath id="'+uid+'-cup-'+i+'"><path d="M'+num(l+5)+' '+num(g.yTop+1)+'L'+num(l+12)+' '+num(g.yBottom-8)+'Q'+g.x+' '+num(g.yBottom+9)+' '+num(r-12)+' '+num(g.yBottom-8)+'L'+num(r-5)+' '+num(g.yTop+1)+'Z"/></clipPath>';
+    });
+    return s+'</defs>';
+  }
+  function bridge(x,y,uid,coupled,selected) {
+    var lift=coupled?0:7;
+    return '<g aria-hidden="true"><ellipse cx="'+num(x)+'" cy="'+num(y+11)+'" rx="28" ry="6" fill="#4d3c24" opacity=".16"/>'+
+      (!coupled?'<path d="M'+num(x-23)+' '+num(y+7)+'h46" stroke="#556574" stroke-width="3" stroke-dasharray="4 4"/>':'')+
+      '<path d="M'+num(x-27)+' '+num(y+7-lift)+'L'+num(x-21)+' '+num(y-9-lift)+'H'+num(x+21)+'L'+num(x+27)+' '+num(y+7-lift)+'Z" fill="url(#'+uid+'-bridge)" stroke="#b38751" stroke-width="1.5"/>'+
+      '<path d="M'+num(x-19)+' '+num(y-7-lift)+'h38" stroke="#fff2cf" stroke-width="3"/>'+
+      (selected?'<path d="M'+num(x-24)+' '+num(y+10-lift)+'h48" stroke="'+C.teal+'" stroke-width="2" stroke-opacity=".6"/>':'')+'</g>';
+  }
+  function stringScene(w,o,uid) {
+    var b=body(w),sel=geometry(w,o.selected,o), s='';
+    s+='<ellipse cx="500" cy="398" rx="433" ry="22" fill="#17354e" opacity=".1"/>';
+    s+='<g class="resonator"'+structureAttrs(o,'琴箱结构，查看振动传递与接触情况')+'>'+
+      '<path d="M83 94L892 94L933 353L933 394Q933 403 923 403H77Q66 403 66 392V353Z" fill="url(#'+uid+'-front)" stroke="#ae8453" stroke-width="2"/>'+
+      '<path d="M83 94H892L933 353H66Z" fill="url(#'+uid+'-board)" stroke="#c8a675" stroke-width="2"/>'+
+      '<path d="M89 101H885L925 347H74Z" fill="none" stroke="#fff4dc" stroke-width="3" opacity=".75"/>'+
+      '<path d="M89 107H886M78 337H921M70 361H929" stroke="#b88c55" stroke-width="1.4" opacity=".4"/>'+
+      '<ellipse cx="500" cy="222" rx="106" ry="77" fill="#c39a61"/>'+
+      '<ellipse cx="500" cy="219" rx="94" ry="65" fill="url(#'+uid+'-hole)"/>'+
+      '<path d="M414 218Q500 127 586 218" fill="none" stroke="#3b3227" stroke-width="5" opacity=".45"/>';
+    for(var q=0;q<54;q++) { var cx=80+q*15.7; s+='<path d="M'+num(cx)+' 389q4-10 8 0q4 10 8 0" fill="none" stroke="#7c582e" stroke-width="1.4" opacity=".6"/>'; }
+    s+='<path d="M77 379H924M78 398H923" stroke="#ead0a2" stroke-width="3"/>';
+    if(o.mode==='structure'&&!o.mini) s+='<path d="M88 97H887L929 351H70Z" fill="#3163dc" fill-opacity=".035" stroke="'+C.blue+'" stroke-width="3" stroke-dasharray="10 7"/>';
+    if(o.inside) s+='<g opacity=".55" pointer-events="none"><path d="M85 352L119 138H861L904 352" fill="#18877b" fill-opacity=".05" stroke="#18877b" stroke-width="2.5" stroke-dasharray="7 8"/><path data-anim-body="true" d="M119 349Q500 337 904 349" fill="none" stroke="#18877b" stroke-width="3"/></g>';
+    s+='</g>';
+    w.parts.forEach(function(p,i){
+      var g=geometry(w,i,o),x=g.x,y1=g.yTop,y2=g.yBottom,isSel=i===o.selected,stroke=isSel?C.teal:'#bb7c2d',thick=isSel?5.8:4.4;
+      s+='<g class="scene-part"'+partAttrs(w,i,o,'第'+(i+1)+'根橡皮筋，试听音'+targetLabel(p))+'>';
+      if(isSel&&!o.mini) s+='<path d="M'+x+' 110V'+num(y2)+'" stroke="#18877b" stroke-opacity=".1" stroke-width="36" stroke-linecap="round"/>';
+      s+=bridge(x,y1,uid,b.coupled!==false,isSel)+bridge(x,y2,uid,b.coupled!==false,isSel);
+      if(w.model==='legacy-v1'&&y2<332) s+='<path d="M'+x+' '+num(y2)+'V350" stroke="#afb7b3" stroke-width="4.5"/>';
+      s+='<path d="M'+num(x+2)+' '+num(y1-4)+'V'+num(y2+6)+'" fill="none" stroke="#6e542e" stroke-opacity=".16" stroke-width="6"/>'+
+        '<path data-anim-string="'+i+'" data-x="'+x+'" data-y1="'+num(y1-5)+'" data-y2="'+num(y2-5)+'" d="M'+x+' '+num(y1-5)+'L'+x+' '+num(y2-5)+'" stroke="'+stroke+'" stroke-width="'+thick+'" fill="none" stroke-linecap="round"/>'+
+        '<circle cx="'+x+'" cy="'+num(y1-9)+'" r="7" fill="#667380" stroke="#f9ead1" stroke-width="2"/>'+
+        '<path d="M'+x+' '+num(y2)+'V372" stroke="#b5834b" stroke-width="3.8"/>'+
+        '<path d="M'+x+' '+num(y1-8)+'V'+num(y2+4)+'" fill="none" stroke="transparent" stroke-width="58"/>';
+      s+='</g>';
+      var deg=-55+clamp(p.tension,.2,5)/5*210;
+      if(isSel&&!o.mini) {
+        s+='<g'+dragAttrs(w,i,o,'拖动旋钮改变第'+(i+1)+'根橡皮筋的绷紧程度')+'>'+
+          '<circle cx="'+x+'" cy="376" r="26" fill="#f5fbff" stroke="'+C.blue+'" stroke-width="2.5"/>'+
+          '<circle cx="'+x+'" cy="376" r="19" fill="url(#'+uid+'-metal)" stroke="#7f91a6" stroke-width="1.8"/>'+
+          '<g transform="rotate('+num(deg)+' '+x+' 376)"><path d="M'+x+' 363V376" stroke="'+C.blue+'" stroke-width="4" stroke-linecap="round"/></g>'+
+          '<path d="M'+num(x-34)+' 367a38 38 0 0 1 27-23m-8-3 9 3-4 9" fill="none" stroke="'+C.blue+'" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+        if(o.baseline&&o.baseline.parts[i]&&Math.abs(p.tension-o.baseline.parts[i].tension)>.03) {
+          var ga=-55+clamp(o.baseline.parts[i].tension,.2,5)/5*210;
+          s+='<g transform="rotate('+num(ga)+' '+x+' 376)" pointer-events="none"><path d="M'+x+' 353V360" stroke="'+C.amber+'" stroke-width="3" stroke-dasharray="3 2"/></g>';
+        }
+        s+='</g>';
+      } else s+='<circle cx="'+x+'" cy="381" r="9" fill="url(#'+uid+'-metal)" stroke="#7d8d9c" stroke-width="1.5"/>';
+    });
+    if(b.damped) w.parts.forEach(function(p,i){
+      var cg=geometry(w,i,o),cy=cg.yTop+(cg.yBottom-cg.yTop)*.54-16;
+      s+='<g data-damped-part="'+i+'"'+(o.mini?partAttrs(w,i,o):structureAttrs(o,'软布触碰各根橡皮筋的振动部分，查看结构'))+'><path d="M'+num(cg.x-30)+' '+num(cy)+'q17-5 30 0t30 0v32q-15-4-30 1t-30-2Z" fill="url(#'+uid+'-cloth)" stroke="#9aadc1" stroke-width="2"/><path d="M'+num(cg.x-24)+' '+num(cy+27)+'q23 6 48-1" fill="none" stroke="#8fa8bd" stroke-width="2"/></g>';
+    });
+    if(o.inside&&!o.mini) {
+      s+='<g pointer-events="none"><path d="M'+num(sel.x-40)+' 112h-10v'+num(sel.yBottom-112)+'h10" fill="none" stroke="'+C.teal+'" stroke-width="2.6" stroke-dasharray="5 4"/>';
+      s+=text(500,48,b.coupled===false?'琴码与箱面接触不良':'振动经琴码传给琴箱',{size:26,bold:true,fill:C.teal})+'</g>';
+    }
+    return s;
+  }
+  function scissors(x,y,uid) {
+    return '<g transform="translate('+num(x)+' '+num(y)+')" aria-hidden="true"><path d="M-2-1 32-19M-2 1 32 19" stroke="#71889d" stroke-width="6" stroke-linecap="round"/><path d="M1-1 29-18M1 1 29 18" stroke="#e5edf6" stroke-width="2"/><circle cx="-13" cy="-10" r="10" fill="#f7fbff" stroke="#3163dc" stroke-width="5"/><circle cx="-13" cy="10" r="10" fill="#f7fbff" stroke="#3163dc" stroke-width="5"/><circle r="4" fill="#344e67"/></g>';
+  }
+  function pipeScene(w,o,uid) {
+    var b=body(w),s='<ellipse cx="500" cy="387" rx="423" ry="18" fill="#17354e" opacity=".075"/>';
+    s+='<path d="M71 118H929v24H71Z" fill="#ad895b" opacity=".7"/>';
+    w.parts.forEach(function(p,i){
+      var g=geometry(w,i,o),x=g.x,top=g.yTop,bot=g.yBottom,width=g.width,l=x-width/2,r=x+width/2,isSel=i===o.selected;
+      s+='<g class="scene-part"'+partAttrs(w,i,o,'第'+(i+1)+'根封底管，'+num(p.length)+'厘米，试听音'+targetLabel(p))+'>';
+      if(isSel&&!o.mini) s+='<rect x="'+num(l-9)+'" y="'+num(top-14)+'" width="'+num(width+18)+'" height="'+num(bot-top+40)+'" rx="19" fill="#e1f2f3" stroke="'+C.teal+'" stroke-width="2.3"/>';
+      s+='<path d="M'+num(l)+' '+top+'V'+num(bot)+'Q'+x+' '+num(bot+16)+' '+num(r)+' '+num(bot)+'V'+top+'Z" fill="url(#'+uid+'-tube)" stroke="#b5894b" stroke-width="1.8"/>';
+      if(o.inside&&isSel) {
+        s+='<path d="M'+num(l+9)+' '+num(top+9)+'V'+num(bot-6)+'Q'+x+' '+num(bot+2)+' '+num(r-9)+' '+num(bot-6)+'V'+num(top+9)+'Z" fill="url(#'+uid+'-inside)" stroke="#319a91" stroke-width="1.5"/>';
+        for(var k=0;k<8;k++) {
+          var frac=(k+.4)/8.5,yy=top+14+frac*(bot-top-27),a=Math.cos(frac*Math.PI/2);
+          s+='<g data-anim-air="'+i+'" data-air-a="'+num(a)+'" fill="'+C.teal+'" opacity=".85">';
+          for(var j=-1;j<=1;j++)s+='<circle cx="'+num(x+j*11)+'" cy="'+num(yy)+'" r="3.8"/>';
+          s+='</g>';
+        }
+      } else s+='<path d="M'+num(l+12)+' '+num(top+16)+'V'+num(bot-8)+'" stroke="#fff1ca" stroke-width="4" stroke-linecap="round" opacity=".72"/><path d="M'+num(r-9)+' '+num(top+14)+'V'+num(bot-9)+'" stroke="#a6742b" stroke-width="1.5" opacity=".36"/>';
+      s+='<ellipse cx="'+x+'" cy="'+top+'" rx="'+num(width/2)+'" ry="10" fill="#bd8d46" stroke="#a57637" stroke-width="1.4"/>'+
+        '<ellipse cx="'+x+'" cy="'+num(top-1)+'" rx="'+num(width/2-7)+'" ry="6.8" fill="#29464f"/>'+
+        '<path d="M'+num(l+5)+' '+num(top+2)+'Q'+x+' '+num(top+13)+' '+num(r-5)+' '+num(top+2)+'" fill="none" stroke="#fff0bb" stroke-width="3"/>'+
+        '<path d="M'+num(l-1)+' '+num(bot-2)+'V'+num(bot+9)+'Q'+x+' '+num(bot+24)+' '+num(r+1)+' '+num(bot+9)+'V'+num(bot-2)+'Q'+x+' '+num(bot+12)+' '+num(l-1)+' '+num(bot-2)+'Z" fill="'+(isSel?C.teal:'#7caa9f')+'" stroke="#337e73" stroke-width="1.7"/>'+
+        '<rect x="'+num(l-7)+'" y="'+num(top-12)+'" width="'+num(width+14)+'" height="'+num(bot-top+41)+'" fill="transparent"/>';
+      if(o.baseline&&o.baseline.parts[i]) {
+        var ghostBot=top+clamp(o.baseline.parts[i].length,6,40)*g.scale;
+        if(Math.abs(ghostBot-bot)>2) s+='<path d="M'+num(l-6)+' '+num(ghostBot)+'H'+num(r+6)+'" fill="none" stroke="'+C.amber+'" stroke-width="2.5" stroke-dasharray="6 4" pointer-events="none"/>';
+      }
+      if(isSel&&!o.mini) {
+        var pending=typeof o.pendingCut==='number'?clamp(o.pendingCut,6,p.length):p.length;
+        var cutY=top+pending*g.scale;
+        if(pending<p.length-.015) s+='<path d="M'+num(l+1)+' '+num(cutY)+'H'+num(r-1)+'V'+num(bot)+'Q'+x+' '+num(bot+13)+' '+num(l+1)+' '+num(bot)+'Z" fill="#fff" opacity=".68" pointer-events="none"/>';
+        s+='<g'+dragAttrs(w,i,o,'向上拖动选择裁剪位置，确认裁剪后不能接长')+'><rect x="'+num(l-15)+'" y="'+num(cutY-22)+'" width="'+num(width+30)+'" height="48" rx="10" fill="transparent"/><path d="M'+num(l-12)+' '+num(cutY)+'H'+num(r+12)+'" stroke="'+C.blue+'" stroke-width="3" stroke-dasharray="5 4"/>'+scissors(i===w.parts.length-1?l-27:r+27,cutY,uid)+'</g>';
+      }
+      s+='</g>';
+    });
+    var clear=clamp(b.clearance==null?1:b.clearance,0,1),bindY=clear<.25?69:151;
+    s+='<g'+structureAttrs(o,'固定纸带与管口，查看结构')+'><path d="M77 '+bindY+'H923l8 24H69Z" fill="#e9d5ab" fill-opacity=".95" stroke="'+(o.mode==='structure'?C.blue:'#ad9167')+'" stroke-width="'+(o.mode==='structure'?3:1.8)+'"/><path d="M80 '+num(bindY+5)+'H921M78 '+num(bindY+19)+'H925" stroke="#fff4d8" stroke-width="2"/>';
+    if(clear<.25) s+='<path d="M84 '+num(bindY+12)+'H919" stroke="#bd7849" stroke-width="2" stroke-dasharray="6 5"/>';
+    s+='</g>';
+    if(b.damped) w.parts.forEach(function(p,i){
+      var sg=geometry(w,i,o);
+      s+='<g data-damped-part="'+i+'"'+(o.mini?partAttrs(w,i,o):structureAttrs(o,'软材料接触各管的发声开口，查看结构'))+'><path d="M'+num(sg.x-sg.width/2-4)+' 61h'+num(sg.width+8)+'v32q-'+num(sg.width/2)+' 10-'+num(sg.width+8)+' 0Z" fill="url(#'+uid+'-cloth)" stroke="#9aadc1" stroke-width="2"/></g>';
+    });
+    if(o.inside&&!o.mini) s+=text(500,35,clear<.25?'开口被挡住，难以吹奏':'空气沿管长方向往复振动',{size:25,bold:true,fill:C.teal});
+    return s;
+  }
+  function cupPath(g,dx) {
+    var half=g.width/2,l=g.x-half-dx,r=g.x+half+dx;
+    return 'M'+num(l)+' '+g.yTop+'L'+num(g.x-half+8-dx*.15)+' '+num(g.yBottom-9)+'Q'+g.x+' '+num(g.yBottom+9)+' '+num(g.x+half-8+dx*.15)+' '+num(g.yBottom-9)+'L'+num(r)+' '+g.yTop;
+  }
+  function waterScene(w,o,uid) {
+    var b=body(w),s='<ellipse cx="500" cy="390" rx="438" ry="19" fill="#17354e" opacity=".075"/>';
+    s+='<g'+structureAttrs(o,'水杯支架与杯壁接触，查看结构')+'><path d="M65 373H935l-10 21H76Z" fill="url(#'+uid+'-front)" stroke="'+(o.mode==='structure'?C.blue:'#ac8355')+'" stroke-width="'+(o.mode==='structure'?3:1.6)+'"/><path d="M65 373l12-10h847l11 10Z" fill="#efd3ab"/><path d="M77 382H925" stroke="#fff0d5" stroke-width="2" opacity=".7"/></g>';
+    w.parts.forEach(function(p,i){
+      var g=geometry(w,i,o),x=g.x,top=g.yTop,bot=g.yBottom,half=g.width/2,l=x-half,r=x+half,wy=g.dragY,isSel=i===o.selected;
+      s+='<g class="scene-part"'+partAttrs(w,i,o,'第'+(i+1)+'只水杯，水量'+Math.round(p.fill*100)+'%，敲击杯壁')+'>';
+      s+='<ellipse cx="'+x+'" cy="369" rx="'+num(half+3)+'" ry="10" fill="#a9bebd" opacity=".62"/>';
+      if(isSel&&!o.mini) s+='<path d="'+cupPath({x:g.x,yTop:top-12,yBottom:bot+6,width:g.width+19},0)+'" fill="#e4f4f6" fill-opacity=".55" stroke="'+C.teal+'" stroke-width="2" stroke-dasharray="7 5"/>';
+      s+='<path d="'+cupPath(g,0)+'Z" fill="url(#'+uid+'-glass)" stroke="#7eabbc" stroke-width="2.5"/>'+
+        '<g clip-path="url(#'+uid+'-cup-'+i+')">';
+      if(p.fill>.001) s+='<path d="M'+num(l-2)+' '+wy+'H'+num(r+2)+'V'+num(bot+8)+'H'+num(l-2)+'Z" fill="url(#'+uid+'-water)"/><ellipse cx="'+x+'" cy="'+wy+'" rx="'+num(half-4)+'" ry="8" fill="#a5e9f3" fill-opacity=".85" stroke="#5fbcd4" stroke-width="1.5"/>';
+      s+='<path d="M'+num(l+13)+' '+num(top+22)+'L'+num(l+19)+' '+num(bot-24)+'" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".86"/><path d="M'+num(r-11)+' '+num(top+19)+'L'+num(r-17)+' '+num(bot-21)+'" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>';
+      if(o.baseline&&o.baseline.parts[i]&&Math.abs(p.fill-o.baseline.parts[i].fill)>.005) {
+        var oldY=bot-g.height*clamp(o.baseline.parts[i].fill,0,.85);
+        s+='<path d="M'+num(l+5)+' '+num(oldY)+'H'+num(r-5)+'" fill="none" stroke="'+C.amber+'" stroke-width="2.6" stroke-dasharray="6 4"/>';
+      }
+      s+='</g><ellipse cx="'+x+'" cy="'+top+'" rx="'+num(half)+'" ry="11" fill="#effaff" fill-opacity=".45" stroke="#78a5b8" stroke-width="2.7"/><ellipse cx="'+x+'" cy="'+num(top+1)+'" rx="'+num(half-5)+'" ry="6.5" fill="#fff" fill-opacity=".35" stroke="#e7faff" stroke-width="2.2"/>'+
+        '<path d="M'+num(l+13)+' '+num(bot-7)+'Q'+x+' '+num(bot+4)+' '+num(r-13)+' '+num(bot-7)+'" fill="none" stroke="#f6fdff" stroke-width="4.5" opacity=".9"/>';
+      if(o.inside&&isSel) s+='<path data-anim-wall="'+i+'" d="'+cupPath(g,0)+'" fill="none" stroke="'+C.teal+'" stroke-width="4" stroke-opacity=".76"/><ellipse data-anim-rim="'+i+'" data-rx="'+num(half)+'" data-ry="11" cx="'+x+'" cy="'+top+'" rx="'+num(half)+'" ry="11" fill="none" stroke="'+C.teal+'" stroke-width="3"/>';
+      s+='<path d="'+cupPath(g,0)+'Z" fill="transparent" stroke="transparent" stroke-width="14"/>';
+      if(isSel&&!o.mini) s+='<g'+dragAttrs(w,i,o,'上下拖动水面，连续改变第'+(i+1)+'只杯的水量')+'><rect x="'+num(x-38)+'" y="'+num(wy-22)+'" width="76" height="46" rx="13" fill="transparent"/><rect x="'+num(x-25)+'" y="'+num(wy-14)+'" width="50" height="28" rx="13" fill="'+C.teal+'" stroke="#fff" stroke-width="2"/><path d="M'+num(x-9)+' '+num(wy-4)+'h18m-18 8h18" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></g>';
+      s+='</g>';
+    });
+    var sg=geometry(w,o.selected,o);
+    if(b.damped) w.parts.forEach(function(p,i){
+      var cg=geometry(w,i,o);
+      s+='<g data-damped-part="'+i+'"'+(o.mini?partAttrs(w,i,o):structureAttrs(o,'软布分别碰到各只杯壁，查看结构'))+'><path d="M'+num(cg.x-cg.width/2-8)+' '+num(cg.yTop+cg.height*.52)+'h'+num(cg.width+16)+'v43q-'+num(cg.width/2)+' 10-'+num(cg.width+16)+' 0Z" fill="url(#'+uid+'-cloth)" stroke="#9aadc1" stroke-width="2"/></g>';
+    });
+    if(!o.mini) {
+      var side=o.selected>=w.parts.length-2?-1:1, headX=sg.x+side*(sg.width/2+8),headY=sg.yTop+sg.height*.34;
+      s+='<g data-anim-mallet="true" data-mallet-side="'+side+'" pointer-events="none" aria-hidden="true"><path d="M'+num(headX)+' '+num(headY)+'h'+num(side*75)+'" stroke="#9d7648" stroke-width="8" stroke-linecap="round"/><path d="M'+num(headX+side*5)+' '+num(headY-2)+'h'+num(side*66)+'" stroke="#e2bf83" stroke-width="2.5" stroke-linecap="round"/><rect x="'+num(headX-11)+'" y="'+num(headY-21)+'" width="22" height="42" rx="9" fill="url(#'+uid+'-bridge)" stroke="#b58c55" stroke-width="1.5"/><path d="M'+num(headX-5)+' '+num(headY-13)+'v24" stroke="#f9dfac" stroke-width="3" stroke-linecap="round"/></g>';
+    }
+    if(o.inside&&!o.mini) s+=text(500,38,'敲击杯壁 · 杯壁微振已放大',{size:25,bold:true,fill:C.teal});
+    return s;
+  }
+  function draw(w,options) {
+    options=options||{};
+    if(!w||!Array.isArray(w.parts)||!w.parts.length) return text(500,245,'选择一个乐器开始改进',{size:32,bold:true});
+    var o={ selected:options.selected===-1?-1:Math.round(clamp(options.selected==null?0:options.selected,0,w.parts.length-1)),active:typeof options.active==='number'?options.active:-1,inside:!!options.inside,baseline:options.baseline&&options.baseline.family===w.family?options.baseline:null,pendingCut:typeof options.pendingCut==='number'?options.pendingCut:null,mode:options.mode||'pitch',mini:!!options.mini };
+    var uid=(options.idPrefix?String(options.idPrefix).replace(/[^a-zA-Z0-9_-]/g,''):'is')+'-'+(++serial);
+    var s=defs(uid,w,o)+'<g class="instrument-scene" font-family="system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Microsoft YaHei,sans-serif" style="user-select:none;-webkit-user-select:none" fill="none">';
+    s+=fam(w)==='pipe'?pipeScene(w,o,uid):fam(w)==='water'?waterScene(w,o,uid):stringScene(w,o,uid);
+    if(!o.mini) for(var i=0;i<w.parts.length;i++)s+=notePad(w,i,o);
+    if(!o.mini&&options.showHint!==false) s+=text(500,483,o.inside?'振动慢放示意 · 音频保持原音高':fam(w)==='string'?'点旋钮调音，点琴箱看结构':fam(w)==='pipe'?'选好裁剪位置再剪；剪短不能接长':'拖动水面调音；木槌横向轻敲杯壁',{size:22,fill:C.muted});
+    return s+'</g>';
+  }
+  function rawFrequency(w,i) {
+    var p=part(w,i),type=fam(w);
+    if(root.InstrumentModel&&root.InstrumentModel.frequency) return root.InstrumentModel.frequency(w,i);
+    if(w.model==='legacy-v1') return type==='string'?Math.sqrt(8*p.tension/.00032)/(2*p.length/100):type==='pipe'?343/(4*p.length/100):620/Math.sqrt(1+8*p.fill);
+    return type==='string'?130.8128*(30/p.length)*Math.sqrt(p.tension):type==='pipe'?343/(4*(p.length/100+.6*p.diameter/200)):(p.emptyHz||700)/Math.sqrt(1+1.5*p.fill);
+  }
+  function referenceFrequency(w,i) {
+    if(root.InstrumentModel&&root.InstrumentModel.targetHz) return root.InstrumentModel.targetHz(w,i);
+    var intervals=[0,2,4,5,7,9,11,12],target=Math.round(clamp(part(w,i).target,0,7));
+    return 440*Math.pow(2,((w.baseMidi||60)+intervals[target]-69)/12);
+  }
+  function animate(svg,w,options,state) {
+    if(!svg||!svg.querySelectorAll||!w||!w.parts||!w.parts.length) return;
+    options=options||{};state=state||{};
+    if(state.paused) return;
+    var index=typeof options.active==='number'&&options.active>=0?options.active:Math.round(clamp(options.selected||0,0,w.parts.length-1));
+    var ratio=clamp(rawFrequency(w,index)/referenceFrequency(w,index),.35,3),phase=(Number(state.phase)||0)*ratio;
+    var amount=state.playing?clamp(state.amp==null?1:state.amp,0,1):0,swing=Math.sin(phase)*amount;
+    Array.prototype.forEach.call(svg.querySelectorAll('[data-anim-string]'),function(el){
+      var i=Number(el.getAttribute('data-anim-string')),x=Number(el.getAttribute('data-x')),y1=Number(el.getAttribute('data-y1')),y2=Number(el.getAttribute('data-y2'));
+      var a=i===index?swing*(options.inside?14:5):0,delta=(y2-y1)/3;
+      el.setAttribute('d','M'+x+' '+y1+'C'+num(x+a)+' '+num(y1+delta)+' '+num(x+a)+' '+num(y2-delta)+' '+x+' '+y2);
+    });
+    Array.prototype.forEach.call(svg.querySelectorAll('[data-anim-air]'),function(el){
+      var i=Number(el.getAttribute('data-anim-air')),a=Number(el.getAttribute('data-air-a'))||0;
+      el.setAttribute('transform','translate(0 '+num(i===index?swing*a*8:0)+')');
+    });
+    Array.prototype.forEach.call(svg.querySelectorAll('[data-anim-rim]'),function(el){
+      var i=Number(el.getAttribute('data-anim-rim')),rx=Number(el.getAttribute('data-rx')),ry=Number(el.getAttribute('data-ry')),a=i===index?swing*4:0;
+      el.setAttribute('rx',num(rx+a));el.setAttribute('ry',num(ry-a*.4));
+    });
+    Array.prototype.forEach.call(svg.querySelectorAll('[data-anim-wall]'),function(el){var i=Number(el.getAttribute('data-anim-wall'));el.setAttribute('d',cupPath(geometry(w,i,options),i===index?swing*4:0));});
+    Array.prototype.forEach.call(svg.querySelectorAll('[data-anim-body]'),function(el){el.setAttribute('d','M119 349Q500 '+num(349+(body(w).coupled===false?1:4)*swing)+' 904 349');});
+    Array.prototype.forEach.call(svg.querySelectorAll('[data-anim-mallet]'),function(el){var side=Number(el.getAttribute('data-mallet-side'))||1;el.setAttribute('transform','translate('+num(-side*Math.max(0,Math.cos(phase))*amount*3)+' 0)');});
+  }
+  var api={version:'1.0',viewBox:'0 0 1000 490',draw:draw,geometry:geometry,animate:animate};
+  root.InstrumentScene=api;
+  if(typeof module!=='undefined'&&module.exports) module.exports=api;
+}(typeof window!=='undefined'?window:typeof globalThis!=='undefined'?globalThis:this));
+</script>
+<script>(function () {
+'use strict';
+var M=window.InstrumentModel, Art=window.InstrumentScene, sound=new window.InstrumentAudio();
+var $=function(id){return document.getElementById(id);}, clone=M.clone, families=['string','pipe','water'];
+var names={string:'橡皮筋琴',pipe:'吸管排箫',water:'水杯琴'}, syllables=['do','re','mi','fa','sol','la','si','do'];
+var SAVE_KEY='mutiw-instrument-improve-v1', PREVIOUS_KEY='mutiw-instrument-design-2d-v1';
+var state={family:'string',view:'lab',selected:2,mode:'pitch',force:.64,volume:.6,inside:false,paused:false,song:'star',packs:{}};
+var active=-1, activeSide='now', activeUntil=0, activeStarted=0, activeDuration=1.6, activeWork=null, activeForce=.64, pendingCut=null;
+var playback={token:0,timers:[],playing:false,side:null,note:-1}, practice=null, hold=null, drag=null;
+var toastTimer=null, saveTimer=null, storageWarned=false, shift=false, replayVisual=0;
+var recordings={string:{},pipe:{},water:{}}, recording=null, recorderStartToken=0, realPlaybackToken=0;
+var songs={
+ star:{name:'小星星',notes:[1,1,5,5,6,6,5,0,4,4,3,3,2,2,1,0]},
+ joy:{name:'欢乐颂',notes:[3,3,4,5,5,4,3,2,1,1,2,3,3,2,2,0]},
+ scale:{name:'六音测试',notes:[1,2,3,4,5,6,0,0]}
+};
+function esc(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function clamp(n,a,b){return Math.max(a,Math.min(b,n));}
+function finite(n){return typeof n==='number'&&isFinite(n);}
+function labelNote(n){return n===7?'1̇':String(n+1);}
+function info(text){$('toast').textContent=text;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').classList.remove('show');},3800);}
+function showDialog(id){endHold();stopPlayback();var d=$(id);if(d.showModal){if(!d.open)d.showModal();}else{d.setAttribute('open','');d.classList.add('dialog-fallback');}var focus=d.querySelector('button,input,select');if(focus)focus.focus();}
+function closeDialog(d){if(d.id==='recordingDialog'){recorderStartToken++;stopRecording();stopRealPlayback();}if(d.close)d.close();else d.removeAttribute('open');}
+function pack(){return state.packs[state.family];}
+function work(){return pack().current;}
+function baseline(){return pack().baseline;}
+function freshPack(family){var w=M.makeWork(family);if(family==='string')w.body.coupled=false;return {current:clone(w),baseline:clone(w),baselineId:'initial',versions:[{id:'initial',name:'初始版',work:clone(w),time:new Date().toISOString(),note:{}}],actions:[],note:{problem:'',cause:'',explanation:'',judgement:''}};}
+function saveSoon(){clearTimeout(saveTimer);saveTimer=setTimeout(saveState,300);}
+function payload(){return {format:'mutiw-instrument-improve',version:1,family:state.family,force:state.force,volume:state.volume,packs:state.packs};}
+function saveState(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(payload()));}catch(e){if(!storageWarned){storageWarned=true;info('浏览器不能自动保存，请从“作品”保存 JSON。');}}}
+function cleanNote(v){v=v&&typeof v==='object'?v:{};var o={};['problem','cause','explanation','judgement'].forEach(function(k){o[k]=typeof v[k]==='string'?v[k].slice(0,180):'';});return o;}
+function validateWork(w,expected){
+ if(!w||w.family!==expected||families.indexOf(w.family)<0||['modern','legacy-v1'].indexOf(w.model)<0)throw Error('作品的材料或模型不正确。');
+ if(!Number.isInteger(w.baseMidi)||w.baseMidi<36||w.baseMidi>84)throw Error('作品的目标音区不正确。');
+ if(!Array.isArray(w.parts)||w.parts.length<5||w.parts.length>8)throw Error('作品需要 5—8 个元件。');
+ var safe={family:w.family,model:w.model,baseMidi:w.baseMidi,parts:[],body:{}};
+ w.parts.forEach(function(p,i){
+  if(!p||!Number.isInteger(p.target)||p.target<0||p.target>7)throw Error('第 '+(i+1)+' 个目标音不正确。');
+  var out={id:typeof p.id==='string'?p.id.slice(0,80):expected+'-'+i,target:p.target};
+  [['length',.5,100],['tension',.1,10],['fill',0,.85],['diameter',.1,20]].forEach(function(r){if(!finite(p[r[0]])||p[r[0]]<r[1]||p[r[0]]>r[2])throw Error('第 '+(i+1)+' 个元件参数不正确。');out[r[0]]=p[r[0]];});
+  if(expected==='water'&&w.model==='modern'){if(!finite(p.emptyHz)||p.emptyHz<50||p.emptyHz>8000)throw Error('杯子基频参数不正确。');out.emptyHz=p.emptyHz;}
+  var spec=M.paramSpec(w);if(out[spec.key]<spec.min-1e-7||out[spec.key]>spec.max+1e-7)throw Error('元件参数超出本模型范围。');
+  if(w.model==='legacy-v1'&&(out.length<12||out.length>40||out.tension<.5||out.tension>2))throw Error('上一课参数范围不正确。');
+  safe.parts.push(out);
+ });
+ var b=w.body;if(!b||typeof b.coupled!=='boolean'||typeof b.damped!=='boolean'||!finite(b.clearance)||b.clearance<0||b.clearance>1)throw Error('结构参数不正确。');
+ safe.body={coupled:b.coupled,damped:b.damped,clearance:b.clearance};
+ safe.parts.forEach(function(p,i){var f=M.frequency(safe,i);if(!finite(f)||f<20||f>8000)throw Error('作品音高超出支持范围。');});return safe;
+}
+function validatePayload(data){
+ if(!data||data.format!=='mutiw-instrument-improve'||data.version!==1||families.indexOf(data.family)<0||!data.packs)throw Error('不是本课的作品文件。');
+ var out={family:data.family,packs:{},force:finite(data.force)?clamp(data.force,0,1):.64,volume:finite(data.volume)?clamp(data.volume,0,1):.6};
+ families.forEach(function(f){var p=data.packs[f];if(!p||!Array.isArray(p.versions)||p.versions.length>25)throw Error('留存版本格式不正确。');var c=validateWork(p.current,f),b=validateWork(p.baseline,f);
+  var versions=p.versions.map(function(v,i){if(!v)throw Error('版本内容不正确。');return {id:String(v.id||i).slice(0,60),name:String(v.name||'留存版').slice(0,30),work:validateWork(v.work,f),time:String(v.time||'').slice(0,40),note:cleanNote(v.note)};});
+  if(!versions.length)versions=[{id:'initial',name:'初始版',work:clone(b),time:'',note:{}}];
+  var actions=Array.isArray(p.actions)?p.actions.slice(-300).filter(function(a){return a&&typeof a.description==='string';}).map(function(a){return {time:String(a.time||'').slice(0,40),description:a.description.slice(0,180)};}):[];
+  out.packs[f]={current:c,baseline:b,baselineId:String(p.baselineId||'initial').slice(0,60),versions:versions,actions:actions,note:cleanNote(p.note)};
+ });return out;
+}
+function restore(){families.forEach(function(f){state.packs[f]=freshPack(f);});try{var raw=localStorage.getItem(SAVE_KEY);if(raw){var safe=validatePayload(JSON.parse(raw));state.family=safe.family;state.packs=safe.packs;state.force=safe.force;state.volume=safe.volume;}}catch(e){setTimeout(function(){info('未载入旧缓存，已打开完整示例。原文件可从“作品”重新导入。');},700);}}
+function describeValue(w,p,key){if(key==='tension')return w.model==='legacy-v1'?p.tension.toFixed(2)+' 倍':Math.round(p.tension/5*100)+'%';if(key==='fill')return Math.round(p.fill*100)+'%';return p.length.toFixed(2)+' cm';}
+function noteStatus(w,i){var c=M.cents(w,i);return Math.abs(c)<=35?'接近':c<0?'偏低':'偏高';}
+function modifications(old,now){
+ var list=[],fields={tension:'绷紧程度',length:'长度',fill:'水量'};
+ now.parts.forEach(function(p,i){var q=old.parts[i];if(!q){list.push('补入第 '+(i+1)+' 个音');return;}
+ ['tension','length','fill'].forEach(function(k){if((now.family==='string'&&k!=='tension'&&k!=='length')||(now.family==='pipe'&&k!=='length')||(now.family==='water'&&k!=='fill'))return;if(Math.abs(p[k]-q[k])>1e-5)list.push('第 '+(i+1)+' 个音，'+fields[k]+' '+describeValue(old,q,k)+' → '+describeValue(now,p,k));});
+ if(p.target!==q.target)list.push('第 '+(i+1)+' 个元件的目标音改变');
+ });
+ if(old.body.coupled!==now.body.coupled&&now.family==='string')list.push(now.body.coupled?'琴码接触箱面':'琴码与箱面接触不良');
+ if(old.body.damped!==now.body.damped)list.push(now.body.damped?'软布触碰振动段':'移开软布，保留振动空间');
+ if(old.body.clearance!==now.body.clearance&&now.family==='pipe')list.push(now.body.clearance>.8?'移开纸条，管口通畅':'纸条遮住管口');
+ return list;
+}
+function recordAction(before,description){var after=work();if(JSON.stringify(before)===JSON.stringify(after))return;pack().actions.push({time:new Date().toISOString(),description:description,before:before,after:clone(after)});if(pack().actions.length>70)pack().actions.shift();pack().note.judgement='';saveSoon();}
+function changed(){var v=pack().versions[pack().versions.length-1];return JSON.stringify(v.work)!==JSON.stringify(work());}
+function renderAll(){renderHeader();renderLab();renderCompare();saveSoon();}
+function renderHeader(){
+ $('labView').hidden=state.view!=='lab';$('compareView').hidden=state.view!=='compare';
+ document.querySelectorAll('[data-view]').forEach(function(b){var sel=b.dataset.view===state.view;b.classList.toggle('active',sel);if(sel)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+ document.querySelectorAll('[data-family]').forEach(function(b){var sel=b.dataset.family===state.family;b.classList.toggle('active',sel);b.setAttribute('aria-pressed',String(sel));});
+ $('volumeRange').value=state.volume;document.querySelectorAll('[data-force]').forEach(function(b){var sel=Math.abs(Number(b.dataset.force)-state.force)<.05;b.classList.toggle('selected',sel);b.setAttribute('aria-pressed',String(sel));});
+}
+function renderLab(){
+ var w=work(),p=w.parts[state.selected],spec=M.paramSpec(w),c=M.cents(w,state.selected),t=M.targetHz(w,state.selected),f=M.frequency(w,state.selected);
+ $('targetNumber').innerHTML=labelNote(p.target)+'<span>'+syllables[p.target]+'</span>';
+ $('referenceBtn').setAttribute('aria-label','听目标音 '+labelNote(p.target)+' '+syllables[p.target]);
+ $('pitchDot').style.left=clamp(50+c/5,4,96)+'%';$('pitchDot').style.background=Math.abs(c)<=35?'var(--now)':c<0?'#4884b1':'#b9843d';
+ $('pitchStatus').textContent=noteStatus(w,state.selected);$('pitchStatus').style.color=Math.abs(c)<=35?'var(--now)':c<0?'#366c94':'#9d6a2a';
+ $('pitchCents').textContent=(c>0?'+':'')+Math.round(c)+' 音分';$('pitchDetail').textContent='目标 '+t.toFixed(1)+' · 当前 '+f.toFixed(1)+' Hz';
+ $('pitchEditor').hidden=state.mode!=='pitch';$('structureEditor').hidden=state.mode!=='structure';
+ $('editorHeading').textContent=state.mode==='pitch'?'调整第 '+(state.selected+1)+' 个音':'看看发声结构';
+ $('paramLabel').textContent=state.family==='pipe'?'准备剪到':spec.label;
+ var v=state.family==='pipe'?(pendingCut==null?p.length:pendingCut):p[spec.key];
+ $('paramValue').textContent=state.family==='pipe'?v.toFixed(2)+' cm':describeValue(w,p,spec.key);
+ $('paramRange').min=spec.min;$('paramRange').max=state.family==='pipe'?p.length:spec.max;$('paramRange').step=spec.step;$('paramRange').value=v;
+ $('paramRange').setAttribute('aria-label',state.family==='pipe'?'选择剪短后的长度，不会立即裁剪':spec.label);
+ $('lessBtn').textContent=state.family==='string'?'− 拧松':state.family==='water'?'− 倒出':'− 多剪';
+ $('moreBtn').textContent=state.family==='string'?'＋ 拧紧':state.family==='water'?'＋ 加水':'＋ 少剪';
+ $('lessBtn').disabled=v<=spec.min+1e-7;$('moreBtn').disabled=v>=(state.family==='pipe'?p.length:spec.max)-1e-7;
+ $('adjustHint').textContent=state.family==='pipe'?'现长 '+p.length.toFixed(2)+' cm · 不能接长':'长按可连续调整';
+ $('cutTools').hidden=state.family!=='pipe';$('cutBtn').disabled=state.family==='pipe'&&!(v<p.length-.005);
+ $('tryBtn').querySelector('span').textContent=state.family==='string'?'弹一下':state.family==='pipe'?'吹一下':'敲一下';
+ $('materialSummary').textContent=w.model==='legacy-v1'?'上一课作品 · 原音区':state.family==='string'?'橡皮筋 · C3 音区':state.family==='pipe'?'封底管 · C5 音区':'敲杯壁 · C5 音区';
+ $('sceneHint').textContent=state.mode==='structure'?'改变一处，再用同样的力度试听':state.family==='string'?'点弦试音，拖旋钮调整；点琴箱看结构':state.family==='pipe'?'拖动剪刀选位置，再剪下；点纸条看管口':'点杯壁试音，拖水面调整；点杯垫看结构';
+ $('insideBtn').setAttribute('aria-pressed',String(state.inside));$('pauseVisualBtn').hidden=!state.inside;$('slowLabel').hidden=!state.inside;
+ $('pauseVisualBtn').setAttribute('aria-label',state.paused?'继续慢放':'暂停慢放');$('pauseVisualBtn').innerHTML='<svg class="icon"><use href="#i-'+(state.paused?'play':'pause')+'"/></svg>';
+ $('couplingBtn').hidden=state.family!=='string';$('couplingBtn').classList.toggle('is-good',w.body.coupled);$('couplingBtn').textContent=w.body.coupled?'✓ 琴码接触箱面':'○ 琴码接触不良';$('couplingBtn').setAttribute('aria-pressed',String(w.body.coupled));
+ $('dampingBtn').hidden=state.family==='pipe';$('dampingBtn').classList.toggle('is-good',!w.body.damped);$('dampingBtn').textContent=w.body.damped?'○ 软布碰到振动段':'✓ 振动段留空';$('dampingBtn').setAttribute('aria-pressed',String(!w.body.damped));
+ $('clearanceBtn').hidden=state.family!=='pipe';$('clearanceBtn').classList.toggle('is-good',w.body.clearance>.8);$('clearanceBtn').textContent=w.body.clearance>.8?'✓ 管口通畅':'○ 管口被纸条遮挡';$('clearanceBtn').setAttribute('aria-pressed',String(w.body.clearance>.8));
+ $('structureHint').textContent=state.family==='string'?'琴码把振动传到箱面。试试接触与留空有什么影响。':state.family==='pipe'?'吹奏口要留出空间。管的另一端仍然封闭。':'轻敲杯壁，观察触碰杯壁后声音有什么变化。';
+ $('addPartBtn').hidden=w.parts.length>=8;
+ $('beforeNoteBtn').disabled=findPart(baseline(),p.target+1)<0;
+ $('beforeNoteBtn').title=$('beforeNoteBtn').disabled?'改前版没有这个目标音':'试听改前相同的目标音';
+ renderScene();
+ $('mobileKeys').innerHTML=w.parts.map(function(p,i){return '<button data-key="'+i+'" class="'+(i===state.selected?'selected':'')+'" aria-label="演奏 '+labelNote(p.target)+'">'+labelNote(p.target)+'</button>';}).join('');
+}
+function renderScene(){
+ if(!Art){return;}
+ $('mainScene').innerHTML=Art.draw(work(),{selected:state.selected,active:activeSide==='now'?active:-1,inside:state.inside,baseline:baseline(),pendingCut:pendingCut,mode:state.mode,mini:false,showHint:false,idPrefix:'main'});
+}
+function curveSVG(w,color,index){
+ if(index<0)return '<text x="240" y="95" text-anchor="middle" fill="#728392" font-size="30" font-family="sans-serif">改前无此音</text>';
+ var points=[],duration=1.6;
+ for(var i=0;i<=180;i++){var t=2*i/180,y=128-M.envelope(w,index,state.force,t,duration)*103;points.push((42+t*204).toFixed(2)+','+y.toFixed(2));}
+ return '<path d="M42 18V128H450" fill="none" stroke="#b5c4d3" stroke-width="2"/><path d="M42 25H450M42 76H450" stroke="#dce4ed" stroke-dasharray="4 5"/><path d="M42 128L'+points.join('L')+'L450 128Z" fill="'+color+'" opacity=".12"/><path d="M'+points.join('L')+'" stroke="'+color+'" stroke-width="3.5" fill="none"/><g fill="#566c80" font-family="sans-serif" font-size="21"><text x="42" y="155">0</text><text x="241" y="155">1</text><text x="409" y="155">2秒</text><text x="20" y="133">0</text><text x="20" y="31">1</text><text x="48" y="15" font-size="19">同力度 · 相对声幅包络</text></g>';
+}
+function renderCompare(){
+ var b=baseline(),w=work(),bs=M.stats(b),ws=M.stats(w),idx=findPart(b,w.parts[state.selected].target+1);
+ $('songSelect').value=state.song;
+ renderScore();
+ $('beforeScene').innerHTML=Art.draw(b,{selected:idx,active:activeSide==='before'?active:-1,inside:false,mini:true,idPrefix:'before'});
+ $('afterScene').innerHTML=Art.draw(w,{selected:state.selected,active:activeSide==='now'?active:-1,inside:false,mini:true,idPrefix:'after'});
+ $('beforeEnvelope').innerHTML=curveSVG(b,'#c59145',idx);$('afterEnvelope').innerHTML=curveSVG(w,'#18877b',state.selected);
+ $('beforeCount').textContent=bs.close+'/6';$('afterCount').textContent=ws.close+'/6';
+ $('beforePitch').textContent=idx<0?'原版无此音':'此音'+noteStatus(b,idx);$('afterPitch').textContent='此音'+noteStatus(w,state.selected);
+ var v=pack().versions.filter(function(x){return x.id===pack().baselineId;})[0];$('baselineName').textContent=v?v.name:'对照版';
+ $('currentVersionName').textContent=changed()?'正在改进':pack().versions[pack().versions.length-1].name;
+ var changes=modifications(b,w);$('changeSummary').textContent=changes.length?changes[0]+(changes.length>1?'，另 '+(changes.length-1)+' 处':''):'还没有改动';
+ $('iterationInfo').textContent='已留存 '+Math.max(0,pack().versions.length-1)+' 次改进';
+ document.querySelectorAll('[data-judgement]').forEach(function(button){var sel=button.dataset.judgement===pack().note.judgement;button.classList.toggle('selected',sel);button.setAttribute('aria-pressed',String(sel));});
+ $('stopBtn').hidden=!playback.playing;$('alternateBtn').disabled=playback.playing;
+ var needed=uniqueNotes();var absent=needed.filter(function(n){return findPart(w,n)<0||findPart(b,n)<0;});
+ $('fairLabel').textContent=absent.length?(needed.some(function(n){return findPart(b,n)<0;})?'改前版缺少旋律所需的音：可比较已有音，或选择完整版本作对照':'当前还缺 '+absent.join('、')+'，可以回实验台补音'):'同一首曲子 · 同样力度 · 同样速度';
+}
+function renderScore(){var out='';songs[state.song].notes.forEach(function(n,i){if(i&&i%4===0)out+='<i class="bar"></i>';var cls='note';if(playback.note===i||(practice&&practice.position===i))cls+=' current';if(practice&&i<practice.position)cls+=' correct';out+='<span class="'+cls+'" data-score-index="'+i+'">'+(n||'—')+'</span>';});$('score').innerHTML=out;$('practiceRow').hidden=!practice&&$('practiceFeedback').hidden;if(practice)$('practiceKeys').innerHTML=work().parts.map(function(p,i){return '<button data-key="'+i+'" aria-label="演奏当前乐器音 '+labelNote(p.target)+'">'+labelNote(p.target)+'</button>';}).join('');}
+function switchView(view){if(view===state.view)return;stopPlayback();endHold();practice=null;$('practiceFeedback').hidden=true;$('practiceBtn').textContent='自己演奏';state.view=view;renderAll();}
+function selectPart(i,play,side){
+ if(!Number.isInteger(i)||i<0||i>=work().parts.length)return;
+ if(i!==state.selected){endHold();pendingCut=null;}
+ state.selected=i;state.mode='pitch';renderLab();renderCompare();if(play){playOne(side||'now',i,false,true);}
+}
+function playOne(side,index,reference,manual,baselineDirect){
+ if(playback.playing||reference)stopPlayback();
+ var w=clone(side==='before'?baseline():work()),force=state.force,token=playback.token;
+ if(side==='before'&&!baselineDirect)index=findPart(w,work().parts[index].target+1);
+ if(index<0||index>=w.parts.length){info('改前版没有这个目标音，可以比较已有音，或选择完整版本作为对照。');return;}
+ sound.note(w,index,{force:force,duration:1.6,reference:!!reference}).then(function(result){if(result.cancelled||token!==playback.token||reference)return;active=index;activeSide=side;activeWork=w;activeForce=force;activeDuration=1.6;activeStarted=performance.now();activeUntil=activeStarted+1600;renderScene();if(state.view==='compare')renderCompare();if(manual&&side==='now')judgePractice(w.parts[index].target+1);}).catch(function(e){info(e.message);});
+}
+function setParam(value,finalize){
+ var w=work(),p=w.parts[state.selected],s=M.paramSpec(w),v=clamp(Number(value),s.min,state.family==='pipe'?p.length:s.max);
+ if(!finite(v))return;
+ if(state.family==='pipe'){pendingCut=v;}else{p[s.key]=Number(v.toFixed(4));}
+ renderLab();if(finalize)renderCompare();saveSoon();
+}
+var rangeBefore=null;
+$('paramRange').addEventListener('pointerdown',function(){stopPlayback();rangeBefore=clone(work());});
+$('paramRange').addEventListener('input',function(){if(!rangeBefore){stopPlayback();rangeBefore=clone(work());}setParam(Number(this.value));});
+$('paramRange').addEventListener('change',function(){if(rangeBefore){recordAction(rangeBefore,'调整第 '+(state.selected+1)+' 个音');rangeBefore=null;}renderCompare();});
+function stepParam(direction,dt){var w=work(),p=w.parts[state.selected],s=M.paramSpec(w),v=state.family==='pipe'?(pendingCut==null?p.length:pendingCut):p[s.key];var rate=state.family==='string'?(w.model==='legacy-v1'?.008:.025):state.family==='water'?.008:.08;setParam(v+direction*rate*(dt||1));}
+function beginHold(direction,e){if(e&&e.button!=null&&e.button!==0)return;if(e)e.preventDefault();endHold();stopPlayback();hold={before:clone(work()),direction:direction,start:performance.now(),last:performance.now(),repeat:false};stepParam(direction,1);hold.delay=setTimeout(function(){if(!hold)return;hold.repeat=true;hold.last=performance.now();},270);}
+function endHold(){if(!hold)return;clearTimeout(hold.delay);recordAction(hold.before,'连续调整第 '+(state.selected+1)+' 个音');hold=null;renderCompare();}
+['lessBtn','moreBtn'].forEach(function(id,i){var b=$(id),dir=i?1:-1;b.addEventListener('pointerdown',function(e){if(!b.disabled){beginHold(dir,e);b.setPointerCapture&&b.setPointerCapture(e.pointerId);}});b.addEventListener('pointerup',endHold);b.addEventListener('pointercancel',endHold);b.addEventListener('lostpointercapture',endHold);b.addEventListener('click',function(e){if(e.detail===0&&!b.disabled){var before=clone(work());stepParam(dir,1);recordAction(before,'调整第 '+(state.selected+1)+' 个音');renderCompare();}});});
+$('cutBtn').onclick=function(){var p=work().parts[state.selected];if(pendingCut==null||pendingCut>=p.length-.005)return;stopPlayback();var before=clone(work()),old=p.length;p.length=Number(pendingCut.toFixed(3));pendingCut=null;recordAction(before,'第 '+(state.selected+1)+' 根管剪短 '+(old-p.length).toFixed(2)+' cm');renderAll();info('剪下 '+(old-p.length).toFixed(2)+' cm，试着吹一吹。');};
+$('replaceBtn').onclick=function(){stopPlayback();var before=clone(work()),spec=M.paramSpec(work());work().parts[state.selected].length=spec.max;pendingCut=null;recordAction(before,'第 '+(state.selected+1)+' 根换新管 '+spec.max+' cm');renderAll();info('换了一根新管，原来的短管不会变长。');};
+function alterBody(key,value,description){stopPlayback();var before=clone(work());work().body[key]=value;recordAction(before,description);renderAll();}
+$('couplingBtn').onclick=function(){alterBody('coupled',!work().body.coupled,'改变琴码与箱面的接触');};
+$('dampingBtn').onclick=function(){alterBody('damped',!work().body.damped,'改变振动段是否被触碰');};
+$('clearanceBtn').onclick=function(){alterBody('clearance',work().body.clearance>.8?.13:1,'改变管口是否被遮挡');};
+$('returnPitchBtn').onclick=function(){state.mode='pitch';renderLab();};
+$('insideBtn').onclick=function(){state.inside=!state.inside;state.mode=state.inside?'structure':'pitch';state.paused=false;renderLab();};
+$('pauseVisualBtn').onclick=function(){state.paused=!state.paused;this.setAttribute('aria-label',state.paused?'继续慢放':'暂停慢放');this.innerHTML='<svg class="icon"><use href="#i-'+(state.paused?'play':'pause')+'"/></svg>';};
+function localPoint(svg,event){var pt=svg.createSVGPoint();pt.x=event.clientX;pt.y=event.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse());}
+$('mainScene').addEventListener('pointerdown',function(e){
+ if(e.button!==0)return;var handle=e.target.closest('[data-drag]');if(!handle)return;
+ e.preventDefault();stopPlayback();endHold();var pi=e.target.closest('[data-part]');if(pi)state.selected=Number(pi.dataset.part);state.mode='pitch';
+ var start=localPoint($('mainScene'),e),p=work().parts[state.selected],spec=M.paramSpec(work());drag={pointer:e.pointerId,start:start,before:clone(work()),startValue:state.family==='pipe'?(pendingCut==null?p.length:pendingCut):p[spec.key],moved:false};$('mainScene').setPointerCapture(e.pointerId);renderLab();
+});
+$('mainScene').addEventListener('pointermove',function(e){if(!drag||e.pointerId!==drag.pointer)return;e.preventDefault();var point=localPoint($('mainScene'),e),dx=point.x-drag.start.x,dy=point.y-drag.start.y;drag.moved=drag.moved||Math.abs(dx)+Math.abs(dy)>3;var spec=M.paramSpec(work()),change=state.family==='string'?dx*(spec.max-spec.min)/350:state.family==='water'?-dy*.85/240:dy*(spec.max-spec.min)/300;setParam(drag.startValue+change);});
+var suppressClickUntil=0;
+function endDrag(e){if(!drag)return;if(drag.moved)suppressClickUntil=performance.now()+250;recordAction(drag.before,'拖动调整第 '+(state.selected+1)+' 个音');drag=null;renderCompare();}
+$('mainScene').addEventListener('pointerup',endDrag);$('mainScene').addEventListener('pointercancel',endDrag);$('mainScene').addEventListener('lostpointercapture',endDrag);
+$('mainScene').addEventListener('click',function(e){if(performance.now()<suppressClickUntil)return;if(e.target.closest('[data-drag]'))return;if(e.target.closest('[data-structure]')){state.mode='structure';state.inside=true;renderLab();return;}var p=e.target.closest('[data-part]');if(p)selectPart(Number(p.dataset.part),true);});
+$('mainScene').addEventListener('keydown',function(e){var handle=e.target.closest('[data-drag]'),p=e.target.closest('[data-part]'),structure=e.target.closest('[data-structure]');if(handle&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].indexOf(e.key)>=0){e.preventDefault();e.stopPropagation();endHold();stopPlayback();var selected=Number(handle.dataset.index!=null?handle.dataset.index:p?p.dataset.part:state.selected);if(selected!==state.selected){state.selected=selected;pendingCut=null;}var before=clone(work());stepParam(e.key==='ArrowRight'||e.key==='ArrowUp'?1:-1,1);recordAction(before,'键盘调整第 '+(state.selected+1)+' 个音');var refreshed=$('mainScene').querySelector('[data-drag][data-index="'+state.selected+'"]');if(refreshed)refreshed.focus();return;}if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();if(structure){state.mode='structure';state.inside=true;renderLab();}else if(p)selectPart(Number(p.dataset.part),true);}});
+function playFromPanel(id,index){var isBefore=id==='beforeScene',source=isBefore?baseline():work();if(index<0||index>=source.parts.length)return;var current=findPart(work(),source.parts[index].target+1);if(current>=0)state.selected=current;renderCompare();playOne(isBefore?'before':'now',index,false,true,isBefore);}
+['beforeScene','afterScene'].forEach(function(id){$(id).addEventListener('click',function(e){var p=e.target.closest('[data-part]');if(p)playFromPanel(id,Number(p.dataset.part));});$(id).addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){var p=e.target.closest('[data-part]');if(p){e.preventDefault();e.stopPropagation();playFromPanel(id,Number(p.dataset.part));}}});});
+$('mobileKeys').onclick=function(e){var b=e.target.closest('[data-key]');if(b)selectPart(Number(b.dataset.key),true);};
+$('practiceKeys').onclick=function(e){var b=e.target.closest('[data-key]');if(b)selectPart(Number(b.dataset.key),true);};
+document.querySelectorAll('[data-force]').forEach(function(b){b.onclick=function(){stopPlayback();state.force=Number(b.dataset.force);renderHeader();renderCompare();saveSoon();};});
+$('referenceBtn').onclick=function(){playOne('now',state.selected,true,false);};$('beforeNoteBtn').onclick=function(){playOne('before',state.selected,false,false);};$('nowNoteBtn').onclick=function(){playOne('now',state.selected,false,false);};$('tryBtn').onclick=function(){playOne('now',state.selected,false,true);};
+document.querySelectorAll('[data-view]').forEach(function(b){b.onclick=function(){switchView(b.dataset.view);};});$('toCompareBtn').onclick=function(){switchView('compare');};$('backToLabBtn').onclick=function(){switchView('lab');};
+document.querySelectorAll('[data-family]').forEach(function(b){b.onclick=function(){endHold();stopPlayback();state.family=b.dataset.family;state.selected=Math.min(2,work().parts.length-1);state.mode='pitch';state.paused=false;pendingCut=null;practice=null;renderAll();};});
+$('addPartBtn').onclick=function(){stopPlayback();var w=work();if(w.parts.length>=8){info('这一份作品最多 8 个元件。');return;}var before=clone(w),target=-1;for(var i=0;i<8;i++)if(!w.parts.some(function(p){return p.target===i;})){target=i;break;}if(target<0)target=w.parts.length;
+ var p=clone(w.parts[Math.min(target,w.parts.length-1)]);p.id=w.family+'-'+Date.now();p.target=target;
+ if(w.model==='modern'){var sample=M.makeWork(w.family);if(target<7)p=clone(sample.parts[target]);else if(w.family==='water')p.emptyHz=440*Math.pow(2,(w.baseMidi+12-69)/12)*Math.sqrt(1.6);}
+ p.target=target;p.id=w.family+'-'+Date.now();w.parts.push(p);state.selected=w.parts.length-1;state.mode='pitch';pendingCut=null;recordAction(before,'补入目标 '+labelNote(target));renderAll();info('补入目标 '+labelNote(target)+'，还需要自己调音。');};
+function findPart(w,n){var best=-1;w.parts.forEach(function(p,i){if(p.target===n-1&&(best<0||Math.abs(M.cents(w,i))<Math.abs(M.cents(w,best))))best=i;});return best;}
+function uniqueNotes(){return songs[state.song].notes.filter(function(n,i,arr){return n>0&&arr.indexOf(n)===i;});}
+function stopPlayback(){playback.token++;playback.timers.forEach(clearTimeout);playback.timers=[];playback.playing=false;playback.side=null;playback.note=-1;sound.stop();active=-1;activeUntil=0;activeWork=null;$('stopBtn').hidden=true;$('alternateBtn').disabled=false;renderScore();}
+function later(fn,delay){var id=setTimeout(fn,delay);playback.timers.push(id);return id;}
+async function playAlternating(){
+ stopPlayback();practice=null;$('practiceFeedback').hidden=true;$('practiceBtn').textContent='自己演奏';
+ var b=clone(baseline()),w=clone(work()),notes=songs[state.song].notes,needed=uniqueNotes(),missing=needed.filter(function(n){return findPart(b,n)<0||findPart(w,n)<0;});
+ if(missing.length){info(needed.some(function(n){return findPart(b,n)<0;})?'改前版缺少 '+missing.join('、')+'。可点已有音比较，或把完整留存版设为“改前”。':'当前缺少 '+missing.join('、')+'，先回实验台补音，或点已有元件自由演奏。');return;}
+ var token=playback.token;try{await sound.init();}catch(e){info(e.message);return;}if(token!==playback.token)return;
+ playback.playing=true;renderCompare();var beat=.42,gap=.7,oneLength=notes.length*beat,start=sound.context.currentTime+.08;
+ [b,w].forEach(function(snapshot,version){var side=version===0?'before':'now',offset=version*(oneLength+gap);
+  later(function(){if(playback.token!==token)return;playback.side=side;$('fairLabel').textContent='正在听'+(side==='before'?'改前':'现在')+' · 力度和速度保持相同';},offset*1000);
+  notes.forEach(function(n,j){if(!n)return;var idx=findPart(snapshot,n),holdBeats=1;while(j+holdBeats<notes.length&&notes[j+holdBeats]===0)holdBeats++;var duration=beat*holdBeats*.93;
+   sound.note(snapshot,idx,{force:state.force,duration:duration,when:start+offset+j*beat}).catch(function(e){if(token===playback.token){stopPlayback();info(e.message);}});
+   later(function(){if(token!==playback.token)return;playback.note=j;active=idx;activeSide=side;activeWork=snapshot;activeForce=state.force;activeDuration=duration;activeStarted=performance.now();activeUntil=activeStarted+duration*1000;renderScore();renderCompareScenes();},(offset+j*beat+.08)*1000);
+  });
+ });
+ later(function(){if(token!==playback.token)return;stopPlayback();renderCompare();info('听完前后两版，再做出你的判断。');},(2*oneLength+gap+.2)*1000);
+}
+function renderCompareScenes(){var b=baseline(),w=work();$('beforeScene').innerHTML=Art.draw(b,{selected:findPart(b,w.parts[state.selected].target+1),active:activeSide==='before'?active:-1,mini:true,idPrefix:'before'});$('afterScene').innerHTML=Art.draw(w,{selected:state.selected,active:activeSide==='now'?active:-1,mini:true,idPrefix:'after'});}
+$('alternateBtn').onclick=playAlternating;$('stopBtn').onclick=function(){stopPlayback();renderCompare();};
+$('songSelect').onchange=function(){stopPlayback();practice=null;$('practiceFeedback').hidden=true;$('practiceBtn').textContent='自己演奏';state.song=this.value;renderCompare();};
+$('practiceBtn').onclick=function(){stopPlayback();practice={position:0,correct:0,attempts:0};$('practiceBtn').textContent='重新练习';$('practiceFeedback').textContent='请弹 '+songs[state.song].notes[0]+'，可以点乐器或用数字键';$('practiceFeedback').classList.remove('correct');$('practiceFeedback').hidden=false;renderScore();};
+function judgePractice(n){if(!practice||state.view!=='compare')return;var notes=songs[state.song].notes,wanted=notes[practice.position];practice.attempts++;
+ if(n!==wanted){$('practiceFeedback').textContent='目标是 '+wanted+'，你弹了 '+n+' · 再试一次';$('practiceFeedback').classList.remove('correct');$('practiceFeedback').hidden=false;return;}
+ practice.correct++;practice.position++;while(practice.position<notes.length&&notes[practice.position]===0)practice.position++;
+ $('practiceFeedback').classList.add('correct');
+ if(practice.position>=notes.length){$('practiceFeedback').textContent='✓ 旋律顺序完成！再听一听音准和强弱。';practice=null;$('practiceBtn').textContent='再练一次';}
+ else $('practiceFeedback').textContent='✓ 弹对了！下一个 '+notes[practice.position];renderScore();
+}
+function saveVersion(){
+ endHold();if(!changed()){info('这份版本已留存。先调整，再留存新版本。');return;}
+ var p=pack(),number=p.versions.length;p.versions.push({id:'v-'+Date.now(),name:'第 '+number+' 版',work:clone(work()),time:new Date().toISOString(),note:clone(p.note)});if(p.versions.length>25)p.versions.splice(1,1);
+ saveState();switchView('compare');renderCompare();info('这一版已留存，可以轮流试听，再记录你的判断。');
+}
+$('saveVersionBtn').onclick=saveVersion;
+function openNotes(){var n=pack().note;$('problemSelect').value=n.problem||'';$('causeSelect').value=n.cause||'';$('studentExplanation').value=n.explanation||'';var list=modifications(baseline(),work());$('automaticChange').textContent=list.length?list.join('；'):'还没有改变参数或结构。';showDialog('notesDialog');}
+$('noteBtn').onclick=openNotes;$('recordNotesBtn').onclick=function(){closeDialog($('projectDialog'));openNotes();};
+$('saveNotesBtn').onclick=function(){var n=pack().note;n.problem=$('problemSelect').value;n.cause=$('causeSelect').value;n.explanation=$('studentExplanation').value.trim().slice(0,180);var latest=pack().versions[pack().versions.length-1];if(JSON.stringify(latest.work)===JSON.stringify(work()))latest.note=clone(n);saveState();closeDialog($('notesDialog'));info('已记录你的问题、推测和改法。');};
+document.querySelectorAll('[data-judgement]').forEach(function(b){b.onclick=function(){pack().note.judgement=b.dataset.judgement;var latest=pack().versions[pack().versions.length-1];if(JSON.stringify(latest.work)===JSON.stringify(work()))latest.note=clone(pack().note);renderCompare();saveSoon();};});
+function openHistory(){var p=pack();$('historyList').innerHTML=p.versions.map(function(v,i){var stats=M.stats(v.work);return '<div class="history-row"><div><strong>'+esc(v.name)+'</strong><small>接近基本音 '+stats.close+'/6'+(v.note.judgement?' · '+esc(v.note.judgement):'')+'</small></div><button data-base="'+i+'"'+(v.id===p.baselineId?' disabled':'')+'>'+(v.id===p.baselineId?'当前对照':'设为改前')+'</button></div>';}).join('');showDialog('historyDialog');}
+$('baselineBtn').onclick=openHistory;$('historyBtn').onclick=function(){closeDialog($('projectDialog'));openHistory();};
+$('historyList').onclick=function(e){var b=e.target.closest('[data-base]');if(!b)return;var v=pack().versions[Number(b.dataset.base)];if(v){pack().baseline=clone(v.work);pack().baselineId=v.id;closeDialog($('historyDialog'));renderAll();info(v.name+'已作为“改前”对照，当前乐器没有改变。');}};
+function download(name,blob){var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},20000);}
+function csvCell(v){var s=String(v==null?'':v);if(/^[=+@-]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}
+function exportRecord(){var p=pack(),rows=[['记录类型','来源','材料','版本','元件','目标音','目标频率Hz','模型频率Hz','偏差音分','参数或改动','发现问题','可能原因','我的判断','补充想法']];
+ var editions=p.versions.slice();if(changed())editions.push({name:'当前未留存',work:clone(work()),note:p.note});
+ editions.forEach(function(v){v.work.parts.forEach(function(part,i){var n=v.note||{};rows.push(['元件','模型计算（不是实测）',names[v.work.family],v.name,i+1,labelNote(part.target),M.targetHz(v.work,i).toFixed(2),M.frequency(v.work,i).toFixed(2),M.cents(v.work,i).toFixed(1),JSON.stringify({length_cm:part.length,tension_ratio:part.tension,water_fraction:part.fill,body:v.work.body}),n.problem||'',n.cause||'',n.judgement||'',n.explanation||'']);});});
+ p.actions.forEach(function(a){rows.push(['操作记录','网页操作',names[state.family],a.time,'','','','','',a.description,'','','','']);});
+ rows.push(['说明','模型限制','','','','','','','','±35音分为网页提示阈值，不是教材评分；实物结构、演奏效果需师生另作评价','','','','']);
+ download('改进我们的乐器_前后对照记录.csv',new Blob(['\ufeff'+rows.map(function(r){return r.map(csvCell).join(',');}).join('\r\n')],{type:'text/csv;charset=utf-8'}));info('记录已生成，请查看浏览器下载。');
+}
+$('exportRecordBtn').onclick=exportRecord;
+$('exportProjectBtn').onclick=function(){download('改进我们的乐器_作品.json',new Blob([JSON.stringify(payload())],{type:'application/json'}));};
+$('projectBtn').onclick=function(){showDialog('projectDialog');};$('modelInfoBtn').onclick=function(){showDialog('infoDialog');};$('helpBtn').onclick=function(){closeDialog($('projectDialog'));showDialog('infoDialog');};
+$('volumeRange').oninput=function(){state.volume=Number(this.value);sound.setVolume(state.volume);saveSoon();};
+function acceptImport(data){
+ stopPlayback();endHold();
+ if(data&&data.format==='mutiw-instrument-2d'){
+  var imported={};families.forEach(function(f){imported[f]=M.importPrevious(data,f);});
+  if(!confirm('将上一课的三种材料副本载入本课？本课当前数据会被替换，上一课的原作品不变。'))return;
+  families.forEach(function(f){var w=imported[f];state.packs[f]={current:clone(w),baseline:clone(w),baselineId:'previous',versions:[{id:'previous',name:'上一课作品',work:clone(w),time:new Date().toISOString(),note:{}}],actions:[],note:cleanNote({})};});state.family=data.family;info('已接入上一课副本，保留原音区与音高。');
+ }else{
+  var safe=validatePayload(data);if(!confirm('打开这份作品并替换本课当前数据？如需保留，请先保存当前作品。'))return;state.family=safe.family;state.packs=safe.packs;state.force=safe.force;state.volume=safe.volume;info('作品与留存记录已打开。');
+ }
+ state.view='lab';state.selected=Math.min(2,work().parts.length-1);state.mode='pitch';pendingCut=null;practice=null;sound.setVolume(state.volume);closeDialog($('projectDialog'));renderAll();saveState();
+}
+$('importBtn').onclick=function(){$('importFile').value='';$('importFile').click();};
+$('importFile').onchange=function(){var file=this.files&&this.files[0];if(!file)return;if(file.size>8*1024*1024){info('作品文件过大，请选择 8 MB 以内的 JSON。');return;}var reader=new FileReader();reader.onload=function(){try{acceptImport(JSON.parse(String(reader.result)));}catch(e){info('未导入：'+e.message);}};reader.onerror=function(){info('文件读取失败，请重新选择。');};reader.readAsText(file);};
+$('continuePreviousBtn').onclick=function(){try{var raw=localStorage.getItem(PREVIOUS_KEY);if(!raw){info('这里没有上一课缓存。请打开上一课导出的作品 JSON。');return;}acceptImport(JSON.parse(raw));}catch(e){info('未接入：'+e.message);}};
+$('resetBtn').onclick=function(){if(!confirm('重新开始当前材料？将清空本课这一种材料的改进记录，不影响上一课。'))return;stopPlayback();endHold();state.packs[state.family]=freshPack(state.family);state.selected=2;state.mode='pitch';state.inside=false;pendingCut=null;practice=null;$('practiceFeedback').hidden=true;renderAll();saveState();};
+$('fullscreenBtn').onclick=function(){var d=document,el=d.documentElement;try{var p=d.fullscreenElement?d.exitFullscreen():el.requestFullscreen?el.requestFullscreen():null;if(p&&p.catch)p.catch(function(){info('浏览器未允许全屏，可使用设备的全屏模式。');});if(!p&&!el.requestFullscreen)info('此浏览器不支持网页全屏，请使用系统全屏。');}catch(e){info('请使用浏览器或设备的全屏模式。');}};
+document.querySelectorAll('[data-close]').forEach(function(b){b.onclick=function(){closeDialog(b.closest('dialog'));};});
+document.querySelectorAll('dialog').forEach(function(d){d.addEventListener('cancel',function(){if(d.id==='recordingDialog'){recorderStartToken++;stopRecording();stopRealPlayback();}});});
+
+function renderRecording(){var r=recordings[state.family];['before','after'].forEach(function(side){var cap=side==='before'?'Before':'After',record=r[side],el=$('real'+cap);if(record&&el.src!==record.url)el.src=record.url;if(!record){el.removeAttribute('src');}el.hidden=!record;$('download'+cap+'Btn').disabled=!record;$('record'+cap+'Btn').disabled=!!recording&&recording.side!==side;});$('realCompareBtn').disabled=!r.before||!r.after||!!recording;}
+function openRecording(){stopPlayback();renderRecording();$('recordingStatus').textContent='每段最多 12 秒。录音只留在当前页面。';showDialog('recordingDialog');}
+$('recordRealBtn').onclick=openRecording;
+function stopRecording(){var current=recording;if(current){if(current.recorder&&current.recorder.state!=='inactive'){try{current.recorder.stop();}catch(ignore){}}if(current.timer)clearInterval(current.timer);}}
+function stopRealPlayback(){realPlaybackToken++;['realBefore','realAfter'].forEach(function(id){$(id).pause();});}
+async function beginRecording(side){
+ if(recording){if(recording.side===side)stopRecording();return;}
+ stopRealPlayback();stopPlayback();
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){$('recordingStatus').textContent='此环境不能录音。请从 HTTPS 页面用支持麦克风的浏览器打开；模拟功能仍可使用。';return;}
+ var token=++recorderStartToken,family=state.family,stream;var cap=side==='before'?'Before':'After';$('recordingStatus').textContent='请允许麦克风，只录乐器声音。';
+ try{
+  stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false},video:false});
+  if(token!==recorderStartToken||document.hidden||!$('recordingDialog').open){stream.getTracks().forEach(function(t){t.stop();});return;}
+  var mime=['audio/webm;codecs=opus','audio/mp4','audio/ogg;codecs=opus'].filter(function(t){return MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t);})[0],rec= mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream),chunks=[];
+  recording={side:side,family:family,recorder:rec,stream:stream,timer:null,start:Date.now()};
+  rec.ondataavailable=function(e){if(e.data&&e.data.size)chunks.push(e.data);};
+  rec.onstop=function(){var current=recording;if(current&&current.timer)clearInterval(current.timer);stream.getTracks().forEach(function(t){t.stop();});recording=null;var blob=new Blob(chunks,{type:rec.mimeType||mime||'audio/webm'}),r=recordings[family];if(blob.size){if(r[side])URL.revokeObjectURL(r[side].url);r[side]={blob:blob,url:URL.createObjectURL(blob),mime:blob.type};}$('record'+cap+'Btn').classList.remove('is-recording');$('record'+cap+'Btn').textContent='● '+(side==='before'?'重录改前':'重录改后');$('recordingStatus').textContent=blob.size?'已录下真实声音。刷新前可保存录音。':'没有录到声音，请检查麦克风后重试。';renderRecording();};
+  rec.onerror=function(){stopRecording();$('recordingStatus').textContent='录音中断，请检查麦克风连接后重试。';};
+  rec.start();$('record'+cap+'Btn').classList.add('is-recording');$('record'+cap+'Btn').textContent='■ 停止 0 秒';$('recordingStatus').textContent='正在录'+(side==='before'?'改前':'改后')+' · 保持设备位置和演奏力度';
+  recording.timer=setInterval(function(){if(!recording)return;var seconds=Math.floor((Date.now()-recording.start)/1000);$('record'+cap+'Btn').textContent='■ 停止 '+seconds+' 秒';if(seconds>=12)stopRecording();},200);renderRecording();
+ }catch(e){if(stream)stream.getTracks().forEach(function(t){t.stop();});if(token!==recorderStartToken)return;recording=null;$('recordingStatus').textContent=e.name==='NotAllowedError'?'没有获得麦克风授权。可在浏览器设置中允许后重试，或继续模拟比较。':e.name==='NotFoundError'?'未找到麦克风。模拟功能仍可使用。':'无法开启录音，请检查安全页面、浏览器和麦克风。';renderRecording();}
+}
+$('recordBeforeBtn').onclick=function(){beginRecording('before');};$('recordAfterBtn').onclick=function(){beginRecording('after');};
+['before','after'].forEach(function(side){var cap=side==='before'?'Before':'After';$('download'+cap+'Btn').onclick=function(){var r=recordings[state.family][side];if(r){var ext=r.mime.indexOf('mp4')>=0?'m4a':r.mime.indexOf('ogg')>=0?'ogg':'webm';download('乐器实物_'+(side==='before'?'改前':'改后')+'.'+ext,r.blob);}};});
+$('realCompareBtn').onclick=async function(){stopRealPlayback();var token=realPlaybackToken;try{for(var i=0;i<2;i++){if(token!==realPlaybackToken)return;var el=$(i===0?'realBefore':'realAfter');el.currentTime=0;$('recordingStatus').textContent='正在听真实录音：'+(i===0?'改前':'改后');await el.play();await new Promise(function(resolve,reject){el.onended=resolve;el.onerror=reject;el.onpause=function(){if(token!==realPlaybackToken)resolve();};});}if(token===realPlaybackToken)$('recordingStatus').textContent='真实录音对照完成，哪些变化支持你的判断？';}catch(e){$('recordingStatus').textContent='录音未能播放，请直接使用上方播放器。';}};
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){stopPlayback();stopRealPlayback();endHold();return;}if(document.querySelector('dialog[open]')||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;
+ if(/^[1-8]$/.test(e.key)){e.preventDefault();var n=Number(e.key),i=findPart(work(),n);if(i<0){info('作品里还没有这个目标音，可以从实验台补音。');return;}selectPart(i,true);}
+ else if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();selectPart((state.selected+(e.key==='ArrowRight'?1:-1)+work().parts.length)%work().parts.length,false);}
+});
+window.addEventListener('pointerup',endHold);window.addEventListener('blur',function(){endHold();endDrag();stopPlayback();});
+document.addEventListener('visibilitychange',function(){if(document.hidden){recorderStartToken++;endHold();stopPlayback();stopRecording();stopRealPlayback();}});
+window.addEventListener('pagehide',function(){recorderStartToken++;saveState();stopRecording();sound.stop();stopRealPlayback();Object.keys(recordings).forEach(function(f){['before','after'].forEach(function(k){if(recordings[f][k])URL.revokeObjectURL(recordings[f][k].url);});});});
+var animationLast=0,visualPhase=0;
+function animate(now){
+ var dt=animationLast?Math.min(.05,(now-animationLast)/1000):0;animationLast=now;
+ if(hold&&hold.repeat){var elapsed=(now-hold.last)/100;if(elapsed>=.4){hold.last=now;stepParam(hold.direction,elapsed);}}
+ if(!state.paused)visualPhase+=dt*2*Math.PI*3.2;
+ var playing=now<activeUntil&&!!activeWork,amp=playing?M.envelope(activeWork,active,activeForce,(now-activeStarted)/1000,activeDuration):0;
+ if(state.view==='lab')Art.animate($('mainScene'),work(),{selected:state.selected,active:active,inside:state.inside,mini:false},{phase:visualPhase,amp:amp,playing:playing&&activeSide==='now',paused:state.paused});
+ else ['before','now'].forEach(function(side){var svg=side==='before'?$('beforeScene'):$('afterScene'),w=side==='before'?baseline():work();Art.animate(svg,w,{selected:active,active:active,inside:false,mini:true},{phase:visualPhase,amp:amp,playing:playing&&side===activeSide,paused:false});});
+ requestAnimationFrame(animate);
+}
+restore();sound.setVolume(state.volume);renderAll();requestAnimationFrame(animate);
+window.InstrumentLesson={version:'1.0',snapshot:function(){return clone(payload());},validate:validatePayload,modifications:modifications,model:M};
+}());
+</script>
+</body></html>
