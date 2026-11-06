@@ -297,7 +297,7 @@
  $('fullscreen-btn').onclick=function(){var doc=document.documentElement,req=doc.requestFullscreen||doc.webkitRequestFullscreen,exit=document.exitFullscreen||document.webkitExitFullscreen;try{if(document.fullscreenElement||document.webkitFullscreenElement){if(exit)exit.call(document);}else if(req){var promise=req.call(doc);if(promise&&promise.catch)promise.catch(function(){toast('当前浏览器未允许全屏，可使用系统全屏功能');});}else toast('当前设备使用浏览器全屏或横屏查看');}catch(e){toast('此浏览器不支持网页全屏');}};
  Array.prototype.forEach.call(document.querySelectorAll('[data-field]'),function(btn){btn.onclick=function(){var f=this.getAttribute('data-field'),v=this.getAttribute('data-value');selected=f==='wheels'?'wheel':f;change(f,f==='wheels'?Number(v):v);};});$('wheelbase-input').oninput=function(){selected='wheel';change('wheelbase',Number(this.value));};$('tilt-input').oninput=function(){selected='solar';change('tilt',Number(this.value));};$('dimensions-btn').onclick=function(){dimensions=!dimensions;this.setAttribute('aria-pressed',dimensions?'true':'false');update(true);};$('xray-btn').onclick=function(){xray=!xray;this.setAttribute('aria-pressed',xray?'true':'false');update(true);};$('save-baseline').onclick=function(){baseline={design:copy(design),settings:copy(settings)};update();toast('方案 A 已保留；可以继续改变当前设计');};$('compare-btn').onclick=showCompare;$('reset-btn').onclick=function(){design=copy(DEFAULT_DESIGN);selected='';xray=false;dimensions=true;$('dimensions-btn').setAttribute('aria-pressed','true');$('xray-btn').setAttribute('aria-pressed','false');if(window.MoonMechanism)window.MoonMechanism.reset();update();toast('当前设计已复位；方案A和材料设置保留');};
  $('import-file').onchange=function(){var input=this,file=input.files&&input.files[0];if(!file)return;if(file.size>200000){toast('文件过大，请选择本网页导出的JSON方案');input.value='';return;}var reader=new FileReader();reader.onload=function(){try{var d=JSON.parse(reader.result);if(d.kind!=='moon-rover-design'||d.version!==1||!d.design||!d.settings)throw new Error('format');design=normalizeDesign(d.design);settings=normalizeSettings(d.settings);baseline=d.baseline&&d.baseline.design&&d.baseline.settings?{design:normalizeDesign(d.baseline.design),settings:normalizeSettings(d.baseline.settings)}:null;closeModal();update();toast('方案已导入');}catch(e){toast('不是有效的月球小车方案文件');}input.value='';};reader.onerror=function(){toast('文件读取失败，请重选');input.value='';};reader.readAsText(file);};
- document.addEventListener('moon-mechanism-ratio',function(e){var r=e.detail&&Number(e.detail.ratio);if([1,2,3].indexOf(r)>=0){design.ratio=r;save();}});
+ document.addEventListener('moon-mechanism-ratio',function(e){var r=e.detail&&Number(e.detail.ratio);if([1,2,3].indexOf(r)>=0){design.ratio=r;update(true);save();}});
  bindDrag();if(window.MoonMechanism){window.MoonMechanism.init($('mechanism-page'),function(){return copy(design);});window.MoonMechanism.setVisible(false);}update();
  }
  window.MoonApp={boot:boot,getDesign:function(){return copy(design);},getSettings:function(){return copy(settings);},bill:bill,renderSvg:renderSvg,issues:designIssues};
@@ -434,7 +434,7 @@
   function setRatio(ratio) {
     ratio = validRatio(ratio);
     if (ratio === state.ratio) { return; }
-    state.ratio = ratio; clearTurns(); state.message = '齿数已改变，圈数归零。再转一圈比较。';
+    state.ratio = ratio; lastDesign = state.solar + state.motor + state.wheel + state.ratio; clearTurns(); state.message = '齿数已改变，圈数归零。再转一圈比较。';
     paint(); emitRatio();
   }
   function bindButton(node, fn) {
