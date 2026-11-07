@@ -333,6 +333,7 @@ var $ = function (id) { return document.getElementById(id); };
 var clamp = function (n, a, b) { return Math.max(a, Math.min(b, n)); };
 var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); };
 var round = function (n) { return Math.round(n * 100) / 100; };
+var offsetText = function (y) { return round((y - 280) / 24).toFixed(2); };
 var clone = function (o) { return JSON.parse(JSON.stringify(o)); };
 var KEY = 'aihtml-g6u2l2-evidence-v1';
 var COLORS = {light:'#ffd277',pred:'#e6a9df',top:'#ff8392',bottom:'#66d9ee'};
@@ -401,7 +402,7 @@ function benchSVG(s,id,interactive){
   out+=line(c.x-13,c.y-c.r,c.x+13,c.y-c.r,'#9ce6d7',4)+line(c.x-13,c.y+c.r,c.x+13,c.y+c.r,'#9ce6d7',4);
   out+='<circle cx="'+c.x+'" cy="'+c.y+'" r="5" fill="#8bd8c9" opacity=".6"/>';
   out+=label(c.x,540,'卡纸 '+(i+1),25,sel?'#b8ece2':'#d8e8eb',null,sel?700:500);
-  out+=label(c.x,c.y-171,round((c.y-280)/24).toFixed(1)+' cm',21,sel?'#b8ece2':'#9eb8c1');
+  out+=label(c.x,c.y-171,offsetText(c.y)+' cm',21,sel?'#b8ece2':'#9eb8c1');
   if(b.on){var pl=m.planes[i],dx=c.x-b.source.x;if(pl.incoming.active){var a=b.source.y+pl.incoming.min*dx,z=b.source.y+pl.incoming.max*dx;var intervals=[[Math.max(25,a),Math.min(c.y-c.r,z)],[Math.max(c.y+c.r,a),Math.min(525,z)]];intervals.forEach(function(q){if(q[1]>q[0])out+=line(c.x-11,q[0],c.x-11,q[1],'#fff0b2',7);});}}
   if(sel&&interactive)out+='<path d="M'+(c.x-35)+' '+(c.y-31)+'l-7 8h14Z M'+(c.x-35)+' '+(c.y+31)+'l-7-8h14Z" fill="#b8ece2"/>';
   out+='</g>';
@@ -455,7 +456,7 @@ function screenSVG(s,id){
  out+='</g></svg>';return out;
 }
 function resultText(r){if(r.page==='pinhole')return'屏距 '+r.pin.v+' cm · 像高 '+(6*r.pin.v/r.pin.u).toFixed(1)+' cm';var m=Optics.benchModel(r.bench);return !r.bench.on?'手电筒关闭':m.screen.lit?'纸屏有光斑':'纸屏无光斑';}
-function conditionText(r){if(r.page==='pinhole')return'物距 '+r.pin.u+' cm；屏距 '+r.pin.v+' cm';return r.bench.cards.map(function(c,i){return'卡'+(i+1)+(c.present?'偏移 '+((c.y-280)/24).toFixed(1)+' cm':'移出');}).join('；')+'；方向 '+round(r.bench.angleDeg)+'°';}
+function conditionText(r){if(r.page==='pinhole')return'物距 '+r.pin.u+' cm；屏距 '+r.pin.v+' cm';return r.bench.cards.map(function(c,i){return'卡'+(i+1)+(c.present?'偏移 '+offsetText(c.y)+' cm':'移出');}).join('；')+'；方向 '+round(r.bench.angleDeg)+'°';}
 function render(){
  paintQueued=false;var s=currentRenderState(),bench=app.page==='bench';
  stage.innerHTML=sceneSVG(s,'live-',true);$('screen-view').innerHTML=screenSVG(s,'front-');
@@ -467,7 +468,7 @@ function render(){
  text('stage-name',bench?'俯视模型 · 空气中的光':'剖面模型 · 小孔与纸屏');
  text('screen-title',bench?'纸屏正视':'纸屏正视 · 烛焰像');
  text('stage-hint',app.draw?'在实验图中画预测路线，箭头自动指向笔画终点。':bench?'拖动卡纸调位置；拖动手电筒前的圆点调方向。':'拖动烛焰或纸屏；红、蓝只标记光来自哪一点。');
- if(bench){var c=app.bench.cards[app.selected],m=Optics.benchModel(app.bench);text('selected-card-label','卡纸 '+(app.selected+1)+' 偏移');text('card-offset-value',((c.y-280)/24).toFixed(1)+' cm');$('card-offset').value=round((c.y-280)/24);$('card-offset').disabled=!c.present;text('remove-card',(c.present?'移出':'放回')+'卡纸 '+(app.selected+1));text('screen-status',resultText(s));text('screen-note',!app.bench.on?'点击手电筒，打开光源。':!s.rays?'光路未显示，先画出你的预测。':m.fullyBlockedAt!==null?'通向纸屏的光止于卡纸 '+(m.fullyBlockedAt+1)+'。':'比较孔的开口与通过的光路。');
+ if(bench){var c=app.bench.cards[app.selected],m=Optics.benchModel(app.bench);text('selected-card-label','卡纸 '+(app.selected+1)+' 偏移');text('card-offset-value',offsetText(c.y)+' cm');$('card-offset').value=round((c.y-280)/24);$('card-offset').disabled=!c.present;text('remove-card',(c.present?'移出':'放回')+'卡纸 '+(app.selected+1));text('screen-status',resultText(s));text('screen-note',!app.bench.on?'点击手电筒，打开光源。':!s.rays?'光路未显示，先画出你的预测。':m.fullyBlockedAt!==null?'通向纸屏的光止于卡纸 '+(m.fullyBlockedAt+1)+'。':'比较孔的开口与通过的光路。');
  }else{var p=app.pin;text('screen-status','像高 '+(6*p.v/p.u).toFixed(1)+' cm');text('screen-note',s.rays?'把 A、B 与屏上的 A′、B′ 对应起来。':'先观察像，再点选烛焰上的标记。');$('screen-distance').value=p.v;$('object-distance').value=p.u;text('screen-distance-value',p.v+' cm');text('object-distance-value',p.u+' cm');text('image-height',(6*p.v/p.u).toFixed(1)+' cm');Array.prototype.forEach.call(document.querySelectorAll('[data-point]'),function(el){toggle(el,p.points[el.getAttribute('data-point')]);});}
  text('record-count',app.records.length);
 }
