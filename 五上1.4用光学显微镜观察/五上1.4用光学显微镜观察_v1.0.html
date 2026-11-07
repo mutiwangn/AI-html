@@ -1,0 +1,1182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eff5f4">
+<meta name="description" content="五上1.4用光学显微镜观察：调光、调焦与目镜视野联动，玻片与倒像定位、同区倍率对照及自主观察记录。">
+<title>用光学显微镜观察 · 互动实验室</title>
+<style>
+:root{--paper:#eff5f4;--ink:#193832;--accent:#087f6d;--line:#cfdad7;--amber:#d99b30;--muted:#526b64;--white:#fff;--danger:#aa5035;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;min-height:44px;padding:8px 16px;font-size:18px;font-weight:650;touch-action:manipulation}button:hover{background:#e1edE9}button:active{transform:translateY(1px)}button:disabled{opacity:.42;cursor:not-allowed;transform:none}button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-offset:3px}button[aria-pressed="true"],.primary{color:#fff;background:var(--accent);border-color:var(--accent)}button[aria-pressed="true"]:hover,.primary:hover{background:#066d5d}.icon{width:21px;height:21px;display:inline-block;vertical-align:-4px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.topbar{height:84px;display:flex;align-items:center;gap:22px;padding:0 26px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.25)}h1{font-size:clamp(22px,2.05vw,32px);line-height:1.2;letter-spacing:-.045em;margin:0;white-space:nowrap;font-weight:790}.mainnav{align-self:stretch;display:flex;gap:8px;margin-left:auto}.mainnav button{border:0;border-radius:0;font-size:21px;white-space:nowrap;padding:0 22px;background:none!important;color:var(--muted);position:relative}.mainnav button[aria-selected="true"]{color:var(--ink)}.mainnav button[aria-selected="true"]:after{content:"";height:4px;background:var(--accent);position:absolute;bottom:12px;left:18px;right:18px;border-radius:4px}.actions{display:flex;gap:10px;white-space:nowrap}.actions button{padding:8px 12px;border-color:#789b8f}.recordcount{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;background:#dbeae5;border-radius:50%;font-size:14px;margin-left:4px}.app{height:calc(100vh - 84px);height:calc(100dvh - 84px);min-height:520px;display:flex;flex-direction:column}.labhead{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 30px 8px;min-height:76px}.labhead h2{font-size:24px;margin:0;font-weight:650}.samples{display:flex;gap:6px;align-items:center}.samples>span{font-size:17px;color:var(--muted);margin-right:5px}.samples button{min-height:40px;padding:6px 14px;font-size:17px}.samples button[aria-pressed="true"]{background:#dcece6;color:#086b58;border-color:#7aa99a}.workspace{display:grid;grid-template-columns:1.06fr 1fr;flex:1;min-height:0;padding:0 28px;gap:20px}.objectstage{position:relative;min-height:0;display:flex;flex-direction:column}.focusstage{height:100%;min-height:0;display:flex;align-items:center;justify-content:center}.microscope{width:100%;height:100%;max-height:640px;overflow:visible;touch-action:none}.microscope text{font-size:21px;fill:var(--ink);font-weight:650}.microscope .microhint{font-size:16px;font-weight:500;fill:var(--muted)}.microscope .label-line{stroke:#698d7f;fill:none;stroke-width:1.5}.microscope .handle{cursor:ns-resize;outline:none}.microscope .handle:focus-visible circle,.microscope .mirror-handle:focus-visible line{stroke:var(--amber);stroke-width:4}.microscope .mirror-handle{cursor:ew-resize}.scene-note{position:absolute;left:14px;bottom:8px;display:flex;align-items:center;gap:12px;font-size:16px;color:var(--muted)}.scene-note button{font-size:15px;padding:4px 10px;min-height:34px}.eyepiece{min-height:0;display:flex;align-items:center;flex-direction:column;justify-content:center;padding:6px 0}.eyepiece h2{font-size:27px;line-height:1.2;margin:0 0 12px;font-weight:730}.fieldWrap{position:relative;border-radius:50%;border:10px solid #303c38;box-shadow:0 4px 0 #182b2440,inset 0 0 0 2px #9aa6a1;width:min(100%,calc(100vh - 420px),530px);width:min(100%,calc(100dvh - 420px),530px);min-width:210px;min-height:210px;aspect-ratio:1;flex-shrink:0;background:#fffdf7;overflow:hidden}.fieldWrap canvas{width:100%;height:100%;display:block}.fieldOverlay{position:absolute;inset:0;pointer-events:none}.fieldMeta{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:17px}.fieldMeta button{font-size:21px;min-width:160px;padding:8px 18px}.magnification{font-size:20px;margin:10px 0 5px;font-variant-numeric:tabular-nums}.magnification strong{font-size:24px;font-weight:750}.fieldStatus{font-size:17px;line-height:1.45;color:var(--muted);min-height:25px;margin:0;text-align:center}.toolbar{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:22px;padding:16px 30px 18px;border-top:1px solid var(--line);margin-top:6px;align-items:center;min-height:94px}.control{display:flex;align-items:center;gap:14px;min-width:0}.control+.control{border-left:1px solid var(--line);padding-left:22px}.control label,.control-title{font-size:20px;font-weight:680;white-space:nowrap}.rangegroup{flex:1;min-width:60px}.rangegroup .endpoints{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;line-height:1}input[type=range]{width:100%;height:30px;accent-color:var(--accent);cursor:pointer;touch-action:pan-x;margin:0;background:transparent}input[type=range]::-webkit-slider-thumb{min-width:24px;min-height:24px}output{font-variant-numeric:tabular-nums;font-size:15px;color:var(--muted);display:block;font-weight:500}.finebuttons{display:flex;gap:7px;flex:1}.finebuttons button{flex:1;min-width:56px;padding:6px 8px;touch-action:none}.capture{font-size:22px;min-width:190px;min-height:54px}.foot{min-height:36px;border-top:1px solid var(--line);display:flex;gap:14px;align-items:center;padding:4px 30px 6px;color:var(--muted);font-size:14px}.foot button{font-size:14px;min-height:28px;padding:3px 8px;border:0;text-decoration:underline;text-underline-offset:3px}.footnote{margin-left:82px}.watermark{margin-left:auto;font-weight:750;color:#315e4d}.hidden,[hidden]{display:none!important}.locatestage{display:flex;flex-direction:column;height:100%;min-height:0;position:relative}.stageheading{display:flex;justify-content:space-between;align-items:center;padding:12px 10px 5px}.stageheading h2{font-size:24px;margin:0}.stageheading span{font-size:16px;color:var(--muted)}.slideCanvasWrap{position:relative;flex:1;min-height:160px;overflow:hidden}.slideCanvasWrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}.slideCanvasWrap canvas:active{cursor:grabbing}.slideCanvasWrap.targeting canvas{cursor:crosshair}.slidebuttons{display:flex;justify-content:center;gap:8px;padding:8px 0 12px}.slidebuttons button{font-size:17px}.motionline{height:32px;text-align:center;font-size:18px;color:var(--accent);font-weight:650}.locate-tools{grid-column:1/4;display:flex;justify-content:space-between;gap:20px;align-items:center}.locate-tools strong{font-size:20px;font-weight:650}.locate-tools span{font-size:17px;color:var(--muted)}.fov-read{font-size:19px;text-align:right;font-variant-numeric:tabular-nums}.fov-read small{display:block;font-size:14px;color:var(--muted)}.toast{position:fixed;left:50%;bottom:115px;transform:translateX(-50%);background:#16382f;color:white;box-shadow:0 6px 28px #16382f25;padding:12px 22px;font-size:18px;max-width:min(88vw,720px);border-radius:10px;z-index:100;pointer-events:none;opacity:0;transition:opacity .18s}.toast.show{opacity:1}.info-layer{position:fixed;inset:0;z-index:120;background:#10342c66;display:flex;align-items:center;justify-content:center;padding:24px}.info-dialog{background:#f9fcfa;max-width:760px;max-height:90vh;overflow:auto;border-radius:14px;padding:28px;color:var(--ink);box-shadow:0 20px 80px #102a2940;font-size:18px;line-height:1.7}.info-dialog h2{font-size:25px;margin:0 0 12px}.info-dialog p{margin:14px 0}.info-dialog a{color:var(--accent)}.info-dialog .dialoghead{display:flex;justify-content:space-between;align-items:center;gap:20px}.info-dialog small{font-size:15px;color:var(--muted)}.noscript{padding:24px;background:#fff3d7}
+@media(min-width:1600px){.topbar{height:92px;padding:0 40px}.app{height:calc(100vh - 92px);height:calc(100dvh - 92px)}.labhead{padding:20px 45px 10px}.labhead h2{font-size:28px}.workspace{padding:0 44px;gap:30px}.fieldWrap{width:min(100%,calc(100vh - 430px),650px);width:min(100%,calc(100dvh - 430px),650px)}.toolbar{padding:20px 45px}.fieldMeta button{font-size:24px}.magnification{font-size:24px}.fieldStatus{font-size:19px}}
+@media(max-width:1200px){.topbar{padding:0 18px;gap:12px;height:76px}h1{font-size:24px}.mainnav{gap:0}.mainnav button{font-size:18px;padding:0 14px}.actions{gap:6px}.actions button{font-size:16px;padding:8px}.actions .actionword{display:none}.app{height:calc(100vh - 76px);height:calc(100dvh - 76px)}.labhead{padding:14px 20px 8px;min-height:68px}.labhead h2{font-size:21px}.workspace{gap:8px;padding:0 18px}.fieldWrap{width:min(100%,calc(100vh - 393px),460px);width:min(100%,calc(100dvh - 393px),460px)}.eyepiece h2{font-size:23px}.toolbar{gap:12px;padding:12px 22px;min-height:88px}.control{gap:8px}.control+.control{padding-left:12px}.control label,.control-title{font-size:18px}.fieldMeta button{min-width:130px;font-size:19px}.fieldMeta{gap:8px;margin-top:12px}.magnification{font-size:18px}.capture{min-width:158px;font-size:19px}.foot{padding-left:20px}.scene-note{font-size:14px;left:5px}.stageheading h2{font-size:21px}}
+@media(max-height:760px) and (min-width:761px){.topbar{height:66px}.app{height:calc(100vh - 66px);height:calc(100dvh - 66px);min-height:460px}.labhead{min-height:56px;padding-top:8px;padding-bottom:5px}.labhead h2{font-size:21px}.workspace{padding:0 16px}.eyepiece h2{font-size:22px;margin-bottom:7px}.fieldWrap{width:min(100%,calc(100vh - 345px),460px);width:min(100%,calc(100dvh - 345px),460px);min-width:180px;min-height:180px;border-width:8px}.fieldMeta{margin-top:8px}.fieldMeta button{min-height:40px;font-size:18px;padding:6px 14px}.magnification{margin:6px 0 2px;font-size:17px}.magnification strong{font-size:21px}.fieldStatus{font-size:15px;min-height:22px}.toolbar{min-height:76px;padding:10px 22px}.foot{min-height:32px}.scene-note{bottom:0}.microscope .microhint{font-size:17px}.slidebuttons{padding:5px 0}.motionline{height:26px;font-size:16px}.stageheading{padding-top:4px}}
+@media(max-width:900px) and (min-width:761px){h1{font-size:21px}.topbar{gap:8px;padding:0 12px}.mainnav button{font-size:17px;padding:0 9px}.mainnav button[aria-selected=true]:after{left:8px;right:8px}.actions button{padding:7px}.labhead{flex-wrap:wrap;gap:8px;min-height:88px}.labhead h2{font-size:20px}.samples button{min-height:36px}.toolbar{grid-template-columns:1fr 1fr 1fr auto;gap:8px;padding-left:16px;padding-right:16px}.control{gap:6px}.control+.control{padding-left:8px}.control label,.control-title{font-size:17px}.finebuttons button{min-width:36px;font-size:15px}.capture{min-width:140px;font-size:18px}.stageheading{display:block}.stageheading span{display:block;margin-top:3px}.fieldWrap{width:min(100%,calc(100dvh - 445px),400px)}.scene-note{position:static;justify-content:center;gap:4px;font-size:12px}.scene-note button{font-size:12px;padding:2px 5px}.slidebuttons{gap:5px}.slidebuttons button{font-size:15px;padding:5px 8px}}
+@media(max-width:760px),(max-width:900px) and (orientation:portrait){.topbar{height:auto;min-height:118px;flex-wrap:wrap;padding:12px 15px 0;gap:8px 10px}.topbar h1{font-size:23px;flex:1}.actions button{font-size:14px;min-height:38px;padding:6px}.actions .icon{width:18px;height:18px}.recordcount{height:18px;min-width:18px;font-size:12px}.mainnav{order:3;width:100%;height:48px;margin:0;gap:0}.mainnav button{flex:1;font-size:19px;padding:0}.mainnav button[aria-selected=true]:after{bottom:1px;left:15%;right:15%}.app{height:auto;min-height:calc(100vh - 118px)}.labhead{align-items:flex-start;padding:16px 18px 5px;gap:12px;flex-direction:column}.labhead h2{font-size:21px}.samples{width:100%;justify-content:flex-start}.samples button{font-size:16px;min-height:40px;padding:6px 12px}.samples>span{font-size:15px}.workspace{display:flex;flex-direction:column;padding:0 16px;gap:10px}.objectstage{height:350px;flex:none}.focusstage{height:330px}.microscope{max-width:550px}.scene-note{font-size:13px;bottom:-3px;left:0}.scene-note button{font-size:13px;min-height:30px}.eyepiece{padding:16px 0 8px}.eyepiece h2{font-size:23px}.fieldWrap{width:min(82vw,370px);min-width:0;min-height:0;border-width:8px}.fieldMeta{margin-top:12px}.magnification{font-size:18px}.fieldStatus{font-size:16px}.toolbar{grid-template-columns:1fr 1fr;gap:16px;padding:16px 18px;margin-top:10px;position:relative}.control+.control{border:0;padding-left:0}.control:first-child{grid-column:1/3}.control:first-child .rangegroup{max-width:none}.control label,.control-title{font-size:18px}.control{min-height:48px}.finebuttons button{min-width:44px}.toolbar .capture{grid-column:1/3;min-height:52px}.foot{font-size:12px;flex-wrap:wrap;padding:8px 16px;gap:6px}.foot button{font-size:13px}.foot .footnote{max-width:70%}.locate-tools{grid-column:1/3;flex-wrap:wrap;gap:8px}.locate-tools strong{font-size:18px}.locate-tools span{font-size:15px}.fov-read{font-size:17px;text-align:left}.objectstage.locating{height:380px}.stageheading{padding:12px 2px 0}.stageheading h2{font-size:21px}.stageheading span{font-size:13px}.slidebuttons{padding:4px 0;gap:5px}.slidebuttons button{font-size:15px;padding:5px 10px}.motionline{font-size:15px;height:26px}.toast{bottom:25px;font-size:16px}.info-dialog{padding:20px;font-size:17px}.info-layer{padding:12px}.info-dialog .dialoghead{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+/* Observation records: scoped styles, no external assets. */
+.mr-modal[hidden], .mr-modal [hidden], .mr-toast[hidden] { display: none !important; }
+.mr-modal, .mr-modal * { box-sizing: border-box; }
+.mr-modal {
+  --mr-ink: var(--ink, #193832); --mr-accent: var(--accent, #087f6d);
+  --mr-paper: var(--paper, #f3f6f5); --mr-line: var(--line, #d6e1dd);
+  position: fixed; inset: 0; z-index: 10000; display: flex; flex-direction: column;
+  color: var(--mr-ink); background: var(--mr-paper);
+  font: 18px/1.5 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  text-align: left; isolation: isolate;
+}
+.mr-modal button, .mr-modal input {
+  font: inherit; color: inherit; letter-spacing: 0;
+}
+.mr-modal button {
+  min-height: 46px; padding: 9px 16px; border: 1px solid var(--mr-line);
+  border-radius: 10px; background: #fff; cursor: pointer; touch-action: manipulation;
+}
+.mr-modal button:focus-visible, .mr-modal input:focus-visible, .mr-canvas:focus-visible {
+  outline: 3px solid #d99b30; outline-offset: 3px;
+}
+.mr-modal button:disabled { opacity: .45; cursor: default; }
+.mr-modal .mr-primary { color: #fff; background: var(--mr-accent); border-color: var(--mr-accent); }
+.mr-head {
+  flex: 0 0 auto; padding: 16px clamp(16px, 3vw, 42px); background: #fff;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  border-bottom: 1px solid var(--mr-line);
+}
+.mr-head h2 { margin: 0; font-size: clamp(24px, 2.2vw, 32px); font-weight: 750; line-height: 1.25; }
+.mr-head-actions, .mr-tools { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.mr-scroll { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 22px clamp(16px, 3vw, 42px) 30px; }
+.mr-workspace { max-width: 1480px; margin: 0 auto; }
+.mr-empty { padding: 42px 16px; margin: 0; text-align: center; font-size: 22px; }
+.mr-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.mr-gallery[data-count="1"] { grid-template-columns: minmax(240px, 350px); justify-content: center; }
+.mr-gallery[data-count="2"] { grid-template-columns: repeat(2, minmax(240px, 420px)); justify-content: center; }
+.mr-gallery[data-count="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mr-card { min-width: 0; border: 2px solid var(--mr-line); border-radius: 12px; overflow: hidden; background: #fff; }
+.mr-card.mr-selected { border-color: var(--mr-accent); box-shadow: 0 0 0 2px rgba(8, 127, 109, .12); }
+.mr-modal .mr-select {
+  width: 100%; padding: 12px; border: 0; border-radius: 0; text-align: left; display: block;
+  background: transparent;
+}
+.mr-card-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 9px; }
+.mr-number { font-weight: 750; white-space: nowrap; }
+.mr-source { color: #536c62; font-size: 18px; text-align: right; }
+.mr-source-image { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; height: auto; max-height: 260px; background: #f7f9f7; border-radius: 8px; }
+.mr-sample { display: block; margin-top: 9px; font-size: 20px; font-weight: 700; overflow-wrap: anywhere; }
+.mr-magnification { display: block; margin-top: 2px; color: #52695f; font-size: 18px; overflow-wrap: anywhere; }
+.mr-card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 12px 12px; }
+.mr-edit-status { font-size: 18px; color: var(--mr-accent); }
+.mr-modal .mr-delete { padding: 7px 13px; min-height: 44px; background: #fff; color: #7e4c45; }
+.mr-editor { border-top: 1px solid var(--mr-line); margin-top: 24px; padding-top: 20px; display: grid; grid-template-columns: minmax(280px, 430px) minmax(210px, 420px); gap: 24px; align-items: center; justify-content: center; }
+.mr-draw-wrap { position: relative; width: 100%; max-width: 430px; aspect-ratio: 1; }
+.mr-canvas { display: block; width: 100%; height: auto; aspect-ratio: 1; touch-action: none; user-select: none; -webkit-user-select: none; cursor: crosshair; }
+.mr-draw-prompt { position: absolute; inset: 32%; display: flex; align-items: center; justify-content: center; text-align: center; color: #657c70; font-size: 20px; pointer-events: none; }
+.mr-editor-copy h3 { margin: 0 0 12px; font-size: 24px; line-height: 1.35; }
+.mr-editor-copy p { margin: 0 0 18px; font-size: 19px; }
+.mr-editor-meta { color: #536c62; overflow-wrap: anywhere; }
+.mr-import { border: 1px solid var(--mr-line); border-radius: 12px; background: #fff; margin-bottom: 24px; padding: 18px; }
+.mr-import h3 { margin: 0 0 14px; font-size: 23px; }
+.mr-import-layout { display: grid; grid-template-columns: 160px minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: 18px; }
+.mr-import-preview { display: block; width: 160px; height: 145px; object-fit: contain; background: #f3f6f5; border-radius: 8px; }
+.mr-field { display: block; font-size: 18px; }
+.mr-field input { margin-top: 6px; display: block; width: 100%; min-height: 48px; padding: 10px 12px; border: 1px solid #aebeb6; border-radius: 8px; background: #fff; }
+.mr-import .mr-tools { margin-top: 16px; }
+.mr-import-note { margin: 14px 0 0; color: #536c62; font-size: 18px; }
+.mr-foot { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px clamp(16px, 3vw, 42px); border-top: 1px solid var(--mr-line); background: #fff; font-size: 18px; }
+.mr-status { margin: 0; min-height: 27px; color: #285d4f; }
+.mr-save-reminder { margin: 0; color: #5b7167; }
+.mr-toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%); z-index: 10002;
+  max-width: min(90vw, 720px); padding: 13px 20px; border-radius: 10px; background: #173c32;
+  color: #fff; font: 19px/1.5 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  text-align: center; box-shadow: 0 8px 30px rgba(0,0,0,.16); pointer-events: none;
+}
+@media (min-width: 1400px) {
+  .mr-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 24px; align-items: start; }
+  .mr-empty, .mr-import { grid-column: 1 / -1; }
+  .mr-gallery, .mr-gallery[data-count="2"], .mr-gallery[data-count="3"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mr-gallery[data-count="1"] { grid-template-columns: minmax(240px, 400px); }
+  .mr-editor { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid var(--mr-line); padding: 0 0 0 24px; margin: 0; gap: 12px; position: sticky; top: 0; }
+  .mr-editor-copy { grid-row: 1; }
+  .mr-source-image { max-height: 245px; }
+}
+@media (max-width: 780px) {
+  .mr-head { flex-wrap: wrap; padding: 14px 16px; gap: 12px; }
+  .mr-head-actions { width: 100%; justify-content: space-between; gap: 8px; }
+  .mr-head-actions button { padding: 9px 12px; }
+  .mr-gallery, .mr-gallery[data-count="2"], .mr-gallery[data-count="3"] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .mr-gallery[data-count="1"] { grid-template-columns: minmax(240px, 340px); }
+  .mr-modal .mr-select { padding: 9px; }
+  .mr-card-bottom { padding: 0 9px 9px; flex-wrap: wrap; }
+  .mr-editor { gap: 16px; grid-template-columns: minmax(250px, 1fr) minmax(180px, .8fr); }
+  .mr-import-layout { grid-template-columns: 110px 1fr; }
+  .mr-import-preview { width: 110px; height: 140px; grid-row: span 2; }
+  .mr-foot { align-items: start; padding: 10px 16px; gap: 12px; }
+  .mr-save-reminder { max-width: 190px; }
+}
+@media (max-width: 500px) {
+  .mr-head h2 { font-size: 24px; }
+  .mr-head-actions { flex-wrap: wrap; justify-content: start; }
+  .mr-head-actions .mr-close { margin-left: auto; }
+  .mr-head-actions button { font-size: 18px; }
+  .mr-scroll { padding: 16px 12px 24px; }
+  .mr-gallery, .mr-gallery[data-count="2"], .mr-gallery[data-count="3"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mr-card-top { flex-direction: column; gap: 1px; }
+  .mr-source, .mr-number { font-size: 18px; }
+  .mr-sample { font-size: 19px; }
+  .mr-card-bottom { gap: 5px; }
+  .mr-editor { display: flex; flex-direction: column; gap: 10px; }
+  .mr-editor-copy { width: 100%; order: -1; }
+  .mr-editor-copy p { margin-bottom: 12px; }
+  .mr-draw-wrap { max-width: 390px; }
+  .mr-import-layout { grid-template-columns: 1fr; }
+  .mr-import-preview { width: 100%; height: 150px; grid-row: auto; }
+  .mr-foot { flex-direction: column; gap: 2px; font-size: 18px; }
+  .mr-save-reminder { max-width: none; }
+}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <h1>用光学显微镜观察</h1>
+  <nav class="mainnav" aria-label="探究场景">
+    <button id="tabFocus" role="tab" aria-selected="true" aria-controls="workspace" data-page="focus">调光与对焦</button>
+    <button id="tabLocate" role="tab" aria-selected="false" aria-controls="workspace" data-page="locate">视野与定位</button>
+  </nav>
+  <div class="actions">
+    <button id="recordsBtn" aria-label="打开观察记录"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 7h8M8 12h8M8 17h4"/></svg> <span class="actionword">观察记录</span><span class="recordcount" id="recordCount">0</span></button>
+    <button id="resetBtn" aria-label="重置当前场景"><svg class="icon" viewBox="0 0 24 24"><path d="M20 8a9 9 0 1 0 1 8M20 3v6h-6"/></svg> <span class="actionword">重置</span></button>
+    <button id="fullscreenBtn" aria-label="全屏显示"><svg class="icon" viewBox="0 0 24 24"><path d="M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg> <span class="actionword">全屏</span></button>
+  </div>
+</header>
+<noscript><p class="noscript">请启用浏览器的 JavaScript，才能使用显微镜联动、定位和记录功能。</p></noscript>
+<main class="app">
+  <div class="labhead">
+    <h2 id="taskTitle">调一调，让图像清楚起来</h2>
+    <div class="samples" aria-label="模型标本"><span>标本</span><button data-sample="hair" aria-pressed="true">头发</button><button data-sample="wing" aria-pressed="false">蝶翅</button><button data-sample="letter" aria-pressed="false">字母 F</button></div>
+  </div>
+  <div class="workspace" id="workspace">
+    <section class="objectstage" id="objectStage" aria-label="显微镜操作区">
+      <div class="focusstage" id="focusStage">
+        <svg id="microscope" class="microscope" viewBox="0 0 720 560" role="group" aria-label="反光镜式光学显微镜侧面。调焦时镜筒升降，反光镜将侧方灯光反射到标本。">
+          <defs>
+            <linearGradient id="metal" x1="0" x2="1"><stop stop-color="#c4d0cc"/><stop offset=".24" stop-color="#fcfffd"/><stop offset=".52" stop-color="#f7faf8"/><stop offset="1" stop-color="#aebeb6"/></linearGradient>
+            <linearGradient id="dark" x1="0" x2="1"><stop stop-color="#202a27"/><stop offset=".35" stop-color="#56625c"/><stop offset=".55" stop-color="#242f2a"/><stop offset="1" stop-color="#151e1a"/></linearGradient>
+            <linearGradient id="silver" x1="0" x2="1"><stop stop-color="#6e8279"/><stop offset=".45" stop-color="#f3faf7"/><stop offset=".7" stop-color="#c3d2ca"/><stop offset="1" stop-color="#6e8179"/></linearGradient>
+            <radialGradient id="knob"><stop offset=".65" stop-color="#34483f"/><stop offset=".68" stop-color="#74877c"/><stop offset=".75" stop-color="#27362f"/><stop offset="1" stop-color="#202d26"/></radialGradient>
+            <linearGradient id="glass"><stop stop-color="#daefed" stop-opacity=".35"/><stop offset=".5" stop-color="#fcfffd" stop-opacity=".8"/><stop offset="1" stop-color="#8ebbb1" stop-opacity=".55"/></linearGradient>
+            <marker id="rayArrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 7 3.5 0 7" fill="#d99b30"/></marker>
+          </defs>
+          <ellipse cx="347" cy="534" rx="177" ry="15" fill="#294a3820"/>
+          <path d="M249 504C186 474 181 392 199 322C213 259 249 213 284 191L305 223C271 251 246 288 235 341C222 401 229 451 279 468Z" fill="url(#metal)" stroke="#c8d2cb" stroke-width="2"/>
+          <path d="M219 431L253 498H295L274 430Z" fill="url(#metal)" stroke="#aebeB4" stroke-width="2"/>
+          <rect x="265" y="227" width="20" height="244" rx="7" fill="url(#silver)"/>
+          <path d="M217 499Q302 476 459 498L501 518Q504 530 487 534H190Q178 527 190 517Z" fill="url(#metal)" stroke="#a8b8ad" stroke-width="2"/>
+          <path d="M194 531H234V540H195Z M453 531H493V540H453Z" fill="#37463e"/>
+          <g id="tube">
+            <rect x="318" y="78" width="64" height="134" rx="8" fill="url(#metal)" stroke="#a3b5a9" stroke-width="2"/>
+            <rect x="328" y="32" width="45" height="60" rx="5" fill="url(#dark)" stroke="#26382c" stroke-width="2"/>
+            <ellipse cx="350.5" cy="33" rx="25" ry="7" fill="#2a342e" stroke="#75877a" stroke-width="3"/>
+            <ellipse cx="350.5" cy="32" rx="17" ry="3" fill="#111e16"/>
+            <rect x="315" y="199" width="70" height="14" rx="3" fill="url(#dark)" transform="rotate(-10 350 206)"/>
+            <path d="M350 211L388 238L413 222L382 201Z" fill="url(#silver)" stroke="#84998b" stroke-width="2"/>
+            <path d="M385 228L400 252L420 239L408 217Z" fill="url(#silver)" stroke="#84998b" stroke-width="2"/>
+            <path d="M394 243L414 232" stroke="#217a9c" stroke-width="5"/>
+            <g id="objectiveBody">
+              <rect x="331" y="212" width="39" height="79" rx="4" fill="url(#silver)" stroke="#84998b" stroke-width="2"/>
+              <path d="M331 271H370" stroke="#d9ac42" stroke-width="6" id="objectiveBand"/>
+              <rect x="335" y="289" width="31" height="13" rx="4" fill="url(#dark)" id="objectiveTip"/>
+            </g>
+            <path d="M383 65L507 65" class="label-line"/><circle cx="383" cy="65" r="4.5" fill="#087f6d"/><text x="518" y="72">目镜 10×</text>
+            <path d="M371 281L495 263" class="label-line" id="objectiveLeader"/><circle id="objectiveDot" cx="371" cy="281" r="4.5" fill="#087f6d"/><text x="505" y="270" id="objectiveLabel">物镜 10×</text>
+          </g>
+          <g id="coarseHandle" class="handle" tabindex="0" role="slider" aria-label="粗调旋钮，上下拖动或用方向键升降镜筒" aria-valuemin="16" aria-valuemax="100" aria-valuenow="62">
+            <circle cx="278" cy="212" r="40" fill="url(#knob)" stroke="#5b6c61" stroke-width="3"/>
+            <circle cx="278" cy="212" r="34" fill="none" stroke="#a0aea3" stroke-width="3" stroke-dasharray="2 5"/>
+            <circle cx="278" cy="212" r="21" fill="#087f6d" stroke="#67a899" stroke-width="2"/>
+            <path id="coarseTick" d="M278 184V193" stroke="#d6eee3" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="278" cy="212" r="48" fill="transparent"/>
+          </g>
+          <g id="fineHandle" class="handle" tabindex="0" role="slider" aria-label="细调旋钮，上下拖动或用方向键微调">
+            <circle cx="278" cy="280" r="24" fill="url(#knob)" stroke="#677b6c" stroke-width="2"/>
+            <circle cx="278" cy="280" r="13" fill="#087f6d" stroke="#78b3a0" stroke-width="2"/>
+            <path id="fineTick" d="M278 260V266" stroke="#d6eee3" stroke-width="2"/>
+            <circle cx="278" cy="280" r="32" fill="transparent"/>
+          </g>
+          <path d="M238 212H144" class="label-line"/><text x="62" y="219">粗调</text><path d="M254 280H144" class="label-line"/><text x="62" y="287">细调</text><text x="44" y="316" class="microhint">上下拖动旋钮</text>
+          <g id="illumination">
+            <path d="M116 445H350" stroke="#d99b30" stroke-width="4" fill="none" marker-end="url(#rayArrow)" opacity=".9"/>
+            <path id="reflectedRay" d="M350 445L350 348" stroke="#d99b30" stroke-width="4" fill="none" marker-end="url(#rayArrow)"/>
+            <path id="lightCone" d="M340 348L350 302L360 348Z" fill="#e9b650" opacity=".25"/>
+          </g>
+          <g id="lamp"><path d="M87 424L112 432V458L87 466Z" fill="#ceddd3" stroke="#819c8c" stroke-width="2"/><path d="M86 429H67V460H86Z" fill="#6c8979"/><path d="M75 460V477M59 478H91" stroke="#456957" stroke-width="4"/><text x="40" y="505" class="microhint">侧方灯光</text></g>
+          <path d="M252 343H333V365H252Z M368 343H491V365H368Z" fill="url(#dark)" stroke="#293d31" stroke-width="2"/>
+          <path d="M333 343L337 351H364L368 343" fill="none" stroke="#70877a" stroke-width="3"/>
+          <rect x="288" y="331" width="145" height="11" rx="2" fill="url(#glass)" stroke="#73a49b" stroke-width="1.5"/>
+          <path id="specimenOnSlide" d="M338 335L363 336" stroke="#8c613c" stroke-width="2"/>
+          <path d="M265 324V345H291M453 325V345H432" stroke="#a4b6a8" stroke-width="7" fill="none" stroke-linejoin="round"/>
+          <path d="M493 350L548 367" class="label-line"/><text x="554" y="375">载物台</text>
+          <path id="gapBracket" d="M402 303H413V330H402" fill="none" stroke="#9a8360" stroke-width="1.5"/><text id="gapText" x="424" y="321" class="microhint">间距</text>
+          <path d="M283 449H319M350 450V483" stroke="#536c5b" stroke-width="10" fill="none"/>
+          <g id="mirrorHandle" class="mirror-handle" tabindex="0" role="slider" aria-label="反光镜，左右拖动改变角度" aria-valuemin="20" aria-valuemax="70" aria-valuenow="38">
+            <g id="mirrorSurface" transform="rotate(-38 350 445)">
+              <rect x="308" y="439" width="84" height="15" rx="6" fill="url(#silver)" stroke="#677f70" stroke-width="3"/>
+              <path d="M313 438H387" stroke="#d0e6e1" stroke-width="6" stroke-linecap="round"/>
+            </g>
+            <circle cx="350" cy="445" r="52" fill="transparent"/>
+            <circle cx="350" cy="445" r="6" fill="#087f6d" stroke="#cce5d9" stroke-width="2"/>
+          </g>
+          <path d="M394 445H502" class="label-line"/><text x="512" y="452">反光镜</text><text x="512" y="478" class="microhint">左右拖动</text>
+        </svg>
+      </div>
+      <div class="scene-note" id="focusNote"><button id="raysBtn" aria-pressed="true">光的路径</button><span id="safetyNote">下降时从侧面看，观察时缓缓升起镜筒。</span></div>
+      <div class="locatestage" id="locateStage" hidden>
+        <div class="stageheading"><h2>载玻片上的标本</h2><span>局部俯视 · 拖动玻片</span></div>
+        <div class="slideCanvasWrap" id="slideWrap"><canvas id="slideCanvas" tabindex="0" aria-label="载玻片局部俯视，可拖动或使用方向键移动玻片"></canvas></div>
+        <div class="motionline" id="motionLine">试着把金色目标移到十字中心</div>
+        <div class="slidebuttons"><button id="markBtn" aria-pressed="false">另选目标</button><button id="traceBtn" aria-pressed="false">保留位移起点</button><button id="slideResetBtn">复位玻片</button></div>
+      </div>
+    </section>
+    <section class="eyepiece" aria-label="目镜里看到的图像">
+      <h2>目镜里的视野</h2>
+      <div class="fieldWrap"><canvas id="fieldCanvas" width="600" height="600" aria-label="与显微镜操作同步的圆形模型视野"></canvas></div>
+      <div class="fieldMeta" aria-label="选择物镜"><button id="lowBtn" data-objective="10" aria-pressed="true">物镜 10×</button><button id="highBtn" data-objective="40" aria-pressed="false">物镜 40×</button></div>
+      <p class="magnification">目镜 10× × 物镜 <span id="objectiveRead">10</span>× = <strong id="totalRead">100×</strong></p>
+      <p class="fieldStatus" id="fieldStatus" role="status" aria-live="polite">模型视野 · 调整反光镜与旋钮</p>
+    </section>
+  </div>
+  <div class="toolbar">
+    <div class="control focus-control"><label for="mirrorRange">反光镜<output id="mirrorRead">38°</output></label><div class="rangegroup"><input id="mirrorRange" type="range" min="20" max="70" step=".5" value="38" aria-label="反光镜角度"><div class="endpoints"><span>向左转</span><span>向右转</span></div></div></div>
+    <div class="control focus-control"><label for="coarseRange">粗调<output id="coarseRead">升降镜筒</output></label><div class="rangegroup"><input id="coarseRange" type="range" min="16" max="100" step=".5" value="62" aria-label="粗调镜筒高度"><div class="endpoints"><span>下降</span><span>上升</span></div></div></div>
+    <div class="control focus-control"><span class="control-title">细调</span><div class="finebuttons"><button id="fineDown" aria-label="细调下降，长按连续微调">↓ 降</button><button id="fineUp" aria-label="细调上升，长按连续微调">↑ 升</button></div></div>
+    <div class="locate-tools" id="locateTools" hidden><div><strong>已对光、已调清</strong><br><span>本页专门比较：玻片移动与取景范围</span></div><div class="fov-read">模型视野直径 <b id="fovRead">1.80</b> mm<small>同一目镜，固定观察中心</small></div></div>
+    <button class="primary capture" id="captureBtn"><svg class="icon" viewBox="0 0 24 24"><path d="M4 6h4l2-3h4l2 3h4a2 2 0 0 1 2 2v11H2V8a2 2 0 0 1 2-2Z"/><circle cx="12" cy="12" r="4"/></svg> 保留这一帧</button>
+  </div>
+  <footer class="foot"><span class="footnote" id="modelNote">教学模型 · 结构与间距不按实际比例</span><button id="infoBtn">模型说明</button><span class="watermark">mutiw</span></footer>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="info-layer" id="infoLayer" hidden>
+  <section class="info-dialog" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+    <div class="dialoghead"><h2 id="infoTitle">模型说明与实物观察</h2><button id="infoClose">返回观察</button></div>
+    <p><b>这是帮助解释操作的教学模型。</b>镜体结构、间距、调焦变化与内置标本纹理都经过简化；它们不能作为真实观察或测量的证据。请继续使用实物显微镜，亲自调光、调焦和记录。</p>
+    <p>本模型采用反光镜式显微镜，固定灯光从左侧水平入射。镜面转动会改变反射方向。真实设备的最佳角度取决于光源位置；不要用显微镜对着太阳。</p>
+    <p>两种调焦都改变<b>同一个镜筒位置</b>。物镜切换时不自动调清，40×物镜更长，留给玻片的间隙更小。本模型在高倍关闭粗调，并阻止物镜碰到玻片。实物操作应遵守本机说明和教师指导。</p>
+    <p>总放大倍数＝目镜倍数×物镜倍数，是<b>镜头的标称组合</b>，不是物体在屏幕上的实际放大倍数。放得更大不代表一定获得更多可辨细节。</p>
+    <p>“视野与定位”页固定照明和焦点，专门研究移动与倍率。此处设定目镜视场数 FN＝18 mm；模型视野直径＝FN÷物镜倍数。因此10×、40×物镜对应1.80 mm、0.45 mm的模型视野。该设定不能用于测量导入照片。</p>
+    <p>头发、蝶翅为<b>结构示意</b>；字母 F 是用于比较方向的定位片。导入照片保持原图方向，倍数由使用者填写，默认为未标注。页面不会自动生成观察结论。</p>
+    <p><small>课程依据：本项目五上教材第14—17页，教师教学用书第4课，材料说明书第08—09页。模型关系核对：<a href="https://www.microscopyu.com/microscopy-basics/field-of-view" target="_blank" rel="noopener">Nikon：视野</a>、<a href="https://www.microscopyu.com/microscopy-basics/components" target="_blank" rel="noopener">光学系统</a>、<a href="https://www.microscopyu.com/microscopy-basics/useful-magnification-range" target="_blank" rel="noopener">有效放大</a>。网页 v1.0。</small></p>
+  </section>
+</div>
+<script>
+/* Standalone observation records. Embedded by the lesson's single HTML file. */
+(function (global) {
+  'use strict';
+  var MAX_RECORDS = 4;
+  var DRAW_SIZE = 640;
+  var DRAW_RADIUS = 284;
+  var records = [];
+  var sequence = 0;
+  var selectedId = null;
+  var activeStroke = null;
+  var previousFocus = null;
+  var previousOverflow = '';
+  var config = {};
+  var refs = null;
+  var toastTimer = 0;
+  var pendingPhoto = null;
+  var photoToken = 0;
+  var exporting = false;
+
+  function el(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+  function button(text, className, handler) {
+    var node = el('button', className, text);
+    node.type = 'button';
+    if (handler) node.addEventListener('click', handler);
+    return node;
+  }
+  function clean(value, limit) {
+    return String(value == null ? '' : value).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').trim().slice(0, limit);
+  }
+  function selected() {
+    return records.find(function (record) { return record.id === selectedId; }) || null;
+  }
+  function announce(message) {
+    ensure();
+    refs.status.textContent = message;
+    refs.toast.textContent = message;
+    refs.toast.setAttribute('aria-live', refs.modal.hidden ? 'polite' : 'off');
+    refs.toast.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { refs.toast.hidden = true; }, 3800);
+  }
+  function syncCount() {
+    var target = document.getElementById('recordCount');
+    if (target) target.textContent = String(records.length);
+    if (refs) {
+      refs.exportButton.disabled = !records.length || exporting;
+      refs.importButton.disabled = records.length >= MAX_RECORDS;
+    }
+    try {
+      document.dispatchEvent(new CustomEvent('microrecordschange', { detail: { count: records.length } }));
+    } catch (error) { /* The visible count still works in older engines. */ }
+  }
+
+  function ensure() {
+    if (refs) return;
+    var modal = el('section', 'mr-modal');
+    modal.hidden = true;
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-labelledby', 'mr-title');
+    modal.tabIndex = -1;
+    var head = el('header', 'mr-head');
+    var title = el('h2', '', '我的观察记录');
+    title.id = 'mr-title';
+    var headActions = el('div', 'mr-head-actions');
+    var importButton = button('导入照片', '', choosePhoto);
+    var exportButton = button('导出 PNG', 'mr-primary', exportRecords);
+    var closeButton = button('返回观察', 'mr-close', close);
+    closeButton.setAttribute('aria-label', '关闭观察记录，返回观察');
+    headActions.appendChild(importButton);
+    headActions.appendChild(exportButton);
+    headActions.appendChild(closeButton);
+    head.appendChild(title);
+    head.appendChild(headActions);
+
+    var scroll = el('div', 'mr-scroll');
+    var workspace = el('div', 'mr-workspace');
+    var empty = el('p', 'mr-empty', '先保留目镜画面，或导入自己的照片。');
+    var gallery = el('div', 'mr-gallery');
+    gallery.setAttribute('aria-label', '已保留的观察画面，点击选择要记录的一帧');
+
+    var importPanel = el('form', 'mr-import');
+    importPanel.hidden = true;
+    importPanel.setAttribute('aria-label', '填写导入照片的信息');
+    var importTitle = el('h3', '', '给照片留下必要的信息');
+    var importLayout = el('div', 'mr-import-layout');
+    var preview = el('img', 'mr-import-preview');
+    preview.alt = '待加入记录的照片';
+    var sampleLabel = el('label', 'mr-field', '观察物名称（可不填）');
+    var sampleInput = el('input');
+    sampleInput.type = 'text';
+    sampleInput.maxLength = 40;
+    sampleInput.placeholder = '如：头发';
+    sampleInput.autocomplete = 'off';
+    sampleLabel.appendChild(sampleInput);
+    var magLabel = el('label', 'mr-field', '拍摄时的倍率（可不填）');
+    var magInput = el('input');
+    magInput.type = 'text';
+    magInput.maxLength = 24;
+    magInput.placeholder = '不知道时留空';
+    magInput.autocomplete = 'off';
+    magLabel.appendChild(magInput);
+    importLayout.appendChild(preview);
+    importLayout.appendChild(sampleLabel);
+    importLayout.appendChild(magLabel);
+    var importTools = el('div', 'mr-tools');
+    var confirmImport = button('加入记录', 'mr-primary');
+    confirmImport.type = 'submit';
+    importTools.appendChild(confirmImport);
+    importTools.appendChild(button('取消', '', cancelPhoto));
+    importPanel.appendChild(importTitle);
+    importPanel.appendChild(importLayout);
+    importPanel.appendChild(el('p', 'mr-import-note', '标记为“导入照片”；图片本身不能告诉我们显微镜倍率。'));
+    importPanel.appendChild(importTools);
+    importPanel.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!pendingPhoto) return;
+      var result = add({
+        image: pendingPhoto,
+        sample: clean(sampleInput.value, 40) || '未命名照片',
+        source: '导入照片',
+        magnification: clean(magInput.value, 24) || '未标注',
+        details: clean(magInput.value, 24) ? '倍率由使用者填写；图片尺寸未作测量校准。' : '未标注拍摄倍率；图片尺寸未作测量校准。'
+      });
+      if (result !== false) {
+        cancelPhoto();
+        refs.canvas.focus();
+      }
+    });
+
+    var editor = el('section', 'mr-editor');
+    var drawingWrap = el('div', 'mr-draw-wrap');
+    var canvas = el('canvas', 'mr-canvas');
+    canvas.width = DRAW_SIZE;
+    canvas.height = DRAW_SIZE;
+    canvas.tabIndex = 0;
+    canvas.setAttribute('aria-label', '空白圆形观察图，用鼠标或手指绘画');
+    var drawingPrompt = el('div', 'mr-draw-prompt', '在圈内画出观察到的特征');
+    drawingWrap.appendChild(canvas);
+    drawingWrap.appendChild(drawingPrompt);
+    var editorCopy = el('div', 'mr-editor-copy');
+    var editorTitle = el('h3');
+    var editorMeta = el('p', 'mr-editor-meta');
+    var editorInstruction = el('p', '', '点选上方画面，再用手指或鼠标画出你看到的特征。');
+    var tools = el('div', 'mr-tools');
+    var undoButton = button('撤销一笔', '', undo);
+    var clearButton = button('清空图画', '', clearDrawing);
+    tools.appendChild(undoButton);
+    tools.appendChild(clearButton);
+    editorCopy.appendChild(editorTitle);
+    editorCopy.appendChild(editorMeta);
+    editorCopy.appendChild(editorInstruction);
+    editorCopy.appendChild(tools);
+    editor.appendChild(drawingWrap);
+    editor.appendChild(editorCopy);
+
+    workspace.appendChild(importPanel);
+    workspace.appendChild(empty);
+    workspace.appendChild(gallery);
+    workspace.appendChild(editor);
+    scroll.appendChild(workspace);
+    var foot = el('footer', 'mr-foot');
+    var status = el('p', 'mr-status');
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    var reminder = el('p', 'mr-save-reminder', '记录保留在当前页，刷新前请导出。');
+    foot.appendChild(status);
+    foot.appendChild(reminder);
+    var fileInput = el('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.hidden = true;
+    fileInput.addEventListener('change', function () {
+      if (fileInput.files && fileInput.files[0]) preparePhoto(fileInput.files[0]);
+    });
+    var toast = el('div', 'mr-toast');
+    toast.hidden = true;
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    modal.appendChild(head);
+    modal.appendChild(scroll);
+    modal.appendChild(foot);
+    modal.appendChild(fileInput);
+    document.body.appendChild(modal);
+    document.body.appendChild(toast);
+    refs = {
+      modal: modal, closeButton: closeButton, importButton: importButton, exportButton: exportButton,
+      scroll: scroll, empty: empty, gallery: gallery, editor: editor, canvas: canvas,
+      drawingPrompt: drawingPrompt, editorTitle: editorTitle, editorMeta: editorMeta,
+      undoButton: undoButton, clearButton: clearButton, status: status, toast: toast,
+      fileInput: fileInput, importPanel: importPanel, preview: preview,
+      sampleInput: sampleInput, magInput: magInput
+    };
+    canvas.addEventListener('pointerdown', startStroke);
+    canvas.addEventListener('pointermove', moveStroke);
+    canvas.addEventListener('pointerup', endStroke);
+    canvas.addEventListener('pointercancel', endStroke);
+    canvas.addEventListener('lostpointercapture', endStroke);
+    modal.addEventListener('keydown', handleKeys);
+    render();
+  }
+
+  function init(options) {
+    if (options && typeof options === 'object') config = options;
+    ensure();
+    return api;
+  }
+  function open() {
+    ensure();
+    if (!refs.modal.hidden) return;
+    previousFocus = document.activeElement;
+    previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    refs.modal.hidden = false;
+    render();
+    refs.closeButton.focus();
+  }
+  function close() {
+    if (!refs || refs.modal.hidden) return;
+    finishStroke();
+    refs.modal.hidden = true;
+    document.body.style.overflow = previousOverflow;
+    if (previousFocus && previousFocus.isConnected && typeof previousFocus.focus === 'function') previousFocus.focus();
+    if (typeof config.onClose === 'function') config.onClose();
+  }
+  function add(payload) {
+    ensure();
+    if (records.length >= MAX_RECORDS) {
+      announce('最多保留4帧。请先在观察记录中删除一帧，再添加。');
+      return false;
+    }
+    if (!payload || typeof payload.image !== 'string' || !/^data:image\/(png|jpe?g|webp|gif|bmp);base64,/i.test(payload.image)) {
+      announce('没有可保存的图像，请重新保留画面。');
+      return false;
+    }
+    finishStroke();
+    var record = {
+      id: ++sequence,
+      image: payload.image,
+      sample: clean(payload.sample, 60) || '未命名观察物',
+      source: payload.source === '导入照片' ? '导入照片' : '模型示意',
+      magnification: clean(payload.magnification, 60) || '未标注',
+      details: clean(payload.details, 200),
+      strokes: []
+    };
+    records.push(record);
+    selectedId = record.id;
+    render();
+    announce('已保留第' + records.length + '帧，可继续比较或画观察图。');
+    return records.length;
+  }
+  function remove(id) {
+    finishStroke();
+    var index = records.findIndex(function (record) { return record.id === id; });
+    if (index < 0) return;
+    records.splice(index, 1);
+    if (selectedId === id) selectedId = records.length ? records[Math.min(index, records.length - 1)].id : null;
+    render();
+    announce('已删除这一帧及它的观察图。');
+    var nextFocus = refs.gallery.querySelector('.mr-selected .mr-select') || refs.importButton;
+    if (!refs.modal.hidden) nextFocus.focus();
+  }
+  function select(id) {
+    finishStroke();
+    selectedId = id;
+    render();
+    var nextFocus = refs.gallery.querySelector('.mr-selected .mr-select');
+    if (!refs.modal.hidden && nextFocus) nextFocus.focus();
+  }
+  function render() {
+    if (!refs) return;
+    refs.gallery.textContent = '';
+    refs.gallery.dataset.count = String(records.length);
+    refs.empty.hidden = records.length > 0;
+    refs.gallery.hidden = !records.length;
+    refs.editor.hidden = !records.length;
+    records.forEach(function (record, index) {
+      var card = el('article', 'mr-card' + (record.id === selectedId ? ' mr-selected' : ''));
+      var choose = button('', 'mr-select', function () { select(record.id); });
+      choose.setAttribute('aria-pressed', record.id === selectedId ? 'true' : 'false');
+      choose.setAttribute('aria-label', '选择第' + (index + 1) + '帧：' + record.sample + '，' + record.source + '，倍率' + record.magnification);
+      var top = el('span', 'mr-card-top');
+      top.appendChild(el('span', 'mr-number', '第' + (index + 1) + '帧'));
+      top.appendChild(el('span', 'mr-source', record.source));
+      var image = el('img', 'mr-source-image');
+      image.src = record.image;
+      image.alt = record.sample + '的' + record.source;
+      image.draggable = false;
+      choose.appendChild(top);
+      choose.appendChild(image);
+      choose.appendChild(el('span', 'mr-sample', record.sample));
+      choose.appendChild(el('span', 'mr-magnification', '倍率：' + record.magnification));
+      var bottom = el('div', 'mr-card-bottom');
+      bottom.appendChild(el('span', 'mr-edit-status', record.id === selectedId ? '正在记录' : '点击作图'));
+      var deleteButton = button('删除', 'mr-delete', function () { remove(record.id); });
+      deleteButton.setAttribute('aria-label', '删除第' + (index + 1) + '帧和它的观察图');
+      bottom.appendChild(deleteButton);
+      card.appendChild(choose);
+      card.appendChild(bottom);
+      refs.gallery.appendChild(card);
+    });
+    var current = selected();
+    if (current) {
+      var index = records.indexOf(current) + 1;
+      refs.editorTitle.textContent = '第' + index + '帧 · 我的观察图';
+      refs.editorMeta.textContent = current.sample + ' · ' + current.source + ' · 倍率 ' + current.magnification;
+    }
+    redraw();
+    syncCount();
+  }
+
+  function drawLines(context, strokes, size) {
+    var scale = size / DRAW_SIZE;
+    context.save();
+    context.beginPath();
+    context.arc(size / 2, size / 2, DRAW_RADIUS * scale - 2, 0, Math.PI * 2);
+    context.clip();
+    context.strokeStyle = '#193832';
+    context.fillStyle = '#193832';
+    context.lineWidth = 4.5 * scale;
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+    strokes.forEach(function (stroke) {
+      if (!stroke.length) return;
+      if (stroke.length === 1) {
+        context.beginPath();
+        context.arc(stroke[0].x * size, stroke[0].y * size, 2.25 * scale, 0, Math.PI * 2);
+        context.fill();
+        return;
+      }
+      context.beginPath();
+      context.moveTo(stroke[0].x * size, stroke[0].y * size);
+      for (var i = 1; i < stroke.length; i++) context.lineTo(stroke[i].x * size, stroke[i].y * size);
+      context.stroke();
+    });
+    context.restore();
+  }
+  function drawObservation(context, strokes, size) {
+    context.clearRect(0, 0, size, size);
+    context.fillStyle = '#ffffff';
+    context.beginPath();
+    context.arc(size / 2, size / 2, DRAW_RADIUS / DRAW_SIZE * size, 0, Math.PI * 2);
+    context.fill();
+    context.strokeStyle = '#829b8c';
+    context.lineWidth = 2.2 * size / DRAW_SIZE;
+    context.stroke();
+    drawLines(context, strokes, size);
+  }
+  function redraw() {
+    var current = selected();
+    var strokes = current ? current.strokes : [];
+    var context = refs.canvas.getContext('2d');
+    if (!context) {
+      refs.status.textContent = '当前浏览器不支持二维绘图，可保留和比较图像。';
+      return;
+    }
+    drawObservation(context, strokes, DRAW_SIZE);
+    refs.drawingPrompt.hidden = strokes.length > 0;
+    refs.undoButton.disabled = !strokes.length;
+    refs.clearButton.disabled = !strokes.length;
+  }
+  function pointFromEvent(event) {
+    var bounds = refs.canvas.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) return null;
+    return { x: (event.clientX - bounds.left) / bounds.width, y: (event.clientY - bounds.top) / bounds.height };
+  }
+  function startStroke(event) {
+    if ((event.pointerType === 'mouse' && event.button !== 0) || activeStroke) return;
+    var current = selected();
+    var point = pointFromEvent(event);
+    if (!current || !point) return;
+    var dx = point.x - .5, dy = point.y - .5;
+    if (dx * dx + dy * dy > Math.pow(DRAW_RADIUS / DRAW_SIZE, 2)) return;
+    event.preventDefault();
+    var stroke = [point];
+    current.strokes.push(stroke);
+    activeStroke = { pointerId: event.pointerId, recordId: current.id, stroke: stroke };
+    if (refs.canvas.setPointerCapture) refs.canvas.setPointerCapture(event.pointerId);
+    redraw();
+  }
+  function moveStroke(event) {
+    if (!activeStroke || activeStroke.pointerId !== event.pointerId) return;
+    event.preventDefault();
+    var point = pointFromEvent(event);
+    if (!point) return;
+    var last = activeStroke.stroke[activeStroke.stroke.length - 1];
+    var dx = point.x - last.x, dy = point.y - last.y;
+    if (dx * dx + dy * dy < .000002) return;
+    activeStroke.stroke.push(point);
+    redraw();
+  }
+  function endStroke(event) {
+    if (!activeStroke || activeStroke.pointerId !== event.pointerId) return;
+    if (event.type === 'pointerup') moveStroke(event);
+    finishStroke();
+  }
+  function finishStroke() {
+    if (!activeStroke) return;
+    var pointerId = activeStroke.pointerId;
+    activeStroke = null;
+    if (refs && refs.canvas.hasPointerCapture && refs.canvas.hasPointerCapture(pointerId)) refs.canvas.releasePointerCapture(pointerId);
+  }
+  function undo() {
+    finishStroke();
+    var current = selected();
+    if (!current || !current.strokes.length) return;
+    current.strokes.pop();
+    redraw();
+  }
+  function clearDrawing() {
+    finishStroke();
+    var current = selected();
+    if (!current || !current.strokes.length) return;
+    current.strokes = [];
+    redraw();
+    announce('已清空这一帧的手绘图，保留画面仍在。');
+  }
+
+  function handleKeys(event) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!refs.importPanel.hidden) cancelPhoto();
+      else close();
+      return;
+    }
+    if (event.key !== 'Tab') return;
+    var nodes = Array.prototype.slice.call(refs.modal.querySelectorAll('button:not([disabled]), input:not([disabled]):not([type="file"]), [tabindex="0"]')).filter(function (node) { return node.getClientRects().length > 0; });
+    if (!nodes.length) { event.preventDefault(); refs.modal.focus(); return; }
+    var first = nodes[0], last = nodes[nodes.length - 1];
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === refs.modal)) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  }
+
+  function choosePhoto() {
+    ensure();
+    if (records.length >= MAX_RECORDS) { announce('已经保留4帧，请删除一帧后再导入照片。'); return; }
+    refs.fileInput.click();
+  }
+  function cancelPhoto() {
+    photoToken++;
+    pendingPhoto = null;
+    if (!refs) return;
+    refs.importPanel.hidden = true;
+    refs.preview.removeAttribute('src');
+    refs.sampleInput.value = '';
+    refs.magInput.value = '';
+  }
+  function preparePhoto(file) {
+    if (!file.type || file.type.indexOf('image/') !== 0 || file.type === 'image/svg+xml') {
+      announce('请选择 JPG、PNG 或 WebP 等照片文件。');
+      refs.fileInput.value = '';
+      return;
+    }
+    if (file.size > 25 * 1024 * 1024) {
+      announce('这张照片较大，请先缩小到25 MB以内再导入。');
+      refs.fileInput.value = '';
+      return;
+    }
+    var token = ++photoToken;
+    // Read the selected bytes into an independent data URL before clearing the
+    // input. This avoids a blob-URL image fetch and its separate CSP/lifetime
+    // constraints; the lesson's saved frames already use the same data route.
+    var reader = new FileReader();
+    var photo = new Image();
+    refs.status.textContent = '正在读取照片……';
+    photo.onload = function () {
+      if (token !== photoToken) return;
+      try {
+        if (!photo.naturalWidth || !photo.naturalHeight) throw new Error('Empty image');
+        var scale = Math.min(1, 1440 / Math.max(photo.naturalWidth, photo.naturalHeight));
+        var canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(photo.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(photo.naturalHeight * scale));
+        var context = canvas.getContext('2d');
+        if (!context) throw new Error('Canvas unavailable');
+        context.fillStyle = '#fff';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(photo, 0, 0, canvas.width, canvas.height);
+        pendingPhoto = canvas.toDataURL('image/jpeg', .9);
+        refs.preview.src = pendingPhoto;
+        refs.sampleInput.value = '';
+        refs.magInput.value = '';
+        refs.importPanel.hidden = false;
+        refs.scroll.scrollTop = 0;
+        refs.status.textContent = '照片只在本页处理。补充信息后点击“加入记录”。';
+        refs.sampleInput.focus();
+      } catch (error) {
+        pendingPhoto = null;
+        announce('照片未能读取，请改用 JPG 或 PNG 格式再试。');
+      }
+    };
+    photo.onerror = function () {
+      if (token === photoToken) announce('已读到照片文件，但浏览器未能解码图片。请尝试 JPG 或 PNG 格式。');
+    };
+    reader.onload = function () {
+      if (token !== photoToken) return;
+      var data = reader.result;
+      refs.fileInput.value = '';
+      if (typeof data !== 'string' || data.indexOf('data:') !== 0) {
+        announce('没有读到照片内容，请重新选择文件。');
+        return;
+      }
+      refs.status.textContent = '正在解析照片……';
+      photo.src = data;
+    };
+    reader.onerror = function () {
+      if (token !== photoToken) return;
+      refs.fileInput.value = '';
+      announce('照片文件读取失败，请重新选择一张可在设备中打开的图片。');
+    };
+    reader.onabort = function () {
+      if (token !== photoToken) return;
+      refs.fileInput.value = '';
+      announce('照片读取已中断，请重新选择文件。');
+    };
+    try {
+      reader.readAsDataURL(file);
+    } catch (error) {
+      if (token !== photoToken) return;
+      refs.fileInput.value = '';
+      announce('无法读取所选照片，请重新选择文件。');
+    }
+  }
+
+  function loadImage(source) {
+    return new Promise(function (resolve, reject) {
+      var image = new Image();
+      image.onload = function () { resolve(image); };
+      image.onerror = function () { reject(new Error('Image failed to load')); };
+      image.src = source;
+    });
+  }
+  function fitImage(context, image, x, y, width, height) {
+    var factor = Math.min(width / image.naturalWidth, height / image.naturalHeight);
+    var w = image.naturalWidth * factor, h = image.naturalHeight * factor;
+    context.drawImage(image, x + (width - w) / 2, y + (height - h) / 2, w, h);
+  }
+  function wrapText(context, value, x, y, maxWidth, lineHeight, maxLines) {
+    var chars = Array.from(value), line = '', rows = [];
+    chars.forEach(function (character) {
+      if (character === '\n' || (line && context.measureText(line + character).width > maxWidth)) {
+        rows.push(line); line = character === '\n' ? '' : character;
+      } else line += character;
+    });
+    if (line) rows.push(line);
+    rows.slice(0, maxLines).forEach(function (row, i) {
+      if (i === maxLines - 1 && rows.length > maxLines) {
+        while (row && context.measureText(row + '…').width > maxWidth) row = row.slice(0, -1);
+        row += '…';
+      }
+      context.fillText(row, x, y + i * lineHeight);
+    });
+  }
+  async function exportRecords() {
+    if (exporting || !records.length) return;
+    finishStroke();
+    exporting = true;
+    syncCount();
+    refs.exportButton.textContent = '正在导出…';
+    var snapshot = records.map(function (record) {
+      return {
+        image: record.image, sample: record.sample, source: record.source,
+        magnification: record.magnification, details: record.details,
+        strokes: record.strokes.map(function (stroke) { return stroke.map(function (point) { return { x: point.x, y: point.y }; }); })
+      };
+    });
+    try {
+      var images = await Promise.all(snapshot.map(function (record) { return loadImage(record.image); }));
+      var width = 1400, rowHeight = 590, top = 130;
+      var output = document.createElement('canvas');
+      output.width = width;
+      output.height = top + snapshot.length * rowHeight + 70;
+      var context = output.getContext('2d');
+      if (!context) throw new Error('Canvas unavailable');
+      context.fillStyle = '#fff';
+      context.fillRect(0, 0, output.width, output.height);
+      context.fillStyle = '#193832';
+      context.font = 'bold 40px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif';
+      context.fillText('显微镜观察记录', 56, 62);
+      context.font = '24px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif';
+      context.fillStyle = '#587164';
+      context.fillText('保留的画面与我的观察图', 56, 101);
+      snapshot.forEach(function (record, index) {
+        var y = top + index * rowHeight;
+        context.fillStyle = '#193832';
+        context.font = 'bold 28px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif';
+        wrapText(context, '第' + (index + 1) + '帧  ' + record.sample, 56, y + 32, 1260, 34, 1);
+        context.font = '24px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif';
+        context.fillStyle = '#476357';
+        wrapText(context, record.source + '  |  倍率：' + record.magnification, 56, y + 69, 1260, 30, 1);
+        if (record.details) {
+          context.font = '21px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif';
+          wrapText(context, record.details, 56, y + 100, 1260, 27, 2);
+        }
+        context.fillStyle = '#f4f7f5';
+        context.fillRect(56, y + 145, 590, 380);
+        fitImage(context, images[index], 66, y + 155, 570, 360);
+        var drawing = document.createElement('canvas');
+        drawing.width = 400; drawing.height = 400;
+        var drawingContext = drawing.getContext('2d');
+        if (!drawingContext) throw new Error('Canvas unavailable');
+        drawObservation(drawingContext, record.strokes, 400);
+        context.drawImage(drawing, 820, y + 135);
+        context.font = '24px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif';
+        context.fillStyle = '#193832';
+        context.fillText('保留画面', 56, y + 562);
+        context.fillText('我的观察图', 845, y + 562);
+        context.strokeStyle = '#d6e1dd';
+        context.lineWidth = 1;
+        context.beginPath(); context.moveTo(56, y + 580); context.lineTo(1344, y + 580); context.stroke();
+      });
+      context.font = '22px system-ui, "PingFang SC", "Microsoft YaHei", sans-serif';
+      context.fillStyle = '#587164';
+      context.fillText('“模型示意”用于理解操作和关系，不是实拍观测；未填写的照片倍率保留为“未标注”。', 56, output.height - 28);
+      var blob = await new Promise(function (resolve, reject) {
+        output.toBlob(function (result) { if (result) resolve(result); else reject(new Error('PNG export failed')); }, 'image/png');
+      });
+      var url = URL.createObjectURL(blob);
+      var anchor = el('a');
+      var now = new Date();
+      var date = String(now.getFullYear()) + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0');
+      anchor.download = '显微镜观察记录_' + date + '.png';
+      anchor.href = url;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 15000);
+      announce('已生成 PNG，请查看浏览器的下载文件。');
+    } catch (error) {
+      announce('本次导出失败，记录仍在本页。请换用支持下载的浏览器重试。');
+    } finally {
+      exporting = false;
+      refs.exportButton.textContent = '导出 PNG';
+      syncCount();
+    }
+  }
+
+  var api = { init: init, add: add, open: open, close: close, count: function () { return records.length; } };
+  global.MicroRecords = api;
+})(window);
+
+</script>
+<script>
+'use strict';
+// Model parameters and specimen drawing functions are kept separate from state and UI.
+// Replace drawSpecimen() to change art. Keep the shared coordinate transform unchanged.
+const PARAMS={ocular:10,fieldNumber:18,lowFocus:52,highFocus:52.5,minH:16,maxH:100,stageY:331,lowTipY:302,highExtension:20,heightScale:.65,mirrorY:445,holeY:348,holeHalf:17};
+const SAMPLE_NAMES={hair:'头发',wing:'蝶翅',letter:'字母 F 定位片'};
+function initialFocus(){return{sample:'hair',objective:10,h:58,angle:42,rays:true};}
+function initialLocate(){return{sample:'letter',objective:10,x:0,y:0,target:{x:-220,y:-260},trace:null,marking:false};}
+const appState={page:'focus',focus:initialFocus(),locate:initialLocate()};
+const $=function(id){return document.getElementById(id);};
+const fieldCanvas=$('fieldCanvas'),fieldCtx=fieldCanvas.getContext('2d'),slideCanvas=$('slideCanvas'),slideCtx=slideCanvas.getContext('2d');
+const specimenCanvas=document.createElement('canvas');specimenCanvas.width=600;specimenCanvas.height=600;const specimenCtx=specimenCanvas.getContext('2d');
+let framePending=false,toastTimer=null,slideGeom={w:600,h:400,cx:300,cy:200,k:.12},fieldMeta=null,lastPointer=null;
+function clamp(v,a,b){return Math.min(b,Math.max(a,v));}
+function current(){return appState[appState.page];}
+function gapFor(h,obj){return PARAMS.stageY-(PARAMS.lowTipY-(h-52)*PARAMS.heightScale+(obj===40?PARAMS.highExtension:0));}
+function minimumHeight(obj){return Math.max(PARAMS.minH,52+(4-PARAMS.stageY+PARAMS.lowTipY+(obj===40?PARAMS.highExtension:0))/PARAMS.heightScale);}
+function optics(s,page){
+  const fov=PARAMS.fieldNumber/s.objective;
+  let light=1,blur=0,rayX=350;
+  if(page==='focus'){
+    const a=s.angle*Math.PI/180,dx=Math.cos(2*a),dy=-Math.sin(2*a),len=(PARAMS.holeY-PARAMS.mirrorY)/dy;
+    rayX=350+dx*len;
+    const off=Math.abs(rayX-350),entrance=clamp(1-off/(PARAMS.holeHalf+13),0,1);
+    light=.018+.982*entrance*entrance;
+    const focus=s.objective===40?PARAMS.highFocus:PARAMS.lowFocus;
+    blur=Math.min(20,Math.abs(s.h-focus)*(s.objective===40?3.2:.7));
+  }
+  return{fov:fov,total:PARAMS.ocular*s.objective,light:light,blur:blur,rayX:rayX,scale:600/(fov*1000),gap:page==='focus'?gapFor(s.h,s.objective):null};
+}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').classList.remove('show');},3300);}
+function requestRender(){if(!framePending){framePending=true;requestAnimationFrame(function(){framePending=false;render();});}}
+function setHeight(v){
+  const s=appState.focus,min=minimumHeight(s.objective);let next=clamp(v,min,PARAMS.maxH);
+  if(v<min){toast('已停在安全间隙：从侧面看物镜，避免碰到玻片。');}
+  s.h=next;requestRender();
+}
+function specimenPath(c,sample){
+  if(sample==='letter'){
+    c.beginPath();c.moveTo(-290,-420);c.lineTo(320,-420);c.lineTo(320,-250);c.lineTo(-100,-250);c.lineTo(-100,-70);c.lineTo(230,-70);c.lineTo(230,95);c.lineTo(-100,95);c.lineTo(-100,420);c.lineTo(-290,420);c.closePath();
+  }else if(sample==='hair'){
+    c.beginPath();c.moveTo(-2600,-740);c.bezierCurveTo(-1100,-350,1000,430,2600,780);c.lineTo(2600,860);c.bezierCurveTo(1000,505,-1100,-270,-2600,-660);c.closePath();
+  }
+}
+function drawSpecimen(c,sample){
+  c.save();
+  if(sample==='letter'){
+    specimenPath(c,sample);c.fillStyle='#394c42';c.fill();c.strokeStyle='#2d4037';c.lineWidth=7;c.stroke();
+    c.fillStyle='#eadfc7';for(let i=0;i<55;i++){let x=-265+((i*97)%540),y=-390+((i*53)%760);if(x<-120||y<-270||(y>-55&&y<70&&x<210)){c.beginPath();c.ellipse(x,y,3+(i%5),2,0,0,Math.PI*2);c.fill();}}
+  }else if(sample==='hair'){
+    specimenPath(c,sample);
+    let g=c.createLinearGradient(0,-65,0,70);g.addColorStop(0,'#74533b');g.addColorStop(.4,'#b68a60');g.addColorStop(.7,'#89603d');g.addColorStop(1,'#604932');c.fillStyle=g;c.fill();c.lineWidth=3;c.strokeStyle='#70523a';c.stroke();c.clip();
+    c.strokeStyle='#d1ac7c';c.lineWidth=3;
+    for(let i=-50;i<53;i++){let x=i*52,y=.30*x+35*Math.sin(x/800);c.beginPath();c.moveTo(x-30,y-70);c.quadraticCurveTo(x+18,y-10,x-18,y+70);c.stroke();}
+    c.strokeStyle='#59443370';c.lineWidth=4;c.beginPath();c.moveTo(-2700,-770);c.bezierCurveTo(-1100,-315,1000,465,2700,850);c.stroke();
+  }else if(sample==='wing'){
+    // Deterministic, overlapping scale-like forms. Not a photograph or measured specimen.
+    c.fillStyle='#e7cf9e';c.fillRect(-3000,-2200,6000,4400);
+    const colors=['#d6a45c','#bb7d39','#deb776','#b8884d','#e3c28a'];
+    for(let row=-17;row<18;row++){for(let col=-17;col<18;col++){
+      let x=col*168+(row%2)*82,y=row*139,seed=((col+30)*7+(row+30)*11)%5;
+      c.save();c.translate(x,y);c.rotate(-.10+.035*seed);
+      c.beginPath();c.moveTo(-56,-98);c.quadraticCurveTo(-72,-62,-66,13);c.quadraticCurveTo(-55,56,-36,81);c.lineTo(-19,67);c.lineTo(-2,86);c.lineTo(17,65);c.lineTo(35,79);c.quadraticCurveTo(67,43,65,-4);c.quadraticCurveTo(74,-66,53,-98);c.closePath();
+      c.fillStyle=colors[seed];c.fill();c.strokeStyle='#86572c80';c.lineWidth=2.5;c.stroke();
+      c.strokeStyle='#fff1cf65';c.lineWidth=2;
+      for(let rid=-3;rid<4;rid++){c.beginPath();c.moveTo(rid*14,-88);c.quadraticCurveTo(rid*17,-5,rid*12,55);c.stroke();}
+      c.restore();
+    }}
+  }
+  c.restore();
+}
+function drawArrow(c,x1,y1,x2,y2,color,width,dash){
+  let dx=x2-x1,dy=y2-y1,d=Math.hypot(dx,dy);if(d<5)return;
+  let a=Math.atan2(dy,dx),size=10;
+  c.save();c.strokeStyle=color;c.fillStyle=color;c.lineWidth=width||3;c.setLineDash(dash?[6,5]:[]);c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();c.setLineDash([]);c.beginPath();c.moveTo(x2,y2);c.lineTo(x2-size*Math.cos(a-.4),y2-size*Math.sin(a-.4));c.lineTo(x2-size*Math.cos(a+.4),y2-size*Math.sin(a+.4));c.closePath();c.fill();c.restore();
+}
+function targetDot(c,x,y,size){c.save();c.strokeStyle='#b9780b';c.fillStyle='#ffdc72';c.lineWidth=2;c.beginPath();c.arc(x,y,size||7,0,Math.PI*2);c.fill();c.stroke();c.beginPath();c.moveTo(x-11,y);c.lineTo(x+11,y);c.moveTo(x,y-11);c.lineTo(x,y+11);c.stroke();c.restore();}
+function drawField(s,o){
+  let c=fieldCtx,n=600,k=o.scale,locate=appState.page==='locate';
+  specimenCtx.clearRect(0,0,n,n);specimenCtx.save();specimenCtx.translate(n/2,n/2);specimenCtx.scale(-k,-k);if(locate)specimenCtx.translate(s.x,s.y);specimenCtx.beginPath();specimenCtx.rect(-2040,-1000,4080,2000);specimenCtx.clip();drawSpecimen(specimenCtx,s.sample);specimenCtx.restore();
+  c.clearRect(0,0,n,n);c.fillStyle='#faf7ef';c.fillRect(0,0,n,n);
+  c.save();if('filter' in c){c.filter='blur('+o.blur.toFixed(2)+'px)';c.drawImage(specimenCanvas,0,0);}
+  else if(o.blur>.7){let small=document.createElement('canvas');small.width=small.height=Math.max(20,Math.round(n/(1+o.blur*1.5)));small.getContext('2d').drawImage(specimenCanvas,0,0,small.width,small.height);c.imageSmoothingEnabled=true;c.drawImage(small,0,0,n,n);}else c.drawImage(specimenCanvas,0,0);c.restore();
+  if(!locate){c.fillStyle='rgba(4,12,8,'+(1-o.light).toFixed(4)+')';c.fillRect(0,0,n,n);}
+  if(locate){
+    c.save();c.strokeStyle='#506f6155';c.lineWidth=1.4;c.setLineDash([7,8]);c.beginPath();c.moveTo(300,0);c.lineTo(300,600);c.moveTo(0,300);c.lineTo(600,300);c.stroke();c.restore();
+    const t=s.target,tx=300-(t.x+s.x)*k,ty=300-(t.y+s.y)*k;
+    if(s.trace){const ox=300-(t.x+s.trace.x)*k,oy=300-(t.y+s.trace.y)*k;c.save();c.strokeStyle='#b67b2e80';c.lineWidth=2;c.setLineDash([6,5]);c.beginPath();c.arc(ox,oy,10,0,Math.PI*2);c.stroke();c.restore();drawArrow(c,ox,oy,tx,ty,'#be861f',3,false);}
+    targetDot(c,tx,ty,7);
+  }
+  c.save();let vign=c.createRadialGradient(300,300,210,300,300,305);vign.addColorStop(0,'#102e1b00');vign.addColorStop(1,'#102e1b15');c.fillStyle=vign;c.fillRect(0,0,n,n);c.restore();
+}
+function drawSlide(s,o){
+  const r=slideCanvas.getBoundingClientRect();if(r.width<1||r.height<1)return;
+  const dpr=Math.min(window.devicePixelRatio||1,2),w=Math.round(r.width),h=Math.round(r.height);
+  if(slideCanvas.width!==Math.round(w*dpr)||slideCanvas.height!==Math.round(h*dpr)){slideCanvas.width=Math.round(w*dpr);slideCanvas.height=Math.round(h*dpr);}
+  const c=slideCtx,k=Math.min(w/4300,h/2800),cx=w*.5,cy=h*.48;slideGeom={w:w,h:h,cx:cx,cy:cy,k:k};
+  c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
+  // Stationary microscope stage. The slide, specimen and target share one translation.
+  c.fillStyle='#dce8e2';roundRect(c,16,20,w-32,h-38,12);c.fill();c.strokeStyle='#a6bdb1';c.lineWidth=1;c.stroke();
+  c.fillStyle='#334a3e';roundRect(c,34,37,w-68,h-73,12);c.fill();
+  c.save();c.beginPath();c.rect(35,38,w-70,h-75);c.clip();c.translate(cx+s.x*k,cy+s.y*k);
+  c.fillStyle='#eaf5ed';roundRect(c,-2100*k,-1050*k,4200*k,2100*k,6);c.fill();c.strokeStyle='#91b9a5';c.lineWidth=2;c.stroke();
+  c.save();c.beginPath();c.rect(-2040*k,-1000*k,4080*k,2000*k);c.clip();c.scale(k,k);drawSpecimen(c,s.sample);c.restore();
+  targetDot(c,s.target.x*k,s.target.y*k,6);
+  c.strokeStyle='#638a76';c.lineWidth=2;c.beginPath();c.moveTo(-1880*k,-860*k);c.lineTo(-1580*k,-860*k);c.lineTo(-1580*k,-600*k);c.stroke();c.restore();
+  const radius=(o.fov*1000/2)*k,lowRadius=900*k;
+  c.save();c.fillStyle='#eff5f4b5';c.beginPath();c.rect(34,37,w-68,h-73);c.arc(cx,cy,radius,0,Math.PI*2,true);c.fill('evenodd');
+  if(s.objective===40){c.strokeStyle='#e4f3e5bb';c.setLineDash([6,5]);c.lineWidth=2;c.beginPath();c.arc(cx,cy,lowRadius,0,Math.PI*2);c.stroke();c.setLineDash([]);}
+  c.strokeStyle='#087f6d';c.lineWidth=3;c.beginPath();c.arc(cx,cy,radius,0,Math.PI*2);c.stroke();
+  c.strokeStyle='#087f6d';c.lineWidth=1.6;c.beginPath();c.moveTo(cx-15,cy);c.lineTo(cx+15,cy);c.moveTo(cx,cy-15);c.lineTo(cx,cy+15);c.stroke();
+  c.fillStyle='#193832';c.font='600 15px system-ui,"Microsoft YaHei",sans-serif';c.textAlign='center';c.fillText('物镜取景范围',cx,Math.max(19,cy-radius-12));
+  if(s.trace){drawArrow(c,cx+s.trace.x*k,h-18,cx+s.x*k,h-18,'#087f6d',3,false);if(Math.abs(s.y-s.trace.y)>8)drawArrow(c,16,cy+s.trace.y*k,16,cy+s.y*k,'#087f6d',3,false);}
+  c.restore();
+  // Axis is outside the image, so the specimen itself can turn or move independently.
+  c.fillStyle='#526b64';c.textAlign='right';c.font='14px system-ui,"Microsoft YaHei",sans-serif';c.fillText('上',w-8,19);c.fillText('下',w-8,h-4);
+}
+function renderMicroscope(s,o){
+  const dy=-(s.h-52)*PARAMS.heightScale;
+  $('tube').setAttribute('transform','translate(0 '+dy.toFixed(2)+')');
+  const rect=$('objectiveBody').querySelector('rect');
+  rect.setAttribute('height',s.objective===40?'99':'79');
+  $('objectiveBand').setAttribute('d',s.objective===40?'M331 291H370':'M331 271H370');
+  $('objectiveBand').setAttribute('stroke',s.objective===40?'#3f8ca9':'#d9ac42');
+  $('objectiveTip').setAttribute('y',s.objective===40?'309':'289');
+  $('objectiveLabel').textContent='物镜 '+s.objective+'×';
+  $('objectiveLeader').setAttribute('d',s.objective===40?'M371 301L495 263':'M371 281L495 263');
+  $('objectiveDot').setAttribute('cy',s.objective===40?'301':'281');
+  $('coarseTick').setAttribute('transform','rotate('+(s.h*5).toFixed(1)+' 278 212)');
+  $('fineTick').setAttribute('transform','rotate('+(s.h*48).toFixed(1)+' 278 280)');
+  $('coarseHandle').setAttribute('aria-valuenow',s.h.toFixed(2));$('coarseHandle').setAttribute('aria-disabled',s.objective===40?'true':'false');
+  $('coarseHandle').style.opacity=s.objective===40?'.5':'1';$('fineHandle').setAttribute('aria-valuemin',minimumHeight(s.objective));$('fineHandle').setAttribute('aria-valuemax','100');$('fineHandle').setAttribute('aria-valuenow',s.h.toFixed(2));
+  $('mirrorSurface').setAttribute('transform','rotate('+(-s.angle)+' 350 445)');
+  $('mirrorHandle').setAttribute('aria-valuenow',s.angle);
+  $('illumination').style.display=s.rays?'':'none';
+  $('reflectedRay').setAttribute('d','M350 445L'+o.rayX.toFixed(2)+' 348');
+  $('reflectedRay').setAttribute('opacity',o.light>.05?'.9':'.55');
+  $('lightCone').setAttribute('d','M340 331L350 '+(PARAMS.stageY-o.gap).toFixed(2)+'L360 331Z');
+  $('lightCone').setAttribute('opacity',o.light>.06?(o.light*.42).toFixed(3):'0');
+  const tip=PARAMS.stageY-o.gap;
+  $('gapBracket').setAttribute('d','M402 '+tip.toFixed(2)+'H413V330H402');
+  $('gapBracket').setAttribute('stroke',o.gap<7?'#aa5035':'#9a8360');
+  $('gapText').setAttribute('y',Math.max(316,tip+o.gap*.5+6).toFixed(2));
+  $('specimenOnSlide').setAttribute('d',s.sample==='hair'?'M338 335L363 336':s.sample==='letter'?'M348 339V333H357M348 336H354':'M340 334L345 338L350 334L355 338L360 334');
+  $('safetyNote').textContent=o.gap<7?'间隙已很小：停止下降，从侧面检查。':s.objective===40?'高倍用细调；找不到时可退回低倍。':'下降时从侧面看，观察时缓缓升起镜筒。';
+}
+function render(){
+  const s=current(),focus=appState.page==='focus',o=optics(s,appState.page);fieldMeta=o;
+  $('focusStage').hidden=!focus;$('focusNote').hidden=!focus;$('locateStage').hidden=focus;$('locateTools').hidden=focus;
+  $('objectStage').classList.toggle('locating',!focus);
+  document.querySelectorAll('.focus-control').forEach(function(e){e.hidden=!focus;});
+  $('tabFocus').setAttribute('aria-selected',focus?'true':'false');$('tabLocate').setAttribute('aria-selected',focus?'false':'true');
+  $('taskTitle').textContent=focus?'调一调，让图像清楚起来':'换高倍前，怎样留住同一个目标？';
+  document.querySelectorAll('[data-sample]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.sample===s.sample?'true':'false');});
+  $('lowBtn').setAttribute('aria-pressed',s.objective===10?'true':'false');$('highBtn').setAttribute('aria-pressed',s.objective===40?'true':'false');
+  $('objectiveRead').textContent=s.objective;$('totalRead').textContent=o.total+'×';
+  if(focus){
+    $('mirrorRange').value=s.angle;$('mirrorRead').textContent=s.angle.toFixed(s.angle%1?1:0)+'°';
+    $('coarseRange').value=s.h;$('coarseRange').disabled=s.objective===40;$('coarseRead').textContent=s.objective===40?'高倍用细调':'升降镜筒';
+    $('raysBtn').setAttribute('aria-pressed',s.rays?'true':'false');
+    renderMicroscope(s,o);
+    $('fieldStatus').textContent=o.light<.1?'模型视野 · 视野很暗':o.light<.42?'模型视野 · 视野偏暗':o.blur>3?'模型视野 · 轮廓模糊':o.blur>.8?'模型视野 · 还有些模糊':'模型视野 · 图像清楚';
+    $('modelNote').textContent='教学模型 · 结构与间距不按实际比例';
+  }else{
+    $('fovRead').textContent=o.fov.toFixed(2);
+    const dist=Math.hypot(s.target.x+s.x,s.target.y+s.y),inside=dist<o.fov*500;
+    $('fieldStatus').textContent=inside?(dist<o.fov*100?'金色目标已接近中心':'金色目标在视野内'):'金色目标已移出当前视野';
+    $('markBtn').setAttribute('aria-pressed',s.marking?'true':'false');$('markBtn').textContent=s.marking?'点一下标本选目标':'另选目标';$('slideWrap').classList.toggle('targeting',s.marking);
+    $('traceBtn').setAttribute('aria-pressed',s.trace?'true':'false');$('traceBtn').textContent=s.trace?'清除位移起点':'保留位移起点';
+    let line=s.marking?'在左侧标本上点一个位置':s.trace?'移动玻片，比较两边的箭头':'试着把金色目标移到十字中心';
+    if(s.trace){let dx=s.x-s.trace.x,dy=s.y-s.trace.y,parts=[],inverse=[];if(Math.abs(dx)>10){parts.push(dx>0?'右':'左');inverse.push(dx>0?'左':'右');}if(Math.abs(dy)>10){parts.push(dy>0?'下':'上');inverse.push(dy>0?'上':'下');}if(parts.length)line='玻片向'+parts.join('')+'移，像向'+inverse.join('')+'移';}
+    $('motionLine').textContent=line;$('modelNote').textContent='教学模型 · 标本结构示意，不能据此测量实物';
+    drawSlide(s,o);
+  }
+  const wrap=document.querySelector('.fieldWrap'),eye=document.querySelector('.eyepiece');
+  if(!window.matchMedia('(max-width:760px), (max-width:900px) and (orientation:portrait)').matches){
+    let reserved=0;Array.from(eye.children).forEach(function(el){if(el!==wrap){const st=getComputedStyle(el);reserved+=el.getBoundingClientRect().height+(parseFloat(st.marginTop)||0)+(parseFloat(st.marginBottom)||0);}});
+    const st=getComputedStyle(eye);reserved+=(parseFloat(st.paddingTop)||0)+(parseFloat(st.paddingBottom)||0);
+    const side=Math.max(160,Math.floor(Math.min(eye.clientWidth-20,eye.clientHeight-reserved-4,650)));
+    wrap.style.width=side+'px';wrap.style.height=side+'px';wrap.style.minWidth='0';wrap.style.minHeight='0';
+  }else{wrap.style.width='';wrap.style.height='';wrap.style.minWidth='';wrap.style.minHeight='';}
+  drawField(s,o);
+}
+function changePage(page){appState.page=page;requestRender();}
+function changeSample(sample){
+  const s=current();s.sample=sample;
+  if(appState.page==='locate'){s.x=0;s.y=0;s.trace=null;s.marking=false;s.target=sample==='letter'?{x:-220,y:-260}:sample==='hair'?{x:440,y:160}:{x:420,y:-200};}
+  requestRender();
+}
+function changeObjective(obj){
+  const s=current();if(s.objective===obj)return;
+  if(appState.page==='focus'&&gapFor(s.h,obj)<4){toast('换长物镜会碰到玻片。先升高镜筒，并在低倍找到清晰像。');return;}
+  s.objective=obj;
+  if(appState.page==='locate')s.trace=null;
+  else if(obj===40)toast(Math.abs(s.h-52)>3?'请先用低倍找到清晰像，再换高倍微调。':'已保留镜筒位置，轻轻细调，让高倍图像清楚。');
+  requestRender();
+}
+function setupDragger(el,onMove,onStart){
+  let drag=null;
+  el.addEventListener('pointerdown',function(e){if(e.button!==0&&e.pointerType==='mouse')return;if(onStart&&onStart(e)===false)return;e.preventDefault();el.setPointerCapture(e.pointerId);drag={x:e.clientX,y:e.clientY,h:appState.focus.h,angle:appState.focus.angle};});
+  el.addEventListener('pointermove',function(e){if(!drag)return;onMove(e.clientX-drag.x,e.clientY-drag.y,drag,e);});
+  const end=function(){drag=null;};el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);el.addEventListener('lostpointercapture',end);
+}
+function holdButton(id,delta){
+  const el=$(id);let timer=null;
+  function end(){if(timer){clearInterval(timer);timer=null;}}
+  el.addEventListener('pointerdown',function(e){e.preventDefault();el.setPointerCapture(e.pointerId);setHeight(appState.focus.h+delta);timer=setInterval(function(){setHeight(appState.focus.h+delta);},70);});
+  el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);el.addEventListener('lostpointercapture',end);window.addEventListener('blur',end);el.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();setHeight(appState.focus.h+delta);}});
+}
+document.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){changePage(b.dataset.page);});});
+document.querySelectorAll('[data-sample]').forEach(function(b){b.addEventListener('click',function(){changeSample(b.dataset.sample);});});
+document.querySelectorAll('[data-objective]').forEach(function(b){b.addEventListener('click',function(){changeObjective(Number(b.dataset.objective));});});
+$('mirrorRange').addEventListener('input',function(e){appState.focus.angle=Number(e.target.value);requestRender();});
+$('coarseRange').addEventListener('input',function(e){setHeight(Number(e.target.value));});
+$('raysBtn').addEventListener('click',function(){appState.focus.rays=!appState.focus.rays;requestRender();});
+setupDragger($('coarseHandle'),function(dx,dy,d){if(appState.focus.objective===10)setHeight(d.h-dy*.20);},function(){if(appState.focus.objective===40){toast('高倍观察请使用细调。');return false;}});
+setupDragger($('fineHandle'),function(dx,dy,d){setHeight(d.h-dy*.025);});
+setupDragger($('mirrorHandle'),function(dx,dy,d){appState.focus.angle=clamp(d.angle+dx*.18,20,70);requestRender();});
+$('coarseHandle').addEventListener('keydown',function(e){if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();if(appState.focus.objective===10)setHeight(appState.focus.h+(e.key==='ArrowUp'?1:-1));else toast('高倍观察请使用细调。');}});
+$('fineHandle').addEventListener('keydown',function(e){if(e.key==='ArrowUp'||e.key==='ArrowDown'){e.preventDefault();setHeight(appState.focus.h+(e.key==='ArrowUp'?.1:-.1));}});
+$('mirrorHandle').addEventListener('keydown',function(e){if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();appState.focus.angle=clamp(appState.focus.angle+(e.key==='ArrowRight'?.5:-.5),20,70);requestRender();}});
+holdButton('fineDown',-.1);holdButton('fineUp',.1);
+let slideDrag=null;
+slideCanvas.addEventListener('pointerdown',function(e){
+  if(e.button!==0&&e.pointerType==='mouse')return;e.preventDefault();const s=appState.locate,r=slideCanvas.getBoundingClientRect();
+  if(s.marking){const tx=(e.clientX-r.left-slideGeom.cx)/slideGeom.k-s.x,ty=(e.clientY-r.top-slideGeom.cy)/slideGeom.k-s.y;if(Math.abs(tx)>2000||Math.abs(ty)>950){toast('请在玻片范围内标记目标。');return;}s.target={x:tx,y:ty};s.marking=false;s.trace=null;requestRender();return;}
+  slideCanvas.setPointerCapture(e.pointerId);slideDrag={x:e.clientX,y:e.clientY,sx:s.x,sy:s.y};
+});
+slideCanvas.addEventListener('pointermove',function(e){if(!slideDrag)return;const s=appState.locate;s.x=clamp(slideDrag.sx+(e.clientX-slideDrag.x)/slideGeom.k,-2100,2100);s.y=clamp(slideDrag.sy+(e.clientY-slideDrag.y)/slideGeom.k,-1100,1100);requestRender();});
+['pointerup','pointercancel','lostpointercapture'].forEach(function(name){slideCanvas.addEventListener(name,function(){slideDrag=null;});});
+slideCanvas.addEventListener('keydown',function(e){const s=appState.locate,step=e.shiftKey?10:50;let handled=true;if(e.key==='ArrowRight')s.x=clamp(s.x+step,-2100,2100);else if(e.key==='ArrowLeft')s.x=clamp(s.x-step,-2100,2100);else if(e.key==='ArrowDown')s.y=clamp(s.y+step,-1100,1100);else if(e.key==='ArrowUp')s.y=clamp(s.y-step,-1100,1100);else handled=false;if(handled){e.preventDefault();requestRender();}});
+$('markBtn').addEventListener('click',function(){appState.locate.marking=!appState.locate.marking;requestRender();});
+$('traceBtn').addEventListener('click',function(){const s=appState.locate;s.trace=s.trace?null:{x:s.x,y:s.y};requestRender();});
+$('slideResetBtn').addEventListener('click',function(){const s=appState.locate;s.x=s.y=0;s.trace=null;s.marking=false;requestRender();});
+$('resetBtn').addEventListener('click',function(){if(appState.page==='focus')appState.focus=initialFocus();else appState.locate=initialLocate();toast('当前场景已重置，已保留的记录不变。');requestRender();});
+$('fullscreenBtn').addEventListener('click',async function(){
+  try{if(document.fullscreenElement){await document.exitFullscreen();}else if(document.documentElement.requestFullscreen){await document.documentElement.requestFullscreen();}else if(document.documentElement.webkitRequestFullscreen){document.documentElement.webkitRequestFullscreen();}else{toast('此浏览器不支持网页全屏，可使用浏览器全屏或横屏查看。');}}catch(e){toast('浏览器未允许全屏，可使用浏览器的全屏功能。');}
+});
+let infoPrevious=null;
+$('infoBtn').addEventListener('click',function(){infoPrevious=document.activeElement;$('infoLayer').hidden=false;$('infoClose').focus();});
+function closeInfo(){$('infoLayer').hidden=true;if(infoPrevious)infoPrevious.focus();}
+$('infoClose').addEventListener('click',closeInfo);$('infoLayer').addEventListener('click',function(e){if(e.target===$('infoLayer'))closeInfo();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('infoLayer').hidden)closeInfo();if(e.key==='Tab'&&!$('infoLayer').hidden){const items=$('infoLayer').querySelectorAll('button,a'),first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+function roundRect(c,x,y,w,h,r){r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+function captureField(){
+  render();const s=current(),o=optics(s,appState.page),out=document.createElement('canvas');out.width=600;out.height=600;const c=out.getContext('2d');c.fillStyle='#fff';c.fillRect(0,0,600,600);c.save();c.beginPath();c.arc(300,300,292,0,Math.PI*2);c.clip();c.drawImage(fieldCanvas,8,8,584,584);c.restore();c.strokeStyle='#344a3f';c.lineWidth=5;c.beginPath();c.arc(300,300,292,0,Math.PI*2);c.stroke();
+  const details=appState.page==='focus'?'调光与对焦；反光镜 '+s.angle.toFixed(1)+'°；镜筒位置 '+s.h.toFixed(2)+'（模型相对刻度）；'+$('fieldStatus').textContent:'视野与定位；模型视野直径 '+o.fov.toFixed(2)+' mm；玻片位移 ('+(s.x/1000).toFixed(2)+', '+(s.y/1000).toFixed(2)+') mm（右、下为正）；目标标记仅作定位';
+  return{image:out.toDataURL('image/png'),sample:SAMPLE_NAMES[s.sample],source:'模型示意',magnification:'目镜10× × 物镜'+s.objective+'× = '+o.total+'×',details:details};
+}
+$('captureBtn').addEventListener('click',function(){if(!window.MicroRecords){toast('记录模块未就绪，请刷新页面。');return;}window.MicroRecords.add(captureField());});
+$('recordsBtn').addEventListener('click',function(){if(window.MicroRecords)window.MicroRecords.open();});
+window.addEventListener('resize',requestRender);
+if(window.ResizeObserver){new ResizeObserver(requestRender).observe($('workspace'));}
+if(window.MicroRecords)window.MicroRecords.init({onClose:requestRender});
+// Expose read-only snapshots and pure model calculations for repeatable science checks.
+window.MicroLab={snapshot:function(){return JSON.parse(JSON.stringify(appState));},optics:optics,gapFor:gapFor,parameters:Object.assign({},PARAMS)};
+render();
+</script>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T2 · 二维绘图" title="本课最低技术需求：T2 · 二维绘图" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;box-shadow:0 1px 5px rgba(0,0,0,.12)">T2 · 二维绘图</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
