@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173b38">
+<meta name="description" content="六上4.7时间与变化：把年轮、珊瑚生长纹与地层变成可以对齐、放大、回溯的时间证据。">
+<title>时间与变化 · 互动探究</title>
+<style>
+:root{--ink:#173b38;--green:#1f6b59;--mint:#e5f0e9;--accent:#c66d50;--gold:#d7ab58;--paper:#f3f5f2;--line:#d6dfd9;--muted:#60736d;--unit:1rem;color-scheme:light}
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden}body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:20px;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;min-height:46px;border:1px solid var(--line);background:white;border-radius:10px;padding:8px 16px;font-size:20px;font-weight:650;line-height:1.3;touch-action:manipulation}button:hover{border-color:var(--green);background:#edf4ef}button:active{transform:translateY(1px)}button:disabled{opacity:.5;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #df9a41;outline-offset:3px}button.primary,.primary{background:var(--green);border-color:var(--green);color:#fff}button.primary:hover{background:#195b4b}button.secondary{background:var(--mint);border-color:transparent}.muted{color:var(--muted);font-size:17px;line-height:1.5;margin:0}.lead{font-size:23px;font-weight:650;line-height:1.5;margin:0}.value{font-size:38px;font-weight:750;font-variant-numeric:tabular-nums;line-height:1.15}.panel-title{font-size:26px;margin:0 0 8px;line-height:1.35}.control{display:flex;flex-direction:column;gap:8px}.range-row{display:flex;align-items:center;gap:12px}.status{border-left:4px solid var(--gold);background:#f6f2e5;padding:12px 14px;font-size:20px;line-height:1.55;min-height:62px}input[type=range]{margin:0;width:100%;min-width:0;min-height:42px;accent-color:var(--green);cursor:pointer;touch-action:pan-y}input[type=number]{width:92px;border:1px solid var(--line);border-radius:8px;min-height:46px;padding:6px 8px;background:white;font-size:24px;text-align:center}input,textarea,select{border:1px solid var(--line);border-radius:8px;background:white}textarea{padding:10px;resize:vertical;min-height:64px;line-height:1.5}select{min-height:46px;padding:6px 10px}svg{font-family:inherit;fill:var(--ink)}svg text{user-select:none}svg [role=button],svg [data-drag]{cursor:pointer}a{color:var(--green)}[hidden]{display:none!important}
+#app{height:100vh;height:100dvh;display:grid;grid-template-rows:82px minmax(0,1fr) 68px;padding:0 24px 12px;gap:12px}.app-header{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);min-width:0}.app-header h1{font-size:30px;font-weight:760;margin:0;letter-spacing:.03em;white-space:nowrap}.page-tabs{display:flex;gap:5px;align-self:stretch;align-items:center}.page-tabs button{background:transparent;border:0;border-radius:0;font-size:21px;min-height:58px;padding:10px 13px;position:relative;color:#677b74}.page-tabs button span{font-size:15px;font-weight:750;opacity:.7;margin-right:5px}.page-tabs button[aria-pressed=true]{color:var(--ink)}.page-tabs button[aria-pressed=true]::after{content:"";position:absolute;bottom:0;left:12px;right:12px;height:4px;border-radius:4px;background:var(--green)}.header-tools{display:flex;gap:8px;align-items:center}.header-tools button{background:transparent;font-size:18px;padding:8px 12px;min-height:44px}.header-tools #help-open{border-radius:50%;width:40px;min-height:40px;padding:5px;font-size:21px}.count-dot{display:inline-flex;background:var(--green);color:white;border-radius:10px;font-size:13px;min-width:18px;height:18px;align-items:center;justify-content:center;margin-left:6px}#workspaces,.workspace{height:100%;min-height:0;min-width:0}.workspace{display:none}.workspace.active{display:block}.workbench{height:100%;display:grid;grid-template-columns:minmax(0,1fr) clamp(258px,24vw,342px);gap:22px;min-height:0}.scene{background:#fff;border:1px solid var(--line);border-radius:16px;min-width:0;min-height:0;position:relative;display:flex;flex-direction:column;overflow:hidden}.scene>svg{width:100%;height:100%;display:block;flex:1;min-height:0}.rail{min-width:0;min-height:0;display:flex;flex-direction:column;gap:16px;padding:12px 0;overflow:auto;scrollbar-width:thin}.rail p{margin-top:0}.rail .control{flex-shrink:0}.rail .push-bottom{margin-top:auto}.app-footer{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-left:112px;min-width:0}.app-footer p{margin:0;font-size:23px;font-weight:600;line-height:1.3}.footer-tools{display:flex;gap:8px;flex-shrink:0}.footer-tools button{font-size:17px;min-height:42px;background:transparent;padding:7px 12px}.compat-grade{position:fixed;left:24px;bottom:30px;font-size:11px;padding:4px 7px;color:#fff;background:#476d5d;border-radius:5px;pointer-events:none;z-index:4}.modal{position:fixed;inset:0;background:rgba(15,37,31,.42);z-index:50;display:flex;align-items:center;justify-content:center;padding:20px}.dialog{background:var(--paper);width:min(880px,100%);max-height:90vh;border:1px solid #ccd8d0;border-radius:18px;box-shadow:0 20px 80px #173b3833;display:flex;flex-direction:column;overflow:hidden}.dialog-heading{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--line);gap:16px}.dialog-heading h2{font-size:27px;margin:0}.dialog-body{padding:24px;overflow:auto;min-height:0}.dialog-actions{border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:16px 24px;gap:16px}.dialog-actions span{font-size:16px;color:var(--muted)}.record-compose{display:grid;grid-template-columns:1fr;gap:8px;background:white;padding:20px;border-radius:12px}.record-compose label{font-size:19px;font-weight:650}.compose-actions{display:flex;align-items:center;justify-content:space-between;gap:12px}.record-card{margin-top:16px;border-top:1px solid var(--line);padding-top:16px;overflow-wrap:anywhere}.record-card h3{display:flex;align-items:center;justify-content:space-between;font-size:20px;margin:0 0 8px}.record-card h3 button{font-size:15px;min-height:36px}.record-card p{font-size:18px;margin:6px 0;line-height:1.5}.record-card small{color:var(--muted);font-size:15px}.help-copy{font-size:19px;line-height:1.75}.help-copy h3{font-size:23px;margin:20px 0 6px}.help-copy p{margin:0 0 10px}.source-links{font-size:16px}#toast{position:fixed;left:50%;bottom:92px;transform:translate(-50%,15px);max-width:80vw;background:#173b38;color:#fff;border-radius:12px;padding:12px 22px;font-size:19px;line-height:1.45;opacity:0;pointer-events:none;transition:.15s;z-index:70}#toast.visible{opacity:1;transform:translate(-50%,0)}
+@media(min-width:1700px){body{font-size:24px}#app{grid-template-rows:100px minmax(0,1fr) 84px;padding:0 36px 18px;gap:18px}.app-header h1{font-size:38px}.page-tabs button{font-size:26px;min-height:68px}.header-tools button{font-size:22px}.workbench{grid-template-columns:minmax(0,1fr) 370px;gap:30px}.rail{gap:24px}.lead{font-size:27px}.panel-title{font-size:31px}button{font-size:24px;min-height:54px}.status{font-size:24px}.muted{font-size:20px}.app-footer p{font-size:29px}.footer-tools button{font-size:21px}.compat-grade{left:36px;bottom:40px}}
+@media(max-width:1100px){#app{padding-left:16px;padding-right:16px;gap:9px;grid-template-rows:74px minmax(0,1fr) 62px}.app-header{gap:8px}.app-header h1{font-size:25px}.page-tabs button{font-size:18px;padding:9px}.page-tabs button span{display:none}.header-tools{gap:5px}.header-tools button{font-size:16px;padding:7px 9px}.workbench{gap:14px;grid-template-columns:minmax(0,1fr) 258px}.rail{gap:12px;padding-top:6px}.lead{font-size:20px}.status{font-size:18px}.app-footer p{font-size:20px}.footer-tools button{font-size:15px;padding:7px 8px}.compat-grade{left:16px;bottom:27px}}
+@media(max-width:780px) and (orientation:portrait){#app{padding:0 12px 8px;grid-template-rows:110px minmax(0,1fr) 66px;gap:8px}.app-header{flex-wrap:wrap;align-content:center;gap:5px 12px}.app-header h1{font-size:25px;order:0}.header-tools{margin-left:auto;order:1}.page-tabs{order:2;width:100%;justify-content:space-around;height:46px;align-self:auto}.page-tabs button{min-height:44px;font-size:18px;width:33%;padding:4px}.workbench{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:10px}.rail{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;padding:0;max-height:280px}.rail .push-bottom{margin:0}.panel-title{font-size:22px}.lead{font-size:18px}.value{font-size:28px}.muted{font-size:15px}.status{font-size:17px;min-height:48px;padding:8px 10px}.rail button{font-size:18px;padding:7px 10px;min-height:44px}.app-footer{padding-left:0;align-items:center}.app-footer p{font-size:17px}.footer-tools{gap:3px}.footer-tools button{font-size:14px;min-height:40px;padding:5px 7px}.compat-grade{left:12px;bottom:2px;font-size:8px;padding:1px 4px}.dialog-body{padding:15px}.dialog-heading{padding:14px 16px}.dialog-actions{padding:12px 16px}.dialog-actions span{font-size:13px}.record-compose{padding:12px}.dialog-heading h2{font-size:23px}}
+@media(max-width:480px){#app{grid-template-rows:104px minmax(0,1fr) 66px;padding-left:8px;padding-right:8px}.header-tools button{min-height:38px}.header-tools #help-open{width:32px;min-height:32px}.app-header h1{font-size:23px}.page-tabs button{font-size:16px}.rail{gap:7px 10px;max-height:285px}.rail .muted{font-size:13px}.rail button{font-size:16px}.panel-title{font-size:20px}.status{font-size:15px}.lead{font-size:16px}.app-footer{gap:6px}.app-footer p{font-size:15px}.footer-tools button{font-size:12px;padding:4px;min-height:36px}.compose-actions{flex-wrap:wrap}.dialog-actions{flex-wrap:wrap}.modal{padding:8px}}
+@media(max-height:570px) and (orientation:landscape){#app{grid-template-rows:56px minmax(0,1fr) 46px;padding:0 10px 5px;gap:6px}.app-header h1{font-size:21px}.page-tabs button{font-size:16px;min-height:42px}.header-tools button{font-size:14px;min-height:34px}.header-tools #help-open{width:30px;min-height:30px}.workbench{grid-template-columns:minmax(0,1fr) 230px;gap:12px}.rail{gap:8px;padding:0}.rail .panel-title{font-size:20px}.rail .lead{font-size:17px}.rail .muted{font-size:14px}.rail button{font-size:16px;min-height:40px;padding:6px 10px}.rail input[type=number]{min-height:38px;font-size:19px}.status{font-size:16px;min-height:38px;padding:6px 10px}.app-footer{padding-left:90px}.app-footer p{font-size:16px}.footer-tools button{min-height:32px;font-size:13px;padding:4px 8px}.compat-grade{left:10px;bottom:20px;font-size:9px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+.download-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:20px;padding:10px 24px;border-radius:10px;font-size:21px;font-weight:700;text-decoration:none}.export-dialog{max-width:650px}#export-filename{font-size:22px;overflow-wrap:anywhere}
+
+.tree-ages{display:flex;justify-content:space-between;gap:9px}.tree-ages label{font-size:20px;display:flex;align-items:center;gap:6px;white-space:nowrap}.tree-ages input{width:64px}.tree-bottom{display:flex;flex-direction:column;gap:12px}.tree-rail .range-row button{min-width:44px;padding:5px}.tree-scene svg{touch-action:none}.tree-workbench.expanded .tree-count-control,.tree-workbench.expanded #tree-count-feedback{display:none}.tree-workbench.expanded #tree-expand{background:transparent;border-color:var(--line);color:var(--green);min-height:42px;font-size:17px}.tree-workbench.expanded #tree-align-controls{margin-top:2px}.tree-workbench.expanded #tree-align-controls label{font-size:21px;line-height:1.45}.tree-workbench.expanded #tree-match-feedback{min-height:76px}.tree-workbench.expanded .tree-intro .lead{font-size:21px}.tree-rail #tree-selected{min-height:46px}.tree-workbench.expanded #tree-selected{font-size:16px}
+@media(min-width:1700px){.tree-ages label{font-size:25px}.tree-ages input{width:80px}.tree-workbench.expanded #tree-align-controls label,.tree-workbench.expanded .tree-intro .lead{font-size:25px}.tree-workbench.expanded #tree-selected{font-size:20px}}
+@media(max-width:780px) and (orientation:portrait){.tree-rail{grid-template-columns:1fr 1fr}.tree-intro .lead{font-size:17px}.tree-ages{gap:5px}.tree-ages label{font-size:16px;gap:3px}.tree-ages input{width:48px;font-size:20px;padding:4px}.tree-bottom{gap:7px}.tree-rail #tree-selected{min-height:0}.tree-workbench.expanded .tree-intro{grid-column:1}.tree-workbench.expanded #tree-expand{grid-column:2;grid-row:1;align-self:start}.tree-workbench.expanded #tree-align-controls{grid-column:1;grid-row:2/4}.tree-workbench.expanded #tree-match-feedback{grid-column:2;grid-row:2;min-height:50px}.tree-workbench.expanded .tree-bottom{grid-column:2;grid-row:3}.tree-workbench.expanded #tree-align-controls label,.tree-workbench.expanded .tree-intro .lead{font-size:17px}.tree-workbench.expanded #tree-selected{display:none}.tree-workbench.expanded #tree-match-feedback{font-size:15px}.tree-workbench.expanded .tree-bottom button{font-size:16px}}
+@media(max-height:570px) and (orientation:landscape){.tree-rail{gap:7px}.tree-intro .lead{font-size:16px}.tree-ages label{font-size:16px}.tree-ages input{width:50px}.tree-bottom{gap:6px}.tree-rail #tree-selected{font-size:13px;min-height:0}.tree-workbench.expanded #tree-align-controls label,.tree-workbench.expanded .tree-intro .lead{font-size:16px}.tree-workbench.expanded #tree-match-feedback{font-size:14px;min-height:45px}.tree-workbench.expanded #tree-selected{display:none}.tree-workbench.expanded #tree-expand{font-size:14px;min-height:34px}}
+
+@media(max-height:460px) and (orientation:landscape){.tree-rail{gap:6px}.tree-intro,.tree-rail #tree-selected{display:none}.tree-bottom{gap:0}.tree-rail .control{gap:5px}.tree-workbench.expanded #tree-align-controls label{display:none}.tree-workbench.expanded #tree-expand{font-size:14px;min-height:32px}.tree-rail #tree-offset{min-height:30px}.tree-rail .range-row button{min-height:32px}.tree-workbench.expanded #tree-match-feedback{font-size:13px;line-height:1.4;min-height:45px}.tree-rail .push-bottom{margin-top:0}.tree-rail #tree-save,.tree-rail #tree-check-match{min-height:36px;font-size:15px}}
+
+.coral-rail{gap:12px;padding-top:8px;padding-bottom:8px}.coral-heading .panel-title{margin-bottom:3px}.coral-count-row{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0}.coral-count-row>div{white-space:nowrap;font-size:21px}.coral-count-row .value{color:var(--accent);vertical-align:baseline;font-size:37px}.coral-count-row button{min-height:44px;font-size:18px;padding:7px 13px}.coral-year-field{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;font-size:23px;font-weight:650}.coral-year-field>span{white-space:nowrap}.coral-year-field input{width:116px;font-size:28px;color:var(--accent);font-weight:750}.coral-estimate{gap:2px}.coral-estimate input[type=range]{min-height:32px;accent-color:var(--accent)}.coral-count-rule{text-align:center;font-size:17px}.coral-result{min-height:76px;padding:10px 0 10px 14px;border-left:4px solid var(--gold);display:flex;flex-direction:column;justify-content:center;gap:4px}.coral-result>strong{font-size:22px;font-weight:700;line-height:1.35}.coral-result .coral-hours{font-size:38px;font-weight:750;color:var(--accent);line-height:1.15;font-variant-numeric:tabular-nums}.coral-result .coral-hours small{font-size:20px;color:var(--ink);font-weight:600}.coral-result .muted{font-size:16px;line-height:1.4}.coral-reference{font-size:16px;line-height:1.5;margin-top:auto!important}.coral-scene{background:#fffdfa}.coral-scene svg{touch-action:none}.coral-scene svg [data-coral-window]{cursor:ew-resize}.coral-scene svg [data-coral-count]{cursor:crosshair}
+@media(min-width:1700px){.coral-rail{gap:18px}.coral-count-row>div{font-size:25px}.coral-count-row .value{font-size:45px}.coral-year-field{font-size:28px}.coral-year-field input{width:140px;font-size:34px}.coral-count-rule,.coral-reference{font-size:20px}.coral-result{min-height:98px}.coral-result>strong{font-size:28px}.coral-result .coral-hours{font-size:48px}.coral-result .muted{font-size:20px}}
+@media(max-width:1100px){.coral-rail{gap:10px}.coral-heading .panel-title{font-size:24px}.coral-count-row>div{font-size:20px}.coral-count-row .value{font-size:34px}.coral-year-field{font-size:21px}.coral-year-field input{width:100px;font-size:26px}.coral-result>strong{font-size:20px}.coral-reference{font-size:15px}.coral-result{min-height:70px}}
+@media(max-width:780px) and (orientation:portrait){.coral-rail{grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;gap:8px 12px;padding:0;overflow:visible;max-height:260px}.coral-heading{grid-column:1;grid-row:1}.coral-heading .panel-title{font-size:22px}.coral-heading .muted{display:none}.coral-count-row{grid-column:2;grid-row:1}.coral-count-row>div{font-size:17px}.coral-count-row .value{font-size:28px}.coral-count-row button{font-size:15px;padding:6px 9px}.coral-estimate{grid-column:1;grid-row:2;align-self:center}.coral-year-field{font-size:17px;gap:6px}.coral-year-field input{font-size:23px;width:76px;min-height:42px}.coral-estimate input[type=range]{min-height:30px}.coral-count-rule{font-size:14px}.coral-result{grid-column:2;grid-row:2;align-self:stretch;min-height:76px;padding:6px 0 6px 10px}.coral-result>strong{font-size:18px}.coral-result .coral-hours{font-size:32px}.coral-result .coral-hours small{font-size:17px}.coral-result .muted{font-size:14px}#coral-calc{grid-column:1;grid-row:3}#coral-record{grid-column:2;grid-row:3}.coral-reference{display:none}}
+@media(max-width:480px){.coral-heading .panel-title{font-size:19px}.coral-count-row{gap:4px}.coral-count-row>div{font-size:15px}.coral-count-row .value{font-size:25px}.coral-count-row button{padding:5px 7px;font-size:14px!important}.coral-year-field{font-size:16px}.coral-year-field input{width:70px;font-size:22px}.coral-result>strong{font-size:16px}.coral-result .coral-hours{font-size:29px}.coral-result .muted{font-size:13px}}
+@media(max-height:570px) and (orientation:landscape){.coral-rail{display:grid;grid-template-columns:1fr 1fr;gap:7px 8px;align-content:start;overflow:auto}.coral-heading{grid-column:1/-1}.coral-heading .panel-title{font-size:20px;margin:0}.coral-heading .muted{display:none}.coral-count-row{grid-column:1/-1}.coral-count-row>div{font-size:17px}.coral-count-row .value{font-size:27px}.coral-count-row button{font-size:15px;min-height:36px}.coral-estimate{grid-column:1/-1}.coral-year-field{justify-content:flex-start;font-size:18px}.coral-year-field input{width:95px;font-size:22px;min-height:36px}.coral-estimate input[type=range]{min-height:26px}.coral-count-rule{display:none}.coral-result{grid-column:1/-1;grid-row:4;min-height:58px;padding:4px 0 4px 10px}.coral-result .coral-hours{font-size:29px}.coral-result .muted{font-size:13px}.coral-result>strong{font-size:17px}#coral-calc,#coral-record{font-size:15px;padding:5px 7px;min-height:38px}.coral-reference{display:none}}
+
+@media(max-height:460px) and (orientation:landscape){.coral-rail{gap:6px 8px}}
+
+.strata-scene>svg{min-height:0;width:100%;height:100%;flex:1;display:block}.strata-playback{display:grid;grid-template-columns:92px minmax(0,1fr) 58px 76px;gap:10px;align-items:center;padding:7px 16px 10px;border-top:1px solid #e5eae4;flex-shrink:0}.strata-playback label,.strata-playback output{font-size:18px;white-space:nowrap}.strata-playback output{text-align:center;font-variant-numeric:tabular-nums}.strata-playback button{font-size:17px;min-height:44px;padding:7px 10px}.strata-playback input{min-height:44px;margin:0}.strata-rail{gap:20px;justify-content:center}.strata-inference,.strata-refinement{min-width:0}.strata-field-label{font-size:19px;display:block;margin:10px 0 7px}.strata-inference>select{display:block;width:100%;font-size:20px;min-height:50px;padding:8px}.strata-environment{display:flex;align-items:center;gap:10px;margin-top:14px}.strata-environment label{font-size:19px;white-space:nowrap}.strata-environment select{flex:1;min-width:0;min-height:46px;font-size:19px;padding:6px}.strata-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.strata-actions button{font-size:19px;padding:9px 8px;white-space:nowrap;min-height:48px}.strata-refinement{border-top:1px solid var(--line);padding-top:17px}.strata-history{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px 8px;margin:0 0 16px;font-size:18px;line-height:1.4}.strata-history dt{color:#60736d;font-size:16px;padding-top:2px}.strata-history dd{margin:0;overflow-wrap:anywhere}.strata-refinement .status{font-size:18px;line-height:1.55;min-height:70px;padding:10px 12px;margin:0}.strata-refinement .muted{font-size:14px;line-height:1.5;margin:12px 0 0}.strata-layer{cursor:pointer;outline:none}.strata-layer:focus .strata-layer-outline{stroke:#c28322!important;stroke-width:5!important}.strata-layer:hover .strata-layer-outline{stroke:#1f6b59;stroke-width:4}
+@media(min-width:1700px){.strata-inference>select{font-size:24px;min-height:58px}.strata-field-label,.strata-environment label,.strata-environment select{font-size:23px}.strata-actions button{font-size:22px;min-height:56px}.strata-history{font-size:22px;grid-template-columns:92px 1fr;gap:12px}.strata-history dt{font-size:20px}.strata-refinement .status{font-size:22px}.strata-refinement .muted{font-size:18px}.strata-playback label,.strata-playback output{font-size:22px}.strata-playback{grid-template-columns:118px minmax(0,1fr) 68px 86px;padding:10px 20px}.strata-playback button{font-size:20px;min-height:50px}}
+@media(max-width:1100px){.strata-rail{gap:14px}.strata-actions{gap:8px;margin-top:12px}.strata-actions button{font-size:17px;padding:8px 6px}.strata-inference>select{font-size:18px}.strata-field-label,.strata-environment label,.strata-environment select{font-size:17px}.strata-environment{gap:7px;margin-top:10px}.strata-history{font-size:17px;grid-template-columns:68px 1fr;gap:8px}.strata-history dt{font-size:15px}.strata-refinement .status{font-size:17px;padding:8px 10px}.strata-refinement{padding-top:12px}.strata-playback{grid-template-columns:76px minmax(0,1fr) 48px 64px;gap:6px;padding:6px 10px}.strata-playback label,.strata-playback output{font-size:16px}.strata-playback button{font-size:16px;padding:5px 8px}}
+@media(max-width:780px) and (orientation:portrait){.strata-rail{align-items:start;gap:10px 14px;max-height:260px;overflow:auto;justify-content:normal}.strata-inference .panel-title{margin-bottom:2px}.strata-field-label{font-size:16px;margin:5px 0}.strata-inference>select{font-size:16px;min-height:44px;padding:5px}.strata-environment{gap:5px;margin-top:7px}.strata-environment label,.strata-environment select{font-size:15px}.strata-environment select{min-height:44px;padding:5px}.strata-actions{margin-top:8px;gap:6px}.strata-actions button{font-size:15px;min-height:44px;padding:5px}.strata-refinement{border-top:0;padding-top:0}.strata-history{font-size:15px;grid-template-columns:1fr;gap:1px;margin:0 0 8px}.strata-history dt{font-size:13px;margin-top:4px}.strata-refinement .status{font-size:15px;line-height:1.45;min-height:58px;padding:7px 8px}.strata-refinement .muted{font-size:12px;margin-top:7px}.strata-playback{grid-template-columns:76px minmax(0,1fr) 44px 60px;padding:4px 8px;gap:5px}.strata-playback input{min-height:42px}.strata-playback button{min-height:44px}}
+@media(max-width:480px){.strata-rail{gap:8px;max-height:254px}.strata-actions{grid-template-columns:1fr 1fr;gap:4px}.strata-actions button{font-size:13px;padding:5px 2px}.strata-environment label{font-size:13px}.strata-environment select{font-size:13px}.strata-inference>select{font-size:14px}.strata-field-label{font-size:14px}.strata-history{font-size:14px}.strata-refinement .status{font-size:13px;min-height:56px}.strata-playback{grid-template-columns:60px minmax(0,1fr) 38px 48px;gap:4px;padding:3px 7px}.strata-playback label,.strata-playback output,.strata-playback button{font-size:13px}.strata-playback button{padding:4px}.strata-refinement .muted{font-size:11px}}
+@media(max-height:570px) and (orientation:landscape){.strata-rail{gap:9px;justify-content:flex-start}.strata-field-label{font-size:15px;margin:3px 0}.strata-inference>select{min-height:40px;font-size:15px;padding:4px}.strata-environment{margin-top:5px;gap:5px}.strata-environment label,.strata-environment select{font-size:14px}.strata-environment select{min-height:38px;padding:4px}.strata-actions{margin-top:7px;gap:6px}.strata-actions button{min-height:40px;font-size:15px;padding:5px}.strata-history{font-size:14px;grid-template-columns:62px 1fr;gap:4px;margin-bottom:6px}.strata-history dt{font-size:13px}.strata-refinement{padding-top:7px}.strata-refinement .status{font-size:14px;min-height:45px;padding:5px 7px}.strata-refinement .muted{font-size:11px;margin-top:5px}.strata-playback{padding:2px 7px;grid-template-columns:68px 1fr 40px 55px}.strata-playback label,.strata-playback output{font-size:14px}.strata-playback input{min-height:38px}.strata-playback button{min-height:38px;font-size:14px;padding:4px}}
+
+@media(max-height:460px) and (orientation:landscape){.strata-rail{gap:5px}.strata-inference .panel-title{font-size:17px;margin:0 0 3px}.strata-field-label{display:none}.strata-inference>select{min-height:32px;font-size:14px}.strata-environment select{min-height:32px}.strata-actions{margin-top:5px}.strata-actions button{min-height:34px;font-size:14px}.strata-history{font-size:12px;line-height:1.2;gap:2px 5px;margin:0 0 4px;grid-template-columns:54px 1fr}.strata-history dt{font-size:11px}.strata-refinement{padding-top:5px}.strata-refinement .status{font-size:12px;line-height:1.35;padding:4px 6px;min-height:32px}.strata-refinement .muted{display:none}}
+
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="app-header">
+    <h1>时间与变化</h1>
+    <nav class="page-tabs" aria-label="探究工作区">
+      <button type="button" data-page="tree" aria-pressed="true"><span>01</span> 树木年轮</button>
+      <button type="button" data-page="coral" aria-pressed="false"><span>02</span> 珊瑚日历</button>
+      <button type="button" data-page="strata" aria-pressed="false"><span>03</span> 地层档案</button>
+    </nav>
+    <div class="header-tools">
+      <button type="button" id="records-open">记录<span id="record-count" class="count-dot" hidden>0</span></button>
+      <button type="button" id="fullscreen">全屏</button>
+      <button type="button" id="help-open" aria-label="教学与模型说明" title="教学与模型说明">?</button>
+    </div>
+  </header>
+  <main id="workspaces">
+    <section id="page-tree" class="workspace active" aria-label="树木年轮"><div class="workbench tree-workbench">
+ <div class="scene tree-scene"><svg id="tree-svg" viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg" aria-label="两块树木横截面与年轮时间带"></svg></div>
+ <aside class="rail tree-rail">
+  <div class="tree-intro"><h2 class="panel-title" id="tree-task">先数，再比较</h2><p class="lead" id="tree-instruction">点选一个完整年轮，沿着它看一圈。</p></div>
+  <div class="control tree-count-control">
+   <div class="tree-ages"><label>A <input id="tree-age-a" type="number" min="1" max="50" inputmode="numeric" placeholder="?" aria-label="样本A年轮数量"> 年</label><label>B <input id="tree-age-b" type="number" min="1" max="50" inputmode="numeric" placeholder="?" aria-label="样本B年轮数量"> 年</label></div>
+   <button id="tree-check-age" type="button" class="secondary">核对我的计数</button>
+  </div>
+  <div id="tree-count-feedback" class="status" role="status">从中心向外数，浅色和深色合为一年。</div>
+  <button id="tree-expand" type="button" class="primary">展开时间带</button>
+  <div id="tree-align-controls" class="control" hidden>
+   <label for="tree-offset">移动 B，与 A 的宽窄变化对齐</label>
+   <div class="range-row"><button id="tree-earlier" type="button" aria-label="B向前移动一年">−</button><input id="tree-offset" type="range" min="0" max="6" step="1" value="6" aria-label="B时间带位置"><button id="tree-later" type="button" aria-label="B向后移动一年">+</button></div>
+   <button id="tree-check-match" type="button" class="primary">核对重叠的证据</button>
+  </div>
+  <div id="tree-match-feedback" class="status" hidden role="status">先对齐连续几年的宽窄变化。</div>
+  <div class="tree-bottom push-bottom"><p class="muted" id="tree-selected">横截面示意 · 生长条件不同</p><button id="tree-save" type="button">留存这份证据</button></div>
+ </aside>
+</div>
+</section>
+    <section id="page-coral" class="workspace" hidden aria-label="珊瑚日历"><div class="workbench coral-workbench">
+  <div class="scene coral-scene">
+    <svg id="coral-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" role="group" aria-label="现代和古代一年日纹的教学模型，可以拖动取样窗并划过放大的日纹计数"></svg>
+  </div>
+  <aside class="rail coral-rail" aria-label="珊瑚日纹推算工具">
+    <div class="coral-heading">
+      <h2 class="panel-title">用日纹推算</h2>
+      <p class="muted">先数一组，再看一整年。</p>
+    </div>
+    <div class="coral-count-row">
+      <div>已点 <strong id="coral-count" class="value">0</strong> 条</div>
+      <button id="coral-clear" type="button" class="secondary" aria-label="清除当前取样窗内的日纹标记">重数</button>
+    </div>
+    <div class="control coral-estimate">
+      <label class="coral-year-field" for="coral-days"><span>估计一年</span><input id="coral-days" type="number" min="360" max="420" step="1" value="365" inputmode="numeric" aria-label="估计古代一年有多少日"><span>日</span></label>
+      <input id="coral-days-range" type="range" min="360" max="420" step="1" value="365" aria-label="调整估计的一年日数">
+      <p class="muted coral-count-rule">每组日纹数 × 20 组</p>
+    </div>
+    <button id="coral-calc" type="button" class="primary">推算一天</button>
+    <div id="coral-result" class="coral-result" aria-live="polite">
+      <strong>古代的一天有多长？</strong>
+      <span class="muted">先假定一年总时长近似不变。</span>
+    </div>
+    <button id="coral-record" type="button" class="secondary" disabled>留下证据</button>
+    <p class="muted coral-reference">约4亿年前部分珊瑚的研究参照；图中年界与日纹已确认。</p>
+  </aside>
+</div>
+</section>
+    <section id="page-strata" class="workspace" hidden aria-label="地层档案"><div class="workbench strata-workbench">
+  <div class="scene strata-scene">
+    <svg id="strata-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" role="group" aria-label="未倒转的地层剖面。点击地层查看化石，并按从早到晚的顺序排列。"></svg>
+    <div class="strata-playback">
+      <label for="strata-stage">形成过程</label>
+      <input id="strata-stage" type="range" min="1" max="4" step="1" value="4" aria-label="回看四个形成阶段，不代表相等的时间间隔">
+      <output id="strata-stage-output" for="strata-stage">4 / 4</output>
+      <button id="strata-order-reset" type="button" title="清空已排层序，回到完整剖面">重排</button>
+    </div>
+  </div>
+  <aside class="rail strata-rail">
+    <div class="strata-inference">
+      <h2 class="panel-title">C 层有多老？</h2>
+      <label class="strata-field-label" for="strata-age">我的年代判断</label>
+      <select id="strata-age" aria-label="我对C层形成时间的判断">
+        <option value="">选择一个推断</option>
+        <option value="unknown">还不能确定具体年代</option>
+        <option value="older">比1.2亿年前更早</option>
+        <option value="between">约1亿—1.2亿年前</option>
+        <option value="younger">比1亿年前更晚</option>
+      </select>
+      <div class="strata-environment">
+        <label for="strata-environment">C 层环境</label>
+        <select id="strata-environment" aria-label="根据化石组合推断C层形成时的环境">
+          <option value="">我的推断</option>
+          <option value="marine">海洋</option>
+          <option value="land">陆地</option>
+          <option value="uncertain">证据不足</option>
+        </select>
+      </div>
+      <div class="strata-actions">
+        <button id="strata-dates" class="secondary" type="button">加入测年</button>
+        <button id="strata-record" class="primary" type="button">保留判断</button>
+      </div>
+    </div>
+    <div class="strata-refinement">
+      <dl class="strata-history">
+        <dt>初次判断</dt><dd id="strata-before">尚未保留</dd>
+        <dt>新证据后</dt><dd id="strata-after">尚未保留</dd>
+      </dl>
+      <p id="strata-feedback" class="status" aria-live="polite">只有层序时，能确定具体多少年前吗？</p>
+      <p id="strata-date-note" class="muted" hidden>测年数值为教学示意，不是这幅图的实测结果。</p>
+    </div>
+  </aside>
+</div>
+</section>
+  </main>
+  <footer class="app-footer">
+    <p id="guiding-question">同样长了几年，就一定一样粗吗？</p>
+    <div class="footer-tools"><button type="button" id="export-svg">保存观察图</button><button type="button" id="reset-page">重置本页</button></div>
+  </footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="records-modal" class="modal" hidden>
+ <div class="dialog records-dialog" role="dialog" aria-modal="true" aria-labelledby="records-title" tabindex="-1">
+  <div class="dialog-heading"><h2 id="records-title">我的证据记录</h2><button type="button" data-close aria-label="关闭记录">关闭</button></div>
+  <div class="dialog-body">
+   <div class="record-compose"><label for="my-evidence">我观察到的证据</label><textarea id="my-evidence" rows="2" maxlength="500" placeholder="也可以记录真实标本上的发现"></textarea><label for="my-inference">我的解释 / 还不能确定什么</label><textarea id="my-inference" rows="2" maxlength="500" placeholder="把证据与判断连起来"></textarea><div class="compose-actions"><select id="my-source" aria-label="记录来源"><option>课堂观察</option><option>真实标本</option><option>教材资料</option></select><button class="primary" id="record-manual" type="button">保存这条记录</button></div></div>
+   <div id="record-list"></div>
+  </div>
+  <div class="dialog-actions"><span id="storage-status">记录保存在本机浏览器</span><button id="export-csv" type="button" class="primary">导出记录 CSV</button></div>
+ </div>
+</div>
+<div id="help-modal" class="modal" hidden>
+ <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="help-title" tabindex="-1">
+  <div class="dialog-heading"><h2 id="help-title">让痕迹成为证据</h2><button type="button" data-close>关闭</button></div>
+  <div class="dialog-body help-copy">
+   <p>本课以教材第122—126页为依据。先观察真实材料，再用网页把难看清的细节放大，把不同尺度的证据连接起来。</p>
+   <h3>树木年轮</h3><p>浅色早材与深色晚材共同组成一个年轮。本页是保留髓心和外缘的完整横截面示意；没有缺轮、假轮。比较粗细后，再沿取样线展开年轮，把两棵树重叠的宽窄序列对齐。B的最外圈年份不等于已知砍伐年份。</p>
+   <h3>珊瑚日历</h3><p>一年约400日的线索来自对部分古珊瑚的研究。屏幕纹理是教学示意，已约定年界和日纹，不是真实化石测量。换算假定一年总时长近似不变；某一条生长纹是否代表一天，需要研究证据确认。</p>
+   <h3>地层档案</h3><p>只对本页未倒转的剖面比较上下先后。化石组合帮助推断古环境；上下火山灰中的可测年矿物提供年代范围。层厚不表示形成时间长短，形成步骤也不代表等长时间。</p>
+   <h3>操作与保存</h3><p>可用鼠标、触屏、滑条和键盘操作。数字键1、2、3切换工作区；Esc关闭窗口。记录只保存在当前浏览器，可导出CSV和当前SVG观察图。浏览器可能限制本地文件的自动保存，全屏与下载也取决于设备。</p>
+   <p class="source-links">资料：<a href="https://oceanservice.noaa.gov/education/dyw-tree-detective.html" target="_blank" rel="noopener noreferrer">NOAA 年轮配准</a> · <a href="https://www.floridamuseum.ufl.edu/science/sclerochronology-playing-back-the-recordings-of-life/" target="_blank" rel="noopener noreferrer">Florida Museum 生长纹研究</a> · <a href="https://www.usgs.gov/publications/coral-growth-and-geochronometry" target="_blank" rel="noopener noreferrer">Wells 1963</a> · <a href="https://www.nps.gov/articles/000/grcatime-timescale.htm" target="_blank" rel="noopener noreferrer">NPS 地质年代</a></p>
+  </div>
+ </div>
+</div>
+<div id="export-modal" class="modal" hidden>
+ <div class="dialog export-dialog" role="dialog" aria-modal="true" aria-labelledby="export-title" tabindex="-1">
+  <div class="dialog-heading"><h2 id="export-title">保存文件</h2><button type="button" data-close>关闭</button></div>
+  <div class="dialog-body"><p id="export-filename"></p><p class="muted">文件已生成，点击下方按钮保存到设备。</p><a id="download-link" class="download-button primary" href="#" download>下载文件</a></div>
+ </div>
+</div>
+<script>window.LessonModules = {};</script>
+<script>
+(function(){
+'use strict';
+var WIDTHS=[1.15,.85,1.6,1.35,.5,.75,1.65,1.25,1.8,.65,.48,1.15,1.6,.8,1.35,1.95,.9,.55,1.45,1.15];
+var MODELS={A:{start:8,length:12,radius:200},B:{start:0,length:14,radius:170}};
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+function widths(id){var m=MODELS[id];return WIDTHS.slice(m.start,m.start+m.length);}
+function bounds(id,r){var ws=widths(id),sum=ws.reduce(function(a,b){return a+b;},0),acc=0;return ws.map(function(w){acc+=w;return acc/sum*r;});}
+function relativeWidths(id){var w=widths(id),mean=w.reduce(function(a,b){return a+b;},0)/w.length;return w.map(function(x){return x/mean;});}
+function overlap(offset){var pairs=[];for(var i=0;i<14;i++){var x=i+offset;if(x>=8&&x<20)pairs.push([WIDTHS[8+x-8],WIDTHS[i]]);}return pairs;}
+function pearson(p){if(p.length<3)return null;var a=0,b=0,aa=0,bb=0,ab=0;for(var i=0;i<p.length;i++){a+=p[i][0];b+=p[i][1];aa+=p[i][0]*p[i][0];bb+=p[i][1]*p[i][1];ab+=p[i][0]*p[i][1];}var den=Math.sqrt((p.length*aa-a*a)*(p.length*bb-b*b));return den?(p.length*ab-a*b)/den:0;}
+window.TimeEvidenceModel={tree:{widths:widths,relativeWidths:relativeWidths,ringBoundaries:bounds,match:function(offset){var p=overlap(offset);return{overlap:p.length,correlation:pearson(p),aligned:offset===0,outerYear:2005+offset+13};},sampleYears:function(id){return MODELS[id].length;}}};
+var root,api,svg,state,box,dragLast=false;
+function defaults(){return{expanded:false,selectedSample:'A',selectedRing:0,ageA:'',ageB:'',ageChecked:false,offset:6,matchChecked:false,attempts:[]};}
+function el(id){return root.querySelector('#tree-'+id);}
+function num(v,d){return typeof v==='number'&&isFinite(v)?v:d;}
+function escape(s){return api.esc(String(s));}
+function ringPath(cx,cy,r){var p=[];for(var i=0;i<=72;i++){var a=i/72*Math.PI*2,w=1+.018*Math.sin(a*3)+.012*Math.cos(a*5);p.push((i?'L':'M')+(cx+Math.cos(a)*r*w).toFixed(2)+' '+(cy+Math.sin(a)*r*(1+.012*Math.cos(a*4))).toFixed(2));}return p.join(' ')+'Z';}
+function drawTree(id,cx,cy,r){var rs=bounds(id,r),s='<g data-tree="'+id+'" role="button" tabindex="0" aria-label="样本'+id+'：点击横截面选择年轮，左右键逐圈选择">';s+='<path d="'+ringPath(cx,cy,r+10)+'" fill="#765039" stroke="#5f402e" stroke-width="3"/>';for(var i=rs.length-1;i>=0;i--){var selected=state.selectedSample===id&&state.selectedRing===i;var w=rs[i]-(rs[i-1]||0);s+='<path data-ring="'+i+'" data-sample="'+id+'" d="'+ringPath(cx,cy,rs[i])+'" fill="'+(selected?'#8bbfa6':(i%2?'#ead1a2':'#f1dbb5'))+'" stroke="'+(selected?'#1f6b59':'#aa7744')+'" stroke-width="'+Math.max(1.8,w*.18)+'"/>';}
+s+='<circle cx="'+cx+'" cy="'+cy+'" r="4" fill="#855d3e"/><line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+r+22)+'" y2="'+cy+'" stroke="#173b38" stroke-width="2" stroke-dasharray="6 6" opacity=".8"/>';
+if(state.selectedSample===id){var ri=state.selectedRing,rb=rs[ri],ra=rs[ri-1]||0;s+='<line x1="'+(cx+ra)+'" y1="'+cy+'" x2="'+(cx+rb)+'" y2="'+cy+'" stroke="#0f7155" stroke-width="10" stroke-linecap="round"/>';}return s+'</g>';}
+function drawBands(){var s='',x0=112,cell=38,top=350,bottom=510,shift=state.offset;var relative={A:relativeWidths('A'),B:relativeWidths('B')};
+s+='<text x="40" y="305" font-size="24" fill="#60736d">每格一年 · 相对宽窄</text>';
+for(var j=0;j<=20;j++){var x=x0+j*cell;s+='<line x1="'+x+'" y1="330" x2="'+x+'" y2="550" stroke="#e5eae6" stroke-width="1"/>';if(j>=8&&j<20&&j%2===1)s+='<text x="'+(x+cell/2)+'" y="575" font-size="22" text-anchor="middle">'+(2005+j)+'</text>';}
+['A','B'].forEach(function(id){var start=id==='A'?8:shift,y=id==='A'?top:bottom;var vals=relative[id];s+='<text x="44" y="'+(y-18)+'" font-size="32" font-weight="750">'+id+'</text>';s+='<g data-band="'+id+'"'+(id==='B'?' role="slider" tabindex="0" aria-label="左右移动B时间带" aria-valuemin="0" aria-valuemax="6" aria-valuenow="'+shift+'"':'')+'>';if(id==='B')s+='<rect x="'+(x0+shift*cell-7)+'" y="413" width="'+(cell*14+14)+'" height="133" rx="9" fill="#f9f0df" stroke="'+(state.matchChecked&&shift===0?'#1f6b59':'#d5b477')+'" stroke-width="2"/>';
+for(var i=0;i<vals.length;i++){var xx=x0+(start+i)*cell;var h=vals[i]*48;var selected=state.selectedSample===id&&state.selectedRing===i;var matched=state.matchChecked&&shift===0&&(start+i>=8)&&(start+i<=13);s+='<g data-ring="'+i+'" data-sample="'+id+'"><rect x="'+(xx+3)+'" y="'+(y-h)+'" width="'+(cell-6)+'" height="'+h+'" rx="3" fill="'+(selected?'#0f7155':matched?'#7aac8e':id==='A'?'#ad7544':'#cfa36b')+'"/><line x1="'+(xx+cell/2)+'" y1="'+(y+5)+'" x2="'+(xx+cell/2)+'" y2="'+(y+12)+'" stroke="#8a9c92" stroke-width="2"/></g>';}
+s+='</g>';});
+if(state.matchChecked&&shift===0){s+='<rect x="'+(x0+8*cell-2)+'" y="325" width="'+(cell*6+4)+'" height="220" rx="7" fill="none" stroke="#1f6b59" stroke-dasharray="8 5" stroke-width="2" pointer-events="none"/><text x="'+(x0+13.5*cell)+'" y="608" font-size="26" font-weight="750" text-anchor="middle" fill="#1f6b59">B 最外圈：2018年</text>';}else s+='<text x="'+(x0+(shift+7)*cell)+'" y="608" font-size="23" text-anchor="middle" fill="#946b38">拖动 B，试着把连续的宽窄模式接起来</text>';
+return s;}
+function renderSvg(){var ex=state.expanded,s='<rect width="1000" height="620" fill="#ffffff"/><text x="40" y="44" font-size="24" fill="#60736d">'+(ex?'':'同一地区 · 两块完整横截面')+'</text><text x="960" y="44" text-anchor="end" font-size="22" fill="#60736d">教学示意</text>';
+if(ex){s+=drawTree('A',300,170,112)+drawTree('B',740,170,94);s+='<text x="142" y="180" font-size="30" font-weight="750">A</text><text x="600" y="180" font-size="30" font-weight="750">B</text><text x="300" y="32" font-size="23" text-anchor="middle">最外圈 2024年</text><text x="740" y="32" font-size="23" text-anchor="middle">最外圈年份未知</text>';s+=drawBands();}
+else{s+=drawTree('A',265,300,200)+drawTree('B',735,300,170);s+='<text x="265" y="554" text-anchor="middle" font-size="32" font-weight="750">A</text><text x="735" y="554" text-anchor="middle" font-size="32" font-weight="750">B</text><text x="265" y="594" text-anchor="middle" font-size="25">最外圈 2024年</text><text x="735" y="594" text-anchor="middle" font-size="25">最外圈年份未知</text>';}
+svg.innerHTML=s;}
+function feedbackAge(){if(!state.ageChecked)return'从中心向外数，浅色和深色合为一年。';var good=Number(state.ageA)===12&&Number(state.ageB)===14;return good?'A 有12个完整年轮，B 有14个。哪一块更粗？哪一块记录的年数更多？':'再沿取样线核对：浅、深合成一圈，不要把它们数成两年。';}
+function render(){box.classList.toggle('expanded',state.expanded);el('age-a').value=state.ageA;el('age-b').value=state.ageB;el('count-feedback').textContent=feedbackAge();el('task').textContent=state.expanded?'让时间记录接起来':'先数，再比较';el('instruction').textContent=state.expanded?'A 的最外圈年份已知。B 能补上更早的记录吗？':'点选一个完整年轮，沿着它看一圈。';el('expand').textContent=state.expanded?'返回横截面':'展开时间带';el('align-controls').hidden=!state.expanded;el('match-feedback').hidden=!state.expanded;el('offset').value=state.offset;el('earlier').disabled=state.offset===0;el('later').disabled=state.offset===6;var sel=state.selectedSample;el('selected').textContent='样本 '+sel+' · 从中心数第 '+(state.selectedRing+1)+' 个完整年轮';if(state.matchChecked){var result=window.TimeEvidenceModel.tree.match(state.offset);el('match-feedback').textContent=result.aligned?'连续6年的宽窄模式吻合。B最外圈形成于2018年；两份记录共跨20年。':'这个位置的宽窄模式还未对齐。不要只比较一圈，也看看相邻几圈。';}else el('match-feedback').textContent='B的位置尚未核对。先比较重叠部分连续几年的宽窄变化。';renderSvg();}
+function change(){render();api.changed();}
+function setOffset(v){state.offset=clamp(Math.round(v),0,6);state.matchChecked=false;change();}
+function selectAt(p,target){if(target&&target.closest){var hit=target.closest('[data-ring]');if(hit){state.selectedSample=hit.getAttribute('data-sample');state.selectedRing=Number(hit.getAttribute('data-ring'));change();return;}}var ex=state.expanded,positions=ex?{A:[300,170,112],B:[740,170,94]}:{A:[265,300,200],B:[735,300,170]};for(var id in positions){var c=positions[id],d=Math.sqrt(Math.pow(p.x-c[0],2)+Math.pow(p.y-c[1],2));if(d<=c[2]+12){var rs=bounds(id,c[2]);var idx=rs.findIndex(function(r){return d<=r;});state.selectedSample=id;state.selectedRing=idx<0?rs.length-1:idx;change();return;}}if(ex){var id2=p.y<407?'A':'B';var index=Math.floor((p.x-112)/38)-(id2==='A'?8:state.offset);if(index>=0&&index<MODELS[id2].length){state.selectedSample=id2;state.selectedRing=index;change();}}}
+function saveEvidence(){var ageGood=state.ageChecked&&Number(state.ageA)===12&&Number(state.ageB)===14;var matched=state.matchChecked&&state.offset===0;api.record({topic:'树木年轮',source:'教学示意模型',evidence:'A计数：'+(state.ageA||'未填')+'年；B计数：'+(state.ageB||'未填')+'年；'+(state.ageChecked?(ageGood?'计数已核对':'计数待修正'):'计数未核对')+'。'+(state.expanded?'B时间带位置 '+state.offset+'；已知A最外圈2024年。':''),inference:matched?'重叠的6年宽窄模式吻合；推断B最外圈2018年，合并记录跨20年。':state.expanded?'时间带尚未匹配，不能据此确定B最外圈年份。':ageGood?'本示意中较细的B记录的年数更多；粗细不能代替数年轮。':'依据尚未核对，继续观察。'});}
+window.LessonModules.tree={
+init:function(element,helpers,saved){root=element;api=helpers;svg=el('svg');box=root.querySelector('.workbench');state=defaults();if(saved&&typeof saved==='object'){state.expanded=!!saved.expanded;state.selectedSample=saved.selectedSample==='B'?'B':'A';state.selectedRing=clamp(Math.floor(num(saved.selectedRing,0)),0,MODELS[state.selectedSample].length-1);state.ageA=/^\d{1,2}$/.test(String(saved.ageA))?String(saved.ageA):'';state.ageB=/^\d{1,2}$/.test(String(saved.ageB))?String(saved.ageB):'';state.ageChecked=!!saved.ageChecked;state.offset=clamp(Math.round(num(saved.offset,6)),0,6);state.matchChecked=!!saved.matchChecked;state.attempts=Array.isArray(saved.attempts)?saved.attempts.slice(-10):[];}
+el('age-a').addEventListener('input',function(){state.ageA=this.value;state.ageChecked=false;el('count-feedback').textContent=feedbackAge();api.changed();});el('age-b').addEventListener('input',function(){state.ageB=this.value;state.ageChecked=false;el('count-feedback').textContent=feedbackAge();api.changed();});el('check-age').addEventListener('click',function(){if(!state.ageA||!state.ageB){api.toast('先填写两块样本的年轮计数。');return;}state.ageChecked=true;change();});el('expand').addEventListener('click',function(){state.expanded=!state.expanded;change();});el('offset').addEventListener('input',function(){setOffset(Number(this.value));});el('earlier').addEventListener('click',function(){setOffset(state.offset-1);});el('later').addEventListener('click',function(){setOffset(state.offset+1);});el('check-match').addEventListener('click',function(){state.matchChecked=true;state.attempts.push(state.offset);state.attempts=state.attempts.slice(-10);change();});el('save').addEventListener('click',saveEvidence);
+api.bindDrag(svg,{start:function(e){var p=api.svgPoint(svg,e);if(state.expanded&&p.y>410&&p.y<548&&p.x>=112+state.offset*38-7&&p.x<=112+(state.offset+14)*38+7){dragLast=false;return{x:p.x,offset:state.offset,target:e.target};}selectAt(p,e.target);return null;},move:function(e,ctx){var p=api.svgPoint(svg,e),dx=p.x-ctx.x;if(Math.abs(dx)>4)dragLast=true;var offset=clamp(ctx.offset+Math.round(dx/38),0,6);if(offset!==state.offset)setOffset(offset);},end:function(e,ctx){if(!dragLast)selectAt(api.svgPoint(svg,e),ctx.target);}});
+svg.addEventListener('keydown',function(e){var target=e.target;var band=target.getAttribute('data-band');if(band==='B'&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();setOffset(state.offset+(e.key==='ArrowRight'?1:-1));var active=svg.querySelector('[data-band="B"]');if(active)active.focus();return;}var id=target.getAttribute('data-tree');if(id&&(e.key==='ArrowLeft'||e.key==='ArrowRight'||e.key==='Enter'||e.key===' ')){e.preventDefault();state.selectedSample=id;state.selectedRing=clamp(state.selectedRing+(e.key==='ArrowLeft'?-1:1),0,MODELS[id].length-1);change();var node=svg.querySelector('[data-tree="'+id+'"]');if(node)node.focus();}});render();},
+enter:function(){render();},leave:function(){},reset:function(){state=defaults();change();},snapshot:function(){return JSON.parse(JSON.stringify(state));},getSVG:function(){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1400" height="952" font-family="Microsoft YaHei,PingFang SC,sans-serif" fill="#173b38">'+svg.innerHTML+'<rect y="620" width="1000" height="60" fill="#f3f5f2"/><text x="30" y="656" font-size="22">时间与变化 · 树木年轮 · 教学示意'+(state.matchChecked&&state.offset===0?' · B最外圈2018年':' · 尚不能据此确定B最外圈年份')+'</text></svg>';}
+};
+})();
+
+(function () {
+  'use strict';
+  var rootNode, api, svg, controls = {};
+  var YEAR_HOURS = 365.2422 * 24;
+  var state = freshState();
+  var geometry = { start: 160, width: 790, top: 145, countX: 66, countWidth: 868, countY: 308, countHeight: 150 };
+
+  function freshState() { return { window: 8, marked: [], days: 365, calculated: false }; }
+  function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+  function copy(value) { return JSON.parse(JSON.stringify(value)); }
+  function escape(value) { return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function fmt(value) { return Number(value).toFixed(1); }
+  function hoursForDays(days) { return YEAR_HOURS / days; }
+  function readSaved(saved) {
+    if (!saved || typeof saved !== 'object') return freshState();
+    var result = freshState();
+    if (isFinite(saved.window)) result.window = clamp(Math.round(Number(saved.window)), 0, 19);
+    if (isFinite(saved.days)) result.days = clamp(Math.round(Number(saved.days)), 360, 420);
+    result.calculated = saved.calculated === true;
+    if (Array.isArray(saved.marked)) {
+      saved.marked.forEach(function (item) {
+        if (typeof item === 'number' && item >= 0 && item < 400 && Math.floor(item) === item && result.marked.indexOf(item) < 0) result.marked.push(item);
+      });
+    }
+    return result;
+  }
+  function marked(globalIndex) { return state.marked.indexOf(globalIndex) >= 0; }
+  function windowCount() {
+    var count = 0, first = state.window * 20;
+    for (var i = 0; i < 20; i++) if (marked(first + i)) count++;
+    return count;
+  }
+  function setMarked(globalIndex, paint) {
+    var index = state.marked.indexOf(globalIndex);
+    if (paint && index < 0) { state.marked.push(globalIndex); return true; }
+    if (!paint && index >= 0) { state.marked.splice(index, 1); return true; }
+    return false;
+  }
+  function changed() { if (api && api.changed) api.changed(); }
+  function setWindow(value) {
+    var next = clamp(Math.round(value), 0, 19);
+    if (next === state.window) return false;
+    state.window = next;
+    render();
+    changed();
+    return true;
+  }
+  function setDays(value) {
+    var next = clamp(Math.round(value), 360, 420);
+    if (!isFinite(next)) return;
+    state.days = next;
+    state.calculated = false;
+    render();
+    changed();
+  }
+  function dayFromX(x) { return clamp(Math.floor((x - geometry.countX) / geometry.countWidth * 20), 0, 19); }
+  function windowFromX(x) { return clamp(Math.floor((x - geometry.start) / geometry.width * 20), 0, 19); }
+  function ridgePath(globalIndex, cx, y0, height, amplitude) {
+    var seed = (globalIndex * 17 + 11) % 29;
+    var a = Math.sin(seed * 1.7) * amplitude;
+    var b = Math.cos(seed * 0.9) * amplitude;
+    return 'M ' + fmt(cx) + ' ' + y0 + ' C ' + fmt(cx + a) + ' ' + fmt(y0 + height * .25) + ' ' + fmt(cx + b) + ' ' + fmt(y0 + height * .3) + ' ' + fmt(cx + a * .6) + ' ' + fmt(y0 + height * .5) + ' S ' + fmt(cx - b) + ' ' + fmt(y0 + height * .77) + ' ' + fmt(cx) + ' ' + (y0 + height);
+  }
+
+  function makeSVG() {
+    var left = geometry.start, width = geometry.width;
+    var selectedX = left + state.window * width / 20;
+    var selectedCenter = selectedX + width / 40;
+    var count = windowCount();
+    var first = state.window * 20;
+    var parts = [
+      '<title>珊瑚日历：日纹放大与一天时长推算</title>',
+      '<desc>教学示意，参考约4亿年前部分珊瑚每年约400日的研究。年界与日纹已确认。现代与古代的年带按日序归一化展开，不是骨骼尺寸的直接比较。可拖动20日取样窗并标记日纹。计算假定一年总时长近似不变。</desc>',
+      '<defs><pattern id="coral-modern-lines" width="' + (width / 365) + '" height="52" patternUnits="userSpaceOnUse" x="' + left + '"><rect width="' + (width / 365) + '" height="52" fill="#e5f0e9"/><path d="M .8 0 V 52" stroke="#547d69" stroke-width=".8"/></pattern>',
+      '<pattern id="coral-ancient-lines" width="' + (width / 400) + '" height="58" patternUnits="userSpaceOnUse" x="' + left + '"><rect width="' + (width / 400) + '" height="58" fill="#f5e9dd"/><path d="M .7 0 V 58" stroke="#b57854" stroke-width=".7"/></pattern>',
+      '<linearGradient id="coral-bone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9f0df"/><stop offset=".5" stop-color="#f2d8b6"/><stop offset="1" stop-color="#f9eddb"/></linearGradient>',
+      '<clipPath id="coral-detail-clip"><rect x="' + geometry.countX + '" y="' + geometry.countY + '" width="' + geometry.countWidth + '" height="' + geometry.countHeight + '" rx="9"/></clipPath></defs>',
+      '<rect width="1000" height="620" fill="#fffdfa"/>',
+      '<g font-family="PingFang SC,Microsoft YaHei,sans-serif" fill="#173b38">',
+      '<text x="42" y="39" font-size="26" font-weight="700">把一年放在同一把尺上</text>',
+      '<text x="954" y="39" text-anchor="end" font-size="20" fill="#687970">日序展开 · 教学示意</text>',
+      '<text x="42" y="108" font-size="31" font-weight="700">现代</text>',
+      '<rect x="' + left + '" y="71" width="' + width + '" height="52" rx="5" fill="url(#coral-modern-lines)"/>',
+      '<text x="555" y="108" text-anchor="middle" font-size="26" font-weight="750" stroke="#e5f0e9" stroke-width="7" paint-order="stroke" fill="#214d42">一年约365日</text>',
+      '<text x="42" y="184" font-size="31" font-weight="700">古代</text>',
+      '<rect x="' + left + '" y="145" width="' + width + '" height="58" rx="5" fill="url(#coral-ancient-lines)"/>'
+    ];
+    for (var group = 1; group < 20; group++) {
+      var gx = left + group * width / 20;
+      parts.push('<path d="M ' + fmt(gx) + ' 145 V 203" stroke="#bc9771" stroke-width="1.6"/>');
+    }
+    parts.push('<path d="M ' + left + ' 65 V 209 M ' + (left + width) + ' 65 V 209" stroke="#47695b" stroke-width="3"/>');
+    parts.push('<g data-coral-window="true" role="slider" tabindex="0" aria-label="古代日纹取样窗，左右方向键移动" aria-valuemin="1" aria-valuemax="20" aria-valuenow="' + (state.window + 1) + '" aria-valuetext="第' + (state.window + 1) + '组，共20组">');
+    parts.push('<rect x="' + fmt(selectedX - 9) + '" y="128" width="' + fmt(width / 20 + 18) + '" height="85" rx="6" fill="transparent"/>');
+    parts.push('<rect x="' + fmt(selectedX) + '" y="140" width="' + fmt(width / 20) + '" height="68" rx="4" fill="#c66d50" fill-opacity=".15" stroke="#b25135" stroke-width="4"/>');
+    parts.push('<path d="M ' + fmt(selectedCenter - 10) + ' 133 H ' + fmt(selectedCenter + 10) + '" stroke="#b25135" stroke-width="7" stroke-linecap="round"/>');
+    parts.push('</g>');
+    parts.push('<path d="M ' + fmt(selectedCenter) + ' 210 L ' + fmt(selectedCenter) + ' 225 L 500 252 V 266" fill="none" stroke="#c66d50" stroke-width="2" stroke-dasharray="5 5"/>');
+    parts.push('<text x="' + left + '" y="239" font-size="22" fill="#60736d">拖动取样窗</text><text x="950" y="239" text-anchor="end" font-size="22" fill="#60736d">全年分成20组</text>');
+    parts.push('<text x="42" y="288" font-size="27" font-weight="700">第 ' + (state.window + 1) + ' 组 · 放大日纹</text><text x="954" y="288" text-anchor="end" font-size="23" fill="#8f533c">点一点，或划过日纹</text>');
+    parts.push('<g data-coral-count="true" role="button" tabindex="0" aria-label="标记放大的日纹。按回车标记下一条，按退格撤销一条。已标记' + count + '条"><rect x="' + geometry.countX + '" y="' + geometry.countY + '" width="' + geometry.countWidth + '" height="' + geometry.countHeight + '" rx="9" fill="url(#coral-bone)" stroke="#e2ccb0" stroke-width="2"/>');
+    parts.push('<g clip-path="url(#coral-detail-clip)">');
+    for (var i = 0; i < 20; i++) {
+      var x = geometry.countX + (i + .5) * geometry.countWidth / 20;
+      var globalIndex = first + i;
+      var isMarked = marked(globalIndex);
+      if (isMarked) parts.push('<rect x="' + fmt(geometry.countX + i * geometry.countWidth / 20) + '" y="308" width="' + fmt(geometry.countWidth / 20) + '" height="150" fill="#1f6b59" fill-opacity=".13"/>');
+      parts.push('<path d="' + ridgePath(globalIndex, x + 3, 312, 142, 4.2) + '" fill="none" stroke="#e2ba8f" stroke-width="7" opacity=".65"/>');
+      parts.push('<path d="' + ridgePath(globalIndex, x, 311, 144, 3.8) + '" fill="none" stroke="' + (isMarked ? '#1f6b59' : '#a96945') + '" stroke-width="' + (isMarked ? '5' : '3.7') + '" stroke-linecap="round"/>');
+    }
+    parts.push('</g>');
+    for (var j = 0; j < 20; j++) {
+      var dotX = geometry.countX + (j + .5) * geometry.countWidth / 20;
+      var isDotMarked = marked(first + j);
+      parts.push('<circle cx="' + fmt(dotX) + '" cy="475" r="9" fill="' + (isDotMarked ? '#1f6b59' : '#fffdfa') + '" stroke="' + (isDotMarked ? '#1f6b59' : '#c9bda9') + '" stroke-width="2"/>');
+    }
+    parts.push('<rect x="60" y="303" width="880" height="186" fill="transparent"/></g>');
+    if (state.calculated) {
+      var hours = hoursForDays(state.days), scale = 660 / 26;
+      parts.push('<text x="42" y="528" font-size="24" font-weight="700">同一年的时长，分给不同天数</text>');
+      parts.push('<text x="47" y="568" font-size="25">现代一天</text><rect x="202" y="546" width="' + fmt(24 * scale) + '" height="25" rx="5" fill="#1f6b59"/>');
+      parts.push('<text x="' + fmt(216 + 24 * scale) + '" y="568" font-size="24" font-weight="700">24时</text>');
+      parts.push('<text x="47" y="604" font-size="25">推算一天</text><rect x="202" y="583" width="' + fmt(hours * scale) + '" height="25" rx="5" fill="#c66d50"/>');
+      parts.push('<text x="' + fmt(216 + hours * scale) + '" y="605" font-size="24" font-weight="700">约' + fmt(hours) + '时</text>');
+    } else {
+      parts.push('<text x="500" y="540" text-anchor="middle" font-size="29" font-weight="750">' + (count === 20 ? '本组20条 × 全年20组，得到什么？' : '每一道已确认的日纹，对应一个当时的日。') + '</text>');
+      parts.push('<text x="500" y="581" text-anchor="middle" font-size="25" fill="#60736d">古代的一天，和现在一样长吗？</text>');
+    }
+    parts.push('</g>');
+    return parts.join('');
+  }
+
+  function render() {
+    if (!rootNode) return;
+    var active = document.activeElement;
+    var windowHadFocus = active && active.getAttribute && active.getAttribute('data-coral-window') === 'true';
+    var countHadFocus = active && active.getAttribute && active.getAttribute('data-coral-count') === 'true';
+    svg.innerHTML = makeSVG();
+    if (windowHadFocus) {
+      var newWindow = svg.querySelector('[data-coral-window]');
+      if (newWindow && newWindow.focus) newWindow.focus();
+    }
+    if (countHadFocus) {
+      var newCount = svg.querySelector('[data-coral-count]');
+      if (newCount && newCount.focus) newCount.focus();
+    }
+    controls.count.textContent = windowCount();
+    if (document.activeElement !== controls.days) controls.days.value = state.days;
+    controls.range.value = state.days;
+    controls.record.disabled = !state.calculated;
+    if (state.calculated) {
+      var hours = hoursForDays(state.days);
+      var difference = hours - 24;
+      var comparison = Math.abs(difference) < .05 ? '与现代一天约24小时接近' : '比现代' + (difference < 0 ? '短' : '长') + '约' + fmt(Math.abs(difference)) + '小时';
+      controls.result.innerHTML = '<div class="coral-hours">' + fmt(hours) + ' <small>小时 / 日</small></div><span class="muted">' + escape(comparison) + (state.days !== 400 ? ' · 自选假设' : '') + '</span>';
+    } else {
+      controls.result.innerHTML = '<strong>古代的一天有多长？</strong><span class="muted">先假定一年总时长近似不变。</span>';
+    }
+  }
+
+  function beginDrag(event) {
+    var p = api.svgPoint(svg, event);
+    if (p.y >= 126 && p.y <= 216 && p.x >= 145 && p.x <= 965) {
+      setWindow(windowFromX(p.x));
+      return { kind: 'window' };
+    }
+    if (p.y >= 303 && p.y <= 489 && p.x >= 60 && p.x <= 940) {
+      var day = dayFromX(p.x), index = state.window * 20 + day;
+      var context = { kind: 'mark', last: day, window: state.window, paint: !marked(index) };
+      setMarked(index, context.paint);
+      render();
+      return context;
+    }
+    return null;
+  }
+  function moveDrag(event, context) {
+    if (!context) return;
+    var p = api.svgPoint(svg, event);
+    if (context.kind === 'window') { setWindow(windowFromX(p.x)); return; }
+    if (context.kind !== 'mark' || p.y < 285 || p.y > 510) return;
+    var day = dayFromX(p.x), first = context.window * 20;
+    for (var i = Math.min(context.last, day); i <= Math.max(context.last, day); i++) setMarked(first + i, context.paint);
+    context.last = day;
+    render();
+  }
+  function endDrag(event, context) {
+    if (!context) return;
+    changed();
+    if (context.kind === 'mark' && windowCount() === 20 && api.toast) api.toast('这一组已标出20条日纹。全年有20组，能推算多少日？');
+  }
+  function calculate() {
+    var raw = controls.days.value.trim(), days = Number(raw);
+    if (!raw || !isFinite(days) || days < 360 || days > 420 || Math.floor(days) !== days) {
+      if (api.toast) api.toast('请填360—420之间的整数，表示估计的一年日数。');
+      controls.days.focus();
+      return;
+    }
+    state.days = days;
+    state.calculated = true;
+    render();
+    changed();
+  }
+  function record() {
+    if (!state.calculated) return;
+    var hours = hoursForDays(state.days);
+    var inference = '假定一年总时长近似不变，按' + state.days + '日/年推算，一天约' + fmt(hours) + '小时。';
+    if (state.days === 400) inference += '这与部分约4亿年前珊瑚约400日/年的研究参照相符。';
+    else inference += '当前年日数是自选假设，不能当作真实化石测量结果。';
+    if (api.record) api.record({
+      topic: '珊瑚日历',
+      evidence: '教学样本第' + (state.window + 1) + '组，本窗标记' + windowCount() + '条日纹；全年20组。输入的一年日数为' + state.days + '日。',
+      inference: inference,
+      source: '教学模型；参考部分泥盆纪珊瑚研究。年界与日纹已确认，按日序展开；不是本班实测。'
+    });
+  }
+  function init(root, sharedApi, saved) {
+    rootNode = root;
+    api = sharedApi;
+    svg = root.querySelector('#coral-svg');
+    state = readSaved(saved);
+    controls = {
+      count: root.querySelector('#coral-count'),
+      clear: root.querySelector('#coral-clear'),
+      days: root.querySelector('#coral-days'),
+      range: root.querySelector('#coral-days-range'),
+      calc: root.querySelector('#coral-calc'),
+      result: root.querySelector('#coral-result'),
+      record: root.querySelector('#coral-record')
+    };
+    controls.clear.addEventListener('click', function () {
+      var start = state.window * 20;
+      state.marked = state.marked.filter(function (value) { return value < start || value >= start + 20; });
+      render();
+      changed();
+    });
+    controls.range.addEventListener('input', function () { setDays(Number(this.value)); });
+    controls.days.addEventListener('input', function () {
+      state.calculated = false;
+      var raw = this.value.trim(), value = Number(raw);
+      if (raw && isFinite(value) && value >= 360 && value <= 420 && Math.floor(value) === value) state.days = value;
+      render();
+      changed();
+    });
+    controls.days.addEventListener('change', function () {
+      var value = Number(this.value);
+      if (!this.value.trim() || !isFinite(value)) value = state.days;
+      setDays(value);
+      this.value = state.days;
+    });
+    controls.calc.addEventListener('click', calculate);
+    controls.record.addEventListener('click', record);
+    svg.addEventListener('keydown', function (event) {
+      var target = event.target;
+      if (!target || !target.getAttribute) return;
+      var key = event.key;
+      if (target.getAttribute('data-coral-count') === 'true') {
+        var first = state.window * 20, i;
+        if (key === 'Enter' || key === ' ') {
+          event.preventDefault();
+          for (i = 0; i < 20; i++) if (!marked(first + i)) { setMarked(first + i, true); break; }
+          render();
+          changed();
+        } else if (key === 'Backspace' || key === 'Delete') {
+          event.preventDefault();
+          for (i = 19; i >= 0; i--) if (marked(first + i)) { setMarked(first + i, false); break; }
+          render();
+          changed();
+        }
+        return;
+      }
+      if (target.getAttribute('data-coral-window') !== 'true') return;
+      if (key === 'ArrowLeft' || key === 'ArrowDown') { event.preventDefault(); setWindow(state.window - 1); }
+      else if (key === 'ArrowRight' || key === 'ArrowUp') { event.preventDefault(); setWindow(state.window + 1); }
+      else if (key === 'Home') { event.preventDefault(); setWindow(0); }
+      else if (key === 'End') { event.preventDefault(); setWindow(19); }
+    });
+    api.bindDrag(svg, { start: beginDrag, move: moveDrag, end: endDrag });
+    render();
+  }
+  function reset() { state = freshState(); render(); changed(); }
+  function getSVG() {
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="992" viewBox="0 0 1000 620">' + makeSVG() + '</svg>';
+  }
+  window.LessonModules = window.LessonModules || {};
+  window.LessonModules.coral = {
+    init: init,
+    enter: render,
+    leave: function () {},
+    reset: reset,
+    snapshot: function () { return copy(state); },
+    getSVG: getSVG,
+    model: { yearHours: YEAR_HOURS, hoursForDays: hoursForDays, daysPerGroup: 20, groups: 20 }
+  };
+}());
+
+(function () {
+  'use strict';
+  window.LessonModules = window.LessonModules || {};
+  var host, api, svg, fields = {}, state;
+  var AGE = {unknown:'还不能确定具体年代',older:'比1.2亿年前更早',between:'约1亿—1.2亿年前',younger:'比1亿年前更晚'};
+  var ENV = {marine:'海洋',land:'陆地',uncertain:'证据不足'};
+  var LAYERS = [
+    {id:'A',y:140,h:62,color:'#d6c18a',ink:'#645640',items:['leaf','roots'],names:['叶片','根迹'],stage:4},
+    {id:'B',y:202,h:105,color:'#ceb798',ink:'#725e48',items:['leaf','fish','twig'],names:['叶片','鱼骨','枝条'],stage:3},
+    {id:'C',y:307,h:145,color:'#b5cec2',ink:'#3b695d',items:['coral','crinoid','shell'],names:['珊瑚','海百合','腕足类'],stage:2},
+    {id:'D',y:452,h:65,color:'#c5c0b2',ink:'#645e52',items:['shell','crinoid'],names:['腕足类','海百合'],stage:1}
+  ];
+  function fresh() { return {version:1,selected:'C',stage:4,order:[],dates:false,age:'',environment:'',before:null,after:null,feedback:'只有层序时，能确定具体多少年前吗？'}; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;'); }
+  function cleanJudgment(v) { return v && AGE[v.age] ? {age:v.age,environment:ENV[v.environment] ? v.environment : ''} : null; }
+  function restore(saved) {
+    var next = fresh();
+    if (!saved || saved.version !== 1) return next;
+    next.stage = Math.max(1,Math.min(4,Math.round(Number(saved.stage) || 4)));
+    next.selected = /^[ABCD]$/.test(saved.selected || '') ? saved.selected : 'C';
+    next.dates = saved.dates === true;
+    next.age = AGE[saved.age] ? saved.age : '';
+    next.environment = ENV[saved.environment] ? saved.environment : '';
+    next.before = cleanJudgment(saved.before); next.after = cleanJudgment(saved.after);
+    if (Array.isArray(saved.order)) saved.order.slice(0,4).forEach(function(id){if (/^[ABCD]$/.test(id) && next.order.indexOf(id) === -1) next.order.push(id);});
+    if (typeof saved.feedback === 'string') next.feedback = saved.feedback.slice(0,150);
+    if (layer(next.selected).stage > next.stage) next.selected = ['D','C','B','A'][next.stage-1];
+    return next;
+  }
+  function layer(id) { for (var i=0;i<LAYERS.length;i++) if(LAYERS[i].id===id) return LAYERS[i]; return LAYERS[2]; }
+  function notify() { if(api && api.changed) api.changed(); }
+  function text(x,y,size,copy,fill,extra) { return '<text x="'+x+'" y="'+y+'" font-size="'+size+'" fill="'+(fill||'#173b38')+'" '+(extra||'')+'>'+esc(copy)+'</text>'; }
+  function icon(type,x,y,scale,color) {
+    var ink=color||'#3b695d', art='';
+    if(type==='shell') {
+      art='<path d="M0 -29 C-25 -35 -48 -13 -45 8 C-39 29 -18 37 0 38 C18 37 39 29 45 8 C48 -13 25 -35 0 -29Z" fill="#f5f1df" stroke-width="3"/>';
+      [-33,-22,-11,0,11,22,33].forEach(function(v){art+='<path d="M0 -25 Q'+(v*.8)+' -3 '+v+' '+(35-Math.abs(v)*.24)+'" fill="none" stroke-width="2"/>';});
+      art+='<path d="M-39 10 Q0 23 39 10 M-29 27 Q0 34 29 27" fill="none" stroke-width="1.5" opacity=".5"/>';
+    } else if(type==='coral') {
+      art='<path d="M0 42 L0 13 L-18 -2 L-18 -26 M0 13 L18 -2 L18 -31 M-18 -2 L-36 -15 L-36 -29 M18 -2 L37 -17 L37 -34 M0 26 L-33 9 L-43 -3 M0 29 L32 17 L44 2 M0 6 L0 -38" fill="none" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>';
+      [[-18,-29],[18,-34],[-36,-32],[37,-37],[-43,-6],[44,-1],[0,-41]].forEach(function(p){art+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="5" fill="#eef3e5" stroke-width="2"/>';});
+    } else if(type==='crinoid') {
+      art='<path d="M0 43 Q3 25 0 4" fill="none" stroke-width="7"/>';
+      for(var i=10;i<=39;i+=7)art+='<path d="M-4 '+i+' L4 '+i+'" fill="none" stroke="#eef3e5" stroke-width="2"/>';
+      [-37,-20,0,20,37].forEach(function(v){art+='<path d="M0 5 Q'+(v*.45)+' -10 '+v+' -43" fill="none" stroke-width="4" stroke-linecap="round"/>';for(var j=0;j<4;j++){var yy=-10-j*8,xx=v*(.2+j*.18);art+='<path d="M'+xx+' '+yy+' l-8 -8 M'+xx+' '+yy+' l8 -10" fill="none" stroke-width="2"/>';}});
+      art+='<path d="M-12 4 Q0 15 12 4 L8 -6 L-8 -6Z" fill="#f5f1df" stroke-width="2"/>';
+    } else if(type==='leaf') {
+      art='<path d="M-5 37 C-44 12 -33 -33 16 -46 C49 -3 29 27 -5 37Z" fill="#edf0d9" stroke-width="3"/><path d="M-12 49 Q5 2 16 -42 M-4 24 L-25 8 M0 12 L24 3 M5 -2 L-19 -16 M9 -15 L26 -25" fill="none" stroke-width="2.6" stroke-linecap="round"/>';
+    } else if(type==='roots') {
+      art='<path d="M0 -44 L0 -7 L-9 20 L-3 43 M0 -9 L-24 6 L-38 24 M-17 1 L-27 -14 M-11 23 L-30 38 M1 -15 L21 0 L35 25 M22 1 L34 -7 M25 9 L17 33" fill="none" stroke-width="4" stroke-linecap="round"/>';
+    } else if(type==='fish') {
+      art='<path d="M-33 0 L30 0 M30 0 L48 -22 L45 22Z" fill="#f7efdc" stroke-width="3"/><path d="M-33 0 C-44 -23 -60 -13 -59 1 C-57 17 -40 20 -33 0Z" fill="#f7efdc" stroke-width="3"/><circle cx="-49" cy="-2" r="2" fill="'+ink+'"/>';
+      for(var k=-25;k<25;k+=10)art+='<path d="M'+k+' 0 l6 -16 M'+k+' 0 l6 16" fill="none" stroke-width="2.5"/>';
+    } else {
+      art='<path d="M-38 35 L28 -35 M-14 10 L-31 -13 M-3 -2 L23 0 M11 -18 L7 -40 M-25 22 L-4 30" fill="none" stroke-width="5" stroke-linecap="round"/>';
+    }
+    return '<g transform="translate('+x+' '+y+') scale('+scale+')" stroke="'+ink+'">'+art+'</g>';
+  }
+  function layerTexture(l) {
+    var out='<g opacity=".23" stroke="'+l.ink+'" stroke-width="1.7" fill="none">';
+    if(l.id==='B') {
+      for(var j=0;j<6;j++){var yy=l.y+14+j*15;out+='<path d="M44 '+yy+' Q280 '+(yy+20)+' 644 '+(yy-5)+'"/>';}
+    } else if(l.id==='C') {
+      for(var k=0;k<7;k++){var yc=l.y+16+k*19;out+='<path d="M44 '+yc+' Q190 '+(yc-7)+' 340 '+yc+' T644 '+yc+'"/>';}
+    } else {
+      for(var i=0;i<24;i++){var xx=60+(i*47)%564,yd=l.y+12+(i*17)%Math.max(18,l.h-24);out+='<path d="M'+xx+' '+yd+' l7 2"/>';}
+    }
+    return out+'</g>';
+  }
+  function landscape(top) {
+    if(state.stage<=2) {
+      return '<rect x="44" y="'+(top-36)+'" width="600" height="36" fill="#dcecea"/>'+ '<path d="M44 '+(top-35)+' Q94 '+(top-45)+' 144 '+(top-35)+' T244 '+(top-35)+' T344 '+(top-35)+' T444 '+(top-35)+' T544 '+(top-35)+' T644 '+(top-35)+'" fill="none" stroke="#77a899" stroke-width="3"/>';
+    }
+    var out='<path d="M44 '+top+' Q180 '+(top-9)+' 330 '+(top-3)+' T644 '+top+'" fill="none" stroke="#70916b" stroke-width="8"/>';
+    for(var i=0;i<15;i++){var x=65+i*39;out+='<path d="M'+x+' '+(top-4)+' l-4 -11 M'+x+' '+(top-4)+' l5 -15" stroke="#70916b" stroke-width="2"/>';}
+    return out;
+  }
+  function ash(y,shown,label,age) {
+    var out='<rect x="44" y="'+(y-3)+'" width="600" height="6" fill="#efeee4" stroke="#868678" stroke-width="1.3"/>';
+    if(shown) {
+      var boxY = y===307 ? 347 : 435;
+      out+='<path d="M638 '+y+' H677 V'+(boxY+35)+' H703" fill="none" stroke="#b3833f" stroke-width="2.5" stroke-dasharray="6 5"/>';
+      out+='<path d="M629 '+y+' l8 -7 l8 7 l-8 7Z" fill="#d7ab58" stroke="#a37537" stroke-width="1.5"/>';
+      out+='<rect x="706" y="'+boxY+'" width="258" height="70" rx="9" fill="#f8f2df" stroke="#e5d5b2"/>';
+      out+=text(721,boxY+24,21,label,'#6d5b3e')+text(721,boxY+57,29,age,'#573f21','font-weight="700"');
+    }
+    return out;
+  }
+  function sceneBody() {
+    var out='', selected=layer(state.selected), current=layer(['D','C','B','A'][state.stage-1]);
+    out+='<rect width="1000" height="620" fill="#ffffff"/>';
+    out+=text(44,45,31,state.stage===4?'从早到晚，依次点层':'回看同一地点的形成过程',null,'font-weight="700"');
+    out+=text(44,79,20,'未倒转的示意剖面 · 厚度不表示时长','#60736d');
+    out+='<rect x="44" y="517" width="600" height="16" fill="#e7e4da"/>';
+    for(var i=0;i<LAYERS.length;i++) {
+      var l=LAYERS[i]; if(l.stage>state.stage) continue;
+      var cy=l.y+l.h/2, active=l.id===state.selected;
+      out+='<g class="strata-layer" data-layer="'+l.id+'" tabindex="0" role="button" aria-label="查看'+l.id+'层化石并加入形成顺序" aria-pressed="'+active+'">';
+      out+='<rect x="44" y="'+l.y+'" width="600" height="'+l.h+'" fill="'+l.color+'"/>';
+      out+=layerTexture(l);
+      out+='<rect x="61" y="'+(cy-23)+'" width="47" height="46" rx="8" fill="'+(active?'#1f6b59':'#f7f4e8')+'" fill-opacity="'+(active?'1':'.88')+'"/>';
+      out+=text(84.5,cy+14,36,l.id,active?'#ffffff':'#173b38','text-anchor="middle" font-weight="700" style="fill:'+(active?'#ffffff':'#173b38')+'"');
+      var locs=l.items.length===3?[226,402,553]:[250,475];
+      for(var n=0;n<l.items.length;n++)out+=icon(l.items[n],locs[n],cy,l.id==='C'?.84:l.id==='B'?.66:.48,l.ink);
+      out+='<rect class="strata-layer-outline" x="46" y="'+(l.y+2)+'" width="596" height="'+(l.h-4)+'" fill="transparent" stroke="'+(active?'#1f6b59':'#ffffff')+'" stroke-opacity="'+(active?'1':'.52')+'" stroke-width="'+(active?'4':'1.5')+'"/>';
+      out+='</g>';
+    }
+    out+=landscape(current.y);
+    out+='<path d="M644 '+(selected.y+selected.h/2)+' C684 '+(selected.y+selected.h/2)+' 673 214 700 214" fill="none" stroke="#729b8d" stroke-width="2.3" stroke-dasharray="5 5"/>';
+    out+='<rect x="702" y="101" width="262" height="230" rx="12" fill="#f5f8f3" stroke="#d9e3d9" stroke-width="1.5"/>';
+    out+=text(720,141,27,selected.id+' 层的化石组合',null,'font-weight="650"');
+    var insetXs=selected.items.length===3?[750,834,918]:[781,891];
+    for(var f=0;f<selected.items.length;f++){out+=icon(selected.items[f],insetXs[f],222,.63,selected.ink);out+=text(insetXs[f],292,23,selected.names[f],null,'text-anchor="middle"');}
+    if(state.stage>=2)out+=ash(452,state.dates,'C 层下方火山灰','约1.2亿年前');
+    if(state.stage>=3)out+=ash(307,state.dates,'C 层上方火山灰','约1亿年前');
+    if(!state.dates){out+=text(721,394,26,'这些痕迹能告诉',null)+text(721,434,26,'我们哪些信息？',null);}
+    else if(state.stage<3){out+=text(720,369,22,'上方火山灰', '#60736d')+text(720,402,22,'在后续阶段出现', '#60736d');}
+    if(state.dates)out+=text(722,526,18,'火山灰测年值 · 教学示意','#60736d');
+    out+='<path d="M44 543 H964" stroke="#e3e9e2" stroke-width="1.4"/>';
+    out+=text(44,580,26,'我的层序',null,'font-weight="650"')+text(196,579,23,'早','#60736d','text-anchor="middle"');
+    for(var t=0;t<4;t++){
+      var x=231+t*147,ord=state.order[t], fill=ord?layer(ord).color:'#f2f5f0';
+      out+='<rect x="'+x+'" y="551" width="105" height="43" rx="8" fill="'+fill+'" stroke="'+(ord?'#adbaae':'#ccd7cb')+'" stroke-width="1.5" '+(!ord?'stroke-dasharray="5 4"':'')+'/>';
+      out+=text(x+52.5,583,30,ord||'·',null,'text-anchor="middle" font-weight="700"');
+      if(t<3)out+='<path d="M'+(x+118)+' 572 H'+(x+136)+' M'+(x+130)+' 566 l6 6 l-6 6" fill="none" stroke="#83998c" stroke-width="2.5" stroke-linecap="round"/>';
+    }
+    out+=text(825,579,23,'晚','#60736d','text-anchor="middle"');
+    var orderMsg=state.order.length===4?(state.order.join('')==='DCBA'?'层序与未倒转剖面的叠放关系吻合。':'再看一看：哪些层压在另一些层的上面？'):'点击地层，留下你的形成顺序。';
+    out+=text(44,617,21,orderMsg,state.order.length===4&&state.order.join('')!=='DCBA'?'#a16f2a':'#60736d');
+    return out;
+  }
+  function summary(j) { return j ? AGE[j.age] : '尚未保留'; }
+  function render() {
+    if(!host)return;
+    svg.innerHTML=sceneBody();
+    fields.stage.value=state.stage; fields.stageOutput.textContent=state.stage+' / 4';
+    fields.stage.setAttribute('aria-valuetext','阶段'+state.stage+'：'+['D','C','B','A'][state.stage-1]+'层形成；阶段间隔不等时');
+    fields.age.value=state.age; fields.environment.value=state.environment;
+    fields.dates.textContent=state.dates?'看测年':'加入测年';
+    fields.before.textContent=summary(state.before); fields.after.textContent=summary(state.after);
+    fields.feedback.textContent=state.feedback; fields.dateNote.hidden=!state.dates;
+  }
+  function chooseLayer(id) {
+    if(!/^[ABCD]$/.test(id)||layer(id).stage>state.stage)return;
+    state.selected=id;
+    if(state.order.length<4 && state.order.indexOf(id)===-1)state.order.push(id);
+    render();notify();
+  }
+  function findLayer(target) {
+    while(target && target!==svg){if(target.getAttribute&&target.getAttribute('data-layer'))return target.getAttribute('data-layer');target=target.parentNode;}
+    return '';
+  }
+  function introduceDates() {
+    if(!state.dates && !state.before && AGE[state.age])state.before={age:state.age,environment:state.environment};
+    state.dates=true;state.stage=4;state.selected='C';
+    state.feedback='比较 C 层上下的两条火山灰，再修正你的判断。';
+    render();notify();
+  }
+  function saveJudgment() {
+    if(!AGE[state.age]){if(api.toast)api.toast('先选择你对 C 层年代的判断。');fields.age.focus();return;}
+    var j={age:state.age,environment:state.environment};
+    if(state.dates)state.after=j; else if(!state.before)state.before=j;
+    if(!state.dates){
+      state.feedback=state.age==='unknown'?'层序支持比较先后；要给出具体年代，还需要其他证据。':'这个具体年代依据什么？试着加入测年证据再检验。';
+    }else{
+      state.feedback=state.age==='between'?'你的范围与上下两条火山灰的年龄相符。':'再比较 C 层的位置与上下两条火山灰的年龄。';
+    }
+    if(state.environment==='marine')state.feedback+=' 海生化石组合支持这里曾是海洋。';
+    else if(state.environment==='land')state.feedback+=' 再想想珊瑚、海百合和腕足类生活在哪里。';
+    var orderText=state.order.length?state.order.join(' → '):'未排序';
+    var evidence='我的层序（早→晚）：'+orderText+'；C层化石组合：珊瑚、海百合、腕足类。'+(state.dates?'C层下方火山灰约1.2亿年前，上方火山灰约1亿年前。':'尚未加入测年证据。');
+    var inference='年代：'+AGE[state.age]+'；环境：'+(ENV[state.environment]||'未判断')+'。';
+    if(state.dates&&state.before)inference+=' 初次判断：'+AGE[state.before.age]+'；新证据后：'+AGE[state.age]+'。';
+    if(api.record)api.record({topic:'地层档案',evidence:evidence,inference:inference,source:'教学模型：未倒转的示意剖面；火山灰年龄为示意值'});
+    render();notify();
+    if(api.toast)api.toast(state.dates?'已保留加入测年证据后的判断。':'已保留初次判断。');
+  }
+  function init(root,shared,saved) {
+    host=root;api=shared||{};state=restore(saved);svg=host.querySelector('#strata-svg');
+    fields={stage:host.querySelector('#strata-stage'),stageOutput:host.querySelector('#strata-stage-output'),age:host.querySelector('#strata-age'),environment:host.querySelector('#strata-environment'),dates:host.querySelector('#strata-dates'),record:host.querySelector('#strata-record'),before:host.querySelector('#strata-before'),after:host.querySelector('#strata-after'),feedback:host.querySelector('#strata-feedback'),dateNote:host.querySelector('#strata-date-note')};
+    svg.addEventListener('click',function(e){var id=findLayer(e.target);if(id)chooseLayer(id);});
+    svg.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){var id=findLayer(e.target);if(id){e.preventDefault();chooseLayer(id);var g=svg.querySelector('[data-layer="'+id+'"]');if(g&&g.focus)g.focus();}}});
+    fields.stage.addEventListener('input',function(){state.stage=Number(fields.stage.value);if(layer(state.selected).stage>state.stage)state.selected=['D','C','B','A'][state.stage-1];render();notify();});
+    fields.stage.addEventListener('change',function(){notify();});
+    fields.age.addEventListener('change',function(){state.age=fields.age.value;notify();});
+    fields.environment.addEventListener('change',function(){state.environment=fields.environment.value;state.selected='C';state.stage=4;render();notify();});
+    fields.dates.addEventListener('click',introduceDates);fields.record.addEventListener('click',saveJudgment);
+    host.querySelector('#strata-order-reset').addEventListener('click',function(){state.order=[];state.stage=4;render();notify();});
+    render();
+  }
+  function snapshot(){return JSON.parse(JSON.stringify(state||fresh()));}
+  function getSVG(){
+    var footer='当前判断：'+(AGE[state.age]||'未填写')+'；C层环境：'+(ENV[state.environment]||'未填写')+'。';
+    var before=state.before?'初次：'+AGE[state.before.age]+'；新证据后：'+(state.after?AGE[state.after.age]:'尚未保留'):'尚未保留初次判断。';
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="730" viewBox="0 0 1000 730"><title>时间与变化 · 地层档案 · 教学模型观察图</title><style>text{font-family:"PingFang SC","Microsoft YaHei",sans-serif}</style>'+sceneBody()+'<rect x="0" y="635" width="1000" height="95" fill="#f3f5f2"/>'+text(28,665,23,footer)+text(28,699,21,before,'#60736d')+text(28,724,16,'示意剖面与示意测年；形成阶段不等时，厚度不表示时长。','#60736d')+'</svg>';
+  }
+  window.LessonModules.strata={init:init,enter:render,leave:function(){},reset:function(){state=fresh();render();notify();},snapshot:snapshot,getSVG:getSVG};
+}());
+
+(function(){
+'use strict';
+var KEY='aihtml-time-and-change-v1',modules=window.LessonModules,page='tree',saved={},records=[],storageOK=true,saveTimer=0,toastTimer=0,lastFocus=null;
+var titles={tree:'树木年轮',coral:'珊瑚日历',strata:'地层档案'};
+var questions={tree:'同样长了几年，就一定一样粗吗？',coral:'同样一年，天数更多，一天会怎样？',strata:'有了新证据，原来的判断要改变吗？'};
+function byId(id){return document.getElementById(id);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+try{var raw=localStorage.getItem(KEY);if(raw){var parsed=JSON.parse(raw);if(parsed&&parsed.version===1){saved=parsed;if(Array.isArray(saved.records))records=saved.records.filter(function(x){return x&&typeof x.evidence==='string';}).slice(-30);if(saved.page&&modules[saved.page])page=saved.page;}}}catch(e){storageOK=false;}
+function toast(message){byId('toast').textContent=message;byId('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(function(){byId('toast').classList.remove('visible');},3400);}
+function snapshot(){var data={version:1,page:page,records:records,modules:{}};Object.keys(modules).forEach(function(name){data.modules[name]=modules[name].snapshot();});return data;}
+function persist(){clearTimeout(saveTimer);try{localStorage.setItem(KEY,JSON.stringify(snapshot()));storageOK=true;}catch(e){storageOK=false;}byId('storage-status').textContent=storageOK?'记录保存在本机浏览器':'当前浏览器未能自动保存，请导出记录';}
+function changed(){clearTimeout(saveTimer);saveTimer=setTimeout(persist,250);}
+function refreshCounter(){var count=byId('record-count');count.textContent=records.length;count.hidden=records.length===0;}
+function addRecord(entry){if(records.length>=30){toast('已保留30条记录。请先导出，再删除不需要的记录。');return;}var item={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),topic:String(entry.topic||titles[page]).slice(0,80),source:String(entry.source||'教学示意模型').slice(0,60),evidence:String(entry.evidence||'').slice(0,1500),inference:String(entry.inference||'').slice(0,1500),time:new Date().toISOString()};if(!item.evidence.trim()){toast('先写下观察到的证据。');return;}records.push(item);refreshCounter();renderRecords();persist();toast('这份证据已保留，可在“记录”中查看。');}
+function svgPoint(svg,e){var touch=e.touches&&e.touches.length?e.touches[0]:e.changedTouches&&e.changedTouches.length?e.changedTouches[0]:e;var p=svg.createSVGPoint();p.x=touch.clientX;p.y=touch.clientY;var m=svg.getScreenCTM();if(m)return p.matrixTransform(m.inverse());return{x:0,y:0};}
+function bindDrag(element,handlers){var dragging=false,context=null,pointerId=null;function start(e){if(dragging||e.button>0)return;var c=handlers.start?handlers.start(e):{};if(c===null||c===false||typeof c==='undefined')return;dragging=true;context=c;pointerId=e.pointerId;if(e.cancelable)e.preventDefault();if(typeof e.pointerId==='number'&&element.setPointerCapture){try{element.setPointerCapture(e.pointerId);}catch(err){}}}
+function move(e){if(!dragging)return;if(pointerId!=null&&e.pointerId!=null&&e.pointerId!==pointerId)return;if(e.cancelable)e.preventDefault();if(handlers.move)handlers.move(e,context);}
+function end(e){if(!dragging)return;if(pointerId!=null&&e.pointerId!=null&&e.pointerId!==pointerId)return;dragging=false;if(handlers.end)handlers.end(e,context);if(pointerId!=null&&element.releasePointerCapture){try{element.releasePointerCapture(pointerId);}catch(err){}}context=null;pointerId=null;}
+if(window.PointerEvent){element.addEventListener('pointerdown',start);element.addEventListener('pointermove',move);element.addEventListener('pointerup',end);element.addEventListener('pointercancel',end);}else{element.addEventListener('mousedown',start);document.addEventListener('mousemove',move);document.addEventListener('mouseup',end);element.addEventListener('touchstart',start,{passive:false});element.addEventListener('touchmove',move,{passive:false});element.addEventListener('touchend',end);element.addEventListener('touchcancel',end);}return function(){dragging=false;};}
+var api={toast:toast,changed:changed,record:addRecord,esc:esc,svgPoint:svgPoint,bindDrag:bindDrag};
+Object.keys(modules).forEach(function(name){modules[name].init(byId('page-'+name),api,saved.modules&&saved.modules[name]);});
+function switchPage(next){if(!modules[next])return;if(modules[page].leave)modules[page].leave();page=next;document.querySelectorAll('[data-page]').forEach(function(btn){btn.setAttribute('aria-pressed',String(btn.getAttribute('data-page')===next));});Object.keys(modules).forEach(function(name){var s=byId('page-'+name);s.hidden=name!==next;s.classList.toggle('active',name===next);});byId('guiding-question').textContent=questions[page];if(modules[page].enter)modules[page].enter();changed();}
+document.querySelectorAll('[data-page]').forEach(function(button){button.addEventListener('click',function(){switchPage(button.getAttribute('data-page'));});});
+function openModal(id){lastFocus=document.activeElement;if(modules[page].leave)modules[page].leave();if(id==='records-modal')renderRecords();byId(id).hidden=false;var dialog=byId(id).querySelector('.dialog');dialog.focus();persist();}
+function closeModals(){document.querySelectorAll('.modal').forEach(function(modal){modal.hidden=true;});if(lastFocus&&lastFocus.focus)lastFocus.focus();lastFocus=null;}
+byId('records-open').addEventListener('click',function(){openModal('records-modal');});byId('help-open').addEventListener('click',function(){openModal('help-modal');});document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',closeModals);});document.querySelectorAll('.modal').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)closeModals();});});
+function renderRecords(){var container=byId('record-list');if(!records.length){container.innerHTML='<p class="muted" style="margin-top:20px">还没有保存记录。在每个工作区留存证据，或在这里写下自己的观察。</p>';return;}container.innerHTML=records.slice().reverse().map(function(x){return'<article class="record-card"><h3>'+esc(x.topic)+'<button type="button" data-delete="'+esc(x.id)+'" aria-label="删除这条'+esc(x.topic)+'记录">删除</button></h3><small>'+esc(x.source)+'</small><p><strong>证据：</strong>'+esc(x.evidence)+'</p><p><strong>解释：</strong>'+esc(x.inference||'暂未解释')+'</p></article>';}).join('');}
+byId('record-list').addEventListener('click',function(e){var id=e.target.getAttribute('data-delete');if(!id)return;records=records.filter(function(x){return x.id!==id;});renderRecords();refreshCounter();persist();});
+byId('record-manual').addEventListener('click',function(){var evidence=byId('my-evidence').value.trim();if(!evidence){toast('先写下一条观察证据。');byId('my-evidence').focus();return;}if(records.length>=30){toast('先导出并整理已有记录。');return;}addRecord({topic:titles[page],source:byId('my-source').value,evidence:evidence,inference:byId('my-inference').value.trim()});byId('my-evidence').value='';byId('my-inference').value='';});
+var exportUrl=null;
+function download(text,type,name){try{var blob=new Blob([text],{type:type});if(navigator.msSaveBlob){navigator.msSaveBlob(blob,name);return;}if(exportUrl)URL.revokeObjectURL(exportUrl);exportUrl=URL.createObjectURL(blob);var a=byId('download-link');a.href=exportUrl;a.download=name;byId('export-filename').textContent=name;closeModals();openModal('export-modal');}catch(e){toast('当前浏览器未能导出，请使用系统浏览器重试。');}}
+
+function csvCell(s){s=String(s==null?'':s);if(/^[=+\-@]/.test(s))s="'"+s;return'"'+s.replace(/"/g,'""')+'"';}
+byId('export-csv').addEventListener('click',function(){if(!records.length){toast('请先保存一条证据记录。');return;}var rows=[['工作区','来源','观察证据','我的解释','记录时间（UTC）']];records.forEach(function(r){rows.push([r.topic,r.source,r.evidence,r.inference,r.time]);});download('\ufeff'+rows.map(function(row){return row.map(csvCell).join(',');}).join('\r\n'),'text/csv;charset=utf-8','时间与变化_证据记录.csv');});
+byId('export-svg').addEventListener('click',function(){var content=modules[page].getSVG();var doc=new DOMParser().parseFromString(content,'image/svg+xml');if(doc.querySelector('parsererror')){toast('观察图生成失败，请保留文字记录。');return;}download('<?xml version="1.0" encoding="UTF-8"?>\n'+content,'image/svg+xml;charset=utf-8','时间与变化_'+titles[page]+'_观察图.svg');});
+byId('reset-page').addEventListener('click',function(){modules[page].reset();persist();toast('本页已重置，已保存的证据记录仍保留。');});
+byId('fullscreen').addEventListener('click',function(){var d=document,entered=d.fullscreenElement||d.webkitFullscreenElement;try{if(entered){var out=d.exitFullscreen||d.webkitExitFullscreen;if(out)out.call(d);}else{var request=d.documentElement.requestFullscreen||d.documentElement.webkitRequestFullscreen;if(request){var result=request.call(d.documentElement);if(result&&result.catch)result.catch(function(){toast('此浏览器限制网页全屏，可使用浏览器全屏功能。');});}else toast('此浏览器不支持网页全屏，可使用浏览器全屏功能。');}}catch(e){toast('此浏览器限制网页全屏，可使用浏览器全屏功能。');}});
+function updateFullscreen(){byId('fullscreen').textContent=document.fullscreenElement||document.webkitFullscreenElement?'退出全屏':'全屏';}document.addEventListener('fullscreenchange',updateFullscreen);document.addEventListener('webkitfullscreenchange',updateFullscreen);
+document.addEventListener('keydown',function(e){var open=document.querySelector('.modal:not([hidden])');if(e.key==='Escape'){if(open){e.preventDefault();closeModals();}return;}if(open){if(e.key==='Tab'){var targets=Array.prototype.slice.call(open.querySelectorAll('button,input,textarea,select,a,[tabindex="0"]')).filter(function(x){return!x.disabled&&x.offsetParent!==null;});if(!targets.length)return;var first=targets[0],last=targets[targets.length-1];if(e.shiftKey&&(document.activeElement===first||document.activeElement.classList.contains('dialog'))){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}return;}var tag=(document.activeElement.tagName||'').toLowerCase();if(/input|textarea|select/.test(tag)||e.ctrlKey||e.altKey||e.metaKey)return;if(e.key==='1'||e.key==='2'||e.key==='3'){e.preventDefault();switchPage(['tree','coral','strata'][Number(e.key)-1]);}});
+document.addEventListener('visibilitychange',function(){if(document.hidden){if(modules[page].leave)modules[page].leave();persist();}});window.addEventListener('pagehide',persist);
+window.TimeChangeLesson={version:'1.0.0',getSnapshot:snapshot,replaceModule:function(name,replacement){if(!modules[name]||!replacement||typeof replacement.init!=='function')throw new Error('Invalid module interface');var old=modules[name].snapshot();modules[name].leave();modules[name]=replacement;replacement.init(byId('page-'+name),api,old);if(page===name)replacement.enter();}};
+switchPage(page);refreshCounter();if(!storageOK)toast('当前浏览器未启用自动保存，课末请导出记录。');
+})();
+
+</script>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div class="compat-grade" aria-label="本课技术需求：T1 基础交互" title="本课最低技术需求：T1 · HTML、CSS、JavaScript、SVG">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
