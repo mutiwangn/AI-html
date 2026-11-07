@@ -208,13 +208,26 @@ svg text{font-family:var(--font);pointer-events:none}svg .svg-label{font-size:23
   function preset(type){resetMirrors();if(type==='upper')state.upper.angle=-32;if(type==='lower'){state.lower.x=508;state.lower.y=447;}if(type==='blocked')state.baffle=true;setSelected('[data-preset]','data-preset',type);render()}
   function switchPage(page){state.page=page;el('build-panel').classList.toggle('hidden',page!=='build');el('test-panel').classList.toggle('hidden',page!=='test');el('tab-build').classList.toggle('selected',page==='build');el('tab-test').classList.toggle('selected',page==='test');el('tab-build').setAttribute('aria-pressed',page==='build');el('tab-test').setAttribute('aria-pressed',page==='test');setText('stage-title',page==='build'?'看进纸盒内部':'真实情境，检验改进');render()}
   function point(e){var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;var matrix=svg.getScreenCTM();return matrix?p.matrixTransform(matrix.inverse()):v(0,0)}
-  var drag=null;svg.addEventListener('pointerdown',function(e){var t=e.target;while(t&&t!==svg&&!t.hasAttribute('data-drag'))t=t.parentNode;if(!t||t===svg)return;
-    var mode=t.getAttribute('data-drag'),which=mode.split('-')[1],p=point(e),m=state[which];drag={mode:mode,which:which,p:p,start:{x:m.x,y:m.y,angle:m.angle},id:e.pointerId};svg.setPointerCapture&&svg.setPointerCapture(e.pointerId);e.preventDefault();});
-  svg.addEventListener('pointermove',function(e){if(!drag||e.pointerId!==drag.id)return;var p=point(e),m=state[drag.which];if(drag.mode.indexOf('turn-')===0){var degrees=Math.atan2(p.y-m.y,p.x-m.x)*180/Math.PI;m.angle=clamp(degrees,-72,-18);}else{
+  var drag=null;
+  function beginDrag(e){var t=e.target;while(t&&t!==svg&&(!t.hasAttribute||!t.hasAttribute('data-drag')))t=t.parentNode;if(!t||t===svg)return;
+    var mode=t.getAttribute('data-drag'),which=mode.split('-')[1],p=point(e),m=state[which];drag={mode:mode,which:which,p:p,start:{x:m.x,y:m.y,angle:m.angle},id:e.pointerId};
+    if(e.nativePointer!==false&&svg.setPointerCapture){try{svg.setPointerCapture(e.pointerId)}catch(ignore){}}e.preventDefault();}
+  function moveDrag(e){if(!drag||e.pointerId!==drag.id)return;var p=point(e),m=state[drag.which];if(drag.mode.indexOf('turn-')===0){var degrees=Math.atan2(p.y-m.y,p.x-m.x)*180/Math.PI;m.angle=clamp(degrees,-72,-18);}else{
       m.x=clamp(drag.start.x+p.x-drag.p.x,448,506);m.y=clamp(drag.start.y+p.y-drag.p.y,drag.which==='upper'?146:418,drag.which==='upper'?180:449);
-    }setSelected('[data-preset]','data-preset','');render();e.preventDefault()});
+    }setSelected('[data-preset]','data-preset','');render();e.preventDefault()}
   function endDrag(e){if(drag&&e.pointerId===drag.id){drag=null;}}
+  svg.addEventListener('pointerdown',beginDrag);svg.addEventListener('pointermove',moveDrag);
   svg.addEventListener('pointerup',endDrag);svg.addEventListener('pointercancel',endDrag);svg.addEventListener('lostpointercapture',function(){drag=null});
+  if(!window.PointerEvent){
+    function touchLike(e,t){return {target:e.target,clientX:t.clientX,clientY:t.clientY,pointerId:1,nativePointer:false,preventDefault:function(){e.preventDefault()}}}
+    svg.addEventListener('touchstart',function(e){if(e.changedTouches.length)beginDrag(touchLike(e,e.changedTouches[0]))},{passive:false});
+    svg.addEventListener('touchmove',function(e){if(e.changedTouches.length)moveDrag(touchLike(e,e.changedTouches[0]))},{passive:false});
+    svg.addEventListener('touchend',function(e){endDrag({pointerId:1})});
+    svg.addEventListener('touchcancel',function(e){endDrag({pointerId:1})});
+    svg.addEventListener('mousedown',function(e){beginDrag({target:e.target,clientX:e.clientX,clientY:e.clientY,pointerId:2,nativePointer:false,preventDefault:function(){e.preventDefault()}})});
+    svg.addEventListener('mousemove',function(e){moveDrag({clientX:e.clientX,clientY:e.clientY,pointerId:2,preventDefault:function(){e.preventDefault()}})});
+    document.addEventListener('mouseup',function(){endDrag({pointerId:2})});
+  }
   el('tab-build').addEventListener('click',function(){switchPage('build')});el('tab-test').addEventListener('click',function(){switchPage('test')});el('reset-top').addEventListener('click',resetMirrors);
   el('toggle-rays').addEventListener('click',function(){state.rays=!state.rays;this.setAttribute('aria-pressed',state.rays);this.textContent=state.rays?'◉ 光路可见':'◎ 隐藏光路';render()});
   var faultSequence=['upper','lower','blocked','correct'],faultIndex=0;
