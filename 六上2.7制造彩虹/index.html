@@ -199,6 +199,7 @@
    view.innerHTML=list.length?list.map(function(w){return '<span style="background:'+w.c+';color:'+w.c+'" title="'+w.id+'色光"></span>'}).join(''):'<i>还没照到纸屏</i>';
    document.getElementById('optCaption').textContent=prism?'拖动三棱镜转动':'拖动镜子右端改变倾角';
    document.getElementById('optAngle').textContent=prism?'棱镜转角：'+state.prismAngle.toFixed(0)+'°':'镜面倾角：'+state.mirrorAngle.toFixed(1)+'°';
+   if(state.page===0)document.getElementById('prompt').textContent=prism?promptTexts[0]:'水和镜子分别怎样改变光的传播方向？';
  }
  var optDrag=null;svgOpt.addEventListener('pointerdown',function(e){var target=e.target.closest('[data-drag]');if(!target)return;var kind=target.getAttribute('data-drag'),p=svgPos(svgOpt,e);optDrag={kind:kind,start:p,angle:kind==='prism'?state.prismAngle:state.mirrorAngle};svgOpt.setPointerCapture(e.pointerId);e.preventDefault()});
  svgOpt.addEventListener('pointermove',function(e){if(!optDrag)return;var p=svgPos(svgOpt,e),dx=p.x-optDrag.start.x; if(optDrag.kind==='prism')state.prismAngle=clamp(optDrag.angle+dx*.12,-12,16);else state.mirrorAngle=clamp(optDrag.angle+dx*.014,5,10);renderOpt()});
