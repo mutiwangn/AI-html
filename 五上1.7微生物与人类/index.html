@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eff6ef">
+<meta name="description" content="五上1.7微生物与人类：宏微联动、同条件对照、传播路径回溯与自主关系整理。单文件离线互动课堂。">
+<title>五上1.7 微生物与人类 · 互动观察室 v1.0</title>
+<style>
+:root{--bg:#eff6ef;--paper:#fff;--ink:#163f3c;--soft:#55726c;--teal:#23867a;--deep:#164c49;--line:#d6e5dc;--mint:#d8eee4;--gold:#e7ae49;--red:#bd5836;--radius:15px;font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif;color:var(--ink);background:var(--bg);font-synthesis:none}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}button,input,select{font:inherit}button,select{touch-action:manipulation}button{border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;border-radius:10px;min-height:46px;padding:10px 15px;font-weight:650;font-size:17px;line-height:1.25}button:hover{border-color:var(--teal);background:#f3f9f5}button:active{transform:translateY(1px)}button:disabled{opacity:.43;cursor:default;transform:none}button.primary{background:var(--deep);color:white;border-color:var(--deep)}button.selected,button[aria-pressed="true"]{background:var(--mint);border-color:var(--teal);color:var(--deep)}button.primary[aria-pressed="true"]{background:var(--deep);color:#fff}button:focus-visible,select:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #b67916;outline-offset:3px}svg{display:block;max-width:100%;height:auto}a{color:var(--teal);text-underline-offset:3px}h1,h2,h3,p{margin:0}h1{font-size:clamp(23px,2.2vw,34px);letter-spacing:.025em}h2{font-size:clamp(23px,2vw,30px);line-height:1.35}h3{font-size:20px}select{width:100%;height:48px;border:1px solid #b7d0c4;border-radius:9px;background:#fff;color:var(--ink);padding:8px 34px 8px 12px;font-size:18px}input[type="range"]{width:100%;height:42px;accent-color:var(--teal);cursor:pointer;touch-action:pan-y}input[type="range"]::-webkit-slider-thumb{width:25px;height:25px}label.field-label{display:block;font-size:16px;font-weight:700;margin-bottom:9px}.quiet{color:var(--soft);font-size:15px;line-height:1.65}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
+#app{height:100vh;height:100dvh;display:flex;flex-direction:column;max-width:2000px;margin:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:18px 30px 13px}.brand{display:flex;align-items:center;gap:15px}.book-code{font-size:16px;color:var(--soft);white-space:nowrap;border-right:1px solid #b8d0c3;padding-right:15px}.tools{display:flex;gap:8px}.tools button{font-size:15px;min-height:40px;padding:8px 12px;background:transparent}.nav{display:flex;align-items:center;gap:10px;padding:0 30px 13px}.nav button{background:transparent;border:0;border-bottom:3px solid transparent;border-radius:0;padding:8px 12px;font-size:19px;min-height:44px;color:var(--soft)}.nav button.active{color:var(--deep);border-bottom-color:var(--teal);font-weight:800}.nav .number{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#dfebe1;font-size:14px;margin-right:8px}.nav .active .number{background:var(--deep);color:#fff}.view{min-height:0;flex:1;margin:0 24px;display:flex;flex-direction:column;gap:12px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:18px;flex:1;min-height:0}.stage{min-height:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);display:flex;flex-direction:column;overflow:hidden}.stage-header{padding:20px 24px 8px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.stage-header .quiet{margin-top:5px}.stage-header button{flex-shrink:0;font-size:16px;min-height:42px;padding:8px 12px}.science-canvas{flex:1;min-height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:0 8px;cursor:pointer;touch-action:manipulation}.science-canvas>svg{width:100%;height:100%;max-height:100%}.canvas-tip{position:absolute;bottom:11px;left:24px;font-size:16px;color:var(--soft);background:rgba(255,255,255,.93);padding:6px 12px;border-radius:7px;pointer-events:none}.compare-pair{display:grid;grid-template-columns:1fr 1fr;width:100%;height:100%;gap:12px;padding:0 16px}.compare-unit{min-height:0;display:flex;flex-direction:column;align-items:center;border-right:1px solid var(--line);padding:0 12px}.compare-unit:last-child{border:0}.compare-unit h3{font-size:19px;padding:7px 0}.compare-unit svg{width:100%;flex:1;min-height:0}.legend-line{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:15px;color:var(--soft);padding:8px 24px 11px}.legend-line .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);display:inline-block;margin-right:6px}.timeline{border-top:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:10px 18px;background:#fbfdfb}.timeline .slider-wrap{flex:1;min-width:0}.slider-caption{display:flex;justify-content:space-between;gap:8px;font-size:14px;color:var(--soft)}.timeline button{white-space:nowrap;font-size:16px}.timeline .play{min-width:84px}.panel{min-height:0;overflow:auto;display:flex;flex-direction:column;gap:17px;padding:4px 1px 6px}.panel-section{border-bottom:1px solid var(--line);padding-bottom:17px}.panel-section:last-child{border:0}.segments{display:flex;gap:7px}.segments button{flex:1;font-size:17px;padding:11px 7px}.panel-actions{display:grid;gap:9px}.panel-actions .pair{display:flex;gap:7px}.panel-actions .pair button{flex:1}.insight{background:#e2eee4;border-radius:11px;padding:16px;font-size:17px;line-height:1.7}.insight strong{display:block;margin-bottom:6px}.insight button{margin-top:12px;min-height:38px;font-size:15px;padding:8px 11px}.question{font-size:18px;line-height:1.7;margin-bottom:12px}.mode-note{padding-top:9px;font-size:14px;color:var(--soft);line-height:1.6}.footnote{display:flex;justify-content:space-between;gap:20px;padding:10px 30px;font-size:13px;color:var(--soft);line-height:1.35}.footnote span:last-child{opacity:.65;letter-spacing:.04em}.evidence-count{display:inline-block;font-size:13px;background:#dfebe1;border-radius:20px;min-width:22px;padding:2px 6px;margin-left:5px}
+.spread-main{padding:12px 18px 0}.spread-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 4px 10px}.spread-heading h2{font-size:26px}.spread-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;min-height:0}.spread-board{min-height:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fafcf9}.spread-board header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#edf4eb;gap:8px}.spread-board header h3{font-size:18px;line-height:1.35}.board-label{display:grid;place-items:center;width:28px;height:28px;border-radius:6px;background:var(--deep);color:#fff;font-size:17px}.board-art{flex:1;min-height:130px;display:flex;align-items:center;justify-content:center}.board-art svg{width:100%;height:100%;max-height:100%;touch-action:manipulation}.board-status{padding:8px 12px;border-top:1px solid var(--line);font-size:15px;color:var(--soft);line-height:1.5}.event-caption{font-size:20px;font-weight:700;text-align:center;padding:10px 8px;color:var(--deep);min-height:48px}.spread-caution{padding:9px 4px;font-size:14px;line-height:1.5;color:var(--soft)}.path-box{padding:12px;background:white;border:1px solid var(--line);border-radius:9px;font-size:16px;line-height:1.7;min-height:100px}.path-box strong{display:block;margin-bottom:5px}.source-key{display:inline-block;width:12px;height:12px;background:var(--red);border:2px solid #fff;outline:1px solid var(--red);border-radius:50%;margin-right:7px}.step-ticks{display:flex;justify-content:space-between;font-size:14px;color:var(--soft)}
+.records-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;flex:1;min-height:0}.record-stage{padding:18px 22px;overflow:auto}.record-stage h2{margin-bottom:5px}.evidence-tray{display:flex;gap:10px;overflow-x:auto;padding:12px 0 16px;min-height:145px;border-bottom:1px solid var(--line);flex-shrink:0}.evidence-card{flex:0 0 185px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#f7faf5;position:relative}.evidence-card .thumb{height:96px;overflow:hidden;background:#fff}.evidence-card .thumb svg{width:100%;height:100%}.evidence-card .card-copy{font-size:13px;padding:7px 9px;line-height:1.55}.evidence-card .remove{position:absolute;right:3px;top:3px;min-height:26px;width:26px;padding:1px;border-radius:50%;font-size:15px;background:#fff}.evidence-empty{display:flex;align-items:center;gap:16px;color:var(--soft);font-size:17px;line-height:1.7;max-width:580px}.evidence-empty svg{flex-shrink:0}.map-wrap{flex:1;min-height:230px;display:flex;align-items:center;justify-content:center;padding-top:12px}.map-wrap svg{width:100%;max-height:100%}.relationship-form{display:flex;flex-direction:column;gap:13px}.relationship-form label{font-size:15px;font-weight:700;display:block;margin-bottom:6px}.relationship-form select{font-size:16px;height:44px}.map-tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;padding-top:8px}.map-tools button{font-size:15px;min-height:40px;padding:8px 11px}.map-note{font-size:15px;line-height:1.6;color:var(--soft);padding-top:8px}.storage-note{font-size:13px;color:var(--soft);line-height:1.55}
+.toast{position:fixed;left:50%;bottom:36px;transform:translateX(-50%);background:#164c49;color:#fff;font-size:17px;padding:12px 23px;border-radius:11px;z-index:80;box-shadow:0 4px 30px #14352d20;max-width:90vw;text-align:center;pointer-events:none}.modal-backdrop{position:fixed;inset:0;background:#123d3470;z-index:90;display:flex;align-items:center;justify-content:center;padding:20px}.modal{background:#fff;border-radius:16px;max-width:770px;max-height:85vh;overflow:auto;padding:26px 30px;box-shadow:0 24px 90px #0b2c2a30}.modal-head{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}.modal h3{margin:17px 0 7px}.modal p,.modal li{font-size:16px;line-height:1.75}.modal ul{padding-left:22px}.modal .version{font-size:13px;color:var(--soft);padding-top:15px}.modal button{min-width:65px}.modal code{background:#f0f6ed;padding:2px 5px;border-radius:4px}
+@media(min-width:1650px){.topbar{padding:22px 36px 17px}.nav{padding-left:36px}.view{margin:0 30px}.workspace{grid-template-columns:minmax(0,1fr) 340px;gap:24px}.panel{gap:23px}.panel-section{padding-bottom:22px}.panel button{font-size:20px;min-height:53px}.panel select{font-size:21px;height:55px}.question{font-size:21px}.insight{font-size:20px}label.field-label{font-size:19px}.stage-header{padding:26px 30px 10px}.records-grid{grid-template-columns:minmax(0,1fr) 360px}.relationship-form select{font-size:19px;height:51px}.relationship-form label{font-size:17px}.quiet{font-size:17px}.footnote{font-size:15px}.event-caption{font-size:24px}}
+@media(max-width:1100px){.topbar{padding:13px 20px 10px}.brand{gap:10px}.book-code{font-size:14px;padding-right:10px}.nav{padding:0 20px 10px;gap:5px}.nav button{font-size:17px}.view{margin:0 14px;gap:10px}.workspace{grid-template-columns:minmax(0,1fr) 238px;gap:12px}.panel{gap:12px}.panel-section{padding-bottom:12px}.panel button{font-size:15px;min-height:43px}.panel select{font-size:16px}.stage-header{padding:15px 17px 7px}.stage-header h2{font-size:22px}.stage-header .quiet{font-size:13px}.stage-header button{font-size:14px;padding:8px}.question{font-size:16px}.insight{font-size:15px;padding:12px}.timeline{gap:9px;padding:8px 10px}.timeline button{font-size:14px;padding:8px 10px;min-height:42px}.legend-line{font-size:13px;padding:8px 16px}.spread-main{padding:10px 10px 0}.spread-heading h2{font-size:22px}.spread-board header{padding:8px}.spread-board header h3{font-size:15px}.board-status{font-size:13px}.spread-pair{gap:8px}.event-caption{font-size:17px;padding:9px 3px}.records-grid{grid-template-columns:minmax(0,1fr) 265px;gap:12px}.record-stage{padding:15px}.relationship-form{gap:10px}.record-stage h2{font-size:23px}.footnote{font-size:11px;padding:8px 20px}.mode-note{font-size:13px}.evidence-count{font-size:12px}.nav .number{margin-right:5px}.path-box{font-size:14px}}
+@media(max-height:820px) and (min-width:901px){.topbar{padding-top:10px;padding-bottom:7px}.nav{padding-bottom:7px}.nav button{min-height:40px}.stage-header{padding-top:12px}.stage-header h2{font-size:22px}.panel{gap:10px}.panel-section{padding-bottom:10px}.insight{padding:10px;font-size:15px}.question{font-size:16px;margin-bottom:8px}.footnote{padding-top:6px;padding-bottom:6px}.science-canvas{min-height:130px}.evidence-tray{min-height:120px}.evidence-card .thumb{height:70px}.relationship-form{gap:9px}}
+@media(max-width:900px) and (orientation:portrait){html,body{overflow:auto;height:auto;min-height:100%}#app{height:auto;min-height:100vh;min-height:100dvh}.view{flex:1}.workspace,.records-grid{display:flex;flex-direction:column}.stage{min-height:580px}.panel{display:grid;grid-template-columns:1fr 1fr;gap:15px;overflow:visible}.panel-section{border-bottom:0}.panel>.insight{grid-column:2;grid-row:2}.science-canvas{min-height:330px}.records-grid>.panel{display:block}.relationship-form{display:grid;grid-template-columns:1fr 1fr;gap:15px}.relationship-form>button{grid-column:1/-1}.record-stage{min-height:650px}.spread-main{min-height:570px}.footnote{margin-top:14px}.storage-note{margin-top:12px}.map-wrap{min-height:310px}}
+@media(max-width:620px){html,body{overflow:auto;height:auto}#app{height:auto;min-height:100vh}.topbar{padding:15px 14px 10px;gap:8px;flex-wrap:wrap}.brand{gap:8px}h1{font-size:23px}.book-code{font-size:12px;padding-right:8px}.tools{margin-left:auto;gap:4px}.tools button{font-size:13px;padding:6px 9px;min-height:33px}.nav{padding:0 8px 10px;justify-content:space-between;gap:0}.nav button{font-size:15px;padding:8px 5px}.nav .number{width:20px;height:20px;font-size:12px;margin-right:4px}.view{margin:0 9px}.workspace,.records-grid{display:flex;flex-direction:column}.stage{min-height:430px}.stage-header{padding:14px 13px 7px;flex-wrap:wrap}.stage-header h2{font-size:22px}.stage-header button{min-height:37px}.stage-header .quiet{font-size:13px}.science-canvas{min-height:260px;padding:0}.canvas-tip{font-size:13px;bottom:4px;left:10px}.legend-line{font-size:12px;gap:5px;padding:5px 12px}.timeline{flex-wrap:wrap;gap:8px;padding:9px}.timeline .slider-wrap{flex-basis:100%;order:5}.timeline button{font-size:15px}.timeline .play{min-width:78px}.slider-caption{font-size:13px}.panel{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:5px 4px}.panel select{font-size:15px}.panel>.insight{grid-column:1/-1;grid-row:auto}.panel-section{border:0;padding:0}.panel .question{font-size:16px}.panel label.field-label{font-size:15px}.segments button{font-size:14px;padding:8px 5px}.insight{font-size:16px}.footnote{padding:11px 14px;font-size:11px;gap:10px}.spread-main{min-height:760px;padding:12px 8px 0}.spread-heading{flex-wrap:wrap}.spread-heading h2{font-size:22px}.spread-pair{display:flex;flex-direction:column;gap:12px;min-height:620px}.spread-board{height:300px;flex:1}.spread-board header h3{font-size:17px}.spread-board header{padding:7px 10px}.board-status{font-size:13px}.board-art{min-height:190px}.event-caption{font-size:16px}.spread-caution{font-size:12px}.spread-main .timeline .slider-wrap{order:5}.records-grid>.panel{display:block}.record-stage{min-height:580px;padding:14px 12px}.relationship-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.relationship-form select{font-size:14px;padding-right:23px}.map-wrap{min-height:300px}.map-tools{justify-content:flex-start}.map-tools button{font-size:14px}.modal{padding:20px 18px}.modal-backdrop{padding:12px}.modal h2{font-size:23px}.modal p,.modal li{font-size:15px}.compare-pair{padding:0 4px;gap:0}.compare-unit{padding:0 4px}.compare-unit h3{font-size:14px}.science-canvas.comparing{min-height:310px}.science-canvas.mobile-stack{display:flex;flex-direction:column;overflow:visible;flex:none;min-height:0;padding:0 5px}.mobile-scene{width:100%}.mobile-scene svg{width:100%;height:auto;max-height:none}.science-canvas.mobile-stack .compare-pair{display:flex;flex-direction:column;height:auto;width:100%}.science-canvas.mobile-stack .compare-unit{border-right:0;border-bottom:1px solid var(--line);padding:9px 4px;min-height:0}.science-canvas.mobile-stack .compare-unit svg{flex:none;height:auto;width:100%}.science-canvas.mobile-stack .compare-unit h3{font-size:18px}.mobile-relations{width:100%;display:grid;gap:18px}.mobile-relations article{border-bottom:1px solid var(--line);padding-bottom:15px;display:grid;gap:8px}.mobile-relations strong{font-size:17px}.mobile-relations p{font-size:16px;line-height:1.7}.mobile-relations small{font-size:13px;color:var(--soft)}.map-note{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="app">
+ <header>
+  <div class="topbar"><div class="brand"><span class="book-code">五上 · 1.7</span><h1>微生物与人类</h1></div><div class="tools"><button id="helpBtn">教师说明</button><button id="fullscreenBtn" aria-label="进入全屏">全屏</button></div></div>
+  <nav class="nav" aria-label="工作区"><button class="active" data-view="action" aria-current="page"><span class="number">1</span>追踪作用</button><button data-view="spread"><span class="number">2</span>阻断传播</button><button data-view="records"><span class="number">3</span>整理联系<span class="evidence-count" id="recordCount">0</span></button></nav>
+ </header>
+ <main class="view" id="view-action">
+  <div class="workspace">
+   <section class="stage" aria-label="宏观与微观观察">
+    <div class="stage-header"><div><h2 id="sceneQuestion">面团为什么会变蓬松？</h2><p class="quiet" id="sceneSubtitle">外部变化与内部活动，沿同一进程回看。</p></div><button id="insideBtn" aria-pressed="false">打开内部透视</button></div>
+    <div class="science-canvas" id="scienceCanvas" role="button" tabindex="0" aria-label="点击观察对象，切换内部透视"></div>
+    <div class="legend-line" id="sceneLegend"><span><i class="dot"></i>颜色与大小用于区分，不是真实显微照片</span></div>
+    <div class="timeline"><button class="primary play" id="effectPlay">▶ 播放</button><div class="slider-wrap"><label class="sr-only" for="effectTime">模型进程</label><input id="effectTime" type="range" min="0" max="100" step="1" value="0"><div class="slider-caption"><span>过程早期</span><span id="effectTimeLabel">模型进程 0%</span><span>过程后期</span></div></div><button id="effectReset">复位</button></div>
+   </section>
+   <aside class="panel" aria-label="作用观察控制">
+    <div class="panel-section"><label class="field-label" for="sceneSelect">观察哪种变化？</label><select id="sceneSelect"><option value="yeast">酵母发面</option><option value="mold">面包霉变</option><option value="compost">落叶堆肥</option></select><p class="mode-note" id="scenarioNote">同一份生面团，只改变所处的温度条件。</p></div>
+    <div class="panel-section"><label class="field-label" id="conditionLabel">改变温度条件</label><div class="segments" role="group" aria-labelledby="conditionLabel"><button data-condition="active" aria-pressed="true" id="activeCondition">温暖</button><button data-condition="limited" aria-pressed="false" id="limitedCondition">冷藏</button></div><p class="mode-note" id="conditionNote">进程表示模型推进，不是实际发酵分钟数。</p></div>
+    <div class="panel-section panel-actions"><button id="pinBtn">＋ 保留这个条件作对照</button><div class="pair"><button id="clearPinBtn" hidden>取消对照</button><button id="saveEffectBtn" class="primary">留存观察</button></div></div>
+    <div class="insight"><strong id="effectPromptTitle">先找一条线索</strong><p id="effectPrompt">拖动进程，观察外部变化。点画面，再看看内部发生了什么。</p><button id="explainBtn" aria-expanded="false">查看解释线索</button></div>
+   </aside>
+  </div>
+ </main>
+ <main class="view" id="view-spread" hidden>
+  <div class="workspace">
+   <section class="stage spread-main" aria-label="同一次用餐的两种方案">
+    <div class="spread-heading"><h2>公筷能切断哪条路径？</h2><span class="quiet"><i class="source-key"></i>橙色：来自同一来源的追踪标记</span></div>
+    <div class="spread-pair"><article class="spread-board"><header><span class="board-label">A</span><h3>私筷夹共用菜</h3></header><div class="board-art" id="boardA"></div><p class="board-status" id="statusA"></p></article><article class="spread-board"><header><span class="board-label">B</span><h3 id="boardBTitle">公筷专用</h3></header><div class="board-art" id="boardB"></div><p class="board-status" id="statusB"></p></article></div>
+    <p class="event-caption" id="eventCaption">起点：只放入一个来源标记，尚未发生接触。</p>
+    <div class="timeline"><button id="spreadBack" aria-label="回到上一次接触">上一步</button><button class="primary play" id="spreadPlay">▶ 回放</button><button id="spreadNext">下一步</button><div class="slider-wrap"><label class="sr-only" for="spreadTime">用餐接触步骤</label><input id="spreadTime" type="range" min="0" max="4" step="1" value="0"><div class="step-ticks"><span>起点</span><span>甲入口</span><span>甲取菜</span><span>乙取菜</span><span>乙入口</span></div></div><button id="spreadReset">复位</button></div>
+    <p class="spread-caution">标记只展示一种可能的接触路径，不代表菌量、感染率或已经患病；本模型不含空气传播等其他途径。</p>
+   </section>
+   <aside class="panel" aria-label="传播路径控制">
+    <div class="panel-section"><label class="field-label" for="sourceSelect">两边从同一来源开始</label><select id="sourceSelect"><option value="mouthA">甲的口腔</option><option value="dish">共用菜已有标记</option></select><p class="mode-note">可更换起点，检验同一措施的适用范围。</p></div>
+    <div class="panel-section"><label class="field-label" for="publicMode">方案 B 的用法</label><select id="publicMode"><option value="dedicated">公筷专用，不入口</option><option value="mixed">把公筷也送入口中</option></select><p class="mode-note" id="publicNote">专用公筷只夹共用菜，再把菜放入个人碗；不碰口和已用餐具。</p></div>
+    <div class="path-box" id="pathBox" aria-live="polite"><strong>追踪到哪里？</strong>点选画面中的口腔、筷子、菜或碗，回看标记的来路。</div>
+    <div class="panel-actions"><button id="saveSpreadBtn" class="primary">留存这一刻</button></div>
+    <div class="insight"><strong>用路径解释</strong><p id="spreadQuestion">让两边完成同一轮接触。哪一段路径改变了？如果起点换了，结果是否相同？</p></div>
+   </aside>
+  </div>
+ </main>
+ <main class="view" id="view-records" hidden>
+  <div class="records-grid">
+   <section class="stage record-stage"><h2>把观察连成自己的解释</h2><p class="quiet">先保留依据，再说清“希望怎样改变、可以怎么做”。</p><div class="evidence-tray" id="evidenceTray"></div><div class="map-wrap" id="relationMap"></div><p class="map-note">这里保留你的解释，不自动判对错。模型展示的是预设机制，需结合教材资料与真实观察讨论。</p><div class="map-tools"><button id="undoRelation">撤销一条关系</button><button id="exportMap" class="primary">下载关系图 SVG</button><button id="exportEvidence">下载所选观察 SVG</button></div></section>
+   <aside class="panel"><div class="relationship-form"><div><label for="goalSelect">人的目的</label><select id="goalSelect"><option value="">请选择…</option><option>让面食蓬松</option><option>保存普通面包</option><option>让落叶回到土壤</option><option>减少共餐交叉污染</option><option>帮助植物生长</option></select></div><div><label for="changeSelect">希望怎样改变？</label><select id="changeSelect"><option value="">请选择…</option><option>促进特定微生物的活动</option><option>抑制微生物生长</option><option>阻断特定接触路径</option><option>利用分解后的养分</option><option>还需要继续查证</option></select></div><div><label for="waySelect">我的做法或解释</label><select id="waySelect"><option value="">请选择…</option><option>控制发酵条件</option><option>适当冷藏保存</option><option>给好氧堆肥适当通气</option><option>公筷专用、分餐</option><option>不能只依赖公筷</option><option>分解使部分养分回到土壤</option><option>需要补充真实观察</option></select></div><div><label for="evidenceSelect">依据哪一次观察？</label><select id="evidenceSelect"><option value="">暂未选依据</option></select></div><button id="addRelation" class="primary">＋ 加入关系图</button></div><div class="insight"><strong>换一个人的目的</strong><p>同样是分解食物，为什么保存食品时希望慢一些，处理落叶时又希望快一些？</p></div><p class="storage-note" id="storageNote">观察与关系保存在本设备浏览器中，不会上传。最多留存 6 帧观察、4 条关系。</p></aside>
+  </div>
+ </main>
+ <footer class="footnote"><span>模型示意 · 比例、颜色、进程及转移标记不代表真实测量</span><span>mutiw · v1.0</span></footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div class="modal-backdrop" id="helpModal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" tabindex="-1"><div class="modal-head"><h2 id="helpTitle">教师说明与模型边界</h2><button id="closeHelp">关闭</button></div><p>对应本项目上传的教科版五年级上册第一单元第7课《微生物与人类》，教材第26–29页。三个工作区可独立穿插在课堂中使用。</p><h3>建议怎样用</h3><p>真实的资料阅读、实物观察和讨论照常进行。网页补充宏观与微观同步、相同条件回放、传播路径显现和观察整理。点实验对象可切换透视；保留条件后，两边沿同一模型进程比较。改变条件会重新计算整个过程，相当于重新设定一次对照，并非中途冷却。</p><h3>三个作用模型</h3><ul><li>酵母利用糖产生二氧化碳，气体被面团结构保留，面团膨松。本模型不包含烘烤，也未穷尽发酵的产物；温暖仅表示适于本情境的条件，不是越热越好。</li><li>面包霉变的剖面表示菌丝可能伸入内部。普通面包发霉不能靠去掉表面就判断安全；不打开、闻嗅或品尝霉变样品。冷藏只使本情境中的活动减慢，不等于灭菌。</li><li>落叶场景聚焦好氧分解。通气不足时此过程减慢，仍可能存在其他分解途径。图中的小点示意部分可利用养分，不是所有物质的精确去向；植物不会直接把腐殖质当食物“吃掉”。</li></ul><h3>传播路径怎样理解</h3><p>两种方案从相同起点、按相同一轮用餐顺序回放。橙色代表从起点经所示接触可到达的路径，不代表某次真实用餐一定发生转移或感染。专用公筷的假设是只夹共用菜、把菜放下而不接触已用个人餐具；更换来源或让公筷入口后，路径将重新计算。公筷不能解决已有食品污染及所有传播途径。</p><h3>资料核查</h3><ul><li>教材第26–29页；所附教师用书《微生物与人类》教学目标、教材解读与实施建议。</li><li><a href="https://blogs.extension.iastate.edu/answerline/2021/01/12/yeast-bread-baking-a-kitchen-science-drama/" target="_blank" rel="noopener">Iowa State University：酵母、二氧化碳与面筋结构</a></li><li><a href="https://ask.fsis.usda.gov/article/Are-molds-the-same-as-bacteria" target="_blank" rel="noopener">USDA FSIS：霉菌与深入食物的菌丝</a></li><li><a href="https://www.fda.gov/consumers/consumer-updates/are-you-storing-food-safely" target="_blank" rel="noopener">FDA：冷藏、食品保存与霉菌</a></li><li><a href="https://www.epa.gov/sustainable-management-food/composting" target="_blank" rel="noopener">US EPA：好氧堆肥与有机物分解</a></li><li><a href="https://www.cdc.gov/children-and-school-preparedness/php/interventions/appendix-a.html" target="_blank" rel="noopener">CDC：传播来源、途径与感染的区别</a></li></ul><p>本页无外部运行依赖，可离线打开。查阅以上资料链接需要联网。全屏及文件下载受浏览器能力限制；下载失败时可使用浏览器菜单保存网页或截图。观察图明确带有“模型示意”标记，不作为真实实验数据。</p><p class="version">版本 v1.0 · 本地保存键 aihtml-microbes-17-v1 · 可选全屏不影响核心操作。</p></section></div>
+<script>
+/* MicrobeScenes — deterministic teaching illustrations, not measured biology.
+ * Each scene occupies two independent 500 × 540 halves: macro | micro.
+ * All visible progress derives from metric(); no independent animation clock.
+ * Asset replacement point: replace macro*/
+(function (root) {
+  'use strict';
+  var sequence = 0;
+  var C = { ink:'#164c49', teal:'#23867a', pale:'#eff6ef', gold:'#e7ae49', rust:'#cf6e46', muted:'#617c74', line:'#cbded3' };
+  function clamp(t) { t=Number(t); return Number.isFinite(t) ? Math.max(0,Math.min(1,t)) : 0; }
+  function num(n) { return Math.round(n*100)/100; }
+  function kindOf(kind) { return ['yeast','mold','compost'].indexOf(kind)>=0 ? kind : 'yeast'; }
+  function metric(kind,t,condition) {
+    kind=kindOf(kind); t=clamp(t);
+    /* Rates are illustrative choices for qualitative comparison, not real
+       growth rates or timing. Limited conditions slow activity, not sterilize. */
+    var r=condition==='limited' ? {yeast:.12,mold:.17,compost:.22}[kind] : 1;
+    return (1-Math.exp(-2.1*r*t))/(1-Math.exp(-2.1));
+  }
+  function text(x,y,s,size,fill,weight,anchor) {
+    return '<text x="'+x+'" y="'+y+'" font-size="'+(size||24)+'" fill="'+(fill||C.ink)+'" font-weight="'+(weight||500)+'"'+(anchor?' text-anchor="'+anchor+'"':'')+'>'+s+'</text>';
+  }
+  function circle(x,y,r,fill,stroke,sw) {
+    return '<circle cx="'+num(x)+'" cy="'+num(y)+'" r="'+num(r)+'" fill="'+fill+'"'+(stroke?' stroke="'+stroke+'" stroke-width="'+(sw||2)+'"':'')+'/>';
+  }
+  function path(d,fill,stroke,sw,extra) {
+    return '<path d="'+d+'" fill="'+(fill||'none')+'"'+(stroke?' stroke="'+stroke+'" stroke-width="'+(sw||2)+'"':'')+' '+(extra||'')+'/>';
+  }
+  function ellipse(x,y,rx,ry,fill,stroke,sw) {
+    return '<ellipse cx="'+num(x)+'" cy="'+num(y)+'" rx="'+num(rx)+'" ry="'+num(ry)+'" fill="'+fill+'"'+(stroke?' stroke="'+stroke+'" stroke-width="'+(sw||2)+'"':'')+'/>';
+  }
+  function defs(id) {
+    return '<defs>'+
+      '<linearGradient id="'+id+'-dough" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0c5"/><stop offset="1" stop-color="#dfb878"/></linearGradient>'+
+      '<linearGradient id="'+id+'-bowl" x1="0" y1="0" x2="1" y2=".7"><stop offset="0" stop-color="#e3f0e7"/><stop offset=".6" stop-color="#c9e1d3"/><stop offset="1" stop-color="#9cbead"/></linearGradient>'+
+      '<linearGradient id="'+id+'-bread" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0cf"/><stop offset="1" stop-color="#eac994"/></linearGradient>'+
+      '<clipPath id="'+id+'-micro"><circle cx="750" cy="287" r="179"/></clipPath>'+
+      '<clipPath id="'+id+'-pile"><path d="M65 410 L65 260 Q110 205 159 225 Q204 184 253 219 Q299 193 343 250 L343 410 Z"/></clipPath>'+
+      '<marker id="'+id+'-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9" fill="none" stroke="'+C.teal+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></marker>'+
+    '</defs>';
+  }
+  function topLabels(kind,inside) {
+    var labels={yeast:'酵母参与发面',mold:'普通面包发霉',compost:'落叶逐渐分解'};
+    return text(36,48,'外部变化',26,C.ink,700)+text(36,88,labels[kind],23,C.muted)+
+      text(536,48,inside?'内部放大示意':'看不见的内部',26,C.ink,700);
+  }
+  function microBoundary(id,bg) {
+    return circle(750,287,185,'#fff',C.line,2)+circle(750,287,179,bg||C.pale);
+  }
+  function closedMicro() {
+    return '<g data-open-inside="true" style="cursor:pointer">'+
+      circle(750,282,174,C.pale,C.line,2)+
+      '<g transform="translate(750 246)">'+circle(-14,-12,40,'none',C.teal,4)+path('M17 19 L50 52','none',C.teal,10,'stroke-linecap="round"')+'</g>'+
+      text(750,355,'打开内部透视',26,C.ink,650,'middle')+
+      text(750,397,'追踪肉眼看不到的变化',22,C.muted,500,'middle')+'</g>';
+  }
+  function yeastCell(x,y,a,scale,bud) {
+    var s='<g transform="translate('+x+' '+y+') rotate('+a+') scale('+scale+')">';
+    if(bud>0) s+=ellipse(29,-19,9+8*bud,13+9*bud,'#c2dfb3',C.teal,2.8);
+    s+=ellipse(0,0,27,36,'#a9cf99',C.teal,3)+ellipse(-6,-6,17,23,'#cfe4b8')+circle(8,9,7,'#618e6a')+'</g>';
+    return s;
+  }
+  function yeastMacro(m,id) {
+    var top=285-105*m, s='';
+    s+=ellipse(253,450,191,18,'#e2ebe3');
+    s+=path('M65 315 Q250 267 435 315 L404 417 Q250 462 96 417 Z','url(#'+id+'-bowl)',C.teal,3);
+    s+=ellipse(250,316,185,46,'#c8dbb6','#7c9e80',3);
+    s+=path('M82 319 C84 '+num(top+12)+' 161 '+num(top-20)+' 250 '+num(top)+' C339 '+num(top-20)+' 416 '+num(top+12)+' 418 319 Q250 371 82 319 Z','url(#'+id+'-dough)','#c3a36c',2);
+    var pores=[[136,300,8],[187,302,12],[237,306,9],[295,302,13],[347,301,8],[204,270,9],[290,270,11],[250,237,8]];
+    pores.forEach(function(p,i){
+      if(i<5 || m>.18){
+        var y=p[1]-(p[1]-top)*m*.35;
+        s+=ellipse(p[0],y,p[2]*(.2+.8*m),p[2]*(.15+.55*m),'#bb945e','none');
+        if(m>.12) s+=ellipse(p[0]-1.5,y-2,p[2]*(.12+.43*m),p[2]*(.08+.32*m),'#fff1ce');
+      }
+    });
+    s+=path('M65 324 Q250 386 435 324 L404 428 Q250 475 96 428 Z','url(#'+id+'-bowl)',C.teal,3);
+    s+=path('M85 348 Q250 397 415 348','none','#f5fbf5',6,'opacity=".8"');
+    s+=ellipse(250,445,110,10,'#b6cbbd');
+    s+=text(250,500,m<.06?'同样的起始面团':m<.48?'气泡逐渐积累':'面团变得蓬松',24,C.ink,600,'middle');
+    return s;
+  }
+  function yeastMicro(m,id) {
+    var s=microBoundary(id,'#fcf2d7');
+    s+='<g clip-path="url(#'+id+'-micro)">';
+    var strands=['M565 205 Q658 253 708 165 T939 216','M563 306 Q656 354 705 272 T939 323','M584 420 Q670 466 727 380 T947 425','M650 108 Q602 233 647 306 T659 472','M806 105 Q754 223 809 288 T805 478','M915 127 Q854 244 907 315 T914 457'];
+    strands.forEach(function(d){s+=path(d,'none','#d9bc80',4,'opacity=".52"');});
+    var sugars=[[638,174],[716,138],[786,151],[843,177],[889,265],[892,345],[832,417],[742,444],[640,388],[611,297],[718,312],[784,357],[693,409],[838,307]];
+    var remaining=14-Math.floor(m*8);
+    sugars.slice(0,remaining).forEach(function(p,i){s+='<rect x="'+(p[0]-5)+'" y="'+(p[1]-5)+'" width="10" height="10" rx="2" transform="rotate('+(i*17)+' '+p[0]+' '+p[1]+')" fill="'+C.gold+'" stroke="#bf873b" stroke-width="1.2"/>';});
+    s+=yeastCell(694,224,-32,.92,m*.9)+yeastCell(812,317,27,1,m*.7)+yeastCell(701,370,50,.75,0);
+    var bubbles=[[795,208,25],[649,316,24],[847,389,20],[742,298,14],[888,245,15],[749,405,12]];
+    bubbles.forEach(function(p,i){
+      var rise=Math.max(0,m-(i*.035));
+      if(rise>.01){var r=p[2]*Math.sqrt(rise); s+=circle(p[0],p[1],r,'#fffdf3','#c79c4f',2)+path('M'+num(p[0]-r*.55)+' '+num(p[1])+' Q'+num(p[0]-r*.58)+' '+num(p[1]-r*.58)+' '+num(p[0])+' '+num(p[1]-r*.65),'none','#fff',3,'stroke-linecap="round"');}
+    });
+    s+='</g>'+text(750,88,m<.06?'面团中的一小处':'糖被利用，气泡逐渐积累',22,C.muted,500,'middle');
+    s+=ellipse(558,505,9,12,'#a9cf99',C.teal,2)+text(575,513,'酵母',22);
+    s+='<rect x="674" y="497" width="13" height="13" rx="2" fill="'+C.gold+'"/>'+text(696,513,'糖',22);
+    s+=circle(796,504,10,'#fffdf3','#c79c4f',2)+text(815,513,'二氧化碳气泡',22);
+    return s;
+  }
+  function moldColony(x,y,r,opacity) {
+    var s='<g opacity="'+num(opacity)+'">';
+    s+=circle(x,y,r,'#a7b995');
+    for(var i=0;i<8;i++){
+      var a=i*Math.PI/4,rx=x+Math.cos(a)*r*.48,ry=y+Math.sin(a)*r*.35;
+      s+=circle(rx,ry,r*(.3+(i%3)*.04),'#7d9e80');
+    }
+    s+=circle(x-r*.12,y-r*.07,r*.38,'#507967');
+    return s+'</g>';
+  }
+  function moldMacro(m,id) {
+    var s=ellipse(250,448,190,19,'#e2ebe3');
+    s+=path('M95 425 L87 247 Q52 210 87 167 Q126 121 195 134 Q250 112 305 134 Q374 121 413 167 Q448 210 413 247 L405 425 Z','#c7914f','#a67941',4);
+    s+=path('M112 411 L105 244 Q75 207 106 177 Q142 141 198 152 Q250 131 302 152 Q358 141 394 177 Q425 207 395 244 L388 411 Z','url(#'+id+'-bread)','#ddb77b',2);
+    var crumb=[[146,219,8],[206,194,6],[272,184,9],[351,215,6],[313,275,9],[176,300,8],[241,339,7],[350,372,8],[138,379,5],[294,393,5],[371,305,5],[220,253,5]];
+    crumb.forEach(function(p){s+=ellipse(p[0],p[1],p[2],p[2]*.65,'#d9b77f');});
+    if(m>.025){
+      s+=moldColony(190,240,33*m,Math.min(1,m*3));
+      s+=moldColony(315,330,42*Math.max(0,m-.12),Math.min(1,m*2));
+      s+=moldColony(272,205,24*Math.max(0,m-.23),Math.min(1,m*2));
+    }
+    s+=text(250,500,m<.06?'表面还看不出霉斑':'可见的只是表面变化',24,C.ink,600,'middle');
+    return s;
+  }
+  function moldMicro(m,id) {
+    var s=microBoundary(id,'#eff6ef');
+    s+='<g clip-path="url(#'+id+'-micro)">';
+    s+='<rect x="560" y="242" width="380" height="240" fill="url(#'+id+'-bread)"/>'+
+      path('M563 243 Q649 235 720 244 T938 242','none','#c89550',9);
+    for(var i=0;i<27;i++){
+      var xx=590+(i*61)%320, yy=266+(i*47)%180;
+      s+=ellipse(xx,yy,5+(i%4)*2,4+(i%3)*2,'#d9b47c');
+    }
+    /* A spore is present even when visible surface growth is absent. */
+    s+=circle(750,235,5.5,'#507967',C.ink,1.5);
+    if(m>.005){
+      var hyphae=[
+        [750,242,730,265,743,300,713,340],
+        [750,244,780,274,781,315,821,355],
+        [746,245,708,267,687,281,655,306],
+        [751,244,790,253,819,272,860,288],
+        [742,274,714,297,715,339,682,367],
+        [771,294,753,331,773,368,746,408],
+        [783,310,819,322,836,362,869,383],
+        [731,291,701,294,673,330,628,345]
+      ];
+      hyphae.forEach(function(a,i){
+        var pts=a.map(function(v,j){return j%2===0?750+(v-750)*m:242+(v-242)*m;});
+        s+=path('M'+num(pts[0])+' '+num(pts[1])+' C'+num(pts[2])+' '+num(pts[3])+' '+num(pts[4])+' '+num(pts[5])+' '+num(pts[6])+' '+num(pts[7]),'none',i%2?'#7a9a6f':'#4e795f',3.5,'stroke-linecap="round"');
+      });
+      for(var j=0;j<5;j++){
+        var px=750+(j-2)*31*m, h=(25+(j%3)*16)*m;
+        s+=path('M750 242 Q'+num(px)+' '+num(235-h*.2)+' '+num(px)+' '+num(235-h),'none','#638b66',3,'stroke-linecap="round"');
+        s+=circle(px,235-h,(6+j%2*2)*Math.sqrt(m),'#638b66');
+        if(m>.5)s+=circle(px-2,233-h,2.4,'#bfd2a7');
+      }
+    }
+    s+='</g>'+text(750,88,m<.06?'表面可能已有微小孢子':'把面包表面剖开来看',22,C.muted,500,'middle');
+    s+=text(582,189,'表面',22,C.muted)+path('M632 191 L670 232','none',C.muted,1.6);
+    s+=text(820,410,'内部',22,C.muted);
+    s+=text(750,513,m<.06?'孢子很小，肉眼难以发现':'菌丝可进入面包内部',23,C.ink,600,'middle');
+    return s;
+  }
+  function leaf(x,y,scale,rotation,fill) {
+    return '<g transform="translate('+num(x)+' '+num(y)+') rotate('+rotation+') scale('+num(scale)+')">'+
+      path('M-25 0 Q-5 -29 24 -3 Q10 23 -25 0 Z',fill,'#98723d',1.6)+
+      path('M-25 0 Q-1 -3 24 -3 M-6 -2 L-8 -14 M4 -3 L9 11','none','#98723d',1.4)+'</g>';
+  }
+  function compostMacro(m,id) {
+    var s='';
+    s+=path('M34 440 H466 V468 H34 Z','#b79c74')+path('M34 440 H466','none','#8c805d',3);
+    s+=path('M61 414 L61 262 Q111 205 159 225 Q204 184 253 219 Q299 193 343 250 L343 414 Z','#90754d');
+    s+='<g clip-path="url(#'+id+'-pile)">';
+    s+=path('M57 '+num(390-92*m)+' Q210 '+num(354-90*m)+' 350 '+num(389-88*m)+' V425 H57 Z','#6d6547');
+    for(var i=0;i<24;i++){
+      var x=80+(i*67)%253, y=241+(i*43)%157, sc=(.65+(i%4)*.12)*(1-m*.68);
+      s+=leaf(x,y+24*m,sc,(i*49)%160-80,['#c8a84e','#b88a44','#d2b567','#a3a25e'][i%4]);
+      if(m>.04){s+=circle(x+9,y+13,2.5+m*2,'#675c43');}
+    }
+    s+='</g>';
+    /* Open slats let the pile remain visible and visually communicate air. */
+    s+='<rect x="47" y="225" width="18" height="209" rx="3" fill="#8eaa8f" stroke="#638565" stroke-width="2"/>'+
+      '<rect x="342" y="225" width="18" height="209" rx="3" fill="#8eaa8f" stroke="#638565" stroke-width="2"/>';
+    [291,350,410].forEach(function(y){s+='<rect x="49" y="'+y+'" width="309" height="17" rx="3" fill="#afc5a7" stroke="#779974" stroke-width="2" fill-opacity=".93"/>';});
+    /* Adjacent plant: nutrients become usable after decomposition / compost use. */
+    s+=path('M425 438 C423 412 423 383 429 363','none','#568565',4,'stroke-linecap="round"');
+    s+=path('M425 402 Q391 402 394 375 Q424 375 425 402 Z','#95b586','#568565',2)+path('M427 386 Q455 386 457 361 Q430 360 427 386 Z','#bed29c','#568565',2);
+    s+=path('M425 442 L415 460 M425 442 L434 461 M420 450 L405 454 M430 451 L444 453','none','#635c41',2.3,'stroke-linecap="round"');
+    if(m>.45){
+      var q=(m-.45)/.55;
+      for(var k=0;k<4;k++){s+=circle(358+k*17,450,3.5,C.gold,'#ad8637',1);}
+      s+=path('M361 476 Q389 488 417 476','none',C.teal,2,'opacity="'+num(q)+'" marker-end="url(#'+id+'-arrow)"');
+    }
+    s+=text(250,518,m<.45?'有机物逐渐被分解':'腐熟后，部分养分可回到土壤',23,C.ink,600,'middle');
+    return s;
+  }
+  function compostMicro(m,id,condition) {
+    var s=microBoundary(id,C.pale);
+    s+='<g clip-path="url(#'+id+'-micro)">';
+    s+=path('M568 404 Q750 377 935 408 V474 H568 Z','#cbb58e');
+    /* The leaf shrinks into irregular fragments, rather than turning straight
+       into an intact plant or a mouthful for a root. */
+    s+=leaf(746,275,3.2*(1-.5*m),-12,'#c9b36a');
+    for(var i=0;i<9;i++){
+      var a=i*2.399, rr=64+i*7;
+      s+=leaf(750+Math.cos(a)*rr,285+Math.sin(a)*rr*.62,.16+m*.3,i*43,'#a58f50');
+    }
+    var microbes=[[631,253,28],[679,345,-32],[836,231,-45],[855,337,15],[744,371,42],[726,187,-15]];
+    microbes.forEach(function(p,i){
+      s+='<g transform="translate('+p[0]+' '+p[1]+') rotate('+p[2]+')">';
+      if(i%2===0){s+='<rect x="-16" y="-7" width="32" height="14" rx="7" fill="#6ba899" stroke="'+C.teal+'" stroke-width="2"/>'+circle(-5,0,2,'#d9efe4')+circle(5,0,2,'#d9efe4');}
+      else {s+=path('M-20 0 Q-9 -8 0 0 T23 0 M-8 -3 L-12 -16 M7 4 L10 16 M14 3 L25 -9','none','#53775b',3,'stroke-linecap="round"');}
+      s+='</g>';
+    });
+    var n=condition==='limited'?1:3;
+    for(var j=0;j<n;j++){
+      var ax=700+j*48;
+      s+=path('M'+ax+' 128 Q'+(ax+12)+' 149 '+ax+' 170','none',C.teal,2.5,'opacity=".65" marker-end="url(#'+id+'-arrow)"');
+    }
+    if(m>.08){
+      for(var k=0;k<8;k++){
+        var vx=640+k*31,vy=425+(k%3)*9;
+        s+=circle(vx,vy,3+2*m,C.gold,'#ac833e',1);
+      }
+      s+=path('M777 348 Q804 372 800 394','none',C.teal,2,'opacity="'+num(Math.min(1,m*2))+'" marker-end="url(#'+id+'-arrow)"');
+    }
+    s+='</g>'+text(750,88,'细菌、真菌等共同参与',22,C.muted,500,'middle');
+    s+=text(750,513,m<.08?'空气与有机物中的分解者':'有机物分解，部分养分释放',23,C.ink,600,'middle');
+    return s;
+  }
+  function render(kind,t,condition,inside) {
+    kind=kindOf(kind); t=clamp(t); condition=condition==='limited'?'limited':'active';
+    var id='mbs-'+(++sequence), m=metric(kind,t,condition);
+    var names={yeast:'酵母参与发面：面团与内部气泡',mold:'普通面包霉变：表面霉斑与内部菌丝',compost:'落叶堆肥：有机物分解与养分释放'};
+    var s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" role="img" aria-label="'+names[kind]+'，定性模型示意" data-kind="'+kind+'" data-condition="'+condition+'" data-time="'+num(t)+'" data-progress="'+m.toFixed(4)+'" style="font-family:system-ui,-apple-system,BlinkMacSystemFont,\'Microsoft YaHei\',sans-serif;max-width:100%;display:block" stroke-linejoin="round">';
+    s+='<title>'+names[kind]+'</title><desc>所有颜色、形状、大小、数量和进程均为教学示意，不是显微照片或真实生长速率。冷藏和通气不足不会使所有微生物消失。</desc>'+defs(id);
+    s+='<path d="M500 94 V492" stroke="#dce8df" stroke-width="2" stroke-dasharray="5 9"/>';
+    s+=topLabels(kind,!!inside);
+    s+=kind==='yeast'?yeastMacro(m,id):kind==='mold'?moldMacro(m,id):compostMacro(m,id);
+    if(inside) {
+      s+=kind==='yeast'?yeastMicro(m,id):kind==='mold'?moldMicro(m,id):compostMicro(m,id,condition);
+    } else s+=closedMicro();
+    return s+'</svg>';
+  }
+  root.MicrobeScenes={render:render,metric:metric};
+})(typeof window!=='undefined'?window:globalThis);
+
+</script>
+<script>
+(function(){
+'use strict';
+// State, scientific scenarios and rendering are kept separate for later refinement.
+var $=function(id){return document.getElementById(id);};
+var esc=function(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c];});};
+var STORAGE_KEY='aihtml-microbes-17-v1';
+var SCENARIOS={
+ yeast:{name:'酵母发面',question:'面团为什么会变蓬松？',active:'温暖',limited:'冷藏',control:'改变温度条件',note:'同一份生面团，只改变所处的温度条件。',limit:'进程表示模型推进，不是实际发酵分钟数。',clue:'酵母利用糖产生二氧化碳。气体被面团结构保留，气泡逐渐扩大；面团膨松不是酵母个体被放大。',prompt:'内部的气泡与外部面团，哪一种变化能互相解释？',boundary:'温暖指适合本情境的条件，并非越热越好。'},
+ mold:{name:'面包霉变',question:'表面的霉斑，就是全部吗？',active:'室温',limited:'冷藏',control:'改变保存条件',note:'同样的面包、初始孢子和水分，只改变温度条件。',limit:'冷藏抑制生长，不能把微生物清零。',clue:'表面能看到霉斑，菌丝还可能伸入多孔的面包内部。看不见明显霉斑，也不能据此判断食品安全。',prompt:'打开内部透视，再沿进程回看：表面和内部的变化有什么不同？',boundary:'不打开、闻嗅或品尝霉变样品；本图不能检测毒性。'},
+ compost:{name:'落叶堆肥',question:'落叶里的物质到哪里去了？',active:'通气充足',limited:'通气不足',control:'改变通气条件',note:'同样的落叶、初始分解者、水分与温度，只改变通气条件。',limit:'这里聚焦好氧分解；通气不足不等于所有分解停止。',clue:'细菌、真菌等参与分解落叶中的有机物，部分养分回到土壤。适当通气有利于这里展示的好氧过程。',prompt:'比较外部落叶与内部物质变化。我们希望它快一些还是慢一些？为什么？',boundary:'模型省略部分物质去向，不代表真实堆肥完成时间。'}
+};
+var GOALS=['让面食蓬松','保存普通面包','让落叶回到土壤','减少共餐交叉污染','帮助植物生长'];
+var CHANGES=['促进特定微生物的活动','抑制微生物生长','阻断特定接触路径','利用分解后的养分','还需要继续查证'];
+var WAYS=['控制发酵条件','适当冷藏保存','给好氧堆肥适当通气','公筷专用、分餐','不能只依赖公筷','分解使部分养分回到土壤','需要补充真实观察'];
+var NODES={mouthA:{x:78,y:75,label:'甲的口腔',type:'mouth'},chopA:{x:78,y:237,label:'甲的私筷',type:'chop'},bowlA:{x:155,y:395,label:'甲的碗',type:'bowl'},dish:{x:280,y:240,label:'共用菜',type:'dish'},public:{x:280,y:75,label:'公筷',type:'public'},bowlB:{x:405,y:395,label:'乙的碗',type:'bowl'},chopB:{x:482,y:237,label:'乙的私筷',type:'chop'},mouthB:{x:482,y:75,label:'乙的口腔',type:'mouth'}};
+var state={view:'action',effect:{kind:'yeast',condition:'active',t:0,inside:false,pin:null,playing:false,explain:false},spread:{source:'mouthA',mode:'dedicated',step:0,playing:false,selected:null},evidence:[],relations:[]};
+var lastFrame=0,lastPaint=0,spreadElapsed=0,toastTimer=0,storageAvailable=true,lastFocus=null;
+function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3000);}
+function validEvidence(e){
+ if(!e||typeof e.id!=='string'||!/^e[0-9]+$/.test(e.id))return false;
+ if(e.type==='effect')return !!SCENARIOS[e.kind]&&['active','limited'].indexOf(e.condition)>=0&&Number.isFinite(e.t)&&e.t>=0&&e.t<=1&&(e.pin===null||['active','limited'].indexOf(e.pin)>=0)&&typeof e.inside==='boolean';
+ return e.type==='spread'&&['mouthA','dish'].indexOf(e.source)>=0&&['dedicated','mixed'].indexOf(e.mode)>=0&&Number.isInteger(e.step)&&e.step>=0&&e.step<=4;
+}
+function restore(){try{var d=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');if(!d)return;if(Array.isArray(d.evidence))state.evidence=d.evidence.filter(validEvidence).slice(0,6);if(Array.isArray(d.relations))state.relations=d.relations.filter(function(r){return r&&GOALS.indexOf(r.goal)>=0&&CHANGES.indexOf(r.change)>=0&&WAYS.indexOf(r.way)>=0&&typeof r.evidenceId==='string';}).slice(0,4);}catch(e){storageAvailable=false;}}
+function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({evidence:state.evidence,relations:state.relations}));}catch(e){storageAvailable=false;$('storageNote').textContent='当前浏览器不能持久保存。请在离开前下载观察图和关系图；本次操作仍可继续。';}}
+function stop(){state.effect.playing=false;state.spread.playing=false;spreadElapsed=0;syncPlay();}
+function syncPlay(){$('effectPlay').textContent=state.effect.playing?'Ⅱ 暂停':'▶ 播放';$('spreadPlay').textContent=state.spread.playing?'Ⅱ 暂停':'▶ 回放';}
+function setView(view){stop();state.view=view;['action','spread','records'].forEach(function(v){$('view-'+v).hidden=v!==view;});document.querySelectorAll('[data-view]').forEach(function(b){var active=b.dataset.view===view;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});if(view==='records')renderRecords();if(view==='spread')renderSpread();if(view==='action')renderEffect();}
+function conditionName(kind,condition){return SCENARIOS[kind][condition];}
+function renderHalf(kind,t,cond,inside){return MicrobeScenes.render(kind,t,cond,true).replace('viewBox="0 0 1000 540"','viewBox="'+(inside?'500 0 500 540':'0 0 500 540')+'"');}
+function renderEffect(){
+ var s=state.effect,c=SCENARIOS[s.kind],canvas=$('scienceCanvas');
+ $('sceneQuestion').textContent=c.question;$('sceneSelect').value=s.kind;$('conditionLabel').textContent=c.control;$('activeCondition').textContent=c.active;$('limitedCondition').textContent=c.limited;$('scenarioNote').textContent=c.note;$('conditionNote').textContent=c.limit;
+ document.querySelectorAll('[data-condition]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.condition===s.condition));});
+ $('insideBtn').setAttribute('aria-pressed',String(s.inside));$('insideBtn').textContent=s.inside?(s.pin?'改看外部':'收起内部透视'):(s.pin?'同时看内部':'打开内部透视');
+ canvas.classList.toggle('comparing',!!s.pin);canvas.classList.toggle('mobile-stack',window.innerWidth<620);
+ if(s.pin){canvas.innerHTML='<div class="compare-pair"><div class="compare-unit"><h3>A · '+esc(conditionName(s.kind,s.pin))+'</h3>'+renderHalf(s.kind,s.t,s.pin,s.inside)+'</div><div class="compare-unit"><h3>B · '+esc(conditionName(s.kind,s.condition))+'</h3>'+renderHalf(s.kind,s.t,s.condition,s.inside)+'</div></div>';$('sceneSubtitle').textContent='同样起点、同一模型进程；点画面同时切换外部与内部。';}
+ else{canvas.innerHTML=window.innerWidth<620?'<div class="mobile-scene">'+renderHalf(s.kind,s.t,s.condition,false)+'</div>'+(s.inside?'<div class="mobile-scene">'+renderHalf(s.kind,s.t,s.condition,true)+'</div>':''):MicrobeScenes.render(s.kind,s.t,s.condition,s.inside);$('sceneSubtitle').textContent='外部变化与内部活动，沿同一进程回看。';}
+ $('effectTime').value=Math.round(s.t*100);$('effectTimeLabel').textContent='模型进程 '+Math.round(s.t*100)+'%';$('clearPinBtn').hidden=!s.pin;$('pinBtn').textContent=s.pin?'用当前条件替换 A':'＋ 保留这个条件作对照';
+ $('effectPromptTitle').textContent=s.explain?'解释线索':'先找一条线索';$('effectPrompt').textContent=s.explain?c.clue:c.prompt;$('explainBtn').textContent=s.explain?'收起解释':'查看解释线索';$('explainBtn').setAttribute('aria-expanded',String(s.explain));
+ $('sceneLegend').innerHTML='<span><i class="dot"></i>'+esc(s.kind==='mold'?c.boundary:'示意颜色与大小，不是真实显微照片')+'</span>';
+ syncPlay();
+}
+// Binary provenance model: reachability through the specified contacts, not a probability or microbial count.
+function simulateTransmission(source,mode,step){
+ var marked={},parent={},edges=[];Object.keys(NODES).forEach(function(k){marked[k]=false;});marked[source]=true;parent[source]=null;
+ function flow(a,b,event,label){var transferred=marked[a];edges.push({a:a,b:b,event:event,label:label,marked:transferred});if(transferred&&!marked[b]){marked[b]=true;parent[b]=a;}}
+ function touch(a,b,event,label){if(marked[b]&&!marked[a])flow(b,a,event,label);else flow(a,b,event,label);}
+ if(step>=1)touch('mouthA',mode==='mixed'?'public':'chopA',1,mode==='mixed'?'公筷入口':'私筷入口');
+ if(step>=2){if(mode==='private'){touch('chopA','dish',2,'私筷取菜');flow('chopA','bowlA',2,'放入个人碗');}else{touch('public','dish',2,'公筷取菜');flow('public','bowlA',2,'夹菜放下，不碰碗');}}
+ if(step>=3){if(mode==='private'){touch('chopB','dish',3,'私筷取菜');flow('chopB','bowlB',3,'放入个人碗');}else{touch('public','dish',3,'公筷取菜');flow('public','bowlB',3,'夹菜放下，不碰碗');}}
+ if(step>=4){if(mode!=='private')flow('bowlB','chopB',4,'私筷夹个人碗中菜');touch('chopB','mouthB',4,'私筷入口');}
+ return {marked:marked,parent:parent,edges:edges,source:source,mode:mode,step:step};
+}
+function ancestors(sim,key){var list=[key],guard=0;while(sim.parent[key]&&guard++<12){key=sim.parent[key];list.unshift(key);}return list;}
+function edgePath(a,b){var p=NODES[a],q=NODES[b];if(p.x===q.x){var sign=p.x<280?-1:1,down=q.y>p.y;var sx=p.x+sign*31,sy=p.y+(down?8:-7),tx=q.x+sign*32,ty=q.y+(down?-7:8);return 'M'+sx+' '+sy+' C'+(p.x+sign*72)+' '+(sy+(down?42:-42))+' '+(q.x+sign*72)+' '+(ty+(down?-42:42))+' '+tx+' '+ty;}var dx=q.x-p.x,dy=q.y-p.y,len=Math.sqrt(dx*dx+dy*dy)||1,cutA=p.type==='dish'?57:38,cutB=q.type==='dish'?57:39;var x1=p.x+dx/len*cutA,y1=p.y+dy/len*cutA,x2=q.x-dx/len*cutB,y2=q.y-dy/len*cutB;return 'M'+x1.toFixed(1)+' '+y1.toFixed(1)+' L'+x2.toFixed(1)+' '+y2.toFixed(1);}
+function nodeShape(k,n,marked,selected){
+ var shape='';
+ if(n.type==='mouth')shape='<circle r="32" fill="#f2d9b7" stroke="#bda57e" stroke-width="2"/><path d="M-28 -12Q-10 -44 22 -22L30 -8Q4 -18-28 -12" fill="#526b58"/><circle cx="-10" cy="-2" r="2.5" fill="#214c45"/><circle cx="10" cy="-2" r="2.5" fill="#214c45"/><path d="M-9 13Q0 18 9 13" fill="none" stroke="#9e6a53" stroke-width="3" stroke-linecap="round"/>';
+ else if(n.type==='chop'||n.type==='public')shape='<ellipse cy="5" rx="39" ry="34" fill="'+(n.type==='public'?'#d8eee4':'#f4eddd')+'"/><path d="M-15 -30L4 29M0 -33L16 24" stroke="'+(n.type==='public'?'#23867a':'#b4864b')+'" stroke-width="7" stroke-linecap="round"/>';
+ else if(n.type==='dish')shape='<ellipse cy="3" rx="66" ry="43" fill="#ceddd1"/><ellipse cy="-2" rx="64" ry="41" fill="#fff" stroke="#a5c2b0" stroke-width="2"/><ellipse cy="-4" rx="48" ry="27" fill="#e7e6b2"/><path d="M-35 -10Q-10 -38 1 -9Q-4 12-35 -10M9 -9Q28-31 35-4Q17 14 9 -9M-20 10Q0-7 18 13Q-8 33-20 10" fill="#73966b"/><path d="M-17-15L3-18M17 5L34 0M-31 4L-12 9" stroke="#dfa454" stroke-width="7" stroke-linecap="round"/>';
+ else shape='<ellipse cy="14" rx="39" ry="11" fill="#d5e2d7"/><path d="M-37-9Q-28 32 0 34Q28 32 37-9" fill="#e6efe7" stroke="#92b5a1" stroke-width="2"/><ellipse cy="-9" rx="37" ry="14" fill="#fff" stroke="#92b5a1" stroke-width="2"/><ellipse cy="-9" rx="25" ry="8" fill="#f1dfa7"/>';
+ return '<g data-node="'+k+'" role="button" tabindex="0" aria-label="追踪'+n.label+'" transform="translate('+n.x+' '+n.y+')" style="cursor:pointer">'+(selected?'<circle r="48" fill="none" stroke="#23867a" stroke-width="3" stroke-dasharray="6 4"/>':'')+shape+(marked?'<circle cx="29" cy="-27" r="10" fill="#bd5836" stroke="#fff" stroke-width="3"/>':'')+'<text y="65" text-anchor="middle" fill="#214a43" font-size="22" font-weight="600">'+n.label+'</text></g>';
+}
+var spreadSvgSeq=0;
+function spreadSvg(sim,prefix,selected){
+ var uid='tr-'+(++spreadSvgSeq)+'-'+prefix,chain=selected&&sim.marked[selected]?ancestors(sim,selected):[],parts=[];
+ parts.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 510" role="group" aria-label="'+(prefix==='A'?'私筷取共用菜':'公筷方案')+'的接触传播示意" data-step="'+sim.step+'" font-family="Microsoft YaHei,PingFang SC,Arial,sans-serif"><defs><marker id="'+uid+'-orange" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#bd5836"/></marker><marker id="'+uid+'-gray" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#9bb9a9"/></marker></defs><rect width="560" height="510" fill="#fafcf9"/><ellipse cx="280" cy="274" rx="220" ry="168" fill="#edf3e6"/><ellipse cx="280" cy="274" rx="213" ry="161" fill="none" stroke="#dce8d7" stroke-width="2"/>');
+ sim.edges.forEach(function(e){var highlight=chain.length<2||chain.indexOf(e.a)>=0&&chain.indexOf(e.b)>=0;var opacity=highlight?1:.22;parts.push('<path d="'+edgePath(e.a,e.b)+'" fill="none" stroke="'+(e.marked?'#bd5836':'#9bb9a9')+'" stroke-width="'+(e.event===sim.step?'4':'3')+'" stroke-dasharray="'+(e.marked?'none':'6 6')+'" opacity="'+opacity+'" marker-end="url(#'+uid+(e.marked?'-orange':'-gray')+')"/>');});
+ Object.keys(NODES).forEach(function(k){parts.push(nodeShape(k,NODES[k],sim.marked[k],k===selected));});
+ parts.push('<text x="280" y="495" text-anchor="middle" font-size="17" fill="#55726c">'+(sim.mode==='private'?'个人私筷接触共用菜':sim.mode==='mixed'?'本轮：公筷既入口，也夹共用菜':'公筷放下菜，不接触口和已用餐具')+'</text></svg>');return parts.join('');
+}
+function updatePath(){var s=state.spread;if(!s.selected){$('pathBox').innerHTML='<strong>追踪到哪里？</strong>点选画面中的口腔、筷子、菜或碗，回看标记的来路。';return;}var side=s.selected.side,key=s.selected.key,sim=simulateTransmission(s.source,side==='A'?'private':s.mode,s.step);var path=ancestors(sim,key);$('pathBox').innerHTML='<strong>'+side+' · '+esc(NODES[key].label)+'</strong>'+(sim.marked[key]?(path.length===1?'这是本轮追踪标记的起点。':path.map(function(k){return esc(NODES[k].label);}).join(' → ')):'在当前步骤，还没有来自所选起点的标记路径到达这里。')+'<div class="mode-note">'+(sim.marked[key]?'有路径 ≠ 已感染。':'没有这一个来源的标记 ≠ 无菌或绝对安全。')+'</div>';}
+function renderSpread(){
+ var s=state.spread,a=simulateTransmission(s.source,'private',s.step),b=simulateTransmission(s.source,s.mode,s.step);
+ $('boardA').innerHTML=spreadSvg(a,'A',s.selected&&s.selected.side==='A'?s.selected.key:null);$('boardB').innerHTML=spreadSvg(b,'B',s.selected&&s.selected.side==='B'?s.selected.key:null);
+ $('sourceSelect').value=s.source;$('publicMode').value=s.mode;$('boardBTitle').textContent=s.mode==='dedicated'?'公筷专用':'公筷也入口';$('publicNote').textContent=s.mode==='dedicated'?'专用公筷只夹共用菜，再把菜放入个人碗；不碰口和已用餐具。':'同一双公筷在口与共用菜之间使用，会重新接通这条接触路径。';
+ ['A','B'].forEach(function(k){var sim=k==='A'?a:b;$('status'+k).textContent='共用菜：'+(sim.marked.dish?'有来源标记':'未接到来源标记')+' · 乙口腔：'+(sim.marked.mouthB?'有来源标记':'未接到来源标记');});
+ var events=['起点：从'+(s.source==='dish'?'共用菜':'甲的口腔')+'放入追踪标记。','第1步 · 甲先吃一口'+(s.mode==='mixed'?'（B 使用公筷）':'（两边均使用自己的私筷）'),'第2步 · 甲再从共用菜中取菜','第3步 · 乙从同一盘共用菜中取菜','第4步 · 乙用私筷把个人碗中的菜送入口中'];
+ $('eventCaption').textContent=events[s.step];$('spreadTime').value=s.step;$('spreadBack').disabled=s.step===0;$('spreadNext').disabled=s.step===4;updatePath();syncPlay();
+}
+function evidenceTitle(e){return e.type==='effect'?SCENARIOS[e.kind].name+' · '+Math.round(e.t*100)+'%':'用餐路径 · 第'+e.step+'步';}
+function evidenceDetail(e){return e.type==='effect'?(e.pin?'A '+conditionName(e.kind,e.pin)+' / B ':'')+conditionName(e.kind,e.condition)+(e.inside?' · 内部透视':' · 外部观察'):'来源：'+(e.source==='dish'?'共用菜':'甲的口腔')+' · B '+(e.mode==='dedicated'?'公筷专用':'公筷入口');}
+function uniqueId(){var n=Date.now();while(state.evidence.some(function(e){return e.id==='e'+n;}))n++;return 'e'+n;}
+function saveObservation(type){if(state.evidence.length>=6){toast('已留存 6 帧。请在整理联系中删除不需要的观察后再保存。');return;}var e={id:uniqueId(),type:type};if(type==='effect'){Object.assign(e,{kind:state.effect.kind,t:Number(state.effect.t.toFixed(4)),condition:state.effect.condition,inside:state.effect.inside,pin:state.effect.pin});}else{Object.assign(e,{source:state.spread.source,mode:state.spread.mode,step:state.spread.step});}state.evidence.push(e);persist();$('recordCount').textContent=state.evidence.length;toast('已留存观察 '+state.evidence.length+'；可在“整理联系”中使用。');}
+function innerSvg(svg){return svg.replace(/^<svg[^>]*>/,'').replace(/<\/svg>\s*$/,'');}
+function snapshotSvg(e){
+ var p=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="1200" height="820" font-family="Microsoft YaHei,PingFang SC,Arial,sans-serif" role="img" aria-label="模型观察记录"><rect width="1200" height="820" fill="#fff"/><text x="34" y="50" font-size="30" font-weight="700" fill="#164c49">'+esc(evidenceTitle(e))+'</text><text x="34" y="85" font-size="20" fill="#55726c">'+esc(evidenceDetail(e))+'</text>'];
+ if(e.type==='effect'){
+  if(e.pin){p.push('<text x="315" y="130" text-anchor="middle" font-size="25" fill="#164c49">A · '+esc(conditionName(e.kind,e.pin))+'</text><text x="885" y="130" text-anchor="middle" font-size="25" fill="#164c49">B · '+esc(conditionName(e.kind,e.condition))+'</text>');['pin','condition'].forEach(function(key,i){var raw=MicrobeScenes.render(e.kind,e.t,e[key],true);p.push('<svg x="'+(30+i*570)+'" y="145" width="540" height="550" viewBox="'+(e.inside?'500 0 500 540':'0 0 500 540')+'">'+innerSvg(raw)+'</svg>');});}
+  else p.push('<svg x="30" y="115" width="1140" height="610" viewBox="0 0 1000 540">'+innerSvg(MicrobeScenes.render(e.kind,e.t,e.condition,e.inside))+'</svg>');
+ }else{
+  ['private',e.mode].forEach(function(mode,i){p.push('<text x="'+(300+i*590)+'" y="130" text-anchor="middle" font-size="25" fill="#164c49">'+(i?'B · '+(mode==='dedicated'?'公筷专用':'公筷入口'):'A · 私筷夹共用菜')+'</text><svg x="'+(15+i*590)+'" y="150" width="580" height="540" viewBox="0 0 560 510">'+innerSvg(spreadSvg(simulateTransmission(e.source,mode,e.step),i?'B':'A',null))+'</svg>');});
+ }
+ p.push('<line x1="30" y1="749" x2="1170" y2="749" stroke="#d6e5dc"/><text x="34" y="780" font-size="19" fill="#55726c">模型示意：比例、进程和标记不是实测数据；传播标记不等于感染。</text><text x="1168" y="807" text-anchor="end" font-size="14" fill="#7d9489">五上1.7 微生物与人类 · v1.0</text></svg>');return p.join('');
+}
+function multiLine(text,x,y,width,font,fill,anchor){var chars=Array.from(text),lines=[];while(chars.length)lines.push(chars.splice(0,width).join(''));var start=y-(lines.length-1)*font*.64;return '<text x="'+x+'" y="'+start+'" fill="'+fill+'" font-size="'+font+'" text-anchor="'+(anchor||'middle')+'">'+lines.map(function(l,i){return '<tspan x="'+x+'" dy="'+(i?font*1.35:0)+'">'+esc(l)+'</tspan>';}).join('')+'</text>';}
+function mapSvg(){
+ var rows=state.relations,height=Math.max(430,110+rows.length*137),parts=['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 '+height+'" width="1060" height="'+height+'" font-family="Microsoft YaHei,PingFang SC,Arial,sans-serif" role="img" aria-label="学生自主整理的微生物关系图"><rect width="1060" height="'+height+'" fill="#fff"/><text x="28" y="38" font-size="24" font-weight="700" fill="#164c49">我的关系图 · 待讨论</text><text x="195" y="80" text-anchor="middle" font-size="20" fill="#55726c">人的目的</text><text x="535" y="80" text-anchor="middle" font-size="20" fill="#55726c">希望改变</text><text x="875" y="80" text-anchor="middle" font-size="20" fill="#55726c">做法或解释</text>'];
+ if(!rows.length){parts.push('<rect x="40" y="115" width="980" height="220" rx="15" fill="#f7faf4" stroke="#bdd4c5" stroke-dasharray="8 6"/><path d="M320 225H390M665 225H735" stroke="#9bb9a9" stroke-width="3"/><path d="M382 216L393 225L382 234M727 216L738 225L727 234" fill="none" stroke="#9bb9a9" stroke-width="3"/>'+multiLine('为什么要这样做？',190,225,9,24,'#6d8a7b')+multiLine('希望什么发生变化？',535,225,10,24,'#6d8a7b')+multiLine('哪条观察支持解释？',875,225,10,24,'#6d8a7b')+'<text x="530" y="390" text-anchor="middle" font-size="22" fill="#55726c">在右侧选择，并加入你自己的关系。</text>');}
+ rows.forEach(function(r,i){var y=107+i*137;[r.goal,r.change,r.way].forEach(function(txt,j){var x=48+j*340;parts.push('<rect x="'+x+'" y="'+y+'" width="295" height="84" rx="11" fill="'+(j===0?'#e8f1e6':j===1?'#f8efd9':'#dff0e9')+'"/>'+multiLine(txt,x+147.5,y+46,12,22,'#164c49'));if(j<2)parts.push('<path d="M'+(x+306)+' '+(y+43)+'h24m-8-7l8 7-8 7" fill="none" stroke="#6d9d86" stroke-width="2.5"/>');});var ev=state.evidence.find(function(e){return e.id===r.evidenceId;});parts.push('<text x="55" y="'+(y+111)+'" font-size="17" fill="#6b8575">'+esc(ev?'依据观察 '+(state.evidence.indexOf(ev)+1)+'：'+evidenceTitle(ev):'依据：尚未关联观察，需补充查证')+'</text>');});
+ parts.push('<text x="1030" y="'+(height-7)+'" text-anchor="end" font-size="14" fill="#7d9489">学生选择与解释 · 模型观察不等于真实实验数据</text></svg>');return parts.join('');
+}
+function renderRecords(){
+ var selected=$('evidenceSelect').value;
+ $('recordCount').textContent=state.evidence.length;
+ $('evidenceTray').innerHTML=state.evidence.length?state.evidence.map(function(e,i){return '<article class="evidence-card"><button class="remove" data-remove="'+e.id+'" aria-label="删除观察'+(i+1)+'">×</button><div class="thumb">'+snapshotSvg(e)+'</div><div class="card-copy"><strong>观察 '+(i+1)+' · '+esc(evidenceTitle(e))+'</strong><br>'+esc(evidenceDetail(e))+'</div></article>';}).join(''):'<div class="evidence-empty"><svg width="62" height="62" viewBox="0 0 62 62" aria-hidden="true"><rect x="7" y="10" width="48" height="39" rx="7" fill="#e4efe1" stroke="#9fbeab"/><path d="M19 30H43M31 18V42" stroke="#83a48e" stroke-width="3"/></svg><span>还没有观察记录。<br>在前两个工作区点击“留存观察”，把关键的一刻带到这里。</span></div>';
+ $('evidenceSelect').innerHTML='<option value="">暂未选依据</option>'+state.evidence.map(function(e,i){return '<option value="'+e.id+'">观察 '+(i+1)+' · '+esc(evidenceTitle(e))+'</option>';}).join('');if(state.evidence.some(function(e){return e.id===selected;}))$('evidenceSelect').value=selected;else if(state.evidence.length)$('evidenceSelect').value=state.evidence[state.evidence.length-1].id;
+ $('relationMap').innerHTML=window.innerWidth<620?'<div class="mobile-relations">'+(state.relations.length?state.relations.map(function(r,i){var ev=state.evidence.find(function(e){return e.id===r.evidenceId;});return '<article><strong>关系 '+(i+1)+' · '+esc(r.goal)+'</strong><p>希望：'+esc(r.change)+'<br>做法或解释：'+esc(r.way)+'</p><small>'+esc(ev?'依据：'+evidenceTitle(ev):'尚未关联观察，需要补充查证')+'</small></article>';}).join(''):'<p>请选择人的目的、希望改变与做法，加入你自己的关系。</p>')+'</div>':mapSvg();$('undoRelation').disabled=!state.relations.length;$('exportMap').disabled=!state.relations.length;$('exportEvidence').disabled=!state.evidence.length;$('addRelation').disabled=state.relations.length>=4;
+ if(!storageAvailable)$('storageNote').textContent='当前浏览器不能持久保存。请在离开前下载图像；本次操作仍可继续。';
+}
+function downloadSvg(filename,svg){try{var blob=new Blob(['<?xml version="1.0" encoding="UTF-8"?>\n'+svg],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},30000);toast('已生成 SVG，请查看浏览器的下载结果。');}catch(err){toast('当前浏览器未能下载，请使用浏览器截图保存。');}}
+function openHelp(){stop();lastFocus=document.activeElement;$('helpModal').hidden=false;$('closeHelp').focus();}
+function closeHelp(){$('helpModal').hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+document.querySelectorAll('[data-view]').forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.view);});});
+$('sceneSelect').addEventListener('change',function(){stop();state.effect.kind=this.value;state.effect.t=0;state.effect.pin=null;state.effect.explain=false;renderEffect();});
+document.querySelectorAll('[data-condition]').forEach(function(b){b.addEventListener('click',function(){stop();state.effect.condition=b.dataset.condition;renderEffect();});});
+function toggleInside(){state.effect.inside=!state.effect.inside;renderEffect();}
+$('insideBtn').addEventListener('click',toggleInside);$('scienceCanvas').addEventListener('click',toggleInside);$('scienceCanvas').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleInside();}});
+$('effectTime').addEventListener('input',function(){stop();state.effect.t=Number(this.value)/100;renderEffect();});
+$('effectPlay').addEventListener('click',function(){if(state.effect.t>=1)state.effect.t=0;state.effect.playing=!state.effect.playing;lastFrame=0;syncPlay();});
+$('effectReset').addEventListener('click',function(){stop();Object.assign(state.effect,{condition:'active',t:0,inside:false,pin:null,explain:false});renderEffect();});
+$('pinBtn').addEventListener('click',function(){stop();state.effect.pin=state.effect.condition;renderEffect();toast('A 已保留。切换右侧条件，用同一进程比较 A 与 B。');});
+$('clearPinBtn').addEventListener('click',function(){state.effect.pin=null;renderEffect();});
+$('saveEffectBtn').addEventListener('click',function(){stop();saveObservation('effect');});$('explainBtn').addEventListener('click',function(){state.effect.explain=!state.effect.explain;renderEffect();});
+$('sourceSelect').addEventListener('change',function(){stop();state.spread.source=this.value;state.spread.step=0;state.spread.selected=null;renderSpread();});
+$('publicMode').addEventListener('change',function(){stop();state.spread.mode=this.value;renderSpread();});
+$('spreadTime').addEventListener('input',function(){stop();state.spread.step=Number(this.value);renderSpread();});
+$('spreadNext').addEventListener('click',function(){stop();state.spread.step=Math.min(4,state.spread.step+1);renderSpread();});$('spreadBack').addEventListener('click',function(){stop();state.spread.step=Math.max(0,state.spread.step-1);renderSpread();});
+$('spreadPlay').addEventListener('click',function(){if(state.spread.step>=4)state.spread.step=0;state.spread.playing=!state.spread.playing;spreadElapsed=0;lastFrame=0;renderSpread();});
+$('spreadReset').addEventListener('click',function(){stop();Object.assign(state.spread,{source:'mouthA',mode:'dedicated',step:0,selected:null});renderSpread();});
+['A','B'].forEach(function(side){function selectNode(e){var target=e.target.closest('[data-node]');if(!target)return;if(e.type==='keydown'&&e.key!=='Enter'&&e.key!==' ')return;e.preventDefault();state.spread.selected={side:side,key:target.getAttribute('data-node')};renderSpread();} $('board'+side).addEventListener('click',selectNode);$('board'+side).addEventListener('keydown',selectNode);});
+$('saveSpreadBtn').addEventListener('click',function(){stop();saveObservation('spread');});
+$('evidenceTray').addEventListener('click',function(e){var b=e.target.closest('[data-remove]');if(!b)return;var id=b.dataset.remove;state.evidence=state.evidence.filter(function(o){return o.id!==id;});state.relations.forEach(function(r){if(r.evidenceId===id)r.evidenceId='';});persist();renderRecords();toast('已移除这帧观察；相关解释仍保留，需重新关联依据。');});
+$('addRelation').addEventListener('click',function(){var goal=$('goalSelect').value,change=$('changeSelect').value,way=$('waySelect').value,evidenceId=$('evidenceSelect').value;if(!goal||!change||!way){toast('请选好人的目的、希望改变和做法，再加入关系图。');return;}if(state.relations.length>=4)return;state.relations.push({goal:goal,change:change,way:way,evidenceId:evidenceId});persist();renderRecords();toast('已加入你的解释，可继续选择新的关系。');});
+$('undoRelation').addEventListener('click',function(){state.relations.pop();persist();renderRecords();});
+$('exportMap').addEventListener('click',function(){if(state.relations.length)downloadSvg('微生物与人类_我的关系图.svg',mapSvg());});
+$('exportEvidence').addEventListener('click',function(){var id=$('evidenceSelect').value,e=state.evidence.find(function(o){return o.id===id;});if(!e){toast('请先在右侧选择一帧观察。');return;}downloadSvg('微生物与人类_观察'+(state.evidence.indexOf(e)+1)+'.svg',snapshotSvg(e));});
+$('helpBtn').addEventListener('click',openHelp);$('closeHelp').addEventListener('click',closeHelp);$('helpModal').addEventListener('click',function(e){if(e.target===$('helpModal'))closeHelp();});document.addEventListener('keydown',function(e){if($('helpModal').hidden)return;if(e.key==='Escape'){closeHelp();return;}if(e.key==='Tab'){var f=$('helpModal').querySelectorAll('button,a,[tabindex="0"]'),first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+$('fullscreenBtn').addEventListener('click',function(){try{var p;if(document.fullscreenElement||document.webkitFullscreenElement){p=document.exitFullscreen?document.exitFullscreen():document.webkitExitFullscreen&&document.webkitExitFullscreen();}else{var el=document.documentElement;if(el.requestFullscreen)p=el.requestFullscreen();else if(el.webkitRequestFullscreen)p=el.webkitRequestFullscreen();else{toast('此浏览器不支持网页全屏，可使用浏览器或设备的全屏模式。');return;}}if(p&&p.catch)p.catch(function(){toast('全屏未能开启，核心操作仍可正常使用。');});}catch(e){toast('此环境未能开启全屏，核心操作仍可正常使用。');}});
+document.addEventListener('fullscreenchange',function(){$('fullscreenBtn').textContent=document.fullscreenElement?'退出全屏':'全屏';});document.addEventListener('visibilitychange',function(){if(document.hidden)stop();});
+function tick(now){var dt=lastFrame?Math.min((now-lastFrame)/1000,.12):0;lastFrame=now;if(state.effect.playing&&state.view==='action'){state.effect.t=Math.min(1,state.effect.t+dt/18);if(state.effect.t>=1)state.effect.playing=false;if(now-lastPaint>65||!state.effect.playing){renderEffect();lastPaint=now;}}if(state.spread.playing&&state.view==='spread'){spreadElapsed+=dt;if(spreadElapsed>=1.5){spreadElapsed=0;state.spread.step=Math.min(4,state.spread.step+1);if(state.spread.step===4)state.spread.playing=false;renderSpread();}}requestAnimationFrame(tick);}
+var wasSmall=window.innerWidth<620;window.addEventListener('resize',function(){var small=window.innerWidth<620;if(small!==wasSmall){wasSmall=small;if(state.view==='action')renderEffect();if(state.view==='records')renderRecords();}});
+restore();renderEffect();$('recordCount').textContent=state.evidence.length;requestAnimationFrame(tick);
+window.MicrobesApp={state:state,simulateTransmission:simulateTransmission,snapshotSvg:snapshotSvg,mapSvg:mapSvg,setView:setView};
+})();
+
+</script>
+</body>
+</html>
