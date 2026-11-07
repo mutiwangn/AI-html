@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>设计潜望镜 · 结构拆解与平面位置练习</title>
+<style>
+
+:root{--bg:#f2f5f7;--paper:#fff;--ink:#193247;--muted:#617587;--line:#dce5eb;--teal:#087f89;--teal-pale:#e4f3f2;--gold:#f0b33e;--blue:#327fbd;--red:#c45142;--shadow:0 5px 22px #1932470b;--r:16px}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation;border:1px solid var(--line);background:white;color:var(--ink);font-weight:650;border-radius:10px;padding:10px 14px;transition:background .16s,border-color .16s,transform .12s}button:hover{border-color:#85b6bf;background:#f1f8f8}button:active{transform:translateY(1px)}button:focus-visible,input:focus-visible{outline:3px solid #f0b33e;outline-offset:3px}button.primary{background:var(--teal);color:#fff;border-color:var(--teal)}button.active{background:var(--teal-pale);border-color:var(--teal);color:#056973}button.subtle{background:transparent;border-color:transparent;color:var(--muted)}button:disabled{opacity:.45;cursor:not-allowed}button.iconbtn{padding:9px 12px}.small{font-size:13px;color:var(--muted);line-height:1.6}.muted{color:var(--muted)}.hidden{display:none!important}h1,h2,h3,p{margin:0}h1{font-size:27px;letter-spacing:.03em}h2{font-size:20px}h3{font-size:18px}.row{display:flex;align-items:center;gap:8px}.spaced{justify-content:space-between}.wrap{flex-wrap:wrap}.stack{display:flex;flex-direction:column;gap:12px}.app{height:100dvh;display:flex;flex-direction:column;padding:0 18px 10px;max-width:2400px;margin:auto}.header{height:83px;flex:0 0 83px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;gap:12px;align-items:center;flex-shrink:0}.brand-mark{width:46px;height:46px;background:var(--teal);color:white;border-radius:12px;display:grid;place-items:center}.brand-sub{font-size:13px;color:var(--muted);margin-top:3px}.nav{display:flex;gap:5px;background:#e6ecef;padding:5px;border-radius:12px}.nav button{border:0;background:transparent;font-size:17px;padding:11px 18px;white-space:nowrap}.nav button.active{background:#fff;box-shadow:var(--shadow);color:var(--teal)}.top-actions{display:flex;gap:5px}.top-actions button{font-size:14px;white-space:nowrap}.workspace{flex:1;min-height:0}.lab{display:grid;height:100%;grid-template-columns:274px minmax(390px,1fr) 304px;gap:14px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);min-height:0}.controls{padding:18px;display:flex;flex-direction:column;gap:15px;overflow:auto;scrollbar-width:thin}.section-head{display:flex;justify-content:space-between;align-items:center}.section-head .small{font-size:12px}.angle-box{padding:12px 0 14px;border-bottom:1px solid var(--line)}.angle-head{display:flex;align-items:center;justify-content:space-between}.angle-title{font-size:20px;font-weight:750}.angle-value{font-size:34px;font-weight:760;color:var(--teal);font-variant-numeric:tabular-nums}.number-pill{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--teal-pale);color:var(--teal);font-size:15px;margin-right:6px;vertical-align:2px}.slider-row{display:flex;align-items:center;gap:9px;margin-top:8px}.stepper{width:36px;height:36px;padding:0;font-size:22px;flex-shrink:0}.slider-row input{min-width:20px;flex:1}.range-caps{display:flex;justify-content:space-between;margin:5px 44px 0;font-size:12px;color:var(--muted)}input[type=range]{width:100%;height:28px;accent-color:var(--teal);cursor:pointer;touch-action:pan-y}.lockbtn{width:100%;padding:10px;font-size:15px}.presets{display:grid;grid-template-columns:1fr 1fr;gap:7px}.presets button{padding:10px 5px;font-size:14px;min-height:46px}.controls .end-actions{margin-top:auto;display:flex;gap:8px}.controls .end-actions button{flex:1;font-size:14px;padding:10px 4px}.stage{display:flex;flex-direction:column;min-height:0;overflow:hidden;background:#102638;border-color:#102638;color:#fff}.stage-toolbar{display:flex;align-items:center;justify-content:space-between;gap:5px;padding:12px 15px;background:#152e40;min-height:58px}.stage-toolbar button{color:#bfd4df;background:transparent;border-color:#335062;padding:7px 10px;font-size:13px}.stage-toolbar button.active{background:#25535f;border-color:#68a8ae;color:#fff}.stage-toolbar .small{color:#8daab9}.stage-canvas-wrap{flex:1;min-height:0;position:relative;overflow:hidden}.stage-canvas-wrap canvas{width:100%;height:100%;display:block;touch-action:none}.stage-hint{position:absolute;top:14px;left:17px;color:#90b0c2;font-size:13px;pointer-events:none}.stage-bottom{display:flex;align-items:center;gap:9px;justify-content:space-between;padding:12px 16px;background:#152e40;min-height:58px;font-size:14px}.stage-bottom .legend{display:flex;gap:12px;color:#b8cbd8;font-size:12px;flex-wrap:wrap}.legend i{display:inline-block;width:16px;height:3px;vertical-align:3px;margin-right:5px}.stage-bottom button{padding:8px 12px;font-size:14px;background:#264554;border-color:#40616d;color:white}.outcomes{display:flex;flex-direction:column;gap:12px;overflow:auto;scrollbar-width:thin}.view-panel{padding:16px 16px 12px}.view-panel h2{margin-bottom:10px}.eyepiece{background:#081421;border:7px solid #233b4b;border-radius:12px;overflow:hidden;position:relative;aspect-ratio:1.54}.eyepiece canvas{width:100%;height:100%;display:block}.eye-caption{font-size:11px;color:var(--muted);margin-top:6px}.status{padding:16px;background:#eef7f5;border:1px solid #cde2dc;border-radius:14px}.status.warn{background:#fff4e8;border-color:#ead7bb}.status.bad{background:#fbefeb;border-color:#e6c9c1}.status .status-label{font-size:12px;color:#536e72;margin-bottom:5px}.status strong{font-size:23px;line-height:1.25;display:block}.status p{font-size:14px;line-height:1.55;margin-top:7px;color:#496069}.metrics{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:10px;padding-top:10px;gap:10px}.metric .value{font-size:22px;font-weight:750}.metric .small{font-size:12px}.law-panel{padding:15px 17px}.law-panel .equation{font-size:20px;font-weight:750;color:var(--teal);margin:10px 0 5px}.law-panel .small{font-size:13px}.right-bottom{padding:14px 16px;margin-top:auto}.right-bottom button{width:100%;margin-top:10px}.material-strip{font-size:13px;line-height:1.7;color:var(--muted);padding-bottom:9px}.footer{height:27px;flex:0 0 27px;display:flex;justify-content:space-between;align-items:end;font-size:11px;color:#738692;gap:10px}.footer button{padding:0;border:0;background:transparent;font-size:11px;font-weight:500;color:#667b88}.structure{height:100%;display:grid;grid-template-columns:225px minmax(400px,1fr) 315px;gap:14px}.parts{padding:19px 16px;display:flex;flex-direction:column;gap:10px;overflow:auto}.parts button{text-align:left;padding:14px;font-size:18px}.parts button small{display:block;font-size:12px;font-weight:400;margin-top:4px;color:var(--muted)}.structure-stage{display:flex;flex-direction:column;overflow:hidden}.structure-stage .stage-toolbar{background:#fff;color:var(--ink);border-bottom:1px solid var(--line)}.structure-stage .stage-toolbar button{color:var(--ink);border-color:var(--line)}.structure-stage .stage-toolbar button.active{color:var(--teal);background:var(--teal-pale)}.structure-stage .stage-canvas-wrap{background:#eef3f5}.structure-bottom{padding:14px 18px;border-top:1px solid var(--line);background:white;display:flex;gap:16px;align-items:center;font-size:14px}.structure-bottom input{flex:1}.part-detail{padding:22px;overflow:auto;display:flex;flex-direction:column;gap:18px}.part-detail .part-number{color:var(--teal);font-size:13px;font-weight:750}.part-detail h2{font-size:27px}.part-detail p{font-size:18px;line-height:1.8}.part-note{padding:15px;border-radius:12px;background:#edf4f6;font-size:15px;line-height:1.7}.part-detail button{margin-top:auto}.materials{height:100%;display:grid;grid-template-columns:minmax(560px,1fr) 345px;gap:15px}.material-work{padding:23px;overflow:auto}.material-work>p{margin-top:7px}.material-group{margin-top:19px}.material-group h3{margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}.material-options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.material-options.three{grid-template-columns:repeat(3,1fr)}.material-option{display:flex;align-items:center;text-align:left;gap:10px;padding:12px 10px;position:relative;min-height:85px}.material-option.selected{border:2px solid var(--teal);padding:11px 9px;background:#edf8f6}.mat-pic{width:42px;height:48px;flex-shrink:0}.material-option strong{font-size:17px;display:block}.material-option small{font-size:12px;color:var(--muted);font-weight:400;line-height:1.4;display:block;margin-top:5px}.mat-summary{padding:20px;display:flex;flex-direction:column;gap:12px;overflow:auto}.mat-preview{height:176px;flex:0 0 176px;width:100%;background:#edf3f5;border-radius:12px}.mat-preview canvas{width:100%;height:100%}.material-advice{font-size:16px;line-height:1.65;border-bottom:1px solid var(--line);padding-bottom:12px}.material-advice strong{color:var(--teal)}.mat-summary .primary{margin-top:auto;min-height:47px}.material-warning{padding:11px 13px;border-radius:9px;background:#fff4e7;font-size:13px;line-height:1.65;color:#885627}.modal-backdrop{position:fixed;inset:0;z-index:100;background:#0a1e2b87;display:flex;align-items:center;justify-content:center;padding:26px;backdrop-filter:blur(3px)}.modal{width:min(1020px,96vw);max-height:92dvh;background:#fff;border-radius:20px;box-shadow:0 20px 90px #0004;display:flex;flex-direction:column;overflow:hidden}.modal-head{padding:20px 25px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:10px}.modal-head h2{font-size:23px}.modal-body{padding:23px 25px;overflow:auto;min-height:0}.modal-foot{padding:16px 25px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px}.more-controls{display:grid;grid-template-columns:1fr 1fr;gap:20px 30px}.field{padding:15px 0}.field label{font-weight:700;font-size:20px;display:flex;justify-content:space-between}.field output{color:var(--teal)}.field p{font-size:14px;line-height:1.6;color:var(--muted);margin-top:7px}.explain{font-size:17px;line-height:1.85}.explain h3{font-size:21px;margin:19px 0 7px;color:var(--teal)}.explain h3:first-child{margin-top:0}.explain a{color:var(--teal)}.records-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.record{border:1px solid var(--line);border-radius:13px;overflow:hidden}.record-thumb{height:165px;background:#142c3d;display:block;width:100%;object-fit:contain}.record-body{padding:14px}.record-body h3{font-size:19px;margin-bottom:8px}.record-body p{font-size:14px;line-height:1.65}.record .row{margin-top:12px}.record button{font-size:13px;padding:8px 10px}.toast{position:fixed;bottom:35px;left:50%;transform:translate(-50%,15px);padding:13px 25px;border-radius:12px;background:#19384a;color:white;box-shadow:0 6px 25px #0003;z-index:200;opacity:0;pointer-events:none;transition:.2s;max-width:90vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.checkrow{display:flex;align-items:center;gap:9px;font-size:17px}.checkrow input{width:21px;height:21px;accent-color:var(--teal)}.live-badge{width:7px;height:7px;background:#7ac9a6;display:inline-block;border-radius:50%;margin-right:7px}.actual-note{padding:16px;border-left:4px solid var(--teal);background:#ecf5f5;font-size:15px;line-height:1.7}.reference-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.reference-grid section{padding:18px;background:#eff5f6;border-radius:12px}.reference-grid h3{font-size:21px;margin-bottom:10px}.reference-grid p{font-size:16px;line-height:1.8}.empty-record{padding:60px 10px;text-align:center;color:var(--muted);font-size:19px}.flip-controls{display:flex;gap:8px;margin-top:10px}.flip-controls button{flex:1;font-size:13px}
+@media(min-width:1750px){.app{padding:0 24px 12px}.header{height:94px;flex-basis:94px}.lab{grid-template-columns:315px minmax(500px,1fr) 354px;gap:19px}.controls{padding:23px;gap:22px}.angle-title{font-size:24px}.angle-value{font-size:42px}.presets button{font-size:17px;padding:14px 7px}.view-panel h2{font-size:24px}.status strong{font-size:28px}.status p{font-size:17px}.law-panel .small{font-size:16px}.law-panel .equation{font-size:24px}.material-strip{font-size:15px}.right-bottom button{font-size:19px}.stage-toolbar button{font-size:16px}.stage-toolbar{padding:14px 19px}.stage-bottom{padding:16px 20px}.structure{grid-template-columns:255px 1fr 355px}.material-options strong{font-size:20px}.material-options small{font-size:15px}.material-option{min-height:110px}.materials{grid-template-columns:1fr 390px}}
+@media(max-height:790px) and (min-width:1000px){.header{height:70px;flex-basis:70px}.brand-sub{font-size:11px}.controls{padding:13px;gap:10px}.angle-box{padding:5px 0 10px}.angle-value{font-size:29px}.angle-title{font-size:19px}.slider-row{margin-top:3px}.range-caps{margin-top:0}.presets button{min-height:39px;padding:8px 4px}.view-panel{padding:12px}.view-panel h2{font-size:18px;margin-bottom:8px}.status{padding:12px}.status strong{font-size:21px}.status p{font-size:13px}.outcomes{gap:9px}.law-panel{padding:11px 14px}.law-panel h3{font-size:16px}.law-panel .equation{margin:6px 0 3px;font-size:18px}.law-panel .small{font-size:12px}.right-bottom{padding:10px 13px}.right-bottom button{margin-top:6px}.eyepiece{aspect-ratio:1.72}.stage-toolbar{min-height:49px;padding:9px 12px}.stage-bottom{min-height:50px;padding:9px 12px}.material-work{padding:17px}.material-group{margin-top:15px}.material-option{min-height:71px;padding:9px}.material-option.selected{padding:8px}.mat-pic{width:33px;height:42px}.material-option strong{font-size:15px}.material-option small{font-size:11px}.mat-preview{height:144px;flex-basis:144px}.mat-summary{padding:15px;gap:10px}.material-advice{font-size:14px}.part-detail p{font-size:16px}.parts button{padding:12px;font-size:17px}}
+@media(max-width:1270px) and (min-width:1000px){.app{padding:0 10px 8px}.lab{grid-template-columns:231px minmax(330px,1fr) 263px;gap:9px}.header{gap:8px}.brand{gap:8px}h1{font-size:23px}.brand-mark{width:38px;height:38px}.nav button{font-size:15px;padding:9px 12px}.top-actions button{font-size:12px;padding:8px}.controls{padding:13px}.stage-toolbar button{padding:7px;font-size:12px}.stage-toolbar .small{display:none}.stage-bottom .legend{font-size:10px;gap:6px}.structure{grid-template-columns:195px 1fr 270px;gap:10px}.materials{grid-template-columns:1fr 290px}.material-options{gap:7px}.material-option{flex-direction:column;align-items:flex-start}.mat-pic{height:30px}.material-option strong{font-size:14px}.part-detail{padding:16px}.part-detail h2{font-size:23px}}
+@media(max-width:999px){html,body{overflow:auto;height:auto}.app{height:auto;min-height:100dvh;padding:0 10px 10px}.header{height:auto;flex-basis:auto;flex-wrap:wrap;padding:15px 0;gap:10px}.brand{flex:1}.brand-sub{font-size:11px}.brand h1{font-size:23px}.nav{order:3;width:100%;justify-content:center}.nav button{flex:1;padding:9px 4px;font-size:16px}.top-actions button{font-size:12px;padding:9px}.top-actions .sound-control{display:none}.workspace{min-height:0}.lab{grid-template-columns:1fr 1fr;gap:10px;height:auto}.stage{grid-column:1/-1;grid-row:1;height:min(75vw,590px);min-height:370px}.controls{grid-column:1;padding:15px;overflow:visible}.outcomes{grid-column:2;overflow:visible}.footer{height:auto;min-height:35px;gap:15px;align-items:center}.footer span:last-child{display:none}.structure{grid-template-columns:1fr 1fr;height:auto;gap:10px}.structure-stage{grid-column:1/-1;grid-row:1;height:540px}.parts,.part-detail{overflow:visible}.part-detail p{font-size:16px}.materials{display:flex;flex-direction:column;height:auto}.material-work{padding:17px;overflow:visible}.mat-summary{overflow:visible}.material-options{grid-template-columns:1fr 1fr}.material-options.three{grid-template-columns:1fr 1fr 1fr}.mat-preview{height:220px;flex-basis:220px}.modal-backdrop{padding:10px}.more-controls,.reference-grid{grid-template-columns:1fr}.modal-head,.modal-body,.modal-foot{padding:17px}.records-grid{grid-template-columns:1fr}}
+@media(max-width:550px){.lab{grid-template-columns:1fr}.stage{grid-column:1;min-height:335px;height:100vw}.controls{grid-column:1}.outcomes{grid-column:1}.outcomes .eyepiece{aspect-ratio:1.8}.stage-toolbar{padding:9px;gap:5px}.stage-toolbar button{font-size:11px;padding:6px}.stage-toolbar .small{display:none}.stage-bottom .legend{font-size:9px;gap:6px}.stage-bottom{padding:9px}.stage-hint{font-size:11px;top:9px;left:10px}.top-actions button{padding:8px;font-size:11px}.brand-mark{width:34px;height:34px}.brand{gap:8px}.brand h1{font-size:22px}.brand-sub{font-size:9px}.structure{display:flex;flex-direction:column}.structure-stage{height:450px;flex-shrink:0;order:-1}.parts{display:grid;grid-template-columns:1fr 1fr}.parts h2{grid-column:1/-1}.parts .small{grid-column:1/-1}.material-options.three{grid-template-columns:1fr}.material-options.three .material-option{min-height:66px}.material-option{padding:10px 7px}.material-option.selected{padding:9px 6px}.material-option strong{font-size:15px}.mat-pic{width:32px}.material-option small{font-size:11px}.modal-foot{flex-wrap:wrap}.record-thumb{height:150px}}
+.outcomes > div{flex-shrink:0}.eyepiece canvas{object-fit:contain}
+@media(max-height:790px) and (min-width:1000px){.controls{padding:11px;gap:7px}.angle-box{padding:0 0 4px}.slider-row{margin-top:0}.lockbtn{padding:8px}.presets button{min-height:36px;padding:6px 4px}.controls .end-actions button{padding:8px 4px}.outcomes{gap:7px}.view-panel{padding:10px}.eyepiece{height:112px;aspect-ratio:auto}.metrics{margin-top:7px;padding-top:7px}.metric .value{font-size:19px}.view-panel h2{margin-bottom:6px}.status{padding:10px}.status p{font-size:12px}.status strong{font-size:20px}.law-panel{padding:10px 12px}.law-panel .small{line-height:1.45}.right-bottom{padding:9px 12px}.material-strip{line-height:1.5;font-size:12px;padding-bottom:4px}.mat-preview{height:115px;flex-basis:115px}.mat-summary{gap:8px}.material-advice{padding-bottom:9px}.mat-summary h2{font-size:18px}}
+@media(min-height:741px) and (max-height:790px) and (min-width:1000px){.eyepiece{height:140px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Student workbench restored to the first file's arrangement. */
+.brand-sub{max-width:260px}.nav button{font-size:16px;padding:10px 14px}
+.structure .parts{gap:8px}.structure .parts button{padding:12px;font-size:17px}.structure .parts button small{line-height:1.5}.student-design-badge{padding:11px 12px;border-radius:10px;background:#e7f2f2;color:#3d6573;font-size:12px;line-height:1.7;margin-top:3px}.part-detail{gap:15px}.part-detail p{font-size:16px}.part-detail h2{font-size:25px}.part-detail .part-note{font-size:14px}.structure-bottom button{padding:8px;font-size:13px;white-space:nowrap}.structure-stage .stage-toolbar h2{white-space:nowrap}.structure-stage .stage-toolbar button{padding:7px 10px}.mat-preview{position:relative;overflow:hidden}.preview-tools{position:absolute;right:6px;bottom:6px;display:flex;gap:4px}.preview-tools button{font-size:11px;padding:4px 8px;background:#ffffffde}.material-options.four{grid-template-columns:repeat(4,minmax(0,1fr))}.plan-geometry{font-size:12px;line-height:1.6;padding:8px 10px;background:#e8f2f3;border-radius:8px;color:#456b7b}.mat-summary .primary{margin-top:0}.mat-summary #materialApplyBtn{min-height:36px;font-size:13px;padding:8px}.mat-summary #useApplications{min-height:40px;font-size:15px;padding:9px}.mat-summary #inspectOwnDesign{min-height:35px;font-size:13px;padding:7px}
+.practice{height:100%;display:grid;grid-template-columns:208px minmax(350px,1fr) 290px;gap:14px}
+.practice-scenes{padding:19px 15px;display:flex;flex-direction:column;gap:13px;overflow:auto;scrollbar-width:thin}.practice-scenes h2{font-size:21px}.practice-scenes>p{line-height:1.7;font-size:13px}
+#practiceSceneButtons{display:flex;flex-direction:column;gap:9px}.practice-scene-button{display:flex;align-items:center;text-align:left;padding:12px 10px;gap:10px;position:relative;min-height:76px;font-weight:600}.practice-scene-button span{min-width:0}.practice-scene-button strong{display:block;font-size:16px;line-height:1.45}.practice-scene-button small{display:block;color:#738996;font-size:11px;margin-top:4px;font-weight:400}.practice-scene-button .scenario-icon{width:46px;height:46px;flex-shrink:0;display:block;border-radius:11px;background:#edf5f4}.practice-scene-button.active{background:#e7f4f2;border:1.5px solid #39959c}.practice-scene-button .done-dot{position:absolute;right:6px;top:3px;font-size:13px;color:#197f67;display:none}.practice-scene-button.done .done-dot{display:block}
+.practice-how{margin-top:auto;background:#edf4f6;border-radius:11px;padding:12px;color:#567786;font-size:12px;line-height:1.75}.practice-how strong{font-size:13px;color:#365969}.practice-how p{margin:5px 0 0}.practice-progress{font-size:12px;color:#547583;text-align:center}
+.practice-stage{display:flex;flex-direction:column;overflow:hidden}.practice-toolbar{padding:15px 17px;border-bottom:1px solid #dde8eb;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-shrink:0}.practice-toolbar h2{font-size:20px}.practice-toolbar p{font-size:13px;color:#678491;margin-top:6px;line-height:1.5}.practice-toolbar button{font-size:13px;white-space:nowrap;padding:8px 10px;flex-shrink:0}
+.practice-canvas-wrap{position:relative;flex:1;min-height:0;background:#f5f9f8;overflow:hidden}.practice-canvas-wrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}.practice-canvas-wrap canvas:active{cursor:grabbing}.practice-tools{padding:11px 13px;display:flex;justify-content:space-between;gap:7px;border-top:1px solid #dde8eb;flex-shrink:0}.practice-tools button{font-size:12px;padding:8px 9px;white-space:nowrap}.practice-tools .row{gap:5px}
+.practice-feedback{display:flex;flex-direction:column;gap:10px;min-height:0;overflow:auto;scrollbar-width:thin}.practice-feedback>div,.practice-feedback>button{flex-shrink:0}.practice-eye{padding:13px 13px 11px}.practice-eye h3{font-size:17px;margin-bottom:9px}.practice-eye-wrap{height:155px;background:#152d3d;border:5px solid #324f5b;border-radius:13px;overflow:hidden}.practice-eye canvas{width:100%;height:100%;display:block}.practice-eye p{font-size:10px;line-height:1.5;color:#8599a3;margin-top:6px}.practice-status{padding:14px 15px;border-radius:13px;border:1px solid #e4d6b9;background:#fff7e9}.practice-status.good{background:#e9f5ef;border-color:#b6dccc}.practice-status strong{font-size:21px;line-height:1.4;display:block;color:#895e27}.practice-status.good strong{color:#177b65}.practice-status p{font-size:13px;line-height:1.65;color:#54727e;margin-top:5px}.practice-checks{padding:4px 13px}.practice-checks>div{display:flex;align-items:center;gap:9px;padding:10px 0;font-size:13px;line-height:1.5;color:#66818d}.practice-checks>div+div{border-top:1px solid #eaf0f2}.practice-checks i{font-style:normal;width:23px;height:23px;display:grid;place-items:center;flex-shrink:0;border-radius:50%;background:#edf1f3;color:#9aabb2;font-size:13px}.practice-checks .pass{color:#197964}.practice-checks .pass i{background:#dcf2e7;color:#197964}.practice-design{padding:13px}.practice-design h3{font-size:15px;margin-bottom:7px}.practice-design p{font-size:12px;line-height:1.8;color:#5d7d8a;margin-bottom:10px}.practice-design button{flex:1;padding:8px 3px;font-size:12px}.practice-safety{font-size:11px;line-height:1.6;color:#8b704d;padding:10px 12px;background:#fff7e9;border:1px solid #eddfc5;border-radius:10px}#practiceSave{font-size:13px;margin-top:auto;min-height:38px}
+@media(min-width:1750px){.practice{grid-template-columns:240px minmax(580px,1fr) 325px;gap:18px}.practice-scenes{padding:24px 18px}.practice-scene-button{min-height:90px}.practice-scene-button strong{font-size:19px}.practice-scene-button small{font-size:13px}.practice-toolbar h2{font-size:24px}.practice-toolbar p{font-size:16px}.practice-toolbar button{font-size:16px}.practice-tools button{font-size:15px;padding:10px 12px}.practice-eye-wrap{height:192px}.practice-status strong{font-size:26px}.practice-status p{font-size:16px}.practice-checks>div{font-size:16px}.practice-design p{font-size:14px}.practice-design h3{font-size:17px}.practice-safety{font-size:13px}.practice-how{font-size:14px}.practice-how strong{font-size:15px}.practice-eye h3{font-size:20px}.part-detail p{font-size:18px}.part-detail .part-note{font-size:16px}}
+@media(max-height:790px) and (min-width:1000px){.practice-scenes{padding:14px 12px;gap:10px}.practice-scene-button{min-height:67px;padding:9px 8px}.practice-scene-button strong{font-size:14px}.practice-scene-button small{font-size:10px}.practice-eye{padding:10px}.practice-eye-wrap{height:126px}.practice-feedback{gap:7px}.practice-status{padding:10px 12px}.practice-status strong{font-size:19px}.practice-status p{font-size:12px}.practice-checks>div{padding:7px 0;font-size:12px}.practice-design{padding:10px}.practice-design p{font-size:11px;margin-bottom:7px}.practice-safety{padding:8px 10px;font-size:10px}.practice-toolbar{padding:12px 14px}.practice-toolbar h2{font-size:18px}.practice-toolbar p{font-size:12px}.practice-tools{padding:9px}.practice-tools button{padding:7px;font-size:11px}.practice-how{font-size:11px;padding:10px}.part-detail{padding:18px;gap:13px}.structure .parts button{font-size:15px;padding:9px 11px}.student-design-badge{font-size:11px}.mat-summary .material-advice{font-size:12px;line-height:1.6;padding-bottom:8px}.mat-summary .material-warning{font-size:11px;padding:8px}.mat-preview{height:130px;flex-basis:130px}.mat-summary{gap:6px}.mat-summary .plan-geometry{padding:5px 8px}.material-options.four .mat-pic{width:32px}}
+@media(max-width:1270px) and (min-width:1000px){.practice{grid-template-columns:182px minmax(330px,1fr) 249px;gap:10px}.practice-toolbar h2{font-size:16px}.practice-toolbar p{font-size:11px}.practice-scenes h2{font-size:18px}.practice-scene-button .scenario-icon{width:35px;height:40px}.practice-scene-button{gap:7px}.nav button{padding:9px;font-size:14px}.structure-stage .stage-toolbar h2{font-size:15px!important}.structure-stage .stage-toolbar .row{gap:4px}.structure-stage .stage-toolbar button{font-size:12px;padding:6px}.material-options.four{grid-template-columns:1fr 1fr}.practice-tools{flex-wrap:wrap}}
+@media(max-width:999px){.practice{height:auto;grid-template-columns:1fr}.practice-scenes{display:block;overflow:visible;padding:14px}.practice-scenes>p{margin:7px 0 10px}#practiceSceneButtons{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.practice-scene-button{flex-direction:column;padding:10px 6px;text-align:center;gap:6px;min-height:110px}.practice-scene-button strong{font-size:14px}.practice-how,.practice-progress{display:none}.practice-stage{height:620px}.practice-feedback{display:grid;grid-template-columns:1fr 1fr;overflow:visible}.practice-eye{grid-row:span 2}.practice-safety{grid-column:1/-1}.practice-design{grid-column:1/-1}.practice-design .row{max-width:350px}#practiceSave{grid-column:1/-1}.practice-eye-wrap{height:190px}.practice-tools{flex-wrap:wrap}.material-options.four{grid-template-columns:1fr 1fr}.student-design-badge{grid-column:1/-1}.structure-stage{height:530px}}
+@media(max-width:550px){.practice-stage{height:520px}.practice-toolbar{align-items:flex-start;padding:12px}.practice-toolbar h2{font-size:17px}.practice-toolbar p{font-size:11px}.practice-toolbar button{font-size:11px;padding:7px}.practice-feedback{grid-template-columns:1fr}.practice-eye-wrap{height:172px}.practice-tools .row{flex-wrap:wrap}.practice-tools{gap:8px}.practice-scene-button .scenario-icon{width:39px;height:39px}.practice-scene-button strong{font-size:12px}.practice-scene-button small{font-size:9px}.practice-scene-button{min-height:100px}.practice-scenes>h2{font-size:20px}.nav button{font-size:13px}.part-detail h2{font-size:22px}}
+
+.practice-tools #practiceSave{margin:0;min-height:0;font-size:inherit;padding:8px 9px}.practice-tools #practiceSave{font-size:12px}@media(max-height:790px) and (min-width:1000px){.practice-tools #practiceSave{font-size:11px;padding:7px}}
+
+</style>
+</head>
+<body>
+
+<div class="app">
+<header class="header">
+ <div class="brand"><div class="brand-mark"><svg width="28" height="32" viewBox="0 0 28 32" fill="none" aria-hidden="true"><path d="M3 3h17v25h5M3 10h10v11h12" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="m11 4 7 6m-6 12 7 6" stroke="#f3bf53" stroke-width="2.5"/></svg></div><div><h1>设计潜望镜</h1><div class="brand-sub">六年级上册 · 我的作品与使用练习</div></div></div>
+ <nav class="nav" aria-label="实验模块"><button class="active" data-tab="lab">光路实验</button><button data-tab="structure">结构拆解</button><button data-tab="materials">材料设计</button><button data-tab="situations">情境应用</button></nav>
+ <div class="top-actions"><button id="recordsBtn">实验记录 <span id="recordCount">0</span></button><button id="soundBtn" class="sound-control" aria-pressed="false">声音：关</button><button id="fullBtn">全屏</button></div>
+</header>
+<main class="workspace">
+<section id="lab" class="lab" aria-label="光路实验">
+ <aside class="panel controls">
+  <div><h2>自由调节镜面</h2><p class="small">角度均指镜面与水平线的夹角</p></div>
+  <div class="angle-box"><div class="angle-head"><div class="angle-title"><span class="number-pill">1</span>上方镜</div><output id="a1Val" class="angle-value">45°</output></div><div class="slider-row"><button class="stepper" data-step="a1,-1" aria-label="上方镜减小1度">−</button><input type="range" id="a1" min="15" max="75" step="1" value="45" aria-label="上方镜角度"><button class="stepper" data-step="a1,1" aria-label="上方镜增加1度">+</button></div><div class="range-caps"><span>15°</span><span>75°</span></div></div>
+  <div class="angle-box"><div class="angle-head"><div class="angle-title"><span class="number-pill">2</span>下方镜</div><output id="a2Val" class="angle-value">45°</output></div><div class="slider-row"><button class="stepper" data-step="a2,-1" aria-label="下方镜减小1度">−</button><input type="range" id="a2" min="15" max="75" step="1" value="45" aria-label="下方镜角度"><button class="stepper" data-step="a2,1" aria-label="下方镜增加1度">+</button></div><div class="range-caps"><span>15°</span><span>75°</span></div></div>
+  <button id="lockBtn" class="lockbtn" aria-pressed="false">联动调节：关</button>
+  <div><h3 style="font-size:16px;margin-bottom:9px">换个条件，试试看</h3><div class="presets"><button data-preset="standard">45° / 45°</button><button data-preset="lower">45° / 50°</button><button data-preset="parallel">40° / 40°</button><button data-preset="rescue">非45°通光</button></div></div>
+  <button id="moreBtn">调节来光、眼睛与筒长</button>
+  <p class="small" id="geometrySummary">来光 0° · 眼睛居中<br>两镜间距 36 cm</p>
+  <div class="end-actions"><button id="resetBtn">恢复初始</button><button id="whyBtn">解释现象</button></div>
+ </aside>
+ <div class="panel stage">
+  <div class="stage-toolbar"><div class="row"><button id="cutBtn" class="active" aria-pressed="true">剖开外壳</button><button id="rayBtn" class="active" aria-pressed="true">显示光路</button><button id="normalBtn" aria-pressed="false">法线与角</button></div><span class="small"><span class="live-badge"></span>实时计算</span></div>
+  <div class="stage-canvas-wrap"><canvas id="labCanvas" aria-label="可拖动镜面角度的潜望镜剖面与反射光路"></canvas><div class="stage-hint" id="stageHint">拖动镜片端点，也能改变角度</div></div>
+  <div class="stage-bottom"><div class="legend"><span><i style="background:#ffc553"></i>物体来光</span><span><i style="background:#5bcfe3"></i>第一次反射</span><span><i style="background:#92e1aa"></i>第二次反射</span></div><div class="row"><button id="bundleBtn" aria-pressed="false">多条光线</button><button id="pauseBtn" aria-pressed="false">暂停</button></div></div>
+ </div>
+ <aside class="outcomes">
+  <div class="panel view-panel"><h2>从观察孔看出去</h2><div class="eyepiece"><canvas id="eyeCanvas" width="320" height="210" aria-label="依据当前几何光路计算的观察视野"></canvas></div><p class="eye-caption">视野采样示意 · 眼睛朝向上镜中心</p><div class="metrics"><div class="metric"><div class="small">两镜关系</div><div class="value" id="parallelVal">相互平行</div></div><div class="metric"><div class="small">中心光线反射</div><div class="value" id="bounceVal">2 次</div></div></div></div>
+  <div class="status" id="statusBox" role="status" aria-live="polite"><div class="status-label">当前中心光线</div><strong id="statusTitle">光进入眼睛</strong><p id="statusText">沿着箭头，追踪物体的光怎样到达眼睛。</p></div>
+  <div class="panel law-panel"><h3 id="lawTitle">光往哪里去？</h3><div class="equation" id="angleEquation">物体 → 下镜 → 上镜 → 眼睛</div><p class="small" id="angleNote">点开“法线与角”，观察每次反射。眼睛接收光，不发出观察光线。</p></div>
+  <div class="panel right-bottom"><div class="material-strip" id="materialStrip">筒身：硬纸筒<br>镜片：玻璃平面镜</div><button id="saveBtn" class="primary">保存这一组对比</button></div>
+ </aside>
+</section>
+<section id="structure" class="structure hidden" aria-label="潜望镜结构拆解">
+ <aside class="panel parts"><h2>点选关键部位</h2><p class="small">拖动模型可旋转；点击部件会高亮。</p><div id="studentDesignBadge" class="student-design-badge"></div><button data-part="all" class="active">整体结构<small>双平面镜教学型潜望镜</small></button><button data-part="upper">① 上方平面镜<small>把光送向上方观察孔</small></button><button data-part="lower">② 下方平面镜<small>接收来自低处的光</small></button><button data-part="body">③ 遮光筒身<small>支撑、遮光和保护</small></button><button data-part="mount">④ 镜架与固定<small>让角度保持稳定</small></button><button data-part="ports">⑤ 进光口与观察孔<small>开孔方向和位置</small></button></aside>
+ <div class="panel structure-stage"><div class="stage-toolbar"><h2 style="font-size:18px">拆开自己的潜望镜</h2><div class="row"><button id="assembledBtn" class="active">组装</button><button id="cut3dBtn">剖切</button><button id="explodedBtn">拆解</button></div></div><div class="stage-canvas-wrap"><canvas id="structureCanvas" aria-label="可旋转的潜望镜三维结构模型"></canvas></div><div class="structure-bottom"><span>拆开程度</span><input id="explodeSlider" type="range" min="0" max="100" value="0" aria-label="三维模型拆解程度"><button id="viewResetBtn">重置视角</button></div></div>
+ <aside class="panel part-detail"><div class="part-number" id="partNumber">结构 × 功能</div><h2 id="partTitle">两次反射，绕过遮挡</h2><p id="partDescription">上方开口接收物体的光，两面镜子依次反射，让下方的人看见原本被挡住的物体。</p><div class="part-note" id="partNote">这是可实际制作的“双平面镜式”结构，不把所有真实潜望镜都简化为两面镜子。</div><button id="realBtn">真实潜望镜还有什么？</button><button class="primary" data-goto="materials">为这些部位选材料</button></aside>
+</section>
+<section id="materials" class="materials hidden" aria-label="生活材料设计">
+ <div class="panel material-work"><h2>给自己的潜望镜选材料</h2><p class="small">选择立即应用到实验台。先比较功能，再决定材料；四种材料都制作成双直角 Z 字形。材料、镜角与镜距共同带入情境。</p>
+  <div class="material-group"><h3>① 筒身 <span class="small">支撑 · 遮光 · 保护</span></h3><div id="tubeOptions" class="material-options"></div></div>
+  <div class="material-group"><h3>② 两块反射材料 <span class="small">是否平整，比“发亮”更重要</span></h3><div id="mirrorOptions" class="material-options"></div></div>
+  <div class="material-group"><h3>③ 固定方式 <span class="small">不要遮住有效镜面</span></h3><div id="mountOptions" class="material-options four"></div></div>
+  <div class="material-group"><h3>④ 遮光处理 <span class="small">有需要才加，不是所有筒身都必须加</span></h3><div id="liningOptions" class="material-options three"></div></div>
+ </div>
+ <aside class="panel mat-summary"><h2>我的设计方案</h2><div class="mat-preview"><canvas id="materialCanvas" aria-label="当前材料组合的Z字形双直角潜望镜"></canvas><div class="preview-tools"><button id="matSolid" class="active">外观</button><button id="matCut">透视</button></div></div><div class="plan-geometry" id="planGeometry">Z 字形 · 两处直角 · 两块镜片</div><div id="tubeAdvice" class="material-advice"></div><div id="mirrorAdvice" class="material-advice"></div><div id="mountAdvice" class="material-advice"></div><div class="material-warning" id="liningAdvice"></div><button id="inspectOwnDesign">剖开查看我的作品</button><button id="materialApplyBtn">带着方案去看光路</button><button id="useApplications" class="primary">提交方案，放入情境</button></aside>
+</section>
+<section id="situations" class="practice hidden" aria-label="平面情境拖动练习">
+ <aside class="panel practice-scenes">
+  <h2>换个地方用一用</h2><p class="small">先摆好潜望镜，再让小人的眼睛靠近观察孔。</p>
+  <div id="practiceSceneButtons"></div>
+  <div class="practice-how"><strong>怎样操作</strong><p>直接拖动小人和潜望镜，两者可以分别移动。</p><p>也可先选中，再用键盘方向键微调位置。</p></div>
+  <div id="practiceProgress" class="practice-progress">已完成 0 / 4 个情境</div>
+ </aside>
+ <div class="panel practice-stage">
+  <div class="practice-toolbar"><div><h2 id="practiceTitle"></h2><p id="practiceTask"></p></div><button id="practiceRays" aria-pressed="false">显示光路</button></div>
+  <div class="practice-canvas-wrap"><canvas id="practiceCanvas" tabindex="0" aria-label="拖动小人与潜望镜，让观察孔和眼睛对齐"></canvas></div>
+  <div class="practice-tools"><div class="row"><button id="selectPerson" class="active" aria-pressed="true">移动小人</button><button id="selectDevice" aria-pressed="false">移动潜望镜</button></div><div class="row"><button id="practiceFlip">上下翻转</button><button id="practiceHint" aria-pressed="false">位置提示</button><button id="practiceReset">重新摆放</button><button id="practiceSave">保存练习</button></div></div>
+ </div>
+ <aside class="practice-feedback">
+  <div class="panel practice-eye"><h3>观察孔中的目标</h3><div class="practice-eye-wrap"><canvas id="practiceEye" width="320" height="192" aria-label="当前目标的观察结果示意"></canvas></div><p>只示意当前目标是否进入视野，不模拟完整视觉。</p></div>
+  <div class="practice-status" id="practiceStatus" role="status" aria-live="polite"><strong id="practiceStatusTitle"></strong><p id="practiceStatusText"></p></div>
+  <div class="panel practice-checks"><div id="checkEye"></div><div id="checkEntry"></div><div id="checkRay"></div></div>
+  <div class="panel practice-design"><h3>带来的作品</h3><p id="practiceDesign"></p><div class="row"><button id="practiceInspect">剖开检查</button><button id="practiceImprove">修改材料</button></div></div>
+  <div id="practiceSafety" class="practice-safety"></div>
+ </aside>
+</section>
+
+</main>
+<footer class="footer"><span>光路为几何光学模型；动画速度、材料质感为教学示意。</span><button id="teacherBtn">教师说明 · 模型边界 · 参考依据</button><span>结构恢复 · 平面拖动练习版</span></footer>
+</div>
+<div id="modalRoot"></div><div id="toast" class="toast" role="status"></div>
+
+<script>
+
+'use strict';
+/* 单文件离线潜望镜实验室。无第三方库、网络请求或用户数据上传。
+   三维射线与有限平面镜求交；出射方向 d' = d - 2(d·n)n。
+   材料质感参数为定性演示，不代表实测反射率、强度或耐久性。 */
+const $=id=>document.getElementById(id), $$=s=>[...document.querySelectorAll(s)];
+const RAD=Math.PI/180, clamp=(v,a,b)=>Math.max(a,Math.min(b,v)), fmt=(v,n=0)=>Number(v).toFixed(n).replace(/\.0+$/,''), copy=x=>JSON.parse(JSON.stringify(x));
+const V={add:(a,b)=>a.map((v,i)=>v+b[i]),sub:(a,b)=>a.map((v,i)=>v-b[i]),mul:(a,s)=>a.map(v=>v*s),dot:(a,b)=>a.reduce((v,x,i)=>v+x*b[i],0),norm:a=>{const l=Math.hypot(...a);return a.map(x=>x/l)},cross:(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]};
+const INITIAL={a1:45,a2:45,length:36,beam:0,eye:0,tube:'paper',mirror:'glass',mount:'slot',lining:'none',flip1:false,flip2:false};
+let state=copy(INITIAL), ui={tab:'lab',cut:true,rays:true,normals:false,bundle:false,paused:false,lock:false,sound:false,selected:0,part:'all',mode3d:'assembled',explode:0,yaw:-.62,pitch:.2};
+let records=[];try{const r=JSON.parse(localStorage.getItem('periscope_records_textbook_v2')||'[]');if(Array.isArray(r))records=r.filter(x=>x&&x.state&&x.image&&x.state.a1>=15&&x.state.a1<=75).slice(0,8)}catch(e){}
+const TUBES={paper:{name:'硬纸筒',short:'轻便，易开孔',color:'#bd976b',advice:'用硬纸筒或硬纸板拼成两处直角，保持各段通道规整、镜位稳定。接缝漏光时再遮挡，避免受潮变形。'},carton:{name:'牛奶纸盒',short:'利用现成盒形',color:'#72a8ad',advice:'将洗净、晾干的纸盒裁切、拼接成Z字形。转角处留出镜片位置，开孔不能被折边遮住，检查漏光接缝。'},plastic:{name:'不透光塑料管',short:'较耐潮，较难开孔',color:'#c0cbd4',advice:'用塑料管与两个直角连接段组成Z字形。镜片、有效孔径与位置不变时，主光路不变；开孔、切割请成人协助。'},clear:{name:'透明塑料管',short:'可看结构，容易漏光',color:'#8dcada',advice:'透明管与两个直角连接段组成Z字形。透光侧壁会引入杂光；可以加遮光层再比较，并不是越透明越清楚。'}};
+const MIRRORS={glass:{name:'玻璃平面镜',short:'平整清晰，需包边',rough:0,gain:.88,advice:'选平整、洁净的镜片。玻璃边缘要包边，不能使用碎玻璃。模型把其视为单一理想反射面。'},acrylic:{name:'硬质亚克力镜',short:'不易碎，避免弯曲',rough:0,gain:.86,advice:'选带反射镀层的硬质镜片，不是普通透明亚克力板。足够平整时同样可用；弯曲会造成变形。'},foil:{name:'贴平的铝箔',short:'能反射，平整度关键',rough:.7,gain:.64,advice:'亮面不等于平面镜。贴在平整硬板上的铝箔可作比较，但细小皱褶会让图像变模糊。'},wrinkle:{name:'起皱的铝箔',short:'不同位置朝向不同',rough:5,gain:.48,advice:'各处小表面的方向不同，光被反射到不同方向，难以形成清晰连续的图像。先试着压平再比较。'}};
+const MOUNTS={slot:{name:'卡槽＋卡纸镜架',short:'先定位，再固定',advice:'卡槽帮助确定镜片的位置与角度，再用少量胶带固定，避免遮住镜面。'},tape:{name:'双面胶＋胶带',short:'方便，检查牢固度',advice:'把胶粘在镜片背面或边缘，不能糊在反射面上；搬动后再次检查镜片角度。'},clay:{name:'橡皮泥支座',short:'可调，注意松动',advice:'可以反复调整角度，但要检查是否下滑、变形或挡住光路。最终牢固程度取决于做法。'}};
+MOUNTS.glue={name:'热熔胶',short:'背面点粘，注意高温',advice:'用于镜片背面或边缘点粘，不能遮挡反光面。待胶冷却后检查位置和角度；热熔胶枪由教师或成人操作，避免烫伤。'};
+const LININGS={none:{name:'不额外遮光',short:'先检验现有筒身'},seams:{name:'只封接缝',short:'不透光胶带'},black:{name:'黑纸遮光层',short:'覆盖透光壁，不堵孔'}};
+const PARTS={
+ all:['结构 × 功能','拆开自己的潜望镜','这里展示你在材料页选择的作品：筒身、两块镜片、固定方式和开口都保持同步。','先看组装外观，再剖开或拆解。此视角沿用教材方位：眼睛左上，物体右下。'],
+ upper:['部件 01','上方平面镜','接住下方镜反射来的光，把光送向左上方的观察孔。','镜片倾角和正反面都来自你在光路页的设置，不自动改成45°。'],
+ lower:['部件 02','下方平面镜','接收来自右下方物体的光，在镜面处把光反射向上方镜。','两块镜子的朝向要与开口配合。光在镜面处改变方向，不是在镜片内部转弯。'],
+ body:['部件 03','Z 字形遮光筒身','双直角的空心通道支撑镜片，也遮挡侧面杂光。光主要在筒内空气中传播。','这一模型用等效矩形通光空间表示不同筒身材料，不能直接当作加工图。'],
+ mount:['部件 04','镜架与固定','卡槽、胶带、橡皮泥或热熔胶用来固定镜片。关键是位置稳定、不要挡住反光面。','固定部位显示你的实际选材；是否牢固和耐潮，还需要实物检验。'],
+ ports:['部件 05','进光口与观察孔','在这个摆放方向中，右下方是进光口，左上方是观察孔。到情境页可以把整个作品上下翻转使用。','开口的方向、位置与镜片光路相互配合。点开剖切，沿着光路寻找两个开口。']
+};
+const GEO={width:14,half:7,mirrorHalf:6.8,mirrorZ:5.3,aperture:5.8,eyeX:-25,sourceX:40,arm:18,pupil:.9};
+let result=null,viewStats={target:0,total:0},eyeDirty=true,drawDirty=true,threeDirty=true,lastFrame=0,clock=0,labMap=null,mirrorHandles=[];
+function mirrorData(i,s=state){const a=(i?s.a2:s.a1)*RAD,t=[Math.cos(a),Math.sin(a),0];let n=i?[Math.sin(a),-Math.cos(a),0]:[-Math.sin(a),Math.cos(a),0];if(i?s.flip2:s.flip1)n=V.mul(n,-1);return {i,p:[0,i?s.length:0,0],t,n};}
+function channelOutline(s=state){const H=GEO.half,A=GEO.arm,L=s.length;return [[-A,-H],[H,-H],[H,L-H],[A,L-H],[A,L+H],[-H,L+H],[-H,H],[-A,H]];}
+function channelEdges(s=state){const H=GEO.half,A=GEO.arm,L=s.length,ap=GEO.aperture;return [[[-A,-H],[H,-H]],[[H,-H],[H,L-H]],[[H,L-H],[A,L-H]],[[A,L-H],[A,L-ap]],[[A,L+ap],[A,L+H]],[[A,L+H],[-H,L+H]],[[-H,L+H],[-H,H]],[[-H,H],[-A,H]],[[-A,H],[-A,ap]],[[-A,-ap],[-A,-H]]];}
+function inBox(p,s,eps=1e-4){const H=GEO.half+eps,A=GEO.arm+eps,L=s.length;return Math.abs(p[2])<=H&&((Math.abs(p[0])<=H&&p[1]>=-H&&p[1]<=L+H)||(p[0]>=-A&&p[0]<=H&&Math.abs(p[1])<=H)||(p[0]>=-H&&p[0]<=A&&Math.abs(p[1]-L)<=H));}
+function roughNormal(m,hit,s){const r=MIRRORS[s.mirror].rough;if(!r)return m.n;const phase=hit[0]*6.1+hit[1]*2.7+hit[2]*4.5;const a=r*RAD*(Math.sin(phase)+.4*Math.sin(phase*2.31));let n=[m.n[0]*Math.cos(a)-m.n[1]*Math.sin(a),m.n[0]*Math.sin(a)+m.n[1]*Math.cos(a),r*.013*Math.sin(hit[2]*3.73+hit[1])];return V.norm(n);}
+function trace(origin,direction,s=state,options={}){
+ let o=origin.slice(),d=V.norm(direction),start=o.slice(),segs=[],hits=[],visited=0,energy=1;const events=[];const wallTransparent=s.tube==='clear'&&s.lining!=='black';
+ function consider(best,t,type,detail){if(t>1e-4&&t<best.t)return {t,type,...detail};return best;}
+ for(let iteration=0;iteration<18;iteration++){
+  let best={t:180,type:'escape'};
+  for(let i=0;i<2;i++){
+   const m=mirrorData(i,s),den=V.dot(d,m.n);if(Math.abs(den)<1e-9)continue;const t=V.dot(V.sub(m.p,o),m.n)/den;if(t<1e-4)continue;const p=V.add(o,V.mul(d,t));const along=V.dot(V.sub(p,m.p),m.t);
+   if(Math.abs(along)<=GEO.mirrorHalf&&Math.abs(p[2])<=GEO.mirrorZ)best=consider(best,t,'mirror',{m,hit:p});
+  }
+     // Boundary faces of the actual hollow Z-shaped optical channel.
+   for(const [a,b] of channelEdges(s)){
+    const axis=Math.abs(a[0]-b[0])<1e-8?0:1,k=a[axis];if(Math.abs(d[axis])<1e-9)continue;const t=(k-o[axis])/d[axis];if(t<1e-4)continue;const p=V.add(o,V.mul(d,t)),j=1-axis;
+    if(p[j]<Math.min(a[j],b[j])-1e-6||p[j]>Math.max(a[j],b[j])+1e-6||Math.abs(p[2])>GEO.half+1e-6)continue;
+    best=consider(best,t,wallTransparent?'transmit':'wall',{hit:p,side:{axis,k}});
+   }
+   for(const k of [-GEO.half,GEO.half]){if(Math.abs(d[2])<1e-9)continue;const t=(k-o[2])/d[2];if(t<1e-4)continue;const p=V.add(o,V.mul(d,t));if(inBox(p,s))best=consider(best,t,wallTransparent?'transmit':'wall',{hit:p,side:{axis:2,k}});}
+// The exterior occluder matches the wall visible in the experiment scene.
+  const obMin=[10,11,-14],obMax=[29,s.length-9,14];
+  if(!options.skipObstacle)for(let axis=0;axis<3;axis++){if(Math.abs(d[axis])<1e-9)continue;for(const k of [obMin[axis],obMax[axis]]){const t=(k-o[axis])/d[axis];if(t<=1e-4||t>=best.t)continue;const p=V.add(o,V.mul(d,t));if(p.every((v,j)=>v>=obMin[j]-1e-5&&v<=obMax[j]+1e-5))best=consider(best,t,'obstacle',{});}}
+  if(options.reverse&&d[0]>1e-7){const t=(GEO.sourceX-o[0])/d[0];if(t>1e-4)best=consider(best,t,'target',{});}
+  if(!options.reverse&&d[0]<-1e-7){const t=(GEO.eyeX-o[0])/d[0];if(t>1e-4)best=consider(best,t,'eyePlane',{});}
+  const p=V.add(o,V.mul(d,best.t));segs.push({from:start,to:p,level:hits.length,kind:best.type});
+  if(best.type==='mirror'){
+   const m=best.m;let n=roughNormal(m,p,s);if(V.dot(d,m.n)>=0){return {segs,hits,events,end:'back',point:p,d,energy};}
+   const incidence=Math.acos(clamp(-V.dot(d,n),-1,1))/RAD;let out=V.sub(d,V.mul(n,2*V.dot(d,n)));hits.push({i:m.i,p:p.slice(),in:d.slice(),out:out.slice(),n:n.slice(),incidence});energy*=MIRRORS[s.mirror].gain;d=out;o=V.add(p,V.mul(d,.0003));start=p.slice();if(hits.length>=6)return {segs,hits,events,end:'loop',point:p,d,energy};continue;
+  }
+  if(best.type==='transmit'){events.push({type:'leak',p});o=V.add(p,V.mul(d,.0003));start=p.slice();visited++;if(visited>8)return {segs,hits,events,end:'escape',point:p,d,energy};continue;}
+  if(best.type==='eyePlane'){const dy=p[1]-s.eye,dz=p[2];const hit=dy*dy+dz*dz<=GEO.pupil*GEO.pupil;return {segs,hits,events,end:hit?'eye':'missEye',point:p,d,energy};}
+  return {segs,hits,events,end:best.type,point:p,d,energy};
+ }
+ return {segs,hits,events,end:'limit',point:o,d,energy};
+}
+function forward(s=state,offset=0){const a=s.beam*RAD;return trace([GEO.sourceX,s.length-GEO.sourceX*Math.tan(a)+offset,0],[-Math.cos(a),Math.sin(a),0],s);}
+function evaluate(s=state){const r=forward(s),two=r.hits.length>=2&&r.hits[0].i===1&&r.hits[1].i===0;let title,desc,tone='warn';
+ if(r.end==='eye'&&two){title='光进入眼睛';desc='这条来自物体的光，经过下镜、上镜后进入眼睛。';tone='good';}
+ else if(r.end==='eye'){title='有光入眼，但路径不同';desc='检查它是否按“下镜→上镜”经过了两次反射。';}
+ else if(r.end==='back'){title='光碰到了镜片背面';desc='镜片方向也很重要：反射面应朝向来光。';tone='bad';}
+ else if(r.end==='obstacle'){title='光被外部遮挡物挡住';desc='这条光没有绕过外部遮挡物。检查它离开镜面后的方向。';tone='bad';}
+ else if(r.end==='wall'){title='光被筒壁挡住';desc=r.hits.length===0?'中心光线没有从进光口顺利进入。检查来光方向与开孔。':r.hits.length===1?'第一次反射后没有被上方镜接住，或中途碰到了筒壁。':'第二次反射后，没有从观察孔顺利射出。';tone='bad';}
+ else if(r.end==='missEye'){title='光从眼睛旁边经过';desc=two?'光已两次反射，但没有对准当前眼睛位置。可以移动眼睛再试。':'中心光线没有沿预期的双反射路径入眼。';}
+ else{title='中心光线偏离通道';desc='观察它停在哪里，再调整镜片、开孔方向或来光方向。';tone='bad';}
+ if(s.mirror==='wrinkle'||s.mirror==='foil')desc+=' 当前反射材料不完全平整。';
+ if(r.events.length)desc+=' 有光穿过了透明筒壁。';
+ return {...r,two,title,desc,tone};
+}
+function beep(kind='click'){if(!ui.sound)return;try{const ac=window.__audio||(window.__audio=new (window.AudioContext||window.webkitAudioContext)());if(ac.state==='suspended')ac.resume();const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(kind==='save'?660:kind==='success'?880:430,ac.currentTime);g.gain.setValueAtTime(.06,ac.currentTime);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+.14);o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.15);}catch(e){}}
+let toastTimer;function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2700);}
+function apply(patch){Object.assign(state,patch);state.a1=clamp(+state.a1,15,75);state.a2=clamp(+state.a2,15,75);state.length=clamp(+state.length,24,60);state.beam=clamp(+state.beam,-25,25);state.eye=clamp(+state.eye,-9,9);result=evaluate();eyeDirty=drawDirty=threeDirty=true;sync();}
+function setAngle(key,val){val=clamp(val,15,75);if(ui.lock){const delta=clamp(val-state[key],Math.max(15-state.a1,15-state.a2),Math.min(75-state.a1,75-state.a2));apply({a1:state.a1+delta,a2:state.a2+delta});}else apply({[key]:val});}
+function sync(){for(const key of ['a1','a2']){$(key).value=state[key];$(key+'Val').textContent=fmt(state[key])+'°';}const parallel=Math.abs(state.a1-state.a2)<.05;$('parallelVal').textContent=parallel?'相互平行':'相差 '+fmt(Math.abs(state.a1-state.a2))+'°';$('bounceVal').textContent=result.hits.length+' 次';$('statusTitle').textContent=result.title;$('statusText').textContent=result.desc;$('statusBox').className='status'+(result.tone==='good'?'':result.tone==='bad'?' bad':' warn');$('materialStrip').innerHTML='筒身：'+TUBES[state.tube].name+(state.lining==='black'?'＋黑纸遮光':'')+'<br>镜片：'+MIRRORS[state.mirror].name;$('geometrySummary').innerHTML='来光 '+fmt(state.beam)+'° · 眼睛'+(Math.abs(state.eye)<.05?'居中':(state.eye>0?'下移':'上移')+fmt(Math.abs(state.eye),1)+' cm')+'<br>两镜间距 '+fmt(state.length)+' cm';
+ $('recordCount').textContent=records.length;$('lockBtn').textContent='联动调节：'+(ui.lock?'开':'关');$('lockBtn').classList.toggle('active',ui.lock);$('lockBtn').setAttribute('aria-pressed',ui.lock);
+ if(ui.normals){const hit=result.hits.find(h=>h.i===ui.selected);$('lawTitle').textContent=(ui.selected?'下方镜':'上方镜')+' · 本次反射';$('angleEquation').textContent=hit?fmt(hit.incidence,1)+'° = '+fmt(hit.incidence,1)+'°':'光线未照到该反射面';$('angleNote').textContent='入射角 = 反射角，均从法线量起。虚线法线与镜面垂直；镜面倾角不是入射角。';}else{$('lawTitle').textContent='光往哪里去？';$('angleEquation').textContent='物体 → 下镜 → 上镜 → 眼睛';$('angleNote').textContent='点开“法线与角”，观察每次反射。眼睛接收光，不发出观察光线。';}
+ updateMaterialUI();syncMore();if($('partTitle'))updatePartDetails();if($('planGeometry'))$('planGeometry').textContent='Z 字形 · 上镜 '+fmt(state.a1)+'° / 下镜 '+fmt(state.a2)+'° · 镜距 '+fmt(state.length)+' cm';
+}
+// ---------- Canvas helpers and visible light-ray scene ----------
+function setupCanvas(canvas){const b=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);if(b.width<2||b.height<2)return null;const w=Math.round(b.width*dpr),h=Math.round(b.height*dpr);if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}const c=canvas.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);return {c,w:b.width,h:b.height};}
+function roundRect(c,x,y,w,h,r=8,fill,stroke,lw=1){c.beginPath();c.roundRect(x,y,w,h,r);if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=lw;c.stroke()}}
+function path(c,pts,stroke,width=1,fill=null,close=false){if(!pts.length)return;c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]));if(close)c.closePath();if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.lineJoin='round';c.stroke()}}
+function txt(c,t,x,y,size=14,color='#fff',weight=500,align='left'){c.font=`${weight} ${size}px system-ui,"Microsoft YaHei","Noto Sans CJK SC",sans-serif`;c.fillStyle=color;c.textAlign=align;c.textBaseline='middle';c.fillText(t,x,y)}
+function arrow(c,a,b,color,width=2,size=8){path(c,[a,b],color,width);const ang=Math.atan2(b[1]-a[1],b[0]-a[0]);path(c,[[b[0]-size*Math.cos(ang-.45),b[1]-size*Math.sin(ang-.45)],b,[b[0]-size*Math.cos(ang+.45),b[1]-size*Math.sin(ang+.45)]],color,width)}
+function circle(c,x,y,r,fill,stroke,lw=1){c.beginPath();c.arc(x,y,r,0,Math.PI*2);if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=lw;c.stroke()}}
+function label(c,t,x,y,{size=13,bg='#173a4c',color='#d7e7ef',align='left',border=null}={}){c.font=`600 ${size}px system-ui,"Microsoft YaHei","Noto Sans CJK SC",sans-serif`;const tw=c.measureText(t).width;const sx=align==='center'?x-tw/2-9:align==='right'?x-tw-18:x;roundRect(c,sx,y-13,tw+18,26,6,bg,border);txt(c,t,sx+9,y,size,color,600);return tw+18;}
+function linePoint(r,distance){let d=distance;for(const seg of r.segs){const a=seg.from,b=seg.to,l=Math.hypot(b[0]-a[0],b[1]-a[1],b[2]-a[2]);if(d<=l)return {p:V.add(a,V.mul(V.sub(b,a),d/l)),level:seg.level};d-=l;}return null;}
+function drawHumanEye(c,p,sc,theta){
+ const er=Math.max(13,Math.min(24,sc*2.7));c.save();c.translate(p[0],p[1]);c.rotate(theta);
+ c.beginPath();c.moveTo(-er*1.48,0);c.quadraticCurveTo(-er*.46,-er*1.04,er*.50,0);c.quadraticCurveTo(-er*.46,er*1.04,-er*1.48,0);c.fillStyle='#f4f8f1';c.fill();c.strokeStyle=result.end==='eye'?'#a4d9b4':'#98baca';c.lineWidth=2;c.stroke();
+ circle(c,0,0,er*.34,'#419b9e');circle(c,er*.06,0,er*.18,'#173747');circle(c,-er*.06,-er*.12,er*.07,'#fff');c.restore();
+}
+function drawLab(){
+ const dim=setupCanvas($('labCanvas'));if(!dim)return;const {c,w,h}=dim,L=state.length,H=GEO.half,A=GEO.arm;
+ c.clearRect(0,0,w,h);c.fillStyle='#102638';c.fillRect(0,0,w,h);
+ const sy=L-GEO.sourceX*Math.tan(state.beam*RAD),minY=Math.min(-14,state.eye-14,sy-9),maxY=Math.max(L+15,sy+15),minX=-47,maxX=51;
+ const scale=Math.max(.2,Math.min((w-48)/(maxX-minX),(h-76)/(maxY-minY))),ox=(w-(maxX+minX)*scale)/2,oy=(h-(maxY+minY)*scale)/2;
+ const P=p=>[ox+p[0]*scale,oy+p[1]*scale];labMap={ox,oy,scale};
+ const spacing=5*scale;for(let x=((ox%spacing)+spacing)%spacing;x<w;x+=spacing)path(c,[[x,0],[x,h]],'#274354',.55);for(let y=((oy%spacing)+spacing)%spacing;y<h;y+=spacing)path(c,[[0,y],[w,y]],'#274354',.55);
+ // The observer is upper-left and the object lower-right, as in the provided textbook.
+ const wall0=P([10,11]),wall1=P([29,L-9]);if(wall1[1]>wall0[1]){roundRect(c,wall0[0],wall0[1],wall1[0]-wall0[0],wall1[1]-wall0[1],4,'#304958','#526b78');for(let y=wall0[1]+3.2*scale;y<wall1[1];y+=3.2*scale)path(c,[[wall0[0],y],[wall1[0],y]],'#1d3542',1);txt(c,'遮挡物',(wall0[0]+wall1[0])/2,(wall0[1]+wall1[1])/2,Math.max(11,Math.min(15,scale*2.1)),'#a4bbc7',550,'center');}
+ const outline=channelOutline(state),col=TUBES[state.tube].color;
+ let g=c.createLinearGradient(ox-H*scale,0,ox+H*scale,0);g.addColorStop(0,ui.cut?'#1d3848':col);g.addColorStop(.42,ui.cut?'#203e4e':shade(col,1.13));g.addColorStop(1,ui.cut?'#162f40':shade(col,.91));
+ path(c,outline.map(P),'#678796',1.2,g,true);
+ const open=ui.cut||state.tube==='clear',rayVisible=ui.rays&&open;
+ if(open){
+  if(state.lining==='black')path(c,outline.map(P),null,0,'#0e2432',true);
+  for(const [a,b] of channelEdges(state))path(c,[P(a),P(b)],col,Math.max(3,scale*.68));
+  c.save();c.setLineDash([4,5]);path(c,[P([0,0]),P([0,L])],'#416b7d',1);c.restore();
+  // Edges are backed on the non-reflective side only.
+  for(let i=0;i<2;i++){const m=mirrorData(i),off=V.mul(m.n,-.65);path(c,[P(V.add(V.add(m.p,V.mul(m.t,-GEO.mirrorHalf)),off)),P(V.add(V.add(m.p,V.mul(m.t,GEO.mirrorHalf)),off))],'#536774',Math.max(5,scale*.85));}
+  if(state.tube==='clear'&&state.lining!=='black'){
+   c.save();c.globalAlpha=.65;for(let yy=12;yy<L-8;yy+=7){const p=P([-H,yy]);arrow(c,[p[0]-22,p[1]-7],[p[0]+12,p[1]+4],'#8ac8d9',1.2,5)}c.restore();if(L>29)txt(c,'侧面杂光',ox-(H+9)*scale,oy+L*.49*scale,11,'#81bece',500,'center');
+  }
+ }
+ // The object remains upright; only its location changed, not a rotated bitmap.
+ const q=P([GEO.sourceX,sy]),sz=Math.min(66,scale*8.4);
+ roundRect(c,q[0]-sz*.5,q[1]-sz*.68,sz,sz*1.05,5,'#f3f3db','#f3bc56',1.6);txt(c,'↑',q[0],q[1]-sz*.30,sz*.49,'#e45d45',800,'center');txt(c,'A B C',q[0],q[1]+sz*.10,sz*.22,'#246d83',800,'center');path(c,[[q[0],q[1]+sz*.39],[q[0],q[1]+sz*.85]],'#7294a4',3);txt(c,'观察物体',q[0],q[1]+sz*1.10,Math.max(11,Math.min(16,scale*2.5)),'#d9e8ef',600,'center');
+ const eye=P([GEO.eyeX,state.eye]);drawHumanEye(c,eye,scale,Math.atan2(-state.eye,-GEO.eyeX));
+ txt(c,'眼睛接收光',eye[0]-scale*1.6,eye[1]+Math.max(13,Math.min(24,scale*2.7))+18,Math.max(11,Math.min(15,scale*2.3)),'#d9e8ef',600,'center');
+ if(rayVisible){
+  const list=ui.bundle?[-1.5,-.75,0,.75,1.5].map(o=>forward(state,o)):[result],cs=['#ffc553','#5bcfe3','#92e1aa','#c9a7ef','#eb9b76','#fff'];
+  for(let ri=0;ri<list.length;ri++){const r=list[ri];c.save();c.beginPath();c.rect(3,0,w-6,h);c.clip();c.globalAlpha=ui.bundle&&ri!==2?.38:1;
+   for(const seg of r.segs){const a=P(seg.from),b=P(seg.to),co=cs[Math.min(seg.level,5)];c.shadowColor=co;c.shadowBlur=7;path(c,[a,b],co,ui.bundle?1.7:2.7);c.shadowBlur=0;const dist=Math.hypot(b[0]-a[0],b[1]-a[1]);if(dist>35){const mid=[(a[0]+b[0])/2,(a[1]+b[1])/2],theta=Math.atan2(b[1]-a[1],b[0]-a[0]);arrow(c,[mid[0]-7*Math.cos(theta),mid[1]-7*Math.sin(theta)],[mid[0]+7*Math.cos(theta),mid[1]+7*Math.sin(theta)],co,2.2,7);}}
+   if(!ui.paused){const total=r.segs.reduce((z,s)=>z+Math.hypot(...V.sub(s.to,s.from)),0);for(let k=0;k<4;k++){const lp=linePoint(r,(clock*11+k*total/4)%total);if(lp){const p=P(lp.p);circle(c,p[0],p[1],ui.bundle?2.2:3.5,cs[Math.min(lp.level,5)])}}}c.restore();
+  }
+  if(['wall','back','obstacle'].includes(result.end)){const p=P(result.point);circle(c,p[0],p[1],10,'#cb66502a','#f29b79',1.5);path(c,[[p[0]-4,p[1]-4],[p[0]+4,p[1]+4]],'#ffc2a5',2);path(c,[[p[0]-4,p[1]+4],[p[0]+4,p[1]-4]],'#ffc2a5',2);}
+  if(result.end==='eye')circle(c,eye[0],eye[1],6,'#92e1aa30','#a1e8b7',1.5);
+ }else if(ui.rays){const entry=P([A,L-A*Math.tan(state.beam*RAD)]);arrow(c,q,entry,'#ffc553',2.3,7);}
+ mirrorHandles=[];
+ if(open){for(let i=0;i<2;i++){
+  const m=mirrorData(i),p=P(m.p),a=P(V.add(m.p,V.mul(m.t,-GEO.mirrorHalf))),b=P(V.add(m.p,V.mul(m.t,GEO.mirrorHalf))),sel=ui.selected===i;
+  path(c,[a,b],sel?'#e7fdff':'#b9dce5',Math.max(5,scale*.68));const f=V.mul(m.n,.45);path(c,[P(V.add(V.add(m.p,V.mul(m.t,-GEO.mirrorHalf)),f)),P(V.add(V.add(m.p,V.mul(m.t,GEO.mirrorHalf)),f))],'#6dcddd',1.4);
+  for(const v of [a,b]){circle(c,v[0],v[1],7,sel?'#f1bf5d':'#98bdc8','#162f42',2);mirrorHandles.push({i,x:v[0],y:v[1]})}
+  const lx=i?ox-(H+4)*scale:ox+(H+4)*scale,ly=p[1]+(i?13:-13),str=(i?'下镜 ':'上镜 ')+fmt(i?state.a2:state.a1)+'°';
+  label(c,str,lx,ly,{size:Math.max(12,Math.min(16,scale*2.4)),bg:sel?'#245361':'#1d3b4d',color:sel?'#e9fafb':'#c5d9e5',align:i?'right':'left'});
+  c.save();c.setLineDash([4,4]);path(c,[p,[p[0]+GEO.mirrorHalf*scale,p[1]]],'#78909e',1);c.restore();c.beginPath();c.arc(p[0],p[1],Math.min(scale*3.2,23),0,(i?state.a2:state.a1)*RAD);c.strokeStyle='#e2b154';c.lineWidth=1.5;c.stroke();
+  if(ui.normals){const hit=result.hits.find(h=>h.i===i);if(hit){const hp=P(hit.p),n=hit.n;c.save();c.setLineDash([5,5]);path(c,[P(V.add(hit.p,V.mul(n,-7))),P(V.add(hit.p,V.mul(n,7)))],'#ddb6eb',1.5);c.restore();if(i===ui.selected){const a0=Math.atan2(n[1],n[0]),ai=Math.atan2(-hit.in[1],-hit.in[0]),ao=Math.atan2(hit.out[1],hit.out[0]);const arc=(aa,bb,rr,co)=>{const d=(bb-aa+Math.PI*3)%(2*Math.PI)-Math.PI;c.beginPath();c.arc(hp[0],hp[1],rr,aa,aa+d,d<0);c.strokeStyle=co;c.lineWidth=2;c.stroke()};arc(a0,ai,scale*3.2,'#f5c553');arc(a0,ao,scale*4.1,'#91dca9');label(c,'i = r = '+fmt(hit.incidence,1)+'°',lx,ly+(i?-32:32),{size:12,bg:'#3e3454',color:'#edcfef',align:i?'right':'left'});}}}
+ }}
+ [[-A,0,'观察孔',-1],[A,L,'进光口',1]].forEach(([x,y,t,side])=>{const p=P([x,y]);for(const yy of [-GEO.aperture,GEO.aperture])path(c,[P([x,y+yy]),P([x+side*.9,y+yy])],'#c3d8e2',2);txt(c,t,p[0],p[1]-(GEO.aperture+2.8)*scale,Math.max(10,Math.min(13,scale*2.1)),'#b1ccd8',600,'center')});
+ const dx=ox-(H+3)*scale,d1=P([0,0]),d2=P([0,L]);if(L>29){path(c,[[dx,d1[1]],[dx,d2[1]]],'#7193a4',1);for(const y of [d1[1],d2[1]])path(c,[[dx-3,y],[dx+3,y]],'#7d9cab',1);c.save();c.translate(dx-10,(d1[1]+d2[1])/2);c.rotate(-Math.PI/2);txt(c,fmt(L)+' cm 镜距',0,0,11,'#9db4c0',500,'center');c.restore()}
+ txt(c,'教材方位：眼睛左上，物体右下',17,h-15,11,'#8ba9b9');drawDirty=false;
+}
+
+// ---------- Eye field: each pixel samples a reverse ray; arrows in the main scene remain forward ----------
+const targetCanvas=document.createElement('canvas');targetCanvas.width=640;targetCanvas.height=480;const tc=targetCanvas.getContext('2d');
+(function makeTarget(){const g=tc.createLinearGradient(0,0,0,480);g.addColorStop(0,'#abdced');g.addColorStop(.75,'#eef7ee');tc.fillStyle=g;tc.fillRect(0,0,640,480);tc.fillStyle='#7baf94';tc.fillRect(0,355,640,125);path(tc,[[0,325],[95,283],[180,331],[258,295],[365,329],[470,280],[640,320],[640,375],[0,375]],null,0,'#7dad9e',true);tc.fillStyle='#f6f3df';tc.fillRect(152,45,336,342);tc.strokeStyle='#324c5e';tc.lineWidth=8;tc.strokeRect(152,45,336,342);for(let x=160;x<485;x+=41){path(tc,[[x,51],[x,383]],'#d9ddca',1)}for(let y=53;y<387;y+=41){path(tc,[[157,y],[482,y]],'#d9ddca',1)}path(tc,[[304,112],[280,112],[320,66],[360,112],[336,112],[336,179],[304,179]],null,0,'#d9684f',true);txt(tc,'A',228,231,61,'#26868f',850,'center');txt(tc,'B',320,231,61,'#294c77',850,'center');txt(tc,'C',412,231,61,'#df9e35',850,'center');roundRect(tc,188,292,70,60,5,'#248d91');roundRect(tc,285,292,70,60,5,'#e0a03d');roundRect(tc,382,292,70,60,5,'#d26455');txt(tc,'观察板',320,414,25,'#234957',700,'center');})();
+const targetPixels=tc.getImageData(0,0,640,480).data;
+function drawEye(){const canvas=$('eyeCanvas'),W=264,H=174;if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}const c=canvas.getContext('2d'),img=c.createImageData(W,H),data=img.data,origin=[GEO.eyeX,state.eye,0],fovY=.09,fovX=fovY*W/H,sourceY=state.length-GEO.sourceX*Math.tan(state.beam*RAD);let targetCount=0,valid=0;const material=MIRRORS[state.mirror],look=V.norm([-GEO.eyeX,-state.eye,0]),viewDown=[-look[1],look[0],0];
+ for(let y=0;y<H;y++){const vy=(y+.5-H/2)/(H/2)*fovY;for(let x=0;x<W;x++){const vz=(x+.5-W/2)/(W/2)*fovX;const r=trace(origin,[look[0]+vy*viewDown[0],look[1]+vy*viewDown[1],vz],state,{reverse:true});let color=[7,17,27];if(r.end==='target'){
+   const ty=(r.point[1]-sourceY+9)/18*480,tx=(r.point[2]+12)/24*640;
+   if(tx>=0&&tx<640&&ty>=0&&ty<480){const ix=(Math.floor(ty)*640+Math.floor(tx))*4;const gain=Math.max(.08,r.energy);color=[targetPixels[ix]*gain,targetPixels[ix+1]*gain,targetPixels[ix+2]*gain];valid++;if(tx>=152&&tx<488&&ty>=45&&ty<387)targetCount++;}
+   else color=[60*r.energy,111*r.energy,122*r.energy];
+  }else if(r.end==='escape'&&r.events.length){color=[147,175,177];}else if(r.end==='wall'){const k=state.lining==='black'?9:15;color=[k,k+8,k+12];}else if(r.end==='back')color=[29,35,39];else if(r.end==='obstacle')color=[38,55,62];
+  if(state.tube==='clear'&&state.lining!=='black'){// Stray-light contrast is qualitative, not a photometric measurement.
+   const blend=.14;color=color.map((v,i)=>v*(1-blend)+[169,192,196][i]*blend);
+  }
+  const idx=(y*W+x)*4;data[idx]=clamp(color[0],0,255);data[idx+1]=clamp(color[1],0,255);data[idx+2]=clamp(color[2],0,255);data[idx+3]=255;
+ }}
+ c.putImageData(img,0,0);c.save();c.strokeStyle='#eaf9fb35';c.lineWidth=.6;path(c,[[W/2-7,H/2],[W/2+7,H/2]],'#eaf9fb45',.7);path(c,[[W/2,H/2-7],[W/2,H/2+7]],'#eaf9fb45',.7);c.restore();viewStats={target:targetCount,total:W*H,valid};eyeDirty=false;
+}
+// ---------- Lightweight rotatable 3D structural renderer (no external engine/assets) ----------
+// Student workbench: software-projected, fully offline 3D. No WebGL needed.
+function shade(hex,f=1){const m=hex.replace('#','');return '#'+[0,2,4].map(k=>Math.round(clamp(parseInt(m.slice(k,k+2),16)*f,0,255)).toString(16).padStart(2,'0')).join('');}
+let structuralHits=[],structuralLabels=[],structureExplosion=0,previewCut=false,structureZoom=1;
+function insidePoly(x,y,pts){let yes=false;for(let i=0,j=pts.length-1;i<pts.length;j=i++){let a=pts[i],b=pts[j];if(((a[1]>y)!==(b[1]>y))&&x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0])yes=!yes;}return yes;}
+function drawStructure(canvas,mini=false){
+ const dim=setupCanvas(canvas);if(!dim)return;const {c,w,h}=dim,L=state.length,e=mini?0:structureExplosion/100,cut=mini?previewCut:ui.mode3d!=='assembled',yaw=mini?-.50:ui.yaw,pitch=mini?.18:ui.pitch;
+ c.clearRect(0,0,w,h);c.fillStyle='#eef3f5';c.fillRect(0,0,w,h);
+ const sc=(mini?Math.min((w-40)/60,(h-25)/(L+27)):Math.min((w-110)/(68+e*44),(h-100)/(L+30)))* (mini?1:structureZoom);
+ const center=[w*(mini?.49:.47)-e*10*sc,h*.49];
+ const transform=p=>{const y=p[1]-L/2,xx=p[0]*Math.cos(yaw)+p[2]*Math.sin(yaw),zz=-p[0]*Math.sin(yaw)+p[2]*Math.cos(yaw);return [xx,y*Math.cos(pitch)-zz*Math.sin(pitch),y*Math.sin(pitch)+zz*Math.cos(pitch)]};
+ const P=p=>{const a=transform(p);return [center[0]+a[0]*sc,center[1]+a[1]*sc,a[2]]};
+ const faces=[],lines=[],base=TUBES[state.tube].color,H=GEO.half,A=GEO.arm,alpha=state.tube==='clear'?(state.lining==='black'?.86:.3):1,outline=channelOutline(state);
+ function add(pts,col,tag,opacity=1){let ps=pts.map(P);faces.push({pts:ps,col,tag,alpha:opacity,depth:ps.reduce((s,p)=>s+p[2],0)/ps.length});}
+ function prism(poly,z1,z2,col,tag,off=[0,0,0],a=1){let f=poly.map(p=>V.add([p[0],p[1],z1],off)),b=poly.map(p=>V.add([p[0],p[1],z2],off));add(b,shade(col,.75),tag,a);for(let i=0;i<poly.length;i++)add([f[i],f[(i+1)%poly.length],b[(i+1)%poly.length],b[i]],shade(col,.72+(i%3)*.12),tag,a);add(f,col,tag,a);}
+ function box(x,y,z,ww,hh,dd,col,tag,off=[0,0,0]){prism([[x,y],[x+ww,y],[x+ww,y+hh],[x,y+hh]],z,z+dd,col,tag,off);}
+ // Split skin: front panel moves aside; the rear channel retains its hollow Z silhouette.
+ const frontOffset=[e*39,e*2,-e*9],backOffset=[-e*10,0,e*5];
+ if(!cut||e>.015)prism(outline,-H-.55,-H+.35,base,'body',frontOffset,alpha);
+ prism(outline,H-.4,H+.55,state.lining==='black'?'#293b47':shade(base,.92),'body',backOffset,alpha);
+ const wallColor=state.lining==='black'?'#374753':base;
+ for(let j=0;j<channelEdges(state).length;j++){
+  const [a,b]=channelEdges(state)[j],t=.62;
+  const dx=b[0]-a[0],dy=b[1]-a[1],n=V.norm([-dy,dx,0]);
+  const poly=[[a[0],a[1]],[b[0],b[1]],[b[0]+n[0]*t,b[1]+n[1]*t],[a[0]+n[0]*t,a[1]+n[1]*t]];
+  prism(poly,-H+.2,H+.15,wallColor,'body',backOffset,alpha);
+ }
+ // Open windows are rims, not opaque disks.
+ for(let i=0;i<2;i++){
+  const x=i?A:-A,y=i?L:0,off=[(i?12:-12)*e,0,-e*3],col='#536f7c',ap=GEO.aperture;
+  for(const sy of [-ap,ap])box(x-.7,y+sy-.45,-H,1.4,.9,2*H,col,'ports',off);
+  for(const sz of [-ap,ap])box(x-.7,y-ap,sz-.45,1.4,2*ap,.9,col,'ports',off);
+ }
+ const anchors={body:V.add([0,L*.5,-H],frontOffset),upper:null,lower:null,mount:null,ports:V.add([-A,0,-H],[-12*e,0,-3*e])};
+ for(let i=0;i<2;i++){
+  const m=mirrorData(i),off=[(i?1:-1)*e*14,(i?1:-1)*e*2,-e*13],mp=V.add(m.p,off),tag=i?'lower':'upper',z=[0,0,GEO.mirrorZ],a=V.add(mp,V.mul(m.t,-GEO.mirrorHalf)),b=V.add(mp,V.mul(m.t,GEO.mirrorHalf)),f=[V.sub(a,z),V.sub(b,z),V.add(b,z),V.add(a,z)],bk=f.map(v=>V.add(v,V.mul(m.n,-.68)));
+  anchors[tag]=mp;add(bk,'#627888',tag);for(let k=0;k<4;k++)add([f[k],f[(k+1)%4],bk[(k+1)%4],bk[k]],'#7d94a0',tag);add(f,state.mirror==='wrinkle'?'#a1adb5':state.mirror==='foil'?'#bdc8d0':'#abdce5',tag);
+  for(let j=0;j<3;j++){let z0=-4.7+j*3;lines.push({a:V.add(V.add(mp,V.mul(m.t,-4.8)),[0,0,z0]),b:V.add(V.add(mp,V.mul(m.t,4.8)),[0,0,z0+1.5]),col:state.mirror==='wrinkle'?'#778997':'#effdff',tag});}
+  const supportOff=V.add(off,[0,0,-e*8]);const sp=V.add(V.add(m.p,V.mul(m.n,-1.35)),supportOff);if(!i)anchors.mount=sp;
+  const mcol=state.mount==='clay'?'#b47b9e':state.mount==='glue'?'#e4a44a':state.mount==='tape'?'#dfc87e':'#a18a68';
+  for(const zz of [-5,5])box(sp[0]-1.1,sp[1]-.7,sp[2]+zz-.7,2.2,1.4,1.4,mcol,'mount');
+  if(e>.01){c.save();c.setLineDash([4,5]);path(c,[P(m.p),P(mp)],'#93aeb8',1.2);c.restore();}
+ }
+ c.save();c.translate(center[0]+e*15*sc,center[1]+(L/2+H+5)*sc);c.scale(1,.16);let sh=c.createRadialGradient(0,0,0,0,0,(A+18+e*14)*sc);sh.addColorStop(0,'#26455b1c');sh.addColorStop(1,'#26455b00');circle(c,0,0,(A+18+e*14)*sc,sh);c.restore();
+ faces.sort((a,b)=>b.depth-a.depth);for(const f of faces){c.globalAlpha=f.alpha;const active=!mini&&ui.part===f.tag;path(c,f.pts,active?'#d49b3c':shade(f.col,.79),active?1.7:.65,active?shade(f.col,1.06):f.col,true);}c.globalAlpha=1;
+ if(cut||alpha<1){for(const l of lines)path(c,[P(l.a),P(l.b)],l.col,state.mirror==='wrinkle'?1.6:1.5);}
+ // Intact cross section: the path uses the same geometric trace as the first page.
+ if((cut||alpha<1)&&e<.01&&(mini||ui.structureRays!==false)){
+  const cs=['#dc9b24','#248aa4','#239675'];
+  for(const seg of result.segs)if(Math.max(Math.abs(seg.from[0]),Math.abs(seg.to[0]))<65)arrow(c,P(seg.from),P(seg.to),cs[Math.min(seg.level,2)],mini?1.2:2.4,mini?4:7);
+ }
+ if(!mini){
+  structuralHits=faces;structuralLabels=[];
+  txt(c,'当前作品 · '+TUBES[state.tube].name,20,25,14,'#4d707f',650);
+  txt(c,e>.01?'拆解时部件分离，不代表实际通光':'拖动旋转 · 点击部件 · 滚轮缩放',20,h-20,12,'#688692');
+  const shows=cut?['upper','lower','mount','ports']:['body','ports'];
+  if(ui.part!=='all'&&!shows.includes(ui.part))shows.push(ui.part);
+  let entries=shows.map((key,i)=>{let p=P(anchors[key]),names={upper:'① 上方镜',lower:'② 下方镜',body:'③ Z 字形筒身',mount:'④ '+MOUNTS[state.mount].name.split('＋')[0],ports:'⑤ 观察孔'};let right=key==='upper'||key==='body'||key==='mount';return {key,p,t:names[key],x:right?w-157:23,y:clamp(p[1]+(key==='mount'?45:-22),65,h-65),right};});
+  // Stack callouts so labels never hide each other or the selected mirror.
+  for(const side of [false,true]){let list=entries.filter(q=>q.right===side).sort((a,b)=>a.y-b.y);for(let j=1;j<list.length;j++)list[j].y=Math.max(list[j].y,list[j-1].y+36);if(list.length&&list.at(-1).y>h-60){let shift=list.at(-1).y-(h-60);list.forEach(q=>q.y-=shift);}}
+  for(const a of entries){let active=ui.part===a.key;c.font='600 13px system-ui,"Microsoft YaHei"';let ww=c.measureText(a.t).width+20;let xx=clamp(a.x,12,w-ww-12);path(c,[a.p,[a.right?xx:xx+ww,a.y]],active?'#c69741':'#93acb7',1);roundRect(c,xx,a.y-14,ww,28,7,active?'#fff3d9':'#ffffffed',active?'#d7ac59':'#d5e2e7');txt(c,a.t,xx+10,a.y,13,active?'#926211':'#355a6b',650);structuralLabels.push({key:a.key,x:xx,y:a.y-14,w:ww,h:28});}
+ }
+}
+function setPart(name){
+ if(!PARTS[name])return;ui.part=name;updatePartDetails();$$('[data-part]').forEach(b=>b.classList.toggle('active',b.dataset.part===name));
+ if(name!=='all'&&ui.mode3d==='assembled')set3d('cut');if(name==='all')structureZoom=1;threeDirty=true;
+}
+function updatePartDetails(){
+ const p=PARTS[ui.part]||PARTS.all;$('partNumber').textContent=p[0];$('partTitle').textContent=p[1];$('partDescription').textContent=p[2];$('partNote').textContent=p[3];
+ const specific={body:`当前筒身：${TUBES[state.tube].name}。${TUBES[state.tube].advice}`,mount:`当前固定：${MOUNTS[state.mount].name}。${MOUNTS[state.mount].advice}`,upper:`当前上镜 ${state.a1}°，${state.flip1?'背面朝向原来的来光':'反光面朝向通道'}。${MIRRORS[state.mirror].name}。`,lower:`当前下镜 ${state.a2}°，${state.flip2?'背面朝向原来的来光':'反光面朝向通道'}。${MIRRORS[state.mirror].name}。`};
+ if(specific[ui.part])$('partNote').textContent=specific[ui.part];
+ $('studentDesignBadge').textContent=`${TUBES[state.tube].name} · ${MIRRORS[state.mirror].name} · ${MOUNTS[state.mount].name}`;
+}
+function set3d(mode){ui.mode3d=mode;ui.explode=mode==='exploded'?75:0;$('explodeSlider').value=ui.explode;['assembled','cut','exploded'].forEach(x=>$(x==='cut'?'cut3dBtn':x+'Btn').classList.toggle('active',x===mode));threeDirty=true;}
+function bindStructure(){
+ $$('[data-part]').forEach(b=>b.onclick=()=>{setPart(b.dataset.part);beep()});$('assembledBtn').onclick=()=>set3d('assembled');$('cut3dBtn').onclick=()=>set3d('cut');$('explodedBtn').onclick=()=>set3d('exploded');
+ $('explodeSlider').oninput=e=>{ui.explode=+e.target.value;ui.mode3d=ui.explode?'exploded':'cut';['assembledBtn','cut3dBtn','explodedBtn'].forEach(id=>$(id).classList.toggle('active',id===(ui.explode?'explodedBtn':'cut3dBtn')));threeDirty=true};
+ $('viewResetBtn').onclick=()=>{ui.yaw=-.62;ui.pitch=.2;structureZoom=1;threeDirty=true};
+ let drag=null;const cv=$('structureCanvas');cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,yaw:ui.yaw,pitch:ui.pitch,moved:false};cv.setPointerCapture(e.pointerId)});
+ cv.addEventListener('pointermove',e=>{if(!drag)return;if(Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>5)drag.moved=true;if(drag.moved){ui.yaw=drag.yaw+(e.clientX-drag.x)*.009;ui.pitch=clamp(drag.pitch+(e.clientY-drag.y)*.006,-.65,.65);threeDirty=true;}});
+ cv.addEventListener('pointerup',e=>{if(drag&&!drag.moved){const b=cv.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top;const lab=structuralLabels.find(q=>x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h);const f=[...structuralHits].reverse().find(q=>insidePoly(x,y,q.pts));if(lab||f)setPart(lab?lab.key:f.tag);}drag=null;try{cv.releasePointerCapture(e.pointerId)}catch(err){}});
+ cv.addEventListener('pointercancel',()=>drag=null);cv.addEventListener('wheel',e=>{e.preventDefault();structureZoom=clamp(structureZoom*Math.exp(-e.deltaY*.001),.72,1.8);threeDirty=true},{passive:false});
+}
+
+// ---------- Material choices, descriptive engineering feedback ----------
+function matIcon(kind,key){const begin='<svg class="mat-pic" viewBox="0 0 48 58" fill="none" aria-hidden="true">',end='</svg>';
+   if(kind==='tube'){const col=TUBES[key].color;return begin+`<path d="M4 5h28v31h12v16H17V21H4Z" fill="${col}" fill-opacity="${key==='clear'?'.38':'1'}" stroke="#637e89" stroke-width="1.6"/><path d="M4 5h11v16H4Z" fill="#203e4d"/><path d="M36 36h8v16h-8Z" fill="#254351"/><path d="M18 9h10v31h6" stroke="#ffffff88" stroke-width="2.3"/><path d="m20 9 8 8m-8 23 8 8" stroke="#8eadaf" stroke-width="1.5"/>`+end;}
+if(kind==='mirror')return begin+`<path d="m6 16 25-9 11 34-25 10Z" fill="${key==='foil'||key==='wrinkle'?'#b5bfc3':'#8db6c7'}" stroke="#5e7887" stroke-width="2"/><path d="m9 17 21-7 9 28-21 8Z" fill="#d0e8ed"/>`+(key==='wrinkle'?'<path d="m10 19 15 6-10 8 19 3-11 9M19 12l6 11 9-2-6 17" stroke="#68838c" stroke-width="2"/>':key==='foil'?'<path d="m12 20 20 2-15 11 18 4M15 17l5 23" stroke="#8099a2"/>':'<path d="m15 16 15 26m-9-28 12 23" stroke="white" stroke-width="3"/>')+end;
+   if(kind==='mount'&&key==='glue')return begin+'<path d="M6 17h27l10 8-5 5-17-3-3 17H9l5-21-8-1Z" fill="#dfab4b" stroke="#a87d33" stroke-width="1.5"/><path d="m35 23 10 3-2 4-8-2Z" fill="#657e8b"/><path d="M3 17H0" stroke="#f0e6c7" stroke-width="5"/><path d="M17 31h6v6h-7" stroke="#556d78" stroke-width="2"/><path d="M42 35q6 8 0 10-6-2 0-10" fill="#e0bd7e"/>'+end;
+if(kind==='mount')return begin+(key==='slot'?'<path d="m5 47 19-36 19 36Z" fill="#cbb08b" stroke="#957d5d"/><path d="m10 46 17-25 9 25Z" fill="#f3e5cb"/><path d="m10 13 25 25" stroke="#80b7ca" stroke-width="5"/>':key==='tape'?'<ellipse cx="24" cy="28" rx="18" ry="19" fill="#edcf72" stroke="#b39b52"/><ellipse cx="24" cy="28" rx="10" ry="11" fill="#f2f5f7" stroke="#bea34d"/><path d="m38 33 5 19-15-6" fill="#e0c264"/>':'<path d="M4 44c-2-15 12-12 13-20s11-10 15 3 13 9 12 18S8 54 4 44Z" fill="#bb8eaa" stroke="#916785"/>')+end;
+ return begin+(key==='black'?'<path d="M8 8h26v40H8Z" fill="#334752"/><path d="M15 13h26v40H15Z" fill="#1b2b34" stroke="#586a75"/><path d="M18 19h17" stroke="#758893"/>':key==='seams'?'<ellipse cx="22" cy="28" rx="16" ry="18" fill="#47555c"/><ellipse cx="22" cy="28" rx="8" ry="10" fill="#e3e8e6"/><path d="m36 35 8 15-15-5" fill="#273b45"/>':'<path d="M10 10h28v40H10Z" stroke="#91a5b0" stroke-width="2" stroke-dasharray="4 3"/><path d="m16 31 6 6 10-14" stroke="#719198" stroke-width="3"/>')+end;
+}
+function makeOptions(){for(const [group,data] of [['tube',TUBES],['mirror',MIRRORS],['mount',MOUNTS],['lining',LININGS]]){$(group+'Options').innerHTML=Object.entries(data).map(([key,v])=>`<button class="material-option" data-material="${group}" data-value="${key}" aria-pressed="false">${matIcon(group,key)}<span><strong>${v.name}</strong><small>${v.short}</small></span></button>`).join('');}$$('[data-material]').forEach(b=>b.onclick=()=>{apply({[b.dataset.material]:b.dataset.value});beep();});}
+function updateMaterialUI(){if(!$('tubeOptions').children.length)return;$$('[data-material]').forEach(b=>{const selected=state[b.dataset.material]===b.dataset.value;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',selected)});$('tubeAdvice').innerHTML='<strong>'+TUBES[state.tube].name+'</strong><br>'+TUBES[state.tube].advice;$('mirrorAdvice').innerHTML='<strong>'+MIRRORS[state.mirror].name+'</strong><br>'+MIRRORS[state.mirror].advice;$('mountAdvice').innerHTML='<strong>'+MOUNTS[state.mount].name+'</strong><br>'+MOUNTS[state.mount].advice;$('liningAdvice').textContent=state.lining==='black'?'黑纸覆盖透光壁或反光内壁，但不要挡住进光口、观察孔和镜面。':state.lining==='seams'?(state.tube==='clear'?'只封接缝不能解决透明管整面透光的问题。':'先封漏光接缝，再检查是否还需要内衬。'):(state.tube==='clear'?'透明管未遮光：可以比较结构，但侧面杂光可能降低观察对比度。':'不透光且无明显漏缝的筒身，不一定需要额外包黑纸。');}
+// ---------- Modals, records and teacher support ----------
+let previousFocus=null;
+function modal(title,body,foot='',wide=false){previousFocus=document.activeElement;$('modalRoot').innerHTML=`<div class="modal-backdrop" id="backdrop"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"${wide?' style="width:min(1130px,96vw)"':''}><div class="modal-head"><h2 id="modalTitle">${title}</h2><button id="closeModal" aria-label="关闭弹窗">关闭 ×</button></div><div class="modal-body">${body}</div>${foot?'<div class="modal-foot">'+foot+'</div>':''}</div></div>`;$('closeModal').onclick=closeModal;$('backdrop').onclick=e=>{if(e.target===$('backdrop'))closeModal()};$('closeModal').focus();}
+function closeModal(){$('modalRoot').innerHTML='';if(previousFocus&&document.contains(previousFocus))previousFocus.focus();previousFocus=null;}
+function syncMore(){for(const k of ['beam','eye','length']){if($('more_'+k)){$('more_'+k).value=state[k];$('more_'+k+'Val').textContent=fmt(state[k],k==='eye'?1:0)+(k==='beam'?'°':' cm');}}if($('flip1')){['flip1','flip2'].forEach(k=>{$(k).classList.toggle('active',state[k]);$(k).textContent=(k==='flip1'?'上方镜':'下方镜')+'：'+(state[k]?'背面朝向来光':'正常反射面');});}if($('moreStatus'))$('moreStatus').textContent=result.title;}
+function openMore(){modal('改变更多条件',`<div class="more-controls"><div class="field"><label for="more_beam">来光方向 <output id="more_beamVal"></output></label><input id="more_beam" type="range" min="-25" max="25" step="1"><div class="row spaced small"><span>−25° 向上</span><span>0° 水平</span><span>+25° 向下</span></div><p>移动观察物体的高度，使选中的中心光线照向下镜中心；不是转动光源让眼睛“发光”。</p></div><div class="field"><label for="more_eye">眼睛上下移动 <output id="more_eyeVal"></output></label><input id="more_eye" type="range" min="-9" max="9" step=".1"><div class="row spaced small"><span>−9 cm 上移</span><span>0 居中</span><span>+9 cm 下移</span></div><button id="followEyeBtn" style="margin-top:9px">把眼睛移到出射光上</button><p>眼睛位置改变，不会改变镜子的反射规律。观察窗的朝向自动对准上镜中心。</p></div><div class="field"><label for="more_length">两面镜的间距 <output id="more_lengthVal"></output></label><input id="more_length" type="range" min="24" max="60" step="1"><div class="row spaced small"><span>24 cm</span><span>60 cm</span></div><p>保持镜片和有效孔径不变，比较筒加长后，光能否通过以及观察视野怎样变化。</p></div><div class="field"><label>把镜片装反会怎样？</label><div class="flip-controls"><button id="flip1"></button><button id="flip2"></button></div><p>这里假设镜片背面不透光、不作为反射面。镜架本身不挡光；实际制作时还需检查固定材料。</p></div></div><div class="actual-note">中心光线：<strong id="moreStatus"></strong>。它只是物体发出或反射的许多光线之一，不能把“这条光没进眼睛”等同于“什么都看不见”。</div>`,`<span class="small">改变后实时应用到实验台</span><button class="primary" id="backToLab">返回观察</button>`);
+ for(const k of ['beam','eye','length'])$('more_'+k).oninput=e=>apply({[k]:+e.target.value});for(const k of ['flip1','flip2'])$(k).onclick=()=>{apply({[k]:!state[k]});beep()};$('followEyeBtn').onclick=()=>{const r=forward();if((r.end==='missEye'||r.end==='eye')&&r.hits.length>=2){const dy=r.point[1];if(Math.abs(dy)<=9){apply({eye:Math.round(dy*10)/10});toast('眼睛已移到出射光附近');}else toast('光偏得太远，超出本模型眼睛移动范围');}else toast('光还没有从观察孔顺利射出，请先调整镜面');};$('backToLab').onclick=closeModal;syncMore();}
+function openWhy(){const delta=2*(state.a1-state.a2);let html=`<div class="explain"><div class="actual-note"><strong>此刻看到的现象：${result.title}</strong><br>${result.desc}</div><h3>先区分“偏移”和“看不见”</h3><p>镜子改变的是光的方向。角度变化后，可能仍有部分光进入眼睛，也可能光路被筒壁或镜片边缘截住。右上方视野由多条采样光线计算，不是按角度直接切换一张黑图。</p><h3>两镜不平行时</h3><p>对本模型中依次经过两镜反射的光，两镜倾角相差 <strong>${fmt(Math.abs(state.a2-state.a1))}°</strong>，入射与出射方向的有向差为 <strong>${fmt(delta)}°</strong>。因此图像位置或观察方向会变化，但不能一概说“完全看不见”。此关系指理想平面镜、同一剖面中的两次反射，不适用于光根本没有打到第二面镜子的情况。</p><h3>为什么常用45°？</h3><p>在右侧水平入光、竖直向上传光、向左水平出光的标准结构中，45°使光依次转向90°。两镜都不是45°时，仍然遵守反射规律；能否入眼，还取决于来光方向、镜片大小、位置和孔径。</p><p>可点击“非45°通光”：两镜为40°、来光方向为＋10°，并相应下移眼睛。这说明45°是标准布置的选择，不是所有潜望镜唯一能工作的角度。</p><h3>换成塑料管，什么变了？</h3><p>在镜面、位置和通光空间不变时，不透光纸筒换成不透光塑料管，中心光路不变。改变的是支撑、遮光、耐潮、加工和固定方式；光仍主要在筒内空气中传播。</p><p class="small">光路依据：反射定律。镜面倾角从水平线量起；入射角和反射角从法线量起。</p></div>`;modal('根据光路解释现象',html,`<button id="whyHide">返回实验</button><button id="whyRescue" class="primary">试试非45°通光</button>`);$('whyHide').onclick=closeModal;$('whyRescue').onclick=()=>{closeModal();preset('rescue')};}
+function openReal(){modal('教学模型与真实潜望镜',`<div class="reference-grid"><section><h3>可以动手做的双镜式</h3><p>两块平面镜、遮光筒、镜架和两个开口就能构成基本的潜望镜。这不是只存在于示意图中的结构，可以用生活材料制作并检验。</p><p style="margin-top:12px">本网页主要研究这类结构：镜子怎样改变光的方向，镜片和开口怎样相互配合。</p></section><section><h3>更复杂的光学潜望镜</h3><p>一些专业潜望镜使用棱镜代替平面镜改变光路，还配有物镜、目镜等透镜部件。它们的视场、放大和成像系统不能只用“两面45°镜子”完整解释。</p><p style="margin-top:12px">本网页没有把专业仪器的透镜、棱镜、放大和调焦过程放进计算模型。</p></section></div><div class="actual-note" style="margin-top:18px">建模时把同口径筒身的有效通光空间作等效处理。三维外观用于辨认部件；光学采样使用矩形有效孔径。圆管与方筒的实际完整视场不能据此作精确比较。</div><p class="small" style="margin-top:15px">结构参考：英国科学博物馆集团 Periscope；美国海军历史与遗产司令部 Nomenclature of Naval Vessels 中的 Periscope 条目。</p>`);}
+function openTeacher(){modal('教师说明与模型边界',`<div class="explain"><h3>本版的依据与定位</h3><p>本版按用户提出的《设计潜望镜》学习目标制作。本次按用户提供的教材照片调整为眼睛在左上、物体在右下的光路；第四页的四个用途来自用户提供的情境配图。没有补写未提供的教学用书内容。</p><p>网页用来辅助真实制作后的比较和解释，不替代材料试验。光路、结构、材料与情境四个页面自由切换，不强制猜想—结论等课堂流程。</p><h3>计算什么</h3><p>光线与有限平面镜、有效孔径、筒壁求交；镜面按 d′ = d − 2(d·n)n 反射。会检验镜片正反面、碰壁、漏光、是否经过两镜，以及是否到达眼睛位置。观察窗按三维射线采样，不用“不是45°就黑屏”的条件判断。</p><p>上镜中心为(0,0)，下镜中心为(0,L)；横向有效通道宽14 cm，镜面在剖面内长13.6 cm。眼睛位于上方左侧，距离轴线25 cm；眼点前方的接收范围为放大示意。镜片尺寸、物距、眼距可以影响实际视场，本版没有为这些变量单独提供滑块。</p><h3>不计算什么</h3><p>生活材料均表现为双直角Z字形拼接，采用等效矩形截面的通光空间比较，不能用于出加工图或精确估计圆形管的视场。模型没有计算普通背镀镜前表面的重影、衍射、人眼调焦、玻璃厚度折射和透明管壁的完整多次反射。</p><p>铝箔用位置相关的微表面法线扰动表现不平整，质感和亮度系数只作定性比较。透明管壁作薄壁透光近似，并加入杂光对比度示意；没有真实光度学测量。固定材料只给出设计反馈，不虚构耐久、成本或稳定率，也不自动按材料改变角度。</p><h3>平面情境练习：计算与简化</h3><p>小人与潜望镜分别拖动。位置判断包含眼睛与观察孔的距离、进光口是否放入对应介质、装置是否碰到墙体或缸壁，以及目标上的采样点能否经两面有限镜片到达眼睛。镜角、镜片正反面、筒身、镜距和固定材料均沿用当前作品，不自动修正设计。</p><p>情境页是二维位置练习。右侧只示意当前目标是否进入观察范围，不模拟完整的三维视场；“目标尚未进入视野”不等于没有其他光进入眼睛。显示光路时，成功路径依据同一镜面几何关系生成。</p><p>乌龟情境需要将下方进光口完整伸到水面以下。入水部分按封闭观察窗、筒内保持空气作示意；未模拟水或玻璃界面的折射、密封失效、进水和真实防水性能。任何材料的定位通过，都不表示能把实物直接投入水中。</p><p>水面和下水道仅用于数字模拟，不作为潜水或进入管道的练习。普通潜望镜不是呼吸管；不要打开井盖或进入下水道。热熔胶枪由成人操作，待冷却后检查。</p><h3>三个容易误教的地方</h3><p><strong>45°不是“魔法开关”。</strong>它适合标准直角光路；其他角度也可能有通光方案。<br><strong>中心光线不是物体发出的全部光。</strong>中心光线失配和整个观察窗全黑不是一回事。<br><strong>纸换塑料不改变反射规律。</strong>主光在空气中传播；材料主要影响遮光、支撑、加工及实际稳定性。</p><h3>课堂操作</h3><p>使用滑块、加减按钮或拖动镜片端点调角度。先观察现象，按需打开光路、法线或解释。保存最多8组方案，再打开“实验记录”并排比较、恢复参数或导出一张记录图。所有数据留在当前浏览器；本地存储受限时，本次会话仍可使用。</p><h3>制作安全</h3><p>不要用潜望镜观察太阳或强激光。镜片包边，不用碎玻璃；玻璃裁切、硬塑料开孔由成人完成。使用回收包装先清洁、晾干。</p><h3>参考依据（点击需联网）</h3><p><a href="https://www.sciencemuseumgroup.org.uk/learning/resources/periscope" target="_blank" rel="noopener">Science Museum Group — Periscope</a>：基本结构、材料及双反射活动。<br><a href="https://farside.ph.utexas.edu/teaching/316/lectures/node127.html" target="_blank" rel="noopener">University of Texas at Austin — Law of Reflection</a>：反射定律、法线与粗糙表面反射。<br><a href="https://www.history.navy.mil/research/library/online-reading-room/title-list-alphabetically/n/nomenclature-naval-vessels.html" target="_blank" rel="noopener">Naval History and Heritage Command — Nomenclature of Naval Vessels</a>：潜望镜的物镜、目镜、棱镜或反射镜结构。</p></div>`,null,true);}
+function safeState(s){const clean=copy(INITIAL);for(const k of ['a1','a2','length','beam','eye'])if(Number.isFinite(+s[k]))clean[k]=+s[k];for(const [k,map] of [['tube',TUBES],['mirror',MIRRORS],['mount',MOUNTS],['lining',LININGS]])if(map[s[k]])clean[k]=s[k];for(const k of ['flip1','flip2'])clean[k]=!!s[k];return clean;}
+records=records.filter(r=>typeof r.image==='string'&&r.image.startsWith('data:image/')).map(r=>({...r,state:safeState(r.state)}));
+function persist(){try{localStorage.setItem('periscope_records_textbook_v2',JSON.stringify(records));}catch(e){toast('记录已保留在本次会话；浏览器未允许长期保存');}$('recordCount').textContent=records.length;}
+function captureRecord(){if(records.length>=8){toast('已保存8组，请在实验记录中删除一组后再保存');return;}if(eyeDirty)drawEye();drawLab();const thumb=document.createElement('canvas');thumb.width=780;thumb.height=430;const c=thumb.getContext('2d');c.fillStyle='#122b3e';c.fillRect(0,0,780,430);const lc=$('labCanvas'),ratio=Math.min(575/lc.width,430/lc.height);c.drawImage(lc,0,0,lc.width,lc.height,(575-lc.width*ratio)/2,(430-lc.height*ratio)/2,lc.width*ratio,lc.height*ratio);c.drawImage($('eyeCanvas'),586,38,180,119);txt(c,'观察孔视野',676,179,16,'#d3e8ef',600,'center');txt(c,'上镜 '+fmt(state.a1)+'°',600,234,20,'#fff',700);txt(c,'下镜 '+fmt(state.a2)+'°',600,272,20,'#fff',700);txt(c,fmt(state.length)+' cm',600,310,18,'#b1cbd6');records.push({state:copy(state),image:thumb.toDataURL('image/png'),time:new Date().toISOString()});persist();beep('save');toast('已保存第 '+records.length+' 组，可继续改变一个条件作比较');}
+function recordDescription(s){const r=evaluate(s);return `<p>上镜 <strong>${fmt(s.a1)}°</strong> / 下镜 <strong>${fmt(s.a2)}°</strong> · 来光 ${fmt(s.beam)}°<br>两镜间距 ${fmt(s.length)} cm · 眼睛偏移 ${fmt(s.eye,1)} cm<br>${TUBES[s.tube].name} · ${MIRRORS[s.mirror].name}<br>${MOUNTS[s.mount].name} · ${LININGS[s.lining].name}<br><strong style="color:${r.tone==='good'?'#087f89':'#b16830'}">${r.title}</strong></p>`;}
+function openRecords(){modal('我的实验对比 · '+records.length+' / 8 组',records.length?'<div class="records-grid">'+records.map((r,i)=>`<article class="record"><img class="record-thumb" src="${r.image}" alt="第${i+1}组潜望镜光路与观察窗截图"><div class="record-body"><h3>方案 ${i+1}</h3>${recordDescription(r.state)}<div class="row"><button class="primary" data-restore="${i}">恢复这组参数</button><button data-delete="${i}">删除</button></div></div></article>`).join('')+'</div>':'<div class="empty-record">还没有记录。<br><span class="small">调整一个条件，再点击实验台右下方“保存这一组对比”。</span></div>',`<span class="small">建议每次只改变一个条件</span><div class="row"><button id="clearRecords" ${records.length?'':'disabled'}>清空</button><button class="primary" id="exportRecords" ${records.length?'':'disabled'}>导出记录图片</button></div>`,true);$$('[data-restore]').forEach(b=>b.onclick=()=>{const s=copy(records[+b.dataset.restore].state);closeModal();setTab('lab');apply(s);toast('已恢复这组参数')});$$('[data-delete]').forEach(b=>b.onclick=()=>{records.splice(+b.dataset.delete,1);persist();openRecords()});$('clearRecords').onclick=()=>{modal('清空本机实验记录？','<p class="explain">这会删除当前浏览器中的全部实验记录。已经导出的图片不受影响。</p>','<button id="cancelClear">保留记录</button><button id="confirmClear" class="primary">确认清空</button>');$('cancelClear').onclick=openRecords;$('confirmClear').onclick=()=>{records=[];persist();openRecords()};};$('exportRecords').onclick=exportRecords;}
+function loadImage(src){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=src;});}
+function downloadBlob(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000);}
+async function exportRecords(){if(!records.length)return;const list=copy(records);try{const cols=list.length===1?1:2,cellW=620,cellH=572,W=cols*cellW+72,H=Math.ceil(list.length/cols)*cellH+190;const cv=document.createElement('canvas');cv.width=W;cv.height=H;const c=cv.getContext('2d');c.fillStyle='#f1f5f6';c.fillRect(0,0,W,H);txt(c,'设计潜望镜 · 实验对比记录',36,49,33,'#193247',750);txt(c,'比较角度、来光方向、眼睛位置与材料；截图为几何光学模型。',36,93,18,'#627d8d');for(let i=0;i<list.length;i++){const r=list[i],s=r.state,x=36+(i%cols)*cellW,y=135+Math.floor(i/cols)*cellH;roundRect(c,x,y,cellW-18,cellH-20,14,'#fff','#d3e0e5');txt(c,'方案 '+(i+1),x+20,y+29,23,'#087f89',750);const image=await loadImage(r.image);c.drawImage(image,x+16,y+54,cellW-50,(cellW-50)*430/780);let yy=y+392;const rows=[`上镜 ${fmt(s.a1)}° / 下镜 ${fmt(s.a2)}°    来光 ${fmt(s.beam)}°`,`镜距 ${fmt(s.length)} cm    眼睛偏移 ${fmt(s.eye,1)} cm`,`${TUBES[s.tube].name} · ${MIRRORS[s.mirror].name}`,`${MOUNTS[s.mount].name} · ${LININGS[s.lining].name}`,`中心光线：${evaluate(s).title}`];rows.forEach((t,k)=>txt(c,t,x+20,yy+k*29,18,k===4?'#087f89':'#415e6c',k===4?700:500));}txt(c,'潜望镜开放实验室 · 数字模拟辅助真实制作，不代替实物检验',36,H-27,16,'#748b97');cv.toBlob(blob=>{if(blob){downloadBlob(blob,'潜望镜_实验对比记录.png');toast('记录图片已生成')}else toast('图片生成失败，请保留当前页面后重试')},'image/png');}catch(e){toast('导出未完成，记录仍保留在页面中');console.error(e);}}
+// ---------- Interaction wiring ----------
+function setTab(tab){if(!['lab','structure','materials','situations'].includes(tab))return;ui.tab=tab;['lab','structure','materials','situations'].forEach(k=>$(k).classList.toggle('hidden',k!==tab));$$('[data-tab]').forEach(b=>{b.classList.toggle('active',b.dataset.tab===tab);b.setAttribute('aria-current',b.dataset.tab===tab?'page':'false')});drawDirty=threeDirty=eyeDirty=true;if(tab==='structure')updatePartDetails();if(tab==='situations'&&window.Practice)Practice.refresh();beep();}
+function preset(name){const common={beam:0,eye:0,flip1:false,flip2:false,length:36};const p={standard:{a1:45,a2:45},lower:{a1:45,a2:50},parallel:{a1:40,a2:40},rescue:{a1:40,a2:40,beam:10,eye:4.4}};ui.lock=false;apply({...common,...p[name]});ui.rays=ui.cut=true;syncToggleButtons();if(name==='rescue')toast('两镜40°，同时改变来光方向和眼睛位置');beep();}
+function syncToggleButtons(){for(const [id,key] of [['cutBtn','cut'],['rayBtn','rays'],['normalBtn','normals'],['bundleBtn','bundle']]){$(id).classList.toggle('active',ui[key]);$(id).setAttribute('aria-pressed',ui[key]);}$('pauseBtn').textContent=ui.paused?'继续':'暂停';$('pauseBtn').setAttribute('aria-pressed',ui.paused);$('stageHint').textContent=ui.cut?'拖动镜片端点，也能改变角度':'外观观察中 · 可剖开外壳查看内部';}
+$$('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));$$('[data-goto]').forEach(b=>b.onclick=()=>setTab(b.dataset.goto));$$('[data-step]').forEach(b=>b.onclick=()=>{const [k,d]=b.dataset.step.split(',');ui.selected=k==='a1'?0:1;setAngle(k,state[k]+Number(d));beep()});for(const k of ['a1','a2']){$(k).oninput=e=>{ui.selected=k==='a1'?0:1;setAngle(k,+e.target.value)};$(k).onchange=()=>beep();}
+$$('[data-preset]').forEach(b=>b.onclick=()=>preset(b.dataset.preset));$('lockBtn').onclick=()=>{ui.lock=!ui.lock;sync();toast(ui.lock?'两镜将同幅度转动，保留当前角度差':'已恢复独立调节');};
+for(const [id,key] of [['cutBtn','cut'],['rayBtn','rays'],['normalBtn','normals'],['bundleBtn','bundle'],['pauseBtn','paused']])$(id).onclick=()=>{ui[key]=!ui[key];syncToggleButtons();sync();drawDirty=true;beep();};
+$('moreBtn').onclick=openMore;$('whyBtn').onclick=openWhy;$('teacherBtn').onclick=openTeacher;$('realBtn').onclick=openReal;$('resetBtn').onclick=()=>{state=copy(INITIAL);ui.lock=false;ui.selected=0;ui.cut=ui.rays=true;ui.normals=ui.bundle=false;ui.paused=false;apply({});syncToggleButtons();toast('已恢复初始方案，已保存的记录不变')};
+$('saveBtn').onclick=captureRecord;$('recordsBtn').onclick=openRecords;$('materialApplyBtn').onclick=()=>{setTab('lab');toast('已应用材料组合，角度与位置保持不变')};$('useApplications').onclick=()=>{try{localStorage.setItem('periscope_submitted_design_v2',JSON.stringify(state))}catch(e){}setTab('situations');toast('已把当前材料、镜角和镜距带入情境')};$('matSolid').onclick=()=>{previewCut=false;$('matSolid').classList.add('active');$('matCut').classList.remove('active');threeDirty=true};$('matCut').onclick=()=>{previewCut=true;$('matCut').classList.add('active');$('matSolid').classList.remove('active');threeDirty=true};
+$('inspectOwnDesign').onclick=()=>{setTab('structure');set3d('cut')};
+$('soundBtn').onclick=()=>{ui.sound=!ui.sound;$('soundBtn').textContent='声音：'+(ui.sound?'开':'关');$('soundBtn').setAttribute('aria-pressed',ui.sound);beep();};
+$('fullBtn').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else toast('此浏览器不支持页面全屏，请使用浏览器全屏模式')}catch(e){toast('全屏请求被浏览器阻止，请使用浏览器全屏模式')}};
+let draggingMirror=null;
+$('labCanvas').addEventListener('pointerdown',e=>{if(!ui.cut)return;const rect=e.currentTarget.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top;const near=mirrorHandles.reduce((best,p)=>{const d=Math.hypot(p.x-x,p.y-y);return d<best.d?{...p,d}:best},{d:30});if(near.i!==undefined){draggingMirror=near.i;ui.selected=near.i;e.currentTarget.setPointerCapture(e.pointerId);sync();drawDirty=true}});
+$('labCanvas').addEventListener('pointermove',e=>{if(draggingMirror===null||!labMap)return;const r=e.currentTarget.getBoundingClientRect(),x=(e.clientX-r.left-labMap.ox)/labMap.scale,y=(e.clientY-r.top-labMap.oy)/labMap.scale-(draggingMirror?state.length:0);let a=Math.atan2(y,x)/RAD;a=(a+180)%180;a=clamp(Math.round(a),15,75);setAngle(draggingMirror?'a2':'a1',a);});
+['pointerup','pointercancel'].forEach(name=>$('labCanvas').addEventListener(name,e=>{if(draggingMirror!==null){draggingMirror=null;beep();try{e.currentTarget.releasePointerCapture(e.pointerId)}catch(err){}}}));
+document.addEventListener('keydown',e=>{const dialog=document.querySelector('[role=dialog]');if(dialog){if(e.key==='Escape'){closeModal();return;}if(e.key==='Tab'){const f=[...dialog.querySelectorAll('button:not([disabled]),input,select,a[href]')].filter(x=>x.getClientRects().length);if(!f.length)return;if(e.shiftKey&&document.activeElement===f[0]){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&document.activeElement===f[f.length-1]){e.preventDefault();f[0].focus()}}}});
+window.addEventListener('resize',()=>{drawDirty=threeDirty=eyeDirty=true});document.addEventListener('fullscreenchange',()=>{$('fullBtn').textContent=document.fullscreenElement?'退出全屏':'全屏';drawDirty=threeDirty=eyeDirty=true});
+function frame(t){const dt=Math.min((t-lastFrame)/1000,.1)||0;lastFrame=t;if(!ui.paused)clock+=dt;
+ if(ui.tab==='lab'){if(eyeDirty)drawEye();if(drawDirty||(!ui.paused&&ui.rays))drawLab();}
+ if(ui.tab==='structure'){let de=ui.explode-structureExplosion;if(Math.abs(de)>.05){structureExplosion+=de*Math.min(dt*13,1);threeDirty=true;}else if(structureExplosion!==ui.explode){structureExplosion=ui.explode;threeDirty=true;}if(threeDirty){drawStructure($('structureCanvas'));threeDirty=false;}}
+ if(ui.tab==='materials'&&threeDirty){drawStructure($('materialCanvas'),true);threeDirty=false;}
+ if(ui.tab==='situations'&&window.Practice)Practice.frame(t);requestAnimationFrame(frame);
+}
+bindStructure();makeOptions();apply({});syncToggleButtons();updatePartDetails();if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ui.paused=true;syncToggleButtons();}requestAnimationFrame(frame);
+// Test hooks for physics/regression verification; not used by normal interaction.
+window.PeriscopeLab={getState:()=>copy(state),getUI:()=>copy(ui),getResult:()=>copy(result),getViewStats:()=>copy(viewStats),trace,forward,evaluate,apply,preset,setTab,set3d,getRecords:()=>copy(records)};
+
+window.RevisionData={tubes:TUBES,mirrors:MIRRORS,mounts:MOUNTS,linings:LININGS};
+/* Flat application practice. Two independent drag targets; all scenes use the
+   student's exact mirror, tube, mounting and length state. Scene positions use
+   a single coordinate map for drawing, hit testing and geometric ray tests. */
+(function(){'use strict';
+ const CW=960,CH=600,S=4;
+ const scenes={
+  hide:{name:'躲猫猫',short:'藏好自己，看向窗外',title:'藏在窗台后，找到小伙伴',task:'拖动潜望镜绕过窗台，再把小人的眼睛移到观察孔旁。',dir:-1,
+   start:{person:[157,424],device:[372,474]},ideal:[450,431],bounds:[85,434,337,458],ground:555,target:[784,287],radius:26,
+   walls:[{x:488,y:330,w:28,h:225,name:'窗台下方的墙'}],note:'让人留在窗台后面，借助高处的进光口观察。'},
+  turtle:{name:'观察乌龟进食',short:'进光口伸到水里',title:'把进光口伸入水中，观察小乌龟',task:'上面的观察孔留在缸外；下面的进光口需要伸入水中。',dir:1,
+   start:{person:[180,327],device:[383,273]},ideal:[570,266],bounds:[80,475,240,420],ground:558,target:[782,410],radius:21,
+   tank:{x:522,y:300,w:369,h:204,water:342},walls:[{x:518,y:300,w:9,h:207,name:'鱼缸左侧玻璃'},{x:886,y:300,w:9,h:207,name:'鱼缸右侧玻璃'},{x:518,y:499,w:378,h:9,name:'鱼缸底部'}],
+   note:'入水段按封闭观察窗、筒内保持空气作示意。普通纸筒和开口装置不能据此直接入水；防水性能不作合格判定。'},
+  water:{name:'看水面上的风景',short:'眼睛低处，进光口出水',title:'人在低处，看见水面上的浮标',task:'将整个进光口升到水面上方，让水下小人的眼睛靠近观察孔。',dir:-1,
+   start:{person:[165,439],device:[375,499]},ideal:[422,419],bounds:[100,418,367,484],ground:560,target:[778,275],radius:26,walls:[],water:330,
+   note:'仅限屏幕模拟。潜望镜不是呼吸管或潜水装备，不能照图下水练习；筒内保持空气为模型假设。'},
+  drain:{name:'检查下水道',short:'人在地面，观察低处',title:'留在地面外，查看管道里的堵塞',task:'从已有的观察通道放下潜望镜，小人的眼睛仍留在地面上方。',dir:1,
+   start:{person:[171,224],device:[378,236]},ideal:[563,235],bounds:[80,473,134,243],ground:306,target:[778,379],radius:26,
+   walls:[{x:0,y:307,w:510,h:293,name:'左侧土层'},{x:610,y:307,w:350,h:38,name:'管道上方的土层'},{x:610,y:492,w:350,h:108,name:'管道下方的土层'},{x:510,y:492,w:100,h:108,name:'观察通道底部'}],
+   note:'仅限屏幕模拟。不要打开井盖、靠近敞口或进入下水道；画面中的通道是为了理解光路而剖开的示意。'}
+ };
+ let key='hide',poses={},selected='person',rays=false,hint=false,drag=null,dirty=true,signature='',mapping=null,report=null,lastEval='',done=new Set(),initialized=false;
+ const cv=document.getElementById('practiceCanvas'),eyeCV=document.getElementById('practiceEye');
+ const el=id=>document.getElementById(id);
+ const rect=(c,x,y,w,h,r=0,fill,stroke,lw=1)=>{c.beginPath();c.roundRect(x,y,w,h,r);if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=lw;c.stroke()}};
+ const disk=(c,x,y,r,fill,stroke,lw=1)=>{c.beginPath();c.arc(x,y,r,0,Math.PI*2);if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=lw;c.stroke()}};
+ const line=(c,pts,stroke='#647d86',lw=2,fill=null,close=false)=>{c.beginPath();pts.forEach((p,i)=>i?c.lineTo(...p):c.moveTo(...p));if(close)c.closePath();if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=lw;c.lineCap='round';c.lineJoin='round';c.stroke()}};
+ const shape=(c,d,fill,stroke=null,lw=2)=>{let p=new Path2D(d);if(fill){c.fillStyle=fill;c.fill(p)}if(stroke){c.strokeStyle=stroke;c.lineWidth=lw;c.lineCap='round';c.lineJoin='round';c.stroke(p)}};
+ function text(c,t,x,y,size=18,col='#365b67',weight=500,align='left'){c.font=`${weight} ${size}px system-ui,"Microsoft YaHei","Noto Sans CJK SC",sans-serif`;c.fillStyle=col;c.textAlign=align;c.textBaseline='middle';c.fillText(t,x,y)}
+ function tag(c,t,x,y,kind='neutral'){c.font='650 16px system-ui,"Microsoft YaHei"';let w=c.measureText(t).width+24;rect(c,x,y-16,w,32,8,kind==='teal'?'#e4f5f2':kind==='gold'?'#fff2d7':'#ffffffee',kind==='teal'?'#9dcfc5':kind==='gold'?'#dfc185':'#d2e1e4');text(c,t,x+12,y,16,kind==='gold'?'#97712c':'#406974',650);return {x,y:y-16,w,h:32};}
+ function arrows(c,points,col='#e8aa32',lw=3){line(c,points,col,lw);for(let j=1;j<points.length;j++){let a=points[j-1],b=points[j],d=Math.hypot(b[0]-a[0],b[1]-a[1]);if(d<25)continue;let t=Math.atan2(b[1]-a[1],b[0]-a[0]),m=[a[0]+(b[0]-a[0])*.6,a[1]+(b[1]-a[1])*.6];line(c,[[m[0]-9*Math.cos(t-.42),m[1]-9*Math.sin(t-.42)],m,[m[0]-9*Math.cos(t+.42),m[1]-9*Math.sin(t+.42)]],col,lw);}}
+ function pose(){if(!poses[key])poses[key]={person:{x:scenes[key].start.person[0],y:scenes[key].start.person[1]},device:{x:scenes[key].start.device[0],y:scenes[key].start.device[1]},dir:scenes[key].dir};return poses[key]}
+ function design(){return PeriscopeLab.getState()}
+ function map(p,s=design(),q=pose()){return [q.device.x+p[0]*S,q.device.y+q.dir*p[1]*S]}
+ function unmap(p,q=pose()){return [(p[0]-q.device.x)/S,(p[1]-q.device.y)/(q.dir*S),0]}
+ function portPoints(s=design(),q=pose()){return {out:map([-GEO.arm,0],s,q),in:map([GEO.arm,s.length],s,q)}}
+ function intersectSegmentRect(a,b,r){let lo=0,hi=1;for(let k=0;k<2;k++){let d=b[k]-a[k],min=k?r.y:r.x,max=min+(k?r.h:r.w);if(Math.abs(d)<1e-9){if(a[k]<=min+.03||a[k]>=max-.03)return false;}else{let t1=(min-a[k])/d,t2=(max-a[k])/d;if(t1>t2)[t1,t2]=[t2,t1];lo=Math.max(lo,t1);hi=Math.min(hi,t2);if(hi<=lo)return false;}}return hi>1e-5&&lo<.99999;}
+ function hitBody(s,q){const h=GEO.half*S,A=GEO.arm*S,py=q.device.y,iy=py+q.dir*s.length*S,x=q.device.x;const parts=[{x:x-A,y:py-h,w:A+h,h:2*h},{x:x-h,y:Math.min(py,iy)-h,w:2*h,h:Math.abs(iy-py)+2*h},{x:x-h,y:iy-h,w:A+h,h:2*h}];return scenes[key].walls.find(r=>parts.some(a=>a.x+2<r.x+r.w&&a.x+a.w-2>r.x&&a.y+2<r.y+r.h&&a.y+a.h-2>r.y))||null;}
+ function reflected(p,m){return V.sub(p,V.mul(m.n,2*V.dot(V.sub(p,m.p),m.n)))}
+ function opticalTest(s,q){
+  const cfg=scenes[key],origin=unmap([q.person.x,q.person.y],q),ms=[mirrorData(0,s),mirrorData(1,s)],test=[],valid=[],blocked=[];
+  let firstFailure=null;
+  for(let j=0;j<17;j++){
+   const ty=cfg.target[1]+(j-8)/8*cfg.radius,target=unmap([cfg.target[0],ty],q);
+   if(target[0]<GEO.arm+1)continue;
+   let image=reflected(reflected(target,ms[1]),ms[0]),d=V.norm(V.sub(image,origin));
+   if(d[0]<=0)continue;
+   const r=PeriscopeLab.trace(origin,d,s,{reverse:true,skipObstacle:true});test.push(r);if(!firstFailure)firstFailure=r;
+   if(r.end!=='target'||r.hits.length!==2||r.hits[0].i!==0||r.hits[1].i!==1||r.d[0]<=0)continue;
+   let p=r.hits[1].p,dist=(target[0]-p[0])/r.d[0];if(dist<=0)continue;
+   let end=V.add(p,V.mul(r.d,dist)),worldEnd=map(end,s,q);
+   if(Math.abs(worldEnd[1]-cfg.target[1])>cfg.radius+3)continue;
+   let pts=[[q.person.x,q.person.y],map(r.hits[0].p,s,q),map(r.hits[1].p,s,q),worldEnd];
+   const block=cfg.walls.find(ob=>pts.slice(1).some((b,i)=>intersectSegmentRect(pts[i],b,ob)));
+   if(block){blocked.push(block);continue}valid.push({r,pts,y:worldEnd[1],distance:Math.abs(worldEnd[1]-cfg.target[1])});
+  }
+  valid.sort((a,b)=>a.distance-b.distance);return {count:valid.length,samples:17,path:valid[0]?.pts||null,trace:valid[0]?.r||firstFailure,block:blocked[0]||null,min:valid.length?Math.min(...valid.map(x=>x.y)):null,max:valid.length?Math.max(...valid.map(x=>x.y)):null};
+ }
+ function check(){
+  const s=design(),q=pose(),cfg=scenes[key],pp=portPoints(s,q),ap=GEO.aperture*S,gap=pp.out[0]-q.person.x,eyediff=Math.abs(pp.out[1]-q.person.y),near=gap>=3&&gap<=52&&eyediff<=ap;
+  const collider=hitBody(s,q),direction=q.dir===cfg.dir;let place=direction&&!collider,why='';
+  if(!direction)why=cfg.dir===1?'这个情境需要从低处进光，试试“上下翻转”。':'这个情境需要从高处进光，试试“上下翻转”。';
+  else if(collider)why='潜望镜碰到了'+collider.name+'，把装置移到通畅的空间。';
+  if(key==='turtle'){
+   const t=cfg.tank,under=pp.in[1]-ap>t.water+1&&pp.in[1]+ap<t.y+t.h-7&&pp.in[0]>t.x+10&&pp.in[0]<t.x+t.w-12;
+   if(!under){place=false;if(!why)why='下方进光口还没有完整伸到水里。把装置移到缸内水面以下。';}
+  } else if(key==='water'){
+   if(pp.in[1]+ap>=cfg.water-1){place=false;if(!why)why='进光口还没有全部露出水面，请升高潜望镜。';}
+  } else if(key==='hide'){
+   if(pp.in[1]+ap>330){place=false;if(!why)why='进光口仍低于窗台，需要把潜望镜抬高一些。';}
+   if(q.person.y<362){place=false;if(!why)why='先把自己藏到窗台后面，再借助潜望镜观察。';}
+  } else if(key==='drain'){
+   if(pp.in[1]-ap<345||pp.in[1]+ap>492||pp.in[0]<612){place=false;if(!why)why='让低处的进光口到达管道内部，不要插在土层里。';}
+  }
+  const optics=opticalTest(s,q),optical=optics.count>0,success=near&&place&&optical;
+  const rough=s.mirror==='wrinkle'||s.mirror==='foil',leak=s.tube==='clear'&&s.lining!=='black';let title,desc;
+  if(success){title='位置正确，目标进入视野';desc=rough?'位置与通道已接通，但铝箔不够平整。可以返回换镜片，再比较轮廓。':leak?'位置正确；透明筒壁没有充分遮光，可以继续比较有无杂光的区别。':'光从进光口进入，经过两面镜子，最后到达小人的眼睛。';}
+  else if(!place){title=key==='turtle'&&direction&&!collider?'把进光口伸到水里':'先摆好潜望镜';desc=why;}
+  else if(!near){title='再移动小人，靠近观察孔';desc='潜望镜已经放到可用的位置。把小人的眼睛移近左侧的观察孔。';}
+  else {title='位置接近，再检查光路';desc=optics.block?'来光被'+optics.block.name+'挡住，可继续微调位置。':optics.trace?.end==='back'?'有光照到镜片背面，请到光路页检查镜片正反面。':'目标光线没有顺利经过两面镜子。先微调眼睛或装置，再检查镜角。';}
+  const old=report?.success;report={near,place,optical,success,title,desc,why,collider:collider?.name||null,entry:pp.in,outlet:pp.out,gap,eyediff,rough,leak,optics};
+  if(success){done.add(key);if(!old&&ui.sound)beep('success')}
+  updateInfo(s);return report;
+ }
+ function setCheck(id,yes,t){el(id).className=yes?'pass':'';el(id).innerHTML='<i>'+ (yes?'✓':'○')+'</i><span>'+t+'</span>'}
+ function updateInfo(s){
+  el('practiceStatus').className='practice-status'+(report.success?' good':'');el('practiceStatusTitle').textContent=report.title;el('practiceStatusText').textContent=report.desc;
+  setCheck('checkEye',report.near,'眼睛靠近观察孔');setCheck('checkEntry',report.place,key==='turtle'?'进光口完整伸入水中':key==='water'?'进光口完整露出水面':'装置位于合适的通道');setCheck('checkRay',report.optical,'目标光线到达眼睛');
+  el('practiceDesign').innerHTML=TUBES[s.tube].name+' · '+MIRRORS[s.mirror].name+'<br>'+MOUNTS[s.mount].name+' · '+LININGS[s.lining].name+'<br>上镜 '+s.a1+'° / 下镜 '+s.a2+'° · 镜距 '+s.length+' cm';
+  el('practiceProgress').textContent='已完成 '+done.size+' / 4 个情境';document.querySelectorAll('[data-practice-scene]').forEach(b=>b.classList.toggle('done',done.has(b.dataset.practiceScene)));
+ }
+ // ---------- Illustrated flat scenes. All props share the interaction coordinates. ----------
+ function cloud(c,x,y,s=1){c.save();c.translate(x,y);c.scale(s,s);shape(c,'M-39 10Q-43-8-24-8Q-17-30 2-19Q22-29 30-6Q50-5 47 10Z','#ffffffbd');c.restore();}
+ function plant(c,x,y,s=1){c.save();c.translate(x,y);c.scale(s,s);line(c,[[0,0],[-5,-70]],'#6e9e85',4);shape(c,'M-4-31Q-53-31-45-65Q-12-69-4-31Z','#93b6a0');shape(c,'M-5-54Q28-94 39-62Q31-35-5-54Z','#6fa08b');shape(c,'M-7-67Q-40-91-15-105Q5-91-7-67Z','#b1c8a6');shape(c,'M-23 0H23L18 42H-17Z','#d3aa82','#bb9875');line(c,[[-24,0],[24,0]],'#e8c8a4',7);c.restore();}
+ function backdrop(c){
+  rect(c,0,0,CW,CH,0,'#f5f8f5');
+  if(key==='hide'){
+   rect(c,0,0,488,555,0,'#f5efe3');rect(c,516,0,444,555,0,'#dceef4');cloud(c,720,83,1.4);cloud(c,904,148,.85);
+   shape(c,'M516 331Q605 258 707 311Q810 247 960 302V555H516Z','#b8d6b5');shape(c,'M516 394Q679 349 782 381Q874 341 960 380V555H516Z','#91b999');
+   rect(c,26,55,426,183,12,'#fffcf6','#e3d7c4',2);rect(c,47,78,165,134,4,'#d6eaf0');rect(c,228,78,201,134,4,'#cce3e8');line(c,[[220,78],[220,212]],'#d4b98e',12);line(c,[[49,167],[428,167]],'#ffffffbd',5);
+   rect(c,67,264,165,78,7,'#f8fbf1','#dedccb');text(c,'科学活动室',149,302,23,'#8da28e',650,'center');
+   rect(c,488,330,28,225,0,'#b5c1bd');rect(c,478,322,50,12,3,'#cfaf85','#bd9e75');for(let y=367;y<550;y+=39){line(c,[[489,y],[514,y]],'#94a9a7',1)}
+   rect(c,0,555,960,45,0,'#d7e3d3');line(c,[[0,555],[960,555]],'#b8ccb7',2);plant(c,78,513,.72);targetArt(c,784,287,1);
+   tag(c,'窗台',521,346);text(c,'室内',314,70,16,'#afaa97',600);text(c,'窗外',907,70,16,'#779697',600,'right');
+  } else if(key==='turtle'){
+   rect(c,0,0,960,558,0,'#f0f6f4');rect(c,39,64,336,145,9,'#e1edf0','#d2e3e6');cloud(c,128,106,.8);shape(c,'M40 179Q159 116 231 158Q324 110 375 161V208H40Z','#b5d0bc');line(c,[[206,65],[206,207]],'#f8fbf8',8);
+   text(c,'自然观察角',145,238,20,'#769789',650,'center');rect(c,0,558,960,42,0,'#dce5d8');plant(c,90,513,.83);
+   rect(c,497,506,417,22,5,'#b99a7b','#a08469',1.5);rect(c,537,528,20,64,3,'#c7aa8c');rect(c,858,528,20,64,3,'#c7aa8c');
+   rect(c,522,300,369,204,4,'#fafdfe','#82b2b9',3);rect(c,528,342,357,155,0,'#a6dbe36e');rect(c,528,477,357,20,0,'#d8c8a1');
+   shape(c,'M528 478Q590 451 642 475Q699 449 746 468Q817 459 885 476V496H528Z','#d3c8a7');
+   for(let i=0;i<6;i++){disk(c,553+i*50,486+(i%2)*4,3,'#a7ac8f')}
+   for(let x of [847,863]){shape(c,`M${x} 477Q${x-24} 449 ${x-3} 430Q${x+13} 452 ${x} 477Z`,'#82b39b');line(c,[[x,477],[x-3,437]],'#6e9b80',2)}
+   targetArt(c,782,410,1);waterSurface(c,527,886,342);tag(c,'水面',795,324,'teal');
+   line(c,[[522,299],[891,299]],'#507e86',7);text(c,'入水段按封闭观察窗示意',704,553,14,'#78989b',500,'center');
+  } else if(key==='water'){
+   rect(c,0,0,960,330,0,'#d7eef7');cloud(c,152,92,1.25);cloud(c,485,148,.8);cloud(c,867,71,1.2);
+   shape(c,'M558 330L633 240L682 273L722 229L801 290L897 262L960 294V348Z','#a2c7b2');shape(c,'M572 330Q712 307 792 322Q879 311 960 324V344H572Z','#d9d2a8');
+   // A small lighthouse adds a legible horizon, not an aiming device.
+   shape(c,'M661 287L668 236H686L692 287Z','#f8f0dc','#92acaa',2);rect(c,663,225,27,17,3,'#8eb7bb','#577f8a');shape(c,'M659 225L677 210L695 225Z','#b8705f');
+   rect(c,0,330,960,270,0,'#91cedb');shape(c,'M0 442Q245 408 467 445Q688 408 960 438V600H0Z','#7fc0d1');shape(c,'M0 529Q233 502 482 534Q730 508 960 530V600H0Z','#6faebe');
+   for(let b of [[606,441,8],[623,416,4],[660,510,5],[503,565,7],[129,546,4]])disk(c,...b,'#b1e0e366','#c5ebed',1.3);
+   targetArt(c,778,275,1);waterSurface(c,0,960,330);tag(c,'水面',803,353,'teal');text(c,'仅限数字模拟',901,550,16,'#d5f0ee',600,'right');
+  } else {
+   rect(c,0,0,960,307,0,'#e7f0e9');shape(c,'M0 187Q134 147 303 188Q466 122 597 179Q802 132 960 176V301H0Z','#c5d8be');
+   rect(c,0,307,960,293,0,'#c7aa8b');for(let y=337;y<600;y+=46){line(c,[[0,y],[960,y+9]],'#b89a7a',1.1)}
+   rect(c,510,307,100,185,0,'#65818b');rect(c,525,307,70,190,0,'#354f5d');rect(c,604,345,356,147,0,'#63818d');rect(c,610,358,350,120,0,'#294b5b');
+   line(c,[[610,351],[960,351]],'#a0b4b8',3);line(c,[[610,485],[960,485]],'#a0b4b8',3);shape(c,'M610 460Q712 450 780 460Q875 447 960 458V476H610Z','#77a9ae');
+   rect(c,0,294,510,14,2,'#a6b5b1');rect(c,610,294,350,14,2,'#a6b5b1');line(c,[[0,295],[509,295]],'#dbe1d7',3);line(c,[[611,295],[960,295]],'#dbe1d7',3);
+   targetArt(c,778,379,1);tag(c,'剖面示意',28,567);tag(c,'已有观察通道',613,284);text(c,'地面',895,275,17,'#829c8d',600);text(c,'管道内部',914,519,17,'#967957',600,'right');
+  }
+ }
+ function waterSurface(c,x0,x1,y){c.save();c.strokeStyle='#f3ffffcb';c.lineWidth=3;c.beginPath();c.moveTo(x0,y);for(let x=x0;x<x1;x+=54)c.bezierCurveTo(x+14,y-4,x+37,y+4,Math.min(x+54,x1),y);c.stroke();c.restore();}
+ function targetArt(c,x,y,s=1){c.save();c.translate(x,y);c.scale(s,s);
+  if(key==='hide'){
+   // Friendly classmate: proportioned flat illustration, not a primitive 3D doll.
+   c.save();c.translate(0,9);shape(c,'M-16 92L-20 186L-7 186L1 127L8 186H22L20 89Z','#647f9d','#4f6b88',1.8);shape(c,'M-7 184Q-10 198-35 194Q-36 187-21 184Z','#3e6173');shape(c,'M21 184Q34 189 33 196H7L8 184Z','#3e6173');
+   shape(c,'M-23 28Q0 19 23 28L28 96Q4 112-29 96Z','#e9b854','#c69b44');shape(c,'M-23 31Q-38 41-46 68L-64 44L-73 49Q-57 106-38 94L-16 57Z','#e9b854','#c69b44');shape(c,'M-62 43Q-79 27-81 36L-75 50Z','#e7b694','#bd967c');shape(c,'M22 31Q37 45 38 75L49 86L42 94Q22 83 16 61Z','#e9b854','#c69b44');rect(c,-7,16,14,15,4,'#e5b08c');c.restore();
+   shape(c,'M-24-18Q-20-45 12-38Q31-30 30-5L34 5L27 9Q24 30 1 29Q-25 22-26 0Z','#e9bb96','#c7987b');shape(c,'M-26-2Q-38-46-5-53Q28-56 32-23Q11-16 0-31Q-8-16-26-2Z','#425b69');disk(c,-21,4,7,'#e3b18e');disk(c,17,0,2.5,'#365264');shape(c,'M9 14Q17 19 24 11',null,'#b27763',2);shape(c,'M14-10L22-11',null,'#526675',2);disk(c,19,10,4,'#dca18a66');
+  }else if(key==='turtle'){
+   shape(c,'M-38 31Q-46 44-62 36Q-63 27-45 21M20 32Q36 50 45 35Q45 27 30 19','#89ac75','#567f63',2);
+   shape(c,'M-45 13Q-69 8-73 21L-45 29Z','#91b480','#567f63',2);
+   shape(c,'M-46 19Q-56-27-12-36Q29-38 42 10Q39 36-8 40Q-40 39-46 19Z','#789d69','#507958',2.5);
+   shape(c,'M-15-28L10-18L17 4L-2 24L-25 12L-31-10Z','#92b17b','#597f5c',2);line(c,[[-31,-10],[-49,-3]],'#597f5c',2);line(c,[[10,-18],[23,-24]],'#597f5c',2);line(c,[[17,4],[38,4]],'#597f5c',2);line(c,[[-2,24],[-5,39]],'#597f5c',2);
+   shape(c,'M26 2Q48-15 66-3Q77 8 62 20Q46 28 33 19Z','#9eba86','#567f63',2);disk(c,63,4,3,'#365557');disk(c,63,3,1,'#fff');shape(c,'M67 13L72 11',null,'#58765b',1.4);
+   shape(c,'M82-7Q71-24 87-29Q90-44 101-34Q117-37 113-22Q110-8 89-3Z','#a8c585','#749966',1.6);line(c,[[85,-8],[101,-29]],'#789b65',1.4);disk(c,87,1,3,'#d1ab6b');
+   disk(c,-4,-65,4,'#cfeceda8','#a9d3d6',1);disk(c,12,-91,6,'#cfeced66','#a9d3d6',1);
+  }else if(key==='water'){
+   c.save();c.scale(1,.30);disk(c,0,127,38,'#b6eced33','#c5eeee',3);c.restore();
+   shape(c,'M-25 39L-14 15H15L26 39L17 51H-19Z','#d88c54','#ac6c43',2);rect(c,-6,-30,12,46,3,'#dca874','#ad875f',1.5);rect(c,-16,-36,32,15,4,'#e0985e','#ad754f',1.8);shape(c,'M-10-36L0-50L10-36Z','#c17252');line(c,[[-22,42],[21,42]],'#f2d6ad',3);
+  }else {
+   shape(c,'M-54 56L-39 26L-7 21L13 42L50 29L78 50L57 76H-39Z','#ae937d','#816f64',2);shape(c,'M-34 52L-23 38L-8 46L-14 62Z','#ccb5a0','#8c7967',1.3);shape(c,'M25 49L39 42L53 58L41 66Z','#bfaa95','#8c7967',1.3);
+   shape(c,'M-52 17Q-10-23 24 19Q57-15 78 1L65 27Q37 48 15 33Q-14 14-43 34Z','#86a3a0','#5d7e82',2);shape(c,'M-28 4L-17 27L3 6L15 31L40 12',null,'#c1d0c5',2);
+   shape(c,'M-8 28L-2-19L17-22L25 4L19 28Z','#c99c73','#967556',1.5);line(c,[[0,-9],[18,-12]],'#e6d3b1',5);
+  }c.restore();
+ }
+ function actor(c,p,cfg,ghost=false){
+  const selectedNow=selected==='person'&&!ghost;const x=p.x,y=p.y,ground=cfg.ground;
+  c.save();if(ghost)c.globalAlpha=.24;
+  if(key==='water'){
+   c.translate(x,y);shape(c,'M-73 17Q-111 42-174 42L-231 65L-241 54L-187 22L-118-8Z','#668faf','#456d8a',2);shape(c,'M-181 36L-204 63L-242 49L-237 33Z','#3b7489','#315d72');shape(c,'M-243 51L-278 70L-263 45L-248 38Z','#77a993','#467f77',2);shape(c,'M-82-10Q-51-22-34 12L-10 33L-18 40L-50 24Z','#ecd0ac','#b69b81',2);shape(c,'M-110-9Q-86-27-66-10L-58 13L-110 30Z','#edb34e','#ba9347',2);
+  }else{
+   c.translate(x,y);const gy=ground-y,hip=Math.max(59,Math.min(145,gy*.53));
+   // Knee position bends naturally when the eye is lowered; feet stay on the floor.
+   const crouch=gy<170,kx=crouch?13:-18,ky=(hip+gy)*.52;
+   line(c,[[-25,hip-2],[kx,ky],[-15,gy-8]],'#70849c',18);line(c,[[-48,hip-5],[-67,ky],[-54,gy-8]],'#607b93',18);
+   shape(c,`M-26 ${gy-13}Q-9 ${gy-16} 1 ${gy-5}L0 ${gy+1}H-32Z`,'#3c6379');shape(c,`M-66 ${gy-13}Q-49 ${gy-16}-37 ${gy-5}L-38 ${gy+1}H-72Z`,'#3c6379');
+   shape(c,`M-49 24Q-34 18-17 27L-9 ${hip}Q-36 ${hip+13}-62 ${hip-3}Z`,key==='drain'?'#e9b45b':'#72aab0',key==='drain'?'#c6984e':'#538993',2);
+   shape(c,`M-45 34Q-57 48-63 65L-28 79L-20 69L-46 54L-30 35Z`,key==='drain'?'#e9b45b':'#72aab0',key==='drain'?'#c6984e':'#538993',2);
+   shape(c,'M-28 78Q-9 89-7 79L-20 70Z','#e8bd9a','#ba987d',1.5);shape(c,'M-18 30Q-4 38-4 59L17 65L16 74Q-19 72-22 51Z',key==='drain'?'#e9b45b':'#72aab0',key==='drain'?'#c6984e':'#538993',2);
+   shape(c,'M16 64Q30 59 33 67L20 74L15 73Z','#e9be9a','#ba987d',1.5);rect(c,-35,14,17,15,4,'#e4b38f');
+   if(key!=='drain'){shape(c,'M-37 23L-29 38L-14 25L-24 47L-32 38L-38 41Z','#bf655a');}else{line(c,[[-20,48],[-18,hip-5]],'#f5e3b3',5);}
+  }
+  // Simple profile with a visible eye directed at the viewing opening.
+  shape(c,'M-49-13Q-48-39-24-39Q-5-37 2-19L5-5L14 4Q15 9 5 10L2 21Q-3 31-24 26Q-48 18-49-13Z','#efc8a5','#bca184',1.8);
+  shape(c,'M-49 1Q-64-33-38-47Q-8-59 6-27Q-10-12-26-26Q-30-6-49 1Z',key==='water'?'#4b7b96':'#3f5969');
+  disk(c,-43,4,7,'#e8ba96','#bf9b80',1.2);shape(c,'M-45 1Q-38-1-39 6',null,'#ba907a',1.2);disk(c,0,0,2.8,'#304f62');disk(c,.7,-.9,.8,'#fff');line(c,[[-6,-10],[1,-11]],'#496574',2);shape(c,'M-4 17Q2 20 5 15',null,'#bd8a74',1.5);disk(c,-7,9,4,'#e3ac9266');
+  if(key==='drain'){shape(c,'M-58-19Q-56-60-28-58Q2-56 6-21Z','#ebc36b','#c3a451',2);line(c,[[-60,-20],[13,-20]],'#bd9d4e',6);line(c,[[-29,-56],[-26,-24]],'#f7e0a0',5);}
+  if(key==='water'){rect(c,-12,-7,18,13,5,'#b0e0e9ba','#537e8e',2);line(c,[[-12,-3],[-45,-8]],'#527e8c',3);}
+  if(selectedNow){disk(c,0,0,11,null,'#2c99a4',1.7);disk(c,0,0,17,null,'#2c99a430',3)}c.restore();
+  if(!ghost&&hint){tag(c,'拖动小人',Math.max(14,x-97),key==='water'?y+64:Math.min(572,ground+19),'teal')}
+ }
+ function drawDevice(c,s,q,ghost=false){
+  c.save();if(ghost)c.globalAlpha=.23;let poly=channelOutline(s).map(p=>map(p,s,q)),col=TUBES[s.tube].color;
+  c.shadowColor='#2449571c';c.shadowBlur=10;c.shadowOffsetY=4;
+  line(c,poly,'#6b8590',2.2,col,true);c.shadowBlur=0;c.shadowOffsetY=0;
+  // Cut away a narrow front face: supports and the two mirror planes remain visible.
+  c.save();c.globalAlpha=s.tube==='clear'?.84:.35;line(c,poly,null,0,'#f3fbfc',true);c.restore();
+  for(const [a,b] of channelEdges(s)){const aa=map(a,s,q),bb=map(b,s,q);line(c,[aa,bb],s.lining==='black'?'#344550':shade(col,.74),3);}
+  if(s.lining==='seams'){for(const yy of [8,s.length-8]){let p0=map([-7,yy],s,q),p1=map([7,yy],s,q);line(c,[p0,p1],'#55666e',4)}}
+  const mc=s.mount==='glue'?'#dca14c':s.mount==='tape'?'#d7bb6e':s.mount==='clay'?'#ae86a2':'#a69071';
+  for(let i=0;i<2;i++){
+   let m=mirrorData(i,s),a=V.add(m.p,V.mul(m.t,-GEO.mirrorHalf)),b=V.add(m.p,V.mul(m.t,GEO.mirrorHalf)),off=V.mul(m.n,-1.1);line(c,[map(V.add(a,off),s,q),map(V.add(b,off),s,q)],mc,7);
+   line(c,[map(a,s,q),map(b,s,q)],'#668ba0',6);line(c,[map(V.add(a,V.mul(m.n,.3)),s,q),map(V.add(b,V.mul(m.n,.3)),s,q)],s.mirror==='wrinkle'?'#bbc7cb':'#eafcfd',3);
+   if(s.mirror==='foil'||s.mirror==='wrinkle')for(let k=-4;k<=4;k+=2){let p=map(V.add(m.p,V.mul(m.t,k)),s,q);line(c,[[p[0]-2,p[1]-3],[p[0]+3,p[1]+3]],'#829ba6',1.6)}
+  }
+  let pp=portPoints(s,q),ap=GEO.aperture*S;
+  for(const [p,co] of [[pp.out,'#258a99'],[pp.in,'#cf983c']]){line(c,[[p[0],p[1]-ap],[p[0],p[1]+ap]],'#294b5b',4);for(const zz of [-ap,ap])line(c,[[p[0]-4,p[1]+zz],[p[0]+4,p[1]+zz]],co,4);}
+  // The submerged inlet is a sealed viewing window in this teaching model.
+  if(key==='turtle')line(c,[[pp.in[0]+1,pp.in[1]-ap+3],[pp.in[0]+1,pp.in[1]+ap-3]],'#93d5df',3);
+  if(selected==='device'&&!ghost){c.save();c.setLineDash([6,5]);let mid=map([0,s.length/2],s,q);rect(c,mid[0]-36,mid[1]-24,72,48,11,null,'#268e9d',1.8);c.restore();}
+  c.restore();if(!ghost){tag(c,'观察孔',pp.out[0]-75,pp.out[1]-78,'teal');tag(c,'进光口',pp.in[0]+11,pp.in[1]-40,'gold');let mid=map([0,s.length/2],s,q);disk(c,mid[0],mid[1],9,'#ffffffdc','#92acb8',1);for(let dy of [-3,3])for(let dx of [-3,3])disk(c,mid[0]+dx,mid[1]+dy,1,'#6f939e');}
+ }
+ function renderHints(c,s){if(!hint)return;let cfg=scenes[key],ideal={device:{x:cfg.ideal[0],y:cfg.target[1]-cfg.dir*s.length*S},dir:cfg.dir};let ey=map([GEO.eyeX,s.eye],s,ideal);ideal.person={x:ey[0],y:ey[1]};drawDevice(c,s,ideal,true);actor(c,ideal.person,cfg,true);c.save();c.setLineDash([7,6]);disk(c,ey[0],ey[1],22,null,'#4aa396',2);c.restore();text(c,'浅色轮廓是位置提示，镜角仍需自行检查',30,31,16,'#759791');}
+
+ function obstaclePoint(a,b,r){let t0=0,t1=1;for(let j=0;j<2;j++){let delta=b[j]-a[j],lo=j?r.y:r.x,hi=lo+(j?r.h:r.w);if(Math.abs(delta)<1e-9){if(a[j]<=lo||a[j]>=hi)return null;}else{let u=(lo-a[j])/delta,v=(hi-a[j])/delta;if(u>v)[u,v]=[v,u];t0=Math.max(t0,u);t1=Math.min(t1,v);if(t1<=t0)return null;}}if(t1<=0||t0>=1)return null;return {t:Math.max(0,t0),p:[a[0]+(b[0]-a[0])*Math.max(0,t0),a[1]+(b[1]-a[1])*Math.max(0,t0)]};}
+ function renderRays(c,s,q,time){if(!rays||!report)return;
+  if(report.optics.path&&report.place){let p=[...report.optics.path].reverse(),cs=['#dca235','#2696b0','#3b9e79'];for(let i=1;i<p.length;i++){arrows(c,[p[i-1],p[i]],cs[i-1],3);if(!ui.paused){let t=(time*.00025+i*.17)%1,d=[p[i-1][0]+(p[i][0]-p[i-1][0])*t,p[i-1][1]+(p[i][1]-p[i-1][1])*t];disk(c,d[0],d[1],4,cs[i-1])}}}
+  else {const origin=unmap(scenes[key].target,q),dest=[0,s.length,0];let r=PeriscopeLab.trace(origin,V.sub(dest,origin),s,{skipObstacle:true});let cs=['#dba238','#309ab0','#319677'];for(let seg of r.segs){let a=map(seg.from,s,q),b=map(seg.to,s,q),nearest=null;for(const wall of scenes[key].walls){let hit=obstaclePoint(a,b,wall);if(hit&&(!nearest||hit.t<nearest.t))nearest=hit;}if(nearest)b=nearest.p;let extent=Math.hypot(b[0]-a[0],b[1]-a[1]);if(extent>1800)b=[a[0]+(b[0]-a[0])*1800/extent,a[1]+(b[1]-a[1])*1800/extent];arrows(c,[a,b],cs[Math.min(seg.level,2)],2.4);if(nearest||seg.kind==='wall'||seg.kind==='back'){disk(c,b[0],b[1],9,'#ffe9e1','#ce8573',2);line(c,[[b[0]-3,b[1]-3],[b[0]+3,b[1]+3]],'#c27967',1.5);line(c,[[b[0]-3,b[1]+3],[b[0]+3,b[1]-3]],'#c27967',1.5);break;}}}
+ }
+ function draw(time){const b=cv.getBoundingClientRect();if(b.width<2||b.height<2)return;const d=Math.min(devicePixelRatio||1,2),w=Math.round(b.width*d),h=Math.round(b.height*d);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}
+  const c=cv.getContext('2d');c.setTransform(d,0,0,d,0,0);c.fillStyle='#f5f8f5';c.fillRect(0,0,b.width,b.height);const sc=Math.min(b.width/CW,b.height/CH),ox=(b.width-CW*sc)/2,oy=(b.height-CH*sc)/2;mapping={sc,ox,oy};c.translate(ox,oy);c.scale(sc,sc);c.lineJoin='round';c.lineCap='round';
+  backdrop(c);const s=design(),q=pose();renderHints(c,s);drawDevice(c,s,q);actor(c,q.person,scenes[key]);renderRays(c,s,q,time);
+  if(drag){const p=drag.type==='person'?[q.person.x,q.person.y]:map([0,s.length/2],s,q);disk(c,p[0],p[1],23,null,'#52a3aa33',7)}
+  if(report?.success){tag(c,'✓ 位置正确',CW-169,42,'teal');}
+  else if(!hint){text(c,'拖动小人和潜望镜，找到能看见目标的位置',27,31,16,'#6c8b96');}
+  text(c,key==='turtle'?'目标：水里的小乌龟':key==='hide'?'目标：窗外的小伙伴':key==='water'?'目标：水面浮标':'目标：管道堵塞物',935,578,15,key==='water'?'#deefed':'#81918b',500,'right');
+ }
+ function drawEye(){const w=320,h=192,c=eyeCV.getContext('2d');c.clearRect(0,0,w,h);rect(c,0,0,w,h,0,'#112b3a');c.save();c.beginPath();c.roundRect(20,14,280,147,36);c.clip();
+  if(report?.success){rect(c,20,14,280,147,0,key==='hide'?'#d2e8e6':key==='turtle'?'#c5e6e9':key==='water'?'#d1eaf3':'#4c6b72');
+   if(key==='hide'){rect(c,20,105,280,60,0,'#abc8a2')}
+   if(key==='water'){rect(c,20,127,280,40,0,'#87c4cc')}
+   if(report.rough)c.filter=key==='turtle'&&design().mirror==='wrinkle'?'blur(4px)':design().mirror==='wrinkle'?'blur(4px)':'blur(1.5px)';
+   targetArt(c,key==='turtle'?137:160,key==='hide'?60:key==='drain'?68:92,key==='hide'?1.12:key==='drain'?1.36:key==='water'?1.5:1.35);c.filter='none';
+   if(report.leak){rect(c,20,14,280,147,0,'#e5f4e532')}
+   if(report.optics.count<8){let cover=25+(8-report.optics.count)*8;rect(c,20,14,280,cover,0,'#112b3ab8')}
+  }else{rect(c,20,14,280,147,0,'#213e4f');c.strokeStyle='#6a929b';c.lineWidth=2;c.beginPath();c.arc(160,74,23,0,Math.PI*2);c.stroke();line(c,[[177,91],[189,103]],'#6a929b',3);text(c,'目标尚未进入视野',160,127,17,'#b4ccd4',500,'center');}
+  c.restore();rect(c,20,14,280,147,36,null,'#527987',1.5);text(c,report?.success?(report.rough?'位置接通 · 轮廓需改善':'目标观察示意'):'先摆位置，再观察',160,179,12,'#96b8c4',500,'center');
+ }
+ function frame(t){if(!initialized)return;const sig=JSON.stringify({k:key,q:pose(),s:design(),sel:selected,h:hint,r:rays,w:cv.clientWidth,hh:cv.clientHeight});if(sig!==signature){signature=sig;dirty=true;}if(dirty){check();drawEye();draw(t);dirty=false;}else if(rays&&!ui.paused)draw(t);}
+ function point(e){const b=cv.getBoundingClientRect();return [(e.clientX-b.left-mapping.ox)/mapping.sc,(e.clientY-b.top-mapping.oy)/mapping.sc]}
+ function setSelected(type){selected=type;['Person','Device'].forEach(s=>{let on=type===s.toLowerCase();el('select'+s).classList.toggle('active',on);el('select'+s).setAttribute('aria-pressed',on)});dirty=true;}
+ function move(type,x,y){const q=pose(),s=design(),cfg=scenes[key];if(type==='person'){const [a,b,c,d]=cfg.bounds;q.person.x=clamp(x,a,b);q.person.y=clamp(y,c,d);}else{let max=S*s.length;q.device.x=clamp(x,100,858);q.device.y=clamp(y,q.dir===1?65:65+max,q.dir===1?CH-40-max:CH-40);}dirty=true;}
+ function choose(k){if(!scenes[k])return;key=k;pose();hint=false;el('practiceHint').classList.remove('active');el('practiceHint').setAttribute('aria-pressed','false');report=null;signature='';dirty=true;
+  document.querySelectorAll('[data-practice-scene]').forEach(b=>b.classList.toggle('active',b.dataset.practiceScene===k));el('practiceTitle').textContent=scenes[k].title;el('practiceTask').textContent=scenes[k].task;el('practiceSafety').textContent=scenes[k].note;
+ }
+ function sceneIcon(k){const head='<svg class="scenario-icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">',end='</svg>';return head+({hide:'<rect x="9" y="8" width="29" height="24" rx="2" fill="#d8eaf0" stroke="#81aab4" stroke-width="2"/><path d="M8 32h31M23 8v24M9 20h28" stroke="#b69566" stroke-width="3"/><circle cx="16" cy="38" r="4" fill="#70a0a4"/>',turtle:'<path d="M7 13v27h35V13" fill="#cbe9eb" stroke="#7ab0b9" stroke-width="2"/><path d="M8 24h33" stroke="#78bbc3" stroke-width="2"/><ellipse cx="23" cy="33" rx="9" ry="6" fill="#8baa6e"/><circle cx="34" cy="31" r="4" fill="#a9bd87"/><path d="M19 28l6 3-3 7M15 36l-3 3M27 38l3 2" stroke="#567e5c" stroke-width="1.5"/>',water:'<path d="M6 27q5-4 10 0t10 0t10 0t7 0M6 34q5-4 10 0t10 0t10 0t7 0" stroke="#6aa9b6" stroke-width="2.5"/><path d="M18 25h14l-4-6h-6Z" fill="#d79f61"/><path d="M25 19V8" stroke="#c58a58" stroke-width="3"/><path d="M25 9l9 3-9 4Z" fill="#cc7864"/>',drain:'<path d="M5 17h13M30 17h13" stroke="#93aaa1" stroke-width="4"/><path d="M19 17v18h23M29 17v9h13" stroke="#799ba5" stroke-width="3"/><path d="M24 18v12h17" stroke="#c1dbde" stroke-width="4"/><path d="M32 29l5-7 6 7-2 6-9-1Z" fill="#c49f7d"/>'}[k])+end}
+ function save(){frame(performance.now());const out=document.createElement('canvas');out.width=1450;out.height=1020;const c=out.getContext('2d');rect(c,0,0,1450,1020,0,'#f3f7f7');text(c,'设计潜望镜 · '+scenes[key].name,35,50,30,'#1d4356',750);text(c,'我的位置练习：分别移动小人与潜望镜，再检验目标是否进入观察范围。',35,89,18,'#688793');let sc=Math.min(1000/cv.width,650/cv.height);rect(c,30,126,1020,650,18,'#fff','#d4e2e7');c.drawImage(cv,40+(1000-cv.width*sc)/2,126+(650-cv.height*sc)/2,cv.width*sc,cv.height*sc);c.drawImage(eyeCV,1080,143,340,204);text(c,'带来的设计',1080,392,23,'#267987',700);const s=design(),lines=[TUBES[s.tube].name,MIRRORS[s.mirror].name,MOUNTS[s.mount].name,LININGS[s.lining].name,`上镜 ${s.a1}° / 下镜 ${s.a2}°`,`镜距 ${s.length} cm`];lines.forEach((v,i)=>text(c,v,1080,436+i*41,17,'#527480'));text(c,report.title,35,822,27,report.success?'#247f6c':'#996b38',750);
+  function wrap(str,x,y,max){let line0='';for(let ch of str){if(c.measureText(line0+ch).width>max){c.fillText(line0,x,y);y+=28;line0=ch}else line0+=ch}if(line0)c.fillText(line0,x,y);return y}
+  c.font='18px system-ui,"Microsoft YaHei"';c.fillStyle='#5b7b87';c.textAlign='left';let yy=wrap(report.desc,35,867,1320);c.font='15px system-ui,"Microsoft YaHei"';c.fillStyle='#917754';wrap(scenes[key].note,35,yy+54,1350);out.toBlob(b=>{if(b){downloadBlob(b,'潜望镜_'+scenes[key].name+'_位置练习.png');toast('已保存当前作品和练习位置')}},'image/png');
+ }
+ function init(){if(initialized)return;initialized=true;el('practiceSceneButtons').innerHTML=Object.entries(scenes).map(([k,v])=>`<button class="practice-scene-button" data-practice-scene="${k}">${sceneIcon(k)}<span><strong>${v.name}</strong><small>${v.short}</small></span><i class="done-dot">✓</i></button>`).join('');document.querySelectorAll('[data-practice-scene]').forEach(b=>b.onclick=()=>choose(b.dataset.practiceScene));
+  el('selectPerson').onclick=()=>{setSelected('person');cv.focus()};el('selectDevice').onclick=()=>{setSelected('device');cv.focus()};el('practiceRays').onclick=()=>{rays=!rays;el('practiceRays').classList.toggle('active',rays);el('practiceRays').setAttribute('aria-pressed',rays);el('practiceRays').textContent=rays?'隐藏光路':'显示光路';dirty=true};
+  el('practiceHint').onclick=()=>{hint=!hint;el('practiceHint').classList.toggle('active',hint);el('practiceHint').setAttribute('aria-pressed',hint);dirty=true};el('practiceFlip').onclick=()=>{let q=pose(),cy=q.device.y+q.dir*design().length*S/2;q.dir*=-1;move('device',q.device.x,cy-q.dir*design().length*S/2);};
+  el('practiceReset').onclick=()=>{delete poses[key];choose(key);setSelected('person');};el('practiceInspect').onclick=()=>{PeriscopeLab.setTab('structure');PeriscopeLab.set3d('cut');};el('practiceImprove').onclick=()=>PeriscopeLab.setTab('materials');el('practiceSave').onclick=save;
+  cv.addEventListener('pointerdown',e=>{if(!mapping)return;const [x,y]=point(e),q=pose(),s=design();let mid=map([0,s.length/2],s,q);const inDevice=insidePoly(x,y,channelOutline(s).map(p=>map(p,s,q)))||Math.hypot(x-mid[0],y-mid[1])<30;const inHuman=key==='water'?x>=q.person.x-283&&x<=q.person.x+36&&y>=q.person.y-60&&y<=q.person.y+81:x>=q.person.x-84&&x<=q.person.x+36&&y>=q.person.y-65&&y<=scenes[key].ground+10;
+   let type=inDevice?'device':inHuman?'person':null;if(!type)return;setSelected(type);cv.focus({preventScroll:true});drag={type,x,y,start:{...q[type]}};cv.setPointerCapture(e.pointerId);e.preventDefault();dirty=true;});
+  cv.addEventListener('pointermove',e=>{if(!drag||!mapping)return;const p=point(e);move(drag.type,drag.start.x+p[0]-drag.x,drag.start.y+p[1]-drag.y);e.preventDefault();});
+  for(const k of ['pointerup','pointercancel','lostpointercapture'])cv.addEventListener(k,e=>{if(drag){drag=null;dirty=true;try{cv.releasePointerCapture(e.pointerId)}catch(err){}}});
+  cv.addEventListener('keydown',e=>{let ds={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(!ds)return;e.preventDefault();let p=pose()[selected],step=e.shiftKey?12:3;move(selected,p.x+ds[0]*step,p.y+ds[1]*step)});
+  choose('hide');
+ }
+ function refresh(){init();dirty=true;signature='';}
+ window.Practice={refresh,frame,choose,move:(type,x,y)=>{move(type,x,y);check();dirty=true;},getState:()=>({scene:key,pose:copy(pose()),design:design(),selected,hint,rays,completed:[...done],report:report?{near:report.near,place:report.place,optical:report.optical,success:report.success,title:report.title,why:report.why,inlet:report.entry,outlet:report.outlet,count:report.optics.count,path:report.optics.path,collision:report.collider}:null}),getMapping:()=>mapping,getConfig:()=>copy(scenes[key])};
+})();
+
+</script>
+</body></html>
