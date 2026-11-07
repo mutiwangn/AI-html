@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#137f79"><meta name="description" content="四年级上册《我们来做热气球》离线互动实验：步骤与观察、空气微粒解释、可画可写的活动记录。">
+<title>我们来做“热气球”｜互动实验室</title>
+<style>:root{--ink:#203b43;--muted:#6b7f85;--teal:#137f79;--teal-dark:#09635e;--teal-soft:#e8f5f1;--line:#dfe8e7;--paper:#fff;--bg:#f3f7f6;--blue:#338fdd;--hot:#e96150;--amber:#ac641e;--radius:20px;font-size:clamp(15px,1.08vw,18px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;-webkit-font-smoothing:antialiased}button,input,select,textarea{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button,a,input,textarea{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #e7a85b;outline-offset:3px}button{border:0;color:inherit}button:disabled{cursor:default;opacity:.42}button svg{width:1.2em;height:1.2em;flex-shrink:0}svg.icon{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}.hidden,[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.app{height:100vh;height:100dvh;min-height:570px;display:flex;flex-direction:column;overflow:hidden}.topbar{display:flex;align-items:center;gap:1.8rem;padding:1.15rem 1.65rem .95rem;background:#fff;border-bottom:1px solid var(--line);flex-shrink:0}.brand{display:flex;align-items:center;gap:.8rem;flex:1;min-width:0}.brand-mark{width:42px;height:48px;flex-shrink:0}.brand h1{font-size:1.65rem;letter-spacing:-.03em;margin:0;font-weight:750;white-space:nowrap}.brand p{margin:.25rem 0 0;color:var(--muted);font-size:.77rem;letter-spacing:.025em}.tabs{display:flex;align-items:center;gap:.25rem;padding:.3rem;background:#f0f5f3;border-radius:13px;flex-shrink:0}.tab{padding:.7rem .95rem;border-radius:9px;background:transparent;font-weight:650;font-size:.94rem;white-space:nowrap}.tab.active{color:var(--teal-dark);background:white;box-shadow:0 2px 5px #1c493d12}.utilities{display:flex;gap:.45rem}.icon-btn{width:2.5rem;height:2.5rem;display:inline-flex;align-items:center;justify-content:center;background:white;border:1px solid var(--line);border-radius:10px}.icon-btn:hover,.quiet-btn:hover{background:var(--teal-soft)}.icon-btn.selected{background:var(--teal-soft);border-color:#8dc7b9;color:var(--teal-dark)}
+.workspace{flex:1;min-height:0;display:flex;flex-direction:column;padding:.9rem 1.65rem .7rem;gap:.85rem}.checkpoints{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;flex-shrink:0}.checkpoint{position:relative;display:flex;align-items:center;gap:.75rem;text-align:left;padding:.7rem 1rem;border:1px solid #dfe7e5;border-radius:13px;background:#fff}.checkpoint.active{border-color:var(--teal);background:var(--teal-soft);box-shadow:inset 0 0 0 1px var(--teal)}.checkpoint:hover{border-color:#71b6a5}.cp-num{width:2rem;height:2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#eef3f2;color:#698780;font-weight:750;font-size:.85rem;flex-shrink:0}.active .cp-num{background:var(--teal);color:#fff}.cp-label{font-weight:720;font-size:1rem;line-height:1.3}.cp-detail{display:block;color:var(--muted);font-size:.73rem;font-weight:400;margin-top:.15rem}.cp-tick{margin-left:auto;color:var(--teal);font-size:.85rem;opacity:0}.checkpoint.seen .cp-tick{opacity:1}.lab-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(302px,27%);gap:1rem;flex:1;min-height:0}.scene-shell{display:flex;flex-direction:column;min-height:0;min-width:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.scene-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.4rem;padding:.6rem .85rem;border-bottom:1px solid #ecf0ee;min-height:3.3rem;flex-shrink:0}.scene-id{font-size:.84rem;font-weight:650;color:#53716d;display:flex;align-items:center;gap:.45rem}.live-dot{height:7px;width:7px;border-radius:100%;background:var(--teal)}.scene-id.paused .live-dot{background:#d49b45}.view-tools{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}.toggle{display:inline-flex;align-items:center;gap:.35rem;font-size:.8rem;border-radius:8px;padding:.42rem .55rem;background:#f4f6f5;color:#6a7e7c}.toggle.active{background:var(--teal-soft);color:var(--teal-dark)}.toggle.active .toggle-dot{background:var(--teal);border-color:var(--teal)}.toggle-dot{display:inline-block;width:.6rem;height:.6rem;border:1.5px solid #a3b5b0;border-radius:50%}.scene{position:relative;flex:1;min-height:245px;overflow:hidden;background:#fafffd}.scene canvas{display:block;width:100%;height:100%;position:absolute;inset:0}.scene-caption{position:absolute;left:1.2rem;top:1.05rem;pointer-events:none;max-width:55%;z-index:1}.scene-caption strong{display:block;font-size:1.3rem;font-weight:750;line-height:1.4}.scene-caption span{display:block;font-size:.84rem;margin-top:.3rem;color:var(--muted);line-height:1.5}.model-badge{position:absolute;top:1rem;right:1.1rem;color:#74877f;background:#ffffffd9;font-size:.68rem;padding:.35rem .55rem;border-radius:6px;pointer-events:none}.legend{position:absolute;left:1.2rem;bottom:.8rem;display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:#5b736c;background:#fffefa;border:1px solid #e7ede9;border-radius:9px;padding:.45rem .65rem;z-index:2;pointer-events:none}.legend i{height:.6rem;width:4.3rem;border-radius:5px;background:linear-gradient(90deg,#338fdd,#af78a1,#e96150)}.scene-note{position:absolute;bottom:.9rem;right:1.1rem;font-size:.69rem;color:#71867e;pointer-events:none}.touch-pop{position:absolute;left:50%;top:43%;transform:translate(-50%,-50%);background:#fffdf6;border:1px solid #e4c89a;box-shadow:0 7px 25px #4f472420;border-radius:16px;padding:.8rem 1.15rem;text-align:center;z-index:3;pointer-events:none;min-width:200px}.touch-pop strong{display:block;font-size:1.3rem;color:#966120}.touch-pop span{display:block;font-size:.73rem;color:#796d5d;margin-top:.3rem}.freeze-flag{position:absolute;left:50%;bottom:3rem;transform:translateX(-50%);background:#1b4943eb;color:white;padding:.55rem 1rem;border-radius:10px;font-size:.85rem;pointer-events:none;white-space:nowrap;z-index:2}.scene-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;padding:.75rem .9rem;border-top:1px solid var(--line);background:#fff;flex-shrink:0}.scene-actions{display:flex;gap:.5rem;align-items:center}.quiet-btn{display:inline-flex;align-items:center;justify-content:center;gap:.35rem;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.57rem .75rem;line-height:1.3;font-size:.85rem;white-space:nowrap}.quiet-btn.active{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}.speed-btn{font-size:.76rem;color:#657d75;border:0;background:#f4f7f5;padding:.4rem .6rem;border-radius:8px;min-width:3.4rem}.status-note{font-size:.73rem;color:#688077;display:flex;align-items:center;gap:.4rem}.status-note .dot{width:.5rem;height:.5rem;border-radius:50%;background:#73ae95;flex-shrink:0}
+.sidebar{background:#fff;border:1px solid var(--line);border-radius:var(--radius);display:flex;flex-direction:column;min-height:0;overflow:auto;scrollbar-width:thin}.side-content{padding:1.1rem 1.15rem .8rem;flex:1}.section-kicker{font-size:.75rem;color:var(--teal);font-weight:650;display:flex;justify-content:space-between;align-items:center}.section-kicker span{color:#89a49a;font-variant-numeric:tabular-nums}.side-heading{font-size:1.5rem;line-height:1.45;font-weight:760;margin:.5rem 0 .7rem;letter-spacing:-.025em}.action-copy{font-size:.93rem;line-height:1.85;margin:0 0 .75rem;color:#3e575b}.action-copy b{color:var(--teal-dark);font-weight:700}.step-line{display:flex;align-items:flex-start;gap:.55rem;margin:.45rem 0;line-height:1.65;font-size:.88rem}.step-line i{font-style:normal;flex-shrink:0;margin-top:.17rem;width:1.2rem;height:1.2rem;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#edf4f0;color:#4e7c6f;font-size:.7rem;font-weight:700}.small-heading{display:flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:650;color:#54786d;margin:1rem 0 .6rem}.observe-row{display:flex;gap:.55rem;align-items:flex-start;font-size:.9rem;line-height:1.65;margin:.45rem 0}.observe-row em{font-style:normal;font-size:.76rem;color:#5d8375;background:#eef6f1;border-radius:6px;flex-shrink:0;padding:.08rem .35rem;margin-top:.1rem}.observe-row span{flex:1}.touch-btn{font-size:.77rem;color:#846135;background:#fbf5e9;border:1px solid #eedfc5;display:flex;align-items:center;justify-content:center;width:100%;padding:.5rem .4rem;border-radius:9px;margin-top:.65rem;gap:.4rem}.reference-panel{border-top:1px dashed #dbe5df;margin-top:.9rem;padding-top:.8rem}.reference-label{display:flex;align-items:center;justify-content:space-between;font-size:.75rem;color:var(--muted);gap:.4rem}.text-link{padding:.15rem 0;border:0;background:transparent;color:var(--teal);font-weight:650;font-size:.79rem;display:inline-flex;align-items:center;gap:.25rem}.reference-body{font-size:.88rem;line-height:1.7;margin-top:.5rem;background:#f5f8f6;padding:.65rem .75rem;border-radius:10px}.ref-hint{font-size:.78rem;color:#869990;line-height:1.7;margin:.5rem 0}.side-bottom{padding:.85rem 1.1rem 1rem;border-top:1px solid var(--line);background:#fdfefd;position:sticky;bottom:0;z-index:4}.primary-btn{display:flex;gap:.5rem;align-items:center;justify-content:center;width:100%;padding:.82rem .85rem;min-height:3.1rem;background:var(--teal);color:#fff;font-size:1.08rem;font-weight:720;border-radius:12px;box-shadow:0 4px 8px #0f716f12}.primary-btn:hover{background:var(--teal-dark)}.primary-btn.warm{background:#cf7745}.primary-btn.warm:hover{background:#b76738}.secondary-actions{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-top:.65rem;min-height:1.5rem}.secondary-actions button{font-size:.77rem}.mini-safety{font-size:.69rem;line-height:1.55;color:#89704e;margin:.65rem 0 0}.page-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;color:#758780;font-size:.7rem;flex-shrink:0}.page-foot .text-link{font-size:.7rem;color:#677f73;font-weight:400}.page-foot span{line-height:1.5}.safety-mark{color:#aa7943}
+.micro-intro{font-size:.86rem;line-height:1.75;color:#53696b;margin:0 0 .7rem}.micro-chain{display:flex;flex-direction:column;gap:.55rem}.chain-line{display:flex;gap:.65rem;align-items:flex-start;line-height:1.65;font-size:.88rem}.chain-number{color:var(--teal);background:#e7f4ed;font-size:.73rem;font-weight:750;width:1.5rem;height:1.5rem;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:7px;margin-top:.1rem}.chain-line strong{font-weight:700;color:#264b43}.density-box{border-top:1px solid var(--line);margin-top:.85rem;padding-top:.8rem}.density-title{font-size:.77rem;color:#6a8177;line-height:1.5}.sample-canvas{display:block;width:100%;height:8.5rem}.micro-caveat{font-size:.72rem;line-height:1.6;color:#718579;margin:.45rem 0 0}.micro-switch{display:flex;gap:.3rem;border-radius:10px;background:#eef4f0;padding:.25rem;margin-bottom:.8rem}.micro-switch button{flex:1;background:transparent;border-radius:7px;padding:.5rem .3rem;font-size:.78rem;font-weight:650}.micro-switch button.active{background:#fff;color:var(--teal);box-shadow:0 1px 4px #1a453012}.micro-footer{display:flex;gap:.35rem;margin-top:.8rem}.micro-footer .quiet-btn{font-size:.73rem;flex:1;padding:.45rem .3rem}
+.record-workspace{flex:1;min-height:0;overflow:auto;padding:1.1rem 1.65rem 1.5rem;scrollbar-width:thin}.record-wrap{max-width:1520px;margin:0 auto}.record-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin:0 0 .8rem}.record-head h2{font-size:1.45rem;letter-spacing:-.03em;margin:0 0 .35rem}.record-head p{font-size:.82rem;color:var(--muted);line-height:1.65;margin:0}.record-head-actions{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:flex-end}.student-fields{display:flex;align-items:center;gap:1rem;padding:.7rem 1rem;background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:.8rem;flex-wrap:wrap}.student-fields label{font-size:.84rem;color:#577164;display:flex;gap:.5rem;align-items:center}.student-fields input{border:0;border-bottom:1px solid #bed1c7;width:8rem;border-radius:0;padding:.2rem .3rem;color:var(--ink);background:transparent;font-size:.88rem}.student-fields .save-state{margin-left:auto;font-size:.73rem;color:#708877}.notebook{border:1px solid #cfdfd6;border-radius:16px;overflow:hidden;background:#fff}.table-heading{display:grid;grid-template-columns:15% 40% 45%;background:#e7f1e8;border-bottom:1px solid #d2e1d6;color:#3b614a}.table-heading div{text-align:center;padding:.7rem .5rem;font-size:.9rem;font-weight:700;line-height:1.5}.table-heading div+div{border-left:1px solid #d2e1d6}.record-row{display:grid;grid-template-columns:15% 40% 45%;min-height:10.8rem;border-bottom:1px solid #e0e9e1;scroll-margin-top:1rem}.record-row:last-child{border-bottom:0}.record-row.highlight{box-shadow:inset 0 0 0 3px var(--teal)}.record-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem .5rem;background:#fafcf9;gap:.5rem}.record-stage .row-number{font-size:.72rem;letter-spacing:.1em;color:#8aab95}.record-stage b{font-size:.98rem;line-height:1.7}.record-stage button{font-size:.73rem;font-weight:500;color:#628f72}.draw-zone{position:relative;min-height:9.8rem;display:flex;flex-direction:column;border-left:1px solid #e0e9e1;overflow:hidden}.draw-canvas{flex:1;min-height:120px;max-height:210px;width:100%;display:block;touch-action:none;cursor:crosshair}.draw-tools{display:flex;gap:.4rem;align-items:center;padding:.3rem .55rem;border-top:1px dotted #e7eee6;min-height:1.9rem;background:#fff}.draw-tools span{font-size:.69rem;color:#8a9d8b;flex:1}.draw-tools button{font-size:.69rem;display:inline-flex;align-items:center;gap:.2rem;background:#f4f7f2;padding:.2rem .4rem;border-radius:5px}.record-inputs{padding:.8rem 1rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #e0e9e1;gap:.6rem}.temp-options{display:flex;gap:.35rem;flex-wrap:wrap}.temp-choice{border:1px solid #dde5dd;background:#fff;border-radius:8px;font-size:.83rem;padding:.4rem .6rem;white-space:nowrap}.temp-choice.selected{background:var(--teal-soft);border-color:var(--teal);color:var(--teal-dark);box-shadow:inset 0 0 0 1px var(--teal)}.record-inputs textarea{resize:vertical;width:100%;min-height:3.15rem;height:3.6rem;background:#fafbf9;border:1px solid #e5ebe2;border-radius:8px;padding:.5rem .65rem;line-height:1.6;font-size:.85rem;color:var(--ink)}textarea::placeholder{color:#a0aba0}.record-reference{font-size:.73rem;color:#866940;background:#fbf7e9;line-height:1.65;padding:.45rem .6rem;border-radius:7px}.finding-box{margin-top:.85rem;background:#fff;border:1px solid var(--line);border-radius:15px;padding:1rem 1.1rem;display:grid;grid-template-columns:8rem 1fr;gap:1rem}.finding-title{font-weight:700;font-size:1rem;padding-top:.4rem}.finding-content textarea{width:100%;min-height:4rem;resize:vertical;border:1px solid #dfe8dd;border-radius:10px;padding:.65rem .8rem;font-size:.93rem;line-height:1.75;color:var(--ink);background:#fbfcf9}.finding-ref{font-size:.84rem;line-height:1.8;background:#faf6e9;color:#77633d;padding:.6rem .8rem;border-radius:8px;margin-top:.5rem}.record-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.9rem;color:#829084;font-size:.74rem;line-height:1.65}
+.modal-backdrop{position:fixed;inset:0;z-index:80;background:#19372d70;backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:1.25rem}.modal{width:min(900px,94vw);max-height:92vh;overflow:auto;background:#fff;border-radius:22px;box-shadow:0 25px 80px #183e3430}.modal-head{position:sticky;top:0;z-index:1;background:white;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:1rem 1.35rem}.modal-head h2{font-size:1.25rem;margin:0}.modal-body{padding:1.25rem 1.4rem 1.5rem;font-size:.9rem;line-height:1.85}.modal-body h3{font-size:1rem;margin:1.2rem 0 .4rem}.modal-body h3:first-child{margin-top:0}.modal-body p{margin:.5rem 0}.modal-body .notice{border-left:4px solid #dba64e;background:#fff8e9;border-radius:4px 10px 10px 4px;padding:.8rem 1rem;line-height:1.8}.modal-body a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}.step-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.step-card{background:#f8fbf8;border-radius:14px;padding:.8rem;border:1px solid #e6eee7}.step-card svg{width:100%;height:160px;display:block}.step-card h3{font-size:.98rem;margin:.3rem 0 .5rem}.step-card p{font-size:.83rem;line-height:1.8}.compare-canvas{width:100%;height:290px;display:block;background:#f6faf7;border-radius:15px;margin:.8rem 0}.source-copy{font-size:.77rem;color:#657d71}.key{display:inline-block;font-size:.8rem;border:1px solid #d4ded5;border-bottom:3px solid #d4ded5;border-radius:5px;background:#fafcf8;padding:0 .4rem;margin:0 .2rem}.toast{position:fixed;z-index:120;bottom:2rem;left:50%;transform:translateX(-50%);background:#173f37f2;color:white;box-shadow:0 6px 28px #20492e33;border-radius:12px;padding:.75rem 1.25rem;max-width:90vw;text-align:center;font-size:.88rem;line-height:1.6;pointer-events:none}.toast.warning{background:#856437f5}.sr-status{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1800px){.lab-layout{grid-template-columns:minmax(0,1fr) 29%}.side-content{padding:1.3rem 1.4rem}.side-bottom{padding:1rem 1.4rem}.scene-caption{top:1.3rem;left:1.5rem}}
+@media(max-width:1190px){.topbar{gap:1rem;padding:.85rem 1.1rem}.brand h1{font-size:1.42rem}.brand-mark{width:32px;height:40px}.tab{padding:.65rem .7rem;font-size:.86rem}.utilities{gap:.3rem}.utilities .icon-btn{width:2.15rem;height:2.15rem}.workspace{padding:.7rem 1.1rem .55rem;gap:.65rem}.lab-layout{grid-template-columns:minmax(0,1fr) 295px;gap:.7rem}.side-content{padding:.9rem 1rem}.side-heading{font-size:1.35rem}.side-bottom{padding:.7rem 1rem}.scene-toolbar{padding:.5rem .65rem}.scene-id{font-size:.76rem}.toggle{font-size:.74rem;padding:.38rem .4rem}.checkpoint{padding:.65rem .75rem}.cp-label{font-size:.9rem}.cp-detail{font-size:.67rem}.scene-caption strong{font-size:1.16rem}.scene-caption span{font-size:.77rem}.quiet-btn{font-size:.78rem;padding:.5rem .58rem}.scene-footer{padding:.65rem}.status-note{font-size:.66rem}.status-note .status-detail{display:none}}
+@media(max-height:780px) and (min-width:901px){.topbar{padding-top:.75rem;padding-bottom:.7rem}.brand p{font-size:.7rem}.workspace{padding-top:.65rem;padding-bottom:.4rem;gap:.6rem}.checkpoint{padding-top:.5rem;padding-bottom:.5rem}.scene-toolbar{min-height:2.75rem}.side-content{padding-top:.8rem;padding-bottom:.65rem}.side-heading{margin:.3rem 0 .5rem}.action-copy{font-size:.88rem;margin-bottom:.5rem}.small-heading{margin:.7rem 0 .35rem}.observe-row{font-size:.84rem;margin:.35rem 0}.reference-panel{margin-top:.65rem;padding-top:.6rem}.reference-body{font-size:.8rem}.step-line{font-size:.84rem}.primary-btn{padding:.65rem .7rem;min-height:2.75rem;font-size:1rem}.side-bottom{padding-top:.65rem;padding-bottom:.7rem}.mini-safety{font-size:.65rem}.scene-footer{padding-top:.6rem;padding-bottom:.6rem}.sample-canvas{height:7rem}.micro-chain{gap:.35rem}.micro-intro{font-size:.79rem}.chain-line{font-size:.8rem}.micro-caveat{font-size:.68rem}}
+@media(max-width:900px){.app{height:auto;min-height:100dvh;overflow:visible}.topbar{flex-wrap:wrap;gap:.7rem;padding:.8rem 1rem}.brand{flex:1}.brand h1{font-size:1.38rem}.brand p{font-size:.68rem}.tabs{order:3;flex:1;justify-content:center}.tab{flex:1;font-size:.91rem}.utilities{margin-left:auto}.workspace{padding:.7rem .8rem .7rem;gap:.7rem}.checkpoints{gap:.4rem}.checkpoint{padding:.6rem .5rem;gap:.45rem;justify-content:center}.cp-num{height:1.65rem;width:1.65rem;font-size:.75rem}.cp-label{font-size:.8rem}.cp-detail{display:none}.cp-tick{display:none}.lab-layout{display:flex;flex-direction:column;gap:.8rem;flex:none}.scene-shell{height:580px;flex:none}.scene{min-height:300px}.sidebar{max-height:none;overflow:visible;display:grid;grid-template-columns:1fr 230px}.side-content{padding:1.05rem 1.2rem}.side-bottom{position:static;border-top:0;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;border-radius:0 20px 20px 0;padding:1rem}.secondary-actions{flex-wrap:wrap}.scene-caption strong{font-size:1.3rem}.scene-caption span{font-size:.85rem}.page-foot{align-items:flex-start;font-size:.68rem}.page-foot span{max-width:75%}.record-workspace{overflow:visible;padding:1rem}.record-head{align-items:flex-start}.record-head-actions{max-width:270px}.record-head h2{font-size:1.25rem}.record-head p{font-size:.76rem}.table-heading{grid-template-columns:16% 40% 44%}.record-row{grid-template-columns:16% 40% 44%;min-height:11rem}.record-inputs{padding:.6rem}.temp-choice{font-size:.78rem;padding:.35rem .45rem}.record-stage b{font-size:.9rem}.record-inputs textarea{font-size:.8rem}.finding-box{grid-template-columns:6rem 1fr}.student-fields{gap:.7rem}.student-fields input{width:6rem}}
+@media(max-width:560px){.topbar{gap:.6rem;padding:.7rem .8rem}.brand{gap:.5rem}.brand h1{font-size:1.18rem}.brand-mark{width:29px;height:36px}.brand p{font-size:.61rem}.utilities .icon-btn{width:1.95rem;height:1.95rem}.utilities{gap:.25rem}.utilities .fullscreen-button{display:none}.tab{font-size:.84rem;padding:.65rem .45rem}.checkpoint{gap:.28rem;border-radius:10px;padding:.6rem .25rem}.cp-num{width:1.35rem;height:1.35rem;font-size:.63rem}.cp-label{font-size:.73rem}.workspace{padding:.55rem .55rem;gap:.55rem}.checkpoints{gap:.3rem}.scene-shell{height:480px;border-radius:15px}.scene-toolbar{padding:.5rem .6rem;gap:.5rem}.scene-id{font-size:.73rem}.view-tools{gap:.3rem}.toggle{font-size:.67rem;padding:.3rem .35rem}.scene-caption{top:.8rem;left:.8rem;max-width:67%}.scene-caption strong{font-size:1.05rem}.scene-caption span{font-size:.69rem;line-height:1.5;max-width:240px}.model-badge{font-size:.56rem;top:.85rem;right:.7rem;padding:.25rem .3rem}.scene-note{font-size:.56rem;bottom:.7rem;right:.6rem;max-width:40%;text-align:right}.legend{font-size:.65rem;left:.7rem;bottom:.6rem;padding:.3rem .5rem;gap:.35rem}.legend i{width:2.8rem}.scene-footer{padding:.55rem;gap:.5rem}.quiet-btn{font-size:.74rem;padding:.5rem .58rem;gap:.25rem}.scene-actions{gap:.35rem}.status-note{display:none}.speed-btn{font-size:.71rem}.sidebar{display:flex;border-radius:15px}.side-content{padding:1rem}.side-heading{font-size:1.35rem}.side-bottom{border-left:0;border-top:1px solid var(--line);border-radius:0 0 15px 15px;padding:.85rem 1rem}.secondary-actions{justify-content:space-between}.page-foot{gap:.5rem;line-height:1.5}.page-foot span{max-width:78%;font-size:.61rem}.page-foot .text-link{font-size:.61rem}.record-workspace{padding:.8rem .6rem}.record-head{flex-direction:column;gap:.65rem}.record-head-actions{max-width:none;justify-content:flex-start;width:100%}.record-head-actions .quiet-btn{font-size:.7rem;flex:1}.student-fields{padding:.65rem;gap:.7rem}.student-fields label{font-size:.75rem;gap:.3rem}.student-fields input{width:5.5rem}.student-fields .save-state{margin-left:0;font-size:.64rem}.table-heading{display:none}.notebook{border-radius:12px}.record-row{display:grid;grid-template-columns:1fr 1fr;min-height:260px}.record-stage{grid-column:1/-1;flex-direction:row;padding:.55rem .7rem;justify-content:flex-start;gap:.65rem;border-bottom:1px solid #e2eae0}.record-stage b{font-size:.88rem}.record-stage .row-number{font-size:.68rem}.record-stage button{margin-left:auto}.draw-zone{border-left:0;min-height:210px}.draw-canvas{min-height:170px}.draw-tools span{font-size:.56rem}.draw-tools{padding:.3rem;gap:.2rem}.draw-tools button{font-size:.6rem;padding:.2rem .25rem}.record-inputs{padding:.65rem .5rem;justify-content:flex-start;gap:.6rem}.temp-options{gap:.3rem}.temp-choice{font-size:.72rem;padding:.3rem .45rem}.record-inputs textarea{font-size:.76rem;min-height:4.5rem}.record-reference{font-size:.63rem}.finding-box{display:block;padding:.85rem}.finding-title{padding:0;margin-bottom:.6rem}.finding-content textarea{font-size:.84rem}.record-foot{font-size:.65rem;align-items:flex-start}.record-foot .text-link{font-size:.68rem;white-space:nowrap}.modal-backdrop{padding:.65rem}.modal{width:100%;border-radius:16px;max-height:94dvh}.modal-head{padding:.8rem 1rem}.modal-head h2{font-size:1.1rem}.modal-body{padding:1rem;font-size:.85rem}.step-gallery{grid-template-columns:1fr;gap:.8rem}.step-card{display:grid;grid-template-columns:105px 1fr;gap:.5rem}.step-card svg{height:140px;grid-row:span 2}.step-card h3{margin:.4rem 0 0;font-size:.9rem}.step-card p{font-size:.78rem;margin:.25rem 0}.compare-canvas{height:240px}.touch-pop{padding:.6rem .8rem;min-width:180px}.touch-pop strong{font-size:1.1rem}.touch-pop span{font-size:.67rem}.freeze-flag{font-size:.73rem;padding:.5rem .7rem;bottom:2.8rem}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+.draw-canvas{height:9rem}
+/* Keep the explanatory controls above the action bar on classroom displays. */
+.sample-canvas{height:7rem}.micro-caveat{font-size:.69rem;line-height:1.55}.micro-footer{margin-top:.6rem}
+@media(max-height:780px) and (min-width:901px){.sample-canvas{height:6.2rem}.micro-caveat{font-size:.65rem}.micro-footer{margin-top:.4rem}.micro-footer .quiet-btn{font-size:.68rem}.density-box{margin-top:.6rem;padding-top:.6rem}}
+
+/* Keep action controls separate from the independently scrollable explanation. */
+@media(min-width:901px){.sidebar{overflow:hidden}.side-content{min-height:0;overflow:auto;scrollbar-width:thin}.side-bottom{position:static;flex-shrink:0}}
+@media(max-width:900px){.tabs{flex:1 0 100%;width:100%}}
+@media(min-width:901px) and (max-width:1190px) and (max-height:780px){#micro-content .side-heading{margin-bottom:.4rem}.micro-chain{gap:.25rem}.micro-switch{margin-bottom:.55rem}.micro-switch button{padding:.4rem .3rem}.micro-caveat{line-height:1.35}.micro-footer{margin-top:.25rem}.density-box{margin-top:.35rem;padding-top:.35rem}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden"><defs>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="3"/></symbol>
+<symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1.2 7M4 4v6h6"/></symbol>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="m4 9 4 0 5-4v14l-5-4H4ZM17 8a6 6 0 0 1 0 8M20 5a10 10 0 0 1 0 14"/></symbol>
+<symbol id="i-muted" viewBox="0 0 24 24"><path d="m4 9 4 0 5-4v14l-5-4H4ZM17 9l5 6m0-6-5 6"/></symbol>
+<symbol id="i-full" viewBox="0 0 24 24"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.2" stroke-width="2.4"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.7-7 10-7 10 7 10 7-3.7 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h6l3 2 3-2h6v15h-6l-3 2-3-2H3ZM12 6v15"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 12V5a1.4 1.4 0 0 1 2.8 0v5-6a1.4 1.4 0 0 1 2.8 0v6-4a1.4 1.4 0 0 1 2.8 0v5-2a1.4 1.4 0 0 1 2.8 0v7c0 4-2.5 6-6 6-2.5 0-4.5-1.3-6-3L3 14a1.5 1.5 0 0 1 2-2l3 3"/></symbol>
+<symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 2c2 5-2 6 0 9 2-1 3-3 3-4 4 4 6 8 3 12-3 4-10 4-13-1-2-4 1-8 3-10-1 4 1 5 2 4 3-3-1-5 2-10Z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" stroke-width="2.5"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24"><path d="m4 16-1 5 5-1L21 7l-4-4ZM14 6l4 4"/></symbol>
+<symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1.5"/></symbol>
+<symbol id="i-undo" viewBox="0 0 24 24"><path d="M4 5v6h6M4 11c3-5 13-6 15 1 2 6-5 9-10 6"/></symbol>
+<symbol id="i-bin" viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></symbol>
+</defs></svg>
+<div class="app" id="app">
+<header class="topbar">
+ <div class="brand">
+  <svg class="brand-mark" viewBox="0 0 48 56" aria-hidden="true"><path d="M15 40C9 35 6 27 7 15Q8 5 16 6Q24 8 32 6Q40 5 41 15C42 27 39 35 33 40Z" fill="#e3f4e9" stroke="#147d70" stroke-width="2.4"/><path d="M16 9Q13 25 19 37M32 9Q35 25 29 37" fill="none" stroke="#9bc9b4" stroke-width="1.7"/><path d="M19 40v9h10v-9" fill="#d6b57c" stroke="#a67d49" stroke-width="1.7"/><path d="M24 28c6 6 5 11 0 11s-6-5 0-11" fill="#e8844b"/><path d="M24 33q3 5 0 5t0-5" fill="#ffe3a3"/></svg>
+  <div><h1>我们来做“热气球”</h1><p>四年级上册 · 第一单元第6课 · 看见变化，解释上升</p></div>
+ </div>
+ <nav class="tabs" aria-label="学习视图" role="tablist">
+  <button class="tab active" data-tab="experiment" id="tab-experiment" role="tab" aria-selected="true" aria-controls="lab-workspace">实验与观察</button>
+  <button class="tab" data-tab="particles" id="tab-particles" role="tab" aria-selected="false" aria-controls="lab-workspace">微粒解释</button>
+  <button class="tab" data-tab="record" id="tab-record" role="tab" aria-selected="false" aria-controls="record-workspace">活动记录</button>
+ </nav>
+ <div class="utilities">
+  <button id="sound-btn" class="icon-btn" title="开启音效" aria-label="开启音效" aria-pressed="false"><svg class="icon"><use href="#i-muted"/></svg></button>
+  <button id="fullscreen-btn" class="icon-btn fullscreen-button" title="全屏显示" aria-label="全屏显示"><svg class="icon"><use href="#i-full"/></svg></button>
+  <button id="info-btn" class="icon-btn" title="使用说明与科学说明" aria-label="使用说明与科学说明"><svg class="icon"><use href="#i-info"/></svg></button>
+ </div>
+</header>
+<main class="workspace" id="lab-workspace" role="tabpanel" aria-labelledby="tab-experiment">
+ <div class="checkpoints" aria-label="四个观察与记录时刻">
+  <button class="checkpoint active" data-checkpoint="0"><span class="cp-num">01</span><span class="cp-label">加热前<span class="cp-detail">备材料 · 看初始状态</span></span><span class="cp-tick">✓</span></button>
+  <button class="checkpoint" data-checkpoint="1"><span class="cp-num">02</span><span class="cp-label">加热中<span class="cp-detail">看形状 · 比冷暖</span></span><span class="cp-tick">✓</span></button>
+  <button class="checkpoint" data-checkpoint="2"><span class="cp-num">03</span><span class="cp-label">快要上升时<span class="cp-detail">先观察 · 再松手</span></span><span class="cp-tick">✓</span></button>
+  <button class="checkpoint" data-checkpoint="3"><span class="cp-num">04</span><span class="cp-label">降落后<span class="cp-detail">再观察 · 找变化</span></span><span class="cp-tick">✓</span></button>
+ </div>
+ <div class="lab-layout">
+  <section class="scene-shell" aria-label="热气球动态实验装置">
+   <div class="scene-toolbar">
+    <div class="scene-id" id="scene-mode"><span class="live-dot"></span><span id="scene-mode-text">可操作的实验模型</span></div>
+    <div class="view-tools">
+     <button class="toggle" id="particle-btn" aria-pressed="false"><i class="toggle-dot"></i>微粒</button>
+     <button class="toggle active" id="flow-btn" aria-pressed="true"><i class="toggle-dot"></i>气流</button>
+     <button class="toggle" id="cutaway-btn" aria-pressed="false"><i class="toggle-dot"></i>纸筒剖视</button>
+    </div>
+   </div>
+   <div class="scene" id="scene">
+    <canvas id="lab-canvas" aria-label="塑料袋、纸筒和蜡烛。通过右侧按钮加热、松手和观察降落；点袋子可查看模拟冷暖。" role="img"></canvas>
+    <div class="scene-caption"><strong id="scene-title">先看一看，还没有加热</strong><span id="scene-subtitle">袋口朝下，双手扶住袋子的外壁。</span></div>
+    <div class="model-badge">教学示意 · 非实测</div>
+    <div class="legend hidden" id="particle-legend"><span>较冷</span><i></i><span>较热</span></div>
+    <div class="scene-note" id="scene-note">点袋子，查看模拟冷暖</div>
+    <div class="touch-pop hidden" id="touch-pop"><strong></strong><span>模拟冷暖，不是实际测温</span></div>
+    <div class="freeze-flag hidden" id="freeze-flag">已定格 · 先观察，再继续</div>
+   </div>
+   <div class="scene-footer">
+    <div class="scene-actions">
+     <button class="quiet-btn" id="auto-btn"><svg class="icon"><use href="#i-play"/></svg><span>完整演示</span></button>
+     <button class="quiet-btn" id="pause-btn"><svg class="icon"><use href="#i-pause"/></svg><span>暂停</span></button>
+     <button class="quiet-btn" id="reset-btn" title="重置实验，不清空记录"><svg class="icon"><use href="#i-reset"/></svg><span>重来</span></button>
+    </div>
+    <div class="status-note"><i class="dot"></i><span id="status-note">逐步操作<span class="status-detail"> · 观察点自动定格</span></span></div>
+    <button class="speed-btn" id="speed-btn" title="切换演示速度" aria-label="切换演示速度，当前一倍">1× 速度</button>
+   </div>
+  </section>
+  <aside class="sidebar" id="sidebar" aria-label="操作与观察提示">
+   <div class="side-content" id="observation-content"></div>
+   <div class="side-content hidden" id="micro-content"></div>
+   <div class="side-bottom">
+    <button class="primary-btn" id="primary-btn"><svg class="icon"><use href="#i-fire"/></svg><span>点火 · 开始加热</span></button>
+    <div class="secondary-actions">
+     <button class="text-link" id="secondary-btn">材料与步骤</button>
+     <button class="text-link" id="record-current-btn"><svg class="icon"><use href="#i-pencil"/></svg>记录这一刻</button>
+    </div>
+    <p class="mini-safety">真实实验须由教师组织；火源由教师处理，不触碰发烫部位。</p>
+   </div>
+  </aside>
+ </div>
+ <footer class="page-foot"><span><b class="safety-mark">安全提醒</b>　这是课堂模拟。纸筒和塑料袋不能接触火焰，不自行放飞孔明灯。</span><button class="text-link" id="materials-btn">查看材料与步骤 <svg class="icon"><use href="#i-arrow"/></svg></button></footer>
+</main>
+<section class="record-workspace hidden" id="record-workspace" role="tabpanel" aria-labelledby="tab-record">
+ <div class="record-wrap">
+  <header class="record-head"><div><h2>袋子的变化 · 活动记录</h2><p>先观察，再画形状、选冷暖。参考仅供核对，真实实验请按实际现象填写。</p></div><div class="record-head-actions"><button class="quiet-btn" id="record-ref-btn" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg><span>显示参考示意</span></button><button class="quiet-btn" id="export-btn"><svg class="icon"><use href="#i-down"/></svg>导出记录图片</button><button class="quiet-btn" id="back-lab-btn"><svg class="icon"><use href="#i-book"/></svg>回到实验</button></div></header>
+  <div class="student-fields"><label>班级 <input id="student-class" type="text" maxlength="24" autocomplete="off" placeholder="例如：四（1）班"></label><label>姓名 <input id="student-name" type="text" maxlength="24" autocomplete="off" placeholder="我的姓名"></label><label>日期 <input id="student-date" type="text" maxlength="24" autocomplete="off" placeholder="月 / 日"></label><span class="save-state" id="save-state">记录仅暂存在本机，不上传</span></div>
+  <div class="notebook">
+   <div class="table-heading"><div>观察任务</div><div>画一画<br>塑料袋形状</div><div>摸一摸<br>塑料袋冷暖变化</div></div>
+   <div id="record-rows"></div>
+  </div>
+  <div class="finding-box"><div class="finding-title">我的发现</div><div class="finding-content"><textarea id="finding-input" maxlength="500" placeholder="袋子为什么会上升，为什么又会降落？把观察到的变化和你的解释连起来。"></textarea><div class="finding-ref hidden" id="finding-reference">参考表达：袋内空气受热后，袋子逐渐鼓起。在周围空气的浮力足以托起袋子和袋内空气时，袋子就能上升；离开热源后，袋内空气逐渐冷却，袋子又会降落。</div></div></div>
+  <div class="record-foot"><span>图中的气流、微粒和冷暖属于模型示意；真实观察的形状、冷暖和时长可能不同。</span><button class="text-link" id="clear-record-btn"><svg class="icon"><use href="#i-bin"/></svg>清空本机记录</button></div>
+ </div>
+</section>
+</div>
+<div class="modal-backdrop hidden" id="modal-backdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1"><header class="modal-head"><h2 id="modal-title"></h2><button class="icon-btn" id="modal-close" aria-label="关闭说明"><svg class="icon"><use href="#i-close"/></svg></button></header><div class="modal-body" id="modal-body"></div></section></div>
+<div class="toast hidden" id="toast" role="status"></div>
+<div class="sr-status" id="sr-status" aria-live="polite"></div>
+<noscript><p style="padding:2rem">此互动网页需要启用 JavaScript。请在浏览器中打开 HTML 文件，而不是使用文件预览。</p></noscript>
+<script>(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const $$ = q => [...document.querySelectorAll(q)];
+const clamp = (n,a,b) => Math.max(a,Math.min(b,n));
+const lerp = (a,b,t) => a+(b-a)*t;
+const icon = n => `<svg class="icon" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const escapeHTML = text => String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let seed = 52421;
+const rand = () => { seed = (Math.imul(seed,1664525)+1013904223)>>>0; return seed/4294967296; };
+const FONT='"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif';
+const COLD=[51,143,221], HOT=[233,97,80];
+const tempColor=(t,a=1)=>`rgba(${COLD.map((c,i)=>Math.round(lerp(c,HOT[i],clamp(t,0,1)))).join(',')},${a})`;
+const WORLD={w:1000,h:650,x:480,mouth:456,floor:596,tubeTop:436,tubeWidth:92};
+const TEMP_AMBIENT=22, MAX_VOLUME=.065, BAG_MASS=.0065, AMBIENT_DENSITY=1.196;
+// Teaching model: open bag, approximately constant pressure. Forces use an ideal-gas density relation.
+// Thermal time, drag, geometry and pixel scale are chosen for legibility, not to predict a real flight.
+const stages = [
+ {name:'加热前',short:'加热前',heading:'备好材料，扶住袋子',steps:['备好较大、轻薄的塑料袋、纸筒和蜡烛。','纸筒罩住蜡烛，袋口朝下罩在筒口上方。','扶住袋子外壁，先观察初始状态。'],shape:'袋子是瘪的，还是鼓起的？褶皱多吗？',touch:'与周围物品相比，冷暖有什么不同？',refShape:'较瘪、松软，有较多褶皱。',refTemp:'较冷，与周围环境温度接近。',temp:'较冷'},
+ {name:'加热中',short:'加热中',heading:'保持扶住，观察变化',steps:['由教师处理火源，加热袋内空气。','袋口对着筒口，保持扶住，不急着松手。'],shape:'轮廓正在怎样变化？褶皱有没有减少？',touch:'与加热前相比，袋子变暖了吗？',refShape:'逐渐鼓起，褶皱减少。',refTemp:'逐渐变暖。',temp:'变暖'},
+ {name:'塑料袋快要上升时',short:'快要上升时',heading:'先记录，再松开双手',steps:['袋子较饱满，出现向上提起的趋势。','看清形状与冷暖后，松开双手，观察升降。'],shape:'是否更饱满？有没有向上提起的趋势？',touch:'与刚开始加热时相比，冷暖怎样变化？',refShape:'鼓起、较饱满，有向上提起的趋势。',refTemp:'较热，比开始加热时更暖。',temp:'较热'},
+ {name:'降落后',short:'降落后',heading:'落下后，再比较一次',steps:['由教师确认安全，再比较袋子的状态。','把此时与快要上升时的观察进行比较。'],shape:'还像起飞前那样饱满吗？褶皱怎样变化？',touch:'与起飞前相比，是更热还是更凉？',refShape:'逐渐变瘪、褶皱增多，最后落下。',refTemp:'比起飞时变凉；刚降落时仍可能温温的。',temp:'变凉'}
+];
+let tab='experiment', previousLabTab='experiment';
+let prefs={particles:false,flow:true,cutaway:false,forces:false,sound:false,speed:1};
+let state, visited=new Set([0]), particles=[], escaping=[], observationRefs=[false,false,false,false];
+let lastUIPanel='', lastUI=0, visualTime=0, lastFrame=0, emission=0, sampleTime=0;
+let modalKind='', modalReturnFocus=null, toastTimer=0,touchTimer=0;
+let recordReferences=false, highlightedRow=-1, saveTimer=0, storageAvailable=true;
+const newState=()=>({phase:'before',temp:22,skin:22,fill:.27,held:true,heat:false,flame:false,paused:false,auto:false,autoWait:0,seenMid:false,readyWait:0,h:0,v:0,drift:0,flightTime:0,peak:0,fastCool:false,snapshot:false,early:false,landAge:0});
+const checkpoint=()=>state.phase==='before'?0:state.phase==='heating'?1:state.phase==='landed'?3:2;
+const airborne=()=>!state.held&&state.phase!=='landed';
+const thermal=()=>clamp((state.temp-TEMP_AMBIENT)/45,0,1);
+const netLiftMass=()=>AMBIENT_DENSITY*(1-(TEMP_AMBIENT+273.15)/(state.temp+273.15))*MAX_VOLUME*state.fill-BAG_MASS;
+function bagGeometry(){
+ const f=clamp(state.fill,.22,1);
+ const settle=state.phase==='landed'?clamp(state.landAge/2.5,0,1):0;
+ return {x:WORLD.x+state.drift,y:WORLD.mouth-state.h,w:74+140*f+settle*15,h:(122+155*f)*(1-.25*settle),mouth:43+13*f,fill:f,settle};
+}
+function makeBagPath(b){
+ const p=new Path2D(), w=b.w,h=b.h,m=b.mouth,wiggle=(1-b.fill)*7;
+ p.moveTo(-m,0);
+ p.bezierCurveTo(-w*.5,-h*.10,-w*.63,-h*.58,-w*.53,-h*.88);
+ p.quadraticCurveTo(-w*.48,-h*1.025,-w*.32,-h);
+ p.bezierCurveTo(-w*.13,-h+wiggle,w*.14,-h-wiggle*.5,w*.33,-h);
+ p.quadraticCurveTo(w*.55,-h*1.018,w*.55,-h*.85);
+ p.bezierCurveTo(w*.62,-h*.54,w*.49,-h*.09,m,0);
+ p.quadraticCurveTo(0,9,-m,0);p.closePath();return p;
+}
+function widthAt(t,b){
+ const points=[[0,b.mouth],[.1,b.w*.47],[.3,b.w*.575],[.66,b.w*.575],[.86,b.w*.52],[1,b.w*.325]];
+ t=clamp(t,0,1);
+ for(let i=1;i<points.length;i++)if(t<=points[i][0])return lerp(points[i-1][1],points[i][1],(t-points[i-1][0])/(points[i][0]-points[i-1][0]));
+ return points[points.length-1][1];
+}
+function expectedParticles(){const b=bagGeometry();return Math.round(b.w*b.h*1.035*.0016*(TEMP_AMBIENT+273.15)/(state.temp+273.15));}
+function createParticle(initial=false){
+ const b=bagGeometry();let y=initial?.06+rand()*.89:-.09-rand()*.1;
+ let x=initial?(rand()*2-1)*(widthAt(y,b)/b.w-.028):(rand()*2-1)*b.mouth/b.w*.72;
+ const angle=rand()*Math.PI*2;
+ return {x,y,dx:Math.cos(angle),dy:Math.sin(angle),speed:.8+rand()*.45,heat:initial?thermal():clamp(thermal()+.12,0,1),enter:!initial,exit:false,age:0};
+}
+function resetParticles(){particles=[];escaping=[];emission=0;for(let i=0;i<expectedParticles();i++)particles.push(createParticle(true));}
+function announce(s){$('sr-status').textContent=s;}
+function toast(msg,warning=false){clearTimeout(toastTimer);$('toast').textContent=msg;$('toast').classList.remove('hidden');$('toast').classList.toggle('warning',warning);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),3100);}
+function invalidate(){lastUIPanel='';updateUI(true);}
+function hideTouch(){clearTimeout(touchTimer);$('touch-pop').classList.add('hidden');}
+function resetSimulation(silent=false){hideTouch();state=newState();visited=new Set([0]);resetParticles();lastUIPanel='';if(!silent){tone('reset');toast('实验已重置，活动记录仍保留。');}updateUI(true);}
+function startHeating(){
+ if(!state.held)return;hideTouch();
+ if(state.phase==='before')state.phase='heating';
+ state.heat=true;state.flame=true;state.paused=false;state.snapshot=false;visited.add(1);tone('click');announce('开始加热。请保持扶住袋子，观察形状和冷暖。');invalidate();
+}
+function releaseBag(){
+ if(!state.held)return;hideTouch();
+ state.early=netLiftMass()<=0;
+ state.held=false;state.heat=false;state.flame=false;state.paused=false;state.snapshot=false;state.flightTime=0;state.h=0;state.v=0;state.drift=0;state.phase=state.early?'falling':'rising';
+ tone('release');announce(state.early?'加热不足，袋子没有升起，开始下落。':'已松开双手。袋子离开热源，开始逐渐冷却。');invalidate();
+}
+function stopHeating(){
+ state.heat=false;state.flame=false;state.paused=false;state.auto=false;state.snapshot=false;
+ toast('已停止加热。袋子仍被扶住，观察它怎样变化。');invalidate();
+}
+function jumpTo(i){
+ hideTouch();state=newState();state.paused=true;state.snapshot=true;state.auto=false;
+ if(i===1)Object.assign(state,{phase:'heating',temp:42,skin:31,fill:.59,heat:true,flame:true,seenMid:true});
+ if(i===2)Object.assign(state,{phase:'ready',temp:67,skin:49,fill:.98,heat:true,flame:true,seenMid:true});
+ if(i===3)Object.assign(state,{phase:'landed',temp:27,skin:30,fill:.35,held:false,h:WORLD.mouth-WORLD.floor,drift:200,flightTime:25,landAge:3});
+ visited.add(i);resetParticles();invalidate();tone('click');announce(`已回看：${stages[i].short}。这是关键状态示意，可继续操作。`);
+ if(tab==='record')setTab(previousLabTab);
+}
+function coolingSnapshot(){
+ hideTouch();state=newState();Object.assign(state,{phase:'falling',temp:43,skin:47,fill:.75,held:false,h:70,v:-10,drift:160,flightTime:14,paused:true,snapshot:true});visited.add(2);resetParticles();invalidate();
+}
+function togglePause(){
+ if(state.phase==='before'&&!state.auto){state.paused=!state.paused;}
+ else state.paused=!state.paused;
+ state.snapshot=false;tone('click');updateUI(true);
+}
+function primaryAction(){
+ if(state.phase==='before'){startHeating();return;}
+ if(state.phase==='ready'){releaseBag();return;}
+ if(state.phase==='landed'){resetSimulation();return;}
+ if(state.phase==='heating'){
+  if(!state.heat){startHeating();return;}
+  state.paused=!state.paused;state.snapshot=false;invalidate();tone('click');return;
+ }
+ togglePause();
+}
+function autoDemo(){
+ if(state.auto){state.auto=false;toast('已切换为逐步操作。');updateUI(true);return;}
+ resetSimulation(true);state.auto=true;state.autoWait=1;state.paused=false;toast('将连续展示加热、上升、冷却和降落；可随时暂停。');updateUI(true);tone('click');
+}
+function updatePhysics(dt){
+ if(state.paused)return;
+ if(state.phase==='before'){
+  if(state.auto){state.autoWait-=dt;if(state.autoWait<=0)startHeating();}return;
+ }
+ if(state.held){
+  if(state.phase==='ready'){
+   if(state.auto){state.readyWait+=dt;if(state.readyWait>=1.2)releaseBag();}return;
+  }
+  const target=state.heat?85:TEMP_AMBIENT;
+  state.temp+=(target-state.temp)*(state.heat?.17:.08)*dt;
+  const fillTarget=clamp(.27+(state.temp-22)/32*.73,.27,1);
+  state.fill+=(fillTarget-state.fill)*.88*dt;
+  state.skin+=(state.temp-state.skin)*.35*dt;
+  if(state.heat&&state.temp>=42&&!state.seenMid){
+   state.seenMid=true;
+   if(!state.auto){state.paused=true;tone('notice');announce('加热中观察点已定格。看看袋子形状和冷暖，再继续加热。');invalidate();return;}
+  }
+  if(state.heat&&state.temp>=67&&state.fill>.92){
+   state.temp=67;state.phase='ready';visited.add(2);state.readyWait=0;
+   if(!state.auto)state.paused=true;
+   tone('ready');announce('袋子快要上升了。请先观察和记录，再松开双手。');invalidate();
+  }
+ }else if(state.phase!=='landed'){
+  state.flightTime+=dt;
+  state.temp+=(TEMP_AMBIENT-state.temp)*(state.fastCool?.13:.055)*dt;
+  state.skin+=(state.temp-state.skin)*.2*dt;
+  const fillTarget=.3+.7*clamp((state.temp-TEMP_AMBIENT)/35,0,1);
+  state.fill+=(fillTarget-state.fill)*1.1*dt;
+  const a=netLiftMass()*6500-.8*state.v;
+  state.v+=a*dt;state.h+=state.v*dt;state.peak=Math.max(state.peak,state.h);
+  state.drift=190*(1-Math.exp(-state.flightTime*.14));
+  const previous=state.phase;
+  state.phase=state.v>.15?'rising':state.v<-.15?'falling':previous;
+  if(previous!==state.phase){invalidate();if(state.phase==='falling')announce('袋子逐渐冷却，开始下降。');}
+  if(state.h<=WORLD.mouth-WORLD.floor){
+   state.h=WORLD.mouth-WORLD.floor;state.v=0;state.phase='landed';state.landAge=0;visited.add(3);
+   state.auto=false;state.paused=true;tone('land');announce('袋子已经降落。请记录形状和冷暖变化。');invalidate();
+  }
+ }else{
+  state.landAge+=dt;state.temp+=(TEMP_AMBIENT-state.temp)*.08*dt;state.skin+=(state.temp-state.skin)*.2*dt;state.fill+=(.3-state.fill)*.12*dt;
+ }
+}
+function updateParticles(dt){
+ if(state.paused||!dt)return;
+ const b=bagGeometry(),goal=expectedParticles();
+ emission+=dt*22;
+ if(emission>=1){
+  const slots=Math.floor(emission);emission-=slots;
+  let live=particles.filter(p=>!p.exit).length;
+  for(let i=0;i<slots;i++){
+   if(live<goal){particles.push(createParticle());live++;}
+   else if(live>goal){
+    let p=particles.filter(q=>!q.exit&&!q.enter).sort((a,c)=>a.y-c.y)[0];if(p){p.exit=true;live--;}
+   }
+  }
+ }
+ for(let i=particles.length-1;i>=0;i--){
+  const p=particles[i];p.age+=dt;
+  const localHeat=clamp(thermal()+(state.heat&&state.held?.16*(.55-p.y):0),0,1);
+  p.heat+=(localHeat-p.heat)*1.7*dt;
+  const speed=(23+p.heat*43)*p.speed;
+  if(p.enter){p.y+=dt*62/b.h;p.x*=Math.pow(.97,dt*30);if(p.y>.09){p.enter=false;p.dy=Math.max(.2,p.dy);}}
+  else if(p.exit){p.x+=(0-p.x)*1.65*dt;p.y-=dt*54/b.h;if(p.y<-.11){escaping.push({x:b.x+p.x*b.w,y:b.y-p.y*b.h,vx:(rand()-.5)*55,vy:20+rand()*25,heat:p.heat,life:2.5});particles.splice(i,1);continue;}}
+  else{
+   p.x+=p.dx*speed*dt/b.w;p.y+=p.dy*speed*dt/b.h;
+   if(p.y>.955){p.y=.955;p.dy=-Math.abs(p.dy);}
+   if(p.y<.028){p.y=.028;p.dy=Math.abs(p.dy);}
+   const edge=Math.max(.1,widthAt(p.y,b)/b.w-.029);
+   if(p.x>edge){p.x=edge;p.dx=-Math.abs(p.dx);}
+   if(p.x<-edge){p.x=-edge;p.dx=Math.abs(p.dx);}
+  }
+ }
+ for(let i=escaping.length-1;i>=0;i--){const p=escaping[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.heat=Math.max(0,p.heat-dt*.15);p.life-=dt;if(p.life<=0)escaping.splice(i,1);}
+}
+function setTab(next){
+ if(next==='record'){
+  previousLabTab=tab==='record'?previousLabTab:tab;state.paused=true;
+ }else{
+  if(next==='particles'){prefs.particles=true;prefs.cutaway=true;}
+  previousLabTab=next;
+ }
+ tab=next;
+ $$('.tab').forEach(b=>{b.classList.toggle('active',b.dataset.tab===next);b.setAttribute('aria-selected',String(b.dataset.tab===next));});
+ $('lab-workspace').classList.toggle('hidden',next==='record');$('record-workspace').classList.toggle('hidden',next!=='record');
+ $('lab-workspace').setAttribute('aria-labelledby',`tab-${next==='record'?'experiment':next}`);
+ $('observation-content').classList.toggle('hidden',next==='particles');$('micro-content').classList.toggle('hidden',next!=='particles');
+ invalidate();requestAnimationFrame(()=>{if(next==='record'){resizeDrawings();if(highlightedRow>=0)$(`record-row-${highlightedRow}`).scrollIntoView({block:'center',behavior:'smooth'});}else resizeScene();});
+}
+function recordThisMoment(){highlightedRow=checkpoint();updateRowHighlight();setTab('record');tone('click');}
+function updateRowHighlight(){$$('.record-row').forEach((row,i)=>row.classList.toggle('highlight',i===highlightedRow));}
+function touchBag(){
+ const t=state.skin;
+ let word=state.phase==='ready'?'较热 · 比先前更暖':t<26?'较冷 · 接近室温':t<38?'温温的':t<51?'较暖': '较热';
+ if(state.phase==='landed')word=state.skin>30?'比起飞时变凉，仍可能温暖':'变凉了 · 接近室温';
+ else if(!state.held)word=state.skin>30?'仍有余温 · 正在散热':'逐渐变凉 · 接近室温';
+ $('touch-pop').querySelector('strong').textContent=word;$('touch-pop').classList.remove('hidden');clearTimeout(touchTimer);touchTimer=setTimeout(()=>$('touch-pop').classList.add('hidden'),2600);tone('touch');
+}
+function observationHTML(){
+ const i=checkpoint(),s=stages[i],isFlying=airborne();
+ let title=s.heading;
+ let steps=s.steps;
+ let shape=s.shape,touch=s.touch;
+ if(isFlying){
+  title=state.early?'加热不足，没有升起':'离开热源，继续观察';
+  steps=state.early?['还没充分加热就松手，袋子未能升起。','气球能不能上升，还与袋子的轻重、大小有关。']:['松手后，袋子离开热源，不再持续加热。','注意：冷却已经开始，但袋子不会瞬间掉下。'];
+  shape='袋子在上升，还是下降？轮廓正在怎样变化？';touch='颜色变化是模型解释；真实观察要等安全后再比较。';
+ }
+ return `<div class="section-kicker">${isFlying?'连续观察':'操作与观察'}<span>${String(i+1).padStart(2,'0')} / 04</span></div>
+ <h2 class="side-heading">${title}</h2>
+ <div>${steps.map((t,j)=>`<div class="step-line"><i>${j+1}</i><span>${t}</span></div>`).join('')}</div>
+ ${state.phase==='heating'?'<button class="text-link" data-action="tube">纸筒有什么作用？ '+icon('arrow')+'</button>':''}
+ <div class="small-heading">${icon('eye')}这一刻，重点看什么？</div>
+ <div class="observe-row"><em>形状</em><span>${shape}</span></div>
+ <div class="observe-row"><em>冷暖</em><span>${touch}</span></div>
+ <button class="touch-btn" data-action="touch">${icon('hand')}模拟摸一摸袋子外壁</button>
+ <div class="reference-panel"><div class="reference-label"><span>对应作业本 · 第 ${i+1} 行</span><button class="text-link" data-action="reference">${observationRefs[i]?'收起参考':'核对参考'}</button></div>
+ ${observationRefs[i]?`<div class="reference-body"><b>画：</b>${s.refShape}<br><b>冷暖：</b>${s.refTemp}</div>`:'<p class="ref-hint">先用自己的话描述，再核对。<br>点击下方“记录这一刻”可画、可写。</p>'}</div>`;
+}
+function createMicroPanel(){
+ $('micro-content').innerHTML=`<div class="section-kicker">把看不见的变化放大<span>模型解释</span></div><h2 class="side-heading" id="micro-heading">为什么能升起来？</h2><div class="micro-switch"><button id="micro-hot-btn">受热与上升</button><button id="micro-cool-btn">冷却与下降</button></div><div class="micro-chain" id="micro-chain"></div><div class="density-box"><div class="density-title">比较<b>相同体积</b>的空气（气压近似相同）</div><canvas id="sample-canvas" class="sample-canvas" role="img" aria-label="周围空气和袋内空气的等体积取样微粒比较"></canvas><p class="micro-caveat">微粒向各个方向运动，不会变大或变轻。颜色、速度为放大示意。</p></div><div class="micro-footer"><button class="quiet-btn" id="force-btn">比较浮力与重力</button><button class="quiet-btn" data-action="science">科学说明</button></div>`;
+ $('micro-hot-btn').addEventListener('click',()=>jumpTo(2));$('micro-cool-btn').addEventListener('click',coolingSnapshot);
+ $('force-btn').addEventListener('click',()=>{prefs.forces=!prefs.forces;updateUI(true);});
+}
+function updateMicro(){
+ const cooling=!state.held;
+ $('micro-heading').textContent=cooling?'为什么又会降下来？':'为什么能升起来？';
+ $('micro-hot-btn').classList.toggle('active',!cooling);$('micro-cool-btn').classList.toggle('active',cooling);
+ const lines=cooling?[
+  '<strong>不再持续加热</strong><br>袋内空气逐渐冷却，红色转回蓝色。',
+  '<strong>微粒运动变慢</strong><br>袋内外空气的温度差、密度差逐渐减小。',
+  '<strong>不能继续托起整袋</strong><br>浮力不足以平衡总重力后，袋子最终下降。'
+ ]:[
+  '<strong>受热，微粒运动更快</strong><br>蓝色逐渐转红，袋子逐渐鼓起。',
+  '<strong>同体积，热空气较轻</strong><br>同样一格中，热空气微粒较少。',
+  '<strong>周围空气把袋子向上托</strong><br>浮力大于袋子和袋内空气的总重力，就能上升。'
+ ];
+ $('micro-chain').innerHTML=lines.map((s,i)=>`<div class="chain-line"><span class="chain-number">${i+1}</span><div>${s}</div></div>`).join('');
+ $('force-btn').classList.toggle('active',prefs.forces);$('force-btn').setAttribute('aria-pressed',String(prefs.forces));
+}
+function updateUI(force=false){
+ const i=checkpoint();
+ $$('.checkpoint').forEach((b,j)=>{b.classList.toggle('active',j===i);b.classList.toggle('seen',visited.has(j));b.setAttribute('aria-current',j===i?'step':'false');});
+ for(const [id,key] of [['particle-btn','particles'],['flow-btn','flow'],['cutaway-btn','cutaway']]){const b=$(id);b.classList.toggle('active',prefs[key]);b.setAttribute('aria-pressed',String(prefs[key]));}
+ $('particle-legend').classList.toggle('hidden',!prefs.particles);
+ const key=`${state.phase}/${tab}/${observationRefs[i]}/${state.early}`;
+ if(force||lastUIPanel!==key){$('observation-content').innerHTML=observationHTML();if(tab==='particles')updateMicro();lastUIPanel=key;}
+ let title,sub;
+ switch(state.phase){
+  case 'before':title='先看一看，还没有加热';sub='袋口朝下，双手扶住袋子的外壁。';break;
+  case 'heating':title=state.heat?'袋子的形状正在变化':'停止加热后，会怎样？';sub=state.heat?'注意轮廓与褶皱，再比较冷暖。':'仍然扶住袋子；热量正在逐渐散失。';break;
+  case 'ready':title='袋子快要上升了';sub='先画出此刻的形状，再松开双手。';break;
+  case 'rising':title='正在上升，也在冷却';sub='袋子已离开热源；冷却不等于立即下降。';break;
+  case 'falling':title=state.early?'没有充分加热，未能升起':'逐渐冷却，开始下降';sub=state.early?'松手不一定会上升，继续观察结果。':'袋子里仍有空气，不是空气消失了。';break;
+  case 'landed':title='已经降落，再看一次';sub='与起飞时相比变凉；刚降落可能仍有余温。';break;
+ }
+ $('scene-title').textContent=title;$('scene-subtitle').textContent=sub;
+ $('scene-mode').classList.toggle('paused',state.paused);
+ $('scene-mode-text').textContent=state.snapshot?'关键状态回看':state.paused?'观察已定格':state.auto?'完整过程演示':tab==='particles'?'空气微粒解释模型':'可操作的实验模型';
+ $('freeze-flag').classList.toggle('hidden',!state.paused||state.phase==='before'||state.phase==='landed');
+ $('freeze-flag').textContent=state.phase==='ready'?'已定格 · 先记录，再松手':'已定格 · 先观察，再继续';
+ $('scene-note').textContent=prefs.particles?'微粒为放大示意，并非真实颜色':'点袋子，查看模拟冷暖';
+ $('pause-btn').innerHTML=icon(state.paused?'play':'pause')+`<span>${state.paused?'继续':'暂停'}</span>`;
+ $('pause-btn').setAttribute('aria-label',state.paused?'继续模拟':'暂停模拟');
+ $('auto-btn').classList.toggle('active',state.auto);$('auto-btn').innerHTML=icon(state.auto?'stop':'play')+`<span>${state.auto?'结束连播':'完整演示'}</span>`;
+ $('status-note').innerHTML=state.auto?'连续演示 · 可随时暂停':'逐步操作<span class="status-detail"> · 观察点自动定格</span>';
+ let label,primaryIcon='play';
+ if(state.phase==='before'){label='点火 · 开始加热';primaryIcon='fire';}
+ else if(state.phase==='heating'){label=!state.heat?'再次加热':state.paused?'继续加热':'暂停 · 仔细观察';primaryIcon=state.paused||!state.heat?'fire':'pause';}
+ else if(state.phase==='ready'){label='松开双手';primaryIcon='hand';}
+ else if(state.phase==='landed'){label='再做一次';primaryIcon='reset';}
+ else{label=state.paused?'继续观察升降':'暂停 · 仔细观察';primaryIcon=state.paused?'play':'pause';}
+ $('primary-btn').innerHTML=icon(primaryIcon)+`<span>${label}</span>`;$('primary-btn').classList.toggle('warm',state.phase==='ready');
+ let secondary;
+ if(state.phase==='before')secondary='材料与步骤';
+ else if(state.phase==='heating')secondary=state.heat?'停止加热':'提前松手试试';
+ else if(state.phase==='ready')secondary='纸筒有什么作用？';
+ else if(state.phase==='landed')secondary='查看四次记录';
+ else secondary=state.fastCool?'恢复自然冷却':'加快冷却（模拟）';
+ $('secondary-btn').textContent=secondary;
+ $('speed-btn').textContent=`${prefs.speed}× 速度`;$('speed-btn').setAttribute('aria-label',`切换演示速度，当前${prefs.speed}倍`);
+ syncSound();
+}
+const canvas=$('lab-canvas'),ctx=canvas.getContext('2d',{alpha:false});
+let viewport={width:0,height:0,scale:1,ox:0,oy:0};
+const ambient=Array.from({length:1090},()=>({x:rand()*1000,y:rand()*590,dx:(rand()-.5)*12,dy:(rand()-.5)*12}));
+const sampleSeeds=Array.from({length:42},()=>({x:rand(),y:rand(),dx:(rand()>.5?1:-1)*(.045+rand()*.045),dy:(rand()>.5?1:-1)*(.04+rand()*.06)}));
+function roundRect(c,x,y,w,h,r=8){r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+function text(c,s,x,y,size=20,color='#526e62',align='left',weight=500){c.font=`${weight} ${size}px ${FONT}`;c.fillStyle=color;c.textAlign=align;c.textBaseline='alphabetic';c.fillText(s,x,y);}
+function arrow(c,x1,y1,x2,y2,color='#cf8950',w=4,head=10){const a=Math.atan2(y2-y1,x2-x1);c.save();c.strokeStyle=color;c.fillStyle=color;c.lineWidth=w;c.lineCap='round';c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();c.beginPath();c.moveTo(x2,y2);c.lineTo(x2-head*Math.cos(a-.5),y2-head*Math.sin(a-.5));c.lineTo(x2-head*Math.cos(a+.5),y2-head*Math.sin(a+.5));c.closePath();c.fill();c.restore();}
+function resizeScene(){
+ const r=$('scene').getBoundingClientRect();if(r.width<=0||r.height<=0)return;
+ const dpr=Math.min(window.devicePixelRatio||1,2);
+ canvas.width=Math.round(r.width*dpr);canvas.height=Math.round(r.height*dpr);
+ viewport={width:r.width,height:r.height,scale:Math.min(r.width/WORLD.w,r.height/WORLD.h),ox:0,oy:0,dpr};
+ viewport.ox=(r.width-WORLD.w*viewport.scale)/2;viewport.oy=(r.height-WORLD.h*viewport.scale)/2;
+ renderScene();
+}
+function drawFloor(){
+ ctx.fillStyle='#f6faf7';ctx.fillRect(-1000,WORLD.floor,3000,700);
+ ctx.strokeStyle='#cfddd4';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(-1000,WORLD.floor);ctx.lineTo(2000,WORLD.floor);ctx.stroke();
+ ctx.strokeStyle='#e9eeea';ctx.lineWidth=1;for(let i=0;i<10;i++){ctx.beginPath();ctx.moveTo(-300+i*170,WORLD.floor);ctx.lineTo(-600+i*240,800);ctx.stroke();}
+ text(ctx,'实验台',880,626,18,'#92a599','right');
+ const b=bagGeometry();ctx.save();ctx.globalAlpha=.045+clamp((state.h+150)/500,0,.035);ctx.fillStyle='#234a40';ctx.beginPath();ctx.ellipse(b.x,WORLD.floor+5,90+state.fill*15,10,0,0,Math.PI*2);ctx.fill();ctx.restore();
+}
+function drawCandleAndTube(){
+ const x=WORLD.x,top=WORLD.tubeTop,bottom=WORLD.floor,w=WORLD.tubeWidth;
+ ctx.fillStyle='#e5ebe8';ctx.beginPath();ctx.ellipse(x,bottom+2,72,11,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#c2d0ca';ctx.lineWidth=1.2;ctx.stroke();
+ const wax=ctx.createLinearGradient(x-11,0,x+13,0);wax.addColorStop(0,'#e8dbb6');wax.addColorStop(.42,'#fff6d9');wax.addColorStop(1,'#d3c59f');
+ ctx.fillStyle=wax;roundRect(ctx,x-12,bottom-70,24,67,4);ctx.fill();ctx.strokeStyle='#c9bc96';ctx.lineWidth=1.1;ctx.stroke();
+ ctx.fillStyle='#fff5d4';ctx.beginPath();ctx.ellipse(x,bottom-70,12,3.5,0,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle='#524937';ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x,bottom-70);ctx.quadraticCurveTo(x+2,bottom-78,x+1,bottom-80);ctx.stroke();
+ if(state.flame){
+  const wav=Math.sin(visualTime*15)*3;
+  ctx.save();ctx.shadowColor='#ffb641';ctx.shadowBlur=18;ctx.fillStyle='#ee9740';ctx.beginPath();ctx.moveTo(x,bottom-80);ctx.bezierCurveTo(x-20,bottom-84,x-6,bottom-111,x+wav+1,bottom-123);ctx.bezierCurveTo(x+3,bottom-107,x+20,bottom-94,x+8,bottom-82);ctx.closePath();ctx.fill();ctx.shadowBlur=0;
+  ctx.fillStyle='#ffe7a4';ctx.beginPath();ctx.moveTo(x,bottom-80);ctx.bezierCurveTo(x-10,bottom-86,x-1,bottom-101,x+2,bottom-105);ctx.bezierCurveTo(x+3,bottom-98,x+10,bottom-84,x,bottom-80);ctx.fill();ctx.restore();
+ }
+ const tube=ctx.createLinearGradient(x-w/2,0,x+w/2,0);tube.addColorStop(0,'#aaa2bd');tube.addColorStop(.4,'#c1b8ce');tube.addColorStop(.72,'#b4a9c4');tube.addColorStop(1,'#9388aa');
+ ctx.save();if(prefs.cutaway)ctx.globalAlpha=.33;
+ ctx.fillStyle=tube;ctx.beginPath();ctx.moveTo(x-w/2,top);ctx.bezierCurveTo(x-w/2,top+20,x+w/2,top+20,x+w/2,top);ctx.lineTo(x+w/2,bottom-4);ctx.bezierCurveTo(x+w/2,bottom+11,x-w/2,bottom+11,x-w/2,bottom-4);ctx.closePath();ctx.fill();
+ ctx.restore();
+ ctx.strokeStyle=prefs.cutaway?'#8e819fa6':'#9487a3';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x-w/2,top);ctx.lineTo(x-w/2,bottom-4);ctx.bezierCurveTo(x-w/2,bottom+11,x+w/2,bottom+11,x+w/2,bottom-4);ctx.lineTo(x+w/2,top);ctx.stroke();
+ ctx.fillStyle=prefs.cutaway?'#a194af33':'#766b89';ctx.beginPath();ctx.ellipse(x,top,w/2,11,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#897c99';ctx.lineWidth=2;ctx.stroke();
+ ctx.strokeStyle='#dcd3e4';ctx.lineWidth=1.4;ctx.beginPath();ctx.ellipse(x,top,w/2-3,8.5,0,Math.PI,Math.PI*2);ctx.stroke();
+ if(!prefs.cutaway){
+  ctx.fillStyle='#5e5870';ctx.beginPath();ctx.moveTo(x-24,bottom+3);ctx.lineTo(x-24,bottom-21);ctx.quadraticCurveTo(x-15,bottom-24,x-6,bottom-21);ctx.lineTo(x-6,bottom+7);ctx.closePath();ctx.fill();
+  ctx.strokeStyle='#978ca9';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x+28,top+11);ctx.lineTo(x+28,bottom-4);ctx.stroke();
+ }else{
+  ctx.strokeStyle='#a294b4';ctx.setLineDash([5,5]);ctx.lineWidth=1.2;roundRect(ctx,x-30,top+25,60,115,7);ctx.stroke();ctx.setLineDash([]);
+ }
+ if(!state.held){text(ctx,'火源已熄灭',x,bottom+34,17,'#85998c','center');}
+}
+function drawBulkFlow(b){
+ if(!prefs.flow||!state.heat||!state.held)return;
+ const fromY=prefs.cutaway?WORLD.floor-96:WORLD.tubeTop-2;
+ ctx.save();
+ for(let j=-1;j<=1;j++){
+  const x=WORLD.x+j*24,top=b.y-b.h*(.48+j*.06),phase=visualTime*1.8+j;
+  ctx.strokeStyle=`rgba(216,139,70,${prefs.particles?.4:.65})`;ctx.lineWidth=3.4;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(x,fromY);ctx.bezierCurveTo(x-12,fromY-70,x+10,top+65,x+Math.sin(phase)*5,top);ctx.stroke();
+  const yy=lerp(fromY-5,top+8,((visualTime*.23+j*.3)%1+1)%1);
+  arrow(ctx,x,yy+11,x,yy-8,'#dd9a58',3,9);
+ }
+ ctx.restore();
+}
+function drawAmbientParticles(b,path){
+ if(!prefs.particles)return;
+ ctx.save();const clip=new Path2D();clip.rect(-2000,-2000,5000,5000);clip.addPath(path,new DOMMatrix().translate(b.x,b.y));ctx.clip(clip,'evenodd');
+ const cy=b.y-b.h/2;
+ for(const p of ambient){
+  const x=((p.x+p.dx*visualTime)%1000+1000)%1000,y=((p.y+p.dy*visualTime)%590+590)%590;
+  const distance=((x-b.x)/260)**2+((y-cy)/280)**2;
+  if(distance>1||y>WORLD.floor-10)continue;
+  if(Math.abs(x-WORLD.x)<WORLD.tubeWidth/2&&y>WORLD.tubeTop&&y<WORLD.floor)continue;
+  const opacity=.26*Math.min(1,(1-distance)*4);
+  ctx.fillStyle=tempColor(0,opacity);ctx.beginPath();ctx.arc(x,y,3.8,0,Math.PI*2);ctx.fill();
+ }
+ ctx.restore();
+ for(const p of escaping){ctx.fillStyle=tempColor(p.heat,clamp(p.life/2,0,.6));ctx.beginPath();ctx.arc(p.x,p.y,3.8,0,Math.PI*2);ctx.fill();}
+}
+function drawBag(b,path){
+ ctx.save();ctx.translate(b.x,b.y);
+ const grad=ctx.createLinearGradient(-b.w*.65,0,b.w*.65,0);
+ if(prefs.particles){grad.addColorStop(0,'rgba(224,243,241,.75)');grad.addColorStop(.2,`rgba(249,251,246,.66)`);grad.addColorStop(.55,tempColor(thermal(),.065));grad.addColorStop(.88,'rgba(241,247,240,.44)');grad.addColorStop(1,'rgba(210,235,229,.7)');}
+ else{grad.addColorStop(0,'rgba(221,235,225,.87)');grad.addColorStop(.22,'rgba(245,250,243,.42)');grad.addColorStop(.55,'rgba(243,249,242,.27)');grad.addColorStop(.86,'rgba(228,241,228,.62)');grad.addColorStop(1,'rgba(201,223,211,.85)');}
+ ctx.fillStyle=grad;ctx.fill(path);ctx.strokeStyle='#93b4a59c';ctx.lineWidth=2.1;ctx.stroke(path);
+ if(prefs.particles){
+  ctx.save();ctx.clip(path);
+  for(const p of particles){
+   if(p.y<0)continue;const x=p.x*b.w,y=-p.y*b.h;
+   ctx.strokeStyle=tempColor(p.heat,.24);ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(x-p.dx*(3+p.heat*9),y+p.dy*(3+p.heat*9));ctx.lineTo(x,y);ctx.stroke();
+   ctx.fillStyle=tempColor(p.heat,.92);ctx.beginPath();ctx.arc(x,y,3.8,0,Math.PI*2);ctx.fill();
+   ctx.fillStyle='rgba(255,255,255,.54)';ctx.beginPath();ctx.arc(x-1,y-1.1,1.15,0,Math.PI*2);ctx.fill();
+  }
+  ctx.restore();
+ }
+ ctx.save();ctx.clip(path);ctx.lineWidth=1.15;
+ const wrinkle=1-b.fill;
+ for(let j=0;j<7;j++){
+  const u=(j-3)/3;
+  const startX=u*b.w*.33,startY=-b.h+5+(j%2)*3;
+  const endX=u*b.mouth*.92;
+  ctx.strokeStyle=`rgba(126,166,146,${.17+wrinkle*.14})`;
+  ctx.beginPath();ctx.moveTo(startX,startY);
+  ctx.bezierCurveTo(startX+(j%2?1:-1)*b.w*(.12+wrinkle*.1),-b.h*.73,endX-b.w*u*.14,-b.h*.26,endX,1);ctx.stroke();
+  ctx.strokeStyle=`rgba(255,255,255,${.33+wrinkle*.22})`;ctx.beginPath();ctx.moveTo(startX+3,startY);ctx.bezierCurveTo(startX+18,-b.h*.58,endX+6,-b.h*.19,endX+3,0);ctx.stroke();
+ }
+ if(wrinkle>.1){
+  ctx.strokeStyle=`rgba(121,156,140,${wrinkle*.28})`;
+  for(let j=0;j<7;j++){
+   const y=-b.h*(.16+j*.105),a=widthAt(-y/b.h,b);
+   ctx.beginPath();ctx.moveTo(-a*.96,y);ctx.lineTo(-a*.45,y-9*wrinkle);ctx.lineTo(a*.14,y+12*wrinkle);ctx.lineTo(a*.87,y-5*wrinkle);ctx.stroke();
+  }
+ }
+ ctx.restore();
+ ctx.strokeStyle='#abc1b3b3';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-b.w*.31,-b.h+5);ctx.bezierCurveTo(-b.w*.1,-b.h+10,b.w*.15,-b.h+2,b.w*.32,-b.h+5);ctx.stroke();
+ ctx.strokeStyle='#7caa979c';ctx.lineWidth=2.1;ctx.beginPath();ctx.ellipse(0,1,b.mouth,8,0,0,Math.PI);ctx.stroke();ctx.strokeStyle='#bed5cba6';ctx.beginPath();ctx.ellipse(0,1,b.mouth,8,0,Math.PI,Math.PI*2);ctx.stroke();
+ if(prefs.particles){for(const p of particles){if(p.y<0){ctx.fillStyle=tempColor(p.heat,.82);ctx.beginPath();ctx.arc(p.x*b.w,-p.y*b.h,3.8,0,Math.PI*2);ctx.fill();}}}
+ ctx.restore();
+}
+function drawHand(x,y,mirror){
+ ctx.save();ctx.translate(x,y);ctx.scale(mirror*.61,.61);ctx.rotate(-.2);
+ ctx.fillStyle='#f3d5b8';ctx.strokeStyle='#ceaa8b';ctx.lineWidth=1.8;
+ const p=new Path2D('M-36 61 L-16 35 C-26 25 -31 14 -27 10 C-23 5 -18 10 -8 21 L-5 -7 Q-4 -16 3 -13 Q7 -12 7 -5 L9 17 L12 -19 Q13 -27 20 -24 Q24 -23 24 -16 L24 15 L29 -13 Q31 -22 37 -18 Q41 -16 39 -7 L36 22 L43 1 Q46 -7 51 -2 Q55 1 50 14 L44 38 Q40 52 23 62 L8 82 Z');ctx.fill(p);ctx.stroke(p);
+ ctx.strokeStyle='#d1ac8b';ctx.lineWidth=1.1;ctx.beginPath();ctx.moveTo(-8,21);ctx.quadraticCurveTo(5,27,4,43);ctx.moveTo(8,41);ctx.quadraticCurveTo(21,31,32,32);ctx.stroke();
+ ctx.fillStyle='#5b9c8f';ctx.strokeStyle='#488576';ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(-40,58);ctx.lineTo(14,77);ctx.lineTo(3,106);ctx.lineTo(-59,89);ctx.closePath();ctx.fill();ctx.stroke();ctx.strokeStyle='#9cc3b4';ctx.beginPath();ctx.moveTo(-37,67);ctx.lineTo(8,83);ctx.stroke();ctx.restore();
+}
+function drawCallout(title,sub,x,y,toX,toY,width=155){
+ text(ctx,title,x,y,23,'#4d6f60','left',650);text(ctx,sub,x,y+27,17,'#8a9e90');
+ ctx.strokeStyle='#c1d3c5';ctx.lineWidth=1.4;ctx.setLineDash([4,5]);ctx.beginPath();ctx.moveTo(x+width,y+8);ctx.lineTo(toX-20,y+8);ctx.lineTo(toX,toY);ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle='#91b19b';ctx.beginPath();ctx.arc(toX,toY,3.2,0,Math.PI*2);ctx.fill();
+}
+function drawThermalGauge(){
+ const x=860,y=270,h=135;
+ text(ctx,'袋内空气',x,y-48,21,'#647d6e','center',650);
+ text(ctx,'冷暖示意',x,y-24,16,'#96a598','center');
+ ctx.fillStyle='#fff';ctx.strokeStyle='#d4dfd7';ctx.lineWidth=1.5;roundRect(ctx,x-12,y,24,h+8,12);ctx.fill();ctx.stroke();
+ const heat=thermal(),height=20+heat*(h-20);
+ const g=ctx.createLinearGradient(0,y+h,0,y);g.addColorStop(0,tempColor(0));g.addColorStop(1,tempColor(1));ctx.fillStyle=g;roundRect(ctx,x-6,y+h-height,12,height+1,6);ctx.fill();
+ ctx.fillStyle=tempColor(heat);ctx.beginPath();ctx.arc(x,y+h+4,14,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#ffffff';ctx.lineWidth=4;ctx.stroke();
+ for(let i=0;i<5;i++){ctx.strokeStyle='#ccdad0';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x+20,y+i*30+7);ctx.lineTo(x+26,y+i*30+7);ctx.stroke();}
+ const word=state.temp<29?'较冷':state.temp<52?'温暖':'较热';
+ text(ctx,word,x,y+h+47,27,tempColor(heat),'center',700);
+ if(!state.held&&state.temp>26)text(ctx,'正在冷却',x,y+h+74,17,'#8a9d8e','center');
+}
+function drawForceComparison(b){
+ const vol=MAX_VOLUME*state.fill,rhoIn=AMBIENT_DENSITY*(TEMP_AMBIENT+273.15)/(state.temp+273.15);
+ const buoy=AMBIENT_DENSITY*vol,weight=rhoIn*vol+BAG_MASS,max=Math.max(buoy,weight),up=140*buoy/max,down=140*weight/max;
+ const x=145,y=365;
+ arrow(ctx,x,y,x,y-up,'#258c7c',7,17);arrow(ctx,x+105,y,x+105,y+down,'#d5895e',7,17);
+ ctx.fillStyle='#7f9e8b';ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.arc(x+105,y,5,0,Math.PI*2);ctx.fill();
+ text(ctx,'向上的浮力',x,y-up-18,20,'#237d6c','center',650);
+ text(ctx,'总重力',x+105,y+down+30,20,'#b0714c','center',650);
+ const comparison=buoy>weight?'浮力 ＞ 总重力':'浮力 ＜ 总重力';
+ text(ctx,comparison,200,552,22,'#536e5d','center',700);
+ text(ctx,'总重力：袋子 + 袋内空气',200,578,16,'#8e9e91','center');
+ text(ctx,state.held?'手的作用未画出；箭头仅作比较':'空气阻力未画出；箭头仅作比较',200,604,15,'#9aa89b','center');
+}
+function renderScene(){
+ if(!viewport.width||tab==='record')return;
+ const {dpr,width,height,scale,ox,oy}=viewport;
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#fbfefb';ctx.fillRect(0,0,width,height);
+ ctx.translate(ox,oy);ctx.scale(scale,scale);
+ const b=bagGeometry(),path=makeBagPath(b);
+ drawFloor();drawAmbientParticles(b,path);drawCandleAndTube();drawBulkFlow(b);drawBag(b,path);
+ if(state.held){
+  const hands=widthAt(.12,b);drawHand(b.x-hands-9,b.y-31,1);drawHand(b.x+hands+9,b.y-31,-1);
+ }
+ if(prefs.forces){drawForceComparison(b);}
+ else if(state.held){
+  drawCallout('塑料袋','袋口朝下，手扶外壁',80,282,b.x-widthAt(.47,b),b.y-b.h*.47,168);
+  drawCallout('纸筒','集中热空气，引向袋口',110,485,WORLD.x-48,504,183);
+  if(prefs.cutaway)text(ctx,'蜡烛',WORLD.x+95,556,19,'#9a805d');
+ }else{
+  text(ctx,state.early?'没有升起':'离开热源',104,365,25,'#597961','left',650);
+  text(ctx,'袋内空气逐渐冷却',104,398,20,'#899e8d');
+  text(ctx,'袋子里仍然有空气',104,430,18,'#9aab9c');
+ }
+ if(airborne()){
+  const ax=b.x+b.w*.64+31,cy=b.y-b.h*.48;
+  if(state.phase==='rising'){arrow(ctx,ax,cy+35,ax,cy-35,'#4d9f89',5,13);text(ctx,'上升',ax+18,cy+6,20,'#498b72','left',650);}
+  else{arrow(ctx,ax,cy-35,ax,cy+35,'#be8e66',5,13);text(ctx,'下降',ax+18,cy+6,20,'#a67d52','left',650);}
+ }
+ if(state.phase==='ready'){
+  const by=b.y-b.h-26;ctx.fillStyle='#edf8ee';ctx.strokeStyle='#a1c6a5';ctx.lineWidth=1;roundRect(ctx,b.x-72,by-25,144,34,17);ctx.fill();ctx.stroke();text(ctx,'快要上升了',b.x,by-2,18,'#55925f','center',650);
+ }
+ if(!prefs.forces)drawThermalGauge();
+}
+function reflect01(v){const k=((v%2)+2)%2;return k<=1?k:2-k;}
+function renderSamples(){
+ if(tab!=='particles')return;const c=$('sample-canvas');if(!c)return;
+ const r=c.getBoundingClientRect();if(!r.width||!r.height)return;
+ const dpr=Math.min(devicePixelRatio||1,2);if(c.width!==Math.round(r.width*dpr)||c.height!==Math.round(r.height*dpr)){c.width=Math.round(r.width*dpr);c.height=Math.round(r.height*dpr);}
+ const g=c.getContext('2d'),W=r.width,H=r.height;g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,W,H);
+ const gap=14,bw=(W-gap)/2,bh=H-44;
+ for(let j=0;j<2;j++){
+  const x=j*(bw+gap),hot=j===1?thermal():0,n=j===0?36:Math.round(36*(TEMP_AMBIENT+273.15)/(state.temp+273.15));
+  g.fillStyle=j===0?'#f3f9fd':'#fcf7f2';g.strokeStyle=j===0?'#c4dbea':'#e4d7c7';g.lineWidth=1;roundRect(g,x+1,7,bw-2,bh,9);g.fill();g.setLineDash([4,3]);g.stroke();g.setLineDash([]);
+  for(let i=0;i<n;i++){
+   const p=sampleSeeds[i],speed=1+hot*1.5;
+   const px=x+8+reflect01(p.x+(j?hotSampleTime:sampleTime)*p.dx)*(bw-16),py=15+reflect01(p.y+(j?hotSampleTime:sampleTime)*p.dy)*(bh-16);
+   g.fillStyle=tempColor(hot,.83);g.beginPath();g.arc(px,py,2.7,0,Math.PI*2);g.fill();
+  }
+  text(g,j===0?'周围空气':'袋内空气',x+bw/2,H-10,Math.min(14,bw/8),'#647e6c','center',600);
+ }
+}
+/* Worksheet data stays in this browser. No network requests are made. */
+const STORAGE_KEY='hot-air-balloon-classroom-records-v1';
+function blankRecord(){const d=new Date();return {className:'',name:'',date:`${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`,finding:'',rows:stages.map(()=>({temp:'',note:'',strokes:[]}))};}
+function loadRecord(){
+ const fresh=blankRecord();
+ try{
+  const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return fresh;
+  const data=JSON.parse(raw);
+  for(const k of ['className','name','date','finding'])if(typeof data[k]==='string')fresh[k]=data[k].slice(0,k==='finding'?500:24);
+  if(Array.isArray(data.rows))for(let i=0;i<4;i++){
+   const row=data.rows[i];if(!row||typeof row!=='object')continue;
+   if(['较冷','变暖','较热','变凉'].includes(row.temp))fresh.rows[i].temp=row.temp;
+   if(typeof row.note==='string')fresh.rows[i].note=row.note.slice(0,300);
+   if(Array.isArray(row.strokes))fresh.rows[i].strokes=row.strokes.slice(0,120).filter(Array.isArray).map(s=>s.slice(0,1800).filter(p=>Array.isArray(p)&&p.length>=2&&Number.isFinite(p[0])&&Number.isFinite(p[1])).map(p=>[clamp(p[0],0,1),clamp(p[1],0,1)]));
+  }
+  return fresh;
+ }catch(e){storageAvailable=false;return fresh;}
+}
+let recordData=loadRecord();
+function saveRecordNow(){
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(recordData));storageAvailable=true;$('save-state').textContent='已暂存于本机 · 不上传';}
+ catch(e){storageAvailable=false;$('save-state').textContent='无法本机暂存，请导出记录图片';}
+}
+function scheduleSave(){clearTimeout(saveTimer);$('save-state').textContent='正在暂存…';saveTimer=setTimeout(saveRecordNow,350);}
+function buildRecords(){
+ $('record-rows').innerHTML=stages.map((s,i)=>`<div class="record-row" id="record-row-${i}"><div class="record-stage"><span class="row-number">0${i+1}</span><b>${i===2?'快要上升时':s.name}</b><button class="text-link" data-revisit="${i}">回看此刻 ${icon('arrow')}</button></div><div class="draw-zone"><canvas class="draw-canvas" id="draw-${i}" aria-label="${s.short}：在此画出塑料袋形状"></canvas><div class="draw-tools"><span>用手指或鼠标画</span><button data-undo="${i}" title="撤销最后一笔">${icon('undo')}撤销</button><button data-clear-draw="${i}" title="只清除这一格的画图">清图</button></div></div><div class="record-inputs"><div class="temp-options" role="group" aria-label="${s.short}的冷暖">${['较冷','变暖','较热','变凉'].map(t=>`<button class="temp-choice ${recordData.rows[i].temp===t?'selected':''}" data-temp-row="${i}" data-temp="${t}" aria-pressed="${recordData.rows[i].temp===t}">${t}</button>`).join('')}</div><textarea id="note-${i}" maxlength="300" aria-label="${s.short}的观察补充" placeholder="我观察到的变化…"></textarea><div class="record-reference ${recordReferences?'':'hidden'}" id="record-ref-${i}"><b>参考：</b>${s.refShape} ${s.refTemp}</div></div></div>`).join('');
+ ['className','name','date'].forEach((k,i)=>$(['student-class','student-name','student-date'][i]).value=recordData[k]);
+ $('finding-input').value=recordData.finding;
+ for(let i=0;i<4;i++){$(`note-${i}`).value=recordData.rows[i].note;bindDrawing(i);$(`note-${i}`).addEventListener('input',e=>{recordData.rows[i].note=e.target.value;scheduleSave();});}
+ $('save-state').textContent=storageAvailable?'记录仅暂存在本机，不上传':'无法本机暂存，请导出记录图片';
+ updateRowHighlight();
+}
+function drawWorksheetBase(g,index,reference){
+ const W=400,H=180,cx=200,floor=157;
+ // Fixed drawing coordinates keep a student's sketch aligned on resize and in exported images.
+ if(index<3){
+  g.strokeStyle='#b5bdb5';g.fillStyle='#fafbf8';g.lineWidth=1.3;
+  g.beginPath();g.moveTo(cx-17,119);g.lineTo(cx-17,floor);g.bezierCurveTo(cx-17,floor+5,cx+17,floor+5,cx+17,floor);g.lineTo(cx+17,119);g.closePath();g.fill();g.stroke();g.beginPath();g.ellipse(cx,119,17,4,0,0,Math.PI*2);g.fill();g.stroke();
+  g.fillStyle='#ddd2a7';g.strokeStyle='#aaa387';g.lineWidth=.8;roundRect(g,cx-3,floor-17,6,17,1);g.fill();g.stroke();g.beginPath();g.moveTo(cx,floor-17);g.lineTo(cx,floor-22);g.stroke();
+  if(index>0){g.fillStyle='#e7b267';g.beginPath();g.moveTo(cx,floor-22);g.quadraticCurveTo(cx-7,floor-25,cx+1,floor-34);g.quadraticCurveTo(cx+7,floor-24,cx,floor-22);g.fill();}
+ }
+ if(reference){
+  const bs=[{w:55,h:62,mouth:23,fill:.27},{w:83,h:95,mouth:25,fill:.6},{w:106,h:112,mouth:28,fill:1},{w:105,h:53,mouth:39,fill:.3}][index];
+  const y=index===3?floor:127;
+  g.save();g.translate(cx,y);g.fillStyle='rgba(194,222,202,.21)';g.strokeStyle='#79a38a';g.lineWidth=1.6;const p=makeBagPath(bs);g.fill(p);g.stroke(p);
+  const wrinkles=index===2?3:5;
+  for(let j=0;j<wrinkles;j++){const x=(j-(wrinkles-1)/2)*bs.w*.15;g.strokeStyle='#8eae9566';g.lineWidth=.8;g.beginPath();g.moveTo(x,-bs.h+5);g.bezierCurveTo(x-8,-bs.h*.58,x+12,-bs.h*.35,x*.6,1);g.stroke();}
+  g.strokeStyle='#80a68e';g.beginPath();g.ellipse(0,1,bs.mouth,4,0,0,Math.PI);g.stroke();g.restore();
+  text(g,'参考轮廓',W-13,20,12,'#9aa986','right');
+ }
+}
+function paintInk(g,index){
+ g.strokeStyle='#244a53';g.fillStyle='#244a53';g.lineWidth=2.5;g.lineCap='round';g.lineJoin='round';
+ for(const stroke of recordData.rows[index].strokes){if(!stroke.length)continue;if(stroke.length===1){g.beginPath();g.arc(stroke[0][0]*400,stroke[0][1]*180,1.3,0,Math.PI*2);g.fill();continue;}
+  g.beginPath();g.moveTo(stroke[0][0]*400,stroke[0][1]*180);for(let j=1;j<stroke.length;j++)g.lineTo(stroke[j][0]*400,stroke[j][1]*180);g.stroke();}
+}
+const drawingMetrics={};
+function renderDrawing(i){
+ const c=$(`draw-${i}`);if(!c)return;const r=c.getBoundingClientRect();if(!r.width||!r.height)return;
+ const dpr=Math.min(devicePixelRatio||1,2),pw=Math.round(r.width*dpr),ph=Math.round(r.height*dpr);
+ if(c.width!==pw||c.height!==ph){c.width=pw;c.height=ph;}
+ const g=c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.fillStyle='#fff';g.fillRect(0,0,r.width,r.height);
+ const scale=Math.min(r.width/400,r.height/180),ox=(r.width-400*scale)/2,oy=(r.height-180*scale)/2;drawingMetrics[i]={scale,ox,oy};
+ g.translate(ox,oy);g.scale(scale,scale);drawWorksheetBase(g,i,recordReferences);paintInk(g,i);
+ if(!recordData.rows[i].strokes.length&&!recordReferences){text(g,i===3?'画出降落后的袋子':'画出纸筒上方的袋子',200,37,14,'#bcc6bb','center');}
+}
+function resizeDrawings(){for(let i=0;i<4;i++)renderDrawing(i);}
+function bindDrawing(i){
+ const c=$(`draw-${i}`);let drawing=false,current=null,pid=null;
+ function point(e){const r=c.getBoundingClientRect(),m=drawingMetrics[i];if(!m)return [0,0];return[clamp((e.clientX-r.left-m.ox)/(m.scale*400),0,1),clamp((e.clientY-r.top-m.oy)/(m.scale*180),0,1)];}
+ c.addEventListener('pointerdown',e=>{if(e.button!==0&&e.pointerType==='mouse')return;e.preventDefault();drawing=true;pid=e.pointerId;current=[point(e)];recordData.rows[i].strokes.push(current);if(recordData.rows[i].strokes.length>120)recordData.rows[i].strokes.shift();try{c.setPointerCapture(pid);}catch(err){}renderDrawing(i);});
+ c.addEventListener('pointermove',e=>{if(!drawing||e.pointerId!==pid)return;e.preventDefault();const p=point(e),last=current[current.length-1];if(Math.hypot(p[0]-last[0],p[1]-last[1])>.002&&current.length<1800)current.push(p);renderDrawing(i);});
+ const end=e=>{if(!drawing||e.pointerId!==pid)return;drawing=false;current=null;try{c.releasePointerCapture(pid);}catch(err){}pid=null;scheduleSave();};
+ c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end);
+}
+function toggleRecordReferences(){
+ recordReferences=!recordReferences;$('record-ref-btn').classList.toggle('active',recordReferences);$('record-ref-btn').setAttribute('aria-pressed',String(recordReferences));$('record-ref-btn').innerHTML=icon('eye')+`<span>${recordReferences?'隐藏参考示意':'显示参考示意'}</span>`;
+ for(let i=0;i<4;i++)$(`record-ref-${i}`).classList.toggle('hidden',!recordReferences);$('finding-reference').classList.toggle('hidden',!recordReferences);resizeDrawings();
+}
+function wrapCanvasText(g,str,x,y,maxWidth,lineHeight,fontSize,color='#435c50',maxLines=100){
+ g.font=`400 ${fontSize}px ${FONT}`;g.fillStyle=color;g.textAlign='left';g.textBaseline='top';let line='',lines=0;
+ for(const ch of String(str)){
+  if(ch==='\n'||g.measureText(line+ch).width>maxWidth){g.fillText(line,x,y+lines*lineHeight);line=ch==='\n'?'':ch;lines++;if(lines>=maxLines-1)break;}else line+=ch;
+ }
+ if(line)g.fillText(line,x,y+lines*lineHeight);return (lines+1)*lineHeight;
+}
+function downloadBlob(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
+async function exportRecord(){
+ const button=$('export-btn');button.disabled=true;
+ try{
+  saveRecordNow();if(document.fonts&&document.fonts.ready)await document.fonts.ready;
+  const out=document.createElement('canvas');out.width=1600;out.height=1920;const g=out.getContext('2d');
+  g.fillStyle='#f8fbf6';g.fillRect(0,0,1600,1920);
+  g.fillStyle='#137f79';g.fillRect(0,0,1600,17);
+  text(g,'我们来做“热气球”',86,110,48,'#244b3d','left',700);text(g,'袋子的变化 · 活动记录',88,165,26,'#719079');
+  const meta=`班级：${recordData.className||'________'}     姓名：${recordData.name||'________'}     日期：${recordData.date||'________'}`;
+  text(g,meta,90,220,25,'#62796a');
+  const X=80,Y=255,W=1440,left=208,middle=575,right=W-left-middle,headH=84,rowH=285;
+  g.fillStyle='#fff';g.fillRect(X,Y,W,headH+4*rowH);g.fillStyle='#e6f0e3';g.fillRect(X,Y,W,headH);
+  text(g,'观察任务',X+left/2,Y+50,26,'#4a6d4d','center',650);
+  text(g,'画一画 · 塑料袋形状',X+left+middle/2,Y+50,26,'#4a6d4d','center',650);
+  text(g,'摸一摸 · 冷暖变化',X+left+middle+right/2,Y+50,26,'#4a6d4d','center',650);
+  for(let i=0;i<4;i++){
+   const y=Y+headH+i*rowH,r=recordData.rows[i];g.fillStyle='#fafcf8';g.fillRect(X,y,left,rowH);
+   const label=i===2?['塑料袋快要','上升时']:[stages[i].short];
+   label.forEach((s,j)=>text(g,s,X+left/2,y+137+j*39-(label.length-1)*19,26,'#4d6653','center',650));
+   g.save();g.translate(X+left+15,y+16);const scale=Math.min((middle-30)/400,(rowH-32)/180);g.translate(((middle-30)-400*scale)/2,((rowH-32)-180*scale)/2);g.scale(scale,scale);drawWorksheetBase(g,i,recordReferences);paintInk(g,i);g.restore();
+   const tx=X+left+middle+28;
+   text(g,r.temp?`我的选择：${r.temp}`:'我的选择：________________',tx,y+56,29,r.temp?'#21765b':'#a2b09f','left',650);
+   if(r.note)wrapCanvasText(g,r.note,tx,y+85,right-56,36,24,'#4e6251',3);
+   else{g.strokeStyle='#dce5d7';g.lineWidth=1;for(let k=0;k<2;k++){g.beginPath();g.moveTo(tx,y+127+k*39);g.lineTo(X+W-30,y+127+k*39);g.stroke();}}
+   if(recordReferences)wrapCanvasText(g,`参考：${stages[i].refTemp}`,tx,y+210,right-56,28,19,'#967b50',2);
+  }
+  g.strokeStyle='#cbdac7';g.lineWidth=2;g.strokeRect(X,Y,W,headH+4*rowH);
+  for(const xx of [X+left,X+left+middle]){g.beginPath();g.moveTo(xx,Y);g.lineTo(xx,Y+headH+4*rowH);g.stroke();}
+  for(let i=0;i<=4;i++){g.beginPath();g.moveTo(X,Y+headH+i*rowH);g.lineTo(X+W,Y+headH+i*rowH);g.stroke();}
+  const fy=1510;text(g,'我的发现',90,fy,29,'#395c42','left',650);
+  g.fillStyle='#fff';roundRect(g,80,fy+23,1440,214,15);g.fill();g.strokeStyle='#d9e4d3';g.stroke();
+  if(recordData.finding)wrapCanvasText(g,recordData.finding,109,fy+49,1380,40,26,'#405c46',4);
+  else{for(let k=0;k<3;k++){g.strokeStyle='#e4eadf';g.beginPath();g.moveTo(110,fy+91+k*45);g.lineTo(1490,fy+91+k*45);g.stroke();}}
+  text(g,'课堂模拟记录；真实实验请按实际现象填写。冷暖、形变和微粒均为教学示意。',88,1840,21,'#82917c');
+  if(recordReferences)text(g,'本页含参考示意，参考内容不是学生的实测结果。',88,1875,20,'#a18c66');
+  const blob=await new Promise((resolve,reject)=>out.toBlob(b=>b?resolve(b):reject(new Error('无法生成图片')),'image/png'));
+  const safeName=(recordData.name||'课堂').replace(/[<>:"/\\|?*\u0000-\u001f]/g,'').slice(0,24);
+  downloadBlob(blob,`热气球活动记录-${safeName}.png`);toast('记录图片已生成。请保留文件，避免清理浏览器后丢失。');tone('ready');
+ }catch(e){console.error('Record export failed',e);toast('导出未成功。请在完整浏览器中打开此文件后再试。',true);}finally{button.disabled=false;}
+}
+function clearRecord(){
+ if(!window.confirm('清空本机的姓名、画图、冷暖选择和文字记录？已导出的图片不会受影响。'))return;
+ recordData=blankRecord();buildRecords();resizeDrawings();saveRecordNow();toast('本机记录已清空。');
+}
+function materialIllustration(index){
+ const common='<defs><linearGradient id="pl'+index+'" x1="0" x2="1"><stop stop-color="#dbeadf" stop-opacity=".8"/><stop offset=".5" stop-color="#f6faf5" stop-opacity=".5"/><stop offset="1" stop-color="#cbded1" stop-opacity=".8"/></linearGradient></defs>';
+ if(index===0)return `<svg viewBox="0 0 230 155" role="img" aria-label="塑料袋、纸筒、蜡烛">${common}<path d="M12 91Q6 57 18 42L61 45Q70 63 68 105L21 111Z" fill="url(#pl0)" stroke="#8bad97" stroke-width="1.5"/><path d="m22 49 8 58m12-60 7 57m12-50-7 26 12 18" stroke="#adbfad" fill="none"/><path d="M91 44v78q22 10 44 0V44" fill="#b1a4c5" stroke="#897d9c" stroke-width="1.4"/><ellipse cx="113" cy="44" rx="22" ry="6" fill="#897d9c"/><path d="M96 125v-15h8v18" fill="#f8fbf8"/><rect x="178" y="79" width="17" height="48" rx="2" fill="#eee1be" stroke="#c7b48b"/><path d="m186 79 1-8" stroke="#6b634e" stroke-width="2"/><text x="40" y="146" font-size="14" fill="#6a8170" text-anchor="middle">塑料袋</text><text x="114" y="146" font-size="14" fill="#6a8170" text-anchor="middle">纸筒</text><text x="186" y="146" font-size="14" fill="#6a8170" text-anchor="middle">蜡烛</text></svg>`;
+ if(index===1)return `<svg viewBox="0 0 230 155" role="img" aria-label="教师点火，纸筒罩住蜡烛，袋口朝下">${common}<path d="M95 89v56q20 7 40 0V89" fill="#b0a1c15c" stroke="#9d8caf"/><ellipse cx="115" cy="89" rx="20" ry="5" fill="#9785ad60"/><rect x="112" y="125" width="7" height="20" fill="#e6d6aa"/><path d="M115 125q-11-8 1-22 10 18-1 22" fill="#ebad58"/><path d="M91 94Q67 63 75 18Q93 12 115 17Q138 12 155 18Q165 66 139 94Z" fill="url(#pl1)" stroke="#8bae96" stroke-width="1.5"/><path d="M93 22Q93 69 104 92m35-69q1 41-15 69" stroke="#b5cbb7" fill="none"/><path d="M109 101V65m-6 8 6-8 6 8M124 101V49m-6 8 6-8 6 8" fill="none" stroke="#d9935b" stroke-width="2"/><path d="M50 103 89 87m89 16-39-16" stroke="#c5d6c6" stroke-width="2"/><text x="31" y="121" font-size="12" fill="#748a76">扶住外壁</text><text x="162" y="121" font-size="12" fill="#748a76">远离火焰</text></svg>`;
+ return `<svg viewBox="0 0 230 155" role="img" aria-label="松手后袋子离开热源，先上升后冷却下降">${common}<path d="M88 92Q67 63 69 20Q83 13 107 16Q128 12 142 20Q147 62 125 92Z" fill="url(#pl2)" stroke="#8aae96" stroke-width="1.5"/><path d="M86 23q-6 40 8 64m34-65q8 40-9 65" fill="none" stroke="#a5bda6"/><ellipse cx="107" cy="93" rx="19" ry="4" fill="none" stroke="#99b9a0"/><path d="M48 90V36m-8 10 8-10 8 10" fill="none" stroke="#51a188" stroke-width="3"/><path d="M169 40v55m-8-10 8 10 8-10" fill="none" stroke="#b99570" stroke-width="3"/><path d="M41 128v21q16 6 32 0v-21" fill="#b2a6c2" stroke="#9283a5"/><ellipse cx="57" cy="128" rx="16" ry="4" fill="#8e819e"/><text x="33" y="24" font-size="13" fill="#5d9377">上升</text><text x="153" y="118" font-size="13" fill="#a3845f">冷却下降</text></svg>`;
+}
+function openModal(kind){
+ modalReturnFocus=document.activeElement;state.paused=true;state.auto=false;modalKind=kind;updateUI(true);
+ let title,html;
+ if(kind==='steps'){
+  title='材料与步骤 · 三步看明白';
+  const steps=[['备好材料，先观察','选择较大、轻薄、完好的塑料袋，准备纸筒和蜡烛。未加热时，先观察袋子的形状和冷暖。'],['加热袋内空气','火源由教师处理。用纸筒罩住蜡烛，袋口朝下罩在筒口上方，扶住袋子外壁；观察袋子是否鼓起、变暖。'],['观察后松手，比较降落','出现向上提起的趋势时，先完成这一刻的观察，再松手。继续观察升降；降落后由教师确认安全，再比较形状和冷暖。']];
+  html=`<div class="step-gallery">${steps.map((s,i)=>`<article class="step-card">${materialIllustration(i)}<h3>${i+1}. ${s[0]}</h3><p>${s[1]}</p></article>`).join('')}</div><h3>每一步都对应记录</h3><p><b>加热前 → 加热中 → 快要上升时 → 降落后</b><br>每次都看两件事：<b>袋子形状</b>、<b>冷暖变化</b>。升空后先用眼观察，不追着摸袋子。</p><div class="notice"><b>真实实验的安全安排</b><br>须由教师组织，火源由教师处理；准备合适的灭火措施，保持实验区域通风。袋子、纸筒不接触火焰，纸筒的进气口不堵塞。发烫部位不摸，袋口和火源附近不摸。纸筒用于集中热空气，并不是防火装置。不要自行制作或放飞孔明灯。</div>`;
+ }else if(kind==='tube'){
+  title='为什么要用纸筒？';
+  html='<p><b>纸筒把热空气集中起来，并引向袋口。</b>它的主要作用不是让蜡烛燃烧得更旺。</p><canvas class="compare-canvas" id="compare-canvas" role="img" aria-label="没有纸筒时热空气容易向四周扩散；有纸筒时热空气沿纸筒集中上升"></canvas><p>黄色箭头表示空气整体流动，不代表每一个微粒只向上运动。下面的开口用于让空气进入。</p><div class="notice">这里只作原理比较。真实实验中不要随意移开纸筒或改变火源位置；纸筒本身也可能燃烧，须由教师按实验要求操作。</div>';
+ }else{
+  title=kind==='science'?'微粒解释 · 科学说明':'使用说明与科学说明';
+  html=`${kind==='info'?'<h3>怎么用</h3><p>用右侧大按钮逐步操作：开始加热 → 加热中定格 → 继续加热 → 起飞前定格 → 松手 → 降落后定格。“完整演示”跳过中途定格。“暂停”可以停住动画；上方四个时刻可直接回看，不必从头等待。</p><p>“微粒解释”打开袋内外的微粒示意，可比较相同体积的冷、热空气；“活动记录”支持触屏或鼠标画图、选择冷暖、填写文字和导出图片。记录只在当前浏览器内暂存，不上传；清理浏览器数据可能使记录丢失。</p><p>键盘：<span class="key">空格</span>暂停 / 继续，<span class="key">R</span>重置实验，<span class="key">1—4</span>回看观察时刻。<span class="key">Esc</span>关闭说明。表单输入时不触发这些快捷键。</p>':''}
+  <h3>1. 微粒怎样表示加热？</h3><p>蓝色逐渐变红，表示温度升高；运动加快，表示无规则运动更剧烈。冷却时反向变化。微粒仍向各个方向运动，而不是都向上冲。微粒并不会真的变红、变大或变轻。</p>
+  <h3>2. 为什么整袋能够上升？</h3><p>袋口敞开，袋内外气压近似相同。相同体积的热空气比冷空气质量小、密度低。当周围空气提供的浮力大于袋子与袋内空气的总重力时，袋子可以从静止开始上升。袋子太重、体积太小或温度差不足，都可能无法升起。</p>
+  <h3>3. 为什么会降落？</h3><p>离开热源后，袋内空气逐渐冷却，密度差以及可提供的净上升作用减小；当无法继续支撑整袋时，它最终会下降。冷却已经开始时，袋子仍可能由于原有运动和剩余浮力继续上升一段。刚降落不代表已恢复室温，也不代表袋内没有空气。</p>
+  <h3>4. 袋口是敞开的，空气可以进出</h3><p>受热使已有空气的微粒运动加快，并不会凭空制造空气。本模型以点表示剖面取样的空气微粒群，随袋子形状改变，在袋口显示进出；点的总数不是袋内真实分子总数，也不是实际三维质量的直接计量。请用右侧“相同体积”的取样框比较疏密。</p>
+  <h3>5. 哪些地方是教学处理？</h3><p>升降使用简化的温度、理想气体密度、浮力、重力和阻力关系。微粒尺寸与速度、袋子的形变、散热快慢、横向位置和演示时长均为教学处理；不能用于判断真实实验的加热时长、起飞温度或安全距离。松手后，模拟同步熄灭桌面蜡烛，避免出现袋子落向明火的示范。</p><p>“比较浮力与重力”没有画出空气阻力和手的作用，不能把这两根箭头当作完整受力图。蓝红颜色属于解释模型，不是学生能用眼直接观察到的空气颜色。</p>
+  <div class="notice">模拟“摸一摸”只给出冷暖示意，不是实际测温。真实实验应由教师确认可触摸的安全部位，发烫部位不摸，不靠近袋口和火源。不要自行放飞孔明灯。</div>
+  <h3>内容依据</h3><p class="source-copy">装置、操作和四次记录时刻依据本课教材及作业本内容。微粒运动参考 <a href="https://www.acs.org/middleschoolchemistry/lessonplans/chapter1/lesson5.html" target="_blank" rel="noopener noreferrer">美国化学会：Air, It’s Really There</a>；浮力和热气球原理参考 <a href="https://www.grc.nasa.gov/www/k-12/WindTunnel/Activities/buoy_Archimedes.html" target="_blank" rel="noopener noreferrer">NASA Glenn：Buoyancy, Archimedes Principle</a>。这些参考链接需要联网，互动网页本身不需要联网。</p>`;
+ }
+ $('modal-title').textContent=title;$('modal-body').innerHTML=html;$('modal-backdrop').classList.remove('hidden');$('app').inert=true;
+ $('modal-close').focus();
+ if(kind==='tube')requestAnimationFrame(()=>drawTubeComparison());
+}
+function closeModal(){
+ $('modal-backdrop').classList.add('hidden');$('app').inert=false;modalKind='';if(modalReturnFocus&&document.contains(modalReturnFocus))modalReturnFocus.focus();else $('primary-btn').focus();
+}
+function drawTubeComparison(){
+ const c=$('compare-canvas');if(!c)return;const r=c.getBoundingClientRect();if(!r.width||!r.height)return;
+ const dpr=Math.min(devicePixelRatio||1,2);c.width=r.width*dpr;c.height=r.height*dpr;const g=c.getContext('2d');g.scale(dpr,dpr);g.clearRect(0,0,r.width,r.height);
+ const s=Math.min(r.width/760,r.height/290),ox=(r.width-760*s)/2,oy=(r.height-290*s)/2;g.translate(ox,oy);g.scale(s,s);
+ text(g,'没有纸筒',190,31,21,'#778577','center',650);text(g,'有纸筒',570,31,21,'#397856','center',650);
+ g.strokeStyle='#dce7dc';g.setLineDash([5,5]);g.beginPath();g.moveTo(380,20);g.lineTo(380,255);g.stroke();g.setLineDash([]);
+ for(let j=0;j<2;j++){
+  const x=j?570:190;
+  g.fillStyle='#e9dcb9';g.strokeStyle='#b9a988';roundRect(g,x-9,209,18,49,3);g.fill();g.stroke();g.fillStyle='#e8a149';g.beginPath();g.moveTo(x,209);g.quadraticCurveTo(x-14,198,x+2,178);g.quadraticCurveTo(x+16,201,x,209);g.fill();
+  if(j){g.fillStyle='#b0a2be35';g.strokeStyle='#b0a2be';g.lineWidth=2;g.beginPath();g.moveTo(x-38,91);g.lineTo(x-38,259);g.moveTo(x+38,91);g.lineTo(x+38,259);g.stroke();g.fillRect(x-38,91,76,168);g.beginPath();g.ellipse(x,91,38,8,0,0,Math.PI*2);g.stroke();}
+  for(let k=-2;k<=2;k++){
+   const endx=x+k*(j?11:40),endy=j?68:74+Math.abs(k)*19;
+   g.strokeStyle='#dcb071';g.lineWidth=3;g.beginPath();g.moveTo(x+k*3,179);g.bezierCurveTo(x+k*(j?8:30),145,endx,110,endx,endy);g.stroke();arrow(g,endx,endy+11,endx,endy,'#d39f5c',3,10);
+  }
+  text(g,j?'集中并引向袋口':'热空气易向四周扩散',x,286,18,j?'#4d8a61':'#8f987f','center');
+ }
+}
+let audio=null, master=null, fireGain=null;
+function initAudio(){
+ if(audio)return;const AC=window.AudioContext||window.webkitAudioContext;if(!AC){toast('此浏览器不支持网页音效。',true);prefs.sound=false;return;}
+ try{
+  audio=new AC();master=audio.createGain();master.gain.value=.52;master.connect(audio.destination);
+  const length=audio.sampleRate*2,buffer=audio.createBuffer(1,length,audio.sampleRate),data=buffer.getChannelData(0);let brown=0;
+  for(let i=0;i<length;i++){brown=(brown+(Math.random()*2-1)*.045)/1.02;data[i]=brown*2;}
+  const src=audio.createBufferSource();src.buffer=buffer;src.loop=true;const lp=audio.createBiquadFilter();lp.type='lowpass';lp.frequency.value=580;fireGain=audio.createGain();fireGain.gain.value=0;src.connect(lp);lp.connect(fireGain);fireGain.connect(master);src.start();
+ }catch(e){prefs.sound=false;audio=null;toast('音效无法启用，不影响实验操作。',true);}
+}
+function syncSound(){
+ if(fireGain&&audio)fireGain.gain.setTargetAtTime(prefs.sound&&state.flame&&!state.paused&&tab!=='record'?.105:0,audio.currentTime,.13);
+}
+function tone(type){
+ if(!prefs.sound)return;initAudio();if(!audio)return;audio.resume().catch(()=>{});
+ const notes={click:[420],touch:[520,600],notice:[560,730],ready:[523,659,784],release:[500,700,860],land:[500,380],reset:[480,400]};
+ const seq=notes[type]||notes.click;
+ seq.forEach((frequency,i)=>{const o=audio.createOscillator(),g=audio.createGain(),start=audio.currentTime+i*.09;o.type='sine';o.frequency.value=frequency;g.gain.setValueAtTime(0,start);g.gain.linearRampToValueAtTime(.105,start+.015);g.gain.exponentialRampToValueAtTime(.001,start+.16);o.connect(g);g.connect(master);o.start(start);o.stop(start+.18);o.onended=()=>{o.disconnect();g.disconnect();};});
+}
+function toggleSound(){
+ prefs.sound=!prefs.sound;if(prefs.sound){initAudio();if(audio)audio.resume().catch(()=>{});tone('ready');}
+ $('sound-btn').innerHTML=icon(prefs.sound?'sound':'muted');$('sound-btn').setAttribute('aria-pressed',String(prefs.sound));$('sound-btn').setAttribute('aria-label',prefs.sound?'关闭音效':'开启音效');$('sound-btn').title=prefs.sound?'关闭音效':'开启音效';$('sound-btn').classList.toggle('selected',prefs.sound);syncSound();
+}
+async function toggleFullscreen(){
+ try{
+  if(document.fullscreenElement)await document.exitFullscreen();
+  else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();
+  else toast('此浏览器不支持网页全屏；可使用浏览器的全屏或横屏显示。');
+ }catch(e){toast('未能进入全屏，请使用浏览器的全屏功能。',true);}
+}
+/* Wire the lesson controls. */
+$$('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+$$('.checkpoint').forEach(b=>b.addEventListener('click',()=>jumpTo(Number(b.dataset.checkpoint))));
+$('primary-btn').addEventListener('click',primaryAction);
+$('secondary-btn').addEventListener('click',()=>{
+ if(state.phase==='before')openModal('steps');
+ else if(state.phase==='heating'){if(state.heat)stopHeating();else releaseBag();}
+ else if(state.phase==='ready')openModal('tube');
+ else if(state.phase==='landed'){highlightedRow=-1;updateRowHighlight();setTab('record');}
+ else{state.fastCool=!state.fastCool;state.paused=false;state.snapshot=false;toast(state.fastCool?'已加快模拟冷却，用于观察下降。':'已恢复模型的自然冷却。');updateUI(true);}
+});
+$('record-current-btn').addEventListener('click',recordThisMoment);
+$('auto-btn').addEventListener('click',autoDemo);$('pause-btn').addEventListener('click',togglePause);$('reset-btn').addEventListener('click',()=>resetSimulation());
+$('speed-btn').addEventListener('click',()=>{const speeds=[.5,1,2];prefs.speed=speeds[(speeds.indexOf(prefs.speed)+1)%speeds.length];updateUI(true);toast(`演示速度：${prefs.speed} 倍。动画时长不代表真实实验时长。`);});
+$('particle-btn').addEventListener('click',()=>{prefs.particles=!prefs.particles;updateUI(true);});
+$('flow-btn').addEventListener('click',()=>{prefs.flow=!prefs.flow;updateUI(true);});
+$('cutaway-btn').addEventListener('click',()=>{prefs.cutaway=!prefs.cutaway;updateUI(true);});
+$('materials-btn').addEventListener('click',()=>openModal('steps'));$('info-btn').addEventListener('click',()=>openModal('info'));$('sound-btn').addEventListener('click',toggleSound);$('fullscreen-btn').addEventListener('click',toggleFullscreen);
+$('sidebar').addEventListener('click',e=>{
+ const b=e.target.closest('[data-action]');if(!b)return;
+ const a=b.dataset.action;
+ if(a==='touch')touchBag();else if(a==='reference'){observationRefs[checkpoint()]=!observationRefs[checkpoint()];invalidate();}else if(a==='tube')openModal('tube');else if(a==='science')openModal('science');
+});
+canvas.addEventListener('click',e=>{
+ const r=canvas.getBoundingClientRect(),b=bagGeometry(),x=(e.clientX-r.left-viewport.ox)/viewport.scale,y=(e.clientY-r.top-viewport.oy)/viewport.scale;
+ if(y>=b.y-b.h-10&&y<=b.y+18&&Math.abs(x-b.x)<widthAt((b.y-y)/b.h,b)+10)touchBag();
+ else if(Math.abs(x-WORLD.x)<WORLD.tubeWidth/2+10&&y>WORLD.tubeTop&&y<WORLD.floor)openModal('tube');
+});
+$('record-rows').addEventListener('click',e=>{
+ let b=e.target.closest('[data-temp-row]');
+ if(b){const i=Number(b.dataset.tempRow);recordData.rows[i].temp=recordData.rows[i].temp===b.dataset.temp?'':b.dataset.temp;$$( `[data-temp-row="${i}"]`).forEach(t=>{const chosen=t.dataset.temp===recordData.rows[i].temp;t.classList.toggle('selected',chosen);t.setAttribute('aria-pressed',String(chosen));});scheduleSave();tone('click');return;}
+ b=e.target.closest('[data-undo]');if(b){const i=Number(b.dataset.undo);recordData.rows[i].strokes.pop();renderDrawing(i);scheduleSave();return;}
+ b=e.target.closest('[data-clear-draw]');if(b){const i=Number(b.dataset.clearDraw);recordData.rows[i].strokes=[];renderDrawing(i);scheduleSave();return;}
+ b=e.target.closest('[data-revisit]');if(b){jumpTo(Number(b.dataset.revisit));return;}
+});
+['student-class','student-name','student-date'].forEach((id,i)=>$(id).addEventListener('input',e=>{recordData[['className','name','date'][i]]=e.target.value;scheduleSave();}));
+$('finding-input').addEventListener('input',e=>{recordData.finding=e.target.value;scheduleSave();});
+$('record-ref-btn').addEventListener('click',toggleRecordReferences);$('export-btn').addEventListener('click',exportRecord);$('clear-record-btn').addEventListener('click',clearRecord);$('back-lab-btn').addEventListener('click',()=>setTab(previousLabTab));
+$('modal-close').addEventListener('click',closeModal);$('modal-backdrop').addEventListener('click',e=>{if(e.target===$('modal-backdrop'))closeModal();});
+document.addEventListener('keydown',e=>{
+ if(modalKind){
+  if(e.key==='Escape'){e.preventDefault();closeModal();return;}
+  if(e.key==='Tab'){
+   const els=[...$('modal-backdrop').querySelectorAll('button,a[href],input,textarea,[tabindex="0"]')].filter(el=>!el.disabled&&el.getClientRects().length);
+   const first=els[0],last=els[els.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  }return;
+ }
+ if(e.target.closest('input,textarea,select,[contenteditable="true"]')||e.ctrlKey||e.metaKey||e.altKey||e.repeat)return;
+ if(e.code==='Space'&&tab!=='record'){e.preventDefault();togglePause();}
+ else if(e.key.toLowerCase()==='r'&&tab!=='record'){e.preventDefault();resetSimulation();}
+ else if(/^[1-4]$/.test(e.key)&&tab!=='record'){e.preventDefault();jumpTo(Number(e.key)-1);}
+});
+window.addEventListener('resize',()=>{resizeScene();if(tab==='record')resizeDrawings();if(modalKind==='tube')drawTubeComparison();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){state.paused=true;updateUI(true);}});
+window.addEventListener('beforeunload',saveRecordNow);
+let hotSampleTime=0;
+function frame(now){
+ const dt=lastFrame?Math.min((now-lastFrame)/1000,.05):0;lastFrame=now;
+ if(!state.paused&&tab!=='record'&&!document.hidden){
+  let remaining=dt*prefs.speed;
+  while(remaining>0&&!state.paused){const step=Math.min(remaining,.015);updatePhysics(step);updateParticles(step);visualTime+=step;sampleTime+=step;hotSampleTime+=step*(1+thermal()*1.5);remaining-=step;}
+ }
+ if(now-lastUI>220){updateUI(false);lastUI=now;}
+ renderScene();renderSamples();requestAnimationFrame(frame);
+}
+createMicroPanel();buildRecords();resetSimulation(true);
+if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){state.paused=true;updateUI(true);}
+if(window.ResizeObserver){
+ const ro=new ResizeObserver(()=>{if(tab!=='record')resizeScene();else resizeDrawings();});ro.observe($('scene'));ro.observe($('record-workspace'));
+}
+// Read-only model state for lesson adaptation and automated verification.
+Object.defineProperty(window,'HotAirBalloonLab',{value:Object.freeze({version:'1.0.1',getState:()=>Object.freeze({...state,checkpoint:checkpoint(),netLiftMass:netLiftMass(),particleCount:particles.length,view:tab})}),writable:false});
+requestAnimationFrame(()=>{resizeScene();requestAnimationFrame(frame);});
+})();
+</script>
+
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T2 · 二维绘图" title="本课最低技术需求：T2 · 二维绘图" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T2 · 二维绘图</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body></html>
