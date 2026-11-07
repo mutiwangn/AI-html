@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#142f40">
+<meta name="description" content="六上4.2用水计量时间：连续放水与倒回再测同步比较、水位与流量联动、补水溢流剖面及本班实测记录。单文件离线课堂互动。">
+<title>用水计量时间 · 水流观察室</title>
+<style>
+:root{--ink:#142f40;--muted:#596d78;--paper:#f3f5f3;--line:#d4ddde;--teal:#087e89;--amber:#bd6b16;--water:#58bed1;--mint:#e4f1ee;--base:clamp(18px,1.45vw,27px)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;font-size:var(--base);-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{color:inherit;white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:8px;min-height:46px;padding:8px 14px;font-weight:650;cursor:pointer;touch-action:manipulation}button:hover{background:var(--mint)}button:disabled{opacity:.45;cursor:default}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #0085a2;outline-offset:3px}button.primary{background:var(--ink);border-color:var(--ink);color:#fff}button[aria-pressed=true]{background:var(--mint);border-color:var(--teal);color:#065e68}button.small{font-size:clamp(16px,1.1vw,21px);padding:7px 11px;min-height:44px}button.flat{background:transparent;border-color:transparent}h1,h2,h3,p{margin:0}svg{display:block;width:100%;height:100%;font-family:inherit;overflow:hidden}a{color:var(--teal)}[hidden]{display:none!important}input[type=range]{width:100%;min-width:0;height:44px;margin:0;accent-color:var(--teal);cursor:pointer;touch-action:pan-y}input[type=range]::-webkit-slider-thumb{min-width:25px;min-height:25px}.app{height:100%;height:100dvh;display:flex;flex-direction:column;padding:0 24px 10px;gap:12px}.topbar{display:flex;align-items:center;gap:18px;min-height:81px;flex-shrink:0;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;white-space:nowrap}.brand svg{width:31px;height:38px;flex:none}.brand h1{font-size:clamp(25px,2.1vw,40px);letter-spacing:.02em}.nav{display:flex;gap:4px;align-self:stretch;align-items:center;margin:auto}.nav button{background:transparent;border:0;border-bottom:3px solid transparent;min-height:56px;padding:10px 16px;border-radius:0;color:var(--muted)}.nav button[aria-selected=true]{color:var(--teal);border-bottom-color:var(--teal)}.nav span{font-size:.75em;margin-right:8px;font-weight:400}.utilities{display:flex;gap:2px}.screen{flex:1;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:12px}.mission{min-height:45px;display:flex;align-items:center;justify-content:space-between;gap:14px}.mission h2{font-size:clamp(23px,1.85vw,35px);font-weight:650;line-height:1.3}.hole-control{display:flex;gap:5px;align-items:center;flex-shrink:0}.hole-control>span{font-size:17px;color:var(--muted);margin-right:4px}.hole-control button{min-width:62px}.experiment-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(315px,1fr);gap:18px;min-height:0}.stage{background:#fff;border:1px solid var(--line);border-radius:12px;min-width:0;min-height:0;overflow:hidden;position:relative}.compare-stage{display:grid;grid-template-rows:auto minmax(0,1fr) auto}.vessel-heads{display:grid;grid-template-columns:1fr 1fr;padding:15px 10px 0;text-align:center}.vessel-heads h3{font-size:clamp(22px,1.7vw,32px)}.vessel-heads p{font-size:clamp(15px,1.12vw,21px);color:var(--muted);margin-top:5px}.teal{color:var(--teal)}.amber{color:var(--amber)}.vessel-svg{min-height:0;flex:1}.stage-note{font-size:clamp(15px,1.1vw,21px);line-height:1.35;color:var(--muted);text-align:center;border-top:1px solid #e4e9e9;padding:8px 10px;background:#fafcfb}.records-panel{display:flex;flex-direction:column;padding:18px 20px;gap:14px;min-height:0}.panel-title{display:flex;gap:10px;align-items:center;justify-content:space-between}.panel-title h3{font-size:clamp(20px,1.5vw,29px);font-weight:650}.model-tag{font-size:16px;color:var(--muted)}.records-table{width:100%;border-collapse:collapse;table-layout:fixed;text-align:center}.records-table th{font-size:clamp(16px,1.15vw,22px);line-height:1.45;font-weight:500;color:var(--muted);padding:8px 2px 14px;border-bottom:1px solid var(--line)}.records-table td{font-size:clamp(26px,2.15vw,41px);font-weight:650;padding:20px 2px;border-bottom:1px solid #e1e7e7;font-variant-numeric:tabular-nums}.records-table th:first-child,.records-table td:first-child{text-align:left;width:30%}.records-table td:first-child{font-size:clamp(18px,1.3vw,25px);font-weight:500}.records-table td small{display:block;font-size:clamp(14px,1vw,18px);color:var(--muted);margin-top:4px;font-weight:400}.records-table td .sec{font-size:17px;margin-left:2px;font-weight:400}.records-table tr.active{background:#f1f8f7}.table-tools{display:flex;align-items:center;justify-content:space-between;gap:8px}.table-tools span{font-size:clamp(16px,1.05vw,20px);color:var(--muted)}.prompt{padding-top:12px;margin-top:auto;font-size:clamp(19px,1.4vw,27px);line-height:1.55;border-top:2px solid #dfebe8}.prompt small{display:block;font-size:clamp(14px,1.03vw,19px);line-height:1.5;color:var(--muted);margin-top:10px}.controls{display:flex;align-items:center;gap:12px;padding:9px 15px;border:1px solid var(--line);border-radius:10px;background:#fff;min-height:79px}.play-button{min-width:111px}.scrub{flex:1;min-width:0;display:grid;grid-template-columns:auto minmax(60px,1fr);align-items:center;gap:13px}.scrub label{font-size:18px;color:var(--muted);white-space:nowrap}.clock{min-width:105px;display:flex;align-items:baseline;gap:5px;justify-content:flex-end;white-space:nowrap;font-variant-numeric:tabular-nums}.clock strong{font-size:clamp(30px,2.5vw,45px)}.clock span{font-size:18px}.statusline{min-height:22px;display:flex;gap:14px;align-items:center;font-size:clamp(14px,1vw,19px);color:var(--muted);padding-left:115px}.statusline>span:last-child{margin-left:auto}.compat{position:fixed;left:25px;bottom:10px;font-size:13px;color:#637884;pointer-events:none;z-index:3}.stable-grid{grid-template-columns:minmax(0,1.65fr) minmax(340px,1fr)}.stable-stage{display:flex;flex-direction:column}.live-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 20px;border-bottom:1px solid var(--line)}.live-stats div{display:flex;justify-content:space-between;align-items:center;gap:6px}.live-stats span{font-size:clamp(17px,1.22vw,23px);color:var(--muted)}.live-stats strong{font-size:clamp(26px,2vw,38px);font-variant-numeric:tabular-nums}.live-stats small{font-size:17px;font-weight:400}.stability-panel{padding:18px 20px;display:flex;flex-direction:column;gap:12px}.tap-label{display:flex;align-items:center;justify-content:space-between;gap:8px}.tap-label label{font-size:clamp(21px,1.5vw,29px);font-weight:650}.tap-label output{font-size:clamp(26px,2vw,36px);font-weight:650;font-variant-numeric:tabular-nums}.tap-label output small{font-size:16px;font-weight:400}.range-labels{display:flex;justify-content:space-between;font-size:16px;color:var(--muted);margin-top:-6px}.overflow-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.overflow-row span{font-size:clamp(19px,1.4vw,26px)}.overflow-row button{min-width:98px}.stability-chart{flex:1;min-height:140px;display:flex;flex-direction:column}.stability-chart h3{font-size:clamp(19px,1.38vw,26px);font-weight:650;display:flex;align-items:center;justify-content:space-between}.stability-chart h3 span{font-size:16px;color:var(--muted);font-weight:400}.stability-chart svg{min-height:0;flex:1}.stable-prompt{font-size:clamp(17px,1.25vw,24px);line-height:1.45;color:var(--muted)}.step-controls{display:flex;align-items:center;gap:9px;flex:1}.stable-time-track{height:8px;border-radius:4px;background:#e5edec;flex:1;margin:0 10px;overflow:hidden}.stable-time-track i{display:block;height:100%;width:0;background:var(--teal)}.sr-only{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden}.modal{position:fixed;inset:0;background:rgba(13,35,45,.45);z-index:20;padding:24px;display:flex;align-items:center;justify-content:center}.teacher-sheet{background:#fff;border-radius:12px;padding:26px 32px;max-width:960px;width:100%;max-height:94vh;overflow:auto}.teacher-sheet header{display:flex;align-items:center;justify-content:space-between;gap:12px}.teacher-sheet h2{font-size:29px}.teacher-sheet h3{font-size:22px;margin-top:22px;margin-bottom:8px}.teacher-sheet p,.teacher-sheet li{font-size:19px;line-height:1.7}.teacher-sheet ul{margin:8px 0;padding-left:24px}.teacher-sheet .source{font-size:16px;color:var(--muted)}.toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);background:#142f40;color:#fff;border-radius:8px;padding:12px 20px;max-width:85vw;font-size:19px;z-index:30;text-align:center;pointer-events:none}.stream{stroke-linecap:round;stroke-dasharray:10 9}.flowing .stream{animation:flow .75s linear infinite}.return-flow{stroke-dasharray:10 8;animation:flow 1.3s linear infinite}@keyframes flow{to{stroke-dashoffset:-38}}@media(prefers-reduced-motion:reduce){.flowing .stream,.return-flow{animation:none}}@supports not(font-size:clamp(18px,1vw,24px)){body{font-size:20px}.brand h1{font-size:29px}.mission h2{font-size:25px}.vessel-heads h3{font-size:24px}.vessel-heads p,.stage-note{font-size:17px}.panel-title h3{font-size:22px}.records-table th{font-size:17px}.records-table td{font-size:30px}.records-table td:first-child{font-size:20px}.prompt{font-size:21px}.prompt small{font-size:16px}.clock strong{font-size:34px}.live-stats strong{font-size:29px}.tap-label label{font-size:23px}.stable-prompt{font-size:18px}}
+@media(min-width:1600px){.records-table td{padding:28px 2px}.stage-note{padding:11px}.topbar{min-height:96px}.screen{gap:18px}.controls{min-height:91px}.records-panel,.stability-panel{padding:25px 28px}}
+@media(max-width:1120px){.app{padding:0 16px 9px;gap:9px}.topbar{gap:8px;min-height:73px}.brand h1{font-size:25px}.brand svg{width:25px}.nav button{padding:10px 12px;font-size:19px}.utilities button{padding:6px 8px;font-size:15px}.experiment-grid{gap:12px;grid-template-columns:minmax(0,1.7fr) minmax(290px,1fr)}.records-panel,.stability-panel{padding:14px;gap:10px}.mission h2{font-size:24px}.records-table td{padding:20px 1px}.vessel-heads p{font-size:15px}.vessel-heads h3{font-size:23px}.stage-note{font-size:15px}.prompt{font-size:20px}.prompt small{font-size:15px}.controls{gap:8px;padding:8px 10px}.controls button{padding:8px 11px}.stable-grid{grid-template-columns:minmax(0,1.5fr) minmax(310px,1fr)}.compat{left:17px}.statusline{font-size:14px}.stable-prompt{font-size:18px}.live-stats{padding:10px 12px}}
+@media(max-height:850px) and (min-width:851px){.app{gap:7px}.topbar{min-height:66px}.screen{gap:8px}.mission{min-height:40px}.mission h2{font-size:24px}.records-panel,.stability-panel{padding:12px 15px;gap:8px}.records-table td{padding:13px 2px}.records-table th{padding:6px 2px 9px}.prompt{font-size:19px;padding-top:8px}.prompt small{display:none}.vessel-heads{padding-top:9px}.controls{min-height:67px}.stage-note{padding:6px}.stability-chart{min-height:110px}.overflow-row{padding:7px 0}.stable-prompt{font-size:16px}.live-stats{padding:8px 16px}}
+@media(max-width:850px) and (orientation:portrait){.app{padding:0 12px 8px;gap:8px}.topbar{min-height:98px;flex-wrap:wrap;gap:0;align-content:center}.brand{width:58%}.brand h1{font-size:24px}.utilities{width:42%;justify-content:flex-end}.nav{order:3;width:100%;justify-content:center;height:47px}.nav button{min-height:44px;height:44px;padding:8px 18px}.mission{min-height:52px}.mission h2{font-size:23px}.hole-control>span{display:none}.hole-control button{min-width:44px;padding:6px 8px}.experiment-grid{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:10px}.compare-stage{min-height:0}.vessel-heads{padding-top:7px}.vessel-heads h3{font-size:22px}.vessel-heads p{font-size:14px;margin-top:2px}.stage-note{font-size:14px;padding:5px}.records-panel{display:block;padding:8px 12px}.panel-title{margin-bottom:4px}.panel-title h3{font-size:19px}.model-tag{font-size:14px}.records-table th{font-size:15px;padding:3px 2px 5px}.records-table td{padding:5px 2px;font-size:24px}.records-table td:first-child{font-size:17px}.records-table td small{display:none}.records-table{width:100%}.table-tools{margin-top:6px}.table-tools span{font-size:14px}.table-tools button{min-height:37px;font-size:14px;padding:5px 9px}.prompt{display:none}.controls{min-height:70px;gap:6px;padding:7px 8px}.controls button{font-size:16px;padding:7px 9px}.play-button{min-width:76px}.scrub{gap:7px;grid-template-columns:1fr}.scrub label{display:none}.clock{min-width:73px}.clock strong{font-size:27px}.clock span{font-size:16px}.statusline{padding-left:88px;font-size:12px;min-height:20px;gap:5px}.statusline>span:first-child{display:none}.compat{left:13px;font-size:11px;bottom:10px}.stable-grid{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto}.stability-panel{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;padding:10px 12px}.tap-control{min-width:0}.tap-label label{font-size:20px}.tap-label output{font-size:24px}.tap-label output small{font-size:14px}.range-labels{font-size:13px}.overflow-row{padding:0;border-bottom:0;align-items:flex-start}.overflow-row span{font-size:18px;align-self:center}.overflow-row button{min-width:72px;font-size:16px}.stability-chart{grid-column:1 / -1;min-height:140px;height:155px;max-height:155px}.stability-chart h3{font-size:18px}.stability-chart h3 span{font-size:14px}.stable-prompt{grid-column:1 / -1;font-size:14px}.live-stats{padding:7px 12px}.live-stats span{font-size:16px}.live-stats strong{font-size:25px}.step-controls{gap:6px}.stable-time-track{margin:0 4px}.modal{padding:12px}.teacher-sheet{padding:18px}.teacher-sheet h2{font-size:24px}}
+@media(max-width:520px) and (orientation:portrait){.brand{width:59%;gap:6px}.brand h1{font-size:21px}.brand svg{width:21px}.utilities{width:41%}.utilities button{font-size:13px;padding:5px 6px;min-height:39px}.utilities #teacherButton{display:none}.topbar{min-height:92px}.mission{min-height:57px;gap:5px}.mission h2{font-size:19px;max-width:64%}.hole-control{gap:3px}.hole-control button{font-size:14px;min-width:35px;min-height:42px}.vessel-heads h3{font-size:19px}.vessel-heads p{font-size:11px}.stage-note{font-size:12px}.screen{gap:7px}.records-table th{font-size:13px}.records-table td{font-size:21px;padding:4px 2px}.records-table td:first-child{font-size:15px}.records-table td .sec{font-size:13px}.panel-title h3{font-size:17px}.table-tools span{font-size:12px}.controls{min-height:60px}.controls button{font-size:14px;padding:6px 8px;min-height:43px}.play-button{min-width:63px}.clock{min-width:64px}.clock strong{font-size:24px}.clock span{font-size:13px}.statusline>span:last-child{font-size:10px}.tap-label label{font-size:17px}.tap-label output{font-size:21px}.tap-label output small{font-size:12px}.stability-panel{gap:5px 10px;padding:8px 10px}.overflow-row span{font-size:16px}.overflow-row button{font-size:14px;min-width:61px;min-height:42px}.stability-chart{min-height:120px;height:132px;max-height:132px}.stability-chart h3{font-size:16px}.stable-prompt{font-size:12px}.live-stats span{font-size:13px}.live-stats strong{font-size:22px}.live-stats small{font-size:12px}.model-tag{font-size:12px}.step-controls button{min-width:0}.teacher-sheet p,.teacher-sheet li{font-size:16px}}
+
+/* ClassRecords: scoped, dependency-free classroom data overlay. */
+#recordsModal{position:fixed;left:0;top:0;right:0;bottom:0;z-index:6000;display:flex;flex-direction:column;box-sizing:border-box;padding:18px 26px 16px;background:#f5f8f7;color:#18363b;font-family:Arial,"Microsoft YaHei","PingFang SC",sans-serif;overflow:hidden;-webkit-text-size-adjust:100%}
+#recordsModal[hidden],#recordsModal [hidden]{display:none!important}
+#recordsModal *{box-sizing:border-box}
+#recordsModal .cr-heading{flex:0 0 auto;margin:0 0 10px}
+#recordsModal h2{margin:0;font-size:32px;font-weight:800;line-height:1.2;letter-spacing:.02em}
+#recordsModal .cr-subtitle{margin:5px 0 0;font-size:22px;line-height:1.3;color:#476167}
+#recordsModal .cr-table{flex:0 0 auto;width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;background:#fff;border:1px solid #c9d8d8;border-radius:12px;overflow:hidden}
+#recordsModal .cr-table th{width:180px;padding:9px 16px;font-size:24px;text-align:left;font-weight:800;line-height:1.25;vertical-align:middle}
+#recordsModal .cr-table td{padding:8px 12px;vertical-align:top}
+#recordsModal .cr-table tr+tr th,#recordsModal .cr-table tr+tr td{border-top:1px solid #dbe4e3}
+#recordsModal .cr-continuous{border-left:6px solid #087e89;color:#076a73}
+#recordsModal .cr-refill{border-left:6px solid #bd6b16;color:#9b540d}
+#recordsModal .cr-table label{display:block;font-size:21px;font-weight:600;line-height:1.25;margin:0 0 4px;white-space:nowrap}
+#recordsModal .cr-table input{display:block;width:100%;height:48px;border:2px solid #b7cdce;border-radius:8px;background:#fafcfb;color:#18363b;padding:4px 10px;font:700 28px/1.2 Arial,"Microsoft YaHei",sans-serif;outline:none}
+#recordsModal .cr-table input::placeholder{color:#8da3a5;opacity:1}
+#recordsModal .cr-table input:focus{border-color:#087e89;box-shadow:0 0 0 3px rgba(8,126,137,.16)}
+#recordsModal .cr-table input[aria-invalid="true"]{border-color:#b44039;background:#fff5f3}
+#recordsModal .cr-error{flex:0 0 auto;min-height:25px;margin:5px 0 0;color:#a5332d;font-size:20px;line-height:1.2}
+#recordsModal .cr-chart-panel{flex:1 1 auto;min-height:160px;display:flex;flex-direction:column;background:#fff;border:1px solid #cbdada;border-radius:12px;padding:9px 16px 5px;margin:3px 0 0;overflow:hidden}
+#recordsModal .cr-chart-heading{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;min-height:33px}
+#recordsModal h3{margin:0;font-size:24px;line-height:1.2;font-weight:800}
+#recordsModal .cr-legend{display:flex;align-items:center;margin-left:16px;font-size:20px;line-height:1.2;white-space:nowrap}
+#recordsModal .cr-legend span+span{margin-left:24px}
+#recordsModal .cr-legend i{display:inline-block;width:18px;height:18px;margin-right:7px;border-radius:3px;vertical-align:-2px}
+#recordsModal .cr-chart-body{position:relative;flex:1 1 auto;min-height:0;width:100%}
+#recordsModal .cr-chart{display:block;position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+#recordsModal .cr-footnote{flex:0 0 auto;margin:7px 0;font-size:20px;line-height:1.3;color:#476167}
+#recordsModal .cr-footer{flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;min-height:50px}
+#recordsModal .cr-save-state{flex:1 1 auto;margin:0 16px 0 0;font-size:20px;line-height:1.25;color:#476167}
+#recordsModal .cr-save-state.cr-unsaved{color:#a5332d}
+#recordsModal button{display:inline-block;min-height:48px;padding:9px 21px;border:2px solid #b5c9cb;border-radius:9px;background:#fff;color:#18363b;font:700 24px/1.2 Arial,"Microsoft YaHei","PingFang SC",sans-serif;white-space:nowrap;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+#recordsModal button+button{margin-left:12px}
+#recordsModal button:focus{outline:3px solid #61abb2;outline-offset:2px}
+#recordsModal button:disabled{opacity:.46;cursor:default}
+#recordsModal button.cr-primary{background:#087e89;border-color:#087e89;color:#fff}
+@media(max-width:1100px){#recordsModal{padding:16px 20px 14px}#recordsModal .cr-table th{width:155px;padding:8px 12px}#recordsModal .cr-table td{padding:8px 9px}#recordsModal .cr-table label{font-size:20px}}
+@media(max-width:620px){#recordsModal{padding:13px 12px 12px}#recordsModal h2{font-size:28px}#recordsModal .cr-subtitle{font-size:18px}#recordsModal .cr-heading{margin-bottom:8px}#recordsModal .cr-table th{width:81px;padding:7px 7px;font-size:18px}#recordsModal .cr-table td{padding:7px 5px}#recordsModal .cr-table label{font-size:15px;white-space:normal;min-height:36px;line-height:1.2}#recordsModal .cr-table input{height:46px;padding:3px 5px;font-size:24px}#recordsModal .cr-error{font-size:16px;min-height:21px}#recordsModal .cr-chart-panel{padding:8px 9px 3px;min-height:180px}#recordsModal .cr-chart-heading{display:block;min-height:53px}#recordsModal h3{font-size:21px}#recordsModal .cr-legend{font-size:17px;margin:7px 0 0}#recordsModal .cr-legend span+span{margin-left:18px}#recordsModal .cr-legend i{width:15px;height:15px;margin-right:5px}#recordsModal .cr-footnote{font-size:16px;line-height:1.3;margin:6px 0}#recordsModal .cr-footer{flex-wrap:wrap;justify-content:space-between}#recordsModal .cr-save-state{flex:0 0 100%;font-size:16px;margin:0 0 7px}#recordsModal button{font-size:18px;padding:9px 10px;min-height:46px}#recordsModal button+button{margin-left:6px}}
+@media(max-height:650px) and (min-width:621px){#recordsModal{padding:11px 18px 10px}#recordsModal .cr-heading{margin-bottom:6px}#recordsModal h2{font-size:28px}#recordsModal .cr-subtitle{font-size:19px;margin-top:3px}#recordsModal .cr-table th{font-size:22px}#recordsModal .cr-table td{padding:6px 9px}#recordsModal .cr-table label{font-size:18px;margin-bottom:3px}#recordsModal .cr-table input{height:44px;font-size:26px}#recordsModal .cr-error{font-size:18px;min-height:22px;margin-top:3px}#recordsModal .cr-chart-panel{min-height:125px;padding-top:5px}#recordsModal h3{font-size:22px}#recordsModal .cr-legend{font-size:18px}#recordsModal .cr-footnote{font-size:18px;margin:4px 0}#recordsModal .cr-save-state{font-size:18px}#recordsModal button{min-height:44px;font-size:21px;padding:8px 17px}#recordsModal .cr-footer{min-height:44px}}
+@media(max-height:520px) and (min-width:621px){#recordsModal{padding:8px 12px}#recordsModal .cr-heading{margin-bottom:4px}#recordsModal h2{font-size:23px}#recordsModal .cr-subtitle{font-size:16px;margin-top:1px}#recordsModal .cr-table th{font-size:19px;width:135px}#recordsModal .cr-table td{padding:3px 8px}#recordsModal .cr-table label{font-size:16px;margin-bottom:1px}#recordsModal .cr-table input{font-size:23px;height:44px}#recordsModal .cr-error{font-size:15px;min-height:18px;margin-top:2px}#recordsModal .cr-chart-panel{min-height:83px;margin-top:1px;padding:3px 12px 0}#recordsModal .cr-chart-heading{min-height:22px}#recordsModal h3{font-size:18px}#recordsModal .cr-legend{font-size:16px}#recordsModal .cr-legend i{height:13px;width:13px}#recordsModal .cr-footnote{font-size:14px;line-height:1.2;margin:3px 0}#recordsModal .cr-save-state{font-size:15px}#recordsModal button{font-size:18px;min-height:44px;padding:7px 16px}}
+
+</style>
+</head>
+<body>
+<div class="app" id="app">
+ <header class="topbar">
+  <div class="brand"><svg viewBox="0 0 32 40" aria-hidden="true"><path d="M16 3C13 10 4 19 4 26a12 12 0 0 0 24 0C28 19 19 10 16 3Z" fill="none" stroke="#087e89" stroke-width="2.8"/><path d="M9 27a7 7 0 0 0 7 7" fill="none" stroke="#58bed1" stroke-width="2.8" stroke-linecap="round"/></svg><h1>用水计量时间</h1></div>
+  <nav class="nav" aria-label="探究场景"><button id="navCompare" aria-selected="true" aria-controls="compareScreen"><span>01</span>两种测法</button><button id="navStable" aria-selected="false" aria-controls="stableScreen"><span>02</span>保持水位</button></nav>
+  <div class="utilities"><button class="small flat" id="recordsButton">实测记录</button><button class="small flat" id="teacherButton">教师</button><button class="small flat" id="fullscreenButton">全屏</button></div>
+ </header>
+ <main class="screen" id="compareScreen" aria-labelledby="compareQuestion">
+  <div class="mission"><h2 id="compareQuestion">同样流出 50 mL，用时一定相同吗？</h2><div class="hole-control" role="group" aria-label="两边同时改变孔径"><span>两边孔径</span><button class="small" data-diameter="0.8" aria-pressed="false">小</button><button class="small" data-diameter="1" aria-pressed="true">中</button><button class="small" data-diameter="1.2" aria-pressed="false">大</button></div></div>
+  <div class="experiment-grid">
+   <section class="stage compare-stage" aria-label="两种测法同步剖面观察">
+    <div class="vessel-heads"><div><h3 class="teal">连续放水</h3><p>200 mL 起，连续流出三个 50 mL</p></div><div><h3 class="amber">倒回再测</h3><p>倒回 50 mL，恢复到 200 mL</p></div></div>
+    <div class="vessel-svg" id="compareArt"></div>
+    <p class="stage-note" id="compareStageNote">看水面到小孔的高度 · 右侧重复使用同一份 50 mL 水</p>
+   </section>
+   <aside class="stage records-panel" aria-label="自动计时记录">
+    <div class="panel-title"><h3>自动计时记录</h3><span class="model-tag">模型值 · 秒</span></div>
+    <table class="records-table" aria-label="每个50毫升用时"><thead><tr><th id="timeHeading">每 50 mL</th><th class="teal" id="aTimeHeading">连续放水</th><th class="amber" id="bTimeHeading">倒回再测</th></tr></thead><tbody>
+     <tr id="dataRow0"><td><span id="rowLabel0">第 1 段</span><small id="rowSub0">0 → 50 mL</small></td><td class="teal" id="aTime0">—</td><td class="amber" id="bTime0">—</td></tr>
+     <tr id="dataRow1"><td><span id="rowLabel1">第 2 段</span><small id="rowSub1">50 → 100 mL</small></td><td class="teal" id="aTime1">—</td><td class="amber" id="bTime1">—</td></tr>
+     <tr id="dataRow2"><td><span id="rowLabel2">第 3 段</span><small id="rowSub2">100 → 150 mL</small></td><td class="teal" id="aTime2">—</td><td class="amber" id="bTime2">—</td></tr>
+    </tbody></table>
+    <div class="table-tools"><span id="tableHint">右侧为第 1、2、3 次</span><button class="small" id="tableModeButton" aria-pressed="false">看累计时间</button></div>
+    <p class="prompt" id="comparePrompt">哪一种测法，每次都回到<br>相同的起始条件？<small>累计时间可以直接比较吗？<br>用“本班实测记录”对照真实实验。</small></p>
+   </aside>
+  </div>
+  <div class="controls"><button class="primary play-button" id="comparePlay">开始</button><button id="compareReset" aria-label="重置两种测法">重来</button><div class="scrub"><label for="compareScrub">拖动回看</label><input id="compareScrub" type="range" min="0" max="1000" step="1" value="0" aria-label="累计流水时间回放，秒"></div><div class="clock"><strong id="compareClock">0.0</strong><span>秒</span></div><button class="small" id="compareSpeed" aria-label="切换回放速度，当前4倍">4×</button></div>
+  <footer class="statusline"><span id="compareStatus">相同容器、相同小孔、相同初始水量</span><span>按流水时间对齐，倒回用时不计 · 模型演示</span></footer>
+ </main>
+ <main class="screen" id="stableScreen" hidden aria-labelledby="stableQuestion">
+  <div class="mission"><h2 id="stableQuestion">每 10 秒流出的水，怎样才能更接近？</h2><span class="model-tag">稳水改进模型</span></div>
+  <div class="experiment-grid stable-grid">
+   <section class="stage stable-stage" aria-label="补水与溢流剖面">
+    <div class="live-stats"><div><span>容器水量</span><strong><span id="stableVolume" style="font:inherit;color:inherit">150.0</span><small> mL</small></strong></div><div><span>此刻流量</span><strong class="teal"><span id="stableRate" style="font:inherit;color:inherit">2.32</span><small> mL/s</small></strong></div></div>
+    <div class="vessel-svg" id="stableArt"></div>
+    <p class="stage-note" id="stableObservation">补水从上面进入；溢出的水另行收集。</p>
+   </section>
+   <aside class="stage stability-panel" aria-label="补水控制与每十秒出水量">
+    <div class="tap-control"><div class="tap-label"><label for="inflow">补水量</label><output id="inflowValue" for="inflow">0.0 <small>mL/s</small></output></div><input id="inflow" type="range" min="0" max="5" step="0.1" value="0" aria-label="补水流量，每秒毫升"><div class="range-labels"><span>关闭</span><span>加大</span></div></div>
+    <div class="overflow-row"><span>侧面溢流口</span><button id="overflowButton" aria-pressed="false">关闭</button></div>
+    <div class="stability-chart"><h3>每 10 秒，底孔出水量 <span>mL</span></h3><svg id="stableChart" viewBox="0 0 480 255" role="img" aria-label="尚未完成十秒测量"></svg></div>
+    <p class="stable-prompt" id="stablePrompt">只补水、只开溢流，或一起使用。<br>先猜，再看水位和出水量。</p>
+   </aside>
+  </div>
+  <div class="controls"><button class="primary play-button" id="stablePlay">开始</button><button id="stableReset">重来</button><div class="step-controls"><button class="small" id="stableStep">前进10秒</button><div class="stable-time-track" aria-hidden="true"><i id="stableProgress"></i></div></div><div class="clock"><strong id="stableClock">0.0</strong><span>秒</span></div><button class="small" id="stableSpeed" aria-label="切换回放速度，当前4倍">4×</button></div>
+  <footer class="statusline"><span id="stableStatus">中孔 · 起始 150 mL · 每轮 60 秒</span><span>补水来自外部水源，溢流水不计入底孔收水 · 模型演示</span></footer>
+ </main>
+</div>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div class="compat" data-aihtml-level="1">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="modal" id="teacherModal" role="dialog" aria-modal="true" aria-labelledby="teacherTitle" hidden>
+ <section class="teacher-sheet"><header><h2 id="teacherTitle">教学与模型说明</h2><button id="teacherClose">返回实验</button></header>
+  <h3>先做实物实验，再用数字证据解释</h3><p>教材《用水计量时间》（六上，第102—105页）先测200 mL水连续流出50、100、150 mL的累计用时，再比较倒回重测、持续补水。网页把水位、流量和计时记录同步显示；实测入口不会自动填入模型值。</p>
+  <h3>课堂上值得追问</h3><ul><li>“累计100 mL的用时”与“第二个50 mL的用时”，怎样区别？</li><li>倒回后每次相同，是否说明一次流水过程中始终一样快？</li><li>开了溢流口，补水不足时水位还能稳定吗？</li></ul>
+  <h3>模型边界</h3><p>模型使用等截面、开口容器和固定小孔，体积流量随水面到小孔高度的平方根变化。中孔的首段50 mL被设定为20秒，只用于比较趋势，不是实物实验的标准答案。真实瓶形、管阻、孔形、表面张力等会影响数值。</p><p>第二屏从150 mL起，补水由外部水源提供；侧面溢流口设在150 mL处，溢流水与底孔收水分开。侧孔视为足够宽：若高于150 mL才打开，会立即排出高于侧孔的水；真实装置需要过程。它是理解稳定水位的改进模型，并非元代四层铜壶的复原。多级补给的作用可结合教材讨论，不能理解为层数多就永久匀速。</p>
+  <h3>使用与保存</h3><p>单文件可离线打开。拖动回放条可暂停并回看；改变孔径会重新开始比较。“前进10秒”直接跳到下一个整10秒并记录。实测数据只保存在本机浏览器，可导出CSV；不会上传。全屏不可用的设备可直接使用横屏。</p>
+  <p class="source">依据：用户提供的教材第102—105页、教师用书第323—332页、材料说明书第24—25页。物理模型参考 <a href="https://openstax.org/books/college-physics-2e/pages/12-3-the-most-general-applications-of-bernoullis-equation" target="_blank" rel="noopener noreferrer">OpenStax：托里拆利定理</a>。装置示意全部为代码绘制，几何与渲染接口可独立替换。</p>
+ </section>
+</div>
+
+<section id="recordsModal" hidden role="dialog" aria-modal="true" aria-labelledby="crTitle" aria-describedby="crSubtitle">
+  <header class="cr-heading">
+    <h2 id="crTitle" tabindex="-1">本班实测记录</h2>
+    <p id="crSubtitle" class="cr-subtitle">填入真实实验数据；单位：秒。</p>
+  </header>
+  <table class="cr-table" aria-label="两种放水方法的真实计时记录">
+    <tbody>
+      <tr>
+        <th class="cr-continuous" scope="row">连续放水</th>
+        <td><label for="crCumulative1">累计50 mL</label><input id="crCumulative1" type="number" inputmode="decimal" min="0" step="any" placeholder="—" autocomplete="off" aria-label="连续放水，累计50毫升所用秒数" aria-describedby="crError"></td>
+        <td><label for="crCumulative2">累计100 mL</label><input id="crCumulative2" type="number" inputmode="decimal" min="0" step="any" placeholder="—" autocomplete="off" aria-label="连续放水，累计100毫升所用秒数" aria-describedby="crError"></td>
+        <td><label for="crCumulative3">累计150 mL</label><input id="crCumulative3" type="number" inputmode="decimal" min="0" step="any" placeholder="—" autocomplete="off" aria-label="连续放水，累计150毫升所用秒数" aria-describedby="crError"></td>
+      </tr>
+      <tr>
+        <th class="cr-refill" scope="row">倒回再测</th>
+        <td><label for="crRefill1">第一次50 mL</label><input id="crRefill1" type="number" inputmode="decimal" min="0" step="any" placeholder="—" autocomplete="off" aria-label="倒回再测，第一次50毫升独立计时秒数" aria-describedby="crError"></td>
+        <td><label for="crRefill2">第二次50 mL</label><input id="crRefill2" type="number" inputmode="decimal" min="0" step="any" placeholder="—" autocomplete="off" aria-label="倒回再测，第二次50毫升独立计时秒数" aria-describedby="crError"></td>
+        <td><label for="crRefill3">第三次50 mL</label><input id="crRefill3" type="number" inputmode="decimal" min="0" step="any" placeholder="—" autocomplete="off" aria-label="倒回再测，第三次50毫升独立计时秒数" aria-describedby="crError"></td>
+      </tr>
+    </tbody>
+  </table>
+  <p id="crError" class="cr-error" role="status" aria-live="polite"></p>
+  <div class="cr-chart-panel">
+    <div class="cr-chart-heading">
+      <h3>每50 mL用时</h3>
+      <div class="cr-legend" aria-label="图表图例"><span><i style="background:#087e89" aria-hidden="true"></i>连续放水</span><span><i style="background:#bd6b16" aria-hidden="true"></i>倒回再测</span></div>
+    </div>
+    <div class="cr-chart-body" id="crChartBody"><svg id="crChart" class="cr-chart" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="请先填入真实实验数据"></svg></div>
+  </div>
+  <p class="cr-footnote">连续放水用累计时间相减；倒回再测是三次独立计时。</p>
+  <footer class="cr-footer">
+    <p id="crSaveState" class="cr-save-state" role="status" aria-live="polite">本机已保存</p>
+    <button type="button" id="crExport" disabled>导出CSV</button>
+    <button type="button" id="crClear" disabled>清空</button>
+    <button type="button" class="cr-primary" id="crClose">返回实验</button>
+  </footer>
+</section>
+
+
+<script>
+/*
+ * WaterModel 1.0 — 六上4.2《用水计量时间》
+ * Deterministic teaching model; every time/flow value is a MODEL VALUE, not a
+ * measurement. Units: mL, s, and relative hole diameter.
+ *
+ * Assumptions: open, constant-cross-section vessel; fixed small bottom orifice;
+ * discharge coefficient held constant; free air at the surface and outlet.
+ * Torricelli gives Q = Cd A_hole sqrt(2 g h). Since h is proportional to V,
+ * this model uses dV/dt = -k sqrt(V), with k proportional to hole diameter^2.
+ * k is calibrated to make the first 50 mL from 200 mL take 20 model seconds.
+ * This calibration is illustrative, not a prediction for a particular bottle.
+ * Surface tension, changing drop size, inlet turbulence, outlet shape,
+ * viscosity changes, trapped air and a submerged outlet are not represented.
+ *
+ * MODEL_SOURCE:
+ * OpenStax, College Physics 2e, 12.3, "Torricelli's Theorem".
+ * https://openstax.org/books/college-physics-2e/pages/12-3-the-most-general-applications-of-bernoullis-equation
+ * The mass-balance integration and classroom parameter choices below are
+ * independently implemented. No textbook text or imagery is embedded.
+ *
+ * Ideal overflow: an open, sufficiently large overflow outlet holds volume
+ * at 150 mL ONLY while incoming flow can replace the bottom outflow. Opening
+ * it with a higher initial level releases the excess immediately in the
+ * model; this release is counted as overflow, never as timed bottom outflow.
+ * Start the stable-head scene at 150 mL to avoid that idealized initial jump.
+ */
+(function (root, factory) {
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.WaterModel = api;
+}(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this), function () {
+  'use strict';
+
+  var INITIAL = 200;
+  var CAPACITY = 250;
+  var OVERFLOW_LEVEL = 150;
+  var INTERVAL_VOLUME = 50;
+  var COUNT = 3;
+  var K = (Math.sqrt(200) - Math.sqrt(150)) / 10;
+  var EPS = 1e-9;
+  var SOURCE = 'https://openstax.org/books/college-physics-2e/pages/12-3-the-most-general-applications-of-bernoullis-equation';
+
+  function finite(value, fallback) {
+    value = Number(value);
+    return isFinite(value) ? value : fallback;
+  }
+
+  function nonnegative(value, fallback) {
+    return Math.max(0, finite(value, fallback));
+  }
+
+  function clamp(value, lower, upper) {
+    return Math.max(lower, Math.min(upper, value));
+  }
+
+  function diameterRatio(value) {
+    if (value === 'small') return 0.8;
+    if (value === 'medium') return 1;
+    if (value === 'large') return 1.2;
+    value = finite(value, 1);
+    return value > 0 ? clamp(value, 0.1, 3) : 1;
+  }
+
+  function coefficient(diameter) {
+    var d = diameterRatio(diameter);
+    return K * d * d;
+  }
+
+  function flowAtVolume(volume, diameter) {
+    return coefficient(diameter) * Math.sqrt(nonnegative(volume, 0));
+  }
+
+  function timeForOutflow(outflow, diameter, initialVolume) {
+    var initial = nonnegative(initialVolume === undefined ? INITIAL : initialVolume, INITIAL);
+    var quantity = clamp(nonnegative(outflow, 0), 0, initial);
+    return 2 * (Math.sqrt(initial) - Math.sqrt(initial - quantity)) / coefficient(diameter);
+  }
+
+  function compare(diameter) {
+    var d = diameterRatio(diameter);
+    var cumulative = [];
+    var segments = [];
+    var repeatCumulative = [];
+    var repeatSegments = [];
+    var previous = 0;
+    var first = timeForOutflow(INTERVAL_VOLUME, d);
+    for (var i = 0; i < COUNT; i += 1) {
+      var time = timeForOutflow((i + 1) * INTERVAL_VOLUME, d);
+      cumulative.push(time);
+      segments.push(time - previous);
+      repeatCumulative.push(first * (i + 1));
+      repeatSegments.push(first);
+      previous = time;
+    }
+    return {
+      diameterRatio: d,
+      coefficient: coefficient(d),
+      initialVolume: INITIAL,
+      intervalVolume: INTERVAL_VOLUME,
+      continuous: { cumulativeTimes: cumulative, segmentTimes: segments, duration: cumulative[COUNT - 1] },
+      repeat: { cumulativeTimes: repeatCumulative, segmentTimes: repeatSegments, duration: repeatCumulative[COUNT - 1] }
+    };
+  }
+
+  /* Stops and closes the bottom outlet after 150 mL has been collected. */
+  function draining(time, diameter) {
+    var info = compare(diameter);
+    var timings = info.continuous;
+    var t = clamp(nonnegative(time, 0), 0, timings.duration);
+    var finished = t >= timings.duration - EPS;
+    var remaining = Math.pow(Math.max(0, Math.sqrt(INITIAL) - info.coefficient * t / 2), 2);
+    if (finished) remaining = INITIAL - COUNT * INTERVAL_VOLUME;
+    var outflow = clamp(INITIAL - remaining, 0, COUNT * INTERVAL_VOLUME);
+    var completed = 0;
+    for (var i = 0; i < COUNT; i += 1) {
+      if (t >= timings.cumulativeTimes[i] - EPS) completed += 1;
+    }
+    var index = Math.min(COUNT - 1, completed);
+    var start = index ? timings.cumulativeTimes[index - 1] : 0;
+    var naturalFlow = flowAtVolume(remaining, info.diameterRatio);
+    return {
+      mode: 'continuous',
+      elapsed: t,
+      duration: timings.duration,
+      remaining: remaining,
+      outflow: outflow,
+      receiverVolume: outflow,
+      cumulativeOutflow: outflow,
+      flowRate: finished ? 0 : naturalFlow,
+      naturalFlowRate: naturalFlow,
+      finished: finished,
+      progress: t / timings.duration,
+      segmentIndex: index,
+      segmentNumber: index + 1,
+      segmentElapsed: clamp(t - start, 0, timings.segmentTimes[index]),
+      segmentOutflow: clamp(outflow - index * INTERVAL_VOLUME, 0, INTERVAL_VOLUME),
+      completedSegments: completed,
+      cumulativeTimes: timings.cumulativeTimes,
+      segmentTimes: timings.segmentTimes,
+      diameterRatio: info.diameterRatio,
+      headFraction: remaining / INITIAL,
+      fillFraction: remaining / CAPACITY
+    };
+  }
+
+  /* Three separate 200 -> 150 mL trials. Returned 50 mL is reused each time.
+   * elapsed is the sum of FLOWING time; pouring-back and waiting time are
+   * excluded. At a trial boundary the next trial starts at 200 mL instantly.
+   * outflow/receiverVolume is the CURRENT cup (0..50), not a 150 mL collection.
+   */
+  function repeated(time, diameter) {
+    var info = compare(diameter);
+    var timings = info.repeat;
+    var trialTime = timings.segmentTimes[0];
+    var t = clamp(nonnegative(time, 0), 0, timings.duration);
+    var finished = t >= timings.duration - EPS;
+    var completed = finished ? COUNT : Math.min(COUNT - 1, Math.floor((t + EPS) / trialTime));
+    var index = Math.min(COUNT - 1, completed);
+    var localTime = finished ? trialTime : clamp(t - index * trialTime, 0, trialTime);
+    var remaining = Math.pow(Math.max(0, Math.sqrt(INITIAL) - info.coefficient * localTime / 2), 2);
+    if (finished) remaining = INITIAL - INTERVAL_VOLUME;
+    var cup = clamp(INITIAL - remaining, 0, INTERVAL_VOLUME);
+    var naturalFlow = flowAtVolume(remaining, info.diameterRatio);
+    return {
+      mode: 'repeat',
+      elapsed: t,
+      duration: timings.duration,
+      remaining: remaining,
+      outflow: cup,
+      receiverVolume: cup,
+      cumulativeOutflow: finished ? COUNT * INTERVAL_VOLUME : index * INTERVAL_VOLUME + cup,
+      flowRate: finished ? 0 : naturalFlow,
+      naturalFlowRate: naturalFlow,
+      finished: finished,
+      progress: t / timings.duration,
+      segmentIndex: index,
+      segmentNumber: index + 1,
+      segmentElapsed: localTime,
+      segmentOutflow: cup,
+      completedSegments: completed,
+      resetCount: finished ? COUNT - 1 : index,
+      cumulativeTimes: timings.cumulativeTimes,
+      segmentTimes: timings.segmentTimes,
+      diameterRatio: info.diameterRatio,
+      headFraction: remaining / INITIAL,
+      fillFraction: remaining / CAPACITY
+    };
+  }
+
+  /* Accurate -log(1-z), including small z on older JavaScript engines. */
+  function negativeLog1m(z) {
+    if (z >= 1) return Infinity;
+    if (Math.log1p) return -Math.log1p(-z);
+    if (z < 0.0001) return z + z * z / 2 + z * z * z / 3 + Math.pow(z, 4) / 4;
+    return -Math.log(1 - z);
+  }
+
+  /* Exact implicit solution for dV/dt = inflow - k*sqrt(V).
+   * y=sqrt(V), ye=inflow/k; z is the fraction travelled towards ye.
+   * time(z) = (2/k) * [ -z(ye-y0) - ye*log(1-z) ].
+   * This is monotone, so bisection is stable on either side of equilibrium.
+   */
+  function travelTime(v0, v1, inflow, k) {
+    if (Math.abs(v0 - v1) < 1e-13) return 0;
+    if (inflow === 0) return 2 * (Math.sqrt(v0) - Math.sqrt(v1)) / k;
+    var y0 = Math.sqrt(v0);
+    var ye = inflow / k;
+    var delta = ye - y0;
+    if (Math.abs(delta) < 1e-14) return Infinity;
+    var z = (Math.sqrt(v1) - y0) / delta;
+    if (z < 0 || z >= 1) return Infinity;
+    return Math.max(0, 2 / k * (-z * delta + ye * negativeLog1m(z)));
+  }
+
+  function freeVolume(v0, time, inflow, k) {
+    if (time <= 0) return v0;
+    if (inflow === 0) return Math.pow(Math.max(0, Math.sqrt(v0) - k * time / 2), 2);
+    var y0 = Math.sqrt(v0);
+    var ye = inflow / k;
+    var delta = ye - y0;
+    if (Math.abs(delta) < 1e-12) return v0;
+    var lower = 0;
+    var upper = 1;
+    for (var i = 0; i < 54; i += 1) {
+      var z = (lower + upper) / 2;
+      var t = 2 / k * (-z * delta + ye * negativeLog1m(z));
+      if (t < time) lower = z; else upper = z;
+    }
+    return Math.pow(y0 + (lower + upper) / 2 * delta, 2);
+  }
+
+  function advanceVolume(volume, time, inflow, k, limit) {
+    var excessAtStart = Math.max(0, volume - limit);
+    var initial = Math.min(volume, limit);
+    var capFlow = k * Math.sqrt(limit);
+    var excessLater = 0;
+    var finalVolume;
+    var bottomOut;
+    if (inflow > capFlow && initial < limit) {
+      var atLimit = travelTime(initial, limit, inflow, k);
+      if (atLimit <= time) {
+        finalVolume = limit;
+        excessLater = (inflow - capFlow) * (time - atLimit);
+      } else {
+        finalVolume = freeVolume(initial, time, inflow, k);
+      }
+    } else if (inflow >= capFlow && initial >= limit - 1e-12) {
+      finalVolume = limit;
+      excessLater = Math.max(0, inflow - capFlow) * time;
+    } else {
+      finalVolume = freeVolume(initial, time, inflow, k);
+    }
+    finalVolume = clamp(finalVolume, 0, limit);
+    bottomOut = Math.max(0, initial + inflow * time - finalVolume - excessLater);
+    return { volume: finalVolume, bottom: bottomOut, excess: excessAtStart + excessLater };
+  }
+
+  function createStableState(initialVolume, overflowOn, diameter) {
+    var initial = nonnegative(initialVolume === undefined ? OVERFLOW_LEVEL : initialVolume, OVERFLOW_LEVEL);
+    var enabled = Boolean(overflowOn);
+    var limit = enabled ? OVERFLOW_LEVEL : CAPACITY;
+    var volume = Math.min(initial, limit);
+    var excess = initial - volume;
+    return {
+      elapsed: 0,
+      initialVolume: initial,
+      volume: volume,
+      exitTotal: 0,
+      overflowTotal: enabled ? excess : 0,
+      spillTotal: enabled ? 0 : excess,
+      inflowTotal: 0,
+      exitRate: flowAtVolume(volume, diameter),
+      inflowRate: 0,
+      overflowRate: 0,
+      spillRate: 0,
+      overflowOn: enabled,
+      diameterRatio: diameterRatio(diameter),
+      capacity: CAPACITY,
+      overflowLevel: OVERFLOW_LEVEL,
+      headFraction: volume / INITIAL,
+      fillFraction: volume / CAPACITY,
+      measurements: [],
+      currentIntervalVolume: 0,
+      massBalanceError: 0
+    };
+  }
+
+  /* Pure state transition. Constant controls during dt are integrated with
+   * the exact implicit solution. Every completed 10-s bottom-flow collection
+   * is recorded in measurements; changing controls between calls is allowed.
+   * Never mutates the input state or its measurement array.
+   */
+  function stepStable(state, dt, inflow, overflowOn, diameter) {
+    var prior = state || createStableState();
+    var duration = Math.min(nonnegative(dt, 0), 86400);
+    var startTime = nonnegative(prior.elapsed, 0);
+    var finalTime = startTime + duration;
+    var incoming = Math.min(nonnegative(inflow === undefined ? prior.inflowRate : inflow, 0), 1000);
+    var enabled = overflowOn === undefined ? Boolean(prior.overflowOn) : Boolean(overflowOn);
+    var d = diameterRatio(diameter === undefined ? prior.diameterRatio : diameter);
+    var k = coefficient(d);
+    var limit = enabled ? OVERFLOW_LEVEL : CAPACITY;
+    var current = {
+      elapsed: startTime,
+      initialVolume: nonnegative(prior.initialVolume, OVERFLOW_LEVEL),
+      volume: nonnegative(prior.volume, OVERFLOW_LEVEL),
+      exitTotal: nonnegative(prior.exitTotal, 0),
+      overflowTotal: nonnegative(prior.overflowTotal, 0),
+      spillTotal: nonnegative(prior.spillTotal, 0),
+      inflowTotal: nonnegative(prior.inflowTotal, 0),
+      measurements: (prior.measurements || []).slice(),
+      currentIntervalVolume: nonnegative(prior.currentIntervalVolume, 0)
+    };
+
+    /* Apply an opened ideal overflow even when dt=0. */
+    var released = Math.max(0, current.volume - limit);
+    current.volume -= released;
+    if (enabled) current.overflowTotal += released; else current.spillTotal += released;
+
+    while (current.elapsed < finalTime) {
+      var nextBoundary = (Math.floor(current.elapsed / 10) + 1) * 10;
+      var end = Math.min(finalTime, nextBoundary);
+      var deltaTime = end - current.elapsed;
+      var advanced = advanceVolume(current.volume, deltaTime, incoming, k, limit);
+      current.volume = advanced.volume;
+      current.exitTotal += advanced.bottom;
+      current.currentIntervalVolume += advanced.bottom;
+      current.inflowTotal += incoming * deltaTime;
+      if (enabled) current.overflowTotal += advanced.excess; else current.spillTotal += advanced.excess;
+      current.elapsed = end;
+      if (end === nextBoundary) {
+        current.measurements.push({
+          startTime: nextBoundary - 10,
+          endTime: nextBoundary,
+          volume: current.currentIntervalVolume,
+          averageRate: current.currentIntervalVolume / 10
+        });
+        current.currentIntervalVolume = 0;
+      }
+    }
+    current.elapsed = finalTime;
+    current.exitRate = k * Math.sqrt(current.volume);
+    current.inflowRate = incoming;
+    current.overflowOn = enabled;
+    current.diameterRatio = d;
+    current.capacity = CAPACITY;
+    current.overflowLevel = OVERFLOW_LEVEL;
+    current.headFraction = current.volume / INITIAL;
+    current.fillFraction = current.volume / CAPACITY;
+    var outgoingExcessRate = current.volume >= limit - 1e-8 ? Math.max(0, incoming - current.exitRate) : 0;
+    current.overflowRate = enabled ? outgoingExcessRate : 0;
+    current.spillRate = enabled ? 0 : outgoingExcessRate;
+    current.massBalanceError = current.initialVolume + current.inflowTotal - current.volume - current.exitTotal - current.overflowTotal - current.spillTotal;
+    return current;
+  }
+
+  function simulateStable(totalTime, inflow, overflowOn, initialVolume, diameter) {
+    var initial = initialVolume === undefined ? INITIAL : initialVolume;
+    return stepStable(createStableState(initial, overflowOn, diameter), totalTime, inflow, overflowOn, diameter);
+  }
+
+  return {
+    VERSION: '1.0',
+    MODEL_SOURCE: SOURCE,
+    INITIAL_VOLUME: INITIAL,
+    CAPACITY: CAPACITY,
+    OVERFLOW_LEVEL: OVERFLOW_LEVEL,
+    INTERVAL_VOLUME: INTERVAL_VOLUME,
+    BASE_COEFFICIENT: K,
+    diameterRatio: diameterRatio,
+    coefficient: coefficient,
+    flowAtVolume: flowAtVolume,
+    timeForOutflow: timeForOutflow,
+    compare: compare,
+    draining: draining,
+    repeated: repeated,
+    createStableState: createStableState,
+    stepStable: stepStable,
+    simulateStable: simulateStable
+  };
+}));
+
+</script>
+<script>
+(function () {
+ 'use strict';
+ var W = window.WaterModel;
+ var $ = function (id) { return document.getElementById(id); };
+ var state = { page:'compare', time:0, playing:false, diameter:1, speed:4, cumulative:false,
+  stable:W.createStableState(150,false,1), stablePlaying:false, stableSpeed:4, inflow:0, overflow:false, stopAt:60, changes:[] };
+ var previousFrame = 0, lastPaint = 0, toastTimer = 0, returnFocus = null;
+ var chartCache = '', comparisonCache = '';
+ var n = function (value, digits) { return Number(value).toFixed(digits === undefined ? 1 : digits); };
+ function attr(id,key,value) { $(id).setAttribute(key,String(value)); }
+ function showToast(message) { $('toast').textContent=message; $('toast').hidden=false; window.clearTimeout(toastTimer); toastTimer=window.setTimeout(function(){ $('toast').hidden=true; },3200); }
+ function setSvgContent(svg,markup) {
+  var holder=document.createElement('div');
+  holder.innerHTML='<svg xmlns="http://www.w3.org/2000/svg">'+markup+'</svg>';
+  var source=holder.firstChild;
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+  while(source.firstChild) svg.appendChild(source.firstChild);
+ }
+ /* Replaceable illustration interface: vessel markup and stable-head markup.
+  * All positions are independent of WaterModel. Keep each id contract when
+  * substituting refined SVG or a future model. No external assets are used.
+  */
+ function vesselMarkup(id,offset,color) {
+  var s='<g transform="translate('+offset+' 0)">';
+  s+='<ellipse cx="230" cy="423" rx="103" ry="10" fill="#edf2f1"/>';
+  s+='<path d="M142 28V270Q142 282 154 282H306Q318 282 318 270V28" fill="#f7fbfc" stroke="#799ba6" stroke-width="3"/>';
+  s+='<rect id="'+id+'Water" x="146" y="82" width="168" height="196" fill="url(#waterFill)"/>';
+  s+='<ellipse id="'+id+'Surface" cx="230" cy="82" rx="84" ry="7" fill="#9bdae4" stroke="#3daac0" stroke-width="2"/>';
+  s+='<path d="M153 38V267M307 38V267" stroke="#fff" stroke-width="5" opacity=".75"/>';
+  s+='<ellipse cx="230" cy="28" rx="88" ry="10" fill="none" stroke="#799ba6" stroke-width="3"/>';
+  for(var v=50;v<=200;v+=50) {
+   var y=280-v;
+   s+='<path d="M129 '+y+'H150" stroke="#829aa4" stroke-width="2"/><text x="116" y="'+(y+8)+'" text-anchor="end" font-size="25" fill="#536d79">'+v+'</text>';
+  }
+  s+='<text x="116" y="31" text-anchor="end" font-size="22" fill="#536d79">mL</text>';
+  s+='<path d="M141 80H321" stroke="#698c98" stroke-width="2" stroke-dasharray="6 6" opacity=".6"/>';
+  s+='<text id="'+id+'Volume" x="230" y="191" text-anchor="middle" font-size="43" font-weight="650" fill="#143c4c">200</text>';
+  s+='<text x="230" y="220" text-anchor="middle" font-size="23" fill="#335e6d">mL</text>';
+  s+='<path id="'+id+'Head" d="M343 80H358M351 80V280M343 280H358" fill="none" stroke="'+color+'" stroke-width="3"/>';
+  s+='<text x="367" y="171" font-size="24" fill="'+color+'">水面</text><text x="367" y="202" font-size="24" fill="'+color+'">到小孔</text>';
+  s+='<rect x="220" y="279" width="20" height="13" rx="4" fill="#526f7c"/><rect id="'+id+'Hole" x="226" y="289" width="8" height="5" rx="2" fill="#143342"/>';
+  s+='<path id="'+id+'Stream" class="stream" d="M230 295V352" stroke="#38a8c0" stroke-width="6" fill="none"/>';
+  s+='<path id="'+id+'Valve" d="M217 295H243" stroke="#bd6b16" stroke-width="5" visibility="hidden"/>';
+  s+='<text id="'+id+'Rate" x="210" y="322" text-anchor="end" font-size="24" fill="#087e89">— mL/s</text>';
+  s+='<path d="M154 348V410Q154 419 164 419H296Q306 419 306 409V348" fill="#f5fafb" stroke="#799ba6" stroke-width="3"/>';
+  s+='<rect id="'+id+'Cup" x="158" y="416" width="144" height="0" fill="#8ed5e1"/>';
+  s+='<path d="M158 416H302" stroke="#799ba6" stroke-width="2"/>';
+  for(var c=50;c<=150;c+=50) s+='<path d="M291 '+(416-c*.32)+'H305" stroke="#648b9a" stroke-width="2"/>';
+  s+='<text id="'+id+'Collected" x="230" y="451" text-anchor="middle" font-size="27" fill="'+color+'" font-weight="600">'+(id==='a'?'累计':'本次')+' 0.0 mL</text>';
+  if(id==='b') s+='<g id="returnArrow" opacity="0"><path class="return-flow" d="M310 383C456 383 452 16 300 16" stroke="#bd6b16" stroke-width="4" fill="none" marker-end="url(#returnTip)"/></g>';
+  return s+'</g>';
+ }
+ function buildComparisonArt() {
+  $('compareArt').innerHTML='<svg id="compareSvg" viewBox="0 0 940 466" role="img" aria-label="两个等截面容器中水位和流量的同步比较"><defs><linearGradient id="waterFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8e6eb"/><stop offset="1" stop-color="#65bbcf"/></linearGradient><marker id="returnTip" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 2L10 6L2 10" fill="none" stroke="#bd6b16" stroke-width="2"/></marker></defs><path d="M470 20V445" stroke="#e1e8e8" stroke-width="2"/>'+vesselMarkup('a',0,'#087e89')+vesselMarkup('b',470,'#bd6b16')+'</svg>';
+ }
+ function buildStableArt() {
+  $('stableArt').innerHTML='<svg id="stableSvg" viewBox="0 0 790 460" role="img" aria-label="外部补水、侧面溢流和底孔出水的独立路径"><defs><linearGradient id="stableFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8e6eb"/><stop offset="1" stop-color="#65bbcf"/></linearGradient></defs>'+
+   '<path d="M156 14H284Q304 14 304 34V56" stroke="#8aa8b1" stroke-width="18" fill="none"/><path d="M156 14H284Q304 14 304 34V56" stroke="#e0e9e9" stroke-width="11" fill="none"/><path d="M266 1V29M252 1H280" stroke="#597d8a" stroke-width="7" fill="none" stroke-linecap="round"/><text x="156" y="65" font-size="25" fill="#596d78">外部补水</text><path id="inletStream" class="stream" d="M304 62V160" stroke="#38a8c0" stroke-width="7" fill="none"/>'+
+   '<ellipse cx="347" cy="429" rx="112" ry="10" fill="#edf2f1"/><ellipse cx="649" cy="429" rx="86" ry="9" fill="#edf2f1"/><path d="M248 73V315Q248 326 260 326H434Q446 326 446 314V73" fill="#f7fbfc" stroke="#799ba6" stroke-width="3"/><rect id="steadyWater" x="252" y="174" width="190" height="149" fill="url(#stableFill)"/><ellipse id="steadySurface" cx="347" cy="174" rx="95" ry="7" fill="#9bdae4" stroke="#3daac0" stroke-width="2"/><path d="M260 82V313M435 82V313" stroke="#fff" stroke-width="5" opacity=".75"/><ellipse cx="347" cy="73" rx="99" ry="10" fill="none" stroke="#799ba6" stroke-width="3"/>'+
+   '<path d="M224 174H457" stroke="#bd6b16" stroke-dasharray="7 6" stroke-width="2"/><text x="213" y="183" text-anchor="end" font-size="27" fill="#bd6b16">150 mL</text><text x="213" y="215" text-anchor="end" font-size="23" fill="#596d78">溢流口高度</text><path id="steadyHead" d="M205 174H218M211 174V324M205 324H218" stroke="#087e89" stroke-width="3" fill="none"/><text x="198" y="270" text-anchor="end" font-size="25" fill="#087e89">水面到小孔</text>'+
+   '<path d="M445 176H549Q566 176 566 193V268H649V322" stroke="#799ba6" stroke-width="16" fill="none"/><path d="M445 176H549Q566 176 566 193V268H649V322" stroke="#edf4f5" stroke-width="10" fill="none"/><path id="overflowStream" class="stream" d="M445 176H549Q566 176 566 193V268H649V360" stroke="#38a8c0" stroke-width="5" fill="none"/>'+
+   '<g id="overflowValve" role="button" tabindex="0" aria-label="打开侧面溢流口" style="cursor:pointer"><rect x="479" y="139" width="74" height="73" rx="12" fill="transparent"/><path id="valveGate" d="M511 161V191" stroke="#bd6b16" stroke-width="8" stroke-linecap="round"/><circle cx="511" cy="176" r="22" fill="none" stroke="#bd6b16" stroke-width="3"/></g><text x="576" y="150" font-size="25" fill="#bd6b16">溢流支路</text>'+
+   '<path id="topSpill" class="stream" d="M446 74H474V331H702V360" stroke="#bd6b16" stroke-width="5" fill="none" visibility="hidden"/><text id="topSpillLabel" x="514" y="95" font-size="24" fill="#bd6b16" visibility="hidden">顶部漫出</text>'+
+   '<rect x="337" y="323" width="20" height="14" rx="4" fill="#526f7c"/><path id="bottomStream" class="stream" d="M347 339V365" stroke="#38a8c0" stroke-width="6" fill="none"/>'+
+   '<path d="M267 360V419H427V360" fill="#f5fafb" stroke="#799ba6" stroke-width="3"/><rect id="steadyCup" x="271" y="415" width="152" height="0" fill="#8ed5e1"/><text id="steadyCollected" x="347" y="454" text-anchor="middle" font-size="27" fill="#087e89" font-weight="600">底孔 0.0 mL</text>'+
+   '<path d="M581 360V419H717V360" fill="#f5fafb" stroke="#799ba6" stroke-width="3"/><rect id="wasteCup" x="585" y="415" width="128" height="0" fill="#bedee3"/><text id="wasteCollected" x="649" y="454" text-anchor="middle" font-size="26" fill="#bd6b16" font-weight="600">溢出 0.0 mL</text></svg>';
+ }
+ function paintVessel(id, data) {
+  var y=280-data.remaining;
+  attr(id+'Water','y',y); attr(id+'Water','height',Math.max(0,data.remaining-2)); attr(id+'Surface','cy',y);
+  $(id+'Volume').textContent=n(data.remaining,0);
+  attr(id+'Head','d','M343 '+y+'H358M351 '+y+'V280M343 280H358');
+  var cupHeight=data.receiverVolume*.32;
+  attr(id+'Cup','y',416-cupHeight); attr(id+'Cup','height',cupHeight);
+  $(id+'Collected').textContent=(id==='a'?'累计 ':'本次 ')+n(data.receiverVolume)+' mL';
+  $(id+'Rate').textContent=(state.time<=0?'—':n(data.flowRate,2))+' mL/s';
+  attr(id+'Stream','stroke-width',Math.max(2,4*state.diameter));
+  attr(id+'Stream','opacity',state.playing&&!data.finished?1:0.18);
+  attr(id+'Stream','visibility',data.finished||state.time===0?'hidden':'visible');
+  attr(id+'Valve','visibility',data.finished?'visible':'hidden');
+  attr(id+'Hole','width',8*state.diameter);attr(id+'Hole','x',230-4*state.diameter);
+ }
+ function paintComparison() {
+  var data=W.compare(state.diameter), a=W.draining(state.time,state.diameter), b=W.repeated(state.time,state.diameter);
+  paintVessel('a',a);paintVessel('b',b);
+  $('compareSvg').setAttribute('class',state.playing?'flowing':'');
+  $('compareClock').textContent=n(state.time);$('compareScrub').value=state.time/data.continuous.duration*1000;
+  $('compareScrub').max=1000;attr('compareScrub','aria-valuetext',n(state.time)+'秒，按流水时间对齐');
+  $('comparePlay').textContent=state.playing?'暂停':(state.time>=data.continuous.duration-.001?'再看一次':(state.time>0?'继续':'开始'));
+  var subs=document.querySelectorAll('.vessel-heads p');
+  subs[0].textContent=a.finished?'三个 50 mL 已完成，关闭小孔':'200 mL 起，连续流出三个 50 mL';
+  subs[1].textContent=b.finished?'三次已完成；量杯中仍是 50 mL':(b.segmentNumber>1?'第 '+b.segmentNumber+' 次：恢复到 200 mL 后重测':'倒回 50 mL，恢复到 200 mL');
+  attr('returnArrow','opacity',b.segmentNumber>1&&!b.finished&&b.segmentElapsed<3?1:0);
+  var key=[state.diameter,state.cumulative,a.completedSegments,b.completedSegments].join('|');
+  if(key!==comparisonCache) {
+   comparisonCache=key;
+   for(var i=0;i<3;i++) {
+    $('aTime'+i).textContent=state.time>=data.continuous.cumulativeTimes[i]-1e-7?n(state.cumulative?data.continuous.cumulativeTimes[i]:data.continuous.segmentTimes[i]):'—';
+    $('bTime'+i).textContent=state.time>=data.repeat.cumulativeTimes[i]-1e-7?n(state.cumulative?data.repeat.cumulativeTimes[i]:data.repeat.segmentTimes[i]):'—';
+    $('dataRow'+i).className=!a.finished&&i===a.segmentIndex?'active':'';
+    $('rowLabel'+i).textContent=state.cumulative?(i+1)+' 段·次':'第 '+(i+1)+' 段';
+    $('rowSub'+i).textContent=state.cumulative?'左：累计'+(i+1)*50+'mL':i*50+' → '+(i+1)*50+' mL';
+   }
+  }
+  $('timeHeading').textContent=state.cumulative?'完成到':'每 50 mL';
+  $('aTimeHeading').textContent=state.cumulative?'连续累计':'连续放水';$('bTimeHeading').textContent=state.cumulative?'重测合计':'倒回再测';
+  $('tableModeButton').textContent=state.cumulative?'拆成每 50 mL':'看累计时间';
+  attr('tableModeButton','aria-pressed',state.cumulative);
+  $('tableHint').textContent=state.cumulative?'右侧：前1、2、3次流水用时合计':'右侧为第 1、2、3 次';
+  $('compareStatus').textContent=state.playing?'水位、出水量与时间同步变化':(state.time>0?'已暂停，可拖动回看或切换记录':'相同容器、相同小孔、相同初始水量');
+  $('compareSvg').setAttribute('aria-label','连续放水余水'+n(a.remaining)+'毫升，累计收水'+n(a.receiverVolume)+'毫升；倒回再测第'+b.segmentNumber+'次，余水'+n(b.remaining)+'毫升，本次收水'+n(b.receiverVolume)+'毫升。');
+ }
+ function changedDuring(start,end) {
+  for(var i=0;i<state.changes.length;i++) if(state.changes[i]>=start-1e-7&&state.changes[i]<end-1e-7) return true;
+  return false;
+ }
+ function paintChart() {
+  var s=state.stable, ms=s.measurements;
+  var key=ms.map(function(m){return n(m.volume,3);}).join(',')+'|'+Math.floor(s.elapsed/10)+'|'+n(s.currentIntervalVolume,1)+'|'+state.changes.join(',');
+  if(key===chartCache)return;chartCache=key;
+  var svg='', base=205, top=24, scale=(base-top)/35;
+  [0,10,20,30].forEach(function(v){var y=base-v*scale;svg+='<path d="M42 '+y+'H470" stroke="#e1e8e7"/><text x="33" y="'+(y+6)+'" text-anchor="end" font-size="19" fill="#758891">'+v+'</text>';});
+  var desc=[];
+  for(var i=0;i<6;i++) {
+   var x=49+i*70, complete=Boolean(ms[i]), current=!complete&&i===ms.length&&s.elapsed>i*10, amount=complete?ms[i].volume:(current?s.currentIntervalVolume:0), h=amount*scale;
+   if(amount>0) svg+='<rect x="'+x+'" y="'+(base-h)+'" width="48" height="'+h+'" rx="3" fill="'+(complete?'#087e89':'#bededc')+'"/>';
+   svg+='<text x="'+(x+24)+'" y="'+(base-h-9)+'" text-anchor="middle" font-size="24" font-weight="600" fill="'+(complete?'#142f40':'#769797')+'">'+(complete?n(amount):current?'…':'—')+'</text>';
+   svg+='<text x="'+(x+24)+'" y="233" text-anchor="middle" font-size="19" fill="#596d78">'+i*10+'–'+(i+1)*10+'</text>';
+   if(complete&&changedDuring(i*10,(i+1)*10))svg+='<circle cx="'+(x+24)+'" cy="248" r="4" fill="#bd6b16"/>';
+   if(complete)desc.push(i*10+'到'+(i+1)*10+'秒：'+n(amount)+'毫升');
+  }
+  setSvgContent($('stableChart'),svg);attr('stableChart','aria-label',desc.length?desc.join('；'):'尚未完成十秒测量');
+ }
+ function paintStable() {
+  var s=state.stable, y=324-s.volume, isFlowing=state.stablePlaying&&s.elapsed<60;
+  $('stableSvg').setAttribute('class',isFlowing?'flowing':'');
+  $('stableVolume').textContent=n(s.volume);$('stableRate').textContent=n(s.exitRate,2);
+  $('stableClock').textContent=n(s.elapsed);$('stableProgress').style.width=Math.min(100,s.elapsed/60*100)+'%';
+  $('stablePlay').textContent=isFlowing?'暂停':(s.elapsed>=60-1e-7?'再测一轮':(s.elapsed>0?'继续':'开始'));
+  $('stableStep').disabled=s.elapsed>=60-1e-7;
+  attr('steadyWater','y',y);attr('steadyWater','height',Math.max(0,s.volume-1));attr('steadySurface','cy',y);
+  attr('steadyHead','d','M205 '+y+'H218M211 '+y+'V324M205 324H218');
+  attr('inletStream','d','M304 62V'+Math.max(75,y));attr('inletStream','visibility',state.inflow>0?'visible':'hidden');attr('inletStream','stroke-width',Math.max(2,state.inflow*1.8));
+  attr('inletStream','opacity',isFlowing?1:0.22);
+  attr('bottomStream','visibility',s.volume>0?'visible':'hidden');attr('bottomStream','opacity',isFlowing?1:0.22);
+  attr('overflowStream','visibility',state.overflow&&s.overflowRate>1e-6?'visible':'hidden');attr('overflowStream','opacity',isFlowing?1:0.22);
+  attr('valveGate','d',state.overflow?'M496 176H526':'M511 161V191');
+  attr('overflowValve','aria-label',(state.overflow?'关闭':'打开')+'侧面溢流口');attr('overflowValve','aria-pressed',state.overflow);
+  attr('topSpill','visibility',s.spillRate>1e-7?'visible':'hidden');attr('topSpillLabel','visibility',s.spillTotal>0.01?'visible':'hidden');
+  var exitHeight=Math.min(54,s.exitTotal/200*54), wasteHeight=Math.min(54,(s.overflowTotal+s.spillTotal)/250*54);
+  attr('steadyCup','y',415-exitHeight);attr('steadyCup','height',exitHeight);attr('wasteCup','y',415-wasteHeight);attr('wasteCup','height',wasteHeight);
+  $('steadyCollected').textContent='底孔 '+n(s.exitTotal)+' mL';$('wasteCollected').textContent='溢出 '+n(s.overflowTotal+s.spillTotal)+' mL';
+  var net=state.inflow-s.exitRate-s.overflowRate-s.spillRate;
+  var change=s.elapsed===0?'补水从上面进入；溢出的水另行收集。':(Math.abs(net)<0.01?'此刻水位近似稳定':(net>0?'此刻水位正在上升':'此刻水位正在下降'));
+  if(s.spillTotal>0.01)change+=' · 已有水从容器顶部漫出';
+  else if(s.overflowTotal>0.01)change+=' · 溢流支路单独收水';
+  $('stableObservation').textContent=change;
+  $('stablePrompt').innerHTML=state.changes.length?'橙点：这一段调过条件。<br>比较时留意补水量和溢流口。':'只补水、只开溢流，或一起使用。<br>先猜，再看水位和出水量。';
+  paintChart();
+ }
+ function resetCompare() {state.time=0;state.playing=false;comparisonCache='';paintComparison();}
+ function resetStable() {state.stable=W.createStableState(150,state.overflow,1);state.stable=W.stepStable(state.stable,0,state.inflow,state.overflow,1);state.stablePlaying=false;state.stopAt=60;state.changes=[];chartCache='';paintStable();}
+ function pauseAll() {state.playing=false;state.stablePlaying=false;paintComparison();paintStable();}
+ function selectPage(page) {
+  pauseAll();state.page=page;$('compareScreen').hidden=page!=='compare';$('stableScreen').hidden=page!=='stable';
+  attr('navCompare','aria-selected',page==='compare');attr('navStable','aria-selected',page==='stable');
+ }
+ function changeMark() {var t=state.stable.elapsed;if(t>0&&t<60&&(state.changes.length===0||Math.abs(state.changes[state.changes.length-1]-t)>0.01))state.changes.push(t);}
+ function updateInflow() {
+  if(state.stable.elapsed>=60-1e-7){resetStable();showToast('新一轮：从150 mL重新开始。');}
+  var val=Number($('inflow').value);
+  if(val!==state.inflow)changeMark();state.inflow=val;
+  $('inflowValue').innerHTML=n(val)+' <small>mL/s</small>';
+  state.stable=W.stepStable(state.stable,0,val,state.overflow,1);paintStable();
+ }
+ function toggleOverflow() {
+  if(state.stable.elapsed>=60-1e-7){resetStable();showToast('新一轮：从150 mL重新开始。');}
+  if(!state.overflow&&state.stable.volume>150.01)showToast('理想溢流：高于侧孔的水先排出。');
+  changeMark();state.overflow=!state.overflow;attr('overflowButton','aria-pressed',state.overflow);$('overflowButton').textContent=state.overflow?'开启':'关闭';
+  state.stable=W.stepStable(state.stable,0,state.inflow,state.overflow,1);paintStable();
+ }
+ function cycleSpeed(isStable) {
+  var current=isStable?state.stableSpeed:state.speed, list=[1,4,8], next=list[(list.indexOf(current)+1)%3];
+  if(isStable)state.stableSpeed=next;else state.speed=next;
+  var btn=$(isStable?'stableSpeed':'compareSpeed');btn.textContent=next+'×';btn.setAttribute('aria-label','切换回放速度，当前'+next+'倍');
+ }
+ function frame(now) {
+  var dt=previousFrame?Math.min((now-previousFrame)/1000,0.1):0;previousFrame=now;
+  var dirty=false;
+  if(state.page==='compare'&&state.playing){var duration=W.compare(state.diameter).continuous.duration;state.time=Math.min(duration,state.time+dt*state.speed);if(state.time>=duration)state.playing=false;dirty=true;}
+  if(state.page==='stable'&&state.stablePlaying){var advance=Math.min(dt*state.stableSpeed,state.stopAt-state.stable.elapsed,60-state.stable.elapsed);state.stable=W.stepStable(state.stable,Math.max(0,advance),state.inflow,state.overflow,1);if(state.stable.elapsed>=state.stopAt-1e-7||state.stable.elapsed>=60-1e-7)state.stablePlaying=false;dirty=true;}
+  if(dirty&&(now-lastPaint>=30||!state.playing&&!state.stablePlaying)){if(state.page==='compare')paintComparison();else paintStable();lastPaint=now;}
+  window.requestAnimationFrame(frame);
+ }
+ function trapTeacher(e) {
+  if($('teacherModal').hidden)return;
+  if(e.key==='Escape'||e.keyCode===27){closeTeacher();return;}
+  if(e.key==='Tab'||e.keyCode===9){var focusables=$('teacherModal').querySelectorAll('button,a[href]'), first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+ }
+ function closeTeacher() {$('teacherModal').hidden=true;if(returnFocus)returnFocus.focus();}
+ buildComparisonArt();buildStableArt();
+ $('navCompare').addEventListener('click',function(){selectPage('compare');});$('navStable').addEventListener('click',function(){selectPage('stable');});
+ $('comparePlay').addEventListener('click',function(){if(state.time>=W.compare(state.diameter).continuous.duration-.001)state.time=0;state.playing=!state.playing;paintComparison();});
+ $('compareReset').addEventListener('click',resetCompare);
+ $('compareScrub').addEventListener('input',function(){state.playing=false;state.time=Number(this.value)/1000*W.compare(state.diameter).continuous.duration;comparisonCache='';paintComparison();});
+ $('compareScrub').addEventListener('change',function(){state.playing=false;state.time=Number(this.value)/1000*W.compare(state.diameter).continuous.duration;comparisonCache='';paintComparison();});
+ $('compareSpeed').addEventListener('click',function(){cycleSpeed(false);});
+ $('tableModeButton').addEventListener('click',function(){state.cumulative=!state.cumulative;comparisonCache='';paintComparison();});
+ var holeButtons=document.querySelectorAll('[data-diameter]');
+ for(var h=0;h<holeButtons.length;h++)holeButtons[h].addEventListener('click',function(){state.diameter=Number(this.getAttribute('data-diameter'));for(var j=0;j<holeButtons.length;j++)holeButtons[j].setAttribute('aria-pressed',Number(holeButtons[j].getAttribute('data-diameter'))===state.diameter?'true':'false');resetCompare();showToast('两边小孔一起改变，重新比较。');});
+ $('stablePlay').addEventListener('click',function(){if(state.stable.elapsed>=60-1e-7)resetStable();state.stopAt=60;state.stablePlaying=!state.stablePlaying;paintStable();});
+ $('stableReset').addEventListener('click',resetStable);
+ $('stableStep').addEventListener('click',function(){var target=Math.min(60,(Math.floor((state.stable.elapsed+1e-7)/10)+1)*10);state.stablePlaying=false;state.stopAt=60;state.stable=W.stepStable(state.stable,Math.max(0,target-state.stable.elapsed),state.inflow,state.overflow,1);paintStable();});
+ $('stableSpeed').addEventListener('click',function(){cycleSpeed(true);});
+ $('inflow').addEventListener('input',updateInflow);$('inflow').addEventListener('change',updateInflow);
+ $('overflowButton').addEventListener('click',toggleOverflow);$('overflowValve').addEventListener('click',toggleOverflow);$('overflowValve').addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '||e.keyCode===13||e.keyCode===32){e.preventDefault();toggleOverflow();}});
+ $('recordsButton').addEventListener('click',function(){pauseAll();if(window.ClassRecords)window.ClassRecords.open();});
+ $('teacherButton').addEventListener('click',function(){pauseAll();returnFocus=document.activeElement;$('teacherModal').hidden=false;$('teacherClose').focus();});
+ $('teacherClose').addEventListener('click',closeTeacher);document.addEventListener('keydown',trapTeacher);
+ $('teacherModal').addEventListener('click',function(e){if(e.target===this)closeTeacher();});
+ $('fullscreenButton').addEventListener('click',function(){var el=document.documentElement, method=el.requestFullscreen||el.webkitRequestFullscreen;var active=document.fullscreenElement||document.webkitFullscreenElement;try{if(active){var leave=document.exitFullscreen||document.webkitExitFullscreen;if(leave)leave.call(document);}else if(method){var result=method.call(el);if(result&&result.catch)result.catch(function(){showToast('当前设备不支持网页全屏，可使用浏览器全屏或横屏。');});}else showToast('当前设备不支持网页全屏，可使用浏览器全屏或横屏。');}catch(e){showToast('请使用浏览器全屏或横屏。');}});
+ document.addEventListener('fullscreenchange',function(){$('fullscreenButton').textContent=document.fullscreenElement?'退出全屏':'全屏';});
+ document.addEventListener('visibilitychange',function(){if(document.hidden)pauseAll();previousFrame=0;});
+ document.addEventListener('keydown',function(e){var tag=document.activeElement&&document.activeElement.tagName;if(tag==='INPUT'||tag==='TEXTAREA'||tag==='BUTTON'||!$('teacherModal').hidden||$('recordsModal')&&!$('recordsModal').hidden)return;if(e.key===' '||e.keyCode===32){e.preventDefault();$(state.page==='compare'?'comparePlay':'stablePlay').click();}});
+ paintComparison();paintStable();window.requestAnimationFrame(frame);
+ /* Public replacement hook for later asset/model refinement. */
+ window.WaterLesson={version:'1.0',model:W,renderers:{vesselMarkup:vesselMarkup,buildComparison:buildComparisonArt,buildStable:buildStableArt},pause:pauseAll};
+}());
+
+</script>
+<script>
+
+(function (root) {
+  'use strict';
+  var modal = document.getElementById('recordsModal');
+  if (!modal) return;
+  var KEY = 'aihtml-6up-4-2-class-records-v1';
+  var ids = ['crCumulative1', 'crCumulative2', 'crCumulative3', 'crRefill1', 'crRefill2', 'crRefill3'];
+  var fields = [], i, isOpen = false, previousFocus = null, previousOverflow = '', undo = null, resizeTimer = 0;
+  var chart = document.getElementById('crChart');
+  var chartBody = document.getElementById('crChartBody');
+  var errorText = document.getElementById('crError');
+  var saveText = document.getElementById('crSaveState');
+  var exportButton = document.getElementById('crExport');
+  var clearButton = document.getElementById('crClear');
+  var current = null;
+  for (i = 0; i < ids.length; i++) fields.push(document.getElementById(ids[i]));
+
+  function rawValues() {
+    var result = [], j;
+    for (j = 0; j < fields.length; j++) result.push(fields[j].value);
+    return result;
+  }
+  function setValues(values) {
+    var j;
+    for (j = 0; j < fields.length; j++) fields[j].value = typeof values[j] === 'string' ? values[j] : '';
+  }
+  function save() {
+    try {
+      root.localStorage.setItem(KEY, JSON.stringify({ version: 1, values: rawValues(), updatedAt: new Date().toISOString() }));
+      saveText.textContent = '本机已保存';
+      saveText.className = 'cr-save-state';
+    } catch (e) {
+      saveText.textContent = '未保存，可导出';
+      saveText.className = 'cr-save-state cr-unsaved';
+    }
+  }
+  function load() {
+    try {
+      var stored = root.localStorage.getItem(KEY);
+      if (stored) {
+        var data = JSON.parse(stored);
+        if (data && data.version === 1 && Object.prototype.toString.call(data.values) === '[object Array]' && data.values.length === 6) setValues(data.values);
+      }
+    } catch (e) {
+      saveText.textContent = '未保存，可导出';
+      saveText.className = 'cr-save-state cr-unsaved';
+    }
+  }
+  function compute() {
+    var values = rawValues(), parsed = [], valid = [], bad = [], segments = [null, null, null], repeat = [null, null, null];
+    var errors = [], positiveError = false, orderError = false, maximumKnown = null, any = false, j, value, badInput;
+    for (j = 0; j < 6; j++) {
+      badInput = !!(fields[j].validity && fields[j].validity.badInput);
+      any = any || values[j] !== '' || badInput;
+      if (values[j] === '' && !badInput) {
+        parsed[j] = null; valid[j] = false; bad[j] = false;
+      } else {
+        value = Number(values[j]);
+        parsed[j] = value;
+        valid[j] = !badInput && isFinite(value) && value > 0;
+        bad[j] = !valid[j];
+        if (!valid[j]) positiveError = true;
+      }
+    }
+    for (j = 0; j < 3; j++) {
+      if (valid[j]) {
+        if (maximumKnown !== null && parsed[j] <= maximumKnown) {
+          valid[j] = false; bad[j] = true; orderError = true;
+        }
+        maximumKnown = maximumKnown === null ? parsed[j] : Math.max(maximumKnown, parsed[j]);
+      }
+    }
+    if (valid[0]) segments[0] = parsed[0];
+    for (j = 1; j < 3; j++) if (valid[j - 1] && valid[j]) segments[j] = parsed[j] - parsed[j - 1];
+    for (j = 0; j < 3; j++) if (valid[j + 3]) repeat[j] = parsed[j + 3];
+    if (positiveError) errors.push('请填写大于0的秒数。');
+    if (orderError) errors.push('连续放水的累计时间须依次增加。');
+    for (j = 0; j < 6; j++) fields[j].setAttribute('aria-invalid', bad[j] ? 'true' : 'false');
+    return { raw: values, continuous: segments, refill: repeat, invalid: bad, errors: errors, hasData: any };
+  }
+  function formatNumber(value) {
+    if (value === null || typeof value !== 'number' || !isFinite(value)) return '';
+    if (value >= 1000000 || (value > 0 && value < .001)) return value.toExponential(2);
+    return String(Number(value.toPrecision(6)));
+  }
+  function exactNumber(value) {
+    return value === null ? '' : String(Number(value.toPrecision(12)));
+  }
+  function xml(text) {
+    return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function svgText(x, y, text, size, fill, anchor, weight) {
+    return '<text x="' + x + '" y="' + y + '" font-size="' + size + '" fill="' + (fill || '#18363b') + '" text-anchor="' + (anchor || 'start') + '" font-weight="' + (weight || 600) + '" font-family="Arial,Microsoft YaHei,PingFang SC,sans-serif">' + xml(text) + '</text>';
+  }
+  function draw() {
+    if (!isOpen || !current) return;
+    var width = Math.max(240, chartBody.clientWidth), height = Math.max(65, chartBody.clientHeight);
+    var compact = width < 560, veryShort = height < 145;
+    var font = compact ? 16 : (veryShort ? 16 : 23);
+    var labelWidth = compact ? 63 : (veryShort ? 85 : 112);
+    var valueWidth = compact ? 92 : (veryShort ? 100 : 145);
+    var top = veryShort ? 0 : 27, bottom = 3, groupHeight = (height - top - bottom) / 3;
+    var barHeight = Math.min(28, Math.max(7, (groupHeight - 12) / 2));
+    var gap = Math.min(8, Math.max(3, groupHeight * .1));
+    var valueFont = Math.min(font, Math.max(10, barHeight + gap - 1));
+    var plotWidth = Math.max(50, width - labelWidth - valueWidth - 8);
+    var maximum = 0, j, k, value, list, x, y, length, label, invalid, parts = [], summary = [];
+    for (j = 0; j < 3; j++) {
+      if (current.continuous[j] !== null) maximum = Math.max(maximum, current.continuous[j]);
+      if (current.refill[j] !== null) maximum = Math.max(maximum, current.refill[j]);
+    }
+    if (maximum > 0 && !veryShort) {
+      for (j = 0; j <= 2; j++) {
+        x = labelWidth + plotWidth * j / 2;
+        parts.push('<line x1="' + x + '" x2="' + x + '" y1="26" y2="' + height + '" stroke="#dde7e7" stroke-width="1"/>');
+        parts.push(svgText(x, 18, formatNumber(maximum * j / 2), compact ? 14 : 18, '#6b8387', j === 0 ? 'start' : (j === 2 ? 'end' : 'middle'), 400));
+      }
+    }
+    for (j = 0; j < 3; j++) {
+      var groupTop = top + j * groupHeight;
+      var pairTop = groupTop + (groupHeight - 2 * barHeight - gap) / 2;
+      if (veryShort) parts.push(svgText(0, groupTop + groupHeight / 2 + font * .33, '第' + (j + 1) + '段', font, '#18363b', 'start', 700));
+      else {
+        parts.push(svgText(0, groupTop + groupHeight / 2 - 3, '第' + (j + 1) + '个', font, '#18363b', 'start', 700));
+        parts.push(svgText(0, groupTop + groupHeight / 2 + font + 2, '50 mL', font - 2, '#6b8387', 'start', 400));
+      }
+      for (k = 0; k < 2; k++) {
+        list = k === 0 ? current.continuous : current.refill;
+        value = list[j];
+        invalid = k === 0 ? (current.invalid[j] || (j > 0 && current.invalid[j - 1])) : current.invalid[j + 3];
+        y = pairTop + k * (barHeight + gap);
+        parts.push('<rect x="' + labelWidth + '" y="' + y + '" width="' + plotWidth + '" height="' + barHeight + '" rx="3" fill="#f0f5f4"/>');
+        if (value !== null && maximum > 0) {
+          length = plotWidth * value / maximum;
+          parts.push('<rect x="' + labelWidth + '" y="' + y + '" width="' + length + '" height="' + barHeight + '" rx="3" fill="' + (k === 0 ? '#087e89' : '#bd6b16') + '"/>');
+          label = formatNumber(value) + ' 秒';
+          parts.push(svgText(labelWidth + plotWidth + 9, y + barHeight / 2 + valueFont * .34, label, valueFont, '#18363b', 'start', 700));
+        } else {
+          label = invalid ? '待修正' : '待记录';
+          parts.push(svgText(labelWidth + 9, y + barHeight / 2 + valueFont * .34, label, valueFont, invalid ? '#a5332d' : '#728a8e', 'start', 400));
+        }
+        summary.push('第' + (j + 1) + '个50毫升，' + (k === 0 ? '连续放水' : '倒回再测') + '：' + label);
+      }
+    }
+    chart.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+    chart.setAttribute('preserveAspectRatio', 'none');
+    chart.setAttribute('aria-label', summary.join('；'));
+    chart.innerHTML = parts.join('');
+  }
+  function render(persist) {
+    current = compute();
+    errorText.textContent = current.errors.join(' ');
+    exportButton.disabled = !current.hasData || current.errors.length > 0;
+    clearButton.disabled = !current.hasData && !undo;
+    clearButton.textContent = undo ? '撤销清空' : '清空';
+    if (persist) save();
+    draw();
+  }
+  function csvCell(value) {
+    return '"' + String(value === null || value === undefined ? '' : value).replace(/"/g, '""') + '"';
+  }
+  function exportCSV() {
+    render(false);
+    if (!current.hasData || current.errors.length) return;
+    var time = new Date(), timestamp = new Date(time.getTime() + 8 * 3600000).toISOString().slice(0, 19) + '+08:00', rows = [['数据来源', '测量方式', '第几个50mL', '计时含义', '记录值（秒）', '本段用时（秒）', '导出时间（北京时间）']];
+    var j, lines = [], cells, k;
+    for (j = 0; j < 3; j++) rows.push(['本班实测（手动录入）', '连续放水', j + 1, '从开始到累计' + (j + 1) * 50 + 'mL', current.raw[j], exactNumber(current.continuous[j]), timestamp]);
+    for (j = 0; j < 3; j++) rows.push(['本班实测（手动录入）', '倒回再测', j + 1, '倒回同一初始水位后独立计时50mL', current.raw[j + 3], exactNumber(current.refill[j]), timestamp]);
+    for (j = 0; j < rows.length; j++) {
+      cells = [];
+      for (k = 0; k < rows[j].length; k++) cells.push(csvCell(rows[j][k]));
+      lines.push(cells.join(','));
+    }
+    var filename = '六上4.2用水计量时间_本班实测_' + timestamp.replace(/[-:]/g, '').replace('T', '_').slice(0, 15) + '.csv';
+    try {
+      var blob = new Blob(['\ufeff' + lines.join('\r\n') + '\r\n'], { type: 'text/csv;charset=utf-8;' });
+      if (root.navigator && root.navigator.msSaveOrOpenBlob) {
+        root.navigator.msSaveOrOpenBlob(blob, filename);
+        return;
+      }
+      var urlAPI = root.URL || root.webkitURL;
+      if (!urlAPI || !urlAPI.createObjectURL) throw new Error('Download unavailable');
+      var url = urlAPI.createObjectURL(blob), anchor = document.createElement('a');
+      var supportsDownload = 'download' in anchor;
+      anchor.href = url;
+      anchor.download = filename;
+      anchor.style.display = 'none';
+      if (!supportsDownload) { anchor.target = '_blank'; anchor.rel = 'noopener'; }
+      modal.appendChild(anchor);
+      root.setTimeout(function () {
+        if (anchor.parentNode) anchor.parentNode.removeChild(anchor);
+        urlAPI.revokeObjectURL(url);
+      }, 1500);
+      anchor.click();
+    } catch (e) {
+      errorText.textContent = '此浏览器未能导出；请保留本页数据后换用其他浏览器。';
+    }
+  }
+  function clearOrUndo() {
+    if (undo) {
+      setValues(undo);
+      undo = null;
+    } else {
+      if (!current || !current.hasData) return;
+      undo = rawValues();
+      setValues(['', '', '', '', '', '']);
+    }
+    render(true);
+  }
+  function focusable() {
+    var nodes = modal.querySelectorAll('input,button,a[href],[tabindex]'), result = [], j, node;
+    for (j = 0; j < nodes.length; j++) {
+      node = nodes[j];
+      if (!node.disabled && node.tabIndex >= 0 && (node.offsetWidth || node.offsetHeight)) result.push(node);
+    }
+    return result;
+  }
+  function open() {
+    if (isOpen) { draw(); return; }
+    previousFocus = document.activeElement;
+    previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    modal.hidden = false;
+    modal.removeAttribute('hidden');
+    isOpen = true;
+    render(false);
+    root.setTimeout(function () {
+      if (!isOpen) return;
+      draw();
+      document.getElementById('crTitle').focus();
+    }, 0);
+  }
+  function close() {
+    if (!isOpen) return;
+    isOpen = false;
+    modal.hidden = true;
+    modal.setAttribute('hidden', '');
+    document.body.style.overflow = previousOverflow;
+    if (previousFocus && previousFocus.focus && document.documentElement.contains(previousFocus)) {
+      try { previousFocus.focus(); } catch (e) {}
+    }
+  }
+  for (i = 0; i < fields.length; i++) {
+    fields[i].addEventListener('input', function () { undo = null; render(true); });
+    fields[i].addEventListener('change', function () { undo = null; render(true); });
+  }
+  exportButton.addEventListener('click', exportCSV);
+  clearButton.addEventListener('click', clearOrUndo);
+  document.getElementById('crClose').addEventListener('click', close);
+  document.addEventListener('keydown', function (event) {
+    if (!isOpen) return;
+    var key = event.key || event.keyCode;
+    if (key === 'Escape' || key === 'Esc' || key === 27) {
+      event.preventDefault(); event.stopPropagation(); close(); return;
+    }
+    if (key === 'Tab' || key === 9) {
+      var nodes = focusable(), active = document.activeElement, first = nodes[0], last = nodes[nodes.length - 1], found = false, j;
+      if (!nodes.length) { event.preventDefault(); return; }
+      for (j = 0; j < nodes.length; j++) if (nodes[j] === active) found = true;
+      if (event.shiftKey && (active === first || !found)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (active === last || !found)) { event.preventDefault(); first.focus(); }
+      event.stopPropagation();
+    }
+  }, true);
+  root.addEventListener('resize', function () {
+    if (!isOpen) return;
+    root.clearTimeout(resizeTimer);
+    resizeTimer = root.setTimeout(draw, 80);
+  });
+  root.ClassRecords = {
+    open: open,
+    close: close,
+    refresh: function () { render(false); },
+    getData: function () {
+      var snapshot = compute();
+      return { raw: snapshot.raw.slice(0), continuous: snapshot.continuous.slice(0), refill: snapshot.refill.slice(0), valid: snapshot.errors.length === 0, hasData: snapshot.hasData };
+    }
+  };
+  load();
+  render(true);
+}(window));
+
+</script>
+</body>
+</html>
