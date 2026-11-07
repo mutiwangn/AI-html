@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="description" content="六年级上册《改进水钟》：透明拆解、同步对照、实物测试记录。单文件离线互动课堂。">
+<title>改进水钟 · 互动实验室</title>
+<style>:root{--ink:#102b3d;--muted:#516977;--teal:#087d88;--teal-dark:#08626b;--teal-pale:#ddf1f1;--water:#36b3c4;--bg:#edf4f6;--line:#bdd3da;--amber:#ad6226;--amber-pale:#fff1da;--white:#fff;--base:clamp(18px,1.55vw,29px);--radius:10px}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;font-size:var(--base);line-height:1.4}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;border:2px solid var(--line);background:#fff;border-radius:var(--radius);padding:.38em .75em;min-height:44px;font-weight:700;line-height:1.25;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:4px solid #e8a943;outline-offset:3px}button:hover{border-color:var(--teal)}button:disabled{cursor:default;opacity:.5}button[aria-pressed=true]{border-color:var(--teal);background:var(--teal-pale)}[hidden]{display:none!important}h1,h2,h3,p{margin:0}button.primary,.tab.active{background:var(--teal);color:#fff;border-color:var(--teal)}button.primary:hover,.tab.active:hover{background:var(--teal-dark)}button.secondary{border-color:#93acb8;background:white}.quiet{background:transparent;border-color:var(--line)}.text-button{border:0;background:transparent;min-height:32px;font-size:.85em;padding:0 .4em;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+#app{height:100vh;height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto}main{min-height:0;position:relative;overflow:hidden}.app-header{display:flex;align-items:center;gap:1.25rem;padding:.55rem 1.1rem;background:#fff;border-bottom:2px solid var(--teal);min-height:76px}.app-header h1{font-size:clamp(28px,2.7vw,52px);line-height:1.1;white-space:nowrap;font-weight:850;letter-spacing:-.04em}.app-header nav{display:flex;gap:.5rem;margin:auto}.tab{font-size:clamp(18px,1.65vw,32px);border-color:transparent;padding:.45em .9em}.app-header>.quiet{font-size:.85rem}.page{height:100%;min-height:0}.build-page{display:grid;grid-template-columns:minmax(0,1fr) minmax(285px,30%)}.scene{display:flex;flex-direction:column;min-width:0;min-height:0;position:relative;background:var(--bg)}.scene-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.2rem .5rem;padding:.65rem 1.1rem .15rem}.scene-heading h2{font-size:clamp(24px,2.2vw,43px);font-weight:800}.scene-heading span{font-size:clamp(14px,1.15vw,21px);color:var(--muted)}.apparatus{min-height:0;flex:1;overflow:hidden}.apparatus>svg{display:block;width:100%;height:100%;touch-action:none}.apparatus .interactive{cursor:pointer}.apparatus .hotspot:hover{stroke:var(--teal)}.control-rail{background:#fff;border-left:2px solid var(--line);padding:clamp(12px,1.3vw,26px);display:flex;flex-direction:column;gap:.55rem;min-height:0;overflow:hidden}.control-rail h2{font-size:clamp(20px,1.8vw,34px);line-height:1.25;margin-bottom:.1rem}.components{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}.component{display:flex;align-items:center;justify-content:center;gap:.35em;padding:.5em .3em;font-size:1.05rem;min-height:56px}.check{display:inline-block;width:1em;height:1em;border:2px solid #90adb8;border-radius:4px;background:#fff;position:relative;flex-shrink:0}.component[aria-pressed=true] .check{background:var(--teal);border-color:var(--teal)}.component[aria-pressed=true] .check:after{content:"";position:absolute;left:23%;top:4%;width:34%;height:60%;border-right:3px solid white;border-bottom:3px solid white;transform:rotate(45deg)}.source-options{border-left:4px solid var(--teal);padding-left:.5rem;display:grid;gap:.35rem}.choice-row{display:flex;align-items:center;gap:.5rem;justify-content:space-between;font-size:.8rem}.segmented{display:flex;gap:3px}.segmented button{font-size:.8rem;padding:.35em .5em;border-width:1px;min-height:40px}.segmented button.selected{background:var(--teal);border-color:var(--teal);color:#fff}.range-control{display:block;font-size:.93rem}.range-control>span{display:flex;align-items:center;justify-content:space-between;gap:.3rem}.range-control strong{font-variant-numeric:tabular-nums;color:var(--teal)}input[type=range]{width:100%;height:36px;padding:0;margin:.15em 0 0;cursor:pointer;accent-color:var(--teal);touch-action:pan-x;background:transparent}input[type=range]::-webkit-slider-thumb{height:26px;width:26px}input[type=range]::-moz-range-thumb{height:26px;width:26px}.hole-control{margin-top:.1rem}.readings{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:var(--radius);padding:.55rem .25rem;margin-top:auto}.readings>div{display:flex;flex-direction:column;align-items:center;gap:.2rem}.readings>div+div{border-left:1px solid var(--line)}.readings span{font-size:.84rem}.readings strong{font-size:clamp(27px,2.6vw,49px);color:var(--teal);white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1.2}.readings small{font-size:.4em;display:block;text-align:center;margin-top:.05rem}.save-buttons{display:flex;gap:.45rem}.save-buttons button{flex:1;white-space:nowrap;font-size:.98rem;padding:.55em .2em}
+.transport{display:flex;gap:.65rem;align-items:center;padding:.45rem 1rem;background:#fff;border-top:2px solid var(--line)}.transport>button{font-size:clamp(21px,1.9vw,36px);min-width:3.6em}.timeline{flex:1;min-width:0;padding:0 .45rem}.timeline label{display:flex;align-items:baseline;gap:.3em;font-size:.9rem;font-variant-numeric:tabular-nums;line-height:1.2}.timeline strong{font-size:1.35em}.timeline .time-kind{color:var(--muted);font-size:.8em;margin-left:auto}.timeline input{margin:0;display:block;height:28px}.app-footer{font-size:clamp(12px,.9vw,17px);height:26px;display:flex;align-items:center;gap:.6rem;padding:0 .7rem;color:var(--muted)}.app-footer>#storageState{margin:auto}.app-footer button{font-size:inherit;min-height:24px}
+.compare-page{display:flex;flex-direction:column;padding:.65rem 1rem .5rem;gap:.5rem}.compare-heading{display:flex;justify-content:space-between;align-items:center;gap:.6rem}.compare-heading h2{font-size:clamp(23px,2vw,39px)}.compare-heading button{font-size:.8rem}.calibration-bar{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;font-size:.8rem}.calibration-bar>span{font-weight:700}.calibration-bar p{color:var(--muted);flex:1;min-width:250px;font-size:.85em}.compare-panels{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:.8rem;min-height:0}.comparison{background:white;border:1px solid var(--line);border-radius:var(--radius);min-height:0;display:flex;flex-direction:column;overflow:hidden}.comparison-head{display:flex;align-items:center;justify-content:space-between;padding:.3rem .65rem;border-bottom:1px solid var(--line)}.comparison h3{font-size:1.1rem}.comparison.before h3{color:var(--amber)}.comparison.after h3{color:var(--teal)}.comparison-head button{font-size:.7rem;min-height:36px;padding:.2em .6em}.config-summary{color:var(--muted);font-size:clamp(14px,1.13vw,21px);padding:.2rem .65rem;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.compare-visual{display:flex;flex:1;align-items:center;min-height:0;padding:.2rem .6rem;gap:.4rem}.mini-tank{flex:0 0 43%;align-self:stretch;min-height:0}.mini-tank svg{width:100%;height:100%;display:block}.compare-readout{flex:1;display:flex;flex-direction:column;gap:.15rem}.compare-readout .label{font-size:.8rem;color:var(--muted)}.clock-time{font-size:clamp(34px,4.3vw,80px);line-height:1.1;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:850}.clock-error{font-size:clamp(22px,2.2vw,43px);font-weight:750;font-variant-numeric:tabular-nums}.clock-error.ahead{color:var(--amber)}.clock-error.behind{color:#52649a}.clock-error.close{color:var(--teal)}.flow-note{color:var(--muted);font-size:.72rem;line-height:1.35;margin-top:.3rem}.volume-title{font-size:.78rem;font-weight:650;padding:0 .65rem}.minute-chart{height:clamp(92px,14vh,165px);margin:0 .4rem .2rem;display:block}.compare-bottom{display:flex;justify-content:space-between;align-items:center;gap:.4rem;font-size:.8rem}.compare-bottom p{color:var(--muted)}.empty-compare{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.7rem;padding:1rem;height:100%}.empty-compare p{max-width:16em;font-size:.95rem;color:var(--muted)}.empty-compare button{font-size:.9rem}
+.toast{position:fixed;bottom:100px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:white;box-shadow:0 5px 22px #102b3d22;border-radius:10px;padding:.55rem 1rem;z-index:30;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s;font-size:.9rem;text-align:center;max-width:92vw}.toast.visible{opacity:1;transform:translate(-50%,0)}.modal-backdrop{position:fixed;inset:0;z-index:100;background:#102b3da8;display:flex;align-items:center;justify-content:center;padding:4vh 4vw}.info-dialog{background:white;border-radius:12px;width:min(1040px,94vw);max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 70px #102b3d55}.modal-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:.6rem .8rem;gap:1rem}.modal-head h2{font-size:1.2rem}.modal-head button{font-size:.8rem}.info-body{overflow:auto;padding:.65rem 1rem 1.1rem;font-size:.82rem;line-height:1.65}.info-body h3{font-size:1.1em;margin:.7em 0 .3em}.info-body p+p{margin-top:.5rem}.info-body a{color:var(--teal)}
+.volume-title{margin:0}.minute-chart svg{display:block;width:100%;height:100%}.app-footer #modeLabel{margin-left:108px}.clock-error small{font-size:.55em;font-weight:500}.config-summary{white-space:normal;overflow:visible;min-height:1.5em}
+@media(min-width:1600px){.components{grid-template-columns:1fr}.component{justify-content:flex-start;padding:.35em .65em;min-height:60px}.control-rail{gap:.6rem}.source-options{gap:.25rem}}
+@media(max-height:760px){.app-header{padding:.4rem .8rem;min-height:64px}.control-rail{padding:.55rem;gap:.4rem}.control-rail h2{font-size:1.05rem}.component{min-height:45px}.readings{padding:.4rem .2rem}.source-options{gap:0}.choice-row{font-size:.75rem}.range-control{font-size:.82rem}.save-buttons button{padding:.4em .2em}.scene-heading{padding:.45rem .7rem 0}.transport{padding:.35rem .7rem}.app-footer{height:22px}.comparison-head{padding:.2rem .6rem}.minute-chart{height:100px}.compare-page{gap:.35rem;padding:.5rem .7rem .35rem}.calibration-bar{gap:.35rem}.calibration-bar p{font-size:.82em}}
+@media(max-width:1100px){.app-header{gap:.5rem}.app-header h1{font-size:30px}.tab{padding:.45em .6em}.build-page{grid-template-columns:minmax(0,1fr) 300px}.scene-heading{display:block}.scene-heading span{font-size:14px}.control-rail h2{font-size:21px}.component{font-size:20px}.compare-heading h2{font-size:25px}.calibration-bar p{font-size:15px}.config-summary{font-size:15px}.compare-bottom{font-size:16px}.flow-note{font-size:14px}}
+@media(max-width:720px){:root{--base:18px}.app-header{padding:7px 9px;gap:5px;flex-wrap:wrap;min-height:91px}.app-header h1{font-size:27px}.app-header nav{order:3;width:100%;gap:5px}.tab{flex:1;padding:7px 4px;min-height:38px;font-size:18px}.app-header>.quiet{margin-left:auto;min-height:38px;padding:5px 10px}.build-page{display:flex;flex-direction:column}.scene{flex:1;min-height:185px}.scene-heading{padding:6px 10px 0;display:flex;flex-wrap:wrap}.scene-heading h2{font-size:21px}.scene-heading span{font-size:12px}.control-rail{border-left:0;border-top:1px solid var(--line);padding:8px 10px;display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;flex:0 0 auto;overflow:visible}.control-rail h2{display:none}.components{gap:5px}.component{font-size:16px;min-height:42px;padding:5px}.source-options{grid-column:1/-1;display:flex;align-items:center;gap:12px;order:3;border:0;padding:0}.source-options .choice-row{font-size:14px;gap:5px;flex:1}.source-options .range-control{flex:1;font-size:13px}.source-options button{font-size:13px;padding:5px;min-height:36px}.hole-control{font-size:16px;margin:0;display:flex;flex-direction:column;justify-content:center}.hole-control input{height:26px;margin:0}.readings{margin:0;padding:3px;border:0;border-radius:0;grid-row:2}.readings span{font-size:13px}.readings strong{font-size:25px;display:flex;align-items:baseline;gap:4px}.readings small{font-size:11px}.save-buttons{grid-row:2;align-self:center;gap:5px}.save-buttons button{font-size:16px;min-height:42px;padding:5px}.transport{padding:6px 8px;gap:6px}.transport>button{font-size:19px;min-width:0;padding:8px 10px}.timeline{padding:0 3px}.timeline label{font-size:14px}.timeline .time-kind{display:none}.timeline input{height:26px}.app-footer{height:23px;font-size:12px}.compare-page{padding:8px;gap:5px}.compare-heading{gap:5px}.compare-heading h2{font-size:20px}.compare-heading button{font-size:13px;min-height:36px;padding:5px}.calibration-bar{gap:5px;font-size:14px}.calibration-bar p{font-size:12px;min-width:150px;flex-basis:65%}.calibration-bar .segmented button{font-size:14px;min-height:35px}.compare-panels{gap:6px}.comparison-head{padding:5px 7px}.comparison h3{font-size:19px}.comparison-head button{font-size:13px;min-height:30px;padding:3px}.config-summary{font-size:12px;padding:4px 6px;white-space:normal;line-height:1.25;min-height:38px;max-height:50px}.compare-visual{flex-direction:column;padding:0 4px;gap:0}.mini-tank{width:100%;flex:1;max-height:135px;min-height:65px}.compare-readout{flex:0 0 auto;gap:0;align-items:center;padding-bottom:4px}.clock-time{font-size:34px}.clock-error{font-size:22px}.compare-readout .label{font-size:13px}.flow-note{font-size:11px;margin-top:2px;text-align:center;min-height:28px}.volume-title{font-size:12px;padding:0 6px}.minute-chart{height:74px;margin:0 2px 3px}.compare-bottom{font-size:13px;align-items:center}.compare-bottom p{flex:1}.compare-bottom .segmented{flex-direction:column}.compare-bottom button{font-size:13px;min-height:32px;padding:4px 7px}.empty-compare{padding:8px;gap:10px}.empty-compare p{font-size:15px}.empty-compare button{font-size:15px}.modal-backdrop{padding:12px}.info-dialog{max-height:94vh}.modal-head{padding:10px}.modal-head h2{font-size:23px}.info-body{font-size:17px;padding:5px 15px 20px}.toast{bottom:90px;font-size:16px}}
+@media(max-width:720px) and (max-height:700px){.scene{min-height:155px}.scene-heading span{display:none}.source-options input{height:23px}.control-rail{gap:3px 8px;padding:4px 8px}.component{min-height:38px}.readings strong{font-size:23px}.app-header{min-height:86px}.mini-tank{max-height:90px}.flow-note{display:none}.minute-chart{height:65px}}
+@media(max-width:720px){.app-footer #storageState{display:none}.app-footer #modeLabel{white-space:nowrap}.app-footer #modelInfo{margin-left:auto;white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.toast{transition:none}}
+
+.records-page{box-sizing:border-box;display:flex;flex-direction:column;min-width:0;min-height:0;height:100%;padding:clamp(10px,1.3vw,22px);gap:clamp(8px,1.1vh,14px);overflow:hidden;background:#edf4f6;color:#102b3d;font:500 22px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;font-size:clamp(20px,1.55vw,28px)}
+.records-page[hidden],.records-page.hidden{display:none!important}
+.records-page *{box-sizing:border-box}
+.records-page h2,.records-page h3,.records-page p{margin:0}
+.records-page button,.records-page input{font:inherit;-webkit-tap-highlight-color:transparent}
+.records-page button{cursor:pointer;touch-action:manipulation;color:inherit}
+.records-page button:focus-visible,.records-page input:focus-visible{outline:3px solid #087d88;outline-offset:3px}
+.records-page .records-header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-shrink:0}
+.records-page .records-header h2{font-size:clamp(28px,2.4vw,40px);line-height:1.15;font-weight:760;letter-spacing:.02em}
+.records-page .records-target{display:flex;align-items:center;gap:14px;white-space:nowrap}
+.records-page .records-target>span{font-size:.86em}
+.records-page .records-target-options{display:flex;gap:4px;padding:4px;border-radius:12px;background:#dce7ec}
+.records-page .records-target button{border:0;background:transparent;border-radius:8px;min-height:46px;padding:5px 17px;font-size:28px;font-weight:750;font-variant-numeric:tabular-nums}
+.records-page .records-target button span{font-size:18px;margin-left:4px;font-weight:500}
+.records-page .records-target button[aria-pressed="true"]{background:#102b3d;color:white;box-shadow:0 2px 4px rgba(16,43,61,.1)}
+.records-page .records-instruction{font-size:.9em;flex-shrink:0;color:#355166}
+.records-page .records-board{display:flex;flex:1;flex-direction:column;min-height:0;min-width:0;padding:clamp(12px,1.5vw,24px);border:1px solid #d4e1e7;border-radius:14px;background:#fff}
+.records-page .records-groups{display:flex;flex:1;min-height:0;min-width:0}
+.records-page .records-group{display:flex;flex-direction:column;flex:1;min-height:0;min-width:0}
+.records-page .records-before{padding-right:clamp(15px,2.2vw,36px)}
+.records-page .records-after{border-left:1px solid #d4e1e7;padding-left:clamp(15px,2.2vw,36px)}
+.records-page .records-group-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0;margin-bottom:10px}
+.records-page .records-group-heading h3{font-size:clamp(28px,2vw,36px);font-weight:760;line-height:1.1}
+.records-page .records-before h3{color:#ad6226}
+.records-page .records-after h3{color:#087d88}
+.records-page .records-completed{font-size:.76em;color:#5c7180;white-space:nowrap}
+.records-page .records-column-labels,.records-page .records-trial-row{display:flex;align-items:center;gap:clamp(8px,1vw,16px)}
+.records-page .records-column-labels{font-size:.76em;color:#5c7180;flex-shrink:0;padding-bottom:3px}
+.records-page .records-column-labels>span:nth-child(1),.records-page .records-trial{width:18%;flex-shrink:0}
+.records-page .records-column-labels>span:nth-child(2),.records-page .records-reading{width:40%;flex-shrink:0;text-align:center}
+.records-page .records-column-labels>span:nth-child(3),.records-page .records-error{flex:1;min-width:0;text-align:right}
+.records-page .records-mobile-label{display:none}
+.records-page .records-list{display:flex;flex-direction:column;flex:1;min-height:0}
+.records-page .records-trial-row{flex:1;min-height:48px;border-bottom:1px solid #e2eaee;padding:6px 0}
+.records-page .records-trial-row:last-child{border-bottom:0}
+.records-page .records-trial{font-size:.9em;white-space:nowrap}
+.records-page .records-reading{align-self:center;display:flex;align-items:center;justify-content:center;min-height:44px;max-height:74px;height:88%;border:1.5px dashed #97acb9;border-radius:9px;background:#f4f8fa;line-height:1;font-size:clamp(28px,2.3vw,40px);font-variant-numeric:tabular-nums;font-weight:750}
+.records-page .records-reading strong{font-weight:750}
+.records-page .records-reading.is-filled{border-style:solid;background:#edf5f7;border-color:#9bb9c2}
+.records-page .records-reading:hover{background:#e4f1f3;border-color:#087d88}
+.records-page .records-error{font-size:clamp(28px,2vw,36px);line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap;color:#355166}
+.records-page .records-error b{font-weight:650}
+.records-page .records-error>span{display:none}
+.records-page .records-stats{display:flex;flex-shrink:0;border-top:2px solid #dce7ec;padding-top:10px;margin-top:6px;gap:12px}
+.records-page .records-stat{flex:1;min-width:0}
+.records-page .records-stat>span{display:block;font-size:.75em;color:#5c7180;white-space:nowrap}
+.records-page .records-stat output{display:block;font-size:clamp(28px,2vw,36px);line-height:1.18;font-weight:750;font-variant-numeric:tabular-nums;margin-top:3px;white-space:nowrap}
+.records-page .records-stat output small{font-size:17px;font-weight:500;margin-left:5px}
+.records-page .records-method{flex-shrink:0;font-size:.72em;line-height:1.2;color:#5c7180;padding-top:12px}
+.records-page .records-explanation{display:flex;align-items:center;gap:14px;flex-shrink:0;min-height:44px}
+.records-page .records-explanation>span{font-size:.82em;white-space:nowrap}
+.records-page .records-explanation input{width:100%;min-width:0;min-height:44px;border:1px solid #b8cbd5;border-radius:9px;padding:9px 13px;color:#102b3d;background:white;font-size:.9em}
+.records-page .records-explanation input::placeholder{color:#607b8b;opacity:1}
+.records-page .records-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-shrink:0;min-height:44px}
+.records-page .records-footer p{font-size:.71em;line-height:1.25;color:#5c7180;min-width:0}
+.records-page .records-footer p.is-warning{color:#984a17}
+.records-page .records-export{flex-shrink:0;border:0;border-radius:9px;background:#087d88;color:#fff;min-height:44px;padding:10px 20px;font-size:.85em;font-weight:700}
+.records-page .records-export:hover{background:#076771}
+.records-page .records-modal{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:12px;background:rgba(16,43,61,.46);touch-action:manipulation}
+.records-page .records-modal[hidden]{display:none!important}
+.records-page .records-keypad{width:390px;max-width:100%;max-height:100%;padding:22px;border:1px solid #c9dae3;border-radius:18px;background:#edf4f6;box-shadow:0 20px 70px rgba(16,43,61,.25);overflow:hidden}
+.records-page .records-keypad h3{font-size:24px;line-height:1.2;font-weight:750}
+.records-page .records-pad-display{display:flex;align-items:baseline;justify-content:flex-end;gap:10px;min-height:70px;padding:12px 14px;margin-top:12px;border:1px solid #b8cbd5;border-radius:9px;background:white;font-variant-numeric:tabular-nums}
+.records-page .records-pad-display output{font-size:42px;line-height:1;font-weight:750}
+.records-page .records-pad-display>span{font-size:20px}
+.records-page .records-keypad p{font-size:16px;color:#5c7180;min-height:23px;line-height:1.35;padding:7px 0 9px}
+.records-page .records-pad-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.records-page .records-pad-keys button{min-height:54px;border:1px solid #c6d6df;border-radius:9px;background:white;font-size:28px;line-height:1;font-weight:650}
+.records-page .records-pad-keys button[data-record-key="back"]{font-size:22px}
+.records-page .records-pad-keys button:active{background:#d5e9ec}
+.records-page .records-pad-actions{display:flex;gap:8px;margin-top:12px}
+.records-page .records-pad-actions button{flex:1;min-width:0;min-height:48px;border:1px solid #b8cbd5;border-radius:9px;background:#fff;font-size:22px;font-weight:650}
+.records-page .records-pad-actions .records-confirm{border-color:#087d88;background:#087d88;color:white}
+@media(max-width:1100px){.records-page .records-target{gap:8px}.records-page .records-target button{padding:5px 12px}.records-page .records-column-labels{font-size:16px}.records-page .records-stat>span{font-size:17px}.records-page .records-before{padding-right:16px}.records-page .records-after{padding-left:16px}}
+@media(max-height:760px) and (min-width:641px){.records-page{padding:10px;gap:8px}.records-page .records-header h2{font-size:30px}.records-page .records-target-options{padding:2px}.records-page .records-target button{min-height:44px;padding-top:4px;padding-bottom:4px}.records-page .records-instruction{font-size:18px}.records-page .records-board{padding:12px}.records-page .records-group-heading{margin-bottom:5px}.records-page .records-group-heading h3{font-size:28px}.records-page .records-trial-row{padding:3px 0;min-height:46px}.records-page .records-stats{padding-top:6px;margin-top:3px}.records-page .records-method{padding-top:7px;font-size:15px}.records-page .records-explanation input{min-height:42px;padding:7px 10px}.records-page .records-footer{min-height:42px}.records-page .records-export{padding:8px 15px;min-height:42px}}
+@media(max-width:640px){.records-page{padding:8px;gap:8px;font-size:20px}.records-page .records-header{flex-wrap:wrap;gap:7px}.records-page .records-header h2{font-size:28px;width:100%}.records-page .records-target{width:100%;justify-content:space-between;gap:8px}.records-page .records-target>span{font-size:18px}.records-page .records-target-options{padding:2px}.records-page .records-target button{font-size:28px;padding:4px 16px;min-height:44px}.records-page .records-instruction{display:none}.records-page .records-board{padding:10px 9px}.records-page .records-before{padding-right:9px}.records-page .records-after{padding-left:9px}.records-page .records-group-heading{margin-bottom:4px;gap:4px}.records-page .records-group-heading h3{font-size:26px}.records-page .records-completed{font-size:15px}.records-page .records-column-labels{display:none}.records-page .records-mobile-label{display:block;flex-shrink:0;font-size:13px;color:#5c7180;margin-bottom:3px;white-space:nowrap}.records-page .records-trial-row{display:grid;grid-template-columns:24px minmax(0,1fr);grid-template-rows:minmax(44px,1fr) 29px;gap:1px 4px;min-height:77px;padding:3px 0}.records-page .records-trial{grid-column:1;grid-row:1;width:auto;font-size:20px;text-align:left}.records-page .records-trial>span{display:none}.records-page .records-reading{grid-column:2;grid-row:1;width:100%;height:100%;min-height:44px;font-size:28px;border-radius:6px}.records-page .records-error{grid-column:1 / 3;grid-row:2;width:100%;font-size:28px;display:flex;align-items:baseline;justify-content:flex-end;gap:4px;line-height:1.05}.records-page .records-error>span{display:inline;font-size:13px;font-weight:500}.records-page .records-stats{flex-direction:column;gap:5px;padding-top:6px;margin-top:3px}.records-page .records-stat>span{font-size:15px}.records-page .records-stat output{font-size:28px;margin-top:0;line-height:1.1}.records-page .records-stat output small{font-size:15px;margin-left:3px}.records-page .records-method{font-size:13px;line-height:1.3;padding-top:7px}.records-page .records-method>span{display:none}.records-page .records-explanation{display:block;min-height:0}.records-page .records-explanation>span{display:none}.records-page .records-explanation input{min-height:44px;font-size:18px;padding:8px 10px}.records-page .records-footer{gap:8px;min-height:44px}.records-page .records-footer p{font-size:12px;max-width:50%}.records-page .records-export{font-size:16px;min-height:44px;padding:8px 10px}.records-page .records-keypad{padding:16px}.records-page .records-pad-keys{gap:6px}}
+@media(max-height:540px){.records-page .records-keypad{width:370px;padding:12px}.records-page .records-keypad h3{font-size:20px}.records-page .records-pad-display{min-height:48px;padding:7px 10px;margin-top:7px}.records-page .records-pad-display output{font-size:34px}.records-page .records-keypad p{font-size:14px;min-height:21px;padding:4px 0 6px}.records-page .records-pad-keys{gap:5px}.records-page .records-pad-keys button{min-height:44px;font-size:27px}.records-page .records-pad-actions{gap:5px;margin-top:7px}.records-page .records-pad-actions button{min-height:44px;font-size:20px}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="app-header">
+    <h1>改进水钟</h1>
+    <nav aria-label="课堂任务">
+      <button class="tab active" data-page="build" aria-current="page">拆看改进</button>
+      <button class="tab" data-page="compare">同场验证</button>
+      <button class="tab" data-page="records">实物记录</button>
+    </nav>
+    <button id="fullscreenBtn" class="quiet" aria-label="进入或退出全屏">全屏</button>
+  </header>
+  <main>
+    <section id="buildPage" class="page build-page" aria-label="拆看改进">
+      <div class="scene">
+        <div class="scene-heading"><h2>水位为什么会改变？</h2><span id="buildState">拖动水位线，或点装置加部件</span></div>
+        <div id="apparatus" class="apparatus"></div>
+      </div>
+      <aside class="control-rail" aria-label="改进设计">
+        <h2>改一个地方，再试一试</h2>
+        <div class="components">
+          <button id="supplyToggle" class="component" aria-pressed="false"><span class="check" aria-hidden="true"></span>供水壶</button>
+          <button id="overflowToggle" class="component" aria-pressed="false"><span class="check" aria-hidden="true"></span>溢流管</button>
+        </div>
+        <div id="sourceOptions" class="source-options" hidden>
+          <div class="choice-row"><span>供水量</span><div class="segmented"><button data-source="400">400 mL</button><button data-source="1600">1600 mL</button></div></div>
+          <label class="range-control"><span>初始供水 <strong id="supplyValue">2.0 mL/秒</strong></span><input id="supplyRange" type="range" min="0.6" max="3" step="0.1" value="2" aria-label="初始供水流量，毫升每秒"></label>
+        </div>
+        <label class="range-control hole-control"><span>出水孔 <strong id="holeValue">1.0 mm</strong></span><input id="holeRange" type="range" min="0.6" max="1.4" step="0.1" value="1" aria-label="出水孔直径，毫米"></label>
+        <div class="readings">
+          <div><span>水位高度</span><strong id="headValue">16.0 <small>cm</small></strong></div>
+          <div><span>出水速度</span><strong id="flowValue">51.8 <small>mL/分</small></strong></div>
+        </div>
+        <div class="save-buttons"><button id="saveBefore" class="secondary">记为改前</button><button id="saveAfter" class="primary">记为改后</button></div>
+      </aside>
+    </section>
+    <section id="comparePage" class="page compare-page" hidden aria-label="同场验证">
+      <div class="compare-heading">
+        <h2>同一段时间，谁的读数更接近？</h2>
+        <button id="exportEvidence" class="quiet">保存证据图</button>
+      </div>
+      <div class="calibration-bar"><span>刻度规则</span><div class="segmented"><button id="ownScale" class="selected" aria-pressed="true">各自重标</button><button id="sharedScale" aria-pressed="false">沿用改前</button></div><p id="scaleNote">各用首分钟水量定 1 分钟，再画等距刻度。</p><button id="scaleHelp" class="text-button" aria-label="查看刻度规则说明">说明</button></div>
+      <div id="comparePanels" class="compare-panels"></div>
+      <div class="compare-bottom"><p id="comparePrompt">先看 2 分钟，再到 10 分钟：结果会改变吗？</p><div class="segmented"><button id="jumpTwo">看 2 分钟</button><button id="jumpTen">看 10 分钟</button></div></div>
+    </section>
+    <section id="recordsPage" class="page records-page" hidden aria-labelledby="recordsTitle">
+  <header class="records-header">
+    <h2 id="recordsTitle">让实物来检验</h2>
+    <div class="records-target" role="group" aria-label="选择标准计时时长，各时长分别保存记录">
+      <span>标准计时到</span>
+      <div class="records-target-options">
+        <button type="button" data-record-standard="120" aria-pressed="true" aria-label="选择120秒标准时间，显示此组实测记录">120<span>秒</span></button>
+        <button type="button" data-record-standard="600" aria-pressed="false" aria-label="选择600秒标准时间，显示此组实测记录">600<span>秒</span></button>
+      </div>
+    </div>
+  </header>
+  <p class="records-instruction" id="recordsInstruction">标准计时器到120秒时，记录水钟的读数。</p>
+  <div class="records-board">
+    <div class="records-groups">
+      <section class="records-group records-before" aria-labelledby="recordsBeforeTitle">
+        <div class="records-group-heading"><h3 id="recordsBeforeTitle">改前</h3><span class="records-completed" id="recordsBeforeCompleted">0 / 3 次</span></div>
+        <div class="records-column-labels" aria-hidden="true"><span>次数</span><span>水钟读数 / 秒</span><span>误差 / 秒</span></div>
+        <div class="records-mobile-label" aria-hidden="true">水钟读数与误差 · 秒</div>
+        <div class="records-list">
+          <div class="records-trial-row"><span class="records-trial"><span>第</span>1<span>次</span></span><button type="button" class="records-reading" data-record-side="before" data-record-trial="0" aria-label="录入改前第1次水钟读数"><strong>—</strong></button><output class="records-error" data-error-side="before" data-error-trial="0"><span>误差</span><b>—</b></output></div>
+          <div class="records-trial-row"><span class="records-trial"><span>第</span>2<span>次</span></span><button type="button" class="records-reading" data-record-side="before" data-record-trial="1" aria-label="录入改前第2次水钟读数"><strong>—</strong></button><output class="records-error" data-error-side="before" data-error-trial="1"><span>误差</span><b>—</b></output></div>
+          <div class="records-trial-row"><span class="records-trial"><span>第</span>3<span>次</span></span><button type="button" class="records-reading" data-record-side="before" data-record-trial="2" aria-label="录入改前第3次水钟读数"><strong>—</strong></button><output class="records-error" data-error-side="before" data-error-trial="2"><span>误差</span><b>—</b></output></div>
+        </div>
+        <div class="records-stats">
+          <div class="records-stat"><span>平均绝对误差</span><output id="recordsBeforeMae">—</output></div>
+          <div class="records-stat"><span>三次读数极差</span><output id="recordsBeforeRange">—</output></div>
+        </div>
+      </section>
+      <section class="records-group records-after" aria-labelledby="recordsAfterTitle">
+        <div class="records-group-heading"><h3 id="recordsAfterTitle">改后</h3><span class="records-completed" id="recordsAfterCompleted">0 / 3 次</span></div>
+        <div class="records-column-labels" aria-hidden="true"><span>次数</span><span>水钟读数 / 秒</span><span>误差 / 秒</span></div>
+        <div class="records-mobile-label" aria-hidden="true">水钟读数与误差 · 秒</div>
+        <div class="records-list">
+          <div class="records-trial-row"><span class="records-trial"><span>第</span>1<span>次</span></span><button type="button" class="records-reading" data-record-side="after" data-record-trial="0" aria-label="录入改后第1次水钟读数"><strong>—</strong></button><output class="records-error" data-error-side="after" data-error-trial="0"><span>误差</span><b>—</b></output></div>
+          <div class="records-trial-row"><span class="records-trial"><span>第</span>2<span>次</span></span><button type="button" class="records-reading" data-record-side="after" data-record-trial="1" aria-label="录入改后第2次水钟读数"><strong>—</strong></button><output class="records-error" data-error-side="after" data-error-trial="1"><span>误差</span><b>—</b></output></div>
+          <div class="records-trial-row"><span class="records-trial"><span>第</span>3<span>次</span></span><button type="button" class="records-reading" data-record-side="after" data-record-trial="2" aria-label="录入改后第3次水钟读数"><strong>—</strong></button><output class="records-error" data-error-side="after" data-error-trial="2"><span>误差</span><b>—</b></output></div>
+        </div>
+        <div class="records-stats">
+          <div class="records-stat"><span>平均绝对误差</span><output id="recordsAfterMae">—</output></div>
+          <div class="records-stat"><span>三次读数极差</span><output id="recordsAfterRange">—</output></div>
+        </div>
+      </section>
+    </div>
+    <p class="records-method">误差 = 水钟读数 − 标准时间<span> · 极差比较三次重复读数</span></p>
+  </div>
+  <label class="records-explanation"><span>我们的解释</span><input id="recordsExplanation" type="text" maxlength="240" autocomplete="off" aria-label="填写本组实物改进与证据解释，可以留空" placeholder="我们改了…因为…证据是…"></label>
+  <footer class="records-footer"><p id="recordsStatus" role="status" aria-live="polite">填满3次后显示汇总 · 仅保存实测记录</p><button type="button" id="recordsExport" class="records-export" aria-label="导出120秒和600秒两组人工录入的实测数据为CSV文件">导出实测 CSV</button></footer>
+
+  <div id="recordsKeypad" class="records-modal" hidden>
+    <div class="records-keypad" role="dialog" aria-modal="true" aria-labelledby="recordsPadTitle" aria-describedby="recordsPadHelp" tabindex="-1">
+      <h3 id="recordsPadTitle">改前 · 第1次</h3>
+      <div class="records-pad-display"><output id="recordsPadValue" aria-live="polite">—</output><span>秒</span></div>
+      <p id="recordsPadHelp">填写水钟读数，最多一位小数</p>
+      <div class="records-pad-keys">
+        <button type="button" data-record-key="1" aria-label="输入数字1">1</button><button type="button" data-record-key="2" aria-label="输入数字2">2</button><button type="button" data-record-key="3" aria-label="输入数字3">3</button>
+        <button type="button" data-record-key="4" aria-label="输入数字4">4</button><button type="button" data-record-key="5" aria-label="输入数字5">5</button><button type="button" data-record-key="6" aria-label="输入数字6">6</button>
+        <button type="button" data-record-key="7" aria-label="输入数字7">7</button><button type="button" data-record-key="8" aria-label="输入数字8">8</button><button type="button" data-record-key="9" aria-label="输入数字9">9</button>
+        <button type="button" data-record-key="." aria-label="输入小数点">.</button><button type="button" data-record-key="0" aria-label="输入数字0">0</button><button type="button" data-record-key="back" aria-label="删除最后一位数字">退格</button>
+      </div>
+      <div class="records-pad-actions"><button type="button" data-record-key="clear" aria-label="清空待录入的水钟读数">清空</button><button type="button" data-record-key="cancel" aria-label="取消本次编辑，保留原读数">取消</button><button type="button" data-record-key="confirm" class="records-confirm" aria-label="确认保存本次水钟实测读数">确认</button></div>
+    </div>
+  </div>
+</section>
+
+  </main>
+  <section id="transport" class="transport" aria-label="模型时间控制">
+    <button id="playBtn" class="primary">开始</button>
+    <button id="resetBtn" class="secondary">重来</button>
+    <div class="timeline"><label for="timeRange"><strong id="timeLabel">0:00</strong><span> / 10:00</span><span class="time-kind">标准时间</span></label><input id="timeRange" type="range" min="0" max="600" step="1" value="0" aria-label="标准时间，0到600秒，拖动回看"></div>
+    <button id="speedBtn" class="secondary" aria-label="切换演示速度">×20</button>
+  </section>
+  <footer class="app-footer"><span id="modeLabel">模型演示</span><span id="storageState" role="status"></span><button id="modelInfo" class="text-button">模型说明</button></footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="infoModal" class="modal-backdrop" hidden>
+ <section class="info-dialog" role="dialog" aria-modal="true" aria-labelledby="infoTitle" tabindex="-1">
+  <div class="modal-head"><h2 id="infoTitle">怎样理解这个模型</h2><button id="closeInfo" class="secondary" aria-label="关闭模型说明">关闭</button></div>
+  <div class="info-body">
+   <h3>先标刻，再对照</h3>
+   <p>默认“各自重标”：两个方案各自先做一次 60 秒标定，把收集到的水量作为 1 分钟，再画等距刻度；然后补回相同初始水位开始测试。切换“沿用改前”后，两台水钟都用改前尺上的刻度间距，换杯也不重画尺子，便于检查改变孔径或受水杯后旧刻度是否还能用。</p>
+   <p><b>偏差＝水钟读数－标准时间。</b>正数表示走快，负数表示走慢。实物也可以逐分钟测量、画不等距刻度来补偿流量变化；这里的对照针对本课的等距刻度要求。</p>
+   <h3>水从哪里来，到哪里去</h3>
+   <p>供水壶的水量有限，随着水位下降，供水速度也会降低。出水壶按水面到出水孔的高度计算出水速度；多余的水经溢流管进入余水杯，不进入受水杯。供水不足时，装了溢流管也无法保持水位。</p>
+   <p>溢流管按通畅、排量足够的理想溢流口处理；未安装时，满壶后的水会从杯沿溢出。拖动初始水位或改参数会回到时间零；若水位高于溢流口，开始前的多余水也会流走。</p>
+   <h3>哪些数值需要实物验证</h3>
+   <p>这是简化水流模型，采用 Q＝C<sub>d</sub>A√(2gh)，有效流量系数固定为 0.62。忽略黏性、表面张力、孔形、管路阻力、气泡、浮标摩擦和液面波动；动画中的水流不是逐滴计数，容器之间不使用同一绘图比例。</p>
+   <p>换细受水杯只改变水位与刻度间距，不改变上方出水速度；受水杯满后停止提供有效读数。真实作品仍要重新标刻和测试。此页示例与“实物记录”的数据分开保存。</p>
+   <h3>教学依据</h3>
+   <p>教科版六上《改进水钟》，教材第 110—113 页；教师用书第 343—352 页。可先做改前、改后各 2 分钟快测，再检验完整 10 分钟的表现。</p>
+   <p class="source-links"><a href="https://farside.ph.utexas.edu/teaching/336L/Fluid/node55.html" target="_blank" rel="noopener noreferrer">Texas 大学：孔口出流模型</a><br><a href="https://ocw.mit.edu/courses/res-12-001-topics-in-fluid-dynamics-fall-2024/mitres_12_001_f24_appendix.pdf" target="_blank" rel="noopener noreferrer">MIT OCW：真实水流的模型边界</a></p>
+  </div>
+ </section>
+</div>
+<script>/* Water clock teaching model, v1.0. All volumes: mL (= cm^3), lengths: cm,
+   time: s, hole diameter: mm. No randomness and no external dependencies.
+
+   The lower vessel uses Q = Cd * pi * (d/20)^2 * sqrt(2*g*h).
+   The finite, constant-section source vessel uses
+   S(t)=S0*max(0,1-q0*t/(2*S0))^2, so q_in=q0*sqrt(S/S0).
+   An enabled overflow is an IDEAL, sufficiently wide, open spillway at its
+   stated height; it can remove excess water but cannot add any water.
+   The ordinary vessel also spills over its rim if overfilled.
+
+   Calibration: collect the first 60 s of a separate, identical setup run,
+   mark that volume as one minute, and extend equally spaced volume marks.
+   The displayed error is conditional on THIS scale rule. A falling-head
+   clock can instead be calibrated with unequal empirically measured marks.
+
+   Limits: atmospheric free surfaces and free outlets; small thin-wall hole;
+   fixed effective Cd=0.62, constant vessel sections, no evaporation, viscosity
+   change, surface-tension/drop formation, float friction or outlet submergence.
+   Source initial flow is independently adjustable, not inferred from volume.
+   Source/receiver illustrations need not share a geometrical scale.
+
+   Reference: Richard Fitzpatrick, UT Austin, Flow Through an Orifice:
+   https://farside.ph.utexas.edu/teaching/336L/Fluid/node55.html
+   This source gives Q=C*S*sqrt(2*g*h) and thin-plate contraction C~=0.62;
+   our fixed effective Cd additionally idealizes other real outlet losses.
+*/
+(function (root, factory) {
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.WaterModel = api;
+}(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this), function () {
+  'use strict';
+  var G = 981;
+  var EPS = 1e-9;
+  var defaults = {
+    initialHeadCm: 16,
+    tankAreaCm2: 30,
+    tankMaxHeadCm: 20,
+    holeMm: 1,
+    Cd: 0.62,
+    sourceMl: 0,
+    supplyRate: 2,
+    overflow: false,
+    overflowHeadCm: 16,
+    receiverAreaCm2: 30,
+    receiverCapacityMl: 1200,
+    duration: 600,
+    step: 0.05
+  };
+
+  function bound(x, lo, hi) { return Math.max(lo, Math.min(hi, x)); }
+  function number(x, fallback, lo, hi) {
+    var n = (x === undefined || x === null || x === '') ? fallback : Number(x);
+    return bound(isFinite(n) ? n : fallback, lo, hi);
+  }
+  function normalize(input) {
+    var a = input || {};
+    var c = {};
+    c.tankAreaCm2 = number(a.tankAreaCm2, 30, 1, 10000);
+    c.tankMaxHeadCm = number(a.tankMaxHeadCm, 20, 1, 100);
+    c.initialHeadCm = number(a.initialHeadCm, 16, 0, c.tankMaxHeadCm);
+    c.holeMm = number(a.holeMm, 1, 0, 5);
+    c.Cd = number(a.Cd, 0.62, 0, 1);
+    c.sourceMl = number(a.sourceMl, 0, 0, 10000);
+    c.supplyRate = number(a.supplyRate, 2, 0, 20);
+    c.overflow = !!a.overflow;
+    c.overflowHeadCm = number(a.overflowHeadCm, 16, 0.1, c.tankMaxHeadCm);
+    c.receiverAreaCm2 = number(a.receiverAreaCm2, 30, 1, 10000);
+    c.receiverCapacityMl = number(a.receiverCapacityMl, 1200, 1, 100000);
+    c.duration = number(a.duration, 600, 60, 3600);
+    c.step = number(a.step, 0.05, 0.005, 0.25);
+    return c;
+  }
+  function outflowRate(headCm, holeMm, Cd) {
+    var d = number(holeMm, 1, 0, 5);
+    var coeff = number(Cd, 0.62, 0, 1);
+    return coeff * Math.PI * (d / 20) * (d / 20) * Math.sqrt(2 * G * Math.max(0, headCm));
+  }
+  function sourceAt(c, t) {
+    if (c.sourceMl <= 0) return 0;
+    var fraction = Math.max(0, 1 - c.supplyRate * Math.max(0, t) / (2 * c.sourceMl));
+    return c.sourceMl * fraction * fraction;
+  }
+  function supplyAt(c, t) {
+    return c.sourceMl > 0 ? c.supplyRate * Math.max(0, 1 - c.supplyRate * Math.max(0, t) / (2 * c.sourceMl)) : 0;
+  }
+  function compute(input) {
+    var c = normalize(input);
+    var initialTankMl = c.initialHeadCm * c.tankAreaCm2;
+    var ceilingHead = c.overflow ? c.overflowHeadCm : c.tankMaxHeadCm;
+    var ceilingMl = ceilingHead * c.tankAreaCm2;
+    var tank = Math.min(initialTankMl, ceilingMl);
+    var setupSpill = initialTankMl - tank;
+    var pipeSpill = c.overflow ? setupSpill : 0;
+    var rimSpill = c.overflow ? 0 : setupSpill;
+    var collected = 0;
+    var receiverSpill = 0;
+    var delivered = 0;
+    var t = 0;
+    var k = outflowRate(1, c.holeMm, c.Cd);
+    var initialTotal = initialTankMl + c.sourceMl;
+    var samples = [];
+    var maxBalanceError = 0;
+    var receiverFullAt = null;
+
+    function snapshot(time) {
+      var h = Math.max(0, tank / c.tankAreaCm2);
+      var qIn = supplyAt(c, time);
+      var qOut = outflowRate(h, c.holeMm, c.Cd);
+      var source = sourceAt(c, time);
+      var balance = initialTotal - (source + tank + collected + pipeSpill + rimSpill + receiverSpill);
+      maxBalanceError = Math.max(maxBalanceError, Math.abs(balance));
+      samples.push({
+        t: time, h: h, tankMl: tank, sourceMl: source,
+        collectedMl: collected, deliveredMl: delivered,
+        overflowMl: pipeSpill + rimSpill,
+        pipeOverflowMl: pipeSpill, rimOverflowMl: rimSpill,
+        receiverOverflowMl: receiverSpill,
+        outflowRate: qOut, supplyRate: qIn,
+        spillRate: h >= ceilingHead - 1e-7 ? Math.max(0, qIn - qOut) : 0,
+        receiverHeightCm: collected / c.receiverAreaCm2,
+        massBalanceErrorMl: balance,
+        clockSeconds: null, errorSeconds: null, clockValid: false
+      });
+    }
+    function advance(target) {
+      while (t < target - 1e-10) {
+        var dt = Math.min(c.step, target - t);
+        var feed = Math.max(0, sourceAt(c, t) - sourceAt(c, t + dt));
+        var out;
+        if (feed < 1e-12) {
+          // Exact integrated Torricelli drainage when there is no inflow.
+          var rootHead = Math.max(0, Math.sqrt(tank / c.tankAreaCm2) - k * dt / (2 * c.tankAreaCm2));
+          out = tank - c.tankAreaCm2 * rootHead * rootHead;
+        } else {
+          // Conservative midpoint step. Clipping midpoint to the spillway
+          // holds a full reservoir exactly at its overflow level while fed.
+          var qStart = outflowRate(tank / c.tankAreaCm2, c.holeMm, c.Cd);
+          var halfFeed = sourceAt(c, t) - sourceAt(c, t + dt / 2);
+          var midTank = bound(tank + halfFeed - qStart * dt / 2, 0, ceilingMl);
+          out = outflowRate(midTank / c.tankAreaCm2, c.holeMm, c.Cd) * dt;
+        }
+        out = bound(out, 0, tank + feed);
+        var nextTank = tank + feed - out;
+        var excess = Math.max(0, nextTank - ceilingMl);
+        tank = Math.max(0, nextTank - excess);
+        if (c.overflow) pipeSpill += excess;
+        else rimSpill += excess;
+        delivered += out;
+        var received = Math.min(out, Math.max(0, c.receiverCapacityMl - collected));
+        if (receiverFullAt === null && collected + out >= c.receiverCapacityMl - EPS && out > EPS) {
+          receiverFullAt = t + dt * (c.receiverCapacityMl - collected) / out;
+        }
+        collected += received;
+        receiverSpill += out - received;
+        t += dt;
+      }
+      t = target;
+    }
+    snapshot(0);
+    for (var second = 1; second <= Math.floor(c.duration); second += 1) {
+      advance(second);
+      snapshot(second);
+    }
+    if (t < c.duration - EPS) { advance(c.duration); snapshot(c.duration); }
+    var calibrationMl = samples[60].collectedMl;
+    var calibrated = calibrationMl > EPS && samples[60].receiverOverflowMl < EPS;
+    for (var i = 0; i < samples.length; i += 1) {
+      var s = samples[i];
+      s.clockSeconds = calibrated ? s.collectedMl * 60 / calibrationMl : null;
+      s.errorSeconds = calibrated ? s.clockSeconds - s.t : null;
+      s.clockValid = calibrated && s.receiverOverflowMl < EPS;
+    }
+    var result = {
+      config: c,
+      samples: samples,
+      calibrationMl: calibrationMl,
+      calibrationValid: calibrated,
+      minuteVolumes: [],
+      minutes: [],
+      metadata: {
+        version: '1.0',
+        sourceFlowModel: 'gravity sqrt(source/source0)',
+        overflowModel: 'ideal open spillway with sufficient capacity; no added water',
+        integration: 'exact source, exact unforced drainage, conservative midpoint for fed tank',
+        calibration: 'independent identical first-60-second run, then equally spaced volume marks',
+        errorDefinition: 'water-clock reading minus standard elapsed seconds',
+        initialTotalMl: initialTotal,
+        setupOverflowMl: setupSpill,
+        preparedHeadCm: Math.min(c.initialHeadCm, ceilingHead),
+        sourceEmptyAt: c.sourceMl > 0 && c.supplyRate > 0 ? 2 * c.sourceMl / c.supplyRate : null,
+        receiverFullAt: receiverFullAt,
+        maxMassBalanceErrorMl: maxBalanceError,
+        limitation: 'A fixed effective discharge coefficient and an ideal overflow are teaching approximations; actual apparatus requires calibration.'
+      }
+    };
+    for (var end = 60; end <= c.duration + EPS; end += 60) {
+      var a = sampleAt(result, end - 60);
+      var b = sampleAt(result, end);
+      var volume = Math.max(0, b.deliveredMl - a.deliveredMl);
+      result.minuteVolumes.push(volume);
+      result.minutes.push({minute: end / 60, start: end - 60, end: end, volumeMl: volume,
+        clockSeconds: b.clockSeconds, errorSeconds: b.errorSeconds});
+    }
+    return result;
+  }
+  function sampleAt(sim, seconds) {
+    if (!sim || !sim.samples || !sim.samples.length) return null;
+    var t = bound(number(seconds, 0, 0, sim.config.duration), 0, sim.config.duration);
+    var i = Math.min(Math.floor(t), sim.samples.length - 1);
+    var a = sim.samples[i];
+    if (Math.abs(t - a.t) < 1e-10 || i === sim.samples.length - 1) return a;
+    var b = sim.samples[i + 1];
+    var mix = (t - a.t) / (b.t - a.t);
+    var s = {};
+    for (var key in a) {
+      if (Object.prototype.hasOwnProperty.call(a, key)) {
+        s[key] = typeof a[key] === 'number' && typeof b[key] === 'number'
+          ? a[key] + (b[key] - a[key]) * mix : a[key];
+      }
+    }
+    s.t = t;
+    // Read validity conservatively at the exact queried point.
+    s.clockValid = sim.calibrationValid && s.receiverOverflowMl < EPS;
+    return s;
+  }
+  return {
+    version: '1.0', defaults: defaults,
+    normalize: normalize, compute: compute, sampleAt: sampleAt,
+    outflowRate: outflowRate,
+    sourceVolumeAt: function (config, t) { return sourceAt(normalize(config), Math.max(0, t)); },
+    sourceFlowAt: function (config, t) { return supplyAt(normalize(config), Math.max(0, t)); }
+  };
+}));
+</script>
+<script>(function (root) {
+  'use strict';
+  var STORAGE_KEY = 'aihtml-g6-u4-l4-physical-records-v1';
+  var page, state, initialized = false, edit = null, previousFocus = null;
+  var defaultStatus = '填满3次后显示汇总 · 仅保存实测记录';
+
+  function el(id) { return document.getElementById(id); }
+  function each(list, fn) { for (var i = 0; i < list.length; i++) fn(list[i], i); }
+  function blankGroup() { return { before: [null, null, null], after: [null, null, null], explanation: '' }; }
+  function blankState() { return { version: 1, activeStandard: 120, groups: { '120': blankGroup(), '600': blankGroup() } }; }
+  function validNumber(value) { return typeof value === 'number' && isFinite(value) && value >= 0 && value <= 9999.9; }
+  function round1(n) { return Math.round(n * 10) / 10; }
+  function displayNumber(n) { return round1(n).toFixed(1); }
+  function signedNumber(n) { n = round1(n); return (n > 0 ? '+' : '') + n.toFixed(1); }
+  function group() { return state.groups[String(state.activeStandard)]; }
+  function setStatus(message, warning) {
+    el('recordsStatus').textContent = message || defaultStatus;
+    el('recordsStatus').className = warning ? 'is-warning' : '';
+  }
+  function readSaved() {
+    var clean = blankState();
+    try {
+      var text = root.localStorage.getItem(STORAGE_KEY);
+      if (!text) return clean;
+      var saved = JSON.parse(text);
+      if (!saved || saved.version !== 1 || !saved.groups) return clean;
+      if (saved.activeStandard === 120 || saved.activeStandard === 600) clean.activeStandard = saved.activeStandard;
+      each(['120', '600'], function (standard) {
+        var source = saved.groups[standard];
+        if (!source || typeof source !== 'object') return;
+        each(['before', 'after'], function (side) {
+          if (!Array.isArray(source[side])) return;
+          for (var i = 0; i < 3; i++) clean.groups[standard][side][i] = validNumber(source[side][i]) ? round1(source[side][i]) : null;
+        });
+        if (typeof source.explanation === 'string') clean.groups[standard].explanation = source.explanation.slice(0, 240);
+      });
+    } catch (error) {
+      setStatus('旧记录未能读取；可继续记录并导出CSV。', true);
+    }
+    return clean;
+  }
+  function save() {
+    try { root.localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); setStatus(); return true; }
+    catch (error) { setStatus('本机保存失败，请导出CSV保留记录。', true); return false; }
+  }
+  function metrics(values, standard) {
+    var count = 0, sum = 0, low = Infinity, high = -Infinity;
+    for (var i = 0; i < 3; i++) {
+      if (!validNumber(values[i])) continue;
+      count++; sum += Math.abs(values[i] - standard);
+      if (values[i] < low) low = values[i];
+      if (values[i] > high) high = values[i];
+    }
+    return { count: count, mae: count === 3 ? sum / 3 : null, range: count === 3 ? high - low : null };
+  }
+  function showMetric(id, value, description) {
+    var target = el(id);
+    target.textContent = value === null ? '—' : displayNumber(value);
+    if (value !== null) {
+      var unit = document.createElement('small'); unit.textContent = '秒'; target.appendChild(unit);
+    }
+    target.setAttribute('aria-label', description + (value === null ? '，需填满三次读数' : '，' + displayNumber(value) + '秒'));
+  }
+  function render() {
+    var current = group();
+    each(page.querySelectorAll('[data-record-standard]'), function (button) {
+      button.setAttribute('aria-pressed', String(Number(button.getAttribute('data-record-standard')) === state.activeStandard));
+    });
+    el('recordsInstruction').textContent = '标准计时器到' + state.activeStandard + '秒时，记录水钟的读数。';
+    each(page.querySelectorAll('[data-record-side]'), function (button) {
+      var side = button.getAttribute('data-record-side'), index = Number(button.getAttribute('data-record-trial'));
+      var value = current[side][index], prefix = side === 'before' ? '改前' : '改后';
+      button.querySelector('strong').textContent = value === null ? '—' : displayNumber(value);
+      button.className = 'records-reading' + (value === null ? '' : ' is-filled');
+      button.setAttribute('aria-label', prefix + '第' + (index + 1) + '次水钟读数，' + (value === null ? '未填写' : displayNumber(value) + '秒') + '，点击录入，标准时间' + state.activeStandard + '秒');
+    });
+    each(page.querySelectorAll('[data-error-side]'), function (output) {
+      var side = output.getAttribute('data-error-side'), index = Number(output.getAttribute('data-error-trial'));
+      var value = current[side][index];
+      output.querySelector('b').textContent = value === null ? '—' : signedNumber(value - state.activeStandard);
+      output.setAttribute('aria-label', (side === 'before' ? '改前' : '改后') + '第' + (index + 1) + '次误差，' + (value === null ? '尚无数据' : signedNumber(value - state.activeStandard) + '秒'));
+    });
+    each(['before', 'after'], function (side) {
+      var m = metrics(current[side], state.activeStandard), name = side === 'before' ? 'Before' : 'After';
+      el('records' + name + 'Completed').textContent = m.count + ' / 3 次';
+      showMetric('records' + name + 'Mae', m.mae, '三次读数的平均绝对误差');
+      showMetric('records' + name + 'Range', m.range, '三次重复读数的极差，最大读数减最小读数');
+    });
+    el('recordsExplanation').value = current.explanation;
+  }
+  function renderPad(message) {
+    el('recordsPadValue').textContent = edit && edit.buffer !== '' ? edit.buffer : '—';
+    el('recordsPadHelp').textContent = message || '填写水钟读数，最多一位小数';
+  }
+  function openPad(button) {
+    var side = button.getAttribute('data-record-side'), index = Number(button.getAttribute('data-record-trial'));
+    var value = group()[side][index];
+    previousFocus = document.activeElement;
+    edit = { standard: state.activeStandard, side: side, index: index, buffer: value === null ? '' : String(value), fresh: value !== null };
+    el('recordsPadTitle').textContent = (side === 'before' ? '改前' : '改后') + ' · 第' + (index + 1) + '次';
+    renderPad(); el('recordsKeypad').hidden = false;
+    el('recordsKeypad').querySelector('.records-keypad').focus();
+  }
+  function closePad() {
+    el('recordsKeypad').hidden = true; edit = null;
+    if (previousFocus && previousFocus.focus) previousFocus.focus();
+    previousFocus = null;
+  }
+  function padKey(key) {
+    if (!edit) return;
+    if (key === 'cancel') { closePad(); return; }
+    if (key === 'confirm') {
+      var value = edit.buffer === '' ? null : Number(edit.buffer);
+      if (value !== null && !validNumber(value)) { renderPad('请输入0至9999.9秒'); return; }
+      state.groups[String(edit.standard)][edit.side][edit.index] = value === null ? null : round1(value);
+      save(); render(); closePad(); return;
+    }
+    if (key === 'clear') { edit.buffer = ''; edit.fresh = false; renderPad(); return; }
+    if (key === 'back') { edit.buffer = edit.buffer.slice(0, -1); edit.fresh = false; renderPad(); return; }
+    var buffer = edit.fresh ? '' : edit.buffer;
+    edit.fresh = false;
+    if (key === '.') {
+      if (buffer.indexOf('.') >= 0) return;
+      buffer = (buffer || '0') + '.';
+    } else if (/^[0-9]$/.test(key)) {
+      if (buffer === '0') buffer = key; else buffer += key;
+    } else return;
+    if (!/^\d{1,4}(\.\d{0,1})?$/.test(buffer) || Number(buffer) > 9999.9) {
+      renderPad('最多9999.9秒，保留一位小数'); return;
+    }
+    edit.buffer = buffer; renderPad();
+  }
+  function handleKeys(event) {
+    if (!edit) return;
+    var key = event.key;
+    if (/^[0-9.]$/.test(key)) { event.preventDefault(); padKey(key); }
+    else if (key === 'Backspace' || key === 'Delete') { event.preventDefault(); padKey('back'); }
+    else if (key === 'Escape' || key === 'Esc') { event.preventDefault(); padKey('cancel'); }
+    else if (key === 'Enter') { event.preventDefault(); padKey('confirm'); }
+    else if (key === 'Tab') {
+      var buttons = el('recordsKeypad').querySelectorAll('button'), first = buttons[0], last = buttons[buttons.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === el('recordsKeypad').querySelector('.records-keypad'))) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+  }
+  function csvCell(value) {
+    if (value === null || typeof value === 'undefined') return '""';
+    var text = String(value);
+    if (typeof value !== 'number' && (/^\s*[=+\-@]/.test(text) || /^[\t\r\n]/.test(text))) text = "'" + text;
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+  function csvContent() {
+    var rows = [['数据来源', '标准时间（秒）', '改进阶段', '第几次', '水钟读数（秒）', '误差=读数-标准（秒）', '三次平均绝对误差（秒）', '三次读数极差（秒）', '本组解释']];
+    each([120, 600], function (standard) {
+      var current = state.groups[String(standard)];
+      each(['before', 'after'], function (side) {
+        var values = current[side], m = metrics(values, standard);
+        for (var i = 0; i < 3; i++) rows.push(['实测（人工录入）', standard, side === 'before' ? '改前' : '改后', i + 1, values[i], values[i] === null ? null : round1(values[i] - standard), m.mae === null ? null : round1(m.mae), m.range === null ? null : round1(m.range), current.explanation]);
+      });
+    });
+    return '\ufeff' + rows.map(function (row) { return row.map(csvCell).join(','); }).join('\r\n');
+  }
+  function exportCsv() {
+    try {
+      var csv = csvContent(), blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var date = new Date(), dateText = date.getFullYear() + ('0' + (date.getMonth() + 1)).slice(-2) + ('0' + date.getDate()).slice(-2);
+      var filename = '改进水钟_实测记录_' + dateText + '.csv';
+      if (root.navigator && root.navigator.msSaveBlob) { root.navigator.msSaveBlob(blob, filename); return; }
+      var urlAPI = root.URL || root.webkitURL;
+      if (!urlAPI || !urlAPI.createObjectURL) { setStatus('此浏览器暂不支持文件导出。', true); return; }
+      var url = urlAPI.createObjectURL(blob), link = document.createElement('a');
+      link.href = url; link.download = filename; link.style.display = 'none'; page.appendChild(link); link.click(); page.removeChild(link);
+      root.setTimeout(function () { urlAPI.revokeObjectURL(url); }, 20000);
+      setStatus('已生成两组实测CSV；空白读数保持空白。');
+    } catch (error) { setStatus('导出未完成，请重试。', true); }
+  }
+  function init() {
+    if (initialized) return;
+    page = el('recordsPage'); if (!page) return;
+    initialized = true; state = readSaved();
+    each(page.querySelectorAll('[data-record-standard]'), function (button) {
+      button.addEventListener('click', function () { if (edit) closePad(); state.activeStandard = Number(button.getAttribute('data-record-standard')); save(); render(); });
+    });
+    each(page.querySelectorAll('[data-record-side]'), function (button) { button.addEventListener('click', function () { openPad(button); }); });
+    each(page.querySelectorAll('[data-record-key]'), function (button) { button.addEventListener('click', function () { padKey(button.getAttribute('data-record-key')); }); });
+    el('recordsKeypad').addEventListener('click', function (event) { if (event.target === el('recordsKeypad')) closePad(); });
+    document.addEventListener('keydown', handleKeys);
+    el('recordsExplanation').addEventListener('input', function () { group().explanation = this.value.slice(0, 240); save(); });
+    el('recordsExport').addEventListener('click', exportCsv);
+    render();
+  }
+  function show() { init(); if (initialized) { if (edit) closePad(); render(); } }
+  root.RecordsUI = { init: init, show: show };
+}(window));
+</script>
+<script>(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var M = window.WaterModel;
+  var STORE = 'water-clock-improve-v1';
+  var base = {initialHeadCm:16,tankAreaCm2:30,tankMaxHeadCm:20,holeMm:1,Cd:0.62,sourceMl:0,supplyRate:2,overflow:false,overflowHeadCm:16,receiverAreaCm2:30,receiverCapacityMl:1200,duration:600,step:0.05};
+  var state = {page:'build',config:copy(base),before:copy(base),after:null,sourceAmount:1600,time:0,speed:20,playing:false,scale:'own'};
+  var sim, beforeSim, afterSim, toastTimer, animation=0, lastFrame=0, lastPaint=0, drag=null, lastInfoFocus=null;
+  var saveOK = true;
+  var fmt = function (n,d) { return Number(n).toFixed(d === undefined ? 1 : d); };
+  function copy(a) { return JSON.parse(JSON.stringify(a)); }
+  function clamp(n,a,b) { return Math.max(a,Math.min(b,n)); }
+  function esc(s) { return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c];}); }
+  function timeText(n,decimals) {
+    if (n === null || !isFinite(n)) return '—';
+    n=Math.max(0,n); var all=decimals?Math.round(n*10)/10:Math.floor(n+0.000001);
+    var min=Math.floor(all/60), sec=all-min*60;
+    return min+':'+(sec<10?'0':'')+(decimals?sec.toFixed(1):Math.floor(sec));
+  }
+  function errorText(n) { if(n===null||!isFinite(n))return '读数无效'; return Math.abs(n)<0.05?'0.0 秒':(n>0?'+':'−')+fmt(Math.abs(n))+' 秒'; }
+  function errorClass(n) { return Math.abs(n)<0.05?'close':n>0?'ahead':'behind'; }
+  function normalized(raw) {
+    var c=M.normalize(raw||base); c.duration=600;c.step=.05;c.tankAreaCm2=30;c.tankMaxHeadCm=20;c.Cd=.62;
+    c.initialHeadCm=clamp(c.initialHeadCm,6,18);c.holeMm=clamp(c.holeMm,.6,1.4);
+    c.sourceMl=c.sourceMl>0?(c.sourceMl<800?400:1600):0;c.supplyRate=clamp(c.supplyRate,.6,3);
+    c.overflowHeadCm=16;c.receiverAreaCm2=c.receiverAreaCm2<22?15:30;c.receiverCapacityMl=c.receiverAreaCm2*40;
+    return c;
+  }
+  function load() {
+    try { var saved=JSON.parse(localStorage.getItem(STORE)||'null');
+      if(saved&&saved.version===1){state.config=normalized(saved.config);state.before=normalized(saved.before);state.after=saved.after?normalized(saved.after):null;state.sourceAmount=saved.sourceAmount===400?400:1600;}
+    } catch(e) { saveOK=false; }
+  }
+  function persist() {
+    try {localStorage.setItem(STORE,JSON.stringify({version:1,config:state.config,before:state.before,after:state.after,sourceAmount:state.sourceAmount}));saveOK=true;}
+    catch(e){saveOK=false;}
+    $('storageState').textContent=saveOK?'方案保存在本机':'本机保存不可用，仍可操作与导出';
+  }
+  function toast(message) { $('toast').textContent=message;$('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').classList.remove('visible');},2600); }
+  function computeAll() { sim=M.compute(state.config);beforeSim=M.compute(state.before);afterSim=state.after?M.compute(state.after):null; }
+  function changed(message) { pause();state.time=0;state.config=normalized(state.config);sim=M.compute(state.config);syncControls();render();persist();if(message)toast(message); }
+  function syncControls() {
+    $('supplyToggle').setAttribute('aria-pressed',String(state.config.sourceMl>0));
+    $('overflowToggle').setAttribute('aria-pressed',String(state.config.overflow));
+    $('sourceOptions').hidden=state.config.sourceMl===0;
+    Array.prototype.forEach.call(document.querySelectorAll('[data-source]'),function(b){b.classList.toggle('selected',Number(b.getAttribute('data-source'))===state.sourceAmount);b.setAttribute('aria-pressed',String(Number(b.getAttribute('data-source'))===state.sourceAmount));});
+    $('supplyRange').value=state.config.supplyRate;$('supplyValue').textContent=fmt(state.config.supplyRate)+' mL/秒';
+    $('holeRange').value=state.config.holeMm;$('holeValue').textContent=fmt(state.config.holeMm)+' mm';
+  }
+  function toggleSupply() {state.config.sourceMl=state.config.sourceMl?0:state.sourceAmount;changed(state.config.sourceMl?'加上供水壶，从相同条件重新开始':'取下供水壶，从时间零开始');}
+  function toggleOverflow() {state.config.overflow=!state.config.overflow;changed(state.config.overflow?'装上溢流管，观察水位会怎样变化':'取下溢流管，观察多余的水去哪里');}
+  function toggleCup() {state.config.receiverAreaCm2=state.config.receiverAreaCm2===30?15:30;state.config.receiverCapacityMl=state.config.receiverAreaCm2*40;changed(state.config.receiverAreaCm2===15?'换成细受水杯：上方出水速度会改变吗？':'换成宽受水杯，重新开始');}
+  function setPage(page) {
+    pause();state.page=page;
+    ['build','compare','records'].forEach(function(p){$(p+'Page').hidden=p!==page;});
+    Array.prototype.forEach.call(document.querySelectorAll('[data-page]'),function(b){var on=b.getAttribute('data-page')===page;b.classList.toggle('active',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
+    $('transport').hidden=page==='records';$('modeLabel').textContent=page==='records'?'真实实验 · 手动记录':'模型演示';
+    if(page==='records'&&window.RecordsUI)window.RecordsUI.show();
+    render();
+  }
+  function saveScheme(which) {
+    state[which]=copy(state.config);if(which==='before')beforeSim=M.compute(state.before);else afterSim=M.compute(state.after);
+    persist();toast(which==='before'?'已保留改前方案，继续改一个地方':'已保留改后方案，进入“同场验证”比较');
+  }
+  function useScheme(which) {if(!state[which])return;state.config=copy(state[which]);if(state.config.sourceMl)state.sourceAmount=state.config.sourceMl;changed();setPage('build');toast('取回'+(which==='before'?'改前':'改后')+'方案，可继续修改');}
+  function pause() {state.playing=false;if(animation)cancelAnimationFrame(animation);animation=0;lastFrame=0;updateTransport();}
+  function play() {if(state.playing){pause();return;}if(state.page==='records')return;if(state.time>=600)state.time=0;state.playing=true;lastFrame=0;animation=requestAnimationFrame(tick);updateTransport();}
+  function tick(stamp) {
+    if(!state.playing)return;
+    if(lastFrame){state.time=Math.min(600,state.time+Math.min(.1,(stamp-lastFrame)/1000)*state.speed);}
+    lastFrame=stamp;
+    if(stamp-lastPaint>=32||state.time>=600){render();lastPaint=stamp;}
+    if(state.time>=600){pause();return;}
+    animation=requestAnimationFrame(tick);
+  }
+  function seek(t) {pause();state.time=clamp(t,0,600);render();}
+  function updateTransport() {if(!$('playBtn'))return;$('playBtn').textContent=state.playing?'暂停':state.time>=600?'重播':state.time>0?'继续':'开始';$('speedBtn').textContent='×'+state.speed;}
+  function node(tag,attrs,inside) {return '<'+tag+' '+attrs+'>'+inside+'</'+tag+'>';}
+  function label(x,y,text,opts) {opts=opts||'';return '<text x="'+x+'" y="'+y+'" '+opts+'>'+esc(text)+'</text>';}
+  function vesselPath(x,y,w,h) {return 'M'+x+','+y+'V'+(y+h-12)+'Q'+x+','+(y+h)+' '+(x+12)+','+(y+h)+'H'+(x+w-12)+'Q'+(x+w)+','+(y+h)+' '+(x+w)+','+(y+h-12)+'V'+y;}
+  function pipe(path,flow,color,time) {color=color||'#31b5c6';return '<path d="'+path+'" fill="none" stroke="#547585" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/><path d="'+path+'" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>'+(flow>0.0001?'<path d="'+path+'" fill="none" stroke="'+color+'" stroke-width="5" stroke-dasharray="10 7" stroke-dashoffset="'+fmt(-time*Math.min(14,flow*10))+'" stroke-linecap="round" stroke-linejoin="round"/>':'');}
+  function waterStream(x,y1,y2,flow,time) {if(flow<.0001||y2<=y1)return '';return '<path d="M'+x+','+y1+'V'+y2+'" stroke="#31b5c6" stroke-width="'+fmt(3+Math.min(flow,3)*2)+'" stroke-linecap="round" stroke-dasharray="12 9" stroke-dashoffset="'+fmt(-time*(8+flow*10))+'" fill="none"/>';}
+  function compactApparatusSVG(c,s) {
+    var wy=365-s.h*8.6,overY=227.4,cw=c.receiverAreaCm2===15?148:210,cx=420-cw/2,ry=594-137*s.collectedMl/c.receiverCapacityMl,has=c.sourceMl>0;
+    var out='<svg xmlns="http://www.w3.org/2000/svg" viewBox="235 0 470 650" aria-label="水钟剖面示意，可点供水壶和溢流管，拖动水位线" style="font-family:Microsoft YaHei,PingFang SC,sans-serif;font-weight:650;fill:#102b3d;font-size:29px">';
+    out+='<path d="M283 170V609M557 170V609M270 374H570M270 610H570" stroke="#bdd2db" stroke-width="9" fill="none"/>';
+    out+='<g data-action="supply" role="button" tabindex="0" aria-label="'+(has?'取下':'加上')+'供水壶" class="interactive"><path d="'+vesselPath(315,32,210,98)+'" fill="#fff" stroke="#789aa8" stroke-width="4"'+(has?'':' stroke-dasharray="8 6"')+'/>';
+    if(has){var sy=130-91*s.sourceMl/c.sourceMl;out+='<rect x="319" y="'+sy+'" width="202" height="'+Math.max(0,126-sy)+'" fill="#83d6df"/>'+label(420,22,'供水壶','text-anchor="middle"')+label(420,93,'余 '+Math.round(s.sourceMl)+' mL','text-anchor="middle" font-size="25"');}
+    else out+=label(420,91,'＋ 供水壶','text-anchor="middle" fill="#087d88"');out+='</g>';
+    if(has)out+=pipe('M420 132V158',s.supplyRate,null,state.time)+waterStream(420,163,193,s.supplyRate,state.time);
+    out+=label(420,185,'出水壶','text-anchor="middle" font-size="26"')+'<path d="'+vesselPath(305,193,230,172)+'" fill="#fff" stroke="#547585" stroke-width="4"/><rect x="309" y="'+wy+'" width="222" height="'+Math.max(0,361-wy)+'" fill="#7cd0dc"/><path d="M305 '+wy+'H535" stroke="#087d88" stroke-width="4"/>'+label(420,331,fmt(s.h)+' cm','text-anchor="middle" fill="#08626b" font-size="30"');
+    out+='<g data-action="waterline" data-drag="head" role="slider" aria-valuemin="6" aria-valuemax="18" aria-valuenow="'+c.initialHeadCm+'" aria-label="拖动设置初始水位，厘米" tabindex="0" class="interactive"><path d="M305 '+wy+'H535" stroke="transparent" stroke-width="42"/><circle cx="305" cy="'+wy+'" r="18" fill="#fff" stroke="#087d88" stroke-width="4"/>'+label(305,wy+9,'↕','text-anchor="middle" font-size="28" fill="#087d88"')+'</g>';
+    out+='<g data-action="overflow" role="button" tabindex="0" aria-label="'+(c.overflow?'取下':'加上')+'溢流管" class="interactive">';
+    if(c.overflow)out+=pipe('M539 '+overY+'H644V512',s.spillRate,null,state.time)+'<path d="M539 '+overY+'H644V512" stroke="transparent" stroke-width="40" fill="none"/>'+label(630,202,'溢流管','text-anchor="middle" font-size="25"');
+    else out+='<rect x="567" y="236" width="126" height="84" rx="9" fill="#fff" stroke="#94bac7" stroke-width="2" stroke-dasharray="7 5"/>'+label(630,269,'＋','text-anchor="middle" fill="#087d88" font-size="27"')+label(630,303,'溢流管','text-anchor="middle" fill="#087d88" font-size="25"');out+='</g>';
+    if(s.spillRate>0&&!c.overflow)out+='<path d="M538 195Q591 199 602 267L644 520" fill="none" stroke="#36b3c4" stroke-width="5" stroke-dasharray="10 7"/>';
+    if(s.spillRate>0&&c.overflow)out+=waterStream(644,516,555,s.spillRate,state.time);
+    out+='<path d="'+vesselPath(580,530,110,64)+'" fill="#fff" stroke="#ad8d63" stroke-width="4"/><rect x="584" y="'+(590-Math.min(1,s.overflowMl/1500)*54)+'" width="102" height="'+(Math.min(1,s.overflowMl/1500)*54)+'" fill="#aedfe4"/>'+label(635,620,'余水','text-anchor="middle" font-size="24" fill="#99612d"')+label(635,646,Math.round(s.overflowMl)+' mL','text-anchor="middle" font-size="23" fill="#99612d"');
+    out+=label(420,435,'受水杯','text-anchor="middle" font-size="27"')+'<g data-action="cup" role="button" tabindex="0" aria-label="'+(c.receiverAreaCm2===30?'换细受水杯':'换宽受水杯')+'" class="interactive"><path d="'+vesselPath(cx,450,cw,144)+'" fill="#fff" stroke="#547585" stroke-width="4"/><rect x="'+(cx+4)+'" y="'+ry+'" width="'+(cw-8)+'" height="'+Math.max(0,590-ry)+'" fill="#79cfda"/>'+label(420,646,c.receiverAreaCm2===30?'点杯子，换细杯':'点杯子，换宽杯','text-anchor="middle" font-size="25" fill="#087d88"')+'</g>';
+    for(var minute=0;minute<=10;minute+=5){var y=594-sim.calibrationMl*minute/c.receiverCapacityMl*137;if(y>=452&&(minute===0||594-y>=26))out+='<path d="M'+(cx+cw+7)+' '+y+'h12" stroke="#6a8b99" stroke-width="2"/>'+label(cx+cw+23,y+8,minute,'font-size="23"');}
+    if(s.collectedMl>1)out+='<path d="M'+(cx+cw-25)+' '+ry+'h40" stroke="#b66a22" stroke-width="4"/>';
+    out+=pipe('M420 367V388',s.outflowRate,null,state.time)+waterStream(420,394,Math.max(451,ry-6),s.outflowRate,state.time);
+    if(s.receiverOverflowMl>0)out+='<path d="M'+(cx+cw+2)+' 455Q'+(cx+cw+25)+' 465 '+(cx+cw+30)+' 510L'+(cx+cw+33)+' 615" fill="none" stroke="#36b3c4" stroke-width="4" stroke-dasharray="9 6"/>'+label(420,621,'下杯溢出 '+Math.round(s.receiverOverflowMl)+' mL','text-anchor="middle" font-size="23" fill="#ad6226"');
+    return out+'</svg>';
+  }
+  function apparatusSVG(c,s) {
+    if(window.innerWidth<=720)return compactApparatusSVG(c,s);
+    var headBottom=365, headTop=193, wy=headBottom-s.h*8.6, overY=headBottom-16*8.6;
+    var cw=c.receiverAreaCm2===15?148:210, cx=420-cw/2, receiverBottom=594, rh=137, ry=receiverBottom-rh*(s.collectedMl/c.receiverCapacityMl);
+    var sourceFraction=c.sourceMl?s.sourceMl/c.sourceMl:0, sourceY=130-sourceFraction*94;
+    var over=c.overflow, hasSource=c.sourceMl>0, spill=s.spillRate>0, ruler='';
+    var tickStep=sim.calibrationMl*5/c.receiverCapacityMl*rh>=26?5:10;
+    for(var minute=0;minute<=10;minute++){var vol=sim.calibrationMl*minute;if(vol>c.receiverCapacityMl)break;var y=receiverBottom-vol/c.receiverCapacityMl*rh;var major=minute%tickStep===0;var legible=minute===0||receiverBottom-y>=26;ruler+='<path d="M'+(cx+cw+8)+','+y+'h'+(major?18:9)+'" stroke="#5e7b88" stroke-width="'+(major?2:1)+'"/>'+(major&&legible?label(cx+cw+31,y+8,String(minute),'font-size="23"'):'');}
+    var out='';
+    out+='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 630" aria-label="水钟剖面示意，可点击供水壶和溢流管，拖动水位线" style="font-family:Microsoft YaHei,PingFang SC,sans-serif;font-weight:650;fill:#102b3d;font-size:29px">';
+    out+='<defs><clipPath id="headClip"><path d="M305 193H535V353Q535 365 523 365H317Q305 365 305 353Z"/></clipPath><clipPath id="sourceClip"><path d="M315 28H525V118Q525 130 513 130H327Q315 130 315 118Z"/></clipPath><clipPath id="cupClip"><path d="M'+cx+' 450H'+(cx+cw)+'V582Q'+(cx+cw)+' 594 '+(cx+cw-12)+' 594H'+(cx+12)+'Q'+cx+' 594 '+cx+' 582Z"/></clipPath></defs>';
+    // Clean support frame; apparatus details have an isolated renderer for replacement.
+    out+='<path d="M283 170V609M557 170V609" stroke="#c0d3da" stroke-width="12" fill="none"/><path d="M270 374H570M270 610H570" stroke="#a9c2ce" stroke-width="15" fill="none"/>';
+    out+='<g data-action="supply" role="button" tabindex="0" aria-label="'+(hasSource?'取下':'加上')+'供水壶" class="interactive">';
+    if(hasSource){out+='<path d="'+vesselPath(315,28,210,102)+'" fill="#fff" stroke="#547585" stroke-width="4"/><rect x="315" y="'+sourceY+'" width="210" height="'+(130-sourceY)+'" fill="#83d6df" clip-path="url(#sourceClip)"/>';
+      out+='<path d="'+vesselPath(315,28,210,102)+'" fill="none" stroke="#547585" stroke-width="4"/>'+label(69,78,'供水壶')+'<path d="M190 80H301" stroke="#7894a1" stroke-width="2"/>';
+      out+=label(610,70,'剩余 '+Math.round(s.sourceMl)+' mL','font-size="27" fill="#087d88"')+label(610,109,'流入 '+fmt(s.supplyRate,2)+' mL/秒','font-size="23" fill="#516977"');
+    }else{out+='<path d="'+vesselPath(315,28,210,102)+'" fill="#ffffff88" stroke="#90b6c2" stroke-width="3" stroke-dasharray="9 7"/>'+label(420,85,'＋ 供水壶','text-anchor="middle" fill="#087d88" font-size="28"');}
+    out+='</g>';
+    if(hasSource)out+=pipe('M420 132V158',s.supplyRate,null,state.time)+waterStream(420,163,193,s.supplyRate,state.time);
+    out+='<path d="'+vesselPath(305,193,230,172)+'" fill="#fff" stroke="#547585" stroke-width="4"/>';
+    out+='<rect x="305" y="'+wy+'" width="230" height="'+(365-wy)+'" fill="#7cd0dc" clip-path="url(#headClip)"/>';
+    out+='<path d="M305 '+wy+'H535" stroke="#087d88" stroke-width="4"/>';
+    out+='<path d="'+vesselPath(305,193,230,172)+'" fill="none" stroke="#547585" stroke-width="4"/>'+label(68,213,'出水壶');
+    out+='<path d="M282 '+wy+'H296M282 365H296M287 '+wy+'V365" fill="none" stroke="#087d88" stroke-width="3"/>'+label(265,(wy+365)/2+8,fmt(s.h)+' cm','text-anchor="end" fill="#087d88" font-size="30"');
+    out+='<g data-action="waterline" data-drag="head" role="slider" aria-valuemin="6" aria-valuemax="18" aria-valuenow="'+c.initialHeadCm+'" aria-label="拖动设置初始水位，厘米" tabindex="0" class="interactive"><path d="M305 '+wy+'H535" stroke="transparent" stroke-width="42"/><circle cx="305" cy="'+wy+'" r="14" fill="#fff" stroke="#087d88" stroke-width="4"/><path d="M300 '+(wy-3)+'L305 '+(wy-8)+'L310 '+(wy-3)+'M300 '+(wy+3)+'L305 '+(wy+8)+'L310 '+(wy+3)+'" fill="none" stroke="#087d88" stroke-width="2"/></g>';
+    out+='<g data-action="overflow" role="button" tabindex="0" aria-label="'+(over?'取下':'加上')+'溢流管" class="interactive">';
+    if(over){out+=pipe('M539 '+overY+'H644V503',spill?s.spillRate:0,null,state.time);out+='<path d="M539 '+overY+'H644V503" stroke="transparent" stroke-width="35" fill="none"/>'+label(668,overY+9,'溢流管','font-size="27" fill="#087d88"');}
+    else{out+='<rect x="625" y="176" width="194" height="49" rx="9" fill="#fff" stroke="#8bb8c4" stroke-width="2" stroke-dasharray="6 4"/>'+label(722,210,'＋ 溢流管','text-anchor="middle" font-size="26" fill="#087d88"');}
+    out+='</g>';
+    if(spill&&!over){out+='<path d="M537 195Q592 187 601 241L644 510" fill="none" stroke="#36b3c4" stroke-width="5" stroke-dasharray="10 7" stroke-dashoffset="'+(-state.time*14)+'"/>'+label(675,201,'杯沿溢水','font-size="27" fill="#ad6226"');}
+    if(spill&&over)out+=waterStream(644,509,560,s.spillRate,state.time);
+    out+='<path d="'+vesselPath(610,522,210,72)+'" fill="#fff" stroke="#b29571" stroke-width="4"/><rect x="615" y="'+(588-Math.min(1,s.overflowMl/1500)*60)+'" width="200" height="'+(Math.min(1,s.overflowMl/1500)*60)+'" fill="#aedfe4" rx="6"/>'+label(715,624,'余水 '+Math.round(s.overflowMl)+' mL','text-anchor="middle" font-size="25" fill="#99612d"');
+    // The receiver can be exchanged without changing upstream flow.
+    out+='<g data-action="cup" role="button" tabindex="0" aria-label="'+(c.receiverAreaCm2===30?'换细受水杯':'换宽受水杯')+'" class="interactive">';
+    out+='<path d="'+vesselPath(cx,450,cw,144)+'" fill="#fff" stroke="#547585" stroke-width="4"/><rect x="'+cx+'" y="'+ry+'" width="'+cw+'" height="'+(594-ry)+'" fill="#79cfda" clip-path="url(#cupClip)"/><path d="'+vesselPath(cx,450,cw,144)+'" fill="none" stroke="#547585" stroke-width="4"/>'+label(67,479,'受水杯')+'<rect x="55" y="501" width="180" height="49" rx="9" fill="#fff" stroke="#99bac5" stroke-width="2"/>'+label(145,535,c.receiverAreaCm2===30?'点此换细杯':'点此换宽杯','text-anchor="middle" font-size="25"');
+    out+='</g>'+ruler+label(cx+cw+31,432,'分','font-size="23" fill="#516977"');
+    if(s.collectedMl>1){out+='<rect x="'+(cx+cw-46)+'" y="'+(ry-6)+'" width="32" height="12" rx="3" fill="#eda957"/><path d="M'+(cx+cw-30)+' '+(ry-6)+'V'+(ry-35)+'" stroke="#b66a22" stroke-width="3"/><path d="M'+(cx+cw-30)+' '+ry+'H'+(cx+cw+25)+'" stroke="#b66a22" stroke-width="3"/>';}
+    out+=pipe('M420 367V388',s.outflowRate,null,state.time)+waterStream(420,394,Math.max(451,ry-6),s.outflowRate,state.time);
+    // Magnified thin-wall orifice, geometry only; no individual-droplet claims.
+    var opening=c.holeMm*12;
+    out+='<g aria-label="出水孔放大示意"><circle cx="801" cy="359" r="73" fill="#fff" stroke="#b4ccd5" stroke-width="2"/><path d="M459 381L730 359" stroke="#94b5c1" stroke-width="2" stroke-dasharray="6 6"/>'+label(801,267,'孔口放大','text-anchor="middle" font-size="25" fill="#516977"');
+    out+='<path d="M742 348H'+(801-opening/2)+'M'+(801+opening/2)+' 348H860" stroke="#638794" stroke-width="10"/><path d="M743 320H859V342H743Z" fill="#b9e9ee"/>'+waterStream(801,355,413,s.outflowRate,state.time)+label(801,460,fmt(c.holeMm)+' mm','text-anchor="middle" font-size="30" fill="#087d88"')+'</g>';
+    if(s.receiverOverflowMl>0){out+='<path d="M'+(cx+cw+2)+' 455Q'+(cx+cw+25)+' 456 '+(cx+cw+28)+' 487L'+(cx+cw+48)+' 608" fill="none" stroke="#36b3c4" stroke-width="5" stroke-dasharray="10 6" stroke-dashoffset="'+(-state.time*12)+'"/><ellipse cx="'+(cx+cw+49)+'" cy="612" rx="35" ry="7" fill="#9cdae3"/>'+label(65,580,'下杯溢出','font-size="24" fill="#ad6226"')+label(65,614,Math.round(s.receiverOverflowMl)+' mL','font-size="27" fill="#ad6226"');}
+    out+='</svg>';
+    return out;
+  }
+  function configText(c) {return (c.sourceMl?c.sourceMl+'mL供水 / 初流'+fmt(c.supplyRate)+'mL/秒':'无供水')+' · '+(c.overflow?'有溢流管':'无溢流管')+' · 孔径'+fmt(c.holeMm)+'mm'+(c.receiverAreaCm2===15?' · 细杯':'');}
+  function displayed(simulation,sample) {
+    var calibration=state.scale==='own'?simulation.calibrationMl:beforeSim.calibrationMl*(simulation.config.receiverAreaCm2/beforeSim.config.receiverAreaCm2);
+    var valid=calibration>1e-9&&sample.receiverOverflowMl<1e-9;
+    var reading=valid?sample.collectedMl/calibration*60:null;
+    return {reading:reading,error:reading===null?null:reading-state.time,valid:valid,calibration:calibration};
+  }
+  function miniTank(c,s,id,color) {
+    var y=219-s.h*8.3, overY=219-16*8.3;
+    var str='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 290" aria-label="'+id+'水位'+fmt(s.h)+'厘米" style="font-family:Microsoft YaHei,PingFang SC,sans-serif;font-size:24px;fill:#102b3d">';
+    str+='<path d="M66 51V207Q66 219 78 219H193Q205 219 205 207V51" fill="#fff" stroke="#78939f" stroke-width="4"/><rect x="69" y="'+y+'" width="133" height="'+Math.max(0,216-y)+'" fill="#95d9e2"/><path d="M69 '+y+'H202" stroke="'+color+'" stroke-width="4"/>';
+    if(c.sourceMl>0)str+=waterStream(136,5,46,s.supplyRate,state.time);
+    if(c.overflow)str+=pipe('M207 '+overY+'H234V202',s.spillRate,null,state.time);
+    if(!c.overflow&&s.spillRate>0)str+='<path d="M207 53Q235 50 243 150" fill="none" stroke="#36b3c4" stroke-width="5"/>';
+    str+='<path d="M49 219V'+y+'M43 219H55M43 '+y+'H55" fill="none" stroke="'+color+'" stroke-width="3"/>'+label(135,263,fmt(s.h)+' cm','text-anchor="middle" font-size="34" font-weight="700" fill="'+color+'"');
+    str+=waterStream(136,224,236,s.outflowRate,state.time)+'</svg>';return str;
+  }
+  function chartSVG(simulation,color) {
+    var allMax=Math.max.apply(null,beforeSim.minuteVolumes.concat(afterSim?afterSim.minuteVolumes:[]));
+    var top=Math.max(10,Math.ceil(allMax/10)*10), h=114, baseline=90;
+    var s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 130" role="img" aria-label="已经流出的每分钟水量，同一纵轴尺度，单位毫升" style="font-family:Microsoft YaHei,PingFang SC,sans-serif;fill:#516977;font-size:19px">';
+    s+='<path d="M43 10V90H550" fill="none" stroke="#c0d3d9" stroke-width="2"/>'+label(36,19,top,'text-anchor="end" font-size="17"')+label(36,94,'0','text-anchor="end" font-size="17"');
+    for(var i=0;i<10;i++){
+      var x=52+i*49,w=34,start=i*60,end=(i+1)*60;
+      var elapsed=Math.max(0,Math.min(60,state.time-start));
+      var vol=elapsed>0?M.sampleAt(simulation,start+elapsed).deliveredMl-M.sampleAt(simulation,start).deliveredMl:0;
+      var height=vol/top*75;
+      s+='<rect x="'+x+'" y="'+(baseline-height)+'" width="'+w+'" height="'+height+'" rx="3" fill="'+color+'" opacity="'+(state.time>=end?'1':'.45')+'"/>';
+      if(state.time>=end)s+=label(x+w/2,Math.max(19,baseline-height-5),String(Math.round(vol)),'text-anchor="middle" font-size="24" fill="'+color+'"');
+      s+=label(x+w/2,118,String(i+1),'text-anchor="middle" font-size="24"');
+    }
+    s+='</svg>';return s;
+  }
+  function compareCard(which,simulation) {
+    var title=which==='before'?'改前':'改后',color=which==='before'?'#ad6226':'#087d88';
+    if(!simulation)return '<article class="comparison '+which+'"><div class="comparison-head"><h3>'+title+'</h3></div><div class="empty-compare"><h3>等你来改进</h3><p>回到“拆看改进”，改变装置，再点“记为改后”。</p><button class="primary" data-go-build>去改一改</button></div></article>';
+    var s=M.sampleAt(simulation,state.time),d=displayed(simulation,s),c=simulation.config;
+    var status=s.receiverOverflowMl>1e-8?'下杯已溢出 '+Math.round(s.receiverOverflowMl)+' mL':c.sourceMl&&s.sourceMl<.01?'供水壶已空':c.sourceMl?'剩余供水 '+Math.round(s.sourceMl)+' mL':'出水 '+fmt(s.outflowRate*60)+' mL/分';
+    return '<article class="comparison '+which+'"><div class="comparison-head"><h3>'+title+'</h3><button data-use="'+which+'" class="quiet" aria-label="取回'+title+'方案继续修改">取回方案</button></div><p class="config-summary">'+esc(configText(c))+'</p><div class="compare-visual"><div class="mini-tank">'+miniTank(c,s,title,color)+'</div><div class="compare-readout"><span class="label">水钟读数</span><strong class="clock-time" id="clock'+title+'">'+timeText(d.reading,true)+'</strong><strong class="clock-error '+errorClass(d.error||0)+'"><small>偏差 </small>'+(d.valid?errorText(d.error):'读数无效')+'</strong><span class="flow-note">'+esc(status)+'<br>余水 '+Math.round(s.overflowMl)+' mL</span></div></div><h4 class="volume-title">每个 1 分钟的出水量 / mL</h4><div class="minute-chart">'+chartSVG(simulation,color)+'</div></article>';
+  }
+  function render() {
+    if(state.page==='build'){
+      var s=M.sampleAt(sim,state.time);$('apparatus').innerHTML=apparatusSVG(state.config,s);
+      $('headValue').innerHTML=fmt(s.h)+' <small>cm</small>';$('flowValue').innerHTML=fmt(s.outflowRate*60)+' <small>mL/分</small>';
+      $('buildState').textContent=state.time===0?'拖动水位线，或点装置加部件':s.receiverOverflowMl>0?'受水杯已满：此后不能继续读时':state.config.sourceMl&&s.sourceMl<.01?'供水壶已空，继续追踪水位':s.spillRate>0&&!state.config.overflow?'水从杯沿溢出，流向余水杯':'拖动下方时间条，回看同一时刻';
+    }else if(state.page==='compare'){
+      $('comparePanels').innerHTML=compareCard('before',beforeSim)+compareCard('after',afterSim);
+      $('exportEvidence').disabled=!afterSim;
+      $('scaleNote').textContent=state.scale==='own'?'各用首分钟水量定 1 分钟，再画等距刻度。':'沿用改前的刻度间距；换杯也不重新标尺。';
+      $('ownScale').classList.toggle('selected',state.scale==='own');$('sharedScale').classList.toggle('selected',state.scale==='shared');
+      $('ownScale').setAttribute('aria-pressed',String(state.scale==='own'));$('sharedScale').setAttribute('aria-pressed',String(state.scale==='shared'));
+    }
+    $('timeRange').value=Math.round(state.time);$('timeLabel').textContent=timeText(state.time);updateTransport();
+  }
+  function svgPoint(ev) {var svg=$('apparatus').querySelector('svg');var pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse());}
+  function dragMove(ev) {if(!drag)return;var e=ev.touches?ev.touches[0]:ev;if(!e)return;var p=svgPoint(e);state.config.initialHeadCm=Math.round(clamp((365-p.y)/8.6,6,18)*2)/2;changed();if(ev.cancelable)ev.preventDefault();}
+  function dragStart(ev) {var target=ev.target.closest?ev.target.closest('[data-drag]'):null;if(!target)return;drag={start:true};pause();if(ev.pointerId!==undefined&&$('apparatus').setPointerCapture)$('apparatus').setPointerCapture(ev.pointerId);dragMove(ev);}
+  function dragEnd() {if(!drag)return;drag=null;persist();toast('初始水位已设置，时间从零开始');}
+  function showInfo() {pause();lastInfoFocus=document.activeElement;$('infoModal').hidden=false;$('closeInfo').focus();}
+  function closeInfo() {$('infoModal').hidden=true;if(lastInfoFocus&&lastInfoFocus.focus)lastInfoFocus.focus();}
+  function download(name,content,type) {
+    try {
+      var blob=new Blob([content],{type:type});
+      if(navigator.msSaveBlob){navigator.msSaveBlob(blob,name);return true;}
+      var api=window.URL||window.webkitURL;
+      if(!api||!api.createObjectURL){toast('此浏览器暂不支持文件导出');return false;}
+      var url=api.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);
+      setTimeout(function(){api.revokeObjectURL(url);},30000);return true;
+    }catch(e){toast('导出未完成，请重试');return false;}
+  }
+  function exportEvidence() {
+    if(!afterSim)return;pause();
+    var width=1200,height=870,lines='';
+    lines+='<rect width="1200" height="870" fill="#edf4f6"/>'+label(55,65,'改进水钟 · 模型对照证据','font-size="38" font-weight="800"');
+    lines+=label(55,110,'标准时间 '+timeText(state.time)+'  |  '+(state.scale==='own'?'各自用首分钟水量重新标刻':'两台沿用改前刻度间距，换杯也不重标'),'font-size="26"');
+    [beforeSim,afterSim].forEach(function(a,i){var x=55+i*590,s=M.sampleAt(a,state.time),d=displayed(a,s),color=i?'#087d88':'#ad6226';
+      lines+='<rect x="'+x+'" y="142" width="550" height="580" rx="12" fill="white" stroke="#bdd3da"/>'+label(x+25,188,i?'改后':'改前','fill="'+color+'" font-size="32" font-weight="800"');
+      lines+=label(x+25,226,(a.config.sourceMl?'供水 '+a.config.sourceMl+' mL，初流 '+fmt(a.config.supplyRate)+' mL/秒':'无供水')+'；'+(a.config.overflow?'有溢流管':'无溢流管'),'font-size="20"');
+      lines+=label(x+25,267,'起测 '+fmt(a.metadata.preparedHeadCm)+' cm；孔径 '+fmt(a.config.holeMm)+' mm；受水杯 '+a.config.receiverAreaCm2+' cm²','font-size="21"');
+      lines+=label(x+25,330,'水钟读数 '+timeText(d.reading,true),'font-size="39" font-weight="750"');
+      lines+=label(x+25,385,'偏差 '+errorText(d.error),'font-size="34" fill="'+color+'"');
+      lines+=label(x+25,433,'当前水位 '+fmt(s.h)+' cm；流出 '+fmt(s.outflowRate*60)+' mL/分','font-size="24"');
+      lines+=label(x+25,477,'上壶余 '+Math.round(s.sourceMl)+'；上方溢出 '+Math.round(s.overflowMl)+'；下杯溢出 '+Math.round(s.receiverOverflowMl)+' mL','font-size="20"');
+      lines+=label(x+25,523,'每个完整分钟的出水量（mL）','font-size="24" font-weight="700"');
+      var vals=a.minuteVolumes.map(function(v,j){return state.time>=(j+1)*60?fmt(v):'—';});
+      lines+=label(x+25,565,'第 1—5 分钟：'+vals.slice(0,5).join(' / '),'font-size="23"');
+      lines+=label(x+25,607,'第 6—10 分钟：'+vals.slice(5,10).join(' / '),'font-size="23"');
+      lines+=label(x+25,664,'1 分钟刻度水量 '+fmt(d.calibration,2)+' mL','font-size="24" fill="#516977"');
+    });
+    lines+=label(55,770,'偏差 = 水钟读数 − 标准时间；正数走快，负数走慢。','font-size="25"');
+    lines+=label(55,812,'简化模型；等距刻度；数值需用实物重新标刻并复测。','font-size="24" fill="#516977"');
+    if(download('改进水钟_模型证据_'+Math.round(state.time)+'秒.svg','<svg xmlns="http://www.w3.org/2000/svg" width="'+width+'" height="'+height+'" viewBox="0 0 1200 870" style="font-family:Microsoft YaHei,PingFang SC,sans-serif;fill:#102b3d">'+lines+'</svg>','image/svg+xml;charset=utf-8'))toast('已生成模型证据图，请查看下载');
+  }
+  function bind() {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-page]'),function(b){b.addEventListener('click',function(){setPage(b.getAttribute('data-page'));});});
+    $('supplyToggle').addEventListener('click',toggleSupply);$('overflowToggle').addEventListener('click',toggleOverflow);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-source]'),function(b){b.addEventListener('click',function(){state.sourceAmount=Number(b.getAttribute('data-source'));state.config.sourceMl=state.sourceAmount;changed('供水量已改变，从时间零重新测试');});});
+    $('supplyRange').addEventListener('input',function(){state.config.supplyRate=Number(this.value);changed();});
+    $('holeRange').addEventListener('input',function(){state.config.holeMm=Number(this.value);changed();});
+    $('saveBefore').addEventListener('click',function(){saveScheme('before');});$('saveAfter').addEventListener('click',function(){saveScheme('after');});
+    $('playBtn').addEventListener('click',play);$('resetBtn').addEventListener('click',function(){seek(0);});
+    $('speedBtn').addEventListener('click',function(){state.speed=state.speed===20?1:state.speed===1?5:20;updateTransport();});
+    $('timeRange').addEventListener('input',function(){seek(Number(this.value));});
+    $('jumpTwo').addEventListener('click',function(){seek(120);});$('jumpTen').addEventListener('click',function(){seek(600);});
+    $('ownScale').addEventListener('click',function(){state.scale='own';render();});$('sharedScale').addEventListener('click',function(){state.scale='shared';render();});
+    $('comparePanels').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;if(b.hasAttribute('data-use'))useScheme(b.getAttribute('data-use'));if(b.hasAttribute('data-go-build'))setPage('build');});
+    $('apparatus').addEventListener('click',function(e){if(drag)return;var a=e.target.closest?e.target.closest('[data-action]'):null;if(!a)return;var action=a.getAttribute('data-action');if(action==='supply')toggleSupply();if(action==='overflow')toggleOverflow();if(action==='cup')toggleCup();});
+    $('apparatus').addEventListener('keydown',function(e){var a=e.target.closest?e.target.closest('[data-action]'):null;if(!a)return;var action=a.getAttribute('data-action');if(action==='waterline'&&(e.key==='ArrowUp'||e.key==='ArrowDown')){e.preventDefault();state.config.initialHeadCm=clamp(state.config.initialHeadCm+(e.key==='ArrowUp'?.5:-.5),6,18);changed();var current=$('apparatus').querySelector('[data-drag]');if(current)current.focus();}else if(e.key==='Enter'||e.key===' '){e.preventDefault();if(action==='supply')toggleSupply();if(action==='overflow')toggleOverflow();if(action==='cup')toggleCup();}});
+    if(window.PointerEvent){$('apparatus').addEventListener('pointerdown',dragStart);$('apparatus').addEventListener('pointermove',dragMove);$('apparatus').addEventListener('pointerup',dragEnd);$('apparatus').addEventListener('pointercancel',dragEnd);}else{$('apparatus').addEventListener('mousedown',dragStart);document.addEventListener('mousemove',dragMove);document.addEventListener('mouseup',dragEnd);$('apparatus').addEventListener('touchstart',dragStart,{passive:false});$('apparatus').addEventListener('touchmove',dragMove,{passive:false});$('apparatus').addEventListener('touchend',dragEnd);}
+    $('modelInfo').addEventListener('click',showInfo);$('scaleHelp').addEventListener('click',showInfo);$('closeInfo').addEventListener('click',closeInfo);$('infoModal').addEventListener('click',function(e){if(e.target===this)closeInfo();});
+    document.addEventListener('keydown',function(e){if(!$('infoModal').hidden){if(e.key==='Escape'){closeInfo();return;}if(e.key==='Tab'){var list=$('infoModal').querySelectorAll('button,a[href]'),first=list[0],last=list[list.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}}});
+    $('exportEvidence').addEventListener('click',exportEvidence);
+    $('fullscreenBtn').addEventListener('click',function(){var d=document,el=document.documentElement;try{var p;if(d.fullscreenElement||d.webkitFullscreenElement){p=d.exitFullscreen?d.exitFullscreen():d.webkitExitFullscreen();}else{p=el.requestFullscreen?el.requestFullscreen():el.webkitRequestFullscreen?el.webkitRequestFullscreen():null;if(!p&&!el.requestFullscreen&&!el.webkitRequestFullscreen)toast('此设备请使用浏览器的全屏或添加到主屏幕');}if(p&&p.catch)p.catch(function(){toast('可用浏览器菜单进入全屏');});}catch(e){toast('可用浏览器菜单进入全屏');}});
+    document.addEventListener('visibilitychange',function(){if(document.hidden)pause();});
+    window.addEventListener('resize',function(){if(!state.playing)render();});
+  }
+  load();computeAll();bind();syncControls();if(window.RecordsUI)window.RecordsUI.init();render();persist();
+  // Stable replacement boundary: calculations stay in WaterModel; drawings here
+  // can be replaced independently without altering schemes or real measurements.
+  window.WaterClockLab={version:'1.0',getState:function(){return copy({page:state.page,config:state.config,before:state.before,after:state.after,time:state.time,scale:state.scale,playing:state.playing});},getEvidence:function(){return {current:M.sampleAt(sim,state.time),before:M.sampleAt(beforeSim,state.time),after:afterSim?M.sampleAt(afterSim,state.time):null};}};
+}());
+</script>
+
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
