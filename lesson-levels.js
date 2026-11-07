@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   root.AIHTML_LEVELS = {
+    "六上2.3光能穿透物体吗": {"level":1,"note":"原生SVG/CSS/JS，黑盒剖面、材料位置对照与微粒散射；模拟/实物记录、CSV/SVG导出，单文件离线，无外部依赖；实体希沃/iPad尚未实测"},
     "六上2.4光的反射现象": {"level": 1, "note": "SVG光路、表面放大与桌屉遮挡；单文件离线，无WebGL依赖"},
     "四上1.6我们来做热气球": {"level": 2, "note": "Canvas 二维绘图与 SVG，单文件离线；三页课堂、四时刻观察及本机记录；手绘/PNG实际落盘、独立手机视口和真机未测"},
     "四上1.5空气有力量": {"level": 2, "note": "Canvas 二维动态模型与 Web Audio 合成音效，单文件离线；真实桌面浏览器验证，实体希沃/iPad与独立手机视口未测"},
