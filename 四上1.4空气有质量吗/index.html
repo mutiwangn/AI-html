@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>四上1.4 空气有质量吗 · 简洁碰撞与回弹版</title>
+<style>
+:root{--ink:#173b46;--muted:#687d84;--orange:#e9612f;--orange-light:#fff0e8;--teal:#088ea7;--teal-light:#e5f5f8;--green:#35845a;--green-light:#edf6ed;--line:#dce6e8;--bg:#f4f8f9;--paper:#fff;--radius:18px}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;-webkit-tap-highlight-color:transparent}body{overflow-x:hidden}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}button:disabled{cursor:default;opacity:.42}button:focus-visible,input:focus-visible{outline:3px solid #0489ac;outline-offset:4px}button{border:0}svg.icon{height:21px;width:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}.hidden,[hidden]{display:none!important}.app{max-width:1920px;margin:auto;min-height:100dvh;display:flex;flex-direction:column}.topbar{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:22px 30px 18px;background:#fff;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:13px;white-space:nowrap}.brand-mark{width:45px;height:45px;border-radius:50%;background:var(--teal-light);display:grid;place-items:center;color:var(--teal)}.brand-mark svg{width:29px;height:29px}.brand h1{margin:0;font-size:clamp(22px,1.95vw,34px);font-weight:850;letter-spacing:.025em}.view-tabs{display:flex;background:#f0f4f5;padding:5px;border-radius:14px;gap:5px;flex-shrink:0}.view-tabs button{font-size:17px;padding:12px 20px;border-radius:10px;background:transparent;color:var(--muted);font-weight:700;white-space:nowrap}.view-tabs button.active{background:var(--ink);color:#fff;box-shadow:0 3px 7px #173b4610}.tools{display:flex;gap:8px;align-items:center}.tool{height:44px;min-width:44px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px;padding:0 12px}.tool:hover{background:#f2f7f8}.tool[aria-pressed=true]{background:var(--teal-light);color:var(--teal);border-color:#a7dce6}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 302px;gap:24px;padding:22px 28px 12px;flex:1;min-height:0}.experiment{min-width:0;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative}.stage-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px 8px;flex-shrink:0}.stage-caption{font-size:18px;font-weight:750;display:flex;align-items:center;gap:9px}.stage-caption:before{content:"";width:7px;height:21px;border-radius:4px;background:var(--orange)}.micro-switch{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:700;background:#edf6f8;color:var(--teal);padding:10px 13px;border-radius:10px;white-space:nowrap}.toggle-track{width:33px;height:20px;background:#b7c6ca;border-radius:20px;padding:3px;display:block}.toggle-track:before{content:"";display:block;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .2s}.micro-switch[aria-pressed=true] .toggle-track{background:var(--teal)}.micro-switch[aria-pressed=true] .toggle-track:before{transform:translateX(13px)}.legend{display:flex;align-items:center;gap:18px;justify-content:center;min-height:26px;color:var(--muted);font-size:13px;line-height:1.5}.legend .key{display:flex;gap:6px;align-items:center}.dot{width:9px;height:9px;border-radius:50%;display:inline-block;background:var(--teal)}.dot.new{background:#f58737}.legend-note{color:#829397;font-size:12px}.canvas-wrap{width:100%;position:relative;flex:1;min-height:350px;height:clamp(350px,calc(100dvh - 275px),770px);background:#fff;overflow:hidden}.canvas-wrap canvas{width:100%;height:100%;display:block;touch-action:none;user-select:none}.live-state{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 18px 18px;text-align:left;border-top:1px solid #edf1f2;background:#f8fbfb;min-height:89px}.state-sign{width:47px;height:47px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--teal-light);color:var(--teal);font-size:31px;font-weight:900;flex-shrink:0}.state-title{font-size:23px;font-weight:800;line-height:1.35;letter-spacing:.02em}.state-sub{font-size:14px;color:var(--muted);margin-top:3px;line-height:1.55}.live-state.left .state-sign{background:var(--orange-light);color:var(--orange)}.live-state.right .state-sign{background:#edf2fa;color:#49729b}.live-state.balanced{background:#f1f8f1}.live-state.balanced .state-sign{background:#dbeedd;color:var(--green)}.sidebar{display:flex;flex-direction:column;gap:0;min-width:0}.control-section{padding:7px 3px 23px}.control-section+.control-section{border-top:1px solid var(--line);padding-top:23px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:7px}.section-head h2{font-size:19px;letter-spacing:.015em;margin:0;font-weight:800}.side-hint{font-size:12px;color:var(--muted);white-space:nowrap}.big-count{display:flex;align-items:baseline;justify-content:center;gap:7px;margin:13px 0 14px}.big-count b{font-family:Arial,sans-serif;font-size:67px;line-height:1;font-weight:750;letter-spacing:-3px;color:var(--orange);font-variant-numeric:tabular-nums}.big-count span{color:var(--muted);font-size:17px}.queued{text-align:center;font-size:12px;height:21px;margin-top:-8px;color:var(--orange)}.primary{background:var(--orange);color:#fff;border:1px solid var(--orange);box-shadow:0 4px 0 #c84d25;border-radius:13px;font-size:21px;font-weight:800;padding:15px 12px;display:flex;align-items:center;justify-content:center;gap:9px;min-height:59px;width:100%;transition:background .15s,transform .15s}.primary:not(:disabled):active{transform:translateY(3px);box-shadow:0 1px 0 #c84d25}.button-row{display:flex;gap:9px;margin-top:13px}.secondary{flex:1;background:#fff;border:1px solid var(--line);border-radius:11px;min-height:45px;padding:10px 7px;font-size:15px;font-weight:700;color:var(--ink);white-space:nowrap}.secondary:hover{border-color:#a3bbc2;background:#f5fafa}.secondary.warm{background:var(--orange-light);border-color:#f4d5c6;color:#c9592d}.secondary.green{background:var(--green-light);color:var(--green);border-color:#cfe2d0}.presets{display:flex;gap:6px;margin-top:14px;align-items:center;justify-content:space-between}.presets span{font-size:12px;color:var(--muted);white-space:nowrap}.presets button{padding:7px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;color:var(--muted);background:#fff}.presets button.selected{background:var(--ink);color:#fff;border-color:var(--ink)}.inline-link{border:0;background:transparent;color:var(--muted);font-size:13px;padding:10px 3px 0;text-decoration:underline;text-underline-offset:4px}.stepper{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:19px 0 10px}.stepper button{width:57px;height:57px;background:#fff;border:1px solid #d3e2d3;border-radius:12px;color:var(--green);font-size:30px;font-weight:700}.stepper button:last-child{background:var(--green);color:white;border-color:var(--green)}.bean-number{text-align:center;font-size:14px;color:var(--muted);min-width:95px}.bean-number b{font-family:Arial,sans-serif;font-size:42px;line-height:1;color:var(--green);font-weight:750;display:inline-block;margin-right:5px;font-variant-numeric:tabular-nums}.small-note{font-size:12px;color:var(--muted);line-height:1.65;margin:12px 0 0}.science-note{margin-top:auto;border-left:3px solid #c6dce1;padding:3px 0 3px 13px;font-size:13px;line-height:1.7;color:#607d85}.science-note strong{color:#33545e;font-weight:700}.press-primary{background:var(--teal);border-color:var(--teal);box-shadow:0 4px 0 #096c80;margin-top:17px;touch-action:none}.press-primary[aria-pressed=true]{background:#076f84;transform:translateY(3px);box-shadow:0 1px 0 #09566a}.force-row{display:flex;align-items:center;justify-content:space-between;margin-top:23px;font-size:14px}.force-row b{color:var(--teal)}input[type=range]{width:100%;height:34px;accent-color:var(--teal);cursor:pointer;touch-action:none}.force-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}.mass-readout{padding:10px 12px;margin-top:14px;background:#fff;border:1px dashed #bdcdd3;border-radius:10px;font-size:13px;line-height:1.8}.mass-readout b{color:var(--orange);font-variant-numeric:tabular-nums}.footer{padding:4px 29px 16px;display:flex;justify-content:space-between;gap:15px;color:#74888f;font-size:12px;align-items:center;line-height:1.6}.footer button{color:#5e7880;padding:5px 0;background:transparent;border:0;font-size:12px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}.footer-note{display:flex;gap:9px;align-items:center}.footer-note svg{width:15px;height:15px}.toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,12px);z-index:50;pointer-events:none;background:#173b46f0;color:#fff;padding:14px 25px;border-radius:13px;font-size:16px;opacity:0;transition:opacity .2s,transform .2s;max-width:90vw;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}dialog{width:min(640px,calc(100vw - 30px));border:0;border-radius:21px;padding:0;box-shadow:0 30px 120px #18394545;color:var(--ink);max-height:85dvh;background:#fff}dialog::backdrop{background:#193e4c65;backdrop-filter:blur(3px)}.modal-head{padding:22px 25px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:22px}.modal-head button{font-size:26px;background:#edf3f4;width:36px;height:36px;border-radius:50%;color:var(--ink)}.modal-body{padding:20px 25px 26px;max-height:calc(85dvh - 90px);overflow:auto;font-size:14px;line-height:1.8}.modal-body p{margin:0 0 14px}.modal-body h3{margin:20px 0 8px;font-size:16px}.param-row{display:grid;grid-template-columns:1fr 116px;align-items:center;gap:15px;margin:13px 0}.param-row input{width:116px;border:1px solid #c9d8dd;padding:8px 10px;border-radius:8px;color:var(--ink);background:#fff}.param-row small{display:block;color:var(--muted)}.check-row{display:flex;gap:10px;align-items:center;padding:9px 0}.check-row input{width:18px;height:18px;accent-color:var(--teal)}.modal-actions{display:flex;gap:12px;margin-top:18px}.modal-actions button{font-size:15px}.modal-actions .primary{box-shadow:none;min-height:45px;padding:10px;width:auto;flex:1}.sources{border-top:1px solid var(--line);padding-top:10px;font-size:12px;color:var(--muted);overflow-wrap:anywhere}.sources a{color:#267990}.keyboard-note{color:var(--muted);font-size:12px;margin-top:17px}.screenreader{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(min-width:1600px){.workspace{grid-template-columns:minmax(0,1fr) 350px;gap:29px;padding:26px 35px 15px}.topbar{padding:25px 36px}.control-section{padding-top:14px;padding-bottom:27px}.control-section+.control-section{padding-top:29px}.big-count{margin:22px 0 20px}.big-count b{font-size:80px}.primary{font-size:24px;min-height:68px}.secondary{font-size:17px;min-height:50px}.stage-caption{font-size:21px}.section-head h2{font-size:22px}.state-title{font-size:27px}.state-sub{font-size:16px}.small-note,.science-note{font-size:14px}.legend{font-size:15px}.legend-note{font-size:13px}.canvas-wrap{height:clamp(430px,calc(100dvh - 320px),860px)}}
+@media(max-width:1140px){.topbar{padding:16px 20px;gap:13px}.brand-mark{display:none}.view-tabs button{padding:11px 12px;font-size:15px}.tool{padding:0 10px}.tool .tool-label{display:none}.workspace{padding:17px 18px 10px;gap:16px;grid-template-columns:minmax(0,1fr) 265px}.stage-top{padding:14px 15px 6px}.stage-caption{font-size:15px}.micro-switch{font-size:13px;padding:9px}.legend-note{display:none}.state-title{font-size:20px}.state-sub{font-size:12px}.state-sign{height:40px;width:40px;font-size:27px}.primary{font-size:19px}.secondary{font-size:14px}.big-count b{font-size:59px}.control-section{padding-bottom:19px}.control-section+.control-section{padding-top:19px}.section-head h2{font-size:17px}.canvas-wrap{min-height:360px}.footer{padding-left:20px;padding-right:20px}}
+@media(max-width:790px){.topbar{flex-wrap:wrap;padding:13px 16px;gap:12px}.brand h1{font-size:23px}.tools{margin-left:auto}.view-tabs{order:3;width:100%;justify-content:center}.view-tabs button{flex:1;font-size:16px;padding:11px}.workspace{grid-template-columns:1fr;gap:16px;padding:13px 12px 10px}.experiment{border-radius:17px}.canvas-wrap{height:clamp(330px,54vw,520px);flex:none;min-height:0}.stage-top{padding:13px 12px 6px}.stage-caption{font-size:15px}.micro-switch{gap:6px;padding:8px;font-size:12px}.legend{gap:14px;font-size:11px;min-height:25px}.live-state{padding:12px;min-height:79px;gap:10px}.state-title{font-size:19px}.state-sub{font-size:12px;line-height:1.5}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:16px}.control-section{padding:7px 0 10px}.control-section+.control-section{border-top:0;padding:7px 0 10px;border-left:1px solid var(--line);padding-left:16px}.section-head h2{font-size:16px}.side-hint{display:none}.big-count{margin:15px 0 14px}.big-count b{font-size:56px}.primary{min-height:51px;padding:12px 6px;font-size:17px;gap:5px}.button-row{gap:6px}.secondary{font-size:12px;padding:9px 4px;min-height:42px}.presets{gap:4px}.presets span{display:none}.presets button{flex:1;padding:7px 4px;font-size:12px}.science-note{grid-column:1/-1;margin-top:0;font-size:12px}.footer{font-size:10px;padding:7px 14px 14px;align-items:flex-start}.footer-note{gap:5px}.footer button{font-size:11px}.stepper{gap:5px;margin-top:19px}.stepper button{width:43px;height:52px;font-size:25px}.bean-number{min-width:53px;font-size:12px}.bean-number b{font-size:36px;margin-right:2px}.small-note{font-size:11px}.inline-link{font-size:12px}.press-primary{font-size:15px;margin-top:19px}.force-row{font-size:12px}.toast{font-size:14px;padding:12px 17px}.tools .tool{height:37px;min-width:37px;padding:0 8px}.tool svg{width:18px;height:18px}.mass-readout{font-size:11px;padding:8px}.legend-note{display:none}}
+@media(max-width:385px){.brand h1{font-size:20px}.tools{gap:5px}.workspace{padding-left:9px;padding-right:9px}.stage-caption{font-size:13px}.primary{font-size:15px}.sidebar{gap:12px}.control-section+.control-section{padding-left:12px}.stepper button{width:36px}.state-title{font-size:17px}.canvas-wrap{height:315px}.footer-note svg{display:none}}
+@media(min-width:791px) and (min-height:650px){.app{height:100dvh;min-height:0}.topbar,.footer{flex-shrink:0}.workspace{min-height:0}.experiment{min-height:0}.canvas-wrap{height:0;min-height:0;flex:1}.sidebar{min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#bfced2 transparent;padding-right:3px}.sidebar .control-section,.sidebar .science-note{flex-shrink:0}}
+@media(min-width:1141px) and (max-height:850px) and (min-height:650px){.topbar{padding-top:16px;padding-bottom:14px}.workspace{padding-top:16px;padding-bottom:8px}.control-section{padding-bottom:15px}.control-section+.control-section{padding-top:17px}.big-count{margin:11px 0 12px}.big-count b{font-size:58px}.primary{min-height:53px;padding-top:12px;padding-bottom:12px;font-size:20px}.button-row{margin-top:11px}.secondary{min-height:41px;padding:9px 6px}.stepper{margin-top:15px;margin-bottom:8px}.small-note{margin-top:10px}.science-note{font-size:12px}.stage-top{padding-top:14px;padding-bottom:6px}.live-state{min-height:80px;padding-top:12px;padding-bottom:14px}.footer{padding-bottom:11px}}
+@media(max-width:790px){.canvas-wrap{height:calc((100vw - 26px)*.591);min-height:0;flex:none}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Keep the first edition's white laboratory canvas. */
+.stage-actions{display:flex;gap:8px;align-items:center;flex-shrink:0}.stage-actions button{min-height:42px}
+.collision-toggle{border:1px solid #d2e2e7;background:#fff;color:#476974;border-radius:10px;padding:9px 12px;font-size:14px;font-weight:700;white-space:nowrap}
+.collision-toggle[aria-pressed=true]{background:#fff3dc;border-color:#eec46a;color:#89591a}
+.sound-label{white-space:nowrap;font-size:14px;font-weight:750}.tap-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.tap-actions .secondary{white-space:normal;font-size:14px;min-height:48px;line-height:1.35;padding:8px 5px}.tap-actions .secondary.active{outline:3px solid #efac56;outline-offset:2px}
+.tap-compare{width:100%;margin-top:8px;min-height:40px;font-size:14px}.sound-settings{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.sound-settings input{flex:1;min-width:150px}.sound-settings output{font-variant-numeric:tabular-nums;min-width:44px}
+.collision-tip{font-size:12px;line-height:1.65;color:#71868c;margin:10px 0 0}.count-value{font-variant-numeric:tabular-nums}
+@media(min-width:791px){.stage-caption{min-width:0}.stage-top{gap:9px}.stage-actions{gap:6px}.science-note{margin-top:10px}.force-row{margin-top:14px}.control-section+.control-section{padding-top:15px}.press-primary{margin-top:12px}}
+@media(min-width:791px) and (max-width:1140px){.stage-caption{font-size:14px}.collision-toggle{font-size:12px;padding:7px}.sound-label{font-size:12px}.tool{padding:0 9px}}
+@media(max-width:790px){.stage-top{flex-wrap:wrap;gap:8px}.stage-actions{margin-left:auto}.collision-toggle{font-size:12px;padding:7px;min-height:36px}.stage-actions button{min-height:36px}.sound-label{font-size:11px}.tap-actions{grid-template-columns:1fr;margin-top:10px;gap:6px}.tap-actions .secondary{min-height:40px;font-size:12px;padding:7px 3px}.tap-compare{font-size:12px}.collision-tip{font-size:11px}.tools{gap:5px}.stage-caption{font-size:14px}}
+
+@media(min-width:791px) and (max-height:900px){
+ .workspace{padding-top:14px}.control-section{padding-bottom:12px}.control-section+.control-section{padding-top:12px}
+ .big-count{margin:8px 0 10px}.big-count b{font-size:52px}.queued{height:17px}.primary{min-height:51px;padding-top:10px;padding-bottom:10px}
+ .button-row{margin-top:10px}.presets{margin-top:10px}.stepper{margin-top:12px}
+ #pressSection .force-row{margin-top:9px}#forceRange{height:30px}#pressSection .small-note{margin:7px 0 0}
+ .tap-actions{margin-top:9px}.tap-actions .secondary{min-height:43px}.tap-compare{min-height:38px;margin-top:6px}
+ #pressSection .collision-tip{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+ <div class="brand"><div class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 32 32"><path d="M4 16h24M16 5v23M6 16l-3 8h6zm20 0-3 8h6zM11 28h10"/><circle cx="16" cy="10" r="3" fill="currentColor" stroke="none"/></svg></div><h1>空气有质量吗</h1></div>
+ <nav class="view-tabs" aria-label="实验视图"><button class="active" id="tabBalance" aria-pressed="true">打气 · 称一称</button><button id="tabHardness" aria-pressed="false">按压 · 比一比</button></nav>
+ <div class="tools"><button class="tool" id="soundBtn" aria-label="开关音效" aria-pressed="true" title="首次操作后启用音效"><svg class="icon" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zM17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span class="sound-label">音效待启用</span></button><button class="tool" id="resetBtn" title="回到初始状态"><svg class="icon" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg><span class="tool-label">重置</span></button><button class="tool" id="fullBtn" title="进入全屏"><svg class="icon" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg><span class="tool-label">全屏</span></button></div>
+</header>
+<main class="workspace">
+ <section class="experiment" aria-label="实验模型">
+  <div class="stage-top"><div class="stage-caption" id="stageCaption">给左边皮球逐步打气</div><div class="stage-actions"><button id="collisionSlowBtn" class="collision-toggle" aria-pressed="false" hidden>碰撞慢镜</button><button id="microBtn" class="micro-switch" aria-pressed="true"><span class="toggle-track" aria-hidden="true"></span>微粒透视</button></div></div>
+  <div class="legend" id="legend"><span class="key"><i class="dot"></i>原有空气</span><span class="key"><i class="dot new"></i>新打入的空气</span><span class="legend-note">颜色只用于追踪，都是空气</span></div>
+  <div class="canvas-wrap" id="canvasWrap"><canvas id="scene" role="img" aria-label="两端各有一个皮球的简易天平，初始平衡。可通过旁边的按钮打气、添加绿豆，或切换按压比较。"></canvas></div>
+  <div class="live-state" id="liveState" role="status" aria-live="polite"><div class="state-sign" id="stateSign">＝</div><div><div class="state-title" id="stateTitle">天平已调平</div><div class="state-sub" id="stateSub">两个皮球里原本都有空气。</div></div></div>
+ </section>
+ <aside class="sidebar" aria-label="实验操作">
+  <section class="control-section">
+   <div class="section-head"><h2 id="pumpHeading">向左边皮球打气</h2><span class="side-hint">最多 30 筒</span></div>
+   <div class="big-count"><b id="strokeCount">0</b><span>筒空气</span></div><div class="queued" id="queued" aria-live="off"></div>
+   <button class="primary" id="pumpOne"><svg class="icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>打入 1 筒</button>
+   <div class="button-row"><button class="secondary warm" id="pumpTen">连续 +10 筒</button><button class="secondary" id="releaseOne">放出 1 筒量</button></div>
+   <div class="presets" aria-label="设置总筒数"><span>累计到</span><button data-total="0">0 筒</button><button data-total="10">10 筒</button><button data-total="30">30 筒</button></div>
+   <button class="inline-link" id="stopPump" hidden>停止连续打气</button>
+   <div class="mass-readout" id="massReadout" hidden>新增空气质量：<b id="airMass">0.00 g</b><br>左球质量：<span id="totalMass">200.00 g</span><br><span style="color:var(--muted)">以上是模型计算，不是实测读数</span></div>
+  </section>
+  <section class="control-section" id="beanSection">
+   <div class="section-head"><h2>右边加入绿豆</h2><span class="side-hint">让天平重新平衡</span></div>
+   <div class="stepper"><button id="beanMinus" aria-label="取出一粒绿豆">−</button><div class="bean-number"><b id="beanCount">0</b>粒</div><button id="beanPlus" aria-label="加入一粒绿豆">＋</button></div>
+   <div class="button-row"><button class="secondary green" id="beanFive">加入 5 粒</button><button class="secondary" id="beanClear">取出全部</button></div>
+   <p class="small-note">也可以把托盘里的绿豆拖进右边的小桶。</p>
+  </section>
+  <section class="control-section" id="pressSection" hidden>
+   <div class="section-head"><h2>用相同的力按压</h2></div>
+   <button class="primary press-primary" id="pressBtn" aria-pressed="false">按住，同时按压</button>
+   <div class="force-row"><span>按压力度</span><b id="forceValue">中等</b></div><input id="forceRange" type="range" min="20" max="100" step="1" value="65" aria-label="同时作用在两个皮球上的按压力度"><div class="force-labels"><span>轻</span><span>重</span></div>
+   <p class="small-note">按压、拍球都不增减空气。</p>
+   <div class="tap-actions"><button class="secondary" id="tapLeftBtn">拍打气前的球</button><button class="secondary warm" id="tapRightBtn">拍当前的球</button></div><button class="secondary tap-compare" id="tapCompareBtn">依次拍两球 · 听一听</button><p class="collision-tip">也可直接点击皮球。拍球声为合成示意；微粒撞壁本身不配敲击声。</p>
+  </section>
+  <div class="science-note" id="scienceNote"><strong>先看现象，再找解释。</strong><br>打气后，模型会自动拔下气针再称量。</div>
+ </aside>
+</main>
+<footer class="footer"><div class="footer-note"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.2"/></svg><span>微粒、碰撞箭头、声音和回弹均为模型示意；不能代替真实实验。</span></div><button id="settingsBtn">教师说明 / 模型设定</button></footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<dialog id="settingsDialog" aria-labelledby="settingsTitle">
+ <div class="modal-head"><h2 id="settingsTitle">教师说明与模型设定</h2><button id="closeSettings" aria-label="关闭说明">×</button></div>
+ <div class="modal-body">
+  <p><strong>这是解释模型，不是测量仪器。</strong>称量用于研究质量；按压、拍球与碰撞演示帮助解释球内空气的支撑作用。软硬变化不等于质量变化，拍球声也不能作为空气有质量的直接证据。</p>
+  <h3>音效</h3>
+  <div class="sound-settings"><label for="volumeRange">网页音量</label><input id="volumeRange" type="range" min="0" max="100" value="80"><output id="volumeOutput" for="volumeRange">80%</output><button class="secondary" id="testSoundBtn">试听音效</button></div>
+  <p class="small-note">首次点击打气、拍球等操作后启用声音。听不清时，可先试听，再检查电脑或一体机的媒体音量。网页不能控制设备的系统音量。</p>
+  <h3>碰撞与回弹怎样理解</h3>
+  <p>圆点撞到球壁时反弹；亮弧和向外箭头表示空气对球壁的作用。两球温度条件相同，微粒的大小和平均运动速率保持同一设定；打气增加的是数量，不是把微粒变大、变硬或任意加速。在体积变化不大的条件下，更多微粒会更频繁地撞击球壁。</p>
+  <p>球被按瘪后，里面的空气占据空间变小。松手后，球内外压力差与橡胶球皮的弹性共同影响回弹。不是“多打气让橡胶材料本身变得更有弹性”，也不是打得越多越好。</p>
+  <p>回弹使用等效弹簧—阻尼模型；微粒撞壁采用二维反射示意，并未计算完整的三维气体—球皮耦合。近 2 秒的撞壁计数来自画面中的实际模型碰撞，不是真实分子测量；观察时允许小幅随机波动。为突出撞壁，微粒之间的相互碰撞未逐次模拟。碰撞慢镜只减慢动画，声音不作物理变调。</p>
+  <h3>微粒守恒</h3>
+  <p>每筒用 8 个小点表示。每个小点从筒内进入软管，再越过气针进入皮球；同一个小点不会在管内和球内重复显示。放气反向进行。按压和拍球均不增减微粒。0 筒是“未额外打气”，不是球内没有空气。64 个初始小点是示意采样，数量比例不用于求真实压强。</p>
+  <h3>可调整的质量示例</h3>
+  <div class="param-row"><label for="pumpVolume">每筒有效打入的常压空气体积<small>单位：mL。默认 50 mL，各次等量打入。</small></label><input id="pumpVolume" type="number" min="20" max="100" step="1" value="50"></div>
+  <div class="param-row"><label for="beanMassInput">每粒绿豆的质量<small>单位：g。默认 0.10 g，模拟同质量绿豆。</small></label><input id="beanMassInput" type="number" min="0.02" max="0.2" step="0.01" value="0.10"></div>
+  <p class="small-note">模型采用空气密度 1.20 g/L 的室温近似值。新增质量 = 已进入的筒量 × 每筒体积 ÷ 1000 × 密度。初始球整体质量 200.00 g 仅为示例，小桶等不变质量在初始调平时抵消。参数不是所用器材的实测结果；“30 筒相当于多少粒绿豆”以真实实验为准。</p>
+  <label class="check-row"><input id="showMass" type="checkbox">显示模型质量（克）</label>
+  <label class="check-row"><input id="slowMotion" type="checkbox">慢动作打气 / 放气</label>
+  <div class="modal-actions"><button id="defaultParams" class="secondary">恢复默认填写</button><button id="applyParams" class="primary">应用参数并重新调平</button></div>
+  <h3>课堂安全</h3><p>真实打气时按皮球标注的压力范围操作，不追求越硬越好；气针由教师安装，称量前移开打气筒和气针，待天平静止后读数。绿豆不可入口。</p><h3>使用与参考</h3>
+  <p class="small-note">单文件离线网页，无联网资源，无麦克风录音。空格：打气；+ / −：增减绿豆；H：切换视图；V：切换透视；R：重置。按压按钮支持按住空格或 Enter。参数保存在当前浏览器，课堂状态不自动保存。</p>
+  <p class="small-note">气体压强模型参考：<a href="https://www.grc.nasa.gov/www/k-12/airplane/pressure.html" target="_blank" rel="noopener">NASA Glenn · Gas Pressure</a>。声音启用与控制参考：<a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Best_practices" target="_blank" rel="noopener">MDN · Web Audio API best practices</a>。拍球声由程序合成，不是球的实录或声学预测。</p>
+ </div>
+</dialog>
+<script>
+'use strict';
+(() => {
+ // All assets and simulation code are embedded. No network requests are needed.
+ const $ = id => document.getElementById(id);
+ const C = $('scene'), ctx = C.getContext('2d', {alpha:false});
+ const W=1100,H=650,MAX_STROKES=30,BASE_MASS=200,DENSITY=1.20,BASE_PARTICLES=64,PARTICLES_PER_STROKE=8;
+ const COLORS={ink:'#173b46',muted:'#728991',orange:'#e96930',newAir:'#f28c3b',teal:'#088da7',green:'#57934c'};
+ const model={volume:50,beanMass:.1,showMass:false,slow:false,audioVolume:.8};
+ const state={view:'balance',micro:true,sound:true,strokes:0,beans:0,target:0,pumping:false,progress:0,phase:'idle',release:false,press:false,force:.65,indent:0,angle:0,angleVel:0,drag:null,beanFalls:[],flows:[],outflows:[],settling:0,beanTimer:0,time:0,flowDelivered:0,packet:[],cycleStartCount:64,cycleCompleted:0,deliveredTotal:0,departedTotal:0,tubeEnteredTotal:0,tubeExitedTotal:0,lastPacketCount:0,collisionSlow:false,dentBefore:0,dentAfter:0,dentVelBefore:0,dentVelAfter:0,reboundUntil:0,taps:[null,null],tapEvents:[],tapQueue:[],collisionClock:0,hitCounts:[0,0],hitWindows:[[],[]],wallHits:[[],[]],lastTapAt:-10,audit:[]};
+ let last=0,scale=1,offsetX=0,offsetY=0,dpr=1,cssWidth=1000,cssHeight=600,toastTimer,ac=null,master=null,analyser=null,compressor=null,lastPaintedState='',resizeObserver,symbolID=0;
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const soundBuffers=new Map();const audioNodes=new Set();
+ try{const stored=JSON.parse(localStorage.getItem('airMassLabSettings')||'null');if(stored&&validParams(stored.volume,stored.beanMass)){Object.assign(model,{volume:stored.volume,beanMass:stored.beanMass,showMass:!!stored.showMass,slow:!!stored.slow,audioVolume:Number.isFinite(stored.audioVolume)?Math.max(0,Math.min(1,stored.audioVolume)):.8});}}catch(e){}
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,t)=>a+(b-a)*t;
+ function validParams(v,b){return Number.isFinite(v)&&v>=20&&v<=100&&Number.isFinite(b)&&b>=.02&&b<=.2;}
+ function savePrefs(){try{localStorage.setItem('airMassLabSettings',JSON.stringify(model));}catch(e){}}
+ function airPerStroke(){return model.volume/1000*DENSITY;}
+ function addedSymbols(){return leftParticles.length-BASE_PARTICLES;}
+ function addedMass(){return addedSymbols()/PARTICLES_PER_STROKE*airPerStroke();}
+ function massDiff(){return addedMass()-state.beans*model.beanMass;}
+ function equalMass(){return Math.abs(massDiff())<.00001;}
+ const rand=(min,max)=>min+Math.random()*(max-min);
+ function particle(isNew=false,entry=false){const a=rand(0,Math.PI*2),r=Math.sqrt(Math.random())*.90,s=rand(.72,1.08),dir=entry?rand(-.7,.7):rand(0,Math.PI*2);return{id:'p'+(++symbolID),x:entry?-.946:Math.cos(a)*r,y:entry?rand(-.035,.035):Math.sin(a)*r,vx:Math.cos(dir)*s,vy:Math.sin(dir)*s,isNew,flash:0,transport:null};}
+ let leftParticles=[],rightParticles=[];
+ function createParticles(){symbolID=0;leftParticles=Array.from({length:BASE_PARTICLES},()=>particle());rightParticles=leftParticles.map(p=>({...p,id:'r'+p.id}));}
+ function toast(s){$('toast').textContent=s;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2400);}
+ function updateAudioUI(){const label=!state.sound?'音效：关':ac?.state==='running'?'音效：开':'音效待启用';$('soundBtn').setAttribute('aria-pressed',String(state.sound));$('soundBtn').setAttribute('aria-label',state.sound?'关闭音效':'打开音效');$('soundBtn').innerHTML='<svg class="icon" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z'+(state.sound?'M17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14':'M17 9l5 6m0-6-5 6')+'"/></svg><span class="sound-label">'+label+'</span>';}
+ function unlockAudio(){if(!state.sound)return false;try{if(!ac){const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)throw new Error('Web Audio unavailable');ac=new Audio();master=ac.createGain();compressor=ac.createDynamicsCompressor();compressor.threshold.value=-5;compressor.knee.value=3;compressor.ratio.value=12;compressor.attack.value=.003;compressor.release.value=.15;analyser=ac.createAnalyser();analyser.fftSize=1024;master.gain.value=model.audioVolume;master.connect(compressor);compressor.connect(analyser);analyser.connect(ac.destination);ac.onstatechange=updateAudioUI;}if(ac.state==='suspended'||ac.state==='interrupted')ac.resume().then(updateAudioUI).catch(()=>toast('声音未启用，请点击右上角音效按钮重试'));updateAudioUI();return true;}catch(e){state.sound=false;updateAudioUI();toast('此浏览器未能启用音效，画面仍可操作');return false;}}
+ function stopAudio(){for(const n of audioNodes){try{n.stop();}catch(e){}}audioNodes.clear();}
+ // Deterministic PCM synthesis, no recordings or external sound files.
+ function makeSound(kind,ratio=0){const r=Math.round(clamp(ratio,0,1)*20)/20,key=kind+':'+r;if(soundBuffers.has(key))return soundBuffers.get(key);const sr=ac.sampleRate,duration=kind==='inflate'?.34:kind==='intake'?.22:kind==='release'?.46:kind==='tap'?.42:kind==='chime'?.52:.12;const buffer=ac.createBuffer(1,Math.ceil(sr*duration),sr),data=buffer.getChannelData(0);let seed=928173,low=0,peak=0;const f=165+180*r;
+  for(let i=0;i<data.length;i++){const t=i/sr;seed=(1664525*seed+1013904223)>>>0;const n=(seed/4294967296)*2-1;low+=.13*(n-low);const hi=n-low;let s=0;
+   if(kind==='tap'){const phase=2*Math.PI*f*(t+.13*.014*(1-Math.exp(-t/.014)));const ring=Math.sin(phase)+.35*Math.sin(phase*1.47)+.12*Math.sin(phase*2.18);const decay=.063+.055*r;const strike=hi*Math.exp(-t/(.011-.004*r));s=ring*Math.exp(-t/decay)*.6+strike*(.55+.22*r);}
+   else if(kind==='inflate'||kind==='release'||kind==='intake'){const env=Math.sin(Math.PI*t/duration)**.7;const pitch=kind==='intake'?430:720; s=(.54*hi+.32*low+.09*Math.sin(2*Math.PI*pitch*t))*env;if(kind==='inflate')s+=.25*Math.sin(2*Math.PI*190*t)*Math.exp(-t/.025);}
+   else if(kind==='chime'){for(let j=0;j<2;j++){const u=t-j*.13;if(u>=0)s+=Math.sin(2*Math.PI*(j?880:660)*u)*Math.exp(-u/.10)*.52;}}
+   else s=(Math.sin(2*Math.PI*(kind==='bean'?540:240)*t)*.6+hi*.3)*Math.exp(-t/.023);
+   s*=Math.min(1,t/.0025);data[i]=s;peak=Math.max(peak,Math.abs(s));}
+  const peakLevel=kind==='tap'?.84:kind==='inflate'?.7:kind==='release'?.67:kind==='chime'?.60:kind==='intake'?.48:.43;for(let i=0;i<data.length;i++)data[i]*=peakLevel/(peak||1);soundBuffers.set(key,buffer);return buffer;}
+ function playSound(kind,ratio=0){if(!state.sound||!unlockAudio())return;const source=ac.createBufferSource();source.buffer=makeSound(kind,ratio);source.connect(master);audioNodes.add(source);source.onended=()=>{audioNodes.delete(source);source.disconnect();};source.start(ac.currentTime+.008);}
+ function tone(){playSound('click');}
+ function hiss(){playSound('release');}
+ function chime(){playSound('chime');}
+ function clearTap(){state.tapQueue=[];state.taps=[null,null];$('tapLeftBtn').classList.remove('active');$('tapRightBtn').classList.remove('active');}
+ function playBallTap(side){if(state.pumping||state.press||state.view!=='hardness'||state.time-state.lastTapAt<.22)return;unlockAudio();const i=side==='left'?0:1,ratio=i?clamp(addedMass()/1.8,0,1):0;state.lastTapAt=state.time;state.taps[i]={at:state.time,ratio};state.tapEvents.push({side,time:state.time,ratio});if(state.tapEvents.length>12)state.tapEvents.shift();if(i===0)state.dentVelBefore+=.9;else state.dentVelAfter+=.9;playSound('tap',ratio);$('tapLeftBtn').classList.toggle('active',i===0);$('tapRightBtn').classList.toggle('active',i===1);updateUI();}
+ function updateUI(force=false){
+  $('strokeCount').textContent=state.strokes;$('beanCount').textContent=state.beans;
+  $('airMass').textContent=addedMass().toFixed(2)+' g';$('totalMass').textContent=(BASE_MASS+addedMass()).toFixed(2)+' g';$('massReadout').hidden=!model.showMass;
+  const busy=state.pumping;const pending=busy&&!state.release?` · 正在第 ${state.strokes+1} 筒`:'';
+  $('pumpOne').disabled=state.target>=MAX_STROKES||state.release;$('pumpTen').disabled=state.target>=MAX_STROKES||state.release;$('releaseOne').disabled=state.strokes===0||busy;
+  $('stopPump').hidden=!busy;$('queued').textContent=busy?(state.release?'空气正逐个离开皮球…':`目标 ${state.target} 筒${pending}`):'';
+  document.querySelectorAll('[data-total]').forEach(b=>{b.classList.toggle('selected',Number(b.dataset.total)===state.strokes&&!busy);b.disabled=busy;});
+  $('beanMinus').disabled=state.beans===0||busy;$('beanPlus').disabled=state.beans>=200||busy;$('beanFive').disabled=state.beans>=200||busy;$('beanClear').disabled=state.beans===0||busy;
+  $('pressBtn').disabled=busy;$('pressBtn').setAttribute('aria-pressed',String(state.press));$('pressBtn').textContent=state.press?'保持相同的力…':'按住，同时按压';
+  $('forceValue').textContent=state.force<.4?'轻':state.force>.78?'较重':'中等';
+  for(const id of ['tapLeftBtn','tapRightBtn','tapCompareBtn'])$(id).disabled=busy||state.press;
+  let mode='neutral',sign='＝',title='天平已调平',sub='两个皮球里原本都有空气。';
+  if(state.view==='hardness'){
+   sign=state.press?'↓':'↕';title=state.press?'同样用力，比较凹陷程度':'按一按，松手看回弹';
+   sub=state.micro?'亮弧表示撞壁；向外箭头表示空气对球壁的作用。':'打开微粒透视，可观察空气怎样作用于球壁。';
+   if(state.strokes===0&&!busy)sub='两边都未额外打气。先打气，再观察按压、碰撞与回弹。';
+   if(!state.press&&state.time<state.reboundUntil){sign='↑';title='松手了，球壁正在恢复';sub='球内外压力差与球皮弹性共同影响回弹。';}
+   const tapping=state.taps.findIndex(t=>t&&state.time-t.at<.65);if(tapping>=0){sign='♪';title=tapping===0?'拍打气前的球':'拍当前的球';sub='拍球声音为合成示意；球面振动，不进气、不放气。';}
+   if(busy){sign='⋯';title=state.release?'正在放气':'正在打气';sub=`本筒${state.release?'已离开':'已进入'} ${state.flowDelivered} / ${PARTICLES_PER_STROKE} 个小点。`;}
+  }else if(busy){sign='⋯';title=state.release?'空气正在离开皮球':'空气正在进入左边皮球';sub='气针连接时暂停称量；结束后自动拔下气针。';}
+  else if(state.beanFalls.length){sign='↓';title='绿豆正在落入右边小桶';sub='等绿豆落稳，再观察天平。';}
+  else if(state.settling>0){sign='↔';title='观察天平的变化';sub='请等天平静止，再比较两边质量。';}
+  else if(equalMass()){if(state.strokes>0){mode='balanced';sign='＝';title='天平重新平衡了';sub=`本模型：新打入 ${state.strokes} 筒空气 ≈ ${state.beans} 粒绿豆的质量。`;}}
+  else if(massDiff()>0){mode='left';sign='↙';title='左边下沉了';sub=state.beans===0?'只增加了空气，左边的质量发生了什么变化？':'继续加入绿豆，试着让天平重新平衡。';}
+  else{mode='right';sign='↘';title='右边下沉了';sub='取出一些绿豆，或者给左边打入空气。';}
+  const key=[mode,sign,title,sub].join('|');if(key!==lastPaintedState||force){$('liveState').className='live-state '+mode;$('stateSign').textContent=sign;$('stateTitle').textContent=title;$('stateSub').textContent=sub;lastPaintedState=key;C.setAttribute('aria-label',`${state.view==='balance'?'天平模型':'碰撞与软硬比较模型'}。已完成${state.strokes}筒，球内共${leftParticles.length}个模型小点。${title}。${sub}`);}
+ }
+ function beginCycle(){state.progress=0;state.flowDelivered=0;state.cycleStartCount=leftParticles.length;state.phase=state.release?'release':'intake';
+  state.packet=Array.from({length:PARTICLES_PER_STROKE},(_,i)=>{const p=state.release?leftParticles[leftParticles.length-1-i]:particle(true,true);p.transport=null;return{p,i,stage:state.release?'inside':'waiting',depart:state.release?.16+i*.055:.34+i*.055,travel:state.release?.27:.25,arrive:0,pathT:0,intakeStart:i*.023,intakeEnd:.12+i*.023,startPos:{x:p.x,y:p.y}};});
+  if(state.release)playSound('release');else playSound('intake');
+ }
+ function requestPump(amount){if(state.release)return;setPress(false);clearTap();unlockAudio();state.target=Math.min(MAX_STROKES,state.target+amount);if(!state.pumping&&state.target>state.strokes){state.pumping=true;state.release=false;beginCycle();}updateUI();}
+ function setTotal(n){n=clamp(Math.floor(n),0,MAX_STROKES);if(state.pumping)return;if(n>state.strokes)requestPump(n-state.strokes);else if(n<state.strokes){setPress(false);clearTap();unlockAudio();state.target=n;state.pumping=true;state.release=true;beginCycle();updateUI();}}
+ function finishOperation(){state.pumping=false;state.release=false;state.phase='idle';state.progress=0;state.packet=[];state.flowDelivered=0;state.lastPacketCount=PARTICLES_PER_STROKE;state.settling=.85;updateUI();}
+ function updateTransport(dt){if(!state.pumping)return;const duration=state.release?(model.slow?2.1:1.05):(model.slow?3.1:1.4),prev=state.progress;state.progress=Math.min(1,state.progress+dt/duration);const t=state.progress;
+  if(!state.release){state.phase=t<.30?'intake':t<.91?'push':'close';if(prev<.30&&t>=.30)playSound('inflate');}
+  for(const q of state.packet){
+   if(!state.release){
+    if(t<q.intakeStart){q.stage='waiting';continue;}
+    if(t<q.intakeEnd){q.stage='intake';q.pathT=(t-q.intakeStart)/(q.intakeEnd-q.intakeStart);continue;}
+    if(t<q.depart){q.stage='cylinder';continue;}
+    if(q.stage!=='hose'&&q.stage!=='inside'){q.stage='hose';state.tubeEnteredTotal++;}
+    q.pathT=clamp((t-q.depart)/q.travel,0,1);
+    if(q.pathT>=1&&q.stage!=='inside'){q.stage='inside';q.p.x=-.946;q.p.y=(q.i-3.5)*.009;q.p.transport=null;leftParticles.push(q.p);state.flowDelivered++;state.deliveredTotal++;state.tubeExitedTotal++;updateUI();}
+   }else{
+    if(t<q.depart-.11)continue;
+    if(t<q.depart){if(q.stage==='inside')q.startPos={x:q.p.x,y:q.p.y};q.stage='approach';q.p.transport='approach';const f=(t-q.depart+.11)/.11;q.p.x=lerp(q.startPos.x,-.946,f);q.p.y=lerp(q.startPos.y,0,f);continue;}
+    if(q.stage==='inside'||q.stage==='approach'){const idx=leftParticles.indexOf(q.p);if(idx>=0)leftParticles.splice(idx,1);q.p.transport='hose';q.stage='hose';state.flowDelivered++;state.departedTotal++;state.tubeEnteredTotal++;updateUI();}
+    q.pathT=clamp((t-q.depart)/q.travel,0,1);if(q.pathT>=1&&q.stage!=='outside'){q.stage='outside';q.p.transport='outside';state.tubeExitedTotal++;}
+   }
+  }
+  if(t>=1){state.audit.push({release:state.release,before:state.cycleStartCount,after:leftParticles.length,passed:state.flowDelivered,ids:state.packet.map(q=>q.p.id)});if(state.audit.length>90)state.audit.shift();state.strokes+=state.release?-1:1;state.cycleCompleted++;if(state.release?state.strokes<=state.target:state.strokes>=state.target)finishOperation();else beginCycle();updateUI();}
+ }
+ function reset(){stopAudio();clearTap();Object.assign(state,{strokes:0,beans:0,target:0,pumping:false,progress:0,phase:'idle',release:false,press:false,indent:0,angle:0,angleVel:0,drag:null,beanFalls:[],flows:[],outflows:[],settling:0,beanTimer:0,flowDelivered:0,packet:[],deliveredTotal:0,departedTotal:0,tubeEnteredTotal:0,tubeExitedTotal:0,lastPacketCount:0,cycleCompleted:0,dentBefore:0,dentAfter:0,dentVelBefore:0,dentVelAfter:0,reboundUntil:0,hitCounts:[0,0],hitWindows:[[],[]],wallHits:[[],[]],audit:[],tapEvents:[],lastTapAt:-10});createParticles();updateUI(true);}
+ function addBeans(n,fromDrag=false){if(state.pumping)return;unlockAudio();const old=state.beans;state.beans=Math.max(0,Math.min(200,state.beans+n));const delta=state.beans-old;if(delta>0){for(let i=0;i<Math.min(delta,8);i++)state.beanFalls.push({t:-i*.045,duration:.48,sx:fromDrag?(state.drag?.x||920):997,sy:fromDrag?(state.drag?.y||360):555,seed:Math.random()});state.beanTimer=.7;}if(delta<0)state.beanFalls=[];if(delta<0)playSound('bean');state.settling=delta>0?.95:.65;updateUI();}
+ function setView(v){setPress(false);clearTap();state.view=v;state.wallHits=[[],[]];state.hitWindows=[[],[]];$('pumpHeading').textContent=v==='balance'?'向左边皮球打气':'继续给当前皮球打气';$('tabBalance').classList.toggle('active',v==='balance');$('tabBalance').setAttribute('aria-pressed',String(v==='balance'));$('tabHardness').classList.toggle('active',v==='hardness');$('tabHardness').setAttribute('aria-pressed',String(v==='hardness'));$('beanSection').hidden=v!=='balance';$('pressSection').hidden=v!=='hardness';$('collisionSlowBtn').hidden=v!=='hardness';$('stageCaption').textContent=v==='balance'?'只给左边的皮球打气':'同样用力，观察碰撞与回弹';$('scienceNote').innerHTML=v==='balance'?'<strong>先看现象，再找解释。</strong><br>打气后自动拔下气针，再观察天平。':'<strong>软硬看按压，质量看称量。</strong><br>松手后，球内外压力差与球皮弹性共同影响回弹。';updateUI(true);resize();}
+ function setPress(on){if(on&&(state.pumping||state.view!=='hardness'))return;if(state.press===on)return;state.press=on;if(on){unlockAudio();clearTap();playSound('click');}else{state.reboundUntil=state.time+(state.collisionSlow?2.7:1.4);}updateUI();}
+ function toggleMicro(){state.micro=!state.micro;$('microBtn').setAttribute('aria-pressed',String(state.micro));$('legend').style.visibility=state.micro?'visible':'hidden';}
+ function effectiveStiffness(){return 1+addedMass()/.65;}
+ function skinStep(dt){const drive=state.press?90*.38*state.force:0;const mult=effectiveStiffness();for(const [d,v,k] of [['dentBefore','dentVelBefore',90],['dentAfter','dentVelAfter',90*mult]]){state[v]+=(drive-k*state[d]-2*.77*Math.sqrt(k)*state[v])*dt;state[d]+=state[v]*dt;if(!state.press&&Math.abs(state[d])<.00012&&Math.abs(state[v])<.001){state[d]=0;state[v]=0;}state[d]=clamp(state[d],-.018,.42);}state.indent=state.dentBefore/.38;}
+ const LIMIT=.975;
+ const bump=x=>Math.exp(-Math.pow(x/.40,4));
+ function wallPoint(a,d){const x=Math.cos(a),sy=Math.sin(a),y=sy+(sy<0?d*bump(x):0);const dx=-Math.sin(a),dy=Math.cos(a)+(sy<0?d*(-4*Math.pow(x,3)/Math.pow(.4,4))*bump(x)*dx:0);const len=Math.hypot(dx,dy);return{x,y,nx:dy/len,ny:-dx/len};}
+ function recordHit(side,a,impulse){state.hitCounts[side]++;state.hitWindows[side].push(state.collisionClock);const list=state.wallHits[side],sector=Math.floor(((a+2*Math.PI)%(2*Math.PI))/(2*Math.PI)*24);const old=list.find(h=>h.sector===sector);if(old){old.at=state.time;old.a=a;old.impulse=impulse;}else list.push({a,at:state.time,sector,impulse});}
+ function updateParticles(ps,dt,dent,side){for(const p of ps){if(p.transport==='approach')continue;p.x+=p.vx*dt;p.y+=p.vy*dt;p.flash=Math.max(0,p.flash-dt*4);let nx=0,ny=0,hit=false,a=0;
+   if(p.y<0&&Math.abs(p.x)<LIMIT){const s=Math.sqrt(Math.max(.000001,LIMIT*LIMIT-p.x*p.x)),top=-s+dent*bump(p.x),deriv=p.x/s+dent*(-4*p.x**3/.4**4)*bump(p.x);if(p.y<top){const len=Math.hypot(deriv,1);nx=deriv/len;ny=-1/len;p.y=top+.00001;hit=true;a=Math.atan2(-s,p.x);}}
+   const rr=Math.hypot(p.x,p.y);if(!hit&&rr>LIMIT&&(p.y>=0||Math.abs(p.x)>.91)){nx=p.x/rr;ny=p.y/rr;p.x=nx*(LIMIT-.00001);p.y=ny*(LIMIT-.00001);a=Math.atan2(ny,nx);hit=true;}
+   if(hit){const dot=p.vx*nx+p.vy*ny;if(dot>0){p.vx-=2*dot*nx;p.vy-=2*dot*ny;p.flash=1;recordHit(side,a,2*dot);}}
+  }}
+ function updatePhysics(dt){state.time+=dt;updateTransport(dt);const visualFactor=state.view==='hardness'&&state.collisionSlow?.38:1;const simDt=dt*visualFactor*(reduced?.7:1);state.collisionClock+=simDt;const n=Math.max(1,Math.ceil(simDt/(1/120)));for(let j=0;j<n;j++){skinStep(simDt/n);updateParticles(rightParticles,simDt/n,state.view==='hardness'?state.dentBefore:0,0);updateParticles(leftParticles,simDt/n,state.view==='hardness'?state.dentAfter:0,1);}
+  for(let i=0;i<2;i++){state.hitWindows[i]=state.hitWindows[i].filter(t=>t>state.collisionClock-2);state.wallHits[i]=state.wallHits[i].filter(h=>state.time-h.at<(state.collisionSlow?.65:.34));if(state.taps[i]&&state.time-state.taps[i].at>1){state.taps[i]=null;$(i?'tapRightBtn':'tapLeftBtn').classList.remove('active');updateUI();}}
+  while(state.tapQueue.length&&state.time>=state.tapQueue[0].at){const q=state.tapQueue.shift();playBallTap(q.side);}
+  for(const bean of state.beanFalls)bean.t+=dt;if(state.beanFalls.length){const old=state.beanFalls.length;state.beanFalls=state.beanFalls.filter(b=>b.t<b.duration);if(old!==state.beanFalls.length){playSound('bean');updateUI();}}
+  if(state.settling>0){state.settling-=dt;if(state.settling<=0){if(state.view==='balance'&&equalMass()&&state.strokes>0)chime();updateUI();}}
+  const ta=state.pumping?0:state.beanFalls.length?state.angle:-.18*Math.tanh(massDiff()/1.5);if(reduced){state.angle=ta;state.angleVel=0;}else{state.angleVel+=(ta-state.angle)*45*dt-state.angleVel*12*dt;state.angle+=state.angleVel*dt;}
+  if(state.view==='hardness')updateUI();
+ }
+ function resize(){const b=C.getBoundingClientRect();cssWidth=b.width;cssHeight=b.height;dpr=Math.min(window.devicePixelRatio||1,2);C.width=Math.round(b.width*dpr);C.height=Math.round(b.height*dpr);scale=Math.min(b.width/W,b.height/H);offsetX=(b.width-W*scale)/2;offsetY=(b.height-H*scale)/2;}
+ function roundRect(x,y,w,h,r,fill,stroke,line=1){ctx.beginPath();if(ctx.roundRect){ctx.roundRect(x,y,w,h,r);}else{r=Math.max(0,Math.min(r,Math.abs(w)/2,Math.abs(h)/2));ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.lineWidth=line;ctx.strokeStyle=stroke;ctx.stroke();}}
+ function text(t,x,y,size=20,color=COLORS.ink,align='center',weight=500){ctx.fillStyle=color;ctx.font=`${weight} ${size}px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif`;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(t,x,y);}
+ function line(x1,y1,x2,y2,color='#79949c',width=2,dash=[]){ctx.beginPath();ctx.setLineDash(dash);ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke();ctx.setLineDash([]);}
+ function circle(x,y,r,fill,stroke,width=1){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);if(fill){ctx.fillStyle=fill;ctx.fill();}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=width;ctx.stroke();}}
+ function arrow(x1,y1,x2,y2,color,width=3,head=8){line(x1,y1,x2,y2,color,width);const a=Math.atan2(y2-y1,x2-x1);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-head*Math.cos(a-.52),y2-head*Math.sin(a-.52));ctx.lineTo(x2-head*Math.cos(a+.52),y2-head*Math.sin(a+.52));ctx.closePath();ctx.fillStyle=color;ctx.fill();}
+ function ballPath(x,y,r,dent=0){ctx.beginPath();for(let i=0;i<=160;i++){const a=i/160*2*Math.PI,p=wallPoint(a,dent);if(i===0)ctx.moveTo(x+p.x*r,y+p.y*r);else ctx.lineTo(x+p.x*r,y+p.y*r);}ctx.closePath();}
+ function drawCollisions(x,y,r,dent,side){if(!state.micro||state.view!=='hardness')return;const life=state.collisionSlow?.65:.34;for(const h of state.wallHits[side]){const age=(state.time-h.at)/life;if(age>=1)continue;const p=wallPoint(h.a,dent),alpha=(1-age)*.88;ctx.save();ctx.globalAlpha=alpha;ctx.beginPath();for(let j=0;j<=10;j++){const q=wallPoint(h.a-.07+.014*j,dent);if(j===0)ctx.moveTo(x+q.x*(r-3),y+q.y*(r-3));else ctx.lineTo(x+q.x*(r-3),y+q.y*(r-3));}ctx.strokeStyle='#e49b18';ctx.lineWidth=5;ctx.stroke();const sx=x+p.x*(r+2),sy=y+p.y*(r+2);arrow(sx,sy,sx+p.nx*22,sy+p.ny*22,'#d98b15',3,6);ctx.restore();}}
+ function drawBall(x,y,r,ps,dent=0,options={}){ctx.save();ctx.shadowColor='#244d6518';ctx.shadowBlur=8;ctx.shadowOffsetY=4;ballPath(x,y,r,dent);const g=ctx.createRadialGradient(x-r*.4,y-r*.5,0,x+r*.14,y+r*.2,r*1.35);g.addColorStop(0,'#78c3f4');g.addColorStop(.42,'#338fd0');g.addColorStop(1,'#165689');ctx.fillStyle=g;ctx.fill();ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  ctx.save();ballPath(x,y,r-1,dent);ctx.clip();
+  if(!state.micro){for(let i=0;i<390;i++){const xx=((i*41)%197)/197*2-1,yy=((i*73)%199)/199*2-1;if(xx*xx+yy*yy<.98)circle(x+xx*r,y+yy*r,r*.0055,'#12457422');}ctx.strokeStyle='#16496d';ctx.lineWidth=r*.025;const d=dent*r;ctx.beginPath();ctx.moveTo(x-r,y);ctx.bezierCurveTo(x-r*.3,y+r*.20,x+r*.3,y-r*.20,x+r,y);ctx.stroke();ctx.beginPath();ctx.moveTo(x,y-r+d);ctx.bezierCurveTo(x-r*.28,y-r*.30,x+r*.27,y+r*.3,x,y+r);ctx.stroke();ctx.beginPath();ctx.moveTo(x-r*.66,y-r*.75);ctx.bezierCurveTo(x+r*.28,y-r*.5,x+r*.23,y+r*.65,x+r*.67,y+r*.75);ctx.stroke();ctx.beginPath();ctx.moveTo(x+r*.7,y-r*.72);ctx.bezierCurveTo(x-r*.25,y-r*.4,x-r*.26,y+r*.58,x-r*.69,y+r*.75);ctx.stroke();}
+  else{ballPath(x,y,r-5,dent);ctx.fillStyle='#f3fafcfb';ctx.fill();ctx.strokeStyle='#abd2e1';ctx.lineWidth=1;ctx.stroke();ctx.save();ballPath(x,y,r-5,dent);ctx.clip();const dotR=r>100?3.25:2.55;for(const p of ps){const px=x+p.x*(r-5),py=y+p.y*(r-5);circle(px,py,dotR,p.isNew?COLORS.newAir:COLORS.teal);circle(px-.65,py-.75,.65,'#ffffffb0');if(p.flash>.2){circle(px,py,dotR+2,'#ffd98240');}}ctx.restore();}
+  ctx.restore();ballPath(x,y,r,dent);ctx.strokeStyle='#27618c';ctx.lineWidth=2;ctx.stroke();if(options.valve){roundRect(x-r-7,y-6,12,12,4,'#566e7b','#a9c8d6');circle(x-r-5,y,2,'#2b4245');}ctx.restore();if(options.side!==undefined)drawCollisions(x,y,r,dent,options.side);
+ }
+ function drawBean(x,y,s=1,angle=0){ctx.save();ctx.translate(x,y);ctx.rotate(angle);ctx.beginPath();ctx.ellipse(0,0,8*s,5.5*s,-.3,0,Math.PI*2);const g=ctx.createLinearGradient(-8*s,-5*s,8*s,5*s);g.addColorStop(0,'#aac866');g.addColorStop(.6,'#668e36');g.addColorStop(1,'#486d2c');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle='#486728';ctx.lineWidth=.8*s;ctx.stroke();ctx.beginPath();ctx.ellipse(1*s,-1*s,2.4*s,1.4*s,-.4,0,Math.PI*2);ctx.fillStyle='#e6e5af';ctx.fill();ctx.restore();}
+ function bucket(x,hookY,ps,n=0){
+  const ballY=hookY+236,r=84,bottom=hookY+322,left=x-113,right=x+113;
+  // Chains remain vertical in the world even when the balance beam rotates.
+  ctx.strokeStyle='#9dabb0';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,hookY+4);ctx.lineTo(left+17,hookY+212);ctx.moveTo(x,hookY+4);ctx.lineTo(right-17,hookY+212);ctx.stroke();
+  roundRect(left,hookY+212,226,112,18,'#dff4ff2c','#b8d6e3',2.4);
+  drawBall(x,ballY,r,ps,0,{valve:true});
+  const actualN=Math.max(0,n-state.beanFalls.length);
+  for(let i=0;i<Math.min(actualN,70);i++){const col=i%13,row=Math.floor(i/13);drawBean(x-91+col*15+(row%2)*3,bottom-14-row*9,.83,Math.sin(i*3)*.7);}
+  const glaze=ctx.createLinearGradient(left,0,right,0);glaze.addColorStop(0,'#b0d6e533');glaze.addColorStop(.20,'#fff5');glaze.addColorStop(.4,'#dcf1f708');glaze.addColorStop(.9,'#83b9cd26');
+  roundRect(left,hookY+231,226,93,16,glaze,'#9ec6d3',2);
+  ctx.beginPath();ctx.ellipse(x,hookY+230,113,14,0,0,Math.PI*2);ctx.strokeStyle='#a9ccd7';ctx.lineWidth=2;ctx.stroke();
+  line(left+14,hookY+256,left+14,bottom-19,'#ffffffbd',3);line(right-13,hookY+257,right-13,bottom-19,'#ffffffad',2);
+  text(n?`+ ${n} 粒绿豆`:'',x,bottom+27,19,'#418050','center',750);
+  return {x,y:ballY,bottom,hookY};
+ }
+ function beamPositions(){const px=605,py=175,arm=231;return{px,py,arm,lx:px-arm*Math.cos(state.angle),ly:py-arm*Math.sin(state.angle),rx:px+arm*Math.cos(state.angle),ry:py+arm*Math.sin(state.angle)};}
+ function drawLabBackground(){ /* Intentionally empty: a white laboratory background. */ }
+ function drawScale(){
+  const p=beamPositions();
+  // Ground and apparatus shadow.
+  const floor=ctx.createLinearGradient(0,490,0,630);floor.addColorStop(0,'#f9fcfc00');floor.addColorStop(1,'#eff5f6');ctx.fillStyle=floor;ctx.fillRect(0,490,W,160);line(34,588,1064,588,'#dce8eb',1.5);
+  ctx.beginPath();ctx.ellipse(609,588,370,12,0,0,Math.PI*2);ctx.fillStyle='#143b4611';ctx.fill();
+  const pole=ctx.createLinearGradient(589,0,623,0);pole.addColorStop(0,'#90a2a7');pole.addColorStop(.4,'#e3ecee');pole.addColorStop(1,'#97a9af');roundRect(590,169,30,396,6,pole,'#8c9fa7',1.5);
+  roundRect(524,558,164,27,7,'#617982','#4b636e',1.4);roundRect(541,553,130,12,6,'#adc1c8');
+  // Zero reference and stationary dial.
+  roundRect(552,121,106,92,15,'#f7fafb','#d0dfe4',1.5);ctx.beginPath();ctx.arc(605,176,39,Math.PI,Math.PI*2);ctx.strokeStyle='#c3d3d9';ctx.lineWidth=2;ctx.stroke();for(let i=-3;i<=3;i++){const a=-Math.PI/2+i*.21;line(605+Math.cos(a)*32,176+Math.sin(a)*32,605+Math.cos(a)*39,176+Math.sin(a)*39,i===0?'#3a9460':'#b9cbd1',i===0?3:1.5);}
+  ctx.save();ctx.translate(p.px,p.py);ctx.rotate(state.angle);roundRect(-265,-10,530,20,7,'#748b93','#48636d',2);roundRect(-259,-8,516,5,3,'#b8c9ce');for(let i=-5;i<=5;i++)if(i!==0){ctx.beginPath();ctx.arc(i*44,13,5,0,Math.PI);ctx.strokeStyle='#617b85';ctx.lineWidth=2;ctx.stroke();}line(0,-2,0,-40,'#df7038',4);ctx.restore();circle(605,175,13,'#f3f7f8','#556f79',3);circle(605,175,5,'#718a94');
+  const left=bucket(p.lx,p.ly,leftParticles),right=bucket(p.rx,p.ry,rightParticles,state.beans);
+  text('打气的一边',p.lx,70,27,COLORS.orange,'center',750);text('不打气的一边',p.rx,70,27,COLORS.ink,'center',750);
+  text('初始质量 + 新增空气',p.lx,104,17,'#7a8d92');text('初始质量 + 绿豆',p.rx,104,17,'#7a8d92');
+  if(!state.pumping&&Math.abs(massDiff())>.00001&&state.settling<=0){const isLeft=massDiff()>0,xx=isLeft?p.lx-143:p.rx+143,yy=isLeft?left.y:right.y;arrow(xx,yy-34,xx,yy+25,isLeft?'#e97a42':'#688bad',4,10);}
+  if(state.pumping){roundRect(573,240,64,34,8,'#ecf2f4','#c4d7de');text('暂不称',605,257,15,'#69868f','center',700);}
+  if(model.showMass&&!state.pumping){text(`+${addedMass().toFixed(2)} g`,p.lx,left.bottom+52,17,'#d66b36','center',700);text(`+${(state.beans*model.beanMass).toFixed(2)} g`,p.rx,right.bottom+52,17,'#4a8544','center',700);}
+  drawPump(left);
+  drawTray();
+  // A bean drop is visible and the balance waits until it lands.
+  for(const b of state.beanFalls){if(b.t<0)continue;const t=Math.min(1,b.t/b.duration),tx=p.rx+randFixed(b.seed)*57,ty=right.bottom-19,xx=b.sx+(tx-b.sx)*t,yy=b.sy+(ty-b.sy)*t-180*Math.sin(t*Math.PI);drawBean(xx,yy,1.1,t*4);}
+  if(state.drag?.kind==='bean'){const inside=inBucket(state.drag.x,state.drag.y);if(inside){roundRect(p.rx-126,p.ry+195,252,143,19,'#88c98815','#72af6e',3);text('松手放入',p.rx,p.ry+184,18,'#4d8d49','center',700);}drawBean(state.drag.x,state.drag.y,1.6,.3);}
+ }
+ function randFixed(x){return Math.sin(x*85)*.75;}
+ function bezierAt(t,p0,p1,p2,p3){const m=1-t;return{x:m*m*m*p0.x+3*m*m*t*p1.x+3*m*t*t*p2.x+t*t*t*p3.x,y:m*m*m*p0.y+3*m*m*t*p1.y+3*m*t*t*p2.y+t*t*t*p3.y};}
+ function drawPacket(path,mini=false){if(!state.micro||!state.pumping)return;for(const q of state.packet){if(q.stage==='inside'||q.stage==='approach'||q.stage==='outside')continue;let pt=null;if(q.stage==='hose')pt=bezierAt(state.release?1-q.pathT:q.pathT,...path);else if(!state.release){const slot=mini?{x:path[0].x-18+(q.i%2)*8,y:path[0].y-51+Math.floor(q.i/2)*12}:{x:107+Math.sin(q.i*2)*5,y:406+q.i*17};if(q.stage==='cylinder')pt=slot;else if(q.stage==='intake'){pt={x:lerp(mini?slot.x-42:27,slot.x,q.pathT),y:slot.y};}else if(q.stage==='waiting')pt={x:mini?slot.x-42:27,y:slot.y};}if(pt)circle(pt.x,pt.y,mini?3.7:4.2,q.p.isNew?COLORS.newAir:COLORS.teal);}}
+ function drawPump(ball){const active=state.pumping,up=active&&!state.release?(state.progress<.30?state.progress/.30:1-(state.progress-.30)/.63):0,manual=state.drag?.kind==='pump'?state.drag.pull:0;const handleY=357-clamp(Math.max(manual,up),0,1)*105;
+  text('打气筒',111,214,23,COLORS.ink,'center',750);if(!active)text('点一下 / 拖动把手',111,245,14,'#82979e');
+  const body=ctx.createLinearGradient(88,0,137,0);body.addColorStop(0,'#177e94');body.addColorStop(.45,'#42b7c8');body.addColorStop(1,'#12788e');roundRect(63,562,104,14,6,'#324f5d');roundRect(88,371,51,193,9,body,'#24778a',2);roundRect(98,388,30,154,8,'#e8fafbc7');
+  const metal=ctx.createLinearGradient(109,0,121,0);metal.addColorStop(0,'#a5b5bb');metal.addColorStop(.45,'#f7fbfc');metal.addColorStop(1,'#92a3aa');roundRect(108,handleY+8,12,Math.max(21,385-handleY),2,metal,'#9aafb7');roundRect(64,handleY-5,100,22,8,'#304f5e','#243e4b',2);roundRect(69,handleY-3,89,5,3,'#58798a');
+  const end={x:active?ball.x-75:ball.x-125,y:active?ball.y:ball.y+19};const path=[{x:139,y:543},{x:256,y:584},{x:204,y:end.y+76},end];ctx.beginPath();ctx.moveTo(path[0].x,path[0].y);ctx.bezierCurveTo(path[1].x,path[1].y,path[2].x,path[2].y,end.x,end.y);ctx.strokeStyle='#3e6979';ctx.lineWidth=12;ctx.lineCap='round';ctx.stroke();ctx.strokeStyle=state.micro?'#e4f4f8':'#8eacb7';ctx.lineWidth=8;ctx.stroke();line(end.x-17,end.y,end.x,end.y,'#b2cbd3',3);drawPacket(path);ctx.lineCap='butt';
+  if(active){text(state.release?'放气：空气向外流出':state.phase==='intake'?'拉起：吸入周围空气':'压下：空气进入皮球',175,608,17,COLORS.teal,'center',650);text(`本筒${state.release?'已离开':'已入球'} ${state.flowDelivered} / 8 个小点`,175,634,17,COLORS.orange,'center',750);}
+  else{text('气针已拔下',226,608,14,'#83999f');if(state.lastPacketCount)text('每筒 8 个小点 · 一一进入',176,633,14,'#82949a');}
+ }
+ function drawTray(){
+  ctx.save();ctx.translate(991,570);ctx.beginPath();ctx.ellipse(0,0,63,17,0,0,Math.PI*2);ctx.fillStyle='#a8bbc44a';ctx.fill();ctx.beginPath();ctx.ellipse(0,-6,61,17,0,0,Math.PI*2);ctx.fillStyle='#e1ebee';ctx.fill();ctx.strokeStyle='#becfd5';ctx.lineWidth=1.5;ctx.stroke();for(let i=0;i<15;i++){drawBean(((i*37)%88)-43,((i*23)%19)-16,.8,(i%3)*.6);}ctx.restore();text('绿豆',991,606,21,'#527946','center',750);text('拖进右边小桶',991,632,14,'#819298');
+ }
+ function drawPressRig(x,y,r,dent){const top=y-r+dent*r,lift=state.press?0:22;const padY=top-11-lift;line(x,132,x,padY-9,'#9db5bf',10);line(x-2,132,x-2,padY-9,'#e3edef',3);roundRect(x-30,padY-9,60,21,9,'#97aeb9','#77959f',1.3);roundRect(x-25,padY-7,50,6,4,'#d1e0e5');if(state.press)arrow(x+56,151,x+56,185,'#de9237',5,10);}
+ function drawTapMark(x,y,r,dent,i){const tap=state.taps[i];if(!tap)return;const t=state.time-tap.at;if(t>.65)return;const top=y-r+dent*r;ctx.save();ctx.globalAlpha=1-t/.65;const grow=t*32;for(let j=0;j<3;j++){const a=-Math.PI/2+(j-1)*.65;line(x+Math.cos(a)*(21+grow),top-6+Math.sin(a)*(21+grow),x+Math.cos(a)*(34+grow),top-6+Math.sin(a)*(34+grow),'#e3a247',3);}ctx.restore();}
+ function collisionMeter(x,side){const count=state.hitWindows[side].length,w=250;const c=side?COLORS.orange:COLORS.teal;const max=Math.max(100,state.hitWindows[0].length,state.hitWindows[1].length);text(`近 2 秒撞壁  ${count} 次`,x,556,20,c,'center',750);roundRect(x-w/2,578,w,7,4,'#eaf0f2');roundRect(x-w/2,578,Math.max(3,w*count/max),7,4,c);}
+ function drawHardness(){const x1=298,x2=802,y=347,r=145,d0=state.dentBefore,d1=state.dentAfter;
+  text('打气前',x1,38,28,COLORS.ink,'center',800);text('当前',x2,38,28,COLORS.orange,'center',800);text('尚未额外打气，球里已有空气',x1,75,16,'#71878f');text(`已打入 ${state.strokes} 筒空气`,x2,75,17,'#c47143','center',650);
+  line(550,177,550,502,'#e4ecee',1.5,[5,9]);text(state.press?'相同的按压力':'按住 → 松手',550,125,17,'#78949d','center',650);
+  for(const x of [x1,x2]){ctx.beginPath();ctx.ellipse(x,501,129,10,0,0,Math.PI*2);ctx.fillStyle='#284a5a0a';ctx.fill();roundRect(x-189,504,378,9,4,'#e4edf0');}
+  drawBall(x1,y,r,rightParticles,d0,{side:0});drawBall(x2,y,r,leftParticles,d1,{side:1,valve:state.pumping});drawPressRig(x1,y,r,d0);drawPressRig(x2,y,r,d1);drawTapMark(x1,y,r,d0,0);drawTapMark(x2,y,r,d1,1);
+  if(state.press||state.time<state.reboundUntil){ctx.setLineDash([5,6]);ctx.strokeStyle='#9cb1bb90';ctx.lineWidth=1.5;for(const x of [x1,x2]){ctx.beginPath();ctx.arc(x,y,r,Math.PI*1.12,Math.PI*1.88);ctx.stroke();}ctx.setLineDash([]);}
+  if(state.micro){collisionMeter(x1,0);collisionMeter(x2,1);text('撞壁亮一下；向外箭头表示空气对球壁的作用',550,615,17,'#587883','center',650);text('同一观察时长的模型计数，不是真实测量',550,639,13,'#899ca3');}
+  else{const pressed=state.press||state.time<state.reboundUntil;text(pressed?'观察凹陷与恢复':'点击皮球，也可以拍一拍',550,562,23,'#537884','center',700);text('打开微粒透视，可以看到撞壁与向外的作用',550,603,17,'#83959d');}
+  if(state.pumping){const path=[{x:571,y:448},{x:615,y:502},{x:610,y:367},{x:x2-r+9,y}];roundRect(544,380,29,70,7,'#d5ebf1','#9ebdc9',1.5);ctx.beginPath();ctx.moveTo(path[0].x,path[0].y);ctx.bezierCurveTo(path[1].x,path[1].y,path[2].x,path[2].y,path[3].x,path[3].y);ctx.strokeStyle='#719baa';ctx.lineWidth=10;ctx.stroke();ctx.strokeStyle='#e5f4f7';ctx.lineWidth=7;ctx.stroke();drawPacket(path,true);text(`${state.flowDelivered} / 8`,556,478,16,COLORS.orange,'center',700);}
+ }
+ function render(){ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#fff';ctx.fillRect(0,0,cssWidth,cssHeight);ctx.translate(offsetX,offsetY);ctx.scale(scale,scale);if(state.view==='balance')drawScale();else drawHardness();}
+ function frame(time){const dt=Math.min(.035,last?(time-last)/1000:1/60);last=time;updatePhysics(dt);render();requestAnimationFrame(frame);}
+ function localPoint(e){const b=C.getBoundingClientRect();return{x:(e.clientX-b.left-offsetX)/scale,y:(e.clientY-b.top-offsetY)/scale};}
+ function inBucket(x,y){const p=beamPositions();return Math.abs(x-p.rx)<135&&y>p.ry+155&&y<p.ry+347;}
+ C.addEventListener('pointerdown',e=>{if(state.pumping)return;const p=localPoint(e);unlockAudio();if(state.view==='hardness')return;if(Math.abs(p.x-991)<80&&Math.abs(p.y-567)<45){state.drag={kind:'bean',x:p.x,y:p.y};C.setPointerCapture(e.pointerId);e.preventDefault();}else if(p.x>48&&p.x<178&&p.y>264&&p.y<410){state.drag={kind:'pump',x:p.x,y:p.y,startY:p.y,pull:0};C.setPointerCapture(e.pointerId);e.preventDefault();}});
+ C.addEventListener('pointermove',e=>{if(!state.drag)return;const p=localPoint(e);state.drag.x=p.x;state.drag.y=p.y;if(state.drag.kind==='pump')state.drag.pull=clamp(Math.abs(p.y-state.drag.startY)/100,0,1);e.preventDefault();});
+ C.addEventListener('pointerup',e=>{if(!state.drag)return;const p=localPoint(e);if(state.drag.kind==='bean'){if(inBucket(p.x,p.y))addBeans(1,true);else toast('把绿豆拖到右边的小桶里');}else requestPump(1);state.drag=null;if(C.hasPointerCapture(e.pointerId))C.releasePointerCapture(e.pointerId);});
+ C.addEventListener('pointercancel',()=>state.drag=null);
+ C.addEventListener('click',e=>{if(state.view!=='hardness'||state.pumping)return;const p=localPoint(e);if(Math.hypot(p.x-298,p.y-347)<145)playBallTap('left');else if(Math.hypot(p.x-802,p.y-347)<145)playBallTap('right');});
+ $('pumpOne').addEventListener('click',()=>requestPump(1));$('pumpTen').addEventListener('click',()=>requestPump(10));$('releaseOne').addEventListener('click',()=>setTotal(state.strokes-1));
+ document.querySelectorAll('[data-total]').forEach(b=>b.addEventListener('click',()=>setTotal(Number(b.dataset.total))));
+ $('stopPump').addEventListener('click',()=>{if(!state.pumping)return;state.target=state.release?Math.max(0,state.strokes-1):Math.min(MAX_STROKES,state.strokes+1);updateUI();toast('完成当前这一筒后停止');});
+ $('beanPlus').addEventListener('click',()=>addBeans(1));$('beanMinus').addEventListener('click',()=>addBeans(-1));$('beanFive').addEventListener('click',()=>addBeans(5));$('beanClear').addEventListener('click',()=>addBeans(-state.beans));
+ $('tabBalance').addEventListener('click',()=>setView('balance'));$('tabHardness').addEventListener('click',()=>setView('hardness'));$('microBtn').addEventListener('click',toggleMicro);
+ $('collisionSlowBtn').addEventListener('click',()=>{state.collisionSlow=!state.collisionSlow;if(!state.micro)toggleMicro();$('collisionSlowBtn').setAttribute('aria-pressed',String(state.collisionSlow));$('collisionSlowBtn').textContent=state.collisionSlow?'慢镜：开':'碰撞慢镜';state.hitWindows=[[],[]];});
+ $('pressBtn').addEventListener('pointerdown',e=>{e.preventDefault();if(state.pumping)return;$('pressBtn').setPointerCapture(e.pointerId);setPress(true);});
+ for(const name of ['pointerup','pointercancel','lostpointercapture','blur'])$('pressBtn').addEventListener(name,()=>setPress(false));
+ $('pressBtn').addEventListener('keydown',e=>{if(e.code==='Space'||e.code==='Enter'){e.preventDefault();e.stopPropagation();setPress(true);}});$('pressBtn').addEventListener('keyup',e=>{if(e.code==='Space'||e.code==='Enter'){e.preventDefault();e.stopPropagation();setPress(false);}});
+ $('tapLeftBtn').addEventListener('click',()=>{clearTap();playBallTap('left');});$('tapRightBtn').addEventListener('click',()=>{clearTap();playBallTap('right');});$('tapCompareBtn').addEventListener('click',()=>{if(state.pumping||state.press)return;clearTap();state.lastTapAt=-10;playBallTap('left');state.tapQueue.push({side:'right',at:state.time+.9});});
+ $('forceRange').addEventListener('input',e=>{state.force=Number(e.target.value)/100;updateUI();});
+ $('resetBtn').addEventListener('click',()=>{reset();toast('已回到初始状态，天平重新调平');});
+ $('soundBtn').addEventListener('click',()=>{if(state.sound&&!ac){unlockAudio();playSound('chime');return;}state.sound=!state.sound;if(state.sound){unlockAudio();if(master)master.gain.setValueAtTime(model.audioVolume,ac.currentTime);playSound('chime');}else{stopAudio();if(master)master.gain.setValueAtTime(0,ac.currentTime);}updateAudioUI();});
+ $('fullBtn').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else toast('此浏览器不支持网页全屏，可横屏使用。');}catch(e){toast('浏览器未允许全屏，可按 F11 或横屏使用。');}});
+ $('settingsBtn').addEventListener('click',()=>{setPress(false);clearTap();$('pumpVolume').value=model.volume;$('beanMassInput').value=model.beanMass.toFixed(2);$('showMass').checked=model.showMass;$('slowMotion').checked=model.slow;$('volumeRange').value=Math.round(model.audioVolume*100);$('volumeOutput').textContent=Math.round(model.audioVolume*100)+'%';$('settingsDialog').showModal();});
+ $('closeSettings').addEventListener('click',()=>$('settingsDialog').close());
+ $('settingsDialog').addEventListener('click',e=>{if(e.target===$('settingsDialog')){const b=e.target.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)e.target.close();}});
+ $('volumeRange').addEventListener('input',e=>{model.audioVolume=Number(e.target.value)/100;$('volumeOutput').textContent=e.target.value+'%';if(master)master.gain.setValueAtTime(state.sound?model.audioVolume:0,ac.currentTime);savePrefs();});
+ $('testSoundBtn').addEventListener('click',()=>{state.sound=true;unlockAudio();if(master)master.gain.setValueAtTime(model.audioVolume,ac.currentTime);playSound('tap',.8);updateAudioUI();});
+ $('showMass').addEventListener('change',e=>{model.showMass=e.target.checked;savePrefs();updateUI();});$('slowMotion').addEventListener('change',e=>{model.slow=e.target.checked;savePrefs();});
+ $('applyParams').addEventListener('click',()=>{const v=Number($('pumpVolume').value),b=Number($('beanMassInput').value);if(!validParams(v,b)){toast('每筒体积需在 20–100 mL，绿豆质量需在 0.02–0.20 g。');return;}model.volume=v;model.beanMass=b;model.showMass=$('showMass').checked;model.slow=$('slowMotion').checked;savePrefs();reset();$('settingsDialog').close();toast('参数已应用，已重新调平');});
+ $('defaultParams').addEventListener('click',()=>{$('pumpVolume').value=50;$('beanMassInput').value='0.10';$('showMass').checked=false;$('slowMotion').checked=false;});
+ document.addEventListener('keydown',e=>{if($('settingsDialog').open||['INPUT','TEXTAREA','SELECT','BUTTON','A'].includes(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey||e.repeat)return;if(e.code==='Space'){e.preventDefault();requestPump(1);}else if(e.key==='+'||e.key==='=')addBeans(1);else if(e.key==='-')addBeans(-1);else if(e.key.toLowerCase()==='v')toggleMicro();else if(e.key.toLowerCase()==='h')setView(state.view==='balance'?'hardness':'balance');else if(e.key.toLowerCase()==='r')reset();});
+ document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden){setPress(false);clearTap();stopAudio();}});window.addEventListener('blur',()=>{setPress(false);state.drag=null;});
+ createParticles();if(window.ResizeObserver){resizeObserver=new ResizeObserver(resize);resizeObserver.observe($('canvasWrap'));}window.addEventListener('resize',resize);resize();updateUI(true);updateAudioUI();requestAnimationFrame(frame);
+ Object.defineProperty(window,'airMassLab',{value:Object.freeze({snapshot:()=>({version:'4.1-classroom-20261107',strokes:state.strokes,beans:state.beans,massAdded:addedMass(),massDiff:massDiff(),balanced:equalMass(),pumping:state.pumping,release:state.release,progress:state.progress,target:state.target,view:state.view,micro:state.micro,press:state.press,angle:state.angle,particles:leftParticles.length,newParticles:leftParticles.filter(p=>p.isNew).length,referenceParticles:rightParticles.length,particlesPerStroke:PARTICLES_PER_STROKE,flowDelivered:state.flowDelivered,tubeParticles:state.packet.filter(q=>q.stage==='hose').length,deliveredTotal:state.deliveredTotal,departedTotal:state.departedTotal,tubeEnteredTotal:state.tubeEnteredTotal,tubeExitedTotal:state.tubeExitedTotal,transport:state.packet.map(q=>({id:q.p.id,stage:q.stage,t:q.pathT,inBall:leftParticles.includes(q.p)})),audit:state.audit.slice(),sound:state.sound,audioState:ac?.state||'not-created',audioVolume:model.audioVolume,indentBefore:state.dentBefore,indentAfter:state.dentAfter,collisionSlow:state.collisionSlow,hitCounts:state.hitCounts.slice(),recentHits:state.hitWindows.map(h=>h.length),activeHits:state.wallHits.map(h=>h.length),meanSpeeds:[rightParticles,leftParticles].map(ps=>ps.reduce((s,p)=>s+Math.hypot(p.vx,p.vy),0)/ps.length),tapEvents:state.tapEvents.slice(),settings:{...model}}),audioLevel:()=>{if(!analyser)return{peak:0,rms:0};const d=new Float32Array(analyser.fftSize);analyser.getFloatTimeDomainData(d);let peak=0,sum=0;for(const x of d){peak=Math.max(peak,Math.abs(x));sum+=x*x;}return{peak,rms:Math.sqrt(sum/d.length)};}}),writable:false});
+})();
+
+</script>
+
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T2 · 二维绘图" title="本课最低技术需求：T2 · 二维绘图" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T2 · 二维绘图</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
