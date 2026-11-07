@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f5f7f3">
+<meta name="description" content="六年级科学：用24小时时间沙盘、同情境计划试运行和真实行动记录，制订可以实行的健康生活计划。单文件离线互动课件。">
+<title>制订健康生活计划</title>
+<style>
+:root{--ink:#21372f;--muted:#61746a;--paper:#fff;--bg:#f5f7f3;--line:#dce5dc;--green:#25765b;--green-light:#e7f1e9;--amber:#a95f17;--amber-light:#fff0dc;--red:#bd4e42;--red-light:#ffede8;--purple:#7c83c6;--radius:18px;--font:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:var(--font);background:var(--bg);color:var(--ink);overflow:hidden;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation;border:0}button:disabled{opacity:.42;cursor:default}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #1179b3;outline-offset:3px}button:focus:not(:focus-visible){outline:none}button,input,select,textarea{min-width:0}button svg{width:24px;height:24px;vertical-align:middle;flex:none}svg{display:block}input[type=range]{width:100%;height:38px;accent-color:var(--green);cursor:pointer;touch-action:pan-y;background:transparent}input[type=range]::-webkit-slider-thumb{width:27px;height:27px}input[type=text],textarea,select{width:100%;background:#f8faf7;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:clamp(17px,1.45vw,24px)}input[type=text]:focus,textarea:focus,select:focus{border-color:var(--green)}textarea{resize:none;line-height:1.5}a{color:var(--green)}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#app{height:100vh;height:100dvh;display:grid;grid-template-rows:82px minmax(0,1fr) 58px;padding:0 28px;max-width:2400px;margin:0 auto}.topbar{display:flex;align-items:center;gap:24px;border-bottom:1px solid var(--line)}h1{font-size:clamp(22px,2.1vw,36px);letter-spacing:.02em;margin:0;white-space:nowrap;font-weight:800}.tabs{display:flex;gap:6px;margin-left:auto}.tab{font-size:clamp(16px,1.4vw,24px);font-weight:650;padding:12px 16px;background:transparent;color:var(--muted);border-radius:10px;white-space:nowrap;display:flex;gap:8px;align-items:center}.tab span{font:700 16px/1 var(--font);border:1.5px solid currentColor;width:25px;height:25px;display:grid;place-items:center;border-radius:50%}.tab[aria-selected=true]{background:var(--green);color:white}.utilities{display:flex;gap:5px}.icon-btn{display:grid;place-items:center;width:44px;height:44px;background:transparent;border-radius:9px;color:var(--muted)}.icon-btn:hover{background:#e9eee6}.page{height:100%;min-height:0;display:none;padding:20px 0 12px;flex-direction:column;gap:14px}.page.active{display:flex}.intro{display:flex;align-items:center;justify-content:space-between;gap:18px;flex:none}.intro h2{font-size:clamp(23px,2.25vw,38px);margin:0;font-weight:750;line-height:1.25}.intro .subtle{font-size:clamp(16px,1.28vw,21px);margin:6px 0 0;color:var(--muted)}.text-btn{border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;min-height:44px;font-size:clamp(16px,1.2vw,20px);font-weight:650;background:#fff;white-space:nowrap}.text-btn:hover{border-color:#98b5a6;background:#f5faf6}.primary{background:var(--green);color:white;border-color:var(--green)}.primary:hover{background:#1d624b;color:white}.main-grid{display:grid;grid-template-rows:minmax(0,1fr);grid-template-columns:minmax(0,1fr) minmax(270px,29%);gap:20px;flex:1;min-height:0}.stage{min-height:0;position:relative;display:flex;flex-direction:column}.sheet{min-height:0;background:white;border:1px solid var(--line);border-radius:var(--radius)}.panel{padding:18px;min-height:0}.footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-left:118px}.footer p{font-size:clamp(16px,1.35vw,23px);color:var(--muted);margin:0}.footer .text-btn{min-height:40px;padding:8px 16px}.small{font-size:clamp(14px,1.08vw,18px);line-height:1.5;color:var(--muted);margin:0}.status{font-size:clamp(20px,1.9vw,30px);font-weight:750;line-height:1.25}.status .num{font-size:1.3em}.status.good{color:var(--green)}.status.warn{color:var(--red)}
+/* Screen 1: quantities are a budget, not an ordered timetable. */
+.budget-stage{padding:16px 22px 12px}.budget-top{display:flex;align-items:center;justify-content:space-between;gap:16px}.budget-top .small{margin-top:4px}.budget-drawing{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative}.budget-svg{width:100%;height:100%;overflow:visible}.budget-svg .sector{cursor:pointer;transition:opacity .16s;outline:none}.budget-svg .sector:hover{opacity:.86}.budget-svg .sector:focus{stroke:#164a37;stroke-width:4}.budget-svg text{font-family:var(--font);pointer-events:none}.comparison{display:flex;align-items:center;gap:12px;min-height:36px;font-size:clamp(15px,1.15vw,20px);color:var(--muted);flex-wrap:wrap}.compare-strip{flex:1;display:flex;height:14px;border-radius:5px;overflow:hidden;min-width:90px;background:#edf0eb}.compare-strip span{display:block;height:100%}.sleep-band{border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;align-items:center;gap:12px}.sleep-band strong{font-size:clamp(18px,1.65vw,27px);font-weight:750}.sleep-band .moon-line{display:flex;align-items:center;gap:10px;white-space:nowrap}.sleep-band .moon-line svg{width:28px;height:28px;color:var(--purple)}.budget-controls{display:flex;flex-direction:column;gap:12px;padding:16px}.categories{display:grid;grid-template-columns:1fr;gap:4px;flex:1;min-height:0}.category{background:#fff;display:flex;align-items:center;gap:10px;text-align:left;border-radius:10px;border:2px solid transparent;padding:9px 12px;font-size:clamp(17px,1.4vw,24px);min-height:45px}.category[aria-pressed=true]{border-color:var(--selected-color,var(--green));background:#f7f9f5}.category .swatch{width:15px;height:30px;border-radius:4px;flex:none}.category .label{font-weight:650;white-space:nowrap}.category .value{margin-left:auto;font-size:clamp(17px,1.45vw,25px);font-variant-numeric:tabular-nums;font-weight:750;white-space:nowrap}.editor{padding:15px 13px 8px;border-radius:12px;background:#f3f6f0}.editor-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.editor-top strong{font-size:clamp(19px,1.5vw,27px)}.editor-top output{font-size:clamp(23px,2.1vw,34px);font-weight:800;color:var(--green);white-space:nowrap}.range-row{display:flex;align-items:center;gap:9px}.step-btn{width:42px;height:42px;border-radius:50%;background:white;font-size:28px;border:1px solid #ccd9cd;flex:none;line-height:1}.category-note{font-size:clamp(14px,1.1vw,18px);color:var(--muted);line-height:1.5;min-height:48px;margin:5px 0 0}.sleep-notice{font-size:clamp(15px,1.12vw,19px);line-height:1.4;background:#f6f3ff;color:#5d649e;border-radius:9px;padding:10px 12px;margin:0}.sleep-notice.alert{background:var(--amber-light);color:var(--amber)}
+/* Screen 2: repeat exactly the same conditions. */
+.sim-intro{max-width:900px}.sim-main{grid-template-columns:minmax(0,1fr) minmax(270px,27%)}.week-stage{gap:16px;padding:18px}.week-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.week-heading strong{font-size:clamp(18px,1.5vw,25px)}.play-btn{display:flex;align-items:center;gap:8px}.week-table{display:grid;grid-template-columns:95px repeat(7,minmax(0,1fr));column-gap:7px;row-gap:9px;align-items:stretch;flex:1;min-height:0}.week-table .row-label{display:flex;flex-direction:column;justify-content:center;font-size:clamp(17px,1.4vw,23px);font-weight:750;line-height:1.5}.week-table .row-label small{font-size:.68em;color:var(--muted);font-weight:400;white-space:nowrap}.day-head{background:#f7f8f5;border-radius:12px;padding:10px 3px 9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:2px solid transparent;min-width:0}.day-head.active{border-color:var(--green);background:var(--green-light)}.day-head .day-num{font-size:clamp(14px,1.1vw,19px);color:var(--muted)}.day-head svg{width:clamp(23px,2.7vw,43px);height:clamp(23px,2.7vw,43px);color:#536e5f}.day-head strong{font-size:clamp(15px,1.3vw,21px);font-weight:650;line-height:1.35;max-width:4.5em;text-align:center}.result-cell{border-radius:12px;background:#f6f7f3;min-height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:2px solid transparent;transition:background .2s;min-width:0;padding:8px 3px}.result-cell .mark{font-size:clamp(26px,2.5vw,42px);line-height:1;font-weight:650}.result-cell .result-word{font-size:clamp(13px,1.05vw,18px);font-weight:650;white-space:nowrap}.result-cell.pending{color:#bcc8bd}.result-cell.ok{background:var(--green-light);color:var(--green)}.result-cell.backup{background:#e6f1f7;color:#246b91}.result-cell.blocked{background:var(--amber-light);color:var(--amber)}.result-cell.active{border-color:currentColor}.sim-detail{background:#f5f8f2;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:18px;min-height:103px}.detail-day{flex:none}.detail-day strong{display:block;font-size:clamp(20px,1.8vw,30px);color:var(--green);margin-bottom:4px}.detail-day span{font-size:clamp(14px,1.1vw,18px);color:var(--muted)}.detail-copy{border-left:1px solid #d5dfd2;padding-left:18px;font-size:clamp(16px,1.4vw,23px);line-height:1.5;margin:0}.sim-controls{display:flex;flex-direction:column;gap:15px}.sim-controls h3{font-size:clamp(20px,1.7vw,29px);margin:0}.control-label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:clamp(17px,1.35vw,23px);font-weight:650}.control-label output{font-size:clamp(24px,2.1vw,34px);font-weight:800;color:var(--green);white-space:nowrap}.control-label output span{font-size:.55em;font-weight:600}.sim-control{border-bottom:1px solid var(--line);padding-bottom:9px}.switch-label{display:flex;align-items:center;gap:12px;cursor:pointer;font-size:clamp(18px,1.45vw,24px);font-weight:650}.switch-label input{width:24px;height:24px;accent-color:var(--green);flex:none}.switch-label .small{display:block;font-size:.72em;font-weight:400;margin-top:5px}.buffer-note{padding:9px 11px;background:#f5f8f2;border-radius:8px;font-size:clamp(14px,1.05vw,18px);line-height:1.5;color:var(--muted);margin:0}.buffer-note.error{color:var(--red);background:var(--red-light)}.sim-summary{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px}.summary-count{padding:12px 8px;text-align:center;background:#f4f6f1;border-radius:10px}.summary-count strong{display:block;font-size:clamp(29px,3vw,49px);line-height:1.15}.summary-count span{font-size:clamp(14px,1.05vw,18px);display:block;margin-top:5px}.summary-count.improved{background:var(--green-light);color:var(--green)}.sim-bottom{display:flex;gap:9px;align-items:center;justify-content:space-between}.sim-bottom .small{font-size:clamp(13px,1vw,17px)}
+/* Screen 3: authentic records are never inferred from a simulation. */
+.plan-main{grid-template-columns:minmax(0,1.08fr) minmax(310px,.92fr)}.action-card{display:flex;flex-direction:column;gap:12px;padding:20px 24px;border-top:5px solid var(--green)}.goal-choices{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.goal-btn{display:flex;align-items:center;justify-content:center;gap:7px;background:#f5f7f2;border:2px solid transparent;border-radius:10px;padding:11px 4px;font-size:clamp(17px,1.35vw,23px);font-weight:700;min-height:48px}.goal-btn svg{width:24px;height:24px}.goal-btn[aria-pressed=true]{background:var(--green-light);border-color:var(--green);color:var(--green)}.plan-field{display:block;font-size:clamp(17px,1.2vw,21px);color:var(--muted);line-height:1.4}.plan-field input,.plan-field textarea{display:block;margin-top:6px;color:var(--ink)}.plan-field textarea{height:78px}.plan-field label{display:block}.plan-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}.plan-bottom .text-btn{font-size:clamp(14px,1.15vw,20px)}.record-panel{display:flex;flex-direction:column;gap:17px;padding:20px 24px}.record-panel h3{font-size:clamp(22px,1.9vw,32px);margin:0}.record-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.record-top .small{color:var(--green)}.record-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.record-day{display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 2px;background:#f4f6f0;border-radius:11px;border:2px solid transparent;min-width:0}.record-day .day-label{font-size:clamp(13px,1.05vw,18px);color:var(--muted);white-space:nowrap}.record-day .record-mark{font-size:clamp(27px,2.4vw,40px);line-height:1;font-weight:650}.record-day .record-label{font-size:clamp(12px,.95vw,16px);white-space:nowrap}.record-day[data-state=done]{background:var(--green-light);color:var(--green)}.record-day[data-state=part]{background:#fdf0da;color:#9b6418}.record-day[data-state=miss]{background:#f9e9e3;color:#a75940}.record-day[data-state=na]{background:#eaf0f8;color:#4d688e}.record-stats{font-size:clamp(18px,1.45vw,25px);margin:0;color:var(--ink);line-height:1.5}.evidence-hint{font-size:clamp(15px,1.15vw,20px);color:var(--muted);margin:0;line-height:1.6}.reflection{flex:1;display:flex;flex-direction:column;min-height:0}.reflection textarea{flex:1;min-height:58px;max-height:110px}.record-actions{margin-top:auto;display:flex;gap:9px;flex-wrap:wrap}.record-actions .text-btn{flex:1;padding:10px 8px}.scope-note{font-size:clamp(14px,1.05vw,18px);line-height:1.55;color:var(--muted);margin:0}.record-log{font-size:clamp(14px,1.1vw,19px);line-height:1.5;color:var(--muted);margin:0;max-height:4.5em;overflow:auto}.record-reset{margin-left:auto;color:var(--muted)}
+/* Overlays use a bounded surface; main screens never scroll. */
+.overlay{position:fixed;inset:0;background:rgba(22,43,31,.38);display:flex;align-items:center;justify-content:center;z-index:40;padding:22px}.dialog{width:min(750px,96vw);max-height:88vh;overflow:auto;background:white;border:1px solid #d9e3d6;border-radius:20px;padding:28px;box-shadow:0 20px 70px #14372633}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:16px}.dialog h2{margin:0;font-size:clamp(23px,2vw,32px)}.dialog h3{font-size:21px;margin:22px 0 10px}.dialog p,.dialog li{font-size:18px;line-height:1.7}.dialog p{margin:12px 0}.dialog ul{padding-left:1.4em}.dialog .close{font-size:28px}.record-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}.record-option{font-size:21px;text-align:left;border:2px solid var(--line);border-radius:11px;padding:16px;background:#fff}.record-option[aria-pressed=true]{border-color:var(--green);background:var(--green-light)}.dialog .buttons{display:flex;gap:10px;justify-content:flex-end;margin-top:22px}.notice-toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:#213c30;color:white;border-radius:10px;padding:13px 22px;font-size:18px;box-shadow:0 6px 26px #1c3b2d22;z-index:60;max-width:90vw;text-align:center;pointer-events:none}.print-only{display:none}.rotate-hint{display:none}
+@media(min-width:1700px){#app{grid-template-rows:105px minmax(0,1fr) 76px;padding:0 40px}.page{padding:26px 0 20px;gap:22px}.main-grid{gap:28px}.budget-stage{padding:24px 34px 18px}.budget-controls,.panel{padding:25px}.categories{gap:8px}.category{padding:12px 18px}.editor{padding:20px}.category-note{min-height:66px}.week-stage{padding:28px;gap:24px}.sim-detail{min-height:140px}.week-table{column-gap:12px;row-gap:16px;grid-template-columns:125px repeat(7,minmax(0,1fr))}.action-card,.record-panel{padding:26px 34px;gap:22px}.plan-field input,.plan-field textarea{padding:16px}.plan-field textarea{height:110px}.record-day{padding:22px 3px}.record-actions .text-btn{padding:14px}.tab{padding:15px 20px}}
+@media(max-width:1150px){#app{padding:0 18px;grid-template-rows:72px minmax(0,1fr) 52px}.topbar{gap:12px}.tabs{gap:3px}.tab{padding:10px 11px}.tab span{display:none}.utilities{gap:0}.icon-btn{width:38px;height:40px}.page{padding-top:15px;gap:12px}.main-grid{gap:14px;grid-template-columns:minmax(0,1fr) 280px}.budget-stage{padding:15px}.budget-controls{padding:12px;gap:9px}.category{padding:8px;gap:8px}.category .swatch{width:12px;height:26px}.editor{padding:12px 10px 7px}.week-stage{padding:12px;gap:10px}.week-table{grid-template-columns:70px repeat(7,minmax(0,1fr));column-gap:5px;row-gap:8px}.sim-detail{padding:12px;gap:12px}.detail-copy{padding-left:12px}.sim-controls{padding:15px;gap:12px}.plan-main{grid-template-columns:minmax(0,1fr) minmax(0,.95fr)}.action-card,.record-panel{padding:16px;gap:12px}.record-grid{gap:4px}.goal-btn{gap:4px}.goal-btn svg{width:20px}.footer{padding-left:106px}.footer p{font-size:15px}}
+@media(max-height:700px) and (min-width:800px){#app{grid-template-rows:61px minmax(0,1fr) 44px}.page{padding-top:10px;gap:8px}.intro h2{font-size:24px}.intro .subtle{margin-top:3px;font-size:15px}.topbar h1{font-size:24px}.tab{padding:8px 12px}.budget-stage{padding:10px 15px}.budget-controls{padding:10px;gap:6px}.category{min-height:34px;padding:4px 8px;font-size:17px}.category .value{font-size:18px}.category .swatch{height:22px}.editor{padding:8px 10px 5px}.editor-top strong{font-size:18px}.editor-top output{font-size:25px}.category-note{font-size:13px;min-height:36px;line-height:1.35}.sleep-notice{padding:6px 9px;font-size:13px}.sleep-band{padding-top:6px}.sleep-band strong{font-size:18px}.comparison{min-height:25px}.sim-controls{gap:8px;padding:12px}.sim-controls h3{font-size:20px}.control-label{font-size:17px}.control-label output{font-size:24px}.sim-control{padding-bottom:4px}.switch-label{font-size:17px}.buffer-note{font-size:13px;padding:6px 8px}.week-stage{padding:11px;gap:8px}.week-table{row-gap:6px}.day-head{gap:4px;padding:5px 2px}.day-head svg{width:25px;height:25px}.day-head strong{font-size:15px}.result-cell{min-height:52px;padding:4px}.result-cell .mark{font-size:28px}.result-cell .result-word{font-size:13px}.sim-detail{min-height:75px;padding:9px 12px}.detail-copy{font-size:16px}.summary-count{padding:6px}.summary-count strong{font-size:30px}.action-card,.record-panel{padding:12px 16px;gap:8px}.goal-btn{padding:7px 4px;min-height:40px}.plan-field{font-size:15px}.plan-field input,.plan-field textarea{padding:8px 10px;font-size:17px;margin-top:4px}.plan-field textarea{height:60px}.plan-bottom .small{font-size:12px}.record-panel h3{font-size:23px}.record-day{padding:9px 2px;gap:7px}.record-stats{font-size:18px}.evidence-hint,.scope-note{font-size:13px}.reflection textarea{max-height:65px}.text-btn{min-height:37px;padding:7px 10px;font-size:15px}.record-actions .text-btn{padding:8px}.footer .text-btn{min-height:34px;padding:5px 12px}.record-log{font-size:13px;max-height:3em}}
+@media(min-width:800px) and (max-height:820px) and (min-height:481px){
+.budget-controls{padding:12px;gap:8px}.categories{gap:3px;grid-template-rows:repeat(6,minmax(0,1fr))}.category{padding:5px 9px;min-height:35px;font-size:18px}.category .value{font-size:19px}.category .swatch{height:25px}.editor{padding:10px 11px 7px}.editor-top strong{font-size:19px}.editor-top output{font-size:27px}.category-note{font-size:14px;min-height:39px;margin-top:3px;line-height:1.4}.sleep-notice{font-size:14px;padding:8px 10px}.sim-controls{gap:10px;padding:15px}.sim-controls h3{font-size:23px}.sim-controls input[type=range]{height:31px}.control-label{font-size:19px}.control-label output{font-size:28px}.sim-control{padding-bottom:6px}.sim-controls .small{font-size:14px}.switch-label{font-size:19px}.buffer-note{font-size:14px;padding:8px}.summary-count{padding:9px}.summary-count strong{font-size:34px}.summary-count span{font-size:14px}.action-card,.record-panel{padding:15px 19px;gap:9px}.plan-field{font-size:17px}.plan-field input,.plan-field textarea{font-size:19px;padding:9px 11px;margin-top:5px}.plan-field textarea{height:70px}.goal-btn{padding:9px 4px;min-height:43px}.plan-bottom .small{font-size:13px}.record-panel h3{font-size:25px}.record-top .small{font-size:12px}.record-day{padding:11px 2px;gap:8px}.record-stats{font-size:19px}.record-log,.evidence-hint{font-size:14px}.record-actions .text-btn{font-size:16px;padding:8px}.scope-note{font-size:13px}.reflection textarea{min-height:44px;max-height:75px}
+}
+@media(max-width:799px){#app{padding:0 12px;grid-template-rows:108px minmax(0,1fr) 48px}.topbar{flex-wrap:wrap;justify-content:space-between;gap:3px;padding:10px 0 7px}.topbar h1{font-size:23px}.utilities{margin-left:auto;order:1}.tabs{order:2;width:100%;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.tab{font-size:16px;justify-content:center;padding:9px 4px}.tab span{display:none}.icon-btn{width:35px;height:35px}.intro{gap:10px}.intro h2{font-size:23px}.intro .subtle{font-size:14px;line-height:1.4;margin-top:3px}.intro>.text-btn{font-size:13px;min-height:36px;padding:7px 10px}.page{padding:12px 0 8px;gap:10px}.main-grid{grid-template-columns:1fr;grid-template-rows:minmax(0,1.05fr) minmax(0,.95fr);gap:10px}.budget-stage{padding:12px 16px 8px}.budget-top .status{font-size:19px}.budget-top .small{font-size:12px}.budget-top .text-btn{font-size:13px;padding:7px 10px;min-height:35px}.budget-drawing{position:relative;min-height:100px}.budget-svg{max-height:100%;overflow:hidden}.comparison{min-height:23px;gap:7px;font-size:12px;flex-wrap:nowrap}.compare-strip{height:10px}.sleep-band{padding-top:6px;gap:5px}.sleep-band strong{font-size:17px}.sleep-band .small{font-size:12px}.sleep-band .moon-line{gap:5px}.sleep-band .moon-line svg{width:21px;height:21px}.budget-controls{padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:9px;align-content:stretch}.categories{grid-template-columns:1fr 1fr;gap:3px;grid-column:1 / -1;flex:none}.category{padding:5px 6px;gap:5px;font-size:14px;min-height:33px}.category .value{font-size:15px}.category .label{font-size:14px}.category .swatch{height:20px;width:8px}.editor{grid-column:1 / -1;padding:8px 10px 4px;display:grid;grid-template-columns:1fr 1.25fr;gap:3px 12px}.editor-top strong{font-size:17px}.editor-top output{font-size:23px}.editor .range-row{gap:7px}.step-btn{width:31px;height:31px;font-size:23px}.category-note{grid-column:1 / -1;min-height:0;font-size:12px;line-height:1.4;margin:2px 0}.sleep-notice{grid-column:1 / -1;padding:6px 9px;font-size:12px;line-height:1.4}.footer{padding-left:0;gap:8px}.footer p{font-size:12px;padding-left:0;max-width:75%;line-height:1.4}.footer .text-btn{font-size:13px;padding:6px 10px;min-height:34px}.sim-main{grid-template-rows:minmax(0,1fr) auto}.week-stage{padding:10px;gap:8px}.week-heading strong{font-size:16px}.play-btn{font-size:14px;padding:7px 10px;min-height:36px}.play-btn svg{width:19px;height:19px}.week-table{grid-template-columns:46px repeat(7,minmax(0,1fr));column-gap:3px;row-gap:5px}.week-table .row-label{font-size:14px;line-height:1.4}.week-table .row-label small{font-size:9px}.day-head{gap:3px;padding:5px 1px;border-radius:8px}.day-head .day-num{font-size:11px}.day-head strong{font-size:12px;max-width:2.3em;line-height:1.3}.day-head svg{width:23px;height:23px}.result-cell{min-height:46px;gap:4px;padding:5px 0;border-radius:7px}.result-cell .mark{font-size:24px}.result-cell .result-word{font-size:10px}.sim-detail{min-height:80px;padding:8px;gap:8px}.detail-day strong{font-size:18px}.detail-day span{font-size:10px}.detail-copy{font-size:13px;padding-left:8px;line-height:1.5}.sim-bottom .small{font-size:10px;line-height:1.4}.sim-controls{display:grid;grid-template-columns:1fr 1fr;padding:11px 13px;gap:8px 15px}.sim-controls h3{font-size:18px;grid-column:1 / -1}.sim-control{padding-bottom:0;border:0}.control-label{font-size:14px}.control-label output{font-size:23px}.sim-controls input[type=range]{height:30px}.switch-label{font-size:14px;gap:7px;grid-column:1 / -1}.switch-label input{width:21px;height:21px}.switch-label .small{font-size:11px;margin-top:2px}.buffer-note{grid-column:1 / -1;font-size:11px;padding:6px 8px}.sim-summary{grid-column:1 / -1;gap:9px;grid-template-columns:1fr 1fr}.summary-count{padding:6px 10px;text-align:left;display:flex;align-items:center;gap:8px}.summary-count strong{font-size:25px;display:inline}.summary-count span{font-size:11px;display:inline;margin:0}.plan-main{grid-template-rows:minmax(0,1.1fr) minmax(0,.9fr)}.action-card,.record-panel{padding:12px 14px;gap:7px}.action-card{border-top-width:3px}.goal-choices{gap:5px}.goal-btn{min-height:36px;padding:5px 2px;font-size:14px;gap:4px}.goal-btn svg{width:19px;height:19px}.plan-field{font-size:13px;line-height:1.3}.plan-field input,.plan-field textarea{font-size:16px;padding:7px 10px;margin-top:3px;border-radius:7px}.plan-field textarea{height:58px}.plan-bottom .small{font-size:10px}.plan-bottom .text-btn{font-size:11px;min-height:29px;padding:5px 7px}.record-panel h3{font-size:19px}.record-top .small{font-size:10px}.record-grid{gap:4px}.record-day{padding:7px 1px;gap:5px;border-radius:7px}.record-day .day-label{font-size:10px}.record-day .record-mark{font-size:22px}.record-day .record-label{font-size:9px}.record-stats{font-size:14px}.evidence-hint{font-size:11px;line-height:1.4}.record-log{font-size:11px;max-height:2.9em}.reflection textarea{min-height:36px;max-height:55px}.record-actions .text-btn{font-size:13px;min-height:35px;padding:6px}.scope-note{font-size:10px;line-height:1.4}.dialog{padding:20px}.dialog p,.dialog li{font-size:16px}.record-option{font-size:18px;padding:12px}.notice-toast{font-size:15px;bottom:60px;padding:10px 16px}.compat-badge{left:auto!important;right:7px!important;bottom:3px!important;font-size:8px!important;padding:1px 5px!important}.footer .next-btn{margin-bottom:10px}}
+@media(max-width:799px) and (min-height:920px){.plan-main{grid-template-rows:minmax(0,1.05fr) minmax(0,.95fr)}.action-card,.record-panel{gap:12px;padding:17px}.goal-btn{min-height:44px;font-size:17px}.plan-field{font-size:16px}.plan-field input,.plan-field textarea{font-size:18px;padding:10px}.plan-field textarea{height:68px}.record-panel h3{font-size:23px}.record-day{padding:10px 2px}.record-stats{font-size:17px}.record-log{font-size:13px}.evidence-hint{font-size:13px}.budget-controls{padding:14px}.category{font-size:17px;padding:8px}.category .label{font-size:17px}.category .value{font-size:18px}.sleep-notice{font-size:14px}.category-note{font-size:14px}.day-head strong{font-size:14px;max-width:4em}.day-head svg{width:30px;height:30px}.result-cell .result-word{font-size:13px}.week-table{grid-template-columns:65px repeat(7,minmax(0,1fr))}.week-table .row-label{font-size:17px}.detail-copy{font-size:16px}.sim-controls{padding:17px;gap:13px}.control-label{font-size:18px}.switch-label{font-size:17px}.buffer-note{font-size:13px}}
+@media(max-width:799px) and (max-height:740px){#app{grid-template-rows:94px minmax(0,1fr) 40px}.topbar h1{font-size:20px}.tab{font-size:14px;padding:7px 2px}.page{padding-top:8px;gap:7px}.intro h2{font-size:19px}.intro .subtle{font-size:12px}.main-grid{gap:7px}.budget-stage{padding:8px 10px 6px}.budget-top .status{font-size:16px}.budget-top .small{display:none}.budget-top .text-btn{font-size:11px;min-height:30px}.comparison{display:none}.sleep-band .small{font-size:10px}.sleep-band strong{font-size:14px}.budget-controls{padding:7px;gap:5px}.category{min-height:28px;padding:2px 5px}.category .label,.category .value{font-size:13px}.editor{padding:5px 7px;gap:0 8px}.editor-top strong{font-size:14px}.editor-top output{font-size:20px}.category-note{font-size:10px}.sleep-notice{font-size:10px;padding:4px 6px}.sim-controls{gap:5px 10px;padding:7px 10px}.sim-controls h3{font-size:15px}.sim-controls input[type=range]{height:23px}.switch-label{font-size:12px}.switch-label .small{font-size:10px}.buffer-note{font-size:10px;padding:4px 6px}.summary-count strong{font-size:21px}.summary-count{padding:4px 7px}.week-heading strong{font-size:14px}.day-head svg{display:none}.day-head strong{font-size:11px}.result-cell{min-height:32px;padding:2px;gap:2px}.result-cell .mark{font-size:19px}.result-cell .result-word{font-size:9px}.sim-detail{min-height:62px}.detail-copy{font-size:11px}.sim-bottom{display:none}.plan-main{grid-template-rows:minmax(0,1fr) minmax(0,.95fr)}.action-card,.record-panel{padding:8px 10px;gap:5px}.goal-btn{min-height:30px;font-size:12px;padding:3px}.goal-btn svg{width:16px}.plan-field{font-size:11px}.plan-field input,.plan-field textarea{font-size:13px;padding:5px 8px}.plan-field textarea{height:43px}.plan-bottom .small{font-size:9px}.plan-bottom .text-btn{font-size:10px;min-height:24px;padding:3px 5px}.record-panel h3{font-size:16px}.record-day{padding:4px 1px;gap:3px}.record-stats{font-size:12px}.record-log{display:none}.reflection textarea{min-height:26px;max-height:35px}.record-actions .text-btn{min-height:30px;font-size:11px;padding:4px}.evidence-hint{font-size:10px}.footer p{font-size:10px}.scope-note{font-size:9px}.footer .text-btn{font-size:11px;min-height:30px}}
+@media(max-height:480px) and (min-width:700px){#app{grid-template-rows:49px minmax(0,1fr) 34px;padding:0 12px}.topbar h1{font-size:19px}.topbar{gap:8px}.tabs{margin-left:auto}.tab{font-size:13px;padding:7px 8px}.tab span{display:none}.utilities .icon-btn{width:31px;height:31px}.page{padding:7px 0 5px;gap:6px}.intro h2{font-size:19px}.intro .subtle{display:none}.main-grid{grid-template-columns:minmax(0,1fr) 255px;gap:9px}.categories{grid-template-columns:1fr 1fr;gap:2px}.category{font-size:12px;padding:3px;min-height:25px;gap:4px}.category .label,.category .value{font-size:12px}.category .swatch{width:6px;height:16px}.editor{padding:5px 8px}.editor-top strong{font-size:14px}.editor-top output{font-size:19px}.editor .range-row input{height:25px}.step-btn{width:28px;height:28px;font-size:21px}.category-note{font-size:10px;min-height:25px}.sleep-notice{font-size:10px;padding:4px 6px}.budget-controls{gap:5px;padding:7px}.budget-top .status{font-size:17px}.budget-top .small{display:none}.budget-stage{padding:8px 10px}.comparison{display:none}.sleep-band{padding-top:4px}.sleep-band strong{font-size:14px}.sleep-band .small{font-size:10px}.sleep-band svg{width:19px!important;height:19px!important}.intro>.text-btn{padding:4px 8px;min-height:29px;font-size:12px}.week-stage{padding:7px;gap:5px}.week-heading strong{font-size:13px}.play-btn{font-size:12px;min-height:27px;padding:4px 7px}.play-btn svg{width:16px;height:16px}.week-table{grid-template-columns:49px repeat(7,minmax(0,1fr));gap:4px}.week-table .row-label{font-size:12px}.day-head{padding:3px 1px;gap:2px}.day-head svg{display:none}.day-head .day-num{font-size:9px}.day-head strong{font-size:10px}.result-cell{min-height:30px;padding:3px;gap:3px}.result-cell .mark{font-size:19px}.result-cell .result-word{font-size:9px}.sim-detail{min-height:50px;padding:6px}.detail-day strong{font-size:16px}.detail-day span{font-size:9px}.detail-copy{font-size:11px}.sim-bottom{display:none}.sim-controls{padding:8px;gap:6px}.sim-controls h3{font-size:17px}.control-label{font-size:12px}.control-label output{font-size:20px}.sim-controls input[type=range]{height:22px}.switch-label{font-size:12px;gap:7px}.switch-label .small{font-size:9px;margin-top:3px}.switch-label input{width:19px;height:19px}.buffer-note{font-size:10px;padding:4px 6px}.summary-count{display:flex;align-items:center;gap:6px;padding:5px}.summary-count strong{font-size:21px}.summary-count span{font-size:9px;margin:0}.plan-main{grid-template-columns:1fr 1fr}.action-card,.record-panel{padding:7px 10px;gap:5px}.goal-btn{min-height:28px;padding:3px;font-size:12px}.goal-btn svg{width:15px;height:15px}.plan-field{font-size:10px}.plan-field input,.plan-field textarea{font-size:12px;padding:4px 7px;margin-top:2px}.plan-field textarea{height:39px}.plan-bottom .small{font-size:9px}.plan-bottom .text-btn{font-size:10px;min-height:24px;padding:3px 6px}.record-panel h3{font-size:17px}.record-top .small{font-size:9px}.record-day{padding:4px 1px;gap:4px}.record-day .day-label{font-size:9px}.record-day .record-mark{font-size:18px}.record-day .record-label{font-size:8px}.record-stats{font-size:12px}.evidence-hint,.record-log{font-size:10px}.record-log{max-height:1.5em}.reflection textarea{max-height:37px;min-height:25px}.record-actions .text-btn{font-size:11px;min-height:27px;padding:4px}.scope-note{font-size:9px}.footer{padding-left:103px}.footer p{font-size:10px}.footer .text-btn{font-size:11px;min-height:27px;padding:4px 8px}.compat-badge{font-size:9px!important;padding:2px 5px!important;bottom:5px!important}}
+@media(max-height:480px) and (min-width:700px){.sim-controls{display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:5px 9px;padding:7px 9px}.sim-controls h3,.switch-label,.buffer-note,.sim-summary{grid-column:1 / -1}.sim-control{border:0}.sim-control .small{font-size:9px;line-height:1.3}.sim-controls .switch-label{line-height:1.25}.sim-summary{margin-top:0}.control-label{font-size:11px;display:block}.control-label output{font-size:18px;margin-left:4px}.summary-count{padding:4px}.page{min-height:0}.record-log{display:none}.record-panel{gap:4px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{body{overflow:visible;background:#fff}#app,.overlay,.notice-toast,.compat-badge{display:none!important}.print-only{display:block!important;color:#172a20;font-family:var(--font);padding:15mm}h1{white-space:normal}.print-only h1{font-size:26pt;margin:0 0 7mm}.print-only h2{font-size:17pt}.print-only p{font-size:13pt;line-height:1.8;white-space:pre-wrap}.print-only table{border-collapse:collapse;width:100%;margin-top:8mm}.print-only th,.print-only td{border:1px solid #9bac9e;padding:3mm;font-size:11pt;text-align:left}.print-only .print-note{font-size:10pt;color:#555}.print-only .print-field{border-bottom:1px solid #c8d0c7;padding:3mm 0} @page{size:A4;margin:10mm}}
+</style>
+</head>
+<body>
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-moon" viewBox="0 0 32 32"><path d="M25 21A12 12 0 0 1 11 6a12 12 0 1 0 14 15Z" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/><path d="M21 4v6m-3-3h6m3 6v4m-2-2h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+<symbol id="i-sun" viewBox="0 0 32 32"><circle cx="16" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 2v4m0 20v4M2 16h4m20 0h4M6 6l3 3m14 14 3 3M6 26l3-3M23 9l3-3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+<symbol id="i-rain" viewBox="0 0 32 32"><path d="M8 20a6 6 0 0 1 0-12 8 8 0 0 1 15-1 6.5 6.5 0 1 1 2 13Z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m10 24-2 4m10-4-2 4m10-4-2 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+<symbol id="i-clock" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+<symbol id="i-block" viewBox="0 0 32 32"><rect x="5" y="5" width="22" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m9 9 14 14M23 9 9 23" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+<symbol id="i-bag" viewBox="0 0 32 32"><rect x="5" y="10" width="22" height="17" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11 10V7a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v3M5 17h22M13 15v5h6v-5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+<symbol id="i-walk" viewBox="0 0 32 32"><circle cx="19" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m9 14 7-4 5 7 6 1M16 10l-3 11-5 8m5-8 7 3 1 6" stroke="currentColor" stroke-width="2.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-food" viewBox="0 0 32 32"><path d="M5 17h22c-1 8-5 11-11 11S6 25 5 17ZM3 17h26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M13 15C5 9 10 4 16 10c0-7 8-8 9-4 1 5-5 8-9 9M15 10l1 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></symbol>
+<symbol id="i-heart" viewBox="0 0 32 32"><path d="M16 27C4 20 2 13 5 8c3-5 8-4 11 0 3-4 8-5 11 0 3 5 1 12-11 19Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></symbol>
+<symbol id="i-full" viewBox="0 0 32 32"><path d="M12 4H4v8m16-8h8v8M4 20v8h8m16-8v8h-8" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-info" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 14v10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="9" r="1.6" fill="currentColor"/></symbol>
+<symbol id="i-play" viewBox="0 0 32 32"><path d="m11 5 15 11-15 11Z" fill="currentColor"/></symbol>
+<symbol id="i-pause" viewBox="0 0 32 32"><path d="M9 6h5v20H9zm9 0h5v20h-5z" fill="currentColor"/></symbol>
+<symbol id="i-check" viewBox="0 0 32 32"><path d="m6 16 7 7L27 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<div id="app">
+<header class="topbar">
+<h1>制订健康生活计划</h1>
+<nav class="tabs" role="tablist" aria-label="探究任务">
+<button class="tab" id="tab-0" role="tab" aria-controls="page-0" aria-selected="true" data-page="0"><span>1</span>安排一天</button>
+<button class="tab" id="tab-1" role="tab" aria-controls="page-1" aria-selected="false" tabindex="-1" data-page="1"><span>2</span>试过一周</button>
+<button class="tab" id="tab-2" role="tab" aria-controls="page-2" aria-selected="false" tabindex="-1" data-page="2"><span>3</span>我的行动</button>
+</nav>
+<div class="utilities"><button class="icon-btn" id="info-btn" title="课堂使用与模型说明" aria-label="课堂使用与模型说明"><svg><use href="#i-info" xlink:href="#i-info" xmlns:xlink="http://www.w3.org/1999/xlink"/></svg></button><button class="icon-btn" id="full-btn" title="全屏" aria-label="进入全屏"><svg><use href="#i-full" xlink:href="#i-full" xmlns:xlink="http://www.w3.org/1999/xlink"/></svg></button></div>
+</header>
+<main style="min-height:0">
+<section id="page-0" class="page active" role="tabpanel" aria-labelledby="tab-0">
+ <div class="intro"><div><h2>一天只有24小时，怎样安排？</h2><p class="subtle">先看一份待调整的示例，再为自己的计划留出时间。</p></div><button class="text-btn" id="reset-budget">恢复示例</button></div>
+ <div class="main-grid">
+  <div class="stage sheet budget-stage">
+   <div class="budget-top"><div><div class="status" id="budget-status" aria-live="polite"></div><p class="small" id="budget-kind">按时长分配，不代表活动的先后顺序。</p></div><button class="text-btn" id="snapshot-budget">留作对照</button></div>
+   <div class="budget-drawing"><svg id="budget-svg" class="budget-svg" viewBox="0 0 680 470" role="group" aria-label="24小时时间预算，可点选色块调整"></svg></div>
+   <div class="comparison" id="comparison"></div>
+   <div class="sleep-band"><div class="moon-line"><svg><use href="#i-moon" xlink:href="#i-moon" xmlns:xlink="http://www.w3.org/1999/xlink"/></svg><strong id="sleep-window"></strong></div><p class="small">示例按次日7:00起床倒推<br>预留时间≠实际睡着时间</p></div>
+  </div>
+  <aside class="sheet budget-controls" aria-label="调节各项时间">
+   <div class="categories" id="categories"></div>
+   <div class="editor"><div class="editor-top"><strong id="selected-label">睡眠</strong><output id="selected-value" for="budget-range"></output></div><div class="range-row"><button class="step-btn" id="budget-minus" aria-label="减少15分钟">−</button><input type="range" id="budget-range" min="360" max="720" step="15" value="540" aria-label="睡眠时间"><button class="step-btn" id="budget-plus" aria-label="增加15分钟">+</button></div><p class="category-note" id="category-note"></p></div>
+   <p id="sleep-notice" class="sleep-notice"></p>
+  </aside>
+ </div>
+</section>
+<section id="page-1" class="page" role="tabpanel" aria-labelledby="tab-1" hidden>
+ <div class="intro"><div class="sim-intro"><h2>同样的一周，预案会带来什么变化？</h2><p class="subtle">情境演练：放学后做一项适合自己的活动。</p></div><button class="text-btn" id="sim-reset">重新推演</button></div>
+ <div class="main-grid sim-main">
+  <div class="stage sheet week-stage">
+   <div class="week-heading"><strong>先预测，再试运行</strong><button class="text-btn primary play-btn" id="play-week"><svg><use href="#i-play" xlink:href="#i-play" xmlns:xlink="http://www.w3.org/1999/xlink"/></svg><span>试过一周</span></button></div>
+   <div class="week-table" id="week-table" role="group" aria-label="同一组情境下的两种计划"></div>
+   <div class="sim-detail" id="sim-detail" aria-live="polite"></div>
+   <div class="sim-bottom"><p class="small">○ 可安排　↗ 启用预案　△ 待调整</p><p class="small">只检验时间与场地；不预测健康效果。</p></div>
+  </div>
+  <aside class="sheet panel sim-controls">
+   <h3>一次只改一个条件</h3>
+   <div class="sim-control"><label class="control-label" for="duration-range">活动时长 <output id="duration-value"></output></label><input id="duration-range" type="range" min="10" max="60" step="5" value="20"><p class="small">两份计划保持相同时长。</p></div>
+   <div class="sim-control"><label class="control-label" for="buffer-range">机动时间 <output id="buffer-value"></output></label><input id="buffer-range" type="range" min="0" max="30" step="5" value="0"></div>
+   <label class="switch-label"><input type="checkbox" id="indoor-switch"><span>备好室内活动<span class="small">确认空间安全，活动适合自己。</span></span></label>
+   <p class="buffer-note" id="buffer-note"></p>
+   <div class="sim-summary" aria-live="polite"><div class="summary-count"><strong id="base-count">—</strong><span>原计划可安排</span></div><div class="summary-count improved"><strong id="new-count">—</strong><span>加入预案后</span></div></div>
+  </aside>
+ </div>
+</section>
+<section id="page-2" class="page" role="tabpanel" aria-labelledby="tab-2" hidden>
+ <div class="intro"><div><h2>从一件小事开始，把计划带进生活。</h2><p class="subtle">明确行动、触发时机和预案，再用真实记录改进。</p></div></div>
+ <div class="main-grid plan-main">
+  <div class="sheet action-card">
+   <div id="goal-choices" class="goal-choices" role="group" aria-label="选择一个小目标"></div>
+   <label class="plan-field">我要做的一件小事<input id="action-input" type="text" maxlength="68" autocomplete="off" aria-label="我要做的一件小事"></label>
+   <label class="plan-field">什么时候，或遇到什么情况<input id="trigger-input" type="text" maxlength="60" autocomplete="off" aria-label="行动触发时机"></label>
+   <label class="plan-field">遇到困难，我准备这样调整<textarea id="backup-input" maxlength="140" aria-label="备用方案"></textarea></label>
+   <div class="plan-bottom"><p class="small" id="goal-note"></p><button id="use-sim" class="text-btn">采用演练方案</button></div>
+  </div>
+  <div class="sheet record-panel">
+   <div class="record-top"><h3>我的7天真实记录</h3><span class="small" id="save-status">保存在本机</span></div>
+   <div class="record-grid" id="record-grid" aria-label="真实行动记录"></div>
+   <p class="record-stats" id="record-stats"></p>
+   <p class="evidence-hint">点一天，记下真实情况。演练结果不会填到这里。</p>
+   <p id="record-log" class="record-log"></p>
+   <label class="plan-field reflection">看过记录，我想调整……<textarea id="reflection-input" maxlength="160" placeholder="哪种困难出现得多？下一步怎么改？" aria-label="根据记录调整计划"></textarea></label>
+   <div class="record-actions"><button class="text-btn primary" id="export-card">保存计划卡</button><button class="text-btn" id="print-card">打印</button><button class="text-btn record-reset" id="clear-records">清空记录</button></div>
+   <p class="scope-note">先改一件事，也要照顾膳食、睡眠、运动与情绪。</p>
+  </div>
+ </div>
+</section>
+</main>
+<footer class="footer"><p id="footer-question">多安排了半小时，准备从哪里调整？</p><button class="text-btn next-btn" id="next-page">试过一周 →</button></footer>
+</div>
+<div class="overlay" id="info-overlay" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="info-title" tabindex="-1"><div class="dialog-head"><h2 id="info-title">让计划经得起生活的检验</h2><button class="icon-btn close" data-close="info-overlay" aria-label="关闭说明">×</button></div>
+ <p>六年级上册第一单元第7课《制订健康生活计划》。依据教材第26—29页、教师用书第120—132页设计。</p>
+ <h3>课堂怎样用</h3><p>先让学生在纸上写出一件想改变的小事，再用时间沙盘检查取舍。推演前请预测；比较时保持七天情境与活动时长不变，一次改变一个预案。最后把计划带回生活，真实记录后再修订。</p>
+ <h3>时间沙盘的边界</h3><ul><li>六类时间不重复计数。在校时间已含校内午餐、课间和体育；“校外起居”是校外吃饭、洗漱、路程等。</li><li>初始9小时睡眠是一份待调整的示例。小学睡眠参考为每天10小时；本页只计算预留时间，不预测实际入睡。</li><li>总和不超过24小时，只通过了时间总量检查；还要核对具体时段、转换和路程。休息、玩耍和交往也有价值。</li></ul>
+ <h3>七天情境的边界</h3><ul><li>所有事件与时长都是可替换的课堂虚构条件。20分钟是一个校外小行动示例，不是全天运动建议。</li><li>机动时间从第1页的自由安排中预留，各天可挪出的上限不同；不会多出一天的时间，也不挤占睡眠和吃饭。</li><li>室内预案只在有安全场地时可用。室内、户外活动的价值和强度并不等同。时间或条件仍不满足时，允许保留“待调整”。</li><li>这里比较“是否有条件安排”，不等于已经完成，不计算健康分数。</li></ul>
+ <h3>记录与保存</h3><p>每类目标有独立的行动卡和记录，每条记录保留当时的计划。只有自己输入的内容才会成为真实记录，平静的一天可给情绪计划记“无需启用”。数据仅在当前浏览器本机保存，不上传。共用一体机请在展示个人信息前考虑是否合适。浏览器清理数据会丢失记录，可保存计划卡或打印带走。</p>
+ <p>参考：<a href="https://hudong.moe.gov.cn/srcsite/A06/s3321/202104/t20210401_523901.html" target="_blank" rel="noopener noreferrer">教育部《关于进一步加强中小学生睡眠管理工作的通知》</a>。网页运行无需联网，链接仅供教师查阅。</p>
+ <div class="buttons"><button class="text-btn primary" data-close="info-overlay">回到探究</button></div>
+</div></div>
+<div class="overlay" id="record-overlay" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="record-title" tabindex="-1"><div class="dialog-head"><h2 id="record-title">第1天，实际发生了什么？</h2><button class="icon-btn close" data-close="record-overlay" aria-label="关闭记录">×</button></div><p id="record-action" class="small"></p><div class="record-options" id="record-options"></div><label class="plan-field" for="reason-select">遇到的情况（可不填）</label><select id="reason-select"><option value="">未填写</option><option>时间冲突</option><option>场地或材料变化</option><option>忘记了</option><option>需要休息或身体不适</option><option>需要他人帮助</option><option>其他情况</option></select><label class="plan-field" style="margin-top:13px">一条真实证据（可不填）<input id="record-note" type="text" maxlength="100" placeholder="做了什么、用了多久，或为什么调整" autocomplete="off"></label><div class="buttons"><button class="text-btn" id="record-unset">撤回这天记录</button><button class="text-btn primary" id="record-save">记下这一刻</button></div></div></div>
+<div class="overlay" id="confirm-overlay" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title" tabindex="-1"><div class="dialog-head"><h2 id="confirm-title">清空这类目标的记录？</h2><button class="icon-btn close" data-close="confirm-overlay" aria-label="取消">×</button></div><p>将清空当前目标的7天记录和反思，保留行动计划。其他目标的记录不受影响。</p><div class="buttons"><button class="text-btn" data-close="confirm-overlay">保留记录</button><button class="text-btn primary" id="confirm-clear">清空当前记录</button></div></div></div>
+<div id="toast" class="notice-toast" role="status" hidden></div>
+<div class="print-only" id="print-output"></div>
+<script>
+/*
+ * HealthPlanModel v1.0.0 — 六上1.7《制订健康生活计划》
+ * ES5, no dependencies, no network, no persistence.
+ * All times are minutes. These are fictional classroom scheduling scenarios,
+ * not forecasts of health outcomes or records of a student's real behaviour.
+ */
+(function (root) {
+  'use strict';
+
+  var DAY_MINUTES = 1440;
+  var SLEEP_REFERENCE = 600;
+  var budgetConfig = [
+    { id: 'sleep', label: '睡眠', value: 540, color: '#7869c8', note: '为睡眠预留的时间，不等于实际睡着时长。默认9小时是待调整示例。' },
+    { id: 'school', label: '在校全部活动', value: 420, color: '#7e9dad', note: '已含在校午餐、课间与运动，不在其他类别重复计算。' },
+    { id: 'study', label: '校外学习', value: 120, color: '#dca34b', note: '仅统计校外学习时间。' },
+    { id: 'activity', label: '校外活动', value: 30, color: '#409c83', note: '仅统计校外活动；一个小行动的时长不能代表全天运动量。' },
+    { id: 'living', label: '校外起居', value: 120, color: '#dc8a74', note: '校外吃饭、洗漱、通勤等；不重复统计在校起居。' },
+    { id: 'free', label: '自由安排', value: 210, color: '#82b6c5', note: '可包含休息、玩耍和交往；预案机动时间从这里预留。' }
+  ];
+
+  var scenarios = [
+    { id: 'day1', day: 1, title: '普通一天', window: 40, outdoor: true, indoor: true, bufferCap: 20, description: '原定时段有40分钟，户外场地可用；另有最多20分钟自由时间可前后调配。' },
+    { id: 'day2', day: 2, title: '下雨了', window: 30, outdoor: false, indoor: true, bufferCap: 15, description: '原定时段有30分钟，户外活动暂停；预先确认的安全室内场地可用。' },
+    { id: 'day3', day: 3, title: '回家晚了', window: 10, outdoor: true, indoor: true, bufferCap: 15, description: '原定时段只剩10分钟，场地可用；当天最多能调配15分钟自由时间。' },
+    { id: 'day4', day: 4, title: '场地被占', window: 25, outdoor: false, indoor: true, bufferCap: 15, description: '原定时段有25分钟，户外场地被占用；预先确认的安全室内场地可用。' },
+    { id: 'day5', day: 5, title: '临时有事', window: 15, outdoor: true, indoor: true, bufferCap: 10, description: '原定时段只剩15分钟，场地可用；当天最多能调配10分钟自由时间。' },
+    { id: 'day6', day: 6, title: '全家外出', window: 0, outdoor: false, indoor: false, bufferCap: 0, description: '原定时段无法安排活动，也没有已确认可用的替代场地；需要和家人另行商量。' },
+    { id: 'day7', day: 7, title: '自由安排', window: 50, outdoor: true, indoor: true, bufferCap: 20, description: '原定时段有50分钟，场地可用；另有最多20分钟自由时间可前后调配。' }
+  ];
+
+  function finiteNumber(value) {
+    if (typeof value !== 'number' && typeof value !== 'string') { return null; }
+    if (typeof value === 'string' && !/^-?\d+(?:\.\d+)?$/.test(value)) { return null; }
+    var n = Number(value);
+    return isFinite(n) ? n : null;
+  }
+
+  function defaultBudget() {
+    var result = {};
+    var i;
+    for (i = 0; i < budgetConfig.length; i += 1) {
+      result[budgetConfig[i].id] = budgetConfig[i].value;
+    }
+    return result;
+  }
+
+  /* values is an object keyed by the six ids. Omitted keys use defaults.
+   * remaining is SIGNED (negative means overbooked); over is never negative.
+   * validTime means no invalid input and no overbooking, not proof that the
+   * time-of-day, location, sleep quality or all other conditions are suitable.
+   */
+  function calculateBudget(values) {
+    var input = values || {};
+    var normalized = {};
+    var errors = [];
+    var sum = 0;
+    var i;
+    for (i = 0; i < budgetConfig.length; i += 1) {
+      var entry = budgetConfig[i];
+      var raw = Object.prototype.hasOwnProperty.call(input, entry.id) ? input[entry.id] : entry.value;
+      var value = finiteNumber(raw);
+      if (value === null || value < 0) {
+        errors.push(entry.label + '的时间须为非负数。');
+        value = 0;
+      }
+      normalized[entry.id] = value;
+      sum += value;
+    }
+    return {
+      values: normalized,
+      sum: sum,
+      remaining: DAY_MINUTES - sum,
+      unallocated: Math.max(0, DAY_MINUTES - sum),
+      over: Math.max(0, sum - DAY_MINUTES),
+      plannedSleepShort: Math.max(0, SLEEP_REFERENCE - normalized.sleep),
+      validInput: errors.length === 0,
+      validTime: errors.length === 0 && sum <= DAY_MINUTES,
+      isFull: errors.length === 0 && sum === DAY_MINUTES,
+      errors: errors
+    };
+  }
+
+  function formatMinutes(minutes) {
+    var n = finiteNumber(minutes);
+    if (n === null) { return '—'; }
+    var sign = n < 0 ? '−' : '';
+    n = Math.round(Math.abs(n));
+    var hours = Math.floor(n / 60);
+    var rest = n % 60;
+    return sign + (hours ? hours + '小时' : '') + (rest || !hours ? rest + '分钟' : '');
+  }
+
+  /* Returns a clock label, e.g. nightStart(420, 600) === '21:00'.
+   * Wake time defaults to 07:00. This subtracts a PLANNED sleep interval;
+   * it does not claim that going to bed means falling asleep immediately.
+   */
+  function nightStart(wakeMinutes, sleepMinutes) {
+    var wake = typeof wakeMinutes === 'undefined' ? 420 : finiteNumber(wakeMinutes);
+    var sleep = typeof sleepMinutes === 'undefined' ? 540 : finiteNumber(sleepMinutes);
+    if (wake === null || sleep === null || sleep < 0) { return '—'; }
+    var start = ((Math.round(wake - sleep) % DAY_MINUTES) + DAY_MINUTES) % DAY_MINUTES;
+    var hours = Math.floor(start / 60);
+    var minutes = start % 60;
+    return (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+  }
+
+  /* Prefer passing one of scenarios[] directly. Numeric days are ONE-based. */
+  function resolveDay(day) {
+    if (day && typeof day === 'object') { return day; }
+    var i;
+    for (i = 0; i < scenarios.length; i += 1) {
+      if (day === scenarios[i].day || day === scenarios[i].id) { return scenarios[i]; }
+    }
+    return null;
+  }
+
+  function evaluateDay(day, plan, budgetValues) {
+    var event = resolveDay(day);
+    var input = plan || {};
+    var duration = typeof input.duration === 'undefined' ? 20 : finiteNumber(input.duration);
+    var buffer = typeof input.buffer === 'undefined' ? 0 : finiteNumber(input.buffer);
+    var allowIndoor = input.indoor === true;
+    var budget = calculateBudget(budgetValues);
+    var base = event ? finiteNumber(event.window) : null;
+    var cap = event ? finiteNumber(event.bufferCap) : null;
+    var result = {
+      dayId: event ? event.id : null,
+      day: event ? event.day : null,
+      title: event ? event.title : '',
+      kind: 'blocked',
+      code: '',
+      reason: '',
+      duration: duration,
+      baseMinutes: base === null ? 0 : base,
+      availableMinutes: base === null ? 0 : base,
+      bufferAvailable: 0,
+      bufferUsed: 0,
+      bufferReserved: buffer === null ? 0 : buffer,
+      bufferSource: 'free',
+      usesIndoor: false,
+      venue: null,
+      plannedSleepShort: budget.plannedSleepShort
+    };
+
+    function blocked(code, reason) {
+      result.code = code;
+      result.reason = reason;
+      return result;
+    }
+
+    if (!event || base === null || cap === null || base < 0 || cap < 0) {
+      return blocked('invalid_scenario', '情境数据需要检查。');
+    }
+    if (duration === null || duration < 10 || duration > 60 || buffer === null || buffer < 0 || buffer > 30) {
+      return blocked('invalid_plan', '请把小行动设为10—60分钟，机动时间设为0—30分钟。');
+    }
+    if (!budget.validInput) {
+      return blocked('invalid_budget', budget.errors.join(''));
+    }
+    if (budget.over > 0) {
+      return blocked('overbooked', '一天已经超出' + formatMinutes(budget.over) + '，请先调整时间预算。');
+    }
+    if (budget.values.activity < duration) {
+      return blocked('activity_short', '校外活动只安排了' + formatMinutes(budget.values.activity) + '，放不下' + formatMinutes(duration) + '的小行动。');
+    }
+    if (budget.values.free < buffer) {
+      return blocked('buffer_short', '自由安排只有' + formatMinutes(budget.values.free) + '，不能再预留' + formatMinutes(buffer) + '机动时间。');
+    }
+
+    result.bufferAvailable = Math.min(buffer, cap);
+    result.availableMinutes = base + result.bufferAvailable;
+
+    if (event.outdoor === true && base >= duration) {
+      result.kind = 'ok';
+      result.code = 'original_possible';
+      result.venue = 'outdoor';
+      result.reason = '户外场地可用，原定时段有' + formatMinutes(base) + '，可以安排。';
+      return result;
+    }
+
+    if (event.outdoor !== true && !(allowIndoor && event.indoor === true)) {
+      if (event.indoor !== true) {
+        return blocked('no_venue', '没有已确认可用的户外或室内场地，需要另行商量，预案不能强行变出条件。');
+      }
+      return blocked('indoor_not_enabled', '户外场地不可用；这里有合适的室内场地，但原计划没有准备这种替代方式。');
+    }
+
+    if (result.availableMinutes < duration) {
+      return blocked('time_short', '原定时段' + formatMinutes(base) + '，加上当天可用的机动时间' + formatMinutes(result.bufferAvailable) + '，仍少' + formatMinutes(duration - result.availableMinutes) + '。');
+    }
+
+    result.kind = 'backup';
+    result.code = 'backup_possible';
+    result.usesIndoor = event.outdoor !== true;
+    result.venue = result.usesIndoor ? 'indoor' : 'outdoor';
+    result.bufferUsed = Math.max(0, duration - base);
+    var methods = [];
+    if (result.usesIndoor) { methods.push('改用预先确认安全的室内活动'); }
+    if (result.bufferUsed > 0) { methods.push('从自由安排中调配' + formatMinutes(result.bufferUsed)); }
+    result.reason = methods.join('，') + '，可以保留' + formatMinutes(duration) + '的小行动。';
+    return result;
+  }
+
+  function evaluateWeek(plan, budgetValues) {
+    var result = [];
+    var i;
+    for (i = 0; i < scenarios.length; i += 1) {
+      result.push(evaluateDay(scenarios[i], plan, budgetValues));
+    }
+    return result;
+  }
+
+  function summarize(results) {
+    var counts = { feasible: 0, primary: 0, backup: 0, blocked: 0 };
+    var i;
+    for (i = 0; i < results.length; i += 1) {
+      if (results[i].kind === 'ok') { counts.primary += 1; counts.feasible += 1; }
+      else if (results[i].kind === 'backup') { counts.backup += 1; counts.feasible += 1; }
+      else { counts.blocked += 1; }
+    }
+    return counts;
+  }
+
+  function compareWeek(plan, budgetValues) {
+    var input = plan || {};
+    var duration = typeof input.duration === 'undefined' ? 20 : input.duration;
+    var original = evaluateWeek({ duration: duration, buffer: 0, indoor: false }, budgetValues);
+    var revised = evaluateWeek(input, budgetValues);
+    return {
+      original: original,
+      revised: revised,
+      originalSummary: summarize(original),
+      revisedSummary: summarize(revised)
+    };
+  }
+
+  var api = {
+    version: '1.0.0',
+    DAY_MINUTES: DAY_MINUTES,
+    SLEEP_REFERENCE: SLEEP_REFERENCE,
+    budgetConfig: budgetConfig,
+    scenarios: scenarios,
+    scenarioNotice: '七天均为虚构的课堂情境，只检验时间和场地条件，不代表真实执行记录，也不预测健康效果。',
+    bufferNotice: '机动时间从已有自由安排中预留；每天可调配的时间不同，不增加一天总时长，也不挤占睡眠、吃饭或在校活动。',
+    defaultBudget: defaultBudget,
+    calculateBudget: calculateBudget,
+    formatMinutes: formatMinutes,
+    nightStart: nightStart,
+    evaluateDay: evaluateDay,
+    evaluateWeek: evaluateWeek,
+    compareWeek: compareWeek,
+    summarize: summarize
+  };
+
+  root.HealthPlanModel = api;
+  if (typeof module !== 'undefined' && module.exports) { module.exports = api; }
+}(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this)));
+
+</script>
+<script>
+(function(){'use strict';
+var M=window.HealthPlanModel;
+if(!M){document.body.innerHTML='<p style="font-size:24px;padding:30px">课件模型未加载，请重新下载完整HTML。</p>';return;}
+var $=function(id){return document.getElementById(id);};
+var NS='http://www.w3.org/2000/svg';
+var STORAGE='science-grade6-health-plan-v1';
+var cats=[
+ {id:'sleep',label:'睡眠',short:'睡眠',color:'#8585c8',min:360,max:720,note:'睡前准备不算睡着。为睡眠留出充足时间，再安排其他事。'},
+ {id:'school',label:'在校全部活动',short:'在校',color:'#5b9ca6',min:0,max:600,note:'包含在校学习、午餐、课间和体育，其他类别不要再重复计算。'},
+ {id:'study',label:'校外学习',short:'学习',color:'#dda964',min:0,max:240,note:'作业与自主学习的示例预算；遇到冲突，可与老师、家长一起协调。'},
+ {id:'activity',label:'校外活动',short:'活动',color:'#69a881',min:0,max:180,note:'仅计校外的活动时间，不重复计入校内体育。下一页的小行动从这里安排。'},
+ {id:'living',label:'校外起居',short:'起居',color:'#d6977f',min:60,max:300,note:'校外吃饭、洗漱、路程、家务等；这里不包括睡眠与在校午餐。'},
+ {id:'free',label:'自由安排',short:'自由',color:'#a2b8a3',min:0,max:480,note:'给休息、玩耍、交往与临时变化留些余地；机动时间也从这里预留。'}
+];
+var goals=[
+ {id:'activity',name:'运动',icon:'walk',action:'安排20分钟适合自己的活动',trigger:'放学后，在安全的场地',backup:'遇到下雨，改做适合自己的室内活动；没有安全场地时重新安排。',note:'这是一个校外小行动，不代表全天运动总量。'},
+ {id:'sleep',name:'睡眠',icon:'moon',action:'按约定时间收好电子设备，开始洗漱',trigger:'在家人一起商定的睡前准备时间',backup:'晚饭后先整理书包与衣物；任务来不及，和家长、老师一起协调。',note:'准备睡觉不等于已经睡着；不以少睡换完成。'},
+ {id:'food',name:'膳食',icon:'food',action:'晚餐主动尝试一种蔬菜',trigger:'每天晚餐时',backup:'先和家人商量；没有原定蔬菜，就选择家里现有且适合自己的蔬菜。',note:'从可行的小改变开始，也要考虑整体膳食。'},
+ {id:'mood',name:'情绪',icon:'heart',action:'先暂停，再用一句话表达感受',trigger:'当我感到生气或紧张时',backup:'到安全的地方平复；需要时向可信任的老师、家长或其他成人求助。',note:'情绪不必立刻消失；没有触发时可记“无需启用”。'}
+];
+var recordTypes=[{id:'done',label:'做到',mark:'✓'},{id:'part',label:'部分做到',mark:'◐'},{id:'miss',label:'还没做到',mark:'△'},{id:'na',label:'无需启用',mark:'—'}];
+function copy(o){return JSON.parse(JSON.stringify(o));}
+function freshCard(g){return{action:g.action,trigger:g.trigger,backup:g.backup,reflection:'',records:[null,null,null,null,null,null,null]};}
+function defaults(){var cards={};goals.forEach(function(g){cards[g.id]=freshCard(g);});return{version:1,budget:{sleep:540,school:420,study:120,activity:30,living:120,free:210},comparison:null,selected:'sleep',sim:{duration:20,buffer:0,indoor:false},goal:'activity',cards:cards};}
+var state=defaults(),page=0,revealed=0,selectedDay=0,timer=null,storageOK=true,lastFocus=null,editDay=0,editState='done',editPlan=null,toastTimer=null,chartSelected=null;
+function safeText(v,n,fallback){return typeof v==='string'?v.slice(0,n):fallback;}
+function load(){try{var raw=localStorage.getItem(STORAGE);if(!raw)return;var data=JSON.parse(raw);if(!data||data.version!==1)return;cats.forEach(function(c){var v=Number(data.budget&&data.budget[c.id]);if(isFinite(v))state.budget[c.id]=Math.max(c.min,Math.min(c.max,Math.round(v/15)*15));});if(data.comparison&&typeof data.comparison==='object'){var snap={};cats.forEach(function(c){var v=Number(data.comparison[c.id]);snap[c.id]=isFinite(v)?Math.max(c.min,Math.min(c.max,v)):state.budget[c.id];});state.comparison=snap;}if(cats.some(function(c){return c.id===data.selected;}))state.selected=data.selected;if(data.sim){state.sim.duration=Math.max(10,Math.min(60,Math.round((Number(data.sim.duration)||20)/5)*5));state.sim.buffer=Math.max(0,Math.min(30,Math.round((Number(data.sim.buffer)||0)/5)*5));state.sim.indoor=data.sim.indoor===true;}goals.forEach(function(g){var src=data.cards&&data.cards[g.id],dst=state.cards[g.id];if(!src)return;dst.action=safeText(src.action,68,g.action);dst.trigger=safeText(src.trigger,60,g.trigger);dst.backup=safeText(src.backup,140,g.backup);dst.reflection=safeText(src.reflection,160,'');if(Array.isArray(src.records))dst.records=dst.records.map(function(_,i){var r=src.records[i];if(!r||!recordTypes.some(function(t){return t.id===r.state;}))return null;if(r.state==='na'&&g.id!=='mood')return null;return{state:r.state,reason:safeText(r.reason,40,''),note:safeText(r.note,100,''),plan:r.plan?{action:safeText(r.plan.action,68,''),trigger:safeText(r.plan.trigger,60,''),backup:safeText(r.plan.backup,140,'')}:null};});});if(goals.some(function(g){return g.id===data.goal;}))state.goal=data.goal;}catch(e){storageOK=false;}}
+function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));storageOK=true;}catch(e){storageOK=false;}$('save-status').textContent=storageOK?'保存在本机':'请导出保存';}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function svgIcon(n){return'<svg aria-hidden="true"><use href="#i-'+n+'" xlink:href="#i-'+n+'" xmlns:xlink="http://www.w3.org/1999/xlink"/></svg>';}
+function fmt(m){m=Math.round(m);var h=Math.floor(m/60),r=m%60;return h?(h+'小时'+(r?r+'分':'')):(r+'分钟');}
+function compact(m){return(m/60%1===0?m/60:(m/60).toFixed(2).replace(/0$/,''))+'h';}
+function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').hidden=false;toastTimer=setTimeout(function(){$('toast').hidden=true;},2600);}
+function total(){return cats.reduce(function(a,c){return a+state.budget[c.id];},0);}
+function stopSim(){if(timer!==null){clearInterval(timer);timer=null;}renderPlay();}
+function invalidate(){stopSim();revealed=0;selectedDay=0;renderSim();}
+function switchPage(n){stopSim();page=n;for(var i=0;i<3;i++){var active=i===n;$('page-'+i).hidden=!active;$('page-'+i).classList.toggle('active',active);$('tab-'+i).setAttribute('aria-selected',String(active));$('tab-'+i).tabIndex=active?0:-1;}var q=['多安排了半小时，准备从哪里调整？','哪一天仍需调整？你根据什么这样判断？','用真实记录说话：下一次，准备改哪一步？'];$('footer-question').textContent=q[n];$('next-page').textContent=n===0?'试过一周 →':n===1?'我的行动 →':'返回沙盘 ↺';if(n===0)renderBudget();if(n===1)renderSim();if(n===2)renderCard();}
+function svgEl(tag,attrs,textContent){var el=document.createElementNS(NS,tag);Object.keys(attrs||{}).forEach(function(k){el.setAttribute(k,attrs[k]);});if(textContent!==undefined)el.textContent=textContent;return el;}
+function point(cx,cy,r,deg){var a=(deg-90)*Math.PI/180;return[cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function donut(cx,cy,rOuter,rInner,a,b){if(b-a<.01)return'';b=Math.min(b,a+359.999);var p1=point(cx,cy,rOuter,a),p2=point(cx,cy,rOuter,b),p3=point(cx,cy,rInner,b),p4=point(cx,cy,rInner,a),large=b-a>180?1:0;return'M'+p1.join(' ')+' A'+rOuter+' '+rOuter+' 0 '+large+' 1 '+p2.join(' ')+' L'+p3.join(' ')+' A'+rInner+' '+rInner+' 0 '+large+' 0 '+p4.join(' ')+' Z';}
+function makeCategories(){var host=$('categories');host.innerHTML='';cats.forEach(function(c){var b=document.createElement('button');b.className='category';b.dataset.id=c.id;b.style.setProperty('--selected-color',c.color);b.setAttribute('aria-pressed','false');b.innerHTML='<span class="swatch" style="background:'+c.color+'"></span><span class="label">'+c.label+'</span><span class="value"></span>';b.addEventListener('click',function(){state.selected=c.id;renderBudget();save();});host.appendChild(b);});}
+function renderBudget(){var sum=total(),left=1440-sum,host=$('budget-svg');host.innerHTML='';var status=$('budget-status');status.className='status '+(left<0?'warn':'good');status.innerHTML=left<0?'超出 <span class="num">'+fmt(-left)+'</span>':left>0?'还有 <span class="num">'+fmt(left)+'</span> 未分配':'已安排 <span class="num">24小时</span>';$('budget-kind').textContent=sum>1440?'红色外圈是超出部分；环内只容纳24小时。':'按时长分配，不代表活动的先后顺序。';var cx=340,cy=224,ro=174,ri=114;
+host.appendChild(svgEl('circle',{cx:cx,cy:cy,r:(ro+ri)/2,fill:'none',stroke:'#e9eee5','stroke-width':ro-ri}));
+for(var t=0;t<24;t++){var p1=point(cx,cy,ro+7,t*15),p2=point(cx,cy,ro+(t%6===0?21:14),t*15);host.appendChild(svgEl('line',{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],stroke:t%6===0?'#879c8d':'#c7d3c7','stroke-width':t%6===0?2:1}));}
+var cursor=0;cats.forEach(function(c){var val=state.budget[c.id],start=cursor,end=Math.min(1440,cursor+val);if(start<1440&&end>start){var a=start/4,b=end/4,path=svgEl('path',{d:donut(cx,cy,ro,ri,a+.6,b-.6),fill:c.color,stroke:state.selected===c.id?'#213d2e':'#fff','stroke-width':state.selected===c.id?3:1.5,'class':'sector',tabindex:'0',role:'button','aria-label':c.label+'，'+fmt(val)+'，点击调整','data-category':c.id});path.addEventListener('click',function(){state.selected=c.id;renderBudget();save();});path.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();state.selected=c.id;renderBudget();save();}});host.appendChild(path);if(end-start>=105){var pos=point(cx,cy,(ro+ri)/2,(a+b)/2);host.appendChild(svgEl('text',{x:pos[0],y:pos[1]-4,'text-anchor':'middle','font-size':22,'font-weight':750,fill:'#fff'},c.short));host.appendChild(svgEl('text',{x:pos[0],y:pos[1]+21,'text-anchor':'middle','font-size':19,'font-weight':600,fill:'#fff'},compact(end-start)));}}cursor+=val;});
+if(left<0){host.appendChild(svgEl('path',{d:donut(cx,cy,ro+30,ro+23,0,Math.min(359.8,-left/4)),fill:'#bd4e42'}));}
+host.appendChild(svgEl('text',{x:cx,y:cy-26,'text-anchor':'middle','font-size':23,fill:'#6a7b6e'},'一天的时间预算'));
+host.appendChild(svgEl('text',{x:cx,y:cy+28,'text-anchor':'middle','font-size':58,'font-weight':800,fill:'#213d2e'},'24'));
+host.appendChild(svgEl('text',{x:cx,y:cy+60,'text-anchor':'middle','font-size':23,fill:'#6a7b6e'},'小时'));
+host.appendChild(svgEl('text',{x:cx,y:447,'text-anchor':'middle','font-size':22,fill:'#61746a'},'点选色块，调节这项时间'));
+var sel=cats.filter(function(c){return c.id===state.selected;})[0];$('selected-label').textContent=sel.label;$('selected-value').textContent=fmt(state.budget[sel.id]);$('budget-range').min=sel.min;$('budget-range').max=sel.max;$('budget-range').value=state.budget[sel.id];$('budget-range').setAttribute('aria-label',sel.label+'时间');$('category-note').textContent=sel.note;$('budget-minus').disabled=state.budget[sel.id]<=sel.min;$('budget-plus').disabled=state.budget[sel.id]>=sel.max;
+Array.prototype.forEach.call($('categories').children,function(b){var c=cats.filter(function(x){return x.id===b.dataset.id;})[0];b.setAttribute('aria-pressed',String(c.id===state.selected));b.querySelector('.value').textContent=fmt(state.budget[c.id]);});
+var bedtime=(420-state.budget.sleep+1440)%1440;var time=M.nightStart(420,state.budget.sleep);$('sleep-window').textContent=time+' → 次日7:00';var short=600-state.budget.sleep;$('sleep-notice').className='sleep-notice'+(short>0?' alert':'');$('sleep-notice').textContent=short>0?'小学睡眠参考10小时；这份安排还少'+fmt(short)+'。':'已为睡眠预留至少10小时；仍需关注实际入睡与醒来情况。';
+var comp=$('comparison');if(state.comparison){var cs=cats.reduce(function(n,c){return n+state.comparison[c.id];},0);comp.innerHTML='<span>对照 '+fmt(cs)+'</span><div class="compare-strip">'+cats.map(function(c){return'<span style="width:'+(state.comparison[c.id]/Math.max(1440,cs)*100)+'%;background:'+c.color+'"></span>';}).join('')+'</div><span>睡眠 '+fmt(state.comparison.sleep)+' → '+fmt(state.budget.sleep)+'</span>';}else{comp.innerHTML='<span>留一份对照，再看看调整了什么。</span>';}}
+function changeBudget(v){var c=cats.filter(function(x){return x.id===state.selected;})[0];state.budget[c.id]=Math.max(c.min,Math.min(c.max,Math.round(Number(v)/15)*15));renderBudget();invalidate();save();}
+var dayIcons=['sun','rain','clock','block','clock','bag','sun'];
+var dayShort=['普通一天','开始下雨','回家晚了','场地被占','临时有事','全家外出','自由安排'];
+function dayData(){return M.scenarios||M.days;}
+function getResult(i,improved){var plan=improved?state.sim:{duration:state.sim.duration,buffer:0,indoor:false};return M.evaluateDay(dayData()[i],plan,state.budget);}
+function resultMark(r){return r.kind==='ok'?'○':r.kind==='backup'?'↗':'△';}
+function resultWord(r){return r.kind==='ok'?'可安排':r.kind==='backup'?'用预案':'待调整';}
+function renderPlay(){var b=$('play-week');if(!b)return;b.innerHTML=svgIcon(timer!==null?'pause':'play')+'<span>'+(timer!==null?'暂停':revealed>=7?'再试一次':revealed?'继续试运行':'试过一周')+'</span>';}
+function renderSim(){var host=$('week-table'),html='<div></div>';for(var d=0;d<7;d++)html+='<button class="day-head'+(selectedDay===d?' active':'')+'" data-day="'+d+'" aria-label="查看第'+(d+1)+'天：'+dayShort[d]+'"><span class="day-num">第'+(d+1)+'天</span>'+svgIcon(dayIcons[d])+'<strong>'+dayShort[d]+'</strong></button>';
+for(var row=0;row<2;row++){html+='<div class="row-label">'+(row?'有预案':'原计划')+'<small>'+(row?'时间＋场地':'只按原安排')+'</small></div>';for(var j=0;j<7;j++){var result=j<revealed?getResult(j,row===1):null;html+='<button class="result-cell '+(result?result.kind:'pending')+(selectedDay===j&&result?' active':'')+'" data-day="'+j+'" data-row="'+row+'" aria-label="'+(row?'有预案':'原计划')+'第'+(j+1)+'天：'+(result?resultWord(result):'尚未推演')+'"><span class="mark">'+(result?resultMark(result):'·')+'</span><span class="result-word">'+(result?resultWord(result):'待推演')+'</span></button>';}}
+host.innerHTML=html;Array.prototype.forEach.call(host.querySelectorAll('[data-day]'),function(b){b.addEventListener('click',function(){selectedDay=Number(b.dataset.day);renderSim();});});
+$('duration-value').innerHTML=state.sim.duration+'<span> 分钟</span>';$('buffer-value').innerHTML=state.sim.buffer+'<span> 分钟</span>';$('duration-range').value=state.sim.duration;$('buffer-range').value=state.sim.buffer;$('indoor-switch').checked=state.sim.indoor;
+var event=dayData()[selectedDay],base=getResult(selectedDay,false),improved=getResult(selectedDay,true);var available=event.window!==undefined?event.window:event.availableMinutes;var text=selectedDay<revealed?'原计划：'+base.reason+'　加入预案：'+improved.reason:'这天原时段有'+available+'分钟。先预测：两份计划都能安排吗？';$('sim-detail').innerHTML='<div class="detail-day"><strong>第'+(selectedDay+1)+'天</strong><span>'+dayShort[selectedDay]+'</span></div><p class="detail-copy">'+esc(text)+'</p>';
+var sum=total(),err=sum>1440?'时间沙盘已超出24小时，请先回第1页调整。':state.budget.activity<state.sim.duration?'校外活动预算只有'+fmt(state.budget.activity)+'，放不下这项行动。':state.budget.free<state.sim.buffer?'自由安排只有'+fmt(state.budget.free)+'，不够预留这些机动时间。':'';var bn=$('buffer-note');bn.className='buffer-note'+(err?' error':'');bn.textContent=err||'机动时间从自由安排的'+fmt(state.budget.free)+'中预留；每一天能挪出的时间不同。';var countA=0,countB=0;for(var k=0;k<revealed;k++){if(getResult(k,false).kind!=='blocked')countA++;if(getResult(k,true).kind!=='blocked')countB++;}$('base-count').textContent=revealed?countA+' / '+revealed:'—';$('new-count').textContent=revealed?countB+' / '+revealed:'—';renderPlay();}
+function play(){if(timer!==null){stopSim();return;}if(revealed>=7)revealed=0;function tick(){selectedDay=revealed;revealed++;renderSim();if(revealed>=7){stopSim();toast('看一看仍待调整的那一天。');}}tick();if(revealed<7){timer=setInterval(tick,850);renderPlay();}}
+function goal(){return goals.filter(function(g){return g.id===state.goal;})[0];}
+function card(){return state.cards[state.goal];}
+function makeGoals(){var host=$('goal-choices');host.innerHTML='';goals.forEach(function(g){var b=document.createElement('button');b.className='goal-btn';b.dataset.goal=g.id;b.innerHTML=svgIcon(g.icon)+g.name;b.addEventListener('click',function(){readFields();state.goal=g.id;renderCard();save();});host.appendChild(b);});}
+function recordType(id){return recordTypes.filter(function(t){return t.id===id;})[0]||{id:'',label:'未记录',mark:'·'};}
+function readFields(){var c=card();c.action=$('action-input').value.slice(0,68);c.trigger=$('trigger-input').value.slice(0,60);c.backup=$('backup-input').value.slice(0,140);c.reflection=$('reflection-input').value.slice(0,160);}
+function renderCard(){var c=card(),g=goal();$('action-input').value=c.action;$('trigger-input').value=c.trigger;$('backup-input').value=c.backup;$('reflection-input').value=c.reflection;$('goal-note').textContent=g.note;$('use-sim').hidden=g.id!=='activity';Array.prototype.forEach.call($('goal-choices').children,function(b){b.setAttribute('aria-pressed',String(b.dataset.goal===g.id));});renderRecords();$('save-status').textContent=storageOK?'保存在本机':'请导出保存';}
+function renderRecords(){var c=card(),host=$('record-grid');host.innerHTML='';var n=0,done=0,part=0,na=0;var reasons={};c.records.forEach(function(r,i){var type=recordType(r&&r.state);var b=document.createElement('button');b.className='record-day';b.dataset.state=type.id;b.dataset.day=i;b.setAttribute('aria-label','第'+(i+1)+'天，'+type.label+'，点击记录');b.innerHTML='<span class="day-label">第'+(i+1)+'天</span><span class="record-mark">'+type.mark+'</span><span class="record-label">'+type.label+'</span>';b.addEventListener('click',function(){openRecord(i);});host.appendChild(b);if(r){n++;if(r.state==='done')done++;if(r.state==='part')part++;if(r.state==='na')na++;if(r.reason)reasons[r.reason]=(reasons[r.reason]||0)+1;}});$('record-stats').textContent=n?'已记录'+n+'天 · 做到'+done+'天'+(part?' · 部分做到'+part+'天':'')+(na?' · 无需启用'+na+'天':''):'记录还空着，等真实行动来填写。';var sorted=Object.keys(reasons).sort(function(a,b){return reasons[b]-reasons[a];});if(sorted.length){$('record-log').textContent='记录中的困难：'+sorted.map(function(k){return k+' '+reasons[k]+'次';}).join('；')+'。';}else{var evidence=c.records.map(function(r,i){return r&&r.note?'第'+(i+1)+'天：'+r.note:'';}).filter(Boolean);$('record-log').textContent=evidence.length?evidence[evidence.length-1]:'没做到也能提供证据：记下原因，再想办法。';}}
+function openOverlay(id){lastFocus=document.activeElement;$(id).hidden=false;var d=$(id).querySelector('.dialog');d.focus();}
+function closeOverlay(id){$(id).hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+function openRecord(i){readFields();editDay=i;var r=card().records[i];editState=r?r.state:'done';editPlan=r&&r.plan?copy(r.plan):{action:card().action,trigger:card().trigger,backup:card().backup};$('record-title').textContent='第'+(i+1)+'天，实际发生了什么？';$('record-action').textContent=(r&&r.plan?'记录时的行动：':'本次记录的行动：')+editPlan.action+(r&&r.plan&&planChanged(r)?'（计划已修订，本次仍编辑原记录）':'');$('reason-select').value=r?r.reason:'';$('record-note').value=r?r.note:'';renderRecordOptions();openOverlay('record-overlay');}
+function renderRecordOptions(){var types=recordTypes.filter(function(t){return t.id!=='na'||state.goal==='mood';});$('record-options').innerHTML='';types.forEach(function(t){var b=document.createElement('button');b.className='record-option';b.setAttribute('aria-pressed',String(editState===t.id));b.innerHTML='<span style="display:inline-block;width:31px">'+t.mark+'</span>'+t.label;b.addEventListener('click',function(){editState=t.id;Array.prototype.forEach.call($('record-options').children,function(n){n.setAttribute('aria-pressed',String(n===b));});});$('record-options').appendChild(b);});}
+function recordSave(){card().records[editDay]={state:editState,reason:$('reason-select').value,note:$('record-note').value.trim().slice(0,100),plan:copy(editPlan)};save();renderRecords();closeOverlay('record-overlay');focusDay();}
+function useSim(){if(total()>1440||state.budget.activity<state.sim.duration||state.budget.free<state.sim.buffer){toast('先调整时间预算，让这项行动有时间可用。');return;}var c=card();c.action='安排'+state.sim.duration+'分钟适合自己的活动';c.trigger='放学后，在安全且适合活动的时段';c.backup=(state.sim.indoor?'下雨或户外场地不可用时，换到确认安全的室内场地；':'先确认户外场地；')+(state.sim.buffer?'从自由安排中预留'+state.sim.buffer+'分钟机动时间；':'')+'仍无时间或安全场地时，与家人一起重新安排。';renderCard();save();toast('演练方案已写入行动卡，真实记录保持不变。');}
+function focusDay(){var b=$('record-grid').querySelector('[data-day="'+editDay+'"]');if(b)b.focus();}
+function planChanged(r){var c=card();return r&&r.plan&&(r.plan.action!==c.action||r.plan.trigger!==c.trigger||r.plan.backup!==c.backup);}
+function recordEvidence(r){if(!r)return '';var text=[r.reason,r.note].filter(Boolean).join('；');if(planChanged(r))text+=(text?'\n':'')+'记录时行动：'+r.plan.action+'\n时机：'+r.plan.trigger+'\n预案：'+r.plan.backup;return text;}
+function wrap(s,max){var result=[],line='';String(s||'').split('').forEach(function(ch){if(ch==='\n'){result.push(line);line='';return;}if(line.length>=max){result.push(line);line='';}line+=ch;});if(line||!result.length)result.push(line);return result;}
+function buildExportSVG(){readFields();var c=card(),g=goal(),y=164;var items=[];function txt(x,yy,size,text,color,weight){items.push('<text x="'+x+'" y="'+yy+'" font-size="'+size+'"'+(color?' fill="'+color+'"':'')+(weight?' font-weight="'+weight+'"':'')+'>'+esc(text)+'</text>');}function field(label,value){txt(96,y,23,label,'#61746a');y+=39;wrap(value||'（待填写）',42).forEach(function(line){txt(96,y,29,line);y+=40;});y+=18;}txt(94,108,40,'我的健康生活行动卡 · '+g.name,null,'700');field('一件小事',c.action);field('触发时机',c.trigger);field('遇到困难时',c.backup);y+=3;txt(96,y,29,'7天真实记录',null,'700');y+=24;var tableTop=y,rows=[];c.records.forEach(function(r,i){var lines=wrap(recordEvidence(r)||'—',37);rows.push({record:r,day:i+1,lines:lines,height:Math.max(52,lines.length*28+20)});});var tableHeight=52+rows.reduce(function(n,r){return n+r.height;},0);items.push('<rect x="91" y="'+y+'" width="1218" height="'+tableHeight+'" rx="7" fill="#fafbf8" stroke="#dce5dc"/>');txt(108,y+34,22,'日期','#61746a');txt(235,y+34,22,'实际情况','#61746a');txt(430,y+34,22,'证据与调整原因','#61746a');y+=52;rows.forEach(function(row){items.push('<path d="M92 '+y+'H1308" stroke="#dce5dc"/>');txt(108,y+33,22,'第'+row.day+'天');txt(235,y+33,22,recordType(row.record&&row.record.state).label);row.lines.forEach(function(line,i){txt(430,y+31+i*28,20,line);});y+=row.height;});y+=54;txt(96,y,23,'下一步想调整','#61746a');y+=36;wrap(c.reflection||'（等真实记录后再填写）',48).forEach(function(line){txt(96,y,24,line);y+=34;});y+=43;txt(96,y,19,'记录由使用者填写；课堂情境推演不代表真实完成。计划有改动时，保留记录当时的行动。','#61746a');var height=Math.max(1200,y+55);return'<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="'+height+'" viewBox="0 0 1400 '+height+'"><rect width="1400" height="'+height+'" fill="#f5f7f3"/><rect x="48" y="42" width="1304" height="'+(height-84)+'" rx="22" fill="white" stroke="#dce5dc"/><g font-family="Microsoft YaHei,PingFang SC,sans-serif" fill="#21372f">'+items.join('')+'</g></svg>';}
+function download(text,type,name){var blob=new Blob([text],{type:type});if(window.navigator.msSaveBlob){window.navigator.msSaveBlob(blob,name);return;}var u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(u);},15000);}
+function buildPrint(){readFields();var c=card();var html='<h1>我的健康生活行动卡 · '+esc(goal().name)+'</h1><div class="print-field"><h2>一件小事</h2><p>'+esc(c.action||'（待填写）')+'</p></div><div class="print-field"><h2>触发时机</h2><p>'+esc(c.trigger||'（待填写）')+'</p></div><div class="print-field"><h2>遇到困难时</h2><p>'+esc(c.backup||'（待填写）')+'</p></div><h2>7天真实记录</h2><table><thead><tr><th>日期</th><th>实际情况</th><th>证据与原因</th></tr></thead><tbody>';c.records.forEach(function(r,i){html+='<tr><td>第'+(i+1)+'天</td><td>'+recordType(r&&r.state).label+'</td><td>'+esc(recordEvidence(r)).replace(/\n/g,'<br>')+'</td></tr>';});html+='</tbody></table><h2>下一步想调整</h2><p>'+esc(c.reflection||'________________________________')+'</p><p class="print-note">自己真实记录，未记录不等于没有做到。课堂情境推演不代表真实完成。先改一件事，也照顾膳食、睡眠、运动与情绪。</p>';$('print-output').innerHTML=html;return html;}
+load();makeCategories();makeGoals();renderBudget();renderSim();renderCard();
+document.querySelectorAll('[data-page]').forEach(function(b){b.addEventListener('click',function(){switchPage(Number(b.dataset.page));});b.addEventListener('keydown',function(e){var n=page;if(e.key==='ArrowRight')n=(page+1)%3;else if(e.key==='ArrowLeft')n=(page+2)%3;else if(e.key==='Home')n=0;else if(e.key==='End')n=2;else return;e.preventDefault();switchPage(n);$('tab-'+n).focus();});});
+$('next-page').addEventListener('click',function(){switchPage((page+1)%3);});$('budget-range').addEventListener('input',function(){changeBudget(this.value);});$('budget-minus').addEventListener('click',function(){changeBudget(state.budget[state.selected]-15);});$('budget-plus').addEventListener('click',function(){changeBudget(state.budget[state.selected]+15);});$('reset-budget').addEventListener('click',function(){state.budget=defaults().budget;state.selected='sleep';state.comparison=null;renderBudget();invalidate();save();toast('已恢复待调整示例；行动卡和真实记录保留。');});$('snapshot-budget').addEventListener('click',function(){state.comparison=copy(state.budget);renderBudget();save();toast('已保留这份时间安排作对照。');});
+$('duration-range').addEventListener('input',function(){state.sim.duration=Number(this.value);invalidate();save();});$('buffer-range').addEventListener('input',function(){state.sim.buffer=Number(this.value);invalidate();save();});$('indoor-switch').addEventListener('change',function(){state.sim.indoor=this.checked;invalidate();save();});$('sim-reset').addEventListener('click',function(){invalidate();});$('play-week').addEventListener('click',play);
+['action-input','trigger-input','backup-input','reflection-input'].forEach(function(id){$(id).addEventListener('input',function(){readFields();save();});});$('use-sim').addEventListener('click',useSim);$('record-save').addEventListener('click',recordSave);$('record-unset').addEventListener('click',function(){card().records[editDay]=null;save();renderRecords();closeOverlay('record-overlay');focusDay();});$('clear-records').addEventListener('click',function(){readFields();openOverlay('confirm-overlay');});$('confirm-clear').addEventListener('click',function(){card().records=[null,null,null,null,null,null,null];card().reflection='';save();renderCard();closeOverlay('confirm-overlay');toast('当前目标的记录已清空。');});
+$('export-card').addEventListener('click',function(){save();download(buildExportSVG(),'image/svg+xml;charset=utf-8','我的健康生活行动卡-'+goal().name+'.svg');toast('计划卡已生成，可保存图片文件或打印。');});$('print-card').addEventListener('click',function(){buildPrint();save();window.print();});
+$('info-btn').addEventListener('click',function(){openOverlay('info-overlay');});document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',function(){closeOverlay(b.dataset.close);});});document.querySelectorAll('.overlay').forEach(function(overlay){overlay.addEventListener('click',function(e){if(e.target===overlay)closeOverlay(overlay.id);});overlay.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();closeOverlay(overlay.id);}if(e.key==='Tab'){var nodes=Array.prototype.filter.call(overlay.querySelectorAll('button,input,select,textarea,a[href]'),function(n){return!n.disabled&&n.offsetParent!==null;});if(!nodes.length)return;var first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&(document.activeElement===first||document.activeElement===overlay.querySelector('.dialog'))){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});});
+$('full-btn').addEventListener('click',function(){var d=document,el=document.documentElement,exit=d.exitFullscreen||d.webkitExitFullscreen,enter=el.requestFullscreen||el.webkitRequestFullscreen;if(d.fullscreenElement||d.webkitFullscreenElement){if(exit)exit.call(d);}else if(enter){try{var p=enter.call(el);if(p&&p.catch)p.catch(function(){toast('可使用浏览器菜单或F11进入全屏。');});}catch(e){toast('可使用浏览器菜单或F11进入全屏。');}}else toast('可使用浏览器菜单或F11进入全屏。');});document.addEventListener('fullscreenchange',function(){$('full-btn').setAttribute('aria-label',document.fullscreenElement?'退出全屏':'进入全屏');});document.addEventListener('visibilitychange',function(){if(document.hidden)stopSim();});window.addEventListener('beforeprint',buildPrint);
+/* Replaceable educational data and pure rules live in HealthPlanModel.
+   UI is SVG/DOM only; there are no fetched assets, trackers, or remote scripts. */
+window.HealthPlanApp={getState:function(){return copy(state);},getSimulation:function(){return{revealed:revealed,baseline:dayData().map(function(_,i){return getResult(i,false);}),improved:dayData().map(function(_,i){return getResult(i,true);})};},getExportSVG:buildExportSVG};
+})();
+</script>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div class="compat-badge" aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
