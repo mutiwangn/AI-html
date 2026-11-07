@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071b2a">
+<meta name="description" content="六上2.6《制作潜望镜》：镜面反射剖面、真实光路追踪、目镜视野及场景化工程调试。">
+<title>制作潜望镜｜透视调试与改进</title>
+<style>
+:root{--bg:#071b2a;--panel:#102d40;--panel2:#13384b;--line:#326176;--ink:#f2f8fb;--muted:#a9cad6;--cyan:#57dbdf;--gold:#ffc966;--green:#9fe7b8;--red:#ff9c87;--font:system-ui,-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:var(--font);color:var(--ink);background:radial-gradient(ellipse at 30% -30%,#184961 0,transparent 60%),var(--bg)}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation;border:1px solid #51768a;background:#20465a;color:#fff;border-radius:13px;font-size:17px;font-weight:700;padding:10px 15px;transition:background .15s,border-color .15s}button:hover{background:#2d5970;border-color:#7fb7c9}button:active{transform:translateY(1px)}button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}button[aria-pressed=true],button.selected{background:#17717d;border-color:#7be2e3;color:#fff}button.secondary{background:transparent}button:disabled{opacity:.45;cursor:not-allowed}button small{display:block;font-weight:500}p,h1,h2,h3{margin:0}.hidden,[hidden]{display:none!important}
+.app{width:100%;height:100%;max-width:2300px;margin:auto;display:flex;flex-direction:column;padding:12px 18px 9px;gap:10px}.topbar{height:74px;flex-shrink:0;display:flex;align-items:center;gap:16px}.logo{width:47px;height:47px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(130deg,#1c8995,#135268);font-size:26px;box-shadow:inset 0 1px 0 #ffffff45}.brand{min-width:0}.eyebrow{font-size:14px;letter-spacing:.06em;color:var(--muted);font-weight:700}.brand h1{font-size:clamp(25px,2vw,34px);line-height:1.2;margin-top:2px;white-space:nowrap}.brand h1 span{color:#a3cdd6;font-size:.65em;font-weight:500}.nav{margin-left:auto;display:flex;gap:6px;background:#0c2636;border:1px solid #22465a;padding:5px;border-radius:17px}.nav button{border:0;background:transparent;color:#a9cbd6;min-width:155px;white-space:nowrap;font-size:17px}.nav button.selected{color:#092432;background:#8ce6e4}.reset-top{font-size:16px;white-space:nowrap;min-height:46px}
+.main{min-height:0;flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,365px);gap:12px}.stage-panel,.side-panel{min-height:0;border:1px solid #376077;border-radius:20px;overflow:hidden;box-shadow:0 10px 24px #0003;background:#0b2638}.stage-panel{display:flex;flex-direction:column}.stage-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 17px;background:#103247;min-height:58px}.stage-top strong{font-size:23px}.stage-top .sub{color:#a4c9d9;font-size:15px;margin-left:10px}.stage-top button{font-size:15px;padding:9px 12px;white-space:nowrap}.diagram-wrap{position:relative;flex:1;min-height:0;background:radial-gradient(ellipse at 60% 50%,#15374b,#071c2d 75%);display:grid;place-items:center;overflow:hidden}.diagram-wrap svg{width:100%;height:100%;display:block;touch-action:none;user-select:none;-webkit-user-select:none}.stage-note{position:absolute;left:15px;bottom:13px;pointer-events:none;color:#d9f1f5;font-size:15px;font-weight:600;text-shadow:0 2px 4px #0008;background:#0a2739af;padding:7px 12px;border:1px solid #326077;border-radius:10px}.stage-foot{min-height:56px;background:#103247;padding:7px 13px;display:flex;align-items:center;gap:13px}.beam-key{display:flex;align-items:center;gap:8px;color:#e9f4f6;font-size:15px;font-weight:700;white-space:nowrap}.beam-key i{width:35px;height:3px;background:var(--gold);border-radius:9px;box-shadow:0 0 10px #ffc96688}.stage-foot #ray-readout{color:var(--muted);font-size:15px;margin-left:auto;text-align:right;font-variant-numeric:tabular-nums}.stage-foot .fault-btn{white-space:nowrap;font-size:15px;padding:8px 12px}
+.side-panel{background:linear-gradient(160deg,#153a4c,#102a3d);display:flex;flex-direction:column;gap:10px;padding:14px 15px 13px}.side-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px}.side-title h2{font-size:23px}.side-title span{font-size:13px;color:#a9cad6;white-space:nowrap}.viewport{height:178px;flex:0 0 178px;border-radius:14px;overflow:hidden;position:relative;border:8px solid #365467;box-shadow:inset 0 0 25px #0009,0 5px 12px #0005;background:#091c29}.viewport:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 35px 17px #071926c9;border-radius:4px}.view-sky{position:absolute;inset:-10%;transition:transform .13s ease,filter .13s ease;transform-origin:center}.view-sky svg{width:100%;height:100%;display:block}.view-shade{position:absolute;inset:0;background:#051b28;opacity:0;transition:opacity .15s}.view-caption{position:absolute;bottom:7px;left:10px;z-index:3;font-size:14px;color:white;text-shadow:0 1px 4px black;font-weight:700}.view-notice{display:none;position:absolute;inset:0;z-index:2;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:#081b28d9;font-size:23px;font-weight:800;gap:5px}.view-notice small{font-size:14px;color:#c2d5de;font-weight:500;padding:0 8px}.viewport.is-blocked .view-notice{display:flex}.metric-box{border:1px solid #3a6175;background:#0a293b;border-radius:12px;padding:11px 12px;min-height:76px}.metric-box.good{border-color:#438477;background:#0b403e}.metric-box.bad{border-color:#935e57;background:#422c33}.metric-box strong{font-size:22px;line-height:1.24;display:block}.metric-box span{font-size:15px;display:block;color:#c0dce3;margin-top:4px;line-height:1.35}.lesson-panel{display:flex;flex-direction:column;gap:12px;min-height:0;flex:1}.angle-row{display:flex;align-items:center;gap:12px;padding:3px 1px}.angle-row .name{font-size:19px;font-weight:750}.angle-row .degree{margin-left:auto;font-size:30px;color:#95e6e8;font-variant-numeric:tabular-nums;font-weight:800}.angle-row .hint{color:#a6c7d4;font-size:13px}.divider{border:0;border-top:1px solid #396179;width:100%;margin:0}.panel-label{font-size:15px;color:#a8cbd7;font-weight:700}.preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.preset-grid button{padding:12px 6px;font-size:17px;min-height:51px}.small-help{font-size:14px;color:#abcad6;line-height:1.5}.spacer{flex:1;min-height:0}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.choices button{padding:10px 2px;font-size:15px;min-height:50px}.controls-row{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #31566b;padding-top:10px}.controls-row .line-label{font-size:17px;font-weight:750}.segmented{display:flex;gap:6px}.segmented button{font-size:15px;padding:9px 12px;min-height:40px}.records{display:grid;grid-template-columns:1fr 1fr;gap:8px}.record{border:1px dashed #4d7a8e;border-radius:11px;padding:9px 10px;background:#0b293a;min-height:72px}.record .record-head{font-size:14px;color:#a2dce0;letter-spacing:.06em;font-weight:800}.record .record-text{font-size:15px;font-weight:700;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.record .record-sub{font-size:12px;color:#b1cdd6;margin-top:2px}.record-actions{display:flex;gap:7px}.record-actions button{flex:1;padding:9px 5px;font-size:15px}.field-note{width:100%;background:#092536;border:1px solid #4f7787;color:white;padding:10px 11px;border-radius:10px;font-size:15px;min-height:42px}.field-note::placeholder{color:#8eacbc}.footer{height:20px;flex:0 0 20px;display:flex;justify-content:space-between;color:#8fb1be;font-size:12px;gap:12px}.footer span:last-child{text-align:right}
+svg text{font-family:var(--font);pointer-events:none}svg .svg-label{font-size:23px;font-weight:800;fill:#e4faff;paint-order:stroke;stroke:#071d2a;stroke-width:5px;stroke-linejoin:round}svg .svg-sub{font-size:16px;fill:#b6d5e0;paint-order:stroke;stroke:#071d2a;stroke-width:3px}svg .mirror-grab{cursor:grab;touch-action:none}svg .mirror-grab:active{cursor:grabbing}svg .mirror-face{pointer-events:none}svg .ray{fill:none;stroke:#ffd27c;stroke-width:2.6;opacity:.24;stroke-linejoin:round}svg .ray.center{stroke:#ffe59c;stroke-width:5;opacity:1;filter:url(#ray-glow)}svg .ray.partial{stroke:#ffa37e;opacity:.18}svg .ray.center.partial{stroke:#ffa98e;opacity:.95}svg .arrow{fill:none;stroke:#ffe5aa;stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:1180px){.app{padding:7px 9px 6px;gap:6px}.topbar{height:61px;gap:8px}.logo{width:40px;height:40px;font-size:22px}.eyebrow{font-size:12px}.brand h1{font-size:24px}.nav button{min-width:115px;font-size:15px;padding:9px}.reset-top{font-size:13px;padding:8px}.main{grid-template-columns:minmax(0,1fr) minmax(285px,31vw);gap:7px}.stage-top{min-height:48px}.stage-top strong{font-size:19px}.stage-top .sub{display:none}.stage-note{font-size:12px}.stage-foot{min-height:46px}.side-panel{padding:10px;gap:7px}.side-title h2{font-size:20px}.viewport{height:140px;flex-basis:140px}.metric-box{min-height:70px;padding:9px}.metric-box strong{font-size:19px}.metric-box span{font-size:13px}.lesson-panel{gap:8px}.angle-row .degree{font-size:25px}.angle-row .name{font-size:17px}.preset-grid button{min-height:42px;font-size:15px;padding:8px 2px}.choices button{font-size:13px;min-height:44px}.controls-row{padding-top:6px}.controls-row .line-label{font-size:15px}.segmented button{padding:8px;font-size:13px}.record{min-height:61px;padding:6px}.record .record-text{font-size:13px}.field-note{min-height:37px;padding:7px;font-size:13px}.footer{font-size:11px}}
+@media(max-height:760px){.app{padding-top:5px;gap:5px}.topbar{height:58px}.side-panel{gap:6px}.viewport{height:132px;flex-basis:132px}.metric-box{min-height:65px}.lesson-panel{gap:6px}.stage-top{min-height:46px;padding:7px 12px}.stage-foot{min-height:44px}.preset-grid button{min-height:40px}.small-help{font-size:12px}.records{gap:5px}.record{min-height:59px}.record-actions button{padding:7px 3px}.footer{height:16px;flex-basis:16px}}
+@media(max-width:720px){.app{padding:5px;gap:4px}.logo{display:none}.brand h1{font-size:20px}.brand h1 span{display:none}.eyebrow{font-size:10px}.nav{padding:2px}.nav button{min-width:69px;font-size:12px;padding:8px 5px}.reset-top{display:none}.main{grid-template-columns:minmax(0,1fr) 235px;gap:5px}.side-panel{padding:7px}.side-title h2{font-size:16px}.side-title span{font-size:10px}.viewport{height:118px;flex-basis:118px;border-width:4px}.metric-box strong{font-size:16px}.metric-box span{font-size:11px}.stage-top strong{font-size:15px}.stage-top button{font-size:11px}.stage-note{font-size:10px}.stage-foot{gap:5px}.beam-key,#ray-readout{font-size:11px!important}.stage-foot .fault-btn{font-size:11px;padding:7px}.angle-row .degree{font-size:20px}.angle-row .name{font-size:14px}.preset-grid button{font-size:12px}.choices button{font-size:11px}.controls-row .line-label{font-size:12px}.segmented button{font-size:11px;padding:6px}.record .record-text{font-size:11px}.record-actions button{font-size:11px}.footer{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="logo" aria-hidden="true">◈</div>
+    <div class="brand"><div class="eyebrow">六年级上册 · 第二单元《光》 · 第6课</div><h1>制作潜望镜 <span>｜光学透视调试台</span></h1></div>
+    <nav class="nav" aria-label="学习任务"><button id="tab-build" class="selected" aria-pressed="true">① 透视调试</button><button id="tab-test" aria-pressed="false">② 测试改进</button></nav>
+    <button class="reset-top secondary" id="reset-top" title="把两面镜片复位">↺ 重置镜片</button>
+  </header>
+  <main class="main">
+    <section class="stage-panel" aria-label="潜望镜剖面与光路">
+      <div class="stage-top"><div><strong id="stage-title">看进纸盒内部</strong><span class="sub">拖动镜片，反射光路和目镜实时联动</span></div><button id="toggle-rays" aria-pressed="true">◉ 光路可见</button></div>
+      <div class="diagram-wrap">
+        <svg id="diagram" viewBox="0 0 940 560" role="img" aria-label="潜望镜的二维剖面，两面可以移动和旋转的平面镜，以及动态反射光线">
+          <defs>
+            <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#366076" stroke-opacity=".25" stroke-width="1"/></pattern>
+            <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5f859b"/><stop offset=".42" stop-color="#345b70"/><stop offset="1" stop-color="#203e53"/></linearGradient>
+            <linearGradient id="mirror-metal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d6fcff"/><stop offset=".40" stop-color="#78e4eb"/><stop offset="1" stop-color="#238998"/></linearGradient>
+            <linearGradient id="sea-flood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2ab6d4" stop-opacity=".34"/><stop offset="1" stop-color="#075ba1" stop-opacity=".16"/></linearGradient>
+            <filter id="ray-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="2" result="soft"/><feMerge><feMergeNode in="soft"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <marker id="ray-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L8 3L0 6" fill="none" stroke="#ffe39d" stroke-width="1.5"/></marker>
+          </defs>
+          <rect width="940" height="560" fill="url(#grid)"/>
+          <g id="scene-wall">
+            <path d="M785 278H940V560H785Z" fill="#294655"/><path d="M785 277H940" stroke="#b8d3dc" stroke-width="8"/>
+            <g fill="#375d6d" stroke="#7499a8" stroke-width="2"><rect x="795" y="298" width="65" height="28"/><rect x="861" y="326" width="68" height="28"/><rect x="795" y="353" width="65" height="28"/><rect x="861" y="382" width="68" height="28"/></g>
+            <path d="M800 245q25-88 52-80 31-31 66-7" stroke="#7db6a1" stroke-width="12" fill="none" stroke-linecap="round"/><g fill="#88bc95"><circle cx="850" cy="142" r="30"/><circle cx="890" cy="128" r="28"/><circle cx="917" cy="163" r="24"/></g>
+            <path d="M850 212V153" stroke="#e7e5b7" stroke-width="4"/><path d="M834 165L850 145L866 165Z" fill="#ffc36c"/><path d="M848 156L850 184" stroke="#bb6557" stroke-width="3"/>
+          </g>
+          <g id="scene-sea" hidden>
+            <rect x="780" y="0" width="160" height="560" fill="#14506a" opacity=".15"/>
+            <path d="M778 252Q815 241 855 250T940 250V560H778Z" fill="#167aaf" opacity=".55"/>
+            <path d="M782 258Q815 249 850 256T940 252" fill="none" stroke="#81dbe8" stroke-width="5"/>
+            <path d="M822 171H906L892 193H835Z" fill="#cfebf0"/><rect x="858" y="151" width="31" height="20" rx="2" fill="#e8f9fb"/><path d="M875 149V131" stroke="#e9f3f8" stroke-width="4"/><path d="M876 132L896 140H876Z" fill="#ffa95b"/>
+            <rect x="0" y="255" width="940" height="305" fill="url(#sea-flood)"/><path d="M0 255Q230 249 470 255T940 255" fill="none" stroke="#72d5e8" stroke-dasharray="13 9" stroke-width="3" opacity=".7"/>
+            <text x="793" y="314" class="svg-sub">水面</text>
+          </g>
+          <g id="scene-pipe" hidden>
+            <path d="M777 93H940V302H777Z" fill="#09131c"/><path d="M810 126H931V241H810" fill="none" stroke="#475c68" stroke-width="19"/><path d="M872 151L861 176L882 192L866 211" fill="none" stroke="#d78860" stroke-width="5"/>
+            <g id="flash-cone" hidden><path d="M780 165L933 104L933 266Z" fill="#ffdf8a" opacity=".22"/><circle cx="875" cy="166" r="41" fill="#ffdb81" opacity=".12"/></g>
+          </g>
+          <g aria-hidden="true">
+            <path d="M417 112H785V212H527V382H527V485H107V380H417Z" fill="url(#shell)" stroke="#9fbbc7" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M429 125H785V201H516V392H515V472H107V393H429Z" fill="#081d2e" stroke="#7197a6" stroke-opacity=".45" stroke-width="1.5"/>
+            <path d="M429 125H785M785 201H516V392M515 472H107M107 393H429V125" fill="none" stroke="#90d0d8" stroke-opacity=".36" stroke-width="3"/>
+            <path d="M517 206V385" stroke="#7ca6b5" stroke-width="2" stroke-dasharray="5 9" opacity=".5"/>
+            <path d="M429 125V392" stroke="#3d7082" stroke-width="2" opacity=".6"/>
+            <path d="M785 124V201M108 394V471" stroke="#c4eff1" stroke-width="9" stroke-opacity=".58"/>
+          </g>
+          <g id="internal-baffle" hidden><rect x="427" y="284" width="92" height="18" rx="3" fill="#b78f66" stroke="#ffe4b5" stroke-width="3"/><text x="542" y="300" class="svg-sub">纸板挡光</text></g>
+          <g id="rays-layer" aria-hidden="true"></g>
+          <g id="mirror-upper" class="mirror-grab">
+            <rect class="mirror-face" x="-59" y="-8" width="118" height="16" rx="4" fill="#173b47" stroke="#e0f7f7" stroke-width="2"/>
+            <rect class="mirror-face" x="-53" y="-5" width="106" height="10" rx="3" fill="url(#mirror-metal)"/>
+            <circle class="mirror-face" r="17" fill="#053847" stroke="#d6ffff" stroke-width="3"/><path class="mirror-face" d="M-9 0H9M0-9V9" stroke="#86edf0" stroke-width="2"/>
+            <circle data-drag="move-upper" r="25" fill="transparent"><title>拖动这里移动上镜</title></circle>
+            <circle class="mirror-face" cx="59" r="19" fill="#ffc966" stroke="#fff2bf" stroke-width="3"/><circle data-drag="turn-upper" cx="59" r="29" fill="transparent"><title>拖动端点旋转上镜</title></circle>
+          </g>
+          <g id="mirror-lower" class="mirror-grab">
+            <rect class="mirror-face" x="-59" y="-8" width="118" height="16" rx="4" fill="#173b47" stroke="#e0f7f7" stroke-width="2"/>
+            <rect class="mirror-face" x="-53" y="-5" width="106" height="10" rx="3" fill="url(#mirror-metal)"/>
+            <circle class="mirror-face" r="17" fill="#053847" stroke="#d6ffff" stroke-width="3"/><path class="mirror-face" d="M-9 0H9M0-9V9" stroke="#86edf0" stroke-width="2"/>
+            <circle data-drag="move-lower" r="25" fill="transparent"><title>拖动这里移动下镜</title></circle>
+            <circle class="mirror-face" cx="59" r="19" fill="#ffc966" stroke="#fff2bf" stroke-width="3"/><circle data-drag="turn-lower" cx="59" r="29" fill="transparent"><title>拖动端点旋转下镜</title></circle>
+          </g>
+          <g id="eye" aria-hidden="true"><path d="M94 432q23-24 45 0-22 25-45 0Z" fill="#c3e1e7"/><circle cx="116" cy="432" r="9" fill="#126179"/><circle cx="116" cy="432" r="4" fill="#041e2f"/><path d="M82 450q-22 32 2 54" stroke="#7d9da9" stroke-width="8" stroke-linecap="round" fill="none"/></g>
+          <text x="626" y="103" class="svg-label">入光口</text><text x="49" y="368" class="svg-label">目镜</text><text x="321" y="99" class="svg-sub">上镜</text><text x="351" y="529" class="svg-sub">下镜</text>
+          <g id="scene-titles" aria-hidden="true"><text x="808" y="52" class="svg-label" id="scene-caption">观察墙外</text></g>
+          <g id="ray-direction" aria-hidden="true"></g>
+        </svg>
+        <div class="stage-note">✥ 拖镜片中央改变位置　↗ 拖金色端点改变角度</div>
+      </div>
+      <div class="stage-foot"><span class="beam-key"><i></i> 黄色＝能到达的光路</span><span id="ray-readout" aria-live="polite">正在计算光路…</span><button class="fault-btn" id="quick-fault">制造一处故障</button></div>
+    </section>
+    <aside class="side-panel" aria-live="polite">
+      <div class="side-title"><h2>从目镜里看</h2><span>模拟视野 · 非相机画面</span></div>
+      <div class="viewport" id="viewport" role="img" aria-label="根据镜片和使用条件变化的模拟目镜画面">
+        <div class="view-sky" id="view-sky">
+          <svg id="view-wall" viewBox="0 0 310 185" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sky1" x2="0" y2="1"><stop stop-color="#6ac3df"/><stop offset="1" stop-color="#f2e2b4"/></linearGradient></defs><rect width="310" height="185" fill="url(#sky1)"/><circle cx="245" cy="41" r="21" fill="#fff3b4"/><path d="M0 137Q70 111 145 132T310 115V185H0" fill="#559b87"/><path d="M0 157H310V185H0" fill="#668c96"/><path d="M112 115L153 73L192 115Z" fill="#c85758"/><rect x="128" y="115" width="47" height="36" fill="#fff6db"/><rect x="146" y="129" width="13" height="22" fill="#4a7a91"/><path d="M78 155V86" stroke="#82634f" stroke-width="8"/><circle cx="78" cy="68" r="31" fill="#3e9770"/></svg>
+          <svg id="view-sea" viewBox="0 0 310 185" preserveAspectRatio="xMidYMid slice" hidden><rect width="310" height="185" fill="#8acbe6"/><circle cx="249" cy="30" r="20" fill="#fff4bf"/><rect y="92" width="310" height="93" fill="#2984ac"/><path d="M0 107q25-8 50 0t50 0t50 0t50 0t50 0t60 0" fill="none" stroke="#9cdee8" stroke-width="4"/><path d="M88 89H227L210 118H105Z" fill="#faf8ef"/><rect x="144" y="61" width="47" height="28" fill="#fcf7e4"/><rect x="165" y="36" width="5" height="25" fill="#f9fcfc"/><path d="M170 37L202 47H170Z" fill="#ffad72"/></svg>
+          <svg id="view-pipe" viewBox="0 0 310 185" preserveAspectRatio="xMidYMid slice" hidden><rect width="310" height="185" fill="#313d40"/><path d="M0 20H310V165H0" fill="none" stroke="#71818a" stroke-width="27"/><path d="M240 18L211 74L231 92L202 156" fill="none" stroke="#b76b50" stroke-width="10"/><path d="M0 150H310" stroke="#465861" stroke-width="14"/></svg>
+        </div>
+        <div class="view-shade" id="view-shade"></div>
+        <div class="view-notice" id="view-notice"><span>看不到目标</span><small id="view-help">先检查两面镜子</small></div>
+        <div class="view-caption" id="view-caption">透过两次反射看到墙外</div>
+      </div>
+      <div class="metric-box" id="status-box"><strong id="status-title">正在检验光路</strong><span id="status-detail">…</span></div>
+      <section class="lesson-panel" id="build-panel" aria-label="镜片调试">
+        <div class="angle-row"><div><div class="name">① 上镜</div><div class="hint">相对水平线</div></div><span class="degree" id="upper-angle">45°</span></div>
+        <hr class="divider"><div class="angle-row"><div><div class="name">② 下镜</div><div class="hint">相对水平线</div></div><span class="degree" id="lower-angle">45°</span></div>
+        <hr class="divider"><div class="panel-label">选择一处问题，尝试修好它</div>
+        <div class="preset-grid"><button data-preset="upper">上镜歪了</button><button data-preset="lower">下镜移位</button><button data-preset="blocked">内壁挡光</button><button data-preset="correct" class="selected">两镜对准</button></div>
+        <div class="spacer"></div><p class="small-help">观察重点：光不是“拐弯”前进，而是每次照到镜面后改变方向。</p>
+      </section>
+      <section class="lesson-panel hidden" id="test-panel" aria-label="任务检验与方案记录">
+        <div class="panel-label">选择使用场景</div>
+        <div class="choices" role="group" aria-label="使用场景"><button data-case="wall" class="selected">隔墙观察</button><button data-case="sea">水下瞭望</button><button data-case="pipe">管道检修</button></div>
+        <div class="controls-row"><span class="line-label">镜身材料</span><div class="segmented"><button data-material="paper" class="selected">纸盒</button><button data-material="sealed">防水管</button></div></div>
+        <div class="controls-row"><span class="line-label">前端补光</span><div class="segmented"><button data-light="off" class="selected">关闭</button><button data-light="on">开启</button></div></div>
+        <input id="real-note" class="field-note" maxlength="80" placeholder="实物测试：我们发现……" aria-label="记录真实作品的测试发现">
+        <div class="records"><div class="record"><div class="record-head">方案 A · 改进前</div><div class="record-text" id="record-a">等待记录</div><div class="record-sub" id="record-a-sub">—</div></div><div class="record"><div class="record-head">方案 B · 改进后</div><div class="record-text" id="record-b">等待记录</div><div class="record-sub" id="record-b-sub">—</div></div></div>
+        <div class="record-actions"><button id="save-a">记录 A</button><button id="save-b">记录 B</button><button id="export">导出记录</button></div>
+      </section>
+    </aside>
+  </main>
+  <footer class="footer"><span>二维几何光学示意｜光路按镜面反射方向计算；忽略玻璃厚度和表面散射。</span><span>工程表现为模拟预测，实物效果以小组测试为准。</span></footer>
+</div>
+<script>
+(function(){'use strict';
+  var NS='http://www.w3.org/2000/svg', svg=document.getElementById('diagram');
+  function el(id){return document.getElementById(id)}
+  function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+  function setText(id,value){el(id).textContent=value}
+  function show(node,yes){node.hidden=!yes}
+  var state={page:'build',scene:'wall',material:'paper',light:false,baffle:false,rays:true,
+    upper:{x:474,y:163,angle:-45},lower:{x:474,y:433,angle:-45},records:{A:null,B:null}};
+  var walls=[[[429,125],[785,125]],[[516,201],[785,201]],[[429,201],[429,393]],[[516,201],[516,392]],[[107,393],[429,393]],[[107,472],[515,472]]];
+  function v(x,y){return {x:x,y:y}}
+  function sub(a,b){return v(a.x-b.x,a.y-b.y)}
+  function cross(a,b){return a.x*b.y-a.y*b.x}
+  function add(a,b,t){return v(a.x+b.x*t,a.y+b.y*t)}
+  function dir(angle){var k=angle*Math.PI/180;return v(Math.cos(k),Math.sin(k))}
+  function mirror(m){var u=dir(m.angle);return {a:add(m,u,-59),b:add(m,u,59),u:u}}
+  function hit(p,d,a,b){var q=sub(b,a),diff=sub(a,p),den=cross(d,q);if(Math.abs(den)<1e-8)return null;
+    var t=cross(diff,q)/den,side=cross(diff,d)/den;if(t<=.02||side<-.001||side>1.001)return null;return {p:add(p,d,t),t:t}}
+  function reflected(d,t){var s=2*(d.x*t.x+d.y*t.y);return v(s*t.x-d.x,s*t.y-d.y)}
+  function firstWall(p,d){var best=null,segs=walls.slice();if(state.baffle)segs.push([[429,292],[516,292]]);
+    for(var i=0;i<segs.length;i++){var a=v(segs[i][0][0],segs[i][0][1]),b=v(segs[i][1][0],segs[i][1][1]),h=hit(p,d,a,b);if(h&&(!best||h.t<best.t))best=h;}return best}
+  function trace(angle){
+    var p=v(141,433),d=dir(angle),pts=[p],roles=['eye','lower','upper'];
+    for(var i=1;i<roles.length;i++){
+      var m=mirror(state[roles[i]]),h=hit(p,d,m.a,m.b),w=firstWall(p,d);
+      if(w&&(!h||w.t<h.t-.3)){pts.push(w.p);return {points:pts,ok:false,why:'wall'}}
+      if(!h){pts.push(add(p,d,Math.min(260,w?w.t:260)));return {points:pts,ok:false,why:'miss'}}
+      pts.push(h.p);p=add(h.p,d,.25);d=reflected(d,m.u);
+    }
+    if(d.x<=.08){pts.push(add(p,d,70));return {points:pts,ok:false,why:'angle'}}
+    var t=(785-p.x)/d.x,w2=firstWall(p,d);
+    if(w2&&w2.t<t-.3){pts.push(w2.p);return {points:pts,ok:false,why:'wall'}}
+    var outlet=add(p,d,t);pts.push(outlet);
+    if(outlet.y<125||outlet.y>201){return {points:pts,ok:false,why:'exit'}}
+    var sceneY=outlet.y+(862-outlet.x)*d.y/d.x;
+    return {points:pts,ok:true,sceneY:sceneY,aim:sceneY>=127&&sceneY<=199,dist:Math.abs(sceneY-163)};
+  }
+  function pathOf(pts){return pts.map(function(p,i){return (i?'L':'M')+p.x.toFixed(1)+' '+p.y.toFixed(1)}).join(' ')}
+  function svgNode(tag,attrs){var n=document.createElementNS(NS,tag);for(var key in attrs)if(Object.prototype.hasOwnProperty.call(attrs,key))n.setAttribute(key,attrs[key]);return n}
+  function drawMirrors(){['upper','lower'].forEach(function(which){var m=state[which];el('mirror-'+which).setAttribute('transform','translate('+m.x+' '+m.y+') rotate('+m.angle+')');});setText('upper-angle',Math.round(-state.upper.angle)+'°');setText('lower-angle',Math.round(-state.lower.angle)+'°')}
+  function drawRays(){var layer=el('rays-layer');while(layer.firstChild)layer.removeChild(layer.firstChild);var direction=el('ray-direction');while(direction.firstChild)direction.removeChild(direction.firstChild);
+    var sample=[],success=0,aim=0;for(var i=-10;i<=10;i++){var ray=trace(i*.0043*180/Math.PI);sample.push(ray);if(ray.ok){success++;if(ray.aim)aim++;}}
+    if(state.rays){for(var j=0;j<sample.length;j++){
+      var r=sample[j],isCenter=j===10;
+      var p=svgNode('path',{d:pathOf(r.points.slice().reverse()),'class':'ray'+(isCenter?' center':'')+(r.ok?'':' partial')});layer.appendChild(p);
+      if(isCenter&&r.ok){var pts=r.points,anchor=pts[pts.length-2],out=pts[pts.length-1],a=v(out.x*.55+anchor.x*.45,out.y*.55+anchor.y*.45),b=v(out.x*.45+anchor.x*.55,out.y*.45+anchor.y*.55);direction.appendChild(svgNode('path',{d:pathOf([a,b]),'class':'arrow','marker-end':'url(#ray-arrow)'}));}
+    }}
+    setText('ray-readout','通过镜筒 '+success+' / 21 束追踪光线');
+    return {success:success,aim:aim,central:sample[10]};
+  }
+  function setSelected(selector,attr,value){var items=document.querySelectorAll(selector);for(var i=0;i<items.length;i++){var b=items[i];b.classList.toggle('selected',b.getAttribute(attr)===value);b.setAttribute('aria-pressed',String(b.getAttribute(attr)===value));}}
+  function renderScene(){['wall','sea','pipe'].forEach(function(c){show(el('scene-'+c),state.scene===c);show(el('view-'+c),state.scene===c)});setSelected('[data-case]','data-case',state.scene);setSelected('[data-material]','data-material',state.material);setSelected('[data-light]','data-light',state.light?'on':'off');
+    show(el('flash-cone'),state.scene==='pipe'&&state.light);
+    setText('scene-caption',{wall:'墙外的小屋',sea:'水面上的轮船',pipe:'管壁上的裂缝'}[state.scene]);
+    setText('view-caption',{wall:'墙外：观察小屋',sea:'水下：观察船只',pipe:'管道：寻找裂缝'}[state.scene]);
+    show(el('internal-baffle'),state.baffle);
+  }
+  function renderView(result){var central=result.central,bright=result.success/21,issue='',detail='',good=false,partial=false;
+    var sees= result.aim>=4&&result.success>=6;
+    if(state.baffle){issue='镜筒内部有遮挡';detail='光线碰到内壁纸板，无法顺利通过。';}
+    else if(result.success<6){issue='镜片尚未对准';detail='光线偏离镜面或碰到镜筒内壁。';}
+    else if(!sees){issue='目标偏离目镜视野';detail='光能通过，但没有对准要观察的景物。';partial=true;}
+    else if(result.success<16){issue='只能看见部分景物';detail='部分光线被镜片边缘或镜筒遮挡。';partial=true;}
+    else{issue='两次反射，目标可见';detail='光先经过上镜、下镜，再进入眼睛。';good=true;}
+    var envOK=true;
+    if(state.page==='test'&&state.scene==='sea'&&state.material==='paper'){envOK=false;issue='纸盒镜身不适合水下';detail='水进入镜筒，真实作品无法稳定观察；试试防水结构。';}
+    if(state.page==='test'&&state.scene==='pipe'&&!state.light){envOK=false;issue='管道太暗，缺少照明';detail='光路即使通畅，也需要有光照亮目标。';}
+    var visible=sees&&envOK;good=good&&envOK;partial=partial&&envOK;
+    var box=el('status-box');box.className='metric-box'+(good?' good':(!visible?' bad':''));setText('status-title',issue);setText('status-detail',detail);
+    el('viewport').classList.toggle('is-blocked',!visible);
+    setText('view-help',envOK?(result.success<6?'调整镜面，追踪光线':'光路偏离目标，请继续调试'):(state.scene==='sea'?'换成防水结构':'在前端添加照明'));
+    var sceneOffset=central.ok?clamp((central.sceneY-163)*-.7,-63,63):0;
+    el('view-sky').style.transform='translateY('+sceneOffset.toFixed(1)+'px)';
+    el('view-sky').style.filter='brightness('+(state.scene==='pipe'?(state.light?1:.12):1)+')';
+    el('view-shade').style.opacity=visible?String(clamp(.44-bright*.4,0,.48)):'0';
+    return {success:result.success,aim:result.aim,visible:visible,issue:issue,condition:envOK};
+  }
+  var latest=null;
+  function render(){drawMirrors();renderScene();latest=renderView(drawRays());}
+  function resetMirrors(){state.upper={x:474,y:163,angle:-45};state.lower={x:474,y:433,angle:-45};state.baffle=false;setSelected('[data-preset]','data-preset','correct');render()}
+  function preset(type){resetMirrors();if(type==='upper')state.upper.angle=-32;if(type==='lower'){state.lower.x=508;state.lower.y=447;}if(type==='blocked')state.baffle=true;setSelected('[data-preset]','data-preset',type);render()}
+  function switchPage(page){state.page=page;el('build-panel').classList.toggle('hidden',page!=='build');el('test-panel').classList.toggle('hidden',page!=='test');el('tab-build').classList.toggle('selected',page==='build');el('tab-test').classList.toggle('selected',page==='test');el('tab-build').setAttribute('aria-pressed',page==='build');el('tab-test').setAttribute('aria-pressed',page==='test');setText('stage-title',page==='build'?'看进纸盒内部':'真实情境，检验改进');render()}
+  function point(e){var p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;var matrix=svg.getScreenCTM();return matrix?p.matrixTransform(matrix.inverse()):v(0,0)}
+  var drag=null;svg.addEventListener('pointerdown',function(e){var t=e.target;while(t&&t!==svg&&!t.hasAttribute('data-drag'))t=t.parentNode;if(!t||t===svg)return;
+    var mode=t.getAttribute('data-drag'),which=mode.split('-')[1],p=point(e),m=state[which];drag={mode:mode,which:which,p:p,start:{x:m.x,y:m.y,angle:m.angle},id:e.pointerId};svg.setPointerCapture&&svg.setPointerCapture(e.pointerId);e.preventDefault();});
+  svg.addEventListener('pointermove',function(e){if(!drag||e.pointerId!==drag.id)return;var p=point(e),m=state[drag.which];if(drag.mode.indexOf('turn-')===0){var degrees=Math.atan2(p.y-m.y,p.x-m.x)*180/Math.PI;m.angle=clamp(degrees,-72,-18);}else{
+      m.x=clamp(drag.start.x+p.x-drag.p.x,448,506);m.y=clamp(drag.start.y+p.y-drag.p.y,drag.which==='upper'?146:418,drag.which==='upper'?180:449);
+    }setSelected('[data-preset]','data-preset','');render();e.preventDefault()});
+  function endDrag(e){if(drag&&e.pointerId===drag.id){drag=null;}}
+  svg.addEventListener('pointerup',endDrag);svg.addEventListener('pointercancel',endDrag);svg.addEventListener('lostpointercapture',function(){drag=null});
+  el('tab-build').addEventListener('click',function(){switchPage('build')});el('tab-test').addEventListener('click',function(){switchPage('test')});el('reset-top').addEventListener('click',resetMirrors);
+  el('toggle-rays').addEventListener('click',function(){state.rays=!state.rays;this.setAttribute('aria-pressed',state.rays);this.textContent=state.rays?'◉ 光路可见':'◎ 隐藏光路';render()});
+  var faultSequence=['upper','lower','blocked','correct'],faultIndex=0;
+  el('quick-fault').addEventListener('click',function(){preset(faultSequence[faultIndex++%faultSequence.length]);});
+  Array.prototype.forEach.call(document.querySelectorAll('[data-preset]'),function(b){b.addEventListener('click',function(){preset(b.getAttribute('data-preset'))})});
+  Array.prototype.forEach.call(document.querySelectorAll('[data-case]'),function(b){b.addEventListener('click',function(){state.scene=b.getAttribute('data-case');render()})});
+  Array.prototype.forEach.call(document.querySelectorAll('[data-material]'),function(b){b.addEventListener('click',function(){state.material=b.getAttribute('data-material');render()})});
+  Array.prototype.forEach.call(document.querySelectorAll('[data-light]'),function(b){b.addEventListener('click',function(){state.light=b.getAttribute('data-light')==='on';render()})});
+  function loadNotes(){try{var stored=JSON.parse(localStorage.getItem('periscope-lesson-2-6-records')||'{}');if(stored.records)state.records=stored.records;if(stored.note)el('real-note').value=stored.note;}catch(ignore){}}
+  function persist(){try{localStorage.setItem('periscope-lesson-2-6-records',JSON.stringify({records:state.records,note:el('real-note').value}))}catch(ignore){}}
+  function labelCase(c){return {wall:'隔墙观察',sea:'水下瞭望',pipe:'管道检修'}[c]||c}
+  function showRecords(){['A','B'].forEach(function(slot){var d=state.records[slot],s=slot.toLowerCase();setText('record-'+s,d?(d.visible?'能看见目标':'尚不能看清'):'等待记录');setText('record-'+s+'-sub',d?(labelCase(d.scene)+' · '+d.rays+'/21束'):'—')})}
+  function capture(slot){state.records[slot]={scene:state.scene,material:state.material,light:state.light,baffle:state.baffle,upper:{x:state.upper.x,y:state.upper.y,angle:state.upper.angle},lower:{x:state.lower.x,y:state.lower.y,angle:state.lower.angle},visible:latest.visible,rays:latest.success,issue:latest.issue,at:new Date().toLocaleString('zh-CN')};persist();showRecords();}
+  el('save-a').addEventListener('click',function(){capture('A')});el('save-b').addEventListener('click',function(){capture('B')});el('real-note').addEventListener('input',persist);
+  el('export').addEventListener('click',function(){var lines=['六年级上册 第二单元 第6课《制作潜望镜》','方案测试与改进记录（光路为二维模型预测，非实物测量）',''];
+    ['A','B'].forEach(function(k){var d=state.records[k];lines.push('方案 '+k+'：'+(d?labelCase(d.scene):'未记录'));if(d){lines.push('镜身材料：'+(d.material==='sealed'?'防水管':'纸盒')+'；前端补光：'+(d.light?'开':'关'));lines.push('上镜角度：'+Math.round(-d.upper.angle)+'°；下镜角度：'+Math.round(-d.lower.angle)+'°');lines.push('模拟追踪：'+d.rays+'/21 束通过镜筒；目标：'+(d.visible?'可见':'不可见'));lines.push('当时问题：'+d.issue+'；记录时间：'+d.at);}lines.push('')});
+    lines.push('小组实物测试发现：'+(el('real-note').value||'（待填写）'));lines.push('我们准备怎样改进：_______________________');
+    var blob=new Blob(['\uFEFF'+lines.join('\r\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='六上2.6潜望镜改进记录.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url)},2000);
+  });
+  window.PeriscopePhysics={trace:trace,hit:hit,reflected:reflected,state:state};
+  loadNotes();showRecords();render();
+})();
+</script>
+</body>
+</html>
