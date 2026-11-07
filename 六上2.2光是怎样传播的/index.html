@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102c39">
+<meta name="description" content="六年级上册《光是怎样传播的》：光斑与光路同步、预测叠加、打孔卡纸探究与小孔成像。单体离线互动课件。">
+<title>光是怎样传播的 · 光路实验室</title>
+<style>
+:root{--ink:#18323e;--muted:#526771;--paper:#f2f5f3;--line:#d6e0dc;--teal:#137e79;--mint:#b8ece2;--gold:#ffd277;--stage:#102c39;--white:#fff;--r:16px;--body:clamp(16px,1.32vw,25px);--btn:clamp(16px,1.32vw,25px)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);background:var(--paper);font-size:var(--body);-webkit-text-size-adjust:100%}button,input,select,textarea{font:inherit}button{cursor:pointer;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent}button,input,select,textarea,a,[tabindex]{outline-offset:4px}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:3px solid #dc8c18}button{border:1px solid var(--line);color:var(--ink);background:#fff;border-radius:10px;min-height:46px;padding:10px 16px;font-size:var(--btn);font-weight:650;line-height:1.2}button:hover{background:#eaf5f1}button:disabled{opacity:.4;cursor:default}button.primary{background:var(--teal);color:#fff;border-color:var(--teal)}button.primary:hover{background:#0b6c68}button.active,button[aria-pressed="true"]{background:#d5eee7;border-color:#137e79;color:#096a65}button.icon{min-width:46px;padding:9px}.icon svg{width:22px;height:22px;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}button.ghost{background:transparent;border-color:transparent}.small{font-size:clamp(13px,1.05vw,19px)}[hidden]{display:none!important}.app{height:100%;height:100dvh;display:flex;flex-direction:column;padding:0 24px 26px;gap:0}.topbar{min-height:92px;display:flex;align-items:center;gap:22px;border-bottom:1px solid var(--line);flex-shrink:0}h1{font-size:clamp(23px,2vw,38px);margin:0;font-weight:800;letter-spacing:-.04em;white-space:nowrap}.topbar nav{display:flex;gap:7px;margin-left:auto;background:#e4ebe7;padding:5px;border-radius:12px}.topbar nav button{background:transparent;border-color:transparent;padding:13px 20px;white-space:nowrap}.topbar nav button.active{background:#fff;box-shadow:0 3px 10px #18323e0b;color:#126c68}.top-actions{display:flex;gap:6px;align-items:center}.count{display:inline-flex;align-items:center;justify-content:center;width:1.4em;height:1.4em;border-radius:50%;background:#e6f0ed;margin-left:6px;font-size:.82em;color:#1c6b63}main{flex:1;min-height:0;display:flex;flex-direction:column}.question{min-height:98px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-shrink:0}.question h2{margin:0;font-size:clamp(25px,2.25vw,43px);letter-spacing:-.025em;line-height:1.3}.question p{color:var(--muted);margin:7px 0 0;font-size:clamp(15px,1.25vw,24px)}.work-area{display:grid;grid-template-columns:minmax(0,1fr) clamp(260px,23vw,420px);gap:20px;flex:1;min-height:0}.stage-shell{min-height:0;display:flex;flex-direction:column;background:var(--stage);border-radius:var(--r);overflow:hidden;position:relative;box-shadow:0 6px 24px #163c3910}.stage-top{height:67px;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;gap:12px;flex-shrink:0;color:#d7e8ed}.stage-name{font-size:clamp(14px,1.1vw,21px);white-space:nowrap}.stage-actions{display:flex;gap:8px}.stage-actions button{background:#21424f;color:#e5f1f3;border:1px solid #3b5a65;min-height:42px;padding:9px 14px;font-size:clamp(14px,1.16vw,22px)}.stage-actions button.active{background:var(--mint);color:#123b3f;border-color:var(--mint)}.stage-actions .mini{width:42px;padding:6px;font-size:23px}.stage{flex:1;min-height:0;touch-action:none;position:relative;overflow:hidden;cursor:default}.stage.drawing{cursor:crosshair}.stage>svg{display:block;width:100%;height:100%;user-select:none;-webkit-user-select:none}.stage [data-drag]{cursor:grab;touch-action:none}.stage [data-action]{cursor:pointer}.stage-footer{display:flex;align-items:center;gap:8px;justify-content:space-between;min-height:56px;flex-shrink:0;border-top:1px solid #35515d;padding:9px 20px;color:#c7dce3;font-size:clamp(13px,1.15vw,22px)}.stage-footer strong{font-weight:600;color:#e3f4ed}.stage-footer .legend{display:flex;gap:16px;align-items:center;white-space:nowrap}.swatch{display:inline-block;width:20px;height:4px;border-radius:2px;background:var(--gold);vertical-align:middle;margin-right:5px}.swatch.pred{background:#e6a9df}.aside{display:flex;flex-direction:column;min-height:0;padding:20px;background:#fff;border:1px solid var(--line);border-radius:var(--r);gap:12px}.aside h3{margin:0;font-size:clamp(21px,1.55vw,30px)}.screen-wrap{flex:1;min-height:90px;max-height:42%;background:#0a202a;border-radius:11px;position:relative;overflow:hidden}.screen-wrap svg{display:block;width:100%;height:100%}.status{font-size:clamp(22px,1.8vw,34px);font-weight:750;margin:0;line-height:1.25}.status-note{font-size:clamp(13px,1.04vw,20px);color:var(--muted);margin:0;min-height:1.5em;line-height:1.4}.controls{display:flex;flex-direction:column;gap:10px;flex-shrink:0}.control-title{display:flex;align-items:center;justify-content:space-between;gap:4px;font-weight:650;font-size:clamp(16px,1.3vw,25px)}output{font-variant-numeric:tabular-nums;color:#126e67}input[type=range]{width:100%;height:36px;margin:0;accent-color:var(--teal);cursor:ew-resize;touch-action:none}input[type=range]::-webkit-slider-thumb{min-width:25px;min-height:25px}input[type=range]:disabled{opacity:.4}.row{display:flex;gap:8px}.row>button{flex:1;padding-left:6px;padding-right:6px;white-space:nowrap}.save{width:100%;margin-top:auto;min-height:52px}.pinhole-controls .control-title{font-size:clamp(16px,1.27vw,24px)}.numbers{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:12px}.numbers div{display:flex;flex-direction:column;gap:4px;color:var(--muted);font-size:clamp(14px,1.1vw,21px)}.numbers strong{font-size:clamp(22px,1.8vw,34px);color:var(--ink);font-variant-numeric:tabular-nums}.point-keys{display:flex;gap:7px}.point-keys button{flex:1;min-height:44px;font-size:clamp(15px,1.15vw,22px);padding:8px 5px;border-color:#cedbd7}.point-keys button[data-point="top"]{color:#b94453}.point-keys button[data-point="bottom"]{color:#087d93}.point-keys button[data-point="top"].active{background:#f9e4e8;border-color:#df7a87}.point-keys button[data-point="bottom"].active{background:#e0f3f8;border-color:#6fb5c8}.toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);padding:13px 24px;max-width:90vw;background:#fff7e4;border:1px solid #d7b979;border-radius:12px;box-shadow:0 5px 26px #0002;z-index:70;font-size:clamp(16px,1.3vw,24px);color:#58431a;pointer-events:none}.veil{position:fixed;inset:0;background:#0b2436ad;backdrop-filter:blur(6px);z-index:40;display:flex;align-items:center;justify-content:center;padding:22px}.dialog{width:min(1500px,98vw);max-height:calc(100dvh - 44px);background:var(--paper);border-radius:18px;display:flex;flex-direction:column;padding:24px;gap:18px;box-shadow:0 25px 100px #03182366;overflow:hidden}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.dialog h2{font-size:clamp(25px,2vw,38px);margin:0}.dialog-head .actions{display:flex;align-items:center;gap:8px}.dialog-note{margin:0;font-size:clamp(14px,1.1vw,20px);color:var(--muted)}.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;min-height:0;flex:1}.evidence-card{min-width:0;min-height:0;border:1px solid var(--line);padding:16px;border-radius:12px;background:white;display:flex;flex-direction:column;gap:10px}.evidence-head{display:flex;gap:8px}.evidence-head select{flex:1;min-width:0;font-weight:700;background:#f0f6f3}.evidence-head button{padding:8px 12px;min-height:42px}.evidence-thumb{background:var(--stage);border-radius:8px;aspect-ratio:2 / 1;min-height:100px;max-height:30vh;flex:1;overflow:hidden}.evidence-thumb>svg{height:100%;width:100%;display:block}.evidence-data{margin:0;font-size:clamp(15px,1.15vw,22px);font-weight:650}.evidence-card label{display:flex;gap:8px;align-items:center;font-size:clamp(14px,1.1vw,21px)}.evidence-card label>select{flex:1;min-width:0}.evidence-card textarea{width:100%;height:73px;min-height:58px;resize:none}.evidence-card select,.evidence-card textarea{border:1px solid #c4d6ce;border-radius:7px;padding:8px 10px;font-size:clamp(14px,1.1vw,21px);color:var(--ink)}.empty{display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);padding:30px;background:#fff;min-height:250px;border:2px dashed #b3c9bd;border-radius:12px;grid-column:1/-1;font-size:clamp(20px,1.7vw,32px);line-height:1.7}.guide{width:min(900px,95vw);overflow:auto;padding:28px}.guide h3{margin:18px 0 5px;font-size:1.1em}.guide p{margin:5px 0;line-height:1.7;font-size:clamp(16px,1.3vw,23px)}.guide ul{padding-left:1.5em;margin:5px 0;line-height:1.7}.guide .dialog-head{position:sticky;top:-28px;background:var(--paper);padding-top:4px;z-index:1}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(min-width:1700px){.app{padding:0 32px 28px}.topbar{min-height:112px}.question{min-height:120px}.aside{padding:26px;gap:18px}.stage-top{height:78px}.stage-footer{min-height:64px}.save{min-height:65px}.controls{gap:14px}button{min-height:54px}.screen-wrap{min-height:120px}.dialog{padding:28px}}
+@media(max-width:1160px){.app{padding:0 14px 24px}.topbar{min-height:78px;gap:10px}.topbar nav button{padding:11px 12px}.topbar nav{gap:0}.top-actions{gap:2px}h1{font-size:24px}.question{min-height:91px}.work-area{gap:12px;grid-template-columns:minmax(0,1fr) 270px}.aside{padding:14px;gap:9px}.stage-top{padding:10px 12px;height:60px}.stage-name{font-size:13px}.stage-actions{gap:5px}.stage-actions button{padding:8px 10px}.stage-footer{padding:10px 12px;font-size:13px}.stage-footer .legend{gap:8px}.controls{gap:8px}.numbers{padding-top:8px}.save{min-height:47px}.top-actions .optional-label{display:none}.screen-wrap{min-height:100px}.dialog{padding:18px;gap:12px}.evidence-card{padding:12px;gap:8px}.evidence-card textarea{height:60px}}
+@media(max-height:690px) and (min-width:761px){.topbar{min-height:65px}.question{min-height:74px}.question h2{font-size:26px}.question p{margin-top:3px;font-size:14px}.stage-top{height:52px}.stage-footer{min-height:42px}.aside{gap:7px;padding:12px}.aside h3{font-size:20px}.controls{gap:5px}button{min-height:40px;padding:8px 12px}.save{min-height:42px}input[type=range]{height:29px}.screen-wrap{min-height:70px;max-height:30%}.status{font-size:23px}.status-note{font-size:12px}.control-title{font-size:16px}.point-keys button{min-height:36px}.numbers{padding-top:7px}.numbers strong{font-size:23px}.dialog{padding:14px;gap:10px}.evidence-thumb{max-height:24vh}.evidence-card textarea{height:50px;min-height:50px}.evidence-card{gap:7px}.dialog h2{font-size:24px}.dialog-note{font-size:13px}}
+@media(max-width:760px){.app{padding:0 10px 24px}.topbar{min-height:104px;display:grid;grid-template-columns:1fr auto;gap:4px;padding:8px 0}.topbar h1{font-size:22px}.topbar nav{grid-column:1/-1;grid-row:2;justify-self:stretch;margin:0;padding:3px}.topbar nav button{flex:1;min-height:38px;font-size:16px;padding:9px}.top-actions{grid-column:2;grid-row:1}.top-actions button{min-height:38px;padding:6px 8px}.top-actions button.icon{min-width:36px}.top-actions button:first-child{font-size:14px}.question{min-height:77px;gap:6px}.question h2{font-size:23px}.question p{font-size:13px;margin-top:3px;max-width:80vw}.question>button{font-size:13px;min-height:36px;padding:7px}.work-area{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) 185px;gap:10px}.stage-top{height:46px;padding:7px 10px}.stage-name{font-size:12px}.stage-actions button{font-size:12px;min-height:32px;padding:7px 9px}.stage-actions .mini{width:32px;font-size:18px}.stage-footer{min-height:36px;padding:6px 10px;font-size:11px}.stage-footer .legend{display:none}.aside{padding:10px;display:grid;grid-template-columns:112px minmax(0,1fr);grid-template-rows:23px 1fr 40px;gap:5px 12px}.aside h3{grid-column:1;font-size:15px}.screen-wrap{grid-column:1;grid-row:2;max-height:none;min-height:0}.status{grid-column:1;grid-row:3;font-size:15px;text-align:center;align-self:center}.status-note{display:none}.controls{grid-column:2;grid-row:1/3;gap:3px;justify-content:center}.control-title{font-size:14px}.controls input[type=range]{height:27px}.row>button{font-size:12px;min-height:33px;padding:6px}.save{grid-column:2;grid-row:3;min-height:37px;height:37px;font-size:14px;margin:0}.numbers{padding-top:4px}.numbers div{font-size:11px;gap:2px}.numbers strong{font-size:17px}.point-keys button{min-height:31px;font-size:12px;padding:5px}.pinhole-controls{gap:2px}.pinhole-controls .control-title{font-size:13px}.pinhole-controls .numbers{display:none}.pinhole-controls input[type=range]{height:24px}.veil{padding:10px}.dialog{padding:13px;max-height:calc(100dvh - 20px);gap:10px}.dialog-head{gap:7px}.dialog h2{font-size:21px}.dialog-head .actions{gap:3px}.dialog-head .actions button{font-size:12px;min-height:34px;padding:7px}.dialog-note{font-size:12px}.evidence-grid{gap:9px}.evidence-card{padding:8px;gap:8px}.evidence-head{flex-wrap:wrap;gap:4px}.evidence-head select{width:100%;flex-basis:100%;font-size:12px}.evidence-head button{font-size:11px;min-height:30px;padding:5px 7px}.evidence-thumb{min-height:90px;max-height:18vh}.evidence-data{font-size:12px;min-height:34px}.evidence-card label{display:block;font-size:12px}.evidence-card label>select{width:100%;margin-top:4px;font-size:12px;padding:6px}.evidence-card textarea{font-size:12px;height:80px;padding:6px}.guide{padding:20px}.guide p,.guide li{font-size:15px}.guide .dialog-head{top:-20px}}
+@media(max-height:550px) and (min-width:761px){.app{padding-bottom:20px}.topbar{min-height:53px}.topbar nav button{padding:7px 10px;min-height:34px}.question{min-height:58px}.question h2{font-size:22px}.question p{font-size:12px}.work-area{grid-template-columns:minmax(0,1fr) 245px;gap:8px}.aside{gap:5px;padding:9px}.stage-top{height:42px}.stage-footer{min-height:32px;font-size:11px}.stage-actions button{min-height:31px;font-size:12px}.aside h3{font-size:17px}.screen-wrap{min-height:45px;max-height:25%}.status{font-size:19px}.status-note{display:none}.controls{gap:3px}.control-title{font-size:13px}.pinhole-controls .control-title{font-size:13px}.pinhole-controls .numbers{display:none}button{min-height:33px;font-size:13px;padding:6px 9px}.save{min-height:33px}.point-keys button{min-height:29px;font-size:12px}.stage-name{font-size:12px}.numbers{display:none}.evidence-card textarea{height:38px;min-height:38px}.evidence-thumb{min-height:60px}.dialog-note{display:none}.evidence-head button{min-height:29px}.evidence-card label{font-size:12px}.evidence-card select,.evidence-card textarea{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <h1>光是怎样传播的</h1>
+    <nav aria-label="探究场景">
+      <button id="tab-bench" class="active" aria-pressed="true">1 追踪光路</button>
+      <button id="tab-pinhole" aria-pressed="false">2 小孔成像</button>
+    </nav>
+    <div class="top-actions">
+      <button id="open-evidence" aria-label="打开证据板">证据板<span id="record-count" class="count">0</span></button>
+      <button id="open-guide" class="icon ghost" title="课堂用法与模型说明" aria-label="课堂用法与模型说明"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 8.8a2.5 2.5 0 0 1 4.8 1c0 1.7-2.4 1.9-2.4 3.8M12 17h.01"/></svg></button>
+      <button id="fullscreen" class="icon ghost" title="全屏" aria-label="进入全屏"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg></button>
+    </div>
+  </header>
+  <main>
+    <section class="question"><div><h2 id="question-title">光被哪张卡纸挡住了？</h2><p id="question-sub">先在实物中观察，再用光路检验你的解释。</p></div><button id="reset" class="ghost">复原</button></section>
+    <section class="work-area" aria-label="互动实验区域">
+      <div class="stage-shell">
+        <div class="stage-top"><span id="stage-name" class="stage-name">俯视模型 · 空气中的光</span><div class="stage-actions"><button id="draw-prediction" aria-pressed="false">画预测线</button><button id="clear-prediction" class="mini" aria-label="清除预测线" title="清除预测线" hidden>↶</button><button id="show-rays" aria-pressed="false">光路透视</button></div></div>
+        <div id="stage" class="stage" aria-label="可拖动的光路实验模型"></div>
+        <div class="stage-footer"><span id="stage-hint">拖动卡纸调位置；拖动手电筒前的圆点调方向。</span><span id="legend" class="legend"><span><i class="swatch pred"></i>预测</span><span><i class="swatch"></i>模型光路</span></span></div>
+      </div>
+      <aside class="aside">
+        <h3 id="screen-title">纸屏正视</h3>
+        <div id="screen-view" class="screen-wrap"></div>
+        <p id="screen-status" class="status" aria-live="polite">纸屏有光斑</p>
+        <p id="screen-note" class="status-note">光路未显示，先画出你的预测。</p>
+        <div id="bench-controls" class="controls">
+          <label class="control-title" for="card-offset"><span id="selected-card-label">卡纸 2 偏移</span><output id="card-offset-value">0.0 cm</output></label>
+          <input id="card-offset" aria-label="所选卡纸偏移" type="range" min="-3" max="3" step="0.05" value="0">
+          <div class="row"><button id="remove-card">移出卡纸 2</button><button id="align-cards">三孔对齐</button></div>
+        </div>
+        <div id="pinhole-controls" class="controls pinhole-controls" hidden>
+          <div class="point-keys" aria-label="追踪烛焰上的点"><button data-point="top" aria-pressed="false">上部 A</button><button data-point="bottom" aria-pressed="false">下部 B</button></div>
+          <label class="control-title" for="screen-distance"><span>纸屏离小孔</span><output id="screen-distance-value">15 cm</output></label>
+          <input id="screen-distance" aria-label="纸屏到小孔的距离" type="range" min="8" max="24" step="0.5" value="15">
+          <label class="control-title" for="object-distance"><span>烛焰离小孔</span><output id="object-distance-value">20 cm</output></label>
+          <input id="object-distance" aria-label="烛焰到小孔的距离" type="range" min="12" max="28" step="0.5" value="20">
+          <output id="image-height" class="sr-only">4.5 cm</output>
+        </div>
+        <button id="save-record" class="primary save">留下这组证据</button>
+      </aside>
+    </section>
+  </main>
+</div>
+<div id="toast" class="toast" role="status" hidden></div>
+<div id="evidence-dialog" class="veil" hidden>
+  <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="evidence-title">
+    <div class="dialog-head"><h2 id="evidence-title">证据对照</h2><div class="actions"><button id="export-svg">导出记录图</button><button id="export-csv">导出表格</button><button class="icon" data-close="evidence-dialog" aria-label="关闭证据板">✕</button></div></div>
+    <p class="dialog-note">最多保留 4 组；模型结果与实物观察分别记录。选择两组，比较条件、光斑与解释。</p>
+    <div id="evidence-grid" class="evidence-grid"></div>
+  </section>
+</div>
+<div id="guide-dialog" class="veil" hidden>
+  <section class="dialog guide" role="dialog" aria-modal="true" aria-labelledby="guide-title">
+    <div class="dialog-head"><h2 id="guide-title">课堂用法与模型说明</h2><button class="icon" data-close="guide-dialog" aria-label="关闭说明">✕</button></div>
+    <h3>先有实物证据，再让光路帮助解释</h3>
+    <p>完成三张打孔卡纸实验后，在这里摆出相同条件。先画预测线，再打开光路透视；比较“中间卡纸偏移”与“把它完全移走”。轻微偏移时，仍可能有部分光穿过小孔。</p>
+    <h3>把物体上的一个点，与屏上的一个点联系起来</h3>
+    <p>点击烛焰上的 A、B 点，追踪从不同部位发出的光；再拖动纸屏，观察像与光路怎样同步变化。红、蓝仅为来源标记，光线经过小孔前后保持共线。</p>
+    <h3>这个模型保留了什么、简化了什么</h3>
+    <ul><li>均匀空气中的几何光学模型，不模拟折射、散射和衍射。透视线是解释工具，不表示能在干净空气中直接看到完整光路。</li><li>手电筒简化为点状等效光源与有宽度的光束。卡纸为理想不透明薄板，画出的边缘只用于识别，不模拟光从卡纸外缘绕过。孔与距离为教学放大示意。</li><li>逐孔计算可通过的射线，卡纸会截断遇到它的光。孔中心不完全等高，不代表一定完全无光。</li><li>小孔成像采用理想点孔；孔口视觉放大。像的位置与大小按相似三角形计算，忽略孔径造成的模糊与衍射。屏幕明暗作示意，不用于光度测量。</li><li>烛焰高 6 cm 是模型尺度，不代表每支蜡烛的真实火焰。仅显示烛焰的像；烛身未作为发光体处理。用相同的物体位置比较屏距变化。</li></ul>
+    <h3>记录与操作</h3>
+    <p>证据保存在当前浏览器；离线或隐私模式无法保存时，仍可导出 SVG 记录图和 CSV 表格。实物观察默认为“未记录”，由学生自行补充。SVG 记录图可直接用浏览器打开或打印。</p>
+    <p>鼠标和触控均可拖动。键盘可用 Tab 选中卡纸，上下方向键微调，Delete 移出或放回；选中手电筒方向点后可用方向键调整。选中烛焰或纸屏后，可用左右方向键移动。Esc 退出画线或关闭对话框。</p>
+    <h3>教学依据</h3>
+    <p>所附六年级上册教材第 38–41 页，教师用书第 158–167 页。延伸提问：怎样用今天的光路解释排队与影子？</p>
+  </section>
+</div>
+<script>
+/*
+ * Deterministic, two-dimensional geometric optics for 六上 2.2.
+ * Units: bench coordinates must all use one shared unit; pinhole distances u/v/h
+ * and pointY are in cm, apertureMm is in mm. spreadDeg is the HALF beam angle.
+ * Cards are ideal infinitely tall, opaque, zero-thickness planes with open gaps.
+ * A point-like equivalent source emits a uniform angular fan in uniform air.
+ * transmission is the fraction of that MODEL angular fan, not a measured
+ * three-dimensional light intensity. Diffraction/scattering/reflection omitted.
+ */
+(function (root, factory) {
+  'use strict';
+  var api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  if (root) root.Optics = api;
+}(typeof window !== 'undefined' ? window : this, function () {
+  'use strict';
+  var EPS = 1e-9;
+  var RAD = Math.PI / 180;
+
+  function finite(value, fallback) {
+    return typeof value === 'number' && isFinite(value) ? value : fallback;
+  }
+
+  function clamp(value, low, high) {
+    return Math.max(low, Math.min(high, value));
+  }
+
+  function coordinate(value, fallback) {
+    return clamp(finite(value, fallback), -1000000, 1000000);
+  }
+
+  function positive(value, fallback) {
+    value = finite(value, fallback);
+    return value > 0 ? clamp(value, 0.000001, 1000000) : fallback;
+  }
+
+  function range(low, high) {
+    var width = Math.max(0, high - low);
+    return {
+      min: low,
+      max: width > EPS ? high : low,
+      width: width > EPS ? width : 0,
+      active: width > EPS
+    };
+  }
+
+  function intersect(a, low, high) {
+    if (!a.active) return range(a.min, a.min);
+    return range(Math.max(a.min, low), Math.min(a.max, high));
+  }
+
+  function normalized(state) {
+    state = state || {};
+    var src = state.source || {};
+    var scr = state.screen || {};
+    var source = { x: coordinate(src.x, 0), y: coordinate(src.y, 0) };
+    var angle = clamp(finite(state.angleDeg, 0), -89, 89);
+    var spread = clamp(finite(state.spreadDeg, 8), 0, 89);
+    var angleMin = clamp(angle - spread, -89.9, 89.9);
+    var angleMax = clamp(angle + spread, -89.9, 89.9);
+    var screenX = coordinate(scr.x, source.x + 1000);
+    if (screenX <= source.x + EPS) screenX = source.x + 1;
+    var screenMin = coordinate(scr.minY, -1000);
+    var screenMax = coordinate(scr.maxY, 1000);
+    var swap;
+    if (screenMin > screenMax) {
+      swap = screenMin; screenMin = screenMax; screenMax = swap;
+    }
+    var cards = [];
+    var inputCards = Object.prototype.toString.call(state.cards) === '[object Array]' ? state.cards : [];
+    for (var i = 0; i < inputCards.length; i += 1) {
+      var card = inputCards[i] || {};
+      var x = coordinate(card.x, source.x - 1);
+      if (x <= source.x + EPS || x >= screenX - EPS) continue;
+      cards.push({
+        index: i,
+        x: x,
+        y: coordinate(card.y, source.y),
+        r: clamp(finite(card.r, 10), 0, 1000000),
+        present: card.present !== false
+      });
+    }
+    cards.sort(function (a, b) { return a.x - b.x || a.index - b.index; });
+    return {
+      source: source,
+      angleDeg: angle,
+      spreadDeg: spread,
+      beam: range(Math.tan(angleMin * RAD), Math.tan(angleMax * RAD)),
+      angularSpan: (angleMax - angleMin) * RAD,
+      cards: cards,
+      screen: { x: screenX, minY: screenMin, maxY: screenMax }
+    };
+  }
+
+  function fraction(r, span) {
+    if (!r.active || span <= EPS) return 0;
+    return clamp((Math.atan(r.max) - Math.atan(r.min)) / span, 0, 1);
+  }
+
+  function segment(n, x0, x1, r) {
+    return {
+      x0: x0,
+      x1: x1,
+      minSlope: r.min,
+      maxSlope: r.max,
+      y0Min: n.source.y + r.min * (x0 - n.source.x),
+      y0Max: n.source.y + r.max * (x0 - n.source.x),
+      y1Min: n.source.y + r.min * (x1 - n.source.x),
+      y1Max: n.source.y + r.max * (x1 - n.source.x),
+      active: r.active,
+      fraction: fraction(r, n.angularSpan)
+    };
+  }
+
+  function benchModel(state) {
+    var n = normalized(state);
+    var current = range(n.beam.min, n.beam.max);
+    var previousX = n.source.x;
+    var segments = [];
+    var planes = [];
+    var fullyBlockedAt = null;
+    for (var i = 0; i < n.cards.length; i += 1) {
+      var card = n.cards[i];
+      var dx = card.x - n.source.x;
+      var before = current;
+      var low = (card.y - card.r - n.source.y) / dx;
+      var high = (card.y + card.r - n.source.y) / dx;
+      segments.push(segment(n, previousX, card.x, before));
+      if (card.present) current = intersect(before, low, high);
+      if (before.active && !current.active && fullyBlockedAt === null) fullyBlockedAt = card.index;
+      var beforeFraction = fraction(before, n.angularSpan);
+      var afterFraction = fraction(current, n.angularSpan);
+      planes.push({
+        index: card.index,
+        x: card.x,
+        y: card.y,
+        r: card.r,
+        present: card.present,
+        incoming: before,
+        aperture: range(low, high),
+        outgoing: current,
+        incomingFraction: beforeFraction,
+        outgoingFraction: afterFraction,
+        blockedFraction: Math.max(0, beforeFraction - afterFraction)
+      });
+      previousX = card.x;
+    }
+    segments.push(segment(n, previousX, n.screen.x, current));
+    var distance = n.screen.x - n.source.x;
+    var onScreen = intersect(current,
+      (n.screen.minY - n.source.y) / distance,
+      (n.screen.maxY - n.source.y) / distance);
+    var darkPosition = clamp(n.source.y, n.screen.minY, n.screen.maxY);
+    var minY = onScreen.active ? n.source.y + onScreen.min * distance : darkPosition;
+    var maxY = onScreen.active ? n.source.y + onScreen.max * distance : darkPosition;
+    return {
+      source: n.source,
+      beam: n.beam,
+      segments: segments,
+      planes: planes,
+      outgoing: current,
+      transmission: fraction(current, n.angularSpan),
+      screenFraction: fraction(onScreen, n.angularSpan),
+      fullyBlockedAt: fullyBlockedAt,
+      screen: {
+        x: n.screen.x,
+        lit: onScreen.active,
+        minY: minY,
+        maxY: maxY,
+        centerY: (minY + maxY) / 2,
+        height: Math.max(0, maxY - minY),
+        unclippedMinY: n.source.y + current.min * distance,
+        unclippedMaxY: n.source.y + current.max * distance,
+        allowedMinY: n.screen.minY,
+        allowedMaxY: n.screen.maxY
+      }
+    };
+  }
+
+  function traceRay(state, slope) {
+    var n = normalized(state);
+    slope = finite(slope, Math.tan(n.angleDeg * RAD));
+    slope = clamp(slope, -1000000, 1000000);
+    var points = [{ x: n.source.x, y: n.source.y }];
+    if (slope < n.beam.min - EPS || slope > n.beam.max + EPS) {
+      return {
+        emitted: false, reachedScreen: false, blockedBy: null,
+        hitType: 'outsideBeam', end: points[0], points: points, slope: slope
+      };
+    }
+    for (var i = 0; i < n.cards.length; i += 1) {
+      var card = n.cards[i];
+      if (!card.present) continue;
+      var y = n.source.y + slope * (card.x - n.source.x);
+      var point = { x: card.x, y: y };
+      points.push(point);
+      // The opening is strictly inside its edges. Tangency has zero width/flux.
+      if (y <= card.y - card.r + EPS || y >= card.y + card.r - EPS) {
+        return {
+          emitted: true, reachedScreen: false, blockedBy: card.index,
+          hitType: 'card', end: point, points: points, slope: slope
+        };
+      }
+    }
+    var end = { x: n.screen.x, y: n.source.y + slope * (n.screen.x - n.source.x) };
+    points.push(end);
+    var reaches = end.y >= n.screen.minY - EPS && end.y <= n.screen.maxY + EPS;
+    return {
+      emitted: true, reachedScreen: reaches, blockedBy: null,
+      hitType: reaches ? 'screen' : 'outsideScreen', end: end, points: points, slope: slope
+    };
+  }
+
+  function pinholeProject(input) {
+    input = input || {};
+    var u = positive(input.u, 15);
+    var v = positive(input.v, 15);
+    var h = clamp(finite(input.h, 6), 0, 1000000);
+    var aperture = clamp(finite(input.apertureMm, 1), 0, 1000000);
+    var pointY = coordinate(input.pointY, 0);
+    var magnification = v / u;
+    return {
+      u: u, v: v, h: h, apertureMm: aperture, pointY: pointY,
+      magnification: magnification,
+      imageHeight: h * magnification,
+      imageY: -pointY * magnification,
+      geometricBlurMm: aperture * (1 + magnification),
+      relativeIrradiance: aperture * aperture * (15 / v) * (15 / v)
+    };
+  }
+
+  return {
+    benchModel: benchModel,
+    traceRay: traceRay,
+    pinholeProject: pinholeProject
+  };
+}));
+
+</script>
+<script>
+(function () {
+'use strict';
+var $ = function (id) { return document.getElementById(id); };
+var clamp = function (n, a, b) { return Math.max(a, Math.min(b, n)); };
+var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); };
+var round = function (n) { return Math.round(n * 100) / 100; };
+var clone = function (o) { return JSON.parse(JSON.stringify(o)); };
+var KEY = 'aihtml-g6u2l2-evidence-v1';
+var COLORS = {light:'#ffd277',pred:'#e6a9df',top:'#ff8392',bottom:'#66d9ee'};
+var BASE = {source:{x:130,y:280},angleDeg:0,spreadDeg:8,cards:[{x:350,y:280,r:12,present:true},{x:570,y:280,r:12,present:true},{x:790,y:280,r:12,present:true}],screen:{x:1010,minY:85,maxY:475},on:true};
+var app = {page:'bench',bench:clone(BASE),pin:{u:20,v:15,points:{top:false,bottom:false}},selected:1,rays:{bench:false,pinhole:false},draw:false,sketch:{bench:[],pinhole:[]},records:[],compare:[0,1],sequence:1};
+var touchTarget = null, drag = null, paintQueued = false, toastTimer = 0, modalReturn = null, storageWarned = false;
+var stage = $('stage');
+function text(id, value) { $(id).textContent = value; }
+function notify(message) { text('toast', message); $('toast').hidden=false; clearTimeout(toastTimer); toastTimer=setTimeout(function(){$('toast').hidden=true;},3200); }
+function toggle(el, value) { el.classList.toggle('active',value); el.setAttribute('aria-pressed',value?'true':'false'); }
+function validRecord(r) {
+  if (!r || (r.page !== 'bench' && r.page !== 'pinhole') || typeof r.id !== 'number' || !isFinite(r.id)) return false;
+  if (r.page==='bench') {
+    if(!r.bench || !Array.isArray(r.bench.cards) || r.bench.cards.length!==3) return false;
+    var b=clone(BASE); b.on=r.bench.on!==false; b.angleDeg=clamp(Number(r.bench.angleDeg)||0,-12,12);
+    for(var i=0;i<3;i++){b.cards[i].y=clamp(Number(r.bench.cards[i].y)||280,208,352); b.cards[i].present=r.bench.cards[i].present!==false;}
+    r.bench=b;
+  } else {
+    if(!r.pin) return false;
+    r.pin={u:clamp(Number(r.pin.u)||20,12,28),v:clamp(Number(r.pin.v)||15,8,24),points:{top:!!(r.pin.points&&r.pin.points.top),bottom:!!(r.pin.points&&r.pin.points.bottom)}};
+  }
+  r.note=String(r.note||'').slice(0,180); r.actual=String(r.actual||'未记录').slice(0,30); r.rays=!!r.rays;
+  r.sketch=Array.isArray(r.sketch)?r.sketch.slice(0,12).map(function(p){return Array.isArray(p)?p.slice(0,1000).filter(function(q){return q&&isFinite(q.x)&&isFinite(q.y);}).map(function(q){return{x:clamp(+q.x,0,1120),y:clamp(+q.y,0,560)};}):[];}):[];
+  return true;
+}
+try { var stored=JSON.parse(localStorage.getItem(KEY)||'null'); if(stored&&stored.version===1&&Array.isArray(stored.records)){app.records=stored.records.filter(validRecord).slice(0,4);app.sequence=app.records.reduce(function(m,r){return Math.max(m,r.id+1);},1);} } catch(e) {}
+function persist(){var ok=true;try{localStorage.setItem(KEY,JSON.stringify({version:1,records:app.records}));}catch(e){ok=false;if(!storageWarned){notify('当前浏览器不能保存，请及时导出记录。');storageWarned=true;}} text('record-count',app.records.length);return ok;}
+function svgOpen(id,label) {
+ return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 560" role="group" aria-label="'+esc(label)+'"><defs>'+
+ '<linearGradient id="'+id+'card" x1="0" x2="1"><stop stop-color="#93aab2"/><stop offset=".42" stop-color="#e4eeed"/><stop offset="1" stop-color="#839ea7"/></linearGradient>'+
+ '<linearGradient id="'+id+'torch"><stop stop-color="#447486"/><stop offset=".55" stop-color="#2e5364"/><stop offset="1" stop-color="#8cb3c0"/></linearGradient>'+
+ '<linearGradient id="'+id+'flame" x1="0" y1="1" x2=".2" y2="0"><stop stop-color="#ff9a35"/><stop offset=".55" stop-color="#ffd275"/><stop offset="1" stop-color="#fff1bb"/></linearGradient>'+
+ '<marker id="'+id+'arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="'+COLORS.pred+'"/></marker>'+
+ '<clipPath id="'+id+'clip"><rect x="16" y="25" width="1088" height="500" rx="10"/></clipPath>'+
+ '</defs><rect width="1120" height="560" fill="#102c39"/>';
+}
+function label(x,y,t,size,fill,anchor,weight) {return '<text x="'+round(x)+'" y="'+round(y)+'" fill="'+(fill||'#d8e8eb')+'" font-size="'+(size||23)+'" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-weight="'+(weight||500)+'" text-anchor="'+(anchor||'middle')+'">'+esc(t)+'</text>';}
+function line(x1,y1,x2,y2,color,width,dash,opacity) {return '<line x1="'+round(x1)+'" y1="'+round(y1)+'" x2="'+round(x2)+'" y2="'+round(y2)+'" stroke="'+color+'" stroke-width="'+(width||2)+'"'+(dash?' stroke-dasharray="'+dash+'"':'')+(opacity!=null?' opacity="'+opacity+'"':'')+'/>';}
+function arrowLine(x1,y1,x2,y2,color,width,opacity){
+ var t=.62,ax=x1+(x2-x1)*t,ay=y1+(y2-y1)*t,a=Math.atan2(y2-y1,x2-x1),len=10;
+ var xA=ax-Math.cos(a-.48)*len,yA=ay-Math.sin(a-.48)*len,xB=ax-Math.cos(a+.48)*len,yB=ay-Math.sin(a+.48)*len;
+ return '<g'+(opacity!=null?' opacity="'+opacity+'"':'')+'>'+line(x1,y1,x2,y2,color,width||2.4)+'<path d="M'+round(xA)+' '+round(yA)+'L'+round(ax)+' '+round(ay)+'L'+round(xB)+' '+round(yB)+'" fill="none" stroke="'+color+'" stroke-width="'+(width||2.4)+'" stroke-linecap="round" stroke-linejoin="round"/></g>';
+}
+function sketches(paths,id){return paths.map(function(points){if(points.length<2)return'';var d=points.map(function(p,i){return(i?'L':'M')+round(p.x)+' '+round(p.y);}).join(' ');return'<path d="'+d+'" fill="none" stroke="'+COLORS.pred+'" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity=".94" marker-end="url(#'+id+'arrow)"/>';}).join('');}
+function modelStateForRecord(r){return {page:r.page,bench:r.bench,pin:r.pin,rays:r.rays,sketch:r.sketch,selected:-1};}
+function currentRenderState(){return{page:app.page,bench:app.bench,pin:app.pin,rays:app.rays[app.page],sketch:app.sketch[app.page],selected:app.selected};}
+function benchSVG(s,id,interactive){
+ var b=s.bench,m=Optics.benchModel(b),out=svgOpen(id,'手电筒、三张打孔卡纸和纸屏的俯视模型'),i;
+ out+=line(85,502,1050,502,'#45616b',3)+line(130,280,1010,280,'#50717c',1,'5 8',.48);
+ for(i=0;i<11;i++)out+=line(130+i*88,497,130+i*88,508,'#51717b',2);
+ out+='<g clip-path="url(#'+id+'clip)">';
+ if(b.on&&s.rays){
+  m.segments.forEach(function(q){if(q.active)out+='<polygon points="'+[q.x0+','+q.y0Min,q.x1+','+q.y1Min,q.x1+','+q.y1Max,q.x0+','+q.y0Max].join(' ')+'" fill="#ffd277" opacity=".12"/>';});
+  var slopes=[];for(i=-4;i<=4;i++)slopes.push(Math.tan((b.angleDeg+i*b.spreadDeg/4)*Math.PI/180));
+  m.planes.forEach(function(p){if(p.outgoing.active)slopes.push((p.outgoing.min+p.outgoing.max)/2);});
+  var seen={};slopes.forEach(function(sl){var key=Math.round(sl*100000);if(seen[key])return;seen[key]=true;var ray=Optics.traceRay(b,sl);if(ray.emitted){out+=arrowLine(b.source.x,b.source.y,ray.end.x,ray.end.y,COLORS.light,ray.reachedScreen?3:1.8,ray.reachedScreen?1:.55);}});
+ }
+ out+='</g>';
+ for(i=0;i<3;i++){
+  var c=b.cards[i],sel=s.selected===i,att=interactive?' data-drag="card-'+i+'" tabindex="0" role="button" aria-label="卡纸'+(i+1)+'，'+(c.present?'拖动或用方向键调整，Delete键移出':'已移出，点击放回')+'"':'';
+  if(!c.present){out+='<g'+(interactive?' data-action="restore-'+i+'" tabindex="0" role="button" aria-label="放回卡纸'+(i+1)+'"':'')+'><rect x="'+(c.x-21)+'" y="130" width="42" height="300" rx="7" fill="none" stroke="#68858f" stroke-width="2" stroke-dasharray="6 8" opacity=".45"/>'+label(c.x,94,'已移出',24,'#9bb4bc')+label(c.x,540,'卡纸 '+(i+1),25,'#9bb4bc')+'</g>';continue;}
+  out+='<g'+att+'><rect x="'+(c.x-40)+'" y="'+(c.y-157)+'" width="80" height="314" fill="transparent"/>';
+  if(sel&&interactive)out+='<rect x="'+(c.x-25)+'" y="'+(c.y-157)+'" width="50" height="314" rx="9" fill="#75cbbc" fill-opacity=".07" stroke="#94dccd" stroke-width="2" stroke-dasharray="6 5"/>';
+  out+='<path d="M'+(c.x-10)+' 25h20v'+(c.y-c.r-25)+'h-20Z M'+(c.x-10)+' '+(c.y+c.r)+'h20v'+(525-c.y-c.r)+'h-20Z" fill="#54727d"/>';
+  out+='<path d="M'+(c.x-10)+' '+(c.y-150)+'h20v'+(150-c.r)+'h-20Z M'+(c.x-10)+' '+(c.y+c.r)+'h20v'+(150-c.r)+'h-20Z" fill="url(#'+id+'card)" stroke="#f2f9f4" stroke-width="1"/>';
+  out+=line(c.x-13,c.y-c.r,c.x+13,c.y-c.r,'#9ce6d7',4)+line(c.x-13,c.y+c.r,c.x+13,c.y+c.r,'#9ce6d7',4);
+  out+='<circle cx="'+c.x+'" cy="'+c.y+'" r="5" fill="#8bd8c9" opacity=".6"/>';
+  out+=label(c.x,540,'卡纸 '+(i+1),25,sel?'#b8ece2':'#d8e8eb',null,sel?700:500);
+  out+=label(c.x,c.y-171,round((c.y-280)/24).toFixed(1)+' cm',21,sel?'#b8ece2':'#9eb8c1');
+  if(b.on){var pl=m.planes[i],dx=c.x-b.source.x;if(pl.incoming.active){var a=b.source.y+pl.incoming.min*dx,z=b.source.y+pl.incoming.max*dx;var intervals=[[Math.max(25,a),Math.min(c.y-c.r,z)],[Math.max(c.y+c.r,a),Math.min(525,z)]];intervals.forEach(function(q){if(q[1]>q[0])out+=line(c.x-11,q[0],c.x-11,q[1],'#fff0b2',7);});}}
+  if(sel&&interactive)out+='<path d="M'+(c.x-35)+' '+(c.y-31)+'l-7 8h14Z M'+(c.x-35)+' '+(c.y+31)+'l-7-8h14Z" fill="#b8ece2"/>';
+  out+='</g>';
+ }
+ out+='<rect x="1005" y="85" width="17" height="390" rx="5" fill="#d9e7e5"/>'+line(1010,86,1010,474,'#fff',2)+label(1014,540,'纸屏',25,'#e2eceb');
+ if(b.on&&m.screen.lit)out+=line(1005,m.screen.minY,1005,m.screen.maxY,'#ffe8a1',10);
+ var ang=b.angleDeg,hy=280+105*Math.tan(ang*Math.PI/180);
+ out+='<g transform="translate(130 280) rotate('+ang+')"'+(interactive?' data-action="lamp" tabindex="0" role="button" aria-label="'+(b.on?'关闭':'打开')+'手电筒"':'')+'><rect x="-98" y="-20" width="82" height="40" rx="10" fill="url(#'+id+'torch)" stroke="#83b7c7" stroke-width="2"/><path d="M-25-25H-8L4-32V32L-8 25H-25Z" fill="#47778a" stroke="#93bfcd" stroke-width="2"/><rect x="-1" y="-28" width="7" height="56" rx="3" fill="'+(b.on?'#ffe8a1':'#a1b9bc')+'"/><circle cx="-57" cy="0" r="6" fill="'+(b.on?'#9ee8c7':'#183e4c')+'"/></g>';
+ out+=label(111,410,b.on?'手电筒 · 开':'手电筒 · 关',20,'#bbd1d7');
+ if(interactive){out+=line(148,280,235,hy,'#75a7b5',2,'4 5',.8)+'<g data-drag="aim" role="slider" tabindex="0" aria-label="手电筒方向" aria-valuemin="-12" aria-valuemax="12" aria-valuenow="'+ang+'"><circle cx="235" cy="'+hy+'" r="27" fill="transparent"/><circle cx="235" cy="'+hy+'" r="12" fill="#102c39" stroke="#9ec5d0" stroke-width="3"/><circle cx="235" cy="'+hy+'" r="3" fill="#9ec5d0"/></g>'+label(235,hy+42,round(ang)+'°',19,'#a5c6d0');}
+ out+=sketches(s.sketch||[],id);
+ out+=label(40,31,s.rays?'透视：解释模型':'观察：光斑与遮挡',19,'#92b5bf','start');
+ return out+'</svg>';
+}
+function flame(id){return '<path d="M0-60C-6-37-27-12-25 17C-24 43-13 59 0 60C17 59 29 39 26 17C23-1 11-21 6-40C5-22-1-20-3-13C-9-28-5-41 0-60Z" fill="url(#'+id+'flame)"/><path d="M1-14C-11 5-16 20-11 34C-6 51 9 50 13 34C18 17 6 0 1-14Z" fill="#fff5c7"/>';}
+function pinSVG(s,id,interactive){
+ var p=s.pin,H=600,Y=270,xO=H-p.u*18,xS=H+p.v*18,m=p.v/p.u,out=svgOpen(id,'烛焰、小孔和纸屏的剖面模型');
+ out+='<rect x="'+H+'" y="82" width="'+(xS-H)+'" height="376" fill="#091f29"/>'+line(75,Y,1080,Y,'#5c7d86',1.5,'6 8',.6);
+ out+=line(xO,496,H,496,'#81a5af',2)+line(H,496,xS,496,'#81a5af',2);
+ [xO,H,xS].forEach(function(x){out+=line(x,488,x,504,'#81a5af',2);});
+ out+=label((xO+H)/2,536,'物距 '+p.u+' cm',24,'#c3dae0')+label((H+xS)/2,536,'屏距 '+p.v+' cm',24,'#c3dae0');
+ out+='<rect x="'+(H-10)+'" y="82" width="20" height="181" rx="3" fill="#aec5cd"/><rect x="'+(H-10)+'" y="277" width="20" height="181" rx="3" fill="#aec5cd"/>'+line(H-12,263,H+12,263,'#e0f4f1',3)+line(H-12,277,H+12,277,'#e0f4f1',3);
+ out+=label(H,51,'小孔',25,'#d8e8eb')+label(H+23,274,'O',20,'#c0d8df','start');
+ out+='<g'+(interactive?' data-drag="screen" tabindex="0" role="slider" aria-label="纸屏位置" aria-valuemin="8" aria-valuemax="24" aria-valuenow="'+p.v+'"':'')+'><rect x="'+(xS-30)+'" y="82" width="60" height="376" fill="transparent"/><rect x="'+(xS-6)+'" y="82" width="14" height="376" rx="4" fill="#e0e9df" stroke="#b9d6cc" stroke-width="2"/><path d="M'+(xS-20)+' 466h-13l7-7m-7 7 7 7M'+(xS+20)+' 466h13l-7-7m7 7-7 7" fill="none" stroke="#b8ece2" stroke-width="3"/>'+label(xS,51,'纸屏',25,'#d8e8eb')+'</g>';
+ out+=line(xS-7,Y-54*m,xS-7,Y+54*m,'#ffd277',7);
+ if(s.rays){['top','bottom'].forEach(function(key){if(!p.points[key])return;var dy=key==='top'?-40:38,yO=Y+dy,yI=Y-dy*m,color=COLORS[key];[-140,-72,72,140].forEach(function(d){out+=arrowLine(xO,yO,H-10,Y+d,color,1.3,.23);});out+=arrowLine(xO,yO,H,Y,color,3,1)+arrowLine(H,Y,xS,yI,color,3,1)+'<circle cx="'+xS+'" cy="'+yI+'" r="7" fill="'+color+'"/>'+label(xS-15,yI+(key==='top'?28:-16),key==='top'?'A′':'B′',24,color,'end',700);});}
+ out+='<g'+(interactive?' data-drag="object" role="slider" tabindex="0" aria-label="烛焰位置" aria-valuemin="12" aria-valuemax="28" aria-valuenow="'+p.u+'"':'')+'><rect x="'+(xO-32)+'" y="190" width="64" height="265" fill="transparent"/><rect x="'+(xO-20)+'" y="334" width="40" height="102" rx="5" fill="#f5dfbd"/><path d="M'+(xO-20)+' 344q10 7 18 0t22 0" fill="none" stroke="#d5b785" stroke-width="3"/>'+line(xO,336,xO,324,'#bac7c9',3)+'<g transform="translate('+xO+' '+Y+') scale(.9)">'+flame(id)+'</g><path d="M'+(xO-35)+' 466h-13l7-7m-7 7 7 7M'+(xO+35)+' 466h13l-7-7m7 7-7 7" fill="none" stroke="#b8ece2" stroke-width="3"/></g>';
+ ['top','bottom'].forEach(function(key){var yy=Y+(key==='top'?-40:38),on=p.points[key],color=COLORS[key];out+='<g'+(interactive?' data-action="point-'+key+'" role="button" tabindex="0" aria-label="追踪烛焰'+(key==='top'?'上部A':'下部B')+'点" aria-pressed="'+on+'"':'')+'><circle cx="'+xO+'" cy="'+yy+'" r="24" fill="transparent"/><circle cx="'+xO+'" cy="'+yy+'" r="'+(on?10:8)+'" fill="'+(on?color:'#102c39')+'" stroke="'+color+'" stroke-width="3"/>'+label(xO-23,yy+8,key==='top'?'A':'B',25,color,'end',700)+'</g>';});
+ out+=label(40,31,s.rays?'透视：追踪同一个点发出的光':'先观察纸屏上的烛焰像',19,'#92b5bf','start');
+ out+=sketches(s.sketch||[],id);return out+'</svg>';
+}
+function sceneSVG(s,id,interactive){return s.page==='bench'?benchSVG(s,id,interactive):pinSVG(s,id,interactive);}
+function screenSVG(s,id){
+ var out='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 230" role="img" aria-label="纸屏正视的模型结果"><defs><linearGradient id="'+id+'paper" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#8faaa9"/><stop offset="1" stop-color="#687e80"/></linearGradient><linearGradient id="'+id+'flame" x1="0" y1="1" x2=".2" y2="0"><stop stop-color="#ff9a35"/><stop offset=".55" stop-color="#ffd275"/><stop offset="1" stop-color="#fff1bb"/></linearGradient><clipPath id="'+id+'paperclip"><rect x="32" y="20" width="236" height="190" rx="4"/></clipPath></defs><rect width="300" height="230" fill="#0a202a"/><rect x="30" y="18" width="240" height="194" rx="5" fill="url(#'+id+'paper)" stroke="#b4c5c1" stroke-width="2"/><g clip-path="url(#'+id+'paperclip)">';
+ if(s.page==='bench'){
+  var b=s.bench,m=Optics.benchModel(b),D=b.screen.x-b.source.x,scale=.45,cy=115;
+  if(b.on&&m.screen.lit){
+   var sy0=cy+(b.screen.minY-b.source.y)*scale, sh=(b.screen.maxY-b.screen.minY)*scale;
+   out+='<defs><clipPath id="'+id+'screenclip"><rect x="0" y="'+sy0+'" width="300" height="'+sh+'"/></clipPath></defs><g clip-path="url(#'+id+'screenclip)">';
+   var active=0;
+   b.cards.forEach(function(c,i){if(!c.present)return;var f=D/(c.x-b.source.x),y=cy+(c.y-b.source.y)*f*scale,r=c.r*f*scale;out+='<defs><clipPath id="'+id+'hole'+i+'"><circle cx="150" cy="'+y+'" r="'+r+'"/></clipPath></defs><g clip-path="url(#'+id+'hole'+i+')">';active++;});
+   var a=b.angleDeg*Math.PI/180,beta=b.spreadDeg*Math.PI/180,k=Math.pow(Math.cos(beta),2)-Math.pow(Math.sin(a),2);
+   out+='<ellipse cx="150" cy="'+(cy+D*scale*(m.beam.min+m.beam.max)/2)+'" rx="'+(D*scale*Math.sin(beta)/Math.sqrt(k))+'" ry="'+(D*scale*(m.beam.max-m.beam.min)/2)+'" fill="#fff0ad"/>';
+   for(var i=0;i<active;i++)out+='</g>';out+='</g>';
+  }
+ } else {
+  var p=s.pin,mag=p.v/p.u,scaleF=.72*mag,opacity=clamp(1.12*Math.pow(15/p.v,1.2),.48,1);
+  out+='<g opacity="'+opacity+'" transform="translate(150 115) rotate(180) scale('+scaleF+')">'+flame(id)+'</g>';
+  if(s.rays){['top','bottom'].forEach(function(key){if(!p.points[key])return;var dy=key==='top'?-40:38,yy=115-dy*.8*mag;out+='<circle cx="150" cy="'+yy+'" r="5" fill="'+COLORS[key]+'"/>'+label(171,yy+6,key==='top'?'A′':'B′',18,COLORS[key],'start',700);});}
+ }
+ out+='</g></svg>';return out;
+}
+function resultText(r){if(r.page==='pinhole')return'屏距 '+r.pin.v+' cm · 像高 '+(6*r.pin.v/r.pin.u).toFixed(1)+' cm';var m=Optics.benchModel(r.bench);return !r.bench.on?'手电筒关闭':m.screen.lit?'纸屏有光斑':'纸屏无光斑';}
+function conditionText(r){if(r.page==='pinhole')return'物距 '+r.pin.u+' cm；屏距 '+r.pin.v+' cm';return r.bench.cards.map(function(c,i){return'卡'+(i+1)+(c.present?'偏移 '+((c.y-280)/24).toFixed(1)+' cm':'移出');}).join('；')+'；方向 '+round(r.bench.angleDeg)+'°';}
+function render(){
+ paintQueued=false;var s=currentRenderState(),bench=app.page==='bench';
+ stage.innerHTML=sceneSVG(s,'live-',true);$('screen-view').innerHTML=screenSVG(s,'front-');
+ toggle($('tab-bench'),bench);toggle($('tab-pinhole'),!bench);toggle($('draw-prediction'),app.draw);toggle($('show-rays'),app.rays[app.page]);
+ stage.classList.toggle('drawing',app.draw);$('clear-prediction').hidden=!app.sketch[app.page].length;
+ text('draw-prediction',app.draw?'完成预测':'画预测线');$('bench-controls').hidden=!bench;$('pinhole-controls').hidden=bench;
+ text('question-title',bench?'光被哪张卡纸挡住了？':'烛焰上的光，分别去了哪里？');
+ text('question-sub',bench?'先在实物中观察，再用光路检验你的解释。':'点选烛焰上的 A、B，再移动纸屏寻找证据。');
+ text('stage-name',bench?'俯视模型 · 空气中的光':'剖面模型 · 小孔与纸屏');
+ text('screen-title',bench?'纸屏正视':'纸屏正视 · 烛焰像');
+ text('stage-hint',app.draw?'在实验图中画预测路线，箭头自动指向笔画终点。':bench?'拖动卡纸调位置；拖动手电筒前的圆点调方向。':'拖动烛焰或纸屏；红、蓝只标记光来自哪一点。');
+ if(bench){var c=app.bench.cards[app.selected],m=Optics.benchModel(app.bench);text('selected-card-label','卡纸 '+(app.selected+1)+' 偏移');text('card-offset-value',((c.y-280)/24).toFixed(1)+' cm');$('card-offset').value=round((c.y-280)/24);$('card-offset').disabled=!c.present;text('remove-card',(c.present?'移出':'放回')+'卡纸 '+(app.selected+1));text('screen-status',resultText(s));text('screen-note',!app.bench.on?'点击手电筒，打开光源。':!s.rays?'光路未显示，先画出你的预测。':m.fullyBlockedAt!==null?'通向纸屏的光止于卡纸 '+(m.fullyBlockedAt+1)+'。':'比较孔的开口与通过的光路。');
+ }else{var p=app.pin;text('screen-status','像高 '+(6*p.v/p.u).toFixed(1)+' cm');text('screen-note',s.rays?'把 A、B 与屏上的 A′、B′ 对应起来。':'先观察像，再点选烛焰上的标记。');$('screen-distance').value=p.v;$('object-distance').value=p.u;text('screen-distance-value',p.v+' cm');text('object-distance-value',p.u+' cm');text('image-height',(6*p.v/p.u).toFixed(1)+' cm');Array.prototype.forEach.call(document.querySelectorAll('[data-point]'),function(el){toggle(el,p.points[el.getAttribute('data-point')]);});}
+ text('record-count',app.records.length);
+}
+function schedule(){if(paintQueued)return;paintQueued=true;(window.requestAnimationFrame||function(f){setTimeout(f,16);})(render);}
+function setPage(page){app.page=page;app.draw=false;drag=null;render();}
+function setCardOffset(v){var c=app.bench.cards[app.selected];if(c.present)c.y=280+clamp(v,-3,3)*24;render();}
+function togglePoint(key){app.pin.points[key]=!app.pin.points[key];if(app.pin.points[key])app.rays.pinhole=true;render();}
+function getDataTarget(el,key){while(el&&el!==stage){if(el.getAttribute&&el.getAttribute(key)!==null)return el;el=el.parentNode;}return null;}
+function position(evt){var svg=stage.querySelector('svg'),touch=evt.touches&&evt.touches[0]||evt.changedTouches&&evt.changedTouches[0]||evt,pt=svg.createSVGPoint();pt.x=touch.clientX;pt.y=touch.clientY;try{return pt.matrixTransform(svg.getScreenCTM().inverse());}catch(e){return{x:0,y:0};}}
+function startDrag(e){
+ if(drag)return;
+ if(e.button!=null&&e.button!==0)return;
+ var p=position(e),target=getDataTarget(e.target,'data-drag');
+ if(app.draw){if(app.sketch[app.page].length>=12){notify('最多保留 12 条预测线，可先清除再画。');return;}var path=[{x:clamp(p.x,0,1120),y:clamp(p.y,0,560)}];app.sketch[app.page].push(path);drag={type:'draw',path:path};}
+ else {if(getDataTarget(e.target,'data-action'))return;if(!target)return;var name=target.getAttribute('data-drag');drag={type:name,startX:p.x,startY:p.y};if(name.indexOf('card-')===0){app.selected=+name.split('-')[1];drag.initial=app.bench.cards[app.selected].y;}else if(name==='object')drag.initial=app.pin.u;else if(name==='screen')drag.initial=app.pin.v;}
+ if(e.cancelable)e.preventDefault();if(e.pointerId!=null&&stage.setPointerCapture){try{stage.setPointerCapture(e.pointerId);}catch(err){}}schedule();
+}
+function moveDrag(e){if(!drag)return;if(e.cancelable)e.preventDefault();var p=position(e);
+ if(drag.type==='draw'){var last=drag.path[drag.path.length-1],dx=p.x-last.x,dy=p.y-last.y;if(dx*dx+dy*dy>8&&drag.path.length<1000)drag.path.push({x:clamp(p.x,0,1120),y:clamp(p.y,0,560)});}
+ else if(drag.type.indexOf('card-')===0){var c=app.bench.cards[app.selected];if(c.present)c.y=clamp(drag.initial+p.y-drag.startY,208,352);}
+ else if(drag.type==='aim')app.bench.angleDeg=round(clamp(Math.atan2(p.y-280,Math.max(40,p.x-130))*180/Math.PI,-12,12));
+ else if(drag.type==='object')app.pin.u=Math.round(clamp(drag.initial-(p.x-drag.startX)/18,12,28)*2)/2;
+ else if(drag.type==='screen')app.pin.v=Math.round(clamp(drag.initial+(p.x-drag.startX)/18,8,24)*2)/2;
+ schedule();}
+function endDrag(){if(touchTarget){touchTarget.removeEventListener('touchmove',moveDrag);touchTarget.removeEventListener('touchend',endDrag);touchTarget.removeEventListener('touchcancel',endDrag);touchTarget=null;}if(!drag)return;if(drag.type==='draw'&&drag.path.length<2)app.sketch[app.page].pop();drag=null;render();}
+if(window.PointerEvent){stage.addEventListener('pointerdown',startDrag);stage.addEventListener('pointermove',moveDrag);stage.addEventListener('pointerup',endDrag);stage.addEventListener('pointercancel',endDrag);}
+else {stage.addEventListener('mousedown',startDrag);document.addEventListener('mousemove',moveDrag);document.addEventListener('mouseup',endDrag);stage.addEventListener('touchstart',function(e){if(touchTarget||drag)return;startDrag(e);if(drag){touchTarget=e.target;touchTarget.addEventListener('touchmove',moveDrag,{passive:false});touchTarget.addEventListener('touchend',endDrag);touchTarget.addEventListener('touchcancel',endDrag);}},{passive:false});}
+function action(name){if(app.draw)return;if(name==='lamp')app.bench.on=!app.bench.on;else if(name.indexOf('restore-')===0){app.selected=+name.split('-')[1];app.bench.cards[app.selected].present=true;}else if(name.indexOf('point-')===0){togglePoint(name.slice(6));return;}render();}
+stage.addEventListener('click',function(e){var t=getDataTarget(e.target,'data-action');if(t)action(t.getAttribute('data-action'));});
+stage.addEventListener('keydown',function(e){var t=getDataTarget(e.target,'data-drag')||getDataTarget(e.target,'data-action');if(!t)return;var a=t.getAttribute('data-action'),d=t.getAttribute('data-drag'),k=e.key,handled=false;
+ if(a&&(k==='Enter'||k===' ')){e.preventDefault();action(a);var next=stage.querySelector(a.indexOf('restore-')===0?'[data-drag="card-'+a.slice(8)+'"]':'[data-action="'+a+'"]');if(next)next.focus();return;}
+ if(d&&d.indexOf('card-')===0){app.selected=+d.split('-')[1];if(k==='ArrowUp'||k==='ArrowDown'){var c=app.bench.cards[app.selected];if(c.present)c.y=clamp(c.y+(k==='ArrowUp'?-1.2:1.2),208,352);handled=true;}else if(k==='Delete'||k==='Backspace'){app.bench.cards[app.selected].present=!app.bench.cards[app.selected].present;handled=true;}else if(k==='Enter'){handled=true;}}
+ else if(d==='aim'&&/Arrow/.test(k)){app.bench.angleDeg=clamp(app.bench.angleDeg+((k==='ArrowUp'||k==='ArrowLeft')?-.5:.5),-12,12);handled=true;}
+ else if((d==='screen'||d==='object')&&(k==='ArrowLeft'||k==='ArrowRight')){var step=k==='ArrowLeft'?-.5:.5;if(d==='screen')app.pin.v=clamp(app.pin.v+step,8,24);else app.pin.u=clamp(app.pin.u-step,12,28);handled=true;}
+ if(handled){e.preventDefault();render();var replacement=stage.querySelector('[data-drag="'+d+'"]');if(!replacement&&d.indexOf('card-')===0)replacement=stage.querySelector('[data-action="restore-'+d.slice(5)+'"]');if(replacement)replacement.focus();}
+});
+function openDialog(id){modalReturn=document.activeElement;$(id).hidden=false;var focus=$(id).querySelector('button:not(:disabled),select,textarea');if(focus)focus.focus();}
+function closeDialog(id){$(id).hidden=true;if(modalReturn&&document.documentElement.contains(modalReturn))modalReturn.focus();}
+function saveRecord(){if(app.records.length>=4){notify('已保留 4 组。请到证据板导出或删除一组。');renderEvidence();openDialog('evidence-dialog');return;}
+ var r={id:app.sequence++,page:app.page,rays:app.rays[app.page],sketch:clone(app.sketch[app.page]),note:'',actual:'未记录',created:new Date().toISOString()};if(app.page==='bench')r.bench=clone(app.bench);else r.pin=clone(app.pin);app.records.push(r);app.compare=[Math.max(0,app.records.length-2),app.records.length-1];var saved=persist();notify(saved?'已留下证据 '+r.id+'，可在证据板并排比较。':'证据仅保留在本页；刷新会丢失，请及时导出。');}
+function recordTitle(r){return'证据 '+r.id+' · '+(r.page==='bench'?'卡纸光路':'小孔成像');}
+function renderEvidence(){
+ var n=app.records.length;if(!n){$('evidence-grid').innerHTML='<div class="empty">还没有留下证据。<br>调整实验后，点击“留下这组证据”。</div>';$('export-svg').disabled=true;$('export-csv').disabled=true;return;}
+ $('export-svg').disabled=false;$('export-csv').disabled=false;var html='';
+ for(var slot=0;slot<Math.min(2,n);slot++){
+  var idx=clamp(app.compare[slot],0,n-1),r=app.records[idx];app.compare[slot]=idx;
+  var options=app.records.map(function(q,j){return'<option value="'+j+'"'+(j===idx?' selected':'')+'>'+esc(recordTitle(q))+'</option>';}).join('');
+  var actuals=r.page==='bench'?['未记录','有光斑','无光斑','光斑不清楚']:['未记录','观察到倒像','观察到正像','像不清楚'];
+  html+='<article class="evidence-card" data-record-id="'+r.id+'"><div class="evidence-head"><select data-select-slot="'+slot+'" aria-label="'+(slot?'右':'左')+'侧比较记录">'+options+'</select><button data-replay="'+r.id+'">恢复场景</button><button data-delete="'+r.id+'" aria-label="删除证据'+r.id+'">删除</button></div><div class="evidence-thumb">'+sceneSVG(modelStateForRecord(r),'ev'+slot+'-',false)+'</div><p class="evidence-data">模型：'+esc(resultText(r))+'</p><label>实物观察<select data-actual="'+r.id+'" aria-label="证据'+r.id+'的实物观察">'+actuals.map(function(v){return'<option'+(v===r.actual?' selected':'')+'>'+esc(v)+'</option>';}).join('')+'</select></label><textarea maxlength="180" data-note="'+r.id+'" aria-label="证据'+r.id+'的我的解释" placeholder="我的解释：哪些现象支持我的想法？">'+esc(r.note)+'</textarea></article>';
+ }
+ $('evidence-grid').innerHTML=html;
+}
+function recordById(id){for(var i=0;i<app.records.length;i++)if(app.records[i].id===+id)return app.records[i];return null;}
+function download(name,content,type){try{var blob=new Blob([content],{type:type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.style.display='none';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},60000);notify('已生成 '+name);}catch(e){notify('当前浏览器不支持下载，请换用电脑浏览器打开。');}}
+function csvCell(s){return'"'+String(s==null?'':s).replace(/"/g,'""')+'"';}
+function exportCSV(){if(!app.records.length)return;var rows=[['证据编号','场景','数据性质','模型条件','模型结果','本组实物观察','我的解释']];app.records.forEach(function(r){rows.push([r.id,r.page==='bench'?'卡纸光路':'小孔成像','几何光学模拟，非实测',conditionText(r),resultText(r),r.actual,r.note]);});download('光是怎样传播的-观察记录.csv','\uFEFF'+rows.map(function(r){return r.map(csvCell).join(',');}).join('\r\n'),'text/csv;charset=utf-8');}
+function wrapText(str,max){str=String(str).replace(/[\r\n]+/g,' ');var chars=Array.from?Array.from(str):str.split(''),rows=[];while(chars.length)rows.push(chars.splice(0,max).join(''));return rows.length?rows:[''];}
+function exportSVG(){
+ if(!app.records.length)return;var W=1600,colW=750,rowH=700,rows=Math.ceil(app.records.length/2),H=130+rows*rowH;
+ var out='<svg xmlns="http://www.w3.org/2000/svg" width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'"><rect width="100%" height="100%" fill="#f2f5f3"/>'+label(48,55,'光是怎样传播的 · 观察记录',35,'#18323e','start',800)+label(48,94,'模型结果与实物观察分别记录；彩色光路是解释模型。',22,'#526771','start');
+ app.records.forEach(function(r,i){var x=40+(i%2)*780,y=125+Math.floor(i/2)*rowH;out+='<rect x="'+x+'" y="'+y+'" width="750" height="680" rx="12" fill="white" stroke="#cfddd6"/>'+label(x+20,y+38,recordTitle(r),26,'#18323e','start',700);var nested=sceneSVG(modelStateForRecord(r),'export'+i+'-',false).replace('<svg xmlns="http://www.w3.org/2000/svg"','<svg x="'+(x+15)+'" y="'+(y+54)+'" width="720" height="330" xmlns="http://www.w3.org/2000/svg"');out+=nested;out+=label(x+20,y+410,'模型：'+resultText(r),23,'#18323e','start',650);wrapText(conditionText(r),40).slice(0,2).forEach(function(t,j){out+=label(x+20,y+440+j*23,t,18,'#526771','start');});out+=label(x+20,y+496,'实物观察：'+r.actual,22,'#18323e','start');wrapText('我的解释：'+(r.note||'（待补充）'),31).forEach(function(t,j){out+=label(x+20,y+527+j*23,t,19,'#526771','start');});});out+='</svg>';download('光是怎样传播的-证据图.svg',out,'image/svg+xml;charset=utf-8');
+}
+$('tab-bench').addEventListener('click',function(){setPage('bench');});$('tab-pinhole').addEventListener('click',function(){setPage('pinhole');});
+$('show-rays').addEventListener('click',function(){app.rays[app.page]=!app.rays[app.page];app.draw=false;if(app.page==='pinhole'&&app.rays.pinhole&&!app.pin.points.top&&!app.pin.points.bottom){app.pin.points.top=true;app.pin.points.bottom=true;}render();});
+$('draw-prediction').addEventListener('click',function(){app.draw=!app.draw;render();});$('clear-prediction').addEventListener('click',function(){app.sketch[app.page]=[];render();});
+$('card-offset').addEventListener('input',function(){setCardOffset(+this.value);});$('remove-card').addEventListener('click',function(){var c=app.bench.cards[app.selected];c.present=!c.present;render();});
+$('align-cards').addEventListener('click',function(){app.bench.cards.forEach(function(c){c.y=280;c.present=true;});app.bench.angleDeg=0;render();});
+$('screen-distance').addEventListener('input',function(){app.pin.v=+this.value;render();});$('object-distance').addEventListener('input',function(){app.pin.u=+this.value;render();});
+Array.prototype.forEach.call(document.querySelectorAll('[data-point]'),function(el){el.addEventListener('click',function(){togglePoint(this.getAttribute('data-point'));});});
+$('reset').addEventListener('click',function(){if(app.page==='bench'){app.bench=clone(BASE);app.selected=1;}else app.pin={u:20,v:15,points:{top:false,bottom:false}};app.rays[app.page]=false;app.sketch[app.page]=[];app.draw=false;drag=null;render();notify('当前场景已复原；证据板中的记录仍保留。');});
+$('save-record').addEventListener('click',saveRecord);$('open-evidence').addEventListener('click',function(){renderEvidence();openDialog('evidence-dialog');});$('open-guide').addEventListener('click',function(){openDialog('guide-dialog');});
+Array.prototype.forEach.call(document.querySelectorAll('[data-close]'),function(el){el.addEventListener('click',function(){closeDialog(this.getAttribute('data-close'));});});
+Array.prototype.forEach.call(document.querySelectorAll('.veil'),function(el){el.addEventListener('click',function(e){if(e.target===el)closeDialog(el.id);});});
+$('evidence-grid').addEventListener('change',function(e){var el=e.target;if(el.hasAttribute('data-select-slot')){var slot=el.getAttribute('data-select-slot');app.compare[+slot]=+el.value;renderEvidence();var next=$('evidence-grid').querySelector('[data-select-slot="'+slot+'"]');if(next)next.focus();}if(el.hasAttribute('data-actual')){var r=recordById(el.getAttribute('data-actual'));if(r){r.actual=el.value;persist();}}});
+$('evidence-grid').addEventListener('input',function(e){var el=e.target;if(el.hasAttribute('data-note')){var r=recordById(el.getAttribute('data-note'));if(r){r.note=el.value.slice(0,180);persist();}}});
+$('evidence-grid').addEventListener('click',function(e){var el=e.target;if(el.hasAttribute('data-replay')){var r=recordById(el.getAttribute('data-replay'));if(!r)return;app.page=r.page;if(r.page==='bench')app.bench=clone(r.bench);else app.pin=clone(r.pin);app.rays[r.page]=r.rays;app.sketch[r.page]=clone(r.sketch);app.draw=false;closeDialog('evidence-dialog');render();}if(el.hasAttribute('data-delete')){var id=+el.getAttribute('data-delete');app.records=app.records.filter(function(r){return r.id!==id;});app.compare=[0,Math.min(1,app.records.length-1)];persist();renderEvidence();var focus=$('evidence-dialog').querySelector('select,button:not(:disabled)');if(focus)focus.focus();notify('已删除这组本机记录。');}});
+$('export-svg').addEventListener('click',exportSVG);$('export-csv').addEventListener('click',exportCSV);
+$('fullscreen').addEventListener('click',function(){var root=document.documentElement,request=root.requestFullscreen||root.webkitRequestFullscreen,exit=document.exitFullscreen||document.webkitExitFullscreen;try{var p;if(document.fullscreenElement||document.webkitFullscreenElement){if(exit)p=exit.call(document);}else if(request)p=request.call(root);else{notify('此浏览器不支持网页全屏，请使用浏览器全屏或横屏。');return;}if(p&&p.catch)p.catch(function(){notify('未能进入全屏，可使用浏览器的全屏功能。');});}catch(e){notify('此浏览器暂不支持全屏。');}});
+document.addEventListener('fullscreenchange',function(){$('fullscreen').setAttribute('aria-label',document.fullscreenElement?'退出全屏':'进入全屏');});
+document.addEventListener('keydown',function(e){var open=!$('evidence-dialog').hidden?$('evidence-dialog'):!$('guide-dialog').hidden?$('guide-dialog'):null;if(e.key==='Escape'){if(open)closeDialog(open.id);else if(app.draw){app.draw=false;render();}}if(open&&e.key==='Tab'){var items=open.querySelectorAll('button:not(:disabled),select,textarea'),first=items[0],last=items[items.length-1];if(!open.contains(document.activeElement)){e.preventDefault();first.focus();}else if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+render();
+}());
+
+</script>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互；真实设备仍需核验" style="position:fixed;left:8px;bottom:5px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:2px 7px;border:1px solid rgba(255,255,255,.36);border-radius:5px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body>
+</html>
