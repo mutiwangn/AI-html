@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   root.AIHTML_LEVELS = {
+    "四上1.5空气有力量": {"level": 2, "note": "Canvas 二维动态模型与 Web Audio 合成音效，单文件离线；真实桌面浏览器验证，实体希沃/iPad与独立手机视口未测"},
     "四上1.4空气有质量吗": {"level": 2, "note": "Canvas/SVG 二维模拟与 Web Audio 合成音效，单文件离线；桌面 Chromium 验证，实体希沃/iPad与独立手机视口未测"},
     "四上2.1我们的呼吸与消化": {"level": 1, "note": "原生 SVG/CSS/JS，单文件离线；体验地图、交流墙、研究问题与 TXT 导出；关闭前需导出，实体希沃和平板未测"},
     "四上1.3空气占据的空间会改变吗": {"level": 1, "note": "原生 SVG/CSS/JS，单文件离线；空气和水定性压缩对照、微粒解释和真实记录；实体希沃和平板未测"},
