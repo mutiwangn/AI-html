@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eff5f5">
+<meta name="description" content="用简易显微镜观察：全貌与局部联动、扫描留痕、同点对照与真实观察记录。单文件离线互动课堂。">
+<title>用简易显微镜观察</title>
+<style>
+:root{--bg:#eff5f5;--surface:#fbfdfc;--ink:#163e49;--muted:#526c74;--line:#c6d3d8;--teal:#048878;--teal-dark:#006f65;--orange:#d78c35;--soft:#dceeea;--radius:10px}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;color:var(--ink);background:var(--bg)}body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}button,input,textarea{font:inherit;color:inherit}button{border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);cursor:pointer;min-height:46px;padding:8px 15px;font-size:19px;font-weight:650;line-height:1.25;touch-action:manipulation}button:hover{border-color:var(--teal);background:#f2faf7}button:active{transform:translateY(1px)}button:disabled{opacity:.42;cursor:default;transform:none}button.primary,button[aria-pressed="true"].choice{background:var(--teal);border-color:var(--teal);color:white}button.primary:hover{background:var(--teal-dark)}button.active-soft,button[aria-pressed="true"].outline{background:var(--soft);border-color:var(--teal);color:var(--teal-dark)}button:focus-visible,input:focus-visible,textarea:focus-visible,canvas:focus-visible,a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}svg.icon{width:22px;height:22px;vertical-align:-4px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}button .icon{margin-right:5px}.topbar{height:78px;flex:none;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;padding:0 24px;background:var(--surface)}h1{font-size:clamp(22px,2.1vw,32px);line-height:1.25;margin:0;white-space:nowrap;letter-spacing:-.04em}.tabs{height:100%;display:flex;gap:22px;margin:auto;align-items:stretch}.tab{position:relative;border:0;background:transparent;border-radius:0;padding:0 10px;white-space:nowrap;font-size:clamp(19px,1.7vw,24px);color:var(--muted)}.tab:hover{background:transparent}.tab[aria-selected="true"]{color:var(--teal);font-weight:800}.tab[aria-selected="true"]:after{content:"";height:4px;background:var(--teal);border-radius:3px;position:absolute;bottom:0;left:0;right:0}.utilities{display:flex;gap:10px}.utilities button{font-size:18px;padding:9px 12px}.app{flex:1;min-height:0;position:relative}.page{height:100%}.page[hidden]{display:none!important}.observe{display:grid;grid-template-columns:39% 61%}.overview-side{padding:22px 22px 14px;display:flex;flex-direction:column;min-width:0;min-height:0;border-right:1px solid var(--line)}.specimen-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.specimen-picker button{font-size:clamp(17px,1.5vw,22px);padding:9px 4px}.section-line{display:flex;justify-content:space-between;gap:10px;align-items:center;min-height:40px;font-size:17px;color:var(--muted)}.section-line strong{font-size:18px;font-weight:600}.section-line button{min-height:36px;padding:5px 9px;font-size:16px}.overview-stage{flex:1;position:relative;min-height:190px;overflow:hidden;border-radius:var(--radius);background:#d3e0e4}.overview-stage canvas{display:block;width:100%;height:100%;cursor:crosshair;touch-action:none}.direction-tip{font-size:clamp(16px,1.4vw,21px);text-align:center;line-height:1.4;margin:12px 0;color:var(--ink)}.scanbar{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--line)}.scanbar .primary{margin-left:auto;white-space:nowrap}.scanbar button{font-size:17px;padding:8px 11px}.scan-strip{display:flex;align-items:center;gap:9px;height:72px;overflow-x:auto;scrollbar-width:thin;padding:6px 2px;flex-shrink:0}.scan-empty{font-size:16px;color:var(--muted);padding-left:3px}.scan-item{position:relative;width:55px;height:55px;min-height:55px;flex:none;padding:0;border-radius:50%;background:white}.scan-item img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}.scan-item span{position:absolute;left:-2px;top:-3px;min-width:23px;height:23px;line-height:23px;border-radius:50%;background:var(--orange);color:white;font-size:14px}.scan-item.current{outline:2px solid var(--teal);outline-offset:2px}.viewer-side{padding:12px 25px 12px;display:flex;flex-direction:column;min-width:0;min-height:0}.viewer-top{display:flex;align-items:center;gap:10px;flex:none;min-height:44px}.viewer-top strong{font-size:18px;font-weight:600;color:var(--muted);margin-right:auto}.viewer-top button{min-height:36px;padding:6px 10px;font-size:17px}.field-stage{position:relative;flex:1;min-height:250px}.field-stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.field-stage canvas:active{cursor:grabbing}.field-status{position:absolute;bottom:6px;right:6px;color:var(--muted);font-size:16px;pointer-events:none;padding:3px 6px;background:#eff5f5de;border-radius:4px}.range-readout{min-height:29px;text-align:center;font-size:17px;color:var(--teal-dark);line-height:1.4;padding:2px}.range-readout:empty{min-height:7px;padding:0}.tools-switch{display:grid;grid-template-columns:1fr 1fr 1.5fr;border:1px solid #aabcC4;border-radius:var(--radius);overflow:hidden;flex:none;background:var(--surface)}.tools-switch button{border:0;border-radius:0;border-right:1px solid var(--line);font-size:clamp(17px,1.6vw,23px);padding:10px 5px}.tools-switch button:last-child{border-right:0}.focus-row{display:flex;align-items:center;gap:18px;min-height:64px}.focus-control{flex:1;display:flex;align-items:center;gap:18px;min-width:0}.focus-control label{font-size:22px;white-space:nowrap;font-weight:650}.focus-control input{width:100%;min-width:70px}input[type="range"]{accent-color:var(--teal);height:36px;cursor:pointer;touch-action:manipulation}input[type="range"]::-webkit-slider-thumb{cursor:grab}.led{border:0;background:transparent!important;display:flex;align-items:center;gap:12px;white-space:nowrap;font-size:20px;padding-right:0}.switch-track{display:inline-block;background:#bac9ce;width:55px;height:31px;border-radius:18px;position:relative}.switch-track:after{content:"";position:absolute;left:4px;top:4px;width:23px;height:23px;background:white;border-radius:50%;box-shadow:0 1px 3px #0003;transition:transform .15s}.led[aria-pressed="true"] .switch-track{background:var(--teal)}.led[aria-pressed="true"] .switch-track:after{transform:translateX(24px)}.footer{height:29px;flex:none;display:flex;align-items:center;gap:13px;padding:0 23px;font-size:13px;color:#607980;background:#eaf1f2}.footer .model-note{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.footer button{min-height:24px;font-size:13px;background:transparent;border:0;padding:2px 3px;white-space:nowrap}.footer .watermark{margin-left:auto;color:#71878b;opacity:.75}.tech{font-size:12px;white-space:nowrap}.record{padding:18px 24px 14px;display:flex;flex-direction:column;gap:14px}.record-toolbar{display:flex;align-items:center;gap:12px;flex:none}.record-title{font-size:20px;font-weight:700;margin-right:auto;min-width:0;display:flex;align-items:center;gap:8px}.record-title input{font-size:20px;font-weight:600;background:transparent;border:0;border-bottom:1px solid var(--line);width:min(230px,22vw);min-width:80px;padding:8px 5px;border-radius:0}.record-toolbar button{font-size:17px}.record-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.record-cell{display:flex;flex-direction:column;min-height:0;min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);padding:12px}.record-cell.selected{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal)}.record-cell header{display:flex;align-items:center;gap:8px;flex:none}.record-cell h2{font-size:20px;margin:0;line-height:1.4;flex:1}.record-cell header button{font-size:15px;padding:5px 8px;min-height:34px}.drawing-wrap{position:relative;flex:1;min-height:120px;margin:8px 0;background:white;border-radius:6px}.drawing-wrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair}.source-label{color:var(--muted);font-size:14px;line-height:1.5;min-height:42px;flex:none;overflow-wrap:anywhere}.note-input{width:100%;resize:none;min-height:58px;height:58px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-size:17px;line-height:1.4;background:#f8fbfa}.drawing-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;min-height:48px}.drawing-toolbar button{min-height:42px;font-size:17px}.drawing-toolbar .tool-group{display:flex;gap:7px}.drawing-toolbar .color-dot{width:37px;min-height:37px;height:37px;padding:0;border:3px solid white;border-radius:50%;box-shadow:0 0 0 1px var(--line)}.drawing-toolbar .color-dot[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}.draw-hint{color:var(--muted);font-size:15px;margin-right:auto}.record-hint{margin:0;font-size:14px;color:var(--muted);line-height:1.5}.modal{position:fixed;inset:0;background:#173e495c;z-index:20;display:flex;align-items:center;justify-content:center;padding:20px}.modal[hidden]{display:none!important}.dialog{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 70px #0b2b4740;width:min(700px,100%);max-height:90vh;overflow:auto;padding:26px}.dialog h2{font-size:25px;margin:0 0 16px}.dialog p,.dialog li{font-size:17px;line-height:1.7}.dialog ul{padding-left:24px}.dialog a{color:var(--teal-dark)}.dialog .actions{display:flex;justify-content:flex-end;gap:12px;margin-top:20px}.dialog .actions button{font-size:17px}.dialog .preview-image{display:block;max-width:100%;max-height:55vh;margin:auto;border:1px solid var(--line)}.dialog .primary-link{display:inline-flex;padding:11px 18px;background:var(--teal);color:white;text-decoration:none;border-radius:8px;font-size:17px;font-weight:700}.toast{position:fixed;bottom:46px;left:50%;transform:translateX(-50%);z-index:30;max-width:min(90vw,650px);padding:12px 21px;border-radius:10px;background:#173e49;color:white;font-size:18px;box-shadow:0 4px 18px #173e4933;text-align:center;pointer-events:none}.toast[hidden]{display:none}.hide{display:none!important}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+@media(min-width:1500px){.topbar{height:88px;padding:0 30px}.overview-side{padding:28px 28px 16px}.viewer-side{padding:15px 32px}.section-line{min-height:46px}.focus-row{min-height:74px}.scan-strip{height:86px}.scan-item{width:64px;height:64px}.record-cell h2{font-size:24px}.record-cell{padding:16px}.source-label{font-size:16px}.note-input{font-size:19px}.record-toolbar button{font-size:20px}.record-toolbar{min-height:56px}}
+@media(max-height:760px) and (min-width:901px){.topbar{height:67px;padding:0 18px;gap:12px}.overview-side{padding:12px 16px 4px}.viewer-side{padding:5px 19px 6px}.direction-tip{margin:7px 0;font-size:16px}.scan-strip{height:64px}.scanbar{padding-top:7px}.focus-row{min-height:55px}.field-stage{min-height:180px}.section-line{min-height:32px}.footer{height:26px}.record{padding:12px 18px 8px;gap:9px}.record-grid{gap:13px}.record-cell{padding:10px}.record-cell h2{font-size:18px}.source-label{font-size:13px;min-height:38px}.note-input{font-size:16px;height:50px;min-height:50px}.drawing-toolbar{min-height:40px}.record-hint{font-size:13px}.record-toolbar button{min-height:40px}}
+@media(max-width:1100px) and (min-width:901px){.topbar{gap:10px;padding:0 15px}h1{font-size:23px}.tabs{gap:10px}.tab{font-size:18px;padding:0 6px}.utilities{gap:7px}.utilities button{font-size:16px;padding:8px}.utilities .icon{display:none}.observe{grid-template-columns:40% 60%}.viewer-top button{font-size:15px}.overview-side{padding-left:14px;padding-right:14px}.viewer-side{padding-left:16px;padding-right:16px}.scanbar button{font-size:15px;padding:8px}.record-toolbar{gap:7px}.record-toolbar button{font-size:15px;padding:8px}.record-title{font-size:18px}.record-cell header button{font-size:13px;padding:5px}.record-cell h2{font-size:17px}}
+@media(max-width:900px){body{overflow:auto;height:auto;min-height:100vh;min-height:100dvh}.topbar{height:auto;min-height:100px;flex-wrap:wrap;padding:12px 18px 0;gap:6px}h1{font-size:25px;flex:1}.utilities button{font-size:16px;min-height:39px;padding:7px 10px}.tabs{height:47px;order:3;width:100%;justify-content:center;gap:35px}.tab{font-size:20px}.app{flex:auto;min-height:0}.page{height:auto}.observe{grid-template-columns:42% 58%;min-height:650px}.overview-side{padding:16px 12px 10px}.viewer-side{padding:10px 12px}.overview-stage{min-height:280px}.field-stage{height:350px;min-height:260px;flex:1}.specimen-picker{gap:6px}.specimen-picker button{font-size:16px;min-height:44px}.viewer-top{flex-wrap:wrap;gap:6px}.viewer-top strong{font-size:17px}.viewer-top button{font-size:15px;min-height:34px;padding:6px 8px}.scanbar{flex-wrap:wrap}.scanbar .primary{width:100%;order:-1;margin:0}.scan-strip{height:68px}.direction-tip{font-size:16px}.focus-row{gap:8px;flex-wrap:wrap;min-height:92px}.focus-control{flex-basis:100%;gap:12px}.focus-control label{font-size:20px}.led{font-size:18px;margin-left:auto;min-height:38px}.tools-switch button{font-size:17px}.field-status{font-size:14px;right:0}.range-readout{font-size:15px}.footer{min-height:33px;height:auto;padding:6px 15px;flex-wrap:wrap;gap:6px}.record{padding:16px}.record-toolbar{flex-wrap:wrap;gap:8px}.record-title{flex-basis:100%;font-size:20px}.record-title input{width:220px}.record-toolbar button{font-size:16px}.record-grid{gap:10px;min-height:400px}.record-cell{padding:9px}.record-cell header{flex-wrap:wrap}.record-cell h2{font-size:17px;flex-basis:100%}.drawing-wrap{height:230px;flex:1}.source-label{font-size:13px}.note-input{font-size:15px;height:78px}.draw-hint{font-size:14px}.record-hint{font-size:13px}}
+@media(max-width:600px){.topbar{padding:12px 12px 0}h1{font-size:21px}.utilities button{font-size:14px;min-height:36px;padding:7px 9px}.utilities .icon{display:none}.utilities{gap:5px}.tabs{gap:22px;height:44px}.tab{font-size:18px}.observe{display:flex;flex-direction:column;min-height:0}.overview-side{border-right:0;border-bottom:1px solid var(--line);padding:15px 15px 10px}.specimen-picker button{font-size:18px}.overview-stage{height:285px;min-height:285px;flex:none}.scanbar{flex-wrap:nowrap}.scanbar .primary{order:0;width:auto;margin-left:auto}.scan-strip{height:60px}.direction-tip{font-size:17px}.viewer-side{padding:12px 15px}.field-stage{height:355px;min-height:355px;flex:none}.viewer-top strong{font-size:18px}.focus-row{min-height:65px;flex-wrap:nowrap}.focus-control{flex-basis:auto}.focus-control label{font-size:18px}.led{font-size:16px;gap:8px}.switch-track{width:49px;height:29px}.switch-track:after{width:21px;height:21px}.led[aria-pressed="true"] .switch-track:after{transform:translateX(20px)}.tools-switch button{font-size:18px}.field-status{font-size:14px}.record{gap:12px;padding:14px 12px}.record-toolbar button{font-size:15px;padding:8px 9px}.record-grid{display:flex;flex-direction:column;gap:14px}.record-cell{padding:12px}.record-cell header{flex-wrap:nowrap}.record-cell h2{font-size:20px;flex-basis:auto}.record-cell header button{font-size:16px;min-height:38px}.drawing-wrap{height:300px;flex:none}.source-label{font-size:14px;min-height:0;margin-bottom:7px}.note-input{height:58px;font-size:17px}.drawing-toolbar{position:sticky;bottom:0;z-index:5;padding:9px;background:var(--bg);border:1px solid var(--line);border-radius:8px}.draw-hint{flex-basis:100%;font-size:13px}.drawing-toolbar button{font-size:16px}.footer .model-note{white-space:normal;font-size:12px}.dialog{padding:20px}.dialog p,.dialog li{font-size:16px}.toast{font-size:16px;bottom:25px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<svg aria-hidden="true" class="visually-hidden"><defs><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 7v5h5M4 12a8 8 0 1 0 2-6"/></symbol><symbol id="i-full" viewBox="0 0 24 24"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></symbol></defs></svg>
+<header class="topbar">
+ <h1>用简易显微镜观察</h1>
+ <nav class="tabs" role="tablist" aria-label="观察工作区"><button class="tab" id="observe-tab" role="tab" aria-selected="true" aria-controls="observe-page">定位与扫描</button><button class="tab" id="record-tab" role="tab" aria-selected="false" aria-controls="record-page">对照与记录</button></nav>
+ <div class="utilities"><button id="reset-btn"><svg class="icon"><use href="#i-reset"/></svg>复位</button><button id="fullscreen-btn"><svg class="icon"><use href="#i-full"/></svg>全屏</button></div>
+</header>
+<main class="app">
+ <section class="page observe" id="observe-page" role="tabpanel" aria-labelledby="observe-tab">
+  <div class="overview-side">
+   <div class="specimen-picker" role="group" aria-label="选择观察物体"><button class="choice" data-specimen="leg" aria-pressed="false">昆虫足</button><button class="choice" data-specimen="paper" aria-pressed="true">餐巾纸</button><button class="choice" data-specimen="print" aria-pressed="false">彩色印刷</button></div>
+   <div class="section-line"><strong>物体全貌</strong><span id="position-label" aria-live="off">取景位置</span></div>
+   <div class="overview-stage"><canvas id="overview" tabindex="0" aria-label="物体全貌，拖动取景圆；也可用方向键移动位置"></canvas></div>
+   <p class="direction-tip">拖动取景圆，把细节放回整体</p>
+   <div class="scanbar"><button class="outline" id="coverage-btn" aria-pressed="false">已看区域</button><button id="undo-scan" disabled>撤回</button><button class="primary" id="capture-btn">留住视野</button></div>
+   <div class="scan-strip" id="scan-strip" aria-label="保存的视野"><span class="scan-empty">保留几个位置，再拼回全貌</span></div>
+  </div>
+  <div class="viewer-side">
+   <div class="viewer-top"><strong>眼中视野</strong><button class="outline" id="range-btn" aria-pressed="false">比较范围</button><button id="compare-btn">同点对照</button></div>
+   <div class="field-stage"><canvas id="field" tabindex="0" aria-label="放大的观察视野，可拖动查找相邻结构"></canvas><div class="field-status" id="field-status">结构与视野示意</div></div>
+   <div class="range-readout" id="range-readout" aria-live="polite"></div>
+   <div class="tools-switch" role="group" aria-label="选择观察工具"><button class="choice" data-mode="0" aria-pressed="false">整体</button><button class="choice" data-mode="1" aria-pressed="false">放大镜</button><button class="choice" data-mode="2" aria-pressed="true">简易显微镜</button></div>
+   <div class="focus-row"><div class="focus-control"><label for="focus">调焦</label><input id="focus" type="range" min="0" max="100" step="1" value="47" aria-label="转动调焦环" aria-valuetext="调焦位置47"></div><button class="led" id="led-btn" aria-pressed="true" aria-label="LED照明"><span>LED照明</span><span class="switch-track" aria-hidden="true"></span></button></div>
+  </div>
+ </section>
+ <section class="page record" id="record-page" role="tabpanel" aria-labelledby="record-tab" hidden>
+  <div class="record-toolbar"><label class="record-title" for="record-object">观察对象 <input id="record-object" maxlength="30" value="餐巾纸" aria-label="观察对象名称"></label><button id="bring-comparison">带入同点对照</button><button id="blank-record">空白观察单</button><button class="primary" id="export-btn"><svg class="icon"><use href="#i-save"/></svg>保存观察图</button></div>
+  <div class="record-grid">
+   <article class="record-cell selected" data-slot="0"><header><h2>肉眼观察</h2><button data-upload="0">实拍</button><button data-clear="0" aria-label="清空肉眼观察图">清空</button></header><div class="drawing-wrap"><canvas id="record-canvas-0" tabindex="0" aria-label="肉眼观察画图区，可用画笔或圈注记录"></canvas></div><div class="source-label" id="source-0">空白记录 · 可以直接画图，或导入实拍</div><textarea class="note-input" id="note-0" maxlength="140" placeholder="我看到了……（也可只画图）" aria-label="肉眼观察发现"></textarea></article>
+   <article class="record-cell" data-slot="1"><header><h2>放大镜观察</h2><button data-upload="1">实拍</button><button data-clear="1" aria-label="清空放大镜观察图">清空</button></header><div class="drawing-wrap"><canvas id="record-canvas-1" tabindex="0" aria-label="放大镜观察画图区，可用画笔或圈注记录"></canvas></div><div class="source-label" id="source-1">空白记录 · 可以直接画图，或导入实拍</div><textarea class="note-input" id="note-1" maxlength="140" placeholder="与整体相比……" aria-label="放大镜观察发现"></textarea></article>
+   <article class="record-cell" data-slot="2"><header><h2>简易显微镜观察</h2><button data-upload="2">实拍</button><button data-clear="2" aria-label="清空简易显微镜观察图">清空</button></header><div class="drawing-wrap"><canvas id="record-canvas-2" tabindex="0" aria-label="简易显微镜观察画图区，可用画笔或圈注记录"></canvas></div><div class="source-label" id="source-2">空白记录 · 可以直接画图，或导入实拍</div><textarea class="note-input" id="note-2" maxlength="140" placeholder="哪些细节需要画下来？" aria-label="简易显微镜观察发现"></textarea></article>
+  </div>
+  <div class="drawing-toolbar"><div class="tool-group" role="group" aria-label="记录工具"><button class="outline" data-draw="pen" aria-pressed="true">画笔</button><button class="outline" data-draw="circle" aria-pressed="false">圈注</button></div><button class="color-dot" data-color="#048878" style="background:#048878" aria-label="青绿色画笔" aria-pressed="true"></button><button class="color-dot" data-color="#d78c35" style="background:#d78c35" aria-label="橙色画笔" aria-pressed="false"></button><button id="undo-drawing" disabled>撤销笔画</button><span class="draw-hint" id="draw-hint">在图片上画；没有图片时，可直接画观察图。</span></div>
+  <p class="record-hint">实拍请选同一物体，并标明观察位置；未校准图片不能据此量尺寸。照片仅在本页处理，关闭前请保存观察图。</p>
+ </section>
+</main>
+<footer class="footer"><span class="tech">T2 · 二维绘图</span><span class="model-note">结构与视野示意；不代表器材标定倍率</span><button id="help-btn">模型与使用说明</button><span class="watermark">mutiw</span></footer>
+<input type="file" id="photo-file" accept="image/jpeg,image/png,image/webp,image/bmp" class="visually-hidden" tabindex="-1">
+<div class="modal" id="help-modal" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="help-title"><h2 id="help-title">让细节有位置，让记录有依据</h2><p><b>定位与扫描：</b>拖动取景圆，或直接拖动右侧图像；方向键也可移动。换观察工具时保留观察中心。“留住视野”最多保留6张；点缩略图可回到当时位置。“已看区域”把这些位置放回同一张全貌。</p><p><b>对照与记录：</b>同点对照会固定当前位置的三档示意图。实物观察后，也可分别导入肉眼、放大镜和简易显微镜照片，自己画图、圈注和填写发现。网页不会替你生成结论。</p><ul><li>内置昆虫足、餐巾纸和彩色印刷均为程序绘制的结构示意，不是显微实拍；不同视野来自同一张底图，不会随倍率随机换纹理。</li><li>三个观察档位使用相对显示尺度1、4、12；同一显示窗口覆盖的模型范围相应缩小。它们不是实际仪器的光学倍率，真实视野还与仪器结构有关。图像统一保持原方向，未模拟不同型号可能出现的倒像。</li><li>调焦只改变清晰程度，LED只改变照明；均不改变放大档位。这里只用单一观察平面近似调焦，未模拟完整光路、像差及立体样本的景深。</li><li>图像放大不等于增加原图细节；模型结果也不能独立验证模型自身设定的规律。照片无尺度标定，不显示毫米或微米尺。</li></ul><p><b>实物仍要操作：</b>按器材说明打开光源，物镜端垂直对准物体，稳住透明罩，再转调焦环。不要用显微镜或放大镜看太阳。优先用纸、印刷品或现成标本，不伤害活体昆虫。</p><p>课程依据：本项目所附教科版五年级上册教材第10—13页及教师教学用书第3课。光学关系参考 <a href="https://www.microscopyu.com/microscopy-basics/field-of-view" target="_blank" rel="noopener">Nikon：Field of View</a>、<a href="https://www.microscopyu.com/microscopy-basics/useful-magnification-range" target="_blank" rel="noopener">Useful Magnification Range</a>。</p><p>v1.0 · 单文件，无外部运行依赖。照片与记录仅留在当前页面内存；刷新或关闭会清除。导出会同时给出预览，方便不支持自动下载的设备保存。</p><div class="actions"><button class="primary" data-close="help-modal">回到观察</button></div></div></div>
+<div class="modal" id="confirm-modal" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title"><h2 id="confirm-title">替换当前记录？</h2><p id="confirm-message"></p><div class="actions"><button id="confirm-cancel">保留现有内容</button><button class="primary" id="confirm-ok">继续</button></div></div></div>
+<div class="modal" id="export-modal" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="export-title"><h2 id="export-title">观察图已生成</h2><p id="export-message">点击下载保存；平板也可长按预览图保存图片。</p><img id="export-image" class="preview-image" alt="三种工具的观察记录导出预览"><div class="actions"><button data-close="export-modal">继续记录</button><a id="download-link" class="primary-link" download="用简易显微镜观察_观察记录.png">下载 PNG</a></div></div></div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+/*
+ * MicroSpecimens — deterministic, code-drawn specimen illustrations.
+ * ALL images are structural teaching diagrams, NOT micrographs or real observations.
+ * The 1000 × 1000 world has no physical millimetre / micrometre calibration.
+ * Overview and magnified crops MUST sample this same world image.
+ * Each renderer fills the complete world, uses no network / font / image assets,
+ * and draws fewer than 2500 separate specimen marks.
+ */
+(function () {
+  'use strict';
+  var SIZE = 1000;
+
+  function rng(seed) {
+    var s = seed >>> 0;
+    return function () {
+      s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+      return s / 4294967296;
+    };
+  }
+  function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+  function dot(ctx, x, y, r, fill) {
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = fill; ctx.fill();
+  }
+  function backdrop(ctx, light, edge) {
+    var g = ctx.createRadialGradient(480, 420, 90, 500, 500, 735);
+    g.addColorStop(0, light); g.addColorStop(1, edge);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, SIZE, SIZE);
+  }
+
+  // A generic insect leg: coxa / trochanter / femur / tibia / five tarsal
+  // segments / paired terminal claws. It does not identify a particular species.
+  function drawLeg(ctx) {
+    backdrop(ctx, '#fffdf6', '#e8e1d0');
+    var random = rng(13831);
+    var segments = [
+      { a: [217, 178], b: [293, 262], wa: 42, wb: 31, hairs: 13 },
+      { a: [293, 262], b: [333, 316], wa: 28, wb: 25, hairs: 9 },
+      { a: [333, 316], b: [481, 609], wa: 47, wb: 29, hairs: 35 },
+      { a: [481, 609], b: [729, 391], wa: 23, wb: 15, hairs: 43 },
+      { a: [729, 391], b: [775, 474], wa: 15, wb: 12, hairs: 15 },
+      { a: [775, 474], b: [797, 532], wa: 12, wb: 10, hairs: 11 },
+      { a: [797, 532], b: [809, 575], wa: 11, wb: 8.8, hairs: 8 },
+      { a: [809, 575], b: [819, 613], wa: 9, wb: 7.5, hairs: 7 },
+      { a: [819, 613], b: [836, 651], wa: 7.8, wb: 6.2, hairs: 7 }
+    ];
+
+    // A soft specimen shadow is separate from all structural marks.
+    ctx.save();
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.strokeStyle = 'rgba(74,46,16,0.075)'; ctx.lineWidth = 67;
+    ctx.shadowColor = 'rgba(67,45,22,0.12)'; ctx.shadowBlur = 17;
+    ctx.shadowOffsetX = 9; ctx.shadowOffsetY = 13;
+    ctx.beginPath(); ctx.moveTo(217, 178);
+    for (var s = 0; s < segments.length; s++) ctx.lineTo(segments[s].b[0], segments[s].b[1]);
+    ctx.stroke(); ctx.restore();
+
+    segments.forEach(function (seg, index) {
+      var dx = seg.b[0] - seg.a[0], dy = seg.b[1] - seg.a[1];
+      var len = Math.sqrt(dx * dx + dy * dy), angle = Math.atan2(dy, dx);
+      ctx.save(); ctx.translate(seg.a[0], seg.a[1]); ctx.rotate(angle);
+      var body = ctx.createLinearGradient(0, -seg.wa, 0, seg.wa);
+      body.addColorStop(0, '#6d3717');
+      body.addColorStop(0.17, '#b87127');
+      body.addColorStop(0.38, '#e7b960');
+      body.addColorStop(0.62, '#c48a37');
+      body.addColorStop(0.85, '#995821');
+      body.addColorStop(1, '#633418');
+      ctx.beginPath();
+      ctx.moveTo(-seg.wa * 0.16, -seg.wa * 0.54);
+      ctx.bezierCurveTo(len * 0.12, -seg.wa * 1.13, len * 0.63, -seg.wa * 0.82, len, -seg.wb * 0.64);
+      ctx.bezierCurveTo(len + seg.wb * 0.63, -seg.wb * 0.25, len + seg.wb * 0.63, seg.wb * 0.3, len, seg.wb * 0.68);
+      ctx.bezierCurveTo(len * 0.68, seg.wa * 0.91, len * 0.16, seg.wa * 1.11, -seg.wa * 0.16, seg.wa * 0.55);
+      ctx.bezierCurveTo(-seg.wa * 0.48, seg.wa * 0.17, -seg.wa * 0.46, -seg.wa * 0.18, -seg.wa * 0.16, -seg.wa * 0.54);
+      ctx.closePath(); ctx.fillStyle = body; ctx.fill();
+      ctx.strokeStyle = '#75421e'; ctx.lineWidth = index < 4 ? 1.8 : 1.2; ctx.stroke();
+
+      ctx.save(); ctx.clip();
+      // Fine cuticular pits remain attached to the same surface when magnified.
+      var pitCount = index < 4 ? Math.floor(len / 2.3) : Math.floor(len / 3.5);
+      for (var p = 0; p < pitCount; p++) {
+        var px = 6 + random() * (len - 9), pt = px / len;
+        var pw = seg.wa * (1 - pt) + seg.wb * pt;
+        var py = (random() - 0.5) * pw * 1.42;
+        dot(ctx, px, py, 0.45 + random() * 0.95, 'rgba(86,46,16,0.20)');
+      }
+      ctx.beginPath(); ctx.moveTo(6, -seg.wa * 0.27);
+      ctx.bezierCurveTo(len * 0.25, -seg.wa * 0.40, len * 0.73, -seg.wb * 0.19, len - 4, -seg.wb * 0.10);
+      ctx.strokeStyle = 'rgba(255,234,173,0.44)'; ctx.lineWidth = Math.max(1, seg.wa * 0.095); ctx.stroke();
+      ctx.restore();
+
+      // Setae grow out from visible sockets. Curves taper via a second fine tip.
+      for (var h = 0; h < seg.hairs; h++) {
+        var t = 0.075 + (h + random() * 0.56) / seg.hairs * 0.85;
+        var hx = t * len, side = h % 2 ? 1 : -1;
+        var width = (seg.wa * (1 - t) + seg.wb * t) * (0.76 + random() * 0.10);
+        var hy = side * width;
+        var hairLen = (index < 4 ? 21 : 14) + random() * (index < 4 ? 27 : 15);
+        var sweep = hairLen * (0.23 + random() * 0.40);
+        var tx = hx + sweep, ty = hy + side * hairLen;
+        ctx.beginPath(); ctx.ellipse(hx, hy, 2.15, 1.35, 0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(89,45,20,0.73)'; ctx.fill();
+        dot(ctx, hx - 0.6, hy - 0.55, 0.5, 'rgba(255,223,153,0.80)');
+        ctx.beginPath(); ctx.moveTo(hx, hy);
+        ctx.bezierCurveTo(hx + sweep * 0.19, hy + side * hairLen * 0.44,
+          hx + sweep * 0.72, hy + side * hairLen * 0.83, tx, ty);
+        ctx.strokeStyle = '#764a27'; ctx.lineWidth = index < 4 ? 1.35 : 1.05; ctx.lineCap = 'round'; ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(tx, ty);
+        ctx.quadraticCurveTo(tx + sweep * 0.15, ty + side * hairLen * 0.11,
+          tx + sweep * 0.32, ty + side * hairLen * 0.19);
+        ctx.strokeStyle = 'rgba(112,76,43,0.68)'; ctx.lineWidth = 0.65; ctx.stroke();
+      }
+      ctx.restore();
+    });
+
+    // Small overlapping joint plates, rather than disconnected spherical joints.
+    for (var j = 0; j < segments.length - 1; j++) {
+      var at = segments[j].b, r = Math.min(segments[j].wb, segments[j + 1].wa) * 0.77;
+      var joint = ctx.createRadialGradient(at[0] - r * 0.28, at[1] - r * 0.34, 0, at[0], at[1], r);
+      joint.addColorStop(0, '#ddb268'); joint.addColorStop(0.60, '#a16d32'); joint.addColorStop(1, '#653e20');
+      ctx.beginPath(); ctx.ellipse(at[0], at[1], r, r * 0.76, -0.5, 0, Math.PI * 2);
+      ctx.fillStyle = joint; ctx.fill();
+      ctx.strokeStyle = '#65391d'; ctx.lineWidth = 1.2; ctx.stroke();
+      ctx.beginPath(); ctx.arc(at[0] - r * 0.06, at[1] - r * 0.05, r * 0.6, 3.5, 5.65);
+      ctx.strokeStyle = 'rgba(255,223,158,0.48)'; ctx.lineWidth = 1.25; ctx.stroke();
+    }
+
+    // The pretarsus ends in two distinct curved claws.
+    ctx.save(); ctx.translate(836, 651); ctx.rotate(-0.12);
+    [-1, 1].forEach(function (side) {
+      var claw = ctx.createLinearGradient(0, 0, side * 29, 53);
+      claw.addColorStop(0, '#c28c45'); claw.addColorStop(0.5, '#8a5425'); claw.addColorStop(1, '#442915');
+      ctx.beginPath(); ctx.moveTo(side * 2, -3);
+      ctx.bezierCurveTo(side * 24, 2, side * 45, 20, side * 41, 40);
+      ctx.bezierCurveTo(side * 40, 49, side * 29, 59, side * 22, 59);
+      ctx.bezierCurveTo(side * 29, 47, side * 32, 36, side * 25, 28);
+      ctx.bezierCurveTo(side * 19, 20, side * 10, 17, side * 3, 13);
+      ctx.closePath(); ctx.fillStyle = claw; ctx.fill();
+      ctx.strokeStyle = '#60401e'; ctx.lineWidth = 1.1; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(side * 7, 6); ctx.quadraticCurveTo(side * 36, 21, side * 35, 39);
+      ctx.strokeStyle = 'rgba(245,207,134,0.44)'; ctx.lineWidth = 1.8; ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  // Tissue paper is an irregular fibre network, not a woven square fabric grid.
+  function drawPaper(ctx) {
+    backdrop(ctx, '#e7e1d2', '#d5cebb');
+    var random = rng(570211);
+    // Background pores add depth but have no claimed measured dimensions.
+    for (var pore = 0; pore < 40; pore++) {
+      var x = random() * SIZE, y = random() * SIZE, r = 12 + random() * 37;
+      var shade = ctx.createRadialGradient(x, y, 0, x, y, r);
+      shade.addColorStop(0, 'rgba(124,113,85,0.13)'); shade.addColorStop(1, 'rgba(124,113,85,0)');
+      ctx.fillStyle = shade; ctx.fillRect(x - r, y - r, r * 2, r * 2);
+    }
+    var fibres = [];
+    for (var i = 0; i < 450; i++) {
+      var theta = random() * Math.PI * 2, length = 330 + random() * 820;
+      var cx = -80 + random() * 1160, cy = -80 + random() * 1160;
+      fibres.push({ cx: cx, cy: cy, angle: theta, length: length,
+        bend: (random() - 0.5) * 170, width: 2.4 + random() * 9.4,
+        tone: random(), split: i % 4 === 0 });
+    }
+    // Include a clear crossing at the recommended starting observation position.
+    fibres.push({ cx: 515, cy: 495, angle: 0.42, length: 760, bend: 49, width: 9.4, tone: 0.6, split: true });
+    fibres.push({ cx: 495, cy: 509, angle: 1.83, length: 680, bend: -35, width: 7.3, tone: 0.4, split: true });
+    fibres.push({ cx: 510, cy: 490, angle: 2.56, length: 530, bend: 30, width: 5.1, tone: 0.8, split: false });
+
+    fibres.forEach(function (f) {
+      ctx.save(); ctx.translate(f.cx, f.cy); ctx.rotate(f.angle); ctx.lineCap = 'round';
+      var left = -f.length / 2, right = f.length / 2;
+      function curve(offset) {
+        ctx.beginPath(); ctx.moveTo(left, offset);
+        ctx.bezierCurveTo(left + f.length * 0.29, f.bend + offset,
+          right - f.length * 0.22, -f.bend * 0.55 + offset, right, offset + f.bend * 0.18);
+      }
+      curve(f.width * 0.40 + 1.5);
+      ctx.strokeStyle = 'rgba(101,94,73,0.19)'; ctx.lineWidth = f.width + 2.0; ctx.stroke();
+      curve(0);
+      var warm = Math.round(226 + f.tone * 18);
+      ctx.strokeStyle = 'rgb(' + (warm + 6) + ',' + (warm + 3) + ',' + (warm - 8) + ')';
+      ctx.lineWidth = f.width; ctx.stroke();
+      curve(-f.width * 0.21);
+      ctx.strokeStyle = 'rgba(255,255,250,0.69)'; ctx.lineWidth = Math.max(0.9, f.width * 0.25); ctx.stroke();
+      curve(f.width * 0.16);
+      ctx.strokeStyle = 'rgba(141,132,107,0.21)'; ctx.lineWidth = 0.55; ctx.stroke();
+      if (f.split) {
+        // Fine fibrils split near some ends without imposing a repeated lattice.
+        ctx.beginPath(); ctx.moveTo(right - 64, f.bend * 0.03);
+        ctx.quadraticCurveTo(right - 28, f.bend * 0.18 + 5, right + 22, f.bend * 0.18 + 11);
+        ctx.strokeStyle = 'rgba(246,243,230,0.93)'; ctx.lineWidth = 1.25; ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(right - 52, f.bend * 0.03);
+        ctx.quadraticCurveTo(right - 20, f.bend * 0.18 - 7, right + 17, f.bend * 0.18 - 13);
+        ctx.lineWidth = 0.8; ctx.stroke();
+      }
+      ctx.restore();
+    });
+  }
+
+  // A printed leaf illustration formed from subtractively overlapping CMYK dots.
+  // This is one simplified halftone process, not a claim about every printer.
+  function printInkAt(x, y) {
+    var dx = x - 508, dy = y - 492, co = 0.70710678118, si = -0.70710678118;
+    var along = (dx * co + dy * si) / 355;
+    var across = (-dx * si + dy * co) / 218;
+    if (Math.abs(along) <= 1) {
+      var edge = Math.pow(Math.max(0, Math.cos(along * Math.PI / 2)), 0.83);
+      if (Math.abs(across) < edge) {
+        var vein = Math.abs(across - 0.085 * Math.sin(along * 3.4)) < 0.028;
+        var sideVein = Math.abs(((along + across * 0.82 + 1.8) % 0.30) - 0.15) < 0.014 && Math.abs(across) > 0.055;
+        var leafEdge = edge - Math.abs(across) < 0.027;
+        return [0.035 + (vein ? 0.08 : 0),
+          clamp(0.30 + along * 0.12 + across * 0.07 + (sideVein ? 0.11 : 0), 0.15, 0.61),
+          vein ? 0.61 : 0.91,
+          leafEdge ? 0.17 : (vein ? 0.12 : (sideVein ? 0.055 : 0.008))];
+      }
+    }
+    // The small stem is printed as part of the artwork, not an anatomical claim.
+    var stemX = x - 270, stemY = y - 742;
+    var stemAlong = (stemX * co + stemY * si);
+    var stemAcross = (-stemX * si + stemY * co);
+    if (stemAlong > -106 && stemAlong < 32 && Math.abs(stemAcross) < 10 - stemAlong * 0.025) {
+      return [0.62, 0.11, 0.78, 0.12];
+    }
+    return [0, 0, 0, 0];
+  }
+  function drawPrint(ctx) {
+    backdrop(ctx, '#fffdf8', '#eeeae1');
+    var random = rng(33499);
+    ctx.lineWidth = 0.55; ctx.lineCap = 'round';
+    for (var p = 0; p < 100; p++) {
+      var px = random() * SIZE, py = random() * SIZE;
+      ctx.beginPath(); ctx.moveTo(px, py);
+      ctx.quadraticCurveTo(px + 7, py - 3, px + 13 + random() * 15, py + random() * 3);
+      ctx.strokeStyle = 'rgba(168,154,127,0.13)'; ctx.stroke();
+    }
+    var step = 20;
+    var screens = [
+      { channel: 2, degrees: 0, color: '#fff000', ox: 3, oy: 7 },
+      { channel: 1, degrees: 75, color: '#e5007b', ox: 0, oy: 1 },
+      { channel: 0, degrees: 15, color: '#00afd8', ox: 8, oy: 4 },
+      { channel: 3, degrees: 45, color: '#282729', ox: 2, oy: 8 }
+    ];
+    ctx.save(); ctx.globalCompositeOperation = 'multiply';
+    screens.forEach(function (screen) {
+      var angle = screen.degrees * Math.PI / 180, c = Math.cos(angle), s = Math.sin(angle);
+      ctx.fillStyle = screen.color;
+      for (var row = -31; row <= 31; row++) {
+        for (var col = -31; col <= 31; col++) {
+          var gx = col * step + screen.ox, gy = row * step + screen.oy;
+          var x = 500 + gx * c - gy * s, y = 500 + gx * s + gy * c;
+          if (x < -16 || y < -16 || x > SIZE + 16 || y > SIZE + 16) continue;
+          var ink = printInkAt(x, y)[screen.channel];
+          if (ink < 0.007) continue;
+          var radius = step * Math.sqrt(ink / Math.PI);
+          ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.fill();
+        }
+      }
+    });
+    ctx.restore();
+  }
+
+  var drawers = { leg: drawLeg, paper: drawPaper, print: drawPrint };
+  window.MicroSpecimens = {
+    worldSize: SIZE,
+    items: [
+      { id: 'leg', name: '昆虫足', center: { x: 518, y: 568 }, focus: 55,
+        question: '局部看到的细节，位于整条足的哪里？' },
+      { id: 'paper', name: '餐巾纸', center: { x: 507, y: 495 }, focus: 47,
+        question: '纸面看起来平整，换个观察尺度会有什么发现？' },
+      { id: 'print', name: '彩色印刷', center: { x: 529, y: 480 }, focus: 63,
+        question: '图上的橙色，放大后仍是一整片吗？' }
+    ],
+    draw: function (ctx, id) {
+      if (!drawers[id]) throw new Error('Unknown specimen: ' + id);
+      ctx.save();
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+      drawers[id](ctx);
+      ctx.restore();
+    }
+  };
+}());
+
+</script>
+<script>
+(function(){
+'use strict';
+// The model uses one deterministic specimen texture in a shared 1000 × 1000 coordinate system.
+// Display scale, focus and illumination are independent. No physical calibration is implied.
+var $=function(id){return document.getElementById(id);};
+var all=function(sel){return Array.prototype.slice.call(document.querySelectorAll(sel));};
+var WORLD=MicroSpecimens.worldSize, MODES=[{label:'整体',scale:1},{label:'放大镜',scale:4},{label:'简易显微镜',scale:12}];
+var specById={}; MicroSpecimens.items.forEach(function(item){specById[item.id]=item;});
+var state={specimen:'paper',center:{x:507,y:495},mode:2,focus:47,led:true,showRange:false,coverage:false,page:'observe',scans:[],currentScan:-1};
+var record={slots:[],selected:0,tool:'pen',color:'#048878'};
+var texture=null,textureId='',renderPending=false,toastTimer=0,pendingAction=null,lastFocus=null,uploadSlot=0,exportURL='';
+var originalCenter=specById.paper.center;state.center={x:originalCenter.x,y:originalCenter.y};
+function newSlot(){return {image:null,source:'blank',label:'空白记录 · 可以直接画图，或导入实拍',strokes:[],note:''};}
+for(var a=0;a<3;a++)record.slots.push(newSlot());
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function cloneView(s){return {specimen:s.specimen,center:{x:s.center.x,y:s.center.y},mode:s.mode,focus:s.focus,led:s.led};}
+function ensureTexture(id){
+ if(textureId===id && texture)return texture;
+ texture=document.createElement('canvas');texture.width=2400;texture.height=2400;
+ var ctx=texture.getContext('2d');ctx.scale(2.4,2.4);MicroSpecimens.draw(ctx,id);textureId=id;return texture;
+}
+function canvasSetup(canvas){
+ var box=canvas.getBoundingClientRect(),w=Math.max(1,box.width),h=Math.max(1,box.height),dpr=Math.min(2,window.devicePixelRatio||1);
+ var pw=Math.round(w*dpr),ph=Math.round(h*dpr);
+ if(canvas.width!==pw||canvas.height!==ph){canvas.width=pw;canvas.height=ph;}
+ var ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);return {ctx:ctx,w:w,h:h};
+}
+function mapRect(w,h){var side=Math.min(w-28,h-28);return {x:(w-side)/2,y:(h-side)/2,size:side};}
+function circle(ctx,x,y,r){ctx.beginPath();ctx.arc(x,y,Math.max(0,r),0,Math.PI*2);}
+function text(ctx,content,x,y,size,color,align,weight){ctx.fillStyle=color||'#163e49';ctx.font=(weight||600)+' '+size+'px "Microsoft YaHei","PingFang SC",sans-serif';ctx.textAlign=align||'left';ctx.textBaseline='middle';ctx.fillText(content,x,y);}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function drawOverview(){
+ var setup=canvasSetup($('overview')),ctx=setup.ctx,w=setup.w,h=setup.h,r=mapRect(w,h),tex=ensureTexture(state.specimen);
+ ctx.fillStyle='#d3e0e4';ctx.fillRect(0,0,w,h);ctx.save();roundRect(ctx,r.x,r.y,r.size,r.size,5);ctx.clip();
+ ctx.fillStyle='#f8faf5';ctx.fillRect(r.x,r.y,r.size,r.size);
+ if(state.coverage){
+  ctx.globalAlpha=.12;ctx.drawImage(tex,r.x,r.y,r.size,r.size);ctx.globalAlpha=1;
+  if(state.scans.length){state.scans.forEach(function(v){var diameter=r.size/MODES[v.mode].scale,x=r.x+v.center.x/WORLD*r.size-diameter/2,y=r.y+v.center.y/WORLD*r.size-diameter/2;ctx.save();circle(ctx,x+diameter/2,y+diameter/2,diameter/2);ctx.clip();ctx.drawImage(v.fieldImage,v.fieldRect.x,v.fieldRect.y,v.fieldRect.side,v.fieldRect.side,x,y,diameter,diameter);ctx.restore();});}
+ }else ctx.drawImage(tex,r.x,r.y,r.size,r.size);
+ var cx=r.x+state.center.x/WORLD*r.size,cy=r.y+state.center.y/WORLD*r.size;
+ state.scans.forEach(function(v,i){var x=r.x+v.center.x/WORLD*r.size,y=r.y+v.center.y/WORLD*r.size,rad=r.size/(2*MODES[v.mode].scale);ctx.strokeStyle='#ce8c42';ctx.lineWidth=1.8;ctx.setLineDash([4,3]);circle(ctx,x,y,rad);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#d78c35';circle(ctx,x,y,10);ctx.fill();text(ctx,String(i+1),x,y+.5,12,'#fff','center',700);});
+ if(state.showRange){[0,1,2].forEach(function(m){ctx.strokeStyle=m===state.mode?'#048878':'#839ca4';ctx.lineWidth=m===state.mode?2.7:1.5;ctx.setLineDash(m===state.mode?[]:[5,4]);circle(ctx,cx,cy,r.size/(2*MODES[m].scale));ctx.stroke();});ctx.setLineDash([]);}
+ else {ctx.fillStyle='#0488780c';ctx.strokeStyle='#048878';ctx.lineWidth=2.6;circle(ctx,cx,cy,r.size/(2*MODES[state.mode].scale));ctx.fill();ctx.stroke();}
+ ctx.strokeStyle='#fff';ctx.lineWidth=2.5;ctx.fillStyle='#048878';circle(ctx,cx,cy,5);ctx.fill();ctx.stroke();
+ ctx.restore();
+ $('position-label').textContent=state.coverage?'已留住 '+state.scans.length+' 处':'拖动或点选位置';
+ $('overview').setAttribute('aria-label',specById[state.specimen].name+'全貌，取景中心横向'+Math.round(state.center.x/WORLD*100)+'%、纵向'+Math.round(state.center.y/WORLD*100)+'%；可拖动或用方向键移动');
+}
+function blurAmount(s){return s.mode===2?Math.min(8,Math.abs(s.focus-specById[s.specimen].focus)*.23):0;}
+function drawField(ctx,w,h,s,opts){
+ opts=opts||{};var tex=ensureTexture(s.specimen),side=Math.max(1,Math.min(w-22,h-22)),x=(w-side)/2,y=(h-side)/2,span=WORLD/MODES[s.mode].scale;
+ ctx.clearRect(0,0,w,h);ctx.fillStyle=opts.white?'#ffffff':'#eff5f5';ctx.fillRect(0,0,w,h);
+ ctx.save();circle(ctx,w/2,h/2,side/2);ctx.clip();ctx.fillStyle='#e2e7e3';ctx.fillRect(x,y,side,side);
+ var factor=side/span,dx=w/2-s.center.x*factor,dy=h/2-s.center.y*factor,whole=WORLD*factor,b=blurAmount(s)*(side/450);
+ if(b>.3 && 'filter' in ctx){ctx.filter='blur('+b.toFixed(2)+'px)';ctx.drawImage(tex,dx,dy,whole,whole);ctx.filter='none';}
+ else if(b>.3){var low=document.createElement('canvas'),ls=Math.max(18,Math.round(side/(b*1.6+1)));low.width=ls;low.height=ls;var lc=low.getContext('2d');lc.fillStyle='#e2e7e3';lc.fillRect(0,0,ls,ls);lc.drawImage(tex,-(s.center.x-span/2)*ls/span,-(s.center.y-span/2)*ls/span,WORLD*ls/span,WORLD*ls/span);ctx.imageSmoothingEnabled=true;ctx.drawImage(low,x,y,side,side);}
+ else ctx.drawImage(tex,dx,dy,whole,whole);
+ if(s.mode===2&&!s.led){ctx.fillStyle='rgba(5,25,34,.88)';ctx.fillRect(x,y,side,side);}
+ var vignette=ctx.createRadialGradient(w/2,h/2,side*.32,w/2,h/2,side*.51);vignette.addColorStop(0,'rgba(27,52,61,0)');vignette.addColorStop(1,'rgba(27,52,61,.09)');ctx.fillStyle=vignette;ctx.fillRect(x,y,side,side);ctx.restore();
+ ctx.strokeStyle='#a6bac3';ctx.lineWidth=Math.max(2,side*.007);circle(ctx,w/2,h/2,side/2);ctx.stroke();
+ if(opts.center){ctx.strokeStyle='#048878';ctx.lineWidth=1.2;circle(ctx,w/2,h/2,4);ctx.stroke();}
+ return {x:x,y:y,side:side};
+}
+function drawMainField(){var o=canvasSetup($('field'));drawField(o.ctx,o.w,o.h,state);var b=blurAmount(state);$('field-status').textContent=state.mode===2&&!state.led?'光源已关 · 暗光示意':state.mode===2&&b>1.4?'转动调焦环，找清楚的位置':'结构与视野示意';$('field').setAttribute('aria-label',MODES[state.mode].label+'示意视野，中心与左侧相同'+(state.mode===2?'，调焦位置'+state.focus+'，LED'+(state.led?'打开':'关闭'):''));}
+function syncObserveControls(){
+ all('[data-mode]').forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.mode===state.mode));});
+ all('[data-specimen]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.specimen===state.specimen));});
+ $('focus').value=String(state.focus);$('focus').disabled=state.mode!==2;$('focus').setAttribute('aria-valuetext','调焦位置'+state.focus);
+ $('focus').parentElement.style.opacity=state.mode===2?'1':'.45';$('led-btn').disabled=state.mode!==2;$('led-btn').setAttribute('aria-pressed',String(state.led));
+ $('range-btn').setAttribute('aria-pressed',String(state.showRange));$('coverage-btn').setAttribute('aria-pressed',String(state.coverage));
+ $('range-readout').textContent=state.showRange?'示意放大 ×'+MODES[state.mode].scale+' · 当前覆盖宽度为整体的 '+(state.mode===0?'全部':'1/'+MODES[state.mode].scale):'';
+ $('undo-scan').disabled=state.scans.length===0;all('.scan-item').forEach(function(b,i){b.classList.toggle('current',i===state.currentScan);});
+}
+function schedule(){if(renderPending)return;renderPending=true;requestAnimationFrame(function(){renderPending=false;if(state.page==='observe'){syncObserveControls();drawOverview();drawMainField();}else drawAllRecords();});}
+function showToast(message){$('toast').textContent=message;$('toast').hidden=false;window.clearTimeout(toastTimer);toastTimer=window.setTimeout(function(){$('toast').hidden=true;},3100);}
+function setPage(name){
+ state.page=name;$('reset-btn').hidden=name==='record';$('observe-page').hidden=name!=='observe';$('record-page').hidden=name!=='record';$('observe-tab').setAttribute('aria-selected',String(name==='observe'));$('record-tab').setAttribute('aria-selected',String(name==='record'));if(window.innerWidth<=900)window.scrollTo(0,0);schedule();
+}
+function openModal(id){lastFocus=document.activeElement;$(id).hidden=false;var first=$(id).querySelector('button,a,input');if(first)first.focus();}
+function closeModal(id){$(id).hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();if(id==='confirm-modal')pendingAction=null;}
+function confirmChange(message,action){$('confirm-message').textContent=message;pendingAction=action;openModal('confirm-modal');}
+function hasRecord(){return record.slots.some(function(s,i){return s.image||s.strokes.length||$('note-'+i).value.trim();});}
+function guarded(message,fn){if(hasRecord())confirmChange(message,fn);else fn();}
+function renderScanStrip(){
+ var strip=$('scan-strip');strip.textContent='';strip.setAttribute('data-count',String(state.scans.length));
+ if(!state.scans.length){var empty=document.createElement('span');empty.className='scan-empty';empty.textContent='保留几个位置，再拼回全貌';strip.appendChild(empty);}
+ state.scans.forEach(function(s,i){var b=document.createElement('button');b.className='scan-item'+(i===state.currentScan?' current':'');b.setAttribute('aria-label','返回第'+(i+1)+'处'+MODES[s.mode].label+'视野');var img=document.createElement('img');img.src=s.thumbnail;img.alt='第'+(i+1)+'处视野缩略图';var num=document.createElement('span');num.textContent=String(i+1);b.appendChild(img);b.appendChild(num);b.addEventListener('click',function(){state.center={x:s.center.x,y:s.center.y};state.mode=s.mode;state.focus=s.focus;state.led=s.led;state.currentScan=i;renderScanStrip();schedule();});strip.appendChild(b);});
+ $('undo-scan').disabled=!state.scans.length;
+}
+function capture(){
+ if(state.scans.length>=6){showToast('已保留6处。可先“撤回”最后一处，再继续。');return;}
+ var s=cloneView(state),c=document.createElement('canvas');c.width=256;c.height=256;s.fieldRect=drawField(c.getContext('2d'),256,256,s,{white:true});s.fieldImage=c;s.thumbnail=c.toDataURL('image/png');state.scans.push(s);state.currentScan=state.scans.length-1;renderScanStrip();schedule();showToast('第'+state.scans.length+'处已留住；点缩略图可返回。');
+}
+function changeSpecimen(id){
+ if(id===state.specimen)return;
+ var act=function(){state.specimen=id;var p=specById[id].center;state.center={x:p.x,y:p.y};state.focus=clamp(specById[id].focus-12,0,100);state.led=true;state.scans=[];state.currentScan=-1;state.coverage=false;texture=null;textureId='';renderScanStrip();if(!hasRecord())$('record-object').value=specById[id].name;schedule();};
+ if(state.scans.length)confirmChange('更换物体将清空这组扫描位置；“对照与记录”中的内容会保留。',act);else act();
+}
+function resetView(){var p=specById[state.specimen].center;state.center={x:p.x,y:p.y};state.mode=2;state.focus=clamp(specById[state.specimen].focus-12,0,100);state.led=true;state.showRange=false;state.coverage=false;state.currentScan=-1;renderScanStrip();schedule();showToast('取景和调焦已复位，已留住的视野与观察记录仍保留。');}
+function pointInCanvas(event,canvas){var r=canvas.getBoundingClientRect();return {x:event.clientX-r.left,y:event.clientY-r.top,w:r.width,h:r.height};}
+var mapDrag=null,fieldDrag=null;
+$('overview').addEventListener('pointerdown',function(e){if(e.button!==0&&e.button!==-1)return;e.preventDefault();this.setPointerCapture(e.pointerId);mapDrag=e.pointerId;moveMap(e);});
+$('overview').addEventListener('pointermove',function(e){if(mapDrag===e.pointerId)moveMap(e);});
+function moveMap(e){var p=pointInCanvas(e,$('overview')),r=mapRect(p.w,p.h);state.center.x=clamp((p.x-r.x)/r.size*WORLD,0,WORLD);state.center.y=clamp((p.y-r.y)/r.size*WORLD,0,WORLD);state.currentScan=-1;schedule();}
+['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){$('overview').addEventListener(ev,function(){mapDrag=null;});});
+$('field').addEventListener('pointerdown',function(e){if(e.button!==0&&e.button!==-1)return;e.preventDefault();this.setPointerCapture(e.pointerId);fieldDrag={id:e.pointerId,x:e.clientX,y:e.clientY};});
+$('field').addEventListener('pointermove',function(e){if(!fieldDrag||fieldDrag.id!==e.pointerId)return;var r=this.getBoundingClientRect(),side=Math.min(r.width-22,r.height-22),ratio=(WORLD/MODES[state.mode].scale)/side;state.center.x=clamp(state.center.x-(e.clientX-fieldDrag.x)*ratio,0,WORLD);state.center.y=clamp(state.center.y-(e.clientY-fieldDrag.y)*ratio,0,WORLD);fieldDrag.x=e.clientX;fieldDrag.y=e.clientY;state.currentScan=-1;schedule();});
+['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){$('field').addEventListener(ev,function(){fieldDrag=null;});});
+['overview','field'].forEach(function(id){$(id).addEventListener('keydown',function(e){var dx=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0,dy=e.key==='ArrowDown'?1:e.key==='ArrowUp'?-1:0;if(!dx&&!dy)return;e.preventDefault();var step=(e.shiftKey?12:3)*(WORLD/MODES[state.mode].scale)/100;state.center.x=clamp(state.center.x+dx*step,0,WORLD);state.center.y=clamp(state.center.y+dy*step,0,WORLD);state.currentScan=-1;schedule();});});
+// Snapshot evidence and user drawings remain in memory only; nothing is uploaded.
+function fitSquare(w,h){var d=Math.min(w,h);return {x:(w-d)/2,y:(h-d)/2,size:d};}
+function drawImageContain(ctx,img,x,y,w,h){var iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height,scale=Math.min(w/iw,h/ih),dw=iw*scale,dh=ih*scale;ctx.drawImage(img,x+(w-dw)/2,y+(h-dh)/2,dw,dh);}
+function renderStrokes(ctx,strokes,x,y,d){
+ ctx.lineCap='round';ctx.lineJoin='round';
+ strokes.forEach(function(s){if(!s.points.length)return;ctx.strokeStyle=s.color;ctx.lineWidth=d*.008;ctx.beginPath();if(s.type==='circle'){var p=s.points[0],q=s.points[s.points.length-1],cx=x+(p.x+q.x)/2*d,cy=y+(p.y+q.y)/2*d,rx=Math.abs(q.x-p.x)*d/2,ry=Math.abs(q.y-p.y)*d/2;if(rx<1||ry<1){circle(ctx,x+p.x*d,y+p.y*d,d*.018);}else ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);}else {s.points.forEach(function(p,i){if(i===0)ctx.moveTo(x+p.x*d,y+p.y*d);else ctx.lineTo(x+p.x*d,y+p.y*d);});if(s.points.length===1){ctx.lineTo(x+s.points[0].x*d+.1,y+s.points[0].y*d+.1);}}ctx.stroke();});
+}
+function drawRecordCanvas(index,ctx,w,h,forExport){
+ var slot=record.slots[index],r=fitSquare(w,h);ctx.clearRect(0,0,w,h);ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+ ctx.save();ctx.beginPath();ctx.rect(r.x,r.y,r.size,r.size);ctx.clip();
+ if(slot.image)drawImageContain(ctx,slot.image,r.x,r.y,r.size,r.size);
+ else if(!forExport&&!slot.strokes.length){ctx.strokeStyle='#dbe5e5';ctx.lineWidth=1.5;ctx.setLineDash([6,5]);circle(ctx,w/2,h/2,r.size*.43);ctx.stroke();ctx.setLineDash([]);text(ctx,'画下你的观察',w/2,h/2,Math.max(16,Math.min(22,r.size*.08)),'#83979c','center',500);}
+ renderStrokes(ctx,slot.strokes,r.x,r.y,r.size);ctx.restore();
+}
+function drawAllRecords(){record.slots.forEach(function(slot,i){var o=canvasSetup($('record-canvas-'+i));drawRecordCanvas(i,o.ctx,o.w,o.h,false);$('source-'+i).textContent=slot.label;});syncDrawingControls();}
+function syncDrawingControls(){all('.record-cell').forEach(function(c){c.classList.toggle('selected',+c.dataset.slot===record.selected);});all('[data-draw]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.draw===record.tool));});all('[data-color]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.color===record.color));});$('undo-drawing').disabled=!record.slots[record.selected].strokes.length;$('draw-hint').textContent='正在记录：'+['肉眼观察','放大镜观察','简易显微镜观察'][record.selected]+' · 画图或圈出证据';}
+function makeComparison(){
+ for(var i=0;i<3;i++){var s=cloneView(state);s.mode=i;var c=document.createElement('canvas');c.width=720;c.height=720;drawField(c.getContext('2d'),720,720,s,{white:true});var slot=newSlot();slot.image=c;slot.source='model';slot.label=specById[s.specimen].name+' · 同点结构示意 ×'+MODES[i].scale+(i===2?(!s.led?' · 暗光':blurAmount(s)>1.4?' · 未调清':' · 已调焦'):'');record.slots[i]=slot;$('note-'+i).value='';}
+ $('record-object').value=specById[state.specimen].name;record.selected=2;setPage('record');showToast('同一中心的三档示意图已保留。请自己圈注、比较。');
+}
+function requestComparison(){guarded('带入当前位置的三档示意图，将替换观察单的图片、笔画和文字。需要保留时，请先保存观察图。',makeComparison);}
+function blankRecords(){for(var i=0;i<3;i++){record.slots[i]=newSlot();$('note-'+i).value='';}record.selected=0;$('record-object').value=specById[state.specimen].name;schedule();}
+function clearSlot(i){var slot=record.slots[i],action=function(){record.slots[i]=newSlot();$('note-'+i).value='';record.selected=i;schedule();};if(slot.image||slot.strokes.length||$('note-'+i).value.trim())confirmChange('清空这一栏的图片、笔画和文字，其他两栏保留。',action);else showToast('这一栏还是空白，可以直接画图或导入实拍。');}
+var drawDrag=null;
+function normalizedPoint(e,canvas){var p=pointInCanvas(e,canvas),r=fitSquare(p.w,p.h);return {x:clamp((p.x-r.x)/r.size,0,1),y:clamp((p.y-r.y)/r.size,0,1),inside:p.x>=r.x&&p.x<=r.x+r.size&&p.y>=r.y&&p.y<=r.y+r.size};}
+record.slots.forEach(function(_,i){var canvas=$('record-canvas-'+i);canvas.addEventListener('pointerdown',function(e){if(e.button!==0&&e.button!==-1)return;var p=normalizedPoint(e,this);if(!p.inside)return;e.preventDefault();this.setPointerCapture(e.pointerId);record.selected=i;var stroke={type:record.tool,color:record.color,points:[{x:p.x,y:p.y}]};record.slots[i].strokes.push(stroke);drawDrag={id:e.pointerId,index:i,stroke:stroke};schedule();});canvas.addEventListener('pointermove',function(e){if(!drawDrag||drawDrag.id!==e.pointerId||drawDrag.index!==i)return;var p=normalizedPoint(e,this),points=drawDrag.stroke.points;if(drawDrag.stroke.type==='circle'){points[1]={x:p.x,y:p.y};}else if(points.length<3000){var prev=points[points.length-1];if(Math.abs(p.x-prev.x)+Math.abs(p.y-prev.y)>.0015)points.push({x:p.x,y:p.y});}schedule();});['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){canvas.addEventListener(ev,function(){drawDrag=null;});});canvas.addEventListener('focus',function(){record.selected=i;syncDrawingControls();});});
+function prepareUpload(i){uploadSlot=i;$('photo-file').value='';$('photo-file').click();}
+function loadPhoto(file,index){
+ if(!file)return;
+ if(!/^image\/(jpeg|png|webp|bmp)$/i.test(file.type)){showToast('请选择 JPG、PNG、WebP 或 BMP 图片；HEIC请先转为JPG。');return;}
+ if(file.size>25*1024*1024){showToast('图片超过25MB，请先缩小后再导入。');return;}
+ var url=URL.createObjectURL(file),img=new Image();img.onload=function(){
+  try{var max=1600,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));var c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.naturalWidth*scale));c.height=Math.max(1,Math.round(img.naturalHeight*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);var action=function(){var slot=newSlot();slot.image=c;slot.source='photo';slot.label='本地实拍 · 未校准 · '+file.name.slice(0,32);record.slots[index]=slot;$('note-'+index).value='';record.selected=index;setPage('record');showToast('照片已导入本页，可圈注；不会上传。');};var existing=record.slots[index];if(existing.image||existing.strokes.length||$('note-'+index).value.trim())confirmChange('用这张实拍替换本栏图片、笔画和文字，其他栏保留。',action);else action();}
+  catch(err){showToast('这张图片无法处理，请换成较小的JPG或PNG。');}
+  finally{URL.revokeObjectURL(url);}
+ };img.onerror=function(){URL.revokeObjectURL(url);showToast('无法读取图片，请换成JPG或PNG后重试。');};img.src=url;
+}
+function wrapLines(ctx,str,width,maxLines){var result=[],line='';var chars=Array.from(str);for(var i=0;i<chars.length;i++){var ch=chars[i];if(ch==='\n'){result.push(line);line='';continue;}if(line&&ctx.measureText(line+ch).width>width){result.push(line);line=ch;}else line+=ch;}if(line||!result.length)result.push(line);if(maxLines&&result.length>maxLines){result=result.slice(0,maxLines);result[maxLines-1]=result[maxLines-1].slice(0,-1)+'…';}return result;}
+function exportRecord(){
+ var c=document.createElement('canvas');c.width=1800;var ctx=c.getContext('2d');ctx.font='21px \"Microsoft YaHei\",\"PingFang SC\",sans-serif';var noteLines=[0,1,2].map(function(i){return wrapLines(ctx,$('note-'+i).value.trim(),500);});var longest=Math.max(3,noteLines[0].length,noteLines[1].length,noteLines[2].length),boxHeight=738+longest*27+28;c.height=Math.max(1140,153+boxHeight+115);ctx=c.getContext('2d');ctx.fillStyle='#eff5f5';ctx.fillRect(0,0,c.width,c.height);
+ text(ctx,'用简易显微镜观察',52,54,34,'#163e49','left',750);
+ var name=$('record-object').value.trim()||'我的观察物体';text(ctx,'观察对象：'+name,52,108,24,'#526c74','left',500);
+ var date=new Date(),dateStr=date.getFullYear()+'年'+(date.getMonth()+1)+'月'+date.getDate()+'日';text(ctx,dateStr,1748,108,21,'#526c74','right',500);
+ var colw=548,gap=26,left=52,top=153;var titles=['肉眼观察','放大镜观察','简易显微镜观察'];
+ for(var i=0;i<3;i++){var x=left+i*(colw+gap),slot=record.slots[i];ctx.fillStyle='#fff';roundRect(ctx,x,top,colw,boxHeight,12);ctx.fill();ctx.strokeStyle='#c6d3d8';ctx.lineWidth=1;ctx.stroke();text(ctx,titles[i],x+24,top+39,26,'#163e49','left',700);
+  var picture=document.createElement('canvas');picture.width=500;picture.height=500;drawRecordCanvas(i,picture.getContext('2d'),500,500,true);ctx.drawImage(picture,x+24,top+78);
+  ctx.font='18px "Microsoft YaHei","PingFang SC",sans-serif';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillStyle='#526c74';wrapLines(ctx,slot.label,colw-48,3).forEach(function(line,j){ctx.fillText(line,x+24,top+595+j*25);});
+  ctx.strokeStyle='#dce5e6';ctx.beginPath();ctx.moveTo(x+24,top+681);ctx.lineTo(x+colw-24,top+681);ctx.stroke();text(ctx,'我的发现',x+24,top+710,21,'#163e49','left',700);
+  var note=$('note-'+i).value.trim();ctx.font='21px "Microsoft YaHei","PingFang SC",sans-serif';ctx.textAlign='left';ctx.textBaseline='top';ctx.fillStyle='#163e49';noteLines[i].forEach(function(line,j){ctx.fillText(line,x+24,top+738+j*27);});
+ }
+ text(ctx,'结构示意与实拍来源分栏注明；示意倍率不是仪器标定倍率。未校准照片不能直接用于测量。',52,c.height-73,19,'#526c74','left',500);
+ text(ctx,'观察图由学生自主绘制、圈注和记录。',52,c.height-38,19,'#526c74','left',500);text(ctx,'mutiw',1748,c.height-38,18,'#819598','right',500);
+ try{var data=c.toDataURL('image/png');$('export-image').src=data;$('download-link').href=data;$('download-link').download='用简易显微镜观察_'+name.replace(/[\\/:*?"<>|]/g,'_').slice(0,30)+'_观察记录.png';$('export-message').textContent='观察图已生成（1800 × '+c.height+'）。点击下载；平板也可长按下方图片保存。';openModal('export-modal');}
+ catch(err){showToast('图片导出失败，请先截图保存当前记录。');}
+}
+all('[data-specimen]').forEach(function(b){b.addEventListener('click',function(){changeSpecimen(this.dataset.specimen);});});
+all('[data-mode]').forEach(function(b){b.addEventListener('click',function(){state.mode=+this.dataset.mode;state.currentScan=-1;schedule();});});
+$('focus').addEventListener('input',function(){state.focus=+this.value;state.currentScan=-1;schedule();});
+$('led-btn').addEventListener('click',function(){state.led=!state.led;state.currentScan=-1;schedule();});
+$('range-btn').addEventListener('click',function(){state.showRange=!state.showRange;schedule();});
+$('coverage-btn').addEventListener('click',function(){state.coverage=!state.coverage;if(state.coverage&&!state.scans.length)showToast('先留住一处视野，再看它在全貌中的位置。');schedule();});
+$('capture-btn').addEventListener('click',capture);
+$('undo-scan').addEventListener('click',function(){state.scans.pop();state.currentScan=-1;renderScanStrip();schedule();});
+$('observe-tab').addEventListener('click',function(){setPage('observe');});$('record-tab').addEventListener('click',function(){setPage('record');});
+$('compare-btn').addEventListener('click',requestComparison);$('bring-comparison').addEventListener('click',requestComparison);
+$('blank-record').addEventListener('click',function(){guarded('清空观察单的三栏图片、笔画和文字；扫描位置会保留。需要保留时，请先保存观察图。',blankRecords);});
+$('reset-btn').addEventListener('click',function(){if(state.page==='observe')resetView();else showToast('观察记录不会被复位删除；需要重新记录时，可选“空白观察单”。');});
+all('[data-upload]').forEach(function(b){b.addEventListener('click',function(){prepareUpload(+this.dataset.upload);});});
+all('[data-clear]').forEach(function(b){b.addEventListener('click',function(){clearSlot(+this.dataset.clear);});});
+all('[data-draw]').forEach(function(b){b.addEventListener('click',function(){record.tool=this.dataset.draw;syncDrawingControls();});});
+all('[data-color]').forEach(function(b){b.addEventListener('click',function(){record.color=this.dataset.color;syncDrawingControls();});});
+$('undo-drawing').addEventListener('click',function(){record.slots[record.selected].strokes.pop();schedule();});
+$('photo-file').addEventListener('change',function(){loadPhoto(this.files&&this.files[0],uploadSlot);});
+$('export-btn').addEventListener('click',exportRecord);
+$('help-btn').addEventListener('click',function(){openModal('help-modal');});all('[data-close]').forEach(function(b){b.addEventListener('click',function(){closeModal(this.dataset.close);});});
+$('confirm-cancel').addEventListener('click',function(){closeModal('confirm-modal');});
+$('confirm-ok').addEventListener('click',function(){var act=pendingAction;closeModal('confirm-modal');if(act)act();});
+all('.modal').forEach(function(m){m.addEventListener('pointerdown',function(e){if(e.target===m)closeModal(m.id);});});
+document.addEventListener('keydown',function(e){var open=all('.modal').filter(function(m){return !m.hidden;})[0];if(!open)return;if(e.key==='Escape'){closeModal(open.id);return;}if(e.key==='Tab'){var nodes=all('#'+open.id+' button,#'+open.id+' a[href],#'+open.id+' input');nodes=nodes.filter(function(n){return !n.disabled&&n.getClientRects().length;});if(!nodes.length)return;var first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+$('fullscreen-btn').addEventListener('click',function(){
+ var doc=document,root=document.documentElement,active=doc.fullscreenElement||doc.webkitFullscreenElement,fn=active?(doc.exitFullscreen||doc.webkitExitFullscreen):(root.requestFullscreen||root.webkitRequestFullscreen);
+ if(!fn){showToast('此浏览器不支持页面全屏，可使用浏览器全屏或横屏查看。');return;}
+ try{var p=fn.call(active?doc:root);if(p&&p.catch)p.catch(function(){showToast('全屏未开启，可使用浏览器的全屏功能。');});}catch(e){showToast('全屏未开启，可使用浏览器的全屏功能。');}
+});
+['fullscreenchange','webkitfullscreenchange'].forEach(function(ev){document.addEventListener(ev,function(){$('fullscreen-btn').innerHTML='<svg class="icon"><use href="#i-full"/></svg>'+((document.fullscreenElement||document.webkitFullscreenElement)?'退出全屏':'全屏');schedule();});});
+window.addEventListener('resize',schedule);
+if(window.ResizeObserver){var ro=new ResizeObserver(schedule);all('.overview-stage,.field-stage,.drawing-wrap').forEach(function(el){ro.observe(el);});}
+renderScanStrip();syncObserveControls();schedule();
+})();
+
+</script>
+</body>
+</html>
