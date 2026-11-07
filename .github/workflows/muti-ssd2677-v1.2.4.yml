@@ -1,0 +1,175 @@
+name: Build Muti SSD2677 v1.2.4
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - build/muti-ssd2677-v1.2.4-ci
+    paths:
+      - 'ci/muti-ssd2677-v1.2.4/**'
+      - '.github/workflows/muti-ssd2677-v1.2.4.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'ci/muti-ssd2677-v1.2.4/**'
+      - '.github/workflows/muti-ssd2677-v1.2.4.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: build/muti-ssd2677-v1.2.4-ci
+
+      - name: Reconstruct v1.2.3 and apply v1.2.4 patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE='ci/muti-ssd2677-v1.2.0'
+          OUT='ci/muti-ssd2677-v1.2.4/work'
+          mkdir -p "$OUT"
+
+          cat "$BASE/source.part00" "$BASE/source.part01" "$BASE/source.part02" \
+              "$BASE/source.fix03a" "$BASE/source.fix03b" \
+              "$BASE/source.fix04a" "$BASE/source.fix04b" \
+              "$BASE/source.fix05a" "$BASE/source.fix05b" > /tmp/project_v120.b64
+          base64 --decode /tmp/project_v120.b64 > /tmp/project_v120.tar.gz
+          echo 'ba99bcdc325f54d4bbe2e745ce208f255cee66e5961620c12cfeb281d52b8329  /tmp/project_v120.tar.gz' | sha256sum --check --strict
+          tar -xzf /tmp/project_v120.tar.gz -C "$OUT"
+          cp -a "$BASE/overrides/." "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0/"
+
+          python ci/muti-ssd2677-v1.2.1/apply_v121.py "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0"
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.0" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1"
+          python ci/muti-ssd2677-v1.2.2/apply_v122.py "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1"
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.1" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2"
+
+          base64 --decode ci/muti-ssd2677-v1.2.3/v123.patch.gz.b64 > /tmp/v123.patch.gz
+          echo '7731a9d0f243d1c90f9276ea3f811faf4748d06fc0378be0c02327bf7713ef2e  /tmp/v123.patch.gz' | sha256sum --check --strict
+          gzip --decompress --stdout /tmp/v123.patch.gz > /tmp/v123.patch
+          echo 'c91caf9ecbeb875b15c68541d4b265bbcaf187c612a3a2bb52a92d45bfecc226  /tmp/v123.patch' | sha256sum --check --strict
+          cd "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2"
+          patch --batch --forward -p1 < /tmp/v123.patch || true
+          for critical in include/app_config.h src/main.cpp web/index.html tools/make_release.py tools/validate_project.py; do
+            if [ -f "${critical}.rej" ]; then
+              echo "critical v1.2.3 patch reject: ${critical}.rej" >&2
+              cat "${critical}.rej" >&2
+              exit 1
+            fi
+          done
+          find . -name '*.rej' -delete
+          find . -name '*.orig' -delete
+          cd -
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.2" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
+
+          base64 --decode ci/muti-ssd2677-v1.2.4/v124.patch.gz.b64 > /tmp/v124.patch.gz
+          echo 'ad9ac257038c3daceeb5338062745bf2d55870fef605fa46c52771e26586598c  /tmp/v124.patch.gz' | sha256sum --check --strict
+          gzip --decompress --stdout /tmp/v124.patch.gz > /tmp/v124.patch
+          echo '8f45b43e7875b3093fa0a93711d4bcbd3f310ca7424dae7c7ef194a159ada607  /tmp/v124.patch' | sha256sum --check --strict
+          cd "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3"
+          patch --batch --forward -p1 < /tmp/v124.patch
+          cd -
+          mv "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.3" "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.4"
+
+          python - <<'PY'
+          from pathlib import Path
+          root = Path('ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4')
+          for p in root.rglob('*.md'):
+              text = p.read_text(encoding='utf-8')
+              text = text.replace('v1.2.3', 'v1.2.4').replace('1.2.3', '1.2.4')
+              p.write_text(text, encoding='utf-8')
+
+          changelog = root / 'CHANGELOG.md'
+          if changelog.is_file():
+              text = changelog.read_text(encoding='utf-8')
+              if '## 1.2.4' not in text:
+                  entry = (
+                      '## 1.2.4 — 2026-08-22\n\n'
+                      '- 增加不可变 Device ID、MAC、设备名称、用途标签和独立局域网主机名。\n'
+                      '- 默认主机名改为 `muti-<MAC末6位>.local`，避免多设备 mDNS 冲突。\n'
+                      '- 默认恢复热点改为 `Muti-102-<MAC末4位>`，便于同时区分多块屏。\n'
+                      '- 增加 UDP 32123 局域网自动发现和设备列表。\n'
+                      '- 增加浏览器生成并显示设备识别卡，包含 IP、主机名、Device ID 与屏幕 Profile。\n'
+                      '- 显示驱动、TB LUT、GPIO、2bpp 帧格式与刷新保护保持冻结。\n\n'
+                  )
+                  text = text.replace('# CHANGELOG\n\n', '# CHANGELOG\n\n' + entry, 1)
+                  changelog.write_text(text, encoding='utf-8')
+
+          (root / 'docs' / 'MULTI_DEVICE.md').write_text('''# 多设备局域网管理\n\n## 稳定身份\n\n每块设备使用三层定位：\n\n1. 不可变 Device ID：`MUTI-` 加完整 eFuse MAC。\n2. 可修改且应保持唯一的 mDNS 主机名，例如 `muti-calendar.local`。\n3. 路由器 DHCP 保留地址，可选但推荐。\n\nIP 地址只表示当前网络位置，不作为设备身份。\n\n## 默认命名\n\n- 主机名：`muti-<MAC末6位>.local`\n- 配置热点：`Muti-102-<MAC末4位>`\n- Profile：`ssd2677-960x640-bwyr`\n\n局域网内只能有一块设备使用 `muti.local`。多块设备应分别设置为 `muti-calendar.local`、`muti-weather.local` 等。\n\n## 自动发现\n\n设备监听 UDP 32123 的 `MUTI_DISCOVER_V1` 探测并返回 Device ID、当前 IP、主机名、用途、分辨率、调色板、控制器和固件版本。网页中的“扫描局域网设备”由当前 ESP32 发起本地广播，不依赖公网或服务器。\n\n## 设备识别卡\n\n网页可生成并上传识别卡，显示当前 IP、主机名、Device ID、用途和屏幕 Profile。该操作会触发一次正常全局刷新并受 180 秒冷却保护。\n''', encoding='utf-8')
+          PY
+
+          rm -rf "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.4/.pio"
+          rm -f "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.4/firmware/"*
+          rm -f "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.4/MANIFEST_SHA256.txt"
+          find "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.4" -name '*.orig' -o -name '*.rej' | xargs -r rm -f
+          python "$OUT/Muti-SSD2677-LocalWeb-C3-v1.2.4/tools/embed_web.py"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: python -m pip install --disable-pip-version-check 'platformio==6.1.18'
+
+      - name: Structural validation
+        working-directory: ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4
+        run: python tools/validate_project.py
+
+      - name: Compile USB-CDC build
+        working-directory: ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4
+        run: python -m platformio run -e c3_promini_usb
+
+      - name: Compile UART build
+        working-directory: ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4
+        run: python -m platformio run -e c3_promini_uart
+
+      - name: Produce flash images
+        working-directory: ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4
+        run: python tools/make_release.py --env c3_promini_usb
+
+      - name: Generate package manifest
+        working-directory: ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .pio
+          rm -f MANIFEST_SHA256.txt
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          root = Path('.')
+          rows = []
+          for path in sorted(root.rglob('*')):
+              if not path.is_file() or '.pio' in path.parts or path.name == 'MANIFEST_SHA256.txt':
+                  continue
+              rows.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {path.as_posix()}")
+          Path('MANIFEST_SHA256.txt').write_text('\n'.join(rows) + '\n', encoding='utf-8')
+          print(f'manifest entries: {len(rows)}')
+          PY
+
+      - name: Package complete release
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd ci/muti-ssd2677-v1.2.4/work
+          zip -qr Muti-SSD2677-LocalWeb-C3-v1.2.4.zip Muti-SSD2677-LocalWeb-C3-v1.2.4
+          sha256sum Muti-SSD2677-LocalWeb-C3-v1.2.4.zip > Muti-SSD2677-LocalWeb-C3-v1.2.4.zip.sha256
+          unzip -t Muti-SSD2677-LocalWeb-C3-v1.2.4.zip
+
+      - name: Upload complete program package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Muti-SSD2677-LocalWeb-C3-v1.2.4
+          path: |
+            ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4.zip
+            ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4.zip.sha256
+            ci/muti-ssd2677-v1.2.4/work/Muti-SSD2677-LocalWeb-C3-v1.2.4/firmware/*
+          if-no-files-found: error
+          retention-days: 14
