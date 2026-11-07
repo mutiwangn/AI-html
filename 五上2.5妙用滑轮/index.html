@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f6fa"><meta name="aihtml-level" content="2"><meta name="description" content="五上2.5妙用滑轮：生活机构三维观察、轴心留痕、定动滑轮关系透视与自由改装；用于真实实验后的研讨与迁移。"><title>妙用滑轮 · 观察与改装工坊 v2.0</title>
+<style>
+:root{--ink:#25354a;--muted:#718095;--blue:#316ce4;--line:#dce4ef;--soft:#edf3ff;--paper:#fff;--bg:#f3f6fa;--orange:#d58024;--radius:12px;font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;color:var(--ink);font-synthesis:none}*{box-sizing:border-box}body{margin:0;background:var(--bg);height:100vh;height:100dvh;overflow:hidden}button,input,select{font:inherit}button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;min-height:42px;padding:9px 12px;font-weight:600;font-size:15px;cursor:pointer;touch-action:manipulation}button:hover{background:#f3f7ff;border-color:#a5bee9}button:active{background:#e8effc}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #86aaf8;outline-offset:2px}button:disabled{opacity:.4;cursor:not-allowed}button.primary{background:var(--blue);border-color:var(--blue);color:white}button.active{background:var(--soft);border-color:#8eaff5;color:#1e55b7}button.quiet{background:transparent;border-color:transparent}button.small{font-size:13px;min-height:34px;padding:6px 10px}.header{height:78px;padding:0 24px;display:flex;align-items:center;gap:22px;background:white;border-bottom:1px solid var(--line)}.brand{display:flex;gap:12px;align-items:center}.mark{height:42px;width:42px;border-radius:10px;background:#f1b832;display:grid;place-items:center}.mark svg{width:30px;height:30px}.brand h1{font-size:24px;margin:0;letter-spacing:1px}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.nav{margin:auto;display:flex;gap:4px;background:#f4f6fa;padding:4px;border-radius:10px}.nav button{background:transparent;border:0;padding:10px 19px;white-space:nowrap;font-size:16px}.nav button.active{background:white;color:var(--blue);box-shadow:0 2px 6px #132c5011}.headtools{display:flex;gap:5px}.headtools button{font-size:13px;padding:8px 10px}.workspace{height:calc(100vh - 108px);height:calc(100dvh - 108px);display:grid;grid-template-columns:minmax(0,1fr) 334px;gap:14px;padding:14px 18px 6px}.stage{position:relative;min-width:0;min-height:0;overflow:hidden;border-radius:var(--radius);border:1px solid var(--line);background:linear-gradient(160deg,#fafcfe,#edf2f8)}#world{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.stage-title{position:absolute;top:19px;left:22px;right:20px;z-index:8;pointer-events:none}.stage-title h2{font-size:24px;line-height:1.4;margin:0}.stage-title p{font-size:13px;color:var(--muted);margin:5px 0 0;line-height:1.5}.contextbar{display:flex;gap:7px;margin-top:14px;pointer-events:auto;flex-wrap:wrap}.contextbar button{min-height:38px;padding:7px 13px;font-size:14px;background:#ffffffdd}.contextbar button.active{background:var(--soft)}.viewtools{position:absolute;left:15px;bottom:93px;z-index:8;display:flex;gap:6px;flex-wrap:wrap}.viewtools button{background:#fffffff2;min-height:38px;font-size:13px;padding:7px 10px}.viewtools button.active{background:var(--soft)}.transport{position:absolute;bottom:15px;left:15px;right:15px;display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fffffff2;border:1px solid var(--line);border-radius:10px;z-index:8;min-height:63px}.transport .play{width:44px;min-width:44px;height:43px;padding:9px}.transport label{font-size:13px;color:var(--muted);white-space:nowrap}.transport .slider{flex:1;min-width:40px}.transport output{font-size:19px;white-space:nowrap;font-variant-numeric:tabular-nums;min-width:62px;text-align:right}.transport input{width:100%;margin:0}.transport select{border:0;background:transparent;color:var(--muted);font-size:13px;max-width:72px}.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;min-height:0;overflow:auto;scrollbar-width:thin}.panel h2{font-size:21px;margin:0 0 5px;line-height:1.45}.panel h3{font-size:14px;margin:15px 0 9px;color:#596a80}.question{font-size:16px;line-height:1.65;margin:0 0 12px;color:#40516a}.hint{font-size:12px;line-height:1.7;color:var(--muted);margin:8px 0}.section{padding-top:13px;margin-top:13px;border-top:1px solid #e8edf5}.row{display:flex;gap:7px;align-items:center}.row>*{flex:1;min-width:0}.row button{padding:9px 6px}.full{width:100%}.choices{display:flex;gap:5px;flex-wrap:wrap}.choices button{flex:1;white-space:nowrap;font-size:14px;padding:8px 9px}.range{margin:13px 0}.range label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:5px}.range b{font-size:18px;font-variant-numeric:tabular-nums;color:var(--blue)}input[type=range]{accent-color:var(--blue);width:100%;height:24px;cursor:pointer;touch-action:pan-y}.metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:14px 0}.metric{min-width:0;background:#f3f6fb;border-radius:9px;padding:10px 8px;text-align:center}.metric small{font-size:11px;display:block;color:var(--muted);line-height:1.5}.metric b{font-size:25px;line-height:1.4;letter-spacing:-.5px;display:inline-block;font-variant-numeric:tabular-nums}.metric em{font-size:11px;font-style:normal;margin-left:2px;color:var(--muted)}.metric:first-child{background:#edf3ff}.metric:first-child b{color:var(--blue)}.status{font-size:13px;line-height:1.65;min-height:40px;padding:9px 11px;background:#f3f6fb;border-radius:8px;margin:10px 0}.status.warn{background:#fff5e5;color:#85580d}.status.ok{background:#edf3ff;color:#2559ac}.checks{font-size:13px;line-height:1.8;margin-top:8px}.checks div{display:flex;justify-content:space-between;gap:8px;padding:3px 0}.checks .pass{color:#235bb4}.checks .fail{color:#ad6120}.object-title{font-size:15px;font-weight:700;margin:0 0 8px}.components{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}.components button{font-size:13px;padding:6px 10px;min-height:35px;flex:1;max-width:48%}.route{font-size:13px;line-height:1.65;background:#f3f6fb;border-radius:8px;padding:9px 10px;word-break:break-word;min-height:39px;margin:9px 0}.slim-controls{display:grid;grid-template-columns:1fr 1fr;gap:6px}.slim-controls button{font-size:14px;padding:8px 4px}.footer{height:30px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 22px;color:var(--muted);font-size:11px;white-space:nowrap}.labels{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}.label{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;border:1px solid #d4dfef;padding:4px 9px;min-height:30px;font-size:13px;line-height:1.3;background:#fffffff2;border-radius:7px;box-shadow:0 2px 6px #1831510d;pointer-events:none}.label.hit{pointer-events:auto;cursor:pointer;border:1px solid #b2c8ef;color:#2559ac;min-height:35px}.label.selected{background:var(--blue);color:#fff;border-color:var(--blue)}.label.grip{pointer-events:auto;min-height:43px;padding:9px 13px;background:var(--blue);color:white;border:0;font-size:15px;cursor:ns-resize;touch-action:none;box-shadow:0 4px 16px #316ce429}.label.axis{border:1px dashed #7294cf;background:#f4f8ffdd;color:#44658f}.label.strand{border-radius:50%;font-size:12px;padding:4px 7px;min-height:27px;background:#fff6df;border-color:#dcaa4f;color:#946113;pointer-events:auto}.label.strand.picked{background:#f3b63c;color:#4a3514;border-color:#edb33e}.label.strand.correct{background:#c8dafa;color:#284b83}.label.note{font-size:12px;background:transparent;border:0;box-shadow:none;color:#5e7490}.drawlayer{position:absolute;inset:0;z-index:6;width:100%;height:100%;pointer-events:none;touch-action:none}.drawlayer.enabled{pointer-events:auto;cursor:crosshair}.prediction-indicator{position:absolute;left:22px;top:153px;z-index:3;pointer-events:none;color:#5b7396;font-size:13px}.drawer{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;padding:20px;background:#1f304866;backdrop-filter:blur(5px)}.drawer.open{display:flex}.dialog{width:min(1080px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:14px;padding:25px;box-shadow:0 25px 90px #18314f33}.dialog header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:18px}.dialog h2{margin:0;font-size:24px}.dialog h3{margin:18px 0 7px}.dialog p,.dialog li{font-size:15px;line-height:1.8;color:#53647b}.dialog a{color:#2d63c8}.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:15px}.compare-card{border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}.compare-card img{width:100%;aspect-ratio:1.35;object-fit:contain;background:#f3f6fa;border-radius:8px}.compare-card h3{font-size:17px;margin:8px 0}.compare-card p{font-size:13px;margin:4px 0}.barrow{font-size:13px;display:flex;gap:8px;align-items:center;margin:8px 0}.barrow i{height:7px;background:#6090ed;border-radius:5px;display:inline-block;min-width:2px;max-width:150px}.barrow i.orange{background:#e8ad4d}.compare-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}.empty{padding:24px;background:#f4f7fb;border-radius:10px;color:var(--muted);line-height:1.8}.toast{position:fixed;left:50%;bottom:42px;transform:translate(-50%,15px);opacity:0;pointer-events:none;padding:12px 20px;background:#203249;color:#fff;border-radius:10px;max-width:80vw;font-size:14px;line-height:1.6;z-index:50;transition:.16s}.toast.show{opacity:1;transform:translate(-50%,0)}.error{position:absolute;left:15%;right:15%;top:40%;background:#fff5e7;border:1px solid #e4bb69;border-radius:10px;padding:18px;font-size:16px;line-height:1.7;z-index:9;display:none}.tiny{font-size:11px;color:var(--muted)}.picktools{display:flex;gap:5px;flex-wrap:wrap}.picktools button{font-size:13px;padding:7px 8px;min-height:34px}details{margin:13px 0 0}summary{font-size:13px;font-weight:600;color:#60738e;cursor:pointer;padding:8px 0}details[open]{padding-bottom:8px}.warning-strip{font-size:13px;padding:10px;border:1px solid #ebcf9f;background:#fff9ef;border-radius:8px;color:#80623a}select{max-width:100%;min-height:38px;padding:7px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}.icon{height:21px;width:21px;vertical-align:middle}.count{font-size:11px;display:inline-block;background:#edf3ff;color:#316ce4;padding:2px 5px;border-radius:6px;margin-left:4px}.field-label{font-size:13px;color:var(--muted);display:block;margin:9px 0 5px}
+@media(min-width:1650px){.workspace{grid-template-columns:minmax(0,1fr) 380px;gap:18px;padding:18px 24px 6px}.panel{padding:23px}.panel h2{font-size:25px}.question{font-size:18px}button{font-size:17px;min-height:47px}.range label{font-size:17px}.status{font-size:15px}.metric b{font-size:31px}.metric small{font-size:13px}.choices button{font-size:16px}.label{font-size:15px}.stage-title h2{font-size:29px}.nav button{font-size:18px}.header{height:84px}.workspace{height:calc(100dvh - 114px)}}
+@media(max-height:800px) and (min-width:960px){.header{height:65px}.workspace{height:calc(100dvh - 91px);padding-top:10px;gap:10px;grid-template-columns:minmax(0,1fr) 313px}.footer{height:26px}.panel{padding:13px}.panel h2{font-size:19px}.question{font-size:14px;margin-bottom:7px}.range{margin:9px 0}.section{margin-top:10px;padding-top:10px}.panel h3{margin-top:10px}.metrics{margin:10px 0}.metric{padding:7px 5px}.metric b{font-size:22px}.status{padding:7px 9px;margin:8px 0;min-height:30px}.stage-title h2{font-size:22px}.brand small{display:none}.nav button{font-size:15px;padding:9px 14px}.checks div{padding:1px 0}}
+@media(max-width:1100px){.header{padding:0 13px;gap:9px}.brand h1{font-size:20px}.mark{width:35px;height:35px}.brand{gap:7px}.brand small{display:none}.nav button{padding:10px 10px;font-size:14px}.headtools button{padding:8px}.headtools .helpword{display:none}.workspace{grid-template-columns:minmax(0,1fr) 290px;padding:10px 10px 5px;gap:10px}.panel{padding:13px}.stage-title{left:16px;top:14px}.stage-title h2{font-size:21px}.stage-title p{font-size:12px}.contextbar button{padding:7px 9px;font-size:12px}.viewtools button{font-size:12px;padding:6px 8px}.transport{gap:6px;padding:8px}.transport label{font-size:11px}.transport output{font-size:16px}.transport .small{font-size:11px;padding:6px}.panel h2{font-size:20px}.question{font-size:14px}.choices button{font-size:13px}}
+@media(max-width:760px){body{overflow:auto;height:auto;min-height:100dvh}.header{height:auto;min-height:100px;flex-wrap:wrap;padding:10px 12px;gap:8px}.brand{flex:1}.brand h1{font-size:21px}.headtools{order:1}.nav{order:2;flex-basis:100%;margin:0;justify-content:space-between}.nav button{font-size:13px;padding:8px 10px;flex:1}.workspace{display:flex;flex-direction:column;height:auto;gap:10px;padding:10px}.stage{height:59vh;min-height:430px;max-height:650px;flex:none}.stage-title h2{font-size:19px}.contextbar{margin-top:9px;gap:5px}.contextbar button{min-height:34px;font-size:12px}.stage-title p{font-size:11px}.panel{overflow:visible;padding:16px}.footer{height:auto;white-space:normal;padding:9px 13px;line-height:1.7;font-size:10px}.footer span:first-child{max-width:70%}.viewtools{bottom:87px;gap:4px;left:10px;right:10px}.viewtools button{font-size:11px;padding:6px;min-height:32px}.transport{left:9px;right:9px;bottom:12px}.transport .play{width:38px;min-width:38px}.transport label{display:none}.transport .timeunit{display:none}.prediction-indicator{top:140px;left:16px;font-size:11px}.dialog{padding:15px}.dialog h2{font-size:20px}.drawer{padding:12px}.label{font-size:12px;min-height:28px;padding:4px 7px}.label.grip{font-size:13px;padding:8px 11px}.panel .metrics{max-width:420px}.compare-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.toast{transition:none}}
+.detail-box{position:absolute;right:20px;top:145px;width:220px;height:250px;border:1px solid #d8e2f1;border-radius:10px;background:#f8fbffed;z-index:4;pointer-events:none;overflow:hidden;box-shadow:0 5px 20px #253c5910}.detail-box[hidden]{display:none}.detail-box header{position:absolute;top:10px;left:12px;right:12px;font-size:13px;font-weight:650;color:#3e5676}.detail-box canvas{position:absolute!important;inset:28px 0 25px!important;width:100%!important;height:calc(100% - 53px)!important;pointer-events:none}.detail-box small{position:absolute;bottom:9px;left:10px;right:10px;text-align:center;font-size:10px;color:#71839c}@media(max-width:1100px){.detail-box{right:12px;width:172px;height:218px;top:148px}}@media(max-width:760px){.detail-box{width:128px;height:174px;right:8px;top:145px}.detail-box header{font-size:11px;left:8px}.detail-box small{font-size:9px;bottom:8px}}
+</style></head><body>
+<header class="header"><div class="brand"><div class="mark"><svg viewBox="0 0 32 32" fill="none" stroke="#25354a" stroke-width="1.8"><circle cx="16" cy="16" r="8"/><circle cx="16" cy="16" r="2"/><path d="M9 29V16a7 7 0 0 1 14 0v9M16 8V3M6 29h6M20 25h6"/></svg></div><div><h1>妙用滑轮</h1><small>五年级上册 · 工具与技术 · 2.5</small></div></div><nav class="nav" aria-label="探究页面"><button data-page="life">生活观察</button><button data-page="fixed">定滑轮</button><button data-page="moving">动滑轮</button><button data-page="builder">改装工坊</button></nav><div class="headtools"><button data-action="compare">对照<span id="savedCount" class="count">0</span></button><button data-action="help" aria-label="课堂用法和模型说明">?<span class="helpword"> 说明</span></button><button data-action="fullscreen" aria-label="全屏">全屏</button></div></header>
+<main class="workspace"><section class="stage" id="stage" aria-label="可操作三维舞台"><canvas id="world" aria-label="三维滑轮模型，拖动空白处转动视角"></canvas><div class="stage-title"><h2 id="stageTitle"></h2><p id="stageSub"></p><div class="contextbar" id="contextbar"></div></div><div class="prediction-indicator" id="predictionIndicator"></div><div id="labels" class="labels"></div><svg id="drawlayer" class="drawlayer" aria-label="在画面中标出预测的运动方向"></svg><div class="detail-box" id="detailBox" hidden><header id="detailTitle">滑轮同步特写</header><canvas id="detailWorld" aria-label="当前滑轮的同步放大视图"></canvas><small>随轮放大 · 位置变化看主图</small></div><div class="viewtools" id="viewtools"></div><div class="transport" id="transport"></div><div class="error" id="error" role="alert"></div></section><aside class="panel" id="panel" aria-label="学生操作与验证区"></aside></main>
+<footer class="footer"><span id="modelNote">理想模型 · 模拟结果不是实测证据</span><span id="rendererNote">离线单文件 · v2.0</span></footer>
+<div id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><div class="dialog"><header><h2 id="dialogTitle"></h2><button data-action="close" aria-label="关闭对话框">关闭</button></header><div id="dialogBody"></div></div></div><div class="toast" id="toast" role="status" aria-live="polite"></div><input type="file" id="importFile" accept=".json,application/json" hidden>
+<script>
+
+/* Small self-contained WebGL2 renderer. Original implementation; no network assets. */
+'use strict';
+const V={add:(a,b)=>a.map((x,i)=>x+b[i]),sub:(a,b)=>a.map((x,i)=>x-b[i]),mul:(a,s)=>a.map(x=>x*s),dot:(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0),cross:(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],len:a=>Math.hypot(...a),norm:a=>{let l=Math.hypot(...a)||1;return a.map(x=>x/l)}};
+const M={
+ identity:()=>[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+ mul:(a,b)=>{let r=new Array(16).fill(0);for(let c=0;c<4;c++)for(let row=0;row<4;row++)for(let k=0;k<4;k++)r[c*4+row]+=a[k*4+row]*b[c*4+k];return r},
+ trs:(p,s=[1,1,1],r=[0,0,0])=>{let [x,y,z]=r,cx=Math.cos(x),sx=Math.sin(x),cy=Math.cos(y),sy=Math.sin(y),cz=Math.cos(z),sz=Math.sin(z);let rx=[1,0,0,0,0,cx,sx,0,0,-sx,cx,0,0,0,0,1],ry=[cy,0,-sy,0,0,1,0,0,sy,0,cy,0,0,0,0,1],rz=[cz,sz,0,0,-sz,cz,0,0,0,0,1,0,0,0,0,1];let a=M.mul(rz,M.mul(ry,rx));for(let c=0;c<3;c++)for(let j=0;j<3;j++)a[c*4+j]*=s[c];a[12]=p[0];a[13]=p[1];a[14]=p[2];return a},
+ look:(eye,at)=>{let z=V.norm(V.sub(eye,at)),x=V.norm(V.cross([0,1,0],z)),y=V.cross(z,x);return[x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-V.dot(x,eye),-V.dot(y,eye),-V.dot(z,eye),1]},
+ perspective:(fov,aspect,n=.1,f=100)=>{let t=1/Math.tan(fov/2);return[t/aspect,0,0,0,0,t,0,0,0,0,(f+n)/(n-f),-1,0,0,2*f*n/(n-f),0]},
+ point:(m,p)=>{let [x,y,z]=p;return[m[0]*x+m[4]*y+m[8]*z+m[12],m[1]*x+m[5]*y+m[9]*z+m[13],m[2]*x+m[6]*y+m[10]*z+m[14],m[3]*x+m[7]*y+m[11]*z+m[15]]}
+};
+const C={ink:'#263f4b',steel:'#c4d0d4',dark:'#3c5360',fixed:'#f0b537',moving:'#377acf',rope:'#d7823d',ivory:'#f7f8f5',wood:'#bf8d59',red:'#d74945',blue:'#568fac',rubber:'#b05b89',green:'#91b7a0'};
+function rgba(hex){if(Array.isArray(hex))return hex;let s=hex.replace('#','');if(s.length===3)s=s.split('').map(c=>c+c).join('');return[parseInt(s.slice(0,2),16)/255,parseInt(s.slice(2,4),16)/255,parseInt(s.slice(4,6),16)/255,1]}
+class Stage3D{
+ constructor(canvas){
+  this.canvas=canvas;this.gl=canvas.getContext('webgl2',{antialias:true,alpha:true,preserveDrawingBuffer:true});if(!this.gl){this.soft=true;this.ctx=canvas.getContext('2d');this.geo={};this.batches={};this.camera={yaw:.24,pitch:.16,dist:12.8,target:[0,2.9,0]};this.targetCam=null;this.touch=new Map();this.labels=[];this.onCamera=()=>{};if(canvas.id!=='detailWorld')this.setupInput();return;}
+  let gl=this.gl;let vs=`#version 300 es\nprecision highp float;layout(location=0) in vec3 aPos;layout(location=1) in vec3 aNorm;layout(location=2) in mat4 aModel;layout(location=6) in vec4 aColor;uniform mat4 uVP;out vec3 vN;out vec3 vW;out vec4 vC;void main(){vec4 w=aModel*vec4(aPos,1.);vW=w.xyz;vN=transpose(inverse(mat3(aModel)))*aNorm;vC=aColor;gl_Position=uVP*w;}`;
+  let fs=`#version 300 es\nprecision highp float;in vec3 vN;in vec3 vW;in vec4 vC;uniform vec3 uEye;out vec4 frag;void main(){vec3 n=normalize(vN);if(!gl_FrontFacing)n=-n;vec3 l=normalize(vec3(-.45,.85,.6));float d=max(dot(n,l),0.);float d2=max(dot(n,normalize(vec3(.7,.2,-.5))),0.);vec3 h=normalize(l+normalize(uEye-vW));float sp=pow(max(dot(n,h),0.),35.);float light=.63+.30*d+.10*d2;frag=vec4(vC.rgb*light+vec3(.10*sp),vC.a);}`;
+  let compile=(type,src)=>{let s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s};let pr=gl.createProgram();gl.attachShader(pr,compile(gl.VERTEX_SHADER,vs));gl.attachShader(pr,compile(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(pr));this.program=pr;this.uVP=gl.getUniformLocation(pr,'uVP');this.uEye=gl.getUniformLocation(pr,'uEye');this.geo={};this.batches={};this.camera={yaw:.24,pitch:.16,dist:12.8,target:[0,2.9,0]};this.targetCam=null;this.touch=new Map();this.labels=[];this.onCamera=()=>{};if(canvas.id!=='detailWorld')this.setupInput();
+ }
+ geometry(name,positions,normals,indices){if(this.soft){this.geo[name]={positions,normals,indices};return name}let gl=this.gl,vao=gl.createVertexArray();gl.bindVertexArray(vao);let data=[];for(let i=0;i<positions.length;i+=3)data.push(positions[i],positions[i+1],positions[i+2],normals[i],normals[i+1],normals[i+2]);let vb=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,vb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);for(let i=0;i<2;i++){gl.enableVertexAttribArray(i);gl.vertexAttribPointer(i,3,gl.FLOAT,false,24,i*12)}let ib=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(indices),gl.STATIC_DRAW);let instance=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,instance);for(let i=0;i<4;i++){gl.enableVertexAttribArray(2+i);gl.vertexAttribPointer(2+i,4,gl.FLOAT,false,80,i*16);gl.vertexAttribDivisor(2+i,1)}gl.enableVertexAttribArray(6);gl.vertexAttribPointer(6,4,gl.FLOAT,false,80,64);gl.vertexAttribDivisor(6,1);this.geo[name]={vao,vb,ib,instance,count:indices.length};return name}
+ primitive(name){if(this.geo[name])return name;let p=[],n=[],ix=[];let add=(a,normal)=>{p.push(...a);n.push(...normal);return p.length/3-1};
+  if(name==='box'){let faces=[[[1,0,0],[[.5,-.5,-.5],[.5,.5,-.5],[.5,.5,.5],[.5,-.5,.5]]],[[-1,0,0],[[-.5,-.5,.5],[-.5,.5,.5],[-.5,.5,-.5],[-.5,-.5,-.5]]],[[0,1,0],[[-.5,.5,-.5],[-.5,.5,.5],[.5,.5,.5],[.5,.5,-.5]]],[[0,-1,0],[[-.5,-.5,.5],[-.5,-.5,-.5],[.5,-.5,-.5],[.5,-.5,.5]]],[[0,0,1],[[-.5,-.5,.5],[.5,-.5,.5],[.5,.5,.5],[-.5,.5,.5]]],[[0,0,-1],[[.5,-.5,-.5],[-.5,-.5,-.5],[-.5,.5,-.5],[.5,.5,-.5]]]];for(let [nm,vs]of faces){let st=p.length/3;vs.forEach(a=>add(a,nm));ix.push(st,st+1,st+2,st,st+2,st+3)}}
+  else if(name.startsWith('cylinder')){let rt=Number(name.split(':')[1]||1),N=this.soft?24:40;for(let j=0;j<=N;j++){let a=j/N*Math.PI*2,c=Math.cos(a),s=Math.sin(a);add([c,-.5,s],V.norm([c,1-rt,s]));add([rt*c,.5,rt*s],V.norm([c,1-rt,s]));if(j<N){let k=j*2;ix.push(k,k+1,k+2,k+1,k+3,k+2)}}for(let [y,r]of[[-.5,1],[.5,rt]]){let base=add([0,y,0],[0,Math.sign(y),0]);for(let j=0;j<=N;j++){let a=j/N*Math.PI*2;add([r*Math.cos(a),y,r*Math.sin(a)],[0,Math.sign(y),0]);if(j<N)ix.push(base,base+j+1,base+j+2)}}}
+  else if(name==='sphere'){let A=this.soft?6:12,B=this.soft?10:20;for(let j=0;j<=A;j++)for(let i=0;i<=B;i++){let y=Math.cos(j/A*Math.PI),s=Math.sin(j/A*Math.PI),a=i/B*Math.PI*2,v=[s*Math.cos(a),y,s*Math.sin(a)];add(v,v);if(j<A&&i<B){let k=j*(B+1)+i;ix.push(k,k+1,k+B+1,k+1,k+B+2,k+B+1)}}}
+  else if(name.startsWith('torus')){let t=Number(name.split(':')[1]||.10),A=this.soft?28:48,B=this.soft?6:8;for(let j=0;j<=A;j++)for(let i=0;i<=B;i++){let a=j/A*2*Math.PI,b=i/B*2*Math.PI,ca=Math.cos(a),sa=Math.sin(a),cb=Math.cos(b),sb=Math.sin(b);add([(1+t*cb)*ca,(1+t*cb)*sa,t*sb],[cb*ca,cb*sa,sb]);if(j<A&&i<B){let k=j*(B+1)+i;ix.push(k,k+1,k+B+1,k+1,k+B+2,k+B+1)}}}
+  else if(name==='disk'){let center=add([0,0,0],[0,1,0]);for(let j=0;j<=48;j++){let a=j/48*Math.PI*2;add([Math.cos(a),0,Math.sin(a)],[0,1,0]);if(j<48)ix.push(center,j+1,j+2)}}
+  return this.geometry(name,p,n,ix)
+ }
+ begin(){this.batches={};this.labels=[]}
+ mesh(geo,mat,color){this.primitive(geo);(this.batches[geo]??=[]).push(...mat,...rgba(color))}
+ box(p,s,c,r=[0,0,0]){this.mesh('box',M.trs(p,s,r),c)}
+ sphere(p,s,c){this.mesh('sphere',M.trs(p,[s,s,s]),c)}
+ cylinder(p,r,h,c,rot=[0,0,0],top=1){this.mesh('cylinder:'+top,M.trs(p,[r,h,r],rot),c)}
+ torus(p,r,t,c,rot=[0,0,0]){this.mesh('torus:'+t,M.trs(p,[r,r,r],rot),c)}
+ rod(a,b,r,c){let y=V.sub(b,a),len=V.len(y);if(len<1e-5)return;y=V.norm(y);let x=V.norm(V.cross(Math.abs(y[1])>.94?[1,0,0]:[0,1,0],y)),z=V.cross(x,y),p=V.mul(V.add(a,b),.5);this.mesh('cylinder:1',[...V.mul(x,r),0,...V.mul(y,len),0,...V.mul(z,r),0,...p,1],c)}
+ shadow(x,z,rx,rz){this.mesh('disk',M.trs([x,.006,z],[rx,1,rz]),'#e1e9e7')}
+ triangle(name,points,color){if(!this.geo[name]){let norm=V.norm(V.cross(V.sub(points[1],points[0]),V.sub(points[2],points[0])));this.geometry(name,points.flat(),[...norm,...norm,...norm],[0,1,2])}this.mesh(name,M.identity(),color)}
+ custom(name,points,normals,indices,model,color){if(!this.geo[name])this.geometry(name,points.flat(),normals.flat(),indices);this.mesh(name,model,color)}
+ label(text,pos,kind='',id=''){this.labels.push({text,pos,kind,id})}
+ resize(){let rect=this.canvas.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,1.75);let w=Math.max(1,Math.round(rect.width*ratio)),h=Math.max(1,Math.round(rect.height*ratio));if(this.canvas.width!==w||this.canvas.height!==h){this.canvas.width=w;this.canvas.height=h}this.w=rect.width;this.h=rect.height}
+ draw(){this.resize();let gl=this.gl,c=this.camera,now=performance.now(),alpha=1-Math.exp(-Math.min(.2,(now-(this.camTick||now-16))/1000)*12);this.camTick=now;if(this.targetCam){let done=true;for(let key of['yaw','pitch','dist']){let d=this.targetCam[key]-c[key];c[key]+=d*alpha;if(Math.abs(d)>.003)done=false}c.target=c.target.map((v,i)=>{let d=this.targetCam.target[i]-v;if(Math.abs(d)>.003)done=false;return v+d*alpha});if(done)this.targetCam=null}let eye=V.add(c.target,[Math.sin(c.yaw)*Math.cos(c.pitch)*c.dist,Math.sin(c.pitch)*c.dist,Math.cos(c.yaw)*Math.cos(c.pitch)*c.dist]);this.vp=M.mul(M.perspective(.64,this.w/this.h),M.look(eye,c.target));if(this.soft){this.drawSoft(eye);return}gl.viewport(0,0,this.canvas.width,this.canvas.height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.enable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);gl.useProgram(this.program);gl.uniformMatrix4fv(this.uVP,false,this.vp);gl.uniform3fv(this.uEye,eye);for(let [key,values]of Object.entries(this.batches)){let g=this.geo[key];gl.bindVertexArray(g.vao);gl.bindBuffer(gl.ARRAY_BUFFER,g.instance);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(values),gl.DYNAMIC_DRAW);gl.drawElementsInstanced(gl.TRIANGLES,g.count,gl.UNSIGNED_SHORT,0,values.length/20)}}
+ drawSoft(eye){let ctx=this.ctx,ratio=this.canvas.width/this.w;ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,this.w,this.h);let faces=[],light=V.norm([-.45,.85,.6]);for(let [key,values]of Object.entries(this.batches)){let geo=this.geo[key];for(let j=0;j<values.length;j+=20){let mat=values.slice(j,j+16),col=values.slice(j+16,j+19),verts=[],screens=[];for(let i=0;i<geo.positions.length;i+=3){let v=M.point(mat,geo.positions.slice(i,i+3)).slice(0,3);verts.push(v);let p=M.point(this.vp,v),w=p[3];screens.push([(p[0]/w+1)*this.w*.5,(1-p[1]/w)*this.h*.5,w])}let ground=key==='disk'||(Math.abs(mat[13])<.13&&Math.abs(mat[5])<.5);for(let i=0;i<geo.indices.length;i+=3){let ids=geo.indices.slice(i,i+3),a=verts[ids[0]],b=verts[ids[1]],c=verts[ids[2]],points=ids.map(id=>screens[id]);if(points.some(p=>p[2]<.08))continue;let area=(points[1][0]-points[0][0])*(points[2][1]-points[0][1])-(points[1][1]-points[0][1])*(points[2][0]-points[0][0]);if(Math.abs(area)<.025)continue;let center=V.mul(V.add(V.add(a,b),c),1/3),normal=V.norm(V.cross(V.sub(b,a),V.sub(c,a))),dot=V.dot(normal,V.sub(eye,center));if(dot<0)normal=V.mul(normal,-1);let shade=.68+.28*Math.max(0,V.dot(normal,light)),color=col.map(c=>Math.min(255,Math.round(c*shade*255)));let z=(points[0][2]+points[1][2]+points[2][2])/3+(ground?100:0)+(key==='disk'?0:ground?10:0);faces.push({points,z,color})}}}faces.sort((a,b)=>b.z-a.z);ctx.lineWidth=.45;for(let f of faces){let p=f.points;ctx.beginPath();ctx.moveTo(p[0][0],p[0][1]);ctx.lineTo(p[1][0],p[1][1]);ctx.lineTo(p[2][0],p[2][1]);ctx.closePath();ctx.fillStyle=`rgb(${f.color.join(',')})`;ctx.strokeStyle=ctx.fillStyle;ctx.fill();ctx.stroke()}this.faceCount=faces.length}
+ project(pos){if(!this.vp)return null;let p=M.point(this.vp,pos),x=(p[0]/p[3]+1)*this.w/2,y=(1-p[1]/p[3])*this.h/2;return{x,y,visible:p[3]>0&&x>6&&x<this.w-6&&y>6&&y<this.h-6}}
+ view(mode,target=null){let t=target||[0,2.9,0];this.targetCam={yaw:mode==='front'?0:.32,pitch:mode==='front'?.02:.18,dist:mode==='close'?5.2:12.8,target:t};this.onCamera()}
+ setupInput(){let el=this.canvas;el.style.touchAction='none';el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);this.touch.set(e.pointerId,{x:e.clientX,y:e.clientY});this.targetCam=null});el.addEventListener('pointermove',e=>{let p=this.touch.get(e.pointerId);if(!p)return;let dx=e.clientX-p.x,dy=e.clientY-p.y;this.camera.yaw+=dx*.006;this.camera.pitch=Math.max(-.18,Math.min(1.1,this.camera.pitch+dy*.004));this.touch.set(e.pointerId,{x:e.clientX,y:e.clientY});this.onCamera()});for(let e of['pointerup','pointercancel','lostpointercapture'])el.addEventListener(e,v=>this.touch.delete(v.pointerId));el.addEventListener('wheel',e=>{e.preventDefault();this.targetCam=null;this.camera.dist=Math.min(65,Math.max(3.3,this.camera.dist*Math.exp(e.deltaY*.001)));this.onCamera()},{passive:false});el.addEventListener('dblclick',()=>this.view('iso'))}
+}
+
+function arc(x,y,r,a,b,z=0,n=20){return Array.from({length:n+1},(_,i)=>{let t=a+(b-a)*i/n;return[x+r*Math.cos(t),y+r*Math.sin(t),z]})}
+function pathLength(points){let s=0;for(let i=1;i<points.length;i++)s+=V.len(V.sub(points[i],points[i-1]));return s}
+function pathPoint(points,s){for(let i=1;i<points.length;i++){let d=V.len(V.sub(points[i],points[i-1]));if(s<=d)return V.add(points[i-1],V.mul(V.sub(points[i],points[i-1]),s/(d||1)));s-=d}return points.at(-1)}
+function rope(points,col=C.rope,beads=true){for(let i=1;i<points.length;i++)R.rod(points[i-1],points[i],.025,col);if(beads){let len=pathLength(points);for(let d=.15;d<len;d+=.47)R.sphere(pathPoint(points,d),.035,'#fff0d1')}}
+function hook(x,y,z=0,scale=1,color=C.dark){let p=arc(x,y-.08*scale,.13*scale,.2*Math.PI,1.65*Math.PI,z,16);for(let i=1;i<p.length;i++)R.rod(p[i-1],p[i],.032*scale,color);R.rod([x,y+.12*scale,z],[x,y+.02*scale,z],.032*scale,color)}
+function pulley(x,y,r=.42,kind='F',angle=0,z=0,focus='',explode=0){
+ const scale=r/.42,sp=.18*scale+explode*.38,color='#efba3e';
+ // Solid sheave cheeks and recessed groove; all parts are separately transformable.
+ R.cylinder([x,y,z],r-.045*scale,.16*scale,color,[Math.PI/2,0,0]);
+ for(let sign of [-1,1]){
+  const zz=z+sign*(.115*scale+explode*.24);
+  R.cylinder([x,y,zz],r,.065*scale,color,[Math.PI/2,0,0]);
+  R.torus([x,y,zz+sign*.034*scale],r*.94,.025,color);
+  const a=angle+.8;
+  R.rod([x+Math.cos(a)*r*.52,y+Math.sin(a)*r*.52,zz+sign*.04*scale],[x+Math.cos(a)*r*.75,y+Math.sin(a)*r*.75,zz+sign*.04*scale],.019*scale,'#fff5d5');
+ }
+ for(let sign of [-1,1])R.box([x,y,z+sign*sp],[.115*scale,1.2*scale,.07*scale],C.dark);
+ for(let yy of [-.57,.57])R.box([x,y+yy*scale,z],[.115*scale,.09*scale,2*sp],C.dark);
+ R.cylinder([x,y,z],.075*scale,2*sp+.13*scale,focus==='axle'?'#4585e8':C.dark,[Math.PI/2,0,0]);
+ for(let sy of [-1,1]){
+  R.rod([x,y+sy*.59*scale,z],[x,y+sy*.71*scale,z],.048*scale,C.dark);
+  let pts=arc(x,y+sy*.84*scale,.17*scale,.12*Math.PI,1.86*Math.PI,z,R.soft?10:18);
+  for(let i=1;i<pts.length;i++)R.rod(pts[i-1],pts[i],.042*scale,C.dark);
+ }
+ if(typeof drawnWheels!=='undefined')drawnWheels.push({id:currentWheelId||'P'+(drawnWheels.length+1),p:[x,y,z],kind,r,angle});
+}
+function arrow(a,b,color=C.moving){let d=V.sub(b,a),l=V.len(d);if(l<.01)return;let u=V.norm(d),head=.16,tail=V.sub(b,V.mul(u,head));R.rod(a,tail,.026,color);let y=u,x=V.norm(V.cross(Math.abs(y[1])>.94?[1,0,0]:[0,1,0],y)),z=V.cross(x,y),p=V.mul(V.add(tail,b),.5);R.mesh('cylinder:0',[...V.mul(x,.09),0,...V.mul(y,head),0,...V.mul(z,.09),0,...p,1],color)}
+function frame(width=5.6,top=6.2){R.box([0,-.12,0],[width+1,.24,2.3],'#e4eceb');for(let x of[-width/2,width/2]){R.cylinder([x,top/2,-.5],.07,top,C.steel);R.box([x,.12,-.4],[.85,.17,1.5],C.dark);R.cylinder([x,top-.03,-.5],.11,.15,C.dark)}R.rod([-width/2,top,-.5],[width/2,top,-.5],.085,C.steel);R.shadow(0,0,width*.45,.7)}
+function support(x,y=5.4,top=6.2,z=0){R.rod([x,top,-.5],[x,top,z],.06,C.dark);R.rod([x,top,z],[x,y+.77,z],.045,C.dark)}
+function anchor(x,y,z=0){R.torus([x,y,z],.075,.26,C.dark);R.box([x,y+.13,z-.12],[.24,.12,.24],C.dark)}
+function weights(x,hookY,count,z=0,col=C.steel){hook(x,hookY,z,.7);let top=hookY-.22;R.rod([x,top+.09,z],[x,top-count*.12-.04,z],.031,C.dark);for(let i=0;i<count;i++){R.cylinder([x,top-i*.12,z],.26,.105,col);R.torus([x,top-i*.12+.027,z],.256,.014,C.dark,[Math.PI/2,0,0])}R.cylinder([x,top-count*.12+.01,z],.29,.038,C.dark);R.shadow(x,z,.44,.3)}
+function handle(p,dir='down',color=C.moving){let [x,y,z]=p;R.torus([x,y+(dir==='down'?-.14:.14),z],.13,.23,color);R.box([x,y+(dir==='down'?-.3:.3),z],[.45,.1,.14],color)}
+function rubber(x,y,L){let h=L*.11,w=.11*Math.sqrt(5/L);let points=[[x-w,y+.05,0],[x-w*1.1,y+h*.25,0],[x-w*1.1,y+h*.75,0],[x-w,y+h-.05,0],[x,y+h,0],[x+w,y+h-.05,0],[x+w*1.1,y+h*.75,0],[x+w*1.1,y+h*.25,0],[x+w,y+.05,0],[x,y,0],[x-w,y+.05,0]];for(let i=1;i<points.length;i++)R.rod(points[i-1],points[i],.022,C.rubber);R.torus([x,y,0],.058,.24,C.dark);R.torus([x,y+h,0],.058,.24,C.dark);return h}
+function ruler(x,y,cm=14,scale=.11){R.box([x,y+cm*scale/2,-.08],[.28,cm*scale+.08,.045],'#f6ecd1');for(let i=0;i<=cm;i++){R.rod([x-.13,y+i*scale,-.045],[x+(i%5===0?.1:0),y+i*scale,-.045],.007,C.ink)}for(let i of[0,5,10])if(i<=cm)R.label(String(i),[x+.11,y+i*scale,0],'ruler')}
+function crate(x,y,z=0,scale=1){let w=1.15*scale,h=.7*scale,d=.85*scale;R.box([x,y,z],[w,h,d],C.wood);for(let dz of[-d/2-.012,d/2+.012]){for(let yy of[-h*.33,h*.33])R.box([x,y+yy,z+dz],[w+.03,.06*scale,.04], '#d9ad76');for(let xx of[-w*.4,w*.4])R.box([x+xx,y,z+dz],[.08*scale,h,.05], '#835c3c')}for(let xx of[-w*.27,w*.27])R.rod([x,y+h/2+.46,z],[x+xx,y+h/2,z],.022,C.dark)}
+function person(x,z,phase=0,scale=1){let c=C.blue;R.sphere([x,1.64*scale,z],.2*scale,'#dba77d');R.sphere([x,1.72*scale,z-.025],.195*scale,C.dark);R.sphere([x,1.63*scale,z+.075],.178*scale,'#e1b28c');R.box([x,1.17*scale,z],[.43*scale,.62*scale,.27*scale],c);for(let side of[-1,1]){R.rod([x+side*.12*scale,.87*scale,z],[x+side*.15*scale,.16*scale,z+.03],.095*scale,C.dark);R.box([x+side*.15*scale,.07*scale,z+.08],[.2*scale,.12*scale,.34*scale],C.ink);let y=(1.35+.18*Math.sin(phase+side))*scale;R.rod([x+side*.24*scale,1.37*scale,z],[x+side*.20*scale,y,z+.38*scale],.065*scale,c);R.sphere([x+side*.20*scale,y,z+.4*scale],.073*scale,'#e1b28c')}}
+function tree(x,z,s=1){R.cylinder([x,.55*s,z],.09*s,1.1*s,C.wood);for(let[dx,dy,dz,sz]of[[0,1.4,0,.6],[-.25,1.15,.12,.43],[.25,1.25,-.06,.46]])R.sphere([x+dx*s,dy*s,z+dz*s],sz*s,C.green)}
+function ground(){R.box([0,-.16,0],[9,.25,5.5],'#e8efec');for(let i=-4;i<=4;i++)R.rod([i,.001,-2.3],[i,.001,2.3],.006,'#d9e5e0')}
+function building(){R.box([-2.7,1.18,-1.75],[3.5,2.35,1.25],'#e0e8e7');R.box([-2.7,2.4,-1.75],[3.7,.17,1.4],C.blue);for(let i=0;i<5;i++)for(let j=0;j<2;j++)R.box([-4.08+i*.69,.8+j*.85,-1.10],[.4,.56,.05],'#88adb9');R.box([-2.7,.48,-1.08],[.44,.94,.065],C.dark)}
+function drawFlag(x,y,t){let W=1.42,H=.88,A=12,B=5,ps=[],ns=[],idx=[];for(let j=0;j<=B;j++)for(let i=0;i<=A;i++){let xx=-i/A*W,yy=-j/B*H,zz=.12*Math.sin(i/A*6-t*3)*(i/A);ps.push([xx,yy,zz]);ns.push([0,0,1]);if(j<B&&i<A){let k=j*(A+1)+i;idx.push(k,k+1,k+A+1,k+1,k+A+2,k+A+1)}}let name='flag';if(R.geo[name]&&R.soft){R.geo[name].positions=ps.flat();R.geo[name].normals=ns.flat()}else if(R.geo[name]){let gl=R.gl,data=[];ps.forEach((v,i)=>data.push(...v,...ns[i]));gl.bindBuffer(gl.ARRAY_BUFFER,R.geo[name].vb);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.DYNAMIC_DRAW)}R.custom(name,ps,ns,idx,M.trs([x,y,.08]),'#da3b3e');let star=(sx,sy,rad,id)=>{let p=[[0,0,.015]],n=[[0,0,1]],ii=[];for(let i=0;i<=10;i++){let a=Math.PI/2+i*Math.PI/5,rr=i%2?rad*.42:rad;p.push([rr*Math.cos(a),rr*Math.sin(a),.015]);n.push([0,0,1]);if(i<10)ii.push(0,i+1,i+2)}let localZ=.12*Math.sin(-sx/W*6-t*3)*(-sx/W);R.custom(id,p,n,ii,M.trs([x+sx,y+sy,.1+localZ]),'#ffd05b')};star(-.25,-.23,.105,'starBig');for(let[i,px,py]of[[0,-.40,-.105],[1,-.47,-.19],[2,-.47,-.30],[3,-.40,-.39]])star(px,py,.036,'star'+i)}
+function lattice(a,b,width=.45,col=C.fixed){let d=V.sub(b,a),u=V.norm(d),normal=V.norm(V.cross(u,[0,0,1])),side=V.mul(normal,width/2);for(let z of[-.25,.25]){R.rod(V.add(a,[...side.slice(0,2),z]),V.add(b,[...side.slice(0,2),z]),.05,col);R.rod(V.add(a,[-side[0],-side[1],z]),V.add(b,[-side[0],-side[1],z]),.05,col);let N=Math.ceil(V.len(d)/.5);for(let i=0;i<N;i++){let p=V.add(a,V.mul(d,i/N)),q=V.add(a,V.mul(d,(i+1)/N));R.rod(V.add(p,[side[0],side[1],z]),V.add(q,[-side[0],-side[1],z]),.025,col);R.rod(V.add(p,[-side[0],-side[1],z]),V.add(q,[side[0],side[1],z]),.025,col)}}}
+function winch(x,y,top,angle=0){let rad=.21,cx=x+rad;R.box([cx,y,-.39],[.63,.64,.16],C.dark);R.rod([cx,y+.32,-.4],[cx,top,-.4],.055,C.dark);R.cylinder([cx,y,0],rad,.25,C.rope,[Math.PI/2,0,0]);for(let z of[-.19,.19]){R.cylinder([cx,y,z],rad+.05,.05,C.steel,[Math.PI/2,0,0]);for(let a of[angle,angle+Math.PI/2])R.rod([cx-Math.cos(a)*.16,y-Math.sin(a)*.16,z+.035],[cx+Math.cos(a)*.16,y+Math.sin(a)*.16,z+.035],.015,C.dark)}R.cylinder([cx,y,-.61],.15,.24,C.blue,[Math.PI/2,0,0])}
+function sceneLife(s,t){let p=(1-Math.cos(t*.58))/2,q=p*2.05;ground();let focus=s.focus||'',explode=s.explode?1:0,mech=s.mechanism;
+ if(s.scene==='flag'){
+  if(!mech){building();tree(3.1,-1.45,.95);R.box([-.75,.08,.15],[1.55,.17,1.2],C.dark);R.box([-.75,.2,.15],[1.15,.17,.84],C.steel);R.cylinder([-.83,2.9,-.16],.064,5.7,C.steel);R.sphere([-.83,5.85,-.16],.09,C.fixed);person(.77,.48,t*2,.83)}
+  let x=-.38,y=5.42,r=.28;support(x,y,5.97);pulley(x,y,r,'F',-q/r,0,focus,explode);let pts=[[x-r,.68,0],...arc(x,y,r,Math.PI,0),[x+r,.68,0],...arc(x,.68,r,0,-Math.PI)];rope(pts,C.rope,false);let len=pathLength(pts);for(let d=(q%.5);d<len;d+=.5)R.sphere(pathPoint(pts,d),.035,'#fff0d1');drawFlag(x-r-.04,2.55+q,t);arrow([x+r+.28,Math.sin(t*.58)>=0?3.3:2.7,0],[x+r+.28,Math.sin(t*.58)>=0?2.7:3.3,0],C.rope);R.label(Math.sin(t*.58)>=0?'旗帜沿绳上升':'旗帜沿绳下降',[x-r-.75,1.52+q,.1],'neutral');R.label('顶部滑轮',[x+.32,y+.55,.1],'fixed','lifeFocus');if(s.highlight)R.label('轮轴位置不变',[x+.85,y,.1],'fixed');
+  return{focus:[x,y,0],phase:p>.95?'到达高处':Math.sin(t*.58)>0?'拉绳 · 旗帜上升':'放绳 · 旗帜下降',q};
+ }
+ if(s.scene==='crane'){
+  if(!mech){lattice([-2.45,.12,-.55],[-2.45,5.6,-.55],.6);lattice([-3.65,5.52,-.55],[2.7,5.52,-.55],.43);R.box([-2.8,4.9,-.53],[.78,.75,.7],C.fixed);R.box([-2.82,5.03,-.15],[.5,.32,.03],'#8eb5bf');R.box([-3.6,5.2,-.55],[.75,.5,.86],C.dark);R.box([-2.45,.1,-.55],[1.75,.23,1.6],C.dark);R.rod([-2.45,6.45,-.55],[2.65,5.74,-.55],.02,C.dark);R.rod([-2.45,6.45,-.55],[-3.65,5.74,-.55],.02,C.dark);R.rod([-2.45,5.65,-.55],[-2.45,6.45,-.55],.047,C.fixed)}
+  let x=.45,r=.4,y=2.45+p*1.15;anchor(x-r,5.67);pulley(x,y,r,'M',(y-2.45)/r,0,focus,explode);pulley(x+2*r,4.64,r,'F',-2*(y-2.45)/r,0,focus,explode);R.rod([x+2*r,5.60,0],[x+2*r,5.75,-.55],.05,C.dark);rope([[x-r,5.67,0],...arc(x,y,r,Math.PI,2*Math.PI),...arc(x+2*r,4.64,r,Math.PI,0),[x+3*r,4.45,0]]);winch(x+3*r,4.45,5.7,-2*(y-2.45)/.21);R.rod([x,y-.95,0],[x,y-.99,0],.027,C.dark);crate(x,y-1.80);if(s.highlight){R.label('动滑轮：随货物升降',[x-.42,y-.15,.2],'moving','lifeFocus');R.label('定滑轮：固定在吊臂上',[x+2*r,5.55,.15],'fixed');}R.label(Math.sin(t*.58)>=0?'卷筒收绳':'卷筒放绳',[x+3*r+.28,3.88,.1],'neutral');return{focus:[x,y+.15,0],phase:Math.sin(t*.58)>0?'卷筒收绳 · 货物上升':'卷筒放绳 · 货物下降',q};
+ }
+ if(s.scene==='well'){
+  if(!mech){for(let j=0;j<3;j++)for(let i=0;i<14;i++){let a=(i+j*.5)*Math.PI*2/14;R.box([-.4+Math.cos(a)*1.05,.23+j*.28,-.1+Math.sin(a)*1.05],[.48,.24,.27],'#b4b5aa',[0,-a+Math.PI/2,0])}for(let x of[-1.65,.75])R.box([x,2.25,-.35],[.16,4.5,.22],C.wood);R.box([-.45,4.5,-.35],[2.85,.24,.27],C.wood);tree(-3.1,-1.2,.9);person(1.8,.2,t*2,.85)}
+  let x=-.25,y=4.06,r=.37,by=1.18+p*1.82;pulley(x,y,r,'F',-(by-1.18)/r,0,focus,explode);R.rod([x,y+.75,0],[x,4.85,-.35],.042,C.dark);rope([[x-r,by+.54,0],...arc(x,y,r,Math.PI,0),[x+r,3.4-(by-1.18),0]]);handle([x+r,3.4-(by-1.18),0]);R.cylinder([x-r,by,0],.32,.44,'#b6c6cb',[0,0,0],1.16);R.cylinder([x-r,by+.225,0],.337,.012,'#7ba8b7');R.torus([x-r,by+.23,0],.365,.046,C.steel,[Math.PI/2,0,0]);let hp=arc(x-r,by+.24,.30,0,Math.PI);for(let i=1;i<hp.length;i++)R.rod(hp[i-1],hp[i],.023,C.dark);if(s.highlight)R.label(Math.sin(t*.58)>=0?'向下拉绳，桶向上升':'缓慢放绳，桶向下降',[x+.7,2.0,0],'fixed');R.label('水井提水',[x-r,by-.52,.2],'neutral');return{focus:[x,y,0],phase:Math.sin(t*.58)>0?'向下拉绳 · 水桶上升':'缓慢放绳 · 水桶下降',q};
+ }
+ // Workshop gantry, a four-supporting-strand tackle.
+ if(!mech){for(let x of[-2.7,2.7]){R.box([x,2.85,-.45],[.25,5.7,.35],C.blue);for(let z of[-.8,.8])R.cylinder([x,.16,z],.16,.12,C.dark,[Math.PI/2,0,0]);R.box([x,.3,0],[.5,.22,1.9],C.dark)}R.box([0,5.7,-.45],[5.65,.35,.43],C.blue);for(let i=0;i<3;i++)R.box([-3.3+i*.72,.35,-1.8],[.55,.7,.65],i===1?C.dark:C.wood)}
+ let r=.36,base=-1.07,my=2.3+p*1.08;let pts=[[base-r,5.58,0]];for(let i=0;i<4;i++){let x=base+i*2*r,kind=i%2?'F':'M',y=kind==='F'?4.87:my;pulley(x,y,r,kind,(kind==='M'?1:-1)*(i+1)*(my-2.3)/r,0,focus,explode);pts.push(...arc(x,y,r,Math.PI,kind==='F'?0:2*Math.PI));if(kind==='F')R.rod([x,y+.74,0],[x,5.75,-.45],.047,C.dark)}pts.push([base+7*r,4.04,0]);rope(pts);winch(base+7*r,4.04,5.7,-4*(my-2.3)/.21);anchor(base-r,5.58);R.rod([base-r,5.75,0],[base-r,5.75,-.45],.04,C.dark);R.rod([base,my-.68,0],[base+4*r,my-.68,0],.06,C.dark);R.rod([base+2*r,my-.68,0],[base+2*r,my-.93,0],.05,C.dark);R.box([base+2*r,my-1.17,0],[1.35,.55,.8],C.steel);for(let x of[-.45,-.15,.15,.45])R.cylinder([base+2*r+x,my-.84,0],.13,.20,C.dark);if(s.highlight){R.label('同一吊架上的两个动滑轮',[base+2*r,my+.65,.1],'moving','lifeFocus');R.label('上方两个定滑轮',[base+3*r,5.7,.1],'fixed');R.label(Math.sin(t*.58)>=0?'电动卷筒收绳':'电动卷筒放绳',[base+7*r+.38,3.5,.1],'neutral')}return{focus:[base+2*r,my+.65,0],phase:Math.sin(t*.58)>0?'收绳 · 吊起发动机':'放绳 · 放下发动机',q};
+}
+
+/* v2.0 discussion edition. Physics / state / procedural assets / UI are separated.
+   No downloaded GLB has been supplied: these are replaceable procedural 3D assets. */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CM=5, RADIUS=.4, TOP=13.5, FY=11.5, MY=4.5;
+const icons={play:'<path d="m8 4 12 8-12 8Z" fill="currentColor" stroke="none"/>',pause:'<path d="M8 5v14M16 5v14" stroke-width="4"/>',reset:'<path d="M3 11a9 9 0 1 1 2 7M3 4v7h7"/>',eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>'};
+function icon(n){return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icons[n]||''}</svg>`}
+const clone=x=>JSON.parse(JSON.stringify(x));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function freshRig(kind='moving'){
+ const r={components:[],route:[],anchor:'top',complete:true,load:20,capacity:12,target:20,travel:50,required:'down',limited:false,s:0,angle:0,shift:0,prediction:'',tested:false};
+ if(kind==='fixed'){r.anchor='load';r.components=[{id:'A',mount:'fixed'}];r.route=['A']}
+ if(kind==='moving'){r.components=[{id:'A',mount:'moving'}];r.route=['A']}
+ if(kind==='combined'){r.components=[{id:'A',mount:'moving'},{id:'B',mount:'fixed'}];r.route=['A','B']}
+ if(kind==='four'){r.components=[{id:'A',mount:'moving'},{id:'B',mount:'fixed'},{id:'C',mount:'moving'},{id:'D',mount:'fixed'}];r.route=['A','B','C','D']}
+ if(kind==='blank'){r.complete=false}
+ return r;
+}
+const Core={
+ inspect(r){
+  const fail=reason=>({valid:false,n:0,F:NaN,direction:'',reason});
+  if(!r.route.length)return fail('选择绳端固定处，再依次点滑轮穿绳。');
+  const map=new Map(r.components.map(c=>[c.id,c]));let expected=r.anchor==='top'?'moving':'fixed',seen=new Set(),m=0;
+  for(const id of r.route){
+   const c=map.get(id);if(!c)return fail('绳路经过了已移除的滑轮，请重新穿绳。');
+   if(seen.has(id))return fail('一个槽只能绕一次。撤销重复的那一段。');
+   if(c.mount!==expected)return fail(expected==='moving'?'下一段需要绕过连接货物的滑轮。':'下一段需要绕过挂在横梁上的滑轮。');
+   seen.add(id);if(c.mount==='moving')m++;expected=expected==='moving'?'fixed':'moving';
+  }
+  const n=2*m+(r.anchor==='load'?1:0),last=map.get(r.route[r.route.length-1]),dir=last.mount==='fixed'?'down':'up';
+  if(!r.complete)return {...fail('绳路还没接到拉绳端，点击“接出自由端”。'),n,direction:dir};
+  return{valid:n>0,n,m,F:r.load/n,direction:dir,unused:r.components.length-seen.size,reason:'绳路已连通'};
+ },
+ stats(r,page){
+  const p=this.inspect(r),n=p.n||1;
+  let direction=page==='fixed'?(r.angle===90?'right':r.angle===45?'diagonal':'down'):p.direction;
+  const h=r.s/n,geometric=page==='fixed'?25:Math.min(n*25,p.direction==='up'?42:50);
+  const allowed=r.limited?Math.min(geometric,r.travel):geometric;
+  const enough=!r.limited||p.F<=r.capacity+1e-8;
+  const directionOK=r.required==='any'||direction===r.required;
+  return {...p,direction,h,s:r.s,maxS:allowed,geometric,enough,needS:n*r.target,directionOK,reached:h>=r.target-.05};
+ }
+};
+const PAGE={life:{title:'在生活里，追踪一个滑轮',sub:'先观察运动，再决定怎样判断。'},fixed:{title:'换一个方向，结果会怎样？',sub:'直接拖动蓝色绳端；空白处可转动视角。'},moving:{title:'同一个货物，两种提升方式',sub:'把两边升得一样高，或让绳端移动一样远。'},builder:{title:'让你的改装，接受检验',sub:'同一种滑轮，改变挂接和绳路，看看作用有何不同。'}};
+const LIFE={flag:{name:'校园升旗',question:'轮子转动了，轮轴的位置也变了吗？'},crane:{name:'工地吊装',question:'吊臂上的轮子和吊钩里的轮子，谁会移动？'},well:{name:'井口提水',question:'向下拉的绳子，怎样把水桶带上来？'},workshop:{name:'车间吊装',question:'哪些轮子与货物连接在同一个移动部分？'}};
+const S={page:'life',life:{scene:'flag',time:0,playing:!matchMedia('(prefers-reduced-motion: reduce)').matches,speed:.7,highlight:false,mechanism:false,explode:false,focus:''},fixed:freshRig('fixed'),moving:freshRig('moving'),builder:freshRig('moving'),selected:null,tool:'grab',detail:true,data:false,arrows:false,trace:false,ghost:false,marks:[],annotations:[],pick:false,picked:[],checked:false,wire:false,run:false,runReason:'',hold:false,compareDirect:false,compareMode:'height',snapshots:[],undo:{fixed:[],moving:[],builder:[]},lifeGuess:'',checkedLife:false};
+let R,D,drawnWheels=[],currentWheelId='',segments=[],grip=null,lifeFrame=null,toastTimer,dirty=true,last=performance.now(),lastUI=0,lastFrame=0,labelPool=[],focusOld=null,dialogReturnFocus=null;
+try{const saved=JSON.parse(localStorage.getItem('pulley-discussion-v2')||'[]');if(Array.isArray(saved))S.snapshots=saved.filter(x=>x&&typeof x.title==='string'&&typeof x.image==='string'&&x.image.startsWith('data:image/png;')).slice(-3)}catch{}
+const rig=()=>S[S.page];
+const physics=()=>Core.stats(rig(),S.page);
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3400)}
+function label(t,p,kind='',id=''){R.label(t,p,kind,id)}
+function btn(t,a,cls='',attr=''){return `<button class="${cls}" data-action="${a}" ${attr}>${t}</button>`}
+function choice(t,a,active,attr=''){return btn(t,a,active?'active':'',attr)}
+function range(t,key,min,max,step,val,unit){return `<div class="range"><label for="range-${key}"><span>${t}</span><b id="val-${key}">${val}${unit}</b></label><input id="range-${key}" type="range" data-param="${key}" min="${min}" max="${max}" step="${step}" value="${val}" aria-label="${t}"></div>`}
+function metrics(){return `<div class="metrics"><div class="metric"><small>提升所需拉力</small><b id="forceValue">—</b><em>N</em></div><div class="metric"><small>货物已上升</small><b id="heightValue">0</b><em>cm</em></div><div class="metric"><small>绳端已移动</small><b id="ropeValue">0</b><em>cm</em></div></div>`}
+function pushUndo(){if(S.page==='life')return;const a=S.undo[S.page];a.push(clone(rig()));if(a.length>25)a.shift()}
+function beginEdit(){S.run=false;S.hold=false;rig().s=0;rig().tested=false;S.runReason='';S.checked=false;S.picked=[];dirty=true}
+function setPage(page){
+ if(!PAGE[page])return;
+ S.run=false;S.hold=false;S.page=page;S.selected=null;S.wire=false;S.pick=false;S.checked=false;S.picked=[];S.marks=[];S.annotations=[];S.tool='grab';focusOld=null;
+ if(page!=='life')S.life.playing=false;
+ if(page==='life')S.life.playing=!S.life.explode&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+ try{history.replaceState(null,'','#'+page)}catch{}
+ render();view('whole');
+}
+function view(kind){
+ S.tool='grab';const life=S.page==='life';let target=life?[0,2.9,0]:[0,7.0,0],dist=life?13:26;
+ if(kind==='close'){
+  const o=drawnWheels.find(w=>w.id===S.selected)||drawnWheels[0];
+  if(o)target=V.add(o.p,[0,0,.05]);dist=life?4.6:5.2;
+  if(!focusOld)focusOld=clone(R.camera);
+ }else focusOld=null;
+ const ar=Math.max(.5,$('stage').clientWidth/$('stage').clientHeight);
+ if(kind!=='close')dist*=Math.max(1,.92/ar);
+ R.targetCam={yaw:kind==='front'?0:.23,pitch:kind==='front'?0:.13,dist,target};
+ dirty=true;renderTools();
+}
+function layout(r){
+ const pos={},start=-(r.route.length-1)*RADIUS+r.shift*1.2,h=(r.s/(Core.inspect(r).n||1))/CM;
+ r.route.forEach((id,i)=>{const c=r.components.find(c=>c.id===id);if(c)pos[id]=[start+i*2*RADIUS,c.mount==='fixed'?FY:MY+h,0]});
+ let idx=0;for(const c of r.components){if(!pos[c.id]){pos[c.id]=[-4.2+(idx++)*1.5,c.mount==='fixed'?FY:c.mount==='moving'?MY+h:1.3,-.8]}}
+ return {pos,start,h,barY:MY+h-1.0};
+}
+function mountName(c){return c.mount==='fixed'?'挂在横梁':c.mount==='moving'?'连着货物':'尚未挂接'}
+function render(){
+ document.querySelectorAll('[data-page]').forEach(b=>{b.classList.toggle('active',b.dataset.page===S.page);b.setAttribute('aria-current',b.dataset.page===S.page?'page':'false')});
+ $('stageTitle').textContent=PAGE[S.page].title;$('stageSub').textContent=PAGE[S.page].sub;
+ $('savedCount').textContent=S.snapshots.length;
+ $('modelNote').textContent=S.page==='life'?'生活机构为简化示意 · 可旋转、暂停与留痕':'理想模型 · 忽略摩擦及绳、滑轮自重 · 模拟结果不是实测证据';
+ if(S.page==='life')renderLifeUI();else if(S.page==='builder')renderBuilderUI();else renderLabUI();
+ renderTools();renderTransport();updateMetrics();dirty=true;
+}
+function renderLifeUI(){
+ const l=S.life;
+ $('contextbar').innerHTML=Object.entries(LIFE).map(([id,o])=>choice(o.name,'scene',id===l.scene,`data-value="${id}"`)).join('');
+ $('panel').innerHTML=`<h2>我来观察</h2><p class="question">${LIFE[l.scene].question}</p>
+ <div class="object-title">${S.selected?'已选：滑轮 '+esc(S.selected.replace('P','')):'先点画面中的一个滑轮'}</div>
+ <div class="row">${btn('聚焦这个轮子','focus')}${btn('回到全景','whole')}</div>
+ <div class="section"><div class="row">${btn(S.marks.length?'重新标记轴心':'标出现在的轴心','mark','primary')}${btn(l.playing?'暂停观察':'让装置运动','play')}</div><p class="hint">留下起点，再观察轮轴是否离开原位置。</p></div>
+ <h3>我的判断</h3><div class="choices">${choice('轴心不移动','lifeGuess',S.lifeGuess==='fixed','data-value="fixed"')}${choice('轴心会移动','lifeGuess',S.lifeGuess==='moving','data-value="moving"')}</div>
+ <div class="row" style="margin-top:9px">${btn('用位置变化检查','checkLife','full',S.lifeGuess?'':'disabled')}</div><div id="lifeFeedback" class="status">先留下你的判断，答案不会自动出现。</div>
+ <div class="section"><div class="slim-controls">${choice('只看机构','mechanism',l.mechanism)}${choice('拆开滑轮','explode',l.explode)}${choice('追踪绳路','trace',S.trace)}${btn('换个视角','side')}</div></div>
+ <div class="section"><div class="row">${btn('保留这张观察','save')}${btn('查看对照','compare')}</div></div>`;
+}
+function renderLabUI(){
+ const fixed=S.page==='fixed',r=rig();
+ $('contextbar').innerHTML=fixed?[[0,'向下拉'],[45,'斜向下拉'],[90,'水平拉']].map(([v,t])=>choice(t,'angle',r.angle===v,`data-value="${v}"`)).join(''):
+ `${choice('只看动滑轮','direct',!S.compareDirect,'data-value="off"')}${choice('与直接提升对照','direct',S.compareDirect,'data-value="on"')}`;
+ $('panel').innerHTML=`<h2>${fixed?'我换一个条件':'我来找联系'}</h2><p class="question">${fixed?'改变拉绳方向后，哪些量会变，哪些量不变？':'哪些绳段在支承一起移动的部分？'}</p>
+ ${range('货物重力','load',5,40,5,r.load,' N')}
+ ${fixed?`<h3>把安装位置换到</h3><div class="choices">${[-1,0,1].map((v,i)=>choice(['左侧','中间','右侧'][i],'shift',r.shift===v,`data-value="${v}"`)).join('')}</div>`:
+ `${S.compareDirect?`<h3>保持什么相同？</h3><div class="choices">${choice('上升高度相同','compareMode',S.compareMode==='height','data-value="height"')}${choice('拉动距离相同','compareMode',S.compareMode==='rope','data-value="rope"')}</div>`:`<div class="row">${choice('我来选承重绳段','pick',S.pick)}${btn('检查选择','checkStrands','',S.pick?'':'disabled')}</div>`}`}
+ <details id="predictionDetails"><summary>先留一个预测，再试</summary><p class="hint">${fixed?'与同重货物直接提升相比，所需拉力会怎样？':'与直接提升相比，绳端需要移动多远？'}</p><div class="choices">${['更小／更短','相同','更大／更长'].map(t=>choice(t,'prediction',r.prediction===t,`data-value="${t}"`)).join('')}</div></details>
+ ${metrics()}<div class="row">${btn(S.data?'隐藏力的读数':'显示模型读数','data')}${choice('看运动箭头','arrows',S.arrows)}</div>
+ <div class="section"><div class="row">${btn('试着提升','play','primary')}${btn('回到起点','reset')}</div><div class="status" id="labStatus">拖蓝色绳端，或用下方滑条控制行程。</div></div>
+ <div class="row">${btn('留下轴心起点','mark')}${btn('保存并比较','save')}</div>
+ <div class="section"><div class="row">${btn(fixed?'带到改装工坊':'改成向下拉','toBuilder','full')}</div><p class="hint">先说准备改哪里，再到工坊试一试。</p></div>`;
+}
+function renderBuilderUI(){
+ const r=S.builder,c=r.components.find(x=>x.id===S.selected),p=Core.stats(r,'builder');
+ $('contextbar').innerHTML=`${btn('单定滑轮','preset','','data-value="fixed"')}${btn('单动滑轮','preset','','data-value="moving"')}${btn('从空架开始','preset','','data-value="blank"')}${btn('撤销一步','undo','',S.undo.builder.length?'':'disabled')}`;
+ let objectControls=c?`<div class="object-title">滑轮 ${esc(c.id)} · ${mountName(c)}</div><div class="choices">${choice('挂到横梁','mount',c.mount==='fixed','data-value="fixed"')}${choice('连接货物','mount',c.mount==='moving','data-value="moving"')}${btn('移除','remove','small')}</div>`:`<p class="hint">点选一个滑轮，决定挂在横梁还是连着货物。</p>`;
+ $('panel').innerHTML=`<h2>我来改装</h2><p class="question">${r.limited?'用有限的拉力，把货物升到目标线。':'保留省力作用，能不能改成向下拉？'}</p>
+ <div class="row">${btn('＋ 一个滑轮','add','',r.components.length>=4?'disabled':'')}${choice(S.wire?'正在穿绳':'重新穿绳','wire',S.wire)}</div>
+ <div class="components">${r.components.map(c=>choice(`${c.id} · ${c.mount==='fixed'?'上方':c.mount==='moving'?'下方':'未挂接'}`,'select',S.selected===c.id,`data-value="${c.id}"`)).join('')}</div>${objectControls}
+ ${S.wire?`<h3>绳头固定在哪里？</h3><div class="choices">${choice('上方支架','anchor',r.anchor==='top','data-value="top"')}${choice('下方吊架','anchor',r.anchor==='load','data-value="load"')}</div><p class="hint">再按顺序点画面中的滑轮编号。</p>`:''}
+ <div class="route" id="routeText">${r.anchor==='top'?'上方固定':'下方固定'} ${r.route.length?'→ '+r.route.map(esc).join(' → '):'· 等待穿绳'} ${r.complete?'→ 拉绳端':''}</div>
+ ${S.wire?`<div class="row">${btn('撤销一段','undoRoute')}${btn('接出自由端','finishWire','primary',r.route.length?'':'disabled')}</div>`:''}
+ ${!S.wire?`<div class="row">${btn('任务条件','challenge')}${btn(S.data?'收起读数':'看模型读数','data')}</div>${metrics()}<div class="row">${btn(S.run?'暂停':'测试提升','play','primary')}${btn('回到起点','reset')}</div>`:''}
+ <div id="builderStatus" class="status ${p.valid?'':'warn'}">${esc(p.reason)}</div><div id="checks" class="checks"></div>
+ <div class="section"><div class="slim-controls">${btn('保存作对照','save')}${btn('查看对照','compare')}${choice('我来选承重绳','pick',S.pick)}${btn(S.pick?'检查选择':'标轴心起点',S.pick?'checkStrands':'mark')}</div></div>
+ <details><summary>更多操作与模型范围</summary><div class="slim-controls">${btn('导出设计','export')}${btn('导入设计','import')}${btn('两定两动参考','preset','','data-value="four"')}${btn('一定一动参考','preset','','data-value="combined"')}</div>${range('货物重力','load',5,40,5,r.load,' N')}<p class="hint">单根绳、最多4轮、同一移动吊架。按上下交替穿绳后自动对齐为竖直绳段；不模拟多级独立吊架、斜绳受力或任意交叉绕法。未穿绳的滑轮不会自动增加省力效果。</p></details>`;
+}
+function renderTools(){
+ $('viewtools').innerHTML=`${btn('正面','front')}${btn('三维','whole')}${S.page==='life'?btn('特写','focus'):choice('特写','detail',S.detail)}${btn('放大','zoomIn')}${btn('缩小','zoomOut')}${choice('画方向','arrowTool',S.tool==='arrow')}${choice('描绳路','inkTool',S.tool==='ink')}${btn('清标注','clearMarks')}`;
+ $('drawlayer').classList.toggle('enabled',S.tool!=='grab');
+ $('predictionIndicator').textContent=S.tool==='arrow'?'拖一条箭头，表达你预测的运动方向':S.tool==='ink'?'用线画出你的解释；这不是自动给出的答案':S.wire?'穿绳中：依次点滑轮编号，再接出自由端':'';
+}
+function renderTransport(){
+ const life=S.page==='life',p=life?null:physics(),val=life?Math.round(((1-Math.cos(S.life.time*.58))/2)*100):rig().s,max=life?100:p.maxS;
+ $('transport').innerHTML=`<button class="play primary" data-action="play" aria-label="${life?'播放或暂停':'测试提升或暂停'}">${icon((life?S.life.playing:S.run)?'pause':'play')}</button><label for="scrub">${life?'提升位置':'绳端行程'}</label><div class="slider"><input id="scrub" type="range" min="0" max="${max}" step="${life?1:.1}" value="${val}" aria-label="${life?'提升位置':'绳端移动距离'}"></div><output id="scrubValue">${life?val+'%':val.toFixed(1)+' cm'}</output>${life?`<select id="speed" aria-label="演示速度"><option value=".35" ${S.life.speed===.35?'selected':''}>慢速</option><option value=".7" ${S.life.speed===.7?'selected':''}>常速</option></select>`:''}${btn('回起点','reset','small')}`;
+}
+function updateMetrics(){
+ const playing=S.page==='life'?S.life.playing:S.run;
+ const transportPlay=$('transport').querySelector('[data-action="play"]');
+ if(transportPlay&&transportPlay.dataset.playing!==String(playing)){transportPlay.innerHTML=icon(playing?'pause':'play');transportPlay.dataset.playing=String(playing)}
+ const panelPlay=$('panel').querySelector('[data-action="play"]');
+ if(panelPlay)panelPlay.textContent=playing?'暂停':S.page==='life'?'让装置运动':S.page==='builder'?'测试提升':'试着提升';
+ if(S.page==='life'){
+  const val=Math.round((1-Math.cos(S.life.time*.58))*50);if(document.activeElement!==$('scrub'))$('scrub').value=val;$('scrubValue').textContent=val+'%';
+  const fb=$('lifeFeedback');if(fb){if(S.checkedLife){const w=drawnWheels.find(x=>x.id===S.selected)||drawnWheels[0];if(w){const agree=(w.kind==='M')===(S.lifeGuess==='moving');fb.textContent=(agree?'你的判断与模型的轴心运动一致。':'再看轴心与固定支架的位置关系。')+'轮子会转，并不能单独判断“定”或“动”。';fb.className='status '+(agree?'ok':'warn')}}else fb.textContent=S.marks.length?'已留下轴心起点。让装置运动，再与起点比较。':'先留下你的判断，答案不会自动出现。'}
+ }else{
+  const r=rig(),p=physics();if($('forceValue'))$('forceValue').textContent=S.data&&p.valid?p.F.toFixed(p.F%1?1:0):'—';if($('heightValue'))$('heightValue').textContent=p.h.toFixed(1);if($('ropeValue'))$('ropeValue').textContent=r.s.toFixed(1);
+  if($('scrub')){if(document.activeElement!==$('scrub'))$('scrub').value=r.s;$('scrub').max=p.maxS;$('scrubValue').textContent=r.s.toFixed(1)+' cm'}
+  let reason=S.runReason||(!p.valid?p.reason:S.run?'正在缓慢提升；可以随时暂停。':r.tested?'停在当前状态，比较位置与绳路。':'拖蓝色绳端，或点击测试。');
+  if(S.checked&&S.pick){const correct=segments.filter(x=>x.support).map(x=>x.id);const ok=correct.length===S.picked.length&&correct.every(x=>S.picked.includes(x));reason=(ok?'你选出的绳段与支承关系一致。':'保留你的选择，再看高亮的支承绳段。')+'只数向上支承整个移动部分的绳段。'}
+  const st=$('labStatus')||$('builderStatus');if(st){st.textContent=reason;st.className='status '+(!p.valid||!p.enough?'warn':'')}
+  const ck=$('checks');if(ck){ck.innerHTML=r.limited&&r.tested?[
+   ['拉力是否够用',p.F<=r.capacity,S.data?p.F.toFixed(1)+' / '+r.capacity+' N':(p.F<=r.capacity?'足够':'不够')],
+   ['拉绳距离',p.needS<=Math.min(r.travel,p.geometric)+1e-8,Math.round(p.needS)+' / '+r.travel+' cm'],
+   ['操作方向',p.directionOK,p.direction==='down'?'向下拉':'向上拉'],
+   ['到达目标',p.reached,p.h.toFixed(1)+' / '+r.target+' cm']
+  ].map(([l,ok,v])=>`<div><span>${l}</span><span class="${ok?'pass':'fail'}">${ok?'✓':'×'} ${v}</span></div>`).join(''):''}
+ }
+ const b=$('transport').querySelector('.play');if(b)b.innerHTML=icon((S.page==='life'?S.life.playing:S.run)?'pause':'play');
+ const note=R?(R.soft?'Canvas 三维后备 · T2':'WebGL2 三维 · T4'):'三维加载中';$('rendererNote').textContent=note+' · 离线 · v2.0';
+}
+/* ---------------- Replaceable procedural assets and scene assembly ---------------- */
+function rope(points,col=C.rope,beads=true){
+ for(let i=1;i<points.length;i++)R.rod(points[i-1],points[i],.027,col);
+ if(beads&&S.trace){const len=pathLength(points);for(let d=.16;d<len;d+=.65)R.sphere(pathPoint(points,d),.042,'#fff4d4')}
+}
+function bench(){
+ R.box([0,-.17,-.5],[11.8,.28,3.0],'#e3eaf3');R.shadow(0,0,4.8,1.1);
+ for(let x of[-5.35,5.35]){R.box([x,TOP/2,-.7],[.22,TOP,.28],C.dark);R.box([x,.13,-.5],[.6,.26,2.5],C.dark)}
+ R.box([0,TOP,-.7],[10.9,.27,.32],C.dark);
+ for(let x of[-3.2,0,3.2]){R.box([x,TOP-.12,-.55],[.34,.48,.34],C.dark);R.sphere([x,TOP-.12,-.34],.075,'#f0bb40')}
+}
+function topConnect(x,y,z=0){R.rod([x,TOP,-.7],[x,TOP,z],.05,C.dark);R.rod([x,TOP,z],[x,y+.98,z],.035,C.dark);R.torus([x,y+1.04,z],.09,.22,C.dark)}
+function addSeg(id,a,b,support){segments.push({id,a,b,support})}
+function drawMovingBlock(xs,y,zs=[]){
+ let center=xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:0;
+ if(xs.length>1){let barY=y-1.06;R.rod([Math.min(...xs)-.08,barY,0],[Math.max(...xs)+.08,barY,0],.065,C.dark);xs.forEach((x,i)=>R.rod([x,y-.98,zs[i]||0],[x,barY,0],.045,C.dark));R.rod([center,barY,0],[center,barY-.20,0],.035,C.dark);crate(center,barY-1.12,0,1.25)}
+ else{crate(center,y-1.96,0,1.25);R.torus([center,y-.96,0],.10,.22,C.dark)}
+ return center;
+}
+function drawFixed(r){
+ bench();const x=-.8+r.shift*1.2,y=FY,rr=RADIUS,h=r.s/CM,loadY=3.45+h;
+ currentWheelId='A';pulley(x,y,rr,'F',-h/rr);topConnect(x,y);currentWheelId='';
+ const a=r.angle*Math.PI/180,dir=[Math.sin(a),-Math.cos(a),0],tangent=[x+rr*Math.cos(a),y+rr*Math.sin(a),0],end=V.add(tangent,V.mul(dir,1.55+h)),start=[x-rr,loadY,0];
+ const pts=[start,...arc(x,y,rr,Math.PI,a),end];rope(pts);crate(x-rr,loadY-1.02,0,1.25);R.torus(start,.09,.25,C.dark);handle(end,dir[1]>0?'up':'down',C.blue);
+ addSeg('1',start,[x-rr,y,0],true);addSeg('2',tangent,end,false);grip={p:end,dir};
+ if(S.arrows){arrow([x-rr-.7,loadY,0],[x-rr-.7,loadY+.8,0],C.blue);arrow(V.add(end,[.35,.3,0]),V.add(V.add(end,[.35,.3,0]),V.mul(dir,.85)),C.rope)}
+ label('货物',[x-rr,loadY-1.75,.35],'note');window.__ropeLength=pathLength(pts);
+}
+function drawMoving(r){
+ bench();const ph=Core.stats(r,'moving'),x=S.compareDirect?1.6:-.4,y=MY+ph.h/CM,rr=RADIUS,end=[x+rr,5.5+r.s/CM,0],start=[x-rr,TOP-.25,0];
+ anchor(start[0],start[1]);R.rod([start[0],TOP,-.7],[start[0],TOP,0],.04,C.dark);currentWheelId='A';pulley(x,y,rr,'M',ph.h/CM/rr);currentWheelId='';drawMovingBlock([x],y);
+ const pts=[start,...arc(x,y,rr,Math.PI,2*Math.PI),end];rope(pts);handle(end,'up',C.blue);grip={p:end,dir:[0,1,0]};
+ addSeg('1',start,[x-rr,y,0],true);addSeg('2',[x+rr,y,0],end,true);window.__ropeLength=pathLength(pts);
+ if(S.arrows){arrow([x-rr-.4,y+.2,0],[x-rr-.4,y+1,0],C.blue);arrow([x+rr+.4,y+.2,0],[x+rr+.4,y+1,0],C.blue)}
+ if(S.compareDirect){
+  const directH=S.compareMode==='height'?ph.h:ph.s,cy=2.54+directH/CM,topY=cy+1.02;crate(-3.1,cy,0,1.25);rope([[-3.1,topY,0],[-3.1,topY+.8,0]],'#9aaac0',false);handle([-3.1,topY+.8,0],'up','#7797c9');
+  label('直接提升',[-3.1,1.0,.4],'note');label('动滑轮',[x,1.0,.4],'note');
+  label(`上升 ${directH.toFixed(1)} cm`,[-3.1,cy-.85,.3],'note');
+  label(S.data?`${r.load} N · 移动 ${directH.toFixed(1)} cm`:`绳端移动 ${directH.toFixed(1)} cm`,[-3.1,topY+1.45,0],'note');
+  label(S.data?`${ph.F.toFixed(1)} N · 移动 ${ph.s.toFixed(1)} cm`:`绳端移动 ${ph.s.toFixed(1)} cm`,[x,12.0,0],'note');
+ }
+}
+function drawBuilder(r){
+ bench();const p=Core.stats(r,'builder'),lay=layout(r),{pos,start,h,barY}=lay;
+ for(const c of r.components){const v=pos[c.id],i=r.route.indexOf(c.id);currentWheelId=c.id;pulley(v[0],v[1],RADIUS,c.mount==='moving'?'M':'F',i<0?0:(c.mount==='moving'?1:-1)*(i+1)*h/RADIUS,v[2]);currentWheelId='';if(c.mount==='fixed')topConnect(v[0],v[1],v[2])}
+ const moving=r.components.filter(c=>c.mount==='moving'),xs=moving.map(c=>pos[c.id][0]);
+ let loadX=xs.length?xs.reduce((a,b)=>a+b,0)/xs.length:0;
+ if(moving.length){
+  if(moving.length>1){R.rod([Math.min(...xs)-.05,barY,0],[Math.max(...xs)+.05,barY,0],.07,C.dark);for(const c of moving)R.rod(V.add(pos[c.id],[0,-.98,0]),[pos[c.id][0],barY,0],.04,C.dark)}
+  else R.rod([loadX,MY+h-.98,0],[loadX,barY-.12,0],.04,C.dark);
+ }
+ if(r.anchor==='load'&&r.route.length){const ax=start-RADIUS;R.rod([ax,barY,0],[loadX,barY,0],.055,C.dark)}
+ R.rod([loadX,barY,0],[loadX,barY-.3225,0],.04,C.dark);crate(loadX,barY-1.22,0,1.25);
+ const mayDraw=r.route.length>0&&r.route.every(id=>pos[id]);
+ if(mayDraw){
+  const ax=start-RADIUS,ay=r.anchor==='top'?TOP-.25:barY,begin=[ax,ay,0],pts=[begin];anchor(ax,ay);if(r.anchor==='top')R.rod([ax,TOP,-.7],[ax,TOP,0],.04,C.dark);
+  let previous=begin;let k=1;
+  for(const id of r.route){const c=r.components.find(c=>c.id===id),v=pos[id];const entry=[v[0]-RADIUS,v[1],v[2]];addSeg(String(k++),previous,entry,true);pts.push(...arc(v[0],v[1],RADIUS,Math.PI,c.mount==='fixed'?0:2*Math.PI,v[2]));previous=[v[0]+RADIUS,v[1],v[2]]}
+  if(r.complete){const end=[previous[0],p.direction==='down'?10.8-r.s/CM:5.5+r.s/CM,0];pts.push(end);addSeg(String(k),previous,end,p.direction==='up');handle(end,p.direction,C.blue);grip={p:end,dir:[0,p.direction==='down'?-1:1,0]}}
+  rope(pts);window.__ropeLength=pathLength(pts);label(r.anchor==='top'?'固定绳头':'绳头连吊架',[ax-.45,ay+.35,.2],'note');
+ }else window.__ropeLength=0;
+ if(r.limited){const gy=MY-1-1.22+r.target/CM;for(let xx=-4.7;xx<4.6;xx+=.5)R.rod([xx,gy,.4],[xx+.27,gy,.4],.018,'#8a9dbd');label(`目标 +${r.target} cm`,[-3.9,gy+.35,.4],'note')}
+ if(S.arrows&&grip){const ep=grip.p;arrow(V.add(ep,[.5,0,0]),V.add(V.add(ep,[.5,0,0]),V.mul(grip.dir,.85)),C.rope)}
+}
+function drawOverlays(){
+ for(const w of drawnWheels){
+  const selected=w.id===S.selected;if(selected){R.torus([w.p[0],w.p[1],w.p[2]+.22],w.r+.12,.026,'#316ce4')}
+  label((S.page==='life'?'滑轮 ':'')+w.id.replace(/^P/,''),S.page==='life'?[w.p[0],w.p[1]+.78,w.p[2]+.38]:[w.p[0]-w.r-.62,w.p[1]+.15,w.p[2]+.38],'hit'+(selected?' selected':''),'wheel:'+w.id);
+ }
+ if(grip)label('拖动拉绳',V.add(grip.p,[.0,grip.dir[1]>=0?.62:-.68,.42]),'grip','grip');
+ for(const mark of S.marks){
+  const w=drawnWheels.find(x=>x.id===mark.id);R.torus([mark.p[0],mark.p[1],mark.p[2]+.38],.12,.18,'#7195d1');
+  if(w&&V.len(V.sub(w.p,mark.p))>.1){const d=V.sub(w.p,mark.p),len=V.len(d),u=V.norm(d);for(let s=0;s<len;s+=.30)R.rod(V.add(mark.p,V.add(V.mul(u,s),[0,0,.35])),V.add(mark.p,V.add(V.mul(u,Math.min(s+.17,len)),[0,0,.35])),.018,'#7c9ed7')}
+  label('原轴心',V.add(mark.p,[-.65,-.1,.45]),'axis');
+ }
+ if(S.pick){for(const seg of segments){
+  const mid=V.mul(V.add(seg.a,seg.b),.5);const picked=S.picked.includes(seg.id),correct=S.checked&&seg.support;
+  if(picked||correct)R.rod(V.add(seg.a,[0,0,.06]),V.add(seg.b,[0,0,.06]),.047,correct?'#4c80d8':'#e1ab3b');
+  label(seg.id,V.add(mid,[.15,0,.25]),'strand'+(picked?' picked':'')+(correct?' correct':''),'strand:'+seg.id);
+ }}
+ if(S.ghost){const saved=S.snapshots.filter(x=>x.page===S.page).slice(-1)[0];if(saved&&Array.isArray(saved.wheels))for(const w of saved.wheels)R.torus(V.add(w.p,[0,0,-.3]),w.r,.022,'#a7b6cc')}
+}
+function drawAnnotations(){
+ let html='<defs><marker id="arrowhead" markerWidth="7" markerHeight="7" refX="5.4" refY="3.5" orient="auto"><path d="M0 0 7 3.5 0 7z" fill="#2b6ee5"/></marker></defs>';
+ for(const mark of S.annotations){const ps=mark.points.map(p=>R.project(p)).filter(Boolean);if(ps.length<2)continue;html+=`<polyline points="${ps.map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ')}" fill="none" stroke="#2b6ee5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" ${mark.kind==='arrow'?'marker-end="url(#arrowhead)"':''}/>`}
+ $('drawlayer').innerHTML=html;
+}
+function updateLabels(){
+ for(let i=0;i<R.labels.length;i++){
+  const l=R.labels[i];let b=labelPool[i];if(!b){b=document.createElement('button');$('labels').appendChild(b);labelPool.push(b);b.addEventListener('click',e=>{if(b.dataset.id==='grip')return;if(b.dataset.id){e.stopPropagation();onWorldClick(b.dataset.id)}});setupGripInput(b)}
+  const p=R.project(l.pos);b.className='label '+l.kind;b.textContent=l.text;b.dataset.id=l.id||'';b.tabIndex=l.id?0:-1;b.setAttribute('aria-label',l.id==='grip'?'拖动绳端控制提升':l.text);b.style.display=p&&p.visible?'block':'none';
+  if(p){b.style.left=p.x+'px';b.style.top=p.y+'px'}
+ }
+ for(let i=R.labels.length;i<labelPool.length;i++){labelPool[i].style.display='none';labelPool[i].dataset.id='';labelPool[i].tabIndex=-1;}
+}
+function screenWorld(clientX,clientY){
+ const rect=$('world').getBoundingClientRect(),sx=(clientX-rect.left)/rect.width*2-1,sy=1-(clientY-rect.top)/rect.height*2,c=R.camera;
+ const eye=V.add(c.target,[Math.sin(c.yaw)*Math.cos(c.pitch)*c.dist,Math.sin(c.pitch)*c.dist,Math.cos(c.yaw)*Math.cos(c.pitch)*c.dist]),forward=V.norm(V.sub(c.target,eye)),right=V.norm(V.cross(forward,[0,1,0])),up=V.cross(right,forward),tan=Math.tan(.64/2),aspect=rect.width/rect.height;
+ const d=V.norm(V.add(forward,V.add(V.mul(right,sx*tan*aspect),V.mul(up,sy*tan))));if(Math.abs(d[2])<.05)return c.target;
+ const t=(.6-eye[2])/d[2];return V.add(eye,V.mul(d,t));
+}
+function drawAll(){
+ drawnWheels=[];segments=[];grip=null;currentWheelId='';R.begin();
+ if(S.page==='life'){lifeFrame=sceneLife(S.life,S.life.time);R.labels=[]}
+ else if(S.page==='fixed')drawFixed(S.fixed);else if(S.page==='moving')drawMoving(S.moving);else drawBuilder(S.builder);
+ drawOverlays();R.draw();updateLabels();drawAnnotations();drawDetail();window.__appReady=true;window.__renderMode=R.soft?'software-3d':'webgl2';
+}
+/* ---------------- Interaction and state transitions ---------------- */
+
+/* A linked close-up, not a second independent simulation. Camera follows the selected axle. */
+function drawDetail(){
+ const box=$('detailBox');box.hidden=!S.detail||S.page==='life';
+ if(box.hidden||!drawnWheels.length)return;
+ const w=drawnWheels.find(x=>x.id===S.selected)||drawnWheels[0],main=R,ws=drawnWheels;
+ if(!D)D=new Stage3D($('detailWorld'));
+ D.begin();D.camera={yaw:.44,pitch:.12,dist:3.9,target:[0,0,0]};D.targetCam=null;
+ R=D;drawnWheels=[];
+ try{
+  pulley(0,0,w.r,w.kind,w.angle,0);
+  // Translate the actual main-scene rope segments into the axle-following view.
+  for(const seg of segments){if(V.len(V.sub(seg.a,w.p))<w.r+.08||V.len(V.sub(seg.b,w.p))<w.r+.08)R.rod(V.sub(seg.a,w.p),V.sub(seg.b,w.p),.027,C.rope)}
+  const r=rig(),linked=S.page!=='builder'||r.route.includes(w.id);
+  if(linked)rope(arc(0,0,w.r,Math.PI,w.kind==='M'?Math.PI*2:S.page==='fixed'?r.angle*Math.PI/180:0),C.rope,false);
+  D.draw();
+ }finally{R=main;drawnWheels=ws}
+ $('detailTitle').textContent='滑轮 '+w.id+' · 同步特写';
+}
+
+function onWorldClick(id){
+ if(id.startsWith('strand:')){const n=id.split(':')[1];S.checked=false;S.picked=S.picked.includes(n)?S.picked.filter(x=>x!==n):[...S.picked,n];dirty=true;updateMetrics();return}
+ if(id.startsWith('wheel:')){
+  const n=id.slice(6);S.selected=n;S.checkedLife=false;
+  if(S.page==='builder'&&S.wire){wireWheel(n);return}
+  render();return;
+ }
+}
+function wireWheel(id){
+ const r=S.builder,c=r.components.find(x=>x.id===id);if(!c)return;
+ if(!c.mount){S.selected=id;toast('先把这个滑轮挂到横梁，或连接到货物。');render();return}
+ if(r.route.includes(id)){toast('这个轮槽已经穿过。可撤销一段后再试。');return}
+ const expected=r.route.length?(r.components.find(x=>x.id===r.route[r.route.length-1]).mount==='fixed'?'moving':'fixed'):(r.anchor==='top'?'moving':'fixed');
+ if(c.mount!==expected){toast(expected==='moving'?'这个有限模型下一段应绕下方滑轮；可以先改变挂接。':'这个有限模型下一段应绕上方滑轮；可以先改变挂接。');return}
+ pushUndo();beginEdit();r.route.push(id);r.complete=false;render();
+}
+function play(){
+ if(S.page==='life'){S.life.explode=false;S.life.playing=!S.life.playing;render();return}
+ const r=rig(),p=physics();if(!p.valid){toast(p.reason);return}
+ if(S.run){S.run=false;updateMetrics();return}
+ r.tested=true;
+ if(!p.enough){S.runReason='可用拉力不足：装置保持原位。试着改装，或修改任务条件。';S.run=false;updateMetrics();dirty=true;return}
+ let end=Math.min(r.target*p.n,p.maxS);
+ if(r.s>=end-.03)r.s=0;
+ S.run=true;S.runReason='';updateMetrics();dirty=true;
+}
+function moveRope(value){
+ const r=rig(),p=physics();S.run=false;r.tested=true;
+ if(!p.valid){toast(p.reason);return}
+ if(!p.enough){S.runReason='当前可用拉力不足，不能用拖动越过力量限制。';updateMetrics();return}
+ r.s=clamp(value,0,p.maxS);S.runReason='';dirty=true;updateMetrics();
+}
+function resetPosition(){
+ S.run=false;S.runReason='';S.checked=false;S.checkedLife=false;
+ if(S.page==='life'){S.life.time=0;S.life.playing=false}else{rig().s=0;rig().tested=false}
+ dirty=true;updateMetrics();
+}
+function switchPreset(kind){
+ if(S.page!=='builder')setPage('builder');pushUndo();
+ const old=S.builder,f=freshRig(kind);for(const k of['load','capacity','target','travel','required','limited'])f[k]=old[k];S.builder=f;S.selected=null;S.wire=kind==='blank';S.run=false;S.runReason='';S.marks=[];S.annotations=[];S.picked=[];S.checked=false;render();view('whole');
+}
+function markAxes(){
+ if(!drawnWheels.length)return;const chosen=S.selected?drawnWheels.filter(w=>w.id===S.selected):drawnWheels;
+ S.marks=chosen.map(w=>({id:w.id,p:[...w.p]}));S.life.playing=false;S.run=false;dirty=true;render();toast('轴心起点已保留。再让装置运动，比较位置。');
+}
+function showDialog(title,content){
+ dialogReturnFocus=document.activeElement;S.run=false;S.life.playing=false;$('dialogTitle').textContent=title;$('dialogBody').innerHTML=content;$('drawer').classList.add('open');$('drawer').querySelector('[data-action="close"]').focus();updateMetrics();
+}
+function closeDialog(){
+ $('drawer').classList.remove('open');if(dialogReturnFocus&&document.contains(dialogReturnFocus))dialogReturnFocus.focus();
+}
+function captureImage(){
+ const c=document.createElement('canvas'),w=640,ratio=w/R.w;c.width=w;c.height=Math.round(R.h*ratio);let ctx=c.getContext('2d');ctx.fillStyle='#f2f6fb';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage($('world'),0,0,c.width,c.height);
+ ctx.strokeStyle='#316ce4';ctx.lineWidth=3;for(const a of S.annotations){const points=a.points.map(p=>R.project(p));ctx.beginPath();points.forEach((p,i)=>{if(p){i?ctx.lineTo(p.x*ratio,p.y*ratio):ctx.moveTo(p.x*ratio,p.y*ratio)}});ctx.stroke();if(a.kind==='arrow'&&points.length>1){let e=points[points.length-1],p=points[points.length-2],ang=Math.atan2(e.y-p.y,e.x-p.x);ctx.beginPath();ctx.moveTo(e.x*ratio,e.y*ratio);ctx.lineTo(e.x*ratio-10*Math.cos(ang-.5),e.y*ratio-10*Math.sin(ang-.5));ctx.moveTo(e.x*ratio,e.y*ratio);ctx.lineTo(e.x*ratio-10*Math.cos(ang+.5),e.y*ratio-10*Math.sin(ang+.5));ctx.stroke()}}
+ return c.toDataURL('image/png');
+}
+function save(){
+ if(S.snapshots.length>=3){toast('已保留3个方案。请先在对照中移除一个，再保存新的。');showCompare();return}
+ S.run=false;S.life.playing=false;drawAll();let entry={id:Date.now(),page:S.page,title:S.page==='life'?LIFE[S.life.scene].name:S.page==='fixed'?'定滑轮 · '+({0:'向下拉',45:'斜下拉',90:'水平拉'}[S.fixed.angle]):S.page==='moving'?'动滑轮研究':'我的改装',image:captureImage(),marks:clone(S.marks),annotations:clone(S.annotations),wheels:clone(drawnWheels),timestamp:new Date().toISOString()};
+ if(S.page==='life'){entry.life=clone(S.life);entry.guess=S.lifeGuess}else{entry.rig=clone(rig());entry.stats=Core.stats(entry.rig,S.page);entry.guess=entry.rig.prediction;entry.direct=S.compareDirect;entry.mode=S.compareMode}
+ S.snapshots.push(entry);persist();render();toast('已保留。改变一个条件，再保存一份进行对照。');
+}
+function persist(){try{localStorage.setItem('pulley-discussion-v2',JSON.stringify(S.snapshots))}catch{ /* Current session remains usable even when file/private-mode storage is denied. */ }}
+function showCompare(){
+ let a=S.snapshots,nonlife=a.filter(x=>x.rig),same=nonlife.length>1&&nonlife.every(x=>x.rig.load===nonlife[0].rig.load&&x.rig.target===nonlife[0].rig.target);
+ const note=nonlife.length>1?`<p class="${same?'hint':'warning-strip'}">${same?'货物重力和目标高度相同；再比较你改变的连接或拉动方向。':'注意：这些方案的货物或目标高度不同，不能仅看拉力大小就判断哪个方案更好。'}</p>`:'';
+ showDialog('留下不同方案，一起解释',`${note}${a.length?`<div class="compare-grid">${a.map((e,i)=>{
+  const p=e.stats,r=e.rig;
+  return `<article class="compare-card"><img src="${e.image}" alt="方案${i+1}的三维状态"><h3>${String.fromCharCode(65+i)} · ${esc(e.title)}</h3>${r?`<p>${r.tested?'已操作的模型快照':'设计快照，尚未测试'} · 货物 ${r.load} N</p><p>绳头：${r.anchor==='top'?'固定支架':'移动吊架'}；绳路 ${r.route.join(' → ')||'未完成'}</p><div class="barrow"><span>所需拉力 ${Number.isFinite(p.F)?p.F.toFixed(1):'—'} N</span><i style="width:${Number.isFinite(p.F)?clamp(p.F/40*100,0,100):0}px"></i></div><div class="barrow"><span>已拉 ${p.s.toFixed(1)} cm</span><i class="orange" style="width:${p.s/50*100}px"></i></div><p>上升 ${p.h.toFixed(1)} cm；目标 ${r.target} cm</p><p>方向：${{down:'向下',up:'向上',right:'水平',diagonal:'斜向下'}[p.direction]||'待定'}</p>`:`<p>观察对象：${esc(e.title)}</p>`}${e.guess?`<p>原来的判断：${esc(e.guess==='fixed'?'轴心不移动':e.guess==='moving'?'轴心会移动':e.guess)}</p>`:''}<div class="row">${btn('复制后修改','restore','small',`data-index="${i}"`)}${btn('移除','deleteSaved','small',`data-index="${i}"`)}</div></article>`}).join('')}</div>`:'<div class="empty">还没有保留方案。先留下一个观察或设计，再改变条件，回来比较。</div>'}<p class="hint">所有数字来自当前模型，不是实测数据。比较后再说明：你改了什么？哪些现象支持或不支持原来的想法？</p><div class="compare-actions">${btn('导出对照资料','exportComparisons','',a.length?'':'disabled')}${btn('返回继续尝试','close','primary')}</div>`);
+}
+function restore(i){
+ const e=S.snapshots[i];if(!e)return;closeDialog();setPage(e.page);if(e.page==='life'){S.life={...clone(e.life),playing:false};S.lifeGuess=e.guess||''}else{S[e.page]=clone(e.rig);S.compareDirect=!!e.direct;S.compareMode=e.mode||'height'}S.marks=clone(e.marks||[]);S.annotations=clone(e.annotations||[]);S.runReason='从保留方案复制，现在可以继续改动。';render();view('whole');
+}
+function download(name,data,mime){const u=URL.createObjectURL(new Blob([data],{type:mime})),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+function exportDesign(taskOnly=false){
+ const r=S.page==='life'?S.builder:rig();let payload={kind:taskOnly?'pulley-task':'pulley-design',version:2};
+ if(taskOnly){payload.task=Object.fromEntries(['load','capacity','target','travel','required'].map(k=>[k,r[k]]))}else payload.rig=clone(r);
+ download(taskOnly?'妙用滑轮_给同伴的任务.json':'妙用滑轮_我的设计.json',JSON.stringify(payload,null,2),'application/json');
+}
+function sanitizeRig(input){
+ if(!input||typeof input!=='object'||!Array.isArray(input.components)||input.components.length>4||!Array.isArray(input.route)||input.route.length>4)throw Error('设计格式不正确，最多支持4个滑轮。');
+ const r=freshRig('blank');let ids=new Set();r.components=input.components.map(c=>{if(!c||!['A','B','C','D'].includes(c.id)||ids.has(c.id)||![null,'fixed','moving'].includes(c.mount))throw Error('滑轮编号或挂接方式无效。');ids.add(c.id);return{id:c.id,mount:c.mount}});
+ r.route=input.route.map(x=>{if(!ids.has(x))throw Error('绳路包含不存在的滑轮。');return x});if(new Set(r.route).size!==r.route.length)throw Error('绳路不能重复穿过同一个槽。');
+ if(!['top','load'].includes(input.anchor))throw Error('固定端无效。');r.anchor=input.anchor;r.complete=!!input.complete;
+ for(const [key,min,max]of[['load',1,100],['capacity',1,100],['target',1,25],['travel',5,50],['angle',0,90],['shift',-1,1]]){const n=Number(input[key]);if(!Number.isFinite(n)||n<min||n>max)throw Error(key+' 的值超出范围。');r[key]=n}
+ if(!['up','down','any'].includes(input.required))throw Error('方向条件无效。');if(![0,45,90].includes(r.angle))throw Error('当前版本只支持0、45、90度三个拉动方向。');r.required=input.required;r.limited=!!input.limited;r.prediction=typeof input.prediction==='string'?input.prediction.slice(0,40):'';r.s=0;r.tested=false;
+ if(r.complete&&r.route.length&&!Core.inspect(r).valid)throw Error(Core.inspect(r).reason);return r;
+}
+async function importDesign(file){
+ if(!file)return;try{if(file.size>150000)throw Error('文件过大，请选择本页导出的设计或任务 JSON。');const d=JSON.parse(await file.text());if(d.version!==2)throw Error('不是v2格式的设计文件。');let r;
+ if(d.kind==='pulley-design')r=sanitizeRig(d.rig);else if(d.kind==='pulley-task'){let input={...freshRig('blank'),...d.task,limited:true};r=sanitizeRig(input)}else throw Error('不能识别这个文件类型。');
+ setPage('builder');pushUndo();S.builder=r;S.wire=!r.complete;S.selected=null;render();toast(d.kind==='pulley-task'?'已收到任务，设计从空架开始。':'设计已导入，回到起点准备比较。');
+ }catch(e){toast('导入失败：'+e.message)}finally{$('importFile').value=''}
+}
+function challengeDialog(){
+ const r=S.builder;
+ showDialog('换一个条件，也可以出题给同伴',`<p>先选择自由改装，或只对本次任务设置限制。不同方案可以有不同的优势。</p><div class="choices">${choice('自由改装','taskMode',!r.limited,'data-value="free"')}${choice('按条件测试','taskMode',r.limited,'data-value="limited"')}</div><div id="taskForm" data-limited="${r.limited}">
+ ${range('货物重力','task-load',5,40,5,r.load,' N')}${range('最大可用拉力','task-capacity',2,40,1,r.capacity,' N')}${range('目标提升高度','task-target',5,20,1,r.target,' cm')}${range('最多可拉绳距离','task-travel',10,50,5,r.travel,' cm')}
+ <label class="field-label" for="taskDirection">希望怎样拉绳？</label><select id="taskDirection"><option value="down" ${r.required==='down'?'selected':''}>向下拉</option><option value="up" ${r.required==='up'?'selected':''}>向上拉</option><option value="any" ${r.required==='any'?'selected':''}>方向不限</option></select></div><p class="hint">任务条件是你设定的，不保证每组条件都有可行方案。出题文件只含条件，不含你的设计答案。</p><div class="compare-actions">${btn('应用并导出任务','applyExportTask')}${btn('应用条件','applyTask','primary')}</div>`);
+}
+function applyTask(exportIt=false){
+ const r=S.builder;pushUndo();beginEdit();for(const key of['load','capacity','target','travel'])r[key]=Number($('range-task-'+key).value);r.required=$('taskDirection').value;r.limited=$('taskForm').dataset.limited==='true';closeDialog();render();if(exportIt)exportDesign(true);
+}
+function help(){showDialog('课堂用法与模型边界',`<h3>主要用于真实实验之后</h3><p>保留教材中的实物观察、组装、测量和记录。网页用于研讨时看清轴心运动、表达预测、改变一个条件并保留方案，不是重新做一遍教材实验。可直接打开任意页，不需要完成全部页面。</p><h3>学生怎样操作</h3><p>点画面中的滑轮编号选择对象；拖蓝色拉绳端，或拖底部行程滑条控制提升。空白处拖动转动视角，双指缩放或点放大缩小。“画方向”和“描绳路”保留学生自己的解释；“清标注”只清除标记，不删除设计。</p><p>在改装工坊添加同一种滑轮，再选择“挂到横梁”或“连接货物”。重新穿绳时，先选固定端，再依次点滑轮编号，最后接出自由端。可以留着未穿绳的滑轮，观察它是否改变作用。</p><h3>模拟不等于真实证据</h3><p>取单根绷紧、不可伸长的轻绳，忽略摩擦、滑轮及吊架自重，按缓慢提升计算。数值是设定规律的计算结果，不是独立验证这些规律的测量证据。触屏按压力和拖动速度不代表真实拉力。</p><p>研究页：定滑轮一端竖直连接货物，自由端可向下、斜下或水平拉；动滑轮采用两段绳竖直向上的常见接法。省力关系不推广到任意斜绳、不同绳张力或复杂独立多级系统。</p><p>工坊：一根绳、最多4轮、所有连接货物的滑轮同属一个吊架。支持上下交替绕法，自动对齐竖直绳段。由实际绳路决定承重绳段数 n，而不是用滑轮总数代替。理想关系为 F=G/n、s=nh；只增加用于改变方向的轮子，不一定增加 n。</p><p>自由探索拖动的是绳端位移，显示所需拉力；限制任务先判断可用拉力是否足够，不足时保持原位。足够时按所需拉力缓慢提升，不模拟加速、失手坠落或绳子断裂。行程到限位后停下，不代表达到受力平衡。</p><h3>资产与视角</h3><p>本版根据讨论中的黄橙色实心轮、深灰双钩参考，使用可替换的程序化三维几何。尚未导入你在 Blender 中制作的 GLB。研究舞台的轮体直径取4 cm（坐标单位为5 cm）；生活场景为比例调整后的结构示意，不是设备精确复刻。二维截图不能替代对导出GLB的节点检查。</p><h3>教材依据与拓展</h3><p>项目中的《科学教师教学用书·五年级上册》第二单元第5课《妙用滑轮》，印刷页161—170；《科学·五年级上册》印刷页50—53。作用辨认、比较与生活应用依据教材；绳端位移比较、开放改装和任务限制是本网页的拓展设计，不作为本课必须掌握的计算要求。</p><p>物理核对：<a href="https://openstax.org/books/college-physics-2e/pages/9-5-simple-machines" target="_blank" rel="noopener">OpenStax · 9.5 Simple Machines</a>。本页未复制教材或网页插图。</p><h3>兼容与保存</h3><p>HTML 不请求外部字体、模型或脚本，可离线打开。优先使用WebGL2；失败时回退到Canvas软件三维，低性能设备可能较慢。最多保留3个方案；浏览器允许时保存在本机，隐私模式或文件环境可能不允许长期保存，可导出设计与对照资料。没有上传学生数据的服务。</p><p>全屏是否可用由浏览器环境决定。手机纵屏上下排布，一体机与平板横屏采用同屏布局。物理模型和教学任务不因显示方式改变。</p>`)}
+function act(action,b){
+ switch(action){
+ case 'play':play();break;
+ case 'reset':resetPosition();break;
+ case 'scene':S.life.scene=b.dataset.value;S.life.time=0;S.life.playing=!matchMedia('(prefers-reduced-motion: reduce)').matches;S.life.explode=false;S.selected=null;S.marks=[];S.annotations=[];S.lifeGuess='';S.checkedLife=false;render();view('whole');break;
+ case 'select':S.selected=b.dataset.value;if(S.wire)wireWheel(S.selected);else render();break;
+ case 'detail':S.detail=!S.detail;renderTools();dirty=true;break;
+ case 'front':view('front');break;
+ case 'whole':view('whole');break;
+ case 'focus':view('close');break;
+ case 'side':R.targetCam=null;R.camera.yaw+=Math.PI/3;dirty=true;break;
+ case 'zoomIn':R.targetCam=null;R.camera.dist=Math.max(3.3,R.camera.dist*.82);dirty=true;break;
+ case 'zoomOut':R.targetCam=null;R.camera.dist=Math.min(60,R.camera.dist*1.22);dirty=true;break;
+ case 'mark':markAxes();break;
+ case 'mechanism':S.life.mechanism=!S.life.mechanism;render();break;
+ case 'explode':S.life.explode=!S.life.explode;S.life.playing=false;S.selected=S.selected||'P1';render();if(S.life.explode)view('close');break;
+ case 'trace':S.trace=!S.trace;render();break;
+ case 'lifeGuess':S.lifeGuess=b.dataset.value;S.checkedLife=false;render();break;
+ case 'checkLife':if(!S.selected){S.selected=(drawnWheels[0]||{}).id}S.checkedLife=true;S.life.playing=false;updateMetrics();break;
+ case 'angle':pushUndo();beginEdit();S.fixed.angle=Number(b.dataset.value);render();view('whole');break;
+ case 'shift':pushUndo();beginEdit();S.fixed.shift=Number(b.dataset.value);render();break;
+ case 'direct':S.compareDirect=b.dataset.value==='on';S.pick=false;render();view('whole');break;
+ case 'compareMode':S.compareMode=b.dataset.value;resetPosition();render();break;
+ case 'data':S.data=!S.data;render();break;
+ case 'arrows':S.arrows=!S.arrows;render();break;
+ case 'prediction':rig().prediction=b.dataset.value;render();if($('predictionDetails'))$('predictionDetails').open=true;break;
+ case 'pick':S.pick=!S.pick;S.checked=false;S.picked=[];render();break;
+ case 'checkStrands':if(!segments.length){toast('先完成绳路，才能比较支承关系。');break}S.checked=true;dirty=true;updateMetrics();break;
+ case 'toBuilder':{let copy=clone(rig());setPage('builder');S.builder=copy;S.builder.angle=0;S.builder.shift=0;S.builder.s=0;S.builder.tested=false;S.selected=copy.components[0]?.id;render();break}
+ case 'preset':switchPreset(b.dataset.value);break;
+ case 'add':{const r=S.builder;if(r.components.length>=4)return;pushUndo();beginEdit();const id=['A','B','C','D'].find(id=>!r.components.some(c=>c.id===id));r.components.push({id,mount:null});S.selected=id;render();toast('新滑轮已加入。选择挂在横梁，或连接货物。');break}
+ case 'mount':{const c=S.builder.components.find(x=>x.id===S.selected);if(!c)return;pushUndo();beginEdit();if(c.mount!==b.dataset.value&&S.builder.route.includes(c.id)){S.builder.route=[];S.builder.complete=false;S.wire=true}c.mount=b.dataset.value;render();break}
+ case 'remove':{if(!S.selected)return;pushUndo();beginEdit();S.builder.components=S.builder.components.filter(x=>x.id!==S.selected);if(S.builder.route.includes(S.selected)){S.builder.route=[];S.builder.complete=false;S.wire=true}S.selected=null;render();break}
+ case 'wire':pushUndo();beginEdit();S.builder.route=[];S.builder.complete=false;S.wire=true;S.pick=false;render();break;
+ case 'anchor':pushUndo();beginEdit();S.builder.anchor=b.dataset.value;S.builder.route=[];S.builder.complete=false;render();break;
+ case 'undoRoute':pushUndo();beginEdit();S.builder.route.pop();S.builder.complete=false;render();break;
+ case 'finishWire':if(S.builder.route.length){pushUndo();S.builder.complete=true;const p=Core.inspect(S.builder);if(!p.valid){S.builder.complete=false;toast(p.reason)}else{S.wire=false;S.runReason='绳路连通。先预测，再试拉。'}render()}break;
+ case 'undo':{const u=S.undo[S.page];if(u&&u.length){S[S.page]=u.pop();S.run=false;S.runReason='';S.wire=!rig().complete;S.selected=null;S.picked=[];S.checked=false;render()}break}
+ case 'arrowTool':case 'inkTool':S.life.playing=false;S.run=false;S.tool=S.tool===(action==='arrowTool'?'arrow':'ink')?'grab':action==='arrowTool'?'arrow':'ink';renderTools();break;
+ case 'clearMarks':S.annotations=[];S.marks=[];dirty=true;renderTools();break;
+ case 'save':save();break;
+ case 'compare':showCompare();break;
+ case 'restore':restore(Number(b.dataset.index));break;
+ case 'deleteSaved':S.snapshots.splice(Number(b.dataset.index),1);persist();$('savedCount').textContent=S.snapshots.length;showCompare();break;
+ case 'export':exportDesign();break;
+ case 'import':$('importFile').click();break;
+ case 'exportComparisons':download('妙用滑轮_方案对照.json',JSON.stringify({kind:'pulley-comparisons',version:2,note:'模型计算，不是实测数据',snapshots:S.snapshots},null,2),'application/json');break;
+ case 'challenge':challengeDialog();break;
+ case 'taskMode':$('taskForm').dataset.limited=String(b.dataset.value==='limited');$('dialogBody').querySelectorAll('[data-action="taskMode"]').forEach(x=>x.classList.toggle('active',x===b));break;
+ case 'applyTask':applyTask();break;
+ case 'applyExportTask':applyTask(true);break;
+ case 'help':help();break;
+ case 'close':closeDialog();break;
+ case 'fullscreen':{let promise=document.fullscreenElement?document.exitFullscreen?.():document.documentElement.requestFullscreen?.();if(promise)promise.catch(()=>toast('当前浏览器环境不允许全屏，请使用浏览器的全屏功能。'));else toast('当前浏览器未提供全屏接口。');break}
+ }
+ dirty=true;
+}
+/* Pointer/keyboard input: direct manipulation and equivalent visible controls. */
+function setupGripInput(el){
+ let drag=null;
+ el.addEventListener('pointerdown',e=>{
+  if(el.dataset.id!=='grip'||S.page==='life')return;e.preventDefault();e.stopPropagation();const p=physics();
+  if(!p.valid||!p.enough){S.runReason=!p.valid?p.reason:'可用拉力不足。改变设计后再试。';rig().tested=true;updateMetrics();return}
+  const a=R.project(grip.p),b=R.project(V.add(grip.p,grip.dir));if(!a||!b)return;
+  S.run=false;drag={x:e.clientX,y:e.clientY,s:rig().s,dx:b.x-a.x,dy:b.y-a.y};el.setPointerCapture(e.pointerId);
+ });
+ el.addEventListener('pointermove',e=>{if(!drag)return;e.preventDefault();const d=drag,l=d.dx*d.dx+d.dy*d.dy;moveRope(d.s+((e.clientX-d.x)*d.dx+(e.clientY-d.y)*d.dy)/(l||1)*CM)});
+ const end=()=>{drag=null};el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);el.addEventListener('lostpointercapture',end);
+ el.addEventListener('keydown',e=>{if(el.dataset.id!=='grip'||S.page==='life')return;if(['ArrowUp','ArrowRight','ArrowDown','ArrowLeft'].includes(e.key)){e.preventDefault();moveRope(rig().s+(['ArrowUp','ArrowRight'].includes(e.key)?1:-1))}});
+}
+Stage3D.prototype.setupInput=function(){
+ const el=this.canvas;let points=new Map(),moved=false,first=null;
+ el.style.touchAction='none';
+ el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);points.set(e.pointerId,{x:e.clientX,y:e.clientY});first={x:e.clientX,y:e.clientY};moved=false;this.targetCam=null});
+ el.addEventListener('pointermove',e=>{
+  const prev=points.get(e.pointerId);if(!prev)return;const dx=e.clientX-prev.x,dy=e.clientY-prev.y;if(Math.abs(dx)+Math.abs(dy)>2)moved=true;
+  if(points.size===2){const other=[...points.entries()].find(([id])=>id!==e.pointerId)?.[1];if(other){const old=Math.hypot(prev.x-other.x,prev.y-other.y),next=Math.hypot(e.clientX-other.x,e.clientY-other.y);if(next>5)this.camera.dist=clamp(this.camera.dist*old/next,3.3,65)}}
+  else{this.camera.yaw+=dx*.006;this.camera.pitch=clamp(this.camera.pitch+dy*.004,-.18,.9)}
+  points.set(e.pointerId,{x:e.clientX,y:e.clientY});dirty=true;
+ });
+ el.addEventListener('pointerup',e=>{points.delete(e.pointerId);if(!moved&&first){const rect=el.getBoundingClientRect(),x=e.clientX-rect.left,y=e.clientY-rect.top;let best=null,dist=40;for(const w of drawnWheels){const p=this.project(w.p);if(p){const d=Math.hypot(p.x-x,p.y-y);if(d<dist){best=w;dist=d}}}if(best)onWorldClick('wheel:'+best.id)}});
+ for(const ev of['pointercancel','lostpointercapture'])el.addEventListener(ev,e=>points.delete(e.pointerId));
+ el.addEventListener('wheel',e=>{e.preventDefault();this.targetCam=null;this.camera.dist=clamp(this.camera.dist*Math.exp(e.deltaY*.001),3.3,65);dirty=true},{passive:false});
+};
+document.addEventListener('click',e=>{
+ const page=e.target.closest('[data-page]');if(page){setPage(page.dataset.page);return}
+ const b=e.target.closest('[data-action]');if(b&&!b.disabled){act(b.dataset.action,b)}
+});
+document.addEventListener('pointerdown',e=>{if(e.target.matches('input[data-param]')&&!e.target.dataset.param.startsWith('task-')&&S.page!=='life')pushUndo()});
+document.addEventListener('input',e=>{
+ const el=e.target;
+ if(el.id==='scrub'){
+  if(S.page==='life'){S.life.playing=false;S.life.explode=false;S.life.time=Math.acos(1-2*Number(el.value)/100)/.58;S.checkedLife=false;dirty=true;updateMetrics()}
+  else{moveRope(Number(el.value));el.value=rig().s}
+  return;
+ }
+ if(el.dataset.param){const key=el.dataset.param,v=Number(el.value),isTask=key.startsWith('task-');const out=$('val-'+key);if(out)out.textContent=v+(['load','capacity','task-load','task-capacity'].includes(key)?' N':' cm');if(isTask)return;
+  if(S.page!=='life'){beginEdit();rig()[key]=v;updateMetrics()}
+ }
+});
+document.addEventListener('change',e=>{if(e.target.id==='speed'){S.life.speed=Number(e.target.value);dirty=true}});
+$('importFile').addEventListener('change',e=>importDesign(e.target.files[0]));
+$('drawer').addEventListener('click',e=>{if(e.target===$('drawer'))closeDialog()});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){closeDialog();S.tool='grab';S.wire=false;renderTools();return}
+ if($('drawer').classList.contains('open')){if(e.key==='Tab'){const nodes=[...$('drawer').querySelectorAll('button:not([disabled]),a,input,select')].filter(x=>x.offsetParent!==null),a=nodes[0],z=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}return}
+ if(e.code==='Space'&&e.target===document.body){e.preventDefault();play()}
+ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='z'&&S.page!=='life'){e.preventDefault();act('undo',{})}
+});
+let drawing=null;
+$('drawlayer').addEventListener('pointerdown',e=>{if(S.tool==='grab')return;e.preventDefault();$('drawlayer').setPointerCapture(e.pointerId);const p=screenWorld(e.clientX,e.clientY);drawing={kind:S.tool,points:[p,p]};S.annotations.push(drawing);dirty=true});
+$('drawlayer').addEventListener('pointermove',e=>{if(!drawing)return;e.preventDefault();const p=screenWorld(e.clientX,e.clientY);if(drawing.kind==='arrow')drawing.points[1]=p;else if(V.len(V.sub(p,drawing.points[drawing.points.length-1]))>.035)drawing.points.push(p);if(drawing.points.length>350)drawing.points.splice(1,1);dirty=true});
+for(const ev of['pointerup','pointercancel','lostpointercapture'])$('drawlayer').addEventListener(ev,()=>{if(drawing&&V.len(V.sub(drawing.points[0],drawing.points[drawing.points.length-1]))<.04)S.annotations.pop();drawing=null;dirty=true});
+window.addEventListener('resize',()=>{dirty=true});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){S.run=false;S.life.playing=false}last=performance.now();dirty=true});
+function tick(now){
+ const dt=Math.min(.05,(now-last)/1000);last=now;
+ if(S.page==='life'&&S.life.playing&&!S.life.explode){S.life.time+=dt*S.life.speed;dirty=true}
+ if(S.page!=='life'&&S.run){
+  const r=rig(),p=physics();if(!p.valid||!p.enough){S.run=false;S.runReason='条件不满足，提升停止。'}else{
+   const end=Math.min(r.target*p.n,p.maxS);r.s=Math.min(end,r.s+dt*11);r.tested=true;dirty=true;
+   if(r.s>=end-.0001){S.run=false;const q=physics();S.runReason=q.reached?(r.limited&&!q.directionOK?'已到目标高度，但操作方向还不符合任务。':'到达目标高度。保留方案，改变一个条件再比较。'):'可拉绳行程用完，尚未到达目标。试着修改方案或条件。'}
+  }
+ }
+ try{
+  if((dirty||R.targetCam)&&(now-lastFrame>(R.soft?65:15))){drawAll();dirty=false;lastFrame=now}
+  if(now-lastUI>100){updateMetrics();lastUI=now}
+ }catch(e){console.error(e);$('error').style.display='block';$('error').textContent='三维舞台出现问题：'+e.message+'。请重新打开文件。';window.__appError=e.message;return}
+ requestAnimationFrame(tick);
+}
+try{
+ R=new Stage3D($('world'));
+ $('world').addEventListener('webglcontextlost',e=>{e.preventDefault();S.run=false;S.life.playing=false;$('error').style.display='block';$('error').textContent='三维图形上下文中断。请重新打开；设备无法提供WebGL2时会使用Canvas后备。'});
+ const hash=location.hash.slice(1);if(PAGE[hash])S.page=hash;if(S.page!=='life')S.life.playing=false;
+ render();view('whole');drawAll();requestAnimationFrame(tick);
+ window.PulleyLab={version:'2.0',state:S,core:Core,render:()=>{render();drawAll()},view,go:setPage,preset:switchPreset,move:moveRope,play,save,importDesign,sanitizeRig,getScene:()=>({wheels:clone(drawnWheels),segments:clone(segments),grip:clone(grip),camera:clone(R.camera),ropeLength:window.__ropeLength})};
+}catch(e){console.error(e);$('error').style.display='block';$('error').textContent='当前浏览器无法初始化三维舞台：'+e.message;window.__appError=e.message}
+
+</script>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T2 · 二维绘图" title="本课最低技术需求：T2 · 二维绘图" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T2 · 二维绘图</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+</body></html>
