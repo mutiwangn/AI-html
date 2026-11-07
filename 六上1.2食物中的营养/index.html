@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#107669"><meta name="description" content="六年级上册1.2食物中的营养：碘酒对照、油迹时间机与营养标签换算。可离线运行的单体互动课堂。"><title>食物中的营养 · 六上1.2</title><style>:root{--ink:#183a3a;--muted:#607771;--accent:#107669;--paper:#f7f8f3;--line:#d9e3db;--orange:#d69741;--white:#fff;--lavender:#6551a7;--shadow:0 12px 40px rgba(24,58,58,.07)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif}body{font-size:clamp(17px,1.55vw,28px);line-height:1.45;-webkit-tap-highlight-color:transparent}button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}button:disabled{opacity:.45;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #db9c37;outline-offset:3px}button,select{touch-action:manipulation}button{border:0}button svg{display:block}svg{max-width:100%}svg text{font-family:inherit}button[hidden],[hidden]{display:none!important}.btn{min-height:48px;padding:10px 20px;border:1.5px solid var(--line);background:#fff;border-radius:12px;font-weight:650;font-size:clamp(16px,1.55vw,26px);display:inline-flex;align-items:center;justify-content:center;gap:8px;line-height:1.2}.btn:hover{border-color:var(--accent);background:#eff6f1}.btn.primary{color:#fff;background:var(--accent);border-color:var(--accent)}.btn.primary:hover{background:#0b655a}.btn.active,.btn[aria-pressed=true]:not(.primary){background:#e2f0e8;border-color:var(--accent)}.btn svg,.icon-btn svg{width:22px;height:22px;flex-shrink:0}.icon-btn{height:46px;min-width:46px;padding:9px;background:transparent;border:1px solid transparent;border-radius:10px;display:flex;align-items:center;justify-content:center}.icon-btn:hover{background:#e6eee6}.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.app{height:100%;height:100dvh;display:flex;flex-direction:column}.appbar{flex:0 0 auto;height:88px;padding:0 clamp(16px,2.5vw,48px);display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:13px;min-width:0}.brand-icon{width:37px;height:42px;color:var(--accent);flex-shrink:0}.brand h1{font-size:clamp(20px,1.85vw,34px);line-height:1.15;margin:0;white-space:nowrap;font-weight:800;letter-spacing:.01em}.brand small{font-size:13px;font-weight:500;color:var(--muted);display:block;margin-top:4px;letter-spacing:.15em}.main-nav{align-self:stretch;display:flex;gap:8px;align-items:stretch}.nav-btn{position:relative;background:none;padding:0 16px;font-size:clamp(16px,1.5vw,26px);font-weight:650;white-space:nowrap;color:var(--muted)}.nav-btn span{font-size:.72em;margin-right:7px;opacity:.65}.nav-btn[aria-current=page]{color:var(--accent)}.nav-btn[aria-current=page]:after{content:"";height:4px;background:var(--accent);position:absolute;bottom:0;left:16px;right:16px;border-radius:3px 3px 0 0}.toolbar{display:flex;gap:4px}.app-main{flex:1;min-height:0;padding:clamp(12px,1.8vw,32px) clamp(16px,2.5vw,48px) clamp(10px,1.5vw,24px)}.lesson-page{height:100%;min-height:0;display:none}.lesson-page.active{display:block}.page-title{font-size:clamp(27px,2.5vw,46px);font-weight:800;line-height:1.2;letter-spacing:-.025em;margin:0}.page-subtitle{color:var(--muted);font-size:clamp(16px,1.45vw,25px);margin:10px 0 0}.status-toast{position:fixed;z-index:90;bottom:24px;left:50%;transform:translate(-50%,15px);border-radius:12px;padding:12px 24px;background:var(--ink);color:white;box-shadow:var(--shadow);font-size:20px;max-width:90vw;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}.status-toast.show{opacity:1;transform:translate(-50%,0)}.modal-cover{position:fixed;z-index:60;inset:0;background:rgba(12,30,29,.42);padding:5vh 5vw;display:flex;align-items:center;justify-content:center}.modal{background:#fff;border-radius:22px;box-shadow:0 30px 100px #102c2c3b;max-height:90vh;width:min(1080px,100%);display:flex;flex-direction:column;overflow:hidden}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:23px 28px;border-bottom:1px solid var(--line)}.modal-head h2{font-size:28px;margin:0}.modal-body{overflow:auto;padding:24px 28px;font-size:20px;min-height:0}.modal-body h3{font-size:24px;margin:16px 0 8px}.modal-body p{margin:6px 0 18px}.modal-foot{display:flex;gap:10px;align-items:center;justify-content:flex-end;padding:18px 28px;border-top:1px solid var(--line)}.record-table{width:100%;border-collapse:collapse;font-size:18px}.record-table th,.record-table td{text-align:left;border-bottom:1px solid var(--line);padding:12px 9px;vertical-align:top}.record-table th{color:var(--muted);font-weight:600}.record-table .delete-row{min-width:44px;min-height:44px;background:#fff;border-radius:8px;color:#845546}.record-count{margin-right:auto;color:var(--muted);font-size:16px}.record-editor{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}.record-editor label{font-size:17px;font-weight:650;display:block}.record-editor input,.record-editor textarea{width:100%;border:1px solid #a9bcb2;border-radius:8px;padding:10px;margin-top:6px;resize:vertical;font-size:18px;background:#fbfcfa}.record-editor .wide{grid-column:1/-1}.record-editor .btn{justify-self:start}.record-source{display:inline-block;font-size:14px;border-radius:5px;padding:2px 6px;white-space:nowrap;background:#ebf2ed;color:#38634b}.record-source.real{background:#fff0d5;color:#76541f}.help-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.help-note{font-size:16px;color:var(--muted)}.help-grid ul{padding-left:1.2em}.help-grid li{margin-bottom:10px}.modal-body a{color:var(--accent)}.boot-error{padding:20px;font-size:22px;color:#9b382a}.portrait-hint{display:none}
+input[type=range]{accent-color:var(--accent);min-height:44px;cursor:pointer;touch-action:pan-x}
+@media(min-width:1800px){.appbar{height:104px}.icon-btn{height:54px;min-width:54px}.icon-btn svg{width:26px;height:26px}.brand small{font-size:16px}.btn{min-height:58px}}
+@media(max-width:1100px){.appbar{height:78px;gap:10px;padding:0 18px}.brand-icon{display:none}.brand h1{font-size:23px}.brand small{font-size:11px}.nav-btn{padding:0 12px;font-size:18px}.toolbar{gap:0}.icon-btn{min-width:42px}.app-main{padding:18px}.page-title{font-size:30px}.page-subtitle{font-size:18px}}
+@media(max-width:760px){.appbar{height:112px;padding:9px 14px 0;display:grid;grid-template-columns:1fr auto;grid-template-rows:43px 49px;gap:10px 8px}.brand h1{font-size:23px}.brand small{display:none}.brand-icon{display:block;width:24px;height:29px}.brand{gap:8px}.main-nav{grid-row:2;grid-column:1/-1;justify-content:space-between;gap:0}.toolbar{grid-row:1;grid-column:2}.icon-btn{min-width:38px;height:42px;padding:8px}.icon-btn svg{width:21px;height:21px}.nav-btn{padding:0 9px;font-size:17px;flex:1}.nav-btn span{margin-right:4px}.nav-btn[aria-current=page]:after{left:8px;right:8px}.app-main{padding:14px 12px 10px}.page-title{font-size:24px;line-height:1.3}.page-subtitle{font-size:15px;margin-top:5px}.btn{font-size:16px;min-height:44px;padding:9px 13px}.modal-cover{padding:12px}.modal{max-height:calc(100dvh - 24px);border-radius:15px}.modal-head{padding:14px 16px}.modal-head h2{font-size:23px}.modal-body{padding:16px;font-size:17px}.modal-foot{padding:12px 16px;flex-wrap:wrap}.record-table{font-size:14px}.record-table td,.record-table th{padding:10px 5px}.record-source{font-size:12px}.record-editor{grid-template-columns:1fr}.record-editor .wide{grid-column:auto}.help-grid{grid-template-columns:1fr;gap:0}.record-count{font-size:13px}.status-toast{font-size:16px;padding:10px 16px}}
+@media(max-height:650px) and (min-width:761px){.appbar{height:62px}.app-main{padding:12px 22px}.page-title{font-size:27px}.page-subtitle{font-size:16px;margin-top:4px}.btn{min-height:44px;padding:8px 14px;font-size:17px}.brand small{display:none}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+.iod-layout{height:100%;display:flex;flex-direction:column;gap:22px;min-height:0}.iod-heading{display:flex;align-items:center;justify-content:space-between;gap:14px}.iod-model-label{color:var(--muted);font-size:18px;align-self:flex-start;white-space:nowrap;border-bottom:2px solid var(--line);padding:6px 0}.iod-work{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,25%);gap:26px}.iod-bench{display:flex;flex-direction:column;min-height:0}.iod-sample-bar{display:flex;gap:20px;align-items:center;margin-bottom:12px}.iod-sample-bar>span{font-size:19px;color:var(--muted);white-space:nowrap}.iod-choices{display:flex;gap:10px;flex-wrap:nowrap}.iod-choices button{font-size:clamp(19px,1.7vw,30px);padding:10px 20px;border-radius:10px;background:#edf0e8;border:1.5px solid transparent;white-space:nowrap;font-weight:650;min-height:48px}.iod-choices button[aria-pressed=true]{background:var(--accent);color:#fff}.iod-tray{flex:1;min-height:0;position:relative;background:#fff;border:1px solid var(--line);border-radius:22px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow);padding:56px 20px 40px;overflow:hidden}.iod-assays{display:grid;grid-template-columns:1fr 1.22fr 1fr;gap:16px;align-items:center}.iod-assay{text-align:center;min-width:0;display:flex;flex-direction:column;align-items:center}.iod-spec-label{font-size:clamp(23px,2vw,36px);font-weight:750;line-height:1.3}.iod-spec-label span{display:block;color:var(--muted);font-size:clamp(14px,1.2vw,20px);font-weight:500;margin-top:5px}.iod-current .iod-spec-label{color:var(--accent)}.iod-dish{border-radius:50%;background:transparent;position:relative;width:100%;aspect-ratio:1/1;max-height:36vh;min-height:80px;padding:0;touch-action:manipulation;transition:transform .2s}.iod-dish:hover{transform:translateY(-5px)}.iod-dish.drag-over{outline:4px solid var(--orange);outline-offset:3px;background:#fff9e9}.iod-visual{display:block;width:100%;height:100%}.iod-visual svg{height:100%;width:100%;display:block}.iod-spot{pointer-events:none;position:absolute;top:44%;left:41%;width:23%;height:18%;background:#a35e13;border-radius:47% 53% 52% 48% / 50% 40% 60% 50%;opacity:0;transform:scale(.25);transition:transform .55s ease,opacity .4s,background-color .5s;box-shadow:0 0 5px 1px #cfa15b22}.iod-dish.done .iod-spot{opacity:.87;transform:scale(1)}.iod-dish.positive .iod-spot{background:#3f2a74;box-shadow:0 0 8px 3px #66508e24}.iod-dish[data-assay=water] .iod-spot{left:20%;top:35%;width:60%;height:37%;border-radius:50%;opacity:0}.iod-dish[data-assay=water].done .iod-spot{opacity:.28}.iod-fall{opacity:0;position:absolute;left:49%;top:0;width:9px;height:16px;background:#a5611a;border-radius:45% 45% 50% 50%;pointer-events:none}.iod-dish.testing .iod-fall{animation:iodDrop .44s ease-in forwards}.iod-outcome{font-size:clamp(17px,1.5vw,27px);color:var(--muted);min-height:1.5em;line-height:1.3;margin:0}.iod-dish.done+.iod-outcome{color:var(--ink);font-weight:650}.iod-dropper{position:absolute;left:15px;top:5px;background:transparent;display:flex;align-items:center;padding:0;cursor:grab;touch-action:none;z-index:5;border-radius:9px;height:70px}.iod-dropper svg{width:100px;height:62px;pointer-events:none}.iod-dropper span{font-size:18px;pointer-events:none}.iod-dropper.dragging{z-index:80;cursor:grabbing;filter:drop-shadow(0 8px 8px #17352f22)}.iod-tray-caption{position:absolute;bottom:15px;left:0;right:0;display:flex;justify-content:center;gap:8px;align-items:center;font-size:clamp(15px,1.15vw,20px);color:var(--muted)}.iod-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent)}.iod-purple{background:#66518d}.iod-bench-actions{margin-top:16px;display:flex;gap:12px;align-items:center}.iod-micro-note{margin-left:auto;font-size:clamp(14px,1.2vw,20px);color:var(--muted);text-align:right}.iod-evidence{border-left:1px solid var(--line);padding:7px 0 4px 26px;display:flex;flex-direction:column;min-height:0}.iod-evidence-kicker{font-size:clamp(16px,1.4vw,24px);color:var(--muted);font-weight:600;line-height:1.5;padding-bottom:14px;border-bottom:1px solid var(--line)}#iod-evidence-main{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:14px 0}.iod-evidence-symbol{font-family:Georgia,serif;font-size:clamp(60px,8vw,130px);line-height:1;color:#c5d5c7;font-weight:400;margin:0 0 12px}.iod-evidence h3{font-size:clamp(24px,2vw,36px);line-height:1.35;margin:0 0 12px;letter-spacing:-.02em}.iod-evidence p{font-size:clamp(18px,1.5vw,27px);color:var(--muted);margin:0;line-height:1.7}.iod-reveal-btn{width:100%;justify-content:space-between;margin-top:10px;white-space:nowrap}.iod-evidence.result .iod-evidence-symbol{display:none}.iod-color-chip{width:58px;height:58px;border-radius:50%;margin-bottom:18px;background:#3f2a74;border:6px solid white;box-shadow:0 0 0 1px var(--line)}.iod-color-chip.brown{background:#a96b28}.iod-evidence.open #iod-evidence-main{flex:0;padding:15px 0 10px}.iod-evidence.open #iod-evidence-main p{display:none}.iod-evidence.open #iod-evidence-main h3{font-size:clamp(20px,1.7vw,28px);margin:0}.iod-evidence.open .iod-color-chip{display:none}#iod-composition{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;flex:1;min-height:0}#iod-composition h4{font-size:clamp(18px,1.6vw,28px);margin:0 0 12px}.iod-nutrient-list{display:flex;gap:8px;flex-wrap:wrap}.iod-nutrient{background:#e9eee7;border-radius:8px;padding:7px 10px;display:inline-flex;align-items:center;gap:6px;font-size:clamp(16px,1.3vw,23px)}.iod-nutrient small{font-size:.8em}.iod-composition-note{font-size:clamp(16px,1.3vw,23px)!important;line-height:1.55!important;margin-top:15px!important;color:var(--ink)!important}.iod-disclaimer{font-size:clamp(13px,1.05vw,18px)!important;line-height:1.4!important;margin-top:12px!important}.iod-bottom{display:flex;gap:24px;align-items:center;justify-content:space-between;min-height:38px}.iod-bottom p{font-size:clamp(19px,1.6vw,29px);margin:0;font-weight:650}.iod-bottom>span{font-size:clamp(14px,1.1vw,19px);color:var(--muted);white-space:nowrap}@keyframes iodDrop{0%{opacity:1;transform:translateY(0)}90%{opacity:1}100%{opacity:0;transform:translateY(12vh)}}
+@media(min-width:1800px){.iod-layout{gap:28px}.iod-tray{padding-top:80px;padding-bottom:52px}.iod-evidence{padding-left:32px}.iod-dropper{top:10px;left:20px;height:80px}.iod-dropper svg{width:130px;height:80px}.iod-dropper span{font-size:23px}.iod-sample-bar>span{font-size:24px}.iod-bench-actions{margin-top:22px}.iod-choices button{padding:12px 28px}}
+@media(max-width:1100px){.iod-layout{gap:14px}.iod-work{gap:18px;grid-template-columns:minmax(0,1fr) 250px}.iod-evidence{padding-left:18px}.iod-choices{gap:6px}.iod-choices button{padding:8px 11px;font-size:20px}.iod-sample-bar{gap:12px}.iod-sample-bar>span{font-size:16px}.iod-assays{gap:4px}.iod-tray{padding:58px 10px 40px}.iod-spec-label{font-size:24px}.iod-outcome{font-size:18px}.iod-bench-actions{gap:8px}.iod-micro-note{display:none}.iod-bottom p{font-size:20px}.iod-bottom>span{font-size:13px}.iod-evidence p{font-size:19px}.iod-evidence h3{font-size:26px}.iod-model-label{font-size:14px}}
+@media(max-width:760px){.iod-layout{gap:10px}.iod-model-label{display:none}.iod-heading{flex:0 0 auto}.iod-work{display:flex;flex-direction:column;gap:9px}.iod-bench{flex:1;min-height:0}.iod-sample-bar{gap:9px;margin-bottom:8px}.iod-sample-bar>span{font-size:13px}.iod-choices{flex:1;gap:5px}.iod-choices button{flex:1;font-size:16px;padding:8px 7px;min-height:42px;border-radius:8px}.iod-tray{padding:50px 5px 26px;border-radius:15px;min-height:190px}.iod-assays{gap:0;grid-template-columns:1fr 1.15fr 1fr}.iod-spec-label{font-size:20px}.iod-spec-label span{font-size:11px;margin-top:2px}.iod-dish{min-height:65px;max-height:20vh}.iod-outcome{font-size:14px}.iod-tray-caption{font-size:11px;bottom:7px}.iod-dropper{top:-4px;left:3px;height:50px}.iod-dropper svg{width:77px;height:50px}.iod-dropper span{font-size:13px}.iod-bench-actions{margin-top:9px;gap:7px}.iod-bench-actions .btn{flex:1}.iod-evidence{flex:0 0 126px;display:grid;grid-template-columns:1fr auto;grid-template-rows:22px 1fr;border-left:0;border-top:1px solid var(--line);padding:10px 0 0;gap:3px 10px}.iod-evidence-kicker{grid-column:1/-1;font-size:13px;padding:0;border:0}.iod-evidence-symbol{display:none}#iod-evidence-main{padding:0;justify-content:flex-start}.iod-evidence h3{font-size:20px;margin:0 0 3px}.iod-evidence p{font-size:14px;line-height:1.5}.iod-reveal-btn{font-size:14px;width:111px;align-self:center;white-space:normal;margin:0;padding:9px;min-height:47px}.iod-reveal-btn svg{width:16px}.iod-color-chip{display:none}.iod-evidence.open{flex-basis:171px;grid-template-rows:20px 28px 1fr}.iod-evidence.open #iod-evidence-main{padding:0}.iod-evidence.open .iod-reveal-btn{grid-column:2;grid-row:2;align-self:start;min-height:34px;font-size:13px;padding:6px}.iod-evidence.open #iod-evidence-main h3{font-size:17px}#iod-composition{grid-column:1/-1;margin:0;padding:5px 0 0;border:0;display:grid;grid-template-columns:1fr 1fr;gap:3px 9px}#iod-composition h4{display:none}.iod-nutrient-list{gap:3px;align-content:start}.iod-nutrient{font-size:13px;padding:4px 6px;border-radius:5px}.iod-composition-note{font-size:14px!important;margin:0!important;line-height:1.5!important}.iod-disclaimer{font-size:10px!important;margin:0!important;grid-column:1/-1}.iod-bottom{gap:5px;flex-direction:column;align-items:flex-start;min-height:0}.iod-bottom p{font-size:15px}.iod-bottom>span{font-size:11px}.iod-evidence.open+.iod-bottom{display:none}}
+@media(max-height:650px) and (min-width:761px){.iod-layout{gap:10px}.iod-sample-bar{margin-bottom:8px}.iod-choices button{font-size:18px;min-height:44px;padding:6px 15px}.iod-tray{padding-top:47px;padding-bottom:25px}.iod-dropper{top:-9px}.iod-spec-label{font-size:22px}.iod-spec-label span{font-size:12px}.iod-dish{max-height:28vh}.iod-tray-caption{font-size:13px;bottom:8px}.iod-outcome{font-size:17px}.iod-evidence h3{font-size:24px}.iod-evidence p{font-size:17px;line-height:1.5}.iod-evidence-kicker{font-size:15px;padding-bottom:8px}.iod-bottom p{font-size:18px}.iod-bottom>span{font-size:12px}.iod-evidence.open #iod-evidence-main{padding:5px 0}.iod-nutrient{font-size:14px;padding:5px 8px}.iod-composition-note{font-size:15px!important}.iod-disclaimer{font-size:12px!important}.iod-evidence-symbol{font-size:54px}}
+
+/* Keep labels, images and results inside the available tray height. */
+.iod-assays{flex:1;height:100%;min-height:0;align-items:stretch}
+.iod-assay{display:grid;grid-template-rows:auto minmax(0,1fr) auto;justify-items:center;gap:8px;height:100%;min-height:0}
+.iod-dish{height:100%;width:100%;min-height:0;max-height:none;aspect-ratio:auto}
+.iod-spot{display:none}
+.iod-svg-stain{opacity:0;fill:#a96b28;transition:opacity .5s ease}
+.iod-dish.done .iod-svg-stain{opacity:.88}
+.iod-dish.positive .iod-svg-stain{fill:#443071}
+.iod-dish[data-assay=water].done .iod-svg-stain{opacity:.3}
+.iod-tray{padding-top:70px;padding-bottom:22px}
+@media(min-width:1800px){.iod-tray{padding-top:98px;padding-bottom:28px}}
+@media(max-width:760px){.iod-tray{padding-top:52px;padding-bottom:15px}.iod-assay{gap:4px}.iod-evidence.open{flex-basis:185px;grid-template-rows:20px 36px minmax(0,1fr)}.iod-reveal-btn{white-space:nowrap}.iod-evidence.open .iod-reveal-btn{align-self:start;min-height:34px}.iod-evidence.open #iod-evidence-main{align-self:center}}
+@media(max-height:650px) and (min-width:761px){.iod-tray{padding-top:48px;padding-bottom:15px}.iod-assay{gap:4px}}
+
+.oil-lab {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  padding: clamp(12px, 1.35vw, 24px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(9px, 1.3vh, 16px);
+  color: var(--ink, #183a3a);
+}
+.oil-lab *, .oil-lab *::before, .oil-lab *::after { box-sizing: border-box; }
+.oil-lab .oil-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.oil-lab .oil-heading-copy { min-width: 0; }
+.oil-lab .page-title { margin: 0; font-size: clamp(24px, 2.35vw, 42px); line-height: 1.22; font-weight: 750; letter-spacing: -.025em; }
+.oil-lab .page-subtitle { margin: 9px 0 0; color: var(--muted, #607771); font-size: clamp(17px, 1.45vw, 26px); line-height: 1.35; }
+.oil-lab .oil-choices { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; }
+.oil-lab .oil-choice-label { margin-right: 4px; font-size: clamp(16px, 1.4vw, 24px); color: var(--muted, #607771); }
+.oil-lab .oil-choice { appearance: none; border: 1.5px solid var(--line, #d9e3db); background: #fff; color: var(--ink, #183a3a); min-height: 46px; padding: 9px 17px; border-radius: 10px; font: inherit; font-size: clamp(18px, 1.5vw, 26px); font-weight: 650; cursor: pointer; touch-action: manipulation; }
+.oil-lab .oil-choice.is-selected { background: #e4f0e9; border-color: var(--accent, #107669); color: #0b665a; }
+.oil-lab .oil-choice:focus-visible, .oil-lab .btn:focus-visible, .oil-lab input:focus-visible { outline: 3px solid #d69741; outline-offset: 3px; }
+.oil-lab .oil-stage { min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 2vw, 40px); align-items: stretch; }
+.oil-lab .oil-paper-card { min-width: 0; min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; justify-items: center; align-items: center; }
+.oil-lab .oil-paper-heading { display: flex; justify-content: center; align-items: baseline; gap: 12px; }
+.oil-lab .oil-paper-heading h3 { margin: 0; font-size: clamp(24px, 2.05vw, 36px); font-weight: 700; line-height: 1.25; }
+.oil-lab .oil-paper-heading > span { font-size: clamp(16px, 1.2vw, 22px); color: var(--muted, #607771); }
+.oil-lab .oil-sheet-wrap { width: 100%; height: 100%; min-height: 0; max-height: 560px; }
+.oil-lab .oil-sheet-wrap svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.oil-lab .oil-paper-status { align-self: start; min-height: 1.4em; margin: 0; color: var(--muted, #607771); font-size: clamp(19px, 1.7vw, 30px); line-height: 1.3; text-align: center; font-weight: 600; }
+.oil-lab[data-light="true"][data-progress="100"] .oil-paper-status { color: #1c594e; }
+.oil-lab .oil-bottom { min-height: 0; display: grid; gap: 10px; }
+.oil-lab .oil-timeline { display: flex; align-items: center; gap: clamp(12px, 1.7vw, 30px); padding: 0 6px; font-size: clamp(20px, 1.65vw, 29px); font-weight: 650; }
+.oil-lab .oil-timeline > span { white-space: nowrap; }
+.oil-lab #oil-time { flex: 1 1 auto; min-width: 30px; height: 44px; margin: 0; cursor: pointer; accent-color: var(--accent, #107669); touch-action: pan-y; }
+.oil-lab #oil-time:disabled { cursor: default; opacity: .5; }
+.oil-lab .oil-toolbar { display: flex; align-items: center; gap: 10px; }
+.oil-lab .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 19px; font-size: clamp(18px, 1.5vw, 27px); line-height: 1.25; font-weight: 650; white-space: nowrap; touch-action: manipulation; cursor: pointer; }
+.oil-lab .btn svg { width: 23px; height: 23px; flex: 0 0 auto; }
+.oil-lab .btn[aria-pressed="true"] { background: #f4e8b9; border-color: #bba666; color: #615324; }
+.oil-lab .btn:disabled { opacity: .42; cursor: default; }
+.oil-lab .oil-model-note { margin-left: auto; font-size: clamp(14px, 1.12vw, 20px); line-height: 1.35; color: var(--muted, #607771); }
+.oil-lab .oil-evidence { display: flex; align-items: center; min-height: 1.65em; padding: 8px 14px; border-left: 4px solid #d3dfd4; background: #eef2ec; font-size: clamp(18px, 1.65vw, 29px); font-weight: 600; line-height: 1.35; }
+.oil-lab .oil-evidence.is-complete { background: #e5efe5; border-color: var(--accent, #107669); }
+@media (max-width: 1100px) {
+  .oil-lab .oil-heading { align-items: flex-start; }
+  .oil-lab .oil-choice-label { display: none; }
+  .oil-lab .oil-choice { padding-left: 12px; padding-right: 12px; }
+  .oil-lab .oil-toolbar { flex-wrap: wrap; }
+  .oil-lab .oil-model-note { flex: 1 0 100%; margin-left: 0; text-align: right; }
+  .oil-lab .oil-bottom { gap: 6px; }
+  .oil-lab .oil-evidence { font-size: 21px; }
+}
+@media (max-width: 650px) {
+  .oil-lab { padding: 10px 8px; gap: 8px; }
+  .oil-lab .oil-heading { display: block; }
+  .oil-lab .page-title { font-size: 23px; }
+  .oil-lab .page-subtitle { margin-top: 5px; font-size: 16px; }
+  .oil-lab .oil-choices { margin-top: 8px; justify-content: flex-end; }
+  .oil-lab .oil-choice-label { display: inline; font-size: 15px; }
+  .oil-lab .oil-choice { min-height: 44px; padding: 7px 16px; font-size: 18px; }
+  .oil-lab .oil-stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .oil-lab .oil-paper-card { grid-template-columns: 76px minmax(90px, 1fr) 104px; grid-template-rows: minmax(0, 1fr); gap: 5px; align-items: center; }
+  .oil-lab .oil-paper-heading { display: block; text-align: center; }
+  .oil-lab .oil-paper-heading h3 { font-size: 20px; }
+  .oil-lab .oil-paper-heading > span { display: block; margin-top: 3px; font-size: 14px; }
+  .oil-lab .oil-sheet-wrap { min-height: 0; height: 100%; max-height: 144px; }
+  .oil-lab .oil-paper-status { align-self: center; width: 100%; font-size: 17px; line-height: 1.35; }
+  .oil-lab .oil-timeline { gap: 10px; padding: 0 2px; font-size: 18px; }
+  .oil-lab .oil-toolbar { gap: 6px; }
+  .oil-lab .btn { flex: 1 1 auto; padding: 9px 8px; min-height: 44px; font-size: 16px; gap: 5px; }
+  .oil-lab .btn svg { width: 18px; height: 18px; }
+  .oil-lab .oil-model-note { font-size: 12px; }
+  .oil-lab .oil-evidence { min-height: 3.3em; padding: 7px 10px; font-size: 17px; }
+}
+@media (max-height: 650px) and (min-width: 651px) {
+  .oil-lab { gap: 5px; padding-top: 7px; padding-bottom: 7px; }
+  .oil-lab .page-title { font-size: 26px; }
+  .oil-lab .page-subtitle { margin-top: 4px; font-size: 17px; }
+  .oil-lab .oil-paper-heading h3 { font-size: 23px; }
+  .oil-lab .oil-paper-status { font-size: 18px; }
+  .oil-lab .oil-bottom { gap: 3px; }
+  .oil-lab .oil-timeline { font-size: 18px; }
+  .oil-lab .btn { min-height: 44px; font-size: 17px; padding: 8px 13px; }
+  .oil-lab .oil-model-note { flex: 0 1 auto; margin-left: auto; font-size: 12px; }
+  .oil-lab .oil-evidence { font-size: 17px; padding: 5px 10px; }
+}
+
+.label-lab{position:relative;box-sizing:border-box;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:clamp(10px,1.25vh,18px);height:100%;min-height:0;color:var(--ink,#183a3a);font-family:inherit}
+.label-lab *{box-sizing:border-box}
+.label-lab [hidden]{display:none!important}
+.label-lab button,.label-lab input{font:inherit}
+.label-lab button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.label-lab button:focus-visible,.label-lab input:focus-visible{outline:3px solid var(--orange,#d69741);outline-offset:4px}
+.label-lab button:disabled{cursor:default;opacity:.35}
+.label-lab .lbl-head{display:flex;align-items:center;justify-content:space-between;gap:24px;min-width:0}
+.label-lab .page-title{font-size:clamp(23px,2.25vw,40px);line-height:1.25;font-weight:750;letter-spacing:-.035em;margin:0}
+.label-lab .lbl-products{display:flex;gap:6px;flex:none;background:#e8eee7;padding:5px;border-radius:12px}
+.label-lab .lbl-products button{border:0;border-radius:8px;min-width:76px;min-height:44px;padding:9px 17px;background:transparent;color:var(--muted,#607771);font-size:clamp(18px,1.5vw,27px);line-height:1.2;font-weight:650}
+.label-lab .lbl-products button[aria-pressed="true"]{background:#fff;color:var(--accent,#107669);box-shadow:0 2px 5px #183a3a10}
+.label-lab .lbl-main{min-height:0;display:grid;grid-template-columns:minmax(210px,.85fr) minmax(0,2.3fr);gap:clamp(24px,3.4vw,64px);padding:clamp(14px,1.9vh,26px) clamp(18px,2.5vw,42px);border:1px solid var(--line,#d9e3db);background:#fff;border-radius:18px;overflow:hidden}
+.label-lab .lbl-product-panel{min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:clamp(8px,1.1vh,16px)}
+.label-lab .lbl-data-tag{margin:0;color:var(--muted,#607771);font-size:clamp(16px,1.25vw,22px);line-height:1.2}
+.label-lab .lbl-package-art{flex:1 1 180px;min-height:50px;max-height:260px;width:100%;display:flex;align-items:center;justify-content:center}
+.label-lab .lbl-package-art svg{width:auto;max-width:100%;height:100%;max-height:260px;display:block}
+.label-lab .lbl-package-art svg text{font-family:inherit;fill:var(--ink,#183a3a);font-weight:650}
+.label-lab .lbl-amount-display{display:flex;gap:14px;align-items:baseline;justify-content:center;font-size:clamp(19px,1.6vw,29px);white-space:nowrap;line-height:1.05}
+.label-lab .lbl-amount-display output{display:flex;align-items:baseline;gap:5px;color:var(--accent,#107669)}
+.label-lab .lbl-amount-display output strong{font-size:clamp(39px,4.5vw,78px);font-variant-numeric:tabular-nums;font-weight:750;letter-spacing:-.055em}
+.label-lab .lbl-ratio{font-size:clamp(17px,1.45vw,25px);line-height:1.4;color:var(--muted,#607771)}
+.label-lab .lbl-ratio p{margin:0}
+.label-lab .lbl-times{color:var(--accent,#107669);font-weight:700}
+.label-lab .lbl-comparison{min-height:0;display:flex;flex-direction:column;justify-content:center}
+.label-lab .lbl-table{width:100%;height:calc(100% - 30px);border-collapse:collapse;table-layout:fixed;color:var(--ink,#183a3a);font-size:clamp(20px,1.8vw,32px);line-height:1.2}
+.label-lab .lbl-table th,.label-lab .lbl-table td{vertical-align:middle;padding:6px clamp(12px,1.6vw,28px)}
+.label-lab .lbl-table thead th{font-size:clamp(19px,1.65vw,28px);font-weight:650;border-bottom:2px solid var(--ink,#183a3a);padding-top:0;padding-bottom:10px}
+.label-lab .lbl-table thead th:first-child{width:30%;text-align:left;padding-left:0}
+.label-lab .lbl-table thead th:nth-child(2){width:35%}
+.label-lab .lbl-table thead th:nth-child(3){width:35%;background:#eef6f1;color:var(--accent,#107669)}
+.label-lab .lbl-table tbody th{font-weight:650;text-align:left;padding-left:0;font-size:clamp(20px,1.7vw,30px)}
+.label-lab .lbl-table td{text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}
+.label-lab .lbl-table td:last-child{background:#eef6f1;color:var(--accent,#107669);font-weight:700}
+.label-lab .lbl-head-mass{display:inline-block;margin-left:8px;font-variant-numeric:tabular-nums}
+.label-lab .lbl-table .lbl-macro{height:19%}
+.label-lab .lbl-table .lbl-secondary{height:12%}
+.label-lab .lbl-table .lbl-divider th,.label-lab .lbl-table .lbl-divider td{border-top:1px solid var(--line,#d9e3db)}
+.label-lab .lbl-bar{display:block;width:100%;height:8px;background:#e7eeea;border-radius:5px;margin-top:8px;overflow:hidden;position:relative}
+.label-lab .lbl-bar i{display:block;height:100%;border-radius:5px;min-width:0;max-width:100%;transition:width .16s linear}
+.label-lab .lbl-base-bar{background:#8ab9ad}
+.label-lab .lbl-portion-bar{background:var(--accent,#107669)}
+.label-lab .lbl-unknown{color:var(--muted,#607771);font-size:.86em;font-weight:500}
+.label-lab .lbl-scale-note{margin:8px 0 0;text-align:right;color:var(--muted,#607771);font-size:clamp(14px,1.1vw,19px);line-height:1.25}
+.label-lab .lbl-controls{padding:0 6px}
+.label-lab .lbl-portion-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:clamp(20px,1.7vw,29px);font-weight:650;line-height:1.2}
+.label-lab .lbl-shortcuts{display:flex;gap:8px}
+.label-lab .lbl-shortcuts .btn{min-height:40px;font-size:clamp(17px,1.4vw,24px);padding:7px 16px}
+.label-lab .lbl-shortcuts .btn[aria-pressed="true"]{background:#e1f0e7;color:var(--accent,#107669);border-color:#9fc6b6}
+.label-lab .lbl-slider-row{display:flex;align-items:flex-start;gap:14px;margin-top:5px}
+.label-lab .lbl-step{display:flex;align-items:center;justify-content:center;width:46px;height:46px;flex:none;padding:0;border:1px solid var(--line,#d9e3db);background:#fff;border-radius:10px;color:var(--ink,#183a3a)}
+.label-lab .lbl-step svg,.label-lab .lbl-explain-close svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.label-lab .lbl-range-wrap{flex:1;min-width:0;padding-top:2px}
+.label-lab input[type="range"]{display:block;-webkit-appearance:none;appearance:none;width:100%;height:38px;margin:0;background:transparent;cursor:pointer;touch-action:pan-y}
+.label-lab input[type="range"]::-webkit-slider-runnable-track{height:9px;border-radius:6px;background:#d8e5dc}
+.label-lab input[type="range"]::-moz-range-track{height:9px;border-radius:6px;background:#d8e5dc}
+.label-lab input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:31px;height:31px;margin-top:-11px;border-radius:50%;background:var(--accent,#107669);border:4px solid #fff;box-shadow:0 0 0 1px #82b3a3,0 2px 6px #183a3a20}
+.label-lab input[type="range"]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--accent,#107669);border:4px solid #fff;box-shadow:0 0 0 1px #82b3a3,0 2px 6px #183a3a20}
+.label-lab .lbl-range-labels{display:flex;justify-content:space-between;font-size:clamp(14px,1.15vw,20px);line-height:1.15;color:var(--muted,#607771)}
+.label-lab .lbl-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.label-lab .lbl-actions{display:flex;gap:10px;flex:none}
+.label-lab .lbl-actions .btn{font-size:clamp(18px,1.5vw,26px);min-height:46px;padding:10px 18px}
+.label-lab .lbl-footnote{font-size:clamp(14px,1.15vw,20px);line-height:1.3;color:var(--muted,#607771);text-align:right;margin:0}
+.label-lab .lbl-explain{position:absolute;inset:0;z-index:25;background:rgba(17,42,36,.34);border-radius:14px;display:flex;align-items:center;justify-content:center;padding:20px}
+.label-lab .lbl-explain-panel{position:relative;background:var(--paper,#f7f8f3);border:1px solid #fff;border-radius:18px;box-shadow:0 20px 70px #133c3a2e;width:min(880px,100%);max-height:100%;overflow:auto;padding:clamp(24px,3.3vw,52px);font-size:clamp(20px,1.7vw,30px);line-height:1.6}
+.label-lab .lbl-explain-panel h3{font-size:clamp(27px,2.5vw,42px);line-height:1.25;margin:0 38px 20px 0;letter-spacing:-.03em}
+.label-lab .lbl-explain-panel p{margin:15px 0}
+.label-lab .lbl-explain-panel strong{color:var(--accent,#107669);font-weight:700}
+.label-lab .lbl-explain-panel .lbl-six-title{color:var(--muted,#607771);margin:0;font-size:.85em}
+.label-lab .lbl-six{padding:10px 0 16px;margin:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:8px 20px;border-bottom:1px solid var(--line,#d9e3db);font-weight:650}
+.label-lab .lbl-six li{display:flex;gap:9px;align-items:center}
+.label-lab .lbl-six li:before{content:"";width:7px;height:7px;flex:none;background:var(--orange,#d69741);border-radius:50%}
+.label-lab .lbl-explain-close{position:absolute;right:16px;top:16px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line,#d9e3db);color:var(--ink,#183a3a);border-radius:10px}
+.label-lab .lbl-explain-panel .btn{font-size:clamp(19px,1.6vw,27px);margin-top:5px;min-height:46px}
+@media(max-width:1100px){.label-lab .lbl-head{gap:14px}.label-lab .page-title{font-size:27px}.label-lab .lbl-products button{min-width:65px;padding:8px 12px}.label-lab .lbl-main{grid-template-columns:minmax(170px,.72fr) minmax(0,2fr);gap:22px;padding:16px 20px}.label-lab .lbl-table th,.label-lab .lbl-table td{padding-left:12px;padding-right:12px}.label-lab .lbl-head-mass{display:block;margin:3px 0 0}.label-lab .lbl-bottom{gap:12px}.label-lab .lbl-actions .btn{padding:9px 12px}.label-lab .lbl-footnote{max-width:250px}}
+@media(max-width:720px){.label-lab{gap:9px}.label-lab .lbl-head{display:block}.label-lab .page-title{font-size:24px;letter-spacing:-.04em}.label-lab .lbl-products{margin-top:9px;padding:4px;width:100%}.label-lab .lbl-products button{flex:1;min-height:40px;padding:7px 10px;font-size:18px}.label-lab .lbl-main{grid-template-columns:1fr;grid-template-rows:82px minmax(0,1fr);gap:8px;padding:10px 12px;border-radius:13px}.label-lab .lbl-product-panel{display:grid;grid-template-columns:58px 1fr 1fr;grid-template-rows:auto auto;column-gap:9px;row-gap:0;text-align:left;align-items:center}.label-lab .lbl-data-tag{grid-column:2/4;grid-row:1;font-size:13px;line-height:1.2;margin:0 0 2px}.label-lab .lbl-package-art{grid-column:1;grid-row:1/3;height:78px;min-height:0}.label-lab .lbl-package-art svg{height:78px;max-width:58px}.label-lab .lbl-amount-display{grid-column:2;grid-row:2;display:block;font-size:15px;text-align:left;line-height:1.1}.label-lab .lbl-amount-display>span{display:none}.label-lab .lbl-amount-display output{justify-content:flex-start;gap:3px}.label-lab .lbl-amount-display output strong{font-size:37px;letter-spacing:-.05em}.label-lab .lbl-ratio{grid-column:3;grid-row:2;font-size:15px;line-height:1.4;white-space:nowrap;align-self:center}.label-lab .lbl-comparison{min-height:0;justify-content:stretch}.label-lab .lbl-table{height:calc(100% - 23px);font-size:19px}.label-lab .lbl-table thead th{font-size:16px;padding:6px 6px 8px;line-height:1.15}.label-lab .lbl-table thead th:first-child{width:32%}.label-lab .lbl-table thead th:nth-child(2),.label-lab .lbl-table thead th:nth-child(3){width:34%}.label-lab .lbl-table th,.label-lab .lbl-table td{padding:4px 7px}.label-lab .lbl-table tbody th{font-size:17px;letter-spacing:-.04em;white-space:nowrap}.label-lab .lbl-head-mass{display:block;margin:2px 0 0;font-size:15px}.label-lab .lbl-bar{height:6px;margin-top:6px}.label-lab .lbl-scale-note{margin-top:6px;font-size:12px;text-align:center;line-height:1.2}.label-lab .lbl-secondary td{font-size:17px}.label-lab .lbl-portion-caption{font-size:18px}.label-lab .lbl-shortcuts{gap:6px}.label-lab .lbl-shortcuts .btn{font-size:15px;padding:6px 9px;min-height:36px}.label-lab .lbl-slider-row{gap:9px;margin-top:3px}.label-lab .lbl-step{width:42px;height:42px}.label-lab .lbl-range-labels{font-size:12px}.label-lab .lbl-controls{padding:0 2px}.label-lab .lbl-bottom{display:block}.label-lab .lbl-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.label-lab .lbl-actions .btn{font-size:16px;min-height:43px;padding:8px 9px;white-space:nowrap}.label-lab .lbl-footnote{font-size:12px;text-align:center;max-width:none;margin-top:6px}.label-lab .lbl-explain{padding:10px}.label-lab .lbl-explain-panel{padding:25px 20px;font-size:18px;line-height:1.6}.label-lab .lbl-explain-panel h3{font-size:25px;margin-right:25px}.label-lab .lbl-six{gap:8px 10px;font-size:19px}.label-lab .lbl-explain-panel .btn{font-size:18px}.label-lab .lbl-explain-close{right:10px;top:10px;width:36px;height:36px}}
+@media(max-height:670px) and (min-width:721px){.label-lab{gap:7px}.label-lab .page-title{font-size:26px}.label-lab .lbl-products button{min-height:38px;padding:6px 14px;font-size:18px}.label-lab .lbl-main{padding-top:10px;padding-bottom:10px}.label-lab .lbl-product-panel{gap:5px}.label-lab .lbl-package-art{max-height:140px}.label-lab .lbl-amount-display output strong{font-size:44px}.label-lab .lbl-table{font-size:20px}.label-lab .lbl-table tbody th,.label-lab .lbl-table thead th{font-size:19px}.label-lab .lbl-table th,.label-lab .lbl-table td{padding-top:4px;padding-bottom:4px}.label-lab .lbl-bar{height:6px;margin-top:5px}.label-lab .lbl-portion-caption{font-size:20px}.label-lab .lbl-shortcuts .btn{min-height:34px;padding:5px 12px}.label-lab .lbl-step{width:40px;height:40px}.label-lab .lbl-actions .btn{min-height:40px;padding:7px 14px;font-size:18px}.label-lab .lbl-scale-note,.label-lab .lbl-footnote{font-size:13px}.label-lab .lbl-range-labels{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.label-lab .lbl-bar i{transition:none}}
+
+.oil-lab{padding:0}
+</style></head>
+<body>
+<!--
+六上1.2《食物中的营养》 v1.0 | 教学模拟，非食品检测仪。
+依据：用户提供的教科版教材p6—9、教师教学用书p51—63。
+模型接口：FoodVisuals.render(id)；IodineLab.samples；OilLab；LabelLab / FOOD_LABELS。
+数据、画面与状态分层，可替换SVG素材及教学标签；无外部依赖。
+-->
+<div class="app">
+<header class="appbar">
+  <div class="brand"><svg class="brand-icon" viewBox="0 0 40 46" fill="none" aria-hidden="true"><path d="M17 3h14v7l-4 6v17c0 11-19 11-19 0V16L4 10V3h13" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M8 26h19v8c0 7-19 7-19 0Z" fill="currentColor" opacity=".18"/><path d="M10 26h15M16 5v12" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="31" r="2" fill="currentColor"/></svg><h1>食物中的营养<small>六年级上册 · 1.2</small></h1></div>
+  <nav class="main-nav" aria-label="探究任务"><button class="nav-btn" type="button" data-page="iodine" aria-current="page"><span>01</span>碘酒找线索</button><button class="nav-btn" type="button" data-page="oil"><span>02</span>油迹时间机</button><button class="nav-btn" type="button" data-page="label"><span>03</span>标签放大镜</button></nav>
+  <div class="toolbar"><button class="icon-btn" id="open-records" type="button" aria-label="观察记录" title="观察记录"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 3h12a2 2 0 0 1 2 2v16H7a2 2 0 0 1-2-2V3Z" stroke="currentColor" stroke-width="1.8"/><path d="M8 17h11M9 7h6M9 11h6M5 17c-3 0-3 4 0 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><button class="icon-btn" id="open-help" type="button" aria-label="课堂使用与科学边界" title="课堂使用"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 11v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7" r="1.1" fill="currentColor"/></svg></button><button class="icon-btn" id="fullscreen" type="button" aria-label="全屏展示" title="全屏展示"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+</header>
+<main class="app-main"><section class="lesson-page iodine-lab active" id="page-iodine" aria-label="碘酒找线索"><div class="iod-layout">
+  <div class="iod-heading"><div><h2 class="page-title">没变蓝，就没有营养吗？</h2><p class="page-subtitle">拖动滴管到样品上，或直接点样品。</p></div><span class="iod-model-label">实验模拟</span></div>
+  <div class="iod-work">
+    <div class="iod-bench">
+      <div class="iod-sample-bar"><span>换样品</span><div class="iod-choices" role="group" aria-label="选择检验样品"><button type="button" data-sample="rice" aria-pressed="true">米饭</button><button type="button" data-sample="bread" aria-pressed="false">馒头</button><button type="button" data-sample="sugar" aria-pressed="false">白砂糖</button><button type="button" data-sample="egg" aria-pressed="false">熟蛋清</button></div></div>
+      <div class="iod-tray" id="iod-tray">
+        <button class="iod-dropper" id="iod-dropper" type="button" aria-label="碘酒滴管，拖到样品上或点击为当前样品滴一滴"><svg viewBox="0 0 160 90" aria-hidden="true"><g transform="translate(74 45) rotate(35)"><path d="M-48-11h48v22h-48c-14 0-14-22 0-22" fill="#3c5149"/><rect x="-10" y="-16" width="17" height="32" rx="5" fill="#253f37"/><path d="M7-8h52l17 8-17 8H7Z" fill="#f7fff8" stroke="#83a99c" stroke-width="2"/><path d="M10-3h48l10 3-10 3H10Z" fill="#b37732"/></g></svg><span>碘酒</span></button>
+        <div class="iod-assays">
+          <div class="iod-assay iod-control"><div class="iod-spec-label">纯淀粉<span>已知含淀粉</span></div><button class="iod-dish" type="button" data-assay="starch" aria-label="给纯淀粉滴碘酒"><span class="iod-visual" id="iod-visual-starch"></span><span class="iod-spot"></span><span class="iod-fall"></span></button><p class="iod-outcome" id="iod-out-starch">还未滴入</p></div>
+          <div class="iod-assay iod-current"><div class="iod-spec-label" id="iod-sample-label">米饭<span>待检验的样品</span></div><button class="iod-dish" type="button" data-assay="sample" aria-label="给当前食物样品滴碘酒"><span class="iod-visual" id="iod-visual-sample"></span><span class="iod-spot"></span><span class="iod-fall"></span></button><p class="iod-outcome" id="iod-out-sample">点样品，滴一滴</p></div>
+          <div class="iod-assay iod-control"><div class="iod-spec-label">清水<span>不含淀粉</span></div><button class="iod-dish" type="button" data-assay="water" aria-label="给清水滴碘酒"><span class="iod-visual" id="iod-visual-water"></span><span class="iod-spot"></span><span class="iod-fall"></span></button><p class="iod-outcome" id="iod-out-water">还未滴入</p></div>
+        </div>
+      </div>
+      <div class="iod-bench-actions"><button type="button" class="btn primary" id="iod-test-all">同时滴一滴</button><button type="button" class="btn" id="iod-reset">换新样品</button><span class="iod-micro-note">只显示接触处的变化</span></div>
+    </div>
+    <aside class="iod-evidence" aria-label="证据与成分线索">
+      <div class="iod-evidence-kicker">这一滴，能告诉我们什么</div>
+      <div id="iod-evidence-main"><div class="iod-evidence-symbol" aria-hidden="true">?</div><h3>先观察，再解释</h3><p>和纯淀粉、清水相比，样品的颜色怎样变化？</p></div>
+      <button type="button" class="btn iod-reveal-btn" id="iod-reveal" disabled aria-expanded="false">成分线索<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div id="iod-composition" hidden></div>
+    </aside>
+  </div>
+  <div class="iod-bottom"><p id="iod-question">先预测：四种食物都会出现蓝紫色吗？</p><span>实际检验后，食物不再食用</span></div>
+</div>
+</section><section class="lesson-page" id="page-oil" aria-label="油迹时间机" hidden><div class="oil-lab" data-started="false" data-progress="0" data-sample="peanut">
+  <div class="oil-heading">
+    <div class="oil-heading-copy">
+      <h2 class="page-title">刚留下的斑迹，都能算油迹吗？</h2>
+      <p class="page-subtitle">涂抹样品，拖动时间，再迎光看看。</p>
+    </div>
+    <div class="oil-choices" role="group" aria-label="选择第三张纸上的食物样品">
+      <span class="oil-choice-label">样品</span>
+      <button type="button" class="oil-choice is-selected" data-oil-sample="peanut" aria-pressed="true">花生米</button>
+      <button type="button" class="oil-choice" data-oil-sample="cucumber" aria-pressed="false">黄瓜</button>
+    </div>
+  </div>
+
+  <div class="oil-stage" aria-label="同样的纸、同一时刻，比较三种样品留下的斑迹">
+    <article class="oil-paper-card">
+      <div class="oil-paper-heading"><h3>水</h3><span>对照</span></div>
+      <div class="oil-sheet-wrap" id="oil-paper-water"></div>
+      <p class="oil-paper-status" id="oil-water-status">等待涂抹</p>
+    </article>
+    <article class="oil-paper-card">
+      <div class="oil-paper-heading"><h3>食用油</h3><span>对照</span></div>
+      <div class="oil-sheet-wrap" id="oil-paper-oil"></div>
+      <p class="oil-paper-status" id="oil-oil-status">等待涂抹</p>
+    </article>
+    <article class="oil-paper-card">
+      <div class="oil-paper-heading"><h3 id="oil-food-title">花生米</h3><span>样品</span></div>
+      <div class="oil-sheet-wrap" id="oil-paper-food"></div>
+      <p class="oil-paper-status" id="oil-food-status">等待涂抹</p>
+    </article>
+  </div>
+
+  <div class="oil-bottom">
+    <div class="oil-timeline">
+      <span>刚涂抹</span>
+      <input id="oil-time" type="range" min="0" max="100" step="1" value="0" disabled aria-label="观察从刚涂抹到干燥后的变化" aria-valuetext="还没有涂抹样品">
+      <span>干燥后</span>
+    </div>
+    <div class="oil-toolbar">
+      <button type="button" class="btn primary" id="oil-smear">涂抹样品</button>
+      <button type="button" class="btn" id="oil-play" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7Z" fill="currentColor"/></svg>
+        <span>播放变化</span>
+      </button>
+      <button type="button" class="btn" id="oil-light" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>迎光观察</span>
+      </button>
+      <span class="oil-model-note">过程示意，不表示实际用时或含量</span>
+    </div>
+    <div class="oil-evidence" id="oil-evidence" role="status" aria-live="polite">先涂抹，再比较三张纸。</div>
+  </div>
+</div>
+</section><section class="lesson-page" id="page-label" aria-label="标签放大镜" hidden><div class="label-lab">
+  <header class="lbl-head">
+    <h2 class="page-title">标签上的100克，是你吃下的量吗？</h2>
+    <div class="lbl-products" id="lbl-products" role="group" aria-label="选择教学样品"></div>
+  </header>
+
+  <div class="lbl-main">
+    <aside class="lbl-product-panel" aria-label="这一份的质量和换算倍数">
+      <p class="lbl-data-tag">教学模拟标签</p>
+      <div class="lbl-package-art" id="lbl-package-art" aria-hidden="true"></div>
+      <div class="lbl-amount-display">
+        <span>这一份</span>
+        <output for="lbl-amount"><strong id="lbl-amount-value">50</strong><span>克</span></output>
+      </div>
+      <div class="lbl-ratio">
+        <p><span id="lbl-ratio-mass">50</span> ÷ 100 = <strong id="lbl-ratio-value">0.5</strong></p>
+        <p>表中数值 <span class="lbl-times">× <strong id="lbl-multiplier">0.5</strong></span></p>
+      </div>
+    </aside>
+
+    <div class="lbl-comparison">
+      <table class="lbl-table" aria-label="每100克和这一份的营养成分比较">
+        <thead>
+          <tr><th scope="col">营养成分</th><th scope="col">每100克</th><th scope="col">这一份<span class="lbl-head-mass" id="lbl-table-mass">50克</span></th></tr>
+        </thead>
+        <tbody>
+          <tr data-nutrient="protein" class="lbl-macro"><th scope="row">蛋白质</th><td><span class="lbl-base-value">6克</span><span class="lbl-bar" aria-hidden="true"><i class="lbl-base-bar"></i></span></td><td><span class="lbl-portion-value">3克</span><span class="lbl-bar" aria-hidden="true"><i class="lbl-portion-bar"></i></span></td></tr>
+          <tr data-nutrient="fat" class="lbl-macro"><th scope="row">脂肪</th><td><span class="lbl-base-value">12克</span><span class="lbl-bar" aria-hidden="true"><i class="lbl-base-bar"></i></span></td><td><span class="lbl-portion-value">6克</span><span class="lbl-bar" aria-hidden="true"><i class="lbl-portion-bar"></i></span></td></tr>
+          <tr data-nutrient="carbs" class="lbl-macro"><th scope="row">碳水化合物</th><td><span class="lbl-base-value">72克</span><span class="lbl-bar" aria-hidden="true"><i class="lbl-base-bar"></i></span></td><td><span class="lbl-portion-value">36克</span><span class="lbl-bar" aria-hidden="true"><i class="lbl-portion-bar"></i></span></td></tr>
+          <tr data-nutrient="energy" class="lbl-secondary lbl-divider"><th scope="row">能量</th><td><span class="lbl-base-value">1770千焦</span></td><td><span class="lbl-portion-value">885千焦</span></td></tr>
+          <tr data-nutrient="sodium" class="lbl-secondary"><th scope="row">钠</th><td><span class="lbl-base-value">300毫克</span></td><td><span class="lbl-portion-value">150毫克</span></td></tr>
+          <tr data-nutrient="calcium" class="lbl-secondary"><th scope="row">钙</th><td><span class="lbl-base-value lbl-unknown">未标示</span></td><td><span class="lbl-portion-value lbl-unknown">未标示</span></td></tr>
+        </tbody>
+      </table>
+      <p class="lbl-scale-note" id="lbl-scale-note">克数条形使用同一刻度：0—120克</p>
+    </div>
+  </div>
+
+  <div class="lbl-controls">
+    <div class="lbl-portion-caption">
+      <label for="lbl-amount">改变这一份</label>
+      <div class="lbl-shortcuts" role="group" aria-label="快捷设置质量">
+        <button class="btn" id="lbl-per100" type="button">100克</button>
+        <button class="btn" id="lbl-whole" type="button">整包 <span id="lbl-pack-short">150克</span></button>
+      </div>
+    </div>
+    <div class="lbl-slider-row">
+      <button class="lbl-step" id="lbl-less" type="button" aria-label="减少5克"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg></button>
+      <div class="lbl-range-wrap">
+        <input id="lbl-amount" type="range" min="0" max="150" step="5" value="50" aria-label="这一份的质量，单位克">
+        <div class="lbl-range-labels" aria-hidden="true"><span>0克</span><span id="lbl-pack-end">整包150克</span></div>
+      </div>
+      <button class="lbl-step" id="lbl-more" type="button" aria-label="增加5克"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button>
+    </div>
+  </div>
+
+  <div class="lbl-bottom">
+    <div class="lbl-actions">
+      <button class="btn" id="lbl-explain-open" type="button" aria-controls="lbl-explain" aria-expanded="false">标签没写的呢？</button>
+      <button class="btn primary" id="lbl-record" type="button">留下这份记录</button>
+    </div>
+    <p class="lbl-footnote">教学模拟数据，可换成实物包装核对</p>
+  </div>
+
+  <div class="lbl-explain" id="lbl-explain" hidden>
+    <div class="lbl-explain-panel" role="dialog" aria-modal="true" aria-labelledby="lbl-explain-title" tabindex="-1">
+      <button class="lbl-explain-close" id="lbl-explain-close" type="button" aria-label="关闭标签说明"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      <h3 id="lbl-explain-title">没有列出，就没有吗？</h3>
+      <p class="lbl-six-title">人体需要的六类营养</p>
+      <ul class="lbl-six"><li>水</li><li>无机盐</li><li>糖类</li><li>蛋白质</li><li>脂肪</li><li>维生素</li></ul>
+      <p>标签里的<strong>“碳水化合物”</strong>，对应本课所说的<strong>“糖类”</strong>。淀粉和白砂糖都属于糖类。</p>
+      <p>水或维生素没有列在这张标签上，<strong>不能据此说没有</strong>。能量也不是第七类营养。</p>
+      <button class="btn primary" id="lbl-explain-done" type="button">回到标签，找一找</button>
+    </div>
+  </div>
+</div>
+</section></main>
+</div>
+<div class="status-toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-cover" id="records-modal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="records-title" tabindex="-1"><div class="modal-head"><h2 id="records-title">观察记录</h2><button class="icon-btn" type="button" data-close aria-label="关闭观察记录"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div><div class="modal-body"><p class="help-note">模拟记录自动标明来源；实物观察由你补录。记录保存在本机，也可下载。</p><div id="record-content"></div><form class="record-editor" id="real-record-form"><label>实物样品<input id="real-sample" maxlength="32" placeholder="例如：本组花生米" required></label><label>检验方法<select id="real-method" class="btn" style="width:100%;margin-top:6px"><option>碘酒检验</option><option>油迹检验</option><option>包装标签</option></select></label><label class="wide">实际观察到的现象<textarea id="real-observation" maxlength="300" rows="2" placeholder="只写亲眼看到的现象，也可以记录与模拟不一致的结果。" required></textarea></label><button type="submit" class="btn primary">加入实物记录</button></form></div><div class="modal-foot"><span class="record-count" id="record-count"></span><button type="button" class="btn" id="export-records">下载 CSV</button><button type="button" class="btn" data-close>回到实验</button></div></section></div>
+<div class="modal-cover" id="help-modal" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="help-title" tabindex="-1"><div class="modal-head"><h2 id="help-title">把现象变成证据</h2><button class="icon-btn" type="button" data-close aria-label="关闭课堂使用说明"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div><div class="modal-body"><div class="help-grid"><div><h3>在实物探究之后追问</h3><p><strong>碘酒找线索：</strong>先比较纯淀粉、清水与食物样品，再用成分资料检验“没有变蓝就没有营养”的说法。</p><p><strong>油迹时间机：</strong>让三张纸同步经历干燥，也能倒回刚涂抹的时刻；迎光后再比较。</p><p><strong>标签放大镜：</strong>把每100克的标示量，换算成实际一份的量；再找出标签没有告诉我们的信息。</p></div><div><h3>这些模拟能说明什么</h3><ul><li>碘酒检验淀粉；未出现蓝紫色不能推断没有其他营养。</li><li>干燥后仍透光是油迹检验的线索；不能从斑迹大小、深浅读出脂肪克数。</li><li>时间轴只表示过程，不是实际干燥用时。</li><li>标签均为教学模拟数据；未标示不等于零。碳水化合物不等于白砂糖。</li></ul></div></div><h3>回到真实课堂</h3><p>保留食物调查、分组检验和包装阅读。模型现象与本组结果不一致时，先检查样品、取样量、是否干燥和操作条件，并记录差异。</p><p class="help-note">实际检验在教师指导下进行，滴管不碰食物，检验过的样品不再食用。</p><h3>依据与补充资料</h3><p class="help-note">教科版《科学》六年级上册第6—9页；配套教师教学用书《食物中的营养》第51—63页。补充核对：<a href="https://edu.rsc.org/experiments/detecting-starch-in-food-on-a-microscale/563.article" target="_blank" rel="noopener noreferrer">英国皇家化学会：淀粉检验</a>；<a href="https://asta.edu.au/wp-content/uploads/2025/11/AIS-Laboratory-notes-Food-tests.pdf" target="_blank" rel="noopener noreferrer">澳大利亚科学教师协会：食物检验</a>。离线使用不需要打开链接。</p></div><div class="modal-foot"><button class="btn primary" type="button" data-close>开始探究</button></div></section></div>
+<noscript><p class="boot-error">请启用 JavaScript 后重新打开，以使用互动实验。</p></noscript>
+<script>/* FoodVisuals.render is the independent artwork replacement interface. */
+window.FoodVisuals={render:function(id){
+  var food='',i,pts;
+  if(id==='water'){food='<ellipse cx="140" cy="126" rx="84" ry="43" fill="#def0ef" stroke="#adcfc8" stroke-width="2"/><path d="M80 120c21-18 51-23 72-21" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>';}
+  if(id==='starch'){food='<path d="M55 145Q70 127 88 110Q115 77 145 86Q177 85 196 116Q219 131 227 148Q144 176 55 145" fill="#f3f2e9" stroke="#d6d9cd" stroke-width="2"/><path d="M84 127q38-40 65-22m-22 32q35-21 62-4" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>';}
+  if(id==='rice'){food='<ellipse cx="140" cy="135" rx="88" ry="48" fill="#e3e5d7"/>';pts=[[79,132,-35],[91,114,-25],[104,101,28],[119,114,-8],[143,99,40],[164,111,-20],[184,125,20],[201,143,-36],[176,145,45],[151,133,-8],[128,140,25],[105,140,-36],[84,153,22],[112,159,-5],[140,158,-35],[164,164,23],[185,158,-15],[135,119,-22],[161,128,25],[91,98,-20]];for(i=0;i<pts.length;i++){food+='<ellipse cx="'+pts[i][0]+'" cy="'+pts[i][1]+'" rx="16" ry="7" transform="rotate('+pts[i][2]+' '+pts[i][0]+' '+pts[i][1]+')" fill="'+(i%3?'#fffef4':'#f0f0df')+'" stroke="#d7dac9" stroke-width="1.5"/>';}}
+  if(id==='bread'){food='<path d="M61 137C55 105 82 74 121 72C174 62 218 91 220 129C222 168 68 176 61 137Z" fill="#f4e8d3" stroke="#d7c7ab" stroke-width="2"/><path d="M61 137c49 15 108 17 159-8" fill="none" stroke="#ddcfb7" stroke-width="3"/><path d="M114 82q9 15 35 23l-14 10 26 20" fill="none" stroke="#e0d1b9" stroke-width="4" stroke-linecap="round"/><path d="M83 108q10-15 23-17" fill="none" stroke="#fffaf0" stroke-width="7" stroke-linecap="round"/>';}
+  if(id==='sugar'){food='<path d="M62 151L91 120L116 109L141 85L168 100L184 127L216 150Q139 174 62 151Z" fill="#fffdf4" stroke="#d5d9cf" stroke-width="2"/>';pts=[[100,137],[126,119],[145,109],[156,142],[179,148],[119,151],[148,156],[167,124],[87,149],[139,135]];for(i=0;i<pts.length;i++){food+='<path d="m'+pts[i][0]+' '+pts[i][1]+' 5-5 5 5-5 5Z" fill="#f4f5ee" stroke="#c9d7cc" stroke-width="1.1"/>';}}
+  if(id==='egg'){food='<path d="M68 136C48 115 69 91 97 90C109 65 152 77 170 84C204 79 226 106 213 134C223 164 182 178 149 166C111 183 67 165 68 136Z" fill="#fcfdf8" stroke="#cfd6c8" stroke-width="2"/><path d="M90 111q19-16 36-10m39 50q17 5 28-6" fill="none" stroke="#e2e7db" stroke-width="4" stroke-linecap="round"/>';}
+  var stain=id==='water'?'<ellipse cx="140" cy="126" rx="84" ry="43"/>':'<path d="M127 112C132 105 154 105 163 112C173 122 164 136 148 138C131 139 117 127 127 112Z"/>';
+  return '<svg viewBox="0 58 280 158" aria-hidden="true"><ellipse cx="140" cy="190" rx="109" ry="20" fill="#244f3b" opacity=".06"/><path d="M23 126v18c0 48 234 48 234 0v-18" fill="#e8eee8" stroke="#c7d8cf" stroke-width="2"/><ellipse cx="140" cy="126" rx="117" ry="62" fill="#f9fcf8" stroke="#aec7bc" stroke-width="2"/><ellipse cx="140" cy="126" rx="102" ry="49" fill="#f4f7f2" stroke="#d5e1d8" stroke-width="1.5"/>'+food+'<g class="iod-svg-stain">'+stain+'</g><path d="M43 162c35 25 148 35 194-4" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>';
+}};
+(function(){'use strict';
+var data={rice:{name:'米饭',positive:true,nutrients:['糖类 · 淀粉','水','蛋白质'],note:'米饭中的淀粉属于糖类。一次检验只提供一部分成分的线索。'},bread:{name:'馒头',positive:true,nutrients:['糖类 · 淀粉','蛋白质','水'],note:'馒头含有淀粉，也含有其他营养成分。不能用这一滴检验全部营养。'},sugar:{name:'白砂糖',positive:false,nutrients:['糖类 · 蔗糖'],note:'白砂糖中的蔗糖也属于糖类。没有变蓝紫色，不能说明不含糖类。'},egg:{name:'熟蛋清',positive:false,nutrients:['蛋白质','水'],note:'熟蛋清含有蛋白质和水。没有变蓝紫色，不能说明没有营养。'}};
+var root,api,state={sample:'rice',tests:{},open:false},timerIds=[],drag=null,suppressClick=false;
+function q(s){return root.querySelector(s)}
+function each(nodes,fn){Array.prototype.forEach.call(nodes,fn)}
+function key(kind){return kind==='sample'?state.sample:kind}
+function positive(kind){return kind==='starch'||(kind==='sample'&&data[state.sample].positive)}
+function name(kind){return kind==='starch'?'纯淀粉':kind==='water'?'清水':data[state.sample].name}
+function outcome(kind){return positive(kind)?'出现蓝紫色':'未出现蓝紫色'}
+function evidence(){var tested=state.tests[state.sample]===true,d=data[state.sample],box=q('.iod-evidence');box.classList.toggle('result',!!tested);box.classList.toggle('open',state.open&&!!tested);q('#iod-reveal').disabled=!tested;q('#iod-reveal').setAttribute('aria-expanded',state.open?'true':'false');q('#iod-reveal').innerHTML=(state.open?'收起线索':'成分线索')+'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+if(!tested){q('#iod-evidence-main').innerHTML='<div class="iod-evidence-symbol" aria-hidden="true">?</div><h3>先观察，再解释</h3><p>和纯淀粉、清水相比，样品的颜色怎样变化？</p>';q('#iod-question').textContent='先预测：四种食物都会出现蓝紫色吗？';}
+else if(d.positive){q('#iod-evidence-main').innerHTML='<div class="iod-color-chip" aria-hidden="true"></div><h3>出现蓝紫色</h3><p>这支持样品中含有淀粉。还能知道其他营养吗？</p>';q('#iod-question').textContent='颜色变了，能直接读出淀粉有多少克吗？';}
+else{q('#iod-evidence-main').innerHTML='<div class="iod-color-chip brown" aria-hidden="true"></div><h3>未出现蓝紫色</h3><p>这次没有检出淀粉。能据此说没有营养吗？</p>';q('#iod-question').textContent='没有检出淀粉，等于没有任何营养吗？';}
+q('#iod-composition').hidden=!(state.open&&tested);if(state.open&&tested){q('#iod-composition').innerHTML='<h4>成分资料</h4><div class="iod-nutrient-list">'+d.nutrients.map(function(v,i){return '<span class="iod-nutrient"><span class="iod-dot" style="background:'+['#bf9044','#689fbe','#bd7c63'][i%3]+'"></span>'+v+'</span>'}).join('')+'</div><p class="iod-composition-note">'+d.note+'</p><p class="iod-disclaimer">仅列部分成分；符号不表示含量，也不是显微镜图像。</p>';}
+}
+function render(){each(q('.iod-choices').querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-sample')===state.sample?'true':'false')});q('#iod-sample-label').innerHTML=data[state.sample].name+'<span>待检验的样品</span>';['starch','sample','water'].forEach(function(k){q('#iod-visual-'+k).innerHTML=window.FoodVisuals.render(k==='sample'?state.sample:k);var btn=q('[data-assay="'+k+'"]'),done=state.tests[key(k)]===true;btn.classList.toggle('done',done);btn.classList.toggle('positive',done&&positive(k));q('#iod-out-'+k).textContent=done?outcome(k):(k==='sample'?'点样品，滴一滴':'还未滴入');btn.setAttribute('aria-label','给'+name(k)+'滴碘酒'+(done?'，'+outcome(k):''))});evidence();}
+function apply(kind){var k=key(kind);if(state.tests[k]){api.toast('这一份已检验，可换新样品再试');return}var b=q('[data-assay="'+kind+'"]'),sampleAtStart=state.sample;b.classList.add('testing');state.tests[k]='pending';timerIds.push(setTimeout(function(){state.tests[k]=true;b.classList.remove('testing');if(kind!=='sample'||sampleAtStart===state.sample){render()}api.record('碘酒检验',kind==='sample'?data[sampleAtStart].name:name(kind),(kind==='starch'||(kind==='sample'&&data[sampleAtStart].positive)?'出现蓝紫色，支持含有淀粉':'未出现蓝紫色，本次没有检出淀粉')+'（定性模拟）')},450));}
+function clearTimers(){timerIds.forEach(clearTimeout);timerIds=[];each(root.querySelectorAll('.testing'),function(x){x.classList.remove('testing')})}
+function reset(){clearTimers();state.tests={};state.open=false;render();}
+function pt(e){var t=e.touches&&e.touches[0]||e.changedTouches&&e.changedTouches[0]||e;return{x:t.clientX,y:t.clientY}}
+function targetDish(x,y){var el=document.elementFromPoint(x,y);while(el&&el!==root){if(el.getAttribute&&el.getAttribute('data-assay'))return el;el=el.parentNode}return null}
+function clearHover(){each(root.querySelectorAll('.drag-over'),function(e){e.classList.remove('drag-over')})}
+function down(e){if(e.button!==undefined&&e.button!==0)return;var p=pt(e);drag={x:p.x,y:p.y,moved:false};e.preventDefault();q('#iod-dropper').classList.add('dragging');}
+function move(e){if(!drag)return;var p=pt(e),dx=p.x-drag.x,dy=p.y-drag.y;drag.moved=drag.moved||Math.abs(dx)+Math.abs(dy)>5;q('#iod-dropper').style.transform='translate('+dx+'px,'+dy+'px)';q('#iod-dropper').style.pointerEvents='none';clearHover();var d=targetDish(p.x,p.y);if(d)d.classList.add('drag-over');if(e.cancelable)e.preventDefault();}
+function up(e){if(!drag)return;var p=pt(e),moved=drag.moved,d=targetDish(p.x,p.y);q('#iod-dropper').classList.remove('dragging');q('#iod-dropper').style.transform='';q('#iod-dropper').style.pointerEvents='';clearHover();drag=null;suppressClick=true;setTimeout(function(){suppressClick=false},100);if(d)apply(d.getAttribute('data-assay'));else if(!moved)apply('sample');if(e.cancelable)e.preventDefault();}
+function cancel(){if(!drag)return;drag=null;q('#iod-dropper').classList.remove('dragging');q('#iod-dropper').style.transform='';q('#iod-dropper').style.pointerEvents='';clearHover();}
+window.IodineLab={init:function(el,bridge){root=el;api=bridge;each(root.querySelectorAll('[data-sample]'),function(b){b.addEventListener('click',function(){state.sample=b.getAttribute('data-sample');state.open=false;render()})});each(root.querySelectorAll('[data-assay]'),function(b){b.addEventListener('click',function(){apply(b.getAttribute('data-assay'))})});q('#iod-test-all').addEventListener('click',function(){var changed=false;['starch','sample','water'].forEach(function(k){if(!state.tests[key(k)]){apply(k);changed=true}});if(!changed)api.toast('三份样品已检验；可切换食物，或换新样品')});q('#iod-reset').addEventListener('click',reset);q('#iod-reveal').addEventListener('click',function(){state.open=!state.open;evidence()});var drop=q('#iod-dropper');drop.addEventListener('click',function(e){if(!suppressClick&&e.detail===0)apply('sample')});if(window.PointerEvent){drop.addEventListener('pointerdown',down);document.addEventListener('pointermove',move,{passive:false});document.addEventListener('pointerup',up);document.addEventListener('pointercancel',cancel)}else{drop.addEventListener('mousedown',down);document.addEventListener('mousemove',move);document.addEventListener('mouseup',up);drop.addEventListener('touchstart',down,{passive:false});document.addEventListener('touchmove',move,{passive:false});document.addEventListener('touchend',up,{passive:false});document.addEventListener('touchcancel',cancel)}render()},pause:function(){cancel()},reset:reset,getState:function(){return JSON.parse(JSON.stringify(state))},samples:data};
+}());
+
+(function (window) {
+  'use strict';
+  var root, host, api, els, timer = null;
+  var state = { sample: 'peanut', started: false, progress: 0, light: false, playing: false, recorded: false };
+  var sampleNames = { peanut: '花生米', cucumber: '黄瓜' };
+  var stainPath = 'M99 132C107 110 135 106 155 114C178 100 211 114 220 137C239 150 237 181 219 198C201 219 171 222 151 213C128 225 103 211 96 190C77 174 81 146 99 132Z';
+
+  function q(selector) { return root.querySelector(selector); }
+  function each(nodes, fn) { Array.prototype.forEach.call(nodes, fn); }
+  function safeCall(name, args) { if (api && typeof api[name] === 'function') { api[name].apply(api, args || []); } }
+
+  function paperSVG(key, label) {
+    var id = 'oil-' + key;
+    return '<svg viewBox="0 0 320 330" role="img" aria-label="' + label + '在纸上留下的斑迹示意">' +
+      '<defs><pattern id="' + id + '-stripes" x="0" y="0" width="38" height="38" patternUnits="userSpaceOnUse">' +
+      '<rect width="38" height="38" fill="#f7eec8"/><rect width="14" height="38" fill="#8caa91"/></pattern>' +
+      '<clipPath id="' + id + '-clip"><path d="' + stainPath + '"/></clipPath></defs>' +
+      '<rect x="2" y="12" width="316" height="302" rx="6" fill="#e8eeea" class="oil-backing"/>' +
+      '<rect x="2" y="12" width="316" height="302" rx="6" fill="url(#' + id + '-stripes)" class="oil-back-stripes" opacity="0"/>' +
+      '<rect x="29" y="28" width="266" height="277" rx="2" fill="#29483d" opacity=".08"/>' +
+      '<rect x="24" y="21" width="270" height="278" rx="2" fill="#ffffff" stroke="#d1dcd2" stroke-width="1.5"/>' +
+      '<path d="M39 37h241M39 282h241" fill="none" stroke="#f0f3ed" stroke-width="1"/>' +
+      '<g class="oil-target" opacity="1"><ellipse cx="159" cy="164" rx="70" ry="58" fill="none" stroke="#ccd8cf" stroke-width="2" stroke-dasharray="6 7"/></g>' +
+      '<g class="oil-stain" opacity="0">' +
+      '<path class="oil-stain-unlit" d="' + stainPath + '" fill="#9bab9b" opacity=".6"/>' +
+      '<g class="oil-stain-lit" clip-path="url(#' + id + '-clip)" opacity="0"><rect x="0" y="0" width="320" height="330" fill="url(#' + id + '-stripes)"/></g>' +
+      '</g></svg>';
+  }
+
+  function updatePaper(el, amount) {
+    var stain = el.querySelector('.oil-stain');
+    stain.setAttribute('opacity', state.started ? String(amount) : '0');
+    el.querySelector('.oil-target').setAttribute('opacity', state.started ? '0' : '1');
+    el.querySelector('.oil-back-stripes').setAttribute('opacity', state.light ? '.72' : '0');
+    el.querySelector('.oil-stain-lit').setAttribute('opacity', state.light ? '1' : '0');
+    el.querySelector('.oil-stain-unlit').setAttribute('opacity', state.light ? '0' : '.6');
+  }
+
+  function timePhrase() {
+    if (!state.started) return '还没有涂抹样品';
+    if (state.progress === 0) return '刚涂抹';
+    if (state.progress === 100) return '干燥后';
+    return '干燥过程中';
+  }
+
+  function recordEvidence() {
+    if (state.recorded || !state.started || state.progress !== 100 || !state.light) return;
+    state.recorded = true;
+    safeCall('record', ['油迹模拟', sampleNames[state.sample],
+      state.sample === 'peanut'
+        ? '同一过程下，水迹消失，食用油和花生米的斑迹在干燥后仍透光，支持花生米含有脂肪。过程示意，不代表实际用时或脂肪含量。'
+        : '同一过程下，水迹消失，食用油仍有透光斑；黄瓜未见明显油迹，不能证明它完全没有脂肪。过程示意，不代表实际用时或脂肪含量。']);
+  }
+
+  function render() {
+    if (!els) return;
+    var dry = state.progress / 100;
+    var waterAmount = Math.max(0, 1 - dry / .93) * .82;
+    var oilAmount = .82;
+    var foodAmount = state.sample === 'peanut' ? .70 + .12 * (1 - dry) : waterAmount;
+    host.setAttribute('data-started', String(state.started));
+    host.setAttribute('data-progress', String(state.progress));
+    host.setAttribute('data-sample', state.sample);
+    host.setAttribute('data-light', String(state.light));
+    updatePaper(els.paperWater, waterAmount);
+    updatePaper(els.paperOil, oilAmount);
+    updatePaper(els.paperFood, foodAmount);
+    els.time.value = String(state.progress);
+    els.time.disabled = !state.started;
+    els.time.setAttribute('aria-valuetext', timePhrase());
+    els.smear.textContent = state.started ? '重新涂抹' : '涂抹样品';
+    els.play.disabled = !state.started;
+    els.play.querySelector('span').textContent = state.playing ? '暂停变化' : (state.progress === 100 ? '回看变化' : (state.progress > 0 ? '继续变化' : '播放变化'));
+    els.play.querySelector('svg').innerHTML = state.playing ? '<path d="M7 5h4v14H7zm6 0h4v14h-4z" fill="currentColor"/>' : '<path d="m8 5 11 7-11 7Z" fill="currentColor"/>';
+    els.light.setAttribute('aria-pressed', String(state.light));
+    els.light.querySelector('span').textContent = state.light ? '关闭背光' : '迎光观察';
+    els.foodTitle.textContent = sampleNames[state.sample];
+    each(els.choices, function (button) {
+      var selected = button.getAttribute('data-oil-sample') === state.sample;
+      button.setAttribute('aria-pressed', String(selected));
+      button.className = 'oil-choice' + (selected ? ' is-selected' : '');
+    });
+
+    var waterStatus = '等待涂抹', oilStatus = '等待涂抹', foodStatus = '等待涂抹';
+    var evidence = '先涂抹，再比较三张纸。';
+    var complete = state.started && state.progress === 100 && state.light;
+    if (state.started) {
+      waterStatus = oilStatus = foodStatus = state.progress < 100 ? '观察斑迹变化' : '迎光再看';
+      evidence = state.progress < 100 ? '拖动时间：刚留下的斑迹，都能算油迹吗？' : '已经干燥，打开“迎光观察”再比较。';
+      if (state.light && state.progress < 100) {
+        evidence = '现在的透光斑，会一直保留吗？继续拖到“干燥后”。';
+      }
+    }
+    if (complete) {
+      waterStatus = '斑迹消失';
+      oilStatus = '仍有透光斑';
+      foodStatus = state.sample === 'peanut' ? '仍有透光斑' : '未见明显油迹';
+      evidence = state.sample === 'peanut' ? '花生米：干燥后仍透光，支持含有脂肪。' : '黄瓜：未见明显油迹，不能证明完全没有脂肪。';
+    }
+    els.waterStatus.textContent = waterStatus;
+    els.oilStatus.textContent = oilStatus;
+    els.foodStatus.textContent = foodStatus;
+    if (els.evidence.textContent !== evidence) els.evidence.textContent = evidence;
+    els.evidence.className = 'oil-evidence' + (complete ? ' is-complete' : '');
+    recordEvidence();
+  }
+
+  function pause() {
+    if (timer !== null) { window.clearInterval(timer); timer = null; }
+    state.playing = false;
+    render();
+  }
+
+  function startPlayback() {
+    if (!state.started) return;
+    if (state.playing) { pause(); return; }
+    if (state.progress === 100) state.progress = 0;
+    state.playing = true;
+    var from = state.progress;
+    var began = Date.now();
+    render();
+    timer = window.setInterval(function () {
+      state.progress = Math.min(100, Math.round(from + (Date.now() - began) / 100));
+      if (state.progress === 100) {
+        window.clearInterval(timer);
+        timer = null;
+        state.playing = false;
+      }
+      render();
+    }, 60);
+  }
+
+  function smear() {
+    pause();
+    state.started = true;
+    state.progress = 0;
+    state.recorded = false;
+    render();
+  }
+
+  function reset() {
+    pause();
+    state.sample = 'peanut';
+    state.started = false;
+    state.progress = 0;
+    state.light = false;
+    state.recorded = false;
+    render();
+  }
+
+  function init(container, bridge) {
+    root = container;
+    host = root.querySelector('.oil-lab') || root;
+    api = bridge || {};
+    els = {
+      paperWater: q('#oil-paper-water'), paperOil: q('#oil-paper-oil'), paperFood: q('#oil-paper-food'),
+      time: q('#oil-time'), smear: q('#oil-smear'), play: q('#oil-play'), light: q('#oil-light'),
+      choices: root.querySelectorAll('[data-oil-sample]'), foodTitle: q('#oil-food-title'),
+      waterStatus: q('#oil-water-status'), oilStatus: q('#oil-oil-status'), foodStatus: q('#oil-food-status'),
+      evidence: q('#oil-evidence')
+    };
+    els.paperWater.innerHTML = paperSVG('water', '水');
+    els.paperOil.innerHTML = paperSVG('oil', '食用油');
+    els.paperFood.innerHTML = paperSVG('food', '食物样品');
+    els.smear.addEventListener('click', smear);
+    els.play.addEventListener('click', startPlayback);
+    els.light.addEventListener('click', function () { state.light = !state.light; render(); });
+    els.time.addEventListener('input', function () {
+      var nextProgress = Math.min(100, Math.max(0, Number(els.time.value) || 0));
+      pause();
+      state.progress = nextProgress;
+      render();
+    });
+    each(els.choices, function (button) {
+      button.addEventListener('click', function () {
+        var next = button.getAttribute('data-oil-sample');
+        if (state.sample === next) return;
+        pause();
+        state.sample = next;
+        state.started = false;
+        state.progress = 0;
+        state.recorded = false;
+        render();
+        safeCall('toast', ['换成' + sampleNames[next] + '，重新涂抹后再比较。']);
+      });
+    });
+    render();
+  }
+
+  window.OilLab = {
+    init: init,
+    reset: reset,
+    pause: pause,
+    getState: function () { return { sample: state.sample, started: state.started, progress: state.progress, light: state.light, playing: state.playing, recorded: state.recorded }; }
+  };
+})(window);
+
+/*
+ * 标签数据替换接口：修改 FOOD_LABELS 或调用 LabelLab.setProducts(array)。
+ * 所有量以质量 g 为基准；能量 kJ，钠/钙 mg。null 意为未标示，不参与零值推断。
+ * 以下均为教学模拟标签，不代表实际品牌、实测值或个人膳食建议。
+ */
+(function (window, document) {
+  'use strict';
+  var DEFAULT_LABELS = [
+    {id:'biscuit',name:'饼干',shape:'bag',pack:150,protein:6,fat:12,carbs:72,energy:1770,sodium:300,calcium:null},
+    {id:'milk',name:'牛奶',shape:'carton',pack:250,protein:3.2,fat:3.6,carbs:4.8,energy:270,sodium:40,calcium:100},
+    {id:'drink',name:'饮料',shape:'bottle',pack:500,protein:0,fat:0,carbs:10,energy:170,sodium:15,calcium:null}
+  ];
+  var FIELDS = [
+    {key:'protein',name:'蛋白质',unit:'克',bar:true},
+    {key:'fat',name:'脂肪',unit:'克',bar:true},
+    {key:'carbs',name:'碳水化合物',unit:'克',bar:true},
+    {key:'energy',name:'能量',unit:'千焦'},
+    {key:'sodium',name:'钠',unit:'毫克'},
+    {key:'calcium',name:'钙',unit:'毫克'}
+  ];
+  var root = null;
+  var api = null;
+  var products = [];
+  var index = 0;
+  var amount = 50;
+  var scale = 120;
+  var previousFocus = null;
+  var initialized = false;
+
+  function find(selector) { return root.querySelector(selector); }
+  function each(nodes, fn) { Array.prototype.forEach.call(nodes, fn); }
+  function finiteNumber(value) { return typeof value === 'number' && isFinite(value); }
+  function format(value) {
+    var rounded = Math.round((value + 0.00000001) * 100) / 100;
+    return String(rounded === 0 ? 0 : rounded);
+  }
+  function setText(selector, text) { find(selector).textContent = text; }
+  function escapeText(text) {
+    return String(text).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
+  }
+  function validProducts(next) {
+    var list = [];
+    if (!Array.isArray(next)) { return list; }
+    next.forEach(function (item, itemIndex) {
+      if (!item || typeof item.name !== 'string' || !finiteNumber(item.pack) || item.pack <= 0) { return; }
+      var product = {id:String(item.id || ('sample-' + itemIndex)),name:item.name,shape:item.shape || 'bag',pack:item.pack};
+      FIELDS.forEach(function (field) {
+        var value = item[field.key];
+        product[field.key] = finiteNumber(value) && value >= 0 ? value : null;
+      });
+      list.push(product);
+    });
+    return list;
+  }
+  function computeScale() {
+    var highest = 100;
+    products.forEach(function (product) {
+      FIELDS.forEach(function (field) {
+        if (field.bar && product[field.key] !== null) {
+          highest = Math.max(highest, product[field.key] * Math.max(1, product.pack / 100));
+        }
+      });
+    });
+    scale = Math.max(120, Math.ceil(highest / 20) * 20);
+  }
+  function packageSVG(product) {
+    var shape;
+    if (product.shape === 'carton') {
+      shape = '<path d="M45 64 68 29h70l24 35v195H45Z" fill="#eef4ec" stroke="#5a8a79" stroke-width="3"/><path d="M45 64h117M68 29l17 35M138 29l-16 35" fill="none" stroke="#5a8a79" stroke-width="3"/><path d="M45 103h117v72H45Z" fill="#d9e8dd"/><path d="M103 115c-17 22-25 31-25 44a25 25 0 0 0 50 0c0-13-8-22-25-44Z" fill="#fff" stroke="#8bb8a5" stroke-width="2"/>';
+    } else if (product.shape === 'bottle') {
+      shape = '<rect x="76" y="22" width="54" height="22" rx="5" fill="#8bb8a5" stroke="#5a8a79" stroke-width="3"/><path d="M80 44v25c0 20-28 30-28 52v119c0 12 7 19 19 19h64c12 0 19-7 19-19V121c0-22-28-32-28-52V44Z" fill="#f2f5ed" stroke="#5a8a79" stroke-width="3"/><path d="M53 124h100v80H53Z" fill="#d9e8dd"/><circle cx="103" cy="160" r="26" fill="#eac57c"/><path d="M103 136v48M79 160h48m-41-17 34 34m0-34-34 34" stroke="#faf7eb" stroke-width="3"/>';
+    } else {
+      shape = '<path d="M43 30h120l-6 22 8 189-5 18H46l-5-18 8-189Z" fill="#f2f3e9" stroke="#5a8a79" stroke-width="3"/><path d="M47 49h112M47 240h112" stroke="#8ab9a7" stroke-width="3"/><path d="M47 88h114v105H47Z" fill="#dce8d9"/><circle cx="104" cy="142" r="38" fill="#e5be77" stroke="#c69544" stroke-width="3"/><circle cx="91" cy="128" r="3" fill="#ab7d38"/><circle cx="115" cy="126" r="3" fill="#ab7d38"/><circle cx="101" cy="145" r="3" fill="#ab7d38"/><circle cx="84" cy="150" r="3" fill="#ab7d38"/><circle cx="118" cy="153" r="3" fill="#ab7d38"/><circle cx="103" cy="166" r="3" fill="#ab7d38"/>';
+    }
+    return '<svg viewBox="0 0 206 280" xmlns="http://www.w3.org/2000/svg">' + shape + '<text x="103" y="83" text-anchor="middle" font-size="20">' + escapeText(product.name) + '</text><text x="103" y="225" text-anchor="middle" font-size="19">' + escapeText(format(product.pack)) + '克</text></svg>';
+  }
+  function renderProducts() {
+    var container = find('#lbl-products');
+    container.textContent = '';
+    products.forEach(function (product, productIndex) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = product.name;
+      button.setAttribute('data-product', String(productIndex));
+      button.setAttribute('aria-pressed', productIndex === index ? 'true' : 'false');
+      button.addEventListener('click', function () {
+        index = productIndex;
+        amount = Math.min(amount, products[index].pack);
+        renderProduct();
+      });
+      container.appendChild(button);
+    });
+  }
+  function renderProduct() {
+    var product = products[index];
+    find('#lbl-package-art').innerHTML = packageSVG(product);
+    each(find('#lbl-products').querySelectorAll('button'), function (button, productIndex) {
+      button.setAttribute('aria-pressed', productIndex === index ? 'true' : 'false');
+    });
+    find('#lbl-amount').max = String(product.pack);
+    find('#lbl-per100').disabled = product.pack < 100;
+    setText('#lbl-pack-short', format(product.pack) + '克');
+    setText('#lbl-pack-end', '整包' + format(product.pack) + '克');
+    setText('#lbl-scale-note', '克数条形使用同一刻度：0—' + format(scale) + '克');
+    renderAmount();
+  }
+  function renderAmount() {
+    var product = products[index];
+    var ratio = amount / 100;
+    find('#lbl-amount').value = String(amount);
+    find('#lbl-amount').setAttribute('aria-valuetext', '这一份' + format(amount) + '克，整包' + format(product.pack) + '克');
+    setText('#lbl-amount-value', format(amount));
+    setText('#lbl-ratio-mass', format(amount));
+    setText('#lbl-ratio-value', format(ratio));
+    setText('#lbl-multiplier', format(ratio));
+    setText('#lbl-table-mass', format(amount) + '克');
+    find('#lbl-less').disabled = amount <= 0;
+    find('#lbl-more').disabled = amount >= product.pack;
+    find('#lbl-per100').setAttribute('aria-pressed', amount === 100 ? 'true' : 'false');
+    find('#lbl-whole').setAttribute('aria-pressed', amount === product.pack ? 'true' : 'false');
+    FIELDS.forEach(function (field) {
+      var row = find('tr[data-nutrient="' + field.key + '"]');
+      var base = product[field.key];
+      var current = base === null ? null : base * ratio;
+      var left = row.querySelector('.lbl-base-value');
+      var right = row.querySelector('.lbl-portion-value');
+      left.textContent = base === null ? '未标示' : format(base) + field.unit;
+      right.textContent = current === null ? '未标示' : format(current) + field.unit;
+      left.className = 'lbl-base-value' + (base === null ? ' lbl-unknown' : '');
+      right.className = 'lbl-portion-value' + (current === null ? ' lbl-unknown' : '');
+      if (field.bar) {
+        var leftBar = row.querySelector('.lbl-base-bar');
+        var rightBar = row.querySelector('.lbl-portion-bar');
+        leftBar.style.width = (base === null ? 0 : base / scale * 100) + '%';
+        rightBar.style.width = (current === null ? 0 : current / scale * 100) + '%';
+        leftBar.parentNode.style.visibility = base === null ? 'hidden' : 'visible';
+        rightBar.parentNode.style.visibility = current === null ? 'hidden' : 'visible';
+      }
+    });
+  }
+  function setAmount(next) {
+    if (!finiteNumber(next)) { return; }
+    amount = Math.max(0, Math.min(products[index].pack, next));
+    renderAmount();
+  }
+  function openExplanation() {
+    previousFocus = document.activeElement;
+    find('#lbl-explain').hidden = false;
+    find('#lbl-explain-open').setAttribute('aria-expanded', 'true');
+    find('#lbl-explain-close').focus();
+  }
+  function closeExplanation(restoreFocus) {
+    if (!root) { return; }
+    find('#lbl-explain').hidden = true;
+    find('#lbl-explain-open').setAttribute('aria-expanded', 'false');
+    if (restoreFocus && previousFocus && typeof previousFocus.focus === 'function') { previousFocus.focus(); }
+    previousFocus = null;
+  }
+  function recordCurrent() {
+    var product = products[index];
+    var observations = ['教学模拟标签；每100克为基准；这一份' + format(amount) + '克；换算倍数' + format(amount / 100)];
+    FIELDS.forEach(function (field) {
+      var base = product[field.key];
+      observations.push(field.name + '：' + (base === null ? '未标示（不等于没有）' : '每100克' + format(base) + field.unit + '，这一份' + format(base * amount / 100) + field.unit));
+    });
+    observations.push('水和维生素未在此教学标签中列出；数字不用于个人膳食建议。');
+    if (api && typeof api.record === 'function') { api.record('营养标签（教学模拟）', product.name, observations.join('；')); }
+    if (api && typeof api.toast === 'function') { api.toast('已留下这一份的模拟记录'); }
+  }
+  function bind() {
+    find('#lbl-amount').addEventListener('input', function () { setAmount(Number(this.value)); });
+    find('#lbl-amount').addEventListener('change', function () { setAmount(Number(this.value)); });
+    find('#lbl-less').addEventListener('click', function () { setAmount(amount - 5); });
+    find('#lbl-more').addEventListener('click', function () { setAmount(amount + 5); });
+    find('#lbl-per100').addEventListener('click', function () { setAmount(100); });
+    find('#lbl-whole').addEventListener('click', function () { setAmount(products[index].pack); });
+    find('#lbl-record').addEventListener('click', recordCurrent);
+    find('#lbl-explain-open').addEventListener('click', openExplanation);
+    find('#lbl-explain-close').addEventListener('click', function () { closeExplanation(true); });
+    find('#lbl-explain-done').addEventListener('click', function () { closeExplanation(true); });
+    find('#lbl-explain').addEventListener('click', function (event) { if (event.target === this) { closeExplanation(true); } });
+    find('#lbl-explain').addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' || event.keyCode === 27) {
+        event.preventDefault(); event.stopPropagation(); closeExplanation(true);
+      }
+      if (event.key === 'Tab' || event.keyCode === 9) {
+        var first = find('#lbl-explain-close');
+        var last = find('#lbl-explain-done');
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
+    });
+  }
+  function setProducts(next) {
+    var validated = validProducts(next);
+    if (!validated.length) { throw new Error('标签列表需要至少一个有效样品；pack 使用大于零的克数。'); }
+    products = validated;
+    window.FOOD_LABELS = products;
+    index = 0;
+    amount = Math.min(50, products[0].pack);
+    computeScale();
+    if (root) { renderProducts(); renderProduct(); }
+  }
+  window.LabelLab = {
+    init: function (pageRoot, bridge) {
+      if (initialized) { return; }
+      root = pageRoot.querySelector('.label-lab') || pageRoot;
+      api = bridge || {};
+      setProducts(window.FOOD_LABELS || DEFAULT_LABELS);
+      bind();
+      initialized = true;
+    },
+    reset: function () {
+      if (!root) { return; }
+      closeExplanation(false);
+      index = 0;
+      amount = Math.min(50, products[0].pack);
+      renderProduct();
+    },
+    pause: function () { closeExplanation(false); },
+    setProducts: setProducts,
+    getState: function () {
+      if (!products.length) { return null; }
+      return {sample:products[index].id,amount:amount,ratio:amount / 100,scale:scale};
+    }
+  };
+})(window, document);
+
+(function(){'use strict';
+var STORE='science-g6u1l2-nutrition-v1',records=[],toastTimer=null,activePage='iodine',lastFocus=null;
+function byId(id){return document.getElementById(id)}
+function each(list,fn){Array.prototype.forEach.call(list,fn)}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+try{var saved=JSON.parse(localStorage.getItem(STORE)||'[]');if(Array.isArray(saved)){records=saved.filter(function(x){return x&&typeof x.observation==='string'&&typeof x.sample==='string'&&typeof x.kind==='string'}).slice(-60)}}catch(ignore){}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(records))}catch(ignore){toast('浏览器未允许保存；可下载记录留存')}}
+function toast(t){clearTimeout(toastTimer);byId('toast').textContent=t;byId('toast').classList.add('show');toastTimer=setTimeout(function(){byId('toast').classList.remove('show')},3000)}
+function record(kind,sample,observation,source){var src=source||'模拟',key=[kind,sample,observation,src].join('|');if(src==='模拟'&&records.some(function(r){return r.key===key}))return;records.push({key:key,kind:kind,sample:sample,observation:observation,source:src,time:new Date().toISOString()});if(records.length>60)records.shift();persist();if(!byId('records-modal').hidden)renderRecords();}
+var api={record:record,toast:toast};window.IodineLab.init(byId('page-iodine'),api);window.OilLab.init(byId('page-oil'),api);window.LabelLab.init(byId('page-label'),api);
+function selectPage(id){if(['iodine','oil','label'].indexOf(id)<0)return;window.IodineLab.pause();window.OilLab.pause();window.LabelLab.pause();activePage=id;each(document.querySelectorAll('.lesson-page'),function(el){var show=el.id==='page-'+id;el.hidden=!show;el.classList.toggle('active',show)});each(document.querySelectorAll('[data-page]'),function(b){if(b.getAttribute('data-page')===id)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')})}
+each(document.querySelectorAll('[data-page]'),function(b){b.addEventListener('click',function(){selectPage(b.getAttribute('data-page'))})});
+function renderRecords(){var host=byId('record-content');if(!records.length){host.innerHTML='<p style="padding:18px 0;color:var(--muted)">还没有记录。做一次检验，或在下方补录实物观察。</p>'}else{host.innerHTML='<table class="record-table"><thead><tr><th>来源 / 方法</th><th>样品</th><th>观察与数量</th><th><span class="visually-hidden">操作</span></th></tr></thead><tbody>'+records.map(function(r,i){return '<tr><td><span class="record-source '+(r.source==='实物'?'real':'')+'">'+escapeHTML(r.source||'模拟')+'</span><br>'+escapeHTML(r.kind)+'</td><td>'+escapeHTML(r.sample)+'</td><td>'+escapeHTML(r.observation)+'</td><td><button class="delete-row" type="button" data-delete="'+i+'" aria-label="删除第'+(i+1)+'条记录">×</button></td></tr>'}).join('')+'</tbody></table>';each(host.querySelectorAll('[data-delete]'),function(b){b.addEventListener('click',function(){records.splice(Number(b.getAttribute('data-delete')),1);persist();renderRecords()})})}byId('record-count').textContent=records.length+' 条记录 · 最多保留60条';byId('export-records').disabled=!records.length;}
+function openModal(id){lastFocus=document.activeElement;window.OilLab.pause();byId(id).hidden=false;byId(id).querySelector('.modal').focus();if(id==='records-modal')renderRecords()}
+function closeModal(el){el.hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+byId('open-records').addEventListener('click',function(){openModal('records-modal')});byId('open-help').addEventListener('click',function(){openModal('help-modal')});each(document.querySelectorAll('.modal-cover'),function(el){each(el.querySelectorAll('[data-close]'),function(b){b.addEventListener('click',function(){closeModal(el)})});el.addEventListener('click',function(e){if(e.target===el)closeModal(el)})});
+document.addEventListener('keydown',function(e){var open=document.querySelector('.modal-cover:not([hidden])');if(open){if(e.key==='Escape'){closeModal(open);e.preventDefault()}if(e.key==='Tab'){var list=Array.prototype.filter.call(open.querySelectorAll('button,a,input,select,textarea,[tabindex="0"]'),function(x){return !x.disabled&&x.getClientRects().length});if(!list.length)return;var first=list[0],last=list[list.length-1];if(e.shiftKey&&(document.activeElement===first||document.activeElement===open.querySelector('.modal'))){last.focus();e.preventDefault()}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault()}}return}if(e.altKey&&['1','2','3'].indexOf(e.key)>=0){selectPage(['iodine','oil','label'][Number(e.key)-1]);e.preventDefault()}});
+byId('real-record-form').addEventListener('submit',function(e){e.preventDefault();var sample=byId('real-sample').value.trim(),obs=byId('real-observation').value.trim();if(!sample||!obs){toast('请填写样品和亲眼观察到的现象');return}record(byId('real-method').value,sample,obs,'实物');byId('real-observation').value='';toast('已加入实物观察记录')});
+function csvCell(s){s=String(s);if(/^[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"'}
+byId('export-records').addEventListener('click',function(){if(!records.length)return;var lines=[['来源','方法','样品','观察与数量','记录时间（UTC）'].map(csvCell).join(',')].concat(records.map(function(r){return [r.source||'模拟',r.kind,r.sample,r.observation,r.time].map(csvCell).join(',')}));var blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='食物中的营养_观察记录.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},2000);toast('已生成观察记录文件')});
+byId('fullscreen').addEventListener('click',function(){var doc=document,el=document.documentElement,full=doc.fullscreenElement||doc.webkitFullscreenElement;try{var promise;if(full){var exit=doc.exitFullscreen||doc.webkitExitFullscreen;if(exit)promise=exit.call(doc)}else{var enter=el.requestFullscreen||el.webkitRequestFullscreen;if(enter)promise=enter.call(el);else{toast('此浏览器不支持页面全屏，可使用浏览器的全屏展示');return}}if(promise&&promise.catch)promise.catch(function(){toast('全屏未能开启，可使用浏览器的全屏展示')})}catch(ignore){toast('可使用浏览器的全屏展示')}});
+document.addEventListener('visibilitychange',function(){if(document.hidden)window.OilLab.pause()});
+window.NutritionLesson={version:'1.0.0',selectPage:selectPage,getState:function(){return{page:activePage,records:records.slice(),iodine:window.IodineLab.getState(),oil:window.OilLab.getState?window.OilLab.getState():null}},exportText:function(){return JSON.stringify(records,null,2)}};
+}());
+</script>
+</body></html>
