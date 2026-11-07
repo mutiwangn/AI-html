@@ -1055,7 +1055,7 @@ window.AIHTML_CURRICULUM = {
           "lessons": [
             {
               "code": "1.1",
-              "title": "生长发育的信息"
+              "title": "健康成长的信息"
             },
             {
               "code": "1.2",
@@ -1331,6 +1331,7 @@ window.AIHTML_CURRICULUM = {
     }
   ]
 };
+
 
 
 
