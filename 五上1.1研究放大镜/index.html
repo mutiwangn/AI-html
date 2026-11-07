@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#18705c">
+<meta name="description" content="五上1.1研究放大镜：同点倍率与视野联动，镜片剖面对照；离线单文件互动探究。">
+<title>研究放大镜 · 五上1.1</title>
+<style>
+:root{--bg:#f4f3ed;--paper:#fff;--ink:#20342f;--muted:#60706a;--accent:#18705c;--soft:#e5eee8;--line:#d9e1d9;--amber:#c78535;--amber-soft:#f6eddf;--radius:14px;font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;color:var(--ink);background:var(--bg);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;min-height:44px;padding:8px 17px;font-size:18px;cursor:pointer;touch-action:manipulation;line-height:1.25}button:hover{border-color:var(--accent)}button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid #d59540;outline-offset:4px}button:disabled{opacity:.45;cursor:default}button[aria-pressed="true"],button.selected{background:var(--accent);color:#fff;border-color:var(--accent)}button.primary{background:var(--accent);border-color:var(--accent);color:white}button.quiet{background:transparent}button.small{font-size:16px;min-height:36px;padding:6px 12px}button[hidden],[hidden]{display:none!important}a{color:var(--accent)}
+.app{height:100vh;height:100dvh;min-height:640px;display:flex;flex-direction:column;padding:0 26px}.topbar{display:flex;align-items:center;gap:28px;min-height:86px;border-bottom:1px solid #d8ded5;flex-shrink:0}.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}.brandmark{width:38px;height:38px}.brand h1{font-size:27px;margin:0;font-weight:750;letter-spacing:.025em}.brand .chapter{font-size:14px;color:var(--muted);margin-top:3px}.tabs{display:flex;align-items:center;gap:7px}.tabs button{font-size:20px;border-color:transparent;background:transparent;min-height:48px}.tabs button[aria-selected="true"]{background:var(--soft);color:var(--accent);border-color:#c6d8cd;font-weight:700}.utilities{margin-left:auto;display:flex;gap:7px}.utilities button{font-size:16px;padding:8px 11px;white-space:nowrap}.main{flex:1;min-height:0;display:flex;flex-direction:column}.page{flex:1;min-height:0;display:flex;flex-direction:column}.page-intro{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:73px;flex-shrink:0}.page-intro h2{margin:0;font-size:23px;line-height:1.35;font-weight:650}.sample-picker{display:flex;align-items:center;gap:7px;flex-shrink:0}.sample-picker button{font-size:17px;padding:8px 13px;min-height:42px}.sample-picker .photo-button{border-style:dashed;background:transparent}.sample-picker .photo-button[aria-pressed="true"]{background:var(--accent)}
+.observation-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;min-height:0;flex:1}.observation-grid.has-reference{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr);gap:14px}.observation-panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:17px 19px 13px;min-height:0;min-width:0;display:flex;flex-direction:column;position:relative;overflow:hidden}.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:9px;flex-shrink:0;min-height:30px}.panel-heading h3{font-size:20px;margin:0;font-weight:650}.minor{font-size:15px;color:var(--muted);line-height:1.45}.observation-panel .readout{font-size:27px;font-weight:750;color:var(--accent);font-variant-numeric:tabular-nums}.reference-panel{border-color:#d7b98d;background:#fffdf9}.reference-panel .readout{color:#9b6221}.reference-panel .panel-heading{color:#89591f}.overview-frame{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;background:#fafbf7;border-radius:8px;overflow:hidden}.overview-frame svg{width:100%;height:100%;touch-action:none;cursor:crosshair;display:block}.view-circle-wrap{flex:1;min-height:0;display:flex;justify-content:center;align-items:center;position:relative;padding:4px}.view-circle{height:100%;max-width:100%;aspect-ratio:1/1;border-radius:50%;border:7px solid #2c5f51;background:#f8faf6;box-shadow:inset 0 0 0 2px #e8eee8,0 8px 20px #153c2810;position:relative;overflow:hidden}.reference-panel .view-circle{border-color:#b88444}.view-circle svg{display:block;width:100%;height:100%}.view-scale{position:absolute;left:50%;bottom:11px;transform:translateX(-50%);background:#fffffff2;padding:6px 11px;border-radius:5px;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none;max-width:80%;min-width:67px;color:#27473c;font-size:14px;white-space:nowrap}.scale-bar{display:block;height:7px;border:solid #27473c;border-width:0 2px 2px;min-width:20px}.panel-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:39px;margin-top:7px;flex-shrink:0;font-size:17px;line-height:1.3}.panel-footer strong{font-size:19px;font-weight:650}.comparison-note{color:var(--amber);font-size:15px;font-weight:650}.observation-controls{display:flex;align-items:center;gap:24px;min-height:94px;flex-shrink:0}.zoom-control{display:flex;align-items:center;gap:15px;flex:1;min-width:0}.zoom-label{font-size:17px;font-weight:650;white-space:nowrap}.range-wrap{display:flex;align-items:center;gap:14px;min-width:100px;flex:1;max-width:330px}.zoom-value{font-size:26px;color:var(--accent);font-weight:750;min-width:61px;text-align:center;font-variant-numeric:tabular-nums}input[type="range"]{width:100%;accent-color:var(--accent);height:44px;cursor:ew-resize;margin:0;touch-action:pan-y}input[type="range"]::-webkit-slider-thumb{height:26px;width:26px}.quick-zooms{display:flex;gap:5px}.quick-zooms button{min-width:49px;padding:7px 9px;font-size:16px}.observation-actions{display:flex;align-items:center;gap:9px}.observation-actions button{font-size:18px;min-height:47px}.bottomline{min-height:37px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-shrink:0;font-size:14px;color:var(--muted);border-top:1px solid #dce0d7;padding:6px 0 7px 86px;line-height:1.4}.bottomline .safety{white-space:nowrap;color:#87561d}.toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);max-width:min(90vw,690px);padding:12px 22px;font-size:18px;border-radius:9px;background:#203b32;color:white;z-index:50;box-shadow:0 6px 28px #173a2533;text-align:center;pointer-events:none}.overlay{position:fixed;inset:0;background:#13291f80;z-index:80;display:flex;align-items:center;justify-content:center;padding:24px}.help-box{width:min(760px,100%);max-height:90vh;overflow:auto;border:1px solid var(--line);border-radius:16px;background:#fff;padding:27px 30px;box-shadow:0 15px 70px #16372835}.help-head{display:flex;align-items:center;justify-content:space-between;gap:14px}.help-head h2{font-size:25px;margin:0}.help-box h3{font-size:19px;margin:23px 0 8px;color:var(--accent)}.help-box p,.help-box li{font-size:17px;line-height:1.75;margin:8px 0}.help-box ul{padding-left:23px}.help-box .source-line{font-size:14px;line-height:1.6;color:var(--muted)}.no-script{padding:30px;color:#8d310e}.screen-reader{position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden;white-space:nowrap}.photo-status{font-size:15px;color:var(--muted)}
+@media(min-width:1700px){.app{padding:0 40px}.topbar{min-height:100px}.brand h1{font-size:32px}.tabs button{font-size:24px}.page-intro{min-height:87px}.page-intro h2{font-size:28px}.sample-picker button{font-size:21px}.panel-heading h3{font-size:24px}.minor{font-size:18px}.observation-controls{min-height:108px}.observation-actions button,.zoom-label{font-size:22px}.panel-footer{font-size:21px}.panel-footer strong{font-size:25px}.bottomline{font-size:17px;min-height:43px}.utilities button{font-size:19px}}
+@media(max-width:1180px){.app{padding:0 18px}.topbar{gap:16px;min-height:78px}.brand h1{font-size:24px}.brandmark{width:32px;height:32px}.tabs button{font-size:18px;padding:8px 12px}.utilities button{font-size:15px;padding:7px 9px}.page-intro h2{font-size:20px}.sample-picker{gap:5px}.sample-picker button{font-size:16px;padding:7px 10px}.observation-grid{gap:12px}.observation-panel{padding:13px 13px 9px}.panel-heading h3{font-size:18px}.minor{font-size:13px}.panel-footer{font-size:15px}.panel-footer strong{font-size:17px}.observation-controls{gap:16px}.zoom-control{gap:9px}.zoom-label{font-size:16px}.observation-actions{gap:6px}.observation-actions button{font-size:16px;padding:8px 12px}.quick-zooms button{min-width:42px;font-size:15px}.observation-grid.has-reference .panel-heading{flex-wrap:wrap}.observation-grid.has-reference .panel-footer{flex-wrap:wrap;min-height:56px}.bottomline{font-size:12px}}
+@media(max-height:720px) and (min-width:900px){.app{min-height:600px}.topbar{min-height:69px}.page-intro{min-height:63px}.observation-controls{min-height:77px}.observation-panel{padding-top:10px}.panel-heading{margin-bottom:4px}.bottomline{min-height:32px}.brand .chapter{display:none}}
+@media(max-width:899px){.app{height:auto;min-height:100vh;padding:0 16px}.topbar{flex-wrap:wrap;gap:9px 13px;padding:14px 0;min-height:0}.brand{flex:1}.brand h1{font-size:24px}.brand .chapter{font-size:12px}.tabs{order:3;flex:1 0 100%;justify-content:center;gap:10px}.tabs button{flex:1;font-size:18px}.utilities{gap:4px}.utilities button{font-size:14px;padding:7px 9px;min-height:40px}.page-intro{flex-wrap:wrap;gap:11px;padding:17px 0;min-height:0}.page-intro h2{font-size:21px}.sample-picker{width:100%;gap:7px}.sample-picker button{flex:1}.observation-grid{grid-template-columns:1fr 1fr;flex:none;min-height:0}.observation-grid.has-reference{grid-template-columns:1fr 1fr}.observation-grid.has-reference .overview-panel{grid-column:1/-1;height:310px}.observation-panel{height:360px}.view-circle-wrap{height:240px;flex:1}.observation-controls{flex-wrap:wrap;gap:12px;padding:18px 0}.zoom-control{flex:1 0 100%}.range-wrap{max-width:none}.observation-actions{width:100%;justify-content:flex-end}.observation-actions button{font-size:17px}.bottomline{margin-top:5px;flex-wrap:wrap;font-size:12px;padding-left:80px}.minor{font-size:13px}.help-box{padding:20px}.help-box p,.help-box li{font-size:16px}}
+@media(max-width:560px){.brandmark{display:none}.brand h1{font-size:21px}.brand .chapter{font-size:11px}.utilities button{padding:7px 8px;min-height:36px}.utilities #resetAll{display:none}.observation-grid{grid-template-columns:1fr}.observation-panel{height:340px}.overview-panel{height:290px}.observation-grid.has-reference{grid-template-columns:1fr 1fr}.observation-grid.has-reference .observation-panel{height:300px}.observation-grid.has-reference .overview-panel{height:270px}.observation-grid.has-reference .panel-heading h3{font-size:16px}.observation-grid.has-reference .panel-footer{font-size:13px;min-height:60px}.observation-grid.has-reference .panel-footer strong{font-size:15px}.observation-grid.has-reference .view-circle{border-width:5px}.observation-grid.has-reference .view-scale{font-size:11px;bottom:6px;padding:3px 7px}.sample-picker{gap:5px}.sample-picker button{font-size:15px;padding:8px 6px}.zoom-control{flex-wrap:wrap}.zoom-label{font-size:16px}.range-wrap{flex:1}.quick-zooms{margin-left:auto}.observation-actions button{font-size:15px;padding:8px 11px;flex:1}.panel-footer{font-size:16px}.bottomline{padding:10px 0 42px;gap:6px}.bottomline .safety{white-space:normal}.view-scale{font-size:13px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+#structurePage {
+  --lens-ink: #20342f;
+  --lens-green: #18705c;
+  --lens-amber: #c78535;
+  --lens-line: #dce2da;
+  color: var(--lens-ink);
+  font-family: inherit;
+  min-height: 0;
+  height: 100%;
+  padding: 14px 0;
+}
+#structurePage[hidden], #structurePage [hidden] { display: none !important; }
+#structurePage *, #structurePage *::before, #structurePage *::after { box-sizing: border-box; }
+#structurePage button, #structurePage input { font: inherit; }
+#structurePage button { -webkit-tap-highlight-color: transparent; cursor: pointer; }
+#structurePage button:focus-visible, #structurePage input:focus-visible, #structurePage .lens-drag-handle:focus-visible { outline: 3px solid #c78535; outline-offset: 4px; }
+#structurePage .lens-workspace { height: 100%; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 318px; gap: 18px; }
+#structurePage .lens-main { min-height: 0; min-width: 0; background: #fff; border: 1px solid var(--lens-line); border-radius: 16px; padding: 19px 22px 15px; display: flex; flex-direction: column; }
+#structurePage .lens-main-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex: 0 0 auto; }
+#structurePage h2 { margin: 0; font-size: clamp(22px, 2.05vw, 28px); line-height: 1.35; font-weight: 750; letter-spacing: -.02em; }
+#structurePage .lens-button { min-height: 44px; min-width: 56px; padding: 10px 15px; border: 1px solid #c7d5cb; border-radius: 9px; background: #fff; color: var(--lens-green); font-size: 20px; line-height: 1.1; white-space: nowrap; }
+#structurePage .lens-keep { background: #edf4ee; border-color: #d3e3d5; flex-shrink: 0; }
+#structurePage .lens-button:hover { background: #e7f1e9; }
+#structurePage .lens-stage { display: block; width: 100%; min-height: 0; flex: 1 1 auto; overflow: visible; }
+#structurePage .lens-stage text { font-family: inherit; }
+#structurePage .lens-svg-label { fill: var(--lens-ink); font-size: 21px; font-weight: 650; }
+#structurePage .lens-svg-note { fill: #64786d; font-size: 17px; }
+#structurePage .lens-svg-hint { fill: var(--lens-green); font-size: 18px; }
+#structurePage .lens-compact .lens-svg-label, #structurePage .lens-narrow .lens-svg-label { font-size: 22px; }
+#structurePage .lens-compact .lens-svg-note, #structurePage .lens-narrow .lens-svg-note, #structurePage .lens-compact .lens-svg-hint, #structurePage .lens-narrow .lens-svg-hint { font-size: 21px; }
+#structurePage .lens-drag-handle { cursor: ew-resize; touch-action: none; }
+#structurePage .lens-reading-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex: 0 0 auto; padding: 5px 0 10px; }
+#structurePage .lens-measures { display: flex; align-items: baseline; gap: clamp(18px, 3vw, 42px); font-size: 20px; white-space: nowrap; }
+#structurePage .lens-measures strong { display: inline-block; min-width: 43px; color: var(--lens-green); font-size: 28px; font-weight: 750; font-variant-numeric: tabular-nums; text-align: right; }
+#structurePage .lens-unit { font-size: 19px; }
+#structurePage .lens-model-label { color: #718177; font-size: 16px; white-space: nowrap; }
+#structurePage .lens-comparison { display: flex; align-items: center; min-height: 68px; gap: 18px; border-top: 1px solid #e9dfc9; padding: 9px 0 0; flex: 0 0 auto; }
+#structurePage .lens-saved-data { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; font-size: 17px; line-height: 1.4; }
+#structurePage .lens-saved-title { color: #a86c22; font-size: 18px; font-weight: 700; }
+#structurePage .lens-saved-title::before { content: ""; display: inline-block; width: 22px; border-top: 3px dashed #c78535; vertical-align: middle; margin: 0 8px 4px 0; }
+#structurePage #lensSavedMeasure { font-variant-numeric: tabular-nums; color: #64786d; }
+#structurePage .lens-clear { color: #64786d; padding-inline: 12px; font-size: 20px; border: 0; background: transparent; }
+#structurePage .lens-question { margin: 5px 0 0; color: #62756b; font-size: 20px; line-height: 1.35; flex: 0 0 auto; }
+#structurePage .lens-controls { min-height: 0; display: flex; flex-direction: column; gap: 23px; background: #fff; border: 1px solid var(--lens-line); border-radius: 16px; padding: 20px 19px; font-size: 20px; }
+#structurePage .lens-presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+#structurePage .lens-presets button { border: 1px solid #dbe2da; border-radius: 10px; background: #f9faf6; min-width: 0; min-height: 88px; padding: 8px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #53685d; font-size: 20px; line-height: 1.3; }
+#structurePage .lens-presets button[aria-pressed="true"] { color: var(--lens-green); background: #eaf4ed; border: 2px solid #18705c; padding: 7px 0; font-weight: 700; }
+#structurePage .lens-presets svg { width: 44px; height: 42px; fill: #d7e9df; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+#structurePage .lens-control-block { min-width: 0; }
+#structurePage .lens-control-label { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; font-weight: 650; line-height: 1.4; }
+#structurePage output { color: var(--lens-green); font-weight: 650; font-size: 19px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+#structurePage input[type="range"] { display: block; width: 100%; min-height: 44px; padding: 0; margin: 3px 0 0; accent-color: #18705c; cursor: pointer; touch-action: pan-y; -webkit-appearance: none; appearance: none; background: transparent; }
+#structurePage input[type="range"]::-webkit-slider-runnable-track { height: 7px; border-radius: 4px; background: #dfe9df; }
+#structurePage input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 28px; height: 28px; margin-top: -10.5px; border-radius: 50%; border: 3px solid #fff; background: #18705c; box-shadow: 0 0 0 1px #18705c; }
+#structurePage input[type="range"]::-moz-range-track { height: 7px; border-radius: 4px; background: #dfe9df; }
+#structurePage input[type="range"]::-moz-range-thumb { width: 23px; height: 23px; border-radius: 50%; border: 3px solid #fff; background: #18705c; box-shadow: 0 0 0 1px #18705c; }
+#structurePage .lens-range-ends { display: flex; justify-content: space-between; color: #718177; font-size: 17px; line-height: 1.2; }
+#structurePage .lens-control-note { margin: -2px 0 0; color: #718177; font-size: 17px; line-height: 1.35; }
+#structurePage .lens-transparency-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+#structurePage .lens-transparency { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 5px 0 5px 8px; border: 0; background: transparent; color: var(--lens-green); font-size: 20px; font-weight: 650; }
+#structurePage .lens-switch-track { width: 45px; height: 26px; border-radius: 15px; background: #18705c; display: inline-flex; align-items: center; padding: 3px; flex: 0 0 auto; }
+#structurePage .lens-switch-track > span { width: 20px; height: 20px; background: #fff; border-radius: 50%; transform: translateX(19px); transition: transform .15s ease; }
+#structurePage .lens-transparency[aria-checked="false"] { color: #66766c; }
+#structurePage .lens-transparency[aria-checked="false"] .lens-switch-track { background: #9ba69c; }
+#structurePage .lens-transparency[aria-checked="false"] .lens-switch-track > span { transform: translateX(0); }
+#structurePage .lens-control-prompt { margin: auto 0 0; padding: 14px 0 0; border-top: 1px solid #e6ebe3; color: #64786d; line-height: 1.5; font-size: 19px; }
+@media (max-width: 1120px) and (min-width: 901px) {
+  #structurePage .lens-workspace { grid-template-columns: minmax(0, 1fr) 300px; gap: 12px; }
+  #structurePage .lens-main { padding: 16px 16px 13px; }
+  #structurePage .lens-controls { padding: 17px 14px; gap: 22px; }
+  #structurePage .lens-comparison { gap: 8px; }
+  #structurePage .lens-saved-data { font-size: 16px; }
+  #structurePage .lens-model-label { max-width: 100px; font-size: 15px; white-space: normal; text-align: right; }
+  #structurePage .lens-measures { gap: 18px; font-size: 18px; }
+  #structurePage .lens-measures strong { font-size: 26px; }
+  #structurePage .lens-question { font-size: 19px; }
+}
+@media (max-height: 730px) and (min-width: 901px) {
+  #structurePage .lens-controls { gap: 15px; padding-block: 15px; }
+  #structurePage .lens-presets button { min-height: 77px; }
+  #structurePage .lens-presets svg { width: 38px; height: 34px; }
+  #structurePage .lens-control-prompt { padding-top: 9px; font-size: 17px; }
+  #structurePage .lens-main { padding-top: 14px; }
+}
+@media (max-width: 900px) {
+  #structurePage { height: auto; }
+  #structurePage .lens-workspace { height: auto; grid-template-columns: 1fr; gap: 14px; }
+  #structurePage .lens-main { padding: 16px 13px; }
+  #structurePage .lens-main-heading { gap: 8px; }
+  #structurePage h2 { font-size: 22px; }
+  #structurePage .lens-button { font-size: 20px; padding: 10px 11px; }
+  #structurePage .lens-stage { flex: none; height: auto; min-height: 160px; margin: 7px 0; }
+  #structurePage .lens-reading-row { align-items: center; gap: 10px; }
+  #structurePage .lens-measures { font-size: 18px; gap: 14px; }
+  #structurePage .lens-measures strong { font-size: 25px; min-width: 37px; }
+  #structurePage .lens-unit { font-size: 17px; }
+  #structurePage .lens-model-label { max-width: 70px; white-space: normal; text-align: right; font-size: 14px; line-height: 1.4; }
+  #structurePage .lens-controls { gap: 18px; padding: 18px; }
+  #structurePage .lens-presets button { font-size: 20px; min-height: 84px; }
+  #structurePage .lens-comparison { flex-wrap: wrap; gap: 4px 10px; }
+  #structurePage .lens-saved-data { flex: 1 1 170px; }
+  #structurePage .lens-clear { margin-left: auto; }
+  #structurePage .lens-question { font-size: 19px; margin-top: 8px; }
+  #structurePage .lens-control-prompt { font-size: 19px; padding-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { #structurePage .lens-switch-track > span { transition: none; } }
+
+</style>
+</head>
+<body>
+<noscript><p class="no-script">请开启 JavaScript 后使用互动探究。此文件不需要联网。</p></noscript>
+<div class="app">
+ <header class="topbar">
+  <div class="brand"><svg class="brandmark" viewBox="0 0 42 42" aria-hidden="true"><circle cx="17" cy="17" r="12" fill="#e0ebe4" stroke="#18705c" stroke-width="3.5"/><path d="M26 26 37 37" stroke="#18705c" stroke-width="6" stroke-linecap="round"/><path d="M12 18h10M17 13v10" stroke="#18705c" stroke-width="2.2" stroke-linecap="round"/></svg><div><h1>研究放大镜</h1><div class="chapter">五年级上册 · 微小世界 · 1.1</div></div></div>
+  <nav class="tabs" aria-label="探究页面" role="tablist"><button id="observeTab" role="tab" aria-selected="true" aria-controls="observePage">同点观察</button><button id="structureTab" role="tab" aria-selected="false" aria-controls="structurePage">镜片剖面</button></nav>
+  <div class="utilities"><button id="helpButton" aria-haspopup="dialog">说明</button><button id="resetAll">复位</button><button id="fullscreenButton">全屏</button></div>
+ </header>
+ <main class="main">
+  <section id="observePage" class="page" role="tabpanel" aria-labelledby="observeTab">
+   <div class="page-intro"><h2>同一个位置，换个倍率，会看见什么？</h2><div class="sample-picker" aria-label="观察材料"><button data-sample="letters" aria-pressed="true">方格字卡</button><button data-sample="fabric" aria-pressed="false">织物</button><button data-sample="leaf" aria-pressed="false">叶脉</button><button id="photoButton" class="photo-button" aria-pressed="false">我的照片</button><input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp" hidden></div></div>
+   <div id="observationGrid" class="observation-grid">
+    <article class="observation-panel overview-panel"><div class="panel-heading"><h3>原图</h3><span class="minor">拖动观察圈 · 选择位置</span></div><div class="overview-frame"><svg id="overviewSvg" viewBox="0 0 800 520" role="img" aria-label="原图与观察位置" tabindex="0"><g id="overviewScene"></g><g id="referenceFootprint" hidden><circle id="referenceRing" fill="#c7853510" stroke="#c78535" stroke-width="4" stroke-dasharray="10 7"/><text id="referenceMarker" fill="#965f1f" font-size="22" font-weight="700" paint-order="stroke" stroke="#fff" stroke-width="5">对照</text></g><g id="liveFootprint"><circle id="sourceRing" fill="#18705c0b" stroke="#18705c" stroke-width="5"/><circle id="ringHandle" r="12" fill="#18705c" stroke="#fff" stroke-width="4"/><path id="crosshair" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path id="crosshairTop" fill="none" stroke="#18705c" stroke-width="2" stroke-linecap="round"/></g></svg></div><div class="panel-footer"><span id="specimenNote">方格字卡 · 示意图</span><span id="overviewScale" class="minor">每小格 1 mm（模型）</span></div></article>
+    <article id="referencePanel" class="observation-panel reference-panel" hidden><div class="panel-heading"><h3>保留的画面</h3><span id="referenceZoom" class="readout">2×</span></div><div class="view-circle-wrap"><div class="view-circle"><svg id="referenceSvg" viewBox="300 160 200 200" role="img" aria-label="保留的对照画面"></svg><div class="view-scale" id="referenceScale"><span class="scale-bar"></span><span class="scale-label"></span></div></div></div><div class="panel-footer"><span id="referenceField"></span><span id="samePointLabel" class="comparison-note">同一观察点</span></div></article>
+    <article class="observation-panel live-panel"><div class="panel-heading"><h3>当前画面</h3><span id="liveZoom" class="readout">2×</span></div><div class="view-circle-wrap"><div class="view-circle"><svg id="liveSvg" viewBox="300 160 200 200" role="img" aria-label="当前放大画面"></svg><div class="view-scale" id="liveScale"><span class="scale-bar"></span><span class="scale-label"></span></div></div></div><div class="panel-footer"><span id="liveField">视野直径 <strong>10.0 mm</strong></span><button id="returnPoint" class="small" hidden>回到同一点</button></div></article>
+   </div>
+   <div class="observation-controls"><div class="zoom-control"><label for="zoomRange" id="zoomLabel" class="zoom-label">模型观察倍率</label><div class="range-wrap"><input id="zoomRange" type="range" min="2" max="10" step="1" value="2" aria-label="模型观察倍率"><output id="zoomOutput" class="zoom-value" for="zoomRange">2×</output></div><div class="quick-zooms" aria-label="快捷倍率"><button data-zoom="2" aria-pressed="true">2×</button><button data-zoom="5" aria-pressed="false">5×</button><button data-zoom="10" aria-pressed="false">10×</button></div></div><div class="observation-actions"><button id="freezeButton">保留对照</button><button id="clearReference" class="quiet" hidden>清除对照</button><button id="exportButton" class="primary">保存观察图</button></div></div>
+  </section>
+  <section id="structurePage" class="page" hidden role="tabpanel" aria-labelledby="structureTab">
+  <div class="lens-workspace">
+    <div class="lens-main">
+      <div class="lens-main-heading">
+        <h2>镜片里面是什么样？</h2>
+        <button type="button" id="lensKeep" class="lens-button lens-keep">保留对照</button>
+      </div>
+      <svg id="lensStage" class="lens-stage" viewBox="0 0 900 330" xmlns:xlink="http://www.w3.org/1999/xlink" role="group" aria-labelledby="lensStageTitle lensStageDesc">
+        <title id="lensStageTitle">镜片正面、侧面剖面与透过镜片看到的图像</title>
+        <desc id="lensStageDesc">拖动剖面中央的绿色圆点改变镜面的弯曲，也可以使用右侧滑条。中央和边缘厚度与观察图像会同步改变。</desc>
+        <defs>
+          <linearGradient id="lenslabGlass" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#dceee9" stop-opacity=".8"/>
+            <stop offset=".46" stop-color="#ffffff" stop-opacity=".4"/>
+            <stop offset="1" stop-color="#a7d1c4" stop-opacity=".9"/>
+          </linearGradient>
+          <pattern id="lenslabGrid" patternUnits="userSpaceOnUse" width="25" height="25">
+            <path d="M25 0H0V25" fill="none" stroke="#dce4dc" stroke-width="1"/>
+          </pattern>
+          <clipPath id="lenslabMainClip"><circle cx="734" cy="155" r="95"/></clipPath>
+          <clipPath id="lenslabCompareClip"><circle cx="130" cy="155" r="95"/></clipPath>
+          <g id="lenslabTarget">
+            <rect x="-320" y="-320" width="640" height="640" fill="#faf9ef"/>
+            <rect x="-320" y="-320" width="640" height="640" fill="url(#lenslabGrid)"/>
+            <g fill="#2e4840" font-size="31" font-weight="650" text-anchor="middle">
+              <text x="0" y="-61">小小的世界</text>
+              <text x="0" y="-19">认真看细节</text>
+              <text x="0" y="23">科学观察</text>
+              <text x="0" y="65">发现与比较</text>
+              <text x="0" y="107">小小的世界</text>
+            </g>
+            <circle cx="0" cy="0" r="4" fill="#c78535"/>
+          </g>
+        </defs>
+        <g id="lensFrontView">
+          <g id="lensFrontModel">
+            <circle cx="130" cy="155" r="84" fill="#f8faf5" stroke="#d3ddd6" stroke-width="2"/>
+            <circle id="lensFrontGlass" cx="130" cy="155" r="78" fill="url(#lenslabGlass)" stroke="#18705c" stroke-width="3"/>
+            <path id="lensFrontShine" d="M79 125A60 60 0 0 1 149 97" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+            <path d="M42 155H218" fill="none" stroke="#c78535" stroke-width="2" stroke-dasharray="6 5"/>
+          </g>
+          <g id="lensSavedView" visibility="hidden">
+            <circle cx="130" cy="155" r="101" fill="#fff" stroke="#e6d3b3" stroke-width="2"/>
+            <g clip-path="url(#lenslabCompareClip)">
+              <g id="lensCompareZoom"><use href="#lenslabTarget" xlink:href="#lenslabTarget"/></g>
+              <g id="lensSavedOpaqueCover" visibility="hidden">
+                <rect x="29" y="54" width="202" height="202" fill="#7f8b82"/>
+                <path d="M63 104l119 111" stroke="#97a298" stroke-width="6"/>
+                <text x="130" y="147" text-anchor="middle" fill="#fff" font-size="22" font-weight="650">看不到文字</text>
+                <text x="130" y="176" text-anchor="middle" fill="#fff" font-size="21">光不能透过</text>
+              </g>
+            </g>
+            <circle cx="130" cy="155" r="95" fill="none" stroke="#c78535" stroke-width="2"/>
+          </g>
+          <text id="lensFrontLabel" x="130" y="279" text-anchor="middle" class="lens-svg-label">正面</text>
+          <text id="lensFrontNote" x="130" y="306" text-anchor="middle" class="lens-svg-note">直径保持相同</text>
+        </g>
+        <path id="lensConnector" d="M237 155H277m-9-7 9 7-9 7" fill="none" stroke="#a6b5ac" stroke-width="2" stroke-linejoin="round"/>
+        <g id="lensSideView">
+        <path id="lensSavedOutline" d="" fill="none" stroke="#c78535" stroke-width="3" stroke-dasharray="7 6" opacity="0"/>
+        <line id="lensAxis" x1="424" x2="424" y1="29" y2="276" stroke="#d3ddd6" stroke-width="1.5" stroke-dasharray="5 6"/>
+        <path id="lensProfile" d="" fill="url(#lenslabGlass)" stroke="#18705c" stroke-width="3" stroke-linejoin="round"/>
+        <g id="lensDragHandle" class="lens-drag-handle" tabindex="0" role="slider" aria-label="拖动镜片中央改变镜面弯曲" aria-valuemin="-3" aria-valuemax="3" aria-valuenow="2">
+          <circle r="32" fill="transparent"/>
+          <circle r="14" fill="#fff" stroke="#18705c" stroke-width="3"/>
+          <path d="M-7 0H7m-4-4 4 4-4 4M-3-4-7 0l4 4" fill="none" stroke="#18705c" stroke-width="1.8" stroke-linejoin="round"/>
+        </g>
+        <text id="lensDragHint" x="466" y="111" text-anchor="middle" class="lens-svg-hint">左右拖动</text>
+        <text x="423" y="300" text-anchor="middle" class="lens-svg-label">侧面剖面</text>
+        </g>
+        <g id="lensCurrentView">
+        <circle cx="734" cy="155" r="101" fill="#fff" stroke="#d3ddd6" stroke-width="2"/>
+        <g clip-path="url(#lenslabMainClip)">
+          <g id="lensEffectZoom"><use href="#lenslabTarget" xlink:href="#lenslabTarget"/></g>
+          <g id="lensOpaqueCover" visibility="hidden">
+            <rect x="633" y="54" width="202" height="202" fill="#7f8b82"/>
+            <path d="M667 104l119 111" stroke="#97a298" stroke-width="6"/>
+            <text x="734" y="147" text-anchor="middle" fill="#fff" font-size="22" font-weight="650">看不到文字</text>
+            <text x="734" y="176" text-anchor="middle" fill="#fff" font-size="21">光不能透过</text>
+          </g>
+        </g>
+        <circle cx="734" cy="155" r="95" fill="none" stroke="#18705c" stroke-width="2"/>
+        <text id="lensCurrentLabel" x="734" y="300" text-anchor="middle" class="lens-svg-label">透过它看</text>
+        </g>
+      </svg>
+      <div class="lens-reading-row">
+        <div class="lens-measures" aria-live="polite" aria-atomic="true">
+          <span>中央 <strong id="lensCenterValue">6.0</strong> <span class="lens-unit">mm</span></span>
+          <span>边缘 <strong id="lensEdgeValue">2.0</strong> <span class="lens-unit">mm</span></span>
+        </div>
+        <span class="lens-model-label">结构与效果示意</span>
+      </div>
+      <div id="lensComparison" class="lens-comparison" hidden>
+        <div class="lens-saved-data">
+          <span class="lens-saved-title">已保留的镜片</span>
+          <span id="lensSavedName">凸面 · 透明</span>
+          <span id="lensSavedMeasure">中央 6.0 mm · 边缘 2.0 mm</span>
+        </div>
+        <button id="lensClearKeep" type="button" class="lens-button lens-clear">清除</button>
+      </div>
+      <p class="lens-question" id="lensQuestion">中央和边缘，哪里更厚？</p>
+    </div>
+    <aside class="lens-controls" aria-label="镜片控制">
+      <div class="lens-presets" role="group" aria-label="选择镜片">
+        <button type="button" data-lens-preset="flat" aria-pressed="false">
+          <svg viewBox="0 0 50 48" aria-hidden="true"><path d="M20 5h10v38H20z"/></svg>
+          <span>平面玻璃</span>
+        </button>
+        <button type="button" data-lens-preset="convex" aria-pressed="true">
+          <svg viewBox="0 0 50 48" aria-hidden="true"><path d="M25 4Q45 24 25 44Q5 24 25 4z"/></svg>
+          <span>凸透镜</span>
+        </button>
+        <button type="button" data-lens-preset="concave" aria-pressed="false">
+          <svg viewBox="0 0 50 48" aria-hidden="true"><path d="M14 4h22Q27 24 36 44H14Q23 24 14 4z"/></svg>
+          <span>凹透镜</span>
+        </button>
+      </div>
+      <div class="lens-control-block">
+        <label class="lens-control-label" for="lensCurvature"><span>镜面弯曲</span><output id="lensCurvatureValue" for="lensCurvature">外凸</output></label>
+        <input id="lensCurvature" type="range" min="-3" max="3" step="0.1" value="2" aria-label="镜面弯曲程度"/>
+        <div class="lens-range-ends"><span>内凹</span><span>平直</span><span>外凸</span></div>
+      </div>
+      <div class="lens-control-block">
+        <label class="lens-control-label" for="lensBase"><span>整片加厚</span><output id="lensBaseValue" for="lensBase">2.0 mm</output></label>
+        <input id="lensBase" type="range" min="1" max="4" step="0.1" value="2" aria-label="镜片中央与边缘一起增加或减少的基础厚度"/>
+        <p class="lens-control-note">中央和边缘一起增减</p>
+      </div>
+      <div class="lens-transparency-row">
+        <span>透光状态</span>
+        <button type="button" id="lensTransparency" class="lens-transparency" role="switch" aria-checked="true" aria-label="镜片透明">
+          <span id="lensTransparencyText">透明</span><span class="lens-switch-track" aria-hidden="true"><span></span></span>
+        </button>
+      </div>
+      <p class="lens-control-prompt">试着改变形状，再保留一次对照。</p>
+    </aside>
+  </div>
+</section>
+
+ </main>
+ <footer class="bottomline"><span id="modelCaption">图形与刻度为模型设定；真实放大镜的视野还受镜片与观察距离影响。</span><span class="safety">实物操作：不要用放大镜看太阳。</span></footer>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="helpOverlay" class="overlay" hidden><section class="help-box" role="dialog" aria-modal="true" aria-labelledby="helpTitle"><div class="help-head"><h2 id="helpTitle">怎样用它帮助真实观察</h2><button id="closeHelp">关闭</button></div><h3>同点观察：把比较的条件留下来</h3><p>先在原图上拖动观察圈，再改变倍率。按“保留对照”留下一个画面，继续改变倍率或位置；两幅画面来自不同位置时，会出现提示，可一键回到原来的观察点。原图上的实线圈、虚线圈分别对应当前画面与对照画面的取景范围。</p><p>“保存观察图”保留图像、位置和倍率，供讨论或辅助画图，不自动填写结论。可导入自己的 JPG、PNG、WebP 照片，文件只在当前设备处理。数字放大不能补出原照片中没有的细节；未标定的照片不提供毫米读数。</p><h3>镜片剖面：区分凸度与整体厚度</h3><p>拖动侧面镜片中央的控制点，或使用滑条；分别比较镜面弯曲、整片加厚以及透明性。保留一组剖面和观察效果，再只改变一个条件。模型中镜片直径、材料与观察位置固定。</p><h3>模型的适用范围</h3><ul><li>第一页面是固定窗口中的取景模型，2×、5×、10×表示图像的相对缩放；“视野直径”是示意材料的模型值，不是某一真实放大镜的实测参数。</li><li>第二页面采用球面薄透镜的近轴近似；剖面横向厚度作了夸张，不能按屏幕比例测量。凸透镜的物体始终位于焦距以内，效果示意为正立放大的虚像；没有在屏幕上接成实像。</li><li>为区分弯曲与整体厚度，薄透镜模型忽略整片加厚对焦距的次要修正，也未模拟像差、边缘畸变、景深及人眼调节。不能用模拟结果独立证明其预设规律，仍需回到真实镜片观察。</li></ul><p class="source-line">教材依据：本项目《五上》第一单元《微小世界》第1课，印刷页2—5；配套教师教学用书第1课。教师用书不要求学生掌握成像原理。光学模型参考 <a href="https://openstax.org/books/university-physics-volume-3/pages/2-4-thin-lenses" target="_blank" rel="noopener">OpenStax · Thin Lenses</a> 与 <a href="https://openstax.org/books/university-physics-volume-3/pages/2-7-the-simple-magnifier" target="_blank" rel="noopener">The Simple Magnifier</a>。</p><p class="source-line">v1.0 · 单文件，无联网依赖。全屏与下载行为由浏览器支持情况决定。刷新或复位会清除当前对照；重要记录请先保存。</p><button id="mobileReset" class="quiet">恢复全部初始状态</button></section></div>
+
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+
+<script>
+/*
+ * 五上1.1 研究放大镜 — v1.0
+ * No external dependencies. Specimen assets are replaceable SVG models.
+ * Observation model: coordinate space 800×520; 20 units = 1 model mm.
+ * A fixed observation window covers 400 / zoom coordinate units.
+ * This is an image/field-of-view model, NOT a calibrated optical instrument.
+ */
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var NS='http://www.w3.org/2000/svg';
+var state={page:'observe',sample:'letters',cx:400,cy:260,zoom:2,reference:null,photo:null};
+var imageToken=0,toastTimer=0,dragging=false,dragPointer=null,dragOffset={x:0,y:0},helpFocus=null;
+var names={letters:'方格字卡',fabric:'织物',leaf:'叶脉',photo:'我的照片'};
+var defaults={letters:[400,260],fabric:[401,258],leaf:[415,255]};
+var currentMarkup='';
+function escapeXML(v){return String(v).replace(/[<>&"']/g,function(c){return({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'})[c];});}
+function toast(t){$('toast').textContent=t;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3800);}
+window.showLabToast=toast;
+function specimen(type,prefix){
+ var s='';
+ if(type==='photo'&&state.photo){return '<rect width="800" height="520" fill="#f4f3ed"/><image href="'+state.photo.data+'" x="'+state.photo.x+'" y="'+state.photo.y+'" width="'+state.photo.w+'" height="'+state.photo.h+'"/>';}
+ if(type==='letters'){
+  s='<defs><pattern id="'+prefix+'grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#b2c7bc" stroke-width=".75"/></pattern></defs><rect width="800" height="520" fill="#f7f6ee"/><rect x="28" y="25" width="744" height="470" rx="8" fill="#fffef7" stroke="#dce2d3" stroke-width="2"/><rect x="40" y="40" width="720" height="440" fill="url(#'+prefix+'grid)"/>';
+  var rows=['ABCabc','研究放大镜','012345','观察与发现'];
+  for(var r=0;r<4;r++){
+   for(var c=0;c<8;c++){
+    var char=rows[r][c%rows[r].length],size=r%2?34:40;
+    s+='<text x="'+(70+c*90)+'" y="'+(124+r*97)+'" font-family="Microsoft YaHei,PingFang SC,sans-serif" font-size="'+size+'" font-weight="'+(r%2?550:650)+'" fill="'+(r===2?'#914d36':'#263f36')+'">'+char+'</text>';
+   }
+  }
+  s+='<path d="M395 245h13m-8-5v10" stroke="#a14934" stroke-width="1.6"/><circle cx="405" cy="256" r="2.2" fill="#a14934"/>';
+ }else if(type==='fabric'){
+  s='<defs><linearGradient id="'+prefix+'warp" x1="0" x2="1"><stop stop-color="#859a9b"/><stop offset=".35" stop-color="#e9eded"/><stop offset=".58" stop-color="#f7f6ed"/><stop offset="1" stop-color="#879e9f"/></linearGradient><linearGradient id="'+prefix+'weft" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#6a8f91"/><stop offset=".4" stop-color="#c8dcda"/><stop offset=".6" stop-color="#d9e4dc"/><stop offset="1" stop-color="#668c8e"/></linearGradient></defs><rect width="800" height="520" fill="#eae8db"/>';
+  for(var i=0;i<17;i++){var x=i*52-16;s+='<rect x="'+x+'" y="0" width="29" height="520" rx="9" fill="url(#'+prefix+'warp)"/>';for(var k=0;k<4;k++)s+='<path d="M'+(x+6+k*5)+' 0v520" stroke="#f8f7f1" stroke-width=".8" opacity=".6"/>';}
+  for(var j=0;j<11;j++){var y=j*52-18;s+='<rect x="0" y="'+y+'" width="800" height="30" rx="9" fill="url(#'+prefix+'weft)"/>';for(var l=0;l<4;l++)s+='<path d="M0 '+(y+5+l*6)+'h800" stroke="#edf2ec" stroke-width=".8" opacity=".75"/>';}
+  for(var a=0;a<17;a++)for(var b=0;b<11;b++)if((a+b)%2===0){var xx=a*52-16,yy=b*52-22;s+='<rect x="'+xx+'" y="'+yy+'" width="29" height="39" rx="4" fill="url(#'+prefix+'warp)"/>';for(var q=0;q<4;q++)s+='<path d="M'+(xx+6+q*5)+' '+yy+'v39" stroke="#fffdf5" stroke-width=".8" opacity=".6"/>';}
+  s+='<g fill="none" stroke="#aa5a47" stroke-linecap="round"><path d="M398 205q3 22 0 45m0 14q-5 17-2 35" stroke-width="5"/><path d="M398 250q10-7 10-12m-10 12q-7-8-9-15m9 20 9 5m-10 4-6 10" stroke-width="1.1"/></g>';
+ }else{
+  var outline='M108 298C155 142 355 56 690 100C648 385 431 445 108 298Z';
+  s='<defs><linearGradient id="'+prefix+'leaf" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#678c48"/><stop offset=".55" stop-color="#9cba70"/><stop offset="1" stop-color="#bdce8a"/></linearGradient><clipPath id="'+prefix+'leafclip"><path d="'+outline+'"/></clipPath></defs><rect width="800" height="520" fill="#f3f0df"/><path d="M72 333 158 278" stroke="#6c7845" stroke-width="13" stroke-linecap="round"/><path d="'+outline+'" fill="url(#'+prefix+'leaf)" stroke="#638742" stroke-width="3"/><g clip-path="url(#'+prefix+'leafclip)" fill="none" stroke-linecap="round">';
+  s+='<path d="M111 300Q390 237 687 103" stroke="#dde3a1" stroke-width="7"/>';
+  for(var z=0;z<12;z++){var bx=151+z*43,by=295-z*13;var tx=bx+12,ty=by-75-z%3*18;var ex=bx+76,ey=by+97-z*4;s+='<path d="M'+bx+' '+by+'Q'+(bx-8)+' '+(by-54)+' '+tx+' '+ty+'M'+bx+' '+by+'Q'+(bx+42)+' '+(by+14)+' '+ex+' '+ey+'" stroke="#cfdb93" stroke-width="2.6"/>';for(var v=1;v<=3;v++){var vx=bx+v*13,vy=by+v*18;s+='<path d="M'+vx+' '+vy+'q23 -7 34 -23m-42 14q-9 21-10 33M'+(bx+v*2)+' '+(by-v*21)+'q25 -8 37 -30" stroke="#c6d68b" stroke-width=".9" opacity=".85"/>';}}
+  s+='</g>';
+ }
+ return s;
+}
+function modelBounds(){if(state.sample==='photo'&&state.photo)return {x:state.photo.x,y:state.photo.y,w:state.photo.w,h:state.photo.h};return {x:0,y:0,w:800,h:520};}
+function clampPoint(){var b=modelBounds();/* Keep one common centre for every selectable zoom. */var marginX=Math.min(100,b.w/2),marginY=Math.min(100,b.h/2);state.cx=Math.max(b.x+marginX,Math.min(b.x+b.w-marginX,state.cx));state.cy=Math.max(b.y+marginY,Math.min(b.y+b.h-marginY,state.cy));}
+function paintAssets(){
+ $('overviewScene').innerHTML=specimen(state.sample,'over_');$('liveSvg').innerHTML=specimen(state.sample,'live_');$('referenceSvg').innerHTML=specimen(state.sample,'ref_');
+}
+function fieldText(m){return state.sample==='photo'?'未标定 · 无毫米读数':'视野直径 <strong>'+(20/m).toFixed(1)+' mm</strong>';}
+function layoutViews(){document.querySelectorAll('.view-circle-wrap').forEach(function(wrap){var size=Math.floor(Math.min(wrap.clientWidth-8,wrap.clientHeight-8));if(size>0){var circle=wrap.firstElementChild;circle.style.width=size+'px';circle.style.height=size+'px';circle.style.flex='0 0 '+size+'px';}});}
+function updateScale(id,m){var el=$(id);el.hidden=state.sample==='photo';if(el.hidden)return;var f=20/m,unit=f>=8?2:f>=4?1:.5;var host=el.parentElement;var size=host.clientWidth||250;el.querySelector('.scale-bar').style.width=(size*unit/f)+'px';el.querySelector('.scale-label').textContent=unit+' mm（模型）';}
+function setCrop(el,point){var d=400/point.zoom;el.setAttribute('viewBox',[point.cx-d/2,point.cy-d/2,d,d].join(' '));}
+function render(){
+ clampPoint();var r=200/state.zoom;
+ $('sourceRing').setAttribute('cx',state.cx);$('sourceRing').setAttribute('cy',state.cy);$('sourceRing').setAttribute('r',r);
+ $('ringHandle').setAttribute('cx',state.cx+r*.7071);$('ringHandle').setAttribute('cy',state.cy+r*.7071);
+ var cross='M'+(state.cx-12)+' '+state.cy+'h8m8 0h8M'+state.cx+' '+(state.cy-12)+'v8m0 8v8';$('crosshair').setAttribute('d',cross);$('crosshairTop').setAttribute('d',cross);
+ setCrop($('liveSvg'),state);$('liveZoom').textContent=state.zoom+'×';$('zoomOutput').textContent=state.zoom+'×';$('zoomRange').value=state.zoom;$('liveField').innerHTML=fieldText(state.zoom);
+ document.querySelectorAll('[data-zoom]').forEach(function(b){b.setAttribute('aria-pressed',String(Number(b.dataset.zoom)===state.zoom));});
+ document.querySelectorAll('[data-sample]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.sample===state.sample));});$('photoButton').setAttribute('aria-pressed',String(state.sample==='photo'));
+ $('zoomLabel').textContent=state.sample==='photo'?'照片数字放大':'模型观察倍率';$('zoomRange').setAttribute('aria-label',$('zoomLabel').textContent);
+ $('specimenNote').textContent=names[state.sample]+(state.sample==='photo'?' · 本地照片':' · 示意图');$('overviewScale').textContent=state.sample==='letters'?'每小格 1 mm（模型）':state.sample==='photo'?'照片未标定':'尺度为模型设定';
+ var ref=state.reference,has=!!ref;$('referencePanel').hidden=!has;$('referenceFootprint').style.display=has?'':'none';$('referenceFootprint').removeAttribute('hidden');$('observationGrid').classList.toggle('has-reference',has);$('clearReference').hidden=!has;$('freezeButton').textContent=has?'更新对照':'保留对照';
+ if(has){setCrop($('referenceSvg'),ref);$('referenceZoom').textContent=ref.zoom+'×';$('referenceField').innerHTML=fieldText(ref.zoom);$('referenceRing').setAttribute('cx',ref.cx);$('referenceRing').setAttribute('cy',ref.cy);$('referenceRing').setAttribute('r',200/ref.zoom);$('referenceMarker').setAttribute('x',ref.cx-200/ref.zoom);$('referenceMarker').setAttribute('y',Math.max(24,ref.cy-200/ref.zoom-12));var same=Math.abs(ref.cx-state.cx)<.02&&Math.abs(ref.cy-state.cy)<.02;$('samePointLabel').textContent=same?'同一观察点':'观察点不同';$('returnPoint').hidden=same;}else{$('returnPoint').hidden=true;}
+ layoutViews();updateScale('liveScale',state.zoom);if(has)updateScale('referenceScale',ref.zoom);updateCaption();
+}
+function updateCaption(){if(state.page==='structure'){$('modelCaption').textContent='结构与效果为薄透镜近似模型；同材质、同直径、同观察位置。';}else{$('modelCaption').textContent=state.sample==='photo'?'本地照片只在此设备处理；数字放大不能增加原照片没有的细节。':'图形与刻度为模型设定；真实放大镜的视野还受镜片与观察距离影响。';}}
+function selectSample(sample){if(state.sample===sample)return;imageToken++;state.sample=sample;state.reference=null;var p=defaults[sample]||[400,260];state.cx=p[0];state.cy=p[1];paintAssets();render();}
+function setZoom(z){state.zoom=Math.max(2,Math.min(10,Math.round(z)));render();}
+function svgPoint(e){var svg=$('overviewSvg'),pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;var matrix=svg.getScreenCTM();if(!matrix)return null;return pt.matrixTransform(matrix.inverse());}
+function movePoint(e){var p=svgPoint(e);if(!p)return;state.cx=p.x-dragOffset.x;state.cy=p.y-dragOffset.y;render();}
+function reset(){imageToken++;state.sample='letters';state.cx=400;state.cy=260;state.zoom=2;state.reference=null;state.photo=null;$('photoInput').value='';paintAssets();render();if(window.LensLab)window.LensLab.reset();toast('两页均已恢复初始状态');}
+function switchPage(page){state.page=page;$('observePage').hidden=page!=='observe';$('structurePage').hidden=page!=='structure';$('observeTab').setAttribute('aria-selected',String(page==='observe'));$('structureTab').setAttribute('aria-selected',String(page==='structure'));updateCaption();if(page==='structure'&&window.LensLab.resize)window.LensLab.resize();if(page==='observe')render();}
+function loadPhoto(file){
+ if(!file)return;
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type)){toast('请使用 JPG、PNG 或 WebP 图片；HEIC 照片请先转换。');return;}
+ if(file.size>20*1024*1024){toast('这张照片超过20 MB，请先缩小后再导入。');return;}
+ var token=++imageToken,reader=new FileReader();toast('正在打开本地照片…');
+ reader.onerror=function(){toast('无法读取这张照片，请换一张重试。');};
+ reader.onload=function(){var img=new Image();img.onerror=function(){toast('图片解码失败，请换用 JPG 或 PNG。');};img.onload=function(){if(token!==imageToken)return;try{var scale=Math.min(1,1800/Math.max(img.width,img.height)),canvas=document.createElement('canvas');canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);var ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvas unavailable');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);var data=canvas.toDataURL('image/jpeg',.9);var fit=Math.min(800/img.width,520/img.height),w=img.width*fit,h=img.height*fit;state.photo={data:data,w:w,h:h,x:(800-w)/2,y:(520-h)/2};state.sample='photo';state.cx=400;state.cy=260;state.reference=null;paintAssets();render();toast('照片已打开；未标定尺寸，仅作数字放大。');}catch(err){toast('此浏览器无法处理图片，请使用内置示意图或换浏览器。');}};img.src=String(reader.result);};reader.readAsDataURL(file);
+}
+function snapshot(){return {sample:state.sample,cx:state.cx,cy:state.cy,zoom:state.zoom};}
+function saveTextBlob(text,name,type){var blob=new Blob([text],{type:type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},10000);}
+function exportSvg(){
+ var ref=state.reference,frames=ref?[ref,snapshot()]:[snapshot()];var w=1400,h=870,parts=[];
+ parts.push('<svg xmlns="'+NS+'" xmlns:xlink="http://www.w3.org/1999/xlink" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'"><rect width="100%" height="100%" fill="#f4f3ed"/><g font-family="Microsoft YaHei,PingFang SC,sans-serif" fill="#20342f"><text x="48" y="62" font-size="32" font-weight="700">研究放大镜 · 观察记录</text><text x="48" y="98" font-size="19" fill="#60706a">'+escapeXML(names[state.sample])+(state.sample==='photo'?' · 本地照片，数字放大，无实测尺寸':' · 示意图，尺度与视野数值为模型设定')+'</text>');
+ parts.push('<rect x="40" y="132" width="600" height="460" rx="14" fill="#fff" stroke="#d9e1d9"/><text x="63" y="171" font-size="23">原图与取景范围</text><svg x="58" y="198" width="564" height="366.6" viewBox="0 0 800 520">'+specimen(state.sample,'expO_'));
+ if(ref)parts.push('<circle cx="'+ref.cx+'" cy="'+ref.cy+'" r="'+(200/ref.zoom)+'" fill="none" stroke="#c78535" stroke-width="6" stroke-dasharray="10 7"/>');
+ parts.push('<circle cx="'+state.cx+'" cy="'+state.cy+'" r="'+(200/state.zoom)+'" fill="none" stroke="#18705c" stroke-width="5"/></svg>');
+ frames.forEach(function(p,i){var left=ref?674+i*346:824,size=ref?304:360,top=195,diam=400/p.zoom,clip='exportCircle'+i,color=ref&&i===0?'#b88444':'#18705c';parts.push('<defs><clipPath id="'+clip+'"><circle cx="'+(left+size/2)+'" cy="'+(top+size/2)+'" r="'+(size/2-3)+'"/></clipPath></defs><text x="'+(left+size/2)+'" y="169" text-anchor="middle" font-size="24" fill="'+color+'">'+(ref&&i===0?'保留画面':'当前画面')+' '+p.zoom+'×</text><g clip-path="url(#'+clip+')"><svg x="'+left+'" y="'+top+'" width="'+size+'" height="'+size+'" viewBox="'+[p.cx-diam/2,p.cy-diam/2,diam,diam].join(' ')+'">'+specimen(state.sample,'exp'+i+'_')+'</svg></g><circle cx="'+(left+size/2)+'" cy="'+(top+size/2)+'" r="'+(size/2-3)+'" fill="none" stroke="'+color+'" stroke-width="6"/><text x="'+(left+size/2)+'" y="'+(top+size+42)+'" text-anchor="middle" font-size="21">'+(state.sample==='photo'?'照片未标定':'模型视野直径 '+(20/p.zoom).toFixed(1)+' mm')+'</text>');});
+ var same=ref&&Math.abs(ref.cx-state.cx)<.02&&Math.abs(ref.cy-state.cy)<.02;parts.push('<text x="48" y="640" font-size="22" fill="#60706a">'+(ref?(same?'两个画面来自同一观察点。':'注意：两个画面来自不同观察点。'):'已保留当前观察位置与倍率。')+'</text><text x="48" y="704" font-size="24">我的发现：</text><path d="M195 709H1345M48 765H1345" stroke="#bccabe" stroke-width="2"/><text x="48" y="829" font-size="17" fill="#60706a">图像比较用于辅助解释；请用真实镜片与观察记录检验你的想法。</text></g></svg>');return parts.join('');
+}
+function exportImage(){
+ var svg=exportSvg(),blob=new Blob([svg],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),img=new Image();$('exportButton').disabled=true;
+ function finish(){URL.revokeObjectURL(url);$('exportButton').disabled=false;}
+ img.onload=function(){try{var canvas=document.createElement('canvas');canvas.width=1400;canvas.height=870;var ctx=canvas.getContext('2d');if(!ctx||!canvas.toBlob)throw new Error('PNG unsupported');ctx.drawImage(img,0,0);canvas.toBlob(function(b){finish();if(!b){saveTextBlob(svg,'研究放大镜_观察记录.svg','image/svg+xml');toast('已保存SVG观察图；可用浏览器打开。');return;}var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='研究放大镜_观察记录.png';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},10000);toast('观察图已生成，请查看浏览器下载。');},'image/png');}catch(e){finish();saveTextBlob(svg,'研究放大镜_观察记录.svg','image/svg+xml');toast('已改为保存SVG观察图。');}};
+ img.onerror=function(){finish();saveTextBlob(svg,'研究放大镜_观察记录.svg','image/svg+xml');toast('已改为保存SVG观察图。');};img.src=url;
+}
+function closeHelp(){$('helpOverlay').hidden=true;if(helpFocus)helpFocus.focus();}
+function init(){
+ paintAssets();render();
+ document.querySelectorAll('[data-sample]').forEach(function(b){b.addEventListener('click',function(){selectSample(b.dataset.sample);});});
+ document.querySelectorAll('[data-zoom]').forEach(function(b){b.addEventListener('click',function(){setZoom(Number(b.dataset.zoom));});});$('zoomRange').addEventListener('input',function(){setZoom(Number(this.value));});
+ $('freezeButton').addEventListener('click',function(){state.reference=snapshot();render();toast('已保留当前画面，可以改变倍率比较。');});$('clearReference').addEventListener('click',function(){state.reference=null;render();});$('returnPoint').addEventListener('click',function(){if(state.reference){state.cx=state.reference.cx;state.cy=state.reference.cy;render();if(Math.abs(state.cx-state.reference.cx)>.02||Math.abs(state.cy-state.reference.cy)>.02)toast('当前倍率的视野较大，原观察点靠近边缘，已移至最近位置。');}});
+ var svg=$('overviewSvg');svg.addEventListener('pointerdown',function(e){if(dragging||e.isPrimary===false||(e.button!==0&&e.pointerType==='mouse'))return;var p=svgPoint(e);if(!p)return;dragging=true;dragPointer=e.pointerId;var onCircle=['ringHandle','sourceRing','crosshair','crosshairTop'].indexOf(e.target.id)>=0;dragOffset=onCircle?{x:p.x-state.cx,y:p.y-state.cy}:{x:0,y:0};try{if(svg.setPointerCapture)svg.setPointerCapture(e.pointerId);}catch(ignore){}movePoint(e);e.preventDefault();});svg.addEventListener('pointermove',function(e){if(dragging&&e.pointerId===dragPointer)movePoint(e);});['pointerup','pointercancel','lostpointercapture'].forEach(function(type){svg.addEventListener(type,function(e){if(e.pointerId!==dragPointer)return;dragging=false;dragPointer=null;});});svg.addEventListener('keydown',function(e){var step=e.shiftKey?20:5,delta={ArrowLeft:[-step,0],ArrowRight:[step,0],ArrowUp:[0,-step],ArrowDown:[0,step]}[e.key];if(delta){e.preventDefault();state.cx+=delta[0];state.cy+=delta[1];render();}});
+ $('photoButton').addEventListener('click',function(){$('photoInput').click();});$('photoInput').addEventListener('change',function(){loadPhoto(this.files[0]);this.value='';});$('exportButton').addEventListener('click',exportImage);
+ $('observeTab').addEventListener('click',function(){switchPage('observe');});$('structureTab').addEventListener('click',function(){switchPage('structure');});$('resetAll').addEventListener('click',reset);$('mobileReset').addEventListener('click',function(){reset();closeHelp();});
+ $('helpButton').addEventListener('click',function(){helpFocus=document.activeElement;$('helpOverlay').hidden=false;$('closeHelp').focus();});$('closeHelp').addEventListener('click',closeHelp);$('helpOverlay').addEventListener('click',function(e){if(e.target===this)closeHelp();});document.addEventListener('keydown',function(e){if($('helpOverlay').hidden)return;if(e.key==='Escape'){closeHelp();return;}if(e.key==='Tab'){var focusables=$('helpOverlay').querySelectorAll('button,a[href]'),first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+ $('fullscreenButton').addEventListener('click',function(){var root=document.documentElement,active=document.fullscreenElement||document.webkitFullscreenElement,fn=active?(document.exitFullscreen||document.webkitExitFullscreen):(root.requestFullscreen||root.webkitRequestFullscreen);if(!fn){toast('此浏览器不支持页面全屏，可使用浏览器全屏或横屏查看。');return;}try{var p=fn.call(active?document:root);if(p&&p.catch)p.catch(function(){toast('全屏未开启，请使用浏览器的全屏按钮。');});}catch(e){toast('无法开启全屏，请使用浏览器全屏。');}});
+ function fullscreenText(){$('fullscreenButton').textContent=(document.fullscreenElement||document.webkitFullscreenElement)?'退出全屏':'全屏';}document.addEventListener('fullscreenchange',fullscreenText);document.addEventListener('webkitfullscreenchange',fullscreenText);
+ window.addEventListener('resize',function(){if(state.page==='observe')render();});
+ }
+ window.MagnifierApp={init:init,reset:reset,getState:function(){return JSON.parse(JSON.stringify({page:state.page,sample:state.sample,cx:state.cx,cy:state.cy,zoom:state.zoom,reference:state.reference,photoLoaded:!!state.photo}));},exportSvg:exportSvg};
+})();
+
+</script>
+<script>
+/*
+ * LensLab — classroom structure/effect model, no dependencies.
+ * a = 18 mm; sag is the signed sagitta of EACH symmetric spherical surface.
+ * R = (a² + sag²)/(2|sag|), Phi = 2(n-1)sign(sag)/R, n = 1.5.
+ * An object is u = 30 mm before a thin lens; the eye is e = 250 mm after it.
+ * The relative angular size against the same unmoved naked-eye arrangement is
+ * A = (u+e)/(u+e-e*u*Phi). This is NOT a commercial/nominal lens magnification.
+ * At |sag| <= 3 mm, f >= 55.5 mm for positive lenses, so u stays inside f.
+ * base adds equally to centre and edge thickness. It deliberately does not
+ * change Phi in this thin-lens approximation; small thick-lens/plane-slab
+ * effects, lens aberrations and the eye's accommodation are omitted.
+ * The side section exaggerates horizontal thickness for readable classroom
+ * interaction. Thickness numbers are model dimensions, not screen measurements.
+ */
+(function () {
+  'use strict';
+  var DEFAULT = { sag: 2, base: 2, transparent: true };
+  var state = copy(DEFAULT), saved = null, root = null, els = {}, initialized = false;
+  var A = 18, U = 30, E = 250, N = 1.5, RIM_X = 440, CY = 155, SX = 13, SY = 6;
+  var drag = null;
+
+  function copy(o) { return { sag: o.sag, base: o.base, transparent: o.transparent }; }
+  function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+  function roundTenth(n) { return Math.round(n * 10) / 10; }
+  function thickness(o) { return { center: o.base + 2 * Math.max(o.sag, 0), edge: o.base + 2 * Math.max(-o.sag, 0) }; }
+  function optical(o) {
+    var s = Math.abs(o.sag);
+    if (s < 0.000001) return { radius: null, power: 0, angularRatio: 1 };
+    var radius = (A * A + s * s) / (2 * s);
+    var power = 2 * (N - 1) * Math.sign(o.sag) / radius;
+    return { radius: radius, power: power, angularRatio: (U + E) / (U + E - E * U * power) };
+  }
+  function kind(o) { return o.sag > 0.00001 ? 'convex' : o.sag < -0.00001 ? 'concave' : 'flat'; }
+  function shapeLabel(o) { return o.sag > 0.00001 ? '外凸' : o.sag < -0.00001 ? '内凹' : '平直'; }
+  function axis(o) { return RIM_X - (o.base / 2 + Math.max(-o.sag, 0)) * SX; }
+  function profile(o) {
+    var sag = Math.abs(o.sag), r = sag < 0.000001 ? null : (A * A + sag * sag) / (2 * sag);
+    var rimH = r === null ? 0 : Math.sqrt(r * r - A * A), mid = axis(o), right = [], left = [];
+    for (var i = 0; i <= 64; i++) {
+      var y = -A + 2 * A * i / 64;
+      var displacement = r === null ? 0 : Math.sign(o.sag) * (Math.sqrt(Math.max(0, r * r - y * y)) - rimH);
+      var x = RIM_X + displacement * SX, py = CY + y * SY;
+      right.push([x, py]); left.push([2 * mid - x, py]);
+    }
+    var points = right.concat(left.reverse());
+    return points.map(function (p, i) { return (i ? 'L' : 'M') + p[0].toFixed(2) + ' ' + p[1].toFixed(2); }).join(' ') + 'Z';
+  }
+  function layoutStage() {
+    if (!initialized) return;
+    var width = els.stage.getBoundingClientRect().width;
+    if (width < 1) return;
+    var narrow = width < 600, compact = !narrow && width < 850;
+    els.stage.classList.toggle('lens-narrow', narrow); els.stage.classList.toggle('lens-compact', compact);
+    els.stage.setAttribute('viewBox', narrow ? '0 0 420 630' : compact ? '0 0 780 330' : '0 0 900 330');
+    els.frontView.setAttribute('transform', narrow ? 'translate(-22 0)' : compact ? 'translate(-20 0)' : 'translate(0 0)');
+    els.sideView.setAttribute('transform', narrow ? 'translate(-214 300)' : compact ? 'translate(-30 0)' : 'translate(0 0)');
+    els.currentView.setAttribute('transform', narrow ? 'translate(-422 0)' : compact ? 'translate(-64 0)' : 'translate(0 0)');
+    els.connector.setAttribute('visibility', narrow || saved ? 'hidden' : 'visible');
+    els.connector.setAttribute('transform', compact ? 'translate(-20 0)' : 'translate(0 0)');
+  }
+  function renderComparison() {
+    if (!saved) {
+      els.comparison.hidden = true;
+      els.savedOutline.setAttribute('opacity', '0');
+      els.savedOutline.setAttribute('d', '');
+      els.frontModel.setAttribute('visibility', 'visible');
+      els.savedView.setAttribute('visibility', 'hidden');
+      els.frontLabel.textContent = '正面'; els.frontLabel.setAttribute('y', '279');
+      els.frontNote.setAttribute('visibility', 'visible');
+      els.currentLabel.textContent = '透过它看';
+      els.keep.textContent = '保留对照';
+      els.question.textContent = '中央和边缘，哪里更厚？';
+      layoutStage(); return;
+    }
+    var t = thickness(saved);
+    els.comparison.hidden = false;
+    els.savedOutline.setAttribute('opacity', '1');
+    els.savedOutline.setAttribute('d', profile(saved));
+    els.savedName.textContent = shapeLabel(saved) + ' · ' + (saved.transparent ? '透明' : '不透明');
+    els.savedMeasure.textContent = '中央 ' + t.center.toFixed(1) + ' mm · 边缘 ' + t.edge.toFixed(1) + ' mm';
+    els.frontModel.setAttribute('visibility', 'hidden');
+    els.savedView.setAttribute('visibility', 'visible');
+    els.compareZoom.setAttribute('transform', 'translate(130 155) scale(' + optical(saved).angularRatio.toFixed(6) + ')');
+    els.savedCover.setAttribute('visibility', saved.transparent ? 'hidden' : 'visible');
+    els.frontLabel.textContent = '对照画面'; els.frontLabel.setAttribute('y', '300');
+    els.frontNote.setAttribute('visibility', 'hidden');
+    els.currentLabel.textContent = '当前画面';
+    els.keep.textContent = '更新对照';
+    els.question.textContent = '哪些地方变了？看到的图像呢？';
+    layoutStage();
+  }
+  function render() {
+    if (!initialized) return;
+    var t = thickness(state), model = optical(state), hx = RIM_X + state.sag * SX;
+    els.profile.setAttribute('d', profile(state));
+    els.profile.setAttribute('fill', state.transparent ? 'url(#lenslabGlass)' : '#819086');
+    els.front.setAttribute('fill', state.transparent ? 'url(#lenslabGlass)' : '#819086');
+    els.shine.setAttribute('opacity', state.transparent ? '1' : '.2');
+    els.axis.setAttribute('x1', axis(state)); els.axis.setAttribute('x2', axis(state));
+    els.handle.setAttribute('transform', 'translate(' + hx.toFixed(2) + ' ' + CY + ')');
+    els.handle.setAttribute('aria-valuenow', state.sag.toFixed(1));
+    els.handle.setAttribute('aria-valuetext', shapeLabel(state) + (state.sag ? ' ' + Math.abs(state.sag).toFixed(1) + ' 毫米弧高' : ''));
+    els.hint.setAttribute('x', hx.toFixed(2));
+    els.zoom.setAttribute('transform', 'translate(734 155) scale(' + model.angularRatio.toFixed(6) + ')');
+    els.cover.setAttribute('visibility', state.transparent ? 'hidden' : 'visible');
+    els.center.textContent = t.center.toFixed(1); els.edge.textContent = t.edge.toFixed(1);
+    els.curvature.value = state.sag; els.base.value = state.base;
+    els.curvatureValue.textContent = shapeLabel(state);
+    els.baseValue.textContent = state.base.toFixed(1) + ' mm';
+    els.transparency.setAttribute('aria-checked', String(state.transparent));
+    els.transparency.setAttribute('aria-label', state.transparent ? '镜片透明，点击改为不透明' : '镜片不透明，点击改为透明');
+    els.transparencyText.textContent = state.transparent ? '透明' : '不透明';
+    Array.prototype.forEach.call(els.presets, function (button) { button.setAttribute('aria-pressed', String(button.getAttribute('data-lens-preset') === kind(state))); });
+  }
+  function change() {
+    render();
+    if (root && typeof window.CustomEvent === 'function') root.dispatchEvent(new CustomEvent('lenslabchange', { bubbles: true, detail: getState() }));
+  }
+  function stagePoint(event) {
+    var matrix = els.sideView.getScreenCTM();
+    if (!matrix) return null;
+    var p = els.stage.createSVGPoint(); p.x = event.clientX; p.y = event.clientY;
+    return p.matrixTransform(matrix.inverse());
+  }
+  function getState() {
+    var out = copy(state), t = thickness(state), model = optical(state);
+    out.kind = kind(state); out.centerThickness = t.center; out.edgeThickness = t.edge;
+    out.model = { angularRatio: model.angularRatio, radius: model.radius, power: model.power, objectDistance: U, eyeDistance: E };
+    out.comparison = saved ? copy(saved) : null;
+    return out;
+  }
+  function reset() {
+    state = copy(DEFAULT); saved = null; drag = null;
+    if (initialized) { els.hint.setAttribute('opacity', '1'); renderComparison(); change(); }
+    return getState();
+  }
+  function init() {
+    if (initialized) { render(); return true; }
+    root = document.getElementById('structurePage');
+    if (!root) return false;
+    var names = {
+      stage: 'lensStage', profile: 'lensProfile', front: 'lensFrontGlass', shine: 'lensFrontShine', axis: 'lensAxis', handle: 'lensDragHandle', hint: 'lensDragHint',
+      frontView: 'lensFrontView', frontModel: 'lensFrontModel', savedView: 'lensSavedView', sideView: 'lensSideView', currentView: 'lensCurrentView', connector: 'lensConnector',
+      frontLabel: 'lensFrontLabel', frontNote: 'lensFrontNote', currentLabel: 'lensCurrentLabel', compareZoom: 'lensCompareZoom', savedCover: 'lensSavedOpaqueCover',
+      zoom: 'lensEffectZoom', cover: 'lensOpaqueCover', center: 'lensCenterValue', edge: 'lensEdgeValue', curvature: 'lensCurvature', base: 'lensBase',
+      curvatureValue: 'lensCurvatureValue', baseValue: 'lensBaseValue', transparency: 'lensTransparency', transparencyText: 'lensTransparencyText',
+      keep: 'lensKeep', comparison: 'lensComparison', savedOutline: 'lensSavedOutline', savedName: 'lensSavedName', savedMeasure: 'lensSavedMeasure',
+      clearKeep: 'lensClearKeep', question: 'lensQuestion'
+    };
+    Object.keys(names).forEach(function (name) { els[name] = document.getElementById(names[name]); });
+    els.presets = root.querySelectorAll('[data-lens-preset]');
+    initialized = true;
+    els.curvature.addEventListener('input', function () { state.sag = roundTenth(clamp(Number(this.value), -3, 3)); change(); });
+    els.base.addEventListener('input', function () { state.base = roundTenth(clamp(Number(this.value), 1, 4)); change(); });
+    els.transparency.addEventListener('click', function () { state.transparent = !state.transparent; change(); });
+    Array.prototype.forEach.call(els.presets, function (button) {
+      button.addEventListener('click', function () {
+        var preset = this.getAttribute('data-lens-preset');
+        state.sag = preset === 'flat' ? 0 : preset === 'concave' ? -2 : 2;
+        state.transparent = true; change();
+      });
+    });
+    els.keep.addEventListener('click', function () { saved = copy(state); renderComparison(); change(); });
+    els.clearKeep.addEventListener('click', function () { saved = null; renderComparison(); change(); });
+    els.handle.addEventListener('pointerdown', function (event) {
+      if (event.button !== undefined && event.button !== 0) return;
+      var point = stagePoint(event); if (!point) return;
+      event.preventDefault();
+      drag = { pointerId: event.pointerId, offset: point.x - RIM_X - state.sag * SX };
+      els.hint.setAttribute('opacity', '0');
+      try { els.handle.setPointerCapture(event.pointerId); } catch (_) { /* pointer capture is optional on older engines */ }
+    });
+    els.handle.addEventListener('pointermove', function (event) {
+      if (!drag || event.pointerId !== drag.pointerId) return;
+      var point = stagePoint(event); if (!point) return;
+      event.preventDefault();
+      state.sag = roundTenth(clamp((point.x - drag.offset - RIM_X) / SX, -3, 3)); change();
+    });
+    function endDrag(event) {
+      if (!drag || event.pointerId !== drag.pointerId) return;
+      try { els.handle.releasePointerCapture(event.pointerId); } catch (_) { /* no captured pointer */ }
+      drag = null;
+    }
+    els.handle.addEventListener('pointerup', endDrag);
+    els.handle.addEventListener('pointercancel', endDrag);
+    els.handle.addEventListener('lostpointercapture', function () { drag = null; });
+    els.handle.addEventListener('keydown', function (event) {
+      var next = state.sag;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowUp') next += .1;
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') next -= .1;
+      else if (event.key === 'PageUp') next += .5;
+      else if (event.key === 'PageDown') next -= .5;
+      else if (event.key === 'Home') next = -3;
+      else if (event.key === 'End') next = 3;
+      else return;
+      event.preventDefault(); state.sag = roundTenth(clamp(next, -3, 3)); change();
+    });
+    if (typeof window.ResizeObserver === 'function') {
+      var sizeObserver = new ResizeObserver(layoutStage); sizeObserver.observe(els.stage);
+    }
+    if (typeof window.MutationObserver === 'function') {
+      var visibilityObserver = new MutationObserver(layoutStage); visibilityObserver.observe(root, { attributes: true, attributeFilter: ['hidden', 'style', 'class'] });
+    }
+    window.addEventListener('resize', layoutStage);
+    renderComparison(); render(); layoutStage();
+    return true;
+  }
+  window.LensLab = { init: init, reset: reset, getState: getState };
+}());
+
+</script>
+<script>window.LensLab.init();window.MagnifierApp.init();</script>
+</body>
+</html>
