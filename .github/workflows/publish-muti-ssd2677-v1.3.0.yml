@@ -1,0 +1,119 @@
+name: Publish Muti SSD2677 v1.3.0 outputs
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - build/muti-ssd2677-v1.3.0-ci
+    paths:
+      - 'ci/muti-ssd2677-v1.3.0/PUBLISH_TRIGGER.txt'
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout build branch
+        uses: actions/checkout@v4
+        with:
+          ref: build/muti-ssd2677-v1.3.0-ci
+          fetch-depth: 1
+
+      - name: Wait for matching verified build
+        id: wait
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          WORKFLOW='muti-ssd2677-v1.3.0.yml'
+          RUN_ID=''
+          for attempt in $(seq 1 180); do
+            JSON="$(gh api -X GET \
+              "repos/${GITHUB_REPOSITORY}/actions/workflows/${WORKFLOW}/runs" \
+              -f branch='build/muti-ssd2677-v1.3.0-ci' \
+              -f event='push' \
+              -f per_page=30)"
+            RUN_ID="$(jq -r --arg sha "$GITHUB_SHA" \
+              '.workflow_runs[] | select(.head_sha==$sha) | .id' <<<"$JSON" | head -n1)"
+            if [ -z "$RUN_ID" ]; then
+              echo "[$attempt] waiting for build run to appear for $GITHUB_SHA"
+              sleep 10
+              continue
+            fi
+            STATUS="$(jq -r --argjson id "$RUN_ID" \
+              '.workflow_runs[] | select(.id==$id) | .status' <<<"$JSON")"
+            CONCLUSION="$(jq -r --argjson id "$RUN_ID" \
+              '.workflow_runs[] | select(.id==$id) | .conclusion // ""' <<<"$JSON")"
+            echo "[$attempt] run=$RUN_ID status=$STATUS conclusion=$CONCLUSION"
+            if [ "$STATUS" = 'completed' ]; then
+              if [ "$CONCLUSION" != 'success' ]; then
+                echo "matching build failed: $CONCLUSION" >&2
+                exit 1
+              fi
+              break
+            fi
+            sleep 10
+          done
+          if [ -z "$RUN_ID" ]; then
+            echo 'matching build run was not found' >&2
+            exit 1
+          fi
+          FINAL="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}")"
+          test "$(jq -r '.status' <<<"$FINAL")" = 'completed'
+          test "$(jq -r '.conclusion' <<<"$FINAL")" = 'success'
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Download verified artifact
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ steps.wait.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/v130-artifact
+          mkdir -p /tmp/v130-artifact
+          gh run download "$RUN_ID" \
+            --repo "$GITHUB_REPOSITORY" \
+            --name 'Muti-SSD2677-LocalWeb-C3-v1.3.0' \
+            --dir /tmp/v130-artifact
+          find /tmp/v130-artifact -type f -maxdepth 4 -print
+
+      - name: Publish downloadable outputs to branch
+        shell: bash
+        env:
+          RUN_ID: ${{ steps.wait.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          OUT='release/muti-ssd2677-v1.3.0'
+          rm -rf "$OUT"
+          mkdir -p "$OUT/firmware"
+
+          ZIP="$(find /tmp/v130-artifact -type f -name 'Muti-SSD2677-LocalWeb-C3-v1.3.0.zip' -print -quit)"
+          ZIP_SHA="$(find /tmp/v130-artifact -type f -name 'Muti-SSD2677-LocalWeb-C3-v1.3.0.zip.sha256' -print -quit)"
+          test -n "$ZIP" && test -n "$ZIP_SHA"
+          cp "$ZIP" "$OUT/"
+          cp "$ZIP_SHA" "$OUT/"
+
+          for name in firmware.bin merged-flash.bin bootloader.bin partitions.bin boot_app0.bin \
+                      firmware.elf firmware.map flash_args.txt BUILD_INFO.txt SHA256SUMS.txt; do
+            SRC="$(find /tmp/v130-artifact -type f -name "$name" -print -quit)"
+            test -n "$SRC"
+            cp "$SRC" "$OUT/firmware/$name"
+          done
+
+          printf '%s\n' "$GITHUB_SHA" > "$OUT/SOURCE_HEAD_SHA.txt"
+          printf '%s\n' "$RUN_ID" > "$OUT/WORKFLOW_RUN_ID.txt"
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > "$OUT/PUBLISHED_UTC.txt"
+          (cd "$OUT" && sha256sum Muti-SSD2677-LocalWeb-C3-v1.3.0.zip firmware/* > RELEASE_SHA256SUMS.txt)
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$OUT"
+          git commit -m 'ci: publish verified SSD2677 v1.3.0 outputs'
+          git push origin HEAD:build/muti-ssd2677-v1.3.0-ci
