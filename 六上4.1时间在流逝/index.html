@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#142f40">
+<meta name="description" content="六上4.1时间在流逝：燃香前段预测与后段检验、累计时间拆分、本班实测推算、日影追踪。单文件离线课堂互动。">
+<title>时间在流逝 · 计时探究</title>
+<style>
+:root{--ink:#142f40;--muted:#596d78;--paper:#f3f5f3;--line:#d4ddde;--teal:#087e89;--amber:#bd6b16;--warm:#f6b64b;--mint:#e4f1ee;--base:clamp(18px,1.45vw,27px)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;font-size:var(--base);-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{color:inherit;white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:8px;min-height:48px;padding:9px 16px;font-weight:650;cursor:pointer;touch-action:manipulation}button:hover{background:var(--mint)}button:disabled{opacity:.45;cursor:default}button:focus-visible,input:focus-visible,a:focus-visible,svg:focus-visible{outline:3px solid #0085a2;outline-offset:3px}button.primary{background:var(--ink);border-color:var(--ink);color:#fff}button.accent{background:var(--warm);border-color:#e5a739;color:var(--ink)}button[aria-pressed=true]{background:#d7eeeb;border-color:var(--teal);color:#065e68}button.small{font-size:clamp(16px,1.15vw,21px);min-height:42px;padding:7px 12px}button.flat{border-color:transparent;background:transparent}h1,h2,h3,p{margin:0}svg{display:block;width:100%;height:100%;font-family:inherit;overflow:hidden}a{color:#087e89}[hidden]{display:none!important}input[type=range]{width:100%;min-width:0;height:44px;margin:0;accent-color:var(--teal);cursor:pointer;touch-action:pan-y}input[type=range]::-webkit-slider-thumb{min-width:24px;min-height:24px}input[type=number]{appearance:textfield;-moz-appearance:textfield}input::-webkit-inner-spin-button{appearance:none}input[type=number]{border:1px solid #b9c9cc;background:#fff;color:var(--ink);border-radius:7px;text-align:center;min-width:0;font-size:clamp(24px,2.25vw,38px);font-variant-numeric:tabular-nums;outline-offset:2px}.app{height:100%;height:100dvh;display:flex;flex-direction:column;padding:0 24px 12px;gap:12px}.topbar{display:flex;align-items:center;gap:20px;min-height:83px;flex-shrink:0;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:12px;white-space:nowrap}.brand-icon{width:31px;height:31px;border:2px solid var(--teal);border-radius:50%;position:relative;flex-shrink:0}.brand-icon:before{content:"";position:absolute;width:2px;height:10px;background:var(--teal);left:13px;top:4px}.brand-icon:after{content:"";position:absolute;width:9px;height:2px;background:var(--teal);left:13px;top:13px;transform:rotate(25deg);transform-origin:left center}.brand h1{font-size:clamp(25px,2.2vw,40px);letter-spacing:.02em}.nav{display:flex;gap:4px;align-self:stretch;align-items:center;margin:auto}.nav button{background:transparent;border:0;min-height:54px;padding:11px 15px;font-size:clamp(18px,1.45vw,27px);color:var(--muted);border-bottom:3px solid transparent;border-radius:0}.nav b{font-size:.7em;font-weight:500;opacity:.7;margin-right:7px}.nav button[aria-selected=true]{color:#087582;border-bottom-color:#087582}.utilities{display:flex;gap:5px}.utilities button{font-size:16px;padding:8px 10px}.screen{flex:1;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:12px}.mission{font-size:clamp(24px,1.9vw,36px);font-weight:650;line-height:1.4;min-height:38px;display:flex;align-items:center;gap:16px}.mission small{font-size:clamp(15px,1.1vw,20px);color:var(--muted);font-weight:400;margin-left:auto;white-space:nowrap}.stage{min-width:0;min-height:0;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}.burn-layout{display:grid;grid-template-columns:44% minmax(0,1fr);gap:18px;min-height:0}.incense-stage{display:grid;grid-template-rows:minmax(0,1fr) auto}.burn-svg{min-height:0}.segment-strip{display:flex;border-top:1px solid var(--line);background:#f7f9f7;min-height:65px;align-items:center;padding:8px 13px;gap:7px}.segment-strip>div{flex:1;text-align:center;min-width:0}.segment-strip span{display:block;font-size:15px;color:var(--muted);line-height:1.4}.segment-strip strong{font-size:clamp(21px,1.7vw,31px);font-variant-numeric:tabular-nums}.graph-stage{display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:16px 18px 14px;gap:5px}.graph-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.legend{display:flex;gap:18px;font-size:18px}.legend span:before{content:"";display:inline-block;width:20px;height:5px;vertical-align:middle;background:var(--teal);margin-right:7px;border-radius:4px}.legend .b:before{background:var(--amber)}.elapsed-label{font-size:16px;color:var(--muted)}.elapsed-label strong{font-size:clamp(25px,2.3vw,42px);line-height:1.1;color:var(--ink);margin-left:10px;font-variant-numeric:tabular-nums}.graph-svg{min-height:0}.results{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding-top:10px;border-top:1px solid var(--line)}.result{min-width:0}.result span{display:block;font-size:clamp(16px,1.2vw,22px);color:var(--muted);margin-bottom:3px}.result strong{display:block;font-size:clamp(24px,2.1vw,38px);font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.3}.result.teal strong{color:var(--teal)}.result.amber strong{color:var(--amber)}.result small{font-size:15px;display:block;min-height:20px;color:var(--muted)}.controls{display:flex;align-items:center;gap:16px;padding:11px 16px;border:1px solid var(--line);border-radius:10px;background:#fff;min-height:85px}.experiment-actions{display:flex;gap:9px;flex-shrink:0}.rate-control{flex:1;min-width:0;display:grid;grid-template-columns:auto minmax(70px,1fr) auto;align-items:center;gap:12px}.rate-control label{font-size:18px;line-height:1.35}.rate-value{font-size:24px;font-weight:750;white-space:nowrap;color:var(--amber)}.rate-control.waiting{opacity:.45}.replay-line{display:flex;align-items:center;gap:10px;min-width:0;flex:1}.replay-line>label{font-size:18px;white-space:nowrap}.statusline{display:flex;justify-content:space-between;align-items:center;gap:18px;min-height:24px;font-size:clamp(15px,1.1vw,19px);color:var(--muted);padding-left:116px}.statusline .long{text-align:right;margin-left:auto}.record-layout{display:grid;grid-template-columns:46% minmax(0,1fr);gap:20px;min-height:0}.record-form{display:flex;flex-direction:column;padding:18px 20px;min-height:0;gap:13px}.record-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.record-head h3{font-size:clamp(20px,1.6vw,29px);font-weight:650}.data-source{font-size:17px;color:var(--teal);white-space:nowrap}.data-source.sample{color:var(--amber)}.input-caption{font-size:18px;color:var(--muted)}.record-table{width:100%;border-collapse:collapse;table-layout:fixed;flex:1}.record-table th{font-size:clamp(17px,1.2vw,22px);font-weight:500;color:var(--muted);padding:9px 3px;text-align:center;border-bottom:1px solid var(--line)}.record-table th:first-child{width:24%}.record-table th:last-child{width:26%}.record-table td{border-bottom:1px solid #e0e6e6;padding:12px 3px;text-align:center}.record-table td:first-child{font-size:clamp(20px,1.7vw,30px);font-weight:650}.time-inputs{display:flex;align-items:center;justify-content:center;gap:5px}.time-inputs input{width:66px;height:53px;padding:4px}.time-inputs span{font-size:17px;color:var(--muted)}.interval{font-size:clamp(20px,1.75vw,31px);font-weight:700;color:var(--teal);font-variant-numeric:tabular-nums}.input-error{font-size:17px;line-height:1.5;color:#9c4b18;min-height:26px}.record-graph{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:5px;padding:18px}.record-graph h3{font-size:clamp(20px,1.55vw,29px);font-weight:650}.record-note{font-size:18px;color:var(--muted);line-height:1.5}.estimate-block{display:flex;align-items:center;gap:18px;flex:1;min-width:0}.estimate-block label{font-size:18px;color:var(--muted);line-height:1.4;white-space:nowrap}.estimate-block output{font-size:clamp(28px,2.6vw,47px);font-weight:750;color:var(--teal);white-space:nowrap}.estimate-condition{font-size:17px;color:var(--muted);line-height:1.45;max-width:260px;margin-left:auto}.record-actions{display:flex;gap:9px}.solar-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;min-height:0}.solar-stage{display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:16px 18px;gap:7px}.solar-title{display:flex;align-items:center;justify-content:space-between;font-size:20px}.solar-data{display:flex;align-items:baseline;gap:9px;font-size:19px}.solar-data strong{font-size:clamp(25px,2vw,36px);font-weight:750}.solar-data small{margin-left:auto;color:var(--muted);font-size:15px}.sky-svg{touch-action:none;cursor:grab}.sky-svg:active{cursor:grabbing}.season-group{display:flex;gap:6px}.season-group button{font-size:18px;min-height:44px;padding:7px 11px}.solar-timeline{flex:1;min-width:0}.time-stations{display:flex;justify-content:space-between;font-size:15px;color:var(--muted);margin-top:-5px;padding:0 6px}.solar-time{min-width:86px;text-align:center;font-size:24px;font-weight:750;font-variant-numeric:tabular-nums}.overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;background:#142f4080;backdrop-filter:blur(5px)}.dialog{max-width:960px;width:100%;max-height:90vh;display:flex;flex-direction:column;background:var(--paper);border:1px solid #c5d3d4;border-radius:14px;box-shadow:0 18px 70px #102d3f44}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;border-bottom:1px solid var(--line)}.dialog-head h2{font-size:26px}.dialog-body{padding:20px 26px;overflow:auto;font-size:20px;line-height:1.75}.dialog-body p+p{margin-top:13px}.dialog-body h3{font-size:22px;margin:15px 0 5px}.dialog-body ul{padding-left:25px;margin:8px 0}.dialog-foot{padding:16px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:15px}.history-table{width:100%;border-collapse:collapse;text-align:left;font-size:18px;line-height:1.5}.history-table td,.history-table th{border-bottom:1px solid var(--line);padding:11px 6px}.history-table small{display:block;color:var(--muted)}.history-empty{padding:36px 0;text-align:center;color:var(--muted)}.toast{position:fixed;z-index:100;bottom:74px;left:50%;transform:translateX(-50%);max-width:85%;border-radius:9px;color:#fff;background:var(--ink);box-shadow:0 5px 25px #142f4030;padding:13px 22px;font-size:20px;text-align:center;pointer-events:none}.compat{position:fixed;bottom:15px;left:25px;z-index:5;font-size:13px;color:#546a73;border:1px solid #c8d5d6;border-radius:5px;padding:3px 7px;background:#f3f5f3;pointer-events:none}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.nudge{color:var(--teal);font-weight:600}
+@media(min-width:1700px){.app{padding-left:32px;padding-right:32px;gap:18px}.topbar{min-height:100px}.screen{gap:18px}.controls{min-height:105px;padding:15px 22px}.segment-strip{min-height:85px}.segment-strip span{font-size:20px}.graph-stage{padding:23px 26px}.legend{font-size:24px}.elapsed-label{font-size:21px}.result small{font-size:20px;min-height:25px}.rate-control label,.rate-value{font-size:26px}.input-caption,.record-note,.input-error,.estimate-condition,.estimate-block label{font-size:23px}.data-source{font-size:22px}.record-form,.record-graph{padding:24px 28px}.time-inputs input{height:72px;width:85px}.time-inputs span{font-size:23px}.record-table td{padding:18px 6px}.solar-title{font-size:26px}.solar-data{font-size:25px}.solar-data small{font-size:20px}.season-group button{font-size:23px}.time-stations{font-size:19px}.solar-time{font-size:32px}.compat{left:33px;bottom:18px;font-size:15px}.statusline{padding-left:142px}.utilities button{font-size:20px}}
+@media(max-width:1100px){.app{padding:0 16px 9px;gap:8px}.topbar{min-height:73px;gap:12px}.brand h1{font-size:26px}.brand-icon{width:27px;height:27px}.brand-icon:before{left:11px;top:3px}.brand-icon:after{left:11px;top:12px}.nav button{padding:9px 10px;font-size:18px}.nav b{display:none}.utilities button{font-size:15px;padding:7px 9px}.screen{gap:9px}.mission{font-size:25px;min-height:34px}.mission small{font-size:14px}.burn-layout,.solar-layout,.record-layout{gap:12px}.graph-stage{padding:13px 12px}.elapsed-label{font-size:14px}.legend{font-size:16px;gap:10px}.controls{padding:9px 12px;gap:10px;min-height:78px}.experiment-actions{gap:6px}.experiment-actions button{padding:8px 10px;font-size:18px}.rate-control{gap:8px}.rate-control label{font-size:16px}.rate-value{font-size:22px}.result strong{font-size:23px}.result span{font-size:16px}.result small{font-size:13px}.record-form{padding:12px 14px;gap:8px}.record-graph{padding:14px}.record-head h3,.record-graph h3{font-size:20px}.record-table th{font-size:16px}.record-table td{padding:8px 2px}.time-inputs input{width:50px;font-size:27px;height:48px}.time-inputs span{font-size:15px}.interval{font-size:22px}.estimate-block{gap:10px}.estimate-block output{font-size:29px}.estimate-condition{font-size:15px;max-width:210px}.record-actions button{font-size:17px;padding:8px 11px}.season-group button{font-size:16px;padding:7px 8px}.solar-stage{padding:13px}.solar-title{font-size:19px}.solar-data{font-size:17px}.solar-data small{font-size:13px}.solar-time{min-width:68px;font-size:22px}.compat{left:17px;bottom:12px}.statusline{font-size:14px;padding-left:112px}}
+@media(max-height:680px) and (min-width:760px){.topbar{min-height:62px}.screen{gap:7px}.app{gap:7px}.mission{font-size:23px;min-height:31px}.controls{min-height:68px;padding:7px 12px}.segment-strip{min-height:51px;padding:5px 8px}.segment-strip span{font-size:13px}.segment-strip strong{font-size:20px}.graph-stage{padding:10px 12px}.results{padding-top:6px}.result strong{font-size:22px}.result span{font-size:15px}.result small{font-size:12px;min-height:16px}.record-form{gap:4px;padding:10px 14px}.record-table td{padding:6px 2px}.time-inputs input{height:42px}.record-note,.input-caption,.input-error{font-size:15px}.record-graph{padding:12px}.statusline{font-size:13px;min-height:20px}.solar-stage{padding:10px 13px}.solar-title{font-size:17px}.solar-data small{font-size:12px}.solar-data strong{font-size:24px}}
+@media(max-width:759px){.app{padding:0 10px 8px;gap:7px}.topbar{min-height:91px;position:relative;align-items:flex-start;padding-top:10px}.brand h1{font-size:23px}.brand-icon{width:25px;height:25px}.utilities{margin-left:auto}.utilities button{font-size:14px;min-height:34px;padding:5px 8px}.nav{position:absolute;left:0;right:0;bottom:0;height:40px;justify-content:center;gap:0}.nav button{font-size:16px;min-height:38px;padding:7px 13px}.mission{font-size:20px;line-height:1.3;min-height:29px}.mission small{display:none}.screen{gap:7px}.burn-layout{grid-template-columns:39% 1fr;gap:7px}.graph-stage{padding:9px 8px;gap:0}.graph-top{flex-wrap:wrap;gap:3px}.legend{font-size:13px;gap:8px}.legend span:before{width:11px;margin-right:3px}.elapsed-label{font-size:12px}.elapsed-label strong{font-size:22px;margin-left:5px}.segment-strip{flex-direction:column;gap:4px;padding:7px 4px;min-height:0;align-items:stretch}.segment-strip>div{display:flex;justify-content:space-between;align-items:center}.segment-strip span{font-size:11px}.segment-strip strong{font-size:15px}.results{grid-template-columns:1fr;gap:4px;padding-top:5px}.result{display:grid;grid-template-columns:64px 1fr;align-items:baseline}.result span{font-size:13px;margin:0}.result strong{font-size:20px}.result small{grid-column:1 / -1;font-size:11px;min-height:0}.controls{flex-wrap:wrap;padding:8px;gap:7px;min-height:0}.experiment-actions{width:100%;justify-content:space-between}.experiment-actions button{font-size:16px;min-height:42px;padding:7px 12px}.experiment-actions .primary{flex:1}.rate-control{gap:7px}.rate-control label{font-size:14px}.rate-value{font-size:18px}.controls .small{font-size:13px;min-height:37px;padding:6px 8px}.replay-line label{font-size:13px}.statusline{padding-left:99px;font-size:11px;min-height:18px;gap:3px}.statusline .long{display:none}.compat{font-size:10px;left:11px;bottom:10px}.record-layout{grid-template-columns:1fr;grid-template-rows:1.2fr 1fr;gap:7px}.record-form{padding:9px 12px;gap:4px}.record-head h3,.record-graph h3{font-size:17px}.data-source{font-size:13px}.input-caption{font-size:13px}.record-table th{font-size:13px;padding:4px 2px}.record-table td{padding:4px 2px;font-size:17px!important}.time-inputs input{width:48px;height:35px;font-size:22px}.time-inputs span{font-size:13px}.interval{font-size:19px}.record-form .small{font-size:13px;min-height:32px;padding:5px 7px}.input-error{min-height:18px;font-size:12px}.record-graph{padding:9px 12px;gap:0}.record-note{font-size:12px}.estimate-block{gap:9px;flex:1}.estimate-block output{font-size:27px}.estimate-block label{font-size:13px}.estimate-condition{display:none}.record-actions{gap:5px}.record-actions button{font-size:14px;min-height:39px;padding:6px 8px}.solar-layout{grid-template-columns:1fr;grid-template-rows:.85fr 1.15fr;gap:7px}.solar-stage{padding:9px 12px;gap:2px}.solar-title{font-size:16px}.solar-title .small{font-size:12px;min-height:30px;padding:4px 7px}.solar-data{font-size:14px}.solar-data strong{font-size:23px}.solar-data small{font-size:11px}.season-group{order:3;width:100%;justify-content:center;gap:7px}.season-group button{font-size:14px;min-height:33px;padding:5px 14px}.solar-time{font-size:19px;min-width:62px}.time-stations{font-size:11px}.solar-controls>button{font-size:14px;min-height:39px;padding:5px 9px}.dialog{max-height:94vh}.overlay{padding:10px}.dialog-head{padding:13px 16px}.dialog-head h2{font-size:21px}.dialog-head button{font-size:14px}.dialog-body{padding:12px 17px;font-size:16px}.dialog-body h3{font-size:18px}.dialog-foot{padding:11px 15px;font-size:13px}.history-table{font-size:13px}.history-table td,.history-table th{padding:7px 4px}.history-table .small{font-size:12px;padding:5px 6px;min-height:32px}.toast{font-size:16px;padding:11px 15px}}
+@media(max-width:759px) and (max-height:690px){.topbar{min-height:80px;padding-top:7px}.mission{font-size:18px;min-height:24px}.controls{padding:6px;gap:3px}.experiment-actions button{min-height:35px}.segment-strip span{font-size:10px}.segment-strip strong{font-size:13px}.record-form{padding:7px 10px}.record-graph{padding:7px 10px}.input-caption{display:none}.record-table th{padding:2px}.record-table td{padding:3px 2px}.time-inputs input{height:30px}.record-note{font-size:11px}.solar-data small{display:none}}
+@media(max-width:759px){#screen-1 .mission{flex-wrap:wrap;gap:2px 10px}#screen-1 .mission small{display:block;font-size:11px}#reveal-time{font-size:16px;min-width:94px}}
+.download-link{display:inline-flex;align-items:center;padding:10px 20px;min-height:48px;background:var(--ink);color:white;text-decoration:none;font-weight:650;border-radius:8px}.download-preview{min-height:0;overflow:auto;padding:12px}.download-preview svg{width:100%;height:auto;max-height:61vh}.download-preview pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.7}.download-footer{align-items:center}.download-footer span{font-size:16px;overflow-wrap:anywhere}
+@media(max-width:759px){.burn-layout{grid-template-columns:1fr;grid-template-rows:1fr 1.2fr}.incense-stage{grid-template-columns:minmax(0,1fr)88px;grid-template-rows:minmax(0,1fr)}.segment-strip{border-top:0;border-left:1px solid var(--line);justify-content:center;padding:8px 4px;gap:16px}.segment-strip>div{display:block;flex:0;text-align:center}.segment-strip span{font-size:11px}.segment-strip strong{font-size:16px}.graph-stage .results{grid-template-columns:1fr 1fr 1fr;gap:4px}.graph-stage .result{display:block}.graph-stage .result span{font-size:11px;white-space:nowrap}.graph-stage .result strong{font-size:18px}.graph-stage .result small{font-size:10px}.graph-top{flex-wrap:nowrap}.record-actions{width:100%;justify-content:flex-end}.estimate-block{width:100%;flex-basis:100%}.estimate-block output{margin-left:auto}.dialog-foot.download-footer{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<noscript>请启用 JavaScript。此课件为单文件，可下载后离线运行。</noscript>
+<div class="app">
+ <header class="topbar">
+  <div class="brand"><span class="brand-icon" aria-hidden="true"></span><h1>时间在流逝</h1></div>
+  <nav class="nav" role="tablist" aria-label="三个探究任务">
+   <button id="tab-1" role="tab" aria-controls="screen-1" aria-selected="true" data-page="1"><b>01</b>燃香时间尺</button>
+   <button id="tab-2" role="tab" aria-controls="screen-2" aria-selected="false" data-page="2"><b>02</b>实测与推算</button>
+   <button id="tab-3" role="tab" aria-controls="screen-3" aria-selected="false" data-page="3"><b>03</b>日影追踪</button>
+  </nav>
+  <div class="utilities"><button id="open-info" aria-label="打开教学与模型说明">说明</button><button id="fullscreen">全屏</button></div>
+ </header>
+ <section id="screen-1" class="screen" role="tabpanel" aria-labelledby="tab-1">
+  <h2 class="mission"><span id="burn-question">只看前三格，能推测整炷香吗？</span><small>示意模型 · 非实测</small></h2>
+  <div class="burn-layout">
+   <div class="stage incense-stage"><svg id="incense-svg" class="burn-svg" viewBox="0 0 520 460" role="img" aria-label="两炷十等分的香，同一计时起点，对照燃烧过程"></svg><div class="segment-strip" aria-label="前三格各自用时"><div><span>第1格用时</span><strong id="first-interval">—</strong></div><div><span>第2格用时</span><strong id="second-interval">—</strong></div><div><span>第3格用时</span><strong id="third-interval">—</strong></div></div></div>
+   <div class="stage graph-stage">
+    <div class="graph-top"><div class="legend"><span>A 保持原速</span><span class="b">B 后程可变</span></div><div class="elapsed-label">累计<strong id="burn-elapsed">00:00</strong></div></div>
+    <svg id="burn-graph" class="graph-svg" viewBox="0 0 640 390" role="img" aria-label="横轴累计时间，纵轴已燃格数；曲线随实际模型进程延长"></svg>
+    <div class="results"><div class="result"><span>按前3格预测</span><strong id="prediction-result">先观察</strong><small id="prediction-note">后段暂未揭示</small></div><div class="result teal"><span>A 模型结果</span><strong id="actual-a">—</strong><small id="error-a"></small></div><div class="result amber"><span>B 模型结果</span><strong id="actual-b">—</strong><small id="error-b"></small></div></div>
+   </div>
+  </div>
+  <div class="controls burn-controls">
+   <div class="experiment-actions"><button id="burn-main" class="primary">点燃 · 先看3格</button><button id="burn-reset" class="small" aria-label="重置燃香模型">重来</button></div>
+   <div class="rate-control waiting" id="rate-control"><label for="burn-rate">B 后7格<br>燃烧速度</label><input id="burn-rate" type="range" min="0.6" max="1.4" step="0.1" value="1" disabled aria-label="B后七格燃烧速度相对于原速的倍数"><output id="rate-value" class="rate-value">1.0 ×</output></div>
+   <div class="replay-line" id="burn-replay" hidden><label for="burn-scrub">回看过程</label><input id="burn-scrub" type="range" min="0" max="1200" step="1" value="0" aria-label="回看燃香实验中的累计时间"></div>
+   <button id="burn-speed" class="small" aria-label="切换模型播放速度">加速 40×</button>
+   <button id="burn-new-condition" class="small" hidden>换个条件</button>
+  </div>
+  <p class="statusline"><span id="burn-status" aria-live="polite">十等分；先看前三格，后七格暂不播放。</span><span class="long">测量区20厘米 · 从测量区顶端计时</span></p>
+ </section>
+ <section id="screen-2" class="screen" role="tabpanel" aria-labelledby="tab-2" hidden>
+  <h2 class="mission">累计时间，怎样变成每一格用时？<small>把本班实验带进来</small></h2>
+  <div class="record-layout">
+   <div class="stage record-form">
+    <div class="record-head"><h3>填入前三次记录</h3><span id="data-source" class="data-source">本班实测</span><button id="load-example" class="small">填入示例</button></div>
+    <p class="input-caption">从 0:00 开始，填写烧到标记时的累计用时。</p>
+    <table class="record-table"><thead><tr><th>烧到标记</th><th>累计用时</th><th>这一格</th></tr></thead><tbody>
+     <tr><td>第1格</td><td><div class="time-inputs"><input id="t1m" type="number" inputmode="numeric" min="0" max="999" placeholder="0" aria-label="烧到第1格累计分钟"><span>分</span><input id="t1s" type="number" inputmode="numeric" min="0" max="59" placeholder="00" aria-label="烧到第1格累计秒"><span>秒</span></div></td><td><output id="d1" class="interval">—</output></td></tr>
+     <tr><td>第2格</td><td><div class="time-inputs"><input id="t2m" type="number" inputmode="numeric" min="0" max="999" placeholder="0" aria-label="烧到第2格累计分钟"><span>分</span><input id="t2s" type="number" inputmode="numeric" min="0" max="59" placeholder="00" aria-label="烧到第2格累计秒"><span>秒</span></div></td><td><output id="d2" class="interval">—</output></td></tr>
+     <tr><td>第3格</td><td><div class="time-inputs"><input id="t3m" type="number" inputmode="numeric" min="0" max="999" placeholder="0" aria-label="烧到第3格累计分钟"><span>分</span><input id="t3s" type="number" inputmode="numeric" min="0" max="59" placeholder="00" aria-label="烧到第3格累计秒"><span>秒</span></div></td><td><output id="d3" class="interval">—</output></td></tr>
+    </tbody></table>
+    <p id="input-error" class="input-error" aria-live="polite">累计用时应依次增加；分、秒都要填写。</p>
+   </div>
+   <div class="stage record-graph"><h3>比较同样一格，分别用了多久</h3><svg id="record-svg" viewBox="0 0 610 360" role="img" aria-label="前三格各自用时比较图，含累计数据拆分示意"></svg><p id="record-note" class="record-note">前段数据能支持怎样的推测？</p></div>
+  </div>
+  <div class="controls"><div class="estimate-block"><label>整炷香<br>预测用时</label><output id="record-estimate">—</output><p class="estimate-condition" id="estimate-condition">假设：后七格保持与前段相近的燃烧速度。</p></div><div class="record-actions"><button id="save-record" class="primary" disabled>保存本组</button><button id="export-evidence" disabled>导出证据图</button><button id="open-records" class="small">记录 0</button></div></div>
+  <p class="statusline"><span id="record-footer">预测以燃烧速度基本稳定为前提。</span><span class="long">保留真实差异，不把预测当作实测结果</span></p>
+ </section>
+ <section id="screen-3" class="screen" role="tabpanel" aria-labelledby="tab-3" hidden>
+  <h2 class="mission">同样长的影子，一定是同一时刻吗？<small>宁波附近 · 北纬约30°</small></h2>
+  <div class="solar-layout">
+   <div class="stage solar-stage"><div class="solar-title"><span>看太阳 · 拖动回看</span><button id="solar-cloud" class="small" aria-pressed="false">遮住太阳</button></div><svg id="sky-svg" class="sky-svg" viewBox="0 0 620 390" role="img" tabindex="0" aria-label="太阳高度示意。左右拖动或使用方向键，回看一天中的变化"></svg><p class="solar-data">太阳高度 <strong id="sun-altitude">—</strong><small>高度按模型；横向仅表示一天进程</small></p></div>
+   <div class="stage solar-stage"><div class="solar-title"><span>看影子 · 正上方视角</span><button id="solar-traces" class="small" aria-pressed="false">留下五次影子</button></div><svg id="shadow-svg" viewBox="0 0 620 390" role="img" aria-label="竖直1米杆的地面影子，北向上、东向右"></svg><p class="solar-data">1米杆的影长 <strong id="shadow-length">—</strong><small id="shadow-caption">方向与长度同时变化</small></p></div>
+  </div>
+  <div class="controls solar-controls"><button id="solar-play" class="primary" aria-pressed="false">连续观察</button><div class="solar-timeline"><input id="solar-time" type="range" min="4" max="20" step="0.02" value="9" aria-label="当地太阳时，从清晨4点到夜间20点"><div class="time-stations"><span>清晨</span><span>正午</span><span>入夜</span></div></div><button id="reveal-time" class="solar-time" aria-pressed="false">看时刻</button><div class="season-group" role="group" aria-label="选择观察日期"><button data-season="equinox" aria-pressed="true">春秋分</button><button data-season="summer" aria-pressed="false">夏至</button><button data-season="winter" aria-pressed="false">冬至</button></div></div>
+  <p class="statusline"><span id="solar-status">拖动太阳或时间轴，比较上午与下午。</span><span class="long">当地太阳时，非北京时间 · 竖杆日影模型</span></p>
+ </section>
+</div>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div class="compat" data-aihtml-level="1">T1 · 基础交互</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+<div id="info-dialog" class="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="info-title"><div class="dialog"><div class="dialog-head"><h2 id="info-title">教学与模型说明</h2><button class="small" data-close="info-dialog">返回探究</button></div><div class="dialog-body">
+ <p><strong>六上第四单元《计量时间》第1课《时间在流逝》。</strong>依据教材第98—101页、教师用书第313—322页。先保留课堂燃香实验，再用网页重放过程、处理记录、检验预测。</p>
+ <h3>燃香时间尺</h3><p>两支香的测量区均分为十格，前3格先按相同速度燃烧，播放到第3格自动停止。交流预测后，点击“用前3格推算”，再选择B后7格的速度并继续验证。拖动回放条，可以把同一时刻的燃烧位置和图表对应起来。</p>
+ <p><strong>模型假设：</strong>前3格每格120秒；A全程保持该速度，B后7格可设为原速的0.6—1.4倍。数值仅用于对照，不是某种香的实测。速度滑块不对应真实风速、直径或氧浓度的定量关系。现实中的香材质、粗细、空气条件等可能影响结果，不能认定所有香都严格匀速。</p>
+ <h3>实测与推算</h3><p>从测量区起点开始计时，填写烧到第1、2、3格的累计时间。每格用时分别是 T₁、T₂−T₁、T₃−T₂；整炷预测为 T₃÷3×10。只有后续燃烧条件和速度与前段相近，这个推算才有依据。前三格接近，也不能证明后七格一定相同。</p>
+ <p>数据会保留“本班实测／示例数据”来源。填写示例后如需记录实测，请点击“新建实测”。本组记录可保存在当前浏览器，支持删除、CSV导出及SVG证据图导出；浏览器限制本机存储时仍可下载记录。</p>
+ <h3>日影追踪</h3><p>采用北纬29.9°、1米竖直杆和平地；春秋分、夏至、冬至分别用0°、+23.44°、−23.44°太阳赤纬。时间为当地真太阳时，并非北京时间。日影由太阳方向投影计算，未计折射、地形和天气细节。接近地平线时影子很长，超出观察区域的部分被裁切，不会压缩成短影子。</p>
+ <p>这里是普通竖杆的日影模型，没有把地面等角刻度直接当作等时刻的日晷。日晷主要借助一天内日影方向的规律计时；圭表则借助一年内正午影长的规律判断时节。公式参考：<a href="https://gml.noaa.gov/grad/solcalc/solareqns.PDF" target="_blank" rel="noopener">NOAA太阳位置计算</a>。</p>
+ <p><strong>建议课堂用法：</strong>实物燃香取证 → 录入累计时间 → 分析每格用时 → 模型检验前推后测 → 结合日影讨论各种计时方法的条件与局限。教材中的“一分钟体验”继续用真实课堂活动开展。</p>
+</div></div></div>
+<div id="records-dialog" class="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="records-title"><div class="dialog"><div class="dialog-head"><h2 id="records-title">本机实验记录</h2><button class="small" data-close="records-dialog">返回探究</button></div><div class="dialog-body" id="history-body"></div><div class="dialog-foot"><span id="storage-status">记录保存在当前浏览器</span><button id="export-csv" class="small">导出CSV</button></div></div></div>
+<div id="download-dialog" class="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="download-title"><div class="dialog"><div class="dialog-head"><h2 id="download-title">预览导出记录</h2><button class="small" data-close="download-dialog">返回探究</button></div><div id="download-preview" class="download-preview"></div><div class="dialog-foot download-footer"><span id="download-filename"></span><a id="download-file" class="download-link" href="#" download>下载记录</a></div></div></div>
+<div id="toast" class="toast" role="status" hidden></div>
+<script>
+/*
+ * TimeScience v1.0 — 六上4.1《时间在流逝》
+ * 无 DOM、无外部依赖的可替换模型层；可直接内联至单体 HTML。
+ *
+ * 日影：纬度 29.9°N，竖直杆高 1 m，水平地面，当地真太阳时。
+ * 春秋分赤纬 0°、夏至 +23.44°、冬至 -23.44°；忽略折射、地形和太阳视直径。
+ * 不是北京时间换算器，也不是特定日期的精密天文预报。
+ * 太阳高度/时角关系参考 NOAA《General Solar Position Calculations》：
+ * https://gml.noaa.gov/grad/solcalc/solareqns.PDF
+ * E/N/U 分别是东、北、天顶方向；地面影向量为 (-E/U, -N/U)。
+ *
+ * 燃香：各段等长；每段用时由模型直接设定。默认 120 秒/段仅为示例，
+ * 不是实测值，不表示香的粗细、风速或温度与燃烧速度之间的定量关系。
+ * 先观察三段、再外推整炷香，须另外检验后续条件和速度是否仍然稳定。
+ */
+(function (root) {
+  'use strict';
+
+  var RAD = Math.PI / 180;
+  var LATITUDE = 29.9;
+  var HORIZON_EPSILON = 1e-12;
+  var TIME_EPSILON = 1e-9;
+
+  function finite(value, label) {
+    if (typeof value !== 'number' || !isFinite(value)) {
+      throw new TypeError(label + '必须是有限数值');
+    }
+    return value;
+  }
+
+  function positive(value, label) {
+    finite(value, label);
+    if (value <= 0) throw new RangeError(label + '必须大于 0');
+    return value;
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function seasonInfo(season) {
+    if (season === undefined || season === null || season === '' ||
+        season === 'equinox' || season === 'spring' || season === 'autumn' ||
+        season === 'fall' || season === '春秋' || season === '春秋分' ||
+        season === '春分' || season === '秋分') {
+      return { key: 'equinox', declinationDeg: 0 };
+    }
+    if (season === 'summer' || season === '夏至') {
+      return { key: 'summer', declinationDeg: 23.44 };
+    }
+    if (season === 'winter' || season === '冬至') {
+      return { key: 'winter', declinationDeg: -23.44 };
+    }
+    throw new RangeError('season 应为 equinox、summer 或 winter');
+  }
+
+  /**
+   * timeHours: [0, 24]，当地真太阳时（12 点为太阳过当地子午线）。
+   * azimuthDeg: 从北顺时针计角，北0/东90/南180/西270。
+   * shadowEast/shadowNorth/shadowLength 单位 m；无直射太阳时为 null。
+   * 高度很低时真实模型影长可以很大，裁剪与“超出画面”提示由视图层处理。
+   */
+  function solar(timeHours, season) {
+    finite(timeHours, '太阳时');
+    if (timeHours < 0 || timeHours > 24) {
+      throw new RangeError('太阳时应在 0 至 24 小时之间');
+    }
+    var info = seasonInfo(season);
+    var phi = LATITUDE * RAD;
+    var delta = info.declinationDeg * RAD;
+    var hourAngleDeg = (timeHours - 12) * 15;
+    var h = hourAngleDeg * RAD;
+    var east = -Math.cos(delta) * Math.sin(h);
+    var north = Math.cos(phi) * Math.sin(delta) -
+      Math.sin(phi) * Math.cos(delta) * Math.cos(h);
+    var up = clamp(Math.sin(phi) * Math.sin(delta) +
+      Math.cos(phi) * Math.cos(delta) * Math.cos(h), -1, 1);
+    // 清除由 sin(0)、cos(π/2) 舍入造成的极小坐标，保证地平线边界一致。
+    if (Math.abs(east) < HORIZON_EPSILON) east = 0;
+    if (Math.abs(north) < HORIZON_EPSILON) north = 0;
+    if (Math.abs(up) < HORIZON_EPSILON) up = 0;
+    var sunAbove = up > 0;
+    var shadowEast = sunAbove ? -east / up : null;
+    var shadowNorth = sunAbove ? -north / up : null;
+    return {
+      timeHours: timeHours,
+      season: info.key,
+      latitudeDeg: LATITUDE,
+      declinationDeg: info.declinationDeg,
+      hourAngleDeg: hourAngleDeg,
+      sunAbove: sunAbove,
+      altitudeDeg: Math.asin(up) / RAD,
+      azimuthDeg: (Math.atan2(east, north) / RAD + 360) % 360,
+      east: east,
+      north: north,
+      up: up,
+      shadowEast: shadowEast,
+      shadowNorth: shadowNorth,
+      shadowLength: sunAbove ? Math.sqrt(shadowEast * shadowEast +
+        shadowNorth * shadowNorth) : null
+    };
+  }
+
+  /**
+   * 返回十个等长区段各自的燃烧秒数。
+   * 前三段 baseSeconds；后七段速度乘 rateAfter3（速度增大，用时减少）。
+   */
+  function incenseSegments(rateAfter3, baseSeconds) {
+    if (rateAfter3 === undefined) rateAfter3 = 1;
+    if (baseSeconds === undefined) baseSeconds = 120;
+    positive(rateAfter3, '后七段速度倍率');
+    positive(baseSeconds, '基准段用时');
+    var laterSeconds = baseSeconds / rateAfter3;
+    positive(laterSeconds, '后七段用时');
+    var segments = [];
+    for (var i = 0; i < 10; i += 1) {
+      segments.push(i < 3 ? baseSeconds : laterSeconds);
+    }
+    return segments;
+  }
+
+  /**
+   * elapsed 单位秒，小于0按0，大于总时长按完成处理。
+   * fraction 是已燃烧“长度”占比，不是经过的时间占比。
+   * remaining 与 remainingSeconds 均为剩余秒数；remainingSegments 为剩余段数。
+   * currentSegment 为 1 开始的正在燃烧段号；全部结束时为 null。
+   */
+  function burnAt(elapsed, segments) {
+    finite(elapsed, '经过时间');
+    if (!Array.isArray(segments) || segments.length === 0) {
+      throw new TypeError('segments 必须是非空的各段用时数组');
+    }
+    var totalSeconds = 0;
+    var cumulativeSeconds = [];
+    var i;
+    for (i = 0; i < segments.length; i += 1) {
+      positive(segments[i], '第 ' + (i + 1) + ' 段用时');
+      totalSeconds += segments[i];
+      cumulativeSeconds.push(totalSeconds);
+    }
+    finite(totalSeconds, '总用时');
+    var boundedElapsed = clamp(elapsed, 0, totalSeconds);
+    var completedSegments = 0;
+    while (completedSegments < segments.length &&
+      boundedElapsed + TIME_EPSILON >= cumulativeSeconds[completedSegments]) {
+      completedSegments += 1;
+    }
+    var done = completedSegments === segments.length;
+    var start = completedSegments === 0 ? 0 : cumulativeSeconds[completedSegments - 1];
+    var segmentProgress = done ? 1 : clamp(
+      (boundedElapsed - start) / segments[completedSegments], 0, 1);
+    var burnedSegments = done ? segments.length : completedSegments + segmentProgress;
+    var remainingSeconds = done ? 0 : totalSeconds - boundedElapsed;
+    return {
+      elapsed: boundedElapsed,
+      totalSeconds: totalSeconds,
+      cumulativeSeconds: cumulativeSeconds,
+      burnedSegments: burnedSegments,
+      completedSegments: completedSegments,
+      remaining: remainingSeconds,
+      remainingSeconds: remainingSeconds,
+      remainingSegments: segments.length - burnedSegments,
+      done: done,
+      fraction: burnedSegments / segments.length,
+      currentSegment: done ? null : completedSegments + 1,
+      segmentProgress: segmentProgress
+    };
+  }
+
+  /**
+   * cumulativeSeconds: 自测量区起点到第1、2、3条等长刻度的累计秒数，必须递增。
+   * 返回相邻差 intervals、各段均值及按稳定速度外推的整炷香总时长。
+   * spreadPct=(最长段用时-最短段用时)/平均段用时*100，仅描述离散，
+   * 不设“均匀/不均匀”的通用科学阈值，也不由前三段保证后七段稳定。
+   */
+  function estimateFromCumulative(cumulativeSeconds, totalSegments) {
+    if (totalSegments === undefined) totalSegments = 10;
+    if (!Array.isArray(cumulativeSeconds) || cumulativeSeconds.length !== 3) {
+      throw new TypeError('请输入恰好三个累计时间');
+    }
+    finite(totalSegments, '总段数');
+    if (totalSegments < 3 || Math.floor(totalSegments) !== totalSegments) {
+      throw new RangeError('总段数必须是至少为3的整数');
+    }
+    var intervals = [];
+    var previous = 0;
+    var min = Infinity;
+    var max = -Infinity;
+    for (var i = 0; i < 3; i += 1) {
+      finite(cumulativeSeconds[i], '第 ' + (i + 1) + ' 个累计时间');
+      if (cumulativeSeconds[i] <= previous) {
+        throw new RangeError('累计时间必须大于0且依次增加');
+      }
+      var interval = cumulativeSeconds[i] - previous;
+      intervals.push(interval);
+      min = Math.min(min, interval);
+      max = Math.max(max, interval);
+      previous = cumulativeSeconds[i];
+    }
+    var meanSeconds = previous / 3;
+    var predictedTotal = meanSeconds * totalSegments;
+    finite(predictedTotal, '推测总用时');
+    return {
+      intervals: intervals,
+      observedSegments: 3,
+      totalSegments: totalSegments,
+      cumulativeSeconds: cumulativeSeconds.slice(),
+      meanSeconds: meanSeconds,
+      predictedTotal: predictedTotal,
+      predictedRemaining: predictedTotal - previous,
+      min: min,
+      max: max,
+      rangeSeconds: max - min,
+      spreadPct: (max - min) / meanSeconds * 100
+    };
+  }
+
+  /** 四舍五入至整秒，分钟允许大于59，适用于实验时长而非钟面时刻。 */
+  function formatDuration(seconds) {
+    finite(seconds, '时长');
+    var rounded = Math.max(0, Math.round(seconds));
+    var minutes = Math.floor(rounded / 60);
+    var remainder = rounded % 60;
+    return minutes + '分' + (remainder < 10 ? '0' : '') + remainder + '秒';
+  }
+
+  root.TimeScience = {
+    version: '1.0.0',
+    solar: solar,
+    incenseSegments: incenseSegments,
+    burnAt: burnAt,
+    estimateFromCumulative: estimateFromCumulative,
+    formatDuration: formatDuration
+  };
+}(typeof window !== 'undefined' ? window :
+  (typeof global !== 'undefined' ? global : this)));
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var S = window.TimeScience;
+  var $ = function (id) { return document.getElementById(id); };
+  var all = function (selector) { return Array.prototype.slice.call(document.querySelectorAll(selector)); };
+  var INK = '#142f40', MUTED = '#596d78', TEAL = '#087e89', AMBER = '#bd6b16', LINE = '#d4ddde';
+  var page = 1, lastFrame = 0, lastPaint = 0, toastTimer = null, modalReturn = null;
+  var burn = { phase:'idle', running:false, elapsed:0, rate:1, speed:40, prediction:false, completed:false };
+  var solar = { time:9, season:'equinox', playing:false, cloud:false, traces:false, reveal:false };
+  var record = { source:'actual', cumulative:null, estimate:null, records:[], storage:true };
+  var STORAGE_KEY = 'aihtml-six-4-1-time-v1-records', exportURL = null;
+  function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+  function number(v,d){ return Number(v).toFixed(d || 0); }
+  function escapeXML(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c];}); }
+  function text(x,y,value,size,color,anchor,weight){ return '<text x="'+x+'" y="'+y+'" font-size="'+(size||22)+'" fill="'+(color||INK)+'" text-anchor="'+(anchor||'start')+'" font-weight="'+(weight||400)+'">'+escapeXML(value)+'</text>'; }
+  function line(x1,y1,x2,y2,color,width,extra){ return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+(color||LINE)+'" stroke-width="'+(width||1)+'" '+(extra||'')+'/>'; }
+  function circle(x,y,r,fill,extra){ return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+fill+'" '+(extra||'')+'/>'; }
+  function shortTime(t){ var s=Math.max(0,Math.round(t));return (Math.floor(s/60)<10?'0':'')+Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60); }
+  function toast(message){ $('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3300); }
+  function total(arr){ return arr.reduce(function(a,b){return a+b;},0); }
+  function params(){ return {a:S.incenseSegments(1),b:S.incenseSegments(burn.rate)}; }
+  function setBurnStatus(message){ $('burn-status').textContent=message; }
+
+  /* 可替换的视图层：模型返回世界量，只有这里负责SVG样式和屏幕比例。 */
+  var Renderers = {
+    incense:function(elapsed,a,b){
+      var parts=['<defs><linearGradient id="wood" x1="0" x2="1"><stop stop-color="#86664a"/><stop offset=".4" stop-color="#bc9565"/><stop offset="1" stop-color="#85613d"/></linearGradient><radialGradient id="ember"><stop stop-color="#fff4b2"/><stop offset=".35" stop-color="#ff9f42"/><stop offset="1" stop-color="#d25229"/></radialGradient></defs>'];
+      parts.push('<rect x="65" y="65" width="397" height="96" rx="9" fill="#e4f1ee"/>');
+      parts.push(text(260,30,'同一时刻 · 两支对照',23,INK,'middle',600));
+      parts.push(line(80,65,80,385,'#9baead',1.4),line(73,65,87,65,'#9baead',1.4),line(73,385,87,385,'#9baead',1.4));
+      parts.push('<text x="48" y="230" fill="'+MUTED+'" font-size="18" text-anchor="middle" transform="rotate(-90 48 230)">测量区 20 厘米</text>');
+      [a,b].forEach(function(st,i){
+        var x=i===0?173:363, color=i===0?TEAL:AMBER, top=65+st.burnedSegments*32;
+        parts.push(text(x,57,i===0?'A':'B',23,color,'middle',700));
+        parts.push('<rect x="'+(x-9)+'" y="65" width="18" height="320" rx="3" fill="#f1eee8" stroke="#c5bba9" stroke-dasharray="3 5"/>');
+        if(!st.done)parts.push('<rect x="'+(x-9)+'" y="'+top+'" width="18" height="'+Math.max(.1,385-top)+'" rx="2" fill="url(#wood)"/>');
+        for(var j=1;j<=10;j++){
+          var yy=65+j*32;
+          parts.push(line(x-15,yy,x+17,yy,j===3?color:'#9b856d',j===3?2.5:1.4));
+          parts.push(text(x+28,yy+6,j,18,j<=st.completedSegments?color:MUTED));
+        }
+        if(elapsed>0&&!st.done){
+          parts.push('<path d="M '+x+' '+(top-10)+' q -13 -16 2 -31 q 12 -12 2 -24" fill="none" stroke="#bec8c5" stroke-width="3" stroke-linecap="round" opacity=".8"/>');
+          parts.push('<ellipse cx="'+x+'" cy="'+(top+2)+'" rx="12" ry="5" fill="url(#ember)"/>');
+          parts.push(line(x-42,top+2,x-17,top+2,color,2),'<path d="M '+(x-24)+' '+(top-3)+' l 7 5 -7 5" fill="none" stroke="'+color+'" stroke-width="2"/>');
+        }
+        parts.push('<rect x="'+(x-3)+'" y="385" width="6" height="24" fill="#ad7948"/><ellipse cx="'+x+'" cy="415" rx="47" ry="12" fill="#c9d6d2"/><ellipse cx="'+x+'" cy="411" rx="42" ry="10" fill="#e2e8e2" stroke="#9bb0ab"/><ellipse cx="'+x+'" cy="409" rx="16" ry="5" fill="#9eb2a9"/>');
+        parts.push(text(x,449,st.done?'测量区燃尽':'已燃 '+number(st.burnedSegments,1)+' 格',22,color,'middle',650));
+      });
+      parts.push(text(430,115,'前',16,TEAL,'middle'),text(430,137,'3格',16,TEAL,'middle'));
+      return parts.join('');
+    },
+    burnGraph:function(elapsed,pa,pb){
+      var left=67, bottom=316, w=544, h=246, maxT=2160;
+      function x(t){return left+w*t/maxT;}function y(v){return bottom-h*v/10;}
+      var p=[];
+      [0,2,4,6,8,10].forEach(function(n){p.push(line(left,y(n),left+w,y(n),LINE,1),text(left-14,y(n)+7,n,21,MUTED,'end'));});
+      [0,12,24,36].forEach(function(n){p.push(line(x(n*60),bottom,x(n*60),bottom+6,MUTED,1.5),text(x(n*60),bottom+31,n,21,MUTED,'middle'));});
+      p.push(line(left,70,left,bottom,MUTED,1.7),line(left,bottom,left+w,bottom,MUTED,1.7));
+      p.push(text(left,35,'已燃格数',23,INK),text(left+w,bottom+67,'累计时间 / 分',22,MUTED,'end'));
+      if(burn.prediction){
+        p.push(line(x(360),y(3),x(1200),y(10),'#8b9b9f',2.5,'stroke-dasharray="8 7"'));
+        p.push(circle(x(1200),y(10),7,'#fff','stroke="#8b9b9f" stroke-width="2"'));
+        p.push(text(x(1200)+12,y(10)-12,'预测',20,MUTED));
+      }
+      [pa,pb].forEach(function(seg,i){
+        var st=S.burnAt(elapsed,seg),pts=[[x(0),y(0)]],cum=0,col=i===0?TEAL:AMBER;
+        for(var j=0;j<seg.length;j++){cum+=seg[j];if(cum<=elapsed+1e-7)pts.push([x(cum),y(j+1)]);else break;}
+        if(!st.done&&elapsed>0)pts.push([x(elapsed),y(st.burnedSegments)]);
+        p.push('<polyline points="'+pts.map(function(z){return z.join(',');}).join(' ')+'" fill="none" stroke="'+col+'" stroke-width="'+(i===0?7:4)+'" stroke-linecap="round" stroke-linejoin="round" '+(i===1?'stroke-dasharray="10 6"':'')+'/>');
+        if(elapsed>0)p.push(circle(x(st.elapsed),y(st.burnedSegments),i===0?7:5,col,'stroke="#fff" stroke-width="2"'));
+      });
+      if(elapsed===0)p.push(text(350,183,'点燃后，轨迹会跟着出现',23,MUTED,'middle'));
+      if(burn.phase==='observed'||burn.phase==='predicted'){
+        p.push(circle(x(360),y(3),10,'#fff','stroke="'+TEAL+'" stroke-width="3"'));
+        p.push(text(x(360)+16,y(3)-16,'3格 · 累计6分',22,TEAL));
+      }
+      return p.join('');
+    },
+    recordGraph:function(values,est){
+      var p=[],labels=['第1格','第2格','第3格'];
+      if(!est){
+        p.push(text(305,117,'同样长的三格',27,INK,'middle',600),text(305,162,'用时相同吗？',27,TEAL,'middle',600));
+        for(var k=0;k<3;k++)p.push('<rect x="'+(115+k*140)+'" y="215" width="100" height="18" rx="5" fill="#e2eae7"/>',text(165+k*140,269,labels[k],22,MUTED,'middle'));
+        return p.join('');
+      }
+      var max=Math.max.apply(null,est.intervals),scale=320/Math.max(1,max),barX=96;
+      p.push(text(16,30,'每格用时',23,INK));
+      est.intervals.forEach(function(v,i){var yy=62+i*65;p.push(text(10,yy+26,labels[i],22,MUTED),'<rect x="'+barX+'" y="'+yy+'" width="'+(v*scale)+'" height="37" rx="6" fill="'+(i===1?'#8abbb6':TEAL)+'"/>',text(barX+v*scale+14,yy+27,number(v)+'秒',24,INK,'start',600));});
+      p.push(line(14,265,590,265,LINE,1));
+      p.push(text(16,300,'累计到第3格',22,MUTED),text(225,300,shortTime(values[2]),25,INK,'start',650));
+      p.push(text(16,342,'三段相加',22,MUTED),text(225,342,est.intervals.map(function(v){return number(v);}).join(' + ')+' = '+number(values[2])+' 秒',23,TEAL,'start',600));
+      return p.join('');
+    },
+    sky:function(sun){
+      var p=[],night=!sun.sunAbove,skyColor=night?'#20394b':'#e4f0ef';
+      p.push('<defs><clipPath id="skyClip"><rect x="25" y="18" width="570" height="335" rx="12"/></clipPath></defs>');
+      p.push('<rect x="25" y="18" width="570" height="335" rx="12" fill="'+skyColor+'"/>');
+      p.push('<g clip-path="url(#skyClip)">');
+      if(night){[[69,56],[130,108],[205,48],[370,70],[480,42],[550,122]].forEach(function(a){p.push(circle(a[0],a[1],2,'#d3e3e5'));});}
+      p.push('<path d="M25 291 Q140 264 247 284 T595 273 L595 353 L25 353Z" fill="'+(night?'#344c4d':'#c8ddd3')+'"/>');
+      p.push(line(25,302,595,302,night?'#6b838b':'#9eb6ad',2));
+      var path=[];
+      for(var t=4;t<=20.001;t+=.12){var z=S.solar(t,solar.season);path.push((path.length?'L':'M')+(45+(t-4)/16*530)+','+(302-z.altitudeDeg/90*247));}
+      p.push('<path d="'+path.join(' ')+'" fill="none" stroke="'+(night?'#69838e':'#a8c5c1')+'" stroke-width="2.5" stroke-dasharray="6 7"/>');
+      var xx=45+(solar.time-4)/16*530,yy=302-sun.altitudeDeg/90*247;
+      if(sun.sunAbove){
+        p.push(line(xx,yy+22,xx,302,'#d2a85e',1.5,'stroke-dasharray="5 7"'));
+        if(!solar.cloud){
+          for(var r=0;r<12;r++){var ang=r*Math.PI/6;p.push(line(xx+Math.cos(ang)*31,yy+Math.sin(ang)*31,xx+Math.cos(ang)*38,yy+Math.sin(ang)*38,'#d69e35',2.5,'stroke-linecap="round"'));}
+          p.push(circle(xx,yy,23,'#f4c35b','stroke="#d9a53e" stroke-width="2"'));
+          p.push(circle(xx-5,yy-6,6,'#f9d88a'));
+        }else{
+          p.push(circle(xx,yy,23,'#d6c9a8','opacity=".5"'));
+          p.push('<path d="M '+(xx-52)+' '+(yy+10)+' q -16 -32 16 -34 q 12 -35 40 -12 q 31 -18 41 15 q 38 12 16 37 h -105z" fill="#b2c3c9" stroke="#92a9b3" stroke-width="2"/>');
+        }
+      }
+      p.push('<rect x="295" y="284" width="15" height="25" rx="2" fill="'+(night?'#67817e':'#87a9a0')+'"/>');
+      p.push(text(54,335,'清晨',19,night?'#b5cad0':MUTED),text(310,335,'正午',19,night?'#b5cad0':MUTED,'middle'),text(566,335,'傍晚',19,night?'#b5cad0':MUTED,'end'));
+      if(!sun.sunAbove)p.push(text(310,195,'太阳在地平线以下',27,'#d7e6e8','middle',600));
+      if(solar.cloud&&sun.sunAbove)p.push(text(310,58,'看不清直射日光',22,MUTED,'middle'));
+      p.push('</g>');
+      return p.join('');
+    },
+    shadow:function(sun){
+      var cx=310,cy=197,r=156,scale=92,p=[];
+      p.push('<defs><clipPath id="groundClip"><circle cx="310" cy="197" r="156"/></clipPath></defs>');
+      p.push(circle(cx,cy,r,'#f0f5f1','stroke="#ccd9d2" stroke-width="2"'),circle(cx,cy,92,'none','stroke="#d1ded7" stroke-width="1.3" stroke-dasharray="4 6"'));
+      p.push(line(cx-r,cy,cx+r,cy,'#d2ded8',1),line(cx,cy-r,cx,cy+r,'#d2ded8',1));
+      p.push(text(cx,26,'北',23,INK,'middle',650),text(cx,382,'南',23,INK,'middle'),text(130,205,'西',23,INK,'middle'),text(490,205,'东',23,INK,'middle'));
+      p.push('<g clip-path="url(#groundClip)">');
+      if(solar.traces){
+        [8,10,12,14,16].forEach(function(hour){
+          var z=S.solar(hour,solar.season);if(!z.sunAbove)return;
+          var dx=z.shadowEast*scale,dy=-z.shadowNorth*scale,len=Math.sqrt(dx*dx+dy*dy),f=Math.min(1,138/len);
+          p.push(line(cx,cy,cx+dx,cy+dy,'#a6bbb0',4,'stroke-dasharray="7 5"'));
+          p.push(circle(cx+dx*f,cy+dy*f,18,'#fff','stroke="#b5c6bf" stroke-width="1"'));
+          p.push(text(cx+dx*f,cy+dy*f+6,hour,18,'#627a70','middle',650));
+        });
+      }
+      if(sun.sunAbove&&!solar.cloud){
+        var sx=sun.shadowEast*scale,sy=-sun.shadowNorth*scale,sl=Math.sqrt(sx*sx+sy*sy),f2=Math.min(1,(r-2)/Math.max(.01,sl));
+        p.push(line(cx,cy,cx+sx,cy+sy,'#294d53',15,'stroke-linecap="round"'));
+        if(sl>r){var nx=sx/sl,ny=sy/sl,tx=cx+sx*f2,ty=cy+sy*f2;p.push('<path d="M '+(tx-nx*16-ny*8)+' '+(ty-ny*16+nx*8)+' L '+tx+' '+ty+' L '+(tx-nx*16+ny*8)+' '+(ty-ny*16-nx*8)+'" fill="none" stroke="#e4b553" stroke-width="3.5"/>');}
+        else p.push(circle(cx+sx,cy+sy,7,'#163f47','stroke="#fff" stroke-width="2"'));
+      }
+      p.push('</g>',circle(cx,cy,11,'#bc8e4b','stroke="#805c30" stroke-width="2"'),circle(cx-2,cy-2,3,'#e6c68e'));
+      p.push(line(45,337,137,337,MUTED,2),line(45,331,45,343,MUTED,2),line(137,331,137,343,MUTED,2),text(91,366,'1 米',18,MUTED,'middle'));
+      if(solar.traces)p.push(text(610,363,'虚线：晴天留影',16,MUTED,'end'));
+      if(!sun.sunAbove||solar.cloud)p.push('<rect x="179" y="250" width="262" height="44" rx="7" fill="#ffffffed"/>',text(cx,280,'没有清晰的日影',23,MUTED,'middle'));
+      return p.join('');
+    }
+  };
+  /* 供后续素材替换使用；替换渲染器不会改变实验状态和模型函数。 */
+  window.TimeLessonRenderers=Renderers;
+
+  function drawBurn(){
+    var pp=params(),a=S.burnAt(burn.elapsed,pp.a),b=S.burnAt(burn.elapsed,pp.b);
+    $('incense-svg').innerHTML=Renderers.incense(burn.elapsed,a,b);
+    $('burn-graph').innerHTML=Renderers.burnGraph(burn.elapsed,pp.a,pp.b);
+    $('burn-elapsed').textContent=shortTime(burn.elapsed);
+    ['first-interval','second-interval','third-interval'].forEach(function(id,i){$(id).textContent=burn.elapsed+1e-7>=(i+1)*120?'2分00秒':'—';});
+    $('prediction-result').textContent=burn.prediction?'20分00秒':'先观察';
+    $('prediction-note').textContent=burn.prediction?'6分 ÷ 3格 × 10格':'后段暂未揭示';
+    var aDone=a.done||burn.completed,bDone=b.done||burn.completed;
+    $('actual-a').textContent=aDone?S.formatDuration(total(pp.a)):'—';
+    $('actual-b').textContent=bDone?S.formatDuration(total(pp.b)):'—';
+    $('error-a').textContent=aDone?'与预测一致':'';
+    var delta=total(pp.b)-1200;
+    $('error-b').textContent=bDone?(Math.abs(delta)<.01?'与预测一致':(delta>0?'比预测多':'比预测少')+S.formatDuration(Math.abs(delta))):'';
+    $('burn-scrub').value=burn.elapsed;
+  }
+  function updateBurnControls(){
+    var label='点燃 · 先看3格';
+    if(burn.phase==='observe')label=burn.running?'暂停观察':'继续观察';
+    if(burn.phase==='observed')label='用前3格推算';
+    if(burn.phase==='predicted')label='继续 · 验证后7格';
+    if(burn.phase==='verify')label=burn.running?'暂停验证':'继续验证';
+    if(burn.phase==='complete')label=burn.running?'暂停回放':(burn.elapsed>0&&burn.elapsed<Math.max(1200,total(params().b))-.1?'继续回放':'重播全程');
+    $('burn-main').textContent=label;
+    $('burn-rate').disabled=!(burn.phase==='observed'||burn.phase==='predicted');
+    $('rate-control').classList.toggle('waiting',$('burn-rate').disabled);
+    $('rate-control').hidden=burn.completed;
+    $('burn-replay').hidden=!burn.completed;
+    $('burn-new-condition').hidden=!burn.completed;
+    $('burn-scrub').max=Math.max(1200,total(params().b));
+    $('burn-speed').textContent='加速 '+burn.speed+'×';
+    $('burn-main').classList.toggle('accent',burn.phase==='observed');
+    $('burn-question').textContent=burn.phase==='complete'?'前段相同，整炷用时一定相同吗？':(burn.phase==='observed'||burn.phase==='predicted'?'前三格都相同，后七格会怎样？':'只看前三格，能推测整炷香吗？');
+  }
+  function startBurnAction(){
+    if(burn.phase==='idle'){burn.phase='observe';burn.running=true;setBurnStatus('到第3格自动停下；比较累计时间和每格用时。');}
+    else if(burn.phase==='observed'){burn.prediction=true;burn.phase='predicted';setBurnStatus('已留下预测。可改变B后7格速度，再继续验证。');}
+    else if(burn.phase==='predicted'){burn.phase='verify';burn.running=true;setBurnStatus('预测已保留。观察两支香何时到达第10格。');}
+    else if(burn.phase==='complete'){if(burn.elapsed>=Math.max(1200,total(params().b))-.1)burn.elapsed=0;burn.running=!burn.running;setBurnStatus('回看同一过程：拖动时间轴，比较同一时刻的两支香。');}
+    else burn.running=!burn.running;
+    lastFrame=0;updateBurnControls();drawBurn();
+  }
+  function resetBurn(){burn={phase:'idle',running:false,elapsed:0,rate:1,speed:burn.speed,prediction:false,completed:false};$('burn-rate').value=1;$('rate-value').textContent='1.0 ×';setBurnStatus('十等分；先看前三格，后七格暂不播放。');updateBurnControls();drawBurn();}
+  function newCondition(){burn.elapsed=360;burn.phase='predicted';burn.prediction=true;burn.completed=false;burn.running=false;setBurnStatus('前三格证据不变。改变B后程速度，再检验同一个预测。');updateBurnControls();drawBurn();}
+
+  function getCumulative(){
+    var values=[];
+    for(var i=1;i<=3;i++){
+      var m=$('t'+i+'m').value,s=$('t'+i+'s').value;
+      if(m===''||s==='')return {empty:true};
+      var mm=Number(m),ss=Number(s);
+      if(!isFinite(mm)||!isFinite(ss)||mm<0||mm>999||ss<0||ss>59||Math.floor(mm)!==mm||Math.floor(ss)!==ss)return {error:'请填非负整数：分钟0—999，秒数0—59。'};
+      values.push(mm*60+ss);
+    }
+    try{return {values:values,estimate:S.estimateFromCumulative(values)};}catch(err){return {error:err.message};}
+  }
+  function renderRecord(){
+    var result=getCumulative();record.cumulative=result.values||null;record.estimate=result.estimate||null;
+    $('data-source').textContent=record.source==='sample'?'示例数据':'本班实测';
+    $('data-source').classList.toggle('sample',record.source==='sample');
+    $('load-example').textContent=record.source==='sample'?'新建实测':'填入示例';
+    $('input-error').textContent=result.error||(result.empty?'累计用时应依次增加；分、秒都要填写。':'第2格用时 = 第二次累计 − 第一次累计。');
+    $('input-error').style.color=result.error?'#a43d28':MUTED;
+    for(var i=1;i<=3;i++)$('d'+i).textContent=record.estimate?number(record.estimate.intervals[i-1])+'秒':'—';
+    $('record-estimate').textContent=record.estimate?'约'+S.formatDuration(record.estimate.predictedTotal):'—';
+    $('record-svg').innerHTML=Renderers.recordGraph(record.cumulative,record.estimate);
+    $('record-note').textContent=record.estimate?'三格用时相差 '+number(record.estimate.rangeSeconds)+' 秒。后七格也能保持吗？':'前段数据能支持怎样的推测？';
+    $('save-record').disabled=!record.estimate;$('export-evidence').disabled=!record.estimate;
+    $('record-footer').textContent=record.source==='sample'?'当前为示例数据；编辑示例仍保留“示例”标记。':'预测以燃烧速度基本稳定为前提。';
+  }
+  function fillExample(){
+    if(record.source==='sample'){record.source='actual';all('.time-inputs input').forEach(function(input){input.value='';});}
+    else{record.source='sample';[110,224,335].forEach(function(t,i){$('t'+(i+1)+'m').value=Math.floor(t/60);$('t'+(i+1)+'s').value=t%60;});}
+    renderRecord();
+  }
+  function readSaved(){
+    try{
+      var raw=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+      if(Array.isArray(raw))record.records=raw.filter(function(r){try{return typeof r.id==='string'&&(r.source==='actual'||r.source==='sample')&&S.estimateFromCumulative(r.cumulative);}catch(e){return false;}}).slice(-8);
+    }catch(e){record.storage=false;record.records=[];}
+    updateRecordCount();
+  }
+  function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(record.records));record.storage=true;}catch(e){record.storage=false;}updateRecordCount();}
+  function updateRecordCount(){ $('open-records').textContent='记录 '+record.records.length;$('storage-status').textContent=record.storage?'记录保存在当前浏览器':'本机存储受限，请导出CSV保留'; }
+  function saveRecord(){
+    if(!record.estimate)return;
+    if(record.records.length>=8){toast('已保存8组，请先导出并删除不需要的记录。');return;}
+    record.records.push({id:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7),source:record.source,cumulative:record.cumulative.slice(),savedAt:new Date().toISOString()});persist();toast(record.storage?'已保存本组，数据来源也已保留。':'本组暂存于本页，请导出CSV保存。');
+  }
+  function renderHistory(){
+    if(!record.records.length){$('history-body').innerHTML='<p class="history-empty">还没有记录。填入数据后，点击“保存本组”。</p>';$('export-csv').disabled=true;return;}
+    var out='<table class="history-table"><thead><tr><th>记录</th><th>三次累计</th><th>每格用时</th><th>整炷预测</th><th></th></tr></thead><tbody>';
+    record.records.forEach(function(r,i){var e=S.estimateFromCumulative(r.cumulative);out+='<tr><td>第'+(i+1)+'组<small>'+(r.source==='actual'?'本班实测':'示例数据')+'</small></td><td>'+r.cumulative.map(shortTime).join(' / ')+'</td><td>'+e.intervals.join(' / ')+' 秒</td><td>约'+S.formatDuration(e.predictedTotal)+'</td><td><button class="small" data-delete="'+escapeXML(r.id)+'" aria-label="删除第'+(i+1)+'组记录">删除</button></td></tr>';});
+    $('history-body').innerHTML=out+'</tbody></table>';$('export-csv').disabled=false;updateRecordCount();
+  }
+  function download(filename,content,mime){
+    if(exportURL)URL.revokeObjectURL(exportURL);
+    exportURL=URL.createObjectURL(new Blob([content],{type:mime}));
+    var link=$('download-file');link.href=exportURL;link.download=filename;
+    link.textContent=mime.indexOf('svg')>=0?'下载SVG证据图':'下载CSV记录';
+    $('download-filename').textContent=filename;
+    if(mime.indexOf('svg')>=0){$('download-preview').innerHTML=content;}
+    else{$('download-preview').innerHTML='<pre>'+escapeXML(content.replace(/^\uFEFF/,''))+'</pre>';}
+    $('records-dialog').hidden=true;openModal('download-dialog');
+  }
+  function exportCSV(){
+    if(!record.records.length)return;
+    var rows=[['组次','来源','第1次累计_秒','第2次累计_秒','第3次累计_秒','第1格用时_秒','第2格用时_秒','第3格用时_秒','整炷预测_秒','条件','保存时间']];
+    record.records.forEach(function(r,i){var e=S.estimateFromCumulative(r.cumulative);rows.push([i+1,r.source==='actual'?'本班实测':'示例数据'].concat(r.cumulative,e.intervals,[e.predictedTotal.toFixed(2),'后续燃烧速度与前段相近',r.savedAt]));});
+    download('时间在流逝_实验记录.csv','\uFEFF'+rows.map(function(row){return row.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n'),'text/csv;charset=utf-8');
+  }
+  function exportEvidence(){
+    if(!record.estimate)return;
+    var e=record.estimate,out=['<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850"><rect width="1200" height="850" fill="#f3f5f3"/><g font-family="Microsoft YaHei,PingFang SC,Arial,sans-serif">'];
+    out.push(text(60,77,'时间在流逝 · 实验记录',40,INK,'start',700),text(1140,74,record.source==='actual'?'本班实测':'示例数据 · 非实测',24,record.source==='actual'?TEAL:AMBER,'end'));
+    out.push(text(60,130,'测量区十等分；从0:00起计，记录前三个标记处的累计用时。',25,MUTED));
+    out.push('<rect x="55" y="165" width="1090" height="337" rx="12" fill="#fff"/>');
+    out.push(text(100,213,'烧到标记',26,MUTED),text(370,213,'累计用时',26,MUTED),text(700,213,'这一格用时',26,MUTED));
+    for(var i=0;i<3;i++){var yy=278+i*90;out.push(line(85,yy+28,1115,yy+28,LINE),text(100,yy,'第'+(i+1)+'格',30,INK,'start',650),text(370,yy,S.formatDuration(record.cumulative[i]),32,INK),text(700,yy,(i===0?'':number(record.cumulative[i])+' − '+number(record.cumulative[i-1])+' = ')+number(e.intervals[i])+' 秒',29,TEAL,'start',650));}
+    out.push(text(60,566,'整炷预测：'+number(record.cumulative[2])+' 秒 ÷ 3 格 × 10 格',29,MUTED),text(60,641,'约 '+S.formatDuration(e.predictedTotal),51,TEAL,'start',750));
+    out.push(text(60,707,'条件：后七格燃烧速度与前段相近。前三格接近，不能保证后程也相同。',25,INK),text(60,761,'三格用时最大差：'+number(e.rangeSeconds)+' 秒。请结合真实燃烧条件解释差异。',25,MUTED),text(60,813,'整炷结果是预测，不是整炷实测值。',23,MUTED),'</g></svg>');
+    download('时间在流逝_证据图.svg',out.join(''),'image/svg+xml;charset=utf-8');
+  }
+
+  function drawSolar(){
+    var sun=S.solar(solar.time,solar.season);
+    $('sky-svg').innerHTML=Renderers.sky(sun);$('shadow-svg').innerHTML=Renderers.shadow(sun);
+    $('sun-altitude').textContent=sun.sunAbove?number(sun.altitudeDeg,1)+'°':'地平线以下';
+    $('shadow-length').textContent=sun.sunAbove&&!solar.cloud?(sun.shadowLength>99?'>99':number(sun.shadowLength,2))+' 米':'—';
+    $('shadow-caption').textContent=sun.sunAbove&&!solar.cloud&&sun.shadowLength*92>156?'影子超出观察区，未缩短比例':'方向与长度同时变化';
+    $('solar-time').value=solar.time;
+    $('reveal-time').textContent=solar.reveal?'太阳时 '+shortTime(solar.time*60):'看太阳时';
+    $('reveal-time').setAttribute('aria-pressed',String(solar.reveal));
+    $('reveal-time').setAttribute('aria-label',solar.reveal?'当地太阳时 '+shortTime(solar.time*60)+'，点击隐藏':'显示当地太阳时');
+    $('solar-cloud').textContent=solar.cloud?'恢复晴天':'遮住太阳';$('solar-cloud').setAttribute('aria-pressed',String(solar.cloud));
+    $('solar-traces').textContent=solar.traces?'收起留影':'留下五次影子';$('solar-traces').setAttribute('aria-pressed',String(solar.traces));
+    $('solar-play').textContent=solar.playing?'暂停观察':'连续观察';$('solar-play').setAttribute('aria-pressed',String(solar.playing));
+    $('solar-status').textContent=solar.cloud?'遮住太阳后，怎样继续计时？':(solar.traces?'虚线记录晴天8、10、12、14、16时的影子。':'拖动太阳或时间轴，比较上午与下午。');
+  }
+  function setSolarTime(v){solar.time=clamp(v,4,20);solar.playing=false;drawSolar();}
+  function solarDrag(evt){
+    var svg=$('sky-svg'),rect=svg.getBoundingClientRect(),scale=Math.min(rect.width/620,rect.height/390),width=620*scale,left=rect.left+(rect.width-width)/2,logical=(evt.clientX-left)/scale;
+    setSolarTime(4+(logical-45)/530*16);
+  }
+  function changePage(n){
+    page=n;burn.running=false;solar.playing=false;lastFrame=0;
+    for(var i=1;i<=3;i++){var current=i===n;$('screen-'+i).hidden=!current;$('tab-'+i).setAttribute('aria-selected',String(current));$('tab-'+i).tabIndex=current?0:-1;}
+    updateBurnControls();if(n===1)drawBurn();if(n===2)renderRecord();if(n===3)drawSolar();
+  }
+  function openModal(id){burn.running=false;solar.playing=false;updateBurnControls();drawSolar();modalReturn=document.activeElement;$(id).hidden=false;$(id).querySelector('button').focus();}
+  function closeModal(id){$(id).hidden=true;if(modalReturn)modalReturn.focus();}
+
+  all('[data-page]').forEach(function(btn){btn.addEventListener('click',function(){changePage(Number(btn.dataset.page));});btn.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();var next=((page-1+(e.key==='ArrowRight'?1:2))%3)+1;changePage(next);$('tab-'+next).focus();}});});
+  $('burn-main').addEventListener('click',startBurnAction);$('burn-reset').addEventListener('click',resetBurn);
+  $('burn-rate').addEventListener('input',function(){burn.rate=Number(this.value);$('rate-value').textContent=number(burn.rate,1)+' ×';burn.elapsed=360;burn.running=false;setBurnStatus('B后程改为原速的'+number(burn.rate,1)+'倍；前三格证据保持不变。');drawBurn();});
+  $('burn-speed').addEventListener('click',function(){burn.speed=burn.speed===40?120:40;updateBurnControls();});
+  $('burn-new-condition').addEventListener('click',newCondition);
+  $('burn-scrub').addEventListener('input',function(){burn.running=false;burn.elapsed=Number(this.value);updateBurnControls();drawBurn();});
+  all('.time-inputs input').forEach(function(input){input.addEventListener('input',renderRecord);});
+  $('load-example').addEventListener('click',fillExample);$('save-record').addEventListener('click',saveRecord);$('export-evidence').addEventListener('click',exportEvidence);
+  $('open-records').addEventListener('click',function(){renderHistory();openModal('records-dialog');});$('export-csv').addEventListener('click',exportCSV);
+  $('history-body').addEventListener('click',function(e){var btn=e.target.closest('[data-delete]');if(!btn)return;record.records=record.records.filter(function(r){return r.id!==btn.dataset.delete;});persist();renderHistory();});
+  $('solar-time').addEventListener('input',function(){setSolarTime(Number(this.value));});
+  $('solar-play').addEventListener('click',function(){if(solar.time>=19.99)solar.time=4;solar.playing=!solar.playing;lastFrame=0;drawSolar();});
+  $('solar-cloud').addEventListener('click',function(){solar.cloud=!solar.cloud;drawSolar();});$('solar-traces').addEventListener('click',function(){solar.traces=!solar.traces;drawSolar();});$('reveal-time').addEventListener('click',function(){solar.reveal=!solar.reveal;drawSolar();});
+  all('[data-season]').forEach(function(btn){btn.addEventListener('click',function(){solar.season=btn.dataset.season;all('[data-season]').forEach(function(b){b.setAttribute('aria-pressed',String(b===btn));});drawSolar();});});
+  var dragging=false;
+  $('sky-svg').addEventListener('pointerdown',function(e){dragging=true;this.setPointerCapture(e.pointerId);solarDrag(e);});
+  $('sky-svg').addEventListener('pointermove',function(e){if(dragging)solarDrag(e);});
+  $('sky-svg').addEventListener('pointerup',function(){dragging=false;});$('sky-svg').addEventListener('pointercancel',function(){dragging=false;});
+  $('sky-svg').addEventListener('keydown',function(e){if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();setSolarTime(solar.time+(e.key==='ArrowLeft'?-.25:.25));}});
+  $('open-info').addEventListener('click',function(){openModal('info-dialog');});
+  all('[data-close]').forEach(function(btn){btn.addEventListener('click',function(){closeModal(btn.dataset.close);});});
+  all('.overlay').forEach(function(overlay){overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal(overlay.id);});});
+  document.addEventListener('keydown',function(e){var active=all('.overlay').filter(function(d){return !d.hidden;})[0];if(!active)return;if(e.key==='Escape'){closeModal(active.id);return;}if(e.key==='Tab'){var focusable=all('#'+active.id+' button:not(:disabled),#'+active.id+' a[href]'),first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}});
+  $('fullscreen').addEventListener('click',function(){
+    var root=document.documentElement,active=document.fullscreenElement||document.webkitFullscreenElement,fn=active?(document.exitFullscreen||document.webkitExitFullscreen):(root.requestFullscreen||root.webkitRequestFullscreen);
+    if(!fn){toast('此浏览器不支持全屏按钮，可使用浏览器全屏或横屏查看。');return;}
+    try{var p=fn.call(active?document:root);if(p&&p.catch)p.catch(function(){toast('请使用浏览器全屏或横屏查看。');});}catch(e){toast('请使用浏览器全屏或横屏查看。');}
+  });
+  function fullscreenLabel(){$('fullscreen').textContent=document.fullscreenElement||document.webkitFullscreenElement?'退出全屏':'全屏';}
+  document.addEventListener('fullscreenchange',fullscreenLabel);document.addEventListener('webkitfullscreenchange',fullscreenLabel);
+  document.addEventListener('visibilitychange',function(){if(document.hidden){burn.running=false;solar.playing=false;lastFrame=0;updateBurnControls();drawSolar();}});
+  function frame(stamp){
+    var delta=lastFrame?Math.max(0,(stamp-lastFrame)/1000):0;lastFrame=stamp;
+    if(page===1&&burn.running){
+      burn.elapsed+=delta*burn.speed;
+      var limit=burn.phase==='observe'?360:Math.max(1200,total(params().b));
+      if(burn.elapsed>=limit){burn.elapsed=limit;burn.running=false;if(burn.phase==='observe'){burn.phase='observed';setBurnStatus('已停在第3格。先交流整炷预测，再点击推算。');}else{burn.phase='complete';burn.completed=true;setBurnStatus('比较预测与模型结果。可拖动回看，也可换个条件重试。');}updateBurnControls();}
+      if(stamp-lastPaint>32||!burn.running){drawBurn();lastPaint=stamp;}
+    }
+    if(page===3&&solar.playing){solar.time+=delta*.5;if(solar.time>=20){solar.time=20;solar.playing=false;}if(stamp-lastPaint>40||!solar.playing){drawSolar();lastPaint=stamp;}}
+    requestAnimationFrame(frame);
+  }
+  readSaved();renderRecord();drawSolar();updateBurnControls();drawBurn();changePage(1);requestAnimationFrame(frame);
+}());
+
+</script>
+</body>
+</html>
