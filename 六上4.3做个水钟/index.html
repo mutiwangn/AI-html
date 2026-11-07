@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f8f7">
+<meta name="description" content="六上4.3做个水钟：剖面比较稳水装置，标定1—10分钟刻度，独立试测并记录实物实验。离线单体HTML。">
+<title>做个水钟 · 计量时间</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 5C23 20 13 29 13 40a19 19 0 0 0 38 0C51 29 41 20 32 5' fill='%23078189'/%3E%3C/svg%3E">
+<style>
+:root{--ink:#163d43;--muted:#587378;--teal:#087f87;--teal-light:#e0f3f1;--orange:#b66b1e;--orange-light:#fff0dd;--line:#d9e5e3;--bg:#f4f8f7;--white:#fff;--bad:#b34c38;--radius:16px;--ui:clamp(18px,1.48vw,26px)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif;color:var(--ink);background:var(--bg);font-size:var(--ui);-webkit-tap-highlight-color:transparent}button,input,select{font:inherit}button,select{cursor:pointer}button{border:1px solid var(--line);background:var(--white);color:var(--ink);border-radius:10px;min-height:46px;padding:9px 17px;font-weight:650;line-height:1.2;touch-action:manipulation}button:hover{border-color:var(--teal)}button:disabled{opacity:.43;cursor:default}button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #f0aa3d;outline-offset:3px}.primary{background:var(--teal);color:#fff;border-color:var(--teal)}.quiet{background:transparent;border-color:transparent;padding:8px 10px}.small{font-size:16px;color:var(--muted);line-height:1.5}.orange{color:var(--orange)}.teal{color:var(--teal)}.number{font-variant-numeric:tabular-nums}.muted{color:var(--muted)}[hidden]{display:none!important}svg{font-family:inherit;display:block}svg text{user-select:none}input[type=range]{accent-color:var(--teal);width:100%;height:30px;margin:5px 0;touch-action:pan-x}select{border:1px solid var(--line);color:var(--ink);background:white;border-radius:9px;min-height:45px;padding:7px 10px;max-width:100%}.app{height:100%;height:100dvh;max-width:2048px;margin:auto;display:flex;flex-direction:column}.topbar{height:84px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 28px;border-bottom:1px solid var(--line);background:#fff}.brand{display:flex;align-items:center;gap:12px;white-space:nowrap}.brand svg{width:32px;height:40px}.brand h1{font-size:clamp(24px,2vw,34px);margin:0;font-weight:800;letter-spacing:.04em}.nav{display:flex;gap:8px;align-items:center}.nav button{border:0;background:transparent;padding:14px 22px;color:var(--muted);white-space:nowrap}.nav button[aria-selected=true]{background:var(--teal-light);color:var(--teal)}.nav .step{margin-right:8px;opacity:.65;font-size:.85em}.tools{display:flex;gap:4px}.tools button{font-size:17px;min-height:42px;padding:8px 11px}.page{display:none;flex-direction:column;flex:1;min-height:0}.page.active{display:flex}.lead{padding:20px 28px 15px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-shrink:0}.lead h2{margin:0;font-size:clamp(23px,2.15vw,35px);font-weight:750;line-height:1.35}.task-goal{font-size:17px;white-space:nowrap;color:var(--muted)}.workspace{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(275px,24%);gap:20px;padding:0 28px}.stage{background:white;border:1px solid var(--line);border-radius:var(--radius);min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column;position:relative}.stage-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 20px;border-bottom:1px solid #edf2f1;min-height:56px;flex-shrink:0}.stage-top .small{font-size:17px}.stage-top strong{font-size:23px}.stage-art{flex:1;min-height:0;position:relative}.stage-art>svg{width:100%;height:100%}.dual{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0}.rig{display:flex;flex-direction:column;min-width:0;min-height:0}.rig+.rig{border-left:1px solid #e6efed}.rig-title{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:15px 22px 4px;font-size:23px;font-weight:700}.rig-title span{font-size:20px;font-weight:550}.rig>svg{width:100%;flex:1;min-height:0}.evidence{display:flex;flex-direction:column;min-height:0;gap:12px;padding:18px 20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}.evidence h3,.design h3{margin:0;font-size:23px}.legend{display:flex;align-items:center;gap:16px;font-size:18px}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}.chart{flex:1;min-height:130px}.chart svg{width:100%;height:100%}.flow-info{border-top:1px solid var(--line);padding-top:12px}.range-label{display:flex;justify-content:space-between;font-size:20px;gap:10px}.range-label output{font-weight:750}.status{font-size:18px;line-height:1.55;min-height:50px;margin:0}.status strong{font-size:22px}.transport{padding:14px 28px 10px;flex-shrink:0;display:flex;gap:14px;align-items:center;min-height:78px}.timeline{display:flex;align-items:center;gap:10px;flex:1;min-width:100px}.timeline label,.timeline span{font-size:17px;white-space:nowrap}.clock{font-size:clamp(30px,3.5vw,54px);font-weight:800;letter-spacing:.03em;line-height:1.2;font-variant-numeric:tabular-nums}.clock.inline{font-size:28px}.footnote{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:0 28px 12px;font-size:16px;color:var(--muted);flex-shrink:0;min-height:30px}.footnote .model-tag{white-space:nowrap}.design{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 16px;min-height:0;display:flex;flex-direction:column;gap:14px}.design .choice{display:grid;gap:8px}.choice button{font-size:20px;font-weight:600;text-align:left;padding:12px}.choice button[aria-pressed=true]{border:2px solid var(--teal);background:var(--teal-light);padding:11px}.design-label{font-size:18px;color:var(--muted);margin:0}.design .mini-rule{border-top:1px solid var(--line);padding-top:12px;margin-top:auto;font-size:17px;line-height:1.6}.cal-workspace{grid-template-columns:minmax(165px,18%) minmax(0,1fr) minmax(225px,22%)}.cal-evidence .clock{margin:4px 0 10px}.cal-evidence .action-stack{display:grid;gap:10px}.cal-evidence .action-stack button{min-height:48px}.cal-progress{display:flex;align-items:baseline;gap:7px;margin:8px 0 0}.cal-progress strong{font-size:42px;color:var(--teal)}.cal-progress span{font-size:20px}.spacer{flex:1}.cal-note{padding:13px 0;border-top:1px solid var(--line);font-size:18px;line-height:1.6}.scale-toggle{display:flex;gap:10px;align-items:center}.scale-toggle button{font-size:18px}.scale-toggle button[aria-pressed=true]{background:var(--teal-light);border-color:var(--teal);color:var(--teal)}.tap-mark{cursor:crosshair;touch-action:none}.tap-mark:hover .mark-target{fill:#e0f3f1}.test-workspace{grid-template-columns:minmax(0,1fr) minmax(425px,43%)}.test-evidence{gap:14px}.test-settings{display:flex;gap:12px;align-items:center;flex-wrap:nowrap}.test-settings label:last-child{flex:1;min-width:0}.test-settings label:last-child select{width:100%;min-width:0;max-width:250px}.test-settings label{font-size:18px;display:flex;align-items:center;gap:8px}.test-settings select{font-size:20px}.result-banner{border-radius:12px;background:#eef7f5;padding:14px 18px;min-height:100px;display:flex;align-items:center;gap:14px;justify-content:space-between}.result-banner .small{font-size:17px}.result-banner .clock{font-size:37px}.result-error{font-size:28px;font-weight:750;text-align:right}.result-error.bad{color:var(--bad)}.table-wrap{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center}.results{border-collapse:collapse;width:100%;font-size:22px;font-variant-numeric:tabular-nums;table-layout:fixed}.results th{text-align:left;font-size:18px;color:var(--muted);font-weight:500;padding:12px 7px;border-bottom:2px solid var(--line)}.results td{padding:17px 7px;border-bottom:1px solid var(--line);height:70px}.results th:first-child{width:21%}.results td:first-child{font-size:18px;color:var(--muted)}.result-condition{font-size:15px;color:var(--muted);display:block;line-height:1.6}.results .bad{color:var(--bad);font-weight:700}.results .pass{color:var(--teal);font-weight:700}.test-bottom{display:flex;gap:8px;align-items:center;justify-content:space-between}.test-bottom button{font-size:18px}.empty-test{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;background:rgba(255,255,255,.96);padding:20px;text-align:center;gap:15px;z-index:2}.empty-test p{font-size:24px;margin:0}.empty-test .small{font-size:18px}.overlay{position:fixed;inset:0;background:rgba(16,43,47,.4);z-index:30;display:flex;align-items:center;justify-content:center;padding:20px}.dialog{width:min(900px,96vw);max-height:94vh;background:#fff;border-radius:20px;box-shadow:0 22px 100px #12393a33;padding:28px;overflow:auto}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:16px}.dialog h2{margin:0;font-size:28px}.dialog p,.dialog li{font-size:18px;line-height:1.7}.dialog h3{font-size:21px;margin:24px 0 8px}.dialog a{color:var(--teal)}.dialog .actions{display:flex;justify-content:flex-end;gap:12px;margin-top:22px}.real-table{width:100%;border-collapse:collapse;font-size:21px}.real-table th{font-size:18px;text-align:center;padding:12px 4px;color:var(--muted);font-weight:550;border-bottom:1px solid var(--line)}.real-table td{text-align:center;padding:16px 5px;border-bottom:1px solid var(--line)}.real-table input{width:64px;text-align:center;min-height:49px;border:1px solid var(--line);border-radius:8px;padding:5px;font-size:22px;color:var(--ink);background:#fff}.real-table .units{font-size:16px;margin:0 3px}.record-note{font-size:18px;min-height:28px;color:var(--muted);margin-top:12px}.toast{position:fixed;bottom:34px;left:50%;transform:translateX(-50%);background:#143e43;color:white;padding:13px 22px;z-index:50;border-radius:12px;font-size:20px;box-shadow:0 8px 30px #163d432a;max-width:90vw}.compat{position:fixed;right:12px;bottom:2px;color:#729087;font-size:10px;pointer-events:none}.svg-label{font-size:22px;fill:var(--muted)}.svg-main{font-size:25px;fill:var(--ink);font-weight:650}.svg-note{font-size:18px;fill:var(--muted)}
+@media(min-width:1600px){.topbar{height:98px}.lead{padding-top:24px;padding-bottom:20px}.workspace{gap:26px}.rig-title{font-size:29px}.rig-title span{font-size:25px}.evidence{padding:24px}.evidence h3,.design h3{font-size:29px}.legend,.status,.cal-note{font-size:22px}.range-label{font-size:25px}.transport{min-height:96px}.footnote{font-size:18px}.choice button{font-size:24px}.results{font-size:28px}.results th{font-size:22px}.results td{height:90px}.result-banner .clock{font-size:48px}.result-condition{font-size:18px}.test-settings select{font-size:24px}.test-settings label{font-size:22px}.test-bottom button{font-size:23px}}
+@media(max-height:850px) and (min-width:761px){.topbar{height:66px}.lead{padding-top:12px;padding-bottom:10px}.lead h2{font-size:25px}.workspace{gap:14px}.evidence{gap:8px;padding:13px 16px}.stage-top{min-height:46px;padding:9px 15px}.rig-title{font-size:20px;padding:9px 15px 0}.rig-title span{font-size:18px}.design{padding:14px 12px;gap:10px}.design .choice{gap:5px}.choice button{padding:9px;font-size:18px;min-height:40px}.choice button[aria-pressed=true]{padding:8px}.design .mini-rule{font-size:15px;line-height:1.5}.cal-evidence .clock{font-size:38px;margin:0}.cal-evidence .action-stack{gap:7px}.cal-evidence .action-stack button{min-height:42px;font-size:18px}.cal-note{font-size:16px;padding:9px 0}.cal-evidence .cal-note{display:none}.cal-progress strong{font-size:32px}.transport{padding-top:10px;padding-bottom:7px;min-height:64px}.footnote{padding-bottom:7px;font-size:14px}.result-banner{min-height:70px;padding:8px 14px}.result-banner .clock{font-size:30px}.results td{height:43px;padding:6px 5px}.results th{padding:7px 5px;font-size:16px}.test-evidence .error-definition{font-size:14px}.test-evidence .test-bottom .small{font-size:14px}.status{min-height:38px;font-size:16px}.test-settings{gap:8px}.test-settings select{font-size:18px;min-height:40px}.test-bottom button{font-size:16px}.stage-top strong{font-size:20px}}
+@media(max-width:1100px){.topbar{padding:0 18px;gap:8px}.nav{gap:3px}.nav button{padding:12px 14px;font-size:19px}.brand{gap:7px}.brand svg{width:25px}.tools button{font-size:15px;padding:7px}.lead{padding-left:18px;padding-right:18px}.task-goal{font-size:14px}.workspace{padding:0 18px;grid-template-columns:minmax(0,1fr) 255px;gap:12px}.evidence h3,.design h3{font-size:20px}.cal-workspace{grid-template-columns:160px minmax(0,1fr) 220px}.choice button{font-size:18px}.test-workspace{grid-template-columns:minmax(0,1fr) 415px}.rig-title{font-size:19px;padding-left:12px;padding-right:12px}.rig-title span{font-size:16px}.transport{padding-left:18px;padding-right:18px;gap:8px}.transport button{padding:9px 12px;font-size:18px}.footnote{padding-left:18px;padding-right:18px;font-size:14px}.scale-toggle button{font-size:16px}.result-condition{font-size:13px}.test-settings label{font-size:16px}.test-settings select{font-size:18px}.results{font-size:21px}.results th{font-size:16px}}
+@media(max-width:760px){body{font-size:17px}.topbar{height:110px;position:relative;align-items:flex-start;padding:10px 12px;flex-wrap:wrap}.brand h1{font-size:23px}.brand svg{height:30px;width:24px}.tools{position:absolute;right:10px;top:7px}.tools button{min-height:35px;font-size:14px}.nav{width:100%;justify-content:space-around;order:3;gap:3px}.nav button{font-size:17px;flex:1;padding:11px 6px;border-radius:8px;min-height:40px}.nav .step{margin-right:4px}.lead{padding:10px 12px;min-height:57px;display:block}.lead h2{font-size:21px}.task-goal{display:none}.workspace{padding:0 10px;gap:8px;grid-template-columns:1fr;grid-template-rows:minmax(200px,1fr) 162px}.stage{border-radius:12px}.stage-top{min-height:37px;padding:6px 10px}.stage-top strong{font-size:18px}.stage-top .small{font-size:13px}.rig-title{padding:8px 9px 0;font-size:16px}.rig-title span{font-size:13px}.evidence{padding:10px 12px;border-radius:12px}.evidence.compare-evidence{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:23px 1fr;gap:7px 14px}.compare-evidence h3{font-size:16px}.compare-evidence .legend{font-size:13px;gap:8px}.compare-evidence .chart{grid-row:2;min-height:0}.compare-evidence .flow-info{grid-row:2;grid-column:2;padding-top:0;border:0}.range-label{font-size:15px}.status{font-size:13px;line-height:1.45;min-height:32px}.status strong{font-size:16px}.transport{padding:9px 10px 6px;gap:6px;min-height:60px;flex-wrap:wrap}.transport button{min-height:39px;font-size:16px;padding:8px 11px}.transport select{font-size:14px;min-height:38px;padding:5px}.timeline{min-width:70px;gap:6px}.timeline label,.timeline span{font-size:12px}.timeline label{display:none}.footnote{font-size:11px;padding:0 11px 7px;min-height:24px;gap:5px}.footnote .model-tag{font-size:10px}.cal-workspace{grid-template-columns:1fr;grid-template-rows:65px minmax(190px,1fr) 144px}.design{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 10px;border-radius:12px}.design h3,.design-label,.design .mini-rule{display:none}.design .choice{display:flex;gap:5px}.choice button{font-size:13px;padding:7px 5px;flex:1;min-height:42px;text-align:center}.choice button[aria-pressed=true]{padding:6px 4px}.cal-evidence{display:grid;grid-template-columns:1fr 1.25fr;gap:4px 10px}.cal-evidence h3{font-size:15px}.cal-evidence .clock{font-size:29px;grid-column:1;margin:0}.cal-evidence .action-stack{grid-column:2;grid-row:1 / span 3;gap:6px}.cal-evidence .action-stack button{font-size:15px;min-height:34px;padding:7px}.cal-progress{margin:0;gap:4px}.cal-progress strong{font-size:24px}.cal-progress span{font-size:15px}.cal-evidence .spacer,.cal-evidence .cal-note{display:none}.cal-evidence .status{grid-column:1 / span 2;min-height:18px;font-size:12px;line-height:1.3}.cal-transport{justify-content:space-between;min-height:55px}.scale-toggle{gap:5px}.scale-toggle button{font-size:13px;padding:8px;min-height:36px}.test-workspace{grid-template-columns:1fr;grid-template-rows:minmax(175px,1fr) 316px}.test-evidence{padding:10px 12px;gap:6px}.test-settings{gap:7px;justify-content:space-between;flex-wrap:nowrap}.test-settings label{font-size:13px;gap:3px}.test-settings select{min-height:34px;font-size:14px;padding:5px}.result-banner{min-height:56px;padding:7px 11px;border-radius:9px}.result-banner .clock{font-size:26px}.result-banner .small{font-size:12px}.result-error{font-size:20px}.results{font-size:17px}.results th{font-size:13px;padding:5px 4px}.results td{height:35px;padding:4px}.results td:first-child{font-size:13px}.result-condition{display:block;font-size:10px;line-height:1.15}.test-bottom button{font-size:13px;min-height:30px;padding:6px 8px}.test-bottom .small{font-size:12px}.test-evidence .small.error-definition{font-size:11px}.test-transport{justify-content:space-between}.test-transport .small{display:none}.dialog{padding:18px 12px}.dialog-head{gap:10px}.dialog h2{font-size:23px}.dialog p,.dialog li{font-size:16px}.real-table th{font-size:13px}.real-table td{padding:12px 2px;font-size:16px}.real-table input{width:39px;min-height:42px;font-size:18px;padding:2px}.real-table .units{font-size:11px;margin:0 1px}.record-note{font-size:14px}.dialog .actions button{font-size:15px}.toast{font-size:16px;padding:11px 15px;bottom:26px}.empty-test p{font-size:20px}.empty-test .small{font-size:15px}}
+@media(max-width:760px) and (max-height:720px){.topbar{height:96px}.lead{min-height:47px;padding-top:7px;padding-bottom:7px}.lead h2{font-size:18px}.workspace{grid-template-rows:minmax(145px,1fr) 132px}.cal-workspace{grid-template-rows:52px minmax(125px,1fr) 126px}.test-workspace{grid-template-rows:minmax(115px,1fr) 298px}.transport{min-height:51px;padding-top:6px}.footnote{min-height:22px}.compare-evidence .status{font-size:12px}.cal-evidence .clock{font-size:25px}.choice button{font-size:12px;min-height:35px}.cal-evidence .action-stack button{font-size:13px;min-height:31px}.stage-top{min-height:32px}.results td{height:30px}.result-banner{min-height:49px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.water-glint{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+ <header class="topbar">
+  <div class="brand"><svg viewBox="0 0 40 48" aria-hidden="true"><path d="M20 2C14 13 5 23 5 32a15 15 0 0 0 30 0C35 23 26 13 20 2" fill="#087f87"/><path d="M12 32a8 8 0 0 0 8 8" fill="none" stroke="#d7f6ee" stroke-width="3" stroke-linecap="round"/></svg><h1>做个水钟</h1></div>
+  <nav class="nav" role="tablist" aria-label="探究任务">
+   <button id="nav1" role="tab" aria-controls="page1" aria-selected="true" data-page="1"><span class="step">01</span>看见水流</button>
+   <button id="nav2" role="tab" aria-controls="page2" aria-selected="false" data-page="2"><span class="step">02</span>标定刻度</button>
+   <button id="nav3" role="tab" aria-controls="page3" aria-selected="false" data-page="3"><span class="step">03</span>检验计时</button>
+  </nav>
+  <div class="tools"><button id="info" class="quiet" aria-label="教师说明">说明</button><button id="fullscreen" class="quiet">全屏</button></div>
+ </header>
+ <section id="page1" class="page active" role="tabpanel" aria-labelledby="nav1">
+  <div class="lead"><h2>同样一分钟，流出的水一样多吗？</h2><span class="task-goal">同样的底孔 · 同样的起始水位</span></div>
+  <div class="workspace">
+   <div class="stage"><div class="dual">
+    <div class="rig"><div class="rig-title orange">普通漏水瓶 <span id="ordinary-volume" class="number">0 mL</span></div><svg id="ordinary-svg" viewBox="0 0 450 540" role="img" aria-label="普通漏水瓶剖面，水位与接水量随时间变化"></svg></div>
+    <div class="rig"><div class="rig-title teal">加了稳水装置 <span id="steady-volume" class="number">0 mL</span></div><svg id="steady-svg" viewBox="0 0 450 540" role="img" aria-label="上层供水、稳水杯、溢水管与接水杯的剖面"></svg></div>
+   </div></div>
+   <aside class="evidence compare-evidence"><h3>每分钟接到的水</h3><div class="legend"><span><i class="dot" style="background:#ce8a3d"></i>普通</span><span><i class="dot" style="background:#0b9399"></i>稳水</span></div><div id="minute-chart" class="chart" aria-label="每分钟水量对照图"></div><div class="flow-info"><label class="range-label" for="feed-range">上层供水 <output id="feed-value">100%</output></label><input id="feed-range" type="range" min="0" max="150" step="5" value="100" aria-label="调节上层供水系数"><p id="compare-status" class="status">调低供水，观察侧管和水位。</p></div></aside>
+  </div>
+  <div class="transport"><button id="compare-play" class="primary">开始对照</button><button id="compare-next">下一分钟</button><button id="compare-reset" class="quiet">重来</button><div class="timeline"><label for="compare-time">回看</label><input id="compare-time" type="range" min="0" max="600" step="1" value="0" aria-label="回看模型时间"><span id="compare-clock" class="number">0:00</span></div><select id="compare-speed" aria-label="对照播放速度"><option value="1">1倍速</option><option value="30" selected>30倍速</option><option value="60">60倍速</option></select></div>
+  <div class="footnote"><span id="compare-hint">剖面放大：追踪进水、出水和溢水三条路径。</span><span class="model-tag">简化模型 · 非实测数据</span></div>
+ </section>
+ <section id="page2" class="page" role="tabpanel" aria-labelledby="nav2" hidden>
+  <div class="lead"><h2>每隔一分钟，把液面留在时间尺上。</h2><span class="task-goal">目标：10分钟 · 刻度均匀</span></div>
+  <div class="workspace cal-workspace">
+   <aside class="design"><h3>我的水钟</h3><p class="design-label">供水结构</p><div class="choice"><button data-kind="steady" aria-pressed="true">稳水装置</button><button data-kind="ordinary" aria-pressed="false">普通漏水瓶</button></div><p class="design-label">接水杯形状</p><div class="choice"><button data-shape="cylinder" aria-pressed="true">直筒杯</button><button data-shape="taper" aria-pressed="false">上宽下窄杯</button></div><p class="mini-rule">从空接水杯开始。<br>换方案会重新标定。<br>稳水杯已预先加到溢水口。</p></aside>
+   <div class="stage"><div class="stage-top"><strong>接水杯 · 放大看</strong><span id="scale-name" class="small">计时标定的刻度</span></div><div class="stage-art"><svg id="cal-svg" viewBox="0 0 660 540" aria-label="放大的接水杯和可标记的时间刻度" role="img"></svg></div></div>
+   <aside class="evidence cal-evidence"><h3>标定秒表</h3><div id="cal-clock" class="clock number">0:00</div><div class="action-stack"><button id="cal-next" class="primary">走到第1分钟</button><button id="cal-mark" disabled>画下这条刻度</button><button id="cal-auto" class="quiet">快速标完10分钟</button></div><div class="cal-progress"><strong id="cal-count">0</strong><span>/ 10 条刻度</span></div><div class="spacer"></div><p id="cal-status" class="status">先走一分钟，再在液面处画一条线。</p><div class="cal-note">观察相邻刻度：<br>间距相同吗？</div></aside>
+  </div>
+  <div class="transport cal-transport"><div class="scale-toggle"><button id="scale-measured" aria-pressed="true">计时标定</button><button id="scale-equal" aria-pressed="false" disabled>试试十等分</button></div><button id="cal-reset" class="quiet">重新标定</button><div class="spacer"></div><button id="to-test" class="primary" disabled>去检验</button></div>
+  <div class="footnote"><span id="cal-hint">点液面旁的笔尖也能标刻度。可先标2—3分钟，再快速完成。</span><span class="model-tag">模型标定 · 60倍速</span></div>
+ </section>
+ <section id="page3" class="page" role="tabpanel" aria-labelledby="nav3" hidden>
+  <div class="lead"><h2>水钟说“时间到了”，秒表同意吗？</h2><span class="task-goal">比较目标：误差不超过10秒</span></div>
+  <div class="workspace test-workspace">
+   <div class="stage"><div class="stage-top"><strong id="test-scale-label">我的时间尺</strong><span id="test-design-label" class="small">稳水装置 · 直筒杯</span></div><div class="stage-art"><svg id="test-svg" viewBox="0 0 660 540" role="img" aria-label="独立试测水钟，水面到达目标刻度时自动停止"></svg><div id="test-empty" class="empty-test"><p>先给水钟留下一条时间刻度。</p><span class="small">检验使用你在上一页标出的尺子。</span><button id="back-cal" class="primary">去标定刻度</button></div></div></div>
+   <aside class="evidence test-evidence"><div class="test-settings"><label>测到<select id="test-target" aria-label="目标刻度"><option value="2">2分钟</option><option value="5">5分钟</option><option value="10">10分钟</option></select></label><label>条件<select id="test-condition" aria-label="独立试测条件"><option value="same">保持原样</option><option value="feed">供水不足</option><option value="hole">底孔直径增大8%</option><option value="head">起始水位降低20%</option></select></label></div><div class="result-banner"><div><div class="small">独立秒表</div><div id="test-clock" class="clock number">等待试测</div></div><div id="test-error" class="result-error">—</div></div><div class="table-wrap"><table class="results"><thead><tr><th>试次 / 条件</th><th>水钟</th><th>秒表</th><th>误差</th></tr></thead><tbody id="model-results"></tbody></table></div><div class="small error-definition">误差＝水钟−秒表；＋偏快，−偏慢。</div><div class="test-bottom"><span class="small">以上均为模型试测</span><button id="clear-tests" class="quiet">清空本组</button></div><button id="open-record">填写实物实验记录</button></aside>
+  </div>
+  <div class="transport test-transport"><button id="test-run" class="primary" disabled>开始独立试测</button><button id="test-stop" disabled>暂停</button><span id="test-status" class="small">沿用自己的刻度，重新装水后独立运行。</span><div class="spacer"></div><button id="export-model">导出模型记录</button></div>
+  <div class="footnote"><span id="test-hint">只改一个条件，比较同一条刻度的计时结果。</span><span class="model-tag">自动停在目标刻度 · 60倍速</span></div>
+ </section>
+</div>
+<div id="info-overlay" class="overlay" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="info-title"><div class="dialog-head"><h2 id="info-title">给教师的简要说明</h2><button data-close="info-overlay" aria-label="关闭说明">关闭</button></div><p>六上第四单元第3课《做个水钟》。依据所附教材第106—109页、教师用书第333—342页。任务目标：10分钟计时、误差不超过10秒、时间刻度均匀。</p><h3>接在真实实验后使用</h3><p>先画设计草图、制作并观察实物。用“看见水流”追踪剖面与每分钟水量；用“标定刻度”压缩10分钟标定过程；再独立试测，并把真实实验的三组数据填入实物记录。模型记录和实物记录始终分别保存、分别导出。</p><h3>这个模型假设了什么</h3><p>装置开口通气，底孔保持不变，流量按水面到出口高度的平方根变化。稳水杯从溢水口高度起步；只有进水足够时，侧管才持续溢流。接水杯的体积与高度按直筒或圆台计算。画面比例、滴形与滴数是示意，不是材料加工图。</p><p>未模拟黏性、表面张力、孔形、管道阻力和操作误差。“保持原样”只是同条件模型复现，误差接近0不能证明实物同样准确。真实测量值必须由师生填写。</p><h3>留给学生发现</h3><p>普通漏水瓶也能用非等距刻度计时；恒定流量也不保证任何形状的杯子都有等距刻度。十等分尺固定0分与10分的位置，在中间刻度检验更能暴露问题。没达到10秒目标时，保留真实数据，寻找原因。</p><h3>操作与保存</h3><p>更换水钟结构、杯形或刻度方式后，模型试测表重新分组。对照页可中途调供水，时间轴保留调节历史；回到过去再调供水，会以该时刻为起点改写后续试跑。切页或浏览器转入后台会暂停。数据保存在当前浏览器，CSV可带走；浏览器禁用存储时仍可操作、导出。</p><p>模型依据：<a href="https://openstax.org/books/college-physics/pages/12-3-the-most-general-applications-of-bernoullis-equation" target="_blank" rel="noopener">OpenStax：托里拆利定理</a>；<a href="https://mathshistory.st-andrews.ac.uk/HistTopics/Water_clocks/" target="_blank" rel="noopener">圣安德鲁斯大学：水钟与溢流稳水</a>。两页均只作科学背景，不要求学生阅读公式。</p><div class="actions"><button data-close="info-overlay" class="primary">回到实验</button></div></div></div>
+<div id="record-overlay" class="overlay" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="record-title"><div class="dialog-head"><h2 id="record-title">我们的实物实验记录</h2><button data-close="record-overlay">关闭</button></div><p class="muted">填写真实水钟与秒表读数，保留每一次测量。空白不会当作0秒。</p><table class="real-table"><thead><tr><th>试次</th><th>水钟示值</th><th>秒表实际时间</th><th>误差</th></tr></thead><tbody id="real-rows"></tbody></table><div id="record-status" class="record-note" role="status">实物数据初始为空，由师生测量后填写。</div><p class="small">误差＝水钟示值−实际时间；绝对值≤10秒符合本次计时目标。达到计时目标后，还需检查是否能计满10分钟、刻度是否均匀。</p><div class="actions"><button id="clear-real" class="quiet">清空实物记录</button><button id="export-real" class="primary">导出实物记录 CSV</button></div></div></div>
+<div id="toast" class="toast" role="status" hidden></div>
+<!-- AIHTML-COMPAT-GRADE: T1 — HTML/CSS/JavaScript/SVG; no Canvas or WebGL. -->
+<span class="compat" aria-label="技术等级T1，基础交互">T1 · 基础交互</span>
+<script>
+/*
+ * WaterClockModel — deterministic teaching model, not measured experiment data.
+ * Units: time s; height cm; volume mL (= cm³); flow mL/s.
+ * Small, open outlet: Q = Qref × (relative diameter)² × √(h / href).
+ * Viscosity, surface tension, individual drop size and manufacturing tolerances
+ * are intentionally outside this model. Overflow is an ideal height constraint.
+ * Replace this independent module to substitute a different calibrated model.
+ */
+(function (root, factory) {
+  var model = factory();
+  if (typeof module === 'object' && module.exports) module.exports = model;
+  if (root) root.WaterClockModel = model;
+}(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this), function () {
+  'use strict';
+  var C = {
+    referenceHead: 12,
+    outletQ: 0.6,
+    chamberArea: 30,
+    sourceArea: 80,
+    sourceInitialVolume: 1040,
+    sourceInitialHead: 13,
+    sourceQ: 1.2,
+    cylinderArea: 25,
+    collectorHeight: 20,
+    taperBottomRadius: 2,
+    taperTopRadius: 3.5,
+    maxHead: 24,
+    maxInternalStep: 0.05,
+    maxExternalStep: 3600
+  };
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function finite(v, fallback) { return typeof v === 'number' && isFinite(v) ? v : fallback; }
+  function shapeName(shape) { return shape === 'taper' ? 'taper' : 'cylinder'; }
+  function volumeForHeight(h, shape) {
+    h = clamp(finite(h, 0), 0, C.collectorHeight);
+    if (shapeName(shape) === 'cylinder') return C.cylinderArea * h;
+    var r = C.taperBottomRadius;
+    var slope = (C.taperTopRadius - r) / C.collectorHeight;
+    return Math.PI * (r * r * h + r * slope * h * h + slope * slope * h * h * h / 3);
+  }
+  function capacityForShape(shape) { return volumeForHeight(C.collectorHeight, shape); }
+  function heightForVolume(v, shape) {
+    v = clamp(finite(v, 0), 0, capacityForShape(shape));
+    if (shapeName(shape) === 'cylinder') return v / C.cylinderArea;
+    var r = C.taperBottomRadius;
+    var slope = (C.taperTopRadius - r) / C.collectorHeight;
+    return clamp((Math.pow(r * r * r + 3 * slope * v / Math.PI, 1 / 3) - r) / slope, 0, C.collectorHeight);
+  }
+  function apertureOf(state) { return clamp(finite(state.config.aperture, 1), 0, 3); }
+  function feedFactorOf(state) { return clamp(finite(state.config.feedFactor, 1), 0, 3); }
+  function outletAtHead(state, head) {
+    var a = apertureOf(state);
+    return C.outletQ * a * a * Math.sqrt(Math.max(0, head) / C.referenceHead);
+  }
+  function getFlow(state) { return outletAtHead(state, state.head); }
+  function currentFeed(state) {
+    if (state.config.kind !== 'steady') return 0;
+    return C.sourceQ * feedFactorOf(state) * Math.sqrt(Math.max(0, state.sourceVolume) / C.sourceInitialVolume);
+  }
+  function refresh(state) {
+    state.flow = getFlow(state);
+    state.feed = currentFeed(state);
+    state.receiverHeight = heightForVolume(state.volume, state.config.shape);
+    state.receiverCapacity = capacityForShape(state.config.shape);
+    state.shortage = state.config.kind === 'steady' &&
+      (state.head < state.targetHead - 1e-5 || state.feed < state.flow - 1e-8);
+    state.steadyActive = state.config.kind === 'steady' && !state.shortage && state.flow > 0;
+    return state;
+  }
+  function create(options) {
+    options = options || {};
+    var config = {
+      kind: options.kind === 'ordinary' ? 'ordinary' : 'steady',
+      head: clamp(finite(options.head, C.referenceHead), 0, C.maxHead),
+      aperture: clamp(finite(options.aperture, 1), 0, 3),
+      feedFactor: clamp(finite(options.feedFactor, 1), 0, 3),
+      shape: shapeName(options.shape),
+      startVolume: Math.max(0, finite(options.startVolume, 0))
+    };
+    var sourceVolume = config.kind === 'steady' ? Math.max(0, finite(options.sourceVolume, C.sourceInitialVolume)) : 0;
+    var capacity = capacityForShape(config.shape);
+    var volume = Math.min(capacity, config.startVolume);
+    var spilled = Math.max(0, config.startVolume - capacity);
+    return refresh({
+      config: config,
+      time: 0,
+      sourceVolume: sourceVolume,
+      sourceInitialVolume: sourceVolume,
+      head: config.head,
+      initialHead: config.head,
+      targetHead: config.head,
+      volume: volume,
+      overflow: 0,
+      totalOut: 0,
+      spilled: spilled,
+      initialTotalVolume: sourceVolume + config.head * C.chamberArea + config.startVolume,
+      flow: 0,
+      feed: 0,
+      receiverHeight: 0,
+      receiverCapacity: capacity,
+      shortage: false,
+      steadyActive: false
+    });
+  }
+  function step(state, dt) {
+    if (typeof dt !== 'number' || !isFinite(dt) || dt < 0 || dt > C.maxExternalStep) {
+      throw new RangeError('Simulation dt must be finite seconds between 0 and 3600.');
+    }
+    if (!state || !state.config) throw new TypeError('A WaterClockModel state is required.');
+    state.targetHead = clamp(finite(state.targetHead, state.initialHead), 0, C.maxHead);
+    var stable = state.config.kind === 'steady';
+    var endTime = state.time + dt;
+    var receiverCapacity = capacityForShape(state.config.shape);
+    // A changed receiver shape may have less capacity; water is retained in the accounting.
+    if (state.volume > receiverCapacity) {
+      state.spilled += state.volume - receiverCapacity;
+      state.volume = receiverCapacity;
+    }
+    // Moving the overflow opening down immediately releases excess water.
+    if (stable && state.head > state.targetHead) {
+      state.overflow += (state.head - state.targetHead) * C.chamberArea;
+      state.head = state.targetHead;
+    }
+    var remaining = dt;
+    while (remaining > 1e-10) {
+      var d = Math.min(C.maxInternalStep, remaining);
+      var incoming = 0;
+      if (stable && state.sourceVolume > 0) {
+        // Exact draining of the open upper supply vessel over this substep.
+        var rootVolume = Math.sqrt(state.sourceVolume);
+        var sourceSlope = C.sourceQ * feedFactorOf(state) / (2 * Math.sqrt(C.sourceInitialVolume));
+        var nextRoot = Math.max(0, rootVolume - sourceSlope * d);
+        var nextSource = nextRoot * nextRoot;
+        incoming = Math.max(0, state.sourceVolume - nextSource);
+        state.sourceVolume = nextSource;
+      }
+      var chamberBefore = Math.max(0, state.head) * C.chamberArea;
+      var out;
+      var chamberAfter;
+      if (incoming === 0) {
+        // Exact no-inflow drainage avoids negative water near an empty outlet.
+        var diameter = apertureOf(state);
+        var headSlope = C.outletQ * diameter * diameter / (2 * C.chamberArea * Math.sqrt(C.referenceHead));
+        var nextHeadRoot = Math.max(0, Math.sqrt(Math.max(0, state.head)) - headSlope * d);
+        chamberAfter = nextHeadRoot * nextHeadRoot * C.chamberArea;
+        out = Math.max(0, chamberBefore - chamberAfter);
+      } else {
+        // Midpoint integration for inflow + outflow, then the overflow constraint.
+        var midpointHead = state.head + (incoming - outletAtHead(state, state.head) * d) / (2 * C.chamberArea);
+        midpointHead = clamp(midpointHead, 0, state.targetHead);
+        out = Math.min(chamberBefore + incoming, outletAtHead(state, midpointHead) * d);
+        chamberAfter = Math.max(0, chamberBefore + incoming - out);
+      }
+      if (stable) {
+        var chamberCapacity = state.targetHead * C.chamberArea;
+        var overflowNow = Math.max(0, chamberAfter - chamberCapacity);
+        state.overflow += overflowNow;
+        chamberAfter -= overflowNow;
+      }
+      state.head = Math.max(0, chamberAfter / C.chamberArea);
+      state.totalOut += out;
+      var accepted = Math.max(0, Math.min(out, receiverCapacity - state.volume));
+      state.volume += accepted;
+      state.spilled += out - accepted;
+      remaining -= d;
+    }
+    state.time = endTime;
+    return refresh(state);
+  }
+  function clone(state) { return JSON.parse(JSON.stringify(state)); }
+  return {
+    create: create,
+    step: step,
+    clone: clone,
+    heightForVolume: heightForVolume,
+    volumeForHeight: volumeForHeight,
+    capacityForShape: capacityForShape,
+    constants: C,
+    getFlow: getFlow
+  };
+}));
+
+</script>
+<script>
+(function(){
+'use strict';
+var M=window.WaterClockModel,$=function(id){return document.getElementById(id);},all=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
+var page=1,lastStamp=0,lastPaint=0,toastTimer=0,modalReturn=null,storageAvailable=true;
+var compare={a:M.create({kind:'ordinary'}),b:M.create({kind:'steady'}),running:false,limit:600,speed:30,events:[{t:0,feed:1}],minuteA:[0],minuteB:[0]};
+var cal={kind:'steady',shape:'cylinder',state:M.create(),marks:[0],running:false,auto:false,pending:false,limit:60,scale:'measured'};
+var test={state:null,running:false,paused:false,target:120,targetVolume:0,rows:[],condition:'same',last:null};
+var real=[{wm:'2',ws:'0',am:'',as:''},{wm:'5',ws:'0',am:'',as:''},{wm:'10',ws:'0',am:'',as:''}];
+function clamp(n,a,b){return Math.max(a,Math.min(b,n));}
+function fmt(s,tenths){s=Math.max(0,s);var n=tenths?Math.round(s*10):Math.round(s),den=tenths?10:1,m=Math.floor(n/(60*den)),r=n%(60*den);return m+':'+('0'+Math.floor(r/den)).slice(-2)+(tenths?'.'+(r%10):'');}
+function signed(s){var n=Math.round(s*10)/10;return (n>0?'+':n<0?'−':'')+Math.abs(n).toFixed(1)+'秒';}
+function toast(s){$('toast').textContent=s;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3100);}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function save(){try{localStorage.setItem('water-clock-lesson43-v1',JSON.stringify({cal:{kind:cal.kind,shape:cal.shape,marks:cal.marks,scale:cal.scale,state:cal.state,pending:cal.pending},rows:test.rows,real:real}));}catch(e){storageAvailable=false;}}
+function validMarks(v){return Array.isArray(v)&&v.length>=1&&v.length<=11&&v[0]===0&&v.every(function(n,i){return typeof n==='number'&&isFinite(n)&&n>=0&&n<=20&&(!i||n>v[i-1]);});}
+function restore(){try{var raw=localStorage.getItem('water-clock-lesson43-v1');if(!raw)return;var d=JSON.parse(raw);if(d.cal&&validMarks(d.cal.marks)){cal.kind=d.cal.kind==='ordinary'?'ordinary':'steady';cal.shape=d.cal.shape==='taper'?'taper':'cylinder';cal.marks=d.cal.marks;cal.scale=d.cal.scale==='equal'&&cal.marks.length===11?'equal':'measured';var seconds=(cal.marks.length-1)*60+(d.cal.pending?60:0);cal.state=M.create({kind:cal.kind,shape:cal.shape});M.step(cal.state,Math.min(600,seconds));cal.pending=!!d.cal.pending&&cal.marks.length<11;}if(Array.isArray(d.rows))test.rows=d.rows.filter(function(r){return r&&isFinite(r.target)&&r.target>0&&r.target<=600&&(r.actual===null||isFinite(r.actual))&&['same','feed','hole','head'].indexOf(r.condition)>=0;}).slice(-3);if(Array.isArray(d.real)&&d.real.length===3)real=d.real.map(function(r,i){var out={};['wm','ws','am','as'].forEach(function(k){out[k]=typeof r[k]==='string'&&r[k].length<=8?r[k]:'';});return out;});}catch(e){storageAvailable=false;}}
+function svgDefs(id,color){return '<defs><linearGradient id="water-'+id+'" x1="0" y1="0" x2="0" y2="1"><stop stop-color="'+color+'" stop-opacity=".36"/><stop offset="1" stop-color="'+color+'" stop-opacity=".75"/></linearGradient><linearGradient id="glass-'+id+'" x1="0" x2="1"><stop stop-color="#eaf6f6" stop-opacity=".7"/><stop offset=".5" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#d7eaeb" stop-opacity=".5"/></linearGradient><marker id="arrow-'+id+'" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="'+color+'" stroke-width="1.3"/></marker></defs>';}
+function drops(x,y1,y2,flow,time,color){if(flow<=.00001)return '';var s='',n=4,spacing=(y2-y1)/n,phase=(time*flow*2)%1;for(var i=0;i<n;i++){var y=y1+((i+phase)/n)*(y2-y1);s+='<ellipse cx="'+x+'" cy="'+y.toFixed(1)+'" rx="3.4" ry="5.3" fill="'+color+'" opacity=".85"/>';}return s;}
+function vessel(id,x,y,w,h,level,color,shape){level=clamp(level,0,1);var bottom=shape==='taper'?w*2/3.5:w,bl=x+(w-bottom)/2,br=bl+bottom,path='M'+x+' '+y+'L'+bl+' '+(y+h)+'Q'+(x+w/2)+' '+(y+h+5)+' '+br+' '+(y+h)+'L'+(x+w)+' '+y;var waterY=y+h*(1-level);return '<defs><clipPath id="cup-'+id+'"><path d="'+path+'Z"/></clipPath></defs><path d="'+path+'" fill="url(#glass-'+id+')" stroke="#6c959c" stroke-width="3.1" stroke-linejoin="round"/><g clip-path="url(#cup-'+id+')"><rect x="'+(x-2)+'" y="'+waterY+'" width="'+(w+4)+'" height="'+(h*level+8)+'" fill="url(#water-'+id+')"/><path d="M'+(x-5)+' '+waterY+'H'+(x+w+5)+'" stroke="'+color+'" stroke-width="3"/>'+(level>.05?'<path class="water-glint" d="M'+(x+14)+' '+(waterY+12)+'v'+Math.max(0,h*level-25)+'" stroke="#fff" stroke-width="5" opacity=".65" stroke-linecap="round"/>':'')+'</g><path d="M'+x+' '+y+'Q'+(x+w/2)+' '+(y+5)+' '+(x+w)+' '+y+'" fill="none" stroke="#7fa4aa" stroke-width="2"/>';}
+function rigSVG(s,id,options){options=options||{};var steady=s.config.kind==='steady',color=steady?'#0b9399':'#ce8a3d',out='',headY=341-s.head*11,flowing=options.running,tt=flowing?s.time:s.time;out+=svgDefs(id,color);out+='<path d="M47 70V517M32 517H344" stroke="#dce8e5" stroke-width="9" fill="none" stroke-linecap="round"/>';
+ if(steady){out+='<path d="M47 90H125M47 254H124" stroke="#b3c9c7" stroke-width="6" stroke-linecap="round"/>';out+=vessel(id+'-s',139,18,125,113,s.sourceVolume/M.constants.sourceInitialVolume,color,'cylinder').replace(new RegExp('glass-'+id+'-s','g'),'glass-'+id).replace(new RegExp('water-'+id+'-s','g'),'water-'+id);out+='<path d="M182 132L182 145H221V132" fill="#93b8bb"/><circle cx="201" cy="145" r="5" fill="'+color+'"/>';out+=drops(201,151,190,s.feed,tt,color);out+='<text x="284" y="60" class="svg-label">供水</text><text x="284" y="91" class="svg-note">'+(s.feed*60).toFixed(0)+' mL/分</text>';}
+ else{out+='<path d="M47 254H124" stroke="#b3c9c7" stroke-width="6" stroke-linecap="round"/><text x="130" y="95" class="svg-label">没有持续补水</text>';}
+ out+=vessel(id,125,183,153,158,s.head/(158/11),color,'cylinder');
+ if(steady){var overFlow=Math.max(0,s.feed-s.flow)*(s.head>=s.targetHead-.001?1:0),pipeY=341-s.targetHead*11;out+='<path d="M277 '+pipeY+'H338Q349 '+pipeY+' 349 '+(pipeY+12)+'V365" fill="none" stroke="#93b0b3" stroke-width="16" stroke-linecap="round"/><path d="M277 '+pipeY+'H338Q349 '+pipeY+' 349 '+(pipeY+12)+'V365" fill="none" stroke="'+(overFlow>.001?color:'#eff5f4')+'" stroke-width="8" stroke-linecap="round"/>';out+='<path d="M121 '+pipeY+'H285" fill="none" stroke="#087f87" stroke-width="1.8" stroke-dasharray="5 5" opacity=".6"/>';out+='<text x="304" y="'+(pipeY-22)+'" class="svg-label">溢水</text>';out+=drops(349,374,413,overFlow,tt,color);out+=vessel(id+'-w',310,415,78,83,Math.min(.85,s.overflow/450),color,'cylinder').replace(new RegExp('glass-'+id+'-w','g'),'glass-'+id).replace(new RegExp('water-'+id+'-w','g'),'water-'+id);out+='<text x="313" y="529" class="svg-note">余水杯</text>';}
+ out+='<path d="M177 342V356H226V342" fill="#88adb1"/><circle cx="201" cy="355" r="5.2" fill="'+color+'"/>';out+=drops(201,365,407,s.flow,tt,color);out+=vessel(id+'-r',139,414,125,84,s.receiverHeight/20,color,'cylinder').replace(new RegExp('glass-'+id+'-r','g'),'glass-'+id).replace(new RegExp('water-'+id+'-r','g'),'water-'+id);
+ out+='<text x="141" y="530" class="svg-note">计时接水杯</text><path d="M101 '+headY+'h-8V341h8" stroke="'+color+'" stroke-width="2" fill="none"/><text x="70" y="'+((headY+341)/2)+'" text-anchor="middle" transform="rotate(-90 70 '+((headY+341)/2)+')" font-size="22" font-weight="650" fill="'+color+'">'+s.head.toFixed(1)+' cm</text><text x="293" y="335" class="svg-note">底孔</text><text x="234" y="387" font-size="20" fill="'+color+'">'+(s.flow*60).toFixed(1)+' mL/分</text>';
+ return out;
+}
+function bigCupSVG(s,id,marks,pending,target){var color='#0b9399',shape=s.config.shape,geometry={x:234,y:57,w:218,h:418},g=geometry,bottom=g.y+g.h,waterY=bottom-s.receiverHeight/20*g.h,out=svgDefs(id,color);out+='<path d="M68 44V179Q68 195 84 195H176Q194 195 194 179V44" stroke="#a1bdbc" stroke-width="4" fill="#f2f8f6"/><path d="M69 '+(195-s.head/14*150)+'H193V180Q193 194 177 194H84Q69 194 69 180Z" fill="#b3e1dc"/><circle cx="130" cy="200" r="5" fill="#0b9399"/>';
+ out+=drops(130,210,253,s.flow,s.time,color);out+=vessel(id+'-mini',88,262,84,98,s.receiverHeight/20,color,shape).replace(new RegExp('glass-'+id+'-mini','g'),'glass-'+id).replace(new RegExp('water-'+id+'-mini','g'),'water-'+id);out+='<path d="M174 264L231 57M174 359L231 475" stroke="#c2d3d0" stroke-width="2" stroke-dasharray="5 5" fill="none"/><text x="130" y="396" text-anchor="middle" class="svg-label">'+(s.config.kind==='steady'?'稳水装置':'普通漏水瓶')+'</text><text x="130" y="426" text-anchor="middle" class="svg-note">装置局部示意</text><text x="130" y="465" text-anchor="middle" font-size="24" fill="'+color+'">'+(s.flow*60).toFixed(1)+' mL/分</text>';
+out+=drops(344,20,Math.max(26,waterY-7),s.flow,s.time,color);out+=vessel(id,g.x,g.y,g.w,g.h,s.receiverHeight/20,color,shape);
+out+='<rect x="475" y="53" width="130" height="428" rx="7" fill="#faf6e9" stroke="#e6dfca"/><text x="540" y="518" text-anchor="middle" class="svg-label">时间尺 / 分</text><path d="M478 '+bottom+'h49" stroke="#577d7b" stroke-width="2"/><text x="543" y="'+(bottom+7)+'" class="svg-label">0</text>';
+ for(var i=1;i<marks.length;i++){var yy=bottom-marks[i]/20*g.h,isTarget=target===i;out+='<path d="M477 '+yy+'h'+(isTarget?78:50)+'" stroke="'+(isTarget?'#c27629':'#497978')+'" stroke-width="'+(isTarget?4:2)+'"/><text x="'+(isTarget?568:543)+'" y="'+(yy+7)+'" font-size="22" fill="'+(isTarget?'#9f5c16':'#416a6e')+'" font-weight="'+(isTarget?'750':'550')+'">'+i+'</text>';if(isTarget)out+='<path d="M238 '+yy+'H472" stroke="#c27629" stroke-width="2" stroke-dasharray="7 5"/>';}
+ if(pending){out+='<g class="tap-mark" role="button" tabindex="0" aria-label="在当前液面标记第'+cal.marks.length+'分钟" data-mark-current="1"><rect class="mark-target" x="464" y="'+(waterY-21)+'" width="156" height="43" rx="8" fill="#edf9f5" stroke="#0b9399" stroke-width="2"/><path d="M241 '+waterY+'H525" stroke="#0b9399" stroke-width="2" stroke-dasharray="6 5"/><path d="M532 '+(waterY+7)+'l5-13 9 8-14 5M537 '+(waterY-6)+'l9-11 8 7-8 12" fill="#0b9399" stroke="#0b9399" stroke-width="2"/><text x="577" y="'+(waterY+7)+'" text-anchor="middle" font-size="20" fill="#087f87">'+cal.marks.length+'分</text></g>';}
+ out+='<text x="343" y="518" text-anchor="middle" font-size="25" fill="#087f87" font-weight="700">'+s.volume.toFixed(0)+' mL</text>';return out;
+}
+function chartSVG(){var a=compare.minuteA,b=compare.minuteB,shown=Math.floor(compare.a.time/60),w=320,h=290,left=35,bottom=248,top=24,scale=(bottom-top)/42,out='<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="横轴为第几分钟，纵轴为该分钟接水毫升数">';[0,20,40].forEach(function(v){var y=bottom-v*scale;out+='<path d="M'+left+' '+y+'H312" stroke="#e5edeb" stroke-width="1"/><text x="28" y="'+(y+5)+'" text-anchor="end" fill="#6e8688" font-size="15">'+v+'</text>';});out+='<text x="12" y="14" fill="#6e8688" font-size="15">mL</text>';for(var i=1;i<=10;i++){var x=left+6+(i-1)*27;if(i<=shown){var va=a[i]-a[i-1],vb=b[i]-b[i-1];out+='<rect x="'+x+'" y="'+(bottom-va*scale)+'" width="9" height="'+(va*scale)+'" rx="2" fill="#ce8a3d"/><rect x="'+(x+10)+'" y="'+(bottom-vb*scale)+'" width="9" height="'+(vb*scale)+'" rx="2" fill="#0b9399"/>';}else out+='<path d="M'+x+' '+bottom+'h19" stroke="#cbdcda" stroke-width="2"/>';out+='<text x="'+(x+9)+'" y="269" text-anchor="middle" fill="#5e7a7d" font-size="15">'+i+'</text>';}out+='<text x="310" y="288" text-anchor="end" fill="#6e8688" font-size="14">第几分钟</text></svg>';return out;}
+window.WaterClockRenderers={apparatus:rigSVG,collector:bigCupSVG,minuteChart:chartSVG};
+function advanceCompare(dt){var end=Math.min(600,compare.a.time+dt);while(compare.a.time<end-1e-8){var now=compare.a.time,nextEvent=Infinity;for(var e=0;e<compare.events.length;e++){if(compare.events[e].t<=now+1e-7)compare.b.config.feedFactor=compare.events[e].feed;else{nextEvent=compare.events[e].t;break;}}var nextMinute=(Math.floor((now+1e-7)/60)+1)*60,step=Math.min(end-now,nextMinute-now,nextEvent-now);M.step(compare.a,step);M.step(compare.b,step);if(Math.abs(compare.a.time-nextMinute)<1e-6){var idx=Math.round(nextMinute/60);compare.minuteA[idx]=compare.a.volume;compare.minuteB[idx]=compare.b.volume;}}for(var j=0;j<compare.events.length;j++){if(compare.events[j].t<=compare.a.time+1e-7)compare.b.config.feedFactor=compare.events[j].feed;}M.step(compare.b,0);}
+function replayCompare(t){compare.running=false;compare.a=M.create({kind:'ordinary'});compare.b=M.create({kind:'steady'});compare.minuteA=[0];compare.minuteB=[0];advanceCompare(t);$('feed-range').value=Math.round(compare.b.config.feedFactor*100);drawCompare();}
+function drawCompare(){$('ordinary-svg').innerHTML=rigSVG(compare.a,'a',{running:compare.running});$('steady-svg').innerHTML=rigSVG(compare.b,'b',{running:compare.running});$('ordinary-volume').textContent=Math.round(compare.a.volume)+' mL';$('steady-volume').textContent=Math.round(compare.b.volume)+' mL';$('minute-chart').innerHTML=chartSVG();$('compare-clock').textContent=fmt(compare.a.time);$('compare-time').value=compare.a.time;$('feed-value').textContent=Math.round(compare.b.config.feedFactor*100)+'%';$('feed-range').value=Math.round(compare.b.config.feedFactor*100);$('compare-play').textContent=compare.running?'暂停':compare.a.time>=600?'再看一次':compare.a.time>0?'继续对照':'开始对照';$('compare-next').disabled=compare.a.time>=600;var t=compare.a.time;if(compare.b.shortage)$('compare-status').innerHTML='<strong class="orange">侧管不再持续溢水</strong><br>现在的水位和出水量怎样变化？';else if(t>0)$('compare-status').innerHTML='<strong class="teal">水流有两条去路</strong><br>找一找：哪些水用于计时？';else $('compare-status').textContent='调低供水，观察侧管和水位。';var n=Math.floor(t/60);$('compare-hint').textContent=n>0?'第'+n+'分钟收集：普通 '+(compare.minuteA[n]-compare.minuteA[n-1]).toFixed(1)+' mL，稳水 '+(compare.minuteB[n]-compare.minuteB[n-1]).toFixed(1)+' mL。':'剖面放大：追踪进水、出水和溢水三条路径。';}
+function actualMarks(){if(cal.scale==='equal'&&cal.marks.length===11){var a=[];for(var i=0;i<=10;i++)a.push(cal.marks[10]*i/10);return a;}return cal.marks.slice();}
+function clearModelRows(){test.rows=[];test.last=null;test.state=null;test.running=false;test.paused=false;renderRows();}
+function resetCal(){cal.state=M.create({kind:cal.kind,shape:cal.shape});cal.marks=[0];cal.pending=false;cal.running=false;cal.auto=false;cal.scale='measured';clearModelRows();drawCal();updateTest();save();}
+function drawCal(){$('cal-svg').innerHTML=bigCupSVG(cal.state,'cal',actualMarks(),cal.pending&&!cal.auto,0);$('cal-clock').textContent=fmt(cal.state.time);$('cal-count').textContent=cal.marks.length-1;$('scale-name').textContent=cal.scale==='equal'?'0—10分高度十等分':'计时标定的刻度';$('cal-next').disabled=cal.pending||cal.marks.length===11||cal.auto;$('cal-next').textContent=cal.running&&!cal.auto?'暂停':cal.marks.length===11?'已完成10分钟':'走到第'+cal.marks.length+'分钟';$('cal-mark').disabled=!cal.pending||cal.auto;$('cal-mark').textContent=cal.pending?'记下第'+cal.marks.length+'分钟':'画下这条刻度';$('cal-auto').disabled=cal.marks.length===11;$('cal-auto').textContent=cal.auto?'暂停快速标定':'快速标完10分钟';$('scale-equal').disabled=cal.marks.length!==11;$('to-test').disabled=cal.marks.length<2;$('scale-measured').setAttribute('aria-pressed',cal.scale==='measured'?'true':'false');$('scale-equal').setAttribute('aria-pressed',cal.scale==='equal'?'true':'false');all('[data-kind]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.kind===cal.kind?'true':'false');b.disabled=cal.running;});all('[data-shape]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.shape===cal.shape?'true':'false');b.disabled=cal.running;});$('cal-status').textContent=cal.auto?'按一分钟一条，快速记录模型液面。':cal.pending?'已停在整分钟。点液面旁的笔尖，留下刻度。':cal.marks.length===11?'完成了。试试十等分，再去检验中间刻度。':cal.running?'观察液面上升；到整分钟会自动暂停。':'先走一分钟，再在液面处画一条线。';$('cal-hint').textContent=cal.scale==='equal'?'这把尺把0分到10分之间的高度平均分成10份。':'点液面旁的笔尖也能标刻度。可先标2—3分钟，再快速完成。';}
+function markCurrent(){if(!cal.pending||cal.marks.length>=11)return;cal.marks.push(cal.state.receiverHeight);cal.pending=false;clearModelRows();drawCal();updateTest();save();}
+function advanceCal(dt){while(dt>1e-8&&cal.running){var target=cal.marks.length*60,step=Math.min(dt,Math.max(0,target-cal.state.time));if(step>0){M.step(cal.state,step);dt-=step;}if(cal.state.time>=target-1e-7){cal.pending=true;if(cal.auto){cal.marks.push(cal.state.receiverHeight);cal.pending=false;if(cal.marks.length>=11){cal.auto=false;cal.running=false;save();}}else{cal.running=false;save();}}else break;}}
+function labelKind(){return cal.kind==='steady'?'稳水装置':'普通漏水瓶';}
+function labelShape(){return cal.shape==='taper'?'上宽下窄杯':'直筒杯';}
+var conditions={same:'保持原样',feed:'供水不足（30%）',hole:'底孔直径增大8%',head:'起始水位降低20%'};
+function updateTest(){var max=cal.marks.length-1,prev=Number($('test-target').value)||2,opts='';for(var i=1;i<=max;i++)opts+='<option value="'+i+'">'+i+'分钟</option>';$('test-target').innerHTML=opts;if(max)$('test-target').value=Math.min(max,prev);$('test-empty').hidden=max>0;$('test-run').disabled=max===0||test.running||test.paused||test.rows.length>=3;$('test-stop').disabled=!test.state||!test.running&&!test.paused;$('test-stop').textContent=test.paused?'继续':'暂停';$('test-scale-label').textContent=cal.scale==='equal'?'十等分时间尺':'计时标定的时间尺';$('test-design-label').textContent=labelKind()+' · '+labelShape();var feedOption=$('test-condition').querySelector('option[value="feed"]');feedOption.disabled=cal.kind==='ordinary';if(cal.kind==='ordinary'&&$('test-condition').value==='feed')$('test-condition').value='same';$('test-target').disabled=test.running||test.paused;$('test-condition').disabled=test.running||test.paused;drawTest();renderRows();}
+function drawTest(){var s=test.state||M.create({kind:cal.kind,shape:cal.shape}),target=test.state?test.target/60:Number($('test-target').value)||0;$('test-svg').innerHTML=bigCupSVG(s,'test',actualMarks(),false,target);if(test.running||test.paused){$('test-clock').textContent='暂不揭晓';$('test-error').textContent=test.paused?'已暂停':'计时中';$('test-error').className='result-error';}else if(test.last){$('test-clock').textContent=test.last.actual===null?'20分仍未到':fmt(test.last.actual,true);$('test-error').textContent=test.last.actual===null?'未到刻度':signed(test.last.error);$('test-error').className='result-error'+(test.last.actual===null||Math.abs(test.last.error)>10?' bad':'');}else{$('test-clock').textContent='等待试测';$('test-error').textContent='—';$('test-error').className='result-error';}}
+function startTest(){if(test.rows.length>=3){toast('本组已有三次记录，可先导出或清空本组。');return;}if(cal.marks.length<2)return;test.condition=$('test-condition').value;test.target=Number($('test-target').value)*60;var mark=actualMarks()[test.target/60];if(!(mark>0))return;test.targetVolume=M.volumeForHeight(mark,cal.shape);test.state=M.create({kind:cal.kind,shape:cal.shape,head:test.condition==='head'?9.6:12,feedFactor:test.condition==='feed'?0.3:1,aperture:test.condition==='hole'?1.08:1});if(cal.kind==='steady'&&test.condition==='head')test.state.targetHead=12;test.running=true;test.paused=false;test.last=null;lastStamp=0;$('test-status').textContent='新的一次运行：到达'+test.target/60+'分刻度时自动停止。';updateTest();}
+function finishTest(reached){test.running=false;test.paused=false;var actual=reached?test.state.time:null,row={target:test.target,actual:actual,error:actual===null?null:test.target-actual,condition:test.condition,kind:cal.kind,shape:cal.shape,scale:cal.scale};test.rows.push(row);test.last=row;$('test-status').textContent=!reached?'保留未到刻度的结果，检查水量与供水。':test.condition==='same'?'同条件下的模型复现；实物精度请另测。':'条件改变后，原来的时间尺还能继续使用吗？';$('test-hint').textContent=test.rows.length===3?'三次结果已保留。先导出记录，再重新标定或清空本组。':'只改一个条件，比较同一条刻度的计时结果。';save();updateTest();}
+function advanceTest(dt){var prev=M.clone(test.state),end=Math.min(1200,test.state.time+dt);M.step(test.state,end-test.state.time);if(test.state.volume>=test.targetVolume){var lo=0,hi=end-prev.time;for(var k=0;k<24;k++){var mid=(lo+hi)/2,q=M.clone(prev);M.step(q,mid);if(q.volume>=test.targetVolume)hi=mid;else lo=mid;}test.state=M.clone(prev);M.step(test.state,hi);finishTest(true);}else if(test.state.time>=1200)finishTest(false);}
+function renderRows(){var html='';for(var i=0;i<3;i++){var r=test.rows[i];html+='<tr><td>'+(i+1)+(r?'<span class="result-condition">'+({same:'原样',feed:'供水30%',hole:'孔径+8%',head:'水位−20%'}[r.condition])+'</span>':'')+'</td><td>'+(r?fmt(r.target):'—')+'</td><td>'+(r?(r.actual===null?'未到':fmt(r.actual,true)):'—')+'</td><td class="'+(r?(r.actual===null||Math.abs(r.error)>10?'bad':'pass'):'')+'">'+(r?(r.actual===null?'—':signed(r.error)):'—')+'</td></tr>';}$('model-results').innerHTML=html;}
+function renderReal(){var out='';real.forEach(function(r,i){out+='<tr><td>'+(i+1)+'</td><td><input id="r'+i+'wm" data-r="'+i+'" data-field="wm" type="number" inputmode="decimal" min="0" max="99" step="1" value="'+escapeHTML(r.wm)+'" aria-label="第'+(i+1)+'次水钟分钟"><span class="units">分</span><input id="r'+i+'ws" data-r="'+i+'" data-field="ws" type="number" inputmode="decimal" min="0" max="59.9" step="0.1" value="'+escapeHTML(r.ws)+'" aria-label="第'+(i+1)+'次水钟秒"><span class="units">秒</span></td><td><input id="r'+i+'am" data-r="'+i+'" data-field="am" type="number" inputmode="decimal" min="0" max="99" step="1" value="'+escapeHTML(r.am)+'" placeholder="分" aria-label="第'+(i+1)+'次秒表分钟"><span class="units">分</span><input id="r'+i+'as" data-r="'+i+'" data-field="as" type="number" inputmode="decimal" min="0" max="59.9" step="0.1" value="'+escapeHTML(r.as)+'" placeholder="秒" aria-label="第'+(i+1)+'次秒表秒"><span class="units">秒</span></td><td id="real-error-'+i+'">—</td></tr>';});$('real-rows').innerHTML=out;validateReal();}
+function parseReal(r){var fields=['wm','ws','am','as'];if(fields.some(function(k){return r[k].trim()==='';}))return {empty:true};var v=fields.map(function(k){return Number(r[k]);});if(v.some(function(n){return !isFinite(n)||n<0;})||v[0]>99||v[2]>99||v[0]%1||v[2]%1||v[1]>=60||v[3]>=60)return {invalid:true};var water=v[0]*60+v[1],actual=v[2]*60+v[3];if(water<=0||actual<=0)return {invalid:true};return {target:water,actual:actual,error:water-actual};}
+function validateReal(){var count=0,invalid=false;real.forEach(function(r,i){var q=parseReal(r),el=$('real-error-'+i);el.textContent=q.empty?'—':q.invalid?'检查输入':signed(q.error);el.style.color=q.invalid?'#b34c38':q.empty?'#587378':Math.abs(q.error)<=10?'#087f87':'#b34c38';if(q.invalid)invalid=true;if(!q.empty&&!q.invalid)count++;});$('record-status').textContent=invalid?'分钟须为0—99的整数，秒数须小于60，总时间须大于0。':count?count+'组真实记录已填写。'+(storageAvailable?'已保存在当前浏览器。':'浏览器未允许保存，请及时导出。'):'实物数据初始为空，由师生测量后填写。';return {count:count,invalid:invalid};}
+function downloadCSV(name,rows){var csv='\ufeff'+rows.map(function(row){return row.map(function(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n'),blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);toast('已生成CSV文件，请查看浏览器下载。');return csv;}
+function exportModel(){if(!test.rows.length){toast('请先完成一次模型试测。');return;}var rows=[['数据来源','结构','接水杯','刻度方式','试次','水钟示值(秒)','独立模型时间(秒)','误差(秒)','试测条件','10秒目标','说明']];test.rows.forEach(function(r,i){rows.push(['模型试测',r.kind==='steady'?'稳水装置':'普通漏水瓶',r.shape==='taper'?'上宽下窄杯':'直筒杯',r.scale==='equal'?'高度十等分':'按分钟标定',i+1,r.target,r.actual===null?'1200秒仍未到刻度':r.actual.toFixed(1),r.error===null?'':r.error.toFixed(1),conditions[r.condition],r.actual===null?'未到刻度':Math.abs(r.error)<=10?'达到':'未达到','简化模型，非真实测量；同条件复现不能证明实物精度']);});return downloadCSV('做个水钟_模型试测.csv',rows);}
+function exportReal(){var v=validateReal();if(v.invalid){toast('先修正标红的实物数据。');return;}if(!v.count){toast('请先填写至少一组完整的实物测量。');return;}var rows=[['数据来源','试次','水钟示值(秒)','秒表实际时间(秒)','误差(秒)','10秒目标']];real.forEach(function(r,i){var q=parseReal(r);if(!q.empty&&!q.invalid)rows.push(['实物测量',i+1,q.target.toFixed(1),q.actual.toFixed(1),q.error.toFixed(1),Math.abs(q.error)<=10?'达到':'未达到']);});return downloadCSV('做个水钟_实物测量.csv',rows);}
+function pauseAll(){compare.running=false;cal.running=false;cal.auto=false;if(test.running){test.running=false;test.paused=true;}lastStamp=0;}
+function changePage(n){pauseAll();page=n;all('[data-page]').forEach(function(b){b.setAttribute('aria-selected',Number(b.dataset.page)===n?'true':'false');});for(var i=1;i<=3;i++){$('page'+i).hidden=i!==n;$('page'+i).classList.toggle('active',i===n);}if(n===1)drawCompare();if(n===2)drawCal();if(n===3)updateTest();}
+function openModal(id){pauseAll();if(page===1)drawCompare();if(page===2)drawCal();if(page===3)updateTest();modalReturn=document.activeElement;$(id).hidden=false;if(id==='record-overlay')renderReal();$(id).querySelector('button').focus();}
+function closeModal(id){$(id).hidden=true;if(modalReturn&&modalReturn.focus)modalReturn.focus();}
+all('[data-page]').forEach(function(b){b.addEventListener('click',function(){changePage(Number(b.dataset.page));});});
+$('compare-play').addEventListener('click',function(){if(compare.a.time>=600)replayCompare(0);compare.running=!compare.running;compare.limit=600;lastStamp=0;drawCompare();});
+$('compare-next').addEventListener('click',function(){compare.limit=Math.min(600,(Math.floor((compare.a.time+1e-7)/60)+1)*60);compare.running=true;lastStamp=0;drawCompare();});
+$('compare-reset').addEventListener('click',function(){compare.events=[{t:0,feed:1}];replayCompare(0);});
+$('compare-speed').addEventListener('change',function(){compare.speed=Number(this.value);});
+$('compare-time').addEventListener('input',function(){replayCompare(Number(this.value));});
+$('feed-range').addEventListener('input',function(){var t=compare.a.time,f=Number(this.value)/100;compare.events=compare.events.filter(function(e){return e.t<t-1e-6;});compare.events.push({t:t,feed:f});compare.b.config.feedFactor=f;M.step(compare.b,0);drawCompare();});
+all('[data-kind]').forEach(function(b){b.addEventListener('click',function(){if(cal.kind!==b.dataset.kind){cal.kind=b.dataset.kind;resetCal();toast('供水结构已改变，请重新标定。');}});});
+all('[data-shape]').forEach(function(b){b.addEventListener('click',function(){if(cal.shape!==b.dataset.shape){cal.shape=b.dataset.shape;resetCal();toast('接水杯已改变，请重新标定。');}});});
+$('cal-next').addEventListener('click',function(){if(cal.pending||cal.marks.length>=11)return;cal.auto=false;cal.running=!cal.running;lastStamp=0;drawCal();});
+$('cal-mark').addEventListener('click',markCurrent);
+$('cal-svg').addEventListener('click',function(e){var target=e.target;while(target&&target!==this){if(target.getAttribute('data-mark-current')){markCurrent();return;}target=target.parentNode;}});
+$('cal-svg').addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.getAttribute('data-mark-current')){e.preventDefault();markCurrent();}});
+$('cal-auto').addEventListener('click',function(){if(cal.auto){cal.auto=false;cal.running=false;drawCal();save();return;}if(cal.pending)markCurrent();if(cal.marks.length>=11){cal.auto=false;cal.running=false;drawCal();save();return;}clearModelRows();cal.auto=true;cal.running=true;lastStamp=0;drawCal();});
+$('cal-reset').addEventListener('click',resetCal);
+function setScale(mode){if(mode==='equal'&&cal.marks.length!==11)return;if(cal.scale!==mode){cal.scale=mode;clearModelRows();drawCal();updateTest();save();toast('已换时间尺，请用新的一组试测检验。');}}
+$('scale-measured').addEventListener('click',function(){setScale('measured');});$('scale-equal').addEventListener('click',function(){setScale('equal');});
+$('to-test').addEventListener('click',function(){changePage(3);});$('back-cal').addEventListener('click',function(){changePage(2);});
+$('test-target').addEventListener('change',function(){if(!test.running&&!test.paused){test.state=null;test.last=null;drawTest();}});
+$('test-condition').addEventListener('change',function(){if(!test.running&&!test.paused){test.state=null;test.last=null;drawTest();}});
+$('test-run').addEventListener('click',startTest);
+$('test-stop').addEventListener('click',function(){if(test.running){test.running=false;test.paused=true;}else if(test.paused){test.running=true;test.paused=false;lastStamp=0;}updateTest();});
+$('clear-tests').addEventListener('click',function(){clearModelRows();$('test-status').textContent='沿用自己的刻度，重新装水后独立运行。';$('test-hint').textContent='只改一个条件，比较同一条刻度的计时结果。';updateTest();save();});
+$('open-record').addEventListener('click',function(){openModal('record-overlay');});$('info').addEventListener('click',function(){openModal('info-overlay');});
+all('[data-close]').forEach(function(b){b.addEventListener('click',function(){closeModal(b.dataset.close);});});
+all('.overlay').forEach(function(o){o.addEventListener('click',function(e){if(e.target===o)closeModal(o.id);});});
+$('real-rows').addEventListener('input',function(e){var el=e.target;if(!el.dataset.field)return;real[Number(el.dataset.r)][el.dataset.field]=el.value;save();validateReal();});
+$('clear-real').addEventListener('click',function(){real=[{wm:'2',ws:'0',am:'',as:''},{wm:'5',ws:'0',am:'',as:''},{wm:'10',ws:'0',am:'',as:''}];save();renderReal();});
+$('export-model').addEventListener('click',exportModel);$('export-real').addEventListener('click',exportReal);
+document.addEventListener('keydown',function(e){var open=all('.overlay').filter(function(o){return !o.hidden;})[0];if(open){if(e.key==='Escape'){closeModal(open.id);return;}if(e.key==='Tab'){var list=Array.prototype.slice.call(open.querySelectorAll('button:not(:disabled),input:not(:disabled),a[href]')),first=list[0],last=list[list.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}return;}if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;if((e.key==='ArrowRight'||e.key==='ArrowLeft')&&e.target.getAttribute('role')==='tab'){e.preventDefault();var n=clamp(page+(e.key==='ArrowRight'?1:-1),1,3);changePage(n);$('nav'+n).focus();}});
+$('fullscreen').addEventListener('click',function(){var el=document.documentElement,active=document.fullscreenElement||document.webkitFullscreenElement,fn=active?(document.exitFullscreen||document.webkitExitFullscreen):(el.requestFullscreen||el.webkitRequestFullscreen);if(!fn){toast('可使用浏览器全屏或横屏查看。');return;}try{var p=fn.call(active?document:el);if(p&&p.catch)p.catch(function(){toast('请使用浏览器全屏或横屏查看。');});}catch(e){toast('可使用浏览器全屏或横屏查看。');}});
+function fullLabel(){$('fullscreen').textContent=document.fullscreenElement||document.webkitFullscreenElement?'退出全屏':'全屏';}document.addEventListener('fullscreenchange',fullLabel);document.addEventListener('webkitfullscreenchange',fullLabel);
+document.addEventListener('visibilitychange',function(){if(document.hidden){pauseAll();if(page===1)drawCompare();if(page===2)drawCal();if(page===3)updateTest();save();}});
+function frame(stamp){var dt=lastStamp?Math.min(.12,(stamp-lastStamp)/1000):0;lastStamp=stamp;var dirty=false;if(page===1&&compare.running){advanceCompare(Math.min(dt*compare.speed,compare.limit-compare.a.time));if(compare.a.time>=compare.limit-1e-7)compare.running=false;dirty=true;}if(page===2&&cal.running){advanceCal(dt*60);dirty=true;}if(page===3&&test.running){advanceTest(dt*60);dirty=true;}if(dirty&&(stamp-lastPaint>50||!compare.running&&!cal.running&&!test.running)){if(page===1)drawCompare();if(page===2)drawCal();if(page===3)drawTest();lastPaint=stamp;}requestAnimationFrame(frame);}
+// Pure model and renderer are replacement interfaces. This debug snapshot is read-only.
+window.WaterClockLesson={snapshot:function(){return {page:page,compare:{time:compare.a.time,ordinary:M.clone(compare.a),steady:M.clone(compare.b),events:JSON.parse(JSON.stringify(compare.events))},cal:{kind:cal.kind,shape:cal.shape,time:cal.state.time,marks:cal.marks.slice(),scale:cal.scale,pending:cal.pending},test:{running:test.running,rows:JSON.parse(JSON.stringify(test.rows))},real:JSON.parse(JSON.stringify(real))};},parseReal:parseReal};
+restore();drawCompare();drawCal();updateTest();renderReal();changePage(1);requestAnimationFrame(frame);
+}());
+</script>
+</body>
+</html>
