@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="light">
+<title>观察水中的微小生物 · 水滴观察室</title>
+<meta name="description" content="五上第一单元第6课：比较微小生物与碎屑的运动，导入真实显微影像，留帧、描画和叠影记录。单文件离线课堂工具。">
+<style>
+:root{--ink:#123b48;--teal:#087f87;--teal-dark:#08626b;--coral:#ec9878;--paper:#f4f7f5;--line:#cadbdc;--muted:#526f77;--soft:#dcedee;--radius:12px;--font:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",Arial,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:var(--font);color:var(--ink);background:var(--paper)}body{overflow:hidden}button,input,select{font:inherit}button{cursor:pointer;color:var(--ink);font-size:18px;font-weight:600;line-height:1.2;min-height:44px;padding:10px 15px;background:#fff;border:1px solid var(--line);border-radius:9px;touch-action:manipulation}button:hover{border-color:var(--teal);background:#eaf4f3}button:active{transform:translateY(1px)}button:disabled{opacity:.42;cursor:default;transform:none}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #eea678;outline-offset:3px}.primary,button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:white}.primary:hover,button[aria-pressed="true"]:hover{background:var(--teal-dark);color:white}[hidden]{display:none!important}.app-header{height:80px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 22px}.app-header h1{font-size:clamp(23px,2.2vw,34px);line-height:1.2;margin:0;font-weight:800;letter-spacing:-.7px;white-space:nowrap}.tabs{display:flex;gap:12px}.tabs button{min-width:142px;min-height:50px;font-size:22px;border-color:var(--teal)}.utilities{display:flex;gap:8px}.utilities button{font-size:17px;padding:9px 12px;min-width:48px}.utilities svg{width:19px;height:19px;vertical-align:-3px;margin-right:6px}.question{height:43px;margin:0 18px 12px;padding:8px 19px;background:#deeeee;border-radius:10px;font-size:21px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:20px}.question span:last-child{font-size:16px;font-weight:400;color:#47686d}main{height:calc(100vh - 163px);height:calc(100dvh - 163px);margin:0 18px}.model-workspace{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 328px;gap:14px}.observation{height:100%;min-width:0;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) 60px;gap:10px}.stage{min-height:0;position:relative;overflow:hidden;border-radius:13px;background:#123b48}.stage canvas{display:block;width:100%;height:100%;touch-action:none}.stage-top{position:absolute;left:19px;top:14px;color:#c9e4e6;font-size:16px;line-height:1.5;pointer-events:none}.stage-top small{display:block;font-size:13px;color:#96c0c6}.scene-tools{position:absolute;right:13px;top:13px;display:flex;gap:6px}.scene-tools button{background:rgba(12,48,59,.7);border-color:#507b86;color:#ddf3f5;min-height:36px;font-size:15px;padding:7px 10px}.scene-tools button[aria-pressed=true]{background:#e3f4ef;color:#123b48}.stage-bottom{position:absolute;bottom:12px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;color:#afd4da;font-size:15px;pointer-events:none}.stage-bottom #modelTime{color:#e9f7f8;font-variant-numeric:tabular-nums}.toolbar{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:11px;background:#fff;padding:5px}.toolbar button{flex:1;border:0;border-radius:7px;white-space:nowrap;padding:8px 12px;font-size:19px;background:transparent}.toolbar button[aria-pressed=true]{background:var(--soft);color:var(--teal-dark)}.toolbar button.primary{background:var(--teal);color:white}.toolbar svg{width:21px;height:21px;vertical-align:-4px;margin-right:7px}.rail{display:flex;flex-direction:column;min-width:0;min-height:0;padding:15px 16px;background:#fff;border:1px solid #d1dfe1;border-radius:13px;gap:10px}.rail-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}.rail h2{margin:0;font-size:25px;line-height:1.25}.rail-heading small{font-size:14px;color:var(--muted)}.detail-stage{position:relative;min-height:115px;flex:1;max-height:210px;background:linear-gradient(140deg,#d9eef1,#c0e0e7);border-radius:10px;overflow:hidden}.detail-stage canvas{display:block;width:100%;height:100%}.detail-caption{position:absolute;bottom:7px;left:0;right:0;text-align:center;font-size:14px;color:#426f78}.object-picks{display:flex;gap:7px}.object-picks button{flex:1;min-height:40px;font-size:19px;padding:7px;position:relative}.object-picks .pick-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#7cbbc5;margin-right:6px}.object-picks button[data-object=B] .pick-dot{background:#d9aa71}.object-picks button[data-object=C] .pick-dot{background:#75ad62}.object-picks button[data-object=D] .pick-dot{background:#b9a58a}.selected-label{font-size:19px;text-align:center;margin:0;min-height:24px;font-weight:700}.detail-actions{display:flex;gap:8px}.detail-actions button{flex:1;font-size:17px;padding:9px 5px;min-height:42px;border-color:#75a1aa}.detail-description{min-height:41px;margin:0;font-size:15px;line-height:1.45;color:var(--muted)}.water-control{border-top:1px solid var(--line);padding-top:9px}.water-label{display:flex;align-items:center;justify-content:space-between;font-size:20px;font-weight:700;margin-bottom:5px}.water-label output{font-size:15px;color:var(--teal);font-weight:600}.water-range{display:flex;align-items:center;gap:9px}.water-range span{font-size:15px;white-space:nowrap}input[type=range]{appearance:none;-webkit-appearance:none;width:100%;height:25px;background:transparent;cursor:pointer;touch-action:none}input[type=range]::-webkit-slider-runnable-track{height:6px;background:#c3d8da;border-radius:5px}input[type=range]::-moz-range-track{height:6px;background:#c3d8da;border-radius:5px}input[type=range]::-webkit-slider-thumb{appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--teal);margin-top:-9px}input[type=range]::-moz-range-thumb{width:19px;height:19px;border-radius:50%;background:#fff;border:3px solid var(--teal)}.flow-reset{display:block;margin:0 auto;border:0;background:transparent;color:var(--muted);font-size:14px;min-height:24px;padding:2px 10px}.thinking{background:#fff0e8;color:#9a4e32;font-size:17px;line-height:1.45;text-align:center;padding:8px 7px;border-radius:9px;margin:0}.goto-records{width:100%;font-size:20px;min-height:44px}.footline{height:28px;display:flex;align-items:center;justify-content:flex-end;padding:0 21px;font-size:14px;color:#47737d}.footline span{font-weight:800;font-size:17px}.compare-panel{position:absolute;inset:auto 12px 43px 12px;height:44%;min-height:190px;max-height:255px;background:rgba(246,252,250,.97);border-radius:10px;box-shadow:0 10px 25px #062e4855;display:grid;grid-template-rows:31px 1fr 23px;padding:9px 12px 5px}.compare-heading{display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:700;gap:8px}.compare-heading button{font-size:15px;min-height:28px;padding:4px 8px;background:transparent;border:0}.compare-panel canvas{width:100%;height:100%;min-height:0}.compare-note{font-size:13px;text-align:center;color:#4f6c74;line-height:1.5}.toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);z-index:120;background:#103b48;color:#fff;border:1px solid #82bac0;border-radius:10px;padding:13px 22px;max-width:min(720px,90vw);box-shadow:0 4px 25px #0c2e4a22;font-size:18px;line-height:1.5;pointer-events:none}.modal-backdrop{position:fixed;inset:0;z-index:90;background:#0e2b3c75;display:flex;align-items:center;justify-content:center;padding:24px}.modal{width:min(720px,96vw);max-height:85vh;overflow:auto;background:var(--paper);border-radius:14px;padding:24px 27px;box-shadow:0 20px 80px #061e4a55}.modal-title{display:flex;align-items:center;justify-content:space-between;gap:20px}.modal h2{font-size:25px;margin:0 0 15px}.modal p,.modal li{font-size:17px;line-height:1.75}.modal h3{font-size:20px;margin:20px 0 8px}.modal ul{padding-left:23px}.modal a{color:#087b84;text-decoration-thickness:1px;text-underline-offset:3px}.modal-title button{flex-shrink:0}.noscript{padding:30px;font-size:23px}
+@media(min-width:1550px){.app-header{height:89px}.question{height:48px;font-size:24px}main{height:calc(100dvh - 178px)}.model-workspace{grid-template-columns:minmax(0,1fr) 370px}.rail{padding:19px;gap:12px}.rail h2{font-size:29px}.detail-stage{max-height:280px}.detail-description{font-size:17px}.object-picks button{min-height:46px}.toolbar button{font-size:22px}.selected-label{font-size:21px}.thinking{font-size:19px}.detail-actions button{font-size:19px}}
+@media(max-width:1150px){.app-header{padding:10px 16px;gap:10px;height:70px}.app-header h1{font-size:23px}.tabs{gap:6px}.tabs button{min-width:110px;font-size:19px;min-height:46px;padding:10px}.utilities{gap:5px}.utilities button{font-size:15px;min-height:42px;padding:8px}.utilities svg{margin-right:4px;width:16px;height:16px}.question{margin:0 12px 10px;font-size:20px}.question span:last-child{display:none}main{margin:0 12px;height:calc(100dvh - 151px)}.model-workspace{grid-template-columns:minmax(0,1fr) 288px;gap:10px}.rail{padding:12px;gap:8px}.rail h2{font-size:23px}.detail-stage{max-height:195px}.detail-description{font-size:14px;min-height:40px}.thinking{font-size:16px}.detail-actions button{font-size:16px}.toolbar button{padding:7px 8px;font-size:17px}.toolbar svg{margin-right:5px;width:18px;height:18px}.stage-top{font-size:14px}.stage-top small{font-size:12px}.stage-bottom{font-size:13px}.scene-tools{top:auto;bottom:36px;right:12px}.scene-tools button{font-size:13px}.compare-panel{bottom:72px;min-height:170px}.compare-note{font-size:12px}}
+@media(max-height:720px) and (min-width:851px){.app-header{height:64px}.question{height:36px;margin-bottom:8px;font-size:19px}main{height:calc(100dvh - 134px)}.rail{gap:6px;padding:10px 12px}.detail-stage{max-height:160px;min-height:88px}.rail h2{font-size:22px}.detail-description{font-size:13px;min-height:36px}.selected-label{font-size:17px}.thinking{font-size:15px;padding:5px}.water-label{font-size:18px}.object-picks button{min-height:35px}.detail-actions button{min-height:35px;padding:7px 4px}.goto-records{min-height:38px;font-size:18px}.observation{grid-template-rows:minmax(0,1fr) 53px}}
+@media(max-width:850px){body{overflow:auto}.app-header{height:auto;min-height:118px;flex-wrap:wrap;padding:13px 14px;gap:10px}.app-header h1{font-size:25px;flex:1;letter-spacing:-1px}.utilities{order:1}.utilities button{font-size:14px}.utilities .full-label{display:none}.tabs{order:2;flex-basis:100%;gap:10px}.tabs button{flex:1;min-height:43px}.question{font-size:18px;height:auto;min-height:40px;margin:0 12px 12px;padding:9px 12px}main{height:auto;margin:0 12px}.model-workspace{height:auto;display:flex;flex-direction:column}.observation{height:min(70vh,550px);min-height:380px;gap:8px;grid-template-rows:minmax(0,1fr) 58px}.rail{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;position:relative}.rail-heading{grid-column:1/-1}.detail-stage{height:160px;min-height:160px;grid-row:2/5;max-height:none}.object-picks{grid-column:2}.selected-label{grid-column:2}.detail-actions{grid-column:2}.detail-description{grid-column:1/-1;min-height:0}.water-control{grid-column:1/-1}.thinking,.goto-records{grid-column:1/-1}.footline{height:36px}.stage-top{font-size:13px;left:13px;top:12px}.stage-top small{font-size:11px}.scene-tools{bottom:35px}.stage-bottom{left:12px;right:12px;font-size:12px}.toolbar button{font-size:15px;padding:6px 4px}.toolbar svg{display:none}.compare-panel{inset:auto 8px 70px;height:48%;max-height:230px;min-height:175px}.compare-heading{font-size:14px}.compare-note{font-size:11px}}
+@media(max-width:450px){.app-header h1{font-size:21px;letter-spacing:-.7px}.app-header{padding:12px}.utilities button{min-width:33px;padding:7px;font-size:13px}.utilities svg{margin:0;width:16px;height:16px}.utilities .reset-label{display:none}.question{font-size:16px}.rail{column-gap:10px}.detail-stage{height:135px;min-height:135px}.object-picks{gap:4px}.object-picks button{font-size:16px;padding:6px;min-height:38px}.object-picks .pick-dot{display:none}.detail-actions{flex-direction:column;gap:5px}.detail-actions button{min-height:34px;font-size:14px;padding:6px}.selected-label{font-size:16px}.rail h2{font-size:21px}.detail-caption{font-size:11px}.observation{min-height:380px}.compare-heading span{max-width:76%;font-size:12px}.compare-note{font-size:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<noscript><div class="noscript">此观察工具需要启用 JavaScript。请使用支持 Canvas 的浏览器打开。</div></noscript>
+<header class="app-header"><h1>观察水中的微小生物</h1><nav class="tabs" aria-label="工作区"><button id="tabModel" aria-pressed="true">水滴观察</button><button id="tabEvidence" aria-pressed="false">留住证据</button></nav><div class="utilities"><button id="resetApp" title="恢复当前工作区的初始状态" aria-label="复位当前工作区"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/></svg><span class="reset-label">复位</span></button><button id="fullscreen" aria-label="切换全屏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg><span class="full-label">全屏</span></button><button id="openAbout" aria-label="查看模型说明和来源" title="模型说明与来源">?</button></div></header>
+<div class="question"><span id="taskQuestion">同样在动，运动方式一样吗？</span><span id="taskHint">点对象看细节，保留画面作比较</span></div>
+<main>
+<section id="modelPanel" class="model-workspace" aria-label="水滴模型观察">
+<div class="observation"><div class="stage"><canvas id="pondCanvas" aria-label="水滴中的四个观察对象，可点按选择并拖动视野" tabindex="0"></canvas><div class="stage-top">模型示意 · 非真实显微影像<small>为便于观察，形态分别放大；不用于大小、速度测量</small></div><div class="scene-tools"><button id="followObject" aria-pressed="false">跟随 A</button><button id="zoomView" aria-label="画面放大，不改变物体">画面 1×</button></div><div class="stage-bottom"><span id="viewHint">拖动空白移动视野</span><span id="modelTime">模型时刻 0.0 s</span></div><div class="compare-panel" id="comparePanel" hidden><div class="compare-heading"><span>同一段运动，两种比较方式</span><button id="closeCompare" aria-label="关闭轨迹对照">收起</button></div><canvas id="compareCanvas" aria-label="目标与参照碎屑的轨迹比较"></canvas><div class="compare-note">固定坐标，起点对齐 · 实线：目标　虚线：参照 · 最近12个模型秒</div></div></div>
+<div class="toolbar" aria-label="观察控制"><button id="playPause"><svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg><span>暂停</span></button><button id="slowMotion" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4v16l12-8zM20 5v14"/></svg><span>慢放</span></button><button id="showTrails" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 17C7 0 14 24 22 5"/></svg>运动轨迹</button><button id="captureModel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h4l2-3h6l2 3h4v14H3z"/><circle cx="12" cy="13" r="4"/></svg><span>保留画面</span></button></div></div>
+<aside class="rail" aria-label="对象细节与水流控制"><div class="rail-heading"><h2>跟踪观察</h2><small id="viewStatus">局部放大</small></div><div class="detail-stage"><canvas id="detailCanvas" aria-label="所选对象的局部放大"></canvas><div class="detail-caption" id="detailCaption">局部示意 · 不代表实际大小</div></div><div class="object-picks" aria-label="选择观察对象"><button data-object="A" aria-label="观察对象A" aria-pressed="true"><i class="pick-dot"></i>A</button><button data-object="B" aria-label="观察对象B" aria-pressed="false"><i class="pick-dot"></i>B</button><button data-object="C" aria-label="观察对象C" aria-pressed="false"><i class="pick-dot"></i>C</button><button data-object="D" aria-label="观察对象D" aria-pressed="false"><i class="pick-dot"></i>D</button></div><p class="selected-label" id="selectedLabel">观察对象 A</p><div class="detail-actions"><button id="showStructure" aria-pressed="false">结构提示</button><button id="showCompare" aria-pressed="false">与碎屑对照</button></div><p id="detailDescription" class="detail-description">留意轮廓、内部和运动。<br>先描述你的发现，再查看资料。</p><div class="water-control"><label class="water-label" for="waterFlow">水流<output id="flowLabel">向右 · 弱</output></label><div class="water-range"><span>向左</span><input id="waterFlow" type="range" min="-60" max="60" step="1" value="15" aria-label="调节水流方向和强度"><span>向右</span></div><button id="stillWater" class="flow-reset">点此让水流静止</button></div><p class="thinking" id="thinkingQuestion">只凭移动，能判断它是生物吗？</p><button class="primary goto-records" id="goEvidence">去记录真实影像</button></aside>
+</section>
+<section id="evidencePanel" class="ev-panel" hidden aria-label="留住证据">
+  <div class="ev-topbar">
+    <label class="ev-button ev-import" for="evFileInput">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m-4 4 4-4 4 4M4 15v5h16v-5"/></svg>
+      导入照片 / 视频
+    </label>
+    <input id="evFileInput" type="file" accept="image/*,video/*" hidden>
+    <div class="ev-fileline"><strong id="evSourceName">留住课堂里的真实发现</strong><span id="evSourceDetail">文件只在当前设备读取</span></div>
+    <button id="evExport" type="button" class="ev-button ev-primary" disabled>导出观察图</button>
+  </div>
+  <div class="ev-layout">
+    <div class="ev-workspace">
+      <div id="evStage" class="ev-stage">
+        <canvas id="evCanvas" aria-label="观察画面，选择标记工具后点击或拖动"></canvas>
+        <div id="evEmpty" class="ev-empty">
+          <svg class="ev-empty-art" viewBox="0 0 180 140" aria-hidden="true">
+            <circle cx="90" cy="68" r="59" fill="#e1eeea"/>
+            <rect x="37" y="29" width="106" height="78" rx="12" fill="#fff" stroke="#94b4ae" stroke-width="2"/>
+            <path d="M59 83c8-22 23-35 34-31 11 4 8 20-1 29-11 11-24 12-33 2Z" fill="#c6e7d5" stroke="#087f87" stroke-width="2"/>
+            <ellipse cx="78" cy="72" rx="6" ry="8" fill="#7eb6a4"/>
+            <circle cx="114" cy="51" r="4" fill="#f08d6c"/>
+            <circle cx="108" cy="85" r="7" fill="#d1b79e"/>
+            <path d="M122 34v-8m-4 4h8M33 100h-8m4-4v8" stroke="#7ea7a2" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="129" cy="104" r="23" fill="#087f87"/>
+            <path d="M129 115V95m-6 6 6-6 6 6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h2>把微小的发现留下来</h2>
+          <p>导入显微照片或视频，留住几个时刻。</p>
+          <div class="ev-empty-steps"><span>选时刻</span><i>→</i><span>点目标</span><i>→</i><span>叠影看</span></div>
+          <label class="ev-button ev-primary" for="evFileInput">选择课堂素材</label>
+          <small>也可在“水滴观察”中保留模型画面</small>
+        </div>
+        <div id="evViewTag" class="ev-view-tag" hidden></div>
+        <button id="evBackSource" type="button" class="ev-button ev-back-source" hidden>回到原片</button>
+        <div id="evCanvasHint" class="ev-canvas-hint" hidden></div>
+        <video id="evVideo" playsinline muted preload="metadata" hidden></video>
+      </div>
+      <div id="evMediaControls" class="ev-media-controls" hidden>
+        <div class="ev-timeline">
+          <input id="evSeek" type="range" min="0" max="1" value="0" step="0.01" aria-label="视频时间">
+          <span id="evTime">0.0 / 0.0 s</span>
+        </div>
+        <div class="ev-transport">
+          <button id="evStepBack" type="button" class="ev-button" title="向前回看0.2秒">−0.2 秒</button>
+          <button id="evPlay" type="button" class="ev-button ev-play">播放</button>
+          <button id="evStepNext" type="button" class="ev-button" title="向后查看0.2秒">+0.2 秒</button>
+          <label class="ev-rate-label">速度<select id="evRate" aria-label="视频播放速度"><option value="0.25">¼ 倍</option><option value="0.5">½ 倍</option><option value="1" selected>1 倍</option></select></label>
+        </div>
+      </div>
+      <div class="ev-markbar">
+        <div class="ev-tools" role="group" aria-label="观察标记工具">
+          <button id="evToolTarget" class="ev-button ev-tool" type="button" data-ev-tool="target" aria-pressed="true" disabled><span class="ev-dot"></span>目标</button>
+          <button id="evToolReference" class="ev-button ev-tool" type="button" data-ev-tool="reference" aria-pressed="false" disabled><span class="ev-diamond"></span>参照碎屑</button>
+          <button id="evToolOutline" class="ev-button ev-tool" type="button" data-ev-tool="outline" aria-pressed="false" disabled>描轮廓</button>
+        </div>
+        <button id="evCapture" class="ev-button ev-primary" type="button" disabled>留住这一刻</button>
+      </div>
+      <p id="evStatus" class="ev-status" role="status" aria-live="polite">先观察，再标记。记录用来支持你的解释。</p>
+    </div>
+    <aside class="ev-rail" aria-label="观察记录">
+      <div class="ev-rail-heading"><h2>同屏比较</h2><button id="evClearFrames" class="ev-button ev-quiet" type="button" disabled>清空记录</button></div>
+      <div id="evMomentStrip" class="ev-moments" aria-label="已保存的时刻"></div>
+      <button id="evCompare" class="ev-button ev-compare" type="button" aria-pressed="false" disabled>叠影比较</button>
+      <div id="evComparison" class="ev-comparison">
+        <p class="ev-compare-prompt">在两个时刻，标出<strong>同一个目标</strong>和<strong>同一个参照碎屑</strong>。</p>
+        <p class="ev-comparison-note">让画面中的变化变得可比较。</p>
+      </div>
+      <div class="ev-legend" aria-label="标记图例"><span><i class="ev-dot"></i>目标</span><span><i class="ev-diamond"></i>参照</span><span><i class="ev-dash"></i>相对位置连线</span></div>
+      <button id="evClearMarks" class="ev-button ev-clear-marks" type="button" disabled>清除此刻标记</button>
+      <p class="ev-caution">连线不代表完整运动路径。参照的选择会影响比较，不能只凭移动判断它是生物。</p>
+    </aside>
+  </div>
+</section>
+
+<style>
+#evidencePanel{--ev-ink:#123b48;--ev-muted:#5d777b;--ev-teal:#087f87;--ev-coral:#f08d6c;--ev-purple:#7761aa;--ev-border:#d5e2dd;--ev-paper:#f4f7f5;box-sizing:border-box;height:100%;min-height:0;display:flex;flex-direction:column;gap:12px;color:var(--ev-ink);font-family:inherit;font-size:18px}
+#evidencePanel[hidden],#evidencePanel [hidden]{display:none!important}
+#evidencePanel *{box-sizing:border-box}
+#evidencePanel button,#evidencePanel select,#evidencePanel input{font:inherit}
+#evidencePanel button,#evidencePanel label.ev-button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#evidencePanel .ev-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 14px;border:1px solid var(--ev-border);border-radius:10px;background:white;color:var(--ev-ink);font-size:18px;font-weight:600;line-height:1.15;text-align:center;white-space:nowrap;transition:background .15s,border-color .15s}
+#evidencePanel .ev-button:hover:not(:disabled){border-color:#74aaa5;background:#eff7f3}
+#evidencePanel .ev-button:focus-visible,#evidencePanel select:focus-visible,#evidencePanel input:focus-visible{outline:3px solid #efb47a;outline-offset:3px}
+#evidencePanel .ev-button:disabled{cursor:default;opacity:.42}
+#evidencePanel .ev-primary{background:var(--ev-teal);border-color:var(--ev-teal);color:white}
+#evidencePanel .ev-primary:hover:not(:disabled){background:#096c73;border-color:#096c73}
+#evidencePanel .ev-topbar{display:flex;align-items:center;gap:14px;min-height:44px;flex:none}
+#evidencePanel .ev-import{flex:none}
+#evidencePanel .ev-import svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#evidencePanel .ev-fileline{display:flex;flex-direction:column;justify-content:center;min-width:0;flex:1;gap:3px;line-height:1.15}
+#evidencePanel .ev-fileline strong{font-size:18px;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#evidencePanel .ev-fileline span{font-size:14px;color:var(--ev-muted);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#evidencePanel .ev-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;flex:1;min-height:0}
+#evidencePanel .ev-workspace{display:flex;flex-direction:column;min-width:0;min-height:0;gap:10px}
+#evidencePanel .ev-stage{position:relative;flex:1;min-height:190px;overflow:hidden;border:1px solid var(--ev-border);border-radius:12px;background:#e9efec}
+#evidencePanel #evCanvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+#evidencePanel .ev-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:24px;text-align:center;background:#f5f8f6;gap:9px}
+#evidencePanel .ev-empty-art{height:126px;width:162px;flex:none}
+#evidencePanel .ev-empty h2{margin:0;font-size:25px;line-height:1.3;letter-spacing:.02em}
+#evidencePanel .ev-empty p{margin:2px 0 0;color:var(--ev-muted);font-size:18px;line-height:1.5}
+#evidencePanel .ev-empty-steps{display:flex;align-items:center;gap:15px;margin:9px 0;font-size:18px;color:#46656b}
+#evidencePanel .ev-empty-steps i{font-style:normal;color:#8aa9a3}
+#evidencePanel .ev-empty small{margin-top:3px;font-size:14px;color:var(--ev-muted)}
+#evidencePanel .ev-view-tag{position:absolute;left:12px;top:12px;max-width:calc(100% - 148px);padding:7px 10px;border-radius:7px;background:rgba(255,255,255,.94);box-shadow:0 1px 8px #173b4820;color:var(--ev-ink);font-size:16px;line-height:1.3;pointer-events:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#evidencePanel .ev-back-source{position:absolute;top:10px;right:10px;min-height:38px;font-size:16px;padding:7px 12px;background:rgba(255,255,255,.95)}
+#evidencePanel .ev-canvas-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);max-width:calc(100% - 22px);background:rgba(18,59,72,.86);color:white;border-radius:7px;padding:6px 12px;white-space:nowrap;pointer-events:none;font-size:16px;line-height:1.4}
+#evidencePanel .ev-media-controls{display:flex;flex-direction:column;gap:5px;flex:none}
+#evidencePanel .ev-timeline{display:flex;align-items:center;gap:12px;min-height:25px}
+#evidencePanel .ev-timeline input{flex:1;min-width:0;accent-color:var(--ev-teal);height:22px;margin:0;cursor:pointer}
+#evidencePanel .ev-timeline span{font-size:15px;color:var(--ev-muted);font-variant-numeric:tabular-nums;min-width:104px;text-align:right;white-space:nowrap}
+#evidencePanel .ev-transport{display:flex;gap:8px;align-items:center;justify-content:center}
+#evidencePanel .ev-transport .ev-button{min-height:40px;padding:8px 14px}
+#evidencePanel .ev-play{min-width:84px;background:#e5f1ec;border-color:#b6d6cf}
+#evidencePanel .ev-rate-label{display:flex;align-items:center;gap:7px;font-size:16px;color:var(--ev-muted);margin-left:4px;white-space:nowrap}
+#evidencePanel select{min-height:40px;background:white;border:1px solid var(--ev-border);border-radius:9px;color:var(--ev-ink);padding:6px 6px;font-size:17px}
+#evidencePanel .ev-markbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:none}
+#evidencePanel .ev-tools{display:inline-flex;gap:5px;align-items:center;min-width:0}
+#evidencePanel .ev-tools .ev-button{padding:9px 12px}
+#evidencePanel .ev-tool[aria-pressed="true"]{border-color:var(--ev-teal);background:#e3f0eb;color:#066e76}
+#evidencePanel .ev-tool[data-ev-tool="reference"][aria-pressed="true"]{background:#fff0e7;border-color:#d98b61;color:#91512d}
+#evidencePanel .ev-dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--ev-teal);flex:none}
+#evidencePanel .ev-diamond{display:inline-block;width:10px;height:10px;margin:1px 2px;transform:rotate(45deg);background:#de875f;flex:none}
+#evidencePanel .ev-dash{display:inline-block;width:18px;border-top:3px dashed var(--ev-purple);flex:none}
+#evidencePanel .ev-status{margin:0;font-size:16px;line-height:1.45;color:var(--ev-muted);min-height:24px;flex:none;padding:0 2px}
+#evidencePanel .ev-status[data-error="true"]{color:#a64c2b}
+#evidencePanel .ev-rail{display:flex;flex-direction:column;min-height:0;min-width:0;gap:11px;padding:1px 0 0 17px;border-left:1px solid var(--ev-border)}
+#evidencePanel .ev-rail-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none}
+#evidencePanel .ev-rail-heading h2{font-size:21px;margin:0;font-weight:700}
+#evidencePanel .ev-quiet{min-height:36px;padding:7px 4px;border-color:transparent;background:transparent;font-size:15px;color:var(--ev-muted);font-weight:500}
+#evidencePanel .ev-moments{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;flex:none}
+#evidencePanel .ev-moment{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;min-height:111px;padding:6px 4px;border-radius:9px;border:1px solid var(--ev-border);background:white;color:var(--ev-ink);line-height:1.15;text-align:center}
+#evidencePanel .ev-moment[aria-pressed="true"]{border-color:var(--ev-teal);box-shadow:inset 0 0 0 1px var(--ev-teal);background:#f0f7f3}
+#evidencePanel .ev-moment canvas{width:100%;height:47px;object-fit:contain;background:#e7eeea;border-radius:5px}
+#evidencePanel .ev-moment-title{font-size:15px;font-weight:600}
+#evidencePanel .ev-moment-time{font-size:13px;color:var(--ev-muted);font-variant-numeric:tabular-nums}
+#evidencePanel .ev-moment-marks{display:flex;align-items:center;justify-content:center;gap:8px;min-height:12px}
+#evidencePanel .ev-moment-marks .ev-dot{width:8px;height:8px}
+#evidencePanel .ev-moment-marks .ev-diamond{width:7px;height:7px}
+#evidencePanel .ev-moment-marks .ev-missing{opacity:.2}
+#evidencePanel .ev-moment-empty{border-style:dashed;background:transparent;color:#8ba09f;cursor:default}
+#evidencePanel .ev-slot-number{display:flex;align-items:center;justify-content:center;height:47px;font-size:28px;font-weight:300;color:#a4b8b2}
+#evidencePanel .ev-moment-empty span:last-child{font-size:13px;line-height:1.4}
+#evidencePanel .ev-compare{width:100%;background:#edf4f0;border-color:#adcac1;flex:none}
+#evidencePanel .ev-compare[aria-pressed="true"]{background:#087f87;border-color:#087f87;color:white}
+#evidencePanel .ev-comparison{flex:1;min-height:94px;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:4px 0}
+#evidencePanel .ev-compare-prompt{font-size:18px;line-height:1.65;margin:0;font-weight:400}
+#evidencePanel .ev-compare-prompt strong{font-weight:600;color:var(--ev-teal)}
+#evidencePanel .ev-comparison-note{font-size:14px;line-height:1.5;margin:0;color:var(--ev-muted)}
+#evidencePanel .ev-measure-head{font-size:15px;font-weight:600;margin:0;color:var(--ev-muted)}
+#evidencePanel .ev-measures{margin:0;display:grid;grid-template-columns:1fr auto;row-gap:7px;column-gap:8px;align-items:baseline;font-size:17px}
+#evidencePanel .ev-measures dt{margin:0}
+#evidencePanel .ev-measures dd{margin:0;font-variant-numeric:tabular-nums;white-space:nowrap}
+#evidencePanel .ev-measures .ev-relative{color:var(--ev-purple);font-weight:700}
+#evidencePanel .ev-legend{display:flex;align-items:center;justify-content:space-between;gap:5px;flex:none;font-size:13px;color:var(--ev-muted)}
+#evidencePanel .ev-legend span{display:flex;align-items:center;gap:5px;white-space:nowrap}
+#evidencePanel .ev-legend .ev-dot{width:9px;height:9px}
+#evidencePanel .ev-legend .ev-diamond{width:8px;height:8px}
+#evidencePanel .ev-clear-marks{flex:none;min-height:40px;font-size:16px;font-weight:500}
+#evidencePanel .ev-caution{font-size:14px;line-height:1.55;margin:0;color:var(--ev-muted);flex:none}
+@media(min-width:901px) and (max-width:1180px){
+  #evidencePanel .ev-layout{grid-template-columns:minmax(0,1fr) 280px;gap:13px}
+  #evidencePanel .ev-rail{padding-left:12px;gap:9px}
+  #evidencePanel .ev-tools .ev-button{padding:9px 9px;font-size:17px}
+  #evidencePanel #evCapture{padding:9px 11px;font-size:17px}
+  #evidencePanel .ev-topbar{gap:10px}
+  #evidencePanel .ev-fileline strong{font-size:16px}
+  #evidencePanel .ev-fileline span{font-size:13px}
+  #evidencePanel .ev-empty h2{font-size:23px}
+  #evidencePanel .ev-empty p{font-size:16px}
+}
+@media(min-width:901px) and (max-height:740px){
+  #evidencePanel{gap:8px}
+  #evidencePanel .ev-workspace{gap:7px}
+  #evidencePanel .ev-rail{gap:7px}
+  #evidencePanel .ev-moment{min-height:99px}
+  #evidencePanel .ev-moment canvas,#evidencePanel .ev-slot-number{height:38px}
+  #evidencePanel .ev-comparison{min-height:76px;gap:5px}
+  #evidencePanel .ev-measures{row-gap:4px;font-size:16px}
+  #evidencePanel .ev-empty-art{height:88px;width:113px}
+  #evidencePanel .ev-empty{gap:5px;padding:14px}
+  #evidencePanel .ev-empty-steps{margin:5px 0}
+  #evidencePanel .ev-status{font-size:14px;min-height:20px}
+  #evidencePanel .ev-caution{font-size:13px}
+}
+@media(max-width:850px){
+  #evidencePanel{height:auto;min-height:calc(100vh - 152px);gap:12px}
+  #evidencePanel .ev-topbar{flex-wrap:wrap;gap:10px}
+  #evidencePanel .ev-fileline{order:3;flex-basis:100%;gap:4px}
+  #evidencePanel #evExport{margin-left:auto}
+  #evidencePanel .ev-layout{display:flex;flex-direction:column;gap:18px;flex:none}
+  #evidencePanel .ev-stage{flex:none;min-height:340px;height:min(54vh,470px)}
+  #evidencePanel .ev-rail{padding:14px 0 0;border-left:0;border-top:1px solid var(--ev-border);gap:12px;display:grid;grid-template-columns:1fr 1fr;align-items:start}
+  #evidencePanel .ev-rail-heading{grid-column:1 / -1}
+  #evidencePanel .ev-moments{grid-column:1;grid-row:2 / 4}
+  #evidencePanel .ev-compare{grid-column:2;grid-row:2}
+  #evidencePanel .ev-comparison{grid-column:2;grid-row:3 / 6;min-height:130px}
+  #evidencePanel .ev-legend{grid-column:1;grid-row:4}
+  #evidencePanel .ev-clear-marks{grid-column:1;grid-row:5}
+  #evidencePanel .ev-caution{grid-column:1 / -1;font-size:15px}
+  #evidencePanel .ev-moment canvas{height:74px}
+  #evidencePanel .ev-moment{min-height:140px}
+}
+@media(max-width:580px){
+  #evidencePanel .ev-button{font-size:16px;padding:9px 10px}
+  #evidencePanel .ev-topbar{gap:8px}
+  #evidencePanel .ev-import svg{display:none}
+  #evidencePanel .ev-stage{height:350px;min-height:300px}
+  #evidencePanel .ev-empty{padding:14px;gap:7px}
+  #evidencePanel .ev-empty-art{height:96px;width:124px}
+  #evidencePanel .ev-empty h2{font-size:22px}
+  #evidencePanel .ev-empty p{font-size:16px}
+  #evidencePanel .ev-empty-steps{font-size:16px;gap:12px;margin:5px 0}
+  #evidencePanel .ev-markbar{flex-wrap:wrap;gap:8px}
+  #evidencePanel .ev-tools{flex:1;justify-content:space-between}
+  #evidencePanel .ev-tools .ev-button{padding:9px 8px;font-size:16px}
+  #evidencePanel #evCapture{width:100%}
+  #evidencePanel .ev-transport{gap:5px}
+  #evidencePanel .ev-transport .ev-button{padding:8px 8px;font-size:16px;min-height:42px}
+  #evidencePanel .ev-play{min-width:64px}
+  #evidencePanel .ev-rate-label{font-size:14px;gap:4px;margin-left:0}
+  #evidencePanel select{font-size:16px;padding:5px 3px;max-width:76px}
+  #evidencePanel .ev-rail{display:flex;flex-direction:column;gap:11px}
+  #evidencePanel .ev-rail-heading,#evidencePanel .ev-moments,#evidencePanel .ev-comparison,#evidencePanel .ev-clear-marks,#evidencePanel .ev-legend{width:100%}
+  #evidencePanel .ev-moments{gap:9px}
+  #evidencePanel .ev-moment{min-height:125px}
+  #evidencePanel .ev-moment canvas{height:62px}
+  #evidencePanel .ev-comparison{min-height:85px;padding:5px 0}
+  #evidencePanel .ev-legend{justify-content:flex-start;gap:20px;font-size:14px}
+  #evidencePanel .ev-view-tag{font-size:13px;max-width:calc(100% - 115px);left:8px;top:8px}
+  #evidencePanel .ev-back-source{font-size:14px;right:7px;top:7px;min-height:35px;padding:6px 8px}
+  #evidencePanel .ev-canvas-hint{font-size:14px;white-space:normal;width:max-content;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){#evidencePanel .ev-button{transition:none}}
+</style>
+
+<script>
+(function(){
+  'use strict';
+  const root=document.getElementById('evidencePanel');
+  if(!root)return;
+  const $=id=>document.getElementById(id);
+  const canvas=$('evCanvas'),ctx=canvas.getContext('2d'),video=$('evVideo');
+  const C={ink:'#123b48',muted:'#5d777b',target:'#087f87',reference:'#df8256',relative:'#7761aa',paper:'#f4f7f5'};
+  const state={active:false,kind:null,name:'',label:'',url:null,image:null,width:0,height:0,frames:[],selected:null,view:'source',tool:'target',serial:0,token:0,raf:0,pointer:null,stroke:null,seeking:false};
+  let cw=0,ch=0,dpr=1,resizeObserver=null;
+  const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+  const finite=n=>Number.isFinite(n);
+  const sec=n=>finite(n)?n.toFixed(1):'0.0';
+  function announce(message,error){$('evStatus').textContent=message;$('evStatus').dataset.error=error?'true':'false';}
+  function sourceKind(){return state.kind==='model'?'模型示意（非实拍）':state.kind==='video'?'本地导入视频':'本地导入照片';}
+  function frameTime(f){return f.time===null?'照片':(state.kind==='model'?'模型 ':'')+sec(f.time)+' s';}
+  function frameIndex(f){return state.frames.indexOf(f);}
+  function activeFrame(){return state.selected&&state.frames.includes(state.selected)?state.selected:null;}
+  function fit(w,h,iw,ih,pad){
+    pad=pad||0;if(!iw||!ih)return{x:0,y:0,w:0,h:0};
+    const scale=Math.min(Math.max(1,w-pad*2)/iw,Math.max(1,h-pad*2)/ih),fw=iw*scale,fh=ih*scale;
+    return{x:(w-fw)/2,y:(h-fh)/2,w:fw,h:fh};
+  }
+  function captureImage(source){
+    const scale=Math.min(1,1600/state.width,1200/state.height),c=document.createElement('canvas');
+    c.width=Math.max(1,Math.round(state.width*scale));c.height=Math.max(1,Math.round(state.height*scale));
+    c.getContext('2d').drawImage(source,0,0,c.width,c.height);return c;
+  }
+  function makeFrame(source,time){return{id:++state.serial,time:time===null?null:Number(time),image:captureImage(source),target:null,reference:null,strokes:[]};}
+  function timeSort(){state.frames.sort((a,b)=>(a.time||0)-(b.time||0)||a.id-b.id);}
+  function pauseVideo(){if(!video.paused)video.pause();stopLoop();updateTime();}
+  function stopLoop(){if(state.raf){cancelAnimationFrame(state.raf);state.raf=0;}}
+  function loop(){state.raf=0;if(!state.active||state.kind!=='video'||video.paused)return;updateTime();if(state.view==='source')render();state.raf=requestAnimationFrame(loop);}
+  function startLoop(){stopLoop();if(state.active&&!video.paused)state.raf=requestAnimationFrame(loop);}
+  function resize(){
+    if(!state.active||root.hidden)return;
+    const bounds=canvas.getBoundingClientRect();if(bounds.width<1||bounds.height<1)return;
+    cw=bounds.width;ch=bounds.height;dpr=Math.min(2,window.devicePixelRatio||1);
+    const bw=Math.round(cw*dpr),bh=Math.round(ch*dpr);
+    if(canvas.width!==bw||canvas.height!==bh){canvas.width=bw;canvas.height=bh;}
+    render();
+  }
+  function imageRect(){return fit(cw,ch,state.width,state.height,0);}
+  function drawBase(c,f,r,alpha){
+    if(!f||!f.image||!r.w)return;c.save();c.globalAlpha=alpha===undefined?1:alpha;c.drawImage(f.image,r.x,r.y,r.w,r.h);c.restore();
+  }
+  function drawLine(c,a,b,r,color,dashed,width){
+    const x1=r.x+a.x*r.w,y1=r.y+a.y*r.h,x2=r.x+b.x*r.w,y2=r.y+b.y*r.h,dist=Math.hypot(x2-x1,y2-y1);
+    if(dist<2)return;
+    c.save();c.strokeStyle=color;c.fillStyle=color;c.lineWidth=width||2.7;c.lineCap='round';c.lineJoin='round';if(dashed)c.setLineDash([7,5]);
+    c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();c.setLineDash([]);
+    if(dist>9){const a=Math.atan2(y2-y1,x2-x1),s=Math.min(10,dist*.32);c.beginPath();c.moveTo(x2,y2);c.lineTo(x2-s*Math.cos(a-.5),y2-s*Math.sin(a-.5));c.lineTo(x2-s*Math.cos(a+.5),y2-s*Math.sin(a+.5));c.closePath();c.fill();}
+    c.restore();
+  }
+  function roundBox(c,x,y,w,h,r){
+    r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();
+  }
+  function drawMark(c,p,r,type,label,scale){
+    if(!p)return;scale=scale||1;const x=r.x+p.x*r.w,y=r.y+p.y*r.h,color=type==='target'?C.target:C.reference,s=6*scale;
+    c.save();c.lineWidth=2.5*scale;c.strokeStyle='white';c.fillStyle=color;
+    c.beginPath();if(type==='target'){c.arc(x,y,s,0,Math.PI*2);}else{c.moveTo(x,y-s*1.25);c.lineTo(x+s*1.25,y);c.lineTo(x,y+s*1.25);c.lineTo(x-s*1.25,y);c.closePath();}c.fill();c.stroke();
+    if(label){
+      c.font='600 '+Math.round(13*scale)+'px system-ui, "Microsoft YaHei", sans-serif';const tw=c.measureText(label).width+10*scale,th=22*scale;
+      let bx=x+11*scale,by=y-th-5*scale;if(bx+tw>r.x+r.w)bx=x-11*scale-tw;if(bx<r.x)bx=r.x;if(by<r.y)by=y+9*scale;
+      c.fillStyle='rgba(255,255,255,.95)';roundBox(c,bx,by,tw,th,4*scale);c.fill();c.fillStyle=color;c.textBaseline='middle';c.fillText(label,bx+5*scale,by+th/2+.5*scale);
+    }c.restore();
+  }
+  function drawStrokes(c,f,r,color,scale){
+    if(!f||!f.strokes)return;c.save();c.strokeStyle=color||C.target;c.lineWidth=2.5*(scale||1);c.lineCap='round';c.lineJoin='round';
+    c.shadowColor='rgba(255,255,255,.95)';c.shadowBlur=2;c.shadowOffsetX=0;c.shadowOffsetY=0;
+    f.strokes.forEach(points=>{if(!points.length)return;c.beginPath();points.forEach((p,i)=>{const x=r.x+p.x*r.w,y=r.y+p.y*r.h;if(i)c.lineTo(x,y);else c.moveTo(x,y);});if(points.length===1)c.lineTo(r.x+points[0].x*r.w+.1,r.y+points[0].y*r.h+.1);c.stroke();});c.restore();
+  }
+  function completeFrames(){return state.frames.filter(f=>f.target&&f.reference);}
+  function measurements(){
+    const complete=completeFrames();if(complete.length<2)return null;
+    const a=complete[0],b=complete[complete.length-1];
+    const tx=(b.target.x-a.target.x)*state.width,ty=(b.target.y-a.target.y)*state.height;
+    const rx=(b.reference.x-a.reference.x)*state.width,ry=(b.reference.y-a.reference.y)*state.height;
+    return{a,b,target:Math.hypot(tx,ty),reference:Math.hypot(rx,ry),relative:Math.hypot(tx-rx,ty-ry),dx:tx-rx,dy:ty-ry,complete};
+  }
+  function drawComparison(c,r,scale){
+    if(!state.frames.length)return;scale=scale||1;
+    state.frames.forEach((f,i)=>drawBase(c,f,r,i===0?1:1/(i+1)));
+    c.save();c.beginPath();c.rect(r.x,r.y,r.w,r.h);c.clip();
+    const targets=state.frames.filter(f=>f.target),refs=state.frames.filter(f=>f.reference);
+    for(let i=1;i<targets.length;i++)drawLine(c,targets[i-1].target,targets[i].target,r,C.target,false,2.8*scale);
+    for(let i=1;i<refs.length;i++)drawLine(c,refs[i-1].reference,refs[i].reference,r,C.reference,false,2.8*scale);
+    const complete=completeFrames();
+    if(complete.length>=2){
+      const first=complete[0],rel=complete.map(f=>({x:f.target.x-f.reference.x+first.reference.x,y:f.target.y-f.reference.y+first.reference.y}));
+      for(let i=1;i<rel.length;i++)drawLine(c,rel[i-1],rel[i],r,C.relative,true,3*scale);
+    }
+    state.frames.forEach((f,i)=>{drawStrokes(c,f,r,[C.target,C.reference,C.relative][i],scale);drawMark(c,f.target,r,'target',String(i+1),scale);drawMark(c,f.reference,r,'reference',String(i+1),scale);});c.restore();
+  }
+  function drawFrame(c,f,r,scale){drawBase(c,f,r);drawStrokes(c,f,r,null,scale);drawMark(c,f.target,r,'target','目标',scale);drawMark(c,f.reference,r,'reference','参照',scale);}
+  function render(){
+    if(!state.active||!cw||!ch)return;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,cw,ch);ctx.fillStyle='#e9efec';ctx.fillRect(0,0,cw,ch);
+    if(!state.kind)return;const r=imageRect();
+    try{
+      if(state.view==='compare')drawComparison(ctx,r);
+      else if(state.view==='frame'&&activeFrame())drawFrame(ctx,activeFrame(),r,1);
+      else if(state.kind==='image'&&state.image)ctx.drawImage(state.image,r.x,r.y,r.w,r.h);
+      else if(state.kind==='video'&&video.readyState>=2)ctx.drawImage(video,r.x,r.y,r.w,r.h);
+      else if(state.kind==='model'&&activeFrame())drawFrame(ctx,activeFrame(),r,1);
+    }catch(e){/* A seeking video can briefly have no decodable frame. The seeked event redraws it. */}
+  }
+  function updateTime(){
+    if(state.kind!=='video')return;const duration=finite(video.duration)&&video.duration>0?video.duration:0,current=finite(video.currentTime)?video.currentTime:0;
+    $('evSeek').max=String(duration||1);if(!state.seeking)$('evSeek').value=String(current);$('evSeek').disabled=!duration;
+    $('evTime').textContent=sec(current)+' / '+(duration?sec(duration):'—')+' s';$('evPlay').textContent=video.paused?'播放':'暂停';
+  }
+  function updateStrip(){
+    const strip=$('evMomentStrip');strip.replaceChildren();
+    for(let i=0;i<3;i++){
+      const f=state.frames[i],b=document.createElement('button');b.type='button';b.className='ev-moment'+(f?'':' ev-moment-empty');
+      if(f){
+        b.setAttribute('aria-label','查看第'+(i+1)+'个时刻，'+frameTime(f));b.setAttribute('aria-pressed',String(state.view==='frame'&&state.selected===f));
+        const thumb=document.createElement('canvas');thumb.width=160;thumb.height=100;const tc=thumb.getContext('2d');tc.fillStyle='#e7eeea';tc.fillRect(0,0,160,100);drawFrame(tc,f,fit(160,100,state.width,state.height),.55);b.appendChild(thumb);
+        const title=document.createElement('span');title.className='ev-moment-title';title.textContent='时刻 '+(i+1);b.appendChild(title);
+        const time=document.createElement('span');time.className='ev-moment-time';time.textContent=frameTime(f);b.appendChild(time);
+        const marks=document.createElement('span');marks.className='ev-moment-marks';marks.setAttribute('aria-label',(f.target?'已标记目标':'未标记目标')+'，'+(f.reference?'已标记参照':'未标记参照'));
+        const dot=document.createElement('i');dot.className='ev-dot'+(f.target?'':' ev-missing');const diamond=document.createElement('i');diamond.className='ev-diamond'+(f.reference?'':' ev-missing');marks.append(dot,diamond);b.appendChild(marks);
+        b.addEventListener('click',()=>selectFrame(f));
+      }else{
+        b.disabled=true;const num=document.createElement('span');num.className='ev-slot-number';num.textContent=String(i+1);const txt=document.createElement('span');txt.textContent='等待记录';b.append(num,txt);
+      }strip.appendChild(b);
+    }
+  }
+  function updateComparison(){
+    const box=$('evComparison'),m=measurements();box.replaceChildren();
+    if(!m){
+      const p=document.createElement('p');p.className='ev-compare-prompt';
+      if(state.frames.length===1&&state.kind==='image')p.textContent='照片可用来标记结构、描出轮廓。比较运动需要视频中的多个时刻。';
+      else p.innerHTML='在两个时刻，标出<strong>同一个目标</strong>和<strong>同一个参照碎屑</strong>。';
+      const n=document.createElement('p');n.className='ev-comparison-note';n.textContent=state.kind==='model'?'模型记录用于理解方法，不能充当实拍证据。':'让画面中的变化变得可比较。';box.append(p,n);return;
+    }
+    const title=document.createElement('p');title.className='ev-measure-head';title.textContent='时刻 '+(frameIndex(m.a)+1)+' → '+(frameIndex(m.b)+1);box.appendChild(title);
+    const dl=document.createElement('dl');dl.className='ev-measures';
+    [['目标位移',m.target,''],['参照位移',m.reference,''],['相对位移',m.relative,'ev-relative']].forEach(row=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=row[0];dd.textContent=Math.round(row[1])+' px';dt.className=row[2];dd.className=row[2];dl.append(dt,dd);});box.appendChild(dl);
+    const note=document.createElement('p');note.className='ev-comparison-note';note.textContent='相对位移：扣除所选参照的平移。'+(state.kind==='model'?'模型画面像素，非实测。':'px 为原图像素，未换算实际长度。');box.appendChild(note);
+  }
+  function updateUI(){
+    const loaded=!!state.kind,f=activeFrame(),hasFrames=state.frames.length>0;
+    $('evEmpty').hidden=loaded;$('evViewTag').hidden=!loaded;$('evCanvasHint').hidden=!loaded;$('evMediaControls').hidden=state.kind!=='video';
+    $('evSourceName').textContent=loaded?state.name:'留住课堂里的真实发现';$('evSourceName').title=loaded?state.name:'';
+    $('evSourceDetail').textContent=loaded?(sourceKind()+' · '+state.width+' × '+state.height+' px'):'文件只在当前设备读取';
+    $('evBackSource').hidden=state.kind!=='video'||state.view==='source';
+    $('evCapture').hidden=state.kind==='model'||state.kind==='image';
+    $('evCapture').disabled=state.kind!=='video'||state.frames.length>=3||video.readyState<2||video.seeking;
+    $('evCapture').textContent=state.frames.length>=3?'已留住 3 个时刻':'留住这一刻';
+    document.querySelectorAll('[data-ev-tool]').forEach(b=>{b.disabled=!loaded;b.setAttribute('aria-pressed',String(b.dataset.evTool===state.tool));});
+    $('evExport').disabled=!hasFrames;$('evClearFrames').disabled=!hasFrames;$('evCompare').disabled=state.frames.length<2;
+    $('evCompare').setAttribute('aria-pressed',String(state.view==='compare'));
+    $('evCompare').textContent=state.view==='compare'?'正在叠影 · 点时刻可编辑':'叠影比较';
+    $('evClearMarks').disabled=!f||state.view==='compare'||!(f.target||f.reference||f.strokes.length);
+    if(loaded){
+      if(state.view==='compare'){$('evViewTag').textContent=sourceKind()+' · '+state.frames.length+' 个时刻叠影';$('evCanvasHint').textContent='位置连线不代表两帧之间的真实路径';}
+      else if(state.view==='frame'&&f){$('evViewTag').textContent=sourceKind()+' · '+(state.kind==='image'?'照片':'时刻 '+(frameIndex(f)+1)+' · '+frameTime(f));$('evCanvasHint').textContent=state.tool==='target'?'点击或拖动，标出同一个目标':state.tool==='reference'?'标出同一个参照碎屑':'按住拖动，描出观察到的轮廓';}
+      else{$('evViewTag').textContent=sourceKind()+' · 原片';$('evCanvasHint').textContent='暂停到想观察的时刻，再留下画面';}
+    }
+    updateTime();updateStrip();updateComparison();render();
+  }
+  function clearSource(){
+    const previousSource=state.kind;
+    state.token++;pauseVideo();video.removeAttribute('src');video.load();
+    if(state.url){URL.revokeObjectURL(state.url);state.url=null;}
+    state.kind=null;state.name='';state.label='';state.image=null;state.width=0;state.height=0;state.frames=[];state.selected=null;state.view='source';state.tool='target';state.pointer=null;state.stroke=null;state.seeking=false;state.serial=0;
+    document.dispatchEvent(new CustomEvent('evidence:reset',{detail:{source:previousSource,remainingFrames:0}}));
+  }
+  function reset(){clearSource();$('evFileInput').value='';$('evRate').value='1';video.playbackRate=1;announce('先观察，再标记。记录用来支持你的解释。');updateUI();resize();}
+  function mediaFailure(message,token){if(token!==state.token)return;clearSource();announce(message,true);updateUI();}
+  function loadFile(file){
+    if(!file)return;
+    const isImage=/^image\//i.test(file.type)||/\.(png|jpe?g|webp|gif|bmp|avif|heic|heif)$/i.test(file.name);
+    const isVideo=/^video\//i.test(file.type)||/\.(mp4|m4v|mov|webm|ogv|ogg|avi|mkv)$/i.test(file.name);
+    if(!isImage&&!isVideo){announce('请选择照片或视频文件。',true);return;}
+    clearSource();const token=state.token;state.url=URL.createObjectURL(file);state.name=file.name;announce('正在读取 '+file.name+' …');updateUI();
+    if(isImage){
+      const image=new Image();image.onload=function(){if(token!==state.token)return;if(!image.naturalWidth||!image.naturalHeight){mediaFailure('无法读取这张照片，请另存为 JPG 或 PNG 后重试。',token);return;}state.kind='image';state.image=image;state.width=image.naturalWidth;state.height=image.naturalHeight;state.name=file.name;const f=makeFrame(image,null);state.frames=[f];state.selected=f;state.view='frame';announce('照片已留存。点击标记目标，或用“描轮廓”留下你的观察。');updateUI();resize();};
+      image.onerror=()=>mediaFailure('当前浏览器无法读取这张照片，请尝试 JPG 或 PNG。',token);image.src=state.url;
+    }else{
+      video.onloadedmetadata=function(){
+        if(token!==state.token)return;if(!video.videoWidth||!video.videoHeight){mediaFailure('视频没有可读取的画面，请更换文件。',token);return;}
+        state.kind='video';state.width=video.videoWidth;state.height=video.videoHeight;state.name=file.name;state.view='source';video.playbackRate=Number($('evRate').value)||1;
+        announce('用 ±0.2 秒步进选择时刻，再点“留住这一刻”。这不是按原始帧率逐帧。');updateUI();resize();
+      };
+      video.onerror=()=>mediaFailure('当前浏览器无法解码此视频，请尝试 MP4（H.264）或 WebM。',token);
+      video.src=state.url;video.load();
+    }
+  }
+  function captureCurrent(quiet){
+    if(!state.kind)return null;
+    if(state.kind==='model'){announce('回到“水滴观察”可以继续留存模型画面。');return null;}
+    if(state.frames.length>=3){announce('已留住 3 个时刻。先导出或清空，再开始一组新记录。',true);return null;}
+    if(state.kind==='video'&&(video.readyState<2||video.seeking)){announce('画面尚未准备好，请稍后再留存。',true);return null;}
+    pauseVideo();const time=state.kind==='video'?video.currentTime:null;
+    const existing=state.frames.find(f=>time===null||Math.abs(f.time-time)<.015);
+    if(existing){selectFrame(existing);if(!quiet)announce('这个时刻已留存。回到原片，移动时间后再留存。');return existing;}
+    const f=makeFrame(state.kind==='video'?video:state.image,time);state.frames.push(f);timeSort();state.selected=f;state.view='frame';
+    if(!quiet)announce('已留住这一刻。先标记目标，再标记用于比较水流的同一个碎屑。');updateUI();return f;
+  }
+  function selectFrame(f){
+    if(!state.frames.includes(f))return;pauseVideo();state.selected=f;state.view='frame';
+    if(state.kind==='video'&&finite(f.time)){try{video.currentTime=f.time;}catch(e){}}
+    announce('正在查看时刻 '+(frameIndex(f)+1)+'。点击可修改标记，按住可拖动。');updateUI();
+  }
+  function backToSource(){if(state.kind!=='video')return;state.view='source';announce('选择下一个时刻。保持镜头、视野和放大程度不变，便于比较。');updateUI();}
+  function selectTool(tool){
+    state.tool=tool;
+    if(state.view==='compare'&&activeFrame())state.view='frame';
+    if(state.kind&&state.view==='source'&&!captureCurrent(true)){updateUI();return;}
+    if(state.kind==='model'&&!activeFrame()&&state.frames.length){state.selected=state.frames[state.frames.length-1];state.view='frame';}
+    announce(tool==='target'?'在画面上点同一个目标；拖动可调整位置。':tool==='reference'?'选同一个参照碎屑。它应尽量处于同一水流和同一焦面。':'按住画面拖动，描出你看到的轮廓。');updateUI();
+  }
+  function pointFromEvent(event){
+    const bounds=canvas.getBoundingClientRect(),x=event.clientX-bounds.left,y=event.clientY-bounds.top,r=imageRect();
+    if(!r.w||x<r.x||x>r.x+r.w||y<r.y||y>r.y+r.h)return null;return{x:clamp((x-r.x)/r.w,0,1),y:clamp((y-r.y)/r.h,0,1)};
+  }
+  function pointerDown(event){
+    if(!state.kind||state.view==='compare'||event.button>0)return;
+    const p=pointFromEvent(event);if(!p)return;
+    let f=activeFrame();if(state.view==='source'){f=captureCurrent(true);if(!f)return;}if(!f)return;
+    event.preventDefault();state.pointer=event.pointerId;try{canvas.setPointerCapture(event.pointerId);}catch(e){}
+    if(state.tool==='outline'){state.stroke=[p];f.strokes.push(state.stroke);}else f[state.tool]=p;
+    render();
+  }
+  function pointerMove(event){
+    if(state.pointer!==event.pointerId)return;const p=pointFromEvent(event),f=activeFrame();if(!p||!f)return;event.preventDefault();
+    if(state.tool==='outline'&&state.stroke){const last=state.stroke[state.stroke.length-1];if(Math.hypot((p.x-last.x)*cw,(p.y-last.y)*ch)>1.3)state.stroke.push(p);}else f[state.tool]=p;render();
+  }
+  function pointerEnd(event){
+    if(state.pointer!==event.pointerId)return;state.pointer=null;state.stroke=null;try{canvas.releasePointerCapture(event.pointerId);}catch(e){}updateUI();
+  }
+  function stepVideo(delta){
+    if(state.kind!=='video')return;pauseVideo();state.view='source';const max=finite(video.duration)?Math.max(0,video.duration-.001):video.currentTime+Math.max(0,delta);
+    try{video.currentTime=clamp(video.currentTime+delta,0,max);}catch(e){announce('这个时刻暂时无法读取，请拖动时间条重试。',true);}updateUI();
+  }
+  async function togglePlay(){
+    if(state.kind!=='video')return;if(!video.paused){pauseVideo();updateUI();return;}
+    state.view='source';if(finite(video.duration)&&video.currentTime>=video.duration-.03)video.currentTime=0;updateUI();
+    try{await video.play();startLoop();updateTime();}catch(e){announce('浏览器暂时无法播放。请重新点击播放，或更换视频格式。',true);}
+  }
+  function clearFrames(){pauseVideo();state.frames=[];state.selected=null;state.view='source';state.pointer=null;state.stroke=null;
+    if(state.kind==='model'){clearSource();announce('记录已清空，可以重新留存模型画面或导入课堂素材。');}
+    else{document.dispatchEvent(new CustomEvent('evidence:reset',{detail:{source:state.kind,remainingFrames:0}}));announce('记录已清空。原素材仍在，可开始一组新记录。');}updateUI();}
+  function compare(){if(state.frames.length<2)return;pauseVideo();state.view='compare';announce('同一视野直接叠影。实线显示目标和参照的位置变化，紫色虚线扣除了所选参照的平移。');updateUI();}
+  async function addModelFrame(payload){
+    if(!payload||typeof payload.dataUrl!=='string'||!/^data:image\//.test(payload.dataUrl)||!finite(Number(payload.time)))return false;
+    if(state.kind&&state.kind!=='model'&&state.frames.length){announce('已有本地影像记录。请先导出并清空，再保留模型画面。',true);return false;}
+    if(state.frames.length>=3){announce('已留住 3 个时刻。请先导出或清空记录。',true);return false;}
+    const label=String(payload.label||'同一水滴的模型视野');
+    if(state.kind==='model'&&state.frames.length&&state.label!==label){announce('模型视野已改变。请先导出或清空记录，再建立一组可比较的画面。',true);return false;}
+    if(state.kind==='model'&&state.frames.some(f=>Math.abs(f.time-Number(payload.time))<.001)){announce('这个模型时刻已留存。让模型继续运动后，再保留画面。');return false;}
+    const token=state.token,image=new Image();
+    return new Promise(resolve=>{
+      image.onerror=()=>{announce('模型画面读取失败，请重试。',true);resolve(false);};
+      image.onload=()=>{
+        if(token!==state.token||!image.naturalWidth||!image.naturalHeight){resolve(false);return;}
+        if(state.kind==='model'&&state.frames.length&&(state.width!==image.naturalWidth||state.height!==image.naturalHeight)){announce('模型画面大小已改变。请清空后重新记录同一视野。',true);resolve(false);return;}
+        if(state.kind!=='model'){clearSource();state.kind='model';state.width=image.naturalWidth;state.height=image.naturalHeight;state.name=label;state.label=label;}
+        if(state.frames.length>=3){resolve(false);return;}
+        const f=makeFrame(image,Number(payload.time));state.frames.push(f);timeSort();state.selected=f;state.view='frame';
+        announce('已保留模型画面。它用于学习观察方法，不能代替课堂实拍证据。');updateUI();resize();resolve(true);
+      };image.src=payload.dataUrl;
+    });
+  }
+  function wrappedText(c,text,x,y,maxWidth,lineHeight,maxLines){
+    let line='',lines=0;const chars=Array.from(text);for(let i=0;i<chars.length;i++){
+      const test=line+chars[i];if(c.measureText(test).width>maxWidth&&line){c.fillText(line,x,y+lines*lineHeight);lines++;line=chars[i];if(maxLines&&lines>=maxLines-1){while(i+1<chars.length){const t=line+chars[++i];if(c.measureText(t+'…').width>maxWidth){line+='…';break;}line=t;}break;}}else line=test;
+    }if(line)c.fillText(line,x,y+lines*lineHeight);return(lines+1)*lineHeight;
+  }
+  function exportPNG(){
+    if(!state.frames.length)return;
+    const out=document.createElement('canvas');out.width=1600;out.height=state.frames.length===1?1100:1280;const c=out.getContext('2d');
+    c.fillStyle=C.paper;c.fillRect(0,0,out.width,out.height);c.textBaseline='alphabetic';c.fillStyle=C.ink;c.font='700 44px system-ui, "Microsoft YaHei", sans-serif';c.fillText('水中的微小生物 · 观察记录',60,78);
+    c.fillStyle=C.muted;c.font='24px system-ui, "Microsoft YaHei", sans-serif';wrappedText(c,sourceKind()+' ｜ '+state.name,60,125,1480,32,2);
+    c.font='21px system-ui, "Microsoft YaHei", sans-serif';c.fillText('原画面 '+state.width+' × '+state.height+' px  ·  标记由观察者选择',60,177);
+    const multi=state.frames.length>1;
+    if(multi){
+      const gap=22,pw=(1480-gap*(state.frames.length-1))/state.frames.length,ph=300;
+      state.frames.forEach((f,i)=>{const x=60+i*(pw+gap),y=206;c.fillStyle='white';roundBox(c,x,y,pw,ph+57,12);c.fill();const r=fit(pw-12,ph-12,state.width,state.height);r.x+=x+6;r.y+=y+6;drawFrame(c,f,r,1.45);c.fillStyle=C.ink;c.font='600 23px system-ui, "Microsoft YaHei", sans-serif';c.fillText('时刻 '+(i+1)+' · '+frameTime(f),x+15,y+ph+35);});
+      const x=60,y=600,w=950,h=508;c.fillStyle='white';roundBox(c,x,y,w,h,12);c.fill();const r=fit(w-12,h-12,state.width,state.height);r.x+=x+6;r.y+=y+6;drawComparison(c,r,1.7);
+      c.fillStyle=C.ink;c.font='600 26px system-ui, "Microsoft YaHei", sans-serif';c.fillText('同一视野叠影',1050,635);
+      const m=measurements();let sy=684;
+      if(m){c.fillStyle=C.muted;c.font='23px system-ui, "Microsoft YaHei", sans-serif';c.fillText('时刻 '+(frameIndex(m.a)+1)+' → '+(frameIndex(m.b)+1),1050,sy);sy+=49;
+        [['目标位移',m.target,C.target],['参照位移',m.reference,C.reference],['相对位移',m.relative,C.relative]].forEach(row=>{c.fillStyle=row[2];c.font='600 25px system-ui, "Microsoft YaHei", sans-serif';c.fillText(row[0],1050,sy);c.textAlign='right';c.fillText(Math.round(row[1])+' px',1530,sy);c.textAlign='left';sy+=48;});
+        c.fillStyle=C.muted;c.font='22px system-ui, "Microsoft YaHei", sans-serif';sy+=12;wrappedText(c,'相对位移扣除了所选参照的平移。紫色虚线是相对位置连线。',1050,sy,470,34,4);
+      }else{c.fillStyle=C.muted;c.font='24px system-ui, "Microsoft YaHei", sans-serif';wrappedText(c,'尚未在两个时刻同时标记目标与参照。本图保留已完成的标记。',1050,sy,465,38,4);}
+    }else{
+      const f=state.frames[0],x=60,y=212,w=1130,h=713;c.fillStyle='white';roundBox(c,x,y,w,h,12);c.fill();const r=fit(w-14,h-14,state.width,state.height);r.x+=x+7;r.y+=y+7;drawFrame(c,f,r,1.8);
+      c.fillStyle=C.ink;c.font='600 26px system-ui, "Microsoft YaHei", sans-serif';c.fillText('时刻 1',1230,260);c.font='24px system-ui, "Microsoft YaHei", sans-serif';c.fillText(frameTime(f),1230,305);
+      c.fillStyle=C.muted;c.font='23px system-ui, "Microsoft YaHei", sans-serif';wrappedText(c,state.kind==='image'?'照片保留了结构和轮廓。单张照片不能显示运动过程。':'这里只记录了一个时刻，尚不能比较移动。',1230,375,310,38,6);
+    }
+    const by=out.height-118;
+    c.fillStyle=C.target;c.beginPath();c.arc(71,by-7,8,0,Math.PI*2);c.fill();c.font='23px system-ui, "Microsoft YaHei", sans-serif';c.fillText('目标',91,by);
+    c.fillStyle=C.reference;c.beginPath();c.moveTo(220,by-17);c.lineTo(230,by-7);c.lineTo(220,by+3);c.lineTo(210,by-7);c.closePath();c.fill();c.fillText('参照碎屑',240,by);
+    c.strokeStyle=C.relative;c.lineWidth=4;c.setLineDash([8,6]);c.beginPath();c.moveTo(405,by-7);c.lineTo(445,by-7);c.stroke();c.setLineDash([]);c.fillStyle=C.relative;c.fillText('扣除参照平移后的轨迹',460,by);
+    c.fillStyle=C.muted;c.font='22px system-ui, "Microsoft YaHei", sans-serif';wrappedText(c,(state.kind==='model'?'模型示意，不是真实显微观测。':'本地素材（来源由使用者确认），人工选点辅助记录。')+' 像素距离未经实际尺度标定；参照可能不代表全部水流。',60,by+45,1480,32,2);
+    const filename=(state.name.replace(/\.[^.]+$/,'').replace(/[\\/:*?"<>|]/g,'_').slice(0,45)||'显微观察')+'_观察记录.png';
+    try{out.toBlob(blob=>{if(!blob){announce('无法导出观察图，请稍后重试。',true);return;}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);announce('观察图已生成。若浏览器打开图片，可长按或右键保存。');},'image/png');}catch(e){announce('无法导出此素材，请尝试常见的照片或视频格式。',true);}
+  }
+
+  $('evFileInput').addEventListener('change',e=>{loadFile(e.target.files&&e.target.files[0]);e.target.value='';});
+  document.querySelectorAll('[data-ev-tool]').forEach(b=>b.addEventListener('click',()=>selectTool(b.dataset.evTool)));
+  $('evCapture').addEventListener('click',()=>captureCurrent(false));$('evBackSource').addEventListener('click',backToSource);
+  $('evPlay').addEventListener('click',togglePlay);$('evStepBack').addEventListener('click',()=>stepVideo(-.2));$('evStepNext').addEventListener('click',()=>stepVideo(.2));
+  $('evRate').addEventListener('change',()=>{video.playbackRate=Number($('evRate').value)||1;announce('播放速度已调整。视频时刻仍按原片时间显示。');});
+  $('evSeek').addEventListener('input',e=>{if(state.kind!=='video')return;const next=Number(e.target.value);state.seeking=true;pauseVideo();state.view='source';try{video.currentTime=next;}catch(err){state.seeking=false;}$('evTime').textContent=sec(next)+' / '+(finite(video.duration)?sec(video.duration):'—')+' s';});
+  $('evSeek').addEventListener('change',()=>{state.seeking=false;updateUI();});
+  $('evClearFrames').addEventListener('click',clearFrames);$('evCompare').addEventListener('click',compare);$('evExport').addEventListener('click',exportPNG);
+  $('evClearMarks').addEventListener('click',()=>{const f=activeFrame();if(!f||state.view==='compare')return;f.target=null;f.reference=null;f.strokes=[];announce('已清除此刻的标记，画面仍保留。');updateUI();});
+  canvas.addEventListener('pointerdown',pointerDown);canvas.addEventListener('pointermove',pointerMove);canvas.addEventListener('pointerup',pointerEnd);canvas.addEventListener('pointercancel',pointerEnd);
+  video.addEventListener('loadeddata',()=>{if(state.kind==='video'){updateUI();render();}});
+  video.addEventListener('seeking',()=>{if(state.kind==='video')$('evCapture').disabled=true;});
+  video.addEventListener('seeked',()=>{state.seeking=false;if(state.kind==='video'){updateTime();render();$('evCapture').disabled=state.frames.length>=3||video.readyState<2;}});
+  video.addEventListener('durationchange',updateTime);video.addEventListener('timeupdate',()=>{updateTime();if(video.paused)render();});
+  video.addEventListener('play',()=>{startLoop();updateTime();});video.addEventListener('pause',()=>{stopLoop();updateTime();render();});video.addEventListener('ended',()=>{stopLoop();updateTime();render();});
+  if(window.ResizeObserver){resizeObserver=new ResizeObserver(resize);resizeObserver.observe($('evStage'));}else window.addEventListener('resize',resize);
+  window.addEventListener('pagehide',()=>{pauseVideo();if(state.url){URL.revokeObjectURL(state.url);state.url=null;}});
+  window.EvidenceLab={
+    activate:function(){state.active=true;root.hidden=false;requestAnimationFrame(resize);updateUI();},
+    deactivate:function(){state.active=false;pauseVideo();root.hidden=true;},
+    reset:reset,
+    addModelFrame:addModelFrame,
+    getFrameCount:function(){return state.frames.length;},
+    getSource:function(){return state.kind;},
+    getSummary:function(){const m=measurements();return{kind:state.kind,frameCount:state.frames.length,view:state.view,selectedIndex:frameIndex(state.selected),sourceWidth:state.width,sourceHeight:state.height,frames:state.frames.map(f=>({time:f.time,target:!!f.target,reference:!!f.reference,strokes:f.strokes.length})),comparison:m?{target:m.target,reference:m.reference,relative:m.relative}:null};}
+  };
+  updateUI();
+})();
+</script>
+
+</main>
+<footer class="footline"><span>mutiw</span></footer>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div id="aboutDialog" class="modal-backdrop" hidden role="dialog" aria-modal="true" aria-labelledby="aboutTitle"><div class="modal"><div class="modal-title"><h2 id="aboutTitle">模型说明与使用</h2><button id="closeAbout">关闭</button></div><p>对应教科版五年级上册第一单元第6课《观察水中的微小生物》。先用真实水滴和显微镜观察，再借助这里的慢放、轨迹与影像记录交流发现。</p><h3>怎样读这个模型</h3><ul><li>水滴里的对象是程序绘制的<strong>形态与运动示意</strong>，颜色有增强，形态分别放大。画面倍率只缩放画面，不是显微镜光学倍率。</li><li>水流在模型中均匀地推动所有悬浮对象；草履虫与轮虫另有简化的自身运动。小球藻没有鞭毛、不主动游动。真实水流、物体状态和运动远比模型复杂。</li><li>“与碎屑对照”在固定模型坐标中把最近12个模型秒的轨迹起点对齐（镜头移动不改变轨迹），再扣除参照碎屑的平移。它帮助比较运动，<strong>不是鉴定生命的检测器</strong>。模型不能作为其预设规律的独立证据。</li><li>形态示意只用于比较特征，不凭一张图精确认种。微小生物并非都是单细胞：轮虫是多细胞动物。轮虫的纤毛冠作协调摆动，不是机械转轮。</li></ul><h3>真实影像怎么记录</h3><p>导入本地显微照片或视频，保留最多3个时刻。视频按0.2秒步进，可描画轮廓、标记目标和参照碎屑，比较相对位移。保持镜头、倍率和参照一致；参照应是被水流携带、无自主运动的颗粒。叠影和相对位移不能自动消除旋转、变焦、对焦变化或不均匀水流。</p><p>影像只在本机处理，不上传。播放由浏览器解码；常见 MP4（H.264）通常更方便，不能保证所有编码和旧设备可用。导出为观察记录，不自动填写结论。不要因画面里没看见微生物就判断水能饮用。</p><h3>依据与资料</h3><p>本项目所附教材第22—25页、教师教学用书本课第88页起。网页不嵌入教材扫描图，也不转载他人的显微视频。</p><ul><li><a href="https://www.microscopyu.com/gallery-images/paramecium-protozoan-videos" target="_blank" rel="noopener noreferrer">Nikon MicroscopyU：草履虫的纤毛与运动</a></li><li><a href="https://ucmp.berkeley.edu/phyla/rotifera/rotifera.html" target="_blank" rel="noopener noreferrer">UC Berkeley：轮虫的多细胞结构与纤毛冠</a></li><li><a href="https://cfb.unh.edu/phycokey/Choices/Chlorophyceae/unicells/non_flagellated/CHLORELLA/Chlorella_key.htm" target="_blank" rel="noopener noreferrer">University of New Hampshire：小球藻形态</a></li></ul><p>v1.0 · 单文件离线版 · 资料链接需要网络。</p></div></div>
+<!-- AIHTML-COMPAT-GRADE:START -->
+<div aria-label="本课技术需求：T2 · 二维绘图" title="本课最低技术需求：T2 · 二维绘图；视频格式支持取决于浏览器" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,'Microsoft YaHei',sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T2 · 二维绘图</div>
+<!-- AIHTML-COMPAT-GRADE:END -->
+<script>
+/*
+ * PondArt — deterministic, illustrative Canvas organisms.
+ * Drawn forms are scientific schematics, not microscopy photographs.
+ * The anterior (front) of paramecium / rotifer points toward local +x.
+ * size is body length in CSS drawing units; for Chlorella it is diameter.
+ * This module has no DOM effects, timers, network requests or random state.
+ */
+(function (global) {
+  'use strict';
+
+  var TAU = Math.PI * 2;
+
+  function noise(i, seed) {
+    var n = Math.sin(i * 127.1 + seed * 311.7) * 43758.5453123;
+    return n - Math.floor(n);
+  }
+
+  function ellipse(ctx, x, y, rx, ry, angle) {
+    var k = 0.5522847498307936;
+    ctx.save();
+    ctx.translate(x, y);
+    if (angle) ctx.rotate(angle);
+    ctx.beginPath();
+    ctx.moveTo(rx, 0);
+    ctx.bezierCurveTo(rx, ry * k, rx * k, ry, 0, ry);
+    ctx.bezierCurveTo(-rx * k, ry, -rx, ry * k, -rx, 0);
+    ctx.bezierCurveTo(-rx, -ry * k, -rx * k, -ry, 0, -ry);
+    ctx.bezierCurveTo(rx * k, -ry, rx, -ry * k, rx, 0);
+    ctx.closePath();
+    ctx.restore();
+  }
+
+  function dot(ctx, x, y, r, fill) {
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, TAU);
+    ctx.fillStyle = fill;
+    ctx.fill();
+  }
+
+  var slipper = [
+    [-0.48, 0, -0.44, -0.14, -0.26, -0.23, -0.02, -0.20],
+    [-0.02, -0.20, 0.23, -0.20, 0.43, -0.14, 0.48, -0.04],
+    [0.48, -0.04, 0.53, 0.10, 0.35, 0.19, 0.18, 0.18],
+    [0.18, 0.18, 0.06, 0.17, 0.01, 0.12, -0.06, 0.13],
+    [-0.06, 0.13, -0.23, 0.19, -0.42, 0.13, -0.48, 0]
+  ];
+
+  function slipperPath(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(slipper[0][0], slipper[0][1]);
+    for (var i = 0; i < slipper.length; i++) {
+      var p = slipper[i];
+      ctx.bezierCurveTo(p[2], p[3], p[4], p[5], p[6], p[7]);
+    }
+    ctx.closePath();
+  }
+
+  function cubicPoint(p, u) {
+    var v = 1 - u;
+    return {
+      x: v * v * v * p[0] + 3 * v * v * u * p[2] + 3 * v * u * u * p[4] + u * u * u * p[6],
+      y: v * v * v * p[1] + 3 * v * v * u * p[3] + 3 * v * u * u * p[5] + u * u * u * p[7],
+      tx: 3 * v * v * (p[2] - p[0]) + 6 * v * u * (p[4] - p[2]) + 3 * u * u * (p[6] - p[4]),
+      ty: 3 * v * v * (p[3] - p[1]) + 6 * v * u * (p[5] - p[3]) + 3 * u * u * (p[7] - p[5])
+    };
+  }
+
+  function paramecium(ctx, time, dark, detail, size) {
+    var pale = dark ? 'rgba(174,241,230,.83)' : 'rgba(35,126,135,.8)';
+    var body = ctx.createLinearGradient(-0.28, -0.23, 0.18, 0.22);
+    body.addColorStop(0, dark ? 'rgba(159,228,211,.38)' : 'rgba(130,206,190,.62)');
+    body.addColorStop(0.45, dark ? 'rgba(97,187,185,.25)' : 'rgba(165,218,197,.5)');
+    body.addColorStop(1, dark ? 'rgba(41,115,136,.43)' : 'rgba(70,150,156,.3)');
+
+    // Successive cilia bend with a phase offset: a travelling beat, not a rigid fringe.
+    ctx.strokeStyle = dark ? 'rgba(166,231,219,.56)' : 'rgba(42,133,138,.53)';
+    ctx.lineWidth = detail ? 0.0032 : 0.005;
+    var perSegment = detail ? 13 : (size > 40 ? 9 : 6);
+    for (var s = 0; s < slipper.length; s++) {
+      for (var j = 0; j < perSegment; j++) {
+        var id = s * perSegment + j;
+        var p = cubicPoint(slipper[s], (j + 0.35) / perSegment);
+        var len = Math.sqrt(p.tx * p.tx + p.ty * p.ty) || 1;
+        var tx = p.tx / len, ty = p.ty / len, nx = ty, ny = -tx;
+        var wave = Math.sin(time * 8 - id * 0.55);
+        var reach = 0.025 + noise(id, 2) * 0.018;
+        var bend = 0.016 * wave;
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.quadraticCurveTo(p.x + nx * reach * 0.60, p.y + ny * reach * 0.60,
+          p.x + nx * reach + tx * bend, p.y + ny * reach + ty * bend);
+        ctx.stroke();
+      }
+    }
+
+    slipperPath(ctx);
+    ctx.fillStyle = body;
+    ctx.fill();
+    ctx.strokeStyle = pale;
+    ctx.lineWidth = 0.008;
+    ctx.stroke();
+
+    ctx.save();
+    slipperPath(ctx);
+    ctx.clip();
+    // Cytoplasmic granules are texture only; no added animal-like organs.
+    var count = detail ? 68 : 23;
+    for (var k = 0; k < count; k++) {
+      var gx = (noise(k, 5) - 0.5) * 0.85;
+      var gy = (noise(k, 7) - 0.5) * 0.35 - 0.01;
+      dot(ctx, gx, gy, 0.0025 + noise(k, 9) * 0.007,
+        dark ? 'rgba(197,230,193,.30)' : 'rgba(73,126,114,.28)');
+    }
+
+    // A large nucleus and a nearby small nucleus; both stay inside the same cell.
+    ctx.beginPath();
+    ctx.moveTo(-0.095, -0.060);
+    ctx.bezierCurveTo(-0.035, -0.109, 0.069, -0.086, 0.076, -0.031);
+    ctx.bezierCurveTo(0.080, 0.019, -0.003, 0.041, -0.055, 0.004);
+    ctx.bezierCurveTo(-0.068, -0.009, -0.109, -0.023, -0.095, -0.060);
+    ctx.closePath();
+    ctx.fillStyle = dark ? 'rgba(69,130,151,.71)' : 'rgba(65,128,147,.46)';
+    ctx.fill();
+    ctx.strokeStyle = dark ? 'rgba(172,221,222,.48)' : 'rgba(35,110,127,.5)';
+    ctx.lineWidth = 0.004;
+    ctx.stroke();
+    dot(ctx, -0.102, 0.024, 0.014, dark ? 'rgba(154,202,209,.65)' : 'rgba(57,120,140,.6)');
+
+    var vacuoles = [[-0.28, -0.046, 0.036], [-0.18, 0.064, 0.028], [0.21, -0.07, 0.032], [0.30, 0.055, 0.026], [0.08, 0.105, 0.022]];
+    for (var v = 0; v < vacuoles.length; v++) {
+      var a = vacuoles[v];
+      ellipse(ctx, a[0], a[1], a[2], a[2] * 0.88, 0.2);
+      ctx.fillStyle = dark ? 'rgba(186,220,171,.17)' : 'rgba(178,205,135,.33)';
+      ctx.fill();
+      ctx.strokeStyle = dark ? 'rgba(215,236,201,.55)' : 'rgba(96,146,123,.62)';
+      ctx.lineWidth = 0.0035;
+      ctx.stroke();
+      if (detail) {
+        dot(ctx, a[0] - 0.008, a[1] + 0.002, 0.006, 'rgba(139,166,105,.66)');
+        dot(ctx, a[0] + 0.009, a[1] - 0.006, 0.004, 'rgba(170,189,116,.65)');
+      }
+    }
+
+    // A shallow oral groove on the side; it is not a separate digestive organ.
+    ctx.beginPath();
+    ctx.moveTo(0.30, 0.127);
+    ctx.bezierCurveTo(0.20, 0.094, 0.13, 0.038, 0.07, 0.059);
+    ctx.strokeStyle = dark ? 'rgba(141,210,210,.65)' : 'rgba(40,113,125,.55)';
+    ctx.lineWidth = 0.007;
+    ctx.stroke();
+    ctx.restore();
+
+    // Restricted rim highlight gives a transparent contour without a glossy sticker look.
+    ctx.beginPath();
+    ctx.moveTo(-0.39, -0.095);
+    ctx.bezierCurveTo(-0.20, -0.214, 0.14, -0.199, 0.32, -0.124);
+    ctx.lineWidth = 0.004;
+    ctx.strokeStyle = dark ? 'rgba(226,255,242,.67)' : 'rgba(240,255,249,.76)';
+    ctx.stroke();
+  }
+
+  function rotifer(ctx, time, dark, detail) {
+    // A representative bdelloid-like form: extensible body, posterior foot, two ciliary lobes.
+    // The corona lobes never rotate; only their individual cilia beat.
+    ctx.save();
+    var stretch = 0.96 + 0.035 * Math.sin(time * 0.7);
+    ctx.scale(stretch, 1 + (1 - stretch) * 0.18);
+    var rim = dark ? 'rgba(248,226,175,.85)' : 'rgba(129,99,60,.78)';
+    var amber = ctx.createLinearGradient(-0.20, -0.18, 0.12, 0.17);
+    amber.addColorStop(0, dark ? 'rgba(239,215,163,.45)' : 'rgba(233,210,162,.72)');
+    amber.addColorStop(0.5, dark ? 'rgba(186,158,111,.23)' : 'rgba(230,215,179,.4)');
+    amber.addColorStop(1, dark ? 'rgba(143,127,95,.36)' : 'rgba(163,137,94,.33)');
+
+    // The foot ends in slender toes, rather than in a third corona.
+    ctx.beginPath();
+    ctx.moveTo(-0.25, -0.048);
+    ctx.bezierCurveTo(-0.33, -0.04, -0.34, -0.022, -0.43, -0.021);
+    ctx.lineTo(-0.476, -0.037);
+    ctx.lineTo(-0.449, -0.002);
+    ctx.lineTo(-0.483, 0.034);
+    ctx.lineTo(-0.428, 0.022);
+    ctx.bezierCurveTo(-0.35, 0.024, -0.32, 0.048, -0.25, 0.05);
+    ctx.closePath();
+    ctx.fillStyle = amber;
+    ctx.fill();
+    ctx.strokeStyle = rim;
+    ctx.lineWidth = 0.005;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0.26, -0.091);
+    ctx.bezierCurveTo(0.20, -0.11, 0.18, -0.153, 0.075, -0.163);
+    ctx.bezierCurveTo(-0.072, -0.191, -0.24, -0.12, -0.284, -0.048);
+    ctx.bezierCurveTo(-0.299, -0.021, -0.299, 0.032, -0.276, 0.061);
+    ctx.bezierCurveTo(-0.19, 0.161, 0.015, 0.182, 0.134, 0.139);
+    ctx.bezierCurveTo(0.209, 0.115, 0.20, 0.096, 0.26, 0.083);
+    ctx.closePath();
+    ctx.fillStyle = amber;
+    ctx.fill();
+    ctx.strokeStyle = rim;
+    ctx.lineWidth = 0.0065;
+    ctx.stroke();
+
+    // Light external folds suggest telescopic contraction, not internal segmentation.
+    ctx.strokeStyle = dark ? 'rgba(243,224,180,.25)' : 'rgba(127,105,70,.25)';
+    ctx.lineWidth = 0.003;
+    for (var f = 0; f < 3; f++) {
+      var fx = -0.235 - f * 0.047;
+      var fw = 0.068 - f * 0.016;
+      ctx.beginPath();
+      ctx.moveTo(fx + 0.011, -fw);
+      ctx.quadraticCurveTo(fx - 0.013, 0, fx + 0.008, fw);
+      ctx.stroke();
+    }
+
+    // A simplified continuous digestive route inside this multicellular animal.
+    ctx.beginPath();
+    ctx.moveTo(0.31, 0);
+    ctx.bezierCurveTo(0.245, 0.002, 0.172, -0.019, 0.112, -0.004);
+    ctx.bezierCurveTo(0.064, 0.009, 0.019, 0.007, -0.042, 0.026);
+    ctx.bezierCurveTo(-0.10, 0.055, -0.129, 0.058, -0.175, 0.037);
+    ctx.strokeStyle = dark ? 'rgba(226,196,138,.59)' : 'rgba(143,108,60,.54)';
+    ctx.lineWidth = 0.013;
+    ctx.stroke();
+    ellipse(ctx, -0.032, 0.02, 0.085, 0.060, -0.10);
+    ctx.fillStyle = dark ? 'rgba(165,126,69,.39)' : 'rgba(176,139,74,.38)';
+    ctx.fill();
+    ctx.strokeStyle = dark ? 'rgba(239,206,148,.52)' : 'rgba(134,100,56,.51)';
+    ctx.lineWidth = 0.004;
+    ctx.stroke();
+    ellipse(ctx, 0.105, -0.002, 0.041, 0.042, 0);
+    ctx.fillStyle = dark ? 'rgba(212,181,125,.32)' : 'rgba(183,145,86,.27)';
+    ctx.fill();
+    ctx.stroke();
+    if (detail) {
+      for (var g = 0; g < 20; g++) {
+        dot(ctx, (noise(g, 16) - 0.5) * 0.43 - 0.015,
+          (noise(g, 18) - 0.5) * 0.20, 0.003 + noise(g, 21) * 0.006,
+          dark ? 'rgba(223,201,158,.28)' : 'rgba(119,102,68,.25)');
+      }
+      ctx.beginPath();
+      ctx.moveTo(0.096, -0.019); ctx.lineTo(0.111, -0.003); ctx.lineTo(0.096, 0.018);
+      ctx.strokeStyle = dark ? 'rgba(247,222,175,.65)' : 'rgba(111,85,45,.6)';
+      ctx.lineWidth = 0.004;
+      ctx.stroke();
+    }
+
+    // Two head lobes and their anterior ciliary fields. Cilia are individually curved strokes.
+    for (var side = -1; side <= 1; side += 2) {
+      var cx = 0.276, cy = side * 0.078;
+      ellipse(ctx, cx, cy, 0.071, 0.071, 0);
+      ctx.fillStyle = dark ? 'rgba(225,220,175,.24)' : 'rgba(220,204,160,.45)';
+      ctx.fill();
+      ctx.strokeStyle = rim;
+      ctx.lineWidth = 0.004;
+      ctx.stroke();
+      var nc = detail ? 24 : 15;
+      ctx.strokeStyle = dark ? 'rgba(250,238,197,.67)' : 'rgba(122,106,66,.59)';
+      ctx.lineWidth = detail ? 0.003 : 0.004;
+      for (var c = 0; c < nc; c++) {
+        var a = -1.51 + (c / (nc - 1)) * 3.02;
+        var dx = Math.cos(a), dy = Math.sin(a);
+        var bx = cx + 0.067 * dx, by = cy + 0.066 * dy;
+        var phase = time * 9 - c * 0.63 + side * 0.8;
+        var extension = 0.049 + 0.009 * Math.sin(phase);
+        var bend = 0.018 * Math.cos(phase);
+        ctx.beginPath();
+        ctx.moveTo(bx, by);
+        ctx.quadraticCurveTo(bx + dx * extension * 0.56, by + dy * extension * 0.56,
+          bx + dx * extension - dy * bend, by + dy * extension + dx * bend);
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+  }
+
+  function chlorella(ctx, dark, detail) {
+    var cell = ctx.createRadialGradient(-0.17, -0.20, 0.01, 0.02, 0.01, 0.50);
+    cell.addColorStop(0, dark ? 'rgba(173,216,117,.93)' : 'rgba(183,223,131,.94)');
+    cell.addColorStop(0.48, dark ? 'rgba(109,173,87,.83)' : 'rgba(106,170,78,.85)');
+    cell.addColorStop(1, dark ? 'rgba(49,108,66,.77)' : 'rgba(56,122,62,.85)');
+    ellipse(ctx, 0, 0, 0.48, 0.47, 0);
+    ctx.fillStyle = cell;
+    ctx.fill();
+    ctx.strokeStyle = dark ? 'rgba(195,235,151,.82)' : 'rgba(72,125,57,.89)';
+    ctx.lineWidth = 0.022;
+    ctx.stroke();
+
+    if (detail) {
+      // A cup-like chloroplast in section. No flagella, tail, cilia or autonomous stroke.
+      ctx.beginPath();
+      ctx.moveTo(0.25, -0.31);
+      ctx.bezierCurveTo(-0.01, -0.50, -0.41, -0.26, -0.37, 0.09);
+      ctx.bezierCurveTo(-0.34, 0.39, 0.01, 0.47, 0.27, 0.27);
+      ctx.bezierCurveTo(0.01, 0.27, -0.17, 0.14, -0.16, -0.04);
+      ctx.bezierCurveTo(-0.15, -0.20, 0.05, -0.30, 0.25, -0.31);
+      ctx.closePath();
+      ctx.fillStyle = dark ? 'rgba(60,122,62,.63)' : 'rgba(49,120,50,.55)';
+      ctx.fill();
+      for (var g = 0; g < 20; g++) {
+        var a = noise(g, 23) * TAU;
+        var r = 0.20 + noise(g, 29) * 0.17;
+        dot(ctx, Math.cos(a) * r, Math.sin(a) * r, 0.011 + noise(g, 31) * 0.009,
+          dark ? 'rgba(192,223,124,.23)' : 'rgba(178,214,109,.35)');
+      }
+      ellipse(ctx, 0.095, -0.012, 0.094, 0.087, 0.12);
+      ctx.fillStyle = 'rgba(215,229,166,.23)';
+      ctx.fill();
+      ctx.strokeStyle = dark ? 'rgba(212,239,162,.33)' : 'rgba(207,227,148,.48)';
+      ctx.lineWidth = 0.012;
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.arc(-0.006, -0.005, 0.435, 3.70, 4.96);
+    ctx.strokeStyle = dark ? 'rgba(235,252,195,.70)' : 'rgba(240,255,212,.78)';
+    ctx.lineWidth = 0.025;
+    ctx.stroke();
+  }
+
+  function debris(ctx, dark, detail, seed) {
+    var n = 12;
+    ctx.beginPath();
+    for (var i = 0; i < n; i++) {
+      var a = i / n * TAU;
+      var r = 0.34 + noise(i, seed) * 0.16;
+      var x = Math.cos(a) * r, y = Math.sin(a) * r * 0.72;
+      if (!i) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    var earthy = ctx.createLinearGradient(-0.3, -0.2, 0.25, 0.2);
+    earthy.addColorStop(0, dark ? 'rgba(195,176,143,.65)' : 'rgba(173,157,129,.65)');
+    earthy.addColorStop(1, dark ? 'rgba(131,126,111,.33)' : 'rgba(122,117,104,.53)');
+    ctx.fillStyle = earthy;
+    ctx.fill();
+    ctx.strokeStyle = dark ? 'rgba(223,205,170,.46)' : 'rgba(115,107,88,.55)';
+    ctx.lineWidth = 0.017;
+    ctx.stroke();
+    ctx.save();
+    ctx.clip();
+    var count = detail ? 19 : 7;
+    for (var k = 0; k < count; k++) {
+      dot(ctx, (noise(k, seed + 2) - 0.5) * 0.69,
+        (noise(k, seed + 4) - 0.5) * 0.48, 0.012 + noise(k, seed + 5) * 0.025,
+        dark ? 'rgba(90,96,84,.38)' : 'rgba(83,88,73,.25)');
+    }
+    ctx.restore();
+  }
+
+  function draw(ctx, type, x, y, size, angle, t, opts) {
+    if (!ctx || !isFinite(size) || size <= 0 || !isFinite(x) || !isFinite(y)) return;
+    opts = opts || {};
+    var dark = opts.dark !== false;
+    var detail = opts.detail === undefined ? size >= 90 : !!opts.detail;
+    var time = isFinite(t) ? t : 0;
+    ctx.save();
+    try {
+      ctx.translate(x, y);
+      ctx.rotate(isFinite(angle) ? angle : 0);
+      ctx.scale(size, size);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      if (type === 'paramecium') paramecium(ctx, time, dark, detail, size);
+      else if (type === 'rotifer') rotifer(ctx, time, dark, detail);
+      else if (type === 'chlorella') chlorella(ctx, dark, detail);
+      else if (type === 'debris') debris(ctx, dark, detail, isFinite(opts.seed) ? opts.seed : 37);
+    } finally {
+      ctx.restore();
+    }
+  }
+
+  global.PondArt = { draw: draw };
+})(window);
+
+</script>
+<script>
+(function(){'use strict';
+// All motion below is a pedagogical model in arbitrary scene units.
+// Apparent object size and modeled seconds are not calibrated microscopy measurements.
+var $=function(id){return document.getElementById(id);};
+var mainCanvas=$('pondCanvas'),detailCanvas=$('detailCanvas'),compareCanvas=$('compareCanvas');
+var types={A:{type:'paramecium',name:'草履虫',size:170,initial:{x:-125,y:-20},color:'#8ecbd3',hint:'体表有许多短纤毛，协同摆动。一个细胞也能完成生命活动。'},B:{type:'rotifer',name:'轮虫',size:190,initial:{x:148,y:125},color:'#edc890',hint:'头端纤毛冠参与摄食与运动。轮虫是多细胞动物，纤毛不是机械轮。'},C:{type:'chlorella',name:'小球藻',size:23,initial:{x:104,y:-153},color:'#9ecc87',hint:'无鞭毛，不主动游动。绿色来自叶绿体；仅凭不动不能判断它不是生物。'},D:{type:'debris',name:'碎屑',size:49,initial:{x:-165,y:165},color:'#cdb797',hint:'不规则碎屑也会随水移动。移动本身不能证明对象是生物。'}};
+var state={time:0,playing:true,speed:1,flow:15,selected:'A',structure:false,trails:false,compare:false,follow:false,zoom:1,camera:{x:0,y:0},water:{x:0,y:0},history:[],captureLock:null,captureCount:0,active:true};
+var toastTimer=0,lastFrame=0,historyAt=-1,pointer=null,resizePending=true,raf=0,modalPrevious=null,capturePending=false;
+function toast(msg){$('toast').textContent=msg;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},4300);}
+window.classroomToast=toast;
+function organismPosition(key,t,water){var d=types[key],x=d.initial.x+water.x,y=d.initial.y+water.y,a=0;
+if(key==='A'){x+=70*Math.sin(.38*t)+20*Math.sin(.95*t);y+=72*(Math.sin(.23*t+.4)-Math.sin(.4));a=Math.atan2(16.56*Math.cos(.23*t+.4),26.6*Math.cos(.38*t)+19*Math.cos(.95*t));}
+if(key==='B'){x+=42*Math.sin(.21*t);y+=40*(1-Math.cos(.26*t));a=Math.atan2(10.4*Math.sin(.26*t),8.82*Math.cos(.21*t));}
+if(key==='C'){a=0;}if(key==='D'){a=.32;}return{x:x,y:y,angle:a};}
+function positions(){var p={};Object.keys(types).forEach(function(k){p[k]=organismPosition(k,state.time,state.water);});return p;}
+function camera(){if(state.captureLock)return state.captureLock.camera;if(state.follow){var p=organismPosition(state.selected,state.time,state.water);return{x:p.x,y:p.y};}return state.camera;}
+function fit(canvas){var b=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);var w=Math.max(1,b.width),h=Math.max(1,b.height);if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}var ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);return{ctx:ctx,w:w,h:h};}
+function geometry(w,h,zoom,cam){var r=Math.max(45,Math.min(w*.47,h*.44));var s=r/390*zoom;return{cx:w/2,cy:h*.52,r:r,s:s,cam:cam};}
+function point(p,g){return{x:g.cx+(p.x-g.cam.x)*g.s,y:g.cy+(p.y-g.cam.y)*g.s};}
+function drawArrow(ctx,x1,y1,x2,y2,color,width){var dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy);if(len<1)return;var angle=Math.atan2(dy,dx);ctx.save();ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=width||2;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-7*Math.cos(angle-.5),y2-7*Math.sin(angle-.5));ctx.lineTo(x2-7*Math.cos(angle+.5),y2-7*Math.sin(angle+.5));ctx.closePath();ctx.fill();ctx.restore();}
+function drawScene(ctx,w,h,opts){opts=opts||{};var cam=opts.camera||camera(),zoom=opts.zoom||state.zoom,g=geometry(w,h,zoom,cam);ctx.clearRect(0,0,w,h);var bg=ctx.createLinearGradient(0,0,w,h);bg.addColorStop(0,'#103c49');bg.addColorStop(1,'#062d3b');ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+var waterGlow=ctx.createRadialGradient(g.cx-g.r*.25,g.cy-g.r*.25,0,g.cx,g.cy,g.r);waterGlow.addColorStop(0,'#24616b');waterGlow.addColorStop(.65,'#174f5b');waterGlow.addColorStop(1,'#103e4b');ctx.beginPath();ctx.arc(g.cx,g.cy,g.r,0,Math.PI*2);ctx.fillStyle=waterGlow;ctx.fill();ctx.strokeStyle='#78b5c069';ctx.lineWidth=1.5;ctx.stroke();ctx.save();ctx.beginPath();ctx.arc(g.cx,g.cy,g.r-1,0,Math.PI*2);ctx.clip();
+// Background particles follow exactly the same modeled water translation.
+for(var i=0;i<47;i++){var bx=((i*173.31+state.water.x+1100)%1400+1400)%1400-700,by=((i*107.9+state.water.y+900)%1100+1100)%1100-550,p=point({x:bx,y:by},g);ctx.fillStyle=i%6===0?'#d6d9b14b':'#b8dde01c';ctx.beginPath();ctx.arc(p.x,p.y,(i%3+1)*.7,0,Math.PI*2);ctx.fill();}
+if(state.trails&&state.history.length>1){[state.selected,'D'].filter(function(k,i,a){return a.indexOf(k)===i;}).forEach(function(k){ctx.save();ctx.beginPath();ctx.strokeStyle=k==='D'?'#d9b894b8':'#f5aa87';ctx.lineWidth=k==='D'?1.6:2.4;if(k==='D')ctx.setLineDash([4,5]);state.history.forEach(function(s,i){var p=point(s.p[k],g);if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);});ctx.stroke();ctx.restore();});}
+var pp=positions();Object.keys(types).forEach(function(k){var t=types[k],p=point(pp[k],g);PondArt.draw(ctx,t.type,p.x,p.y,t.size*g.s,pp[k].angle,state.time,{dark:true,detail:true});if(k==='C'){[[-26,7],[22,16],[9,-27]].forEach(function(d,i){PondArt.draw(ctx,'chlorella',p.x+d[0]*g.s,p.y+d[1]*g.s,(15+i*2)*g.s,0,0,{dark:true,detail:false});});}
+if(k===state.selected){ctx.save();ctx.strokeStyle='#ecaa83';ctx.lineWidth=1.8;ctx.setLineDash([5,4]);ctx.beginPath();ctx.arc(p.x,p.y,Math.max(20,t.size*g.s*.62),0,Math.PI*2);ctx.stroke();ctx.restore();}
+var labelX=p.x+t.size*g.s*.38+13,labelY=p.y-t.size*g.s*.28-12;ctx.beginPath();ctx.arc(labelX,labelY,13,0,Math.PI*2);ctx.fillStyle=k===state.selected?'#f1ad86':'#153d49';ctx.fill();ctx.strokeStyle=k===state.selected?'#ffd6b7':'#8bb8c0';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle=k===state.selected?'#173c47':'#d8eff0';ctx.font='bold 14px '+getComputedStyle(document.body).fontFamily;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(k,labelX,labelY+.4);
+});ctx.restore();
+// Direction is a relative setting, not a measured physical velocity.
+if(state.flow!==0){var fx=g.cx-g.r*.5,fy=g.cy+g.r*.79;ctx.globalAlpha=.7;var sign=Math.sign(state.flow);drawArrow(ctx,fx,fy,fx+sign*42,fy,'#92c0c6',1.5);ctx.globalAlpha=1;ctx.font='12px '+getComputedStyle(document.body).fontFamily;ctx.textAlign='left';ctx.fillStyle='#9cc6cd';ctx.fillText('水流',fx+(sign>0?49:-75),fy+4);}
+if(opts.export){ctx.fillStyle='#e3f3f3';ctx.textAlign='left';ctx.textBaseline='top';ctx.font='18px '+getComputedStyle(document.body).fontFamily;ctx.fillText('模型示意 · 非真实显微影像',20,15);ctx.font='14px '+getComputedStyle(document.body).fontFamily;ctx.fillText('固定视野 · 形态分别放大，不用于大小或速度测量',20,42);ctx.textAlign='right';ctx.fillText('模型时刻 '+state.time.toFixed(1)+' s',w-20,h-22);}
+return g;}
+function drawDetail(){var f=fit(detailCanvas);if(f.w<3||f.h<3)return;var c=f.ctx,k=state.selected,d=types[k];c.clearRect(0,0,f.w,f.h);var x=f.w*.49,y=f.h*.44,size=Math.min(f.w*.73,f.h*1.14);if(k==='C')size=Math.min(f.w*.34,f.h*.58);if(k==='D')size=Math.min(f.w*.38,f.h*.65);PondArt.draw(c,d.type,x,y,size,k==='A'?-.28:k==='B'?-.18:0,state.time,{dark:false,detail:true});
+if(state.structure){c.fillStyle='#245761';c.font='14px '+getComputedStyle(document.body).fontFamily;c.strokeStyle='#4b8088';c.lineWidth=1;c.textBaseline='middle';if(k==='A'){c.textAlign='right';c.fillText('纤毛',f.w-13,19);c.beginPath();c.moveTo(f.w-47,24);c.lineTo(x+size*.26,y-size*.18);c.stroke();c.textAlign='left';c.fillText('单细胞',11,f.h-37);}else if(k==='B'){c.textAlign='right';c.fillText('纤毛冠',f.w-10,19);c.beginPath();c.moveTo(f.w-55,28);c.lineTo(x+size*.34,y-12);c.stroke();c.textAlign='left';c.fillText('多细胞动物',10,f.h-37);}else if(k==='C'){c.textAlign='right';c.fillText('叶绿体',f.w-13,21);c.beginPath();c.moveTo(f.w-56,28);c.lineTo(x-size*.27,y-size*.05);c.stroke();c.textAlign='left';c.fillText('无鞭毛',11,f.h-37);}else{c.textAlign='left';c.fillText('不规则轮廓',12,22);}}
+}
+function relativeSeries(){var history=state.history;if(history.length<2)return null;var first=history[0],key=state.selected;return history.map(function(s){var target={x:s.p[key].x-first.p[key].x,y:s.p[key].y-first.p[key].y},ref={x:s.p.D.x-first.p.D.x,y:s.p.D.y-first.p.D.y};return{a:target,b:ref,r:{x:target.x-ref.x,y:target.y-ref.y}};});}
+function drawCompare(){if(!state.compare)return;var f=fit(compareCanvas),ctx=f.ctx,w=f.w,h=f.h;if(w<3||h<3)return;ctx.clearRect(0,0,w,h);ctx.font='14px '+getComputedStyle(document.body).fontFamily;ctx.fillStyle='#2d5b64';ctx.textAlign='center';ctx.fillText('固定坐标下的移动',w*.25,15);ctx.fillText('扣除参照的移动',w*.75,15);ctx.strokeStyle='#c1d7d8';ctx.beginPath();ctx.moveTo(w/2,4);ctx.lineTo(w/2,h-5);ctx.stroke();var series=relativeSeries();if(!series){ctx.font='14px '+getComputedStyle(document.body).fontFamily;ctx.fillStyle='#6b858a';ctx.fillText('继续播放，积累一段轨迹',w/2,h*.65);return;}
+var maxX=20,maxY=20;series.forEach(function(s){['a','b','r'].forEach(function(k){maxX=Math.max(maxX,Math.abs(s[k].x));maxY=Math.max(maxY,Math.abs(s[k].y));});});var sc=Math.min((w/4-30)/maxX,(h/2-27)/maxY);function plot(seriesKey,cx,dashed,color){ctx.save();ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2.2;if(dashed)ctx.setLineDash([4,4]);series.forEach(function(s,i){var p=s[seriesKey],x=cx+p.x*sc,y=h*.59+p.y*sc;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});ctx.stroke();var end=series[series.length-1][seriesKey];ctx.setLineDash([]);ctx.beginPath();ctx.arc(cx+end.x*sc,h*.59+end.y*sc,4,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();ctx.restore();}
+[w*.25,w*.75].forEach(function(cx){ctx.strokeStyle='#9abfc166';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(cx-12,h*.59);ctx.lineTo(cx+12,h*.59);ctx.moveTo(cx,h*.59-12);ctx.lineTo(cx,h*.59+12);ctx.stroke();});plot('b',w*.25,true,'#a17b53');plot('a',w*.25,false,'#087f87');plot('r',w*.75,false,'#087f87');ctx.strokeStyle='#a17b53';ctx.beginPath();ctx.arc(w*.75,h*.59,5,0,Math.PI*2);ctx.stroke();}
+function updateTexts(){var d=types[state.selected];$('selectedLabel').textContent=state.structure?d.name+' · 形态示意':'观察对象 '+state.selected;$('detailDescription').innerHTML=state.structure?d.hint:'留意轮廓、内部和运动。<br>先描述你的发现，再查看资料。';$('showStructure').setAttribute('aria-pressed',String(state.structure));$('showCompare').setAttribute('aria-pressed',String(state.compare));$('comparePanel').hidden=!state.compare;$('showTrails').setAttribute('aria-pressed',String(state.trails));$('followObject').textContent=(state.follow?'正在跟随 ':'跟随 ')+state.selected;$('followObject').setAttribute('aria-pressed',String(state.follow));$('followObject').disabled=!!state.captureLock;$('zoomView').disabled=!!state.captureLock;$('zoomView').textContent='画面 '+state.zoom+'×';$('slowMotion').setAttribute('aria-pressed',String(state.speed!==1));$('slowMotion').querySelector('span').textContent=state.speed===1?'慢放':'慢放 ¼×';$('playPause').querySelector('span').textContent=state.playing?'暂停':'播放';$('playIcon').innerHTML=state.playing?'<path d="M6 4h4v16H6zm8 0h4v16h-4z"/>':'<path d="M6 3v18l15-9z"/>';$('waterFlow').value=state.flow;$('flowLabel').textContent=state.flow===0?'静止':(state.flow>0?'向右':'向左')+' · '+(Math.abs(state.flow)<30?'弱':'强');$('viewHint').textContent=state.captureLock?'记录中：镜头已固定':state.follow?'镜头跟随目标；背景会相对移动':'拖动空白移动视野';$('captureModel').querySelector('span').textContent=state.captureCount?'保留画面 '+state.captureCount+'/3':'保留画面';$('thinkingQuestion').textContent=state.selected==='C'?'不主动游动，就一定不是生物吗？':state.selected==='D'?'碎屑也在动，怎样继续判断？':'只凭移动，能判断它是生物吗？';document.querySelectorAll('[data-object]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.object===state.selected));});}
+function select(key,locate){state.selected=key;if(locate&&!state.captureLock){var p=organismPosition(key,state.time,state.water);state.camera={x:p.x,y:p.y};}updateTexts();draw();}
+function draw(){if(!state.active)return;var f=fit(mainCanvas);drawScene(f.ctx,f.w,f.h);drawDetail();drawCompare();$('modelTime').textContent='模型时刻 '+state.time.toFixed(1)+' s';}
+function sampleHistory(){state.history.push({t:state.time,p:positions()});while(state.history.length&&state.history[0].t<state.time-12)state.history.shift();if(state.history.length>180)state.history.shift();historyAt=state.time;}
+function animate(now){var dt=lastFrame?Math.min((now-lastFrame)/1000,.05):0;lastFrame=now;if(state.active&&!document.hidden){if(state.playing){dt*=state.speed;state.time+=dt;state.water.x+=state.flow*.40*dt;if(state.time-historyAt>.085)sampleHistory();draw();}}raf=requestAnimationFrame(animate);}
+function clearCaptureLock(){state.captureLock=null;state.captureCount=0;updateTexts();}
+function resetModel(){state.time=0;state.playing=true;state.speed=1;state.flow=15;state.selected='A';state.structure=false;state.trails=false;state.compare=false;state.follow=false;state.zoom=1;state.camera={x:0,y:0};state.water={x:0,y:0};state.history=[];historyAt=-1;if(window.EvidenceLab&&window.EvidenceLab.getSource&&window.EvidenceLab.getSource()==='model'){window.EvidenceLab.reset();}clearCaptureLock();sampleHistory();updateTexts();draw();}
+function setWorkspace(which){var isModel=which==='model';state.active=isModel;$('modelPanel').hidden=!isModel;$('evidencePanel').hidden=isModel;$('tabModel').setAttribute('aria-pressed',String(isModel));$('tabEvidence').setAttribute('aria-pressed',String(!isModel));$('taskQuestion').textContent=isModel?'同样在动，运动方式一样吗？':'把看见的过程，变成可以比较的证据';$('taskHint').textContent=isModel?'点对象看细节，保留画面作比较':'本地影像 · 留帧 · 标记 · 对照';if(window.EvidenceLab){if(isModel)window.EvidenceLab.deactivate();else window.EvidenceLab.activate();}if(isModel)draw();}
+$('tabModel').onclick=function(){setWorkspace('model');};$('tabEvidence').onclick=$('goEvidence').onclick=function(){setWorkspace('evidence');};$('playPause').onclick=function(){state.playing=!state.playing;updateTexts();draw();};$('slowMotion').onclick=function(){state.speed=state.speed===1?.25:1;updateTexts();};$('showTrails').onclick=function(){state.trails=!state.trails;updateTexts();draw();};$('showStructure').onclick=function(){state.structure=!state.structure;updateTexts();draw();};$('showCompare').onclick=function(){state.compare=!state.compare;updateTexts();draw();};$('closeCompare').onclick=function(){state.compare=false;updateTexts();draw();};$('followObject').onclick=function(){state.follow=!state.follow;if(!state.follow){var p=organismPosition(state.selected,state.time,state.water);state.camera={x:p.x,y:p.y};}updateTexts();draw();};$('zoomView').onclick=function(){state.zoom=state.zoom===1?2:1;updateTexts();draw();};document.querySelectorAll('[data-object]').forEach(function(b){b.onclick=function(){select(b.dataset.object,true);};});$('waterFlow').oninput=function(){state.flow=Number(this.value);updateTexts();draw();};$('stillWater').onclick=function(){state.flow=0;updateTexts();draw();};
+$('captureModel').onclick=async function(){var b=this;if(!window.EvidenceLab||!window.EvidenceLab.addModelFrame){toast('记录台尚未准备好，请重新打开页面。');return;}if(state.captureCount>=3){toast('已保留3个时刻。到“留住证据”比较，或清空后重新观察。');return;}b.disabled=true;capturePending=true;var creating=!state.captureLock;if(creating){state.captureLock={camera:{x:camera().x,y:camera().y},zoom:state.zoom};}var shot=document.createElement('canvas');shot.width=1200;shot.height=760;drawScene(shot.getContext('2d'),1200,760,{camera:state.captureLock.camera,zoom:state.captureLock.zoom,export:true});try{var ok=await window.EvidenceLab.addModelFrame({dataUrl:shot.toDataURL('image/png'),time:state.time,label:'水滴模型 · 同一固定视野'});if(ok){state.captureCount++;state.follow=false;updateTexts();toast(state.captureCount===1?'已留存第1帧，镜头与画面倍率已锁定。继续观察后再留一帧。':'已留存第'+state.captureCount+'帧。可到“留住证据”叠影、标记和导出。');}else{if(creating)state.captureLock=null;toast('记录台已有影像，或模型记录已满。请先导出或清空，再保留新画面。');}}catch(e){if(creating)state.captureLock=null;toast('画面未能保存，请清空记录后重试。');}finally{capturePending=false;b.disabled=false;updateTexts();}};
+document.addEventListener('evidence:reset',function(){if(!capturePending)clearCaptureLock();});
+function canvasPoint(e){var b=mainCanvas.getBoundingClientRect();return{x:e.clientX-b.left,y:e.clientY-b.top};}
+mainCanvas.addEventListener('pointerdown',function(e){if(e.button!==undefined&&e.button!==0)return;var p=canvasPoint(e),f=mainCanvas.getBoundingClientRect(),g=geometry(f.width,f.height,state.zoom,camera()),pp=positions(),found=null,minDist=Infinity;Object.keys(types).forEach(function(k){var q=point(pp[k],g),dist=Math.hypot(p.x-q.x,p.y-q.y),radius=Math.max(23,types[k].size*g.s*.52);if(dist<radius&&dist<minDist){found=k;minDist=dist;}});if(found){select(found,false);return;}if(state.captureLock){toast('记录中的视野已固定；清空记录后可以移动视野。');return;}state.camera={x:camera().x,y:camera().y};state.follow=false;pointer={id:e.pointerId,x:p.x,y:p.y,cx:state.camera.x,cy:state.camera.y,s:g.s};mainCanvas.setPointerCapture(e.pointerId);updateTexts();});
+mainCanvas.addEventListener('pointermove',function(e){if(!pointer||pointer.id!==e.pointerId)return;var p=canvasPoint(e);state.camera.x=pointer.cx-(p.x-pointer.x)/pointer.s;state.camera.y=pointer.cy-(p.y-pointer.y)/pointer.s;draw();});['pointerup','pointercancel','lostpointercapture'].forEach(function(type){mainCanvas.addEventListener(type,function(){pointer=null;});});mainCanvas.addEventListener('keydown',function(e){if(['a','b','c','d'].includes(e.key.toLowerCase())){select(e.key.toUpperCase(),true);e.preventDefault();}if(e.key===' '){state.playing=!state.playing;updateTexts();e.preventDefault();}});
+$('resetApp').onclick=function(){if(state.active){resetModel();toast('水滴模型已复位。');}else if(window.EvidenceLab){window.EvidenceLab.reset();toast('影像与观察记录已清空。');}};
+$('fullscreen').onclick=async function(){try{var d=document;if(d.fullscreenElement){await d.exitFullscreen();}else if(d.documentElement.requestFullscreen){await d.documentElement.requestFullscreen();}else if(d.documentElement.webkitRequestFullscreen){d.documentElement.webkitRequestFullscreen();}else toast('此浏览器不支持网页全屏，可使用浏览器的全屏功能。');}catch(e){toast('当前环境未允许全屏；可使用浏览器全屏或横屏显示。');}};
+function closeAbout(){$('aboutDialog').hidden=true;if(modalPrevious)modalPrevious.focus();}
+$('openAbout').onclick=function(){modalPrevious=document.activeElement;$('aboutDialog').hidden=false;$('closeAbout').focus();};$('closeAbout').onclick=closeAbout;$('aboutDialog').onclick=function(e){if(e.target===this)closeAbout();};document.addEventListener('keydown',function(e){if($('aboutDialog').hidden)return;if(e.key==='Escape'){closeAbout();e.preventDefault();}if(e.key==='Tab'){var all=$('aboutDialog').querySelectorAll('button,a[href]'),first=all[0],last=all[all.length-1];if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault();}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault();}}});window.addEventListener('resize',function(){if(window.innerWidth>850)window.scrollTo(0,0);draw();});document.addEventListener('visibilitychange',function(){lastFrame=0;});
+// Stable inspection API for manual classroom checks; no network or persistence.
+window.PondLab={reset:resetModel,select:select,activate:function(){setWorkspace('model');},getState:function(){return JSON.parse(JSON.stringify(state));},positions:positions,relativeSeries:relativeSeries};
+sampleHistory();updateTexts();draw();raf=requestAnimationFrame(animate);
+})();
+
+</script>
+</body></html>
