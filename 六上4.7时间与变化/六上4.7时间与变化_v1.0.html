@@ -192,6 +192,36 @@
   <div class="dialog-body"><p id="export-filename"></p><p class="muted">文件已生成，点击下方按钮保存到设备。</p><a id="download-link" class="download-button primary" href="#" download>下载文件</a></div>
  </div>
 </div>
+<script>
+/* Local-only evidence protection. No network, no extra persistent copies. */
+window.LessonRecordGuard=function(key,title,current,validate){
+ 'use strict';
+ var original=null,known=false,blocked=false,dirty=false,reason='',backupRaw,backupMade=false,box,button,msg,check,replaceButton;
+ function raw(){return localStorage.getItem(key);}
+ function show(text,bad){reason=text;dirty=!!bad;if(button){button.textContent=bad?'记录未保存 · 查看保护':'本机记录 · '+text;button.style.background=bad?'#9a342d':'#245c50';msg.textContent=text;}}
+ function lock(text){blocked=true;show(text+'。原档未覆盖；当前操作仅留在本页，请先备份。',true);}
+ function load(){try{original=raw();known=true;if(original===null){show('尚未写入',false);return null;}var data=JSON.parse(original);if(!validate(data))throw new Error('invalid');show('已读取',false);return data;}catch(e){lock(known?'本机记录格式或版本不受支持':'本机存储不可读');return null;}}
+ function save(){if(blocked){show(reason,true);return false;}try{if(!known||raw()!==original){lock('另一页面已更改本机记录');return false;}var value=current();if(!validate(value)){lock('当前记录格式异常');return false;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;show('已保存',false);return true;}catch(e){show('未能写入本机；请保留本页并下载备份',true);return false;}}
+ function backup(){var latest=null,readError=false;try{latest=raw();}catch(e){readError=true;}var payload={format:'lesson-local-backup-v1',lesson:title,storageKey:key,createdAt:new Date().toISOString(),originalRaw:original,latestRaw:latest,latestReadFailed:readError,currentPage:current()};try{var url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=title+'-本机记录备份.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);backupRaw=latest;backupMade=!readError;check.checked=false;replaceButton.disabled=true;msg.textContent='已发起备份下载。请到下载位置核实文件已保存；包含个人记录，请勿公开或上传。备份仅供保全，本页没有自动导入功能。';}catch(e){msg.textContent='备份未能生成；请勿关闭本页或替换原档。';backupMade=false;}}
+ function replace(){if(!backupMade||!check.checked)return;try{if(raw()!==backupRaw){backupMade=false;check.checked=false;replaceButton.disabled=true;lock('备份后本机档案再次改变，请重新备份');return;}var value=current();if(!validate(value)){lock('当前记录格式异常，不能替换');return;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;blocked=false;backupMade=false;check.checked=false;replaceButton.disabled=true;show('已用当前页面记录替换；请妥善保留备份',false);}catch(e){show('替换未成功；原档未主动删除，请保留本页和备份',true);}}
+ function mount(){
+  var host=document.createElement('div');host.id='local-record-protection';host.style.cssText='position:fixed;right:10px;bottom:6px;z-index:10000;font:14px/1.6 system-ui,sans-serif;max-width:calc(100vw - 20px);color:#20352d';
+  button=document.createElement('button');button.type='button';button.style.cssText='color:white;border:1px solid white;border-radius:8px;padding:5px 10px;min-height:32px;font:13px system-ui;cursor:pointer';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','local-record-panel');
+  box=document.createElement('section');box.id='local-record-panel';box.hidden=true;box.setAttribute('aria-label','本机记录保护');box.style.cssText='position:absolute;bottom:42px;right:0;width:360px;max-width:calc(100vw - 20px);max-height:75vh;overflow:auto;background:#fff;border:2px solid #587367;border-radius:12px;padding:15px;box-shadow:0 3px 20px #0004;font-size:14px';
+  msg=document.createElement('p');msg.setAttribute('role','status');box.appendChild(msg);
+  var privacy=document.createElement('p');privacy.textContent='数据只在本机和本页，不上传。共用设备请勿录入姓名或可识别的健康信息。备份可能含个人记录，应私人保管。';box.appendChild(privacy);
+  function add(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='display:block;background:#e8f1ec;border:1px solid #738c7d;border-radius:6px;padding:7px;margin:6px 0;min-height:40px;white-space:normal;font:14px system-ui';b.addEventListener('click',fn);box.appendChild(b);return b;}
+  add('下载原档与当前页面备份',backup);add('重试保存（不覆盖冲突档）',save);
+  var label=document.createElement('label');label.style.cssText='display:block;white-space:normal;font-size:14px';check=document.createElement('input');check.type='checkbox';label.appendChild(check);label.appendChild(document.createTextNode('我已核实备份文件落盘，并同意以当前页面记录替换本机档案'));box.appendChild(label);
+  replaceButton=add('确认替换本机档案',replace);replaceButton.disabled=true;check.addEventListener('change',function(){replaceButton.disabled=!(backupMade&&check.checked);});
+  add('关闭记录保护',function(){box.hidden=true;button.setAttribute('aria-expanded','false');button.focus();});button.addEventListener('click',function(){box.hidden=!box.hidden;button.setAttribute('aria-expanded',String(!box.hidden));});host.appendChild(box);host.appendChild(button);document.body.appendChild(host);show(reason||'尚未写入',dirty);
+ }
+ window.addEventListener('storage',function(e){if(e.key===key||e.key===null){try{if(raw()!==original)lock('另一页面已更改本机记录');}catch(err){lock('本机存储不可读');}}});
+ window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+ mount();return {load:load,save:save,lock:lock,markDirty:function(){if(!blocked)show('本页变更尚未保存，请保留本页',true);}};
+};
+
+</script>
 <script>window.LessonModules = {};</script>
 <script>
 (function(){
@@ -233,7 +263,7 @@ function setOffset(v){state.offset=clamp(Math.round(v),0,6);state.matchChecked=f
 function selectAt(p,target){if(target&&target.closest){var hit=target.closest('[data-ring]');if(hit){state.selectedSample=hit.getAttribute('data-sample');state.selectedRing=Number(hit.getAttribute('data-ring'));change();return;}}var ex=state.expanded,positions=ex?{A:[300,170,112],B:[740,170,94]}:{A:[265,300,200],B:[735,300,170]};for(var id in positions){var c=positions[id],d=Math.sqrt(Math.pow(p.x-c[0],2)+Math.pow(p.y-c[1],2));if(d<=c[2]+12){var rs=bounds(id,c[2]);var idx=rs.findIndex(function(r){return d<=r;});state.selectedSample=id;state.selectedRing=idx<0?rs.length-1:idx;change();return;}}if(ex){var id2=p.y<407?'A':'B';var index=Math.floor((p.x-112)/38)-(id2==='A'?8:state.offset);if(index>=0&&index<MODELS[id2].length){state.selectedSample=id2;state.selectedRing=index;change();}}}
 function saveEvidence(){var ageGood=state.ageChecked&&Number(state.ageA)===12&&Number(state.ageB)===14;var matched=state.matchChecked&&state.offset===0;api.record({topic:'树木年轮',source:'教学示意模型',evidence:'A计数：'+(state.ageA||'未填')+'年；B计数：'+(state.ageB||'未填')+'年；'+(state.ageChecked?(ageGood?'计数已核对':'计数待修正'):'计数未核对')+'。'+(state.expanded?'B时间带位置 '+state.offset+'；已知A最外圈2024年。':''),inference:matched?'重叠的6年宽窄模式吻合；推断B最外圈2018年，合并记录跨20年。':state.expanded?'时间带尚未匹配，不能据此确定B最外圈年份。':ageGood?'本示意中较细的B记录的年数更多；粗细不能代替数年轮。':'依据尚未核对，继续观察。'});}
 window.LessonModules.tree={
-init:function(element,helpers,saved){root=element;api=helpers;svg=el('svg');box=root.querySelector('.workbench');state=defaults();if(saved&&typeof saved==='object'){state.expanded=!!saved.expanded;state.selectedSample=saved.selectedSample==='B'?'B':'A';state.selectedRing=clamp(Math.floor(num(saved.selectedRing,0)),0,MODELS[state.selectedSample].length-1);state.ageA=/^\d{1,2}$/.test(String(saved.ageA))?String(saved.ageA):'';state.ageB=/^\d{1,2}$/.test(String(saved.ageB))?String(saved.ageB):'';state.ageChecked=!!saved.ageChecked;state.offset=clamp(Math.round(num(saved.offset,6)),0,6);state.matchChecked=!!saved.matchChecked;state.attempts=Array.isArray(saved.attempts)?saved.attempts.slice(-10):[];}
+init:function(element,helpers,saved){root=element;api=helpers;svg=el('svg');box=root.querySelector('.workbench');state=defaults();if(saved)state=JSON.parse(JSON.stringify(saved));
 el('age-a').addEventListener('input',function(){state.ageA=this.value;state.ageChecked=false;el('count-feedback').textContent=feedbackAge();api.changed();});el('age-b').addEventListener('input',function(){state.ageB=this.value;state.ageChecked=false;el('count-feedback').textContent=feedbackAge();api.changed();});el('check-age').addEventListener('click',function(){if(!state.ageA||!state.ageB){api.toast('先填写两块样本的年轮计数。');return;}state.ageChecked=true;change();});el('expand').addEventListener('click',function(){state.expanded=!state.expanded;change();});el('offset').addEventListener('input',function(){setOffset(Number(this.value));});el('earlier').addEventListener('click',function(){setOffset(state.offset-1);});el('later').addEventListener('click',function(){setOffset(state.offset+1);});el('check-match').addEventListener('click',function(){state.matchChecked=true;state.attempts.push(state.offset);state.attempts=state.attempts.slice(-10);change();});el('save').addEventListener('click',saveEvidence);
 api.bindDrag(svg,{start:function(e){var p=api.svgPoint(svg,e);if(state.expanded&&p.y>410&&p.y<548&&p.x>=112+state.offset*38-7&&p.x<=112+(state.offset+14)*38+7){dragLast=false;return{x:p.x,offset:state.offset,target:e.target};}selectAt(p,e.target);return null;},move:function(e,ctx){var p=api.svgPoint(svg,e),dx=p.x-ctx.x;if(Math.abs(dx)>4)dragLast=true;var offset=clamp(ctx.offset+Math.round(dx/38),0,6);if(offset!==state.offset)setOffset(offset);},end:function(e,ctx){if(!dragLast)selectAt(api.svgPoint(svg,e),ctx.target);}});
 svg.addEventListener('keydown',function(e){var target=e.target;var band=target.getAttribute('data-band');if(band==='B'&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();setOffset(state.offset+(e.key==='ArrowRight'?1:-1));var active=svg.querySelector('[data-band="B"]');if(active)active.focus();return;}var id=target.getAttribute('data-tree');if(id&&(e.key==='ArrowLeft'||e.key==='ArrowRight'||e.key==='Enter'||e.key===' ')){e.preventDefault();state.selectedSample=id;state.selectedRing=clamp(state.selectedRing+(e.key==='ArrowLeft'?-1:1),0,MODELS[id].length-1);change();var node=svg.querySelector('[data-tree="'+id+'"]');if(node)node.focus();}});render();},
@@ -254,19 +284,7 @@ enter:function(){render();},leave:function(){},reset:function(){state=defaults()
   function escape(value) { return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function fmt(value) { return Number(value).toFixed(1); }
   function hoursForDays(days) { return YEAR_HOURS / days; }
-  function readSaved(saved) {
-    if (!saved || typeof saved !== 'object') return freshState();
-    var result = freshState();
-    if (isFinite(saved.window)) result.window = clamp(Math.round(Number(saved.window)), 0, 19);
-    if (isFinite(saved.days)) result.days = clamp(Math.round(Number(saved.days)), 360, 420);
-    result.calculated = saved.calculated === true;
-    if (Array.isArray(saved.marked)) {
-      saved.marked.forEach(function (item) {
-        if (typeof item === 'number' && item >= 0 && item < 400 && Math.floor(item) === item && result.marked.indexOf(item) < 0) result.marked.push(item);
-      });
-    }
-    return result;
-  }
+  function readSaved(saved){return saved?copy(saved):freshState();}
   function marked(globalIndex) { return state.marked.indexOf(globalIndex) >= 0; }
   function windowCount() {
     var count = 0, first = state.window * 20;
@@ -551,20 +569,7 @@ enter:function(){render();},leave:function(){},reset:function(){state=defaults()
   function fresh() { return {version:1,selected:'C',stage:4,order:[],dates:false,age:'',environment:'',before:null,after:null,feedback:'只有层序时，能确定具体多少年前吗？'}; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;'); }
   function cleanJudgment(v) { return v && AGE[v.age] ? {age:v.age,environment:ENV[v.environment] ? v.environment : ''} : null; }
-  function restore(saved) {
-    var next = fresh();
-    if (!saved || saved.version !== 1) return next;
-    next.stage = Math.max(1,Math.min(4,Math.round(Number(saved.stage) || 4)));
-    next.selected = /^[ABCD]$/.test(saved.selected || '') ? saved.selected : 'C';
-    next.dates = saved.dates === true;
-    next.age = AGE[saved.age] ? saved.age : '';
-    next.environment = ENV[saved.environment] ? saved.environment : '';
-    next.before = cleanJudgment(saved.before); next.after = cleanJudgment(saved.after);
-    if (Array.isArray(saved.order)) saved.order.slice(0,4).forEach(function(id){if (/^[ABCD]$/.test(id) && next.order.indexOf(id) === -1) next.order.push(id);});
-    if (typeof saved.feedback === 'string') next.feedback = saved.feedback.slice(0,150);
-    if (layer(next.selected).stage > next.stage) next.selected = ['D','C','B','A'][next.stage-1];
-    return next;
-  }
+  function restore(saved){return saved?JSON.parse(JSON.stringify(saved)):fresh();}
   function layer(id) { for (var i=0;i<LAYERS.length;i++) if(LAYERS[i].id===id) return LAYERS[i]; return LAYERS[2]; }
   function notify() { if(api && api.changed) api.changed(); }
   function text(x,y,size,copy,fill,extra) { return '<text x="'+x+'" y="'+y+'" font-size="'+size+'" fill="'+(fill||'#173b38')+'" '+(extra||'')+'>'+esc(copy)+'</text>'; }
@@ -711,7 +716,7 @@ enter:function(){render();},leave:function(){},reset:function(){state=defaults()
     if(state.dates&&state.before)inference+=' 初次判断：'+AGE[state.before.age]+'；新证据后：'+AGE[state.age]+'。';
     if(api.record)api.record({topic:'地层档案',evidence:evidence,inference:inference,source:'教学模型：未倒转的示意剖面；火山灰年龄为示意值'});
     render();notify();
-    if(api.toast)api.toast(state.dates?'已保留加入测年证据后的判断。':'已保留初次判断。');
+    // Shared record handler reports durable-save success or failure.
   }
   function init(root,shared,saved) {
     host=root;api=shared||{};state=restore(saved);svg=host.querySelector('#strata-svg');
@@ -742,13 +747,26 @@ var titles={tree:'树木年轮',coral:'珊瑚日历',strata:'地层档案'};
 var questions={tree:'同样长了几年，就一定一样粗吗？',coral:'同样一年，天数更多，一天会怎样？',strata:'有了新证据，原来的判断要改变吗？'};
 function byId(id){return document.getElementById(id);}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-try{var raw=localStorage.getItem(KEY);if(raw){var parsed=JSON.parse(raw);if(parsed&&parsed.version===1){saved=parsed;if(Array.isArray(saved.records))records=saved.records.filter(function(x){return x&&typeof x.evidence==='string';}).slice(-30);if(saved.page&&modules[saved.page])page=saved.page;}}}catch(e){storageOK=false;}
+function exact(o,k){return !!o&&typeof o==='object'&&!Array.isArray(o)&&Object.keys(o).sort().join('|')===k.slice().sort().join('|');}
+function integer(x,a,b){return Number.isInteger(x)&&x>=a&&x<=b;}
+function textValue(s,n){return typeof s==='string'&&s.length<=n;}
+function bool(x){return typeof x==='boolean';}
+function enumValue(x,a){return a.indexOf(x)>=0;}
+function validEntry(r){return exact(r,['id','topic','source','evidence','inference','time'])&&textValue(r.id,100)&&r.id.length>0&&textValue(r.topic,80)&&textValue(r.source,60)&&textValue(r.evidence,1500)&&r.evidence.trim().length>0&&textValue(r.inference,1500)&&typeof r.time==='string'&&/^\d{4}-\d{2}-\d{2}T/.test(r.time)&&Number.isFinite(Date.parse(r.time));}
+function ageInput(x){return typeof x==='string'&&(x===''||(/^[-]?(?:[0-9]+(?:[.][0-9]+)?|[.][0-9]+)(?:[eE][+-]?[0-9]+)?$/.test(x)&&Number.isFinite(Number(x))));}
+function validTree(t){return exact(t,['expanded','selectedSample','selectedRing','ageA','ageB','ageChecked','offset','matchChecked','attempts'])&&bool(t.expanded)&&enumValue(t.selectedSample,['A','B'])&&integer(t.selectedRing,0,t.selectedSample==='A'?11:13)&&ageInput(t.ageA)&&ageInput(t.ageB)&&bool(t.ageChecked)&&integer(t.offset,0,6)&&bool(t.matchChecked)&&Array.isArray(t.attempts)&&t.attempts.length<=10&&t.attempts.every(x=>integer(x,0,6));}
+function validCoral(c){return exact(c,['window','marked','days','calculated'])&&integer(c.window,0,19)&&integer(c.days,360,420)&&bool(c.calculated)&&Array.isArray(c.marked)&&c.marked.length<=400&&new Set(c.marked).size===c.marked.length&&c.marked.every(x=>integer(x,0,399));}
+function validJudgment(j){return j===null||(exact(j,['age','environment'])&&enumValue(j.age,['unknown','older','between','younger'])&&enumValue(j.environment,['','marine','land','uncertain']));}
+function validStrata(t){return exact(t,['version','selected','stage','order','dates','age','environment','before','after','feedback'])&&t.version===1&&enumValue(t.selected,['A','B','C','D'])&&integer(t.stage,1,4)&&({A:4,B:3,C:2,D:1})[t.selected]<=t.stage&&Array.isArray(t.order)&&t.order.length<=4&&new Set(t.order).size===t.order.length&&t.order.every(x=>enumValue(x,['A','B','C','D']))&&bool(t.dates)&&enumValue(t.age,['','unknown','older','between','younger'])&&enumValue(t.environment,['','marine','land','uncertain'])&&validJudgment(t.before)&&validJudgment(t.after)&&textValue(t.feedback,150);}
+function validArchive(a){return exact(a,['version','page','records','modules'])&&a.version===1&&enumValue(a.page,['tree','coral','strata'])&&Array.isArray(a.records)&&a.records.length<=30&&a.records.every(validEntry)&&new Set(a.records.map(r=>r.id)).size===a.records.length&&exact(a.modules,['tree','coral','strata'])&&validTree(a.modules.tree)&&validCoral(a.modules.coral)&&validStrata(a.modules.strata);}
+var recordGuard=window.LessonRecordGuard(KEY,'六上4.7时间与变化',snapshot,validArchive);var loadedArchive=recordGuard.load();if(loadedArchive!==null){saved=loadedArchive;records=saved.records;page=saved.page;}
+
 function toast(message){byId('toast').textContent=message;byId('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(function(){byId('toast').classList.remove('visible');},3400);}
 function snapshot(){var data={version:1,page:page,records:records,modules:{}};Object.keys(modules).forEach(function(name){data.modules[name]=modules[name].snapshot();});return data;}
-function persist(){clearTimeout(saveTimer);try{localStorage.setItem(KEY,JSON.stringify(snapshot()));storageOK=true;}catch(e){storageOK=false;}byId('storage-status').textContent=storageOK?'记录保存在本机浏览器':'当前浏览器未能自动保存，请导出记录';}
-function changed(){clearTimeout(saveTimer);saveTimer=setTimeout(persist,250);}
+var pendingSave=false;function persist(){clearTimeout(saveTimer);recordGuard.markDirty();storageOK=recordGuard.save();pendingSave=!storageOK;byId('storage-status').textContent='保存状态见右下角本机记录保护';return storageOK;}
+function changed(){pendingSave=true;recordGuard.markDirty();clearTimeout(saveTimer);saveTimer=setTimeout(persist,250);}
 function refreshCounter(){var count=byId('record-count');count.textContent=records.length;count.hidden=records.length===0;}
-function addRecord(entry){if(records.length>=30){toast('已保留30条记录。请先导出，再删除不需要的记录。');return;}var item={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),topic:String(entry.topic||titles[page]).slice(0,80),source:String(entry.source||'教学示意模型').slice(0,60),evidence:String(entry.evidence||'').slice(0,1500),inference:String(entry.inference||'').slice(0,1500),time:new Date().toISOString()};if(!item.evidence.trim()){toast('先写下观察到的证据。');return;}records.push(item);refreshCounter();renderRecords();persist();toast('这份证据已保留，可在“记录”中查看。');}
+function addRecord(entry){if(records.length>=30){toast('已保留30条记录。请先导出，再删除不需要的记录。');return;}var item={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),topic:String(entry.topic||titles[page]),source:String(entry.source||'教学示意模型'),evidence:String(entry.evidence||''),inference:String(entry.inference||''),time:new Date().toISOString()};if(!item.evidence.trim()){toast('先写下观察到的证据。');return;}if(!validEntry(item)){toast('记录格式或长度超出支持范围，未保存；请保留原输入并备份');return false;}records.push(item);refreshCounter();renderRecords();var ok=persist();toast(ok?'这份证据已保存到本机。':'这份证据仅留在本页，尚未保存；请打开记录保护并备份');return ok;}
 function svgPoint(svg,e){var touch=e.touches&&e.touches.length?e.touches[0]:e.changedTouches&&e.changedTouches.length?e.changedTouches[0]:e;var p=svg.createSVGPoint();p.x=touch.clientX;p.y=touch.clientY;var m=svg.getScreenCTM();if(m)return p.matrixTransform(m.inverse());return{x:0,y:0};}
 function bindDrag(element,handlers){var dragging=false,context=null,pointerId=null;function start(e){if(dragging||e.button>0)return;var c=handlers.start?handlers.start(e):{};if(c===null||c===false||typeof c==='undefined')return;dragging=true;context=c;pointerId=e.pointerId;if(e.cancelable)e.preventDefault();if(typeof e.pointerId==='number'&&element.setPointerCapture){try{element.setPointerCapture(e.pointerId);}catch(err){}}}
 function move(e){if(!dragging)return;if(pointerId!=null&&e.pointerId!=null&&e.pointerId!==pointerId)return;if(e.cancelable)e.preventDefault();if(handlers.move)handlers.move(e,context);}
@@ -756,27 +774,27 @@ function end(e){if(!dragging)return;if(pointerId!=null&&e.pointerId!=null&&e.poi
 if(window.PointerEvent){element.addEventListener('pointerdown',start);element.addEventListener('pointermove',move);element.addEventListener('pointerup',end);element.addEventListener('pointercancel',end);}else{element.addEventListener('mousedown',start);document.addEventListener('mousemove',move);document.addEventListener('mouseup',end);element.addEventListener('touchstart',start,{passive:false});element.addEventListener('touchmove',move,{passive:false});element.addEventListener('touchend',end);element.addEventListener('touchcancel',end);}return function(){dragging=false;};}
 var api={toast:toast,changed:changed,record:addRecord,esc:esc,svgPoint:svgPoint,bindDrag:bindDrag};
 Object.keys(modules).forEach(function(name){modules[name].init(byId('page-'+name),api,saved.modules&&saved.modules[name]);});
-function switchPage(next){if(!modules[next])return;if(modules[page].leave)modules[page].leave();page=next;document.querySelectorAll('[data-page]').forEach(function(btn){btn.setAttribute('aria-pressed',String(btn.getAttribute('data-page')===next));});Object.keys(modules).forEach(function(name){var s=byId('page-'+name);s.hidden=name!==next;s.classList.toggle('active',name===next);});byId('guiding-question').textContent=questions[page];if(modules[page].enter)modules[page].enter();changed();}
+function switchPage(next,initial){if(!modules[next])return;if(modules[page].leave)modules[page].leave();page=next;document.querySelectorAll('[data-page]').forEach(function(btn){btn.setAttribute('aria-pressed',String(btn.getAttribute('data-page')===next));});Object.keys(modules).forEach(function(name){var s=byId('page-'+name);s.hidden=name!==next;s.classList.toggle('active',name===next);});byId('guiding-question').textContent=questions[page];if(modules[page].enter)modules[page].enter();if(!initial)changed();}
 document.querySelectorAll('[data-page]').forEach(function(button){button.addEventListener('click',function(){switchPage(button.getAttribute('data-page'));});});
-function openModal(id){lastFocus=document.activeElement;if(modules[page].leave)modules[page].leave();if(id==='records-modal')renderRecords();byId(id).hidden=false;var dialog=byId(id).querySelector('.dialog');dialog.focus();persist();}
+function openModal(id){lastFocus=document.activeElement;if(modules[page].leave)modules[page].leave();if(id==='records-modal')renderRecords();byId(id).hidden=false;var dialog=byId(id).querySelector('.dialog');dialog.focus();}
 function closeModals(){document.querySelectorAll('.modal').forEach(function(modal){modal.hidden=true;});if(lastFocus&&lastFocus.focus)lastFocus.focus();lastFocus=null;}
 byId('records-open').addEventListener('click',function(){openModal('records-modal');});byId('help-open').addEventListener('click',function(){openModal('help-modal');});document.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',closeModals);});document.querySelectorAll('.modal').forEach(function(m){m.addEventListener('click',function(e){if(e.target===m)closeModals();});});
 function renderRecords(){var container=byId('record-list');if(!records.length){container.innerHTML='<p class="muted" style="margin-top:20px">还没有保存记录。在每个工作区留存证据，或在这里写下自己的观察。</p>';return;}container.innerHTML=records.slice().reverse().map(function(x){return'<article class="record-card"><h3>'+esc(x.topic)+'<button type="button" data-delete="'+esc(x.id)+'" aria-label="删除这条'+esc(x.topic)+'记录">删除</button></h3><small>'+esc(x.source)+'</small><p><strong>证据：</strong>'+esc(x.evidence)+'</p><p><strong>解释：</strong>'+esc(x.inference||'暂未解释')+'</p></article>';}).join('');}
 byId('record-list').addEventListener('click',function(e){var id=e.target.getAttribute('data-delete');if(!id)return;records=records.filter(function(x){return x.id!==id;});renderRecords();refreshCounter();persist();});
-byId('record-manual').addEventListener('click',function(){var evidence=byId('my-evidence').value.trim();if(!evidence){toast('先写下一条观察证据。');byId('my-evidence').focus();return;}if(records.length>=30){toast('先导出并整理已有记录。');return;}addRecord({topic:titles[page],source:byId('my-source').value,evidence:evidence,inference:byId('my-inference').value.trim()});byId('my-evidence').value='';byId('my-inference').value='';});
+byId('record-manual').addEventListener('click',function(){var evidence=byId('my-evidence').value.trim();if(!evidence){toast('先写下一条观察证据。');byId('my-evidence').focus();return;}if(records.length>=30){toast('先导出并整理已有记录。');return;}var ok=addRecord({topic:titles[page],source:byId('my-source').value,evidence:evidence,inference:byId('my-inference').value.trim()});if(ok){byId('my-evidence').value='';byId('my-inference').value='';}});
 var exportUrl=null;
 function download(text,type,name){try{var blob=new Blob([text],{type:type});if(navigator.msSaveBlob){navigator.msSaveBlob(blob,name);return;}if(exportUrl)URL.revokeObjectURL(exportUrl);exportUrl=URL.createObjectURL(blob);var a=byId('download-link');a.href=exportUrl;a.download=name;byId('export-filename').textContent=name;closeModals();openModal('export-modal');}catch(e){toast('当前浏览器未能导出，请使用系统浏览器重试。');}}
 
-function csvCell(s){s=String(s==null?'':s);if(/^[=+\-@]/.test(s))s="'"+s;return'"'+s.replace(/"/g,'""')+'"';}
+function csvCell(s){s=String(s==null?'':s);if(/^[\s\u0000-\u001f]*[=+\-@]/.test(s))s="'"+s;return'"'+s.replace(/"/g,'""')+'"';}
 byId('export-csv').addEventListener('click',function(){if(!records.length){toast('请先保存一条证据记录。');return;}var rows=[['工作区','来源','观察证据','我的解释','记录时间（UTC）']];records.forEach(function(r){rows.push([r.topic,r.source,r.evidence,r.inference,r.time]);});download('\ufeff'+rows.map(function(row){return row.map(csvCell).join(',');}).join('\r\n'),'text/csv;charset=utf-8','时间与变化_证据记录.csv');});
 byId('export-svg').addEventListener('click',function(){var content=modules[page].getSVG();var doc=new DOMParser().parseFromString(content,'image/svg+xml');if(doc.querySelector('parsererror')){toast('观察图生成失败，请保留文字记录。');return;}download('<?xml version="1.0" encoding="UTF-8"?>\n'+content,'image/svg+xml;charset=utf-8','时间与变化_'+titles[page]+'_观察图.svg');});
 byId('reset-page').addEventListener('click',function(){modules[page].reset();persist();toast('本页已重置，已保存的证据记录仍保留。');});
 byId('fullscreen').addEventListener('click',function(){var d=document,entered=d.fullscreenElement||d.webkitFullscreenElement;try{if(entered){var out=d.exitFullscreen||d.webkitExitFullscreen;if(out)out.call(d);}else{var request=d.documentElement.requestFullscreen||d.documentElement.webkitRequestFullscreen;if(request){var result=request.call(d.documentElement);if(result&&result.catch)result.catch(function(){toast('此浏览器限制网页全屏，可使用浏览器全屏功能。');});}else toast('此浏览器不支持网页全屏，可使用浏览器全屏功能。');}}catch(e){toast('此浏览器限制网页全屏，可使用浏览器全屏功能。');}});
 function updateFullscreen(){byId('fullscreen').textContent=document.fullscreenElement||document.webkitFullscreenElement?'退出全屏':'全屏';}document.addEventListener('fullscreenchange',updateFullscreen);document.addEventListener('webkitfullscreenchange',updateFullscreen);
 document.addEventListener('keydown',function(e){var open=document.querySelector('.modal:not([hidden])');if(e.key==='Escape'){if(open){e.preventDefault();closeModals();}return;}if(open){if(e.key==='Tab'){var targets=Array.prototype.slice.call(open.querySelectorAll('button,input,textarea,select,a,[tabindex="0"]')).filter(function(x){return!x.disabled&&x.offsetParent!==null;});if(!targets.length)return;var first=targets[0],last=targets[targets.length-1];if(e.shiftKey&&(document.activeElement===first||document.activeElement.classList.contains('dialog'))){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}return;}var tag=(document.activeElement.tagName||'').toLowerCase();if(/input|textarea|select/.test(tag)||e.ctrlKey||e.altKey||e.metaKey)return;if(e.key==='1'||e.key==='2'||e.key==='3'){e.preventDefault();switchPage(['tree','coral','strata'][Number(e.key)-1]);}});
-document.addEventListener('visibilitychange',function(){if(document.hidden){if(modules[page].leave)modules[page].leave();persist();}});window.addEventListener('pagehide',persist);
+document.addEventListener('visibilitychange',function(){if(document.hidden){if(modules[page].leave)modules[page].leave();if(pendingSave)persist();}});window.addEventListener('pagehide',function(){if(pendingSave)persist();});
 window.TimeChangeLesson={version:'1.0.0',getSnapshot:snapshot,replaceModule:function(name,replacement){if(!modules[name]||!replacement||typeof replacement.init!=='function')throw new Error('Invalid module interface');var old=modules[name].snapshot();modules[name].leave();modules[name]=replacement;replacement.init(byId('page-'+name),api,old);if(page===name)replacement.enter();}};
-switchPage(page);refreshCounter();if(!storageOK)toast('当前浏览器未启用自动保存，课末请导出记录。');
+switchPage(page,true);refreshCounter();if(!storageOK)toast('当前浏览器未启用自动保存，课末请导出记录。');
 })();
 
 </script>
