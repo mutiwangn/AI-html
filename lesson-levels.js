@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   root.AIHTML_LEVELS = {
+    "五下1.4蚯蚓的选择": {"level":1,"note":"DOM位置观察快照，无外部依赖或行为模拟；实体设备未测"},
     "五下1.3阳光下的植物": {"level":1,"note":"DOM/SVG真实观察比较，无外部依赖；实体设备未测"},
     "五下1.2比较种子发芽条件": {"level":1,"note":"DOM记录与比例比较；无Canvas或WebGL，实体设备未测"},
     "五下1.1种子发芽实验": {"level":1,"note":"DOM/SVG基础对比与记录；无WebGL和外部依赖；实体设备未测"},
