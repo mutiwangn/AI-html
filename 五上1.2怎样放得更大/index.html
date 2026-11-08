@@ -350,7 +350,8 @@ if (typeof module !== 'undefined') module.exports = {
       syncSelection();
     }
     function commitImage(panel, image, source, token) {
-      if (token !== panel.loadToken) return;
+      if (token !== panel.loadToken) return false;
+      if ((panel.image || panel.marks.length || panel.note.value.trim()) && !global.confirm('替换 '+panel.key+' 栏观察图？本栏的圈注和发现也会清空。需要保留时请取消并先保存对照图。')) { announce('已取消替换，原图、圈注和发现均保留。'); return false; }
       panel.image = image;
       panel.source = source;
       panel.zoom = 1;
@@ -358,6 +359,7 @@ if (typeof module !== 'undefined') module.exports = {
       panel.drag = null;
       panel.note.value = '';
       syncPanel(panel);
+      return true;
     }
     function loadImage(panel, url, source, token) {
       if (!localImageURL(url)) { announce('请使用本页保留的快照，或导入 PNG、JPEG、WebP 等本地图片。'); return; }
@@ -367,7 +369,7 @@ if (typeof module !== 'undefined') module.exports = {
         if (!image.naturalWidth || !image.naturalHeight || image.naturalWidth * image.naturalHeight > 48000000) {
           announce('这张图片的尺寸过大，请使用较小的照片副本。'); return;
         }
-        commitImage(panel, image, source, token);
+        if (!commitImage(panel, image, source, token)) return;
         announce((source.kind === 'photo' ? '本地照片' : '模拟快照') + '已放入 ' + panel.key + '。可以圈注并写下自己的发现。');
       };
       image.onerror = function () { if (token === panel.loadToken) announce('这张图片暂时无法读取。请换用 PNG 或 JPEG 照片；原观察图已保留。'); };
@@ -517,7 +519,7 @@ if (typeof module !== 'undefined') module.exports = {
         if (line && context.measureText(line + ch).width > width) { lines.push(line); line = ch; } else line += ch;
       });
       if (line || !lines.length) lines.push(line);
-      if (lines.length > maxLines) {
+      if (maxLines && lines.length > maxLines) {
         lines = lines.slice(0, maxLines); var last = lines[maxLines - 1];
         while (last && context.measureText(last + '…').width > width) last = last.slice(0, -1);
         lines[maxLines - 1] = last + '…';
@@ -534,10 +536,15 @@ if (typeof module !== 'undefined') module.exports = {
         var rect = active.canvas.getBoundingClientRect();
         var aspect = rect.width > 1 && rect.height > 1 ? rect.width / rect.height : 1.6;
         var columnWidth = 930, imageHeight = Math.round(clamp(columnWidth / aspect, 300, 620));
-        var imageY = 182, metadataY = imageY + imageHeight + 32, noteY = metadataY + 150;
-        var output = document.createElement('canvas'); output.width = 2000; output.height = noteY + 274;
+        var imageY = 182, metadataY = imageY + imageHeight + 32;
+        var output = document.createElement('canvas'); output.width = 2000;
         var ctx = output.getContext('2d');
         if (!ctx) throw new Error('canvas');
+        var sourceTextLines={}, noteTextLines={}, sourceRows=1, noteRows=1;
+        ['A','B'].forEach(function(key){var panel=panels[key];ctx.font='25px "Microsoft YaHei",sans-serif';sourceTextLines[key]=wrapText(ctx,sourceLines(panel).join('\n'),columnWidth);ctx.font='28px "Microsoft YaHei",sans-serif';noteTextLines[key]=wrapText(ctx,panel.note.value.trim()||'（未填写）',columnWidth);sourceRows=Math.max(sourceRows,sourceTextLines[key].length);noteRows=Math.max(noteRows,noteTextLines[key].length);});
+        var noteY=metadataY+sourceRows*31+40;
+        output.height=noteY+41+noteRows*37+110;
+        ctx=output.getContext('2d');
         ctx.fillStyle = '#f4f6f3'; ctx.fillRect(0, 0, output.width, output.height);
         ctx.fillStyle = '#1e3331'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
         ctx.font = '700 43px "Microsoft YaHei",sans-serif'; ctx.fillText('怎样放得更大 · 观察对照', 54, 67);
@@ -559,10 +566,10 @@ if (typeof module !== 'undefined') module.exports = {
           ctx.restore(); ctx.strokeStyle = '#c9d6cd'; ctx.lineWidth = 2; ctx.strokeRect(x, imageY, columnWidth, imageHeight);
           ctx.fillStyle = '#61706b'; ctx.font = '25px "Microsoft YaHei",sans-serif';
           var source = sourceLines(panel).join('\n');
-          wrapText(ctx, source, columnWidth, 4).forEach(function (line, row) { ctx.fillText(line, x, metadataY + row * 31); });
+          sourceTextLines[key].forEach(function (line, row) { ctx.fillText(line, x, metadataY + row * 31); });
           ctx.fillStyle = '#1e3331'; ctx.font = '600 28px "Microsoft YaHei",sans-serif'; ctx.fillText('我的发现', x, noteY);
           ctx.font = '28px "Microsoft YaHei",sans-serif';
-          wrapText(ctx, panel.note.value.trim() || '（未填写）', columnWidth, 5).forEach(function (line, row) { ctx.fillText(line, x, noteY + 41 + row * 37); });
+          noteTextLines[key].forEach(function (line, row) { ctx.fillText(line, x, noteY + 41 + row * 37); });
           ctx.fillStyle = '#61706b'; ctx.font = '24px "Microsoft YaHei",sans-serif'; ctx.fillText('图片显示缩放 ' + panel.zoom.toFixed(1) + '× · 圈注 ' + panel.marks.length + ' 处', x, output.height - 56);
         });
         ctx.fillStyle = '#61706b'; ctx.font = '24px "Microsoft YaHei",sans-serif'; ctx.fillText('图片放大不会增加原始细节；模拟图不是实际测量。', 54, output.height - 20);

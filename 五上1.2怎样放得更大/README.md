@@ -36,3 +36,9 @@
 - [Nikon MicroscopyU：Useful Magnification Range](https://www.microscopyu.com/microscopy-basics/useful-magnification-range)
 
 教材与教参用于课程核对，未随网页公开附送。
+
+## 观察记录保护修订
+
+换图先成功解码再确认替换，取消或解码失败会保留原图、圈注、发现及缩放。保存对照图按完整文字长度增加图像高度，不再截断发现或来源。
+
+本次在云端 Chrome 实际导入正常及损坏 PNG，验证取消替换、模型快照替换，并下载和查看七行发现的 PNG；另外用隔离测试核对七十行文字及迟到请求保护。记录仍仅在当前页内存中，请在刷新、关闭或升级前导出，不能自动迁移未保存输入。尚未覆盖全部图片格式、真实大图超时、旧 iPad、Safari及希沃实机。

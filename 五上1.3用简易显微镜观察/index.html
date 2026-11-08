@@ -355,6 +355,7 @@ var all=function(sel){return Array.prototype.slice.call(document.querySelectorAl
 var WORLD=MicroSpecimens.worldSize, MODES=[{label:'整体',scale:1},{label:'放大镜',scale:4},{label:'简易显微镜',scale:12}];
 var specById={}; MicroSpecimens.items.forEach(function(item){specById[item.id]=item;});
 var state={specimen:'paper',center:{x:507,y:495},mode:2,focus:47,led:true,showRange:false,coverage:false,page:'observe',scans:[],currentScan:-1};
+var photoGeneration=[0,0,0],photoPending=[null,null,null];
 var record={slots:[],selected:0,tool:'pen',color:'#048878'};
 var texture=null,textureId='',renderPending=false,toastTimer=0,pendingAction=null,lastFocus=null,uploadSlot=0,exportURL='';
 var originalCenter=specById.paper.center;state.center={x:originalCenter.x,y:originalCenter.y};
@@ -428,7 +429,7 @@ function openModal(id){lastFocus=document.activeElement;$(id).hidden=false;var f
 function closeModal(id){$(id).hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus();if(id==='confirm-modal')pendingAction=null;}
 function confirmChange(message,action){$('confirm-message').textContent=message;pendingAction=action;openModal('confirm-modal');}
 function hasRecord(){return record.slots.some(function(s,i){return s.image||s.strokes.length||$('note-'+i).value.trim();});}
-function guarded(message,fn){if(hasRecord())confirmChange(message,fn);else fn();}
+function guarded(message,fn){cancelAllPhotos();if(hasRecord())confirmChange(message,fn);else fn();}
 function renderScanStrip(){
  var strip=$('scan-strip');strip.textContent='';strip.setAttribute('data-count',String(state.scans.length));
  if(!state.scans.length){var empty=document.createElement('span');empty.className='scan-empty';empty.textContent='保留几个位置，再拼回全貌';strip.appendChild(empty);}
@@ -472,26 +473,62 @@ function drawRecordCanvas(index,ctx,w,h,forExport){
 function drawAllRecords(){record.slots.forEach(function(slot,i){var o=canvasSetup($('record-canvas-'+i));drawRecordCanvas(i,o.ctx,o.w,o.h,false);$('source-'+i).textContent=slot.label;});syncDrawingControls();}
 function syncDrawingControls(){all('.record-cell').forEach(function(c){c.classList.toggle('selected',+c.dataset.slot===record.selected);});all('[data-draw]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.draw===record.tool));});all('[data-color]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.color===record.color));});$('undo-drawing').disabled=!record.slots[record.selected].strokes.length;$('draw-hint').textContent='正在记录：'+['肉眼观察','放大镜观察','简易显微镜观察'][record.selected]+' · 画图或圈出证据';}
 function makeComparison(){
+ cancelAllPhotos();
  for(var i=0;i<3;i++){var s=cloneView(state);s.mode=i;var c=document.createElement('canvas');c.width=720;c.height=720;drawField(c.getContext('2d'),720,720,s,{white:true});var slot=newSlot();slot.image=c;slot.source='model';slot.label=specById[s.specimen].name+' · 同点结构示意 ×'+MODES[i].scale+(i===2?(!s.led?' · 暗光':blurAmount(s)>1.4?' · 未调清':' · 已调焦'):'');record.slots[i]=slot;$('note-'+i).value='';}
  $('record-object').value=specById[state.specimen].name;record.selected=2;setPage('record');showToast('同一中心的三档示意图已保留。请自己圈注、比较。');
 }
 function requestComparison(){guarded('带入当前位置的三档示意图，将替换观察单的图片、笔画和文字。需要保留时，请先保存观察图。',makeComparison);}
-function blankRecords(){for(var i=0;i<3;i++){record.slots[i]=newSlot();$('note-'+i).value='';}record.selected=0;$('record-object').value=specById[state.specimen].name;schedule();}
-function clearSlot(i){var slot=record.slots[i],action=function(){record.slots[i]=newSlot();$('note-'+i).value='';record.selected=i;schedule();};if(slot.image||slot.strokes.length||$('note-'+i).value.trim())confirmChange('清空这一栏的图片、笔画和文字，其他两栏保留。',action);else showToast('这一栏还是空白，可以直接画图或导入实拍。');}
+function blankRecords(){cancelAllPhotos();for(var i=0;i<3;i++){record.slots[i]=newSlot();$('note-'+i).value='';}record.selected=0;$('record-object').value=specById[state.specimen].name;schedule();}
+function clearSlot(i){cancelPhoto(i);var slot=record.slots[i],action=function(){record.slots[i]=newSlot();$('note-'+i).value='';record.selected=i;schedule();};if(slot.image||slot.strokes.length||$('note-'+i).value.trim())confirmChange('清空这一栏的图片、笔画和文字，其他两栏保留。',action);else showToast('这一栏还是空白，可以直接画图或导入实拍。');}
 var drawDrag=null;
 function normalizedPoint(e,canvas){var p=pointInCanvas(e,canvas),r=fitSquare(p.w,p.h);return {x:clamp((p.x-r.x)/r.size,0,1),y:clamp((p.y-r.y)/r.size,0,1),inside:p.x>=r.x&&p.x<=r.x+r.size&&p.y>=r.y&&p.y<=r.y+r.size};}
 record.slots.forEach(function(_,i){var canvas=$('record-canvas-'+i);canvas.addEventListener('pointerdown',function(e){if(e.button!==0&&e.button!==-1)return;var p=normalizedPoint(e,this);if(!p.inside)return;e.preventDefault();this.setPointerCapture(e.pointerId);record.selected=i;var stroke={type:record.tool,color:record.color,points:[{x:p.x,y:p.y}]};record.slots[i].strokes.push(stroke);drawDrag={id:e.pointerId,index:i,stroke:stroke};schedule();});canvas.addEventListener('pointermove',function(e){if(!drawDrag||drawDrag.id!==e.pointerId||drawDrag.index!==i)return;var p=normalizedPoint(e,this),points=drawDrag.stroke.points;if(drawDrag.stroke.type==='circle'){points[1]={x:p.x,y:p.y};}else if(points.length<3000){var prev=points[points.length-1];if(Math.abs(p.x-prev.x)+Math.abs(p.y-prev.y)>.0015)points.push({x:p.x,y:p.y});}schedule();});['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){canvas.addEventListener(ev,function(){drawDrag=null;});});canvas.addEventListener('focus',function(){record.selected=i;syncDrawingControls();});});
-function prepareUpload(i){uploadSlot=i;$('photo-file').value='';$('photo-file').click();}
+function prepareUpload(i){cancelPhoto(i);uploadSlot=i;$('photo-file').value='';$('photo-file').click();}
+// Each column owns a generation. Delayed decode/confirmation cannot refill a reset column.
+function cancelPhoto(index){
+ photoGeneration[index]++;
+ var p=photoPending[index];photoPending[index]=null;
+ if(p){window.clearTimeout(p.timer);window.clearTimeout(p.wait);p.img.onload=p.img.onerror=null;if(p.url)URL.revokeObjectURL(p.url);}
+}
+function cancelAllPhotos(){for(var i=0;i<3;i++)cancelPhoto(i);}
 function loadPhoto(file,index){
  if(!file)return;
- if(!/^image\/(jpeg|png|webp|bmp)$/i.test(file.type)){showToast('请选择 JPG、PNG、WebP 或 BMP 图片；HEIC请先转为JPG。');return;}
- if(file.size>25*1024*1024){showToast('图片超过25MB，请先缩小后再导入。');return;}
- var url=URL.createObjectURL(file),img=new Image();img.onload=function(){
-  try{var max=1600,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));var c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.naturalWidth*scale));c.height=Math.max(1,Math.round(img.naturalHeight*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);var action=function(){var slot=newSlot();slot.image=c;slot.source='photo';slot.label='本地实拍 · 未校准 · '+file.name.slice(0,32);record.slots[index]=slot;$('note-'+index).value='';record.selected=index;setPage('record');showToast('照片已导入本页，可圈注；不会上传。');};var existing=record.slots[index];if(existing.image||existing.strokes.length||$('note-'+index).value.trim())confirmChange('用这张实拍替换本栏图片、笔画和文字，其他栏保留。',action);else action();}
-  catch(err){showToast('这张图片无法处理，请换成较小的JPG或PNG。');}
-  finally{URL.revokeObjectURL(url);}
- };img.onerror=function(){URL.revokeObjectURL(url);showToast('无法读取图片，请换成JPG或PNG后重试。');};img.src=url;
+ cancelPhoto(index);
+ if(!/^image\/(jpeg|png|webp|bmp)$/i.test(file.type)){showToast('请选择 JPG、PNG、WebP 或 BMP 图片；HEIC请先转为JPG。原记录未更改。');return;}
+ if(file.size>25*1024*1024){showToast('图片超过25MB，请先缩小后再导入。原记录未更改。');return;}
+ var url;
+ try{url=URL.createObjectURL(file);}catch(err){showToast('无法打开图片文件，原记录未更改。');return;}
+ var img=new Image(),generation=photoGeneration[index],p={img:img,url:url,timer:null,wait:null};photoPending[index]=p;
+ function current(){return photoGeneration[index]===generation&&photoPending[index]===p;}
+ function release(){window.clearTimeout(p.timer);img.onload=img.onerror=null;if(p.url){URL.revokeObjectURL(p.url);p.url=null;}}
+ function fail(message){if(!current())return;cancelPhoto(index);showToast(message+' 原记录未更改。');}
+ img.onload=function(){
+  if(!current())return;
+  try{
+   if(!img.naturalWidth||!img.naturalHeight)throw new Error('empty image');
+   var max=1600,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight)),c=document.createElement('canvas');
+   c.width=Math.max(1,Math.round(img.naturalWidth*scale));c.height=Math.max(1,Math.round(img.naturalHeight*scale));c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+   release();
+   var action=function(){
+    if(!current())return;
+    var slot=newSlot();slot.image=c;slot.source='photo';slot.label='本地实拍 · 未校准 · '+file.name.slice(0,32);
+    cancelPhoto(index);record.slots[index]=slot;$('note-'+index).value='';record.selected=index;setPage('record');showToast('照片已导入本页，可圈注；不会上传。');
+   };
+   function offer(){
+    if(!current())return;
+    // Do not replace a confirmation already awaiting the teacher's decision.
+    if(!$('confirm-modal').hidden){p.wait=window.setTimeout(offer,120);return;}
+    var existing=record.slots[index];
+    if(existing.image||existing.strokes.length||$('note-'+index).value.trim())confirmChange('用这张实拍替换本栏图片、笔画和文字，其他栏保留。',action);else action();
+   }
+   offer();
+  }catch(err){fail('这张图片无法处理，请换成较小的 JPG 或 PNG。');}
+ };
+ img.onerror=function(){fail('无法读取图片，请换成 JPG 或 PNG 后重试。');};
+ p.timer=window.setTimeout(function(){fail('图片读取超时，请重试。');},60000);
+ showToast('正在读取图片，成功并确认后才替换原记录。');img.src=url;
 }
+window.addEventListener('pagehide',cancelAllPhotos);
 function wrapLines(ctx,str,width,maxLines){var result=[],line='';var chars=Array.from(str);for(var i=0;i<chars.length;i++){var ch=chars[i];if(ch==='\n'){result.push(line);line='';continue;}if(line&&ctx.measureText(line+ch).width>width){result.push(line);line=ch;}else line+=ch;}if(line||!result.length)result.push(line);if(maxLines&&result.length>maxLines){result=result.slice(0,maxLines);result[maxLines-1]=result[maxLines-1].slice(0,-1)+'…';}return result;}
 function exportRecord(){
  var c=document.createElement('canvas');c.width=1800;var ctx=c.getContext('2d');ctx.font='21px \"Microsoft YaHei\",\"PingFang SC\",sans-serif';var noteLines=[0,1,2].map(function(i){return wrapLines(ctx,$('note-'+i).value.trim(),500);});var longest=Math.max(3,noteLines[0].length,noteLines[1].length,noteLines[2].length),boxHeight=738+longest*27+28;c.height=Math.max(1140,153+boxHeight+115);ctx=c.getContext('2d');ctx.fillStyle='#eff5f5';ctx.fillRect(0,0,c.width,c.height);
