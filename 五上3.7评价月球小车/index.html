@@ -919,7 +919,7 @@ function draw(){
  $('simulation').innerHTML=s;$('scrub').value=state.t;$('time-label').textContent=fmt(state.t,2)+' s';$('play-label').textContent=state.playing?'暂停观察':state.t>=state.duration?'再试一次':'同步试跑';
 }
 function raf(ts){var dt=state.last?Math.min(.1,(ts-state.last)/1000):0;state.last=ts;if(state.playing&&activePage==='sim'){state.t=Math.min(state.duration,state.t+dt*state.speed);if(state.t>=state.duration)state.playing=false;draw()}if(videoState.playing&&activePage==='video')videoTick();requestAnimationFrame(raf)}
-function switchPage(name){pauseSim();pauseVideo();activePage=name;$$('.page').forEach(function(p){p.classList.toggle('active',p.id==='page-'+name)});$$('.tab').forEach(function(b){var on=b.dataset.page===name;b.classList.toggle('active',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});if(name==='evidence'&&window.EvidenceBoard)EvidenceBoard.onShow();if(name==='sim')draw()}
+function switchPage(name){cancelVideoImports();pauseSim();pauseVideo();activePage=name;$$('.page').forEach(function(p){p.classList.toggle('active',p.id==='page-'+name)});$$('.tab').forEach(function(b){var on=b.dataset.page===name;b.classList.toggle('active',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});if(name==='evidence'&&window.EvidenceBoard)EvidenceBoard.onShow();if(name==='sim')draw()}
 $$('.tab').forEach(function(b){b.addEventListener('click',function(){switchPage(b.dataset.page)})});
 $('play').addEventListener('click',function(){if(state.playing)pauseSim();else{if(state.t>=state.duration)state.t=0;state.playing=true;state.last=performance.now()}draw()});$('replay').addEventListener('click',function(){state.t=0;pauseSim();draw()});$('speed').addEventListener('click',function(){state.speed=state.speed===1?.25:1;$('speed').textContent=state.speed===1?'正常速度':'¼ 倍慢放'});$('scrub').addEventListener('input',function(){pauseSim();state.t=Number(this.value);draw()});
 function change(k,v){state.after[k]=v;compute(true)}
@@ -938,10 +938,36 @@ function pauseVideo(){if(!videoState)return;videoState.playing=false;['before','
 function span(slot){var v=videoState[slot],el=$('video-'+slot);return v.ready?Math.max(0,(v.end===null?el.duration:v.end)-(v.start===null?0:v.start)):0}
 function videoLimit(){return Math.max(span('before'),span('after'),.01)}
 function updateVideoMarks(slot){var v=videoState[slot];$('start-'+slot).textContent=v.start===null?'未标记':fmt(v.start,2)+' s';$('end-'+slot).textContent=v.end===null?'未标记':fmt(v.end,2)+' s';var valid=v.start!==null&&v.end!==null&&v.end>v.start;$('elapsed-'+slot).textContent=valid?fmt(v.end-v.start,2)+' s':'—';$('video-scrub').max=videoLimit();var send=document.querySelector('[data-send="'+slot+'"]');send.disabled=!valid}
-['before','after'].forEach(function(slot){var el=$('video-'+slot);$('video-'+slot+'-file').addEventListener('change',function(){var f=this.files&&this.files[0];if(!f)return;pauseVideo();if(f.size>700*1024*1024){videoMessage('文件较大，可先剪出测试过程，减少平板内存占用。',true)}var v=videoState[slot];if(v.url)URL.revokeObjectURL(v.url);v.ready=false;v.start=null;v.end=null;v.url=URL.createObjectURL(f);el.src=v.url;el.load();$('filename-'+slot).textContent=f.name;updateVideoMarks(slot)});
- el.addEventListener('loadedmetadata',function(){var v=videoState[slot];if(!Number.isFinite(el.duration)||el.duration<=0){videoMessage('这段视频暂时无法读取时长，请换一段可正常播放的视频。',true);return}v.ready=true;el.muted=true;el.playbackRate=videoState.rate;$('empty-'+slot).style.display='none';videoState.t=0;updateVideoMarks(slot);videoMessage('已载入真实测试视频。用视频自己的进度条定位，再标记起点和终点。')});el.addEventListener('error',function(){videoState[slot].ready=false;$('empty-'+slot).style.display='flex';videoMessage('当前浏览器无法播放这段视频。可换用常见的 MP4（H.264）视频。',true);updateVideoMarks(slot)});updateVideoMarks(slot)
-});
-$$('[data-mark]').forEach(function(b){b.addEventListener('click',function(){var slot=b.dataset.slot,v=videoState[slot],el=$('video-'+slot);if(!v.ready){toast('请先导入这版小车的测试视频');return}pauseVideo();var t=el.currentTime;if(b.dataset.mark==='start'){v.start=t;if(v.end!==null&&v.end<=t)v.end=null}else{if(v.start===null){toast('请先标记起点');return}if(t<=v.start+.01){toast('终点必须在起点之后');return}v.end=t}updateVideoMarks(slot);videoState.t=0;$('video-scrub').value=0;$('video-time').textContent='0.00 s';videoMessage('起终点由你手动判定；显示的小数位不等于实际测量精度。两次测试请使用相同判定规则。')})});
+// Decode a separate media element before committing a replacement. No evidence-cache changes.
+var videoImports={before:null,after:null};
+function disposeVideo(el,url){try{el.pause();el.removeAttribute('src');el.load()}catch(ignore){}if(url)URL.revokeObjectURL(url)}
+function cancelVideoImport(slot){var job=videoImports&&videoImports[slot];if(!job)return;videoImports[slot]=null;clearTimeout(job.timer);job.el.onloadeddata=null;job.el.onerror=null;disposeVideo(job.el,job.url)}
+function cancelVideoImports(){if(!videoImports)return;['before','after'].forEach(cancelVideoImport)}
+function bindCommittedVideo(slot,el){el.addEventListener('error',function(){if($('video-'+slot)!==el)return;pauseVideo();videoMessage('当前视频播放遇到错误；起终点标记仍保留。请尝试重新导入可播放的视频，实测表记录不受影响。',true)})}
+function importVideo(slot,f){
+ cancelVideoImport(slot);pauseVideo();
+ var candidate=document.createElement('video'),job={el:candidate,url:null,timer:null};videoImports[slot]=job;
+ function current(){return videoImports[slot]===job}
+ function fail(message){if(!current())return;cancelVideoImport(slot);videoMessage(message+' 原视频和起终点标记均未更改。',true)}
+ candidate.controls=true;candidate.muted=true;candidate.preload='auto';candidate.playsInline=true;candidate.setAttribute('playsinline','');
+ candidate.onerror=function(){fail('新视频无法解码，请换用当前浏览器支持的视频。')};
+ candidate.onloadeddata=function(){
+  if(!current())return;
+  if(!Number.isFinite(candidate.duration)||candidate.duration<=0||!candidate.videoWidth||!candidate.videoHeight||candidate.readyState<2){fail('新视频没有可读取的画面或时长。');return}
+  pauseVideo();var old=$('video-'+slot),v=videoState[slot],oldURL=v.url;
+  try{candidate.playbackRate=videoState.rate;candidate.id=old.id;old.parentNode.replaceChild(candidate,old)}catch(e){fail('新视频载入失败。');return}
+  clearTimeout(job.timer);candidate.onloadeddata=null;candidate.onerror=null;videoImports[slot]=null;
+  v.url=job.url;v.ready=true;v.start=null;v.end=null;bindCommittedVideo(slot,candidate);
+  disposeVideo(old,oldURL);$('filename-'+slot).textContent=f.name;$('empty-'+slot).style.display='none';
+  videoState.t=0;$('video-scrub').value=0;$('video-time').textContent='0.00 s';updateVideoMarks(slot);
+  videoMessage('已载入真实测试视频。用视频自己的进度条定位，再标记起点和终点。'+(f.size>700*1024*1024?' 文件较大，建议剪出测试过程以减少内存占用。':''));
+ };
+ videoMessage('正在检查新视频；原视频与起终点暂时保留。'+(f.size>700*1024*1024?' 文件较大，建议先剪短。':''));
+ try{job.url=URL.createObjectURL(f);candidate.src=job.url;job.timer=setTimeout(function(){fail('新视频读取超时，请剪短后重试。')},60000);candidate.load()}catch(e){fail('浏览器无法读取所选文件。')}
+}
+['before','after'].forEach(function(slot){bindCommittedVideo(slot,$('video-'+slot));$('video-'+slot+'-file').addEventListener('change',function(){var f=this.files&&this.files[0];this.value='';if(f)importVideo(slot,f)});updateVideoMarks(slot)});
+window.addEventListener('pagehide',cancelVideoImports);
+$$('[data-mark]').forEach(function(b){b.addEventListener('click',function(){var slot=b.dataset.slot,v=videoState[slot],el=$('video-'+slot);cancelVideoImport(slot);if(!v.ready){toast('请先导入这版小车的测试视频');return}pauseVideo();var t=el.currentTime;if(b.dataset.mark==='start'){v.start=t;if(v.end!==null&&v.end<=t)v.end=null}else{if(v.start===null){toast('请先标记起点');return}if(t<=v.start+.01){toast('终点必须在起点之后');return}v.end=t}updateVideoMarks(slot);videoState.t=0;$('video-scrub').value=0;$('video-time').textContent='0.00 s';videoMessage('起终点由你手动判定；显示的小数位不等于实际测量精度。两次测试请使用相同判定规则。')})});
 function videoSeek(t){videoState.t=Math.max(0,Math.min(videoLimit(),t));['before','after'].forEach(function(slot){var v=videoState[slot];if(!v.ready)return;var el=$('video-'+slot),start=v.start===null?0:v.start;el.currentTime=Math.min(start+videoState.t,v.end===null?el.duration:v.end)});$('video-scrub').value=videoState.t;$('video-time').textContent=fmt(videoState.t,2)+' s'}
 $('video-scrub').addEventListener('input',function(){pauseVideo();videoSeek(Number(this.value))});$('video-reset').addEventListener('click',function(){pauseVideo();videoSeek(0)});$('video-speed').addEventListener('click',function(){videoState.rate=videoState.rate===.5?.25:videoState.rate===.25?1:.5;['before','after'].forEach(function(slot){$('video-'+slot).playbackRate=videoState.rate});this.textContent=videoState.rate+'× '+(videoState.rate===1?'原速':'慢放')});
 $('video-play').addEventListener('click',function(){if(videoState.playing){pauseVideo();return}var loaded=['before','after'].filter(function(slot){return videoState[slot].ready});if(!loaded.length){toast('先导入一段或两段实物测试视频');return}if(loaded.some(function(slot){return videoState[slot].start===null})){toast('请先为已导入的视频标记起点');return}if(videoState.t>=videoLimit()-.03)videoState.t=0;videoSeek(videoState.t);videoState.playing=true;this.textContent='Ⅱ 暂停观察';loaded.forEach(function(slot){var el=$('video-'+slot);if(videoState.t<span(slot)-.01){el.playbackRate=videoState.rate;var p=el.play();if(p&&p.catch)p.catch(function(){pauseVideo();videoMessage('浏览器暂停了视频，请点击视频原生播放按钮后再尝试同步。',true)})}})});
