@@ -266,7 +266,8 @@
   const root=document.getElementById('evidencePanel');
   if(!root)return;
   const $=id=>document.getElementById(id);
-  const canvas=$('evCanvas'),ctx=canvas.getContext('2d'),video=$('evVideo');
+  const canvas=$('evCanvas'),ctx=canvas.getContext('2d');
+  let video=$('evVideo'),pendingImport=null,importSerial=0;
   const C={ink:'#123b48',muted:'#5d777b',target:'#087f87',reference:'#df8256',relative:'#7761aa',paper:'#f4f7f5'};
   const state={active:false,kind:null,name:'',label:'',url:null,image:null,width:0,height:0,frames:[],selected:null,view:'source',tool:'target',serial:0,token:0,raf:0,pointer:null,stroke:null,seeking:false};
   let cw=0,ch=0,dpr=1,resizeObserver=null;
@@ -423,32 +424,71 @@
     updateTime();updateStrip();updateComparison();render();
   }
   function clearSource(){
+    cancelPendingImport();
     const previousSource=state.kind;
-    state.token++;pauseVideo();video.removeAttribute('src');video.load();
+    state.token++;pauseVideo();video.onerror=null;video.removeAttribute('src');video.load();
     if(state.url){URL.revokeObjectURL(state.url);state.url=null;}
     state.kind=null;state.name='';state.label='';state.image=null;state.width=0;state.height=0;state.frames=[];state.selected=null;state.view='source';state.tool='target';state.pointer=null;state.stroke=null;state.seeking=false;state.serial=0;
     document.dispatchEvent(new CustomEvent('evidence:reset',{detail:{source:previousSource,remainingFrames:0}}));
   }
   function reset(){clearSource();$('evFileInput').value='';$('evRate').value='1';video.playbackRate=1;announce('先观察，再标记。记录用来支持你的解释。');updateUI();resize();}
-  function mediaFailure(message,token){if(token!==state.token)return;clearSource();announce(message,true);updateUI();}
+  // Decode into a separate candidate; the current source and all evidence remain intact.
+  function cancelPendingImport(){
+    importSerial++;
+    if(!pendingImport)return;
+    const p=pendingImport;pendingImport=null;clearTimeout(p.timer);
+    p.media.onload=p.media.onerror=p.media.onloadeddata=null;
+    if(p.video){p.media.removeAttribute('src');p.media.load();}
+    URL.revokeObjectURL(p.url);
+  }
   function loadFile(file){
     if(!file)return;
     const isImage=/^image\//i.test(file.type)||/\.(png|jpe?g|webp|gif|bmp|avif|heic|heif)$/i.test(file.name);
     const isVideo=/^video\//i.test(file.type)||/\.(mp4|m4v|mov|webm|ogv|ogg|avi|mkv)$/i.test(file.name);
-    if(!isImage&&!isVideo){announce('请选择照片或视频文件。',true);return;}
-    clearSource();const token=state.token;state.url=URL.createObjectURL(file);state.name=file.name;announce('正在读取 '+file.name+' …');updateUI();
-    if(isImage){
-      const image=new Image();image.onload=function(){if(token!==state.token)return;if(!image.naturalWidth||!image.naturalHeight){mediaFailure('无法读取这张照片，请另存为 JPG 或 PNG 后重试。',token);return;}state.kind='image';state.image=image;state.width=image.naturalWidth;state.height=image.naturalHeight;state.name=file.name;const f=makeFrame(image,null);state.frames=[f];state.selected=f;state.view='frame';announce('照片已留存。点击标记目标，或用“描轮廓”留下你的观察。');updateUI();resize();};
-      image.onerror=()=>mediaFailure('当前浏览器无法读取这张照片，请尝试 JPG 或 PNG。',token);image.src=state.url;
-    }else{
-      video.onloadedmetadata=function(){
-        if(token!==state.token)return;if(!video.videoWidth||!video.videoHeight){mediaFailure('视频没有可读取的画面，请更换文件。',token);return;}
-        state.kind='video';state.width=video.videoWidth;state.height=video.videoHeight;state.name=file.name;state.view='source';video.playbackRate=Number($('evRate').value)||1;
-        announce('用 ±0.2 秒步进选择时刻，再点“留住这一刻”。这不是按原始帧率逐帧。');updateUI();resize();
-      };
-      video.onerror=()=>mediaFailure('当前浏览器无法解码此视频，请尝试 MP4（H.264）或 WebM。',token);
-      video.src=state.url;video.load();
+    cancelPendingImport();
+    if(!isImage&&!isVideo){announce('请选择照片或视频文件。原素材与记录未更改。',true);return;}
+    let url;
+    try{url=URL.createObjectURL(file);}catch(err){announce('无法读取所选文件。原素材与记录未更改。',true);return;}
+    const media=isImage?new Image():document.createElement('video');
+    const p={id:importSerial,url:url,media:media,video:!isImage,timer:null};pendingImport=p;
+    const current=()=>pendingImport===p&&p.id===importSerial;
+    function fail(message){if(!current())return;cancelPendingImport();announce(message+' 原素材与记录未更改，可以继续观察或导出。',true);}
+    function ready(){
+      if(!current())return;
+      const w=isImage?media.naturalWidth:media.videoWidth,h=isImage?media.naturalHeight:media.videoHeight;
+      if(!w||!h){fail('没有可读取的画面。');return;}
+      let frameImage=null;
+      try{
+        // Test drawing too, before changing state (including image memory-allocation failures).
+        const scale=Math.min(1,1600/w,1200/h),c=document.createElement('canvas');
+        c.width=Math.max(1,Math.round(w*scale));c.height=Math.max(1,Math.round(h*scale));
+        c.getContext('2d').drawImage(media,0,0,c.width,c.height);
+        if(isImage)frameImage=c;
+      }catch(err){fail('画面解码或读取失败，请尝试较小的 JPG、PNG 或 MP4 文件。');return;}
+      clearTimeout(p.timer);media.onload=media.onerror=media.onloadeddata=null;
+      pendingImport=null; // Transfer ownership: clearSource must not revoke the accepted candidate.
+      clearSource();
+      state.url=url;state.name=file.name;state.width=w;state.height=h;
+      if(isImage){
+        state.kind='image';state.image=media;
+        const f={id:++state.serial,time:null,image:frameImage,target:null,reference:null,strokes:[]};
+        state.frames=[f];state.selected=f;state.view='frame';
+        announce('照片已读取，已开始新一组记录。点击标记目标，或用“描轮廓”留下观察。');
+      }else{
+        // Reuse the already decoded video, avoiding a second asynchronous decode after replacing evidence.
+        const old=video;media.id='evVideo';media.hidden=true;
+        old.parentNode.replaceChild(media,old);video=media;bindVideoEvents();
+        state.kind='video';state.view='source';video.playbackRate=Number($('evRate').value)||1;
+        video.onerror=()=>{if(video!==media)return;pauseVideo();announce('视频后续读取失败。已留存的画面和标记仍保留，请先导出，再尝试其他文件。',true);};
+        announce('视频已读取，已开始新一组记录。用 ±0.2 秒选择时刻，再点“留住这一刻”。不是按原始帧率逐帧。');
+      }
+      updateUI();resize();
     }
+    p.timer=setTimeout(()=>fail('读取超时，请重试或选择其他文件。'),60000);
+    media.onerror=()=>fail(isImage?'当前浏览器无法读取这张照片，请尝试 JPG 或 PNG。':'当前浏览器无法解码此视频，请尝试 MP4（H.264）或 WebM。');
+    announce('正在读取 '+file.name+' … 成功后才替换；原素材与记录暂时保留。');
+    if(isImage){media.onload=ready;media.src=url;}
+    else{media.muted=true;media.playsInline=true;media.setAttribute('playsinline','');media.preload='auto';media.onloadeddata=ready;media.src=url;media.load();}
   }
   function captureCurrent(quiet){
     if(!state.kind)return null;
@@ -572,13 +612,18 @@
   $('evClearFrames').addEventListener('click',clearFrames);$('evCompare').addEventListener('click',compare);$('evExport').addEventListener('click',exportPNG);
   $('evClearMarks').addEventListener('click',()=>{const f=activeFrame();if(!f||state.view==='compare')return;f.target=null;f.reference=null;f.strokes=[];announce('已清除此刻的标记，画面仍保留。');updateUI();});
   canvas.addEventListener('pointerdown',pointerDown);canvas.addEventListener('pointermove',pointerMove);canvas.addEventListener('pointerup',pointerEnd);canvas.addEventListener('pointercancel',pointerEnd);
-  video.addEventListener('loadeddata',()=>{if(state.kind==='video'){updateUI();render();}});
-  video.addEventListener('seeking',()=>{if(state.kind==='video')$('evCapture').disabled=true;});
-  video.addEventListener('seeked',()=>{state.seeking=false;if(state.kind==='video'){updateTime();render();$('evCapture').disabled=state.frames.length>=3||video.readyState<2;}});
-  video.addEventListener('durationchange',updateTime);video.addEventListener('timeupdate',()=>{updateTime();if(video.paused)render();});
-  video.addEventListener('play',()=>{startLoop();updateTime();});video.addEventListener('pause',()=>{stopLoop();updateTime();render();});video.addEventListener('ended',()=>{stopLoop();updateTime();render();});
+  function bindVideoEvents(){
+    const bound=video;
+    const listen=(type,fn)=>bound.addEventListener(type,e=>{if(video===bound)fn(e);});
+  listen('loadeddata',()=>{if(state.kind==='video'){updateUI();render();}});
+  listen('seeking',()=>{if(state.kind==='video')$('evCapture').disabled=true;});
+  listen('seeked',()=>{state.seeking=false;if(state.kind==='video'){updateTime();render();$('evCapture').disabled=state.frames.length>=3||video.readyState<2;}});
+  listen('durationchange',updateTime);listen('timeupdate',()=>{updateTime();if(video.paused)render();});
+  listen('play',()=>{startLoop();updateTime();});listen('pause',()=>{stopLoop();updateTime();render();});listen('ended',()=>{stopLoop();updateTime();render();});
+  }
+  bindVideoEvents();
   if(window.ResizeObserver){resizeObserver=new ResizeObserver(resize);resizeObserver.observe($('evStage'));}else window.addEventListener('resize',resize);
-  window.addEventListener('pagehide',()=>{pauseVideo();if(state.url){URL.revokeObjectURL(state.url);state.url=null;}});
+  window.addEventListener('pagehide',()=>{cancelPendingImport();pauseVideo();if(state.url){URL.revokeObjectURL(state.url);state.url=null;}});
   window.EvidenceLab={
     activate:function(){state.active=true;root.hidden=false;requestAnimationFrame(resize);updateUI();},
     deactivate:function(){state.active=false;pauseVideo();root.hidden=true;},
