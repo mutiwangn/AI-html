@@ -1,0 +1,16 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>里面的电路是怎样的 · 用通断证据推理</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ee;color:#263e37;font:18px/1.65 system-ui,"Microsoft YaHei",sans-serif}header,main,footer{max-width:1180px;margin:auto;padding:20px}h1{margin:4px 0;font-size:30px}h2{font-size:22px;margin:0 0 12px}p{margin:10px 0}.tag{color:#805b32;font-size:14px}.layout{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}.card{background:white;border:1px solid #dde5d9;border-radius:20px;padding:22px}svg{width:100%;height:auto;background:#fafbf6;border-radius:12px}button{font:inherit;padding:10px 16px;min-height:48px;border:1px solid #b9cfc0;border-radius:10px;background:#eff5ef;color:#224b3a;cursor:pointer;margin:5px}button[aria-pressed=true]{background:#225c46;color:white}button:focus-visible,input:focus-visible{outline:3px solid #d69a32;outline-offset:3px}input{width:100%;accent-color:#27684d}#feedback,#detail{min-height:88px;padding:12px;background:#f0f6ed;border-radius:12px}.small{font-size:14px;color:#65766c}.selected{stroke:#cf5733!important;stroke-width:5!important}.part{transition:opacity .15s}.muted{opacity:.14}@media(max-width:760px){.layout{grid-template-columns:1fr}header,main,footer{padding:12px}}
+button:disabled{opacity:.4;cursor:not-allowed}#evidence{padding:12px;background:#f3f6ee;border-radius:10px}#hypothesis{max-height:230px}</style>
+<header><div class="tag">四年级下册 · 第三单元 · 3.6 · 基础辅助稿</div><h1>里面的电路是怎样的</h1><p>两点连通，是否一定有一根导线直接相连？</p></header><main class="layout"><section class="card"><h2>四个接线柱的假想暗盒</h2>
+<svg viewBox="0 0 600 390" role="img" aria-label="四接线柱暗盒与当前检测端点，内部导线默认不可见">
+<rect x="75" y="65" width="450" height="255" rx="24" fill="#dfe7df" stroke="#769182" stroke-width="3"/>
+<g id="inside"></g><g id="terminals"></g>
+<text id="boxLabel" x="300" y="360" text-anchor="middle" font-size="18">暗盒内只有理想导线，无电源</text>
+</svg><div id="tests"></div><p id="status" aria-live="polite">选择一对接线柱检测。</p><div id="evidence">尚无检测记录。</div><button id="reveal" disabled>全部检测后，查看本盒连线</button><button id="reset">重新遮住并清空记录</button>
+<p class="small">两色圆环只标出当前检测的两个端点，不表示正负极。本模型用已校验的低压通断检测器作概念演示；“通”表示存在导电路径，“断”表示无导电路径，不测导线长度或数量。</p>
+</section><section class="card"><h2>检验你的连线猜想</h2><button id="guess0">猜想 A：1—2—3</button><button id="guess1">猜想 B：2—1—3</button><button id="guess2">猜想 C：1—2，3—4</button>
+<svg id="hypothesis" viewBox="0 0 600 390" role="img" aria-label="当前选中的内部连线猜想"><rect x="75" y="65" width="450" height="255" rx="24" fill="#f4f5ea"/><g id="guessLines"></g><g id="guessPoints"></g></svg>
+<p id="feedback" aria-live="polite"></p><p><strong>与证据相符，不等于唯一真相。</strong>导电路径可以经过其他接线柱。只测各对的通断，有时不能确定内部每根导线的实际走向。</p>
+<p class="small"><strong>模型假设：</strong>暗盒内部仅有正常理想导线，接触和检测器均正常，不含电池、二极管、电阻或开关。不显示亮度、电压或电流，不处理复杂电子电路。</p>
+<p><strong>安全：</strong>真实活动只使用教师提供、确认无内置电源的教学盒和匹配的低压检测器。不要检测插座、市电、未知电器或带电物品；不直接短接电池两极。</p></section></main>
+<footer><p><strong>教材正文、版次与教参待核。</strong>本页为通断证据与连线猜想基础专题，不等于整课完成。</p><p class="small">科学基础：<a href="https://www.eia.gov/energyexplained/electricity/batteries-circuits-and-transformers.php">US EIA：完整电路</a>。连通推理按本页理想导线假设计算，图形与假想暗盒原创，无署名、无外部依赖。</p></footer><script src="./lesson.js"></script></html>
