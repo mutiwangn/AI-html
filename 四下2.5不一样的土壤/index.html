@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>不一样的土壤 · 配比比较</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ee;color:#263e37;font:18px/1.65 system-ui,"Microsoft YaHei",sans-serif}header,main,footer{max-width:1180px;margin:auto;padding:20px}h1{margin:4px 0;font-size:30px}h2{font-size:22px;margin:0 0 12px}p{margin:10px 0}.tag{color:#805b32;font-size:14px}.layout{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}.card{background:white;border:1px solid #dde5d9;border-radius:20px;padding:22px}svg{width:100%;height:auto;background:#fafbf6;border-radius:12px}button{font:inherit;padding:10px 16px;min-height:48px;border:1px solid #b9cfc0;border-radius:10px;background:#eff5ef;color:#224b3a;cursor:pointer;margin:5px}button[aria-pressed=true]{background:#225c46;color:white}button:focus-visible,input:focus-visible{outline:3px solid #d69a32;outline-offset:3px}input{width:100%;accent-color:#27684d}#feedback,#detail{min-height:88px;padding:12px;background:#f0f6ed;border-radius:12px}.small{font-size:14px;color:#65766c}.selected{stroke:#cf5733!important;stroke-width:5!important}.part{transition:opacity .15s}.muted{opacity:.14}@media(max-width:760px){.layout{grid-template-columns:1fr}header,main,footer{padding:12px}}
+button:disabled{opacity:.4;cursor:not-allowed}</style>
+<header><div class="tag">四年级下册 · 第二单元 · 2.5 · 基础辅助稿</div><h1>不一样的土壤</h1><p>成分名称一样，比例也一定一样吗？</p></header>
+<main class="layout"><section class="card"><h2>两份假想样品，比较矿物颗粒配比</h2>
+<svg viewBox="0 0 600 470" role="img" aria-label="三种矿物粒级的质量配比三角示意及两样品条形图">
+<path d="M90 280L510 280L300 55Z" fill="#f6efe0" stroke="#929d8c" stroke-width="2"/>
+<text x="300" y="30" text-anchor="middle" font-size="19">黏粒 100%</text><text x="45" y="310" font-size="19">砂粒 100%</text><text x="425" y="310" font-size="19">粉粒 100%</text>
+<circle cx="195" cy="257.5" r="12" fill="none" stroke="#28694f" stroke-width="4"/><text x="170" y="245" fill="#28694f" font-size="20">A</text>
+<circle id="pointB" r="7" fill="#c45137"/><text id="labelB" fill="#a23925" font-size="20">B</text>
+<text x="24" y="370" font-size="18">A</text><g id="barA"></g><text x="24" y="420" font-size="18">B</text><g id="barB"></g>
+<text x="300" y="460" text-anchor="middle" font-size="16">每条总长 = 100% · 表示质量比例，不是颗粒个数</text></svg>
+<p id="status" aria-live="polite"></p>
+<p class="small">黄＝砂粒；浅绿＝粉粒；紫＝黏粒。圆环 A 固定为 70% / 20% / 10%；实点 B 可调。重合时红点在绿环中央。三角图仅表示配比位置，不划分或自动命名土壤类型。</p>
+</section><section class="card"><h2>改变 B，其他两项怎样变？</h2><p>每次把矿物总质量的 10% 从一种粒级转给另一种。总量始终为 100%。这是配比思考，不是在把砂粒磨成黏粒。</p>
+<button id="sandPlus">粉粒 → 砂粒</button><button id="sandMinus">砂粒 → 粉粒</button>
+<button id="clayPlus">粉粒 → 黏粒</button><button id="clayMinus">黏粒 → 粉粒</button>
+<button id="match">让 B 与 A 配比相同</button><button id="reset">重置全部</button>
+<h2>辨别证据</h2><p id="question"></p><button id="yes">能这样说</button><button id="no">不能这样说</button><button id="nextQuestion">下一题</button><p id="feedback" aria-live="polite">先比较图中的证据，再判断。</p>
+<p class="small"><strong>范围与局限：</strong>本模型只比较砂、粉、黏三种矿物粒级的质量比例，排除大于 2 mm 的砾石等；不是整份土壤全部组分。没有模拟水、空气、有机质、结构、肥力或植物生长。配比相同不等于两份土壤完全一样，也不能只据配比评选“最好”的土壤。</p></section></main>
+<footer><p><strong>教材正文、版次与教参待核。</strong>依据已核对目录建立本课配比专题入口，并非整课教学验收。真实土壤还需按教师指导观察、比较和实验。</p>
+<p class="small">科学参考：<a href="https://extension.colostate.edu/resource/estimating-soil-texture-sandy-loamy-or-clayey/">Colorado State University Extension：土壤质地</a>。砂、粉、黏是矿物颗粒粒级，质地与它们的相对比例有关。图形与假想数据为原创；未引用教材图片，无外部运行依赖。</p></footer><script src="./lesson.js"></script></html>
