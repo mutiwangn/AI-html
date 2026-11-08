@@ -160,6 +160,36 @@
 
 
 <script>
+/* Local-only evidence protection. No network, no extra persistent copies. */
+window.LessonRecordGuard=function(key,title,current,validate,canSave){
+ 'use strict';
+ var original=null,known=false,blocked=false,dirty=false,reason='',backupRaw,backupMade=false,box,button,msg,check,replaceButton;
+ function raw(){return localStorage.getItem(key);}
+ function show(text,bad){reason=text;dirty=!!bad;if(button){button.textContent=bad?'记录未保存 · 查看保护':'本机记录 · '+text;button.style.background=bad?'#9a342d':'#245c50';msg.textContent=text;}}
+ function lock(text){blocked=true;show(text+'。原档未覆盖；当前操作仅留在本页，请先备份。',true);}
+ function load(){try{original=raw();known=true;if(original===null){show('尚未写入',false);return null;}var data=JSON.parse(original);if(!validate(data))throw new Error('invalid');show('已读取',false);return data;}catch(e){lock(known?'本机记录格式或版本不受支持':'本机存储不可读');return null;}}
+ function save(){if(canSave&&!canSave()){show("输入暂不能保存，原本机记录保留；请先修正",true);return false;}if(blocked){show(reason,true);return false;}try{if(!known||raw()!==original){lock('另一页面已更改本机记录');return false;}var value=current();if(!validate(value)){lock('当前记录格式异常');return false;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;show('已保存',false);return true;}catch(e){show('未能写入本机；请保留本页并下载备份',true);return false;}}
+ function backup(){var latest=null,readError=false;try{latest=raw();}catch(e){readError=true;}var payload={format:'lesson-local-backup-v1',lesson:title,storageKey:key,createdAt:new Date().toISOString(),originalRaw:original,latestRaw:latest,latestReadFailed:readError,currentPage:current()};try{var url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=title+'-本机记录备份.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);backupRaw=latest;backupMade=!readError;check.checked=false;replaceButton.disabled=true;msg.textContent='已发起备份下载。请到下载位置核实文件已保存；包含个人记录，请勿公开或上传。备份仅供保全，本页没有自动导入功能。';}catch(e){msg.textContent='备份未能生成；请勿关闭本页或替换原档。';backupMade=false;}}
+ function replace(){if(canSave&&!canSave()){show("输入暂不能替换，原本机记录保留；请先修正",true);return;}if(!backupMade||!check.checked)return;try{if(raw()!==backupRaw){backupMade=false;check.checked=false;replaceButton.disabled=true;lock('备份后本机档案再次改变，请重新备份');return;}var value=current();if(!validate(value)){lock('当前记录格式异常，不能替换');return;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;blocked=false;backupMade=false;check.checked=false;replaceButton.disabled=true;show('已用当前页面记录替换；请妥善保留备份',false);}catch(e){show('替换未成功；原档未主动删除，请保留本页和备份',true);}}
+ function mount(){
+  var host=document.createElement('div');host.id='local-record-protection';host.style.cssText='position:fixed;right:10px;bottom:6px;z-index:10000;font:14px/1.6 system-ui,sans-serif;max-width:calc(100vw - 20px);color:#20352d';
+  button=document.createElement('button');button.type='button';button.style.cssText='color:white;border:1px solid white;border-radius:8px;padding:5px 10px;min-height:32px;font:13px system-ui;cursor:pointer';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','local-record-panel');
+  box=document.createElement('section');box.id='local-record-panel';box.hidden=true;box.setAttribute('aria-label','本机记录保护');box.style.cssText='position:absolute;bottom:42px;right:0;width:360px;max-width:calc(100vw - 20px);max-height:75vh;overflow:auto;background:#fff;border:2px solid #587367;border-radius:12px;padding:15px;box-shadow:0 3px 20px #0004;font-size:14px';
+  msg=document.createElement('p');msg.setAttribute('role','status');box.appendChild(msg);
+  var privacy=document.createElement('p');privacy.textContent='数据只在本机和本页，不上传。共用设备请勿录入姓名或可识别的健康信息。备份可能含个人记录，应私人保管。';box.appendChild(privacy);
+  function add(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='display:block;background:#e8f1ec;border:1px solid #738c7d;border-radius:6px;padding:7px;margin:6px 0;min-height:40px;white-space:normal;font:14px system-ui';b.addEventListener('click',fn);box.appendChild(b);return b;}
+  add('下载原档与当前页面备份',backup);add('重试保存（不覆盖冲突档）',save);
+  var label=document.createElement('label');label.style.cssText='display:block;white-space:normal;font-size:14px';check=document.createElement('input');check.type='checkbox';label.appendChild(check);label.appendChild(document.createTextNode('我已核实备份文件落盘，并同意以当前页面记录替换本机档案'));box.appendChild(label);
+  replaceButton=add('确认替换本机档案',replace);replaceButton.disabled=true;check.addEventListener('change',function(){replaceButton.disabled=!(backupMade&&check.checked);});
+  add('关闭记录保护',function(){box.hidden=true;button.setAttribute('aria-expanded','false');button.focus();});button.addEventListener('click',function(){box.hidden=!box.hidden;button.setAttribute('aria-expanded',String(!box.hidden));});host.appendChild(box);host.appendChild(button);document.body.appendChild(host);show(reason||'尚未写入',dirty);
+ }
+ window.addEventListener('storage',function(e){if(e.key===key||e.key===null){try{if(raw()!==original)lock('另一页面已更改本机记录');}catch(err){lock('本机存储不可读');}}});
+ window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+ mount();return {load:load,save:save,lock:lock,markDirty:function(text){show(text||'当前修改未保存',true);},status:function(){return {blocked:blocked,dirty:dirty};}};
+};
+
+</script>
+<script>
 /*
  * WaterModel 1.0 — 六上4.2《用水计量时间》
  * Deterministic teaching model; every time/flow value is a MODEL VALUE, not a
@@ -801,27 +831,32 @@
     var j;
     for (j = 0; j < fields.length; j++) fields[j].value = typeof values[j] === 'string' ? values[j] : '';
   }
+  // Validate without coercion, filtering, rounding or dropping unknown fields.
+  function validArchive(data) {
+    if(!data||typeof data!=='object'||Array.isArray(data)||Object.keys(data).sort().join(',')!=='updatedAt,values,version'||data.version!==1||!Array.isArray(data.values)||data.values.length!==6||typeof data.updatedAt!=='string'||!isFinite(Date.parse(data.updatedAt)))return false;
+    return data.values.every(function(v){
+      if(typeof v!=='string')return false;
+      if(v==='')return true;
+      // Only strings that a number input can represent losslessly may enter the UI.
+      if(!/^-?(?:[0-9]+|[0-9]*\.[0-9]+)(?:[eE][+-]?[0-9]+)?$/.test(v)||!isFinite(Number(v)))return false;
+      var probe=document.createElement('input');probe.type='number';probe.value=v;return probe.value===v;
+    });
+  }
+  var lastUpdatedAt=new Date().toISOString();
+  var recordGuard=root.LessonRecordGuard(KEY,'六上4.2用水计量时间',function(){return {version:1,values:rawValues(),updatedAt:lastUpdatedAt};},validArchive,function(){return !fields.some(function(f){return f.validity&&f.validity.badInput;});});
   function save() {
-    try {
-      root.localStorage.setItem(KEY, JSON.stringify({ version: 1, values: rawValues(), updatedAt: new Date().toISOString() }));
-      saveText.textContent = '本机已保存';
-      saveText.className = 'cr-save-state';
-    } catch (e) {
-      saveText.textContent = '未保存，可导出';
-      saveText.className = 'cr-save-state cr-unsaved';
-    }
+    if(fields.some(function(f){return f.validity&&f.validity.badInput;})){recordGuard.markDirty('输入暂不能保存，原本机记录保留；请先修正，勿关闭本页');saveText.textContent='输入无效，未覆盖原记录';saveText.className='cr-save-state cr-unsaved';return false;}
+    lastUpdatedAt=new Date().toISOString();
+    var saved=recordGuard.save();
+    saveText.textContent=saved?'本机已保存':'未保存，请打开记录保护备份';
+    saveText.className=saved?'cr-save-state':'cr-save-state cr-unsaved';
+    return saved;
   }
   function load() {
-    try {
-      var stored = root.localStorage.getItem(KEY);
-      if (stored) {
-        var data = JSON.parse(stored);
-        if (data && data.version === 1 && Object.prototype.toString.call(data.values) === '[object Array]' && data.values.length === 6) setValues(data.values);
-      }
-    } catch (e) {
-      saveText.textContent = '未保存，可导出';
-      saveText.className = 'cr-save-state cr-unsaved';
-    }
+    var data=recordGuard.load();
+    if(data){setValues(data.values);lastUpdatedAt=data.updatedAt;saveText.textContent='已读取本机记录';}
+    else if(recordGuard.status().blocked){saveText.textContent='原记录受保护，当前仅在本页';saveText.className='cr-save-state cr-unsaved';}
+    else saveText.textContent='尚未记录';
   }
   function compute() {
     var values = rawValues(), parsed = [], valid = [], bad = [], segments = [null, null, null], repeat = [null, null, null];
@@ -1026,6 +1061,7 @@
   document.getElementById('crClose').addEventListener('click', close);
   document.addEventListener('keydown', function (event) {
     if (!isOpen) return;
+    var guardTarget=event.target;while(guardTarget){if(guardTarget.id==='local-record-protection')return;guardTarget=guardTarget.parentNode;}
     var key = event.key || event.keyCode;
     if (key === 'Escape' || key === 'Esc' || key === 27) {
       event.preventDefault(); event.stopPropagation(); close(); return;
@@ -1054,7 +1090,7 @@
     }
   };
   load();
-  render(true);
+  render(false);
 }(window));
 
 </script>
