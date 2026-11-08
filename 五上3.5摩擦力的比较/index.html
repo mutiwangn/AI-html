@@ -580,11 +580,42 @@ var config={mode:'roll',texture:'smooth',loads:0};
 var STORE='aihtml-friction-compare-v1';
 var records=[];var seq=0;var customCartRenderer=null;
 function validConfig(c){return c&&(c.mode==='roll'||c.mode==='slide')&&(c.texture==='smooth'||c.texture==='rough')&&[0,1,2].indexOf(Number(c.loads))>=0;}
-try{var loaded=JSON.parse(localStorage.getItem(STORE)||'[]');if(Array.isArray(loaded))records=loaded.filter(function(r){return validConfig(r)&&(r.source==='sim'||r.source==='real')&&Array.isArray(r.values);}).map(function(r){return {id:String(r.id),mode:r.mode,texture:r.texture,loads:Number(r.loads),source:r.source,values:[0,1,2].map(function(i){var v=r.values[i];return typeof v==='number'&&isFinite(v)&&v>=0&&v<=5?Math.round(v*10)/10:null;})};}).slice(0,24);}catch(e){}
+var recordGuard={raw:null,startup:null,locked:false,awaitSave:false,revision:0,request:0,message:''};
+function strictRecords(value){
+ if(!Array.isArray(value))throw Error('records');var ids=Object.create(null);
+ value.forEach(function(r){var keys=['id','mode','texture','loads','source','values'];if(!r||typeof r!=='object'||Array.isArray(r)||keys.some(function(k){return !Object.prototype.hasOwnProperty.call(r,k)})||Object.keys(r).some(function(k){return keys.indexOf(k)<0}))throw Error('shape');
+ if(typeof r.id!=='string'||!r.id||Object.prototype.hasOwnProperty.call(ids,r.id))throw Error('id');ids[r.id]=true;
+ if(['roll','slide'].indexOf(r.mode)<0||['smooth','rough'].indexOf(r.texture)<0||typeof r.loads!=='number'||[0,1,2].indexOf(r.loads)<0||['sim','real'].indexOf(r.source)<0||!Array.isArray(r.values)||r.values.length!==3)throw Error('types');
+ r.values.forEach(function(v){if(v!==null&&(typeof v!=='number'||!isFinite(v)||v<0||v>5))throw Error('value');});
+ });return JSON.parse(JSON.stringify(value));
+}
+function recordStatus(t){recordGuard.message=t;var status=$('recordStorageStatus'),button=$('recordStorageButton');if(status)status.textContent=t;if(button){button.textContent=recordGuard.locked?'记录只读 · 备份':recordGuard.awaitSave?'草稿未保存 · 备份':'记录备份';button.title=t;}var brief=$('recordStorageBrief');if(brief){brief.textContent=t;brief.hidden=!(recordGuard.locked||recordGuard.awaitSave||/未保存|失败/.test(t));}}
+function loadRecords(){try{recordGuard.raw=localStorage.getItem(STORE);recordGuard.startup=recordGuard.raw;if(recordGuard.raw!==null)records=strictRecords(JSON.parse(recordGuard.raw));recordStatus(recordGuard.raw===null?'暂无本机记录，首次记录后将尝试保存。':'已读取全部 '+records.length+' 组记录。');}catch(e){recordGuard.locked=true;recordStatus('缓存异常：原文已保护；本页记录不会自动覆盖，请备份后恢复。');}}
+function persist(){recordGuard.revision++;var ok=false;
+ if(recordGuard.locked||recordGuard.awaitSave)recordStatus(recordGuard.locked?'缓存只读保护：当前记录仅在本页，请备份后恢复。':'恢复草稿尚未保存，请在记录备份中确认保存。');
+ else try{if(localStorage.getItem(STORE)!==recordGuard.raw){recordGuard.locked=true;recordStatus('另一页面更新了缓存，停止覆盖；请先导出本页草稿。');}else{var raw=JSON.stringify(strictRecords(records));localStorage.setItem(STORE,raw);recordGuard.raw=raw;ok=true;recordStatus('全部 '+records.length+' 组记录已保存到本机。');}}catch(e){recordStatus('未保存到本机：权限、空间或数据校验失败；请导出草稿。');}
+ updateCounts();document.dispatchEvent(new CustomEvent('friction-records-change'));return ok;
+}
+function storageDownload(raw,name){try{var u=URL.createObjectURL(new Blob([raw],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},30000);return true;}catch(e){recordStatus('下载失败，请保留原缓存和当前页面。');return false;}}
+function restoreRecords(input){var request=++recordGuard.request,file=input.files&&input.files[0];if(!file)return;if(file.size>2000000){recordStatus('备份过大，当前记录未改变。');input.value='';return;}var revision=recordGuard.revision,signature=JSON.stringify(records),reader=new FileReader();reader.onload=function(){if(request!==recordGuard.request)return;var next;try{next=strictRecords(JSON.parse(reader.result));}catch(e){recordStatus('备份结构或类型无效，当前记录和缓存均保留。');input.value='';return;}if(revision!==recordGuard.revision||signature!==JSON.stringify(records)){recordStatus('读取期间记录已改变，已取消恢复。');input.value='';return;}if(!confirm('用备份替换本页全部模拟和实物记录？可先导出当前草稿。本机缓存暂不改变。')){input.value='';return;}records=next;recordGuard.awaitSave=true;persist();input.value='';};reader.onerror=function(){if(request===recordGuard.request)recordStatus('文件读取失败，旧记录保留。');input.value='';};reader.readAsText(file);}
+function installRecordStorage(){
+ var b=document.createElement('button');b.id='recordStorageButton';b.type='button';b.textContent='记录备份';document.querySelector('.app-header').appendChild(b);
+ var brief=document.createElement('div');brief.id='recordStorageBrief';brief.setAttribute('role','status');brief.style.cssText='position:fixed;bottom:4px;left:10px;right:10px;z-index:20;background:#fff4dc;color:#6e4900;padding:5px 10px;border-radius:6px;font-size:13px;pointer-events:none';brief.hidden=true;document.body.appendChild(brief);
+ var panel=document.createElement('div');panel.className='modal-backdrop';panel.id='recordStoragePanel';panel.hidden=true;panel.innerHTML='<section class="info-dialog" role="dialog" aria-modal="true" aria-labelledby="recordStorageTitle"><div class="dialog-head"><h2 id="recordStorageTitle">完整记录备份与恢复</h2><button id="recordStorageClose">关闭</button></div><p id="recordStorageStatus"></p><p>JSON草稿包含全部模拟和实物记录。原缓存和启动原文未经修正；异常时不会自动覆写。恢复先到本页，确认后才保存。</p><div id="recordStorageActions" style="display:flex;flex-wrap:wrap;gap:10px"></div></section>';document.body.appendChild(panel);
+ var lastFocus;function close(){panel.hidden=true;if(lastFocus)lastFocus.focus();}b.onclick=function(){lastFocus=document.activeElement;panel.hidden=false;$('recordStorageClose').focus();};$('recordStorageClose').onclick=close;panel.onclick=function(e){if(e.target===panel)close();};panel.onkeydown=function(e){if(e.key==='Escape')close();if(e.key==='Tab'){var nodes=panel.querySelectorAll('button'),first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}};
+ function btn(label,fn){var el=document.createElement('button');el.type='button';el.textContent=label;el.onclick=fn;$('recordStorageActions').appendChild(el);}
+ btn('导出完整草稿',function(){storageDownload(JSON.stringify(records,null,2),'摩擦力_完整草稿.json');});btn('导出缓存原文',function(){try{var raw=localStorage.getItem(STORE);if(raw===null){recordStatus('没有本机缓存。');return;}storageDownload(raw,'摩擦力_缓存原文.json');}catch(e){recordStatus('缓存读取失败，可导出启动原文。');}});btn('导出启动原文',function(){if(recordGuard.startup!==null)storageDownload(recordGuard.startup,'摩擦力_启动原文.json');else recordStatus('没有已读取的启动原文。');});
+ var input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.hidden=true;input.onchange=function(){restoreRecords(input);};panel.appendChild(input);btn('恢复JSON',function(){input.click();});
+ btn('确认保存草稿',function(){if(!confirm('保存当前全部记录并覆盖本机旧记录？可先导出原文。'))return;recordGuard.awaitSave=false;persist();});
+ btn('备份后解除保护并覆盖',function(){var raw,next;try{raw=localStorage.getItem(STORE);next=strictRecords(records);}catch(e){recordStatus('无法读取原文或校验草稿，停止覆盖。');return;}if(raw!==null&&!storageDownload(raw,'摩擦力_替换前原文.json'))return;if(!confirm('请确认原文备份已下载且可找到。用当前全部记录覆盖本机缓存？'))return;try{if(localStorage.getItem(STORE)!==raw){recordStatus('确认期间缓存已变化，取消覆盖。');return;}var text=JSON.stringify(next);localStorage.setItem(STORE,text);recordGuard.raw=text;recordGuard.locked=false;recordGuard.awaitSave=false;recordStatus('当前全部记录已保存；请保留旧原文备份。');}catch(e){recordStatus('保存失败，未主动删除原文；当前草稿仍在本页。');}});
+ window.addEventListener('storage',function(e){if(e.key===STORE||e.key===null){recordGuard.locked=true;recordStatus('检测到另一页面更改缓存，停止覆盖，请备份当前草稿。');}});recordStatus(recordGuard.message);
+}
+loadRecords();
+
 function key(c,source){return [source,c.mode,c.texture,c.loads].join('-');}
 function findRecord(c,source){return records.find(function(r){return key(r,r.source)===key(c,source);});}
 function newRecord(c,source){var r={id:key(c,source)+'-'+Date.now()+'-'+(++seq),mode:c.mode,texture:c.texture,loads:Number(c.loads),source:source,values:[null,null,null]};records.push(r);return r;}
-function persist(){try{localStorage.setItem(STORE,JSON.stringify(records));}catch(e){toast('当前浏览器未能保存，请及时导出记录。');}updateCounts();document.dispatchEvent(new CustomEvent('friction-records-change'));}
+
 window.FrictionLab={
  getRecords:function(){return JSON.parse(JSON.stringify(records));},
  getConfig:function(){return Object.assign({},config);},
@@ -652,7 +683,7 @@ var lastRender=0;function animate(stamp){var dt=lastStamp?Math.min(.05,(stamp-la
 var lastFocus;function closeInfo(){$('infoModal').hidden=true;if(lastFocus)lastFocus.focus();}$('showInfo').onclick=function(){lastFocus=document.activeElement;$('infoModal').hidden=false;$('closeInfo').focus();};$('closeInfo').onclick=closeInfo;$('infoModal').onclick=function(e){if(e.target===$('infoModal'))closeInfo();};document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('infoModal').hidden)closeInfo();if(e.key==='Tab'&&!$('infoModal').hidden){e.preventDefault();$('closeInfo').focus();}});
 $('fullscreenBtn').onclick=function(){var d=document;var active=d.fullscreenElement||d.webkitFullscreenElement;try{var promise;if(active){promise=d.exitFullscreen?d.exitFullscreen():d.webkitExitFullscreen&&d.webkitExitFullscreen();}else{promise=d.documentElement.requestFullscreen?d.documentElement.requestFullscreen():d.documentElement.webkitRequestFullscreen&&d.documentElement.webkitRequestFullscreen();if(!d.documentElement.requestFullscreen&&!d.documentElement.webkitRequestFullscreen)toast('当前浏览器不支持网页全屏，可使用浏览器全屏功能。');}if(promise&&promise.catch)promise.catch(function(){toast('可使用浏览器菜单或 F11 进入全屏。');});}catch(e){toast('可使用浏览器菜单或 F11 进入全屏。');}};
 document.addEventListener('fullscreenchange',function(){$('fullscreenBtn').textContent=document.fullscreenElement?'退出全屏':'全屏';});
-buildScales();buildCart();setConfig('loads',0);updateCounts();requestAnimationFrame(animate);
+installRecordStorage();buildScales();buildCart();setConfig('loads',0);updateCounts();requestAnimationFrame(animate);
 })();
 </script>
 <script>

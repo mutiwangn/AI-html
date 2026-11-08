@@ -197,13 +197,43 @@
  <section id="page-records" class="page" aria-label="比较与记录" hidden><div id="records-root" class="page-content"></div></section>
  <section id="page-challenge" class="page" aria-label="3秒到站挑战" hidden><div class="lab-layout">
   <div class="scene-card"><div class="scene-heading"><h2>1米，怎样更接近3秒？</h2><span class="pill">高架实验台</span></div><div class="stage-wrap"><svg id="challenge-stage" class="stage" viewBox="0 0 1060 740" role="img" aria-label="高架实验台上的一米重力小车挑战"></svg></div><div class="scene-toolbar"><button id="challenge-slow" aria-pressed="false">慢放 ×¼</button><button id="challenge-ghosts" aria-pressed="false">等时位置</button><button id="challenge-reset">回到起点</button></div><div class="timeline"><span>回看过程</span><input id="challenge-timeline" type="range" min="0" max="1000" value="0" aria-label="回看挑战过程" disabled><span id="challenge-progress">0.00 秒</span></div></div>
-  <aside class="side"><div class="control-card challenge-card"><h3>调整你的方案</h3><div class="counter"><button id="challenge-minus" aria-label="挑战减少一个垫圈">−</button><div class="count-value"><b id="challenge-n">2</b><span>个</span></div><button id="challenge-plus" aria-label="挑战增加一个垫圈">＋</button></div><label class="mass-title" for="challenge-mass">小车与载物总质量<strong><span id="challenge-mass-value">200</span>克</strong></label><input id="challenge-mass" type="range" min="200" max="800" step="10" value="200"><div class="range-ends"><span>空车 200克</span><span>800克</span></div><div class="start-row"><button id="challenge-start" class="primary">试一试</button></div></div><div id="challenge-result-card" class="control-card"><div class="target-readout">目标 <b>3.00</b> 秒内，尽量接近</div><div class="clock"><span id="challenge-clock">0.00</span><em>秒</em></div><p id="challenge-status" class="challenge-status" aria-live="polite">先选择方案，再测试。</p></div><div class="control-card attempts"><h3>我的尝试 <span id="attempt-count">0</span></h3><div id="attempt-list"><div class="attempt-empty">每次结果都会留下来。<br>比较后，再改一个条件。</div></div></div></aside>
+  <aside class="side"><div class="control-card challenge-card"><h3>调整你的方案</h3><div class="counter"><button id="challenge-minus" aria-label="挑战减少一个垫圈">−</button><div class="count-value"><b id="challenge-n">2</b><span>个</span></div><button id="challenge-plus" aria-label="挑战增加一个垫圈">＋</button></div><label class="mass-title" for="challenge-mass">小车与载物总质量<strong><span id="challenge-mass-value">200</span>克</strong></label><input id="challenge-mass" type="range" min="200" max="800" step="10" value="200"><div class="range-ends"><span>空车 200克</span><span>800克</span></div><div class="start-row"><button id="challenge-start" class="primary">试一试</button></div></div><div id="challenge-result-card" class="control-card"><div class="target-readout">目标 <b>3.00</b> 秒内，尽量接近</div><div class="clock"><span id="challenge-clock">0.00</span><em>秒</em></div><p id="challenge-status" class="challenge-status" aria-live="polite">先选择方案，再测试。</p></div><div class="control-card attempts"><h3>我的尝试（显示最近8次，备份含全部） <span id="attempt-count">0</span></h3><div id="attempt-list"><div class="attempt-empty">每次结果都会留下来。<br>比较后，再改一个条件。</div></div></div></aside>
  </div></section>
  <footer class="app-footer"><span class="compat">T1 · 基础交互</span><span>模型可离线运行<span class="footer-title"> · 用重力驱动小车</span></span></footer>
 </div>
 <div class="dialog-cover" id="notes-modal" hidden><div class="dialog" role="dialog" aria-modal="true" aria-labelledby="notes-title"><div class="dialog-head"><h2 id="notes-title">课堂提示</h2><button class="close" id="notes-close" aria-label="关闭课堂提示">×</button></div><h3>先操作，再用数据解释</h3><p>实验室只改变悬挂垫圈数量：从1个开始尝试，每种数量重复3次。打开“等时位置”比较每隔0.2秒的位置；暂停后可拖动进度条回看。记录页可以填写真实实验结果，模拟数据和实测数据分别保存。</p><h3>把看不清的过程放大</h3><p>“看力的方向”突出垫圈受到的向下重力和绳子对小车的向前拉力。只画相关的部分力，并非完整受力图。加速时绳子拉力不等于悬挂物重力。松开绳子或垫圈落地后，小车会继续滑行并减速；受阻力减速，或被挡车器挡停。</p><div class="model-grid"><p><b>本实验模型</b><br>小车200克，每个垫圈10克；测距60厘米，下落空间65厘米。当前阻力设置下，1个垫圈不能起动。</p><p><b>器材会改变结果</b><br>启动所需数量由车、路面等决定。模型的启动数量和用时不能当作实物标准答案。同条件模拟重复得到相同结果。</p></div><h3>3秒到站</h3><p>目标是在3秒内走完1米，越接近3秒越好。可改变垫圈数量和车载质量；高架实验台留出115厘米下落空间。到达终点时计时结束，动画继续运行；用时不超过3秒且误差不超过0.15秒，显示“精准到站”。</p><h3>记录与设备</h3><p>记录仅保存在当前浏览器；CSV可导出。全屏不可用时仍可直接操作。课件使用内联SVG，无外部字体、图片或脚本。图形与物理模型分离，便于后续替换素材。</p><p class="small">依据：教科版五年级上册教材第70—73页；教师用书对应第213—223页。本页为教学模型，忽略滑轮转动惯量、细绳质量等因素。</p></div></div>
 <div id="toast" class="toast" role="status" hidden></div>
 <noscript><p>请启用JavaScript以运行互动实验。</p></noscript>
+<script>
+(function(root){'use strict';
+var stores=[],own=function(o,k){return Object.prototype.hasOwnProperty.call(o,k)};
+function obj(x,keys){if(!x||typeof x!=='object'||Array.isArray(x))throw Error('结构不是对象');var ks=Object.keys(x);if(ks.length!==keys.length||keys.some(function(k){return !own(x,k)}))throw Error('字段缺失或有未知字段')}
+function num(n,a,b){return typeof n==='number'&&isFinite(n)&&n>=a&&n<=b}
+function integer(n,a,b){return num(n,a,b)&&Math.floor(n)===n}
+function source(s){return s==='real'||s==='simulation'}
+function conditions(o){obj(o,['distance','cartMass']);if(!num(o.distance,.05,10)||!num(o.cartMass,.001,10))throw Error('实验条件无效')}
+function records(s){obj(s,['version','nextId','source','active','groups','rows','draft']);if(s.version!==1||!source(s.source)||!Array.isArray(s.groups)||!Array.isArray(s.rows))throw Error('版本或列表不支持');conditions(s.draft);obj(s.active,['simulation','real']);var ids=Object.create(null),max=0;function id(v,p){if(typeof v!=='string'||!new RegExp('^'+p+'[1-9][0-9]*$').test(v)||own(ids,v))throw Error('ID无效或重复');var n=Number(v.slice(1));if(!integer(n,1,9007199254740000))throw Error('ID超范围');max=Math.max(max,n);ids[v]=true}
+s.groups.forEach(function(g){obj(g,['id','source','distance','cartMass','round']);id(g.id,'g');if(!source(g.source)||!integer(g.round,1,9007199254740000))throw Error('组来源或轮次无效');conditions({distance:g.distance,cartMass:g.cartMass});ids[g.id]=g});
+s.rows.forEach(function(r){obj(r,['id','groupId','n','batch','trials','blocked']);id(r.id,'r');if(!own(ids,r.groupId)||!/^g/.test(r.groupId)||!integer(r.n,0,99)||!integer(r.batch,1,9007199254740000)||typeof r.blocked!=='boolean'||!Array.isArray(r.trials)||r.trials.length!==3)throw Error('行关联或类型无效');r.trials.forEach(function(t){if(t!==null&&t!=='stuck'&&!num(t,Number.MIN_VALUE,3600))throw Error('试次无效')})});
+['real','simulation'].forEach(function(k){var a=s.active[k];if(a!==null&&(!own(ids,a)||ids[a].source!==k))throw Error('活动组关联无效')});if(!integer(s.nextId,max+1,9007199254740000))throw Error('nextId可能复用旧ID');return s}
+function challenge(a){if(!Array.isArray(a))throw Error('挑战记录不是数组');a.forEach(function(x){obj(x,['n','mass','time','good']);if(!integer(x.n,0,12)||!num(x.mass,200,800)||(x.time!==null&&!num(x.time,Number.MIN_VALUE,1e9))||typeof x.good!=='boolean'||x.good!==(x.time!==null&&x.time>=2.85&&x.time<=3))throw Error('挑战记录或判定无效')});return a}
+function download(value,name){var u=URL.createObjectURL(new Blob([value],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},2000)}
+function register(key,label,validate,get,set){var st={key:key,label:label,validate:validate,get:get,set:set,base:null,startup:null,locked:false,awaitSave:false,rev:0,status:'尚未读取',box:null};stores.push(st);return st}
+function status(st,msg,bad){st.status=msg;if(st.summary){st.summary.textContent=st.label+' · '+msg;st.summary.title=msg}if(st.line)st.line.textContent=st.label+'：'+msg;if(bad&&st.box)st.box.open=true}
+function load(st,fallback){try{var raw=localStorage.getItem(st.key);st.base=raw;st.startup=raw;if(raw===null){status(st,'暂无本机记录',false);return fallback}var d=st.validate(JSON.parse(raw));status(st,'已读取本机记录',false);return d}catch(e){st.locked=true;status(st,'原记录不可读取，已保护；当前为临时草稿。'+e.message,true);return fallback}}
+function save(st){st.rev++;try{st.validate(st.get());if(st.locked||st.awaitSave)throw Error('保护或恢复预览中；仅保留临时草稿，请备份后显式保存');if(localStorage.getItem(st.key)!==st.base){st.locked=true;throw Error('其他页面已改记录，未覆盖')}var raw=JSON.stringify(st.get());localStorage.setItem(st.key,raw);st.base=raw;status(st,'已保存到本机',false);return true}catch(e){status(st,'未保存：'+e.message,true);return false}}
+function rawBackup(st){var current;try{current=localStorage.getItem(st.key)}catch(e){current={readError:String(e)}}return {kind:'gravity-raw-backup',key:st.key,startupRaw:st.startup,currentRaw:current}}
+function mount(st){var box=document.createElement('details');box.style.cssText='background:#fff;border:1px solid #acbcc7;border-radius:6px;padding:3px 9px;max-height:48vh;overflow:auto;color:#19364b';var summary=document.createElement('summary');summary.textContent=st.label+' · '+st.status;summary.title=st.status;summary.style.cssText='font-size:14px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';st.summary=summary;box.appendChild(summary);var line=document.createElement('p');line.style.cssText='font-size:15px;margin:6px 0';line.textContent=st.label+'：'+st.status;line.setAttribute('role','status');box.appendChild(line);st.box=box;st.line=line;
+function button(text,fn){var b=document.createElement('button');b.textContent=text;b.style.cssText='font-size:14px;min-height:36px;margin:3px;padding:4px 8px';b.onclick=fn;box.appendChild(b)}
+button('备份原始缓存',function(){try{download(JSON.stringify(rawBackup(st),null,2),st.key+'-raw.json')}catch(e){status(st,'备份未生成：'+e.message,true)}});
+button('导出当前草稿',function(){try{download(JSON.stringify({kind:'gravity-draft',key:st.key,data:st.get()},null,2),st.key+'-draft.json')}catch(e){status(st,'草稿未导出：'+e.message,true)}});
+var file=document.createElement('input');file.type='file';file.accept='.json,application/json';file.hidden=true;box.appendChild(file);button('读取 JSON 备份',function(){file.click()});file.onchange=function(){var f=file.files&&file.files[0];file.value='';if(!f)return;var rev=st.rev,snapshot=JSON.stringify(st.get()),reader=new FileReader();reader.onerror=function(){status(st,'备份读取失败，原数据未更改',true)};reader.onload=function(){try{if(rev!==st.rev||snapshot!==JSON.stringify(st.get()))throw Error('读取期间记录已变，请重新读取');var d=JSON.parse(reader.result);if(d&&d.kind==='gravity-draft'){obj(d,['kind','key','data']);if(d.key!==st.key)throw Error('不是本栏备份');d=d.data}else if(d&&d.kind==='gravity-raw-backup'){obj(d,['kind','key','startupRaw','currentRaw']);if(d.key!==st.key)throw Error('不是本栏备份');var raw=d.currentRaw;if(!confirm('恢复备份中的当前缓存？取消则选择启动原文。'))raw=d.startupRaw;if(typeof raw!=='string')throw Error('所选原文不是可恢复JSON');d=JSON.parse(raw)}st.validate(d);if(!confirm('将当前临时草稿替换为此备份预览？本机旧缓存暂不覆盖。建议先导出当前草稿。'))return;if(rev!==st.rev||snapshot!==JSON.stringify(st.get()))throw Error('记录已变，未替换');st.awaitSave=true;st.rev++;st.set(d);status(st,'已恢复到临时草稿，尚未保存；请核对并显式保存',true)}catch(e){status(st,'未恢复：'+e.message,true)}};reader.readAsText(f)};
+button('确认保存当前草稿',function(){try{st.validate(st.get());var now=localStorage.getItem(st.key);if(!st.locked&&!st.awaitSave&&now===st.base){save(st);return}download(JSON.stringify(rawBackup(st),null,2),st.key+'-before-replace.json');if(!confirm('已发起原始备份下载。请确认备份已保存；确定后用当前草稿覆盖本栏本机缓存（其他栏不变）。'))return;if(localStorage.getItem(st.key)!==now)throw Error('确认期间缓存又变，未覆盖');var raw=JSON.stringify(st.get());localStorage.setItem(st.key,raw);st.base=raw;st.locked=false;st.awaitSave=false;st.rev++;status(st,'已确认保存当前草稿',false)}catch(e){status(st,'未保存：'+e.message,true)}});
+var panel=document.getElementById('gravity-backup-panel');if(!panel){panel=document.createElement('div');panel.id='gravity-backup-panel';panel.style.cssText='position:fixed;right:6px;bottom:2px;z-index:50;max-width:94vw;width:360px;display:grid;gap:2px';document.body.appendChild(panel)}panel.appendChild(box);if(st.locked)box.open=true}
+root.GravityStorage={records:records,challenge:challenge,register:register,load:load,save:save,mount:mount};
+})(window);
+
+</script>
 <script>
 /*
  * GravityPhysics — analytical teaching model for a gravity-driven cart.
@@ -597,44 +627,9 @@
     if (!count) return { status: 'empty', count: 0, mean: null, stuck: 0 };
     return { status: count === 3 ? 'complete' : 'partial', count: count, mean: sum / count, stuck: 0 };
   }
-  function load() {
-    if (loaded) return;
-    loaded = true;
-    try {
-      var raw = root.localStorage && root.localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      var s = JSON.parse(raw);
-      if (!s || s.version !== 1 || !Array.isArray(s.groups) || !Array.isArray(s.rows)) return;
-      var ids = {};
-      s.groups = s.groups.filter(function (g) {
-        var valid = g && typeof g.id === 'string' && (g.source === 'simulation' || g.source === 'real') && validConditions(g.distance, g.cartMass);
-        if (valid) { ids[g.id] = true; g.round = Math.max(1, Math.floor(Number(g.round) || 1)); }
-        return valid;
-      });
-      s.rows = s.rows.filter(function (r) {
-        return r && typeof r.id === 'string' && ids[r.groupId] && finite(r.n) && r.n >= 0 && r.n <= 99 && Math.floor(r.n) === r.n && Array.isArray(r.trials);
-      }).map(function (r) {
-        r.trials = [0, 1, 2].map(function (i) {
-          var v = r.trials[i];
-          return v === 'stuck' ? v : finite(v) && v > 0 && v <= 3600 ? v : null;
-        });
-        r.batch = Math.max(1, Math.floor(Number(r.batch) || 1));
-        r.blocked = !!r.blocked;
-        return r;
-      });
-      state.groups = s.groups;
-      state.rows = s.rows;
-      state.nextId = Math.max(1, Math.floor(Number(s.nextId) || 1), s.groups.length + s.rows.length + 1);
-      /* A changed distance/mass is a new group, never a reinterpretation of old data. */
-      if (s.draft && validConditions(s.draft.distance, s.draft.cartMass)) state.draft = s.draft;
-      if (s.active && typeof s.active === 'object') state.active = { simulation: s.active.simulation || null, real: s.active.real || null };
-      state.source = s.source === 'real' ? 'real' : 'simulation';
-    } catch (ignore) { storageOK = false; }
-  }
-  function save() {
-    try { if (root.localStorage) root.localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); else storageOK = false; }
-    catch (ignore) { storageOK = false; }
-  }
+  var recordStore = root.GravityStorage.register(STORAGE_KEY, '实验记录', root.GravityStorage.records, function(){return state}, function(d){state=d;render()});
+  function load() { if(loaded)return;loaded=true;state=root.GravityStorage.load(recordStore,state); }
+  function save() { storageOK=root.GravityStorage.save(recordStore);return storageOK; }
   function say(message) {
     notice = message || '';
     if (element) {
@@ -779,6 +774,7 @@
       save(); render(); say('已开新实验组，原有数据保留。');
     } else if (action === 'delete-row') {
       var id = target.getAttribute('data-gr-id');
+      if(!findRow(id)||!root.confirm('删除这一整行（含3次试次）？此操作不能直接撤销，建议先导出备份。'))return;
       state.rows = state.rows.filter(function (r) { return r.id !== id; });
       save(); render(); say('已删除这一组记录。');
     } else if (action === 'export') exportCSV();
@@ -807,8 +803,10 @@
     } else if (event.type === 'change' && field === 'n' && row) {
       value = Number(target.value);
       if (!finite(value) || value < 0 || value > 99 || Math.floor(value) !== value) { target.value = row.n; say('垫圈数量请填0到99之间的整数。'); return; }
+      var hasTrials=row.blocked||row.trials.some(function(t){return t!==null});
+      if(value!==row.n&&hasTrials&&!root.confirm('此行已有试次。这里只纠正原记录的垫圈数，不是一次新实验；确认这些旧试次实际使用这个数量吗？若要试新条件，请取消并新建一行。')){target.value=row.n;return;}
       row.n = value;
-      save(); render();
+      save(); render();if(hasTrials)say('已纠正原行条件，旧试次保留；新实验请另建一行。');
     } else if (event.type === 'change' && field === 'blocked' && row) {
       row.blocked = !!target.checked;
       save(); render();
@@ -879,8 +877,8 @@
     var index = row.trials.indexOf(null);
     row.trials[index] = moved ? time : 'stuck';
     state.active[source] = group.id;
-    save(); render();
-    return { ok: true, rowId: row.id, trialIndex: index, count: rowStats(row).count, batch: row.batch };
+    var persisted=save(); render();
+    return { ok: true, saved:persisted, rowId: row.id, trialIndex: index, count: rowStats(row).count, batch: row.batch };
   }
   function mount(id, settings) {
     load();
@@ -897,6 +895,7 @@
     element.addEventListener('input', fieldHandler, false);
     element.addEventListener('change', fieldHandler, false);
     render();
+    if(!recordStore.box)root.GravityStorage.mount(recordStore);
     return api;
   }
   var api = {
@@ -927,8 +926,8 @@ function remake(s){s.model=GravityPhysics.create(parameters(s));}
 function reset(s){s.running=false;s.t=0;s.maxT=0;s.started=false;s.recorded=false;s.cut=null;remake(s);$(s.name+'-timeline').disabled=true;$(s.name+'-timeline').value=0;$(s.name+'-clock').textContent='0.00';$(s.name+'-start').textContent=s.name==='lab'?'释放小车':'试一试';if(s.name==='lab'){$('lab-status').textContent='不推小车，松手试试看。';$('lab-saved').textContent='只改变悬挂垫圈的数量';$('lab-run-label').textContent='计时器';$('lab-cut').disabled=true;}else{$('challenge-status').textContent='先选择方案，再测试。';$('challenge-result-card').classList.remove('success');}controls(s);draw(s);}
 function controls(s){$(s.name+'-n').textContent=s.n;$(s.name+'-minus').disabled=s.n<=0||s.running;$(s.name+'-plus').disabled=s.n>=12||s.running;if(s.name==='challenge'){$('challenge-mass').disabled=s.running;$('challenge-mass-value').textContent=Math.round(s.mass*1000);}else{$('washer-bin').setAttribute('aria-disabled',s.running?'true':'false');}}
 function changeCount(s,d){if(s.running)return;var n=Math.max(0,Math.min(12,s.n+d));if(n===s.n)return;s.n=n;reset(s);}
-function recordLab(s,st){if(s.recorded||s.cut!==null)return;s.recorded=true;var time=st.measurementTime;var result=GravityRecords.addTrial({n:s.n,cartMass:s.mass,distance:.6,time:time,moved:time!==null&&isFinite(time),source:'simulation'});$('lab-saved').textContent=result&&result.ok?'已加入模拟记录 · 每种情况至少3次':'记录已满，请先到记录页整理';}
-function recordChallenge(s,st){if(s.recorded)return;s.recorded=true;var time=st.measurementTime,good=time!==null&&isFinite(time)&&time<=3&&time>=2.85;var item={n:s.n,mass:Math.round(s.mass*1000),time:time===null||!isFinite(time)?null:time,good:good};attempts.unshift(item);if(attempts.length>40)attempts.pop();try{localStorage.setItem('gravity-challenge-v1',JSON.stringify(attempts));}catch(e){}renderAttempts();$('challenge-result-card').classList.toggle('success',good);if(time===null||!isFinite(time))$('challenge-status').textContent='这次没有到达终点。试着调整方案。';else if(good)$('challenge-status').textContent='精准到站！距3秒只差 '+fixed(3-time)+' 秒。';else if(time>3)$('challenge-status').textContent='晚到 '+fixed(time-3)+' 秒。怎样稍快一点？';else $('challenge-status').textContent='提前 '+fixed(3-time)+' 秒。怎样更接近3秒？';}
+function recordLab(s,st){if(s.recorded||s.cut!==null)return;s.recorded=true;var time=st.measurementTime;var result=GravityRecords.addTrial({n:s.n,cartMass:s.mass,distance:.6,time:time,moved:time!==null&&isFinite(time),source:'simulation'});$('lab-saved').textContent=result&&result.ok?(result.saved?'已加入并保存模拟记录 · 每种情况至少3次':'已加入临时模拟记录，尚未保存；请备份'):'记录已满，请先到记录页整理';}
+function recordChallenge(s,st){if(s.recorded)return;s.recorded=true;var time=st.measurementTime,good=time!==null&&isFinite(time)&&time<=3&&time>=2.85;var item={n:s.n,mass:Math.round(s.mass*1000),time:time===null||!isFinite(time)?null:time,good:good};attempts.unshift(item);GravityStorage.save(challengeStore);renderAttempts();$('challenge-result-card').classList.toggle('success',good);if(time===null||!isFinite(time))$('challenge-status').textContent='这次没有到达终点。试着调整方案。';else if(good)$('challenge-status').textContent='精准到站！距3秒只差 '+fixed(3-time)+' 秒。';else if(time>3)$('challenge-status').textContent='晚到 '+fixed(time-3)+' 秒。怎样稍快一点？';else $('challenge-status').textContent='提前 '+fixed(3-time)+' 秒。怎样更接近3秒？';}
 function start(s){if(s.running){s.running=false;$(s.name+'-start').textContent='继续';controls(s);return;}var st=s.model.stateAt(s.t);if(s.started&&(st.finished||!s.model.summary.canStart))reset(s);s.started=true;s.running=true;$(s.name+'-start').textContent='暂停';$(s.name+'-timeline').disabled=false;controls(s);var cur=s.model.stateAt(s.t);if(!s.model.summary.canStart){s.running=false;s.maxT=2;s.t=0;$(s.name+'-start').textContent='再试一次';if(s.name==='lab'){$('lab-status').textContent=s.n===0?'还没有挂上垫圈。':'小车没有起动。可以再加一个试试。';$('lab-run-label').textContent='未起动';recordLab(s,cur);}else recordChallenge(s,cur);controls(s);draw(s);return;}if(s.name==='lab'){$('lab-status').textContent='松手释放，正在观察。';$('lab-cut').disabled=false;}else $('challenge-status').textContent='正在测试你的方案…';kick();}
 function kick(){if(!raf){lastFrame=0;raf=requestFrame(tick);}}
 function tick(now){raf=0;var dt=lastFrame?Math.min((now-lastFrame)/1000,.07):0;lastFrame=now;var states=[lab,challenge],any=false;for(var i=0;i<states.length;i++){var s=states[i];if(!s.running)continue;s.t+=dt*(s.slow?.25:1);s.maxT=Math.max(s.maxT,s.t);var st=s.model.stateAt(s.t);if(st.arrived&&!s.recorded){if(s.name==='lab'){recordLab(s,st);$('lab-status').textContent=s.cut===null?'计时结束，小车继续运动。':'已松开绳子，本次用于观察。';$('lab-run-label').textContent='计时结束';}else recordChallenge(s,st);}if(st.finished||s.t>25){s.running=false;$(s.name+'-start').textContent='再试一次';if(s.name==='lab'){$('lab-cut').disabled=true;if(!s.recorded&&s.cut===null){recordLab(s,st);$('lab-status').textContent='小车停在终点前。';}else if(s.cut!==null)$('lab-status').textContent='绳子松开后，小车滑行并逐渐停下。';else $('lab-status').textContent=st.phase==='bumper'?'小车到达挡车器，实验结束。':'小车滑行后停下，实验结束。';}else if(!s.recorded)recordChallenge(s,st);controls(s);}draw(s);if(s.running)any=true;}if(any)raf=requestFrame(tick);else lastFrame=0;}
@@ -977,7 +976,7 @@ function closeNotes(){$('notes-modal').hidden=true;if(focusBeforeModal)focusBefo
 $('teacher-notes').onclick=function(){focusBeforeModal=document.activeElement;[lab,challenge].forEach(function(s){if(s.running){s.running=false;$(s.name+'-start').textContent='继续';controls(s);}});$('notes-modal').hidden=false;$('notes-close').focus();};$('notes-close').onclick=closeNotes;$('notes-modal').onclick=function(e){if(e.target===this)closeNotes();};document.addEventListener('keydown',function(e){if(!$('notes-modal').hidden){if(e.key==='Escape')closeNotes();if(e.key==='Tab'){e.preventDefault();$('notes-close').focus();}}});
 $('fullscreen').onclick=function(){var d=document,el=d.documentElement,fn;if(d.fullscreenElement||d.webkitFullscreenElement){fn=d.exitFullscreen||d.webkitExitFullscreen;if(fn)fn.call(d);}else{fn=el.requestFullscreen||el.webkitRequestFullscreen;if(fn){try{var promise=fn.call(el);if(promise&&promise.catch)promise.catch(function(){toast('可使用浏览器全屏或横屏观看');});}catch(e){toast('可使用浏览器全屏或横屏观看');}}else toast('可使用浏览器全屏或横屏观看');}};
 document.addEventListener('visibilitychange',function(){if(document.hidden){[lab,challenge].forEach(function(s){if(s.running){s.running=false;$(s.name+'-start').textContent='继续';controls(s);}});}});
-try{var loaded=JSON.parse(localStorage.getItem('gravity-challenge-v1')||'[]');if(Array.isArray(loaded))attempts=loaded.filter(function(a){return a&&typeof a.n==='number'&&a.n>=0&&a.n<=12&&typeof a.mass==='number'&&(a.time===null||typeof a.time==='number'&&isFinite(a.time));}).slice(0,40);}catch(e){}renderAttempts();
+var challengeStore=GravityStorage.register('gravity-challenge-v1','挑战历史',GravityStorage.challenge,function(){return attempts},function(d){attempts=d;renderAttempts()});attempts=GravityStorage.load(challengeStore,[]);renderAttempts();GravityStorage.mount(challengeStore);
 window.GravityApp={version:'1.0.0',showPage:switchPage};
 }());
 </script>

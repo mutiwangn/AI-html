@@ -573,22 +573,20 @@ windTo(0);makeRace();window.requestAnimationFrame(frame);
     }
     return true;
   }
-  function readStorage() {
-    var raw, candidate;
-    try {
-      raw = window.localStorage.getItem(KEY);
-    } catch (ignore) { storageWorks = false; return; }
-    if (!raw) return;
-    try { candidate = JSON.parse(raw); } catch (invalidJSON) { return; }
-    if (validData(candidate)) state = candidate;
-  }
-  function persist(message) {
-    try {
-      window.localStorage.setItem(KEY, JSON.stringify(state));
-      storageWorks = true;
-    } catch (ignore) { storageWorks = false; }
-    byId('recSaveStatus').textContent = storageWorks ? (message || '已保存在本机。') : '本机保存不可用，请导出记录。';
-  }
+function validate(d){return exact(d,['version','groups','showMean'])&&validData(d)&&d.groups.every(function(g){return exact(g,['turns','values'])});}
+
+function exact(o,ks){return !!o&&typeof o==='object'&&!Array.isArray(o)&&Object.keys(o).length===ks.length&&ks.every(function(k){return Object.prototype.hasOwnProperty.call(o,k)});}
+var guard={raw:null,startup:null,locked:false,awaitSave:false,message:'本页尚未保存更改'};
+function status(s){guard.message=s;byId('recSaveStatus').textContent=s;var e=document.getElementById('storage-detail-status');if(e)e.textContent=s;}
+function readProtected(){try{guard.raw=localStorage.getItem(KEY);guard.startup=guard.raw;if(guard.raw!==null){var d=JSON.parse(guard.raw);if(!validate(d))throw Error('schema');state=d;;status('已读取本机完整记录；后续更改将尝试保存。');}}catch(e){guard.locked=true;status('本机原记录无法安全读取，已只读保护；当前编辑仅在本页，请先备份。');}}
+function writeProtected(explicit){if(guard.locked){status('只读保护中，未保存。请先备份原文并明确解除保护。');return false;}if(guard.awaitSave&&!explicit){status('恢复草稿仅在本页，尚未保存；请点击保存当前草稿。');return false;}try{if(localStorage.getItem(KEY)!==guard.raw){guard.locked=true;status('检测到其他页面修改，已停止写入；请备份并选择恢复。');return false;}var d=state;if(!validate(d))throw Error('invalid');var raw=JSON.stringify(d);localStorage.setItem(KEY,raw);guard.raw=raw;guard.awaitSave=false;status('已保存在本机。');return true;}catch(e){status('保存失败，当前草稿仅在本页；请导出草稿后重试。');return false;}}
+function backupRaw(raw,name){if(raw===null){status('没有可导出的原文。');return false;}try{var a=document.createElement('a'),u=URL.createObjectURL(new Blob([raw],{type:'application/json;charset=utf-8'}));a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},2000);return true;}catch(e){status('下载未能启动，请保留本页并复制原文。');return false;}}
+function restoreText(raw){var d;try{d=JSON.parse(raw);if(!validate(d))throw Error('schema');}catch(e){status('恢复内容格式不符，未改变当前记录或本机原文。');return false;}if(!confirm('用这份完整记录替换当前页面草稿？本机原记录暂不覆盖，之后需明确点击保存。'))return false;state=d;;guard.awaitSave=true;closeEditor();render();;status('已载入当前页面，尚未保存；请检查后点击保存当前草稿。');return true;}
+function unlock(){var current;try{current=localStorage.getItem(KEY);}catch(e){status('仍无法读取本机记录，不能解除保护。');return;}if(current!==null&&!backupRaw(current,'本机当前原文.json'))return;if(!confirm('已请求下载本机当前原文。请确认备份文件已收到，再覆盖为当前页面草稿？取消不写入。'))return;try{if(localStorage.getItem(KEY)!==current){status('确认期间原文再次改变，请重新备份。');return;}}catch(e){return;}guard.raw=current;guard.locked=false;guard.awaitSave=true;writeProtected(true);}
+function storageUI(){var box=document.createElement('details');box.style.cssText='position:fixed;right:8px;bottom:8px;z-index:40;background:white;border:1px solid #8ba5b5;border-radius:8px;padding:6px;max-width:420px;max-height:70vh;overflow:auto;color:#18384b;font:14px/1.5 sans-serif';box.innerHTML='<summary>记录备份与恢复</summary><p id="storage-detail-status" role="status"></p><button id="sg-raw">导出启动时原文</button><button id="sg-live">导出本机当前原文</button><button id="sg-draft">导出当前草稿</button><p>打开 JSON 备份文件，复制全文粘贴到下框恢复。未知字段不自动删除。</p><textarea id="sg-input" aria-label="粘贴完整 JSON 备份" style="width:100%;height:100px"></textarea><button id="sg-restore">确认载入草稿</button><button id="sg-save">保存当前草稿</button><button id="sg-unlock">备份后解除保护并覆盖</button>';document.body.appendChild(box);function on(id,f){document.getElementById(id).onclick=f;}on('sg-raw',function(){backupRaw(guard.startup,'启动原文.json')});on('sg-live',function(){try{backupRaw(localStorage.getItem(KEY),'当前本机原文.json')}catch(e){status('无法读取本机原文。')}});on('sg-draft',function(){backupRaw(JSON.stringify(state,null,2),'当前草稿.json')});on('sg-restore',function(){restoreText(document.getElementById('sg-input').value)});on('sg-save',function(){writeProtected(true)});on('sg-unlock',unlock);status(guard.message);window.addEventListener('storage',function(e){if(e.key===KEY||e.key===null){guard.locked=true;status('检测到本机记录外部变化，已停止写入；当前草稿保留在本页。');}});}
+
+function readStorage(){readProtected()}
+function persist(message){return writeProtected(false)}
   function pretty(value) {
     if (value === null) return '';
     return String(Math.round(value * 10) / 10);
@@ -775,7 +773,7 @@ windTo(0);makeRace();window.requestAnimationFrame(frame);
     link.click();
     document.body.removeChild(link);
     window.setTimeout(function () { api.revokeObjectURL(url); }, 30000);
-    byId('recSaveStatus').textContent = '已准备导出：' + filename;
+    byId('recSaveStatus').textContent = guard.message + ' 已准备导出：' + filename;
   }
   body.addEventListener('click', function (event) {
     var button = getButton(event.target, body), col;
@@ -855,6 +853,7 @@ windTo(0);makeRace();window.requestAnimationFrame(frame);
   };
   readStorage();
   render();
+  storageUI();
   if (!storageWorks) byId('recSaveStatus').textContent = '本机保存不可用，请导出记录。';
 }(window, document));
 </script>
