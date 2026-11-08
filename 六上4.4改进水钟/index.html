@@ -237,6 +237,36 @@
   </div>
  </section>
 </div>
+<script>
+/* Local-only evidence protection. No network, no extra persistent copies. */
+window.LessonRecordGuard=function(key,title,current,validate){
+ 'use strict';
+ var slot=window.__lessonGuardSlots||0;window.__lessonGuardSlots=slot+1;var original=null,known=false,blocked=false,dirty=false,reason='',backupRaw,backupMade=false,box,button,msg,check,replaceButton;
+ function raw(){return localStorage.getItem(key);}
+ function show(text,bad){reason=text;dirty=!!bad;if(button){button.textContent=title+' · '+(bad?'记录未保存 · 查看保护':'本机记录 · '+text);button.style.background=bad?'#9a342d':'#245c50';msg.textContent=text;}}
+ function lock(text){blocked=true;show(text+'。原档未覆盖；当前操作仅留在本页，请先备份。',true);}
+ function load(){try{original=raw();known=true;if(original===null){show('尚未写入',false);return null;}var data=JSON.parse(original);if(!validate(data))throw new Error('invalid');show('已读取',false);return data;}catch(e){lock(known?'本机记录格式或版本不受支持':'本机存储不可读');return null;}}
+ function save(){if(blocked){show(reason,true);return false;}try{if(!known||raw()!==original){lock('另一页面已更改本机记录');return false;}var value=current();if(!validate(value)){lock('当前记录格式异常');return false;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;show('已保存',false);return true;}catch(e){show('未能写入本机；请保留本页并下载备份',true);return false;}}
+ function backup(){var latest=null,readError=false;try{latest=raw();}catch(e){readError=true;}var payload={format:'lesson-local-backup-v1',lesson:title,storageKey:key,createdAt:new Date().toISOString(),originalRaw:original,latestRaw:latest,latestReadFailed:readError,currentPage:current()};try{var url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=title+'-本机记录备份.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);backupRaw=latest;backupMade=!readError;check.checked=false;replaceButton.disabled=true;msg.textContent='已发起备份下载。请到下载位置核实文件已保存；包含个人记录，请勿公开或上传。备份仅供保全，本页没有自动导入功能。';}catch(e){msg.textContent='备份未能生成；请勿关闭本页或替换原档。';backupMade=false;}}
+ function replace(){if(!backupMade||!check.checked)return;try{if(raw()!==backupRaw){backupMade=false;check.checked=false;replaceButton.disabled=true;lock('备份后本机档案再次改变，请重新备份');return;}var value=current();if(!validate(value)){lock('当前记录格式异常，不能替换');return;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;blocked=false;backupMade=false;check.checked=false;replaceButton.disabled=true;show('已用当前页面记录替换；请妥善保留备份',false);}catch(e){show('替换未成功；原档未主动删除，请保留本页和备份',true);}}
+ function mount(){
+  var host=document.createElement('div');host.id='local-record-protection-'+slot;host.style.cssText='position:fixed;right:10px;bottom:'+String(6+slot*42)+'px;z-index:10000;font:14px/1.6 system-ui,sans-serif;max-width:calc(100vw - 20px);color:#20352d';
+  button=document.createElement('button');button.type='button';button.style.cssText='color:white;border:1px solid white;border-radius:8px;padding:5px 10px;min-height:32px;font:13px system-ui;cursor:pointer';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','local-record-panel-'+slot);
+  box=document.createElement('section');box.id='local-record-panel-'+slot;box.hidden=true;box.setAttribute('aria-label','本机记录保护');box.style.cssText='position:absolute;bottom:42px;right:0;width:360px;max-width:calc(100vw - 20px);max-height:75vh;overflow:auto;background:#fff;border:2px solid #587367;border-radius:12px;padding:15px;box-shadow:0 3px 20px #0004;font-size:14px';
+  msg=document.createElement('p');msg.setAttribute('role','status');box.appendChild(msg);
+  var privacy=document.createElement('p');privacy.textContent='数据只在本机和本页，不上传。共用设备请勿录入姓名或可识别的健康信息。备份可能含个人记录，应私人保管。';box.appendChild(privacy);
+  function add(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='display:block;background:#e8f1ec;border:1px solid #738c7d;border-radius:6px;padding:7px;margin:6px 0;min-height:40px;white-space:normal;font:14px system-ui';b.addEventListener('click',fn);box.appendChild(b);return b;}
+  add('下载原档与当前页面备份',backup);add('重试保存（不覆盖冲突档）',save);
+  var label=document.createElement('label');label.style.cssText='display:block;white-space:normal;font-size:14px';check=document.createElement('input');check.type='checkbox';label.appendChild(check);label.appendChild(document.createTextNode('我已核实备份文件落盘，并同意以当前页面记录替换本机档案'));box.appendChild(label);
+  replaceButton=add('确认替换本机档案',replace);replaceButton.disabled=true;check.addEventListener('change',function(){replaceButton.disabled=!(backupMade&&check.checked);});
+  add('关闭记录保护',function(){box.hidden=true;button.setAttribute('aria-expanded','false');button.focus();});button.addEventListener('click',function(){box.hidden=!box.hidden;button.setAttribute('aria-expanded',String(!box.hidden));});host.appendChild(box);host.appendChild(button);document.body.appendChild(host);show(reason||'尚未写入',dirty);
+ }
+ window.addEventListener('storage',function(e){if(e.key===key||e.key===null){try{if(raw()!==original)lock('另一页面已更改本机记录');}catch(err){lock('本机存储不可读');}}});
+ window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+ mount();return {load:load,save:save,lock:lock};
+};
+
+</script>
 <script>/* Water clock teaching model, v1.0. All volumes: mL (= cm^3), lengths: cm,
    time: s, hole diameter: mm. No randomness and no external dependencies.
 
@@ -491,32 +521,18 @@
     el('recordsStatus').textContent = message || defaultStatus;
     el('recordsStatus').className = warning ? 'is-warning' : '';
   }
+function exact(o,k){return !!o&&typeof o==='object'&&!Array.isArray(o)&&Object.keys(o).sort().join('|')===k.slice().sort().join('|');}
+function num(x,a,b){return typeof x==='number'&&Number.isFinite(x)&&x>=a&&x<=b;}
+function physicalArchive(s){return exact(s,['version','activeStandard','groups'])&&s.version===1&&[120,600].includes(s.activeStandard)&&exact(s.groups,['120','600'])&&['120','600'].every(function(k){var g=s.groups[k];return exact(g,['before','after','explanation'])&&typeof g.explanation==='string'&&['before','after'].every(function(side){return Array.isArray(g[side])&&g[side].length===3&&g[side].every(x=>x===null||num(x,0,9999.9));});});}
+function validConfig(c){return exact(c,['initialHeadCm','tankAreaCm2','tankMaxHeadCm','holeMm','Cd','sourceMl','supplyRate','overflow','overflowHeadCm','receiverAreaCm2','receiverCapacityMl','duration','step'])&&num(c.initialHeadCm,6,18)&&c.tankAreaCm2===30&&c.tankMaxHeadCm===20&&num(c.holeMm,.6,1.4)&&c.Cd===.62&&[0,400,1600].includes(c.sourceMl)&&num(c.supplyRate,.6,3)&&typeof c.overflow==='boolean'&&c.overflowHeadCm===16&&[15,30].includes(c.receiverAreaCm2)&&c.receiverCapacityMl===c.receiverAreaCm2*40&&c.duration===600&&c.step===.05;}
+function modelArchive(a){return exact(a,['version','config','before','after','sourceAmount'])&&a.version===1&&validConfig(a.config)&&validConfig(a.before)&&(a.after===null||validConfig(a.after))&&[400,1600].includes(a.sourceAmount);}
+
+  var physicalGuard;
   function readSaved() {
-    var clean = blankState();
-    try {
-      var text = root.localStorage.getItem(STORAGE_KEY);
-      if (!text) return clean;
-      var saved = JSON.parse(text);
-      if (!saved || saved.version !== 1 || !saved.groups) return clean;
-      if (saved.activeStandard === 120 || saved.activeStandard === 600) clean.activeStandard = saved.activeStandard;
-      each(['120', '600'], function (standard) {
-        var source = saved.groups[standard];
-        if (!source || typeof source !== 'object') return;
-        each(['before', 'after'], function (side) {
-          if (!Array.isArray(source[side])) return;
-          for (var i = 0; i < 3; i++) clean.groups[standard][side][i] = validNumber(source[side][i]) ? round1(source[side][i]) : null;
-        });
-        if (typeof source.explanation === 'string') clean.groups[standard].explanation = source.explanation.slice(0, 240);
-      });
-    } catch (error) {
-      setStatus('旧记录未能读取；可继续记录并导出CSV。', true);
-    }
-    return clean;
+    physicalGuard=root.LessonRecordGuard(STORAGE_KEY,'4.4 实测',function(){return state;},physicalArchive);
+    var saved=physicalGuard.load();return saved===null?blankState():saved;
   }
-  function save() {
-    try { root.localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); setStatus(); return true; }
-    catch (error) { setStatus('本机保存失败，请导出CSV保留记录。', true); return false; }
-  }
+  function save() {var ok=physicalGuard.save();setStatus(ok?'实测记录已保存到本机':'实测未保存，请打开实测记录保护并私下备份',!ok);return ok;}
   function metrics(values, standard) {
     var count = 0, sum = 0, low = Infinity, high = -Infinity;
     for (var i = 0; i < 3; i++) {
@@ -659,7 +675,7 @@
     each(page.querySelectorAll('[data-record-key]'), function (button) { button.addEventListener('click', function () { padKey(button.getAttribute('data-record-key')); }); });
     el('recordsKeypad').addEventListener('click', function (event) { if (event.target === el('recordsKeypad')) closePad(); });
     document.addEventListener('keydown', handleKeys);
-    el('recordsExplanation').addEventListener('input', function () { group().explanation = this.value.slice(0, 240); save(); });
+    el('recordsExplanation').addEventListener('input', function () { group().explanation = this.value; save(); });
     el('recordsExport').addEventListener('click', exportCsv);
     render();
   }
@@ -695,19 +711,22 @@
     c.overflowHeadCm=16;c.receiverAreaCm2=c.receiverAreaCm2<22?15:30;c.receiverCapacityMl=c.receiverAreaCm2*40;
     return c;
   }
+function exact(o,k){return !!o&&typeof o==='object'&&!Array.isArray(o)&&Object.keys(o).sort().join('|')===k.slice().sort().join('|');}
+function num(x,a,b){return typeof x==='number'&&Number.isFinite(x)&&x>=a&&x<=b;}
+function physicalArchive(s){return exact(s,['version','activeStandard','groups'])&&s.version===1&&[120,600].includes(s.activeStandard)&&exact(s.groups,['120','600'])&&['120','600'].every(function(k){var g=s.groups[k];return exact(g,['before','after','explanation'])&&typeof g.explanation==='string'&&['before','after'].every(function(side){return Array.isArray(g[side])&&g[side].length===3&&g[side].every(x=>x===null||num(x,0,9999.9));});});}
+function validConfig(c){return exact(c,['initialHeadCm','tankAreaCm2','tankMaxHeadCm','holeMm','Cd','sourceMl','supplyRate','overflow','overflowHeadCm','receiverAreaCm2','receiverCapacityMl','duration','step'])&&num(c.initialHeadCm,6,18)&&c.tankAreaCm2===30&&c.tankMaxHeadCm===20&&num(c.holeMm,.6,1.4)&&c.Cd===.62&&[0,400,1600].includes(c.sourceMl)&&num(c.supplyRate,.6,3)&&typeof c.overflow==='boolean'&&c.overflowHeadCm===16&&[15,30].includes(c.receiverAreaCm2)&&c.receiverCapacityMl===c.receiverAreaCm2*40&&c.duration===600&&c.step===.05;}
+function modelArchive(a){return exact(a,['version','config','before','after','sourceAmount'])&&a.version===1&&validConfig(a.config)&&validConfig(a.before)&&(a.after===null||validConfig(a.after))&&[400,1600].includes(a.sourceAmount);}
+
+  var modelGuard;
+  function modelSnapshot(){return {version:1,config:state.config,before:state.before,after:state.after,sourceAmount:state.sourceAmount};}
   function load() {
-    try { var saved=JSON.parse(localStorage.getItem(STORE)||'null');
-      if(saved&&saved.version===1){state.config=normalized(saved.config);state.before=normalized(saved.before);state.after=saved.after?normalized(saved.after):null;state.sourceAmount=saved.sourceAmount===400?400:1600;}
-    } catch(e) { saveOK=false; }
+    modelGuard=window.LessonRecordGuard(STORE,'4.4 模型',modelSnapshot,modelArchive);
+    var saved=modelGuard.load();if(saved!==null){state.config=saved.config;state.before=saved.before;state.after=saved.after;state.sourceAmount=saved.sourceAmount;}
   }
-  function persist() {
-    try {localStorage.setItem(STORE,JSON.stringify({version:1,config:state.config,before:state.before,after:state.after,sourceAmount:state.sourceAmount}));saveOK=true;}
-    catch(e){saveOK=false;}
-    $('storageState').textContent=saveOK?'方案保存在本机':'本机保存不可用，仍可操作与导出';
-  }
+  function persist() {saveOK=modelGuard.save();$('storageState').textContent=saveOK?'方案保存在本机':'方案未保存，请打开模型记录保护并私下备份';return saveOK;}
   function toast(message) { $('toast').textContent=message;$('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').classList.remove('visible');},2600); }
   function computeAll() { sim=M.compute(state.config);beforeSim=M.compute(state.before);afterSim=state.after?M.compute(state.after):null; }
-  function changed(message) { pause();state.time=0;state.config=normalized(state.config);sim=M.compute(state.config);syncControls();render();persist();if(message)toast(message); }
+  function changed(message) { pause();state.time=0;state.config=normalized(state.config);sim=M.compute(state.config);syncControls();render();var ok=persist();if(!ok)toast('方案未保存，请打开模型记录保护并备份');else if(message)toast(message); }
   function syncControls() {
     $('supplyToggle').setAttribute('aria-pressed',String(state.config.sourceMl>0));
     $('overflowToggle').setAttribute('aria-pressed',String(state.config.overflow));
@@ -729,7 +748,7 @@
   }
   function saveScheme(which) {
     state[which]=copy(state.config);if(which==='before')beforeSim=M.compute(state.before);else afterSim=M.compute(state.after);
-    persist();toast(which==='before'?'已保留改前方案，继续改一个地方':'已保留改后方案，进入“同场验证”比较');
+    var ok=persist();toast(ok?(which==='before'?'已保留改前方案，继续改一个地方':'已保留改后方案，进入“同场验证”比较'):'方案只留在本页，未保存；请打开模型记录保护并备份');
   }
   function useScheme(which) {if(!state[which])return;state.config=copy(state[which]);if(state.config.sourceMl)state.sourceAmount=state.config.sourceMl;changed();setPage('build');toast('取回'+(which==='before'?'改前':'改后')+'方案，可继续修改');}
   function pause() {state.playing=false;if(animation)cancelAnimationFrame(animation);animation=0;lastFrame=0;updateTransport();}
@@ -935,7 +954,7 @@
     document.addEventListener('visibilitychange',function(){if(document.hidden)pause();});
     window.addEventListener('resize',function(){if(!state.playing)render();});
   }
-  load();computeAll();bind();syncControls();if(window.RecordsUI)window.RecordsUI.init();render();persist();
+  load();computeAll();bind();syncControls();if(window.RecordsUI)window.RecordsUI.init();render();
   // Stable replacement boundary: calculations stay in WaterModel; drawings here
   // can be replaced independently without altering schemes or real measurements.
   window.WaterClockLab={version:'1.0',getState:function(){return copy({page:state.page,config:state.config,before:state.before,after:state.after,time:state.time,scale:state.scale,playing:state.playing});},getEvidence:function(){return {current:M.sampleAt(sim,state.time),before:M.sampleAt(beforeSim,state.time),after:afterSim?M.sampleAt(afterSim,state.time):null};}};
