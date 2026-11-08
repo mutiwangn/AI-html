@@ -243,9 +243,38 @@ const isMap=()=>st.view==='map'||st.view==='china3d',label=s=>st.names?s.name:'�
 function rec(id){id=id||st.id;if(!st.records[id])st.records[id]={siteId:id,slice:.5,strokes:[],saved:false,assigned:null};return st.records[id];}
 function toast(t){$('#toast').textContent=t;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),3300);}
 function snapshot(){return{schema:'mutiw.terrain.v1',records:st.records,visited:st.visited,names:st.names,updated:new Date().toISOString()};}
-function persist(){try{localStorage.setItem('mutiw.terrain.v1',JSON.stringify(snapshot()));$('#save-status').textContent='本地已保存 · 无需联网';}catch(_){$('#save-status').textContent='当前保留在内存 · 可导出进度';}}
-function validate(d){if(!d||d.schema!=='mutiw.terrain.v1'||!d.records||typeof d.records!=='object'||Array.isArray(d.records))throw Error('不是本网页的进度文件');let records={};Object.keys(d.records).forEach(id=>{if(!byId[id])return;let r=d.records[id];if(!r||!Array.isArray(r.strokes))return;let out={siteId:id,slice:clamp(Number(r.slice)||0,0,1),saved:!!r.saved,assigned:order.includes(r.assigned)?r.assigned:null,strokes:[]};r.strokes.slice(0,80).forEach(s=>{if(!s||!Array.isArray(s.points))return;let points=s.points.slice(0,2000).filter(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)).map(p=>[clamp(p[0],0,1),clamp(p[1],0,1)]);if(points.length>1)out.strokes.push({points,color:/^#[0-9a-f]{6}$/i.test(s.color)?s.color:'#265846'});});if(!out.strokes.length){out.saved=false;out.assigned=null;}records[id]=out;});return{records,visited:Array.isArray(d.visited)?d.visited.filter(id=>byId[id]):[],names:!!d.names};}
-try{let d=localStorage.getItem('mutiw.terrain.v1');if(d)Object.assign(st,validate(JSON.parse(d)));}catch(_){}
+function persist(){try{safeStore.write(JSON.stringify(snapshot()));$('#save-status').textContent='本地已保存 · 无需联网';}catch(_){$('#save-status').textContent='当前保留在内存 · 可导出进度';}}
+function validate(d){if(!d||d.schema!=='mutiw.terrain.v1'||!d.records||typeof d.records!=='object'||Array.isArray(d.records))throw Error('不是本网页的进度文件');let records={};Object.keys(d.records).forEach(id=>{if(!byId[id])return;let r=d.records[id];if(!r||!Array.isArray(r.strokes))return;let out={siteId:id,slice:clamp(Number(r.slice)||0,0,1),saved:!!r.saved,assigned:order.includes(r.assigned)?r.assigned:null,strokes:[]};r.strokes.slice(0,80).forEach(s=>{if(!s||!Array.isArray(s.points))return;let points=s.points.slice(0,2000).filter(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)).map(p=>[clamp(p[0],0,1),clamp(p[1],0,1)]);if(points.length>=1)out.strokes.push({points,color:/^#[0-9a-f]{6}$/i.test(s.color)?s.color:'#265846'});});if(!out.strokes.length){out.saved=false;out.assigned=null;}records[id]=out;});return{records,visited:Array.isArray(d.visited)?d.visited.filter(id=>byId[id]):[],names:!!d.names};}
+/* Storage safety: preserve original bytes, reject invalid/stale data, never clear a key. */
+function classroomStore(key,check){
+ var loaded=false,blocked=false,seen=null,raw=null,panel=null,url=null;
+ function warn(reason){
+  if(!panel){panel=document.createElement('aside');panel.id='storage-safety';panel.setAttribute('role','alert');panel.style.cssText='position:fixed;bottom:8px;left:8px;right:8px;z-index:99999;background:#fff3db;color:#442d14;border:2px solid #b77820;border-radius:10px;padding:10px 14px;font:16px/1.5 system-ui;box-shadow:0 2px 12px #0003';document.body.appendChild(panel);}
+  panel.textContent=reason+' 本次操作仅保留在当前页面内存中；请先导出当前作品，关闭或刷新会丢失未保存修改。';
+  if(raw!==null){var a=document.createElement('a');a.textContent=' 下载原始存档';a.style.cssText='display:inline-block;margin-left:12px;color:#164e84;text-decoration:underline';if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(new Blob([raw],{type:'application/json;charset=utf-8'}));a.href=url;a.download=key+'-原始存档.json';panel.appendChild(a);}
+ }
+ function fail(reason){blocked=true;warn(reason);throw Error(reason);}
+ return {
+  read:function(){if(loaded){if(blocked)throw Error('原始存档已保护');return seen;}loaded=true;
+   try{seen=localStorage.getItem(key);raw=seen;}catch(e){return fail('无法读取本机存档，已停止自动写入。');}
+   if(seen!==null){try{if(!check(JSON.parse(seen)))throw Error('invalid');}catch(e){return fail('原始存档异常或版本不兼容，已保护原文，不会自动覆盖。');}}
+   return seen;
+  },
+  write:function(value){if(!loaded)this.read();if(blocked)return fail('原始存档处于保护状态，未覆盖本机数据。');
+   try{if(!check(JSON.parse(value)))throw Error('invalid');}catch(e){warn('当前记录超出完整保存范围，本次未写入；可撤销后重试或先导出作品。');throw Error('当前记录未写入');}
+   var current;try{current=localStorage.getItem(key);}catch(e){return fail('无法复核本机存档，已停止自动写入。');}
+   if(current!==seen){raw=current;return fail('另一页面已更改存档，已停止写入以避免覆盖。');}
+   try{localStorage.setItem(key,value);seen=value;raw=value;if(panel){panel.remove();panel=null;}}
+   catch(e){warn('本机保存失败（可能空间不足或权限受限）。');throw e;}
+  }
+ };
+}
+const safeStore=classroomStore('mutiw.terrain.v1',d=>{
+ if(!d||d.schema!=='mutiw.terrain.v1'||typeof d.names!=='boolean'||!Array.isArray(d.visited)||d.visited.some(id=>!Object.prototype.hasOwnProperty.call(byId,id))||!d.records||Array.isArray(d.records)||typeof d.records!=='object')return false;
+ if(Object.keys(d).some(k=>!['schema','records','visited','names','updated'].includes(k)))return false;
+ return Object.keys(d.records).every(id=>{let r=d.records[id];return Object.prototype.hasOwnProperty.call(byId,id)&&r&&Object.keys(r).every(k=>['siteId','slice','strokes','saved','assigned'].includes(k))&&r.siteId===id&&Number.isFinite(r.slice)&&r.slice>=0&&r.slice<=1&&typeof r.saved==='boolean'&&(r.assigned===null||order.includes(r.assigned))&&Array.isArray(r.strokes)&&r.strokes.length<=80&&r.strokes.every(s=>s&&Object.keys(s).every(k=>['points','color'].includes(k))&&/^#[0-9a-f]{6}$/i.test(s.color)&&Array.isArray(s.points)&&s.points.length>=1&&s.points.length<=2000&&s.points.every(p=>Array.isArray(p)&&p.length===2&&p.every(v=>Number.isFinite(v)&&v>=0&&v<=1)))&&(r.strokes.length>0||(!r.saved&&r.assigned===null));});
+});
+try{let d=safeStore.read();if(d)Object.assign(st,validate(JSON.parse(d)));}catch(_){}
 function setMorph(v){planet.morph=clamp(v,0,1);$('#unfold').value=Math.round(v*100);$('#unfold-value').textContent=Math.round(v*100)+'%';$('#unfold-btn span').textContent=v>.95?'收回地形地球':'展开世界地图';$('#earth-title').textContent=v>.95?'从地图，走近中国。':'在宇宙中，观察地球。';$('#earth-tip').textContent=v>.95?'点击“中国案例”，进入地形观察':'拖动旋转 · 滚轮 / 双指缩放';$('#china-jump').hidden=v<.985;dirty=true;}
 function animateMorph(to,done){planet.auto=false;$('#auto').checked=false;planet.yaw=planet.pitch=0;if(!earth){setMorph(to);if(done)done();return;}tween={from:planet.morph,to,start:performance.now(),duration:matchMedia('(prefers-reduced-motion:reduce)').matches?30:1400,done};}
 function drawEarth(){if(!earth)return;let r=earth.r;r.resize();let h=Math.max(2.25,3.55/r.aspect)/planet.zoom,vp=M.multiply(M.ortho(-h*r.aspect,h*r.aspect,-h,h,.1,60),M.lookAt([0,0,8],[0,0,0],[0,1,0]));r.begin(vp);let m=M.rotation(planet.pitch*(1-planet.morph),planet.yaw*(1-planet.morph));r.draw(earth.mesh,{texture:earth.texture,matrix:m,uniforms:{uTextured:1,uGlobe:1,uMorph:planet.morph}});if(planet.grid)r.draw(earth.grid,{matrix:m,uniforms:{uMorph:planet.morph,uUnlit:1,uAlpha:.43}});if(planet.coast)r.draw(earth.coast,{matrix:m,uniforms:{uMorph:planet.morph,uUnlit:1,uAlpha:.7}});let b=$('#earth-stage').getBoundingClientRect();$('#china-jump').style.top=(b.height/2-(35/90*1.625)/(h*2)*b.height-20)+'px';$('#china-jump').style.left=(b.width/2-42)+'px';}

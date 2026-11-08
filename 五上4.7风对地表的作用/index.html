@@ -215,6 +215,34 @@
   var ui, state, history = [], initial = null, mode = 'move', source = null, pending = null;
   var selectedEdge = null, preview = false, drag = null, initialized = false, lastId = 0;
   var confirmAction = null, confirmTimer = null, saveWarning = false, evidenceNames = [];
+/* Storage safety: preserve original bytes, reject invalid/stale data, never clear a key. */
+function classroomStore(key,check){
+ var loaded=false,blocked=false,seen=null,raw=null,panel=null,url=null;
+ function warn(reason){
+  if(!panel){panel=document.createElement('aside');panel.id='storage-safety';panel.setAttribute('role','alert');panel.style.cssText='position:fixed;bottom:8px;left:8px;right:8px;z-index:99999;background:#fff3db;color:#442d14;border:2px solid #b77820;border-radius:10px;padding:10px 14px;font:16px/1.5 system-ui;box-shadow:0 2px 12px #0003';document.body.appendChild(panel);}
+  panel.textContent=reason+' 本次操作仅保留在当前页面内存中；请先导出当前作品，关闭或刷新会丢失未保存修改。';
+  if(raw!==null){var a=document.createElement('a');a.textContent=' 下载原始存档';a.style.cssText='display:inline-block;margin-left:12px;color:#164e84;text-decoration:underline';if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(new Blob([raw],{type:'application/json;charset=utf-8'}));a.href=url;a.download=key+'-原始存档.json';panel.appendChild(a);}
+ }
+ function fail(reason){blocked=true;warn(reason);throw Error(reason);}
+ return {
+  read:function(){if(loaded){if(blocked)throw Error('原始存档已保护');return seen;}loaded=true;
+   try{seen=localStorage.getItem(key);raw=seen;}catch(e){return fail('无法读取本机存档，已停止自动写入。');}
+   if(seen!==null){try{if(!check(JSON.parse(seen)))throw Error('invalid');}catch(e){return fail('原始存档异常或版本不兼容，已保护原文，不会自动覆盖。');}}
+   return seen;
+  },
+  write:function(value){if(!loaded)this.read();if(blocked)return fail('原始存档处于保护状态，未覆盖本机数据。');
+   try{if(!check(JSON.parse(value)))throw Error('invalid');}catch(e){warn('当前记录超出完整保存范围，本次未写入；可撤销后重试或先导出作品。');throw Error('当前记录未写入');}
+   var current;try{current=localStorage.getItem(key);}catch(e){return fail('无法复核本机存档，已停止自动写入。');}
+   if(current!==seen){raw=current;return fail('另一页面已更改存档，已停止写入以避免覆盖。');}
+   try{localStorage.setItem(key,value);seen=value;raw=value;if(panel){panel.remove();panel=null;}}
+   catch(e){warn('本机保存失败（可能空间不足或权限受限）。');throw e;}
+  }
+ };
+}
+var safeStore=classroomStore(KEY,function(d){
+ function graph(g){if(!g||Object.keys(g).some(function(k){return ['nodes','edges'].indexOf(k)<0;})||!Array.isArray(g.nodes)||!Array.isArray(g.edges)||g.edges.length>90)return false;var ids={},pairs={};if(!g.nodes.every(function(n){if(!n||!Object.prototype.hasOwnProperty.call(SPECS,n.id)||ids[n.id]||Object.keys(n).some(function(k){return ['id','x','y'].indexOf(k)<0;}))return false;ids[n.id]=true;var w=SPECS[n.id].w;return Number.isFinite(n.x)&&n.x>=w/2+16&&n.x<=984-w/2&&Number.isFinite(n.y)&&n.y>=52&&n.y<=540;}))return false;if(REQUIRED.some(function(id){return !ids[id];}))return false;return g.edges.every(function(e){if(!e||Object.keys(e).some(function(k){return ['id','from','to','word'].indexOf(k)<0;})||typeof e.id!=='string'||!Object.prototype.hasOwnProperty.call(ids,e.from)||!Object.prototype.hasOwnProperty.call(ids,e.to)||e.from===e.to||WORDS.indexOf(e.word)<0)return false;var pair=e.from+'>'+e.to;if(pairs[pair])return false;pairs[pair]=true;return true;});}
+ return d&&d.version===1&&Object.keys(d).every(function(k){return ['version','current','initial'].indexOf(k)>=0;})&&graph(d.current)&&(d.initial===null||graph(d.initial));
+});
   function clone(value) { return JSON.parse(JSON.stringify(value)); }
   function esc(value) { return String(value).replace(/[&<>"']/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c];}); }
   function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
@@ -238,7 +266,7 @@
   }
   function message(text) { ui.status.textContent=text; }
   function save() {
-    try { localStorage.setItem(KEY,JSON.stringify({version:1,current:state,initial:initial})); message('已在本机保存'); }
+    try { safeStore.write(JSON.stringify({version:1,current:state,initial:initial})); message('已在本机保存'); }
     catch(e) { if(!saveWarning){saveWarning=true;message('本机保存不可用，可导出关系图。');} }
   }
   function pushHistory(before) { history.push(clone(before||state)); if(history.length>30)history.shift(); }
@@ -395,7 +423,7 @@
     if(initialized)return;var root=document.getElementById('mapPanel');if(!root)return;initialized=true;
     function el(id){return root.querySelector('#cm-'+id);}
     ui={root:root,board:el('board'),edges:el('edges'),nodes:el('nodes'),move:el('move'),link:el('link'),undo:el('undo'),contextTitle:el('context-title'),contextText:el('context-text'),relationBox:el('relation-box'),relations:el('relations'),cancelLink:el('cancel-link'),deleteEdge:el('delete-edge'),additions:root.querySelector('.cm-additions'),addTemperature:el('add-temperature'),addPlants:el('add-plants'),saveInitial:el('save-initial'),showInitial:el('show-initial'),clear:el('clear'),export:el('export'),readonly:el('readonly'),viewLabel:el('view-label'),hint:el('board-hint'),status:el('status'),evidence:el('evidence'),evidenceText:el('evidence-text')};
-    state=fresh();try{var stored=JSON.parse(localStorage.getItem(KEY)||'null');if(stored&&stored.version===1){state=normalize(stored.current)||state;initial=normalize(stored.initial);}}catch(e){}
+    state=fresh();try{var stored=JSON.parse(safeStore.read()||'null');if(stored&&stored.version===1){state=normalize(stored.current)||state;initial=normalize(stored.initial);}}catch(e){}
     ui.move.addEventListener('click',function(){setMode('move');});ui.link.addEventListener('click',function(){setMode('link');});
     ui.undo.addEventListener('click',function(){if(preview||!history.length)return;cancelConfirm();state=history.pop();resetSelection();save();render();message('已撤销最近一步。');});
     ui.board.addEventListener('pointerdown',down);ui.board.addEventListener('pointermove',move);ui.board.addEventListener('pointerup',up);ui.board.addEventListener('pointercancel',up);ui.board.addEventListener('click',clickBoard);ui.board.addEventListener('keydown',keyBoard);
@@ -625,3 +653,4 @@ window.WindLab={version:'1.0',parameters:P,buildSand:buildSand,buildRock:buildRo
 <!-- AIHTML-COMPAT-GRADE:END -->
 </body>
 </html>
+

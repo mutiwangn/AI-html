@@ -641,8 +641,33 @@
 
  // ---------- Evidence is source-labelled; descriptions are entered by pupils. ----------
  function escapeHtml(text){return String(text).replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
- function restoreRecords(){try{var a=JSON.parse(localStorage.getItem(STORE)||'[]');if(!Array.isArray(a))return;state.records=a.filter(function(r){return r&&typeof r.id==='string'&&typeof r.image==='string'&&/^data:image\/(jpeg|png);base64,/.test(r.image)&&r.image.length<700000&&['model','photo'].indexOf(r.source)>=0;}).slice(-MAX_RECORDS).map(function(r){return {id:r.id,image:r.image,title:String(r.title||'观察记录').slice(0,60),source:r.source,type:r.type==='scratch'?'scratch':'observe',note:String(r.note||'').slice(0,300),tags:Array.isArray(r.tags)?r.tags.map(String).slice(0,6):[],detail:String(r.detail||'').slice(0,200)};});state.selected=state.records.slice(-2).map(function(r){return r.id;});}catch(e){state.records=[];}updateCount();}
- function saveRecords(){try{localStorage.setItem(STORE,JSON.stringify(state.records));}catch(e){toast('浏览器未能保存记录，请及时导出图片或备份。');}updateCount();}
+/* Storage safety: preserve original bytes, reject invalid/stale data, never clear a key. */
+function classroomStore(key,check){
+ var loaded=false,blocked=false,seen=null,raw=null,panel=null,url=null;
+ function warn(reason){
+  if(!panel){panel=document.createElement('aside');panel.id='storage-safety';panel.setAttribute('role','alert');panel.style.cssText='position:fixed;bottom:8px;left:8px;right:8px;z-index:99999;background:#fff3db;color:#442d14;border:2px solid #b77820;border-radius:10px;padding:10px 14px;font:16px/1.5 system-ui;box-shadow:0 2px 12px #0003';document.body.appendChild(panel);}
+  panel.textContent=reason+' 本次操作仅保留在当前页面内存中；请先导出当前作品，关闭或刷新会丢失未保存修改。';
+  if(raw!==null){var a=document.createElement('a');a.textContent=' 下载原始存档';a.style.cssText='display:inline-block;margin-left:12px;color:#164e84;text-decoration:underline';if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(new Blob([raw],{type:'application/json;charset=utf-8'}));a.href=url;a.download=key+'-原始存档.json';panel.appendChild(a);}
+ }
+ function fail(reason){blocked=true;warn(reason);throw Error(reason);}
+ return {
+  read:function(){if(loaded){if(blocked)throw Error('原始存档已保护');return seen;}loaded=true;
+   try{seen=localStorage.getItem(key);raw=seen;}catch(e){return fail('无法读取本机存档，已停止自动写入。');}
+   if(seen!==null){try{if(!check(JSON.parse(seen)))throw Error('invalid');}catch(e){return fail('原始存档异常或版本不兼容，已保护原文，不会自动覆盖。');}}
+   return seen;
+  },
+  write:function(value){if(!loaded)this.read();if(blocked)return fail('原始存档处于保护状态，未覆盖本机数据。');
+   try{if(!check(JSON.parse(value)))throw Error('invalid');}catch(e){warn('当前记录超出完整保存范围，本次未写入；可撤销后重试或先导出作品。');throw Error('当前记录未写入');}
+   var current;try{current=localStorage.getItem(key);}catch(e){return fail('无法复核本机存档，已停止自动写入。');}
+   if(current!==seen){raw=current;return fail('另一页面已更改存档，已停止写入以避免覆盖。');}
+   try{localStorage.setItem(key,value);seen=value;raw=value;if(panel){panel.remove();panel=null;}}
+   catch(e){warn('本机保存失败（可能空间不足或权限受限）。');throw e;}
+  }
+ };
+}
+var safeStore=classroomStore(STORE,function(a){var ids={};return Array.isArray(a)&&a.length<=MAX_RECORDS&&a.every(function(r){if(!r||typeof r.id!=='string'||ids[r.id])return false;ids[r.id]=true;return Object.keys(r).every(function(k){return ['id','image','title','source','type','note','tags','detail'].indexOf(k)>=0;})&&typeof r.image==='string'&&/^data:image\/(jpeg|png);base64,/.test(r.image)&&r.image.length<700000&&['model','photo'].indexOf(r.source)>=0&&['scratch','observe'].indexOf(r.type)>=0&&typeof r.title==='string'&&r.title.length<=60&&typeof r.note==='string'&&r.note.length<=300&&typeof r.detail==='string'&&r.detail.length<=200&&Array.isArray(r.tags)&&r.tags.length<=6&&r.tags.every(function(t){return typeof t==='string';});});});
+ function restoreRecords(){try{var a=JSON.parse(safeStore.read()||'[]');if(!Array.isArray(a))return;state.records=a.filter(function(r){return r&&typeof r.id==='string'&&typeof r.image==='string'&&/^data:image\/(jpeg|png);base64,/.test(r.image)&&r.image.length<700000&&['model','photo'].indexOf(r.source)>=0;}).slice(-MAX_RECORDS).map(function(r){return {id:r.id,image:r.image,title:String(r.title||'观察记录').slice(0,60),source:r.source,type:r.type==='scratch'?'scratch':'observe',note:String(r.note||'').slice(0,300),tags:Array.isArray(r.tags)?r.tags.map(String).slice(0,6):[],detail:String(r.detail||'').slice(0,200)};});state.selected=state.records.slice(-2).map(function(r){return r.id;});}catch(e){state.records=[];}updateCount();}
+ function saveRecords(){try{safeStore.write(JSON.stringify(state.records));}catch(e){toast('浏览器未能保存记录，请及时导出图片或备份。');}updateCount();}
  function updateCount(){$('evidenceCount').textContent=state.records.length;}
  function addRecord(r){if(state.records.length>=MAX_RECORDS){toast('证据夹已满。请先导出，再删除不需要的记录。');return false;}r.id='r'+Date.now()+'-'+Math.random().toString(16).slice(2,7);r.note='';r.tags=[];state.records.push(r);state.selected=state.selected.slice(-1).concat(r.id);saveRecords();toast('已放入证据夹，可与另一条并排比较。');return true;}
  function observationCapture(){if(!obsView)return;var c=document.createElement('canvas');c.width=720;c.height=480;var ctx=c.getContext('2d'),src=currentSource(),view=obsView;ctx.fillStyle='#edeedf';ctx.fillRect(0,0,720,480);var s=Math.min(720/view.w,480/view.h),w=view.w*s,h=view.h*s;ctx.drawImage(src,view.x*src.width/1000,view.y*src.height/720,view.w*src.width/1000,view.h*src.height/720,(720-w)/2,(480-h)/2,w,h);addRecord({type:'observe',source:state.photo?'photo':'model',title:state.photo?'实物照片：'+state.photo.name:names[state.kind]+' · 样本 '+state.serial[state.kind],detail:'屏幕放大 '+state.zoom+'×；中心 '+Math.round(state.focus.x)+','+Math.round(state.focus.y)+'（图像坐标）',image:c.toDataURL('image/jpeg',.87)});}
@@ -702,3 +727,4 @@
 <!-- AIHTML-COMPAT-GRADE:START --><span style="position:fixed;left:7px;bottom:4px;font:10px system-ui,sans-serif;color:#6f7b6a;pointer-events:none;z-index:1" title="Canvas二维绘图，无WebGL">T2</span><!-- AIHTML-COMPAT-GRADE:END -->
 </body>
 </html>
+
