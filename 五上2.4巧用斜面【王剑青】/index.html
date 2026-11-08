@@ -81,7 +81,7 @@
   #stage{
     width:1000px; height:540px; position:relative; flex:0 0 auto; touch-action:none;
     background:linear-gradient(180deg,#e3eff7 0%,#eef7f3 78%,#eef7f3 92.6%,transparent 92.6%);
-    border-radius:12px; overflow:hidden; transform-origin:0 50%;
+    border-radius:12px; overflow:hidden; transform-origin:50% 50%;
     box-shadow:0 2px 10px rgba(0,0,0,.09);
   }
   #viewTag{
@@ -210,7 +210,7 @@
   <button class="hbtn" id="open3dBtn" data-page-node-id="xZp8SCVkdyzP8fwyAwYabT">🧊 3D 小窗</button>
 </header>
 
-<div id="hintbar" data-page-node-id="3zOwOAFnxIpW0BXMPmksH6">任务：用<b data-page-node-id="68vcMP05SsncvIDNTTFB5C">木板</b>和<b data-page-node-id="pp7TYvvUbuKXE74Yf9k3W0">长方体木块</b>搭出你的斜面方案——直斜面、L 型、回字形（转转楼梯式折返）都可以。对比<b data-page-node-id="tRvLHzmBBEURoLz2fWsguH">坡度（省力程度）</b>与<b data-page-node-id="QOqdxFQheaPXXTOoHFiclv">占地面积</b>，找到又省力又省地的好设计！搭好后点「🗺 俯视图」看折返布局，「🧊 3D 小窗」看立体结构。</div>
+<div id="hintbar" data-page-node-id="3zOwOAFnxIpW0BXMPmksH6">任务：用<b data-page-node-id="68vcMP05SsncvIDNTTFB5C">木板</b>和<b data-page-node-id="pp7TYvvUbuKXE74Yf9k3W0">长方体木块</b>搭出你的斜面方案——直斜面、L 型、回字形（转转楼梯式折返）都可以。对比<b data-page-node-id="tRvLHzmBBEURoLz2fWsguH">坡度（省力程度）</b>与<b data-page-node-id="QOqdxFQheaPXXTOoHFiclv">投影包围面积</b>，比较具体方案；转弯或折返不保证面积变小。搭好后点「🗺 俯视图」看折返布局，「🧊 3D 小窗」看立体结构。</div>
 
 <main data-page-node-id="qgdVZl1HXxurytpgUEeojD">
   <aside id="tray" data-page-node-id="ZvsReyErw6l4i130vjcMXH">
@@ -259,8 +259,8 @@
       <h3 data-page-node-id="5mCb98SnRXAAoyp6oIAp3T">📐 模型自动测量</h3>
       <div class="mrow" data-page-node-id="UuWS1OKjir1KWffmobLAfu"><span class="k" data-page-node-id="LFFTYv8vZVuBGkdp4KFfB7">斜面总长度</span><span class="v big" id="mLen" data-page-node-id="RsKGnOmPllD9iAZ0BDDBF8">--</span></div>
       <div class="mrow" data-page-node-id="Pdtd4tbic8h2IgCLFDqY32"><span class="k" data-page-node-id="acLpMhYq450O3RSnNmVNNq">垂直高度</span><span class="v big" data-page-node-id="oO14P75WsfpWrF94JbhKFF">1.5 m</span></div>
-      <div class="mrow" data-page-node-id="xO7uDahwm7Nmcwl7rZBUdP"><span class="k" data-page-node-id="zmkukIZtISs9t6JLtdydLz">占地宽度</span><span class="v big" id="mFoot" data-page-node-id="04xwBos6ftPTFE2md0WFG5">--</span></div>
-      <div class="mrow" data-page-node-id="1i3NtEdPbcw56PStnpAYvG"><span class="k" data-page-node-id="rYV6EI96wZdcBAbx6k7b8V">占地面积</span><span class="v big" id="mArea" data-page-node-id="LyiXSyVMjCd3pgUUV4h3PD">--</span></div>
+      <div class="mrow" data-page-node-id="xO7uDahwm7Nmcwl7rZBUdP"><span class="k" data-page-node-id="zmkukIZtISs9t6JLtdydLz">包围长 × 宽</span><span class="v big" id="mFoot" data-page-node-id="04xwBos6ftPTFE2md0WFG5">--</span></div>
+      <div class="mrow" data-page-node-id="1i3NtEdPbcw56PStnpAYvG"><span class="k" data-page-node-id="rYV6EI96wZdcBAbx6k7b8V">投影包围面积</span><span class="v big" id="mArea" data-page-node-id="LyiXSyVMjCd3pgUUV4h3PD">--</span></div>
       <div class="mrow" data-page-node-id="gSyp4dnBHyugXeIZxaYgMv"><span class="k" data-page-node-id="8fu9mhlblroYbIth3FrnoI">最陡坡度</span><span class="v" id="mSlope" data-page-node-id="U7x2HLXwBG9GVoLuLjiBt9">--</span></div>
       <div class="mrow" data-page-node-id="SmMBCKqoG1uSnDnCGnTh8N"><span class="k" data-page-node-id="6WkOUZkCfBJlViPQ2wrMUA">省力程度</span><span class="v" id="stars" data-page-node-id="6KBrGpFRJbUyskdpicDsQz">--</span></div>
       <div id="refRow" data-page-node-id="8OBWfzxlHl6ZQPzgR2WAZn"></div>
@@ -268,9 +268,9 @@
     </div>
     <div class="card" id="noteCard" data-page-node-id="JLjqdsUYrzwLp1aZd48Rh9">
       <h3 data-page-node-id="8IE04Mz5eXU02eGkgqYmVu">💡 探究提示</h3>
-      <p data-page-node-id="wpktSWXePBLvBmr5YPkKCr"><b data-page-node-id="604ak43bdwZZ56NiyOtQSs">斜面越长（坡度越缓）越省力</b>，但直坡要缓就得修得很长，<b data-page-node-id="EZ51hYSnZLtSAoAxH6brPi">占地更大</b>。<br data-page-node-id="LBqPwySUbRJtYVEUkvdDls">
+      <p data-page-node-id="wpktSWXePBLvBmr5YPkKCr"><b data-page-node-id="604ak43bdwZZ56NiyOtQSs">同高度、同负载及相同摩擦条件下，坡度越缓通常越省力</b>，但直坡要缓就得修得很长，<b data-page-node-id="EZ51hYSnZLtSAoAxH6brPi">占地更大</b>。<br data-page-node-id="LBqPwySUbRJtYVEUkvdDls">
       像盘山公路一样把斜面<b data-page-node-id="zKgyMZOhDEuyBWsSr8y4cv">"折弯"</b>——搭成 L 型、回字形，能在小场地上获得缓坡，代价是<b data-page-node-id="46RvyKCY6cBTj3ZqHCKrVE">木板总长度更长、路程更远</b>。试试找到两者的平衡！<br data-page-node-id="3xT2Qa9vZw8lMcN7rPd1Hs">
-      折返的诀窍是<b>换方向</b>：像<b>转转楼梯</b>那样上—折—再上，用木块当转弯处的桥墩。高处的转角要像<b>楼梯休息台</b>：把长方体<b>并排两块</b>（前后各一列），或者直接用一块<b>宽木块</b>（2 倍宽）——都能做出比木板更宽的<b>转角平台</b>，两段斜面才衔接得稳！<b>只转弯（L 型）不省地，折返（回字形）才省地</b>——搭出来比一比就知道了！</p>
+      折返的诀窍是<b>换方向</b>：像<b>转转楼梯</b>那样上—折—再上，用木块当转弯处的桥墩。高处的转角要像<b>楼梯休息台</b>：把长方体<b>并排两块</b>（前后各一列），或者直接用一块<b>宽木块</b>（2 倍宽）——都能做出比木板更宽的<b>转角平台</b>，两段斜面才衔接得稳！<b>转弯或折返都不保证更省地；需同时比较长、宽及投影包围矩形</b>——搭出来比一比就知道了！</p>
     </div>
   </aside>
 </main>
@@ -625,6 +625,9 @@ function starOf(sin){
   return ["★★★★","很省力"];
 }
 function updateMetrics(){
+  renderInv();
+  const saveState=document.getElementById("planStatus");
+  if(saveState)saveState.textContent="当前搭建尚未保存本次更改；读取或导出不会自动写入缓存。";
   const route=bestRoute();
   S.chain=route;
   /* 楼梯式错开：多段斜面沿深度方向前后交错（±0.4m），像楼梯的上下两层；
@@ -634,7 +637,10 @@ function updateMetrics(){
   if(rsegs.length>1) rsegs.forEach((it,i)=>{ it.rec.z=(i%2===0?-0.4:0.4); });
   const dims=$("#dims"); dims.innerHTML="";
   if(!route){
-    ["mLen","mFoot","mArea","mSlope"].forEach(id=>$("#"+id).textContent="--");
+    ["mLen","mSlope"].forEach(id=>$("#"+id).textContent="--");
+    const partial=structBounds();
+    $("#mFoot").textContent=partial?partial.length.toFixed(2)+" × "+partial.depth.toFixed(2)+" m":"--";
+    $("#mArea").textContent=partial?partial.area.toFixed(2)+" ㎡":"--";
     $("#stars").textContent="--";
     $("#refRow").style.display="none";
     $("#routeStat").textContent = S.planks.some(p=>p.placed)
@@ -644,29 +650,20 @@ function updateMetrics(){
     return;
   }
   const planks=route.filter(i=>i.kind==="plank").map(i=>i.rec);
-  const pts=[];
-  route.forEach(i=>{ if(i.kind==="plank"){ pts.push(i.rec.p1, i.rec.p2); } else { pts.push(i.p1,i.p2); } });
-  // 桥墩底面也占用地面积
-  S.stacks.forEach(st=>{ pts.push({x:st.x-st.w/2,y:0},{x:st.x+st.w/2,y:0}); });
-  const xs=pts.map(p=>p.x);
-  let minX=Math.min(...xs), maxX=Math.max(...xs);
-  const extM=(maxX-minX)/100, areaM=extM*DEPTH;
+  const bounds=structBounds();
+  const minX=bounds.min*100,maxX=bounds.max*100;
+  const extM=bounds.length, areaM=bounds.area;
   const lenM=routeLen(route), steep=routeSteep(route);
   const deg=Math.round(Math.asin(Math.min(1,steep))*180/Math.PI);
   const [st,lab]=starOf(steep);
   $("#mLen").textContent=lenM.toFixed(1)+" m";
-  $("#mFoot").textContent=extM.toFixed(2)+" m";
+  $("#mFoot").textContent=extM.toFixed(2)+" × "+bounds.depth.toFixed(2)+" m";
   $("#mArea").textContent=areaM.toFixed(2)+" ㎡";
   $("#mSlope").textContent="≈"+deg+"°";
   $("#stars").innerHTML=st+" <span style='font-size:12px;color:var(--sub)'>"+lab+"</span>";
-  // 参照：同坡度直坡
-  const tan=steep/Math.sqrt(Math.max(1e-6,1-steep*steep));
-  const refExt=1.5/tan, refArea=refExt*DEPTH;
-  const save=Math.round((refArea-areaM)/refArea*100);
+  // No percentage: a reference slope is not a complete support/platform design.
   $("#refRow").style.display="block";
-  $("#refRow").innerHTML = save>0
-    ? "📏 参照：搭同样缓的<b>直坡</b>需占地约 <b>"+refArea.toFixed(1)+" ㎡</b>，你的折返方案<b>节省了约 "+save+"%</b>！"
-    : "📏 参照：同样坡度的直坡约需占地 "+refArea.toFixed(1)+" ㎡——你的方案占地更大，因为只「转弯」还没「折返」。试试让木板<b>换个方向折回来</b>（像转转楼梯那样）。";
+  $("#refRow").textContent="📏 统一口径：已搭建斜板与桥墩的地面投影包围矩形（含空隙、未接入路线材料及板端伸出；不含固定高台、地面和素材）。不是实体投影并集，也不是所需安全通道面积。转弯或折返是否省空间，须在同高度、负载和坡度条件下比较具体方案。";
   $("#routeStat").textContent="✅ 已连通高台！方案由 "+planks.length+" 段斜面组成。";
   // 2D 标注：占地宽
   function line(x1,y1,x2,y2,color,dash){
@@ -745,31 +742,70 @@ const EX={
 document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click", ()=>{
   if(S.busy) return;
   const k=c.dataset.ex;
+  if((S.planks.length||S.stacks.length)&&!confirm("载入示例将替换当前搭建，是否继续？可先导出当前草稿。"))return;
   clearAll();
   if(EX[k]){ EX[k](); toast("已载入示例："+c.textContent.replace(/^[①②③④]\s*/,"")); }
   updateMetrics();
 }));
 
 /* ================= 重置 / 保存 / 读取 ================= */
-$("#resetBtn").addEventListener("click", ()=>{ clearAll(); updateMetrics(); toast("已一键重置"); });
-$("#saveBtn").addEventListener("click", ()=>{
-  const data={
-    planks:S.planks.filter(p=>p.placed&&!p.flat).map(p=>({t:p.type,p1:p.p1,p2:p.p2})),
-    stacks:S.stacks.map(s=>({x:s.x,n:s.n,z:s.z||0,bt:s.bt||"block"})),
-  };
-  try{ localStorage.setItem("xianmian_plan_v1", JSON.stringify(data));
-    toast("💾 方案已保存（"+data.planks.length+" 段斜面、"+data.stacks.length+" 个桥墩）");
-  }catch(e){ toast("保存失败："+e.message); }
+const PLAN_KEY='xianmian_plan_v1';
+const planMemory={raw:null,locked:false};
+function planValidate(d){
+  const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+  const obj=o=>o!==null&&typeof o==='object'&&!Array.isArray(o);
+  const shape=(o,required,optional=[])=>{if(!obj(o)||required.some(k=>!own(o,k))||Object.keys(o).some(k=>!required.includes(k)&&!optional.includes(k)))throw Error('字段不完整或未知');};
+  const num=(v,a,b)=>{if(typeof v!=='number'||!Number.isFinite(v)||v<a||v>b)throw Error('数值越界');return v;};
+  shape(d,['planks','stacks']);
+  if(!Array.isArray(d.planks)||!Array.isArray(d.stacks)||d.planks.length>10||d.stacks.length>9)throw Error('材料数量无效');
+  const counts={short:0,mid:0,long:0,block:0,wide:0};
+  const point=p=>{shape(p,['x','y']);return {x:num(p.x,0,SW+130),y:num(p.y,0,SH)};};
+  const planks=d.planks.map(p=>{shape(p,['t','p1','p2'],['flat']);if(own(p,'flat')&&typeof p.flat!=='boolean')throw Error('平放标记无效');if(typeof p.t!=='string'||!own(PLEN,p.t))throw Error('木板类型无效');
+    const a=point(p.p1),b=point(p.p2),len=Math.hypot(a.x-b.x,a.y-b.y);if(len<1||len>PLEN[p.t]+8)throw Error('木板端点无效');counts[p.t]++;return {t:p.t,p1:a,p2:b,flat:p.flat===true};});
+  const stacks=d.stacks.map(s=>{shape(s,['x','n'],['z','bt']);const bt=own(s,'bt')?s.bt:'block',z=own(s,'z')?s.z:0;
+    if(typeof bt!=='string'||!own(BTYPE,bt))throw Error('桥墩类型无效');num(s.n,1,BMAX);if(!Number.isInteger(s.n))throw Error('层数无效');
+    num(z,-0.4,0.4);if(![-0.4,0,0.4].includes(z)||(bt==='wide'&&z!==0))throw Error('桥墩深度无效');counts[bt]+=s.n;
+    return {x:num(s.x,26+BTYPE[bt].w/2,PLAT.x-8-BTYPE[bt].w/2+1),n:s.n,z,bt};});
+  Object.keys(counts).forEach(k=>{if(counts[k]>MAXN[k])throw Error('超过材料库存');});return {planks,stacks};
+}
+function planCurrent(){return {planks:S.planks.filter(p=>p.placed).map(p=>({t:p.type,flat:p.flat===true,p1:{x:p.p1.x,y:p.p1.y},p2:{x:p.p2.x,y:p.p2.y}})),stacks:S.stacks.map(s=>({x:s.x,n:s.n,z:s.z||0,bt:s.bt||'block'}))};}
+function planStatus(msg){document.getElementById('planStatus').textContent=msg;toast(msg);}
+function planRead(){
+  try{const raw=localStorage.getItem(PLAN_KEY);planMemory.raw=raw;if(raw===null){planMemory.locked=false;return {empty:true};}
+    const data=planValidate(JSON.parse(raw));planMemory.locked=false;return {data};
+  }catch(e){planMemory.locked=true;planStatus('缓存无法安全读取：已保护原文，当前设计未改变。可导出原始备份和当前草稿。');return {error:true};}
+}
+function planExport(text,name){try{const url=URL.createObjectURL(new Blob([text],{type:'application/json;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);planStatus('已请求下载，请检查浏览器下载记录；未修改本机方案。');return true;}catch(e){planStatus('下载未成功，请勿清除本机数据。');return false;}}
+function planApply(d){clearAll();d.stacks.forEach(s=>addTowerP(s.x,s.n,s.z,s.bt));d.planks.forEach(p=>{addPlankP(p.t,p.p1,p.p2);if(p.flat){const q=S.planks[S.planks.length-1];q.flat=true;syncPlankEl(q);}});renderInv();updateMetrics();}
+$('#resetBtn').addEventListener('click',()=>{if(S.busy)return;if((S.planks.length||S.stacks.length)&&!confirm('清空当前搭建？本机已保存的方案不变，可先导出当前草稿。'))return;clearAll();updateMetrics();toast('已清空当前搭建，本机保存方案未改变');});
+$('#saveBtn').addEventListener('click',()=>{
+  if(S.busy)return;let data;try{data=planValidate(planCurrent());}catch(e){planStatus('当前方案未保存：材料或端点无效，当前设计保留，可导出草稿。');return;}
+  const prior=planRead();if(prior.error)return;
+  if(!prior.empty&&!confirm('覆盖本机已保存方案？可先导出原始备份。取消将保留旧方案。'))return;
+  try{const raw=JSON.stringify(data);localStorage.setItem(PLAN_KEY,raw);planMemory.raw=raw;planStatus('方案已保存到本机（'+data.planks.length+' 段斜面、'+data.stacks.length+' 个桥墩）');}
+  catch(e){planStatus('未能保存到本机：当前设计仍在本页，请导出当前草稿。');}
 });
-$("#loadBtn").addEventListener("click", ()=>{
-  let data=null;
-  try{ data=JSON.parse(localStorage.getItem("xianmian_plan_v1")||"null"); }catch(e){}
-  if(!data || !data.planks.length){ toast("还没有保存过的方案哦"); return; }
-  clearAll();
-  data.stacks.forEach(s=>addTowerP(s.x,s.n,s.z||0,s.bt||"block"));
-  data.planks.forEach(p=>addPlankP(p.t,p.p1,p.p2));
-  renderInv(); updateMetrics();
-  toast("📂 已读取保存的方案");
+$('#loadBtn').addEventListener('click',()=>{
+  if(S.busy)return;const r=planRead();if(r.error)return;if(r.empty){planStatus('没有本机保存方案，当前设计未改变。');return;}
+  if(!confirm('用本机方案替换当前搭建？未保存的当前搭建会清空，可先导出当前草稿。'))return;
+  planApply(r.data);planStatus('已读取本机方案（旧版缺省桥墩参数已兼容），未重新写入缓存。');
+});
+const planTools=document.createElement('div');planTools.id='planTools';planTools.style.cssText='position:fixed;bottom:30px;left:8px;z-index:10000;background:#fffef1;border:1px solid #c5b88a;padding:4px 8px;border-radius:8px;max-width:80vw;font-size:13px';
+planTools.innerHTML='<span id="planStatus" role="status">方案尚未保存本次更改。</span> <button id="planRaw">导出原始备份</button> <button id="planDraft">导出当前草稿</button> <button id="planImport">恢复备份</button> <button id="planReplace">备份后替换缓存</button>';
+document.body.appendChild(planTools);
+$('#planRaw').addEventListener('click',()=>{if(planMemory.raw===null){const r=planRead();if(r.empty){planStatus('没有可导出的本机方案。');return;}}if(planMemory.raw!==null)planExport(planMemory.raw,'斜面-原始缓存.json');else planStatus('无法读取原始缓存，请保留浏览器数据；当前草稿仍可导出。');});
+$('#planDraft').addEventListener('click',()=>planExport(JSON.stringify(planCurrent(),null,2),'斜面-当前草稿.json'));
+planRead();
+
+$('#planReplace').addEventListener('click',()=>{
+ if(S.busy)return;const r=planRead();if(!r.error){planStatus('缓存正常，请使用保存方案按钮。');return;}if(planMemory.raw===null){planStatus('无法取得原文，禁止替换缓存。');return;}
+ let d;try{d=planValidate(planCurrent());}catch(e){planStatus('当前设计未通过校验，不替换缓存。');return;}
+ if(!planExport(planMemory.raw,'斜面-替换前原始缓存.json'))return;
+ if(!confirm('请确认原始缓存备份已下载并可找到。是否用当前设计替换损坏缓存？取消会继续保留原文。'))return;
+ try{const raw=JSON.stringify(d);localStorage.setItem(PLAN_KEY,raw);planMemory.raw=raw;planMemory.locked=false;planStatus('已用当前设计替换本机缓存；旧原文请保留在下载备份中。');}catch(e){planStatus('替换失败：原缓存未主动清除，当前设计保留，可导出草稿。');}
+});
+$('#planImport').addEventListener('click',()=>{
+ if(S.busy)return;const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.onchange=()=>{const f=input.files&&input.files[0];if(!f)return;const reader=new FileReader();reader.onerror=()=>planStatus('备份读取失败，当前设计未改变。');reader.onload=()=>{let d;try{d=planValidate(JSON.parse(reader.result));}catch(e){planStatus('备份不完整或格式不合法，当前设计与缓存均保留。');return;}if(S.busy)return;if(!confirm('恢复此备份到当前搭建？当前未保存搭建将清空，本机缓存不变。'))return;planApply(d);planStatus('备份已恢复到当前页面，尚未写入本机缓存。');};reader.readAsText(f);};input.click();
 });
 
 /* ================= 3D 观察窗（可拖动小窗，搭建时同步刷新） ================= */
@@ -1022,12 +1058,27 @@ function project(p, target){
   const s=cam.F/depth;
   return {x:VW/2+r[0]*s, y:VH/2+16-r[1]*s, depth};
 }
+// Geometry shared by metrics, plan view and 3D footprint. Matches halfBoxes extents.
+function structureFootprints(){
+  const items=[];
+  S.planks.forEach(p=>{
+    if(!p.placed||p.flat)return;
+    const dx=(p.p2.x-p.p1.x)/100,dy=(p.p1.y-p.p2.y)/100;
+    const d=Math.hypot(dx,dy)||1,halfX=Math.abs(dx/d*p.len/200)+Math.abs(dy/d*0.06);
+    const x=(p.p1.x+p.p2.x)/200,z=p.z||0;
+    items.push({kind:"plank",owner:p,min:x-halfX,max:x+halfX,zMin:z-DEPTH/2,zMax:z+DEPTH/2});
+  });
+  S.stacks.forEach(st=>{
+    if(st.n<=0)return;
+    items.push({kind:"pier",owner:st,min:(st.x-st.w/2)/100,max:(st.x+st.w/2)/100,zMin:(st.z||0)-st.d/2,zMax:(st.z||0)+st.d/2});
+  });
+  return items;
+}
 function structBounds(){
-  const pts=[];
-  S.planks.forEach(p=>{ if(p.placed&&!p.flat) pts.push(p.p1.x,p.p2.x); });
-  S.stacks.forEach(st=>pts.push(st.x-st.w/2, st.x+st.w/2));
-  if(!pts.length) return null;
-  return {min:Math.min(...pts)/100, max:Math.max(...pts)/100};
+  const parts=structureFootprints();if(!parts.length)return null;
+  const min=Math.min(...parts.map(p=>p.min)),max=Math.max(...parts.map(p=>p.max));
+  const zMin=Math.min(...parts.map(p=>p.zMin)),zMax=Math.max(...parts.map(p=>p.zMax));
+  return {min,max,zMin,zMax,length:max-min,depth:zMax-zMin,area:(max-min)*(zMax-zMin)};
 }
 function render3d(){
   ctx.clearRect(0,0,VW,VH);
@@ -1069,7 +1120,7 @@ function render3d(){
   // 占地轮廓（红色虚线）
   if(b){
     ctx.save(); ctx.setLineDash([7,5]); ctx.strokeStyle="#d96a5f"; ctx.lineWidth=2;
-    const fp=[[b.min,0.004,-DEPTH/2],[b.max,0.004,-DEPTH/2],[b.max,0.004,DEPTH/2],[b.min,0.004,DEPTH/2]];
+    const fp=[[b.min,0.004,b.zMin],[b.max,0.004,b.zMin],[b.max,0.004,b.zMax],[b.min,0.004,b.zMax]];
     const pj=fp.map(p=>project(p,target));
     if(!pj.some(q=>!q)){
       ctx.beginPath(); ctx.moveTo(pj[0].x,pj[0].y);
@@ -1080,7 +1131,7 @@ function render3d(){
     ctx.restore();
     if(lastMode==="top"){
       ctx.font="bold 13px sans-serif"; ctx.fillStyle="#c0554b"; ctx.textAlign="center";
-      ctx.fillText("占地宽 "+((b.max-b.min)).toFixed(2)+" m × 深 "+DEPTH.toFixed(1)+" m", VW/2, VH-22);
+      ctx.fillText("投影包围矩形 "+b.length.toFixed(2)+" × "+b.depth.toFixed(2)+" m = "+b.area.toFixed(2)+" ㎡（含空隙）", VW/2, VH-22);
     }
   }
 }
@@ -1132,145 +1183,44 @@ function steepColor(sin){
   return "#7cc47f";
 }
 function renderTop(){
-  const g=$("#topG"); if(!g) return;
-  g.innerHTML="";
-  const HZ=DEPTH*100/2;                               // 真实占地带（0.8 m 深）的半高
-  const CN=["①","②","③","④","⑤","⑥"];
-  const baseBottom=480, baseTop=baseBottom-HZ*2;       // 第 1 层 = 真实占地带
-  const segs = S.chain ? S.chain.filter(i=>i.kind==="plank").map(i=>i.rec) : [];
-  const n=segs.length;
-  // 楼梯式展开：每段各占一层，沿板宽方向逐层错开（越靠上＝越高的层）
-  const step = n>1 ? Math.min(HZ*2, (baseTop-186)/(n-1)) : HZ*2;
-  const laneTopY = i => baseTop - i*step;
-  const laneMidY = i => laneTopY(i) + step/2;
-  const stackTop = laneTopY(Math.max(n-1,0));
-
-  function rect(x,y,w,h,fill,stroke,dash,rx){
-    g.appendChild(svgEl("rect",{x,y,width:w,height:h,fill:fill||"none",stroke:stroke||"none",
-      "stroke-width":1.6, rx:rx||0, ...(dash?{"stroke-dasharray":"7 5"}:{})}));
+  const g=$("#topG");if(!g)return;g.innerHTML="";
+  function text(x,y,label,size=13,color="#4a5b52",anchor="start"){
+    const el=svgEl("text",{x,y,"font-size":size,fill:color,"text-anchor":anchor});el.textContent=label;g.appendChild(el);
   }
-  function txt(x,y,s,fill,size,anchor){
-    const t=svgEl("text",{x,y,"text-anchor":anchor||"middle","font-size":size||12.5,
-      "font-weight":"bold",fill:fill||"#4a5b52"});
-    t.textContent=s; g.appendChild(t);
-  }
-  function dashLine(x1,y1,x2,y2,color){
-    g.appendChild(svgEl("line",{x1,y1,x2,y2,stroke:color,"stroke-width":2,"stroke-dasharray":"6 5"}));
-  }
-  // 水平方向箭头：表示重物在这一层的前进方向
-  function arrowH(xa,xb,y,color){
-    const d=xb>=xa?1:-1, s=6.5;
-    g.appendChild(svgEl("line",{x1:xa,y1:y,x2:xb,y2:y,stroke:color,"stroke-width":2.4,"stroke-linecap":"round"}));
-    g.appendChild(svgEl("polyline",{points:[(xb-d*s)+","+(y-s*0.62)+" "+xb+","+y+" "+(xb-d*s)+","+(y+s*0.62)],
-      fill:"none",stroke:color,"stroke-width":2.4,"stroke-linecap":"round","stroke-linejoin":"round"}));
-  }
-
-  /* ---- 左侧板宽刻度：只有第 1 层是真实的占地深度 ---- */
-  rect(24, baseTop, 8, HZ*2, "#e7efe6", "#a8bfb2");
-  txt(38, baseTop+HZ-4, "深 0.8 m", "#6b8577", 11.5, "start");
-  txt(38, baseTop+HZ+12, "（板宽）", "#9aa79f", 10.5, "start");
-
-  /* ---- 高台：从地面一直画到最高层，像楼梯一直通到高台 ---- */
-  rect(PLAT.x, stackTop, PLAT.w, baseBottom-stackTop, "#d6cfbf", "#a89f8d", false, 4);
-  txt(PLAT.x+PLAT.w/2, stackTop+22, "高台 1.5 m 正方体", "#7c7461", 12);
-  txt(PLAT.x+PLAT.w/2, stackTop+38, "深 1.5 m · 比木板宽", "#9c9382", 10.5);
-
-  /* ---- 木块桥墩（落在地面上；并排两列 / 宽木块 ＝ 比木板更宽的楼梯转角平台） ---- */
-  const bandMid=baseTop+HZ;
-  const seenX=new Set();
-  S.stacks.forEach(st=>{
-    const key=Math.round(st.x);
-    if(seenX.has(key)) return; seenX.add(key);
-    const grp=S.stacks.filter(s=>Math.abs(s.x-st.x)<20);
-    const nMax=Math.max(...grp.map(s=>s.n));
-    const zLo=Math.min(...grp.map(s=>(s.z||0)-(s.d||DEPTH)/2));
-    const zHi=Math.max(...grp.map(s=>(s.z||0)+(s.d||DEPTH)/2));
-    const yTop=bandMid-zHi*100, h=(zHi-zLo)*100;
-    const platform=(zHi-zLo)>DEPTH+0.01;
-    if(platform){
-      // 转角平台：深度超过一块木块（0.8 m），向木板两侧伸出，像楼梯休息台
-      rect(st.x-st.w/2, yTop, st.w, h, "#eec894", "#96602c", false, 3);
-      rect(st.x-st.w/2, baseTop, st.w, HZ*2, "none", "#96602c", true, 2);
-      txt(st.x, yTop+14, (st.bt==="wide"?"宽木块平台":"转角平台"), "#5f3d17", 10.5);
-      txt(st.x, yTop+28, nMax+" 层"+(grp.length>1?" × 并排 "+grp.length:"")+(st.bt==="wide"?" · 深 1.6 m":""), "#8a5a24", 10);
-    }else{
-      rect(st.x-st.w/2, baseTop, st.w, HZ*2, "#cf9a5c", "#96602c", false, 3);
-      txt(st.x, baseTop+HZ+4, nMax+" 层", "#5f3d17", 11);
+  text(25,30,"真实俯视投影 · 前后位置与 3D 一致（上方材料可能遮住下方材料）",16);
+  const b=structBounds(),parts=structureFootprints(),segs=S.chain?S.chain.filter(i=>i.kind==="plank").map(i=>i.rec):[];
+  const low=b?Math.min(b.min,PLAT.x/100):0,high=b?Math.max(b.max,(PLAT.x+PLAT.w)/100):10;
+  const zLo=b?Math.min(b.zMin,-PLAT.h/200):-.75,zHi=b?Math.max(b.zMax,PLAT.h/200):.75;
+  const scale=Math.min(700/Math.max(.1,high-low),290/Math.max(.1,zHi-zLo));
+  const X=x=>260+(700-(high-low)*scale)/2+(x-low)*scale;
+  const Z=z=>95+(290-(zHi-zLo)*scale)/2+(zHi-z)*scale;
+  function box(p,fill,stroke,dash){g.appendChild(svgEl("rect",{x:X(p.min),y:Z(p.zMax),width:(p.max-p.min)*scale,height:(p.zMax-p.zMin)*scale,fill,stroke,"stroke-width":2,...(dash?{"stroke-dasharray":"7 5"}:{})}));}
+  box({min:PLAT.x/100,max:(PLAT.x+PLAT.w)/100,zMin:-PLAT.h/200,zMax:PLAT.h/200},"#d6cfbf","#a89f8d");
+  text(X((PLAT.x+PLAT.w/2)/100),Z(0),"固定高台",12,"#746b59","middle");
+  text(25,65,"路线分段（保持原有坡度/高度信息）",12);
+  segs.forEach((p,i)=>{
+    const lo=(GY-Math.max(p.p1.y,p.p2.y))/100,hi=(GY-Math.min(p.p1.y,p.p2.y))/100;
+    text(25,90+i*40,(i+1)+" · "+Math.round(Math.asin(Math.min(1,segSin(p)))*180/Math.PI)+"° · 长 "+(p.len/100).toFixed(1)+" m",13);
+    text(25,107+i*40,"高 "+lo.toFixed(1)+" → "+hi.toFixed(1)+" m",12,"#7c8578");
+  });
+  // Low components first, so overhead boards appear over their supports.
+  parts.sort((a,b)=>{
+    const height=p=>p.kind==="pier"?p.owner.n*p.owner.h:GY-(p.owner.p1.y+p.owner.p2.y)/2;
+    return height(a)-height(b);
+  }).forEach(p=>{
+    const order=p.kind==="plank"?segs.indexOf(p.owner):-1;
+    box(p,p.kind==="pier"?"#cf9a5c":steepColor(segSin(p.owner)),"#806b4e");
+    if(p.kind==="plank"){
+      const y=Z((p.zMin+p.zMax)/2),x=X((p.min+p.max)/2);
+      text(x,y+4,order>=0?String(order+1)+(p.owner.p2.x>=p.owner.p1.x?" →":" ←"):"未接入",12,"#403726","middle");
     }
   });
-
-  /* ---- 木板：每段各占一层（楼梯式），不再叠在同一个面上 ---- */
-  const order=new Map();
-  segs.forEach((r,i)=>order.set(r.id,i+1));
-  S.planks.forEach(p=>{
-    if(!p.placed) return;
-    const x1=Math.min(p.p1.x,p.p2.x), x2=Math.max(p.p1.x,p.p2.x);
-    const idx=order.get(p.id);
-    const sin=p.flat?0:segSin(p);
-    if(idx){
-      const y=laneTopY(idx-1)+4, h=step-8, cy=y+h/2;
-      rect(x1, y, x2-x1, h, p.flat?"#e3d3ae":steepColor(sin), "#7d6236", false, 3);
-      if(!p.flat){
-        const deg=Math.round(Math.asin(Math.min(1,sin))*180/Math.PI);
-        const lo=(GY-Math.max(p.p1.y,p.p2.y))/100, hi=(GY-Math.min(p.p1.y,p.p2.y))/100;
-        txt((x1+x2)/2, cy+(h>58?-2:4), CN[idx-1]+"  "+deg+"°", "#4a3a1c", 13);
-        if(h>58) txt((x1+x2)/2, cy+16, "高 "+lo.toFixed(1)+" → "+hi.toFixed(1)+" m", "#6b5b3a", 10.5);
-      }
-    }else{
-      rect(x1, baseTop+4, x2-x1, HZ*2-8, "#e6dcc4", "#a99a7a", false, 3);
-      txt((x1+x2)/2, baseTop+HZ+4, "未接入路径", "#a08b64", 10.5);
-    }
-  });
-
-  /* ---- 行进方向箭头：→ ← → 交替前进，这就是折返 ---- */
-  segs.forEach((r,i)=>{
-    const L=Math.min(r.p1.x,r.p2.x), R=Math.max(r.p1.x,r.p2.x);
-    if(R-L>60){
-      const y=laneTopY(i)+step-12;
-      if(r.p2.x>r.p1.x) arrowH(L+16, R-14, y, "#2f8d7b");
-      else arrowH(R-16, L+14, y, "#2f8d7b");
-    }
-  });
-
-  /* ---- 折返连接（转弯处）：上下两层之间连起来 ---- */
-  for(let i=0;i<n-1;i++){
-    const a=segs[i], b=segs[i+1];
-    const yA=laneMidY(i), yB=laneMidY(i+1), ym=(yA+yB)/2;
-    g.appendChild(svgEl("polyline",{points:[a.p2.x,yA,a.p2.x,ym,b.p1.x,ym,b.p1.x,yB].join(" "),
-      fill:"none", stroke:"#3a9e8a", "stroke-width":2.4, "stroke-dasharray":"6 4", "stroke-linecap":"round"}));
-    rect(a.p2.x+12, ym-12, 34, 17, "rgba(255,255,255,.92)", "#bfe0d8", false, 8);
-    txt(a.p2.x+29, ym+1, "折返", "#2f8d7b", 11);
-  }
-
-  /* ---- 实际占地轮廓（只算学生搭建的结构，与右侧测量一致） ---- */
-  const b=structBounds();
   if(b){
-    const x0=b.min*100, w=(b.max-b.min)*100;
-    rect(x0, baseTop, w, HZ*2, "none", "#d96a5f", true, 5);
-    dashLine(x0, baseBottom+16, x0+w, baseBottom+16, "#d96a5f");
-    g.appendChild(svgEl("line",{x1:x0,y1:baseBottom+11,x2:x0,y2:baseBottom+21,stroke:"#d96a5f","stroke-width":2}));
-    g.appendChild(svgEl("line",{x1:x0+w,y1:baseBottom+11,x2:x0+w,y2:baseBottom+21,stroke:"#d96a5f","stroke-width":2}));
-    txt(x0+w/2, baseBottom+40, "占地宽 "+(w/100).toFixed(2)+" m × 深 0.8 m = "+(w/100*DEPTH).toFixed(2)+" ㎡（楼梯式前后错开，转角平台略伸出）", "#c0554b", 12.5);
-  }else{
-    txt(SW/2, baseBottom+34, "把木板连到高台后，这里会显示占地轮廓", "#9aa79f", 12.5);
-  }
-
-  /* ---- 折返色块图例（每段一行） ---- */
-  const lh=46+segs.length*19;
-  g.appendChild(svgEl("rect",{x:56,y:58,width:364,height:lh,fill:"rgba(255,255,255,.94)",
-    stroke:"#cfdcd2","stroke-width":1.4,rx:9}));
-  txt(72, 80, "折返俯视图解（共 "+segs.length+" 段 · 楼梯式展开）", "#3f6b5c", 13.5, "start");
-  segs.forEach((r,i)=>{
-    const lo=(GY-Math.max(r.p1.y,r.p2.y))/100, hi=(GY-Math.min(r.p1.y,r.p2.y))/100;
-    const deg=Math.round(Math.asin(Math.min(1,segSin(r)))*180/Math.PI);
-    const cy=80+19*(i+1)+4;
-    g.appendChild(svgEl("rect",{x:72,y:cy-9,width:11,height:11,rx:2.5,fill:steepColor(segSin(r)),
-      stroke:"#7d6236","stroke-width":1}));
-    txt(90, cy, CN[i]+" 高 "+lo.toFixed(1)+" → "+hi.toFixed(1)+" m · "+deg+"° · 长 "+(r.len/100).toFixed(1)+" m",
-      i%2 ? "#7c5a2c" : "#3f6b5c", 11.5, "start");
-  });
-  txt(72, 58+lh+18, "每段各占一层画出（楼梯式展开）；3D 视图中上下两段沿深度方向前后错开——像真实楼梯一样，转角由并排桥墩平台衔接。",
-    "#9aa79f", 11, "start");
+    box(b,"none","#d96a5f",true);
+    text(500,433,"包围长 "+b.length.toFixed(2)+" m × 宽 "+b.depth.toFixed(2)+" m = "+b.area.toFixed(2)+" ㎡",17,"#b4534b","middle");
+  }else text(500,433,"放入搭建材料后显示投影包围矩形",15,"#7c8578","middle");
+  text(500,459,"含全部已搭建斜板与桥墩；不含固定高台、地面、平放素材和拖动预览。",13,"#6b7e70","middle");
+  text(500,482,"红框含空隙，不是实体投影并集或安全通道面积；不能仅凭转弯或折返断言更省地。",13,"#6b7e70","middle");
 }
 
 /* ================= 舞台自适应 ================= */
