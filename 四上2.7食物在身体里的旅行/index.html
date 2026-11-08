@@ -321,7 +321,27 @@ drawSvg.innerHTML='<g transform="translate(4,16)" opacity=".83">'+silhouette+'</
 function pathD(points){return points.map(function(p,i){return(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ');}
 function renderDrawings(){var g=$('draw-paths');g.innerHTML='';drawings.forEach(function(s){g.appendChild(svgNode('path',{d:pathD(s.points),fill:'none',stroke:s.color,'stroke-width':4.5,'stroke-linecap':'round','stroke-linejoin':'round','pointer-events':'none'}));});}
 function renderStickers(){var g=$('sticker-layer');g.innerHTML='';stickerPositions.forEach(function(p,i){var n=svgNode('g',{'class':'organ-sticker'+(selectedSticker===i?' selected':''),transform:'translate('+p.x+' '+p.y+')','data-sticker':i,role:'button',tabindex:'0','aria-label':'移动'+organs[i].name+'贴纸'});n.innerHTML='<rect x="-51" y="-25" width="102" height="50" rx="15" fill="#fffdf6" stroke="#d9dbce" stroke-width="1.5"/><circle cx="-32" cy="0" r="5" fill="'+organs[i].color+'"/><text x="8" y="9" text-anchor="middle" font-size="25" fill="#58665b">'+organs[i].name+'</text>';g.appendChild(n);});}
-function saveLocal(){try{localStorage.setItem('foodJourney-v1-drawing',JSON.stringify({drawings:drawings,stickers:stickerPositions,compared:compared,revising:revising}));}catch(e){}}
+/* STORAGE-SAFETY-START: validate atomically; never repair by silent filtering. */
+var drawingKey='foodJourney-v1-drawing',originalRaw=null,storageProtected=false,storageReady=false,storageMessage='尚未读取本机记录';
+function validDrawingRecord(d){
+ function obj(v){return v!==null&&typeof v==='object'&&!Array.isArray(v);}
+ function num(v){return typeof v==='number'&&isFinite(v);}
+ if(!obj(d)||!Array.isArray(d.drawings)||!Array.isArray(d.stickers)||d.stickers.length!==6)return false;
+ if(typeof d.compared!=='boolean'||typeof d.revising!=='boolean')return false;
+ for(var i=0;i<d.drawings.length;i++){var st=d.drawings[i];if(!obj(st)||typeof st.color!=='string'||!/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(st.color)||!Array.isArray(st.points)||!st.points.length)return false;for(var j=0;j<st.points.length;j++){var pt=st.points[j];if(!Array.isArray(pt)||pt.length!==2||!num(pt[0])||!num(pt[1]))return false;}}
+ for(var k=0;k<d.stickers.length;k++){var p=d.stickers[k];if(!obj(p)||!num(p.x)||!num(p.y))return false;}
+ return true;
+}
+function recordData(){return {drawings:drawings,stickers:stickerPositions,compared:compared,revising:revising};}
+function storageNotice(msg){storageMessage=msg;var n=$('drawing-storage-status');if(n)n.textContent=msg;var b=$('drawing-original-export');if(b)b.disabled=originalRaw===null;}
+function loadDrawingRecord(){
+ try{originalRaw=localStorage.getItem(drawingKey);if(originalRaw!==null){var d=JSON.parse(originalRaw);if(!validDrawingRecord(d))throw new Error('记录结构不完整');drawings=d.drawings;stickerPositions=d.stickers;compared=d.compared;revising=d.revising||compared;storageMessage='已读取本机记录';}else storageMessage='尚无本机记录；绘画后自动保存';}
+ catch(e){storageProtected=true;storageMessage='旧记录读取异常：已只读保护，当前修改仅为临时草稿，请下载备份';}
+ storageReady=true;storageNotice(storageMessage);
+}
+function saveLocal(){if(!storageReady)return false;if(storageProtected){storageNotice('只读保护：旧记录未改动，当前草稿仅在本页，请下载');return false;}
+ try{localStorage.setItem(drawingKey,JSON.stringify(recordData()));storageNotice('已保存本机记录；重要内容请下载草稿');return true;}catch(e){storageNotice('本机保存失败（空间或权限）：当前草稿未写入，请立即下载');return false;}}
+/* STORAGE-SAFETY-END */
 function pushHistory(){drawHistory.push(JSON.stringify({drawings:drawings,stickers:stickerPositions,compared:compared,revising:revising}));if(drawHistory.length>60)drawHistory.shift();$('undo').disabled=false;}
 function getSVGPoint(svg,e){var pt=svg.createSVGPoint(),src=e.touches&&e.touches.length?e.touches[0]:e.changedTouches&&e.changedTouches.length?e.changedTouches[0]:e;pt.x=src.clientX;pt.y=src.clientY;var m=svg.getScreenCTM();return m?pt.matrixTransform(m.inverse()):{x:0,y:0};}
 function ancestorData(node,attr){while(node&&node!==drawSvg){if(node.getAttribute&&node.getAttribute(attr)!==null)return node;node=node.parentNode;}return null;}
@@ -336,8 +356,13 @@ $('undo').disabled=true;
 $('clear-drawing').addEventListener('click',function(){pushHistory();drawings=[];stickerPositions=stickerOrigins.map(function(p){return{x:p.x,y:p.y};});selectedSticker=-1;revising=false;setCompare(false);renderDrawings();renderStickers();saveLocal();toast('已清空，可点“撤销”找回。');});
 function setCompare(on){compared=on;revising=revising||on;$('draw-layout').classList.toggle('comparing',on);$('reference-sheet').hidden=!on;$('initial-note').hidden=on;$('compare').innerHTML=on?'收起参考':'对照看看 <span aria-hidden="true">→</span>';$('drawing-label').textContent=on?'保留想法，用红笔修正':revising?'我的修正':'我的想法';$('pen-dot').style.background=revising?'#cc635c':'#397eb1';$('draw-hint').textContent=revising?'原来的蓝色笔迹保留，用红笔把路线改得更准确。':'画一画路线，把器官贴纸拖到你认为的位置。';$('save-record').hidden=!revising;if(on&&window.matchMedia&&window.matchMedia('(max-width:600px) and (orientation:portrait)').matches)$('draw-hint').textContent='看一看参考图，收起后用红笔修正。';saveLocal();}
 $('compare').addEventListener('click',function(){setCompare(!compared);});
-try{var cached=JSON.parse(localStorage.getItem('foodJourney-v1-drawing')||'null');if(cached&&Array.isArray(cached.drawings)&&Array.isArray(cached.stickers)&&cached.stickers.length===6){drawings=cached.drawings.filter(function(s){return Array.isArray(s.points)&&typeof s.color==='string';});stickerPositions=cached.stickers;compared=!!cached.compared;revising=!!cached.revising||compared;}}catch(e){}
-renderDrawings();renderStickers();if(revising)setCompare(compared);
+loadDrawingRecord();
+renderDrawings();renderStickers();if(revising){storageReady=false;setCompare(compared);storageReady=true;}
+var backupPanel=document.createElement('details');backupPanel.style.cssText='position:fixed;right:12px;bottom:42px;z-index:70;width:min(570px,94vw);padding:9px 13px;border:1px solid #8eaaa0;border-radius:10px;background:#fffef5;box-shadow:0 3px 12px #20382c22;font:16px/1.5 Microsoft YaHei,sans-serif;color:#29463a';
+backupPanel.innerHTML='<summary style="cursor:pointer" id="drawing-storage-status"></summary><p style="margin:8px 0">原始备份保留本次打开时的完整存储原文，不覆盖旧数据；JSON 草稿包含当前绘画与贴纸，可交由维护者恢复。本页不提供自动导入。</p><button id="drawing-original-export" class="quiet-btn" style="font-size:17px">下载启动原始备份</button><button id="drawing-draft-export" class="quiet-btn" style="font-size:17px">下载当前 JSON 草稿</button>';
+document.body.appendChild(backupPanel);storageNotice(storageMessage);if(storageProtected)backupPanel.open=true;
+$('drawing-original-export').onclick=function(){if(originalRaw===null)return;downloadBlob(new Blob([originalRaw],{type:'text/plain;charset=utf-8'}),'食物旅行_启动原始备份.txt');};
+$('drawing-draft-export').onclick=function(){downloadBlob(new Blob([JSON.stringify(recordData(),null,2)],{type:'application/json;charset=utf-8'}),'食物旅行_当前草稿.json');};
 $('save-record').addEventListener('click',function(){if(exportBusy)return;exportBusy=true;var content='<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="930" viewBox="0 0 1600 930"><rect width="1600" height="930" fill="#f7f8f4"/><style>path,line{stroke-linecap:round;stroke-linejoin:round}text{font-family:Microsoft YaHei,PingFang SC,sans-serif}.organ-label text{fill:#536a5c;font-size:27px}.anatomy-static{opacity:1}</style><text x="54" y="65" font-size="35" fill="#223b35">食物在身体里的旅行 · 我的探究记录</text><text x="54" y="112" font-size="24" fill="#6e7e70">蓝笔：原来的想法　红笔：观察后的修正</text><svg x="30" y="150" width="780" height="740" viewBox="0 0 760 720">'+drawSvg.innerHTML+'</svg><svg x="850" y="150" width="690" height="740" viewBox="0 0 620 700">'+$('reference-svg').innerHTML+'</svg><text x="1070" y="132" font-size="26" fill="#218778">消化系统参考图</text></svg>';var blob=new Blob([content],{type:'image/svg+xml;charset=utf-8'}),url=URL.createObjectURL(blob),img=new Image();img.onload=function(){var can=document.createElement('canvas');can.width=1600;can.height=930;can.getContext('2d').drawImage(img,0,0);URL.revokeObjectURL(url);can.toBlob(function(b){if(b){downloadBlob(b,'食物旅行_探究记录.png');toast('探究记录已生成。');}exportBusy=false;},'image/png');};img.onerror=function(){URL.revokeObjectURL(url);exportBusy=false;toast('图片导出未成功，可直接截屏保存。');};img.src=url;});
 function downloadBlob(blob,name){var a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},5000);}
 
@@ -400,3 +425,4 @@ window.FoodJourney={getState:function(){return{page:page,progress:p,playing:play
 </script>
 </body>
 </html>
+
