@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   root.AIHTML_LEVELS = {
+    "五下1.2比较种子发芽条件": {"level":1,"note":"DOM记录与比例比较；无Canvas或WebGL，实体设备未测"},
     "五下1.1种子发芽实验": {"level":1,"note":"DOM/SVG基础对比与记录；无WebGL和外部依赖；实体设备未测"},
     "三上2.2水珠从哪里来二维版": {"level":2,"note":"Canvas二维；无WebGL或外部依赖；旧iPad、希沃真机未测"},
     "五上1.5观察细胞/混合素材版": {"level":1,"note":"SVG比较、圈画与立体切面；照片导入和PNG导出可选Canvas，旧设备未实测"},
