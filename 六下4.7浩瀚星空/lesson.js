@@ -1,0 +1,10 @@
+"use strict";
+const $=id=>document.getElementById(id);let distance=5,time=0;
+$('ticks').innerHTML=Array.from({length:11},(_,i)=>`<path d="M${60+i*50} 205V215" stroke="#98bdcb"/><text x="${54+i*50}" y="240" font-size="17" fill="#d5e5e7">${i}</text>`).join('')+'<text x="500" y="275" font-size="18" fill="#d5e5e7">光年</text>';
+function render(){const x=60+50*time,ox=60+50*distance,received=time>=distance;$('elapsed').value=time;$('timeValue').textContent=time+' 年';$('observer').innerHTML=`<path d="M${ox} 140V200" stroke="${received?'#8bd2a5':'#a2b7c2'}" stroke-width="8"/><text x="${ox-45}" y="90" font-size="18" fill="#d5e5e7">观察者</text><text x="${ox-42}" y="115" font-size="17" fill="#d5e5e7">${distance} 光年处</text>`;
+$('front').innerHTML=`<path id="frontLine" d="M${x} 150V190" stroke="#edbc52" stroke-width="3"/><circle id="signal" cx="${x}" cy="170" r="6" fill="#ffe2a1"/><text x="${Math.max(20,Math.min(x-45,485))}" y="300" font-size="17" fill="#f1cc79">前沿 ${time} 光年</text>`;
+$('timeDrawing').innerHTML=`<path d="M60 60H560" stroke="#a2b7a8" stroke-width="3"/><path d="M60 60H${x}" stroke="#467b5e" stroke-width="8"/><circle cx="${x}" cy="60" r="9" fill="#467b5e"/><text x="45" y="100" font-size="18">0 年</text><text x="530" y="100" font-size="18">10 年</text><text x="${Math.max(60,Math.min(x-25,500))}" y="32" font-size="19" fill="#315f43">${time} 年</text>`;
+$('status').textContent=received?(time===distance?`刚到达：信号经过 ${distance} 年，到达 ${distance} 光年处的观察者。`:`已经收到：接收发生在第 ${distance} 年，现在是第 ${time} 年，前沿已经越过观察位置。`):`尚未收到：前沿走了 ${time} 光年，还要传播 ${distance-time} 年才到观察者。`;
+$('feedback').textContent=`这次信号在第 0 年发出，接收时刻是第 ${distance} 年。在接收那一刻，信号带来的是 ${distance} 年前发出的事件信息，不是光源那个接收时刻的实时状态。`;
+['near','middle','far'].forEach((id,i)=>$(id).setAttribute('aria-pressed',String(distance===[2,5,8][i])));$('next').disabled=time>=10;}
+['near','middle','far'].forEach((id,i)=>$(id).onclick=()=>{distance=[2,5,8][i];time=0;render();});$('elapsed').oninput=()=>{time=Number($('elapsed').value);render();};$('next').onclick=()=>{time=Math.min(10,time+.5);render();};$('arrival').onclick=()=>{time=distance;render();};$('reset').onclick=()=>{distance=5;time=0;render();};render();
