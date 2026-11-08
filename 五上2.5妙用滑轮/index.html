@@ -65,7 +65,7 @@ class Stage3D{
 
 function arc(x,y,r,a,b,z=0,n=20){return Array.from({length:n+1},(_,i)=>{let t=a+(b-a)*i/n;return[x+r*Math.cos(t),y+r*Math.sin(t),z]})}
 function pathLength(points){let s=0;for(let i=1;i<points.length;i++)s+=V.len(V.sub(points[i],points[i-1]));return s}
-function pathPoint(points,s){for(let i=1;i<points.length;i++){let d=V.len(V.sub(points[i],points[i-1]));if(s<=d)return V.add(points[i-1],V.mul(V.sub(points[i],points[i-1]),s/(d||1)));s-=d}return points.at(-1)}
+function pathPoint(points,s){for(let i=1;i<points.length;i++){let d=V.len(V.sub(points[i],points[i-1]));if(s<=d)return V.add(points[i-1],V.mul(V.sub(points[i],points[i-1]),s/(d||1)));s-=d}return points[points.length-1]}
 function rope(points,col=C.rope,beads=true){for(let i=1;i<points.length;i++)R.rod(points[i-1],points[i],.025,col);if(beads){let len=pathLength(points);for(let d=.15;d<len;d+=.47)R.sphere(pathPoint(points,d),.035,'#fff0d1')}}
 function hook(x,y,z=0,scale=1,color=C.dark){let p=arc(x,y-.08*scale,.13*scale,.2*Math.PI,1.65*Math.PI,z,16);for(let i=1;i<p.length;i++)R.rod(p[i-1],p[i],.032*scale,color);R.rod([x,y+.12*scale,z],[x,y+.02*scale,z],.032*scale,color)}
 function pulley(x,y,r=.42,kind='F',angle=0,z=0,focus='',explode=0){
@@ -171,7 +171,87 @@ const PAGE={life:{title:'在生活里，追踪一个滑轮',sub:'先观察运动
 const LIFE={flag:{name:'校园升旗',question:'轮子转动了，轮轴的位置也变了吗？'},crane:{name:'工地吊装',question:'吊臂上的轮子和吊钩里的轮子，谁会移动？'},well:{name:'井口提水',question:'向下拉的绳子，怎样把水桶带上来？'},workshop:{name:'车间吊装',question:'哪些轮子与货物连接在同一个移动部分？'}};
 const S={page:'life',life:{scene:'flag',time:0,playing:!matchMedia('(prefers-reduced-motion: reduce)').matches,speed:.7,highlight:false,mechanism:false,explode:false,focus:''},fixed:freshRig('fixed'),moving:freshRig('moving'),builder:freshRig('moving'),selected:null,tool:'grab',detail:true,data:false,arrows:false,trace:false,ghost:false,marks:[],annotations:[],pick:false,picked:[],checked:false,wire:false,run:false,runReason:'',hold:false,compareDirect:false,compareMode:'height',snapshots:[],undo:{fixed:[],moving:[],builder:[]},lifeGuess:'',checkedLife:false};
 let R,D,drawnWheels=[],currentWheelId='',segments=[],grip=null,lifeFrame=null,toastTimer,dirty=true,last=performance.now(),lastUI=0,lastFrame=0,labelPool=[],focusOld=null,dialogReturnFocus=null;
-try{const saved=JSON.parse(localStorage.getItem('pulley-discussion-v2')||'[]');if(Array.isArray(saved))S.snapshots=saved.filter(x=>x&&typeof x.title==='string'&&typeof x.image==='string'&&x.image.startsWith('data:image/png;')).slice(-3)}catch{}
+/* Snapshot protection: validate atomically, retain raw text, never filter or truncate. */
+const PS_KEY='pulley-discussion-v2';
+const ps={base:null,startup:null,locked:false,awaitSave:false,status:'方案保存在当前页面；可留存到本机或导出备份。'};
+function validateSnapshots(data){
+ const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+ const shape=(o,req,opt=[])=>{if(!o||typeof o!=='object'||Array.isArray(o)||req.some(k=>!own(o,k))||Object.keys(o).some(k=>!req.includes(k)&&!opt.includes(k)))throw Error('未知或缺失字段');};
+ const num=(n,min=0,max=Number.MAX_SAFE_INTEGER,int=false)=>{if(typeof n!=='number'||!Number.isFinite(n)||n<min||n>max||(int&&!Number.isInteger(n)))throw Error('数值类型或范围错误');};
+ const str=(s)=>{if(typeof s!=='string')throw Error('文字类型错误');};
+ const bool=b=>{if(typeof b!=='boolean')throw Error('布尔字段错误');};
+ const one=(v,list)=>{if(!list.includes(v))throw Error('选项错误');};
+ const arr=a=>{if(!Array.isArray(a))throw Error('数组类型错误');};
+ const vector=v=>{arr(v);if(v.length!==3)throw Error('坐标维数错误');v.forEach(n=>num(n,-1e6,1e6));};
+ function rigValue(r){
+  shape(r,['components','route','anchor','complete','load','capacity','target','travel','required','limited','s','angle','shift','prediction','tested']);
+  arr(r.components);arr(r.route);if(r.components.length>4||r.route.length>4)throw Error('滑轮数量超出模型');
+  const ids=new Set();r.components.forEach(c=>{shape(c,['id','mount']);one(c.id,['A','B','C','D']);one(c.mount,[null,'fixed','moving']);if(ids.has(c.id))throw Error('重复滑轮编号');ids.add(c.id);});
+  const path=new Set();r.route.forEach(id=>{if(!ids.has(id)||path.has(id))throw Error('无效或重复绳路');path.add(id);});
+  one(r.anchor,['top','load']);one(r.required,['up','down','any']);one(r.angle,[0,45,90]);
+  ['complete','limited','tested'].forEach(k=>bool(r[k]));str(r.prediction);
+  for(const [k,lo,hi]of [['load',1,100],['capacity',1,100],['target',1,25],['travel',5,50],['s',0,100],['shift',-1,1]])num(r[k],lo,hi);
+ }
+ function same(a,b){if(a===b)return true;if(!a||!b||typeof a!=='object'||typeof b!=='object')return false;const k=Object.keys(a);return k.length===Object.keys(b).length&&k.every(x=>own(b,x)&&same(a[x],b[x]));}
+ arr(data);
+ data.forEach(e=>{
+  const common=['id','page','title','image','marks','annotations','wheels','timestamp','guess'];
+  one(e&&e.page,['life','fixed','moving','builder']);
+  shape(e,common.concat(e.page==='life'?['life']:['rig','stats','direct','mode']));
+  num(e.id,0,Number.MAX_SAFE_INTEGER,true);str(e.title);str(e.timestamp);if(!Number.isFinite(Date.parse(e.timestamp)))throw Error('时间戳错误');str(e.guess);
+  if(typeof e.image!=='string'||!/^data:image\/png;base64,[A-Za-z0-9+/]+={0,2}$/.test(e.image))throw Error('PNG数据格式错误');
+  arr(e.marks);e.marks.forEach(m=>{shape(m,['id','p']);str(m.id);vector(m.p);});
+  arr(e.annotations);e.annotations.forEach(a=>{shape(a,['kind','points']);one(a.kind,['arrow','ink']);arr(a.points);if(a.points.length<2)throw Error('笔画缺少坐标');a.points.forEach(vector);});
+  arr(e.wheels);e.wheels.forEach(w=>{shape(w,['id','p','kind','r','angle']);str(w.id);vector(w.p);one(w.kind,['F','M']);num(w.r,Number.MIN_VALUE,1e6);num(w.angle,-Number.MAX_SAFE_INTEGER,Number.MAX_SAFE_INTEGER);});
+  if(e.page==='life'){
+   shape(e.life,['scene','time','playing','speed','highlight','mechanism','explode','focus']);one(e.life.scene,['flag','crane','well','workshop']);num(e.life.time);num(e.life.speed,0,10);['playing','highlight','mechanism','explode'].forEach(k=>bool(e.life[k]));str(e.life.focus);one(e.guess,['','fixed','moving']);
+  }else{
+   rigValue(e.rig);bool(e.direct);one(e.mode,['height','rope']);
+   const expected=JSON.parse(JSON.stringify(Core.stats(e.rig,e.page)));
+   if(!same(e.stats,expected))throw Error('模型读数与方案不一致或类型错误');
+  }
+ });
+ return JSON.parse(JSON.stringify(data));
+}
+function psStatus(message){ps.status=message;const el=document.getElementById('psStatus');if(el)el.textContent=message;const box=document.getElementById('psStorage');if(box&&/未保存|尚未保存|只读|保护|失败|无法|无效|停止|仅在|未改变|取消|不.*改变/.test(message))box.open=true;}
+try{ps.base=localStorage.getItem(PS_KEY);ps.startup=ps.base;if(ps.base!==null){S.snapshots=validateSnapshots(JSON.parse(ps.base));psStatus('已读取本机 '+S.snapshots.length+' 条方案，完整记录已保留。');}}
+catch(e){ps.locked=true;psStatus('缓存无法安全读取，已只读保护原文；当前页面可继续试用，请备份原文和当前草稿。');}
+function persist(){
+ if(ps.locked||ps.awaitSave){psStatus(ps.locked?'只读保护中，改动仅在当前页面。请先备份原文与草稿。':'恢复内容尚未保存，请点击“保存当前方案”。');return false;}
+ try{
+  const current=localStorage.getItem(PS_KEY);if(current!==ps.base){ps.locked=true;psStatus('另一页面已更改缓存，停止写入。请备份当前草稿及本机原文再决定。');return false;}
+  const text=JSON.stringify(validateSnapshots(JSON.parse(JSON.stringify(S.snapshots))));
+  localStorage.setItem(PS_KEY,text);ps.base=text;psStatus('已保存到本机，共 '+S.snapshots.length+' 个方案。');return true;
+ }catch(e){psStatus('未保存到本机：校验、权限或空间不足。当前方案仍在页面中，请导出草稿。');return false;}
+}
+function psDownload(raw,name){try{download(name,raw,'application/json');return true;}catch(e){psStatus('下载请求失败，请保留本页和浏览器缓存。');return false;}}
+function installSnapshotGuard(){
+ const box=document.createElement('details');box.id='psStorage';box.style.cssText='position:fixed;right:8px;bottom:2px;z-index:1000;max-width:min(520px,94vw);max-height:65vh;overflow:auto;border:1px solid #9bafc3;border-radius:8px;background:#fff;color:#223c53;padding:4px 10px;font:14px/1.5 sans-serif';
+ box.innerHTML='<summary>方案记录与备份</summary><p id="psStatus" role="status"></p><div id="psButtons"></div><p>本页保存完整方案；旧原文与当前草稿分开导出。恢复只改当前页面，需明确保存。浏览器清理数据或关闭未保存页面仍会丢记录。</p>';
+ document.body.appendChild(box);box.open=ps.locked;psStatus(ps.status);
+ const add=(name,fn)=>{const b=document.createElement('button');b.textContent=name;b.style.cssText='padding:6px;margin:3px;font-size:14px';b.onclick=fn;document.getElementById('psButtons').appendChild(b);};
+ add('导出当前草稿',()=>psDownload(JSON.stringify(S.snapshots,null,2),'妙用滑轮_当前方案草稿.json'));
+ add('导出启动原文',()=>{if(ps.startup!==null)psDownload(ps.startup,'妙用滑轮_启动原文.json');else psStatus('启动时没有本机缓存原文。');});
+ add('导出本机现有原文',()=>{try{const raw=localStorage.getItem(PS_KEY);if(raw!==null)psDownload(raw,'妙用滑轮_本机原文.json');else psStatus('本机没有缓存原文。');}catch(e){psStatus('无法读取本机缓存，请导出启动原文和当前草稿。');}});
+ add('恢复 JSON 到当前页面',()=>{
+  const input=document.createElement('input');input.type='file';input.accept='.json,application/json';
+  input.onchange=()=>{const f=input.files&&input.files[0];if(!f)return;const before=JSON.stringify(S.snapshots),reader=new FileReader();reader.onerror=()=>psStatus('文件读取失败，原方案未改变。');reader.onload=()=>{
+   let next;try{let d=JSON.parse(reader.result);if(!Array.isArray(d)){if(!d||d.kind!=='pulley-comparisons'||d.version!==2||Object.keys(d).some(k=>!['kind','version','note','snapshots'].includes(k))||('note'in d&&typeof d.note!=='string'))throw Error('未知备份格式');d=d.snapshots;}next=validateSnapshots(d);}catch(e){psStatus('备份格式或内容无效，原方案未改变。');return;}
+   if(JSON.stringify(S.snapshots)!==before){psStatus('读文件期间方案已改变，取消恢复，请重新选择。');return;}
+   if(!confirm('将当前页面的方案列表替换为备份中的 '+next.length+' 个方案？请先导出需保留的草稿。本机缓存不会立即改变。'))return;
+   S.snapshots=next;ps.awaitSave=true;S.run=false;S.life.playing=false;render();psStatus('已恢复到当前页面，尚未保存本机。');
+  };reader.readAsText(f);};input.click();
+ });
+ add('保存当前方案',()=>{ps.awaitSave=false;persist();});
+ add('备份后解除保护并覆盖',()=>{
+  let text,raw;try{text=JSON.stringify(validateSnapshots(JSON.parse(JSON.stringify(S.snapshots))));raw=localStorage.getItem(PS_KEY);}catch(e){psStatus('当前草稿或缓存无法安全处理，未覆盖。');return;}
+  if(raw!==null&&!psDownload(raw,'妙用滑轮_覆盖前原文.json'))return;
+  if(!confirm('请确认覆盖前原文已下载且可找到（无旧缓存则无需备份）。用当前 '+S.snapshots.length+' 个方案替换本机缓存？其他标签页的方案可能不同。'))return;
+  try{if(localStorage.getItem(PS_KEY)!==raw){psStatus('确认期间缓存再次变化，已取消覆盖。请重新备份。');return;}localStorage.setItem(PS_KEY,text);ps.base=text;ps.locked=false;ps.awaitSave=false;psStatus('已明确覆盖本机缓存，请保留原文备份。');}catch(e){psStatus('覆盖保存失败，草稿仍在当前页，未主动清除旧缓存。');}
+ });
+ window.addEventListener('storage',e=>{if(e.key===PS_KEY||e.key===null){ps.locked=true;psStatus('检测到其他页面修改或清理缓存，已停止写入，请先导出草稿。');}});
+}
+
 const rig=()=>S[S.page];
 const physics=()=>Core.stats(rig(),S.page);
 function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3400)}
@@ -477,12 +557,11 @@ function captureImage(){
  return c.toDataURL('image/png');
 }
 function save(){
- if(S.snapshots.length>=3){toast('已保留3个方案。请先在对照中移除一个，再保存新的。');showCompare();return}
  S.run=false;S.life.playing=false;drawAll();let entry={id:Date.now(),page:S.page,title:S.page==='life'?LIFE[S.life.scene].name:S.page==='fixed'?'定滑轮 · '+({0:'向下拉',45:'斜下拉',90:'水平拉'}[S.fixed.angle]):S.page==='moving'?'动滑轮研究':'我的改装',image:captureImage(),marks:clone(S.marks),annotations:clone(S.annotations),wheels:clone(drawnWheels),timestamp:new Date().toISOString()};
  if(S.page==='life'){entry.life=clone(S.life);entry.guess=S.lifeGuess}else{entry.rig=clone(rig());entry.stats=Core.stats(entry.rig,S.page);entry.guess=entry.rig.prediction;entry.direct=S.compareDirect;entry.mode=S.compareMode}
- S.snapshots.push(entry);persist();render();toast('已保留。改变一个条件，再保存一份进行对照。');
+ S.snapshots.push(entry);const saved=persist();render();toast(saved?'已保存到本机。改变一个条件，再保存一份对照。':'仅留在当前页面，尚未保存到本机。请打开“方案记录与备份”。');
 }
-function persist(){try{localStorage.setItem('pulley-discussion-v2',JSON.stringify(S.snapshots))}catch{ /* Current session remains usable even when file/private-mode storage is denied. */ }}
+
 function showCompare(){
  let a=S.snapshots,nonlife=a.filter(x=>x.rig),same=nonlife.length>1&&nonlife.every(x=>x.rig.load===nonlife[0].rig.load&&x.rig.target===nonlife[0].rig.target);
  const note=nonlife.length>1?`<p class="${same?'hint':'warning-strip'}">${same?'货物重力和目标高度相同；再比较你改变的连接或拉动方向。':'注意：这些方案的货物或目标高度不同，不能仅看拉力大小就判断哪个方案更好。'}</p>`:'';
@@ -567,7 +646,7 @@ function act(action,b){
  case 'save':save();break;
  case 'compare':showCompare();break;
  case 'restore':restore(Number(b.dataset.index));break;
- case 'deleteSaved':S.snapshots.splice(Number(b.dataset.index),1);persist();$('savedCount').textContent=S.snapshots.length;showCompare();break;
+ case 'deleteSaved':if(confirm('移除这一条保留方案？其他方案保留；建议先导出备份。')){S.snapshots.splice(Number(b.dataset.index),1);const saved=persist();$('savedCount').textContent=S.snapshots.length;showCompare();if(!saved)toast('仅从当前页面移除，本机尚未保存。请查看记录与备份。');}break;
  case 'export':exportDesign();break;
  case 'import':$('importFile').click();break;
  case 'exportComparisons':download('妙用滑轮_方案对照.json',JSON.stringify({kind:'pulley-comparisons',version:2,note:'模型计算，不是实测数据',snapshots:S.snapshots},null,2),'application/json');break;
@@ -654,6 +733,7 @@ function tick(now){
  }catch(e){console.error(e);$('error').style.display='block';$('error').textContent='三维舞台出现问题：'+e.message+'。请重新打开文件。';window.__appError=e.message;return}
  requestAnimationFrame(tick);
 }
+installSnapshotGuard();
 try{
  R=new Stage3D($('world'));
  $('world').addEventListener('webglcontextlost',e=>{e.preventDefault();S.run=false;S.life.playing=false;$('error').style.display='block';$('error').textContent='三维图形上下文中断。请重新打开；设备无法提供WebGL2时会使用Canvas后备。'});
