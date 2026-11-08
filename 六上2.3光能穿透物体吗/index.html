@@ -83,7 +83,36 @@
 <!-- AIHTML-COMPAT-GRADE:START -->
 <div class="compat-grade" aria-label="本课技术需求：T1 基础交互" title="纯SVG、CSS和JavaScript；单文件离线">T1 · 基础交互</div>
 <!-- AIHTML-COMPAT-GRADE:END -->
-<script>/* Evidence notebook for 六上2.3. Native SVG/DOM only; no external resources. */
+<script>
+/* Local-only evidence protection. No network, no extra persistent copies. */
+window.LessonRecordGuard=function(key,title,current,validate){
+ 'use strict';
+ var original=null,known=false,blocked=false,dirty=false,reason='',backupRaw,backupMade=false,box,button,msg,check,replaceButton;
+ function raw(){return localStorage.getItem(key);}
+ function show(text,bad){reason=text;dirty=!!bad;if(button){button.textContent=bad?'记录未保存 · 查看保护':'本机记录 · '+text;button.style.background=bad?'#9a342d':'#245c50';msg.textContent=text;}}
+ function lock(text){blocked=true;show(text+'。原档未覆盖；当前操作仅留在本页，请先备份。',true);}
+ function load(){try{original=raw();known=true;if(original===null){show('尚未写入',false);return null;}var data=JSON.parse(original);if(!validate(data))throw new Error('invalid');show('已读取',false);return data;}catch(e){lock(known?'本机记录格式或版本不受支持':'本机存储不可读');return null;}}
+ function save(){if(blocked){show(reason,true);return false;}try{if(!known||raw()!==original){lock('另一页面已更改本机记录');return false;}var value=current();if(!validate(value)){lock('当前记录格式异常');return false;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;show('已保存',false);return true;}catch(e){show('未能写入本机；请保留本页并下载备份',true);return false;}}
+ function backup(){var latest=null,readError=false;try{latest=raw();}catch(e){readError=true;}var payload={format:'lesson-local-backup-v1',lesson:title,storageKey:key,createdAt:new Date().toISOString(),originalRaw:original,latestRaw:latest,latestReadFailed:readError,currentPage:current()};try{var url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=title+'-本机记录备份.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);backupRaw=latest;backupMade=!readError;check.checked=false;replaceButton.disabled=true;msg.textContent='已发起备份下载。请到下载位置核实文件已保存；包含个人记录，请勿公开或上传。备份仅供保全，本页没有自动导入功能。';}catch(e){msg.textContent='备份未能生成；请勿关闭本页或替换原档。';backupMade=false;}}
+ function replace(){if(!backupMade||!check.checked)return;try{if(raw()!==backupRaw){backupMade=false;check.checked=false;replaceButton.disabled=true;lock('备份后本机档案再次改变，请重新备份');return;}var value=current();if(!validate(value)){lock('当前记录格式异常，不能替换');return;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;blocked=false;backupMade=false;check.checked=false;replaceButton.disabled=true;show('已用当前页面记录替换；请妥善保留备份',false);}catch(e){show('替换未成功；原档未主动删除，请保留本页和备份',true);}}
+ function mount(){
+  var host=document.createElement('div');host.id='local-record-protection';host.style.cssText='position:fixed;right:10px;bottom:6px;z-index:10000;font:14px/1.6 system-ui,sans-serif;max-width:calc(100vw - 20px);color:#20352d';
+  button=document.createElement('button');button.type='button';button.style.cssText='color:white;border:1px solid white;border-radius:8px;padding:5px 10px;min-height:32px;font:13px system-ui;cursor:pointer';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','local-record-panel');
+  box=document.createElement('section');box.id='local-record-panel';box.hidden=true;box.setAttribute('aria-label','本机记录保护');box.style.cssText='position:absolute;bottom:42px;right:0;width:360px;max-width:calc(100vw - 20px);max-height:75vh;overflow:auto;background:#fff;border:2px solid #587367;border-radius:12px;padding:15px;box-shadow:0 3px 20px #0004;font-size:14px';
+  msg=document.createElement('p');msg.setAttribute('role','status');box.appendChild(msg);
+  var privacy=document.createElement('p');privacy.textContent='数据只在本机和本页，不上传。共用设备请勿录入姓名或可识别的健康信息。备份可能含个人记录，应私人保管。';box.appendChild(privacy);
+  function add(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='display:block;background:#e8f1ec;border:1px solid #738c7d;border-radius:6px;padding:7px;margin:6px 0;min-height:40px;white-space:normal;font:14px system-ui';b.addEventListener('click',fn);box.appendChild(b);return b;}
+  add('下载原档与当前页面备份',backup);add('重试保存（不覆盖冲突档）',save);
+  var label=document.createElement('label');label.style.cssText='display:block;white-space:normal;font-size:14px';check=document.createElement('input');check.type='checkbox';label.appendChild(check);label.appendChild(document.createTextNode('我已核实备份文件落盘，并同意以当前页面记录替换本机档案'));box.appendChild(label);
+  replaceButton=add('确认替换本机档案',replace);replaceButton.disabled=true;check.addEventListener('change',function(){replaceButton.disabled=!(backupMade&&check.checked);});
+  add('关闭记录保护',function(){box.hidden=true;button.setAttribute('aria-expanded','false');button.focus();});button.addEventListener('click',function(){box.hidden=!box.hidden;button.setAttribute('aria-expanded',String(!box.hidden));});host.appendChild(box);host.appendChild(button);document.body.appendChild(host);show(reason||'尚未写入',dirty);
+ }
+ window.addEventListener('storage',function(e){if(e.key===key||e.key===null){try{if(raw()!==original)lock('另一页面已更改本机记录');}catch(err){lock('本机存储不可读');}}});
+ window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+ mount();return {load:load,save:save,lock:lock};
+};
+
+/* Evidence notebook for 六上2.3. Native SVG/DOM only; no external resources. */
 (function (w, d) {
   'use strict';
   var KEY = 'aihtml-light-transmission-evidence-v1';
@@ -145,31 +174,14 @@
     storageWarning = true;
     notify('此浏览器无法保存到本机；本次记录仍可用，请及时导出。');
   }
-  function load() {
-    if (loaded) return;
-    loaded = true;
-    var raw, saved;
-    try { raw = w.localStorage.getItem(KEY); } catch (ignore) { storageFail(); return; }
-    if (!raw) return;
-    try { saved = JSON.parse(raw); } catch (ignore2) { notify('本机旧记录无法读取，已打开空白证据板。'); return; }
-    if (!saved || saved.version !== 1 || !Array.isArray(saved.records)) {
-      notify('本机旧记录格式不兼容，已打开空白证据板。'); return;
-    }
-    var seen = {}, rejected = 0;
-    saved.records.forEach(function (record) {
-      var value = sanitize(record, true);
-      if (!value || rows.length >= LIMIT) { rejected += 1; return; }
-      if (seen[value.id]) value.id = uid();
-      seen[value.id] = true;
-      rows.push(value);
-    });
-    explanation = cleanText(saved.explanation, 400);
-    if (rejected) notify('已恢复可读取的 ' + rows.length + ' 条记录；跳过了无效或超量记录。');
+  var recordGuard;
+  function same(a,b){if(a===b)return true;if(!a||!b||typeof a!=='object'||typeof b!=='object'||Array.isArray(a)!==Array.isArray(b))return false;var ka=Object.keys(a).sort(),kb=Object.keys(b).sort();return ka.join('|')===kb.join('|')&&ka.every(function(k){return same(a[k],b[k]);});}
+  function validArchive(a){
+    if(!a||Object.keys(a).sort().join(',')!=='explanation,records,version'||a.version!==1||!Array.isArray(a.records)||a.records.length>LIMIT||typeof a.explanation!=='string'||a.explanation!==cleanText(a.explanation,400))return false;
+    var ids=[];return a.records.every(function(r){var safe=sanitize(r,true);if(!safe||!same(r,safe)||ids.indexOf(r.id)>=0)return false;ids.push(r.id);return true;});
   }
-  function save() {
-    try { w.localStorage.setItem(KEY, JSON.stringify({version: 1, records: rows, explanation: explanation})); }
-    catch (ignore) { storageFail(); }
-  }
+  function load(){if(loaded)return;loaded=true;recordGuard=w.LessonRecordGuard(KEY,'六上2.3光能穿透物体吗',function(){return {version:1,records:rows,explanation:explanation};},validArchive);var saved=recordGuard.load();if(saved){rows=saved.records;explanation=saved.explanation;}}
+  function save(){load();return recordGuard.save();}
   function pageSize() {
     var width = w.innerWidth || d.documentElement.clientWidth;
     var height = w.innerHeight || d.documentElement.clientHeight;
@@ -306,15 +318,15 @@
     if (rows.length >= LIMIT) { notify('已保存12条，请先删除一条，再加入新的证据。'); return false; }
     rows.push(value);
     page = Math.floor((rows.length - 1) / pageSize());
-    save(); render();
-    notify(sourceName(value.source) + '已保存（' + rows.length + '/12）。');
+    var stored=save(); render();
+    notify(stored?sourceName(value.source) + '已保存（' + rows.length + '/12）。':'记录仅留在本页，尚未保存；请查看本机记录保护。');
     return true;
   }
   function remove(id) {
     var before = rows.length;
     rows = rows.filter(function (row) { return row.id !== id; });
     if (rows.length === before) return;
-    save(); render(); notify('已删除这条记录。');
+    var stored=save(); render(); notify(stored?'已删除这条记录。':'仅从当前页面移除，未改动本机档案；请查看记录保护。');
   }
 
   function closeModal() {

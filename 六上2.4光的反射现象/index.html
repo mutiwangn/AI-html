@@ -305,6 +305,36 @@
 
 </script>
 <script>
+/* Local-only evidence protection. No network, no extra persistent copies. */
+window.LessonRecordGuard=function(key,title,current,validate){
+ 'use strict';
+ var original=null,known=false,blocked=false,dirty=false,reason='',backupRaw,backupMade=false,box,button,msg,check,replaceButton;
+ function raw(){return localStorage.getItem(key);}
+ function show(text,bad){reason=text;dirty=!!bad;if(button){button.textContent=bad?'记录未保存 · 查看保护':'本机记录 · '+text;button.style.background=bad?'#9a342d':'#245c50';msg.textContent=text;}}
+ function lock(text){blocked=true;show(text+'。原档未覆盖；当前操作仅留在本页，请先备份。',true);}
+ function load(){try{original=raw();known=true;if(original===null){show('尚未写入',false);return null;}var data=JSON.parse(original);if(!validate(data))throw new Error('invalid');show('已读取',false);return data;}catch(e){lock(known?'本机记录格式或版本不受支持':'本机存储不可读');return null;}}
+ function save(){if(blocked){show(reason,true);return false;}try{if(!known||raw()!==original){lock('另一页面已更改本机记录');return false;}var value=current();if(!validate(value)){lock('当前记录格式异常');return false;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;show('已保存',false);return true;}catch(e){show('未能写入本机；请保留本页并下载备份',true);return false;}}
+ function backup(){var latest=null,readError=false;try{latest=raw();}catch(e){readError=true;}var payload={format:'lesson-local-backup-v1',lesson:title,storageKey:key,createdAt:new Date().toISOString(),originalRaw:original,latestRaw:latest,latestReadFailed:readError,currentPage:current()};try{var url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=title+'-本机记录备份.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);backupRaw=latest;backupMade=!readError;check.checked=false;replaceButton.disabled=true;msg.textContent='已发起备份下载。请到下载位置核实文件已保存；包含个人记录，请勿公开或上传。备份仅供保全，本页没有自动导入功能。';}catch(e){msg.textContent='备份未能生成；请勿关闭本页或替换原档。';backupMade=false;}}
+ function replace(){if(!backupMade||!check.checked)return;try{if(raw()!==backupRaw){backupMade=false;check.checked=false;replaceButton.disabled=true;lock('备份后本机档案再次改变，请重新备份');return;}var value=current();if(!validate(value)){lock('当前记录格式异常，不能替换');return;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;blocked=false;backupMade=false;check.checked=false;replaceButton.disabled=true;show('已用当前页面记录替换；请妥善保留备份',false);}catch(e){show('替换未成功；原档未主动删除，请保留本页和备份',true);}}
+ function mount(){
+  var host=document.createElement('div');host.id='local-record-protection';host.style.cssText='position:fixed;right:10px;bottom:6px;z-index:10000;font:14px/1.6 system-ui,sans-serif;max-width:calc(100vw - 20px);color:#20352d';
+  button=document.createElement('button');button.type='button';button.style.cssText='color:white;border:1px solid white;border-radius:8px;padding:5px 10px;min-height:32px;font:13px system-ui;cursor:pointer';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','local-record-panel');
+  box=document.createElement('section');box.id='local-record-panel';box.hidden=true;box.setAttribute('aria-label','本机记录保护');box.style.cssText='position:absolute;bottom:42px;right:0;width:360px;max-width:calc(100vw - 20px);max-height:75vh;overflow:auto;background:#fff;border:2px solid #587367;border-radius:12px;padding:15px;box-shadow:0 3px 20px #0004;font-size:14px';
+  msg=document.createElement('p');msg.setAttribute('role','status');box.appendChild(msg);
+  var privacy=document.createElement('p');privacy.textContent='数据只在本机和本页，不上传。共用设备请勿录入姓名或可识别的健康信息。备份可能含个人记录，应私人保管。';box.appendChild(privacy);
+  function add(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='display:block;background:#e8f1ec;border:1px solid #738c7d;border-radius:6px;padding:7px;margin:6px 0;min-height:40px;white-space:normal;font:14px system-ui';b.addEventListener('click',fn);box.appendChild(b);return b;}
+  add('下载原档与当前页面备份',backup);add('重试保存（不覆盖冲突档）',save);
+  var label=document.createElement('label');label.style.cssText='display:block;white-space:normal;font-size:14px';check=document.createElement('input');check.type='checkbox';label.appendChild(check);label.appendChild(document.createTextNode('我已核实备份文件落盘，并同意以当前页面记录替换本机档案'));box.appendChild(label);
+  replaceButton=add('确认替换本机档案',replace);replaceButton.disabled=true;check.addEventListener('change',function(){replaceButton.disabled=!(backupMade&&check.checked);});
+  add('关闭记录保护',function(){box.hidden=true;button.setAttribute('aria-expanded','false');button.focus();});button.addEventListener('click',function(){box.hidden=!box.hidden;button.setAttribute('aria-expanded',String(!box.hidden));});host.appendChild(box);host.appendChild(button);document.body.appendChild(host);show(reason||'尚未写入',dirty);
+ }
+ window.addEventListener('storage',function(e){if(e.key===key||e.key===null){try{if(raw()!==original)lock('另一页面已更改本机记录');}catch(err){lock('本机存储不可读');}}});
+ window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+ mount();return {load:load,save:save,lock:lock};
+};
+
+</script>
+<script>
 (function(){
 'use strict';
 var G=window.LightGeometry, DEG=Math.PI/180, NS='http://www.w3.org/2000/svg';
@@ -367,9 +397,23 @@ function staticMarkup(content){return content.replace(/ (?:data-drag|data-action
 function wrapSVG(content){return '<svg xmlns="'+NS+'" viewBox="0 0 1000 600" font-family="PingFang SC, Microsoft YaHei, sans-serif">'+content+'</svg>';}
 function byAction(el,attr){while(el&&el!==stage&&el!==document){if(el.getAttribute&&el.hasAttribute(attr))return el;el=el.parentNode;}return null;}
 function toast(msg){$('toast').textContent=msg;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(function(){$('toast').hidden=true;},3400);}
-function persist(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){if(!storageWarned){storageWarned=true;toast('浏览器未允许本地保存，可导出记录保留。');}}}
+// Strict validation only: never normalize or discard existing evidence.
+function keys(o,s){return !!o&&typeof o==='object'&&!Array.isArray(o)&&Object.keys(o).sort().join(',')===s.split(',').sort().join(',');}
+function num(n,a,b){return typeof n==='number'&&Number.isFinite(n)&&n>=a&&n<=b;}
+function bool(v){return typeof v==='boolean';}
+function point(p,x,y){return keys(p,'x,y')&&num(p.x,0,x)&&num(p.y,0,y);}
+function list(a,n,f){return Array.isArray(a)&&a.length<=n&&a.every(f);}
+function validData(scene,d){
+ if(scene==='bench')return keys(d,'angle,on,show,aid,prediction,reference')&&num(d.angle,-75,-15)&&bool(d.on)&&bool(d.show)&&bool(d.aid)&&(d.prediction===null||(point(d.prediction,980,580)&&d.prediction.x>=20&&d.prediction.y>=20))&&(d.reference===null||(keys(d.reference,'angle,on')&&num(d.reference.angle,-75,-15)&&bool(d.reference.on)));
+ if(scene==='surface')return keys(d,'rough,selected,compare')&&num(d.rough,0,100)&&Number.isInteger(d.selected)&&num(d.selected,0,7)&&bool(d.compare);
+ if(scene==='drawer')return keys(d,'angle,on,show,eyeY,blocker,blockX,blockY')&&num(d.angle,15,52)&&bool(d.on)&&bool(d.show)&&num(d.eyeY,130,575)&&bool(d.blocker)&&num(d.blockX,220,870)&&num(d.blockY,145,465);
+ return false;
+}
+function validArchive(d){return keys(d,'scene,bench,surface,drawer,records')&&['bench','surface','drawer'].includes(d.scene)&&['bench','surface','drawer'].every(function(s){return validData(s,d[s]);})&&list(d.records,4,function(r){return keys(r,'id,scene,data,note,observation')&&Number.isSafeInteger(r.id)&&r.id>0&&validData(r.scene,r.data)&&typeof r.note==='string'&&r.note.length<=140&&['未记录','与模型相近','存在差异，待复查'].includes(r.observation);});}
+var recordGuard=window.LessonRecordGuard(KEY,'六上2.4光的反射现象',function(){return state;},validArchive);
+function persist(){return recordGuard.save();}
 function cleanData(scene,data){var s=clone(defaults[scene]),k;if(!data||typeof data!=='object')return s;for(k in s)if(Object.prototype.hasOwnProperty.call(data,k))s[k]=data[k];if(scene==='bench'){s.angle=clamp(Number(s.angle)||-43,-75,-15);s.on=!!s.on;s.show=!!s.show;s.aid=!!s.aid;if(!s.prediction||!isFinite(s.prediction.x)||!isFinite(s.prediction.y))s.prediction=null;else s.prediction={x:clamp(s.prediction.x,20,980),y:clamp(s.prediction.y,20,580)};if(s.reference&&isFinite(s.reference.angle))s.reference={angle:clamp(s.reference.angle,-75,-15),on:!!s.reference.on};else s.reference=null;}if(scene==='surface'){s.rough=clamp(Number(s.rough)||0,0,100);s.selected=clamp(Math.round(Number(s.selected)||0),0,7);s.compare=!!s.compare;}if(scene==='drawer'){s.angle=clamp(Number(s.angle)||24,15,52);s.eyeY=clamp(Number(s.eyeY)||315,130,575);s.blockX=clamp(Number(s.blockX)||470,220,870);s.blockY=clamp(Number(s.blockY)||365,145,465);s.on=!!s.on;s.show=!!s.show;s.blocker=!!s.blocker;}return s;}
-function load(){try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&typeof saved==='object'){if(/^(bench|surface|drawer)$/.test(saved.scene))state.scene=saved.scene;['bench','surface','drawer'].forEach(function(key){state[key]=cleanData(key,saved[key]);});if(Array.isArray(saved.records))state.records=saved.records.slice(0,4).filter(function(r){return r&&/^(bench|surface|drawer)$/.test(r.scene);}).map(function(r,i){return{id:Number(r.id)||Date.now()+i,scene:r.scene,data:cleanData(r.scene,r.data),note:String(r.note||'').slice(0,140),observation:/^(未记录|与模型相近|存在差异，待复查)$/.test(r.observation)?r.observation:'未记录'};});}}catch(e){state=clone(defaults);}}
+function load(){var saved=recordGuard.load();if(saved)state=saved;}
 function stopAnimation(){animation=null;if(raf)cancelAnimationFrame(raf);raf=0;}
 function renderStage(){var focused=document.activeElement&&document.activeElement.getAttribute?document.activeElement.getAttribute('data-drag'):null;var progress=animation?animation.progress:null;svg.innerHTML=sceneSVG(state.scene,state[state.scene],progress);svg.setAttribute('font-family','PingFang SC, Microsoft YaHei, sans-serif');svg.setAttribute('aria-label',state.scene==='bench'?'镜面与弧形纸屏的光路实验':state.scene==='surface'?'不同小面朝向的表面反射模型':'镜子、桌屉、橡皮、眼睛和挡板的透视光路实验');if(focused&&!drag){var el=svg.querySelector('[data-drag="'+focused+'"]');if(el&&el.focus)el.focus();}stage.classList.toggle('drawing',drawing);}
 function setPressed(id,on){$(id).setAttribute('aria-pressed',on?'true':'false');}
@@ -403,7 +447,7 @@ $('playBtn').onclick=function(){if(animation){stopAnimation();render();return;}i
 
 function facts(rec){var s=rec.data;if(rec.scene==='bench'){var m=Models.bench(s);return '模型结果：'+(s.on?'光源开启；镜面与光路见图':'光源关闭，没有该光源的光斑');}if(rec.scene==='surface')return '模型结果：'+(s.rough===0?'表面平整，反射光互相平行':'各处小面朝向不同，反射方向不同');var dm=Models.drawer(s);return '模型结果：橡皮'+(dm.lit?'被照亮':'未照亮')+'；观察者'+(dm.visible?'看得见':'看不见');}
 function sceneName(key){return key==='bench'?'追踪光路':key==='surface'?'放大表面':'照亮桌屉';}
-function saveRecord(){if(state.records.length>=4){toast('已经保存4组，请在记录中删除不需要的一组。');openRecords();return;}stopAnimation();var data=clone(state[state.scene]);if(state.scene!=='surface')data.show=true;state.records.push({id:Date.now(),scene:state.scene,data:data,note:'',observation:'未记录'});persist();render();toast('已保存第'+state.records.length+'组，含当时的镜面和光路。');}
+function saveRecord(){if(state.records.length>=4){toast('已经保存4组，请在记录中删除不需要的一组。');openRecords();return;}stopAnimation();var data=clone(state[state.scene]);if(state.scene!=='surface')data.show=true;state.records.push({id:Date.now(),scene:state.scene,data:data,note:'',observation:'未记录'});var saved=persist();render();toast(saved?'已保存第'+state.records.length+'组，含当时的镜面和光路。':'记录仅在本页，未写入本机；请查看记录保护并备份。');}
 document.querySelectorAll('[data-save]').forEach(function(b){b.onclick=saveRecord;});
 function prefixIDs(str,prefix){return str.replace(/id="([^"]+)"/g,function(_,id){return 'id="'+prefix+id+'"';}).replace(/url\(#([^)]+)\)/g,function(_,id){return 'url(#'+prefix+id+')';});}
 function openModal(id){stopAnimation();render();lastFocus=document.activeElement;$(id).hidden=false;var button=$(id).querySelector('button');if(button)button.focus();}
