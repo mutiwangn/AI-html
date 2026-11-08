@@ -574,36 +574,44 @@
   function cleanText(value, length) { return typeof value === 'string' ? value.slice(0, length) : ''; }
   function validNumber(value, min, max) { return typeof value === 'number' && isFinite(value) && value >= min && value <= max ? Math.round(value * 100) / 100 : null; }
   function choice(value, choices, fallback) { return choices.indexOf(value) >= 0 ? value : fallback; }
-  function normalized(saved) {
-    var out = freshData();
-    if (!saved || saved.schema !== 1 || !Array.isArray(saved.groups)) return out;
-    out.currentGroup = typeof saved.currentGroup === 'number' && saved.currentGroup >= 0 && saved.currentGroup < 4 ? Math.floor(saved.currentGroup) : 0;
-    var s = saved.standards || {}, n;
-    n = validNumber(s.mass, 1, 10000); if (n !== null) out.standards.mass = n;
-    n = validNumber(s.cost, 0, 10000); if (n !== null) out.standards.cost = n;
-    n = validNumber(s.time, 0.1, 999); if (n !== null) out.standards.time = n;
-    if (cleanText(s.load, 50).trim()) out.standards.load = cleanText(s.load, 50).trim();
-    out.groups.forEach(function (g, gi) {
-      var source = saved.groups[gi] || {};
-      ['before', 'after'].forEach(function (vk) {
-        var src = source[vk] || {}, dst = g[vk];
-        dst.mass = validNumber(src.mass, 0.01, 100000);
-        dst.cost = validNumber(src.cost, 0, 100000);
-        dst.consistency = choice(src.consistency, ['same', 'different', 'unknown'], 'unknown');
-        dst.difference = cleanText(src.difference, 100);
-        dst.cooperation = choice(src.cooperation, ['good', 'fair', 'unknown'], 'unknown');
-        dst.looks = choice(src.looks, ['good', 'fair', 'unknown'], 'unknown');
-        dst.trials = [0, 1, 2].map(function (ti) {
-          var trial = src.trials && src.trials[ti] || {}, seconds = validNumber(trial.seconds, 0.01, 999);
-          if (trial.status === 'failed') return { status: 'failed', seconds: null, source: 'manual' };
-          if (trial.status === 'passed' && seconds !== null) return { status: 'passed', seconds: seconds, source: trial.source === 'video' ? 'video' : 'manual' };
-          return blankTrial();
-        });
-      });
-      Object.keys(g.conditions).forEach(function (key) { g.conditions[key] = choice(source.conditions && source.conditions[key], ['unknown', 'same', 'different'], 'unknown'); });
-      Object.keys(g.notes).forEach(function (key) { g.notes[key] = cleanText(source.notes && source.notes[key], 120); });
-    });
-    return out;
+  var evidenceStorage={raw:null,startup:null,locked:false,awaitSave:false,revision:0,request:0,message:'尚未保存本次更改。'};
+  function normalized(saved){
+    function own(o,k){return Object.prototype.hasOwnProperty.call(o,k);}
+    function shape(o,keys){if(!o||typeof o!=='object'||Array.isArray(o)||keys.some(function(k){return !own(o,k);})||Object.keys(o).some(function(k){return keys.indexOf(k)<0;}))throw Error('结构或字段无效');}
+    function num(v,a,b,nullable){if(nullable&&v===null)return;if(typeof v!=='number'||!isFinite(v)||v<a||v>b)throw Error('数值无效');}
+    function text(v,n){if(typeof v!=='string'||v.length>n)throw Error('文字无效');}
+    function enumValue(v,list){if(list.indexOf(v)<0)throw Error('选项无效');}
+    shape(saved,['schema','currentGroup','standards','groups']);if(saved.schema!==1)throw Error('schema无效');num(saved.currentGroup,0,3);if(Math.floor(saved.currentGroup)!==saved.currentGroup)throw Error('小组无效');
+    shape(saved.standards,['mass','cost','time','load']);num(saved.standards.mass,1,10000);num(saved.standards.cost,0,10000);num(saved.standards.time,.1,999);text(saved.standards.load,50);if(!saved.standards.load.trim())throw Error('载重约定为空');
+    if(!Array.isArray(saved.groups)||saved.groups.length!==4)throw Error('必须完整保留4组');
+    saved.groups.forEach(function(g){shape(g,['before','after','conditions','notes']);shape(g.conditions,['load','track','light']);Object.keys(g.conditions).forEach(function(k){enumValue(g.conditions[k],['unknown','same','different']);});shape(g.notes,['problem','cause','change','finding']);Object.keys(g.notes).forEach(function(k){text(g.notes[k],120);});
+      ['before','after'].forEach(function(key){var v=g[key];shape(v,['mass','cost','consistency','difference','cooperation','looks','trials']);num(v.mass,.01,100000,true);num(v.cost,0,100000,true);enumValue(v.consistency,['same','different','unknown']);text(v.difference,100);enumValue(v.cooperation,['good','fair','unknown']);enumValue(v.looks,['good','fair','unknown']);if(!Array.isArray(v.trials)||v.trials.length!==3)throw Error('必须完整保留3次');v.trials.forEach(function(t){shape(t,['status','seconds','source']);enumValue(t.status,['empty','failed','passed']);enumValue(t.source,['manual','video']);if(t.status==='passed')num(t.seconds,.01,999);else if(t.seconds!==null||t.source!=='manual')throw Error('状态、来源与用时不一致');});});
+    });return JSON.parse(JSON.stringify(saved));
+  }
+  function evidenceStatus(message){evidenceStorage.message=message;if(root&&q('#ev-save-state'))q('#ev-save-state').textContent=message;}
+  function loadEvidence(){try{evidenceStorage.raw=global.localStorage.getItem(STORAGE_KEY);evidenceStorage.startup=evidenceStorage.raw;if(evidenceStorage.raw!==null){data=normalized(JSON.parse(evidenceStorage.raw));evidenceStatus('已读取本机4组完整记录；后续更改将尝试保存。');}else evidenceStatus('暂无本机记录，首次修改后将尝试保存。');}catch(e){evidenceStorage.locked=true;evidenceStatus('缓存异常，原文已只读保护；可继续在本页记录并导出草稿。');}}
+  function save(){evidenceStorage.revision++;if(evidenceStorage.locked||evidenceStorage.awaitSave){evidenceStatus(evidenceStorage.locked?'缓存只读保护：当前记录仅在本页，请备份后选择恢复。':'恢复草稿仅在本页，请明确确认保存。');return false;}
+    try{if(global.localStorage.getItem(STORAGE_KEY)!==evidenceStorage.raw){evidenceStorage.locked=true;evidenceStatus('另一页面已更改缓存，停止覆盖；请先导出本页草稿。');return false;}var raw=JSON.stringify(normalized(data));global.localStorage.setItem(STORAGE_KEY,raw);evidenceStorage.raw=raw;evidenceStatus('4组完整记录已自动保存 · 仅在本机');return true;}catch(e){evidenceStatus('未保存到本机：权限、空间或数据校验失败；当前记录仍在本页，请导出草稿。');return false;}
+  }
+  function evidenceDownload(raw,name){try{var url=global.URL.createObjectURL(new Blob([raw],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();global.setTimeout(function(){global.URL.revokeObjectURL(url);},30000);return true;}catch(e){evidenceStatus('下载失败，请保留本页和浏览器数据。');return false;}}
+  function importEvidence(input){var request=++evidenceStorage.request,file=input.files&&input.files[0];if(!file)return;if(file.size>1000000){evidenceStatus('文件过大，未替换记录。');input.value='';return;}
+    var revision=evidenceStorage.revision,signature=JSON.stringify(data),reader=new FileReader();reader.onload=function(){if(request!==evidenceStorage.request)return;var next;try{next=normalized(JSON.parse(reader.result));}catch(e){evidenceStatus('备份schema、数量或类型无效；当前数据和原缓存均保留。');input.value='';return;}
+      if(revision!==evidenceStorage.revision||signature!==JSON.stringify(data)){evidenceStatus('读文件期间记录已改变，取消恢复，请重新选择。');input.value='';return;}
+      if(!global.confirm('恢复将替换全部4组的改进前/后记录、三次测试、条件、说明及共同标准。可先导出当前草稿。本机缓存暂不改变。')){input.value='';return;}
+      closeDialog();data=next;evidenceStorage.awaitSave=true;evidenceStorage.revision++;render();evidenceStatus('已恢复到本页，尚未写入本机缓存；请确认保存恢复草稿。');input.value='';
+    };reader.onerror=function(){if(request===evidenceStorage.request)evidenceStatus('文件读取失败，原记录保留。');input.value='';};reader.readAsText(file);
+  }
+  function installEvidenceStorage(){
+    var box=document.createElement('details');box.style.cssText='font-size:13px;margin:4px 0';var summary=document.createElement('summary');summary.textContent='JSON备份与恢复';box.appendChild(summary);q('#ev-save-state').after(box);
+    function button(label,action){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='font-size:12px;min-height:32px;padding:4px 7px;margin:3px';b.onclick=action;box.appendChild(b);}
+    button('导出完整草稿',function(){evidenceDownload(JSON.stringify(data,null,2),'月球小车评价_4组草稿.json');});
+    button('导出缓存原文',function(){try{var r=global.localStorage.getItem(STORAGE_KEY);if(r===null){evidenceStatus('没有本机缓存。');return;}evidenceDownload(r,'月球小车评价_原始缓存.json');}catch(e){evidenceStatus('无法读取当前缓存，可导出启动快照。');}});
+    button('导出启动原文',function(){if(evidenceStorage.startup!==null)evidenceDownload(evidenceStorage.startup,'月球小车评价_启动原文.json');else evidenceStatus('没有已读取的启动原文。');});
+    var input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.hidden=true;input.onchange=function(){importEvidence(input);};box.appendChild(input);
+    button('恢复JSON',function(){input.click();});
+    button('确认保存恢复草稿',function(){if(!global.confirm('将当前4组完整草稿保存到本机？旧记录会被覆盖，可先导出缓存原文。'))return;evidenceStorage.awaitSave=false;save();});
+    button('备份后解除保护并覆盖',function(){var raw,next;try{raw=global.localStorage.getItem(STORAGE_KEY);next=normalized(data);}catch(e){evidenceStatus('无法读取原文或校验草稿，禁止覆盖。');return;}if(raw!==null&&!evidenceDownload(raw,'月球小车评价_替换前原文.json'))return;if(!global.confirm('请确认原文备份已下载且可找到。用当前4组完整草稿覆盖本机缓存？取消则保留原缓存。'))return;try{if(global.localStorage.getItem(STORAGE_KEY)!==raw){evidenceStatus('确认期间缓存再次变化，已取消覆盖。');return;}var text=JSON.stringify(next);global.localStorage.setItem(STORAGE_KEY,text);evidenceStorage.raw=text;evidenceStorage.locked=false;evidenceStorage.awaitSave=false;evidenceStatus('当前4组草稿已保存；原记录请保留在备份中。');}catch(e){evidenceStatus('覆盖失败，未主动删除原文；当前记录仍在本页。');}});
+    global.addEventListener('storage',function(e){if(e.key===STORAGE_KEY){evidenceStorage.locked=true;evidenceStatus('检测到另一页面更新记录，停止自动覆盖，请先备份本页草稿。');}});
   }
   function format(value, decimals) { return value === null ? '—' : (decimals ? value.toFixed(2) : String(value)); }
   function limitScore(value, limit) { return value === null ? null : (value <= limit ? 3 : 1); }
@@ -613,10 +621,6 @@
     var attempts = version.trials.filter(function (t) { return t.status !== 'empty'; }).length;
     var successes = version.trials.filter(function (t) { return t.status === 'passed'; }).length;
     return { mass: limitScore(version.mass, data.standards.mass), cost: limitScore(version.cost, data.standards.cost), trials: version.trials.map(trialScore), cooperation: version.cooperation === 'unknown' ? null : version.cooperation === 'good' ? 3 : 2, looks: version.looks === 'unknown' ? null : version.looks === 'good' ? 2 : 1, attempts: attempts, successes: successes };
-  }
-  function save() {
-    try { global.localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); q('#ev-save-state').textContent = '已自动保存 · 仅在本机'; }
-    catch (error) { q('#ev-save-state').textContent = '本机未能保存；可继续记录，请导出留存'; }
   }
   function cardsHTML() {
     return ['before', 'after'].map(function (vk) {
@@ -779,7 +783,7 @@
     link.href = url; link.download = '月球小车_实测评价_' + dateLabel + '.csv';
     document.body.appendChild(link); link.click(); link.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
-    q('#ev-save-state').textContent = '已生成全班4组的CSV记录；请在下载文件中确认。';
+    q('#ev-save-state').textContent = evidenceStorage.message+' CSV下载已请求，请检查下载文件。';
   }
   function clickHandler(event) {
     var key = event.target.closest('[data-ev-key]'); if (key && root.contains(key)) { pressKey(key.getAttribute('data-ev-key')); return; }
@@ -828,16 +832,14 @@
   function init() {
     if (ready) return true;
     root = document.getElementById('page-evidence'); if (!root) return false;
-    var loadWarning = false;
-    try { var raw = global.localStorage.getItem(STORAGE_KEY); if (raw) data = normalized(JSON.parse(raw)); }
-    catch (error) { loadWarning = true; /* Private browsing or an unreadable old record must not block current input. */ }
+    loadEvidence();
     q('#ev-versions').innerHTML = cardsHTML();
     root.addEventListener('click', clickHandler);
     root.addEventListener('change', changeHandler);
     root.addEventListener('input', inputHandler);
     root.addEventListener('keydown', keyboardHandler);
     ready = true; render();
-    if (loadWarning) q('#ev-save-state').textContent = '旧记录未能读取；本次可继续记录并导出留存';
+    installEvidenceStorage();evidenceStatus(evidenceStorage.message);
     return true;
   }
   function addVideoTime(version, seconds) {
