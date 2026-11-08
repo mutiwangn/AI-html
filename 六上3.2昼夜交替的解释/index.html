@@ -599,6 +599,39 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
 <div id="toast" role="status" aria-live="polite"></div>
 <noscript>请允许浏览器运行 JavaScript，才能使用手绘与三维模拟功能。</noscript>
 <script>
+/* Local-only evidence protection. No network, no extra persistent copies. */
+window.LessonRecordGuard=function(key,title,current,validate,relatedKeys){
+ 'use strict';
+ relatedKeys=relatedKeys||[];var relatedOriginal=null,backupRelated=null;
+ function related(){return relatedKeys.map(function(k){return {key:k,raw:localStorage.getItem(k)};});}
+ function sameRelated(){return JSON.stringify(related())===JSON.stringify(relatedOriginal);}
+ var original=null,known=false,blocked=false,dirty=false,reason='',backupRaw,backupMade=false,box,button,msg,check,replaceButton;
+ function raw(){return localStorage.getItem(key);}
+ function show(text,bad){reason=text;dirty=!!bad;if(button){button.textContent=bad?'记录未保存 · 查看保护':'本机记录 · '+text;button.style.background=bad?'#9a342d':'#245c50';msg.textContent=text;}}
+ function lock(text){blocked=true;show(text+'。原档未覆盖；当前操作仅留在本页，请先备份。',true);}
+ function load(){try{original=raw();relatedOriginal=related();known=true;if(original===null){if(relatedOriginal.some(function(r){return r.raw!==null;})){lock('发现旧版本档案，未自动迁移');return null;}show('尚未写入',false);return null;}var data=JSON.parse(original);if(!validate(data))throw new Error('invalid');show('已读取',false);return data;}catch(e){lock(known?'本机记录格式或版本不受支持':'本机存储不可读');return null;}}
+ function save(){if(blocked){show(reason,true);return false;}try{if(!known||raw()!==original||!sameRelated()){lock('另一页面已更改本机记录');return false;}var value=current();if(!validate(value)){lock('当前记录格式异常');return false;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;show('已保存',false);return true;}catch(e){show('未能写入本机；请保留本页并下载备份',true);return false;}}
+ function backup(){var latest=null,latestRelated=null,readError=false;try{latest=raw();latestRelated=related();}catch(e){readError=true;}var payload={format:'lesson-local-backup-v1',lesson:title,storageKey:key,createdAt:new Date().toISOString(),originalRaw:original,latestRaw:latest,originalRelated:relatedOriginal,latestRelated:latestRelated,latestReadFailed:readError,currentPage:current()};try{var url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=title+'-本机记录备份.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);backupRaw=latest;backupRelated=latestRelated;backupMade=!readError;check.checked=false;replaceButton.disabled=true;msg.textContent='已发起备份下载。请到下载位置核实文件已保存；包含个人记录，请勿公开或上传。备份仅供保全，本页没有自动导入功能。';}catch(e){msg.textContent='备份未能生成；请勿关闭本页或替换原档。';backupMade=false;}}
+ function replace(){if(!backupMade||!check.checked)return;try{if(raw()!==backupRaw||JSON.stringify(related())!==JSON.stringify(backupRelated)){backupMade=false;check.checked=false;replaceButton.disabled=true;lock('备份后本机档案再次改变，请重新备份');return;}var value=current();if(!validate(value)){lock('当前记录格式异常，不能替换');return;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;relatedOriginal=backupRelated;known=true;blocked=false;backupMade=false;check.checked=false;replaceButton.disabled=true;show('已用当前页面记录替换；请妥善保留备份',false);}catch(e){show('替换未成功；原档未主动删除，请保留本页和备份',true);}}
+ function mount(){
+  var host=document.createElement('div');host.id='local-record-protection';host.style.cssText='position:fixed;right:10px;bottom:6px;z-index:10000;font:14px/1.6 system-ui,sans-serif;max-width:calc(100vw - 20px);color:#20352d';
+  button=document.createElement('button');button.type='button';button.style.cssText='color:white;border:1px solid white;border-radius:8px;padding:5px 10px;min-height:32px;font:13px system-ui;cursor:pointer';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','local-record-panel');
+  box=document.createElement('section');box.id='local-record-panel';box.hidden=true;box.setAttribute('aria-label','本机记录保护');box.style.cssText='position:absolute;bottom:42px;right:0;width:360px;max-width:calc(100vw - 20px);max-height:75vh;overflow:auto;background:#fff;border:2px solid #587367;border-radius:12px;padding:15px;box-shadow:0 3px 20px #0004;font-size:14px';
+  msg=document.createElement('p');msg.setAttribute('role','status');box.appendChild(msg);
+  var privacy=document.createElement('p');privacy.textContent='数据只在本机和本页，不上传。共用设备请勿录入姓名或可识别的健康信息。备份可能含个人记录，应私人保管。';box.appendChild(privacy);
+  function add(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='display:block;background:#e8f1ec;border:1px solid #738c7d;border-radius:6px;padding:7px;margin:6px 0;min-height:40px;white-space:normal;font:14px system-ui';b.addEventListener('click',fn);box.appendChild(b);return b;}
+  add('下载原档与当前页面备份',backup);add('重试保存（不覆盖冲突档）',save);
+  var label=document.createElement('label');label.style.cssText='display:block;white-space:normal;font-size:14px';check=document.createElement('input');check.type='checkbox';label.appendChild(check);label.appendChild(document.createTextNode('我已核实备份文件落盘，并同意以当前页面记录替换本机档案'));box.appendChild(label);
+  replaceButton=add('确认替换本机档案',replace);replaceButton.disabled=true;check.addEventListener('change',function(){replaceButton.disabled=!(backupMade&&check.checked);});
+  add('关闭记录保护',function(){box.hidden=true;button.setAttribute('aria-expanded','false');button.focus();});button.addEventListener('click',function(){box.hidden=!box.hidden;button.setAttribute('aria-expanded',String(!box.hidden));});host.appendChild(box);host.appendChild(button);document.body.appendChild(host);show(reason||'尚未写入',dirty);
+ }
+ window.addEventListener('storage',function(e){if(e.key===key||e.key===null||relatedKeys.indexOf(e.key)>=0){try{if(raw()!==original||!sameRelated())lock('另一页面已更改本机记录');}catch(err){lock('本机存储不可读');}}});
+ window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+ mount();return {load:load,save:save,lock:lock,markDirty:function(){if(!blocked)show('当前修改尚未写入本机',true);},status:function(){return {blocked:blocked,dirty:dirty};}};
+};
+
+</script>
+<script>
 /* ===== physics.js ===== */
 /*
  * Day & night laboratory: deterministic, dependency-free model.
@@ -2785,12 +2818,12 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
   }
   function normalizeStrokes(input) {
     if (!Array.isArray(input)) return [];
-    return input.slice(-500).filter(s => s && Array.isArray(s.points)).map(s => ({
+    return input.filter(s => s && Array.isArray(s.points)).map(s => ({
       type: s.type === 'arrow' || s.tool === 'arrow' ? 'arrow' : 'pen',
       color: validColor(s.color),
       width: clamp(finite(s.width, 4.4 / VW), 1 / VW, 16 / VW),
       ...(s.underBodies ? { underBodies: true } : {}),
-      points: s.points.slice(0, 12000).filter(p => p && Number.isFinite(Number(p.x)) && Number.isFinite(Number(p.y))).map(p => ({
+      points: s.points.filter(p => p && Number.isFinite(Number(p.x)) && Number.isFinite(Number(p.y))).map(p => ({
         // Old drawings keep their 1200×800 reference frame. A wider/taller
         // visible canvas is allowed to extend beyond that original rectangle.
         x: Number(p.x), y: Number(p.y), pressure: clamp(finite(p.pressure, 0.5), 0, 1)
@@ -3278,31 +3311,32 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
   let draft = copy(initial), draftId = null, savedHypotheses = [], deletedHypotheses = [], records = [], restoredSketch = [], notebookInitialized = false, restoredDraftAvailable = false;
   let selectedBody = 'earth', nextHypothesisNumber = 1, penColor = PEN_COLORS[0];
   let page = 'phenomenon', notebookEditing = false, draftDirty = false, board, draftRevision = 0, saveTimer = 0, toastTimer = 0, storageAvailable = true, needsPaint = true, lastStamp = 0, lastUi = 0, lastObservation = 0;
+  let initializing = true;
   let notebookPage = 0, notebookPageSize = 0, teacherPage = 0, recordsPage = 0, simSettingsTab = 'sketch';
-  try {
-    const raw = JSON.parse(localStorage.getItem(KEY) || LEGACY_KEYS.map(key => localStorage.getItem(key)).find(Boolean) || 'null');
-    if (raw && typeof raw === 'object') {
-      notebookInitialized = raw.notebookInitialized === true;
-      if (raw.draft && typeof raw.draft === 'object') { draft = Astro.normalizeConfig({ ...raw.draft, tilt: 0 }); restoredDraftAvailable = true; }
-      draftId = typeof raw.draftId === 'string' ? raw.draftId : null;
-      selectedBody = raw.selectedBody === 'sun' ? 'sun' : 'earth';
-      if (PEN_COLORS.includes(raw.penColor)) penColor = raw.penColor;
-      restoredSketch = Array.isArray(raw.sketch) ? raw.sketch.slice(-500) : [];
-      let lastNumber = 0;
-      savedHypotheses = Array.isArray(raw.hypotheses) ? raw.hypotheses.filter(x => x && typeof x.key === 'string' && typeof x.title === 'string' && x.config).map(x => {
-        const titleNumber = /^假说\s*(\d+)$/.exec(x.title);
-        const candidate = Number.isSafeInteger(x.number) && x.number > 0 ? x.number : titleNumber ? Number(titleNumber[1]) : lastNumber + 1;
-        const number = Number.isSafeInteger(candidate) && candidate > lastNumber ? candidate : lastNumber + 1;
-        lastNumber = number;
-        return { key: x.key.slice(0, 80), number, title: `假说${number}`, legacyTitle: typeof x.legacyTitle === 'string' ? x.legacyTitle.slice(0, 50) : titleNumber ? '' : x.title.slice(0, 50), updatedAt: typeof x.updatedAt === 'string' ? x.updatedAt : '', note: typeof x.note === 'string' ? x.note.slice(0, 200) : '', config: Astro.normalizeConfig({ ...x.config, tilt: 0 }), sketch: Array.isArray(x.sketch) ? x.sketch.slice(-500) : [], preview: typeof x.preview === 'string' && x.preview.startsWith('data:image/png;base64,') && x.preview.length < 600000 ? x.preview : '', custom: true };
-      }) : [];
-      nextHypothesisNumber = Math.max(lastNumber + 1, Number.isSafeInteger(raw.nextHypothesisNumber) && raw.nextHypothesisNumber > 0 ? raw.nextHypothesisNumber : 1);
-      deletedHypotheses = Array.isArray(raw.deletedHypotheses) ? raw.deletedHypotheses.filter(x => x && typeof x.key === 'string' && x.config && Number.isSafeInteger(x.number) && x.number > 0 && !savedHypotheses.some(h => h.key === x.key)).map(x => ({ key: x.key.slice(0, 80), number: x.number, title: `假说${x.number}`, config: Astro.normalizeConfig({ ...x.config, tilt: 0 }), sketch: Array.isArray(x.sketch) ? x.sketch.slice(-500) : [], note: typeof x.note === 'string' ? x.note.slice(0, 200) : '', updatedAt: typeof x.updatedAt === 'string' ? x.updatedAt : '', preview: '', custom: true })) : [];
-      nextHypothesisNumber = Math.max(nextHypothesisNumber, ...deletedHypotheses.map(h => h.number + 1));
-      if (!savedHypotheses.some(h => h.key === draftId)) draftId = null;
-      records = Array.isArray(raw.records) ? raw.records.filter(x => x && x.config && typeof x.title === 'string' && typeof x.result === 'string' && Number.isFinite(x.start) && Number.isFinite(x.end)).slice(-12) : [];
-    }
-  } catch (_) { storageAvailable = false; }
+// Complete known v5 schema. Validation never mutates, filters, clamps or truncates.
+function exact(o,required,optional=[]){return !!o&&typeof o==='object'&&!Array.isArray(o)&&required.every(k=>Object.prototype.hasOwnProperty.call(o,k))&&Object.keys(o).every(k=>required.includes(k)||optional.includes(k));}
+function finiteNumber(n){return typeof n==='number'&&Number.isFinite(n);}
+function between(n,a,b){return finiteNumber(n)&&n>=a&&n<=b;}
+function str(s){return typeof s==='string';}
+function array(a,f){return Array.isArray(a)&&a.every(f);}
+function configOK(c){return exact(c,['earthPos','sunPos','earthSpin','earthSpinPeriod','sunSpin','sunSpinPeriod','orbitMode','orbitDir','orbitPeriod','lat','lon','tilt','phase'])&&[c.earthPos,c.sunPos].every(p=>Array.isArray(p)&&p.length===3&&p.every(finiteNumber)&&p[1]===0)&&Math.hypot(c.earthPos[0]-c.sunPos[0],c.earthPos[2]-c.sunPos[2])>=5-1e-10&&[c.earthSpin,c.sunSpin].every(x=>[-1,0,1].includes(x))&&[-1,1].includes(c.orbitDir)&&['none','earth','sun','both'].includes(c.orbitMode)&&[c.earthSpinPeriod,c.sunSpinPeriod,c.orbitPeriod].every(x=>finiteNumber(x)&&x>=.01)&&between(c.lat,-90,90)&&between(c.lon,-180,180)&&between(c.tilt,-90,90)&&finiteNumber(c.phase);}
+function sketchOK(a){return array(a,s=>exact(s,['type','color','width','points'],['underBodies'])&&['pen','arrow'].includes(s.type)&&str(s.color)&&/^(?:#[0-9a-f]{3}|#[0-9a-f]{6}|#[0-9a-f]{8})$/i.test(s.color)&&between(s.width,1/1200,16/1200)&&(!('underBodies' in s)||s.underBodies===true)&&Array.isArray(s.points)&&s.points.length>0&&s.points.every(p=>exact(p,['x','y','pressure'])&&finiteNumber(p.x)&&finiteNumber(p.y)&&between(p.pressure,0,1)));}
+function hypothesisOK(h){return exact(h,['key','number','title','config','sketch','note','custom','updatedAt'],['legacyTitle'])&&str(h.key)&&h.key.length>0&&Number.isSafeInteger(h.number)&&h.number>0&&str(h.title)&&configOK(h.config)&&h.config.tilt===0&&sketchOK(h.sketch)&&str(h.note)&&h.custom===true&&str(h.updatedAt)&&(!('legacyTitle' in h)||str(h.legacyTitle));}
+function recordOK(r){return exact(r,['title','config','prediction','start','end','result','explanation','events','savedAt'])&&str(r.title)&&configOK(r.config)&&['yes','no','unsure','none'].includes(r.prediction)&&finiteNumber(r.start)&&finiteNumber(r.end)&&r.end>=r.start&&str(r.result)&&str(r.explanation)&&str(r.savedAt)&&array(r.events,e=>exact(e,['type','time'])&&['sunrise','sunset'].includes(e.type)&&finiteNumber(e.time)&&e.time>=r.start-1e-8&&e.time<=r.end+1e-8);}
+function archiveOK(d){if(!exact(d,['formatVersion','notebookInitialized','draft','draftId','selectedBody','penColor','nextHypothesisNumber','sketch','hypotheses','deletedHypotheses','records'])||d.formatVersion!==5||typeof d.notebookInitialized!=='boolean'||!configOK(d.draft)||d.draft.tilt!==0||!(d.draftId===null||str(d.draftId))||!['earth','sun'].includes(d.selectedBody)||!['#e11d48','#1d4ed8','#c2410c','#15803d','#7e22ce'].includes(d.penColor)||!Number.isSafeInteger(d.nextHypothesisNumber)||d.nextHypothesisNumber<1||!sketchOK(d.sketch)||!array(d.hypotheses,hypothesisOK)||!array(d.deletedHypotheses,hypothesisOK)||!array(d.records,recordOK))return false;
+ const all=d.hypotheses.concat(d.deletedHypotheses);return new Set(all.map(h=>h.key)).size===all.length&&new Set(all.map(h=>h.number)).size===all.length&&all.every(h=>h.number<d.nextHypothesisNumber)&&(d.draftId===null||d.hypotheses.some(h=>h.key===d.draftId));}
+
+  // Never silently migrate older or unknown formats. Raw originals stay protected.
+  const recordGuard = window.LessonRecordGuard(KEY,'六上3.2昼夜交替的解释',archiveCurrent,archiveOK,LEGACY_KEYS);
+  const loadedArchive = recordGuard.load();
+  if(loadedArchive){
+    draft=copy(loadedArchive.draft);draftId=loadedArchive.draftId;selectedBody=loadedArchive.selectedBody;
+    penColor=loadedArchive.penColor;nextHypothesisNumber=loadedArchive.nextHypothesisNumber;
+    restoredSketch=copy(loadedArchive.sketch);savedHypotheses=copy(loadedArchive.hypotheses);
+    deletedHypotheses=copy(loadedArchive.deletedHypotheses);records=copy(loadedArchive.records);
+    notebookInitialized=loadedArchive.notebookInitialized;restoredDraftAvailable=true;
+  }
+  storageAvailable=!recordGuard.status().blocked;
 
   const newCamera = () => ({ yaw: -0.65, pitch: 0.46, zoom: 1 });
   const controller = (viewName = 'system') => ({ viewName, view: viewName === 'surface' ? 1 : 0, focus: viewName === 'system' ? 0 : 1, camera: newCamera(), sky: { heading: 180, pitch: 15 }, anim: null });
@@ -3349,19 +3383,18 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
     if (draftDirty || !entry.updatedAt) entry.updatedAt = new Date().toISOString();
     draftDirty = false;
   }
-  function persist() {
-    clearTimeout(saveTimer); storeCurrentDraft();
-    try {
-      // Thumbnails are regenerated from the sketch, so adding pages does not
-      // fill local storage with large duplicate PNG strings.
-      const hypotheses = savedHypotheses.map(({ preview, ...entry }) => entry);
-      const removed = deletedHypotheses.map(({ preview, ...entry }) => entry);
-      localStorage.setItem(KEY, JSON.stringify({ formatVersion: 5, notebookInitialized: true, draft, draftId, selectedBody, penColor, nextHypothesisNumber, sketch: board.getSketch(), hypotheses, deletedHypotheses: removed, records }));
-      storageAvailable = true;
-    } catch (_) { storageAvailable = false; }
-    updateDraftStatus();
+  function archiveCurrent(){
+    // Refresh a dirty draft for backups too; thumbnails are not persisted.
+    if(board && draftDirty) storeCurrentDraft();
+    const hypotheses=savedHypotheses.map(({preview,...entry})=>entry);
+    const removed=deletedHypotheses.map(({preview,...entry})=>entry);
+    return {formatVersion:5,notebookInitialized,draft,draftId,selectedBody,penColor,nextHypothesisNumber,sketch:board?board.getSketch():restoredSketch,hypotheses,deletedHypotheses:removed,records};
   }
-  function scheduleSave() { clearTimeout(saveTimer); saveTimer = setTimeout(persist, 450); }
+  function persist() {
+    clearTimeout(saveTimer);saveTimer=0;
+    storageAvailable=recordGuard.save();updateDraftStatus();return storageAvailable;
+  }
+  function scheduleSave() { if(initializing)return; recordGuard.markDirty(); clearTimeout(saveTimer); saveTimer = setTimeout(function(){saveTimer=0;persist();}, 450); }
   function dirtyDraft() { draftRevision++; draftDirty = true; scheduleSave(); needsPaint = true; updateDraftStatus(true); }
   function updateDraftStatus(changed) {
     const current = savedHypotheses.find(h => h.key === draftId);
@@ -3472,9 +3505,9 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
       else { sim.entry = null; sim.config = copy(initial); sim.time = 0; resetObservation(0); $('selectedSketchBox').classList.add('hidden'); $('selectedSketch').removeAttribute('src'); syncSimConfig(); }
     }
     if (!savedHypotheses.length) notebookEditing = false;
-    persist(); renderSavedHypotheses(); refreshHypothesisSelect(); syncNotebook();
+    const saved=persist(); renderSavedHypotheses(); refreshHypothesisSelect(); syncNotebook();
     if (!savedHypotheses.length && page === 'simulation') setPage('hypothesis');
-    toast(`已删除${removed.title}，可以撤销恢复。`); needsPaint = true;
+    toast(saved?`已删除${removed.title}，可以撤销恢复。`:'仅在本页移到可恢复列表，未写入本机；请备份。'); needsPaint = true;
   }
   function undoDeleteNotebookEntry() {
     if (!deletedHypotheses.length) return;
@@ -3483,8 +3516,8 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
     // Restoring another page must not replace the page currently being edited.
     if (!savedHypotheses.some(entry => entry.key === draftId)) selectDraftAfterRemoval(restored);
     revealNotebookEntry(restored.key);
-    persist(); renderSavedHypotheses(); refreshHypothesisSelect(); syncNotebook();
-    toast(`已恢复${restored.title}，笔迹和运动设置都保留。`); needsPaint = true;
+    const saved=persist(); renderSavedHypotheses(); refreshHypothesisSelect(); syncNotebook();
+    toast(saved?`已恢复${restored.title}，笔迹和运动设置都保留。`:'仅在本页恢复，未写入本机；请备份。'); needsPaint = true;
   }
   function syncDraft() {
     board.setConfig(draft); board.setSelected(selectedBody); syncDraftControls(); updateDraftStatus(); needsPaint = true;
@@ -3532,7 +3565,7 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
     persist(); const entry = savedHypotheses.find(h => h.key === key); if (!entry) return;
     loadSimulation(copy(entry), false); setPage('simulation', true); simSetPlaying(true);
   }
-  function saveHypothesis() { persist(); renderSavedHypotheses(); refreshHypothesisSelect(); toast(`${savedHypotheses.find(h => h.key === draftId)?.title || '这一页'}已保存。`); }
+  function saveHypothesis() { const saved=persist();renderSavedHypotheses();refreshHypothesisSelect();toast(saved?`${savedHypotheses.find(h => h.key === draftId)?.title || '这一页'}已保存。`:'这一页未写入本机；请打开记录保护下载备份。'); }
   function formatLatitude(lat) { return lat === 0 ? '赤道 0°' : `${lat > 0 ? '北纬' : '南纬'} ${Math.abs(lat)}°`; }
   function directionText(dir) { return dir > 0 ? '逆时针' : '顺时针'; }
   function configSummary(config) {
@@ -3742,11 +3775,12 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
     holder.setAttribute('aria-label', `实际连续观察：${observationMessage(sim.analysis)}`);
   }
   function saveObservation() {
+    if(records.length>=12){toast('已保留至少12次观察；现有记录不会淘汰，请先导出备份。本轮不再新增。');return;}
     updateObservation(); const a = sim.analysis;
     if (!a || sim.time - sim.start < .05) { toast('请先播放并观察一段时间，再保存。'); return; }
     const result = a.hasAlternation ? '已观察到昼夜交替' : a.hasDay && a.hasNight ? '观察到一次明暗变化' : a.status === 'horizon-only' ? '处于晨昏边界' : '本时段未见交替';
     records.push({ title: sim.entry ? sim.entry.title : '当前方案', config: copy(sim.config), prediction: sim.prediction || 'none', start: sim.start, end: sim.time, result, explanation: observationMessage(a), events: a.events.map(e => ({ type: e.type, time: e.time })), savedAt: new Date().toISOString() });
-    records = records.slice(-12); persist(); updateRecordsCount(); toast('这次观察已保存，可以选另一种可能性比较。');
+    const saved=persist();updateRecordsCount();toast(saved?'这次观察已保存，可以选另一种可能性比较。':'本次观察仅在本页，未写入本机；请打开记录保护下载备份。');
   }
   function updateRecordsCount() { $('recordsCount').textContent = String(records.length); }
   function renderRecordPage() {
@@ -3996,7 +4030,8 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
     if (event.code === 'Space' && page !== 'hypothesis') { event.preventDefault(); if (page === 'simulation') simSetPlaying(!sim.playing); else if (page === 'phenomenon') { phenomenon.playing = !phenomenon.playing; syncPlayButtons(); } else extSetPlaying(!extension.playing); }
   });
   document.addEventListener('visibilitychange', () => { lastStamp = performance.now(); });
-  window.addEventListener('pagehide', persist);
+  // Flush only a scheduled edit, through the same conflict/schema guard.
+  window.addEventListener('pagehide',function(){if(saveTimer){persist();}});
   window.addEventListener('resize', refreshViewportLayout);
   if (typeof ResizeObserver === 'function') new ResizeObserver(refreshViewportLayout).observe(document.querySelector('.app-header'));
   bindScene($('phenomenonCanvas'), phenomenonControl, null); bindScene($('simCanvas'), simControl, null); bindScene($('geoCanvas'), extControls.geocentric, 'geocentric'); bindScene($('helioCanvas'), extControls.heliocentric, 'heliocentric');
@@ -4054,14 +4089,15 @@ noscript { position: fixed; inset: 100px 30px; display: grid; place-items: cente
     version: '6.0.0',
     snapshot: () => copy({ page, notebookEditing, interface: { notebookPage, notebookPageSize, simSettingsTab, teacherPage, recordsPage }, phenomenon: { ...phenomenon, control: phenomenonControl }, draft, draftId, selectedBody, nextHypothesisNumber, sketchCount: board.getSketch().length, board: { tool: board.tool, color: board.color, spinAngles: board.getSpinAngles(), positions: board.getModelPositions(), sketch: board.getSketch(), viewTransform: board.getViewTransform() }, hypotheses: savedHypotheses.map(h => ({ key: h.key, number: h.number, title: h.title, config: h.config, sketchCount: h.sketch.length, sketch: h.sketch })), records, simulation: { title: sim.entry && sim.entry.title, key: sim.entry && sim.entry.key, config: sim.config, time: sim.time, start: sim.start, playing: sim.playing, prediction: sim.prediction, cycleTarget: sim.cycleTarget, result: sim.analysis && sim.analysis.status, control: simControl }, extension: { ...extension, controls: extControls }, renderEvidence: { phenomenon: renderPhenomenon.getEvidence(), simulation: renderSim.getEvidence(), geocentric: renderGeo.getEvidence(), heliocentric: renderHelio.getEvidence() } })
   }), writable: false });
-  if (!savedHypotheses.some(h => h.key === draftId)) {
+  if (!loadedArchive && !savedHypotheses.some(h => h.key === draftId)) {
     if (notebookInitialized || !restoredDraftAvailable) selectDraftAfterRemoval(savedHypotheses[0] || null);
     else { const entry = makeNotebookEntry(draft, restoredSketch); draftId = entry.key; }
   }
-  notebookInitialized = true;
+  if(!loadedArchive) notebookInitialized = true;
   savedHypotheses.forEach(h => { h.preview = ''; });
   revealNotebookEntry(draftId); selectSimSettingsTab('sketch');
-  syncNotebook(); syncDraft(); renderSavedHypotheses(); refreshHypothesisSelect(); syncSimConfig(); syncExtension(); updateRecordsCount(); syncPlayButtons(); syncViewControls(); persist(); setPage('phenomenon');
+  syncNotebook(); syncDraft(); renderSavedHypotheses(); refreshHypothesisSelect(); syncSimConfig(); syncExtension(); updateRecordsCount(); syncPlayButtons(); syncViewControls(); updateDraftStatus(); setPage('phenomenon');
+  initializing = false;
   requestAnimationFrame(frame);
 })();
 
