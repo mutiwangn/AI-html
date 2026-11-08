@@ -137,6 +137,18 @@
 <div class="toast hidden" id="toast" role="status"></div>
 <div class="sr-status" id="sr-status" aria-live="polite"></div>
 <noscript><p style="padding:2rem">此互动网页需要启用 JavaScript。请在浏览器中打开 HTML 文件，而不是使用文件预览。</p></noscript>
+<details id="air-storage-guard" style="position:fixed;bottom:30px;left:8px;z-index:9999;max-width:min(430px,90vw);padding:7px 11px;border:1px solid #b8cbd0;border-radius:9px;background:#fff;color:#234657;font:15px/1.5 sans-serif;box-shadow:0 3px 12px #0002"><summary>记录安全与备份</summary><p id="air-storage-message">可导出启动时原始记录和当前草稿。备份包含原始字符串，可供人工恢复；本页不自动修复或导入。</p><button id="air-storage-export" type="button">导出原始与当前备份</button></details>
+<script>
+var airRecordGuard=(function(){
+ const key="hot-air-balloon-classroom-records-v1";let raw=null,readOK=false,locked=false,draft=null,getDraft=null;
+ function obj(v){return v!==null&&typeof v==='object'&&!Array.isArray(v)}
+ function valid(v){return obj(v)&&Object.keys(v).every(k=>['className','name','date','finding','rows'].includes(k))&&['className','name','date','finding'].every(k=>typeof v[k]==='string'&&v[k].length<=(k==='finding'?500:24))&&Array.isArray(v.rows)&&v.rows.length===4&&v.rows.every(r=>obj(r)&&Object.keys(r).every(k=>['temp','note','strokes'].includes(k))&&['','较冷','变暖','较热','变凉'].includes(r.temp)&&typeof r.note==='string'&&r.note.length<=300&&Array.isArray(r.strokes)&&r.strokes.length<=120&&r.strokes.every(s=>Array.isArray(s)&&s.length<=1800&&s.every(p=>Array.isArray(p)&&p.length===2&&p.every(n=>typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=1))));}
+ function warn(t){document.getElementById('air-storage-guard').open=true;document.getElementById('air-storage-message').textContent=t}
+ try{raw=localStorage.getItem(key);readOK=true;if(raw!==null&&!valid(JSON.parse(raw)))throw Error('incompatible')}catch(e){locked=true;warn('原始记录损坏或格式不兼容，已锁定保护，绝不覆盖。当前操作仅在本次页面有效，关闭前请导出备份。')}
+ document.getElementById('air-storage-export').onclick=function(){let current=draft;try{if(getDraft)current=getDraft()}catch(e){}let payload={key,readOK,originalRaw:raw,currentDraft:current,exportedAt:new Date().toISOString()};let blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='四上1.6-原始与当前备份.json';a.click();URL.revokeObjectURL(url)};
+ return {setDraftGetter:function(f){getDraft=f},getItem:function(k){if(k!==key)throw Error('unexpected key');if(locked)throw Error('protected storage');return raw},setItem:function(k,value){if(k!==key)throw Error('unexpected key');try{draft=JSON.parse(value)}catch(e){draft=value}if(locked){warn('原始记录受保护，修改仅保留在本次页面，未写入本机。关闭前请导出备份。');throw Error('protected storage')}try{localStorage.setItem(key,value)}catch(e){warn('保存失败：本次修改未写入本机。原有存储未被替换，请导出原始与当前备份。');throw e}}};
+})();
+</script>
 <script>(() => {
 'use strict';
 const $ = id => document.getElementById(id);
@@ -641,7 +653,7 @@ function blankRecord(){const d=new Date();return {className:'',name:'',date:`${d
 function loadRecord(){
  const fresh=blankRecord();
  try{
-  const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return fresh;
+  const raw=airRecordGuard.getItem(STORAGE_KEY);if(!raw)return fresh;
   const data=JSON.parse(raw);
   for(const k of ['className','name','date','finding'])if(typeof data[k]==='string')fresh[k]=data[k].slice(0,k==='finding'?500:24);
   if(Array.isArray(data.rows))for(let i=0;i<4;i++){
@@ -653,9 +665,9 @@ function loadRecord(){
   return fresh;
  }catch(e){storageAvailable=false;return fresh;}
 }
-let recordData=loadRecord();
+let recordData=loadRecord();airRecordGuard.setDraftGetter(()=>recordData);
 function saveRecordNow(){
- try{localStorage.setItem(STORAGE_KEY,JSON.stringify(recordData));storageAvailable=true;$('save-state').textContent='已暂存于本机 · 不上传';}
+ try{airRecordGuard.setItem(STORAGE_KEY,JSON.stringify(recordData));storageAvailable=true;$('save-state').textContent='已暂存于本机 · 不上传';}
  catch(e){storageAvailable=false;$('save-state').textContent='无法本机暂存，请导出记录图片';}
 }
 function scheduleSave(){clearTimeout(saveTimer);$('save-state').textContent='正在暂存…';saveTimer=setTimeout(saveRecordNow,350);}
@@ -764,7 +776,7 @@ async function exportRecord(){
 }
 function clearRecord(){
  if(!window.confirm('清空本机的姓名、画图、冷暖选择和文字记录？已导出的图片不会受影响。'))return;
- recordData=blankRecord();buildRecords();resizeDrawings();saveRecordNow();toast('本机记录已清空。');
+ recordData=blankRecord();buildRecords();resizeDrawings();saveRecordNow();toast(storageAvailable?'本机记录已清空。':'仅清空当前页面草稿；原始存储未更改。');
 }
 function materialIllustration(index){
  const common='<defs><linearGradient id="pl'+index+'" x1="0" x2="1"><stop stop-color="#dbeadf" stop-opacity=".8"/><stop offset=".5" stop-color="#f6faf5" stop-opacity=".5"/><stop offset="1" stop-color="#cbded1" stop-opacity=".8"/></linearGradient></defs>';
