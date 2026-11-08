@@ -2,6 +2,7 @@
 (function (root) {
   'use strict';
   root.AIHTML_LEVELS = {
+    "三上2.2水珠从哪里来二维版": {"level":2,"note":"Canvas二维；无WebGL或外部依赖；旧iPad、希沃真机未测"},
     "五上1.5观察细胞/混合素材版": {"level":1,"note":"SVG比较、圈画与立体切面；照片导入和PNG导出可选Canvas，旧设备未实测"},
     "四上1.8自制打气筒/自由组装实验台": {"level":3,"note":"WebGL1 自定义三维，Canvas2D回退；定性模型，真实GPU、触屏和全部装配条件未完整验收"},
     "三下3.8制作地球科普海报": {"level":1,"note":"原创SVG海报预览、版式比较与模块放大、本机快照及SVG/TXT导出；无外部素材或Canvas，事实与来源须人工复核，真机待核"},
