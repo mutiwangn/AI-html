@@ -1,0 +1,554 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>自制打气筒 · 通孔与手指交互 v8.5</title>
+<style>
+:root{--ink:#203e49;--muted:#617b85;--line:#d9e5e7;--teal:#16796f;--soft:#e8f4ee;--orange:#cc803b;--purple:#9355ab;--bg:#f3f7f6;--aside:246px}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{cursor:pointer;touch-action:manipulation;color:inherit}button:focus-visible{outline:3px solid #df963e;outline-offset:3px}button:disabled{opacity:.36;cursor:default}[hidden]{display:none!important}body{display:grid;grid-template-rows:76px minmax(0,1fr) 30px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 26px;background:white;border-bottom:1px solid var(--line);z-index:10}.brand{display:flex;align-items:center;gap:13px;min-width:0}.logo{width:42px;height:42px;flex:none;border-radius:13px;background:var(--teal);display:grid;place-items:center;color:white}.logo svg{width:27px;height:27px}.brand h1{font-size:25px;line-height:1.2;margin:0;font-weight:750;letter-spacing:.5px}.brand p{font-size:12px;color:var(--muted);margin:4px 0 0;letter-spacing:1.2px}.top-actions{display:flex;gap:9px}.btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);background:white;padding:8px 15px;border-radius:11px;font-size:15px;font-weight:600}.btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.btn:hover{background:#f4f8f7}.btn.reset{border-color:#c8ddd5;background:#eef7f2;color:#246c5c}.app{display:grid;grid-template-columns:var(--aside) minmax(0,1fr);min-height:0}.shelf{background:#fff;border-right:1px solid var(--line);display:grid;grid-template-rows:auto auto minmax(0,1fr) auto auto;padding:18px 12px 10px;gap:10px;min-height:0;z-index:8}.shelf-head{padding:0 7px}.shelf-head h2{font-size:18px;margin:0 0 5px}.shelf-head p{font-size:12px;margin:0;color:var(--muted);line-height:1.7}.materials{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,minmax(0,1fr));gap:9px;min-height:0;align-content:stretch}.item{position:relative;min-width:0;min-height:118px;height:auto;background:#f7faf9;border:1px solid #e3ece9;border-radius:13px;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:6px 4px 11px;transition:border-color .18s,background .18s}.item:hover,.item.selected{background:#edf6f1;border-color:#4a9b89}.item.placed{background:#f3f7f6}.item.placed img{opacity:.45}.item img{width:100%;height:clamp(74px,9.5vh,92px);object-fit:contain;pointer-events:none;display:block}.item .name{font-size:15px;font-weight:650;white-space:nowrap}.item .return{position:absolute;top:4px;right:4px;border:0;background:white;width:25px;height:25px;border-radius:8px;font-size:17px;color:#567b71;display:none;padding:0;box-shadow:0 1px 5px #24453e12}.item.placed .return{display:block}.item .dot{position:absolute;top:10px;left:9px;display:none;width:7px;height:7px;border-radius:50%;background:#428d7d}.item.placed .dot{display:block}.shelf-hint{font-size:12px;line-height:1.7;color:var(--muted);padding:0 5px;margin:0}.shelf-foot{margin-top:0;padding:10px 5px 0;border-top:1px solid #e8eeeb;font-size:12px;color:#9a7855;line-height:1.55}.drop-return{outline:3px dashed #428c78;outline-offset:-8px;background:#ebf6ef}.stage{min-width:0;min-height:0;position:relative;overflow:hidden;background:radial-gradient(ellipse at 44% 36%,#fff 0%,#f4f8f7 48%,#e8f0ee 100%)}#scene{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;outline:none}.toolbar{position:absolute;top:16px;left:20px;right:20px;display:flex;gap:10px;align-items:center;z-index:4;pointer-events:none}.toolbar>*{pointer-events:auto}.switch{display:flex;align-items:center;gap:9px;border:1px solid #d7e4df;background:#ffffffed;border-radius:11px;min-height:44px;padding:10px 13px;font-size:15px;font-weight:600;white-space:nowrap;box-shadow:0 2px 10px #233d3510}.switch span.track{display:block;width:31px;height:18px;border-radius:20px;background:#c4d2cc;position:relative;transition:background .2s;flex:none}.switch .track:after{content:"";position:absolute;left:3px;top:3px;width:12px;height:12px;border-radius:50%;background:white;transition:transform .2s}.switch[aria-pressed=true]{border-color:#8ab7a6;color:var(--teal);background:#f0f9f3}.switch[aria-pressed=true] .track{background:var(--teal)}.switch[aria-pressed=true] .track:after{transform:translateX(13px)}.toolbar .spacer{flex:1;pointer-events:none}.icon-small{width:44px;padding:8px;background:#ffffffda}.hint-toggle{min-height:44px;border:1px solid #e1d3b9;background:#fcf7e9;color:#8c6b2a;border-radius:11px;padding:10px 14px;font-size:15px;font-weight:600}.hint-toggle:before{content:"?";display:inline-grid;place-items:center;width:20px;height:20px;border:1.5px solid currentColor;border-radius:50%;margin-right:7px;font-weight:700}.hints{position:absolute;right:20px;top:72px;width:310px;max-height:calc(100% - 170px);overflow:auto;background:#fffdf6;border:1px solid #e7dfc7;border-radius:14px;padding:20px;z-index:8;box-shadow:0 12px 38px #3b452218}.hints h3{font-size:18px;margin:0 0 16px;color:#7b652e}.hints p{padding:0 0 13px;margin:0 0 13px;border-bottom:1px solid #eee7d3;font-size:16px;line-height:1.8}.hints p:last-child{border:0;margin:0;padding:0}.empty-label{position:absolute;left:50%;top:62%;transform:translate(-50%,-50%);pointer-events:none;text-align:center;color:#6d8b81;font-size:20px;font-weight:600;line-height:1.8;letter-spacing:.4px}.empty-label small{display:block;font-size:13px;font-weight:400;color:#8a9e97}.stage-bottom{position:absolute;bottom:18px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;z-index:3;pointer-events:none}.status{color:#375a50;max-width:min(630px,80%);padding:11px 16px;background:#ffffffd9;border:1px solid #dce8e2;border-radius:13px;box-shadow:0 4px 18px #26483d08;line-height:1.65;font-size:15px;font-weight:550}.stage-bottom .view-note{font-size:12px;color:#7e938a;text-align:right;line-height:1.7}.hole-controls{position:absolute;right:20px;bottom:89px;background:#ffffffee;border:1px solid var(--line);border-radius:14px;padding:13px;z-index:4;box-shadow:0 6px 20px #15382e07}.hole-controls h3{font-size:13px;color:#627e73;font-weight:500;margin:0 0 9px}.segments{display:flex;gap:3px;background:#eff4f0;border-radius:9px;padding:3px}.segments button{border:0;background:transparent;border-radius:7px;padding:8px 10px;font-size:13px;color:#607b70;min-height:36px;white-space:nowrap}.segments button.active{background:white;color:var(--teal);font-weight:650;box-shadow:0 1px 5px #20473b18}.zoom-box{position:absolute;right:20px;top:76px;width:min(42%,440px);height:338px;background:#ffffffec;border:1px solid #d2e1db;border-radius:16px;z-index:2;box-shadow:0 8px 28px #28504510;pointer-events:none}.zoom-head{height:43px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;font-size:15px;font-weight:650;border-bottom:1px solid #edf2ef}.zoom-head small{font-size:11px;color:#6f867c;font-weight:400}.zoom-content{position:absolute;inset:44px 5px 36px}.zoom-content canvas{display:block;width:100%;height:100%}.zoom-note{position:absolute;bottom:10px;left:15px;font-size:13px;color:#6a7d75;right:12px;line-height:1.4}.zoom-callout{position:absolute;font-size:12px;color:#6e687b;pointer-events:none;right:14px;top:62px}.target{position:absolute;width:86px;height:48px;border:2px dashed #58aa96;border-radius:50%;background:#4dbe9510;transform:translate(-50%,-50%);pointer-events:none;display:none;z-index:3}.target.show{display:block}.target::after{content:attr(data-label);position:absolute;left:50%;top:-28px;transform:translateX(-50%);font-size:13px;white-space:nowrap;color:#227968;background:white;border-radius:6px;padding:2px 6px}.target.ready{border-style:solid;background:#59b99626}.toolchip{position:absolute;transform:translate(-50%,-100%);pointer-events:none;color:#386a57;background:#fffef1;border:1px solid #dfd9b8;border-radius:8px;padding:5px 11px;font-size:13px;z-index:6;white-space:nowrap}.take-handle{position:absolute;transform:translate(-50%,-50%);border:1px solid #d0e1d7;border-radius:30px;background:#ffffffcc;padding:5px 11px;font-size:12px;color:#638374;z-index:3;cursor:grab;touch-action:none}.footer{display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:#84938d;font-size:11px;background:#fbfdfc;border-top:1px solid #e2ebe5;gap:12px}.watermark{letter-spacing:2px;color:#8fa598}.toast{position:fixed;left:50%;bottom:60px;transform:translate(-50%,15px);background:#234e42ee;color:white;border-radius:11px;padding:12px 20px;font-size:15px;opacity:0;transition:.18s;pointer-events:none;z-index:30;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.loader{position:absolute;inset:0;background:var(--bg);display:grid;place-items:center;z-index:20;font-size:16px;color:#507866}.error{text-align:center;padding:35px;line-height:1.9;color:#8b5547}.error button{margin-top:15px}.cursor-ghost{position:fixed;pointer-events:none;width:105px;height:105px;transform:translate(-50%,-55%);z-index:60;filter:drop-shadow(0 10px 8px #203d3130);display:none;object-fit:contain}.rotate-note{position:absolute;bottom:15%;left:40%;transform:translateX(-50%);color:#7e988a;font-size:13px;pointer-events:none;opacity:0;transition:.2s}.rotate-note.show{opacity:1}
+@media(min-width:1600px){:root{--aside:282px}.top{padding:0 32px}.brand h1{font-size:29px}.shelf{padding:22px 15px 12px}.item{min-height:144px}.item img{height:108px}.item .name{font-size:18px}.shelf-head h2{font-size:21px}.shelf-head p,.shelf-hint,.shelf-foot{font-size:14px}.switch,.btn,.hint-toggle{font-size:18px;min-height:49px}.status{font-size:18px}.zoom-box{width:470px;height:380px}.zoom-head{font-size:18px}.zoom-note{font-size:16px}.segments button{font-size:16px}.hole-controls h3{font-size:15px}.view-note{font-size:14px!important}.footer{font-size:12px}}
+@media(max-height:750px) and (min-width:701px){body{grid-template-rows:65px minmax(0,1fr) 26px}.shelf{padding-top:14px;gap:9px}.item{height:109px}.item img{height:68px}.shelf-foot{padding-top:8px}.toolbar{top:12px}.zoom-box{height:235px;top:68px}.hints{top:65px}.status{font-size:14px}.shelf-hint{font-size:11px}}
+@media(max-width:1050px) and (min-width:701px){:root{--aside:190px}.top{padding:0 16px}.brand h1{font-size:22px}.btn{font-size:13px;padding:8px 12px}.toolbar{left:12px;right:12px;gap:6px}.switch{font-size:13px;padding:9px 10px;gap:6px}.hint-toggle{padding:10px;font-size:13px}.icon-small{width:40px}.zoom-box{right:12px;width:36%;height:245px}.zoom-head{padding:0 11px;font-size:14px}.zoom-head small{display:none}.stage-bottom{left:12px;right:12px}.view-note{display:none}.item{height:115px}.item img{height:74px}.item .name{font-size:14px}.shelf{padding-left:10px;padding-right:10px}.hole-controls{right:12px}.segments button{font-size:12px;padding:7px}.footer{font-size:10px}}
+@media(max-width:700px){body{grid-template-rows:60px minmax(0,1fr) 32px}.top{padding:0 12px;gap:8px}.brand{gap:8px}.brand h1{font-size:18px}.brand p{font-size:10px}.logo{width:32px;height:32px;border-radius:10px}.logo svg{width:22px;height:22px}.top-actions{gap:5px}.top-actions .btn{font-size:12px;padding:7px 9px;min-height:37px;border-radius:9px;gap:4px}.top-actions .btn svg{width:16px}.top-actions .fs{display:none}.app{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) 143px}.shelf{grid-row:2;border-top:1px solid var(--line);border-right:0;padding:8px 9px 5px;gap:0;display:block}.shelf-head,.shelf-hint,.shelf-foot{display:none}.materials{grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.item{height:116px;padding:4px 1px 8px;border-radius:10px}.item img{height:78px}.item .name{font-size:11px;letter-spacing:-.7px}.item .return{width:22px;height:22px}.toolbar{top:9px;left:9px;right:9px;gap:5px;flex-wrap:wrap}.switch{font-size:12px;min-height:38px;padding:7px 8px;gap:5px;border-radius:9px}.switch span.track{width:27px;height:16px}.switch .track:after{width:10px;height:10px}.switch[aria-pressed=true] .track:after{transform:translateX(11px)}.toolbar .icon-small{width:36px;min-height:36px;padding:7px}.toolbar .spacer{display:none}.hint-toggle{font-size:12px;min-height:37px;padding:7px 8px;margin-left:auto;border-radius:9px}.hint-toggle:before{width:15px;height:15px;margin-right:4px}.toolbar #homeView{display:none}.stage-bottom{bottom:9px;left:9px;right:9px}.status{font-size:12px;padding:7px 10px;max-width:100%;border-radius:9px}.view-note{display:none}.zoom-box{right:9px;top:56px;width:44%;height:180px;border-radius:10px}.zoom-head{height:32px;font-size:12px;padding:0 10px}.zoom-head small,.zoom-callout{display:none}.zoom-content{inset:33px 3px 30px}.zoom-note{font-size:10px;bottom:7px;left:9px;right:6px}.hints{right:9px;top:55px;width:260px;max-height:calc(100% - 105px);padding:16px}.hints p{font-size:14px}.hints h3{font-size:16px}.hole-controls{bottom:55px;right:9px;padding:8px;border-radius:10px}.hole-controls h3{font-size:11px;margin-bottom:5px}.segments button{font-size:10px;padding:5px 7px;min-height:30px}.empty-label{font-size:16px;top:65%}.footer{padding:0 10px;line-height:1.4;font-size:9px}.footer .watermark{font-size:10px}.take-handle{font-size:10px;padding:4px 8px}.target{width:63px;height:36px}.target::after{font-size:11px}.toolchip{font-size:11px}.cursor-ghost{width:85px;height:85px}}
+@media(max-height:480px){body{grid-template-rows:52px minmax(0,1fr) 20px}.brand p{display:none}.shelf{overflow-y:auto}.zoom-box{height:180px}.shelf-foot,.shelf-hint{display:none}.item{height:85px}.item img{height:52px}.toolbar .switch,.toolbar .btn{min-height:35px}.stage-bottom{bottom:8px}.hole-controls{bottom:55px}}
+.punched{position:absolute;left:5px;top:5px;font-size:10px;padding:2px 5px;line-height:1.4;border-radius:4px;background:#fff1f1;color:#b54e4e;border:1px solid #e4aaaa;z-index:1}.item:has(.punched:not([hidden])){border-color:#de8b8b;box-shadow:inset 0 0 0 2px #f1c2c2;background:#fff8f8}.item:has(.punched:not([hidden])) .dot{display:none}
+
+/* v8.2 B: the flexible grid track belongs to materials, not the instructions. */
+.stage{background:radial-gradient(ellipse at 46% 38%,#f1f6f8 0%,#e7f0f3 52%,#d7e6eb 100%)}
+.item.placed img{opacity:.78}
+@media(min-width:701px){
+ :root{--aside:246px}
+ .shelf{display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:12px;padding:18px 12px 12px;overflow:hidden}
+ .shelf-head{padding:0 5px}.shelf-head p{font-size:12px;line-height:1.7}
+ .materials{height:100%;min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:10px;align-content:stretch}
+ .item{height:auto;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto;justify-items:center;align-items:center;padding:10px 6px 12px;overflow:hidden;border-color:#cfdee4;background:linear-gradient(160deg,#fbfdfe,#eaf2f5)}
+ .item img{width:100%;height:100%;min-height:0;object-fit:contain}
+ .item .name{font-size:16px;line-height:1.35;position:relative;z-index:1}
+ .item .return{width:28px;height:28px}
+ .shelf-hint{font-size:12px;line-height:1.7;padding:0 4px;margin:0;align-self:start}
+ .shelf-foot{margin:0;font-size:12px;padding:8px 4px 0;align-self:end}
+}
+@media(min-width:1600px){
+ :root{--aside:276px}
+ .shelf{padding:22px 15px 15px;gap:14px}
+ .item{padding:12px 7px 14px}.item .name{font-size:18px}
+ .shelf-head p,.shelf-hint,.shelf-foot{font-size:14px}
+}
+@media(min-width:701px) and (max-width:1050px){:root{--aside:204px}.shelf{padding:14px 9px 10px;gap:10px}.item{padding:7px 3px 9px}.item .name{font-size:14px}.materials{gap:8px}}
+@media(max-height:750px) and (min-width:701px){.shelf{padding-top:12px;gap:9px}.shelf-head h2{margin-bottom:3px}.shelf-head p,.shelf-hint,.shelf-foot{font-size:11px}.item{padding:6px 4px 8px}.item .name{font-size:15px}}
+@media(max-width:700px){
+ .materials{height:100%;grid-template-rows:minmax(0,1fr);align-items:stretch}
+ .item{height:100%;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto;justify-items:center;align-items:center;padding:5px 1px 8px;overflow:hidden;border-color:#cfdee4;background:linear-gradient(160deg,#fbfdfe,#eaf2f5)}
+ .item img{width:100%;height:100%;min-height:0;object-fit:contain}
+}
+@media(max-height:480px) and (min-width:701px){.shelf{grid-template-rows:auto minmax(0,1fr);gap:6px}.shelf-hint,.shelf-foot{display:none}.shelf-head p{display:none}.item{min-height:0;padding:2px}.item .name{font-size:11px}.materials{gap:5px}}
+
+/* v8.5: an existing hole is a neutral opening, not a warning-coloured plug. */
+.punched{background:#edf1f3;color:#53636c;border:1px solid #bdcbd2}
+.item:has(.punched:not([hidden])){border-color:#b5c8d0;box-shadow:none;background:#f1f6f8}
+.body-zone{width:62px;height:32px;border-color:#96b3b9;background:transparent}
+.body-zone::after{font-size:12px;color:#607b83;top:-25px}
+@media(min-width:1600px){:root{--aside:282px}}
+@media(max-width:700px){.body-zone{width:44px;height:24px}.body-zone::after{font-size:10px}}
+</style></head><body>
+<header class="top"><div class="brand"><div class="logo"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 3h6v4l4 5v12H7V12l4-5z"/><path d="M8 15h12M8 19h12M11 7h6"/></svg></div><div><h1>自制打气筒</h1><p>自由组装实验台 · v8.5</p></div></div><div class="top-actions"><button id="undoBtn" class="btn" disabled><svg viewBox="0 0 24 24"><path d="M9 6L4 11l5 5M4 11h11a5 5 0 010 10" transform="translate(0,-3)"/></svg>撤回</button><button id="resetBtn" class="btn reset"><svg viewBox="0 0 24 24"><path d="M3 11a9 9 0 119 10M3 4v7h7"/></svg>重置</button><button id="fullBtn" class="btn fs" title="全屏"><svg viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg>全屏</button></div></header>
+<main class="app"><aside class="shelf" id="shelf"><div class="shelf-head"><h2>材料区</h2><p>拖拽组装，也可先点材料再点位置</p></div><div class="materials" id="materials"></div><p class="shelf-hint">拖回材料区，可取下零件。<br>打出的孔会保留，重置后复原。</p><div class="shelf-foot">真实打孔请由教师协助。</div></aside>
+<section class="stage" id="stage"><canvas id="scene" aria-label="3D自由组装实验台，点击瓶身按压，空白处拖动旋转" tabindex="0"></canvas><div class="toolbar"><button class="switch" id="particleBtn" aria-pressed="false"><span class="track"></span>空气微粒</button><button class="switch" id="valveBtn" aria-pressed="false"><span class="track"></span>放大窗口</button><button class="btn icon-small" id="pauseBtn" title="暂停 / 继续" aria-label="暂停 / 继续"><svg viewBox="0 0 24 24"><path id="pauseIcon" d="M8 5v14M16 5v14"/></svg></button><button class="btn icon-small" id="homeView" title="复位视角" aria-label="复位视角"><svg viewBox="0 0 24 24"><path d="M3 11a9 9 0 119 10M3 4v7h7"/></svg></button><span class="spacer"></span><button class="hint-toggle" id="hintBtn" aria-expanded="false">小锦囊</button></div>
+<div id="emptyLabel" class="empty-label">把矿泉水瓶拖到这里<small>材料自由组合，随时按压观察</small></div>
+<div class="zoom-box" id="zoomBox" hidden><div class="zoom-head"><span>瓶口局部放大</span><small>形变放大示意</small></div><div class="zoom-content" id="zoomContent"><canvas id="zoomCanvas"></canvas></div><div class="zoom-callout">固定端　／　可动中部</div><div class="zoom-note" id="zoomNote">放入材料后，观察这里的变化。</div></div>
+<div class="hole-controls" id="holeControls" hidden><h3>瓶身小孔</h3><div class="segments"><button class="active" data-hole="auto">随手指开合</button><button data-hole="open">一直打开</button><button data-hole="closed">一直堵住</button></div></div>
+<aside class="hints" id="hints" hidden><h3>试着想一想</h3><p>只把气球套在瓶口上，按压和松手后分别会怎样？</p><p>瓶盖上的孔与瓶身上的孔，作用会一样吗？</p><p>气球皮的两端与中间，怎样安排才合适？</p><p>松手时，瓶子从哪里获得新的空气？</p><p>只改变一个地方，怎样比较改装前后的效果？</p></aside>
+<div class="target" id="neckTarget" data-label="瓶口"></div><div class="target" id="bodyTarget" data-label="在这里打孔"></div><div class="target body-zone" id="bodyUpperTarget"></div><div class="target body-zone" id="bodyMiddleTarget"></div><div class="target body-zone" id="bodyLowerTarget"></div><div class="target" id="capTarget" data-label="瓶盖"></div><div class="toolchip" id="toolChip" hidden></div><button class="take-handle" id="moveHandle" hidden title="拖动瓶底移动装置，拖回材料区取回">移动瓶子</button>
+<div class="stage-bottom"><div class="status" id="status" role="status" aria-live="polite">从左侧取材料，自由尝试你的想法。</div><div class="view-note">空白处拖动旋转 · 滚轮缩放<br>点击瓶身按压 · 按住可保持</div></div><div class="loader" id="loader">正在准备实验台…</div></section></main>
+<footer class="footer"><span>定性模拟 · 微粒、形变与流速为放大示意，不能代替真实实验。</span></footer><div class="toast" id="toast"></div><img class="cursor-ghost" id="ghost" alt="正在拖动的材料">
+<script>
+/* v8.2: fixed premultiplied-alpha coverage; PET classroom material; fluid shelf.
+   TinyLab3D: local WebGL renderer. All geometry and shaders are embedded; no external assets. */
+const G3=(()=>{
+const V={add:(a,b)=>a.map((x,i)=>x+b[i]),sub:(a,b)=>a.map((x,i)=>x-b[i]),mul:(a,s)=>a.map(x=>x*s),dot:(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0),cross:(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]],norm:a=>{let l=Math.hypot(...a)||1;return a.map(x=>x/l)}};
+const I=()=>[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
+function mul(a,b){let c=new Array(16).fill(0);for(let j=0;j<4;j++)for(let i=0;i<4;i++)for(let k=0;k<4;k++)c[j*4+i]+=a[k*4+i]*b[j*4+k];return c}
+function trs(p=[0,0,0],r=[0,0,0],s=[1,1,1]){let [a,b,c]=r,ca=Math.cos(a),sa=Math.sin(a),cb=Math.cos(b),sb=Math.sin(b),cc=Math.cos(c),sc=Math.sin(c);let rx=[1,0,0,0,0,ca,sa,0,0,-sa,ca,0,0,0,0,1],ry=[cb,0,-sb,0,0,1,0,0,sb,0,cb,0,0,0,0,1],rz=[cc,sc,0,0,-sc,cc,0,0,0,0,1,0,0,0,0,1];let m=mul(rz,mul(ry,rx));for(let j=0;j<3;j++)for(let i=0;i<3;i++)m[j*4+i]*=s[j];m[12]=p[0];m[13]=p[1];m[14]=p[2];return m}
+function look(eye,target,up=[0,1,0]){let z=V.norm(V.sub(eye,target)),x=V.norm(V.cross(up,z)),y=V.cross(z,x);return [x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-V.dot(x,eye),-V.dot(y,eye),-V.dot(z,eye),1]}
+function perspective(fov,aspect,near=.05,far=60){let f=1/Math.tan(fov/2),nf=1/(near-far);return [f/aspect,0,0,0,0,f,0,0,0,0,(far+near)*nf,-1,0,0,2*far*near*nf,0]}
+function ortho(h,aspect,near=.01,far=50){let w=h*aspect;return [2/w,0,0,0,0,2/h,0,0,0,0,-2/(far-near),0,0,0,-(far+near)/(far-near),1]}
+function transform(m,p){let [x,y,z]=p,w=m[3]*x+m[7]*y+m[11]*z+m[15];return [(m[0]*x+m[4]*y+m[8]*z+m[12])/w,(m[1]*x+m[5]*y+m[9]*z+m[13])/w,(m[2]*x+m[6]*y+m[10]*z+m[14])/w]}
+const color=hex=>{if(Array.isArray(hex))return hex;let n=parseInt(hex.replace('#',''),16);return[(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]};
+class Node{constructor(geo=null,col='#ffffff',alpha=1){this.geo=geo;this.color=color(col);this.alpha=alpha;this.pos=[0,0,0];this.rot=[0,0,0];this.scale=[1,1,1];this.children=[];this.visible=true;this.shine=.25;this.glass=false;this.unlit=false;this.two=false;this.name='';this.world=I()}add(...n){this.children.push(...n);return this}at(x,y,z){this.pos=[x,y,z];return this}size(x,y=x,z=x){this.scale=[x,y,z];return this}}
+function geometry(p,n,idx){return {p:new Float32Array(p),n:new Float32Array(n),idx:new Uint16Array(idx),dirty:true}}
+function surface(nu,nv,fn){let p=[],n=[],idx=[];const e=.0003;for(let v=0;v<=nv;v++)for(let u=0;u<=nu;u++){let a=u/nu,b=v/nv,pt=fn(a,b),du=V.sub(fn(Math.min(1,a+e),b),fn(Math.max(0,a-e),b)),dv=V.sub(fn(a,Math.min(1,b+e)),fn(a,Math.max(0,b-e))),normal=V.norm(V.cross(du,dv));p.push(...pt);n.push(...normal)}for(let v=0;v<nv;v++)for(let u=0;u<nu;u++){let a=v*(nu+1)+u,b=a+1,c=a+nu+1,d=c+1;idx.push(a,b,c,b,d,c)}let g=geometry(p,n,idx);g.nu=nu;g.nv=nv;return g}
+function updateSurface(g,fn){const e=.0003;let k=0;for(let v=0;v<=g.nv;v++)for(let u=0;u<=g.nu;u++){let a=u/g.nu,b=v/g.nv,pt=fn(a,b),du=V.sub(fn(Math.min(1,a+e),b),fn(Math.max(0,a-e),b)),dv=V.sub(fn(a,Math.min(1,b+e)),fn(a,Math.max(0,b-e))),normal=V.norm(V.cross(du,dv));g.p.set(pt,k);g.n.set(normal,k);k+=3}g.dirty=true}
+function lathe(profile,seg=48){let p=[],n=[],idx=[];for(let j=0;j<profile.length;j++){let [rad,y]=profile[j],prev=profile[Math.max(0,j-1)],next=profile[Math.min(profile.length-1,j+1)],dr=next[0]-prev[0],dy=next[1]-prev[1];for(let i=0;i<=seg;i++){let a=i/seg*Math.PI*2,s=Math.sin(a),c=Math.cos(a);p.push(rad*s,y,rad*c);n.push(...V.norm([dy*s,-dr,dy*c]))}}for(let j=0;j<profile.length-1;j++)for(let i=0;i<seg;i++){let a=j*(seg+1)+i,b=a+1,c=a+seg+1,d=c+1;idx.push(a,b,c,b,d,c)}return geometry(p,n,idx)}
+const cylinder=(r,h)=>lathe([[0,-h/2],[r,-h/2],[r,h/2],[0,h/2]],40);
+const ring=(r,ri,h)=>lathe([[ri,-h/2],[r,-h/2],[r,h/2],[ri,h/2],[ri,-h/2]],48);
+const sphere=(r=1)=>surface(40,26,(u,v)=>{let a=u*2*Math.PI,b=v*Math.PI;return [r*Math.sin(b)*Math.cos(a),r*Math.cos(b),r*Math.sin(b)*Math.sin(a)]});
+const torus=(r,t)=>surface(36,6,(u,v)=>{let a=u*Math.PI*2,b=v*Math.PI*2;return[(r+t*Math.cos(b))*Math.sin(a),t*Math.sin(b),(r+t*Math.cos(b))*Math.cos(a)]});
+function box(w,h,d){let ps=[],ns=[],idx=[];let v=[[-w/2,-h/2,-d/2],[w/2,-h/2,-d/2],[w/2,h/2,-d/2],[-w/2,h/2,-d/2],[-w/2,-h/2,d/2],[w/2,-h/2,d/2],[w/2,h/2,d/2],[-w/2,h/2,d/2]];let f=[[0,3,2,1],[4,5,6,7],[0,4,7,3],[1,2,6,5],[0,1,5,4],[3,7,6,2]];for(let i=0;i<6;i++){let a=f[i],n=V.norm(V.cross(V.sub(v[a[1]],v[a[0]]),V.sub(v[a[2]],v[a[0]])));a.forEach(j=>{ps.push(...v[j]);ns.push(...n)});let k=i*4;idx.push(k,k+1,k+2,k,k+2,k+3)}return geometry(ps,ns,idx)}
+function tube(points,r=.025,segments=8){let p=[],n=[],idx=[];for(let j=0;j<points.length;j++){let a=points[Math.max(0,j-1)],b=points[Math.min(points.length-1,j+1)],dir=V.norm(V.sub(b,a)),side=V.norm(V.cross(dir,Math.abs(dir[1])>.9?[1,0,0]:[0,1,0])),other=V.cross(side,dir);for(let i=0;i<=segments;i++){let t=i/segments*Math.PI*2,nn=V.add(V.mul(side,Math.cos(t)),V.mul(other,Math.sin(t)));p.push(...V.add(points[j],V.mul(nn,r)));n.push(...nn)}}for(let j=0;j<points.length-1;j++)for(let i=0;i<segments;i++){let a=j*(segments+1)+i,b=a+1,c=a+segments+1,d=c+1;idx.push(a,b,c,b,d,c)}return geometry(p,n,idx)}
+function line(a,b,r=.02,col='#456a73'){let dir=V.sub(b,a),len=Math.hypot(...dir),obj=new Node(cylinder(r,len),col).at(...V.mul(V.add(a,b),.5));obj.rot=[Math.acos(Math.max(-1,Math.min(1,dir[1]/len))),Math.atan2(dir[0],dir[2]),0];return obj}
+class Renderer{
+ constructor(canvas){this.canvas=canvas;let gl=canvas.getContext('webgl',{alpha:true,premultipliedAlpha:true,antialias:true,preserveDrawingBuffer:true,depth:true});if(!gl){this.ctx=canvas.getContext('2d');this.ratio=1;if(!this.ctx)throw Error('画布不可用');return;}this.gl=gl;this.cache=new WeakMap();const vs=`attribute vec3 aP;attribute vec3 aN;uniform mat4 uM,uVP;varying vec3 N,W;void main(){vec4 p=uM*vec4(aP,1.0);W=p.xyz;N=normalize(mat3(uM)*aN);gl_Position=uVP*p;}`;const fs=`precision mediump float;
+varying vec3 N,W;
+uniform vec3 uColor,uEye;
+uniform float uAlpha,uShine,uUnlit,uGlass;
+void main(){
+ vec3 n=normalize(N);if(!gl_FrontFacing)n=-n;
+ vec3 l=normalize(vec3(-.6,1.,1.)),v=normalize(uEye-W);
+ float d=max(dot(n,l),0.),d2=max(dot(n,normalize(vec3(.8,.5,-.5))),0.);
+ float sp=pow(max(dot(n,normalize(l+v)),0.),45.)*uShine;
+ float rim=pow(1.-clamp(abs(dot(n,v)),0.,1.),2.2);
+ vec3 c=pow(uColor,vec3(2.2));
+ vec3 lit=c*(.55+.62*d+.2*d2)+vec3(sp+.035*rim);
+ vec3 rgb=pow(clamp(mix(lit,c,uUnlit),0.,1.),vec3(1./2.2));
+ float alpha=uAlpha;
+ if(uGlass>.5){
+  // B-style teaching plastic: clear blue-grey edges and studio reflection bands.
+  // The centre stays translucent so air particles remain visible.
+  vec3 r=reflect(-v,n);
+  float key=exp(-pow((r.x+.42)*7.5,2.))*smoothstep(-.15,.6,r.z);
+  float fill=exp(-pow((r.x-.72)*13.,2.))*smoothstep(-.15,.6,r.z);
+  rgb=mix(uColor,vec3(.13,.29,.37),rim*.86)*(.89+.15*d+.08*d2);
+  rgb=mix(rgb,vec3(.97,.995,1.),clamp(.86*key+.44*fill,0.,.94));
+  alpha=clamp(uAlpha+.36*rim+.16*key,0.,.91);
+ }
+ gl_FragColor=vec4(rgb,alpha);
+}`;
+ this.prog=this.program(vs,fs);this.loc={};['uM','uVP','uColor','uEye','uAlpha','uShine','uUnlit','uGlass'].forEach(k=>this.loc[k]=gl.getUniformLocation(this.prog,k));this.ap=gl.getAttribLocation(this.prog,'aP');this.an=gl.getAttribLocation(this.prog,'aN');this.pProg=this.program(`attribute vec3 aP;attribute vec4 aC;uniform mat4 uVP;uniform float uSize;varying vec4 C;void main(){C=aC;gl_Position=uVP*vec4(aP,1.0);gl_PointSize=uSize;}`,`precision mediump float;varying vec4 C;void main(){float d=length(gl_PointCoord-vec2(.5));if(d>.5)discard;gl_FragColor=vec4(C.rgb,C.a*(1.0-smoothstep(.3,.5,d)));}`);this.pp=gl.getAttribLocation(this.pProg,'aP');this.pc=gl.getAttribLocation(this.pProg,'aC');this.pbuf=gl.createBuffer();this.cbuf=gl.createBuffer();gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LEQUAL);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ONE,gl.ONE_MINUS_SRC_ALPHA);this.ratio=1;
+ }
+ program(v,f){let gl=this.gl,pr=gl.createProgram();for(let [src,type]of[[v,gl.VERTEX_SHADER],[f,gl.FRAGMENT_SHADER]]){let sh=gl.createShader(type);gl.shaderSource(sh,src);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(sh));gl.attachShader(pr,sh)}gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(pr));return pr}
+ resize(w,h,ratio=1){this.ratio=ratio;this.canvas.width=Math.max(1,Math.round(w*ratio));this.canvas.height=Math.max(1,Math.round(h*ratio));}
+ prepare(cam,aspect){cam.view=look(cam.eye,cam.target);cam.projection=cam.ortho?ortho(cam.ortho,aspect):perspective(cam.fov||.55,aspect);cam.vp=mul(cam.projection,cam.view);return cam}
+ render(root,cam,rect=null,points=null){if(this.ctx)return renderCanvas.call(this,root,cam,points);let gl=this.gl;const [x,y,w,h]=rect||[0,0,this.canvas.width,this.canvas.height];gl.enable(gl.SCISSOR_TEST);gl.viewport(x,y,w,h);gl.scissor(x,y,w,h);gl.clearColor(0,0,0,0);gl.depthMask(true);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);this.prepare(cam,w/h);let opaque=[],trans=[];
+ const visit=(o,parent)=>{if(!o.visible)return;o.world=mul(parent,trs(o.pos,o.rot,o.scale));if(o.geo&&o.alpha>.001){o.depth=V.dot(V.sub([o.world[12],o.world[13],o.world[14]],cam.eye),V.norm(V.sub(cam.target,cam.eye)));(o.alpha>=.999?opaque:trans).push(o)}for(let child of o.children)visit(child,o.world)};visit(root,I());gl.useProgram(this.prog);gl.uniformMatrix4fv(this.loc.uVP,false,cam.vp);gl.uniform3fv(this.loc.uEye,cam.eye);gl.disable(gl.CULL_FACE);gl.disable(gl.BLEND);opaque.forEach(o=>this.draw(o));
+ if(points&&points.p.length)this.points(points,cam,8*this.ratio);
+ gl.useProgram(this.prog);gl.enable(gl.BLEND);gl.depthMask(false);trans.sort((a,b)=>b.depth-a.depth);for(let o of trans){if(o.two){gl.enable(gl.CULL_FACE);gl.cullFace(gl.FRONT);this.draw(o);gl.cullFace(gl.BACK);this.draw(o);gl.disable(gl.CULL_FACE)}else this.draw(o)}gl.depthMask(true);gl.disable(gl.SCISSOR_TEST);}
+ disposeGeometry(g){if(!this.gl)return;const b=this.cache.get(g);if(b){this.gl.deleteBuffer(b.p);this.gl.deleteBuffer(b.n);this.gl.deleteBuffer(b.i);this.cache.delete(g)}}
+ draw(o){let gl=this.gl,g=o.geo,b=this.cache.get(g);if(!b){b={p:gl.createBuffer(),n:gl.createBuffer(),i:gl.createBuffer()};this.cache.set(g,b);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,b.i);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,g.idx,gl.STATIC_DRAW);g.dirty=true}if(g.dirty){gl.bindBuffer(gl.ARRAY_BUFFER,b.p);gl.bufferData(gl.ARRAY_BUFFER,g.p,gl.DYNAMIC_DRAW);gl.bindBuffer(gl.ARRAY_BUFFER,b.n);gl.bufferData(gl.ARRAY_BUFFER,g.n,gl.DYNAMIC_DRAW);g.dirty=false}gl.bindBuffer(gl.ARRAY_BUFFER,b.p);gl.enableVertexAttribArray(this.ap);gl.vertexAttribPointer(this.ap,3,gl.FLOAT,false,0,0);gl.bindBuffer(gl.ARRAY_BUFFER,b.n);gl.enableVertexAttribArray(this.an);gl.vertexAttribPointer(this.an,3,gl.FLOAT,false,0,0);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,b.i);gl.uniformMatrix4fv(this.loc.uM,false,o.world);gl.uniform3fv(this.loc.uColor,o.color);gl.uniform1f(this.loc.uAlpha,o.alpha);gl.uniform1f(this.loc.uShine,o.shine);gl.uniform1f(this.loc.uUnlit,o.unlit?1:0);gl.uniform1f(this.loc.uGlass,o.glass?1:0);gl.drawElements(gl.TRIANGLES,g.idx.length,gl.UNSIGNED_SHORT,0)}
+ points(d,cam,size){let gl=this.gl;gl.useProgram(this.pProg);gl.enable(gl.BLEND);gl.depthMask(false);gl.bindBuffer(gl.ARRAY_BUFFER,this.pbuf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(d.p),gl.DYNAMIC_DRAW);gl.enableVertexAttribArray(this.pp);gl.vertexAttribPointer(this.pp,3,gl.FLOAT,false,0,0);gl.bindBuffer(gl.ARRAY_BUFFER,this.cbuf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(d.c),gl.DYNAMIC_DRAW);gl.enableVertexAttribArray(this.pc);gl.vertexAttribPointer(this.pc,4,gl.FLOAT,false,0,0);gl.uniformMatrix4fv(gl.getUniformLocation(this.pProg,'uVP'),false,cam.vp);gl.uniform1f(gl.getUniformLocation(this.pProg,'uSize'),size);gl.drawArrays(gl.POINTS,0,d.p.length/3);gl.depthMask(true);}
+}
+ function renderCanvas(root,cam,points){const ctx=this.ctx,w=this.canvas.width,h=this.canvas.height;this.prepare(cam,w/h);ctx.clearRect(0,0,w,h);const list=[],light=V.norm([-.6,1,1]),light2=V.norm([.8,.5,-.5]);
+ const visit=(o,parent)=>{if(!o.visible)return;o.world=mul(parent,trs(o.pos,o.rot,o.scale));if(o.geo&&o.alpha>.001){const g=o.geo,m=o.world,vp=mul(cam.vp,m),p=g.p,n=g.n;let scr=[],world=[];
+ for(let i=0;i<p.length;i+=3){let pos=[p[i],p[i+1],p[i+2]],v=transform(vp,pos);scr.push([(v[0]+1)*w*.5,(1-v[1])*h*.5,v[2]]);world.push(transform(m,pos));}
+ if(!g.faces){g.faces=[];for(let i=0;i<g.idx.length;i+=6){let a=Array.from(g.idx.slice(i,i+6));let f=a[0]===a[3]?[a[0],a[1],a[2],a[5]]:[a[0],a[1],a[4],a[2]];g.faces.push(f)}}
+ for(const f of g.faces){let s=f.map(i=>scr[i]);if(s.some(v=>!Number.isFinite(v[0])))continue;if(s.every(v=>v[0]<0)||s.every(v=>v[0]>w)||s.every(v=>v[1]<0)||s.every(v=>v[1]>h))continue;let normal=[0,0,0],center=[0,0,0];for(let i of f){normal=V.add(normal,[n[i*3],n[i*3+1],n[i*3+2]]);center=V.add(center,world[i]);}center=V.mul(center,.25);normal=V.norm([m[0]*normal[0]+m[4]*normal[1]+m[8]*normal[2],m[1]*normal[0]+m[5]*normal[1]+m[9]*normal[2],m[2]*normal[0]+m[6]*normal[1]+m[10]*normal[2]]);let view=V.norm(V.sub(cam.eye,center)),front=V.dot(normal,view)>0;if(o.alpha>=.999&&!front)continue;if(!front)normal=V.mul(normal,-1);let d=Math.max(0,V.dot(normal,light)),d2=Math.max(0,V.dot(normal,light2)),sp=Math.pow(Math.max(0,V.dot(normal,V.norm(V.add(light,view)))),45)*o.shine,shade=.55+.62*d+.2*d2;let col=o.color.map(c=>Math.round(clamp01(Math.pow(Math.pow(c,2.2)*shade+sp,1/2.2))*255));let coverage=o.alpha;if(o.glass){let nv=Math.max(0,Math.min(1,Math.abs(V.dot(normal,view)))),edge=Math.pow(1-nv,2.2),r=V.sub(V.mul(normal,2*V.dot(normal,view)),view),fade=Math.max(0,Math.min(1,(r[2]+.15)/.75));fade=fade*fade*(3-2*fade);let key=Math.exp(-Math.pow((r[0]+.42)*7.5,2))*fade,fill=Math.exp(-Math.pow((r[0]-.72)*13,2))*fade,refl=Math.min(.94,.86*key+.44*fill);col=o.color.map((c,j)=>{let base=(c*(1-edge*.86)+[.13,.29,.37][j]*edge*.86)*(.89+.15*d+.08*d2);return Math.round(clamp01(base*(1-refl)+[.97,.995,1][j]*refl)*255)});coverage=Math.min(.91,o.alpha+.36*edge+.16*key)}if(o.unlit)col=o.color.map(x=>Math.round(x*255));list.push({z:s.reduce((t,v)=>t+v[2],0)/4,s,col,alpha:coverage});}
+ }for(let child of o.children)visit(child,o.world)};
+ const clamp01=v=>Math.max(0,Math.min(1,v));visit(root,I());
+ if(points)for(let i=0;i<points.p.length;i+=3){let p=transform(cam.vp,points.p.slice(i,i+3)),c=points.c.slice(i/3*4,i/3*4+4);list.push({z:p[2],point:[(p[0]+1)*w/2,(1-p[1])*h/2],col:c.slice(0,3).map(x=>Math.round(x*255)),alpha:c[3]})}
+ list.sort((a,b)=>b.z-a.z);for(let f of list){ctx.globalAlpha=f.alpha;ctx.fillStyle=`rgb(${f.col.join(',')})`;ctx.beginPath();if(f.point){ctx.arc(f.point[0],f.point[1],4.5*this.ratio,0,Math.PI*2);}else{ctx.moveTo(f.s[0][0],f.s[0][1]);for(let i=1;i<f.s.length;i++)ctx.lineTo(f.s[i][0],f.s[i][1]);ctx.closePath();}ctx.fill();if(!f.point&&f.alpha>.99){ctx.strokeStyle=ctx.fillStyle;ctx.lineWidth=.5;ctx.stroke()}}ctx.globalAlpha=1;
+ }
+
+return {V,I,mul,trs,look,perspective,ortho,transform,Node,geometry,surface,updateSurface,lathe,cylinder,ring,sphere,torus,box,tube,line,Renderer,color};})();
+
+/* Qualitative air-network model, isothermal lumped reservoirs.
+   Source structure: 教科版《科学》四上《自制打气筒》教材 p24–25.
+   Parameters are illustrative, NOT measured material or flow data.
+   Fixed drilled holes intentionally survive assembly undo/removal. */
+class AirModel {
+ constructor(getAssembly,getHoles){this.getA=getAssembly;this.getH=getHoles;this.reset()}
+ reset(){this.n=100;this.b=2;this.x=0;this.t=0;this.press=false;this.used=false;this.qTop=0;this.qSide=0;this.lift=0;this.outside=0;this.strokes=0;this.last='idle';this.lastAt=-9;this.previousBalloon=false;}
+ get volume(){return 100*(1-.60*this.x)}
+ get pressure(){return this.n/this.volume}
+ get balloonPressure(){let e=Math.max(0,this.b-2);return 1+.075*(1-Math.exp(-e/5))+.00019*e;}
+ isValve(){let a=this.getA(),h=this.getH();return a.bottle&&a.cap==='bottle'&&h.cap&&a.strip==='cap'&&a.fixedCap&&!a.stripPunched;}
+ sideOpen(){const a=this.getA(),h=this.getH();return a.bottle&&h.body&&(a.holeMode==='open'||(a.holeMode==='auto'&&!this.press));}
+ startPress(){let a=this.getA();if(!a.bottle)return; if(!this.press)this.strokes++;this.press=true;this.used=true;this.last='press';this.lastAt=this.t;}
+ release(){this.press=false;if(this.used){this.last='release';this.lastAt=this.t;}}
+ step(dt){const a=this.getA(),h=this.getH();this.t+=dt;if(!a.bottle){this.n=100;this.b=2;this.x=0;this.qTop=0;this.qSide=0;this.lift=0;this.previousBalloon=false;return;}
+  if(!a.balloon)this.b=2;else if(!this.previousBalloon)this.b=2;this.previousBalloon=a.balloon;
+  const p=this.pressure;
+  let dx=this.press?(.74-this.x)*6.0-Math.max(0,p-1.23)*3.0:-this.x*4.1+Math.max(0,1-p)*11.0;
+  this.x=Math.max(0,Math.min(.8,this.x+dx*dt));
+  let p1=this.pressure,p2=a.balloon?this.balloonPressure:1;
+  let G=a.cap==='bottle'?(h.cap?150:0):390;
+  let strip=(a.strip==='mouth'||(a.cap==='bottle'&&a.strip==='cap'))&&!a.stripPunched;
+  if(strip&&!this.isValve())G*=.65;
+  let diff=p1-p2,q;
+  if(this.isValve())q=G*Math.max(0,diff-.004);
+  else q=G*diff;
+  // Stable finite reservoirs; no reverse transfer out of an empty balloon.
+  if(a.balloon&&q<0)q=-Math.min(-q,Math.max(0,this.b-2)/dt);
+  if(q>0)q=Math.min(q,Math.max(0,this.n-.5)/dt);
+  let side=this.sideOpen()?900*(p1-1):0;
+  if(side>0)side=Math.min(side,Math.max(0,this.n-.5)/dt-q);
+  let dn=q*dt,ds=side*dt;
+  this.n=Math.max(.5,this.n-dn-ds);
+  if(a.balloon)this.b=Math.max(2,this.b+dn);else this.outside+=dn;
+  this.outside+=ds;
+  this.qTop+=(q-this.qTop)*Math.min(1,dt*20);
+  this.qSide+=(side-this.qSide)*Math.min(1,dt*20);
+  // Leaflet opens by pressure DIFFERENCE, not by a hard-coded press animation.
+  let want=this.isValve()?Math.max(0,Math.min(1,(diff-.004)*13)):strip?Math.min(1,Math.abs(diff)*6):0;
+  if(a.cap==='bottle'&&!h.cap)want=0;this.lift+=(want-this.lift)*Math.min(1,dt*18);
+ }
+ summary(){return {n:this.n,b:this.b,x:this.x,pressure:this.pressure,balloonPressure:this.balloonPressure,qTop:this.qTop,qSide:this.qSide,lift:this.lift,valve:this.isValve(),sideOpen:this.sideOpen(),strokes:this.strokes}}
+}
+if(typeof module!=='undefined')module.exports={AirModel};
+
+'use strict';
+(()=>{
+const $=id=>document.getElementById(id), $$=s=>Array.from(document.querySelectorAll(s));
+const {V,Node,Renderer,geometry,surface,updateSurface,lathe,cylinder,ring,sphere,torus,box,tube,line,transform,color}=G3;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),mix=(a,b,t)=>a+(b-a)*t, ease=t=>t*t*(3-2*t), copy=o=>JSON.parse(JSON.stringify(o));
+const MATERIALS=[['bottle','矿泉水瓶'],['cap','瓶盖'],['punch','打孔器'],['strip','长条气球皮'],['balloon','气球'],['tape','透明胶带']];
+const initAssembly=()=>({bottle:false,bx:0,cap:'tray',strip:'tray',stripPunched:false,tapeCap:false,tapeMouth:false,tapeBalloon:false,fixedCap:false,fixedMouth:false,balloon:false,holeMode:'auto'});
+let A=initAssembly(),holes={cap:false,body:false,bodyY:2.24,bodyAngle:.25,strip:false},history=[],settings={particles:false,valve:false,paused:false},selected=null,drag=null,orbit=null,activePress=null,releaseAt=0,anim=null,now=0,dirty=true,lastGeoX=-1,lastValveLift=-99,lastBallB=-1,view={yaw:.28,pitch:.18,distance:10.8};
+let toastId;let pressSite={y:1.50,a:.28};let bottleHoleKey="";
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(toastId);toastId=setTimeout(()=>$('toast').classList.remove('show'),2100)}
+function status(t){$('status').textContent=t}
+function record(){history.push(copy(A));if(history.length>40)history.shift();$('undoBtn').disabled=false}
+const physics=new AirModel(()=>A,()=>holes);
+let renderer,zoomRenderer;
+try{renderer=new Renderer($('scene'));zoomRenderer=new Renderer($('zoomCanvas'))}catch(e){$('loader').innerHTML='<div class="error">此浏览器未能启动 3D 图形。<br>请开启图形加速，或使用支持 WebGL 的 Chrome / Edge。<br><button class="btn" onclick="location.reload()">重新打开</button></div>';console.error(e);return}
+const root=new Node(),zoomRoot=new Node(),stage=$('stage');
+const camera={eye:[3,4.4,10],target:[.55,2.5,0],fov:.58};
+const zcam={eye:[.92,.83,1.25],target:[0,-.025,0],ortho:1.06};
+const make=(g,c,alpha=1)=>new Node(g,c,alpha);
+const baseProfile=[[.0,0],[.38,.025],[.53,.035],[.59,.13],[.61,.28],[.61,.46],[.61,2.12],[.58,2.34],[.48,2.55],[.32,2.76],[.237,2.91],[.237,3.19]];
+function radiusAt(y){for(let i=1;i<baseProfile.length;i++)if(y<=baseProfile[i][1]){let p=baseProfile[i-1],q=baseProfile[i];let r=mix(p[0],q[0],(y-p[1])/(q[1]-p[1]||1));if(y>.4&&y<2.3)r+=.018*Math.cos((y-.4)*Math.PI*12);return r}return .237}
+function squeezeWeight(y){return Math.exp(-Math.pow((y-1.56)/.87,4))}
+function bottleSurface(s){return(u,v)=>{let y=v*3.19,a=u*2*Math.PI,r=radiusAt(y);return [r*Math.sin(a)*(1-.42*s*squeezeWeight(y)),y,r*Math.cos(a)*(1-.22*s*squeezeWeight(y))]}}
+
+const BODY_HOLE_RADIUS=.074;
+function sidewallPoint(y,a,s=physics.x,depth=0){
+ const r=radiusAt(y)-depth,w=squeezeWeight(y);return[(r*Math.sin(a))*(1-.42*s*w),y,(r*Math.cos(a))*(1-.22*s*w)];
+}
+function bodySite(){return{y:holes.bodyY,a:holes.bodyAngle??.25};}
+function bodyOpeningAngle(y,r=BODY_HOLE_RADIUS){
+ const dy=y-holes.bodyY;if(Math.abs(dy)>=r)return 0;
+ return Math.asin(clamp(Math.sqrt(Math.max(0,r*r-dy*dy))/radiusAt(y),0,.9));
+}
+function piercedBottleSurface(s){return(u,v)=>{
+ const c=holes.bodyY,r=BODY_HOLE_RADIUS;
+ const y=v<.4?(c-r)*v/.4:v<=.6?c-r+(v-.4)/.2*2*r:c+r+(v-.6)/.4*(3.19-c-r);
+ const gap=bodyOpeningAngle(y),a=(holes.bodyAngle??.25)+gap+u*(Math.PI*2-gap*2);
+ return sidewallPoint(y,a,s);
+};}
+function boreSurface(s,part){return(u,v)=>{
+ const t=u*Math.PI*2;
+ const depth=part==='bevel'?v*.012:.012+v*.047;
+ const r=part==='bevel'?BODY_HOLE_RADIUS-v*.006:BODY_HOLE_RADIUS-.006-v*.003;
+ const y=holes.bodyY+r*Math.sin(t),a=(holes.bodyAngle??.25)+Math.asin(clamp(r*Math.cos(t)/radiusAt(y),-.95,.95));
+ return sidewallPoint(y,a,s,depth);
+};}
+function ribSurface(y,s){return(u,v)=>{
+ const rr=radiusAt(y)+.004,t=v*Math.PI*2;
+ const gap=holes.body?bodyOpeningAngle(y,BODY_HOLE_RADIUS+.011):0;
+ const a=(holes.bodyAngle??.25)+gap+u*(Math.PI*2-gap*2),w=squeezeWeight(y);
+ return[(rr+.010*Math.cos(t))*Math.sin(a)*(1-.42*s*w),y+.010*Math.sin(t),(rr+.010*Math.cos(t))*Math.cos(a)*(1-.22*s*w)];
+};}
+function filterBottleGloss(g){
+ if(!g.fullIdx)g.fullIdx=new Uint16Array(g.idx);
+ if(!holes.body){g.idx=new Uint16Array(g.fullIdx);g.dirty=true;return;}
+ const kept=[],hy=holes.bodyY,ha=holes.bodyAngle??.25,r=BODY_HOLE_RADIUS+.007;
+ for(let i=0;i<g.fullIdx.length;i+=3){let near=false;for(let j=0;j<3;j++){const k=g.fullIdx[i+j]*3,y=g.p[k+1],w=squeezeWeight(y),x=g.p[k]/(1-.42*physics.x*w),z=g.p[k+2]/(1-.22*physics.x*w);const da=Math.atan2(Math.sin(Math.atan2(x,z)-ha),Math.cos(Math.atan2(x,z)-ha));if((da*radiusAt(y))**2+(y-hy)**2<r*r){near=true;break;}}if(!near)kept.push(g.fullIdx[i],g.fullIdx[i+1],g.fullIdx[i+2]);}
+ g.idx=new Uint16Array(kept);g.dirty=true;delete g.faces;
+}
+function rebuildBodySurface(s){
+ const key=holes.body?`${holes.bodyY.toFixed(4)}:${holes.bodyAngle.toFixed(4)}`:'solid';
+ if(key!==bottleHoleKey){renderer.disposeGeometry(bottle.shell.geo);bottle.shell.geo=holes.body?surface(80,120,piercedBottleSurface(s)):surface(64,84,bottleSurface(s));bottleHoleKey=key;}
+ else updateSurface(bottle.shell.geo,holes.body?piercedBottleSurface(s):bottleSurface(s));
+ if(bottle.gloss){renderer.disposeGeometry(bottle.gloss.geo);updateSurface(bottle.gloss.geo,bottleGloss(s));filterBottleGloss(bottle.gloss.geo);}
+ for(const o of bottle.g.children)if(o.userY!==undefined){o.scale=[1,1,1];updateSurface(o.geo,ribSurface(o.userY,s));}
+ if(holes.body){updateSurface(bodyHole.bevel.geo,boreSurface(s,'bevel'));updateSurface(bodyHole.wall.geo,boreSurface(s,'wall'));}
+}
+
+function bottleGloss(s){return(u,v)=>{
+ let y=.26+v*2.73,w=Math.pow(Math.sin(Math.PI*v),.45),a=-.43+(u-.5)*.14*w,r=radiusAt(y)+.009;
+ return[r*Math.sin(a)*(1-.42*s*squeezeWeight(y)),y,r*Math.cos(a)*(1-.22*s*squeezeWeight(y))];
+}}
+function bottleModel(){
+ let g=new Node(),shell=make(surface(64,84,bottleSurface(0)),'#7eafc0',.44);
+ shell.two=true;shell.shine=.75;shell.glass=true;g.add(shell);
+ let gloss=make(surface(12,50,bottleGloss(0)),'#ffffff',.64);gloss.unlit=true;g.add(gloss);
+ for(let y of [.18,.44,.74,1.05,1.36,1.66,1.95,2.22,3.02,3.12]){
+  let t=make(surface(64,6,ribSurface(y,0)),'#4a879c',.45);t.two=true;t.shine=.30;g.add(t);t.userY=y;
+ }
+ let neck=make(ring(.252,.217,.035),'#82b4c6',.9).at(0,3.20,0);neck.shine=.8;g.add(neck);
+ let lip=make(torus(.237,.008),'#9cbfca',.68).at(0,3.216,0);lip.shine=.3;g.add(lip);
+ return{g,shell,gloss};
+}
+function capModel(){
+ const g=new Node();
+ const skirt=make(lathe([[.248,-.238],[.280,-.238],[.294,-.220],[.294,-.018],[.286,.018],[.248,.018],[.248,-.238]],64),'#387d8b');skirt.shine=.20;g.add(skirt);
+ const lid=make(lathe([[0,-.016],[.286,-.016],[.286,.018],[.280,.024],[0,.024]],64),'#438b98');lid.shine=.22;g.add(lid);
+ const drilled=new Node();
+ const plate=make(lathe([[.068,-.016],[.286,-.016],[.286,.018],[.280,.024],[.078,.024],[.068,.012],[.068,-.016]],72),'#438b98');plate.shine=.20;
+ // Open inner wall and shallow chamfer. There is deliberately NO disk in the hole.
+ const bore=make(lathe([[.0778,.0238],[.068,.011],[.068,-.053],[.064,-.059]],64),'#34444a');bore.shine=.06;
+ drilled.add(plate,bore);drilled.visible=false;g.add(drilled);
+ const inner=make(ring(.246,.228,.165),'#397381').at(0,-.115,0);inner.shine=.12;g.add(inner);
+ const helix=[];for(let i=0;i<=150;i++){const a=i/150*Math.PI*5.4;helix.push([.228*Math.sin(a),-.045-i/150*.155,.228*Math.cos(a)]);}const thread=make(tube(helix,.006,6),'#2e606d');thread.shine=.1;g.add(thread);
+ for(let i=0;i<36;i++){let a=i*Math.PI*2/36;let rib=make(box(.010,.170,.010),'#2e6c79').at(.296*Math.sin(a),-.119,.296*Math.cos(a));rib.rot[1]=a;rib.shine=.15;g.add(rib);}
+ return{g,lid,drilled,bore};
+}
+function stripShape(lift=0,loose=0,time=0){return(u,v)=>{let q=(u-.5)*2,a=Math.abs(q),x=Math.sign(q)*(a<.69?a/.69*.302:.302+(a-.69)*.018),y=.044;if(a<.69)y+=lift*.22*Math.pow(1-Math.pow(a/.69,2),1.3);else y-=(a-.69)/.31*.265;let flutter=loose*.045*Math.sin(time*15+u*7)*(.3+a);return[x,y+flutter,(v-.5)*.255+loose*.013*Math.sin(time*12)]}}
+function piercedStripShape(side,lift=0,loose=0,time=0){return(u,v)=>{
+ const z=(v-.5)*.255,r=.034,gap=Math.abs(z)<r?Math.sqrt(Math.max(0,r*r-z*z))*.69/.604:0;
+ const uu=side<0?u*(.5-gap):.5+gap+u*(.5-gap);
+ return stripShape(lift,loose,time)(uu,v);
+};}
+function stripModel(){
+ const g=new Node(),membrane=make(surface(48,12,stripShape()),'#ac6bb6',.78);membrane.shine=.45;g.add(membrane);
+ const left=make(surface(26,32,piercedStripShape(-1)),'#ac6bb6',.78),right=make(surface(26,32,piercedStripShape(1)),'#ac6bb6',.78);left.shine=right.shine=.45;left.visible=right.visible=false;g.add(left,right);return{g,membrane,left,right};
+}
+function syncStripMesh(o,lift,loose,t){
+ o.membrane.visible=!holes.strip;o.left.visible=o.right.visible=!!holes.strip;
+ if(holes.strip){updateSurface(o.left.geo,piercedStripShape(-1,lift,loose,t));updateSurface(o.right.geo,piercedStripShape(1,lift,loose,t));}
+ else updateSurface(o.membrane.geo,stripShape(lift,loose,t));
+}
+function flatStrip(){let g=new Node(),m=make(box(.34,1.05,.02),'#b073bc',.88);m.rot=[0,0,-.27];g.add(m);return g}
+function tapeModel(){let g=new Node();let outer=make(ring(.275,.17,.21),'#dbe7ce',.7);outer.rot=[Math.PI/2,0,0];outer.shine=.7;g.add(outer);let core=make(ring(.175,.142,.214),'#bdab89');core.rot=[Math.PI/2,0,0];g.add(core);let free=make(box(.23,.35,.013),'#dce8d2',.55).at(.23,-.25,0);free.rot=[0,0,-.35];g.add(free);return g}
+function punchModel(){let g=new Node();let h=make(lathe([[.05,.23],[.11,.32],[.13,.62],[.10,.78],[.0,.80]],32),'#dca34e');h.shine=.3;g.add(h);g.add(make(cylinder(.065,.08),'#466b73').at(0,.23,0));g.add(make(lathe([[0,-.28],[.014,-.23],[.024,.18]],24),'#b8c3c9'));return g}
+function balloonGeometry(radius=.24,stretch=.24){radius=Math.max(.24,radius);let profile=[[.30,-.17],[.30,-.10],[.285,.04],[.235,.16],[.20,.25]];let theta0=Math.asin(Math.min(.98,.20/radius));for(let i=1;i<=32;i++){let theta=mix(theta0,Math.PI,i/32),r=radius*Math.sin(theta),y=.25+2*stretch*(Math.cos(theta0)-Math.cos(theta))/(1+Math.cos(theta0));profile.push([Math.max(.002,r),y])}return lathe(profile,40)}
+function balloonModel(){let g=new Node();let bulb=make(balloonGeometry(), '#57c748',.88);bulb.shine=.92;bulb.two=true;g.add(bulb);let lip=make(torus(.30,.024),'#3eae37').at(0,-.10,0);g.add(lip);return {g,bulb,lip}}
+function balloonIcon(){let g=new Node(),m=make(sphere(), '#57c748');m.size(.3,.4,.29);m.at(0,.13,0);g.add(m);g.add(make(cylinder(.08,.17),'#3fac38').at(0,-.31,0));g.add(make(torus(.083,.015),'#389b31').at(0,-.4,0));return g}
+function fingerModel(){
+ const g=new Node();
+ const skin=make(surface(36,54,(u,v)=>{
+  const a=u*Math.PI*2,x=-.135+v*1.16;
+  const tip=v<.13?Math.sqrt(Math.max(0,1-((v-.13)/.13)**2)):1;
+  const r=(.087+.020*v+.009*Math.exp(-Math.pow((v-.47)/.075,2))+.008*Math.exp(-Math.pow((v-.76)/.07,2)))*tip;
+  return[x,Math.sin(a)*r*.96-.05*v*v,.093+Math.cos(a)*r+.19*v*v];
+ }),'#d9a787');skin.shine=.09;g.add(skin);
+ const pad=make(sphere(),'#dfae8e');pad.size(.134,.080,.038).at(-.004,-.006,.039);pad.shine=.035;g.add(pad);
+ const nail=make(surface(22,12,(u,v)=>{
+  const x=-.055+u*.22,w=.058*Math.pow(Math.max(.02,Math.sin(Math.PI*u)),.24),y=(v-.5)*2*w;
+  return[x,y+.005,.178+.012*Math.sin(u*Math.PI)-.018*((v-.5)*2)**2];
+ }),'#f1d2bc');nail.shine=.30;nail.two=true;g.add(nail);
+ const lip=[];for(let i=0;i<=16;i++){const y=(i/16-.5)*.10;lip.push([-.041+.016*(y/.05)**2,y+.005,.180-.012*(y/.05)**2]);}g.add(make(tube(lip,.0018,5),'#f7e2d0'));
+ for(const x of[.38,.42,.70]){const points=[];for(let i=0;i<=20;i++){const yy=(i/20-.5)*.147,t=(x+.135)/1.16;points.push([x+.010*(yy/.0735)**2,yy-.05*t*t,.093+.19*t*t+Math.sqrt(Math.max(.001,.10**2-yy**2))+.001]);}const crease=make(tube(points,.0019,5),'#b5866c',.65);crease.shine=0;g.add(crease);}
+ return g;
+}
+function bandGeometry(progress=1,r=.305){return surface(60,1,(u,v)=>{let a=u*Math.PI*2*progress;return[r*Math.sin(a),-.102-v*.135,r*Math.cos(a)]})}
+function shadow(x,z,r=.9){let g=new Node().at(x,.012,z);for(let i=0;i<6;i++){let disk=make(cylinder(r*(1-i*.075),.001),'#70998c',.026);disk.at(0,i*.0004,0);g.add(disk)}return g}
+// World-space objects are deliberately separable for later asset replacement.
+const bottle=bottleModel();root.add(bottle.g);const cap=capModel();root.add(cap.g);const strip=stripModel();root.add(strip.g);const balloon=balloonModel();root.add(balloon.g);const band=make(bandGeometry(),'#e1e8cb',.55);band.two=true;root.add(band);const extraBand=make(bandGeometry(),'#e1e8cb',.48);extraBand.two=true;root.add(extraBand);
+const bodyHole=new Node();
+bodyHole.bevel=make(surface(64,5,boreSurface(0,'bevel')),'#53656b',.96);bodyHole.bevel.shine=.06;
+bodyHole.wall=make(surface(64,6,boreSurface(0,'wall')),'#28363c',1);bodyHole.wall.shine=0;
+bodyHole.add(bodyHole.bevel,bodyHole.wall);root.add(bodyHole);
+const finger=fingerModel();root.add(finger);
+const platform=make(cylinder(1.35,.033),'#dce9e3',.48).at(0,-.04,0);root.add(platform);const stageRing=make(torus(1.36,.008),'#b3cdc0',.65).at(0,-.017,0);root.add(stageRing);
+const bottleShadow=shadow(0,0,.86),capShadow=shadow(1.65,.4,.46);root.add(bottleShadow,capShadow);
+const ghostModels={bottle:bottleModel().g,cap:capModel().g,punch:punchModel(),strip:flatStrip(),balloon:balloonIcon(),tape:tapeModel()};const ghostRoot=new Node();root.add(ghostRoot);Object.values(ghostModels).forEach(o=>{o.visible=false;ghostRoot.add(o)});
+const punchVisual=punchModel(),tapeVisual=tapeModel();root.add(punchVisual,tapeVisual);const wrapPreview=make(bandGeometry(.001),'#d9e6c9',.55);wrapPreview.two=true;root.add(wrapPreview);
+const zneck=new Node();
+const znShell=make(ring(.238,.214,.40),'#81aab9',.42).at(0,-.26,0);znShell.two=true;znShell.glass=true;zneck.add(znShell);
+for(const y of[-.08,-.17,-.27]){const tr=make(torus(.243,.009),'#658e9e',.7).at(0,y,0);tr.shine=.25;zneck.add(tr);}
+zoomRoot.add(zneck);const zcap=capModel();zoomRoot.add(zcap.g);const zstrip=stripModel();zoomRoot.add(zstrip.g);const zband=make(bandGeometry(),'#dbe5c9',.66);zband.two=true;zoomRoot.add(zband);for(const carrier of [band,zband,extraBand]){carrier.add(make(torus(.308,.006),'#b6c5a4',.60).at(0,-.102,0),make(torus(.308,.006),'#e9ecda',.65).at(0,-.237,0));}
+const zArrows=new Node();zoomRoot.add(zArrows);const worldArrows=new Node();root.add(worldArrows);
+function arrowMesh(points,col,alpha=.6){let g=new Node();g.add(make(tube(points,.012,6),col,alpha));let a=points[points.length-2],b=points[points.length-1],d=V.sub(b,a),len=Math.hypot(...d);let head=make(lathe([[0,-.055],[.045,-.055],[0,.045]],16),col,alpha).at(...b);head.rot=[Math.acos(clamp(d[1]/len,-1,1)),Math.atan2(d[0],d[2]),0];g.add(head);return g}
+// Arrow paths bypass the strip's free side edges: no flow through the rubber.
+let arrowNodes={};
+function buildArrows(){zArrows.children=[];worldArrows.children=[];let paths={straight:[[0,-.35,0],[0,-.04,0],[0,.14,0],[0,.48,0]],out:[[0,-.35,0],[0,-.04,0],[0,.085,0],[0,.13,.20],[0,.37,.25]],out2:[[0,-.24,0],[0,-.04,0],[0,.085,0],[0,.13,-.20],[0,.37,-.25]],back:[[0,.43,.05],[0,.25,.05],[0,.075,.05]],leak:[[0,.43,.13],[0,.15,.19],[0,.02,.16],[0,-.12,0],[0,-.32,0]]};for(let[k,p]of Object.entries(paths)){let c=(k==='back'||k==='leak')?'#b56c65':'#d09b40',z=arrowMesh(p,c,.48),w=arrowMesh(p,c,.35);zArrows.add(z);worldArrows.add(w);arrowNodes[k]={z,w}}let blocked=make(box(.19,.015,.055),'#b76e68',.65).at(0,.062,.05);zArrows.add(blocked);arrowNodes.blocked={z:blocked,w:new Node()}}
+buildArrows();
+// Thumbnail images are rendered from the same local XYZ models, not remote pictures.
+const thumbs={};
+function generateThumbs(){
+ const icons={bottle:bottleModel().g,cap:capModel().g,punch:punchModel(),strip:flatStrip(),balloon:balloonIcon(),tape:tapeModel()};
+ const views={bottle:{eye:[2.3,1.1,6.8],target:[0,.05,0],ortho:3.65},cap:{eye:[.8,.85,1.3],target:[0,-.10,0],ortho:1.0},punch:{eye:[1.1,.95,3.1],target:[0,.26,0],ortho:1.35},strip:{eye:[1,.6,4],target:[0,0,0],ortho:1.4},balloon:{eye:[1,.6,4],target:[0,.03,0],ortho:1.17},tape:{eye:[.8,.5,1.7],target:[0,-.04,0],ortho:.99}};
+ for(const[id,node]of Object.entries(icons)){
+  const iconRoot=new Node();if(id==='bottle')node.at(0,-1.52,0);iconRoot.add(node);
+  renderer.resize(176,204,1.5);renderer.render(iconRoot,views[id]);thumbs[id]=renderer.canvas.toDataURL('image/png');
+ }
+}
+generateThumbs();
+$('materials').innerHTML=MATERIALS.map(([id,name])=>`<div class="item" role="button" tabindex="0" data-item="${id}" aria-label="${name}，拖拽或点击选择"><span class="dot"></span><span class="punched" hidden>有孔</span><img draggable="false" src="${thumbs[id]}" alt="${name}的3D模型"><span class="name">${name}</span><button class="return" type="button" data-return="${id}" title="取回${name}" aria-label="取回${name}">↶</button></div>`).join('');
+function updateUI(){const placed={bottle:A.bottle,cap:A.cap!=='tray',strip:A.strip!=='tray',balloon:A.balloon,tape:A.tapeCap||A.tapeMouth||A.tapeBalloon};$$('[data-item]').forEach(el=>{el.classList.toggle('placed',!!placed[el.dataset.item]);el.classList.toggle('selected',selected===el.dataset.item);const badge=el.querySelector('.punched');badge.hidden=!(el.dataset.item==='bottle'?holes.body:el.dataset.item==='cap'?holes.cap:el.dataset.item==='strip'?holes.strip:false)});$('emptyLabel').hidden=A.bottle;$('moveHandle').hidden=!A.bottle;$('holeControls').hidden=!A.bottle||!holes.body;$('zoomBox').hidden=!settings.valve;$('particleBtn').setAttribute('aria-pressed',settings.particles);$('valveBtn').setAttribute('aria-pressed',settings.valve);$('pauseIcon').setAttribute('d',settings.paused?'M8 5l11 7-11 7z':'M8 5v14M16 5v14');$$('[data-hole]').forEach(el=>el.classList.toggle('active',el.dataset.hole===A.holeMode));$('undoBtn').disabled=!history.length;dirty=true;}
+function isInStage(x,y){let r=stage.getBoundingClientRect();return x>=r.left&&x<r.right&&y>=r.top&&y<r.bottom}
+function project(p){const r=stage.getBoundingClientRect();let a=transform(camera.vp,p);return {x:r.left+(a[0]+1)*r.width/2,y:r.top+(1-a[1])*r.height/2}}
+function ray(x,y){const r=stage.getBoundingClientRect(),nx=(x-r.left)/r.width*2-1,ny=1-(y-r.top)/r.height*2;let f=V.norm(V.sub(camera.target,camera.eye)),right=V.norm(V.cross(f,[0,1,0])),up=V.cross(right,f),t=Math.tan(camera.fov/2);return{origin:camera.eye,dir:V.norm(V.add(f,V.add(V.mul(right,nx*t*r.width/r.height),V.mul(up,ny*t))))}}
+function planeAt(x,y,z=.45){let r=ray(x,y),t=(z-r.origin[2])/r.dir[2];return V.add(r.origin,V.mul(r.dir,t))}
+function capPosition(){return A.cap==='bottle'?[A.bx,3.39,0]:[1.65,.37,.4]}
+function mouthPosition(){return [A.bx,A.cap==='bottle'?3.39:3.22,0]}
+function stripPosition(){return A.strip==='cap'?capPosition():[A.bx,3.22,0]}
+function screenDist(x,y,p){let v=project(p);return Math.hypot(x-v.x,y-v.y)}
+function bodyPoint(site=bodySite()){
+ const p=sidewallPoint(site.y,site.a);p[0]+=A.bx;return p;
+}
+function bodyNormal(site=bodySite()){
+ const a=sidewallPoint(site.y,site.a-.002),b=sidewallPoint(site.y,site.a+.002),c=sidewallPoint(site.y-.002,site.a),d=sidewallPoint(site.y+.002,site.a);
+ return V.norm(V.cross(V.sub(b,a),V.sub(d,c)));
+}
+function bottleHit(x,y,drilling=false){
+ const rr=ray(x,y);let prev=0;
+ for(let t=.3;t<25;t+=.035){let p=V.add(rr.origin,V.mul(rr.dir,t)),ly=p[1];if(ly<.12||ly>2.88)continue;
+  let r=radiusAt(ly),w=squeezeWeight(ly),sx=1-.42*physics.x*w,sz=1-.22*physics.x*w;
+  if(((p[0]-A.bx)/sx)**2+(p[2]/sz)**2<r*r){
+   // Refine the visible wall intersection rather than drilling a fixed front point.
+   let lo=t-.035,hi=t;for(let i=0;i<9;i++){let m=(lo+hi)/2,q=V.add(rr.origin,V.mul(rr.dir,m)),ww=squeezeWeight(q[1]),r0=radiusAt(q[1]);if(((q[0]-A.bx)/(1-.42*physics.x*ww))**2+(q[2]/(1-.22*physics.x*ww))**2<r0*r0)hi=m;else lo=m;}
+   p=V.add(rr.origin,V.mul(rr.dir,hi));if(drilling&&(p[1]<.34||p[1]>2.66))return null;return p;
+  }
+ }return null;
+}
+function siteFromPoint(p){let y=clamp(p[1],.34,2.66),w=squeezeWeight(y);return{y,a:Math.atan2((p[0]-A.bx)/(1-.42*physics.x*w),p[2]/(1-.22*physics.x*w))};}
+function pendingBodySite(){
+ if(anim?.type==='punch'&&anim.kind==='body')return anim.site;
+ if(drag?.id==='punch'&&drag.moved){const hit=bottleHit(drag.x,drag.y,true);if(hit)return siteFromPoint(hit);}
+ return bodySite();
+}
+
+function targetFor(item,x,y){// Shelf cap can be drilled or dressed before installation.
+ let capTile=document.querySelector('[data-item="cap"]').getBoundingClientRect();
+ if(A.cap==='tray'&&['punch','strip','tape'].includes(item)&&x>capTile.left&&x<capTile.right&&y>capTile.top&&y<capTile.bottom)return 'capTray';
+ if(!isInStage(x,y))return null;
+ let cp=capPosition(),neck=mouthPosition();
+ if(item==='bottle')return 'stage';
+ if(item==='cap')return A.bottle&&screenDist(x,y,neck)<100?'neck':'bench';
+ if(item==='punch'){
+  if(A.cap!=='tray'&&screenDist(x,y,cp)<58)return 'cap';
+  if(A.bottle&&bottleHit(x,y,true))return 'body';
+  return null;
+ }
+ if(['strip','tape'].includes(item)){
+  if(A.cap==='bench'&&screenDist(x,y,cp)<80)return 'cap';
+  if(A.bottle&&screenDist(x,y,neck)<110)return A.cap==='bottle'?'cap':'mouth';
+  return null;
+ }
+ if(item==='balloon'&&A.bottle&&screenDist(x,y,neck)<130)return 'neck';
+ return null;
+}
+function setTarget(el,p,label,active){const r=stage.getBoundingClientRect(),q=project(p);el.style.left=(q.x-r.left)+'px';el.style.top=(q.y-r.top)+'px';el.dataset.label=label;el.classList.toggle('show',active)}
+function showTargets(){
+ const id=drag?drag.id:selected;
+ setTarget($('neckTarget'),mouthPosition(),'瓶口',!!id&&A.bottle&&['cap','strip','balloon','tape'].includes(id));
+ setTarget($('capTarget'),capPosition(),'瓶盖',!!id&&A.cap!=='tray'&&['punch','strip','tape'].includes(id));
+ const drilling=!!id&&A.bottle&&id==='punch',hover=drilling&&drag?.moved&&drag.target==='body';
+ const a=clamp(view.yaw,-Math.PI,Math.PI);
+ for(const [el,y,label]of[['bodyUpperTarget',2.35,'上部'],['bodyMiddleTarget',1.50,'中部'],['bodyLowerTarget',.64,'下部']])setTarget($(el),bodyPoint({y,a}),label,drilling&&!hover&&!holes.body);
+ setTarget($('bodyTarget'),bodyPoint(pendingBodySite()),holes.body?'已开孔':'在这里打孔',drilling&&(hover||holes.body));
+}
+function selectMaterial(id){selected=selected===id?null:id;updateUI();showTargets();if(selected)status({bottle:'把矿泉水瓶放到实验台上。',cap:'瓶盖可放在桌面操作，也可拧到瓶口。',punch:'把打孔器移到瓶盖，或选择瓶身上、中、下部打孔。',strip:'把长条气球皮放到瓶盖或瓶口。',balloon:'把气球移到瓶口，观察套入过程。',tape:'把透明胶带移到瓶口周围，观察缠绕过程。'}[id]);else status('直接点击瓶身按压；松开观察回弹。')}
+function clearSelection(){selected=null;drag=null;$$('[data-item]').forEach(e=>e.classList.remove('selected'));$('ghost').style.display='none';$('toolChip').hidden=true;$('shelf').classList.remove('drop-return');Object.values(ghostModels).forEach(o=>o.visible=false);wrapPreview.visible=false;showTargets()}
+function blocked(msg){toast(msg);return false}
+function moveToCapTray(){if(A.cap==='tray'){A.cap='bench';}}
+function doAction(id,target,xy=null){if(anim)return blocked('这一处操作尚未结束。');if(!target)return blocked(id==='tape'?'胶带只能缠在瓶口或瓶盖周围。':'请把材料移到亮起的操作位置。');
+ if(id==='bottle'){if(A.bottle)return blocked('瓶子已在实验台，可拖动瓶底移动。');record();A.bottle=true;A.bx=0;physics.reset();anim={type:'bottle',t:0,duration:.58};status('瓶子已竖直放好，可以自由添加材料。');}
+ if(id==='cap'){
+  if(target==='neck'&&A.balloon)return blocked('先取下气球，再安装瓶盖。');if(target==='neck'&&A.strip==='mouth')return blocked('瓶口已有气球皮；先取回，再安装瓶盖。');
+  record();let from=A.cap==='tray'?planeAt(xy?.x||project([0,4,0]).x,xy?.y||project([0,4,0]).y):capPosition();A.cap=target==='neck'?'bottle':'bench';anim={type:'cap',t:0,duration:.7,from};status(target==='neck'?'瓶盖正在拧入瓶口。':'瓶盖放在桌面，可以单独加工。');
+ }
+ if(id==='punch'){
+  let kind=target==='body'?'body':'cap';
+  if(kind==='cap'&&A.balloon&&A.cap==='bottle')return blocked('先取下气球，再对瓶盖打孔。');
+  if(holes[kind]&&!(kind==='cap'&&A.strip==='cap'&&!holes.strip))return blocked(kind==='body'?'瓶身已有一个孔；重置后可选择其他位置。':'这里已经有孔；重置才能恢复完整材料。');
+  if(target==='capTray'){record();moveToCapTray();}
+  // Material damage is committed when the punch contacts the surface.
+  let site=bodySite();if(kind==='body'&&xy){const hit=bottleHit(xy.x,xy.y,true);if(!hit)return blocked('请在瓶身上、中、下部选择位置。');site=siteFromPoint(hit);}
+  anim={type:'punch',kind,site,t:0,duration:.85,done:false};status(kind==='cap'?(A.strip==='cap'?'正在给瓶盖和气球皮一起打孔。':'打孔器正在给瓶盖打孔。'):'打孔器正在穿透选中的瓶壁。');
+ }
+ if(id==='strip'){
+  if(A.balloon&&target!=='capTray'&&!(target==='cap'&&A.cap==='bench'))return blocked('先取下气球，再放入气球皮。');
+  record();if(target==='capTray')moveToCapTray();A.strip=(target==='mouth')?'mouth':'cap';A.stripPunched=!!holes.strip;A.fixedCap=false;A.fixedMouth=false;anim={type:'strip',t:0,duration:.65};status('长条气球皮两端压贴，中间区域保留活动空间。');
+ }
+ if(id==='tape'){
+  record();if(target==='capTray')moveToCapTray();let where=target==='mouth'?'mouth':'cap';
+  let overBalloon=A.balloon&&!(where==='cap'&&A.cap==='bench');
+  anim={type:'tape',where,overBalloon,t:0,duration:1.25};status('透明胶带正在绕瓶口上缘缠绕。');
+ }
+ if(id==='balloon'){
+  if(A.balloon)return blocked('气球已经套好，可直接按压瓶身。');
+  record();A.balloon=true;physics.b=2;anim={type:'balloon',t:0,duration:.75};status(A.cap==='bottle'?'气球口正在张开，套到瓶盖外侧。':'气球口正在张开，套到瓶口。');
+ }
+ clearSelection();updateUI();return true;
+}
+function takeBack(id){if(anim&&anim.type==='punch')return blocked('正在打孔，请待打孔器退出后取回。');record();anim=null;physics.release();releaseAt=0;
+ if(id==='bottle'){A.bottle=false;A.balloon=false;if(A.cap==='bottle')A.cap='bench';if(A.strip==='mouth'){A.strip='tray';A.stripPunched=!!holes.strip;}A.tapeMouth=false;A.fixedMouth=false;A.tapeBalloon=false;}
+ if(id==='cap'){A.cap='tray';if(A.strip==='cap'){A.strip='tray';A.stripPunched=!!holes.strip;}A.fixedCap=false;A.tapeCap=false;A.balloon=false;A.tapeBalloon=false;}
+ if(id==='strip'){A.strip='tray';A.stripPunched=!!holes.strip;A.fixedCap=false;A.fixedMouth=false;}
+ if(id==='balloon'){A.balloon=false;A.tapeBalloon=false;physics.b=2;}
+ if(id==='tape'){A.tapeCap=false;A.tapeMouth=false;A.tapeBalloon=false;A.fixedCap=false;A.fixedMouth=false;}
+ clearSelection();updateUI();status('材料已取回；打出的孔仍然保留。');}
+function undo(){if(!history.length)return;anim=null;physics.release();releaseAt=0;A=history.pop();A.stripPunched=!!holes.strip;physics.reset();clearSelection();updateUI();status('已撤回上一次装配；孔洞保留。');lastGeoX=-1;lastBallB=-1;}
+function reset(){clearTimeout(toastId);$('toast').classList.remove('show');A=initAssembly();holes={cap:false,body:false,bodyY:2.24,bodyAngle:.25,strip:false};history=[];anim=null;drag=null;orbit=null;activePress=null;releaseAt=0;settings={particles:false,valve:false,paused:false};physics.reset();selected=null;view={yaw:.28,pitch:.18,distance:10.8};$('hints').hidden=true;$('hintBtn').setAttribute('aria-expanded','false');clearSelection();lastGeoX=-1;lastValveLift=-99;lastBallB=-1;updateUI();status('从左侧取材料，自由尝试你的想法。');}
+function startBodyPress(id){if(anim||settings.paused)return;if(!A.bottle)return;physics.startPress();activePress=id;releaseAt=0;status(holes.body&&A.holeMode==='auto'?'正在按压瓶身，手指同时堵住小孔。':'正在按压瓶身，观察装置的变化。');}
+function endBodyPress(){if(activePress===null)return;activePress=null;const dur=physics.t-physics.lastAt;if(dur<.64)releaseAt=physics.lastAt+.64;else{physics.release();status('松开瓶身，观察回弹和气球的变化。')}}
+function beginDrag(id,e,from='shelf'){if(e.button!==undefined&&e.button!==0)return;drag={id,from,x0:e.clientX,y0:e.clientY,x:e.clientX,y:e.clientY,moved:false,pointer:e.pointerId,target:null,hoverTime:0};$('ghost').src=thumbs[id]||'';}
+function updateDrag(e){if(!drag||e.pointerId!==drag.pointer)return;drag.x=e.clientX;drag.y=e.clientY;let dist=Math.hypot(drag.x-drag.x0,drag.y-drag.y0);if(dist>5)drag.moved=true;if(!drag.moved)return;let target=targetFor(drag.id,drag.x,drag.y);if(target!==drag.target)drag.hoverTime=0;drag.target=target;showTargets();const inStage=isInStage(drag.x,drag.y);$('ghost').style.display=inStage?'none':'block';$('ghost').style.left=drag.x+'px';$('ghost').style.top=drag.y+'px';$('shelf').classList.toggle('drop-return',!inStage&&drag.from!=='shelf');Object.entries(ghostModels).forEach(([k,n])=>n.visible=inStage&&k===drag.id);
+ if(inStage){let wp=planeAt(drag.x,drag.y,.9);ghostModels[drag.id].pos=wp;if(drag.id==='bottle')ghostModels[drag.id].pos[1]-=1.5;let chip=$('toolChip'),r=stage.getBoundingClientRect();chip.style.left=(drag.x-r.left)+'px';chip.style.top=(drag.y-r.top-38)+'px';chip.hidden=false;chip.textContent=target?{punch:target==='body'?'松开打瓶身孔':'松开打瓶盖孔',tape:'松开完成缠绕',strip:'松开压贴两端',cap:target==='bench'?'放在桌面':'松开拧上瓶盖',balloon:'松开套入',bottle:'松开竖直放好'}[drag.id]:'移到合适的位置';}
+}
+function endDrag(e){if(!drag||e.pointerId!==drag.pointer)return;let d=drag;if(!d.moved){drag=null;selectMaterial(d.id);return;}let target=targetFor(d.id,e.clientX,e.clientY);const shelf=$('shelf').getBoundingClientRect();if(d.from!=='shelf'&&e.clientX>=shelf.left&&e.clientX<=shelf.right&&e.clientY>=shelf.top&&e.clientY<=shelf.bottom){takeBack(d.id);return}drag=null;Object.values(ghostModels).forEach(n=>n.visible=false);if(target)doAction(d.id,target,{x:e.clientX,y:e.clientY});else{clearSelection();toast('未放置，材料已回到原处。');}updateUI()}
+$$('[data-item]').forEach(el=>{el.addEventListener('pointerdown',e=>{if(e.target.closest('[data-return]'))return;e.preventDefault();if(anim)return;beginDrag(el.dataset.item,e);el.setPointerCapture(e.pointerId)});el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectMaterial(el.dataset.item)}})});
+$$('[data-return]').forEach(el=>el.addEventListener('click',e=>{e.stopPropagation();takeBack(el.dataset.return)}));
+window.addEventListener('pointermove',e=>{if(drag){updateDrag(e);return}if(orbit&&e.pointerId===orbit.id){view.yaw=orbit.yaw+(e.clientX-orbit.x)*.008;view.pitch=clamp(orbit.pitch+(e.clientY-orbit.y)*.005,-.04,.75);dirty=true;}if(moving&&e.pointerId===moving.id){let p=planeAt(e.clientX,e.clientY,0);A.bx=clamp(moving.bx+p[0]-moving.wx,-1.8,1.2);dirty=true;}});
+window.addEventListener('pointerup',e=>{if(drag){endDrag(e);return}if(activePress===e.pointerId)endBodyPress();if(orbit&&orbit.id===e.pointerId)orbit=null;if(moving&&moving.id===e.pointerId){const r=$('shelf').getBoundingClientRect();if(e.clientX<r.right&&e.clientY>=r.top){A.bx=moving.bx;takeBack('bottle')}moving=null;}});
+window.addEventListener('pointercancel',()=>{endBodyPress();clearSelection();orbit=null;moving=null});window.addEventListener('blur',()=>{physics.release();activePress=null;releaseAt=0;drag=null;orbit=null;});
+$('scene').addEventListener('pointerdown',e=>{e.preventDefault();if(anim)return;$('scene').setPointerCapture(e.pointerId);if(selected){let target=targetFor(selected,e.clientX,e.clientY);doAction(selected,target,{x:e.clientX,y:e.clientY});return;}
+ if(A.bottle&&holes.body&&screenDist(e.clientX,e.clientY,bodyPoint())<20){A.holeMode=A.holeMode==='open'?'closed':'open';updateUI();status(A.holeMode==='open'?'小孔已打开。':'小孔已堵住。');return;}
+ if(A.cap==='bench'&&screenDist(e.clientX,e.clientY,capPosition())<38){beginDrag('cap',e,'bench');return;}
+ if(A.bottle){const hit=bottleHit(e.clientX,e.clientY);if(hit){pressSite=siteFromPoint(hit);startBodyPress(e.pointerId);return;}}
+ if(A.cap==='bottle'&&screenDist(e.clientX,e.clientY,capPosition())<24){beginDrag('cap',e,'bottle');return;}
+ if(A.balloon&&screenDist(e.clientX,e.clientY,[A.bx,3.9+balloonRadius().h*.7,0])<46){beginDrag('balloon',e,'bottle');return;}
+ orbit={id:e.pointerId,x:e.clientX,y:e.clientY,yaw:view.yaw,pitch:view.pitch};
+});
+$('scene').addEventListener('wheel',e=>{e.preventDefault();view.distance=clamp(view.distance*Math.exp(e.deltaY*.001),6.5,15);dirty=true},{passive:false});
+let moving=null;$('moveHandle').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();if(anim)return;record();let p=planeAt(e.clientX,e.clientY,0);moving={id:e.pointerId,bx:A.bx,wx:p[0]};$('moveHandle').setPointerCapture(e.pointerId)});
+$('undoBtn').onclick=undo;$('resetBtn').onclick=reset;
+$('particleBtn').onclick=()=>{settings.particles=!settings.particles;updateUI()};$('valveBtn').onclick=()=>{settings.valve=!settings.valve;updateUI();resize()};
+$('hintBtn').onclick=()=>{let hidden=!$('hints').hidden;$('hints').hidden=hidden;$('hintBtn').setAttribute('aria-expanded',!hidden)};
+$('pauseBtn').onclick=()=>{settings.paused=!settings.paused;if(settings.paused){activePress=null;releaseAt=0;}updateUI();status(settings.paused?'已暂停，可旋转并仔细观察。':'继续观察。');};
+$('homeView').onclick=()=>{view={yaw:.28,pitch:.18,distance:10.8};dirty=true};
+$('fullBtn').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){toast('浏览器未允许网页全屏，请使用浏览器全屏功能。')}};
+$$('[data-hole]').forEach(el=>el.onclick=()=>{A.holeMode=el.dataset.hole;updateUI();status({auto:'按压时手指堵孔，松手时移开。',open:'小孔保持打开，再试着按压瓶身。',closed:'小孔保持堵住，再试着按压和松手。'}[A.holeMode])});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'){clearSelection();$('hints').hidden=true;$('hintBtn').setAttribute('aria-expanded','false');physics.release();activePress=null;releaseAt=0;}if(e.code==='Space'&&!e.repeat&&e.target===$('scene')){e.preventDefault();startBodyPress('keyboard')}if((e.ctrlKey||e.metaKey)&&e.key==='z'){e.preventDefault();undo()}});window.addEventListener('keyup',e=>{if(e.code==='Space'&&activePress==='keyboard')endBodyPress()});
+function balloonRadius(){let e=Math.max(0,physics.b-2),grow=Math.pow(1-Math.exp(-e/155),.50);const r=.34+.76*grow,h=.36+.78*grow;return {r,h}}
+const sampleGas=Array.from({length:320},(_,i)=>({u:Math.random(),v:Math.random(),w:Math.random(),a:Math.random()*6.28,s:.3+Math.random()*.5}));
+function drawGas(){let data={p:[],c:[]};if(!settings.particles||!A.bottle)return data;let count=clamp(Math.round(physics.n*.85),3,115),t=physics.t;
+ for(let i=0;i<count;i++){let s=sampleGas[i],y=.17+2.62*(.5+.47*Math.sin(s.u*24+t*s.s)),a=s.a+t*(i%2?1:-1)*.42,rad=(.2+.74*s.w)*Math.max(.05,radiusAt(y)-.04),xx=rad*Math.cos(a)*(1-.42*physics.x*squeezeWeight(y)),zz=rad*Math.sin(a)*(1-.22*physics.x*squeezeWeight(y));data.p.push(A.bx+xx,y,zz);data.c.push(.9,.22,.18,.92);}
+ if(A.balloon){let count=clamp(Math.round(physics.b*.5),2,130),bh=balloonRadius(),by=mouthPosition()[1]+.33+bh.h;for(let i=0;i<count;i++){let s=sampleGas[i+130],a=s.a+t*.36,b=s.v*3.14,r=.78*Math.cbrt(s.w);data.p.push(A.bx+bh.r*r*Math.sin(b)*Math.cos(a),by+bh.h*r*Math.cos(b),bh.r*r*Math.sin(b)*Math.sin(a));data.c.push(.9,.26,.2,.76)}}
+ let q=physics.qTop;if(Math.abs(q)>1){const forward=q>0,mp=mouthPosition(),N=clamp(Math.ceil(Math.abs(q)*.18),3,18),activeStrip=A.strip!=='tray'&&!A.stripPunched;for(let i=0;i<N;i++){let f=(t*.9+i/N)%1;if(!forward)f=1-f;let p;if(activeStrip){let k=i%2?1:-1;let pts=[[0,-.65,0],[0,-.1,0],[0,.06,0],[0,.09+physics.lift*.12,k*.19],[0,.38,k*.24],[.18,.7,k*.18]];p=onPath(pts,f);}else{p=onPath([[0,-.65,0],[0,-.1,0],[0,.08,0],[0,.72,0]],f);}data.p.push(mp[0]+p[0],mp[1]+p[1],p[2]);data.c.push(...(forward?[.9,.22,.18,.94]:[.76,.18,.18,.88]))}}
+ let side=physics.qSide;if(holes.body&&Math.abs(side)>2){let p=bodyPoint(),normal=bodyNormal(),out=side>0,N=12;for(let i=0;i<N;i++){let f=(t*.8+i/N)%1;if(!out)f=1-f;data.p.push(p[0]+normal[0]*f*.85,p[1]+normal[1]*f*.85,p[2]+normal[2]*f*.85);data.c.push(...(out?[.9,.22,.18,.9]:[.78,.16,.16,.88]))}}
+ return data;
+}
+function onPath(points,t){let lens=[],total=0;for(let i=1;i<points.length;i++){let l=Math.hypot(...V.sub(points[i],points[i-1]));lens.push(l);total+=l}let s=clamp(t,0,1)*total;for(let i=0;i<lens.length;i++){if(s<=lens[i]||i===lens.length-1)return points[i].map((v,j)=>mix(v,points[i+1][j],s/lens[i]));s-=lens[i]}return points[0]}
+function zoomGas(){let data={p:[],c:[]};if(!settings.particles)return data;let q=physics.qTop;if(Math.abs(q)>.8){const activeStrip=A.strip!=='tray'&&!A.stripPunched;for(let i=0;i<20;i++){let f=(physics.t*.8+i/20)%1;if(q<0)f=1-f;let p;if(activeStrip){let branch=i%2?-1:1;p=onPath([[0,-.45,0],[0,-.04,0],[0,.075,0],[0,.1+physics.lift*.1,branch*.185],[0,.42,branch*.23]],f);}else{p=onPath([[0,-.45,0],[0,-.04,0],[0,.08,0],[0,.46,0]],f);}data.p.push(...p);data.c.push(...(q>0?[.92,.2,.18,.98]:[.78,.16,.18,.92]));}}return data;}
+function applyAnimation(dt){if(!anim)return;anim.t+=dt;const p=clamp(anim.t/anim.duration,0,1);if(anim.type==='punch'&&p>.43&&!anim.done){holes[anim.kind]=true;if(anim.kind==='body'){holes.bodyY=anim.site.y;holes.bodyAngle=anim.site.a;}if(anim.kind==='cap'&&A.strip==='cap'){holes.strip=true;A.stripPunched=true;}anim.done=true;dirty=true;updateUI()}
+ if(p>=1){const a=anim;anim=null;if(a.type==='stripBlow'){A.strip='tray';A.stripPunched=!!holes.strip;A.fixedCap=false;A.fixedMouth=false;A.tapeCap=false;A.tapeMouth=false;lastValveLift=-99;updateUI();return;}if(a.type==='tape'){
+  if(a.overBalloon){A.tapeBalloon=true;status('胶带已缠在气球口外侧。');}
+  else if(a.where==='cap'){A.tapeCap=true;A.fixedCap=A.strip==='cap';status('胶带已缠好，可以直接按压瓶身观察。');}
+  else{A.tapeMouth=true;A.fixedMouth=A.strip==='mouth';status('胶带已缠好，可以直接按压瓶身观察。');}
+ }else if(a.type==='punch')status('孔已保留。可继续组装或直接按压瓶身。');else status('可以继续组装，也可直接按压瓶身。');lastGeoX=-1;lastValveLift=-99;updateUI();}
+}
+function synchronize(){const p=anim?ease(clamp(anim.t/anim.duration,0,1)):1;const cp=capPosition(),mp=mouthPosition();
+ bottle.g.visible=A.bottle;bottle.g.pos=[A.bx,anim?.type==='bottle'?(1-p)*.7:0,0];platform.pos[0]=A.bx;stageRing.pos[0]=A.bx;bottleShadow.pos[0]=A.bx;bottleShadow.visible=A.bottle;
+ cap.g.visible=A.cap!=='tray';capShadow.visible=A.cap==='bench';cap.g.pos=cp.slice();cap.g.rot=[0,0,0];if(anim?.type==='cap'){cap.g.pos=cp.map((v,i)=>mix(anim.from[i],v,p));cap.g.rot[1]=(1-p)*Math.PI*3;}cap.lid.visible=!holes.cap;cap.drilled.visible=holes.cap;
+ strip.g.visible=A.strip!=='tray';strip.g.pos=stripPosition();strip.g.rot=[0,0,0];if(anim?.type==='strip')strip.g.pos[1]+=(1-p)*.85;if(anim?.type==='stripBlow'){strip.g.pos=[mix(anim.from[0],anim.from[0]+1.05,p),mix(anim.from[1],anim.from[1]+1.15,p),mix(anim.from[2],anim.from[2]+.24*Math.sin(p*Math.PI),p)];strip.g.rot=[0,0,mix(anim.rot[2]||0,.95,p)];}
+ let fixed=A.strip==='cap'?A.fixedCap:A.fixedMouth,loose=A.strip!=='tray'&&!fixed?Math.min(.8,Math.abs(physics.qTop)*.014):0;
+ if(A.strip==='cap'&&A.cap!=='bottle')loose=0;let lift=physics.lift;if(A.cap==='bottle'&&!holes.cap)lift=0;
+ syncStripMesh(strip,lift,loose,physics.t);
+ balloon.g.visible=A.bottle&&A.balloon;balloon.g.pos=mp.slice();balloon.g.pos[1]+=.025;if(anim?.type==='balloon'){balloon.g.pos[1]+=(1-p)*.9;balloon.g.scale=[1+.35*Math.sin(p*Math.PI),1,1+.35*Math.sin(p*Math.PI)]}else balloon.g.scale=[1,1,1];
+ if(Math.abs(physics.b-lastBallB)>.08||dirty){let bh=balloonRadius();renderer.disposeGeometry(balloon.bulb.geo);balloon.bulb.geo=balloonGeometry(bh.r,bh.h);lastBallB=physics.b;}
+ balloon.bulb.alpha=settings.particles?.23:.78;balloon.bulb.shine=settings.particles?.3:.8;
+ band.visible=(A.cap!=='tray'&&A.tapeCap)||(A.bottle&&A.tapeMouth);band.pos=A.tapeCap?cp.slice():mp.slice();band.scale=[1,1,1];
+ extraBand.visible=A.tapeBalloon&&A.balloon;extraBand.pos=mp.slice();extraBand.scale=[1.1,1,1.1];
+ bodyHole.visible=A.bottle&&holes.body;bodyHole.pos=[A.bx,0,0];bodyHole.rot=[0,0,0];
+ let covered=holes.body&&!physics.sideOpen();finger.visible=A.bottle&&(covered||physics.press);
+ let fs=covered?bodySite():pressSite;
+ if(!covered&&holes.body&&Math.abs(fs.y-holes.bodyY)<.22)fs={y:clamp(holes.bodyY-.32,.35,2.65),a:fs.a};
+ finger.pos=bodyPoint(fs);finger.rot=[0,fs.a,-.20];
+ let x=physics.x;if(Math.abs(x-lastGeoX)>.0006||dirty){rebuildBodySurface(x);lastGeoX=x;}
+ bottle.shell.alpha=settings.particles?.27:.44;if(bottle.gloss)bottle.gloss.alpha=settings.particles?.38:.64;
+ punchVisual.visible=anim?.type==='punch';tapeVisual.visible=anim?.type==='tape';wrapPreview.visible=false;
+ if(anim?.type==='punch'){let b=anim.kind==='body',target=b?bodyPoint(anim.site):cp,sp=Math.sin(clamp(anim.t/anim.duration,0,1)*Math.PI);punchVisual.pos=target.slice();if(b){let n=bodyNormal(anim.site);punchVisual.rot=[Math.acos(clamp(n[1],-1,1)),Math.atan2(n[0],n[2]),0];punchVisual.pos=V.add(target,V.mul(n,.54-.28*sp));}else{punchVisual.rot=[0,0,0];punchVisual.pos[1]+=.54-.28*sp;}}
+ if(anim?.type==='tape'){let center=anim.where==='cap'?cp:mp;let t=anim.t/anim.duration,a=t*Math.PI*4;tapeVisual.pos=[center[0]+Math.sin(a)*.52,center[1]-.16,center[2]+Math.cos(a)*.52];tapeVisual.scale=[.65,.65,.65];tapeVisual.rot=[0,a,0];wrapPreview.visible=true;wrapPreview.pos=center.slice();renderer.disposeGeometry(wrapPreview.geo);wrapPreview.geo=bandGeometry(Math.min(1,t*1.2));}
+ if(drag?.moved&&drag.id==='tape'&&drag.target){let center=drag.target==='mouth'?mp:cp;let a=drag.hoverTime*5;wrapPreview.visible=true;wrapPreview.pos=center.slice();renderer.disposeGeometry(wrapPreview.geo);wrapPreview.geo=bandGeometry(clamp(drag.hoverTime*.65,.02,1));ghostModels.tape.pos=[center[0]+Math.sin(a)*.48,center[1]-.16,center[2]+Math.cos(a)*.48];ghostModels.tape.rot=[0,a,0];}
+ if(drag?.moved&&drag.id==='punch'&&drag.target){let b=drag.target==='body',site=pendingBodySite(),pt=b?bodyPoint(site):cp;ghostModels.punch.pos=pt.slice();if(b){let n=bodyNormal(site);ghostModels.punch.rot=[Math.acos(clamp(n[1],-1,1)),Math.atan2(n[0],n[2]),0];ghostModels.punch.pos=V.add(pt,V.mul(n,.50));}else{ghostModels.punch.rot=[0,0,0];ghostModels.punch.pos[1]+=.50;}}
+ worldArrows.pos=mp.slice();worldArrows.visible=settings.valve&&A.bottle;
+ const good=physics.isValve(),activeStrip=(A.strip==='mouth'||A.strip==='cap'&&A.cap==='bottle')&&!A.stripPunched,forward=physics.qTop>.7,back=physics.qTop<-.7,attempt=good&&A.balloon&&!physics.press&&physics.b>4&&(physics.balloonPressure>physics.pressure+.005);
+ for(let[k,{z,w}]of Object.entries(arrowNodes)){let v=k==='straight'?forward&&!activeStrip:k.startsWith('out')?forward&&activeStrip:k==='leak'?back&&activeStrip:k==='back'||k==='blocked'?attempt&&activeStrip:false;z.visible=v;w.visible=v;}
+ zcap.g.visible=A.cap!=='tray';zcap.lid.visible=!holes.cap;zcap.drilled.visible=holes.cap;zstrip.g.visible=A.strip!=='tray';zband.visible=A.strip==='cap'?A.tapeCap:A.tapeMouth;zneck.visible=A.bottle||A.cap!=='tray';syncStripMesh(zstrip,lift,loose,physics.t);zArrows.visible=A.bottle&&(A.cap==='bottle'||A.cap==='tray');
+ $('zoomNote').textContent=A.cap!=='tray'&&!holes.cap?'瓶盖完整，尚未打孔。':A.strip==='tray'?'未放气球皮，空气沿开口直接进出。':A.stripPunched?'气球皮已被一同打孔，阀门失效，气流会直线穿过。':!fixed?'气球皮尚未被胶带固定，继续按压可能被吹飞。':!holes.cap&&A.cap!=='tray'?'瓶盖尚未打孔。':forward&&activeStrip?'中间拱起，空气绕过两侧边缘，形成Y形气流。':forward?'没有气球皮阻挡，气流直线通过。':attempt?'回流止于气球皮，未穿过小孔。':'两端保持固定，观察中间的变化。';
+ if(A.bottle){let q=project([A.bx,.12,.73]),r=stage.getBoundingClientRect();$('moveHandle').style.left=(q.x-r.left)+'px';$('moveHandle').style.top=(q.y-r.top+26)+'px';}
+ showTargets();dirty=false;
+}
+function resize(){let r=stage.getBoundingClientRect();renderer.resize(r.width,r.height,Math.min(1.8,window.devicePixelRatio||1));let z=$('zoomContent').getBoundingClientRect();if(z.width>0)zoomRenderer.resize(z.width,z.height,Math.min(1.8,window.devicePixelRatio||1));dirty=true;}
+window.addEventListener('resize',resize);new ResizeObserver(resize).observe(stage);
+function cameraUpdate(){let targetX=.48+(settings.valve?.15:0),targetY=2.50;const mobile=stage.clientWidth<600;if(mobile)targetX=.12+(settings.valve?.70:0);camera.target=[targetX,targetY,0];let distance=view.distance*(mobile?1.10:1)*(A.balloon?1+Math.min(.12,Math.max(0,physics.b-2)/1400):1),cp=Math.cos(view.pitch);camera.eye=[targetX+Math.sin(view.yaw)*distance*cp,targetY+Math.sin(view.pitch)*distance,Math.cos(view.yaw)*distance*cp];renderer.prepare(camera,stage.clientWidth/stage.clientHeight);}
+let frameError=false,last=performance.now(),lastDraw=0;
+function frame(ms){requestAnimationFrame(frame);let dt=Math.min(.045,(ms-last)/1000);last=ms;if(document.hidden)return;try{
+ if(!settings.paused){applyAnimation(dt);let count=Math.ceil(dt/(1/180))||1;for(let i=0;i<count;i++)physics.step(dt/count);let fixedStrip=A.strip==='cap'?A.fixedCap:A.strip==='mouth'?A.fixedMouth:false;if(A.bottle&&A.strip!=='tray'&&!A.stripPunched&&!fixedStrip&&physics.press&&physics.qTop>22&&!anim){anim={type:'stripBlow',t:0,duration:2.4,from:strip.g.pos.slice(),rot:strip.g.rot.slice()};toast('气球皮没有贴胶带，被气流吹飞了。');status('气球皮没有贴胶带固定，被气流吹飞了，请重新安装。');}if(releaseAt&&physics.t>=releaseAt){releaseAt=0;physics.release();status('松开瓶身，观察回弹和气球的变化。')}if(drag?.moved)drag.hoverTime+=dt;}
+ if(settings.paused&&!dirty&&!drag&&!orbit&&!moving)return;const motion=anim||drag||orbit||moving||(A.bottle&&(settings.particles||physics.press||physics.x>.001||Math.abs(physics.qTop)>.1||Math.abs(physics.qSide)>.1));if(!motion&&!dirty)return;if(ms-lastDraw<28)return;lastDraw=ms;cameraUpdate();synchronize();renderer.render(root,camera,null,drawGas());if(settings.valve)zoomRenderer.render(zoomRoot,zcam,null,zoomGas());
+ }catch(e){if(!frameError){frameError=true;console.error(e);toast('画面出现异常，请重置或重新打开文件。')}}}
+updateUI();resize();cameraUpdate();synchronize();renderer.render(root,camera);$('loader').hidden=true;requestAnimationFrame(frame);
+// Test hooks do not auto-assemble, expose answers, or add hidden UI controls.
+window.PumpAssembly={get assembly(){return copy(A)},get holes(){return copy(holes)},get physics(){return physics.summary()},get settings(){return copy(settings)},action:doAction,takeBack,reset,undo,project,bodyPoint,bodyNormal,step(n=1){for(let i=0;i<n;i++)physics.step(1/180);dirty=true;},press:()=>physics.startPress(),release:()=>physics.release(),get animate(){return anim?.type||null},get selected(){return selected},get renderer(){return renderer},setHoleMode(mode){A.holeMode=mode;updateUI()},get scene(){return {bottle,cap,strip,balloon,bodyHole,finger,zcap,zneck,zstrip}}};
+document.documentElement.dataset.ready='true';
+})();
+
+</script>
+</body></html>
