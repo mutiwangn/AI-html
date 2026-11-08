@@ -66,6 +66,8 @@ v1.1此前已检查第一、二页的实际拖拽卷袋、2250mL读数反馈、�
 
 ## 开发文件
 
+2026-11-08 模型编码压缩：保留14个网格、161413个顶点和321054个三角形，已有位置、法线及呼吸形变属性在重新编号后逐值保持不变，不追加几何量化。完整保留原有WebP和PNG备用投影。模型载荷改用meshoptimizer与gzip，WebAssembly不可用或初始化失败时走内嵌JavaScript备用解码，gzip的pako备用路径继续保留。模型数据模块与单文件入口同步更新；无需联网或启动服务。新增MIT许可见 `LICENSE_meshoptimizer.txt`，许可原文也已内嵌于单文件。
+
 `index.html` 为完整课堂文件；`revision/` 为本版各页面、样式、程序、三个器材的独立SVG源文件和内嵌模型数据；`build.py` 将这些模块组合为 `dist/index.html`。继续修改时运行 `python3 build.py`，将生成的单文件作为本课的 `index.html` 发布即可。
 
 模型和本次改编教学实现按CC BY-SA 4.0分享；BodyParts3D保留原素材要求的CC BY-SA 2.1 Japan归因；内嵌pako保留MIT许可。完整作者、修改说明与许可均随单体HTML保留。
