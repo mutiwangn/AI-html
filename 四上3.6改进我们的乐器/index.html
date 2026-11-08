@@ -705,8 +705,15 @@ function work(){return pack().current;}
 function baseline(){return pack().baseline;}
 function freshPack(family){var w=M.makeWork(family);if(family==='string')w.body.coupled=false;return {current:clone(w),baseline:clone(w),baselineId:'initial',versions:[{id:'initial',name:'初始版',work:clone(w),time:new Date().toISOString(),note:{}}],actions:[],note:{problem:'',cause:'',explanation:'',judgement:''}};}
 function saveSoon(){clearTimeout(saveTimer);saveTimer=setTimeout(saveState,300);}
+
+/* STORAGE-GUARD-START */
+var storageRaw=null,storageProtected=false,storageStatus='等待读取本机作品';
+function storageNotice(message){storageStatus=message;var el=document.getElementById('storage-safety-status');if(el){el.textContent=message;el.title=message;}}
+function guardedWrite(){if(storageProtected){storageNotice('只读保护：旧作品未改动；当前操作仅在本页，请下载草稿');return false;}try{localStorage.setItem(SAVE_KEY,JSON.stringify(payload()));storageNotice('本机作品已保存；重要作品请另存 JSON');return true;}catch(e){storageNotice('本机保存失败（空间或权限）；当前草稿未写入，请立即下载');return false;}}
+function mountStorageBackup(){var panel=document.createElement('details');panel.style.cssText='position:fixed;right:12px;bottom:2px;z-index:90;width:min(540px,94vw);padding:4px 12px;background:#fffdf2;color:#233f40;border:1px solid #a5b6b2;border-radius:9px;font:14px/1.5 Microsoft YaHei,sans-serif;box-shadow:0 2px 8px #1233';panel.innerHTML='<summary id="storage-safety-status" style="cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></summary><p style="margin:8px 0">原始备份是本次打开时的完整缓存原文。当前 JSON 草稿可用本课的打开作品功能载入；只读保护下只在内存中使用，不覆盖异常旧缓存。请先下载再离开。</p><button type="button" id="storage-raw-download">下载启动原始备份</button> <button type="button" id="storage-draft-download">下载当前 JSON 草稿</button>';document.body.appendChild(panel);function fitStatus(){var summary=document.getElementById('storage-safety-status');summary.style.whiteSpace=panel.open?'normal':'nowrap';summary.style.overflow=panel.open?'visible':'hidden';panel.style.maxHeight='70vh';panel.style.overflowY=panel.open?'auto':'visible';}panel.addEventListener('toggle',fitStatus);storageNotice(storageStatus);if(storageProtected)panel.open=true;fitStatus();document.getElementById('storage-raw-download').disabled=storageRaw===null;function out(text,type,name){var a=document.createElement('a'),url=URL.createObjectURL(new Blob([text],{type:type}));a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},5000);}document.getElementById('storage-raw-download').onclick=function(){if(storageRaw!==null)out(storageRaw,'text/plain;charset=utf-8','改进我们的乐器_启动原始备份.txt');};document.getElementById('storage-draft-download').onclick=function(){out(JSON.stringify(payload(),null,2),'application/json;charset=utf-8','改进我们的乐器_当前草稿.json');};}
+/* STORAGE-GUARD-END */
 function payload(){return {format:'mutiw-instrument-improve',version:1,family:state.family,force:state.force,volume:state.volume,packs:state.packs};}
-function saveState(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(payload()));}catch(e){if(!storageWarned){storageWarned=true;info('浏览器不能自动保存，请从“作品”保存 JSON。');}}}
+function saveState(){return guardedWrite();}
 function cleanNote(v){v=v&&typeof v==='object'?v:{};var o={};['problem','cause','explanation','judgement'].forEach(function(k){o[k]=typeof v[k]==='string'?v[k].slice(0,180):'';});return o;}
 function validateWork(w,expected){
  if(!w||w.family!==expected||families.indexOf(w.family)<0||['modern','legacy-v1'].indexOf(w.model)<0)throw Error('作品的材料或模型不正确。');
@@ -726,7 +733,7 @@ function validateWork(w,expected){
  safe.body={coupled:b.coupled,damped:b.damped,clearance:b.clearance};
  safe.parts.forEach(function(p,i){var f=M.frequency(safe,i);if(!finite(f)||f<20||f>8000)throw Error('作品音高超出支持范围。');});return safe;
 }
-function validatePayload(data){
+function validatePayloadOriginal(data){
  if(!data||data.format!=='mutiw-instrument-improve'||data.version!==1||families.indexOf(data.family)<0||!data.packs)throw Error('不是本课的作品文件。');
  var out={family:data.family,packs:{},force:finite(data.force)?clamp(data.force,0,1):.64,volume:finite(data.volume)?clamp(data.volume,0,1):.6};
  families.forEach(function(f){var p=data.packs[f];if(!p||!Array.isArray(p.versions)||p.versions.length>25)throw Error('留存版本格式不正确。');var c=validateWork(p.current,f),b=validateWork(p.baseline,f);
@@ -736,7 +743,20 @@ function validatePayload(data){
   out.packs[f]={current:c,baseline:b,baselineId:String(p.baselineId||'initial').slice(0,60),versions:versions,actions:actions,note:cleanNote(p.note)};
  });return out;
 }
-function restore(){families.forEach(function(f){state.packs[f]=freshPack(f);});try{var raw=localStorage.getItem(SAVE_KEY);if(raw){var safe=validatePayload(JSON.parse(raw));state.family=safe.family;state.packs=safe.packs;state.force=safe.force;state.volume=safe.volume;}}catch(e){setTimeout(function(){info('未载入旧缓存，已打开完整示例。原文件可从“作品”重新导入。');},700);}}
+/* STRICT-PAYLOAD-START */
+function validatePayload(data){
+ function keys(v,allowed){if(!v||typeof v!=='object'||Array.isArray(v)||Object.keys(v).some(function(k){return allowed.indexOf(k)<0;}))throw Error('发现未知作品字段，未忽略或覆盖。');}
+ keys(data,['format','version','family','force','volume','packs']);keys(data.packs,families);
+ function obj(x){return x&&typeof x==='object'&&!Array.isArray(x);}
+ function text(v,max){if(typeof v!=='string'||v.length>max)throw Error('文字字段异常或过长，未截断。');}
+ function note(n){if(!obj(n))throw Error('说明字段异常。');['problem','cause','explanation','judgement'].forEach(function(k){if(n[k]!==undefined)text(n[k],180);});}
+ function workCheck(w){if(!obj(w)||!Array.isArray(w.parts))throw Error('部件结构异常');w.parts.forEach(function(p){if(!obj(p))throw Error('部件格式异常');text(p.id,80);});}
+ if(!obj(data)||!obj(data.packs)||!finite(data.force)||data.force<0||data.force>1||!finite(data.volume)||data.volume<0||data.volume>1)throw Error('作品结构或力度/音量异常；未自动修正。');
+ families.forEach(function(f){var p=data.packs[f];if(!obj(p)||!Array.isArray(p.versions)||!p.versions.length||p.versions.length>25||!Array.isArray(p.actions)||p.actions.length>300)throw Error('记录数量或结构异常；未删减。');text(p.baselineId,60);workCheck(p.current);workCheck(p.baseline);note(p.note);p.versions.forEach(function(v){if(!obj(v))throw Error('留存版异常');text(v.id,60);text(v.name,30);text(v.time,40);workCheck(v.work);note(v.note);});p.actions.forEach(function(a){if(!obj(a))throw Error('操作记录异常');text(a.time,40);text(a.description,180);['before','after'].forEach(function(k){if(a[k]!==undefined){workCheck(a[k]);validateWork(a[k],f);}});});});
+ validatePayloadOriginal(data);return clone(data);
+}
+/* STRICT-PAYLOAD-END */
+function restore(){families.forEach(function(f){state.packs[f]=freshPack(f);});try{storageRaw=localStorage.getItem(SAVE_KEY);if(storageRaw!==null){var safe=validatePayload(JSON.parse(storageRaw));state.family=safe.family;state.packs=safe.packs;state.force=safe.force;state.volume=safe.volume;storageNotice('已完整读取本机作品');}else storageNotice('尚无本机作品，修改后自动保存');}catch(e){storageProtected=true;storageNotice('旧作品读取异常，已只读保护原文；当前为临时示例草稿');}}
 function describeValue(w,p,key){if(key==='tension')return w.model==='legacy-v1'?p.tension.toFixed(2)+' 倍':Math.round(p.tension/5*100)+'%';if(key==='fill')return Math.round(p.fill*100)+'%';return p.length.toFixed(2)+' cm';}
 function noteStatus(w,i){var c=M.cents(w,i);return Math.abs(c)<=35?'接近':c<0?'偏低':'偏高';}
 function modifications(old,now){
@@ -1000,8 +1020,9 @@ function animate(now){
  else ['before','now'].forEach(function(side){var svg=side==='before'?$('beforeScene'):$('afterScene'),w=side==='before'?baseline():work();Art.animate(svg,w,{selected:active,active:active,inside:false,mini:true},{phase:visualPhase,amp:amp,playing:playing&&side===activeSide,paused:false});});
  requestAnimationFrame(animate);
 }
-restore();sound.setVolume(state.volume);renderAll();requestAnimationFrame(animate);
+restore();mountStorageBackup();sound.setVolume(state.volume);renderAll();requestAnimationFrame(animate);
 window.InstrumentLesson={version:'1.0',snapshot:function(){return clone(payload());},validate:validatePayload,modifications:modifications,model:M};
 }());
 </script>
 </body></html>
+

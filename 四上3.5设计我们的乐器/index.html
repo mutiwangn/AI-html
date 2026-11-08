@@ -579,24 +579,23 @@
  function partLabel(i){return '第 '+(i+1)+(state.family==='water'?' 只水杯':state.family==='pipe'?' 根管':' 根橡皮筋');}
  function toast(message){clearTimeout(toastTimer);$('toast').textContent=message;$('toast').classList.add('show');toastTimer=setTimeout(function(){$('toast').classList.remove('show');},3200);}
  function validateDesign(d){
-  if(!d||families.indexOf(d.family)<0||!Array.isArray(d.parts)||d.parts.length<5||d.parts.length>8)throw Error('作品格式不正确：需要 5—8 个发声部件。');
-  var safe=M.createDesign(d.family,d.parts.length);
-  d.parts.forEach(function(p,i){
-   ['length','tension','fill'].forEach(function(k){if(typeof p[k]!=='number'||!isFinite(p[k]))throw Error('作品中的参数不完整。');});
-   safe.parts[i].length=clamp(p.length,12,40);safe.parts[i].tension=clamp(p.tension,.5,2);safe.parts[i].fill=clamp(p.fill,0,.85);safe.parts[i].target=noteIndex(p,i);
-  });
-  if(d.strokes){
-   if(!Array.isArray(d.strokes)||d.strokes.length>50)throw Error('作品标注数量超出范围。');
-   safe.strokes=d.strokes.map(function(stroke){
-    if(!Array.isArray(stroke)||stroke.length>800)throw Error('作品标注格式不正确。');
-    return stroke.map(function(pt){if(!Array.isArray(pt)||pt.length!==2||!pt.every(function(v){return typeof v==='number'&&isFinite(v);}))throw Error('标注坐标不正确。');return [Math.round(clamp(pt[0],0,1000)*10)/10,Math.round(clamp(pt[1],0,520)*10)/10];});
-   });
-  }
-  return safe;
+  if(!d||Array.isArray(d)||families.indexOf(d.family)<0||!Array.isArray(d.parts)||d.parts.length<5||d.parts.length>8)throw Error('作品格式不正确：需要 5—8 个部件。');
+  d.parts.forEach(function(p){if(!p||Array.isArray(p))throw Error('部件不是对象。');[['length',12,40],['tension',.5,2],['fill',0,.85]].forEach(function(r){if(typeof p[r[0]]!=='number'||!isFinite(p[r[0]])||p[r[0]]<r[1]||p[r[0]]>r[2])throw Error('参数异常；未自动调到边界。');});if(!Number.isInteger(p.target)||p.target<0||p.target>7)throw Error('参照音异常。');if(p.diameter!==undefined&&(typeof p.diameter!=='number'||!isFinite(p.diameter)||p.diameter<=0||p.diameter>20))throw Error('直径参数异常。');});
+  if(!Array.isArray(d.strokes)||d.strokes.length>50)throw Error('标注格式或数量异常。');d.strokes.forEach(function(stroke){if(!Array.isArray(stroke)||stroke.length>800)throw Error('标注格式异常。');stroke.forEach(function(pt){if(!Array.isArray(pt)||pt.length!==2||!pt.every(function(v){return typeof v==='number'&&isFinite(v);})||pt[0]<0||pt[0]>1000||pt[1]<0||pt[1]>520)throw Error('标注坐标异常；未裁切。');});});
+  return M.clone(d);
  }
- function loadLocal(){try{var raw=localStorage.getItem(KEY);if(!raw)return;var v=JSON.parse(raw);if(v.format!=='mutiw-instrument-2d'||v.version!==1)return;families.forEach(function(f){if(v.designs&&v.designs[f]){var d=validateDesign(v.designs[f]);if(d.family!==f)throw Error('材料类型不一致');state.designs[f]=d;}if(v.saved&&v.saved[f]){var a=validateDesign(v.saved[f]);if(a.family!==f)throw Error('材料类型不一致');state.saved[f]=a;}});if(families.indexOf(v.family)>=0)state.family=v.family;}catch(ignore){/* Invalid or unavailable local data never blocks a fresh lesson. */}}
+ function assertKeys(v,keys){if(!v||typeof v!=='object'||Array.isArray(v)||Object.keys(v).some(function(k){return keys.indexOf(k)<0;}))throw Error('发现未知作品字段，未忽略或覆盖。');}
+ function validateBundle(v){assertKeys(v,['format','version','family','designs','saved']);assertKeys(v.designs,families);assertKeys(v.saved,families);if(!v||Array.isArray(v)||v.format!=='mutiw-instrument-2d'||v.version!==1||families.indexOf(v.family)<0||!v.designs||Array.isArray(v.designs)||!v.saved||Array.isArray(v.saved))throw Error('不是完整的本课作品。');var ds={},as={};families.forEach(function(f){ds[f]=validateDesign(v.designs[f]);if(ds[f].family!==f)throw Error('材料类型不一致');if(Object.prototype.hasOwnProperty.call(v.saved,f)){as[f]=validateDesign(v.saved[f]);if(as[f].family!==f)throw Error('方案 A 材料类型不一致');}});return {designs:ds,saved:as,family:v.family};}
+ function loadLocal(){try{storageRaw=localStorage.getItem(KEY);if(storageRaw!==null){var safe=validateBundle(JSON.parse(storageRaw));state.designs=safe.designs;state.saved=safe.saved;state.family=safe.family;storageNotice('已完整读取本机作品');}else storageNotice('尚无本机作品，修改后自动保存');}catch(e){storageProtected=true;storageNotice('旧作品读取异常，已只读保护原文；当前为临时草稿');}}
+
+/* STORAGE-GUARD-START */
+var storageRaw=null,storageProtected=false,storageStatus='等待读取本机作品';
+function storageNotice(message){storageStatus=message;var el=document.getElementById('storage-safety-status');if(el){el.textContent=message;el.title=message;}}
+function guardedWrite(){if(storageProtected){storageNotice('只读保护：旧作品未改动；当前操作仅在本页，请下载草稿');return false;}try{localStorage.setItem(KEY,JSON.stringify(payload()));storageNotice('本机作品已保存；重要作品请另存 JSON');return true;}catch(e){storageNotice('本机保存失败（空间或权限）；当前草稿未写入，请立即下载');return false;}}
+function mountStorageBackup(){var panel=document.createElement('details');panel.style.cssText='position:fixed;right:12px;bottom:2px;z-index:90;width:min(540px,94vw);padding:4px 12px;background:#fffdf2;color:#233f40;border:1px solid #a5b6b2;border-radius:9px;font:14px/1.5 Microsoft YaHei,sans-serif;box-shadow:0 2px 8px #1233';panel.innerHTML='<summary id="storage-safety-status" style="cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></summary><p style="margin:8px 0">原始备份是本次打开时的完整缓存原文。当前 JSON 草稿可用本课的打开作品功能载入；只读保护下只在内存中使用，不覆盖异常旧缓存。请先下载再离开。</p><button type="button" id="storage-raw-download">下载启动原始备份</button> <button type="button" id="storage-draft-download">下载当前 JSON 草稿</button>';document.body.appendChild(panel);function fitStatus(){var summary=document.getElementById('storage-safety-status');summary.style.whiteSpace=panel.open?'normal':'nowrap';summary.style.overflow=panel.open?'visible':'hidden';panel.style.maxHeight='70vh';panel.style.overflowY=panel.open?'auto':'visible';}panel.addEventListener('toggle',fitStatus);storageNotice(storageStatus);if(storageProtected)panel.open=true;fitStatus();document.getElementById('storage-raw-download').disabled=storageRaw===null;function out(text,type,name){var a=document.createElement('a'),url=URL.createObjectURL(new Blob([text],{type:type}));a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},5000);}document.getElementById('storage-raw-download').onclick=function(){if(storageRaw!==null)out(storageRaw,'text/plain;charset=utf-8','设计我们的乐器_启动原始备份.txt');};document.getElementById('storage-draft-download').onclick=function(){out(JSON.stringify(payload(),null,2),'application/json;charset=utf-8','设计我们的乐器_当前草稿.json');};}
+/* STORAGE-GUARD-END */
  function payload(){return {format:'mutiw-instrument-2d',version:1,family:state.family,designs:state.designs,saved:state.saved};}
- function persist(){clearTimeout(storeTimer);storeTimer=setTimeout(function(){try{localStorage.setItem(KEY,JSON.stringify(payload()));}catch(ignore){}},180);}
+ function persist(){clearTimeout(storeTimer);storeTimer=setTimeout(guardedWrite,180);}
  function snapshot(){var h=state.histories[state.family],s=JSON.stringify(current());if(h[h.length-1]!==s)h.push(s);if(h.length>35)h.shift();$('undoBtn').disabled=false;}
  function stopSequence(){
   playEpoch++;if(state.sequence){clearTimeout(state.sequence.timer);state.sequence=null;}$('melodyBtn').textContent='▶ 演奏选段';document.querySelectorAll('#score .active').forEach(function(el){el.classList.remove('active');});audio.stop();
@@ -788,7 +787,7 @@
  }
  $('sheetBtn').onclick=function(){prepareSheet();openModal('sheetModal');};
  $('loadWork').onclick=function(){$('workFile').value='';$('workFile').click();};
- $('workFile').onchange=function(){var file=this.files&&this.files[0];if(!file)return;if(file.size>8*1024*1024){toast('请选择本工坊保存的作品文件（小于 8 MB）。');return;}var reader=new FileReader();reader.onload=function(){try{var v=JSON.parse(reader.result);if(v.format!=='mutiw-instrument-2d'||v.version!==1)throw Error('请选择本二维工坊保存的作品文件。');var ds={},as={};families.forEach(function(f){ds[f]=validateDesign(v.designs[f]);if(ds[f].family!==f)throw Error('作品材料类型不一致。');if(v.saved&&v.saved[f]){as[f]=validateDesign(v.saved[f]);if(as[f].family!==f)throw Error('保留方案材料类型不一致。');}});if(families.indexOf(v.family)<0)throw Error('作品材料类型不正确。');stopSequence();stopHold(false);clearActivity();state.histories={string:[],water:[],pipe:[]};state.designs=ds;state.saved=as;state.family=v.family;state.selected=0;state.compare=false;render();persist();prepareSheet();toast('作品已载入，三种材料的设计与方案 A 已恢复。');}catch(err){toast(err.message||'作品读取失败，当前设计保持不变。');}};reader.onerror=function(){toast('无法读取这个文件。');};reader.readAsText(file);};
+ $('workFile').onchange=function(){var file=this.files&&this.files[0];if(!file)return;if(file.size>8*1024*1024){toast('请选择本工坊保存的作品文件（小于 8 MB）。');return;}var reader=new FileReader();reader.onload=function(){try{var v=JSON.parse(reader.result);if(v.format!=='mutiw-instrument-2d'||v.version!==1)throw Error('请选择本二维工坊保存的作品文件。');var bundle=validateBundle(v),ds=bundle.designs,as=bundle.saved;stopSequence();stopHold(false);clearActivity();state.histories={string:[],water:[],pipe:[]};state.designs=ds;state.saved=as;state.family=v.family;state.selected=0;state.compare=false;render();persist();prepareSheet();toast('作品已载入，三种材料的设计与方案 A 已恢复。');}catch(err){toast(err.message||'作品读取失败，当前设计保持不变。');}};reader.onerror=function(){toast('无法读取这个文件。');};reader.readAsText(file);};
  document.addEventListener('keydown',function(e){
   var modal=!$('sheetModal').hidden?$('sheetModal'):!$('helpModal').hidden?$('helpModal'):null;
   if(modal){if(e.key==='Escape'){closeModal(modal.id);e.preventDefault();}if(e.key==='Tab'){var els=Array.prototype.slice.call(modal.querySelectorAll('button:not(:disabled),a[href],input:not([hidden])')).filter(function(el){return el.offsetParent!==null;}),first=els[0],last=els[els.length-1];if(!first)return;if(e.shiftKey&&document.activeElement===first){last.focus();e.preventDefault();}else if(!e.shiftKey&&document.activeElement===last){first.focus();e.preventDefault();}}return;}
@@ -798,9 +797,9 @@
   else if(e.key==='Escape'){stopSequence();state.drawing=false;renderControls();}
  });
  document.addEventListener('visibilitychange',function(){if(document.hidden){stopSequence();stopHold(false);audio.stop();}});
- window.addEventListener('pagehide',function(){stopSequence();stopHold(false);try{localStorage.setItem(KEY,JSON.stringify(payload()));}catch(ignore){}});
+ window.addEventListener('pagehide',function(){stopSequence();stopHold(false);guardedWrite();});
  $('targetNote').innerHTML=M.notes.map(function(n){return '<option value="'+n.index+'">'+n.digit+' '+n.name+'</option>';}).join('');
- loadLocal();renderScore(0,-1);render();
+ loadLocal();mountStorageBackup();renderScore(0,-1);render();
  function frame(now){if(!document.hidden&&state.mode==='test'&&!state.paused)renderTrace(false);requestAnimationFrame(frame);}requestAnimationFrame(frame);
  // Read-only diagnostics make model/UI verification possible without introducing test-only controls.
  window.InstrumentWorkshop={version:appVersion,getState:function(){return M.clone({family:state.family,mode:state.mode,selected:state.selected,design:current(),saved:state.saved[state.family]||null,playing:!!state.sequence,paused:state.paused});},audioStatus:function(){return audio.status();},makeSheet:makeSheet};
@@ -808,3 +807,4 @@
 
 </script>
 </body></html>
+
