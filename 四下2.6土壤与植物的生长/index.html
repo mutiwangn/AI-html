@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>土壤与植物的生长 · 根的空间</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ee;color:#263e37;font:18px/1.65 system-ui,"Microsoft YaHei",sans-serif}header,main,footer{max-width:1180px;margin:auto;padding:20px}h1{margin:4px 0;font-size:30px}h2{font-size:22px;margin:0 0 12px}p{margin:10px 0}.tag{color:#805b32;font-size:14px}.layout{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}.card{background:white;border:1px solid #dde5d9;border-radius:20px;padding:22px}svg{width:100%;height:auto;background:#fafbf6;border-radius:12px}button{font:inherit;padding:10px 16px;min-height:48px;border:1px solid #b9cfc0;border-radius:10px;background:#eff5ef;color:#224b3a;cursor:pointer;margin:5px}button[aria-pressed=true]{background:#225c46;color:white}button:focus-visible,input:focus-visible{outline:3px solid #d69a32;outline-offset:3px}input{width:100%;accent-color:#27684d}#feedback,#detail{min-height:88px;padding:12px;background:#f0f6ed;border-radius:12px}.small{font-size:14px;color:#65766c}.selected{stroke:#cf5733!important;stroke-width:5!important}.part{transition:opacity .15s}.muted{opacity:.14}@media(max-width:760px){.layout{grid-template-columns:1fr}header,main,footer{padding:12px}}
+</style>
+<header><div class="tag">四年级下册 · 第二单元 · 2.6 · 基础辅助稿</div><h1>土壤与植物的生长</h1><p>土粒之间的空间，对根有什么意义？</p></header><main class="layout">
+<section class="card"><h2>比较两种示意，不是即时生长实验</h2>
+<button id="loose" aria-pressed="true">较疏松的示意</button><button id="compact" aria-pressed="false">较强压实的示意</button>
+<svg viewBox="0 0 600 470" role="img" aria-label="土粒间距与两种可能根系形态的定性对比">
+<defs><pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M0 9L9 0" stroke="#c5d9df" stroke-width="2"/></pattern></defs>
+<rect id="soilBox" x="60" y="150" width="480" height="270" rx="14" fill="#e6f1f3" stroke="#8ca4a5"/>
+<rect id="poreOverlay" x="60" y="150" width="480" height="270" fill="url(#hatch)" opacity="0"/>
+<g id="grains"></g>
+<path d="M300 155V60M300 100Q240 35 225 65Q235 110 300 110M300 85Q365 25 380 55Q365 100 300 100" fill="#528456" stroke="#376349" stroke-width="6"/>
+<path id="roots" fill="none" stroke="#a45233" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text id="caption" x="300" y="450" text-anchor="middle" font-size="17" fill="#435b51"></text>
+</svg>
+<div><button id="pores">突出孔隙空间</button><button id="rootView">突出根系示例</button><button id="all">查看全部</button></div>
+<p id="detail" aria-live="polite"></p><p class="small">棕色块是土壤固体的抽象示意，淡蓝色是孔隙，不表示“全部是水”。根可以在三维空间绕行，此二维图没有真实尺寸或生长速度。不同状态展示的是不同假想条件，不是同一株植物瞬间变形。</p>
+</section><section class="card"><h2>跟着证据思考</h2><p id="question"></p><button id="yes">能这样说</button><button id="no">不能这样说</button><button id="nextQuestion">下一题</button><p id="feedback" aria-live="polite"></p><button id="reset">重置全部</button>
+<h2>不能只说“越松越好”</h2><p>较强压实可使孔隙减少、气体交换变慢，并使根穿入更困难。但适度的种子与土壤接触也有意义；植物和土壤状况不同，实际效果需观察。</p>
+<p class="small"><strong>专题边界：</strong>只讨论土壤结构与根活动的关系。不预测株高、产量、成活率，不计算压实力，不代表所有根一定画成这样，也没有比较全部土壤类型。图中地上部保持不变，不能据此断言叶片不会受影响。</p>
+<p class="small">课堂延伸：在教师指导下比较土壤条件时，尽量保持植物种类、起始状态、容器、光照和浇水安排一致；连续观察多株，而不是把这张模型图当作实验结果。不为验证模型踩踏花坛或伤害现有植物。</p></section></main>
+<footer><p><strong>教材正文、版次与教参待核。</strong>本课为“土壤结构与根系”基础辅助专题，不等于整课教学完成。</p><p class="small">科学参考：<a href="https://extension.umn.edu/natural-resources/conservation/agricultural-soil-and-water/soil-compaction">University of Minnesota Extension：Soil compaction</a>。图形为原创定性示意，无教材图片、无外部运行依赖。</p></footer><script src="./lesson.js"></script></html>
