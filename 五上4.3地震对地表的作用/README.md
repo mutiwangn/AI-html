@@ -71,3 +71,7 @@
 - [USGS：The Science of Earthquakes](https://www.usgs.gov/programs/earthquake-hazards/science-earthquakes)——断层锁定、突然错动、能量传播与地面振动。
 - [USGS：Surface faulting / surface rupture](https://www.usgs.gov/faqs/what-surface-faulting-or-surface-rupture-earthquake)——不是所有地震都发生地表破裂。
 - [USGS：Earthquake-induced chains of geologic hazards](https://www.usgs.gov/publications/earthquake-induced-chains-geologic-hazards-patterns-mechanisms-and-impacts)——震动、滑坡、堵河和后续地形变化。
+
+
+## 2026-11-08 操作与导出维护
+两侧施力箭头均以左方向键减小、右方向键增大加载；回车/空格仍增大加载，与加载条一致并遵循原有上下限/错动后限制。导出链接不再固定10分钟失效：预览弹窗打开期间保持有效，关闭或替换弹窗时释放，旧隐藏链接移除href；再次导出重新生成，已下载文件不受影响。

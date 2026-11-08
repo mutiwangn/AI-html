@@ -54,3 +54,7 @@
 - [USGS：How Do Volcanoes Erupt?](https://www.usgs.gov/faqs/how-do-volcanoes-erupt)——岩浆上升、气体逸出与不同喷发方式。
 - [USGS：About Volcanoes](https://www.usgs.gov/programs/VHP/about-volcanoes)——岩浆与熔岩、浮力和气体压力、火山喷出物。
 - [NPS：Volcanic Eruptions](https://www.nps.gov/subjects/volcanoes/volcanic-eruptions.htm)——部分熔融、上升减压、气体析出及流动性。
+
+
+## 2026-11-08 操作与导出维护
+导出证据图的链接在当前预览弹窗打开期间保持有效；关闭或替换弹窗时释放旧URL，避免多次导出累积内存。再次导出重新生成链接，已下载文件不受影响。
