@@ -130,6 +130,36 @@
 <div id="teacherOverlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="teacherTitle" hidden><div class="modal"><div class="modal-head"><h2 id="teacherTitle">这节课，怎样用数字证据？</h2><button class="close" data-close aria-label="关闭教学提示">×</button></div><div class="teacher-grid"><section><h3>先做实物，再放大难点</h3><p>依照教材：观察钟摆一分钟，重复3次；自制摆一分钟，重复3次；连续观察40秒，每10秒记录一次。数字页用于统一计数、回看细节、分析差异。</p><p>建议：看清一次约4分钟；实物观察与记录约18分钟；时间展开和对齐约8分钟；证据研讨约10分钟。</p></section><section><h3>怎么数？</h3><p>从一侧释放，去到另一侧，再回到起始侧，计1次。释放瞬间为0次。自由摆的摆幅会减小，因此“回到起始侧”不要求回到原来的同一空间位置。</p><p>40秒不重新放摆。连续计数，记录四段各自增加的次数，避免把累计次数当作区间次数。</p></section><section><h3>模型说明</h3><p>第1页展示钟摆的一次运动，近似等幅；第2页是受弱阻力的自由摆。摆长固定0.90米，初始小摆角12°，依据非线性单摆方程数值计算，周期并未锁成固定数值。</p><p>慢放只改变观看速度，读数始终是模型时间。对齐时只移动两个时段的时间起点，不拉伸时间，也不把两条曲线强行对齐。</p></section><section><h3>让差异留下来</h3><p>同一摆、小摆幅时，一次往返用时近似相同；不是摆锤在各处速度相同。摆幅变小，路程及最大线速度也会变小。</p><p>相邻10秒整数次数偶尔相差1次，可能涉及窗口边界、计数方法或真实实验条件；先看完整周期与记录，不直接宣布“误差”。不同小组的摆可能不同，留待下一课研究。</p></section></div><p class="note-card">教材依据：六上第114—117页；教师用书第353—362页。模型扩展依据：<a href="https://openstax.org/books/university-physics-volume-1/pages/15-4-pendulums" target="_blank" rel="noopener">OpenStax：Pendulums</a>。本页无需联网；参考链接仅供教师查阅。</p></div></div>
 <div id="mechanismOverlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="mechanismTitle" hidden><div class="modal"><div class="modal-head"><h2 id="mechanismTitle">钟摆的能量从哪里来？</h2><button class="close" data-close aria-label="关闭钟内分工">×</button></div><div class="mechanism-diagram"><svg viewBox="0 0 920 350" aria-label="机械摆钟功能关系示意"><defs><marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#19776b"/></marker><marker id="arrowGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10z" fill="#b77b25"/></marker></defs><g fill="#fff" stroke="#cdded2" stroke-width="2"><rect x="25" y="80" width="190" height="110" rx="16"/><rect x="345" y="80" width="210" height="110" rx="16"/><rect x="695" y="80" width="190" height="110" rx="16"/><rect x="345" y="265" width="210" height="65" rx="16"/></g><g text-anchor="middle" font-size="27"><text x="120" y="127">重锤 / 发条</text><text x="120" y="166" font-size="21" fill="#5d7370">提供能量</text><text x="450" y="126">轮系与擒纵</text><text x="450" y="165" font-size="21" fill="#5d7370">传动、间歇放行</text><text x="790" y="126">钟摆</text><text x="790" y="165" font-size="21" fill="#5d7370">调节节律</text><text x="450" y="307">指针</text></g><path d="M220 133H335M560 112H685M450 194v61" fill="none" stroke="#19776b" stroke-width="4" marker-end="url(#arrowGreen)"/><path d="M790 76V27H450V70" fill="none" stroke="#b77b25" stroke-width="4" marker-end="url(#arrowGold)"/><text x="280" y="112" text-anchor="middle" font-size="20" fill="#19776b">传递能量</text><text x="625" y="95" text-anchor="middle" font-size="20" fill="#19776b">少量补能</text><text x="625" y="19" text-anchor="middle" font-size="21" fill="#b77b25">控制放行的节律</text></svg></div><p class="note-card">自由摆会逐渐衰减。机械摆钟由重锤或发条提供能量，擒纵机构给钟摆补充少量能量；钟摆参与控制轮系的节奏。</p><p class="subtle">这是功能关系示意，不是零件装配图。真实摆钟的结构和一次往返对应的时间会不同。依据：<a href="https://catalogue.museogalileo.it/object/ModelPendulumClock.html" target="_blank" rel="noopener">伽利略博物馆</a>。</p></div></div>
 <script>
+/* Local-only evidence protection. No network, no extra persistent copies. */
+window.LessonRecordGuard=function(key,title,current,validate,canSave){
+ 'use strict';
+ var original=null,known=false,blocked=false,dirty=false,reason='',backupRaw,backupMade=false,box,button,msg,check,replaceButton;
+ function raw(){return localStorage.getItem(key);}
+ function show(text,bad){reason=text;dirty=!!bad;if(button){button.textContent=bad?'记录未保存 · 查看保护':'本机记录 · '+text;button.style.background=bad?'#9a342d':'#245c50';msg.textContent=text;}}
+ function lock(text){blocked=true;show(text+'。原档未覆盖；当前操作仅留在本页，请先备份。',true);}
+ function load(){try{original=raw();known=true;if(original===null){show('尚未写入',false);return null;}var data=JSON.parse(original);if(!validate(data))throw new Error('invalid');show('已读取',false);return data;}catch(e){lock(known?'本机记录格式或版本不受支持':'本机存储不可读');return null;}}
+ function save(){if(canSave&&!canSave()){show("输入暂不能保存，原本机记录保留；请先修正",true);return false;}if(blocked){show(reason,true);return false;}try{if(!known||raw()!==original){lock('另一页面已更改本机记录');return false;}var value=current();if(!validate(value)){lock('当前记录格式异常');return false;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;show('已保存',false);return true;}catch(e){show('未能写入本机；请保留本页并下载备份',true);return false;}}
+ function backup(){var latest=null,readError=false;try{latest=raw();}catch(e){readError=true;}var payload={format:'lesson-local-backup-v1',lesson:title,storageKey:key,createdAt:new Date().toISOString(),originalRaw:original,latestRaw:latest,latestReadFailed:readError,currentPage:current()};try{var url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=title+'-本机记录备份.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);backupRaw=latest;backupMade=!readError;check.checked=false;replaceButton.disabled=true;msg.textContent='已发起备份下载。请到下载位置核实文件已保存；包含个人记录，请勿公开或上传。备份仅供保全，本页没有自动导入功能。';}catch(e){msg.textContent='备份未能生成；请勿关闭本页或替换原档。';backupMade=false;}}
+ function replace(){if(canSave&&!canSave()){show("输入暂不能替换，原本机记录保留；请先修正",true);return;}if(!backupMade||!check.checked)return;try{if(raw()!==backupRaw){backupMade=false;check.checked=false;replaceButton.disabled=true;lock('备份后本机档案再次改变，请重新备份');return;}var value=current();if(!validate(value)){lock('当前记录格式异常，不能替换');return;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;blocked=false;backupMade=false;check.checked=false;replaceButton.disabled=true;show('已用当前页面记录替换；请妥善保留备份',false);}catch(e){show('替换未成功；原档未主动删除，请保留本页和备份',true);}}
+ function mount(){
+  var host=document.createElement('div');host.id='local-record-protection';host.style.cssText='position:fixed;right:10px;bottom:6px;z-index:10000;font:14px/1.6 system-ui,sans-serif;max-width:calc(100vw - 20px);color:#20352d';
+  button=document.createElement('button');button.type='button';button.style.cssText='color:white;border:1px solid white;border-radius:8px;padding:5px 10px;min-height:32px;font:13px system-ui;cursor:pointer';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','local-record-panel');
+  box=document.createElement('section');box.id='local-record-panel';box.hidden=true;box.setAttribute('aria-label','本机记录保护');box.style.cssText='position:absolute;bottom:42px;right:0;width:360px;max-width:calc(100vw - 20px);max-height:75vh;overflow:auto;background:#fff;border:2px solid #587367;border-radius:12px;padding:15px;box-shadow:0 3px 20px #0004;font-size:14px';
+  msg=document.createElement('p');msg.setAttribute('role','status');box.appendChild(msg);
+  var privacy=document.createElement('p');privacy.textContent='数据只在本机和本页，不上传。共用设备请勿录入姓名或可识别的健康信息。备份可能含个人记录，应私人保管。';box.appendChild(privacy);
+  function add(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='display:block;background:#e8f1ec;border:1px solid #738c7d;border-radius:6px;padding:7px;margin:6px 0;min-height:40px;white-space:normal;font:14px system-ui';b.addEventListener('click',fn);box.appendChild(b);return b;}
+  add('下载原档与当前页面备份',backup);add('重试保存（不覆盖冲突档）',save);
+  var label=document.createElement('label');label.style.cssText='display:block;white-space:normal;font-size:14px';check=document.createElement('input');check.type='checkbox';label.appendChild(check);label.appendChild(document.createTextNode('我已核实备份文件落盘，并同意以当前页面记录替换本机档案'));box.appendChild(label);
+  replaceButton=add('确认替换本机档案',replace);replaceButton.disabled=true;check.addEventListener('change',function(){replaceButton.disabled=!(backupMade&&check.checked);});
+  add('关闭记录保护',function(){box.hidden=true;button.setAttribute('aria-expanded','false');button.focus();});button.addEventListener('click',function(){box.hidden=!box.hidden;button.setAttribute('aria-expanded',String(!box.hidden));});host.appendChild(box);host.appendChild(button);document.body.appendChild(host);show(reason||'尚未写入',dirty);
+ }
+ window.addEventListener('storage',function(e){if(e.key===key||e.key===null){try{if(raw()!==original)lock('另一页面已更改本机记录');}catch(err){lock('本机存储不可读');}}});
+ window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+ mount();return {load:load,save:save,lock:lock,markDirty:function(text){show(text||'当前修改未保存',true);},status:function(){return {blocked:blocked,dirty:dirty};}};
+};
+
+</script>
+<script>
 /*
  * PendulumModel v1.0 — nonlinear damped pendulum, ES5, no dependencies.
  * Input amplitude is in degrees. Output angle is radians; omega is rad/s.
@@ -310,34 +340,17 @@
       }
     }
 
-    try {
-      var savedText = window.localStorage.getItem(STORAGE_KEY);
-      if (savedText) {
-        var saved = JSON.parse(savedText);
-        if (!saved || saved.version !== 2 || !saved.sets) throw new Error('Invalid record schema');
-        for (p = 0; p < projectKeys.length; p++) {
-          setKey = projectKeys[p];
-          var incomingSet = saved.sets[setKey];
-          if (!incomingSet || !Array.isArray(incomingSet.values) || incomingSet.values.length !== 6) throw new Error('Invalid set');
-          for (r = 0; r < 6; r++) {
-            if (!Array.isArray(incomingSet.values[r]) || incomingSet.values[r].length !== projects[setKey].labels.length) throw new Error('Invalid row');
-            for (c = 0; c < incomingSet.values[r].length; c++) {
-              var restored = incomingSet.values[r][c];
-              if (restored !== null && (typeof restored !== 'number' || !isFinite(restored) || Math.floor(restored) !== restored || restored < 0 || restored > 99)) throw new Error('Invalid count');
-            }
-          }
-        }
-        for (p = 0; p < projectKeys.length; p++) {
-          setKey = projectKeys[p];
-          sets[setKey].values = saved.sets[setKey].values;
-          for (r = 0; r < 6; r++) sets[setKey].notes[r] = saved.sets[setKey].notes && findings.indexOf(saved.sets[setKey].notes[r]) >= 0 ? saved.sets[setKey].notes[r] : '';
-        }
-        if (projectKeys.indexOf(saved.currentProject) >= 0) currentProject = saved.currentProject;
-        if (typeof saved.selected === 'number' && saved.selected >= 0 && saved.selected < 6 && Math.floor(saved.selected) === saved.selected) selected = saved.selected;
-      }
-    } catch (e) {
-      badStorage = true;
+    function exactKeys(o,keys){return o&&typeof o==='object'&&!Array.isArray(o)&&Object.keys(o).sort().join(',')===keys.slice().sort().join(',');}
+    function validArchive(a){
+      if(!exactKeys(a,['version','sets','selected','currentProject'])||a.version!==2||!exactKeys(a.sets,projectKeys)||projectKeys.indexOf(a.currentProject)<0||typeof a.selected!=='number'||Math.floor(a.selected)!==a.selected||a.selected<0||a.selected>5)return false;
+      return projectKeys.every(function(key){var s=a.sets[key];return exactKeys(s,['values','notes'])&&Array.isArray(s.values)&&s.values.length===6&&s.values.every(function(row){return Array.isArray(row)&&row.length===projects[key].labels.length&&row.every(function(n){return n===null||(typeof n==='number'&&isFinite(n)&&Math.floor(n)===n&&n>=0&&n<=99);});})&&Array.isArray(s.notes)&&s.notes.length===6&&s.notes.every(function(n){return typeof n==='string'&&findings.indexOf(n)>=0;});});
     }
+    function archiveCurrent(){var persistentSets={};for(var n=0;n<projectKeys.length;n++)persistentSets[projectKeys[n]]={values:sets[projectKeys[n]].values,notes:sets[projectKeys[n]].notes};return {version:2,sets:persistentSets,selected:selected,currentProject:currentProject};}
+    function canSaveRecords(){return projectKeys.every(function(key){return sets[key].errors.every(function(row){return row.every(function(e){return !e;});});});}
+    var recordGuard=window.LessonRecordGuard(STORAGE_KEY,'六上4.5机械摆钟',archiveCurrent,validArchive,canSaveRecords);
+    var saved=recordGuard.load();
+    if(saved){for(p=0;p<projectKeys.length;p++){setKey=projectKeys[p];sets[setKey].values=saved.sets[setKey].values;sets[setKey].notes=saved.sets[setKey].notes;}currentProject=saved.currentProject;selected=saved.selected;}
+    badStorage=recordGuard.status().blocked;
     values = sets[currentProject].values;
     notes = sets[currentProject].notes;
     errors = sets[currentProject].errors;
@@ -404,22 +417,17 @@
       status.className = 'rec-status' + (isError || saveFailed ? ' rec-error' : '');
     }
     function baseStatus() {
-      if (hasErrors()) announce('请输入0–99的整数；红框暂不计入图表。', true);
+      if (hasErrors()) announce('请输入0–99的整数；红框编辑未保存，图表保留上次有效值。', true);
       else if (saveFailed) announce('本机保存不可用，请导出记录。', true);
-      else if (badStorage) announce('未能读取旧记录；可继续输入并导出。', true);
+      else if (badStorage) announce('旧记录受保护；当前仅在本页，请打开记录保护备份。', true);
       else if (hasData()) announce('已保存在本机 · 次数为完整往返', false);
       else announce('尚无实测数据 · 空格与0次不同', false);
     }
     function save() {
-      try {
-        var persistentSets = {};
-        for (var n = 0; n < projectKeys.length; n++) persistentSets[projectKeys[n]] = { values: sets[projectKeys[n]].values, notes: sets[projectKeys[n]].notes };
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ version: 2, sets: persistentSets, selected: selected, currentProject: currentProject }));
-        saveFailed = false;
-        badStorage = false;
-      } catch (e) { saveFailed = true; }
+      saveFailed=!recordGuard.save();badStorage=recordGuard.status().blocked;
       baseStatus();
-      try { container.dispatchEvent(new CustomEvent('recordschange', { bubbles: true })); } catch (ignore) {}
+      try {container.dispatchEvent(new CustomEvent('recordschange',{bubbles:true}));}catch(ignore){}
+      return !saveFailed;
     }
     function cancelClear() {
       pendingClear = false;
@@ -488,6 +496,7 @@
       save();
     }
     function changeProject(key) {
+      if(hasErrors()){projectSelect.value=currentProject;announce('先修正当前红框再切换项目；上次有效值仍保留。',true);return;}
       if (projectKeys.indexOf(key) < 0) return;
       cancelClear();
       currentProject = key;
@@ -581,7 +590,7 @@
         var valid = !(this.validity && this.validity.badInput) && (raw === '' || (/^\d+$/.test(raw) && Number(raw) >= 0 && Number(raw) <= 99));
         errors[row][col] = !valid;
         this.setAttribute('aria-invalid', valid ? 'false' : 'true');
-        values[row][col] = valid && raw !== '' ? Number(raw) : null;
+        if(valid)values[row][col] = raw !== '' ? Number(raw) : null;
         selected = row;
         render();
         save();
