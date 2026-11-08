@@ -1,0 +1,23 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>导体和绝缘体 · 先确认接触</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ee;color:#263e37;font:18px/1.65 system-ui,"Microsoft YaHei",sans-serif}header,main,footer{max-width:1180px;margin:auto;padding:20px}h1{margin:4px 0;font-size:30px}h2{font-size:22px;margin:0 0 12px}p{margin:10px 0}.tag{color:#805b32;font-size:14px}.layout{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}.card{background:white;border:1px solid #dde5d9;border-radius:20px;padding:22px}svg{width:100%;height:auto;background:#fafbf6;border-radius:12px}button{font:inherit;padding:10px 16px;min-height:48px;border:1px solid #b9cfc0;border-radius:10px;background:#eff5ef;color:#224b3a;cursor:pointer;margin:5px}button[aria-pressed=true]{background:#225c46;color:white}button:focus-visible,input:focus-visible{outline:3px solid #d69a32;outline-offset:3px}input{width:100%;accent-color:#27684d}#feedback,#detail{min-height:88px;padding:12px;background:#f0f6ed;border-radius:12px}.small{font-size:14px;color:#65766c}.selected{stroke:#cf5733!important;stroke-width:5!important}.part{transition:opacity .15s}.muted{opacity:.14}@media(max-width:760px){.layout{grid-template-columns:1fr}header,main,footer{padding:12px}}
+button:disabled{opacity:.4;cursor:not-allowed}label{display:block;padding:10px}input[type=checkbox]{width:22px;height:22px;vertical-align:middle}</style>
+<header><div class="tag">四年级下册 · 第三单元 · 3.5 · 基础辅助稿</div><h1>导体和绝缘体</h1><p>灯不亮，先检查接触，再讨论材料。</p></header><main class="layout"><section class="card"><h2>低压串联测试回路</h2>
+<svg viewBox="0 0 600 430" role="img" aria-label="电池、开关、灯泡与待测材料串联，两端接触可单独控制">
+<path d="M200 350H90V80H120M145 80H250M320 80H450V140M450 220V350H400" fill="none" stroke="#647e72" stroke-width="6"/>
+<path id="arm" fill="none" stroke="#647e72" stroke-width="6"/>
+<circle id="lamp" cx="450" cy="180" r="40" fill="#e8ebe7" stroke="#647e72" stroke-width="4"/><path d="M422 152L478 208M422 208L478 152" stroke="#756c4e" stroke-width="3"/>
+<path d="M120 50V110M145 62V98" stroke="#647e72" stroke-width="5"/>
+<rect x="113" y="75" width="39" height="10" fill="#fafbf6"/>
+<path d="M120 50V110M145 62V98" stroke="#647e72" stroke-width="5"/>
+<text x="110" y="35" font-size="18">+</text><text x="148" y="48" font-size="18">−</text>
+<text x="285" y="35" font-size="18" text-anchor="middle">开关</text><text x="510" y="185" font-size="18">灯泡</text>
+<rect id="sample" x="250" y="330" width="100" height="40" rx="9" fill="#bb7952"/>
+<path id="leftLead" fill="none" stroke="#397aac" stroke-width="6"/><path id="rightLead" fill="none" stroke="#397aac" stroke-width="6"/>
+<text id="sampleLabel" x="300" y="410" text-anchor="middle" font-size="18"></text>
+</svg><p id="status" aria-live="polite"></p><p id="detail"></p><p class="small">电路中的蓝色线段是接触位置，颜色不代表电流；样品外形统一画成长条，仅用于比较，不是真实尺寸。电池、灯泡与其他导线假设正常且匹配。</p></section>
+<section class="card"><h2>选择样品，接好两端</h2><button id="material0">裸铜条</button><button id="material1">裸铝条</button><button id="material2">干燥普通塑料条</button><button id="material3">干燥普通橡胶条</button>
+<label><input id="left" type="checkbox">左端接触良好</label><label><input id="right" type="checkbox">右端接触良好</label><label><input id="power" type="checkbox">闭合开关</label><button id="reset">重置全部</button>
+<h2>辨别结论</h2><p id="question"></p><button id="yes">能这样说</button><button id="no">不能这样说</button><button id="nextQuestion">下一题</button><p id="feedback" aria-live="polite"></p>
+<p><strong>安全：</strong>只使用教师指定的低压电池器材。不得测插座、市电、人体、液体或正在使用的电器；不直接连接电池两极。换样品和调整接点前先断开开关。</p>
+<p class="small"><strong>模型边界：</strong>四个样品是典型纯净、干燥且表面状态明确的例子；未模拟涂层、添加剂、湿度、接触电阻或击穿。普通塑料/橡胶不代表所有配方。灯不亮不能证明绝对不导电，更不能证明能安全接触高压电。</p></section></main>
+<footer><p><strong>教材正文、版次与教参待核。</strong>本页为低压材料比较与接触检查专题，不等于整课完成或专业绝缘检测。</p><p class="small">科学参考：<a href="https://firstresponder.domsafety.com/topic/conductors-and-insulators/">Dominion Energy：Conductors and Insulators</a>；<a href="https://www.eia.gov/energyexplained/electricity/batteries-circuits-and-transformers.php">EIA：闭合电路</a>。原创 SVG，无署名、无外部依赖。</p></footer><script src="./lesson.js"></script></html>
