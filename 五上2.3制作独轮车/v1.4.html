@@ -1060,11 +1060,66 @@ function icon(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="current
 document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=icon(el.dataset.icon));
 const DEFAULT={body:'standard',frame:'light',tray:'medium',wheel:'large',axle:.32,cargoX:.94,color:'#ef8259'};
 let design={...DEFAULT},page='design',game=null,renderer=null,assembling=false,assemblyTime=0,showForces=false,showLever=false,sound=false,audio=null,dialogOpen=false,history=[],recorded=false,lastFrame=0,loadHold=null,removeHold=null,stageDrag=null,designDrag=null,materialDrag=null,toastTime=0,unloadAnim=0,rulesSeen=false,pushKey=null;
-try{let saved=JSON.parse(localStorage.getItem('wheelbarrow-workshop-v1.1')||localStorage.getItem('wheelbarrow-workshop-v1')||'null');if(saved){if(saved.design)Object.assign(design,saved.design);history=Array.isArray(saved.history)?saved.history.filter(h=>h.rules===WheelbarrowGame.config.scoringVersion).slice(-5):[];}}catch(e){}
+/* 独立版本存储：仅写本版本新键，旧键永远只读。 */
+const WB_KEY='wheelbarrow-workshop-isolated-v1.4-archive-s1',WB_RULE=WheelbarrowGame.config.scoringVersion;
+const wb={raw:null,startupRaw:null,awaitSave:false,locked:false,pending:false,first:true,suppress:false,legacy:[],status:'尚未保存本次更改。'};
+function wbValidate(d,mixed){
+ const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+ const shape=(o,req,opt=[])=>{if(!o||typeof o!=='object'||Array.isArray(o)||req.some(k=>!own(o,k))||Object.keys(o).some(k=>!req.includes(k)&&!opt.includes(k)))throw Error('未知或缺失字段');};
+ const num=(v,min,max,int=false)=>{if(typeof v!=='number'||!Number.isFinite(v)||v<min||v>max||(int&&!Number.isInteger(v)))throw Error('数值不合法');};
+ const rules=['v1.1','v1.3','v1.4'];
+ function vd(x){shape(x,['body','frame','tray','wheel','axle','cargoX','color']);const enums={body:['compact','standard','long'],frame:['light','strong'],tray:['small','medium','deep'],wheel:['small','large']};Object.keys(enums).forEach(k=>{if(!enums[k].includes(x[k]))throw Error('部件无效');});num(x.axle,.18,.60);num(x.cargoX,.82,1.12);if(typeof x.color!=='string'||!/^#[0-9a-f]{6}$/i.test(x.color))throw Error('颜色无效');return {...x};}
+ shape(d,['design','history'],['scoringVersion']);if(!Array.isArray(d.history))throw Error('记录非数组');
+ if(Object.prototype.hasOwnProperty.call(d,'scoringVersion')&&(!rules.includes(d.scoringVersion)||(!mixed&&d.scoringVersion!==WB_RULE)))throw Error('规则版本不匹配');
+ const out={design:vd(d.design),history:d.history.map(h=>{shape(h,['time','force','rests','trips','stars','rules','design'],['overloadTrips']);if(!rules.includes(h.rules)||(!mixed&&h.rules!==WB_RULE))throw Error('记录规则不匹配');num(h.time,0,Number.MAX_SAFE_INTEGER);num(h.force,0,Number.MAX_SAFE_INTEGER);num(h.rests,0,Number.MAX_SAFE_INTEGER,true);num(h.trips,0,Number.MAX_SAFE_INTEGER,true);num(h.stars,1,3,true);if(h.rules==='v1.4'){if(!own(h,'overloadTrips'))throw Error('缺少超载记录');num(h.overloadTrips,0,h.trips,true);}else if(own(h,'overloadTrips'))throw Error('记录字段与规则不匹配');return {...h,design:vd(h.design)};}),scoringVersion:WB_RULE};return out;
+}
+function wbStatus(s){wb.status=s;const e=document.getElementById('wbStorageStatus');if(e)e.textContent=s;}
+function wbPayload(){return {design:{...design},history:history.map(h=>({...h,design:{...h.design}})),scoringVersion:WB_RULE};}
+function wbExport(raw,name){try{const u=URL.createObjectURL(new Blob([raw],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),30000);return true;}catch(e){wbStatus('下载失败，请保留本页和浏览器数据。');return false;}}
+for(const key of ["wheelbarrow-workshop-v1.1", "wheelbarrow-workshop-v1"]){try{const raw=localStorage.getItem(key);if(raw!==null)wb.legacy.push({key,raw});}catch(e){wbStatus('部分旧缓存无法读取，已读取原文仍可备份。');}}
+try{
+ wb.raw=localStorage.getItem(WB_KEY);wb.startupRaw=wb.raw;
+ if(wb.raw!==null){const d=wbValidate(JSON.parse(wb.raw),false);design=d.design;history=d.history;wbStatus('已读取本版本方案与完整历史。');}
+ else if(wb.legacy.length){wb.pending=true;wbStatus('发现旧版缓存。尚未导入或写入，请打开“记录与备份”选择。');}
+}catch(e){wb.locked=true;wbStatus('缓存无法安全读取，已只读保护；当前页面可继续试用，请导出原文/草稿。');}
+function persist(){
+ if(wb.first){wb.first=false;return false;}if(wb.suppress)return false;if(wb.awaitSave){wbStatus('当前恢复/新建草稿仅在本页，请点击“保存当前草稿”。');return false;}
+ if(wb.locked||wb.pending){wbStatus(wb.pending?'未选择旧缓存处理方式：当前更改仅在本页，请打开记录与备份。':'存储只读保护中：当前更改仅在本页，请导出草稿。');return false;}
+ try{const current=localStorage.getItem(WB_KEY);if(current!==wb.raw){wb.locked=true;wbStatus('另一个页面已更改本版本记录，停止自动保存。请先导出当前草稿与缓存，再选择恢复。');return false;}
+ const raw=JSON.stringify(wbValidate(wbPayload(),false));localStorage.setItem(WB_KEY,raw);wb.raw=raw;wbStatus('已保存到本版本独立缓存（'+history.length+' 条记录）。');return true;
+ }catch(e){wbStatus('未保存到本机：数据校验、权限或空间不足；当前草稿仍在本页，可导出。');return false;}
+}
+function wbInstall(){
+ const box=document.createElement('details');box.id='wbStorage';box.style.cssText='position:fixed;right:8px;bottom:6px;z-index:10000;max-width:420px;max-height:70vh;overflow:auto;background:#fff;border:1px solid #a7becb;border-radius:8px;padding:6px 10px;color:#19364b;font:14px/1.5 sans-serif';
+ box.innerHTML='<summary>记录与备份</summary><p id="wbStorageStatus" role="status"></p><div id="wbStorageButtons"></div><p>每个页面版本独立保存；旧键不会改写。导入备份只改变当前页面，需点击“保存当前草稿”后才写新键。</p>';
+ document.body.appendChild(box);wbStatus(wb.status);if(wb.pending||wb.locked)box.open=true;
+ const button=(label,fn)=>{const b=document.createElement('button');b.textContent=label;b.style.cssText='margin:3px;padding:6px';b.onclick=fn;document.getElementById('wbStorageButtons').appendChild(b);};
+ const idle=()=>{if(page!=='design'){wbStatus('请先回到设计页，再恢复或替换记录；游戏进行中不修改设计。');return false;}return true;};
+ const apply=d=>{wb.awaitSave=true;design=d.design;history=d.history;wb.suppress=true;try{renderShelf();drawDesign();}finally{wb.suppress=false;}wbStatus('已载入当前页面，尚未写入新键；原缓存保留。');};
+ button('导出当前草稿',()=>wbExport(JSON.stringify(wbPayload(),null,2),'独轮车-'+WB_KEY+'-草稿.json'));
+ button('导出本版本原始缓存',()=>{try{const raw=localStorage.getItem(WB_KEY);if(raw===null){wbStatus('本版本尚无缓存。');return;}wbExport(raw,'独轮车-'+WB_KEY+'-原文.json');}catch(e){wbStatus('无法读取缓存；若本页曾读取原文，可导出启动快照。');}});
+ button('导出已读取原文快照',()=>{if(wb.startupRaw!==null)wbExport(wb.startupRaw,'独轮车-'+WB_KEY+'-启动快照.json');else wbStatus('没有可导出的已读取原文。');});
+ wb.legacy.forEach(item=>{
+ button('备份旧键 '+item.key,()=>wbExport(item.raw,item.key+'-原文.json'));
+ button('选择导入 '+item.key,()=>{if(!idle())return;let d;try{d=wbValidate(JSON.parse(item.raw),true);}catch(e){wbStatus('此旧缓存不完整或类型无效，未导入；请保留原始备份。');return;}const matching=d.history.filter(h=>h.rules===WB_RULE),other=d.history.length-matching.length;
+ if(!confirm('此缓存共 '+d.history.length+' 条记录，其中 '+matching.length+' 条匹配当前规则 '+WB_RULE+'，另 '+other+' 条不载入但仍完整保留在旧键。是否将其设计及匹配记录载入当前页面？当前页面记录会被替换；旧键绝不修改。'))return;
+ d.history=matching;wb.pending=false;apply(d);});
+ });
+ button('从当前草稿新建（不导入旧键）',()=>{if(!idle()||!confirm('不导入旧缓存，保留当前设计和本页记录？旧缓存原文仍保留。'))return;wb.pending=false;wb.awaitSave=true;wbStatus('已选择不导入旧键；当前草稿未保存，请点击保存当前草稿。');});
+ button('保存当前草稿',()=>{wb.awaitSave=false;persist();});
+ button('恢复 JSON 备份到本页',()=>{if(!idle())return;const input=document.createElement('input');input.type='file';input.accept='.json,application/json';input.onchange=()=>{const file=input.files&&input.files[0];if(!file)return;const requestGame=game,requestDesign=JSON.stringify(design);const r=new FileReader();r.onerror=()=>wbStatus('文件读取失败，当前设计未改变。');r.onload=()=>{let d;try{d=wbValidate(JSON.parse(r.result),false);}catch(e){wbStatus('备份格式或规则不匹配，当前设计与缓存均未改变。');return;}if(game!==requestGame||JSON.stringify(design)!==requestDesign){wbStatus('读文件期间设计或挑战状态已改变，已取消恢复，请重新选择文件。');return;}if(!idle()||!confirm('用此备份替换当前页面设计和完整历史？本机缓存不会改变，可先导出当前草稿。'))return;wb.pending=false;apply(d);};r.readAsText(file);};input.click();});
+ button('备份后解除保护并保存',()=>{if(!idle())return;let d,raw;try{d=wbValidate(wbPayload(),false);raw=localStorage.getItem(WB_KEY);}catch(e){wbStatus('无法校验当前草稿或读取缓存，禁止覆盖。');return;}
+ if(raw!==null&&!wbExport(raw,WB_KEY+'-替换前原文.json'))return;
+ if(!confirm('请确认原始缓存备份已下载并可找到（无原缓存则无需备份）。用当前草稿替换本版本缓存？其他版本与旧键均不改。'))return;
+ try{if(localStorage.getItem(WB_KEY)!==raw){wbStatus('确认期间缓存再次改变，已取消覆盖。请重新备份。');return;}const text=JSON.stringify(d);localStorage.setItem(WB_KEY,text);wb.raw=text;wb.locked=false;wb.pending=false;wb.awaitSave=false;wbStatus('当前草稿已保存到本版本新键；原文请保留在备份中。');}catch(e){wbStatus('保存失败，未主动清除原缓存；当前草稿保留。');}
+ });
+ window.addEventListener('storage',e=>{if(e.key===WB_KEY){wb.locked=true;wbStatus('检测到另一页面更新本版本缓存，已停止自动保存，请先备份再恢复。');}});
+}
+
 const PARTS=[{key:'body',title:'车身 · 车把',options:[['compact','短车把'],['standard','标准'],['long','长车把']]},{key:'frame',title:'车架',options:[['light','轻型 · 8块'],['strong','加强 · 12块']]},{key:'tray',title:'车斗',options:[['small','浅 · 6块'],['medium','中 · 9块'],['deep','深 · 12块']]},{key:'wheel',title:'车轮',options:[['small','小轮'],['large','大轮']]}];
 PARTS.forEach(g=>{if(!g.options.some(x=>x[0]===design[g.key]))design[g.key]=DEFAULT[g.key];});
 design.axle=Math.max(.18,Math.min(.60,Number(design.axle)||.32));design.cargoX=Math.max(.82,Math.min(1.12,Number(design.cargoX)||.94));if(!/^#[0-9a-f]{6}$/i.test(design.color))design.color=DEFAULT.color;
-function persist(){try{localStorage.setItem('wheelbarrow-workshop-v1.1',JSON.stringify({design,history,scoringVersion:WheelbarrowGame.config.scoringVersion}));}catch(e){}}
+
 function thumb(key,value){let c='#647f95',o='#ee956f',b='';if(key==='body'){let len=value==='compact'?44:value==='standard'?53:64;b='<path d="M4 30H'+len+'M4 34H'+len+'" stroke="'+c+'" stroke-width="5"/><path d="M'+(len-8)+' 30h9" stroke="#263f54" stroke-width="6"/>';}else if(key==='frame'){b='<path d="M8 33L43 24L60 14M40 24L44 45L14 8" stroke="#a2b5c3" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 36L47 27L63 17M47 27L50 47L19 11" stroke="'+c+'" stroke-width="'+(value==='strong'?5:3.5)+'" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+(value==='strong'?'<path d="M44 36L49 39" stroke="#42617b" stroke-width="3"/>':'');}else if(key==='tray'){let h=value==='small'?13:value==='medium'?21:29;b='<path d="M7 '+(37-h)+'H57L49 39H15Z" fill="'+o+'" stroke="#c9704b" stroke-width="2"/><path d="M8 '+(37-h)+'H56" stroke="#f6bc99" stroke-width="4"/>';}else{let r=value==='small'?13:19;b='<circle cx="32" cy="26" r="'+r+'" fill="#294154"/><circle cx="32" cy="26" r="'+(r-6)+'" fill="#c5d4df"/><circle cx="32" cy="26" r="3" fill="#5d7c95"/><path d="M32 '+(26-r+6)+'v'+(2*r-12)+'m-'+(r-6)+' -'+(r-6)+'h'+(2*r-12)+'" stroke="#728a9d" stroke-width="2"/>';}
 return '<svg viewBox="0 0 68 52" aria-hidden="true">'+b+'</svg>';}
 function renderShelf(){ $('partGroups').innerHTML=PARTS.map(g=>'<section class="part-group"><h3>'+g.title+'</h3><div class="part-options">'+g.options.map(([v,n])=>'<button class="part '+(design[g.key]===v?'selected':'')+'" data-part="'+g.key+'" data-value="'+v+'" aria-label="'+g.title+' '+n+'" aria-pressed="'+(design[g.key]===v)+'">'+thumb(g.key,v)+'<span>'+n+'</span></button>').join('')+'</div></section>').join('');$('colors').innerHTML=['#ef8259','#458fc7','#d6af4f'].map(c=>'<button class="color-dot '+(design.color===c?'selected':'')+'" data-color="'+c+'" style="--swatch:'+c+'" aria-label="'+(c==='#ef8259'?'橙色':c==='#458fc7'?'蓝色':'黄色')+'车斗" aria-pressed="'+(design.color===c)+'"></button>').join('');}
@@ -1356,7 +1411,7 @@ function finish(){
  recorded=true;stopHold();
  const s=game.state,prev=history.length?history[history.length-1]:null;
  const entry={time:game.getMetrics().gameMinutes,force:s.meanForce,rests:s.rests,trips:s.trips,stars:s.stars,overloadTrips:s.overloadTrips,rules:WheelbarrowGame.config.scoringVersion,design:{...design}};
- history.push(entry);history=history.slice(-5);persist();
+ history.push(entry);persist();
  $('resultStars').innerHTML=[0,1,2].map(i=>icon('star').replace('<svg ','<svg class="'+(i<s.stars?'earned':'')+'" style="animation-delay:'+i*.12+'s" ')).join('');
  $('resultStars').setAttribute('aria-label',s.stars+'星认证');
  setText('resultTime',minuteValue(entry.time));
@@ -1367,14 +1422,14 @@ function finish(){
  if(prev){
    let delta=entry.time-prev.time,df=s.meanForce-prev.force;
    $('comparison').innerHTML='与上次相比：用时 <strong>'+(delta<0?'减少 ':'增加 ')+minuteValue(Math.abs(delta))+' 分钟</strong>，平均用力 <strong>'+(df<0?'减少 ':'增加 ')+Math.round(Math.abs(df))+' N</strong>。<br>上次：'+minuteValue(prev.time)+' 分钟 / '+Math.round(prev.force)+' N / 休息 '+prev.rests+' 次';
- }else $('comparison').textContent='本次结果已记录。改装后，用相同的 200 块砖和 20 m 路线再比较。';
+ }else $('comparison').textContent='本次结果已记入当前页面；本机保存情况见“记录与备份”。改装后，用相同的 200 块砖和 20 m 路线再比较。';
  beep(660,.15);setTimeout(()=>beep(880,.2),170);openDialog('resultDialog');
 }
 $('redesignBtn').onclick=returnToDesign;$('retryBtn').onclick=()=>{closeDialog('resultDialog');game=new WheelbarrowGame(design);recorded=false;renderer.setDesign(design);renderer.resetCamera();updateHud();$('batchSlider').value=WheelbarrowGame.getDesignStats(design).capacity;renderer.setViewMode('follow');$('cameraModeLabel').textContent='第一视角';toast('新一轮 200 块砖挑战');};
 function frame(now){requestAnimationFrame(frame);if(!lastFrame)lastFrame=now;let dt=Math.max(0,(now-lastFrame)/1000);lastFrame=now;if(document.hidden)return;if(toastTime>0){toastTime-=dt;if(toastTime<=0)$('toast').classList.remove('show');}if(page!=='game'||!game||!renderer)return;if(!dialogOpen){if(assembling){assemblyTime+=dt;let a=Math.min(1,assemblyTime/6.4);$('assemblyProgress').style.width=(a*100)+'%';setText('assemblyLabel',a<.25?'车身定位':a<.45?'安装车架':a<.60?'固定车斗':a<.76?'穿入轮轴，拧紧螺母':a<.95?'焊接固定连接':'组装完成，进入工地');if(a>=1){assembling=false;$('assemblyLayer').hidden=true;toast('装第一块砖，挑战就开始！');beep(720,.12);if(!rulesSeen){rulesSeen=true;$('rulesStart').textContent='开始搬运';openDialog('rulesDialog');}}}else{let oldRest=game.state.resting,oldDrop=game.state.dropEvent;game.step(dt);if(!oldRest&&game.state.resting){stopHold();beep(230,.14);toast('工地休息 10 分钟 · 时间加速中');}if(game.state.dropEvent>oldDrop){stopHold();beep(160,.24);toast('⚠ 超载滑落 '+game.state.fallen+' 块砖！停下捡回');}unloadAnim=Math.max(0,unloadAnim-dt*2.5);if(game.state.finished&&!recorded)finish();}}
  const s=game.state,m=game.getMetrics();renderer.render({mode:assembling?'assembly':'game',assembly:Math.min(1,assemblyTime/6.4),x:s.x,direction:s.direction,cargo:s.cargo,source:s.source,delivered:s.delivered,dropped:s.dropped,fallen:s.fallen,elapsed:s.elapsed,moving:s.moving,resting:s.resting,restLeft:s.restLeft,restMinutesLeft:s.restLeft/WheelbarrowGame.config.restSeconds*WheelbarrowGame.config.restGameMinutes,lifting:s.moving,forceUp:m.forceUp,forcePush:m.forcePush,showForces,unload:unloadAnim,wheelAngle:s.wheelAngle,celebration:s.finished},now/1000);updateHud();
 }
-renderShelf();drawDesign();requestAnimationFrame(frame);
+wbInstall();renderShelf();drawDesign();requestAnimationFrame(frame);
 })();
 </script>
 </body>
