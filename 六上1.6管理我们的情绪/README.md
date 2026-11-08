@@ -98,3 +98,12 @@
 
 - [NHS：Breathing exercises for stress](https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/breathing-exercises-for-stress/)，用于舒适、不勉强的呼吸节奏说明。
 - [UNICEF：How to recognize signs of distress in children](https://www.unicef.org/parenting/child-care/how-to-recognize-signs-of-distress)，用于儿童反应差异与自主表达边界。
+
+
+## 2026-11-08 记录保护修订
+演示与自愿体验各自最多8条，满额停止新增，不删除任一模式的旧记录；记录仍仅在本页内存，刷新会清空，请先导出。
+本次验证范围及限制见修复交付说明；教参原件尚未取得，不声称已独立逐页核验。
+
+### 本轮集成验证
+云端 Chromium 正常验证：虚构演示练习前6、练习后4，可保存并在记录列表查看，显示每模式8条且满额不删除的说明。
+坏缓存、类型异常、配额失败、并发冲突及满额路径采用隔离 Node 测试；未做浏览器故障注入、备份下载落盘或旧平板/希沃实机测试。

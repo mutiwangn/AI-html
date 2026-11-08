@@ -84,6 +84,36 @@ input[type=range]{-webkit-appearance:none;appearance:none;background:transparent
  <div class="modal-card"><div class="modal-heading"><h2 id="modal-title"></h2><button type="button" id="modal-close" class="quiet-button" aria-label="关闭对话框">关闭</button></div><div id="modal-body" class="modal-body"></div></div>
 </div>
 <noscript><div class="no-script">请在浏览器中启用JavaScript，以使用本课的交互功能。</div></noscript>
+<script>
+/* Local-only evidence protection. No network, no extra persistent copies. */
+window.LessonRecordGuard=function(key,title,current,validate){
+ 'use strict';
+ var original=null,known=false,blocked=false,dirty=false,reason='',backupRaw,backupMade=false,box,button,msg,check,replaceButton;
+ function raw(){return localStorage.getItem(key);}
+ function show(text,bad){reason=text;dirty=!!bad;if(button){button.textContent=bad?'记录未保存 · 查看保护':'本机记录 · '+text;button.style.background=bad?'#9a342d':'#245c50';msg.textContent=text;}}
+ function lock(text){blocked=true;show(text+'。原档未覆盖；当前操作仅留在本页，请先备份。',true);}
+ function load(){try{original=raw();known=true;if(original===null){show('尚未写入',false);return null;}var data=JSON.parse(original);if(!validate(data))throw new Error('invalid');show('已读取',false);return data;}catch(e){lock(known?'本机记录格式或版本不受支持':'本机存储不可读');return null;}}
+ function save(){if(blocked){show(reason,true);return false;}try{if(!known||raw()!==original){lock('另一页面已更改本机记录');return false;}var value=current();if(!validate(value)){lock('当前记录格式异常');return false;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;show('已保存',false);return true;}catch(e){show('未能写入本机；请保留本页并下载备份',true);return false;}}
+ function backup(){var latest=null,readError=false;try{latest=raw();}catch(e){readError=true;}var payload={format:'lesson-local-backup-v1',lesson:title,storageKey:key,createdAt:new Date().toISOString(),originalRaw:original,latestRaw:latest,latestReadFailed:readError,currentPage:current()};try{var url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=title+'-本机记录备份.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},60000);backupRaw=latest;backupMade=!readError;check.checked=false;replaceButton.disabled=true;msg.textContent='已发起备份下载。请到下载位置核实文件已保存；包含个人记录，请勿公开或上传。备份仅供保全，本页没有自动导入功能。';}catch(e){msg.textContent='备份未能生成；请勿关闭本页或替换原档。';backupMade=false;}}
+ function replace(){if(!backupMade||!check.checked)return;try{if(raw()!==backupRaw){backupMade=false;check.checked=false;replaceButton.disabled=true;lock('备份后本机档案再次改变，请重新备份');return;}var value=current();if(!validate(value)){lock('当前记录格式异常，不能替换');return;}var next=JSON.stringify(value);localStorage.setItem(key,next);original=next;known=true;blocked=false;backupMade=false;check.checked=false;replaceButton.disabled=true;show('已用当前页面记录替换；请妥善保留备份',false);}catch(e){show('替换未成功；原档未主动删除，请保留本页和备份',true);}}
+ function mount(){
+  var host=document.createElement('div');host.id='local-record-protection';host.style.cssText='position:fixed;right:10px;bottom:6px;z-index:10000;font:14px/1.6 system-ui,sans-serif;max-width:calc(100vw - 20px);color:#20352d';
+  button=document.createElement('button');button.type='button';button.style.cssText='color:white;border:1px solid white;border-radius:8px;padding:5px 10px;min-height:32px;font:13px system-ui;cursor:pointer';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','local-record-panel');
+  box=document.createElement('section');box.id='local-record-panel';box.hidden=true;box.setAttribute('aria-label','本机记录保护');box.style.cssText='position:absolute;bottom:42px;right:0;width:360px;max-width:calc(100vw - 20px);max-height:75vh;overflow:auto;background:#fff;border:2px solid #587367;border-radius:12px;padding:15px;box-shadow:0 3px 20px #0004;font-size:14px';
+  msg=document.createElement('p');msg.setAttribute('role','status');box.appendChild(msg);
+  var privacy=document.createElement('p');privacy.textContent='数据只在本机和本页，不上传。共用设备请勿录入姓名或可识别的健康信息。备份可能含个人记录，应私人保管。';box.appendChild(privacy);
+  function add(label,fn){var b=document.createElement('button');b.type='button';b.textContent=label;b.style.cssText='display:block;background:#e8f1ec;border:1px solid #738c7d;border-radius:6px;padding:7px;margin:6px 0;min-height:40px;white-space:normal;font:14px system-ui';b.addEventListener('click',fn);box.appendChild(b);return b;}
+  add('下载原档与当前页面备份',backup);add('重试保存（不覆盖冲突档）',save);
+  var label=document.createElement('label');label.style.cssText='display:block;white-space:normal;font-size:14px';check=document.createElement('input');check.type='checkbox';label.appendChild(check);label.appendChild(document.createTextNode('我已核实备份文件落盘，并同意以当前页面记录替换本机档案'));box.appendChild(label);
+  replaceButton=add('确认替换本机档案',replace);replaceButton.disabled=true;check.addEventListener('change',function(){replaceButton.disabled=!(backupMade&&check.checked);});
+  add('关闭记录保护',function(){box.hidden=true;button.setAttribute('aria-expanded','false');button.focus();});button.addEventListener('click',function(){box.hidden=!box.hidden;button.setAttribute('aria-expanded',String(!box.hidden));});host.appendChild(box);host.appendChild(button);document.body.appendChild(host);show(reason||'尚未写入',dirty);
+ }
+ window.addEventListener('storage',function(e){if(e.key===key||e.key===null){try{if(raw()!==original)lock('另一页面已更改本机记录');}catch(err){lock('本机存储不可读');}}});
+ window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+ mount();return {load:load,save:save,lock:lock};
+};
+
+</script>
 <script>/* Inline food illustrations. Each value is SVG content for viewBox="0 0 100 100".
  * Replacement interface: keep the same FOOD_ART keys and 100x100 coordinate space.
  * No external assets, gradients, IDs, fonts or runtime dependencies. */
@@ -194,8 +224,12 @@ window.NutritionModel={foods:FOODS,recipes:RECIPES,references:REFS,initialPlan:i
 var $=function(id){return document.getElementById(id);};
 var state={plan:initialPlan(),baseline:null,compare:false,recipe:'tomatoegg',group:'staple',food:null,spread:0,counted:false,page:'inspect'};
 var toastTimer,saveTimer,lastFocus=null,animationToken=0;
-try{var stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');if(stored&&validatePlan(stored.plan)){state.plan=validatePlan(stored.plan);state.baseline=validatePlan(stored.baseline);state.counted=!!stored.counted;}}catch(ignore){}
-function persist(){clearTimeout(saveTimer);saveTimer=setTimeout(function(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({plan:state.plan,baseline:state.baseline,counted:state.counted}));}catch(ignore){}},180);}
+function validStoredPlan(p){return p&&typeof p==='object'&&!Array.isArray(p)&&Object.keys(p).every(function(k){return RECIPES.some(function(r){return r.id===k;});})&&RECIPES.every(function(r){return p[r.id]&&typeof p[r.id]==='object'&&!Array.isArray(p[r.id])&&Object.keys(p[r.id]).every(function(k){return Object.prototype.hasOwnProperty.call(r.items,k);})&&Object.keys(r.items).every(function(k){return typeof p[r.id][k]==='number'&&isFinite(p[r.id][k])&&p[r.id][k]>=0;});})&&!!validatePlan(p);}
+function validArchive(d){return d&&typeof d==='object'&&!Array.isArray(d)&&Object.keys(d).every(function(k){return ['plan','baseline','counted'].indexOf(k)>=0;})&&validStoredPlan(d.plan)&&(d.baseline===null||validStoredPlan(d.baseline))&&typeof d.counted==='boolean';}
+function archive(){return {plan:state.plan,baseline:state.baseline,counted:state.counted};}
+var recordGuard=new LessonRecordGuard(STORAGE_KEY,'营养要均衡',archive,validArchive);
+var stored=recordGuard.load();if(stored){state.plan=stored.plan;state.baseline=stored.baseline;state.counted=stored.counted;}
+function persist(){return recordGuard.save();}
 function sizeApp(){document.documentElement.style.setProperty('--app-height',window.innerHeight+'px');}
 sizeApp();window.addEventListener('resize',sizeApp);
 function icon(id,css){return '<svg class="food-icon '+(css||'')+'" viewBox="0 0 100 100" aria-hidden="true">'+window.FOOD_ART[id]+'</svg>';}
