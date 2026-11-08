@@ -465,9 +465,13 @@ body{
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-thumb{background:#c9dceb;border-radius:999px}
 ::-webkit-scrollbar-track{background:transparent}
+
+/* 课堂可读性修订：侧栏允许滚动，地图名称加大 */
+.opt-name,.gc-name{font-size:18px!important}.opt-rule,.gc-hint,.gc-tags,.plot-rule{font-size:15px!important;line-height:1.4!important}.plot-name{font-size:23px!important}.plot-rule{font-size:19px!important}.plot-info{min-width:180px}.gc{min-height:100px}#hdr{flex-wrap:wrap;height:auto;min-height:80px;padding:8px;gap:6px}#hdr .btn{font-size:14px;padding:8px}#bones{width:min(1100px,95vw);max-height:92vh;overflow:auto;border:0;border-radius:18px;padding:24px;color:#20324a;font:18px/1.6 system-ui}#bones::backdrop{background:#1239}.bone-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.bone-card{border:1px solid #abc;border-radius:12px;padding:12px;background:#f5faff}.bone-card svg{width:100%;height:190px}.spine{stroke:#8897a4;stroke-width:8;stroke-dasharray:8 3;fill:none}#bones.reveal .spine{stroke:#de5c26}#bone-answer{display:none}#bones.reveal #bone-answer{display:block}#bones button{font:inherit;padding:8px 15px;border-radius:8px;cursor:pointer}#bones textarea{width:100%;font:inherit;min-height:65px}@media(max-width:700px){.bone-grid{grid-template-columns:1fr}}
+#ftr-msg{padding-left:92px}.tc-desc,.tc-note{font-size:15px!important}
 </style>
 </head>
-<body>
+<body><dialog id="bones"><div style="display:flex;justify-content:space-between"><h2>比较骨骼，寻找共同特征</h2><button onclick="this.closest('dialog').close()">返回动物城</button></div><p>先观察鱼、鸡、兔：哪一部分是一节一节连起来的？它们的位置和形状有什么不同？</p><div class="bone-grid"><section class="bone-card"><h3>鱼</h3><svg viewBox="0 0 300 190" role="img" aria-label="鱼的简化骨骼示意"><path d="M50 100 Q120 60 220 100 Q130 140 50 100 M220 100 L260 65 L260 135 Z" fill="#e2edf3" stroke="#a3b9c7"/><path d="M100 100 L90 70 M120 100 L115 65 M140 100 L145 65 M160 100 L175 75 M100 100 L90 125 M120 100 L115 135 M140 100 L145 135 M160 100 L175 125" fill="none" stroke="#698090" stroke-width="3"/><path class="spine" d="M80 100 L220 100"/></svg></section><section class="bone-card"><h3>鸡</h3><svg viewBox="0 0 300 190" role="img" aria-label="鸡的简化骨骼示意"><path d="M80 75 Q100 15 125 45 L125 75 Q180 45 220 100 Q180 135 125 115 Z" fill="#e2edf3" stroke="#a3b9c7"/><path d="M135 95 L125 115 M155 95 L150 120 M175 98 L175 120 M175 120 L170 160 L155 175 M190 120 L200 155 L215 173 M125 80 L150 65 L170 80" fill="none" stroke="#698090" stroke-width="3"/><path class="spine" d="M110 55 Q100 90 145 95 L210 100"/></svg></section><section class="bone-card"><h3>兔</h3><svg viewBox="0 0 300 190" role="img" aria-label="兔的简化骨骼示意"><path d="M55 80 L70 25 L80 65 L90 20 L100 75 Q150 50 220 90 Q245 125 200 130 L90 120 Z" fill="#e2edf3" stroke="#a3b9c7"/><path d="M115 80 L110 115 M135 78 L135 118 M155 80 L160 120 M175 87 L185 120 M105 115 L90 155 L65 155 M205 115 L220 140 L195 160 L165 160" fill="none" stroke="#698090" stroke-width="3"/><path class="spine" d="M80 88 Q140 65 220 105"/></svg></section></div><p>原创结构示意，非真实标本、非等比例，也不是完整解剖图。请对照教材第31页骨骼图片或安全处理的鱼骨标本辨认。</p><label>我们的观察证据（可先说，再记）<textarea placeholder="我们发现……"></textarea></label><button onclick="document.getElementById('bones').classList.toggle('reveal')">显示 / 隐藏脊柱比较</button><div id="bone-answer"><p>橙色部分表示脊柱：许多块椎骨一节一节连接。鱼、鸡、兔都有脊柱，是脊椎动物。鱼刺不全是脊柱，其他骨骼不能都叫脊柱。</p><p>人也有脊柱。对照人体骨骼图，找一找颈部到背部的脊柱。昆虫、蜗牛等没有脊柱，是无脊椎动物；外壳不是脊柱。</p><p>换一个标准再分：会飞的蝴蝶和鸟是否属于同一动物类别？有硬壳的蜗牛与龟是否都有脊柱？说出依据，不只看外形。</p><p>保护我国珍稀动物，如大熊猫、金丝猴、朱鹮。观察不捕捉，不投喂野生动物。</p></div></dialog>
 
 <div id="hdr">
   <div class="logo">
@@ -477,14 +481,14 @@ body{
       <h1>动物城城市建设</h1>
     </div>
   </div>
-  <div class="flex1"></div>
+  <button class="btn btn-g" onclick="document.getElementById('bones').showModal()">骨骼观察</button><button class="btn btn-g" onclick="if(S.phase==='running' && S.queue.length<6)spawnGuest()">下一位</button><button class="btn btn-g" onclick="if(S.phase==='running'){clearT();S.phase='ended';renderAll();showResult();}">结束本轮</button><div class="flex1"></div>
   <div class="mode-tog">
     <button class="mode-btn on" id="btn-nov" onclick="setMode('novice')">新手模式</button>
     <button class="mode-btn" id="btn-std" onclick="setMode('standard')">标准模式</button>
   </div>
   <div class="sbox">
-    <span class="slbl">⏱ 倒计时</span>
-    <span class="sval" id="timer">1:00</span>
+    <span class="slbl">课堂节奏</span>
+    <span class="sval" id="timer">不限时</span>
   </div>
   <div class="sbox" style="min-width:126px">
     <span class="slbl">⭐ 城市口碑</span>
@@ -591,35 +595,35 @@ const WORLD_CX = 2600;
 const WORLD_CY = 2400;
 
 const THEMES = {
-  food:{id:'food',name:'美食广场',badge:'食性分类',emoji:'🍽️',desc:'按吃什么来分类，比如草食、肉食、杂食、吃果实、吃昆虫。',options:[
+  food:{id:'food',name:'美食广场',badge:'食性分类',emoji:'🍽️',desc:'本主题是可交叉的食物标签，不是互斥分组。食性会因物种、阶段和环境而异。',options:[
     {id:'herbivore-hall',name:'草食餐厅',sym:'🌿',rule:'主要吃植物'},
     {id:'carnivore-hall',name:'肉食餐厅',sym:'🥩',rule:'主要吃肉'},
     {id:'omnivore-hall',name:'杂食餐厅',sym:'🍚',rule:'植物和动物都吃'},
     {id:'fruit-bar',name:'果实小屋',sym:'🍎',rule:'喜欢果实和种子'},
     {id:'insect-corner',name:'昆虫食堂',sym:'🐞',rule:'常吃昆虫'},
   ]},
-  residence:{id:'residence',name:'生活家园',badge:'栖息地分类',emoji:'🏠',desc:'按生活环境分类，比如森林、草原、水边、农场、冰雪地区。',options:[
+  residence:{id:'residence',name:'生活家园',badge:'栖息地分类',emoji:'🏠',desc:'本主题是常见生活场所标签，可重叠；不是所有个体都生活在同一处。',options:[
     {id:'forest-home',name:'森林小屋',sym:'🌲',rule:'生活在森林'},
     {id:'grassland-home',name:'草原社区',sym:'🌾',rule:'生活在草地平原'},
-    {id:'water-home',name:'水边公寓',sym:'🌊',rule:'生活在水边湿地'},
+    {id:'water-home',name:'水边公寓',sym:'🌊',rule:'生活在水中或水边'},
     {id:'farm-home',name:'农场小院',sym:'🚜',rule:'常见于农场庭院'},
     {id:'snow-home',name:'冰雪基地',sym:'❄️',rule:'适合寒冷冰雪环境'},
   ]},
   sports:{id:'sports',name:'运动中心',badge:'运动方式分类',emoji:'🏃',desc:'按怎样移动分类，比如飞、游、跑、跳、爬。',options:[
-    {id:'flying-zone',name:'飞行训练场',sym:'🕊️',rule:'主要靠飞行'},
-    {id:'swimming-zone',name:'游泳馆',sym:'🐟',rule:'主要靠游泳'},
-    {id:'running-zone',name:'奔跑赛道',sym:'🐾',rule:'主要靠奔跑'},
+    {id:'flying-zone',name:'飞行训练场',sym:'🕊️',rule:'能够飞行'},
+    {id:'swimming-zone',name:'游泳馆',sym:'🐟',rule:'能够游泳'},
+    {id:'running-zone',name:'奔跑赛道',sym:'🐾',rule:'能够奔跑'},
     {id:'jumping-zone',name:'跳跃乐园',sym:'🦘',rule:'特别擅长跳跃'},
     {id:'climbing-zone',name:'攀爬馆',sym:'🌿',rule:'擅长攀爬'},
   ]},
-  feature:{id:'feature',name:'外形研究所',badge:'身体特征分类',emoji:'🔍',desc:'按身体特征分类，比如有羽毛、有鳞片、有壳、有长鼻子、有角。',options:[
+  feature:{id:'feature',name:'外形研究所',badge:'身体特征分类',emoji:'🔍',desc:'按已有证据选择身体特征；有角等特征会因物种、性别与年龄而异，未列标签不等于没有。',options:[
     {id:'feather-lab',name:'羽毛馆',sym:'🪶',rule:'身体上有羽毛'},
     {id:'scale-lab',name:'鳞片馆',sym:'✨',rule:'身体有鳞片'},
     {id:'shell-lab',name:'硬壳馆',sym:'🛡️',rule:'身体外面有壳'},
     {id:'longnose-lab',name:'长鼻馆',sym:'👃',rule:'有长鼻子或长嘴'},
     {id:'horn-lab',name:'角角馆',sym:'🫎',rule:'头上有角'},
   ]},
-  biology:{id:'biology',name:'动物学院',badge:'生物类别分类',emoji:'📚',desc:'按大类来分，比如哺乳动物、鸟类、鱼类、爬行动物、昆虫。',options:[
+  biology:{id:'biology',name:'动物学院',badge:'生物类别分类',emoji:'📚',desc:'这些是常见动物类别示例，并未穷尽所有类别；请同时比较骨骼与脊柱。',options:[
     {id:'mammal-school',name:'哺乳学院',sym:'🐻',rule:'属于哺乳动物'},
     {id:'bird-school',name:'鸟类学院',sym:'🐦',rule:'属于鸟类'},
     {id:'fish-school',name:'鱼类学院',sym:'🐠',rule:'属于鱼类'},
@@ -629,15 +633,15 @@ const THEMES = {
 };
 
 const HINTS = {
-  food:{'herbivore-hall':n=>`${n}吃植物。`,'carnivore-hall':n=>`${n}吃肉。`,'omnivore-hall':n=>`${n}什么都吃。`,'fruit-bar':n=>`${n}爱吃果实。`,'insect-corner':n=>`${n}会吃虫子。`},
-  residence:{'forest-home':n=>`${n}住森林。`,'grassland-home':n=>`${n}住草地。`,'water-home':n=>`${n}离不开水边。`,'farm-home':n=>`${n}常见在农场。`,'snow-home':n=>`${n}适合冰雪地区。`},
+  food:{'herbivore-hall':n=>`${n}吃植物。`,'carnivore-hall':n=>`${n}吃肉。`,'omnivore-hall':n=>`${n}既吃植物性食物，也吃动物性食物，并非什么都吃。`,'fruit-bar':n=>`${n}爱吃果实。`,'insect-corner':n=>`${n}会吃虫子。`},
+  residence:{'forest-home':n=>`${n}住森林。`,'grassland-home':n=>`${n}住草地。`,'water-home':n=>`${n}生活在水中或水边。`,'farm-home':n=>`${n}常见在农场。`,'snow-home':n=>`${n}适合冰雪地区。`},
   sports:{'flying-zone':n=>`${n}会飞。`,'swimming-zone':n=>`${n}会游。`,'running-zone':n=>`${n}会跑。`,'jumping-zone':n=>`${n}会跳。`,'climbing-zone':n=>`${n}会爬。`},
   feature:{'feather-lab':n=>`${n}有羽毛。`,'scale-lab':n=>`${n}有鳞片。`,'shell-lab':n=>`${n}有硬壳。`,'longnose-lab':n=>`${n}有长鼻子或长嘴。`,'horn-lab':n=>`${n}头上有角。`},
   biology:{'mammal-school':n=>`${n}是哺乳动物。`,'bird-school':n=>`${n}是鸟类。`,'fish-school':n=>`${n}是鱼类。`,'reptile-school':n=>`${n}是爬行动物。`,'insect-school':n=>`${n}是昆虫。`}
 };
 
 const ANIMALS = [
-  {id:'rabbit',name:'兔子',emoji:'🐰',group:'哺乳动物',likes:['herbivore-hall','grassland-home','forest-home','running-zone','mammal-school']},
+  {id:'rabbit',name:'兔子',emoji:'🐰',group:'哺乳动物',likes:['herbivore-hall','grassland-home','forest-home','running-zone','mammal-school','jumping-zone']},
   {id:'panda',name:'熊猫',emoji:'🐼',group:'哺乳动物',likes:['herbivore-hall','forest-home','climbing-zone','mammal-school']},
   {id:'cat',name:'小猫',emoji:'🐱',group:'哺乳动物',likes:['carnivore-hall','farm-home','running-zone','climbing-zone','mammal-school']},
   {id:'dog',name:'小狗',emoji:'🐶',group:'哺乳动物',likes:['omnivore-hall','farm-home','running-zone','mammal-school']},
@@ -653,10 +657,10 @@ const ANIMALS = [
   {id:'tiger',name:'老虎',emoji:'🐯',group:'哺乳动物',likes:['carnivore-hall','forest-home','running-zone','mammal-school']},
   {id:'deer',name:'小鹿',emoji:'🦌',group:'哺乳动物',likes:['herbivore-hall','forest-home','grassland-home','horn-lab','running-zone','mammal-school']},
   {id:'zebra',name:'斑马',emoji:'🦓',group:'哺乳动物',likes:['herbivore-hall','grassland-home','running-zone','mammal-school']},
-  {id:'giraffe',name:'长颈鹿',emoji:'🦒',group:'哺乳动物',likes:['herbivore-hall','grassland-home','longnose-lab','mammal-school']},
+  {id:'giraffe',name:'长颈鹿',emoji:'🦒',group:'哺乳动物',likes:['herbivore-hall','grassland-home','mammal-school']},
   {id:'kangaroo',name:'袋鼠',emoji:'🦘',group:'哺乳动物',likes:['herbivore-hall','grassland-home','jumping-zone','mammal-school']},
   {id:'bear',name:'棕熊',emoji:'🐻',group:'哺乳动物',likes:['omnivore-hall','forest-home','mammal-school']},
-  {id:'bat',name:'蝙蝠',emoji:'🦇',group:'哺乳动物',likes:['fruit-bar','flying-zone','mammal-school']},
+  {id:'bat',name:'果蝠',emoji:'🦇',group:'哺乳动物',likes:['fruit-bar','flying-zone','mammal-school']},
   {id:'fox',name:'狐狸',emoji:'🦊',group:'哺乳动物',likes:['omnivore-hall','forest-home','running-zone','mammal-school']},
   {id:'chicken',name:'小鸡',emoji:'🐔',group:'鸟类',likes:['omnivore-hall','farm-home','feather-lab','bird-school']},
   {id:'duck',name:'鸭子',emoji:'🦆',group:'鸟类',likes:['omnivore-hall','water-home','farm-home','feather-lab','bird-school','swimming-zone']},
@@ -664,20 +668,20 @@ const ANIMALS = [
   {id:'sparrow',name:'麻雀',emoji:'🐦',group:'鸟类',likes:['fruit-bar','farm-home','flying-zone','feather-lab','bird-school']},
   {id:'parrot',name:'鹦鹉',emoji:'🦜',group:'鸟类',likes:['fruit-bar','forest-home','flying-zone','feather-lab','bird-school']},
   {id:'owl',name:'猫头鹰',emoji:'🦉',group:'鸟类',likes:['carnivore-hall','forest-home','flying-zone','feather-lab','bird-school']},
-  {id:'penguin',name:'企鹅',emoji:'🐧',group:'鸟类',likes:['carnivore-hall','snow-home','swimming-zone','feather-lab','bird-school']},
+  {id:'penguin',name:'帝企鹅',emoji:'🐧',group:'鸟类',likes:['carnivore-hall','snow-home','swimming-zone','feather-lab','bird-school']},
   {id:'eagle',name:'老鹰',emoji:'🦅',group:'鸟类',likes:['carnivore-hall','forest-home','flying-zone','feather-lab','bird-school']},
   {id:'peacock',name:'孔雀',emoji:'🦚',group:'鸟类',likes:['fruit-bar','forest-home','feather-lab','bird-school']},
-  {id:'goldfish',name:'金鱼',emoji:'🐟',group:'鱼类',likes:['omnivore-hall','water-home','swimming-zone','fish-school']},
+  {id:'goldfish',name:'金鱼',emoji:'🐟',group:'鱼类',likes:['omnivore-hall','water-home','swimming-zone','fish-school','scale-lab']},
   {id:'shark',name:'鲨鱼',emoji:'🦈',group:'鱼类',likes:['carnivore-hall','water-home','swimming-zone','fish-school']},
   {id:'dolphin',name:'海豚',emoji:'🐬',group:'哺乳动物',likes:['carnivore-hall','water-home','swimming-zone','mammal-school']},
   {id:'whale',name:'鲸鱼',emoji:'🐋',group:'哺乳动物',likes:['carnivore-hall','water-home','swimming-zone','mammal-school']},
   {id:'frog',name:'青蛙',emoji:'🐸',group:'两栖动物',likes:['insect-corner','water-home','jumping-zone']},
-  {id:'turtle',name:'乌龟',emoji:'🐢',group:'爬行动物',likes:['herbivore-hall','water-home','shell-lab','reptile-school']},
+  {id:'turtle',name:'中华草龟',emoji:'🐢',group:'爬行动物',likes:['omnivore-hall','water-home','shell-lab','reptile-school']},
   {id:'snake',name:'小蛇',emoji:'🐍',group:'爬行动物',likes:['carnivore-hall','forest-home','scale-lab','reptile-school']},
   {id:'crocodile',name:'鳄鱼',emoji:'🐊',group:'爬行动物',likes:['carnivore-hall','water-home','scale-lab','reptile-school']},
-  {id:'lizard',name:'蜥蜴',emoji:'🦎',group:'爬行动物',likes:['insect-corner','forest-home','scale-lab','reptile-school','climbing-zone']},
-  {id:'bee',name:'蜜蜂',emoji:'🐝',group:'昆虫',likes:['fruit-bar','insect-school','flying-zone']},
-  {id:'butterfly',name:'蝴蝶',emoji:'🦋',group:'昆虫',likes:['fruit-bar','flying-zone','insect-school']},
+  {id:'lizard',name:'壁虎',emoji:'🦎',group:'爬行动物',likes:['insect-corner','forest-home','scale-lab','reptile-school','climbing-zone']},
+  {id:'bee',name:'蜜蜂',emoji:'🐝',group:'昆虫',likes:['insect-school','flying-zone']},
+  {id:'butterfly',name:'蝴蝶',emoji:'🦋',group:'昆虫',likes:['flying-zone','insect-school']},
   {id:'ladybug',name:'瓢虫',emoji:'🐞',group:'昆虫',likes:['insect-school','flying-zone']},
   {id:'ant',name:'蚂蚁',emoji:'🐜',group:'昆虫',likes:['insect-school']},
   {id:'snail',name:'蜗牛',emoji:'🐌',group:'软体动物',likes:['forest-home','shell-lab']},
@@ -735,7 +739,7 @@ function pickAnimal(optId){
   const m=ANIMALS.filter(a=>a.likes.includes(optId));
   return (m.length?m:ANIMALS)[Math.floor(Math.random()*(m.length||ANIMALS.length))];
 }
-function guestR(wait){if(wait<=5)return 5;if(wait<=10)return 4;if(wait<=16)return 3;return 2;}
+function guestR(wait){return 5;}
 
 function isoPos(gx,gy){
   return {
@@ -777,7 +781,7 @@ function renderAll(){
 }
 
 function renderHdr(){
-  document.getElementById('timer').textContent=fmt(S.timeLeft);
+  document.getElementById('timer').textContent='不限时';
   const av=avgR();
   document.getElementById('rating-val').textContent=av===null?'—':av.toFixed(1);
   document.getElementById('stars-fg').style.width=starW(av);
@@ -868,7 +872,7 @@ function renderQueue(){
   const grid=document.getElementById('q-grid');
   document.getElementById('q-cnt').textContent=`排队 ${S.queue.length}`;
   if(!S.queue.length){
-    const t=S.phase==='running'?'暂无排队，下一波访客正在赶来':'营业开始后，小动物会从这里进入城市';
+    const t=S.phase==='running'?'暂无排队，点“下一位”邀请动物':'营业开始后，小动物会从这里进入城市';
     grid.innerHTML=`<div class="es">${t}</div>`;
     return;
   }
@@ -887,7 +891,7 @@ function renderQueue(){
         </div>
         <div class="gc-hint">${hint}</div>
         ${tags.length?`<div class="multi-tags">${tags.map(t=>`<span class="mtag">${t}</span>`).join('')}</div>`:''}
-        <div class="gc-wait">等待 ${g.wait}s</div>
+        <div class="gc-wait">观察中，不限时</div>
       </div>
     `;
   }).join('');
@@ -1060,7 +1064,7 @@ function spawnGuest(){
   const hf=HINTS[S.themeId]?.[fi.optionId];
   S.queue.push({
     instanceId:`g${S.gid++}`,
-    name:ani.name, emoji:ani.emoji, group:ani.group,
+    name:ani.name, emoji:ani.emoji, group:ani.group, validOptions:[...ani.likes],
     targetFloorId:fid, targetOptionId:fi.optionId, targetLabel:fi.label,
     hintText:`去：${fi.label}`, stdHint:hf?hf(ani.name):`${ani.name}有自己的分类线索。`,
     multiTags:animalTags(ani,2), wait:0, urgent:false,
@@ -1081,26 +1085,11 @@ function beginGame(){
   clearClickSelections();
   S.phase='running'; S.queue=[]; for(const f of S.floors)S.served[f]=[];
   S.timeLeft=60;S.ratings=[];S.reviews=[];S.complaints=0;S.placementAttempts=0;S.correctPlacements=0;S.totalSpawned=0;S.gid=0;
-  setMsg('营业开始！可拖拽，也可先点动物再点目标建筑。');
+  setMsg('不限时。先点动物再点建筑；教师点“下一位”控制节奏。只练习已建类别，不代表全部动物。');
   renderAll(); spawnWave();
 
-  T.cd=setInterval(()=>{
-    S.timeLeft--; document.getElementById('timer').textContent=fmt(S.timeLeft);
-    if(S.timeLeft<=0){ clearT(); S.phase='ended'; setMsg('营业时间结束！'); renderAll(); showResult(); }
-  },1000);
+  // 课堂模式：教师决定节奏；不计时、不催促、不因等待扣分。
 
-  T.wt=setInterval(()=>{
-    let anyOut=false;
-    S.queue=S.queue.filter(g=>{
-      g.wait++;
-      if(g.wait>=24){S.complaints++;S.ratings.push(1);S.reviews.push({emoji:g.emoji,name:g.name,stars:1,label:'超时离开'});anyOut=true;return false;}
-      g.urgent=g.wait>=14; return true;
-    });
-    if(anyOut)setMsg('有动物等待过久离开了，留下了差评！');
-    renderQueue();renderHdr();renderLeft();
-  },1000);
-
-  T.sp=setInterval(()=>{ if(S.phase==='running') spawnWave(); },6200);
 }
 
 function serveGuest(gid,fid){
@@ -1108,22 +1097,22 @@ function serveGuest(gid,fid){
   const idx=S.queue.findIndex(g=>g.instanceId===gid);
   if(idx===-1)return;
   const g=S.queue[idx];
-  S.placementAttempts++;
+  if(!S.assignments[fid]?.built){setMsg('请选已建成的分类建筑。');return;}
   const el=document.getElementById(`plot-${fid}`);
   if(el)el.classList.remove('hover');
 
-  if(g.targetFloorId!==fid){
-    S.complaints++; S.ratings.push(1); S.reviews.push({emoji:g.emoji,name:g.name,stars:1,label:`应去${g.targetLabel}`});
-    setMsg(`${g.name} 分错了！当前主题下它应去「${g.targetLabel}」`);
+  if(!S.assignments[fid]?.built || !g.validOptions.includes(S.assignments[fid].optionId)){
+    if(S.themeId==='biology'){S.placementAttempts++;S.complaints++;S.ratings.push(1);S.reviews.push({emoji:g.emoji,name:g.name,stars:1,label:`应去${g.targetLabel}`});}
+    setMsg(`${g.name} 这个标签未收录或不匹配，请结合资料讨论。当前参考为「${g.targetLabel}」`);
     if(el){el.classList.add('wrong');setTimeout(()=>el&&el.classList.remove('wrong'),700);}
-    S.queue.splice(idx,1); renderQueue(); renderHdr(); renderLeft(); return;
+    renderQueue(); renderHdr(); renderLeft(); return;
   }
 
-  S.correctPlacements++;
+  S.placementAttempts++; S.correctPlacements++;
   const r=guestR(g.wait);
-  S.ratings.push(r); S.reviews.push({emoji:g.emoji,name:g.name,stars:r,label:g.targetLabel}); S.served[fid].push(g);
+  S.ratings.push(r); S.reviews.push({emoji:g.emoji,name:g.name,stars:r,label:S.assignments[fid].label}); S.served[fid].push(g);
   S.queue.splice(idx,1);
-  setMsg(`${g.name} 进入 ${g.targetLabel}，好评 ${stars(r)}（等待${g.wait}s）`);
+  setMsg(`${g.name} 进入 ${S.assignments[fid].label}，好评 ${stars(r)}（依据特征，不比速度）`);
   renderQueue(); renderPlots(); renderHdr(); renderLeft(); requestAnimationFrame(fitWorldToViewport);
 }
 
@@ -1169,7 +1158,7 @@ function showResult(){
       <div class="sc"><div class="sc-l">正确率</div><div class="sc-v">${acc}</div><div class="sc-d">正确${S.correctPlacements}/尝试${S.placementAttempts}</div></div>
       <div class="sc"><div class="sc-l">总接待</div><div class="sc-v">${totalSrv}</div><div class="sc-d">到店${S.totalSpawned}位，成功${totalSrv}位</div></div>
       <div class="sc"><div class="sc-l">好评(4⭐+)</div><div class="sc-v">${good}</div><div class="sc-d">占总评${S.ratings.length?((good/S.ratings.length)*100).toFixed(0)+'%':'—'}</div></div>
-      <div class="sc"><div class="sc-l">差评/投诉</div><div class="sc-v">${S.complaints}</div><div class="sc-d">分错类或等待超时产生</div></div>
+      <div class="sc"><div class="sc-l">差评/投诉</div><div class="sc-v">${S.complaints}</div><div class="sc-d">分类尝试需再核对；等待不扣分</div></div>
     </div>
     <div style="margin-bottom:12px;font-size:12px;color:var(--muted);line-height:1.7;background:#f7fbff;border:1px dashed #dce8f4;border-radius:16px;padding:12px">
       <b>学习总结：</b> 你本轮使用的是 <b>${S.themeId?THEMES[S.themeId].badge:'当前主题'}</b>，动物同时拥有多个分类标签，也就是说：<b>同一种动物可以被不同标准反复分类</b>。
@@ -1197,3 +1186,4 @@ renderAll();
 <!-- AIHTML-COMPAT-GRADE:END -->
 </body>
 </html>
+
