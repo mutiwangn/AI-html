@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>电子拾音器课堂 · 课堂接收端</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Microsoft YaHei",sans-serif;color:#17334a;background:#f1f5f7;font-size:16px}*{box-sizing:border-box}body{margin:0}button,input,a{font:inherit}button,.download{min-height:44px;border:1px solid #c5d3da;border-radius:10px;background:#fff;color:#17334a;padding:10px 16px;cursor:pointer;text-decoration:none}button:hover,.download:hover{background:#eef7fa}button:disabled{opacity:.45;cursor:default}.primary{background:#127a94;color:white;border-color:#127a94}.primary:hover{background:#0d6a81}.danger{color:#a23d2d}header{display:flex;justify-content:space-between;align-items:center;gap:16px;max-width:1440px;margin:auto;padding:25px 28px 18px}h1{font-size:clamp(23px,2.3vw,32px);margin:0;font-weight:730;letter-spacing:.02em}.sub{font-size:14px;color:#607686;margin:6px 0 0}.mark{color:#8398a6;font-size:13px}main{max-width:1440px;margin:auto;padding:0 28px 28px}.box{background:#fff;border:1px solid #d8e2e8;border-radius:16px;padding:22px;margin-bottom:18px}.controlbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.controlbar input{min-height:44px;border:1px solid #c7d7df;border-radius:9px;padding:9px 12px;max-width:260px}.status{min-height:24px;color:#526d7c;margin:14px 0 0;font-size:15px}.status.error{color:#a33d2e}.joinblock{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;margin-top:20px;align-items:center}.label{font-size:14px;color:#5f7583;margin-bottom:8px}.connection{display:block;width:100%;min-width:0;border:1px solid #bbd9e3;background:#edf8fc;border-radius:10px;font:600 clamp(16px,2vw,23px) ui-monospace,Consolas,monospace;color:#135e74;padding:13px;overflow-wrap:anywhere;user-select:all}.room-number{font:700 28px ui-monospace,monospace;letter-spacing:.15em}.meta{display:flex;gap:20px;flex-wrap:wrap;margin-top:14px;color:#547181;font-size:14px}.meta strong{color:#17334a}.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.links a{color:#0b748c;text-underline-offset:3px}.empty{padding:35px 15px;text-align:center;color:#67808e}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}.toolbar h2{font-size:20px;margin:0}.tablewrap{overflow-x:auto;border:1px solid #d7e3e9;border-radius:12px}table{width:100%;border-collapse:collapse;min-width:860px;font-size:15px}th,td{text-align:left;padding:13px 14px;border-bottom:1px solid #e1e9ee;vertical-align:middle}th{font-size:13px;color:#5e7785;background:#f5f9fb;white-space:nowrap}tbody tr:last-child td{border-bottom:0}.name{font-weight:650;max-width:145px;overflow-wrap:anywhere}.time{color:#6d8491;font-size:12px;margin-top:5px}.pitch{font:650 20px ui-monospace,monospace;white-space:nowrap}.unit{font:12px system-ui;color:#617e8e}.rms{font:14px ui-monospace,monospace;white-space:nowrap}.gain{font-size:12px;color:#617e8e;margin-top:4px}.source{display:inline-block;background:#edf4f7;border-radius:20px;padding:5px 9px;white-space:nowrap;font-size:13px}.wave{display:block;width:176px;height:58px;background:#f3f8fa;border-radius:6px}.wave-caption{font-size:11px;color:#718894;margin-top:4px}.recordactions{display:flex;gap:6px;flex-wrap:wrap}.recordactions button{min-height:36px;padding:6px 10px;font-size:13px}.recordinfo{color:#617e8e;font-size:12px;margin:5px 0}.recordplayer audio{display:block;width:225px;max-width:100%;height:34px;margin-top:7px}.waiting{color:#8294a0}.limits{color:#6d818c;font-size:13px;line-height:1.7;margin:15px 2px 0}#offline{max-width:850px;line-height:1.8}#offline h2{margin-top:0}#offline code{background:#edf4f7;padding:3px 6px;border-radius:4px;word-break:break-all}#offline ol{padding-left:24px}#offline .download{display:inline-block;margin:8px 0}.hidden,[hidden]{display:none!important}dialog{border:1px solid #c8d9e2;border-radius:14px;max-width:460px;padding:24px;color:#17334a}dialog::backdrop{background:#132f4550}dialog h2{margin:0 0 12px;font-size:22px}dialog p{line-height:1.7}dialog .controlbar{justify-content:flex-end}@media(max-width:600px){header{padding:20px 16px 16px}main{padding:0 12px 20px}.box{padding:16px}.joinblock{grid-template-columns:1fr}.connection{font-size:16px}.mark{display:none}.controlbar input{max-width:none;width:100%}.joinblock button{width:100%}th,td{padding:11px}.sub{font-size:12px}.controlbar{gap:8px}.controlbar button{flex:1}.meta{gap:10px}}
+</style>
+</head>
+<body>
+<header><div><h1>电子拾音器课堂 · 课堂接收端</h1><p class="sub">查看学生自愿分享的频率、相对振幅和录音</p></div><span class="mark">mutiw</span></header>
+<main>
+<section class="box" id="offline" hidden>
+  <h2>先在教师电脑启动课堂服务</h2>
+  <p>这个静态页面不能接收全班数据。下载启动包，在同一课堂网络内的教师电脑上运行本地服务，再打开终端显示的教师链接。</p>
+  <a class="download primary" id="packageDownload" href="./classroom-lan.zip" download>下载教师启动包</a>
+  <ol><li>安装 Python 3.10 或更新版本，解压启动包。</li><li>Windows 双击 <code>start-windows.bat</code>；macOS / Linux 在终端运行 <code>bash start-macos-linux.sh</code>。</li><li>在这台电脑打开终端中的“教师链接”，把学生连接码发给学生。</li></ol>
+  <p>近期支持“本地网络访问”权限的 Chrome 可从 GitHub HTTPS 学生页连接教师 HTTP 服务。iPad / Safari 或不支持该能力的浏览器，请由学校配置可信 HTTPS，使用同源学生入口。详情见包内 README；不要忽略证书警告或关闭浏览器安全功能。</p>
+  <p class="sub" id="offlineReason"></p>
+</section>
+<section class="box" id="classControls" hidden>
+  <div class="controlbar"><input id="classTitle" aria-label="课堂名称" maxlength="40" value="电子拾音器课堂"><button class="primary" id="create">创建课堂</button><button id="csv" disabled>导出 CSV</button><button class="danger" id="close" disabled>关闭并清空课堂</button></div>
+  <div id="joinInfo" hidden>
+    <div class="joinblock"><div><div class="label">学生连接码 · 复制整行给学生</div><code id="connectionCode" class="connection"></code></div><button id="copyCode">复制连接码</button></div>
+    <div class="meta"><span>同源学生六位码：<strong class="room-number" id="roomCode"></strong></span><span>学生：<strong id="studentCount">0</strong> / 64</span><span>录音暂存：<strong id="diskUsed">0</strong> MiB / 128</span></div>
+    <div class="links"><button id="copyStudentLink">复制学生 HTTPS 链接</button><a id="studentLink" target="_blank" rel="noopener noreferrer">打开学生 HTTPS 页</a><a id="localStudentLink" target="_blank" rel="noopener noreferrer" hidden>打开可信 HTTPS 同源学生页</a></div>
+  </div>
+  <p class="status" id="status" role="status" aria-live="polite">正在连接本机教师服务…</p>
+</section>
+<section class="box" id="livePanel" hidden>
+  <div class="toolbar"><h2>全班实时观察</h2><span class="sub" id="updated">每秒更新</span></div>
+  <div class="empty" id="empty">学生连接后会出现在这里。仅分享最新波形和数值，录音由学生另行提交。</div>
+  <div class="tablewrap" id="tablewrap" hidden><table><thead><tr><th>学生 / 状态</th><th>实时频率</th><th>锁定频率</th><th>相对 RMS / 输入增益</th><th>来源</th><th>真实 PCM 尾窗</th><th>提交的录音</th></tr></thead><tbody id="students"></tbody></table></div>
+  <p class="limits">每名学生保留最新一幅波形，以及最多 3600 条约 1 秒间隔的数值记录。RMS 是当前设备输入信号的相对幅度，不能当作校准分贝或跨设备比较响度。关闭课堂会清空全部数据；先下载需要保留的 CSV 和录音。</p>
+</section>
+</main>
+<dialog id="closeDialog"><h2>关闭这节课堂？</h2><p>学生连接会失效，当前课堂的数值记录和录音将被清空。需要保留的内容请先导出。</p><div class="controlbar"><button id="cancelClose">返回</button><button class="danger" id="confirmClose">关闭并清空</button></div></dialog>
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const rows = new Map(), blobUrls = new Map();
+  const sourceNames = {microphone:'麦克风', replay:'录音回放', tone:'合成示意'};
+  let classroom = null, token = '', polling = false, closed = false, failures = 0, pollTimer = 0, revision = 0;
+  const fragment = new URLSearchParams(location.hash.slice(1));
+  token = fragment.get('admin') || '';
+  try {
+    if (token) { sessionStorage.setItem('soundClassAdmin', token); history.replaceState(null, '', location.pathname + location.search); }
+    else token = sessionStorage.getItem('soundClassAdmin') || '';
+  } catch (_) {}
+
+  function status(text, error = false) { $('status').textContent = text; $('status').classList.toggle('error', error); }
+  function offline(reason) { $('offline').hidden = false; $('classControls').hidden = true; $('livePanel').hidden = true; $('offlineReason').textContent = reason || ''; }
+  async function api(path, options = {}) {
+    const headers = Object.assign({Authorization:'Bearer ' + token}, options.headers || {});
+    if (options.body && typeof options.body !== 'string') { options.body = JSON.stringify(options.body); headers['Content-Type'] = 'application/json'; }
+    const response = await fetch(path, Object.assign({cache:'no-store', credentials:'omit'}, options, {headers}));
+    if (!response.ok) {
+      let message = '服务暂时无法连接（' + response.status + '）';
+      try { const data = await response.json(); message = data.error.message; } catch (_) {}
+      const error = new Error(message); error.status = response.status; throw error;
+    }
+    return response;
+  }
+  async function json(path, options) { return (await api(path, options)).json(); }
+  function releaseBlobs() { for (const url of blobUrls.values()) URL.revokeObjectURL(url); blobUrls.clear(); }
+  async function copy(text, button) {
+    try { await navigator.clipboard.writeText(text); const original = button.textContent; button.textContent = '已复制'; setTimeout(() => button.textContent = original, 1400); }
+    catch (_) { status('自动复制不可用，请选中连接码或链接后手动复制。'); }
+  }
+  function download(blob, name) { const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = name; link.click(); setTimeout(() => URL.revokeObjectURL(url), 5000); }
+  function hz(value) { return typeof value === 'number' && Number.isFinite(value) ? value.toFixed(1) : '—'; }
+  function drawWave(canvas, data) {
+    const ctx = canvas.getContext('2d'), width = canvas.width, height = canvas.height;
+    ctx.clearRect(0, 0, width, height); ctx.strokeStyle = '#d5e3e9'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(0, height / 2); ctx.lineTo(width, height / 2); ctx.stroke();
+    if (!data || !data.samples.length) return;
+    ctx.strokeStyle = '#16819b'; ctx.lineWidth = 1.5; ctx.beginPath();
+    data.samples.forEach((sample, index) => { const x = index / Math.max(1, data.samples.length - 1) * width, y = height / 2 - sample * height * .46; if (index === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y); });
+    ctx.stroke();
+  }
+  function makeRow(student) {
+    const row = document.createElement('tr');
+    row.innerHTML = '<td><div class="name"></div><div class="time"></div></td><td><span class="pitch current">—</span> <span class="unit">Hz</span></td><td><span class="pitch locked">—</span> <span class="unit">Hz</span></td><td><div class="rms">—</div><div class="gain"></div></td><td><span class="source">等待采集</span></td><td><canvas class="wave" width="352" height="116" aria-label="收到的真实PCM波形"></canvas><div class="wave-caption">未收到波形</div></td><td><div class="recordinfo">尚未提交</div><div class="recordactions"></div><div class="recordplayer"></div></td>';
+    row.querySelector('.name').textContent = student.nickname;
+    $('students').appendChild(row); rows.set(student.studentId, row); return row;
+  }
+  async function recordingBlob(record) {
+    if (blobUrls.has(record.recordingId)) return blobUrls.get(record.recordingId);
+    const response = await api('/api/teacher/classes/' + classroom.classId + '/recordings/' + record.recordingId);
+    const url = URL.createObjectURL(await response.blob()); blobUrls.set(record.recordingId, url); return url;
+  }
+  function updateRecording(row, student) {
+    const record = student.recording, lastId = row.dataset.recordingId || '';
+    if ((record && record.recordingId || '') === lastId) return;
+    if (lastId && blobUrls.has(lastId)) { URL.revokeObjectURL(blobUrls.get(lastId)); blobUrls.delete(lastId); }
+    row.dataset.recordingId = record ? record.recordingId : '';
+    const actions = row.querySelector('.recordactions'), player = row.querySelector('.recordplayer'); actions.replaceChildren(); player.replaceChildren();
+    row.querySelector('.recordinfo').textContent = record ? record.duration.toFixed(2) + ' 秒 · ×' + record.inputGain + (record.lockedFrequency ? ' · 锁定 ' + hz(record.lockedFrequency) + ' Hz' : '') : '尚未提交';
+    if (!record) return;
+    const listen = document.createElement('button'); listen.textContent = '回听';
+    listen.addEventListener('click', async () => { listen.disabled = true; try { const url = await recordingBlob(record); const audio = document.createElement('audio'); audio.controls = true; audio.src = url; audio.preload = 'metadata'; player.replaceChildren(audio); status('录音已载入，点击播放器试听。'); } catch (error) { status(error.message, true); } finally { listen.disabled = false; } });
+    const save = document.createElement('button'); save.textContent = '下载 WAV';
+    save.addEventListener('click', async () => { save.disabled = true; try { const url = await recordingBlob(record); const a = document.createElement('a'); a.href = url; a.download = 'sound-' + student.studentId + '.wav'; a.click(); } catch (error) { status(error.message, true); } finally { save.disabled = false; } });
+    actions.append(listen, save);
+  }
+  function render(data) {
+    if (classroom && (!data || data.classId !== classroom.classId)) { rows.clear(); $('students').replaceChildren(); releaseBlobs(); }
+    classroom = data;
+    $('create').disabled = !!data; $('classTitle').disabled = !!data; $('close').disabled = !data; $('csv').disabled = !data; $('joinInfo').hidden = !data;
+    if (!data) { $('empty').hidden = false; $('empty').textContent = '创建课堂后，把连接码发给学生。'; $('tablewrap').hidden = true; return; }
+    $('classTitle').value = data.title;
+    $('connectionCode').textContent = data.connectionCode; $('roomCode').textContent = data.code;
+    $('studentLink').href = data.studentUrl; $('localStudentLink').href = data.localStudentUrl; $('localStudentLink').hidden = !data.secureLocalStudent;
+    $('studentCount').textContent = data.students ? data.students.length : 0; $('diskUsed').textContent = (data.recordingBytes / 1048576 || 0).toFixed(1);
+    const students = data.students || []; $('empty').hidden = students.length > 0; $('tablewrap').hidden = !students.length;
+    $('empty').textContent = '学生连接后会出现在这里。仅分享最新波形和数值，录音由学生另行提交。';
+    for (const student of students) {
+      const row = rows.get(student.studentId) || makeRow(student), frame = student.latest;
+      const seconds = student.lastSeen ? Math.max(0, Date.now() / 1000 - student.lastSeen) : null;
+      row.querySelector('.time').textContent = student.left ? '已退出' : seconds === null ? '已连接，等待采集' : seconds < 4 ? '刚刚收到' : Math.floor(seconds) + ' 秒前收到';
+      row.querySelector('.current').textContent = hz(frame && frame.frequency); row.querySelector('.locked').textContent = hz(frame && frame.lockedFrequency);
+      row.querySelector('.rms').textContent = frame ? frame.rms.toFixed(5) : '—'; row.querySelector('.gain').textContent = frame ? '输入增益 ×' + frame.inputGain : '';
+      row.querySelector('.source').textContent = frame ? sourceNames[frame.source] : '等待采集';
+      drawWave(row.querySelector('.wave'), frame && frame.waveform);
+      row.querySelector('.wave-caption').textContent = frame && frame.waveform ? (frame.waveform.samples.length / frame.waveform.sampleRate * 1000).toFixed(1) + ' ms · 固定 ×1' : '未收到波形';
+      updateRecording(row, student);
+    }
+    $('updated').textContent = '已更新 ' + new Date().toLocaleTimeString('zh-CN', {hour12:false});
+  }
+  async function poll() {
+    if (polling || closed) return; clearTimeout(pollTimer); polling = true; const currentRevision = revision;
+    try { const result = await json('/api/teacher/classes'); if (currentRevision === revision) render(result.classroom); if (failures) status('已重新连接本机教师服务。'); failures = 0; }
+    catch (error) { failures++; status(error.message, true); if (error.status === 401 || error.status === 403) closed = true; }
+    finally { polling = false; if (!closed) pollTimer = setTimeout(poll, 1000); }
+  }
+  $('create').addEventListener('click', async () => { $('create').disabled = true; revision++; try { await json('/api/teacher/classes', {method:'POST', body:{title:$('classTitle').value}}); status('课堂已创建，请把连接码发给学生。'); await poll(); } catch (error) { status(error.message, true); } finally { $('create').disabled = !!classroom; } });
+  $('copyCode').addEventListener('click', () => classroom && copy(classroom.connectionCode, $('copyCode')));
+  $('copyStudentLink').addEventListener('click', () => classroom && copy(classroom.studentUrl, $('copyStudentLink')));
+  $('csv').addEventListener('click', async () => { if (!classroom) return; $('csv').disabled = true; try { const response = await api('/api/teacher/classes/' + classroom.classId + '/export.csv'); download(await response.blob(), 'sound-classroom-' + classroom.code + '.csv'); status('CSV已导出；只包含已接收的数值记录。'); } catch (error) { status(error.message, true); } finally { $('csv').disabled = !classroom; } });
+  $('close').addEventListener('click', () => $('closeDialog').showModal());
+  $('cancelClose').addEventListener('click', () => $('closeDialog').close());
+  $('confirmClose').addEventListener('click', async () => { $('closeDialog').close(); if (!classroom) return; revision++; try { await json('/api/teacher/classes/' + classroom.classId + '/close', {method:'POST', body:{}}); render(null); status('课堂已关闭，数据已清空。'); } catch (error) { status(error.message, true); } });
+  window.addEventListener('pagehide', () => { closed = true; clearTimeout(pollTimer); releaseBlobs(); });
+  if (location.protocol === 'file:' || location.hostname === 'mutiwangn.github.io') { offline(); return; }
+  if (!token) { offline('请使用启动终端中完整的教师链接；链接末尾包含仅供本机管理的凭据。'); return; }
+  $('classControls').hidden = false; $('livePanel').hidden = false;
+  status('服务已连接。学生主动连接后，采集数据才会发到这台电脑。');
+  poll();
+})();
+</script>
+</body>
+</html>
