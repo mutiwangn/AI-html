@@ -1,0 +1,10 @@
+'use strict';
+const $=s=>document.querySelector(s);
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('hidden',s.id!==b.dataset.page));document.querySelectorAll('[data-page]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
+$('#stage').oninput=()=>{let n=Number($('#stage').value);$('#stageText').textContent=['开始','阶段一','阶段二','阶段三'][n];$('#water').setAttribute('y',175+n*22);$('#water').setAttribute('height',112-n*22);$('#arrows').innerHTML=n?[210,300,390].map(x=>'<path d="M'+x+' 160V50m-10 12 10-12 10 12"/>').join(''):'';};
+document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{$('#explain').textContent={gone:'水没有凭空消失。在这些假设条件下，一部分液态水变为水蒸气进入周围空气。',vapor:'这个解释符合蒸发：液态水变为水蒸气进入空气。水蒸气通常看不见，图中的箭头不是可见烟雾。',boil:'不需要先煮开。常温下水也能从表面蒸发；沸腾则还会在液体内部形成大量气泡。'}[b.dataset.answer];});
+document.querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>{$('#planFeedback').textContent=b.dataset.plan==='good'?'更合适：只改变是否加盖。其余条件尽量一致，再记录两杯实际变化，不预先填答案。':'同时改变了盖子和环境位置，难以知道差异来自哪一个条件。请只改变一个条件。';});
+const options=['未观察','低于起始标记','与起始标记相近','高于起始标记','看不清，无法判断'];
+$('#entries').innerHTML=[0,1,2].map(i=>'<div class="entry"><h2>第'+(i+1)+'次观察</h2>'+['敞口杯','加盖杯'].map((s,j)=>'<label for="r'+i+j+'">'+s+'</label><select id="r'+i+j+'">'+options.map(o=>'<option>'+o+'</option>').join('')+'</select>').join('')+'</div>').join('');
+document.querySelectorAll('#entries select').forEach(s=>s.onchange=()=>{$('#summary').textContent='已记录 '+[...document.querySelectorAll('#entries select')].filter(x=>x.value!=='未观察').length+' 项观察；这些是液面描述，不自动证明因果。';});
+$('#export').onclick=()=>{let rows=[['观察序号','敞口杯液面','加盖杯液面','说明']];for(let i=0;i<3;i++)rows.push([i+1,$('#r'+i+'0').value,$('#r'+i+'1').value,'相对各自起始标记；非模型数据']);let csv='﻿'+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='水位真实观察.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
