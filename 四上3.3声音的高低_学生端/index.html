@@ -1,71 +1,501 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#f1f4f5">
-  <meta name="description" content="《声音的高低》学生端：本地录音、音高色带、波形观察与电子音色试听。">
-  <title>声音探测器 · 声音的高低</title>
-  <style>:root{color-scheme:light;--ink:#243341;--muted:#77818b;--paper:#f1f4f5;--line:#e5eaec;--teal:#24776e;--teal-dark:#155c55;--navy:#142038;--pitch-color:#91a2b8;--gradient:linear-gradient(90deg,#9574f7 0%,#5599eb 20%,#36c6d7 40%,#66cf9b 60%,#e3cf62 80%,#f08d70 100%);font-family:ui-rounded,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;font-synthesis:none}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--paper);color:var(--ink);overscroll-behavior:none;-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{color:inherit;border:0;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}button:disabled{cursor:default;opacity:.38}button:focus-visible,input:focus-visible{outline:3px solid #f1b343;outline-offset:3px}button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}h1,h2,p{margin:0}.app{height:100%;height:100dvh;max-width:1500px;margin:auto;padding:clamp(12px,2.2vw,28px) clamp(12px,2.4vw,34px) 12px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding-top:max(clamp(12px,2.2vw,28px),env(safe-area-inset-top));padding-bottom:max(10px,env(safe-area-inset-bottom))}.app-header{display:flex;align-items:center;gap:12px;min-height:54px}.brand-mark{width:42px;height:44px;flex-shrink:0}.brand-mark svg{width:100%;height:100%}.brand-copy h1{font-size:25px;line-height:1.3;letter-spacing:.06em;font-weight:750}.brand-copy p{color:var(--muted);font-size:12px;margin-top:3px;letter-spacing:.06em}.header-actions{display:flex;gap:12px;align-items:center;margin-left:auto}.icon-button,.help-button{width:40px;height:40px;display:grid;place-items:center;background:transparent;border:1px solid #d4dde1;border-radius:50%;font-size:23px;color:#6a7782}.icon-button{border:0}.help-button{font-family:system-ui;font-size:18px;font-weight:600;width:32px;height:32px}.workspace{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,.85fr);gap:20px;min-height:0}.recorder-pane,.tone-pane{background:#fff;border:1px solid #e2e8e9;box-shadow:0 4px 22px #1f3c4910;border-radius:24px;padding:24px;min-width:0;min-height:0}.recorder-pane{display:grid;grid-template-rows:auto minmax(110px,1fr) auto auto auto;gap:14px}.section-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:34px}.section-heading h2{font-size:17px;letter-spacing:.05em;white-space:nowrap;font-weight:650;display:flex;align-items:center;gap:9px}.tiny-dot{width:7px;height:7px;background:var(--teal);border-radius:50%}.view-toggles{display:flex;gap:4px;background:#edf2f3;border-radius:10px;padding:3px}.view-toggles button{padding:7px 13px;min-width:47px;border-radius:7px;background:transparent;color:#849098;font-size:13px;font-weight:650}.view-toggles button[aria-pressed=true]{color:var(--teal-dark);background:white;box-shadow:0 1px 5px #102f4012}.monitor{border-radius:18px;background:var(--navy);color:#eaf0fb;display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:17px 21px 12px;position:relative;box-shadow:inset 0 0 0 1px #ffffff06}.monitor-top{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:22px;z-index:2}.source-label{display:flex;align-items:center;gap:7px;font-size:12px;color:#94a8c2;letter-spacing:.05em;min-height:22px}.source-label i{background:#67768d;width:5px;height:5px;border-radius:50%;flex-shrink:0}.source-label i.active{background:#7bdfba;box-shadow:0 0 8px #7bdfba60}.source-label i.recording{background:#fb9c94;animation:blink 1.2s infinite}.monitor-top button{font-size:11px;background:#ffffff0d;color:#a6bad2;border:1px solid #ffffff17;padding:4px 9px;border-radius:6px;min-height:27px}.visual-area{position:relative;flex:1;min-height:0;margin:4px 0 15px;isolation:isolate}.visual-area canvas{position:absolute;inset:0;width:100%;height:100%}.pitch-readout{position:absolute;inset:auto 0 0;text-align:center;pointer-events:none;z-index:1}.pitch-readout p{font-size:15px;letter-spacing:.05em;color:#bdcbe0;line-height:1.5}.frequency-readout{font-size:clamp(28px,4.5vw,60px);line-height:1.1;font-family:ui-rounded,system-ui,sans-serif;letter-spacing:.015em;font-weight:400;color:#fff;display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:8px;font-variant-numeric:tabular-nums}.frequency-readout small{font-size:15px;color:#8b9eb9;letter-spacing:0}.monitor.has-hz:not(.has-wave) .pitch-readout{top:36%;bottom:auto}.monitor.has-hz:not(.has-wave) .pitch-readout p{margin-top:10px}.monitor.has-wave .pitch-readout{inset:8px 0 auto;text-align:left;display:flex;align-items:baseline;justify-content:space-between;gap:12px}.monitor.has-wave .frequency-readout{font-size:29px;margin:0;gap:5px}.monitor.has-wave .frequency-readout small{font-size:12px}.monitor.has-wave .pitch-readout p{font-size:12px;align-self:center;text-align:right}.monitor.has-wave:not(.has-hz) .pitch-readout{justify-content:flex-end}.scope-scale{position:absolute;inset:auto 0 -9px;display:flex;justify-content:space-between;color:#6783a1;font-size:10px;font-variant-numeric:tabular-nums}.pitch-axis{padding-top:7px}.color-band{position:relative;background:var(--gradient);height:9px;border-radius:10px;width:100%}.color-band:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(20% - 1px),#0b173d4d calc(20% - 1px),#0b173d4d 20%);border-radius:inherit}#pitchMarker{position:absolute;width:5px;height:21px;top:-6px;left:0;transform:translateX(-50%);border:2px solid #fff;border-radius:5px;background:#fff;box-shadow:0 1px 6px #0005;transition:left .08s linear}.axis-labels{display:flex;justify-content:space-between;font-size:12px;margin-top:10px;color:#d8e2f0}.axis-labels span:nth-child(2){font-size:10px;color:#7290b1;letter-spacing:.08em}.history-block{min-width:0}.history-heading{display:flex;justify-content:space-between;font-size:11px;color:#829099;line-height:1.3;margin-bottom:7px}.history-heading label{letter-spacing:.06em}.history-heading span{font-variant-numeric:tabular-nums}.history-track{height:25px;position:relative;background:#f0f3f4;border-radius:5px;overflow:hidden}.history-track canvas{position:absolute;width:100%;height:100%;inset:0}.history-track input{position:absolute;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:none;z-index:2}.history-track:focus-within{outline:2px solid var(--teal);outline-offset:2px}#historyCursor{position:absolute;left:0;top:0;height:100%;border-left:2px solid #243341;box-shadow:1px 0 0 #fff;pointer-events:none;z-index:1}.transport{display:flex;gap:10px;height:56px}.record-button{flex:1;display:flex;justify-content:center;align-items:center;gap:10px;border-radius:14px;background:var(--teal);color:#fff;font-size:16px;font-weight:600;white-space:nowrap;min-width:0}.record-symbol{width:12px;height:12px;background:white;border-radius:50%;box-shadow:0 0 0 4px #ffffff20}.record-button.is-recording{background:#a94946}.record-button.is-recording .record-symbol{border-radius:2px;box-shadow:none}.record-button.is-requesting{background:#637985}.record-button.is-requesting .record-symbol{background:transparent;border:2px solid #ffffff50;border-top-color:#fff;width:16px;height:16px;animation:spin 1s linear infinite;box-shadow:none}.transport-button{padding:0 15px;background:#eff3f4;color:#506572;border-radius:13px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px;min-width:72px;white-space:nowrap}.transport-button svg{width:18px;height:18px}.transport-button.is-playing{background:#e1eeea;color:#26776c}.small-button{min-width:49px;padding:7px 12px;flex-direction:column;gap:2px;font-size:10px}.small-button svg{width:18px;height:18px}.recorder-hint{font-size:12px;color:#859098;text-align:center;line-height:1.4;min-height:18px;overflow-wrap:anywhere}.recorder-hint.error{color:#a24a44}.tone-pane{display:flex;flex-direction:column;justify-content:center;gap:24px;background:#fcfdfd;padding:28px}.tone-heading{margin-bottom:auto;min-height:34px}.tone-heading h2{font-size:17px}.use-pitch{font-size:11px;background:transparent;color:var(--teal);padding:9px 0 9px 9px;white-space:nowrap}.use-pitch span{margin-left:4px;font-size:15px}.frequency-editor{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-top:6px}.step-button{width:38px;height:38px;border:1px solid #dce5e5;border-radius:50%;font-size:24px;line-height:1;background:transparent;color:#627783;flex-shrink:0}.frequency-value{display:flex;align-items:baseline;justify-content:center;min-width:0;gap:3px}.frequency-value input{padding:0;width:4.1ch;max-width:100%;appearance:textfield;-moz-appearance:textfield;border:0;background:transparent;font-size:clamp(38px,5vw,66px);font-weight:400;text-align:center;line-height:1.15;font-family:ui-rounded,system-ui,sans-serif;letter-spacing:-.04em;color:#344553;font-variant-numeric:tabular-nums}.frequency-value input::-webkit-inner-spin-button,.frequency-value input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.frequency-value span{font-size:14px;color:#82909b}.target-slider{margin-top:-4px}.target-slider input{appearance:none;-webkit-appearance:none;width:100%;height:32px;display:block;margin:0;background:transparent;touch-action:none;cursor:pointer}.target-slider input::-webkit-slider-runnable-track{height:6px;border-radius:20px;background:var(--gradient)}.target-slider input::-moz-range-track{height:6px;border-radius:20px;background:var(--gradient)}.target-slider input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;border:3px solid #fff;background:var(--target-color,#72ca9a);width:24px;height:24px;border-radius:50%;margin-top:-9px;box-shadow:0 1px 5px #34455340;outline:1px solid #3445531a}.target-slider input::-moz-range-thumb{border:3px solid #fff;background:var(--target-color,#72ca9a);width:18px;height:18px;border-radius:50%;box-shadow:0 1px 5px #34455340}.range-labels{display:flex;justify-content:space-between;font-size:10px;color:#93a0a6;margin-top:4px}.material-section{display:flex;flex-direction:column;gap:12px}.material-label{font-size:12px;letter-spacing:.1em;color:#83949b}.material-options{display:flex;gap:6px}.material-options button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:#f0f4f4;border:1px solid transparent;border-radius:12px;color:#788c94;height:80px;font-size:12px}.material-options svg{width:34px;height:26px;stroke-width:1.4}.material-options button[aria-pressed=true]{border-color:#a6cec6;background:#e9f4ef;color:#266e62}.tone-play{display:flex;justify-content:center;align-items:center;gap:10px;min-height:53px;border-radius:13px;background:#344654;color:white;font-size:14px;font-weight:600;margin-top:3px}.tone-play svg{width:19px;height:19px}.tone-play.is-playing{background:#26766d}.tone-caption{text-align:center;font-size:10px;color:#97a2a8;letter-spacing:.03em;margin-top:-13px;margin-bottom:auto}.app-footer{display:flex;justify-content:space-between;padding:0 4px;color:#94a0a7;font-size:10px;letter-spacing:.06em;line-height:1.3}.footer-tip{letter-spacing:.18em;color:#a9b2b7}dialog{color:var(--ink);border:0;border-radius:22px;width:min(540px,calc(100vw - 28px));max-height:calc(100dvh - 40px);padding:25px;box-shadow:0 25px 80px #0003;overflow:auto;background:#fff}dialog::backdrop{background:#07122399;backdrop-filter:blur(4px)}.dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.dialog-heading h2{font-size:20px}.dialog-heading button{flex-shrink:0}.help-content h3{font-size:14px;font-weight:650;color:var(--teal);margin:20px 0 6px}.help-content h3:first-child{margin-top:0}.help-content p{font-size:13px;color:#62717d;line-height:1.8;margin-top:6px}.dialog-close{background:var(--teal);color:white;width:100%;border-radius:10px;padding:13px;margin-top:23px;font-size:14px}@keyframes spin{to{transform:rotate(360deg)}}@keyframes blink{50%{opacity:.3}}
-@media(min-width:1600px){.app{padding-top:32px;padding-bottom:20px;gap:25px}.workspace{gap:25px}.recorder-pane{padding:28px;gap:18px}.monitor{padding:22px 28px 18px}.section-heading h2{font-size:21px}.view-toggles button{font-size:15px;padding:9px 16px}.source-label{font-size:15px}.pitch-readout p{font-size:20px}.axis-labels{font-size:15px}.transport{height:65px}.record-button{font-size:19px}.recorder-hint{font-size:14px}.tone-pane{padding:36px;gap:35px}.material-options button{height:90px;font-size:14px}.tone-play{min-height:61px;font-size:17px}}
-@media(max-width:1000px){.app{padding:16px;gap:14px}.workspace{grid-template-columns:minmax(0,1.3fr) minmax(280px,.85fr);gap:14px}.recorder-pane{padding:18px;gap:12px}.tone-pane{padding:20px;gap:20px}.monitor{padding:14px 17px 10px}.transport{gap:7px}.transport-button{padding:0 10px;min-width:60px}.small-button{min-width:43px;padding:5px 10px}.record-button{font-size:15px}.frequency-value input{font-size:54px}.recorder-hint{font-size:11px}.tone-heading h2{font-size:16px}.use-pitch{font-size:10px}}
-@media(max-width:700px) and (orientation:portrait){.app{padding:12px 12px max(9px,env(safe-area-inset-bottom));gap:10px}.app-header{min-height:43px;gap:9px;padding:0 4px}.brand-mark{width:31px;height:34px}.brand-copy h1{font-size:20px;letter-spacing:.07em}.brand-copy p{font-size:10px;margin-top:2px}.header-actions{gap:5px}.workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(250px,1fr) auto;gap:10px}.recorder-pane,.tone-pane{border-radius:18px}.recorder-pane{padding:13px;gap:9px;grid-template-rows:auto minmax(100px,1fr) auto auto auto}.section-heading{min-height:29px}.section-heading h2{font-size:14px;gap:7px}.view-toggles button{padding:5px 10px;font-size:11px;min-width:41px}.monitor{padding:11px 15px 9px;border-radius:13px}.monitor-top{min-height:18px}.source-label{font-size:10px;min-height:18px}.monitor-top button{min-height:22px;padding:2px 7px;font-size:10px}.visual-area{margin:1px 0 12px}.pitch-readout p{font-size:13px}.frequency-readout{font-size:42px}.monitor.has-wave .frequency-readout{font-size:25px}.axis-labels{font-size:11px;margin-top:7px}.axis-labels span:nth-child(2){font-size:9px}.color-band{height:7px}#pitchMarker{height:17px;top:-5px}.history-heading{font-size:10px;margin-bottom:5px}.history-track{height:18px}.transport{height:45px;gap:7px}.record-button{font-size:13px;border-radius:10px;gap:8px}.record-symbol{width:10px;height:10px}.transport-button{min-width:58px;border-radius:10px;font-size:12px;padding:0 10px}.small-button{min-width:40px;padding:4px 9px;font-size:9px}.small-button svg{width:16px;height:16px}.recorder-hint{font-size:10px;min-height:14px;line-height:1.35}.tone-pane{padding:12px 15px;display:grid;grid-template-columns:minmax(0,1fr) 120px;grid-template-rows:auto auto auto;column-gap:15px;row-gap:7px;align-items:center}.tone-heading{grid-column:1/-1;min-height:24px;margin:0}.tone-heading h2{font-size:14px}.use-pitch{font-size:10px;padding:2px 0;min-height:24px}.frequency-editor{grid-column:1;grid-row:2;margin:0;gap:3px}.frequency-value input{font-size:37px;width:4.2ch}.frequency-value span{font-size:11px}.step-button{width:27px;height:27px;font-size:19px}.target-slider{grid-column:1;grid-row:3;margin:-3px 0 0}.target-slider input{height:24px}.target-slider input::-webkit-slider-thumb{width:21px;height:21px;margin-top:-7.5px}.range-labels{font-size:8px;margin-top:0}.material-section{grid-column:2;grid-row:2;gap:0}.material-label{display:none}.material-options{gap:3px;flex-wrap:wrap}.material-options button{flex:auto;width:calc(50% - 3px);height:28px;border-radius:6px;font-size:10px;gap:0}.material-options svg{display:none}.tone-play{grid-column:2;grid-row:3;min-height:32px;margin:0;font-size:11px;gap:5px;border-radius:8px}.tone-play svg{width:14px;height:14px}.tone-caption{grid-column:1/-1;grid-row:4;font-size:8px;letter-spacing:.02em;margin:0;text-align:right}.app-footer{font-size:8px;padding:0 3px}.footer-tip{letter-spacing:.08em}}
-@media(max-width:700px) and (orientation:portrait) and (max-height:720px){.app{gap:7px;padding-top:8px;padding-bottom:6px}.app-header{min-height:38px}.brand-copy h1{font-size:18px}.brand-copy p{font-size:9px}.brand-mark{width:29px;height:32px}.workspace{gap:7px;grid-template-rows:minmax(235px,1fr) auto}.recorder-pane{padding:11px;gap:7px}.monitor{padding-top:8px;padding-bottom:8px}.visual-area{margin-bottom:9px}.pitch-readout p{font-size:11px}.transport{height:41px}.recorder-hint{font-size:9px}.tone-pane{padding:9px 13px;row-gap:4px}.frequency-value input{font-size:33px}.tone-caption{font-size:8px}.history-track{height:16px}.history-heading{font-size:9px}.frequency-readout{font-size:32px;margin-bottom:4px}.monitor.has-hz:not(.has-wave) .pitch-readout{top:29%}.monitor.has-hz:not(.has-wave) .pitch-readout p{margin-top:5px}}
-@media(orientation:landscape) and (max-height:600px){.app{padding:8px max(12px,env(safe-area-inset-right)) 6px max(12px,env(safe-area-inset-left));gap:7px}.app-header{min-height:33px;gap:8px}.brand-mark{width:26px;height:30px}.brand-copy{display:flex;align-items:baseline;gap:12px}.brand-copy h1{font-size:18px;letter-spacing:.03em}.brand-copy p{font-size:10px}.header-actions{gap:6px}.header-actions .icon-button{width:29px;height:29px}.help-button{width:25px;height:25px;font-size:14px}.workspace{grid-template-columns:minmax(0,1.5fr) minmax(255px,1fr);gap:10px}.recorder-pane,.tone-pane{padding:12px;border-radius:15px}.recorder-pane{gap:7px;grid-template-rows:auto minmax(75px,1fr) auto auto auto}.section-heading{min-height:25px}.section-heading h2{font-size:13px}.view-toggles{padding:2px}.view-toggles button{padding:3px 10px;font-size:10px;min-width:40px}.monitor{padding:8px 13px;border-radius:10px}.monitor-top,.source-label{min-height:15px;font-size:9px}.monitor-top button{font-size:9px;padding:1px 6px;min-height:18px}.visual-area{margin:0 0 8px}.pitch-readout p{font-size:10px}.pitch-axis{padding-top:4px}.color-band{height:6px}.axis-labels{font-size:9px;margin-top:5px}.axis-labels span:nth-child(2){font-size:8px}#pitchMarker{height:14px;top:-4px}.frequency-readout{font-size:30px;margin-bottom:2px}.frequency-readout small{font-size:11px}.monitor.has-hz:not(.has-wave) .pitch-readout{top:28%}.monitor.has-hz:not(.has-wave) .pitch-readout p{margin-top:3px}.monitor.has-wave .pitch-readout{inset:0 0 auto}.monitor.has-wave .frequency-readout{font-size:20px}.monitor.has-wave .pitch-readout p{font-size:9px}.scope-scale{font-size:8px;bottom:-6px}.history-heading{font-size:9px;margin-bottom:3px}.history-track{height:14px}.transport{height:35px;gap:7px}.record-button{font-size:12px;gap:7px;border-radius:8px}.record-symbol{width:9px;height:9px}.transport-button{border-radius:8px;min-width:57px;font-size:11px;padding:0 10px}.transport-button svg{width:15px;height:15px}.small-button{min-width:47px;padding:0 7px;font-size:9px;flex-direction:row;gap:4px}.recorder-hint{font-size:9px;min-height:12px}.tone-pane{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto auto;gap:8px;align-content:center}.tone-heading{min-height:25px;margin:0}.use-pitch{font-size:9px;padding:0;min-height:24px}.use-pitch span{font-size:12px}.frequency-editor{margin:0}.frequency-value input{font-size:40px}.frequency-value span{font-size:11px}.step-button{width:28px;height:28px;font-size:19px}.target-slider{margin:-5px 0 0}.target-slider input{height:22px}.range-labels{font-size:8px;margin-top:0}.material-section{gap:0}.material-label{display:none}.material-options{gap:5px}.material-options button{height:36px;border-radius:7px;font-size:11px}.material-options svg{display:none}.tone-play{min-height:35px;font-size:12px;margin:0;border-radius:8px}.tone-play svg{width:15px;height:15px}.tone-caption{font-size:8px;margin:-2px 0 0}.app-footer{font-size:8px}.footer-tip{letter-spacing:.06em}}
-@media(orientation:portrait) and (min-width:701px){.workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 245px}.tone-pane{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;gap:10px 35px;padding:20px 25px}.tone-heading{grid-column:1/-1;margin:0}.frequency-editor{grid-row:2;margin:0}.target-slider{grid-column:1;grid-row:3;align-self:start}.material-section{grid-column:2;grid-row:2;gap:0}.material-label{display:none}.material-options button{height:65px}.tone-play{grid-column:2;grid-row:3;margin:0;min-height:45px;align-self:start}.tone-caption{grid-column:1/-1;font-size:9px;margin:0}.recorder-pane{padding:22px;gap:14px}.monitor{padding:18px 24px 12px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-/* Keep the frequent tablet/phone touch targets separate and easy to hit. */
-@media(max-width:700px) and (orientation:portrait){.view-toggles button{min-height:34px}.material-options button{height:40px}.step-button{width:34px;height:34px}.tone-play{min-height:38px}.use-pitch{min-height:30px}.tone-pane{row-gap:6px}.history-track{height:24px}}
-@media(max-width:360px) and (orientation:portrait){.tone-pane{grid-template-columns:minmax(0,1fr) 106px;column-gap:10px;padding-left:11px;padding-right:11px}.frequency-value input{font-size:29px}.frequency-value span{font-size:10px}.step-button{width:27px;height:30px}.material-options button{height:34px}.tone-play{font-size:10px;min-height:34px}.transport{gap:5px}.transport-button{padding:0 7px;min-width:48px}.small-button{min-width:35px;padding:3px 6px}.record-button{font-size:12px}.recorder-hint{font-size:9px}.view-toggles button{min-height:30px}.tone-heading h2{font-size:13px}.history-track{height:18px}.tone-pane{row-gap:4px}}
-@media(orientation:landscape) and (max-height:330px){.app{padding-top:5px;padding-bottom:5px;gap:5px;grid-template-rows:auto minmax(0,1fr)}.app-header{min-height:28px}.brand-copy h1{font-size:16px}.brand-copy p{font-size:9px}.brand-mark{height:25px;width:23px}.app-footer{display:none}.recorder-pane,.tone-pane{padding:8px}.recorder-pane{gap:5px}.tone-pane{gap:6px}.frequency-value input{font-size:34px}.material-options button{height:32px}.tone-caption{font-size:8px}.monitor{padding-top:6px;padding-bottom:6px}.section-heading{min-height:23px}.visual-area{margin-bottom:6px}}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3f6f7">
+<meta name="description" content="声音的高低学生端：极简录音，横看音高、竖看强弱，按需展开实测波形、频率与四种电子音色。">
+<title>声音探测器 · 声音的高低</title>
+<style>:root {
+  color-scheme: light;
+  --ink: #243341;
+  --muted: #75838d;
+  --paper: #f3f6f7;
+  --line: #e2e8eb;
+  --teal: #24776e;
+  --teal-dark: #155c55;
+  --navy: #142038;
+  --gradient: linear-gradient(90deg,#9574f7 0%,#5599eb 20%,#36c6d7 40%,#66cf9b 60%,#e3cf62 80%,#f08d70 100%);
+  font-family: ui-rounded,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
+body { background: var(--paper); color: var(--ink); overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+button, input { font: inherit; }
+button { border: 0; color: inherit; cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+button:disabled { cursor: default; opacity: .38; }
+button:focus-visible, input:focus-visible { outline: 3px solid #e8ad38; outline-offset: 3px; }
+button:active:not(:disabled) { transform: translateY(1px); }
+button svg { display: block; width: 22px; height: 22px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+[hidden] { display: none !important; }
+h1, h2, p { margin: 0; }
+
+/* The viewport never scrolls. Only the opened tool panel and help dialog do. */
+.app {
+  width: 100%; max-width: 1680px; height: 100%; height: 100dvh;
+  margin: 0 auto;
+  padding: max(16px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(20px,env(safe-area-inset-left));
+  display: grid; grid-template-rows: auto minmax(0,1fr); gap: 15px;
+}
+.app-header { display: flex; align-items: center; min-width: 0; min-height: 46px; gap: 11px; }
+.brand-mark { width: 34px; height: 36px; flex: 0 0 auto; }
+.brand-mark svg { display: block; width: 100%; height: 100%; }
+.app-header h1 { font-size: 23px; line-height: 1.2; font-weight: 720; letter-spacing: .05em; white-space: nowrap; }
+.expand-tools {
+  margin-left: auto; flex-shrink: 0; min-width: 91px; min-height: 43px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 8px 15px; border: 1px solid #d9e2e5; border-radius: 13px;
+  background: #fff9; color: #5c707b; font-size: 14px; font-weight: 600;
+}
+.expand-tools svg { width: 19px; height: 19px; }
+.expand-tools[aria-expanded=true] { color: var(--teal-dark); background: #e7f1ed; border-color: #bdd7cf; }
+.workspace { display: grid; grid-template-columns: minmax(0,1fr); min-width: 0; min-height: 0; gap: 17px; }
+.app.expanded .workspace { grid-template-columns: minmax(0,2.3fr) minmax(300px,1fr); }
+
+/* Main observation area: monitor, the primary record action, and live feedback. */
+.recorder-pane { display: flex; flex-direction: column; min-width: 0; min-height: 0; gap: 11px; }
+.monitor {
+  flex: 1 1 0; display: flex; flex-direction: column; min-width: 0; min-height: 0;
+  padding: 18px 25px 14px; overflow: hidden; border-radius: 23px;
+  background: var(--navy); color: #eaf0fb;
+  box-shadow: 0 5px 20px #142b4013, inset 0 0 0 1px #ffffff06;
+}
+.monitor-top { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 30px; }
+.source-label { display: flex; align-items: center; gap: 8px; min-width: 0; color: #9bb0ca; font-size: 12px; line-height: 1.4; letter-spacing: .035em; }
+.source-label i { width: 6px; height: 6px; border-radius: 50%; background: #677b96; flex: 0 0 auto; }
+#sourceTag { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.source-label i.active { background: #79d9b9; box-shadow: 0 0 8px #79d9b94d; }
+.source-label i.recording { background: #ffa399; animation: blink 1.2s infinite; }
+.frequency-readout { display: flex; align-items: baseline; gap: 6px; flex-shrink: 0; white-space: nowrap; font-variant-numeric: tabular-nums; color: #f8fbff; }
+#detectedFrequency { font-family: ui-rounded,system-ui,sans-serif; font-size: 30px; font-weight: 450; line-height: 1; }
+.frequency-readout small { color: #a8bbd3; font-size: 12px; }
+#frequencyKind { color: #8da5c3; font-size: 10px; margin-left: 2px; }
+.visual-area { position: relative; flex: 1 1 0; min-width: 0; min-height: 24px; margin-top: 7px; }
+.visual-area canvas, .scope-area canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.pitch-status { position: absolute; left: 16px; right: 16px; top: 10px; text-align: center; color: #a8bbd3; font-size: 13px; line-height: 1.4; pointer-events: none; }
+.pitch-status:empty { display: none; }
+.pitch-axis { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex: 0 0 auto; padding: 6px 0 1px; color: #cbd9ec; font-size: 13px; line-height: 1.3; }
+#bandHint { color: #8ba4c4; font-size: 11px; letter-spacing: .06em; }
+
+/* Opening a waveform never replaces or hides the level/pitch plot. */
+.scope-panel {
+  display: flex; flex-direction: column; flex: 0 1 35%;
+  height: 210px; max-height: 250px; min-height: 92px;
+  margin-top: 12px; padding-top: 11px; border-top: 1px solid #ffffff15; gap: 6px;
+}
+.scope-heading { display: flex; align-items: center; gap: 7px; min-width: 0; min-height: 36px; flex: 0 0 auto; }
+#scopeKind { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #adc0d9; font-size: 12px; }
+#triggerBadge { flex: 0 1 auto; max-width: 138px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #92b2be; font-size: 10px; line-height: 1.3; }
+.scope-heading button { display: inline-flex; align-items: center; justify-content: center; min-width: 41px; min-height: 36px; padding: 6px 10px; border: 1px solid #ffffff20; border-radius: 8px; background: #ffffff08; color: #b9cde4; font-size: 12px; flex: 0 0 auto; }
+.scope-heading button[aria-pressed=true] { border-color: #8dbbb899; background: #486f7355; color: #d4f2e9; }
+.scope-area { position: relative; flex: 1 1 0; min-height: 26px; }
+.scope-scale { display: flex; align-items: center; justify-content: space-between; color: #8aa2bf; flex: 0 0 auto; font-size: 10px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.record-footer { display: grid; grid-template-columns: minmax(35px,1fr) minmax(0,350px) minmax(35px,1fr); align-items: center; gap: 12px; flex: 0 0 auto; }
+.record-time { grid-column: 1; justify-self: end; color: #75858e; font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.record-time-spacer { grid-column: 3; }
+.record-button { grid-column: 2; width: 100%; min-height: 57px; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px 20px; background: var(--teal); color: #fff; border-radius: 16px; font-size: 18px; font-weight: 630; line-height: 1.2; white-space: nowrap; box-shadow: 0 3px 8px #1c5a5312; }
+.record-symbol { width: 13px; height: 13px; flex: 0 0 auto; background: white; border-radius: 50%; box-shadow: 0 0 0 4px #ffffff20; }
+.record-button.is-recording { background: #a94946; }
+.record-button.is-recording .record-symbol { border-radius: 3px; box-shadow: none; }
+.record-button.is-requesting { background: #637985; }
+.record-button.is-requesting .record-symbol { width: 16px; height: 16px; border: 2px solid #ffffff55; border-top-color: white; background: transparent; box-shadow: none; animation: spin 1s linear infinite; }
+.recorder-hint { flex: 0 0 auto; max-width: 100%; color: #77858f; text-align: center; font-size: 12px; line-height: 1.4; overflow-wrap: anywhere; }
+.recorder-hint:empty { display: none; }
+.recorder-hint.error { color: #a24a44; }
+
+/* Expanded controls scroll independently; the recorder stays in its own track. */
+.tools-pane {
+  min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 15px;
+  padding: 18px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: #c0d0d0 transparent;
+  background: #fff; border: 1px solid #e0e8e9; border-radius: 22px; box-shadow: 0 4px 18px #203d4910;
+}
+.tools-pane > * { flex-shrink: 0; }
+.observation-tools { display: flex; justify-content: space-between; align-items: center; gap: 10px; position: sticky; top: -1px; z-index: 3; padding-bottom: 9px; background: #fff; box-shadow: 0 4px 0 #fff; border-bottom: 1px solid #edf1f2; }
+.view-toggles { display: flex; gap: 3px; padding: 3px; border-radius: 11px; background: #edf3f3; }
+.view-toggles button { display: inline-flex; justify-content: center; align-items: center; gap: 6px; min-height: 39px; min-width: 50px; padding: 7px 12px; border-radius: 8px; background: transparent; color: #73858d; font-size: 13px; font-weight: 650; }
+.view-toggles button svg { width: 18px; height: 18px; }
+.view-toggles button[aria-pressed=true] { color: var(--teal-dark); background: white; box-shadow: 0 1px 5px #1c3e4217; }
+.utility-tools { display: flex; gap: 3px; }
+.utility-button { display: inline-flex; justify-content: center; align-items: center; width: 39px; min-height: 41px; padding: 7px; border-radius: 9px; background: #f5f8f8; color: #71818b; font-family: system-ui,sans-serif; font-size: 20px; line-height: 1; flex: 0 0 auto; }
+.utility-button svg { width: 19px; height: 19px; }
+.tone-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 29px; }
+.tone-heading h2 { font-size: 15px; line-height: 1.2; font-weight: 650; letter-spacing: .04em; white-space: nowrap; }
+.use-pitch { display: inline-flex; align-items: center; justify-content: flex-end; gap: 3px; min-height: 36px; padding: 5px 0 5px 6px; color: var(--teal); background: transparent; font-size: 11px; white-space: nowrap; }
+.use-pitch span { font-size: 15px; }
+.frequency-editor { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
+.step-button { width: 42px; height: 42px; flex: 0 0 auto; border: 1px solid #d8e2e4; border-radius: 50%; background: #fbfdfd; color: #6a7e88; font-size: 25px; line-height: 1; }
+.frequency-value { display: flex; align-items: baseline; justify-content: center; gap: 5px; min-width: 0; }
+.frequency-value input { width: 4.4ch; min-width: 0; padding: 2px 0; border: 0; border-radius: 5px; background: transparent; color: #344957; font-family: ui-rounded,system-ui,sans-serif; font-weight: 450; font-size: 49px; line-height: 1.15; letter-spacing: -.035em; text-align: center; font-variant-numeric: tabular-nums; appearance: textfield; -moz-appearance: textfield; }
+.frequency-value input::-webkit-inner-spin-button, .frequency-value input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.frequency-value span { color: #80919a; font-size: 13px; }
+.target-slider { min-width: 0; margin-top: -8px; }
+.target-slider input { appearance: none; -webkit-appearance: none; display: block; width: 100%; height: 35px; margin: 0; background: transparent; touch-action: none; cursor: pointer; }
+.target-slider input::-webkit-slider-runnable-track { height: 6px; border-radius: 20px; background: var(--gradient); }
+.target-slider input::-moz-range-track { height: 6px; border-radius: 20px; background: var(--gradient); }
+.target-slider input::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 25px; height: 25px; margin-top: -9.5px; border: 3px solid white; border-radius: 50%; background: var(--target-color,#71c99b); box-shadow: 0 1px 5px #34455340; outline: 1px solid #3445531a; }
+.target-slider input::-moz-range-thumb { width: 19px; height: 19px; border: 3px solid white; border-radius: 50%; background: var(--target-color,#71c99b); box-shadow: 0 1px 5px #34455340; }
+.range-labels { display: flex; justify-content: space-between; color: #8a9aa3; font-size: 10px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.material-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.material-options button { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; justify-items: center; gap: 3px 3px; min-width: 0; min-height: 80px; padding: 10px 13px; border: 1px solid transparent; border-radius: 12px; background: #f0f5f5; color: #71858d; }
+.material-options button svg { grid-column: 1/-1; width: 43px; height: 29px; stroke-width: 1.35; }
+.material-options button span { justify-self: end; font-size: 13px; line-height: 1.2; white-space: nowrap; }
+.material-options button small { justify-self: start; padding: 1px 4px; border-radius: 4px; color: #81949b; font-size: 10px; line-height: 1.3; }
+.material-options button[aria-pressed=true] { border-color: #acd0c6; background: #e9f4ee; color: #276e62; }
+.material-options button[aria-pressed=true] small { color: #4c8c7e; background: #d9ece3; }
+.tone-play { display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 47px; width: 100%; padding: 10px 15px; border-radius: 12px; background: #344b59; color: white; font-size: 14px; font-weight: 600; }
+.tone-play svg { width: 19px; height: 19px; }
+.tone-play.is-playing { background: #26776d; }
+.tone-caption { color: #8e9da5; font-size: 10px; text-align: center; line-height: 1.4; margin-top: -7px; }
+.recording-tools { display: flex; flex-direction: column; gap: 11px; border-top: 1px solid #e5ecee; padding-top: 17px; }
+.history-block { min-width: 0; }
+.history-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 7px; color: #7d8d96; font-size: 11px; line-height: 1.3; }
+.history-heading span { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.history-track { position: relative; height: 36px; min-width: 0; border-radius: 6px; background: #f0f4f5; overflow: hidden; }
+.history-track canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.history-track input { position: absolute; inset: 0; z-index: 2; display: block; margin: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; touch-action: none; }
+.history-track:focus-within { outline: 2px solid var(--teal); outline-offset: 2px; }
+#historyCursor { position: absolute; top: 0; left: 0; z-index: 1; height: 100%; border-left: 2px solid #24463e; box-shadow: 1px 0 0 #fff; pointer-events: none; }
+.clip-transport { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; }
+.transport-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 0; min-height: 43px; padding: 9px 7px; border-radius: 10px; background: #edf3f3; color: #5e747c; font-size: 12px; white-space: nowrap; }
+.transport-button svg { width: 17px; height: 17px; }
+.transport-button.is-playing { color: #236f61; background: #e0eee7; }
+
+/* Help remains an explicitly opened, independently scrollable surface. */
+dialog { width: min(540px,calc(100vw - 28px)); max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); margin: auto; padding: 24px; overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; border: 0; border-radius: 21px; background: #fff; color: var(--ink); box-shadow: 0 25px 80px #0003; }
+dialog::backdrop { background: #07122399; backdrop-filter: blur(4px); }
+.dialog-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+.dialog-heading h2 { font-size: 20px; line-height: 1.35; }
+.dialog-heading .utility-button { flex-shrink: 0; }
+.help-content h3 { color: var(--teal); font-size: 14px; font-weight: 650; margin: 20px 0 6px; }
+.help-content h3:first-child { margin-top: 0; }
+.help-content p { color: #62717d; font-size: 13px; line-height: 1.8; margin-top: 6px; }
+.dialog-close { width: 100%; min-height: 44px; margin-top: 23px; padding: 11px; border-radius: 10px; background: var(--teal); color: white; font-size: 14px; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes blink { 50% { opacity: .4; } }
+
+@media (min-width:1500px) and (min-height:800px) {
+  .app { padding: 25px 30px 23px; gap: 20px; }
+  .app-header { min-height: 52px; }
+  .app-header h1 { font-size: 27px; }
+  .expand-tools { min-height: 46px; font-size: 16px; }
+  .monitor { padding: 24px 32px 20px; border-radius: 27px; }
+  .source-label { font-size: 15px; }
+  #detectedFrequency { font-size: 38px; }
+  #frequencyKind { font-size: 13px; }
+  .pitch-axis { font-size: 16px; }
+  #bandHint { font-size: 13px; }
+  .record-button { min-height: 64px; font-size: 21px; }
+  .record-footer { grid-template-columns: minmax(35px,1fr) minmax(0,390px) minmax(35px,1fr); }
+  .tools-pane { padding: 24px; gap: 18px; }
+}
+
+@media (max-width:1100px) {
+  .app { padding: max(12px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left)); gap: 12px; }
+  .workspace { gap: 12px; }
+  .monitor { padding: 15px 20px 12px; }
+  .tools-pane { padding: 16px; gap: 13px; }
+}
+
+/* Portrait gives the recording surface the larger track. Controls may scroll. */
+@media (orientation:portrait) {
+  .app.expanded .workspace { grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(0,1fr) minmax(0,42%); }
+  .app.expanded .tools-pane { border-radius: 18px; }
+}
+
+@media (orientation:portrait) and (min-width:701px) {
+  .app.expanded .workspace { grid-template-rows: minmax(0,1fr) minmax(0,35%); }
+  .tools-pane { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-content: start; align-items: center; gap: 10px 24px; }
+  .observation-tools { grid-column: 1/-1; }
+  .tone-heading { grid-column: 1; grid-row: 2; }
+  .frequency-editor { grid-column: 1; grid-row: 3; }
+  .target-slider { grid-column: 1; grid-row: 4; }
+  .material-options { grid-column: 2; grid-row: 2/4; }
+  .material-options button { min-height: 63px; padding: 7px 10px; }
+  .material-options button svg { width: 32px; height: 22px; }
+  .tone-play { grid-column: 2; grid-row: 4; }
+  .tone-caption { grid-column: 1/-1; margin: 0; }
+  .recording-tools { grid-column: 1/-1; display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); align-items: end; gap: 20px; padding-top: 12px; }
+}
+
+@media (max-width:700px) and (orientation:portrait) {
+  .app { padding: max(9px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(9px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left)); gap: 9px; }
+  .app-header { min-height: 42px; gap: 8px; }
+  .brand-mark { width: 28px; height: 31px; }
+  .app-header h1 { font-size: 19px; letter-spacing: .04em; }
+  .expand-tools { min-width: 78px; min-height: 40px; padding: 7px 11px; gap: 7px; border-radius: 11px; font-size: 13px; }
+  .expand-tools svg { width: 17px; height: 17px; }
+  .app.expanded .workspace { grid-template-rows: minmax(0,1fr) minmax(0,42%); }
+  .workspace { gap: 9px; }
+  .recorder-pane { gap: 8px; }
+  .monitor { padding: 12px 15px 10px; border-radius: 18px; }
+  .monitor-top { min-height: 25px; gap: 8px; }
+  .source-label { font-size: 10px; gap: 6px; letter-spacing: 0; }
+  #detectedFrequency { font-size: 25px; }
+  .frequency-readout { gap: 4px; }
+  .frequency-readout small { font-size: 10px; }
+  #frequencyKind { margin-left: 0; font-size: 9px; }
+  .visual-area { min-height: 24px; margin-top: 4px; }
+  .pitch-status { top: 7px; left: 9px; right: 9px; font-size: 11px; }
+  .pitch-axis { padding-top: 4px; font-size: 11px; }
+  #bandHint { font-size: 10px; }
+  .scope-panel { flex-basis: 35%; max-height: 190px; min-height: 87px; margin-top: 8px; padding-top: 6px; gap: 4px; }
+  .scope-heading { gap: 5px; min-height: 33px; }
+  #scopeKind { font-size: 10px; }
+  #triggerBadge { max-width: 90px; font-size: 9px; }
+  .scope-heading button { min-height: 33px; min-width: 37px; padding: 5px 7px; font-size: 11px; border-radius: 7px; }
+  .scope-area { min-height: 25px; }
+  .scope-scale { font-size: 9px; }
+  .record-footer { grid-template-columns: minmax(31px,1fr) minmax(0,270px) minmax(31px,1fr); gap: 8px; }
+  .record-button { min-height: 51px; padding: 10px 12px; border-radius: 13px; font-size: 16px; gap: 10px; }
+  .record-symbol { width: 11px; height: 11px; }
+  .record-time { font-size: 11px; }
+  .recorder-hint { font-size: 10px; line-height: 1.35; }
+  .tools-pane { padding: 12px; gap: 11px; }
+  .observation-tools { padding-bottom: 8px; gap: 7px; }
+  .view-toggles button { min-height: 36px; font-size: 12px; padding: 6px 11px; min-width: 46px; }
+  .utility-button { width: 37px; min-height: 39px; }
+  .tone-heading h2 { font-size: 14px; }
+  .use-pitch { min-height: 34px; font-size: 11px; }
+  .frequency-value input { font-size: 41px; }
+  .step-button { width: 39px; height: 39px; }
+  .material-options { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 5px; }
+  .material-options button { display: flex; flex-direction: column; justify-content: center; gap: 4px; min-height: 57px; padding: 7px 3px; border-radius: 9px; }
+  .material-options button svg { display: none; }
+  .material-options button span { font-size: 12px; }
+  .material-options button small { padding: 1px 5px; font-size: 10px; }
+  .tone-play { min-height: 43px; border-radius: 10px; }
+  .tone-caption { font-size: 9px; margin-top: -5px; }
+  .recording-tools { gap: 10px; padding-top: 12px; }
+  .history-track { height: 34px; }
+  .transport-button { min-height: 42px; }
+  dialog { padding: 19px; border-radius: 18px; }
+  .dialog-heading h2 { font-size: 18px; }
+}
+
+@media (max-width:350px) and (orientation:portrait) {
+  .app-header h1 { font-size: 17px; }
+  .brand-mark { width: 25px; }
+  .expand-tools { min-width: 73px; }
+  .monitor { padding-left: 12px; padding-right: 12px; }
+  #frequencyKind { font-size: 8px; }
+  #detectedFrequency { font-size: 23px; }
+  .record-button { font-size: 15px; min-height: 48px; }
+  .app.expanded .workspace { grid-template-rows: minmax(0,1fr) minmax(0,46%); }
+  .tools-pane { padding: 11px; }
+  .frequency-value input { font-size: 38px; }
+  .material-options button span { font-size: 11px; }
+}
+
+/* Low landscape phones retain two independent columns; tools scroll vertically. */
+@media (orientation:landscape) and (max-height:600px) {
+  .app { padding: max(7px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(7px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left)); gap: 7px; }
+  .app-header { min-height: 36px; gap: 8px; }
+  .brand-mark { width: 27px; height: 29px; }
+  .app-header h1 { font-size: 18px; }
+  .expand-tools { min-height: 35px; min-width: 78px; padding: 5px 11px; border-radius: 10px; font-size: 12px; }
+  .expand-tools svg { width: 17px; height: 17px; }
+  .workspace { gap: 10px; }
+  .app.expanded .workspace { grid-template-columns: minmax(0,1fr) clamp(240px,32vw,300px); }
+  .recorder-pane { gap: 7px; }
+  .monitor { padding: 9px 15px 8px; border-radius: 15px; }
+  .monitor-top { min-height: 22px; gap: 8px; }
+  .source-label { font-size: 10px; gap: 6px; }
+  #detectedFrequency { font-size: 24px; }
+  .frequency-readout small { font-size: 10px; }
+  #frequencyKind { font-size: 9px; }
+  .visual-area { margin-top: 3px; min-height: 20px; }
+  .pitch-status { top: 4px; font-size: 11px; }
+  .pitch-axis { font-size: 11px; padding-top: 3px; }
+  #bandHint { font-size: 9px; }
+  .scope-panel { flex-basis: 38%; max-height: 150px; min-height: 75px; margin-top: 6px; padding-top: 5px; gap: 3px; }
+  .scope-heading { min-height: 30px; gap: 6px; }
+  #scopeKind { font-size: 10px; }
+  #triggerBadge { max-width: 110px; font-size: 9px; }
+  .scope-heading button { min-height: 30px; min-width: 37px; padding: 4px 8px; font-size: 11px; border-radius: 6px; }
+  .scope-area { min-height: 22px; }
+  .scope-scale { font-size: 9px; }
+  .record-footer { grid-template-columns: minmax(31px,1fr) minmax(0,280px) minmax(31px,1fr); gap: 9px; }
+  .record-button { min-height: 43px; padding: 8px 12px; border-radius: 11px; font-size: 15px; gap: 9px; }
+  .record-symbol { width: 11px; height: 11px; }
+  .record-time { font-size: 11px; }
+  .recorder-hint { font-size: 10px; line-height: 1.3; }
+  .tools-pane { padding: 11px; gap: 10px; border-radius: 15px; }
+  .observation-tools { padding-bottom: 7px; gap: 6px; }
+  .view-toggles { padding: 2px; }
+  .view-toggles button { min-width: 41px; min-height: 35px; padding: 5px 8px; gap: 4px; font-size: 11px; }
+  .view-toggles button svg { width: 16px; height: 16px; }
+  .utility-tools { gap: 2px; }
+  .utility-button { width: 34px; min-height: 37px; }
+  .utility-button svg { width: 17px; height: 17px; }
+  .tone-heading h2 { font-size: 13px; }
+  .use-pitch { min-height: 32px; font-size: 10px; }
+  .frequency-editor { gap: 7px; }
+  .frequency-value input { font-size: 37px; }
+  .frequency-value span { font-size: 11px; }
+  .step-button { width: 35px; height: 35px; font-size: 22px; }
+  .target-slider input { height: 31px; }
+  .material-options { gap: 6px; }
+  .material-options button { min-height: 51px; padding: 7px; display: flex; justify-content: center; align-items: center; gap: 3px; }
+  .material-options button svg { display: none; }
+  .material-options button span { font-size: 12px; }
+  .material-options button small { font-size: 10px; padding: 1px 3px; }
+  .tone-play { min-height: 41px; font-size: 13px; }
+  .tone-caption { margin-top: -4px; font-size: 9px; }
+  .recording-tools { padding-top: 12px; gap: 9px; }
+  .history-track { height: 32px; }
+  .transport-button { min-height: 40px; gap: 4px; padding: 7px 4px; font-size: 11px; }
+  .transport-button svg { width: 15px; height: 15px; }
+}
+
+@media (orientation:landscape) and (max-height:330px) {
+  .app { padding-top: max(5px,env(safe-area-inset-top)); padding-bottom: max(5px,env(safe-area-inset-bottom)); gap: 5px; }
+  .app-header { min-height: 31px; }
+  .brand-mark { width: 23px; height: 25px; }
+  .app-header h1 { font-size: 16px; }
+  .expand-tools { min-height: 31px; padding-top: 4px; padding-bottom: 4px; }
+  .recorder-pane { gap: 5px; }
+  .monitor { padding: 7px 12px 6px; }
+  .monitor-top { min-height: 19px; }
+  #detectedFrequency { font-size: 21px; }
+  .visual-area { min-height: 15px; margin-top: 2px; }
+  .pitch-axis { padding-top: 2px; font-size: 10px; }
+  .pitch-status { top: 3px; font-size: 10px; }
+  .scope-panel { min-height: 69px; max-height: 90px; flex-basis: 36%; margin-top: 4px; padding-top: 3px; gap: 2px; }
+  .scope-heading, .scope-heading button { min-height: 28px; }
+  .scope-area { min-height: 21px; }
+  .scope-scale { font-size: 8px; }
+  .record-button { min-height: 38px; font-size: 13px; border-radius: 9px; }
+  .recorder-hint { font-size: 9px; line-height: 1.25; }
+}
+
+/* Compact portrait tool grid: everyday synthesis controls share the first view. */
+@media (max-width:700px) and (orientation:portrait) {
+  .tools-pane {
+    display: grid;
+    grid-template-columns: minmax(74px,.8fr) minmax(0,1.65fr);
+    grid-template-areas:
+      "observe observe"
+      "title frequency"
+      "slider slider"
+      "materials materials"
+      "play play"
+      "caption caption"
+      "recording recording";
+    align-content: start; align-items: center;
+    column-gap: 10px; row-gap: 6px; padding: 11px;
+  }
+  .observation-tools { grid-area: observe; padding-bottom: 6px; }
+  .view-toggles { padding: 2px; }
+  .view-toggles button { min-height: 32px; padding: 5px 11px; }
+  .utility-button { min-height: 36px; }
+  .tone-heading { grid-area: title; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1px; min-height: 0; }
+  .tone-heading h2 { font-size: 13px; }
+  .use-pitch { min-height: 27px; padding: 3px 0; font-size: 10px; gap: 2px; }
+  .use-pitch span { font-size: 13px; }
+  .frequency-editor { grid-area: frequency; gap: 6px; }
+  .frequency-value { gap: 3px; }
+  .frequency-value input { width: 4.25ch; font-size: 34px; }
+  .frequency-value span { font-size: 11px; }
+  .step-button { width: 36px; height: 36px; font-size: 22px; }
+  .target-slider { grid-area: slider; margin: -5px 0 0; }
+  .target-slider input { height: 30px; }
+  .material-options { grid-area: materials; }
+  .material-options button { min-height: 50px; padding-top: 5px; padding-bottom: 5px; gap: 3px; }
+  .tone-play { grid-area: play; min-height: 41px; padding: 8px 12px; }
+  .tone-caption { grid-area: caption; margin: 0; line-height: 1.3; }
+  .recording-tools { grid-area: recording; margin-top: 3px; }
+}
+
+@media (max-width:700px) and (orientation:portrait) and (max-height:720px) {
+  .app.expanded .workspace { grid-template-rows: minmax(0,1fr) minmax(0,44%); }
+  .tools-pane { row-gap: 5px; padding: 9px; }
+  .observation-tools { padding-bottom: 4px; }
+  .view-toggles button { min-height: 31px; }
+  .utility-button { min-height: 34px; }
+  .frequency-value input { font-size: 32px; }
+  .step-button { width: 34px; height: 34px; }
+  .target-slider input { height: 27px; }
+  .range-labels { font-size: 9px; }
+  .material-options button { min-height: 46px; padding-top: 4px; padding-bottom: 4px; gap: 2px; }
+  .tone-play { min-height: 39px; }
+}
+
+@media (max-width:350px) and (orientation:portrait) {
+  .app.expanded .workspace { grid-template-rows: minmax(0,1fr) minmax(0,46%); }
+  .tools-pane { column-gap: 8px; }
+  .frequency-value input { font-size: 30px; }
+  .step-button { width: 32px; height: 34px; }
+}
+
+@media (max-width:700px) and (orientation:portrait) and (max-height:640px) {
+  .app.expanded .monitor { padding-top: 8px; padding-bottom: 7px; }
+  .app.expanded .monitor-top { min-height: 22px; }
+  .app.expanded .scope-panel { flex-basis: 30%; min-height: 64px; max-height: 83px; margin-top: 5px; padding-top: 4px; gap: 2px; }
+  .app.expanded .scope-heading, .app.expanded .scope-heading button { min-height: 26px; }
+  .app.expanded .scope-area { min-height: 19px; }
+  .app.expanded .scope-scale { font-size: 8px; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 </style>
 </head>
 <body>
-  <div class="app">
-    <header class="app-header">
-      <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 24v-8M13 30V10M20 35V5M27 29V11M34 23v-6" fill="none" stroke-linecap="round" stroke-width="4"/><path d="M6 24v-8" stroke="#9574f7"/><path d="M13 30V10" stroke="#5599eb"/><path d="M20 35V5" stroke="#46bfa9"/><path d="M27 29V11" stroke="#d4bb5a"/><path d="M34 23v-6" stroke="#ea9775"/></svg></div>
-      <div class="brand-copy"><h1>声音探测器</h1><p>《声音的高低》<span> · 学生端</span></p></div>
-      <div class="header-actions"><button id="fullscreen" class="icon-button" aria-label="全屏显示" title="全屏显示"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button><button id="help" class="help-button" aria-label="打开使用说明">?</button></div>
-    </header>
+<div class="app" id="app">
+<header class="app-header">
+<div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><g fill="none" stroke-linecap="round" stroke-width="4"><path d="M6 24v-8" stroke="#9574f7"/><path d="M13 30V10" stroke="#5599eb"/><path d="M20 35V5" stroke="#46bfa9"/><path d="M27 29V11" stroke="#d4bb5a"/><path d="M34 23v-6" stroke="#ea9775"/></g></svg></div>
+<h1>声音探测器</h1>
+<button id="expandTools" class="expand-tools" aria-expanded="false" aria-controls="expandedTools" aria-label="展开波形、频率和发声功能"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="10" cy="17" r="2"/></svg><span id="expandLabel">更多</span></button>
+</header>
+<main class="workspace">
+<section class="recorder-pane" aria-label="声音录音器">
+<div class="monitor" id="monitor">
+<div class="monitor-top"><span class="source-label"><i id="sourceDot"></i><span id="sourceTag">等待录音</span></span><div class="frequency-readout" id="frequencyReadout" hidden><span id="detectedFrequency">—</span><small>Hz</small><span id="frequencyKind">估计音高</span></div></div>
+<div class="visual-area" id="visualArea"><canvas id="levelPlot" aria-label="横向位置表示音高，彩条高度表示本机相对输入强弱"></canvas><p class="pitch-status" id="pitchStatus"></p></div>
+<div class="pitch-axis"><span>低</span><span id="bandHint">声音的高低</span><span>高</span></div>
+<div class="scope-panel" id="scopePanel" hidden>
+<div class="scope-heading"><span id="scopeKind">录音波形</span><span id="triggerBadge">等待输入</span><button id="freezeWave" aria-pressed="false">定格</button><button id="waveGain" title="只改变波形显示倍率">×4</button></div>
+<div class="scope-area" id="scopeArea"><canvas id="scope" aria-label="时间窗内的原始音频采样波形"></canvas></div>
+<div class="scope-scale"><span>0</span><span>20 ms</span></div>
+</div>
+</div>
+<div class="record-footer"><span id="recordTime" class="record-time" hidden>0:00</span><button id="record" class="record-button"><span id="recordSymbol" class="record-symbol" aria-hidden="true"></span><span id="recordText">开始录音</span></button><span class="record-time-spacer" aria-hidden="true"></span></div>
+<p id="recorderHint" class="recorder-hint" role="status"></p>
+</section>
 
-    <main class="workspace">
-      <section class="recorder-pane" aria-labelledby="recorderTitle">
-        <div class="section-heading"><h2 id="recorderTitle"><span class="tiny-dot"></span>录音观察</h2><div class="view-toggles" aria-label="观察方式"><button id="toggleWave" aria-pressed="false">波形</button><button id="toggleHz" aria-pressed="false">Hz</button></div></div>
-        <div class="monitor" id="monitor">
-          <div class="monitor-top"><span class="source-label"><i id="sourceDot"></i><span id="sourceTag">等待录音</span></span><button id="waveGain" hidden title="改变波形显示倍率">显示 ×4</button></div>
-          <div class="visual-area" id="visualArea">
-            <canvas id="scope" aria-label="音高颜色或声音波形"></canvas>
-            <div class="pitch-readout" id="pitchReadout"><div class="frequency-readout" id="frequencyReadout" hidden><span id="detectedFrequency">—</span><small>Hz</small></div><p id="pitchStatus">听见声音，看见音高</p></div>
-            <div class="scope-scale" id="scopeScale" hidden><span>0</span><span>20 ms</span></div>
-          </div>
-          <div class="pitch-axis"><div class="color-band" aria-label="由低到高的音高色带"><span id="pitchMarker" hidden></span></div><div class="axis-labels"><span>低</span><span id="bandHint">音高色带</span><span>高</span></div></div>
-        </div>
-        <div class="history-block"><div class="history-heading"><label for="scrub">声音足迹</label><span id="timeLabel">0:00 / 0:30</span></div><div class="history-track" id="historyTrack"><canvas id="historyCanvas" aria-label="录音的音高颜色随时间变化"></canvas><span id="historyCursor" hidden></span><input id="scrub" type="range" min="0" max="30" value="0" step="0.01" disabled aria-label="回看录音位置"></div></div>
-        <div class="transport">
-          <button id="record" class="record-button"><span id="recordSymbol" class="record-symbol" aria-hidden="true"></span><span id="recordText">开始录音</span></button>
-          <button id="replay" class="transport-button" disabled><svg viewBox="0 0 24 24" id="replayIcon"><path d="m9 5 11 7-11 7Z"/></svg><span id="replayText">回听</span></button>
-          <button id="download" class="transport-button small-button" disabled aria-label="保存录音为 WAV"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></svg><span>保存</span></button>
-          <button id="clear" class="transport-button small-button" disabled aria-label="清空当前录音"><svg viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></svg><span>清空</span></button>
-        </div>
-        <p id="recorderHint" class="recorder-hint" role="status">轻轻哼一个长音，观察色带上的位置。</p>
-      </section>
-
-      <section class="tone-pane" aria-labelledby="toneTitle">
-        <div class="section-heading tone-heading"><h2 id="toneTitle">选频发声</h2><button id="usePitch" class="use-pitch" disabled>用这个音高 <span aria-hidden="true">↘</span></button></div>
-        <div class="frequency-editor"><button id="frequencyDown" class="step-button" aria-label="降低频率 10 Hz">−</button><label class="frequency-value" for="targetFrequency"><input id="targetFrequency" type="number" min="50" max="1600" step="1" value="440" inputmode="numeric" aria-label="选定频率，50 到 1600 Hz"><span>Hz</span></label><button id="frequencyUp" class="step-button" aria-label="提高频率 10 Hz">+</button></div>
-        <div class="target-slider"><input id="frequencySlider" type="range" min="0" max="1000" value="627" step="1" aria-label="拖动选择发声频率"><div class="range-labels"><span>低 · 50 Hz</span><span>高 · 1600 Hz</span></div></div>
-        <div class="material-section"><span class="material-label">材质音色</span><div class="material-options" role="group" aria-label="选择电子合成音色"><button data-material="pure" aria-pressed="true"><svg viewBox="0 0 40 28"><path d="M3 14C9-5 13-5 20 14s11 19 17 0"/></svg><span>纯音</span></button><button data-material="wood" aria-pressed="false"><svg viewBox="0 0 40 28"><path d="m8 8 18-4 7 15-18 5Zm5-1 7 16m-1-17 7 16M3 4l7 7"/></svg><span>木片</span></button><button data-material="metal" aria-pressed="false"><svg viewBox="0 0 40 28"><path d="m20 4 14 20H6Zm-6 12h23M11 3l7 9"/></svg><span>金属</span></button><button data-material="string" aria-pressed="false"><svg viewBox="0 0 40 28"><path d="M4 6h32M4 14h32M4 22h32M8 3v22m24-22v22"/></svg><span>琴弦</span></button></div></div>
-        <button id="playTone" class="tone-play"><svg id="toneIcon" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></svg><span id="toneText">试听电子音</span></button>
-        <p class="tone-caption">电子合成示意 · 所选频率为基频</p>
-      </section>
-    </main>
-    <footer class="app-footer"><span>录音留在当前设备<span class="footer-detail"> · 最长 30 秒</span></span><span class="footer-tip">从声音到颜色</span></footer>
-  </div>
-
-  <dialog id="helpDialog" aria-labelledby="helpTitle"><div class="dialog-heading"><h2 id="helpTitle">让声音的高低“看得见”</h2><button id="closeHelp" class="icon-button" aria-label="关闭说明">×</button></div><div class="help-content"><h3>录一段，留住声音</h3><p>点击“开始录音”并允许麦克风。靠近设备，轻轻哼一个持续的单音。录好后可以回听、拖动“声音足迹”回看，或保存 WAV 文件。再次录音会在成功后替换上一段。</p><h3>颜色表示什么？</h3><p>声音的高低也叫音调。色带从左到右表示音高由低到高，范围为 50–1600 Hz。颜色是我们约定的标记，声音本身没有这些颜色。没有识别到稳定音高的片段以灰色表示。</p><h3>波形和 Hz</h3><p>“Hz”显示估计的基频；1 Hz 表示每秒振动 1 次。“波形”显示音频信号在固定 20 毫秒内的变化，显示倍率可切换。波形高度不是经过校准的音量分贝值，也不是空气振动的实物照片。</p><h3>用自己的频率发声</h3><p>拖动色带或直接输入 50–1600 Hz，选择纯音、木片、金属或琴弦音色再试听。“用这个音高”可以把刚识别到的音高带到这里。材质音色是电子合成的近似示意，不能代替真实材料的声音。</p><h3>什么时候会“暂未识别”？</h3><p>这个工具适合观察单一、持续的声音。杂声、多人同时说话、极短的敲击声或复杂音色可能无法确定音高，也可能出现倍频判断误差。识别只是音频分析的估计，不是专业测量仪器。</p><h3>设备与录音</h3><p>录音需要 HTTPS 页面和麦克风权限；可在 Safari 或 Chrome 中直接打开。浏览器和设备可能处理输入音量，检测效果会随环境改变。试听电子音会先结束录音；录音结束后可以回听。切到后台会停止录音与播放。</p><p>录音只保存在当前页面的内存中，不会上传。刷新或关闭页面会清除；想保留时请先点击“保存”。下载的单文件可以离线试听电子音；离线录音能否使用取决于浏览器的本地文件权限。</p></div><button id="understood" class="dialog-close">知道了，开始观察</button></dialog>
-  <script>
-/* StudentPitchDSP v1.0 — browser-local, monophonic pitch analysis.
+<aside class="tools-pane" id="expandedTools" aria-label="拓展功能" hidden>
+<div class="observation-tools"><div class="view-toggles" aria-label="拓展观察"><button id="toggleWave" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M2 12c4-13 6-13 10 0s6 13 10 0"/></svg>波形</button><button id="toggleHz" aria-pressed="false">Hz</button></div><div class="utility-tools"><button id="fullscreen" class="utility-button" aria-label="全屏显示"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button><button id="help" class="utility-button" aria-label="使用说明">?</button></div></div>
+<div class="tone-heading"><h2>选频发声</h2><button id="usePitch" class="use-pitch" disabled>用这个音高 <span aria-hidden="true">↘</span></button></div>
+<div class="frequency-editor"><button id="frequencyDown" class="step-button" aria-label="降低频率 10 Hz">−</button><label class="frequency-value" for="targetFrequency"><input id="targetFrequency" type="number" min="100" max="3000" step="1" value="440" inputmode="numeric" aria-label="目标主音频率，100 到 3000 Hz"><span>Hz</span></label><button id="frequencyUp" class="step-button" aria-label="提高频率 10 Hz">+</button></div>
+<div class="target-slider"><input id="frequencySlider" type="range" min="0" max="1000" value="436" step="1" aria-label="拖动选择目标主音频率"><div class="range-labels"><span>100 Hz</span><span>3000 Hz</span></div></div>
+<div class="material-options" role="group" aria-label="电子合成音色">
+<button data-material="aluminum" aria-pressed="true"><svg viewBox="0 0 48 32"><path d="m8 12 5 16m4-20 5 19M26 5l5 19m4-23 6 21M6 22 36 13M3 2l13 13"/></svg><span>铝片琴</span><small>敲</small></button>
+<button data-material="ruler" aria-pressed="false"><svg viewBox="0 0 48 32"><path d="M4 24h39v5H4Zm9-4c11 0 19-4 26-13l3 3C34 21 24 23 13 23M13 18v11M27 16l2 3m3-7 2 3m3-8 2 3"/></svg><span>钢尺</span><small>拨</small></button>
+<button data-material="tube" aria-pressed="false"><svg viewBox="0 0 48 32"><path d="M9 4h7v23H9Zm13-2h7v29h-7Zm13 4h7v18h-7M4 13l20 7"/></svg><span>金属管</span><small>敲</small></button>
+<button data-material="testtube" aria-pressed="false"><svg viewBox="0 0 48 32"><path d="M18 3v22a6 6 0 0 0 12 0V3m-14 0h16M18 19h12M4 7h9m-6 5h6m-5-1 5 1-4 3M21 25h6"/></svg><span>装水试管</span><small>吹</small></button>
+</div>
+<button id="playTone" class="tone-play"><svg id="toneIcon" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></svg><span id="toneText">试听电子音</span></button>
+<p class="tone-caption">合成近似 · 目标主音频率</p>
+<div class="recording-tools" id="recordingTools">
+<div class="history-block"><div class="history-heading"><label for="scrub">声音足迹</label><span id="timeLabel">0:00 / 0:30</span></div><div class="history-track" id="historyTrack"><canvas id="historyCanvas" aria-label="录音的音高颜色与相对强弱记录"></canvas><span id="historyCursor" hidden></span><input id="scrub" type="range" min="0" max="30" value="0" step="0.01" disabled aria-label="回看录音位置"></div></div>
+<div class="clip-transport"><button id="replay" class="transport-button" disabled><svg viewBox="0 0 24 24" id="replayIcon"><path d="m9 5 11 7-11 7Z"/></svg><span id="replayText">回听</span></button><button id="download" class="transport-button" disabled aria-label="保存录音为 WAV"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></svg><span>保存</span></button><button id="clear" class="transport-button" disabled aria-label="清空当前录音"><svg viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15"/></svg><span>清空</span></button></div>
+</div>
+</aside>
+</main>
+</div>
+<dialog id="helpDialog" aria-labelledby="helpTitle"><div class="dialog-heading"><h2 id="helpTitle">横看高低，竖看强弱</h2><button id="closeHelp" class="utility-button" aria-label="关闭说明">×</button></div><div class="help-content">
+<h3>颜色和高度</h3><p>横向位置表示估计音高：左边低，右边高，范围 100–3000 Hz。彩条高度表示本机收到的相对声音强弱，显示尺度保持固定。灰色侧条表示“有输入，但暂未确定音高”，不把杂声当作没有声音。颜色是人为约定的标记。</p><p>强弱由录音采样的均方根（RMS）计算，不是分贝计。距离、方向和设备自动调节会影响结果；比较时尽量保持同一设备、位置和发声方式。</p>
+<h3>实测波形与稳定观察</h3><p>展开“更多”后可打开波形和 Hz。录音波形取自实际收到的 PCM 采样；回看与回听使用同一份录音。20 ms 时间窗和显示倍率保持固定，不把复杂声音重新画成正弦波。</p><p>“稳定触发”只选择实测数据的显示起点，不修改或跨周期平均采样。不够稳定的声音保留原样；可点击“定格”留住当前波形，或停止录音后拖动声音足迹观察。定格只暂停波形，录音和彩条仍继续，定格时刻会显示在波形旁。</p>
+<h3>四种音色</h3><p>铝片琴按敲击条片、钢尺按拨动悬臂薄片、金属管按敲击管体、装水试管按吹奏管口近似合成。它们不是实物录音，也不模拟改变水量。设置的是目标主音频率；复杂敲击音包含非整数倍振动模式，不保证整段声音具有共同基频。</p><p>试听时波形来自实际合成输出，数字标为“目标主音”，与麦克风测得的“估计音高”区分。试听会先结束录音，避免把设备自己发出的声音录进去。</p>
+<h3>录音和保存</h3><p>单次最长 30 秒。点击录音并允许麦克风，先尝试持续、平稳地哼唱单音。展开“更多”可以回听、拖动回看或保存 WAV；再次录音在成功后替换上一段。噪声、多人同时发声、短促敲击和复杂音色可能无法识别或出现倍频误判。</p><p>录音仅保存在当前页面，不上传；关闭或刷新后会清除。切到后台会停止录音与播放。录音建议使用 HTTPS 链接并允许麦克风。单文件可离线发声，本地文件能否录音取决于浏览器权限。</p>
+</div><button id="understood" class="dialog-close">知道了</button></dialog>
+<script>
+/* StudentPitchDSP v1.1 — browser-local, monophonic pitch analysis.
  * Original implementation of a conservative YIN-style difference / CMNDF detector.
  * Algorithm reference: de Cheveigne & Kawahara, JASA 111 (2002), 1917–1930,
  * DOI 10.1121/1.1458024. This is not copied library code or a calibrated sound meter.
@@ -79,8 +509,8 @@
   var LOG2 = Math.log(2);
   var kernels = {};
   var defaults = {
-    minFrequency: 50,
-    maxFrequency: 1600,
+    minFrequency: 100,
+    maxFrequency: 3000,
     minRms: 0.006,
     threshold: 0.12,
     maxFrameSeconds: 0.2,
@@ -128,6 +558,35 @@
     for (var i = 0; i < length; i += 1) {
       var start = i * factor, value = 0;
       for (var k = 0; k < taps.length; k += 1) { value += samples[start + k] * taps[k]; }
+      out[i] = value;
+    }
+    return out;
+  }
+
+  // Low-rate PCM can contain a valid high tone with only 2–7 samples per
+  // period. Analyze a band-limited interpolation of that PCM so a coarse lag
+  // cannot turn 3000 Hz into a false subharmonic. This is internal frequency
+  // estimation only; the input samples are never modified or used as a generated
+  // replacement for a displayed waveform.
+  function interpolate(samples, factor) {
+    var radius = 24, phases = [], phase, k;
+    for (phase = 0; phase < factor; phase += 1) {
+      var fraction = phase / factor, weights = new Float64Array(radius * 2 + 1), sum = 0;
+      for (k = -radius; k <= radius; k += 1) {
+        var distance = fraction - k;
+        var sinc = Math.abs(distance) < 1e-12 ? 1 : Math.sin(Math.PI * distance) / (Math.PI * distance);
+        var window = 0.42 + 0.5 * Math.cos(Math.PI * k / radius) + 0.08 * Math.cos(TWO_PI * k / radius);
+        weights[k + radius] = sinc * window; sum += weights[k + radius];
+      }
+      for (k = 0; k < weights.length; k += 1) { weights[k] /= sum; }
+      phases.push(weights);
+    }
+    var length = Math.max(0, (samples.length - radius * 2 - 1) * factor);
+    var out = new Float32Array(length);
+    for (var i = 0; i < length; i += 1) {
+      var center = radius + Math.floor(i / factor), value = 0;
+      var taps = phases[i % factor];
+      for (k = -radius; k <= radius; k += 1) { value += samples[center + k] * taps[k + radius]; }
       out[i] = value;
     }
     return out;
@@ -255,9 +714,16 @@
     var rms = Math.sqrt(power / count);
     if (rms < minRms) { return answer(null, 0, rms, 'quiet'); }
 
-    // Keep at least 7.5 analysis samples per highest allowed period. This also
+    if (rate < maxFrequency * 8) {
+      var up = Math.max(2, Math.ceil(maxFrequency * 8 / rate));
+      centered = interpolate(centered, up);
+      rate *= up; count = centered.length;
+      if (count < 64) { return answer(null, 0, rms, 'short-frame'); }
+    }
+
+    // Keep at least 7 analysis samples per highest allowed period. This also
     // leaves bandwidth for the harmonics used by the periodicity test.
-    var targetRate = Math.max(12000, maxFrequency * 7.5);
+    var targetRate = Math.max(12000, maxFrequency * 7);
     var factor = Math.max(1, Math.floor(rate / targetRate));
     var samples = decimate(centered, factor);
     var analysisRate = rate / factor;
@@ -451,11 +917,202 @@
   }
 
   root.StudentPitchDSP = {
-    version: '1.0.0',
+    version: '1.1.0',
     defaults: defaults,
     detect: detect,
     createTracker: createTracker
   };
+}(typeof window !== 'undefined' ? window : this));
+
+/* StudentScopeTrigger — selects an actual PCM window; never creates a waveform.
+ * select() returns integer indices into the supplied samples. DC estimation,
+ * hysteresis, period checks and previous-shape matching only choose these indices.
+ * They never normalize, average, filter, replace, stretch, or write display data.
+ * A caller must draw samples[start ... start + count), retaining their amplitudes.
+ */
+(function (root) {
+  'use strict';
+  var TWO_PI = Math.PI * 2;
+
+  function numeric(value, fallback) {
+    return typeof value === 'number' && isFinite(value) ? value : fallback;
+  }
+  function clamp(value, lo, hi) { return Math.max(lo, Math.min(hi, value)); }
+  function stats(samples, start, end) {
+    var sum = 0, squares = 0, count = end - start;
+    for (var i = start; i < end; i += 1) {
+      var value = samples[i];
+      if (!isFinite(value)) { return null; }
+      sum += value; squares += value * value;
+    }
+    if (count < 1) { return null; }
+    var mean = sum / count;
+    return { mean: mean, rms: Math.sqrt(Math.max(0, squares / count - mean * mean)) };
+  }
+
+  // Fractional-delay interpolation is used for this *quality check only*.
+  // Returned plot indices stay integral, and no interpolated values leave here.
+  function periodicCorrelation(samples, start, end, lag) {
+    var base = Math.round(lag), fraction = lag - base, radius = 12;
+    var weights = null, k;
+    if (Math.abs(fraction) > 1e-7) {
+      weights = new Float64Array(radius * 2 + 1);
+      var total = 0;
+      for (k = -radius; k <= radius; k += 1) {
+        var distance = fraction - k;
+        var sinc = Math.abs(distance) < 1e-12 ? 1 : Math.sin(Math.PI * distance) / (Math.PI * distance);
+        var window = 0.42 + 0.5 * Math.cos(Math.PI * k / radius) + 0.08 * Math.cos(TWO_PI * k / radius);
+        weights[k + radius] = sinc * window; total += weights[k + radius];
+      }
+      for (k = 0; k < weights.length; k += 1) { weights[k] /= total; }
+    }
+    var first = Math.max(start, radius), last = Math.min(end - base - radius, samples.length - base - radius);
+    if (last - first < 24) { return -1; }
+    var step = Math.max(1, Math.floor((last - first) / 800));
+    var sx = 0, sy = 0, xx = 0, yy = 0, xy = 0, n = 0;
+    for (var i = first; i < last; i += step) {
+      var x = samples[i], y = 0;
+      if (!weights) { y = samples[i + base]; }
+      else {
+        for (k = -radius; k <= radius; k += 1) { y += samples[i + base + k] * weights[k + radius]; }
+      }
+      sx += x; sy += y; xx += x * x; yy += y * y; xy += x * y; n += 1;
+    }
+    xx -= sx * sx / n; yy -= sy * sy / n; xy -= sx * sy / n;
+    var energy = Math.sqrt(Math.max(0, xx * yy));
+    return energy > 1e-18 ? clamp(xy / energy, -1, 1) : -1;
+  }
+
+  function shapeCorrelation(samples, start, reference, count) {
+    var sx = 0, sy = 0, xx = 0, yy = 0, xy = 0;
+    for (var i = 0; i < count; i += 1) {
+      var x = samples[start + i], y = reference[i];
+      sx += x; sy += y; xx += x * x; yy += y * y; xy += x * y;
+    }
+    xx -= sx * sx / count; yy -= sy * sy / count; xy -= sx * sy / count;
+    var energy = Math.sqrt(Math.max(0, xx * yy));
+    return energy > 1e-18 ? clamp(xy / energy, -1, 1) : -1;
+  }
+
+  function create(options) {
+    var settings = options || {};
+    var minRms = clamp(numeric(settings.minRms, 0.006), 0.0001, 0.2);
+    var minimumCorrelation = clamp(numeric(settings.minCorrelation, 0.965), 0.9, 0.999);
+    var minimumShapeMatch = clamp(numeric(settings.minShapeMatch, 0.94), 0.8, 0.999);
+    var previous = null, previousRate = 0, previousFrequency = 0, matches = 0;
+
+    function reset() {
+      previous = null; previousRate = 0; previousFrequency = 0; matches = 0;
+    }
+    function select(samples, sampleRate, options) {
+      var opts = options || {};
+      var rate = numeric(sampleRate, 0);
+      if (!samples || !samples.length || rate < 4000 || rate > 384000) {
+        reset(); return { start: 0, count: 0, locked: false, reason: 'invalid-input' };
+      }
+      var n = samples.length;
+      var milliseconds = clamp(numeric(opts.windowMs, 20), 2, 200);
+      var count = Math.min(n, Math.max(2, Math.round(rate * milliseconds / 1000)));
+      var latest = Math.max(0, n - count);
+      function rolling(reason) {
+        reset(); return { start: latest, count: count, locked: false, reason: reason };
+      }
+      if (opts.mode === 'rolling') { return rolling('rolling'); }
+      var frequency = numeric(opts.frequency, 0);
+      if (frequency <= 0 || frequency > rate * 0.45) { return rolling('unreliable'); }
+      var period = rate / frequency;
+      if (n < count + Math.ceil(period * 3) || count < 32) { return rolling('short-frame'); }
+
+      // Recent samples control release of the lock. A loud earlier tone cannot
+      // keep the picture locked after the current tail becomes quiet or noisy.
+      var tail = stats(samples, latest, n);
+      if (!tail) { return rolling('invalid-input'); }
+      if (tail.rms < minRms) { return rolling('quiet'); }
+      var analysisCount = Math.min(n, Math.max(count + Math.ceil(period * 4), Math.round(rate * 0.1)));
+      // DC estimation over a near-integer number of periods avoids moving the
+      // trigger level simply because a frame begins at a different phase.
+      var cycleCount = Math.floor(analysisCount / period);
+      analysisCount = Math.min(n, Math.max(count, Math.round(cycleCount * period)));
+      var analysisStart = n - analysisCount;
+      var overall = stats(samples, analysisStart, n);
+      if (!overall) { return rolling('invalid-input'); }
+      if (overall.rms < minRms) { return rolling('quiet'); }
+
+      var longMultiplier = Math.max(2, Math.min(16, Math.floor(analysisCount / period / 2.6)));
+      var multipliers = [1, longMultiplier, Math.max(2, longMultiplier - 1)];
+      for (var q = 0; q < multipliers.length; q += 1) {
+        if (periodicCorrelation(samples, analysisStart, n, period * multipliers[q]) < minimumCorrelation) {
+          return rolling('aperiodic');
+        }
+      }
+      // A short display window may contain fewer than two cycles at the lowest
+      // pitch. Use up to three display windows for the immediate-tail check.
+      var tailStart = Math.max(analysisStart, n - Math.max(count, Math.ceil(period * 3.2)));
+      if (periodicCorrelation(samples, tailStart, n, period) < minimumCorrelation - 0.02) {
+        return rolling('aperiodic');
+      }
+
+      if (previous && (previousRate !== rate || Math.abs(Math.log(frequency / previousFrequency)) > 0.025)) {
+        reset();
+      }
+      var searchSpan = Math.min(Math.round(rate * 0.04), Math.max(Math.ceil(period * 3), Math.round(rate * 0.012)));
+      var searchStart = Math.max(analysisStart + 1, latest - searchSpan);
+      var hysteresis = Math.max(minRms * 0.15, overall.rms * 0.12);
+      var armed = false, candidates = [], mean = overall.mean;
+      // Scan a little before the selectable interval so its first rising edge
+      // can already be armed by a real negative excursion.
+      var scanStart = Math.max(analysisStart, searchStart - Math.ceil(period));
+      for (var i = scanStart + 1; i <= latest; i += 1) {
+        var left = samples[i - 1] - mean, right = samples[i] - mean;
+        if (left <= -hysteresis) { armed = true; }
+        if (armed && left <= 0 && right > 0) {
+          if (i >= searchStart) {
+            candidates.push({ start: i, slope: right - left, height: right });
+          }
+          armed = false;
+        }
+      }
+      if (!candidates.length) { return rolling('no-trigger'); }
+
+      // Compare whole cycles, not just one small wiggle from a strong harmonic.
+      var signatureLength = Math.min(count, Math.max(32, Math.ceil(period * 2)));
+      var best = null, bestScore = -Infinity, bestMatch = -1;
+      for (var c = 0; c < candidates.length; c += 1) {
+        var candidate = candidates[c], score, similarity = -1;
+        if (previous) {
+          similarity = shapeCorrelation(samples, candidate.start, previous, Math.min(signatureLength, previous.length));
+          // Prefer recent data only as a tie breaker; matching the previous
+          // measured cycle prevents alternate harmonic edges from swapping.
+          score = similarity + (candidate.start - searchStart) / Math.max(1, searchSpan) * 0.0002;
+        } else {
+          // Pick a repeatable physical rising edge. This only ranks real edges;
+          // no expected sine, synthesized sample, or average trace is produced.
+          score = candidate.slope / overall.rms - 0.15 * candidate.height / overall.rms;
+          score += (candidate.start - searchStart) / Math.max(1, searchSpan) * 0.001;
+        }
+        if (score > bestScore) { best = candidate; bestScore = score; bestMatch = similarity; }
+      }
+      var changed = !!previous && bestMatch < minimumShapeMatch;
+      if (changed) {
+        // Start a fresh reference from this real input, but immediately report
+        // unlocked rather than claiming the old timbre remains stable.
+        matches = 0;
+      }
+      matches += 1;
+      previous = new Float32Array(signatureLength);
+      for (var s = 0; s < signatureLength; s += 1) { previous[s] = samples[best.start + s]; }
+      previousRate = rate; previousFrequency = frequency;
+      return {
+        start: best.start,
+        count: count,
+        locked: !changed && matches >= 2,
+        reason: changed ? 'changed' : matches >= 2 ? 'locked' : 'acquiring'
+      };
+    }
+    return { select: select, reset: reset };
+  }
+
+  root.StudentScopeTrigger = { version: '1.0.0', create: create };
 }(typeof window !== 'undefined' ? window : this));
 
 /* StudentRecorder: local mono PCM capture; no playback, upload, or dependencies.
@@ -945,10 +1602,11 @@
   global.StudentRecorder = StudentRecorder;
 })(window);
 
-/* StudentAudioOutput v1.0 — local PCM playback and illustrative synthesis.
+/* StudentAudioOutput v1.1 — local PCM playback and illustrative synthesis.
  * No microphone, networking, automatic playback, or external dependency.
  * Materials are electronic approximations, not recordings of real objects.
- * All partials are integer harmonics; the chosen frequency is the fundamental.
+ * The chosen frequency is the dominant target tone, not a claim that every
+ * object has an integer-harmonic spectrum or a single perceptual fundamental.
  * Call unlock() directly inside the gesture: it creates/resumes synchronously
  * before returning its Promise<boolean>. playTone/playClip also return that
  * shape and may be invoked directly from a gesture themselves.
@@ -968,11 +1626,39 @@
   const MASTER_GAIN = 0.60;
   const SYNTH_PEAK = 0.18;
   const CLIP_PEAK_LIMIT = 0.45;
+  const MIN_TONE_FREQUENCY = 100;
+  const MAX_TONE_FREQUENCY = 3000;
+  // Idealized mode families, not measurements of a particular classroom kit:
+  // free-free slender bars/tubes: 1 : 2.7565 : 5.4039 : 8.933;
+  // clamped-free ruler: 1 : 6.267 : 17.5475; blown closed-end air column: 1:3:5.
+  // Sources: Fletcher 1999, Rep. Prog. Phys. 62 p757 (UNSW-hosted paper);
+  // https://newt.phys.unsw.edu.au/music/people/publications/Fletcher1999a.pdf
+  // https://lampz.tugraz.at/~hadley/memm/mechanics/cbeam.php
+  // https://acoustics.asn.au/journal/Vol21No2.pdf (tubular bells, PDF p17)
+  // https://musicweb.ucsd.edu/~trsmyth/waves175/Odd_harmonics_in.html
+  // Mode amplitudes/decays below are illustrative sound-design choices. They
+  // are not universal constants of aluminium, steel, glass, water, or a brand.
   const MATERIALS = {
-    pure:   { duration: 2.0, attack: 0.012, release: 0.060, partials: [[1, 1.00, 0.0]] },
-    wood:   { duration: 0.9, attack: 0.006, release: 0.055, partials: [[1, 1.00, 4.0], [2, 0.22, 5.7], [3, 0.09, 7.0], [4, 0.035, 8.2]] },
-    metal:  { duration: 2.5, attack: 0.005, release: 0.090, partials: [[1, 1.00, 2.3], [2, 0.18, 2.8], [4, 0.10, 3.4], [7, 0.045, 4.0]] },
-    string: { duration: 2.0, attack: 0.009, release: 0.080, partials: [[1, 1.00, 2.4], [2, 0.30, 3.2], [3, 0.16, 4.0], [4, 0.085, 4.8], [5, 0.04, 5.6], [6, 0.02, 6.4]] }
+    // Kept for internal reference checks; the student UI uses the four below.
+    pure: { duration: 2.0, attack: 0.012, release: 0.060, partials: [[1, 1.00, 0.0]] },
+    aluminum: {
+      duration: 2.6, attack: 0.004, release: 0.090,
+      partials: [[1, 1.00, 3.6], [2.7565, 0.14, 6.2], [5.4039, 0.045, 8.4], [8.933, 0.018, 11.0]]
+    },
+    ruler: {
+      duration: 1.6, attack: 0.0035, release: 0.080,
+      partials: [[1, 1.00, 4.8], [6.267, 0.12, 12.0], [17.5475, 0.025, 20.0]]
+    },
+    tube: {
+      duration: 3.0, attack: 0.0015, release: 0.130,
+      partials: [[1, 1.00, 1.9], [2.7565, 0.23, 2.8], [5.4039, 0.11, 4.0], [8.933, 0.05, 5.0]]
+    },
+    testtube: {
+      // Blowing across the mouth: principally the closed-end air column above
+      // the water, with faint filtered air noise. This is NOT struck glass.
+      duration: 3.0, attack: 0.100, release: 0.180, breath: 0.10,
+      partials: [[1, 1.00, 0.08], [3, 0.09, 0.16], [5, 0.025, 0.25], [7, 0.008, 0.35]]
+    }
   };
 
   function finite(value) { return typeof value === 'number' && Number.isFinite(value); }
@@ -993,6 +1679,14 @@
     const partials = config.partials.filter(partial => partial[0] * frequency < sampleRate / 2);
     const attack = Math.min(config.attack, actualDuration * 0.20);
     const release = Math.min(config.release, actualDuration * 0.25);
+    // A reproducible, very quiet breath layer helps distinguish sustained
+    // blown air from struck objects without destabilizing the dominant tone.
+    let noiseSeed = (Math.round(frequency * 100) ^ 0x6d2b79f5) >>> 0;
+    let noiseLow = 0, noiseSlow = 0;
+    const noiseHighCut = Math.min(5500, sampleRate * 0.42);
+    const noiseLowCut = Math.min(650, noiseHighCut * 0.20);
+    const noiseFastAlpha = 1 - Math.exp(-2 * Math.PI * noiseHighCut / sampleRate);
+    const noiseSlowAlpha = 1 - Math.exp(-2 * Math.PI * noiseLowCut / sampleRate);
     let peak = 0;
     for (let i = 1; i < count - 1; i++) {
       const time = i / sampleRate;
@@ -1001,6 +1695,15 @@
       for (const partial of partials) {
         value += partial[1] * Math.exp(-partial[2] * time / actualDuration) *
           Math.sin(2 * Math.PI * frequency * partial[0] * time);
+      }
+      if (config.breath) {
+        noiseSeed ^= noiseSeed << 13;
+        noiseSeed ^= noiseSeed >>> 17;
+        noiseSeed ^= noiseSeed << 5;
+        const white = (noiseSeed >>> 0) / 2147483648 - 1;
+        noiseLow += noiseFastAlpha * (white - noiseLow);
+        noiseSlow += noiseSlowAlpha * (noiseLow - noiseSlow);
+        value += config.breath * (noiseLow - noiseSlow);
       }
       samples[i] = value * gate;
       peak = Math.max(peak, Math.abs(samples[i]));
@@ -1311,9 +2014,12 @@
       return Promise.resolve(false);
     }
 
-    playTone(frequency, material, options = {}) {
+    playTone(frequency, material = 'aluminum', options = {}) {
       if (!finite(frequency) || frequency <= 0) return this._invalid('请选择一个有效的发声频率。');
-      if (!Object.prototype.hasOwnProperty.call(MATERIALS, material)) return this._invalid('请选择纯音、木片、金属或琴弦音色。');
+      if (frequency < MIN_TONE_FREQUENCY || frequency > MAX_TONE_FREQUENCY) {
+        return this._invalid('目标主音频率应在100～3000 Hz之间。');
+      }
+      if (!Object.prototype.hasOwnProperty.call(MATERIALS, material)) return this._invalid('请选择铝片琴、钢尺、金属管或装水试管音色。');
       const duration = options.duration === undefined ? MATERIALS[material].duration : Number(options.duration);
       if (!finite(duration) || duration < 0.05 || duration > 30) return this._invalid('发声时长应在0.05～30秒之间。');
       return this._play('tone', { duration, frequency, material, sampleRate: 0 }, context => {
@@ -1360,11 +2066,11 @@
 (function () {
   'use strict';
   const $ = id => document.getElementById(id);
-  const MIN_F = 50, MAX_F = 1600, MAX_SECONDS = 30;
+  const MIN_F = 100, MAX_F = 3000, MAX_SECONDS = 30;
   const palette = [[149,116,247],[85,153,235],[54,198,215],[102,207,155],[227,207,98],[240,141,112]];
   const clamp = (n,lo,hi) => Math.max(lo,Math.min(hi,n));
-  const positionOf = f => clamp(Math.log2(f / MIN_F) / 5,0,1);
-  const frequencyAt = p => MIN_F * Math.pow(32,clamp(p,0,1));
+  const positionOf = f => clamp(Math.log(f / MIN_F) / Math.log(MAX_F/MIN_F),0,1);
+  const frequencyAt = p => MIN_F * Math.pow(MAX_F/MIN_F,clamp(p,0,1));
   const timeText = n => Math.floor(n / 60) + ':' + String(Math.floor(n % 60)).padStart(2,'0');
   function colorOf(f,alpha=1) {
     if (!(f >= MIN_F && f <= MAX_F)) return 'rgba(139,154,174,' + alpha + ')';
@@ -1372,13 +2078,16 @@
     return 'rgba(' + palette[left].map((n,i) => Math.round(n + (palette[left+1][i]-n)*mix)).join(',') + ',' + alpha + ')';
   }
 
-  const view = {wave:false,hz:false,gain:4,frequency:null,confidence:0,reason:'idle',source:'idle',
-    samples:new Float32Array(8192),sampleRate:48000,cursor:0,target:440,material:'pure'};
+  const view = {expanded:false,wave:false,hz:false,gain:4,frequency:null,confidence:0,rms:0,reason:'idle',source:'idle',
+    samples:new Float32Array(8192),sampleRate:48000,cursor:0,frameTime:0,target:440,material:'aluminum'};
   let clip = null, history = [], pendingHistory = [], currentRecState = 'idle';
   let activeOutput = null, flowToken = 0, pendingTone = false, wavURL = null;
   const tracker = StudentPitchDSP.createTracker();
+  const scopeTrigger = StudentScopeTrigger.create();
+  let waveFrame=null, heldWave=null;
   let drawNeeded = true, historyNeeded = true, lastPaint = 0;
-  let scopeSize = {w:0,h:0}, historySize = {w:0,h:0};
+  let plotSize={w:0,h:0},scopeSize = {w:0,h:0}, historySize = {w:0,h:0};
+  const plotContext = $('levelPlot').getContext('2d');
   const scopeContext = $('scope').getContext('2d');
   const historyContext = $('historyCanvas').getContext('2d');
 
@@ -1388,11 +2097,13 @@
       currentRecState = state;
       if (state === 'requesting') {
         view.source = 'requesting';
+        view.frequency=null;view.rms=0;view.reason='waiting';view.frameTime=0;
+        view.samples=new Float32Array(8192);refreshWaveFrame();
         hint('请允许麦克风访问；等待时可点击“取消”。');
       } else if (state === 'recording') {
-        tracker.reset(); pendingHistory = [];
+        tracker.reset(); releaseWave(); pendingHistory = [];
         view.source = 'microphone'; view.frequency = null; view.reason = 'quiet';
-        view.samples = new Float32Array(8192); view.cursor = 0;
+        view.samples = new Float32Array(8192); view.cursor = 0;view.frameTime=0;view.rms=0;
         historyNeeded = true;
         hint('正在录音 · 轻轻哼一个持续的单音。');
       } else if (state === 'stopping') {
@@ -1407,7 +2118,9 @@
       view.source = 'microphone';
       view.samples = samples; view.sampleRate = sampleRate; view.cursor = elapsed;
       setDetection(result);
-      pendingHistory.push({time:elapsed,frequency:result.frequency,confidence:result.confidence,reason:result.reason});
+      view.rms=inputRms(samples,sampleRate,Math.round(elapsed*sampleRate));view.frameTime=elapsed;
+      refreshWaveFrame();
+      pendingHistory.push({time:elapsed,frequency:result.frequency,confidence:result.confidence,reason:result.reason,rms:view.rms});
       historyNeeded = true;
       updateView();
     },
@@ -1417,7 +2130,7 @@
       pendingHistory = [];
       view.cursor = clip.duration;
       freezeAt(view.cursor);
-      hint('已录好 · 拖动声音足迹回看，或点击“回听”。');
+      hint(view.expanded?'已录好 · 拖动声音足迹回看，或点击“回听”。':'已录好 · 在“更多”里回听、观察和保存。');
       historyNeeded = true;
       updateView();
     },
@@ -1436,11 +2149,12 @@
       view.samples = samples; view.sampleRate = sampleRate;
       if (kind === 'tone') {
         view.source = 'tone'; view.frequency = view.target; view.reason = 'known';
+        view.rms=inputRms(samples,sampleRate,Math.round(elapsed*sampleRate));view.frameTime=elapsed;
       } else if (kind === 'clip' && clip) {
         view.source = 'replay'; view.cursor = clamp(elapsed,0,clip.duration);
-        readClipWindow(view.cursor);
-        setDetection(historyAt(view.cursor)); historyNeeded = true;
+        setDetection(historyAt(view.cursor));readClipWindow(view.cursor); historyNeeded = true;
       }
+      refreshWaveFrame();
       updateView();
     },
     onEnd(kind) {
@@ -1465,10 +2179,23 @@
     $('recorderHint').classList.toggle('error',error);
   }
   function setDetection(result) {
-    view.frequency = result && Number.isFinite(result.frequency) ? result.frequency : null;
+    const f=result&&result.frequency;
+    view.frequency = Number.isFinite(f)&&f>=MIN_F&&f<=MAX_F ? f : null;
     view.confidence = result ? result.confidence || 0 : 0;
     view.reason = result ? result.reason || 'unknown' : 'unknown';
+    view.rms=result&&Number.isFinite(result.rms)?result.rms:0;
   }
+  // Fixed 50 ms, de-meaned digital RMS. No per-frame or per-clip normalization.
+  // Startup padding is excluded by the valid captured sample count.
+  function inputRms(samples,sampleRate,validSamples=samples.length){
+    const n=Math.min(samples.length,Math.max(0,validSamples),Math.round(sampleRate*.05));
+    if(n<2)return 0;
+    let sum=0,power=0;
+    for(let i=samples.length-n;i<samples.length;i++){sum+=samples[i];power+=samples[i]*samples[i];}
+    return Math.sqrt(Math.max(0,power/n-(sum/n)**2));
+  }
+  // The logarithmic height is a fixed display scale, not calibrated sound pressure.
+  function levelOf(rms){return clamp((20*Math.log10(Math.max(rms,1e-8))+60)/48,0,1);}
   function historyAt(time) {
     if (!history.length || time < history[0].time-.045) return {frequency:null,confidence:0,reason:'short-frame'};
     let lo=0,hi=history.length-1;
@@ -1480,6 +2207,7 @@
     view.cursor = clamp(time,0,clip.duration); view.source = 'frozen';
     setDetection(historyAt(view.cursor));
     readClipWindow(view.cursor);
+    refreshWaveFrame();
     historyNeeded = true; drawNeeded = true;
   }
   function readClipWindow(time) {
@@ -1488,13 +2216,15 @@
     view.samples = new Float32Array(8192);
     view.samples.set(clip.samples.subarray(begin,end),8192-(end-begin));
     view.sampleRate = clip.sampleRate;
+    view.rms=inputRms(view.samples,view.sampleRate,end);view.frameTime=time;
   }
   function restoreClip() {
     if (clip) freezeAt(clamp(view.cursor,0,clip.duration));
     else {
       view.source='idle'; view.frequency=null; view.reason='idle'; view.cursor=0;
-      view.samples = new Float32Array(8192);
+      view.samples = new Float32Array(8192);view.rms=0;view.frameTime=0;
     }
+    refreshWaveFrame();
     historyNeeded = true; drawNeeded = true;
   }
   function isRecording() { return currentRecState === 'recording' || currentRecState === 'stopping'; }
@@ -1522,26 +2252,32 @@
     $('scrub').max = clip && !isBusy() ? clip.duration : MAX_SECONDS;
     $('scrub').value = Math.min(Number($('scrub').max),view.cursor);
     $('scrub').setAttribute('aria-valuetext',timeText(view.cursor));
+    $('recordTime').hidden=!(isBusy()||clip);
+    $('recordTime').textContent=timeText(view.cursor);
+    $('recordingTools').hidden=!(clip||isBusy());
+    $('freezeWave').disabled=!heldWave&&(!waveFrame||view.source==='idle'||view.source==='requesting');
   }
   function updateView() {
-    const sourceText = {idle:'等待录音',requesting:'等待麦克风授权',microphone:'麦克风 · 正在录音',frozen:'录音回看',replay:'录音回听',tone:'电子合成 · 设定基频'};
+    const sourceText = {idle:'等待录音',requesting:'等待麦克风授权',microphone:'麦克风 · 正在录音',frozen:'录音回看',replay:'录音回听',tone:'电子合成 · 目标主音'};
     $('sourceTag').textContent = sourceText[view.source] || '等待声音';
     $('sourceDot').classList.toggle('recording',currentRecState==='recording');
     $('sourceDot').classList.toggle('active',view.source==='tone'||view.source==='replay');
     const f = view.frequency;
     $('detectedFrequency').textContent = f ? Math.round(f) : '—';
-    let status = '听见声音，看见音高';
+    $('frequencyKind').textContent=view.source==='tone'?'目标主音':'估计音高';
+    let status = '';
     if (view.source==='requesting') status = '请允许使用麦克风';
-    else if (view.source==='tone') status = '电子音 · '+({pure:'纯音',wood:'木片',metal:'金属',string:'琴弦'}[view.material]);
+    else if (view.source==='tone') status = '';
     else if (view.source!=='idle') {
-      if (f) status = view.hz ? '估计基频' : '音高位置';
+      if (f) status = '';
       else if (view.reason==='quiet') status = view.source==='microphone' ? '声音较轻，靠近一点' : '这个片段声音较轻';
       else status = '暂未识别稳定音高';
     }
     $('pitchStatus').textContent=status;
-    $('pitchMarker').hidden = !f;
-    if(f) $('pitchMarker').style.left=(positionOf(f)*100)+'%';
-    $('bandHint').textContent = view.hz ? '50–1600 Hz · 音高色带' : '音高色带';
+    $('bandHint').textContent = view.hz ? '100–3000 Hz' : '声音的高低';
+    $('levelPlot').dataset.frequency=f?f.toFixed(2):'';
+    $('levelPlot').dataset.rms=view.rms.toFixed(6);
+    $('levelPlot').dataset.level=levelOf(view.rms).toFixed(4);
     const total = isRecording() ? MAX_SECONDS : clip ? clip.duration : MAX_SECONDS;
     $('timeLabel').textContent = timeText(view.cursor) + ' / ' + timeText(total);
     $('historyCursor').hidden = !(clip || isRecording());
@@ -1553,12 +2289,27 @@
     $('toggleWave').setAttribute('aria-pressed',String(view.wave));
     $('toggleHz').setAttribute('aria-pressed',String(view.hz));
     $('monitor').classList.toggle('has-wave',view.wave);
-    $('monitor').classList.toggle('has-hz',view.hz);
     $('frequencyReadout').hidden=!view.hz;
-    $('scopeScale').hidden=!view.wave;
-    $('waveGain').hidden=!view.wave;
-    updateView();
+    $('scopePanel').hidden=!view.wave;
+    if(view.wave)refreshWaveFrame();
+    updateView();resize();
   }
+  function refreshWaveFrame(){
+    if(!view.wave)return;
+    // Ring buffers are left-padded before enough PCM has arrived. Never render
+    // those unmeasured zeros as part of a measured waveform.
+    const valid=Math.min(view.samples.length,Math.max(0,Math.round(view.frameTime*view.sampleRate)));
+    if(valid<Math.round(view.sampleRate*.02)){
+      waveFrame=null;scopeTrigger.reset();drawNeeded=true;return;
+    }
+    const offset=view.samples.length-valid;
+    const range=scopeTrigger.select(view.samples.subarray(offset),view.sampleRate,{windowMs:20,frequency:view.frequency,mode:'stable'});
+    range.start+=offset;
+    waveFrame={samples:view.samples,sampleRate:view.sampleRate,range,source:view.source,frequency:view.frequency,
+      time:Math.max(0,view.frameTime-(view.samples.length-range.start-range.count)/view.sampleRate)};
+    drawNeeded=true;
+  }
+  function releaseWave(){heldWave=null;waveFrame=null;scopeTrigger.reset();$('freezeWave').setAttribute('aria-pressed','false');$('freezeWave').textContent='定格';}
   function cancelOutput() {
     ++flowToken; pendingTone=false; output.stop(); activeOutput=null;
   }
@@ -1580,20 +2331,35 @@
     if(currentRecState==='requesting') {++flowToken;recorder.cancel();return;}
     if(currentRecState==='recording') {recorder.stop();return;}
     if(currentRecState==='stopping') return;
-    cancelOutput();
+    cancelOutput();releaseWave();
     // Keep this synchronous to the tap: browsers require a user gesture.
     recorder.start();
   });
+  $('expandTools').addEventListener('click',()=>{
+    view.expanded=!view.expanded;
+    $('app').classList.toggle('expanded',view.expanded);
+    $('expandedTools').hidden=!view.expanded;
+    $('expandTools').setAttribute('aria-expanded',String(view.expanded));
+    $('expandTools').setAttribute('aria-label',view.expanded?'收起拓展功能':'展开波形、频率和发声功能');
+    $('expandLabel').textContent=view.expanded?'收起':'更多';
+    updateView();resize();
+  });
   $('toggleWave').addEventListener('click',()=>toggleDisplay('wave'));
   $('toggleHz').addEventListener('click',()=>toggleDisplay('hz'));
+  $('freezeWave').addEventListener('click',()=>{
+    if(heldWave){heldWave=null;scopeTrigger.reset();refreshWaveFrame();}
+    else if(waveFrame)heldWave={...waveFrame,samples:waveFrame.samples.slice(),range:{...waveFrame.range}};
+    $('freezeWave').setAttribute('aria-pressed',String(!!heldWave));
+    $('freezeWave').textContent=heldWave?'继续':'定格';drawNeeded=true;
+  });
   $('waveGain').addEventListener('click',()=>{
     view.gain=({1:4,4:16,16:1})[view.gain];
-    $('waveGain').textContent='显示 ×'+view.gain; drawNeeded=true;
+    $('waveGain').textContent='×'+view.gain; drawNeeded=true;
   });
   $('scrub').addEventListener('input',()=>{
     if(!clip||isBusy())return;
     const selected=Number($('scrub').value);
-    cancelOutput();freezeAt(selected);
+    cancelOutput();releaseWave();freezeAt(selected);
     hint('回看录音 · 颜色与波形对应所选时刻。');updateView();
   });
   $('replay').addEventListener('click',async()=>{
@@ -1601,7 +2367,7 @@
     if(activeOutput==='clip') {
       cancelOutput();freezeAt(view.cursor);hint('已暂停回听，可以继续播放或拖动回看。');updateView();return;
     }
-    cancelOutput();
+    cancelOutput();releaseWave();
     const ticket=++flowToken;
     const ready=output.unlock();
     const offset=view.cursor>=clip.duration-.1 ? 0 : view.cursor;
@@ -1614,7 +2380,7 @@
   $('playTone').addEventListener('click',async()=>{
     if(activeOutput==='tone'||pendingTone){cancelOutput();restoreClip();hint('已停止发声。');updateView();return;}
     setTarget($('targetFrequency').value);
-    cancelOutput();
+    cancelOutput();releaseWave();
     const ticket=++flowToken;
     pendingTone=true;updateControls();
     const ready=output.unlock(); // Start the output context within this exact tap.
@@ -1623,9 +2389,9 @@
     if(!await ready||ticket!==flowToken){if(ticket===flowToken){pendingTone=false;updateControls();}return;}
     pendingTone=false;
     view.source='tone';view.frequency=view.target;view.reason='known';
-    view.samples=new Float32Array(8192);
+    view.samples=new Float32Array(8192);view.rms=0;view.frameTime=0;refreshWaveFrame();
     hint('正在试听电子合成音 · 麦克风未在录音。');
-    const started=await output.playTone(view.target,view.material,view.material==='pure'?{duration:6}:{});
+    const started=await output.playTone(view.target,view.material);
     if(ticket!==flowToken)return;
     if(!started)restoreClip();
     updateView();
@@ -1644,7 +2410,7 @@
   }));
   $('clear').addEventListener('click',()=>{
     if(isBusy())return;
-    cancelOutput();revokeWav();clip=null;history=[];pendingHistory=[];tracker.reset();
+    cancelOutput();releaseWave();revokeWav();clip=null;history=[];pendingHistory=[];tracker.reset();
     restoreClip();hint('已清空录音，可以重新开始。');updateView();
   });
 
@@ -1696,82 +2462,125 @@
     const context=canvas.getContext('2d');context.setTransform(ratio,0,0,ratio,0,0);
     return {w,h};
   }
-  function resize(){scopeSize=fitCanvas($('scope'));historySize=fitCanvas($('historyCanvas'));drawNeeded=true;historyNeeded=true;}
+  function resize(){
+    plotSize=fitCanvas($('levelPlot'));scopeSize=fitCanvas($('scope'));historySize=fitCanvas($('historyCanvas'));
+    drawNeeded=true;historyNeeded=true;
+  }
   new ResizeObserver(resize).observe($('visualArea'));
+  new ResizeObserver(()=>{scopeSize=fitCanvas($('scope'));drawNeeded=true;}).observe($('scopeArea'));
   new ResizeObserver(()=>{historySize=fitCanvas($('historyCanvas'));historyNeeded=true;}).observe($('historyTrack'));
   window.addEventListener('resize',resize);
 
-  function drawScope(now) {
-    const ctx=scopeContext,{w,h}=scopeSize;
+  function drawLevelPlot(){
+    const ctx=plotContext,{w,h}=plotSize;
     ctx.clearRect(0,0,w,h);
-    if(view.wave){drawWave(ctx,w,h);return;}
-    const f=view.frequency,cx=w/2,cy=h*.43;
-    const radius=Math.max(9,Math.min(w*.16,h*.34));
-    const live=(view.source==='microphone'||view.source==='tone'||view.source==='replay')&&f;
-    const pulse=live&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches ? Math.sin(now/450)*.035 : 0;
-    const r=radius*(1+pulse);
-    const glow=ctx.createRadialGradient(cx,cy,r*.3,cx,cy,r*1.85);
-    glow.addColorStop(0,colorOf(f,f?.19:.04));glow.addColorStop(1,colorOf(f,0));
-    ctx.fillStyle=glow;ctx.fillRect(cx-r*2,cy-r*2,r*4,r*4);
-    ctx.strokeStyle=colorOf(f,f?.18:.12);ctx.lineWidth=1;
-    ctx.beginPath();ctx.arc(cx,cy,r*1.35,0,Math.PI*2);ctx.stroke();
-    ctx.beginPath();ctx.arc(cx,cy,r*1.12,0,Math.PI*2);ctx.stroke();
-    const orb=ctx.createRadialGradient(cx-r*.3,cy-r*.35,1,cx,cy,r);
-    orb.addColorStop(0,colorOf(f,f?.32:.12));orb.addColorStop(1,colorOf(f,f?.13:.04));
-    ctx.fillStyle=orb;ctx.strokeStyle=colorOf(f,f?.7:.26);ctx.lineWidth=1.3;
-    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();ctx.stroke();
-    if(!view.hz){
-      ctx.strokeStyle=colorOf(f,f?.95:.55);ctx.lineWidth=Math.max(1.8,r/23);ctx.lineCap='round';
-      for(let i=0;i<5;i++){const height=r*[.22,.48,.70,.43,.20][i];const x=cx+(i-2)*r*.23;ctx.beginPath();ctx.moveTo(x,cy-height/2);ctx.lineTo(x,cy+height/2);ctx.stroke();}
+    const left=40,right=w-29,top=h<70?9:23,bottom=Math.max(top+6,h-17);
+    const pw=Math.max(1,right-left),ph=bottom-top;
+    ctx.font=(h<70?'9':'11')+'px system-ui,sans-serif';ctx.fillStyle='#879cb5';ctx.textAlign='left';
+    ctx.fillText('强',0,top+3);ctx.fillText('弱',0,bottom+3);
+    ctx.lineWidth=1;
+    for(let i=0;i<=4;i++){
+      const y=top+ph*i/4;ctx.strokeStyle=i===4?'#839db333':'#8ca9c514';
+      ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(right,y);ctx.stroke();
+    }
+    for(let i=0;i<=6;i++){
+      const x=left+pw*i/6;ctx.strokeStyle='#8ca9c50c';
+      ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();
+    }
+    // This strip is the colour key, not fabricated sound energy or an FFT.
+    const bands=w<600?48:72,step=pw/bands;
+    for(let i=0;i<bands;i++){
+      ctx.fillStyle=colorOf(frequencyAt(i/(bands-1)),.8);
+      ctx.fillRect(left+i*step,bottom+6,Math.max(1,step-1.5),4);
+    }
+    const level=levelOf(view.rms),barHeight=level*ph,f=view.frequency;
+    if(level>.001){
+      if(f){
+        const x=left+positionOf(f)*pw,bw=clamp(pw*.042,9,29),y=bottom-barHeight;
+        const gradient=ctx.createLinearGradient(0,y,0,bottom);
+        gradient.addColorStop(0,colorOf(f,.96));gradient.addColorStop(1,colorOf(f,.24));
+        ctx.fillStyle=gradient;ctx.fillRect(x-bw/2,y,bw,barHeight);
+        ctx.fillStyle=colorOf(f,.2);ctx.fillRect(x-bw*.9,y,bw*1.8,Math.min(3,barHeight));
+        ctx.fillStyle=colorOf(f,1);ctx.fillRect(x-bw/2,y,bw,Math.min(3,barHeight));
+        ctx.strokeStyle=colorOf(f,.18);ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();
+      }else{
+        // Unknown pitch has no invented horizontal coordinate.
+        ctx.fillStyle='#98aabd';ctx.fillRect(23,bottom-barHeight,7,barHeight);
+        ctx.fillStyle='#8299ae';ctx.font='10px system-ui,sans-serif';ctx.textAlign='center';
+        ctx.fillText('?',26.5,bottom+12);
+      }
     }
   }
-  function drawWave(ctx,w,h) {
-    const top=Math.min(45,h*.3),bottom=Math.max(top+10,h-7),mid=(top+bottom)/2,amplitude=(bottom-top)*.44;
-    ctx.lineWidth=1;ctx.strokeStyle='#ffffff09';
-    for(let i=0;i<=10;i++){const x=i*w/10;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();}
-    for(let i=0;i<=4;i++){const y=top+(bottom-top)*i/4;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
-    ctx.strokeStyle='#738da43a';ctx.beginPath();ctx.moveTo(0,mid);ctx.lineTo(w,mid);ctx.stroke();
-    const samples=view.samples,count=Math.min(samples.length,Math.round(view.sampleRate*.02));
-    let start=Math.max(0,samples.length-count),search=Math.max(0,start-Math.round(view.sampleRate/MIN_F));
-    // A rising zero crossing stabilizes the trace without changing the 20 ms scale.
-    for(let i=start;i>search;i--){if(samples[i-1]<=0&&samples[i]>0){start=i;break;}}
-    ctx.lineWidth=1.8;ctx.lineJoin='round';ctx.strokeStyle=colorOf(view.frequency,.95);ctx.beginPath();
+  function drawWave(){
+    const ctx=scopeContext,{w,h}=scopeSize;
+    ctx.clearRect(0,0,w,h);
+    if(!view.wave)return;
+    const frame=heldWave||waveFrame;
+    $('freezeWave').setAttribute('aria-pressed',String(!!heldWave));
+    $('freezeWave').textContent=heldWave?'继续':'定格';
+    if(!frame){
+      $('scopeKind').textContent=view.source==='tone'?'合成输出波形':'录音波形';
+      $('triggerBadge').textContent=['idle','requesting'].includes(view.source)?'等待输入':'等待完整采样';
+      $('triggerBadge').classList.remove('locked');
+      for(const key of ['frameEnd','start','count','locked','frozen'])delete $('scope').dataset[key];
+      return;
+    }
+    const {samples,range}=frame;
+    const top=3,bottom=Math.max(8,h-3),mid=(top+bottom)/2,amplitude=(bottom-top)*.46;
+    ctx.lineWidth=1;
+    for(let i=0;i<=10;i++){
+      const x=i*w/10;ctx.strokeStyle='#ffffff0a';ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();
+    }
+    for(let i=0;i<=4;i++){
+      const y=top+(bottom-top)*i/4;ctx.strokeStyle=i===2?'#819ab343':'#ffffff0a';
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
+    }
+    // Every plotted point comes directly from the captured/output PCM array.
+    // The trigger chooses indices only: no sine reconstruction, no averaging.
+    ctx.lineWidth=1.4;ctx.lineJoin='round';ctx.strokeStyle=colorOf(frame.frequency,.96);ctx.beginPath();
     let clipped=false;
-    const points=Math.max(2,Math.ceil(w*1.7));
-    for(let j=0;j<points;j++){
-      const at=start+j/(points-1)*(count-1),index=Math.floor(at),mix=at-index;
-      const sample=((samples[index]||0)*(1-mix)+(samples[index+1]||0)*mix)*view.gain;
-      if(Math.abs(sample)>1)clipped=true;
-      const x=j/(points-1)*w,y=mid-clamp(sample,-1,1)*amplitude;
-      if(j===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    for(let i=0;i<range.count;i++){
+      const value=samples[range.start+i]*view.gain;
+      if(Math.abs(value)>1)clipped=true;
+      const x=i/Math.max(1,range.count-1)*w,y=mid-clamp(value,-1,1)*amplitude;
+      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
     }
     ctx.stroke();
-    if(clipped){ctx.font='10px system-ui,sans-serif';ctx.textAlign='right';ctx.fillStyle='#edc988';ctx.fillText('显示截顶 · 可调低倍率',w-3,bottom-1);}
+    if(clipped){
+      ctx.font='9px system-ui,sans-serif';ctx.textAlign='right';ctx.fillStyle='#e6c68a';
+      ctx.fillText('显示截顶 · 调低倍率',w-3,bottom-2);
+    }
+    $('scopeKind').textContent=frame.source==='tone'?'合成输出波形':'录音实测波形';
+    $('triggerBadge').textContent=heldWave?'定格 '+timeText(frame.time)+'.'+Math.floor((frame.time%1)*10):
+      range.locked?'稳定触发':view.source==='idle'||view.source==='requesting'?'等待输入':'原始波形';
+    $('triggerBadge').classList.toggle('locked',range.locked&&!heldWave);
+    $('scope').dataset.frameEnd=frame.time.toFixed(4);
+    $('scope').dataset.start=range.start;$('scope').dataset.count=range.count;
+    $('scope').dataset.locked=String(range.locked);$('scope').dataset.frozen=String(!!heldWave);
   }
   function drawHistory() {
     const ctx=historyContext,{w,h}=historySize;
     ctx.clearRect(0,0,w,h);
     const items=isRecording()?pendingHistory:history,total=isRecording()?MAX_SECONDS:(clip?clip.duration:MAX_SECONDS);
-    if(items.length){ctx.fillStyle='#c3cdd4';ctx.fillRect(0,0,items[0].time/total*w,h);}
     for(let i=0;i<items.length;i++){
       const item=items[i],next=items[i+1];
       const endTime=next?next.time:(isRecording()?view.cursor:total);
       const x=item.time/total*w,end=endTime/total*w;
       ctx.fillStyle=item.frequency?colorOf(item.frequency,.8):'#c3cdd4';
-      ctx.fillRect(x,0,Math.max(.5,end-x),h);
+      const height=Math.max(1,levelOf(item.rms||0)*h);
+      ctx.fillRect(Math.floor(x),h-height,Math.max(1,Math.ceil(end)-Math.floor(x)),height);
     }
     ctx.fillStyle='#fff8';
     for(let i=1;i<6;i++)ctx.fillRect(w*i/6,0,1,h);
   }
   function animate(now) {
-    const active=view.frequency&&(view.source==='microphone'||view.source==='tone'||view.source==='replay');
-    if((drawNeeded||active)&&now-lastPaint>32){drawScope(now);lastPaint=now;drawNeeded=false;}
+    if(drawNeeded&&now-lastPaint>32){drawLevelPlot();drawWave();lastPaint=now;drawNeeded=false;}
     if(historyNeeded){drawHistory();historyNeeded=false;}
     requestAnimationFrame(animate);
   }
   setTarget(440);updateView();resize();requestAnimationFrame(animate);
 })();
 
-  </script>
+</script>
 </body>
 </html>
