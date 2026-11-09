@@ -22,7 +22,4 @@ $('undo').onclick=()=>{sheets[selected].strokes.pop();edit()};$('clear').onclick
 function gallery(){let old=selected;const images=sheets.map((s,i)=>{selected=i;paint();return canvas.toDataURL()});selected=old;paint();$('gallery').innerHTML=sheets.map((s,i)=>`<button id="g${i}"><img src="${images[i]}" alt="第${i+1}张观察画">${i+1} · ${s.strokes.length?placeNames[s.place]+' · '+(s.kind?'第'+s.kind+'类':'待辨认'):'尚未画下发现'}</button>`).join('');sheets.forEach((s,i)=>$('g'+i).onclick=()=>{selected=i;show(1)});const drawn=sheets.filter(s=>s.strokes.length),kinds=new Set(drawn.filter(s=>s.kind).map(s=>s.kind));$('summary').textContent=drawn.length?'已画 '+drawn.length+' 张；按已分配编号合并为 '+kinds.size+' 类；'+drawn.filter(s=>!s.kind).length+' 张待辨认。请老师核对。':'还没有画下发现，暂不统计。'}
 function show(i){for(let j=0;j<3;j++){$('p'+j).hidden=i!==j;$('tab'+j).setAttribute('aria-pressed',i===j)}armed=false;if(i===1)edit();if(i===2)gallery()};for(let i=0;i<3;i++)$('tab'+i).onclick=()=>show(i);render();edit();
 </script>
-<!-- AIHTML-COMPAT-GRADE:START -->
-<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
-<!-- AIHTML-COMPAT-GRADE:END -->
 </body></html>

@@ -26,7 +26,4 @@ $('pathControls').innerHTML=['水','食用油'].map((n,k)=>'<div class="controlr
 $('pathSummary').textContent=lengths.map((r,i)=>'第'+(i+1)+'次痕迹：水'+(r[0]===null?'未标':'已标')+'／油'+(r[1]===null?'未标':'已标')).join('　');$('pathNotice').textContent='两条线按你的记录绘制，不是精确测量。结果请到“比较发现”另行记录。'}
 $('clearPaths').onclick=()=>{if(!pathArmed){pathArmed=true;pathRender();$('pathNotice').textContent='只清空这次两条线，其他次和结果不变。'}else{lengths[trial]=[null,null];pathArmed=false;pathRender();$('pathNotice').textContent='当前两条线已清空。'}};touchRender();opRender();pathRender();
 </script>
-<!-- AIHTML-COMPAT-GRADE:START -->
-<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
-<!-- AIHTML-COMPAT-GRADE:END -->
 </body></html>

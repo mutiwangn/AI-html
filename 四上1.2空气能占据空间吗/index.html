@@ -26,8 +26,5 @@ $('#challengePump').onclick=()=>{challengeCount++;let sealed=$('#sealed').checke
 $('#clear').onclick=()=>{if(!confirm(storageLocked?'仅清空本次页面草稿？受保护的原始记录不会改动。':'清空本机这节课的全部观察记录？建议先导出备份。'))return;record={};$$('#records textarea').forEach(e=>e.value='');save()};$('#print').onclick=()=>window.print();$('#reveal').onclick=()=>{$('#answer').hidden=!$('#answer').hidden;$('#reveal').textContent=$('#answer').hidden?'讨论后，展开解释参考':'收起解释参考'};$('#full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){$('#full').textContent='请用浏览器全屏'}};
 function frame(t){let dt=Math.min(.05,(t-last)/1000||.016);last=t;phase+=dt;state.inside+=(state.target-state.inside)*Math.min(1,dt*3);drawLab();requestAnimationFrame(frame)}updateLab();drawChallenge();requestAnimationFrame(frame);
 </script>
-<!-- AIHTML-COMPAT-GRADE:START -->
-<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
-<!-- AIHTML-COMPAT-GRADE:END -->
 </body></html>
 

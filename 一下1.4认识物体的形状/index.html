@@ -10,8 +10,5 @@ let trial=0,stackArmed=false;const stackData=Array.from({length:3},()=>[0,0,0]),
 function stackRender(){ $('trials').innerHTML=[0,1,2].map(i=>'<button id="trial'+i+'" aria-pressed="'+(trial===i)+'">搭法 '+(i+1)+'</button>').join('');[0,1,2].forEach(i=>$('trial'+i).onclick=()=>{trial=i;stackArmed=false;$('clearStack').textContent='清空这次搭法';$('stackNotice').textContent='';stackRender()});$('stackChoices').innerHTML=stackOptions.map((arr,k)=>'<div class="stackrow"><strong>'+stackLabels[k]+'</strong><div class="row">'+arr.map((v,j)=>'<button id="stack'+k+'_'+j+'" aria-pressed="'+(stackData[trial][k]===j)+'">'+v+'</button>').join('')+'</div></div>').join('');stackOptions.forEach((arr,k)=>arr.forEach((v,j)=>$('stack'+k+'_'+j).onclick=()=>{stackData[trial][k]=j;stackArmed=false;$('clearStack').textContent='清空这次搭法';stackRender()}));$('stackSummary').innerHTML=stackData.map((r,i)=>'<p>搭法'+(i+1)+'：'+stackOptions[0][r[0]]+' ＋ '+stackOptions[1][r[1]]+' → '+stackOptions[2][r[2]]+'</p>').join('')}
 $('clearStack').onclick=()=>{if(!stackArmed){stackArmed=true;$('clearStack').textContent='再点确认清空';$('stackNotice').textContent='只清空当前搭法，其余保留。'}else{stackData[trial].fill(0);stackArmed=false;$('clearStack').textContent='清空这次搭法';$('stackNotice').textContent='当前搭法已清空。';stackRender()}};stackRender();
 </script>
-<!-- AIHTML-COMPAT-GRADE:START -->
-<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
-<!-- AIHTML-COMPAT-GRADE:END -->
 </body></html>
 

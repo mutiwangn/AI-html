@@ -1896,8 +1896,5 @@ window.addEventListener('focus',()=>{if(DiskStore.fileReady&&materialReady&&!act
 setInterval(()=>{if(document.visibilityState==='visible'&&DiskStore.fileReady&&materialReady&&!active&&!$('dialog').open)syncFolderSource().catch(()=>{})},12000);
 initializeMaterials().catch(e=>{console.error(e);showDisconnected('文件夹暂未读取：'+e.message)});
 </script>
-<!-- AIHTML-COMPAT-GRADE:START -->
-<div aria-label="本课技术需求：T2 · 二维绘图" title="本课最低技术需求：T2 · 二维绘图" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T2 · 二维绘图</div>
-<!-- AIHTML-COMPAT-GRADE:END -->
 </body>
 </html>

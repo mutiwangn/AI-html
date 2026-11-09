@@ -22,7 +22,4 @@ function save(){try{localStorage.setItem(key,JSON.stringify({values:Object.fromE
 $('#save').onclick=save;$('#print').onclick=()=>window.print();$('#clear').onclick=()=>{if(!confirm('清空本机这份观察记录？此操作不能撤销。'))return;fields.forEach(e=>e.value='');points=[null,null,null];points.forEach((_,i)=>paint(i));try{localStorage.removeItem(key);}catch(e){}$('#save-status').textContent='已清空。请开始一份真实的新记录。';};
 try{const raw=JSON.parse(localStorage.getItem(key)||'null');if(raw){fields.forEach(e=>e.value=raw.values?.[e.id]||'');if(Array.isArray(raw.points))points=raw.points.slice(0,3).map(p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y)?p:null);points.forEach((_,i)=>paint(i));$('#save-status').textContent='已恢复上次保存的本机记录。';}}catch(e){$('#save-status').textContent='未能恢复本机记录，请重新记录并打印留存。';}
 </script>
-<!-- AIHTML-COMPAT-GRADE:START -->
-<div aria-label="本课技术需求：T1 · 基础交互" title="本课最低技术需求：T1 · 基础交互" style="position:fixed;left:8px;bottom:7px;z-index:8;pointer-events:none;max-width:calc(100% - 16px);padding:3px 8px;border:1px solid rgba(255,255,255,.36);border-radius:6px;background:rgba(17,59,46,.76);color:#fff;font:700 11px/1.4 Arial,sans-serif;letter-spacing:.1px;box-shadow:0 1px 5px rgba(0,0,0,.12)">T1 · 基础交互</div>
-<!-- AIHTML-COMPAT-GRADE:END -->
 </body></html>

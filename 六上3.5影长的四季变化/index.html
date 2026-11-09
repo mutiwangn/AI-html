@@ -67,7 +67,7 @@ main{height:calc(100% - 112px);position:relative}.page{height:100%;display:none;
  <div class="row spread"><button class="primary" id="saveShadow" style="flex:1;min-height:43px">记录 / 留影</button><button class="flat small" id="clearShadows">清空</button></div><div id="labRecords" class="recordlist"></div><div class="bottomnote">小孔中的亮光是光斑，不是影端。<br>手电筒的模拟影长不必与太阳理论值相等。</div></aside>
 </section>
 </main>
-<div class="footer"><span>六年级上册 · 地球的运动</span><span id="footerInfo">离线交互实验室 / v1.1 · T2</span></div>
+<div class="footer"><span>六年级上册 · 地球的运动</span><span id="footerInfo">离线交互实验室 / v1.1</span></div>
 </div>
 <div id="modalBack" class="modalback hidden" role="presentation"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modalheader"><h3 id="modalTitle"></h3><button id="modalClose" class="iconbtn" aria-label="关闭"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div><div id="modalBody" class="modalbody"></div><div id="modalFooter" class="modalfooter"></div></section></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -346,7 +346,7 @@ function frame(ts){rafPending=false;var dt=Math.min((ts-lastFrame)||16,45);lastF
 }
 // Declare separately for older browsers, and avoid optional chaining / module loading.
 var again=false;
-function switchPage(n){activePage=n;$$('.page').forEach(function(el){el.classList.toggle('active',el.id==='page'+n);});$$('.tabs button').forEach(function(el){var yes=+el.getAttribute('data-page')===n;el.classList.toggle('active',yes);el.setAttribute('aria-selected',yes?'true':'false');});if(n===2){renderQuery();renderData();}else{views[n].resize();requestDraw();} $('footerInfo').textContent='离线交互实验室 / v1.1 · T2';}
+function switchPage(n){activePage=n;$$('.page').forEach(function(el){el.classList.toggle('active',el.id==='page'+n);});$$('.tabs button').forEach(function(el){var yes=+el.getAttribute('data-page')===n;el.classList.toggle('active',yes);el.setAttribute('aria-selected',yes?'true':'false');});if(n===2){renderQuery();renderData();}else{views[n].resize();requestDraw();} $('footerInfo').textContent='离线交互实验室 / v1.1';}
 $$('[data-page]').forEach(function(b){b.addEventListener('click',function(){switchPage(+b.getAttribute('data-page'));});});
 $$('[data-views]').forEach(function(row){var n=+row.getAttribute('data-views');$$('button',row).forEach(function(b){b.addEventListener('click',function(){$$('button',row).forEach(function(x){x.classList.toggle('active',x===b);});views[n].setView(b.getAttribute('data-view'));if(n===3)$('stage3').classList.toggle('closeview',b.getAttribute('data-view')==='close');requestDraw();});});});
 $$('[data-zoom]').forEach(function(b){b.addEventListener('click',function(){var a=b.getAttribute('data-zoom').split(':'),v=views[+a[0]];v.zoom=Solar.clamp(v.zoom*(+a[1]),.55,2.8);v.resize();requestDraw();});});
