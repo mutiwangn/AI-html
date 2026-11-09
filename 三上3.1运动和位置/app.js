@@ -1,0 +1,16 @@
+'use strict';
+const $=s=>document.querySelector(s);
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('hidden',s.id!==b.dataset.page));document.querySelectorAll('[data-page]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
+let moment=0;
+function renderTime(){ $('#car').setAttribute('transform','translate('+(moment?330:170)+' 220)');$('#ghost').toggleAttribute('hidden',!(moment&&$('#trace').checked));$('#before').setAttribute('aria-pressed',String(!moment));$('#after').setAttribute('aria-pressed',String(!!moment));$('#timeNote').textContent=moment?'时刻二：小车更远了，长椅的位置没有改变。比较的是它们相对旗杆的位置。':'时刻一：记住小车和长椅相对旗杆的位置。';}
+$('#before').onclick=()=>{moment=0;renderTime();};$('#after').onclick=()=>{moment=1;renderTime();};$('#trace').onchange=renderTime;
+document.querySelectorAll('[data-motion]').forEach(b=>b.onclick=()=>{$('#motionFeedback').textContent={car:'正确：两个时刻，小车相对旗杆的位置不同，因此这段时间内发生过位置变化。不能只凭两张图知道中间走了哪条路线。',bench:'两张图中的长椅位置相同，没有提供长椅位置改变的证据。仅凭这两张图，也不能证明它中间绝未移动。',picture:'一个时刻告诉我们位置，不足以判断位置是否改变。需要在一段时间内比较，并说明参照物。'}[b.dataset.motion];});
+$('#lines').innerHTML=Array.from({length:7},(_,i)=>{let x=100+i*50,y=50+i*50;return '<path d="M'+x+' 50V350M100 '+y+'H400"/>';}).join('');
+const spots=[['东',2,350,200],['北',3,250,50],['西',1,200,200],['南',2,250,300],['东',3,400,200],['北',1,250,150]];let spot=0;
+function describe(){return '小球在旗杆的'+spots[spot][0]+'面，离旗杆'+spots[spot][1]+'米。';}
+$('#next').onclick=()=>{spot=(spot+1)%spots.length;$('#ball').setAttribute('cx',spots[spot][2]);$('#ball').setAttribute('cy',spots[spot][3]);$('#direction').value='';$('#distance').value='';$('#location').textContent='先试着说：小球在旗杆的……';$('#locationFeedback').textContent='';};
+$('#show').onclick=()=>{$('#location').textContent=describe();};
+$('#check').onclick=()=>{let d=$('#direction').value,n=$('#distance').value;$('#locationFeedback').textContent=!d||!n?'还需要同时选方向和距离。':d===spots[spot][0]&&Number(n)===spots[spot][1]?'描述准确！'+describe():'再看看：先从旗杆找方向，再数到小球共几格，每格1米。';};
+const observations=['未观察','两个时刻位置不同','两个时刻位置相同','看不清，不能判断'];
+$('#entries').innerHTML=[0,1].map(i=>'<div class="entry"><h2>观察 '+(i+1)+'</h2><label for="object'+i+'">观察对象</label><select id="object'+i+'"><option>未选择</option><option>小车</option><option>小球</option><option>书本</option></select><label for="result'+i+'">前后位置的证据</label><select id="result'+i+'">'+observations.map(o=>'<option>'+o+'</option>').join('')+'</select></div>').join('');
+$('#export').onclick=()=>{let ref=$('#reference').value;let rows=[['参照物','观察序号','对象','前后位置证据','限制']];for(let i=0;i<2;i++){let object=$('#object'+i).value,result=$('#result'+i).value;if(result!=='未观察'&&(ref==='未选择'||object==='未选择')){$('#recordFeedback').textContent='已填观察结果时，请同时选择参照物和观察对象。';return;}rows.push([ref,i+1,object,result,'前后位置相同不能证明中间未移动']);}let csv='\uFEFF'+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='位置真实观察.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);$('#recordFeedback').textContent='已导出当前记录，未观察保留为空缺状态，不填模型答案。';};
