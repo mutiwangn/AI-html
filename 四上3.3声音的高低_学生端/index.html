@@ -1,0 +1,1777 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f1f4f5">
+  <meta name="description" content="《声音的高低》学生端：本地录音、音高色带、波形观察与电子音色试听。">
+  <title>声音探测器 · 声音的高低</title>
+  <style>:root{color-scheme:light;--ink:#243341;--muted:#77818b;--paper:#f1f4f5;--line:#e5eaec;--teal:#24776e;--teal-dark:#155c55;--navy:#142038;--pitch-color:#91a2b8;--gradient:linear-gradient(90deg,#9574f7 0%,#5599eb 20%,#36c6d7 40%,#66cf9b 60%,#e3cf62 80%,#f08d70 100%);font-family:ui-rounded,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;font-synthesis:none}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--paper);color:var(--ink);overscroll-behavior:none;-webkit-tap-highlight-color:transparent}button,input{font:inherit}button{color:inherit;border:0;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-user-select:none}button:disabled{cursor:default;opacity:.38}button:focus-visible,input:focus-visible{outline:3px solid #f1b343;outline-offset:3px}button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}button:active:not(:disabled){transform:translateY(1px)}[hidden]{display:none!important}h1,h2,p{margin:0}.app{height:100%;height:100dvh;max-width:1500px;margin:auto;padding:clamp(12px,2.2vw,28px) clamp(12px,2.4vw,34px) 12px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding-top:max(clamp(12px,2.2vw,28px),env(safe-area-inset-top));padding-bottom:max(10px,env(safe-area-inset-bottom))}.app-header{display:flex;align-items:center;gap:12px;min-height:54px}.brand-mark{width:42px;height:44px;flex-shrink:0}.brand-mark svg{width:100%;height:100%}.brand-copy h1{font-size:25px;line-height:1.3;letter-spacing:.06em;font-weight:750}.brand-copy p{color:var(--muted);font-size:12px;margin-top:3px;letter-spacing:.06em}.header-actions{display:flex;gap:12px;align-items:center;margin-left:auto}.icon-button,.help-button{width:40px;height:40px;display:grid;place-items:center;background:transparent;border:1px solid #d4dde1;border-radius:50%;font-size:23px;color:#6a7782}.icon-button{border:0}.help-button{font-family:system-ui;font-size:18px;font-weight:600;width:32px;height:32px}.workspace{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,.85fr);gap:20px;min-height:0}.recorder-pane,.tone-pane{background:#fff;border:1px solid #e2e8e9;box-shadow:0 4px 22px #1f3c4910;border-radius:24px;padding:24px;min-width:0;min-height:0}.recorder-pane{display:grid;grid-template-rows:auto minmax(110px,1fr) auto auto auto;gap:14px}.section-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:34px}.section-heading h2{font-size:17px;letter-spacing:.05em;white-space:nowrap;font-weight:650;display:flex;align-items:center;gap:9px}.tiny-dot{width:7px;height:7px;background:var(--teal);border-radius:50%}.view-toggles{display:flex;gap:4px;background:#edf2f3;border-radius:10px;padding:3px}.view-toggles button{padding:7px 13px;min-width:47px;border-radius:7px;background:transparent;color:#849098;font-size:13px;font-weight:650}.view-toggles button[aria-pressed=true]{color:var(--teal-dark);background:white;box-shadow:0 1px 5px #102f4012}.monitor{border-radius:18px;background:var(--navy);color:#eaf0fb;display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:17px 21px 12px;position:relative;box-shadow:inset 0 0 0 1px #ffffff06}.monitor-top{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:22px;z-index:2}.source-label{display:flex;align-items:center;gap:7px;font-size:12px;color:#94a8c2;letter-spacing:.05em;min-height:22px}.source-label i{background:#67768d;width:5px;height:5px;border-radius:50%;flex-shrink:0}.source-label i.active{background:#7bdfba;box-shadow:0 0 8px #7bdfba60}.source-label i.recording{background:#fb9c94;animation:blink 1.2s infinite}.monitor-top button{font-size:11px;background:#ffffff0d;color:#a6bad2;border:1px solid #ffffff17;padding:4px 9px;border-radius:6px;min-height:27px}.visual-area{position:relative;flex:1;min-height:0;margin:4px 0 15px;isolation:isolate}.visual-area canvas{position:absolute;inset:0;width:100%;height:100%}.pitch-readout{position:absolute;inset:auto 0 0;text-align:center;pointer-events:none;z-index:1}.pitch-readout p{font-size:15px;letter-spacing:.05em;color:#bdcbe0;line-height:1.5}.frequency-readout{font-size:clamp(28px,4.5vw,60px);line-height:1.1;font-family:ui-rounded,system-ui,sans-serif;letter-spacing:.015em;font-weight:400;color:#fff;display:flex;align-items:baseline;justify-content:center;gap:8px;margin-bottom:8px;font-variant-numeric:tabular-nums}.frequency-readout small{font-size:15px;color:#8b9eb9;letter-spacing:0}.monitor.has-hz:not(.has-wave) .pitch-readout{top:36%;bottom:auto}.monitor.has-hz:not(.has-wave) .pitch-readout p{margin-top:10px}.monitor.has-wave .pitch-readout{inset:8px 0 auto;text-align:left;display:flex;align-items:baseline;justify-content:space-between;gap:12px}.monitor.has-wave .frequency-readout{font-size:29px;margin:0;gap:5px}.monitor.has-wave .frequency-readout small{font-size:12px}.monitor.has-wave .pitch-readout p{font-size:12px;align-self:center;text-align:right}.monitor.has-wave:not(.has-hz) .pitch-readout{justify-content:flex-end}.scope-scale{position:absolute;inset:auto 0 -9px;display:flex;justify-content:space-between;color:#6783a1;font-size:10px;font-variant-numeric:tabular-nums}.pitch-axis{padding-top:7px}.color-band{position:relative;background:var(--gradient);height:9px;border-radius:10px;width:100%}.color-band:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(20% - 1px),#0b173d4d calc(20% - 1px),#0b173d4d 20%);border-radius:inherit}#pitchMarker{position:absolute;width:5px;height:21px;top:-6px;left:0;transform:translateX(-50%);border:2px solid #fff;border-radius:5px;background:#fff;box-shadow:0 1px 6px #0005;transition:left .08s linear}.axis-labels{display:flex;justify-content:space-between;font-size:12px;margin-top:10px;color:#d8e2f0}.axis-labels span:nth-child(2){font-size:10px;color:#7290b1;letter-spacing:.08em}.history-block{min-width:0}.history-heading{display:flex;justify-content:space-between;font-size:11px;color:#829099;line-height:1.3;margin-bottom:7px}.history-heading label{letter-spacing:.06em}.history-heading span{font-variant-numeric:tabular-nums}.history-track{height:25px;position:relative;background:#f0f3f4;border-radius:5px;overflow:hidden}.history-track canvas{position:absolute;width:100%;height:100%;inset:0}.history-track input{position:absolute;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:none;z-index:2}.history-track:focus-within{outline:2px solid var(--teal);outline-offset:2px}#historyCursor{position:absolute;left:0;top:0;height:100%;border-left:2px solid #243341;box-shadow:1px 0 0 #fff;pointer-events:none;z-index:1}.transport{display:flex;gap:10px;height:56px}.record-button{flex:1;display:flex;justify-content:center;align-items:center;gap:10px;border-radius:14px;background:var(--teal);color:#fff;font-size:16px;font-weight:600;white-space:nowrap;min-width:0}.record-symbol{width:12px;height:12px;background:white;border-radius:50%;box-shadow:0 0 0 4px #ffffff20}.record-button.is-recording{background:#a94946}.record-button.is-recording .record-symbol{border-radius:2px;box-shadow:none}.record-button.is-requesting{background:#637985}.record-button.is-requesting .record-symbol{background:transparent;border:2px solid #ffffff50;border-top-color:#fff;width:16px;height:16px;animation:spin 1s linear infinite;box-shadow:none}.transport-button{padding:0 15px;background:#eff3f4;color:#506572;border-radius:13px;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px;min-width:72px;white-space:nowrap}.transport-button svg{width:18px;height:18px}.transport-button.is-playing{background:#e1eeea;color:#26776c}.small-button{min-width:49px;padding:7px 12px;flex-direction:column;gap:2px;font-size:10px}.small-button svg{width:18px;height:18px}.recorder-hint{font-size:12px;color:#859098;text-align:center;line-height:1.4;min-height:18px;overflow-wrap:anywhere}.recorder-hint.error{color:#a24a44}.tone-pane{display:flex;flex-direction:column;justify-content:center;gap:24px;background:#fcfdfd;padding:28px}.tone-heading{margin-bottom:auto;min-height:34px}.tone-heading h2{font-size:17px}.use-pitch{font-size:11px;background:transparent;color:var(--teal);padding:9px 0 9px 9px;white-space:nowrap}.use-pitch span{margin-left:4px;font-size:15px}.frequency-editor{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-top:6px}.step-button{width:38px;height:38px;border:1px solid #dce5e5;border-radius:50%;font-size:24px;line-height:1;background:transparent;color:#627783;flex-shrink:0}.frequency-value{display:flex;align-items:baseline;justify-content:center;min-width:0;gap:3px}.frequency-value input{padding:0;width:4.1ch;max-width:100%;appearance:textfield;-moz-appearance:textfield;border:0;background:transparent;font-size:clamp(38px,5vw,66px);font-weight:400;text-align:center;line-height:1.15;font-family:ui-rounded,system-ui,sans-serif;letter-spacing:-.04em;color:#344553;font-variant-numeric:tabular-nums}.frequency-value input::-webkit-inner-spin-button,.frequency-value input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.frequency-value span{font-size:14px;color:#82909b}.target-slider{margin-top:-4px}.target-slider input{appearance:none;-webkit-appearance:none;width:100%;height:32px;display:block;margin:0;background:transparent;touch-action:none;cursor:pointer}.target-slider input::-webkit-slider-runnable-track{height:6px;border-radius:20px;background:var(--gradient)}.target-slider input::-moz-range-track{height:6px;border-radius:20px;background:var(--gradient)}.target-slider input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;border:3px solid #fff;background:var(--target-color,#72ca9a);width:24px;height:24px;border-radius:50%;margin-top:-9px;box-shadow:0 1px 5px #34455340;outline:1px solid #3445531a}.target-slider input::-moz-range-thumb{border:3px solid #fff;background:var(--target-color,#72ca9a);width:18px;height:18px;border-radius:50%;box-shadow:0 1px 5px #34455340}.range-labels{display:flex;justify-content:space-between;font-size:10px;color:#93a0a6;margin-top:4px}.material-section{display:flex;flex-direction:column;gap:12px}.material-label{font-size:12px;letter-spacing:.1em;color:#83949b}.material-options{display:flex;gap:6px}.material-options button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:#f0f4f4;border:1px solid transparent;border-radius:12px;color:#788c94;height:80px;font-size:12px}.material-options svg{width:34px;height:26px;stroke-width:1.4}.material-options button[aria-pressed=true]{border-color:#a6cec6;background:#e9f4ef;color:#266e62}.tone-play{display:flex;justify-content:center;align-items:center;gap:10px;min-height:53px;border-radius:13px;background:#344654;color:white;font-size:14px;font-weight:600;margin-top:3px}.tone-play svg{width:19px;height:19px}.tone-play.is-playing{background:#26766d}.tone-caption{text-align:center;font-size:10px;color:#97a2a8;letter-spacing:.03em;margin-top:-13px;margin-bottom:auto}.app-footer{display:flex;justify-content:space-between;padding:0 4px;color:#94a0a7;font-size:10px;letter-spacing:.06em;line-height:1.3}.footer-tip{letter-spacing:.18em;color:#a9b2b7}dialog{color:var(--ink);border:0;border-radius:22px;width:min(540px,calc(100vw - 28px));max-height:calc(100dvh - 40px);padding:25px;box-shadow:0 25px 80px #0003;overflow:auto;background:#fff}dialog::backdrop{background:#07122399;backdrop-filter:blur(4px)}.dialog-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.dialog-heading h2{font-size:20px}.dialog-heading button{flex-shrink:0}.help-content h3{font-size:14px;font-weight:650;color:var(--teal);margin:20px 0 6px}.help-content h3:first-child{margin-top:0}.help-content p{font-size:13px;color:#62717d;line-height:1.8;margin-top:6px}.dialog-close{background:var(--teal);color:white;width:100%;border-radius:10px;padding:13px;margin-top:23px;font-size:14px}@keyframes spin{to{transform:rotate(360deg)}}@keyframes blink{50%{opacity:.3}}
+@media(min-width:1600px){.app{padding-top:32px;padding-bottom:20px;gap:25px}.workspace{gap:25px}.recorder-pane{padding:28px;gap:18px}.monitor{padding:22px 28px 18px}.section-heading h2{font-size:21px}.view-toggles button{font-size:15px;padding:9px 16px}.source-label{font-size:15px}.pitch-readout p{font-size:20px}.axis-labels{font-size:15px}.transport{height:65px}.record-button{font-size:19px}.recorder-hint{font-size:14px}.tone-pane{padding:36px;gap:35px}.material-options button{height:90px;font-size:14px}.tone-play{min-height:61px;font-size:17px}}
+@media(max-width:1000px){.app{padding:16px;gap:14px}.workspace{grid-template-columns:minmax(0,1.3fr) minmax(280px,.85fr);gap:14px}.recorder-pane{padding:18px;gap:12px}.tone-pane{padding:20px;gap:20px}.monitor{padding:14px 17px 10px}.transport{gap:7px}.transport-button{padding:0 10px;min-width:60px}.small-button{min-width:43px;padding:5px 10px}.record-button{font-size:15px}.frequency-value input{font-size:54px}.recorder-hint{font-size:11px}.tone-heading h2{font-size:16px}.use-pitch{font-size:10px}}
+@media(max-width:700px) and (orientation:portrait){.app{padding:12px 12px max(9px,env(safe-area-inset-bottom));gap:10px}.app-header{min-height:43px;gap:9px;padding:0 4px}.brand-mark{width:31px;height:34px}.brand-copy h1{font-size:20px;letter-spacing:.07em}.brand-copy p{font-size:10px;margin-top:2px}.header-actions{gap:5px}.workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(250px,1fr) auto;gap:10px}.recorder-pane,.tone-pane{border-radius:18px}.recorder-pane{padding:13px;gap:9px;grid-template-rows:auto minmax(100px,1fr) auto auto auto}.section-heading{min-height:29px}.section-heading h2{font-size:14px;gap:7px}.view-toggles button{padding:5px 10px;font-size:11px;min-width:41px}.monitor{padding:11px 15px 9px;border-radius:13px}.monitor-top{min-height:18px}.source-label{font-size:10px;min-height:18px}.monitor-top button{min-height:22px;padding:2px 7px;font-size:10px}.visual-area{margin:1px 0 12px}.pitch-readout p{font-size:13px}.frequency-readout{font-size:42px}.monitor.has-wave .frequency-readout{font-size:25px}.axis-labels{font-size:11px;margin-top:7px}.axis-labels span:nth-child(2){font-size:9px}.color-band{height:7px}#pitchMarker{height:17px;top:-5px}.history-heading{font-size:10px;margin-bottom:5px}.history-track{height:18px}.transport{height:45px;gap:7px}.record-button{font-size:13px;border-radius:10px;gap:8px}.record-symbol{width:10px;height:10px}.transport-button{min-width:58px;border-radius:10px;font-size:12px;padding:0 10px}.small-button{min-width:40px;padding:4px 9px;font-size:9px}.small-button svg{width:16px;height:16px}.recorder-hint{font-size:10px;min-height:14px;line-height:1.35}.tone-pane{padding:12px 15px;display:grid;grid-template-columns:minmax(0,1fr) 120px;grid-template-rows:auto auto auto;column-gap:15px;row-gap:7px;align-items:center}.tone-heading{grid-column:1/-1;min-height:24px;margin:0}.tone-heading h2{font-size:14px}.use-pitch{font-size:10px;padding:2px 0;min-height:24px}.frequency-editor{grid-column:1;grid-row:2;margin:0;gap:3px}.frequency-value input{font-size:37px;width:4.2ch}.frequency-value span{font-size:11px}.step-button{width:27px;height:27px;font-size:19px}.target-slider{grid-column:1;grid-row:3;margin:-3px 0 0}.target-slider input{height:24px}.target-slider input::-webkit-slider-thumb{width:21px;height:21px;margin-top:-7.5px}.range-labels{font-size:8px;margin-top:0}.material-section{grid-column:2;grid-row:2;gap:0}.material-label{display:none}.material-options{gap:3px;flex-wrap:wrap}.material-options button{flex:auto;width:calc(50% - 3px);height:28px;border-radius:6px;font-size:10px;gap:0}.material-options svg{display:none}.tone-play{grid-column:2;grid-row:3;min-height:32px;margin:0;font-size:11px;gap:5px;border-radius:8px}.tone-play svg{width:14px;height:14px}.tone-caption{grid-column:1/-1;grid-row:4;font-size:8px;letter-spacing:.02em;margin:0;text-align:right}.app-footer{font-size:8px;padding:0 3px}.footer-tip{letter-spacing:.08em}}
+@media(max-width:700px) and (orientation:portrait) and (max-height:720px){.app{gap:7px;padding-top:8px;padding-bottom:6px}.app-header{min-height:38px}.brand-copy h1{font-size:18px}.brand-copy p{font-size:9px}.brand-mark{width:29px;height:32px}.workspace{gap:7px;grid-template-rows:minmax(235px,1fr) auto}.recorder-pane{padding:11px;gap:7px}.monitor{padding-top:8px;padding-bottom:8px}.visual-area{margin-bottom:9px}.pitch-readout p{font-size:11px}.transport{height:41px}.recorder-hint{font-size:9px}.tone-pane{padding:9px 13px;row-gap:4px}.frequency-value input{font-size:33px}.tone-caption{font-size:8px}.history-track{height:16px}.history-heading{font-size:9px}.frequency-readout{font-size:32px;margin-bottom:4px}.monitor.has-hz:not(.has-wave) .pitch-readout{top:29%}.monitor.has-hz:not(.has-wave) .pitch-readout p{margin-top:5px}}
+@media(orientation:landscape) and (max-height:600px){.app{padding:8px max(12px,env(safe-area-inset-right)) 6px max(12px,env(safe-area-inset-left));gap:7px}.app-header{min-height:33px;gap:8px}.brand-mark{width:26px;height:30px}.brand-copy{display:flex;align-items:baseline;gap:12px}.brand-copy h1{font-size:18px;letter-spacing:.03em}.brand-copy p{font-size:10px}.header-actions{gap:6px}.header-actions .icon-button{width:29px;height:29px}.help-button{width:25px;height:25px;font-size:14px}.workspace{grid-template-columns:minmax(0,1.5fr) minmax(255px,1fr);gap:10px}.recorder-pane,.tone-pane{padding:12px;border-radius:15px}.recorder-pane{gap:7px;grid-template-rows:auto minmax(75px,1fr) auto auto auto}.section-heading{min-height:25px}.section-heading h2{font-size:13px}.view-toggles{padding:2px}.view-toggles button{padding:3px 10px;font-size:10px;min-width:40px}.monitor{padding:8px 13px;border-radius:10px}.monitor-top,.source-label{min-height:15px;font-size:9px}.monitor-top button{font-size:9px;padding:1px 6px;min-height:18px}.visual-area{margin:0 0 8px}.pitch-readout p{font-size:10px}.pitch-axis{padding-top:4px}.color-band{height:6px}.axis-labels{font-size:9px;margin-top:5px}.axis-labels span:nth-child(2){font-size:8px}#pitchMarker{height:14px;top:-4px}.frequency-readout{font-size:30px;margin-bottom:2px}.frequency-readout small{font-size:11px}.monitor.has-hz:not(.has-wave) .pitch-readout{top:28%}.monitor.has-hz:not(.has-wave) .pitch-readout p{margin-top:3px}.monitor.has-wave .pitch-readout{inset:0 0 auto}.monitor.has-wave .frequency-readout{font-size:20px}.monitor.has-wave .pitch-readout p{font-size:9px}.scope-scale{font-size:8px;bottom:-6px}.history-heading{font-size:9px;margin-bottom:3px}.history-track{height:14px}.transport{height:35px;gap:7px}.record-button{font-size:12px;gap:7px;border-radius:8px}.record-symbol{width:9px;height:9px}.transport-button{border-radius:8px;min-width:57px;font-size:11px;padding:0 10px}.transport-button svg{width:15px;height:15px}.small-button{min-width:47px;padding:0 7px;font-size:9px;flex-direction:row;gap:4px}.recorder-hint{font-size:9px;min-height:12px}.tone-pane{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto auto;gap:8px;align-content:center}.tone-heading{min-height:25px;margin:0}.use-pitch{font-size:9px;padding:0;min-height:24px}.use-pitch span{font-size:12px}.frequency-editor{margin:0}.frequency-value input{font-size:40px}.frequency-value span{font-size:11px}.step-button{width:28px;height:28px;font-size:19px}.target-slider{margin:-5px 0 0}.target-slider input{height:22px}.range-labels{font-size:8px;margin-top:0}.material-section{gap:0}.material-label{display:none}.material-options{gap:5px}.material-options button{height:36px;border-radius:7px;font-size:11px}.material-options svg{display:none}.tone-play{min-height:35px;font-size:12px;margin:0;border-radius:8px}.tone-play svg{width:15px;height:15px}.tone-caption{font-size:8px;margin:-2px 0 0}.app-footer{font-size:8px}.footer-tip{letter-spacing:.06em}}
+@media(orientation:portrait) and (min-width:701px){.workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 245px}.tone-pane{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto;gap:10px 35px;padding:20px 25px}.tone-heading{grid-column:1/-1;margin:0}.frequency-editor{grid-row:2;margin:0}.target-slider{grid-column:1;grid-row:3;align-self:start}.material-section{grid-column:2;grid-row:2;gap:0}.material-label{display:none}.material-options button{height:65px}.tone-play{grid-column:2;grid-row:3;margin:0;min-height:45px;align-self:start}.tone-caption{grid-column:1/-1;font-size:9px;margin:0}.recorder-pane{padding:22px;gap:14px}.monitor{padding:18px 24px 12px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Keep the frequent tablet/phone touch targets separate and easy to hit. */
+@media(max-width:700px) and (orientation:portrait){.view-toggles button{min-height:34px}.material-options button{height:40px}.step-button{width:34px;height:34px}.tone-play{min-height:38px}.use-pitch{min-height:30px}.tone-pane{row-gap:6px}.history-track{height:24px}}
+@media(max-width:360px) and (orientation:portrait){.tone-pane{grid-template-columns:minmax(0,1fr) 106px;column-gap:10px;padding-left:11px;padding-right:11px}.frequency-value input{font-size:29px}.frequency-value span{font-size:10px}.step-button{width:27px;height:30px}.material-options button{height:34px}.tone-play{font-size:10px;min-height:34px}.transport{gap:5px}.transport-button{padding:0 7px;min-width:48px}.small-button{min-width:35px;padding:3px 6px}.record-button{font-size:12px}.recorder-hint{font-size:9px}.view-toggles button{min-height:30px}.tone-heading h2{font-size:13px}.history-track{height:18px}.tone-pane{row-gap:4px}}
+@media(orientation:landscape) and (max-height:330px){.app{padding-top:5px;padding-bottom:5px;gap:5px;grid-template-rows:auto minmax(0,1fr)}.app-header{min-height:28px}.brand-copy h1{font-size:16px}.brand-copy p{font-size:9px}.brand-mark{height:25px;width:23px}.app-footer{display:none}.recorder-pane,.tone-pane{padding:8px}.recorder-pane{gap:5px}.tone-pane{gap:6px}.frequency-value input{font-size:34px}.material-options button{height:32px}.tone-caption{font-size:8px}.monitor{padding-top:6px;padding-bottom:6px}.section-heading{min-height:23px}.visual-area{margin-bottom:6px}}
+</style>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 24v-8M13 30V10M20 35V5M27 29V11M34 23v-6" fill="none" stroke-linecap="round" stroke-width="4"/><path d="M6 24v-8" stroke="#9574f7"/><path d="M13 30V10" stroke="#5599eb"/><path d="M20 35V5" stroke="#46bfa9"/><path d="M27 29V11" stroke="#d4bb5a"/><path d="M34 23v-6" stroke="#ea9775"/></svg></div>
+      <div class="brand-copy"><h1>声音探测器</h1><p>《声音的高低》<span> · 学生端</span></p></div>
+      <div class="header-actions"><button id="fullscreen" class="icon-button" aria-label="全屏显示" title="全屏显示"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button><button id="help" class="help-button" aria-label="打开使用说明">?</button></div>
+    </header>
+
+    <main class="workspace">
+      <section class="recorder-pane" aria-labelledby="recorderTitle">
+        <div class="section-heading"><h2 id="recorderTitle"><span class="tiny-dot"></span>录音观察</h2><div class="view-toggles" aria-label="观察方式"><button id="toggleWave" aria-pressed="false">波形</button><button id="toggleHz" aria-pressed="false">Hz</button></div></div>
+        <div class="monitor" id="monitor">
+          <div class="monitor-top"><span class="source-label"><i id="sourceDot"></i><span id="sourceTag">等待录音</span></span><button id="waveGain" hidden title="改变波形显示倍率">显示 ×4</button></div>
+          <div class="visual-area" id="visualArea">
+            <canvas id="scope" aria-label="音高颜色或声音波形"></canvas>
+            <div class="pitch-readout" id="pitchReadout"><div class="frequency-readout" id="frequencyReadout" hidden><span id="detectedFrequency">—</span><small>Hz</small></div><p id="pitchStatus">听见声音，看见音高</p></div>
+            <div class="scope-scale" id="scopeScale" hidden><span>0</span><span>20 ms</span></div>
+          </div>
+          <div class="pitch-axis"><div class="color-band" aria-label="由低到高的音高色带"><span id="pitchMarker" hidden></span></div><div class="axis-labels"><span>低</span><span id="bandHint">音高色带</span><span>高</span></div></div>
+        </div>
+        <div class="history-block"><div class="history-heading"><label for="scrub">声音足迹</label><span id="timeLabel">0:00 / 0:30</span></div><div class="history-track" id="historyTrack"><canvas id="historyCanvas" aria-label="录音的音高颜色随时间变化"></canvas><span id="historyCursor" hidden></span><input id="scrub" type="range" min="0" max="30" value="0" step="0.01" disabled aria-label="回看录音位置"></div></div>
+        <div class="transport">
+          <button id="record" class="record-button"><span id="recordSymbol" class="record-symbol" aria-hidden="true"></span><span id="recordText">开始录音</span></button>
+          <button id="replay" class="transport-button" disabled><svg viewBox="0 0 24 24" id="replayIcon"><path d="m9 5 11 7-11 7Z"/></svg><span id="replayText">回听</span></button>
+          <button id="download" class="transport-button small-button" disabled aria-label="保存录音为 WAV"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></svg><span>保存</span></button>
+          <button id="clear" class="transport-button small-button" disabled aria-label="清空当前录音"><svg viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></svg><span>清空</span></button>
+        </div>
+        <p id="recorderHint" class="recorder-hint" role="status">轻轻哼一个长音，观察色带上的位置。</p>
+      </section>
+
+      <section class="tone-pane" aria-labelledby="toneTitle">
+        <div class="section-heading tone-heading"><h2 id="toneTitle">选频发声</h2><button id="usePitch" class="use-pitch" disabled>用这个音高 <span aria-hidden="true">↘</span></button></div>
+        <div class="frequency-editor"><button id="frequencyDown" class="step-button" aria-label="降低频率 10 Hz">−</button><label class="frequency-value" for="targetFrequency"><input id="targetFrequency" type="number" min="50" max="1600" step="1" value="440" inputmode="numeric" aria-label="选定频率，50 到 1600 Hz"><span>Hz</span></label><button id="frequencyUp" class="step-button" aria-label="提高频率 10 Hz">+</button></div>
+        <div class="target-slider"><input id="frequencySlider" type="range" min="0" max="1000" value="627" step="1" aria-label="拖动选择发声频率"><div class="range-labels"><span>低 · 50 Hz</span><span>高 · 1600 Hz</span></div></div>
+        <div class="material-section"><span class="material-label">材质音色</span><div class="material-options" role="group" aria-label="选择电子合成音色"><button data-material="pure" aria-pressed="true"><svg viewBox="0 0 40 28"><path d="M3 14C9-5 13-5 20 14s11 19 17 0"/></svg><span>纯音</span></button><button data-material="wood" aria-pressed="false"><svg viewBox="0 0 40 28"><path d="m8 8 18-4 7 15-18 5Zm5-1 7 16m-1-17 7 16M3 4l7 7"/></svg><span>木片</span></button><button data-material="metal" aria-pressed="false"><svg viewBox="0 0 40 28"><path d="m20 4 14 20H6Zm-6 12h23M11 3l7 9"/></svg><span>金属</span></button><button data-material="string" aria-pressed="false"><svg viewBox="0 0 40 28"><path d="M4 6h32M4 14h32M4 22h32M8 3v22m24-22v22"/></svg><span>琴弦</span></button></div></div>
+        <button id="playTone" class="tone-play"><svg id="toneIcon" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></svg><span id="toneText">试听电子音</span></button>
+        <p class="tone-caption">电子合成示意 · 所选频率为基频</p>
+      </section>
+    </main>
+    <footer class="app-footer"><span>录音留在当前设备<span class="footer-detail"> · 最长 30 秒</span></span><span class="footer-tip">从声音到颜色</span></footer>
+  </div>
+
+  <dialog id="helpDialog" aria-labelledby="helpTitle"><div class="dialog-heading"><h2 id="helpTitle">让声音的高低“看得见”</h2><button id="closeHelp" class="icon-button" aria-label="关闭说明">×</button></div><div class="help-content"><h3>录一段，留住声音</h3><p>点击“开始录音”并允许麦克风。靠近设备，轻轻哼一个持续的单音。录好后可以回听、拖动“声音足迹”回看，或保存 WAV 文件。再次录音会在成功后替换上一段。</p><h3>颜色表示什么？</h3><p>声音的高低也叫音调。色带从左到右表示音高由低到高，范围为 50–1600 Hz。颜色是我们约定的标记，声音本身没有这些颜色。没有识别到稳定音高的片段以灰色表示。</p><h3>波形和 Hz</h3><p>“Hz”显示估计的基频；1 Hz 表示每秒振动 1 次。“波形”显示音频信号在固定 20 毫秒内的变化，显示倍率可切换。波形高度不是经过校准的音量分贝值，也不是空气振动的实物照片。</p><h3>用自己的频率发声</h3><p>拖动色带或直接输入 50–1600 Hz，选择纯音、木片、金属或琴弦音色再试听。“用这个音高”可以把刚识别到的音高带到这里。材质音色是电子合成的近似示意，不能代替真实材料的声音。</p><h3>什么时候会“暂未识别”？</h3><p>这个工具适合观察单一、持续的声音。杂声、多人同时说话、极短的敲击声或复杂音色可能无法确定音高，也可能出现倍频判断误差。识别只是音频分析的估计，不是专业测量仪器。</p><h3>设备与录音</h3><p>录音需要 HTTPS 页面和麦克风权限；可在 Safari 或 Chrome 中直接打开。浏览器和设备可能处理输入音量，检测效果会随环境改变。试听电子音会先结束录音；录音结束后可以回听。切到后台会停止录音与播放。</p><p>录音只保存在当前页面的内存中，不会上传。刷新或关闭页面会清除；想保留时请先点击“保存”。下载的单文件可以离线试听电子音；离线录音能否使用取决于浏览器的本地文件权限。</p></div><button id="understood" class="dialog-close">知道了，开始观察</button></dialog>
+  <script>
+/* StudentPitchDSP v1.0 — browser-local, monophonic pitch analysis.
+ * Original implementation of a conservative YIN-style difference / CMNDF detector.
+ * Algorithm reference: de Cheveigne & Kawahara, JASA 111 (2002), 1917–1930,
+ * DOI 10.1121/1.1458024. This is not copied library code or a calibrated sound meter.
+ * Input: PCM Float32Array and its ACTUAL sample rate; never pass FFT magnitudes.
+ * No microphone access, DOM, timers, network, or persistent storage is used here.
+ */
+(function (root) {
+  'use strict';
+
+  var TWO_PI = Math.PI * 2;
+  var LOG2 = Math.log(2);
+  var kernels = {};
+  var defaults = {
+    minFrequency: 50,
+    maxFrequency: 1600,
+    minRms: 0.006,
+    threshold: 0.12,
+    maxFrameSeconds: 0.2,
+    maxDriftCents: 45
+  };
+
+  function number(value, fallback) {
+    return typeof value === 'number' && isFinite(value) ? value : fallback;
+  }
+  function clamp(value, lo, hi) { return Math.max(lo, Math.min(hi, value)); }
+  function cents(a, b) { return 1200 * Math.log(a / b) / LOG2; }
+  function answer(frequency, confidence, rms, reason) {
+    return {
+      frequency: frequency === null ? null : frequency,
+      confidence: clamp(number(confidence, 0), 0, 1),
+      rms: Math.max(0, number(rms, 0)),
+      reason: reason
+    };
+  }
+
+  function lowPassKernel(factor) {
+    if (kernels[factor]) { return kernels[factor]; }
+    var radius = factor * 12;
+    var taps = new Float64Array(radius * 2 + 1);
+    var cutoff = 0.42 / factor;
+    var sum = 0;
+    for (var i = -radius; i <= radius; i += 1) {
+      var sinc = i === 0 ? 2 * cutoff : Math.sin(TWO_PI * cutoff * i) / (Math.PI * i);
+      var window = 0.54 + 0.46 * Math.cos(Math.PI * i / radius);
+      taps[i + radius] = sinc * window;
+      sum += taps[i + radius];
+    }
+    for (var j = 0; j < taps.length; j += 1) { taps[j] /= sum; }
+    kernels[factor] = taps;
+    return taps;
+  }
+
+  function decimate(samples, factor) {
+    if (factor === 1) { return samples; }
+    var taps = lowPassKernel(factor);
+    var radius = (taps.length - 1) / 2;
+    var length = Math.floor((samples.length - 1 - radius * 2) / factor) + 1;
+    if (length < 1) { return new Float32Array(0); }
+    var out = new Float32Array(length);
+    for (var i = 0; i < length; i += 1) {
+      var start = i * factor, value = 0;
+      for (var k = 0; k < taps.length; k += 1) { value += samples[start + k] * taps[k]; }
+      out[i] = value;
+    }
+    return out;
+  }
+
+  function parabola(values, index) {
+    var left = values[index - 1], middle = values[index], right = values[index + 1];
+    var curvature = left + right - 2 * middle;
+    var offset = curvature > 1e-20 ? clamp((left - right) / (2 * curvature), -0.5, 0.5) : 0;
+    return { lag: index + offset, value: Math.max(0, middle + (right - left) * offset / 4) };
+  }
+
+  function difference(samples, lag, start, length) {
+    var d = 0;
+    for (var i = start, end = start + length; i < end; i += 1) {
+      var delta = samples[i] - samples[i + lag];
+      d += delta * delta;
+    }
+    return d;
+  }
+
+  // Compare a genuinely fractional delay, rather than treating a sampled
+  // difference-function trough as its exact minimum. This matters especially
+  // for upper pitches and strong high harmonics: coarse-lag errors must not be
+  // mistaken for evidence of an octave/subharmonic. The windowed-sinc delay is
+  // evaluated only for a handful of candidates, at no more than ~2400 positions.
+  function periodicLoss(samples, lag, start, end) {
+    var base = Math.round(lag), fraction = lag - base, radius = 16;
+    var weights = null, k;
+    if (Math.abs(fraction) > 1e-7) {
+      weights = new Float64Array(radius * 2 + 1);
+      var weightSum = 0;
+      for (k = -radius; k <= radius; k += 1) {
+        var q = fraction - k;
+        var sinc = Math.abs(q) < 1e-12 ? 1 : Math.sin(Math.PI * q) / (Math.PI * q);
+        var window = 0.42 + 0.5 * Math.cos(Math.PI * k / radius) + 0.08 * Math.cos(TWO_PI * k / radius);
+        weights[k + radius] = sinc * window;
+        weightSum += weights[k + radius];
+      }
+      for (k = 0; k < weights.length; k += 1) { weights[k] /= weightSum; }
+    }
+    var first = Math.max(start, radius);
+    var last = Math.min(end - base - radius, samples.length - base - radius);
+    if (last - first < 32) { return 1; }
+    var step = Math.max(1, Math.floor((last - first) / 2400));
+    var xx = 0, yy = 0, xy = 0, sx = 0, sy = 0, count = 0;
+    for (var i = first; i < last; i += step) {
+      var x = samples[i], y = 0;
+      if (!weights) { y = samples[i + base]; }
+      else {
+        for (k = -radius; k <= radius; k += 1) { y += samples[i + base + k] * weights[k + radius]; }
+      }
+      xx += x * x; yy += y * y; xy += x * y; sx += x; sy += y; count += 1;
+    }
+    // Local-mean removal and normalized correlation tolerate amplitude decay.
+    xx -= sx * sx / count; yy -= sy * sy / count; xy -= sx * sy / count;
+    var energy = Math.sqrt(Math.max(0, xx * yy));
+    return energy > 1e-20 ? clamp(1 - xy / energy, 0, 2) : 1;
+  }
+
+  /* Refine against the original sample rate, so decimation does not quantize
+   * high pitches. A sinusoidal correction removes much of a three-point
+   * parabola's high-frequency bias; it is negligible for low-frequency periods.
+   */
+  function refine(samples, approximateLag, start, end, radiusFraction) {
+    var radius = Math.max(2, Math.ceil(approximateLag * radiusFraction));
+    var low = Math.max(2, Math.floor(approximateLag - radius));
+    var high = Math.min(Math.ceil(approximateLag + radius), end - start - 8);
+    var length = end - start - high - 1;
+    if (length < 8 || high - low < 2) { return null; }
+    var values = new Float64Array(high + 2);
+    var best = low, bestValue = Infinity;
+    for (var lag = low; lag <= high; lag += 1) {
+      values[lag] = difference(samples, lag, start, length);
+      if (values[lag] < bestValue) { best = lag; bestValue = values[lag]; }
+    }
+    if (best === low || best === high) { return null; }
+    var left = values[best - 1], middle = values[best], right = values[best + 1];
+    var curvature = left + right - 2 * middle;
+    var rawOffset = curvature > 1e-20 ? clamp((left - right) / (2 * curvature), -0.5, 0.5) : 0;
+    var omega = TWO_PI / (best + rawOffset);
+    var offset = rawOffset;
+    if (omega < 1.6 && curvature > 1e-20) {
+      offset = clamp(Math.atan((left - right) / curvature * Math.tan(omega / 2)) / omega, -0.5, 0.5);
+    }
+    var energy = 0;
+    for (var i = start; i < start + length; i += 1) {
+      energy += samples[i] * samples[i] + samples[i + best] * samples[i + best];
+    }
+    var minimum = Math.max(0, middle + (right - left) * rawOffset / 4);
+    return { lag: best + offset, loss: energy > 1e-20 ? minimum / energy : 1 };
+  }
+
+  function detect(input, sampleRate, options) {
+    var opts = options || {};
+    var rate = number(sampleRate, 0);
+    if (!input || typeof input.length !== 'number' || rate < 4000 || rate > 384000) {
+      return answer(null, 0, 0, 'invalid-input');
+    }
+    var minFrequency = clamp(number(opts.minFrequency, number(opts.minFreq, defaults.minFrequency)), 20, 4000);
+    var maxFrequency = clamp(number(opts.maxFrequency, number(opts.maxFreq, defaults.maxFrequency)), 40, rate * 0.4);
+    if (minFrequency >= maxFrequency) { return answer(null, 0, 0, 'invalid-input'); }
+    var minRms = clamp(number(opts.minRms, defaults.minRms), 0.00001, 0.5);
+    var threshold = clamp(number(opts.threshold, defaults.threshold), 0.02, 0.25);
+    var maxSeconds = clamp(number(opts.maxFrameSeconds, defaults.maxFrameSeconds), 0.06, 0.35);
+    var count = Math.min(input.length, Math.floor(rate * maxSeconds));
+    if (count < 64 || count / rate < 3 / maxFrequency) {
+      return answer(null, 0, 0, 'short-frame');
+    }
+    var offset = input.length - count;
+    var sum = 0, i, value;
+    for (i = 0; i < count; i += 1) {
+      value = input[offset + i];
+      if (typeof value !== 'number' || !isFinite(value)) { return answer(null, 0, 0, 'invalid-input'); }
+      sum += value;
+    }
+    var mean = sum / count;
+    var centered = new Float32Array(count);
+    var power = 0;
+    for (i = 0; i < count; i += 1) {
+      value = input[offset + i] - mean;
+      centered[i] = value;
+      power += value * value;
+    }
+    var rms = Math.sqrt(power / count);
+    if (rms < minRms) { return answer(null, 0, rms, 'quiet'); }
+
+    // Keep at least 7.5 analysis samples per highest allowed period. This also
+    // leaves bandwidth for the harmonics used by the periodicity test.
+    var targetRate = Math.max(12000, maxFrequency * 7.5);
+    var factor = Math.max(1, Math.floor(rate / targetRate));
+    var samples = decimate(centered, factor);
+    var analysisRate = rate / factor;
+    var n = samples.length;
+    if (n < 64) { return answer(null, 0, rms, 'short-frame'); }
+    var filteredPower = 0;
+    for (i = 0; i < n; i += 1) { filteredPower += samples[i] * samples[i]; }
+    if (Math.sqrt(filteredPower / n) < minRms * 0.65) {
+      return answer(null, 0, rms, 'out-of-range');
+    }
+
+    // Three periods must fit in the frame. Extra lags give both boundary
+    // frequencies a real, interpolatable local minimum, instead of clamping a dip.
+    var maxLag = Math.min(Math.ceil(analysisRate / minFrequency) + 2, Math.floor(n / 3));
+    var windowLength = n - maxLag - 1;
+    if (maxLag < 4 || windowLength < 16) { return answer(null, 0, rms, 'short-frame'); }
+    var raw = new Float64Array(maxLag + 1);
+    var normalized = new Float64Array(maxLag + 1);
+    normalized[0] = 1;
+    var cumulative = 0;
+    for (var tau = 1; tau <= maxLag; tau += 1) {
+      var d = difference(samples, tau, 0, windowLength);
+      raw[tau] = d;
+      cumulative += d;
+      normalized[tau] = cumulative > 1e-24 ? d * tau / cumulative : 1;
+    }
+
+    // Search short lags too: an out-of-range high tone must not be reported as
+    // a subharmonic that happens to fall within the allowed interval.
+    var candidates = [];
+    for (tau = 2; tau < maxLag; tau += 1) {
+      if (normalized[tau] <= normalized[tau - 1] && normalized[tau] < normalized[tau + 1]) {
+        var dip = parabola(normalized, tau);
+        if (dip.value < threshold) {
+          candidates.push({ lag: parabola(raw, tau).lag, loss: dip.value });
+        }
+      }
+    }
+    if (!candidates.length) { return answer(null, 0, rms, 'unclear'); }
+    var chosen = candidates[0];
+    var refined = refine(centered, chosen.lag * factor, 0, centered.length, 0.035);
+    if (!refined) { return answer(null, 0, rms, 'unclear'); }
+    var chosenLoss = periodicLoss(centered, refined.lag, 0, centered.length);
+    // A weak fundamental under a strong second/third harmonic can produce an
+    // early, shallow dip. Accept a longer integral period only when its gain in
+    // periodicity is substantial, so clean pure tones do not collapse an octave.
+    for (i = 1; i < candidates.length; i += 1) {
+      var candidate = candidates[i];
+      var ratio = candidate.lag / chosen.lag;
+      var integer = Math.round(ratio);
+      if (integer >= 2 && integer <= 4 && Math.abs(ratio - integer) < 0.075) {
+        var alternative = refine(centered, candidate.lag * factor, 0, centered.length, 0.035);
+        if (alternative) {
+          var alternativeLoss = periodicLoss(centered, alternative.lag, 0, centered.length);
+          if (alternativeLoss < chosenLoss * 0.5 && chosenLoss - alternativeLoss > 0.003) {
+            chosen = candidate; refined = alternative; chosenLoss = alternativeLoss;
+          }
+        }
+      }
+    }
+    // The coarse analysis may miss a very narrow true trough. Check divisors
+    // using the original samples, accepting only an equally periodic shorter
+    // cycle. This also rejects high out-of-range pure tones instead of returning
+    // an in-range subharmonic.
+    var fullLag = refined.lag;
+    for (var divisor = 8; divisor >= 2; divisor -= 1) {
+      var expected = fullLag / divisor;
+      if (expected < 3) { continue; }
+      var shorter = refine(centered, expected, 0, centered.length, 0.035);
+      if (shorter && Math.abs(shorter.lag / expected - 1) < 0.06) {
+        var shorterLoss = periodicLoss(centered, shorter.lag, 0, centered.length);
+        if (shorterLoss < Math.min(0.012, chosenLoss + 0.001) && shorter.lag < refined.lag) {
+          refined = shorter; chosenLoss = shorterLoss;
+        }
+      }
+    }
+
+    // Refine over several complete cycles. Besides reducing frequency error,
+    // this checks that periodicity persists across a useful time span: nearby
+    // unrelated tones can have an apparently good *single-cycle* match.
+    var multiplier = Math.min(32, Math.floor(centered.length / (2.6 * refined.lag)));
+    if (multiplier >= 2) {
+      var longRefinement = refine(centered, refined.lag * multiplier, 0, centered.length,
+        Math.min(0.02, 0.18 / multiplier));
+      if (!longRefinement) { return answer(null, 1 - chosenLoss, rms, 'unstable'); }
+      var longLoss = periodicLoss(centered, longRefinement.lag, 0, centered.length);
+      if (longLoss > threshold) { return answer(null, 1 - longLoss, rms, 'unstable'); }
+      refined.lag = longRefinement.lag / multiplier;
+      // Two unrelated tones can coincide again at one long delay. A single
+      // stable period must also explain intermediate integral delays.
+      var checkMultipliers = [1, Math.max(1, multiplier - 1), Math.max(1, Math.floor(multiplier * 0.61))];
+      for (var check = 0; check < checkMultipliers.length; check += 1) {
+        var continuityLoss = periodicLoss(centered, refined.lag * checkMultipliers[check], 0, centered.length);
+        if (continuityLoss > threshold) { return answer(null, 1 - continuityLoss, rms, 'unstable'); }
+        longLoss = Math.max(longLoss, continuityLoss);
+      }
+      chosenLoss = Math.max(chosenLoss, longLoss);
+    }
+    var frequency = rate / refined.lag;
+    var confidence = 1 - chosenLoss;
+    if (frequency < minFrequency * 0.9999 || frequency > maxFrequency * 1.0001) {
+      return answer(null, confidence, rms, 'out-of-range');
+    }
+    if (count / rate * frequency < 3) { return answer(null, 0, rms, 'short-frame'); }
+    if (chosenLoss > threshold || confidence < 1 - threshold) {
+      return answer(null, confidence, rms, 'unclear');
+    }
+
+    // Independently inspect the beginning/end. A sweeping pitch or competing
+    // unstable sources should produce unknown, even if the whole-frame average
+    // looks periodic enough to yield a plausible number.
+    var half = Math.floor(centered.length * 0.49);
+    var front = refine(centered, refined.lag, 0, half, 0.08);
+    var back = refine(centered, refined.lag, centered.length - half, centered.length, 0.08);
+    var maxDrift = clamp(number(opts.maxDriftCents, defaults.maxDriftCents), 10, 120);
+    if (!front || !back || front.loss > threshold * 1.5 || back.loss > threshold * 1.5 ||
+        Math.abs(cents(front.lag, back.lag)) > maxDrift) {
+      return answer(null, confidence, rms, 'unstable');
+    }
+    frequency = clamp(frequency, minFrequency, maxFrequency);
+    confidence = 1 - Math.max(chosenLoss, front.loss, back.loss);
+    if (confidence < 1 - threshold) { return answer(null, confidence, rms, 'unclear'); }
+    return answer(frequency, confidence, rms, 'ok');
+  }
+
+  function median(values) {
+    var sorted = values.slice().sort(function (a, b) { return a - b; });
+    var middle = Math.floor(sorted.length / 2);
+    return sorted.length % 2 ? sorted[middle] : Math.sqrt(sorted[middle - 1] * sorted[middle]);
+  }
+
+  function createTracker(options) {
+    var opts = options || {};
+    var minFrames = Math.round(clamp(number(opts.minFrames, 3), 2, 10));
+    var windowSize = Math.round(clamp(number(opts.windowSize, 5), minFrames, 15));
+    var stableCents = clamp(number(opts.stabilityCents, 40), 5, 150);
+    var minConfidence = clamp(number(opts.minConfidence, 0.88), 0.5, 1);
+    var maxGapMs = clamp(number(opts.maxGapMs, 500), 50, 5000);
+    var minSpanMs = clamp(number(opts.minSpanMs, 120), 0, 2000);
+    var history = [], lastTime = null, runStartTime = null;
+
+    function reset() { history = []; lastTime = null; runStartTime = null; }
+    function tracked(detection, frequency, reason, spread) {
+      var result = answer(frequency, detection.confidence, detection.rms, reason);
+      result.stable = frequency !== null;
+      result.frames = history.length;
+      result.spreadCents = number(spread, 0);
+      return result;
+    }
+    function update(detection, timestamp) {
+      var d = detection || answer(null, 0, 0, 'unclear');
+      var now = number(timestamp, Date.now()); // milliseconds, e.g. performance.now().
+      var f = number(d.frequency, 0);
+      if (f <= 0 || number(d.confidence, 0) < minConfidence || d.reason !== 'ok') {
+        reset();
+        return tracked(d, null, d.reason && d.reason !== 'ok' ? d.reason : 'unclear', 0);
+      }
+      if (lastTime !== null && (now < lastTime || now - lastTime > maxGapMs)) {
+        history = []; runStartTime = null;
+      }
+      // Reprocessing the same timestamp cannot satisfy the multiple-frame gate.
+      if (lastTime !== null && now === lastTime) {
+        return tracked(d, null, 'acquiring', 0);
+      }
+      lastTime = now;
+      var jump = false;
+      if (history.length) {
+        var previous = median(history.map(function (item) { return item.frequency; }));
+        if (Math.abs(cents(f, previous)) > stableCents) {
+          history = []; runStartTime = null; jump = true;
+        }
+      }
+      if (runStartTime === null) { runStartTime = now; }
+      history.push({ frequency: f, confidence: d.confidence, time: now });
+      if (history.length > windowSize) { history.shift(); }
+      var frequencies = history.map(function (item) { return item.frequency; });
+      var low = Math.min.apply(Math, frequencies), high = Math.max.apply(Math, frequencies);
+      var spread = Math.abs(cents(high, low));
+      if (spread > stableCents) {
+        history = [history[history.length - 1]]; runStartTime = now;
+        return tracked(d, null, 'unstable', spread);
+      }
+      if (history.length < minFrames || now - runStartTime < minSpanMs) {
+        return tracked(d, null, jump ? 'unstable' : 'acquiring', spread);
+      }
+      var result = tracked(d, median(frequencies), 'ok', spread);
+      result.confidence = Math.min.apply(Math, history.map(function (item) { return item.confidence; }));
+      return result;
+    }
+    return { update: update, reset: reset };
+  }
+
+  root.StudentPitchDSP = {
+    version: '1.0.0',
+    defaults: defaults,
+    detect: detect,
+    createTracker: createTracker
+  };
+}(typeof window !== 'undefined' ? window : this));
+
+/* StudentRecorder: local mono PCM capture; no playback, upload, or dependencies.
+ * Call start() directly from a user gesture. States: idle, requesting,
+ * recording, stopping, error. onFrame receives an owned 8192-sample window
+ * (left-padded until enough samples arrive); elapsed is captured PCM duration.
+ * AudioWorklet is preferred; ScriptProcessor is a compatibility fallback.
+ * The reported sampleRate is the actual AudioContext PCM rate, which can
+ * differ from the microphone hardware rate because browsers may resample.
+ */
+(function (global) {
+  'use strict';
+
+  const BLOCK_SIZE = 4096;
+  const WINDOW_SIZE = 8192;
+  const MIN_DURATION = 0.15;
+  const WORKLET_SOURCE = `
+    class StudentPCMProcessor extends AudioWorkletProcessor {
+      constructor(options) {
+        super();
+        this.buffer = new Float32Array(4096);
+        this.used = 0;
+        this.total = 0;
+        this.limit = options.processorOptions.maxSamples;
+        this.active = true;
+        this.port.onmessage = (event) => {
+          if (event.data && event.data.type === 'flush') {
+            this.active = false;
+            this.flush();
+            this.port.postMessage({ type: 'flushed' });
+          }
+        };
+      }
+      flush() {
+        if (!this.used) return;
+        const samples = this.used === this.buffer.length
+          ? this.buffer : this.buffer.slice(0, this.used);
+        this.buffer = new Float32Array(4096);
+        this.used = 0;
+        this.port.postMessage({ type: 'chunk', samples }, [samples.buffer]);
+      }
+      process(inputs, outputs) {
+        // Silence both here and in the main-thread zero-gain output node.
+        for (const output of outputs) {
+          for (const channel of output) channel.fill(0);
+        }
+        if (!this.active) return false;
+        const channels = inputs[0];
+        if (!channels || !channels.length || !channels[0].length) return true;
+        // Do not assume that a rendering quantum always has 128 frames.
+        for (let i = 0; i < channels[0].length && this.total < this.limit; i++) {
+          let sample = 0;
+          for (let c = 0; c < channels.length; c++) sample += channels[c][i] || 0;
+          this.buffer[this.used++] = sample / channels.length;
+          this.total++;
+          if (this.used === this.buffer.length) this.flush();
+        }
+        if (this.total >= this.limit) {
+          this.active = false;
+          this.flush();
+          this.port.postMessage({ type: 'limit' });
+          return false;
+        }
+        return true;
+      }
+    }
+    registerProcessor('student-pcm-capture', StudentPCMProcessor);
+  `;
+
+  function stopTracks(stream) {
+    if (!stream) return;
+    for (const track of stream.getTracks()) {
+      try { track.stop(); } catch (_) { /* Already released. */ }
+    }
+  }
+
+  function problem(message) {
+    const error = new Error(message);
+    error.name = 'StudentRecorderError';
+    return error;
+  }
+
+  class StudentRecorder {
+    constructor(options = {}) {
+      this.options = options;
+      const maximum = Number(options.maxDuration);
+      this.maxDuration = Number.isFinite(maximum) && maximum > 0 ? maximum : 30;
+      this._state = 'idle';
+      this._session = null;
+      this._serial = 0;
+    }
+
+    static supported() {
+      return global.isSecureContext !== false &&
+        !!(global.navigator && global.navigator.mediaDevices &&
+          global.navigator.mediaDevices.getUserMedia &&
+          (global.AudioContext || global.webkitAudioContext));
+    }
+
+    supported() { return StudentRecorder.supported(); }
+    getState() { return this._state; }
+
+    _notify(name, ...args) {
+      if (typeof this.options[name] !== 'function') return;
+      try { this.options[name](...args); }
+      catch (error) {
+        if (global.console && global.console.error) {
+          global.console.error('StudentRecorder callback:', name, error);
+        }
+      }
+    }
+
+    _stateTo(state, message) {
+      this._state = state;
+      this._notify('onState', state, message || '');
+    }
+
+    _active(session) {
+      return this._session === session && !session.cancelled && !session.released;
+    }
+
+    start() {
+      if (this._session) {
+        if (this._state === 'recording') return Promise.resolve(true);
+        if (this._state === 'requesting') return this._session.startPromise || Promise.resolve(false);
+        return Promise.resolve(false);
+      }
+      if (!this.supported()) {
+        const message = global.isSecureContext === false
+          ? '录音需要安全连接，请通过 HTTPS 网页打开。'
+          : '当前浏览器无法使用麦克风录音，请用较新的 Safari 或 Chrome 打开此页面。';
+        this._stateTo('error', message);
+        this._notify('onError', message);
+        return Promise.resolve(false);
+      }
+
+      const session = {
+        id: ++this._serial, context: null, stream: null, source: null,
+        processor: null, sink: null, moduleURL: null, mode: '',
+        sampleRate: 0, count: 0, chunks: [], latest: new Float32Array(WINDOW_SIZE),
+        cancelled: false, released: false, stopping: false,
+        maxTimer: null, captureTimer: null, flushTimer: null,
+        pendingTimers: new Set(), trackListeners: [],
+        resolveCancel: null, resolveFlush: null, stopPromise: null
+      };
+      session.cancelPromise = new Promise((resolve) => { session.resolveCancel = resolve; });
+      this._session = session;
+      this._stateTo('requesting', '请允许使用麦克风；也可以取消。');
+      if (!this._active(session)) return Promise.resolve(false);
+
+      try {
+        const AudioContextClass = global.AudioContext || global.webkitAudioContext;
+        session.context = new AudioContextClass({ latencyHint: 'interactive' });
+        session.sampleRate = session.context.sampleRate;
+        session.maxSamples = Math.max(1, Math.floor(session.sampleRate * this.maxDuration));
+        // This call intentionally happens synchronously, before awaiting permission.
+        // Attach a rejection handler immediately, even if the permission is ignored.
+        const resumed = Promise.resolve(session.context.resume()).then(
+          () => true, () => false
+        );
+        const permission = Promise.resolve(global.navigator.mediaDevices.getUserMedia({
+          audio: {
+            channelCount: { ideal: 1 },
+            echoCancellation: { ideal: false },
+            noiseSuppression: { ideal: false },
+            autoGainControl: { ideal: false }
+          },
+          video: false
+        })).then((stream) => {
+          // getUserMedia has no portable abort mechanism: dispose of late grants.
+          if (!this._active(session) || session.stopping) {
+            stopTracks(stream);
+            return null;
+          }
+          session.stream = stream;
+          return stream;
+        });
+        session.startPromise = this._startSession(session, permission, resumed);
+        return session.startPromise;
+      } catch (error) {
+        this._fail(session, error);
+        return Promise.resolve(false);
+      }
+    }
+
+    async _bounded(session, promise, milliseconds, message) {
+      let timer;
+      const timeout = new Promise((_, reject) => {
+        timer = global.setTimeout(() => reject(problem(message)), milliseconds);
+        session.pendingTimers.add(timer);
+      });
+      try {
+        return await Promise.race([promise, session.cancelPromise, timeout]);
+      } finally {
+        global.clearTimeout(timer);
+        session.pendingTimers.delete(timer);
+      }
+    }
+
+    async _startSession(session, permission, resumed) {
+      try {
+        const stream = await Promise.race([permission, session.cancelPromise]);
+        if (!stream || !this._active(session)) return false;
+        const tracks = stream.getAudioTracks();
+        if (!tracks.length || tracks.every((track) => track.readyState === 'ended')) {
+          throw problem('没有可用的麦克风输入，请连接麦克风后重试。');
+        }
+        const context = session.context;
+        if (context.state !== 'running') {
+          await this._bounded(session, resumed, 2500, '音频还没有启动，请再次点击开始录音。');
+          if (!this._active(session)) return false;
+          if (context.state !== 'running') {
+            await this._bounded(session, context.resume(), 2500, '音频还没有启动，请再次点击开始录音。');
+          }
+        }
+        if (!this._active(session)) return false;
+        if (context.state !== 'running') throw problem('音频被系统暂停，请返回页面后重新开始录音。');
+
+        await this._createProcessor(session);
+        if (!this._active(session)) return false;
+        session.source = context.createMediaStreamSource(stream);
+        session.sink = context.createGain();
+        session.sink.gain.value = 0;
+        session.processor.connect(session.sink);
+        session.sink.connect(context.destination);
+        session.source.connect(session.processor);
+
+        for (const track of tracks) {
+          const ended = () => {
+            if (this._active(session) && !session.stopping) {
+              this._stop('麦克风已断开，录音已结束。');
+            }
+          };
+          track.addEventListener('ended', ended);
+          session.trackListeners.push([track, ended]);
+        }
+        context.onstatechange = () => {
+          if (this._active(session) && !session.stopping && this._state === 'recording' &&
+              context.state !== 'running') {
+            this._stop('音频被系统中断，录音已结束。');
+          }
+        };
+
+        session.maxTimer = global.setTimeout(() => {
+          if (this._active(session)) this._stop('已达到录音时长上限。');
+        }, this.maxDuration * 1000);
+        session.captureTimer = global.setTimeout(() => {
+          if (this._active(session) && !session.stopping && session.count === 0) {
+            this._fail(session, problem('没有收到麦克风数据，请检查权限或重新开始录音。'));
+          }
+        }, 3000);
+        this._stateTo('recording', '正在录音…');
+        return this._active(session) && !session.stopping;
+      } catch (error) {
+        if (this._active(session) && !session.stopping) this._fail(session, error);
+        return false;
+      }
+    }
+
+    async _createProcessor(session) {
+      const context = session.context;
+      if (context.audioWorklet && typeof global.AudioWorkletNode === 'function' &&
+          global.URL && typeof global.URL.createObjectURL === 'function') {
+        try {
+          session.moduleURL = global.URL.createObjectURL(new global.Blob([WORKLET_SOURCE], {
+            type: 'text/javascript'
+          }));
+          await this._bounded(session, context.audioWorklet.addModule(session.moduleURL), 4000,
+            '音频采集模块启动超时。');
+          if (!this._active(session)) return;
+          const processor = new global.AudioWorkletNode(context, 'student-pcm-capture', {
+            numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [1],
+            channelCount: 1, channelCountMode: 'explicit', channelInterpretation: 'speakers',
+            processorOptions: { maxSamples: session.maxSamples }
+          });
+          session.processor = processor;
+          session.mode = 'worklet';
+          processor.port.onmessage = (event) => {
+            if (!this._active(session)) return;
+            const data = event.data || {};
+            if (data.type === 'chunk') this._consume(session, data.samples);
+            if (data.type === 'flushed' || data.type === 'limit') {
+              if (session.resolveFlush) session.resolveFlush();
+              if (data.type === 'limit' && !session.stopping) this._stop('已达到录音时长上限。');
+            }
+          };
+          processor.onprocessorerror = () => {
+            if (this._active(session) && !session.stopping) {
+              this._fail(session, problem('音频采集意外中断，请重新开始录音。'));
+            }
+          };
+          return;
+        } catch (_) {
+          // A blocked Blob module or an older implementation can use the fallback.
+          if (!this._active(session)) return;
+        } finally {
+          if (session.moduleURL) {
+            global.URL.revokeObjectURL(session.moduleURL);
+            session.moduleURL = null;
+          }
+        }
+      }
+      if (typeof context.createScriptProcessor !== 'function') {
+        throw problem('此浏览器不支持录音采集，请换用较新的 Safari 或 Chrome。');
+      }
+      const processor = context.createScriptProcessor(BLOCK_SIZE, 1, 1);
+      session.processor = processor;
+      session.mode = 'script';
+      processor.onaudioprocess = (event) => {
+        // Never copy microphone input to the output, including in fallback mode.
+        for (let c = 0; c < event.outputBuffer.numberOfChannels; c++) {
+          event.outputBuffer.getChannelData(c).fill(0);
+        }
+        if (!this._active(session) || session.stopping) return;
+        this._consume(session, event.inputBuffer.getChannelData(0));
+      };
+    }
+
+    _consume(session, samples) {
+      if (!this._active(session) || !samples || !samples.length) return;
+      const remaining = session.maxSamples - session.count;
+      if (remaining <= 0) return;
+      const copy = new Float32Array(Math.min(remaining, samples.length));
+      copy.set(samples.subarray(0, copy.length));
+      session.chunks.push(copy);
+      session.count += copy.length;
+      global.clearTimeout(session.captureTimer);
+      session.captureTimer = null;
+      if (copy.length >= WINDOW_SIZE) {
+        session.latest.set(copy.subarray(copy.length - WINDOW_SIZE));
+      } else {
+        session.latest.copyWithin(0, copy.length);
+        session.latest.set(copy, WINDOW_SIZE - copy.length);
+      }
+      this._notify('onFrame', session.latest.slice(), session.sampleRate,
+        session.count / session.sampleRate);
+      if (this._active(session) && !session.stopping && session.count >= session.maxSamples) {
+        this._stop('已达到录音时长上限。');
+      }
+    }
+
+    stop() { return this._stop('录音已完成。'); }
+
+    _stop(message) {
+      const session = this._session;
+      if (!session) return Promise.resolve(null);
+      if (session.stopping) return session.stopPromise || Promise.resolve(null);
+      if (this._state === 'requesting') {
+        this.cancel();
+        return Promise.resolve(null);
+      }
+      session.stopping = true;
+      global.clearTimeout(session.maxTimer);
+      global.clearTimeout(session.captureTimer);
+      // Release the microphone immediately; queued Worklet PCM can still flush.
+      stopTracks(session.stream);
+      if (session.source) {
+        try { session.source.disconnect(); } catch (_) { /* Already disconnected. */ }
+      }
+      this._stateTo('stopping', '正在保存录音…');
+      session.stopPromise = this._finish(session, message);
+      return session.stopPromise;
+    }
+
+    async _finish(session, message) {
+      if (session.mode === 'worklet' && session.processor && session.processor.port) {
+        await new Promise((resolve) => {
+          session.resolveFlush = resolve;
+          session.flushTimer = global.setTimeout(resolve, 250);
+          try { session.processor.port.postMessage({ type: 'flush' }); }
+          catch (_) { resolve(); }
+        });
+        global.clearTimeout(session.flushTimer);
+        session.resolveFlush = null;
+      }
+      if (!this._active(session) || session.cancelled) return null;
+      const duration = session.count / session.sampleRate;
+      if (!session.count || duration < MIN_DURATION) {
+        const text = !session.count
+          ? '没有录到音频，请检查麦克风后重试。'
+          : '录音太短，请持续发声至少半秒后再停止。';
+        this._fail(session, problem(text));
+        return null;
+      }
+      const samples = new Float32Array(session.count);
+      let offset = 0;
+      for (const chunk of session.chunks) {
+        samples.set(chunk, offset);
+        offset += chunk.length;
+      }
+      const clip = { samples, sampleRate: session.sampleRate, duration };
+      this._release(session);
+      this._session = null;
+      this._stateTo('idle', message);
+      this._notify('onComplete', clip);
+      return clip;
+    }
+
+    cancel() {
+      const session = this._session;
+      if (session) {
+        session.cancelled = true;
+        session.resolveCancel(null);
+        if (session.resolveFlush) session.resolveFlush();
+        this._release(session);
+        this._session = null;
+      }
+      this._stateTo('idle', '已取消录音。');
+    }
+
+    _fail(session, error) {
+      if (!this._active(session)) return;
+      const message = this._errorMessage(error);
+      session.cancelled = true;
+      session.resolveCancel(null);
+      if (session.resolveFlush) session.resolveFlush();
+      this._release(session);
+      this._session = null;
+      this._stateTo('error', message);
+      this._notify('onError', message);
+    }
+
+    _release(session) {
+      if (session.released) return;
+      session.released = true;
+      global.clearTimeout(session.maxTimer);
+      global.clearTimeout(session.captureTimer);
+      global.clearTimeout(session.flushTimer);
+      for (const timer of session.pendingTimers) global.clearTimeout(timer);
+      session.pendingTimers.clear();
+      for (const [track, listener] of session.trackListeners) {
+        track.removeEventListener('ended', listener);
+      }
+      session.trackListeners.length = 0;
+      stopTracks(session.stream);
+      for (const node of [session.source, session.processor, session.sink]) {
+        if (node) {
+          try { node.disconnect(); } catch (_) { /* Already disconnected. */ }
+        }
+      }
+      if (session.processor) {
+        session.processor.onaudioprocess = null;
+        session.processor.onprocessorerror = null;
+        if (session.processor.port) {
+          session.processor.port.onmessage = null;
+          try { session.processor.port.close(); } catch (_) { /* Already closed. */ }
+        }
+      }
+      if (session.moduleURL) {
+        global.URL.revokeObjectURL(session.moduleURL);
+        session.moduleURL = null;
+      }
+      if (session.context) {
+        session.context.onstatechange = null;
+        try { Promise.resolve(session.context.close()).catch(() => {}); }
+        catch (_) { /* The context may already be closed by the browser. */ }
+      }
+      session.chunks.length = 0;
+      session.stream = session.source = session.processor = session.sink = null;
+    }
+
+    _errorMessage(error) {
+      if (error && error.name === 'StudentRecorderError') return error.message;
+      switch (error && error.name) {
+        case 'NotAllowedError':
+        case 'PermissionDeniedError':
+          return '没有获得麦克风权限。请在浏览器网站设置中允许麦克风，再点击开始录音。';
+        case 'NotFoundError':
+        case 'DevicesNotFoundError':
+          return '没有找到麦克风，请检查设备连接后重试。';
+        case 'NotReadableError':
+        case 'TrackStartError':
+          return '麦克风暂时无法使用，可能正被其他应用占用。请关闭相关应用后重试。';
+        case 'OverconstrainedError':
+          return '此麦克风不支持当前采集设置，请换用其他麦克风或浏览器。';
+        case 'SecurityError':
+          return '此页面被浏览器限制使用麦克风，请在 HTTPS 页面中直接打开。';
+        case 'InvalidStateError':
+        case 'AbortError':
+          return '录音启动被中断，请保持页面在前台，再点击开始录音。';
+        default:
+          return '录音未能启动，请检查麦克风权限并重新开始。';
+      }
+    }
+  }
+
+  global.StudentRecorder = StudentRecorder;
+})(window);
+
+/* StudentAudioOutput v1.0 — local PCM playback and illustrative synthesis.
+ * No microphone, networking, automatic playback, or external dependency.
+ * Materials are electronic approximations, not recordings of real objects.
+ * All partials are integer harmonics; the chosen frequency is the fundamental.
+ * Call unlock() directly inside the gesture: it creates/resumes synchronously
+ * before returning its Promise<boolean>. playTone/playClip also return that
+ * shape and may be invoked directly from a gesture themselves.
+ * onState: idle | starting | playing, with kind null | tone | clip.
+ * onFrame: an owned 8192-sample OUTPUT PCM array, actual context sample rate,
+ * absolute clip elapsed seconds (offset included), and kind, about every 50 ms.
+ * stop() cancels pending starts and fades active sound; it does NOT call onEnd.
+ * onEnd(kind) runs once for natural completion. getState() returns a snapshot.
+ */
+(function (global) {
+  'use strict';
+
+  const FRAME_SIZE = 8192;
+  const FRAME_MS = 50;
+  const START_LEAD = 0.008;
+  const STOP_FADE = 0.015;
+  const MASTER_GAIN = 0.60;
+  const SYNTH_PEAK = 0.18;
+  const CLIP_PEAK_LIMIT = 0.45;
+  const MATERIALS = {
+    pure:   { duration: 2.0, attack: 0.012, release: 0.060, partials: [[1, 1.00, 0.0]] },
+    wood:   { duration: 0.9, attack: 0.006, release: 0.055, partials: [[1, 1.00, 4.0], [2, 0.22, 5.7], [3, 0.09, 7.0], [4, 0.035, 8.2]] },
+    metal:  { duration: 2.5, attack: 0.005, release: 0.090, partials: [[1, 1.00, 2.3], [2, 0.18, 2.8], [4, 0.10, 3.4], [7, 0.045, 4.0]] },
+    string: { duration: 2.0, attack: 0.009, release: 0.080, partials: [[1, 1.00, 2.4], [2, 0.30, 3.2], [3, 0.16, 4.0], [4, 0.085, 4.8], [5, 0.04, 5.6], [6, 0.02, 6.4]] }
+  };
+
+  function finite(value) { return typeof value === 'number' && Number.isFinite(value); }
+  function clamp(value, lower, upper) { return Math.max(lower, Math.min(upper, value)); }
+  function raisedCosine(value) { return 0.5 - 0.5 * Math.cos(Math.PI * clamp(value, 0, 1)); }
+  function disconnect(node) {
+    if (!node) return;
+    try { node.disconnect(); } catch (_) { /* Already detached. */ }
+  }
+
+  function tonePCM(frequency, material, sampleRate, requestedDuration) {
+    const config = MATERIALS[material];
+    const duration = requestedDuration === undefined ? config.duration : requestedDuration;
+    const count = Math.max(2, Math.round(duration * sampleRate));
+    const actualDuration = count / sampleRate;
+    const samples = new Float32Array(count);
+    // Omit every partial at or above Nyquist, rather than allowing aliasing.
+    const partials = config.partials.filter(partial => partial[0] * frequency < sampleRate / 2);
+    const attack = Math.min(config.attack, actualDuration * 0.20);
+    const release = Math.min(config.release, actualDuration * 0.25);
+    let peak = 0;
+    for (let i = 1; i < count - 1; i++) {
+      const time = i / sampleRate;
+      const gate = raisedCosine(time / attack) * raisedCosine((actualDuration - time) / release);
+      let value = 0;
+      for (const partial of partials) {
+        value += partial[1] * Math.exp(-partial[2] * time / actualDuration) *
+          Math.sin(2 * Math.PI * frequency * partial[0] * time);
+      }
+      samples[i] = value * gate;
+      peak = Math.max(peak, Math.abs(samples[i]));
+    }
+    if (peak > 0) {
+      const scale = SYNTH_PEAK / peak;
+      for (let i = 1; i < count - 1; i++) samples[i] *= scale;
+    }
+    // The first and last samples remain zero. Normalization controls digital
+    // peaks only; this is not a calibrated or equal-perceived-loudness signal.
+    return samples;
+  }
+
+  function clipPCM(samples) {
+    const copy = new Float32Array(samples.length);
+    let peak = 0;
+    for (let i = 0; i < copy.length; i++) {
+      const value = Number(samples[i]);
+      if (Number.isFinite(value)) peak = Math.max(peak, Math.abs(value));
+    }
+    // Preserve the recording and never amplify a quiet clip. Attenuate only
+    // when its peak exceeds the conservative playback ceiling.
+    const scale = peak > CLIP_PEAK_LIMIT ? CLIP_PEAK_LIMIT / peak : 1;
+    for (let i = 0; i < copy.length; i++) {
+      const value = Number(samples[i]);
+      copy[i] = Number.isFinite(value) ? value * scale : 0;
+    }
+    return copy;
+  }
+
+  class StudentAudioOutput {
+    constructor(options = {}) {
+      this.options = options;
+      this._context = null;
+      this._resumePromise = null;
+      this._resumeContext = null;
+      this._generation = 0;
+      this._session = null;
+      this._state = 'idle';
+      this._kind = null;
+      this._elapsed = 0;
+      this._meta = { duration: 0, frequency: null, material: null, sampleRate: 0 };
+    }
+
+    static supported() { return !!(global.AudioContext || global.webkitAudioContext); }
+
+    _notify(name, ...args) {
+      if (typeof this.options[name] !== 'function') return;
+      try { this.options[name](...args); }
+      catch (error) {
+        if (global.console && global.console.error) global.console.error('StudentAudioOutput callback:', name, error);
+      }
+    }
+
+    _stateTo(state, kind) {
+      this._state = state;
+      this._kind = kind;
+      this._notify('onState', state, kind);
+    }
+
+    unlock() {
+      // This method intentionally is not async: constructor and resume() must
+      // run in the current gesture, before any Promise continuation.
+      let context;
+      try {
+        if (!this._context || this._context.state === 'closed') {
+          const AudioContextClass = global.AudioContext || global.webkitAudioContext;
+          if (!AudioContextClass) throw new Error('unsupported');
+          this._context = new AudioContextClass();
+          this._resumePromise = null;
+          this._resumeContext = null;
+        }
+        context = this._context;
+        if (context.state === 'running') return Promise.resolve(true);
+        if (this._resumePromise && this._resumeContext === context) return this._resumePromise;
+        const resumeResult = context.resume();
+        let pending;
+        pending = Promise.resolve(resumeResult).then(() => {
+          if (this._resumePromise === pending) {
+            this._resumePromise = null;
+            this._resumeContext = null;
+          }
+          if (context !== this._context) return false;
+          const ready = context.state === 'running';
+          if (!ready) this._notify('onError', '声音尚未开启，请再次点击播放。');
+          return ready;
+        }, () => {
+          if (this._resumePromise === pending) {
+            this._resumePromise = null;
+            this._resumeContext = null;
+          }
+          if (context === this._context) this._notify('onError', '无法开启声音，请再次点击播放或检查浏览器声音设置。');
+          return false;
+        });
+        this._resumePromise = pending;
+        this._resumeContext = context;
+        return pending;
+      } catch (_) {
+        this._notify('onError', StudentAudioOutput.supported()
+          ? '无法创建声音环境，请重新打开页面后再试。'
+          : '当前浏览器不支持发声，请用较新的 Safari 或 Chrome 打开。');
+        return Promise.resolve(false);
+      }
+    }
+
+    getState() {
+      const session = this._session;
+      const elapsed = session
+        ? clamp(session.offset + Math.max(0, session.context.currentTime - session.startAt), 0, session.duration)
+        : this._elapsed;
+      return {
+        state: this._state,
+        kind: this._kind,
+        elapsed,
+        duration: this._meta.duration,
+        frequency: this._meta.frequency,
+        material: this._meta.material,
+        sampleRate: this._meta.sampleRate,
+        contextState: this._context ? this._context.state : 'uninitialized',
+        unlocked: !!this._context && this._context.state === 'running'
+      };
+    }
+
+    _dispose(session) {
+      if (!session || session.disposed) return;
+      session.disposed = true;
+      if (session.timer !== null) global.clearInterval(session.timer);
+      if (session.cleanupTimer !== null) global.clearTimeout(session.cleanupTimer);
+      session.timer = session.cleanupTimer = null;
+      session.source.onended = null;
+      disconnect(session.source);
+      disconnect(session.gain);
+      disconnect(session.analyser);
+    }
+
+    _cancel(session) {
+      if (!session || session.disposed || session.cancelled) return;
+      session.cancelled = true;
+      if (session.timer !== null) global.clearInterval(session.timer);
+      session.timer = null;
+      const now = session.context.currentTime;
+      try {
+        const gain = session.gain.gain;
+        if (now <= session.startAt) {
+          gain.cancelScheduledValues(now);
+          gain.setValueAtTime(0, now);
+          session.source.stop(now);
+          if (!session.disposed) session.cleanupTimer = global.setTimeout(() => this._dispose(session), 90);
+          return;
+        }
+        // cancelAndHoldAtTime retains the actual envelope value. The fallback
+        // explicitly computes that value so an early stop cannot jump louder.
+        if (typeof gain.cancelAndHoldAtTime === 'function') gain.cancelAndHoldAtTime(now);
+        else {
+          gain.cancelScheduledValues(now);
+          let value = MASTER_GAIN;
+          if (now <= session.startAt) value = 0;
+          else if (now < session.attackEnd) value *= (now - session.startAt) / (session.attackEnd - session.startAt);
+          else if (now > session.releaseStart) value *= Math.max(0, (session.endAt - now) / (session.endAt - session.releaseStart));
+          gain.setValueAtTime(value, now);
+        }
+        gain.linearRampToValueAtTime(0, now + STOP_FADE);
+        session.source.stop(now + STOP_FADE + 0.003);
+      } catch (_) {
+        try { session.source.stop(); } catch (_) { /* Already ended. */ }
+      }
+      // onended is normally immediate after the fade. This bounded fallback
+      // also releases nodes when an interrupted context cannot dispatch it.
+      if (!session.disposed) session.cleanupTimer = global.setTimeout(() => this._dispose(session), 90);
+    }
+
+    stop() {
+      this._generation++;
+      const session = this._session;
+      if (session) this._elapsed = this.getState().elapsed;
+      this._session = null;
+      this._cancel(session);
+      this._stateTo('idle', null);
+    }
+
+    _finish(session) {
+      if (!session || session.disposed) return;
+      const current = this._session === session && this._generation === session.generation && !session.cancelled;
+      this._dispose(session);
+      if (!current) return;
+      this._session = null;
+      this._elapsed = session.duration;
+      this._stateTo('idle', null);
+      this._notify('onEnd', session.kind);
+    }
+
+    _frame(session) {
+      if (this._session !== session || session.cancelled || session.disposed || this._generation !== session.generation) return;
+      const now = session.context.currentTime;
+      if (now < session.startAt) return;
+      if (now >= session.endAt + 0.02) {
+        // Defensive completion if the event queue delayed source.onended.
+        this._finish(session);
+        return;
+      }
+      try {
+        const samples = new Float32Array(FRAME_SIZE);
+        if (typeof session.analyser.getFloatTimeDomainData === 'function') {
+          session.analyser.getFloatTimeDomainData(samples);
+        } else {
+          const bytes = new Uint8Array(FRAME_SIZE);
+          session.analyser.getByteTimeDomainData(bytes);
+          for (let i = 0; i < FRAME_SIZE; i++) samples[i] = (bytes[i] - 128) / 128;
+        }
+        this._elapsed = clamp(session.offset + Math.max(0, now - session.startAt), 0, session.duration);
+        this._notify('onFrame', samples, session.context.sampleRate, this._elapsed, session.kind);
+      } catch (_) {
+        const generation = this._generation;
+        this.stop();
+        if (this._generation === generation + 1) this._notify('onError', '无法读取播放波形，请重新点击播放。');
+      }
+    }
+
+    _startBuffer(context, buffer, kind, offset, generation) {
+      if (generation !== this._generation || context !== this._context) return false;
+      const duration = buffer.length / buffer.sampleRate;
+      const remaining = duration - offset;
+      if (!(remaining > 0)) return false;
+      let source, gain, analyser;
+      try {
+        source = context.createBufferSource();
+        source.buffer = buffer;
+        gain = context.createGain();
+        analyser = context.createAnalyser();
+        analyser.fftSize = FRAME_SIZE;
+        analyser.smoothingTimeConstant = 0;
+        // This analyser sees the actual gain-controlled mono OUTPUT, not the
+        // input buffer or an invented display oscillator.
+        source.connect(gain);
+        gain.connect(analyser);
+        analyser.connect(context.destination);
+        const startAt = context.currentTime + START_LEAD;
+        const endAt = startAt + remaining;
+        const attackEnd = startAt + Math.min(0.010, remaining * 0.25);
+        const releaseStart = endAt - Math.min(0.018, remaining * 0.25);
+        gain.gain.setValueAtTime(0, startAt);
+        gain.gain.linearRampToValueAtTime(MASTER_GAIN, attackEnd);
+        gain.gain.setValueAtTime(MASTER_GAIN, releaseStart);
+        gain.gain.linearRampToValueAtTime(0, endAt);
+        const session = {
+          context, source, gain, analyser, generation, kind, offset, duration,
+          startAt, endAt, attackEnd, releaseStart,
+          timer: null, cleanupTimer: null, disposed: false, cancelled: false
+        };
+        source.onended = () => this._finish(session);
+        this._session = session;
+        this._elapsed = offset;
+        this._meta.duration = duration;
+        this._meta.sampleRate = context.sampleRate;
+        source.start(startAt, offset);
+        this._stateTo('playing', kind);
+        // A consumer may stop from its onState callback.
+        if (this._session === session && generation === this._generation) {
+          session.timer = global.setInterval(() => this._frame(session), FRAME_MS);
+        }
+        return this._session === session && generation === this._generation;
+      } catch (error) {
+        if (source) {
+          source.onended = null;
+          try { source.stop(); } catch (_) { /* Not started. */ }
+        }
+        disconnect(source); disconnect(gain); disconnect(analyser);
+        this._session = null;
+        throw error;
+      }
+    }
+
+    _play(kind, meta, createBuffer, offset) {
+      const generation = ++this._generation;
+      const previous = this._session;
+      this._session = null;
+      this._cancel(previous);
+      this._elapsed = offset;
+      this._meta = meta;
+      this._stateTo('starting', kind);
+      if (generation !== this._generation) return Promise.resolve(false);
+      const ready = this.unlock();
+      const context = this._context;
+      return ready.then(ok => {
+        if (generation !== this._generation) return false;
+        if (!ok || !context || context !== this._context) {
+          this._stateTo('idle', null);
+          return false;
+        }
+        try {
+          const buffer = createBuffer(context);
+          if (generation !== this._generation) return false;
+          const started = this._startBuffer(context, buffer, kind, offset, generation);
+          if (!started && generation === this._generation) this._stateTo('idle', null);
+          return started;
+        } catch (error) {
+          if (generation !== this._generation) return false;
+          this._stateTo('idle', null);
+          this._notify('onError', error && error.studentMessage
+            ? error.studentMessage : '这段声音暂时无法播放，请重新点击播放。');
+          return false;
+        }
+      });
+    }
+
+    _invalid(message) {
+      this._notify('onError', message);
+      return Promise.resolve(false);
+    }
+
+    playTone(frequency, material, options = {}) {
+      if (!finite(frequency) || frequency <= 0) return this._invalid('请选择一个有效的发声频率。');
+      if (!Object.prototype.hasOwnProperty.call(MATERIALS, material)) return this._invalid('请选择纯音、木片、金属或琴弦音色。');
+      const duration = options.duration === undefined ? MATERIALS[material].duration : Number(options.duration);
+      if (!finite(duration) || duration < 0.05 || duration > 30) return this._invalid('发声时长应在0.05～30秒之间。');
+      return this._play('tone', { duration, frequency, material, sampleRate: 0 }, context => {
+        if (frequency >= context.sampleRate / 2) {
+          const error = new Error('nyquist');
+          error.studentMessage = '这个频率超出当前设备的发声范围，请调低频率。';
+          throw error;
+        }
+        const samples = tonePCM(frequency, material, context.sampleRate, duration);
+        const buffer = context.createBuffer(1, samples.length, context.sampleRate);
+        buffer.getChannelData(0).set(samples);
+        return buffer;
+      }, 0);
+    }
+
+    playClip(clip, offset = 0) {
+      if (!clip || !clip.samples || !Number.isInteger(clip.samples.length) || clip.samples.length < 2) {
+        return this._invalid('还没有可播放的录音，请先录一段声音。');
+      }
+      const sampleRate = Number(clip.sampleRate);
+      if (!finite(sampleRate) || sampleRate < 8000 || sampleRate > 192000) return this._invalid('这段录音的采样率无效，无法播放。');
+      // The PCM length is authoritative; rounded UI duration cannot trim audio.
+      const duration = clip.samples.length / sampleRate;
+      offset = Number(offset);
+      if (!finite(offset)) return this._invalid('播放位置无效，请重新选择录音位置。');
+      offset = Math.max(0, offset);
+      if (offset >= duration) return this._invalid('已到录音结尾，请从前面的位置播放。');
+      // Snapshot immediately, before resume resolves, so a subsequent recording
+      // cannot change the pending playback through a shared input array.
+      let samples;
+      try { samples = clipPCM(clip.samples); }
+      catch (_) { return this._invalid('无法读取这段录音，请重新录制。'); }
+      return this._play('clip', { duration, frequency: null, material: null, sampleRate: 0 }, context => {
+        const buffer = context.createBuffer(1, samples.length, sampleRate);
+        buffer.getChannelData(0).set(samples);
+        return buffer;
+      }, offset);
+    }
+  }
+
+  global.StudentAudioOutput = StudentAudioOutput;
+}(typeof window !== 'undefined' ? window : globalThis));
+
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const MIN_F = 50, MAX_F = 1600, MAX_SECONDS = 30;
+  const palette = [[149,116,247],[85,153,235],[54,198,215],[102,207,155],[227,207,98],[240,141,112]];
+  const clamp = (n,lo,hi) => Math.max(lo,Math.min(hi,n));
+  const positionOf = f => clamp(Math.log2(f / MIN_F) / 5,0,1);
+  const frequencyAt = p => MIN_F * Math.pow(32,clamp(p,0,1));
+  const timeText = n => Math.floor(n / 60) + ':' + String(Math.floor(n % 60)).padStart(2,'0');
+  function colorOf(f,alpha=1) {
+    if (!(f >= MIN_F && f <= MAX_F)) return 'rgba(139,154,174,' + alpha + ')';
+    const value = positionOf(f) * 5, left = Math.min(4,Math.floor(value)), mix = value-left;
+    return 'rgba(' + palette[left].map((n,i) => Math.round(n + (palette[left+1][i]-n)*mix)).join(',') + ',' + alpha + ')';
+  }
+
+  const view = {wave:false,hz:false,gain:4,frequency:null,confidence:0,reason:'idle',source:'idle',
+    samples:new Float32Array(8192),sampleRate:48000,cursor:0,target:440,material:'pure'};
+  let clip = null, history = [], pendingHistory = [], currentRecState = 'idle';
+  let activeOutput = null, flowToken = 0, pendingTone = false, wavURL = null;
+  const tracker = StudentPitchDSP.createTracker();
+  let drawNeeded = true, historyNeeded = true, lastPaint = 0;
+  let scopeSize = {w:0,h:0}, historySize = {w:0,h:0};
+  const scopeContext = $('scope').getContext('2d');
+  const historyContext = $('historyCanvas').getContext('2d');
+
+  const recorder = new StudentRecorder({
+    maxDuration: MAX_SECONDS,
+    onState(state,message) {
+      currentRecState = state;
+      if (state === 'requesting') {
+        view.source = 'requesting';
+        hint('请允许麦克风访问；等待时可点击“取消”。');
+      } else if (state === 'recording') {
+        tracker.reset(); pendingHistory = [];
+        view.source = 'microphone'; view.frequency = null; view.reason = 'quiet';
+        view.samples = new Float32Array(8192); view.cursor = 0;
+        historyNeeded = true;
+        hint('正在录音 · 轻轻哼一个持续的单音。');
+      } else if (state === 'stopping') {
+        hint(message);
+      } else if (state === 'idle' && message === '已取消录音。') {
+        restoreClip(); hint(clip ? '已取消，上一段录音还在。' : '已取消录音，可以重新开始。');
+      }
+      updateView();
+    },
+    onFrame(samples,sampleRate,elapsed) {
+      const result = tracker.update(StudentPitchDSP.detect(samples,sampleRate),elapsed*1000);
+      view.source = 'microphone';
+      view.samples = samples; view.sampleRate = sampleRate; view.cursor = elapsed;
+      setDetection(result);
+      pendingHistory.push({time:elapsed,frequency:result.frequency,confidence:result.confidence,reason:result.reason});
+      historyNeeded = true;
+      updateView();
+    },
+    onComplete(recorded) {
+      revokeWav();
+      clip = recorded; history = pendingHistory.slice();
+      pendingHistory = [];
+      view.cursor = clip.duration;
+      freezeAt(view.cursor);
+      hint('已录好 · 拖动声音足迹回看，或点击“回听”。');
+      historyNeeded = true;
+      updateView();
+    },
+    onError(message) {
+      restoreClip();
+      hint(message,true); updateView();
+    }
+  });
+
+  const output = new StudentAudioOutput({
+    onState(state,kind) {
+      activeOutput = state === 'idle' ? null : kind;
+      updateControls();
+    },
+    onFrame(samples,sampleRate,elapsed,kind) {
+      view.samples = samples; view.sampleRate = sampleRate;
+      if (kind === 'tone') {
+        view.source = 'tone'; view.frequency = view.target; view.reason = 'known';
+      } else if (kind === 'clip' && clip) {
+        view.source = 'replay'; view.cursor = clamp(elapsed,0,clip.duration);
+        readClipWindow(view.cursor);
+        setDetection(historyAt(view.cursor)); historyNeeded = true;
+      }
+      updateView();
+    },
+    onEnd(kind) {
+      activeOutput = null; pendingTone = false;
+      if (kind === 'clip' && clip) {
+        freezeAt(clip.duration);
+        hint('回听结束 · 可以拖动声音足迹，回看一个片段。');
+      } else {
+        restoreClip();
+        hint(clip ? '试听结束，当前录音仍然保留。' : '试听结束 · 也可以录下自己的声音。');
+      }
+      updateView();
+    },
+    onError(message) {
+      pendingTone = false; activeOutput = null;
+      restoreClip(); hint(message,true); updateView();
+    }
+  });
+
+  function hint(text,error=false) {
+    $('recorderHint').textContent = text;
+    $('recorderHint').classList.toggle('error',error);
+  }
+  function setDetection(result) {
+    view.frequency = result && Number.isFinite(result.frequency) ? result.frequency : null;
+    view.confidence = result ? result.confidence || 0 : 0;
+    view.reason = result ? result.reason || 'unknown' : 'unknown';
+  }
+  function historyAt(time) {
+    if (!history.length || time < history[0].time-.045) return {frequency:null,confidence:0,reason:'short-frame'};
+    let lo=0,hi=history.length-1;
+    while (lo<hi) {const mid=Math.ceil((lo+hi)/2);if(history[mid].time<=time)lo=mid;else hi=mid-1;}
+    return history[lo];
+  }
+  function freezeAt(time) {
+    if (!clip) return;
+    view.cursor = clamp(time,0,clip.duration); view.source = 'frozen';
+    setDetection(historyAt(view.cursor));
+    readClipWindow(view.cursor);
+    historyNeeded = true; drawNeeded = true;
+  }
+  function readClipWindow(time) {
+    const end = clamp(Math.round(time * clip.sampleRate),0,clip.samples.length);
+    const begin = Math.max(0,end-8192);
+    view.samples = new Float32Array(8192);
+    view.samples.set(clip.samples.subarray(begin,end),8192-(end-begin));
+    view.sampleRate = clip.sampleRate;
+  }
+  function restoreClip() {
+    if (clip) freezeAt(clamp(view.cursor,0,clip.duration));
+    else {
+      view.source='idle'; view.frequency=null; view.reason='idle'; view.cursor=0;
+      view.samples = new Float32Array(8192);
+    }
+    historyNeeded = true; drawNeeded = true;
+  }
+  function isRecording() { return currentRecState === 'recording' || currentRecState === 'stopping'; }
+  function isBusy() { return isRecording() || currentRecState === 'requesting'; }
+  function updateControls() {
+    const recording = currentRecState === 'recording';
+    const requesting = currentRecState === 'requesting';
+    const stopping = currentRecState === 'stopping';
+    $('recordText').textContent = recording ? '停止录音' : requesting ? '取消' : stopping ? '保存中…' : '开始录音';
+    $('record').classList.toggle('is-recording',recording);
+    $('record').classList.toggle('is-requesting',requesting);
+    $('record').disabled = stopping;
+    $('replay').disabled = !clip || isBusy() || pendingTone;
+    $('download').disabled = !clip || isBusy();
+    $('clear').disabled = !clip || isBusy();
+    $('replay').classList.toggle('is-playing',activeOutput === 'clip');
+    $('replayText').textContent = activeOutput === 'clip' ? '暂停' : '回听';
+    $('replayIcon').innerHTML = activeOutput === 'clip' ? '<path d="M8 5v14M16 5v14"/>' : '<path d="m9 5 11 7-11 7Z"/>';
+    $('playTone').classList.toggle('is-playing',activeOutput === 'tone' || pendingTone);
+    $('toneText').textContent = pendingTone ? '准备发声…' : activeOutput === 'tone' ? '停止发声' : '试听电子音';
+    $('toneIcon').innerHTML = activeOutput === 'tone' || pendingTone ? '<path d="M7 7h10v10H7Z"/>' : '<path d="m8 5 11 7-11 7Z"/>';
+    const measured = ['microphone','frozen','replay'].includes(view.source);
+    $('usePitch').disabled = !view.frequency || !measured || stopping || pendingTone;
+    $('scrub').disabled = !clip || isBusy();
+    $('scrub').max = clip && !isBusy() ? clip.duration : MAX_SECONDS;
+    $('scrub').value = Math.min(Number($('scrub').max),view.cursor);
+    $('scrub').setAttribute('aria-valuetext',timeText(view.cursor));
+  }
+  function updateView() {
+    const sourceText = {idle:'等待录音',requesting:'等待麦克风授权',microphone:'麦克风 · 正在录音',frozen:'录音回看',replay:'录音回听',tone:'电子合成 · 设定基频'};
+    $('sourceTag').textContent = sourceText[view.source] || '等待声音';
+    $('sourceDot').classList.toggle('recording',currentRecState==='recording');
+    $('sourceDot').classList.toggle('active',view.source==='tone'||view.source==='replay');
+    const f = view.frequency;
+    $('detectedFrequency').textContent = f ? Math.round(f) : '—';
+    let status = '听见声音，看见音高';
+    if (view.source==='requesting') status = '请允许使用麦克风';
+    else if (view.source==='tone') status = '电子音 · '+({pure:'纯音',wood:'木片',metal:'金属',string:'琴弦'}[view.material]);
+    else if (view.source!=='idle') {
+      if (f) status = view.hz ? '估计基频' : '音高位置';
+      else if (view.reason==='quiet') status = view.source==='microphone' ? '声音较轻，靠近一点' : '这个片段声音较轻';
+      else status = '暂未识别稳定音高';
+    }
+    $('pitchStatus').textContent=status;
+    $('pitchMarker').hidden = !f;
+    if(f) $('pitchMarker').style.left=(positionOf(f)*100)+'%';
+    $('bandHint').textContent = view.hz ? '50–1600 Hz · 音高色带' : '音高色带';
+    const total = isRecording() ? MAX_SECONDS : clip ? clip.duration : MAX_SECONDS;
+    $('timeLabel').textContent = timeText(view.cursor) + ' / ' + timeText(total);
+    $('historyCursor').hidden = !(clip || isRecording());
+    $('historyCursor').style.left = Math.min(99.7,view.cursor/total*100)+'%';
+    updateControls(); drawNeeded=true;
+  }
+  function toggleDisplay(type) {
+    view[type] = !view[type];
+    $('toggleWave').setAttribute('aria-pressed',String(view.wave));
+    $('toggleHz').setAttribute('aria-pressed',String(view.hz));
+    $('monitor').classList.toggle('has-wave',view.wave);
+    $('monitor').classList.toggle('has-hz',view.hz);
+    $('frequencyReadout').hidden=!view.hz;
+    $('scopeScale').hidden=!view.wave;
+    $('waveGain').hidden=!view.wave;
+    updateView();
+  }
+  function cancelOutput() {
+    ++flowToken; pendingTone=false; output.stop(); activeOutput=null;
+  }
+  function setTarget(value,announce=false) {
+    const numeric=Number(value);
+    if (!Number.isFinite(numeric)) return;
+    view.target=Math.round(clamp(numeric,MIN_F,MAX_F));
+    $('targetFrequency').value=view.target;
+    $('frequencySlider').value=Math.round(positionOf(view.target)*1000);
+    $('frequencySlider').setAttribute('aria-valuetext',view.target+' Hz');
+    document.documentElement.style.setProperty('--target-color',colorOf(view.target));
+    $('frequencyDown').disabled=view.target<=MIN_F;
+    $('frequencyUp').disabled=view.target>=MAX_F;
+    if(activeOutput==='tone'||pendingTone) {cancelOutput();restoreClip();updateView();}
+    if (announce) hint('已选 '+view.target+' Hz · 点击“试听电子音”。');
+  }
+
+  $('record').addEventListener('click',() => {
+    if(currentRecState==='requesting') {++flowToken;recorder.cancel();return;}
+    if(currentRecState==='recording') {recorder.stop();return;}
+    if(currentRecState==='stopping') return;
+    cancelOutput();
+    // Keep this synchronous to the tap: browsers require a user gesture.
+    recorder.start();
+  });
+  $('toggleWave').addEventListener('click',()=>toggleDisplay('wave'));
+  $('toggleHz').addEventListener('click',()=>toggleDisplay('hz'));
+  $('waveGain').addEventListener('click',()=>{
+    view.gain=({1:4,4:16,16:1})[view.gain];
+    $('waveGain').textContent='显示 ×'+view.gain; drawNeeded=true;
+  });
+  $('scrub').addEventListener('input',()=>{
+    if(!clip||isBusy())return;
+    const selected=Number($('scrub').value);
+    cancelOutput();freezeAt(selected);
+    hint('回看录音 · 颜色与波形对应所选时刻。');updateView();
+  });
+  $('replay').addEventListener('click',async()=>{
+    if(!clip||isBusy())return;
+    if(activeOutput==='clip') {
+      cancelOutput();freezeAt(view.cursor);hint('已暂停回听，可以继续播放或拖动回看。');updateView();return;
+    }
+    cancelOutput();
+    const ticket=++flowToken;
+    const ready=output.unlock();
+    const offset=view.cursor>=clip.duration-.1 ? 0 : view.cursor;
+    if(!await ready||ticket!==flowToken)return;
+    view.cursor=offset;view.source='replay';
+    setDetection(historyAt(offset));
+    const started=await output.playClip(clip,offset);
+    if(ticket===flowToken&&started){hint('正在回听 · 可点击“暂停”或拖动声音足迹。');updateView();}
+  });
+  $('playTone').addEventListener('click',async()=>{
+    if(activeOutput==='tone'||pendingTone){cancelOutput();restoreClip();hint('已停止发声。');updateView();return;}
+    setTarget($('targetFrequency').value);
+    cancelOutput();
+    const ticket=++flowToken;
+    pendingTone=true;updateControls();
+    const ready=output.unlock(); // Start the output context within this exact tap.
+    if(currentRecState==='requesting')recorder.cancel();
+    else if(isRecording())await recorder.stop();
+    if(!await ready||ticket!==flowToken){if(ticket===flowToken){pendingTone=false;updateControls();}return;}
+    pendingTone=false;
+    view.source='tone';view.frequency=view.target;view.reason='known';
+    view.samples=new Float32Array(8192);
+    hint('正在试听电子合成音 · 麦克风未在录音。');
+    const started=await output.playTone(view.target,view.material,view.material==='pure'?{duration:6}:{});
+    if(ticket!==flowToken)return;
+    if(!started)restoreClip();
+    updateView();
+  });
+  $('frequencySlider').addEventListener('input',()=>setTarget(frequencyAt(Number($('frequencySlider').value)/1000)));
+  $('targetFrequency').addEventListener('change',()=>setTarget($('targetFrequency').value || view.target));
+  $('targetFrequency').addEventListener('keydown',event=>{if(event.key==='Enter'){$('targetFrequency').blur();setTarget($('targetFrequency').value||view.target);}});
+  $('frequencyDown').addEventListener('click',()=>setTarget(view.target-10));
+  $('frequencyUp').addEventListener('click',()=>setTarget(view.target+10));
+  $('usePitch').addEventListener('click',()=>{if(view.frequency)setTarget(view.frequency,true);});
+  document.querySelectorAll('[data-material]').forEach(button=>button.addEventListener('click',()=>{
+    if(activeOutput==='tone'||pendingTone){cancelOutput();restoreClip();}
+    view.material=button.dataset.material;
+    document.querySelectorAll('[data-material]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+    updateView();
+  }));
+  $('clear').addEventListener('click',()=>{
+    if(isBusy())return;
+    cancelOutput();revokeWav();clip=null;history=[];pendingHistory=[];tracker.reset();
+    restoreClip();hint('已清空录音，可以重新开始。');updateView();
+  });
+
+  function revokeWav(){if(wavURL){URL.revokeObjectURL(wavURL);wavURL=null;}}
+  function encodeWav(recorded) {
+    const count=recorded.samples.length,buffer=new ArrayBuffer(44+count*2),data=new DataView(buffer);
+    function word(offset,value){for(let i=0;i<value.length;i++)data.setUint8(offset+i,value.charCodeAt(i));}
+    word(0,'RIFF');data.setUint32(4,36+count*2,true);word(8,'WAVE');word(12,'fmt ');
+    data.setUint32(16,16,true);data.setUint16(20,1,true);data.setUint16(22,1,true);
+    data.setUint32(24,recorded.sampleRate,true);data.setUint32(28,recorded.sampleRate*2,true);
+    data.setUint16(32,2,true);data.setUint16(34,16,true);word(36,'data');data.setUint32(40,count*2,true);
+    for(let i=0;i<count;i++){const value=clamp(recorded.samples[i],-1,1);data.setInt16(44+i*2,value<0?Math.round(value*32768):Math.round(value*32767),true);}
+    return new Blob([buffer],{type:'audio/wav'});
+  }
+  $('download').addEventListener('click',()=>{
+    if(!clip||isBusy())return;
+    if(!wavURL)wavURL=URL.createObjectURL(encodeWav(clip));
+    const link=document.createElement('a');link.href=wavURL;
+    link.download='声音足迹_'+new Date().toISOString().replace(/[:.]/g,'-').slice(0,19)+'.wav';
+    document.body.appendChild(link);link.click();link.remove();
+    hint('已生成 WAV 文件，请在浏览器下载或分享菜单中保存。');
+  });
+
+  const dialog=$('helpDialog');
+  $('help').addEventListener('click',()=>dialog.showModal());
+  $('closeHelp').addEventListener('click',()=>dialog.close());
+  $('understood').addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('click',event=>{if(event.target===dialog){const rect=dialog.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();}});
+  if(!document.fullscreenEnabled)$('fullscreen').hidden=true;
+  $('fullscreen').addEventListener('click',async()=>{
+    try {if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}
+    catch(_){hint('当前设备未开启网页全屏；可以直接使用横屏或竖屏。');}
+  });
+  document.addEventListener('fullscreenchange',()=>{$('fullscreen').setAttribute('aria-label',document.fullscreenElement?'退出全屏':'全屏显示');});
+  function backgroundStop() {
+    cancelOutput();
+    if(currentRecState==='requesting')recorder.cancel();
+    else if(isRecording())recorder.stop();
+    else restoreClip();
+    updateView();
+  }
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)backgroundStop();});
+  window.addEventListener('pagehide',()=>{backgroundStop();revokeWav();});
+
+  function fitCanvas(canvas) {
+    const rect=canvas.getBoundingClientRect(),ratio=Math.min(2,window.devicePixelRatio||1);
+    const w=Math.max(1,rect.width),h=Math.max(1,rect.height);
+    canvas.width=Math.round(w*ratio);canvas.height=Math.round(h*ratio);
+    const context=canvas.getContext('2d');context.setTransform(ratio,0,0,ratio,0,0);
+    return {w,h};
+  }
+  function resize(){scopeSize=fitCanvas($('scope'));historySize=fitCanvas($('historyCanvas'));drawNeeded=true;historyNeeded=true;}
+  new ResizeObserver(resize).observe($('visualArea'));
+  new ResizeObserver(()=>{historySize=fitCanvas($('historyCanvas'));historyNeeded=true;}).observe($('historyTrack'));
+  window.addEventListener('resize',resize);
+
+  function drawScope(now) {
+    const ctx=scopeContext,{w,h}=scopeSize;
+    ctx.clearRect(0,0,w,h);
+    if(view.wave){drawWave(ctx,w,h);return;}
+    const f=view.frequency,cx=w/2,cy=h*.43;
+    const radius=Math.max(9,Math.min(w*.16,h*.34));
+    const live=(view.source==='microphone'||view.source==='tone'||view.source==='replay')&&f;
+    const pulse=live&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches ? Math.sin(now/450)*.035 : 0;
+    const r=radius*(1+pulse);
+    const glow=ctx.createRadialGradient(cx,cy,r*.3,cx,cy,r*1.85);
+    glow.addColorStop(0,colorOf(f,f?.19:.04));glow.addColorStop(1,colorOf(f,0));
+    ctx.fillStyle=glow;ctx.fillRect(cx-r*2,cy-r*2,r*4,r*4);
+    ctx.strokeStyle=colorOf(f,f?.18:.12);ctx.lineWidth=1;
+    ctx.beginPath();ctx.arc(cx,cy,r*1.35,0,Math.PI*2);ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,r*1.12,0,Math.PI*2);ctx.stroke();
+    const orb=ctx.createRadialGradient(cx-r*.3,cy-r*.35,1,cx,cy,r);
+    orb.addColorStop(0,colorOf(f,f?.32:.12));orb.addColorStop(1,colorOf(f,f?.13:.04));
+    ctx.fillStyle=orb;ctx.strokeStyle=colorOf(f,f?.7:.26);ctx.lineWidth=1.3;
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();ctx.stroke();
+    if(!view.hz){
+      ctx.strokeStyle=colorOf(f,f?.95:.55);ctx.lineWidth=Math.max(1.8,r/23);ctx.lineCap='round';
+      for(let i=0;i<5;i++){const height=r*[.22,.48,.70,.43,.20][i];const x=cx+(i-2)*r*.23;ctx.beginPath();ctx.moveTo(x,cy-height/2);ctx.lineTo(x,cy+height/2);ctx.stroke();}
+    }
+  }
+  function drawWave(ctx,w,h) {
+    const top=Math.min(45,h*.3),bottom=Math.max(top+10,h-7),mid=(top+bottom)/2,amplitude=(bottom-top)*.44;
+    ctx.lineWidth=1;ctx.strokeStyle='#ffffff09';
+    for(let i=0;i<=10;i++){const x=i*w/10;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();}
+    for(let i=0;i<=4;i++){const y=top+(bottom-top)*i/4;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    ctx.strokeStyle='#738da43a';ctx.beginPath();ctx.moveTo(0,mid);ctx.lineTo(w,mid);ctx.stroke();
+    const samples=view.samples,count=Math.min(samples.length,Math.round(view.sampleRate*.02));
+    let start=Math.max(0,samples.length-count),search=Math.max(0,start-Math.round(view.sampleRate/MIN_F));
+    // A rising zero crossing stabilizes the trace without changing the 20 ms scale.
+    for(let i=start;i>search;i--){if(samples[i-1]<=0&&samples[i]>0){start=i;break;}}
+    ctx.lineWidth=1.8;ctx.lineJoin='round';ctx.strokeStyle=colorOf(view.frequency,.95);ctx.beginPath();
+    let clipped=false;
+    const points=Math.max(2,Math.ceil(w*1.7));
+    for(let j=0;j<points;j++){
+      const at=start+j/(points-1)*(count-1),index=Math.floor(at),mix=at-index;
+      const sample=((samples[index]||0)*(1-mix)+(samples[index+1]||0)*mix)*view.gain;
+      if(Math.abs(sample)>1)clipped=true;
+      const x=j/(points-1)*w,y=mid-clamp(sample,-1,1)*amplitude;
+      if(j===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+    if(clipped){ctx.font='10px system-ui,sans-serif';ctx.textAlign='right';ctx.fillStyle='#edc988';ctx.fillText('显示截顶 · 可调低倍率',w-3,bottom-1);}
+  }
+  function drawHistory() {
+    const ctx=historyContext,{w,h}=historySize;
+    ctx.clearRect(0,0,w,h);
+    const items=isRecording()?pendingHistory:history,total=isRecording()?MAX_SECONDS:(clip?clip.duration:MAX_SECONDS);
+    if(items.length){ctx.fillStyle='#c3cdd4';ctx.fillRect(0,0,items[0].time/total*w,h);}
+    for(let i=0;i<items.length;i++){
+      const item=items[i],next=items[i+1];
+      const endTime=next?next.time:(isRecording()?view.cursor:total);
+      const x=item.time/total*w,end=endTime/total*w;
+      ctx.fillStyle=item.frequency?colorOf(item.frequency,.8):'#c3cdd4';
+      ctx.fillRect(x,0,Math.max(.5,end-x),h);
+    }
+    ctx.fillStyle='#fff8';
+    for(let i=1;i<6;i++)ctx.fillRect(w*i/6,0,1,h);
+  }
+  function animate(now) {
+    const active=view.frequency&&(view.source==='microphone'||view.source==='tone'||view.source==='replay');
+    if((drawNeeded||active)&&now-lastPaint>32){drawScope(now);lastPaint=now;drawNeeded=false;}
+    if(historyNeeded){drawHistory();historyNeeded=false;}
+    requestAnimationFrame(animate);
+  }
+  setTarget(440);updateView();resize();requestAnimationFrame(animate);
+})();
+
+  </script>
+</body>
+</html>
