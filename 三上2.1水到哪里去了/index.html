@@ -8,4 +8,16 @@
 <section id="fair" class="hidden grid"><div class="card"><h2>怎样比较敞口与加盖？</h2><p>两杯开始水量相同，杯子相同。我们只想研究“是否加盖”的影响。</p><div class="choices"><button data-plan="bad">甲敞口放温暖处，乙加盖放阴凉处</button><button data-plan="good">两杯并排同处放置，一杯敞口一杯加盖</button></div><p id="planFeedback" class="feedback" aria-live="polite">哪种方案更便于比较？</p><div class="notice">同时开始、同样长的观察时段，杯子不移动；初始水位做标记。记录杯中水位，也观察盖内水滴。多做几次再讨论。</div></div><div class="card"><h2>加盖意味着什么？</h2><p>加盖会限制与外界空气交换，但不表示杯内完全没有蒸发。杯内水蒸气还可能凝结回水。</p><p>盖子是否密闭、环境温度和观察时间都会影响结果。不能把模型当作“几分钟一定少多少”的答案。</p><h2>安全观察</h2><p>只用常温清水、稳定的透明杯；远离电器。不加热、不尝水。需要长时间观察时由教师安排。</p></div></section>
 <section id="record" class="hidden"><div class="card"><h2>记录你真的看见的变化</h2><p>以各杯自己的起始标记为准，只记录液面位置。没有观察就保留“未观察”。这里不自动填写模型结果。</p>
 <div class="grid" id="entries"></div><button id="export" class="primary">下载观察记录</button><p id="summary" aria-live="polite"></p><p class="muted">只保存在本页内存，刷新会清空；导出不含姓名。选“未观察”会清除该杯本条旧结果。水位变化不是精确水量测量。</p></div></section>
-</main><footer>三上2.1 · 独立重制辅助稿 · 教材与教参待核，非整课验收 · 模型不替代真实实验</footer><script src="./app.js"></script></body></html>
+</main><footer>三上2.1 · 独立重制辅助稿 · 教材与教参待核，非整课验收 · 模型不替代真实实验</footer><script>
+'use strict';
+const $=s=>document.querySelector(s);
+document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{document.querySelectorAll('main>section').forEach(s=>s.classList.toggle('hidden',s.id!==b.dataset.page));document.querySelectorAll('[data-page]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));});
+$('#stage').oninput=()=>{let n=Number($('#stage').value);$('#stageText').textContent=['开始','阶段一','阶段二','阶段三'][n];$('#water').setAttribute('y',175+n*22);$('#water').setAttribute('height',112-n*22);$('#arrows').innerHTML=n?[210,300,390].map(x=>'<path d="M'+x+' 160V50m-10 12 10-12 10 12"/>').join(''):'';};
+document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{$('#explain').textContent={gone:'水没有凭空消失。在这些假设条件下，一部分液态水变为水蒸气进入周围空气。',vapor:'这个解释符合蒸发：液态水变为水蒸气进入空气。水蒸气通常看不见，图中的箭头不是可见烟雾。',boil:'不需要先煮开。常温下水也能从表面蒸发；沸腾则还会在液体内部形成大量气泡。'}[b.dataset.answer];});
+document.querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>{$('#planFeedback').textContent=b.dataset.plan==='good'?'更合适：只改变是否加盖。其余条件尽量一致，再记录两杯实际变化，不预先填答案。':'同时改变了盖子和环境位置，难以知道差异来自哪一个条件。请只改变一个条件。';});
+const options=['未观察','低于起始标记','与起始标记相近','高于起始标记','看不清，无法判断'];
+$('#entries').innerHTML=[0,1,2].map(i=>'<div class="entry"><h2>第'+(i+1)+'次观察</h2>'+['敞口杯','加盖杯'].map((s,j)=>'<label for="r'+i+j+'">'+s+'</label><select id="r'+i+j+'">'+options.map(o=>'<option>'+o+'</option>').join('')+'</select>').join('')+'</div>').join('');
+document.querySelectorAll('#entries select').forEach(s=>s.onchange=()=>{$('#summary').textContent='已记录 '+[...document.querySelectorAll('#entries select')].filter(x=>x.value!=='未观察').length+' 项观察；这些是液面描述，不自动证明因果。';});
+$('#export').onclick=()=>{let rows=[['观察序号','敞口杯液面','加盖杯液面','说明']];for(let i=0;i<3;i++)rows.push([i+1,$('#r'+i+'0').value,$('#r'+i+'1').value,'相对各自起始标记；非模型数据']);let csv='﻿'+rows.map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='水位真实观察.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
+
+</script></body></html>
