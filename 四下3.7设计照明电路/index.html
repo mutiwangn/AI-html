@@ -9,4 +9,24 @@ button:disabled{opacity:.4;cursor:not-allowed}#evidence{padding:12px;background:
 <g fill="#596d62"><circle cx="90" cy="230" r="6"/><circle cx="510" cy="230" r="6"/></g><g font-size="18" fill="#354e41"><text x="350" y="83">灯 A · 小屋 A</text><text x="350" y="188">灯 B · 小屋 B</text><text id="labelA" x="185" y="104"></text><text id="labelB" x="185" y="204"></text><text id="labelC" x="15" y="303"></text><text x="250" y="407">匹配的低压电源</text><text x="261" y="320">＋</text><text x="308" y="324">−</text></g></svg>
 <label><input id="s1" type="checkbox"> <span id="name1">闭合公共开关</span></label><label><input id="s2" type="checkbox"> <span id="name2">方案 A 无第二个开关</span></label><p id="status" aria-live="polite"></p><button id="reset">重置本方案</button><p class="small">两盏灯始终分别位于两条支路。点表示导线相接；长短线表示电源正负端。亮色只表示本模型中灯能亮，不表示真实亮度。</p></section>
 <section class="card"><h2>先定需求，再逐项验收</h2><p>设计要求：能做到下面四种照明状态。先选一项，再操作开关，最后检验。</p><button id="target0">都不亮</button><button id="target1">只亮 A</button><button id="target2">只亮 B</button><button id="target3">两盏都亮</button><p id="task"></p><button id="check">检验当前需求</button><p id="feedback" aria-live="polite">请先操作开关，再检验。</p><div id="records"></div><p>沿着图中的导线找一找：当一条支路被开关断开，另一盏灯经过电源的完整回路还在吗？试完方案 A，再改进为方案 B。</p><p class="small">切换方案时，所有开关自动断开，验收记录清空。方案变更相当于断电后重新设计，不是带电改线。这里不模拟电流大小、电源内阻、灯泡额定值或故障。假设电源与灯泡匹配、元件和接触均正常。</p><p><strong>安全：</strong>仅用于教师指导下的低压教学模型设计。真实制作先断电，使用教师批准的电池盒、匹配灯泡和开关；不直接短接电池两极。不得照图安装家庭照明、接插座或市电。</p></section></main>
-<footer><p><strong>教材正文、版次与教参待核。</strong>本页为双灯独立控制的设计与验收专题，不等于整课完成。</p><p class="small">目录：Notion 四下教材目录第 4–5 页；科学依据：<a href="https://www.eia.gov/energyexplained/electricity/batteries-circuits-and-transformers.php" target="_blank" rel="noopener">EIA：完整回路与开关</a>。两种方案的结果由图示理想回路推导。原创二维示意，无外部素材。实体触屏未测。</p></footer><script src="lesson.js"></script></html>
+<footer><p><strong>教材正文、版次与教参待核。</strong>本页为双灯独立控制的设计与验收专题，不等于整课完成。</p><p class="small">目录：Notion 四下教材目录第 4–5 页；科学依据：<a href="https://www.eia.gov/energyexplained/electricity/batteries-circuits-and-transformers.php" target="_blank" rel="noopener">EIA：完整回路与开关</a>。两种方案的结果由图示理想回路推导。原创二维示意，无外部素材。实体触屏未测。</p></footer><script>
+"use strict";
+const $=id=>document.getElementById(id), names=['都不亮','只亮 A','只亮 B','两盏都亮'];
+let separate=false,target=0,passed=new Set();
+function state(){let a=$('s1').checked,b=separate?$('s2').checked:a;return [a,b];}
+function draw(){let [a,b]=state(),s=$('s1').checked,t=$('s2').checked;
+$('common').setAttribute('aria-pressed',!separate);$('separate').setAttribute('aria-pressed',separate);
+$('s2').disabled=!separate;$('name1').textContent=separate?'闭合 A 支路开关':'闭合公共开关';$('name2').textContent=separate?'闭合 B 支路开关':'方案 A 无第二个开关';
+$('switchA').setAttribute('d',!separate||s?'M190 130H250':'M190 130L242 105');$('switchB').setAttribute('d',!separate||t?'M190 230H250':'M190 230L242 205');$('switchC').setAttribute('d',separate||s?'M90 280V320':'M90 280L65 315');
+$('labelA').textContent=separate?'开关 A':'';$('labelB').textContent=separate?'开关 B':'';$('labelC').textContent=separate?'':'公共';
+$('lampA').setAttribute('fill',a?'#ffe077':'#e8ebe7');$('lampB').setAttribute('fill',b?'#ffe077':'#e8ebe7');
+$('status').textContent=`当前：灯 A ${a?'亮':'不亮'}，灯 B ${b?'亮':'不亮'}。`;
+$('task').textContent='当前需求：'+names[target];for(let i=0;i<4;i++)$('target'+i).setAttribute('aria-pressed',i===target);
+$('records').textContent='本方案已通过：'+(passed.size?[...passed].sort().map(i=>names[i]).join('、'):'暂无')+(passed.size===4?'。四项需求均达到：可以分别控制两灯。':'。需实际达到并逐项检验。');}
+function reset(){passed.clear();target=0;$('s1').checked=false;$('s2').checked=false;$('feedback').textContent='开关已断开，记录已清空。';draw();}
+$('common').onclick=()=>{separate=false;reset();};$('separate').onclick=()=>{separate=true;reset();};$('reset').onclick=reset;
+for(let i=0;i<4;i++)$('target'+i).onclick=()=>{target=i;$('feedback').textContent='请操作开关，再检验当前需求。';draw();};
+for(let id of ['s1','s2'])$(id).onchange=()=>{$('feedback').textContent='开关状态已改变，请重新检验。';draw();};
+$('check').onclick=()=>{let[a,b]=state(),actual=Number(a)+2*Number(b);if(actual===target){passed.add(target);$('feedback').textContent='达到需求：'+names[target]+'。记录已保存。';}else $('feedback').textContent='尚未达到：当前是“'+names[actual]+'”。'+(!separate&&(target===1||target===2)?'公共开关同时接通或断开两条支路，不能让一盏单独亮。试试改进开关位置。':'再调整开关，沿导线检查回路。');draw();};draw();
+
+</script></html>
