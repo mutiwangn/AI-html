@@ -136,13 +136,13 @@
 
       function resourceHTML(book, resource) {
         var author = (resource[2] || '').replace(/^【|】$/g, '').trim();
-        return '<article class="resource-card">' +
+        return '<article class="resource-card"><div class="resource-content">' +
           '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5>' +
             (author ? '<span class="resource-author">' + escapeHTML(author) + '</span>' : '') + '</div>' +
           '<p class="resource-description">' + escapeHTML(resource[3]) + '</p>' +
           '<div class="resource-bottom"><div class="resource-tech">' + resourceGrade(resource) + '</div>' +
             '<a class="lesson-open" href="' + escapeHTML(resource[4]) + '" aria-label="进入' + escapeHTML(book.title) + resource[0] + '《' + escapeHTML(resource[1]) + '》' + (author ? '，' + escapeHTML(author) : '') + '的交互课件">进入课件' + arrow + '</a></div>' +
-          '</article>';
+          '</div>' + (window.AIHTMLFeedback ? window.AIHTMLFeedback.render(resource[4]) : '') + '</article>';
       }
 
       function unitHTML(book, unit, initialUnit) {
@@ -235,6 +235,7 @@
           return unitHTML(book, unit, initialUnit);
         }).join('');
         bindDisclosures();
+        if (window.AIHTMLFeedback) window.AIHTMLFeedback.mount(directory);
         directory.scrollTop = 0;
         if (requestedUnit && selectedUnit) {
           var unitNode = directory.querySelector('[data-unit="' + selectedUnit.number + '"]');
@@ -404,5 +405,6 @@
     }
   };
 })(window, document);
+
 
 
