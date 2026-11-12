@@ -556,8 +556,8 @@ window.AIHTML_METADATA = {
   },
   "./四上2.3呼吸的变化/": {
     "id": "9c597e23cfe99c182ad1f3cb0a58d6db",
-    "updatedAt": "2026-11-11T23:50:42Z",
-    "commit": "3ecf2019f2d0a0d56a94663db33895b322935148"
+    "updatedAt": "2026-11-12T23:32:33Z",
+    "commit": "9823f2174631053d009f743991c7892ceebf8b15"
   },
   "./四上2.4测量肺活量/": {
     "id": "2a5ba89a3d53612723ea942fa7ca2dbc",
@@ -1310,4 +1310,3 @@ window.AIHTML_METADATA = {
     "commit": "7b6b979d44575bddba4682699cfbc45073defcb5"
   }
 };
-
