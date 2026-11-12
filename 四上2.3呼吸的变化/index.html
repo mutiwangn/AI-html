@@ -82,7 +82,6 @@ function drawFallback(){if(state.page!==1)return;const rr=rates();let out='<defs
  out+='<path d="M'+(x-116)+' 458Q'+x+' '+(458+84*a)+' '+(x+116)+' 458" fill="none" stroke="#e8c687" stroke-width="10"/><path d="M'+x+' '+mem+'V'+(mem+24)+'" stroke="#e8c687" stroke-width="7"/>';
  if(b.direction!=='turn'){const down=b.direction==='in';out+='<path d="M'+x+' '+(down?182:267)+'V'+(down?267:182)+'" stroke="#63dbe6" stroke-width="4" marker-end="url(#airArrow23)"/>';}
  out+=text(b.direction==='in'?'下拉底膜 · 空气进入':b.direction==='out'?'底膜回升 · 空气排出':'换向时刻 · 气流暂缓',x,555,22,b.direction==='turn'?'#93adc1':'#63dbe6')+text('已完成 '+b.completed+' 次',x,588,22)+'</g>';}
- out+=text('固定瓶壁 ≠ 会运动的胸廓　｜　气球模拟肺，底膜有限类比膈肌',485,622,19,'#bcd4e5');
  $('fallback').innerHTML='<svg viewBox="0 0 970 666" role="img" aria-label="原创二维双瓶通气比较。固定瓶壁不运动，底膜下拉时气球变大，混合空气经导管进入；底膜回升时空气排出。两侧按各自设定次数在同一60秒中循环。">'+out+'</svg>';
 }
 function openModal(titleText,body,init){abortMeasure('打开说明，本轮中断，不存为完整60秒记录。');state.playing=false;state.modal=true;returnFocus=document.activeElement;$('modalTitle').textContent=titleText;$('modalBody').innerHTML=body;$('modal').hidden=false;$('modalClose').focus();if(init)init();updateDynamic()}
