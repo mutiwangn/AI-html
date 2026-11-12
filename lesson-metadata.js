@@ -261,122 +261,122 @@ window.AIHTML_METADATA = {
   },
   "./三上1.1我们关心天气/": {
     "id": "ee93ade746ba05253ab20ead9c63c3ab",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./三上1.2认识气温计/": {
     "id": "930c264ec0eb09089c25da977bc2eec3",
-    "updatedAt": "2026-11-09T07:05:52Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "b691407ec87aa24fe6a24bb0d086364063220482"
   },
   "./三上1.3测量气温/": {
     "id": "8a756fcd8d1eacbf321be08b48d372e3",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./三上1.4测量降水量/": {
     "id": "7893a3479fc6511e370652a5b41db5f1",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上1.5观测风/": {
     "id": "65f585d0222ecbc37313e2843f391f89",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上1.6观察云/": {
     "id": "5eddbcfe9af463043f30cd6031a092de",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上1.7天气预报/": {
     "id": "25f0e4ec92e4a412949ff6b247e748fe",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./三上1.8天气的影响/": {
     "id": "b56ba2c44491c459142088b65878a397",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上2.1水到哪里去了/": {
     "id": "4845d5b62bbad971df97566eaa4fd762",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上2.2水珠从哪里来二维版/": {
     "id": "ad313d2f8727e92a54baafa62158f09b",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./三上2.3水沸腾了/": {
     "id": "87bf490993724c6188345ea84aec315c",
-    "updatedAt": "2026-11-09T07:00:05Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "925d07d756c476dd284cc17fd665b1022ed28b93"
   },
   "./三上2.4水结冰了/": {
     "id": "8e13957830e634274de3d33747740705",
-    "updatedAt": "2026-11-03T23:46:05Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "8739f478fecc5d0b5f082ccad72c879ea88d1fb3"
   },
   "./三上2.5冰熔化了/": {
     "id": "b5df6defdeed6f9b61ed827735b579ce",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./三上2.6水能溶解多少物质/": {
     "id": "029ac5357e0c86a35a781d9f644438b1",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./三上2.7加快溶解/": {
     "id": "30a85893ff1f448f0cb3256738152ae4",
-    "updatedAt": "2026-11-10T13:27:30Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "6a3874f1e247ceac2bce51466223d81dbf0b7afe"
   },
   "./三上2.8用水分离/": {
     "id": "b7ba3d71e897943b8138ca2444de5259",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上3.2各种各样的运动/": {
     "id": "f4a0da4c66f01b47a75e3baed898807a",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上3.3直线运动和曲线运动/": {
     "id": "d19b7b167fd1bc069786aef9d1d03de2",
-    "updatedAt": "2026-11-04T10:34:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "73b89888b9807914ef68c4b812a799cc673df5a1"
   },
   "./三上3.4相同距离比快慢/": {
     "id": "003d84f188e9a327d3335b0073ec03b0",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上3.5相同时间比快慢/": {
     "id": "4e9f2e3992924af301c17924292eb7a3",
-    "updatedAt": "2026-11-10T13:02:31Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
   },
   "./三上3.6运动和能量/": {
     "id": "b62b5b8d2322a71839bb0517c4cf980e",
-    "updatedAt": "2026-11-10T13:12:48Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "b26f3cfa38f53b4830f1f0e2966b437a46e81c5b"
   },
   "./三上3.7设计和制作过山车/": {
     "id": "a5c4a896654c46a0458a8003ba2bdd2a",
-    "updatedAt": "2026-11-10T13:12:48Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "b26f3cfa38f53b4830f1f0e2966b437a46e81c5b"
   },
   "./三上3.8测试过山车/": {
     "id": "80a1a335f91c64b009a93fc816f14e0e",
-    "updatedAt": "2026-11-10T13:12:48Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "b26f3cfa38f53b4830f1f0e2966b437a46e81c5b"
   },
   "./三下1.1根据太阳辨别方向/": {
@@ -501,57 +501,57 @@ window.AIHTML_METADATA = {
   },
   "./四上1.1感受空气/": {
     "id": "d2885c385b5dbde778218dcb4f38f023",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上1.2空气能占据空间吗/": {
     "id": "4cdc7bf1c55137d3d0854aff34c1c6d0",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上1.3空气占据的空间会改变吗/": {
     "id": "45ebb8b3bbb1e47894219612a77a077d",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上1.4空气有质量吗/": {
     "id": "9271f24505895508606c5a004bb13eaa",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上1.5空气有力量/": {
     "id": "c93d66b7a33ca9eb9dc04ddd06fbd02e",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上1.6我们来做热气球/": {
     "id": "4081960b6341db6b072a1857dc29de99",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上1.7风的成因/": {
     "id": "4ae1b2bce03a0446dbe9c11e2c6eb40a",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上1.8自制打气筒/": {
     "id": "9f682bcc384d3f563c8aae157746833a",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上1.8自制打气筒/自由组装实验台/": {
     "id": "bea03480189eae129ef60e69f21d75b3",
-    "updatedAt": "2026-11-08T10:41:59Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "add0ee4c477174eaa6a4b716437f84ce470c7531"
   },
   "./四上2.1我们的呼吸与消化/": {
     "id": "f034837db9d8633719118c4bca7f1ffa",
-    "updatedAt": "2026-11-11T11:30:14Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "1a0e3f131098e7a9d6b29674d3f5efead3fc11b2"
   },
   "./四上2.2认识呼吸器官/": {
     "id": "a442b5153f3f2b3472729948f1cd22c5",
-    "updatedAt": "2026-11-11T11:34:16Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "212cd0a614da531abb6ee86b93fb1fef25c58afc"
   },
   "./四上2.3呼吸的变化/": {
@@ -561,72 +561,72 @@ window.AIHTML_METADATA = {
   },
   "./四上2.4测量肺活量/": {
     "id": "2a5ba89a3d53612723ea942fa7ca2dbc",
-    "updatedAt": "2026-11-11T13:14:54Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "c3ba860c0009bd70dfa9a2b319629361d831b5a1"
   },
   "./四上2.5口腔里的消化/": {
     "id": "743720f3773d4c68a92754b822a3e5f7",
-    "updatedAt": "2026-11-10T13:25:10Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "7b6b979d44575bddba4682699cfbc45073defcb5"
   },
   "./四上2.6胃和小肠里的消化/": {
     "id": "496c01aef0e3beaffba771d020406d96",
-    "updatedAt": "2026-11-10T13:15:51Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "087dc284916d580bb25c42678a69a232630839f2"
   },
   "./四上2.7食物在身体里的旅行/": {
     "id": "01b07b5a1f7acdf8899d733db58ee40d",
-    "updatedAt": "2026-11-11T10:19:59Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "34a65a4c06fb12286a77bf6b3422199b32dbdc6b"
   },
   "./四上2.8呵护我们的器官/": {
     "id": "4b4eaef372505add154ed6e1f9001717",
-    "updatedAt": "2026-11-11T10:13:20Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "7f8daa34b91ad43caf109c27b570fdddb8dfc1bb"
   },
   "./四上3.1声音是怎样产生的/": {
     "id": "0cef00144688a019502e3f707d3114f3",
-    "updatedAt": "2026-11-10T13:25:10Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "7b6b979d44575bddba4682699cfbc45073defcb5"
   },
   "./四上3.2声音的强弱/": {
     "id": "7fb47d39e7c581349b20bd82458bbc4b",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上3.3声音的高低_学生端/": {
     "id": "e7d221e9185e27fd08c6c2d63dbb8691",
-    "updatedAt": "2026-11-09T03:03:08Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "a8e6a9fd09c17e9d30e20b662528c111db2f2340"
   },
   "./四上3.3声音的高低/": {
     "id": "1ecf96628ac1bc598496225278f1ad5f",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上3.4乐器的声音变化/": {
     "id": "41b09ed14241858ff3382fe0dc7f9837",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上3.5设计我们的乐器/": {
     "id": "234b95242eee02a7c22156758211ce67",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上3.6改进我们的乐器/": {
     "id": "9c0a3bad86a7dbcaaa8e458244dec60e",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上3.7声音的传播/": {
     "id": "5a95be508f02f23f3e0ad106dcb1bf44",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四上3.8保护听力/": {
     "id": "e0ce3eef40cdae005cff9e2a72dd9e92",
-    "updatedAt": "2026-11-09T01:05:49Z",
+    "updatedAt": "2026-11-12T23:06:21Z",
     "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
   },
   "./四下3.2点亮小灯泡/": {
@@ -1310,3 +1310,4 @@ window.AIHTML_METADATA = {
     "commit": "7b6b979d44575bddba4682699cfbc45073defcb5"
   }
 };
+

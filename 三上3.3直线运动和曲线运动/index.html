@@ -55,7 +55,30 @@
     @media(orientation:landscape){.rotate-hint{display:none}}
     @media(max-height:610px){.app{gap:5px;padding-top:5px;padding-bottom:5px}.top{min-height:40px}.lesson small{display:none}.steps{min-height:42px}.footer{min-height:50px}.control{min-height:40px;padding:6px 14px}.stage-head h2{margin-top:2px}}
   </style>
-</head>
+
+<style id="unit-visual-theme">
+/* Unit visual system v1: interface only; original scripts and scientific visuals preserved. */
+:root{--uv-bg:#f8f4ec;--uv-surface:#fffefb;--uv-soft:#fff0d5;--uv-ink:#453824;--uv-muted:#78664e;--uv-line:#e4d6bf;--uv-accent:#96600b;--uv-hover:#794b06;--uv-radius:16px;--uv-font:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;}
+html,body{background:var(--uv-bg);color:var(--uv-ink);font-family:var(--uv-font);}
+header,.header,.app-header,.top{background:var(--uv-surface);color:var(--uv-ink);border-bottom-color:var(--uv-line);box-shadow:0 2px 0 var(--uv-soft);}
+header h1,.header h1,.app-header h1,.top h1,.top .brand b{color:var(--uv-ink);font-weight:750;letter-spacing:.025em;}
+header .eyebrow,.header .eyebrow,.top small,.app-header small{color:var(--uv-accent);}
+.card,.panel:not(.process),.modal,.dialog,dialog,.rail,.control-rail{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);border-radius:var(--uv-radius);box-shadow:0 5px 20px #153d4b08;}
+button{font-family:var(--uv-font);border-radius:11px;}
+nav button,.nav button,.tabs button,.page-nav button,.main-nav button,.nav-button,.step{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-line);border-radius:11px;box-shadow:none;}
+nav button.active,nav button.selected,nav button.on,nav button[aria-selected="true"],nav button[aria-pressed="true"],.nav button.active,.nav button.selected,.nav button.on,.nav button[aria-selected="true"],.nav button[aria-pressed="true"],.tabs button.active,.tabs button.selected,.tabs button.on,.tabs button[aria-selected="true"],.tabs button[aria-pressed="true"],.page-nav button.active,.page-nav button.selected,.page-nav button.on,.page-nav button[aria-selected="true"],.page-nav button[aria-pressed="true"],.main-nav button.active,.main-nav button.selected,.main-nav button.on,.main-nav button[aria-selected="true"],.main-nav button[aria-pressed="true"],.nav-button.active,.nav-button.selected,.nav-button.on,.nav-button[aria-selected="true"],.nav-button[aria-pressed="true"],.step.active,.step.selected,.step.on,.step[aria-selected="true"],.step[aria-pressed="true"],button.primary,.button.primary,.action.primary{background:var(--uv-accent);color:#fff;border-color:var(--uv-accent);box-shadow:none;}
+button.primary:hover,.button.primary:hover,.action.primary:hover{background:var(--uv-hover);color:#fff;}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:var(--uv-accent);outline-offset:3px;}
+.notice,.info-note,.noteBox,.callout{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-line);border-left-color:var(--uv-accent);border-radius:11px;}
+
+.top{border-radius:12px;}.lesson small{color:var(--uv-muted);}.lesson-mark{background:var(--uv-accent);color:#fff;box-shadow:none;}
+.step .num{background:#ead9ba;color:#694611;}.step.active .num{background:#fff0d5;color:#694611;}
+.simple-button,.control{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);box-shadow:none;}
+.control.primary,.control.selected{background:var(--uv-accent);color:#fff;border-color:var(--uv-accent);}
+.control.warn{color:#9a3923;border-color:#d6a18c;}.footer-note{color:var(--uv-muted);}.speed{color:var(--uv-ink);}.control-divider{background:var(--uv-line);}
+.stage{color:#eef9ff;} /* Keep dark motion canvas and its scientific path colours. */
+</style>
+<style>.app{position:absolute;left:50%;top:50%;width:1600px;height:900px;max-width:none;margin:0;transform-origin:center;padding:14px;gap:11px}.top{min-height:57px}.steps{min-height:58px}.footer{min-height:76px;overflow:visible}.controls{flex-wrap:wrap}.stage{min-height:0}.rotate-hint{display:none!important}</style></head>
 <body>
 <div class="app">
   <header class="top">
@@ -68,12 +91,12 @@
     <button class="step" data-page="2" type="button"><span class="num">3</span>小球冲出桌面</button>
   </nav>
   <main class="stage" id="stage">
-    <canvas id="stage-canvas" aria-label="可触控的科学运动模拟实验画面"></canvas>
+    <canvas id="stage-canvas" aria-label="可触控的科学运动模型画面"></canvas>
     <div class="stage-head"><span class="eyebrow" id="stage-eyebrow">观察 · 比较</span><h2 id="stage-title">哪些运动路线不一样？</h2></div>
     <div class="stage-hint" id="stage-hint">点击运动的物体，观察路线</div>
     <div class="rotate-hint">横屏可获得更大的实验画面</div>
   </main>
-  <footer class="footer" aria-label="实验操作区">
+  <footer class="footer" aria-label="模型操作区">
     <div class="controls" id="controls-observe">
       <button class="control selected" type="button" data-scene="road">🚙 公路</button>
       <button class="control" type="button" data-scene="lift">🛗 生活</button>
@@ -288,7 +311,7 @@
     }
   }
 
-  function setPage(p){page=p;document.querySelectorAll('.step').forEach(function(b){var active=Number(b.dataset.page)===page;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});el('controls-observe').hidden=page!==0;el('controls-shoot').hidden=page!==1;el('controls-fall').hidden=page!==2;var eyebrow=['观察 · 比较','探索 · 验证','预测 · 实验'][page],title=['哪些运动路线不一样？','怎样让蓝球击中红球？','小球离开桌面后怎样运动？'][page],hint=['点击运动物体，观察路线','从蓝球向前拖动，松手发射','先画猜想，再做实验'][page];el('stage-eyebrow').textContent=eyebrow;el('stage-title').textContent=title;el('stage-hint').textContent=hint; if(page===1)shotReset();if(page===2)fallReset(true)}
+  function setPage(p){page=p;document.querySelectorAll('.step').forEach(function(b){var active=Number(b.dataset.page)===page;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});el('controls-observe').hidden=page!==0;el('controls-shoot').hidden=page!==1;el('controls-fall').hidden=page!==2;var eyebrow=['观察 · 比较','探索 · 验证','预测 · 模型演示'][page],title=['哪些运动路线不一样？','怎样让蓝球击中红球？','小球离开桌面后怎样运动？'][page],hint=['点击运动物体，观察路线','从蓝球向前拖动，松手发射','先画猜想，再看模型'][page];el('stage-eyebrow').textContent=eyebrow;el('stage-title').textContent=title;el('stage-hint').textContent=hint; if(page===1)shotReset();if(page===2)fallReset(true)}
   function selectScene(s){scene=s;selected=-1;showRoutes=false;clock=0;document.querySelectorAll('[data-scene]').forEach(function(b){b.classList.toggle('selected',b.dataset.scene===s)});el('routes').textContent='◎ 显示路线';el('routes').classList.remove('selected');el('routes').setAttribute('aria-pressed','false');el('stage-hint').textContent=s==='road'?'点击汽车，观察它走过的路':s==='lift'?'竖直、倾斜，也可能是直线':'点一点小车或飞鸟'}
 
   var pointerId=null,dragMode='';
@@ -320,5 +343,5 @@
   resize();setPage(0);window.requestAnimationFrame(tick);
 })();
 </script>
-</body>
+<script>(()=>{const app=document.querySelector('.app');function fit(){app.style.transform='translate(-50%,-50%) scale('+Math.min(innerWidth/1600,innerHeight/900)+')';}addEventListener('resize',fit);fit();})();</script></body>
 </html>

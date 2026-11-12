@@ -17,7 +17,24 @@ main{min-height:0;overflow:hidden;padding:clamp(12px,1.25vw,22px)}.page{display:
 @media(max-width:1000px){.brand small{display:none}.brand .snow{width:36px;height:36px;font-size:24px}.mutiw{display:none}.top{padding:0 9px;gap:5px}.nav{gap:3px}.nav button{padding:10px 8px}.layout{grid-template-columns:minmax(0,1.5fr) minmax(315px,1fr)}#page1 .layout{grid-template-columns:minmax(0,1.45fr) minmax(325px,1fr)}#page2 .analysisTop{grid-template-columns:minmax(0,1.35fr) minmax(315px,1fr)}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-</head>
+
+<style id="unit-visual-theme">
+/* Unit visual system v1: interface only; original scripts and scientific visuals preserved. */
+:root{--uv-bg:#edf7f8;--uv-surface:#ffffff;--uv-soft:#e1f3f4;--uv-ink:#173f49;--uv-muted:#4e737b;--uv-line:#c5dfe3;--uv-accent:#087b86;--uv-hover:#08636c;--uv-radius:16px;--uv-font:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;}
+html,body{background:var(--uv-bg);color:var(--uv-ink);font-family:var(--uv-font);}
+header,.header,.app-header,.top{background:var(--uv-surface);color:var(--uv-ink);border-bottom-color:var(--uv-line);box-shadow:0 2px 0 var(--uv-soft);}
+header h1,.header h1,.app-header h1,.top h1,.top .brand b{color:var(--uv-ink);font-weight:750;letter-spacing:.025em;}
+header .eyebrow,.header .eyebrow,.top small,.app-header small{color:var(--uv-accent);}
+.card,.panel:not(.process),.modal,.dialog,dialog,.rail,.control-rail{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);border-radius:var(--uv-radius);box-shadow:0 5px 20px #153d4b08;}
+button{font-family:var(--uv-font);border-radius:11px;}
+nav button,.nav button,.tabs button,.page-nav button,.main-nav button,.nav-button,.step{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-line);border-radius:11px;box-shadow:none;}
+nav button.active,nav button.selected,nav button.on,nav button[aria-selected="true"],nav button[aria-pressed="true"],.nav button.active,.nav button.selected,.nav button.on,.nav button[aria-selected="true"],.nav button[aria-pressed="true"],.tabs button.active,.tabs button.selected,.tabs button.on,.tabs button[aria-selected="true"],.tabs button[aria-pressed="true"],.page-nav button.active,.page-nav button.selected,.page-nav button.on,.page-nav button[aria-selected="true"],.page-nav button[aria-pressed="true"],.main-nav button.active,.main-nav button.selected,.main-nav button.on,.main-nav button[aria-selected="true"],.main-nav button[aria-pressed="true"],.nav-button.active,.nav-button.selected,.nav-button.on,.nav-button[aria-selected="true"],.nav-button[aria-pressed="true"],.step.active,.step.selected,.step.on,.step[aria-selected="true"],.step[aria-pressed="true"],button.primary,.button.primary,.action.primary{background:var(--uv-accent);color:#fff;border-color:var(--uv-accent);box-shadow:none;}
+button.primary:hover,.button.primary:hover,.action.primary:hover{background:var(--uv-hover);color:#fff;}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:var(--uv-accent);outline-offset:3px;}
+.notice,.info-note,.noteBox,.callout{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-line);border-left-color:var(--uv-accent);border-radius:11px;}
+.top .brand small,.top .mutiw{color:var(--uv-muted);}.brand .snow{background:var(--uv-soft);color:var(--uv-accent);border-color:var(--uv-line);}.top .nav button{color:var(--uv-ink);}.top .nav button.active{background:var(--uv-accent);color:#fff;border-color:var(--uv-accent);}
+</style>
+<style id="freezing-focus-layout">body{font-size:22px}.app{grid-template-rows:80px minmax(0,1fr)}.brand b{font-size:30px}.nav button{font-size:22px}.brand small,.mutiw{font-size:16px}.action,.action.small{font-size:20px}.stageHead .hintTiny,.stageBottom span,.readout span,.subtle,.stepButton small{font-size:18px}.stepButton b{font-size:25px}.noteBox{font-size:20px}.tempCard p{font-size:20px}#freezeBefore,#freezeAfter{font-size:22px;padding:10px 16px;border:1px solid #aacbd4;background:#f4fbfc;border-radius:12px}#freezeBefore[aria-pressed=true],#freezeAfter[aria-pressed=true]{background:#087c87;color:white}#page3{position:relative}#freezeFocus{flex:1;min-height:0;padding:18px 24px;display:flex;flex-direction:column;gap:12px}.freezeTitle{display:flex;justify-content:space-between;gap:20px;align-items:start}.freezeTitle h2{font-size:29px;margin:0 0 8px}.freezeTitle p{font-size:20px;margin:0;color:#4b7182}.freezeTitle>div:last-child{display:flex;gap:8px;flex:none}#freezeCompare{width:100%;flex:1;min-height:0}.freezeBottom p{font-size:22px;line-height:1.45;margin:5px 0}.freezeBottom .freezeBoundary{font-size:17px;color:#56747e}#thermalResources{flex:none;border:1px solid #bed8e2;background:#f8fcff;border-radius:12px}#thermalResources summary{cursor:pointer;padding:12px 18px;font-size:19px;font-weight:bold}#thermalResources[open]{position:absolute;z-index:40;inset:0;background:#f8fcff;box-shadow:0 0 0 1600px #142b3a99;display:flex;flex-direction:column;overflow:auto}#thermalResources[open] summary::after{content:'　（再次点此关闭）'}.thermalBody{height:640px;padding:14px;display:flex;flex-direction:column;gap:12px}.thermalCaution{font-size:18px;margin:0}.thermalBody .extensionsTop{height:370px;flex:none}.thermalBody .lifeGrid{height:180px;min-height:160px;flex:none}</style></head>
 <body>
 <div class="app" id="app">
 <header class="top">
@@ -26,7 +43,7 @@ main{min-height:0;overflow:hidden;padding:clamp(12px,1.25vw,22px)}.page{display:
     <button type="button" class="active" data-page="0" aria-current="page"><span>01</span>实验装置</button>
     <button type="button" data-page="1"><span>02</span>结冰观察</button>
     <button type="button" data-page="2"><span>03</span>变化解释</button>
-    <button type="button" data-page="3"><span>04</span>拓展探究</button>
+    <button type="button" data-page="3"><span>04</span>结冰与生活</button>
   </nav>
   <span class="mutiw">mutiw</span>
 </header>
@@ -87,7 +104,7 @@ main{min-height:0;overflow:hidden;padding:clamp(12px,1.25vw,22px)}.page{display:
       <div class="panel analysisChart"><div class="chartLabel"><span style="color:#1599c8">蓝线 试管水温</span><span style="color:#d78844">橙线 冰盐混合物温度</span><span>教学示意，非实测</span></div><svg id="analysisChart" class="chart" viewBox="0 0 680 170" preserveAspectRatio="none"></svg></div>
     </div>
   </section>
-  <section id="page3" class="page" aria-label="拓展探究">
+  <section id="page3" class="page" aria-label="拓展探究"><div id="freezeFocus" class="panel"><div class="freezeTitle"><div><h2>结冰占的空间变大，水管为什么可能冻裂？</h2><p>比较同一份水结冰前后；再看有没有空间容纳变化。</p></div><div><button id="freezeBefore" aria-pressed="true">结冰前</button><button id="freezeAfter" aria-pressed="false">结冰后</button></div></div><svg id="freezeCompare" viewBox="0 0 1400 430" role="img" aria-label="同一份水结冰前后的体积及受限管道关系示意"></svg><div class="freezeBottom"><p id="freezeEvidence" aria-live="polite"></p><p class="freezeBoundary">这是定性机制图：高度变化经过放大，不是实验数据；水管是否破裂还取决于结冰位置、排水空间、材料与压力。不要用密封容器做结冰实验。</p></div></div><details id="thermalResources"><summary>辅助资料：温度计、乒乓球与其它材料（不作为结冰证据）</summary><div class="thermalBody"><p class="thermalCaution">这些例子涉及不同材料和条件，不能概括为“所有物质受冷都会收缩”。本课的关键证据仍是同一份水结冰后的体积变化。</p>
     <div class="extensionsTop">
       <div class="panel extPanel">
         <div class="extHead"><span>液体温度计</span><span id="thermoReading" class="extTemp">20℃</span></div>
@@ -106,7 +123,7 @@ main{min-height:0;overflow:hidden;padding:clamp(12px,1.25vw,22px)}.page{display:
       <button class="lifeCard" data-life="pipe"><span class="lifeVisual"><svg viewBox="0 0 240 100"><path d="M0 41H240" stroke="#9db4c2" stroke-width="29"/><path d="M0 41H240" stroke="#c1d3df" stroke-width="19"/><path d="M115 18l-8 17 12 13-8 19M124 17l13 16-10 11 8 20" stroke="#d26c5e" stroke-width="5" fill="none"/><path d="M101 13L92 5M144 10l8-9" stroke="#74c7e6" stroke-width="4"/></svg></span><b>冬季水管</b><span class="more">点击探究</span><span class="lifeDetail"><strong>水管冻裂</strong>水结冰后体积增大，可能把充满水的管道撑裂；不同于普通材料遇冷收缩。</span></button>
       <button class="lifeCard" data-life="water4"><span class="lifeVisual"><svg viewBox="0 0 240 100"><path d="M30 10V82H219" stroke="#a4becc" stroke-width="3" fill="none"/><path d="M46 23Q83 74 130 75Q169 72 208 37" fill="none" stroke="#2589bc" stroke-width="5"/><path d="M130 75V88" stroke="#d98e53" stroke-width="3" stroke-dasharray="3 3"/><text x="116" y="99" fill="#356a86" font-size="15">4℃</text></svg></span><b>水的特殊变化</b><span class="more">点击探究</span><span class="lifeDetail"><strong>约 4℃ 的水</strong>在约4℃时密度最大；继续降温、结冰时体积会增大。</span></button>
     </div>
-  </section>
+  </div></details></section>
 </main>
 </div>
 <script>
@@ -198,10 +215,10 @@ $('ballPlay').onclick=function(){if(state.ballDent<.02)state.ballDent=1;state.ba
 var lifes=document.querySelectorAll('.lifeCard');Array.prototype.forEach.call(lifes,function(card){card.onclick=function(){this.classList.toggle('selected');this.setAttribute('aria-expanded',String(this.classList.contains('selected')))}});
 function navigate(i){state.page=i;state.simPlaying=false;state.explainPlaying=false;state.ballPlaying=false;if(i===2&&state.explainT===0)state.explainT=state.simT;var pages=document.querySelectorAll('.page');Array.prototype.forEach.call(pages,function(p,j){p.classList.toggle('active',j===i);p.setAttribute('aria-hidden',j===i?'false':'true')});var navs=document.querySelectorAll('.nav button');Array.prototype.forEach.call(navs,function(b,j){b.classList.toggle('active',j===i);if(j===i)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});renderSim();renderExplain();updateBall()}
 Array.prototype.forEach.call(document.querySelectorAll('.nav button'),function(b){b.onclick=function(){navigate(Number(this.dataset.page))}});
-function fit(){var app=$('app');var w=innerWidth,h=innerHeight;var scale=Math.min(1,w/860,h/580);app.style.width=(w/scale)+'px';app.style.height=(h/scale)+'px';app.style.transform='scale('+scale+')';app.style.transformOrigin='top left'}
+function fit(){var app=$('app');var w=innerWidth,h=innerHeight;var scale=Math.min(w/1600,h/900);app.style.width='1600px';app.style.height='900px';app.style.position='absolute';app.style.left=((w-1600*scale)/2)+'px';app.style.top=((h-900*scale)/2)+'px';app.style.transform='scale('+scale+')';app.style.transformOrigin='top left'}
 var last=performance.now();function tick(now){var dt=Math.min((now-last)/1000,.11);last=now;if(state.simPlaying){state.simT=Math.min(6,state.simT+dt*(6/15));if(state.simT>=6)state.simPlaying=false;renderSim()}if(state.explainPlaying){state.explainT=Math.min(6,state.explainT+dt*(6/15));if(state.explainT>=6)state.explainPlaying=false;renderExplain()}if(Math.abs(state.thermoShown-state.thermoTarget)>.05){state.thermoShown+=(state.thermoTarget-state.thermoShown)*Math.min(1,dt*6);updateThermo()}if(state.ballPlaying){state.ballDent=Math.max(0,state.ballDent-dt/6.0);if(state.ballDent===0)state.ballPlaying=false;updateBall()}requestAnimationFrame(tick)}
 window.addEventListener('resize',fit);setInterval(timerRender,250);fit();updateSetup();drawRecords();renderSim();renderExplain();updateThermo();updateBall();timerRender();requestAnimationFrame(tick);
 })();
 </script>
 </body>
-</html>
+<script id="freezing-focus-script">(()=>{let after=false;const $=id=>document.getElementById(id);function draw(){const color=after?'#b7e3f5':'#68bfd9',h=after?170:140,y=320-h;$('freezeBefore').setAttribute('aria-pressed',String(!after));$('freezeAfter').setAttribute('aria-pressed',String(after));$('freezeCompare').innerHTML=`<rect x="10" y="10" width="660" height="410" rx="18" fill="#f0f8fb"/><rect x="700" y="10" width="690" height="410" rx="18" fill="#f0f8fb"/><g fill="#234b60" font-family="sans-serif"><text x="35" y="52" font-size="26">有空间：同一份水，质量不变</text><text x="730" y="52" font-size="26">空间受限：装满水、排出受阻的管道</text><path d="M190 100V325H470V100" fill="none" stroke="#64899b" stroke-width="7"/><rect x="195" y="${y}" width="270" height="${h}" fill="${color}"/><path d="M155 180H500" stroke="#cf8c4d" stroke-width="3" stroke-dasharray="8 5"/><text x="505" y="185" font-size="19">原水面</text><text x="270" y="270" font-size="30">${after?'冰':'水'}</text><text x="80" y="380" font-size="23">${after?'冰面高于原标记：占据更多空间':'先标记原水面；不添水、不漏水'}</text><rect x="790" y="150" width="500" height="140" fill="${color}" stroke="#688795" stroke-width="12"/><text x="940" y="233" font-size="28">${after?'结冰膨胀受限':'管内充满水'}</text>${after?'<g stroke="#d48c4a" stroke-width="8" fill="none"><path d="M1035 145V95m-18 20 18-20 18 20M1035 295V345m-18-20 18 20 18-20M785 220H735m20-18-20 18 20 18M1295 220H1345m-20-18 20 18-20 18"/></g><path d="M1190 145l-12 15 20 15-18 16" stroke="#cc6b58" stroke-width="6" fill="none"/>':''}<text x="755" y="390" font-size="23">${after?'受压的管壁可能破裂，并非必然冻裂':'观察容纳空间与出水通路是否受限'}</text></g>`;$('freezeEvidence').textContent=after?'证据 → 解释：同一份水结成冰后体积增大；如果变化受到约束，管道内压力可能增大。':'先比较条件：水的多少不变，不把添水或漏水造成的水位变化当成结冰证据。';}$('freezeBefore').onclick=()=>{after=false;draw()};$('freezeAfter').onclick=()=>{after=true;draw()};draw();})();</script></html>

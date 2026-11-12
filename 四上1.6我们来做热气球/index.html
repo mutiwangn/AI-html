@@ -29,7 +29,24 @@
 @media(max-width:900px){.tabs{flex:1 0 100%;width:100%}}
 @media(min-width:901px) and (max-width:1190px) and (max-height:780px){#micro-content .side-heading{margin-bottom:.4rem}.micro-chain{gap:.25rem}.micro-switch{margin-bottom:.55rem}.micro-switch button{padding:.4rem .3rem}.micro-caveat{line-height:1.35}.micro-footer{margin-top:.25rem}.density-box{margin-top:.35rem;padding-top:.35rem}}
 </style>
-</head>
+
+<style id="unit-visual-theme-v1" data-unit="4-1">
+/* Unit visual system v1: interface-only; preserves original content and simulation colors. */
+:root{--uv-bg:#edf5f3;--uv-surface:#ffffff;--uv-soft:#e2f1ed;--uv-ink:#183d3c;--uv-muted:#536f6b;--uv-line:#c8ded7;--uv-accent:#087568;--uv-on:#ffffff;--uv-head:#f8fcfa;--uv-headink:#183d3c;--uv-focus:#b57710;}
+html,body{background:var(--uv-bg)!important}body{color:var(--uv-ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif!important;-webkit-font-smoothing:antialiased}
+body > header,body > .app > header,body > .shell > header,body > #app > header,body > .frame > header,body .app-header,body .topbar,body header.header{background:var(--uv-head)!important;color:var(--uv-headink)!important;border-color:var(--uv-line)!important;box-shadow:0 1px 0 var(--uv-line)!important}
+body .panel,body .card,body .sidebar,body .control-panel,body .board-side,body .board-main,body .modal,body .experiment,body .dialog-body,body .box,body .controls,body .explanation{background:var(--uv-surface)!important;color:var(--uv-ink);border-color:var(--uv-line)!important;border-radius:16px}
+body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch){border-color:var(--uv-line);border-radius:11px;background-color:var(--uv-surface);color:var(--uv-ink);font-family:inherit;touch-action:manipulation}
+body button.primary,body button.primary-btn,body button.primary-button,body button.ear-primary,body button.phone-primary,body nav button[aria-selected="true"],body nav button[aria-pressed="true"],body button.tab.active,body button.nav-btn.active,body nav button.active,body nav button[aria-current="page"]{background:var(--uv-accent)!important;color:var(--uv-on)!important;border-color:var(--uv-accent)!important}
+body button:focus-visible,body input:focus-visible,body select:focus-visible,body textarea:focus-visible,body a:focus-visible{outline:3px solid var(--uv-focus)!important;outline-offset:3px}
+body input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),body textarea,body select{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);border-radius:9px}
+body footer,body .app-footer,body .footer,body .page-foot{color:var(--uv-muted);border-color:var(--uv-line)}
+body .notice,body .callout,body .side-note,body .side-hint,body .note-question{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-accent)}
+body .muted,body .rail-title,body .section-heading,body .control-label,body .control-hint,body .side-title{color:var(--uv-muted)}
+@media(hover:hover){body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch):not(:disabled):hover{border-color:var(--uv-accent)}}
+@media print{html,body{background:white!important;color:black!important}body header,body footer{background:white!important;color:black!important;box-shadow:none!important}body header h1,body header .brand,body header .heading{color:black!important}}
+</style>
+<style id="classroom-single-screen-fix">@media(min-width:901px){html,body{height:100%;overflow:hidden}.app{min-height:0;height:100dvh}.sidebar,.side-content{overflow:visible}.side-content{padding:10px 12px 7px;flex:1;min-height:0}.side-heading{font-size:1.25rem;line-height:1.3;margin:4px 0 6px}.side-bottom{padding:8px 12px}.micro-switch{margin-bottom:5px;padding:3px}.micro-switch button{padding:5px 3px}.micro-chain{gap:3px}.chain-line{font-size:.78rem;line-height:1.45}.sample-canvas{height:5.5rem}.micro-caveat{font-size:.68rem;line-height:1.35;margin-top:3px}.micro-footer{margin-top:4px}.micro-footer .quiet-btn{padding:5px 3px}.step-line{margin:4px 0;line-height:1.45}.observe-row{line-height:1.45;margin:4px 0}}</style><style id="record-single-page-fix">#record-pages{display:flex;align-items:center;gap:8px;margin:7px 0}#record-pages button{font-size:14px;padding:7px 12px;border:1px solid #b9d3c9;border-radius:8px;background:white}#record-pages button[aria-pressed=true]{background:#087d73;color:white}#record-page-count{margin-left:auto;font-size:14px;color:#45645a}.record-row[hidden]{display:none!important}@media(min-width:901px){.record-workspace{overflow:visible;padding:10px 20px}.record-head{margin-bottom:7px}.record-head h2{font-size:1.25rem;margin-bottom:3px}.record-head p{font-size:.75rem;line-height:1.4}.student-fields{padding:6px 12px;margin-bottom:5px}.table-heading div{padding:6px;font-size:.8rem}.record-row{min-height:210px;max-height:230px}.draw-zone{min-height:170px}.draw-canvas{min-height:140px;max-height:180px}.record-stage{padding:8px}.record-inputs{padding:10px;gap:7px}.record-inputs textarea{min-height:48px;height:54px;resize:none}.finding-box{margin-top:8px;padding:8px 12px;gap:8px}.finding-content textarea{min-height:48px;height:48px;padding:6px 10px;resize:none;font-size:.83rem}.finding-ref{font-size:.72rem;line-height:1.4;padding:4px 8px;margin-top:4px}.record-foot{margin-top:6px;font-size:.68rem;line-height:1.4}.record-reference{font-size:.7rem;line-height:1.4;padding:4px 7px}}</style></head>
 <body>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden"><defs>
 <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"/></symbol>
@@ -125,7 +142,7 @@
   <header class="record-head"><div><h2>袋子的变化 · 活动记录</h2><p>先观察，再画形状、选冷暖。参考仅供核对，真实实验请按实际现象填写。</p></div><div class="record-head-actions"><button class="quiet-btn" id="record-ref-btn" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg><span>显示参考示意</span></button><button class="quiet-btn" id="export-btn"><svg class="icon"><use href="#i-down"/></svg>导出记录图片</button><button class="quiet-btn" id="back-lab-btn"><svg class="icon"><use href="#i-book"/></svg>回到实验</button></div></header>
   <div class="student-fields"><label>班级 <input id="student-class" type="text" maxlength="24" autocomplete="off" placeholder="例如：四（1）班"></label><label>姓名 <input id="student-name" type="text" maxlength="24" autocomplete="off" placeholder="我的姓名"></label><label>日期 <input id="student-date" type="text" maxlength="24" autocomplete="off" placeholder="月 / 日"></label><span class="save-state" id="save-state">记录仅暂存在本机，不上传</span></div>
   <div class="notebook">
-   <div class="table-heading"><div>观察任务</div><div>画一画<br>塑料袋形状</div><div>摸一摸<br>塑料袋冷暖变化</div></div>
+   <nav id="record-pages" aria-label="四个观察时刻分页"><button type="button" data-record-page="0" aria-pressed="true">1 · 加热前</button><button type="button" data-record-page="1" aria-pressed="false">2 · 加热中</button><button type="button" data-record-page="2" aria-pressed="false">3 · 快要上升时</button><button type="button" data-record-page="3" aria-pressed="false">4 · 降落后</button><span id="record-page-count">1 / 4</span></nav><div class="table-heading"><div>观察任务</div><div>画一画<br>塑料袋形状</div><div>摸一摸<br>塑料袋冷暖变化</div></div>
    <div id="record-rows"></div>
   </div>
   <div class="finding-box"><div class="finding-title">我的发现</div><div class="finding-content"><textarea id="finding-input" maxlength="500" placeholder="袋子为什么会上升，为什么又会降落？把观察到的变化和你的解释连起来。"></textarea><div class="finding-ref hidden" id="finding-reference">参考表达：袋内空气受热后，袋子逐渐鼓起。在周围空气的浮力足以托起袋子和袋内空气时，袋子就能上升；离开热源后，袋内空气逐渐冷却，袋子又会降落。</div></div></div>
@@ -349,7 +366,7 @@ function setTab(next){
  $('lab-workspace').classList.toggle('hidden',next==='record');$('record-workspace').classList.toggle('hidden',next!=='record');
  $('lab-workspace').setAttribute('aria-labelledby',`tab-${next==='record'?'experiment':next}`);
  $('observation-content').classList.toggle('hidden',next==='particles');$('micro-content').classList.toggle('hidden',next!=='particles');
- invalidate();requestAnimationFrame(()=>{if(next==='record'){resizeDrawings();if(highlightedRow>=0)$(`record-row-${highlightedRow}`).scrollIntoView({block:'center',behavior:'smooth'});}else resizeScene();});
+ invalidate();requestAnimationFrame(()=>{if(next==='record'){showRecordPage(highlightedRow>=0?highlightedRow:recordPageIndex);resizeDrawings();}else resizeScene();});
 }
 function recordThisMoment(){highlightedRow=checkpoint();updateRowHighlight();setTab('record');tone('click');}
 function updateRowHighlight(){$$('.record-row').forEach((row,i)=>row.classList.toggle('highlight',i===highlightedRow));}
@@ -671,13 +688,16 @@ function saveRecordNow(){
  catch(e){storageAvailable=false;$('save-state').textContent='无法本机暂存，请导出记录图片';}
 }
 function scheduleSave(){clearTimeout(saveTimer);$('save-state').textContent='正在暂存…';saveTimer=setTimeout(saveRecordNow,350);}
+let recordPageIndex=0;
+function showRecordPage(index){recordPageIndex=Math.max(0,Math.min(3,Number(index)||0));for(let i=0;i<4;i++){const row=$(`record-row-${i}`);if(row)row.hidden=i!==recordPageIndex;}$$('[data-record-page]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.recordPage)===recordPageIndex)));$('record-page-count').textContent=(recordPageIndex+1)+' / 4';requestAnimationFrame(resizeDrawings);}
+$('record-pages').addEventListener('click',e=>{const b=e.target.closest('[data-record-page]');if(b)showRecordPage(Number(b.dataset.recordPage));});
 function buildRecords(){
  $('record-rows').innerHTML=stages.map((s,i)=>`<div class="record-row" id="record-row-${i}"><div class="record-stage"><span class="row-number">0${i+1}</span><b>${i===2?'快要上升时':s.name}</b><button class="text-link" data-revisit="${i}">回看此刻 ${icon('arrow')}</button></div><div class="draw-zone"><canvas class="draw-canvas" id="draw-${i}" aria-label="${s.short}：在此画出塑料袋形状"></canvas><div class="draw-tools"><span>用手指或鼠标画</span><button data-undo="${i}" title="撤销最后一笔">${icon('undo')}撤销</button><button data-clear-draw="${i}" title="只清除这一格的画图">清图</button></div></div><div class="record-inputs"><div class="temp-options" role="group" aria-label="${s.short}的冷暖">${['较冷','变暖','较热','变凉'].map(t=>`<button class="temp-choice ${recordData.rows[i].temp===t?'selected':''}" data-temp-row="${i}" data-temp="${t}" aria-pressed="${recordData.rows[i].temp===t}">${t}</button>`).join('')}</div><textarea id="note-${i}" maxlength="300" aria-label="${s.short}的观察补充" placeholder="我观察到的变化…"></textarea><div class="record-reference ${recordReferences?'':'hidden'}" id="record-ref-${i}"><b>参考：</b>${s.refShape} ${s.refTemp}</div></div></div>`).join('');
  ['className','name','date'].forEach((k,i)=>$(['student-class','student-name','student-date'][i]).value=recordData[k]);
  $('finding-input').value=recordData.finding;
  for(let i=0;i<4;i++){$(`note-${i}`).value=recordData.rows[i].note;bindDrawing(i);$(`note-${i}`).addEventListener('input',e=>{recordData.rows[i].note=e.target.value;scheduleSave();});}
  $('save-state').textContent=storageAvailable?'记录仅暂存在本机，不上传':'无法本机暂存，请导出记录图片';
- updateRowHighlight();
+ updateRowHighlight();showRecordPage(recordPageIndex);
 }
 function drawWorksheetBase(g,index,reference){
  const W=400,H=180,cx=200,floor=157;

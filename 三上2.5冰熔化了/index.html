@@ -18,8 +18,24 @@
 @media(max-width:650px) and (orientation:portrait){.record-row{grid-template-columns:repeat(5,minmax(0,1fr))}.record-row button{font-size:16px;min-height:58px;line-height:1.4;padding:5px 2px}.record-summary{font-size:16px!important}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
 </style>
-</head>
-<body>
+
+<style id="unit-visual-theme">
+/* Unit visual system v1: interface only; original scripts and scientific visuals preserved. */
+:root{--uv-bg:#edf7f8;--uv-surface:#ffffff;--uv-soft:#e1f3f4;--uv-ink:#173f49;--uv-muted:#4e737b;--uv-line:#c5dfe3;--uv-accent:#087b86;--uv-hover:#08636c;--uv-radius:16px;--uv-font:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",system-ui,sans-serif;}
+html,body{background:var(--uv-bg);color:var(--uv-ink);font-family:var(--uv-font);}
+header,.header,.app-header,.top{background:var(--uv-surface);color:var(--uv-ink);border-bottom-color:var(--uv-line);box-shadow:0 2px 0 var(--uv-soft);}
+header h1,.header h1,.app-header h1,.top h1,.top .brand b{color:var(--uv-ink);font-weight:750;letter-spacing:.025em;}
+header .eyebrow,.header .eyebrow,.top small,.app-header small{color:var(--uv-accent);}
+.card,.panel:not(.process),.modal,.dialog,dialog,.rail,.control-rail{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);border-radius:var(--uv-radius);box-shadow:0 5px 20px #153d4b08;}
+button{font-family:var(--uv-font);border-radius:11px;}
+nav button,.nav button,.tabs button,.page-nav button,.main-nav button,.nav-button,.step{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-line);border-radius:11px;box-shadow:none;}
+nav button.active,nav button.selected,nav button.on,nav button[aria-selected="true"],nav button[aria-pressed="true"],.nav button.active,.nav button.selected,.nav button.on,.nav button[aria-selected="true"],.nav button[aria-pressed="true"],.tabs button.active,.tabs button.selected,.tabs button.on,.tabs button[aria-selected="true"],.tabs button[aria-pressed="true"],.page-nav button.active,.page-nav button.selected,.page-nav button.on,.page-nav button[aria-selected="true"],.page-nav button[aria-pressed="true"],.main-nav button.active,.main-nav button.selected,.main-nav button.on,.main-nav button[aria-selected="true"],.main-nav button[aria-pressed="true"],.nav-button.active,.nav-button.selected,.nav-button.on,.nav-button[aria-selected="true"],.nav-button[aria-pressed="true"],.step.active,.step.selected,.step.on,.step[aria-selected="true"],.step[aria-pressed="true"],button.primary,.button.primary,.action.primary{background:var(--uv-accent);color:#fff;border-color:var(--uv-accent);box-shadow:none;}
+button.primary:hover,.button.primary:hover,.action.primary:hover{background:var(--uv-hover);color:#fff;}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:var(--uv-accent);outline-offset:3px;}
+.notice,.info-note,.noteBox,.callout{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-line);border-left-color:var(--uv-accent);border-radius:11px;}
+</style>
+<style id="water-projector-frame">html{overflow:hidden!important}body{position:absolute!important;width:1600px!important;height:900px!important;min-width:0!important;min-height:0!important;transform-origin:top left!important;overflow:hidden!important}.app-shell,#app{height:900px!important;width:1600px!important;max-width:none!important}</style></head>
+<body><script id="water-projector-fit">(()=>{function fit(){var b=document.body,s=Math.min(innerWidth/1600,innerHeight/900);b.style.transform='scale('+s+')';b.style.left=((innerWidth-1600*s)/2)+'px';b.style.top=((innerHeight-900*s)/2)+'px';}addEventListener('resize',fit);fit();})();</script>
 <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
 <symbol id="i-full" viewBox="0 0 24 24"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></symbol>
 <symbol id="i-help" viewBox="0 0 24 24"><path d="M9 18h6m-5 3h4M8 14a7 7 0 1 1 8 0l-1 3H9z"/></symbol>

@@ -37,7 +37,24 @@
  #pressSection .collision-tip{display:none}
 }
 </style>
-</head>
+
+<style id="unit-visual-theme-v1" data-unit="4-1">
+/* Unit visual system v1: interface-only; preserves original content and simulation colors. */
+:root{--uv-bg:#edf5f3;--uv-surface:#ffffff;--uv-soft:#e2f1ed;--uv-ink:#183d3c;--uv-muted:#536f6b;--uv-line:#c8ded7;--uv-accent:#087568;--uv-on:#ffffff;--uv-head:#f8fcfa;--uv-headink:#183d3c;--uv-focus:#b57710;}
+html,body{background:var(--uv-bg)!important}body{color:var(--uv-ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif!important;-webkit-font-smoothing:antialiased}
+body > header,body > .app > header,body > .shell > header,body > #app > header,body > .frame > header,body .app-header,body .topbar,body header.header{background:var(--uv-head)!important;color:var(--uv-headink)!important;border-color:var(--uv-line)!important;box-shadow:0 1px 0 var(--uv-line)!important}
+body .panel,body .card,body .sidebar,body .control-panel,body .board-side,body .board-main,body .modal,body .experiment,body .dialog-body,body .box,body .controls,body .explanation{background:var(--uv-surface)!important;color:var(--uv-ink);border-color:var(--uv-line)!important;border-radius:16px}
+body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch){border-color:var(--uv-line);border-radius:11px;background-color:var(--uv-surface);color:var(--uv-ink);font-family:inherit;touch-action:manipulation}
+body button.primary,body button.primary-btn,body button.primary-button,body button.ear-primary,body button.phone-primary,body nav button[aria-selected="true"],body nav button[aria-pressed="true"],body button.tab.active,body button.nav-btn.active,body nav button.active,body nav button[aria-current="page"]{background:var(--uv-accent)!important;color:var(--uv-on)!important;border-color:var(--uv-accent)!important}
+body button:focus-visible,body input:focus-visible,body select:focus-visible,body textarea:focus-visible,body a:focus-visible{outline:3px solid var(--uv-focus)!important;outline-offset:3px}
+body input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),body textarea,body select{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);border-radius:9px}
+body footer,body .app-footer,body .footer,body .page-foot{color:var(--uv-muted);border-color:var(--uv-line)}
+body .notice,body .callout,body .side-note,body .side-hint,body .note-question{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-accent)}
+body .muted,body .rail-title,body .section-heading,body .control-label,body .control-hint,body .side-title{color:var(--uv-muted)}
+@media(hover:hover){body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch):not(:disabled):hover{border-color:var(--uv-accent)}}
+@media print{html,body{background:white!important;color:black!important}body header,body footer{background:white!important;color:black!important;box-shadow:none!important}body header h1,body header .brand,body header .heading{color:black!important}}
+</style>
+<style id="classroom-single-screen-fix">@media(min-width:791px){html,body{height:100%;overflow:hidden}.sidebar{overflow:visible;padding-right:0}.control-section{padding-top:4px;padding-bottom:7px}.control-section+.control-section{padding-top:8px}.big-count{margin:5px 0}.big-count b{font-size:44px}.primary{min-height:44px;padding:7px 10px}.button-row,.presets{margin-top:7px}.button-row button{min-height:36px;padding:7px}.presets button{padding:5px 8px}.stepper{margin-top:8px}.tap-actions{margin-top:6px}.tap-actions .secondary{min-height:35px;padding:6px}.tap-compare{min-height:32px;margin-top:5px}#pressSection .force-row{margin-top:5px}#forceRange{height:25px}#pressSection .small-note{margin:4px 0}.science-note{font-size:12px;line-height:1.45;padding-top:5px;margin-top:5px}}</style></head>
 <body>
 <div class="app">
 <header class="topbar">

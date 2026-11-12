@@ -24,6 +24,27 @@ dialog{width:min(530px,calc(100vw - 28px));max-height:calc(100dvh - 30px);margin
 @media(orientation:landscape) and (max-height:330px){.app-header{min-height:29px}.app-header h1{font-size:16px}.app{gap:4px}.monitor-head{min-height:25px}.monitor-foot{min-height:22px}.mic-state{min-height:24px;font-size:9px}.frequency-readout span{font-size:21px}.transport{min-height:52px}.record-button{width:40px;height:40px;min-width:40px;min-height:40px}.record-symbol{width:29px;height:29px}.record-time{font-size:8px}.feature-chip span{font-size:16px}.recorder-hint{font-size:8px}.wave-area{min-height:32px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
+
+<style id="unit-visual-theme-v1" data-unit="4-3">
+/* Unit visual system v1: interface-only; preserves original content and simulation colors. */
+:root{--uv-bg:#f0f1f8;--uv-surface:#ffffff;--uv-soft:#e9e8f7;--uv-ink:#252c4b;--uv-muted:#5e6683;--uv-line:#d5d7e9;--uv-accent:#6153aa;--uv-on:#ffffff;--uv-head:#222a49;--uv-headink:#f3f4ff;--uv-focus:#087f8c;}
+html,body{background:var(--uv-bg)!important}body{color:var(--uv-ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif!important;-webkit-font-smoothing:antialiased}
+body > header,body > .app > header,body > .shell > header,body > #app > header,body > .frame > header,body .app-header,body .topbar,body header.header{background:var(--uv-head)!important;color:var(--uv-headink)!important;border-color:var(--uv-line)!important;box-shadow:0 1px 0 var(--uv-line)!important}
+body .card,body .evidence,body .controls,body .sidebar,body .inspector,body .workbench,body .stage,body .arena,body .box,body .tools-pane,body .dialog,body .modal,body .dialog-card,body .sheet-dialog,body .help-dialog,body .pro-controls,body .meter-column,body .control-card{background:var(--uv-surface)!important;color:var(--uv-ink);border-color:var(--uv-line)!important;border-radius:16px}
+body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch){border-color:var(--uv-line);border-radius:11px;background-color:var(--uv-surface);color:var(--uv-ink);font-family:inherit;touch-action:manipulation}
+body button.primary,body button.primary-btn,body button.primary-button,body button.ear-primary,body button.phone-primary,body nav button[aria-selected="true"],body nav button[aria-pressed="true"],body button.tab.active,body button.nav-btn.active,body nav button.active,body nav button[aria-current="page"]{background:var(--uv-accent)!important;color:var(--uv-on)!important;border-color:var(--uv-accent)!important}
+body button:focus-visible,body input:focus-visible,body select:focus-visible,body textarea:focus-visible,body a:focus-visible{outline:3px solid var(--uv-focus)!important;outline-offset:3px}
+body input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),body textarea,body select{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);border-radius:9px}
+body footer,body .app-footer,body .footer,body .page-foot{color:var(--uv-muted);border-color:var(--uv-line)}
+body .notice,body .callout,body .side-note,body .side-hint,body .note-question{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-accent)}
+body .muted,body .rail-title,body .section-heading,body .control-label,body .control-hint,body .side-title{color:var(--uv-muted)}
+@media(hover:hover){body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch):not(:disabled):hover{border-color:var(--uv-accent)}}
+body header h1,body header .brand h1,body header .brand,body header .heading{color:var(--uv-headink)!important}body header .eyebrow,body header .subtitle,body header .sub,body header .chapter{color:#b9c5e5!important}
+body header nav button,body header .tools button,body header .header-actions button,body header .header-tools button,body header .utilities button{background:#303957;color:#e2e6f7;border-color:#53617f}
+body .control-card,body .control-set,body .evidence-note,body .control-rule{border-color:var(--uv-line)}body .entry,body .case{border-color:var(--uv-line)}
+body .app-header{border-radius:12px;padding:8px 12px}body .teacher-link{color:#554596}body .monitor{border:1px solid #34436b}
+@media print{html,body{background:white!important;color:black!important}body header,body footer{background:white!important;color:black!important;box-shadow:none!important}body header h1,body header .brand,body header .heading{color:black!important}}
+</style>
 </head>
 <body>
 <div class="app" id="app">
