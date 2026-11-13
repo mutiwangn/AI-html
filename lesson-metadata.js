@@ -371,13 +371,13 @@ window.AIHTML_METADATA = {
   },
   "./三上3.7设计和制作过山车/": {
     "id": "a5c4a896654c46a0458a8003ba2bdd2a",
-    "updatedAt": "2026-11-13T01:47:54Z",
-    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
+    "updatedAt": "2026-11-13T05:46:32Z",
+    "commit": "42da557ab18e7a75c200ab9cc99896163412f8a5"
   },
   "./三上3.8测试过山车/": {
     "id": "80a1a335f91c64b009a93fc816f14e0e",
-    "updatedAt": "2026-11-13T01:47:54Z",
-    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
+    "updatedAt": "2026-11-13T05:46:32Z",
+    "commit": "42da557ab18e7a75c200ab9cc99896163412f8a5"
   },
   "./三下1.1根据太阳辨别方向/": {
     "id": "e8ac5cfa66b70be175c8b7c9186d6b44",
@@ -536,13 +536,13 @@ window.AIHTML_METADATA = {
   },
   "./四上1.8自制打气筒/": {
     "id": "9f682bcc384d3f563c8aae157746833a",
-    "updatedAt": "2026-11-13T01:47:54Z",
-    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
+    "updatedAt": "2026-11-13T05:46:32Z",
+    "commit": "42da557ab18e7a75c200ab9cc99896163412f8a5"
   },
   "./四上1.8自制打气筒/自由组装实验台/": {
     "id": "bea03480189eae129ef60e69f21d75b3",
-    "updatedAt": "2026-11-13T01:47:54Z",
-    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
+    "updatedAt": "2026-11-13T05:46:32Z",
+    "commit": "42da557ab18e7a75c200ab9cc99896163412f8a5"
   },
   "./四上2.1我们的呼吸与消化/": {
     "id": "f034837db9d8633719118c4bca7f1ffa",
@@ -611,13 +611,13 @@ window.AIHTML_METADATA = {
   },
   "./四上3.5设计我们的乐器/": {
     "id": "234b95242eee02a7c22156758211ce67",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T05:46:32Z",
+    "commit": "42da557ab18e7a75c200ab9cc99896163412f8a5"
   },
   "./四上3.6改进我们的乐器/": {
     "id": "9c0a3bad86a7dbcaaa8e458244dec60e",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T05:46:32Z",
+    "commit": "42da557ab18e7a75c200ab9cc99896163412f8a5"
   },
   "./四上3.7声音的传播/": {
     "id": "5a95be508f02f23f3e0ad106dcb1bf44",
