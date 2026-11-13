@@ -261,43 +261,43 @@ window.AIHTML_METADATA = {
   },
   "./三上1.1我们关心天气/": {
     "id": "ee93ade746ba05253ab20ead9c63c3ab",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上1.2认识气温计/": {
     "id": "930c264ec0eb09089c25da977bc2eec3",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "b691407ec87aa24fe6a24bb0d086364063220482"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上1.3测量气温/": {
     "id": "8a756fcd8d1eacbf321be08b48d372e3",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上1.4测量降水量/": {
     "id": "7893a3479fc6511e370652a5b41db5f1",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上1.5观测风/": {
     "id": "65f585d0222ecbc37313e2843f391f89",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上1.6观察云/": {
     "id": "5eddbcfe9af463043f30cd6031a092de",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上1.7天气预报/": {
     "id": "25f0e4ec92e4a412949ff6b247e748fe",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上1.8天气的影响/": {
     "id": "b56ba2c44491c459142088b65878a397",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上2.1水到哪里去了/": {
     "id": "4845d5b62bbad971df97566eaa4fd762",
@@ -341,43 +341,43 @@ window.AIHTML_METADATA = {
   },
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上3.2各种各样的运动/": {
     "id": "f4a0da4c66f01b47a75e3baed898807a",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上3.3直线运动和曲线运动/": {
     "id": "d19b7b167fd1bc069786aef9d1d03de2",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "73b89888b9807914ef68c4b812a799cc673df5a1"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上3.4相同距离比快慢/": {
     "id": "003d84f188e9a327d3335b0073ec03b0",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上3.5相同时间比快慢/": {
     "id": "4e9f2e3992924af301c17924292eb7a3",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "1f0c1cf6dc796c66be79f8dad0bbc77a89794623"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上3.6运动和能量/": {
     "id": "b62b5b8d2322a71839bb0517c4cf980e",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "b26f3cfa38f53b4830f1f0e2966b437a46e81c5b"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上3.7设计和制作过山车/": {
     "id": "a5c4a896654c46a0458a8003ba2bdd2a",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "b26f3cfa38f53b4830f1f0e2966b437a46e81c5b"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三上3.8测试过山车/": {
     "id": "80a1a335f91c64b009a93fc816f14e0e",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "b26f3cfa38f53b4830f1f0e2966b437a46e81c5b"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./三下1.1根据太阳辨别方向/": {
     "id": "e8ac5cfa66b70be175c8b7c9186d6b44",
@@ -501,48 +501,48 @@ window.AIHTML_METADATA = {
   },
   "./四上1.1感受空气/": {
     "id": "d2885c385b5dbde778218dcb4f38f023",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上1.2空气能占据空间吗/": {
     "id": "4cdc7bf1c55137d3d0854aff34c1c6d0",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上1.3空气占据的空间会改变吗/": {
     "id": "45ebb8b3bbb1e47894219612a77a077d",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上1.4空气有质量吗/": {
     "id": "9271f24505895508606c5a004bb13eaa",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上1.5空气有力量/": {
     "id": "c93d66b7a33ca9eb9dc04ddd06fbd02e",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上1.6我们来做热气球/": {
     "id": "4081960b6341db6b072a1857dc29de99",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上1.7风的成因/": {
     "id": "4ae1b2bce03a0446dbe9c11e2c6eb40a",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上1.8自制打气筒/": {
     "id": "9f682bcc384d3f563c8aae157746833a",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上1.8自制打气筒/自由组装实验台/": {
     "id": "bea03480189eae129ef60e69f21d75b3",
-    "updatedAt": "2026-11-12T23:06:21Z",
-    "commit": "add0ee4c477174eaa6a4b716437f84ce470c7531"
+    "updatedAt": "2026-11-13T01:47:54Z",
+    "commit": "765eecd3fb3f40e66dfc6e13a06771859d21bd3c"
   },
   "./四上2.1我们的呼吸与消化/": {
     "id": "f034837db9d8633719118c4bca7f1ffa",
