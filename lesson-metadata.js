@@ -381,43 +381,43 @@ window.AIHTML_METADATA = {
   },
   "./三下1.1根据太阳辨别方向/": {
     "id": "e8ac5cfa66b70be175c8b7c9186d6b44",
-    "updatedAt": "2026-11-09T01:05:49Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./三下1.2利用自然物辨别方向/": {
     "id": "2bd55605b2a27b51dd3fdc9f2c25ca7f",
-    "updatedAt": "2026-11-09T01:05:49Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./三下1.3利用磁铁辨别方向/": {
     "id": "bb8fe13406bc04fa468e0545b8b05dab",
-    "updatedAt": "2026-11-09T01:05:49Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./三下1.4磁极与方向/": {
     "id": "abfc70bab92fb34d361f0855f30de6a6",
-    "updatedAt": "2026-11-09T01:05:49Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./三下1.5制作小磁针/": {
     "id": "fed5b68f4870f36e622cdcea7c77e7a4",
-    "updatedAt": "2026-11-09T01:05:49Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./三下1.6设计指南针/": {
     "id": "47aab58e4de88d36f5d00d78005590f3",
-    "updatedAt": "2026-11-09T01:05:49Z",
-    "commit": "dbe290f97f495270ee8d4a1cd0cc6dd6dc5a538f"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./三下1.7制作指南针/": {
     "id": "0df405fc498ff14fe22b54506d609769",
-    "updatedAt": "2026-11-08T05:22:40Z",
-    "commit": "2c8b0ede5c408c310066363e26446bfb38816393"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./三下1.8用指南针“寻宝”/": {
     "id": "24d8a7feea8a0bfa47aa94b944f271c0",
-    "updatedAt": "2026-11-08T05:22:40Z",
-    "commit": "2c8b0ede5c408c310066363e26446bfb38816393"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./三下2.1不同种类的动物/": {
     "id": "88cb3460639fda18d75fea9e23e43fbd",
@@ -1031,33 +1031,33 @@ window.AIHTML_METADATA = {
   },
   "./六上1.1健康成长的信息/": {
     "id": "0da4ee9b6871a46e10b9e9618c78227c",
-    "updatedAt": "2026-11-10T13:18:29Z",
-    "commit": "b505920e7c739e84b6557d103fef8c16090724e6"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./六上1.2食物中的营养/": {
     "id": "23ed37464c09c052dec4baa31038cc4a",
-    "updatedAt": "2026-11-10T13:18:29Z",
-    "commit": "b505920e7c739e84b6557d103fef8c16090724e6"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./六上1.3营养要均衡/": {
     "id": "9956d4b5620689cb6e8c2789288b37bf",
-    "updatedAt": "2026-11-10T13:18:29Z",
-    "commit": "b505920e7c739e84b6557d103fef8c16090724e6"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./六上1.4身体的总指挥/": {
     "id": "c9fd9e0e5a3d8c01a04afe127c5aa1b4",
-    "updatedAt": "2026-11-10T13:18:29Z",
-    "commit": "b505920e7c739e84b6557d103fef8c16090724e6"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./六上1.5睡眠要充足/": {
     "id": "dc96f8c7045a3e41bb4d3acdaf8409a8",
-    "updatedAt": "2026-11-10T13:18:29Z",
-    "commit": "b505920e7c739e84b6557d103fef8c16090724e6"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./六上1.6管理我们的情绪/": {
     "id": "95d9835eba4d11b93ab9c800475a1818",
-    "updatedAt": "2026-11-10T13:21:43Z",
-    "commit": "2e26ceac2cfc23ebbd62c758a331948029522862"
+    "updatedAt": "2026-11-13T10:50:43Z",
+    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
   },
   "./六上1.7制订健康生活计划/": {
     "id": "0d900d41976c0d636535b22f914b3ed4",
