@@ -506,8 +506,8 @@ window.AIHTML_METADATA = {
   },
   "./四上1.2空气能占据空间吗/": {
     "id": "4cdc7bf1c55137d3d0854aff34c1c6d0",
-    "updatedAt": "2026-11-13T02:12:03Z",
-    "commit": "6b2665b17c7bb7775052f1c035ad603eb9d8d3aa"
+    "updatedAt": "2026-11-13T09:12:47Z",
+    "commit": "1656352fde1357083d4aefeacd460f664feeddca"
   },
   "./四上1.3空气占据的空间会改变吗/": {
     "id": "45ebb8b3bbb1e47894219612a77a077d",
@@ -566,8 +566,8 @@ window.AIHTML_METADATA = {
   },
   "./四上2.5口腔里的消化/": {
     "id": "743720f3773d4c68a92754b822a3e5f7",
-    "updatedAt": "2026-11-13T02:12:03Z",
-    "commit": "6b2665b17c7bb7775052f1c035ad603eb9d8d3aa"
+    "updatedAt": "2026-11-13T09:17:12Z",
+    "commit": "acf2d662f54c829414de71ec67cebc7d8e922f6d"
   },
   "./四上2.6胃和小肠里的消化/": {
     "id": "496c01aef0e3beaffba771d020406d96",
