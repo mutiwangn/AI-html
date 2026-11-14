@@ -16,8 +16,26 @@
 @media(max-width:600px){.topbar{padding:12px 12px 0}h1{font-size:21px}.utilities button{font-size:14px;min-height:36px;padding:7px 9px}.utilities .icon{display:none}.utilities{gap:5px}.tabs{gap:22px;height:44px}.tab{font-size:18px}.observe{display:flex;flex-direction:column;min-height:0}.overview-side{border-right:0;border-bottom:1px solid var(--line);padding:15px 15px 10px}.specimen-picker button{font-size:18px}.overview-stage{height:285px;min-height:285px;flex:none}.scanbar{flex-wrap:nowrap}.scanbar .primary{order:0;width:auto;margin-left:auto}.scan-strip{height:60px}.direction-tip{font-size:17px}.viewer-side{padding:12px 15px}.field-stage{height:355px;min-height:355px;flex:none}.viewer-top strong{font-size:18px}.focus-row{min-height:65px;flex-wrap:nowrap}.focus-control{flex-basis:auto}.focus-control label{font-size:18px}.led{font-size:16px;gap:8px}.switch-track{width:49px;height:29px}.switch-track:after{width:21px;height:21px}.led[aria-pressed="true"] .switch-track:after{transform:translateX(20px)}.tools-switch button{font-size:18px}.field-status{font-size:14px}.record{gap:12px;padding:14px 12px}.record-toolbar button{font-size:15px;padding:8px 9px}.record-grid{display:flex;flex-direction:column;gap:14px}.record-cell{padding:12px}.record-cell header{flex-wrap:nowrap}.record-cell h2{font-size:20px;flex-basis:auto}.record-cell header button{font-size:16px;min-height:38px}.drawing-wrap{height:300px;flex:none}.source-label{font-size:14px;min-height:0;margin-bottom:7px}.note-input{height:58px;font-size:17px}.drawing-toolbar{position:sticky;bottom:0;z-index:5;padding:9px;background:var(--bg);border:1px solid var(--line);border-radius:8px}.draw-hint{flex-basis:100%;font-size:13px}.drawing-toolbar button{font-size:16px}.footer .model-note{white-space:normal;font-size:12px}.dialog{padding:20px}.dialog p,.dialog li{font-size:16px}.toast{font-size:16px;bottom:25px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
-</head>
-<body>
+<style id="four-domain-coverage-theme">
+/* Four-domain classroom chrome: scientific SVG/canvas and original scripts unchanged. */
+body[data-course-domain="engineering"]{--domain-main:#252629;--domain-accent:#F4DF35;--domain-paper:#F4F0E7;--domain-ink:#252629;--domain-soft:#EAE4D5;--domain-line:#CDC5B5;background:#F4F0E7!important;color:#252629}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header){background:#252629!important;color:#F4DF35!important;border-bottom:4px solid #F4DF35!important;box-shadow:none}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(h1,.chapter,.book-code,.identity p,.brand p,.subtitle){color:#F4DF35!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button,.tab){background:transparent!important;color:#F4DF35!important;border-color:#F4DF3566!important;border-radius:3px!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button[aria-selected="true"],button[aria-pressed="true"],button.active,button[aria-current="page"]){background:#F4DF35!important;color:#252629!important;border-color:#F4DF35!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) nav{background:transparent!important}
+body[data-course-domain] :is(main,.main,.app,#app){background-color:transparent}
+body[data-course-domain] :is(.question,.question-bar,.question-strip,.intro,.stage-header){border-color:#CDC5B5;}
+body[data-course-domain] :is(.ob-controls,.lens-controls,.control-panel,.setting-panel,.wind-panel,.sidebar,.side,.aside,.panel-section){border-color:#CDC5B5;}
+body[data-course-domain] :is(button.primary,button.active,button.selected,button[aria-pressed="true"],button[aria-selected="true"]):not([data-color]):not(.color-dot):not(.swatch):not([style*="background"]){background:#F4DF35!important;color:#252629!important;border-color:#F4DF35!important}
+body[data-course-domain] button:not([aria-pressed="true"]):not([aria-selected="true"]):not(.primary):not(.active):not(.selected){border-color:#CDC5B5}
+body[data-course-domain] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){accent-color:#F4DF35}
+body[data-course-domain] :is(button,input,select,textarea):focus-visible{outline:3px solid #F4DF35;outline-offset:3px}
+body[data-course-domain] :is(.panel-heading,.panel-head,.section-title,.control-title){border-color:#CDC5B5}
+body[data-course-domain] :is(dialog,.modal-panel){border-color:#CDC5B5;}
+body[data-course-domain="engineering"] :is(.overview-side,.control-panel,.control-card,.controls){border-color:#CDC5B5}
+</style></head>
+<body data-course-domain="engineering">
 <svg aria-hidden="true" class="visually-hidden"><defs><symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 7v5h5M4 12a8 8 0 1 0 2-6"/></symbol><symbol id="i-full" viewBox="0 0 24 24"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></symbol></defs></svg>
 <header class="topbar">
  <h1>用简易显微镜观察</h1>
