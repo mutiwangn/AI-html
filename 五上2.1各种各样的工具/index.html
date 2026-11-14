@@ -17,8 +17,27 @@
 @media(max-height:650px) and (min-width:851px){body{overflow:auto}.app{height:690px}.topbar{padding-top:10px;padding-bottom:10px}.workspace{padding-top:10px}.rail{gap:9px}.control-block{padding-bottom:9px}.dock{padding-top:5px;padding-bottom:10px}.quiet-note{font-size:13px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
-</head>
-<body>
+<style id="four-domain-coverage-theme">
+/* Four-domain classroom chrome: scientific SVG/canvas and original scripts unchanged. */
+body[data-course-domain="engineering"]{--domain-main:#252629;--domain-accent:#F4DF35;--domain-paper:#F4F0E7;--domain-ink:#252629;--domain-soft:#EAE4D5;--domain-line:#CDC5B5;background:#F4F0E7!important;color:#252629}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header){background:#252629!important;color:#F4DF35!important;border-bottom:4px solid #F4DF35!important;box-shadow:none}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(h1,small,.eyebrow,.chapter,.book-code,.identity p,.brand p,.brand small,.brand>div>span,.subtitle){color:#F4DF35!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button,.tab){background:transparent!important;color:#F4DF35!important;border-color:#F4DF3566!important;border-radius:3px!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button[aria-selected="true"],button[aria-pressed="true"],button.active,button[aria-current="page"]){background:#F4DF35!important;color:#252629!important;border-color:#F4DF35!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) nav{background:transparent!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) .tab span{color:inherit!important}
+body[data-course-domain] :is(main,.main,.app,#app){background-color:transparent}
+body[data-course-domain] :is(.question,.question-bar,.question-strip,.intro,.stage-header){border-color:#CDC5B5;}
+body[data-course-domain] :is(.ob-controls,.lens-controls,.control-panel,.setting-panel,.wind-panel,.sidebar,.side,.aside,.panel-section){border-color:#CDC5B5;}
+body[data-course-domain] :is(button.primary,button.active,button.selected,button[aria-pressed="true"],button[aria-selected="true"]):not([data-color]):not(.color-dot):not(.swatch):not([style*="background"]){background:#F4DF35!important;color:#252629!important;border-color:#F4DF35!important}
+body[data-course-domain] button:not([aria-pressed="true"]):not([aria-selected="true"]):not(.primary):not(.active):not(.selected){border-color:#CDC5B5}
+body[data-course-domain] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){accent-color:#F4DF35}
+body[data-course-domain] :is(button,input,select,textarea):focus-visible{outline:3px solid #F4DF35;outline-offset:3px}
+body[data-course-domain] :is(.panel-heading,.panel-head,.section-title,.control-title){border-color:#CDC5B5}
+body[data-course-domain] :is(dialog,.modal-panel){border-color:#CDC5B5;}
+body[data-course-domain="engineering"] :is(.overview-side,.control-panel,.control-card,.controls){border-color:#CDC5B5}
+</style></head>
+<body data-course-domain="engineering">
 <div class="app">
 <header class="topbar">
   <div class="brand"><div class="brand-mark" aria-hidden="true"><svg width="31" height="31" viewBox="0 0 32 32" fill="none"><path d="M4 21h17l6-12M6 21l-2-8h17M9 13V8h7v5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="26" r="2.5" fill="currentColor"/><circle cx="22" cy="26" r="2.5" fill="currentColor"/></svg></div><div><div class="eyebrow">五上 · 2.1　工具与技术</div><h1>各种各样的工具</h1></div></div>
