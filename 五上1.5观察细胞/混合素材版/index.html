@@ -24,8 +24,26 @@
 @media(max-height:650px) and (min-width:761px){.ob-pane-head{min-height:54px;padding:5px 12px}.ob-tools{min-height:54px;padding:6px 12px}.ob-controls{min-height:42px}.ob-stage{min-height:120px}.ob-top{min-height:36px}.ob-top button{min-height:38px}#observe{gap:7px}}
 
 </style>
-</head>
-<body>
+<style id="four-domain-coverage-theme">
+/* Four-domain classroom chrome: scientific SVG/canvas and original scripts unchanged. */
+body[data-course-domain="life"]{--domain-main:#202D3A;--domain-accent:#BD4836;--domain-paper:#FFF3EB;--domain-ink:#202D3A;--domain-soft:#F8DED1;--domain-line:#D8BAB0;background:#FFF3EB!important;color:#202D3A}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header){background:#202D3A!important;color:#FFF3EB!important;border-bottom:4px solid #BD4836!important;box-shadow:none}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(h1,.chapter,.book-code,.identity p,.brand p,.subtitle){color:#FFF3EB!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button,.tab){background:transparent!important;color:#FFF3EB!important;border-color:#FFF3EB66!important;border-radius:3px!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button[aria-selected="true"],button[aria-pressed="true"],button.active,button[aria-current="page"]){background:#BD4836!important;color:#FFFFFF!important;border-color:#BD4836!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) nav{background:transparent!important}
+body[data-course-domain] :is(main,.main,.app,#app){background-color:transparent}
+body[data-course-domain] :is(.question,.question-bar,.question-strip,.intro,.stage-header){border-color:#D8BAB0;}
+body[data-course-domain] :is(.ob-controls,.lens-controls,.control-panel,.setting-panel,.wind-panel,.sidebar,.side,.aside,.panel-section){border-color:#D8BAB0;}
+body[data-course-domain] :is(button.primary,button.active,button.selected,button[aria-pressed="true"],button[aria-selected="true"]):not([data-color]):not(.color-dot):not(.swatch):not([style*="background"]){background:#BD4836!important;color:#FFFFFF!important;border-color:#BD4836!important}
+body[data-course-domain] button:not([aria-pressed="true"]):not([aria-selected="true"]):not(.primary):not(.active):not(.selected){border-color:#D8BAB0}
+body[data-course-domain] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){accent-color:#BD4836}
+body[data-course-domain] :is(button,input,select,textarea):focus-visible{outline:3px solid #BD4836;outline-offset:3px}
+body[data-course-domain] :is(.panel-heading,.panel-head,.section-title,.control-title){border-color:#D8BAB0}
+body[data-course-domain] :is(dialog,.modal-panel){border-color:#D8BAB0;}
+body[data-course-domain="life"] :is(.ob-controls,.water-control,.ev-media-controls,.panel-section){background:#FFF3EB;border-color:#D8BAB0}
+</style></head>
+<body data-course-domain="life">
 <header class="app-header">
  <div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 7Q20 2 37 9Q46 20 39 35Q29 47 12 39Q2 26 10 7Z" fill="#d9ebe0" stroke="#187d70" stroke-width="2"/><path d="M14 11Q25 7 35 13Q42 24 34 34Q26 41 15 34Q8 24 14 11Z" fill="#edf5ee" stroke="#77ab91"/><ellipse cx="18" cy="23" rx="6" ry="7" fill="#ad88b8"/><circle cx="18" cy="23" r="2" fill="#765285"/></svg><h1>观察细胞 · 混合素材版</h1></div>
  <nav class="main-tabs" role="tablist" aria-label="学习工作区"><button id="tab-observe" type="button" role="tab" aria-selected="true" aria-controls="observe">观察与记录</button><button id="tab-structure" type="button" role="tab" aria-selected="false" aria-controls="structure">立体与切面</button></nav>
