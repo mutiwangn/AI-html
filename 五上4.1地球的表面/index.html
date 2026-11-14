@@ -113,7 +113,26 @@
   #explore-page .canvas-tools{bottom:46px;right:9px}#explore-page .canvas-tools button{height:27px;width:28px;font-size:14px}
 }
 
-</style></head><body>
+</style><style id="four-domain-coverage-theme">
+/* Four-domain classroom chrome: scientific SVG/canvas and original scripts unchanged. */
+body[data-course-domain="earth"]{--domain-main:#153F3D;--domain-accent:#AD8C48;--domain-paper:#F3EFE4;--domain-ink:#153F3D;--domain-soft:#E4E7DD;--domain-line:#B9C6BB;background:#F3EFE4!important;color:#153F3D}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header){background:#153F3D!important;color:#FFF9EE!important;border-bottom:4px solid #AD8C48!important;box-shadow:none}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(h1,small,.eyebrow,.chapter,.book-code,.identity p,.brand p,.brand small,.brand>div>span,.subtitle){color:#FFF9EE!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button,.tab){background:transparent!important;color:#FFF9EE!important;border-color:#FFF9EE66!important;border-radius:3px!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button[aria-selected="true"],button[aria-pressed="true"],button.active,button[aria-current="page"]){background:#AD8C48!important;color:#102423!important;border-color:#AD8C48!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) nav{background:transparent!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) .tab span{color:inherit!important}
+body[data-course-domain] :is(main,.main,.app,#app){background-color:transparent}
+body[data-course-domain] :is(.question,.question-bar,.question-strip,.intro,.stage-header){border-color:#B9C6BB;}
+body[data-course-domain] :is(.ob-controls,.lens-controls,.control-panel,.setting-panel,.wind-panel,.sidebar,.side,.aside,.panel-section){border-color:#B9C6BB;}
+body[data-course-domain] :is(button.primary,button.active,button.selected,button[aria-pressed="true"],button[aria-selected="true"]):not([data-color]):not(.color-dot):not(.swatch):not([style*="background"]){background:#AD8C48!important;color:#102423!important;border-color:#AD8C48!important}
+body[data-course-domain] button:not([aria-pressed="true"]):not([aria-selected="true"]):not(.primary):not(.active):not(.selected){border-color:#B9C6BB}
+body[data-course-domain] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){accent-color:#AD8C48}
+body[data-course-domain] :is(button,input,select,textarea):focus-visible{outline:3px solid #AD8C48;outline-offset:3px}
+body[data-course-domain] :is(.panel-heading,.panel-head,.section-title,.control-title){border-color:#B9C6BB}
+body[data-course-domain] :is(dialog,.modal-panel){border-color:#B9C6BB;}
+body[data-course-domain="earth"] .terrain-choice.active :is(b,small){color:#102423!important}
+</style></head><body data-course-domain="earth">
 <svg aria-hidden="true" class="defs"><defs>
 <symbol id="i-globe" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c5 5 5 13 0 18-5-5-5-13 0-18z"></path></symbol>
 <symbol id="i-map" viewbox="0 0 24 24"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15m6-12v15"></path></symbol>
