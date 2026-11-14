@@ -306,8 +306,8 @@ window.AIHTML_METADATA = {
   },
   "./三上2.2水珠从哪里来二维版/": {
     "id": "ad313d2f8727e92a54baafa62158f09b",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T11:10:20Z",
+    "commit": "dea205703f16a02e9392a27db7d3d67da6e19084"
   },
   "./三上2.3水沸腾了/": {
     "id": "87bf490993724c6188345ea84aec315c",
@@ -531,8 +531,8 @@ window.AIHTML_METADATA = {
   },
   "./四上1.7风的成因/": {
     "id": "4ae1b2bce03a0446dbe9c11e2c6eb40a",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T11:09:41Z",
+    "commit": "ea63895e45b4ca7cbdb693c188d8e865d16df1f9"
   },
   "./四上1.8自制打气筒/": {
     "id": "9f682bcc384d3f563c8aae157746833a",
@@ -926,33 +926,33 @@ window.AIHTML_METADATA = {
   },
   "./五下2.1热从哪里来/": {
     "id": "b04ee9901a6ff28bf1e2b953ab15b1ff",
-    "updatedAt": "2026-11-14T04:51:00Z",
-    "commit": "c072f3da10d8adfa3bf403198e96e77097f44762"
+    "updatedAt": "2026-11-14T11:06:21Z",
+    "commit": "e02c839f4bf799eb5d6a94ff9ec0ac629a16a21c"
   },
   "./五下2.2热与水的变化/": {
     "id": "73497766914b4df005165db2aa26569d",
-    "updatedAt": "2026-11-14T04:50:06Z",
-    "commit": "908b5845839c311ccfec8724283f82babaf8589b"
+    "updatedAt": "2026-11-14T11:06:21Z",
+    "commit": "e02c839f4bf799eb5d6a94ff9ec0ac629a16a21c"
   },
   "./五下2.3温度与热的传递/": {
     "id": "362820e763d8e1fb289dbdacfc22e08b",
-    "updatedAt": "2026-11-14T04:49:47Z",
-    "commit": "6abc8336a1e7b2c8457a3ebd6e8ab53701820a99"
+    "updatedAt": "2026-11-14T11:06:21Z",
+    "commit": "e02c839f4bf799eb5d6a94ff9ec0ac629a16a21c"
   },
   "./五下2.4热在金属中的传递/": {
     "id": "34549baa996d478dd4d799d604ca2c54",
-    "updatedAt": "2026-11-14T04:49:47Z",
-    "commit": "6abc8336a1e7b2c8457a3ebd6e8ab53701820a99"
+    "updatedAt": "2026-11-14T11:06:21Z",
+    "commit": "e02c839f4bf799eb5d6a94ff9ec0ac629a16a21c"
   },
   "./五下2.5热在水中的传递/": {
     "id": "60b6922173ee35b47da479f0c32f71b7",
-    "updatedAt": "2026-11-14T04:49:47Z",
-    "commit": "6abc8336a1e7b2c8457a3ebd6e8ab53701820a99"
+    "updatedAt": "2026-11-14T11:06:21Z",
+    "commit": "e02c839f4bf799eb5d6a94ff9ec0ac629a16a21c"
   },
   "./五下2.6哪个传热快/": {
     "id": "290a3688ae03e5aad8678fc550864fdb",
-    "updatedAt": "2026-11-14T04:49:18Z",
-    "commit": "067c4d8eac6b462bbceb9b20309f5f64c4eb1c5f"
+    "updatedAt": "2026-11-14T11:06:21Z",
+    "commit": "e02c839f4bf799eb5d6a94ff9ec0ac629a16a21c"
   },
   "./五下2.7制作保温杯/": {
     "id": "029237701af6f25251ab55a57d77e44b",
@@ -996,8 +996,8 @@ window.AIHTML_METADATA = {
   },
   "./五下4.1不同材料的沉浮/": {
     "id": "9d41a129b50e8fbbdb959cd5641dc916",
-    "updatedAt": "2026-11-14T04:48:45Z",
-    "commit": "c5b68d7dbc2d855b9237e73375586ef1b1270b00"
+    "updatedAt": "2026-11-14T11:06:21Z",
+    "commit": "e02c839f4bf799eb5d6a94ff9ec0ac629a16a21c"
   },
   "./五下4.2用能浮的材料造船/": {
     "id": "50baf847e3138ea9ca47da764c7d3865",
