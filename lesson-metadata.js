@@ -336,8 +336,8 @@ window.AIHTML_METADATA = {
   },
   "./三上2.8用水分离/": {
     "id": "b7ba3d71e897943b8138ca2444de5259",
-    "updatedAt": "2026-11-14T10:53:37Z",
-    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
+    "updatedAt": "2026-11-14T12:42:40Z",
+    "commit": "5171ebd58189d59c5ed69f11ccf1b854675adcb7"
   },
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
