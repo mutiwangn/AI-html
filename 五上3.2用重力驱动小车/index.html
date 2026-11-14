@@ -185,8 +185,27 @@
 @media(max-height:720px) and (max-width:700px){.topbar{height:58px}.tabs{padding-bottom:4px}.tab{min-height:38px;padding-top:6px;padding-bottom:6px}.page{overflow:auto}.scene-card{min-height:220px}.stage-wrap{min-height:145px}.control-card{padding:9px}.clock{font-size:30px}.counter button{min-height:32px;height:32px}.count-value{font-size:29px}.fixed-line{display:none}}
 @media(prefers-reduced-motion:reduce){button{transition:none}}
 </style>
-</head>
-<body>
+<style id="four-domain-coverage-theme">
+/* Four-domain classroom chrome: scientific SVG/canvas and original scripts unchanged. */
+body[data-course-domain="physical"]{--domain-main:#5132A5;--domain-accent:#D82A83;--domain-paper:#F7F4FC;--domain-ink:#241D38;--domain-soft:#EEE6FA;--domain-line:#DED1EF;background:#F7F4FC!important;color:#241D38}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header){background:#5132A5!important;color:#FFFFFF!important;border-bottom:4px solid #D82A83!important;box-shadow:none}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(h1,small,.eyebrow,.chapter,.book-code,.identity p,.brand p,.brand small,.brand>div>span,.subtitle){color:#FFFFFF!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button,.tab){background:transparent!important;color:#FFFFFF!important;border-color:#FFFFFF66!important;border-radius:3px!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button[aria-selected="true"],button[aria-pressed="true"],button.active,button[aria-current="page"]){background:#D82A83!important;color:#FFFFFF!important;border-color:#D82A83!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) nav{background:transparent!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) .tab span{color:inherit!important}
+body[data-course-domain] :is(main,.main,.app,#app){background-color:transparent}
+body[data-course-domain] :is(.question,.question-bar,.question-strip,.intro,.stage-header){border-color:#DED1EF;}
+body[data-course-domain] :is(.ob-controls,.lens-controls,.control-panel,.setting-panel,.wind-panel,.sidebar,.side,.aside,.panel-section){border-color:#DED1EF;}
+body[data-course-domain] :is(button.primary,button.active,button.selected,button[aria-pressed="true"],button[aria-selected="true"]):not([data-color]):not(.color-dot):not(.swatch):not([style*="background"]){background:#D82A83!important;color:#FFFFFF!important;border-color:#D82A83!important}
+body[data-course-domain] button:not([aria-pressed="true"]):not([aria-selected="true"]):not(.primary):not(.active):not(.selected){border-color:#DED1EF}
+body[data-course-domain] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){accent-color:#D82A83}
+body[data-course-domain] :is(button,input,select,textarea):focus-visible{outline:3px solid #D82A83;outline-offset:3px}
+body[data-course-domain] :is(.panel-heading,.panel-head,.section-title,.control-title){border-color:#DED1EF}
+body[data-course-domain] :is(dialog,.modal-panel){border-color:#DED1EF;}
+body[data-course-domain="physical"] :is(.observation-controls,.lens-controls,.ev-controls,.control-card,.setting-panel){background:#EEE6FA;border-color:#DED1EF}
+</style></head>
+<body data-course-domain="physical">
 <div class="app">
  <header class="topbar"><div class="brand"><div class="brand-mark" aria-hidden="true"><svg width="32" height="30" viewBox="0 0 40 36"><path d="M5 10h23v13H5z" fill="none" stroke="#2368e8" stroke-width="2.5"/><circle cx="11" cy="27" r="4" fill="#2368e8"/><circle cx="25" cy="27" r="4" fill="#2368e8"/><path d="M28 15h7V5m-4 4 4-4 4 4" fill="none" stroke="#ef943c" stroke-width="2.5"/></svg></div><div><small>五年级上册 · 运动和力 · 3.2</small><h1>用重力驱动小车</h1></div></div><div class="top-actions"><button class="quiet" id="teacher-notes">课堂提示</button><button class="quiet" id="fullscreen" aria-label="切换全屏">⛶ 全屏</button></div></header>
  <nav class="tabs" aria-label="课堂活动"><button class="tab active" id="tab-lab" data-page="lab" aria-current="page"><b>1</b>重力实验室</button><button class="tab" id="tab-records" data-page="records"><b>2</b>比较与记录</button><button class="tab" id="tab-challenge" data-page="challenge"><b>3</b>3秒到站</button></nav>
