@@ -20,8 +20,26 @@ button{white-space:nowrap}.header-tools{flex-shrink:0}
 
 .download-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;background:var(--green);border:1px solid var(--green);border-radius:10px;color:white;text-decoration:none;font-size:17px;font-weight:650;white-space:nowrap;cursor:pointer}.download-link:hover{background:var(--green-dark)}.download-link[aria-disabled="true"]{opacity:.4;cursor:default}
 </style>
-</head>
-<body>
+<style id="four-domain-coverage-theme">
+/* Four-domain classroom chrome: scientific SVG/canvas and original scripts unchanged. */
+body[data-course-domain="earth"]{--domain-main:#153F3D;--domain-accent:#AD8C48;--domain-paper:#F3EFE4;--domain-ink:#153F3D;--domain-soft:#E4E7DD;--domain-line:#B9C6BB;background:#F3EFE4!important;color:#153F3D}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header){background:#153F3D!important;color:#FFF9EE!important;border-bottom:4px solid #AD8C48!important;box-shadow:none}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(h1,small,.eyebrow,.chapter,.book-code,.identity p,.brand p,.brand small,.brand>div>span,.subtitle){color:#FFF9EE!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button,.tab){background:transparent!important;color:#FFF9EE!important;border-color:#FFF9EE66!important;border-radius:3px!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button[aria-selected="true"],button[aria-pressed="true"],button.active,button[aria-current="page"]){background:#AD8C48!important;color:#102423!important;border-color:#AD8C48!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) nav{background:transparent!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) .tab span{color:inherit!important}
+body[data-course-domain] :is(main,.main,.app,#app){background-color:transparent}
+body[data-course-domain] :is(.question,.question-bar,.question-strip,.intro,.stage-header){border-color:#B9C6BB;}
+body[data-course-domain] :is(.ob-controls,.lens-controls,.control-panel,.setting-panel,.wind-panel,.sidebar,.side,.aside,.panel-section){border-color:#B9C6BB;}
+body[data-course-domain] :is(button.primary,button.active,button.selected,button[aria-pressed="true"],button[aria-selected="true"]):not([data-color]):not(.color-dot):not(.swatch):not([style*="background"]){background:#AD8C48!important;color:#102423!important;border-color:#AD8C48!important}
+body[data-course-domain] button:not([aria-pressed="true"]):not([aria-selected="true"]):not(.primary):not(.active):not(.selected){border-color:#B9C6BB}
+body[data-course-domain] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){accent-color:#AD8C48}
+body[data-course-domain] :is(button,input,select,textarea):focus-visible{outline:3px solid #AD8C48;outline-offset:3px}
+body[data-course-domain] :is(.panel-heading,.panel-head,.section-title,.control-title){border-color:#B9C6BB}
+body[data-course-domain] :is(dialog,.modal-panel){border-color:#B9C6BB;}
+</style></head>
+<body data-course-domain="earth">
 <div class="app">
   <header class="topbar">
     <div class="brand"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M6 29L10 12 24 7 35 19 30 33 14 35Z" fill="#e3c195"/><path d="M10 12l11 9L24 7M6 29l15-8 9 12M21 21l14-2" fill="none" stroke="#294f46" stroke-width="2.5"/></svg></span><div><span class="eyebrow">五年级上册 · 4.5</span><h1>岩石的类别与变化</h1></div></div>
