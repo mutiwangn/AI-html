@@ -14,8 +14,26 @@
 @media(max-width:450px){.app-header h1{font-size:21px;letter-spacing:-.7px}.app-header{padding:12px}.utilities button{min-width:33px;padding:7px;font-size:13px}.utilities svg{margin:0;width:16px;height:16px}.utilities .reset-label{display:none}.question{font-size:16px}.rail{column-gap:10px}.detail-stage{height:135px;min-height:135px}.object-picks{gap:4px}.object-picks button{font-size:16px;padding:6px;min-height:38px}.object-picks .pick-dot{display:none}.detail-actions{flex-direction:column;gap:5px}.detail-actions button{min-height:34px;font-size:14px;padding:6px}.selected-label{font-size:16px}.rail h2{font-size:21px}.detail-caption{font-size:11px}.observation{min-height:380px}.compare-heading span{max-width:76%;font-size:12px}.compare-note{font-size:10px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
-</head>
-<body>
+<style id="four-domain-coverage-theme">
+/* Four-domain classroom chrome: scientific SVG/canvas and original scripts unchanged. */
+body[data-course-domain="life"]{--domain-main:#202D3A;--domain-accent:#BD4836;--domain-paper:#FFF3EB;--domain-ink:#202D3A;--domain-soft:#F8DED1;--domain-line:#D8BAB0;background:#FFF3EB!important;color:#202D3A}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header){background:#202D3A!important;color:#FFF3EB!important;border-bottom:4px solid #BD4836!important;box-shadow:none}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(h1,.chapter,.book-code,.identity p,.brand p,.subtitle){color:#FFF3EB!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button,.tab){background:transparent!important;color:#FFF3EB!important;border-color:#FFF3EB66!important;border-radius:3px!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button[aria-selected="true"],button[aria-pressed="true"],button.active,button[aria-current="page"]){background:#BD4836!important;color:#FFFFFF!important;border-color:#BD4836!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) nav{background:transparent!important}
+body[data-course-domain] :is(main,.main,.app,#app){background-color:transparent}
+body[data-course-domain] :is(.question,.question-bar,.question-strip,.intro,.stage-header){border-color:#D8BAB0;}
+body[data-course-domain] :is(.ob-controls,.lens-controls,.control-panel,.setting-panel,.wind-panel,.sidebar,.side,.aside,.panel-section){border-color:#D8BAB0;}
+body[data-course-domain] :is(button.primary,button.active,button.selected,button[aria-pressed="true"],button[aria-selected="true"]):not([data-color]):not(.color-dot):not(.swatch):not([style*="background"]){background:#BD4836!important;color:#FFFFFF!important;border-color:#BD4836!important}
+body[data-course-domain] button:not([aria-pressed="true"]):not([aria-selected="true"]):not(.primary):not(.active):not(.selected){border-color:#D8BAB0}
+body[data-course-domain] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){accent-color:#BD4836}
+body[data-course-domain] :is(button,input,select,textarea):focus-visible{outline:3px solid #BD4836;outline-offset:3px}
+body[data-course-domain] :is(.panel-heading,.panel-head,.section-title,.control-title){border-color:#D8BAB0}
+body[data-course-domain] :is(dialog,.modal-panel){border-color:#D8BAB0;}
+body[data-course-domain="life"] :is(.ob-controls,.water-control,.ev-media-controls,.panel-section){background:#FFF3EB;border-color:#D8BAB0}
+</style></head>
+<body data-course-domain="life">
 <noscript><div class="noscript">此观察工具需要启用 JavaScript。请使用支持 Canvas 的浏览器打开。</div></noscript>
 <header class="app-header"><h1>观察水中的微小生物</h1><nav class="tabs" aria-label="工作区"><button id="tabModel" aria-pressed="true">水滴观察</button><button id="tabEvidence" aria-pressed="false">留住证据</button></nav><div class="utilities"><button id="resetApp" title="恢复当前工作区的初始状态" aria-label="复位当前工作区"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/></svg><span class="reset-label">复位</span></button><button id="fullscreen" aria-label="切换全屏"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg><span class="full-label">全屏</span></button><button id="openAbout" aria-label="查看模型说明和来源" title="模型说明与来源">?</button></div></header>
 <div class="question"><span id="taskQuestion">同样在动，运动方式一样吗？</span><span id="taskHint">点对象看细节，保留画面作比较</span></div>
