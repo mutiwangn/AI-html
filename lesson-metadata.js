@@ -66,38 +66,38 @@ window.AIHTML_METADATA = {
   },
   "./一下1.1观察物体的特征/": {
     "id": "6da6b5778dd37136cc2540ecb6844d75",
-    "updatedAt": "2026-11-14T04:49:47Z",
-    "commit": "6abc8336a1e7b2c8457a3ebd6e8ab53701820a99"
+    "updatedAt": "2026-11-14T10:56:39Z",
+    "commit": "2092c7775fa3243ed895a85542d2e43ea692420f"
   },
   "./一下1.2给物体分类/": {
     "id": "e16d0189ae84b9e1985f6f8bdd1a03cf",
-    "updatedAt": "2026-11-14T04:49:47Z",
-    "commit": "6abc8336a1e7b2c8457a3ebd6e8ab53701820a99"
+    "updatedAt": "2026-11-14T10:56:39Z",
+    "commit": "2092c7775fa3243ed895a85542d2e43ea692420f"
   },
   "./一下1.3比较物体的轻重/": {
     "id": "e6270586612f4aa58c6678715045f09d",
-    "updatedAt": "2026-11-14T04:50:06Z",
-    "commit": "908b5845839c311ccfec8724283f82babaf8589b"
+    "updatedAt": "2026-11-14T10:56:39Z",
+    "commit": "2092c7775fa3243ed895a85542d2e43ea692420f"
   },
   "./一下1.4认识物体的形状/": {
     "id": "b861dff9b1912d8123e3acfa7a0f2035",
-    "updatedAt": "2026-11-14T04:51:18Z",
-    "commit": "0cd994ca4822d40033d8b8f80fdb0c53713adca0"
+    "updatedAt": "2026-11-14T10:56:39Z",
+    "commit": "2092c7775fa3243ed895a85542d2e43ea692420f"
   },
   "./一下1.5观察一瓶水/": {
     "id": "cdef4eac50de15133c138b4e17ffac38",
-    "updatedAt": "2026-11-14T04:51:52Z",
-    "commit": "9a95f3ab9f72cd16952180cde32743c8109c2001"
+    "updatedAt": "2026-11-14T10:56:39Z",
+    "commit": "2092c7775fa3243ed895a85542d2e43ea692420f"
   },
   "./一下1.6哪个流动得快/": {
     "id": "bdd1feae1f67c56774a36f74162fe4e4",
-    "updatedAt": "2026-11-14T04:52:15Z",
-    "commit": "5b776f2c2fbfd1b2ef7f3c1a3caae5d4368a432f"
+    "updatedAt": "2026-11-14T10:56:39Z",
+    "commit": "2092c7775fa3243ed895a85542d2e43ea692420f"
   },
   "./一下1.7它们去哪里了/": {
     "id": "d1fe88e5e81e4c024ddfd0946a99428a",
-    "updatedAt": "2026-11-14T04:50:06Z",
-    "commit": "908b5845839c311ccfec8724283f82babaf8589b"
+    "updatedAt": "2026-11-14T10:56:39Z",
+    "commit": "2092c7775fa3243ed895a85542d2e43ea692420f"
   },
   "./一下2.1我们周围的动物/": {
     "id": "1b7fbd07d404407130f274f2e5fa44c0",
@@ -301,8 +301,8 @@ window.AIHTML_METADATA = {
   },
   "./三上2.1水到哪里去了/": {
     "id": "4845d5b62bbad971df97566eaa4fd762",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:42:46Z",
+    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
   },
   "./三上2.2水珠从哪里来二维版/": {
     "id": "ad313d2f8727e92a54baafa62158f09b",
@@ -311,43 +311,43 @@ window.AIHTML_METADATA = {
   },
   "./三上2.3水沸腾了/": {
     "id": "87bf490993724c6188345ea84aec315c",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:42:46Z",
+    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
   },
   "./三上2.4水结冰了/": {
     "id": "8e13957830e634274de3d33747740705",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:53:37Z",
+    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.5冰熔化了/": {
     "id": "b5df6defdeed6f9b61ed827735b579ce",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:53:37Z",
+    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.6水能溶解多少物质/": {
     "id": "029ac5357e0c86a35a781d9f644438b1",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:53:37Z",
+    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.7加快溶解/": {
     "id": "30a85893ff1f448f0cb3256738152ae4",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:53:37Z",
+    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.8用水分离/": {
     "id": "b7ba3d71e897943b8138ca2444de5259",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:53:37Z",
+    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./三上3.2各种各样的运动/": {
     "id": "f4a0da4c66f01b47a75e3baed898807a",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./三上3.3直线运动和曲线运动/": {
     "id": "d19b7b167fd1bc069786aef9d1d03de2",
@@ -366,8 +366,8 @@ window.AIHTML_METADATA = {
   },
   "./三上3.6运动和能量/": {
     "id": "b62b5b8d2322a71839bb0517c4cf980e",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./三上3.7设计和制作过山车/": {
     "id": "a5c4a896654c46a0458a8003ba2bdd2a",
@@ -501,33 +501,33 @@ window.AIHTML_METADATA = {
   },
   "./四上1.1感受空气/": {
     "id": "d2885c385b5dbde778218dcb4f38f023",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./四上1.2空气能占据空间吗/": {
     "id": "4cdc7bf1c55137d3d0854aff34c1c6d0",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./四上1.3空气占据的空间会改变吗/": {
     "id": "45ebb8b3bbb1e47894219612a77a077d",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./四上1.4空气有质量吗/": {
     "id": "9271f24505895508606c5a004bb13eaa",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./四上1.5空气有力量/": {
     "id": "c93d66b7a33ca9eb9dc04ddd06fbd02e",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./四上1.6我们来做热气球/": {
     "id": "4081960b6341db6b072a1857dc29de99",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:40:09Z",
+    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
   },
   "./四上1.7风的成因/": {
     "id": "4ae1b2bce03a0446dbe9c11e2c6eb40a",
@@ -586,28 +586,28 @@ window.AIHTML_METADATA = {
   },
   "./四上3.1声音是怎样产生的/": {
     "id": "0cef00144688a019502e3f707d3114f3",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:42:46Z",
+    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
   },
   "./四上3.2声音的强弱/": {
     "id": "7fb47d39e7c581349b20bd82458bbc4b",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:42:46Z",
+    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
   },
   "./四上3.3声音的高低_学生端/": {
     "id": "e7d221e9185e27fd08c6c2d63dbb8691",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:42:46Z",
+    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
   },
   "./四上3.3声音的高低/": {
     "id": "1ecf96628ac1bc598496225278f1ad5f",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:42:46Z",
+    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
   },
   "./四上3.4乐器的声音变化/": {
     "id": "41b09ed14241858ff3382fe0dc7f9837",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:42:46Z",
+    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
   },
   "./四上3.5设计我们的乐器/": {
     "id": "234b95242eee02a7c22156758211ce67",
@@ -621,8 +621,8 @@ window.AIHTML_METADATA = {
   },
   "./四上3.7声音的传播/": {
     "id": "5a95be508f02f23f3e0ad106dcb1bf44",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:42:46Z",
+    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
   },
   "./四上3.8保护听力/": {
     "id": "e0ce3eef40cdae005cff9e2a72dd9e92",
@@ -631,8 +631,8 @@ window.AIHTML_METADATA = {
   },
   "./四下3.2点亮小灯泡/": {
     "id": "da31ea25e68ed82147b8a37121756472",
-    "updatedAt": "2026-11-14T03:40:57Z",
-    "commit": "d4fb0a56912d55b86fef9e56bd45e14dcf0c98ff"
+    "updatedAt": "2026-11-14T11:00:57Z",
+    "commit": "ad62ab92dada3aa1a571c1662976f2ef8eb2ccac"
   },
   "./四下3.8模拟安装照明电路/": {
     "id": "b96b9ffe6a4724ea31ee0db34c37160e",
@@ -646,23 +646,23 @@ window.AIHTML_METADATA = {
   },
   "./四下3.6里面的电路是怎样的/": {
     "id": "4521474a262cfffa087049aa34a9d05a",
-    "updatedAt": "2026-11-14T03:40:57Z",
-    "commit": "d4fb0a56912d55b86fef9e56bd45e14dcf0c98ff"
+    "updatedAt": "2026-11-14T11:00:57Z",
+    "commit": "ad62ab92dada3aa1a571c1662976f2ef8eb2ccac"
   },
   "./四下3.5导体和绝缘体/": {
     "id": "b7e1828ff590a7f183a41bb07103de3c",
-    "updatedAt": "2026-11-14T03:40:57Z",
-    "commit": "d4fb0a56912d55b86fef9e56bd45e14dcf0c98ff"
+    "updatedAt": "2026-11-14T11:00:57Z",
+    "commit": "ad62ab92dada3aa1a571c1662976f2ef8eb2ccac"
   },
   "./四下3.4电路出故障了/": {
     "id": "93fe9592e00f3e36f27e6758408f9cf8",
-    "updatedAt": "2026-11-14T03:40:57Z",
-    "commit": "d4fb0a56912d55b86fef9e56bd45e14dcf0c98ff"
+    "updatedAt": "2026-11-14T11:00:57Z",
+    "commit": "ad62ab92dada3aa1a571c1662976f2ef8eb2ccac"
   },
   "./四下3.3简易电路/": {
     "id": "d325f0dc53e150d45696498c3dc5ba00",
-    "updatedAt": "2026-11-14T03:40:57Z",
-    "commit": "d4fb0a56912d55b86fef9e56bd45e14dcf0c98ff"
+    "updatedAt": "2026-11-14T11:00:57Z",
+    "commit": "ad62ab92dada3aa1a571c1662976f2ef8eb2ccac"
   },
   "./四下2.8家乡的土壤/": {
     "id": "b69efb3410866a6c164ef8909b688c93",
