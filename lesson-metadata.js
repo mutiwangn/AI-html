@@ -746,13 +746,13 @@ window.AIHTML_METADATA = {
   },
   "./五上1.1研究放大镜/": {
     "id": "04614b82f374f31c98eb68210a27f53d",
-    "updatedAt": "2026-11-14T05:12:20Z",
-    "commit": "6d9c9f70b3b68de786dd82f6c3d1db4ebedf370e"
+    "updatedAt": "2026-11-14T11:29:11Z",
+    "commit": "cb8c3499c20a5b3603ec1f2823ba028a482cfd08"
   },
   "./五上1.2怎样放得更大/": {
     "id": "1872ef6f50cc73ce07856caf1d350dbd",
-    "updatedAt": "2026-11-14T05:12:20Z",
-    "commit": "6d9c9f70b3b68de786dd82f6c3d1db4ebedf370e"
+    "updatedAt": "2026-11-14T11:29:11Z",
+    "commit": "cb8c3499c20a5b3603ec1f2823ba028a482cfd08"
   },
   "./五上1.3用简易显微镜观察/": {
     "id": "19b03fff3f15d11c019d5aa3661e96eb",
@@ -791,8 +791,8 @@ window.AIHTML_METADATA = {
   },
   "./五上2.2独轮车省力的秘密/": {
     "id": "d5e6aef186e0bf61c911f3bd06500c92",
-    "updatedAt": "2026-11-14T04:52:15Z",
-    "commit": "5b776f2c2fbfd1b2ef7f3c1a3caae5d4368a432f"
+    "updatedAt": "2026-11-14T11:29:11Z",
+    "commit": "cb8c3499c20a5b3603ec1f2823ba028a482cfd08"
   },
   "./五上2.3制作独轮车/": {
     "id": "a9bf4cf820536a0034a80174d503370f",
@@ -801,13 +801,13 @@ window.AIHTML_METADATA = {
   },
   "./五上2.4巧用斜面/": {
     "id": "89a544aac89cdbe2da9bc6a00ff506a0",
-    "updatedAt": "2026-11-14T04:52:15Z",
-    "commit": "5b776f2c2fbfd1b2ef7f3c1a3caae5d4368a432f"
+    "updatedAt": "2026-11-14T11:29:11Z",
+    "commit": "cb8c3499c20a5b3603ec1f2823ba028a482cfd08"
   },
   "./五上2.5妙用滑轮/": {
     "id": "50c3d11658d1116781ffa88f748fc5ce",
-    "updatedAt": "2026-11-14T05:19:50Z",
-    "commit": "a6534b21768613adc7e4edf2d975bfc5f42578a0"
+    "updatedAt": "2026-11-14T11:29:11Z",
+    "commit": "cb8c3499c20a5b3603ec1f2823ba028a482cfd08"
   },
   "./五上2.6给小车安装方向盘基础稿/": {
     "id": "a74b15fc3625327fabd2e1c1d8f440f3",
@@ -826,23 +826,23 @@ window.AIHTML_METADATA = {
   },
   "./五上3.2用重力驱动小车/": {
     "id": "4051734228d70305ec01e3aed946c303",
-    "updatedAt": "2026-11-14T05:17:23Z",
-    "commit": "3e3e086e73071cee0565ab3365f850b457f18351"
+    "updatedAt": "2026-11-14T11:32:43Z",
+    "commit": "4bcb5e7e5198f5d78a61d98ffab286c2672ae378"
   },
   "./五上3.3用弹力驱动小车/": {
     "id": "ed8906d521f82e3c634bd37a74b2f541",
-    "updatedAt": "2026-11-14T05:17:23Z",
-    "commit": "3e3e086e73071cee0565ab3365f850b457f18351"
+    "updatedAt": "2026-11-14T11:32:43Z",
+    "commit": "4bcb5e7e5198f5d78a61d98ffab286c2672ae378"
   },
   "./五上3.4测量力的大小/": {
     "id": "dd9c63de1f558ab76bab9fa0de7cdca4",
-    "updatedAt": "2026-11-14T05:22:11Z",
-    "commit": "16c56d41a5fb3079337e9d1fdcbd726c068c7a3b"
+    "updatedAt": "2026-11-14T11:32:43Z",
+    "commit": "4bcb5e7e5198f5d78a61d98ffab286c2672ae378"
   },
   "./五上3.5摩擦力的比较/": {
     "id": "bd4905aeab497b0d5230c102d1fe3af7",
-    "updatedAt": "2026-11-14T05:22:11Z",
-    "commit": "16c56d41a5fb3079337e9d1fdcbd726c068c7a3b"
+    "updatedAt": "2026-11-14T11:32:43Z",
+    "commit": "4bcb5e7e5198f5d78a61d98ffab286c2672ae378"
   },
   "./五上3.6制作月球小车/": {
     "id": "8f128d8404a545f94f9ec5183c1a4fae",
