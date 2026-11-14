@@ -335,6 +335,7 @@ window.AIHTML_METADATA = {
     "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.8用水分离/": {
+    "updateSummary": "细化盐场与四步实验器材：新增烧杯刻度、滤纸导流、凹形蒸发皿及盖帽熄灯，完善五层过滤瓶；二维兼容图同步精修，修复重播提示。",
     "id": "b7ba3d71e897943b8138ca2444de5259",
     "updatedAt": "2026-11-14T15:00:20Z",
     "commit": "6f01dee50e573cc3e0283647d187e1cd77fe5ec5"

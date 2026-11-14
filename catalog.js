@@ -137,10 +137,11 @@
       function resourceHTML(book, resource) {
         var author = (resource[2] || '').replace(/^【|】$/g, '').trim();
         var feedback=window.AIHTMLFeedback;
+        var updateMeta = (window.AIHTML_METADATA || {})[resource[4]] || {};
         return '<article class="resource-card"><div class="resource-content">' +
           '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5><span class="resource-kind">交互课件</span>' +
           (feedback ? feedback.date(resource[4]) : '') + '<div class="resource-tech">'+resourceGrade(resource)+'</div></div>' +
-          '<p class="resource-description"><span class="resource-summary-label">最新更新</span>暂无更新简介</p>' +
+          '<p class="resource-description"><span class="resource-summary-label">最新更新</span>' + escapeHTML(updateMeta.updateSummary || '暂无更新简介') + '</p>' +
           '<div class="resource-bottom">'+(feedback ? feedback.render(resource[4]) : '')+
           '<a class="lesson-open" href="' + escapeHTML(resource[4]) + '" aria-label="进入' + escapeHTML(resource[1]) + '课件">进入课件' + arrow + '</a></div></div></article>';
       }
