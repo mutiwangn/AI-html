@@ -136,13 +136,13 @@
 
       function resourceHTML(book, resource) {
         var author = (resource[2] || '').replace(/^【|】$/g, '').trim();
+        var feedback=window.AIHTMLFeedback;
         return '<article class="resource-card"><div class="resource-content">' +
-          '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5>' +
-            (author ? '<span class="resource-author">' + escapeHTML(author) + '</span>' : '') + '</div>' +
-          '<p class="resource-description">' + escapeHTML(resource[3]) + '</p>' +
-          '<div class="resource-bottom"><div class="resource-tech">' + resourceGrade(resource) + '</div>' +
-            '<a class="lesson-open" href="' + escapeHTML(resource[4]) + '" aria-label="进入' + escapeHTML(book.title) + resource[0] + '《' + escapeHTML(resource[1]) + '》' + (author ? '，' + escapeHTML(author) : '') + '的交互课件">进入课件' + arrow + '</a></div>' +
-          '</div>' + (window.AIHTMLFeedback ? window.AIHTMLFeedback.render(resource[4]) : '') + '</article>';
+          '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5><span class="resource-kind">交互课件</span>' +
+          (feedback ? feedback.date(resource[4]) : '') + '<div class="resource-tech">'+resourceGrade(resource)+'</div></div>' +
+          '<p class="resource-description"><span class="resource-summary-label">最新更新</span>暂无更新简介</p>' +
+          '<div class="resource-bottom">'+(feedback ? feedback.render(resource[4]) : '')+
+          '<a class="lesson-open" href="' + escapeHTML(resource[4]) + '" aria-label="进入' + escapeHTML(resource[1]) + '课件">进入课件' + arrow + '</a></div></div></article>';
       }
 
       function unitHTML(book, unit, initialUnit) {
@@ -405,6 +405,7 @@
     }
   };
 })(window, document);
+
 
 
 
