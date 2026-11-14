@@ -91,7 +91,7 @@ body>header small,.app>header small,#app>header small,#appRoot>header small,.top
      <tr id="dataRow1"><td><span id="rowLabel1">第 2 段</span><small id="rowSub1">50 → 100 mL</small></td><td class="teal" id="aTime1">—</td><td class="amber" id="bTime1">—</td></tr>
      <tr id="dataRow2"><td><span id="rowLabel2">第 3 段</span><small id="rowSub2">100 → 150 mL</small></td><td class="teal" id="aTime2">—</td><td class="amber" id="bTime2">—</td></tr>
     </tbody></table>
-    <div class="table-tools"><span id="tableHint">右侧为第 1、2、3 次</span><button class="small" id="tableModeButton" aria-pressed="false">看累计时间</button></div>
+    <div class="table-tools"><span id="tableHint">“倒回再测”列为第 1、2、3 次</span><button class="small" id="tableModeButton" aria-pressed="false">看累计时间</button></div>
     <p class="prompt" id="comparePrompt">哪一种测法，每次都回到<br>相同的起始条件？<small>累计时间可以直接比较吗？<br>用“本班实测记录”对照真实实验。</small></p>
    </aside>
   </div>
@@ -690,7 +690,7 @@ window.LessonRecordGuard=function(key,title,current,validate,canSave){
   $('aTimeHeading').textContent=state.cumulative?'连续累计':'连续放水';$('bTimeHeading').textContent=state.cumulative?'重测合计':'倒回再测';
   $('tableModeButton').textContent=state.cumulative?'拆成每 50 mL':'看累计时间';
   attr('tableModeButton','aria-pressed',state.cumulative);
-  $('tableHint').textContent=state.cumulative?'右侧：前1、2、3次流水用时合计':'右侧为第 1、2、3 次';
+  $('tableHint').textContent=state.cumulative?'“倒回再测”列：前1、2、3次流水用时合计':'“倒回再测”列为第 1、2、3 次';
   $('compareStatus').textContent=state.playing?'水位、出水量与时间同步变化':(state.time>0?'已暂停，可拖动回看或切换记录':'相同容器、相同小孔、相同初始水量');
   $('compareSvg').setAttribute('aria-label','连续放水余水'+n(a.remaining)+'毫升，累计收水'+n(a.receiverVolume)+'毫升；倒回再测第'+b.segmentNumber+'次，余水'+n(b.remaining)+'毫升，本次收水'+n(b.receiverVolume)+'毫升。');
  }
@@ -1104,3 +1104,27 @@ window.LessonRecordGuard=function(key,title,current,validate,canSave){
 </script>
 </body>
 </html>
+
+<style id="physical-stage-v2">
+:root{--domain-nav:#40394E;--domain-paper:#F3F1F5;--domain-action:#5132A5;--domain-detail:#A5457D;--domain-ink:#282332;--bg:#F3F1F5;--paper:#F3F1F5;--line:#ddd7e4}
+html{background:#40394E!important;overflow:hidden}body{background:#F3F1F5!important;color:#282332!important}header,.topbar{background:#40394E!important;color:white!important}h1::before{color:#d8b6d3!important}button{border-radius:9px!important}button.primary,button[aria-pressed=true],button[aria-selected=true]{background:#5132A5!important;border-color:#5132A5!important;color:white!important}input[type=range]{accent-color:#89558c!important}.card,.panel,.control-card,.aside{border-color:#ddd7e4!important}.notice,.tag,.hint{background:#ece7f2!important;color:#40394e!important}.card>h2{border:0!important}p{line-height:1.45}button:focus-visible{outline-color:#ac3575!important}
+body>.app{background:#F3F1F5!important;padding:16px 28px 10px!important;gap:12px!important}header.topbar{flex-shrink:0;min-height:76px!important;height:76px!important;padding:10px 18px!important;border-radius:12px!important;border:0!important}header.topbar h1{font-size:28px!important}header nav button{font-size:18px!important;min-height:42px!important}.question h2,.mission h2{font-size:25px!important}.question,.mission{margin:0!important}.experiment,.stage{border-radius:14px!important;border-color:#ddd7e4!important;box-shadow:none!important}.controls{border-radius:12px!important;border-color:#ddd7e4!important}.utilities button{min-height:40px!important}.experiment-grid,.stable-grid{grid-template-columns:1fr!important;grid-template-rows:minmax(0,1fr) 176px!important;gap:10px!important}.records-panel{display:grid!important;grid-template-columns:250px 1fr!important;gap:10px;padding:10px 18px!important;overflow:auto!important}.records-panel .panel-title{grid-column:1;display:block!important}.records-panel .table-tools{grid-column:1}.records-panel table{grid-column:2;grid-row:1/4;font-size:16px!important}.records-panel td,.records-panel th{padding:3px 10px!important}.records-panel p{font-size:15px!important;margin:0}.stability-panel{display:grid!important;grid-template-columns:1fr 1.4fr!important;gap:10px 25px!important;padding:12px 20px!important;overflow:auto!important}.stability-panel .tap-control{grid-column:1;grid-row:1}.stability-panel .overflow-row{grid-column:1;grid-row:2}.stability-panel .stability-chart{grid-column:2;grid-row:1/3;min-height:0;height:130px!important}.stability-panel>p{font-size:15px!important;margin:0}.stability-panel h3{font-size:18px!important;margin:0}.live-stats{padding:6px 16px!important}.vessel-heads{padding:5px 20px!important}.controls{min-height:72px!important;padding:8px 16px!important}.controls button{font-size:18px!important}.mission{min-height:40px!important}body{position:absolute!important;width:1600px!important;height:900px!important;min-height:900px!important;transform-origin:0 0!important;overflow:hidden!important}body>.app{height:900px!important;width:1600px!important;max-width:none!important}</style><script>(()=>{function fit(){const s=Math.min(innerWidth/1600,innerHeight/900);document.body.style.transform="scale("+s+")";document.body.style.left=(innerWidth-1600*s)/2+"px";document.body.style.top=(innerHeight-900*s)/2+"px"}addEventListener("resize",fit);fit()})();</script>
+<style id="physical-safe-dock-alignment">/* Preserve the scroll origin when concentrated controls wrap beyond dock height. */
+body :is(.operation-dock,.control-card,.controls){align-content:flex-start!important;align-items:flex-start!important;align-content:safe center!important;align-items:safe center!important}
+@supports not (align-content:safe center){body :is(.operation-dock,.control-card,.controls){align-content:flex-start!important;align-items:flex-start!important}}
+@supports not (align-items:safe center){body :is(.operation-dock,.control-card,.controls){align-content:flex-start!important;align-items:flex-start!important}}
+</style>
+
+<style id="physical-stable-scientific-pair">
+body #stableScreen .stable-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr) 104px!important;gap:12px!important}
+body #stableScreen .stable-stage{grid-column:1!important;grid-row:1!important;min-height:0!important;min-width:0!important}
+body #stableScreen .stable-grid>.stability-chart{grid-column:2!important;grid-row:1!important;height:auto!important;max-height:none!important;min-height:0!important;min-width:0!important;display:flex!important;flex-direction:column!important;background:#fff;border:1px solid #ddd7e4;border-radius:14px;padding:18px 22px;overflow:hidden}
+body #stableScreen .stable-grid>.stability-chart h3{font-size:23px!important;line-height:1.4;margin:0 0 12px!important;flex:none}
+body #stableScreen .stable-grid>.stability-chart #stableChart{display:block!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;flex:1}
+body #stableScreen .stability-panel{grid-column:1/-1!important;grid-row:2!important;display:grid!important;grid-template-columns:minmax(300px,1fr) 220px minmax(320px,1fr)!important;grid-template-rows:1fr!important;gap:16px!important;align-items:safe center!important;align-content:safe center!important;padding:12px 20px!important}
+body #stableScreen .stability-panel .tap-control{grid-column:1!important;grid-row:1!important}
+body #stableScreen .stability-panel .overflow-row{grid-column:2!important;grid-row:1!important}
+body #stableScreen .stability-panel #stablePrompt{grid-column:3!important;grid-row:1!important;font-size:18px!important}
+body #recordsModal .cr-heading :is(h2,p),body #recordsModal #crSubtitle{color:#f3eff9!important}
+</style>
+<script id="physical-stable-scientific-pair-layout">(()=>{const grid=document.querySelector('#stableScreen .stable-grid');const chart=grid.querySelector('.stability-chart');grid.insertBefore(chart,grid.querySelector('.stability-panel'));})();</script>
