@@ -21,7 +21,18 @@
 @media(prefers-reduced-motion:reduce){.preset,.trace{transition:none}}
 .trace .track-wrap{touch-action:none;cursor:ew-resize}
 </style>
-</head>
+<style id="four-domain-coverage">/* Four-domain visual coverage: chrome only; scientific graphics unchanged. */
+:root{--domain-nav:#143F3D;--domain-action:#246963;--domain-paper:#F4F0E6;--domain-ink:#173C3A;--domain-detail:#B89A53}
+body{background:var(--domain-paper)}
+body>header,.app>header,#app>header,#appRoot>header,.topbar,.app-header{background:var(--domain-nav)!important;color:#fff!important;border-bottom:3px solid var(--domain-detail)!important}
+body>header h1,.app>header h1,#app>header h1,#appRoot>header h1,.topbar h1,.app-header h1{color:#fff!important}
+h1::before{content:"地球与宇宙";display:block;font-size:11px;line-height:1.15;letter-spacing:.13em;font-weight:600;color:var(--domain-detail);margin-bottom:3px}
+button.primary,.btn.primary,button[aria-pressed="true"],button[aria-selected="true"],.tabs button.active,.tab.active,nav button.active,.mainnav button.active,.main-tabs button.active{background:var(--domain-action)!important;color:#FFFFFF!important;border-color:var(--domain-action)!important}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--domain-detail);outline-offset:3px}
+input[type="range"],input[type="checkbox"]{accent-color:var(--domain-action)}
+body>header button:not(.primary):not([aria-pressed="true"]),.topbar>button:not(.primary),.topbar .icon-btn,.app-header .icon-btn{background:#FFFCF8;color:var(--domain-ink);border-color:#B9B5B0}
+.topbar .tab:not(.active),.topbar .tabs button:not(.active),.app-header .main-tabs button:not(.active){color:#F7F2EC}
+body>header small,.app>header small,#app>header small,#appRoot>header small,.topbar small,.app-header small,.brand-sub,.version{color:#E3DED8!important}.topbar .tools button,.topbar .utilities button,.app-header .header-tools button{background:#FFFCF8;color:var(--domain-ink);border-color:#B9B5B0}.topbar button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),.app-header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),.app>header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),#appRoot>header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]){background:#FFFCF8!important;color:var(--domain-ink)!important}</style></head>
 <body>
 <div class="app">
  <header class="topbar">

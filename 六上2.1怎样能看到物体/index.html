@@ -17,7 +17,18 @@
 @media(max-height:500px){.topbar{min-height:42px}.lesson{display:none}.question{min-height:32px}.question p{display:none}.control-card{gap:2px}.eye-card{min-height:80px}.eye-caption{display:none}.stage-bottom{min-height:35px}.stage-head{padding-top:5px}.room-metrics{display:none}.record-button{min-height:35px}.question h2{font-size:1.12rem}.app{padding-bottom:17px}.compare-slots{min-height:60px;max-height:70px}.quote{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-</head>
+<style id="four-domain-coverage">/* Four-domain visual coverage: chrome only; scientific graphics unchanged. */
+:root{--domain-nav:#5132A5;--domain-action:#B92370;--domain-paper:#F7F4FC;--domain-ink:#241D38;--domain-detail:#D82A83}
+body{background:var(--domain-paper)}
+body>header,.app>header,#app>header,#appRoot>header,.topbar,.app-header{background:var(--domain-nav)!important;color:#fff!important;border-bottom:3px solid var(--domain-detail)!important}
+body>header h1,.app>header h1,#app>header h1,#appRoot>header h1,.topbar h1,.app-header h1{color:#fff!important}
+h1::before{content:"物质科学";display:block;font-size:11px;line-height:1.15;letter-spacing:.13em;font-weight:600;color:var(--domain-detail);margin-bottom:3px}
+button.primary,.btn.primary,button[aria-pressed="true"],button[aria-selected="true"],.tabs button.active,.tab.active,nav button.active,.mainnav button.active,.main-tabs button.active{background:var(--domain-action)!important;color:#FFFFFF!important;border-color:var(--domain-action)!important}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--domain-detail);outline-offset:3px}
+input[type="range"],input[type="checkbox"]{accent-color:var(--domain-action)}
+h1::before{color:#F5DAED}body>header button:not(.primary):not([aria-pressed="true"]),.topbar>button:not(.primary),.topbar .icon-btn,.app-header .icon-btn{background:#FFFCF8;color:var(--domain-ink);border-color:#B9B5B0}
+.topbar .tab:not(.active),.topbar .tabs button:not(.active),.app-header .main-tabs button:not(.active){color:#F7F2EC}
+body>header small,.app>header small,#app>header small,#appRoot>header small,.topbar small,.app-header small,.brand-sub,.version{color:#E3DED8!important}.topbar .tools button,.topbar .utilities button,.app-header .header-tools button{background:#FFFCF8;color:var(--domain-ink);border-color:#B9B5B0}.topbar button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),.app-header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),.app>header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),#appRoot>header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]){background:#FFFCF8!important;color:var(--domain-ink)!important}.topbar .lesson{color:#E3DED8!important}</style></head>
 <body>
 <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden"><defs>
 <symbol id="eye-icon" viewBox="0 0 40 30"><path d="M2 15Q20-6 38 15Q20 36 2 15Z" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="20" cy="15" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>

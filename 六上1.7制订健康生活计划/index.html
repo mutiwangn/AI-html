@@ -32,7 +32,18 @@
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 @media print{body{overflow:visible;background:#fff}#app,.overlay,.notice-toast,.compat-badge{display:none!important}.print-only{display:block!important;color:#172a20;font-family:var(--font);padding:15mm}h1{white-space:normal}.print-only h1{font-size:26pt;margin:0 0 7mm}.print-only h2{font-size:17pt}.print-only p{font-size:13pt;line-height:1.8;white-space:pre-wrap}.print-only table{border-collapse:collapse;width:100%;margin-top:8mm}.print-only th,.print-only td{border:1px solid #9bac9e;padding:3mm;font-size:11pt;text-align:left}.print-only .print-note{font-size:10pt;color:#555}.print-only .print-field{border-bottom:1px solid #c8d0c7;padding:3mm 0} @page{size:A4;margin:10mm}}
 </style>
-</head>
+<style id="four-domain-coverage">/* Four-domain visual coverage: chrome only; scientific graphics unchanged. */
+:root{--domain-nav:#202D3A;--domain-action:#BD4836;--domain-paper:#FFF3EB;--domain-ink:#202D3A;--domain-detail:#E66D57}
+body{background:var(--domain-paper)}
+body>header,.app>header,#app>header,#appRoot>header,.topbar,.app-header{background:var(--domain-nav)!important;color:#fff!important;border-bottom:3px solid var(--domain-detail)!important}
+body>header h1,.app>header h1,#app>header h1,#appRoot>header h1,.topbar h1,.app-header h1{color:#fff!important}
+h1::before{content:"生命科学";display:block;font-size:11px;line-height:1.15;letter-spacing:.13em;font-weight:600;color:var(--domain-detail);margin-bottom:3px}
+button.primary,.btn.primary,button[aria-pressed="true"],button[aria-selected="true"],.tabs button.active,.tab.active,nav button.active,.mainnav button.active,.main-tabs button.active{background:var(--domain-action)!important;color:#FFFFFF!important;border-color:var(--domain-action)!important}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--domain-detail);outline-offset:3px}
+input[type="range"],input[type="checkbox"]{accent-color:var(--domain-action)}
+body>header button:not(.primary):not([aria-pressed="true"]),.topbar>button:not(.primary),.topbar .icon-btn,.app-header .icon-btn{background:#FFFCF8;color:var(--domain-ink);border-color:#B9B5B0}
+.topbar .tab:not(.active),.topbar .tabs button:not(.active),.app-header .main-tabs button:not(.active){color:#F7F2EC}
+body>header small,.app>header small,#app>header small,#appRoot>header small,.topbar small,.app-header small,.brand-sub,.version{color:#E3DED8!important}.topbar .tools button,.topbar .utilities button,.app-header .header-tools button{background:#FFFCF8;color:var(--domain-ink);border-color:#B9B5B0}.topbar button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),.app-header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),.app>header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]),#appRoot>header button:not(.active):not([aria-selected="true"]):not([aria-pressed="true"]){background:#FFFCF8!important;color:var(--domain-ink)!important}.topbar{padding:0 12px;margin:0 -12px}.editor,.strategy,.record-log{border-top:3px solid var(--domain-detail)}.tab:not([aria-selected="true"]){background:#314351!important;color:#fff!important}.tab[aria-selected="true"]{background:#BD4836!important;color:white!important}</style></head>
 <body>
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
 <symbol id="i-moon" viewBox="0 0 32 32"><path d="M25 21A12 12 0 0 1 11 6a12 12 0 1 0 14 15Z" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/><path d="M21 4v6m-3-3h6m3 6v4m-2-2h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
