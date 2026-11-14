@@ -185,8 +185,27 @@
  .structure-page .force-head{font-size:14px}
 }
 </style>
-</head>
-<body>
+<style id="four-domain-coverage-theme">
+/* Four-domain classroom chrome: scientific SVG/canvas and original scripts unchanged. */
+body[data-course-domain="physical"]{--domain-main:#5132A5;--domain-accent:#D82A83;--domain-paper:#F7F4FC;--domain-ink:#241D38;--domain-soft:#EEE6FA;--domain-line:#DED1EF;background:#F7F4FC!important;color:#241D38}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header){background:#5132A5!important;color:#FFFFFF!important;border-bottom:4px solid #D82A83!important;box-shadow:none}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(h1,small,.eyebrow,.chapter,.book-code,.identity p,.brand p,.brand small,.brand>div>span,.subtitle){color:#FFFFFF!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button,.tab){background:transparent!important;color:#FFFFFF!important;border-color:#FFFFFF66!important;border-radius:3px!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) :is(button[aria-selected="true"],button[aria-pressed="true"],button.active,button[aria-current="page"]){background:#D82A83!important;color:#FFFFFF!important;border-color:#D82A83!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) nav{background:transparent!important}
+body[data-course-domain] :is(header.topbar,header.app-header,.app>header,#app>header,body>header) .tab span{color:inherit!important}
+body[data-course-domain] :is(main,.main,.app,#app){background-color:transparent}
+body[data-course-domain] :is(.question,.question-bar,.question-strip,.intro,.stage-header){border-color:#DED1EF;}
+body[data-course-domain] :is(.ob-controls,.lens-controls,.control-panel,.setting-panel,.wind-panel,.sidebar,.side,.aside,.panel-section){border-color:#DED1EF;}
+body[data-course-domain] :is(button.primary,button.active,button.selected,button[aria-pressed="true"],button[aria-selected="true"]):not([data-color]):not(.color-dot):not(.swatch):not([style*="background"]){background:#D82A83!important;color:#FFFFFF!important;border-color:#D82A83!important}
+body[data-course-domain] button:not([aria-pressed="true"]):not([aria-selected="true"]):not(.primary):not(.active):not(.selected){border-color:#DED1EF}
+body[data-course-domain] :is(input[type="range"],input[type="checkbox"],input[type="radio"]){accent-color:#D82A83}
+body[data-course-domain] :is(button,input,select,textarea):focus-visible{outline:3px solid #D82A83;outline-offset:3px}
+body[data-course-domain] :is(.panel-heading,.panel-head,.section-title,.control-title){border-color:#DED1EF}
+body[data-course-domain] :is(dialog,.modal-panel){border-color:#DED1EF;}
+body[data-course-domain="physical"] :is(.observation-controls,.lens-controls,.ev-controls,.control-card,.setting-panel){background:#EEE6FA;border-color:#DED1EF}
+</style></head>
+<body data-course-domain="physical">
 <div class="app">
 <header class="topbar">
 <div class="brand"><div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 30 46" fill="none"><path d="M10 8V6a5 5 0 0 1 10 0v2" stroke="currentColor" stroke-width="2.4"/><rect x="6" y="8" width="18" height="30" rx="4" fill="currentColor"/><path d="M12 14h6m-6 5h4m-4 5h6m-6 5h4" stroke="#ddf4e9" stroke-width="1.5"/><path d="M15 38v3c0 5 6 4 6 0" stroke="currentColor" stroke-width="2.2"/><path d="M10 22h10" stroke="#e5b259" stroke-width="2.4" stroke-linecap="round"/></svg></div><div><h1>测量力的大小</h1><small>弹簧测力计互动实验室</small></div></div>
