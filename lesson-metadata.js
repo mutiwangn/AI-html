@@ -141,13 +141,13 @@ window.AIHTML_METADATA = {
   },
   "./二上1.2我们的家/": {
     "id": "2139c3268daedc4017f9334ef14b5869",
-    "updatedAt": "2026-11-14T04:51:00Z",
-    "commit": "c072f3da10d8adfa3bf403198e96e77097f44762"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./二上1.3家里的物品/": {
     "id": "2e9b009731f3d5d721c63d2811355f4d",
-    "updatedAt": "2026-11-14T04:51:18Z",
-    "commit": "0cd994ca4822d40033d8b8f80fdb0c53713adca0"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./二上1.4设计小房子/": {
     "id": "ec6dd5f0e8c965cd85bb5708a6f7e53a",
@@ -171,8 +171,8 @@ window.AIHTML_METADATA = {
   },
   "./二上2.3我们周围的空气/": {
     "id": "4433c4af507e8e49043aedbc0fb760b0",
-    "updatedAt": "2026-11-14T04:52:47Z",
-    "commit": "7cb271637efd0d86ab93d3dd8b2ef422e4a00214"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./二上2.4不同的天气/": {
     "id": "a6029eda2ebee121a4afdcac4875972b",
@@ -231,23 +231,23 @@ window.AIHTML_METADATA = {
   },
   "./二下2.1磁铁能吸引什么/": {
     "id": "455bdb4ee860b6dba94ee88ad0d9f989",
-    "updatedAt": "2026-11-14T04:51:52Z",
-    "commit": "9a95f3ab9f72cd16952180cde32743c8109c2001"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./二下2.2比较力量的大小/": {
     "id": "d689a9aea2dbc9f73173ba505a60c19a",
-    "updatedAt": "2026-11-14T04:52:15Z",
-    "commit": "5b776f2c2fbfd1b2ef7f3c1a3caae5d4368a432f"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./二下2.3让小车动起来/": {
     "id": "c689a53f8c6d1f82218afabeee0fe280",
-    "updatedAt": "2026-11-14T04:51:52Z",
-    "commit": "9a95f3ab9f72cd16952180cde32743c8109c2001"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./二下2.4隔物吸铁/": {
     "id": "e98ce7555984a8ea31c158b35d33f932",
-    "updatedAt": "2026-11-14T04:51:52Z",
-    "commit": "9a95f3ab9f72cd16952180cde32743c8109c2001"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./二下2.5设计钓鱼玩具/": {
     "id": "af751cb0b3e8bf4bb02a14244bc9892a",
@@ -391,18 +391,18 @@ window.AIHTML_METADATA = {
   },
   "./三下1.3利用磁铁辨别方向/": {
     "id": "bb8fe13406bc04fa468e0545b8b05dab",
-    "updatedAt": "2026-11-13T10:50:43Z",
-    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./三下1.4磁极与方向/": {
     "id": "abfc70bab92fb34d361f0855f30de6a6",
-    "updatedAt": "2026-11-13T10:50:43Z",
-    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./三下1.5制作小磁针/": {
     "id": "fed5b68f4870f36e622cdcea7c77e7a4",
-    "updatedAt": "2026-11-13T10:50:43Z",
-    "commit": "ba70e6b2c1d3b8b9b88f116278e671e4c820cd4b"
+    "updatedAt": "2026-11-14T11:16:25Z",
+    "commit": "6f406a694b4932829ae1ce12934979ea5f2f5c29"
   },
   "./三下1.6设计指南针/": {
     "id": "47aab58e4de88d36f5d00d78005590f3",
@@ -1066,23 +1066,23 @@ window.AIHTML_METADATA = {
   },
   "./六上2.1怎样能看到物体/": {
     "id": "eb41bbedbdf2c57d9c69a9db53260cd1",
-    "updatedAt": "2026-11-14T04:47:05Z",
-    "commit": "2ba1fdf4df55914de8ff63edd05503d3735f45a9"
+    "updatedAt": "2026-11-14T11:24:30Z",
+    "commit": "3992a6287a658e01e55482b9bec23795a5cf17c9"
   },
   "./六上2.2光是怎样传播的/": {
     "id": "bb4a94b6cdc81764b7f7e8aa91fbaef9",
-    "updatedAt": "2026-11-14T04:47:05Z",
-    "commit": "2ba1fdf4df55914de8ff63edd05503d3735f45a9"
+    "updatedAt": "2026-11-14T11:24:30Z",
+    "commit": "3992a6287a658e01e55482b9bec23795a5cf17c9"
   },
   "./六上2.3光能穿透物体吗/": {
     "id": "8b82ebca3e2841f39ebd4700d05419ca",
-    "updatedAt": "2026-11-14T04:47:05Z",
-    "commit": "2ba1fdf4df55914de8ff63edd05503d3735f45a9"
+    "updatedAt": "2026-11-14T11:24:30Z",
+    "commit": "3992a6287a658e01e55482b9bec23795a5cf17c9"
   },
   "./六上2.4光的反射现象/": {
     "id": "437da745ef238a759a350bbce3724d06",
-    "updatedAt": "2026-11-14T04:47:05Z",
-    "commit": "2ba1fdf4df55914de8ff63edd05503d3735f45a9"
+    "updatedAt": "2026-11-14T11:24:30Z",
+    "commit": "3992a6287a658e01e55482b9bec23795a5cf17c9"
   },
   "./六上2.5设计潜望镜/": {
     "id": "100626901910c6ff0fdded20896d9ed9",
@@ -1096,8 +1096,8 @@ window.AIHTML_METADATA = {
   },
   "./六上2.7制造彩虹/": {
     "id": "c5f2340f8403372e8558c1a8693cb866",
-    "updatedAt": "2026-11-14T04:47:05Z",
-    "commit": "2ba1fdf4df55914de8ff63edd05503d3735f45a9"
+    "updatedAt": "2026-11-14T11:24:30Z",
+    "commit": "3992a6287a658e01e55482b9bec23795a5cf17c9"
   },
   "./六上3.1利用地球模型来研究/": {
     "id": "1951236e06b0707de971e029cdc8052f",
@@ -1136,13 +1136,13 @@ window.AIHTML_METADATA = {
   },
   "./六上4.1时间在流逝/": {
     "id": "a41df9ad78f7473f805b61da7a5ff659",
-    "updatedAt": "2026-11-14T05:14:59Z",
-    "commit": "e8f82e3e9ffd7306124e8cd937182414696f5909"
+    "updatedAt": "2026-11-14T11:24:30Z",
+    "commit": "3992a6287a658e01e55482b9bec23795a5cf17c9"
   },
   "./六上4.2用水计量时间/": {
     "id": "d383567b13aa9ed3bbcb4c5047dd0431",
-    "updatedAt": "2026-11-14T05:17:23Z",
-    "commit": "3e3e086e73071cee0565ab3365f850b457f18351"
+    "updatedAt": "2026-11-14T11:24:30Z",
+    "commit": "3992a6287a658e01e55482b9bec23795a5cf17c9"
   },
   "./六上4.3做个水钟/": {
     "id": "9af3b31019cfaf369af91c757f963939",
@@ -1156,8 +1156,8 @@ window.AIHTML_METADATA = {
   },
   "./六上4.5机械摆钟/": {
     "id": "cec67b83fb62df507a20c45876948432",
-    "updatedAt": "2026-11-14T04:51:18Z",
-    "commit": "0cd994ca4822d40033d8b8f80fdb0c53713adca0"
+    "updatedAt": "2026-11-14T11:24:30Z",
+    "commit": "3992a6287a658e01e55482b9bec23795a5cf17c9"
   },
   "./六上4.6制作钟摆/": {
     "id": "2367cb1b2a2401e559aa660c14d35771",
@@ -1186,8 +1186,8 @@ window.AIHTML_METADATA = {
   },
   "./六下2.2电能和磁能/": {
     "id": "61cf3553cf5b3089f27b98fa7942751e",
-    "updatedAt": "2026-11-14T04:48:15Z",
-    "commit": "b181d942c2d0a523a0789ce6cc6a036d1359df8c"
+    "updatedAt": "2026-11-14T11:22:10Z",
+    "commit": "85824bc5ac24917d95ff02bbcfbaf4c3c3770c0d"
   },
   "./六下4.2了解空间站/": {
     "id": "2ae77b0830089ed4efd62d5ad2cd738e",
@@ -1201,13 +1201,13 @@ window.AIHTML_METADATA = {
   },
   "./六下2.5电能从哪里来/": {
     "id": "6654e476f518dac08e4021802e1c28cc",
-    "updatedAt": "2026-11-14T04:49:18Z",
-    "commit": "067c4d8eac6b462bbceb9b20309f5f64c4eb1c5f"
+    "updatedAt": "2026-11-14T11:22:10Z",
+    "commit": "85824bc5ac24917d95ff02bbcfbaf4c3c3770c0d"
   },
   "./六下2.7能源与可持续发展/": {
     "id": "e9b9593fb6ff1d74b9acd991e3c2fd17",
-    "updatedAt": "2026-11-14T04:48:45Z",
-    "commit": "c5b68d7dbc2d855b9237e73375586ef1b1270b00"
+    "updatedAt": "2026-11-14T11:22:10Z",
+    "commit": "85824bc5ac24917d95ff02bbcfbaf4c3c3770c0d"
   },
   "./六下1.6多样的古生物/": {
     "id": "341667ac04eac7ebc9970bf8671e6176",
@@ -1241,8 +1241,8 @@ window.AIHTML_METADATA = {
   },
   "./六下2.1各种形式的能/": {
     "id": "e3322f7c886e4f382b5136f8d5e71206",
-    "updatedAt": "2026-11-14T04:48:45Z",
-    "commit": "c5b68d7dbc2d855b9237e73375586ef1b1270b00"
+    "updatedAt": "2026-11-14T11:22:10Z",
+    "commit": "85824bc5ac24917d95ff02bbcfbaf4c3c3770c0d"
   },
   "./六下4.3月球探索/": {
     "id": "6bdc079d95f460b42edb210b2253a2f2",
@@ -1256,8 +1256,8 @@ window.AIHTML_METADATA = {
   },
   "./六下3.1怎样看得更远/": {
     "id": "55c8701cd9ca6c6d780c273c595e8a9e",
-    "updatedAt": "2026-11-14T04:49:02Z",
-    "commit": "36311fa259514a16fd1f9480ccec71d6706ead03"
+    "updatedAt": "2026-11-14T11:22:10Z",
+    "commit": "85824bc5ac24917d95ff02bbcfbaf4c3c3770c0d"
   },
   "./六下3.2怎样看得更准确/": {
     "id": "213b80af3c19781f9034767efb38e0ba",
@@ -1291,18 +1291,18 @@ window.AIHTML_METADATA = {
   },
   "./六下2.3神奇的电动机/": {
     "id": "c9da47df33e53f6e581f808f040996d3",
-    "updatedAt": "2026-11-14T04:48:45Z",
-    "commit": "c5b68d7dbc2d855b9237e73375586ef1b1270b00"
+    "updatedAt": "2026-11-14T11:22:10Z",
+    "commit": "85824bc5ac24917d95ff02bbcfbaf4c3c3770c0d"
   },
   "./六下2.4让小船行驶起来/": {
     "id": "917a526c4a2d811e6ff291cb719a681f",
-    "updatedAt": "2026-11-14T04:48:45Z",
-    "commit": "c5b68d7dbc2d855b9237e73375586ef1b1270b00"
+    "updatedAt": "2026-11-14T11:22:10Z",
+    "commit": "85824bc5ac24917d95ff02bbcfbaf4c3c3770c0d"
   },
   "./六下2.6物质变化中的能量/": {
     "id": "1cf7a6e7c554829c5e209844b85df42b",
-    "updatedAt": "2026-11-14T04:49:18Z",
-    "commit": "067c4d8eac6b462bbceb9b20309f5f64c4eb1c5f"
+    "updatedAt": "2026-11-14T11:22:10Z",
+    "commit": "85824bc5ac24917d95ff02bbcfbaf4c3c3770c0d"
   },
   "./六下4.1探索宇宙的历程/": {
     "id": "3710f5a4f649380ea91654b81bdefe76",
