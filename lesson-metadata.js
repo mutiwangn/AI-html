@@ -351,18 +351,18 @@ window.AIHTML_METADATA = {
   },
   "./三上3.3直线运动和曲线运动/": {
     "id": "d19b7b167fd1bc069786aef9d1d03de2",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:11:41Z",
+    "commit": "8b23acd9cfc6541ee91c559f183d8ee031c4a7a1"
   },
   "./三上3.4相同距离比快慢/": {
     "id": "003d84f188e9a327d3335b0073ec03b0",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:11:41Z",
+    "commit": "8b23acd9cfc6541ee91c559f183d8ee031c4a7a1"
   },
   "./三上3.5相同时间比快慢/": {
     "id": "4e9f2e3992924af301c17924292eb7a3",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
+    "updatedAt": "2026-11-14T10:11:41Z",
+    "commit": "8b23acd9cfc6541ee91c559f183d8ee031c4a7a1"
   },
   "./三上3.6运动和能量/": {
     "id": "b62b5b8d2322a71839bb0517c4cf980e",
