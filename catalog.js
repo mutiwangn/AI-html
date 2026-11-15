@@ -147,9 +147,9 @@
         var feedback=window.AIHTMLFeedback;
         var updateMeta = (window.AIHTML_METADATA || {})[resource[4]] || {};
         return '<article class="resource-card"><div class="resource-content">' +
-          '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5><span class="resource-kind">' + escapeHTML(resourceTeachingType(updateMeta)) + '</span>' +
-          (feedback ? feedback.date(resource[4]) : '') + '<div class="resource-tech">'+resourceGrade(resource)+'</div></div>' +
-          '<p class="resource-description"><span class="resource-summary-label">最新更新</span>' + escapeHTML(updateMeta.updateSummary || '暂无更新简介') + '</p>' +
+          '<div class="resource-overview"><div class="resource-identity"><h5>' + escapeHTML(resource[1]) + '</h5><span class="resource-kind">' + escapeHTML(resourceTeachingType(updateMeta)) + '</span>' +
+          '<div class="resource-tech">'+resourceGrade(resource)+'</div></div><div class="resource-update">' + (feedback ? feedback.date(resource[4]) : '') +
+          '<p class="resource-description"><span class="resource-summary-label">最新更新</span>' + escapeHTML(updateMeta.updateSummary || '暂无更新简介') + '</p></div></div>' +
           '<div class="resource-bottom">'+(feedback ? feedback.render(resource[4]) : '')+
           '<a class="lesson-open" href="' + escapeHTML(resource[4]) + '" aria-label="进入' + escapeHTML(resource[1]) + '课件">进入课件' + arrow + '</a></div></div></article>';
       }
@@ -239,16 +239,18 @@
           if (Number(requestedUnit) === unit.number) selectedUnit = unit;
         });
         if (selectedUnit) initialUnit = selectedUnit.number;
-        directoryTitle.textContent = book.title;
-        document.getElementById('directory-meta').textContent = book.units.length + ' 个单元 · ' + totalLessons + ' 个课时 · ' + book.lessons.length + ' 份课件';
+        directoryTitle.textContent = selectedUnit ? selectedUnit.title : book.title;
+        directory.classList.toggle('unit-page', !!selectedUnit);
+        document.getElementById('directory-meta').textContent = selectedUnit ? book.title + ' · 第' + selectedUnit.number + '单元 · ' + selectedUnit.lessons.length + '课' : book.units.length + ' 个单元 · ' + totalLessons + ' 个课时 · ' + book.lessons.length + ' 份课件';
         document.getElementById('focused-book').innerHTML =
           '<div class="focused-cover"><img src="' + escapeHTML(book.cover) + '" alt="' + escapeHTML(book.title) + '《科学》教材封面" width="520" height="735"></div>' +
           '<div class="focused-book-label"><h3>' + escapeHTML(book.title.replace(/[上下]册$/, '')) + '</h3><p>' + (semester === 'up' ? '秋季学期 · 上册' : '春季学期 · 下册') + '</p></div>';
         closeLink.setAttribute('href', '#books-' + semester);
-        directory.innerHTML = book.units.map(function (unit) {
+        directory.innerHTML = (selectedUnit ? '<a class="unit-back" href="#book-' + book.id + '">‹ 全册单元</a>' : '') + (selectedUnit ? [selectedUnit] : book.units).map(function (unit) {
           return unitHTML(book, unit, initialUnit);
         }).join('');
         bindDisclosures();
+        if (!selectedUnit) each(directory.querySelectorAll('.unit-summary'), function(summary) { summary.addEventListener('click', function(event) { event.preventDefault(); window.location.hash = '#book-' + book.id + '/unit-' + summary.parentNode.getAttribute('data-unit'); }); });
         if (window.AIHTMLFeedback) window.AIHTMLFeedback.mount(directory);
         directory.scrollTop = 0;
         if (requestedUnit && selectedUnit) {
