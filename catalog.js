@@ -134,12 +134,20 @@
         }
       }
 
+      /* 当前全部课件为初稿。新版经过内容核对后，才在该条 metadata 中填写
+         teachingType（如结构展示）和 teachingTypeCommit（对应新版 commit）。
+         版本不匹配时回到初稿，避免旧分类误用于尚未核对的新内容。 */
+      function resourceTeachingType(meta) {
+        return meta.teachingType && meta.teachingTypeCommit && meta.teachingTypeCommit === meta.commit
+          ? String(meta.teachingType) : '初稿';
+      }
+
       function resourceHTML(book, resource) {
         var author = (resource[2] || '').replace(/^【|】$/g, '').trim();
         var feedback=window.AIHTMLFeedback;
         var updateMeta = (window.AIHTML_METADATA || {})[resource[4]] || {};
         return '<article class="resource-card"><div class="resource-content">' +
-          '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5><span class="resource-kind">交互课件</span>' +
+          '<div class="resource-top"><h5>' + escapeHTML(resource[1]) + '</h5><span class="resource-kind">' + escapeHTML(resourceTeachingType(updateMeta)) + '</span>' +
           (feedback ? feedback.date(resource[4]) : '') + '<div class="resource-tech">'+resourceGrade(resource)+'</div></div>' +
           '<p class="resource-description"><span class="resource-summary-label">最新更新</span>' + escapeHTML(updateMeta.updateSummary || '暂无更新简介') + '</p>' +
           '<div class="resource-bottom">'+(feedback ? feedback.render(resource[4]) : '')+
