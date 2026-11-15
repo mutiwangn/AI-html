@@ -1,0 +1,46 @@
+/* Candidate visual layer only: catalog data and actions remain untouched. */
+:root{--accent:#d2e8ff;--muted:#c4d3df;--line:transparent;--glass:rgba(25,39,57,.58)}
+body{background:#0c1929;isolation:isolate}
+.atmosphere{position:fixed;inset:0;z-index:-2;pointer-events:none;background:#0c1929 url('./assets/plants.webp') center/cover no-repeat;transition:background-image .6s}
+.atmosphere:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,18,29,.4),rgba(5,18,29,.09))}
+#ambient-particles{position:fixed;inset:0;z-index:-1;pointer-events:none;width:100%;height:100%}
+.site-header,body[data-view=focus] .site-header,.site-footer,body[data-view=focus] .site-footer{background:rgba(15,29,44,.43);border:0;backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%)}
+.site-header-inner{min-height:88px}.site-header h1{font-family:'Microsoft YaHei',sans-serif;font-size:clamp(22px,2vw,34px);font-weight:650}.site-title:after{display:none}
+.semester-button{min-width:142px;min-height:52px;border:0;border-radius:30px;background:rgba(255,255,255,.08)!important;font-size:20px;box-shadow:none!important}.semester-button[aria-pressed=true]{background:rgba(221,237,255,.85)!important;color:#182f46}.season-art{display:none}.season-label small{display:none}.season-icon{width:24px;height:24px}
+.compat-entry,body[data-view=focus] .compat-entry,.close-focus,.focus-nav{border:0;background:rgba(255,255,255,.12);backdrop-filter:blur(14px)}
+.book-entry{background:rgba(21,40,53,.45);padding:16px 14px;border-radius:22px;backdrop-filter:blur(20px) saturate(130%);-webkit-backdrop-filter:blur(20px) saturate(130%);box-shadow:0 18px 50px #0002,inset 0 1px 0 #fff2}
+.book-grid{gap:18px}.book-cover-link{height:clamp(150px,15vw,270px)}.book-heading h2{font-size:clamp(20px,1.6vw,28px)}.book-unit-link{font-size:clamp(16px,1.1vw,21px)}.book-units,.book-units li{border:0}.book-unit-link:hover{background:#ffffff15;color:#fff}.book-unit-number{color:#c8dceb}
+.focus-backdrop{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}.focus-view{background:transparent}.focus-layout{gap:0;grid-template-columns:minmax(190px,.24fr) minmax(0,.76fr);max-width:1400px;background:var(--glass);border-radius:28px;backdrop-filter:blur(26px) saturate(135%);-webkit-backdrop-filter:blur(26px) saturate(135%);box-shadow:0 30px 90px #0004,inset 0 1px 0 #fff3;padding:12px}
+body[data-view=focus] .library-view{visibility:hidden}.focused-book{padding:24px}.focused-cover img{max-height:400px;width:100%;box-shadow:0 20px 40px #0004}.focused-book h3{font-size:27px}.focused-book p{color:#cedeea;font-size:15px}
+.directory-panel{background:transparent;border:0;box-shadow:none;border-radius:18px}.directory-heading{border:0;padding:22px 24px 14px}.directory-heading h2{font-size:32px}.directory-heading p{color:#d1dfeb}.directory-scroll{padding:8px 18px 22px}.unit-node{background:transparent;border:0;margin:4px 0}.unit-summary{min-height:60px}.unit-node[open]>.unit-summary{background:#d7eaff1a;box-shadow:none}.unit-summary h3{font-size:27px}.unit-lessons{border:0;padding:4px 0;margin:0 0 10px 18px}.lesson-node:before{display:none}.lesson-summary{background:#ffffff08;margin:5px 0;padding:11px 14px;border-radius:13px}.lesson-summary:hover{background:#ffffff15}.lesson-node[open]>.lesson-summary{background:#ffffff15;color:#fff}.lesson-resources{padding:0 0 10px}.resource-card{background:rgba(227,241,255,.12);border:0;box-shadow:none;border-radius:16px}.lesson-grade{border:0}.resource-count{background:#ffffff12;color:#e3f3ff}.lesson-open{border:0;background:rgba(208,232,255,.83);color:#17344b}.lesson-open:hover{background:#e2f2ff}.unit-lesson-count{color:#ccdce9}.lesson-code{color:#c5dbea}
+.atmosphere-toggle{position:fixed;right:20px;bottom:8px;z-index:60;color:#d6e8f7;border:0;border-radius:18px;background:#20374b99;padding:7px 12px;font-size:12px;cursor:pointer}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.focus-layout,.book-entry{background:rgba(20,37,54,.94)}}
+@media(max-width:900px){.book-grid{gap:12px}.book-entry{padding:10px}.focus-layout{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);padding:7px;gap:4px}.focused-book{padding:6px;flex-direction:row;gap:10px}.focused-cover{width:35px}.focused-cover img{height:48px}.focused-book h3{font-size:19px;margin:0}.focused-book p{font-size:12px}.focused-book-label{display:flex;align-items:center;gap:10px}.directory-heading{padding:8px 12px}.directory-heading h2{font-size:22px}.unit-summary h3{font-size:22px}.atmosphere-toggle{bottom:6px;right:8px}.directory-scroll{padding:5px 7px 18px}}
+@media(max-width:699px){.focus-layout{border-radius:20px}.site-header-inner{padding:8px 10px}.book-entry{border-radius:15px}.book-grid{gap:12px}.directory-heading h2{font-size:19px}.unit-summary h3{font-size:19px}.unit-summary{min-height:48px}.lesson-summary{padding:8px;min-height:44px}.unit-lessons{margin-left:0}.atmosphere-toggle{position:absolute;top:8px;bottom:auto;font-size:0;width:25px;height:25px;padding:0;right:5px;opacity:.8}.atmosphere-toggle:after{content:'◌';font-size:18px}.site-header .compat-entry{margin-right:20px}.focus-view{padding-bottom:8px}.directory-panel{border-radius:14px}}
+@media(prefers-reduced-motion:reduce){.atmosphere{transition:none}#ambient-particles{display:none}}
+/* Explicit positive stacking keeps imagery above the root background. */
+.atmosphere{z-index:0}#ambient-particles{z-index:1}main{position:relative;z-index:2}.site-footer{position:relative;z-index:3}
+:root{--glass:rgba(82,111,139,.30)}
+.focus-layout{background:linear-gradient(125deg,rgba(208,230,247,.17),rgba(43,67,91,.42));box-shadow:0 26px 70px #0004,inset 0 1px 0 #fff4,inset 0 -1px 0 #fff1}
+.directory-panel{background:rgba(9,26,44,.26)}
+/* Accessibility guardrails: text-bearing scrims remain legible over white imagery. */
+.book-entry,.directory-panel{background:rgba(9,26,44,.76)}
+.site-header,body[data-view=focus] .site-header,.site-footer,body[data-view=focus] .site-footer{background:rgba(9,26,44,.76)}
+.book-heading,.book-unit-link,.focused-book,.directory-panel{color:#edf5fb}
+.book-heading p,.book-heading span,.focused-book p,.directory-heading p,.unit-lesson-count,.lesson-code,.site-footer{color:#d9e6ef}
+.focused-book-label{background:rgba(9,26,44,.76);border-radius:12px;padding:8px}
+.atmosphere-toggle{min-width:44px;min-height:44px;background:#173047;color:#edf5fb;opacity:1}
+body[data-motion=paused] *,body[data-motion=paused] *:before,body[data-motion=paused] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+body[data-motion=paused] .book-cover-link img,body[data-motion=paused] .book-cover-link:hover img{transform:none}
+@media(max-width:699px){.atmosphere-toggle{position:fixed;top:auto;bottom:4px;right:4px;width:44px;height:44px;z-index:80}.site-footer{padding-right:54px}.directory-scroll{padding-bottom:52px}}
+.book-entry{border:0}
+@media(max-width:699px){.semester-button{min-width:0;min-height:44px;flex:1}.book-unit-link{min-height:44px}.book-heading h2 a{min-height:44px}.focus-nav{min-width:44px}}
+.resource-card{background:rgba(9,26,44,.40)}
+.resource-description{color:#d9e6ef}
+.flight-pages small{color:#4d646c}
+/* Two cached decoded surfaces crossfade; hover never alters the selected unit. */
+.atmosphere{background-image:url('./assets/plants.webp');transition:none}
+.atmosphere-layer{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;opacity:0;transition:opacity .65s ease;will-change:opacity}
+.atmosphere-layer.is-visible{opacity:1}
+.atmosphere:after{z-index:2;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.atmosphere-layer{transition:none}}
