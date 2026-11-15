@@ -335,10 +335,10 @@ window.AIHTML_METADATA = {
     "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.8用水分离/": {
-    "updateSummary": "细化盐场与四步实验器材：新增烧杯刻度、滤纸导流、凹形蒸发皿及盖帽熄灯，完善五层过滤瓶；二维兼容图同步精修，修复重播提示。",
+    "updateSummary": "聚焦改用AI生成盐田情景图；拓展新增污水处理厂六阶段流程与自动演示，保留教材过滤瓶，强调再生水用途与饮用限制。",
     "id": "b7ba3d71e897943b8138ca2444de5259",
-    "updatedAt": "2026-11-14T15:00:20Z",
-    "commit": "6f01dee50e573cc3e0283647d187e1cd77fe5ec5"
+    "updatedAt": "2026-11-15T03:33:03.106Z",
+    "commit": "36361928ddcaaf37e7aa5660afd1661d8e09a181"
   },
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
