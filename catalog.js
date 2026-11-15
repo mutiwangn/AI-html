@@ -192,6 +192,11 @@
               changeDisclosure(node, false);
               return;
             }
+            if (node.className.indexOf('lesson-node') !== -1 && window.innerWidth <= 699) {
+              window.setTimeout(function () {
+                if (node.hasAttribute('open')) directory.scrollTop += node.getBoundingClientRect().top - directory.getBoundingClientRect().top - 5;
+              }, 0);
+            }
             /* 每一层只聚焦一个展开项；同一课的多个作品始终同时保留。 */
             each(node.parentNode.children, function (sibling) {
               if (sibling !== node && sibling.tagName === 'DETAILS') changeDisclosure(sibling, false);
