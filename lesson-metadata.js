@@ -335,12 +335,12 @@ window.AIHTML_METADATA = {
     "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.8用水分离/": {
-  "updateSummary": "探索四步实验操作：盐沙均匀混合，搅拌溶解、规范引流、停火冷却与两盘对比；保留滤纸微观及污水厂独立阶段，生成图标明示意。",
+  "updateSummary": "实验操作四步保留；酒精灯新增暖色三层火焰与放大标注（着色示意），滤纸默认展示真实交织纤维与多个表面孔隙，支持近孔及无标记原图。",
   "id": "b7ba3d71e897943b8138ca2444de5259",
-  "updatedAt": "2026-11-15T09:26:34.375Z",
-  "commit": "eebbd1d9235e1fc6bcd668407681c3f500b65635",
+  "updatedAt": "2026-11-15T10:52:30.315Z",
+  "commit": "d8ff263257832ecdebb34af63cffb40000f54cb0",
   "teachingType": "实验操作",
-  "teachingTypeCommit": "eebbd1d9235e1fc6bcd668407681c3f500b65635"
+  "teachingTypeCommit": "d8ff263257832ecdebb34af63cffb40000f54cb0"
 },
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
