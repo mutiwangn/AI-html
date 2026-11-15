@@ -720,3 +720,36 @@ body[data-view="focus"] .compat-entry:hover,
     .book-entry { background: rgba(6,26,53,.82); }
   }
 }
+
+/* Phone focus: compact textbook switcher, full-width lesson cards, no duplicate cover block. */
+@media(max-width:699px) and (orientation:portrait){
+ body[data-view="focus"] .site-header-inner{padding:6px 10px;gap:5px 8px}
+ body[data-view="focus"] .site-title{font-size:16px}
+ body[data-view="focus"] .site-title::after{display:none}
+ body[data-view="focus"] .compat-entry{min-height:36px;font-size:12px;padding:6px}
+ body[data-view="focus"] .semester-button{min-height:38px;padding:6px;font-size:16px}
+ body[data-view="focus"] .season-icon{width:19px;height:19px}
+ body[data-view="focus"] .site-footer{display:none}
+ .focus-view{padding:calc(var(--header-size) + 5px) 6px max(6px,env(safe-area-inset-bottom))}
+ .focus-layout{grid-template-rows:44px minmax(0,1fr);gap:5px}
+ .focused-book{padding:0 44px;gap:8px;justify-content:center}
+ .focused-cover{width:25px;height:36px}
+ .focused-cover img{max-height:36px}
+ .focused-book-label{display:flex;align-items:baseline;gap:8px}
+ .focused-book h3{font-size:18px;margin:0}
+ .focused-book p{font-size:11px}
+ .focus-nav{top:calc(var(--header-size) + 27px);width:38px;height:44px}
+ .focus-nav svg{width:24px;height:24px}
+ .directory-heading{padding:7px 10px;gap:6px}
+ .directory-heading h2{font-size:18px}
+ .directory-heading p{font-size:11px;margin-top:2px}
+ .close-focus{min-height:44px;width:44px;padding:10px}
+ .directory-scroll{padding:5px 5px 12px}
+ .unit-summary{min-height:44px;padding:8px;gap:6px}
+ .unit-summary h3{font-size:18px}
+ .unit-lessons{margin:4px 0 7px 5px;padding-left:5px}
+ .lesson-node::before{left:-5px;width:4px;top:22px}
+ .lesson-summary{min-height:44px;padding:8px 5px;gap:6px}
+ .lesson-summary h4{font-size:16px}
+ .lesson-resources{padding:0 2px 7px 2px}
+}
