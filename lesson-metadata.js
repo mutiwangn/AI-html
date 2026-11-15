@@ -335,11 +335,13 @@ window.AIHTML_METADATA = {
     "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.8用水分离/": {
-    "updateSummary": "聚焦改用AI生成盐田情景图；拓展新增污水处理厂六阶段流程与自动演示，保留教材过滤瓶，强调再生水用途与饮用限制。",
-    "id": "b7ba3d71e897943b8138ca2444de5259",
-    "updatedAt": "2026-11-15T03:33:03.106Z",
-    "commit": "36361928ddcaaf37e7aa5660afd1661d8e09a181"
-  },
+  "updateSummary": "探索四步实验操作：盐沙均匀混合，搅拌溶解、规范引流、停火冷却与两盘对比；保留滤纸微观及污水厂独立阶段，生成图标明示意。",
+  "id": "b7ba3d71e897943b8138ca2444de5259",
+  "updatedAt": "2026-11-15T09:26:34.375Z",
+  "commit": "eebbd1d9235e1fc6bcd668407681c3f500b65635",
+  "teachingType": "实验操作",
+  "teachingTypeCommit": "eebbd1d9235e1fc6bcd668407681c3f500b65635"
+},
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
     "updatedAt": "2026-11-14T10:40:09Z",
