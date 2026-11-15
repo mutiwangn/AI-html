@@ -335,12 +335,12 @@ window.AIHTML_METADATA = {
     "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
   },
   "./三上2.8用水分离/": {
-  "updateSummary": "实验操作四步保留；酒精灯新增暖色三层火焰与放大标注（着色示意），滤纸默认展示真实交织纤维与多个表面孔隙，支持近孔及无标记原图。",
+  "updateSummary": "滤纸显微视野横向放大，长纤维交织走向与多个表面孔隙更清楚；保留近孔观察及完整原图。实验四步、暖色三层火焰和污水处理过程保留。",
   "id": "b7ba3d71e897943b8138ca2444de5259",
-  "updatedAt": "2026-11-15T10:52:30.315Z",
-  "commit": "d8ff263257832ecdebb34af63cffb40000f54cb0",
+  "updatedAt": "2026-11-15T11:06:10.193Z",
+  "commit": "68b32be679f25fe60d9cf08c9ee710c999f88f62",
   "teachingType": "实验操作",
-  "teachingTypeCommit": "d8ff263257832ecdebb34af63cffb40000f54cb0"
+  "teachingTypeCommit": "68b32be679f25fe60d9cf08c9ee710c999f88f62"
 },
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
