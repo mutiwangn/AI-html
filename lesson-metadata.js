@@ -579,9 +579,10 @@ window.AIHTML_METADATA = {
   },
   "./四上2.7食物在身体里的旅行/": {
     "id": "01b07b5a1f7acdf8899d733db58ee40d",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
-  },
+    "updatedAt": "2026-11-17T12:57:35Z",
+    "commit": "890e4c24886e959dc9e5b9f6c6cb69a6f5010bf2",
+    "updateSummary": "胶囊内镜课堂版 v2.4；保留三页互动与新增观察素材，图片优化至2.47MB，人体定位3D模型需联网。"
+},
   "./四上2.8呵护我们的器官/": {
     "id": "4b4eaef372505add154ed6e1f9001717",
     "updatedAt": "2026-11-13T09:39:01Z",
