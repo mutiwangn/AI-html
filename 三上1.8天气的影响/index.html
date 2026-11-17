@@ -1,17 +1,1389 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>天气的影响</title><style>*{box-sizing:border-box}body{margin:0;background:#e1edf2;color:#173f49;font:22px/1.5 system-ui,'Microsoft YaHei',sans-serif;overflow:hidden}#app{width:1600px;height:900px;position:absolute;transform-origin:top left;background:#edf5fb;padding:24px 30px}header{height:76px;display:flex;justify-content:space-between;align-items:center}h1{font-size:32px;margin:0}h2{font-size:25px;margin:0 0 12px}h3{font-size:22px;margin:8px 0}p{margin:8px 0}.small{font-size:17px;color:#4e707a}.layout{height:696px;display:grid;grid-template-columns:1080px 440px;gap:20px;margin-top:15px}.panel{border:1px solid #c5dfe3;border-radius:20px;background:#fff;padding:20px}button,input,select{font:inherit;color:inherit}button{border:1px solid #bad3de;background:white;border-radius:12px;padding:9px 14px;cursor:pointer;min-height:46px}button:hover{background:#e5f2f8}button.active,.primary{background:#176a99;color:white}button:disabled{opacity:.5;cursor:default}button:focus-visible,select:focus-visible,input:focus-visible{outline:4px solid #d39726;outline-offset:2px}select,input{border:1px solid #bed6df;background:white;border-radius:9px;padding:7px;min-height:43px;font-size:19px}input[type=range]{width:100%;accent-color:#176a99}svg{width:100%;display:block}svg text{font-family:system-ui,'Microsoft YaHei',sans-serif;fill:#173f49}.notice{background:#e4f1fb;border-left:4px solid #176a99;padding:11px 14px;border-radius:8px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:10px 0}.entry{margin:8px 0;padding:10px;border:1px solid #c5dfe3;border-radius:12px}.entry select,.entry input{width:100%;margin:4px 0}.entry label{font-size:16px}#real .entry input,#real .entry select{font-size:17px}#realFeedback{line-height:1.4}#caseFeedback{font-size:17px}footer{margin-top:14px;font-size:18px;line-height:1.6}dialog{max-height:750px;width:1050px;padding:28px;border:1px solid #c5dfe3;border-radius:20px;color:#173f49}dialog::backdrop{background:#163249aa}a{color:#176a99}.hidden{display:none!important}.tag{font-size:16px;background:#e4f1fb;padding:5px 9px;border-radius:7px}.status{font-size:18px;min-height:48px}.chip{font-size:18px;padding:6px 10px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}#weatherScene{height:235px}#cases p{font-size:19px;line-height:1.4}#cases #caseFeedback{font-size:17px}#real h2{font-size:23px;margin:0 0 5px}#real .row{margin:5px 0}#real .row button{min-height:38px;padding:5px 12px;font-size:18px}#real .entry{padding:8px;margin:5px 0}#real .entry input,#real .entry select{height:35px;min-height:35px;padding:4px;font-size:16px;margin:3px 0}#real .entry label{font-size:15px}#real .small{font-size:16px;line-height:1.35}#compare{height:75px}#cases p{font-size:17px;line-height:1.35}#cases #caseFeedback{font-size:16px}#cases #options button{font-size:17px!important;padding:6px 10px;min-height:40px}#diagram{height:250px}.separation aside .entry{padding:6px 9px;margin:5px 0}.separation aside .entry select{height:35px;min-height:35px;font-size:17px;padding:4px;margin:2px 0}.separation aside .small{font-size:16px;line-height:1.35}.separation #evidence{height:60px}.separation #review{margin:6px 0;padding:8px 10px}.separation aside .row{margin:6px 0}</style></head><body><div id="app"><header><div><div class="small">三年级上册 · 天气 · 1.8</div><h1>天气的影响</h1></div><button id="help">方法、边界与来源</button></header><main class="layout"><section class="panel"><div class="row"><h2>同一天气，对不同对象意味着什么？</h2><span class="tag">预设定性情境，不是实测或预报</span></div><div class="row"><label>情境 <select id="weather"><option value="rain">雨持续落下</option><option value="dry">无雨，空气较干燥</option><option value="wind">无雨，较干燥且有风</option></select></label><label>晾晒处 <select id="roof"><option value="open">露天</option><option value="covered">有挡雨棚</option></select></label><button id="start">回到开始</button></div><svg id="weatherScene" viewBox="0 0 1040 340" role="img" aria-label="同一天气中的衣物晾晒和雨水收集情境"></svg><label for="time">拖动观察过程 <span id="phase"></span></label><input id="time" type="range" min="0" max="100" value="0"><div class="pair"><div class="notice"><h3>① 直接看见的线索</h3><p id="seen" class="small"></p></div><div class="notice"><h3>② 从线索作安排</h3><p id="decision" class="small"></p></div></div><p class="small">只用水位、衣物含水的定性变化示意；不模拟植物长势、人体温度或真实干燥时间。改变遮棚后，“天气相同”也不等于“条件相同”。</p></section><aside class="panel"><div class="row"><button id="caseTab" class="primary">生活应用</button><button id="realTab">真实证据</button></div><section id="cases"><label for="case">把证据用在具体情境</label><select id="case" style="width:100%"><option>晴热活动</option><option>雨天出行</option><option>雨后花盆</option><option>大风晾晒</option></select><h2 id="caseTitle" style="margin-top:15px"></h2><p id="caseText"></p><div id="options"></div><p id="caseFeedback" class="notice small">先说理由，再选择。</p><h3>还需要的信息</h3><p id="caseNeed" class="small"></p><p class="small">观察是已经看到；预报是未来信息；“所以一定……”仍可能是未经验证的推测。</p></section><section id="real" hidden><h2>两次真实证据并排看</h2><div class="row"><button id="r0">记录 A</button><button id="r1">记录 B</button></div><div class="entry"><div class="pair"><div><label>时间与天气线索</label><input id="rtime" placeholder="例如：上午，雨后" maxlength="25"></div><div><label>观察对象</label><select id="object"><option>未记录</option><option>晾晒衣物</option><option>雨水容器</option><option>路面 / 出行</option><option>植物与盆土</option><option>户外活动</option></select></div></div><label>看到的现象（不写因果结论）</label><input id="effect" placeholder="例如：土湿；水位变高" maxlength="35"><div class="pair"><div><label>证据来源</label><select id="source"><option>未记录</option><option>亲眼观察</option><option>预报信息</option><option>他人转述</option><option>只是推测</option></select></div><div><label>其他改变的条件</label><input id="condition" placeholder="例如：刚浇水" maxlength="35"></div></div></div><svg id="compare" viewBox="0 0 400 95" role="img" aria-label="两次真实证据和比较条件"></svg><p id="realFeedback" class="small"></p><div class="row"><button id="export">导出 CSV</button><button id="clear">清空</button></div><p class="small">仅页面内存保存，不上传，刷新丢失。不填姓名、地址或健康信息。</p></section></aside></main>
-<footer>同一天气不只有一种影响；网页情境不是本地天气预报。雷雨、大风、高温等风险遵循官方预警、学校与成人安排。<br>不攀高、不追赶吹走的物品、不进入不明积水；植物状态还受土壤、排水、浇水等影响。</footer></div><dialog id="helpDialog"><h2>比较对象、条件和证据</h2><p>衣物与收集容器是同一场景中的两个不同目标。雨可能妨碍晾干，却能补充收集水。挡雨棚改变受雨条件，不能把同一天气当作全部条件相同。深色衣物区是含水趋势图解，不是湿度测量或实际颜色预测。水位只画定性变化，不给真实时长、降雨量、干燥速度。</p><p>无雨时为短时示意，容器蒸发未画出，不意味着露天水永远不减少。有风和无风情境只说明干燥空气流动可能促进蒸发；不能外推风越大越安全。真实证据保持来源与其他条件，单凭两次观察不能排除混杂因素。</p><p>保留原四个生活情境和安全判断。原创二维图，无外部图像和配音。教材教参仍待核对。</p><p>依据：<a href="https://www.usgs.gov/water-science-school/science/evaporation-and-water-cycle">USGS：蒸发与水循环</a>；<a href="https://www.usgs.gov/publications/instructions-measuring-rate-evaporation-water-surfaces">USGS：温度、风与空气干燥程度影响蒸发</a>。只摘要科学关系，不复制资源图片。</p><button id="closeHelp">返回课堂</button></dialog><script>
-'use strict';const $=id=>document.getElementById(id);function fit(){let s=Math.min(innerWidth/1600,innerHeight/900);$('app').style.transform=`scale(${s})`;$('app').style.left=(innerWidth-1600*s)/2+'px';$('app').style.top=(innerHeight-900*s)/2+'px'}addEventListener('resize',fit);fit();$('help').onclick=()=>$('helpDialog').showModal();$('closeHelp').onclick=()=>{$('helpDialog').close();$('help').focus()};function escapeXml(v){return String(v).replace(/[<>&"']/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&apos;'}[c]))}function csvCell(v){return '"'+String(v).replace(/^[=+@-]/,"'$&").replace(/"/g,'""')+'"'}function download(name,rows){let a=document.createElement('a'),u=URL.createObjectURL(new Blob(['\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-const cases=[{title:'晴热的午后',symbol:'☀️',text:'学校准备开展户外活动。天气晴热，地面无遮阴。怎样安排更稳妥？',options:['查看预警与学校安排，和老师调整时段或场地','只要没有下雨，就按原计划一直晒太阳'],correct:0,why:'晴天也可能有高温风险。活动安排要结合预警、场地和教师指导，不是晴天就一定适合所有户外活动。',limit:'还要了解气温、预警、活动强度、遮阴和供水条件。不能仅凭图标判断安全。'},{title:'雨天的出行',symbol:'🌧️',text:'准备步行去学校，路面有积水。怎样考虑天气的影响？',options:['为了快一点，穿过不清楚深浅的积水','由成人确认安全路线，按学校通知安排出行'],correct:1,why:'雨会改变路面和能见度。积水深浅与路况不明时不能贸然通过，出行听从成人与学校安排。',limit:'需要了解雨势、积水、道路和交通情况；遇暴雨或雷电以官方预警和学校安排为准。'},{title:'雨后的花盆',symbol:'🪴',text:'花盆刚放在雨中，盆土已经湿润。有人说“每天都要再浇同样多的水”。你更赞成什么？',options:['先看盆土、排水和植物需要，再决定是否浇水','不论是否下雨，都再浇同样多的水'],correct:0,why:'降雨可能补充水分，但浇水还取决于植物、盆土和排水情况。不能只按固定次数判断，也不能认为雨越多越好。',limit:'盆土是否湿润？排水孔是否通畅？不同植物需要不同。网页不能替你判断具体花盆的状况。'},{title:'大风中的晾晒',symbol:'🌬️',text:'风明显增大，晾晒物和悬挂物在晃动。怎样处理？',options:['爬到高处抓住晃动的物品','告诉成人，在安全条件下处理或改变安排'],correct:1,why:'风可能加快部分物品干燥，也可能吹落物品并带来危险。孩子不攀高、不追赶吹走的东西，由成人评估处理。',limit:'风速、固定方式、周围高空物品和预警都重要。不能把“有风容易干”当成所有大风天气都适宜晾晒。'}];
-function model(w,roof,t){return {wet:w==='rain'&&roof==='open'?.45+.45*t:Math.max(.1,.45-(w==='wind'?.32:w==='dry'?.24:.05)*t),tank:w==='rain'?50+120*t:50,wind:w==='wind'?t:0}}
-function weatherDraw(){let w=$('weather').value,r=$('roof').value,t=Number($('time').value)/100,m=model(w,r,t),rain=w==='rain'?Array.from({length:20},(_,i)=>`<path d="M${40+i*50} ${55+(i%3)*8}l-8 20" stroke="#459fbd" stroke-width="3"/>`).join(''):'';$('weatherScene').innerHTML=`<rect x="0" y="0" width="1040" height="340" rx="15" fill="#edf7fc"/><text x="250" y="35" text-anchor="middle" font-size="23">晾晒湿衣物</text><text x="790" y="35" text-anchor="middle" font-size="23">接雨水，留作浇灌备用</text>${rain}<path d="M70 110H450M90 100V300M430 100V300" stroke="#7695a2" stroke-width="5"/>${r==='covered'?'<path d="M45 100L250 60L475 100Z" fill="#abbfcb" stroke="#698797" stroke-width="3"/>':''}<path d="M170 130L215 110H285L330 130L310 170L285 155V270H215V155L190 170Z" fill="#6cafd2" stroke="#3a7e9e" stroke-width="3"/><path d="M215 ${270-140*m.wet}H285V270H215Z" fill="#28688c" opacity=".7"/><text x="250" y="324" text-anchor="middle" font-size="19">深色区：含水变化的解释示意</text><path d="M660 110V290H920V110" fill="#fff" stroke="#7695a2" stroke-width="5"/><rect x="663" y="${287-m.tank}" width="254" height="${m.tank}" fill="#85c8df"/><path d="M650 237H930" stroke="#305b73" stroke-dasharray="7 6" stroke-width="2"/><text x="790" y="324" text-anchor="middle" font-size="19">虚线保留开始水位</text>${w==='wind'?'<path d="M345 170h100m-15-10 15 10-15 10M335 205h100m-15-10 15 10-15 10" fill="none" stroke="#739cae" stroke-width="4"/>':''}`;$('phase').textContent=t===0?'开始':t===1?'一段时间后（非真实时长）':'过程中（可定格比较）';$('seen').textContent=w==='rain'?(r==='open'?'雨落到衣物上，也进入敞口容器；后者水位逐渐高于起点。':'雨棚挡住直接落到衣物上的雨；同一场雨仍进入露天容器。'):'没有雨水补入容器；湿衣物的水可经蒸发进入空气。此处假设空气较干燥，未给具体干燥速度。';$('decision').textContent=w==='rain'?'想晾干衣服，需要考虑避雨；想收集雨水，降雨可能有帮助。雨水不能直接当饮用水；是否浇花还要看盆土和植物需要。':w==='wind'?'风可能促进干燥，也会使物品晃动、掉落。是否晾晒还需看固定方式、预警和成人安排。':'无雨可能方便晾晒，但不替代高温预警与场地检查；不能因此断定所有活动都安全。'}
-['weather','roof','time'].forEach(id=>$(id).oninput=weatherDraw);$('start').onclick=()=>{$('time').value=0;weatherDraw()};
-function caseDraw(){let c=cases[$('case').selectedIndex||0];$('caseTitle').textContent=c.title;$('caseText').textContent=c.text;$('caseNeed').textContent=c.limit;$('options').replaceChildren();c.options.forEach((v,i)=>{let b=document.createElement('button');b.textContent=v;b.style.cssText='width:100%;margin:5px 0;font-size:19px';b.onclick=()=>$('caseFeedback').textContent=(i===c.correct?'这个安排更有依据。':'需要重新考虑安全条件。')+c.why;$('options').appendChild(b)});$('caseFeedback').textContent='先说理由，再选择；当地信息不能由模型替代。'}$('case').onchange=caseDraw;
-let selectedRecord=0,records=Array.from({length:2},()=>({rtime:'',object:'未记录',effect:'',source:'未记录',condition:''}));const keys=['rtime','object','effect','source','condition'];function compare(){let same=records[0].object!=='未记录'&&records[0].object===records[1].object,observed=records.every(r=>r.source==='亲眼观察'&&r.effect&&r.rtime);$('compare').innerHTML=records.map((r,i)=>`<rect x="${i*205}" y="5" width="195" height="62" rx="10" fill="${r.source==='亲眼观察'?'#d8ecf5':'#f8edda'}"/><text x="${i*205+97}" y="29" font-size="18" text-anchor="middle">${i?'B':'A'} ${escapeXml(r.object)}</text><text x="${i*205+97}" y="54" font-size="15" text-anchor="middle">${escapeXml(r.source)}</text>`).join('')+`<text x="200" y="89" text-anchor="middle" font-size="16">${same?'对象相同：还要核对时段、遮挡、浇水等条件':'对象不同或未记录：不能直接比较变化快慢'}</text>`;$('realFeedback').textContent=observed?'两份亲眼观察仍不自动证明天气是唯一原因；对照其他条件，保留不同解释。':'预报、转述、推测不自动变成亲眼证据；空项保留，不补写模型现象。'}function loadRecord(i){selectedRecord=i;keys.forEach(k=>$(k).value=records[i][k]);$('r0').className=i===0?'primary':'';$('r1').className=i===1?'primary':'';compare()}keys.forEach(k=>$(k).oninput=()=>{records[selectedRecord][k]=$(k).value;compare()});$('r0').onclick=()=>loadRecord(0);$('r1').onclick=()=>loadRecord(1);$('caseTab').onclick=()=>{$('cases').hidden=false;$('real').hidden=true};$('realTab').onclick=()=>{$('cases').hidden=true;$('real').hidden=false;compare()};function realRows(){return[['记录','时间天气','对象','实际现象','证据来源','其他条件'],...records.map((r,i)=>[i?'B':'A',...keys.map(k=>r[k]||'未记录')])]}$('export').onclick=()=>download('天气影响真实证据.csv',realRows());$('clear').onclick=()=>{if(!confirm('清空两份真实记录？请先导出。'))return;records=Array.from({length:2},()=>({rtime:'',object:'未记录',effect:'',source:'未记录',condition:''}));loadRecord(0)};weatherDraw();caseDraw();loadRecord(0);
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#28735d"><title>天气的影响 · 角色分类拓展版</title><style>:root{--ink:#183e36;--sub:#5f756c;--green:#28735d;--line:#dbe7de;--paper:#eef4ef;--gold:#edb34c;--radius:22px;--gap:14px;font-family:"Microsoft YaHei","PingFang SC","Noto Sans CJK SC",sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}button:disabled{cursor:default;opacity:.45}button:focus-visible{outline:4px solid #de9b24;outline-offset:3px}button:active:not(:disabled){transform:translateY(1px)}button{transition:background .16s,box-shadow .16s;border:0}h1,h2,h3,h4,p{margin:0}[hidden]{display:none!important}svg{display:block}button svg{pointer-events:none}.app{height:100dvh;display:flex;flex-direction:column;gap:var(--gap);padding:12px 14px;min-height:650px}.header{height:74px;flex-shrink:0;background:#fff;border:1px solid var(--line);border-radius:22px;display:flex;align-items:center;justify-content:space-between;padding:10px 18px;gap:14px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{display:grid;place-items:center;width:48px;height:48px;background:#28735d;border-radius:15px;font-size:30px}.brand h1{font-size:29px;line-height:1.2;font-weight:900}.brand p{font-size:13px;color:var(--sub);margin-top:2px}.tabs{display:flex;background:#eff4ef;padding:5px;border-radius:15px;gap:3px}.tabs button{padding:10px 19px;font-size:20px;font-weight:800;border-radius:11px;background:none;white-space:nowrap}.tabs button[aria-selected=true]{background:var(--green);color:white}.tools{display:flex;gap:8px}.button{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:17px;font-weight:700;min-height:44px;white-space:nowrap}.button:hover{background:#f0f6f1}.button.primary{background:var(--green);color:#fff;border-color:var(--green)}.button.gold{background:#fff1d0;border-color:#e6cd92}.button.danger{color:#a4423d;background:#fff0ed;border-color:#eaccc6}
+.workspace{flex:1;min-height:0;display:grid;grid-template-columns:clamp(160px,11.8vw,220px) minmax(0,.83fr) minmax(0,1.17fr);gap:var(--gap)}.panel{min-width:0;min-height:0;background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 5px 20px #244c3605}.weather-panel{display:flex;flex-direction:column;padding:16px 12px;gap:10px}.weather-panel h2{font-size:23px;font-weight:850}.weather-panel>p{font-size:15px;color:var(--sub);line-height:1.5}.weather-list{flex:1;display:flex;flex-direction:column;gap:7px;min-height:0;overflow:auto;scrollbar-width:thin}.weather-button{display:flex;align-items:center;gap:9px;border:2px solid #e1e9e3;background:#fff;border-radius:13px;padding:9px 12px;min-height:50px;flex:1;max-height:76px;text-align:left;white-space:nowrap;font-size:23px;font-weight:800}.weather-button .weather-icon{font-size:27px;width:35px;text-align:center}.weather-button[aria-pressed=true]{background:#e6f3e9;border-color:#358069}.weather-button:hover{background:#f1f8f2}.weather-panel.extreme .weather-button[aria-pressed=true]{background:#fff1e3;border-color:#c18b54}.left-footer{display:flex;flex-direction:column;gap:7px}.left-footer .button{padding:10px 4px;font-size:15px}.left-footer p{font-size:12px;color:var(--sub);line-height:1.6;text-align:center}
+.stage-panel{padding:15px;display:flex;flex-direction:column;gap:12px}.weather-head{display:flex;gap:12px;justify-content:space-between;align-items:flex-start}.weather-head h2{font-size:39px;font-weight:900;line-height:1.1}.weather-head p{font-size:19px;line-height:1.55;margin-top:9px}.replay-button{flex-shrink:0;border:1px solid var(--line);background:white;border-radius:12px;padding:9px;font-size:15px;line-height:1.4}.stage{position:relative;flex:1;min-height:260px;overflow:hidden;border-radius:18px;isolation:isolate;background:#afdef5}.scene-back{position:absolute;inset:0;z-index:0}.scene-back>svg{width:100%;height:100%}.scene-sky-top{stop-color:var(--sky-top,#7dc8f6)}.scene-sky-bottom{stop-color:var(--sky-bottom,#e1f5ff)}.sky-sun{opacity:var(--sun-alpha,1)}.sky-clouds{fill:var(--cloud-color,#fff);opacity:var(--cloud-alpha,.9)}.grass-land{fill:var(--grass-color,#aad77d)}.hill-far{fill:var(--hill-color,#89be7e)}.weather-rain,.weather-snow,.weather-fog,.weather-wind,.weather-lightning,.weather-hot{display:none}.stage[data-weather=cloudy]{--sun-alpha:.7;--cloud-alpha:1;--sky-top:#97c6e5}.stage[data-weather=overcast]{--sun-alpha:0;--cloud-color:#b8cbd0;--cloud-alpha:1;--sky-top:#b1c5ce;--sky-bottom:#e3edf0}.stage:is([data-weather=rain],[data-weather=downpour]){--sun-alpha:0;--cloud-color:#94b2be;--sky-top:#8eb2c7;--sky-bottom:#d6e8ef}.stage:is([data-weather=storm],[data-weather=typhoon]){--sun-alpha:0;--cloud-color:#7795a5;--sky-top:#789aaf;--sky-bottom:#c1d9e5}.stage:is([data-weather=snow],[data-weather=blizzard]){--sun-alpha:0;--grass-color:#e7f2f0;--hill-color:#ccdcd8;--sky-top:#b2d3e3;--sky-bottom:#eff8ff}.stage[data-weather=freeze]{--sky-top:#91bbdf;--sky-bottom:#e3f3ff}.stage:is([data-weather=hot],[data-weather=heatwave]){--sky-top:#97cceb;--sky-bottom:#ffe6b0}.weather-fx{position:absolute;inset:0;pointer-events:none;z-index:3;overflow:hidden}.weather-rain i{position:absolute;left:var(--x);top:-12%;height:18px;width:2px;background:#d6f3ff;box-shadow:0 0 1px #4d8ead;transform:rotate(12deg);animation:fallRain var(--speed,.9s) linear infinite;animation-delay:var(--delay)}.stage:is([data-weather=rain],[data-weather=downpour],[data-weather=storm],[data-weather=typhoon]) .weather-rain{display:block}.stage[data-weather=downpour] .weather-rain i{height:27px;width:3px;opacity:.85}.stage[data-weather=typhoon] .weather-rain{transform:skewX(-17deg)}.weather-snow i{position:absolute;top:-5%;left:var(--x);width:7px;height:7px;border-radius:50%;background:#fff;animation:fallSnow var(--speed,4s) linear infinite;animation-delay:var(--delay);box-shadow:0 0 4px #ffffffcc}.stage:is([data-weather=snow],[data-weather=blizzard]) .weather-snow{display:block}.stage[data-weather=blizzard] .weather-snow i{width:10px;height:10px;animation-duration:2.6s}.weather-fog{background:linear-gradient(0deg,transparent 0%,#edf5f5a6 48%,#eaf3f36b 100%);z-index:1}.stage:is([data-weather=foggy],[data-weather=densefog]) .weather-fog{display:block}.stage[data-weather=densefog] .weather-fog{background:#e6f1f2ba}.stage:is([data-weather=windy],[data-weather=typhoon]) .weather-wind{display:block}.weather-wind i{position:absolute;left:-30%;top:var(--y);height:12px;width:120px;border-top:3px solid #ffffffaa;border-radius:50%;animation:windAcross 2.4s linear infinite;animation-delay:var(--delay)}.stage:is([data-weather=windy],[data-weather=typhoon]) .scene-tree{transform-box:fill-box;transform-origin:50% 100%;animation:treeSway 2.5s ease-in-out infinite}.stage[data-weather=storm] .weather-lightning{display:block}.weather-lightning svg{position:absolute;right:18%;top:8%;width:45px;height:100px;fill:#fff0a0;animation:bolt 5s ease-in-out infinite}.stage:is([data-weather=hot],[data-weather=heatwave]) .weather-hot{display:block;background:radial-gradient(ellipse at 76% 14%,#ffd07345,transparent 55%)}.weather-hot:after{content:"";position:absolute;inset:30% 0 0;background:repeating-linear-gradient(90deg,transparent,transparent 11%,#ffdd8933 12%,transparent 13%);animation:heatHaze 3s ease-in-out infinite}.weather-warning{position:absolute;top:12px;left:12px;right:12px;z-index:6;font-size:15px;background:#fff6dfed;padding:8px 12px;border-radius:11px;color:#785432;font-weight:700}.scene-note{position:absolute;left:12px;top:11px;background:#ffffffe0;border-radius:7px;font-size:12px;color:#536d63;padding:5px 8px;z-index:4}.actor-layer{position:absolute;left:0;right:0;bottom:6%;height:76%;z-index:2;pointer-events:none}.actor-position{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:74%;height:100%;max-width:365px;pointer-events:auto}.actor-entry{width:100%;height:100%}.actor-entry.enter-person{animation:personEnter 1.25s linear both}.actor-entry.enter-animal{animation:animalEnter 1.2s ease-out both}.actor-entry.enter-plant{animation:plantAppear .8s ease-out both}.actor-figure{height:100%;width:100%;transform-origin:50% 100%}.actor-figure>.character-svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 4px 2px #294d3220)}.human .leg{transform-box:view-box;transform-origin:115px 212px}.human .arm{transform-box:view-box;transform-origin:114px 149px}.enter-person .leg-front{animation:stride .31s ease-in-out 4 alternate}.enter-person .leg-back{animation:stride .31s ease-in-out 4 alternate-reverse}.enter-person .arm-back{animation:armSwing .31s ease-in-out 4 alternate}.human .head{transform-box:view-box;transform-origin:113px 130px;animation:headLook 7s ease-in-out infinite}.human .eyes,.bird .eyes{transform-box:fill-box;transform-origin:center;animation:blink 5.5s linear infinite}.human .broom-prop{transform-box:view-box;transform-origin:165px 169px;animation:sweep 3s ease-in-out infinite}.human .kite-prop{transform-box:view-box;transform-origin:158px 176px;animation:kiteFloat 4s ease-in-out infinite}.human .plant-task{transform-box:view-box;transform-origin:160px 190px;animation:canMove 4s ease-in-out infinite}.character-svg.insect .nature-body{transform-box:view-box;transform-origin:120px 180px;animation:beeFloat 2.5s ease-in-out infinite}.insect .wing{transform-box:fill-box;transform-origin:50% 100%;animation:wingBeat .14s ease-in-out infinite alternate}.amphibian .nature-body{transform-box:view-box;transform-origin:120px 296px;animation:frogBreathe 3.2s ease-in-out infinite}.bird .wing{transform-box:fill-box;transform-origin:70% 10%;animation:birdWing 5s ease-in-out infinite}.plant .leaf-group{transform-box:view-box;transform-origin:120px 292px;animation:plantSway 4.5s ease-in-out infinite}.stage:is([data-weather=windy],[data-weather=typhoon]) .plant .leaf-group{animation:plantSway 1.6s ease-in-out infinite}.stage .actor-mood{position:absolute;top:22%;right:4%;width:72px;height:72px;z-index:7;border-radius:50%;filter:drop-shadow(0 5px 5px #19423723);animation:stickerPop .25s ease-out}.actor-mood .face-svg{width:100%;height:100%}.role-identity{text-align:center;min-height:51px;display:flex;flex-direction:column;justify-content:center;gap:3px}.role-identity strong{font-size:24px;line-height:1.2;font-weight:850}.role-identity span{font-size:17px;color:var(--sub)}.rate-box{background:#eff6f0;border:1px solid #dce9dd;border-radius:16px;padding:14px 17px}.rate-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.rate-head h3{font-size:22px;font-weight:850}.rate-value{font-size:46px;line-height:1;font-weight:900;color:var(--green);white-space:nowrap;font-variant-numeric:tabular-nums}.rate-bar{height:11px;border-radius:999px;background:#d7e5d8;margin:12px 0 9px;overflow:hidden}.rate-fill{height:100%;border-radius:999px;background:#61b789;width:0;transition:width .35s ease}.rate-detail{font-size:17px;line-height:1.6}.rate-formula{font-size:13px;line-height:1.55;margin-top:4px;color:var(--sub)}
+.right-panel{padding:20px 22px;display:flex;flex-direction:column;gap:14px;border-top:5px solid #72a991}.right-top{display:flex;justify-content:space-between;align-items:center;gap:12px}.progress-text{font-size:21px;font-weight:800}.progress-text small{font-size:16px;color:var(--sub);margin-left:10px;font-weight:500}.auto-switch{border-radius:10px;padding:8px 11px;background:#f0f5f0;border:1px solid var(--line);font-size:15px;white-space:nowrap}.auto-switch[aria-pressed=true]{background:#deefdf;border-color:#86b58e}.role-card{border:0;border-radius:17px;background:#f5f8f2;padding:21px 26px;flex:1;display:flex;flex-direction:column;justify-content:center;min-height:190px;gap:10px;overflow:auto}.card-name{font-size:clamp(36px,3.5vw,66px);font-weight:900;line-height:1.18;letter-spacing:.04em}.card-task{font-size:clamp(24px,2vw,37px);font-weight:800;line-height:1.3;color:#35675a}.card-desc{font-size:clamp(25px,2.04vw,38px);font-weight:550;line-height:1.62;margin-top:6px;color:#233e35;overflow-wrap:anywhere}.mood-box{padding:0 2px}.mood-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.mood-heading h3{font-size:clamp(23px,1.9vw,33px);font-weight:900}.hint-button{font-size:16px;border:1px solid #e7d3a9;background:#fff3d9;border-radius:10px;padding:8px 11px;white-space:nowrap}.mood-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.mood-button{--tone:#789984;--tint:#eef6ed;border:2px solid var(--tone);border-radius:16px;background:var(--tint);padding:12px 4px 10px;min-height:136px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;user-select:none;touch-action:none;position:relative}.mood-button.love{--tone:#8ac293;--tint:#eef9ef}.mood-button.like{--tone:#bbd088;--tint:#f4f9e9}.mood-button.neutral{--tone:#e8ce78;--tint:#fff9e3}.mood-button.dislike{--tone:#e5b182;--tint:#fff2e5}.mood-button.hate{--tone:#daa0ac;--tint:#fff0f2}.mood-button>.face-svg{height:clamp(58px,4.9vw,88px);width:clamp(58px,4.9vw,88px);transition:transform .17s}.mood-button:hover>.face-svg{transform:translateY(-3px)}.mood-button[aria-pressed=true]{box-shadow:inset 0 0 0 3px #355f4e,0 4px 12px #325e461c}.mood-button[aria-pressed=true]:after{content:"✓";position:absolute;right:5px;top:2px;font-size:23px;font-weight:900;color:#214f3e}.mood-label{font-size:clamp(18px,1.46vw,28px);font-weight:850;text-align:center;line-height:1.28;word-break:keep-all}.mood-label span{display:block}.selection-status{min-height:48px;border-radius:12px;background:#f1f6ef;display:flex;align-items:center;gap:10px;font-size:clamp(18px,1.5vw,27px);font-weight:650;padding:10px 14px;line-height:1.45}.selection-status .face-svg{width:36px;height:36px;flex-shrink:0}.selection-status[data-recorded=false]{color:var(--sub);font-size:19px;background:#f8faf6}.right-tools{display:grid;grid-template-columns:.75fr 1.6fr 1fr;gap:10px}.right-tools button{min-height:59px;padding:12px 5px;border-radius:14px;background:#edf4ed;font-size:clamp(19px,1.5vw,27px);font-weight:850;white-space:nowrap}.right-tools .next{background:var(--green);color:white}.right-tools .end{background:#fff3d9;color:#775a2d}.classroom-note{font-size:13px;line-height:1.5;color:var(--sub);text-align:center}.drag-ghost{position:fixed;width:80px;height:80px;transform:translate(-50%,-50%);pointer-events:none;z-index:10000;filter:drop-shadow(0 8px 12px #10392844)}.drag-ghost svg{width:100%;height:100%}.drop-ready{outline:5px dashed #f1b741;outline-offset:-6px}.pause-motion *{animation-play-state:paused!important}
+.summary-page{flex:1;min-height:0;overflow:auto;padding:22px 26px;background:#fff;border:1px solid var(--line);border-radius:22px}.summary-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.summary-head h2{font-size:43px;font-weight:900}.summary-head .actions{display:flex;gap:10px}.summary-intro{font-size:26px;color:#4c6d5f;margin:14px 0 20px;line-height:1.55}.summary-list{display:grid;gap:14px}.summary-round{border:1px solid #dbe5dd;background:#f6faf4;border-radius:17px;padding:20px;display:grid;grid-template-columns:180px 1fr 130px;gap:20px;align-items:center}.summary-round h3{font-size:30px;font-weight:850}.summary-round p{font-size:18px;color:var(--sub);margin-top:6px}.summary-faces{display:flex;flex-wrap:wrap;gap:10px}.mini-result{display:flex;align-items:center;gap:7px;border-radius:12px;background:white;padding:7px 11px;border:1px solid #dfe8df}.mini-result svg{width:40px;height:40px}.mini-result span{font-size:18px}.mini-result small{display:block;font-size:13px;color:var(--sub)}.summary-metric{text-align:center}.summary-metric strong{display:block;font-size:42px;color:var(--green)}.summary-metric .button{margin-top:5px}.findings{margin-top:20px;border-top:1px solid var(--line);padding-top:18px}.findings-head{display:flex;align-items:center;justify-content:space-between;gap:14px}.findings-head h3{font-size:28px}.finding{font-size:34px;line-height:1.6;border-left:6px solid #6eab7f;background:#f1f7ee;padding:18px 22px;margin-top:13px;border-radius:0 15px 15px 0}.empty-state{padding:45px 20px;text-align:center;font-size:26px;background:#f7faf4;border-radius:17px;line-height:1.8;color:var(--sub)}
+dialog{border:1px solid var(--line);border-radius:25px;padding:24px;max-height:calc(100dvh - 40px);color:var(--ink);width:min(1280px,94vw);box-shadow:0 24px 85px #0e352b33}dialog::backdrop{background:#17382d65;backdrop-filter:blur(4px)}.dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.dialog-head h2{font-size:40px;font-weight:900}.dialog-head p{font-size:21px;color:var(--sub);line-height:1.5;margin-top:9px}.dialog-result-message{font-size:29px;font-weight:750;background:#f1f7ed;border-radius:15px;padding:15px 20px;margin-top:18px;line-height:1.5}.result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}.result-card{background:#f8fbf5;border:1px solid #dce7dd;border-radius:18px;padding:12px 14px;text-align:center;position:relative;min-width:0}.result-portrait{height:140px}.result-portrait svg{height:100%;width:100%;margin:auto}.result-mood{position:absolute;top:12px;right:12px;width:50px;height:50px}.result-card h3{font-size:25px;font-weight:850;line-height:1.4;margin-top:4px}.result-card p{font-size:19px;line-height:1.45;color:#516b5d}.result-card strong{display:block;font-size:23px;margin-top:8px;color:#315b46}.dialog-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}.dialog-footer .button{font-size:22px;padding:12px 20px}.dialog-small{width:min(740px,94vw)}.dialog-small .dialog-body{font-size:26px;line-height:1.75;margin-top:20px}.hint-question{padding:17px;background:#fff6df;border-radius:14px;font-size:28px;line-height:1.7;margin-top:18px}.radio-tools{display:flex;gap:10px;margin:20px 0}.radio-tools button{font-size:24px;padding:14px;background:#eaf4e8;border-radius:13px;border:2px solid transparent}.radio-tools button[aria-pressed=true]{border-color:var(--green)}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);z-index:11000;padding:13px 25px;border-radius:13px;background:#214d3f;color:white;font-size:19px;box-shadow:0 8px 26px #193a392b;max-width:85vw;text-align:center;pointer-events:none}
+@keyframes personEnter{0%{transform:translateX(-140%)}90%{transform:translateX(0)}100%{transform:translateX(0)}}@keyframes animalEnter{from{transform:translateX(-140%)}to{transform:translateX(0)}}@keyframes plantAppear{from{opacity:0;transform:scale(.72);transform-origin:50% 100%}to{opacity:1;transform:scale(1);transform-origin:50% 100%}}@keyframes stride{from{transform:rotate(-12deg)}to{transform:rotate(12deg)}}@keyframes armSwing{from{transform:rotate(7deg)}to{transform:rotate(-8deg)}}@keyframes headLook{0%,40%,100%{transform:rotate(0)}50%,58%{transform:rotate(3deg)}75%,83%{transform:rotate(-2deg)}}@keyframes blink{0%,43%,47%,100%{transform:scaleY(1)}45%{transform:scaleY(.1)}}@keyframes sweep{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(7deg)}}@keyframes kiteFloat{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(4deg)}}@keyframes canMove{0%,100%{transform:rotate(0)}50%{transform:rotate(-5deg)}}@keyframes beeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}@keyframes wingBeat{from{opacity:.8;scale:1 1}to{opacity:1;scale:.82 1.08}}@keyframes frogBreathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.02,.98)}}@keyframes birdWing{0%,45%,100%{transform:rotate(0)}55%,65%{transform:rotate(8deg)}}@keyframes plantSway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}@keyframes treeSway{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(2deg)}}@keyframes stickerPop{from{transform:scale(.6)}to{transform:scale(1)}}@keyframes fallRain{to{top:110%;translate:-25px 0}}@keyframes fallSnow{to{top:110%;translate:25px 0}}@keyframes windAcross{to{left:120%}}@keyframes heatHaze{50%{transform:translateX(5px)}}@keyframes bolt{0%,85%,100%{opacity:0}90%,95%{opacity:.75}}
+@media(min-width:1800px){.app{padding:16px 20px;--gap:18px}.header{height:86px}.brand h1{font-size:34px}.tabs button{font-size:24px;padding:12px 24px}.weather-panel{padding:20px 15px;gap:14px}.weather-panel h2{font-size:28px}.weather-button{font-size:28px;min-height:62px;max-height:85px}.weather-button .weather-icon{font-size:32px}.right-panel{padding:27px 29px;gap:19px}.role-card{padding:28px 33px}.progress-text{font-size:25px}.mood-button{min-height:165px}.right-tools button{min-height:71px}.rate-head h3{font-size:27px}.rate-value{font-size:57px}.rate-detail{font-size:22px}.rate-formula{font-size:16px}.stage-panel{padding:20px}.weather-head h2{font-size:48px}.weather-head p{font-size:23px}.role-identity strong{font-size:30px}.role-identity span{font-size:22px}.actor-position{max-width:400px}.rate-box{padding:19px 21px}.classroom-note{font-size:16px}}
+@media(max-height:780px) and (min-width:901px){.app{min-height:590px;padding:8px 10px;--gap:10px}.header{height:65px;padding:8px 16px}.brand h1{font-size:26px}.brand-mark{height:43px;width:43px}.brand p{font-size:12px}.tabs button{font-size:18px;padding:9px 17px}.weather-panel{padding:12px 10px;gap:8px}.weather-panel>p{display:none}.weather-button{min-height:40px;padding:6px 8px;font-size:21px}.weather-list{gap:5px}.right-panel{padding:14px 18px;gap:10px}.role-card{padding:16px 22px;gap:8px;min-height:175px}.card-name{font-size:clamp(35px,3.25vw,48px)}.card-task{font-size:clamp(24px,2vw,31px)}.card-desc{font-size:clamp(24px,2vw,31px);line-height:1.55;margin-top:4px}.mood-button{min-height:116px;padding:8px 2px;gap:7px}.mood-button>.face-svg{width:61px;height:61px}.mood-heading{margin-bottom:8px}.mood-heading h3{font-size:24px}.mood-label{font-size:20px}.right-tools button{min-height:49px;font-size:20px;padding:10px 4px}.selection-status{min-height:43px;padding:6px 11px;font-size:20px}.classroom-note{font-size:12px}.stage-panel{padding:12px;gap:9px}.weather-head h2{font-size:33px}.weather-head p{font-size:17px;margin-top:5px}.rate-box{padding:11px 13px}.rate-head h3{font-size:20px}.rate-value{font-size:38px}.rate-detail{font-size:15px}.rate-formula{font-size:11px;margin-top:1px}.rate-bar{margin:7px 0 5px;height:10px}.role-identity{min-height:45px}.role-identity strong{font-size:22px}.role-identity span{font-size:16px}.actor-layer{height:80%;bottom:4%}.stage{min-height:220px}.result-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.result-portrait{height:106px}.dialog-result-message{font-size:24px}.dialog-head h2{font-size:33px}}
+@media(min-width:901px) and (max-width:1160px){.workspace{grid-template-columns:140px minmax(0,.8fr) minmax(0,1.2fr)}.header{gap:8px;padding:10px}.brand h1{font-size:23px}.brand p{display:none}.tabs button{padding:9px 12px;font-size:17px}.tools .button{padding:9px;font-size:14px}.weather-panel h2{font-size:19px}.weather-button{font-size:20px;padding:7px}.weather-button .weather-icon{font-size:23px;width:25px}.card-desc{font-size:25px}.mood-list{gap:6px}.mood-button>.face-svg{height:54px;width:54px}.mood-label{font-size:18px}.right-panel{padding:13px}.progress-text{font-size:18px}.progress-text small{font-size:13px;margin-left:5px}.auto-switch{font-size:12px}.rate-head h3{font-size:17px}.rate-formula{font-size:11px}.rate-value{font-size:35px}.weather-head h2{font-size:32px}.weather-head p{font-size:16px}.replay-button{font-size:12px;padding:7px}.hint-button{font-size:13px;padding:7px}.mood-heading h3{font-size:22px}.right-tools button{font-size:18px}.role-identity strong{font-size:22px}.role-identity span{font-size:15px}}
+@media(max-width:900px){.app{height:auto;min-height:100dvh;padding:10px}.header{height:auto;min-height:74px;flex-wrap:wrap}.brand h1{font-size:25px}.brand p{font-size:11px}.tabs{order:3;width:100%;justify-content:center}.tabs button{flex:1;font-size:19px;padding:10px}.tools .button{font-size:14px;padding:8px}.workspace{grid-template-columns:140px minmax(0,1fr);min-height:0}.weather-panel{grid-row:1;max-height:560px}.weather-panel h2{font-size:20px}.weather-panel>p{display:none}.weather-button{font-size:21px;padding:7px;min-height:43px}.weather-button .weather-icon{font-size:25px;width:26px}.weather-list{gap:5px}.stage-panel{grid-column:2;min-height:530px}.stage{height:300px;min-height:290px}.weather-head h2{font-size:32px}.weather-head p{font-size:17px}.rate-head h3{font-size:20px}.rate-value{font-size:34px}.rate-detail{font-size:15px}.rate-formula{font-size:12px}.right-panel{grid-column:1/-1;padding:20px}.role-card{min-height:200px}.card-name{font-size:40px}.card-task{font-size:27px}.card-desc{font-size:28px}.mood-heading h3{font-size:26px}.mood-button{min-height:125px}.mood-button>.face-svg{width:65px;height:65px}.mood-label{font-size:21px}.selection-status{font-size:22px}.right-tools button{font-size:23px}.summary-page{padding:20px}.summary-head{align-items:flex-start;flex-direction:column}.summary-head h2{font-size:35px}.summary-round{grid-template-columns:1fr 100px}.summary-faces{grid-column:1/-1;grid-row:2}.result-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.dialog-head h2{font-size:31px}.dialog-head p{font-size:19px}.dialog-result-message{font-size:25px}.result-card h3{font-size:22px}.result-card p{font-size:16px}.finding{font-size:28px}.result-portrait{height:115px}.role-identity strong{font-size:23px}}
+@media(max-width:560px){.header{padding:11px;gap:10px}.brand-mark{height:36px;width:36px;border-radius:10px;font-size:24px}.brand{gap:8px}.brand h1{font-size:22px}.tools{gap:5px}.tools .button{min-height:35px;padding:7px;font-size:12px}.tabs button{font-size:16px;padding:9px 5px}.workspace{grid-template-columns:92px minmax(0,1fr);gap:8px}.weather-panel{padding:9px 6px;max-height:455px}.weather-panel h2{font-size:15px;text-align:center}.weather-button{font-size:15px;border-radius:10px;gap:3px;padding:6px 3px;min-height:38px}.weather-button .weather-icon{font-size:18px;width:22px}.left-footer .button{font-size:11px;padding:8px 2px;min-height:32px}.left-footer p{display:none}.weather-list{gap:4px}.stage-panel{min-height:455px;padding:9px;gap:8px}.stage{height:236px;min-height:236px;border-radius:13px}.weather-head h2{font-size:26px}.weather-head p{font-size:13px;line-height:1.4;margin-top:5px}.replay-button{font-size:11px;padding:5px;border-radius:8px}.scene-note{font-size:10px;left:7px;top:7px}.weather-warning{font-size:11px;padding:6px;left:7px;right:7px;top:7px}.actor-layer{height:80%;bottom:5%}.actor-position{width:88%}.actor-mood{width:47px!important;height:47px!important}.role-identity{min-height:36px}.role-identity strong{font-size:18px}.role-identity span{font-size:12px}.rate-box{padding:9px;border-radius:12px}.rate-head h3{font-size:14px}.rate-value{font-size:27px}.rate-detail{font-size:11px}.rate-formula{font-size:10px}.rate-bar{height:8px;margin:6px 0 4px}.right-panel{padding:16px 13px;gap:12px}.role-card{padding:20px;min-height:200px}.card-name{font-size:37px}.card-task{font-size:25px}.card-desc{font-size:26px}.progress-text{font-size:19px}.progress-text small{font-size:13px;margin-left:5px}.auto-switch{font-size:12px;padding:7px}.mood-heading h3{font-size:24px}.hint-button{font-size:13px;padding:7px}.mood-list{gap:5px}.mood-button{min-height:106px;padding:8px 1px;border-radius:12px}.mood-button>.face-svg{width:49px;height:49px}.mood-label{font-size:15px}.mood-button[aria-pressed=true]:after{font-size:18px}.right-tools{gap:7px}.right-tools button{min-height:51px;font-size:18px}.selection-status{font-size:18px;padding:8px 10px}.selection-status[data-recorded=false]{font-size:16px}.classroom-note{font-size:11px}.summary-round{padding:14px;gap:12px;grid-template-columns:1fr 86px}.summary-round h3{font-size:24px}.summary-metric strong{font-size:32px}.summary-round p{font-size:15px}.mini-result span{font-size:15px}.mini-result{padding:6px 8px}.mini-result svg{width:34px;height:34px}.summary-intro{font-size:21px}.summary-head .actions{flex-wrap:wrap}.summary-head .button{font-size:14px;padding:8px}.findings-head{flex-wrap:wrap}.findings-head h3{font-size:23px}.finding{font-size:24px;padding:15px}.result-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.result-card{padding:10px 8px}.result-portrait{height:110px}.result-card h3{font-size:21px}.result-card p{font-size:16px}.result-card strong{font-size:18px}.result-mood{width:42px;height:42px;right:7px;top:7px}dialog{padding:17px;border-radius:20px}.dialog-head h2{font-size:26px}.dialog-head p{font-size:16px}.dialog-result-message{font-size:21px;padding:12px}.dialog-head .button{font-size:14px;padding:7px}.dialog-footer .button{font-size:17px;padding:10px 12px}.dialog-small .dialog-body{font-size:22px}.hint-question{font-size:23px}.radio-tools button{font-size:20px}.toast{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+.card-desc{white-space:pre-line}
+
+/* Category extension. Main card sizes remain large; no typing controls are added. */
+.category-bar{display:grid;grid-template-columns:1.28fr 1fr 1fr;gap:8px;flex-shrink:0}
+.category-button{padding:10px 9px;border:1px solid #dbe6dc;border-radius:12px;background:#f6f9f5;text-align:center;line-height:1.3;min-width:0;min-height:64px}
+.category-button strong{display:block;font-size:clamp(20px,1.6vw,30px);font-weight:850;white-space:nowrap}
+.category-button small{display:block;font-size:clamp(12px,.85vw,16px);margin-top:3px;color:#667c71;white-space:nowrap}
+.category-button[aria-pressed=true]{background:#28735d;color:#fff;border-color:#28735d}
+.category-button[aria-pressed=true] small{color:#e0f0df}
+.category-button:hover:not([aria-pressed=true]){background:#eaf3e9}
+.right-panel{gap:12px}.right-top{flex-shrink:0}.role-card{flex:1 1 auto;min-height:240px;padding:20px 25px;gap:9px}
+.card-name{font-size:clamp(38px,3.2vw,60px);letter-spacing:.01em}.card-task{font-size:clamp(25px,1.85vw,36px)}
+.card-desc{font-size:clamp(25px,1.95vw,37px);line-height:1.6;white-space:pre-line}
+.mood-box,.selection-status,.right-tools,.classroom-note{flex-shrink:0}
+.selection-status{font-size:clamp(18px,1.3vw,26px)}.classroom-note{line-height:1.3}
+.scene-note{font-size:clamp(12px,1.1vw,19px);font-weight:650;padding:7px 10px}
+.stage[data-setting=library] .weather-fx{clip-path:polygon(65% 5%,99% 5%,99% 46%,65% 46%)}
+.stage[data-setting=library] .actor-position{max-width:300px}
+.stage[data-setting=harbor] .actor-position{left:46%}
+.windmill-rotor{transform-box:view-box;transform-origin:0px 0px}
+.stage[data-weather=windy] .windmill-rotor{animation:contextSpin 10s linear infinite}
+@keyframes contextSpin{to{transform:rotate(360deg)}}
+.snail .nature-body{animation:snailBreathe 5s ease-in-out infinite;transform-origin:50% 100%;transform-box:fill-box}
+@keyframes snailBreathe{50%{transform:translateX(3px)}}
+.result-place{display:block;font-size:15px;color:#6f8074;margin-top:4px}
+.summary-filter{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.summary-filter button{border:1px solid #dce7de;border-radius:12px;background:#f2f7f1;padding:11px 17px;font-size:22px;font-weight:700}
+.summary-filter button[aria-pressed=true]{background:#28735d;color:#fff}
+.summary-filter small{font-size:16px;margin-left:5px}
+.summary-category-label{display:inline-block;margin-top:8px;border-radius:7px;background:#dfeddf;padding:4px 8px;font-size:17px;font-weight:750}
+.pool-dialog{width:min(1140px,94vw)}.pool-category-bar{margin:20px 0 10px}
+.pool-controls{display:flex;justify-content:space-between;align-items:center;gap:15px;margin:6px 0 12px}
+.pool-controls .radio-tools{margin:0}.pool-controls .radio-tools button{font-size:21px;padding:12px 16px}
+.pool-controls p{font-size:18px;line-height:1.5;color:var(--sub);max-width:360px}
+.pool-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;max-height:39dvh;overflow:auto;padding:3px 5px 3px 0;scrollbar-width:thin}
+.pool-preview-card{display:grid;grid-template-columns:68px 1fr;gap:10px;align-items:center;border:1px solid #dce7dc;background:#f6f9f3;border-radius:12px;padding:10px;min-width:0}
+.pool-portrait{height:87px}.pool-portrait svg{width:100%;height:100%}
+.pool-preview-card strong{display:block;font-size:21px;line-height:1.4}
+.pool-preview-card span{display:block;font-size:18px;line-height:1.4;color:#426253}
+.pool-preview-card small{display:block;font-size:13px;color:#7b8a7b;margin-top:3px}
+.pool-help{font-size:17px;color:var(--sub);margin-top:16px;line-height:1.6}
+.source-note{font-size:14px;line-height:1.7;color:#6c7b72;margin-top:8px}.source-note summary{cursor:pointer}
+.source-note p{margin:8px 0}
+@media(min-width:1800px){.right-panel{padding:22px 26px;gap:15px}.category-button{min-height:72px}.role-card{min-height:260px;padding:23px 30px}.mood-button{min-height:150px}.right-tools button{min-height:63px}}
+@media(max-height:800px) and (min-width:901px){.right-panel{padding:12px 16px;gap:8px}.category-button{min-height:53px;padding:7px}.category-button strong{font-size:22px}.category-button small{font-size:12px}.role-card{min-height:205px;padding:14px 22px;gap:7px}.card-name{font-size:clamp(36px,2.9vw,46px)}.card-task{font-size:clamp(25px,1.9vw,30px)}.card-desc{font-size:clamp(25px,1.95vw,31px);line-height:1.55;margin-top:3px}.mood-button{min-height:103px;padding:7px 2px;gap:5px}.mood-button>.face-svg{width:55px;height:55px}.mood-heading{margin-bottom:7px}.mood-heading h3{font-size:23px}.mood-label{font-size:19px}.selection-status{min-height:40px;padding:6px 10px;font-size:18px}.selection-status .face-svg{height:30px;width:30px}.right-tools button{min-height:46px;font-size:19px;padding:9px 3px}.classroom-note{font-size:11px}.auto-switch{font-size:13px;padding:6px 8px}.progress-text{font-size:19px}.progress-text small{font-size:14px}.result-place{font-size:13px}}
+@media(min-width:901px) and (max-width:1160px){.category-button strong{font-size:20px}.category-bar{gap:5px}.role-card{padding:13px 18px}.card-name{font-size:35px}.card-task{font-size:25px}.card-desc{font-size:25px}.right-panel{gap:8px}}
+@media(max-width:900px){.category-button strong{font-size:23px}.category-button small{font-size:13px}.category-button{min-height:62px}.role-card{min-height:225px}.pool-preview{grid-template-columns:repeat(2,minmax(0,1fr))}.pool-controls{align-items:flex-start}.pool-controls p{font-size:15px;max-width:260px}.summary-filter button{font-size:19px}}
+@media(max-width:560px){.category-bar{gap:5px;grid-template-columns:1.2fr 1fr 1fr}.category-button{padding:9px 3px;min-height:61px}.category-button strong{font-size:19px}.category-button small{font-size:10px}.right-panel{gap:11px}.role-card{padding:20px;min-height:225px}.card-name{font-size:36px}.card-task{font-size:25px}.card-desc{font-size:25px;line-height:1.6;white-space:normal}.scene-note{font-size:10px;padding:5px 7px}.pool-preview{grid-template-columns:1fr;max-height:40dvh}.pool-preview-card strong{font-size:21px}.pool-controls{display:block}.pool-controls p{margin:8px 0 0;max-width:none}.pool-controls .radio-tools button{font-size:18px}.pool-help{font-size:15px}.summary-filter{gap:5px}.summary-filter button{font-size:16px;padding:9px 10px}.summary-filter small{font-size:12px;margin-left:2px}.classroom-note{font-size:11px}}
+
+
+/* Tighten controls, not the large reading text, to fit classroom 16:9 displays. */
+.right-panel{padding:16px 20px;gap:10px}
+.category-button{padding:8px 9px;min-height:62px}
+.category-button strong{line-height:1.12}.category-button small{line-height:1.2}
+.role-card>*{flex-shrink:0}
+.auto-switch{font-size:14px;line-height:1.25;padding:7px 10px}
+.mood-heading h3{line-height:1.3}
+.hint-button{font-size:15px;line-height:1.3;padding:7px 10px}
+.mood-button{gap:7px;padding:10px 3px 8px}
+.mood-button>.face-svg{height:clamp(55px,4.2vw,76px);width:clamp(55px,4.2vw,76px)}
+@media(min-width:1800px){.right-panel{padding:22px 26px;gap:14px}.category-button{min-height:72px}.auto-switch{font-size:16px}.role-card{min-height:290px}}
+@media(max-height:800px) and (min-width:901px){.right-panel{padding:12px 16px;gap:6px}.category-button{min-height:51px;padding:6px 7px}.auto-switch{font-size:13px;padding:6px 8px}.hint-button{font-size:14px;padding:6px 9px}.mood-button{gap:5px;padding:7px 2px}.mood-button>.face-svg{height:53px;width:53px}.role-card{min-height:205px}.classroom-note{line-height:1.2}}
+@media(max-width:900px){.right-panel{padding:20px;gap:12px}.category-button{padding:10px 7px;min-height:62px}.mood-button{padding:12px 3px}.mood-button>.face-svg{height:65px;width:65px}}
+@media(max-width:560px){.right-panel{padding:16px 13px}.category-button{min-height:60px;padding:8px 3px}.category-button strong{font-size:19px}.mood-button>.face-svg{height:49px;width:49px}.mood-button{padding:8px 1px}.hint-button{font-size:13px}.auto-switch{font-size:12px;padding:7px}}
+
+
+@media(min-width:901px) and (max-width:1799px) and (min-height:801px){.role-card{padding-top:17px;padding-bottom:17px}}
+</style></head><body><div class="app" id="app">
+ <header class="header">
+  <div class="brand"><div class="brand-mark" aria-hidden="true">⛅</div><div><h1>天气的影响</h1><p>三年级上册 · 互动天气剧场</p></div></div>
+  <nav class="tabs" role="tablist" aria-label="活动页面"><button role="tab" data-page="normal" aria-selected="true">常见天气</button><button role="tab" data-page="extreme" aria-selected="false">恶劣天气</button><button role="tab" data-page="summary" aria-selected="false">汇总发现</button></nav>
+  <div class="tools"><button class="button" id="pauseBtn" aria-pressed="false">暂停动画</button><button class="button" id="fullscreenBtn">全屏</button></div>
+ </header>
+ <main class="workspace" id="workspace">
+  <aside class="weather-panel panel" id="weatherPanel"><h2 id="weatherListTitle">选择天气</h2><p>同一天气，换个角色想一想。</p><div class="weather-list" id="weatherList"></div><div class="left-footer"><button class="button" id="rolePoolBtn">本轮角色</button><button class="button" id="restartBtn">重开本轮</button><p>只需点击，无需打字。</p></div></aside>
+  <section class="stage-panel panel" aria-label="天气与卡通角色场景"><div class="weather-head"><div><h2 id="weatherName"></h2><p id="weatherDesc"></p></div><button class="replay-button" id="replayBtn" title="重新播放当前角色的入场动画">重播<br>入场</button></div><div class="stage" id="stage"></div><div class="role-identity" id="stageIdentity"></div><section class="rate-box" aria-label="本轮评价统计"><div class="rate-head"><h3>本轮实时满意率</h3><output class="rate-value" id="rateNumber">—</output></div><div class="rate-bar" role="progressbar" id="rateBar" aria-label="本轮满意率" aria-valuemin="0" aria-valuemax="100"><div class="rate-fill" id="rateFill"></div></div><p class="rate-detail" id="rateDetail">还没有评价</p><p class="rate-formula">前两档计为“喜欢” ÷ 已评价角色数</p></section></section>
+  <aside class="right-panel panel" aria-label="角色卡片和点击评价"><div class="category-bar" id="categoryBar" role="group" aria-label="选择角色类型"></div><div class="right-top"><div class="progress-text" id="progressText"></div><button class="auto-switch" id="autoBtn" aria-pressed="false">自动换卡：关</button></div><section class="role-card" id="roleCard"><h2 class="card-name" id="cardName"></h2><h3 class="card-task" id="cardTask"></h3><p class="card-desc" id="cardDesc"></p></section><section class="mood-box"><div class="mood-heading"><h3>这种天气，我喜欢吗？</h3><button class="hint-button" id="hintBtn">给一点提示</button></div><div class="mood-list" id="moodList" role="group" aria-label="五档天气感受"></div></section><div class="selection-status" id="selectionStatus" role="status" aria-live="polite" data-recorded="false"></div><div class="right-tools"><button id="previousBtn">上一位</button><button class="next" id="nextBtn">下一位角色 →</button><button class="end" id="endBtn">结束本轮</button></div><p class="classroom-note" id="classroomNote">表情由同学选择，不自动判断对错。</p></aside>
+ </main>
+ <section class="summary-page" id="summaryPage" hidden><div class="summary-head"><h2>汇总发现</h2><div class="actions"><button class="button" id="exportBtn">导出记录</button><button class="button danger" id="clearBtn">清空课堂记录</button></div></div><p class="summary-intro" id="summaryIntro"></p><div class="summary-filter" id="summaryFilter" role="group" aria-label="按角色类型查看记录"></div><div class="summary-list" id="summaryList"></div><section class="findings"><div class="findings-head"><h3>先说说我们的发现</h3><div><button class="button gold" id="findingBtn">展开一条发现</button><button class="button" id="hideFindingsBtn" hidden>收起</button></div></div><div id="findings"></div></section></section>
+</div>
+<dialog id="resultDialog" aria-labelledby="resultTitle"><div class="dialog-head"><div><h2 id="resultTitle"></h2><p id="resultSubtitle"></p></div><button class="button" data-close="resultDialog">关闭</button></div><p class="dialog-result-message" id="resultMessage"></p><div class="result-grid" id="resultGrid"></div><div class="dialog-footer"><button class="button" id="resultSummaryBtn">去汇总发现</button><button class="button primary" id="resultWeatherBtn">选择下一种天气</button></div></dialog>
+<dialog id="hintDialog" class="dialog-small" aria-labelledby="hintTitle"><div class="dialog-head"><h2 id="hintTitle">站在角色的位置想一想</h2><button class="button" data-close="hintDialog">关闭</button></div><p class="hint-question" id="hintQuestion"></p><div class="dialog-footer"><button class="button primary" data-close="hintDialog">我来试着说一说</button></div></dialog>
+<dialog id="confirmDialog" class="dialog-small" aria-labelledby="confirmTitle"><div class="dialog-head"><h2 id="confirmTitle"></h2><button class="button" data-close="confirmDialog">取消</button></div><p class="dialog-body" id="confirmText"></p><div class="dialog-footer"><button class="button" data-close="confirmDialog">保留当前</button><button class="button primary" id="confirmOK">确认</button></div></dialog>
+<dialog id="poolDialog" class="pool-dialog" aria-labelledby="poolTitle"><div class="dialog-head"><div><h2 id="poolTitle">选择本轮角色</h2><p>先比较不同职业，再按需拓展到动植物。</p></div><button class="button" data-close="poolDialog">关闭</button></div><div class="category-bar pool-category-bar" id="poolCategoryBar" role="group" aria-label="本轮角色类型"></div><div class="pool-controls"><div class="radio-tools" role="group" aria-label="本轮情境数量"><button data-pool="8" aria-pressed="true">精选 8 张</button><button data-pool="0" aria-pressed="false">本类全部</button></div><p id="poolDescription"></p></div><div class="pool-preview" id="poolPreview"></div><p class="pool-help">卡片只提供任务与环境，不预设表情答案。更换后开启新一轮，已有评价保留。</p><details class="source-note"><summary>教学依据与情境说明</summary><p>依据《【教学用书】三上》第8课《天气的影响》（书内页91—98）：重点联系人的生产、生活，动植物角色小话剧作为拓展。新增职业、生活情境及卡通场景为课堂改编，不是教材原文案例清单。动植物的“喜欢”表示同学对生存或生长条件的拟人判断；本轮满意率不能用来判断真实天气的安全程度。</p></details><div class="dialog-footer"><button class="button primary" id="poolApplyBtn">开始这一组</button></div></dialog>
+<div class="toast" id="toast" hidden role="status"></div>
+<script>
+const ROLE_POOL = [
+  {
+    "id": "grower",
+    "category": "jobs",
+    "group": "person",
+    "name": "农民",
+    "task": "照看菜苗",
+    "intro": "菜苗刚栽进地里。\n我摸了摸土，土有些干。",
+    "setting": "field",
+    "place": "菜地",
+    "art": "grower",
+    "costume": "",
+    "prop": "",
+    "hint": "想一想菜苗需要的水分，也想一想人在菜地里怎样劳动。"
+  },
+  {
+    "id": "harvest",
+    "category": "jobs",
+    "group": "person",
+    "name": "农民",
+    "task": "晾晒谷子",
+    "intro": "收好的谷子铺在晒场上。\n我准备翻一翻，再收进粮仓。",
+    "setting": "drying",
+    "place": "晒谷场",
+    "art": "harvest",
+    "costume": "",
+    "prop": "",
+    "hint": "谷子正在变干。雨水、阳光和风会怎样影响这件事？"
+  },
+  {
+    "id": "fisher",
+    "category": "jobs",
+    "group": "person",
+    "name": "渔民",
+    "task": "准备出海捕鱼",
+    "intro": "渔船还停在码头。\n我先看风浪，再安排出海。",
+    "setting": "harbor",
+    "place": "渔港码头",
+    "art": "generic",
+    "costume": "fisher",
+    "prop": "fishbasket",
+    "hint": "除了有没有阳光，出海还要观察风浪和视线吗？"
+  },
+  {
+    "id": "builder",
+    "category": "jobs",
+    "group": "person",
+    "name": "建筑工人",
+    "task": "准备露天施工",
+    "intro": "砖块和工具已经放好。\n我准备和同伴在工地施工。",
+    "setting": "construction",
+    "place": "施工工地",
+    "art": "generic",
+    "costume": "builder",
+    "prop": "toolbox",
+    "hint": "天气会影响材料、施工安排和工人的身体吗？哪些条件需要先确认？"
+  },
+  {
+    "id": "courier",
+    "category": "jobs",
+    "group": "person",
+    "name": "快递员",
+    "task": "派送包裹",
+    "intro": "车上装着纸箱包裹。\n我今天要跑好几个小区。",
+    "setting": "street",
+    "place": "小区道路",
+    "art": "courier",
+    "costume": "",
+    "prop": "",
+    "hint": "纸箱、道路和身体感受，都要考虑吗？"
+  },
+  {
+    "id": "rider",
+    "category": "jobs",
+    "group": "person",
+    "name": "外卖骑手",
+    "task": "配送午餐",
+    "intro": "餐箱里放着刚做好的午餐。\n我准备骑车送到顾客家。",
+    "setting": "street",
+    "place": "城市街道",
+    "art": "courier",
+    "costume": "rider",
+    "prop": "mealbox",
+    "hint": "饭菜要送好，骑车也要安全。天气可能改变哪些条件？"
+  },
+  {
+    "id": "cleaner",
+    "category": "jobs",
+    "group": "person",
+    "name": "环卫工人",
+    "task": "清扫街道",
+    "intro": "路边有落叶和垃圾。\n我和同伴要清扫这段街道。",
+    "setting": "street",
+    "place": "街道",
+    "art": "cleaner",
+    "costume": "",
+    "prop": "",
+    "hint": "风、雨和冷热会怎样影响路面、落叶以及清扫工作？"
+  },
+  {
+    "id": "traffic",
+    "category": "jobs",
+    "group": "person",
+    "name": "交警",
+    "task": "在路口执勤",
+    "intro": "这个路口车辆很多。\n我需要在室外指挥交通。",
+    "setting": "street",
+    "place": "十字路口",
+    "art": "traffic",
+    "costume": "",
+    "prop": "",
+    "hint": "看清来往车辆、站稳和长时间在户外工作，分别需要什么条件？"
+  },
+  {
+    "id": "driver",
+    "category": "jobs",
+    "group": "person",
+    "name": "公交司机",
+    "task": "接送乘客",
+    "intro": "乘客已经在车站等候。\n我准备驾驶公交车出发。",
+    "setting": "busstop",
+    "place": "公交站",
+    "art": "generic",
+    "costume": "driver",
+    "prop": "wheel",
+    "hint": "天气会影响路面的状态、视线和乘客候车吗？"
+  },
+  {
+    "id": "sailor",
+    "category": "jobs",
+    "group": "person",
+    "name": "轮渡船员",
+    "task": "准备开船渡江",
+    "intro": "乘客准备乘轮渡过江。\n我先查看江面和航行条件。",
+    "setting": "harbor",
+    "place": "轮渡码头",
+    "art": "generic",
+    "costume": "sailor",
+    "prop": "wheel",
+    "hint": "过江时要看清什么？水面和风的变化会影响哪些安排？"
+  },
+  {
+    "id": "vendor",
+    "category": "jobs",
+    "group": "person",
+    "name": "冷饮店主",
+    "task": "在公园旁卖冷饮",
+    "intro": "冰柜和冷饮已经备好。\n我在公园旁的小店等顾客。",
+    "setting": "shop",
+    "place": "公园冷饮店",
+    "art": "generic",
+    "costume": "vendor",
+    "prop": "icecream",
+    "hint": "天气可能影响客人的选择；店员自己和食品保存还要注意什么？"
+  },
+  {
+    "id": "hotfood",
+    "category": "jobs",
+    "group": "person",
+    "name": "热饮摊主",
+    "task": "准备热饮",
+    "intro": "保温桶里装着热豆浆。\n我在车站旁摆好摊位。",
+    "setting": "shop",
+    "place": "车站热饮摊",
+    "art": "generic",
+    "costume": "hotfood",
+    "prop": "cup",
+    "hint": "等车的人这时想喝什么？摊主的身体和摊位也会受到影响吗？"
+  },
+  {
+    "id": "seller",
+    "category": "jobs",
+    "group": "person",
+    "name": "菜摊摊主",
+    "task": "露天摆摊卖菜",
+    "intro": "新鲜蔬菜摆在露天摊位。\n我准备在这里卖一上午。",
+    "setting": "market",
+    "place": "露天菜场",
+    "art": "generic",
+    "costume": "seller",
+    "prop": "vegetables",
+    "hint": "蔬菜、顾客和长时间在摊位工作的人，受到的影响一样吗？"
+  },
+  {
+    "id": "fruiter",
+    "category": "jobs",
+    "group": "person",
+    "name": "果农",
+    "task": "采摘成熟的果子",
+    "intro": "果园里有一批果子成熟了。\n我带着果篮准备采摘。",
+    "setting": "orchard",
+    "place": "果园",
+    "art": "grower",
+    "costume": "fruiter",
+    "prop": "fruitbasket",
+    "hint": "果实、果树、脚下的路和采摘工作，都要考虑吗？"
+  },
+  {
+    "id": "tea",
+    "category": "jobs",
+    "group": "person",
+    "name": "茶农",
+    "task": "采摘新茶",
+    "intro": "茶树上长出了新芽。\n我背着竹篓，准备去采茶。",
+    "setting": "tea",
+    "place": "茶园",
+    "art": "grower",
+    "costume": "tea",
+    "prop": "teabasket",
+    "hint": "嫩芽、采摘后的茶叶和在茶园里劳动的人，需要注意哪些条件？"
+  },
+  {
+    "id": "beekeeper",
+    "category": "jobs",
+    "group": "person",
+    "name": "养蜂人",
+    "task": "照看蜂箱",
+    "intro": "蜂箱放在一片花田旁。\n我准备查看蜂箱周围的情况。",
+    "setting": "beehives",
+    "place": "花田蜂场",
+    "art": "generic",
+    "costume": "beekeeper",
+    "prop": "honey",
+    "hint": "人的工作、蜜蜂外出和蜂箱内部的环境，可能受到哪些不同影响？"
+  },
+  {
+    "id": "gardener",
+    "category": "jobs",
+    "group": "person",
+    "name": "园林工人",
+    "task": "栽种新树",
+    "intro": "公园里刚栽下几棵小树。\n我准备继续照看它们。",
+    "setting": "garden",
+    "place": "公园绿地",
+    "art": "grower",
+    "costume": "gardener",
+    "prop": "shovel",
+    "hint": "新树的根、土里的水以及工人的劳动，会受到什么影响？"
+  },
+  {
+    "id": "saltworker",
+    "category": "jobs",
+    "group": "person",
+    "name": "盐场工人",
+    "task": "观察晒盐池",
+    "intro": "海水已经引入浅浅的盐池。\n我准备观察池里的变化。",
+    "setting": "salt",
+    "place": "海边盐场",
+    "art": "generic",
+    "costume": "saltworker",
+    "prop": "rake",
+    "hint": "想一想“晒盐”中的“晒”。天气会怎样改变池里的水？"
+  },
+  {
+    "id": "photographer",
+    "category": "jobs",
+    "group": "person",
+    "name": "摄影师",
+    "task": "给游客拍合影",
+    "intro": "游客约好在公园拍合影。\n我带着相机来选拍摄位置。",
+    "setting": "park",
+    "place": "公园拍摄点",
+    "art": "tourist",
+    "costume": "",
+    "prop": "",
+    "hint": "拍摄需要怎样的光线？器材、人物和背景都要考虑吗？"
+  },
+  {
+    "id": "landscapephoto",
+    "category": "jobs",
+    "group": "person",
+    "name": "摄影师",
+    "task": "寻找雾中山景",
+    "intro": "我想拍一张雾中的山景。\n今天到山脚寻找取景位置。",
+    "setting": "mountain",
+    "place": "山脚观景台",
+    "art": "tourist",
+    "costume": "landscapephoto",
+    "prop": "",
+    "hint": "想拍“雾中的山”，需要怎样的天气？拍到景色和拍摄安全都要考虑吗？"
+  },
+  {
+    "id": "pe_teacher",
+    "category": "jobs",
+    "group": "person",
+    "name": "体育老师",
+    "task": "组织操场跑步",
+    "intro": "这节课安排在操场跑步。\n我还准备了跳绳和小球。",
+    "setting": "school",
+    "place": "学校操场",
+    "art": "generic",
+    "costume": "pe_teacher",
+    "prop": "whistle",
+    "hint": "操场、学生的身体感受和活动计划，会怎样变化？"
+  },
+  {
+    "id": "tourguide",
+    "category": "jobs",
+    "group": "person",
+    "name": "导游",
+    "task": "带游客参观",
+    "intro": "游客准备走一段游览路线。\n我拿着小旗，准备带队。",
+    "setting": "park",
+    "place": "公园游览区",
+    "art": "generic",
+    "costume": "tourguide",
+    "prop": "flag",
+    "hint": "队伍里的人、路线和游览内容，对天气的需要完全一样吗？"
+  },
+  {
+    "id": "skistaff",
+    "category": "jobs",
+    "group": "person",
+    "name": "雪场工作人员",
+    "task": "检查雪道",
+    "intro": "雪道上已经有积雪。\n我准备检查今天的开放条件。",
+    "setting": "ski",
+    "place": "滑雪场",
+    "art": "generic",
+    "costume": "skistaff",
+    "prop": "skis",
+    "hint": "雪的状态、视线和游客的身体，都适合今天开放吗？"
+  },
+  {
+    "id": "fishfarmer",
+    "category": "jobs",
+    "group": "person",
+    "name": "养殖户",
+    "task": "照看鱼塘",
+    "intro": "鱼塘里养着一批鱼。\n我准备查看水面和设备。",
+    "setting": "pond",
+    "place": "养殖鱼塘",
+    "art": "generic",
+    "costume": "fishfarmer",
+    "prop": "fishbasket",
+    "hint": "天气对塘里的鱼和在岸边工作的人，会有同样的影响吗？"
+  },
+  {
+    "id": "lineman",
+    "category": "jobs",
+    "group": "person",
+    "name": "电力工人",
+    "task": "巡查线路",
+    "intro": "今天有一段线路需要巡查。\n我先查看天气，再安排工作。",
+    "setting": "power",
+    "place": "线路巡查点",
+    "art": "generic",
+    "costume": "lineman",
+    "prop": "toolbox",
+    "hint": "看清线路、接近作业地点和人员安全，对天气有什么要求？"
+  },
+  {
+    "id": "harborworker",
+    "category": "jobs",
+    "group": "person",
+    "name": "港口工人",
+    "task": "准备装卸货物",
+    "intro": "货物已经运到港口。\n我准备和同伴安排装卸。",
+    "setting": "harbor",
+    "place": "港口货运区",
+    "art": "generic",
+    "costume": "harborworker",
+    "prop": "box",
+    "hint": "货物、设备和在室外工作的人员，各要注意什么？"
+  },
+  {
+    "id": "solar",
+    "category": "jobs",
+    "group": "person",
+    "name": "光伏电站工人",
+    "task": "查看太阳能板",
+    "intro": "电站里装着许多太阳能板。\n我准备查看今天的发电记录。",
+    "setting": "solar",
+    "place": "光伏电站",
+    "art": "generic",
+    "costume": "solar",
+    "prop": "clipboard",
+    "hint": "这些设备利用什么？设备工作和人员工作的需要一样吗？"
+  },
+  {
+    "id": "windfarm",
+    "category": "jobs",
+    "group": "person",
+    "name": "风电场工人",
+    "task": "查看风力发电机",
+    "intro": "山坡上建着风力发电机。\n我在站点查看运行记录。",
+    "setting": "windfarm",
+    "place": "风电场站点",
+    "art": "generic",
+    "costume": "windfarm",
+    "prop": "clipboard",
+    "hint": "发电设备需要风，但风越大就一定越好吗？人还要注意什么？"
+  },
+  {
+    "id": "observer",
+    "category": "jobs",
+    "group": "person",
+    "name": "气象观测员",
+    "task": "记录天气",
+    "intro": "观测场里放着各种仪器。\n我准备读取并记录观测数据。",
+    "setting": "station",
+    "place": "气象观测场",
+    "art": "generic",
+    "costume": "observer",
+    "prop": "clipboard",
+    "hint": "不同天气都需要记录吗？读取仪器和户外安全需要怎样兼顾？"
+  },
+  {
+    "id": "librarian",
+    "category": "jobs",
+    "group": "person",
+    "name": "图书管理员",
+    "task": "整理室内图书",
+    "intro": "我在室内整理图书。\n还要留意开着的窗户。",
+    "setting": "library",
+    "place": "室内图书室",
+    "art": "generic",
+    "costume": "librarian",
+    "prop": "book",
+    "hint": "和一直在户外的人相比，室内工作的感受会一样吗？窗户和图书还需要留意什么？"
+  },
+  {
+    "id": "student",
+    "category": "other",
+    "group": "person",
+    "name": "学生",
+    "task": "上学和课间活动",
+    "intro": "我今天要步行上学。\n课间还想和同学到操场玩。",
+    "setting": "school",
+    "place": "校园",
+    "art": "student",
+    "costume": "",
+    "prop": "",
+    "hint": "上学路上的感受和课间活动的感受，一定一样吗？"
+  },
+  {
+    "id": "tourist",
+    "category": "other",
+    "group": "person",
+    "name": "游客",
+    "task": "去公园野餐",
+    "intro": "我带了食物和野餐垫。\n今天计划到公园坐一会儿。",
+    "setting": "park",
+    "place": "公园草坪",
+    "art": "tourist",
+    "costume": "",
+    "prop": "",
+    "hint": "走路、坐在草地上和保存食物，分别要考虑什么？"
+  },
+  {
+    "id": "kite",
+    "category": "other",
+    "group": "person",
+    "name": "放风筝的人",
+    "task": "在空地放风筝",
+    "intro": "我带着风筝来到空地。\n这里远离电线和马路。",
+    "setting": "park",
+    "place": "安全空地",
+    "art": "kite",
+    "costume": "",
+    "prop": "",
+    "hint": "风筝需要怎样的风？能飞起来就一定安全吗？"
+  },
+  {
+    "id": "runner",
+    "category": "other",
+    "group": "person",
+    "name": "晨练者",
+    "task": "沿步道跑步",
+    "intro": "我穿好运动鞋。\n准备沿公园步道跑几圈。",
+    "setting": "park",
+    "place": "公园步道",
+    "art": "generic",
+    "costume": "runner",
+    "prop": "watch",
+    "hint": "身体感受、路面和运动时间，会怎样影响你的决定？"
+  },
+  {
+    "id": "laundry",
+    "category": "other",
+    "group": "person",
+    "name": "晾衣服的家长",
+    "task": "在院子里晾衣服",
+    "intro": "衣服刚洗好，还有些湿。\n我准备把它们晾在院子里。",
+    "setting": "laundry",
+    "place": "家中院子",
+    "art": "generic",
+    "costume": "laundry",
+    "prop": "laundry",
+    "hint": "想让衣服变干，需要关注哪些天气条件？"
+  },
+  {
+    "id": "school_parent",
+    "category": "other",
+    "group": "person",
+    "name": "接孩子的家长",
+    "task": "到校门口等孩子",
+    "intro": "孩子快放学了。\n我准备步行到校门口等候。",
+    "setting": "school",
+    "place": "校门口",
+    "art": "generic",
+    "costume": "school_parent",
+    "prop": "bag",
+    "hint": "走路、等候和接孩子回家的时候，分别需要准备什么？"
+  },
+  {
+    "id": "elder",
+    "category": "other",
+    "group": "person",
+    "name": "散步的老人",
+    "task": "在小区慢慢散步",
+    "intro": "我准备沿小区步道走走。\n走累了就在长椅上坐一会儿。",
+    "setting": "park",
+    "place": "小区步道",
+    "art": "generic",
+    "costume": "elder",
+    "prop": "cane",
+    "hint": "保暖、避晒、路面和休息位置，哪些需要留意？"
+  },
+  {
+    "id": "cyclist",
+    "category": "other",
+    "group": "person",
+    "name": "骑行爱好者",
+    "task": "准备骑自行车",
+    "intro": "自行车已经检查好了。\n我准备到专用骑行道活动。",
+    "setting": "cycle",
+    "place": "自行车道",
+    "art": "generic",
+    "costume": "cyclist",
+    "prop": "helmet",
+    "hint": "风、路面和视线会给骑行带来什么变化？"
+  },
+  {
+    "id": "camper",
+    "category": "other",
+    "group": "person",
+    "name": "露营爱好者",
+    "task": "准备在营地露营",
+    "intro": "我带好帐篷和背包。\n准备查看营地的天气和环境。",
+    "setting": "camp",
+    "place": "正规露营地",
+    "art": "tourist",
+    "costume": "camper",
+    "prop": "map",
+    "hint": "帐篷、地面、晚上休息和人员安全，分别要考虑什么？"
+  },
+  {
+    "id": "skilover",
+    "category": "other",
+    "group": "person",
+    "name": "滑雪爱好者",
+    "task": "到正规雪场活动",
+    "intro": "我准备去正规滑雪场。\n先看看今天能不能开放。",
+    "setting": "ski",
+    "place": "正规滑雪场",
+    "art": "generic",
+    "costume": "skilover",
+    "prop": "skis",
+    "hint": "喜欢滑雪，是否就会喜欢所有寒冷和下雪的天气？"
+  },
+  {
+    "id": "bee",
+    "category": "nature",
+    "group": "animal",
+    "name": "蜜蜂",
+    "task": "到花丛中采食",
+    "intro": "蜂巢附近有一片花丛。\n我准备到花朵上寻找食物。",
+    "setting": "flowers",
+    "place": "花丛",
+    "art": "bee",
+    "costume": "",
+    "prop": "",
+    "hint": "飞行、花朵和蜂巢，需要注意哪些天气条件？"
+  },
+  {
+    "id": "frog",
+    "category": "nature",
+    "group": "animal",
+    "name": "青蛙",
+    "task": "在池塘边活动",
+    "intro": "池塘边有水草和石块。\n我在这里活动、寻找食物。",
+    "setting": "pond",
+    "place": "池塘岸边",
+    "art": "frog",
+    "costume": "",
+    "prop": "",
+    "hint": "池塘水量、岸边环境和身体水分，会怎样变化？"
+  },
+  {
+    "id": "sparrow",
+    "category": "nature",
+    "group": "animal",
+    "name": "麻雀",
+    "task": "在地面寻找食物",
+    "intro": "树下有种子和小虫。\n我在地面和树枝间活动。",
+    "setting": "garden",
+    "place": "树下草地",
+    "art": "sparrow",
+    "costume": "",
+    "prop": "",
+    "hint": "怎样找到食物和栖身的地方？天气会改变这些条件吗？"
+  },
+  {
+    "id": "snail",
+    "category": "nature",
+    "group": "animal",
+    "name": "蜗牛",
+    "task": "在花园慢慢爬行",
+    "intro": "我生活在花园里。\n周围有草叶、石块和落叶。",
+    "setting": "garden",
+    "place": "花园落叶旁",
+    "art": "snail",
+    "costume": "",
+    "prop": "",
+    "hint": "身体的水分、叶片和隐蔽处，是不是都需要考虑？"
+  },
+  {
+    "id": "butterfly",
+    "category": "nature",
+    "group": "animal",
+    "name": "蝴蝶",
+    "task": "在花间飞行",
+    "intro": "花园里有正在开的花。\n我在花丛中寻找花蜜。",
+    "setting": "flowers",
+    "place": "花园",
+    "art": "butterfly",
+    "costume": "",
+    "prop": "",
+    "hint": "翅膀、花朵和能躲藏的地方，会怎样受到天气影响？"
+  },
+  {
+    "id": "seedling",
+    "category": "nature",
+    "group": "plant",
+    "name": "青菜幼苗",
+    "task": "刚刚在菜地扎根",
+    "intro": "我刚长出几片嫩叶。\n根旁的土有些干。",
+    "setting": "field",
+    "place": "菜地",
+    "art": "seedling",
+    "costume": "",
+    "prop": "",
+    "hint": "土里的水、幼嫩的叶片和浅浅的根，各需要什么？"
+  },
+  {
+    "id": "tree",
+    "category": "nature",
+    "group": "plant",
+    "name": "校园里的树",
+    "task": "长着新叶",
+    "intro": "我长在校园绿地里。\n树枝上刚长出嫩叶。",
+    "setting": "school",
+    "place": "校园绿地",
+    "art": "tree",
+    "costume": "",
+    "prop": "",
+    "hint": "树根、树枝和新叶，受到的影响完全一样吗？"
+  },
+  {
+    "id": "cactus",
+    "category": "nature",
+    "group": "plant",
+    "name": "仙人掌",
+    "task": "在沙地生长",
+    "intro": "我生长在沙地里。\n脚下的土排水比较快。",
+    "setting": "sand",
+    "place": "沙地",
+    "art": "cactus",
+    "costume": "",
+    "prop": "",
+    "hint": "储存的水和根旁的土壤，会帮助你想到什么？"
+  },
+  {
+    "id": "rice",
+    "category": "nature",
+    "group": "plant",
+    "name": "水稻",
+    "task": "正在抽穗开花",
+    "intro": "我生长在稻田里。\n农民正在管理田里的水层。",
+    "setting": "ricefield",
+    "place": "稻田",
+    "art": "rice",
+    "costume": "",
+    "prop": "",
+    "hint": "水层、茎秆和正在开的花，需要的条件一样吗？"
+  },
+  {
+    "id": "sunflower",
+    "category": "nature",
+    "group": "plant",
+    "name": "向日葵",
+    "task": "正在开花",
+    "intro": "我在田边开着花。\n根扎在土里，花朵露在外面。",
+    "setting": "flowers",
+    "place": "田边花地",
+    "art": "sunflower",
+    "costume": "",
+    "prop": "",
+    "hint": "根、叶片和花盘，会怎样受到光、水和风的影响？"
+  }
+];
+
+const WEATHER_PAGES = {
+  normal: [
+    {id:'sunny', emoji:'☀️', name:'晴天', desc:'天空明亮，阳光照着大地。', stage:'天空晴朗、光线充足。'},
+    {id:'cloudy', emoji:'⛅', name:'多云', desc:'有云也有太阳，天气比较柔和。', stage:'天空有云，阳光时有时无。'},
+    {id:'overcast', emoji:'☁️', name:'阴天', desc:'云层较厚，看不见太阳。', stage:'天空灰白，光线弱一些。'},
+    {id:'rain', emoji:'🌧️', name:'下雨', desc:'细细的雨落下来，地面会慢慢变湿。', stage:'雨点飘下，地面开始变湿。'},
+    {id:'windy', emoji:'🌬️', name:'刮风', desc:'风在吹，树叶和衣服会动起来。', stage:'风在吹，云和树叶轻轻摇动。'},
+    {id:'snow', emoji:'❄️', name:'下雪', desc:'雪花飘下来，空气变冷。', stage:'雪花慢慢落下，地面显得更冷。'},
+    {id:'foggy', emoji:'🌫️', name:'有雾', desc:'远处不太看得清楚。', stage:'空气有雾，远处看起来模糊。'},
+    {id:'hot', emoji:'🌡️', name:'炎热', desc:'天气热，太阳晒得人发烫。', stage:'阳光强烈，感觉很热。'}
+  ],
+  extreme: [
+    {id:'storm', emoji:'⛈️', name:'雷雨', desc:'又打雷又下雨，户外更危险。', stage:'雷声和雨同时出现，要特别注意安全。'},
+    {id:'downpour', emoji:'🌧️', name:'暴雨', desc:'雨下得很大，积水可能变多。', stage:'大雨不停，地面更容易积水。'},
+    {id:'typhoon', emoji:'🌀', name:'台风', desc:'风很大，雨也很强，危险更多。', stage:'强风和强雨一起出现。'},
+    {id:'blizzard', emoji:'🌨️', name:'暴雪', desc:'雪更大更急，路也更难走。', stage:'大雪纷纷落下，视线也更差。'},
+    {id:'freeze', emoji:'🥶', name:'严寒', desc:'天气特别冷，容易受冻。', stage:'空气特别冷，外面待久了不舒服。'},
+    {id:'heatwave', emoji:'🔥', name:'酷热', desc:'天气特别热，容易中暑。', stage:'气温很高，观察角色所处的环境。'},
+    {id:'densefog', emoji:'🌫️', name:'浓雾', desc:'更难看清远处，出行更受影响。', stage:'雾很大，远处几乎看不清。'}
+  ]
+};
+
+const MOODS = [
+  {id:'love', emoji:'🤩', label:'非常喜欢', score:100},
+  {id:'like', emoji:'🙂', label:'比较喜欢', score:75},
+  {id:'neutral', emoji:'😐', label:'一般', score:50},
+  {id:'dislike', emoji:'🙁', label:'不太喜欢', score:25},
+  {id:'hate', emoji:'😭', label:'很不喜欢', score:0}
+];
+
+
+/* Self-contained articulated SVG characters; no fonts, emoji or network assets are used for the cast. */
+const S = '#29464c';
+// Variations extend the existing articulated full-body character system.
+const OCCUPATION_STYLE={
+ fisher:{colors:['#56a5b2','#9cd4d2','#355675'],hat:'bucket'},
+ builder:{colors:['#eba348','#ffd781','#486275'],hat:'hardhat'},
+ rider:{colors:['#e8b432','#ffe07f','#375568'],hat:'helmet'},
+ driver:{colors:['#69a3bf','#c2e0e8','#344f6b'],hat:'cap'},
+ sailor:{colors:['#e4edf3','#fff','#294f71'],hat:'sailor'},
+ vendor:{colors:['#c9839c','#edc1cc','#5a7491'],hat:'visor'},
+ hotfood:{colors:['#ce895b','#ebbd88','#546477'],hat:'cap'},
+ seller:{colors:['#559979','#9acfa5','#536a85'],hat:'visor'},
+ fruiter:{colors:['#de8d67','#f5bfa0','#38677f'],hat:'straw'},
+ tea:{colors:['#669e73','#b8d598','#3d6b85'],hat:'straw'},
+ beekeeper:{colors:['#e7d8ac','#fff2cf','#b2ad8d'],hat:'beeveil'},
+ gardener:{colors:['#5f9866','#b6d58c','#42637a'],hat:'cap'},
+ saltworker:{colors:['#839fc8','#bfd7ed','#456981'],hat:'straw'},
+ landscapephoto:{colors:['#d29360','#f0c294','#527f70']},
+ pe_teacher:{colors:['#a578af','#d8b9e0','#4f6690']},
+ tourguide:{colors:['#ba776c','#e7ada3','#527586'],hat:'cap'},
+ skistaff:{colors:['#df7757','#f4b68c','#496c92'],hat:'beanie'},
+ fishfarmer:{colors:['#63a391','#a9d2bd','#37637a'],hat:'bucket'},
+ lineman:{colors:['#799bd0','#bdd6f1','#3c628a'],hat:'hardhat'},
+ harborworker:{colors:['#e5a055','#f5d195','#536a76'],hat:'hardhat'},
+ solar:{colors:['#6a9fc3','#b2d3ed','#46657d'],hat:'hardhat'},
+ windfarm:{colors:['#57a2a6','#a2d6ce','#4b627d'],hat:'hardhat'},
+ observer:{colors:['#6b8eb5','#b0c9e4','#496375'],hat:'cap'},
+ librarian:{colors:['#a482b2','#d5bbdc','#617a8c']},
+ runner:{colors:['#e18c6d','#f6bda1','#576ea2']},
+ laundry:{colors:['#b889b9','#e5c4de','#4d7e88']},
+ school_parent:{colors:['#71a29d','#b6d6cb','#686e92']},
+ elder:{colors:['#c39870','#e8c6a0','#66819a'],hat:'cap'},
+ cyclist:{colors:['#dc9265','#f6cc9b','#5976a8'],hat:'helmet'},
+ camper:{colors:['#769a78','#b5caa0','#4c7198'],hat:'bucket'},
+ skilover:{colors:['#af83b4','#d7b6da','#527ca4'],hat:'beanie'}
+};
+function costumeHat(r,shirt,light,fallback){
+ const kind=OCCUPATION_STYLE[r.costume]?.hat;
+ const outline='stroke="'+S+'" stroke-width="3" stroke-linejoin="round"';
+ if(!kind)return fallback;
+ if(kind==='straw')return fallback||`<path d="M68 68q5-42 45-42t44 42Z" fill="#e7b95b" ${outline}/><ellipse cx="113" cy="69" rx="67" ry="13" fill="#f4cd77" ${outline}/><path d="M75 50q38 8 76 0" fill="none" stroke="#c39a46" stroke-width="3"/>`;
+ if(kind==='hardhat')return `<path d="M70 67q0-42 43-42q43 0 43 42" fill="#f1c85c" ${outline}/><path d="M105 29v33m17-33v33" fill="none" stroke="#fff0ac" stroke-width="7"/><rect x="61" y="61" width="104" height="14" rx="6" fill="#eeb647" ${outline}/>`;
+ if(kind==='helmet')return `<path d="M68 62q6-37 45-37t45 37l-3 17H71Z" fill="${shirt}" ${outline}/><path d="M86 42v14m26-19v16m27-10v14" stroke="${light}" stroke-width="7" stroke-linecap="round"/><path d="M68 69h90" stroke="${S}" stroke-width="4"/>`;
+ if(kind==='bucket')return `<path d="M75 32h76l5 34 21 9q-63 21-126 0l20-9Z" fill="${light}" ${outline}/><path d="M74 55h80" stroke="${shirt}" stroke-width="9"/>`;
+ if(kind==='sailor')return `<path d="M65 40q49-27 96 0l-10 24H76Z" fill="#f2f7f7" ${outline}/><path d="M77 65h74" stroke="#356384" stroke-width="12"/><path d="m108 40 5 5 5-5m-5 5v11m-7-7q7 12 14 0" fill="none" stroke="#d3b75f" stroke-width="2.5"/>`;
+ if(kind==='beanie')return `<path d="M70 62q2-37 43-37t44 37Z" fill="${shirt}" ${outline}/><rect x="65" y="58" width="97" height="18" rx="7" fill="${light}" ${outline}/><circle cx="113" cy="23" r="12" fill="${light}" ${outline}/>`;
+ if(kind==='beeveil')return `<ellipse cx="113" cy="62" rx="61" ry="14" fill="#f2e1a7" ${outline}/><path d="M76 54q6-32 37-32t37 32" fill="#f7edc8" ${outline}/><path d="M54 65v70q59 26 119 0V65" fill="#d5deda" opacity=".22" stroke="${S}" stroke-width="3"/><path d="M55 134q59 23 118 0" fill="none" stroke="#9eaa99" stroke-width="3"/>`;
+ if(kind==='visor')return `<path d="M72 56h80v15H72Z" fill="${shirt}" ${outline}/><path d="M98 66h66l16 9q-30 12-80 0" fill="${light}" ${outline}/>`;
+ return `<path d="M72 63q8-32 42-32q35 0 41 35Z" fill="${shirt}" ${outline}/><path d="M99 62h63q16 0 19 8H98Z" fill="${light}" ${outline}/>`;
+}
+function uniformDetails(role){
+ const k=role.costume;
+ if(['vendor','hotfood','seller','laundry'].includes(k))return `<path d="M92 149l5 29h32l8-29m-40 29-11 36h52l-9-36" fill="#f8e7c5" stroke="${S}" stroke-width="2.5"/><rect x="103" y="190" width="20" height="15" rx="3" fill="#e0c191"/>`;
+ if(['builder','lineman','harborworker','solar','windfarm'].includes(k))return `<path d="M92 147v68m38-68v68M78 199h66" fill="none" stroke="#f6efb6" stroke-width="7"/><rect x="121" y="172" width="16" height="16" fill="#f5e8c1" stroke="${S}" stroke-width="2"/>`;
+ if(['fisher','sailor'].includes(k))return `<path d="M85 158h52m-55 12h58m-61 13h62m-62 12h65" stroke="#e8f6f3" stroke-width="5"/><path d="m101 143 12 18 14-18" fill="none" stroke="#406b87" stroke-width="4"/>`;
+ if(['pe_teacher','runner','cyclist','skilover','skistaff'].includes(k))return `<path d="M112 147v68m-28-9h18m23 0h16" fill="none" stroke="#f4ede4" stroke-width="3"/>`;
+ return '';
+}
+function professionProp(key){
+ const st=`stroke="${S}" stroke-width="3" stroke-linejoin="round"`;
+ let p='';
+ if(['box','mealbox'].includes(key))p=`<rect x="82" y="175" width="88" height="63" rx="7" fill="${key==='mealbox'?'#eac44d':'#ddb079'}" ${st}/><path d="M84 191h84" stroke="${S}" stroke-width="3"/><path d="M100 175v62m51-62v62" stroke="#fff1b8" stroke-width="7"/>${key==='mealbox'?'<path d="M117 188v17m-5-17v7q5 6 10 0v-7m12 0v28" stroke="#7e733c" stroke-width="3" fill="none"/>':''}`;
+ if(key==='toolbox')p=`<path d="M141 189v-14q15-9 30 0v14" fill="none" stroke="${S}" stroke-width="6"/><rect x="125" y="186" width="64" height="44" rx="5" fill="#bd6458" ${st}/><path d="M126 198h62" stroke="#efb79d" stroke-width="5"/><rect x="150" y="195" width="13" height="10" rx="2" fill="#efd283"/>`;
+ if(key==='wheel')p=`<circle cx="120" cy="194" r="41" fill="none" stroke="${S}" stroke-width="9"/><circle cx="120" cy="194" r="31" fill="#b7d5e1" opacity=".65"/><circle cx="120" cy="194" r="10" fill="#e0e9e2" ${st}/><path d="m111 190-24-10m42 10 24-10m-33 25v26" stroke="${S}" stroke-width="7"/>`;
+ if(key==='icecream')p=`<path d="m156 177 16 56 21-56Z" fill="#dfb275" ${st}/><path d="m162 190 24 13m-20 3 15 9" stroke="#ba8d54" stroke-width="2"/><path d="M151 176c-15-10-8-28 6-28 0-28 34-27 35-5 19-1 25 27 10 34Z" fill="#f4d6c7" ${st}/>`;
+ if(key==='cup')p=`<path d="M151 175h35v42q-18 12-35 0Z" fill="#df985f" ${st}/><path d="M186 181q28-4 20 20q-8 11-20 6" fill="none" stroke="${S}" stroke-width="5"/><path d="M159 160q-5-10 3-17m13 18q-7-11 1-19" fill="none" stroke="#b8c5c6" stroke-width="3" stroke-linecap="round"/>`;
+ if(['fishbasket','fruitbasket','teabasket','vegetables'].includes(key)){
+  p=`<path d="M145 188q22-28 44 0" fill="none" stroke="#bb9056" stroke-width="7"/><path d="m135 192 73 0-11 48h-51Z" fill="#ddb47b" ${st}/><path d="M148 209h47m-43 13h39m-32-27v40m19-40v40" stroke="#bc8f57" stroke-width="2.5"/>`;
+  if(key==='fishbasket')p+=`<path d="m144 188-9-12 18 3q24-23 41 5-17 18-41 5Z" fill="#87b3c2" ${st}/><circle cx="183" cy="181" r="2.5" fill="${S}"/>`;
+  if(key==='fruitbasket')p+=`<g fill="#e49c61" stroke="#ad7844" stroke-width="2"><circle cx="153" cy="185" r="10"/><circle cx="175" cy="181" r="11"/><circle cx="194" cy="189" r="9"/></g><path d="M174 170q6-12 17-8-3 12-17 8" fill="#7da75d"/>`;
+  if(['teabasket','vegetables'].includes(key))p+=`<g fill="#79b965" stroke="#477b4b" stroke-width="2"><path d="M153 193q-18-33-4-35q24 13 17 35Z"/><path d="M169 194q-9-43 8-39 17 10 2 39Z"/><path d="M180 193q3-33 22-24 1 20-11 24Z"/></g>`;
+ }
+ if(['clipboard','map','book'].includes(key))p=key==='book'?`<path d="M85 177q20-9 36 0 20-9 41 0v49q-25-10-41 0-19-10-36 0Z" fill="#d7e6be" ${st}/><path d="M121 177v48M93 190h19m-19 12h19m19-12h23m-23 12h23" stroke="#779475" stroke-width="2.5"/>`:`<rect x="133" y="161" width="60" height="78" rx="5" fill="#dfbb87" ${st}/><rect x="140" y="171" width="46" height="59" rx="3" fill="#fff7e4"/><rect x="150" y="156" width="23" height="14" rx="3" fill="#96adaf" ${st}/><path d="M147 186h31m-31 12h27m-27 12h31" stroke="#8aaab0" stroke-width="3"/>`;
+ if(['shovel','rake'].includes(key))p=`<path d="M172 143v137" stroke="${S}" stroke-width="8"/><path d="M172 143v137" stroke="#bb935f" stroke-width="4"/>${key==='shovel'?`<path d="m154 262 36 0-3 32-14 14-16-14Z" fill="#96aca9" ${st}/>`:`<path d="M139 279h67m-60 0v20m12-20v20m12-20v20m12-20v20m12-20v20" stroke="#667e80" stroke-width="5" stroke-linecap="round"/>`}`;
+ if(key==='skis')p=`<g transform="rotate(-9 182 207)"><path d="M171 134q0-19 14-19v182h-14Z" fill="#8fa9d6" ${st}/><path d="M191 148q0-19 14-19v168h-14Z" fill="#e7b677" ${st}/><path d="M171 241h14m6-8h14" stroke="${S}" stroke-width="5"/></g>`;
+ if(key==='flag')p=`<path d="M174 127v120" stroke="#715b49" stroke-width="5"/><path d="M177 123q28-12 50 0v40q-22-13-50 0Z" fill="#e2a153" ${st}/>`;
+ if(key==='honey')p=`<path d="M148 182h38v45q-20 9-38 0Z" fill="#dfb768" ${st}/><rect x="144" y="175" width="46" height="11" rx="3" fill="#c6a464" ${st}/><path d="M149 196h35v17h-35Z" fill="#f6e4a8"/>`;
+ if(key==='whistle')p=`<path d="M96 143q20 53 38 0" fill="none" stroke="#efd5ac" stroke-width="3"/><path d="M113 179h20v9h-5q-9 11-17 0Z" fill="#7eacc2" ${st}/>`;
+ if(key==='cane')p=`<path d="M172 183q15-21 24 0v117" fill="none" stroke="${S}" stroke-width="8" stroke-linecap="round"/><path d="M172 183q15-21 24 0v117" fill="none" stroke="#cfa576" stroke-width="4" stroke-linecap="round"/>`;
+ if(key==='laundry')p=`<path d="m140 191 24-12 11 6 11-6 25 12-10 24-12-5v39h-31v-39l-9 5Z" fill="#f4d9e4" ${st}/><path d="M164 180q10 18 22 0" fill="none" stroke="#bd89a6" stroke-width="3"/>`;
+ if(key==='bag')p=`<path d="M151 189v-11q13-16 25 0v11" fill="none" stroke="${S}" stroke-width="5"/><rect x="141" y="188" width="47" height="51" rx="6" fill="#d9b789" ${st}/>`;
+ if(key==='watch')p=`<path d="M83 184v20" stroke="#465f74" stroke-width="7"/><rect x="77" y="183" width="12" height="13" rx="3" fill="#d2e6ec" stroke="${S}" stroke-width="2"/>`;
+ return `<g class="prop occupation-prop">${p}</g>`;
+}
+function extraNatureArt(role){
+ const id=role.art||role.id,st=`stroke="${S}" stroke-width="3.5" stroke-linejoin="round"`;let body='',cl='plant';
+ if(id==='snail'){
+  cl='snail';body=`<g class="nature-body"><path d="M31 262q65-5 122-14l11-58q12-17 25 0l17 73q3 28-47 28H34q-24-5-3-29Z" fill="#9dc282" ${st}/><circle cx="95" cy="223" r="53" fill="#dca56e" ${st}/><path d="M111 244c-47 21-68-33-32-50 30-15 50 20 26 32-11 5-20-6-13-12" fill="none" stroke="#ab7956" stroke-width="7" stroke-linecap="round"/><path d="m169 194-6-35m22 34 12-34" fill="none" stroke="#698e65" stroke-width="5" stroke-linecap="round"/><circle cx="163" cy="157" r="7" fill="#537864"/><circle cx="198" cy="157" r="7" fill="#537864"/><path d="M170 214h12" stroke="#56794d" stroke-width="3" stroke-linecap="round"/></g>`;
+ }
+ if(id==='butterfly'){
+  cl='insect butterfly';body=`<g class="nature-body"><g class="wing" ${st}><path d="M116 185Q20 175 26 106q8-43 41-19 31 23 49 86Z" fill="#dfb0d7"/><path d="M125 184q97-14 92-82-11-34-40-14-38 29-52 85Z" fill="#dfb0d7"/><path d="M116 184q-76-14-69 37 9 47 52 13Z" fill="#e7bf89"/><path d="M125 182q73-15 67 37-7 48-53 18Z" fill="#e7bf89"/><path d="M99 175q-55-1-53-49 24-20 53 49Zm45 0q58-2 53-51-26-20-53 51Z" fill="#ad85b3" stroke="none"/><circle cx="69" cy="217" r="10" fill="#f6e4b7" stroke="none"/><circle cx="170" cy="217" r="10" fill="#f6e4b7" stroke="none"/></g><ellipse cx="120" cy="191" rx="12" ry="53" fill="#7c796e" ${st}/><circle cx="120" cy="132" r="18" fill="#a29384" ${st}/><path d="m111 117-10-29m28 30 11-29" stroke="${S}" stroke-width="3"/><circle cx="101" cy="87" r="5" fill="#6b6c66"/><circle cx="140" cy="87" r="5" fill="#6b6c66"/><g stroke="${S}" stroke-width="3" fill="none"><path d="m108 174-15 5m15 7-17 8m17 4-14 14m38-38 15 5m-15 7 17 8m-17 4 14 14"/></g></g>`;
+ }
+ if(id==='rice'){
+  body=`<ellipse cx="120" cy="298" rx="91" ry="15" fill="#8ac7d7"/><g class="nature-body leaf-group"><path d="M121 290V110q23-37 48 8m-60 173-13-139q-24-29-44 5m80 132 24-98q23-22 38 8" fill="none" stroke="#5e8d4b" stroke-width="7"/><g fill="#76ae61" stroke="#4e8245" stroke-width="2.5"><path d="M116 270q-93-30-89-108 65 37 89 108Z"/><path d="M128 273q85-49 85-108-65 15-85 108Z"/><path d="M123 242q-54-47-42-93 42 34 42 93Z"/></g><g fill="#daca8c" stroke="#a89b63" stroke-width="2">${[0,1,2,3,4,5].map(i=>`<ellipse cx="${143+i*5}" cy="${103+i*8}" rx="4" ry="7" transform="rotate(-25 ${143+i*5} ${103+i*8})"/><ellipse cx="${66-i*3}" cy="${141+i*8}" rx="4" ry="6"/>`).join('')}</g></g>`;
+ }
+ if(id==='sunflower'){
+  body=`<ellipse cx="120" cy="299" rx="70" ry="12" fill="#b39862"/><g class="nature-body leaf-group"><path d="M120 292V142" stroke="#548a43" stroke-width="10"/><path d="M116 254q-67 8-74-60 72-9 78 60m3-28q8-55 65-59 18 65-65 59" fill="#7eb752" stroke="#4b7d42" stroke-width="3"/><g fill="#efc85b" stroke="#c4953c" stroke-width="2.5">${Array.from({length:12},(_,i)=>`<ellipse cx="120" cy="78" rx="14" ry="29" transform="rotate(${i*30} 120 126)"/>`).join('')}</g><circle cx="120" cy="126" r="39" fill="#b68a4d" stroke="#775f39" stroke-width="3"/><g fill="#dec183">${Array.from({length:20},(_,i)=>{const a=i*2.4,d=5+Math.sqrt(i)*6;return `<circle cx="${120+Math.cos(a)*d}" cy="${126+Math.sin(a)*d}" r="2.5"/>`;}).join('')}</g></g>`;
+ }
+ return `<svg class="character-svg ${cl}" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${role.name}的卡通形象">${body}</svg>`;
+}
+
+function faceMarkup(mood){
+ const eyes=mood==='love'?'<path d="M89 96q7-10 14 0m20 0q7-10 14 0" fill="none" stroke="#293840" stroke-width="4" stroke-linecap="round"/>':'<g class="eyes"><ellipse cx="97" cy="95" rx="4.2" ry="6" fill="#293840"/><ellipse cx="129" cy="95" rx="4.2" ry="6" fill="#293840"/><circle cx="98" cy="93" r="1.4" fill="white"/><circle cx="130" cy="93" r="1.4" fill="white"/></g>';
+ let mouth='<path d="M105 115h16" fill="none" stroke="#8a4e44" stroke-width="3.2" stroke-linecap="round"/>';
+ if(mood==='love')mouth='<path d="M99 112q14 29 28 0Z" fill="#854036" stroke="#854036" stroke-width="2"/><path d="M103 114h20" stroke="white" stroke-width="4"/><path d="M106 125q7-7 14 0" fill="#ec7876"/>';
+ if(mood==='like')mouth='<path d="M101 111q12 15 24 0" fill="none" stroke="#8a4e44" stroke-width="3.5" stroke-linecap="round"/>';
+ if(mood==='dislike')mouth='<path d="M102 117q11-10 22 0" fill="none" stroke="#8a4e44" stroke-width="3.5" stroke-linecap="round"/>';
+ if(mood==='hate')mouth='<path d="M101 121q12-23 24 0Z" fill="#854036"/><path d="M84 103q-8 10 0 13q8-3 0-13m57 0q-8 10 0 13q8-3 0-13" fill="#5ab6ec"/>';
+ return eyes+'<ellipse cx="82" cy="107" rx="9" ry="4.5" fill="#eaa08b" opacity=".6"/><ellipse cx="143" cy="107" rx="9" ry="4.5" fill="#eaa08b" opacity=".6"/><path d="M113 99v6h4" fill="none" stroke="#d89677" stroke-width="2.5" stroke-linecap="round"/>'+mouth;
+}
+function humanArt(role,mood){
+ const id=role.art||role.id, isStudent=id==='student', farmer=['grower','harvest'].includes(id), cleaner=id==='cleaner', cop=id==='traffic';
+ const cfg=OCCUPATION_STYLE[role.costume]?.colors||{student:['#7856b6','#ac8de5','#344c79'],grower:['#6fa94d','#a5cb71','#385f8e'],harvest:['#ea9572','#f6b58f','#32678b'],courier:['#428bcc','#71b7e8','#294e7d'],cleaner:['#ef9950','#ffc67e','#405a69'],tourist:['#e57679','#f0a2a4','#487083'],traffic:['#5ca7cf','#95cde5','#29495b'],kite:['#e4a739','#ffda70','#537fad']}[id]||['#439f89','#8ad7ad','#315671'];
+ const [shirt,light,trousers]=cfg, skin='#f5c3a3', skinDark='#e8ad8b';
+ let hat='';
+ if(farmer)hat='<path d="M69 67q4-42 44-42t44 42" fill="#e7b24e" stroke="'+S+'" stroke-width="3"/><path d="M76 48q34 10 74 0M75 56q36 10 77 0" stroke="#c28b36" stroke-width="2" fill="none"/><ellipse cx="113" cy="69" rx="67" ry="13" fill="#f4cd6c" stroke="'+S+'" stroke-width="3"/><path d="M67 69q42 9 89 0" fill="none" stroke="#bd8636" stroke-width="2"/>';
+ if(id==='courier'||cleaner)hat='<path d="M72 63q8-32 42-32q35 0 41 35Z" fill="'+shirt+'" stroke="'+S+'" stroke-width="3"/><path d="M99 62h63q16 0 19 8H98Z" fill="'+light+'" stroke="'+S+'" stroke-width="3"/>';
+ if(cop)hat='<path d="M70 53q42-31 84 0l-6 19H76Z" fill="#eef4ef" stroke="'+S+'" stroke-width="3"/><path d="M76 66h72q5 12-32 13q-39-1-40-13" fill="#294957"/><path d="m113 47 7 4-2 9h-10l-2-9Z" fill="#ebc960"/>';
+ hat=costumeHat(role,shirt,light,hat);
+ let hair='<path d="M72 93q-15-25 5-46q12-22 40-15l15-6-2 12q27 3 27 32l-4 30-9-23q-12-1-20-14q-12 12-24 8q-11 13-21 9Z" fill="#513d35" stroke="'+S+'" stroke-width="3"/>';
+ if(role.costume==='elder')hair=hair.replace('#513d35','#bfc2bf');
+ if(['elder','librarian'].includes(role.costume))hair+='<g fill="none" stroke="#516570" stroke-width="2.5"><circle cx="97" cy="96" r="12"/><circle cx="129" cy="96" r="12"/><path d="M109 94h8"/></g>';
+ let backpack='';
+ if(isStudent||id==='tourist')backpack='<rect x="142" y="145" width="34" height="67" rx="12" fill="'+(isStudent?'#f0b83c':'#459d9e')+'" stroke="'+S+'" stroke-width="3"/><path d="M150 158v36" stroke="#ffffff80" stroke-width="4" stroke-linecap="round"/>';
+ let torsoDetail='<path d="M92 146q20 23 41 0" stroke="#ffffffcc" fill="none" stroke-width="4"/>';
+ if(farmer)torsoDetail='<path d="M84 146l6 69h45l8-69M86 171h54v47H88Z" fill="#4a7ea0" stroke="'+S+'" stroke-width="3"/><rect x="102" y="182" width="24" height="19" rx="3" fill="#78a6bd"/><circle cx="91" cy="170" r="3" fill="#f4d878"/><circle cx="137" cy="170" r="3" fill="#f4d878"/>';
+ if(isStudent)torsoDetail='<path d="M92 144l21 18 22-18M95 145l8 58m28-58-6 58" fill="none" stroke="#d9c9ec" stroke-width="6"/><path d="m105 154 9 10 12-10-9 27-6-4Z" fill="#df5c59"/>';
+ if(cleaner)torsoDetail='<path d="M87 147v72m49-72v72M79 193h67" stroke="#f7f4be" stroke-width="9"/>';
+ if(cop)torsoDetail='<path d="M112 149v65M89 173h16m16 0h16" stroke="#2f6a91" stroke-width="3"/><path d="m111 148-4 8 6 25 7-25-6-8" fill="#294d66"/><path d="M76 208h72" stroke="#294957" stroke-width="8"/><rect x="104" y="204" width="14" height="8" fill="#d9c16c"/>';
+ torsoDetail+=uniformDetails(role);
+ let prop='';
+ if(id==='grower')prop='<g class="prop plant-task"><path d="M158 173q23-20 33 0v16h-7v-17q-8-11-21 3" fill="none" stroke="'+S+'" stroke-width="6"/><path d="M139 178h43v36h-43Z" fill="#60b7bc" stroke="'+S+'" stroke-width="3"/><path d="m182 185 28-13 6 8-30 27" fill="#8ed4d0" stroke="'+S+'" stroke-width="3"/><path d="m209 170 12 16" stroke="'+S+'" stroke-width="7" stroke-linecap="round"/><path d="M148 188v14" stroke="#b4f0df" stroke-width="5" stroke-linecap="round"/></g>';
+ if(id==='harvest')prop='<g class="prop"><ellipse cx="121" cy="189" rx="56" ry="21" fill="#ce9750" stroke="'+S+'" stroke-width="3"/><path d="M67 188q54 24 108 0l-8 30q-47 13-91 0Z" fill="#efc57a" stroke="'+S+'" stroke-width="3"/><path d="M81 194v20m14-16v20m15-18v20m14-19v20m15-21v19m14-23v21" stroke="#c99954" stroke-width="2"/><g fill="#f8db78" stroke="#ae853a" stroke-width="1.3">'+Array.from({length:17},(_,i)=>`<ellipse cx="${78+(i*17)%85}" cy="${181+(i*7)%15}" rx="5" ry="2.8" transform="rotate(${i*29} ${78+(i*17)%85} ${181+(i*7)%15})"/>`).join('')+'</g></g>';
+ if(id==='courier')prop='<g class="prop"><path d="m68 174 57-10 48 14-55 15Z" fill="#edd19b" stroke="'+S+'" stroke-width="3"/><path d="M68 174v53l50 12v-46Zm50 19v46l55-13v-48Z" fill="#dcb074" stroke="'+S+'" stroke-width="3"/><path d="m100 170 24 8-13 55 13 3 12-57-21-11" fill="#f7e3b9"/><rect x="139" y="192" width="23" height="20" rx="3" fill="#fff6da"/><path d="M145 198h11m-11 6h8" stroke="#ae8751" stroke-width="2"/></g>';
+ if(cleaner)prop='<g class="prop broom-prop"><path d="m175 142-25 126" stroke="'+S+'" stroke-width="9" stroke-linecap="round"/><path d="m175 142-25 126" stroke="#c5945e" stroke-width="5" stroke-linecap="round"/><path d="m137 254 27 6 18 39-71-1Z" fill="#e3b965" stroke="'+S+'" stroke-width="3"/><path d="m141 263-15 31m24-30-3 32m10-30 9 29" stroke="#b88d43" stroke-width="2.5"/></g>';
+ if(id==='tourist')prop='<g class="prop"><path d="M83 149l21 38h32l10-39" fill="none" stroke="#394c52" stroke-width="4"/><rect x="88" y="176" width="64" height="43" rx="9" fill="#3e626a" stroke="'+S+'" stroke-width="3"/><rect x="97" y="169" width="23" height="9" rx="3" fill="#36505d"/><circle cx="121" cy="197" r="16" fill="#d3e9e6" stroke="#1e3e4a" stroke-width="3"/><circle cx="121" cy="197" r="10" fill="#6099b4"/><circle cx="117" cy="192" r="3" fill="white"/></g>';
+ if(cop)prop='<g class="prop"><path d="m172 154 19-23" stroke="#f6f9f1" stroke-width="14" stroke-linecap="round"/><circle cx="193" cy="128" r="10" fill="#f7f9f3" stroke="'+S+'" stroke-width="2.5"/><path d="M91 139l22 9 20-9" fill="none" stroke="#f7f9f3" stroke-width="3"/></g>';
+ if(id==='kite')prop='<g class="prop kite-prop"><path d="M153 179Q192 170 194 124T194 63" fill="none" stroke="#496269" stroke-width="2"/><path d="m189 3 37 32-21 40-31-39Z" fill="#efb246" stroke="'+S+'" stroke-width="3"/><path d="m189 3 16 72m-31-39 52-1" stroke="#e87656" stroke-width="3"/><path d="M205 75q-23 15-8 31" fill="none" stroke="#c27788" stroke-width="3"/><path d="m195 83 14 10-15 6" fill="#e88e9f"/><rect x="145" y="165" width="22" height="28" rx="5" fill="#be7a53" stroke="'+S+'" stroke-width="3"/></g>';
+ if(role.prop)prop=professionProp(role.prop);
+ // Limbs are separate groups for walk cycles, not an icon moving inside a circle.
+ return `<svg class="character-svg human" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${role.name}的全身卡通形象">
+ <ellipse class="ground-shadow" cx="119" cy="305" rx="61" ry="10" fill="#29483c" opacity=".17"/>
+ <g class="human-body">
+ ${backpack}
+ <g class="leg leg-back"><path d="M119 207h28l-4 68h-25Z" fill="${trousers}" stroke="${S}" stroke-width="3"/><path d="M120 270h25v19h-25Z" fill="${skin}" stroke="${S}" stroke-width="2.5"/><path d="M120 285h24l19 9q5 10-4 11h-40q-7-7 1-20Z" fill="#f6f1df" stroke="${S}" stroke-width="3"/><path d="M122 300h36" stroke="${light}" stroke-width="4"/></g>
+ <g class="leg leg-front"><path d="M81 206h31l-4 70H82Z" fill="${trousers}" stroke="${S}" stroke-width="3"/><path d="M83 270h25v19H83Z" fill="${skin}" stroke="${S}" stroke-width="2.5"/><path d="M82 284h25l3 20H67q-7-6 3-12Z" fill="#f6f1df" stroke="${S}" stroke-width="3"/><path d="M70 299h36" stroke="${light}" stroke-width="4"/></g>
+ <g class="arm arm-back"><path d="M144 149q16 12 22 32l-8 8-24-25" fill="${shirt}" stroke="${S}" stroke-width="3"/><path d="M163 179l10 18" stroke="${S}" stroke-width="15" stroke-linecap="round"/><path d="M163 179l10 18" stroke="${skin}" stroke-width="11" stroke-linecap="round"/><circle cx="173" cy="199" r="8" fill="${skin}" stroke="${S}" stroke-width="2.5"/></g>
+ <path d="M88 139q24-13 51 0q16 25 9 78q-34 12-73-1q-4-49 13-77Z" fill="${shirt}" stroke="${S}" stroke-width="3.5"/>
+ <path d="M87 156q-7 33-5 50" fill="none" stroke="${light}" stroke-width="6" stroke-linecap="round"/>
+ ${torsoDetail}
+ <path d="M100 124v19q12 15 25 0v-19" fill="${skinDark}" stroke="${S}" stroke-width="3"/>
+ <g class="head"><circle cx="70" cy="94" r="11" fill="${skinDark}" stroke="${S}" stroke-width="3"/><circle cx="155" cy="94" r="11" fill="${skinDark}" stroke="${S}" stroke-width="3"/><path d="M72 71q38-23 82 0v34q-4 30-41 30q-37 0-41-30Z" fill="${skin}" stroke="${S}" stroke-width="3"/>${hair}${faceMarkup(mood)}${hat}</g>
+ <g class="arm arm-front"><path d="M82 149q-13 4-18 28l13 7 18-23" fill="${shirt}" stroke="${S}" stroke-width="3"/><path d="M68 177l4 21 18 5" fill="none" stroke="${S}" stroke-width="15" stroke-linecap="round"/><path d="M68 177l4 21 18 5" fill="none" stroke="${skin}" stroke-width="11" stroke-linecap="round"/><circle cx="92" cy="204" r="8" fill="${skin}" stroke="${S}" stroke-width="2.5"/></g>
+ ${prop}
+ </g></svg>`;
+}
+function natureArt(role,mood){
+ const id=role.art||role.id;
+ let a='',cl='';
+ if(id==='bee'){
+  cl='insect';a=`<g class="nature-body"><g fill="#e7f9ff" stroke="#3d6772" stroke-width="3"><ellipse class="wing wing-left" cx="102" cy="127" rx="34" ry="59" transform="rotate(-28 102 127)"/><ellipse class="wing wing-right" cx="155" cy="126" rx="34" ry="59" transform="rotate(28 155 126)"/></g><g stroke="#4e453b" stroke-width="4" fill="none" stroke-linecap="round">${[0,1,2].map(i=>`<path d="m${83+i*17} 196-8 22 8 9m${112+i*17} 197 10 21-7 10"/>`).join('')}</g><ellipse cx="137" cy="177" rx="60" ry="44" fill="#f9cd4b" stroke="${S}" stroke-width="3.5"/><path d="M124 136q-10 41 0 84m27-87q12 39 2 82" fill="none" stroke="#695644" stroke-width="13"/><circle cx="76" cy="168" r="38" fill="#ffda63" stroke="${S}" stroke-width="3.5"/><path d="M59 138q-17-25-6-28m33 28q13-22 22-20" stroke="${S}" stroke-width="4" fill="none"/><circle cx="53" cy="111" r="5" fill="${S}"/><circle cx="108" cy="118" r="5" fill="${S}"/><g class="eyes" fill="#34453c"><ellipse cx="63" cy="162" rx="4" ry="6"/><ellipse cx="88" cy="162" rx="4" ry="6"/></g><path d="M68 182h14" stroke="#80663a" stroke-width="3" stroke-linecap="round"/><path d="m195 174 16 8-16 7" fill="#695644"/></g>`;
+ }
+ if(id==='frog'){
+  cl='amphibian';a=`<g class="nature-body"><ellipse cx="75" cy="247" rx="31" ry="44" transform="rotate(27 75 247)" fill="#75b755" stroke="${S}" stroke-width="3.5"/><ellipse cx="165" cy="247" rx="31" ry="44" transform="rotate(-27 165 247)" fill="#75b755" stroke="${S}" stroke-width="3.5"/><ellipse cx="120" cy="233" rx="56" ry="54" fill="#91cc66" stroke="${S}" stroke-width="3.5"/><ellipse cx="120" cy="240" rx="37" ry="40" fill="#d5e99c"/><path d="M72 171q-5-64 42-25q17-35 45-12q26 20 18 53q-14 41-63 33q-50 0-52-32Z" fill="#93cc67" stroke="${S}" stroke-width="3.5"/><g fill="#eaf1bf" stroke="${S}" stroke-width="3"><ellipse cx="88" cy="153" rx="20" ry="25"/><ellipse cx="153" cy="153" rx="20" ry="25"/></g><g class="eyes" fill="#304745"><ellipse cx="91" cy="155" rx="7" ry="10"/><ellipse cx="151" cy="155" rx="7" ry="10"/></g><path d="M99 189q21 3 42 0" fill="none" stroke="#496844" stroke-width="3" stroke-linecap="round"/><g fill="none" stroke="${S}" stroke-width="12" stroke-linecap="round"><path d="m94 232-8 49m59-49 8 49"/></g><g fill="none" stroke="#9ad070" stroke-width="8" stroke-linecap="round"><path d="m94 232-8 49m59-49 8 49"/></g><g fill="#9ad070" stroke="${S}" stroke-width="3"><path d="m45 275-15 17 25-4 24 3-14-13m133-3 15 17-25-4-24 3 14-13M80 278l-12 17 17-4 17 4-10-17m55 0-9 17 17-4 16 4-12-17"/></g></g>`;
+ }
+ if(id==='sparrow'){
+  cl='bird';a=`<g class="nature-body"><path d="m78 222-54-28 20 52 47 13" fill="#97755e" stroke="${S}" stroke-width="3"/><ellipse cx="124" cy="223" rx="62" ry="55" fill="#bc946c" stroke="${S}" stroke-width="3.5"/><ellipse cx="137" cy="236" rx="42" ry="40" fill="#f3dfb6"/><circle cx="139" cy="155" r="50" fill="#b18b68" stroke="${S}" stroke-width="3.5"/><path d="M95 148q34-46 78 0v-25q-44-47-78 4Z" fill="#8b6754"/><ellipse cx="159" cy="166" rx="25" ry="29" fill="#f0e0bf"/><ellipse cx="129" cy="173" rx="15" ry="18" fill="#e8d8b8"/><g class="eyes"><circle cx="150" cy="149" r="7" fill="#2b3b3f"/><circle cx="152" cy="147" r="2.2" fill="#fff"/></g><path d="m182 153 25 10-25 10" fill="#dbad50" stroke="${S}" stroke-width="3"/><path class="wing" d="M99 195q39 5 27 44q-22 26-52-12Z" fill="#92735c" stroke="${S}" stroke-width="3"/><path d="m91 216 24 9m-31-2 25 9" stroke="#c4a485" stroke-width="3" stroke-linecap="round"/><path d="M111 274v22m35-23v23m-47 2 12-2 11 5m12-3 12-2 12 5" fill="none" stroke="#846247" stroke-width="4" stroke-linecap="round"/></g>`;
+ }
+ if(id==='seedling'){
+  cl='plant';a=`<ellipse cx="121" cy="294" rx="82" ry="15" fill="#aa8356"/><path d="M122 285V160" stroke="#427b41" stroke-width="10" stroke-linecap="round"/><g class="nature-body leaf-group" fill="#72b953" stroke="#3f753c" stroke-width="3"><path d="M119 254Q34 255 32 175q72-7 90 70Z"/><path d="M124 233q0-77 81-95q12 88-81 99Z"/><path d="M119 186q-56-10-51-69q62 0 54 69Z"/><path d="M123 168q-3-57 48-72q16 59-48 76Z"/><path d="m47 193 72 61m73-98-68 77m-40-99 35 52m34-72-30 54" fill="none" stroke="#badf83" stroke-width="3"/></g><g fill="#ddc098"><ellipse cx="80" cy="293" rx="9" ry="4"/><ellipse cx="138" cy="298" rx="6" ry="3"/><ellipse cx="173" cy="290" rx="8" ry="4"/></g>`;
+ }
+ if(id==='tree'){
+  cl='plant';a=`<path d="M103 287l10-162h28l2 164 16 14H81Z" fill="#aa7952" stroke="#4d6750" stroke-width="3"/><path d="m122 215-40-40m48 16 43-41" stroke="#aa7952" stroke-width="14" stroke-linecap="round"/><path d="M125 236v42" stroke="#815d43" stroke-width="3"/><g class="nature-body leaf-group" stroke="#477b49" stroke-width="3"><path d="M61 193Q9 176 32 133q-10-45 41-49q13-52 61-29q52-5 54 38q54 11 37 57q11 53-50 52q-53 16-77-7q-24 10-37-2" fill="#6cb75d"/><path d="M48 125q-6-29 31-30q12-38 50-24q43-2 42 31q37 9 37 32q-24-23-57-5q-18-31-48-13q-24-16-55 9Z" fill="#9bce73" stroke="none"/><g fill="#d2e993" stroke="none"><path d="m81 153-12-16q19-9 22 10Z"/><path d="m163 143 4-20q21 8 7 20Z"/><path d="m126 96 8-16q16 15 1 21Z"/></g></g>`;
+ }
+ if(id==='cactus'){
+  cl='plant';a=`<ellipse cx="121" cy="300" rx="86" ry="14" fill="#d7b578"/><g class="nature-body leaf-group"><path d="M93 295V221H64q-29 0-29-30v-55q0-28 26-28t25 28v33h8V91q0-41 31-41q35 0 35 41v124h10v-40q0-27 23-27t23 27v57q0 28-30 28h-26v35Z" fill="#75b778" stroke="#416c54" stroke-width="3.5"/><path d="M119 285V93m22 191V91M62 188v-49m129 94v-53" stroke="#a9d391" stroke-width="5" stroke-linecap="round"/><g stroke="#d6eac2" stroke-width="2.5" stroke-linecap="round">${[[104,98],[145,129],[100,170],[138,198],[110,237],[152,268],[50,145],[75,199],[183,188],[201,237]].map(([x,y])=>`<path d="m${x-3} ${y-4} 6 8m-6 0 6-8"/>`).join('')}</g></g><g fill="#b78e54"><ellipse cx="64" cy="302" rx="10" ry="4"/><ellipse cx="175" cy="298" rx="9" ry="4"/></g>`;
+ }
+ return `<svg class="character-svg ${cl}" viewBox="0 0 240 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${role.name}的卡通形象"><ellipse class="ground-shadow" cx="121" cy="306" rx="73" ry="10" fill="#29483c" opacity=".13"/>${a}</svg>`;
+}
+function characterArt(role,mood=null){if(role.group==='person')return humanArt(role,mood);return ['snail','butterfly','rice','sunflower'].includes(role.art||role.id)?extraNatureArt(role):natureArt(role,mood);}
+function faceSticker(id){
+ const c={love:['#d6f2d6','#3c9756'],like:['#e4f1c2','#75983c'],neutral:['#fff1bf','#c9992b'],dislike:['#ffe1c7','#d47c42'],hate:['#ffd9df','#c9697a']}[id]||['#f1f2ee','#7d928c'];
+ const eye=id==='love'?'<path d="M25 34q6-10 12 0m18 0q6-10 12 0" fill="none" stroke="#374742" stroke-width="4" stroke-linecap="round"/>':'<ellipse cx="31" cy="33" rx="3.7" ry="5"/><ellipse cx="60" cy="33" rx="3.7" ry="5"/>';
+ let mouth='<path d="M34 52h23" stroke="#374742" stroke-width="4" stroke-linecap="round"/>';
+ if(id==='love')mouth='<path d="M29 48q17 33 34 0Z" fill="#375343"/><path d="M36 60q9-8 18 0" fill="#f28e79"/>';
+ if(id==='like')mouth='<path d="M31 49q15 21 30 0" fill="none" stroke="#374742" stroke-width="4" stroke-linecap="round"/>';
+ if(id==='dislike')mouth='<path d="M32 58q14-18 28 0" fill="none" stroke="#374742" stroke-width="4" stroke-linecap="round"/>';
+ if(id==='hate')mouth='<path d="M31 62q15-34 30 0Z" fill="#554340"/><path d="M23 41q-12 19-1 20q9-1 1-20m47 0q-10 19 0 20q10-1 0-20" fill="#4facdc"/>';
+ return `<svg class="face-svg" viewBox="0 0 90 90" aria-hidden="true"><circle cx="45" cy="45" r="41" fill="${c[0]}" stroke="${c[1]}" stroke-width="3"/><path d="M19 24q12-16 33-11" fill="none" stroke="white" stroke-opacity=".65" stroke-width="5" stroke-linecap="round"/><g fill="#374742">${eye}${mouth}</g></svg>`;
+}
+
+// Scenery supplies the location and task context, never the student's judgment.
+function sceneIllustration(r){
+ const k=r.setting;
+ const plant=(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 18V-13" stroke="#4d824b" stroke-width="5"/><path d="M-1 10q-31-1-28-28 26 0 28 28m1-8q1-28 27-32 7 29-27 32" fill="#83bd60" stroke="#507e44" stroke-width="2"/></g>`;
+ const tree=(x,y,s=1,fruit=false)=>`<g transform="translate(${x} ${y}) scale(${s})"><g class="scene-tree"><path d="M0 5v65m0-40-22-18m22 31 23-19" stroke="#8c865b" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M-49 6q-19-32 13-44-7-41 37-33 41-6 42 29 34 14 17 46-9 26-53 20-39 12-56-18" fill="#73ae61"/><path d="M-33-31q-6-29 32-28 36-7 35 25-19 19-39 8-18 9-28-5" fill="#9dce7b"/>${fruit?'<g fill="#eeb46a"><circle cx="-31" cy="-2" r="8"/><circle cx="18" cy="-27" r="8"/><circle cx="40" cy="4" r="8"/></g>':''}</g></g>`;
+ const house=`<g transform="translate(389 269)"><path d="M0 0h127v96H0Z" fill="#fff1d4"/><path d="m-12 4 74-43L138 4Z" fill="#779dc4"/><path d="M20 96V53h28v43" fill="#7eafc5"/><path d="M71 34h30v30H71Z" fill="#b1ddec"/><path d="M-7 98h141" stroke="#b9be9f" stroke-width="4"/></g>`;
+ const sky=`<defs><linearGradient id="sky" x2="0" y2="1"><stop class="scene-sky-top"/><stop offset="1" class="scene-sky-bottom"/></linearGradient><linearGradient id="pond" x2="0" y2="1"><stop stop-color="#91d9ec"/><stop offset="1" stop-color="#60b4d6"/></linearGradient></defs><path fill="url(#sky)" d="M0 0h600v500H0Z"/><g class="sky-sun"><circle cx="486" cy="88" r="56" fill="#fff0ba" opacity=".4"/><circle cx="486" cy="88" r="40" fill="#ffd36a"/></g><g class="sky-clouds"><path d="M63 117c-33 0-35-39-6-46 9-38 62-43 80-8 27-14 54 3 56 24 29 4 28 33-3 33Z"/><path d="M316 170c-20 0-25-30 0-32-4-39 54-48 68-18 20-5 40 6 41 24 27 0 27 28 0 29Z" opacity=".83"/><path d="M464 208c-20 0-25-25-3-28 3-29 45-32 52-12 24-7 42 10 38 24 19 5 19 21-3 24Z" opacity=".7"/></g>`;
+ const hills=`<path class="hill-far" d="M0 292q82-49 180-21t200-8t220 1v236H0Z"/><path d="M0 329q110-64 251-16t349-12v199H0Z" fill="#b7d89c"/>`;
+ const grass=`<path class="grass-land" d="M0 366q152-30 298-9t302-10v153H0Z"/>`;
+ const path=`<path d="M274 362q-8 55-114 138h229q-65-95-62-138Z" fill="#ead5ae"/>`;
+ let middle='',ground=grass+path,near='';
+ if(['field','ricefield','tea'].includes(k)){
+  middle=house+tree(84,285,.85);
+  ground=`<path class="grass-land" d="M0 345H600v155H0Z"/><path d="m0 400 600-65v33L0 454Z" fill="${k==='ricefield'?'#83bbbd':'#c3a87a'}"/><path d="m0 480 600-89v37L0 524Z" fill="${k==='ricefield'?'#8dcbd3':'#ceb689'}"/><path d="m256 347-69 153h135l-14-153Z" fill="#dbc699"/>`;
+  if(k==='tea'){
+   near=Array.from({length:4},(_,i)=>`<path d="M-12 ${374+i*32}q75-30 160-22m254 0q115-29 220-12" fill="none" stroke="#78ad60" stroke-width="27"/>`).join('');
+  }else near=[...[30,90,153].map((x,i)=>plant(x,390+i*12,.65)),...[423,479,550].map((x,i)=>plant(x,386-i*9,.7)),...[48,122,432,518,580].map((x,i)=>plant(x,457-i%2*13,.9))].join('');
+ }
+ else if(k==='drying'){
+  middle=house+tree(68,291,.65);ground=`<path d="M0 344H600v156H0Z" fill="#d7cfc0"/><path d="m22 382 155-27 60 58-210 34Z" fill="#f0d98b"/><path d="m397 360 191 4v89l-192-28Z" fill="#eacc79"/>`;
+  near=Array.from({length:64},(_,i)=>`<ellipse cx="${i<32?40+(i*27)%175:410+(i*23)%161}" cy="${i<32?383+(i*7)%42:382+(i*11)%53}" rx="4" ry="2" fill="#caaa62"/>`).join('');
+ }
+ else if(['street','busstop','cycle'].includes(k)){
+  middle=`<g fill="#b6cbd5"><rect x="23" y="224" width="80" height="133" rx="3"/><rect x="124" y="249" width="63" height="108"/><rect x="442" y="237" width="110" height="120"/></g><g fill="#deedf1">${[34,67,135,159,455,488,520].map(x=>`<path d="M${x} 270h15v19h-15Zm0 32h15v19h-15Z"/>`).join('')}</g>${tree(406,292,.56)}`;
+  ground=`<path d="M0 352H600v148H0Z" fill="#b6b8b1"/><path d="M0 362H600" stroke="#eddfc2" stroke-width="12"/><path d="M0 449H600" stroke="#f8f2dd" stroke-width="4" stroke-dasharray="34 24"/>`;
+  near=k==='cycle'?`<path d="M0 462H600v38H0Z" fill="#a8c8a0"/>`:`<g fill="#ecede4">${Array.from({length:6},(_,i)=>`<path d="m${16+i*26} 392 20-5v68l-20 5Z"/>`).join('')}</g><g transform="translate(501 269)"><path d="M18 57v121" stroke="#687974" stroke-width="7"/><rect width="37" height="94" rx="10" fill="#4c626b"/><circle cx="18" cy="20" r="9" fill="#d6978c"/><circle cx="18" cy="47" r="9" fill="#e4c77c"/><circle cx="18" cy="74" r="9" fill="#8abe9b"/></g>`;
+  if(k==='busstop')middle+=`<g transform="translate(423 303)"><rect width="158" height="75" rx="9" fill="#c9dfb5" stroke="#607e7d" stroke-width="3"/><path d="M7 14h142v27H7Z" fill="#a6d5e5"/><path d="M98 14v61m20-61v61" stroke="#658a95" stroke-width="3"/><circle cx="31" cy="74" r="12" fill="#5c6d78"/><circle cx="125" cy="74" r="12" fill="#5c6d78"/></g>`;
+ }
+ else if(k==='harbor'){
+  middle=`<path d="M0 301H600v199H0Z" fill="url(#pond)"/><path d="M10 325h82m63 10h88m152-12h130m-115 35h70m-480 0h98" stroke="#d7eff3" stroke-width="3"/><g transform="translate(413 238)"><path d="M-14 77h178l-25 40H8Z" fill="#748fab" stroke="#526b7f" stroke-width="3"/><rect x="21" y="37" width="75" height="41" fill="#f5e6bc"/><rect x="30" y="44" width="20" height="18" fill="#aad6e3"/><rect x="59" y="44" width="20" height="18" fill="#aad6e3"/><path d="M112 12v65m-36-68h36" fill="none" stroke="#6f818d" stroke-width="5"/></g>`;
+  ground=`<path d="m0 400 361-52 239 58v94H0Z" fill="#d7c5a7"/><path d="m0 401 360-46 240 58" fill="none" stroke="#ede0c3" stroke-width="9"/>`;near=`<g fill="#818d81"><rect x="51" y="391" width="15" height="57" rx="4"/><rect x="509" y="402" width="15" height="58" rx="4"/></g>`;
+ }
+ else if(k==='construction'){
+  middle=`<g transform="translate(394 211)"><path d="M0 152V37h135v115M0 85h135M65 37v114" fill="none" stroke="#94a6a1" stroke-width="12"/><path d="M-12 29h158v12H-12Z" fill="#c3ccc0"/><path d="M0 137h54v30H0Z" fill="#d19b76"/></g>${tree(65,290,.55)}`;
+  ground=`<path d="M0 356H600v144H0Z" fill="#ddc69e"/>`;
+  near=`<path d="M41 397h104v37H41Z" fill="#c89470"/><path d="M35 408h117m-82-11v37m43-37v37" stroke="#efd5b7" stroke-width="3"/><path d="m459 437 23-63 22 63Z" fill="#e3a474"/><path d="M469 410h26" stroke="#f9edce" stroke-width="7"/>`;
+ }
+ else if(['shop','market'].includes(k)){
+  const ice=r.id==='vendor';
+  middle=tree(75,295,.75)+`<g transform="translate(387 250)"><path d="M5 35h146v123H5Z" fill="#f4e4c3"/><path d="M-8 37 15 0h123l25 37Z" fill="${ice?'#cea4ba':'#8bbd97'}"/><path d="M27 0 11 38m47-38-7 38m45-38 4 38m28-38 15 38" stroke="#f5edda" stroke-width="13"/><path d="M17 59h120v62H17Z" fill="#adc6c0"/><path d="M-3 116h162v15H-3Z" fill="#c79d74"/></g>`;
+  if(k==='market')near=`<g transform="translate(46 390)"><path d="M0 20h105v45H0Z" fill="#bb976d"/>${[15,39,64,90].map(x=>plant(x,23,.48)).join('')}</g>`;
+ }
+ else if(k==='orchard')middle=tree(77,284,.98,true)+tree(454,283,1.13,true)+tree(552,290,.62,true);
+ else if(k==='beehives'){
+  middle=tree(76,287,.9)+tree(508,280,.8);
+  near=`<g transform="translate(428 334)"><path d="M0 0h87v87H0Z" fill="#dfbc78" stroke="#b59b6a" stroke-width="3"/><path d="M-5-5h97v12H-5Z" fill="#9d9d80"/><path d="M0 30h87M0 60h87" stroke="#b29661" stroke-width="3"/><path d="M23 76h38" stroke="#667d6b" stroke-width="5"/></g>${[50,116,469,540].map((x,i)=>`<circle cx="${x}" cy="${454+i%2*12}" r="9" fill="#f3d597"/>`).join('')}`;
+ }
+ else if(k==='salt'){
+  middle=`<path d="M0 303H600v48H0Z" fill="#8ec9dc"/>`;
+  ground=`<path d="M0 348H600v152H0Z" fill="#ebdfbe"/><g fill="#b8dee6" stroke="#f8edce" stroke-width="11"><path d="m-9 371 206-12-25 63-191 8Z"/><path d="m412 359 200 13v61l-188-17Z"/><path d="m-9 446 172-6-19 65H-9Z"/><path d="m434 439 177 14v52H449Z"/></g>`;
+ }
+ else if(k==='mountain'){
+  middle=`<path d="M0 345 106 163 227 341 340 130 512 348 600 222v278H0Z" fill="#84b0ad"/><path d="m38 355 165-143 146 143 157-130 94 124v151H0Z" fill="#a4c9b3"/>`;ground=grass+path;
+  near=`<path d="M35 396h130m266 0h134m-514-28v59m49-57v45m400-45v45m48-46v55" fill="none" stroke="#a1977e" stroke-width="9"/>`;
+ }
+ else if(k==='school'){
+  middle=`<g transform="translate(361 236)"><path d="M0 63h213v82H0Z" fill="#f8e7bf"/><path d="M82 35h68v111H82Z" fill="#f9edcf"/><path d="m75 39 40-30 43 30Z" fill="#6f9ec3"/><path d="M-8 58h83m84 0h55" stroke="#8bb0cb" stroke-width="10"/><g fill="#aad5e3">${[12,48,162,193].map(x=>`<path d="M${x} 77h17v22h-17Zm0 36h17v22h-17Z"/>`).join('')}</g><circle cx="116" cy="65" r="14" fill="#fff9e7" stroke="#9bbbc8" stroke-width="3"/><path d="M116 55v10l8 5" fill="none" stroke="#779dac" stroke-width="2.5"/><path d="M98 108h37v38H98Z" fill="#98bfca"/></g>${tree(68,285,.7)}`;
+  near=`<path d="m18 452 124-10m292 0 153 13" fill="none" stroke="#c7997f" stroke-width="43"/><path d="m18 453 124-10m292 0 153 13" stroke="#f5e5d3" stroke-width="2"/>`;
+ }
+ else if(k==='ski'){
+  middle=`<path d="m0 321 133-142 137 148 125-176 205 160v189H0Z" fill="#bdd6e1"/><path d="m62 255 71-76 68 74-53-14-16-25-20 30Z" fill="#f1f7f4"/><path d="m341 224 54-73 79 80-53-19-28-27-19 31Z" fill="#f4f8f3"/>`;
+  ground=`<path d="M0 370q125-55 314-1t286-5v136H0Z" fill="#f2f6ed"/>`;
+  near=`<g stroke="#8da5b1" stroke-width="5"><path d="M73 353v80m432-87v80"/></g><path d="m76 353 43 9-43 20m432-35 43 6-43 23" fill="#d99982"/>`;
+ }
+ else if(k==='pond'){
+  middle=tree(74,289,.7)+tree(501,277,.95);
+  ground=`<path d="M0 348H600v152H0Z" fill="#b1d28f"/><path d="M395 361q125-56 235 2v126q-180 0-215-71-55-25-20-57Z" fill="url(#pond)"/>`;
+  near=`<path d="M444 392h61m13 35h65m-138 32h65" stroke="#c4ebed" stroke-width="4"/><path d="m418 409-10-35m20 41 4-40m-1 55 12-24" stroke="#6c9d57" stroke-width="5"/>`;
+ }
+ else if(['solar','windfarm','power','station'].includes(k)){
+  middle=tree(79,282,.65);
+  if(k==='solar')near=`<g transform="translate(394 302)"><path d="M27 32v76m85-65v71" stroke="#8fa2aa" stroke-width="6"/><path d="M10 0h136l28 69H-5Z" fill="#5e88aa" stroke="#aecbd9" stroke-width="4"/><path d="M56 0 50 69m49-69 11 69m-89-46h134M3 45h160" stroke="#bed7e3" stroke-width="2"/></g>`;
+  if(k==='windfarm')near=`${[[106,267,.7],[488,253,1.0],[385,278,.55]].map(([x,y,z])=>`<g transform="translate(${x} ${y}) scale(${z})"><path d="M-6 0-12 144h26L7 0Z" fill="#dce8de" stroke="#93ada9" stroke-width="3"/><g class="windmill-rotor"><path d="M-2-6-9-100q14-10 18 2L9-7m-10 7-83 49q1 18 17 13L9 9M4-4l87 48q16-8 5-18L13-13" fill="#f1f6ed" stroke="#96b6b9" stroke-width="3"/><circle r="12" fill="#c1d5ce"/></g></g>`).join('')}`;
+  if(k==='power')near=`<path d="M462 193v251M504 182v264M442 221h82m-82 0L610 200m-86 27L614 218" fill="none" stroke="#91a7ac" stroke-width="7"/><path d="M453 213h17m27-3h17" stroke="#b2c5bd" stroke-width="14"/>`;
+  if(k==='station')near=`<g transform="translate(426 268)"><path d="M12 93v55m85-55v55" stroke="#b7bba7" stroke-width="7"/><rect width="111" height="93" rx="3" fill="#f4f4e5" stroke="#a4b8ab" stroke-width="3"/><path d="M-7-4h124v13H-7Z" fill="#d5e0cf"/><path d="M11 25h89M11 40h89M11 55h89M11 70h89" stroke="#b3cbbf" stroke-width="4"/></g>`;
+ }
+ else if(k==='library'){
+  return `<svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${sky}<path d="M0 0H600V500H0Z M401 39V222H579V39Z" fill="#eee5d0" fill-rule="evenodd"/><path d="M397 37h184v187H397Z" fill="none" stroke="#b1aaa0" stroke-width="11"/><path d="M488 40v178m-86-86h173" stroke="#c3c2b3" stroke-width="8"/><path d="M0 365H600v135H0Z" fill="#d2be9c"/><g transform="translate(27 127)"><rect width="148" height="265" rx="4" fill="#c5ac84"/><path d="M9 74h130M9 148h130M9 222h130" stroke="#a48c6b" stroke-width="9"/>${Array.from({length:18},(_,i)=>`<rect x="${14+(i%6)*20}" y="${12+Math.floor(i/6)*74}" width="15" height="58" rx="2" fill="${['#aac6a0','#c4a5a0','#92b9cd','#cfb78b'][i%4]}"/>`).join('')}</g><path d="M399 284h172v17H399Zm20 17h9v102h-9Zm125 0h9v102h-9Z" fill="#b5966b"/></svg>`;
+ }
+ else if(k==='laundry'){
+  middle=house;
+  near=`<path d="M25 295v135m144-145v145M25 301l143-9" stroke="#879b94" stroke-width="5" fill="none"/><path d="m54 300 16-5 5 7 7-7 16 5-7 19-7-4v31H63v-31l-6 4Z" fill="#ceb3c7"/><path d="M111 298h36v58h-36Z" fill="#d6e7ee"/>`;
+ }
+ else if(k==='camp'){
+  middle=tree(73,291,1)+tree(520,288,.95);
+  near=`<path d="m390 408 87-117 86 118Z" fill="#ceac7a" stroke="#9e9472" stroke-width="3"/><path d="m477 291 56 117h59l-71-96Z" fill="#b6b587"/><path d="m425 408 52-84 52 84Z" fill="#6c8580"/>`;
+ }
+ else if(k==='sand'){
+  ground=`<path d="M0 346q135-45 309 0t291-4v158H0Z" fill="#e9cc94"/><path d="M0 430q124-69 266-31t334-34" fill="none" stroke="#f3dfb4" stroke-width="15"/>`;middle='';
+ }
+ else{
+  middle=house+tree(82,278,.95);
+  near=`<g transform="translate(441 376)"><path d="M0 0h110v16H0ZM0-23h110v15H0Z" fill="#c4a273"/><path d="M15-7v60m80-60v60" stroke="#849282" stroke-width="6"/></g>`;
+  if(['flowers','garden'].includes(k))near+=[48,103,466,536,573].map((x,i)=>`<g transform="translate(${x} ${435+i%2*20})">${plant(0,0,.48)}<g fill="${i%2?'#d6afc9':'#e8cb7d'}"><circle cx="0" cy="-18" r="10"/><circle cx="-8" cy="-11" r="8"/><circle cx="8" cy="-11" r="8"/></g><circle cx="0" cy="-13" r="4" fill="#c79b54"/></g>`).join('');
+ }
+ return `<svg viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${sky}${hills}${middle}${ground}${near}</svg>`;
+}
+function renderSetting(r){
+ const stage=$('stage');
+ if(stage.dataset.settingRole!==r.id){
+  stage.dataset.settingRole=r.id;stage.dataset.setting=r.setting;
+  const scene=stage.querySelector('.scene-back');if(scene)scene.innerHTML=sceneIllustration(r);
+ }
+ const note=stage.querySelector('.scene-note');if(note)note.textContent=r.place+' · 情境模拟';
+ const warning=stage.querySelector('.weather-warning');if(warning)warning.textContent=r.place+' · 恶劣天气，先考虑安全';
+}
+
+function sceneMarkup(weather){
+ const land=sceneIllustration(currentRole());
+ const rain=Array.from({length:weather.id==='rain'?24:48},(_,i)=>`<i style="--x:${(i*23.71)%100}%;--delay:-${(i*.13)%1.3}s;--speed:${weather.id==='rain'?.95:.57}s"></i>`).join('');
+ const snow=Array.from({length:weather.id==='snow'?22:46},(_,i)=>`<i style="--x:${(i*29.37)%100}%;--delay:-${(i*.7)%5}s;--speed:${3.4+(i%4)*.5}s"></i>`).join('');
+ const winds=Array.from({length:6},(_,i)=>`<i style="--y:${18+i*12}%;--delay:-${i*.45}s"></i>`).join('');
+ return `<div class="scene-back">${land}</div><div class="weather-fx weather-hot"></div><div class="weather-fx weather-fog"></div><div class="actor-layer" id="actorLayer"></div><div class="weather-fx weather-rain">${rain}</div><div class="weather-fx weather-snow">${snow}</div><div class="weather-fx weather-wind">${winds}</div><div class="weather-fx weather-lightning"><svg viewBox="0 0 60 100"><path d="M31 0 5 49h22L14 100 58 34H34L47 0Z"/></svg></div>${isExtreme(weather.id)?'<div class="weather-warning">课堂模拟 · 恶劣天气请注意安全</div>':'<span class="scene-note">课堂情境模拟</span>'}`;
+}
+
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CATEGORIES={
+ jobs:{label:'不同职业',subtitle:'核心学习',scope:'生产与劳动',description:'只比较不同职业，不混入动植物。'},
+ nature:{label:'动植物',subtitle:'拓展活动',scope:'生存与生长',description:'先完成人的影响，再开展动植物拓展。'},
+ other:{label:'其他',subtitle:'日常生活',scope:'生活与活动',description:'学生、家长、游客和活动爱好者。'}
+};
+const categoryInfo=id=>CATEGORIES[id]||CATEGORIES.jobs;
+const categoryRoles=id=>ROLE_POOL.filter(r=>r.category===id);
+const state={view:'normal',lastPage:'normal',category:'jobs',sessions:{},roundCache:{},history:[],auto:false,paused:false,poolSize:8,finding:0,summaryCategory:'all'};
+let roundSerial=0,advanceTimer=0,confirmAction=null,lastScene='',lastActor='',toastTimer=0;
+const isExtreme=id=>WEATHER_PAGES.extreme.some(w=>w.id===id);
+const roleById=id=>ROLE_POOL.find(r=>r.id===id)||ROLE_POOL[0];
+const moodById=id=>MOODS.find(m=>m.id===id)||null;
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function roleQueue(size=state.poolSize,category=state.category){
+ const pool=categoryRoles(category);
+ const cap=size===0?pool.length:Math.min(size,pool.length);
+ const anchors=category==='jobs'?['grower','harvest']:category==='nature'?['bee','seedling','cactus']:['student','tourist','kite'];
+ // Keep the two farming tasks together, then sample broadly across professions.
+ const first=anchors.filter(id=>pool.some(r=>r.id===id)).slice(0,cap);
+ if(category==='jobs'&&cap<=8){
+  const bands=[['courier','rider','cleaner','traffic','builder','lineman'],['vendor','hotfood','seller','photographer','pe_teacher','tourguide','skistaff','librarian'],['fisher','saltworker','solar','windfarm','fishfarmer','sailor']];
+  for(const band of bands){if(first.length<cap)first.push(shuffle(band.filter(id=>!first.includes(id)))[0]);}
+ }
+ const remaining=shuffle(pool.filter(r=>!first.includes(r.id)).map(r=>r.id));
+ return [...first,...remaining.slice(0,cap-first.length)];
+}
+function newSession(page,weatherId,category=state.category){return {id:'round-'+(++roundSerial),page,weatherId,category,queue:roleQueue(state.poolSize,category),index:0,ratings:{},ended:false,status:'进行中'};}
+function roundKey(page,weatherId,category){return page+'|'+weatherId+'|'+category;}
+function cacheRound(s){state.roundCache[roundKey(s.page,s.weatherId,s.category)]=s;}
+function session(page=state.view==='summary'?state.lastPage:state.view){
+ if(!WEATHER_PAGES[page])page=state.lastPage;
+ const previous=state.sessions[page];
+ if(!previous)state.sessions[page]=newSession(page,WEATHER_PAGES[page][0].id);
+ else if(previous.category!==state.category){
+  cacheRound(previous);
+  const cached=state.roundCache[roundKey(page,previous.weatherId,state.category)];
+  state.sessions[page]=cached&&!cached.ended?cached:newSession(page,previous.weatherId);
+ }
+ return state.sessions[page];
+}
+function categoryButtons(selected,attr='data-category'){
+ return Object.entries(CATEGORIES).map(([id,c])=>`<button class="category-button" ${attr}="${id}" aria-pressed="${id===selected}"><strong>${c.label}</strong><small>${c.subtitle} · ${categoryRoles(id).length}张</small></button>`).join('');
+}
+function renderCategories(){$('categoryBar').innerHTML=categoryButtons(state.category);}
+function switchCategory(id){
+ if(!CATEGORIES[id]||id===state.category)return;
+ cancelAdvance();cleanDrag();const old=session();archive(old);cacheRound(old);
+ state.category=id;const s=session(old.page);render();
+ toast(`${categoryInfo(id).label}：天气不变，${stats(s).n?'继续本类已有评价':'开始本类角色评价'}。`);
+}
+$('categoryBar').addEventListener('click',e=>{const b=e.target.closest('[data-category]');if(b)switchCategory(b.dataset.category);});
+function weather(s=session()){return WEATHER_PAGES[s.page].find(w=>w.id===s.weatherId);}
+function currentRole(s=session()){return roleById(s.queue[Math.min(s.index,s.queue.length-1)]);}
+function stats(s){
+ const votes=s.queue.filter(id=>moodById(s.ratings[id])).map(id=>s.ratings[id]);
+ const counts=Object.fromEntries(MOODS.map(m=>[m.id,0]));votes.forEach(v=>counts[v]++);
+ const likes=counts.love+counts.like,neutral=counts.neutral,dislikes=counts.dislike+counts.hate;
+ return {n:votes.length,counts,likes,neutral,dislikes,rate:votes.length?Math.round(likes/votes.length*100):null};
+}
+function archive(s=session()){
+ if(!stats(s).n)return;
+ const snap={...s,queue:[...s.queue],ratings:{...s.ratings}};
+ const i=state.history.findIndex(h=>h.id===s.id);if(i<0)state.history.push(snap);else state.history[i]=snap;
+}
+function cancelAdvance(){clearTimeout(advanceTimer);advanceTimer=0;}
+function toast(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,2200);}
+function ask(title,text,action){cancelAdvance();confirmAction=action;$('confirmTitle').textContent=title;$('confirmText').textContent=text;$('confirmDialog').showModal();}
+$('confirmOK').addEventListener('click',()=>{const fn=confirmAction;confirmAction=null;$('confirmDialog').close();if(fn)fn();});
+$('confirmDialog').addEventListener('close',()=>confirmAction=null);
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>$(b.dataset.close).close()));
+function switchPage(page){
+ if(!['normal','extreme','summary'].includes(page))return;
+ cancelAdvance();archive();state.view=page;if(page!=='summary')state.lastPage=page;
+ document.querySelectorAll('[data-page]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.page===page)));
+ $('workspace').hidden=page==='summary';$('summaryPage').hidden=page!=='summary';
+ if(page==='summary')renderSummary();else render();
+}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>switchPage(b.dataset.page)));
+function setWeather(id){
+ const page=state.view;if(!WEATHER_PAGES[page]?.some(w=>w.id===id))return;
+ const old=session(page);if(old.weatherId===id&&!old.ended)return;
+ cancelAdvance();if(!old.ended&&stats(old).n){old.status='已切换天气';old.ended=true;}archive(old);
+ cacheRound(old);state.sessions[page]=newSession(page,id);render();
+}
+$('weatherList').addEventListener('click',e=>{const b=e.target.closest('[data-weather]');if(b)setWeather(b.dataset.weather);});
+function renderWeather(){
+ const s=session();$('weatherPanel').classList.toggle('extreme',s.page==='extreme');$('weatherListTitle').textContent=s.page==='normal'?'选择天气':'恶劣天气';
+ $('weatherList').innerHTML=WEATHER_PAGES[s.page].map(w=>`<button class="weather-button" data-weather="${w.id}" aria-pressed="${w.id===s.weatherId}" title="${esc(w.desc)}"><span class="weather-icon" aria-hidden="true">${w.emoji}</span><span>${w.name}</span></button>`).join('');
+ $('rolePoolBtn').textContent='本轮角色 · '+s.queue.length+'位';
+}
+function renderActor(replay=false){
+ const s=session(),r=currentRole(s),m=s.ratings[r.id]||null;
+ const key=s.id+'|'+s.index;
+ const layer=$('actorLayer');if(!layer)return;renderSetting(r);
+ if(key!==lastActor||replay){
+  lastActor=key;
+  layer.innerHTML=`<div class="actor-position" data-role-id="${r.id}" aria-label="${esc(r.name)}，${esc(r.task)}"><div class="actor-entry enter-${r.group}"><div class="actor-figure">${characterArt(r,m)}</div></div><div class="actor-mood"${m?'':' hidden'}>${m?faceSticker(m):''}</div></div>`;
+  const entry=layer.querySelector('.actor-entry');
+  entry.addEventListener('animationend',e=>{if(e.target===entry)entry.className='actor-entry';});
+ }else{
+  const figure=layer.querySelector('.actor-figure');
+  if(figure&&figure.dataset.mood!==(m||'')){figure.innerHTML=characterArt(r,m);figure.dataset.mood=m||'';}
+  const badge=layer.querySelector('.actor-mood');badge.hidden=!m;badge.innerHTML=m?faceSticker(m):'';
+ }
+ $('stageIdentity').innerHTML=`<strong>${esc(r.name)}</strong><span>${esc(r.task)}</span>`;
+}
+function renderStage(){
+ const s=session(),w=weather(s);$('weatherName').textContent=w.name;$('weatherDesc').textContent=w.stage;
+ if(lastScene!==s.page+'|'+w.id){lastScene=s.page+'|'+w.id;$('stage').dataset.weather=w.id;$('stage').innerHTML=sceneMarkup(w);lastActor='';}
+ renderActor();
+}
+function renderStats(){
+ const p=stats(session());$('rateNumber').textContent=p.rate===null?'—':p.rate+'%';$('rateFill').style.width=(p.rate??0)+'%';
+ if(p.rate===null){$('rateBar').removeAttribute('aria-valuenow');$('rateBar').setAttribute('aria-valuetext','尚未评价');}
+ else{$('rateBar').setAttribute('aria-valuenow',p.rate);$('rateBar').setAttribute('aria-valuetext',p.likes+'位喜欢，共'+p.n+'位已评价');}
+ $('rateDetail').textContent=p.n?`喜欢 ${p.likes} 位 · 一般 ${p.neutral} 位 · 不喜欢 ${p.dislikes} 位`:'等待第一位角色的评价';
+}
+function renderRole(){
+ const s=session(),r=currentRole(s),m=moodById(s.ratings[r.id]),p=stats(s);
+ $('progressText').innerHTML=`角色 ${s.index+1} / ${s.queue.length}<small>已评价 ${p.n} 位</small>`;
+ $('cardName').textContent=r.name;$('cardTask').textContent=r.task;$('cardDesc').textContent=r.intro;
+ $('classroomNote').textContent=r.category==='nature'?'拓展：表情表示对生存或生长条件的拟人判断。':'情境为课堂改编；表情由同学判断，不预设答案。';
+ $('selectionStatus').dataset.recorded=String(!!m);
+ $('selectionStatus').innerHTML=m?`${faceSticker(m.id)}<span>已记录：${m.label}${s.ended?' · 本轮已结束':'，可以重新选择。'}</span>`:'<span>点一个表情即可评价，也可以拖到角色上。</span>';
+ $('previousBtn').disabled=s.index===0||s.ended;
+ $('nextBtn').disabled=!m;$('nextBtn').textContent=(s.ended||s.index===s.queue.length-1)?'查看本轮小结':'下一位角色 →';
+ $('endBtn').textContent=s.ended?'查看小结':'结束本轮';
+ $('autoBtn').setAttribute('aria-pressed',state.auto);$('autoBtn').textContent='自动换卡：'+(state.auto?'开':'关');
+ $('moodList').innerHTML=MOODS.map(item=>`<button type="button" class="mood-button ${item.id}" data-mood="${item.id}" aria-label="${item.label}" aria-pressed="${m?.id===item.id}" ${s.ended?'disabled':''}>${faceSticker(item.id)}<span class="mood-label">${item.label==='一般'?'<span>一般</span><span aria-hidden="true">　</span>':`<span>${item.label.slice(0,-2)}</span><span>${item.label.slice(-2)}</span>`}</span></button>`).join('');
+}
+function render(){if(state.view==='summary'){renderSummary();return;}renderCategories();renderWeather();renderStage();renderStats();renderRole();}
+function scheduleAdvance(){
+ cancelAdvance();const s=session(),r=currentRole(s);if(s.ended||!s.ratings[r.id])return;
+ const isLast=s.index===s.queue.length-1;if(!isLast&&!state.auto)return;
+ const page=state.view,roundId=s.id,roleId=r.id;
+ advanceTimer=setTimeout(()=>{
+  advanceTimer=0;const latest=state.sessions[page];
+  if(!latest||latest.id!==roundId||currentRole(latest).id!==roleId||state.view!==page||latest.ended||document.querySelector('dialog[open]'))return;
+  if(isLast)finishRound();else nextRole();
+ },isLast?1100:2200);
+}
+function setMood(id,expected=null){
+ if(state.view==='summary'||!moodById(id))return;
+ const s=session(),r=currentRole(s);if(s.ended)return;
+ if(expected&&(expected.round!==s.id||expected.role!==r.id||expected.page!==state.view))return;
+ s.ratings[r.id]=id;archive(s);renderActor();renderStats();renderRole();scheduleAdvance();
+}
+let suppressClickUntil=0,drag=null;
+$('moodList').addEventListener('click',e=>{if(performance.now()<suppressClickUntil)return;const b=e.target.closest('[data-mood]');if(b&&!b.disabled)setMood(b.dataset.mood);});
+function nextRole(){
+ cancelAdvance();const s=session(),r=currentRole(s);if(!s.ratings[r.id])return;
+ if(s.ended){openResults(s);return;}
+ if(s.index===s.queue.length-1){finishRound();return;}
+ s.index++;renderActor();renderRole();
+}
+$('nextBtn').addEventListener('click',nextRole);
+$('previousBtn').addEventListener('click',()=>{cancelAdvance();const s=session();if(s.index>0&&!s.ended){s.index--;renderActor();renderRole();}});
+$('autoBtn').addEventListener('click',()=>{state.auto=!state.auto;renderRole();scheduleAdvance();});
+function finishRound(){cancelAdvance();const s=session();s.ended=true;s.status=stats(s).n===s.queue.length?'已完成':'提前结束';archive(s);renderRole();openResults(s);}
+$('endBtn').addEventListener('click',finishRound);
+$('replayBtn').addEventListener('click',()=>{if(state.view!=='summary')renderActor(true);});
+$('restartBtn').addEventListener('click',()=>ask('重开本轮？','当前已有评价将保留在“汇总发现”，并在同一天气下开始新一轮。',()=>{const s=session();s.ended=true;s.status='重新开始前的记录';archive(s);state.sessions[s.page]=newSession(s.page,s.weatherId);render();}));
+let pendingPool=8,pendingCategory='jobs';
+$('rolePoolBtn').addEventListener('click',()=>{cancelAdvance();pendingPool=state.poolSize;pendingCategory=state.category;renderPool();$('poolDialog').showModal();});
+function renderPool(){
+ const list=categoryRoles(pendingCategory),c=categoryInfo(pendingCategory);
+ $('poolCategoryBar').innerHTML=categoryButtons(pendingCategory,'data-pending-category');
+ document.querySelectorAll('[data-pool]').forEach(b=>{b.setAttribute('aria-pressed',Number(b.dataset.pool)===pendingPool);b.textContent=Number(b.dataset.pool)===0?'全部 '+list.length+' 张':'精选 '+Math.min(8,list.length)+' 张';});
+ $('poolDescription').textContent=c.description;
+ $('poolPreview').innerHTML=list.map(r=>`<article class="pool-preview-card"><div class="pool-portrait">${characterArt(r)}</div><div><strong>${esc(r.name)}</strong><span>${esc(r.task)}</span><small>${esc(r.place)}</small></div></article>`).join('');
+}
+$('poolCategoryBar').addEventListener('click',e=>{const b=e.target.closest('[data-pending-category]');if(b){pendingCategory=b.dataset.pendingCategory;renderPool();}});
+document.querySelectorAll('[data-pool]').forEach(b=>b.addEventListener('click',()=>{pendingPool=Number(b.dataset.pool);renderPool();}));
+$('poolApplyBtn').addEventListener('click',()=>{
+ cancelAdvance();const old=session();old.ended=true;old.status='已更换角色';archive(old);cacheRound(old);
+ state.poolSize=pendingPool;state.category=pendingCategory;
+ state.sessions[old.page]=newSession(old.page,old.weatherId);cacheRound(state.sessions[old.page]);
+ $('poolDialog').close();render();
+});
+const ROLE_HINTS={student:'看看上学路线、书包和操场。哪些事情需要重新安排？',grower:'菜苗需要什么？看看土里的水，再想想人在菜地里怎样工作。',harvest:'想一想，谷子正在晾晒。天空、空气和地面会带来什么变化？',courier:'包裹需要保护什么？路上能看清、能走稳吗？',cleaner:'观察路面和落叶。清扫任务会怎样变化？',tourist:'郊游准备做什么？行走、拍照和野餐受到的影响一样吗？',traffic:'看看道路、视线和来往车辆。站在路口工作需要注意什么？',kite:'想一想风筝飞起来需要什么。能飞起来就一定安全吗？',bee:'花朵、翅膀和蜂巢，哪些条件值得注意？',frog:'池塘、水草和岸边在这种天气下会怎样？',sparrow:'哪里能找到食物？哪里适合栖身？',seedling:'幼苗的根、叶片和土壤，分别需要什么条件？',tree:'看看树根、树枝和嫩叶。它们会受到怎样的影响？',cactus:'储存的水和根旁的土壤，会帮助你想到什么？'};
+$('hintBtn').addEventListener('click',()=>{cancelAdvance();const r=currentRole();$('hintTitle').textContent=r.name+' · 想一想';$('hintQuestion').textContent=r.hint||ROLE_HINTS[r.id]||'这个角色正在做什么？天气改变了哪些条件？';$('hintDialog').showModal();});
+function openResults(s){
+ cancelAdvance();const w=weather(s),p=stats(s),rated=s.queue.filter(id=>moodById(s.ratings[id])),levels=new Set(rated.map(id=>s.ratings[id]));
+ $('resultTitle').textContent=w.name+' · '+categoryInfo(s.category).label+'的感受';
+ $('resultSubtitle').textContent=`${s.status} · 已评价 ${p.n} / ${s.queue.length} 位${p.rate===null?'':' · 满意率 '+p.rate+'%'}。以下均为同学的选择。`;
+ let msg='还没有评价。回到右侧，点一个表情试试。';
+ if(rated.length&&levels.size===1)msg='这次已评价的角色都选择了“'+moodById(s.ratings[rated[0]]).label+'”。换些角色，还会一样吗？';
+ else if(p.likes&&p.dislikes)msg='同一种天气里，有角色喜欢，也有角色不喜欢。请分别说说理由。';
+ else if(rated.length)msg='同一种天气，出现了 '+levels.size+' 种不同感受。它们的任务和需要有什么不同？';
+ $('resultMessage').textContent=msg;
+ $('resultGrid').innerHTML=rated.map(id=>{const r=roleById(id),m=moodById(s.ratings[id]);return `<article class="result-card"><div class="result-portrait">${characterArt(r,m.id)}</div><div class="result-mood">${faceSticker(m.id)}</div><h3>${esc(r.name)}</h3><p>${esc(r.task)}</p><small class="result-place">${esc(r.place)}</small><strong>${m.label}</strong></article>`;}).join('')||'<div class="empty-state" style="grid-column:1/-1">本轮还没有表情记录。</div>';
+ if(!$('resultDialog').open)$('resultDialog').showModal();
+}
+$('resultSummaryBtn').addEventListener('click',()=>{$('resultDialog').close();switchPage('summary');});
+$('resultWeatherBtn').addEventListener('click',()=>{$('resultDialog').close();if(state.view==='summary')switchPage(state.lastPage);$('weatherList').querySelector('button')?.focus();toast('请从左侧选择下一种天气。');});
+const FINDINGS=['同一种天气，对不同角色可能有不同的影响。','同一个人做不同的事，对天气的需要也可能不同。','不能把自己喜欢的天气，当成适合所有角色的“好天气”。','天气的程度和持续时间改变，影响也可能改变；恶劣天气尤其需要注意安全。'];
+function renderFindings(){$('findings').innerHTML=FINDINGS.slice(0,state.finding).map(t=>`<p class="finding">${t}</p>`).join('');$('findingBtn').disabled=state.finding>=FINDINGS.length;$('findingBtn').textContent=state.finding?'再展开一条发现':'展开一条发现';$('hideFindingsBtn').hidden=!state.finding;}
+$('findingBtn').addEventListener('click',()=>{state.finding=Math.min(FINDINGS.length,state.finding+1);renderFindings();});
+$('hideFindingsBtn').addEventListener('click',()=>{state.finding=0;renderFindings();});
+function renderSummary(){
+ const all=state.history.filter(s=>stats(s).n);
+ const list=all.filter(s=>state.summaryCategory==='all'||s.category===state.summaryCategory);
+ $('summaryFilter').innerHTML=[['all','全部记录'],...Object.entries(CATEGORIES).map(([id,c])=>[id,c.label])].map(([id,label])=>`<button data-summary-category="${id}" aria-pressed="${state.summaryCategory===id}">${label} <small>${all.filter(s=>id==='all'||s.category===id).length}</small></button>`).join('');
+ $('summaryIntro').textContent=all.length?`已记录 ${all.length} 轮，本页显示 ${list.length} 轮。职业、生活与动植物分组记录，满意率只统计各自本轮。`:'先比较不同职业的感受；动植物作为拓展，不与人的评价混算。';
+ $('summaryList').innerHTML=list.slice().reverse().map(s=>{const w=weather(s),p=stats(s);return `<article class="summary-round"><div><h3>${w.emoji} ${w.name}</h3><span class="summary-category-label">${categoryInfo(s.category).label}</span><p>${s.page==='extreme'?'恶劣天气':'常见天气'} · ${s.status}</p><p>已评价 ${p.n} / ${s.queue.length} 位</p></div><div class="summary-faces">${s.queue.filter(id=>s.ratings[id]).map(id=>{const r=roleById(id);return `<div class="mini-result">${faceSticker(s.ratings[id])}<span>${esc(r.name)}<small>${esc(r.task)}</small></span></div>`;}).join('')}</div><div class="summary-metric"><strong>${p.rate}%</strong><p>本轮满意率</p><button class="button" data-result="${s.id}">查看表情</button></div></article>`;}).join('')||'<div class="empty-state">这一类还没有记录。<br>先让同学判断，再比较。</div>';
+ renderFindings();
+}
+$('summaryFilter').addEventListener('click',e=>{const b=e.target.closest('[data-summary-category]');if(b){state.summaryCategory=b.dataset.summaryCategory;renderSummary();}});
+$('summaryList').addEventListener('click',e=>{const b=e.target.closest('[data-result]');if(!b)return;const s=state.history.find(h=>h.id===b.dataset.result);if(s)openResults(s);});
+$('clearBtn').addEventListener('click',()=>ask('清空课堂记录？','这会清空所有轮次的表情记录，操作后不能撤销。',()=>{state.history=[];state.sessions={};state.roundCache={};state.finding=0;lastScene='';lastActor='';renderSummary();toast('课堂记录已清空。');}));
+$('exportBtn').addEventListener('click',()=>{
+ if(!state.history.length){toast('还没有评价记录。');return;}
+ const rows=[['轮次','天气','角色类型','状态','角色','任务','活动地点','情境说明','选择的感受','满意率（前两档占已评价比例）']];
+ state.history.forEach((s,i)=>s.queue.forEach(id=>{if(!moodById(s.ratings[id]))return;const r=roleById(id);rows.push([i+1,weather(s).name,categoryInfo(s.category).label,s.status,r.name,r.task,r.place,r.intro,moodById(s.ratings[id]).label,stats(s).rate+'%']);}));
+ const csv='\uFEFF'+rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+ const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='天气的影响_课堂表情记录.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);
+});
+// Click is the primary interaction. Pointer drag additionally supports touchscreens and mouse.
+$('moodList').addEventListener('pointerdown',e=>{
+ const b=e.target.closest('[data-mood]');if(!b||b.disabled||e.button!==0)return;
+ const s=session();drag={pointerId:e.pointerId,key:b.dataset.mood,page:state.view,round:s.id,role:currentRole(s).id,x:e.clientX,y:e.clientY,moving:false,ghost:null};
+});
+function dropTargetAt(x,y){const e=document.elementFromPoint(x,y);return e?.closest('#stage,#roleCard')||null;}
+function cleanDrag(){if(drag?.ghost)drag.ghost.remove();document.querySelectorAll('.drop-ready').forEach(el=>el.classList.remove('drop-ready'));drag=null;}
+document.addEventListener('pointermove',e=>{
+ if(!drag||drag.pointerId!==e.pointerId)return;
+ if(!drag.moving&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>9){drag.moving=true;drag.ghost=document.createElement('div');drag.ghost.className='drag-ghost';drag.ghost.innerHTML=faceSticker(drag.key);document.body.appendChild(drag.ghost);}
+ if(!drag.moving)return;e.preventDefault();drag.ghost.style.left=e.clientX+'px';drag.ghost.style.top=e.clientY+'px';
+ document.querySelectorAll('.drop-ready').forEach(el=>el.classList.remove('drop-ready'));dropTargetAt(e.clientX,e.clientY)?.classList.add('drop-ready');
+},{passive:false});
+document.addEventListener('pointerup',e=>{
+ if(!drag||drag.pointerId!==e.pointerId)return;const d=drag;
+ if(d.moving){suppressClickUntil=performance.now()+400;const target=dropTargetAt(e.clientX,e.clientY);cleanDrag();if(target)setMood(d.key,d);}else cleanDrag();
+});
+document.addEventListener('pointercancel',cleanDrag);
+$('moodList').addEventListener('dragstart',e=>e.preventDefault());
+$('pauseBtn').addEventListener('click',()=>{state.paused=!state.paused;$('app').classList.toggle('pause-motion',state.paused);$('pauseBtn').textContent=state.paused?'播放动画':'暂停动画';$('pauseBtn').setAttribute('aria-pressed',state.paused);});
+$('fullscreenBtn').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else toast('请使用浏览器全屏功能。');}catch(e){toast('请使用浏览器全屏功能。');}});
+document.addEventListener('fullscreenchange',()=>$('fullscreenBtn').textContent=document.fullscreenElement?'退出全屏':'全屏');
+document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAdvance();});
+document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target!==d)return;const b=d.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)d.close();}));
+render();
 
 </script></body></html>
-
-<style id="earth-archive-observation">
-:root{--uv-bg:#F4F0E7;--uv-surface:#FFFCF5;--uv-soft:#E8E4D8;--uv-ink:#103F3E;--uv-muted:#556965;--uv-line:#B9B8A9;--uv-accent:#103F3E;--uv-hover:#1c5551}
-html,body{background:#103F3E!important;color:#103F3E!important}#app,#lesson-screen{background:#F4F0E7!important;color:#103F3E!important}
-header{padding:0!important;background:transparent!important;border:0!important;border-bottom:1px solid #8C9B91!important;box-shadow:none!important}header::before{display:none!important}header h1{font-family:'Noto Serif CJK SC','Songti SC','SimSun',serif!important;font-size:36px!important;color:#103F3E!important;letter-spacing:.02em!important;font-weight:700!important}header .small{color:#886429!important;letter-spacing:.12em}h2,h3{color:#103F3E}button,input,select{border-radius:2px!important;border-color:#9AA79B!important}button{background:#FFFCF5;color:#103F3E}button[aria-pressed=true],button.primary,button.active{background:#B38A44!important;color:#10312F!important;border-color:#9D7736!important;box-shadow:none!important}button:hover{box-shadow:inset 0 -3px #B38A44}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #B38A44!important;outline-offset:3px}input,select{background:#FFFCF5!important;color:#103F3E!important}input[type=range]{accent-color:#103F3E}body .panel,body .card{background:transparent!important;color:#103F3E!important;border:0!important;border-top:3px solid #B38A44!important;border-radius:0!important;box-shadow:none!important}body .notice{background:#E9E5D9!important;border-left:3px solid #B38A44!important;border-radius:0!important;color:#103F3E!important}.muted,.small{color:#53645F}.tag{background:#E9E5D9!important;color:#53645F!important;border-radius:0!important}.archive-rail{position:absolute;left:0;top:0;bottom:0;width:188px;padding:30px 19px;background:#103F3E;color:#F4F0E7;z-index:2}.archive-domain{font:700 25px/1.5 'SimSun',serif;padding-bottom:18px;border-bottom:1px solid #B7C8BA}.archive-num{font:700 90px/1.2 Georgia,serif;margin:27px 0 12px;color:#F4F0E7}.archive-label{color:#D5B16A;font-size:17px;letter-spacing:.15em}.archive-rail nav{display:flex;flex-direction:column;gap:12px;margin-top:35px}.archive-rail button{background:transparent!important;color:#F4F0E7!important;text-align:left;border:0!important;border-left:3px solid #79988E!important;font-size:21px!important;padding:13px 10px!important;border-radius:0!important;min-height:54px!important}.archive-rail button[aria-pressed=true],.archive-rail button.active,.archive-rail button.primary{background:#C8A35E!important;color:#10312F!important;border-left:3px solid #F4F0E7!important}.archive-method{margin-top:35px;border-top:1px solid #6E9187;padding-top:18px;font-size:18px;line-height:1.9;color:#D6DED3}.archive-foot{position:absolute;bottom:28px;font-size:14px;line-height:1.8;color:#BACCC2}footer{background:transparent!important;color:#53645F!important;border-top:1px solid #8C9B91;padding:10px 0!important}footer button{background:#FFFCF5!important;color:#103F3E!important}dialog{background:#F4F0E7!important;color:#103F3E!important;border-radius:2px!important;border:1px solid #103F3E!important}dialog a{color:#245F59}.evidence-chart{background:#FFFCF5!important;border-color:#B9B8A9!important;border-radius:0!important}th{background:#103F3E!important;color:#F4F0E7!important}td{background:#FFFCF5!important}
-#app{padding:22px 28px 15px 218px!important}header{height:100px!important}.layout{grid-template-columns:910px 418px!important;gap:24px;height:656px!important;margin-top:18px!important}.panel{padding:13px 0!important}aside.panel{border-left:1px solid #B9B8A9!important;padding-left:23px!important}.layout>.panel>.row:first-child{margin-top:2px;border-bottom:1px solid #B9B8A9;padding-bottom:10px}.layout>.panel>.row:first-child h2{font-size:27px}.tag{display:block}#weatherScene{height:220px!important}.pair{gap:16px}.notice h3{font-size:21px}.entry{border-radius:0!important}#cases>label{display:block;margin-bottom:8px}#cases #caseTitle{font-size:27px;margin-top:20px!important}#cases p{font-size:19px;line-height:1.5}#cases #options button{font-size:19px!important;min-height:45px!important}#cases #caseFeedback{font-size:18px}.layout>aside{overflow:auto}footer{font-size:17px!important;margin-top:14px!important}.archive-rail nav button{font-size:20px!important}</style><script id="earth-archive-layout">(()=>{const root=document.getElementById('app')||document.getElementById('lesson-screen');const rail=document.createElement('aside');rail.className='archive-rail';rail.setAttribute('aria-label','地球观测档案');rail.innerHTML='<div class="archive-domain">地球与宇宙</div><div class="archive-num">08</div><div class="archive-label">观测档案<br>核心概念 10</div><nav aria-label="课堂导航"></nav><div class="archive-foot">三年级 · 天气单元<br>用证据描述自然变化</div>';root.prepend(rail);const nav=rail.querySelector('nav');['caseTab','realTab'].forEach(id=>nav.append(document.getElementById(id)));const method=document.createElement('div');method.className='archive-method';method.innerHTML='同一天气<br>不同对象<br>不同条件';nav.after(method);})();</script>
