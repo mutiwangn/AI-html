@@ -42,10 +42,10 @@ window.AIHTML_METADATA = {
   "./一上2.3游戏中的观察/": {
     "id": "0cc17283e148e7e41f73202dd9517aad",
     "updatedAt": "2026-11-17T14:26:54Z",
-    "commit": "88cdf5d224e824bf86c4b62daf7c7b9c34f2e29a",
+    "commit": "cd10303f9724051d868361ed104e073fe668c564",
     "updateSummary": "v2.1递进挑战：各5次比抓住次数、尺子总分、有效时间中位数；随机信号防预判，慢速可练习，等量有效试次才比时间。",
     "teachingType": "互动游戏",
-    "teachingTypeCommit": "88cdf5d224e824bf86c4b62daf7c7b9c34f2e29a"
+    "teachingTypeCommit": "cd10303f9724051d868361ed104e073fe668c564"
 },
   "./一上2.4气味告诉我们/": {
     "id": "0f7d8bca29866f09434ec1544491affc",
