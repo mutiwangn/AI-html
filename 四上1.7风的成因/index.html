@@ -72,86 +72,274 @@ body[data-mode="convection"] .canvas-area .freeze-badge{display:none}
 @media(min-width:901px) and (max-height:830px){body[data-mode="convection"] #flow-summary{display:none}body[data-mode="convection"] .sea-play{padding:6px 12px;min-height:40px}body[data-mode="convection"] .coast-select button{padding:6px 4px;min-height:36px}body[data-mode="convection"] .sea-temp-inline{margin-top:9px}body[data-mode="convection"] .side-section:has(#smoke-panel){padding-top:10px;padding-bottom:9px}}
 
 
-#sea-zoom-btn{display:none!important}
-</style>
+/* v6: preserve classroom controls, give the simulation visual priority. */
+body[data-mode="convection"] .sea-scale-note,
+body[data-mode="convection"] #guide-items,
+body[data-mode="convection"] .record-guide .section-heading,
+body[data-mode="convection"] .status,
+body[data-mode="convection"] .caption-note{display:none}
+body[data-mode="convection"] .record-guide{padding-top:12px;padding-bottom:12px}
+body[data-mode="convection"] .stage-caption{min-height:30px;padding-top:5px;padding-bottom:5px}
+body[data-mode="convection"] .sea-temp-popover{position:static;margin-top:8px;box-shadow:none}
+body[data-mode="convection"] aside{overflow:auto}
+body[data-mode="convection"] .sea-temp-inline{font-size:15px}
+.sea-start p{display:block;width:fit-content}
+@media(max-width:450px){.sea-start p{display:none}}
+.dot.hot{background:#ff873f}.dot{background:#41bcff}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+@media(prefers-color-scheme:dark){
+ :root{--bg:#15262f;--paper:#20353e;--ink:#e3eff3;--muted:#a7bdc7;--line:#405760;--teal:#4aadb3;--teal-light:#26474d}
+ .stage-wrap,aside,.stage-caption,.modal,.sea-temp-popover{background:#20353e}
+ button,.reference-button{background:#263f49;color:#e3eff3}.primary{background:#26777e;color:#fff}.warm{background:#b25a2a;color:#fff}
+ .tabs,.segmented{background:#172c35}.tab[aria-selected="true"],.segmented button[aria-pressed="true"]{background:#32535d;color:#b1eeed}
+ .record-guide,.sea-temp-details>summary{background:#213a44;color:#dfedf1}.sea-temp-inline{color:#bfd2db}
+ .observation-strip,.explanation{background:#24464b;color:#d1eeee}.brand-symbol{background:#26474d}
+ button:hover:not(:disabled){background:#33545d;color:#f2fbff}.selected,button[aria-pressed="true"].toggle{color:#b5f1ed;background:#26474d}
+ body .head-actions button,body .bottom-bar button:not(.primary),body .coast-select button,body .probe-select button,body .probe-places button,body .reference-button{background:#263f49;color:#e3eff3}
+ body .coast-select button.selected,body .probe-select button.selected,body .probe-places button.selected{background:#32535d;color:#b5f1ed}
+ body .tabs .tab[aria-selected="true"],body .segmented button[aria-pressed="true"],body .view-tools>.toggle[aria-pressed="true"],body .sea-detail-buttons .toggle{background:#32535d;color:#b5f1ed}
+ body .view-tools>.toggle{background:#263f49;color:#e3eff3}
+ body .record-fields input,body .record-fields textarea,body .record-fields select{background:#152c35;color:#e3eff3}
+}
 
-<style id="unit-visual-theme-v1" data-unit="4-1">
-/* Unit visual system v1: interface-only; preserves original content and simulation colors. */
-:root{--uv-bg:#edf5f3;--uv-surface:#ffffff;--uv-soft:#e2f1ed;--uv-ink:#183d3c;--uv-muted:#536f6b;--uv-line:#c8ded7;--uv-accent:#087568;--uv-on:#ffffff;--uv-head:#f8fcfa;--uv-headink:#183d3c;--uv-focus:#b57710;}
-html,body{background:var(--uv-bg)!important}body{color:var(--uv-ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif!important;-webkit-font-smoothing:antialiased}
-body > header,body > .app > header,body > .shell > header,body > #app > header,body > .frame > header,body .app-header,body .topbar,body header.header{background:var(--uv-head)!important;color:var(--uv-headink)!important;border-color:var(--uv-line)!important;box-shadow:0 1px 0 var(--uv-line)!important}
-body .panel,body .card,body .sidebar,body .control-panel,body .board-side,body .board-main,body .modal,body .experiment,body .dialog-body,body .box,body .controls,body .explanation{background:var(--uv-surface)!important;color:var(--uv-ink);border-color:var(--uv-line)!important;border-radius:16px}
-body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch){border-color:var(--uv-line);border-radius:11px;background-color:var(--uv-surface);color:var(--uv-ink);font-family:inherit;touch-action:manipulation}
-body button.primary,body button.primary-btn,body button.primary-button,body button.ear-primary,body button.phone-primary,body nav button[aria-selected="true"],body nav button[aria-pressed="true"],body button.tab.active,body button.nav-btn.active,body nav button.active,body nav button[aria-current="page"]{background:var(--uv-accent)!important;color:var(--uv-on)!important;border-color:var(--uv-accent)!important}
-body button:focus-visible,body input:focus-visible,body select:focus-visible,body textarea:focus-visible,body a:focus-visible{outline:3px solid var(--uv-focus)!important;outline-offset:3px}
-body input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),body textarea,body select{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);border-radius:9px}
-body footer,body .app-footer,body .footer,body .page-foot{color:var(--uv-muted);border-color:var(--uv-line)}
-body .notice,body .callout,body .side-note,body .side-hint,body .note-question{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-accent)}
-body .muted,body .rail-title,body .section-heading,body .control-label,body .control-hint,body .side-title{color:var(--uv-muted)}
-@media(hover:hover){body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch):not(:disabled):hover{border-color:var(--uv-accent)}}
-@media print{html,body{background:white!important;color:black!important}body header,body footer{background:white!important;color:black!important;box-shadow:none!important}body header h1,body header .brand,body header .heading{color:black!important}}
+
+/* v7 functional colors: heat=orange, observe=blue, playback=green, record=purple. */
+:root{--focus:#1c567d;--kid-heat:#a94617;--kid-observe:#185f94;--kid-play:#18714e;--kid-record:#74449b}
+body .kid-button{--tone:#536470;--wash:#f0f4f6;--edge:#c4d0d7;--lift:#b6c4cd;--active:#536470;--on:#fff;--hover:#e7eef2}
+body [data-tone="heat"]{--tone:var(--kid-heat);--wash:#fff2e4;--edge:#ebc5a2;--lift:#dba67d;--active:#a94617;--on:#fff;--hover:#ffe7cf}
+body [data-tone="observe"]{--tone:var(--kid-observe);--wash:#eaf5fd;--edge:#b2d3ed;--lift:#8dbbdd;--active:#185f94;--on:#fff;--hover:#dbeefe}
+body [data-tone="play"]{--tone:var(--kid-play);--wash:#eaf7ef;--edge:#a9d4b9;--lift:#84b69a;--active:#18714e;--on:#fff;--hover:#d8f0e3}
+body [data-tone="record"]{--tone:var(--kid-record);--wash:#f4edfb;--edge:#d3bde8;--lift:#b59ace;--active:#74449b;--on:#fff;--hover:#eadcf6}
+body [data-tone="night"]{--tone:#384c84;--wash:#edf0fa;--edge:#b9c3e1;--lift:#9caaca;--active:#384c84;--on:#fff;--hover:#e0e6f7}
+body .shell .kid-button,body .modal .kid-button,body .shell summary.kid-button{
+ color:var(--tone)!important;background:var(--wash)!important;border:1.5px solid var(--edge)!important;
+ border-radius:12px;box-shadow:0 3px 0 var(--lift);font-weight:700;min-height:46px;padding:8px 11px;gap:8px;
+ position:relative;line-height:1.25;white-space:nowrap;transition:background .14s,box-shadow .14s,transform .14s;
+}
+body .shell .kid-button:hover:not(:disabled),body .modal .kid-button:hover:not(:disabled),body .shell summary.kid-button:hover{background:var(--hover)!important;transform:translateY(-1px);box-shadow:0 4px 0 var(--lift)}
+body .shell .kid-button:active:not(:disabled),body .modal .kid-button:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--lift)}
+body .shell .kid-button.kid-primary,body .modal .kid-button.kid-primary,
+body .shell .kid-button.kid-choice[aria-pressed="true"],body .shell .kid-button.kid-choice[aria-selected="true"]{background:var(--active)!important;color:var(--on)!important;border-color:var(--active)!important;box-shadow:0 3px 0 color-mix(in srgb,var(--active),#18323f 30%)}
+body .shell .kid-button.kid-primary:hover,body .modal .kid-button.kid-primary:hover,
+body .shell .kid-button.kid-choice[aria-pressed="true"]:hover,body .shell .kid-button.kid-choice[aria-selected="true"]:hover{filter:brightness(1.07)}
+body .kid-button:disabled{opacity:.55;box-shadow:none!important;transform:none!important;cursor:not-allowed}
+body button:focus-visible,body summary:focus-visible,body input:focus-visible,body textarea:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+body .kid-button .icon{width:21px;height:21px;stroke-width:2;display:block!important}
+.kid-icon{display:grid;place-items:center;flex:none;color:inherit}
+.kid-label{display:block}.kid-state{font-size:11px;line-height:1;min-width:25px;padding:4px 5px;background:#ffffffb3;border-radius:5px;color:var(--tone);font-weight:750}
+.kid-check{width:17px;height:17px;display:none;align-items:center;justify-content:center;background:#ffffff24;border-radius:50%;font-size:12px;flex:none}
+.kid-choice[aria-pressed="true"] .kid-check,.kid-choice[aria-selected="true"] .kid-check{display:flex}
+.kid-choice:not([aria-pressed="true"]):not([aria-selected="true"]) .kid-check{display:flex;visibility:hidden}
+body .kid-toggle[aria-pressed="true"] .kid-state{color:#fff;background:var(--tone)}
+body .kid-toggle[aria-pressed="true"]{outline:1px solid var(--tone);outline-offset:-4px}
+body .shell{padding-left:20px;padding-right:20px}
+body header{height:88px;gap:18px}
+body .tabs{padding:4px;background:transparent;gap:8px}
+body .tabs .tab{min-width:147px;font-size:16px;padding:10px 13px;min-height:49px}
+.tab-step{display:grid;place-items:center;width:23px;height:23px;border:1px solid currentColor;border-radius:50%;font-size:12px;opacity:.8;flex:none}
+body .head-actions{gap:8px}body .head-actions button{font-size:13px}
+body .head-actions .button-text,body .head-actions .optional{display:inline!important}
+body .workspace{grid-template-columns:minmax(0,1fr) 344px;gap:16px;padding-top:14px}
+body .stage-head h2{font-size:21px}body .stage-head{padding:12px 16px 9px}
+body .view-tools{gap:8px;padding:0 14px 13px;align-items:center}
+.tool-label{font-size:13px;font-weight:750;color:var(--kid-observe);display:flex;align-items:center;gap:5px;white-space:nowrap}
+.tool-label .icon{width:17px;height:17px}
+body .view-tools .segmented{padding:0;background:none;gap:6px;margin-right:auto}
+body .view-tools .kid-button{font-size:14px;min-height:44px;padding:8px 10px}
+body .view-tools>.kid-button{min-width:116px}
+body .side-section{padding:14px 16px}
+body .side-section .section-heading h3{font-size:17px;display:flex;align-items:center;gap:8px}
+.section-symbol{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--wash);color:var(--tone)}
+.section-symbol .icon{width:19px;height:19px}
+body .section-heading .section-symbol{color:var(--tone)}
+body #reset-btn{min-height:44px;font-size:12px;padding:7px 9px;box-shadow:none}
+body #heat-btn,body #sea-play-btn{min-height:58px;font-size:21px;gap:11px;justify-content:center}
+body #heat-btn .icon,body #sea-play-btn .icon{width:26px;height:26px}
+body #heat-btn .kid-state{font-size:12px;background:#ffffff26;color:#fff}
+body .control-label{font-size:15px}body input[type=range]{height:29px}body #heat-range,body #right-heat{accent-color:#b45220!important}
+body .coast-select{gap:6px}body .coast-select .kid-button{font-size:14px!important;min-height:60px;flex:1;display:flex;flex-direction:column;gap:5px;padding:8px 3px}
+body .coast-select .kid-check{position:absolute;right:5px;top:5px;width:14px;height:14px;font-size:10px}
+body .coast-select .icon{width:23px;height:23px}
+body .sea-temp-details>summary.kid-button{font-size:14px;display:flex;align-items:center;gap:8px;min-height:47px;list-style:none}
+body .sea-temp-details>summary::after{margin-left:auto;color:var(--tone);float:none;font-size:20px}
+body .sea-temp-popover{border-color:#e5c5a5;background:#fffcf7;padding:12px}
+body #sea-temp-close{width:100%;margin-top:9px}
+body .sea-temp-inline{margin-top:12px;font-size:14px!important}
+body .probe-select{gap:7px}body .probe-select .kid-button{font-size:15px;min-height:46px;flex:1;padding:7px}
+.probe-step-label{font-size:12px;color:var(--muted);margin:13px 0 7px;font-weight:650}
+body .probe-places{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:0}
+body .probe-places .kid-button{font-size:12px;min-height:44px;padding:6px 3px;gap:3px}
+body .probe-places .icon{width:15px;height:15px}
+body .probe-places .kid-check{width:12px;height:12px;font-size:10px}
+body .probe-readings{font-size:12px;margin-bottom:8px}body .probe-position{margin:9px 0 5px}
+body .probe-switches{gap:10px;flex-wrap:wrap}
+body .switch-row{min-height:44px;gap:8px;margin-bottom:8px;cursor:pointer}
+body .switch-row>span{font-size:14px!important}
+body .probe-switches .switch-row{min-width:130px;gap:5px}
+body .shell button.switch.kid-button{box-shadow:none;min-width:66px;width:66px;min-height:44px;height:44px;border:0!important;background:transparent!important;padding:0;display:block;flex:none}
+body .shell button.switch.kid-button::before{content:'';position:absolute;left:0;right:0;top:7px;height:30px;background:#e2eaf0;border:1.5px solid #9aaebd;border-radius:18px}
+body .shell button.switch.kid-button::after{width:22px;height:22px;top:11px;left:4px;border:1px solid #d4e0e8;background:#fff;box-shadow:0 1px 3px #193c4926}
+body .shell button.switch.kid-button[aria-checked="true"]::before{background:var(--tone);border-color:var(--tone)}
+body .shell button.switch.kid-button[aria-checked="true"]::after{left:40px}
+.switch-word{position:absolute;top:16px;right:11px;line-height:12px;font-size:12px;color:#465b69}
+[aria-checked="true"]>.switch-word{left:11px;right:auto;color:#fff}
+body #ground-panel .section-heading{margin-bottom:8px}
+body .bottom-bar{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.playback-group,.drawing-group{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.drawing-group{margin-left:auto}
+body .bottom-bar .kid-button{min-height:47px;font-size:14px;padding:8px 10px;flex:none}
+body .bottom-bar .record{margin-left:0}
+body[data-mode] .bottom-bar .record{margin-left:0;justify-self:stretch}
+body .bottom-bar #capture-btn .kid-icon{width:28px;height:28px;border-radius:8px;background:var(--tone);color:#fff}
+.draw-directions{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:12px;background:#f4edfb;color:#694185;flex-wrap:wrap}
+.draw-directions>span{font-size:13px;margin-right:auto}.draw-directions .kid-button{font-size:13px}
+body .record-guide .guide-items{display:none}body .record-guide .section-heading{display:none}
+body .record-guide{padding-top:12px;padding-bottom:12px}
+body .reference-button.kid-button{border-style:solid!important;box-shadow:none;font-size:13px}
+body .observation-strip{font-size:13px;padding:9px 13px;min-height:41px}
+body .sea-start button.kid-button{min-height:72px;font-size:27px;padding:17px 27px;border:2px solid #fff!important;box-shadow:0 5px 0 #0d4e37,0 12px 35px #102d4655}
+body .sea-start p{font-size:14px}body .sea-start{width:min(540px,86%)}
+body .modal .kid-button{font-size:14px}
+body .modal-header .close-button{min-width:44px;min-height:44px;padding:8px}
+body .freeze-badge{background:#18714e}body .draw-hint{background:#74449b}
+body #fx-feedback{position:fixed;pointer-events:none;z-index:60;overflow:hidden;opacity:0;contain:strict}
+#fx-feedback canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#fx-source{display:none}#fx-output{pointer-events:none}
+@media(min-width:1650px) and (min-height:870px){body .workspace{grid-template-columns:minmax(0,1fr) 370px}body .side-section{padding:17px 19px}body .view-tools .kid-button{font-size:16px}body .bottom-bar .kid-button{font-size:16px;min-height:50px}body .probe-places .kid-button{font-size:14px}body .probe-select .kid-button{font-size:17px}}
+@media(min-width:901px) and (max-height:830px){body header{height:76px}body .side-section{padding:10px 13px}body .side-section:has(#smoke-panel){padding:10px 13px}body .workspace{grid-template-columns:minmax(0,1fr) 326px}body .stage-head h2{font-size:18px}body .view-tools{padding-bottom:10px;gap:6px}body .view-tools .kid-button{font-size:12px;padding:7px 8px}body .view-tools>.kid-button{min-width:100px}body .tool-label{display:none}body #heat-btn,body #sea-play-btn{min-height:50px;font-size:19px}body .probe-step-label{margin-top:8px}body .probe-readings{display:none}body .probe-select .kid-button{min-height:44px}body .coast-select .kid-button{min-height:55px}body .bottom-bar .kid-button{font-size:12px;padding:7px 8px;gap:5px}body .observation-strip{font-size:12px}body .subnote{font-size:11px}}
+@media(min-width:901px) and (max-width:1200px){body .brand-symbol{display:none}body .brand p{display:none}body .brand h1{font-size:23px}body header{gap:9px}body .tabs .tab{min-width:122px;padding:8px;font-size:14px;gap:5px}body .head-actions button{font-size:12px;padding:7px}body .workspace{grid-template-columns:minmax(0,1fr) 308px}body .view-tools{flex-wrap:wrap}body .view-tools .segmented{margin-right:0}body .view-tools>.kid-button{flex:1}body .view-tools .tool-label{display:none}body .drawing-group{margin-left:0}body .bottom-bar{gap:8px}}
+@media(max-width:900px){body .shell{padding:0 12px}body header{height:auto;padding:13px 0;gap:11px}body .brand{width:100%;margin:0}body .brand h1{font-size:26px}body .tabs{order:1}body .head-actions{order:2;margin-left:auto;gap:6px}body .tabs .tab{font-size:14px;min-width:122px;padding:8px;min-height:46px}body .head-actions .kid-button{font-size:12px;padding:8px;min-height:46px}body .workspace{display:flex}body .stage-wrap{min-height:420px}body .view-tools{display:flex;flex-wrap:wrap}body .tool-label{display:none}body .view-tools .kid-button{font-size:13px}body .canvas-area{height:380px;min-height:260px}body aside{display:grid;grid-template-columns:1fr 1fr}body .bottom-bar .kid-button{font-size:13px}body .record-guide{grid-column:1/-1}body .drawing-group{margin-left:0}body .sea-start button.kid-button{font-size:23px;min-height:62px}}
+@media(max-width:560px){body header{gap:9px}body .tabs{width:100%;padding:0;gap:8px}body .tabs .tab{flex:1;min-height:48px;min-width:0;font-size:15px}body .head-actions{width:100%;margin:0;display:grid;grid-template-columns:1fr 1.25fr 1fr}body .head-actions .kid-button{font-size:12px;gap:5px;min-height:44px;padding:7px}body .head-actions .kid-button .icon{width:18px;height:18px}body .brand-symbol{width:38px;height:38px}body .brand h1{font-size:25px}body .brand p{font-size:11px}body .stage-head{padding:12px}body .stage-head h2{font-size:17px!important}body .stage-head .status{display:none}body .view-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 12px}body .view-tools .segmented{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;width:100%;gap:8px}body .view-tools .kid-button{width:100%;font-size:12px;min-height:45px;padding:7px 6px;gap:6px}body .view-tools>.kid-button{min-width:0}body .view-tools .icon{width:19px;height:19px}body .canvas-area{height:270px;min-height:245px}body .stage-wrap{min-height:425px}body .stage-caption{font-size:10px;padding:7px 10px}body .bottom-bar{display:grid;grid-template-columns:1fr;gap:9px}body .playback-group{display:flex;gap:7px}body .playback-group .kid-button{flex:1}body .drawing-group{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:7px}body .bottom-bar .kid-button{font-size:12px;padding:8px 5px;gap:4px;min-height:47px}body .bottom-bar .kid-button .icon{width:18px;height:18px}body .bottom-bar #capture-btn .kid-icon{width:22px;height:25px}body .bottom-bar .kid-state{display:none}body aside{display:block}body .side-section{padding:16px}body .probe-readings{display:block}body .probe-places .kid-button{min-height:46px;font-size:13px}body .probe-select .kid-button{font-size:16px}body .draw-directions{gap:6px}body .draw-directions>span{flex-basis:100%}body .draw-directions .kid-button{flex:1;padding:8px;font-size:12px;gap:4px}body .sea-start button.kid-button{font-size:20px;min-height:58px;padding:12px 19px}body .sea-start{top:42%}body .modal-backdrop{padding:10px}body .modal{max-height:calc(100dvh - 20px)}body .modal-foot{flex-wrap:wrap}body .modal-foot .kid-button{flex:1;white-space:normal}body .observation-strip{font-size:12px}}
+@media(prefers-color-scheme:dark){
+ :root{--focus:#e6ba64;--kid-heat:#ffc08e;--kid-observe:#acd9ff;--kid-play:#a3e3bf;--kid-record:#dfc5fa}
+ body .kid-button{--tone:#d2e1e9;--wash:#2b414b;--edge:#536977;--lift:#0c1c26;--hover:#344f5c;--active:#536c79;--on:#fff}
+ body [data-tone="heat"]{--tone:#ffc08e;--wash:#493429;--edge:#9d704e;--active:#a94617;--hover:#5c402d;--lift:#291d15}
+ body [data-tone="observe"]{--tone:#acd9ff;--wash:#243e55;--edge:#527a9d;--active:#185f94;--hover:#304e69;--lift:#152332}
+ body [data-tone="play"]{--tone:#a3e3bf;--wash:#264638;--edge:#5c8e72;--active:#18714e;--hover:#315641;--lift:#142c21}
+ body [data-tone="record"]{--tone:#dfc5fa;--wash:#433353;--edge:#8f72a5;--active:#74449b;--hover:#544069;--lift:#2a1e36}
+ body [data-tone="night"]{--tone:#c3d0ff;--wash:#303958;--edge:#7684ac;--active:#384c84;--hover:#404c70;--lift:#22283a}
+ body .kid-state{background:#12232c;color:var(--tone)}body .kid-toggle[aria-pressed="true"] .kid-state{color:#152b36;background:var(--tone)}
+ body .sea-temp-popover{background:#2b302e;border-color:#8b6a4e}body .draw-directions{background:#382e47;color:#e2cef4}
+ body .shell button.switch.kid-button[aria-checked="true"]::before{background:var(--active);border-color:var(--edge)}
+ body #capture-btn .kid-icon{background:var(--active)!important}
+}
+@media(prefers-reduced-motion:reduce){body .kid-button{transition:none!important}body .kid-button:hover,body .kid-button:active{transform:none!important}#fx-feedback{display:none}}
+@media(max-width:560px){body[data-mode] .playback-group .kid-button{flex:1}}
+
+
+
+/* v8 laboratory language: one accent; red/blue belong to scientific data only. */
+:root{--kid-heat:#286970;--kid-observe:#286970;--kid-play:#286970;--kid-record:#286970;--focus:#2b7078;--teal:#287981;--teal-light:#edf5f5}
+body .kid-button,body [data-tone]{--tone:#325b66;--wash:#f2f6f7;--edge:#c4d5da;--lift:#b8c9cf;--active:#287981;--on:#fff;--hover:#e6f0f2}
+body .shell .kid-button,body .modal .kid-button,body .shell summary.kid-button{border-radius:9px;box-shadow:none!important;transition:background .14s,border-color .14s}
+body .shell .kid-button:hover:not(:disabled),body .modal .kid-button:hover:not(:disabled),body .shell summary.kid-button:hover{transform:none}
+body .shell .kid-button:active:not(:disabled),body .modal .kid-button:active:not(:disabled){transform:translateY(1px)}
+body .tabs .tab{border-radius:10px}
+body .kid-button.kid-toggle[aria-pressed="true"]{outline:none;background:#e5f1f2!important;border-color:#80aeb4!important}
+body .kid-toggle[aria-pressed="true"] .kid-state{background:#287981;color:#fff}
+body .kid-state{background:#e2ebee;color:#44646e;border-radius:4px}
+body .kid-primary .kid-state{background:#ffffff26;color:#fff}
+body .section-symbol{background:#e8f0f2;border-radius:8px}
+body .draw-directions{background:#edf3f5;color:#325b66;border:1px solid #d1dfe3}
+body .sea-temp-popover{background:#f6f9fa;border-color:#c4d5da}
+body .observation-strip{background:#e8f0f1;color:#335c65}
+body .shell #capture-btn .kid-icon{background:#287981!important}
+body .draw-hint,body .freeze-badge{background:#287981}
+body .shell #sea-start-btn{border:1.5px solid #c4dedf!important;box-shadow:0 8px 24px #102d4633!important;border-radius:12px}
+body #heat-range,body #right-heat,body #left-heat{accent-color:#287981!important}
+body #heat-output{color:#325b66}
+@media(prefers-color-scheme:dark){
+ :root{--kid-heat:#b7d8dd;--kid-observe:#b7d8dd;--kid-play:#b7d8dd;--kid-record:#b7d8dd;--focus:#a5d6dc;--teal:#69aeb5;--teal-light:#29454d}
+ body .kid-button,body [data-tone]{--tone:#c2d9de;--wash:#293e48;--edge:#536c77;--lift:#15262d;--active:#337b83;--on:#fff;--hover:#344d57}
+ body .kid-button.kid-toggle[aria-pressed="true"]{background:#2b5059!important;border-color:#719da5!important}
+ body .kid-toggle[aria-pressed="true"] .kid-state{background:#a9d3d9;color:#15363e}
+ body .kid-state{background:#1a303a;color:#c2d9de}
+ body .kid-primary .kid-state{background:#ffffff26;color:#fff}
+ body .section-symbol{background:#29414b}body .sea-temp-popover{background:#233a44;border-color:#536c77}
+ body .draw-directions,body .observation-strip{background:#29434b;color:#c6dfe3}
+ body .shell #capture-btn .kid-icon{background:#337b83!important}
+ body #heat-output{color:#c2d9de}
+}
+
 </style>
 </head>
 <body>
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
-<symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 7h12a3 3 0 1 0-3-3M2 12h17a3 3 0 1 1-3 3M5 17h4a3 3 0 1 1-3 3"></path></symbol>
-<symbol id="i-fire" viewBox="0 0 24 24"><path d="M13 2c1 6-5 5-4 10-2-1-2-3-2-3-7 9 2 15 8 12 7-3 5-10 1-13 0 3-2 3-2 3 1-4 0-6-1-9Z"></path></symbol>
-<symbol id="i-extinguish" viewBox="0 0 24 24"><path d="M13 2c1 5-4 5-4 9-2-1-2-3-2-3-5 7-1 13 5 13 6 0 9-6 5-11M3 3l18 18"></path></symbol>
-<symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="4"></path></symbol>
-<symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z"></path></symbol>
-<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 19 20 3M9 3h11v11"></path></symbol>
-<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></symbol>
-<symbol id="i-sound" viewBox="0 0 24 24"><path d="M3 9h4l5-5v16l-5-5H3ZM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"></path></symbol>
-<symbol id="i-mute" viewBox="0 0 24 24"><path d="M3 9h4l5-5v16l-5-5H3ZM16 9l6 6m0-6-6 6"></path></symbol>
-<symbol id="i-camera" viewBox="0 0 24 24"><path d="M3 6h4l2-3h6l2 3h4v15H3Z"></path><circle cx="12" cy="13" r="4"></circle></symbol>
-<symbol id="i-book" viewBox="0 0 24 24"><path d="M3 4h7l2 2 2-2h7v16h-7l-2 2-2-2H3ZM12 6v16"></path></symbol>
-<symbol id="i-screen" viewBox="0 0 24 24"><path d="M3 9V3h6m6 0h6v6M3 15v6h6m6 0h6v-6"></path></symbol>
-<symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7"></path></symbol>
-<symbol id="i-slow" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l-3 2M9 2h6M12 2v3"></path></symbol>
-<symbol id="i-erase" viewBox="0 0 24 24"><path d="m3 15 11-11 7 7-10 10H8Zm4-4 7 7M11 21h10"></path></symbol>
-<symbol id="i-light" viewBox="0 0 24 24"><path d="M8 16a7 7 0 1 1 8 0l-1 3H9ZM9 22h6M12 1v1"></path></symbol>
-<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M3 16v5h18v-5"></path></symbol>
-<symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"></path></symbol>
+<symbol id="i-wind" viewBox="0 0 24 24"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"></path><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"></path><path d="M9.8 4.4A2 2 0 1 1 11 8H2"></path></symbol>
+<symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></symbol>
+<symbol id="i-extinguish" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"></path></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1"></rect><rect x="5" y="3" width="5" height="18" rx="1"></rect></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></symbol>
+<symbol id="i-sound" viewBox="0 0 24 24"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><line x1="22" x2="16" y1="9" y2="15"></line><line x1="16" x2="22" y1="9" y2="15"></line></symbol>
+<symbol id="i-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"></path><circle cx="12" cy="13" r="3"></circle></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></symbol>
+<symbol id="i-screen" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></symbol>
+<symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></symbol>
+<symbol id="i-slow" viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></symbol>
+<symbol id="i-erase" viewBox="0 0 24 24"><path d="M21 21H8a2 2 0 0 1-1.42-.587l-3.994-3.999a2 2 0 0 1 0-2.828l10-10a2 2 0 0 1 2.829 0l5.999 6a2 2 0 0 1 0 2.828L12.834 21"></path><path d="m5.082 11.09 8.828 8.828"></path></symbol>
+<symbol id="i-light" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M10 5H3"></path><path d="M12 19H3"></path><path d="M14 3v4"></path><path d="M16 17v4"></path><path d="M21 12h-9"></path><path d="M21 19h-5"></path><path d="M21 5h-7"></path><path d="M8 10v4"></path><path d="M8 12H3"></path></symbol>
+<symbol id="i-thermometer" viewBox="0 0 24 24"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"></path></symbol>
+<symbol id="i-particles" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="1"></circle></symbol>
+<symbol id="i-smoke" viewBox="0 0 24 24"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></symbol>
+<symbol id="i-wheel" viewBox="0 0 24 24"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"></path><path d="M12 12v.01"></path></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></symbol>
+<symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"></path><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"></path></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m5 12 7-7 7 7"></path><path d="M12 19V5"></path></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></symbol>
 </defs></svg>
 <div class="shell">
-<header><div class="lab-issue" aria-label="物质科学；核心01 物质的结构与性质；关联 10 地球系统 / 04 能量"><span class="lesson-no">07</span><span class="domain-label">物质科学</span><span class="core-label">核心 01 物质的结构与性质</span><span class="related-label">关联 10 地球系统 / 04 能量</span></div>
+<header>
 <div class="brand"><div class="brand-symbol"><svg class="icon"><use href="#i-wind"></use></svg></div><div><h1>风的成因</h1><p>四年级 · 空气流动互动实验室</p></div></div>
 <nav aria-label="选择实验模型" class="tabs" role="tablist"><button aria-controls="box-controls" aria-selected="true" class="tab" id="tab-box" role="tab">1　模拟实验</button><button aria-controls="convection-controls" aria-selected="false" class="tab" id="tab-convection" role="tab">2　海陆风</button></nav>
-<div class="head-actions"><button aria-pressed="true" id="sound-btn" title="音效已开启，首次点击页面后启用；风声为教学增强"><svg class="icon"><use href="#i-sound"></use></svg><span class="button-text optional" id="sound-label">音效开</span></button><button id="archive-btn"><svg class="icon"><use href="#i-book"></use></svg><span class="button-text">记录夹</span><span id="record-count">0</span></button><button id="fullscreen-btn" title="全屏显示"><svg class="icon"><use href="#i-screen"></use></svg><span class="button-text optional">全屏</span></button></div>
+<div class="head-actions"><button aria-pressed="true" id="sound-btn" title="音效已开启，首次点击页面后启用；风声为教学增强"><svg class="icon"><use href="#i-sound"></use></svg><span class="button-text optional" id="sound-label">音效开</span></button><button class="kid-button" data-tone="record" id="archive-btn"><svg class="icon"><use href="#i-book"></use></svg><span class="button-text">我的记录</span><span id="record-count">0</span></button><button id="fullscreen-btn" title="全屏显示"><svg class="icon"><use href="#i-screen"></use></svg><span class="button-text optional">全屏</span></button></div>
 </header>
 <main class="workspace">
 <section aria-label="交互实验画面" class="left">
 <div class="stage-wrap">
-<div class="stage-head"><h2 id="stage-title">用烟迹与风轮，寻找空气流动的证据</h2><div class="status" id="status"><span class="status-dot"></span><span id="status-text">尚未加热</span></div></div>
-<div class="view-tools">
+<div class="stage-head"><h2 id="stage-title">观察空气怎样流动</h2><div class="status" id="status"><span class="status-dot"></span><span id="status-text">尚未加热</span></div></div>
+<div class="view-tools"><span class="tool-label"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>观察</span>
 <div aria-label="观察与解释视图" class="segmented"><button aria-pressed="true" id="view-observe">观察现象</button><button aria-pressed="false" id="view-particle">微粒解释</button></div>
 <button aria-pressed="false" class="toggle" id="arrows-btn"><svg class="icon"><use href="#i-arrow"></use></svg>气流箭头</button><button aria-pressed="false" class="toggle" id="heatmap-btn">温度色层</button>
 </div>
 <div class="canvas-area" id="canvas-area">
-<canvas aria-label="风的成因教学模型。可分别拖动香与金属风轮，或用位置按钮比较气流；第二页可选择白天、黑夜和通用海陆场景。" id="scene">你的浏览器不支持 Canvas，请使用支持 Canvas 的浏览器。</canvas>
-<div id="sea-start" class="sea-start" hidden><button id="sea-start-btn"><svg class="icon"><use href="#i-play"/></svg><span>开始模拟冷热差异</span></button><p>先观察原背景，再模拟受热或冷却形成温差</p></div>
-<div class="canvas-hint" id="canvas-hint">拖动香或金属风轮，也可点击位置按钮</div>
+<canvas aria-label="风的成因教学模型。可拖动香并用烟雾观察气流，也可按需打开金属风轮辅助判断；第二页可选择白天、黑夜和通用海陆场景。" id="scene">你的浏览器不支持 Canvas，请使用支持 Canvas 的浏览器。</canvas>
+<div id="sea-start" class="sea-start" hidden><button id="sea-start-btn"><svg class="icon"><use href="#i-play"/></svg><span>开始模拟冷热差异</span></button><p>改变温差，观察空气和风向袋</p></div>
+<div class="canvas-hint" id="canvas-hint">先观察香的烟；需要时再打开金属风轮</div>
 <div class="freeze-badge" hidden="" id="freeze-badge"><svg class="icon"><use href="#i-pause"></use></svg>画面已定格</div>
 <div class="draw-hint" hidden="" id="draw-hint">在画面上拖出箭头，指出空气流向</div>
 </div>
 <div class="stage-caption"><div class="legend" id="legend"><span><i class="dot smoke"></i>烟粒：帮助追踪空气</span></div><span class="caption-note" id="caption-note">烟迹增强显示 · 非真实比例</span></div>
 </div>
-<div class="bottom-bar">
+<div class="bottom-bar"><div class="playback-group" role="group" aria-label="播放控制">
 <button id="pause-btn"><svg class="icon"><use href="#i-pause"></use></svg><span>暂停</span></button>
 <button id="sea-replay-btn" hidden><svg class="icon"><use href="#i-reset"/></svg><span>重播</span></button>
 <button aria-pressed="false" class="toggle" id="slow-btn"><svg class="icon"><use href="#i-slow"></use></svg><span>慢放</span></button>
-<button aria-pressed="false" class="toggle" id="draw-btn"><svg class="icon"><use href="#i-arrow"></use></svg><span>画箭头</span></button>
+</div><div class="drawing-group" role="group" aria-label="画箭头和记录"><button aria-pressed="false" class="toggle" id="draw-btn"><svg class="icon"><use href="#i-arrow"></use></svg><span>画箭头</span></button>
 <button id="clear-btn" title="清除自己画的箭头"><svg class="icon"><use href="#i-erase"></use></svg><span>清除</span></button>
-<button class="primary record" id="capture-btn"><svg class="icon"><use href="#i-camera"></use></svg><span>定格记录</span></button>
-</div>
-<div class="observation-strip"><svg class="icon"><use href="#i-eye"></use></svg><span id="observation-text"><b>先做对照：</b>蜡烛不点燃，烟怎样移动？金属风轮是否转动？</span></div>
+<button class="primary record" id="capture-btn"><svg class="icon"><use href="#i-camera"></use></svg><span>拍照记录</span></button>
+</div></div>
+<div class="draw-directions" id="draw-directions" role="group" aria-label="点击方向画箭头" hidden><span>点方向，也能画箭头</span><button data-draw-direction="left">向左</button><button data-draw-direction="right">向右</button><button data-draw-direction="up">向上</button><button data-draw-direction="down">向下</button></div>
+<div class="observation-strip"><svg class="icon"><use href="#i-eye"></use></svg><span id="observation-text"><b>先做对照：</b>蜡烛不点燃，烟怎样移动？可再打开金属风轮比较。</span></div>
 </section>
 <aside aria-label="实验控制与观察提示">
 <div class="side-section">
-<div class="section-heading"><h3>改变条件</h3><button class="small quiet" id="reset-btn" title="重置当前模型，不删除记录"><svg class="icon" style="width:14px;height:14px"><use href="#i-reset"></use></svg>重置</button></div>
+<div class="section-heading"><h3><span class="section-symbol" data-tone="heat"><svg class="icon" aria-hidden="true"><use href="#i-fire"/></svg></span>动手做实验</h3><button class="small quiet" id="reset-btn" title="重置当前模型，不删除记录"><svg class="icon" style="width:14px;height:14px"><use href="#i-reset"></use></svg>重置</button></div>
 <div aria-labelledby="tab-box" id="box-controls" role="tabpanel">
 <button class="warm heat-button" id="heat-btn"><svg class="icon"><use href="#i-fire"></use></svg><span>点燃蜡烛</span></button>
-<label class="control-label" for="heat-range"><span>加热强度</span><output id="heat-output">中</output></label><input class="heat-range" id="heat-range" max="3" min="1" step="1" type="range" value="2"/><div class="range-labels"><span>低</span><span>中</span><span>高</span></div>
+<label class="control-label" for="heat-range"><span>火焰大小</span><output id="heat-output">中</output></label><input class="heat-range" id="heat-range" max="3" min="1" step="1" type="range" value="2"/><div class="range-labels"><span>低</span><span>中</span><span>高</span></div>
 <p class="subnote">点燃前后作对照；熄灭后观察余热。</p>
 </div>
 <div aria-labelledby="tab-convection" hidden id="convection-controls" role="tabpanel">
@@ -163,7 +351,7 @@ body .muted,body .rail-title,body .section-heading,body .control-label,body .con
 <button class="primary sea-play" id="sea-play-btn"><svg class="icon"><use href="#i-play"/></svg><span>开始模拟冷热差异</span></button>
 <div class="sea-condition-summary" id="sea-condition-summary">白天：陆地近地面空气较暖</div>
 <div class="sea-temp-inline" id="sea-temp-inline">海 24 ℃　/　陆 32 ℃ <span>示例</span></div>
-<details class="sea-temp-details" id="sea-temp-details"><summary>调节气温 · 同温对照</summary><div class="sea-temp-popover"><label class="control-label" for="left-heat"><span>海面附近气温</span><output id="left-output">24 ℃</output></label><input aria-label="海面附近气温情境示例" id="left-heat" min="5" max="40" step="1" type="range" value="24"/>
+<details class="sea-temp-details" id="sea-temp-details"><summary class="kid-button" data-tone="heat"><svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg>自己调温度</summary><div class="sea-temp-popover"><label class="control-label" for="left-heat"><span>海面附近气温</span><output id="left-output">24 ℃</output></label><input aria-label="海面附近气温情境示例" id="left-heat" min="5" max="40" step="1" type="range" value="24"/>
 <label class="control-label" for="right-heat"><span>陆地近地面气温</span><output id="right-output">32 ℃</output></label><input aria-label="陆地近地面气温情境示例" class="heat-range" id="right-heat" min="5" max="40" step="1" type="range" value="32"/>
 <button class="small equal-button" id="equal-btn">两侧同温，作对照</button>
 <p class="subnote" id="custom-condition">气温为情境示例，非实测。调温可自由对照。</p><button id="sea-temp-close" class="small">完成调温</button></div></details>
@@ -171,24 +359,24 @@ body .muted,body .rail-title,body .section-heading,body .control-label,body .con
 </div>
 <div class="side-section">
 <div id="smoke-panel">
-<div class="section-heading probe-heading"><h3>移动探测工具</h3><span>可分别拖动</span></div>
-<div aria-label="当前移动的工具" class="probe-select" role="group"><button aria-pressed="true" class="selected" data-probe="incense">香</button><button aria-pressed="false" data-probe="wheel">金属风轮</button></div>
-<div aria-label="把当前工具移到测试位置" class="probe-places"><button aria-pressed="true" class="selected" data-probe-place="inlet">横筒开口</button><button aria-pressed="false" data-probe-place="inside">横筒内部</button><button aria-pressed="false" data-probe-place="top">竖筒上方</button><button aria-pressed="false" data-probe-place="wall">竖筒外侧</button><button aria-pressed="false" data-probe-place="far">远处</button></div>
+<div class="section-heading probe-heading"><h3><span class="section-symbol" data-tone="observe"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg></span>用工具找风</h3></div>
+<p class="probe-step-label">选一个工具</p><div aria-label="当前移动的工具" class="probe-select" role="group"><button aria-pressed="true" class="selected" data-probe="incense">香</button><button aria-pressed="false" data-probe="wheel">金属风轮</button></div>
+<p class="probe-step-label">再选放在哪里</p><div aria-label="把当前工具移到测试位置" class="probe-places"><button aria-pressed="true" class="selected" data-probe-place="inlet">横筒开口</button><button aria-pressed="false" data-probe-place="inside">横筒内部</button><button aria-pressed="false" data-probe-place="top">竖筒上方</button><button aria-pressed="false" data-probe-place="wall">竖筒外侧</button><button aria-pressed="false" data-probe-place="far">远处</button></div>
 <p class="probe-position" id="probe-position">香：横筒开口</p>
 <div class="probe-readings"><div><span>香的烟</span><strong id="incense-reading">烟主要上升、飘散</strong></div><div><span>金属风轮</span><strong id="wheel-reading">未见明显转动</strong></div></div>
-<div class="probe-switches"><div class="switch-row"><span>烟迹</span><button aria-checked="true" aria-label="显示香的烟迹" class="switch" id="smoke-btn" role="switch"></button></div><div class="switch-row"><span>风轮</span><button aria-checked="false" aria-label="显示金属风轮" class="switch" id="wheel-btn" role="switch"></button></div></div>
+<div class="probe-switches"><div class="switch-row"><span>看烟</span><button aria-checked="true" aria-label="显示香的烟迹" class="switch" id="smoke-btn" role="switch"></button></div><div class="switch-row"><span>看风轮</span><button aria-checked="false" aria-label="显示金属风轮" class="switch" id="wheel-btn" role="switch"></button></div></div>
 </div>
 <div hidden id="ground-panel">
-<div class="section-heading"><h3>观察高度与方向</h3></div>
-<div class="switch-row"><span>突出近地面</span><button aria-checked="true" aria-label="突出近地面气流" class="switch" id="ground-btn" role="switch"></button></div>
-<div class="switch-row"><span>成云演示</span><button aria-checked="false" aria-label="显示湿空气成云示意" class="switch" id="sea-cloud-btn" role="switch"></button></div>
-<div class="sea-detail-buttons"><button id="sea-zoom-btn" class="toggle" aria-pressed="false">放大低空</button><button id="sea-moist-btn" class="toggle" aria-pressed="true" hidden>水汽充足</button></div>
-<div class="sea-scale-note"><strong id="sea-height-note">本例环流上界约 1000 m</strong><span id="sea-layer-note">本例上方回流约 600—700 m</span></div>
+<div class="section-heading"><h3><span class="section-symbol" data-tone="observe"><svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg></span>想看什么，点一下</h3></div>
+<div class="switch-row"><span>看近地面的风</span><button aria-checked="true" aria-label="突出近地面气流" class="switch" id="ground-btn" role="switch"></button></div>
+<div class="switch-row"><span>看云朵</span><button aria-checked="true" aria-label="显示湿空气成云示意" class="switch" id="sea-cloud-btn" role="switch"></button></div>
+<div class="sea-detail-buttons"><button id="sea-zoom-btn" class="toggle" aria-pressed="false" hidden>放大低空</button><button id="sea-moist-btn" class="toggle" aria-pressed="true">水汽充足</button></div>
+<div class="sea-scale-note"><strong id="sea-height-note">本例环流上界约 1000 m（当前标尺 0-1000 m）</strong><span id="sea-layer-note">上方回流约 600-800 m</span></div>
 <p class="subnote" id="sea-cloud-note" hidden>湿空气上升冷却到凝结条件后，才形成云滴。</p>
 </div>
 <div hidden="" id="flow-summary" style="margin-top:8px"><div class="flow-label"><span>定向气流</span><strong id="flow-value">尚不明显</strong></div><div aria-hidden="true" class="meter"><span id="flow-meter"></span></div></div>
-<div class="volume-row"><svg class="icon"><use href="#i-sound"></use></svg><input aria-label="音效音量" id="volume-range" max="100" min="0" type="range" value="45"/><output id="volume-output">45%</output></div>
-<p class="subnote">模拟风声随气流变化，可调音量。</p>
+<div class="volume-row"><svg class="icon"><use href="#i-sound"></use></svg><input aria-label="音效音量" id="volume-range" max="100" min="0" type="range" value="18"/><output id="volume-output">18%</output></div>
+<p class="subnote">轻风与烛焰音效，可调音量。</p>
 </div>
 <div class="side-section record-guide">
 <div class="section-heading"><h3>带着观察去记录</h3><span>写现象 · 画方向</span></div>
@@ -201,21 +389,9 @@ body .muted,body .rail-title,body .section-heading,body .control-label,body .con
 </div>
 <div class="modal-backdrop" hidden="" id="record-modal"><section aria-labelledby="record-title" aria-modal="true" class="modal" role="dialog"><div class="modal-header"><div><h2 id="record-title">把这一次观察留下来</h2><p>画面已定格，先写看到的现象，再解释原因。</p></div><button aria-label="关闭记录窗口" class="close-button" data-close="record-modal">×</button></div><div class="modal-body"><div class="record-grid"><div><div class="snapshot-box"><img alt="本次实验的定格画面" id="snapshot"/></div><div class="snapshot-meta" id="snapshot-meta"></div><p class="field-note">需要画箭头：关闭窗口，在主画面点击“画箭头”，完成后再次定格记录。</p><button aria-expanded="false" class="reference-button" id="record-reference-btn">看一看本次记录参考</button><div class="explanation" hidden="" id="record-reference"></div></div><div class="record-fields"><label for="record-name">本次观察名称</label><input id="record-name" maxlength="60" type="text"/><label for="record-observed">我看到的现象</label><textarea id="record-observed" maxlength="800" placeholder="烟怎样移动？空气流动方向有什么变化？"></textarea><label for="record-reason">我的解释</label><textarea id="record-reason" maxlength="800" placeholder="哪部分空气受热？周围的空气怎样移动？"></textarea><p class="field-note">可以直接在作业本上记录，不必在这里打字。网页记录仅保存在当前浏览器。</p></div></div></div><div class="modal-foot"><span>定格后不会自动播放；返回主画面可继续观察。</span><button id="download-record-btn"><svg class="icon"><use href="#i-download"></use></svg>保存记录图片</button><button class="primary" id="save-record-btn"><svg class="icon"><use href="#i-check"></use></svg>加入记录夹</button></div></section></div>
 <div class="modal-backdrop" hidden="" id="archive-modal"><section aria-labelledby="archive-title" aria-modal="true" class="modal" role="dialog"><div class="modal-header"><div><h2 id="archive-title">我的观察记录夹</h2><p>并排比较不同条件下的记录；最多保留 8 次。</p></div><button aria-label="关闭记录夹" class="close-button" data-close="archive-modal">×</button></div><div class="modal-body" id="archive-body"></div><div class="modal-foot"><span id="storage-status">记录仅存于这台设备的当前浏览器。</span><button id="export-all-btn"><svg class="icon"><use href="#i-download"></use></svg>导出文字记录</button><button class="primary" data-close="archive-modal">返回实验</button></div></section></div>
-<div class="modal-backdrop" hidden="" id="help-modal"><section aria-labelledby="help-title" aria-modal="true" class="modal help" role="dialog"><div class="modal-header"><h2 id="help-title">使用说明与模型边界</h2><button aria-label="关闭使用说明" class="close-button" data-close="help-modal">×</button></div><div class="modal-body"><h3>第一页：双筒模拟实验</h3><p>装置按本次提供的教材图建模：竖立塑料筒内的空气代表大气层，横筒内的空气代表地面附近的大气，蜡烛用于模拟局部加热。香的烟为示踪物，金属风轮为可移动的虚拟探测工具。</p><p>香与风轮可以分别拖动；也可以先选择工具，再点击“横筒开口、横筒内部、竖筒上方、竖筒外侧、远处”。相邻位置会轻微吸附，其余位置保留自由放置。点燃、熄灭和加热强度可反复改变。</p><h3>第二页：实景背景 + 海岸垂直剖面</h3><p>使用本次生成的白天、夜晚及通用海岸大场景。切换到第二页或选择场景后先停留在背景；点击“开始模拟冷热差异”再显示运动。切换白天与夜晚是比较两个情境，不是按真实时间模拟一整天。</p><p>为了不把航拍远近误当成海拔，在背景之上叠加独立的垂直剖面：横向10千米，纵向海拔0—1000米，0米为理想化平直海岸的海面/低平地基准。它不是照片标定，不推断远山或照片中云的实际高度；标尺上端也不是对流层顶。本页固定聚焦0—1千米。</p><p>海风/陆风是对流层低层的局地环流，不是全球大气大循环。NOAA资料描述的白天回流常见于约1000—1500米。为聚焦0—1千米，本网页选用浅层教学示例：白天环流上界1000米，夜间700米。它们不代表典型或固定高度；前述NOAA常见回流高度并未被缩放为本例。这些高度不是固定标准。实际厚度、范围与回流结构会随背景风、地形和稳定度改变，真实环流不必是完整闭合的二维环。</p><p>白天气温示例为海面附近24℃、陆地近地面32℃；夜间分别22℃和17℃。气温只用于设定模型温差，不是实测数据。近地面水平气压差驱动风；上升与补偿下沉把低层与上方气流联系起来。比较气压时应比较同一高度，而不是把高空气压与地面直接相比。</p><h3>粒子、颜色与云</h3><p>小粒子是随流场移动的空气示踪点，不按真实分子尺度绘制。颜色表示本情境内的相对气温；上升粒子随膨胀冷却，下沉随压缩增温，近地面可与环境交换热量。温度色层的海陆差异随高度减弱，不把整片高空涂成一直发热的红柱。</p><p>“成云演示”仅模拟湿空气上升到凝结条件后云滴出现、随所在高度气流移动，并在混入干空气或下降增温时消散；不是把整朵云固定在一个轨道上绕圈。湿润示例的凝结起始高度取1000米；水汽较少的示例取2600米，因此在本例浅薄夜间环流中不自动成云。这不代表现实中夜晚没有云。背景中已有的云是静态场景，不参与高度测量或气流计算。云的生成还需要水汽、冷却、凝结核等条件，并非有风就一定有云。</p><h3>观察与记录</h3><p>保留暂停、四分之一速慢放、画箭头、定格记录、记录夹与图片导出。参考解释默认收起。画箭头时自动定格；退出画箭头后才能拖动工具。点击定格记录会同时保存背景、色层、粒子、工具位置与自己的箭头。</p><p>空格：暂停/继续；M：音效开关；Esc：关闭弹窗或退出画箭头。音效需首次点击后启用，暂停或切到后台时连续风声减弱至静音。全部图像和音效均在本文件内，页面运行不依赖网络。记录保存在当前浏览器；储存空间不足时可导出图片。</p><h3>模型边界与实验提醒</h3><p>烟不是空气，也不是产生风的原因；香自身的热烟在蜡烛未点燃时也会上升。风轮有启动阈值和惯性，未见转动不能据此断言空气完全不动。模型自动调整风轮的迎风角度；转速仅用于观察比较，不是风速读数。虚拟探测器放入筒内时，不计算其对气流的阻挡。</p><p>本模型以连续的示意流场显示主要气流，不是精确流体计算。烟与空气粒子只从连通口和开放端进出，不能穿过筒壁。蜡烛熄灭后，温差、气流和转动逐渐减弱。海陆模型使用预设的二维质量流函数，满足理想化质量连续性；不求解完整动量、辐射、三维地形、背景风或科里奥利力。成云为给定凝结高度的定性展示，不是完整湿物理计算；粒子大小和动画时间经教学化处理，不能读作真实风速或形成时间。</p><p>网页不能作为明火实验的安全搭建图。真实实验应由教师规范组织，避免火焰接触塑料与纸质材料，不将风轮或手伸向火焰。装置造型与模型对应关系见提供的四上教材第21页；白天海风拓展见第22页。</p><h3>依据与外部核对</h3><p>教材与教师用书：四上《风的成因》；教材第21页双筒装置、第22页白天海风。教材用于确定教学要点；以下公开资料用于补充高度、夜间层结和成云条件，不能把这些数值反推为教材中的固定结论。</p><p><a href="https://www.noaa.gov/jetstream/ocean/sea-breeze" target="_blank" rel="noopener noreferrer">NOAA JetStream：The Sea Breeze</a>（海风回流高度、夜间陆风较浅较弱）。<br/><a href="https://www.ndbc.noaa.gov/education/seabreeze_ans.shtml" target="_blank" rel="noopener noreferrer">NOAA NDBC：What are sea breezes?</a>（海陆风方向与冷热差异）。<br/><a href="https://scied.ucar.edu/learning-zone/clouds/clouds-form-surface-heating" target="_blank" rel="noopener noreferrer">UCAR：Clouds Form Due to Surface Heating</a>（上升膨胀冷却与凝结）。<br/><a href="https://scied.ucar.edu/learning-zone/atmosphere/troposphere" target="_blank" rel="noopener noreferrer">UCAR：The Troposphere</a>（本页仅显示对流层底部）。</p></div><div class="modal-foot"><button class="primary" data-close="help-modal">开始观察</button></div></section></div>
-<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<div class="modal-backdrop" hidden="" id="help-modal"><section aria-labelledby="help-title" aria-modal="true" class="modal help" role="dialog"><div class="modal-header"><h2 id="help-title">使用说明与模型边界</h2><button aria-label="关闭使用说明" class="close-button" data-close="help-modal">×</button></div><div class="modal-body"><h3>第一页：双筒模拟实验</h3><p>装置按本次提供的教材图建模：竖立塑料筒内的空气代表大气层，横筒内的空气代表地面附近的大气，蜡烛用于模拟局部加热。香的烟为主要示踪物，金属风轮为可选的辅助探测工具。</p><p>香与金属风轮可以分别拖动；也可以先选择工具，再点击“横筒开口、横筒内部、竖筒上方、竖筒外侧、远处”。默认先用香观察，金属风轮默认关闭，可按需开启。相邻位置会轻微吸附，其余位置保留自由放置。点燃、熄灭和加热强度可反复改变。</p><h3>第二页：实景背景 + 海岸垂直剖面</h3><p>使用本次生成的白天、夜晚及通用海岸大场景。切换到第二页或选择场景后先停留在背景；点击“开始模拟冷热差异”后再显示运动。切换白天与夜晚是比较两个情境，不是按真实时间模拟一整天。</p><p>为了不把航拍远近误当成海拔，在背景之上叠加独立的垂直剖面：横向10千米，纵向海拔0-1000米，0米为理想化平直海岸的海面/低平地基准。它不是照片标定，不推断远山或照片中云的实际高度；本页只聚焦近地面到1千米高度范围。</p><p>海风/陆风是对流层低层的局地环流，不是全球大气大循环。本网页将教学视野聚焦在近地面0-1千米：白天示例环流上界约1000米，夜间约900米，用来帮助学生看清近地面风、上升、回流和下沉的相互联系。这些高度不是固定标准。实际厚度、范围与回流结构会随背景风、地形和稳定度改变，真实环流不必是完整闭合的二维环。</p><p>白天气温示例为海面附近24℃、陆地近地面32℃；夜间分别22℃和17℃。气温只用于设定模型温差，不是实测数据。近地面水平气压差驱动风；上升与补偿下沉把低层与上方气流联系起来。比较气压时应比较同一高度，而不是把高空气压与地面直接相比。</p><h3>粒子、颜色与云</h3><p>小粒子是随流场移动的空气示踪点，不按真实分子尺度绘制。第二页默认先显示原始背景；点击“开始模拟”后，才叠加红蓝温度色层，并显示温差驱动的空气流动。颜色表示本情境内的相对气温；上升粒子随膨胀冷却，下沉随压缩增温，近地面可与环境交换热量。</p><p>“成云演示”仅模拟湿空气上升到凝结条件后云滴出现、随所在高度气流移动，并在混入干空气或下降增温时消散；不是把整朵云固定在一个轨道上绕圈。湿润示例的凝结起始高度约取620米；水汽较少的示例约取930米，因此在本例浅薄夜间环流中不一定自动成云。这不代表现实中夜晚没有云。背景中已有的云是静态场景，不参与高度测量或气流计算。云的生成还需要水汽、冷却、凝结核等条件，并非有风就一定有云。</p><h3>观察与记录</h3><p>保留暂停、四分之一速慢放、画箭头、定格记录、记录夹与图片导出。参考解释默认收起。画箭头时自动定格；退出画箭头后才能拖动工具。点击定格记录会同时保存背景、色层、粒子、工具位置与自己的箭头。</p><p>空格：暂停/继续；M：音效开关；Esc：关闭弹窗或退出画箭头。音效需首次点击后启用，暂停或切到后台时连续风声减弱至静音。全部图像和音效均在本文件内，页面运行不依赖网络。记录保存在当前浏览器；储存空间不足时可导出图片。</p><h3>模型边界与实验提醒</h3><p>烟不是空气，也不是产生风的原因；香自身的热烟在蜡烛未点燃时也会上升。金属风轮有启动阈值和惯性，未见转动不能据此断言空气完全不动。模型自动调整金属风轮的迎风角度；转速仅用于观察比较，不是风速读数。虚拟探测器放入筒内时，不计算其对气流的阻挡。</p><p>本模型以连续的示意流场显示主要气流，不是精确流体计算。烟与空气粒子只从连通口和开放端进出，不能穿过筒壁。蜡烛熄灭后，温差、气流和转动逐渐减弱。海陆模型使用预设的二维质量流函数，满足理想化质量连续性；不求解完整动量、辐射、三维地形、背景风或科里奥利力。成云为给定凝结高度的定性展示，不是完整湿物理计算；粒子大小和动画时间经教学化处理，不能读作真实风速或形成时间。</p><p>网页不能作为明火实验的安全搭建图。真实实验应由教师规范组织，避免火焰接触塑料与纸质材料，不将金属风轮或手伸向火焰。装置造型与模型对应关系见提供的四上教材第21页；白天海风拓展见第22页。</p><h3>依据与外部核对</h3><p>教材与教师用书：四上《风的成因》；教材第21页双筒装置、第22页白天海风。教材用于确定教学要点；以下公开资料用于补充高度、夜间层结和成云条件，不能把这些数值反推为教材中的固定结论。</p><p><a href="https://www.noaa.gov/jetstream/ocean/sea-breeze" target="_blank" rel="noopener noreferrer">NOAA JetStream：The Sea Breeze</a>（海风回流高度、夜间陆风较浅较弱）。<br/><a href="https://www.ndbc.noaa.gov/education/seabreeze_ans.shtml" target="_blank" rel="noopener noreferrer">NOAA NDBC：What are sea breezes?</a>（海陆风方向与冷热差异）。<br/><a href="https://scied.ucar.edu/learning-zone/clouds/clouds-form-surface-heating" target="_blank" rel="noopener noreferrer">UCAR：Clouds Form Due to Surface Heating</a>（上升膨胀冷却与凝结）。<br/><a href="https://scied.ucar.edu/learning-zone/atmosphere/troposphere" target="_blank" rel="noopener noreferrer">UCAR：The Troposphere</a>（本页仅显示对流层底部）。</p></div><div class="modal-foot"><button class="primary" data-close="help-modal">开始观察</button></div></section></div>
+<div aria-live="polite" class="toast" id="toast" role="status" aria-live="polite" role="status"></div>
 <noscript><p style="padding:30px">此互动网页需要启用 JavaScript。请在浏览器中打开 HTML 文件，而不是文件预览器。</p></noscript>
-<details id="air-storage-guard" style="position:fixed;bottom:30px;left:8px;z-index:9999;max-width:min(430px,90vw);padding:7px 11px;border:1px solid #b8cbd0;border-radius:9px;background:#fff;color:#234657;font:15px/1.5 sans-serif;box-shadow:0 3px 12px #0002"><summary>记录安全与备份</summary><p id="air-storage-message">可导出启动时原始记录和当前草稿。备份包含原始字符串，可供人工恢复；本页不自动修复或导入。</p><button id="air-storage-export" type="button">导出原始与当前备份</button></details>
-<script>
-var airRecordGuard=(function(){
- const key="wind-cause-observation-v1";let raw=null,readOK=false,locked=false,draft=null,getDraft=null;
- function obj(v){return v!==null&&typeof v==='object'&&!Array.isArray(v)}
- function valid(v){return Array.isArray(v)&&v.length<=8&&v.every(r=>obj(r)&&typeof r.image==='string'&&typeof r.title==='string'&&['seen','reason','created','id'].every(k=>r[k]===undefined||typeof r[k]==='string'));}
- function warn(t){document.getElementById('air-storage-guard').open=true;document.getElementById('air-storage-message').textContent=t}
- try{raw=localStorage.getItem(key);readOK=true;if(raw!==null&&!valid(JSON.parse(raw)))throw Error('incompatible')}catch(e){locked=true;warn('原始记录损坏或格式不兼容，已锁定保护，绝不覆盖。当前操作仅在本次页面有效，关闭前请导出备份。')}
- document.getElementById('air-storage-export').onclick=function(){let current=draft;try{if(getDraft)current=getDraft()}catch(e){}let payload={key,readOK,originalRaw:raw,currentDraft:current,exportedAt:new Date().toISOString()};let blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='四上1.7-原始与当前备份.json';a.click();URL.revokeObjectURL(url)};
- return {setDraftGetter:function(f){getDraft=f},getItem:function(k){if(k!==key)throw Error('unexpected key');if(locked)throw Error('protected storage');return raw},setItem:function(k,value){if(k!==key)throw Error('unexpected key');try{draft=JSON.parse(value)}catch(e){draft=value}if(locked){warn('原始记录受保护，修改仅保留在本次页面，未写入本机。关闭前请导出备份。');throw Error('protected storage')}try{localStorage.setItem(key,value)}catch(e){warn('保存失败：本次修改未写入本机。原有存储未被替换，请导出原始与当前备份。');throw e}}};
-})();
-</script>
 <script>
 'use strict';
 (() => {
@@ -230,10 +406,11 @@ const icon=(name)=>`<svg class="icon"><use href="#i-${name}"/></svg>`;
 const canvas=$('scene'),ctx=canvas.getContext('2d',{alpha:false});
 let sceneStretch=1;
 const buffer=document.createElement('canvas');buffer.width=1200;buffer.height=675;const g=buffer.getContext('2d',{alpha:false});
-const app={mode:'box',particle:false,arrows:false,heatmap:false,paused:false,slow:false,draw:false,ground:true,sound:true,volume:.45,showReference:false,annotations:{box:[],convection:[]},box:{on:false,power:2,heat:0,flow:0,smoke:true,incense:'inlet',elapsed:0},conv:{scene:'day',left:24,right:32,actualLeft:24,actualRight:32,flow:0,depth:1000,started:false,elapsed:0},clock:0};
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const app={mode:'box',particle:false,arrows:false,heatmap:false,paused:false,slow:reduceMotion,draw:false,ground:true,sound:true,volume:.18,showReference:false,annotations:{box:[],convection:[]},box:{on:false,power:2,heat:0,flow:0,smoke:true,incense:'inlet',elapsed:0},conv:{scene:'day',left:24,right:32,actualLeft:24,actualRight:32,flow:0,depth:1000,started:false,elapsed:0},clock:0};
 let viewport={width:0,height:0,dpr:1,scale:1,ox:0,oy:0},smokes=[],smokeAccumulator=0,particles=[],convParticles=[],dust=[],drawStart=null,drawNow=null,draggingIncense=false,dragPoint=null,activeModal=null,lastFocus=null,pendingRecord=null,records=[],localAvailable=true,frameLast=0,uiAccumulator=0,toastTimeout=0;
-airRecordGuard.setDraftGetter(()=>({records,pendingRecord:currentRecord()}));const STORE='wind-cause-observation-v1';
-try{const parsed=JSON.parse(airRecordGuard.getItem(STORE)||'[]');if(Array.isArray(parsed))records=parsed.filter(x=>x&&typeof x.image==='string'&&typeof x.title==='string').slice(-8)}catch(e){localAvailable=false}
+const STORE='wind-cause-observation-v1';
+try{const parsed=JSON.parse(localStorage.getItem(STORE)||'[]');if(Array.isArray(parsed))records=parsed.filter(x=>x&&typeof x.image==='string'&&typeof x.title==='string').slice(-8)}catch(e){localAvailable=false}
 const modelClock=()=>app.clock;
 function toast(text){$('toast').textContent=text;$('toast').classList.add('visible');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').classList.remove('visible'),3100)}
 function rr(c,x,y,w,h,r){c.beginPath();r=Math.min(r,w/2,h/2);c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.quadraticCurveTo(x+w,y,x+w,y+r);c.lineTo(x+w,y+h-r);c.quadraticCurveTo(x+w,y+h,x+w-r,y+h);c.lineTo(x+r,y+h);c.quadraticCurveTo(x,y+h,x,y+h-r);c.lineTo(x,y+r);c.quadraticCurveTo(x,y,x+r,y);c.closePath()}
@@ -250,7 +427,7 @@ const geom={left:260,right:470,top:142,bottom:555,cy:468,mouth:758};
 const places={inlet:{x:800,y:468,label:'横筒开口'},inside:{x:641,y:466,label:'横筒内部'},top:{x:367,y:98,label:'竖筒上方'},wall:{x:200,y:330,label:'竖筒外侧'},far:{x:1055,y:437,label:'远处'}};
 const probes={incense:{x:800,y:468,visible:true,place:'inlet'},wheel:{x:1055,y:300,visible:false,place:'custom',angle:0,omega:0,facing:Math.PI,reading:0}};
 let selectedProbe='incense',dragProbe=null,dragOffset={x:0,y:0};
-const viewMemory={box:{particle:false,arrows:false,heatmap:false},convection:{particle:true,arrows:true,heatmap:false}};
+const viewMemory={box:{particle:false,arrows:false,heatmap:false},convection:{particle:true,arrows:false,heatmap:false}};
 let seaPrevious='day',seaTransition=1;
 const coastImages={};
 for(const [name,src] of Object.entries(COAST_ASSETS)){const img=new Image();coastImages[name]=img;img.onload=()=>render();img.onerror=()=>toast('海陆图片未能载入，请重新打开完整 HTML 文件');img.src=src;}
@@ -344,7 +521,7 @@ function seedAir(p,initial=false){
  p.phase=rand(0,6.283);p.temp=.12;p.trail=[];return p;
 }
 function initParticles(){
- particles=Array.from({length:255},(_,id)=>seedAir({id,r:rand(2.7,4),phase:rand(0,6.283)},true));
+ particles=Array.from({length:210},(_,id)=>seedAir({id,r:rand(3.3,4.6),phase:rand(0,6.283)},true));
  initSeaParticles();
 }
 function probeName(probe){let k=probe.place;return places[k]?places[k].label:regionAt(probe.x,probe.y)==='horizontal'?'横筒内自选位置':regionAt(probe.x,probe.y)==='vertical'?'竖筒内自选位置':'自选位置';}
@@ -375,25 +552,25 @@ function updateSmoke(dt){
  if(smokes.length>820)smokes.splice(0,smokes.length-820);
 }
 /*
- * SEA-BREEZE CROSS-SECTION — physical coordinates in metres.
+ * SEA-BREEZE CROSS-SECTION - physical coordinates in metres.
  * The supplied aerial images are scenery, NOT georeferenced observations.
  * The transparent plane has its own sea-level datum and a 10 km horizontal span.
  *
  * This is a kinematic teaching model, not an atmospheric forecast/CFD solution.
  * The prescribed mass-streamfunction gives div(rho*v)=0, no vertical flow
  * through z=0 and no spurious sea-breeze circulation above the chosen cell top.
- * Day example: H=1000 m, return-flow maximum about 670 m.
- * Night example: H=700 m and a smaller forcing, rather than an identical reversed cell.
+ * Day example: H=2000 m, return-flow maximum about 1330 m.
+ * Night example: H=900 m and a smaller forcing, rather than an identical reversed cell.
  * These are ILLUSTRATIVE settings, not universal boundaries inferred from a photo.
  * See the in-app sources and model boundaries for NOAA/UCAR references.
  */
-const SEA={xmin:-5000,xmax:5000,zmax:1000,accelerate:120};
+const SEA={xmin:-5000,xmax:5000,zmax:3000,accelerate:120};
 let seaClock=0,cloudPuffs=[],cloudBudget=0,seaReady=false;
-const SEA_PRESETS={day:{left:24,right:32,depth:1000},night:{left:22,right:17,depth:700},neutral:{left:24,right:24,depth:1000}};
-const seaView={clouds:false,moist:true,zoom:false,pressure:false};
+const SEA_PRESETS={day:{left:24,right:32,depth:1000},night:{left:22,right:17,depth:900},neutral:{left:24,right:24,depth:1000}};
+const seaView={clouds:true,moist:true,zoom:false,pressure:false};
 function seaDepth(){return app.conv.depth||1000;}
 function seaMaxZ(){return 1000;}
-function seaPlane(){return{left:142,right:1136,top:73,bottom:H-119};}
+function seaPlane(){return{left:76,right:1160,top:66,bottom:H-104};}
 function seaPoint(x,z){const p=seaPlane();return{x:p.left+(x-SEA.xmin)/(SEA.xmax-SEA.xmin)*(p.right-p.left),y:p.bottom-z/seaMaxZ()*(p.bottom-p.top)};}
 function seaUnproject(x,y){const p=seaPlane();return{x:SEA.xmin+(x-p.left)/(p.right-p.left)*(SEA.xmax-SEA.xmin),z:(p.bottom-y)/(p.bottom-p.top)*seaMaxZ()};}
 function seaVisibleTop(){return 0;}
@@ -433,20 +610,20 @@ function seaColor(t,alpha=1){
 }
 function initSeaParticles(){
  const depth=seaDepth();
- convParticles=Array.from({length:370},(_,id)=>{
+ convParticles=Array.from({length:240},(_,id)=>{
   // More tracers in the active layer; the upper domain still contains air.
-  const z=id<295?rand(28,depth-25):rand(depth+35,Math.max(depth+36,2980));
+  const z=rand(20,seaMaxZ()-18);
   const x=rand(-4800,4800);
-  return{id,x,z,r:rand(1.15,1.85),phase:rand(0,Math.PI*2),temp:seaEnvironment(x,z),trail:[]};
+  return{id,x,z,r:rand(2.8,3.9),phase:rand(0,Math.PI*2),temp:seaEnvironment(x,z),trail:[]};
  });
  cloudPuffs=[];cloudBudget=0;
 }
-function cloudBase(){return seaView.moist?1000:2600;}
+function cloudBase(){return seaView.moist?620:930;}
 function updateSea(dt){
  const k=app.conv;seaClock+=dt;
  k.actualLeft+=(k.left-k.actualLeft)*(1-Math.exp(-dt/2.8));
  k.actualRight+=(k.right-k.actualRight)*(1-Math.exp(-dt/2.8));
- const forcing=clamp((k.actualRight-k.actualLeft)/8,-1,1)*(k.scene==='night'?.62:1);
+ const forcing=Math.tanh((k.actualRight-k.actualLeft)/14)*(k.scene==='night'?.62:1);
  k.flow+=(forcing-k.flow)*(1-Math.exp(-dt/2.1));
  k.elapsed+=dt;
  const t=dt*SEA.accelerate,depth=seaDepth();
@@ -456,7 +633,7 @@ function updateSea(dt){
   const [um,wm]=seaPhysicalVelocity(p.x+u*t/2,p.z+w*t/2);
   const oldz=p.z;
   p.trail.push({x:p.x,z:p.z});if(p.trail.length>11)p.trail.shift();
-  p.x=clamp(p.x+um*t,-4950,4950);p.z=clamp(p.z+wm*t,12,2980);
+  p.x=clamp(p.x+um*t,-4950,4950);p.z=clamp(p.z+wm*t,12,seaMaxZ()-12);
   const rate=p.z>cloudBase()&&seaView.moist?.0060:.0098;
   p.temp-=rate*(p.z-oldz); // expansion cools, compression warms; mass and dot size stay constant.
   const exchange=p.z<180?2.0:.14;
@@ -467,7 +644,7 @@ function updateSea(dt){
 function updateSeaClouds(dt,t,depth){
  const base=cloudBase();
  if(seaView.clouds&&depth>base+200&&Math.abs(app.conv.flow)>.13){
-  cloudBudget+=dt*1.7;
+  cloudBudget+=dt*(.8+Math.abs(app.conv.flow)*1.8);
   while(cloudBudget>=1){cloudBudget--;
    const dir=app.conv.flow>=0?1:-1;
    cloudPuffs.push({x:dir*rand(2750,3650),z:rand(base+25,Math.min(base+180,depth-110)),size:rand(.65,1.15),opacity:0,life:0,seed:rand(0,100)});
@@ -477,8 +654,8 @@ function updateSeaClouds(dt,t,depth){
   const [u,w]=seaPhysicalVelocity(p.x,p.z);p.x+=u*t;p.z+=w*t;p.life+=dt;
   // Condensation only above the prescribed saturation height; mixing/downward warming dissipates it.
   const wet=seaView.clouds&&seaView.moist&&p.z>base&&p.z<depth-60;
-  const target=wet?smooth(0,4,p.life)*(1-smooth(22,40,p.life))*.82:0;
-  p.opacity+=(target-p.opacity)*(1-Math.exp(-dt/(wet?2:1.1)));
+  const target=wet?smooth(0,1.7,p.life)*(1-smooth(22,40,p.life))*.82:0;
+  p.opacity+=(target-p.opacity)*(1-Math.exp(-dt/(wet?.8:1.1)));
  }
  cloudPuffs=cloudPuffs.filter(p=>p.life<43&&p.z>0&&p.x>-5100&&p.x<5100);
  if(cloudPuffs.length>65)cloudPuffs.splice(0,cloudPuffs.length-65);
@@ -493,146 +670,146 @@ function drawCoastImage(c,name,alpha=1){
 }
 const seaHeatLayer=document.createElement('canvas');seaHeatLayer.width=256;seaHeatLayer.height=136;
 const seaHeatContext=seaHeatLayer.getContext('2d');let lastHeatValues=[-999,-999,-1];
+
+// Image-space masks follow the supplied coastline. These are visual surface regions,
+// not the physical cross-section coordinates or a claim of georeferencing.
+const surfaceShore=[[300,381],[400,387],[452,398],[523,408],[529,418],[555,430],[623,432],[692,448],[750,471],[792,480],[826,503],[775,508],[749,516],[735,531],[822,539],[884,544],[946,574],[1000,618],[1052,664],[1109,714],[1157,759],[1220,793],[1261,823],[1338,858],[1427,899],[1504,941]];
+const terrainSkyline=[[300,381],[351,375],[400,368],[467,365],[501,367],[542,369],[606,374],[677,369],[730,366],[787,356],[868,354],[906,346],[1002,351],[1100,344],[1175,341],[1224,347],[1278,335],[1310,342],[1369,329],[1400,311],[1442,306],[1496,323],[1566,336],[1672,350]];
+const surfaceTint=document.createElement('canvas');surfaceTint.width=836;surfaceTint.height=471;
+const surfaceCtx=surfaceTint.getContext('2d');let surfaceTintKey='';
+function drawSurfaceRegion(points,color){
+ const c=surfaceCtx;c.save();c.scale(.5,.5);c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();c.clip();
+ const fade=c.createLinearGradient(0,310,0,620);
+ fade.addColorStop(0,`rgba(${color},0)`);fade.addColorStop(.28,`rgba(${color},.35)`);fade.addColorStop(1,`rgba(${color},1)`);
+ c.fillStyle=fade;c.fillRect(0,300,1672,641);c.restore();
+}
 function drawSeaHeat(c){
- const k=app.conv,maxz=seaMaxZ(),p=seaPlane();
- if(Math.abs(k.actualLeft-lastHeatValues[0])>.04||Math.abs(k.actualRight-lastHeatValues[1])>.04||maxz!==lastHeatValues[2]){
-  lastHeatValues=[k.actualLeft,k.actualRight,maxz];const a=seaHeatContext.createImageData(256,136);
-  const lo=Math.min(k.actualLeft,k.actualRight),hi=Math.max(k.actualLeft,k.actualRight),mid=(lo+hi)/2,span=Math.max(hi-lo,4);
-  for(let j=0;j<136;j++)for(let i=0;i<256;i++){
-   const z=(1-j/135)*maxz,x=-5000+i/255*10000,t=seaEnvironment(x,z);
-   const q=clamp(.5+(t-mid)/span*.3,0,1),u=q<.5?clamp((q-.35)/.15,0,1):clamp((q-.5)/.15,0,1);
-   const from=q<.5?[48,184,250]:[243,249,245],to=q<.5?[243,249,245]:[255,134,64],o=(j*256+i)*4;
-   for(let ch=0;ch<3;ch++)a.data[o+ch]=Math.round(mix(from[ch],to[ch],u));
-   a.data[o+3]=Math.round(255*(.12+.30*Math.exp(-z/630)));
-  }seaHeatContext.putImageData(a,0,0);
+ const k=app.conv,delta=k.actualRight-k.actualLeft;if(!k.started||Math.abs(delta)<.08)return;
+ const key=delta>0?'land-warm':'sea-warm';
+ if(surfaceTintKey!==key){
+  surfaceTintKey=key;surfaceCtx.clearRect(0,0,836,471);
+  drawSurfaceRegion([[0,380],...surfaceShore,[0,941]],delta>0?'12,128,244':'245,65,37');
+  drawSurfaceRegion([...terrainSkyline,[1672,941],...surfaceShore.slice().reverse()],delta>0?'245,65,37':'12,128,244');
  }
- c.save();c.imageSmoothingEnabled=true;c.drawImage(seaHeatLayer,p.left,p.top,p.right-p.left,p.bottom-p.top);c.restore();
+ const im=coastImages[k.scene];if(!im||!im.naturalWidth)return;
+ // Exact same cover projection as the background, including tall/narrow viewports.
+ const scale=Math.max(W/im.naturalWidth,H/im.naturalHeight),dw=im.naturalWidth*scale,dh=im.naturalHeight*scale;
+ const x=(W-dw)/2,y=(H-dh)/2,strength=Math.tanh(Math.abs(delta)/7);
+ c.save();c.globalCompositeOperation='color';c.globalAlpha=.90*strength;c.drawImage(surfaceTint,x,y,dw,dh);
+ // A small luminance lift keeps the warmer surface readable in the night scene.
+ c.globalCompositeOperation='source-over';c.globalAlpha=(k.scene==='night'?.24:.13)*strength;c.drawImage(surfaceTint,x,y,dw,dh);c.restore();
 }
 function seaTag(c,txt,x,y,size=22,fill='#12354bd9',color='#fff',pad=11){
  c.save();c.font=`650 ${size}px "Microsoft YaHei","Noto Sans CJK SC",sans-serif`;const w=c.measureText(txt).width+pad*2;
  rr(c,x-w/2,y-size*.70,w,size*1.4+5,7);c.fillStyle=fill;c.fill();text(c,txt,x,y+1,size,color,'center',650);c.restore();
 }
 function drawSeaGrid(c){
- const p=seaPlane(),maxz=seaMaxZ();
- // Explicit measurement plane: the photo itself is not calibrated in distance or altitude.
- c.save();const bg=c.createLinearGradient(0,p.top,0,p.bottom);bg.addColorStop(0,'#09274110');bg.addColorStop(1,'#0b274c2b');
- c.fillStyle=bg;c.fillRect(p.left,p.top,p.right-p.left,p.bottom-p.top);
- rr(c,14,p.top-57,113,p.bottom-p.top+80,8);c.fillStyle='#102e47df';c.fill();
- text(c,'海拔 / 米',69,p.top-34,21,'#fff','center',700);
- line(c,[[109,p.top],[109,p.bottom]],'#d0e5f3b5',2);
- const step=200;
- for(let z=0;z<=maxz;z+=step){const y=seaPoint(0,z).y;line(c,[[101,y],[115,y]],'#d3e8f4',2);text(c,String(z),89,y,23,'#eefaff','right',650);
-  if(z>0){c.setLineDash([5,9]);line(c,[[p.left,y],[p.right,y]],z%(step*2)===0?'#d4e7fa55':'#d4e7fa24',1);c.setLineDash([]);}
+ const p=seaPlane();c.save();
+ rr(c,10,p.top-38,54,p.bottom-p.top+55,9);c.fillStyle='#102e47bd';c.fill();
+ text(c,'米',35,p.top-25,12,'#d5e6f1','center',600);
+ line(c,[[62,p.top],[62,p.bottom]],'#d0e5f38a',1);
+ for(let z=0;z<=1000;z+=200){const y=seaPoint(0,z).y;
+  line(c,[[57,y],[65,y]],'#d3e8f4',1.3);text(c,String(z),51,y,13,'#f0f8ff','right',600);
+  if(z>0){c.setLineDash([3,11]);line(c,[[p.left,y],[p.right,y]],'#e2f2ff30',1);c.setLineDash([]);}
  }
- line(c,[[p.left,p.bottom],[p.right,p.bottom]],'#f4edce',2.3);
- c.setLineDash([4,7]);line(c,[[seaPoint(0,0).x,p.bottom],[seaPoint(0,0).x,p.bottom+14]],'#f4e9cd',1.6);c.setLineDash([]);
- // A 10 km section span, not an asserted real extent of the generated coastline.
- for(const x of [-5000,-2500,0,2500,5000]){const q=seaPoint(x,0);line(c,[[q.x,p.bottom],[q.x,p.bottom+6]],'#e8f4f9',1.8);}
- seaTag(c,'海面 / 海岸低平地基准',642,p.bottom+20,17,'#112d46d9');
- text(c,'仅显示对流层底部',1004,p.top-15,19,'#f3faff','center',600);
- c.restore();
+ line(c,[[p.left,p.bottom],[p.right,p.bottom]],'#edf4eed0',1.5);c.restore();
 }
+
 function drawSeaParticles(c){
  if(!app.particle||!app.conv.started)return;
- const p0=seaPlane(),depth=seaDepth();c.save();c.beginPath();c.rect(p0.left,p0.top,p0.right-p0.left,p0.bottom-p0.top);c.clip();
+ const p0=seaPlane();c.save();c.beginPath();c.rect(p0.left,p0.top,p0.right-p0.left,p0.bottom-p0.top);c.clip();
  for(const p of convParticles){
-  if(p.z>seaMaxZ())continue;
-  const q=seaPoint(p.x,p.z),upper=p.z>depth,alpha=upper?.30:(app.ground&&p.z<400?1:.82),r=p.r;
-  if(!upper&&p.trail.length>2&&Math.abs(app.conv.flow)>.02){const first=p.trail[0],a=seaPoint(first.x,first.z);
-   line(c,[[a.x,a.y],[q.x,q.y]],'#05223b7d',2.5);line(c,[[a.x,a.y],[q.x,q.y]],seaColor(p.temp,alpha*.78),1.25);
+  const q=seaPoint(p.x,p.z),a=app.ground&&p.z>400?.8:1,r=p.r;
+  if(p.trail.length>2&&Math.abs(app.conv.flow)>.02){const t=seaPoint(p.trail[0].x,p.trail[0].z);
+   line(c,[[t.x,t.y],[q.x,q.y]],'#102e4755',4.5);line(c,[[t.x,t.y],[q.x,q.y]],seaColor(p.temp,.65*a),2.5);
   }
-  if(!upper)ellipse(c,q.x,q.y,r+.4,r+.4,'#08294180');ellipse(c,q.x,q.y,r,r,seaColor(p.temp,alpha));
+  ellipse(c,q.x,q.y,r+1.1,r+1.1,'#11364a88');
+  ellipse(c,q.x,q.y,r,r,seaColor(p.temp,a),'#effaffbb',.85);
+  ellipse(c,q.x-r*.25,q.y-r*.3,r*.3,r*.3,'#ffffffdc');
  }
  c.restore();
 }
+
 function drawSeaClouds(c){
  if(!seaView.clouds||!app.conv.started)return;const plane=seaPlane();
  c.save();c.beginPath();c.rect(plane.left,plane.top,plane.right-plane.left,plane.bottom-plane.top);c.clip();
- for(const cloud of cloudPuffs){if(cloud.opacity<.02||cloud.z>seaMaxZ())continue;const p=seaPoint(cloud.x,cloud.z),s=cloud.size;
-  c.save();c.globalAlpha=cloud.opacity;
-  for(let j=0;j<6;j++){const cx=p.x+(j-2.5)*11*s,cy=p.y-6*Math.sin(j*1.4+cloud.seed)*s,r=(12+7*Math.sin(j*2+cloud.seed)**2)*s;
-   const grad=c.createRadialGradient(cx-r*.15,cy-r*.2,2,cx,cy,r);grad.addColorStop(0,'#fffdfbf0');grad.addColorStop(.55,'#f2f5f2ce');grad.addColorStop(1,'#f6fcff00');c.fillStyle=grad;c.fillRect(cx-r,cy-r,r*2,r*2);
-  }c.restore();
+ for(const cloud of cloudPuffs.filter(p=>p.opacity>.12).slice(0,4)){const p=seaPoint(cloud.x,cloud.z),s=cloud.size*1.2;
+  c.save();c.translate(p.x,p.y);c.globalAlpha=cloud.opacity;
+  // A connected scalloped silhouette distinguishes simulated condensate from the photograph.
+  c.beginPath();c.moveTo(-34*s,9*s);c.bezierCurveTo(-57*s,4*s,-43*s,-21*s,-25*s,-17*s);
+  c.bezierCurveTo(-22*s,-43*s,9*s,-44*s,15*s,-23*s);c.bezierCurveTo(37*s,-32*s,48*s,-13*s,43*s,-3*s);
+  c.bezierCurveTo(66*s,-2*s,59*s,21*s,35*s,20*s);c.lineTo(-26*s,20*s);c.bezierCurveTo(-48*s,20*s,-48*s,7*s,-34*s,9*s);c.closePath();
+  const grad=c.createLinearGradient(0,-38*s,0,22*s);grad.addColorStop(0,'#fffefa');grad.addColorStop(.6,'#f8fcff');grad.addColorStop(1,'#afc8da');
+  c.shadowColor='#133c5777';c.shadowBlur=10;c.shadowOffsetY=4;c.fillStyle=grad;c.fill();c.shadowBlur=0;c.shadowOffsetY=0;c.strokeStyle='#ffffffc9';c.lineWidth=1.4;c.stroke();c.restore();
  }
  c.restore();
 }
-function drawRibbonArrow(c,worldPoints,color,width=15){
+
+function drawRibbonArrow(c,worldPoints,color,width=7){
  const pts=worldPoints.map(([x,z])=>seaPoint(x,z));if(pts.length<2)return;
  c.save();c.lineCap='round';c.lineJoin='round';
- c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.strokeStyle='#09263e99';c.lineWidth=width+5;c.stroke();c.strokeStyle=color;c.lineWidth=width;c.stroke();
- const q=pts.at(-1),before=pts.at(-2),a=Math.atan2(q.y-before.y,q.x-before.x),len=Math.min(27,Math.hypot(q.x-pts[0].x,q.y-pts[0].y)*.34);
- c.beginPath();c.moveTo(q.x+Math.cos(a)*10,q.y+Math.sin(a)*10);c.lineTo(q.x-len*Math.cos(a-.59),q.y-len*Math.sin(a-.59));c.lineTo(q.x-len*.52*Math.cos(a),q.y-len*.52*Math.sin(a));c.lineTo(q.x-len*Math.cos(a+.59),q.y-len*Math.sin(a+.59));c.closePath();c.fillStyle=color;c.fill();c.strokeStyle='#09263e88';c.lineWidth=1.5;c.stroke();
+ c.beginPath();pts.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.strokeStyle='rgba(10,38,68,.65)';c.lineWidth=width+4;c.stroke();c.strokeStyle=color;c.lineWidth=width;c.stroke();
+ const q=pts.at(-1),before=pts.at(-2),a=Math.atan2(q.y-before.y,q.x-before.x),len=Math.min(27,Math.hypot(q.x-pts[0].x,q.y-pts[0].y)*.26);
+ c.beginPath();c.moveTo(q.x+Math.cos(a)*5,q.y+Math.sin(a)*5);c.lineTo(q.x-len*Math.cos(a-.56),q.y-len*Math.sin(a-.56));c.lineTo(q.x-len*.48*Math.cos(a),q.y-len*.48*Math.sin(a));c.lineTo(q.x-len*Math.cos(a+.56),q.y-len*Math.sin(a+.56));c.closePath();c.fillStyle=color;c.fill();c.strokeStyle='rgba(10,38,68,.18)';c.lineWidth=.9;c.stroke();
  // Moving glints reinforce direction without flashing or reversing oscillation.
  const lengths=[],total=pts.slice(1).reduce((sum,p,i)=>{const l=Math.hypot(p.x-pts[i].x,p.y-pts[i].y);lengths.push(l);return sum+l;},0);
- for(let j=0;j<3;j++){let dist=((seaClock*.17+j/3)%1)*Math.max(1,total-25);for(let i=0;i<lengths.length;i++){if(dist<=lengths[i]){const t=dist/Math.max(1,lengths[i]),x=mix(pts[i].x,pts[i+1].x,t),y=mix(pts[i].y,pts[i+1].y,t);ellipse(c,x,y,2.5,2.5,'#ffffffad');break;}dist-=lengths[i];}}
+ for(let j=0;j<2;j++){let dist=(((reduceMotion?0:seaClock)*.16+j/2)%1)*Math.max(1,total-22);for(let i=0;i<lengths.length;i++){if(dist<=lengths[i]){const t=dist/Math.max(1,lengths[i]),x=mix(pts[i].x,pts[i+1].x,t),y=mix(pts[i].y,pts[i+1].y,t);ellipse(c,x,y,1.8,1.8,'rgba(255,255,255,.55)');break;}dist-=lengths[i];}}
  c.restore();
 }
 function drawSeaArrows(c){
- const k=app.conv,flow=k.flow;if(!k.started||!app.arrows||Math.abs(flow)<.015)return;
- const sign=flow>=0?1:-1,depth=seaDepth(),night=depth<900,lower=night?105:165,upper=depth*.68;
- c.save();c.globalAlpha=.48*clamp(Math.abs(flow)*6,0,1);
- const proj=seaPlane();c.beginPath();c.rect(proj.left-10,proj.top,proj.right-proj.left+30,proj.bottom-proj.top);c.clip();
- const ground=[[-3100,lower],[2300,lower]].map(([x,z])=>[x*sign,z]);
- const back=[[2050,upper],[-2800,upper]].map(([x,z])=>[x*sign,z]);
- drawRibbonArrow(c,ground,'#70d3ff',app.ground?9:7);
- if(upper<=seaMaxZ()-40)drawRibbonArrow(c,back,'#e7eef7',7);
- const up=[[2720,depth*.19],[3160,depth*.30],[3390,depth*.43],[3290,depth*.60]].map(([x,z])=>[x*sign,z]);
- const down=[[-3310,depth*.67],[-3550,depth*.48],[-3450,depth*.32],[-3180,depth*.22]].map(([x,z])=>[x*sign,z]);
- drawRibbonArrow(c,up,'#ffb17c',night?6:8);drawRibbonArrow(c,down,'#92d9ff',night?6:7);c.restore();
- // Labels sit outside arrow bodies, never contradict the local direction.
- const a=seaPoint(-60,upper),upP=seaPoint(sign*3750,depth*.47),dnP=seaPoint(sign*-3780,depth*.51);
- if(upper<=seaMaxZ()-40)seaTag(c,night?'上方回流 · 较低':'上方回流 · 本例约 0.6—0.7 km',a.x,a.y-32,night?22:23);
- if(!night){seaTag(c,'上升',upP.x,upP.y,24);seaTag(c,'补偿下沉',dnP.x,dnP.y,21);}
- else {seaTag(c,'上升',upP.x,upP.y+1,21);seaTag(c,'下沉',dnP.x,dnP.y+1,21);}
- if(seaView.pressure){const y=seaPoint(0,depth*.13).y;seaTag(c,'相对高压',seaPoint(-sign*4100,0).x,y,18,'#184c67ef');seaTag(c,'相对低压',seaPoint(sign*4000,0).x,y,18,'#805440e8');}
+ const k=app.conv,f=k.flow;if(!k.started||!app.arrows||Math.abs(f)<.015)return;
+ const sign=f<0?-1:1,d=seaDepth(),up=d*.72;
+ c.save();c.globalAlpha=clamp(Math.abs(f)*6,.25,1);
+ const map=points=>points.map(([x,z])=>[x*sign,z]);
+ drawRibbonArrow(c,map([[-3500,75],[3250,75]]),'#81e0ff',app.ground?10:8);
+ drawRibbonArrow(c,map([[3050,up],[-3300,up]]),'#f4faff',8);
+ drawRibbonArrow(c,map([[3350,d*.12],[3550,d*.30],[3550,d*.49],[3270,d*.69]]),'#ffb36c',9);
+ drawRibbonArrow(c,map([[-3450,d*.71],[-3660,d*.50],[-3640,d*.29],[-3370,d*.12]]),'#81e0ff',9);
+ c.restore();
+}
+
+function windsockShape(){
+ const f=app.conv.started?app.conv.flow:0,str=clamp(Math.abs(f),0,1);
+ return {direction:f<0?-1:1,strength:str,length:12+90*str,droop:42*Math.pow(1-str,1.6),flutter:1+6*str};
 }
 function drawSeaWindsock(c){
- // Magnified ground instrument: never drawn as a several-hundred-metre-tall pole.
- const x=641,y=H-63,f=app.conv.started?app.conv.flow:0,sgn=f<0?-1:1,str=clamp(Math.abs(f)*1.7,0,1);
- const length=55*str,droop=27*(1-str),wav=Math.sin(seaClock*6)*2.2*str;
- c.save();rr(c,x-77,y-22,154,70,10);c.fillStyle='#102f47d9';c.fill();line(c,[[x,y+20],[x,y-12]],'#e3edf6',3);
- // Larger mouth faces upstream, narrow tail points downstream.
- c.beginPath();c.moveTo(x,y-13);c.quadraticCurveTo(x+sgn*length*.45,y-13+droop*.4,x+sgn*length,y-7+droop+wav);c.lineTo(x+sgn*length,y+droop+wav);c.quadraticCurveTo(x+sgn*length*.45,y+2+droop*.4,x,y+2);c.closePath();
- c.save();c.clip();c.fillStyle='#faf0dc';c.fillRect(x-65,y-20,130,60);c.fillStyle='#f57843';for(let i=-6;i<=6;i+=2)c.fillRect(x+i*10,y-22,10,62);c.restore();c.strokeStyle='#f4eddb';c.lineWidth=1;c.stroke();
- text(c,'近地风向袋 · 放大',x,y+32,14,'#f3faff','center',600);c.restore();
+ const x=615,y=H-72,{direction:sgn,strength:str,length,droop,flutter}=windsockShape();
+ const time=reduceMotion?0:seaClock;
+ c.save();rr(c,x-113,H-95,226,84,12);c.fillStyle='#102f47df';c.fill();
+ line(c,[[x,y-5],[x,H-26]],'#e5edf3',3);ellipse(c,x,H-25,14,3,'#aac2cc');
+ const points=[];
+ for(let i=0;i<=24;i++){const u=i/24,wave=Math.sin(time*(3+str*7)-u*5)*flutter*u*str;
+  points.push({x:x+sgn*u*length,y:y+droop*u*u+wave,half:10-6.5*u});}
+ c.beginPath();points.forEach((p,i)=>i?c.lineTo(p.x,p.y-p.half):c.moveTo(p.x,p.y-p.half));
+ [...points].reverse().forEach(p=>c.lineTo(p.x,p.y+p.half));c.closePath();
+ c.save();c.clip();c.fillStyle='#fff6e9';c.fillRect(x-110,y-20,220,90);c.fillStyle='#ef743d';
+ for(let i=0;i<6;i+=2){c.fillRect(sgn>0?x+i*length/6:x-(i+1)*length/6,y-20,length/6+1,90);}
+ c.restore();c.strokeStyle='#fff3db';c.lineWidth=1.4;c.stroke();ellipse(c,x,y,2.5,10,'#273f4b','#f7e5cf',1.6);
+ text(c,'近地风向袋（放大）',x,H-16,12,'#e4eff4','center',500);c.restore();
 }
+
 function drawSeaFootLabels(c){
- const k=app.conv,seaCold=k.actualLeft<k.actualRight,eq=Math.abs(k.actualLeft-k.actualRight)<.25;
- for(const [x,name,cold,t]of[[350,'海洋',seaCold,k.actualLeft],[944,'陆地',!seaCold,k.actualRight]]){
-  rr(c,x-145,H-88,290,68,10);c.fillStyle='#102f47e0';c.fill();text(c,name,x,H-64,26,'#fff','center',750);
-  text(c,!k.started?'先观察，预测空气怎样流动':eq?'近地面气温接近':cold?'近地面空气较冷':'近地面空气较暖',x,H-37,21,eq?'#e2edea':cold?'#92dcff':'#ffbb8a','center',650);
+ const k=app.conv,delta=k.actualRight-k.actualLeft,eq=Math.abs(delta)<.3;
+ for(const [x,name,t,cold]of[[300,'海洋',k.actualLeft,delta>0],[940,'陆地',k.actualRight,delta<0]]){
+  const color=eq?'#dcebef':cold?'#83dfff':'#ffa48c';
+  rr(c,x-133,H-87,266,67,12);c.fillStyle='#102f47df';c.fill();
+  c.fillStyle=color;rr(c,x-133,H-87,5,67,2);c.fill();
+  text(c,name,x-107,H-54,23,'#f8fcff','left',700);
+  text(c,Math.round(t)+'°C',x+99,H-54,32,color,'right',750);
  }
  drawSeaWindsock(c);
 }
+
 function drawConvection(){
- const c=g,k=app.conv;c.fillStyle='#173b50';c.fillRect(0,0,W,H);drawCoastImage(c,k.scene);
- const night=k.scene==='night';
- // Subtle image-only exposure lift at night, without confusing it with a temperature layer.
- if(night){c.fillStyle='#719ac512';c.fillRect(0,0,W,H);}
- // Top and foot scrims protect legibility; the scenery remains visible.
- let scrim=c.createLinearGradient(0,0,0,100);scrim.addColorStop(0,'#092940a3');scrim.addColorStop(1,'#09294000');c.fillStyle=scrim;c.fillRect(0,0,W,100);
- drawSeaGrid(c);if(k.started&&app.heatmap)drawSeaHeat(c);
- const plane=seaPlane();
- if(k.started){
-  const top=seaPoint(0,Math.min(seaDepth(),seaMaxZ())).y;
-  c.save();c.setLineDash([7,8]);line(c,[[plane.left,top],[plane.right,top]],'#f5efd080',1.4);c.restore();
-  if(seaDepth()<=seaMaxZ())seaTag(c,'本例环流上界 ≈ '+(seaDepth()/1000)+' km',885,top-15,17,'#12354bb5');
-  if(app.ground){const a=seaPoint(0,seaDepth()*.30).y,b=plane.bottom;let band=c.createLinearGradient(0,a,0,b);band.addColorStop(0,'#6cdbff00');band.addColorStop(1,'#51c4f922');c.fillStyle=band;c.fillRect(plane.left,a,plane.right-plane.left,b-a);}
-  drawSeaClouds(c);drawSeaParticles(c);drawSeaArrows(c);
-  const f=Math.abs(k.flow);
-  if(f<.025&&Math.abs(k.actualLeft-k.actualRight)<.3)seaTag(c,'两侧同温：本模型的定向环流逐渐减弱',644,seaPoint(0,850).y,24);
-  else if(night&&!seaView.zoom)seaTag(c,'夜间陆风：环流更浅、更弱',624,seaPoint(0,870).y,26,'#12354bd0');
-  if(seaView.clouds){const y=seaPoint(0,Math.min(seaMaxZ()-160,night?2650:2700)).y;
-   const txt=seaDepth()<cloudBase()+200?'本例抬升未达到成云条件':seaView.moist?'湿空气上升 → 冷却凝结 → 云滴形成':'水汽较少，本例不易成云';
-   seaTag(c,txt,666,y,21,'#143c51bd');
-  }
- }
- const tag={day:'白天 · 海风',night:'夜晚 · 陆风',neutral:'通用 · 温差对照'}[k.scene];
- text(c,tag,155,35,29,'#fff','left',750);
- text(c,'海岸垂直剖面 · 水平跨度 10 km（示意）',714,35,20,'#f4f9fd','center',600);
+ const c=g,k=app.conv;drawCoastImage(c,k.scene);
+ c.fillStyle='#12324822';c.fillRect(0,0,W,H);
+ const scrim=c.createLinearGradient(0,0,0,90);scrim.addColorStop(0,'#092940b0');scrim.addColorStop(1,'#09294000');c.fillStyle=scrim;c.fillRect(0,0,W,90);
+ if(app.heatmap)drawSeaHeat(c);drawSeaGrid(c);
+ if(k.started){drawSeaParticles(c);drawSeaArrows(c);drawSeaClouds(c);}
+ const tag={day:'白天 · 海风',night:'夜晚 · 陆风',neutral:'自己调温'}[k.scene];
+ text(c,tag,82,31,24,'#fff','left',750);
+ text(c,'温差 '+Math.abs(k.actualRight-k.actualLeft).toFixed(1)+'°C',1157,31,20,'#fff','right',650);
  drawSeaFootLabels(c);
- // Small but persistent boundary statement is also captured in exported observations.
- text(c,'标尺对应演示剖面，非照片测高；1000 m 不是大气层顶。',W/2,H-8,14,'#f7fcff','center',600);
 }
 
 function updateModel(dt){
@@ -687,19 +864,31 @@ function drawBoxBase(){
  for(let xx=474;xx<=495;xx+=7){c.beginPath();c.ellipse(xx,468,5,30,0,-Math.PI/2,Math.PI/2);c.strokeStyle='#a3d7eaa0';c.lineWidth=1.7;c.stroke();}
  line(c,[[278,168],[278,433]],'#e7faff21',7);line(c,[[292,179],[292,340]],'#ecfaff13',3);
  c.beginPath();c.moveTo(545,411);c.bezierCurveTo(581,386,630,387,708,387);c.strokeStyle='#dcf9ff28';c.lineWidth=5;c.stroke();
- // Shallow candle matches the supplied textbook shape. The flame is an independent animation.
- ellipse(c,367,552,67,12,'#bfa66e88');
- let wax=c.createLinearGradient(305,0,429,0);wax.addColorStop(0,'#eacb85');wax.addColorStop(.45,'#fff0b8');wax.addColorStop(1,'#d7bb7e');c.fillStyle=wax;c.fillRect(305,533,124,18);ellipse(c,367,551,62,10,wax);ellipse(c,367,533,62,12,'#fff0b8','#dfcd93',1);
- line(c,[[367,531],[367,520]],'#483628',3);
- if(b.on){const t=app.clock,height=44+b.power*7,lean=Math.sin(t*7)*2.5;const glow=c.createRadialGradient(367,492,3,367,492,86);glow.addColorStop(0,'#ffb83e37');glow.addColorStop(1,'#ffb83e00');c.fillStyle=glow;c.fillRect(282,408,170,172);
-  c.beginPath();c.moveTo(367,523);c.bezierCurveTo(342,505,361,487,367+lean,523-height);c.bezierCurveTo(375+lean,480,390,509,367,523);c.fillStyle='#fbad27';c.fill();
-  c.beginPath();c.moveTo(367,522);c.bezierCurveTo(354,511,364,497,367,485);c.bezierCurveTo(373,501,379,516,367,522);c.fillStyle='#fff3a2';c.fill();ellipse(c,367,521,5,4,'#8ed6f2');
- }
+
+ drawCandle(c,b);
  // Source terminology is preserved; details sit away from the airflow paths.
  label(c,'竖立的塑料筒',102,222,23);text(c,'筒内空气代表大气层',103,252,18,'#aac5d2','center');line(c,[[197,237],[255,237]],'#8eacbb',1.7);
  label(c,'横着的塑料筒',698,285,23);text(c,'筒内空气代表地面附近的大气',702,315,18,'#aac5d2','center');line(c,[[647,330],[647,358]],'#8eacbb',1.7);
  text(c,'局部加热',367,590,20,'#57432d','center',700);
  if(app.arrows&&b.flow>.06)drawBoxArrows(c);
+}
+
+function drawCandle(c,b){
+ const t=reduceMotion?0:app.clock,x=367;
+ ellipse(c,x,554,55,10,'#09232b66');
+ const metal=c.createLinearGradient(0,532,0,558);metal.addColorStop(0,'#c7d5d8');metal.addColorStop(.4,'#6a818c');metal.addColorStop(.7,'#dce7e8');metal.addColorStop(1,'#78939d');
+ c.fillStyle=metal;c.fillRect(316,535,102,15);ellipse(c,x,550,51,8,metal,'#dce7e999',1);
+ const wax=c.createLinearGradient(320,0,414,0);wax.addColorStop(0,'#d8ceb0');wax.addColorStop(.35,'#fff4d8');wax.addColorStop(1,'#e3d4b1');
+ c.fillStyle=wax;c.fillRect(322,518,90,24);ellipse(c,x,541,45,7,wax);ellipse(c,x,518,45,10,'#f9efd4','#fff8e8',1);
+ ellipse(c,x,518,15,4,b.on?'#efc881':'#e0d1ad');ellipse(c,x,518,8,2.5,'#f6dfa9');
+ line(c,[[x,518],[x-1,506]],'#473e33',2.8);
+ if(!b.on)return;
+ const h=42+b.power*8+Math.sin(t*9)*2+Math.sin(t*17)*1.4,lean=Math.sin(t*5.7)*2.3+Math.sin(t*11)*1.1;
+ const glow=c.createRadialGradient(x,498,2,x,498,80);glow.addColorStop(0,'#ffbd644b');glow.addColorStop(1,'#ffb64400');c.fillStyle=glow;c.fillRect(x-80,418,160,160);
+ c.beginPath();c.moveTo(x,513);c.bezierCurveTo(x-23,505,x-11,481,x+lean,513-h);c.bezierCurveTo(x+3+lean,473,x+26,502,x,513);
+ const flame=c.createLinearGradient(0,513-h,0,514);flame.addColorStop(0,'#ff8b24');flame.addColorStop(.5,'#ffc44d');flame.addColorStop(.83,'#fff0ad');flame.addColorStop(1,'#729fee');c.fillStyle=flame;c.fill();
+ c.beginPath();c.moveTo(x,511);c.bezierCurveTo(x-9,503,x-4,491,x+lean*.4,480);c.bezierCurveTo(x+7,497,x+11,507,x,511);c.fillStyle='#fff8d9';c.fill();
+ ellipse(c,x,511,5,3,'#729fea');ellipse(c,x-1,507,1.4,2.5,'#ffbd66');
 }
 function drawBoxArrows(c){
  const a=clamp(app.box.flow*4,0,1);c.save();c.globalAlpha=a;
@@ -715,9 +904,17 @@ function drawSmoke(){
  c.restore();
 }
 function drawParticles(){
- if(!app.particle)return;const c=g;
- for(const p of particles){if(p.trail.length>1&&app.box.flow>.1){const first=p.trail[0];line(c,[[first.x,first.y],[p.x,p.y]],rgb(p.temp,.48),2);}ellipse(c,p.x,p.y,p.r,p.r,rgb(p.temp,.95));}
+ if(!app.particle)return;const c=g;c.save();
+ for(const p of particles){
+  if(p.y>510&&Math.abs(p.x-367)<51)continue;
+  if(p.trail.length>1&&app.box.flow>.1){const first=p.trail[0];line(c,[[first.x,first.y],[p.x,p.y]],rgb(p.temp,.32),2.3);}
+  ellipse(c,p.x,p.y,p.r+2,p.r+2,rgb(p.temp,.08));
+  ellipse(c,p.x,p.y,p.r,p.r,rgb(p.temp,.9),'#e5f7ff99',.8);
+  ellipse(c,p.x-p.r*.27,p.y-p.r*.3,p.r*.32,p.r*.32,'#fffdf4dc');
+ }
+ c.restore();
 }
+
 function drawCoil(c,p){
  if(!p.visible)return;const hot=app.box.smoke;
  // Source point is the glowing outer tip; dragging may grab the coil or its stand.
@@ -741,9 +938,9 @@ function drawWheel(c,p){
  c.save();c.rotate(p.facing);line(c,[[-22,0],[24,0]],'#cedce3',6);
  // The rotor tilts to face the local stream; its axial projection changes at the top outlet.
  c.scale(.58,1);c.rotate(p.angle);
- const colors=['#b8c4cb','#dbe2e7','#8f9da7','#cbd4db','#a7b6c0','#e1e7eb'];
- for(let i=0;i<6;i++){c.save();c.rotate(i*Math.PI/3);c.beginPath();c.moveTo(3,-3);c.bezierCurveTo(13,-20,42,-39,43,-8);c.quadraticCurveTo(34,4,8,6);c.closePath();c.fillStyle=colors[i];c.fill();c.strokeStyle='#ffffff91';c.lineWidth=1.1;c.stroke();c.restore();}
- ellipse(c,0,0,9,9,'#e6edf0','#6b8fa3',2);c.restore();ellipse(c,0,0,4,4,'#eaf7ff');c.restore();
+ const colors=['#dfe7eb','#c7d2d8','#b2c0c8','#d9e2e8','#bcc8cf','#eef3f6'];
+ for(let i=0;i<6;i++){c.save();c.rotate(i*Math.PI/3);c.beginPath();c.moveTo(3,-3);c.bezierCurveTo(13,-20,42,-39,43,-8);c.quadraticCurveTo(34,4,8,6);c.closePath();const blade=c.createLinearGradient(4,-18,40,6);blade.addColorStop(0,colors[i]);blade.addColorStop(1,'#8fa1ac');c.fillStyle=blade;c.fill();c.strokeStyle='#ffffff88';c.lineWidth=1;c.stroke();c.restore();}
+ ellipse(c,0,0,9,9,'#dde6eb','#6b8fa3',2);c.restore();ellipse(c,0,0,4,4,'#f4fbff');c.restore();
  text(c,'金属风轮',p.x,p.y+127,21,p.y>424?'#573f2c':'#dceaf0','center',700);
 }
 function drawProbes(){const c=g;drawCoil(c,probes.incense);drawWheel(c,probes.wheel);
@@ -772,10 +969,48 @@ initParticles();
 new ResizeObserver(resize).observe($('canvas-area'));
 
 // Offline synthesised audio. Continuous wind and short feedback sounds have separate gains.
-const audio={ctx:null,master:null,wind:null,filter:null,enabled:false,failed:false};
-function unlockAudio(){if(!app.sound)return;try{if(!audio.ctx){const AC=window.AudioContext||window.webkitAudioContext;if(!AC){if(!audio.failed)toast('此浏览器不支持音效，其他功能仍可使用');audio.failed=true;return}audio.ctx=new AC();audio.master=audio.ctx.createGain();audio.master.gain.value=app.volume;audio.master.connect(audio.ctx.destination);const len=audio.ctx.sampleRate*3,buf=audio.ctx.createBuffer(1,len,audio.ctx.sampleRate),data=buf.getChannelData(0);let brown=0;for(let i=0;i<len;i++){brown=(brown+Math.random()*.1-.05)/1.015;data[i]=brown*3}const noise=audio.ctx.createBufferSource();noise.buffer=buf;noise.loop=true;audio.filter=audio.ctx.createBiquadFilter();audio.filter.type='lowpass';audio.filter.frequency.value=750;audio.wind=audio.ctx.createGain();audio.wind.gain.value=0;noise.connect(audio.filter);audio.filter.connect(audio.wind);audio.wind.connect(audio.master);noise.start();}if(audio.ctx.state==='suspended')audio.ctx.resume().catch(()=>{});audio.enabled=true}catch(e){audio.failed=true;toast('音效未能启用，可继续使用视觉实验')}}
-function updateAudio(){if(!audio.ctx||!audio.wind)return;const active=app.sound&&!app.paused&&!activeModal&&!document.hidden;const strength=app.mode==='box'?app.box.flow:Math.abs(app.conv.flow);const now=audio.ctx.currentTime;audio.master.gain.setTargetAtTime(app.sound?app.volume:0,now,.07);audio.wind.gain.setTargetAtTime(active?Math.pow(strength,.82)*.5:0,now,.16);audio.filter.frequency.setTargetAtTime(320+strength*1000,now,.2)}
-function tone(kind){if(!app.sound)return;unlockAudio();if(!audio.ctx)return;const c=audio.ctx,now=c.currentTime;const notes=kind==='save'?[660,880,1108]:kind==='ignite'?[240,500]:kind==='off'?[440,220]:kind==='draw'?[660]:kind==='pause'?[460]:[520,650];notes.forEach((freq,i)=>{let o=c.createOscillator(),amp=c.createGain();o.type=kind==='ignite'?'triangle':'sine';o.frequency.setValueAtTime(freq,now+i*.07);amp.gain.setValueAtTime(0,now+i*.07);amp.gain.linearRampToValueAtTime(kind==='ignite'?.22:.18,now+i*.07+.014);amp.gain.exponentialRampToValueAtTime(.001,now+i*.07+.17);o.connect(amp);amp.connect(audio.master);o.start(now+i*.07);o.stop(now+i*.07+.19)})}
+
+const audio={ctx:null,master:null,wind:null,filter:null,fire:null,fireFilter:null,enabled:false,failed:false};
+function unlockAudio(){
+ if(!app.sound)return;
+ try{if(!audio.ctx){
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  const c=audio.ctx=new AC();audio.master=c.createGain();audio.master.gain.value=app.volume;audio.master.connect(c.destination);
+  const length=c.sampleRate*5,windBuffer=c.createBuffer(1,length,c.sampleRate),fireBuffer=c.createBuffer(1,length,c.sampleRate),w=windBuffer.getChannelData(0),f=fireBuffer.getChannelData(0);
+  let brown=0,pink=0,crackle=0;
+  for(let i=0;i<length;i++){
+   const n=Math.random()*2-1;brown=(brown+n*.035)/1.018;w[i]=brown*3;
+   pink=.94*pink+.06*n;if(Math.random()<.00006)crackle=.12+Math.random()*.12;crackle*=.992;
+   f[i]=pink*(.6+.15*Math.sin(i/c.sampleRate*13))+n*crackle;
+  }
+  const noise=c.createBufferSource();noise.buffer=windBuffer;noise.loop=true;audio.filter=c.createBiquadFilter();audio.filter.type='lowpass';audio.filter.frequency.value=550;audio.wind=c.createGain();audio.wind.gain.value=0;
+  noise.connect(audio.filter);audio.filter.connect(audio.wind);audio.wind.connect(audio.master);noise.start();
+  const fire=c.createBufferSource();fire.buffer=fireBuffer;fire.loop=true;audio.fireFilter=c.createBiquadFilter();audio.fireFilter.type='bandpass';audio.fireFilter.frequency.value=1100;audio.fireFilter.Q.value=.55;audio.fire=c.createGain();audio.fire.gain.value=0;
+  fire.connect(audio.fireFilter);audio.fireFilter.connect(audio.fire);audio.fire.connect(audio.master);fire.start();
+ }if(audio.ctx.state==='suspended')audio.ctx.resume().catch(()=>{});audio.enabled=true;
+ }catch(e){audio.failed=true;toast('音效未能启用，可继续使用视觉实验');}
+}
+function windAudioStrength(){return clamp(app.mode==='box'?app.box.flow:Math.abs(seaPhysicalVelocity(0,35)[0])/4.2,0,1);}
+function updateAudio(){
+ if(!audio.ctx)return;const active=app.sound&&!app.paused&&!activeModal&&!document.hidden;
+ const strength=windAudioStrength(),now=audio.ctx.currentTime;
+ audio.master.gain.setTargetAtTime(app.sound?app.volume:0,now,.10);
+ audio.wind.gain.setTargetAtTime(active?Math.pow(strength,1.25)*.065:0,now,.45);
+ audio.filter.frequency.setTargetAtTime(220+strength*430,now,.45);
+ audio.fire.gain.setTargetAtTime(active&&app.mode==='box'&&app.box.on?.25+app.box.power*.07:0,now,.13);
+}
+function tone(kind){
+ if(!app.sound)return;unlockAudio();if(!audio.ctx)return;const c=audio.ctx,now=c.currentTime;
+ if(kind==='ignite'||kind==='off'){
+  const n=c.createBufferSource(),len=Math.floor(c.sampleRate*.28),buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);
+  n.buffer=buf;const filter=c.createBiquadFilter();filter.type='bandpass';filter.frequency.value=kind==='ignite'?1500:700;filter.Q.value=.6;
+  const gain=c.createGain();gain.gain.setValueAtTime(0,now);gain.gain.linearRampToValueAtTime(kind==='ignite'?.13:.08,now+.025);gain.gain.exponentialRampToValueAtTime(.001,now+.27);
+  n.connect(filter);filter.connect(gain);gain.connect(audio.master);n.start();n.stop(now+.28);return;
+ }
+ const notes=kind==='save'?[660,880,1108]:kind==='draw'?[660]:kind==='pause'?[460]:[520,650];
+ notes.forEach((freq,i)=>{const o=c.createOscillator(),gain=c.createGain();o.frequency.value=freq;gain.gain.setValueAtTime(0,now+i*.07);gain.gain.linearRampToValueAtTime(.07,now+i*.07+.014);gain.gain.exponentialRampToValueAtTime(.001,now+i*.07+.14);o.connect(gain);gain.connect(audio.master);o.start(now+i*.07);o.stop(now+i*.07+.16);});
+}
 document.addEventListener('pointerdown',()=>unlockAudio(),{passive:true});
 
 function snapshotState(){
@@ -791,7 +1026,7 @@ function describeState(snapshot){
   else if(inc.place==='inlet'||inc.place==='inside'||regionAt(inc.x,inc.y)==='horizontal')seen=s.flow>.17?'烟向横筒内部移动，经过连接口进入竖筒，再从竖筒上方离开。':'烟主要上升、飘散，尚未见明显的持续定向流动。';
   else seen='在当前自选位置观察烟迹；与横筒开口、竖筒上方的现象作比较。';
   if(w.visible)seen+='金属风轮在'+probeName(w)+(w.omega>.5?'可见转动。':w.omega>.08?'正在缓慢转动。':'未见明显转动。');
-  const reason=s.flow>.08?'蜡烛加热附近的空气，竖筒内空气上升；周围空气从横筒开口补充流入。香的烟和金属风轮帮助显示这种流动。'+(!s.on?'蜡烛已熄灭，但余热和原有气流正在逐渐减弱。':''):'没有明显的蜡烛加热气流时，香自身产生的热烟仍会上升、飘散。风轮不转不能直接说明空气完全不动。';
+  const reason=s.flow>.08?'蜡烛加热附近的空气，竖筒内空气上升；周围空气从横筒开口补充流入。香的烟是主要观察线索，也可以打开金属风轮辅助判断流动方向。'+(!s.on?'蜡烛已熄灭，但余热和原有气流正在逐渐减弱。':''):'没有明显的蜡烛加热气流时，香自身产生的热烟仍会上升、飘散。金属风轮不转不能直接说明空气完全不动。';
   return {condition:s.on?'蜡烛点燃 · '+['','低','中','高'][s.power]+'强度':s.heat>.06?'蜡烛熄灭 · 尚有余热':'蜡烛未加热 / 已冷却',seen,reason,progress:s.flow>.16?'定向气流较明显':'定向气流尚不明显',position:'香：'+probeName(inc)+'；金属风轮：'+probeName(w)};
  }
  const d=s.actualRight-s.actualLeft,stable=Math.abs(s.flow)>.04;
@@ -799,8 +1034,8 @@ function describeState(snapshot){
  const changing=Math.abs(s.left-s.actualLeft)>.4||Math.abs(s.right-s.actualRight)>.4;
  const seen=!s.started?'尚未播放气流，先观察背景与设定的冷热条件。':stable?'近地面空气从'+direction+'，上方回流方向相反；较暖一侧有上升，另一侧有补偿下沉。'+(changing?'气流尚在调整中。':''):'本模型的温差驱动环流很弱或正在减弱；不表示现实海岸没有风。';
  return{condition:name+' · 海面附近 '+Math.round(s.actualLeft)+' ℃ / 陆地近地面 '+Math.round(s.actualRight)+' ℃（示例）',seen,
- reason:'海陆受热或冷却不同，形成近地面的水平气压差，驱动空气流动；上升与补偿下沉将低层气流和上方回流联系起来。'+(s.scene==='night'?'夜间地面冷却使空气层结较稳定，本例采用更浅、更弱的陆风。':s.scene==='neutral'?'通用调温用于比较风向；本例保留所选的环流厚度。':'本例白天回流重点显示在约600—700米（本例）。')+'高度、温度与速度是情境设置，不是对背景图的测量。',
- progress:!s.started?'等待点击播放':changing?'气温与气流正在调整':stable?'加速展示局地环流':'本模型定向环流较弱',position:'海岸垂直剖面；本例环流上界约 '+(s.depth||1000)+' m'};
+ reason:'海陆受热或冷却不同，形成近地面的水平气压差，驱动空气流动；上升与补偿下沉将低层气流和上方回流联系起来。'+(s.scene==='night'?'夜间地面冷却使空气层结较稳定，本例采用更浅、更弱的陆风。':s.scene==='neutral'?'通用调温用于比较风向；本例保留所选的环流厚度。':'本例白天回流重点显示在约600-800米。')+'高度、温度与速度是情境设置，不是对背景图的测量。',
+ progress:!s.started?'等待点击播放':changing?'气温与气流正在调整':stable?'加速展示局地环流':'本模型定向环流较弱',position:'海岸垂直剖面；本例环流上界约 '+(s.depth||2000)+' m'};
 }
 
 function updateReference(){$('reference-text').textContent=describeState().reason;}
@@ -811,35 +1046,124 @@ function syncProbeControls(){
  $('probe-position').textContent=(selectedProbe==='incense'?'香':'金属风轮')+'：'+probeName(p);
  $('smoke-btn').setAttribute('aria-checked',String(app.box.smoke));$('wheel-btn').setAttribute('aria-checked',String(probes.wheel.visible));
 }
+// These presentation helpers share the original model state; they do not simulate a second model.
+const arrowRecovery={box:null,convection:null};
+function kidPaint(id,label,symbol,tone='system',options={}){
+ const el=typeof id==='string'?$(id):id;if(!el)return;
+ el.classList.add('kid-button');el.dataset.tone=tone;
+ el.classList.toggle('kid-primary',!!options.primary);el.classList.toggle('kid-choice',!!options.choice);el.classList.toggle('kid-toggle',!!options.toggle);
+ const key=[label,symbol,options.state||'',options.choice,options.step||''].join('|');
+ if(el.dataset.kidKey!==key||!el.querySelector('.kid-label')){
+  el.innerHTML=(options.step?'<span class="tab-step" aria-hidden="true">'+options.step+'</span>':'')+'<span class="kid-icon" aria-hidden="true">'+icon(symbol)+'</span><span class="kid-label">'+label+'</span>'+(options.state?'<span class="kid-state" aria-hidden="true">'+options.state+'</span>':'')+(options.choice?'<span class="kid-check" aria-hidden="true">✓</span>':'');
+  el.dataset.kidKey=key;
+ }
+ el.setAttribute('aria-label',label+(options.state?'，'+options.state:''));
+}
+function syncKidUI(){
+ const sea=app.mode==='convection',k=app.conv;
+ document.body.dataset.seaStarted=String(k.started);
+ kidPaint('tab-box','模拟实验','fire','heat',{choice:true,step:'1'});
+ kidPaint('tab-convection','海陆风','wind','observe',{choice:true,step:'2'});
+ kidPaint('view-observe',sea?'看海岸实景':'看烟和工具','eye','observe',{choice:true});
+ kidPaint('view-particle','看空气粒子','particles','observe',{choice:true});
+ kidPaint('arrows-btn','气流箭头','arrow','observe',{toggle:true,state:app.arrows?'开':'关'});
+ kidPaint('heatmap-btn','看冷暖','thermometer','observe',{toggle:true,state:app.heatmap?'开':'关'});
+ kidPaint('heat-btn',app.box.on?'熄灭蜡烛':'点燃蜡烛',app.box.on?'extinguish':'fire','heat',{primary:true,state:app.box.on?'燃烧中':'未点燃'});
+ kidPaint('pause-btn',sea&&!k.started?'开始模拟':app.paused?'继续观察':'暂停一下',app.paused?'play':'pause','play');
+ kidPaint('sea-replay-btn','从头播放','reset','play');
+ kidPaint('slow-btn',app.slow?'恢复原速':'慢慢看','slow','play',{toggle:true,state:app.slow?'慢速':'原速'});
+ kidPaint('draw-btn',app.draw?'画好了':'我画箭头',app.draw?'check':'pen','record',{toggle:true});
+ kidPaint('clear-btn',!app.annotations[app.mode].length&&arrowRecovery[app.mode]?'恢复箭头':'擦掉箭头',!app.annotations[app.mode].length&&arrowRecovery[app.mode]?'undo':'erase','record');
+ $('clear-btn').disabled=!app.annotations[app.mode].length&&!arrowRecovery[app.mode];
+ $('clear-btn').title=$('clear-btn').disabled?'画出箭头后，就可以擦掉':'只处理自己画的箭头，不改变实验';
+ kidPaint('capture-btn','拍照记录','camera','record');
+ kidPaint('reset-btn','重新实验','reset','system');
+ kidPaint('sound-btn',app.sound?'声音开':'声音关',app.sound?'sound':'mute','system');
+ $('sound-btn').title=app.sound?'点击关闭所有声音':'点击开启声音';
+ kidPaint('fullscreen-btn',document.fullscreenElement?'退出全屏':'放大画面','screen','system');
+ // Keep the existing count node because updateRecordCount owns it.
+ const archive=$('archive-btn');archive.classList.add('kid-button');archive.dataset.tone='record';
+ archive.setAttribute('aria-label','我的记录，'+records.length+'条');
+ for(const el of document.querySelectorAll('[data-sea-scene]')){
+  const type=el.dataset.seaScene;const [label,symbol,tone]={day:['白天','sun','heat'],night:['夜晚','moon','night'],neutral:['自己调温','sliders','heat']}[type];
+  kidPaint(el,label,symbol,tone,{choice:true});
+ }
+ kidPaint('equal-btn','两边一样暖','thermometer','heat');kidPaint('sea-temp-close','调好了','check','heat');
+ kidPaint('sea-moist-btn',seaView.moist?'水汽多':'水汽少','cloud','observe',{toggle:true});
+ kidPaint('reference-btn',app.showReference?'收起发现':'为什么会这样','light','observe');
+ for(const el of document.querySelectorAll('[data-probe]'))kidPaint(el,el.dataset.probe==='incense'?'用香的烟':'用小风轮',el.dataset.probe==='incense'?'smoke':'wheel','observe',{choice:true});
+ const placeLabels={inlet:'放到筒口',inside:'放进横筒',top:'放到上方',wall:'放到筒外',far:'放远一点'};
+ for(const el of document.querySelectorAll('[data-probe-place]'))kidPaint(el,placeLabels[el.dataset.probePlace],'pin','observe',{choice:true});
+ for(const [id,label]of [['smoke-btn','香的烟'],['wheel-btn','小风轮'],['ground-btn','近地面气流'],['sea-cloud-btn','云朵']]){
+  const el=$(id),on=el.getAttribute('aria-checked')==='true';el.classList.add('kid-button');el.dataset.tone='observe';
+  const word=on?'开':'关';if(el.dataset.word!==word){el.innerHTML='<span class="switch-word" aria-hidden="true">'+word+'</span>';el.dataset.word=word;}
+  el.setAttribute('aria-label',label+'，'+(on?'已显示':'已隐藏'));
+ }
+ $('draw-directions').hidden=!app.draw;
+ if(app.draw)$('draw-hint').innerHTML='拖动画箭头，或点下方的方向按钮';
+ for(const el of document.querySelectorAll('[data-draw-direction]'))kidPaint(el,{left:'向左',right:'向右',up:'向上',down:'向下'}[el.dataset.drawDirection],el.dataset.drawDirection,'record');
+ kidPaint('save-record-btn','收进记录夹','check','record',{primary:true});kidPaint('download-record-btn','下载这张图','download','record');kidPaint('export-all-btn','下载文字记录','download','record');
+ $('heat-range').setAttribute('aria-valuetext',['','小火','中火','大火'][app.box.power]);
+ $('heat-output').textContent=['','小火','中火','大火'][app.box.power];
+ if(sea){const note=$('sea-temp-inline').querySelector('span');if(note)note.textContent=k.started&&app.paused&&(Math.abs(k.actualLeft-k.left)>.4||Math.abs(k.actualRight-k.right)>.4)?'继续后变化':'示例';}
+}
+function clearOrRestoreArrows(){
+ const key=app.mode,items=app.annotations[key];
+ if(items.length){arrowRecovery[key]=JSON.parse(JSON.stringify(items));app.annotations[key]=[];toast('你画的箭头已擦掉，点“恢复箭头”可以找回来。');}
+ else if(arrowRecovery[key]){app.annotations[key]=arrowRecovery[key];arrowRecovery[key]=null;toast('你画的箭头已恢复。');}
+ tone('switch');syncKidUI();render();
+}
+function addDirectionArrow(direction){
+ const x=app.mode==='box'?600:620,y=app.mode==='box'?300:Math.round(H*.5);
+ const [dx,dy]={left:[-150,0],right:[150,0],up:[0,-100],down:[0,100]}[direction];
+ const a={x1:x-dx/2,y1:y-dy/2,x2:x+dx/2,y2:y+dy/2};
+ if(app.mode==='convection'){a.geo1=seaUnproject(a.x1,a.y1);a.geo2=seaUnproject(a.x2,a.y2);}
+ if(app.annotations[app.mode].length>=30)app.annotations[app.mode].shift();app.annotations[app.mode].push(a);
+ tone('draw');syncKidUI();render();
+}
+function initKidControls(){
+ for(const el of document.querySelectorAll('[data-draw-direction]'))el.addEventListener('click',()=>addDirectionArrow(el.dataset.drawDirection));
+ for(const row of document.querySelectorAll('.switch-row'))row.addEventListener('click',e=>{if(!e.target.closest('button'))row.querySelector('button').click();});
+ document.addEventListener('click',()=>queueMicrotask(syncKidUI));
+ document.addEventListener('keydown',()=>queueMicrotask(syncKidUI));
+ document.addEventListener('fullscreenchange',syncKidUI);
+ // Standard keyboard navigation for the two lesson tabs.
+ for(const el of document.querySelectorAll('[role="tab"]'))el.addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();
+  const mode=e.key==='Home'?'box':e.key==='End'?'convection':app.mode==='box'?'convection':'box';setMode(mode);$('tab-'+mode).focus();syncKidUI();
+ });
+ syncKidUI();
+}
+
 function updateUI(){
  const b=app.box,k=app.conv,flow=app.mode==='box'?b.flow:Math.abs(k.flow);let status,cls='status';
  if(app.mode==='box'){status=b.on?(b.heat<.18?'开始加热':'持续加热'):b.heat>.06?'余热逐渐散去':b.elapsed?'已逐渐冷却':'尚未加热';if(b.on)cls+=' hot';else if(b.heat>.06)cls+=' cooling';
   const inc=probes.incense,[u,v]=boxVelocity(inc.x,inc.y);
   $('incense-reading').textContent=!b.smoke?'烟迹已隐藏':Math.hypot(u,v)>22?'烟迹有定向偏移':'烟主要上升、飘散';
   $('wheel-reading').textContent=wheelWord(probes.wheel);$('wheel-reading').classList.toggle('active-reading',probes.wheel.omega>.5);
-  $('observation-text').innerHTML=b.on?'<b>比较位置：</b>横筒开口、竖筒上方和远处，烟与风轮有什么不同？':b.heat>.06?'<b>比较变化：</b>蜡烛熄灭后，烟迹与风轮会立即停止吗？':'<b>先做对照：</b>蜡烛不点燃，烟怎样移动？金属风轮是否转动？';
+  $('observation-text').innerHTML=b.on?'<b>比较位置：</b>横筒开口、竖筒上方和远处，先看烟怎样偏移；需要时再打开金属风轮辅助判断。':b.heat>.06?'<b>比较变化：</b>蜡烛熄灭后，烟迹与金属风轮会立即停止吗？':'<b>先做对照：</b>蜡烛不点燃，烟怎样移动？可再打开金属风轮比较。';
  }else{
   const delta=k.actualRight-k.actualLeft,change=Math.abs(k.actualLeft-k.left)>.4||Math.abs(k.actualRight-k.right)>.4;
-   status=!k.started?'点击播放后显现气流':change?'气温与气流正在调整':Math.abs(delta)<.3?'温差对照':k.scene==='night'?'夜间 · 较浅环流':k.scene==='neutral'?'通用 · 温差对照':'白天 · 低层环流';
+   status=!k.started?'点击开始模拟后显现温差与气流':change?'气温与气流正在调整':Math.abs(delta)<.3?'温差对照':k.scene==='night'?'夜间 · 较浅环流':k.scene==='neutral'?'通用 · 温差对照':'白天 · 低层环流';
    if(change)cls+=' cooling';
-   $('observation-text').innerHTML=!k.started?'<b>先观察：</b>哪一侧近地面空气更暖？点击“播放”检验流动方向。':Math.abs(k.flow)<.02&&Math.abs(delta)<.3?'<b>同温对照：</b>这里只关闭了温差驱动，现实中还可能有背景风。':k.scene==='night'?'<b>比较高度：</b>夜间近地面从陆地吹向海洋，本例环流比白天浅。':k.scene==='neutral'?'<b>改变温差：</b>当前近地面 '+(k.flow>=0?'海 → 陆':'陆 → 海')+'；上方回流方向相反，改变条件后会逐渐调整。':'<b>沿高度追踪：</b>近地面海 → 陆；上升后，在约 600—700 米处回流（本例）。';
+   $('observation-text').innerHTML=!k.started?'<b>先观察：</b>先看没有红蓝色的背景；点击“开始模拟”后，再看温差与气流如何出现。':Math.abs(k.flow)<.02&&Math.abs(delta)<.3?'<b>同温对照：</b>这里只关闭了温差驱动，现实中还可能有背景风。':k.scene==='night'?'<b>比较高度：</b>夜间近地面从陆地吹向海洋，本例环流更浅。':k.scene==='neutral'?'<b>改变温差：</b>当前近地面 '+(k.flow>=0?'海 → 陆':'陆 → 海')+'；上方回流方向相反，改变条件后会逐渐调整。':'<b>沿高度追踪：</b>近地面海 → 陆；上升后，在约 0.6-0.8 km 处回流。';
    syncSeaPlayback();
   }
   $('status').className=cls;$('status-text').textContent=(app.paused&&(app.mode==='box'||k.started)?'已暂停 · ':'')+status;
   $('flow-value').textContent=app.mode==='convection'&&!k.started?'未播放':flow<.07?'尚不明显':flow<.32?'较弱':flow<.67?'较明显':'较强';$('flow-meter').style.width=(clamp(flow,0,1)*100)+'%';
- if(app.showReference)updateReference();updateAudio();
+ if(app.showReference)updateReference();updateAudio();syncKidUI();
 }
 function syncSeaPlayback(){
  const k=app.conv,isSea=app.mode==='convection',running=k.started&&!app.paused;
- $('sea-start').hidden=!isSea||k.started;
- $('sea-replay-btn').hidden=!isSea;
- $('sea-play-btn').innerHTML=icon(running?'pause':'play')+'<span>'+(!k.started?'开始模拟冷热差异':app.paused?'继续播放':'暂停气流')+'</span>';
+ $('sea-start').hidden=!isSea||k.started;$('sea-replay-btn').hidden=!isSea;
+ const action=!k.started?'开始模拟':app.paused?'继续观察':'暂停一下';
+ kidPaint('sea-play-btn',action,running?'pause':'play','play',{primary:true});
+ kidPaint('sea-start-btn','开始模拟','play','play',{primary:true});
  $('sea-play-btn').setAttribute('aria-pressed',String(running));
- if(isSea)$('pause-btn').innerHTML=icon(running?'pause':'play')+'<span>'+(!k.started?'播放':app.paused?'继续':'暂停')+'</span>';
  $('freeze-badge').hidden=!app.paused||(isSea&&!k.started);
 }
 function setPaused(value,silent=false){
- if(app.mode==='convection'&&!value&&!app.conv.started){app.conv.started=true;seaReady=true;app.heatmap=true;app.particle=true;app.arrows=true;$('heatmap-btn').setAttribute('aria-pressed','true');$('arrows-btn').setAttribute('aria-pressed','true');$('view-particle').setAttribute('aria-pressed','true');$('view-observe').setAttribute('aria-pressed','false');}
+ if(app.mode==='convection'&&!value&&!app.conv.started){app.conv.started=true;app.heatmap=true;$('heatmap-btn').setAttribute('aria-pressed','true');seaReady=true;}
  app.paused=value;$('pause-btn').innerHTML=icon(value?'play':'pause')+'<span>'+(value?'继续':'暂停')+'</span>';
  $('pause-btn').classList.toggle('selected',value);$('freeze-badge').hidden=!value;
  if(!value&&app.draw)setDraw(false,true);syncSeaPlayback();if(!silent)tone('pause');updateUI();render();
@@ -849,7 +1173,7 @@ function setView(value){app.particle=value;$('view-particle').setAttribute('aria
 function updateLegend(){
  if(app.mode==='box'){
  $('legend').innerHTML=app.particle?'<span><i class="dot"></i>较冷空气</span><span><i class="dot hot"></i>较热空气</span>':'<span><i class="dot smoke"></i>烟迹显示空气流动</span>';
- $('caption-note').textContent='烟迹与风轮反应为增强示意';
+ $('caption-note').textContent='烟迹与金属风轮反应为增强示意';
  }else{
  $('legend').innerHTML='<span><i class="dot"></i>较冷</span><span><i class="dot hot"></i>较暖</span><span>粒子：空气示踪点，非真实分子</span>';
  $('caption-note').textContent='平直海岸、弱背景风 · 高度与时间为示例';
@@ -857,12 +1181,12 @@ function updateLegend(){
 }
 function setMode(mode){
  if(mode===app.mode)return;$('sea-temp-details').open=false;viewMemory[app.mode]={particle:app.particle,arrows:app.arrows,heatmap:app.heatmap};
- app.mode=mode;document.body.dataset.mode=mode;Object.assign(app,viewMemory[mode]);setDraw(false,true);setPaused(mode==='convection',true);
+ app.mode=mode;document.body.dataset.mode=mode;Object.assign(app,viewMemory[mode]);if(mode==='convection')app.heatmap=app.conv.started;setDraw(false,true);setPaused(mode==='convection',true);
  app.showReference=false;$('reference-text').hidden=true;$('reference-btn').textContent='展开参考解释';$('reference-btn').setAttribute('aria-expanded','false');
  $('tab-box').setAttribute('aria-selected',String(mode==='box'));$('tab-convection').setAttribute('aria-selected',String(mode==='convection'));
  $('box-controls').hidden=mode!=='box';$('convection-controls').hidden=mode==='box';$('smoke-panel').hidden=mode!=='box';$('ground-panel').hidden=mode==='box';$('flow-summary').hidden=mode==='box';
- $('canvas-area').classList.toggle('nature',mode!=='box');$('stage-title').textContent=mode==='box'?'用烟迹与风轮，寻找空气流动的证据':'海陆风：从近地面追踪到上方回流';
- $('canvas-hint').textContent=mode==='box'?'拖动香或金属风轮，也可点击位置按钮':'海洋在左 · 陆地在右 · 空气流动叠加示意';
+ $('canvas-area').classList.toggle('nature',mode!=='box');$('stage-title').textContent=mode==='box'?'观察空气怎样流动':'海陆风：温差怎样带来风';
+ $('canvas-hint').textContent=mode==='box'?'先观察香的烟；需要时再打开金属风轮':'海洋在左 · 陆地在右 · 先看背景，再开始模拟';
  $('view-observe').textContent=mode==='box'?'观察现象':'不显示粒子';$('view-particle').textContent=mode==='box'?'微粒解释':'空气粒子';
  $('view-observe').setAttribute('aria-pressed',String(!app.particle));$('view-particle').setAttribute('aria-pressed',String(app.particle));
  $('arrows-btn').setAttribute('aria-pressed',String(app.arrows));$('heatmap-btn').setAttribute('aria-pressed',String(app.heatmap));
@@ -870,7 +1194,7 @@ function setMode(mode){
  $('guide-items').innerHTML=guides.map((s,i)=>'<div class="guide-item"><span class="num">'+(i+1)+'</span><span>'+s+'</span></div>').join('');
  updateLegend();updateUI();syncProbeControls();syncSeaPlayback();tone('switch');resize();
 }
-function selectProbe(value){selectedProbe=value;syncProbeControls();tone('switch');render();}
+function selectProbe(value){selectedProbe=value;probes[value].visible=true;syncProbeControls();syncKidUI();tone('switch');render();}
 function setProbePlace(value){
  const to=places[value],p=probes[selectedProbe];if(!to)return;
  p.x=to.x;p.y=to.y;p.place=value;p.visible=true;
@@ -886,13 +1210,13 @@ function syncConvInputs(){
  document.querySelectorAll('[data-sea-scene]').forEach(el=>{const on=el.dataset.seaScene===k.scene;el.classList.toggle('selected',on);el.setAttribute('aria-pressed',String(on));});
  $('custom-condition').textContent='气温为情境示例，非实测。调温可自由对照。';
  $('sea-condition-summary').textContent=eq?'两侧同温：比较气流是否减弱':cold?'陆地近地面空气较暖':'海面附近空气较暖';
- $('sea-height-note').textContent='本例环流上界约 '+seaDepth()+' m';
- $('sea-layer-note').textContent=seaDepth()<900?'本例上方回流约在 400—500 m':'本例回流约在 600—700 m';
+ $('sea-height-note').textContent='本例环流上界约 '+seaDepth()+' m（当前标尺 0-1000 m）';
+ $('sea-layer-note').textContent=k.scene==='night'?'本例上方回流约在 500-700 m':'本例上方回流约在 600-800 m';
  $('sea-cloud-note').textContent=seaDepth()<cloudBase()+200?'本例抬升不足以成云；夜间也可有其他成因的云。':seaView.moist?'湿空气上升冷却到凝结条件后，形成云滴。':'水汽较少，本例难以达到成云条件。';
 }
 function setSeaScene(scene){
  const preset=SEA_PRESETS[scene];if(!preset)return;$('sea-temp-details').open=false;
- Object.assign(app.conv,{scene,...preset,actualLeft:preset.left,actualRight:preset.right,flow:0,started:false,elapsed:0});
+ Object.assign(app.conv,{scene,...preset,actualLeft:preset.left,actualRight:preset.right,flow:0,started:false,elapsed:0});app.heatmap=false;$('heatmap-btn').setAttribute('aria-pressed','false');
  seaClock=0;seaPrevious=scene;seaTransition=1;initSeaParticles();app.annotations.convection=[];
  setDraw(false,true);setPaused(true,true);syncConvInputs();syncSeaPlayback();updateUI();tone('switch');render();
 }
@@ -953,10 +1277,10 @@ function openModal(id){lastFocus=document.activeElement;activeModal=id;$(id).hid
 function closeModal(id){$(id).hidden=true;activeModal=null;updateAudio();if(lastFocus&&lastFocus.isConnected)lastFocus.focus()}
 function capture(){setPaused(true,true);setDraw(false,true);render();const state=snapshotState(),desc=describeState(state);pendingRecord={id:Date.now()+'-'+Math.floor(Math.random()*10000),state,imageWidth:buffer.width,imageHeight:buffer.height,image:buffer.toDataURL('image/jpeg',.87),title:(state.mode==='box'?'双筒实验 · ':'海陆风 · ')+desc.condition,seen:'',reason:'',created:new Date().toISOString(),desc};$('snapshot').src=pendingRecord.image;$('record-name').value=pendingRecord.title;$('record-observed').value='';$('record-reason').value='';$('snapshot-meta').replaceChildren();[desc.condition,desc.position,app.particle?'微粒解释视图':'现象视图',desc.progress].forEach(s=>{let node=document.createElement('span');node.textContent=s;$('snapshot-meta').appendChild(node)});$('record-reference').hidden=true;$('record-reference-btn').textContent='看一看本次记录参考';$('record-reference-btn').setAttribute('aria-expanded','false');$('record-reference').textContent='现象：'+desc.seen+'\n解释：'+desc.reason;openModal('record-modal');tone('pause')}
 function currentRecord(){if(!pendingRecord)return null;return{...pendingRecord,title:$('record-name').value.trim()||pendingRecord.title,seen:$('record-observed').value.trim(),reason:$('record-reason').value.trim()}}
-function persist(){try{airRecordGuard.setItem(STORE,JSON.stringify(records));localAvailable=true}catch(e){localAvailable=false;toast('浏览器储存空间受限，记录仅在本次会话中保留，请导出图片')}updateRecordCount()}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(records));localAvailable=true}catch(e){localAvailable=false;toast('浏览器储存空间受限，记录仅在本次会话中保留，请导出图片')}updateRecordCount()}
 function updateRecordCount(){$('record-count').textContent=records.length;$('storage-status').textContent=localAvailable?'记录仅存于这台设备的当前浏览器。':'本地储存不可用：请在关闭页面前导出记录。';$('export-all-btn').disabled=records.length===0}
 function saveRecord(){let r=currentRecord();if(!r)return;if(records.length>=8){toast('记录夹已满，请先删除一条旧记录，再保存本次观察');return}records.push(r);persist();closeModal('record-modal');tone('save');if(localAvailable)toast('已加入记录夹，可以继续实验并记录另一种条件')}
-function renderArchive(){const root=$('archive-body');root.replaceChildren();if(!records.length){const node=document.createElement('div');node.className='archive-empty';node.innerHTML='<h3>还没有保存的观察记录</h3><p>在实验画面点击“定格记录”，<br>保存点燃前、点燃后、熄灭后等不同条件的观察。</p>';root.appendChild(node);return}const grid=document.createElement('div');grid.className='archive-grid';for(const r of records){const card=document.createElement('article');card.className='archive-card';const img=document.createElement('img');img.src=r.image;img.alt=r.title;card.appendChild(img);const body=document.createElement('div');body.className='archive-card-body';const h=document.createElement('h3');h.textContent=r.title;body.appendChild(h);for(const [label,content]of[['我看到',r.seen],['我解释',r.reason]]){let p=document.createElement('p');p.textContent=label+'：'+(content||'已在作业本记录 / 未填写');body.appendChild(p)}const date=document.createElement('p');date.className='time';date.textContent=new Date(r.created).toLocaleString('zh-CN',{hour12:false});body.appendChild(date);let acts=document.createElement('div');acts.className='archive-actions';const save=document.createElement('button');save.textContent='保存图片';save.addEventListener('click',()=>downloadRecord(r));const del=document.createElement('button');del.textContent='删除这条';let armed=false;del.addEventListener('click',()=>{if(!armed){armed=true;del.textContent='再次点击确认删除';setTimeout(()=>{if(del.isConnected){armed=false;del.textContent='删除这条'}},3000);return}records=records.filter(x=>x.id!==r.id);persist();renderArchive()});acts.append(save,del);body.appendChild(acts);card.appendChild(body);grid.appendChild(card)}root.appendChild(grid)}
+function renderArchive(){const root=$('archive-body');root.replaceChildren();if(!records.length){const node=document.createElement('div');node.className='archive-empty';node.innerHTML='<h3>还没有保存的观察记录</h3><p>在实验画面点击“拍照记录”，<br>保存点燃前、点燃后、熄灭后等不同条件的观察。</p>';root.appendChild(node);return}const grid=document.createElement('div');grid.className='archive-grid';for(const r of records){const card=document.createElement('article');card.className='archive-card';const img=document.createElement('img');img.src=r.image;img.alt=r.title;card.appendChild(img);const body=document.createElement('div');body.className='archive-card-body';const h=document.createElement('h3');h.textContent=r.title;body.appendChild(h);for(const [label,content]of[['我看到',r.seen],['我解释',r.reason]]){let p=document.createElement('p');p.textContent=label+'：'+(content||'已在作业本记录 / 未填写');body.appendChild(p)}const date=document.createElement('p');date.className='time';date.textContent=new Date(r.created).toLocaleString('zh-CN',{hour12:false});body.appendChild(date);let acts=document.createElement('div');acts.className='archive-actions';const save=document.createElement('button');kidPaint(save,'下载图片','download','record');save.addEventListener('click',()=>downloadRecord(r));const del=document.createElement('button');kidPaint(del,'删除这条','erase','system');let armed=false;del.addEventListener('click',()=>{if(!armed){armed=true;kidPaint(del,'再点一次删除','erase','system');setTimeout(()=>{if(del.isConnected){armed=false;kidPaint(del,'删除这条','erase','system')}},3000);return}records=records.filter(x=>x.id!==r.id);persist();renderArchive()});acts.append(save,del);body.appendChild(acts);card.appendChild(body);grid.appendChild(card)}root.appendChild(grid)}
 function wrapText(c,content,maxWidth){let lines=[],line='';for(const paragraph of String(content).split('\n')){for(const char of paragraph){if(c.measureText(line+char).width>maxWidth&&line){lines.push(line);line=char}else line+=char}lines.push(line);line=''}return lines}
 async function recordImage(r){const out=document.createElement('canvas');const tc=out.getContext('2d');out.width=1200;tc.font='23px "Microsoft YaHei","Noto Sans CJK SC",sans-serif';const titleLines=wrapText(tc,r.title,1090);const seenLines=wrapText(tc,'我看到：'+(r.seen||'________________________________________'),1090),reasonLines=wrapText(tc,'我解释：'+(r.reason||'________________________________________'),1090);const titleHeight=Math.max(40,titleLines.length*36),imageHeight=Math.round(1100*(r.imageHeight||620)/(r.imageWidth||1600));out.height=190+titleHeight+imageHeight+Math.max(70,seenLines.length*36)+Math.max(70,reasonLines.length*36);tc.fillStyle='#fff';tc.fillRect(0,0,out.width,out.height);text(tc,'风的成因 · 观察记录',50,50,32,'#173c4c','left',750);titleLines.forEach((s,i)=>text(tc,s,50,103+i*36,23,'#4f727d'));const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=r.image});const imageY=112+titleHeight;tc.drawImage(img,50,imageY,1100,imageHeight);let y=imageY+imageHeight+38;seenLines.forEach(s=>{text(tc,s,50,y,23,'#244653');y+=36});y+=20;reasonLines.forEach(s=>{text(tc,s,50,y,23,'#244653');y+=36});text(tc,'条件与方向为教学模型示意；请结合真实实验完成作业本记录。',50,out.height-27,16,'#7a9299');return new Promise(resolve=>out.toBlob(resolve,'image/png'))}
 function downloadBlob(blob,name){if(!blob){toast('图片生成失败，请重试');return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}
@@ -967,10 +1291,10 @@ function exportAll(){let content='风的成因 · 观察记录\n\n'+records.map(
 $('sea-temp-close').addEventListener('click',()=>{$('sea-temp-details').open=false;});
 $('sea-play-btn').addEventListener('click',()=>setPaused(!app.paused));
 $('sea-start-btn').addEventListener('click',()=>setPaused(false));
-$('sea-replay-btn').addEventListener('click',()=>{const k=app.conv;k.flow=0;k.started=false;k.elapsed=0;seaClock=0;initSeaParticles();setPaused(false);});
+$('sea-replay-btn').addEventListener('click',()=>{const k=app.conv;k.flow=0;k.started=false;k.elapsed=0;app.heatmap=false;$('heatmap-btn').setAttribute('aria-pressed','false');seaClock=0;initSeaParticles();setPaused(true,true);syncSeaPlayback();updateUI();render();tone('switch');});
 $('sea-cloud-btn').addEventListener('click',()=>{seaView.clouds=!seaView.clouds;$('sea-cloud-btn').setAttribute('aria-checked',String(seaView.clouds));$('sea-moist-btn').hidden=!seaView.clouds;$('sea-cloud-note').hidden=!seaView.clouds;if(!seaView.clouds){cloudPuffs=[];cloudBudget=0;}syncConvInputs();render();});
 $('sea-moist-btn').addEventListener('click',()=>{seaView.moist=!seaView.moist;$('sea-moist-btn').setAttribute('aria-pressed',String(seaView.moist));$('sea-moist-btn').textContent=seaView.moist?'水汽充足':'水汽较少';syncConvInputs();render();});
-$('sea-zoom-btn').addEventListener('click',()=>{seaView.zoom=!seaView.zoom;$('sea-zoom-btn').setAttribute('aria-pressed',String(seaView.zoom));$('sea-zoom-btn').textContent=seaView.zoom?'还原 0—3000 m':'放大低空';render();});
+$('sea-zoom-btn').addEventListener('click',()=>{render();});
 
 $('tab-box').addEventListener('click',()=>setMode('box'));
 $('tab-convection').addEventListener('click',()=>setMode('convection'));
@@ -990,7 +1314,7 @@ document.querySelectorAll('[data-probe-place]').forEach(el=>el.addEventListener(
 $('ground-btn').addEventListener('click',()=>{app.ground=!app.ground;$('ground-btn').setAttribute('aria-checked',String(app.ground));render();});
 $('pause-btn').addEventListener('click',()=>setPaused(!app.paused));
 $('slow-btn').addEventListener('click',()=>{app.slow=!app.slow;$('slow-btn').setAttribute('aria-pressed',String(app.slow));$('slow-btn').innerHTML=icon('slow')+'<span>'+(app.slow?'慢放 ¼×':'慢放')+'</span>';tone('switch');});
-$('draw-btn').addEventListener('click',()=>setDraw(!app.draw));$('clear-btn').addEventListener('click',()=>{app.annotations[app.mode]=[];tone('switch');render();});$('capture-btn').addEventListener('click',capture);$('reset-btn').addEventListener('click',reset);
+$('draw-btn').addEventListener('click',()=>setDraw(!app.draw));$('clear-btn').addEventListener('click',clearOrRestoreArrows);$('capture-btn').addEventListener('click',capture);$('reset-btn').addEventListener('click',reset);
 $('sound-btn').addEventListener('click',()=>setSound(!app.sound));$('volume-range').addEventListener('input',e=>{app.volume=Number(e.target.value)/100;$('volume-output').textContent=e.target.value+'%';updateAudio();});
 $('reference-btn').addEventListener('click',()=>{app.showReference=!app.showReference;$('reference-text').hidden=!app.showReference;$('reference-btn').textContent=app.showReference?'收起参考解释':'展开参考解释';$('reference-btn').setAttribute('aria-expanded',String(app.showReference));updateReference();tone('switch');});
 $('record-reference-btn').addEventListener('click',()=>{const hidden=!$('record-reference').hidden;$('record-reference').hidden=hidden;$('record-reference-btn').textContent=hidden?'看一看本次记录参考':'收起记录参考';$('record-reference-btn').setAttribute('aria-expanded',String(!hidden));});
@@ -1001,18 +1325,731 @@ document.querySelectorAll('.modal-backdrop').forEach(el=>el.addEventListener('cl
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(activeModal)closeModal(activeModal);else if(app.draw)setDraw(false);return;}if(activeModal){if(e.key==='Tab'){const nodes=[...$(activeModal).querySelectorAll('button:not(:disabled),input,textarea,a[href],select')].filter(el=>el.getClientRects().length),first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}return;}if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();unlockAudio();setPaused(!app.paused);}else if(e.key.toLowerCase()==='m')setSound(!app.sound);});
 document.addEventListener('visibilitychange',()=>{frameLast=0;updateAudio();});
 function frame(now){if(!frameLast)frameLast=now;const dt=clamp((now-frameLast)/1000,0,.05);frameLast=now;if(!app.paused&&!activeModal&&!document.hidden){const time=dt*(app.slow?.25:1);const n=Math.max(1,Math.ceil(time/.018));for(let i=0;i<n;i++)updateModel(time/n);render();}uiAccumulator+=dt;if(uiAccumulator>.12){uiAccumulator=0;updateUI();}requestAnimationFrame(frame);}
-document.body.dataset.mode='box';updateRecordCount();syncConvInputs();syncProbeControls();updateLegend();syncSeaPlayback();updateUI();resize();requestAnimationFrame(frame);
+$('slow-btn').setAttribute('aria-pressed',String(app.slow));document.body.dataset.mode='box';initKidControls();updateRecordCount();syncConvInputs();syncProbeControls();updateLegend();syncSeaPlayback();updateUI();resize();requestAnimationFrame(frame);
 // Read-only diagnostics facilitate offline review; no network or student data collection.
-Object.defineProperty(window,'windLab',{value:Object.freeze({getState:()=>JSON.parse(JSON.stringify({mode:app.mode,paused:app.paused,particle:app.particle,arrows:app.arrows,heatmap:app.heatmap,slow:app.slow,seaView:{...seaView},seaClock,cloudCount:cloudPuffs.length,cloudVisible:cloudPuffs.filter(p=>p.opacity>.1).length,seaModel:{depth:seaDepth(),zmax:seaMaxZ(),xRange:[-5000,5000],plane:seaPlane()},box:app.box,convection:app.conv,probes,selectedProbe,annotations:app.annotations,recordCount:records.length,smokeCount:smokes.length,particleCount:particles.length,audioState:audio.ctx?audio.ctx.state:'not-started',audioGain:audio.wind?audio.wind.gain.value:0,assets:Object.fromEntries(Object.entries(coastImages).map(([n,img])=>[n,{loaded:img.complete&&img.naturalWidth>0,width:img.naturalWidth,height:img.naturalHeight}])),viewport:{...viewport,W,H}})),samplePhysical:(x,z)=>({velocity:seaPhysicalVelocity(x,z),density:Math.exp(-z/8500),temperature:seaEnvironment(x,z)}),project:(x,z)=>seaPoint(x,z),sampleAllSeaParticles:()=>convParticles.map(p=>({x:p.x,z:p.z,r:p.r,temp:p.temp})),sampleAir:(x,y)=>app.mode==='box'?boxVelocity(x,y):seaVelocity(x,y),sampleParticles:()=>JSON.parse(JSON.stringify((app.mode==='box'?particles:convParticles).slice(0,30))),sampleSmoke:()=>JSON.parse(JSON.stringify(smokes.map(p=>({x:p.x,y:p.y,life:p.life}))))}),writable:false});
+Object.defineProperty(window,'windLab',{value:Object.freeze({getState:()=>JSON.parse(JSON.stringify({mode:app.mode,paused:app.paused,particle:app.particle,arrows:app.arrows,heatmap:app.heatmap,slow:app.slow,seaView:{...seaView},seaClock,cloudCount:cloudPuffs.length,cloudVisible:cloudPuffs.filter(p=>p.opacity>.1).length,seaModel:{depth:seaDepth(),zmax:seaMaxZ(),xRange:[-5000,5000],plane:seaPlane()},box:app.box,convection:app.conv,probes,selectedProbe,annotations:app.annotations,recordCount:records.length,smokeCount:smokes.length,particleCount:particles.length,audioState:audio.ctx?audio.ctx.state:'not-started',audioGain:audio.wind?audio.wind.gain.value:0,fireGain:audio.fire?audio.fire.gain.value:0,volume:app.volume,windStrength:windAudioStrength(),windGainTarget:Math.pow(windAudioStrength(),1.25)*.065,windsock:windsockShape(),assets:Object.fromEntries(Object.entries(coastImages).map(([n,img])=>[n,{loaded:img.complete&&img.naturalWidth>0,width:img.naturalWidth,height:img.naturalHeight}])),viewport:{...viewport,W,H}})),samplePhysical:(x,z)=>({velocity:seaPhysicalVelocity(x,z),density:Math.exp(-z/8500),temperature:seaEnvironment(x,z)}),project:(x,z)=>seaPoint(x,z),sampleAllSeaParticles:()=>convParticles.map(p=>({x:p.x,z:p.z,r:p.r,temp:p.temp})),sampleAir:(x,y)=>app.mode==='box'?boxVelocity(x,y):seaVelocity(x,y),sampleParticles:()=>JSON.parse(JSON.stringify((app.mode==='box'?particles:convParticles).slice(0,30))),sampleSmoke:()=>JSON.parse(JSON.stringify(smokes.map(p=>({x:p.x,y:p.y,life:p.life}))))}),writable:false});
 })();
 </script>
+<!-- Third-party notices. Canvas UI Ripple source: https://canvasui.dev/r/ripple-vanilla.json
+# MIT + Commons Clause License Condition v1.0
 
+Copyright (c) 2026 David Haz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, and distribute the Software **as part of
+an application, website, or product**, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+## Commons Clause Restriction
+
+You may use this Software, including for any commercial purpose, **so long as
+you do not sell, sublicense, or redistribute the components themselves -
+whether alone, in a bundle, or as a ported version.**
+
+## No Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+
+ISC License
+
+Copyright (c) 2026 Lucide Icons and Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+- --
+
+The following Lucide icons are derived from the Feather project:
+
+airplay, alert-circle, alert-octagon, alert-triangle, aperture, arrow-down-circle, arrow-down-left, arrow-down-right, arrow-down, arrow-left-circle, arrow-left, arrow-right-circle, arrow-right, arrow-up-circle, arrow-up-left, arrow-up-right, arrow-up, at-sign, calendar, cast, check, chevron-down, chevron-left, chevron-right, chevron-up, chevrons-down, chevrons-left, chevrons-right, chevrons-up, circle, clipboard, clock, code, columns, command, compass, corner-down-left, corner-down-right, corner-left-down, corner-left-up, corner-right-down, corner-right-up, corner-up-left, corner-up-right, crosshair, database, divide-circle, divide-square, dollar-sign, download, external-link, feather, frown, hash, headphones, help-circle, info, italic, key, layout, life-buoy, link-2, link, loader, lock, log-in, log-out, maximize, meh, minimize, minimize-2, minus-circle, minus-square, minus, monitor, moon, more-horizontal, more-vertical, move, music, navigation-2, navigation, octagon, pause-circle, percent, plus-circle, plus-square, plus, power, radio, rss, search, server, share, shopping-bag, sidebar, smartphone, smile, square, table-2, tablet, target, terminal, trash-2, trash, triangle, tv, type, upload, x-circle, x-octagon, x-square, x, zoom-in, zoom-out
+
+The MIT License (MIT) (for the icons listed above)
+
+Copyright (c) 2013-present Cole Bemis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-->
+<script>
+(()=>{
+const canvasDimensionLimits = new WeakMap                                                        ();
+
+/** Keep the existing DPR budget, then account for browser pinch zoom. */
+function getCanvasPixelRatio(
+  element             ,
+  context                                                 ,
+)         {
+  const scale = window.visualViewport?.scale || 1;
+  const requested = Math.min(window.devicePixelRatio || 1, 2) * scale;
+  const width = Math.max(element.clientWidth, 1);
+  const height = Math.max(element.clientHeight, 1);
+  let maxDimension = 8192;
+  if (context) {
+    let limit = canvasDimensionLimits.get(context);
+    if (limit === undefined) {
+      limit = Math.min(
+        maxDimension,
+        context.getParameter(context.MAX_TEXTURE_SIZE),
+        context.getParameter(context.MAX_RENDERBUFFER_SIZE),
+      );
+      canvasDimensionLimits.set(context, limit);
+    }
+    maxDimension = limit;
+  }
+  // Rendering the full element preserves its CSS position and native input
+  // geometry while panning. Bound allocations when zooming large canvases.
+  return Math.min(
+    requested,
+    maxDimension / Math.max(width, height),
+    Math.sqrt(16_777_216 / (width * height)),
+  );
+}
+
+/** Pinch zoom changes visualViewport without resizing the element's CSS box. */
+function createCanvasResizeObserver(onResize            ) {
+  const viewport = window.visualViewport;
+  let frame = 0;
+  let disconnected = false;
+  const schedule = () => {
+    if (frame || disconnected) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      onResize();
+    });
+  };
+  const observer = new ResizeObserver(schedule);
+  window.addEventListener("resize", schedule, { passive: true });
+  viewport?.addEventListener("resize", schedule, { passive: true });
+  return {
+    observe(element         , options                        ) {
+      observer.observe(element, options);
+    },
+    unobserve(element         ) {
+      observer.unobserve(element);
+    },
+    disconnect() {
+      disconnected = true;
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", schedule);
+      viewport?.removeEventListener("resize", schedule);
+    },
+  };
+}
+
+                                                       
+                                                                                 
+  
+
+                                                
+                           
+                     
+                                            
+            
+  
+
+/** Configure the capture subtree for both generations of the experimental API. */
+function prepareHtmlInCanvas(source                   , content             ) {
+  if ("content" in source) {
+    source.setAttribute("content", "drawable");
+    content.setAttribute("drawable", "");
+  } else {
+    source.setAttribute("layoutsubtree", "");
+  }
+}
+
+/** Capture pixels and keep the native DOM hit-test region aligned with them. */
+function drawHtmlInCanvas(
+  source                   ,
+  context                          ,
+  content             ,
+) {
+  const transform = (context                       ).drawElementImage(content, 0, 0);
+  const canvas = source                       ;
+  // Chrome 154 decoupled geometry from drawing before enabling automatic 2D
+  // synchronization. Older versions have no update method; newer versions
+  // synchronize automatically and return void. Use the returned matrix as-is:
+  // drawElementImage already accounts for the canvas's pixel density.
+  if (transform && typeof canvas.updateElementGeometry === "function") {
+    canvas.updateElementGeometry(content, { canvasTransform: transform });
+  }
+}
+
+                                                       
+
+                                
+                                      
+                     
+                                                              
+                 
+                                                    
+                      
+                                                      
+                 
+                                                                
+                 
+                                                                     
+                      
+                                                                              
+                      
+                                                                   
+                 
+                                                                                                             
+                          
+                                                                              
+                    
+ 
+
+                                 
+                                                               
+                            
+                                                                 
+                       
+                                            
+                            
+ 
+
+                                 
+                                    
+                                               
+                                                                            
+                                                            
+                                                               
+                     
+                                                     
+                      
+ 
+
+const DEFAULTS                          = {
+  amplitude: 0.5,
+  speed: 0.65,
+  wavelength: 80,
+  rings: 2,
+  decay: 1,
+  refraction: 100,
+  dispersion: 0.5,
+  shine: 0.5,
+  trigger: "click",
+  interval: 0,
+};
+
+const MAX_RIPPLES = 12;
+const BASE_SPEED = 340;
+
+                                            
+                                
+                            
+  
+
+                                                       
+                                                                      
+  
+
+const VERT = `#version 300 es
+precision highp float;
+layout(location = 0) in vec2 aPos;
+out vec2 vUv;
+void main () {
+  vUv = aPos * 0.5 + 0.5;
+  gl_Position = vec4(aPos, 0.0, 1.0);
+}`;
+
+const FRAG = `#version 300 es
+precision highp float;
+in vec2 vUv;
+out vec4 outColor;
+uniform sampler2D uContent;
+uniform vec2 uResolution;
+uniform vec4 uRipples[12];
+uniform int uCount;
+uniform float uSpeed;
+uniform float uWavelength;
+uniform float uWidth;
+uniform float uDecay;
+uniform float uRefraction;
+uniform float uDispersion;
+uniform float uShine;
+uniform float uHasContent;
+uniform float uMaxX;
+
+vec4 page (vec2 p) {
+  p.x = clamp(p.x, 0.0005, uMaxX - 0.0005);
+  p.y = clamp(p.y, 0.0005, 0.9995);
+  return texture(uContent, p);
+}
+
+void main () {
+  vec2 pUv = vec2(vUv.x, 1.0 - vUv.y);
+  vec2 frag = pUv * uResolution;
+
+  vec2 grad = vec2(0.0);
+  float k = 6.28318530718 / uWavelength;
+  float w2 = uWidth * uWidth;
+
+  for (int i = 0; i < 12; i++) {
+    if (i >= uCount) break;
+    vec4 rp = uRipples[i];
+    vec2 dv = frag - rp.xy;
+    float r = length(dv);
+    float front = uSpeed * rp.z;
+    float s = r - front;
+    float env = exp(-s * s / w2) * exp(-uDecay * rp.z) * rp.w;
+    env *= smoothstep(0.0, 0.08, rp.z);
+    env *= inversesqrt(1.0 + front / max(uWavelength, 1.0) * 0.2);
+    if (env < 0.0015) continue;
+    float dh = (k * cos(s * k) - 2.0 * s / w2 * sin(s * k)) * env;
+    grad += dv / max(r, 1.0) * dh * uWavelength * 0.16;
+  }
+
+  float g = dot(grad, vec2(-0.55, -0.8));
+  float glint = pow(clamp(g * 2.2, 0.0, 1.0), 2.0) * uShine;
+  float shade = pow(clamp(-g * 1.6, 0.0, 1.0), 2.0) * uShine * 0.3;
+
+  if (uHasContent < 0.5) {
+    float a = clamp(glint * 0.9 + shade * 0.5, 0.0, 0.85);
+    outColor = vec4(vec3(glint * 0.9), a);
+    return;
+  }
+
+  vec2 offs = grad * uRefraction / uResolution;
+  vec3 col;
+  if (uDispersion > 0.001) {
+    float d = uDispersion * 0.35;
+    col = vec3(
+      page(pUv + offs * (1.0 + d)).r,
+      page(pUv + offs).g,
+      page(pUv + offs * (1.0 - d)).b
+    );
+  } else {
+    col = page(pUv + offs).rgb;
+  }
+  col += glint;
+  col *= 1.0 - shade;
+  outColor = vec4(col, 1.0);
+}`;
+
+function supportsHtmlInCanvas()          {
+  if (typeof document === "undefined") return false;
+  const probe = document.createElement("canvas")                   ;
+  const ctx = probe.getContext("2d")                              ;
+  return Boolean(
+    ctx &&
+    typeof ctx.drawElementImage === "function" &&
+    typeof probe.requestPaint === "function",
+  );
+}
+
+function createRipple(
+  elements                ,
+  options                = {},
+)                        {
+  const config = { ...DEFAULTS, ...options };
+  const { source, content, output } = elements;
+
+  const gl = output.getContext("webgl2", {
+    alpha: true,
+    depth: false,
+    stencil: false,
+    antialias: false,
+    premultipliedAlpha: true,
+  });
+  if (!gl || gl.isContextLost()) return null;
+
+  const sourceCtx = source.getContext("2d")                              ;
+  const paintable = source                   ;
+  const htmlInCanvas = false && Boolean(
+    sourceCtx &&
+    typeof sourceCtx.drawElementImage === "function" &&
+    typeof paintable.requestPaint === "function",
+  );
+
+  if (htmlInCanvas) prepareHtmlInCanvas(source, content);
+
+  let contentDirty = false;
+  let wake = () => {};
+
+  if (htmlInCanvas) {
+    paintable.onpaint = () => {
+      try {
+        sourceCtx .reset();
+        drawHtmlInCanvas(source, sourceCtx , content);
+        contentDirty = true;
+        wake();
+      } catch {}
+    };
+  }
+
+  function compile(type        , text        )              {
+    const shader = gl .createShader(type) ;
+    gl .shaderSource(shader, text);
+    gl .compileShader(shader);
+    if (!gl .getShaderParameter(shader, gl .COMPILE_STATUS)) {
+      console.error("Ripple shader error:", gl .getShaderInfoLog(shader));
+    }
+    return shader;
+  }
+
+  const vertexShader = compile(gl.VERTEX_SHADER, VERT);
+  const fragmentShader = compile(gl.FRAGMENT_SHADER, FRAG);
+  const program = gl.createProgram() ;
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragmentShader);
+  gl.linkProgram(program);
+
+  const uniforms                                       = {};
+  const count = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+  for (let i = 0; i < count; i++) {
+    const info = gl.getActiveUniform(program, i) ;
+    uniforms[info.name.replace("[0]", "")] = gl.getUniformLocation(
+      program,
+      info.name,
+    ) ;
+  }
+
+  const quad = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+  gl.bufferData(
+    gl.ARRAY_BUFFER,
+    new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+    gl.STATIC_DRAW,
+  );
+  gl.enableVertexAttribArray(0);
+  gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+  const contentTexture = gl.createTexture() ;
+  gl.bindTexture(gl.TEXTURE_2D, contentTexture);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  gl.texImage2D(
+    gl.TEXTURE_2D,
+    0,
+    gl.RGBA,
+    1,
+    1,
+    0,
+    gl.RGBA,
+    gl.UNSIGNED_BYTE,
+    new Uint8Array([0, 0, 0, 0]),
+  );
+
+  let contentMaxX = 1;
+
+  function syncCanvasSize() {
+    const dpr = getCanvasPixelRatio(output, gl );
+    const width = Math.max(1, Math.round(output.clientWidth * dpr));
+    const height = Math.max(1, Math.round(output.clientHeight * dpr));
+    if (output.width !== width || output.height !== height) {
+      output.width = width;
+      output.height = height;
+    }
+    contentMaxX = Math.min(
+      1,
+      Math.max(0.05, content.clientWidth / Math.max(output.clientWidth, 1)),
+    );
+    if (htmlInCanvas) {
+      const sourceWidth = Math.max(1, Math.round(source.clientWidth * dpr));
+      const sourceHeight = Math.max(1, Math.round(source.clientHeight * dpr));
+      if (source.width !== sourceWidth|| source.height !== sourceHeight) {
+        source.width = sourceWidth;
+        source.height = sourceHeight;
+      }
+      paintable.requestPaint ();
+    }
+  }
+
+  syncCanvasSize();
+
+  function uploadContent() {
+    if (!htmlInCanvas || !contentDirty) return;
+    contentDirty = false;
+    gl .bindTexture(gl .TEXTURE_2D, contentTexture);
+    gl .texImage2D(
+      gl .TEXTURE_2D,
+      0,
+      gl .RGBA,
+      gl .RGBA,
+      gl .UNSIGNED_BYTE,
+      source,
+    );
+  }
+
+                                                                 
+  const ripples         = [];
+  const rippleData = new Float32Array(MAX_RIPPLES * 4);
+
+  function splash(x        , y        , strength = 1) {
+    if (reducedMotion) return;
+    if (ripples.length >= MAX_RIPPLES) ripples.shift();
+    ripples.push({ x, y, age: 0, amp: strength });
+    start();
+  }
+
+  function pruneRipples(delta        ) {
+    const diag = Math.hypot(output.clientWidth, output.clientHeight);
+    const speedPx = BASE_SPEED * Math.max(config.speed, 0.05);
+    const width = config.wavelength * Math.max(config.rings, 1) * 0.5;
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      const rp = ripples[i];
+      rp.age += delta;
+      const gone =
+        rp.age * speedPx > diag + width * 3 ||
+        Math.exp(-Math.max(config.decay, 0.05) * rp.age) * rp.amp < 0.012;
+      if (gone) ripples.splice(i, 1);
+    }
+  }
+
+  function render() {
+    uploadContent();
+    const dpr = output.width / Math.max(output.clientWidth, 1);
+    gl .useProgram(program);
+    gl .activeTexture(gl .TEXTURE0);
+    gl .bindTexture(gl .TEXTURE_2D, contentTexture);
+    gl .uniform1i(uniforms.uContent, 0);
+    gl .uniform2f(uniforms.uResolution, output.width, output.height);
+    for (let i = 0; i < MAX_RIPPLES; i++) {
+      const rp = ripples[i];
+      rippleData[i * 4] = rp ? rp.x * dpr : 0;
+      rippleData[i * 4 + 1] = rp ? rp.y * dpr : 0;
+      rippleData[i * 4 + 2] = rp ? rp.age : 0;
+      rippleData[i * 4 + 3] = rp ? rp.amp * Math.max(config.amplitude, 0) : 0;
+    }
+    gl .uniform4fv(uniforms.uRipples, rippleData);
+    gl .uniform1i(uniforms.uCount, ripples.length);
+    gl .uniform1f(uniforms.uSpeed, BASE_SPEED * Math.max(config.speed, 0.05) * dpr);
+    gl .uniform1f(uniforms.uWavelength, Math.max(config.wavelength, 4) * dpr);
+    gl .uniform1f(
+      uniforms.uWidth,
+      Math.max(config.wavelength, 4) * Math.max(config.rings, 1) * 0.5 * dpr,
+    );
+    gl .uniform1f(uniforms.uDecay, Math.max(config.decay, 0.05));
+    gl .uniform1f(uniforms.uRefraction, Math.max(config.refraction, 0) * dpr);
+    gl .uniform1f(uniforms.uDispersion, Math.max(config.dispersion, 0));
+    gl .uniform1f(uniforms.uShine, Math.max(config.shine, 0));
+    gl .uniform1f(uniforms.uHasContent, htmlInCanvas ? 1 : 0);
+    gl .uniform1f(uniforms.uMaxX, contentMaxX);
+    gl .bindFramebuffer(gl .FRAMEBUFFER, null);
+    gl .viewport(0, 0, output.width, output.height);
+    gl .drawArrays(gl .TRIANGLE_STRIP, 0, 4);
+  }
+
+  function renderIdle() {
+    gl .bindFramebuffer(gl .FRAMEBUFFER, null);
+    gl .viewport(0, 0, output.width, output.height);
+    if (htmlInCanvas) {
+      render();
+    } else {
+      gl .clearColor(0, 0, 0, 0);
+      gl .clear(gl .COLOR_BUFFER_BIT);
+    }
+  }
+
+  let raf = 0;
+  let lastTime = performance.now();
+  let destroyed = false;
+  let running = false;
+  let visible = true;
+  let ambientTimer = 0;
+
+  const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let reducedMotion = motionQuery.matches;
+
+  function spawnAmbient() {
+    const w = output.clientWidth;
+    const h = output.clientHeight;
+    if (w < 10 || h < 10) return;
+    splash(
+      w * (0.15 + Math.random() * 0.7),
+      h * (0.15 + Math.random() * 0.7),
+      0.6 + Math.random() * 0.5,
+    );
+  }
+
+  function frame(now        ) {
+    if (destroyed) return;
+    if (!visible) {
+      running = false;
+      return;
+    }
+    const delta = Math.min(Math.max((now - lastTime) / 1000, 0), 1 / 30);
+    lastTime = now;
+    if (!reducedMotion) {
+      pruneRipples(delta);
+      if (config.interval > 0) {
+        ambientTimer += delta;
+        if (ambientTimer >= config.interval) {
+          ambientTimer = 0;
+          spawnAmbient();
+        }
+      }
+    }
+    if (ripples.length > 0) {
+      render();
+    } else {
+      renderIdle();
+      if (!contentDirty && (config.interval <= 0 || reducedMotion)) {
+        running = false;
+        return;
+      }
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (destroyed || running || !visible) return;
+    running = true;
+    lastTime = performance.now();
+    raf = requestAnimationFrame(frame);
+  }
+
+  wake = start;
+  start();
+
+  function localPoint(event              )                   {
+    const rect = output.getBoundingClientRect();
+    return [event.clientX - rect.left, event.clientY - rect.top];
+  }
+
+  let hoverX = -1e5;
+  let hoverY = -1e5;
+
+  function onPointerDown(event              ) {
+    if (config.trigger === "none") return;
+    const [x, y] = localPoint(event);
+    splash(x, y, 1);
+  }
+
+  function onPointerMove(event              ) {
+    if (config.trigger !== "hover") return;
+    const [x, y] = localPoint(event);
+    if (Math.hypot(x - hoverX, y - hoverY) < 56) return;
+    hoverX = x;
+    hoverY = y;
+    splash(x, y, 0.3);
+  }
+
+  content.addEventListener("pointerdown", onPointerDown, { passive: true });
+  content.addEventListener("pointermove", onPointerMove, { passive: true });
+
+  function onMotionChange() {
+    reducedMotion = motionQuery.matches;
+    if (reducedMotion) ripples.length = 0;
+    start();
+  }
+  motionQuery.addEventListener("change", onMotionChange);
+
+  const observer = createCanvasResizeObserver(() => {
+    syncCanvasSize();
+    start();
+  });
+  observer.observe(output);
+  observer.observe(content);
+
+  const intersection = new IntersectionObserver((entries) => {
+    visible = entries[entries.length - 1]?.isIntersecting ?? true;
+    if (visible) start();
+  });
+  intersection.observe(output);
+
+  return {
+    setOptions(next) {
+      if (
+        !Object.entries(next).some(
+          ([key, value]) => config[key                       ] !== value,
+        )
+      )
+        return;
+      Object.assign(config, next);
+      start();
+    },
+    splash,
+    resize() {
+      syncCanvasSize();
+      start();
+    },
+    destroy() {
+      destroyed = true;
+      cancelAnimationFrame(raf);
+      content.removeEventListener("pointerdown", onPointerDown);
+      content.removeEventListener("pointermove", onPointerMove);
+      observer.disconnect();
+      intersection.disconnect();
+      motionQuery.removeEventListener("change", onMotionChange);
+      gl .deleteTexture(contentTexture);
+      gl .deleteProgram(program);
+      gl .deleteShader(vertexShader);
+      gl .deleteShader(fragmentShader);
+      gl .deleteBuffer(quad);
+      if (htmlInCanvas) paintable.onpaint = null;
+    },
+  };
+}
+
+
+// One official Canvas UI Ripple instance, shared by all controls. Never captures or distorts text.
+const host=document.createElement('div');host.id='fx-feedback';host.setAttribute('aria-hidden','true');
+host.innerHTML='<canvas id="fx-source"></canvas><canvas id="fx-output"></canvas>';document.body.append(host);
+let feedback=null,feedbackTimer=0;
+const motion=matchMedia('(prefers-reduced-motion: reduce)');
+const source=host.querySelector('#fx-source'),output=host.querySelector('#fx-output');
+function disposeFeedback(){clearTimeout(feedbackTimer);feedback?.destroy();feedback=null;host.style.opacity='0';host.dataset.state='idle';}
+function showFeedback(event){
+ const button=event.target.closest('button,summary');if(!button||button.disabled||motion.matches||button.classList.contains('switch'))return;
+ const rect=button.getBoundingClientRect();if(rect.width<1||rect.height<1)return;
+ Object.assign(host.style,{left:rect.left+'px',top:rect.top+'px',width:rect.width+'px',height:rect.height+'px',borderRadius:getComputedStyle(button).borderRadius,opacity:'1'});
+ if(!feedback){
+  try{feedback=createRipple({source,content:host,output},{trigger:'none',interval:0,amplitude:.8,speed:.72,wavelength:34,rings:1,decay:6,refraction:0,dispersion:0,shine:.55});}catch{feedback=null;}
+ }
+ if(!feedback){host.style.opacity='0';host.dataset.state='fallback';return;}
+ host.dataset.state='active';feedback.resize();
+ feedback.splash(event.detail===0?rect.width/2:event.clientX-rect.left,event.detail===0?rect.height/2:event.clientY-rect.top,.8);
+ clearTimeout(feedbackTimer);feedbackTimer=setTimeout(()=>{host.style.opacity='0';host.dataset.state='idle';},650);
+}
+document.addEventListener('click',showFeedback,true);
+window.addEventListener('pagehide',disposeFeedback);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)disposeFeedback();});
+motion.addEventListener('change',()=>{if(motion.matches)disposeFeedback();});
+output.addEventListener('webglcontextlost',event=>{event.preventDefault();disposeFeedback();});
+
+})();
+</script>
 </body>
 </html>
-
-
-
-<style id="physical-air-stage-v2">
-:root{--uv-bg:#F3F1F5;--uv-surface:#fff;--uv-soft:#E7E2EB;--uv-ink:#282036;--uv-muted:#6B6376;--uv-line:#D9D2E0;--uv-accent:#5132A5;--uv-head:#40394E;--uv-headink:#fff;--uv-on:#fff;--uv-focus:#AC4C7C}
-html,body{background:#40394E!important}body{color:#282036!important}.v2-rail,.lab-issue{display:none!important}body.airSingle,#airFrame{background:#F3F1F5!important;display:grid!important;grid-template-rows:96px minmax(0,1fr) 40px!important}body.airSingle>header,#airFrame>header{background:#40394E!important;color:#fff!important;border:0!important;gap:24px!important;padding:16px 28px!important;flex-direction:row!important;flex-wrap:nowrap!important}body.airSingle>header h1,#airFrame>header h1{color:white!important;font-size:29px!important}header small{color:#D7D1DF!important}header nav{margin-left:auto!important;display:flex!important;flex-direction:row!important;width:auto!important;gap:8px!important}header nav button{font-size:19px!important;min-height:46px!important;padding:9px 16px!important;border:1px solid #81768E!important;background:transparent!important;color:white!important;border-radius:8px!important}header nav button.active,header nav button[aria-selected=true]{background:#F3F1F5!important;color:#5132A5!important;border-color:#F3F1F5!important}body.airSingle>main,#airFrame>main{background:#F3F1F5!important;padding:18px 28px!important;width:100%!important;margin:0!important;height:100%!important}body.airSingle>footer,#airFrame>footer{background:#F3F1F5!important;color:#6B6376!important;margin:0!important;padding:8px 28px!important;font-size:14px!important}body .card,body .panel,body .stage,body .experiment,body .pair-evidence{background:#fff!important;border:1px solid #D9D2E0!important;border-radius:16px!important;box-shadow:none!important}button{border-radius:8px!important;border-color:#CFC5DB!important;box-shadow:none!important}button.primary{background:#5132A5!important;border-color:#5132A5!important;color:white!important}button.active,button[aria-selected=true]{background:#E7E2EB!important;color:#5132A5!important}input[type=range],input[type=checkbox]{accent-color:#5132A5!important}.bottom-dock{background:white!important;border:1px solid #D9D2E0!important;border-radius:14px!important;padding:12px 18px!important;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.lesson-notes summary{cursor:pointer;font-size:18px;color:#5132A5}.lesson-notes[open]{position:absolute!important;inset:110px 100px 65px!important;width:auto!important;max-height:none!important;overflow:auto!important;z-index:100!important;padding:26px!important;background:#fff!important;border:2px solid #D9D2E0!important;border-radius:16px!important;box-shadow:0 0 0 1000px #251E3877!important}.lesson-notes[open] summary{font-size:24px;margin-bottom:16px}.lesson-notes[open] p{font-size:20px!important;line-height:1.6}.hint,.muted{color:#6B6376!important}.callout,.status,.controls{background:#ECE7F1!important;color:#40394E!important;border-color:#5132A5!important}.lesson-notes button{margin:8px}body.airSingle #air-storage-guard{bottom:42px!important;left:auto!important;right:28px!important}
-html,body{width:100%;height:100%;overflow:hidden}.air-stage-frame{position:absolute!important;left:50%;top:50%;width:1600px!important;height:900px!important;min-height:0!important;max-width:none!important;transform-origin:center!important;margin:0!important;padding:0!important;overflow:hidden!important;background:#F3F1F5!important;display:flex!important;flex-direction:column!important}.air-stage-frame>header{height:90px!important;min-height:90px!important;padding:12px 26px!important;background:#40394E!important;color:white!important;border:0!important;gap:20px!important;flex-wrap:nowrap!important}.air-stage-frame>header h1{font-size:28px!important;color:white!important}.air-stage-frame>header .brand p{color:#D7D1DF!important}.air-stage-frame>header .brand{width:auto!important;flex:none!important}.air-stage-frame>header .brand-mark,.air-stage-frame>header .brandmark,.air-stage-frame>header .brand-symbol{display:none!important}.air-stage-frame>header .tools,.air-stage-frame>header .utilities,.air-stage-frame>header .head-actions{display:flex!important;flex:none!important;gap:6px!important}.air-stage-frame>header .tools button,.air-stage-frame>header .utilities button,.air-stage-frame>header .head-actions button{background:#F3F1F5!important;color:#40394E!important}.air-stage-frame>main.workspace{padding:16px 26px 10px!important;flex:1!important;min-height:0!important;overflow:hidden!important;margin:0!important;width:100%!important}.air-stage-frame>footer{padding:6px 26px!important;margin:0!important;background:#F3F1F5!important;color:#6B6376!important;flex:none!important}.air-stage-frame .sidebar{min-width:0!important;background:#fff!important;border:1px solid #D9D2E0!important;border-radius:14px!important;box-shadow:none!important}.air-stage-frame .sidebar button{min-height:38px!important;font-size:17px!important;padding:7px 13px!important}.air-stage-frame .sidebar h2,.air-stage-frame .sidebar h3{font-size:19px!important}.air-stage-frame .sidebar .small-note,.air-stage-frame .sidebar .side-note{font-size:15px!important}.air-stage-frame .sidebar input[type=range]{min-height:26px!important}.air-stage-frame .sidebar [hidden]{display:none!important}.air-stage-frame .sidebar .hidden{display:none!important}.air-stage-frame .canvas-wrap,.air-stage-frame .canvas-area{min-height:0!important}.air-stage-frame canvas{touch-action:none}.air-stage-frame .legend{font-size:14px!important}.air-stage-frame .side-hint{font-size:14px!important}.air-stage-frame .workspace{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:minmax(0,1fr) 210px!important;gap:10px!important}.air-stage-frame .left{display:flex!important;flex-direction:column!important;min-height:0;gap:6px!important}.air-stage-frame .stage-wrap{flex:1!important;min-height:0!important}.air-stage-frame .stage-head{padding:8px 18px!important}.air-stage-frame .view-tools{padding:0 18px 6px!important}.air-stage-frame .stage-caption{padding:5px 18px!important}.air-stage-frame .bottom-bar{padding:5px 0!important;gap:8px!important}.air-stage-frame .bottom-bar button{min-height:36px!important;font-size:16px!important}.air-stage-frame .observation-strip{font-size:16px!important;padding:4px 12px!important}.air-stage-frame .workspace>aside{display:flex!important;flex-direction:row!important;gap:20px!important;background:white!important;border:1px solid #D9D2E0!important;border-radius:14px!important;padding:12px 18px!important;overflow:visible!important}.air-stage-frame .side-section{border:0!important;padding:0!important;margin:0!important;min-width:0}.air-stage-frame .side-section:first-child{width:370px;flex:none}.air-stage-frame .side-section:nth-child(2){flex:1;display:flex;flex-wrap:wrap;align-content:start;gap:6px 15px}.air-stage-frame .section-heading{margin:0 0 5px!important}.air-stage-frame .section-heading h3{font-size:19px!important}.air-stage-frame #box-controls{display:grid;grid-template-columns:160px 1fr;gap:4px 12px;align-items:center}.air-stage-frame #heat-btn{grid-row:1 / 3;min-height:45px!important;font-size:18px!important;margin:0!important}.air-stage-frame .range-labels,.air-stage-frame #box-controls .subnote{font-size:12px!important;margin:0!important}.air-stage-frame .control-label{font-size:14px!important;margin:0!important}.air-stage-frame #smoke-panel{width:100%}.air-stage-frame .probe-heading{display:none!important}.air-stage-frame .probe-select,.air-stage-frame .probe-places{display:flex!important;gap:5px!important;margin:0 0 5px!important}.air-stage-frame .probe-select button,.air-stage-frame .probe-places button{min-height:31px!important;font-size:15px!important;padding:4px 10px!important}.air-stage-frame .probe-readings{display:flex!important;gap:20px!important;margin:4px 0!important;font-size:14px!important}.air-stage-frame .probe-position{font-size:14px!important;margin:3px 0!important}.air-stage-frame .probe-switches{display:flex!important;gap:25px!important}.air-stage-frame .switch-row{padding:3px 0!important;font-size:14px!important}.air-stage-frame .volume-row{width:230px;margin:0!important}.air-stage-frame .side-section>.subnote{margin:0!important;font-size:12px!important}.air-stage-frame .record-guide{width:240px;flex:none}.air-stage-frame .guide-items{display:none}.air-stage-frame .record-guide .explanation{font-size:13px!important;max-height:130px;overflow:auto}.air-stage-frame .record-guide .section-heading span{display:none}.air-stage-frame .sea-scale-note{font-size:12px!important}.air-stage-frame #ground-panel{display:flex;flex-wrap:wrap;gap:8px 20px}.air-stage-frame #convection-controls .sea-condition-summary{font-size:14px!important}.air-stage-frame #convection-controls .sea-temp-inline{font-size:14px!important}.air-stage-frame #convection-controls .sea-play{min-height:33px!important;font-size:15px!important;padding:4px!important}.air-stage-frame #convection-controls .coast-select{margin:0!important}.air-stage-frame .sea-temp-popover{bottom:70px!important;top:auto!important;left:40px!important;right:auto!important}.air-stage-frame .side-section h3{font-size:18px!important}</style><script id="physical-air-layout-v2">(()=>{const frame=document.querySelector(".shell");frame.classList.add("air-stage-frame");function fit(){frame.style.transform="translate(-50%,-50%) scale("+Math.min(innerWidth/1600,innerHeight/900)+")"}addEventListener("resize",fit);fit();dispatchEvent(new Event("resize"));})();</script><style id="air-header-contrast-fix">body .air-stage-frame>header nav button,body .air-stage-frame>header nav button[aria-pressed=false],body .air-stage-frame>header nav button[aria-selected=false]{background:#F3F1F5!important;color:#40394E!important;border:1px solid #CFC5DB!important}body .air-stage-frame>header nav button.active,body .air-stage-frame>header nav button[aria-pressed=true],body .air-stage-frame>header nav button[aria-selected=true]{background:#DDD3EC!important;color:#3F2585!important;border:1px solid #AC95CE!important}</style>
