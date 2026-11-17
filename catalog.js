@@ -142,6 +142,45 @@
           ? String(meta.teachingType) : '初稿';
       }
 
+      // Network audit: 263 distinct HTML entries; reference links are excluded.
+      var networkRequirements = {
+  "./四上2.7食物在身体里的旅行/": {
+    "mode": "required-part",
+    "label": "部分功能需联网",
+    "note": "人体定位3D模型需联网下载（GitHub / jsDelivr）；进食情境、胶囊介绍与器官比较可离线使用。"
+  },
+  "./四上2.4测量肺活量/": {
+    "mode": "optional",
+    "label": "可选局域网",
+    "note": "单机测量与记录不需联网；课堂汇总需连接同一局域网内的教师服务，下载课堂服务包需联网。"
+  },
+  "./四上3.3声音的高低_学生端/": {
+    "mode": "optional",
+    "label": "可选课堂联网",
+    "note": "单机拾音与观察不需联网；发送课堂数据时连接教师指定的可信HTTPS或局域网服务。"
+  },
+  "./一上2.2发现生长/": {
+    "mode": "optional",
+    "label": "可选联网下载",
+    "note": "课内活动不需联网；从网站点击“下载离线课件”时需要连接当前网站。"
+  }
+};
+      function networkBadge(resource, detailed) {
+        var info = networkRequirements[resource[4]];
+        if (!info) return '';
+        var badge = '<span class="network-badge network-' + info.mode + '" title="' + escapeHTML(info.note) + '">' + escapeHTML(info.label) + '</span>';
+        return detailed ? '<div class="network-notice">' + badge + '<span class="network-purpose">' + escapeHTML(info.note) + '</span></div>' : badge;
+      }
+      function lessonNetworkBadges(resources) {
+        var labels = {};
+        return resources.map(function (resource) {
+          var info = networkRequirements[resource[4]];
+          if (!info || labels[info.label]) return '';
+          labels[info.label] = true;
+          return networkBadge(resource, false);
+        }).join('');
+      }
+
       function resourceHTML(book, resource) {
         var author = (resource[2] || '').replace(/^【|】$/g, '').trim();
         var feedback=window.AIHTMLFeedback;
@@ -150,6 +189,7 @@
           '<div class="resource-overview"><div class="resource-identity"><h5>' + escapeHTML(resource[1]) + '</h5><span class="resource-kind">' + escapeHTML(resourceTeachingType(updateMeta)) + '</span>' +
           '<div class="resource-tech">'+resourceGrade(resource)+'</div></div><div class="resource-update">' + (feedback ? feedback.date(resource[4]) : '') +
           '<p class="resource-description"><span class="resource-summary-label">最新更新</span>' + escapeHTML(updateMeta.updateSummary || '暂无更新简介') + '</p></div></div>' +
+          networkBadge(resource, true) +
           '<div class="resource-bottom">'+(feedback ? feedback.render(resource[4]) : '')+
           '<a class="lesson-open" href="' + escapeHTML(resource[4]) + '" aria-label="进入' + escapeHTML(resource[1]) + '课件">进入课件' + arrow + '</a></div></div></article>';
       }
@@ -168,6 +208,7 @@
               return '<details class="lesson-node' + (resources.length ? ' has-resources' : '') + '" data-lesson="' + escapeHTML(lesson.code) + '">' +
                 '<summary class="lesson-summary" aria-expanded="false" aria-controls="' + lessonId + '">' +
                   '<span class="lesson-code">' + escapeHTML(lesson.code) + '</span><h4>' + escapeHTML(lesson.title) + '</h4>' +
+                  lessonNetworkBadges(resources) +
                   (resources.length ? '<span class="resource-count" aria-label="' + resources.length + '份交互课件">' + resources.length + ' 份</span>' : '') + chevron +
                 '</summary>' +
                 '<div class="lesson-resources" id="' + lessonId + '">' +
