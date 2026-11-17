@@ -1,58 +1,1089 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>空气占据的空间会改变吗</title><style>
-:root{font-family:'Microsoft YaHei','PingFang SC',sans-serif;color:#253f49;background:#f0f5f5;font-size:20px}*{box-sizing:border-box}body{margin:0}header{padding:22px 4vw;border-bottom:1px solid #cedcde;background:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px}h1{font-size:clamp(23px,2.3vw,34px);margin:0}nav{display:flex;gap:8px}button,input,textarea{font:inherit}button{padding:12px 20px;min-height:50px;border:1px solid #c4d5d8;background:white;border-radius:8px;color:inherit;cursor:pointer}button[aria-selected=true],.primary{background:#235a68;color:white;border-color:#235a68}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #c48826;outline-offset:3px}main{max-width:1600px;margin:auto;padding:24px 4vw}.page[hidden]{display:none}.intro{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:18px}.intro h2{font-size:28px;margin:0 0 8px}.muted{font-size:17px;color:#576e76;line-height:1.65;margin:8px 0}.lab{display:grid;grid-template-columns:1fr 1fr;gap:24px}.experiment{background:white;border-top:4px solid #d7a84c;padding:20px 24px}.experiment.water{border-color:#78b3cc}.experiment h3{margin:0;font-size:25px}.experiment svg{width:100%;display:block;max-height:330px}.readout{font-size:24px;min-height:36px}.controls{display:flex;align-items:center;gap:24px;flex-wrap:wrap;background:#e1ecec;padding:20px 24px;margin-top:20px}.slider{flex:1;min-width:220px}input[type=range]{width:100%;accent-color:#235a68;min-height:40px}label{cursor:pointer}input[type=checkbox]{width:22px;height:22px;vertical-align:middle}.explanation{border-left:5px solid #d7a84c;padding:14px 20px;background:#fff8e8;margin-top:20px;font-size:22px;line-height:1.7}.explanation[hidden]{display:none}.question{font-size:26px;line-height:1.7;padding:22px 0}.choice{display:flex;gap:16px;flex-wrap:wrap}.feedback{padding:16px 0;font-size:22px;line-height:1.7;min-height:80px}.method{line-height:1.8;max-width:1000px}table{border-collapse:collapse;width:100%;background:white;margin-top:16px}th,td{padding:12px;border:1px solid #cedcde;text-align:center}td input{width:100%;min-width:60px;max-width:140px;padding:10px;border:1px solid #a8bec3;border-radius:5px}textarea{width:100%;min-height:100px;padding:14px;border:1px solid #a8bec3;border-radius:6px}footer{max-width:1600px;margin:24px auto;padding:0 4vw;color:#576e76;font-size:15px}.record-head{display:flex;justify-content:space-between;gap:16px;align-items:center}.table-wrap{overflow:auto}@media(max-width:800px){header{align-items:start;flex-direction:column;padding:16px 20px}main{padding:20px}nav{width:100%}nav button{flex:1;padding:10px}.lab{gap:14px}.experiment{padding:14px 10px}.experiment h3{font-size:21px}.intro{display:block}.controls{gap:16px;padding:16px}.readout{font-size:19px}.intro h2{font-size:25px}}@media(max-width:520px){.lab{grid-template-columns:1fr}.experiment svg{max-height:230px}.record-head{align-items:start;flex-direction:column}th,td{padding:8px;font-size:17px}}@media print{header nav,.controls,button{display:none}.page[hidden]{display:none}body{background:white}}
-.pair-evidence{padding:18px;border:1px solid #9bb9c4;border-radius:14px;margin:20px 0;background:#f3fafc;color:#244858}.particle-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}.particle-pair svg{width:100%;max-height:250px}.measure-row{display:grid;grid-template-columns:80px 1fr 1fr;gap:16px;padding:12px 0;border-bottom:1px solid #bfd1d7}.delta-track{height:18px;background:linear-gradient(90deg,transparent 49.8%,#7894a1 49.8%,#7894a1 50.2%,transparent 50.2%);position:relative;margin-top:7px;border:1px solid #d0dee3}.delta-track i{position:absolute;top:2px;height:12px}.measure-row small{color:#865922}@media(max-width:750px){.particle-pair,.measure-row{grid-template-columns:1fr}}
-</style>
-<style id="unit-visual-theme-v1" data-unit="4-1">
-/* Unit visual system v1: interface-only; preserves original content and simulation colors. */
-:root{--uv-bg:#edf5f3;--uv-surface:#ffffff;--uv-soft:#e2f1ed;--uv-ink:#183d3c;--uv-muted:#536f6b;--uv-line:#c8ded7;--uv-accent:#087568;--uv-on:#ffffff;--uv-head:#f8fcfa;--uv-headink:#183d3c;--uv-focus:#b57710;}
-html,body{background:var(--uv-bg)!important}body{color:var(--uv-ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif!important;-webkit-font-smoothing:antialiased}
-body > header,body > .app > header,body > .shell > header,body > #app > header,body > .frame > header,body .app-header,body .topbar,body header.header{background:var(--uv-head)!important;color:var(--uv-headink)!important;border-color:var(--uv-line)!important;box-shadow:0 1px 0 var(--uv-line)!important}
-body .panel,body .card,body .sidebar,body .control-panel,body .board-side,body .board-main,body .modal,body .experiment,body .dialog-body,body .box,body .controls,body .explanation{background:var(--uv-surface)!important;color:var(--uv-ink);border-color:var(--uv-line)!important;border-radius:16px}
-body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch){border-color:var(--uv-line);border-radius:11px;background-color:var(--uv-surface);color:var(--uv-ink);font-family:inherit;touch-action:manipulation}
-body button.primary,body button.primary-btn,body button.primary-button,body button.ear-primary,body button.phone-primary,body nav button[aria-selected="true"],body nav button[aria-pressed="true"],body button.tab.active,body button.nav-btn.active,body nav button.active,body nav button[aria-current="page"]{background:var(--uv-accent)!important;color:var(--uv-on)!important;border-color:var(--uv-accent)!important}
-body button:focus-visible,body input:focus-visible,body select:focus-visible,body textarea:focus-visible,body a:focus-visible{outline:3px solid var(--uv-focus)!important;outline-offset:3px}
-body input:not([type="range"]):not([type="checkbox"]):not([type="radio"]),body textarea,body select{background:var(--uv-surface);color:var(--uv-ink);border-color:var(--uv-line);border-radius:9px}
-body footer,body .app-footer,body .footer,body .page-foot{color:var(--uv-muted);border-color:var(--uv-line)}
-body .notice,body .callout,body .side-note,body .side-hint,body .note-question{background:var(--uv-soft);color:var(--uv-ink);border-color:var(--uv-accent)}
-body .muted,body .rail-title,body .section-heading,body .control-label,body .control-hint,body .side-title{color:var(--uv-muted)}
-@media(hover:hover){body button:not(.record-button):not(.record-btn):not(.stop-button):not(.mic-state):not(.scope-button):not(.enable-mic):not(.ear-route-step):not(.scene-part):not(.instrument-part):not(.warm):not(.green):not(.phone-pinch):not(:disabled):hover{border-color:var(--uv-accent)}}
-@media print{html,body{background:white!important;color:black!important}body header,body footer{background:white!important;color:black!important;box-shadow:none!important}body header h1,body header .brand,body header .heading{color:black!important}}
-</style>
-<style>html,body{width:100%;height:100%;overflow:hidden}#airFrame{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;display:grid;grid-template-rows:96px minmax(0,1fr) 40px;overflow:hidden;background:var(--unit-bg,#eef5f3)}#airFrame>header{height:96px;padding:18px 30px;flex-direction:row;flex-wrap:nowrap}#airFrame>main{width:100%;height:100%;min-height:0;padding:18px 28px;margin:0;max-width:none;overflow:hidden}#airFrame>footer{margin:0;padding:10px 28px;font-size:14px}#airFrame h1{font-size:31px}#airFrame nav{width:auto;flex-direction:row;margin-left:auto}#airFrame .page{height:100%;min-height:0}dialog.airAux{position:fixed;inset:0;margin:auto;width:min(1320px,94vw);max-height:86vh;overflow:auto;border:1px solid #7d9ea4;border-radius:18px;background:#f4faf9;color:#244754;padding:24px;z-index:2000}dialog.airAux::backdrop{background:#102831c9}dialog.airAux .closeAux{display:block;margin-left:auto;margin-bottom:15px}#airFrame .layout{height:100%;grid-template-columns:minmax(0,1fr) 355px;gap:20px}#airFrame .stage{display:grid;grid-template-rows:65px minmax(0,1fr) 90px;min-height:0}#airFrame .scene{min-height:0}#airFrame .scene svg{height:100%;width:100%}#airFrame .panel{padding:16px;gap:8px}#airFrame .panel button{min-height:40px;padding:7px 12px}#airFrame .panel p{font-size:15px}#airFrame .panel .note{font-size:14px}#airFrame .status{padding:9px;font-size:15px}#airFrame .steps{grid-template-columns:1fr;gap:8px}#airFrame .records-intro{flex-direction:row;align-items:center;margin-bottom:12px}#airFrame .evidence-board{margin:0;padding:16px 22px}#airFrame .evidence-board h2{margin:6px 0 12px}#airFrame .evidence-board p{font-size:18px;line-height:1.5;margin:8px 0}#airFrame .water-comparison{grid-template-columns:repeat(3,1fr)}#airFrame .water-comparison svg{height:310px;max-height:310px}#airFrame .water-comparison h3{margin:8px 0}#airFrame .water-comparison p{font-size:16px}#airFrame .lab{grid-template-columns:1fr 1fr}#airFrame .intro{display:flex;margin-bottom:12px}#airFrame .experiment svg{height:300px;max-height:300px}#airFrame .controls{padding:12px 18px;margin-top:12px}#airFrame .explanation{font-size:20px;line-height:1.5;margin-top:10px;padding:10px 15px}#airFrame .question{font-size:22px;padding:8px 0;line-height:1.5}#airFrame .pair-evidence{padding:12px 18px;margin:12px 0}#airFrame .pair-evidence h3{margin:6px 0 10px}#airFrame .particle-pair{grid-template-columns:1fr 1fr}#airFrame .particle-pair svg{height:195px;max-height:195px}#airFrame .pair-evidence p{font-size:16px;margin:8px 0}#airFrame .feedback{padding:10px 0;font-size:19px;line-height:1.5;min-height:48px}#airFrame .measure-row{grid-template-columns:80px 1fr 1fr;padding:20px 0}#airFrame .record-head{flex-direction:row}#airFrame details[open]{position:absolute;z-index:20;right:32px;top:130px;width:480px;max-height:520px;overflow:auto;padding:20px;background:#fff;border:2px solid #7d9ea4;border-radius:12px}@media print{html,body{height:auto;overflow:visible}#airFrame{position:static;display:block;width:auto;height:auto;transform:none!important;overflow:visible}#airFrame>main{height:auto;overflow:visible}dialog.airAux[open]{position:static;display:block;width:auto;max-height:none;overflow:visible}dialog.airAux .closeAux{display:none}}
-</style><body><div id="airFrame"><header><div class="lab-issue" aria-label="物质科学；核心01 物质的结构与性质"><span class="lesson-no">03</span><span class="domain-label">物质科学</span><span class="core-label">核心 01 物质的结构与性质</span></div><h1>空气占据的空间会改变吗</h1><nav aria-label="课堂步骤"><button data-page="compare" aria-selected="true">1 对比</button><button data-page="think" aria-selected="false">2 解释</button><button data-page="record" aria-selected="false">3 实测</button></nav></header><div class="v2-rail" aria-hidden="true"><b>AIR</b><span>实验社 / OBSERVE · TEST · THINK</span><i>LAB 03</i></div><main>
-<section id="compare" class="page"><div class="intro"><div><h2>相同的起点，推压后有什么不同？</h2><p class="muted">相同注射器，各装入 20 mL 空气或水，排除漏气等干扰。</p></div><span class="muted">定性示意，不代替实测数据</span></div><div class="lab"><article class="experiment"><h3>空气</h3><svg id="air" viewBox="0 0 580 320" role="img" aria-label="空气注射器纵向剖面"></svg><div id="airText" class="readout"></div></article><article class="experiment water"><h3>水</h3><svg id="water" viewBox="0 0 580 320" role="img" aria-label="水注射器纵向剖面"></svg><div id="waterText" class="readout"></div></article></div><div class="controls"><label class="slider">推压程度 <input id="push" type="range" min="0" max="100" value="0" aria-label="推压程度"></label><label><input id="sealed" type="checkbox" checked> 封住管口</label><label><input id="model" type="checkbox"> 看解释模型</label><button id="reset">回到起点</button></div><p id="observation" class="muted" aria-live="polite"></p><div id="reason" class="explanation" hidden></div></section>
-<section id="think" class="page" hidden><h2>变小的，究竟是什么？</h2><div class="question">封住管口，空气没有漏出。推压后，注射器内的空气占据空间变小。下面哪种解释更合理？</div><div class="pair-evidence"><h3>把同一团空气放在一起比较</h3><label>推压程度（示意） <input id="particlePush" type="range" min="0" max="100" value="70"></label><div class="particle-pair"><div><strong>推压前</strong><svg id="particlesBefore" viewBox="0 0 580 320" role="img" aria-label="推前32个同样大小的粒子符号"></svg></div><div><strong>推压后</strong><svg id="particlesAfter" viewBox="0 0 580 320" role="img" aria-label="推后32个相同大小的粒子符号，间距缩小"></svg></div></div><p id="particleEvidence"></p><p>前提：管口封住、没有漏气。圆点是解释符号，不是直接观察到的分子，也不是实际数量或大小。</p></div><div class="choice"><button data-answer="0">空气微粒变小了</button><button data-answer="1">空气微粒间距变小了</button><button data-answer="2">空气变成了水</button></div><div id="feedback" class="feedback" aria-live="polite">先提出解释，再回到“对比”打开解释模型。</div><button id="openTransfer">新情境：倒扣瓶中的少量水 →</button></section>
-<section id="record" class="page" hidden><div class="record-head"><div><h2>把真实实验的证据留下来</h2><p class="muted">此页只记录实测，不自动填入模拟结果。记录保存在当前浏览器。</p></div><button id="print">打印记录</button></div><div class="pair-evidence"><h3>我的实测配对图</h3><div id="measuredPairs" aria-live="polite"></div><p>只有完整的实测配对才绘图；不把模型读数填到表内。显示“推后 − 初始”的体积变化，负数表示变小。</p></div><button id="openAirRecords">填写与修改真实读数 →</button></section></main><footer>教科版 · 四年级上册 · 第一单元第 3 课　｜　离线互动：观察与解释分开，结论以实验为依据。</footer>
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="QgxDAnEWTcxx56SARSlHN3">
+<head data-page-node-id="9GsElmmKuLbFuYaGgVO7c4">
+<meta charset="UTF-8" data-page-node-id="uWqq3zJ3Ye48aJ33k3G1oZ">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="WCuq1jc6mFpDEmNC5LvfEB">
+<title>3. 空气占据的空间会改变吗 · 互动课堂</title>
+<style>
+:root{
+  --bg:#f2f7fc;
+  --card:#ffffff;
+  --ink:#1c2733;
+  --ink-2:#4a5b6d;
+  --ink-3:#7d8fa1;
+  --line:#dde7f1;
+  --air:#5cb8f0;
+  --air-d:#2690cf;
+  --water:#3358a8;
+  --water-l:#7fa6e6;
+  --warn:#f08a24;
+  --ok:#25a56b;
+  --red:#e05252;
+  --shadow:0 6px 20px rgba(31,74,120,.10);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+header.hd{
+  background:linear-gradient(120deg,#2b7fd4,#4fb0e8);
+  color:#fff;
+  padding:16px 26px 14px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  box-shadow:0 4px 16px rgba(43,127,212,.25);
+}
+header.hd h1{font-size:26px;margin:0;font-weight:700;letter-spacing:.5px;}
+header.hd .sub{font-size:14px;opacity:.92;margin-top:2px;}
+.hd-tools{margin-left:auto;display:flex;gap:10px;}
+.hd-btn{
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.45);color:#fff;
+  padding:7px 14px;border-radius:20px;font-size:14px;cursor:pointer;
+}
+.hd-btn:hover{background:rgba(255,255,255,.32);}
 
-</div><dialog class="airAux" id="airRecords"><button class="closeAux" data-air-close="airRecords">返回配对图 ×</button><h2>真实实验记录</h2><details id="air-storage-guard" style="position:relative;z-index:9999;max-width:min(430px,90vw);padding:7px 11px;border:1px solid #b8cbd0;border-radius:9px;background:#fff;color:#234657;font:15px/1.5 sans-serif;box-shadow:0 3px 12px #0002"><summary>记录安全与备份</summary><p id="air-storage-message">可导出启动时原始记录和当前草稿。备份包含原始字符串，可供人工恢复；本页不自动修复或导入。</p><button id="air-storage-export" type="button">导出原始与当前备份</button></details><p class="method">使用两支相同的无针注射器，分别吸入等体积空气和水；水中尽量不留气泡。封紧管口，缓慢、适度推压，保持推压时读数。重复三次。<strong>不装针头，不对着人，不用蛮力。</strong></p><div class="table-wrap"><table><thead><tr><th>重复</th><th>空气初始 / mL</th><th>空气推后 / mL</th><th>水初始 / mL</th><th>水推后 / mL</th></tr></thead><tbody id="rows"></tbody></table></div><p><label for="note">我的结论与证据</label></p><textarea id="note" placeholder="我观察到……，因此认为……。还需要排除……"></textarea><p class="muted">一般课堂推压下，水的体积变化很小，可能无法从刻度上分辨；不要说水“绝对不能压缩”。松手后活塞的回弹还受摩擦影响。</p><button id="clear">清空本页记录</button><span id="saveState" class="muted" aria-live="polite"></span></dialog><dialog class="airAux" id="airTransfer"><button class="closeAux" data-air-close="airTransfer">返回微粒比较 ×</button><hr><h2>把证据用到新情境</h2><p class="method">一个瓶子竖直倒扣入水，没有冒出气泡，瓶内却进入少量水。瓶内空气可能发生了什么变化？</p><button id="reveal">查看解释与边界</button><div id="transfer" class="explanation" hidden>水对瓶内空气产生压力，使它占据的空间略微变小，所以少量水可以进入。前提是空气没有漏出。<br>只看到软瓶被捏扁，还不能排除漏气和容器变形等影响；用封口注射器对比，证据更清楚。</div><p class="muted">模型帮助我们解释，不能当作亲眼看见了空气微粒。</p></dialog><script>
-var airRecordGuard=(function(){
- const key="air-compression-v1";let raw=null,readOK=false,locked=false,draft=null,getDraft=null;
- function obj(v){return v!==null&&typeof v==='object'&&!Array.isArray(v)}
- function valid(v){return obj(v)&&Object.keys(v).every(k=>/^(note|v[0-2][0-3])$/.test(k)&&typeof v[k]==='string');}
- function warn(t){document.getElementById('air-storage-guard').open=true;document.getElementById('air-storage-message').textContent=t}
- try{raw=localStorage.getItem(key);readOK=true;if(raw!==null&&!valid(JSON.parse(raw)))throw Error('incompatible')}catch(e){locked=true;warn('原始记录损坏或格式不兼容，已锁定保护，绝不覆盖。当前操作仅在本次页面有效，关闭前请导出备份。')}
- document.getElementById('air-storage-export').onclick=function(){let current=draft;try{if(getDraft)current=getDraft()}catch(e){}let payload={key,readOK,originalRaw:raw,currentDraft:current,exportedAt:new Date().toISOString()};let blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='四上1.3-原始与当前备份.json';a.click();URL.revokeObjectURL(url)};
- return {setDraftGetter:function(f){getDraft=f},getItem:function(k){if(k!==key)throw Error('unexpected key');if(locked)throw Error('protected storage');return raw},setItem:function(k,value){if(k!==key)throw Error('unexpected key');try{draft=JSON.parse(value)}catch(e){draft=value}if(locked){warn('原始记录受保护，修改仅保留在本次页面，未写入本机。关闭前请导出备份。');throw Error('protected storage')}try{localStorage.setItem(key,value)}catch(e){warn('保存失败：本次修改未写入本机。原有存储未被替换，请导出原始与当前备份。');throw e}}};
-})();
-</script>
+nav.steps{
+  display:flex;gap:8px;overflow-x:auto;padding:12px 22px;background:#fff;
+  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;
+}
+nav.steps button{
+  border:1px solid var(--line);background:#f7fbff;color:var(--ink-2);
+  padding:9px 18px;border-radius:22px;font-size:16px;cursor:pointer;white-space:nowrap;
+  font-family:inherit;transition:.15s;
+}
+nav.steps button:hover{border-color:var(--air);color:var(--air-d);}
+nav.steps button.on{background:var(--air-d);border-color:var(--air-d);color:#fff;font-weight:600;}
+
+main{max-width:1240px;margin:0 auto;padding:22px 22px 60px;}
+section.page{display:none;animation:fade .25s ease;}
+section.page.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+h2.t{font-size:23px;margin:0 0 4px;color:var(--air-d);display:flex;align-items:center;gap:10px;}
+h2.t .n{background:var(--air-d);color:#fff;width:32px;height:32px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;font-size:17px;}
+.lead{color:var(--ink-2);margin:0 0 18px;font-size:16px;}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow);margin-bottom:18px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+.ask{background:#fff8ec;border:1px solid #f7dcae;border-left:5px solid var(--warn);
+  border-radius:12px;padding:14px 18px;font-size:19px;color:#8a5310;margin-bottom:18px;}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:13px;font-weight:600;}
+.tag.air{background:#e2f3ff;color:var(--air-d);}
+.tag.water{background:#e6ecfb;color:var(--water);}
+.tag.tip{background:#eaf7f0;color:var(--ok);}
+.tag.warn{background:#fdeee0;color:#c96a12;}
+
+/* ---------- 步骤1 聚焦 ---------- */
+.focus-wrap{display:grid;grid-template-columns:340px 1fr;gap:22px;align-items:start;}
+@media(max-width:900px){.focus-wrap{grid-template-columns:1fr;}}
+.bottle-svg{width:100%;height:auto;}
+
+/* ---------- 步骤2 注射器实验 ---------- */
+.exp-head{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.exp-step{flex:1;min-width:210px;background:#f6fbff;border:1px solid var(--line);border-left:4px solid var(--air-d);
+  border-radius:10px;padding:10px 14px;font-size:15px;}
+.exp-step b{color:var(--air-d);}
+
+.syr-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:820px){.syr-row{grid-template-columns:1fr;}}
+.syr-box{border:2px solid var(--line);border-radius:16px;padding:14px;background:#fcfdff;text-align:center;}
+.syr-box.air{border-color:#bfe4fb;background:#f7fcff;}
+.syr-box.water{border-color:#c9d6f2;background:#f7f9ff;}
+.syr-title{font-size:19px;font-weight:700;margin-bottom:2px;}
+.syr-box.air .syr-title{color:var(--air-d);}
+.syr-box.water .syr-title{color:var(--water);}
+.syr-svg{width:100%;max-width:260px;height:auto;display:block;margin:0 auto;}
+
+.readout{display:flex;justify-content:center;gap:10px;margin:10px 0 6px;flex-wrap:wrap;}
+.ro{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 14px;min-width:104px;}
+.ro .k{font-size:12px;color:var(--ink-3);}
+.ro .v{font-size:24px;font-weight:700;line-height:1.2;}
+.syr-box.air .ro .v{color:var(--air-d);}
+.syr-box.water .ro .v{color:var(--water);}
+
+.press-btn{
+  width:100%;margin-top:6px;padding:14px 0;font-size:19px;font-weight:700;font-family:inherit;
+  border:none;border-radius:12px;color:#fff;cursor:pointer;letter-spacing:2px;
+  background:var(--air-d);box-shadow:0 4px 0 #1c6fa4;transition:.08s;user-select:none;
+  -webkit-user-select:none;touch-action:none;
+}
+.syr-box.water .press-btn{background:var(--water);box-shadow:0 4px 0 #23407c;}
+.press-btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.2);}
+.press-btn.held{filter:brightness(1.08);}
+
+.forcebar{height:12px;border-radius:8px;background:#eaf1f8;overflow:hidden;margin:10px 0 4px;border:1px solid var(--line);}
+.forcebar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#7cd0a0,#f0b429,#e05252);transition:width .05s linear;}
+.status{font-size:15px;min-height:26px;color:var(--ink-2);font-weight:600;}
+.status.hit{color:var(--red);}
+
+.concl{background:#f2f9ff;border:1px dashed #9ecdf0;border-radius:12px;padding:14px 18px;font-size:18px;margin-top:14px;}
+.concl b.air{color:var(--air-d);}
+.concl b.water{color:var(--water);}
+
+table.rec{width:100%;border-collapse:collapse;font-size:15px;}
+table.rec th,table.rec td{border:1px solid var(--line);padding:8px 10px;text-align:center;}
+#gunPlunger{transition:transform 1.1s ease-in;}
+#gunBullet{transition:transform 0.4s linear;}
+table.rec th{background:#f1f7fd;color:var(--ink-2);}
+table.rec td.mid{font-weight:700;color:var(--air-d);}
+table.rec input{width:76px;padding:4px 6px;text-align:center;border:1px solid var(--line);border-radius:6px;font-family:inherit;font-size:15px;}
+
+.btn{border:1px solid var(--air-d);background:#fff;color:var(--air-d);padding:9px 18px;border-radius:10px;
+  font-size:15px;cursor:pointer;font-family:inherit;}
+.btn:hover{background:#eaf5ff;}
+.btn.primary{background:var(--air-d);color:#fff;}
+.btn.primary:hover{background:#1c6fa4;}
+.btn.ghost{border-color:var(--line);color:var(--ink-2);}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+
+/* ---------- 步骤3 微粒 ---------- */
+.micro-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:820px){.micro-row{grid-template-columns:1fr;}}
+.micro-box{border:2px solid var(--line);border-radius:16px;padding:14px;background:#fcfdff;}
+.micro-box.air{border-color:#bfe4fb;}
+.micro-box.water{border-color:#c9d6f2;}
+.micro-title{text-align:center;font-size:19px;font-weight:700;margin-bottom:8px;}
+.micro-box.air .micro-title{color:var(--air-d);}
+.micro-box.water .micro-title{color:var(--water);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mcell{border:1px solid var(--line);border-radius:10px;background:#fff;padding:6px;position:relative;}
+.mcell .cap{text-align:center;font-size:13px;color:var(--ink-3);margin-bottom:2px;}
+.mcell .vol{position:absolute;right:8px;top:6px;font-size:12px;color:var(--ink-3);}
+.micro-svg{width:100%;height:auto;display:block;}
+
+.metric{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+.metric div{flex:1;min-width:92px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:6px 8px;text-align:center;font-size:13px;color:var(--ink-3);}
+.metric div b{display:block;font-size:16px;color:var(--ink);}
+.metric div b.chg{color:var(--red);}
+.metric div b.same{color:var(--ok);}
+
+.slider-row{display:flex;align-items:center;gap:12px;margin-top:12px;font-size:15px;}
+input[type=range]{flex:1;accent-color:var(--air-d);height:22px;}
+
+.quiz{background:#fff8ec;border:1px solid #f7dcae;border-radius:12px;padding:14px 18px;}
+.quiz .q{font-size:18px;font-weight:600;margin-bottom:10px;}
+.opts{display:flex;gap:10px;flex-wrap:wrap;}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 18px;cursor:pointer;font-size:16px;font-family:inherit;}
+.opt:hover{border-color:var(--air-d);}
+.opt.right{border-color:var(--ok);background:#eaf7f0;color:var(--ok);font-weight:600;}
+.opt.wrong{border-color:var(--red);background:#fdecec;color:var(--red);}
+.fb{margin-top:10px;font-size:15px;color:var(--ink-2);}
+
+/* ---------- 步骤4 研讨 ---------- */
+.talk{border:1px solid var(--line);border-radius:12px;margin-bottom:14px;overflow:hidden;}
+.talk .q{padding:14px 18px;font-size:18px;font-weight:600;cursor:pointer;background:#f7fbff;
+  display:flex;gap:10px;align-items:flex-start;}
+.talk .q:hover{background:#eef6fe;}
+.talk .a{display:none;padding:0 18px 16px 46px;font-size:16px;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:12px;}
+.talk.open .a{display:block;}
+.talk .q .num{color:var(--air-d);font-weight:700;}
+
+/* ---------- 步骤5 拓展 ---------- */
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+@media(max-width:900px){.apps{grid-template-columns:repeat(2,1fr);}}
+.app{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff;text-align:center;}
+.app .ic{font-size:34px;line-height:1.2;}
+.app .nm{font-weight:700;margin:4px 0 2px;}
+.app .ds{font-size:13px;color:var(--ink-2);}
+.safety{background:#fdecec;border:1px solid #f5b5b5;border-left:5px solid var(--red);border-radius:10px;
+  padding:12px 16px;color:#9c2b2b;font-size:16px;}
+
+footer{text-align:center;color:var(--ink-3);font-size:13px;padding:20px;}
+
+@media print{
+  nav.steps,.hd-tools,.btn,.press-btn{display:none!important;}
+  section.page{display:block!important;}
+  body{background:#fff;}
+  body.print-sheet section.page:not(#p6){display:none!important;}
+  body.print-sheet section#p6{display:block!important;}
+  body.print-sheet .card{box-shadow:none;border:1px solid #999;}
+}
+</style>
+</head>
+<body data-page-node-id="LYiwgDgLTtIHk1DWo2q4vb">
+
+<header class="hd" data-page-node-id="ftHs0MrtaMvhF6EF2TReTm">
+  <div data-page-node-id="c5XIkig9rf7IVF4viDPC6u">
+    <h1 data-page-node-id="6LNDut1ujnYiXTmV222Kxv">3. 空气占据的空间会改变吗</h1>
+    <div class="sub" data-page-node-id="4rS3Ltxpz52ZATxV1l5ALt">教科版 · 四年级上册 · 第一单元《空气》 · 互动课堂</div>
+  </div>
+  <div class="hd-tools" data-page-node-id="rWYqjgZlLqhyxDGlhducHC">
+    <button class="hd-btn" id="btnFull" data-page-node-id="eU90SSvMYYwyQZc5n76HSC">全屏投屏</button>
+    <button class="hd-btn" id="btnPrint" data-page-node-id="9uUFC2Ga4aJ98OhcLTIvpL">打印记录单</button>
+  </div>
+</header>
+
+<nav class="steps" id="nav" data-page-node-id="8TTf9XirShVBPhnTKV1BdI">
+  <button data-p="p1" class="on" data-page-node-id="tAsHkMgD7bPdRiQ7eNnIfg">① 聚焦问题</button>
+  <button data-p="p2" data-page-node-id="r2HnQIS4rFMotkTpokesIh">② 注射器实验</button>
+  <button data-p="p3" data-page-node-id="hDpRC7FBitsoHZkLOvs2hF">③ 微观解释</button>
+  <button data-p="p4" data-page-node-id="KHFBqgJbZ5D37fwKEZca1L">④ 研讨</button>
+  <button data-p="p5" data-page-node-id="ZVvXeObDjYEMzpzAH6Va2B">⑤ 拓展应用</button>
+  <button data-p="p6" data-page-node-id="A9BAGFfGTqDLdDuhXZZdk7">⑥ 实验记录单</button>
+</nav>
+
+<main data-page-node-id="PSqMU3l4WiDSnzbXaoY6aR">
+
+<!-- ================= 1 聚焦 ================= -->
+<section class="page on" id="p1" data-page-node-id="UrNP7w359nMNprmVNnk7Aq">
+  <h2 class="t" data-page-node-id="Dc0lNBzhL2vzhHSHgVcQFs"><span class="n" data-page-node-id="xOPcSjPTZIuesM1P7dlBtD">1</span>聚焦：一个奇怪的现象</h2>
+  <p class="lead" data-page-node-id="c6SMBpaAJzlONDGVxbVLeL">把空塑料瓶瓶口朝下，竖直压入水中。空气明明占满了瓶子，为什么还是会有少量的水进去？</p>
+
+  <div class="card focus-wrap" data-page-node-id="Uz2XwJmA5ar8650CSJaisG">
+    <div data-page-node-id="cOBMwiDE6F07cgRsQ266GZ">
+      <svg class="bottle-svg" viewBox="0 0 300 340" data-page-node-id="nraqBjcupI8gjVmijFSlhx">
+        <defs data-page-node-id="FHuJFIA4Ow4r3GozZXcLmA">
+          <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1" data-page-node-id="waB5yUqujSSTt4R9O5CQbl">
+            <stop offset="0" stop-color="#a9d8f5" data-page-node-id="JzGcrYGHKDcrhOjJntpTzo"/><stop offset="1" stop-color="#5cb8f0" data-page-node-id="MsoRAdnLyLh3TyWZiSC6AM"/>
+          </linearGradient>
+        </defs>
+        <!-- 水槽 -->
+        <rect x="20" y="150" width="260" height="160" rx="6" fill="#eaf4fd" stroke="#c6deef" data-page-node-id="CICvSzFwbseHVFou8nHszI"/>
+        <rect x="24" y="176" width="252" height="130" rx="4" fill="url(#wg)" opacity=".85" data-page-node-id="2JnGxBkqadCWE8rMvlSLAC"/>
+        <path d="M24 176 q30 -8 63 0 t63 0 t63 0 t63 0 v8 h-252 z" fill="#bfe3f8" opacity=".8" data-page-node-id="ExP0Xk2ZDDs9GsHMZSM31d"/>
+        <!-- 瓶子（倒扣） -->
+        <path d="M112 300 L112 108 q0 -12 12 -12 h52 q12 0 12 12 L188 300 z" fill="#ffffff" opacity=".55" stroke="#5b7f9c" stroke-width="2" data-page-node-id="Fuj6AOF9G2j477n9ALeA4K"/>
+        <rect x="128" y="300" width="44" height="26" rx="3" fill="#ffffff" opacity=".55" stroke="#5b7f9c" stroke-width="2" data-page-node-id="rb3wTx5izdCPXxBpDFVx5M"/>
+        <!-- 瓶内进入的水 -->
+        <clipPath id="bclip" data-page-node-id="ACNOLzrA0lS6ekcGbBNbET">
+          <path d="M112 300 L112 108 q0 -12 12 -12 h52 q12 0 12 12 L188 300 z" data-page-node-id="gQKcZpIUyUsxfIPDGqjCJN"/>
+        </clipPath>
+        <g clip-path="url(#bclip)" data-page-node-id="tRYYlmzLEOHlEG2eqFIoZw">
+          <rect id="bInWater" x="110" y="300" width="80" height="0" fill="#5cb8f0" opacity=".9" data-page-node-id="mrE1gw5Vlsz9NStrFpjsHz"/>
+        </g>
+        <!-- 瓶内空气 -->
+        <text x="150" y="212" text-anchor="middle" font-size="16" fill="#1c6b96" font-weight="700" data-page-node-id="0HeX5J0HI1wZZuWY6hGkwB">空气</text>
+        <text x="150" y="232" text-anchor="middle" font-size="12" fill="#1c6b96" data-page-node-id="oz2d92aTKg0n6P1Enf7LR0">占满空间</text>
+        <text id="bInLabel" x="150" y="286" text-anchor="middle" font-size="12" fill="#ffffff" opacity="0" data-page-node-id="0BfVrMlPJCSbQ8wQA3ZDDK">水进来了</text>
+        <!-- 标注 -->
+        <text x="24" y="146" font-size="13" fill="#4a5b6d" data-page-node-id="cE7KGT7aA9wdVS1yDFO79I">水槽里的水</text>
+      </svg>
+      <div class="btn-row" style="justify-content:center" data-page-node-id="U8FfppRrEEGszxxIFUtixp">
+        <button class="btn primary" id="btnBottle" data-page-node-id="bG4J6EAO0uZThQUpWPNtuN">播放：压入水中</button>
+        <button class="btn ghost" id="btnBottleReset" data-page-node-id="gPFVrUw6wUkhGJPrtKEqYO">复位</button>
+      </div>
+    </div>
+
+    <div data-page-node-id="YRbGiMEev1ZVJsNRCjokAx">
+      <div class="ask" data-page-node-id="0L1BRS4ZkoItWaLfu5ok3A">空气占满了瓶子的空间，为什么还是有<b data-page-node-id="3Sa459ty3rwS111gD6AkWj">少量的水</b>可以进入呢？</div>
+      <div class="card" style="box-shadow:none;margin-bottom:12px" data-page-node-id="gbrHI8Hh1M1PcIJmfajBvE">
+        <b data-page-node-id="3Pq5fTebg5MMj1Zv331fxe">我的猜想：</b>
+        <div class="opts" style="margin-top:10px" data-page-node-id="LmHbOYlZ2evPlK2YrQyMjG">
+          <button class="opt" data-guess="a" data-page-node-id="NE7PmeU7TBpGcDHsDgaFtr">A. 空气跑掉了一部分</button>
+          <button class="opt" data-guess="b" data-page-node-id="4uDWMc465IBD2j5MlOJAat">B. 空气被挤小了（占据的空间变小）</button>
+          <button class="opt" data-guess="c" data-page-node-id="sUr4yVE2DK3J7eCPz8UATK">C. 水把空气溶解了</button>
+        </div>
+        <div class="fb" id="guessFb" data-page-node-id="Sxg9PTX84NqMZ1p2NCKHdu">先想一想，选一个，我们用实验来验证！</div>
+      </div>
+      <div class="card" style="box-shadow:none;background:#f6fbff" data-page-node-id="CNOAvCbvPhdPsO7akaZSNC">
+        <b data-page-node-id="iwek0HbN4scVqYwvB1Rt8L">怎样验证？</b>
+        <p style="margin:6px 0 0" data-page-node-id="DJllRAzgtqDzoGHHSADBfQ">用手挤压装空气的瓶子，和装水的瓶子比一比；再用<b data-page-node-id="BxWA30HBwrPCWWWHVpjOhx">注射器</b>做一次定量的测量——看看空气占据的空间到底会不会变。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2 注射器实验 ================= -->
+<section class="page" id="p2" data-page-node-id="YvKqvhbSVHqvHZ6I2KDqVQ">
+  <h2 class="t" data-page-node-id="Y3OdkKbTJwE4EuEwYJZT7b"><span class="n" data-page-node-id="nD0sXYUwCgYOC3wfoMk6FP">2</span>探索：注射器实验（定量比较）</h2>
+  <p class="lead" data-page-node-id="v91bkjD06c1Rv7OKj9KDD6">两个<b data-page-node-id="bNYI3E4Wuu9i7SCjR9CISI">相同</b>的注射器，分别抽进<b data-page-node-id="tJqCGMvULYWoLQvnoFLDQY">同样多（20 毫升）</b>的空气和水；用手堵住管口，慢慢用力压活塞，直到压不动为止。</p>
+
+  <div class="card" data-page-node-id="jYdRDePhdPVD8SLQBOztT3">
+    <div class="exp-head" data-page-node-id="5G2kzXemWdO5NvhbHRVjkZ">
+      <div class="exp-step" data-page-node-id="6z7A2UKwoqiIFJ5YbzQLdF"><b data-page-node-id="P9zzBLJr6tNCHz5vTySY3n">① 抽</b>：分别抽进 20 mL 空气和 20 mL 水，记下初始刻度。</div>
+      <div class="exp-step" data-page-node-id="1fi0kQIkRqAEs389PLblzC"><b data-page-node-id="CHiA5m0NWxECcfZ1EAztR6">② 堵</b>：用手（或橡皮）堵住管口，防止空气和水漏出去。</div>
+      <div class="exp-step" data-page-node-id="HLJURsSkFzUDt1AtHBK9OD"><b data-page-node-id="2UhNuiGgmsKC4JIfDyM2GH">③ 压</b>：慢慢用力向下压活塞，直到<b data-page-node-id="iA2EknuDfNDsacUO86zqXE">压不动为止</b>，记下最后刻度。</div>
+      <div class="exp-step" data-page-node-id="CwI2FF6YAfSdcaFcCmW60O"><b data-page-node-id="LPbKJcqKpmLFx0uuEDKNt2">④ 重复</b>：同样做 3 次，取中间值，数据才可靠。</div>
+    </div>
+    <div style="font-size:15px;color:var(--ink-2)" data-page-node-id="RXqN5GsRvoQWHy7k9rcAAI">
+      <span class="tag tip" data-page-node-id="C8liqjmHXlbUJBcCLGJ4uS">公平比较</span>
+      两样东西要一样多（都是 20 mL）、用一样的力气、都用同样的注射器——这叫<b data-page-node-id="npv35D79fFFGNyF6alReUu">控制变量</b>。
+    </div>
+  </div>
+
+  <div class="syr-row" data-page-node-id="IoxevurrzX1sdBqOOfLPaW">
+    <div class="syr-box air" data-page-node-id="57wl4B9aQCNvuyk34OMsXD">
+      <div class="syr-title" data-page-node-id="OD5d1hZcfOjdd5gHCPKu23">注射器 A · 空气</div>
+      <div style="font-size:13px;color:var(--ink-3)" data-page-node-id="rUOqeunQPlehjNSeeIRfZs">管口已用手堵住</div>
+      <svg class="syr-svg" id="svgAir" viewBox="0 0 220 430" data-page-node-id="DX4xWS4LNB2qccQpRDmZXq"></svg>
+      <div class="readout" data-page-node-id="r2QQ9mWgJbXR54PcJRwCzR">
+        <div class="ro" data-page-node-id="gSC4nRG6etIRYE1kzoawLK"><div class="k" data-page-node-id="DcI2qyUzxy4upbCAAnwwZk">初始刻度</div><div class="v" data-page-node-id="tpv61edFT4kFYGkqgbJK5F">20.0 mL</div></div>
+        <div class="ro" data-page-node-id="oP9ZINxlWVLxYUObDbEOQt"><div class="k" data-page-node-id="dwevjNkbG46LTCW9tjg2Qt">现在刻度</div><div class="v" id="vAir" data-page-node-id="EfgL7dBpZ6No0yYJRgiYB8">20.0</div></div>
+        <div class="ro" data-page-node-id="aRSTe2k171DmKU3jFPI0JB"><div class="k" data-page-node-id="SToXPIROHwM1t9fGtIedON">空间变化</div><div class="v" id="dAir" data-page-node-id="OUGejO0MkLzAAYF0HVIy0l">0.0</div></div>
+      </div>
+      <div class="forcebar" data-page-node-id="Z5XJ8dZOMlg8GFHiAklPvq"><i id="fAir" data-page-node-id="Am0Lvq2msUpZetAK0Mf9hb"></i></div>
+      <div class="status" id="sAir" data-page-node-id="Tf76xI8KyUpmqQrClmMPj5">按住按钮，慢慢用力压活塞 ↓</div>
+      <button class="press-btn" id="pressAir" data-page-node-id="L3H5mhqQnpM3lnm1eOruOM">按 住 向 下 压</button>
+    </div>
+
+    <div class="syr-box water" data-page-node-id="RuGDbwQq7SSbgO5ce6JYsw">
+      <div class="syr-title" data-page-node-id="fcqyUcrknOQO4nP3nFU0yB">注射器 B · 水</div>
+      <div style="font-size:13px;color:var(--ink-3)" data-page-node-id="vgfIHCXVlBJhZgN8w9gqUv">管口已用手堵住</div>
+      <svg class="syr-svg" id="svgWater" viewBox="0 0 220 430" data-page-node-id="Zar8pnMbdCtwMaGKzyMiSs"></svg>
+      <div class="readout" data-page-node-id="wx4mlWvnop9op2eEqbIyGV">
+        <div class="ro" data-page-node-id="tGVAY5thTD5Df8eLVimfmg"><div class="k" data-page-node-id="sNjpbX4je2ZUaYAfnCjWjj">初始刻度</div><div class="v" data-page-node-id="xlGFNqnBki44KCjAxc98if">20.0 mL</div></div>
+        <div class="ro" data-page-node-id="ZG4Bh0GutwMclUSkm3GfYo"><div class="k" data-page-node-id="ZHXoxhZL8sLnM01NyB63OS">现在刻度</div><div class="v" id="vWater" data-page-node-id="MlF0CFSfzT4oylwh0ge2l3">20.0</div></div>
+        <div class="ro" data-page-node-id="h6C9M8mDTwtkMV4ufKbt3o"><div class="k" data-page-node-id="fHkShdLRDvhcNWd38fR4EF">空间变化</div><div class="v" id="dWater" data-page-node-id="FCRwfEpGI5vpIaMCZDogXA">0.0</div></div>
+      </div>
+      <div class="forcebar" data-page-node-id="NhGckGWGsMbDbSc2ASQV9G"><i id="fWater" data-page-node-id="44AFXJ8qwget7UEh8P3dNj"></i></div>
+      <div class="status" id="sWater" data-page-node-id="59hIgHqN2XRGchUlAl6q7G">按住按钮，慢慢用力压活塞 ↓</div>
+      <button class="press-btn" id="pressWater" data-page-node-id="EAH4DW02oj8Bjllobj44Kq">按 住 向 下 压</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px" data-page-node-id="VxZ1ywArRXp3AK9bGWBjMk">
+    <div class="btn-row" data-page-node-id="unfxhWJiVbdSMPY8oyl14b">
+      <button class="btn primary" id="btnAuto" data-page-node-id="vqbOv5A9N7ldRRwDwAnIQh">自动演示（两个一起压）</button>
+      <button class="btn" id="btnReset" data-page-node-id="AEaHL3etkhjPXaH4KAvaQ2">全部复位</button>
+      <button class="btn ghost" id="btnRec" data-page-node-id="YqOaghimpWejpDHhPwMRiw">把这次结果记到记录单</button>
+      <span style="font-size:14px;color:var(--ink-3);align-self:center" data-page-node-id="K6IXBC4FrNtt2wyIlP8uJY">提示：松手后观察活塞会不会弹回去。</span>
+    </div>
+  </div>
+
+  <div class="card" data-page-node-id="DO3PbpNhLXi5AWpAjYfrDL">
+    <h2 class="t" style="font-size:19px" data-page-node-id="murbWc2o4Iu8SzpgkCR9sh">实验数据（重复 3 次，取中间值）</h2>
+    <table class="rec" id="recTable" data-page-node-id="jMrCkuehe1E44T6VBuiF3c">
+      <tr data-page-node-id="hlBeqtvLUQsC8b13wyXJUa">
+        <th data-page-node-id="IEru8oUioFe4JMq94ZGebH">注射器</th><th data-page-node-id="ivgvqaxA1JL4mfW3MyKhig">初始刻度</th><th data-page-node-id="80l7dGe4YoGHYqRWVJeLJE">第 1 次</th><th data-page-node-id="GfFC6MWhgqyCZxvsPP77Ex">第 2 次</th><th data-page-node-id="Gn9twaEEuuDLwj7lOTgcyN">第 3 次</th><th data-page-node-id="UFSUTQMQEYFlAMZz44dovF">中间值</th>
+      </tr>
+      <tr data-page-node-id="IStcZqZ9DOHOmk47GZnmGb">
+        <td data-page-node-id="4OOMAfrqPuiWv05BsyltUk"><span class="tag air" data-page-node-id="8QRde8je4LRxLhZwzLJV5v">空气</span></td><td data-page-node-id="eAWkZo4Nxw91iGseMx2qxW">20 mL</td>
+        <td data-page-node-id="EhzdQtlQ42Zl2ZA2UAP4he"><input data-r="air1" type="number" step="0.5" data-page-node-id="uj1T2qiUu61yynYCUAP1hl"></td>
+        <td data-page-node-id="AKwdxEG1JJOsNxDAEiDDJp"><input data-r="air2" type="number" step="0.5" data-page-node-id="X0Uc0wtMKChVtVbOKAmyaA"></td>
+        <td data-page-node-id="cLnigtpkAOchle42VjUhsE"><input data-r="air3" type="number" step="0.5" data-page-node-id="gul3VEPQR0ZBWfLtdocULW"></td>
+        <td class="mid" id="midAir" data-page-node-id="TAXkxWKojRMCyEMFBRCxaZ">—</td>
+      </tr>
+      <tr data-page-node-id="I5Sovia4KU13qCT5pQeHvT">
+        <td data-page-node-id="Le0URbQ1Ub5NMphC6tRivM"><span class="tag water" data-page-node-id="qITGDRYY2AzdY6YLSzGOmv">水</span></td><td data-page-node-id="FPFvBTZ0G6oXK0q43HsCab">20 mL</td>
+        <td data-page-node-id="JkCG2HucFKsZP70IQzzVxE"><input data-r="w1" type="number" step="0.5" data-page-node-id="NFdToLfLqZAkpDQahZ1JGn"></td>
+        <td data-page-node-id="Doe4ITMcZiSzhZXECH4fem"><input data-r="w2" type="number" step="0.5" data-page-node-id="Ta2FsIYzrfETEcSQ1x4OqR"></td>
+        <td data-page-node-id="hUI5IfTNOXF84Q7Hhi51Y9"><input data-r="w3" type="number" step="0.5" data-page-node-id="Pv5h6ukXBU5AoVVmeKpU97"></td>
+        <td class="mid" id="midWater" data-page-node-id="iTMtI6bTGu3LQ9Uc0E2I6S">—</td>
+      </tr>
+    </table>
+    <div class="btn-row" data-page-node-id="F0WBF1NdzygwqTAqbVyRQP">
+      <button class="btn" id="btnMid" data-page-node-id="11sUVha9xp8AeHAabJLeKD">算出中间值</button>
+      <button class="btn ghost" id="btnFillDemo" data-page-node-id="TPcML1JJFQAHk1jm6s38uG">填入一组参考数据</button>
+      <button class="btn ghost" id="btnClearRec" data-page-node-id="rqHdFYlFgENaHdI3NuEdJ6">清空</button>
+    </div>
+  </div>
+
+  <div class="concl" data-page-node-id="bRIrUDWTaYg6BsWJ74WNhg">
+    <b data-page-node-id="YHTRhwLLM5OKv5obThm6AB">我发现：</b>
+    <b class="air" data-page-node-id="4AvF6SE9HCf1BiWysZ5gCt">空气很容易被压缩</b>（20 mL → 约 8 mL，活塞能压下去很多，松手还会弹回来）；
+    <b class="water" data-page-node-id="P6425iNeUKXLbzQLFtA6AY">水不容易被压缩</b>（20 mL → 约 19.8 mL，活塞几乎压不动）。
+    <br data-page-node-id="Uct77wZP7asRnrXYtAcLaH"><span style="font-size:14px;color:var(--ink-3)" data-page-node-id="igzvJtBn3lxthNEQqAF67y">说明：以上为参考数据。各小组力气不同、注射器密封情况不同，结果会略有差别，这是正常的。</span>
+  </div>
+</section>
+
+<!-- ================= 3 微观解释 ================= -->
+<section class="page" id="p3" data-page-node-id="kvPxFkj5DAC3njLGYjKqff">
+  <h2 class="t" data-page-node-id="O32nWmQaR2dMWzz63sHIGG"><span class="n" data-page-node-id="bquhX0YGP53QyfCodHBBBv">3</span>微观解释：用"○"表示微粒</h2>
+  <p class="lead" data-page-node-id="d2d1OdexfHZnlHFRZz3jHw">用"○"代表空气微粒、水微粒。拖动滑块模拟"向下压活塞"，看看挤压前后，微粒的<b data-page-node-id="VpZHaOberEbfJJmkxg4gRG">数量</b>、<b data-page-node-id="z8WZ0HpBmyvRt8SII2WDcw">大小</b>和<b data-page-node-id="s7Y5g6eRGppLgC9MDgRmvL">距离</b>发生了什么变化。</p>
+
+  <div class="card" data-page-node-id="bIhV4LyI9bbuINF9Vxweye">
+    <div class="slider-row" data-page-node-id="dCIoo0It4hn5pXhQohKv2q">
+      <span style="white-space:nowrap" data-page-node-id="pKVZfiKwLtVk9oSNOmGmli">压活塞的力：</span>
+      <input type="range" id="microSlider" min="0" max="100" value="0" data-page-node-id="0bgc9sUTrti8pUZVedBlxE">
+      <span id="microVol" style="white-space:nowrap;font-weight:700;color:var(--air-d)" data-page-node-id="zEu8XAGMgeAft1SyzvmdY4">20.0 mL</span>
+    </div>
+  </div>
+
+  <div class="micro-row" data-page-node-id="o2ClLM7bd4GatfHmjcBC0a">
+    <div class="micro-box air" data-page-node-id="w4HHCHDSEl2eGuq2bUN54m">
+      <div class="micro-title" data-page-node-id="ciiGR9IpTORNesLuax0Crq">空气微粒</div>
+      <div class="two-col" data-page-node-id="VY4hKnKiJtjiY3y4dacPB2">
+        <div class="mcell" data-page-node-id="cFquKH1Ppx4tRHSIzI1N5g"><div class="cap" data-page-node-id="ZtNEobpNkWf4w8Ln2Ra1pP">开始时</div><div class="vol" data-page-node-id="vszgZcUtE667JLoS99418n">20 mL</div><svg class="micro-svg" id="mAir0" viewBox="0 0 220 300" data-page-node-id="1i8UE007x4hCJDlGNZlsEO"></svg></div>
+        <div class="mcell" data-page-node-id="FK99xb9kjWIOE17RYZDBqd"><div class="cap" data-page-node-id="UGYfIOte7QiMDY8o8By9ue">下压后</div><div class="vol" id="mAirVol" data-page-node-id="VKiNrQJ1PICEketz8Khfvy">20 mL</div><svg class="micro-svg" id="mAir1" viewBox="0 0 220 300" data-page-node-id="1U18GMqA0uBZLHjKJNYtyG"></svg></div>
+      </div>
+      <div class="metric" data-page-node-id="HH9ztozz8OuvvzJPRS88vu">
+        <div data-page-node-id="U7IJDxyYGopLApl07WG2oA">微粒数量<b class="same" id="mAirN" data-page-node-id="L1cnc8hjOr0XM2hmCq3W2U">14 个 · 不变</b></div>
+        <div data-page-node-id="I7jeBDJOMFBFU6pUn0oS2p">微粒大小<b class="same" data-page-node-id="UmUS4a29jCTCTnc6eidCHM">不变</b></div>
+        <div data-page-node-id="3VbR43iBCJ1U86TLJc6bti">微粒间距<b id="mAirGap" data-page-node-id="aiuxPi1f3dwrrsmAOMSZX5">不变</b></div>
+      </div>
+    </div>
+
+    <div class="micro-box water" data-page-node-id="ESZDtnnlNEUzz5cmrfi6p9">
+      <div class="micro-title" data-page-node-id="nqEzLRLWxsz6Ige6nv60ol">水微粒</div>
+      <div class="two-col" data-page-node-id="rjrfflRVh8bgcARnCzcM0l">
+        <div class="mcell" data-page-node-id="WobpVmDi5u352AArULIwGX"><div class="cap" data-page-node-id="owItkAQjjGmBmgLZJv3Pyq">开始时</div><div class="vol" data-page-node-id="FQYGuZBaTgJFxABSYGSXRd">20 mL</div><svg class="micro-svg" id="mWater0" viewBox="0 0 220 300" data-page-node-id="9aeDj0Hi1jDJ4b80Pt8y5H"></svg></div>
+        <div class="mcell" data-page-node-id="JzaJgFK9i21HfD82XH0gQx"><div class="cap" data-page-node-id="bUmHuhCGVG0Fsxxu5KpZ2B">下压后</div><div class="vol" id="mWaterVol" data-page-node-id="9yC092D0DPnwAfuZlvI3Ni">20 mL</div><svg class="micro-svg" id="mWater1" viewBox="0 0 220 300" data-page-node-id="AnFh5Itk9voetxI7WZ0paX"></svg></div>
+      </div>
+      <div class="metric" data-page-node-id="jnHOHZSlA9GIGTsR9Szvrf">
+        <div data-page-node-id="4xE1S73x8uHzJlf1HiaKWL">微粒数量<b class="same" id="mWaterN" data-page-node-id="Mom5s6fP0Otsmz3WHAzA8w">24 个 · 不变</b></div>
+        <div data-page-node-id="aJC0C6Rj1g1liEfpmDWBSQ">微粒大小<b class="same" data-page-node-id="KD4FiofYJkFdrHLcccEkzp">不变</b></div>
+        <div data-page-node-id="OVBgnPwu1HgKNpK7p72iC8">微粒间距<b id="mWaterGap" data-page-node-id="Na3o2lH2cIZjxdOdg6NH7q">几乎不变</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-page-node-id="AcJcJxRFGyBzKLgdsmQHY6">
+    <div class="quiz" data-page-node-id="9nBHWmmWfzP3BqZuZqCjeo">
+      <div class="q" data-page-node-id="BFgGikaLAdP4DacM70bGd6">想一想：压缩时，真正发生变化的是什么？</div>
+      <div class="opts" data-page-node-id="Cxu0PCAzICVQ9ZxhzqBSQN">
+        <button class="opt" data-ans="n" data-page-node-id="RojgC3WKEL1kFeXXGmJZ8n">A. 微粒的数量变少了</button>
+        <button class="opt" data-ans="s" data-page-node-id="uVBiGpNSFTWOZBy3UOVxFc">B. 微粒本身变小了</button>
+        <button class="opt" data-ans="g" data-page-node-id="C9CcFrdcqBXb5NFMCC1m27">C. 微粒之间的距离变小了</button>
+      </div>
+      <div class="fb" id="quizFb" data-page-node-id="9T8YRSqs3fr7SWbqTKRDyb"></div>
+    </div>
+  </div>
+
+  <div class="concl" data-page-node-id="rkOTfxF2kkxrNBwgiT6FIw">
+    <b data-page-node-id="4aRLVUSegmMDBu9e4nDEOx">结论：</b>在压缩过程中，微粒的<b data-page-node-id="apl7hjc5fILEWgC7l94UkQ">大小</b>和<b data-page-node-id="U76CYfn1mmHoeAC1wLP51z">数量</b>都<b data-page-node-id="MErhxrGYDI86OseACaINj4">保持不变</b>，改变的是微粒之间的<b data-page-node-id="6dhvNZiPqEhVbs4paV6B0q">距离</b>。
+    <br data-page-node-id="qzEhePaB6DMro5ACM6AMdC"><b class="air" data-page-node-id="fgk2DLxXg7O2nvmQY9YdJ1">空气</b>微粒之间的距离<b data-page-node-id="b8KI1qGMCeunOwMbh3XpRl">很容易改变</b>，所以空气容易被压缩；
+    <b class="water" data-page-node-id="fuivSA0EzKBZhtnflnZYkS">水</b>微粒之间的距离<b data-page-node-id="dDr2W5trhAs8qIIDDOz1Xi">不容易改变</b>，所以水不容易被压缩。
+    <br data-page-node-id="HrzTBq5LHsakZOpbCnUpc5"><span style="font-size:14px;color:var(--ink-3)" data-page-node-id="DofDNfQI79zBnpdwQQ3gfD">小提示：图中水微粒画得更密，是因为同样多的水里，微粒本来就比空气里挤得多——这是事实。我们比较的是"压缩前后，同一种物质的微粒有没有变"。</span>
+  </div>
+</section>
+
+<!-- ================= 4 研讨 ================= -->
+<section class="page" id="p4" data-page-node-id="Quiwnu9FWLjhE25aq82Tst">
+  <h2 class="t" data-page-node-id="FN9RD9wK5pe4771cbfZjtu"><span class="n" data-page-node-id="y5qWc03Am6cZZbFEiox3m6">4</span>研讨：用证据说话</h2>
+  <p class="lead" data-page-node-id="8axxh7X6x44Qopyd2GIVXk">先自己说一说，再点开看看参考答案。</p>
+
+  <div class="talk" data-page-node-id="bSA4LIm0uo7wBFR30hJtoM">
+    <div class="q" data-page-node-id="hZRLzzYWqQbJeP25JPv4LO"><span class="num" data-page-node-id="L4TzEB0yQFj4ShJlgOsoNc">1.</span>通过注射器实验，我们可以推测：挤压装空气的塑料瓶时，瓶中的空气被压缩了吗？说一说理由。</div>
+    <div class="a" data-page-node-id="CvTsuA5bCjYrOzsLTYlmks">被压缩了。注射器实验里，堵住管口用力压，空气的刻度从 20 mL 明显变小（约 8 mL），说明<b data-page-node-id="uqbkhPOW52x0UZHE9ZKpYt">空气占据的空间变小了</b>。塑料瓶被捏瘪也是同样的道理：瓶子里的空气被压缩，占据的空间变小，瓶子就瘪下去了；松手后空气又撑回原来的大小，瓶子就弹回来。</div>
+  </div>
+  <div class="talk" data-page-node-id="gESfGgSxo1sdBKTlIEeLeC">
+    <div class="q" data-page-node-id="wTOX48AfvkSvcAJsyjU25M"><span class="num" data-page-node-id="fmRYcSlw67RzDC0L1Vbzyp">2.</span>将装满空气的塑料瓶倒扣入水中，为什么还会有水进入？</div>
+    <div class="a" data-page-node-id="QumaiHBLHMEoqWGOxmgsPz">瓶子压入水中越深，水对瓶内空气的压力越大，瓶里的空气被<b data-page-node-id="4GxS7MZmBiiBp8RZrfNEVr">压缩</b>了一点，占据的空间就变小了，于是<b data-page-node-id="NKs8PfcznqVfAVXq120XF1">空出来的那一点空间被水占据</b>，就有少量的水进入瓶中。这也解释了为什么我们看到的是"少量"的水——因为空气只能被压缩一点点（手指的力气有限）。</div>
+  </div>
+  <div class="talk" data-page-node-id="FZ0J0ICbYZsfhoyhgIZBaR">
+    <div class="q" data-page-node-id="s5hAE8pnlAoY5EdK1zv0Yl"><span class="num" data-page-node-id="OCESFbDRU9Gr61HHMtYMDM">3.</span>鼓起来的皮球，为什么还可以继续充入空气？</div>
+    <div class="a" data-page-node-id="NUffbi4YUmpxZkSjUr9WLy">因为<b data-page-node-id="hHh1T5LfdhgQFmJELai1ZH">空气容易被压缩</b>。继续往里打气时，球内空气被压得更"挤"，同样多的空气可以占据更小的空间，所以还能再装进更多空气；同时被压缩的空气有<b data-page-node-id="tw8uWgUq0kE1AHAmYVgxII">弹性</b>，会让皮球鼓起来、有弹性。</div>
+  </div>
+
+  <div class="concl" data-page-node-id="8RYYLF85BG9aphzPWbwWpM">
+    <b data-page-node-id="Uaynsvcng04rlHNuzhGKN4">梳理：</b>空气容易被压缩，所以它占据的空间<b data-page-node-id="nB6OPICqnTUMAQwS2iWEBB">会改变</b>；水不容易被压缩，所以它占据的空间<b data-page-node-id="hBS9BacAeT9gGjanR6NosS">几乎不变</b>。
+  </div>
+</section>
+
+<!-- ================= 5 拓展 ================= -->
+<section class="page" id="p5" data-page-node-id="hjZ7kINOq0H0U4JhFEqv0f">
+  <h2 class="t" data-page-node-id="aeHKlSn17SxYqyJ0ZDdGCj"><span class="n" data-page-node-id="qbsOIWL5xTjyBOTB8lO5Sv">5</span>拓展：空气压缩枪 & 生活中的应用</h2>
+  <p class="lead" data-page-node-id="AJHo1PLHpez0aVv5SDAzDx">空气被压缩以后，还藏着一股"劲儿"。</p>
+
+  <div class="card" data-page-node-id="FojtY7W45Ey1wweaMA2sTa">
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:center" class="focus-wrap" data-page-node-id="qK8r17rugbJK5VCJDaCgl3">
+      <div data-page-node-id="nz6rRc9E8BiA8SHoyC0xyx">
+        <b style="font-size:18px;color:var(--warn)" data-page-node-id="USnVACexGbDpoFf89HnRcj">空气压缩枪</b>
+        <ol style="font-size:17px;padding-left:22px;margin:10px 0" data-page-node-id="HkWzOIkt7SZ1iqnuat9vql">
+          <li data-page-node-id="PErDrCByb7w2pgeVDkHjHI">用注射器吸入一些空气。</li>
+          <li data-page-node-id="pTxgTz6UfDHQdMHxwa78YK">把一小块橙子皮堵在注射器管口。</li>
+          <li data-page-node-id="rJLY5pYEQQG9RMjn6HgWTD">用力压活塞——橙子皮像子弹一样"啪"地弹出去！</li>
+        </ol>
+        <p style="color:var(--ink-2)" data-page-node-id="dLMS8KzUXZewGYMHJnb8Pb">空气被压缩后会产生<b data-page-node-id="rqXG9tqyvRmInPAieN5uXq">弹力</b>，松开的瞬间把橙子皮推出去。</p>
+        <div class="safety" style="margin-top:10px" data-page-node-id="qjyGZTb7xc8RYJXHtqGhcw"><b data-page-node-id="179r8wfDbe4zFh9QMx18yZ">安全提示：</b>游戏时，注射器管口<b data-page-node-id="KpmnDzAS5ECwIncAxacZ6r">不能对着人</b>，管口朝下、远离人群。</div>
+      </div>
+      <div data-page-node-id="Wqa4JFH62TJ9B3ZFj6HHVv">
+        <svg viewBox="0 0 320 190" id="gunSvg" style="width:100%;height:auto" data-page-node-id="mhXyoneMe6Djjhtlu4bukF">
+          <!-- 注射器横放 -->
+          <rect x="30" y="70" width="200" height="46" rx="6" fill="#f3f9ff" stroke="#5b7f9c" stroke-width="2" data-page-node-id="8GBACtSur3Vw78lXhkRfbM"/>
+          <rect x="230" y="78" width="26" height="30" fill="#fff" stroke="#5b7f9c" stroke-width="2" data-page-node-id="rd47wbgGLtQSOUyNZDX12c"/>
+          <rect x="256" y="84" width="34" height="18" rx="4" fill="#dfe9f2" stroke="#5b7f9c" stroke-width="2" data-page-node-id="hyqyEP6Ta8IfYyxOAFgBGd"/>
+          <!-- 空气 -->
+          <rect id="gunAir" x="60" y="73" width="168" height="40" fill="#bfe4fb" data-page-node-id="XMLTdia9UBVb6zfgsLiocj"/>
+          <!-- 活塞 -->
+          <g id="gunPlunger" data-page-node-id="ODM6qQA5rVGYvHYMlDToOe">
+            <rect x="44" y="72" width="18" height="42" rx="3" fill="#4a6c8c" data-page-node-id="KiVTGnWtPC4EM88zjStjgO"/>
+            <rect x="10" y="82" width="36" height="10" rx="3" fill="#4a6c8c" data-page-node-id="Plktd9j2ZFrPBEMCwAEeYc"/>
+            <rect x="4" y="66" width="12" height="42" rx="4" fill="#4a6c8c" data-page-node-id="1bNqKpIJfx9m6Ii65gx5nm"/>
+          </g>
+          <!-- 橙子皮子弹 -->
+          <g id="gunBullet" data-page-node-id="wDoLrTPTqxJDLP80jUvjhJ">
+            <ellipse cx="276" cy="93" rx="12" ry="9" fill="#f5a623" stroke="#c9791a" stroke-width="2" data-page-node-id="8eDXDCfUZjIlxLPuINUW7r"/>
+            <path d="M270 88 q6 -6 12 0" stroke="#c9791a" fill="none" stroke-width="2" data-page-node-id="cyltLoxQiGQunU6szlvUYV"/>
+          </g>
+          <!-- 速度线 -->
+          <g id="gunLines" opacity="0" data-page-node-id="3aL2HdWKWcl97tnqOAOgkH">
+            <path d="M292 84 h22" stroke="#f08a24" stroke-width="3" stroke-linecap="round" data-page-node-id="6sk7JWnbkKRpGm8202fUsa"/>
+            <path d="M296 93 h26" stroke="#f08a24" stroke-width="3" stroke-linecap="round" data-page-node-id="uOm4OBZToO9UY4MZiFXtzJ"/>
+            <path d="M292 102 h18" stroke="#f08a24" stroke-width="3" stroke-linecap="round" data-page-node-id="zkfgLlFt2GzTA4AqZV5TOo"/>
+          </g>
+          <text x="150" y="150" text-anchor="middle" font-size="14" fill="#4a5b6d" id="gunTip" data-page-node-id="uv70LNrDhh7sIVcD3AyGCS">点右边按钮发射</text>
+        </svg>
+      </div>
+    </div>
+    <div class="btn-row" data-page-node-id="E2BgxcP6u3BlfniYFAMRBN">
+      <button class="btn primary" id="btnFire" data-page-node-id="FUyomjfuDMMuSXlB5v1o2e">压活塞 · 发射！</button>
+      <button class="btn ghost" id="btnGunReset" data-page-node-id="q3sEgKkPXRa1S3AReRUaBf">复位</button>
+    </div>
+  </div>
+
+  <div class="card" data-page-node-id="e4VmIEhZxkdZz9gToih4A5">
+    <b style="font-size:18px" data-page-node-id="jr6DkFJZflGfjLKj6SNS2l">生活中，哪些地方用到了"空气容易被压缩"？</b>
+    <div class="apps" style="margin-top:14px" data-page-node-id="BTYy7NJKKQnNXCOygSdxXZ">
+      <div class="app" data-page-node-id="EkNwedY4Fq47bidedWGAdA"><div class="ic" data-page-node-id="aQVXhSKLOTnMMF9jdOsrCx">🚲</div><div class="nm" data-page-node-id="fmyTLJpvYikIVRcefMuGcH">打气筒</div><div class="ds" data-page-node-id="rfgbvVeEgUPPX13HRv9o5d">把空气压进轮胎，压得越紧，打得越足</div></div>
+      <div class="app" data-page-node-id="0wfuyoaV0ZL9BQTgia4nzH"><div class="ic" data-page-node-id="mG06yrJmwrMgTS5HIvMzMH">⛹️</div><div class="nm" data-page-node-id="vtMtLH6ZvGS3ycFxJFCBLs">篮球 / 皮球</div><div class="ds" data-page-node-id="qSwjeoWyEumk7BQkk52feH">里面装的是被压缩的空气，所以能弹起来</div></div>
+      <div class="app" data-page-node-id="CGyUfFkgW6cLd8zrVSA68K"><div class="ic" data-page-node-id="xtgfTeYbLVZhYFAw5nAh9C">🚤</div><div class="nm" data-page-node-id="FuwcH7U8kTRI9VYLK7qEAk">气垫船</div><div class="ds" data-page-node-id="NUKVpasolCX2GYDSj0NG5z">用压缩空气在船底形成气垫，减小摩擦</div></div>
+      <div class="app" data-page-node-id="BrECjq9kCiI7ajvJI7EKSL"><div class="ic" data-page-node-id="xI18yCbLO76RDmCDBCEEAO">🛞</div><div class="nm" data-page-node-id="z1VBnGt28sMuUO1WobI24d">汽车轮胎</div><div class="ds" data-page-node-id="rtyqmTR45ZNKZH822EsZIl">压缩空气能缓冲震动，让车跑得更稳</div></div>
+      <div class="app" data-page-node-id="RgiDmpSsonXC77rDU5Gvzw"><div class="ic" data-page-node-id="AQn9K3kOBBHLeklLfZRyn0">💺</div><div class="nm" data-page-node-id="AijZH9aXevPvl7EnMNZLSt">充气沙发 / 气垫</div><div class="ds" data-page-node-id="UHjt6sFB6VLvtr8j6l9wnY">充进压缩空气，软软的又有弹性</div></div>
+      <div class="app" data-page-node-id="BwvhlHzfb05oZCVg7uH1gm"><div class="ic" data-page-node-id="1VW4yji45lrNd7gKsH6Uhp">🧯</div><div class="nm" data-page-node-id="7ip09C5y7ZBbpxLOz6CyD4">喷雾器 / 灭火器</div><div class="ds" data-page-node-id="ILMf5qggZ7veNt8TMgCo0e">靠压缩空气把液体压出去</div></div>
+      <div class="app" data-page-node-id="T6Top4YZ9g2HI7OTTJ93ze"><div class="ic" data-page-node-id="kwpm5Dbs4rzvFtSd18tu2e">🏥</div><div class="nm" data-page-node-id="ExOuiF6VXQoXY3YAioGi42">急救气垫 / 缓冲包装</div><div class="ds" data-page-node-id="GF4Bk0McR0FdzbrReCuszM">压缩空气吸收撞击的力</div></div>
+      <div class="app" data-page-node-id="QOCAqrwLfTkPeyxNuD6jnC"><div class="ic" data-page-node-id="6XHq3D4KG0gXQITJ3LBHTq">🚪</div><div class="nm" data-page-node-id="6ZGc2kCJzZtb4zmrhd9o5D">气动门 / 气动工具</div><div class="ds" data-page-node-id="3FU2mDDodkzyP6e4RB5igC">压缩空气推动活塞来干活</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="background:#f6fbff" data-page-node-id="y2U4b6rxsnClEm24ZmBdsl">
+    <b data-page-node-id="j6WvDDFnMzkV7gcDsC3ePL">课后小任务：</b>回家找一找，还有哪些地方利用了"空气容易被压缩"？记下<b data-page-node-id="VoN0mQJASNsfROlaah0baK">现象</b>和<b data-page-node-id="HdrLUMWUqt3F8WXfxZNIwT">你的解释</b>，下节课来分享。
+  </div>
+</section>
+
+<!-- ================= 6 记录单 ================= -->
+<section class="page" id="p6" data-page-node-id="eXSGO72IOAhC2iY1XAi0S9">
+  <h2 class="t" data-page-node-id="D6RKjGkl3umO5vzaANxmKl"><span class="n" data-page-node-id="dOTmivf6Kf5BCZQE7vfsD6">6</span>实验记录单</h2>
+  <p class="lead" data-page-node-id="Bl7Nopq7LcF5lcFBHjgejQ">可以直接在电脑上填写，也可以打印出来发给小组。数据会自动保存在这台电脑上。</p>
+
+  <div class="card" data-page-node-id="SZmrSbktckPPH8eDmcIlL1">
+    <div style="text-align:center;font-size:20px;font-weight:700;margin-bottom:6px" data-page-node-id="3AakpzKDECJAJtpMGGLkO6">《空气占据的空间会改变吗》实验记录单</div>
+    <div style="text-align:center;color:var(--ink-3);font-size:15px;margin-bottom:14px" data-page-node-id="ggaQwXZzu34HqOIjUBJv6R">班级：<input style="width:110px;border:none;border-bottom:1px solid #999;text-align:center" id="cls" data-page-node-id="foe0SMue6koYfOwp0q6fue">　　小组：<input style="width:70px;border:none;border-bottom:1px solid #999;text-align:center" id="grp" data-page-node-id="zpUG6VfHC1QZ9FmbnrN5NX"></div>
+
+    <table class="rec" id="sheetTable" data-page-node-id="YiAgS1SgRq7ohkemLsQZn2">
+      <tr data-page-node-id="uhDGMBom48hcD0NbC3TcL8"><th style="width:110px" data-page-node-id="xGre7fZg03VILUv7eCjP7p">注射器</th><th data-page-node-id="Wz2INJ5Jl73Q6PiXdUeHSy">初始刻度</th><th data-page-node-id="qFoKogBwn79qjRd4mVAmuz">我的猜测（压到底后）</th><th data-page-node-id="XQiTFrwdIMpfDwkHF2J63g">第1次</th><th data-page-node-id="2W671W68LjXUgib43Tqv5f">第2次</th><th data-page-node-id="UAOcJ2oEBsA07GwYtnMU16">第3次</th><th data-page-node-id="7AODYBpOxRXmOILawTTCex">中间值</th></tr>
+      <tr data-page-node-id="EY6MdnvqivJsdBw1jNbAAF">
+        <td data-page-node-id="k4jCCAiuw8xFGqUzNpDejH"><span class="tag air" data-page-node-id="lFo8guuCxcYpurLkb4RIDE">空气</span></td>
+        <td data-page-node-id="CN0mPgceWZa5nyj2UzbwCs">20 mL</td>
+        <td data-page-node-id="85A1awJ5HTDYeBYh5N7OQZ"><input data-s="ga" type="number" step="0.5" data-page-node-id="m98FuFJfG6r7NjGCnVOHu5"></td>
+        <td data-page-node-id="mIc2lYatHR57Xvwlz5qqCO"><input data-s="a1" type="number" step="0.5" data-page-node-id="FeWN1l61zR8HXLBnSaW1Ts"></td>
+        <td data-page-node-id="QrpXsqIwLclCj3tR1JBTEj"><input data-s="a2" type="number" step="0.5" data-page-node-id="mP3E5SKNd67feZgFB0GNAg"></td>
+        <td data-page-node-id="Q5oEZXAWE1h77zRtb1vqXG"><input data-s="a3" type="number" step="0.5" data-page-node-id="CyqJeVbeNGKphGzU5r6lUI"></td>
+        <td class="mid" id="smidAir" data-page-node-id="XGw84mXMSG3cXVuvkOI2qn">—</td>
+      </tr>
+      <tr data-page-node-id="1cBsAKwuPE5i06CivXHgvX">
+        <td data-page-node-id="eC0RkotyB4he7iUUCMNFO5"><span class="tag water" data-page-node-id="CnAK8RcsOnl76hbNro110Q">水</span></td>
+        <td data-page-node-id="ut88Cu7r7ZzjYXUrMT4xcD">20 mL</td>
+        <td data-page-node-id="b7LzvqXDA0rE6erW7X5G9Q"><input data-s="gw" type="number" step="0.5" data-page-node-id="AnDyUtl5GFCk5TKUChEtuY"></td>
+        <td data-page-node-id="tNsETLJT8XGHSIgmBLuuNU"><input data-s="w1" type="number" step="0.5" data-page-node-id="0AsQhGpKpl9TT8eeAbylkC"></td>
+        <td data-page-node-id="UFYm5uRw03nZDO32H4uGHj"><input data-s="w2" type="number" step="0.5" data-page-node-id="xK0BIDUYP4S9X7ueoKeptI"></td>
+        <td data-page-node-id="qKD3tMUQjfyjnjQXTb1TG4"><input data-s="w3" type="number" step="0.5" data-page-node-id="OE3xMzJW8ENheO4nPx0VcP"></td>
+        <td class="mid" id="smidWater" data-page-node-id="BJVUKMSPV8bFZVccqBFFRA">—</td>
+      </tr>
+    </table>
+    <div class="btn-row" data-page-node-id="W4jnfGLqGYy1KJqLSPyYp0">
+      <button class="btn" id="btnSheetMid" data-page-node-id="sAX3zVMu6LwEp8yrMVLOnz">算出中间值</button>
+      <button class="btn ghost" id="btnSheetClear" data-page-node-id="O3A2vnw0CQarsNr1Be6fJI">清空</button>
+      <button class="btn primary" id="btnSheetPrint" data-page-node-id="7pvtnBdFcKaK4KWrc98oHw">打印记录单</button>
+    </div>
+  </div>
+
+  <div class="card" data-page-node-id="sxcmIrJwmQLwUSVlHrHzGq">
+    <b data-page-node-id="Izdy4EdizyRF1FGLqvirUR">用"○"画出挤压后的样子（微粒大小、数量不变，只改变距离）</b>
+    <div class="two-col" style="margin-top:12px;gap:20px" data-page-node-id="6np6e36bHcvTNCrVHYsnTC">
+      <div class="mcell" style="padding:12px" data-page-node-id="JDcBt4gK42y6qh2AiC6tQ8">
+        <div style="text-align:center;font-weight:700;color:var(--air-d)" data-page-node-id="GHeymFgP7L2dRPTYHpYivw">空气</div>
+        <div style="display:flex;gap:8px;margin-top:8px" data-page-node-id="ynvXqG7sQPymoAnVqHKG1P">
+          <div style="flex:1" data-page-node-id="16pmihyx0dZMNXUvKKlETI"><div class="cap" data-page-node-id="qD7TxEQLyNTHJqbLyE9WP5">开始时（20 mL）</div><canvas id="drawAir0" width="260" height="300" style="width:100%;border:1px dashed #bfe4fb;border-radius:8px;background:#fff" data-page-node-id="LEUKujg4CR7NGxxsjRc5RG"></canvas></div>
+          <div style="flex:1" data-page-node-id="5n3NZGJY0ipL9npy1ENR4W"><div class="cap" data-page-node-id="xbzb3AphgrdfBdD1gYTh4D">下压后</div><canvas id="drawAir1" width="260" height="300" style="width:100%;border:1px dashed #bfe4fb;border-radius:8px;background:#fff" data-page-node-id="1LZz2dABf1MguR7AkGgcBm"></canvas></div>
+        </div>
+      </div>
+      <div class="mcell" style="padding:12px" data-page-node-id="SgjpCHN81n4BaOUjfYtvu3">
+        <div style="text-align:center;font-weight:700;color:var(--water)" data-page-node-id="Rl2vz2BRwXEZ5AkHMB98d4">水</div>
+        <div style="display:flex;gap:8px;margin-top:8px" data-page-node-id="f8boGviHyHojdkxcNI8f1Z">
+          <div style="flex:1" data-page-node-id="qdQjjZA0kSEdCEp6AXIgp1"><div class="cap" data-page-node-id="JIsTY6hIk8AvCppzYFCOXJ">开始时（20 mL）</div><canvas id="drawWater0" width="260" height="300" style="width:100%;border:1px dashed #c9d6f2;border-radius:8px;background:#fff" data-page-node-id="hG5h2Dd4GJXgonLBBgzGeE"></canvas></div>
+          <div style="flex:1" data-page-node-id="X8aSLAsQitr44g2Tyz6ZcZ"><div class="cap" data-page-node-id="IQaQcsQKEhTWqOlkFzjfwP">下压后</div><canvas id="drawWater1" width="260" height="300" style="width:100%;border:1px dashed #c9d6f2;border-radius:8px;background:#fff" data-page-node-id="kM28jAEPQky1biFJ5ybEtH"></canvas></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:15px;color:var(--ink-2)" data-page-node-id="2xfZsIEp8GoFGuyoUY49pV">
+      电脑上手绘：在"下压后"的格子里<b data-page-node-id="1PNNcgHbet8ntu9Bc1b6Q1">点击</b>添加微粒，<b data-page-node-id="KXg8dG8H5HvwozLn96WVdE">右键</b>（或点"撤销"）删掉最后一个，<b data-page-node-id="sgPPgIVo1GEM2GGAPqEe6h">拖到格子上再点"清空格子"</b>重画。
+      <div class="btn-row" data-page-node-id="cWGovyvKRxTlLv0C6EQoBa">
+        <button class="btn" data-clr="drawAir1" data-page-node-id="8HJ51iMquY7kkCYrvUPOMb">清空：空气·下压后</button>
+        <button class="btn" data-clr="drawWater1" data-page-node-id="tVySYWj8RYRpM77OgDEGgY">清空：水·下压后</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="concl" data-page-node-id="GcmhdbyorEksB5IYCWkI62">
+    <b data-page-node-id="IpYYDCtQ7HlvWIXygCBxqh">我的结论：</b>空气占据的空间<b data-page-node-id="CbaE9bgtHElxQLNo34Xi7c">会改变</b>——空气<b data-page-node-id="OYmh4puLfaJlGbBLGI5JM4">容易被压缩</b>；水占据的空间<b data-page-node-id="OZJwEN6WbPMVYzNKnddxcs">几乎不变</b>——水<b data-page-node-id="bSRk90hPLaDA8jShxKJtbf">不容易被压缩</b>。
+    原因是：压缩时微粒的大小和数量不变，只是<b data-page-node-id="Dgc3q9c5rJrojZMQQXZlxc">空气微粒之间的距离变小了</b>。
+  </div>
+</section>
+
+</main>
+
+<footer data-page-node-id="QXpn2BBVOq2NadpOQx08dW">教科版小学科学四年级上册 第一单元《空气》 第3课 · 互动课件（依据教材实验事实制作，数据为参考值）</footer>
+
 <script>
-const $=id=>document.getElementById(id);let saved={};try{saved=JSON.parse(airRecordGuard.getItem('air-compression-v1')||'{}')}catch(e){};
-function syringe(volume,water,model,open,p){let x=90+volume*14;let s=`<rect x="90" y="85" width="280" height="140" rx="5" fill="#f8fbfc" stroke="#688b95" stroke-width="3"/><rect x="90" y="88" width="${volume*14}" height="134" fill="${water?'#badfed':'#fff4d6'}"/><path d="M90 135 H50 V175 H90" fill="${water?'#badfed':'#fff4d6'}" stroke="#688b95" stroke-width="3"/>`;for(let v=0;v<=20;v+=5)s+=`<path d="M${90+v*14} 85 v22" stroke="#365b67" stroke-width="2"/><text x="${90+v*14}" y="66" text-anchor="middle" font-size="20" fill="#365b67">${v}</text>`;s+='<text x="408" y="66" font-size="20" fill="#365b67">mL</text>';if(model&&!water){let n=open?Math.max(8,Math.round(32*(1-p*.005))):32;for(let i=0;i<n;i++){let col=i%8,row=Math.floor(i/8);s+=`<circle cx="${100+(volume*14-20)*(col+.5)/8}" cy="${112+row*29}" r="5" fill="#aa7726"/>`}}if(open&&p>0)s+=`<path d="M45 155 H9 m14 -10 L9 155 l14 10" stroke="${water?'#3996b8':'#aa7726'}" stroke-width="4" fill="none"/>`;if(!open)s+='<rect x="42" y="127" width="13" height="56" rx="4" fill="#d29b42"/>';s+=`<rect x="${x}" y="89" width="10" height="132" rx="3" fill="#3f6e7a"/><rect x="${x+10}" y="145" width="150" height="20" fill="#bdcfd3" stroke="#688b95" stroke-width="2"/><rect x="${x+160}" y="110" width="12" height="90" rx="4" fill="#688b95"/><text x="290" y="282" text-anchor="middle" font-size="21" fill="#365b67">${open?'管口打开：可以流出':'管口封住：检查密封'}</text>`;return s}
-function render(){let p=+$('push').value,sealed=$('sealed').checked,model=$('model').checked;let a=20-p*.1,w=sealed?20:20-p*.1;$('air').innerHTML=syringe(a,false,model,!sealed,p);$('water').innerHTML=syringe(w,true,model,!sealed,p);$('airText').textContent=p===0?'初始：20 mL':sealed?'占据空间变小（示意）':'部分空气从管口流出';$('waterText').textContent=p===0?'初始：20 mL':sealed?'体积变化很小（刻度不易分辨）':'部分水从管口流出';$('reason').hidden=!model;$('reason').textContent=sealed?'解释模型：同一团空气，微粒数目和大小不变，间距变小。圆点只是示意，不是肉眼能看见的空气。水的微观结构未在此绘制。':'解释模型：打开管口后，空气或水能够流出。剩下的量减少，不能据此证明同一团空气被压缩。';$('observation').textContent=sealed?'先预测，再缓慢拖动。这里只表达变化趋势，推压程度不是测得的力，刻度变化不代表真实实验结果。':'改变了“管口是否封住”这个条件：流出与压缩不是一回事。回到起点可恢复密封对比。'}
-document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.page').forEach(p=>p.hidden=p.id!==b.dataset.page);document.querySelectorAll('[data-page]').forEach(n=>n.setAttribute('aria-selected',n===b?'true':'false'))});['push','sealed','model'].forEach(id=>$(id).oninput=render);$('reset').onclick=()=>{$('push').value=0;$('sealed').checked=true;$('model').checked=false;render()};document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{$('feedback').textContent=b.dataset.answer==='1'?'解释合理：同一团空气的微粒间距变小。注意，这属于解释模型，实验直接支持的是空气占据的空间变小。':'再想想：空气并没有变成另一种物质；解释模型中，微粒数目和大小保持不变。'});$('reveal').onclick=()=>{$('transfer').hidden=!$('transfer').hidden;$('reveal').textContent=$('transfer').hidden?'查看解释与边界':'收起解释'};
-$('rows').innerHTML=[0,1,2].map(r=>`<tr><th>${r+1}</th>${[0,1,2,3].map(c=>`<td><input id="v${r}${c}" type="number" min="0" step="0.1" aria-label="第${r+1}次${['空气初始','空气推后','水初始','水推后'][c]}体积"></td>`).join('')}</tr>`).join('');airRecordGuard.setDraftGetter(()=>Object.fromEntries(fields.map(id=>[id,$(id).value])));let fields=['note',...Array.from({length:12},(_,i)=>'v'+Math.floor(i/4)+i%4)];function save(){renderMeasuredPairs();let data={};fields.forEach(id=>data[id]=$(id).value);try{airRecordGuard.setItem('air-compression-v1',JSON.stringify(data));$('saveState').textContent=' 已保存在本机'}catch(e){$('saveState').textContent=' 当前环境无法保存，请打印或另行记录'}}fields.forEach(id=>{$(id).value=typeof saved[id]==='string'?saved[id]:'';$(id).oninput=save});$('clear').onclick=()=>{if(confirm('清空本页实测记录？')){fields.forEach(id=>$(id).value='');save()}};$('print').onclick=()=>window.print();render();
+/* ============ 工具 ============ */
+const SVGNS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent){
+  const e=document.createElementNS(SVGNS,tag);
+  for(const k in attrs) e.setAttribute(k,attrs[k]);
+  if(parent) parent.appendChild(e);
+  return e;
+}
+function rnd(seed){ // 固定种子随机，保证每次布局一致
+  let s=seed;
+  return function(){ s=(s*9301+49297)%233280; return s/233280; };
+}
+/* 生成微粒归一化坐标 (u,v) ∈ [0,1]，网格+轻微抖动 */
+function makeParticles(n,cols,seed){
+  const rows=Math.ceil(n/cols), r=rnd(seed), out=[];
+  for(let i=0;i<n;i++){
+    const c=i%cols, rr=Math.floor(i/cols);
+    const u=(c+0.5)/cols + (r()-0.5)*0.35/cols;
+    const v=(rr+0.5)/rows + (r()-0.5)*0.35/rows;
+    out.push({u:Math.min(0.97,Math.max(0.03,u)),v:Math.min(0.97,Math.max(0.03,v))});
+  }
+  return out;
+}
+
+/* ============ 物理模型（尽量贴近事实） ============ */
+const V0=20;                 // 初始 20 mL
+const V_AIR_MIN=8;           // 手指力气有限，空气最多压到约 8 mL
+const V_WATER_DROP=0.2;      // 水几乎不可压缩，最多 0.2 mL（密封件形变）
+function airVolume(f){ return V0/(1+ (V0/V_AIR_MIN-1)*f); }   // 近似玻意耳定律
+function waterVolume(f){ return V0 - V_WATER_DROP*f; }
+
+/* ============ 注射器绘制 ============ */
+const SY={ xL:62, xR:158, yBottom:322, yTop:48, cap:30 };   // 内腔
+SY.pxPerMl=(SY.yBottom-SY.yTop)/SY.cap;
+function volToY(v){ return SY.yBottom - v*SY.pxPerMl; }
+
+function buildSyringe(svgId,type,nP,cols,seed,d){
+  const svg=document.getElementById(svgId);
+  svg.innerHTML="";
+  const isAir=type==="air";
+  const fill=isAir?"#bfe4fb":"#9db8e8";
+  const fillDeep=isAir?"#7fc9f2":"#6f93d0";
+  const dotFill=isAir?"#ffffff":"#dbe6f8";
+  const dotStroke=isAir?"#2690cf":"#3358a8";
+
+  // 筒身底色
+  el("rect",{x:SY.xL-7,y:SY.yTop-14,width:(SY.xR-SY.xL)+14,height:SY.yBottom-SY.yTop+28,rx:4,
+    fill:"#ffffff",opacity:.9},svg);
+  // 内容物（先占位，随后按体积更新）
+  const content=el("rect",{x:SY.xL,y:SY.yTop,width:SY.xR-SY.xL,height:SY.yBottom-SY.yTop,fill:fill},svg);
+  // 刻度
+  for(let v=0;v<=SY.cap;v++){
+    const y=volToY(v);
+    const long=(v%5===0);
+    el("line",{x1:SY.xR,y1:y,x2:SY.xR+(long?12:6),y2:y,stroke:"#5b7f9c","stroke-width":long?1.6:1},svg);
+    if(long) el("text",{x:SY.xR+15,y:y+4,"font-size":11,fill:"#5b7f9c"},svg).textContent=v;
+  }
+  // 筒壁描边
+  el("rect",{x:SY.xL-7,y:SY.yTop-14,width:(SY.xR-SY.xL)+14,height:SY.yBottom-SY.yTop+28,rx:4,
+    fill:"none",stroke:"#5b7f9c","stroke-width":2},svg);
+  // 顶部凸缘
+  el("rect",{x:SY.xL-16,y:SY.yTop-22,width:(SY.xR-SY.xL)+32,height:10,rx:3,fill:"#e8f1fa",stroke:"#5b7f9c","stroke-width":2},svg);
+  // 出口
+  el("path",{d:`M${SY.xL-2} ${SY.yBottom+14} L${SY.xR+2} ${SY.yBottom+14} L${(SY.xL+SY.xR)/2+9} ${SY.yBottom+40} L${(SY.xL+SY.xR)/2-9} ${SY.yBottom+40} Z`,
+    fill:"#eef5fb",stroke:"#5b7f9c","stroke-width":2},svg);
+  el("rect",{x:(SY.xL+SY.xR)/2-6,y:SY.yBottom+40,width:12,height:16,rx:2,fill:"#dfe9f2",stroke:"#5b7f9c","stroke-width":2},svg);
+  // 手堵住管口
+  el("ellipse",{cx:(SY.xL+SY.xR)/2,cy:SY.yBottom+64,rx:44,ry:18,fill:"#f6cf9f",stroke:"#d9a86e","stroke-width":2},svg);
+  el("text",{x:(SY.xL+SY.xR)/2,y:SY.yBottom+68,"font-size":12,"text-anchor":"middle",fill:"#8a5a24"},svg).textContent="手堵住管口";
+
+  // 微粒
+  const parts=makeParticles(nP,cols,seed);
+  const dots=[];
+  const g=el("g",{},svg);
+  parts.forEach(p=>{
+    dots.push(el("circle",{cx:0,cy:0,r:d,fill:dotFill,stroke:dotStroke,"stroke-width":1.6},g));
+  });
+
+  // 活塞与推杆（最后画，位于最上层）
+  const rod=el("rect",{x:104,y:6,width:12,height:110,rx:2,fill:"#c9d6e4",stroke:"#8fa4b8","stroke-width":1},svg);
+  const handle=el("rect",{x:82,y:0,width:56,height:12,rx:4,fill:"#8fa4b8"},svg);
+  const piston=el("rect",{x:SY.xL-1,y:120,width:SY.xR-SY.xL+2,height:16,rx:3,fill:"#5b7f9c",stroke:"#41607a","stroke-width":1},svg);
+
+  return {svg,piston,rod,handle,content,dots,parts,dotR:d,
+    update(v){
+      const y=volToY(v);
+      const h=SY.yBottom-y;
+      this.content.setAttribute("y",y);
+      this.content.setAttribute("height",Math.max(0,h));
+      const pistonTop=y-16;
+      const handleY=Math.min(y-136,12);      // 手柄最多压到筒口上方
+      const rodY=handleY+6;
+      this.piston.setAttribute("y",pistonTop);
+      this.handle.setAttribute("y",handleY);
+      this.rod.setAttribute("y",rodY);
+      this.rod.setAttribute("height",Math.max(0,pistonTop-rodY));
+      const pad=this.dotR+3;
+      const w=(SY.xR-SY.xL)-2*pad;
+      const hh=Math.max(1,h-2*pad);
+      this.parts.forEach((p,i)=>{
+        const cx=SY.xL+pad+p.u*w;
+        const cy=y+pad+p.v*hh;
+        this.dots[i].setAttribute("cx",cx);
+        this.dots[i].setAttribute("cy",cy);
+      });
+    }};
+}
+
+/* ============ 实验状态 ============ */
+const air=buildSyringe("svgAir","air",14,5,7,5);
+const wat=buildSyringe("svgWater","water",24,6,11,5);
+
+const st={
+  air:{f:0,v:V0,vd:V0,press:false},
+  water:{f:0,v:V0,vd:V0,press:false}
+};
+const $=id=>document.getElementById(id);
+
+function target(key){
+  const s=st[key];
+  return key==="air"? airVolume(s.f) : waterVolume(s.f);
+}
+
+let last=performance.now();
+function loop(now){
+  const dt=Math.min(60,now-last); last=now;
+  ["air","water"].forEach(key=>{
+    const s=st[key];
+    if(s.press) s.f=Math.min(1,s.f+dt/2600);
+    else s.f=Math.max(0,s.f-dt/900);
+    const tg=target(key);
+    s.v=tg;
+    // 显示值缓动跟随（松手时体现"慢慢弹回"）
+    s.vd += (s.v - s.vd)*Math.min(1,dt/1000*7);
+    if(Math.abs(s.v-s.vd)<0.02) s.vd=s.v;
+    (key==="air"?air:wat).update(s.vd);
+    paint(key);
+  });
+  requestAnimationFrame(loop);
+}
+
+function paint(key){
+  const s=st[key];
+  const vEl=$(key==="air"?"vAir":"vWater");
+  const dEl=$(key==="air"?"dAir":"dWater");
+  const fEl=$(key==="air"?"fAir":"fWater");
+  const sEl=$(key==="air"?"sAir":"sWater");
+  vEl.textContent=s.vd.toFixed(1);
+  const d=s.vd-V0;
+  dEl.textContent=(d>0?"+":"")+d.toFixed(1);
+  fEl.style.width=(s.f*100)+"%";
+  if(s.f>0.985){
+    sEl.textContent = key==="air"
+      ? "压不动了！空气被压缩到约 8 毫升（松手会弹回）"
+      : "压不动了！水几乎没被压缩（只少了约 0.2 毫升）";
+    sEl.classList.add("hit");
+  }else if(s.f>0.05){
+    sEl.textContent = key==="air" ? "正在被压缩……空气的空间在变小" : "几乎压不动……活塞基本没动";
+    sEl.classList.remove("hit");
+  }else if(s.vd<V0-0.15){
+    sEl.textContent = key==="air" ? "松手了：活塞弹回原处——压缩空气有弹性" : "松手了：活塞停在原处，几乎没有变化";
+    sEl.classList.remove("hit");
+  }else{
+    sEl.textContent="按住按钮，慢慢用力压活塞 ↓";
+    sEl.classList.remove("hit");
+  }
+}
+requestAnimationFrame(loop);
+
+/* 按住压 */
+function bindPress(btnId,key){
+  const b=$(btnId);
+  const down=e=>{e.preventDefault();st[key].press=true;b.classList.add("held");};
+  const up=e=>{e.preventDefault();st[key].press=false;b.classList.remove("held");};
+  b.addEventListener("pointerdown",down);
+  b.addEventListener("pointerup",up);
+  b.addEventListener("pointerleave",up);
+  b.addEventListener("pointercancel",up);
+  b.addEventListener("contextmenu",e=>e.preventDefault());
+}
+bindPress("pressAir","air");
+bindPress("pressWater","water");
+
+/* 自动演示 */
+let autoTimer=null;
+$("btnAuto").onclick=()=>{
+  if(autoTimer) return;
+  st.air.press=true; st.water.press=true;
+  $("pressAir").classList.add("held"); $("pressWater").classList.add("held");
+  autoTimer=setTimeout(()=>{
+    st.air.press=false; st.water.press=false;
+    $("pressAir").classList.remove("held"); $("pressWater").classList.remove("held");
+    autoTimer=setTimeout(()=>{autoTimer=null;},2500);
+  },4200);
+};
+$("btnReset").onclick=()=>{
+  ["air","water"].forEach(k=>{st[k].f=0;st[k].v=V0;st[k].vd=V0;st[k].press=false;});
+  $("pressAir").classList.remove("held");$("pressWater").classList.remove("held");
+};
+
+/* 记录本次数据 */
+$("btnRec").onclick=()=>{
+  const av=+st.air.v.toFixed(1), wv=+st.water.v.toFixed(1);
+  if(st.air.f<0.9 && st.water.f<0.9){
+    alert("先按住按钮把活塞压到压不动，再记录数据哦！");
+    return;
+  }
+  ["air1","air2","air3"].forEach(k=>{
+    const i=document.querySelector(`input[data-r="${k}"]`);
+    if(!i.value){ i.value=av; return; }
+  });
+  ["w1","w2","w3"].forEach(k=>{
+    const i=document.querySelector(`input[data-r="${k}"]`);
+    if(!i.value){ i.value=wv; return; }
+  });
+  calcMid('input[data-r="air','midAir');
+  calcMid('input[data-r="w','midWater');
+};
+function calcMid(selPrefix,outId){
+  const vals=[1,2,3].map(n=>{
+    const i=document.querySelector(selPrefix+n+'"]');
+    return i&&i.value!==""?parseFloat(i.value):null;
+  }).filter(x=>x!==null);
+  if(vals.length===0){ $(outId).textContent="—"; return; }
+  vals.sort((a,b)=>a-b);
+  const mid = vals.length%2? vals[(vals.length-1)/2] : ((vals[vals.length/2-1]+vals[vals.length/2])/2);
+  $(outId).textContent=mid+" mL";
+  return mid;
+}
+$("btnMid").onclick=()=>{
+  calcMid('input[data-r="air','midAir');
+  calcMid('input[data-r="w','midWater');
+};
+$("btnFillDemo").onclick=()=>{
+  [["air1",8],["air2",8.5],["air3",7.5],["w1",19.8],["w2",20],["w3",19.8]].forEach(([k,v])=>{
+    document.querySelector(`input[data-r="${k}"]`).value=v;
+  });
+  calcMid('input[data-r="air','midAir');
+  calcMid('input[data-r="w','midWater');
+};
+$("btnClearRec").onclick=()=>{
+  document.querySelectorAll("#recTable input").forEach(i=>i.value="");
+  $("midAir").textContent="—";$("midWater").textContent="—";
+};
+
+/* ============ 步骤1 瓶子动画 ============ */
+$("btnBottle").onclick=()=>{
+  const w=$("bInWater"), l=$("bInLabel");
+  let h=0;
+  const t=setInterval(()=>{
+    h+=1.2; if(h>16) h=16;
+    w.setAttribute("y",300-h); w.setAttribute("height",h);
+    l.setAttribute("opacity", h>6?1:0);
+    if(h>=16) clearInterval(t);
+  },40);
+};
+$("btnBottleReset").onclick=()=>{
+  const w=$("bInWater"), l=$("bInLabel");
+  w.setAttribute("height",0); w.setAttribute("y",300); l.setAttribute("opacity",0);
+};
+document.querySelectorAll("[data-guess]").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll("[data-guess]").forEach(x=>x.classList.remove("right","wrong"));
+    const g=b.dataset.guess;
+    if(g==="b"){ b.classList.add("right"); $("guessFb").innerHTML="👍 很可能是这样！空气被挤小了，才腾出一点空间给水。下面用注射器来验证。"; }
+    else { b.classList.add("wrong");
+      $("guessFb").innerHTML = g==="a"
+        ? "瓶口朝下、空气又没冒泡跑出来，所以不太可能是跑掉了。再想想。"
+        : "空气在水里溶得极少，不足以腾出这么多空间。再想想。";
+    }
+  };
+});
+
+/* ============ 步骤3 微观模拟 ============ */
+function buildMicro(svgId,type,nP,cols,seed,d){
+  const svg=$(svgId);
+  svg.innerHTML="";
+  const isAir=type==="air";
+  const box={x:24,w:172,yBottom:280,yTop:24,cap:30};
+  const px=(box.yBottom-box.yTop)/box.cap;
+  el("rect",{x:box.x-8,y:box.yTop-8,width:box.w+16,height:box.yBottom-box.yTop+16,rx:4,fill:"#fff",stroke:"#5b7f9c","stroke-width":2},svg);
+  const content=el("rect",{x:box.x,y:box.yTop,width:box.w,height:box.yBottom-box.yTop,
+    fill:isAir?"#eaf6ff":"#eef2fb"},svg);
+  // 推杆（固定长度的一小段，跟着活塞走）
+  const rod=el("rect",{x:box.x+box.w/2-6,y:0,width:12,height:40,fill:"#c9d6e4",stroke:"#8fa4b8","stroke-width":1},svg);
+  const handle=el("rect",{x:box.x+box.w/2-28,y:0,width:56,height:12,rx:4,fill:"#8fa4b8"},svg);
+  const piston=el("rect",{x:box.x-6,y:box.yTop-16,width:box.w+12,height:16,rx:3,fill:"#5b7f9c"},svg);
+  // 微粒
+  const parts=makeParticles(nP,cols,seed);
+  const dots=parts.map(p=>el("circle",{cx:0,cy:0,r:d,
+    fill:isAir?"#fff":"#dfe8f8", stroke:isAir?"#2690cf":"#3358a8","stroke-width":2},svg));
+  // 向下压的箭头
+  const arrow=el("path",{d:`M${box.x+box.w/2} ${box.yTop-24} l-9 13 h18 z`,fill:"#e05252"},svg);
+  return {svg,content,rod,handle,piston,arrow,
+    update(v){
+      const y=box.yBottom - v*px;
+      const h=box.yBottom-y;
+      content.setAttribute("y",y); content.setAttribute("height",Math.max(0,h));
+      const pistonTop=y-16;
+      piston.setAttribute("y",pistonTop);
+      rod.setAttribute("y",pistonTop-40);
+      handle.setAttribute("y",pistonTop-52);
+      arrow.setAttribute("transform",`translate(0,${y-box.yTop})`);
+      const pad=d+3, w=box.w-2*pad, hh=Math.max(1,h-2*pad);
+      parts.forEach((p,i)=>{
+        dots[i].setAttribute("cx",box.x+pad+p.u*w);
+        dots[i].setAttribute("cy",y+pad+p.v*hh);
+      });
+    }};
+}
+const mA0=buildMicro("mAir0","air",14,5,7,10);
+const mA1=buildMicro("mAir1","air",14,5,7,10);
+const mW0=buildMicro("mWater0","water",24,6,11,9);
+const mW1=buildMicro("mWater1","water",24,6,11,9);
+mA0.update(20); mW0.update(20);
+function applyMicro(pct){
+  const f=pct/100;
+  const va=airVolume(f), vw=waterVolume(f);
+  mA1.update(va); mW1.update(vw);
+  $("microVol").textContent=va.toFixed(1)+" mL";
+  $("mAirVol").textContent=va.toFixed(1)+" mL";
+  $("mWaterVol").textContent=vw.toFixed(1)+" mL";
+  const gapA=$("mAirGap"), gapW=$("mWaterGap");
+  if(f<0.02){
+    gapA.textContent="不变"; gapA.className="same";
+    gapW.textContent="几乎不变"; gapW.className="same";
+  }else{
+    gapA.textContent="变小 ↓"; gapA.className="chg";
+    gapW.textContent="几乎不变"; gapW.className="same";
+  }
+}
+applyMicro(0);
+$("microSlider").oninput=e=>applyMicro(+e.target.value);
+document.querySelectorAll("[data-ans]").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll("[data-ans]").forEach(x=>x.classList.remove("right","wrong"));
+    const a=b.dataset.ans;
+    if(a==="g"){
+      b.classList.add("right");
+      $("quizFb").innerHTML="✅ 对啦！微粒的数量和大小都没变，变的是<b>微粒之间的距离</b>。空气微粒之间离得远，一压就靠拢；水微粒本来就挨得紧，再压也压不动。";
+    }else{
+      b.classList.add("wrong");
+      $("quizFb").innerHTML = a==="n"
+        ? "❌ 不对。管口堵住了，微粒跑不出去，数量不会变少。"
+        : "❌ 不对。微粒本身不会被压小，被压小的是它们之间的空隙。";
+    }
+  };
+});
+
+/* ============ 研讨展开 ============ */
+document.querySelectorAll(".talk .q").forEach(q=>{
+  q.onclick=()=>q.parentElement.classList.toggle("open");
+});
+
+/* ============ 压缩枪 ============ */
+$("btnFire").onclick=()=>{
+  const p=$("gunPlunger"), a=$("gunAir"), b=$("gunBullet"), l=$("gunLines"), tip=$("gunTip");
+  tip.textContent="压缩空气……";
+  p.setAttribute("transform","translate(120 0)");
+  a.setAttribute("width",168-120);
+  setTimeout(()=>{
+    tip.textContent="啪！橙子皮飞出去了";
+    b.setAttribute("transform","translate(80 0)");
+    l.setAttribute("opacity",1);
+  },1150);
+  setTimeout(()=>{ l.setAttribute("opacity",0); },1600);
+};
+$("btnGunReset").onclick=()=>{
+  const p=$("gunPlunger"), a=$("gunAir"), b=$("gunBullet"), l=$("gunLines"), tip=$("gunTip");
+  p.setAttribute("transform","translate(0 0)");
+  a.setAttribute("width",168);
+  b.setAttribute("transform","translate(0 0)");
+  l.setAttribute("opacity",0); tip.textContent="点左边按钮发射";
+};
+
+/* ============ 记录单手绘 ============ */
+function setupDraw(id,color){
+  const c=document.getElementById(id), ctx=c.getContext("2d");
+  const pts=[];
+  const R=11;
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(p=>{
+      ctx.beginPath(); ctx.arc(p.x,p.y,R,0,Math.PI*2);
+      ctx.fillStyle="#fff"; ctx.fill();
+      ctx.lineWidth=2; ctx.strokeStyle=color; ctx.stroke();
+    });
+  }
+  c.addEventListener("click",e=>{
+    const r=c.getBoundingClientRect();
+    pts.push({x:(e.clientX-r.left)*c.width/r.width, y:(e.clientY-r.top)*c.height/r.height});
+    draw();
+  });
+  c.addEventListener("contextmenu",e=>{ e.preventDefault(); pts.pop(); draw(); });
+  document.querySelector(`[data-clr="${id}"]`).onclick=()=>{ pts.length=0; draw(); };
+  return draw;
+}
+const drawA=setupDraw("drawAir1","#2690cf");
+const drawW=setupDraw("drawWater1","#3358a8");
+function seedCanvas(id,color,n,cols,seed,d){
+  const c=document.getElementById(id), ctx=c.getContext("2d");
+  ctx.clearRect(0,0,c.width,c.height);
+  const pad=20, w=c.width-2*pad, h=c.height-2*pad;
+  makeParticles(n,cols,seed).forEach(p=>{
+    ctx.beginPath(); ctx.arc(pad+p.u*w, pad+p.v*h, d, 0, Math.PI*2);
+    ctx.fillStyle="#fff"; ctx.fill();
+    ctx.lineWidth=2; ctx.strokeStyle=color; ctx.stroke();
+  });
+}
+seedCanvas("drawAir0","#2690cf",14,5,7,11);
+seedCanvas("drawWater0","#3358a8",24,6,11,9);
+
+/* 记录单中间值 */
+$("btnSheetMid").onclick=()=>{
+  const mid=(p,outId)=>{
+    const v=[1,2,3].map(n=>{
+      const i=document.querySelector(`input[data-s="${p}${n}"]`);
+      return i&&i.value!==""?parseFloat(i.value):null;
+    }).filter(x=>x!==null).sort((a,b)=>a-b);
+    if(!v.length){ $(outId).textContent="—"; return; }
+    const m=v.length%2? v[(v.length-1)/2] : (v[v.length/2-1]+v[v.length/2])/2;
+    $(outId).textContent=m+" mL";
+  };
+  mid("a","smidAir"); mid("w","smidWater");
+  saveSheet();
+};
+$("btnSheetClear").onclick=()=>{
+  document.querySelectorAll("#sheetTable input").forEach(i=>i.value="");
+  $("smidAir").textContent="—";$("smidWater").textContent="—";
+  drawA(); drawW(); saveSheet();
+};
+
+/* localStorage 记录单 */
+const SS_KEY="airSheet_v1";
+function saveSheet(){
+  const data={};
+  document.querySelectorAll("#sheetTable input,#recTable input,#cls,#grp").forEach(i=>{
+    if(i.id) data[i.id]=i.value; else if(i.dataset.s) data["s_"+i.dataset.s]=i.value; else if(i.dataset.r) data["r_"+i.dataset.r]=i.value;
+  });
+  try{localStorage.setItem(SS_KEY,JSON.stringify(data));}catch(e){}
+}
+function loadSheet(){
+  let d=null; try{d=JSON.parse(localStorage.getItem(SS_KEY)||"null");}catch(e){}
+  if(!d) return;
+  for(const k in d){
+    if(k.startsWith("s_")) {const el=document.querySelector(`input[data-s="${k.slice(2)}"]`); if(el) el.value=d[k];}
+    else if(k.startsWith("r_")) {const el=document.querySelector(`input[data-r="${k.slice(2)}"]`); if(el) el.value=d[k];}
+    else {const el=document.getElementById(k); if(el) el.value=d[k];}
+  }
+}
+document.addEventListener("input",e=>{ if(e.target.matches("#sheetTable input,#recTable input,#cls,#grp")) saveSheet(); });
+loadSheet();
+
+/* ============ 导航 / 打印 / 全屏 ============ */
+document.querySelectorAll("#nav button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll("#nav button").forEach(x=>x.classList.remove("on"));
+    document.querySelectorAll("section.page").forEach(s=>s.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById(b.dataset.p).classList.add("on");
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+});
+$("btnPrint").onclick=()=>{document.body.classList.add("print-sheet");window.print();setTimeout(()=>document.body.classList.remove("print-sheet"),500);};
+$("btnSheetPrint").onclick=()=>{document.body.classList.add("print-sheet");window.print();setTimeout(()=>document.body.classList.remove("print-sheet"),500);};
+$("btnFull").onclick=()=>{
+  if(!document.fullscreenElement) document.documentElement.requestFullscreen();
+  else document.exitFullscreen();
+};
 </script>
-<script>
-function renderParticlePair(){const p=+$('particlePush').value;$('particlesBefore').innerHTML=syringe(20,false,true,false,0);$('particlesAfter').innerHTML=syringe(20-p*.1,false,true,false,p);$('particleEvidence').textContent='前后各32个圆点，半径都为5个绘图单位；变的是容纳空间和点间距，不是圆点本身。数字仅用于核对模型一致性。'}
-function measuredPairs(){return [0,1,2].map(r=>[0,2].map(c=>{let a=$('v'+r+c).value,b=$('v'+r+(c+1)).value;if(a.trim()===''||b.trim()==='')return null;let x=Number(a),y=Number(b);return Number.isFinite(x)&&Number.isFinite(y)&&x>=0&&y>=0?{before:x,after:y,delta:Math.round((y-x)*1000)/1000}:null}))}
-function renderMeasuredPairs(){const rows=measuredPairs();let scale=Math.max(1,...rows.flat().filter(Boolean).map(x=>Math.abs(x.delta)));$('measuredPairs').innerHTML=rows.map((pairs,r)=>`<div class="measure-row"><strong>第${r+1}次</strong>${pairs.map((x,i)=>x?`<div><span>${i?'水':'空气'}：${x.before} → ${x.after} mL；变化 ${x.delta>0?'+':''}${x.delta} mL</span><div class="delta-track"><i style="width:${Math.abs(x.delta)/scale*45}%;left:${x.delta<0?50-Math.abs(x.delta)/scale*45:50}%;background:${i?'#63a6bd':'#d9a643'}"></i></div>${x.delta>0?'<small>推后大于初始：保留原值，请核对读数、操作和记录。</small>':''}</div>`:'<div>'+ (i?'水':'空气') +'：等待这一对真实读数</div>').join('')}</div>`).join('')}
-$('particlePush').oninput=renderParticlePair;renderParticlePair();renderMeasuredPairs();window.__airEvidence={measuredPairs,renderMeasuredPairs};
-</script><script>function fitAirFrame(){document.getElementById('airFrame').style.transform='translate(-50%,-50%) scale('+Math.min(innerWidth/1600,innerHeight/900)+')'}addEventListener('resize',fitAirFrame);fitAirFrame();document.getElementById('openAirRecords').onclick=()=>document.getElementById('airRecords').showModal();document.querySelectorAll('[data-air-close]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.airClose).close());const transferButton=document.getElementById('openTransfer');if(transferButton)transferButton.onclick=()=>document.getElementById('airTransfer').showModal();</script></body></html>
-
-
-
-<style id="physical-air-stage-v2">
-:root{--uv-bg:#F3F1F5;--uv-surface:#fff;--uv-soft:#E7E2EB;--uv-ink:#282036;--uv-muted:#6B6376;--uv-line:#D9D2E0;--uv-accent:#5132A5;--uv-head:#40394E;--uv-headink:#fff;--uv-on:#fff;--uv-focus:#AC4C7C}
-html,body{background:#40394E!important}body{color:#282036!important}.v2-rail,.lab-issue{display:none!important}body.airSingle,#airFrame{background:#F3F1F5!important;display:grid!important;grid-template-rows:96px minmax(0,1fr) 40px!important}body.airSingle>header,#airFrame>header{background:#40394E!important;color:#fff!important;border:0!important;gap:24px!important;padding:16px 28px!important;flex-direction:row!important;flex-wrap:nowrap!important}body.airSingle>header h1,#airFrame>header h1{color:white!important;font-size:29px!important}header small{color:#D7D1DF!important}header nav{margin-left:auto!important;display:flex!important;flex-direction:row!important;width:auto!important;gap:8px!important}header nav button{font-size:19px!important;min-height:46px!important;padding:9px 16px!important;border:1px solid #81768E!important;background:transparent!important;color:white!important;border-radius:8px!important}header nav button.active,header nav button[aria-selected=true]{background:#F3F1F5!important;color:#5132A5!important;border-color:#F3F1F5!important}body.airSingle>main,#airFrame>main{background:#F3F1F5!important;padding:18px 28px!important;width:100%!important;margin:0!important;height:100%!important}body.airSingle>footer,#airFrame>footer{background:#F3F1F5!important;color:#6B6376!important;margin:0!important;padding:8px 28px!important;font-size:14px!important}body .card,body .panel,body .stage,body .experiment,body .pair-evidence{background:#fff!important;border:1px solid #D9D2E0!important;border-radius:16px!important;box-shadow:none!important}button{border-radius:8px!important;border-color:#CFC5DB!important;box-shadow:none!important}button.primary{background:#5132A5!important;border-color:#5132A5!important;color:white!important}button.active,button[aria-selected=true]{background:#E7E2EB!important;color:#5132A5!important}input[type=range],input[type=checkbox]{accent-color:#5132A5!important}.bottom-dock{background:white!important;border:1px solid #D9D2E0!important;border-radius:14px!important;padding:12px 18px!important;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.lesson-notes summary{cursor:pointer;font-size:18px;color:#5132A5}.lesson-notes[open]{position:absolute!important;inset:110px 100px 65px!important;width:auto!important;max-height:none!important;overflow:auto!important;z-index:100!important;padding:26px!important;background:#fff!important;border:2px solid #D9D2E0!important;border-radius:16px!important;box-shadow:0 0 0 1000px #251E3877!important}.lesson-notes[open] summary{font-size:24px;margin-bottom:16px}.lesson-notes[open] p{font-size:20px!important;line-height:1.6}.hint,.muted{color:#6B6376!important}.callout,.status,.controls{background:#ECE7F1!important;color:#40394E!important;border-color:#5132A5!important}.lesson-notes button{margin:8px}body.airSingle #air-storage-guard{bottom:42px!important;left:auto!important;right:28px!important}
-#airFrame #compare .lab{height:420px!important;gap:18px!important}#airFrame #compare .experiment{display:grid;grid-template-rows:38px minmax(0,1fr) 40px;padding:14px 22px!important}#airFrame #compare .experiment svg{height:100%!important;max-height:none!important}#airFrame #compare .controls{background:#fff!important;border:1px solid #D9D2E0!important;border-radius:14px!important;padding:12px 20px!important;margin-top:12px!important}#airFrame #compare #observation{margin:6px 0!important;font-size:19px!important}#airFrame #compare #reason{margin-top:6px!important;font-size:18px!important;padding:8px 14px!important}#airFrame .intro h2{font-size:28px!important}#airFrame #think .pair-evidence svg{height:220px!important;max-height:220px!important}#airFrame #think .choice{padding:12px!important;background:white;border-radius:12px!important}#airFrame #think .question{font-size:21px!important;padding:8px 0!important}#airFrame #think .pair-evidence{margin:8px 0!important}#airFrame #think .feedback{min-height:0!important;padding:6px 0!important}</style><script id="physical-air-layout-v2">(()=>{function note(title){const d=document.createElement("details");d.className="lesson-notes";const s=document.createElement("summary");s.textContent=title;d.append(s);return d;}})();</script><style id="physical-air-stage-v2-fit">#airFrame #compare:not([hidden]){display:grid!important;grid-template-rows:78px minmax(0,1fr) 78px 32px auto;gap:8px!important}#airFrame #compare .intro{margin:0!important}#airFrame #compare .lab{height:auto!important;min-height:0!important;overflow:hidden!important}#airFrame #compare .experiment{min-height:0!important;overflow:hidden!important;grid-template-rows:34px minmax(0,1fr) 40px!important}#airFrame #compare .experiment svg{min-height:0!important;height:100%!important;width:100%!important;display:block!important}#airFrame #compare .readout{min-height:0!important;font-size:22px!important;line-height:40px!important}#airFrame #compare .controls{height:78px!important;margin:0!important;position:relative!important;background:#fff!important;z-index:1}#airFrame #compare .controls .slider{display:flex!important;align-items:center;gap:20px}#airFrame #compare .controls .slider input{flex:1;min-width:0}#airFrame #compare #observation{margin:0!important;line-height:32px!important}#airFrame #compare #reason{margin:0!important;max-height:80px;overflow:auto}
-</style>
+</body>
+</html>
