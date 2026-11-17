@@ -41,8 +41,11 @@ window.AIHTML_METADATA = {
   },
   "./一上2.3游戏中的观察/": {
     "id": "0cc17283e148e7e41f73202dd9517aad",
-    "updatedAt": "2026-11-14T04:51:18Z",
-    "commit": "0cd994ca4822d40033d8b8f80fdb0c53713adca0"
+    "updatedAt": "2026-11-17T13:42:58Z",
+    "commit": "c7ceb6dc5dd1b2d0dcc2c3ff095a17a3b4d35795",
+    "updateSummary": "v2.0 三页课堂小游戏：抓住了吗、刻度得分、反应时间；单人或同屏双人，前两页可蒙画面和听倒计时，五轮记录可导出。",
+    "teachingType": "互动游戏",
+    "teachingTypeCommit": "c7ceb6dc5dd1b2d0dcc2c3ff095a17a3b4d35795"
   },
   "./一上2.4气味告诉我们/": {
     "id": "0f7d8bca29866f09434ec1544491affc",
