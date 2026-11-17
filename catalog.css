@@ -753,3 +753,12 @@ body[data-view="focus"] .compat-entry:hover,
  .lesson-summary h4{font-size:16px}
  .lesson-resources{padding:0 2px 7px 2px}
 }
+
+/* Explicit, scope-specific connectivity labels; absent labels do not promise offline compatibility. */
+.network-badge{display:inline-flex;align-items:center;flex:0 0 auto;white-space:nowrap;padding:5px 9px;border-radius:7px;font-size:12px;font-weight:800;line-height:1.35;border:1px solid #f0b75c;background:#fff2d4;color:#653900;}
+.network-badge.network-optional{border-color:#72adcf;background:#e5f3ff;color:#12496c;}
+.network-notice{display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;margin:10px 0;padding:11px 12px;border:1px solid rgba(210,169,87,.45);border-radius:10px;background:rgba(255,244,216,.95);color:#34322c;}
+.network-purpose{flex:1 1 220px;font-size:13px;line-height:1.6;color:#34322c;}
+.lesson-summary .network-badge{margin-left:8px;}
+.network-legend{font-size:13px;line-height:1.7;}
+@media(max-width:699px){.lesson-summary{flex-wrap:wrap}.lesson-summary .network-badge{font-size:11px;margin-left:4px;padding:3px 6px}.network-notice{gap:6px;padding:9px}.network-purpose{flex-basis:100%}}
