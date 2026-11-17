@@ -102,7 +102,7 @@ body[data-mode=score] .ruler{width:clamp(68px,8.2vw,124px)}
   <p class="help" id="speedHelp">同一局两位玩家的尺子速度相同。</p>
   <div class="setting-row"><span>声音信号</span><button id="testAudioBtn" class="secondary-button"><svg><use href="#i-sound"/></svg>试声音</button></div>
   <p class="help">三声短音只作准备，之后随机等待长音。不要按节奏猜测。</p>
-  <div class="rules"><h3>怎么玩</h3><p>先点“开始”，尺子落下或绿灯亮起后，再按自己的大按钮。键盘：蓝队 A，红队 L；单人也可按空格。</p><p>每关每局5次，两人机会相同。第一关比抓住次数，第二关比总分，第三关比时间。提前按仍占一次机会；不得补按或只保留最快一次。双人使用同一次信号。</p><p>第二页显示游戏分数；第三页显示本设备上的反应时间，1000毫秒等于1秒。各关均随机等待。反应时间按有效中位数比较，不按获胜轮数；差距不超过20毫秒仅记“接近”（显示容差，不是儿童达标线）。</p><p>先用慢速熟悉操作，再用标准档；第二关标准速度略快。速度是课堂游戏参数，不是儿童正常反应范围或达标标准。同一次数、速度、画面、声音及设备条件下比较；只反映本次操作，不能据此判断谁更聪明。网页比较视觉和听觉提示。皮肤感知可另用实物尺子体验；设备和操作延迟也会影响毫秒数。</p></div>
+  <div class="rules"><h3>怎么玩</h3><p>先点“开始”，尺子落下或绿灯亮起后，再按自己的大按钮。键盘：蓝队 A，红队 L；单人也可按空格。</p><p>每关每局5次，两人机会相同。第一关比抓住次数，第二关比总分，第三关比时间。提前按仍占一次机会；不得补按或只保留最快一次。双人使用同一次信号。</p><p>第二页显示游戏分数；第三页显示本设备上的反应时间，1000毫秒等于1秒。各关均随机等待。反应时间按有效中位数比较，不按获胜轮数；差距不超过20毫秒仅记“接近”（显示容差，不是儿童达标线）。</p><p>先用慢速熟悉操作，再用标准档；第二关标准速度略快。速度是课堂游戏参数，不是儿童正常反应范围或达标标准。同一次数、速度、画面、声音及设备条件下比较；只反映本次操作，不能据此判断谁更聪明。网页比较视觉和听觉提示。皮肤感知可另用实物尺子体验；绿灯所在同一帧作为两人的共同计时起点；屏幕刷新、触控和按键延迟会影响毫秒数，显示的是本次游戏估计，不是专业测量。</p></div>
   <button id="restartBtn" class="secondary-button wide">重新一局</button>
 </dialog>
 <dialog id="recordsDialog" class="records-dialog" aria-labelledby="recordsTitle">
@@ -236,12 +236,22 @@ body[data-mode=score] .ruler{width:clamp(68px,8.2vw,124px)}
   };
 
   GameEngine.prototype.advance = function (now) {
+    // The first rendered green frame, shared by both players, is the timing origin.
+    if (this._config.mode === 'reaction' && this._phase === 'waiting' && validTime(now) && now >= this._releaseAt && now >= this._lastNow) {
+      this._releaseAt = now; this._deadline = now + this._duration;
+    }
     this._tick(now);
     return this.snapshot();
   };
 
   GameEngine.prototype.press = function (playerIndex, now) {
     if (!Number.isInteger(playerIndex) || playerIndex < 0 || playerIndex >= this._players.length) return this.snapshot();
+    if (this._config.mode === 'reaction' && this._phase === 'waiting') {
+      if (!this._takeTime(now) || this._players[playerIndex].status !== 'pending') return this.snapshot();
+      this._players[playerIndex].status = 'early';
+      this._settle();
+      return this.snapshot();
+    }
     if (!this._tick(now)) return this.snapshot();
     if (this._phase !== 'waiting' && this._phase !== 'active') return this.snapshot();
     var player = this._players[playerIndex];
