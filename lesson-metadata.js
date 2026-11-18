@@ -41,11 +41,11 @@ window.AIHTML_METADATA = {
   },
   "./一上2.3游戏中的观察/": {
     "id": "0cc17283e148e7e41f73202dd9517aad",
-    "updatedAt": "2026-11-17T14:26:54Z",
-    "commit": "cd10303f9724051d868361ed104e073fe668c564",
-    "updateSummary": "v2.1递进挑战：各5次比抓住次数、尺子总分、有效时间中位数；随机信号防预判，慢速可练习，等量有效试次才比时间。",
+    "updatedAt": "2026-11-18T08:11:07Z",
+    "commit": "40567a20291bf71dd81881afea6e8ce28be6a566",
+    "updateSummary": "v2.7：醒目开始按钮回到上方；中央纵向记录5次与10次完整显示，可设1–100次；保留抓尺计分、赛车发车灯、抢按判定与音效开关。",
     "teachingType": "互动游戏",
-    "teachingTypeCommit": "cd10303f9724051d868361ed104e073fe668c564"
+    "teachingTypeCommit": "40567a20291bf71dd81881afea6e8ce28be6a566"
 },
   "./一上2.4气味告诉我们/": {
     "id": "0f7d8bca29866f09434ec1544491affc",
