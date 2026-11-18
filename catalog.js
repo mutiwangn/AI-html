@@ -181,6 +181,17 @@
         }).join('');
       }
 
+      // Only authored update summaries qualify; imported timestamps do not label drafts.
+      function lessonUpdateBadge(resources) {
+        var updated = resources.filter(function (resource) {
+          var meta = (window.AIHTML_METADATA || {})[resource[4]] || {};
+          return typeof meta.updateSummary === 'string' && meta.updateSummary.replace(/\s/g, '') && meta.commit;
+        });
+        if (!updated.length) return '';
+        var names = updated.map(function (resource) { return resource[1]; }).join('、');
+        return '<span class="lesson-update-badge" aria-label="本课有更新课件" title="已更新：' + escapeHTML(names) + '">更新</span>';
+      }
+
       function resourceHTML(book, resource) {
         var author = (resource[2] || '').replace(/^【|】$/g, '').trim();
         var feedback=window.AIHTMLFeedback;
@@ -208,7 +219,7 @@
               return '<details class="lesson-node' + (resources.length ? ' has-resources' : '') + '" data-lesson="' + escapeHTML(lesson.code) + '">' +
                 '<summary class="lesson-summary" aria-expanded="false" aria-controls="' + lessonId + '">' +
                   '<span class="lesson-code">' + escapeHTML(lesson.code) + '</span><h4>' + escapeHTML(lesson.title) + '</h4>' +
-                  lessonNetworkBadges(resources) +
+                  lessonUpdateBadge(resources) + lessonNetworkBadges(resources) +
                   (resources.length ? '<span class="resource-count" aria-label="' + resources.length + '份交互课件">' + resources.length + ' 份</span>' : '') + chevron +
                 '</summary>' +
                 '<div class="lesson-resources" id="' + lessonId + '">' +
