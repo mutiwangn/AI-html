@@ -269,9 +269,10 @@ window.AIHTML_METADATA = {
   },
   "./三上1.2认识气温计/": {
     "id": "930c264ec0eb09089c25da977bc2eec3",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
-  },
+    "updatedAt": "2026-11-17T07:11:02+05:30",
+    "commit": "ab107834476ee27b9a6fd95ddf70c47e6a844704",
+    "updateSummary": "拖动液柱认识气温计结构，练习零上零下读数、按温度调节与平视观察，支持触摸和键盘操作。"
+},
   "./三上1.3测量气温/": {
     "id": "8a756fcd8d1eacbf321be08b48d372e3",
     "updatedAt": "2026-11-13T09:39:01Z",
@@ -279,19 +280,22 @@ window.AIHTML_METADATA = {
   },
   "./三上1.4测量降水量/": {
     "id": "7893a3479fc6511e370652a5b41db5f1",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
-  },
+    "updatedAt": "2026-11-17T06:58:52+05:30",
+    "commit": "ef4d3f341154f684847c610f1ca559bbd6d63226",
+    "updateSummary": "比较不同形状雨量器与零刻度位置，控制雨势、观察水深和水量，理解降水量测量方法。"
+},
   "./三上1.5观测风/": {
     "id": "65f585d0222ecbc37313e2843f391f89",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
-  },
+    "updatedAt": "2026-11-17T06:58:58+05:30",
+    "commit": "cc0d6d8745cba1f8aa903bfc9bc9e9c82e3c1514",
+    "updateSummary": "切换风旗、风向标等工具观察同一阵风，判断风向与风力，自由调风并导出活动记录。"
+},
   "./三上1.6观察云/": {
     "id": "5eddbcfe9af463043f30cd6031a092de",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
-  },
+    "updatedAt": "2026-11-17T06:59:02+05:30",
+    "commit": "6625f6ceb753fc12592cb98ee2ea3f6d37b6b48a",
+    "updateSummary": "拖动和归拢云朵比较云量，练习晴、多云、阴判断，认识积云、层云、卷云并保存模拟观察记录。"
+},
   "./三上1.7天气预报/": {
     "id": "25f0e4ec92e4a412949ff6b247e748fe",
     "updatedAt": "2026-11-13T09:39:01Z",
@@ -299,9 +303,10 @@ window.AIHTML_METADATA = {
   },
   "./三上1.8天气的影响/": {
     "id": "b56ba2c44491c459142088b65878a397",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
-  },
+    "updatedAt": "2026-11-17T06:59:09+05:30",
+    "commit": "ce58123df36b8603f867c7ee41d5b076f7eb1410",
+    "updateSummary": "切换常见与恶劣天气、选择职业及动植物角色，用评价与课堂记录比较天气的不同影响。"
+},
   "./三上2.1水到哪里去了/": {
     "id": "4845d5b62bbad971df97566eaa4fd762",
     "updatedAt": "2026-11-14T10:42:46Z",
@@ -309,9 +314,10 @@ window.AIHTML_METADATA = {
   },
   "./三上2.2水珠从哪里来二维版/": {
     "id": "ad313d2f8727e92a54baafa62158f09b",
-    "updatedAt": "2026-11-14T11:10:20Z",
-    "commit": "dea205703f16a02e9392a27db7d3d67da6e19084"
-  },
+    "updatedAt": "2026-11-17T06:59:20+05:30",
+    "commit": "f6a1d8dbcfef3eba309db0c2014c3416de833882",
+    "updateSummary": "观察生活水珠，对比加盖、色素与预冷空杯实验，联动凝结模型；支持擦拭、放大与模拟观察记录。"
+},
   "./三上2.3水沸腾了/": {
     "id": "87bf490993724c6188345ea84aec315c",
     "updatedAt": "2026-11-14T10:42:46Z",
@@ -324,32 +330,36 @@ window.AIHTML_METADATA = {
   },
   "./三上2.5冰熔化了/": {
     "id": "b5df6defdeed6f9b61ed827735b579ce",
-    "updatedAt": "2026-11-14T10:53:37Z",
-    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
-  },
+    "updatedAt": "2026-11-17T06:58:54+05:30",
+    "commit": "64f2a8ea1bb0f7799bf1782ad8303c8247422ca6",
+    "updateSummary": "比较敲碎、吹气、手焐的熔化现象，用三态变化与蜡的受热冷却解释生活中的现象。"
+},
   "./三上2.6水能溶解多少物质/": {
     "id": "029ac5357e0c86a35a781d9f644438b1",
-    "updatedAt": "2026-11-14T10:53:37Z",
-    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
-  },
+    "updatedAt": "2026-11-17T06:58:55+05:30",
+    "commit": "53077356ad803429d84b0ef7b6fbe99f2579f258",
+    "updateSummary": "设计公平实验，逐份比较食盐和小苏打的溶解；记录全班真实证据，探索加水与温水的影响。"
+},
   "./三上2.7加快溶解/": {
     "id": "30a85893ff1f448f0cb3256738152ae4",
-    "updatedAt": "2026-11-14T10:53:37Z",
-    "commit": "b95cac8f60f7df1c643f8568f58a0a1bc12e2459"
-  },
+    "updatedAt": "2026-11-17T06:58:57+05:30",
+    "commit": "2ff5482e99ab2cde3890684730c8874cf5ab417a",
+    "updateSummary": "搅拌实验、温度实验、溶解的秘密与自由实验室四个环节，比较条件、观察溶解并保存实验记录。"
+},
   "./三上2.8用水分离/": {
-  "updateSummary": "滤纸显微视野横向放大，长纤维交织走向与多个表面孔隙更清楚；保留近孔观察及完整原图。实验四步、暖色三层火焰和污水处理过程保留。",
-  "id": "b7ba3d71e897943b8138ca2444de5259",
-  "updatedAt": "2026-11-15T11:06:10.193Z",
-  "commit": "68b32be679f25fe60d9cf08c9ee710c999f88f62",
-  "teachingType": "实验操作",
-  "teachingTypeCommit": "68b32be679f25fe60d9cf08c9ee710c999f88f62"
+    "updateSummary": "修订溶解、过滤、蒸发操作：增加初始颗粒并随搅拌减少；蓝色水颗粒通过滤纸、黄色沙粒留在尖端；加大铁环，改用黑色三脚架直接承托蒸发皿并细化火焰。",
+    "id": "b7ba3d71e897943b8138ca2444de5259",
+    "updatedAt": "2026-11-18T05:59:02+05:30",
+    "commit": "09fce68727ee669ca3a91ae7bb708a48c35700bd",
+    "teachingType": "实验操作",
+    "teachingTypeCommit": "09fce68727ee669ca3a91ae7bb708a48c35700bd"
 },
   "./三上3.1运动和位置/": {
     "id": "43aeeda05ececc1be48dfa01f7f2a833",
-    "updatedAt": "2026-11-14T10:40:09Z",
-    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
-  },
+    "updatedAt": "2026-11-17T06:31:04+05:30",
+    "commit": "84b7e0d5a46f2941b776b77fe97f9f1987647d00",
+    "updateSummary": "修订课堂探索：接力与四人传球，结合非对称半场和方向、距离描述位置；通过公交车、行人与同速车队比较不同参照物下的运动。"
+},
   "./三上3.2各种各样的运动/": {
     "id": "f4a0da4c66f01b47a75e3baed898807a",
     "updatedAt": "2026-11-14T10:40:09Z",
@@ -512,39 +522,46 @@ window.AIHTML_METADATA = {
   },
   "./四上1.2空气能占据空间吗/": {
     "id": "4cdc7bf1c55137d3d0854aff34c1c6d0",
-    "updatedAt": "2026-11-14T10:40:09Z",
-    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
-  },
+    "updatedAt": "2026-11-17T07:11:07+05:30",
+    "commit": "77030786aedbe4e10455315c84340eeac8401e50",
+    "updateSummary": "演示拧紧瓶盖下压、开盖放气与注入空气三组实验，观察小球、水位及空气占据空间的变化。"
+},
   "./四上1.3空气占据的空间会改变吗/": {
     "id": "45ebb8b3bbb1e47894219612a77a077d",
-    "updatedAt": "2026-11-14T10:40:09Z",
-    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
-  },
+    "updatedAt": "2026-11-17T07:11:12+05:30",
+    "commit": "0898b271021125dd6a8c9c5683b2f28f63f03ac4",
+    "updateSummary": "比较空气与水的注射器压缩现象，结合微粒模型、研讨与生活应用，填写和打印实验记录单。"
+},
   "./四上1.4空气有质量吗/": {
     "id": "9271f24505895508606c5a004bb13eaa",
-    "updatedAt": "2026-11-14T10:40:09Z",
-    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
-  },
+    "updatedAt": "2026-11-17T07:11:17+05:30",
+    "commit": "b01198247ca07fad754062eb7d0ca3f9b06164d4",
+    "updateSummary": "给皮球打气并添加绿豆调平天平，比较相同力度下的按压形变，区分质量证据与软硬变化。"
+},
   "./四上1.5空气有力量/": {
     "id": "c93d66b7a33ca9eb9dc04ddd06fbd02e",
-    "updatedAt": "2026-11-14T10:40:09Z",
-    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
-  },
+    "updatedAt": "2026-11-17T07:10:59+05:30",
+    "commit": "76d3ed77d91669dd550604b1255d18d76f172bcb",
+    "updateSummary": "比较气球吹纸杯与气球小火箭，切换现象、空气与受力视图，慢放和单步观察空气流动的作用。"
+},
   "./四上1.6我们来做热气球/": {
     "id": "4081960b6341db6b072a1857dc29de99",
-    "updatedAt": "2026-11-14T10:40:09Z",
-    "commit": "5e4bad39dab6438fb546b5367ef2a791d599cb15"
-  },
+    "updatedAt": "2026-11-17T07:12:15+05:30",
+    "commit": "71ed3a7ee1b33f945b896516abcbd0bdbdefdcdc",
+    "updateSummary": "观察袋子加热、上升与冷却的变化，切换空气微粒和浮力解释，保存活动记录。"
+},
   "./四上1.7风的成因/": {
     "id": "4ae1b2bce03a0446dbe9c11e2c6eb40a",
-    "updatedAt": "2026-11-14T11:09:41Z",
-    "commit": "ea63895e45b4ca7cbdb693c188d8e865d16df1f9"
-  },
+    "updatedAt": "2026-11-17T07:12:17+05:30",
+    "commit": "30c680a589d1262705ab543a22910c2f7886c449",
+    "updateSummary": "通过双筒烟迹实验和海岸昼夜剖面观察空气流动，定格、画箭头并保存观察记录。"
+},
   "./四上1.8自制打气筒/": {
     "id": "9f682bcc384d3f563c8aae157746833a",
-    "updatedAt": "2026-11-13T05:46:32Z",
-    "commit": "42da557ab18e7a75c200ab9cc99896163412f8a5"
-  },
+    "updatedAt": "2026-11-17T07:12:19+05:30",
+    "commit": "4c8aa96ce32bc4862fd49208118c50dc09ed7df2",
+    "updateSummary": "操作瓶式打气筒，比较小孔开闭与挤压幅度，尝试装置改装，记录空气流动并保存实验快照。"
+},
   "./四上1.8自制打气筒/自由组装实验台/": {
     "id": "bea03480189eae129ef60e69f21d75b3",
     "updatedAt": "2026-11-13T05:46:32Z",
@@ -567,9 +584,10 @@ window.AIHTML_METADATA = {
   },
   "./四上2.4测量肺活量/": {
     "id": "2a5ba89a3d53612723ea942fa7ca2dbc",
-    "updatedAt": "2026-11-13T09:39:01Z",
-    "commit": "9ec4a81d1325e48e09dc033c4d4402d32431aba6"
-  },
+    "updatedAt": "2026-11-17T07:11:01+05:30",
+    "commit": "80cbbbe41cd006bc83eb380cc80e0d22ec9f2eec",
+    "updateSummary": "练习测量步骤与读数，记录三次测量并比较班级数据，结合排水模型和运动习惯开展探究。"
+},
   "./四上2.5口腔里的消化/": {
     "id": "743720f3773d4c68a92754b822a3e5f7",
     "updatedAt": "2026-11-13T09:39:01Z",
@@ -799,14 +817,16 @@ window.AIHTML_METADATA = {
   },
   "./五上2.2独轮车省力的秘密/": {
     "id": "d5e6aef186e0bf61c911f3bd06500c92",
-    "updatedAt": "2026-11-14T11:29:11Z",
-    "commit": "cb8c3499c20a5b3603ec1f2823ba028a482cfd08"
-  },
+    "updatedAt": "2026-11-17T07:19:57+05:30",
+    "commit": "c383ecced81dda3eaa1a22ff3979c19fbe9eb7a7",
+    "updateSummary": "拆解独轮车并用直尺模型比较支点、负载和动力位置，观察生活杠杆与手臂结构，标注三点并导出观察记录。"
+},
   "./五上2.3制作独轮车/": {
     "id": "a9bf4cf820536a0034a80174d503370f",
-    "updatedAt": "2026-11-14T04:51:52Z",
-    "commit": "9a95f3ab9f72cd16952180cde32743c8109c2001"
-  },
+    "updatedAt": "2026-11-17T07:20:05+05:30",
+    "commit": "7e25c21fbe91227e01ef4957811ec2616c1c9344",
+    "updateSummary": "选择材料、尺寸与喷漆设计独轮车，在装卸和推车挑战中比较用力、体力、时间与课堂成本，改装后再次实践。"
+},
   "./五上2.4巧用斜面/": {
     "id": "89a544aac89cdbe2da9bc6a00ff506a0",
     "updatedAt": "2026-11-14T11:29:11Z",
@@ -844,9 +864,10 @@ window.AIHTML_METADATA = {
   },
   "./五上3.4测量力的大小/": {
     "id": "dd9c63de1f558ab76bab9fa0de7cdca4",
-    "updatedAt": "2026-11-14T11:32:43Z",
-    "commit": "4bcb5e7e5198f5d78a61d98ffab286c2672ae378"
-  },
+    "updatedAt": "2026-11-17T08:54:26+05:30",
+    "commit": "9e2d7093c931398819c05deeb53802f1e1cfa5ba",
+    "updateSummary": "完整离线版 v1.2：盒式与圆筒式双测力计，观察结构、透视与拆解，练习不同量程下的调零和平视读数，支持教师设题；实物图片内嵌。"
+},
   "./五上3.5摩擦力的比较/": {
     "id": "bd4905aeab497b0d5230c102d1fe3af7",
     "updatedAt": "2026-11-14T11:32:43Z",
@@ -854,9 +875,10 @@ window.AIHTML_METADATA = {
   },
   "./五上3.6制作月球小车/": {
     "id": "8f128d8404a545f94f9ec5183c1a4fae",
-    "updatedAt": "2026-11-14T05:16:07Z",
-    "commit": "c5cf6746fb5f67d8e9ee621767728d01be59657b"
-  },
+    "updatedAt": "2026-11-17T07:23:13+05:30",
+    "commit": "0001f87382774a72e272aee23432fbeeda3a2625",
+    "updateSummary": "认识月球环境与任务要求，选择实物材料，以等轴侧视图设计小车，汇总方案清单与制作预算。"
+},
   "./五上3.7评价月球小车/": {
     "id": "f91b3aeb4c0ebe8ba0760745c3432c65",
     "updatedAt": "2026-11-14T05:22:11Z",
@@ -1094,9 +1116,10 @@ window.AIHTML_METADATA = {
   },
   "./六上2.5设计潜望镜/": {
     "id": "100626901910c6ff0fdded20896d9ed9",
-    "updatedAt": "2026-11-14T04:47:05Z",
-    "commit": "2ba1fdf4df55914de8ff63edd05503d3735f45a9"
-  },
+    "updatedAt": "2026-11-17T07:22:11+05:30",
+    "commit": "9b24b4caf7bee92c204db630589ff20eb2b360e3",
+    "updateSummary": "在3D海战情境中观察潜望镜视野，追踪双镜反射光路，选择材料并设计、预览自己的潜望镜。"
+},
   "./六上2.6制作潜望镜/": {
     "id": "234ab18363d194d4581ba8f6e0f92e14",
     "updatedAt": "2026-11-14T04:47:05Z",
@@ -1114,9 +1137,10 @@ window.AIHTML_METADATA = {
   },
   "./六上3.2昼夜交替的解释/": {
     "id": "e458fb236a7a4290501b5890fbc9a8df",
-    "updatedAt": "2026-11-14T04:47:05Z",
-    "commit": "2ba1fdf4df55914de8ff63edd05503d3735f45a9"
-  },
+    "updatedAt": "2026-11-17T07:20:14+05:30",
+    "commit": "211dc7d35d7f5127048a7bed1c54658dd46300e8",
+    "updateSummary": "第一视角观察昼夜，绘制并保存假说，跟随观察者验证模型，同屏比较地心说与日心说。"
+},
   "./六上3.3地球如何自转/": {
     "id": "9bffb391ad28916a8a077ea49cd9e0ff",
     "updatedAt": "2026-11-14T04:47:05Z",
@@ -1124,9 +1148,10 @@ window.AIHTML_METADATA = {
   },
   "./六上3.4谁先迎来黎明/": {
     "id": "0f2f3439692186741b23e6f575a9a780",
-    "updatedAt": "2026-11-14T05:34:50Z",
-    "commit": "7716bcaee2a552c3b4b4b6ba8e512f367c266c21"
-  },
+    "updatedAt": "2026-11-17T07:20:01+05:30",
+    "commit": "80639e8a8778b6591e88cc470fe510386c603ab9",
+    "updateSummary": "定位北京与乌鲁木齐，通过多视角模拟观察迎来黎明的先后，记录昼夜变化，对比两地历史作息。"
+},
   "./六上3.5影长的四季变化/": {
     "id": "a5bfcc5cca48dab5fd4636f637b1b194",
     "updatedAt": "2026-11-14T05:12:20Z",
