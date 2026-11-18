@@ -105,6 +105,11 @@ body[data-mode=reaction] .signal:before{display:none}.race-lamps{display:flex;al
 body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,12vw,180px)}body[data-players="1"] .center-column>.central-records{grid-template-columns:1fr}body[data-players="1"] .central-row .round-cell{height:clamp(30px,6.2vh,60px)}
 @media(orientation:landscape) and (max-height:600px){.center-column{gap:9px;padding:2px 0}.center-column>.start-button{width:74px;height:74px;border-radius:17px;font-size:17px;padding:5px;gap:4px}.center-column>.start-button svg{width:20px;height:20px}.central-row{grid-template-rows:20px minmax(0,1fr);gap:4px}.central-row>.round-track{gap:4px}.central-row .round-cell,body[data-players="1"] .central-row .round-cell{height:clamp(22px,4.8vh,29px);flex-direction:row}.central-row .round-cell b{font-size:18px}.central-row>strong{font-size:15px}}
 @media(max-width:700px) and (orientation:portrait){.toolbar{grid-template-columns:1fr auto}.control-left{grid-column:1;gap:4px;flex-wrap:wrap}.toolbar .records-button{grid-column:2;grid-row:1;min-width:66px;font-size:14px}.center-column{gap:12px}.center-column>.start-button{width:72px;height:72px;border-radius:17px;font-size:17px;padding:5px}.center-column>.start-button svg{display:block;width:21px;height:21px}.central-row .round-cell,body[data-players="1"] .central-row .round-cell{height:33px}.central-row>strong{font-size:12px}}
+
+/* Variable round count: only the record list scrolls, never the classroom page. */
+.center-column{gap:10px;overflow:hidden}.round-progress{text-align:center;font-size:14px;line-height:20px;flex:none;color:#556c7d;white-space:nowrap}.center-column>.central-records{display:grid;max-height:min(43vh,360px);overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;align-items:start;position:relative;padding:2px 3px 5px;grid-template-rows:auto;overscroll-behavior:contain}.central-row{align-self:start;min-height:0}.central-row>.round-track{grid-template-rows:none;grid-auto-rows:auto}.central-row>strong{position:sticky;top:0;background:var(--bg);z-index:2}.central-row .round-cell,body[data-players="1"] .central-row .round-cell{height:clamp(28px,5.5vh,52px)}#customRounds{width:120px;font:inherit;border:1px solid #ccd5d9;border-radius:10px;padding:8px}
+@media(orientation:landscape) and (max-height:600px){.center-column{gap:5px}.round-progress{font-size:12px;line-height:16px}.center-column>.central-records{max-height:calc(100% - 110px)}.central-row .round-cell,body[data-players="1"] .central-row .round-cell{height:25px}}
+@media(max-width:700px) and (orientation:portrait){.round-progress{font-size:11px}.central-row .round-cell,body[data-players="1"] .central-row .round-cell{height:29px}}
 </style>
 </head>
 <body data-mode="catch" data-players="2" data-phase="idle">
@@ -160,7 +165,7 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
   
 <button class="grab" id="grab0" aria-label="蓝队抓尺子"><span id="action0">抓！</span><kbd>A 键</kbd></button>
 </article>
-<div class="center-column"><button class="start-button" id="startBtn"><svg><use href="#i-play"/></svg><span id="startLabel">开始挑战</span></button><div class="central-records"><div class="central-row blue-record"><strong>蓝队</strong><div class="round-track" id="track0" aria-label="蓝队五回合记录"></div></div><div class="central-row red-record"><strong>红队</strong><div class="round-track" id="track1" aria-label="红队五回合记录"></div></div></div>
+<div class="center-column"><button class="start-button" id="startBtn"><svg><use href="#i-play"/></svg><span id="startLabel">开始挑战</span></button><div class="round-progress" id="roundProgress"></div><div class="central-records" id="centralRecords" tabindex="0" aria-label="双方回合记录，可上下滚动"><div class="central-row blue-record"><strong>蓝队</strong><div class="round-track" id="track0" aria-label="蓝队各回合记录"></div></div><div class="central-row red-record"><strong>红队</strong><div class="round-track" id="track1" aria-label="红队各回合记录"></div></div></div>
 </div>
 <article class="player p2" id="player1" aria-label="红队游戏区">
   <div class="player-head"><strong class="player-name">P2 红队</strong><span class="player-total"><small id="totalLabel1">抓到</small><b id="total1">0</b><small id="unit1">次</small></span></div>
@@ -180,11 +185,15 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <dialog id="settingsDialog" aria-labelledby="settingsTitle">
   <div class="dialog-head"><h2 id="settingsTitle">游戏设置</h2><button class="icon-button close-dialog" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button></div>
+  <div class="setting-row"><label for="roundsSelect">每局次数</label><select id="roundsSelect"><option value="5">5次</option><option value="10">10次</option><option value="custom">自定义</option></select></div>
+  <div class="setting-row" id="customRoundsRow" hidden><label for="customRounds">自定义次数</label><input id="customRounds" type="number" min="1" max="100" step="1" value="5" inputmode="numeric" aria-describedby="roundsHelp"></div>
+  <p class="help" id="roundsHelp">可设1–100次。修改后开启新一局；超过5次，可在中央记录区上下滚动查看。</p>
+  <button id="applyRoundsBtn" class="secondary-button">应用次数并开始新一局</button>
   <div class="setting-row"><label for="speedSelect">尺子下落速度</label><select id="speedSelect"><option value="easy">慢速</option><option value="normal" selected>标准</option><option value="fast">挑战</option></select></div>
   <p class="help" id="speedHelp">同一局两位玩家的尺子速度相同。</p>
   <div class="setting-row"><span>声音信号</span><button id="testAudioBtn" class="secondary-button"><svg><use href="#i-sound"/></svg>试声音</button></div>
   <p class="help">前两关：三声短音后随机等待长音。第三关：三盏红灯逐个亮起，随机等待后变绿；绿灯前按算抢按。开启音效时，绿灯亮起播放一声提示；关闭则仅看灯。切换音效会重新一局，以保持比较条件一致。</p>
-  <div class="rules"><h3>怎么玩</h3><p>先点“开始”，尺子落下或绿灯亮起后，再按自己的大按钮。键盘：蓝队 A，红队 L；单人也可按空格。</p><p>每关每局5次，两人机会相同。第一关比抓住次数，第二关比总分，第三关比时间。提前按仍占一次机会；不得补按或只保留最快一次。双人使用同一次信号。</p><p>第二页显示游戏分数；第三页显示本设备上的反应时间，1000毫秒等于1秒。各关均随机等待。反应时间按有效中位数比较，不按获胜轮数；差距不超过20毫秒仅记“接近”（显示容差，不是儿童达标线）。</p><p>先用慢速熟悉操作，再用标准档；第二关标准速度略快。速度是课堂游戏参数，不是儿童正常反应范围或达标标准。同一次数、速度、画面、声音及设备条件下比较；只反映本次操作，不能据此判断谁更聪明。网页比较视觉和听觉提示。皮肤感知可另用实物尺子体验；绿灯所在同一帧作为两人的共同计时起点；屏幕刷新、触控和按键延迟会影响毫秒数，显示的是本次游戏估计，不是专业测量。</p></div>
+  <div class="rules"><h3>怎么玩</h3><p>先点“开始”，尺子落下或绿灯亮起后，再按自己的大按钮。键盘：蓝队 A，红队 L；单人也可按空格。</p><p>每关每局按所选次数，两人机会相同。第一关比抓住次数，第二关比总分，第三关比时间。提前按仍占一次机会；不得补按或只保留最快一次。双人使用同一次信号。</p><p>第二页显示游戏分数；第三页显示本设备上的反应时间，1000毫秒等于1秒。各关均随机等待。反应时间按有效中位数比较，不按获胜轮数；差距不超过20毫秒仅记“接近”（显示容差，不是儿童达标线）。</p><p>先用慢速熟悉操作，再用标准档；第二关标准速度略快。速度是课堂游戏参数，不是儿童正常反应范围或达标标准。同一次数、速度、画面、声音及设备条件下比较；只反映本次操作，不能据此判断谁更聪明。网页比较视觉和听觉提示。皮肤感知可另用实物尺子体验；绿灯所在同一帧作为两人的共同计时起点；屏幕刷新、触控和按键延迟会影响毫秒数，显示的是本次游戏估计，不是专业测量。</p></div>
   <button id="restartBtn" class="secondary-button wide">重新一局</button>
 </dialog>
 <dialog id="recordsDialog" class="records-dialog" aria-labelledby="recordsTitle">
@@ -472,7 +481,7 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
   function validRecord(r) {
     return r && typeof r.id === 'string' && MODE_NAMES[r.config && r.config.mode] &&
       [1, 2].indexOf(r.config.players) >= 0 && Array.isArray(r.history) &&
-      r.history.length > 0 && r.history.length <= 5 && Array.isArray(r.totals) &&
+      r.history.length > 0 && r.history.length <= (r.config.rounds || 5) && Array.isArray(r.totals) &&
       r.totals.length === r.config.players && r.totals.every(function (t) {
         return t && ['caught', 'points', 'wins', 'valid'].every(function (k) { return Number.isFinite(t[k]) && t[k] >= 0; }) &&
           (t.median === null || (Number.isFinite(t.median) && t.median >= 0));
@@ -549,7 +558,7 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
     else { config.mask = sensory.mask; config.sound = sensory.sound; }
     snap = game.reset(config); config = Object.assign({}, snap.config);
     matchId = makeId(); matchTime = new Date().toISOString(); archivedCount = 0;
-    rebuildRulers(); render();
+    rebuildRulers(); render(); $('centralRecords').scrollTop = 0;
   }
   function pauseRound(message) {
     if (!isRunning() && !pendingStart) return;
@@ -574,6 +583,7 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
     pendingStart = false;
     if (!game.start(now, delay)) { render(); return; }
     snap = game.snapshot(); lastFrame = now;
+    var currentCell = nodes[0].track.children[snap.round - 1]; if (currentCell) $('centralRecords').scrollTop = Math.max(0, currentCell.offsetTop - nodes[0].track.offsetTop - 35);
     if (config.sound && config.mode !== 'reaction') sounds.countdown(now, snap.releaseAt);
     render();
     rafId = requestAnimationFrame(function () { frame(token); });
@@ -632,7 +642,7 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
     var last = snap.history[snap.history.length - 1];
     if (!last) return defaultMessage();
     if (config.players === 1) {
-      if (final) return config.mode === 'catch' ? '抓住 ' + snap.totals[0].caught + ' 次，挑战完成！' : config.mode === 'score' ? '总分 ' + snap.totals[0].points + '，挑战完成！' : '完成5轮，看看你的记录！';
+      if (final) return config.mode === 'catch' ? '抓住 ' + snap.totals[0].caught + ' 次，挑战完成！' : config.mode === 'score' ? '总分 ' + snap.totals[0].points + '，挑战完成！' : '完成' + config.rounds + '轮，看看你的记录！';
       return last.results[0].status === 'early' ? '抢按啦，下一轮等信号！' : last.results[0].status === 'caught' ? '做得好，准备下一轮！' : '再试一次，注意信号！';
     }
     if (final) {
@@ -644,7 +654,7 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
       }
       var metric = config.mode === 'catch' ? 'caught' : 'points';
       var a = snap.totals[0][metric], b = snap.totals[1][metric];
-      return (a === b ? '本局一样多！' : a > b ? '蓝队本局更多！' : '红队本局更多！') + '  ' + a + ' : ' + b + (config.mode === 'catch' ? ' 次（各5次机会）' : ' 分（各5次机会）');
+      return (a === b ? '本局一样多！' : a > b ? '蓝队本局更多！' : '红队本局更多！') + '  ' + a + ' : ' + b + (config.mode === 'catch' ? ' 次（各' + config.rounds + '次机会）' : ' 分（各' + config.rounds + '次机会）');
     }
     return last.tie ? '这一轮平局！' : (last.winner === 0 ? '蓝队' : '红队') + '赢下这一轮！';
   }
@@ -672,21 +682,22 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
     $('eyeIcon').setAttribute('href', config.mask ? '#i-blind' : '#i-eye'); $('soundIcon').setAttribute('href', config.sound ? '#i-sound' : '#i-mute');
     writeText($('maskValue'), config.mask ? '蒙住' : '可见'); writeText($('soundValue'), config.sound ? '开' : '关');
     $('speedSelect').disabled = config.mode === 'reaction'; $('speedSelect').value = config.speed;
-    writeText($('speedHelp'), config.mode === 'reaction' ? '反应时间采用随机等待，尺子速度不参与计时。' : '两人同速、同信号、各5次。慢速练习更从容，挑战档需熟悉后再选。');
+    writeText($('speedHelp'), config.mode === 'reaction' ? '反应时间采用随机等待，尺子速度不参与计时。' : '两人同速、同信号、各所选次数。慢速练习更从容，挑战档需熟悉后再选。');
     var message = done ? winnerMessage(snap.phase === 'complete') : defaultMessage();
     if (running && !config.mask) message = config.mode === 'reaction' ? (snap.phase === 'active' ? '绿灯亮了，按！' : '等绿灯，别抢按！') : snap.phase === 'active' ? '抓！' : (config.sound ? '预备音后，等随机长音！' : '准备好，等尺子落下！');
     writeText($('roundMessage'), message);
-    writeText($('stageGuide'), config.mode === 'catch' ? '第1关：同样5次，比抓住次数；相同次数也可能反应不同。' : config.mode === 'score' ? '第2关：同样5次，比尺子总分；越早抓住，分数越高。' : '第3关：同样5次，比有效时间中位数；数值越小，用时越短。');
+    writeText($('stageGuide'), config.mode === 'catch' ? '第1关：同样次数，比抓住次数；相同次数也可能反应不同。' : config.mode === 'score' ? '第2关：同样次数，比尺子总分；越早抓住，分数越高。' : '第3关：同样次数，比有效时间中位数；数值越小，用时越短。');
     var count = '';
     if (running && snap.phase === 'waiting') count = ''; // 不显示可预测放尺时刻的倒计时
     writeText($('liveCount'), count);
     $('startBtn').disabled = running || pendingStart;
     writeText($('startLabel'), pendingStart ? '准备声音…' : running ? '游戏中' : snap.phase === 'complete' ? '再来一局' : snap.phase === 'result' ? '下一轮' : config.mode === 'reaction' ? '开始测试' : '开始挑战');
-    var nextRound = snap.phase === 'result' ? Math.min(5, snap.round + 1) : snap.round;
-    $('roundLabel').innerHTML = '第' + nextRound + '轮 <span>/ 共5轮</span>';
+    writeText($('roundProgress'), '第' + snap.round + ' / ' + config.rounds + '轮' + (config.rounds > 5 ? ' · ↕' : ''));
+    var nextRound = snap.phase === 'result' ? Math.min(config.rounds, snap.round + 1) : snap.round;
+    $('roundLabel').innerHTML = '第' + nextRound + '轮 <span>/ 共' + config.rounds + '轮</span>';
     var dots = $('roundDots').children;
-    if (!dots.length) { for (var d = 0; d < 5; d++) $('roundDots').appendChild(document.createElement('i')); dots = $('roundDots').children; }
-    for (var k = 0; k < 5; k++) {
+    if (dots.length !== config.rounds) { $('roundDots').innerHTML = ''; for (var d = 0; d < config.rounds; d++) $('roundDots').appendChild(document.createElement('i')); dots = $('roundDots').children; }
+    for (var k = 0; k < config.rounds; k++) {
       var r = snap.history[k]; dots[k].className = r ? 'done' + (r.winner === 0 ? ' p1-win' : r.winner === 1 ? ' p2-win' : '') : k === nextRound - 1 ? 'current' : '';
       dots[k].setAttribute('aria-label', '第' + (k + 1) + '轮' + (r ? '已完成' : '未完成'));
     }
@@ -731,8 +742,10 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
   }
 
   function renderTrack(track, playerIndex, nextRound) {
-    while (track.children.length < 5) { var cell = document.createElement('span'); cell.className = 'round-cell'; cell.innerHTML = '<small></small><b></b>'; track.appendChild(cell); }
-    for (var k = 0; k < 5; k++) {
+    while (track.children.length > config.rounds) track.removeChild(track.lastChild);
+    track.style.gridTemplateRows = 'repeat(' + config.rounds + ', auto)';
+    while (track.children.length < config.rounds) { var cell = document.createElement('span'); cell.className = 'round-cell'; cell.innerHTML = '<small></small><b></b>'; track.appendChild(cell); }
+    for (var k = 0; k < config.rounds; k++) {
       var h = snap.history[k], p = h ? h.results[playerIndex] : (k === snap.round - 1 && isRunning() && snap.players[playerIndex].status !== 'pending' ? snap.players[playerIndex] : null);
       var cell = track.children[k], value = '—';
       if (p) value = config.mode === 'score' ? String(p.score) : config.mode === 'reaction' && p.elapsed !== null ? String(Math.round(p.elapsed)) : p.status === 'caught' ? '✓' : '✕';
@@ -759,14 +772,14 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
   function showRecords() {
     pauseRound();
     writeText($('recordsTitle'), MODE_NAMES[config.mode] + ' · 游戏记录');
-    writeText($('recordExplain'), config.mode === 'reaction' ? '各完成5次有效响应后再比较中位数（排好顺序的中间值）。抢按与超时仍占一次机会，不用0毫秒参与统计；有效次数不足请重新完整做一局。' : '换一种画面或声音条件，再比较抓住次数或游戏得分。不同速度的记录分别标明。');
+    writeText($('recordExplain'), config.mode === 'reaction' ? '各完成所选次数的有效响应后再比较中位数（排好顺序的中间值）。抢按与超时仍占一次机会，不用0毫秒参与统计；有效次数不足请重新完整做一局。' : '换一种画面或声音条件，再比较抓住次数或游戏得分。不同速度的记录分别标明。');
     var box = $('recordsContent'); box.replaceChildren();
     var selected = records.filter(function (r) { return r.config.mode === config.mode; }).slice(-12).reverse();
     if (!selected.length) box.appendChild(element('div', 'empty-records', '玩一轮，就会留下你的记录。'));
     selected.forEach(function (r) {
       var card = element('section', 'record-match'), header = element('header');
       header.appendChild(element('strong', '', conditionLabel(r.config)));
-      header.appendChild(element('span', '', (r.config.players === 2 ? '双人' : '单人') + (r.config.mode !== 'reaction' ? ' · ' + (SPEED_NAMES[r.config.speed] || '标准') : '') + ' · 已玩 ' + r.history.length + '/5 轮'));
+      header.appendChild(element('span', '', (r.config.players === 2 ? '双人' : '单人') + (r.config.mode !== 'reaction' ? ' · ' + (SPEED_NAMES[r.config.speed] || '标准') : '') + ' · 已玩 ' + r.history.length + '/' + (r.config.rounds || 5) + ' 轮'));
       card.appendChild(header);
       r.totals.forEach(function (total, index) {
         var row = element('div', 'record-result');
@@ -819,13 +832,15 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
     heldKeys.add(e.code); pressPlayer(index);
   });
   document.addEventListener('keyup', function (e) { heldKeys.delete(e.code); });
-  $('settingsBtn').addEventListener('click', function () { openDialog($('settingsDialog')); });
+  $('settingsBtn').addEventListener('click', function () { $('roundsSelect').value = [5,10].indexOf(config.rounds) >= 0 ? String(config.rounds) : 'custom'; $('customRounds').value = config.rounds; $('customRoundsRow').hidden = $('roundsSelect').value !== 'custom'; openDialog($('settingsDialog')); });
   $('recordsBtn').addEventListener('click', showRecords);
   document.querySelectorAll('.close-dialog').forEach(function (b) { b.addEventListener('click', function () { closeDialog(b.closest('dialog')); }); });
   document.querySelectorAll('dialog').forEach(function (d) {
     d.addEventListener('cancel', function () { sounds.stop(); });
     d.addEventListener('click', function (e) { if (e.target === d) { var r = d.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closeDialog(d); } });
   });
+  $('roundsSelect').addEventListener('change', function () { $('customRoundsRow').hidden = this.value !== 'custom'; });
+  $('applyRoundsBtn').addEventListener('click', function () { var count = Number($('roundsSelect').value === 'custom' ? $('customRounds').value : $('roundsSelect').value); if (!Number.isInteger(count) || count < 1 || count > 100) { showToast('请输入1到100之间的整数次数。'); $('customRounds').focus(); return; } resetMatch({rounds:count}); closeDialog($('settingsDialog')); showToast('每局' + count + '次，准备好后点中间开始。'); });
   $('speedSelect').addEventListener('change', function () { modeSpeeds[config.mode] = $('speedSelect').value; resetMatch(); });
   $('restartBtn').addEventListener('click', function () { resetMatch(); closeDialog($('settingsDialog')); });
   $('testAudioBtn').addEventListener('click', async function () {
@@ -845,7 +860,7 @@ body[data-players="1"] .arena{grid-template-columns:minmax(0,900px) clamp(120px,
   window.addEventListener('blur', function () { heldKeys.clear(); pauseRound(); halt(); });
   document.addEventListener('visibilitychange', function () { if (document.hidden) { heldKeys.clear(); pauseRound(); sounds.stop(); } });
   window.addEventListener('resize', function () { render(); });
-  rebuildRulers(); render();
+  rebuildRulers(); render(); $('centralRecords').scrollTop = 0;
 }());
 </script>
 </body>
