@@ -612,8 +612,9 @@ window.AIHTML_METADATA = {
 },
   "./四上3.1声音是怎样产生的/": {
     "id": "0cef00144688a019502e3f707d3114f3",
-    "updatedAt": "2026-11-14T10:42:46Z",
-    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
+    "updatedAt": "2026-11-21T02:12:50Z",
+    "commit": "055dd56a7ee6b48995ae05ad9048c52a9c407463",
+    "updateSummary": "v2.0：听真实录音猜发声物体，观察六种物体的振动并比较慢放、止振；拓展蟋蟀和蝉的发声，保留实物观察记录。"
   },
   "./四上3.2声音的强弱/": {
     "id": "7fb47d39e7c581349b20bd82458bbc4b",
