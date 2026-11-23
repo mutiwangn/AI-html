@@ -240,7 +240,7 @@
     '三上2.6水能溶解多少物质': { level: 2, note: 'Canvas 动画' },
     '三上2.7加快溶解': { level: 1, note: 'SVG 模拟与记录' },
     '三上3.3直线运动和曲线运动': { level: 2, note: 'Canvas 轨迹、击球与桌沿运动模拟' },
-    '四上3.2声音的强弱': { level: 1, note: 'SVG、振动对照与Web Audio；录音另需麦克风授权' },
+    '四上3.2声音的强弱': { level: 1, note: 'v2.0：SVG与Web Audio；同段旋律增益比较、三种振动与接触放大、生活声波；五幅AI背景内嵌，单HTML离线，不需麦克风' },
     '四上3.3声音的高低': { level: 1, note: 'SVG、钢尺慢放、振动对照与 Web Audio' },
     '四上3.3声音的高低_学生端': { level: 2, note: '电子拾音器 v2.0：Canvas 实测历史与可选正弦预测、持续拾音与独立录制、Web Audio 四种合成音色；麦克风需授权与安全页面，课堂共享需局域网服务', microphone: true },
     '四上3.4乐器的声音变化': { level: 1, note: 'SVG、琴弦与空气柱慢放、Web Audio、同刻度对照；无3D' },
