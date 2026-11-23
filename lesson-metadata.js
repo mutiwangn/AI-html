@@ -618,8 +618,9 @@ window.AIHTML_METADATA = {
   },
   "./四上3.2声音的强弱/": {
     "id": "7fb47d39e7c581349b20bd82458bbc4b",
-    "updatedAt": "2026-11-14T10:42:46Z",
-    "commit": "a3e66f5fcff7a9b47a6f78bc7d409e2a5f0e2db4"
+    "updatedAt": "2026-11-23T08:42:50Z",
+    "commit": "7f555fbed058212c1b7dddbc3d4f0efb7784fd18",
+    "updateSummary": "v2.0：同一段旋律只改变音量；慢放观察钢尺、鼓面与音叉，借纸团、纸屑和悬球放大振动并保留力度对照；用禁鸣路段、图书馆与教室情境比较音量对他人的影响。五幅背景内嵌，可离线使用。"
   },
   "./四上3.3声音的高低_学生端/": {
     "id": "e7d221e9185e27fd08c6c2d63dbb8691",
