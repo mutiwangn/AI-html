@@ -1,8 +1,8 @@
-const LIMIT = 5_000_000, BODY_LIMIT = LIMIT + 16_384, TTL = 30*86400;
+const LIMIT = 5_000_000, BODY_LIMIT = LIMIT + 16_384;
 const encoder = new TextEncoder();
 const safe = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const common = {
-  'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer',
+  'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'same-origin',
   'Permissions-Policy':'camera=(), microphone=(), geolocation=()','X-Frame-Options':'DENY',
   'X-Robots-Tag':'noindex, nofollow','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'",
 };
@@ -11,28 +11,6 @@ const back = '<a href="https://mutiwangn.github.io/AI-html/">返回课件目录<
 function page(title, content, status=200, extra={}, csp='') {
   return new Response('<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+safe(title)+'</title><style>'+style+'</style></head><body><main><h1>'+safe(title)+'</h1>'+content+'</main></body></html>',{status,headers:{...common,'Content-Security-Policy':common['Content-Security-Policy']+csp,'Content-Type':'text/html; charset=utf-8',...extra}});
 }
-const grades = ['一','二','三','四','五','六'];
-const types = ['原理解读','实验操作','互动游戏','观察记录','其他'];
-const opts = (xs)=>'<option value="">请选择</option>'+xs.map(x=>'<option>'+x+'</option>').join('');
-const form = `<p>教科版小学科学 · 邀请试投</p>
-<p>每次提交一份 UTF-8 单文件 HTML（.html 或 .htm），最大 <strong>5 MB（5,000,000 字节）</strong>。请把必要素材内嵌；如需联网、设备权限或外部素材，请说明。</p>
-<p>只有维护者可以查看原稿。投稿不会自动上线；通过审核后，公开版可按填写的署名单独列在对应课时，不覆盖原有课件。待审稿件和表单信息在收稿箱保留 30 天；联系邮箱不公开。请勿提交学生姓名、照片、课堂记录或密钥。</p>
-<form action="/submit" method="post" enctype="multipart/form-data">
-<label>试投邀请码<input name="code" type="password" required maxlength="64" autocomplete="off"></label>
-<label>课件标题<input name="title" required maxlength="48"></label>
-<label>年级<select name="grade" required>${opts(grades)}</select></label>
-<label>册次<select name="semester" required>${opts(['上册','下册'])}</select></label>
-<label>课次（例如 2.8）<input name="lesson" required maxlength="5" pattern="[1-9][0-9]?[.][1-9][0-9]?" placeholder="2.8"></label>
-<label>课件用途<select name="kind" required>${opts(types)}</select></label>
-<label>一句话教学用途<textarea name="description" required maxlength="120"></textarea></label>
-<label>公开署名（可填笔名）<input name="author" required maxlength="30"></label>
-<label>联系邮箱（选填，不公开）<input name="contact" type="email" maxlength="100" autocomplete="email"></label>
-<label>素材及授权说明<textarea name="license" required maxlength="120" placeholder="请说明是原创，或填写素材来源及许可。"></textarea></label>
-<fieldset><legend>用到的功能（没有可不选）</legend><label><input type="checkbox" name="network" value="yes"> 需要联网</label><label><input type="checkbox" name="microphone" value="yes"> 使用麦克风</label><label><input type="checkbox" name="camera" value="yes"> 使用摄像头</label></fieldset>
-<label>HTML 文件<input id="lesson-file" name="file" type="file" accept=".html,.htm,text/html" required></label>
-<label><input type="checkbox" name="agreement" value="yes" required> 我有权提交本作品及素材，同意审核通过后按上述署名公开课件及其 HTML，不含学生或他人的个人信息。</label>
-<button>提交待审核</button>
-</form><p>${back}</p><script src="/form.js" defer></script>`;
 const fail=(status,msg)=>page('未提交', '<p>'+safe(msg)+'</p><p><a href="/">返回投稿表</a></p>',status);
 const protect=async(a,b)=>{
   if(typeof a!=='string'||typeof b!=='string'||a.length>160||b.length<10)return false;
@@ -40,38 +18,91 @@ const protect=async(a,b)=>{
   const y=new Uint8Array(await crypto.subtle.digest('SHA-256',encoder.encode(b)));
   let d=0; for(let i=0;i<x.length;i++)d|=x[i]^y[i]; return !d;
 };
-async function readBounded(request) {
-  if(Number(request.headers.get('Content-Length')||0)>BODY_LIMIT) return null;
+async function readBounded(request, max=BODY_LIMIT) {
+  if(Number(request.headers.get('Content-Length')||0)>max) return null;
   const reader=request.body?.getReader(); if(!reader)return null;
   let chunks=[], size=0;
-  while(true){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>BODY_LIMIT){try{await reader.cancel()}catch{}return null}chunks.push(value)}
+  while(true){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>max){try{await reader.cancel()}catch{}return null}chunks.push(value)}
   return new Response(new Blob(chunks),{headers:{'Content-Type':request.headers.get('Content-Type')}});
 }
-async function submit(req, env, url) {
-  if(req.headers.get('origin')!==url.origin) return fail(403,'请从投稿表提交。');
-  if(!/^multipart\/form-data;\s*boundary=/i.test(req.headers.get('Content-Type')||''))return fail(400,'请从投稿表提交。');
-  let body, data;
-  try{body=await readBounded(req);if(!body)return fail(413,'单个文件不得超过 5 MB。');data=await body.formData()}catch{return fail(400,'无法读取投稿表，请重新选择文件。')}
+const VIEWER='https://aihtml-community.mutiwangn.workers.dev';
+const tiers=['初步感知','原理解读','实验操作','观察记录','互动游戏','综合应用'];
+const licenses={site:'仅授权本站展示，不授权站外再发布',by:'CC BY 4.0（允许分享与改编，须署名）',bync:'CC BY-NC 4.0（限非商业分享与改编，须署名）'};
+const cookieName='__Host-aihtml-contributor';
+const uuid=/^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/;
+const ttl=1800;
+const ip=r=>r.headers.get('CF-Connecting-IP')||'unknown';
+const same=(r,u)=>r.headers.get('Origin')===u.origin;
+const throttle=()=>page('操作过于频繁','<p>请稍后再试。</p>',429,{'Retry-After':'60'});
+function signKey(env){return crypto.subtle.importKey('raw',encoder.encode(env.PILOT_CODE),{name:'HMAC',hash:'SHA-256'},false,['sign','verify']);}
+async function contributorCookie(env){
+  const payload=String(Math.floor(Date.now()/1000)+ttl)+'.'+crypto.randomUUID();
+  const raw=new Uint8Array(await crypto.subtle.sign('HMAC',await signKey(env),encoder.encode(payload)));
+  return payload+'.'+Array.from(raw,b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function contributor(req,env){
+  if(typeof env.PILOT_CODE!=='string'||env.PILOT_CODE.length<10)return false;
+  const raw=(req.headers.get('Cookie')||'').split(';').map(x=>x.trim()).find(x=>x.startsWith(cookieName+'='))?.slice(cookieName.length+1)||'';
+  const match=raw.match(/^(\d{10})\.([0-9a-f-]{36})\.([0-9a-f]{64})$/);
+  if(!match)return false;
+  const now=Math.floor(Date.now()/1000),exp=Number(match[1]);
+  if(exp<=now||exp>now+ttl)return false;
+  return crypto.subtle.verify('HMAC',await signKey(env),Uint8Array.from(match[3].match(/../g),s=>parseInt(s,16)),encoder.encode(match[1]+'.'+match[2]));
+}
+function entry(){
+  return page('投稿互动课件','<p>输入邀请码即可投稿。不需要 GitHub 账号。</p><form action="/enter" method="post"><label>邀请码<input type="password" name="code" required maxlength="64" autocomplete="off"></label><button>进入投稿</button></form><p>'+back+' · <a href="/review">管理员后台</a></p>');
+}
+function compose(){
+  return page('投稿互动课件', `<p>填写下方四项，发布后会直接出现在 AI HTML 首页的「教师投稿」。课件名称从 HTML 的标题读取。</p>
+<form action="/submit" method="post" enctype="multipart/form-data">
+<label>署名（可用笔名）<input name="author" required maxlength="30" autocomplete="nickname"></label>
+<label>单一 HTML 源文件（≤5 MB）<input id="lesson-file" name="file" type="file" accept=".html,.htm,text/html" required></label>
+<label>授权范围<select name="license" required><option value="">请选择</option>${Object.entries(licenses).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')}</select></label>
+<label>课件使用层次<select name="tier" required><option value="">请选择</option>${tiers.map(x=>'<option>'+x+'</option>').join('')}</select></label>
+<p><small>请上传 UTF-8 单文件 HTML（5,000,000 字节以内），将图片、音频等内嵌。隔离播放不允许联网、麦克风、摄像头或本地存储。不上传学生姓名、照片、课堂记录或密钥。点击「直接发布」表示你有权公开该文件及素材，并同意以所选授权、署名公开。本区未经人工审核，管理员可下架。</small></p>
+<button>直接发布</button>
+</form><p>${back}</p><script src="/form.js" defer></script>`,200,{},"; script-src 'self'");
+}
+async function enter(req,env,url){
+  if(!same(req,url))return fail(403,'请从邀请码页面提交。');
+  const [client,location]=await Promise.all([env.ENTRY_LIMIT.limit({key:'enter:'+ip(req)}),env.ENTRY_GLOBAL.limit({key:'enter-all'})]);
+  if(!client.success||!location.success)return throttle();
+  if(!/^application\/x-www-form-urlencoded\b/i.test(req.headers.get('Content-Type')||''))return fail(400,'请从邀请码页面提交。');
+  const body=await readBounded(req,2048);
+  if(!body)return fail(400,'邀请码无效。');
+  const code=new URLSearchParams(await body.text()).get('code')?.trim();
+  if(!await protect(code,env.PILOT_CODE))return fail(403,'邀请码不正确。');
+  const sig=await contributorCookie(env);
+  return new Response(null,{status:303,headers:{...common,Location:'/','Set-Cookie':cookieName+'='+sig+'; Max-Age='+ttl+'; Path=/; Secure; HttpOnly; SameSite=Strict'}});
+}
+function inferTitle(html,file){
+  const m=html.slice(0,32768).match(/<title(?:\s[^>]*)?>([\s\S]{0,300}?)<\/title\s*>/i);
+  const raw=m?.[1]?.replace(/<[^>]*>/g,'').replace(/&(amp|lt|gt|quot|apos);/g,(_,v)=>({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'"})[v]);
+  return (raw?.trim()||file.name.replace(/\.html?$/i,'')).replace(/[\x00-\x1f\x7f\u202a-\u202e\u2066-\u2069]+/g,' ').trim().slice(0,64)||'互动课件';
+}
+async function submit(req,env,url){
+  if(!same(req,url)||!await contributor(req,env))return fail(403,'请先从投稿入口输入邀请码。');
+  const [client,location]=await Promise.all([env.ENTRY_LIMIT.limit({key:'publish:'+ip(req)}),env.ENTRY_GLOBAL.limit({key:'publish-all'})]);
+  if(!client.success||!location.success)return throttle();
+  if(!/^multipart\/form-data;\s*boundary=/i.test(req.headers.get('Content-Type')||''))return fail(400,'请从投稿页面提交。');
+  let data;
+  try{const body=await readBounded(req);if(!body)return fail(413,'单个文件不得超过 5 MB。');data=await body.formData()}catch{return fail(400,'无法读取文件，请重新选择。')}
   const val=k=>typeof data.get(k)==='string'?data.get(k).trim():'';
-  if(!await protect(val('code'),env.PILOT_CODE)) return fail(403,'邀请码不正确，或本轮试投尚未开启。');
-  const files=data.getAll('file'), file=files[0];
-  if(files.length!==1||typeof file?.size!=='number'||!file.size|| !/\.html?$/i.test(file.name))return fail(400,'请提交一份 .html 或 .htm 文件。');
+  const files=data.getAll('file'),file=files[0];
+  if(files.length!==1||typeof file?.size!=='number'||!file.size||!/\.html?$/i.test(file.name))return fail(400,'请提交一份 HTML（.html 或 .htm）。');
   if(file.size>LIMIT)return fail(413,'单个文件不得超过 5 MB（5,000,000 字节）。');
-  const m={title:val('title'), grade:val('grade'), semester:val('semester'), lesson:val('lesson'), kind:val('kind'), description:val('description'), author:val('author'), contact:val('contact'), license:val('license'), requirements:['network','microphone','camera'].filter(k=>val(k)==='yes'), at:new Date().toISOString(), bytes:file.size};
-  const required={title:48,description:120,author:30,license:120};
-  if(Object.entries(required).some(([k,max])=>!m[k]||m[k].length>max)||
-     !grades.includes(m.grade)||!['上册','下册'].includes(m.semester)||!types.includes(m.kind)||
-     !/^[1-9]\d?\.[1-9]\d?$/.test(m.lesson)||m.contact.length>100||
-     (m.contact&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m.contact))||val('agreement')!=='yes')return fail(422,'请检查必填信息、授权确认和课次格式。');
-  const bytes=await file.arrayBuffer();
-  let html;
+  const author=val('author'),tier=val('tier'),license=val('license');
+  if(!author||author.length>30||/[\x00-\x1f\x7f\u202a-\u202e\u2066-\u2069]/.test(author)||!tiers.includes(tier)||!Object.hasOwn(licenses,license))return fail(422,'请检查署名、授权范围和使用层次。');
+  const bytes=await file.arrayBuffer();let html;
   try{html=new TextDecoder('utf-8',{fatal:true}).decode(bytes)}catch{return fail(422,'请把文件另存为 UTF-8 编码的 HTML。')}
-  if(html.includes('\0')||!/^\s*(?:<!--[\s\S]*?-->\s*)*(?:<!doctype\s+html\b|<html[\s>])/i.test(html.slice(0,8192)))return fail(422,'文件须是完整 HTML 文档（以 HTML 文档声明或 html 标签开头）。');
-  const id=crypto.randomUUID(), key='submission:'+Date.now()+':'+id;
-  m.id=id; m.consent='公开课件 HTML、素材授权、不含个人数据，v1';
-  if(encoder.encode(JSON.stringify(m)).byteLength>1024)return fail(422,'文字说明过长，请缩短署名或说明后重试。');
-  try{await env.INBOX.put(key,bytes,{metadata:m,expirationTtl:TTL})}catch{return fail(503,'收稿箱暂不可用，未确认收件。请稍后重试。')}
-  return page('投稿已收到','<p>状态：待审核，尚未发布。</p><p>投稿编号：<strong>'+safe(id)+'</strong></p><p>请留存编号。原稿和表单资料不会公开。</p><p>'+back+'</p>',201);
+  if(html.includes('\0')||!/^\s*(?:<!--[\s\S]*?-->\s*)*(?:<!doctype\s+html\b|<html[\s>])/i.test(html.slice(0,8192)))return fail(422,'请上传完整 HTML 文档。');
+  const title=inferTitle(html,file),id=crypto.randomUUID(),key='html:'+id;
+  const count=await env.COMMUNITY_DB.prepare('SELECT count(*) AS n FROM submissions').first();
+  if(count.n>=60)return fail(503,'投稿区已满，请联系管理员。');
+  await env.COMMUNITY_FILES.put(key,bytes);
+  try{await env.COMMUNITY_DB.prepare('INSERT INTO submissions(id,title,author,tier,license,created_at,bytes) VALUES(?,?,?,?,?,?,?)').bind(id,title,author,tier,license,Date.now(),bytes.byteLength).run();}
+  catch(e){await env.COMMUNITY_FILES.delete(key).catch(()=>{});return fail(503,'未能发布课件，请稍后重试。');}
+  return page('课件已发布','<p>'+safe(title)+' 已列入教师投稿区。</p><p><a href="'+VIEWER+'/play/'+id+'">打开课件</a> · '+back+'</p>',201);
 }
 function reviewLine(m,key) {
   const names={network:'联网',microphone:'麦克风',camera:'摄像头'};
@@ -87,6 +118,18 @@ async function review(req,env,url) {
     if(!client.success || !location.success) return page('登录尝试过多','<p>请稍后再试。</p>',429,{'Retry-After':'60'});
     return page('维护者登录','<p>需要独立的审核凭据。</p>',401,{'WWW-Authenticate':'Basic realm="AI HTML private review", charset="UTF-8"'});
   }
+  if(req.method==='POST'){
+    if(!same(req,url))return fail(403,'请从管理员后台下架课件。');
+    if(!/^application\/x-www-form-urlencoded\b/i.test(req.headers.get('Content-Type')||''))return fail(400,'请求无效。');
+    const body=await readBounded(req,2048);if(!body)return fail(400,'请求无效。');
+    const fields=new URLSearchParams(await body.text()),id=fields.get('id');
+    if(!uuid.test(id||''))return fail(400,'课件编号无效。');
+    if(fields.get('confirm')!=='yes')return page('确认删除课件','<p>删除后，课件将从首页消失，播放链接也会失效。</p><form method="post" action="/review/delete"><input type="hidden" name="id" value="'+id+'"><input type="hidden" name="confirm" value="yes"><button>确认删除</button></form><p><a href="/review">取消并返回</a></p>');
+    await env.COMMUNITY_DB.prepare('DELETE FROM submissions WHERE id = ?').bind(id).run();
+    let message='已下架，首页和播放链接不再提供该课件。';
+    try{await env.COMMUNITY_FILES.delete('html:'+id);}catch{message='已下架，播放链接已失效，后台文件清理暂未完成。';}
+    return page('课件已删除','<p>'+message+'</p><p><a href="/review">返回管理员后台</a></p>');
+  }
   if(url.pathname==='/review/download'){
     const key=url.searchParams.get('key')||'';
     if(!/^submission:\d{13}:[\da-f-]{36}$/.test(key)) return fail(404,'找不到该稿件。');
@@ -99,19 +142,27 @@ async function review(req,env,url) {
   if(cursor&&cursor.length>2000)return fail(400,'翻页参数无效。');
   const {keys,list_complete,cursor:next}=await env.INBOX.list({prefix:'submission:',limit:50,...(cursor?{cursor}:{})});
   const entries=keys.reverse().filter(x=>x.metadata).map(x=>reviewLine(x.metadata,x.name));
-  return page('投稿审核箱','<p>原稿仅供下载、离线审查。审核通过后，由维护者另开 PR 收录。</p>'+
-    (entries.length?'<ul>'+entries.join('')+'</ul>':'<p>暂无投稿。</p>')+
-    (!list_complete&&next?'<p><a href="/review?cursor='+encodeURIComponent(next)+'">下一页</a></p>':''));
+  const {results}=await env.COMMUNITY_DB.prepare('SELECT id,title,author,tier,created_at FROM submissions ORDER BY created_at DESC,id DESC LIMIT 60').all();
+  const live=results.map(r=>'<li><a href="'+VIEWER+'/play/'+r.id+'">'+safe(r.title)+'</a> · '+safe(r.author)+' · '+safe(r.tier)
+    +'<form method="post" action="/review/delete"><input type="hidden" name="id" value="'+r.id+'"><button>删除</button></form></li>');
+  return page('投稿管理','<h2>已公开的教师投稿</h2><p>新投稿无需审核，异常稿件可在此删除。</p>'
+    +(live.length?'<ul>'+live.join('')+'</ul>':'<p>暂无公开投稿。</p>')
+    +'<h2>旧版待审稿</h2><p>旧稿仍私密，不会自动公开。</p>'
+    +(entries.length?'<ul>'+entries.join('')+'</ul>':'<p>暂无旧稿。</p>')
+    +(!list_complete&&next?'<p><a href="/review?cursor='+encodeURIComponent(next)+'">旧稿下一页</a></p>':''));
 }
 export default {async fetch(req,env){
   const url=new URL(req.url);
   try{
-    if(req.method==='GET'&&url.pathname==='/')return page('投稿互动课件',form,200,{"Referrer-Policy":"same-origin"},"; script-src 'self'");
+    if(req.method==='GET'&&url.pathname==='/')return await contributor(req,env)?compose():entry();
+    if(req.method==='POST'&&url.pathname==='/enter')return await enter(req,env,url);
     if(req.method==='GET'&&url.pathname==='/form.js')return new Response(
       "const input=document.getElementById('lesson-file');input.addEventListener('change',()=>{const file=input.files[0];input.setCustomValidity(file && file.size > 5000000 ? '单个课件不得超过 5 MB。' : '');if(!input.validity.valid)input.reportValidity()});",
       {headers:{...common,'Content-Type':'text/javascript; charset=utf-8'}});
     if(req.method==='POST'&&url.pathname==='/submit')return await submit(req,env,url);
     if(req.method==='GET'&&['/review','/review/download'].includes(url.pathname))return await review(req,env,url);
+    if(req.method==='POST'&&url.pathname==='/review/delete')return await review(req,env,url);
     return fail(404,'该入口不存在。');
   }catch{return fail(503,'服务暂不可用，请稍后重试。')}
 }};
+
