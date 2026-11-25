@@ -35,7 +35,7 @@ const form = `<p>教科版小学科学 · 邀请试投</p>
 </form><p>${back}</p><script src="/form.js" defer></script>`;
 const fail=(status,msg)=>page('未提交', '<p>'+safe(msg)+'</p><p><a href="/">返回投稿表</a></p>',status);
 const protect=async(a,b)=>{
-  if(typeof a!=='string'||typeof b!=='string'||a.length>160||b.length<16)return false;
+  if(typeof a!=='string'||typeof b!=='string'||a.length>160||b.length<10)return false;
   const x=new Uint8Array(await crypto.subtle.digest('SHA-256',encoder.encode(a)));
   const y=new Uint8Array(await crypto.subtle.digest('SHA-256',encoder.encode(b)));
   let d=0; for(let i=0;i<x.length;i++)d|=x[i]^y[i]; return !d;
@@ -81,7 +81,12 @@ async function review(req,env,url) {
   const auth = req.headers.get('authorization')||'';
   let user='', pass='';
   try{if(/^Basic /i.test(auth)){const s=atob(auth.slice(6));const p=s.indexOf(':');if(p>=0){user=s.slice(0,p);pass=s.slice(p+1)}}}catch{}
-  if(user!=='reviewer'||!await protect(pass,env.REVIEW_PASSWORD))return page('维护者登录','<p>需要独立的审核凭据。</p>',401,{'WWW-Authenticate':'Basic realm="AI HTML private review", charset="UTF-8"'});
+  if(!env.REVIEW_USER || user!==env.REVIEW_USER || !await protect(pass,env.REVIEW_PASSWORD)) {
+    const ip=req.headers.get('CF-Connecting-IP')||'unknown';
+    const [client, location]=await Promise.all([env.REVIEW_CLIENT_LIMIT.limit({key:'client:'+ip}),env.REVIEW_LOCATION_LIMIT.limit({key:'review-failed'})]);
+    if(!client.success || !location.success) return page('登录尝试过多','<p>请稍后再试。</p>',429,{'Retry-After':'60'});
+    return page('维护者登录','<p>需要独立的审核凭据。</p>',401,{'WWW-Authenticate':'Basic realm="AI HTML private review", charset="UTF-8"'});
+  }
   if(url.pathname==='/review/download'){
     const key=url.searchParams.get('key')||'';
     if(!/^submission:\d{13}:[\da-f-]{36}$/.test(key)) return fail(404,'找不到该稿件。');
