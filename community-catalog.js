@@ -2,12 +2,27 @@
   'use strict';
   var list = document.getElementById('teacher-community-list');
   var status = document.getElementById('teacher-community-status');
-  if (!list || !status || !window.fetch) return;
+  var menu = document.getElementById('teacher-community-menu');
+  var close = document.getElementById('teacher-community-close');
+  if (!list || !status || !menu) return;
+  var trigger = menu.querySelector('summary');
+  function hide(restoreFocus) {
+    menu.open = false;
+    if (restoreFocus && trigger) trigger.focus();
+  }
+  if (close) close.addEventListener('click', function () { hide(true); });
+  document.addEventListener('click', function (event) {
+    if (menu.open && !menu.contains(event.target)) hide(false);
+  });
+  document.addEventListener('keydown', function (event) {
+    if (menu.open && event.key === 'Escape') { event.preventDefault(); hide(true); }
+  });
+  if (!window.fetch) return;
   var base = 'https://aihtml-community.mutiwangn.workers.dev';
   var idPattern = /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/;
   var busy = false;
   function refresh() {
-    if (busy) return;
+    if (busy || !menu.open) return;
     busy = true;
     fetch(base + '/api/catalog', {cache:'no-store',credentials:'omit'})
       .then(function (r) { if (!r.ok) throw new Error('catalog'); return r.json(); })
@@ -31,11 +46,12 @@
         status.textContent = records.length ? '' : '还没有公开投稿。';
         busy = false;
       }).catch(function () {
-        status.textContent = '暂时未能刷新，可点击「查看全部」重试。';
+        list.textContent = '';
+        status.textContent = '暂时未能加载，可点击「查看全部」。';
         busy = false;
       });
   }
-  refresh();
+  menu.addEventListener('toggle', refresh);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) refresh(); });
   window.addEventListener('pageshow', function (event) { if (event.persisted) refresh(); });
 }());
