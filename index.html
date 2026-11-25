@@ -14,6 +14,8 @@
 <style>
 .lesson-update-badge{display:inline-flex;align-items:center;justify-content:center;flex:none;white-space:nowrap;border:1px solid #e9b65b;border-radius:999px;padding:3px 9px;background:#fff0c4;color:#704300;font-size:12px;font-weight:750;line-height:1.2;box-shadow:0 1px 2px #00000012}.lesson-summary .lesson-update-badge{margin-left:6px;margin-right:4px}@media(max-width:699px){.lesson-summary .lesson-update-badge{padding:3px 6px;font-size:11px;margin-left:3px;margin-right:2px}}
 </style>
+  <link rel="stylesheet" href="./community-catalog.css?v=20261125">
+  <script src="./community-catalog.js?v=20261125" defer></script>
 </head>
 <body data-semester="up" data-view="library">
   <header class="site-header">
@@ -39,6 +41,14 @@
   </header>
 
   <main id="main-content">
+    <section class="teacher-community" aria-labelledby="teacher-community-title">
+      <div class="teacher-community-bar">
+        <div><h2 id="teacher-community-title">教师投稿</h2><p>教师自行发布，未经平台审核。</p></div>
+        <nav aria-label="教师投稿入口"><a href="https://aihtml-lesson-intake.mutiwangn.workers.dev/">我要投稿</a><a href="https://aihtml-community.mutiwangn.workers.dev/">查看全部</a></nav>
+      </div>
+      <p id="teacher-community-status" role="status"></p>
+      <ul class="teacher-community-list" id="teacher-community-list"></ul>
+    </section>
     <section class="library-view" id="library-view" aria-label="秋季学期上册教材目录">
       <div class="book-grid" id="books"></div>
     </section>
@@ -74,7 +84,7 @@
   <footer class="site-footer">
     <div class="site-footer-inner">
       <p>围绕教科版小学科学教材，汇集可操作、可探究的课堂交互课件。</p>
-      <p><a href="https://aihtml-lesson-intake.mutiwangn.workers.dev/">投稿互动课件（试投）</a> · <a href="https://github.com/mutiwangn/AI-html/blob/main/CONTRIBUTING.md">投稿与审核说明</a></p>
+      <p><a href="https://aihtml-lesson-intake.mutiwangn.workers.dev/">投稿互动课件</a> · <a href="https://github.com/mutiwangn/AI-html/blob/main/CONTRIBUTING.md">教师投稿说明</a></p>
       <p class="network-legend">联网标识：黄色为部分功能需联网，蓝色为可选联网。未标注不等于完整离线验收。<a href="https://github.com/mutiwangn/AI-html/blob/main/NETWORK-REQUIREMENTS.md">查看联网用途与核查范围</a></p>
     </div>
   </footer>
