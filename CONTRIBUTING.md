@@ -15,4 +15,4 @@
 
 ## 收稿服务维护
 
-`.github/contribution-intake/worker.mjs` 是收稿 Worker 源码。部署用私有 KV 绑定 `INBOX`，独立密钥 `PILOT_CODE`、`REVIEW_PASSWORD`，审核用户名为 `reviewer`。密钥仅在部署服务内设置；试投邀请码只分享给受邀者，审核凭据不外传。上传体大小和文件大小均由服务端限制，稿件只从审核端以附件下载。请在变更后复测 5,000,000 字节成功、5,000,001 字节拒绝、无授权不能查看或下载原稿。试投阶段有需要时可轮换邀请码；扩大开放范围前再配防滥用措施。
+`.github/contribution-intake/worker.mjs` 是收稿 Worker 源码。部署用私有 KV 绑定 `INBOX`，独立密钥 `PILOT_CODE`、`REVIEW_USER`、`REVIEW_PASSWORD`，并绑定审核失败限流器 `REVIEW_CLIENT_LIMIT` 和 `REVIEW_LOCATION_LIMIT`。密钥仅在部署服务内设置；试投邀请码只分享给受邀者，审核凭据不外传。上传体大小和文件大小均由服务端限制，稿件只从审核端以附件下载。请在变更后复测 5,000,000 字节成功、5,000,001 字节拒绝、无授权不能查看或下载原稿。试投阶段有需要时可轮换邀请码；扩大开放范围前再配防滥用措施。
